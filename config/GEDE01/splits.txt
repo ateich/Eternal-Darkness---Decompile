@@ -1,3 +1,22 @@
-# Generated and refined by DTK after the local disc passes verification.
-# This file is intentionally empty at bootstrap.
+Sections:
+	.init       type:code align:4
+	extab       type:rodata align:32
+	extabindex  type:rodata align:4
+	.text       type:code align:4
+	.ctors      type:rodata align:8
+	.dtors      type:rodata align:32
+	.rodata     type:rodata align:32
+	.data       type:data align:32
+	.bss        type:bss align:4
+	.sdata      type:data align:4
+	.sbss       type:bss align:8
+	.sdata2     type:rodata align:8
+	.sbss2      type:bss align:32
 
+# Reviewed from the DTK disassembly. The debugger-driver stubs and AMC marker
+# are separate SDK objects; keep the boundary at 0x8022E7F4 explicit.
+dolphin/db/DebuggerDriver.c:
+	.text       start:0x8022E7C4 end:0x8022E7F4
+
+dolphin/amc/AmcExi2Stubs.c:
+	.text       start:0x8022E7F4 end:0x8022E7FC

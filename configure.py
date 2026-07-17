@@ -89,11 +89,26 @@ Matching = True
 NonMatching = False
 Equivalent = config.non_matching
 
-# Objects are added only after DTK-derived boundaries are reviewed. An empty list still
-# supports initial analysis and prevents unverified guesses from becoming build truth.
+# These SDK objects have reviewed DTK boundaries and reconstructed source, but remain
+# non-matching until a lawful MWCC installation can produce objdiff evidence.
 config.warn_missing_config = False
 config.warn_missing_source = False
-config.libs = []
+config.libs = [
+    {
+        "lib": "NdevExi2A",
+        "mw_version": "GC/1.2.5n",
+        "cflags": cflags_base,
+        "progress_category": "sdk",
+        "objects": [Object(NonMatching, "dolphin/db/DebuggerDriver.c")],
+    },
+    {
+        "lib": "amcstubs",
+        "mw_version": "GC/1.2.5n",
+        "cflags": cflags_base,
+        "progress_category": "sdk",
+        "objects": [Object(NonMatching, "dolphin/amc/AmcExi2Stubs.c")],
+    },
+]
 config.progress_categories = [ProgressCategory("game", "Game Code"), ProgressCategory("sdk", "SDK/Runtime")]
 config.progress_each_module = args.verbose
 config.progress_report_args = []
