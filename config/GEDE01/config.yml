@@ -1,0 +1,22 @@
+name: main
+object: sys/main.dol
+hash: ea24b6af954876ce072562ff39cdb4c81d32be1f
+object_base: orig/GEDE01
+extract_objects: true
+
+symbols: config/GEDE01/symbols.txt
+splits: config/GEDE01/splits.txt
+
+# GEDE01 revision 0 has been fully scanned and contains no REL/RSO modules.
+# Do not add a modules list unless a DTK-validated module is discovered.
+detect_objects: true
+detect_strings: true
+write_asm: true
+symbols_known: false
+fill_gaps: true
+export_all: true
+globalize_symbols: true
+
+# The DOL proves a pre-GC-2.7 exception/link layout, but not an exact compiler.
+# mw_comment_version remains unset until the compiler matrix establishes it.
+

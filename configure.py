@@ -1,0 +1,107 @@
+#!/usr/bin/env python3
+"""Generate GEDE01 matching or non-matching builds with dtk-template helpers."""
+
+from __future__ import annotations
+
+import argparse
+import sys
+from pathlib import Path
+
+try:
+    from tools.project import Object, ProgressCategory, ProjectConfig, calculate_progress, generate_build, is_windows
+except ModuleNotFoundError:
+    raise SystemExit("Bootstrap helpers are missing. Run: python3 tools/bootstrap.py")
+
+VERSION = "GEDE01"
+
+parser = argparse.ArgumentParser()
+parser.add_argument("mode", choices=["configure", "progress"], default="configure", nargs="?")
+parser.add_argument("--version", choices=[VERSION], default=VERSION, type=str.upper)
+parser.add_argument("--build-dir", type=Path, default=Path("build"))
+parser.add_argument("--binutils", type=Path)
+parser.add_argument("--compilers", type=Path)
+parser.add_argument("--mw-version", default="GC/1.3.2",
+                    choices=["GC/1.2.5n", "GC/1.3", "GC/1.3.2", "GC/1.3.2r", "GC/2.0"])
+parser.add_argument("--dtk", type=Path, default=Path(".tools/bin/dtk"))
+parser.add_argument("--objdiff", type=Path)
+parser.add_argument("--sjiswrap", type=Path)
+parser.add_argument("--ninja", type=Path, default=Path(".tools/bin/ninja"))
+parser.add_argument("--map", action="store_true")
+parser.add_argument("--debug", action="store_true")
+parser.add_argument("--non-matching", action="store_true")
+parser.add_argument("--no-progress", dest="progress", action="store_false")
+parser.add_argument("--verbose", action="store_true")
+if not is_windows():
+    parser.add_argument("--wrapper", type=Path)
+args = parser.parse_args()
+
+config = ProjectConfig()
+config.version = args.version
+config.build_dir = args.build_dir
+config.config_path = Path("config") / VERSION / "config.yml"
+config.check_sha_path = Path("config") / VERSION / "build.sha1"
+config.dtk_path = args.dtk
+config.objdiff_path = args.objdiff
+config.binutils_path = args.binutils
+# Never auto-download proprietary compiler binaries. The ignored local directory
+# must be populated by the user or replaced with an explicitly supplied path.
+config.compilers_path = args.compilers or Path("compilers")
+config.sjiswrap_path = args.sjiswrap
+config.ninja_path = args.ninja
+config.generate_map = args.map
+config.non_matching = args.non_matching
+config.progress = args.progress
+if not is_windows():
+    config.wrapper = args.wrapper
+if not config.non_matching:
+    config.asm_dir = None
+
+# Pinned public tooling. The helper downloads these and verifies its release metadata.
+config.binutils_tag = "2.42-2"
+config.compilers_tag = "20251118"
+config.dtk_tag = "v1.8.3"
+config.objdiff_tag = "v3.6.1"
+config.sjiswrap_tag = "v1.2.2"
+config.wibo_tag = "1.0.3"
+
+config.asflags = ["-mgekko", "--strip-local-absolute", "-I include", f"-I build/{VERSION}/include"]
+config.ldflags = ["-fp hardware", "-nodefaults"]
+if args.map:
+    config.ldflags.append("-mapunused")
+if args.debug:
+    config.ldflags.append("-g")
+
+# This is a testable starting hypothesis, not a fingerprint result.
+config.linker_version = args.mw_version
+cflags_base = [
+    "-nodefaults", "-proc gekko", "-align powerpc", "-enum int", "-fp hardware",
+    "-Cpp_exceptions off", "-O4,p", "-inline auto", '-pragma "cats off"',
+    '-pragma "warn_notinlined off"', "-maxerrors 1", "-nosyspath", "-RTTI off",
+    "-fp_contract on", "-str reuse", "-multibyte", "-i include", f"-i build/{VERSION}/include",
+    f"-DVERSION_{VERSION}",
+]
+if args.debug:
+    cflags_base.extend(["-sym on", "-DDEBUG=1"])
+else:
+    cflags_base.append("-DNDEBUG=1")
+
+Matching = True
+NonMatching = False
+Equivalent = config.non_matching
+
+# Objects are added only after DTK-derived boundaries are reviewed. An empty list still
+# supports initial analysis and prevents unverified guesses from becoming build truth.
+config.warn_missing_config = False
+config.warn_missing_source = False
+config.libs = []
+config.progress_categories = [ProgressCategory("game", "Game Code"), ProgressCategory("sdk", "SDK/Runtime")]
+config.progress_each_module = args.verbose
+config.progress_report_args = []
+config.reconfig_deps = [Path("config") / VERSION / "toolchain.yml"]
+
+if args.mode == "configure":
+    generate_build(config)
+elif args.mode == "progress":
+    calculate_progress(config)
+else:
+    sys.exit("unknown mode")
