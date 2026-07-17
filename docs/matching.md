@@ -15,9 +15,14 @@ DTK's first local split identified the following two SDK objects:
 
 - `dolphin/db/DebuggerDriver.c`: `.text` `0x8022E7C4-0x8022E7F4`
 - `dolphin/amc/AmcExi2Stubs.c`: `.text` `0x8022E7F4-0x8022E7FC`
+- `Runtime.PPCEABI.H/__init_cpp_exceptions.cpp`: `.text` `0x800F63E4-0x800F6460`,
+  plus its constructor, destructor, and `fragmentID` sections
 
 The reconstructed functions produce only `li`, `blr`, or bare `blr` sequences. They are
 registered as non-matching until they are compiled with a lawful `GC/1.2.5n` candidate
 and objdiff confirms instruction, symbol binding (including weak `Hu_IsStub`), and
 relocation equality. The current machine has no `mwcc*.exe` or `mwldeppc.exe`; place
 the compiler under `compilers/GC/1.2.5n/` or pass `--compilers` before running the gate.
+The runtime object should be tested across the full compiler matrix because its code and
+linker-generated constructor/destructor ordering provide stronger fingerprint evidence
+than the compiler-insensitive debugger stubs.

@@ -80,6 +80,13 @@ cflags_base = [
     "-fp_contract on", "-str reuse", "-multibyte", "-i include", f"-i build/{VERSION}/include",
     f"-DVERSION_{VERSION}",
 ]
+cflags_runtime = [
+    *cflags_base,
+    "-use_lmw_stmw on",
+    "-str reuse,pool,readonly",
+    "-gccinc",
+    "-common off",
+]
 if args.debug:
     cflags_base.extend(["-sym on", "-DDEBUG=1"])
 else:
@@ -94,6 +101,13 @@ Equivalent = config.non_matching
 config.warn_missing_config = False
 config.warn_missing_source = False
 config.libs = [
+    {
+        "lib": "Runtime.PPCEABI.H",
+        "mw_version": config.linker_version,
+        "cflags": cflags_runtime,
+        "progress_category": "sdk",
+        "objects": [Object(NonMatching, "Runtime.PPCEABI.H/__init_cpp_exceptions.cpp")],
+    },
     {
         "lib": "NdevExi2A",
         "mw_version": "GC/1.2.5n",
