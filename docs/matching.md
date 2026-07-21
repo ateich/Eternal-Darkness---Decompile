@@ -152,3 +152,19 @@ send, receive, and priority-jam operations. The public SDK structure layout and
 interrupt/thread-queue behavior reproduce all 728 code bytes and 17 relocations
 with GC/1.2.5n. DTK function boundaries close both ends, and the text-only object
 defines no data requiring an ownership inference.
+
+## Contiguous game-code continuation
+
+`fn_80006D50` is promoted as a text-only input covering
+`0x80006D50-0x80006F30`. DTK identifies both endpoints as function starts and
+the preceding `fn_80006B38` returns exactly at the lower endpoint. The function
+has no fall-through or interior entry across either cut, and its 29 call/SDA
+relocations all resolve outside the input.
+
+The recovered source reproduces the complete 480-byte function and every
+relocation at 100%. In particular, the queried value is returned as a 64-bit
+quantity and explicitly truncated through a 32-bit result. Preserving that
+source-level operation is required to reproduce four instances of MWCC's
+`li -1; and` sequence; a direct cast is semantically equivalent but does not
+match. The normal source link retains DOL SHA-1
+`ea24b6af954876ce072562ff39cdb4c81d32be1f`.
