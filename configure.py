@@ -104,7 +104,10 @@ config.libs = [
         "mw_version": config.linker_version,
         "cflags": cflags_base,
         "progress_category": "game",
-        "objects": [Object(Matching, "game/game_prefix_800068E0.c")],
+        "objects": [
+            Object(Matching, "game/game_prefix_800068E0.c"),
+            Object(Matching, "game/game_fn_80006B38.c"),
+        ],
     },
     {
         "lib": "Runtime.PPCEABI.H",

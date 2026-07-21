@@ -90,3 +90,25 @@ rerun for all four candidates. Each candidate still gives a 100% 252-byte game
 input and reproduces the expected whole-DOL SHA-1. Promotion therefore adds no
 compiler discrimination; the next candidate must come from the float-heavy code
 beginning later in the first game text region.
+
+## Float-heavy game-code matrix
+
+`fn_80006B38` at `0x80006B38-0x80006D50` adds a 0x60-byte stack frame,
+paired-single `f31` save/restore, two retained GPRs, three vector temporaries,
+54 relocations, float-return lifetimes, and mixed FPR/GPR variadic calls. The
+matrix result is still non-discriminating:
+
+| Candidate | `.text` | Relocations | Code size |
+| --- | ---: | ---: | ---: |
+| GC/1.3 | 100% | 54/54 | 536 bytes |
+| GC/1.3.2 | 100% | 54/54 | 536 bytes |
+| GC/1.3.2r | 100% | 54/54 | 536 bytes |
+| GC/2.0 | 100% | 54/54 | 536 bytes |
+
+GC/1.3, GC/1.3.2, and GC/1.3.2r emit byte-identical complete objects for this
+probe. GC/2.0 emits the same code and relocations; its complete-object hash differs
+only in non-linked compiler metadata. Consequently none of the four surviving
+game/linker candidates is eliminated. This is direct evidence that paired-single
+prologues and this degree of float scheduling/register pressure do not distinguish
+the candidates; a later TU must exercise actual arithmetic contraction or a
+candidate-sensitive inlining decision.

@@ -125,3 +125,22 @@ Objdiff v3.6.1 reports the input's `.text`, all four functions, and all relocati
 at 100%. The normal source link retains DOL SHA-1
 `ea24b6af954876ce072562ff39cdb4c81d32be1f`. The project now has 13 complete
 objects, 33 functions, 2,068 matching code bytes, and 224 matching data bytes.
+
+## Float-heavy game-code input
+
+The next promoted input is the single 536-byte function at
+`0x80006B38-0x80006D50`. DTK identifies both endpoints as function boundaries:
+`fn_80006B08` returns before the start and `fn_80006D50` begins at the end. No
+branch, fall-through edge, or interior entry crosses either cut. The function's
+54 relocations all resolve outward; none targets either adjacent function.
+
+The data cross-reference review also supports a text-only split. The function
+reads shared `.sdata2` display constants at `0x8064DC98-0x8064DCB8`, shared SDA
+game state, and strings inside the aggregate table at `0x8023BAA0`; it defines no
+storage and does not claim any of those shared objects. This makes the boundary
+reproducible without inventing stripped retail source or data ownership.
+
+The recovered source preserves the retail 0x60-byte frame, paired-single
+`f31` save/restore, three temporary vectors, seven stack color values, float
+return-value lifetime, and the float-leading variadic renderer ABI. Objdiff
+v3.6.1 reports all 536 bytes and all 54 relocations at 100%.
