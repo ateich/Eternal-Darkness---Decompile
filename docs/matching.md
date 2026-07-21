@@ -168,3 +168,11 @@ source-level operation is required to reproduce four instances of MWCC's
 `li -1; and` sequence; a direct cast is semantically equivalent but does not
 match. The normal source link retains DOL SHA-1
 `ea24b6af954876ce072562ff39cdb4c81d32be1f`.
+
+The immediately following `fn_80006F30` is also promoted, extending the
+source-linked interval through `0x800070E4`. DTK records a 436-byte function
+with closed entry/return boundaries and 15 outward relocations. Its signed
+16-bit identifier comparisons and sparse state switch reproduce the retail
+branch tree only when the final result handling is expressed as a switch over
+`-2`, `-1`, `0`, and the default case. Objdiff reports 436/436 code bytes and
+all relocations at 100%, and the whole-DOL SHA-1 gate remains unchanged.
