@@ -60,3 +60,22 @@ prologue layout, loop scheduling, and the inlining of `PopWaitingQueuePrio`. Thi
 proves that the recovered `dvd`, `exi`, `si`, and `gx` archive objects use
 GC/1.2.5n. It does **not** eliminate GC/1.3 through GC/2.0 for Silicon Knights game
 code or for the final linker; vendor SDK archives were compiled independently.
+
+## First game-code matrix
+
+The 252-byte game-code prefix at `0x800068E0` adds nontrivial prologues, 14 calls,
+integer control flow, SDA loads/stores, and 27 relocations to the matrix:
+
+| Candidate | Prefix `.text` | Relocations | `.text` SHA-256 |
+| --- | ---: | ---: | --- |
+| GC/1.3 | 100% | 27/27 | `fa2edacd...71e4c` |
+| GC/1.3.2 | 100% | 27/27 | `fa2edacd...71e4c` |
+| GC/1.3.2r | 100% | 27/27 | `fa2edacd...71e4c` |
+| GC/2.0 | 100% | 27/27 | `fa2edacd...71e4c` |
+
+No surviving game compiler is eliminated by this corpus. That negative result is
+useful: the compiler differences seen in the SDK archive are not present in these
+four game functions. The next discriminator must include floating-point
+contraction, deferred inlining, string pooling, or a larger register-pressure
+case from a proven game TU. Until then, GC/1.3 remains the earliest viable default
+and all four candidates remain live.

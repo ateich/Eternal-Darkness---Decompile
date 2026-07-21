@@ -74,3 +74,26 @@ Objdiff v3.6.1 reports every section and all 13 functions across these five obje
 at 100%, including relocations. Together with the previous objects, the project has
 12 complete objects, 29 functions, 1,816 matching code bytes, and 224 matching data
 bytes. The source-linked DOL continues to reproduce the expected SHA-1.
+
+## First game-code recovery probe
+
+The first game candidate is the contiguous `.text` prefix
+`0x800068E0-0x800069DC`. It was selected because `0x800068E0` is the start of the
+main `.text` section and the 252-byte prefix contains a useful mix of four small
+functions: a 116-byte bootstrap call sequence, a 24-byte unsigned maximum update,
+an 8-byte SDA getter, and a 104-byte event callback. DTK supplies all function
+boundaries and 27 relocation targets. The reconstructed source is retained at
+`tools/probes/game_prefix_800068E0.c`.
+
+The recovered prefix is byte-identical and all 27 relocations agree for GC/1.3,
+GC/1.3.2, GC/1.3.2r, and GC/2.0. Its `.text` SHA-256 is
+`fa2edacda7c904249161ad5f2078ce403a0f1703630555ebf5c02abda5717e4c` for the
+retail prefix and every candidate output.
+
+This probe is deliberately **not** registered as a matching game TU. The section
+start proves where the first input begins, but DTK/Ghidra evidence does not yet
+prove that `0x800069DC` is an input-object boundary; code and SDA state continue
+beyond it. Treating the prefix as a standalone object would inflate progress and
+could hide relocation or data ownership errors. The first game-TU gate therefore
+remains open pending a defensible end boundary. This is a boundary divergence, not
+a codegen failure: the recovered source for the four functions already matches.
