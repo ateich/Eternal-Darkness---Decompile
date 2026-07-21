@@ -176,3 +176,21 @@ with closed entry/return boundaries and 15 outward relocations. Its signed
 branch tree only when the final result handling is expressed as a switch over
 `-2`, `-1`, `0`, and the default case. Objdiff reports 436/436 code bytes and
 all relocations at 100%, and the whole-DOL SHA-1 gate remains unchanged.
+
+## Arithmetic-contraction probe
+
+The text-only `fn_8017A574` input covers a complete DTK function boundary at
+`0x8017A574-0x8017A5A8`. It is a four-component vector dot product whose retail
+body contains one `fmuls` and three dependent `fmadds`. The natural C expression
+matches all 52 bytes at 100%; there are no relocations or owned data sections.
+The four-candidate result and canonical-compiler decision are recorded in
+`docs/toolchain.md`, and the normal full link retains the expected DOL SHA-1.
+
+## Dolphin base/processor assembly
+
+The SDK expansion now includes `dolphin/base/PPCArch.s` at
+`0x80209A9C-0x80209B8C`. This is the closed DTK range immediately after SI and
+before DB, containing 24 processor-control routines including `PPCMfmsr`,
+`PPCHalt`, `PPCDisableSpeculation`, and `PPCSetFpNonIEEEMode`. Objdiff reports
+all 240 code bytes, all 24 functions (including weak bindings), and both internal
+branch relocations at 100%. The full link retains the expected DOL SHA-1.

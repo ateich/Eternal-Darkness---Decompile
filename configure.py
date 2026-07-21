@@ -79,6 +79,7 @@ LIBRARY_MW_VERSIONS = {
     "si": SDK_MW_VERSION,
     "exi": SDK_MW_VERSION,
     "gx": SDK_MW_VERSION,
+    "base": SDK_MW_VERSION,
 }
 
 config.asflags = ["-mgekko", "--strip-local-absolute", "-I include", f"-I build/{VERSION}/include"]
@@ -126,6 +127,7 @@ config.libs = [
             Object(Matching, "game/game_fn_80006B38.c"),
             Object(Matching, "game/game_fn_80006D50.c"),
             Object(Matching, "game/game_fn_80006F30.c"),
+            Object(Matching, "game/game_fn_8017A574.c"),
         ],
     },
     {
@@ -186,6 +188,13 @@ config.libs = [
         "cflags": cflags_base,
         "progress_category": "sdk",
         "objects": [Object(Matching, "dolphin/exi/EXIUart.c")],
+    },
+    {
+        "lib": "base",
+        "mw_version": LIBRARY_MW_VERSIONS["base"],
+        "cflags": cflags_base,
+        "progress_category": "sdk",
+        "objects": [Object(Matching, "dolphin/base/PPCArch.s")],
     },
     {
         "lib": "gx",

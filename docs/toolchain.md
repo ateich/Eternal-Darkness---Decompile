@@ -127,3 +127,30 @@ game/linker candidates is eliminated. This is direct evidence that paired-single
 prologues and this degree of float scheduling/register pressure do not distinguish
 the candidates; a later TU must exercise actual arithmetic contraction or a
 candidate-sensitive inlining decision.
+
+## Arithmetic-contraction matrix and canonical default
+
+`fn_8017A574` (`0x8017A574-0x8017A5A8`) is the requested genuine contraction
+case. It computes a four-component dot product and the retail 52-byte sequence
+contains one `fmuls` followed by three dependent `fmadds`. This is arithmetic
+contraction, rather than merely moving float arguments or saving FPRs.
+
+| Candidate | `.text` | Relocations | Complete-object SHA-256 | Whole DOL |
+| --- | ---: | ---: | --- | --- |
+| GC/1.3 | 100% | none | `04de5287...934904b` | expected SHA-1 |
+| GC/1.3.2 | 100% | none | `04de5287...934904b` | expected SHA-1 |
+| GC/1.3.2r | 100% | none | `04de5287...934904b` | expected SHA-1 |
+| GC/2.0 | 100% | none | `4832ff67...bec341b` | expected SHA-1 |
+
+All four candidates emit the same 52 linked code bytes and reproduce DOL SHA-1
+`ea24b6af954876ce072562ff39cdb4c81d32be1f`. As with the earlier float-heavy
+probe, GC/2.0's complete-object difference is confined to non-linked compiler
+metadata. This genuine contraction case therefore does not discriminate among
+the surviving versions.
+
+Per the project decision rule, **GC/1.3 is now the canonical game/runtime/linker
+default** because it is the earliest fully matching candidate. The full
+four-version matrix will no longer run for every game TU; later inputs receive
+GC/1.3 verification plus targeted spot-checks when they contain a new suspected
+compiler-sensitive construct. Nintendo SDK libraries remain pinned separately
+to GC/1.2.5n.

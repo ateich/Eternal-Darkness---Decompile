@@ -1,4 +1,4 @@
-status: narrowed
+status: canonical-default
 architecture: gekko
 endianness: big
 compiler_family: Metrowerks CodeWarrior for GameCube
@@ -20,6 +20,7 @@ library_compilers:
   si: GC/1.2.5n
   exi: GC/1.2.5n
   gx: GC/1.2.5n
+  base: GC/1.2.5n
 runtime_candidates:
   - GC/1.3
   - GC/1.3.2
@@ -47,4 +48,4 @@ confirmed_flag_set:
   - -str reuse,pool,readonly
   - -use_lmw_stmw on
   - -common off
-notes: The set is confirmed as matching; individual necessity remains to be isolated with more complex TUs.
+notes: GC/1.3 is canonical after a genuine fmuls/fmadds contraction case failed to distinguish the four surviving candidates; use later versions only for targeted spot-checks.
