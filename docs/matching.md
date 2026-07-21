@@ -18,11 +18,35 @@ DTK's first local split identified the following two SDK objects:
 - `Runtime.PPCEABI.H/__init_cpp_exceptions.cpp`: `.text` `0x800F63E4-0x800F6460`,
   plus its constructor, destructor, and `fragmentID` sections
 
-The reconstructed functions produce only `li`, `blr`, or bare `blr` sequences. They are
-registered as non-matching until they are compiled with a lawful `GC/1.2.5n` candidate
-and objdiff confirms instruction, symbol binding (including weak `Hu_IsStub`), and
-relocation equality. The current machine has no `mwcc*.exe` or `mwldeppc.exe`; place
-the compiler under `compilers/GC/1.2.5n/` or pass `--compilers` before running the gate.
-The runtime object should be tested across the full compiler matrix because its code and
-linker-generated constructor/destructor ordering provide stronger fingerprint evidence
-than the compiler-insensitive debugger stubs.
+The first gate passed on 2026-07-21. Objdiff v3.6.1 reports:
+
+- `dolphin/db/DebuggerDriver.c`: `.text` 100%, all eight symbols 100%, with
+  `Hu_IsStub` retaining weak binding.
+- `dolphin/amc/AmcExi2Stubs.c`: `.text` and `AMC_IsStub` 100%.
+- `Runtime.PPCEABI.H/__init_cpp_exceptions.cpp`: `.text` 100%, `.ctors` 100%,
+  `.dtors` 100%, `.sdata` 100%, all symbols 100%, and all twelve relocations equal
+  with GC/1.3.
+
+MWCC names the priority inputs `.ctors$10`, `.dtors$10`, and `.dtors$15`; DTK's
+recovered object contains their already-linked `.ctors` and `.dtors` names. The pinned
+Linux wrapper canonicalizes only those ELF section names after compilation so objdiff
+and MWLD compare/link the same representation. This is required for a 100% data and
+relocation gate and is reproducible through the normal build.
+
+All three objects are now registered matching and linked from source. The resulting
+`build/GEDE01/main.dol` is byte-identical to the verified input with SHA-1
+`ea24b6af954876ce072562ff39cdb4c81d32be1f`.
+
+## First expansion
+
+The next four evidence-backed PPCEABI helper objects are also split and linked from
+source assembly:
+
+- `Runtime.PPCEABI.H/__save_fpr.s`
+- `Runtime.PPCEABI.H/__restore_fpr.s`
+- `Runtime.PPCEABI.H/__save_gpr.s`
+- `Runtime.PPCEABI.H/__restore_gpr.s`
+
+Each is 76 bytes and objdiff reports `.text` 100%. Linking all four retains the
+expected whole-DOL SHA-1. The project therefore has seven complete objects and 484
+matching code bytes after this milestone.

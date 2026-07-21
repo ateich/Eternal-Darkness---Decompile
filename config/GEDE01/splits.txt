@@ -13,16 +13,26 @@ Sections:
 	.sdata2     type:rodata align:8
 	.sbss2      type:bss align:32
 
-# Reviewed from the DTK disassembly. The debugger-driver stubs and AMC marker
-# are separate SDK objects; keep the boundary at 0x8022E7F4 explicit.
-dolphin/db/DebuggerDriver.c:
-	.text       start:0x8022E7C4 end:0x8022E7F4
+Runtime.PPCEABI.H/__save_fpr.s:
+	.text       start:0x800F5CB0 end:0x800F5CFC
 
-dolphin/amc/AmcExi2Stubs.c:
-	.text       start:0x8022E7F4 end:0x8022E7FC
+Runtime.PPCEABI.H/__restore_fpr.s:
+	.text       start:0x800F5CFC end:0x800F5D48
+
+Runtime.PPCEABI.H/__save_gpr.s:
+	.text       start:0x800F5D48 end:0x800F5D94
+
+Runtime.PPCEABI.H/__restore_gpr.s:
+	.text       start:0x800F5D94 end:0x800F5DE0
 
 Runtime.PPCEABI.H/__init_cpp_exceptions.cpp:
 	.text       start:0x800F63E4 end:0x800F6460
 	.ctors      start:0x80237EE0 end:0x80237EE4
 	.dtors      start:0x80237F00 end:0x80237F08
 	.sdata      start:0x8064B838 end:0x8064B83C
+
+dolphin/db/DebuggerDriver.c:
+	.text       start:0x8022E7C4 end:0x8022E7F4
+
+dolphin/amc/AmcExi2Stubs.c:
+	.text       start:0x8022E7F4 end:0x8022E7FC

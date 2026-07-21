@@ -36,6 +36,10 @@ NINJA_ASSETS = {
     ("Linux", "x86_64"): ("ninja-linux.zip", "5749cbc4e668273514150a80e387a957f933c6ed3f5f11e03fb30955e2bbead6"),
     ("Linux", "aarch64"): ("ninja-linux-aarch64.zip", "fd2cacc8050a7f12a16a2e48f9e06fca5c14fc4c2bee2babb67b58be17a607fc"),
 }
+WIBO_VERSION = "1.0.3"
+WIBO_ASSETS = {
+    ("Linux", "x86_64"): ("wibo-x86_64", "7fdf620b151744296b9bb93318d8c4009d3d3e98e23718a6eda9fbec4cefbb2a"),
+}
 
 
 def fetch(url: str, destination: Path, expected_sha256: str, executable: bool = False) -> None:
@@ -80,6 +84,12 @@ def main() -> None:
     ninja.write_bytes(payload)
     ninja.chmod(ninja.stat().st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
     print(f"installed {ninja.relative_to(ROOT)}")
+
+    if key not in WIBO_ASSETS:
+        raise SystemExit(f"No pinned wibo bootstrap asset for {key}; pass --wrapper explicitly")
+    wibo_asset, wibo_digest = WIBO_ASSETS[key]
+    wibo_url = f"https://github.com/decompals/wibo/releases/download/{WIBO_VERSION}/{wibo_asset}"
+    fetch(wibo_url, ROOT / ".tools" / "bin" / "wibo", wibo_digest, executable=True)
     print("bootstrap complete")
 
 

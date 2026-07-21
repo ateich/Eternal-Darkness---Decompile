@@ -23,7 +23,10 @@ python3 configure.py
 .tools/bin/ninja
 ```
 
-`bootstrap.py` downloads hash-pinned DTK 1.8.3, Ninja 1.13.2, and pinned open-source `dtk-template` build helpers. The build may download remaining pinned public tools. It does not and must not download proprietary compilers; place lawfully obtained MWCC binaries in ignored `compilers/` or pass `--compilers`.
+`bootstrap.py` downloads hash-pinned DTK 1.8.3, Ninja 1.13.2, wibo 1.0.3,
+and pinned open-source `dtk-template` build helpers. The build may download remaining
+pinned public tools. It does not and must not download proprietary compilers; place
+lawfully obtained MWCC binaries in ignored `compilers/` or pass `--compilers`.
 
 The ingestion script fails closed unless the disc header, Redump identity, and `main.dol` hashes all match. It extracts only `boot.bin` and `main.dol` into ignored `orig/GEDE01/sys/` and records local provenance in an ignored report.
 

@@ -20,7 +20,7 @@ parser.add_argument("--version", choices=[VERSION], default=VERSION, type=str.up
 parser.add_argument("--build-dir", type=Path, default=Path("build"))
 parser.add_argument("--binutils", type=Path)
 parser.add_argument("--compilers", type=Path)
-parser.add_argument("--mw-version", default="GC/1.3.2",
+parser.add_argument("--mw-version", default="GC/1.3",
                     choices=["GC/1.2.5n", "GC/1.3", "GC/1.3.2", "GC/1.3.2r", "GC/2.0"])
 parser.add_argument("--dtk", type=Path, default=Path(".tools/bin/dtk"))
 parser.add_argument("--objdiff", type=Path)
@@ -52,7 +52,7 @@ config.generate_map = args.map
 config.non_matching = args.non_matching
 config.progress = args.progress
 if not is_windows():
-    config.wrapper = args.wrapper
+    config.wrapper = args.wrapper or Path("tools/mwcc_wrapper.py")
 if not config.non_matching:
     config.asm_dir = None
 
@@ -84,7 +84,6 @@ cflags_runtime = [
     *cflags_base,
     "-use_lmw_stmw on",
     "-str reuse,pool,readonly",
-    "-gccinc",
     "-common off",
 ]
 if args.debug:
@@ -96,8 +95,7 @@ Matching = True
 NonMatching = False
 Equivalent = config.non_matching
 
-# These SDK objects have reviewed DTK boundaries and reconstructed source, but remain
-# non-matching until a lawful MWCC installation can produce objdiff evidence.
+# SDK objects are promoted only after objdiff and the whole-DOL hash gate pass.
 config.warn_missing_config = False
 config.warn_missing_source = False
 config.libs = [
@@ -106,21 +104,27 @@ config.libs = [
         "mw_version": config.linker_version,
         "cflags": cflags_runtime,
         "progress_category": "sdk",
-        "objects": [Object(NonMatching, "Runtime.PPCEABI.H/__init_cpp_exceptions.cpp")],
+        "objects": [
+            Object(Matching, "Runtime.PPCEABI.H/__init_cpp_exceptions.cpp"),
+            Object(Matching, "Runtime.PPCEABI.H/__save_fpr.s"),
+            Object(Matching, "Runtime.PPCEABI.H/__restore_fpr.s"),
+            Object(Matching, "Runtime.PPCEABI.H/__save_gpr.s"),
+            Object(Matching, "Runtime.PPCEABI.H/__restore_gpr.s"),
+        ],
     },
     {
         "lib": "NdevExi2A",
         "mw_version": "GC/1.2.5n",
         "cflags": cflags_base,
         "progress_category": "sdk",
-        "objects": [Object(NonMatching, "dolphin/db/DebuggerDriver.c")],
+        "objects": [Object(Matching, "dolphin/db/DebuggerDriver.c")],
     },
     {
         "lib": "amcstubs",
         "mw_version": "GC/1.2.5n",
         "cflags": cflags_base,
         "progress_category": "sdk",
-        "objects": [Object(NonMatching, "dolphin/amc/AmcExi2Stubs.c")],
+        "objects": [Object(Matching, "dolphin/amc/AmcExi2Stubs.c")],
     },
 ]
 config.progress_categories = [ProgressCategory("game", "Game Code"), ProgressCategory("sdk", "SDK/Runtime")]

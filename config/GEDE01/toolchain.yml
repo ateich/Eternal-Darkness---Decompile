@@ -1,4 +1,4 @@
-status: fingerprinting
+status: narrowed
 architecture: gekko
 endianness: big
 compiler_family: Metrowerks CodeWarrior for GameCube
@@ -10,11 +10,31 @@ candidate_order:
   - GC/1.3.2r
   - GC/2.0
 sdk_candidate: GC/1.2.5n
-confirmed_flags: []
-hypothesis_flags:
+runtime_candidates:
+  - GC/1.3
+  - GC/1.3.2
+  - GC/1.3.2r
+  - GC/2.0
+rejected_candidates:
+  GC/1.2.5n: runtime text 61.16129%; whole-DOL SHA-1 mismatch
+compiler_sha256:
+  GC/1.2.5n: ccf4b465cec73b5aae9c5c5543dcf8cda8a62aba246f89e2e0b200d742f2e55c
+  GC/1.3: 4e502c38465500d4fda8d966b268151a6c74c730508e3d9b7efd23d1a6083715
+  GC/1.3.2: 7cbae0a5bd81e07d7fa8975bbc4e969b5dea265cc29c5ee6bae0453a6e25f225
+  GC/1.3.2r: e066c7c9fa5f21681b287be199018905c2cbb21b557ce99bc75e29291f363227
+  GC/2.0: b79ee3e358fe18d7b492c3400169efc1a9bc5dff1a120dcb025f7869ab772022
+confirmed_flag_set:
+  - -nodefaults
   - -proc gekko
+  - -align powerpc
+  - -enum int
   - -fp hardware
   - -O4,p
   - -inline auto
-notes: Exact patch versions and flags remain unconfirmed until objdiff evidence exists.
-
+  - -Cpp_exceptions off
+  - -RTTI off
+  - -fp_contract on
+  - -str reuse,pool,readonly
+  - -use_lmw_stmw on
+  - -common off
+notes: The set is confirmed as matching; individual necessity remains to be isolated with more complex TUs.
