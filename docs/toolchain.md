@@ -79,3 +79,9 @@ four game functions. The next discriminator must include floating-point
 contraction, deferred inlining, string pooling, or a larger register-pressure
 case from a proven game TU. Until then, GC/1.3 remains the earliest viable default
 and all four candidates remain live.
+
+After promotion into the normal build, the full configure/build/report gate was
+rerun for all four candidates. Each candidate still gives a 100% 252-byte game
+input and reproduces the expected whole-DOL SHA-1. Promotion therefore adds no
+compiler discrimination; the next candidate must come from the float-heavy code
+beginning later in the first game text region.

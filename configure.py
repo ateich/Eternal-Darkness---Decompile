@@ -100,6 +100,13 @@ config.warn_missing_config = False
 config.warn_missing_source = False
 config.libs = [
     {
+        "lib": "game",
+        "mw_version": config.linker_version,
+        "cflags": cflags_base,
+        "progress_category": "game",
+        "objects": [Object(Matching, "game/game_prefix_800068E0.c")],
+    },
+    {
         "lib": "Runtime.PPCEABI.H",
         "mw_version": config.linker_version,
         "cflags": cflags_runtime,
