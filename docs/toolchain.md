@@ -61,6 +61,11 @@ proves that the recovered `dvd`, `exi`, `si`, and `gx` archive objects use
 GC/1.2.5n. It does **not** eliminate GC/1.3 through GC/2.0 for Silicon Knights game
 code or for the final linker; vendor SDK archives were compiled independently.
 
+`dolphin/os/OSLink.c` extends that archive fingerprint to OS: its retained
+`__OSModuleInit` is 100% with GC/1.2.5n and 63.33333% with GC/1.3. `OSArena.c`
+also remains 100% under GC/1.2.5n. The OS archive is therefore pinned to
+GC/1.2.5n independently of the still-live game/linker candidates.
+
 ## First game-code matrix
 
 The 252-byte game-code prefix at `0x800068E0` adds nontrivial prologues, 14 calls,

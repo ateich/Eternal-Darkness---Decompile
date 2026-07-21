@@ -135,10 +135,13 @@ config.libs = [
     },
     {
         "lib": "os",
-        "mw_version": config.linker_version,
+        "mw_version": "GC/1.2.5n",
         "cflags": cflags_base,
         "progress_category": "sdk",
-        "objects": [Object(Matching, "dolphin/os/OSArena.c")],
+        "objects": [
+            Object(Matching, "dolphin/os/OSArena.c"),
+            Object(Matching, "dolphin/os/OSLink.c"),
+        ],
     },
     {
         "lib": "dvd",

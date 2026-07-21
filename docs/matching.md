@@ -75,6 +75,19 @@ at 100%, including relocations. Together with the previous objects, the project 
 12 complete objects, 29 functions, 1,816 matching code bytes, and 224 matching data
 bytes. The source-linked DOL continues to reproduce the expected SHA-1.
 
+The next OS archive fragment is also complete:
+
+- `dolphin/os/OSLink.c` contributes the retained `__OSModuleInit` input at
+  `0x8020D1D8-0x8020D1F0`. The release linker discarded the rest of `OSLink.c`,
+  so the recovered input is text-only; its two absolute low-memory SDK globals
+  remain address declarations rather than owned data sections.
+
+GC/1.2.5n reproduces all 24 bytes and the function's absolute-address references
+at 100%; GC/1.3 reaches only 63.33333%. `OSArena.c` remains 100% after moving the
+OS archive to the now-confirmed GC/1.2.5n compiler. The project has 14 complete
+objects, 34 functions, 2,092 matching code bytes, and 224 matching data bytes,
+with the expected whole-DOL SHA-1.
+
 ## First matching game-code input
 
 The first game candidate is the contiguous `.text` prefix
