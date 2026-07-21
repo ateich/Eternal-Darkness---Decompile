@@ -50,3 +50,27 @@ source assembly:
 Each is 76 bytes and objdiff reports `.text` 100%. Linking all four retains the
 expected whole-DOL SHA-1. The project therefore has seven complete objects and 484
 matching code bytes after this milestone.
+
+## SDK production expansion
+
+The next evidence-backed pass used the May 2001 Dolphin SDK decompilation and
+Super Mario Sunshine's reconstructed SDK as clean-room references, then accepted
+only output verified against GEDE01's own DTK splits. Five additional objects are
+now complete:
+
+- `dolphin/os/OSArena.c`: 32 code bytes, 8 data bytes, four functions.
+- `dolphin/dvd/dvdqueue.c`: 408 code bytes, 32 BSS bytes, four functions.
+- `dolphin/exi/EXIUart.c`: 624 code bytes, 16 SBSS bytes, two linked functions.
+  The unreferenced `ReadUARTN` routine is absent from the retail link and is not
+  manufactured in the recovered object.
+- `dolphin/si/SISamplingRate.c`: 264 code bytes, 152 data bytes, two functions.
+  The hardware VI-register macro and the object's four-byte string alignment are
+  represented explicitly because both affect code or section identity.
+- `dolphin/gx/GXStubs.c`: 4 code bytes and one function. Its identity is supported
+  by the call from recovered GX transform code with the expected two floating
+  arguments.
+
+Objdiff v3.6.1 reports every section and all 13 functions across these five objects
+at 100%, including relocations. Together with the previous objects, the project has
+12 complete objects, 29 functions, 1,816 matching code bytes, and 224 matching data
+bytes. The source-linked DOL continues to reproduce the expected SHA-1.

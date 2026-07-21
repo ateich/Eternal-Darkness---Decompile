@@ -126,6 +126,41 @@ config.libs = [
         "progress_category": "sdk",
         "objects": [Object(Matching, "dolphin/amc/AmcExi2Stubs.c")],
     },
+    {
+        "lib": "os",
+        "mw_version": config.linker_version,
+        "cflags": cflags_base,
+        "progress_category": "sdk",
+        "objects": [Object(Matching, "dolphin/os/OSArena.c")],
+    },
+    {
+        "lib": "dvd",
+        "mw_version": "GC/1.2.5n",
+        "cflags": cflags_base,
+        "progress_category": "sdk",
+        "objects": [Object(Matching, "dolphin/dvd/dvdqueue.c")],
+    },
+    {
+        "lib": "si",
+        "mw_version": "GC/1.2.5n",
+        "cflags": cflags_base,
+        "progress_category": "sdk",
+        "objects": [Object(Matching, "dolphin/si/SISamplingRate.c")],
+    },
+    {
+        "lib": "exi",
+        "mw_version": "GC/1.2.5n",
+        "cflags": cflags_base,
+        "progress_category": "sdk",
+        "objects": [Object(Matching, "dolphin/exi/EXIUart.c")],
+    },
+    {
+        "lib": "gx",
+        "mw_version": "GC/1.2.5n",
+        "cflags": cflags_base,
+        "progress_category": "sdk",
+        "objects": [Object(Matching, "dolphin/gx/GXStubs.c")],
+    },
 ]
 config.progress_categories = [ProgressCategory("game", "Game Code"), ProgressCategory("sdk", "SDK/Runtime")]
 config.progress_each_module = args.verbose

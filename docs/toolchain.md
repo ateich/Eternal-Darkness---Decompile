@@ -40,3 +40,23 @@ individually necessary.
 Compiler SHA-256 fingerprints are recorded in `config/GEDE01/toolchain.yml`. A full
 build with each surviving candidate reproduces
 `ea24b6af954876ce072562ff39cdb4c81d32be1f`.
+
+## SDK archive compiler fingerprint
+
+The larger DVD and EXI objects establish a separate, exact compiler fingerprint
+for Nintendo's prebuilt SDK libraries. With the same recorded flags, their `.text`
+comparison is:
+
+| Candidate | `dvdqueue.c` (408 bytes) | `EXIUart.c` (624 bytes) |
+| --- | ---: | ---: |
+| GC/1.2.5n | 100% | 100% |
+| GC/1.3 | 72.71568% | 81.00000% |
+| GC/1.3.2 | 72.71568% | 81.38461% |
+| GC/1.3.2r | 72.71568% | 81.38461% |
+| GC/2.0 | 72.71568% | 81.38461% |
+
+The differences are structural rather than relocation-only: GC/1.3 and later alter
+prologue layout, loop scheduling, and the inlining of `PopWaitingQueuePrio`. This
+proves that the recovered `dvd`, `exi`, `si`, and `gx` archive objects use
+GC/1.2.5n. It does **not** eliminate GC/1.3 through GC/2.0 for Silicon Knights game
+code or for the final linker; vendor SDK archives were compiled independently.
