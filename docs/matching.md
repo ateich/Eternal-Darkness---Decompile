@@ -194,3 +194,25 @@ before DB, containing 24 processor-control routines including `PPCMfmsr`,
 `PPCHalt`, `PPCDisableSpeculation`, and `PPCSetFpNonIEEEMode`. Objdiff reports
 all 240 code bytes, all 24 functions (including weak bindings), and both internal
 branch relocations at 100%. The full link retains the expected DOL SHA-1.
+
+## Small game continuation and OS time-base primitives
+
+The closed game interval `0x8000738C-0x800073E4` contributes four more complete
+functions: two wrappers around the shared object at `lbl_8064C5F8`, one empty
+callback, and the `lbl_8064C600` setter. Objdiff reports 36/36, 40/40, 4/4, and
+8/8 bytes respectively, with all four relocations equal. This is 88/88 bytes for
+the input and extends verified game coverage beyond the large function ending at
+`0x8000738C` without claiming that still-unmatched function.
+
+`dolphin/os/OSTime.c` now owns the closed `0x80210AA0-0x80210AC0` interval.
+`OSGetTime` is the 24-byte stable-upper/lower time-base read loop and `OSGetTick`
+is the 8-byte lower time-base read. Both functions and the complete 32-byte input
+are 100%; the internal retry branch is also equal.
+
+The adjacent C candidates remain deliberately unpromoted. Natural 64-bit source
+for `__OSGetSystemTime` and `__OSTimeToSystemTime` reproduces the arithmetic and
+calls with GC/1.2.5n but uses 24-byte frames where retail uses 32-byte frames;
+objdiff reaches 98.84% and 98.77273% per function (98.98182% for their combined
+220-byte experimental interval). `__OSTimeToSystemTime` also retains an operand-
+ordering delta unless the system-time addend is written first. These results are
+codegen evidence for the OS archive investigation, not matching coverage.

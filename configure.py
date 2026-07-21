@@ -127,6 +127,7 @@ config.libs = [
             Object(Matching, "game/game_fn_80006B38.c"),
             Object(Matching, "game/game_fn_80006D50.c"),
             Object(Matching, "game/game_fn_80006F30.c"),
+            Object(Matching, "game/game_fn_8000738C.c"),
             Object(Matching, "game/game_fn_8017A574.c"),
         ],
     },
@@ -166,6 +167,7 @@ config.libs = [
             Object(Matching, "dolphin/os/OSArena.c"),
             Object(Matching, "dolphin/os/OSLink.c"),
             Object(Matching, "dolphin/os/OSMessage.c"),
+            Object(Matching, "dolphin/os/OSTime.c"),
         ],
     },
     {

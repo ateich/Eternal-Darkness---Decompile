@@ -13,6 +13,10 @@ types and callers are recovered.
 | Rendering/camera | `0x800C2708-0x800C280C` (camera anchor); `0x801EF400-0x801F5980` (engine band) | Direct references to `Camera01`, `SKEngine_Render.c`, and `SkEngine_AnimTexture.c`; the engine band lies immediately before the Nintendo GX archive beginning near `0x80222B30`. | High for renderer/animation anchors. |
 | Audio/SFX/music | `0x80050B08-0x80052218` (game sound query); `0x801A9488-0x801AC2E8` (core audio band) | Direct xrefs to `GS_Query_Weapon_Sound`, `sd_sound.c`, `/audio/effects/ed_fx.*`, and `SoundSource %d`. A cinematic-audio call-site anchor also exists at `0x8016B4B4-0x8016B5CC`. | High for anchors and core band. |
 
+The sanity row is expanded into an entry-point and structure map in
+`docs/sanity-system.md`. That map separates effect registration functions from
+per-frame/action callbacks and records only fields visible in repeated code.
+
 ## Supporting data ranges
 
 - Audio enum/debug strings start near `.data` `0x8023C830`; effect archive paths

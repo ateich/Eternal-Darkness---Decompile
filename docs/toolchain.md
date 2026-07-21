@@ -154,3 +154,12 @@ four-version matrix will no longer run for every game TU; later inputs receive
 GC/1.3 verification plus targeted spot-checks when they contain a new suspected
 compiler-sensitive construct. Nintendo SDK libraries remain pinned separately
 to GC/1.2.5n.
+
+The flag-control probe does discriminate: compiling the same source with GC/1.3
+and `-fp_contract off` expands the retail 52-byte body to 64 bytes (four `fmuls`
+and three `fadds`) and objdiff falls to 32.846153%. Thus the probe confirms
+`-fp_contract on` for this game input and eliminates the hypothesis that
+contraction mode was disabled. It simultaneously eliminates the proposed
+*version* discriminator: with contraction enabled, GC/1.3, GC/1.3.2,
+GC/1.3.2r, and GC/2.0 all produce the same linked instructions. No one of those
+four versions is selected by this probe alone.
