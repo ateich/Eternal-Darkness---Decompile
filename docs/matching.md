@@ -144,3 +144,11 @@ The recovered source preserves the retail 0x60-byte frame, paired-single
 `f31` save/restore, three temporary vectors, seven stack color values, float
 return-value lifetime, and the float-leading variadic renderer ABI. Objdiff
 v3.6.1 reports all 536 bytes and all 54 relocations at 100%.
+
+## OS message queue
+
+The recovered `OSMessage.c` input covers `0x8020D1F0-0x8020D4C8`: initialization,
+send, receive, and priority-jam operations. The public SDK structure layout and
+interrupt/thread-queue behavior reproduce all 728 code bytes and 17 relocations
+with GC/1.2.5n. DTK function boundaries close both ends, and the text-only object
+defines no data requiring an ownership inference.

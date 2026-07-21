@@ -64,6 +64,23 @@ config.objdiff_tag = "v3.6.1"
 config.sjiswrap_tag = "v1.2.2"
 config.wibo_tag = "1.0.3"
 
+# The retail DOL links independently built inputs from two compiler lines.
+# Game/runtime objects follow the selected live candidate; Nintendo SDK archive
+# objects are fingerprinted to GC/1.2.5n.
+GAME_MW_VERSION = args.mw_version
+SDK_MW_VERSION = "GC/1.2.5n"
+LIBRARY_MW_VERSIONS = {
+    "game": GAME_MW_VERSION,
+    "Runtime.PPCEABI.H": GAME_MW_VERSION,
+    "NdevExi2A": SDK_MW_VERSION,
+    "amcstubs": SDK_MW_VERSION,
+    "os": SDK_MW_VERSION,
+    "dvd": SDK_MW_VERSION,
+    "si": SDK_MW_VERSION,
+    "exi": SDK_MW_VERSION,
+    "gx": SDK_MW_VERSION,
+}
+
 config.asflags = ["-mgekko", "--strip-local-absolute", "-I include", f"-I build/{VERSION}/include"]
 config.ldflags = ["-fp hardware", "-nodefaults"]
 if args.map:
@@ -72,7 +89,7 @@ if args.debug:
     config.ldflags.append("-g")
 
 # This is a testable starting hypothesis, not a fingerprint result.
-config.linker_version = args.mw_version
+config.linker_version = GAME_MW_VERSION
 cflags_base = [
     "-nodefaults", "-proc gekko", "-align powerpc", "-enum int", "-fp hardware",
     "-Cpp_exceptions off", "-O4,p", "-inline auto", '-pragma "cats off"',
@@ -101,7 +118,7 @@ config.warn_missing_source = False
 config.libs = [
     {
         "lib": "game",
-        "mw_version": config.linker_version,
+        "mw_version": LIBRARY_MW_VERSIONS["game"],
         "cflags": cflags_base,
         "progress_category": "game",
         "objects": [
@@ -111,7 +128,7 @@ config.libs = [
     },
     {
         "lib": "Runtime.PPCEABI.H",
-        "mw_version": config.linker_version,
+        "mw_version": LIBRARY_MW_VERSIONS["Runtime.PPCEABI.H"],
         "cflags": cflags_runtime,
         "progress_category": "sdk",
         "objects": [
@@ -124,52 +141,53 @@ config.libs = [
     },
     {
         "lib": "NdevExi2A",
-        "mw_version": "GC/1.2.5n",
+        "mw_version": LIBRARY_MW_VERSIONS["NdevExi2A"],
         "cflags": cflags_base,
         "progress_category": "sdk",
         "objects": [Object(Matching, "dolphin/db/DebuggerDriver.c")],
     },
     {
         "lib": "amcstubs",
-        "mw_version": "GC/1.2.5n",
+        "mw_version": LIBRARY_MW_VERSIONS["amcstubs"],
         "cflags": cflags_base,
         "progress_category": "sdk",
         "objects": [Object(Matching, "dolphin/amc/AmcExi2Stubs.c")],
     },
     {
         "lib": "os",
-        "mw_version": "GC/1.2.5n",
+        "mw_version": LIBRARY_MW_VERSIONS["os"],
         "cflags": cflags_base,
         "progress_category": "sdk",
         "objects": [
             Object(Matching, "dolphin/os/OSArena.c"),
             Object(Matching, "dolphin/os/OSLink.c"),
+            Object(Matching, "dolphin/os/OSMessage.c"),
         ],
     },
     {
         "lib": "dvd",
-        "mw_version": "GC/1.2.5n",
+        "mw_version": LIBRARY_MW_VERSIONS["dvd"],
         "cflags": cflags_base,
         "progress_category": "sdk",
         "objects": [Object(Matching, "dolphin/dvd/dvdqueue.c")],
     },
     {
         "lib": "si",
-        "mw_version": "GC/1.2.5n",
+        "mw_version": LIBRARY_MW_VERSIONS["si"],
         "cflags": cflags_base,
         "progress_category": "sdk",
         "objects": [Object(Matching, "dolphin/si/SISamplingRate.c")],
     },
     {
         "lib": "exi",
-        "mw_version": "GC/1.2.5n",
+        "mw_version": LIBRARY_MW_VERSIONS["exi"],
         "cflags": cflags_base,
         "progress_category": "sdk",
         "objects": [Object(Matching, "dolphin/exi/EXIUart.c")],
     },
     {
         "lib": "gx",
-        "mw_version": "GC/1.2.5n",
+        "mw_version": LIBRARY_MW_VERSIONS["gx"],
         "cflags": cflags_base,
         "progress_category": "sdk",
         "objects": [Object(Matching, "dolphin/gx/GXStubs.c")],

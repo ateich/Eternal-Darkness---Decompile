@@ -66,6 +66,21 @@ code or for the final linker; vendor SDK archives were compiled independently.
 also remains 100% under GC/1.2.5n. The OS archive is therefore pinned to
 GC/1.2.5n independently of the still-live game/linker candidates.
 
+The two-toolchain model is encoded, rather than merely documented, in
+`configure.py` and `config/GEDE01/toolchain.yml`. `game` and
+`Runtime.PPCEABI.H` follow the selected GC/1.3-through-GC/2.0 game/runtime
+candidate (GC/1.3 by default), while every recovered Nintendo SDK archive library
+is assigned GC/1.2.5n. The linker follows the selected game/runtime candidate.
+
+`OSMessage.c` expands the OS fingerprint with four functions and 728 bytes. It is
+100% with GC/1.2.5n, including 17 relocations, but only 76.53846% in `.text` with
+GC/1.3. This supplies a second substantial OS object, beyond the tiny retained
+`OSLink.c` initializer, that independently enforces the per-library assignment.
+After encoding these assignments, complete links with GC/1.3, GC/1.3.2,
+GC/1.3.2r, and GC/2.0 selected for game/runtime/linker inputs all reproduce DOL
+SHA-1 `ea24b6af954876ce072562ff39cdb4c81d32be1f`; SDK inputs remain pinned to
+GC/1.2.5n in every run.
+
 ## First game-code matrix
 
 The 252-byte game-code prefix at `0x800068E0` adds nontrivial prologues, 14 calls,
