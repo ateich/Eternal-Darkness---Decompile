@@ -35,3 +35,8 @@ The contraction flag control is in `build/probes/contract-off.diff.json`:
 GC/1.3 with `-fp_contract off` scores 32.846153% for `fn_8017A574` and emits
 64 bytes instead of the retail 52. The enabled four-version matrix remains
 100% for every candidate, as recorded in `docs/toolchain.md`.
+
+After adopting GC/1.3 as the canonical default, `fn_800073E4` received a targeted
+GC/2.0 spot check because its match depends on a register-lifetime preference.
+GC/2.0 also produces 376/376 linked bytes at 100%; this result is summarized
+durably in `docs/toolchain.md`.

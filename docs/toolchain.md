@@ -162,6 +162,11 @@ GC/1.3 verification plus targeted spot-checks when they contain a new suspected
 compiler-sensitive construct. Nintendo SDK libraries remain pinned separately
 to GC/1.2.5n.
 
+The first post-decision spot check is `fn_800073E4`, whose exact source depends on
+a `register`-qualified branch-local temporary and inline `stmw`/`lmw`. GC/2.0
+emits the same 376 linked bytes as canonical GC/1.3 (100% in objdiff), so this new
+register-allocation case does not reopen the version matrix.
+
 The flag-control probe does discriminate: compiling the same source with GC/1.3
 and `-fp_contract off` expands the retail 52-byte body to 64 bytes (four `fmuls`
 and three `fadds`) and objdiff falls to 32.846153%. Thus the probe confirms
