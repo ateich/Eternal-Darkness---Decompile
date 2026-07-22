@@ -21,11 +21,26 @@ provisional until matching source supplies types.
 | Effect | Registration/initializer | Action or state callbacks | Direct data evidence |
 | --- | --- | --- | --- |
 | Target marker | `fn_80087A24` | `fn_80087BA8`, `fn_80087D64`, `fn_80087EC4`, `fn_80088298` | `"Insanity: Target Marker"` at `0x80245090`. |
+| Attack camera | `fn_80088890` | adjacent camera callbacks not yet typed | `"Insanity: Attack Camera"` at `0x802450A8`. |
+| Horror camera shake | `fn_80088C04` | adjacent camera callbacks not yet typed | `"Ins: Horror Cam Shake"` at `0x802450C0`. |
 | Bleeding walls | `fn_80089204` | `fn_80089394`, `fn_80089754` | Name at `0x802450D8`; particle-failure diagnostic at `0x802450F4`. |
 | Blood bath | `fn_800898E0` | callbacks registered inside that initializer | Name at `0x8024514C`. |
 | Blood-pool ceiling drip | `fn_80089EE8` | state logic within the same anchor and its registered callbacks | Name at `0x80245164`. |
 | Timeline visitation | `fn_8009DF38` | `fn_8009E0D4`, `fn_8009E130` | Name at `0x80245448`; initializer schedules three callbacks with room-dependent durations. |
 | Walk on ceiling | `fn_8009E39C` | `fn_8009E5C4` and adjacent callbacks | Name at `0x80245464`; invalid-room diagnostic at `0x8024547C`. |
+| Illusions of grandeur | `fn_8009DCA4` | callbacks not yet typed | `"Ins: Illusions of Grandeur"` at `0x80245414`. |
+| Phantom creatures | `fn_8009DE50` | callbacks not yet typed | `"Ins: Phantom Creatures"` at `0x80245430`. |
+| Edwards ghost cinematic | `fn_8009E710` | callbacks not yet typed | `"Insanity: Edwards Ghost Cine"` at `0x802454C8`. |
+| Zombie | `fn_8009E8E0` | callbacks not yet typed | `"Insanity: Zombie"` at `0x802454E8`. |
+| Alex phone call | `fn_8009EC34` | callbacks not yet typed | `"Ins: Alex Phone Call"` at `0x802454FC`. |
+| Bug crawl | `fn_8009ED44` | callbacks not yet typed | `"Insanity: Bug Crawl"` at `0x80245514`. |
+| Controller missing | `fn_8009F07C` | callbacks not yet typed | `"Ins: Controller Not found"` at `0x80245528`. |
+| Ammo pickup | `fn_8009F41C` | callbacks not yet typed | `"Insanity: Ammo Pickup"` at `0x80245544`. |
+| Locked in room | `fn_8009F534` | callbacks not yet typed | `"Ins: Locked in Room"` at `0x8024555C`. |
+| To be continued | `fn_8009F7D4` | callbacks not yet typed | `"Insanity: To be Continued"` at `0x80245570`. |
+| TV shutoff | `fn_8009F99C` | callbacks not yet typed | `"Ins: TV Shut Off"` at `0x8024558C`. |
+| Enemy one-hit kill | `fn_8009FEF0` | callbacks not yet typed | `"Ins: Enemy One Hit Kill"` at `0x802455A0`. |
+| Expand/shrink player | `fn_800A0018` | mode-specific callbacks not yet typed | Names at `0x802455B8` and `0x802455D0`. |
 | Poltergeist book | direct actions `fn_800A04BC`, `fn_800A079C` | internal state paths | One-book failure diagnostic at `0x802455E8`; caller xrefs listed above. |
 | Sinking feeling | `fn_800A1150` | `fn_800A1060`, `fn_800A1580` | Name at `0x802456B8`; dispatch tables at `0x80245634` and `0x802456D4`. |
 
@@ -46,6 +61,10 @@ provisional until matching source supplies types.
 - The contiguous name block `0x80245090-0x802456D2` is an effect catalog, not a
   proven array: it mixes aligned strings, diagnostics, unrelated AI strings, and
   jump tables. It must not be modeled as one flat structure.
+- Direct `lis`/`addi` xrefs now tie more than twenty named effects to closed DTK function
+  boundaries. That establishes an initializer catalog, but does not by itself
+  prove the selection weights or whether every name corresponds to an enabled
+  retail effect.
 
 ## Next xref passes
 

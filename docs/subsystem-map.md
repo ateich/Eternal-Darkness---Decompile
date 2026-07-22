@@ -17,6 +17,25 @@ The sanity row is expanded into an entry-point and structure map in
 `docs/sanity-system.md`. That map separates effect registration functions from
 per-frame/action callbacks and records only fields visible in repeated code.
 
+## Entity and character anchors
+
+- `fn_800721B0` (`0x800721B0-0x80072354`) initializes a fixed-stride character
+  table at `0x80313120`. The observed stride is `0xE0`; the function clears a
+  32-byte selection table at `0x80244680`, opens `ed_chrs.dat`, and reads records
+  into the table. This is the strongest current game-side character-database
+  loader anchor.
+- `fn_80072354` computes `0x80313120 + index * 0xE0`, while `fn_80072368` scans
+  175 entries and compares the word at record `+0x04`. These two leaves expose a
+  concrete table shape without assigning semantic names to the remaining fields.
+- `fn_800723A8` (`0x800723A8-0x8007249C`) reopens `ed_chrs.dat` and reads a
+  selected record, making it a bounded per-character load/update path rather than
+  a broad subsystem guess.
+- `fn_801E97D4` (`0x801E97D4-0x801E995C`) is the engine-side NPC header parser.
+  It checks the serialized header size against `0x2C`, emits the direct
+  `Parse_NpcHeader_From_ByteStream()` diagnostic on mismatch, and relocates
+  variable-length fields observed at header offsets `+0x08`, `+0x10`, and
+  `+0x18`. These offsets are evidence for future typing, not final field names.
+
 ## Supporting data ranges
 
 - Audio enum/debug strings start near `.data` `0x8023C830`; effect archive paths
