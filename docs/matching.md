@@ -126,6 +126,20 @@ at 100%. The normal source link retains DOL SHA-1
 `ea24b6af954876ce072562ff39cdb4c81d32be1f`. The project now has 13 complete
 objects, 33 functions, 2,068 matching code bytes, and 224 matching data bytes.
 
+The following text-only input at `0x800069DC-0x80006B38` closes the remaining
+gap between that prefix and `fn_80006B38`. DTK identifies five complete functions
+of 24, 8, 84, 184, and 48 bytes. The first begins exactly at the prior return
+boundary and the fifth returns immediately before the next matched function; no
+fall-through or interior entry crosses either cut. All 29 relocations compare
+equal and resolve to shared state, the earlier callback, or external functions.
+
+Two source details are codegen-significant. The eight-byte maximum getter must be
+kept out of line because `fn_80006A50` contains a retail call to it, and the
+64-bit query result must be explicitly truncated through 32 bits to reproduce
+MWCC's `li -1; and` sequence. Objdiff reports all 348 bytes, five functions, and
+29 relocations at 100%. With this promotion, every byte from the start of game
+`.text` at `0x800068E0` through `0x800073E4` is source-linked and matching.
+
 ## Float-heavy game-code input
 
 The next promoted input is the single 536-byte function at

@@ -12,11 +12,14 @@ SDK compiler GC/1.2.5n.
 | `fn_800073DC` | 8/8 | 100% |
 | `game/game_fn_800070E4.c` | 680/680 | 100% |
 | `fn_800070E4` | 680/680 | 100% |
+| `game/game_fn_800069DC.c` | 348/348 | 100% |
+| `fn_800069DC` through `fn_80006B08` | 348/348 | 100% |
 | `dolphin/os/OSTime.c` | 32/32 | 100% |
 | `OSGetTime` | 24/24 | 100% |
 | `OSGetTick` | 8/8 | 100% |
 
-All relocations compare equal, including all 42 in `game_fn_800070E4.c`. The final linked
+All relocations compare equal, including all 42 in `game_fn_800070E4.c` and all
+29 in `game_fn_800069DC.c`. The final linked
 `build/GEDE01/main.dol` has SHA-1
 `ea24b6af954876ce072562ff39cdb4c81d32be1f` and passes the configured hash gate.
 The generated one-shot evidence is in `build/fn738c.final.json` and
