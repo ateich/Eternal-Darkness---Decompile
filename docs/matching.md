@@ -245,3 +245,18 @@ objdiff reaches 98.84% and 98.77273% per function (98.98182% for their combined
 220-byte experimental interval). `__OSTimeToSystemTime` also retains an operand-
 ordering delta unless the system-time addend is written first. These results are
 codegen evidence for the OS archive investigation, not matching coverage.
+
+## Forward game continuation
+
+`fn_800073E4` extends the contiguous source-linked game interval to `0x8000755C`.
+DTK identifies a single 376-byte function between the return at `0x800073E4` and
+the next function start. Its 20 call/SDA relocations all resolve outward and the
+input owns no data.
+
+The reconstructed dispatcher preserves six long-lived GPR values and MWCC's
+inline `stmw`/`lmw` pair. Its replacement-context temporary is explicitly
+`register` qualified; without that source-level preference GC/1.3 legally reuses
+the branch-dead state register and emits four different instructions, while the
+qualified form reproduces the retail `r27` lifetime exactly. Objdiff reports
+376/376 code bytes and all 20 relocations at 100%, and the whole-DOL SHA-1 gate
+remains `ea24b6af954876ce072562ff39cdb4c81d32be1f`.
