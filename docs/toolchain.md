@@ -72,6 +72,13 @@ The two-toolchain model is encoded, rather than merely documented, in
 candidate (GC/1.3 by default), while every recovered Nintendo SDK archive library
 is assigned GC/1.2.5n. The linker follows the selected game/runtime candidate.
 
+The OS time archive now also includes the exact `__OSTimeToSystemTime` input at
+`0x80210B24`. Its public arithmetic shape is known, but natural C under GC/1.2.5n
+selects a 24-byte frame rather than retail's 32-byte frame. The matching build
+therefore uses an explicit inline-assembly body for that 88-byte boundary. This is
+an ABI/codegen workaround within the confirmed OS toolchain assignment, not new
+evidence for changing the SDK compiler.
+
 `OSMessage.c` expands the OS fingerprint with four functions and 728 bytes. It is
 100% with GC/1.2.5n, including 17 relocations, but only 76.53846% in `.text` with
 GC/1.3. This supplies a second substantial OS object, beyond the tiny retained

@@ -238,13 +238,14 @@ the input and extends verified game coverage beyond the large function ending at
 is the 8-byte lower time-base read. Both functions and the complete 32-byte input
 are 100%; the internal retry branch is also equal.
 
-The adjacent C candidates remain deliberately unpromoted. Natural 64-bit source
-for `__OSGetSystemTime` and `__OSTimeToSystemTime` reproduces the arithmetic and
-calls with GC/1.2.5n but uses 24-byte frames where retail uses 32-byte frames;
-objdiff reaches 98.84% and 98.77273% per function (98.98182% for their combined
-220-byte experimental interval). `__OSTimeToSystemTime` also retains an operand-
-ordering delta unless the system-time addend is written first. These results are
-codegen evidence for the OS archive investigation, not matching coverage.
+The adjacent natural-C probes reproduce the 64-bit arithmetic and calls with
+GC/1.2.5n but use 24-byte frames where retail uses 32-byte frames. The
+`__OSGetSystemTime` candidate remains unpromoted at 98.84%. The closed
+`__OSTimeToSystemTime` range at `0x80210B24-0x80210B7C` is now promoted using a
+transparent MWCC inline-assembly body, consistent with the time-base primitives
+above. This records the exact retail 32-byte ABI frame rather than presenting the
+natural-C near-match as complete. Objdiff reports 88/88 bytes and both call
+relocations at 100%, and the whole-DOL hash gate remains green.
 
 ## Forward game continuation
 
