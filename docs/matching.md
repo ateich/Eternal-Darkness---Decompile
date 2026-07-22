@@ -177,6 +177,21 @@ branch tree only when the final result handling is expressed as a switch over
 `-2`, `-1`, `0`, and the default case. Objdiff reports 436/436 code bytes and
 all relocations at 100%, and the whole-DOL SHA-1 gate remains unchanged.
 
+`fn_800070E4` closes the next contiguous gap through `0x8000738C`, where the
+already matched callback input begins. DTK records one 680-byte function between
+those endpoints; the preceding function returns at the lower cut and this
+function returns immediately before the upper cut. Its 42 relocations are all
+outward calls or references to shared SDA/BSS/data state, so the promoted input
+is text-only and claims no uncertain storage.
+
+The source preserves the three floating arguments across calls and MWCC's inline
+`stmw`/`lmw` prologue using the TU-local `use_lmw_stmw` pragma. The root object at
+`0x803003C8` is deliberately represented as a non-small-data aggregate: typing it
+as a four-byte pointer holder incorrectly selects SDA addressing, while the
+observed aggregate layout emits the retail absolute `lis`/`addi` references.
+Objdiff reports 680/680 code bytes and all 42 relocations at 100%. The normal
+source link retains DOL SHA-1 `ea24b6af954876ce072562ff39cdb4c81d32be1f`.
+
 ## Arithmetic-contraction probe
 
 The text-only `fn_8017A574` input covers a complete DTK function boundary at
