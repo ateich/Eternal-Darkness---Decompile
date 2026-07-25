@@ -271,12 +271,63 @@ compiler's `lmw`/`stmw` option for this translation unit.
 Evidence: `build/fn8910.final.json`. The next contiguous game function is
 `fn_80008B38`.
 
+## 15. Game function `fn_80008B38`
+
+`game/game_fn_80008B38.c` owns `.text 0x80008B38-0x80008B6C`.
+The event-state initializer is 52/52 bytes and 100% in objdiff. Both
+relocations compare equal. Evidence: `build/fn8b38.final.json`.
+
+## 16. Game function `fn_80008B6C`
+
+`game/game_fn_80008B6C.c` owns `.text 0x80008B6C-0x80008BD8`.
+The mode-2 restart helper is 108/108 bytes and 100% in objdiff. All 11
+relocations compare equal. Evidence: `build/fn8b6c.final.json`.
+
+## 17. Game function `fn_80008BD8`
+
+`game/game_fn_80008BD8.c` owns `.text 0x80008BD8-0x80008C14`.
+The active mode-2 initializer is 60/60 bytes and 100% in objdiff. All 11
+relocations compare equal. Evidence: `build/fn8bd8.final.json`.
+
+## 18. Game function `fn_80008C14`
+
+`game/game_fn_80008C14.c` owns `.text 0x80008C14-0x80008C48`.
+The active mode-1 initializer is 52/52 bytes and 100% in objdiff. Both
+relocations compare equal. Evidence: `build/fn8c14.final.json`.
+
+## 19. Game function `fn_80008C48`
+
+`game/game_fn_80008C48.c` owns `.text 0x80008C48-0x80008C8C`.
+The current-handle cleanup helper is 68/68 bytes and 100% in objdiff. All
+five relocations compare equal. Evidence: `build/fn8c48.final.json`.
+
+## 20. Game function `fn_80008C8C`
+
+`game/game_fn_80008C8C.c` owns `.text 0x80008C8C-0x80008CA0`.
+The event-stream enable helper is 20/20 bytes and 100% in objdiff. All three
+relocations compare equal. Evidence: `build/fn8c8c.final.json`.
+
+## 21. Game function `fn_80008CA0`
+
+`game/game_fn_80008CA0.c` owns `.text 0x80008CA0-0x80008D0C`.
+The event-state teardown helper is 108/108 bytes and 100% in objdiff. All 14
+relocations compare equal. Evidence: `build/fn8ca0.final.json`.
+
+## 22. Game function `fn_80008D0C`
+
+`game/game_fn_80008D0C.c` owns `.text 0x80008D0C-0x80008D24`.
+The stream-position reset helper is 24/24 bytes and 100% in objdiff. Both
+relocations compare equal. Evidence: `build/fn8d0c.final.json`. The next
+contiguous game function is `fn_80008D24`.
+
+All eight implementations are natural C with no inline assembly.
+
 ## Cycle totals
 
 | Scope | Objects | Functions | Code bytes |
 | --- | --- | --- | --- |
-| All | 38/367 | 99/8216 | 11584/2300692 (0.504%) |
-| Game code | 20/21 complete | 37/38 | 8556/8844 matched, 8524 linked |
+| All | 46/375 | 107/8216 | 12076/2300692 (0.525%) |
+| Game code | 28/29 complete | 45/46 | 9048/9336 matched, 9016 linked |
 | SDK/Runtime | 18/18 | 62/62 | 3028/3028 (100%) |
 
 Aggregate evidence is in `build/GEDE01/report.json`.
