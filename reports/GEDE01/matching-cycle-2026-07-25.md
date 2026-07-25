@@ -200,12 +200,23 @@ the previous state. The implementation is natural C with no inline assembly.
 Evidence: `build/fn86cc.final.json`. The next contiguous game function is
 `fn_80008710`.
 
+## 9. Game function `fn_80008710`
+
+`game/game_fn_80008710.c` owns `.text 0x80008710-0x80008724`.
+The function is 20/20 bytes and 100% in objdiff. Both instruction
+relocations compare equal in offset, type, addend and resolved target. It is
+the indexed setter for the 32-bit table at `lbl_80302010`; the implementation
+is natural C with no inline assembly.
+
+Evidence: `build/fn8710.final.json`. The next contiguous game function is
+`fn_80008724`.
+
 ## Cycle totals
 
 | Scope | Objects | Functions | Code bytes |
 | --- | --- | --- | --- |
-| All | 32/361 | 93/8216 | 10520/2300692 (0.457%) |
-| Game code | 14/15 complete | 31/32 | 7492/7780 matched, 7460 linked |
+| All | 33/362 | 94/8216 | 10540/2300692 (0.458%) |
+| Game code | 15/16 complete | 32/33 | 7512/7800 matched, 7480 linked |
 | SDK/Runtime | 18/18 | 62/62 | 3028/3028 (100%) |
 
 Aggregate evidence is in `build/GEDE01/report.json`.
