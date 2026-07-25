@@ -84,6 +84,26 @@ LIBRARY_MW_VERSIONS = {
 
 config.asflags = ["-mgekko", "--strip-local-absolute", "-I include", f"-I build/{VERSION}/include"]
 config.ldflags = ["-fp hardware", "-nodefaults"]
+config.custom_build_rules = [
+    {
+        "name": "globalize_game_bias",
+        "command": (
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@39=lbl_8064DCE8 "
+            "--globalize-symbol=lbl_8064DCE8 $in && touch $out"
+        ),
+        "description": "GLOBALIZE $in",
+    }
+]
+config.custom_build_steps = {
+    "post-compile": [
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_800094C0.globalized"],
+            "rule": "globalize_game_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_800094C0.o"],
+        }
+    ]
+}
 if args.map:
     config.ldflags.append("-mapunused")
 if args.debug:
@@ -170,6 +190,7 @@ config.libs = [
             Object(Matching, "game/game_fn_80009314.c"),
             Object(Matching, "game/game_fn_8000937C.c"),
             Object(Matching, "game/game_fn_80009400.c"),
+            Object(Matching, "game/game_fn_800094C0.c"),
             Object(Matching, "game/game_fn_8017A574.c"),
         ],
     },
