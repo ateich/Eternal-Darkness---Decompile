@@ -365,12 +365,54 @@ objdiff. All eight relocations compare equal. Evidence:
 
 All six implementations are natural C with no inline assembly.
 
+## 29. Game function `fn_80009158`
+
+`game/game_fn_80009158.c` owns `.text 0x80009158-0x800091D0`.
+The fixed event-state initializer is 120/120 bytes and 100% in objdiff.
+All seven relocations compare equal. Evidence: `build/fn9158.final.json`.
+
+## 30. Game function `fn_800091D0`
+
+`game/game_fn_800091D0.c` owns `.text 0x800091D0-0x80009248`.
+The adjacent fixed event-state initializer is 120/120 bytes and 100% in
+objdiff. All seven relocations compare equal. Evidence:
+`build/fn91d0.final.json`.
+
+## 31. Game function `fn_80009248`
+
+`game/game_fn_80009248.c` owns `.text 0x80009248-0x80009314`.
+The two-argument object-state setter is 204/204 bytes and 100% in objdiff.
+All nine relocations compare equal. Evidence: `build/fn9248.final.json`.
+
+## 32. Game function `fn_80009314`
+
+`game/game_fn_80009314.c` owns `.text 0x80009314-0x8000937C`.
+The zero-argument game-state callback is 104/104 bytes and 100% in
+objdiff. All six relocations compare equal. Evidence:
+`build/fn9314.final.json`.
+
+## 33. Game function `fn_8000937C`
+
+`game/game_fn_8000937C.c` owns `.text 0x8000937C-0x80009400`.
+The one-argument integer callback is 132/132 bytes and 100% in objdiff.
+All seven relocations compare equal. Evidence: `build/fn937c.final.json`.
+
+## 34. Game function `fn_80009400`
+
+`game/game_fn_80009400.c` owns `.text 0x80009400-0x800094C0`.
+The one-argument event-mask dispatcher is 192/192 bytes and 100% in
+objdiff. All nine relocations compare equal. Evidence:
+`build/fn9400.final.json`. The next contiguous game function is
+`fn_800094C0`.
+
+All six implementations are natural C with no inline assembly.
+
 ## Cycle totals
 
 | Scope | Objects | Functions | Code bytes |
 | --- | --- | --- | --- |
-| All | 52/381 | 113/8216 | 13152/2300692 (0.572%) |
-| Game code | 34/35 complete | 51/52 | 10124/10412 matched, 10092 linked |
+| All | 58/387 | 119/8216 | 14024/2300692 (0.610%) |
+| Game code | 40/41 complete | 57/58 | 10996/11284 matched, 10964 linked |
 | SDK/Runtime | 18/18 | 62/62 | 3028/3028 (100%) |
 
 Aggregate evidence is in `build/GEDE01/report.json`.
