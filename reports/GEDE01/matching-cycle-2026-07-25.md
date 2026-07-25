@@ -234,12 +234,24 @@ inline assembly.
 Evidence: `build/fn8738.final.json`. The next contiguous game function is
 `fn_800087E8`.
 
+## 12. Game function `fn_800087E8`
+
+`game/game_fn_800087E8.c` owns `.text 0x800087E8-0x80008888`.
+The function is 160/160 bytes and 100% in objdiff. All seven instruction
+relocations compare equal in offset, type, addend and resolved target. It
+refreshes one table entry from the active runtime object, serializes the low
+byte of all twelve entries, and returns the serialized size rounded up to a
+32-byte boundary. The implementation is natural C with no inline assembly.
+
+Evidence: `build/fn87e8.final.json`. The next contiguous game function is
+`fn_80008888`.
+
 ## Cycle totals
 
 | Scope | Objects | Functions | Code bytes |
 | --- | --- | --- | --- |
-| All | 35/364 | 96/8216 | 10736/2300692 (0.467%) |
-| Game code | 17/18 complete | 34/35 | 7708/7996 matched, 7676 linked |
+| All | 36/365 | 97/8216 | 10896/2300692 (0.474%) |
+| Game code | 18/19 complete | 35/36 | 7868/8156 matched, 7836 linked |
 | SDK/Runtime | 18/18 | 62/62 | 3028/3028 (100%) |
 
 Aggregate evidence is in `build/GEDE01/report.json`.
