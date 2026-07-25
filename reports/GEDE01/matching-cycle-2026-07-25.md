@@ -246,12 +246,24 @@ byte of all twelve entries, and returns the serialized size rounded up to a
 Evidence: `build/fn87e8.final.json`. The next contiguous game function is
 `fn_80008888`.
 
+## 13. Game function `fn_80008888`
+
+`game/game_fn_80008888.c` owns `.text 0x80008888-0x80008910`.
+The function is 136/136 bytes and 100% in objdiff. All three instruction
+relocations compare equal in offset, type, addend and resolved target. It is
+the inverse of `fn_800087E8`: it deserializes twelve low bytes into the
+32-bit table at `lbl_80302010` and returns the serialized size rounded up to
+a 32-byte boundary. The implementation is natural C with no inline assembly.
+
+Evidence: `build/fn8888.final.json`. The next contiguous game function is
+`fn_80008910`.
+
 ## Cycle totals
 
 | Scope | Objects | Functions | Code bytes |
 | --- | --- | --- | --- |
-| All | 36/365 | 97/8216 | 10896/2300692 (0.474%) |
-| Game code | 18/19 complete | 35/36 | 7868/8156 matched, 7836 linked |
+| All | 37/366 | 98/8216 | 11032/2300692 (0.480%) |
+| Game code | 19/20 complete | 36/37 | 8004/8292 matched, 7972 linked |
 | SDK/Runtime | 18/18 | 62/62 | 3028/3028 (100%) |
 
 Aggregate evidence is in `build/GEDE01/report.json`.
