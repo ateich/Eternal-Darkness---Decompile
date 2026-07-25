@@ -79,6 +79,26 @@ therefore uses an explicit inline-assembly body for that 88-byte boundary. This 
 an ABI/codegen workaround within the confirmed OS toolchain assignment, not new
 evidence for changing the SDK compiler.
 
+GC/1.2.5n is the canonical compiler for every `dolphin/os` translation unit and
+must be treated as correct unless direct object evidence disproves it. An
+undocumented intermediate MWCC release is not an active hypothesis and compiler
+archaeology must not block expansion into game-owned `.text`.
+
+Remaining OS mismatches are investigated in this time-boxed order:
+
+1. compare known public Dolphin SDK source revisions and patches;
+2. test plausible GC/1.2.5n library flags;
+3. revalidate translation-unit boundaries, archive membership, and object ordering;
+4. determine whether the retail function is locally modified SDK source;
+5. when semantics and relocations are confirmed but available compiler codegen
+   cannot reproduce the retail scheduling, preserve the real C as a documented
+   `NonMatching` input, or use only the minimal inline assembly needed where an
+   exact match is required.
+
+Whole-function inline assembly is not the default representation when real C plus
+an explicit `NonMatching` registration is honest and sufficient. OS investigation
+is fill-in work; contiguous game-code recovery remains the priority.
+
 `OSMessage.c` expands the OS fingerprint with four functions and 728 bytes. It is
 100% with GC/1.2.5n, including 17 relocations, but only 76.53846% in `.text` with
 GC/1.3. This supplies a second substantial OS object, beyond the tiny retained

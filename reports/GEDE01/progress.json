@@ -23,8 +23,8 @@
   "source": "objdiff v3.6.1 build/GEDE01/report.json",
   "open_items": [
     "fn_80008014 is 96.11% and registered NonMatching: GC/1.3 emits the loop index copy in the loop body where retail schedules it into the latch. Every other instruction, operand and relocation agrees.",
-    "The retail OS objects were built by an MWCC revision between GC/1.2.5n and GC/1.3 that we do not hold; __OSGetSystemTime and __OSTimeToSystemTime are represented as transparent inline assembly because of it.",
+    "GC/1.2.5n is canonical for all dolphin/os translation units unless direct object evidence disproves it. Resolve remaining OS mismatches by checking public SDK source revisions and patches, plausible GC/1.2.5n library flags, TU/archive boundaries and ordering, then local retail modifications; preserve honest C as documented NonMatching when unavailable codegen alone prevents an exact match.",
     "Continue game .text upward from 0x80008438; the next data-ownership boundary is jumptable_8023BF28."
   ],
-  "next_gate": "match fn_80008014's loop-latch scheduling or find the intermediate MWCC revision; extend game .text from 0x80008438; trace sanity runtime +0x20 and SanitySlot beyond +0x08"
+  "next_gate": "extend game .text from 0x80008438 toward jumptable_8023BF28; investigate OS mismatches only as time-boxed fill-in under the canonical GC/1.2.5n policy; trace sanity runtime +0x20 and SanitySlot beyond +0x08"
 }
