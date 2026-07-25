@@ -150,6 +150,7 @@ config.libs = [
                 "game/game_fn_80008910.c",
                 extra_cflags=["-use_lmw_stmw on"],
             ),
+            Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_8017A574.c"),
         ],
     },
