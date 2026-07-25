@@ -132,6 +132,10 @@ config.libs = [
             Object(Matching, "game/game_fn_8000738C.c"),
             Object(Matching, "game/game_fn_800073E4.c"),
             Object(Matching, "game/game_fn_8000755C.c"),
+            # fn_80008014 sits at 96.11%: MWCC schedules the loop index copy
+            # into the latch instead of the body. See reports/GEDE01/
+            # matching-cycle-2026-07-25.md. fn_80008134 is 100%.
+            Object(NonMatching, "game/game_fn_80008014.c"),
             Object(Matching, "game/game_fn_8017A574.c"),
         ],
     },
