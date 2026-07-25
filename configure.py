@@ -176,6 +176,7 @@ config.libs = [
             Object(Matching, "dolphin/os/OSLink.c"),
             Object(Matching, "dolphin/os/OSMessage.c"),
             Object(Matching, "dolphin/os/OSTime.c"),
+            Object(Matching, "dolphin/os/OSGetSystemTime.c"),
             Object(Matching, "dolphin/os/OSTimeToSystemTime.c"),
         ],
     },
