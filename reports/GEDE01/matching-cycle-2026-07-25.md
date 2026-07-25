@@ -211,12 +211,23 @@ is natural C with no inline assembly.
 Evidence: `build/fn8710.final.json`. The next contiguous game function is
 `fn_80008724`.
 
+## 10. Game function `fn_80008724`
+
+`game/game_fn_80008724.c` owns `.text 0x80008724-0x80008738`.
+The function is 20/20 bytes and 100% in objdiff. Both instruction
+relocations compare equal in offset, type, addend and resolved target. It is
+the indexed getter paired with `fn_80008710`; the implementation is natural C
+with no inline assembly.
+
+Evidence: `build/fn8724.final.json`. The next contiguous game function is
+`fn_80008738`.
+
 ## Cycle totals
 
 | Scope | Objects | Functions | Code bytes |
 | --- | --- | --- | --- |
-| All | 33/362 | 94/8216 | 10540/2300692 (0.458%) |
-| Game code | 15/16 complete | 32/33 | 7512/7800 matched, 7480 linked |
+| All | 34/363 | 95/8216 | 10560/2300692 (0.459%) |
+| Game code | 16/17 complete | 33/34 | 7532/7820 matched, 7500 linked |
 | SDK/Runtime | 18/18 | 62/62 | 3028/3028 (100%) |
 
 Aggregate evidence is in `build/GEDE01/report.json`.
