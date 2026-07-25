@@ -174,12 +174,27 @@ implementation remains C and contains no inline assembly.
 Evidence: `build/fn82a4.final.json`. The next contiguous game function is
 `fn_80008438`.
 
+## 7. Game function `fn_80008438`
+
+`game/game_fn_80008438.c` owns `.text 0x80008438-0x800086CC`.
+The function is 660/660 bytes and 100% in objdiff. All 103 instruction
+relocations compare equal in offset, type, addend and resolved target.
+
+The function is the main shutdown/reset sequence. It tears down subsystems,
+resolves the pending startup state, updates the restart counter, and releases
+the remaining process resources. The exact source uses an explicit
+`current_thread` temporary to retain retail's final compare operand order; it
+contains no inline assembly.
+
+Evidence: `build/fn8438.final.json`. The next contiguous game function is
+`fn_800086CC`.
+
 ## Cycle totals
 
 | Scope | Objects | Functions | Code bytes |
 | --- | --- | --- | --- |
-| All | 30/359 | 91/8216 | 9792/2300692 (0.426%) |
-| Game code | 12/13 complete | 29/30 | 6764/7052 matched, 6732 linked |
+| All | 31/360 | 92/8216 | 10452/2300692 (0.454%) |
+| Game code | 13/14 complete | 30/31 | 7424/7712 matched, 7392 linked |
 | SDK/Runtime | 18/18 | 62/62 | 3028/3028 (100%) |
 
 Aggregate evidence is in `build/GEDE01/report.json`.
