@@ -258,12 +258,25 @@ a 32-byte boundary. The implementation is natural C with no inline assembly.
 Evidence: `build/fn8888.final.json`. The next contiguous game function is
 `fn_80008910`.
 
+## 14. Game function `fn_80008910`
+
+`game/game_fn_80008910.c` owns `.text 0x80008910-0x80008B38`.
+The function is 552/552 bytes and 100% in objdiff. All 22 instruction
+relocations compare equal in offset, type, addend and resolved target. It
+advances the global event stream, detects and dispatches records for the
+current frame, and maintains the active handle and remaining duration. The
+implementation is natural C with no inline assembly. Retail uses the
+compiler's `lmw`/`stmw` option for this translation unit.
+
+Evidence: `build/fn8910.final.json`. The next contiguous game function is
+`fn_80008B38`.
+
 ## Cycle totals
 
 | Scope | Objects | Functions | Code bytes |
 | --- | --- | --- | --- |
-| All | 37/366 | 98/8216 | 11032/2300692 (0.480%) |
-| Game code | 19/20 complete | 36/37 | 8004/8292 matched, 7972 linked |
+| All | 38/367 | 99/8216 | 11584/2300692 (0.504%) |
+| Game code | 20/21 complete | 37/38 | 8556/8844 matched, 8524 linked |
 | SDK/Runtime | 18/18 | 62/62 | 3028/3028 (100%) |
 
 Aggregate evidence is in `build/GEDE01/report.json`.
