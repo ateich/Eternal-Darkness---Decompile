@@ -159,12 +159,27 @@ small-data symbols.
 Evidence: `build/fn8154.final.json`. The next contiguous game function is
 `fn_800082A4`.
 
+## 6. Game function `fn_800082A4`
+
+`game/game_fn_800082A4.c` owns `.text 0x800082A4-0x80008438`.
+The function is 404/404 bytes and 100% in objdiff. All 36 ELF relocation
+entries compare equal in offset, type, addend and resolved target.
+
+The function performs startup and pending-state dispatch, copies and clamps a
+`0x34`-byte state record, runs the compiler's optimized empty delay loop, and
+selects one of two state initializers. Recovering the unsigned inline maximum
+operation was the final codegen key for the exact `li`/`cmplwi` schedule; the
+implementation remains C and contains no inline assembly.
+
+Evidence: `build/fn82a4.final.json`. The next contiguous game function is
+`fn_80008438`.
+
 ## Cycle totals
 
 | Scope | Objects | Functions | Code bytes |
 | --- | --- | --- | --- |
-| All | 29/358 | 90/8216 | 9388/2300692 (0.408%) |
-| Game code | 11/12 complete | 28/29 | 6360/6648 matched, 6328 linked |
+| All | 30/359 | 91/8216 | 9792/2300692 (0.426%) |
+| Game code | 12/13 complete | 29/30 | 6764/7052 matched, 6732 linked |
 | SDK/Runtime | 18/18 | 62/62 | 3028/3028 (100%) |
 
 Aggregate evidence is in `build/GEDE01/report.json`.
