@@ -189,12 +189,23 @@ contains no inline assembly.
 Evidence: `build/fn8438.final.json`. The next contiguous game function is
 `fn_800086CC`.
 
+## 8. Game function `fn_800086CC`
+
+`game/game_fn_800086CC.c` owns `.text 0x800086CC-0x80008710`.
+The function is 68/68 bytes and 100% in objdiff. All five instruction
+relocations compare equal in offset, type, addend and resolved target. It
+temporarily changes a subsystem state, runs three teardown calls, and restores
+the previous state. The implementation is natural C with no inline assembly.
+
+Evidence: `build/fn86cc.final.json`. The next contiguous game function is
+`fn_80008710`.
+
 ## Cycle totals
 
 | Scope | Objects | Functions | Code bytes |
 | --- | --- | --- | --- |
-| All | 31/360 | 92/8216 | 10452/2300692 (0.454%) |
-| Game code | 13/14 complete | 30/31 | 7424/7712 matched, 7392 linked |
+| All | 32/361 | 93/8216 | 10520/2300692 (0.457%) |
+| Game code | 14/15 complete | 31/32 | 7492/7780 matched, 7460 linked |
 | SDK/Runtime | 18/18 | 62/62 | 3028/3028 (100%) |
 
 Aggregate evidence is in `build/GEDE01/report.json`.
