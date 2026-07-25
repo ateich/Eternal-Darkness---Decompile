@@ -1,16 +1,30 @@
 {
   "status": "matching",
-  "matching_objects": 26,
-  "total_objects": 353,
-  "matching_functions": 80,
+  "matching_objects": 28,
+  "total_objects": 357,
+  "matching_functions": 89,
   "total_functions": 8216,
-  "matching_code_bytes": 6176,
+  "matching_code_bytes": 9052,
   "total_code_bytes": 2300692,
-  "matching_data_bytes": 224,
+  "matching_data_bytes": 784,
   "total_data_bytes": 4305651,
-  "code_percent": 0.26844097,
-  "function_percent": 0.97370983,
+  "code_percent": 0.39344686,
+  "function_percent": 1.0832522,
+  "linked_code_bytes": 9020,
+  "linked_data_bytes": 756,
+  "game_code_matching_bytes": 6024,
+  "game_code_total_bytes": 6312,
+  "game_code_linked_bytes": 5992,
+  "sdk_code_matching_bytes": 3028,
+  "sdk_code_total_bytes": 3028,
+  "sdk_objects_complete": 18,
+  "sdk_objects_total": 18,
   "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
   "source": "objdiff v3.6.1 build/GEDE01/report.json",
-  "next_gate": "continue with fn_8000755C; resolve __OSGetSystemTime's 64-bit frame-size divergence; type the sanity callback registry"
+  "open_items": [
+    "fn_80008014 is 96.11% and registered NonMatching: GC/1.3 emits the loop index copy in the loop body where retail schedules it into the latch. Every other instruction, operand and relocation agrees.",
+    "The retail OS objects were built by an MWCC revision between GC/1.2.5n and GC/1.3 that we do not hold; __OSGetSystemTime and __OSTimeToSystemTime are represented as transparent inline assembly because of it.",
+    "Continue game .text upward from 0x80008154; the next data-ownership boundary is jumptable_8023BF28."
+  ],
+  "next_gate": "match fn_80008014's loop-latch scheduling or find the intermediate MWCC revision; extend game .text from 0x80008154; trace sanity runtime +0x20 and SanitySlot beyond +0x08"
 }
