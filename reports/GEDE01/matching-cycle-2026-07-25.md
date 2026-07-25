@@ -222,12 +222,24 @@ with no inline assembly.
 Evidence: `build/fn8724.final.json`. The next contiguous game function is
 `fn_80008738`.
 
+## 11. Game function `fn_80008738`
+
+`game/game_fn_80008738.c` owns `.text 0x80008738-0x800087E8`.
+The function is 176/176 bytes and 100% in objdiff. All 12 instruction
+relocations compare equal in offset, type, addend and resolved target. It
+initializes the first twelve entries of `lbl_80302010` through the indexed
+setter and returns the table count. The implementation is natural C with no
+inline assembly.
+
+Evidence: `build/fn8738.final.json`. The next contiguous game function is
+`fn_800087E8`.
+
 ## Cycle totals
 
 | Scope | Objects | Functions | Code bytes |
 | --- | --- | --- | --- |
-| All | 34/363 | 95/8216 | 10560/2300692 (0.459%) |
-| Game code | 16/17 complete | 33/34 | 7532/7820 matched, 7500 linked |
+| All | 35/364 | 96/8216 | 10736/2300692 (0.467%) |
+| Game code | 17/18 complete | 34/35 | 7708/7996 matched, 7676 linked |
 | SDK/Runtime | 18/18 | 62/62 | 3028/3028 (100%) |
 
 Aggregate evidence is in `build/GEDE01/report.json`.
