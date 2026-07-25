@@ -147,12 +147,24 @@ durations 0, 700 and 300, confirming the halfword is a duration.
 The full layout is in `docs/sanity-system.md`. `SanitySlot` beyond `+0x08`
 and the controller's `0x10-0x40` span remain unproven and are left unnamed.
 
+## 5. Game function `fn_80008154`
+
+`game/game_fn_80008154.c` owns `.text 0x80008154-0x800082A4`.
+The function is 336/336 bytes and 100% in objdiff. All 44 relocations
+compare equal in offset, type, addend and resolved target. The unit owns no
+data: its only absolute data reference is to the pre-existing
+`lbl_8030F540`, while its remaining global references use pre-existing
+small-data symbols.
+
+Evidence: `build/fn8154.final.json`. The next contiguous game function is
+`fn_800082A4`.
+
 ## Cycle totals
 
 | Scope | Objects | Functions | Code bytes |
 | --- | --- | --- | --- |
-| All | 28/357 | 89/8216 | 9052/2300692 (0.393%) |
-| Game code | 10/11 complete | 27/28 | 6024/6312 matched, 5992 linked |
+| All | 29/358 | 90/8216 | 9388/2300692 (0.408%) |
+| Game code | 11/12 complete | 28/29 | 6360/6648 matched, 6328 linked |
 | SDK/Runtime | 18/18 | 62/62 | 3028/3028 (100%) |
 
 Aggregate evidence is in `build/GEDE01/report.json`.
