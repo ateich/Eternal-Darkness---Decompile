@@ -407,12 +407,29 @@ objdiff. All nine relocations compare equal. Evidence:
 
 All six implementations are natural C with no inline assembly.
 
+## 35. Game function `fn_800094C0`
+
+`game/game_fn_800094C0.c` owns `.text 0x800094C0-0x800096E0` and the
+shared integer-to-double bias constant at `.sdata2
+0x8064DCE8-0x8064DCF0`. The four-argument filtered object counter is
+544/544 code bytes and 8/8 data bytes at 100% in objdiff. All 21
+relocations compare equal. Evidence: `build/fn94c0.final.json`.
+
+The implementation is natural C with no inline assembly. Because MWCC gives
+the pooled constant a TU-local generated name, the post-compile build step
+globalizes that existing symbol as `lbl_8064DCE8`; this adds no bytes and
+preserves the shared retail relocation used by the remaining unsplit game
+code. The full linked DOL retains SHA-1
+`ea24b6af954876ce072562ff39cdb4c81d32be1f`.
+
+The next contiguous game function is `fn_800096E0`.
+
 ## Cycle totals
 
 | Scope | Objects | Functions | Code bytes |
 | --- | --- | --- | --- |
-| All | 58/387 | 119/8216 | 14024/2300692 (0.610%) |
-| Game code | 40/41 complete | 57/58 | 10996/11284 matched, 10964 linked |
+| All | 59/388 | 120/8216 | 14568/2300692 (0.633%) |
+| Game code | 41/42 complete | 58/59 | 11540/11828 matched, 11508 linked |
 | SDK/Runtime | 18/18 | 62/62 | 3028/3028 (100%) |
 
 Aggregate evidence is in `build/GEDE01/report.json`.
