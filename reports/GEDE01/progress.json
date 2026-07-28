@@ -1,20 +1,20 @@
 {
   "status": "matching",
-  "matching_objects": 153,
-  "total_objects": 488,
-  "matching_functions": 214,
+  "matching_objects": 155,
+  "total_objects": 490,
+  "matching_functions": 216,
   "total_functions": 8216,
-  "matching_code_bytes": 35700,
+  "matching_code_bytes": 36044,
   "total_code_bytes": 2300692,
   "matching_data_bytes": 1276,
   "total_data_bytes": 4305651,
-  "code_percent": 1.55171,
-  "function_percent": 2.60467,
-  "linked_code_bytes": 35668,
+  "code_percent": 1.56666,
+  "function_percent": 2.62902,
+  "linked_code_bytes": 36012,
   "linked_data_bytes": 1248,
-  "game_code_matching_bytes": 32672,
-  "game_code_total_bytes": 33944,
-  "game_code_linked_bytes": 32640,
+  "game_code_matching_bytes": 33016,
+  "game_code_total_bytes": 34288,
+  "game_code_linked_bytes": 32984,
   "sdk_code_matching_bytes": 3028,
   "sdk_code_total_bytes": 3028,
   "sdk_objects_complete": 18,
@@ -30,5 +30,5 @@
     "GC/1.2.5n is canonical for all dolphin/os translation units unless direct object evidence disproves it. Resolve remaining OS mismatches by checking public SDK source revisions and patches, plausible GC/1.2.5n library flags, TU/archive boundaries and ordering, then local retail modifications; preserve honest C as documented NonMatching when unavailable codegen alone prevents an exact match.",
     "fn_8000A668 owns the jumptable_8023BF28 data-ownership boundary: its two dense switches dispatch through jumptable_8023BF28 (60 entries, values 0..0x3B) and jumptable_8023C018 (54 entries, values 6..0x3B); promoting it requires assigning .data 0x8023BF28-0x8023C0F0 to the TU and shrinking the auto data object."
   ],
-  "next_gate": "continue contiguous exact matching at fn_8000ED44 (0x8000ED44), then fn_8000EDF0 (0x8000EDF0); fn_8000EBD4 is 192/192 bytes at 99.9375% with 10/10 relocation sites equal and four compiler-temporary stack-displacement differences (the same MWCC signed-conversion temp-slot divergence as fn_8000EB14); fn_8000EC94 is 176 bytes at 97.72727% with 9/9 relocation sites equal, MWCC inserting one canonicalizing extsh for the s16 field store that shifts the tail and two branch displacements by 4 bytes; both are honest C registered NonMatching, with no whole-function inline assembly; compiler-emitted signed-conversion biases are externalized to retail lbl_8064DCE8; fn_8000A668 separately owns jumptable data 0x8023BF28..0x8023C0F0; GC/1.2.5n remains canonical for dolphin/os translation units"
+  "next_gate": "continue contiguous exact matching at fn_8000EE9C (0x8000EE9C), a 296-byte function whose switch owns jumptable_8023C264 (0xE0 bytes); fn_8000ED44 and fn_8000EDF0 are each 172/172 bytes at 100%, with respectively 9/9 and 11/11 .text relocation sites equal; fn_8000EBD4 remains 192/192 bytes at 99.9375% with 10/10 relocation sites equal and four compiler-temporary stack-displacement differences, while fn_8000EC94 remains 176 bytes at 97.72727% with 9/9 relocation sites equal and one canonicalizing extsh shifting the tail; both are honest C registered NonMatching, with no whole-function inline assembly; compiler-emitted signed-conversion biases are externalized to retail lbl_8064DCE8; fn_8000A668 separately owns jumptable data 0x8023BF28..0x8023C0F0; GC/1.2.5n remains canonical for dolphin/os translation units"
 }
