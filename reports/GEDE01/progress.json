@@ -1,20 +1,20 @@
 {
   "status": "matching",
-  "matching_objects": 159,
-  "total_objects": 495,
-  "matching_functions": 220,
+  "matching_objects": 162,
+  "total_objects": 498,
+  "matching_functions": 223,
   "total_functions": 8216,
-  "matching_code_bytes": 37168,
+  "matching_code_bytes": 37876,
   "total_code_bytes": 2300692,
   "matching_data_bytes": 1276,
   "total_data_bytes": 4305651,
-  "code_percent": 1.61551,
-  "function_percent": 2.6777,
-  "linked_code_bytes": 37136,
+  "code_percent": 1.64629,
+  "function_percent": 2.71422,
+  "linked_code_bytes": 37844,
   "linked_data_bytes": 1248,
-  "game_code_matching_bytes": 34140,
-  "game_code_total_bytes": 35844,
-  "game_code_linked_bytes": 34108,
+  "game_code_matching_bytes": 34848,
+  "game_code_total_bytes": 36552,
+  "game_code_linked_bytes": 34816,
   "sdk_code_matching_bytes": 3028,
   "sdk_code_total_bytes": 3028,
   "sdk_objects_complete": 18,
@@ -31,5 +31,5 @@
     "GC/1.2.5n is canonical for all dolphin/os translation units unless direct object evidence disproves it. Resolve remaining OS mismatches by checking public SDK source revisions and patches, plausible GC/1.2.5n library flags, TU/archive boundaries and ordering, then local retail modifications; preserve honest C as documented NonMatching when unavailable codegen alone prevents an exact match.",
     "fn_8000A668 owns the jumptable_8023BF28 data-ownership boundary: its two dense switches dispatch through jumptable_8023BF28 (60 entries, values 0..0x3B) and jumptable_8023C018 (54 entries, values 6..0x3B); promoting it requires assigning .data 0x8023BF28-0x8023C0F0 to the TU and shrinking the auto data object."
   ],
-  "next_gate": "resolve the contiguous exact-match blocker fn_8000F1DC (0x8000F1DC), currently 432/432 bytes at 92.01852% with all 16 relocation sites equal; the immediately following fn_8000F38C and fn_8000F430 are exact matched islands totaling 292 bytes with 8/8 and 7/7 relocations equal, so after fn_8000F1DC the next unclaimed address is fn_8000F4B0 (0x8000F4B0); fn_8000A668 separately owns jumptable data 0x8023BF28..0x8023C0F0; GC/1.2.5n remains canonical for dolphin/os translation units"
+  "next_gate": "resolve the contiguous exact-match blocker fn_8000F1DC (0x8000F1DC), currently 432/432 bytes at 92.01852% with all 16 relocation sites equal; the following exact matched island now spans fn_8000F38C through fn_8000F6AC, totaling 1000 bytes, including new exact matches fn_8000F4B0 (280/280 bytes, 13/13 relocation sites), fn_8000F5C8 (228/228 bytes, 12/12 relocation sites), and fn_8000F6AC (200/200 bytes, 9/9 relocation sites), so the next unclaimed address is fn_8000F774 (0x8000F774); fn_8000A668 separately owns jumptable data 0x8023BF28..0x8023C0F0; GC/1.2.5n remains canonical for dolphin/os translation units"
 }
