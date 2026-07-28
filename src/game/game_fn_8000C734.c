@@ -1,0 +1,42 @@
+typedef int s32;
+
+extern const char lbl_8023BEF8[];
+extern s32 lbl_8064D18C;
+extern s32 fn_8016A598(void*);
+extern double fn_8016A694(void*, s32);
+extern void fn_80163BB4(void*, const char*, ...);
+extern void* fn_80201B9C(void);
+extern void* fn_80201B8C(void*);
+extern s32 fn_80201B54(void*);
+extern s32 fn_80201B5C(void*);
+extern s32 fn_80201EB8(void*);
+extern void fn_802020B4(void*, s32);
+extern void* fn_80201BC0(void*);
+
+s32 fn_8000C734(void* script)
+{
+    s32 id;
+    void* owner;
+    s32 type;
+    s32 kind;
+
+    if (fn_8016A598(script) != 1) {
+        fn_80163BB4(script, lbl_8023BEF8, 1, fn_8016A598(script));
+        return 0;
+    }
+
+    id = (s32)fn_8016A694(script, 1);
+    script = fn_80201B9C();
+    while (script != 0) {
+        owner = fn_80201B8C(script);
+        fn_80201B54(script);
+        type = fn_80201B5C(script);
+        kind = fn_80201EB8(script);
+        if (owner != 0 && lbl_8064D18C == kind &&
+            (type == 4 || type == 0x12 || type == 0x1B)) {
+            fn_802020B4(script, id);
+        }
+        script = fn_80201BC0(script);
+    }
+    return 0;
+}
