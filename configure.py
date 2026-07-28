@@ -619,6 +619,11 @@ config.libs = [
             # reused 0x8/0xC slot (same MWCC temp-allocation divergence as
             # fn_8000EB14); all 10 relocation sites agree.
             Object(NonMatching, "game/game_fn_8000EBD4.c"),
+            # 97.72727%: MWCC inserts one extsh canonicalizing the s32 local
+            # for the s16 field store where retail stores the word directly;
+            # the extra instruction shifts the tail and two branch
+            # displacements by 4 bytes; all 9 relocation sites agree.
+            Object(NonMatching, "game/game_fn_8000EC94.c"),
             Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_80008B6C.c"),
             Object(Matching, "game/game_fn_80008BD8.c"),
