@@ -254,6 +254,16 @@ config.custom_build_rules = [
         ),
         "description": "EXTERNALIZE $in",
     },
+    {
+        "name": "externalize_game_bias_98",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @98 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@98=lbl_8064DCE8 --remove-section=.sdata2 $in "
+            "&& touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
 ]
 config.custom_build_steps = {
     "post-compile": [
@@ -406,6 +416,11 @@ config.custom_build_steps = {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8000E96C.externalized"],
             "rule": "externalize_game_bias_21",
             "inputs": [f"build/{VERSION}/src/game/game_fn_8000E96C.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8000F774.externalized"],
+            "rule": "externalize_game_bias_98",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8000F774.o"],
         },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8000EB14.externalized"],
@@ -674,6 +689,10 @@ config.libs = [
             Object(Matching, "game/game_fn_8000F4B0.c"),
             Object(Matching, "game/game_fn_8000F5C8.c"),
             Object(Matching, "game/game_fn_8000F6AC.c"),
+            # 99.45521%: the generated object has the exact 1652-byte size
+            # and control flow; remaining deltas are callee-saved register
+            # allocation in the long-lived handle/object webs.
+            Object(NonMatching, "game/game_fn_8000F774.c"),
             Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_80008B6C.c"),
             Object(Matching, "game/game_fn_80008BD8.c"),
