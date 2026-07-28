@@ -1,20 +1,20 @@
 {
   "status": "matching",
-  "matching_objects": 164,
-  "total_objects": 502,
-  "matching_functions": 225,
+  "matching_objects": 165,
+  "total_objects": 504,
+  "matching_functions": 226,
   "total_functions": 8216,
-  "matching_code_bytes": 43496,
+  "matching_code_bytes": 43724,
   "total_code_bytes": 2300692,
   "matching_data_bytes": 1276,
   "total_data_bytes": 4305651,
-  "code_percent": 1.89056,
-  "function_percent": 2.73856,
-  "linked_code_bytes": 43464,
+  "code_percent": 1.90047,
+  "function_percent": 2.75073,
+  "linked_code_bytes": 43692,
   "linked_data_bytes": 1248,
-  "game_code_matching_bytes": 40468,
-  "game_code_total_bytes": 44604,
-  "game_code_linked_bytes": 40436,
+  "game_code_matching_bytes": 40696,
+  "game_code_total_bytes": 44832,
+  "game_code_linked_bytes": 40664,
   "sdk_code_matching_bytes": 3028,
   "sdk_code_total_bytes": 3028,
   "sdk_objects_complete": 18,
@@ -34,5 +34,5 @@
     "GC/1.2.5n is canonical for all dolphin/os translation units unless direct object evidence disproves it. Resolve remaining OS mismatches by checking public SDK source revisions and patches, plausible GC/1.2.5n library flags, TU/archive boundaries and ordering, then local retail modifications; preserve honest C as documented NonMatching when unavailable codegen alone prevents an exact match.",
     "fn_8000A668 owns the jumptable_8023BF28 data-ownership boundary: its two dense switches dispatch through jumptable_8023BF28 (60 entries, values 0..0x3B) and jumptable_8023C018 (54 entries, values 6..0x3B); promoting it requires assigning .data 0x8023BF28-0x8023C0F0 to the TU and shrinking the auto data object."
   ],
-  "next_gate": "resolve fn_800115CC (0x800115CC), the contiguous 284-byte game callback now reconstructed in honest C at 92.788734%; canonical MWCC removes retail's overwritten first-argument fctiwz/stfd/lwz sequence. All 10 relocation targets/addends agree and 6/10 sites are equal before the 12-byte shift. Once exact, the next address is fn_800116E8 (0x800116E8), 228 bytes. Separately resolve fn_8000F1DC (432/432 bytes at 92.01852%, all 16 relocation sites equal), fn_8000F774 (1652/1652 bytes at 99.45521%, all 114 relocation sites equal), and fn_8000FDE8 (496/496 bytes at 97.98387%, 19/20 relocation sites equal); fn_8000A668 owns jumptable data 0x8023BF28..0x8023C0F0; GC/1.2.5n remains canonical for dolphin/os translation units"
+  "next_gate": "match fn_800117CC (0x800117CC), the next 188-byte game callback after fn_800116E8 (228/228 bytes at 100%, all 9 relocation sites equal). Leave fn_800115CC as its documented honest NonMatching reconstruction this pass. Separately resolve fn_8000F1DC (432/432 bytes at 92.01852%, all 16 relocation sites equal), fn_8000F774 (1652/1652 bytes at 99.45521%, all 114 relocation sites equal), and fn_8000FDE8 (496/496 bytes at 97.98387%, 19/20 relocation sites equal); fn_8000A668 owns jumptable data 0x8023BF28..0x8023C0F0; GC/1.2.5n remains canonical for dolphin/os translation units"
 }
