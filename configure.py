@@ -195,6 +195,16 @@ config.custom_build_rules = [
         "description": "EXTERNALIZE $in",
     },
     {
+        "name": "externalize_game_bias_10",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @10 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@10=lbl_8064DCE8 --remove-section=.sdata2 $in "
+            "&& touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
         "name": "externalize_game_bias_6",
         "command": (
             "python3 tools/externalize_elf_symbol.py $in @6 && "
@@ -381,6 +391,11 @@ config.custom_build_steps = {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8000EBD4.externalized"],
             "rule": "externalize_game_bias_11",
             "inputs": [f"build/{VERSION}/src/game/game_fn_8000EBD4.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8000ED44.externalized"],
+            "rule": "externalize_game_bias_10",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8000ED44.o"],
         },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8000E138.externalized"],
