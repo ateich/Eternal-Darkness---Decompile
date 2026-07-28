@@ -709,6 +709,7 @@ config.libs = [
             # it. All 10 relocation targets/addends agree; 6/10 sites remain
             # equal before the missing 12-byte sequence shifts the tail.
             Object(NonMatching, "game/game_fn_800115CC.c"),
+            Object(Matching, "game/game_fn_800116E8.c"),
             Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_80008B6C.c"),
             Object(Matching, "game/game_fn_80008BD8.c"),
