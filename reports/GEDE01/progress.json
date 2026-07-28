@@ -1,20 +1,20 @@
 {
   "status": "matching",
-  "matching_objects": 97,
-  "total_objects": 427,
-  "matching_functions": 158,
+  "matching_objects": 103,
+  "total_objects": 433,
+  "matching_functions": 164,
   "total_functions": 8216,
-  "matching_code_bytes": 23044,
+  "matching_code_bytes": 23968,
   "total_code_bytes": 2300692,
   "matching_data_bytes": 1248,
   "total_data_bytes": 4305651,
-  "code_percent": 1.0016117,
-  "function_percent": 1.923077,
-  "linked_code_bytes": 23012,
+  "code_percent": 1.0417736,
+  "function_percent": 1.9961052,
+  "linked_code_bytes": 23936,
   "linked_data_bytes": 1220,
-  "game_code_matching_bytes": 20016,
-  "game_code_total_bytes": 20304,
-  "game_code_linked_bytes": 19984,
+  "game_code_matching_bytes": 20940,
+  "game_code_total_bytes": 21228,
+  "game_code_linked_bytes": 20908,
   "sdk_code_matching_bytes": 3028,
   "sdk_code_total_bytes": 3028,
   "sdk_objects_complete": 18,
@@ -26,5 +26,5 @@
     "GC/1.2.5n is canonical for all dolphin/os translation units unless direct object evidence disproves it. Resolve remaining OS mismatches by checking public SDK source revisions and patches, plausible GC/1.2.5n library flags, TU/archive boundaries and ordering, then local retail modifications; preserve honest C as documented NonMatching when unavailable codegen alone prevents an exact match.",
     "fn_8000A668 owns the jumptable_8023BF28 data-ownership boundary: its two dense switches dispatch through jumptable_8023BF28 (60 entries, values 0..0x3B) and jumptable_8023C018 (54 entries, values 6..0x3B); promoting it requires assigning .data 0x8023BF28-0x8023C0F0 to the TU and shrinking the auto data object."
   ],
-  "next_gate": "extend game .text from fn_8000B7FC (0x8000B7FC) toward the next data-ownership boundary; fn_8000B444 is 260/260 bytes with all instructions and 9/9 relocation sites equal; fn_8000B548 is 128/128 bytes with all instructions and 7/7 relocation sites equal; fn_8000B5C8 is 104/104 bytes with all instructions and 6/6 relocation sites equal; fn_8000B630 is 260/260 bytes with all instructions and 11/11 relocation sites equal, and its compiler-emitted @18 signed-conversion bias is externalized to the retail lbl_8064DCE8 symbol; fn_8000B734 is 200/200 bytes with all instructions and 8/8 relocation sites equal; fn_8000A668 owns jumptable data 0x8023BF28..0x8023C0F0; functions saving 3+ callee-saved GPRs need -use_lmw_stmw on; MWCC allocates callee-saved regs by local declaration order; investigate OS mismatches only as time-boxed fill-in under the canonical GC/1.2.5n policy"
+  "next_gate": "extend game .text from fn_8000BB98 (0x8000BB98) toward the next data-ownership boundary; fn_8000B7FC is 260/260 bytes with all instructions and 10/10 relocation sites equal; fn_8000B900 is 140/140 bytes with all instructions and 8/8 relocation sites equal; fn_8000B98C is 128/128 bytes with all instructions and 7/7 relocation sites equal; fn_8000BA0C is 140/140 bytes with all instructions and 8/8 relocation sites equal; fn_8000BA98 is 8/8 bytes with its 1/1 relocation site equal; fn_8000BAA0 is 248/248 bytes with all instructions and 11/11 relocation sites equal; compiler-emitted signed-conversion biases are externalized to the retail lbl_8064DCE8 symbol; fn_8000A668 owns jumptable data 0x8023BF28..0x8023C0F0; functions saving 3+ callee-saved GPRs need -use_lmw_stmw on; MWCC allocates callee-saved regs by local declaration order; investigate OS mismatches only as time-boxed fill-in under the canonical GC/1.2.5n policy"
 }
