@@ -224,6 +224,16 @@ config.custom_build_rules = [
         ),
         "description": "EXTERNALIZE $in",
     },
+    {
+        "name": "externalize_game_bias_21",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @21 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@21=lbl_8064DCE8 --remove-section=.sdata2 $in "
+            "&& touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
 ]
 config.custom_build_steps = {
     "post-compile": [
@@ -356,6 +366,11 @@ config.custom_build_steps = {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8000E0AC.externalized"],
             "rule": "externalize_game_bias_8",
             "inputs": [f"build/{VERSION}/src/game/game_fn_8000E0AC.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8000E96C.externalized"],
+            "rule": "externalize_game_bias_21",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8000E96C.o"],
         },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8000E138.externalized"],
@@ -577,6 +592,14 @@ config.libs = [
             Object(Matching, "game/game_fn_8000E664.c"),
             Object(Matching, "game/game_fn_8000E764.c"),
             Object(Matching, "game/game_fn_8000E84C.c"),
+            # 99.81132%: four FPR operand fields differ while size and all
+            # 16 relocation sites agree. Preserve the real C; do not replace
+            # the vector-conversion block with inline assembly.
+            Object(
+                NonMatching,
+                "game/game_fn_8000E96C.c",
+                extra_cflags=["-use_lmw_stmw on"],
+            ),
             Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_80008B6C.c"),
             Object(Matching, "game/game_fn_80008BD8.c"),
