@@ -624,6 +624,7 @@ config.libs = [
             # the extra instruction shifts the tail and two branch
             # displacements by 4 bytes; all 9 relocation sites agree.
             Object(NonMatching, "game/game_fn_8000EC94.c"),
+            Object(Matching, "game/game_fn_8000ED44.c"),
             Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_80008B6C.c"),
             Object(Matching, "game/game_fn_80008BD8.c"),
