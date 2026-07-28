@@ -693,6 +693,10 @@ config.libs = [
             # and control flow; remaining deltas are callee-saved register
             # allocation in the long-lived handle/object webs.
             Object(NonMatching, "game/game_fn_8000F774.c"),
+            # 97.94355%: real C reconstruction has the exact 496-byte
+            # size and control flow, but MWCC allocates every long-lived
+            # value one callee-saved register below retail.
+            Object(NonMatching, "game/game_fn_8000FDE8.c"),
             Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_80008B6C.c"),
             Object(Matching, "game/game_fn_80008BD8.c"),
