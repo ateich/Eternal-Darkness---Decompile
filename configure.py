@@ -373,6 +373,11 @@ config.custom_build_steps = {
             "inputs": [f"build/{VERSION}/src/game/game_fn_8000E96C.o"],
         },
         {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8000EB14.externalized"],
+            "rule": "externalize_game_bias_11",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8000EB14.o"],
+        },
+        {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8000E138.externalized"],
             "rule": "externalize_game_bias_8",
             "inputs": [f"build/{VERSION}/src/game/game_fn_8000E138.o"],
@@ -600,6 +605,10 @@ config.libs = [
                 "game/game_fn_8000E96C.c",
                 extra_cflags=["-use_lmw_stmw on"],
             ),
+            # 99.833336%: the four instructions forming the final signed
+            # integer-to-double temporary use 0x10/0x14 instead of retail's
+            # reused 0x8/0xC slot; all 10 relocation sites agree.
+            Object(NonMatching, "game/game_fn_8000EB14.c"),
             Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_80008B6C.c"),
             Object(Matching, "game/game_fn_80008BD8.c"),
