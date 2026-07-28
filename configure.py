@@ -268,6 +268,11 @@ config.custom_build_rules = [
 config.custom_build_steps = {
     "post-compile": [
         {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8000FFD8.externalized"],
+            "rule": "externalize_game_bias_9",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8000FFD8.o"],
+        },
+        {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8000F4B0.externalized"],
             "rule": "externalize_game_bias_13",
             "inputs": [f"build/{VERSION}/src/game/game_fn_8000F4B0.o"],
@@ -697,6 +702,7 @@ config.libs = [
             # size and control flow, but MWCC allocates every long-lived
             # value one callee-saved register below retail.
             Object(NonMatching, "game/game_fn_8000FDE8.c"),
+            Object(Matching, "game/game_fn_8000FFD8.c"),
             Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_80008B6C.c"),
             Object(Matching, "game/game_fn_80008BD8.c"),
