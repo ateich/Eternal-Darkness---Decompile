@@ -1,0 +1,88 @@
+typedef int s32;
+typedef signed short s16;
+
+typedef struct ObjectData {
+    char pad_000[0xEA];
+    s16 values_0EA[15];
+    s16 values_108[15];
+    s16 values_126[15];
+} ObjectData;
+
+typedef struct ObjectInstance {
+    char pad_00[0x8C];
+    ObjectData* data;
+    void* component;
+} ObjectInstance;
+
+extern const char lbl_8023BEF8[];
+extern s32 fn_8016A598(void*);
+extern double fn_8016A694(void*, s32);
+extern void fn_80163BB4(void*, const char*, ...);
+extern void fn_8016A830(void*, double);
+extern void* fn_80201814(s32);
+extern ObjectInstance* fn_80201B8C(void*);
+extern s32 fn_80201B44(void);
+extern void* fn_80072354(void*);
+extern void fn_80038308(void*, s32, s16*);
+extern void fn_80038464(void*, s32, s16*);
+
+s32 fn_8000D590(void* script)
+{
+    s32 category;
+    void* object;
+    s32 mode;
+    s32 object_id;
+    s32 slot;
+    ObjectInstance* instance;
+    void* component;
+    s16 result = 0;
+
+    if (fn_8016A598(script) != 4) {
+        fn_80163BB4(script, lbl_8023BEF8, 4, fn_8016A598(script));
+        return 0;
+    }
+
+    object_id = (s32)fn_8016A694(script, 1);
+    mode = (s32)fn_8016A694(script, 2);
+    slot = (s32)fn_8016A694(script, 3);
+    category = (s32)fn_8016A694(script, 4);
+    object = fn_80201814(object_id);
+    instance = object != 0 ? fn_80201B8C(object) : 0;
+    component = instance != 0 ? fn_80072354(instance->component) : 0;
+
+    if (object != 0 && instance != 0 && component != 0) {
+        switch (mode) {
+        case 0:
+            if (category == 15) {
+                if (slot == 0) {
+                    fn_80038308(object, mode, &result);
+                } else {
+                    fn_80038464(object, mode, &result);
+                }
+            } else if (object_id != fn_80201B44()) {
+                if (slot == 0) {
+                    result = instance->data->values_0EA[category];
+                } else if (slot == 1) {
+                    result = instance->data->values_108[category];
+                } else {
+                    result = instance->data->values_126[category];
+                }
+            }
+            break;
+        case 1:
+        case 2:
+        case 3:
+            if (object_id == fn_80201B44() && category == 15) {
+                if (slot == 0) {
+                    fn_80038308(object, mode, &result);
+                } else {
+                    fn_80038464(object, mode, &result);
+                }
+            }
+            break;
+        }
+    }
+
+    fn_8016A830(script, (double)result);
+    return 1;
+}
