@@ -86,6 +86,16 @@ config.asflags = ["-mgekko", "--strip-local-absolute", "-I include", f"-I build/
 config.ldflags = ["-fp hardware", "-nodefaults"]
 config.custom_build_rules = [
     {
+        "name": "externalize_game_switch_22",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @22 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@22=jumptable_8023C264 --remove-section=.data $in "
+            "&& touch $out"
+        ),
+        "description": "EXTERNALIZE SWITCH $in",
+    },
+    {
         "name": "globalize_game_bias",
         "command": (
             "build/binutils/powerpc-eabi-objcopy "
@@ -247,6 +257,11 @@ config.custom_build_rules = [
 ]
 config.custom_build_steps = {
     "post-compile": [
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8000EE9C.externalized"],
+            "rule": "externalize_game_switch_22",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8000EE9C.o"],
+        },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_800094C0.globalized"],
             "rule": "globalize_game_bias",
@@ -641,6 +656,7 @@ config.libs = [
             Object(NonMatching, "game/game_fn_8000EC94.c"),
             Object(Matching, "game/game_fn_8000ED44.c"),
             Object(Matching, "game/game_fn_8000EDF0.c"),
+            Object(Matching, "game/game_fn_8000EE9C.c"),
             Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_80008B6C.c"),
             Object(Matching, "game/game_fn_80008BD8.c"),
