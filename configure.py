@@ -1111,6 +1111,7 @@ config.libs = [
             Object(NonMatching, "game/game_fn_80017FF8.c"),
             Object(Matching, "game/game_fn_80018598.c"),
             Object(Matching, "game/game_fn_80018650.c"),
+            Object(NonMatching, "game/game_fn_80018708.c"),
             Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_80008B6C.c"),
             Object(Matching, "game/game_fn_80008BD8.c"),
