@@ -1,20 +1,20 @@
 {
   "status": "matching",
-  "matching_objects": 246,
-  "total_objects": 587,
-  "matching_functions": 307,
+  "matching_objects": 250,
+  "total_objects": 591,
+  "matching_functions": 311,
   "total_functions": 8216,
-  "matching_code_bytes": 64764,
+  "matching_code_bytes": 65344,
   "total_code_bytes": 2300692,
   "matching_data_bytes": 1332,
   "total_data_bytes": 4305651,
-  "code_percent": 2.814979,
-  "function_percent": 3.7366114,
-  "linked_code_bytes": 64732,
+  "code_percent": 2.840189,
+  "function_percent": 3.785297,
+  "linked_code_bytes": 65312,
   "linked_data_bytes": 1304,
-  "game_code_matching_bytes": 61736,
-  "game_code_total_bytes": 66168,
-  "game_code_linked_bytes": 61704,
+  "game_code_matching_bytes": 62316,
+  "game_code_total_bytes": 66748,
+  "game_code_linked_bytes": 62284,
   "sdk_code_matching_bytes": 3028,
   "sdk_code_total_bytes": 3028,
   "sdk_objects_complete": 18,
@@ -35,5 +35,5 @@
     "GC/1.2.5n is canonical for all dolphin/os translation units unless direct object evidence disproves it. Resolve remaining OS mismatches by checking public SDK source revisions and patches, plausible GC/1.2.5n library flags, TU/archive boundaries and ordering, then local retail modifications; preserve honest C as documented NonMatching when unavailable codegen alone prevents an exact match.",
     "fn_8000A668 owns the jumptable_8023BF28 data-ownership boundary: its two dense switches dispatch through jumptable_8023BF28 (60 entries, values 0..0x3B) and jumptable_8023C018 (54 entries, values 6..0x3B); promoting it requires assigning .data 0x8023BF28-0x8023C0F0 to the TU and shrinking the auto data object."
   ],
-  "next_gate": "match fn_800169FC (0x800169FC), the next 296-byte game function after fn_80016904 (144/144 bytes, 9/9 relocations) and fn_80016994 (104/104 bytes, 6/6 relocations), both at 100%. Its committed honest-C NonMatching reconstruction is 304 bytes at 92.702705%; all 17 relocation target/type entries agree, with 8/17 sites equal before MWCC's extra base-materialization instructions shift the tail. Resolve MWCC's indexed table loads and second-loop register assignment without whole-function inline assembly. Leave fn_800115CC as its documented honest NonMatching reconstruction. Separately resolve fn_8000F1DC (432/432 bytes at 92.01852%, all 16 relocation sites equal), fn_8000F774 (1652/1652 bytes at 99.45521%, all 114 relocation sites equal), and fn_8000FDE8 (496/496 bytes at 97.98387%, 19/20 relocation sites equal); fn_8000A668 owns jumptable data 0x8023BF28..0x8023C0F0; GC/1.2.5n remains canonical for dolphin/os translation units"
+  "next_gate": "match fn_80016D68 (0x80016D68), the next 420-byte game function after fn_80016B24 (184/184 bytes, 13/13 relocations), fn_80016BDC (108/108 bytes, 7/7 relocations), fn_80016C48 (160/160 bytes, 10/10 relocations), and fn_80016CE8 (128/128 bytes, 7/7 relocations), all at 100%. Leave the preceding fn_800169FC as its committed honest-C NonMatching reconstruction (304 bytes versus retail's 296, 92.702705%, all 17 relocation target/type entries agreeing and 8/17 sites equal) and do not substitute whole-function inline assembly. Separately resolve fn_8000F1DC (432/432 bytes at 92.01852%, all 16 relocation sites equal), fn_8000F774 (1652/1652 bytes at 99.45521%, all 114 relocation sites equal), and fn_8000FDE8 (496/496 bytes at 97.98387%, 19/20 relocation sites equal); fn_8000A668 owns jumptable data 0x8023BF28..0x8023C0F0; GC/1.2.5n remains canonical for dolphin/os translation units"
 }
