@@ -1,7 +1,7 @@
 {
   "status": "matching",
   "matching_objects": 246,
-  "total_objects": 586,
+  "total_objects": 587,
   "matching_functions": 307,
   "total_functions": 8216,
   "matching_code_bytes": 64764,
@@ -13,7 +13,7 @@
   "linked_code_bytes": 64732,
   "linked_data_bytes": 1304,
   "game_code_matching_bytes": 61736,
-  "game_code_total_bytes": 65872,
+  "game_code_total_bytes": 66168,
   "game_code_linked_bytes": 61704,
   "sdk_code_matching_bytes": 3028,
   "sdk_code_total_bytes": 3028,
@@ -31,8 +31,9 @@
     "fn_8000F774 is 99.45521% and registered NonMatching: its 1652-byte real-C reconstruction has the exact retail size and all 114 relocation sites equal; the remaining instruction differences are callee-saved register allocation across the long-lived handle, mode and spawned-object webs. No whole-function inline assembly is used.",
     "fn_8000FDE8 is 97.98387% and registered NonMatching: its 496-byte real-C reconstruction has the exact retail size and control flow; 19/20 relocation sites agree. MWCC rotates every long-lived script/value local one callee-saved register below retail, and its generated signed-int-to-double constant remains locally owned. No whole-function inline assembly is used.",
     "fn_800115CC is 92.788734% and registered NonMatching: its 284-byte real-C reconstruction preserves the retail behavior, but canonical MWCC removes the overwritten first script argument's fctiwz/stfd/lwz conversion, producing 272 bytes. All 10 relocation targets/addends agree; 6/10 relocation sites are equal before the missing 12-byte sequence shifts the tail. No inline assembly is used.",
+    "fn_800169FC is 92.702705% and registered NonMatching: its honest-C reconstruction preserves both table-walk loops and all 17 relocation target/type entries, but canonical MWCC produces 304 bytes versus retail's 296. It materializes each table-record base through r0, forms indexed table loads instead of retail's add-plus-displacement loads, and assigns the second loop's pointer/counter registers differently; 8/17 relocation sites remain equal before those extra instructions shift the rest. No inline assembly is used.",
     "GC/1.2.5n is canonical for all dolphin/os translation units unless direct object evidence disproves it. Resolve remaining OS mismatches by checking public SDK source revisions and patches, plausible GC/1.2.5n library flags, TU/archive boundaries and ordering, then local retail modifications; preserve honest C as documented NonMatching when unavailable codegen alone prevents an exact match.",
     "fn_8000A668 owns the jumptable_8023BF28 data-ownership boundary: its two dense switches dispatch through jumptable_8023BF28 (60 entries, values 0..0x3B) and jumptable_8023C018 (54 entries, values 6..0x3B); promoting it requires assigning .data 0x8023BF28-0x8023C0F0 to the TU and shrinking the auto data object."
   ],
-  "next_gate": "match fn_800169FC (0x800169FC), the next 296-byte game function after fn_80016904 (144/144 bytes, 9/9 relocations) and fn_80016994 (104/104 bytes, 6/6 relocations), both now at 100%. A preliminary honest-C reconstruction of fn_800169FC reached the exact 296-byte size and all 15 relocation targets but only 92.702705% because MWCC formed indexed table accesses and assigned the second loop's pointer/counter registers differently; do not force it with whole-function inline assembly. Leave fn_800115CC as its documented honest NonMatching reconstruction. Separately resolve fn_8000F1DC (432/432 bytes at 92.01852%, all 16 relocation sites equal), fn_8000F774 (1652/1652 bytes at 99.45521%, all 114 relocation sites equal), and fn_8000FDE8 (496/496 bytes at 97.98387%, 19/20 relocation sites equal); fn_8000A668 owns jumptable data 0x8023BF28..0x8023C0F0; GC/1.2.5n remains canonical for dolphin/os translation units"
+  "next_gate": "match fn_800169FC (0x800169FC), the next 296-byte game function after fn_80016904 (144/144 bytes, 9/9 relocations) and fn_80016994 (104/104 bytes, 6/6 relocations), both at 100%. Its committed honest-C NonMatching reconstruction is 304 bytes at 92.702705%; all 17 relocation target/type entries agree, with 8/17 sites equal before MWCC's extra base-materialization instructions shift the tail. Resolve MWCC's indexed table loads and second-loop register assignment without whole-function inline assembly. Leave fn_800115CC as its documented honest NonMatching reconstruction. Separately resolve fn_8000F1DC (432/432 bytes at 92.01852%, all 16 relocation sites equal), fn_8000F774 (1652/1652 bytes at 99.45521%, all 114 relocation sites equal), and fn_8000FDE8 (496/496 bytes at 97.98387%, 19/20 relocation sites equal); fn_8000A668 owns jumptable data 0x8023BF28..0x8023C0F0; GC/1.2.5n remains canonical for dolphin/os translation units"
 }
