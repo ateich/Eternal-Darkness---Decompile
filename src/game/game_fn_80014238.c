@@ -1,0 +1,26 @@
+typedef int s32;
+
+extern const char lbl_8023BEF8[];
+extern s32 fn_8016A598(void*);
+extern void fn_80163BB4(void*, const char*, s32, s32, ...);
+extern s32 fn_80201B44(void);
+extern void* fn_80201814(s32);
+extern void* fn_80204318(void*, s32);
+extern s32 fn_80201B54(void);
+extern void fn_800CC3BC(s32, s32, s32, s32, s32, s32);
+
+s32 fn_80014238(void* script)
+{
+    s32 object_id;
+
+    if (fn_8016A598(script) != 0) {
+        fn_80163BB4(script, lbl_8023BEF8, 0, fn_8016A598(script));
+        return 0;
+    }
+
+    object_id = fn_80201B44();
+    if (fn_80204318(fn_80201814(fn_80201B44()), 1) != 0) {
+        fn_800CC3BC(0, object_id, fn_80201B54(), 0, 0, 0);
+    }
+    return 0;
+}
