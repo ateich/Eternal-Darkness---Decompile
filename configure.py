@@ -482,6 +482,26 @@ config.custom_build_steps = {
             "rule": "externalize_game_bias_11",
             "inputs": [f"build/{VERSION}/src/game/game_fn_8000DAF4.o"],
         },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80012DA8.externalized"],
+            "rule": "externalize_game_bias_8",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80012DA8.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80012F40.externalized"],
+            "rule": "externalize_game_bias_8",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80012F40.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80012FD0.externalized"],
+            "rule": "externalize_game_bias_12",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80012FD0.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_800131E8.externalized"],
+            "rule": "externalize_game_bias_10",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_800131E8.o"],
+        },
     ]
 }
 if args.map:
