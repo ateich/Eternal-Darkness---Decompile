@@ -507,6 +507,11 @@ config.custom_build_steps = {
             "rule": "externalize_game_bias_8",
             "inputs": [f"build/{VERSION}/src/game/game_fn_80013340.o"],
         },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80013870.externalized"],
+            "rule": "externalize_game_bias_8",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80013870.o"],
+        },
     ]
 }
 if args.map:
@@ -797,6 +802,7 @@ config.libs = [
             Object(Matching, "game/game_fn_800136C4.c"),
             Object(Matching, "game/game_fn_80013748.c"),
             Object(Matching, "game/game_fn_800137DC.c"),
+            Object(Matching, "game/game_fn_80013870.c"),
             Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_80008B6C.c"),
             Object(Matching, "game/game_fn_80008BD8.c"),
