@@ -304,6 +304,16 @@ config.custom_build_rules = [
         ),
         "description": "EXTERNALIZE $in",
     },
+    {
+        "name": "externalize_game_unsigned_bias_8",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @8 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@8=lbl_8064DE60 --remove-section=.sdata2 $in "
+            "&& touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
 ]
 config.custom_build_steps = {
     "post-compile": [
@@ -616,6 +626,11 @@ config.custom_build_steps = {
             "outputs": [f"build/{VERSION}/src/game/game_fn_80016270.externalized"],
             "rule": "externalize_game_bias_14",
             "inputs": [f"build/{VERSION}/src/game/game_fn_80016270.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80016904.externalized"],
+            "rule": "externalize_game_unsigned_bias_8",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80016904.o"],
         },
     ]
 }
@@ -999,6 +1014,7 @@ config.libs = [
                 "game/game_fn_80016730.c",
                 extra_cflags=["-use_lmw_stmw on"],
             ),
+            Object(Matching, "game/game_fn_80016904.c"),
             Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_80008B6C.c"),
             Object(Matching, "game/game_fn_80008BD8.c"),
