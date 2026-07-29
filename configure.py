@@ -328,6 +328,11 @@ config.custom_build_rules = [
 config.custom_build_steps = {
     "post-compile": [
         {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80017A3C.externalized"],
+            "rule": "externalize_game_bias_10",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80017A3C.o"],
+        },
+        {
             "outputs": [f"build/{VERSION}/src/game/game_fn_800179AC.externalized"],
             "rule": "externalize_game_bias_8",
             "inputs": [f"build/{VERSION}/src/game/game_fn_800179AC.o"],
@@ -1076,6 +1081,7 @@ config.libs = [
             Object(Matching, "game/game_fn_80017884.c"),
             Object(Matching, "game/game_fn_80017910.c"),
             Object(Matching, "game/game_fn_800179AC.c"),
+            Object(Matching, "game/game_fn_80017A3C.c"),
             Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_80008B6C.c"),
             Object(Matching, "game/game_fn_80008BD8.c"),
