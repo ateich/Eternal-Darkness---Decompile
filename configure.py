@@ -567,6 +567,11 @@ config.custom_build_steps = {
             "rule": "externalize_game_bias_21",
             "inputs": [f"build/{VERSION}/src/game/game_fn_80015058.o"],
         },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80015320.externalized"],
+            "rule": "externalize_game_bias_16",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80015320.o"],
+        },
     ]
 }
 if args.map:
@@ -903,6 +908,11 @@ config.libs = [
                 extra_cflags=["-use_lmw_stmw on"],
             ),
             Object(Matching, "game/game_fn_800152B8.c"),
+            Object(
+                Matching,
+                "game/game_fn_80015320.c",
+                extra_cflags=["-use_lmw_stmw on"],
+            ),
             Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_80008B6C.c"),
             Object(Matching, "game/game_fn_80008BD8.c"),
