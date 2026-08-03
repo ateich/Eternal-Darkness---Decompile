@@ -1,7 +1,7 @@
 {
   "status": "matching",
   "matching_objects": 304,
-  "total_objects": 652,
+  "total_objects": 653,
   "matching_functions": 367,
   "total_functions": 8216,
   "matching_code_bytes": 78448,
@@ -13,7 +13,7 @@
   "linked_code_bytes": 78064,
   "linked_data_bytes": 1544,
   "game_code_matching_bytes": 75420,
-  "game_code_total_bytes": 84456,
+  "game_code_total_bytes": 84804,
   "game_code_linked_bytes": 75036,
   "sdk_code_matching_bytes": 3028,
   "sdk_code_total_bytes": 3028,
@@ -38,8 +38,9 @@
     "fn_80018CC4 is 98.393936% and registered NonMatching: its 528-byte honest-C reconstruction has the exact retail size, control-flow shape, descriptor layout and all 17/17 relocation-bearing instructions equal. The five remaining operand/scheduling differences are confined to the two volatile low-byte assignments that set the duplicated transformed values to 120 and 90. No whole-function inline assembly is used.",
     "fn_80018EF4 is 99.943184% and registered NonMatching: its 352-byte honest-C reconstruction has the exact retail size and instruction stream. 12/13 relocation-bearing instructions are equal; canonical MWCC emits the signed-integer conversion bias as a private literal rather than relocating it against retail lbl_8064DCE8. No inline assembly is used.",
     "fn_80019F98 is 97.45641% and registered NonMatching: its honest-C reconstruction captures the argument-count fallthrough, object lookup, vector conversion, effect creation and property setup. Canonical MWCC produces 772 bytes versus retail's 780; all 32 relocation target/type entries agree and 24/32 relocation-bearing instruction sites are equal before the missing two-instruction result/kind register shuffle shifts the tail. The remaining differences are the r26-r28 allocation of the script, kind and handle/effect webs. No whole-function inline assembly is used.",
+    "fn_8001B294 is 95.68965% and registered NonMatching: its honest-C reconstruction captures the zero-argument validation, channel-1 state comparison, context decrement, effect fallback and signed script result. Canonical MWCC produces 352 bytes versus retail's 348; all 20 relocation target/type entries agree and 15/20 relocation sites are equal before the extra result-register move shifts the tail. The remaining differences are the r28-r31 allocation of the script, manager/context, id and result webs. No whole-function inline assembly is used.",
     "GC/1.2.5n is canonical for all dolphin/os translation units unless direct object evidence disproves it. Resolve remaining OS mismatches by checking public SDK source revisions and patches, plausible GC/1.2.5n library flags, TU/archive boundaries and ordering, then local retail modifications; preserve honest C as documented NonMatching when unavailable codegen alone prevents an exact match.",
     "fn_8000A668 owns the jumptable_8023BF28 data-ownership boundary: its two dense switches dispatch through jumptable_8023BF28 (60 entries, values 0..0x3B) and jumptable_8023C018 (54 entries, values 6..0x3B); promoting it requires assigning .data 0x8023BF28-0x8023C0F0 to the TU and shrinking the auto data object."
   ],
-  "next_gate": "match fn_8001B294 (0x8001B294), immediately after newly exact fn_8001AF68 (444/444 code bytes, 100%, all 23 relocations equal) and fn_8001B124 (368/368 code bytes, 100%, all 21 relocations equal). Contiguous game .text now extends through 0x8001B294. Continue forward without retrying fn_80019F98, which remains an honest-C NonMatching reconstruction at 97.45641% (retail 780 bytes versus 772 generated, all 32 relocation target/type entries equal and 24/32 relocation sites equal). Do not substitute whole-function inline assembly. Leave fn_800169FC, fn_800173CC, fn_80017FF8, fn_80018708, fn_80018CC4 and fn_80018EF4 as documented NonMatching reconstructions. Separately resolve fn_8000F1DC (432/432 bytes at 92.01852%, all 16 relocation sites equal), fn_8000F774 (1652/1652 bytes at 99.45521%, all 114 relocation sites equal), and fn_8000FDE8 (496/496 bytes at 97.98387%, 19/20 relocation sites equal); fn_8000A668 owns jumptable data 0x8023BF28..0x8023C0F0; GC/1.2.5n remains canonical for dolphin/os translation units"
+  "next_gate": "match fn_8001B294 (0x8001B294), immediately after exact fn_8001B124. Its honest-C reconstruction is 95.68965% (retail 348 bytes versus 352 generated); all 20 relocation target/type entries agree and 15/20 relocation sites are equal. The remaining divergence is the r28-r31 allocation of the script, manager/context, id and result webs plus one extra result-register move. Contiguous game .text remains exact through 0x8001B294. Do not substitute whole-function inline assembly. After resolving it, continue with fn_8001B3F0 (0x8001B3F0). Leave fn_800169FC, fn_800173CC, fn_80017FF8, fn_80018708, fn_80018CC4, fn_80018EF4 and fn_80019F98 as documented NonMatching reconstructions. Separately resolve fn_8000F1DC (432/432 bytes at 92.01852%, all 16 relocation sites equal), fn_8000F774 (1652/1652 bytes at 99.45521%, all 114 relocation sites equal), and fn_8000FDE8 (496/496 bytes at 97.98387%, 19/20 relocation sites equal); fn_8000A668 owns jumptable data 0x8023BF28..0x8023C0F0; GC/1.2.5n remains canonical for dolphin/os translation units"
 }
