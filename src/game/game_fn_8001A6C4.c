@@ -16,6 +16,7 @@ char lbl_8023CC30[] =
 
 extern double fn_8016A694(void*, s32);
 extern s32 fn_8016A598(void*);
+extern void fn_8016A830(void*, double);
 extern void fn_800AFBA8(void*);
 extern void fn_800AFDA4(void);
 extern void fn_80025A78(s32);
@@ -139,4 +140,63 @@ s32 fn_8001A6C4(void* script)
     lbl_8064D18C = lbl_8023D5B8[lbl_803003C8.mode];
     fn_80025A78(9);
     return 0;
+}
+
+s32 fn_8001A9D0(void* script)
+{
+    s32 mode;
+
+    switch (lbl_803003C8.mode) {
+    case 16:
+        mode = 16;
+        break;
+    case 0:
+        mode = 0;
+        break;
+    case 1:
+        mode = 1;
+        break;
+    case 2:
+        mode = 2;
+        break;
+    case 3:
+        mode = 3;
+        break;
+    case 4:
+        mode = 4;
+        break;
+    case 5:
+        mode = 5;
+        break;
+    case 6:
+        mode = 6;
+        break;
+    case 7:
+        mode = 7;
+        break;
+    case 8:
+        mode = 8;
+        break;
+    case 9:
+        mode = 9;
+        break;
+    case 10:
+        mode = 10;
+        break;
+    case 11:
+        mode = 11;
+        break;
+    case 13:
+        mode = 13;
+        break;
+    case 15:
+        mode = 15;
+        break;
+    default:
+        mode = 0;
+        break;
+    }
+
+    fn_8016A830(script, (double)mode);
+    return 1;
 }

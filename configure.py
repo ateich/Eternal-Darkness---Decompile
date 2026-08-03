@@ -86,6 +86,16 @@ config.asflags = ["-mgekko", "--strip-local-absolute", "-I include", f"-I build/
 config.ldflags = ["-fp hardware", "-nodefaults"]
 config.custom_build_rules = [
     {
+        "name": "externalize_game_bias_70",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @70 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@70=lbl_8064DCE8 --remove-section=.sdata2 $in "
+            "&& touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
         "name": "externalize_game_flags_4",
         "command": (
             "python3 tools/externalize_elf_symbol.py $in @4 && "
@@ -327,6 +337,11 @@ config.custom_build_rules = [
 ]
 config.custom_build_steps = {
     "post-compile": [
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8001A6C4.externalized"],
+            "rule": "externalize_game_bias_70",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8001A6C4.o"],
+        },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_80019F98.externalized"],
             "rule": "externalize_game_bias_19",
