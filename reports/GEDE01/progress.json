@@ -1,19 +1,19 @@
 {
   "status": "matching",
   "matching_objects": 352,
-  "total_objects": 708,
+  "total_objects": 710,
   "matching_functions": 415,
   "total_functions": 8216,
   "matching_code_bytes": 87956,
   "total_code_bytes": 2300692,
-  "matching_data_bytes": 1624,
+  "matching_data_bytes": 1692,
   "total_data_bytes": 4305651,
   "code_percent": 3.8230236,
   "function_percent": 5.05112,
   "linked_code_bytes": 87572,
   "linked_data_bytes": 1596,
   "game_code_matching_bytes": 84928,
-  "game_code_total_bytes": 97688,
+  "game_code_total_bytes": 98280,
   "game_code_linked_bytes": 84544,
   "sdk_code_matching_bytes": 3028,
   "sdk_code_total_bytes": 3028,
@@ -46,8 +46,9 @@
     "fn_8001DE84 is 93.111115% and registered NonMatching: its honest-C reconstruction captures the global-state rollover, work-buffer reset, 256-entry halfword initialization and final data-state reset. Canonical MWCC produces 356 bytes versus retail's 360 and folds the retail +0x1C/+0x98 interior pointers into the root, then reloads the root around fn_80228B50. Retail has 7 relocations and generated code has 9; all shared relocation targets/types agree, but only the initial two sites are equal before the four-byte scheduling gap shifts the calls and tail. No whole-function inline assembly is used.",
     "fn_8001DFEC is 86.46342% and registered NonMatching: its honest-C reconstruction captures the mode/value rollover, paired object resets, work-buffer reset, 256-entry halfword initialization and final data-state reset. Both objects are exactly 328 bytes. Retail materializes +0x1C/+0x98/+0xC0 interior pointers while canonical MWCC folds them into the root and reloads that root around fn_80228B50. Retail has 7 relocations and generated code has 9; all 7 retail targets/types agree and 5/7 retail sites are equal. No whole-function inline assembly is used.",
     "fn_8001E144 is 65.023026% and registered NonMatching: its honest-C reconstruction captures global initialization, the 15-way mode switch, resource loading/alignment paths, timing setup, state transitions and final reset. Canonical MWCC produces 1416 bytes versus retail's 1216; retail has 75 ELF relocations and generated code has 101. The largest remaining differences are shared-path recovery, local/register allocation, and exact struct/data-copy expression shape. No whole-function inline assembly is used.",
+    "fn_8001E644 is 99.83108% and registered NonMatching: its honest-C reconstruction has the exact 592-byte retail size and control-flow shape, and its 68-byte 17-entry jump table is 100%. Both objects have all 53 ELF relocations (36 text and 17 data) equal. The only code differences are five operand fields in one volatile register web: canonical MWCC keeps the current shift in r5 and the next mask in r7 where retail uses r7 and r5. No inline assembly is used.",
     "GC/1.2.5n is canonical for all dolphin/os translation units unless direct object evidence disproves it. Resolve remaining OS mismatches by checking public SDK source revisions and patches, plausible GC/1.2.5n library flags, TU/archive boundaries and ordering, then local retail modifications; preserve honest C as documented NonMatching when unavailable codegen alone prevents an exact match.",
     "fn_8000A668 owns the jumptable_8023BF28 data-ownership boundary: its two dense switches dispatch through jumptable_8023BF28 (60 entries, values 0..0x3B) and jumptable_8023C018 (54 entries, values 6..0x3B); promoting it requires assigning .data 0x8023BF28-0x8023C0F0 to the TU and shrinking the auto data object."
   ],
-  "next_gate": "match fn_8001E644 (0x8001E644). The forward scan now includes honest fn_8001E144 at 65.023026% NonMatching (1216 retail bytes, 1416 generated, 75 retail versus 101 generated ELF relocations) and exact fn_8001E604 (64/64 bytes, 16 instructions and all 5 relocations equal). The contiguous exact-match frontier remains 0x8001DE84 because fn_8001DE84, fn_8001DFEC and fn_8001E144 are documented honest NonMatching reconstructions; do not retry them without a new source-level codegen hypothesis and do not use whole-function inline assembly. fn_8000A668 owns jumptable data 0x8023BF28..0x8023C0F0; GC/1.2.5n remains canonical for dolphin/os translation units"
+  "next_gate": "reconstruct fn_8001E894 (0x8001E894). The forward scan now includes honest fn_8001E644 at 99.83108% NonMatching (592/592 bytes, exact 68-byte jump table and all 53 relocations equal); its only differences are five operand fields in the r5/r7 volatile register web. The contiguous exact-match frontier remains 0x8001DE84 because fn_8001DE84, fn_8001DFEC, fn_8001E144 and fn_8001E644 are documented honest NonMatching reconstructions; do not retry them without a new source-level codegen hypothesis and do not use whole-function inline assembly. fn_8000A668 owns jumptable data 0x8023BF28..0x8023C0F0; GC/1.2.5n remains canonical for dolphin/os translation units"
 }
