@@ -1,20 +1,20 @@
 {
   "status": "matching",
-  "matching_objects": 352,
-  "total_objects": 710,
-  "matching_functions": 415,
+  "matching_objects": 353,
+  "total_objects": 712,
+  "matching_functions": 416,
   "total_functions": 8216,
-  "matching_code_bytes": 87956,
+  "matching_code_bytes": 87960,
   "total_code_bytes": 2300692,
   "matching_data_bytes": 1692,
   "total_data_bytes": 4305651,
-  "code_percent": 3.8230236,
-  "function_percent": 5.05112,
-  "linked_code_bytes": 87572,
+  "code_percent": 3.8231976,
+  "function_percent": 5.063291,
+  "linked_code_bytes": 87576,
   "linked_data_bytes": 1596,
-  "game_code_matching_bytes": 84928,
-  "game_code_total_bytes": 98280,
-  "game_code_linked_bytes": 84544,
+  "game_code_matching_bytes": 84932,
+  "game_code_total_bytes": 98284,
+  "game_code_linked_bytes": 84548,
   "sdk_code_matching_bytes": 3028,
   "sdk_code_total_bytes": 3028,
   "sdk_objects_complete": 18,
@@ -50,5 +50,5 @@
     "GC/1.2.5n is canonical for all dolphin/os translation units unless direct object evidence disproves it. Resolve remaining OS mismatches by checking public SDK source revisions and patches, plausible GC/1.2.5n library flags, TU/archive boundaries and ordering, then local retail modifications; preserve honest C as documented NonMatching when unavailable codegen alone prevents an exact match.",
     "fn_8000A668 owns the jumptable_8023BF28 data-ownership boundary: its two dense switches dispatch through jumptable_8023BF28 (60 entries, values 0..0x3B) and jumptable_8023C018 (54 entries, values 6..0x3B); promoting it requires assigning .data 0x8023BF28-0x8023C0F0 to the TU and shrinking the auto data object."
   ],
-  "next_gate": "reconstruct fn_8001E894 (0x8001E894). The forward scan now includes honest fn_8001E644 at 99.83108% NonMatching (592/592 bytes, exact 68-byte jump table and all 53 relocations equal); its only differences are five operand fields in the r5/r7 volatile register web. The contiguous exact-match frontier remains 0x8001DE84 because fn_8001DE84, fn_8001DFEC, fn_8001E144 and fn_8001E644 are documented honest NonMatching reconstructions; do not retry them without a new source-level codegen hypothesis and do not use whole-function inline assembly. fn_8000A668 owns jumptable data 0x8023BF28..0x8023C0F0; GC/1.2.5n remains canonical for dolphin/os translation units"
+  "next_gate": "reconstruct fn_8001E894 (0x8001E894), then continue at fn_8001F758 (0x8001F758). The forward scan now includes exact fn_8001F754 (4/4 bytes, one instruction, zero relocations). fn_8001E894 is a 3776-byte state dispatcher and remains the first unresolved address; it was not replaced with inline assembly or a speculative partial C translation. The contiguous exact-match frontier remains 0x8001DE84 because fn_8001DE84, fn_8001DFEC, fn_8001E144 and fn_8001E644 are documented honest NonMatching reconstructions. fn_8000A668 owns jumptable data 0x8023BF28..0x8023C0F0; GC/1.2.5n remains canonical for dolphin/os translation units"
 }
