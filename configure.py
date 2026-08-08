@@ -1565,6 +1565,15 @@ config.libs = [
             Object(Matching, "game/game_fn_8002B650.c"),
             Object(Matching, "game/game_fn_8002B688.c"),
             Object(Matching, "game/game_fn_8002B6B0.c"),
+            # 96.79612%: exact 824-byte real-C reconstruction; the remaining
+            # differences are confined to scheduling two global loads in the
+            # final call setup. All 30 relocation targets/types agree and
+            # 28/30 sites are equal; its owned sdata2 constant is 100%.
+            Object(
+                NonMatching,
+                "game/game_fn_8002B748.c",
+                extra_cflags=["-use_lmw_stmw on"],
+            ),
             Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_80008B6C.c"),
             Object(Matching, "game/game_fn_80008BD8.c"),
