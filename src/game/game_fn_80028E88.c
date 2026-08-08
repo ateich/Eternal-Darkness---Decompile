@@ -6,7 +6,6 @@ typedef struct AlignmentRecord {
     s32 alternate;
 } AlignmentRecord;
 
-extern const char* lbl_8023E28C[];
 extern AlignmentRecord lbl_8023E118[];
 extern s32 lbl_8064D564;
 extern s32 lbl_803003C8[];
@@ -20,6 +19,16 @@ extern char lbl_8064B38C;
 extern char lbl_8064B390;
 extern char lbl_8064B398;
 extern char lbl_8064B39C;
+extern char lbl_8064B374;
+extern char lbl_8023E154, lbl_8023E160, lbl_8064B2F8, lbl_8023E16C;
+extern char lbl_8023E178, lbl_8064B300, lbl_8064B304, lbl_8023E184;
+extern char lbl_8064B308, lbl_8064B310, lbl_8064B318, lbl_8064B320;
+extern char lbl_8064B328, lbl_8064B330, lbl_8064B334, lbl_8064B33C;
+extern char lbl_8064B344, lbl_8064B34C, lbl_8064B354, lbl_8064B35C;
+extern char lbl_8023E194, lbl_8023E1A0, lbl_8023E1AC, lbl_8023E1B8;
+extern char lbl_8023E1FC, lbl_8064B364, lbl_8023E20C, lbl_8023E220;
+extern char lbl_8023E230, lbl_8023E240, lbl_8064B36C, lbl_8023E250;
+extern char lbl_8023E260, lbl_8023E270;
 
 extern s32 fn_80045240(s32);
 extern void fn_800FD39C(char*, const char*);
@@ -27,6 +36,20 @@ extern void fn_800FD40C(char*, const char*);
 extern s32 fn_80036E50(void);
 extern void* fn_80201B3C(void);
 extern s32 fn_801E394C(const char*);
+
+#pragma section ".data"
+__declspec(section ".data") char lbl_8023E280[] = "Magick Pool";
+__declspec(section ".data") char* lbl_8023E28C[] = {
+    &lbl_8023E154, &lbl_8023E160, &lbl_8064B2F8, &lbl_8023E16C,
+    &lbl_8023E178, &lbl_8064B300, &lbl_8064B304, &lbl_8023E184,
+    &lbl_8064B308, &lbl_8064B310, &lbl_8064B318, &lbl_8064B320,
+    &lbl_8064B328, &lbl_8064B330, &lbl_8064B334, &lbl_8064B33C,
+    &lbl_8064B344, &lbl_8064B34C, &lbl_8064B354, &lbl_8064B35C,
+    &lbl_8023E194, &lbl_8023E1A0, &lbl_8023E1AC, &lbl_8023E1B8,
+    &lbl_8023E1FC, &lbl_8064B364, &lbl_8023E20C, &lbl_8023E220,
+    &lbl_8023E230, &lbl_8023E240, &lbl_8064B36C, &lbl_8023E250,
+    &lbl_8023E260, &lbl_8023E270, lbl_8023E280, &lbl_8064B374
+};
 
 const char* fn_80028E88(const signed char* command, s32* result)
 {
@@ -75,7 +98,7 @@ const char* fn_80028E88(const signed char* command, s32* result)
             fn_800FD39C(buffer, &lbl_8064B39C);
         }
         {
-            const char** strings = lbl_8023E28C;
+            char** strings = lbl_8023E28C;
             fn_800FD40C((char*)strings[23], buffer);
             text = strings[23];
         }
