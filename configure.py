@@ -138,6 +138,15 @@ config.custom_build_rules = [
         "description": "EXTERNALIZE SWITCH $in",
     },
     {
+        "name": "name_game_80024F28_switches",
+        "command": (
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@36=jumptable_8023DE74 "
+            "--redefine-sym=@37=jumptable_8023DE38 $in && touch $out"
+        ),
+        "description": "NAME SWITCHES $in",
+    },
+    {
         "name": "globalize_game_bias",
         "command": (
             "build/binutils/powerpc-eabi-objcopy "
@@ -401,6 +410,11 @@ config.custom_build_rules = [
 ]
 config.custom_build_steps = {
     "post-compile": [
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80024F28.switches_named"],
+            "rule": "name_game_80024F28_switches",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80024F28.o"],
+        },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8001CE94.externalized"],
             "rule": "externalize_game_bias_10",
@@ -1440,6 +1454,7 @@ config.libs = [
             Object(Matching, "game/game_fn_80024B78.c"),
             Object(Matching, "game/game_fn_80024D08.c"),
             Object(Matching, "game/game_fn_80024D3C.c"),
+            Object(Matching, "game/game_fn_80024F28.c"),
             Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_80008B6C.c"),
             Object(Matching, "game/game_fn_80008BD8.c"),
