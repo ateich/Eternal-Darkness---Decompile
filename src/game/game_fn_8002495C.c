@@ -1,0 +1,58 @@
+extern void fn_802046C0(int, int);
+extern void fn_800374EC(int, int);
+extern void fn_800CEF94(int);
+extern void fn_800CEFE8(int);
+extern void fn_80180014(int, int, int, int);
+extern void fn_801E823C(int);
+extern void fn_801A6EFC(int);
+extern void fn_8011EA60(int);
+extern void fn_801287C0(int);
+extern void fn_800EA038(int);
+
+void fn_8002495C(void)
+{
+    fn_802046C0(92, 275);
+    fn_800374EC(2, 3);
+    fn_800374EC(4, 175);
+    fn_800374EC(5, 25);
+    fn_800374EC(8, 10);
+    fn_800374EC(10, 10);
+    fn_800374EC(11, 6);
+    fn_800374EC(20, 1);
+    fn_800374EC(24, 10);
+    fn_800374EC(87, 2);
+    fn_800374EC(25, 7);
+    fn_800374EC(26, 15);
+    fn_800374EC(49, 1);
+    fn_800374EC(22, 1);
+    fn_800374EC(23, 3);
+    fn_800374EC(32, 1);
+    fn_800374EC(34, 2);
+    fn_800374EC(36, 10);
+    fn_800374EC(7, 16);
+    fn_800374EC(6, 30);
+    fn_800374EC(43, 2);
+    fn_800374EC(9, 2);
+    fn_800374EC(42, 6);
+    fn_800374EC(56, 1);
+    fn_800374EC(58, 1);
+    fn_800374EC(39, 30);
+    fn_800374EC(53, 3);
+    fn_800374EC(62, 17);
+    fn_800374EC(63, 4);
+    fn_800374EC(77, 30);
+    fn_800374EC(80, 2);
+    fn_800374EC(78, 10);
+    fn_800374EC(79, 7);
+    fn_800374EC(83, 6);
+    fn_800374EC(88, 5);
+    fn_800374EC(44, 30);
+    fn_800CEF94(295);
+    fn_800CEFE8(295);
+    fn_80180014(150, 0, 40, 190);
+    fn_801E823C(260);
+    fn_801A6EFC(24);
+    fn_8011EA60(275);
+    fn_801287C0(275);
+    fn_800EA038(12);
+}
