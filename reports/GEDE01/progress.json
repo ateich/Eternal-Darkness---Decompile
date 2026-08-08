@@ -1,20 +1,20 @@
 {
   "status": "matching",
-  "matching_objects": 365,
-  "total_objects": 727,
-  "matching_functions": 428,
+  "matching_objects": 366,
+  "total_objects": 728,
+  "matching_functions": 429,
   "total_functions": 8216,
-  "matching_code_bytes": 89664,
+  "matching_code_bytes": 90096,
   "total_code_bytes": 2300692,
   "matching_data_bytes": 1692,
   "total_data_bytes": 4305651,
-  "code_percent": 3.8972623,
-  "function_percent": 5.2093477,
-  "linked_code_bytes": 89280,
+  "code_percent": 3.9160392,
+  "function_percent": 5.221519,
+  "linked_code_bytes": 89712,
   "linked_data_bytes": 1596,
-  "game_code_matching_bytes": 86636,
-  "game_code_total_bytes": 99988,
-  "game_code_linked_bytes": 86252,
+  "game_code_matching_bytes": 87068,
+  "game_code_total_bytes": 100420,
+  "game_code_linked_bytes": 86684,
   "sdk_code_matching_bytes": 3028,
   "sdk_code_total_bytes": 3028,
   "sdk_objects_complete": 18,
@@ -51,5 +51,5 @@
     "fn_8000A668 owns the jumptable_8023BF28 data-ownership boundary: its two dense switches dispatch through jumptable_8023BF28 (60 entries, values 0..0x3B) and jumptable_8023C018 (54 entries, values 6..0x3B); promoting it requires assigning .data 0x8023BF28-0x8023C0F0 to the TU and shrinking the auto data object.",
     "MWCC 2.4.2 roots a switch binary-search tree at the median case value and emits a bare branch with no compare for a case whose body is empty. A retail pivot that sits below the lowest visible case therefore identifies a hidden empty case; this is how fn_800238BC's case -1 was recovered."
   ],
-  "next_gate": "continue the forward scan at fn_80023CF8 (0x80023CF8); fn_8001E894 (0x8001E894) is still the first unresolved address and remains a 3776-byte state dispatcher that was not replaced with inline assembly or a speculative partial C translation. The forward scan now includes exact fn_8001F754 (4/4 bytes, zero relocations), fn_8002014C (4/4 bytes, zero relocations), fn_80020D70 (32/32 bytes, 1/1 relocation), fn_80023674 (44/44 bytes, 4/4 relocations), fn_800236A0 (112/112 bytes, 9/9 emitted relocations), fn_80023710 (240/240 bytes, 12/12 relocations), fn_80023800 (124/124 bytes, 9/9 relocations), fn_8002387C (64/64 bytes, 3/3 relocations), fn_800238BC (92/92 bytes, 3/3 relocations), fn_80023918 (336/336 bytes, 28/28 relocation-bearing instructions), fn_80023A68 (216/216 bytes, 21/21 relocation-bearing instructions), fn_80023B40 (224/224 bytes, 11/11 ELF relocations) and fn_80023C20 (216/216 bytes, 27/27 relocation-bearing instructions). fn_800238BC..fn_80023C20 is itself contiguous, so the compact forward-scan gate advances to 0x80023CF8. The contiguous exact-match frontier remains 0x8001DE84 because fn_8001DE84, fn_8001DFEC, fn_8001E144 and fn_8001E644 are documented honest NonMatching reconstructions. fn_8000A668 owns jumptable data 0x8023BF28..0x8023C0F0; GC/1.2.5n remains canonical for dolphin/os translation units"
+  "next_gate": "continue the forward scan at fn_80023EA8 (0x80023EA8); fn_8001E894 (0x8001E894) is still the first unresolved address and remains a 3776-byte state dispatcher that was not replaced with inline assembly or a speculative partial C translation. The forward scan now includes exact fn_8001F754 (4/4 bytes, zero relocations), fn_8002014C (4/4 bytes, zero relocations), fn_80020D70 (32/32 bytes, 1/1 relocation), fn_80023674 (44/44 bytes, 4/4 relocations), fn_800236A0 (112/112 bytes, 9/9 emitted relocations), fn_80023710 (240/240 bytes, 12/12 relocations), fn_80023800 (124/124 bytes, 9/9 relocations), fn_8002387C (64/64 bytes, 3/3 relocations), fn_800238BC (92/92 bytes, 3/3 relocations), fn_80023918 (336/336 bytes, 28/28 relocation-bearing instructions), fn_80023A68 (216/216 bytes, 21/21 relocation-bearing instructions), fn_80023B40 (224/224 bytes, 11/11 ELF relocations), fn_80023C20 (216/216 bytes, 27/27 relocation-bearing instructions) and fn_80023CF8 (432/432 bytes, 65/65 ELF relocations). fn_800238BC..fn_80023CF8 is itself contiguous, so the compact forward-scan gate advances to 0x80023EA8. The contiguous exact-match frontier remains 0x8001DE84 because fn_8001DE84, fn_8001DFEC, fn_8001E144 and fn_8001E644 are documented honest NonMatching reconstructions. fn_8000A668 owns jumptable data 0x8023BF28..0x8023C0F0; GC/1.2.5n remains canonical for dolphin/os translation units"
 }
