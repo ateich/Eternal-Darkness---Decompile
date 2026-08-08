@@ -1,0 +1,24 @@
+typedef unsigned char u8;
+typedef unsigned int u32;
+
+extern char lbl_8023DD88[];
+
+extern int fn_80213394(void*, void*);
+extern int fn_802137F4(void*, void*, u32, int, int);
+extern void fn_8021345C(void*);
+extern void* fn_801FEA8C(u32, int, const char*, int);
+
+void* fn_80024594(void* object, u32* size)
+{
+    u8 state[0x40];
+    void* result = 0;
+
+    if (fn_80213394(object, state) != 0) {
+        *size = *(u32*)&state[0x34];
+        result = fn_801FEA8C((*size + 31) & ~31, 1, lbl_8023DD88, 139);
+        while (fn_802137F4(state, result, (*size + 31) & ~31, 0, 2) < 0) {
+        }
+        fn_8021345C(state);
+    }
+    return result;
+}
