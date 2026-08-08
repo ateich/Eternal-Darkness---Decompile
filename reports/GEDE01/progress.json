@@ -1,20 +1,20 @@
 {
   "status": "matching",
-  "matching_objects": 429,
-  "total_objects": 798,
-  "matching_functions": 492,
+  "matching_objects": 432,
+  "total_objects": 801,
+  "matching_functions": 495,
   "total_functions": 8216,
-  "matching_code_bytes": 103884,
+  "matching_code_bytes": 104560,
   "total_code_bytes": 2300692,
   "matching_data_bytes": 1988,
   "total_data_bytes": 4305651,
-  "code_percent": 4.515337,
-  "function_percent": 5.988315,
-  "linked_code_bytes": 103500,
+  "code_percent": 4.54472,
+  "function_percent": 6.02483,
+  "linked_code_bytes": 104176,
   "linked_data_bytes": 1892,
-  "game_code_matching_bytes": 100856,
-  "game_code_total_bytes": 120192,
-  "game_code_linked_bytes": 100472,
+  "game_code_matching_bytes": 101532,
+  "game_code_total_bytes": 120868,
+  "game_code_linked_bytes": 101148,
   "sdk_code_matching_bytes": 3028,
   "sdk_code_total_bytes": 3028,
   "sdk_objects_complete": 18,
@@ -57,5 +57,5 @@
     "fn_8000A668 owns the jumptable_8023BF28 data-ownership boundary: its two dense switches dispatch through jumptable_8023BF28 (60 entries, values 0..0x3B) and jumptable_8023C018 (54 entries, values 6..0x3B); promoting it requires assigning .data 0x8023BF28-0x8023C0F0 to the TU and shrinking the auto data object.",
     "MWCC 2.4.2 roots a switch binary-search tree at the median case value and emits a bare branch with no compare for a case whose body is empty. A retail pivot that sits below the lowest visible case therefore identifies a hidden empty case; this is how fn_800238BC's case -1 was recovered."
   ],
-  "next_gate": "continue the forward scan at fn_80028BE4 (0x80028BE4, size 0x170). fn_80028198 is an honest-C documented NonMatching reconstruction at 2.068592% (1108 generated vs. 2060 retail bytes; 85 generated vs. 143 retail relocation sites). fn_800289A4 is an exact-size honest-C documented NonMatching reconstruction at 99.45192% with all 24/24 ELF relocations equal; only its long-lived node/hit register allocation differs. fn_80028B44 is exact at 160/160 bytes with all 6/6 ELF relocations equal. The contiguous exact-match frontier remains 0x8001DE84 because fn_8001DE84, fn_8001DFEC, fn_8001E144 and fn_8001E644 are documented honest NonMatching reconstructions, and fn_8001E894 remains the first unresolved address. fn_8000A668 owns jumptable data 0x8023BF28..0x8023C0F0; GC/1.2.5n remains canonical for dolphin/os translation units"
+  "next_gate": "continue the forward scan at fn_80028E88 (0x80028E88, size 0x318), whose 26-way character switch dispatches through locally scoped jumptable_8023E31C (0x68 bytes). fn_80028BE4 is exact at 368/368 bytes with all 27/27 ELF relocations equal; fn_80028D54 is exact at 184/184 bytes with all 4/4 relocations equal; fn_80028E0C is exact at 124/124 bytes with all 7/7 relocations equal. fn_80028198 remains an honest-C documented NonMatching reconstruction at 2.068592%, and fn_800289A4 remains exact-size honest C at 99.45192% with all 24/24 relocations equal. The contiguous exact-match frontier remains 0x8001DE84 because fn_8001DE84, fn_8001DFEC, fn_8001E144 and fn_8001E644 are documented honest NonMatching reconstructions, and fn_8001E894 remains the first unresolved address. fn_8000A668 owns jumptable data 0x8023BF28..0x8023C0F0; GC/1.2.5n remains canonical for dolphin/os translation units"
 }
