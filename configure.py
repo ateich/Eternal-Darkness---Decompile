@@ -1530,6 +1530,7 @@ config.libs = [
             Object(Matching, "game/game_fn_80027F10.c"),
             Object(Matching, "game/game_fn_80027F3C.c"),
             Object(Matching, "game/game_fn_80027F44.c"),
+            Object(Matching, "game/game_fn_80028098.c"),
             Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_80008B6C.c"),
             Object(Matching, "game/game_fn_80008BD8.c"),
