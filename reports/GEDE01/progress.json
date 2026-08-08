@@ -1,7 +1,7 @@
 {
   "status": "matching",
   "matching_objects": 452,
-  "total_objects": 827,
+  "total_objects": 828,
   "matching_functions": 515,
   "total_functions": 8216,
   "matching_code_bytes": 109540,
@@ -13,7 +13,7 @@
   "linked_code_bytes": 109156,
   "linked_data_bytes": 2152,
   "game_code_matching_bytes": 106512,
-  "game_code_total_bytes": 126784,
+  "game_code_total_bytes": 127168,
   "game_code_linked_bytes": 106128,
   "sdk_code_matching_bytes": 3028,
   "sdk_code_total_bytes": 3028,
@@ -55,9 +55,10 @@
     "fn_800289A4 is 99.45192% and registered NonMatching: its honest-C reconstruction has the exact 416-byte retail size, instruction order, behavior and all 24/24 ELF relocations equal. The only remaining differences are the allocator coalescing the long-lived node pointer into r27 and the hit result into r28, where retail reserves r23 for the node and reuses r27 for the hit result. No inline assembly is used.",
     "fn_8002B5B4 is 53.035713% and registered NonMatching: its honest-C reconstruction captures both indexed 12-byte vector copies, the parallel value-table store and current-index update. Canonical GC/1.3 produces 84 bytes versus retail's 112, folding the three retail destination-base calculations into one and eliminating retail's saved r31 offset. Both objects contain the same three relocation targets/types; the first relocation site is equal before the missing address-materialization/prologue instructions shift the remaining two. No inline assembly is used.",
     "fn_8002B748 is 96.79612% and registered NonMatching: its honest-C reconstruction has the exact 824-byte retail size and matches the complete two-phase event callback, state layout and control flow. Both objects contain 30 ELF relocations with the same targets/types; 28/30 sites are equal, while only the lbl_8064E034 and lbl_8064D18C loads move within the final fn_801AAE68 argument-setup window. The owned 8-byte signed-conversion constant at 0x8064E038 is 100%. No inline assembly is used.",
+    "fn_8002BFE0 is 97.395836% and registered NonMatching: its honest-C reconstruction has the exact 384-byte retail size and captures the three-axis randomized effect initialization and finalization loop. Both objects contain 11 ELF text relocations at the same sites and with the same types; 8/11 named targets agree, while canonical MWCC permutes the one/zero/conversion-bias constant loads and rotates the long-lived object, direction pointer and loop counter registers. No inline assembly is used.",
     "GC/1.2.5n is canonical for all dolphin/os translation units unless direct object evidence disproves it. Resolve remaining OS mismatches by checking public SDK source revisions and patches, plausible GC/1.2.5n library flags, TU/archive boundaries and ordering, then local retail modifications; preserve honest C as documented NonMatching when unavailable codegen alone prevents an exact match.",
     "fn_8000A668 owns the jumptable_8023BF28 data-ownership boundary: its two dense switches dispatch through jumptable_8023BF28 (60 entries, values 0..0x3B) and jumptable_8023C018 (54 entries, values 6..0x3B); promoting it requires assigning .data 0x8023BF28-0x8023C0F0 to the TU and shrinking the auto data object.",
     "MWCC 2.4.2 roots a switch binary-search tree at the median case value and emits a bare branch with no compare for a case whose body is empty. A retail pivot that sits below the lowest visible case therefore identifies a hidden empty case; this is how fn_800238BC's case -1 was recovered."
   ],
-  "next_gate": "continue the forward game-code scan at fn_8002BFE0 (0x8002BFE0, size 0x180). fn_8002BC7C is matched at 100% (868/868 bytes; all 45 relocation sites, types, targets and addends agree) and the linked DOL retains SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f. fn_8002B748 remains an exact-size honest-C documented NonMatching reconstruction at 96.79612% (824 generated vs. 824 retail bytes; all 30 relocation targets/types agree and 28/30 sites are equal). fn_8002AC60 remains the earlier unresolved 0x950-byte rendering/collision callback, and fn_80029358 remains the earlier unresolved 0x10EC-byte dispatcher whose 33-entry dense switch owns locally scoped jumptable_8023E388 at data 0x8023E388..0x8023E40C. The contiguous exact-match frontier remains 0x8001DE84 because fn_8001DE84, fn_8001DFEC, fn_8001E144 and fn_8001E644 are documented honest NonMatching reconstructions, and fn_8001E894 remains the first unresolved address. fn_8000A668 owns jumptable data 0x8023BF28..0x8023C0F0; GC/1.2.5n remains canonical for dolphin/os translation units"
+  "next_gate": "continue the forward game-code scan at fn_8002C160 (0x8002C160, size 0x35C). fn_8002BFE0 is an exact-size honest-C documented NonMatching reconstruction at 97.395836% (384 generated vs. 384 retail bytes; all 11 ELF relocation sites/types agree and 8/11 named targets agree); the linked DOL retains SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f. fn_8002B748 remains an exact-size honest-C documented NonMatching reconstruction at 96.79612% (824 generated vs. 824 retail bytes; all 30 relocation targets/types agree and 28/30 sites are equal). fn_8002AC60 remains the earlier unresolved 0x950-byte rendering/collision callback, and fn_80029358 remains the earlier unresolved 0x10EC-byte dispatcher whose 33-entry dense switch owns locally scoped jumptable_8023E388 at data 0x8023E388..0x8023E40C. The contiguous exact-match frontier remains 0x8001DE84 because fn_8001DE84, fn_8001DFEC, fn_8001E144 and fn_8001E644 are documented honest NonMatching reconstructions, and fn_8001E894 remains the first unresolved address. fn_8000A668 owns jumptable data 0x8023BF28..0x8023C0F0; GC/1.2.5n remains canonical for dolphin/os translation units"
 }
