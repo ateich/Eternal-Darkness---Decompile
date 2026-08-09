@@ -11,6 +11,7 @@ void fn_8001E644(u32 type, s32 unused, s32 enable)
 {
     s32* values;
     u32 next_mask;
+    s32 current_shift;
     u32 current_mask;
     u32 previous_mask;
     u32 next_bit;
@@ -19,10 +20,11 @@ void fn_8001E644(u32 type, s32 unused, s32 enable)
 
     values = lbl_8064C5A8;
     next_mask = 0x10000 << (values[1] - 1);
-    current_mask = 0x10000 << (values[0] - 1);
+    current_shift = values[0] - 1;
+    current_mask = 0x10000 << current_shift;
     previous_mask = 0x10000 << (values[-1] - 1);
     next_bit = 1 << (values[1] - 1);
-    current_bit = 1 << (values[0] - 1);
+    current_bit = 1 << current_shift;
     previous_bit = 1 << (values[-1] - 1);
 
     switch (type) {
