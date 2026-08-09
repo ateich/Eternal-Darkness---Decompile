@@ -22,9 +22,9 @@ void fn_80024794(void)
 {
     u32 size1;
     u32 count;
-    u32 total;
     u32 size2;
     u32 size3;
+    u32 total;
     void* base;
 
     size1 = fn_8015AA14();

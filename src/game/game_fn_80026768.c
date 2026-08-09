@@ -27,6 +27,11 @@ typedef struct ParticlePoint {
     s16 y;
 } ParticlePoint;
 
+typedef union EdgeValues {
+    u32 words[3];
+    s16 half[6];
+} EdgeValues;
+
 typedef struct EffectData {
     char resource[0x50];
     ParticlePoint point[3][5];
@@ -68,11 +73,11 @@ extern void fn_801A8F08(s16, s16, s16, s16, s32, s32, s32, s32, s32);
 
 void fn_80026768(EffectState* state)
 {
+    EffectData* data = &lbl_8023DEB0;
     u32 colors[6];
-    u32 texcoords[3];
+    EdgeValues edge;
     u32 packed[6];
-    s16 edge[5];
-    s32 alpha;
+    u32 alpha;
     s32 x0;
     s32 x1;
     s32 y0;
@@ -84,7 +89,10 @@ void fn_80026768(EffectState* state)
     s32 i;
     u32 draw_color;
 
-    if (state == 0 || state->alpha == 0) {
+    if (state == 0) {
+        return;
+    }
+    if (state->alpha == 0) {
         return;
     }
 
@@ -97,37 +105,37 @@ void fn_80026768(EffectState* state)
         colors[i] = lbl_80238C28[i];
     }
     for (i = 0; i < 3; i++) {
-        texcoords[i] = lbl_80238C40[i];
+        edge.words[i] = lbl_80238C40[i];
     }
 
     variant = state->variant;
     texture = state->mode != 0 ? -1 : -30360;
-    depth = state->mode != 0 ? -1 : (alpha | 0xFFFF0A00);
+    depth = ((state->mode != 0 ? (u8)state->alpha >> 2 : (u8)state->alpha)
+             | 0xFFFF0A00);
     draw_color = (alpha | 0x0A0A0A00);
-    for (i = 0; i < 2; i++) {
-        packed[i] = draw_color;
-    }
-    for (; i < 4; i++) {
-        packed[i] = depth;
-    }
+    packed[0] = draw_color;
+    packed[1] = draw_color;
+    packed[2] = depth;
+    packed[3] = depth;
     packed[4] = colors[variant * 2] | alpha;
     packed[5] = colors[variant * 2 + 1] | alpha;
 
-    x0 = (s32)(lbl_8064DF98 * state->x);
-    x1 = (s32)(lbl_8064DF98 * state->y);
-    if (x0 > x1) {
+    x0 = (s32)(lbl_8064DF98 * state->y);
+    x1 = (s32)(lbl_8064DF98 * state->x);
+    bottom = (s32)((lbl_8064DF94 + lbl_8064DF98 * state->scale)
+                   + state->top);
+    if (x0 < x1) {
         s32 swap = x0;
         x0 = x1;
         x1 = swap;
     }
     y0 = (s32)(lbl_8064DF9C + (61 - x0) * state->scale);
     y1 = (s32)(lbl_8064DF9C + (61 - x1) * state->scale);
-    bottom = (s32)(lbl_8064DF94 + lbl_8064DF98 * state->scale);
-    edge[0] = y0;
-    edge[1] = y0;
-    edge[2] = y1;
-    edge[3] = y1;
-    edge[4] = bottom;
+    edge.half[1] = y0;
+    edge.half[2] = y0;
+    edge.half[3] = y1;
+    edge.half[4] = y1;
+    edge.half[5] = bottom;
 
     fn_801F1034();
     draw_color = lbl_8064C2A8;
@@ -137,8 +145,8 @@ void fn_80026768(EffectState* state)
     x0 = state->left + 6;
     x1 = x0 + 19;
     for (i = 0; i < 3; i++) {
-        s32 top = state->top + edge[i * 2];
-        s32 bot = state->top + edge[i * 2 + 1];
+        s32 top = state->top + edge.half[i * 2];
+        s32 bot = state->top + edge.half[i * 2 + 1];
         fn_80226AB4(0x80, 5, 4);
         fn_80026754(x0, top, texture);
         fn_80026DBC(packed[i * 2]);
@@ -155,16 +163,16 @@ void fn_80026768(EffectState* state)
         fn_80026740();
     }
 
-    fn_80225F4C(13, lbl_8023DEB0.resource, 4);
-    ((u8*)&lbl_8023DEB0.color[variant])[3] = state->alpha;
-    draw_color = lbl_8023DEB0.color[variant];
+    fn_80225F4C(13, data->resource, 4);
+    ((u8*)&data->color[variant])[3] = state->alpha;
+    draw_color = data->color[variant];
     fn_801A852C(&draw_color, 0, 9, 0x80000000);
 
     for (i = 0; i < 5; i++) {
-        ParticlePoint* point = &lbl_8023DEB0.point[variant][i];
-        s16* age = &lbl_8023DEB0.age[variant][i];
-        s16* delay = &lbl_8023DEB0.delay[variant][i];
-        s32 limit = edge[4] - state->top;
+        ParticlePoint* point = &data->point[variant][i];
+        s16* age = &data->age[variant][i];
+        s16* delay = &data->delay[variant][i];
+        s32 limit = edge.half[5] - state->top;
 
         if (*age == 1) {
             lbl_8064C6E8++;
@@ -192,15 +200,15 @@ void fn_80026768(EffectState* state)
         }
     }
 
-    fn_80225F4C(13, lbl_8023DEB0.resource, 4);
+    fn_80225F4C(13, data->resource, 4);
     if (state->mode != 0) {
         draw_color = lbl_8064DF88;
         ((u8*)&draw_color)[3] = state->alpha;
         fn_801A852C(&draw_color, 0, 0, 0x80000000);
         fn_801A8F08(state->left, state->top, state->left + 31,
                     state->top + 30, -1, 0, 5, 0, 5);
-        fn_801A8F08(state->left, state->top + edge[4], state->left + 31,
-                    state->top + edge[4] + 30, -1, 4, 5, 0, 5);
+        fn_801A8F08(state->left, state->top + edge.half[5], state->left + 31,
+                    state->top + edge.half[5] + 30, -1, 4, 5, 0, 5);
     } else {
         fn_801ED3F4(lbl_8064CD7C);
         draw_color = lbl_8064DF8C;
@@ -208,7 +216,7 @@ void fn_80026768(EffectState* state)
         fn_801A85D4(&draw_color, 14, 15, 0x80000000);
         fn_801A8F08(state->left, state->top, state->left + 31,
                     state->top + 30, -30360, 0, 5, 0, 5);
-        fn_801A8F08(state->left, state->top + edge[4], state->left + 31,
-                    state->top + edge[4] + 30, -30360, 4, 5, 0, 5);
+        fn_801A8F08(state->left, state->top + edge.half[5], state->left + 31,
+                    state->top + edge.half[5] + 30, -30360, 4, 5, 0, 5);
     }
 }
