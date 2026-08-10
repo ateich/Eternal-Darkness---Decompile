@@ -1,6 +1,8 @@
 typedef unsigned int u32;
 typedef int s32;
 
+char lbl_8023CDD8[] = "EDDestroyMainCharacterDamageField";
+
 extern s32 fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);

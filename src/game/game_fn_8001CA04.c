@@ -8,8 +8,9 @@ extern void fn_8016A830(void*, double);
 extern void fn_80163BB4(void*, const char*, ...);
 extern u32 fn_8004519C(void);
 extern s32 fn_800451E4(s32);
-extern char lbl_8023CD70[];
-extern char lbl_8023CD8C[];
+char lbl_8023CD70[] = "\nInvalid Alignment of %i\n";
+char lbl_8023CD8C[] =
+    "\nInvalid Num of Args Expecting 0 or 1, and got %i\n";
 extern double lbl_8064DE60;
 extern double lbl_8064DCF8;
 

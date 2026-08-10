@@ -4,7 +4,7 @@
   "lessons": [
     {
       "category": "register-allocation",
-      "functions": ["fn_8000F1DC", "fn_8000F774", "fn_8000FDE8", "fn_800173CC", "fn_80019F98", "fn_8001B294", "fn_80020150", "fn_80024794", "fn_80026320", "fn_80026DC8", "fn_800289A4", "fn_8002BFE0", "fn_8002DAE0", "fn_8002F428", "fn_8002FAE8", "fn_80031D24", "fn_80033180", "fn_80034708", "fn_800359A0", "fn_80036374", "fn_800365C8", "fn_80037AF4"],
+      "functions": ["fn_8000F1DC", "fn_8000F774", "fn_8000FDE8", "fn_800173CC", "fn_80020150", "fn_80024794", "fn_80026320", "fn_80026DC8", "fn_8002BFE0", "fn_8002DAE0", "fn_8002F428", "fn_8002FAE8", "fn_80031D24", "fn_80033180", "fn_80034708", "fn_800359A0", "fn_80036374", "fn_800365C8"],
       "precise_divergence": "Canonical MWCC rotates, swaps, or coalesces overlapping long-lived values across callee-saved GPRs differently from retail, even when size, control flow, and relocations otherwise agree.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
@@ -45,6 +45,48 @@
       "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8000EC94"]
     },
     {
+      "category": "register-allocation",
+      "functions": ["fn_80019F98"],
+      "precise_divergence": "The branch-disjoint script/object pointer web and fourth value-block field do not receive retail's registers or store schedule when their declarations and assignments are ordered differently.",
+      "workaround": "Preserve the documented declaration and assignment order.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80019F98"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8001B294"],
+      "precise_divergence": "Implicit unsigned-halfword normalization retains a redundant result move and prevents retail's r28-r31 allocation.",
+      "workaround": "Express the normalization as an explicit 0xFFFF mask.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8001B294"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80023258"],
+      "precise_divergence": "Source declaration order controls whether the long-lived lbl_80302400/lbl_8023D020 bases receive retail's r31/r30 assignment.",
+      "workaround": "Use the documented declaration order for the two long-lived global bases.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80023258"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80023258"],
+      "precise_divergence": "Retail retains the global +0x1C fade-subobject pointer in r29, while canonical MWCC folds those accesses into the global root and removes repeated interior-pointer materializations.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80023258"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_800289A4"],
+      "precise_divergence": "A wider node-handle lifetime prevents retail's dedicated r23 allocation and conflicts with the hit result held in r27.",
+      "workaround": "Scope the node handle to the branch that owns it.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800289A4"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80037AF4"],
+      "precise_divergence": "Distinct result variables in the final five construction cases do not recover retail's r31 allocation.",
+      "workaround": "Reuse the primary result variable in those five cases.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80037AF4"]
+    },
+    {
       "category": "instruction-scheduling",
       "functions": ["fn_80008014"],
       "precise_divergence": "GC/1.3 emits the loop-index copy in the loop body, while retail schedules the same copy in the loop latch.",
@@ -53,17 +95,31 @@
     },
     {
       "category": "instruction-scheduling",
-      "functions": ["fn_8001D1BC", "fn_800337C8"],
-      "precise_divergence": "Canonical MWCC moves initial vector-copy loads around saved-register setup or callee-saved argument moves, while retail keeps or orders the copy as a different contiguous scheduling window.",
+      "functions": ["fn_800337C8"],
+      "precise_divergence": "Canonical MWCC schedules the initial constant-vector copy differently around the six callee-saved argument moves.",
       "workaround": null,
-      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8001D1BC and fn_800337C8"]
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800337C8"]
     },
     {
       "category": "instruction-scheduling",
-      "functions": ["fn_80018CC4", "fn_80021490", "fn_8002B748", "fn_80031544", "fn_80031D24", "fn_80033180"],
+      "functions": ["fn_80018CC4", "fn_8002B748", "fn_80031544", "fn_80031D24", "fn_80033180"],
       "precise_divergence": "Equivalent stores, loads, argument setup, or temporary copies occupy a different local scheduling window from retail, sometimes shifting subsequent relocation sites despite matching behavior.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8001D1BC"],
+      "precise_divergence": "Declaring lbl_80237F38 const changes placement of its vector loads relative to saved-register setup instead of preserving retail's grouped load schedule.",
+      "workaround": "Declare lbl_80237F38 as writable Vec3.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8001D1BC"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80021490"],
+      "precise_divergence": "Ordinary rectangle reads do not preserve retail's prompt-argument scheduling.",
+      "workaround": "Use volatile rectangle reads.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80021490"]
     },
     {
       "category": "jump-table-strategy",
@@ -95,7 +151,7 @@
     },
     {
       "category": "float-constant-placement",
-      "functions": ["fn_8000FDE8", "fn_80018708", "fn_80018EF4", "fn_8001CA04", "fn_80026320", "fn_80026768", "fn_80026DC8", "fn_80031544"],
+      "functions": ["fn_8000FDE8", "fn_800173CC", "fn_80018708", "fn_80018EF4", "fn_8001B294", "fn_8001C078", "fn_8001CA04", "fn_80026320", "fn_80026768", "fn_80026DC8", "fn_8002DAE0", "fn_8002F428", "fn_80031544", "fn_80033180", "fn_800359A0"],
       "precise_divergence": "Canonical MWCC emits a signed- or unsigned-integer conversion bias as a compiler-private literal (often in sdata2), while retail relocates against an existing shared constant; code may otherwise be identical.",
       "workaround": "Externalize the conversion-bias constant to the retail symbol when its identity is known.",
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
@@ -141,6 +197,13 @@
       "precise_divergence": "Retail preserves multiple long-lived GPR or floating arguments across calls using an inline stmw/lmw prologue and epilogue selected by a translation-unit pragma.",
       "workaround": "Enable the TU-local use_lmw_stmw pragma and preserve the source-level argument lifetimes.",
       "evidence": ["docs/matching.md: Contiguous game-code continuation", "docs/matching.md: Forward game continuation"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_8001CB10", "fn_8001CB88"],
+      "precise_divergence": "An incomplete converter declaration does not record the recovered double argument passed to fn_800F5C54 and therefore does not express the retail call ABI precisely.",
+      "workaround": "Declare fn_800F5C54 with its recovered double parameter.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8001CB10 and fn_8001CB88"]
     },
     {
       "category": "inlining",

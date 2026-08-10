@@ -1,7 +1,10 @@
 typedef int s32;
 
 extern const char lbl_8023BEF8[];
-extern const char lbl_8023CA98[];
+char lbl_8023CA98[] =
+    "Invalid Alignment of %i\0"
+    "( Error: pStartVert is NULL )\0\0\0"
+    "( Error: pEndVert is NULL )";
 extern s32 fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);

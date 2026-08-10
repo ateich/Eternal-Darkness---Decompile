@@ -19,7 +19,19 @@ typedef struct {
     u8 bytes[144];
 } SpawnInfo;
 
-extern const char lbl_8023CBC8[];
+typedef struct {
+    char invalid_count[52];
+    f32 colour[3];
+    f32 origin[3];
+    char missing_marker[25];
+} MarkerDiagnostics;
+
+MarkerDiagnostics lbl_8023CBC8 = {
+    "\nInvalid Num of Markers! Expecting %i, and got %i",
+    { 0.2f, 0.2f, 0.2f },
+    { 0.0f, 0.0f, 0.0f },
+    "Could not find marker %u"
+};
 extern double lbl_8064DE68;
 extern s32 lbl_8064D1BC;
 extern s32 lbl_8064D18C;
@@ -66,7 +78,8 @@ s32 fn_80017FF8(void* script)
     handle = -1;
     count = (s32)fn_8016A694(script, 1);
     if (fn_8016A598(script) != count + 4) {
-        fn_80163BB4(script, lbl_8023CBC8, count + 4, fn_8016A598(script));
+        fn_80163BB4(script, lbl_8023CBC8.invalid_count, count + 4,
+                    fn_8016A598(script));
         fn_8016A830(script, lbl_8064DE68);
         return 1;
     }

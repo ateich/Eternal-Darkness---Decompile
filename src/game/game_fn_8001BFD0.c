@@ -23,6 +23,7 @@ s32 fn_8001BFD0(void* arg)
 {
     s32 id;
     s32 value;
+    Object* object;
 
     if (fn_8016A598(arg) != 2) {
         fn_80163BB4(arg, lbl_8023BEF8, 2, fn_8016A598(arg));
@@ -31,6 +32,7 @@ s32 fn_8001BFD0(void* arg)
 
     id = (s32)fn_8016A694(arg, 1);
     value = (s32)fn_8016A694(arg, 2);
-    *(u16*)((u8*)((Object*)fn_80201B8C(fn_80201814(id)))->inner + 0x146) = value;
+    object = fn_80201B8C(fn_80201814(id));
+    object->inner->value = value;
     return 1;
 }

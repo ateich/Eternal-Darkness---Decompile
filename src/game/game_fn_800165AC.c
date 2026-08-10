@@ -1,7 +1,7 @@
 typedef int s32;
 
 extern const char lbl_8023BEF8[];
-extern const char lbl_8023CB70[];
+char lbl_8023CB70[] = "Invalid Cinematic Number: %d";
 extern s32 fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);

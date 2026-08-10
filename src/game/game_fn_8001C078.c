@@ -28,7 +28,7 @@ extern Vec3s* fn_80158CC8(s32, s32, LookupResult*);
 extern s32 fn_800382C0(void);
 extern void fn_800CF46C(Vec3f*, LookupResult*, s32, s32, s32, u8, s32, u32);
 extern char lbl_8023BEF8[];
-extern char lbl_8023CD54[];
+char lbl_8023CD54[] = "Could not find marker %u\n";
 
 s32 fn_8001C078(void* arg)
 {

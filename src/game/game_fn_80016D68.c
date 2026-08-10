@@ -2,7 +2,8 @@ typedef int s32;
 
 #pragma use_lmw_stmw on
 
-extern const char lbl_8023CB90[];
+char lbl_8023CB90[] =
+    "\nInvalid Num of Args Expecting 1 or 2 or 3, and got %i";
 extern void* lbl_8064C4E0;
 extern void* lbl_8064C504;
 

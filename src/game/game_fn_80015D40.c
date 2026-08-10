@@ -8,7 +8,9 @@ typedef struct Vec3f {
 } Vec3f;
 
 extern const char lbl_8023BEF8[];
-extern const char lbl_8023CB2C[];
+char lbl_8023CB2C[] =
+    "\n(Error: pStartVert is NULL)\n\0\0\0"
+    " (Error: pDirectionVert is NULL)\0\0\0";
 extern s32 fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void* fn_8016A784(void*, int);

@@ -8,7 +8,7 @@ typedef struct Vec3f {
 } Vec3f;
 
 extern const char lbl_8023BEF8[];
-extern const char lbl_8023CAEC[];
+char lbl_8023CAEC[] = " (Error: pCentreVert is NULL)";
 extern const double lbl_8064DCE8;
 extern s32 fn_8016A598(void*);
 extern double fn_8016A694(void*, int);

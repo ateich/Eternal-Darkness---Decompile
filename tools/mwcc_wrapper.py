@@ -67,7 +67,17 @@ def main() -> None:
     output = output_object(args)
     if output is not None and output.name == "__init_cpp_exceptions.o":
         normalize_runtime_sections(output)
-    if output is not None and output.name == "game_fn_80037AF4.o":
+    if output is not None and output.name in (
+        "game_fn_8000EE9C.o",
+        "game_fn_8000EFC4.o",
+        "game_fn_800122F8.o",
+        "game_fn_80015568.o",
+        "game_fn_80015BE0.o",
+        "game_fn_80015D40.o",
+        "game_fn_8001C078.o",
+        "game_fn_8001CC00.o",
+        "game_fn_80037AF4.o",
+    ):
         set_section_alignment(output, b".data", 4)
         payload = output.read_bytes().replace(b".comment\0", b".ignored\0")
         output.write_bytes(payload)
