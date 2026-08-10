@@ -23,7 +23,7 @@ extern s32 fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern unsigned int fn_800F5C54();
-extern s32 fn_8015C4A4(u32, s32);
+extern int fn_8015C4A4(int, int);
 extern Vec3s* fn_80158CC8(s32, s32, LookupResult*);
 extern s32 fn_800382C0(void);
 extern void fn_800CF46C(Vec3f*, LookupResult*, s32, s32, s32, u8, s32, u32);

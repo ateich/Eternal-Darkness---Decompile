@@ -13,7 +13,7 @@ extern const double lbl_8064DCE8;
 extern unsigned int fn_800F5C54();
 extern s32 fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
-extern s16* fn_8016A784(void*, s32);
+extern void* fn_8016A784(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_801D5EE8(Vec3f*, u32, s32, s32, s32, s32, s32, s32, s32, s32,
                        s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, u32);

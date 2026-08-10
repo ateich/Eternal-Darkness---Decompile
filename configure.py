@@ -237,6 +237,14 @@ config.custom_build_rules = [
         "description": "NAME SWITCHES $in",
     },
     {
+        "name": "name_game_8000D8A4_switch",
+        "command": (
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@16=jumptable_8023C248 $in && touch $out"
+        ),
+        "description": "NAME SWITCH $in",
+    },
+    {
         "name": "globalize_game_bias",
         "command": (
             "build/binutils/powerpc-eabi-objcopy "
@@ -919,6 +927,11 @@ config.custom_build_steps = {
             "inputs": [f"build/{VERSION}/src/game/game_fn_8000D3D4.o"],
         },
         {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8000D8A4.switch_named"],
+            "rule": "name_game_8000D8A4_switch",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8000D8A4.o"],
+        },
+        {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8000E054.externalized"],
             "rule": "externalize_game_bias_6",
             "inputs": [f"build/{VERSION}/src/game/game_fn_8000E054.o"],
@@ -1310,11 +1323,7 @@ config.libs = [
             # reused 0x8/0xC slot (same MWCC temp-allocation divergence as
             # fn_8000EB14); all 10 relocation sites agree.
             Object(NonMatching, "game/game_fn_8000EBD4.c"),
-            # 97.72727%: MWCC inserts one extsh canonicalizing the s32 local
-            # for the s16 field store where retail stores the word directly;
-            # the extra instruction shifts the tail and two branch
-            # displacements by 4 bytes; all 9 relocation sites agree.
-            Object(NonMatching, "game/game_fn_8000EC94.c"),
+            Object(Matching, "game/game_fn_8000EC94.c"),
             Object(Matching, "game/game_fn_8000ED44.c"),
             Object(Matching, "game/game_fn_8000EDF0.c"),
             Object(Matching, "game/game_fn_8000EE9C.c"),

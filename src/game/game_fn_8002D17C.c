@@ -18,8 +18,8 @@ extern int fn_80201B54();
 extern void* fn_80201B8C();
 extern s32 fn_80201EB8(void*);
 extern void fn_80128754(s32, s32);
-extern void fn_8011FA8C(s32, s32, s32);
-extern void fn_802020B4(void*, s32);
+extern void fn_8011FA8C(void*, int, int);
+extern void fn_802020B4(void*, int);
 extern void fn_8020104C(s32, s32, s32, s32, float);
 extern void fn_8012C62C(s32, s32, s32*, s32*, s32*, s32);
 extern void fn_80201D2C(void*, s32);
@@ -42,7 +42,7 @@ s32 fn_8002D17C(void* callback, s32 phase, void* event)
             s32 resource = fn_80201EB8(callback);
 
             fn_80128754(object, -1);
-            fn_8011FA8C(object, 0x20000000, 0);
+            fn_8011FA8C((void*)object, 0x20000000, 0);
             fn_802020B4(callback, 0);
 
             if ((resource == 0x199 || resource == 0x60 || resource == 0xB9) &&
@@ -64,9 +64,9 @@ s32 fn_8002D17C(void* callback, s32 phase, void* event)
 
             if ((unsigned int)object != 0) {
                 if (state->mode == 6) {
-                    fn_8011FA8C(object, 0x180, 0);
+                    fn_8011FA8C((void*)object, 0x180, 0);
                 } else {
-                    fn_8011FA8C(object, 0x180, 0);
+                    fn_8011FA8C((void*)object, 0x180, 0);
                 }
             }
 

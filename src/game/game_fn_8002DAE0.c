@@ -59,7 +59,7 @@ extern s32 fn_80200C28(void*);
 extern s32 fn_80200C20(void*);
 extern void* fn_80201B8C();
 extern int fn_80201B54();
-extern void fn_802020B4(void*, s32);
+extern void fn_802020B4(void*, int);
 extern void fn_80201D2C(void*, s32);
 extern void fn_80201D14(void*, s32);
 extern unsigned long long fn_8020123C();

@@ -23,6 +23,7 @@ s32 fn_8000EC94(void* script)
     s32 index;
     s32 value;
     void* object;
+    ObjectInfo* info;
 
     if (fn_8016A598(script) != 2) {
         fn_80163BB4(script, lbl_8023BEF8, 2, fn_8016A598(script));
@@ -33,7 +34,8 @@ s32 fn_8000EC94(void* script)
     value = (s32)fn_8016A694(script, 2);
     object = fn_80201814(index);
     if (object != 0) {
-        ((ObjectInfo*)fn_80201B8C(object))->sub->value = value;
+        info = fn_80201B8C(object);
+        info->sub->value = value;
     }
     return 0;
 }

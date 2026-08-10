@@ -2,7 +2,7 @@ typedef int s32;
 
 extern void* lbl_8064C4E0;
 
-extern s32 fn_801E79FC(void*, s32);
+extern int fn_801E79FC(void*, int);
 extern void fn_801E79A0(void*, s32);
 extern s32 fn_8006BE44(void);
 extern void fn_800B9454(s32, s32);

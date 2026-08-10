@@ -44,7 +44,7 @@ extern s32 fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern unsigned int fn_800F5C54();
-extern s32 fn_8015C4A4(s32, s32);
+extern int fn_8015C4A4(int, int);
 extern EffectRecordTable* fn_8015C390(s32);
 extern void fn_8019DFA0(EffectDescriptor*);
 extern void fn_8019DFF8(void);

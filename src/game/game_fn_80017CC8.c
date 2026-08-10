@@ -6,7 +6,7 @@ extern const double lbl_8064DCE8;
 extern s32 fn_8016A598(void*);
 extern void fn_80163BB4(void*, const char*, ...);
 extern double fn_8016A694(void*, int);
-extern void* fn_8016A784(void*, s32);
+extern void* fn_8016A784(void*, int);
 extern s32 fn_80046378(s32, void*, s32);
 extern void fn_8016A830(void*, double);
 

@@ -33,7 +33,7 @@ extern void fn_801F47F8(void);
 extern void fn_800AD484(void);
 extern s32 fn_80047304(void);
 extern void fn_801F4D10(void);
-extern s32 fn_801E79FC(void*, s32);
+extern int fn_801E79FC(void*, int);
 extern void fn_8007D4D4(void);
 extern void fn_801EA9F8(void);
 extern void fn_80006B38(void);

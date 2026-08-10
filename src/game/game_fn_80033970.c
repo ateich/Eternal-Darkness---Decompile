@@ -38,7 +38,7 @@ extern void fn_80201D14(void*, s32);
 extern void fn_80201D1C(void*, s32);
 extern void fn_80201D2C(void*, s32);
 extern void fn_80201D34(void*, s32);
-extern void fn_802020B4(void*, s32);
+extern void fn_802020B4(void*, int);
 extern void* fn_80201814();
 extern BoundObject* fn_801FD6F4(void*);
 extern void fn_8011FB54(void*, s32);

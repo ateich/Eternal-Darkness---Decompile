@@ -23,7 +23,7 @@ extern s32 fn_80007D00(s32);
 extern s32 fn_80007DA0(s32);
 extern void fn_80042F7C(s32, s32);
 extern void fn_80043034(s32);
-extern s32 fn_801E79FC(void*, s32);
+extern int fn_801E79FC(void*, int);
 extern void fn_800B0414(s32, s32, s32, s32, s32);
 extern void fn_800452DC(s32);
 extern void fn_8001D9FC(s32);

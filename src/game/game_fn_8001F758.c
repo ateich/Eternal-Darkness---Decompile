@@ -41,7 +41,7 @@ extern s32 fn_800B193C(void);
 extern void fn_8001DE68(void);
 extern u32 fn_801A98F4(s32, s32);
 extern void fn_8001DE84(s32, s32);
-extern void fn_801E7974(void*, s32);
+extern void fn_801E7974(void*, int);
 extern void fn_801E79A0(void*, s32);
 extern void fn_801A9964(u32);
 extern s32 fn_800AFCD0(void*);

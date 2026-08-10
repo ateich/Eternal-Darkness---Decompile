@@ -34,8 +34,8 @@ extern s32 lbl_806518D8;
 extern s32 fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern unsigned int fn_800F5C54();
-extern s32 fn_8015C4A4(s32, s32);
-extern Vec3s* fn_80158ABC(s32, s32, s32);
+extern int fn_8015C4A4(int, int);
+extern Vec3s* fn_80158ABC(int, int, void*);
 extern s32 fn_80128258(void);
 extern s32 fn_80128130(void);
 extern s32 fn_800453AC(s32, s32, s32, s32, s32, s32, s32, s32,
@@ -45,7 +45,7 @@ extern void* fn_80201814();
 extern void* fn_80201BC8();
 extern s32 fn_801D3974(s32);
 extern void fn_8012C62C(s32, s32, s32*, s32*, s32*, s32);
-extern void fn_8011FA8C(s32, s32, s32);
+extern void fn_8011FA8C(void*, int, int);
 extern void fn_8012CBE8(s32, s32, Vec3f*, Vec3f*, Vec3f*, s32);
 extern void fn_8012F58C(s32, s32, s32, s32, s32, s32);
 extern void fn_80163BB4(void*, const char*, ...);
@@ -104,7 +104,7 @@ s32 fn_80019F98(void* script)
             values.v2 = kind;
             fn_8012C62C(object, 15, &values.v0, &values.v1,
                          &values.v2, 2);
-            fn_8011FA8C(object, 0, 0x1000000);
+            fn_8011FA8C((void*)object, 0, 0x1000000);
 
             position_copy = default_position;
             preset0 = *(Vec3f*)(strings + 0xD24);

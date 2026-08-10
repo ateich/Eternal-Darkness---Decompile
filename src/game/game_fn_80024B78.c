@@ -2,7 +2,7 @@ typedef signed int s32;
 
 extern void* lbl_8064C4E0;
 
-extern void fn_801E7974(void*, s32);
+extern void fn_801E7974(void*, int);
 
 void fn_80024B78(void)
 {

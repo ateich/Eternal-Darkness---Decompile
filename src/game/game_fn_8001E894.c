@@ -76,7 +76,7 @@ extern void fn_801AD404(s32, s32, s32);
 extern void fn_801AD490(void);
 extern void fn_801A9964(u32);
 extern void fn_801E79A0(void*, s32);
-extern void fn_801E7974(void*, s32);
+extern void fn_801E7974(void*, int);
 extern s32 fn_8012070C(void);
 extern void fn_8015E918(void*, s32, s32, s32, s32);
 extern u32 fn_801A98F4(s32, s32);

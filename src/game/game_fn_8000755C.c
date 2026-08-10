@@ -49,8 +49,8 @@ extern s32 lbl_806518C8;
 
 extern void* fn_80156DA0(s32, void*);
 extern void fn_80043F44(Request*);
-extern s32 fn_801E79FC(void*, s32);
-extern void fn_801E7974(void*, s32);
+extern int fn_801E79FC(void*, int);
+extern void fn_801E7974(void*, int);
 extern void fn_801E79A0(void*, s32);
 extern void fn_801399CC(s16);
 extern void* fn_80034708(Request*);
@@ -62,7 +62,7 @@ extern u32 fn_8011FAEC(void*);
 extern void fn_8011FADC(void*, u32);
 extern void fn_8011FE64(void*, void*);
 extern void fn_801261F4(void*);
-extern Vec3s* fn_80158ABC(s32, s32, float*);
+extern Vec3s* fn_80158ABC(int, int, void*);
 extern void fn_8011F104(void*, float, float, float);
 extern void fn_8012B7A0(void*, float);
 extern void fn_8011FB54(void*, s32);
@@ -100,7 +100,7 @@ extern void fn_8002A4C8(void);
 extern void fn_800CBAB8(void);
 extern void fn_800CBF40(void);
 
-extern void fn_8011FA8C(void*, s32, s32);
+extern void fn_8011FA8C(void*, int, int);
 extern s32 fn_8011EB04(void*);
 extern void fn_801303F0(void*, s32, s32, float, float);
 extern void fn_8013041C(void*, void*);

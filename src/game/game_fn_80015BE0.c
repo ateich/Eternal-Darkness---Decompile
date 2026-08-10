@@ -16,7 +16,7 @@ extern const char lbl_8023CB0C[];
 extern Value lbl_8064DE58;
 extern s32 fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
-extern s16* fn_8016A784(void*, s32);
+extern void* fn_8016A784(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_80152404(Vec3f*, s32, s32, s32, Value*);
 

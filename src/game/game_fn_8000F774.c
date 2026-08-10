@@ -54,7 +54,7 @@ extern s32 lbl_8064DD28;
 
 extern s32 fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
-extern Vec3s* fn_8016A784(void*, s32);
+extern void* fn_8016A784(void*, int);
 extern void fn_8016A830(void*, double);
 extern void fn_8016A7D8(void*);
 extern void fn_80163BB4(void*, const char*, ...);
@@ -85,7 +85,7 @@ extern void fn_80201D2C(void*, s32);
 extern void fn_80201D14(void*, s32);
 extern void* fn_80201C24(void*);
 extern void fn_80157B80(void*, s32);
-extern void fn_8011FA8C(void*, s32, s32);
+extern void fn_8011FA8C(void*, int, int);
 extern int fn_80201B44();
 extern void* fn_80201814();
 extern void* fn_80201C2C(void*);

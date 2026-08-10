@@ -10,7 +10,7 @@ extern void* fn_80201B8C();
 extern int fn_80201B54();
 extern s32 fn_80201B5C(void*);
 extern s32 fn_80201EB8(void*);
-extern void fn_802020B4(void*, s32);
+extern void fn_802020B4(void*, int);
 extern void* fn_80201BC0(void*);
 
 s32 fn_8000C618(void* script)
