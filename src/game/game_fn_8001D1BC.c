@@ -14,7 +14,7 @@ extern void fn_80211A90(Vec3*, Vec3*, f32);
 extern void fn_80211A48(Vec3*, Vec3*, Vec3*);
 extern void* fn_801D3A24(s32, s32);
 extern void fn_80152A88(Vec3*, Vec3*, void*, s32);
-extern const Vec3 lbl_80237F38;
+extern Vec3 lbl_80237F38;
 extern char lbl_8023BEF8[];
 
 s32 fn_8001D1BC(void* script)

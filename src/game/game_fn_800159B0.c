@@ -60,7 +60,7 @@ extern void fn_80147E88(GameState*);
 extern void fn_801498AC(GameState*, CreatedObject*);
 extern void fn_80187968(GameState*);
 extern int fn_80201B44();
-extern void fn_801E8328(s32);
+extern void fn_801E8328();
 
 s32 fn_800159B0(void* script)
 {

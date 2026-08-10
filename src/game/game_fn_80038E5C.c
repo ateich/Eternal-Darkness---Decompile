@@ -10,7 +10,7 @@ typedef struct Vec3 {
     float z;
 } Vec3;
 
-extern s32 fn_80201EB8(void*);
+extern s32 fn_80201EB8();
 extern s32 fn_80201B4C(void*);
 extern void fn_80201E78(Vec3*, void*);
 extern void* fn_80201BC8();

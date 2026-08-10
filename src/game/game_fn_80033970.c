@@ -45,7 +45,7 @@ extern void fn_8011FB54(void*, s32);
 extern void fn_80046F28(void*, s32);
 extern void fn_80046FC4(s32, s32);
 extern void fn_8012B324(void*);
-extern void fn_801E8328(s32, void*);
+extern void fn_801E8328();
 extern s32 fn_80128EAC(void*);
 extern void fn_8011F114(Vec3*, void*);
 extern float fn_8012B750(void*);

@@ -34,13 +34,13 @@ extern int fn_801A7538(); extern int fn_801A7588(); extern int fn_801A764C();
 extern int fn_801A7668(); extern int fn_801A7670(); extern int fn_801AC9F4();
 extern int fn_801CEB2C(); extern int fn_801D1B10(); extern int fn_801D38BC();
 extern int fn_801D38E8(); extern int fn_801D39E0(); extern int fn_801DD0A8();
-extern int fn_801E2B28(); extern int fn_801E8328(); extern int fn_802006D4();
+extern int fn_801E2B28(); extern void fn_801E8328(); extern int fn_802006D4();
 extern int fn_80200C10(); extern int fn_80200C38(); extern int fn_8020104C();
 extern unsigned long long fn_8020123C(); extern void* fn_80201814(); extern int fn_80201AE4();
 extern int fn_80201B44(); extern int fn_80201B54(); extern int fn_80201B5C();
 extern void* fn_80201B8C(); extern int fn_80201B9C(); extern int fn_80201BC0();
-extern void* fn_80201BC8(); extern int fn_80201D14(); extern int fn_80201D1C();
-extern int fn_80201D2C(); extern int fn_80201D34(); extern int fn_80201E78();
+extern void* fn_80201BC8(); extern void fn_80201D14(); extern void fn_80201D1C();
+extern void fn_80201D2C(); extern int fn_80201D34(); extern int fn_80201E78();
 extern int fn_80201EB8(); extern int fn_80202160(); extern int fn_80204578();
 extern int fn_80211A6C(); extern float fn_80211B08();
 

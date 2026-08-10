@@ -26,13 +26,13 @@ extern const volatile Vec3 lbl_80238D94;
 
 extern s32 lbl_8064A80C;
 extern float lbl_80650598;
-extern void* fn_80201B9C(void);
+extern void* fn_80201B9C();
 extern void* fn_80201B8C();
 extern int fn_80201B54();
 extern s32 fn_80201B64(void*);
 extern void* fn_80201BC8();
 extern s32 fn_80201B4C(void*);
-extern s32 fn_80201EB8(void*);
+extern s32 fn_80201EB8();
 extern void* fn_80201BC0(void*);
 extern void fn_8011F114(Vec3*, void*);
 extern u32 fn_80179004(Vec3*, Vec3*);

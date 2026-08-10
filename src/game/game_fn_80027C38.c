@@ -22,7 +22,7 @@ extern u32 lbl_8064C6F8;
 extern s32 lbl_8064C700;
 extern s32 lbl_8064C708;
 
-extern void* fn_80201B9C(s32);
+extern void* fn_80201B9C();
 extern void* fn_80204844(void*, s32);
 extern Manager* fn_8006D444(void*);
 extern void fn_801E5FB0(u32);

@@ -23,7 +23,7 @@ extern u32 fn_80201CCC(void*);
 extern void fn_80201D2C(void*, s32);
 extern void fn_80201D14(void*, s32);
 extern void fn_80201E50(void*, u32);
-extern void fn_801E8328(s32, void*);
+extern void fn_801E8328();
 extern void fn_80201D34(void*, s32);
 extern void fn_80201D1C(void*, s32);
 extern void fn_8011F114(Vec3*, void*);

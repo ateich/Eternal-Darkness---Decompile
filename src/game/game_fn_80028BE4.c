@@ -5,9 +5,9 @@ extern s32 lbl_8064C6FC;
 extern s32 lbl_8064D18C;
 
 extern void* fn_80201B3C(void);
-extern void* fn_80201B9C(void);
+extern void* fn_80201B9C();
 extern void* fn_80201BC0(void*);
-extern s32 fn_80201EB8(void*);
+extern s32 fn_80201EB8();
 extern s32 fn_80201B4C(void*);
 extern void* fn_80155DB4(void*);
 extern void* fn_80156930(void*);

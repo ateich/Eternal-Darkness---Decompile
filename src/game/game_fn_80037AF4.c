@@ -55,14 +55,14 @@ extern void fn_80201D3C(void*, int);
 extern void fn_80201D44(void*, int);
 extern void fn_80201D4C(void*, void*);
 extern void fn_802020B4(void*, int);
-extern void* fn_80201B9C(void);
+extern void* fn_80201B9C();
 extern int fn_80201B5C(void*);
 extern void* fn_80201B8C();
 extern void* fn_80201BC0(void*);
 extern void* fn_80201814();
 extern void* fn_80201BC8();
 extern unsigned long long fn_8020123C();
-extern void fn_801E8328(int, void*);
+extern void fn_801E8328();
 
 #define FIELD(data, offset) (*(void**)((data)->bytes + (offset)))
 

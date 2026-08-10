@@ -42,7 +42,7 @@ extern s32 fn_801AC9C0(s32);
 extern void fn_801AC980(s32, s32);
 extern void* fn_80201814();
 extern void fn_801D7F04(InnerState*, s32);
-extern void fn_801E8328(s32, void*);
+extern void fn_801E8328();
 extern void fn_80201D34(void*, s32);
 extern void fn_80201D1C(void*, s32);
 extern s32 fn_801AC908(s32, void*, s32);

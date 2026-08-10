@@ -41,8 +41,8 @@ extern s32 fn_80128130(void);
 extern s32 fn_800453AC(s32, s32, s32, s32, s32, s32, s32, s32,
                       Vec3f*, s32, s32, f32);
 extern void fn_8020104C(s32, s32, s32, s32, f32);
-extern void fn_80201814(s32);
-extern void* fn_80201BC8(void);
+extern void* fn_80201814();
+extern void* fn_80201BC8();
 extern s32 fn_801D3974(s32);
 extern void fn_8012C62C(s32, s32, s32*, s32*, s32*, s32);
 extern void fn_8011FA8C(s32, s32, s32);

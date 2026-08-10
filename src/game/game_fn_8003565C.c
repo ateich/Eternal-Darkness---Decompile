@@ -16,11 +16,11 @@ typedef struct ObjectInfo {
 extern const Vec3 lbl_80238D70;
 extern const Vec3 lbl_80238D7C;
 
-extern void* fn_80201B9C(void);
+extern void* fn_80201B9C();
 extern void* fn_80201BC0(void*);
 extern void* fn_80201B8C();
 extern void* fn_80201BC8();
-extern s32 fn_80201EB8(void*);
+extern s32 fn_80201EB8();
 extern int fn_80201B54();
 extern void fn_8011F114(Vec3*, void*);
 extern u32 fn_80178E94(const Vec3*, const Vec3*);

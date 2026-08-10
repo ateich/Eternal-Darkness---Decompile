@@ -2,7 +2,7 @@ typedef unsigned int u32;
 
 extern u32 fn_801A74C0(void*);
 extern u32 fn_80038C28(void*, void*, void*);
-extern void* fn_80201B9C(void);
+extern void* fn_80201B9C();
 extern void* fn_80201BC0(void*);
 
 u32 fn_80038DAC(register void* source, register void* target,

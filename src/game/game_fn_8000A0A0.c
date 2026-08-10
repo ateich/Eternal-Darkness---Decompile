@@ -20,7 +20,7 @@ typedef struct Entry {
 extern const char lbl_8023BEF8[];
 extern s32 lbl_8064D18C;
 extern double lbl_8064DCF8;
-extern void* fn_80201B9C(void);
+extern void* fn_80201B9C();
 extern int fn_80201B44();
 extern void* fn_80201814();
 extern void fn_80201E78(Vec*, void*);
@@ -28,7 +28,7 @@ extern s32 fn_8016A598(void*);
 extern void fn_80163BB4(void*, const char*, ...);
 extern unsigned long long fn_8020123C();
 extern void* fn_80201B8C();
-extern s32 fn_80201EB8(void*);
+extern s32 fn_80201EB8();
 extern s32 fn_80201B5C(void*);
 extern int fn_80201B54();
 extern void fn_80201B64(void*);

@@ -27,12 +27,12 @@ typedef struct State {
 extern s32 lbl_8064D18C;
 extern const float lbl_8064E1F4;
 
-extern s32 fn_80200C10(void* event);
+extern s32 fn_80200C10(void*);
 extern void* fn_80201B8C();
 extern int fn_80201B54();
-extern void fn_80201D2C(void* object, s32 action);
-extern void fn_80201D14(void* object, s32 action);
-extern void fn_801E8328(s32 action, void* object);
+extern void fn_80201D2C(void*, s32);
+extern void fn_80201D14(void*, s32);
+extern void fn_801E8328();
 extern s32 fn_80032A0C(void);
 extern void fn_801F6B6C(State* state, IVec3* position, s32 arg2, s32 arg3);
 extern s32 fn_80032924(State* state, IVec3* position);

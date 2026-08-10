@@ -8,9 +8,9 @@ extern float lbl_8064DFF4;
 extern float lbl_8064DFF8;
 
 extern void* fn_80201B3C(void);
-extern void* fn_80201B9C(void);
+extern void* fn_80201B9C();
 extern void* fn_80201BC0(void*);
-extern s32 fn_80201EB8(void*);
+extern s32 fn_80201EB8();
 extern s32 fn_80201B4C(void*);
 extern s32 fn_80201B5C(void*);
 extern void fn_80201B64(void*);
@@ -31,7 +31,6 @@ u16 fn_800289A4(s32 value, s32 flag, s32 finish)
     u16 count = 0;
     void* head;
     void* item;
-    register void* node;
     void* actor;
     s32 kind;
     s32 subtype;
@@ -47,27 +46,29 @@ u16 fn_800289A4(s32 value, s32 flag, s32 finish)
             subtype = fn_80201B5C(item);
 
             fn_80201B64(item);
-            node = fn_80201BC8(item);
-            if (kind == 1 && subtype != 0x25 && subtype != 0x40 &&
-                subtype != 0x45) {
-                saved = fn_8011F6F0();
-                if (subtype == 5) {
-                    fn_8011F778(node, lbl_8064DFF8 + saved);
-                }
-                hit = fn_801FBEF0(node, value, flag);
-                if (subtype == 5) {
-                    fn_8011F778(node, saved);
-                }
-                if (!hit) {
-                    hit = fn_801FC034(node, value, flag, lbl_8064DFF4);
-                }
-                if (hit) {
-                    actor = fn_80155DB4(item);
-                    if (actor != 0 &&
-                        fn_80156930(actor) == (void*)fn_8002AC60) {
-                        fn_80036DA4(item,
-                                   fn_80036D5C(item) | 0x04000000);
-                        count++;
+            {
+                register void* node = fn_80201BC8(item);
+                if (kind == 1 && subtype != 0x25 && subtype != 0x40 &&
+                    subtype != 0x45) {
+                    saved = fn_8011F6F0();
+                    if (subtype == 5) {
+                        fn_8011F778(node, lbl_8064DFF8 + saved);
+                    }
+                    hit = fn_801FBEF0(node, value, flag);
+                    if (subtype == 5) {
+                        fn_8011F778(node, saved);
+                    }
+                    if (!hit) {
+                        hit = fn_801FC034(node, value, flag, lbl_8064DFF4);
+                    }
+                    if (hit) {
+                        actor = fn_80155DB4(item);
+                        if (actor != 0 &&
+                            fn_80156930(actor) == (void*)fn_8002AC60) {
+                            fn_80036DA4(item,
+                                       fn_80036D5C(item) | 0x04000000);
+                            count++;
+                        }
                     }
                 }
             }

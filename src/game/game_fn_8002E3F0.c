@@ -11,14 +11,14 @@ extern float lbl_8064E064, lbl_8064E06C;
 extern const double lbl_8064E038;
 extern s32 lbl_8064D18C;
 extern s32 fn_80200C10(void*); extern void* fn_80201B8C(); extern int fn_80201B54();
-extern void fn_8020104C(s32,s32,s32,s32,float); extern void fn_80201D2C(void*,s32); extern void fn_80201D14(void*,s32);
+extern void fn_8020104C(s32,s32,s32,s32,float); extern void fn_80201D2C(void*, s32); extern void fn_80201D14(void*, s32);
 extern void* fn_801A717C(void); extern void fn_801A74A0(void*,s32); extern void fn_801A74A8(void*,s32); extern void fn_801A7538(void*,s32);
 extern void* fn_80201814(); extern int fn_80201B44(); extern s32 fn_80071DD8(void); extern s32 fn_801CEB2C(s32);
 extern s32 fn_801D38E8(s32); extern s32 fn_80035628(void*); extern s32 fn_801D1B10(s16,s32,s32,u8);
 extern void fn_801A7518(void*,s32); extern void fn_801A7588(void*,s32); extern void fn_80149A68(void*,ShortVector*,s32,s32,s32);
 extern void fn_801A764C(void*,FloatVector*); extern void fn_801A74D8(void*,s32); extern void fn_801A7668(void*,s32); extern void fn_801A7670(void*,s32);
 extern unsigned long long fn_8020123C(); extern void fn_801A7228(void*); extern void fn_802006D4(s32,s32,s32,s32,s32);
-extern void fn_801E8328(s32,void*); extern void fn_80201D34(void*,s32); extern void fn_80201D1C(void*,s32);
+extern void fn_801E8328(); extern void fn_80201D34(void*,s32); extern void fn_80201D1C(void*, s32);
 extern s32 fn_80201B5C(void*); extern void* fn_80201BC8(); extern s32 fn_80126070(void*); extern void fn_802003C0(s32,s32);
 
 s32 fn_8002E3F0(void* callback, s32 phase, void* event)

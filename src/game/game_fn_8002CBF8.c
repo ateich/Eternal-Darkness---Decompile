@@ -41,7 +41,7 @@ extern u16 fn_80158234(EventData*);
 extern u16 fn_80157994(void*);
 extern void* fn_80201814();
 extern void* fn_80201C24(void*);
-extern void fn_801E8328(s32, void*);
+extern void fn_801E8328();
 extern void fn_80201D34(void*, s32);
 extern void fn_80201D1C(void*, s32);
 
