@@ -34,18 +34,18 @@ extern s32 lbl_806518D8;
 extern s32 fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern unsigned int fn_800F5C54();
-extern int fn_8015C4A4(int, int);
-extern Vec3s* fn_80158ABC(int, int, void*);
+extern s32 fn_8015C4A4(s32, s32);
+extern Vec3s* fn_80158ABC(s32, s32, s32);
 extern s32 fn_80128258(void);
 extern s32 fn_80128130(void);
 extern s32 fn_800453AC(s32, s32, s32, s32, s32, s32, s32, s32,
                       Vec3f*, s32, s32, f32);
 extern void fn_8020104C(s32, s32, s32, s32, f32);
-extern void* fn_80201814();
-extern void* fn_80201BC8();
+extern void fn_80201814(s32);
+extern void* fn_80201BC8(void);
 extern s32 fn_801D3974(s32);
 extern void fn_8012C62C(s32, s32, s32*, s32*, s32*, s32);
-extern void fn_8011FA8C(void*, int, int);
+extern void fn_8011FA8C(s32, s32, s32);
 extern void fn_8012CBE8(s32, s32, Vec3f*, Vec3f*, Vec3f*, s32);
 extern void fn_8012F58C(s32, s32, s32, s32, s32, s32);
 extern void fn_80163BB4(void*, const char*, ...);
@@ -62,11 +62,13 @@ s32 fn_80019F98(void* script)
     Vec3f preset0;
     Vec3f position_copy;
     Values values;
-    register s32 kind;
-    register s32 handle;
-    register s32 effect;
-    register s32 object;
-    void* state = script;
+    s32 handle;
+    s32 kind;
+    s32 effect;
+    s32 object;
+    void* state;
+
+    state = script;
 
     switch (fn_8016A598(state)) {
     case 5:
@@ -96,21 +98,22 @@ s32 fn_80019F98(void* script)
             fn_8020104C(57, effect, effect, 0, value);
             fn_8020104C(156, effect, effect, 6, lbl_8064DCF0);
             fn_80201814(effect);
-            object = (s32)fn_80201BC8();
+            state = fn_80201BC8();
             kind = fn_801D3974(kind);
 
+            values.pad = kind;
+            values.v2 = kind;
             values.v0 = kind;
             values.v1 = lbl_806518D8;
-            values.v2 = kind;
-            fn_8012C62C(object, 15, &values.v0, &values.v1,
+            fn_8012C62C((s32)state, 15, &values.v0, &values.v1,
                          &values.v2, 2);
-            fn_8011FA8C((void*)object, 0, 0x1000000);
+            fn_8011FA8C((s32)state, 0, 0x1000000);
 
             position_copy = default_position;
             preset0 = *(Vec3f*)(strings + 0xD24);
             preset1 = *(Vec3f*)(strings + 0xD30);
-            fn_8012CBE8(object, 15, &preset1, &preset0, &position_copy, 1);
-            fn_8012F58C(object, 15, 1, 0,
+            fn_8012CBE8((s32)state, 15, &preset1, &preset0, &position_copy, 1);
+            fn_8012F58C((s32)state, 15, 1, 0,
                          (s32)(value - lbl_8064DE94), 0x100);
         }
     } else {

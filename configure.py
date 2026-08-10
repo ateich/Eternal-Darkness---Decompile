@@ -673,7 +673,7 @@ config.custom_build_steps = {
         },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8001B294.externalized"],
-            "rule": "externalize_game_bias_14",
+            "rule": "externalize_game_bias_15",
             "inputs": [f"build/{VERSION}/src/game/game_fn_8001B294.o"],
         },
         {
@@ -735,6 +735,11 @@ config.custom_build_steps = {
             "outputs": [f"build/{VERSION}/src/game/game_fn_80019054.externalized"],
             "rule": "externalize_game_bias_14",
             "inputs": [f"build/{VERSION}/src/game/game_fn_80019054.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80018EF4.externalized"],
+            "rule": "externalize_game_bias_13",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80018EF4.o"],
         },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_80017DB0.externalized"],
@@ -1530,7 +1535,7 @@ config.libs = [
             ),
             Object(Matching, "game/game_fn_80018ED4.c"),
             Object(
-                NonMatching,
+                Matching,
                 "game/game_fn_80018EF4.c",
                 extra_cflags=["-use_lmw_stmw on"],
             ),
@@ -1560,7 +1565,7 @@ config.libs = [
             Object(Matching, "game/game_fn_80019D2C.c"),
             Object(Matching, "game/game_fn_80019ED8.c"),
             Object(
-                NonMatching,
+                Matching,
                 "game/game_fn_80019F98.c",
                 extra_cflags=["-use_lmw_stmw on"],
             ),
@@ -1580,7 +1585,7 @@ config.libs = [
             Object(Matching, "game/game_fn_8001ADF8.c"),
             Object(Matching, "game/game_fn_8001AF68.c"),
             Object(Matching, "game/game_fn_8001B124.c"),
-            Object(NonMatching, "game/game_fn_8001B294.c"),
+            Object(Matching, "game/game_fn_8001B294.c"),
             Object(Matching, "game/game_fn_8001B3F0.c"),
             Object(
                 Matching,

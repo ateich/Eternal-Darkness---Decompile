@@ -38,6 +38,13 @@
       "evidence": ["docs/matching.md: Contiguous game-code continuation"]
     },
     {
+      "category": "register-allocation",
+      "functions": ["fn_8000EC94"],
+      "precise_divergence": "Combining the object-info lookup with the halfword assignment lets canonical MWCC shorten the converted s32 value's lifetime and emit a redundant pre-call extsh that is absent from retail.",
+      "workaround": "Separate the object-info lookup from the halfword assignment so the s32 value remains live until the direct sth.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8000EC94"]
+    },
+    {
       "category": "instruction-scheduling",
       "functions": ["fn_80008014"],
       "precise_divergence": "GC/1.3 emits the loop-index copy in the loop body, while retail schedules the same copy in the loop latch.",
