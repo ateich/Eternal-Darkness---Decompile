@@ -56,14 +56,7 @@ extern void fn_801ED5F4(s32, s32, s32, s32, s32, float);
 extern void fn_801A8D38(s32);
 extern void fn_800B2EC0(s32);
 
-#pragma section ".rodata"
-#pragma force_active on
-__declspec(section ".rodata") const RectTriplet lbl_80238B44 = {
-    {{{0x41, 0x73, 0x5F, 0x6C}, {0xBA, 0x73, 0x5F, 0x6C}}},
-    {{{0x39, 0x6A, 0x70, 0x7F}, {0xB1, 0x6A, 0x6F, 0x7F}}},
-    {{{0x47, 0x4A, 0x9F, 0x67}, {0xC2, 0x4C, 0x111, 0x65}}}
-};
-#pragma force_active reset
+extern const RectTriplet lbl_80238B44;
 
 void fn_80021490(s32 selection)
 {

@@ -31,7 +31,7 @@ extern void fn_8016A830(void*, double);
 extern unsigned int fn_800F5C54();
 extern void fn_80196578(void*);
 extern void fn_8018F81C(void*, u8);
-extern s32 fn_801D3974(s32);
+extern int fn_801D3974(s32);
 extern int fn_8015C4A4(int, int);
 extern Vec3s* fn_80158ABC(int, int, void*);
 extern void fn_80211AAC(f32*, f32*);

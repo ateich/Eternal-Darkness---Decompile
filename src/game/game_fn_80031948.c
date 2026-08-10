@@ -25,7 +25,7 @@ typedef struct EffectDescriptor {
 } EffectDescriptor;
 
 extern void fn_80181F5C(EffectDescriptor*);
-extern u32 fn_800FBFB0(void);
+extern int fn_800FBFB0(void);
 extern u16 fn_801D3A24(s32, s32);
 extern void fn_80182014(void);
 extern void fn_80147EC4(EffectDescriptor*);

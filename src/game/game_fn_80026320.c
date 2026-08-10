@@ -93,28 +93,28 @@ void fn_80026320(BatchEntry* batch)
                 points.points[1].x /= lbl_8064DF74;
                 points.points[2].x /= lbl_8064DF74;
                 points.points[3].x /= lbl_8064DF74;
-
-                points.points[0].x = lbl_8064DF78 * (points.points[0].x + center_x);
-                points.points[1].x = lbl_8064DF78 * (points.points[1].x + center_x);
-                points.points[2].x = lbl_8064DF78 * (points.points[2].x + center_x);
-                points.points[3].x = lbl_8064DF78 * (points.points[3].x + center_x);
-                points.points[0].y = lbl_8064DF78 * (points.points[0].y + center_y);
-                points.points[1].y = lbl_8064DF78 * (points.points[1].y + center_y);
-                points.points[2].y = lbl_8064DF78 * (points.points[2].y + center_y);
-                points.points[3].y = lbl_8064DF78 * (points.points[3].y + center_y);
-
-                fn_801ECF50(8);
-                fn_80226AB4(0x80, 2, 4);
-                fn_80026754((s32)points.points[0].x, (s32)points.points[0].y, -0x20);
-                fn_80026744(lbl_8064DF58, lbl_8064DF58);
-                fn_80026754((s32)points.points[1].x, (s32)points.points[1].y, -0x20);
-                fn_80026744(lbl_8064DF64, lbl_8064DF58);
-                fn_80026754((s32)points.points[2].x, (s32)points.points[2].y, -0x20);
-                fn_80026744(lbl_8064DF64, lbl_8064DF64);
-                fn_80026754((s32)points.points[3].x, (s32)points.points[3].y, -0x20);
-                fn_80026744(lbl_8064DF58, lbl_8064DF64);
-                fn_80026740();
             }
+
+            points.points[0].x = lbl_8064DF78 * (points.points[0].x + center_x);
+            points.points[1].x = lbl_8064DF78 * (points.points[1].x + center_x);
+            points.points[2].x = lbl_8064DF78 * (points.points[2].x + center_x);
+            points.points[3].x = lbl_8064DF78 * (points.points[3].x + center_x);
+            points.points[0].y = lbl_8064DF78 * (points.points[0].y + center_y);
+            points.points[1].y = lbl_8064DF78 * (points.points[1].y + center_y);
+            points.points[2].y = lbl_8064DF78 * (points.points[2].y + center_y);
+            points.points[3].y = lbl_8064DF78 * (points.points[3].y + center_y);
+
+            fn_801ECF50(8);
+            fn_80226AB4(0x80, 2, 4);
+            fn_80026754((s32)points.points[0].x, (s32)points.points[0].y, -0x20);
+            fn_80026744(lbl_8064DF58, lbl_8064DF58);
+            fn_80026754((s32)points.points[1].x, (s32)points.points[1].y, -0x20);
+            fn_80026744(lbl_8064DF64, lbl_8064DF58);
+            fn_80026754((s32)points.points[2].x, (s32)points.points[2].y, -0x20);
+            fn_80026744(lbl_8064DF64, lbl_8064DF64);
+            fn_80026754((s32)points.points[3].x, (s32)points.points[3].y, -0x20);
+            fn_80026744(lbl_8064DF58, lbl_8064DF64);
+            fn_80026740();
         }
     }
 }

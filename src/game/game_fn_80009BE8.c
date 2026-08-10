@@ -9,7 +9,7 @@ extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void* fn_80201814();
 extern void* fn_80201BC8();
-extern u32 fn_80036D5C(void*);
+extern unsigned int fn_80036D5C(void*);
 extern void fn_80036DA4(void*, u32);
 extern void fn_801261F4(void*);
 extern void fn_80120AD0(void*, s32, s32, s32, float, float);

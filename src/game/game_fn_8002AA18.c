@@ -2,11 +2,11 @@ typedef int s32;
 typedef unsigned char u8;
 
 extern void* fn_80156938(void*);
-extern void* fn_80201EB8();
+extern int fn_80201EB8();
 extern void* fn_80201BC8();
 extern s32 fn_8002A858(void*, void*, void*);
 extern void* fn_80156928(void*);
-extern s32 fn_80201B4C(void*);
+extern int fn_80201B4C(void*);
 extern void* fn_8015C910(void);
 extern u8 fn_80202160(void*);
 extern void fn_802015D4(void*);
@@ -16,7 +16,7 @@ extern u8 lbl_8064C714;
 s32 fn_8002AA18(void* callback, void* unused, s32 run)
 {
     void* source = fn_80156938(callback);
-    void* state = fn_80201EB8();
+    void* state = (void*)fn_80201EB8();
     void* object;
 
     if (source != 0) {

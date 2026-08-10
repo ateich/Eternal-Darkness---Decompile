@@ -33,7 +33,7 @@ extern void* fn_80201C24(void*);
 extern void fn_80204E0C(void*, void*);
 extern s32 fn_801579F4(void*);
 extern void fn_80201B3C(void);
-extern void* fn_80201EB8();
+extern int fn_80201EB8();
 extern void fn_8011FB54(void*, void*);
 extern void fn_8011FA8C(void*, int, int);
 extern void fn_8011FABC(void*, s32, s32);
@@ -85,7 +85,7 @@ void fn_80027948(void* object, s32 message, void* target, void* target_object,
     }
 
     fn_80201B3C();
-    fn_8011FB54(target_data, fn_80201EB8());
+    fn_8011FB54(target_data, (void*)fn_80201EB8());
     fn_8011FA8C(target_data, 0x10100, 0);
     fn_8011FABC(target_data, 0, 0x40);
     if (count > 0) {

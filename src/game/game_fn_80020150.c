@@ -43,7 +43,7 @@ extern float lbl_8064DEDC;
 extern s32 fn_801A8C60(s32, s32, void*, void*);
 extern void fn_80144C4C(void*);
 extern void fn_80025A78(s32);
-extern void fn_8001DE84(s32, s32);
+extern void fn_8001DE84(int, int);
 extern void fn_8001DFEC(s32, s32);
 extern void fn_8001DA18(void);
 extern void fn_8001DA7C(void);

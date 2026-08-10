@@ -3,7 +3,7 @@ typedef int s32;
 #pragma use_lmw_stmw on
 
 extern void* fn_80156938(void*);
-extern void* fn_80201EB8();
+extern int fn_80201EB8();
 extern void* fn_80201BC8();
 extern s32 fn_8015C628(void*);
 extern void* fn_8011F950(void*);
@@ -17,7 +17,7 @@ extern void fn_80126880(void*);
 s32 fn_8002AB84(void* callback, void* unused, s32 run)
 {
     void* source = fn_80156938(callback);
-    void* state = fn_80201EB8();
+    void* state = (void*)fn_80201EB8();
     void* object = source != 0 ? fn_80201BC8(source) : 0;
 
     if (run != 0) {

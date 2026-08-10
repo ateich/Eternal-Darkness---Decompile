@@ -50,7 +50,7 @@ extern u32 lbl_8064C248;
 extern void* memset(void*, int, u32);
 extern void fn_8001D56C(void);
 extern void fn_8001DE68(void);
-extern void fn_8001DE84(u32, u32);
+extern void fn_8001DE84(int, int);
 extern u32 fn_80024638(void*, void*, u32*);
 extern void fn_80023B40(void);
 extern void fn_80042E3C(void);

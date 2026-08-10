@@ -22,7 +22,7 @@ extern void* fn_80201814();
 extern void* fn_80201B8C();
 extern void fn_80201ADC(Object*);
 extern void fn_800CAC5C(s32, s32, s32*, s32*, s32*);
-extern u32 fn_80036D5C(void*);
+extern unsigned int fn_80036D5C(void*);
 extern void fn_80036DA4(void*, u32);
 
 s32 fn_8000F1DC(void* script)

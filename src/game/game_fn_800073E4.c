@@ -9,7 +9,7 @@ extern int lbl_8064C5C4;
 extern void* fn_80156938(void*, int);
 extern void* fn_80201BC8();
 extern int fn_801FA44C(void);
-extern void* fn_80201EB8();
+extern int fn_80201EB8();
 extern u32 fn_8011FAEC(void*);
 extern int fn_8002A858(void*, void*, void*);
 extern void fn_801568C0(void*, int);
@@ -39,7 +39,7 @@ int fn_800073E4(void* object, int value, int apply)
     }
 
     state = fn_801FA44C();
-    child = fn_80201EB8(item);
+    child = (void*)fn_80201EB8(item);
     flags = fn_8011FAEC(context);
 
     if (apply != 0) {

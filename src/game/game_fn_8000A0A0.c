@@ -28,7 +28,7 @@ extern s32 fn_8016A598(void*);
 extern void fn_80163BB4(void*, const char*, ...);
 extern unsigned long long fn_8020123C();
 extern void* fn_80201B8C();
-extern s32 fn_80201EB8();
+extern int fn_80201EB8();
 extern s32 fn_80201B5C(void*);
 extern int fn_80201B54();
 extern void fn_80201B64(void*);

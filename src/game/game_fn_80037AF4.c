@@ -80,17 +80,16 @@ extern void fn_801E8328();
 #define CREATE_LATE(template, mode, kind, pool, offset) \
     do { \
         ObjectData* data = fn_8017CDB4(lbl_8064C74C); \
-        late_result = fn_802016CC(template); \
-        fn_80201D3C(late_result, mode); \
-        fn_80201D44(late_result, kind); \
+        result = fn_802016CC(template); \
+        fn_80201D3C(result, mode); \
+        fn_80201D44(result, kind); \
         FIELD(data, offset) = fn_8017CDB4(pool); \
-        fn_80201D4C(late_result, data); \
-        return late_result; \
+        fn_80201D4C(result, data); \
+        return result; \
     } while (0)
 
 void* fn_80037AF4(int type)
 {
-    register void* late_result;
     register void* result;
 
     switch (type) {
@@ -218,10 +217,10 @@ void* fn_80037AF4(int type)
     case 80:
         CREATE_LATE(&lbl_8064B3CC, 2, 80, lbl_8064C730, 0x78);
     case 62: {
-        late_result = fn_802016CC(&lbl_8064B478);
-        fn_80201D3C(late_result, 4);
-        fn_80201D44(late_result, 62);
-        return late_result;
+        result = fn_802016CC(&lbl_8064B478);
+        fn_80201D3C(result, 4);
+        fn_80201D44(result, 62);
+        return result;
     }
     case 88:
         CREATE_LATE(&lbl_8064B47C, 2, 88, lbl_8064C720, 0x88);

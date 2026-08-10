@@ -106,7 +106,7 @@ extern void fn_801303F0(void*, s32, s32, float, float);
 extern void fn_8013041C(void*, void*);
 extern void fn_800C23D8(void);
 extern void fn_801387E4(void);
-extern void* fn_801D3974(s32);
+extern int fn_801D3974(s32);
 extern void fn_8011FF0C(void**);
 extern void fn_8011FF18(s32);
 extern void* fn_801E86A0(void*, s32);
@@ -473,7 +473,7 @@ void fn_80007EC0(s32 arg0, s32 arg1, u32 flags)
 
     fn_801387E4();
     fn_80007F64(lbl_803003C8.mode);
-    handle = fn_801D3974(3);
+    handle = (void*)fn_801D3974(3);
     fn_8011FF0C(&handle);
     fn_8011FF18(0x96);
     fn_8011FF04(fn_801E86A0(lbl_8064C528, 0x68));

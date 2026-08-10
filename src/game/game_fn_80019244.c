@@ -33,7 +33,7 @@ extern unsigned int fn_800F5C54();
 extern int fn_8015C4A4(int, int);
 extern Vec3s* fn_80158ABC(int, int, void*);
 extern void fn_8019FF5C(void*);
-extern s32 fn_800FBFB0(void);
+extern int fn_800FBFB0(void);
 extern void fn_801A0008(void);
 extern void fn_80148008(Vec3f*, const Vec3s*, void*, void (*)(void));
 extern void* memset(void*, s32, unsigned long);

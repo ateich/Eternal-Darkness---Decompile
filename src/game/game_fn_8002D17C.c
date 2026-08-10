@@ -16,7 +16,7 @@ extern s32 fn_80200C10(void*);
 extern void* fn_80201BC8();
 extern int fn_80201B54();
 extern void* fn_80201B8C();
-extern s32 fn_80201EB8();
+extern int fn_80201EB8();
 extern void fn_80128754(s32, s32);
 extern void fn_8011FA8C(void*, int, int);
 extern void fn_802020B4(void*, int);

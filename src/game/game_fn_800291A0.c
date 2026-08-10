@@ -13,7 +13,7 @@ typedef struct TypeInfo {
 } TypeInfo;
 
 extern void* fn_80201BC8();
-extern void* fn_80201B4C(void*);
+extern int fn_80201B4C(void*);
 extern void fn_80202054(void*, s32);
 extern void* fn_8011F950(void);
 extern void* fn_8011EB04(void*);
@@ -44,7 +44,7 @@ void fn_800291A0(void* source)
     object = fn_80201BC8();
 
     if (fn_8011F950() == 0) {
-        value = fn_80201B4C(source);
+        value = (void*)fn_80201B4C(source);
         node = fn_8002A444(fn_8011EB04(object), value);
 
         fn_80202054(source, 1);
