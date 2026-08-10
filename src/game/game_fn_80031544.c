@@ -40,7 +40,7 @@ extern void fn_8014CBC0(void*);
 extern void fn_80149CC4(void*, Vec3*, s32, s32, s32);
 extern s32 fn_80035628(void*);
 extern s32 fn_801D39E0(s32);
-extern s32 fn_80201B54(void*);
+extern int fn_80201B54();
 extern void fn_801E8328(s32, void*);
 extern void fn_801FDA7C(void);
 extern void fn_8014CA98(void);

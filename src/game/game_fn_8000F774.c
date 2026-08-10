@@ -53,14 +53,14 @@ extern s32 lbl_8064DD24;
 extern s32 lbl_8064DD28;
 
 extern s32 fn_8016A598(void*);
-extern double fn_8016A694(void*, s32);
+extern double fn_8016A694(void*, int);
 extern Vec3s* fn_8016A784(void*, s32);
 extern void fn_8016A830(void*, double);
 extern void fn_8016A7D8(void*);
-extern void fn_80163BB4(void*, const char*, s32, s32, ...);
+extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_80043F44(Request*);
 extern void* fn_80034708(Request*);
-extern void* fn_80201BC8(void*);
+extern void* fn_80201BC8();
 extern s32 fn_80036E14(void*);
 extern u32 fn_8011F950(void*);
 extern void fn_8012B7A0(void*, float);
@@ -86,11 +86,11 @@ extern void fn_80201D14(void*, s32);
 extern void* fn_80201C24(void*);
 extern void fn_80157B80(void*, s32);
 extern void fn_8011FA8C(void*, s32, s32);
-extern void* fn_80201B44(void);
-extern void* fn_80201814(void*);
+extern int fn_80201B44();
+extern void* fn_80201814();
 extern void* fn_80201C2C(void*);
 extern void* fn_80204C2C(void*);
-extern s32 fn_80201B54(void*);
+extern int fn_80201B54();
 extern void* fn_80158598(void*, s32);
 extern s32 fn_80158264(void*, void*, s32);
 extern void fn_80157E34(void*, s32, void*, void*, s32);
@@ -268,7 +268,7 @@ s32 fn_8000F774(void* script)
         }
         fn_80204CE4(view, found);
         array = fn_80201C24(view);
-        found = fn_80158598(fn_80201B44(), 0);
+        found = fn_80158598((void*)fn_80201B44(), 0);
         if (found != 0) {
             index = fn_80158264(found, array, 1);
             array = *(ItemArray**)array;

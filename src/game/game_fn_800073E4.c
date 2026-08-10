@@ -7,7 +7,7 @@ extern int lbl_8064C5C8;
 extern int lbl_8064C5C4;
 
 extern void* fn_80156938(void*, int);
-extern void* fn_80201BC8(void*);
+extern void* fn_80201BC8();
 extern int fn_801FA44C(void);
 extern void* fn_80201EB8(void*);
 extern u32 fn_8011FAEC(void*);
@@ -17,7 +17,7 @@ extern void fn_801568B8(void*, int);
 extern void fn_8011F7E0(void*, int);
 extern void fn_80126880(void*);
 extern int fn_80156928(void*);
-extern int fn_80201B44(void);
+extern int fn_80201B44();
 extern int fn_80201AE4(void);
 extern void* fn_8015C910(void);
 extern u8 fn_80202160(void*);

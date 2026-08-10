@@ -5,7 +5,7 @@ typedef struct Command {
 } Command;
 
 extern double fn_8016A694(void*, int);
-extern u32 fn_800F5C54(double);
+extern unsigned int fn_800F5C54();
 extern Command lbl_803023E0;
 
 void fn_8001C500(void* arg)

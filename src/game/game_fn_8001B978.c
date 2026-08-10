@@ -9,8 +9,8 @@ typedef struct Color {
 } Color;
 
 extern s32 fn_8016A598(void*);
-extern float fn_8016A694(void*, s32);
-extern void fn_80163BB4(void*, const char*, s32, ...);
+extern double fn_8016A694(void*, int);
+extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_801ECBBC(Color*);
 extern char lbl_8023BEF8[];
 

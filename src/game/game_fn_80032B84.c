@@ -16,7 +16,7 @@ typedef struct Records {
     Record records[1];
 } Records;
 
-extern u8* fn_80201B8C(void* object);
+extern void* fn_80201B8C();
 extern const double lbl_8064E038;
 
 void fn_80032B84(void* object, s32 index, s32 mode, float value)

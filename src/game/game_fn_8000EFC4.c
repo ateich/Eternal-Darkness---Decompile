@@ -26,17 +26,17 @@ extern const char lbl_8023BEF8[];
 extern s32 lbl_8064D18C;
 extern void* fn_80201B9C(void);
 extern s32 fn_8016A598(void*);
-extern void fn_80163BB4(void*, const char*, s32, s32, ...);
+extern void fn_80163BB4(void*, const char*, ...);
 extern Vec3s* fn_8016A784(void*, s32);
-extern double fn_8016A694(void*, s32);
-extern u32 fn_800F5C54(double);
+extern double fn_8016A694(void*, int);
+extern unsigned int fn_800F5C54();
 extern s32 fn_80201EB8(void*);
-extern Object* fn_80201B8C(void*);
-extern void* fn_80201BC8(void*);
+extern void* fn_80201B8C();
+extern void* fn_80201BC8();
 extern void fn_80201E78(Vec3f*, void*);
 extern u32 fn_80178F14(s32, s32, s32, s32, s32, s32);
 extern void* fn_80201BC0(void*);
-extern s32 fn_80201B54(void*);
+extern int fn_80201B54();
 extern void fn_8016A830(void*, double);
 
 s32 fn_8000EFC4(void* script)

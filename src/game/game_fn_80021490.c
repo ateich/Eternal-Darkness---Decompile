@@ -78,8 +78,8 @@ void fn_80021490(s32 selection)
     u32 second_color;
     s32 i;
 
-    draw_color = lbl_8064C2A8;
     rectangles = &lbl_80238978.rectangles;
+    draw_color = lbl_8064C2A8;
     first = rectangles->first;
     third = rectangles->third;
     second = rectangles->second;
@@ -109,22 +109,38 @@ void fn_80021490(s32 selection)
         if (lbl_8030241C.menu_state == 0xFF && fn_800B7EC0() == i) {
             switch (fn_800B194C()) {
             case 1: {
-                u32 prompt_color;
+                volatile u32 prompt_color;
+                u32 prompt_color_value;
+                volatile Rect* prompt_rect;
+                s16 prompt_left;
+                s16 prompt_top;
+                s16 prompt_right;
+                s16 prompt_bottom;
                 fn_801ED5F4(1, 0x502, 1, 0, 0, lbl_8064DEE0);
-                prompt_color = lbl_8064C2C4;
-                fn_801A872C(third.value[i].left, third.value[i].top,
-                            third.value[i].right, third.value[i].bottom,
-                            -1, 6, &prompt_color);
+                prompt_color_value = lbl_8064C2C4;
+                prompt_rect = &third.value[i];
+                prompt_left = prompt_rect->left;
+                prompt_top = prompt_rect->top;
+                prompt_right = prompt_rect->right;
+                prompt_bottom = prompt_rect->bottom;
+                prompt_color = prompt_color_value;
+                fn_801A872C(prompt_left, prompt_top, prompt_right,
+                            prompt_bottom, -1, 6, (u32*)&prompt_color);
                 fn_801ED5F4(0, 2, 1, 0, 0, lbl_8064DEC0);
                 fn_801A8D38(5);
                 break;
             }
             default: {
-                u32 prompt_color;
-                prompt_color = lbl_8064C2C4;
-                fn_801A872C(third.value[i].left, third.value[i].top,
-                            third.value[i].right, third.value[i].bottom,
-                            -1, 6, &prompt_color);
+                volatile u32 prompt_color;
+                u32 prompt_color_value = lbl_8064C2C4;
+                volatile Rect* prompt_rect = &third.value[i];
+                s16 prompt_left = prompt_rect->left;
+                s16 prompt_top = prompt_rect->top;
+                s16 prompt_right = prompt_rect->right;
+                s16 prompt_bottom = prompt_rect->bottom;
+                prompt_color = prompt_color_value;
+                fn_801A872C(prompt_left, prompt_top, prompt_right,
+                            prompt_bottom, -1, 6, (u32*)&prompt_color);
                 break;
             }
             }

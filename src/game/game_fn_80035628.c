@@ -5,7 +5,7 @@ typedef struct ObjectInfo {
     s32 value94;
 } ObjectInfo;
 
-extern ObjectInfo* fn_80201B8C(void*);
+extern void* fn_80201B8C();
 
 s32 fn_80035628(void* object)
 {

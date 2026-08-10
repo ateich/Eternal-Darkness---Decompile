@@ -1,6 +1,6 @@
 typedef int s32;
 
-extern double fn_8016A694(void*, s32);
+extern double fn_8016A694(void*, int);
 extern void fn_8011E19C(s32, s32);
 
 s32 fn_8000BEF4(void* script)

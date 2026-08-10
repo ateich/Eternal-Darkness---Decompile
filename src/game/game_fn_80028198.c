@@ -46,11 +46,11 @@ extern void fn_80027730(void*, s32, s32);
 extern void fn_801FA354(void);
 extern void fn_80028B44(void);
 extern void fn_8016B400(s32, s32, s32);
-extern void* fn_80201814(s32);
+extern void* fn_80201814();
 extern s32 fn_80201C24(void);
 extern s32 fn_80157BC4(void);
 extern s32 fn_80157BF4(s32);
-extern void* fn_80201B44(void);
+extern int fn_80201B44();
 extern void fn_80205680(void*, void*, s32);
 extern s32 fn_8015821C(s32);
 extern s32 fn_801E79FC(void*, s32);
@@ -193,13 +193,13 @@ void fn_80028198(void)
             void* target = fn_80201814(entry->value1C);
             void* actor;
             if (target != 0) {
-                fn_80205680(target, fn_80201B44(), 0x1E);
+                fn_80205680(target, (void*)fn_80201B44(), 0x1E);
             }
             if (fn_8015821C(scene) == 0x1F &&
                 !fn_801E79FC(lbl_8064C4E0, 0x10A)) {
                 fn_801B05E8(0xC, 0x64, 6, 1, 0, 5, 0, 0);
             }
-            actor = fn_80201B44();
+            actor = (void*)fn_80201B44();
             fn_801E6CA0(lbl_8064C504, value2, value1, 0, 1);
             fn_80027948(actor, -2, object, entry->value1C,
                         0, 0, 0, 0);

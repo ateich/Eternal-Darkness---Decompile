@@ -20,14 +20,14 @@ typedef struct {
 extern const char lbl_8023BEF8[];
 extern const double lbl_8064DCE8;
 extern s32 fn_8016A598(void*);
-extern double fn_8016A694(void*, s32);
+extern double fn_8016A694(void*, int);
 extern void fn_8016A830(void*, double);
-extern void fn_80163BB4(void*, const char*, s32, s32, ...);
+extern void fn_80163BB4(void*, const char*, ...);
 extern void* fn_80201B9C(void);
 extern void* fn_80204844(void*, s32);
-extern s32 fn_80201B54(void*);
-extern CommandOwner* fn_80201B8C(void*);
-extern u64 fn_8020123C(s32, s32, s32, s32*);
+extern int fn_80201B54();
+extern void* fn_80201B8C();
+extern unsigned long long fn_8020123C();
 
 s32 fn_80019C10(void* script)
 {
@@ -46,7 +46,7 @@ s32 fn_80019C10(void* script)
     object = fn_80204844(fn_80201B9C(), 0x20);
     if (object != 0) {
         s32 id = fn_80201B54(object);
-        CommandState* state = fn_80201B8C(object)->state;
+        CommandState* state = ((CommandOwner*)fn_80201B8C(object))->state;
         u32 message_result;
         state->argument->value = value;
         message_result = fn_8020123C(0x53, 0, id, &state->argument->value) &

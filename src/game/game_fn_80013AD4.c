@@ -3,9 +3,9 @@ typedef unsigned int u32;
 
 extern const char lbl_8023BEF8[];
 extern s32 fn_8016A598(void*);
-extern double fn_8016A694(void*, s32);
-extern void fn_80163BB4(void*, const char*, s32, s32, ...);
-extern u32 fn_800F5C54(double);
+extern double fn_8016A694(void*, int);
+extern void fn_80163BB4(void*, const char*, ...);
+extern unsigned int fn_800F5C54();
 extern void fn_801D0050(s32, u32*);
 
 s32 fn_80013AD4(void* script)

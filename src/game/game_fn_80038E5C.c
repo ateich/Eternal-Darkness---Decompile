@@ -13,15 +13,15 @@ typedef struct Vec3 {
 extern s32 fn_80201EB8(void*);
 extern s32 fn_80201B4C(void*);
 extern void fn_80201E78(Vec3*, void*);
-extern void fn_80201BC8(void*, u32, u32);
+extern void* fn_80201BC8();
 extern s32 fn_80179064(s32, s32, s32, s32);
 extern u8 fn_80204578(void*, Vec3*);
 extern u8 fn_80204508(void*, void*);
 extern u16 fn_801A7434(void*);
 extern void fn_801A7588(void*, u32);
-extern u32 fn_80201B54(void*);
+extern int fn_80201B54();
 extern void fn_801A74A8(void*, u32);
-extern u64 fn_8020123C(s32, u32, u32, void*);
+extern unsigned long long fn_8020123C();
 
 u32 fn_80038E5C(void* source, void* target, void* effect, float* point)
 {

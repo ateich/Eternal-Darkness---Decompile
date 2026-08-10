@@ -5,9 +5,9 @@ typedef struct ObjectInfo {
     void* resources;
 } ObjectInfo;
 
-extern ObjectInfo* fn_80201B8C(void*);
+extern void* fn_80201B8C();
 
 void* fn_80036D38(void* object)
 {
-    return fn_80201B8C(object)->resources;
+    return ((ObjectInfo*)fn_80201B8C(object))->resources;
 }

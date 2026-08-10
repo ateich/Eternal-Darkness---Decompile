@@ -6,8 +6,8 @@ extern void fn_80163BB4(void*, const char*, ...);
 extern void* fn_80158598(s32, s32);
 extern void fn_80158668(void*);
 extern void fn_801E8328(s32, void*);
-extern void* fn_80201814(s32);
-extern s32 fn_80201B44(void);
+extern void* fn_80201814();
+extern int fn_80201B44();
 
 s32 fn_8000EDF0(void* script)
 {

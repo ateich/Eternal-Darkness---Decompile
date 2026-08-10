@@ -14,7 +14,7 @@ extern s32 lbl_8064CDC8;
 extern s32 lbl_8064C5A4;
 extern const char lbl_8023CA4C[];
 extern s32 fn_8016A598(void*);
-extern double fn_8016A694(void*, s32);
+extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 
 s32 fn_8001243C(void* script)

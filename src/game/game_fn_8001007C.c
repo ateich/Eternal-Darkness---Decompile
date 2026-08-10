@@ -41,7 +41,7 @@ extern const double lbl_8064DE40;
 extern const double lbl_8064DE48;
 extern const double lbl_8064DE50;
 
-extern double fn_8016A694(void*, s32);
+extern double fn_8016A694(void*, int);
 extern void fn_8016A5B0(void*, s32);
 extern void fn_8016A830(void*, double);
 extern void fn_8016AA34(void*, const char*);

@@ -12,7 +12,7 @@ extern const char lbl_8023CB0C[];
 extern float lbl_8064DE5C;
 extern s32 fn_8016A598(void*);
 extern s16* fn_8016A784(void*, s32);
-extern void fn_80163BB4(void*, const char*, s32, ...);
+extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_80152838(Vec3f*, Vec3f*, s32);
 
 s32 fn_80016128(void* script)

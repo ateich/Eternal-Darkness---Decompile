@@ -14,7 +14,7 @@ extern s32 fn_80201EB8(void*);
 extern s32 fn_80201B4C(void*);
 extern s32 fn_80201B5C(void*);
 extern void fn_80201B64(void*);
-extern void* fn_80201BC8(void*);
+extern void* fn_80201BC8();
 extern float fn_8011F6F0(void);
 extern void fn_8011F778(void*, float);
 extern s32 fn_801FBEF0(void*, s32, s32);

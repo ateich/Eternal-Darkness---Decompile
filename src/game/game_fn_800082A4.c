@@ -20,7 +20,7 @@ extern void fn_8022A814(s32, s32);
 extern void fn_8011E174(s32, s32);
 extern void fn_8011DFA8(void);
 extern void fn_8016B400(s32, s32, s32);
-extern void fn_80201B44(void);
+extern int fn_80201B44();
 extern void fn_801D0D30(void);
 extern void* memcpy(void*, const void*, u32);
 extern void fn_800FBFA8(s32);
@@ -28,7 +28,7 @@ extern void fn_80144EE0(void*, u32);
 extern void fn_80144E78(void*, u32);
 extern void fn_801EBA58(void*);
 extern s32 fn_801E79FC(void*, s32);
-extern void* fn_80201814(void);
+extern void* fn_80201814();
 extern void fn_80201F80(void*, s32, s32);
 
 static inline u32 max_u32(u32 a, u32 b)

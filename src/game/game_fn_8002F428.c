@@ -29,12 +29,12 @@ extern const float lbl_8064E138;
 extern s32 lbl_8064D18C;
 
 extern void* fn_80156938(void*);
-extern Callback* fn_80201B8C(void*);
+extern void* fn_80201B8C();
 extern s32 fn_80201B5C(void*);
-extern s32 fn_80201B54(void*);
-extern void fn_8020123C(s32, s32, s32, s32);
-extern void* fn_80201814(s32);
-extern void* fn_80201BC8(void*);
+extern int fn_80201B54();
+extern unsigned long long fn_8020123C();
+extern void* fn_80201814();
+extern void* fn_80201BC8();
 extern void fn_80121104(float);
 extern s32 fn_8011FB4C(void*);
 extern s32 fn_80201AE4(void);

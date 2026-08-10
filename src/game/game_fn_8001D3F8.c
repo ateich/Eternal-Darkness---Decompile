@@ -3,10 +3,10 @@ typedef unsigned int u32;
 typedef unsigned long long u64;
 
 extern s32 fn_8016A598(void*);
-extern double fn_8016A694(void*, s32);
-extern void fn_80163BB4(void*, const char*, s32, ...);
-extern void* fn_80201814(s32);
-extern u64 fn_8020123C(s32, s32, s32, s32);
+extern double fn_8016A694(void*, int);
+extern void fn_80163BB4(void*, const char*, ...);
+extern void* fn_80201814();
+extern unsigned long long fn_8020123C();
 extern void fn_8016A830(void*, double);
 extern void fn_8016A7D8(void*);
 extern const double lbl_8064DCF8;

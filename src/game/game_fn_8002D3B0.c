@@ -19,11 +19,11 @@ typedef struct ObjectState {
 extern void* lbl_8064C4E0;
 
 extern s32 fn_80200C10(void*);
-extern CallbackState* fn_80201B8C(void*);
-extern s32 fn_80201B54(void*);
+extern void* fn_80201B8C();
+extern int fn_80201B54();
 extern void fn_80201D2C(void*, s32);
 extern void fn_80201D14(void*, s32);
-extern void* fn_80201814(s32);
+extern void* fn_80201814();
 extern ObjectState* fn_80036D38(void*);
 extern void fn_801EF38C(s32);
 extern void fn_801E8328(s32, void*);
@@ -35,7 +35,7 @@ extern void fn_800CE524(void*);
 s32 fn_8002D3B0(void* callback, s32 phase, void* event)
 {
     s32 event_id = fn_80200C10(event);
-    InnerState* state = (InnerState*)fn_80201B8C(callback)->inner;
+    InnerState* state = (InnerState*)((CallbackState*)fn_80201B8C(callback))->inner;
     void* object;
     ObjectState* object_state;
     fn_80201B54(callback);

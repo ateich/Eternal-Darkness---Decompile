@@ -25,13 +25,13 @@ typedef struct {
 
 extern const char lbl_8023CBC8[];
 
-extern double fn_8016A694(void*, s32);
+extern double fn_8016A694(void*, int);
 extern s32 fn_8016A598(void*);
-extern void fn_80163BB4(void*, const char*, s32, ...);
+extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_80196578(void*);
 extern void fn_8018F81C(void*, u8);
 extern s32 fn_801D3974(s32);
-extern s32 fn_800F5C54(double);
+extern unsigned int fn_800F5C54();
 extern void* fn_8015C4A4(s32, s32);
 extern Vec3s* fn_80158ABC(void*, s32, s32);
 extern void* fn_80147EC4(void*);

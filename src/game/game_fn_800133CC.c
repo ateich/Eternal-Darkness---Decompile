@@ -5,14 +5,14 @@ extern const char lbl_8023BEF8[];
 extern char lbl_8030206C[];
 extern void fn_8014CBC0(char*);
 extern s32 fn_8016A598(void*);
-extern double fn_8016A694(void*, s32);
-extern void fn_80163BB4(void*, const char*, s32, s32, ...);
-extern void* fn_80201814(s32);
+extern double fn_8016A694(void*, int);
+extern void fn_80163BB4(void*, const char*, ...);
+extern void* fn_80201814();
 extern void* fn_80201C24(void);
 extern void fn_80157B60(void*, u8);
 extern void fn_80157B3C(void*, s32);
 extern char* fn_80047D6C(void);
-extern s32 fn_80201B44(void);
+extern int fn_80201B44();
 extern void fn_800DBF60(s32, void*, s32, char*, float);
 
 s32 fn_800133CC(void* script)

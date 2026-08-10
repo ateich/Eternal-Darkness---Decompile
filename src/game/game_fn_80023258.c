@@ -53,7 +53,7 @@ extern void fn_8022A5D8(s32, s32, s32, s32);
 
 void fn_80023258(void)
 {
-    u8* data;
+    u8* data = lbl_8023D020;
     u8* global = lbl_80302400;
     FrontEndState* fade_state = (FrontEndState*)(global + 0x1C);
     FrontEndState* state;
@@ -61,8 +61,6 @@ void fn_80023258(void)
     volatile u32 color;
     u32 call_color;
     s32 value;
-
-    data = lbl_8023D020;
 
     if (fade_state->fade < 255) {
         value = fade_state->fade + 4;

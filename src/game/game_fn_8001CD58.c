@@ -2,9 +2,9 @@ typedef unsigned int u32;
 typedef int s32;
 
 extern s32 fn_8016A598(void*);
-extern double fn_8016A694(void*, s32);
+extern double fn_8016A694(void*, int);
 extern void fn_8016A830(void*, double);
-extern void fn_80163BB4(void*, const char*, s32, ...);
+extern void fn_80163BB4(void*, const char*, ...);
 extern u32 fn_800AD2AC(void);
 extern const double lbl_8064DE18;
 extern char lbl_8023BEF8[];

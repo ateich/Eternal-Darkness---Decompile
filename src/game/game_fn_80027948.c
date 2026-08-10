@@ -25,9 +25,9 @@ extern u32 lbl_8064C6F8;
 extern s32 lbl_8064C700;
 extern float lbl_8064DFE0;
 
-extern void* fn_80201814(void*);
+extern void* fn_80201814();
 extern void* fn_80201C2C(void*);
-extern void* fn_80201BC8(void*);
+extern void* fn_80201BC8();
 extern void* fn_80155DB4(void*);
 extern void* fn_80201C24(void*);
 extern void fn_80204E0C(void*, void*);

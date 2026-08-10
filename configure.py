@@ -537,9 +537,37 @@ config.custom_build_rules = [
         ),
         "description": "EXTERNALIZE SWITCH $in",
     },
+    {
+        "name": "name_game_8001FE1C_switch",
+        "command": (
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@98=jumptable_8023D9C0 $in && touch $out"
+        ),
+        "description": "NAME SWITCH $in",
+    },
+    {
+        "name": "externalize_game_80020E94_switch",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @57 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@57=jumptable_8023DA70 --remove-section=.data $in "
+            "&& touch $out"
+        ),
+        "description": "EXTERNALIZE SWITCH $in",
+    },
 ]
 config.custom_build_steps = {
     "post-compile": [
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80020E94.externalized"],
+            "rule": "externalize_game_80020E94_switch",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80020E94.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8001FE1C.named"],
+            "rule": "name_game_8001FE1C_switch",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8001FE1C.o"],
+        },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8001E644.externalized"],
             "rule": "externalize_game_8001E644_switch",
@@ -1616,15 +1644,15 @@ config.libs = [
             Object(Matching, "game/game_fn_8001F754.c"),
             Object(Matching, "game/game_fn_8001F758.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_8001FB94.c"),
-            Object(NonMatching, "game/game_fn_8001FE1C.c"),
+            Object(Matching, "game/game_fn_8001FE1C.c"),
             Object(Matching, "game/game_fn_8002014C.c"),
             Object(NonMatching, "game/game_fn_80020150.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_80020D70.c"),
             Object(Matching, "game/game_fn_80020D90.c"),
-            Object(NonMatching, "game/game_fn_80020E94.c"),
+            Object(Matching, "game/game_fn_80020E94.c"),
             Object(Matching, "game/game_fn_80021234.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(NonMatching, "game/game_fn_80021490.c", extra_cflags=["-use_lmw_stmw on"]),
-            Object(NonMatching, "game/game_fn_80021714.c"),
+            Object(Matching, "game/game_fn_80021714.c"),
             Object(Matching, "game/game_fn_800217F4.c"),
             Object(NonMatching, "game/game_fn_8002188C.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_80023230.c"),

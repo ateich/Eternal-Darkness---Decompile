@@ -33,14 +33,14 @@ extern const u32 lbl_80651934;
 
 extern s32 fn_80200C10(void*);
 extern s32 fn_80200C38(void*);
-extern ObjectInfo* fn_80201B8C(void*);
-extern s32 fn_80201B54(void*);
-extern s32 fn_80201BC8(void*);
+extern void* fn_80201B8C();
+extern int fn_80201B54();
+extern void* fn_80201BC8();
 extern void fn_80201D2C(void*, s32);
 extern void fn_80201D14(void*, s32);
 extern void fn_80201D34(void*, s32);
 extern void fn_80201D1C(void*, s32);
-extern void fn_8020123C(s32, s32, s32, s32);
+extern unsigned long long fn_8020123C();
 extern void fn_8012C62C(void*, s32, u32*, u32*, u32*, s32);
 extern void fn_80120AD0(s32, s32, s32, s32, f32, f32);
 extern void fn_800CAC5C(u8, void*, u32*, u32*, u32*);
@@ -67,7 +67,7 @@ s32 fn_80031FE4(void* object, s32 action, void* event, s32* completed)
     register s32 effect_id;
     register s32 object_id;
     object_id = fn_80201B54(object);
-    effect_id = fn_80201BC8(object);
+    effect_id = (s32)fn_80201BC8(object);
 
     if (action == 0) {
         if (event_id == 1) {

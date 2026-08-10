@@ -54,10 +54,10 @@ extern void fn_801E7974(void*, s32);
 extern void fn_801E79A0(void*, s32);
 extern void fn_801399CC(s16);
 extern void* fn_80034708(Request*);
-extern void* fn_80201B54(void);
+extern int fn_80201B54();
 extern void fn_80201AEC(void*, void*);
 extern void fn_80201AF8(void*);
-extern void* fn_80201BC8(void*);
+extern void* fn_80201BC8();
 extern u32 fn_8011FAEC(void*);
 extern void fn_8011FADC(void*, u32);
 extern void fn_8011FE64(void*, void*);
@@ -86,7 +86,7 @@ extern s32 fn_800CF220(void*, s32, s32, s32, s32, s32, float, float);
 extern s32 fn_800CE914(void*, Point16*, Point16*, s32);
 extern void fn_801E8328(s32, s32);
 extern void fn_800CDD84(void*);
-extern void* fn_80201B44(void);
+extern int fn_80201B44();
 extern void* fn_80158598(void*, s32);
 extern void fn_80158668(void);
 extern void fn_801586CC(void*, s32, void*, void*);
@@ -277,7 +277,7 @@ void fn_8000755C(s32 arg0, s32 arg1, u32 flags)
     fn_801399CC((s16)req.f14);
     view = fn_80034708(&req);
 
-    handle = fn_80201B54();
+    handle = (void*)fn_80201B54();
     fn_80201AEC(handle, view);
     fn_80201AF8(handle);
 
@@ -335,9 +335,9 @@ void fn_8000755C(s32 arg0, s32 arg1, u32 flags)
     fn_801E8328(0xB, t6);
 
     fn_800CDD84(view);
-    fn_80158598(fn_80201B44(), 1);
+    fn_80158598((void*)fn_80201B44(), 1);
     fn_80158668();
-    fn_801586CC(fn_80158598(fn_80201B44(), 1), 6, (void*)fn_800CBAB8,
+    fn_801586CC(fn_80158598((void*)fn_80201B44(), 1), 6, (void*)fn_800CBAB8,
                 (void*)fn_800CBF40);
 
     if (lowbit == 0) {

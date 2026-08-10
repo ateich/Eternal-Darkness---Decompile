@@ -2,7 +2,7 @@ typedef unsigned char u8;
 typedef unsigned int u32;
 typedef int s32;
 
-extern u8* fn_80201B8C(void* object);
+extern void* fn_80201B8C();
 
 void fn_80032B18(void* object, s32 index, s32 mode, const u32* value)
 {

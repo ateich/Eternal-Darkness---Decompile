@@ -5,12 +5,12 @@ typedef struct Ref Ref;
 typedef struct Object Object;
 
 extern s32 fn_8016A598(void*);
-extern double fn_8016A694(void*, s32);
-extern void fn_80163BB4(void*, const char*, s32, ...);
+extern double fn_8016A694(void*, int);
+extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_8016A830(void*, double);
-extern Ref* fn_80201814(s32);
+extern void* fn_80201814();
 extern Object* fn_80201C24(Ref*);
-extern void* fn_80201B44(void);
+extern int fn_80201B44();
 extern u32 fn_80157BF4(Object*);
 extern u16 fn_80158234(Object*);
 extern s32 fn_801586FC(s32, void*);
@@ -63,7 +63,7 @@ s32 fn_8001BAE4(void* arg)
             fn_8016A830(arg, lbl_8064DD38);
             return 1;
         }
-        if (!fn_801586FC(id1, fn_80201B44())) {
+        if (!fn_801586FC(id1, (void*)fn_80201B44())) {
             fn_8016A830(arg, lbl_8064DDB8);
             return 1;
         }
@@ -87,7 +87,7 @@ s32 fn_8001BAE4(void* arg)
             fn_8016A830(arg, lbl_8064DD38);
             return 1;
         }
-        if (!fn_801586FC(id2, fn_80201B44())) {
+        if (!fn_801586FC(id2, (void*)fn_80201B44())) {
             fn_8016A830(arg, lbl_8064DDB8);
             return 1;
         }

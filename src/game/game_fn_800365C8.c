@@ -46,19 +46,19 @@ extern float lbl_8064E234;
 extern float lbl_8064E238;
 
 extern void* fn_80201B9C(void);
-extern ObjectInfo* fn_80201B8C(void*);
-extern void* fn_80201BC8(void*);
+extern void* fn_80201B8C();
+extern void* fn_80201BC8();
 extern void fn_8011F114(Vec3*, void*);
 extern s32 fn_801A7570(void*);
 extern void* fn_80205288(void*);
-extern s32 fn_80201B54(void*);
+extern int fn_80201B54();
 extern s32 fn_8011EB04(void*);
 extern void* fn_80201C24(void*);
 extern u32 fn_80157C80(void*);
 extern s32 fn_80201EB8(void*);
 extern s32 fn_80201B4C(void*);
 extern s32 fn_80201B64(void*);
-extern u64 fn_8020123C(s32, s32, s32, s32);
+extern unsigned long long fn_8020123C();
 extern u32 fn_80178E94(Vec3*, Vec3*);
 extern s32 fn_80036A1C(void*, s32, s32*, Vec3*);
 extern u8 fn_80204434(void*, Vec3*, s32, float);
@@ -92,7 +92,7 @@ void* fn_800365C8(register void* source, register void* query)
     source_position = lbl_80238DA0;
     best_distance = lbl_8064E228;
     selected = 0;
-    state = fn_80201B8C(source)->state;
+    state = ((ObjectInfo*)fn_80201B8C(source))->state;
     source_transform = fn_80201BC8(source);
     if (source_transform != 0) {
         fn_8011F114(&temporary, source_transform);

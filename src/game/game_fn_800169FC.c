@@ -23,7 +23,7 @@ extern FirstEntry lbl_80241DE8[];
 extern SecondEntry lbl_802417D0[];
 extern void* lbl_8024E388[];
 extern s32 fn_8016A598(void*);
-extern void fn_80163BB4(void*, const char*, s32, ...);
+extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_801E7974(void*, s16);
 
 s32 fn_800169FC(void* script)

@@ -91,21 +91,21 @@ extern void* lbl_8064C7A8;
 extern void* lbl_8064C7AC;
 extern void* lbl_8064C7B0;
 
-extern ObjectInfo* fn_80201B8C(void*);
-extern s32 fn_80201B54(void*);
+extern void* fn_80201B8C();
+extern int fn_80201B54();
 extern void* fn_80204B10(void*, void**);
-extern void* fn_80201814(void*);
+extern void* fn_80201814();
 extern void* fn_80158598(s32, s32);
 extern void fn_80158668(void);
 extern s32 fn_80204EC8(void*, void*);
 extern s32 fn_80204F54(void*);
-extern void fn_80201BC8(void*);
+extern void* fn_80201BC8();
 extern void fn_800BD2DC(void*, void*);
 extern void fn_80204C94(void*);
 extern void fn_8017CE74(void*, void*);
 extern void fn_801A7228(void*);
 extern void fn_800E9F84(void*);
-extern void fn_8020123C(s32, s32, s32, s32);
+extern unsigned long long fn_8020123C();
 extern void fn_800EA3A0(void*, void*);
 extern void fn_80201D4C(void*, s32);
 

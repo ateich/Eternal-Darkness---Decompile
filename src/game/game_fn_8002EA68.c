@@ -35,21 +35,21 @@ extern const u16 lbl_8064E100;
 extern s32 lbl_8064D18C;
 
 extern s32 fn_80200C10(void*);
-extern Callback* fn_80201B8C(void*);
-extern s32 fn_80201B54(void*);
+extern void* fn_80201B8C();
+extern int fn_80201B54();
 extern void fn_802020B4(void*, s32);
 extern void fn_80201D2C(void*, s32);
 extern void fn_80201D14(void*, s32);
 extern void fn_80201D34(void*, s32);
 extern void fn_80201D1C(void*, s32);
 extern void fn_801E8328(s32, void*);
-extern u64 fn_8020123C(s32, s32, s32, s32);
+extern unsigned long long fn_8020123C();
 extern s32 fn_802006D4(s32, s32, s32, s32, s32);
 extern s32 fn_80200614(s32, s32, s32);
 extern void fn_8020104C(s32, s32, s32, s32, float);
 extern void fn_80200460(s32, s32, s32, s32, float);
-extern void* fn_80201814(s32);
-extern void* fn_80201BC8(void*);
+extern void* fn_80201814();
+extern void* fn_80201BC8();
 extern void fn_8020216C(void*);
 extern s32 fn_80201AE4(void);
 extern s32 fn_80201EB8(void*);
@@ -84,7 +84,7 @@ s32 fn_8002EA68(void* callback, s32 phase, void* event)
     Vec3 vector, point;
     void* callback_object = callback;
     s32 event_id = fn_80200C10(event);
-    State* state = (State*)fn_80201B8C(callback_object)->inner;
+    State* state = (State*)((Callback*)fn_80201B8C(callback_object))->inner;
     s32 object_id = fn_80201B54(callback_object);
 
     if (phase == 0) {

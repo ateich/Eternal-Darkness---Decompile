@@ -21,9 +21,9 @@ extern s32 fn_801E79FC(void*, s32);
 extern s32 fn_800462C8(s32);
 extern void* fn_80201B9C(void);
 extern void* fn_80204844(void*, s32);
-extern u32 fn_80201B54(void);
-extern ObjectInfo* fn_80201B8C(void*);
-extern u64 fn_8020123C(s32, s32, u32, s32);
+extern int fn_80201B54();
+extern void* fn_80201B8C();
+extern unsigned long long fn_8020123C();
 extern void fn_8020104C(s32, s32, u32, s32, f32);
 
 void fn_80025F48(void)

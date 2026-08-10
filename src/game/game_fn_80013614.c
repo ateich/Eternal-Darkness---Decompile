@@ -3,10 +3,10 @@ typedef unsigned int u32;
 
 extern const char lbl_8023BEF8[];
 extern s32 fn_8016A598(void*);
-extern double fn_8016A694(void*, s32);
-extern void fn_80163BB4(void*, const char*, s32, s32, ...);
-extern u32 fn_800F5C54(double);
-extern void* fn_80201814(s32);
+extern double fn_8016A694(void*, int);
+extern void fn_80163BB4(void*, const char*, ...);
+extern unsigned int fn_800F5C54();
+extern void* fn_80201814();
 extern void* fn_80201C24(void);
 extern void fn_80157B6C(void*, u32);
 

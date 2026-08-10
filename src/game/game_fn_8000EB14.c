@@ -8,11 +8,11 @@ typedef struct ObjectInfo {
 
 extern const char lbl_8023BEF8[];
 extern s32 fn_8016A598(void*);
-extern double fn_8016A694(void*, s32);
+extern double fn_8016A694(void*, int);
 extern void fn_8016A830(void*, double);
 extern void fn_80163BB4(void*, const char*, ...);
-extern void* fn_80201814(s32);
-extern ObjectInfo* fn_80201B8C(void*);
+extern void* fn_80201814();
+extern void* fn_80201B8C();
 
 s32 fn_8000EB14(void* script)
 {
@@ -26,7 +26,7 @@ s32 fn_8000EB14(void* script)
 
     object = fn_80201814((s32)fn_8016A694(script, 1));
     if (object != 0) {
-        value = fn_80201B8C(object)->value;
+        value = ((ObjectInfo*)fn_80201B8C(object))->value;
     }
     fn_8016A830(script, value);
     return 1;

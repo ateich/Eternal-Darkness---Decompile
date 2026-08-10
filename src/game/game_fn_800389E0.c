@@ -13,14 +13,14 @@ typedef struct ObjectData {
     s16 channel3;
 } ObjectData;
 
-extern ObjectInfo* fn_80201B8C(void*);
+extern void* fn_80201B8C();
 extern u32 fn_8020216C(void*);
 extern int fn_80038308(void*, int, s16*);
 extern int fn_80038464(void*, int, s16*);
-extern int fn_80201B54(void*);
-extern int fn_80201B44(void);
+extern int fn_80201B54();
+extern int fn_80201B44();
 extern int fn_80070A6C(int);
-extern void fn_80201BC8(void*);
+extern void* fn_80201BC8();
 extern void fn_80201D88(void*, s16);
 extern void fn_80036C40(void*, int, s16);
 extern int lbl_8064C594;

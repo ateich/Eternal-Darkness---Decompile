@@ -20,10 +20,10 @@ extern void* lbl_8064D74C;
 extern void fn_801EFE84(int);
 extern void fn_8001E644(int, int, int);
 extern void fn_801E7974(void*, int);
-extern void* fn_8015AA0C(void);
-extern void* fn_80024638(void*, void*, u32*);
+extern u32 fn_8015AA0C(void);
+extern u32 fn_80024638(void*, u32, u32*);
 extern void fn_8015DAB0(void);
-extern void fn_800242B8(void*);
+extern void fn_800242B8(u32);
 extern void fn_801EF530(void);
 extern void fn_801EF580(void*);
 extern void fn_801EB194(int);
@@ -43,31 +43,31 @@ extern char lbl_8023DA60[];
 void fn_80020E94(void)
 {
     int i;
-    void* value;
+    u32 mode;
     u32 size;
 
     lbl_8064B2BC = 5;
-    value = *(void**)(lbl_803003C8 + 8);
+    mode = *(u32*)(lbl_803003C8 + 8);
     fn_801EFE84(1);
 
-    switch ((int)value) {
+    switch (mode) {
     case 0:
         if (lbl_8023D600[lbl_8030241C.table_index] == 100) {
-            value = (void*)16;
+            mode = 16;
         }
         break;
     case 10:
-        value = (void*)9;
+        mode = 9;
         break;
     case 9:
-        value = (void*)10;
+        mode = 10;
         break;
     case 15:
-        value = (void*)10;
+        mode = 10;
         break;
     }
 
-    for (i = 0; i < (int)value; i++) {
+    for (i = 0; i < (int)mode; i++) {
         switch (i) {
         case 9:
             fn_8001E644(10, 0, 1);
@@ -137,11 +137,15 @@ void fn_80020E94(void)
         break;
     }
 
-    value = fn_8015AA0C();
-    value = fn_80024638(lbl_8023DA60, value, &size);
-    fn_8015DAB0();
-    for (i = 0; i < 2; i++) {
-        fn_800242B8(value);
+    {
+        u32 input = fn_8015AA0C();
+        u32 resource = fn_80024638(lbl_8023DA60, input, &size);
+        int j;
+
+        fn_8015DAB0();
+        for (j = 0; j < 2; j++) {
+            fn_800242B8(resource);
+        }
     }
     fn_801EF530();
     fn_801EF580(lbl_8064D74C);

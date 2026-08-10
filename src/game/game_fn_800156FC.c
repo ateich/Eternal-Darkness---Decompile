@@ -11,9 +11,9 @@ extern const char lbl_8023BEF8[];
 extern const char lbl_8023CAEC[];
 extern const double lbl_8064DCE8;
 extern s32 fn_8016A598(void*);
-extern double fn_8016A694(void*, s32);
+extern double fn_8016A694(void*, int);
 extern s16* fn_8016A784(void*, s32);
-extern void fn_80163BB4(void*, const char*, s32, ...);
+extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_801D38BC(s32, void*, void*);
 extern void fn_8014F65C(Vec3f*, s32, s16, s32, float, void*);
 

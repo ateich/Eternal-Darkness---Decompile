@@ -15,7 +15,7 @@ extern s32 fn_8016A598(void*);
 extern void fn_8016A830(void*, double);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void* fn_80201B3C(void);
-extern ObjectInfo* fn_80201B8C(void*);
+extern void* fn_80201B8C();
 
 s32 fn_8000ED44(void* script)
 {
@@ -29,7 +29,7 @@ s32 fn_8000ED44(void* script)
 
     object = fn_80201B3C();
     if (object != 0) {
-        value = ((Object*)fn_80201B8C(object)->object)->value;
+        value = ((Object*)((ObjectInfo*)fn_80201B8C(object))->object)->value;
     }
     fn_8016A830(script, value);
     return 1;

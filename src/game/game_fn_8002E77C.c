@@ -37,8 +37,8 @@ extern TableState lbl_803003C8;
 extern TableEntry lbl_8023BA64[];
 
 extern s32 fn_80200C10(void*);
-extern CallbackState* fn_80201B8C(void*);
-extern s32 fn_80201B54(void*);
+extern void* fn_80201B8C();
+extern int fn_80201B54();
 extern void fn_8011FF18(s32);
 extern s32 fn_801D3944(s32);
 extern s32 fn_8002EA18(s32);
@@ -46,13 +46,13 @@ extern void* fn_800CE9A4(void*, s32, s32);
 extern void fn_801E8328(s32, void*);
 extern s32 fn_801D38E8(s32);
 extern s32 fn_80201AE4(void);
-extern void fn_8020123C(s32, s32, s32, s32);
+extern unsigned long long fn_8020123C();
 extern void fn_802020B4(void*, s32);
 extern s32 fn_800DE354(void);
 extern s32 fn_802066E0(s32, s32);
 extern void fn_8011DD8C(s32, s32);
 extern void fn_802006D4(s32, s32, s32, s32, s32);
-extern void* fn_80201814(s32);
+extern void* fn_80201814();
 extern void fn_80201D2C(void*, s32);
 extern void fn_80201D14(void*, s32);
 extern void fn_80201D34(void*, s32);
@@ -61,7 +61,7 @@ extern void fn_80201D1C(void*, s32);
 s32 fn_8002E77C(void* callback, s32 phase, void* event)
 {
     s32 event_id = fn_80200C10(event);
-    InnerState* state = (InnerState*)fn_80201B8C(callback)->inner;
+    InnerState* state = (InnerState*)((CallbackState*)fn_80201B8C(callback))->inner;
     s32 object_id = fn_80201B54(callback);
 
     if (phase == 0) {

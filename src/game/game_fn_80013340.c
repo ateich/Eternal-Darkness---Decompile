@@ -4,7 +4,7 @@ extern const char lbl_8023BEF8[];
 extern const double lbl_8064DCE8;
 extern s32 lbl_8064C61C;
 extern s32 fn_8016A598(void*);
-extern void fn_80163BB4(void*, const char*, s32, s32, ...);
+extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_8016A830(void*, double);
 
 s32 fn_80013340(void* script)

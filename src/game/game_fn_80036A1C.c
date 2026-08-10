@@ -22,8 +22,8 @@ typedef struct InnerObject {
     u32 flags;
 } InnerObject;
 
-extern ObjectInfo* fn_80201B8C(void*);
-extern InnerObject* fn_80201BC8(void*);
+extern void* fn_80201B8C();
+extern void* fn_80201BC8();
 extern s32 fn_80066BB8(void*, s32);
 extern void fn_8011F114(Vec3*, void*);
 extern s32 fn_80036B7C(void*, s32, Vec3*);

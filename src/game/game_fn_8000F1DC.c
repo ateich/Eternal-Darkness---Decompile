@@ -17,9 +17,9 @@ typedef struct Object {
 } Object;
 
 extern s32 fn_8016A598(void*);
-extern double fn_8016A694(void*, s32);
-extern void* fn_80201814(s32);
-extern Object* fn_80201B8C(void*);
+extern double fn_8016A694(void*, int);
+extern void* fn_80201814();
+extern void* fn_80201B8C();
 extern void fn_80201ADC(Object*);
 extern void fn_800CAC5C(s32, s32, s32*, s32*, s32*);
 extern u32 fn_80036D5C(void*);

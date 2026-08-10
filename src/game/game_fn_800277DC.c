@@ -12,7 +12,7 @@ extern s32 lbl_8064C700;
 extern s32 lbl_8064C708;
 
 extern void fn_801E5FB0(u32);
-extern void fn_8020123C(s32, s32, u32, s32);
+extern unsigned long long fn_8020123C();
 
 void fn_800277DC(s16 state, EventPayload* payload)
 {

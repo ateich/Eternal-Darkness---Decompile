@@ -5,9 +5,9 @@ typedef struct Command {
     u32 words[8];
 } Command;
 
-extern double fn_8016A694(void*, s32);
+extern double fn_8016A694(void*, int);
 extern s32 fn_802019EC(s32, void*);
-extern void* fn_80201814(void);
+extern void* fn_80201814();
 extern void fn_80201ADC(void);
 extern void* fn_80201C2C(void);
 extern s32 fn_80201B5C(void*);

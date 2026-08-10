@@ -10,8 +10,8 @@ typedef struct Command {
     s32 value;
 } Command;
 
-extern double fn_8016A694(void*, s32);
-extern u32 fn_800F5C54(double);
+extern double fn_8016A694(void*, int);
+extern unsigned int fn_800F5C54();
 extern Command lbl_803023E0;
 extern void* lbl_8064D1BC;
 

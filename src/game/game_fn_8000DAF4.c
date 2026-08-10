@@ -9,7 +9,7 @@ extern void* fn_80201C24(void);
 extern void* fn_80049220(void*, s32);
 extern void fn_80049304(void*, void*);
 extern void* fn_802053B0(void*, void*);
-extern s32 fn_80201B54(void*);
+extern int fn_80201B54();
 
 s32 fn_8000DAF4(void* script)
 {

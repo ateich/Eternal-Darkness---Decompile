@@ -6,7 +6,7 @@ typedef struct Command {
 } Command;
 
 extern s32 fn_8016A598(void*);
-extern void fn_80163BB4(void*, const char*, s32, ...);
+extern void fn_80163BB4(void*, const char*, ...);
 extern s32 fn_80070A6C(s32);
 extern void fn_8001C310(void*);
 extern s32 fn_8011E310(s32, s32, s32, s32, s32, s32, s32);

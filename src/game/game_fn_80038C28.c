@@ -17,9 +17,9 @@ extern s16 fn_801A76D4(void*);
 extern s32 fn_80179064(s32, s32, s32, s32);
 extern u8 fn_80204578(void*, Vec3*);
 extern void fn_801A7588(void*, u32);
-extern s32 fn_80201B54(void*);
+extern int fn_80201B54();
 extern void fn_801A74A8(void*, s32);
-extern u64 fn_8020123C(s32, s32, s32, void*);
+extern unsigned long long fn_8020123C();
 
 u32 fn_80038C28(register void* source, register void* target,
                 register void* effect)

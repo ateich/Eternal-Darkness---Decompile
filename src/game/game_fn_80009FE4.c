@@ -4,12 +4,12 @@ typedef int s32;
 
 extern const char lbl_8023BEF8[];
 extern double lbl_8064DCF8;
-extern s32 fn_80201B44(void);
+extern int fn_80201B44();
 extern s32 fn_8016A598(void*);
-extern void fn_80163BB4(void*, const char*, s32, s32, ...);
-extern u64 fn_8020123C(s32, s32, s32, s32);
+extern void fn_80163BB4(void*, const char*, ...);
+extern unsigned long long fn_8020123C();
 extern void fn_8016A830(void*, double);
-extern void* fn_80201814(s32);
+extern void* fn_80201814();
 extern void fn_8016A7D8(void*);
 
 s32 fn_80009FE4(void* script)

@@ -47,8 +47,8 @@ extern volatile const ChannelList lbl_80238D58;
 extern const float lbl_8064E160;
 
 extern void* fn_80155DB4(void);
-extern void* fn_80201BC8(s32);
-extern u32 fn_80201B54(s32);
+extern void* fn_80201BC8();
+extern int fn_80201B54();
 extern s32 fn_80035628(s32);
 extern void fn_80147E88(EffectDescriptor*);
 extern void fn_8019B13C(EffectDescriptor*);

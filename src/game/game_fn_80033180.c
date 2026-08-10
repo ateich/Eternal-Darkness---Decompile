@@ -28,8 +28,8 @@ extern s32 lbl_8064D18C;
 extern const float lbl_8064E1F4;
 
 extern s32 fn_80200C10(void* event);
-extern u8* fn_80201B8C(void* object);
-extern s32 fn_80201B54(void* object);
+extern void* fn_80201B8C();
+extern int fn_80201B54();
 extern void fn_80201D2C(void* object, s32 action);
 extern void fn_80201D14(void* object, s32 action);
 extern void fn_801E8328(s32 action, void* object);
@@ -40,7 +40,7 @@ extern void fn_800329E8(State* state, u8 value);
 extern void fn_80033038(State* state);
 extern s32 fn_80032A5C(State* state);
 extern void fn_80032E90(State* state, const Vec3* point);
-extern void fn_8020123C(s32 event, s32 source, s32 target, s32 arg3);
+extern unsigned long long fn_8020123C();
 
 s32 fn_80033180(void* object, s32 action, void* event, s32* completed)
 {

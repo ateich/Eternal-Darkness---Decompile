@@ -57,17 +57,17 @@ extern s32 fn_80200C10(void*);
 extern s32 fn_80200C38(void*);
 extern s32 fn_80200C28(void*);
 extern s32 fn_80200C20(void*);
-extern CallbackState* fn_80201B8C(void*);
-extern s32 fn_80201B54(void*);
+extern void* fn_80201B8C();
+extern int fn_80201B54();
 extern void fn_802020B4(void*, s32);
 extern void fn_80201D2C(void*, s32);
 extern void fn_80201D14(void*, s32);
-extern u64 fn_8020123C(s32, s32, s32, s32);
-extern void* fn_80201814(s32);
+extern unsigned long long fn_8020123C();
+extern void* fn_80201814();
 extern s32 fn_80201B5C(void*);
 extern s32 fn_80201B64(void*);
-extern void* fn_80201BC8(void*);
-extern s32 fn_80201B44(void);
+extern void* fn_80201BC8();
+extern int fn_80201B44();
 extern void fn_801E8328(s32, void*);
 extern void fn_80201D34(void*, s32);
 extern void fn_80201D1C(void*, s32);
@@ -103,7 +103,7 @@ s32 fn_8002DAE0(void* callback, s32 phase_arg, void* event_arg, s32* output)
     void* event = event_arg;
     s32 phase = phase_arg;
     s32 event_id = fn_80200C10(event);
-    InnerState* state = (InnerState*)fn_80201B8C(callback)->inner;
+    InnerState* state = (InnerState*)((CallbackState*)fn_80201B8C(callback))->inner;
     s32 object_id = fn_80201B54(callback);
 
     if (phase == 0) {

@@ -18,7 +18,7 @@ typedef struct Resource {
     s16 channel3;
 } Resource;
 
-extern ObjectInfo* fn_80201B8C(void*);
+extern void* fn_80201B8C();
 extern Resource* fn_80072354(int);
 
 int fn_80038464(void* object, int channel, s16* value)

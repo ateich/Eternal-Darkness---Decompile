@@ -9,11 +9,11 @@ extern const char lbl_8023BEF8[];
 extern double lbl_8064DE60;
 
 extern s32 fn_8016A598(void*);
-extern double fn_8016A694(void*, s32);
-extern void fn_80163BB4(void*, const char*, s32, ...);
+extern double fn_8016A694(void*, int);
+extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_8016A830(void*, double);
-extern s32 fn_80201B44(void);
-extern void* fn_80201814(s32);
+extern int fn_80201B44();
+extern void* fn_80201814();
 extern s32 fn_80201B3C(void);
 extern void fn_80205288(s32);
 extern void* fn_80201C24(void*);

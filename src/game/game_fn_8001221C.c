@@ -2,7 +2,7 @@ typedef int s32;
 
 extern s32 lbl_8064D18C;
 extern s32 fn_8016A598(void*);
-extern double fn_8016A694(void*, s32);
+extern double fn_8016A694(void*, int);
 extern void fn_800073D8(s32);
 
 s32 fn_8001221C(void* script)

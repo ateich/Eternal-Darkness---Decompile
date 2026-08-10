@@ -1,13 +1,13 @@
 typedef int s32;
 
-extern void* fn_80201BC8(void*);
+extern void* fn_80201BC8();
 extern s32 fn_80201B64(void*);
 extern s32 fn_80201B6C(void*);
 extern s32 fn_80201B5C(void*);
 extern s32 fn_80201B7C(void*);
 extern s32 fn_80201B74(void*);
 extern s32 fn_80201B84(void*);
-extern s32 fn_80201B54(void*);
+extern int fn_80201B54();
 
 s32 fn_80035FB8(register void* object)
 {

@@ -11,14 +11,14 @@ typedef struct Object {
     InnerObject* inner;
 } Object;
 
-extern Object* fn_80201B8C(void*);
+extern void* fn_80201B8C();
 
 s32 fn_800360B0(void* object, u16* flags)
 {
     InnerObject* inner;
 
     if (object != 0) {
-        inner = fn_80201B8C(object)->inner;
+        inner = ((Object*)fn_80201B8C(object))->inner;
         if (inner != 0) {
             *flags = inner->flags;
             return 1;

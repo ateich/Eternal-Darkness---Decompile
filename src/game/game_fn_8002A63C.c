@@ -2,7 +2,7 @@ typedef int s32;
 
 extern void* fn_80156938(void*);
 extern void* fn_80201EB8(void);
-extern void* fn_80201BC8(void*);
+extern void* fn_80201BC8();
 extern s32 fn_8002A858(void*, void*, void*);
 extern void fn_8012D0D0(void*);
 extern void fn_8012EBDC(void*);

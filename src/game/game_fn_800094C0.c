@@ -23,16 +23,16 @@ typedef struct Object {
 extern const char lbl_8023BEF8[];
 extern s32 lbl_8064D18C;
 
-extern u32 fn_800F5C54(double);
+extern unsigned int fn_800F5C54();
 extern Player* fn_8015C28C(s32);
 extern s32 fn_8016A598(void*);
-extern double fn_8016A694(void*, s32);
-extern void fn_80163BB4(void*, const char*, s32, s32, ...);
+extern double fn_8016A694(void*, int);
+extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_8016A830(void*, double);
 extern void* fn_80201B9C(void);
-extern Object* fn_80201B8C(void*);
-extern void* fn_80201BC8(void*);
-extern void fn_80201B54(void*);
+extern void* fn_80201B8C();
+extern void* fn_80201BC8();
+extern int fn_80201B54();
 extern void* fn_80201BC0(void*);
 extern s32 fn_8011FB4C(void*);
 extern s32 fn_8013B8C0(void*, void*);

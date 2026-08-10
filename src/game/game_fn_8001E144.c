@@ -10,10 +10,13 @@ typedef struct Context {
     u32 argument;
     u8 pad1C[0x14];
     u32 flags;
+    u8 pad34[4];
     u32 resource;
     u16 kind;
     u8 state;
+    u8 pad3F;
     u8 limit;
+    u8 pad41[3];
 } Context;
 
 typedef struct Timings {
@@ -30,20 +33,21 @@ typedef struct GlobalState {
     Timings timings;
 } GlobalState;
 
-typedef struct Block64 { u32 word[16]; } Block64;
+typedef struct Block32 { u32 word[8]; } Block32;
 
 extern GlobalState lbl_80302400;
 extern u8 lbl_8023D020[];
-extern Block64 lbl_80238978;
-extern Block64 lbl_80238998;
-extern u32 lbl_8064C5E0;
-extern u32 lbl_8064C5E8[2];
-extern u32 lbl_8064C640;
-extern void* lbl_8064C7AC;
+extern Block32 lbl_80238978;
+extern Block32 lbl_80238998;
+extern u32 lbl_8064C6D0;
+extern u32 lbl_8064C6C4;
+extern u32 lbl_8064C6C8;
+extern u32 lbl_8064C670;
+extern void* lbl_8064C504;
 extern u32 lbl_8064C794;
 extern u32 lbl_8064C248;
 
-extern void fn_8000518C(void*, int, u32);
+extern void* memset(void*, int, u32);
 extern void fn_8001D56C(void);
 extern void fn_8001DE68(void);
 extern void fn_8001DE84(u32, u32);
@@ -73,37 +77,39 @@ void fn_8001E144(u32 mode)
 {
     GlobalState* global = &lbl_80302400;
     Context* context = &global->context;
-    u32 size;
-    void* start;
-
+    u8* data = lbl_8023D020;
+    Timings* timings = &global->timings;
+    u32 sizes[5];
     fn_8022A814(0, 0);
-    fn_8000518C(context, 0, 0x44);
+    memset(context, 0, 0x44);
     context->limit = 200;
     context->kind = 7;
     context->value = 255;
-    lbl_8064C5E8[0] = 0;
-    lbl_8064C5E8[1] = 0;
-    lbl_8064C640 = 0;
+    lbl_8064C6C8 = 0;
+    lbl_8064C6C4 = 0;
+    lbl_8064C670 = 0;
     context->argument = mode;
     context->flags = 0;
-    fn_8020EF54(global->object, lbl_8023D020 + 0x83C);
-    lbl_8064C5E0 = 0;
+    fn_8020EF54(global->object, data + 0x83C);
+    lbl_8064C6D0 = 0;
     fn_8001DE84(3, 0);
     fn_8001DE84(3, 0);
     context->value = 255;
     context->flags |= 0x20;
-    global->timings.first = 2000;
-    global->timings.second = 1000;
-    global->timings.third = 1000;
-    global->timings.fourth = 1000;
+    timings->first = 2000;
+    timings->second = 1000;
+    timings->third = 1000;
+    timings->fourth = 1000;
 
     if (mode == 0) {
         fn_801AD4B4(7, 0, 0, 0);
         fn_8001D56C();
         fn_801A99B4();
     }
-    context->handle = 0;
-    context->end = 0;
+    {
+    Context* active = &global->context;
+    active->handle = 0;
+    active->end = 0;
 
     switch (mode) {
     case 1:
@@ -114,14 +120,14 @@ void fn_8001E144(u32 mode)
         context->value = 255;
         context->flags |= 1;
         context->flags |= 0x10;
-        global->timings.second = 3000;
-        global->timings.third = 1500;
-        global->timings.fourth = 1500;
+        timings->second = 3000;
+        timings->third = 1500;
+        timings->fourth = 1500;
         {
             void* start = fn_80138164();
-            context->handle = fn_80024638(lbl_8023D020 + 0x848, start, &global->timings.first);
-            fn_8015DAB0((void*)context->handle);
-            context->end = (u32)start + ((global->timings.first + 31) & ~31);
+            active->handle = fn_80024638(data + 0x848, start, &sizes[4]);
+            fn_8015DAB0((void*)active->handle);
+            active->end = (u32)start + ((sizes[4] + 31) & ~31);
         }
         if (context->flags & 4) {
             context->resource = fn_801A98F4(629, 100);
@@ -133,59 +139,66 @@ void fn_8001E144(u32 mode)
         fn_80042E3C();
         break;
     case 3:
-        start = fn_80138164();
-        context->handle = fn_80024638(lbl_8023D020 + 0x848, start, &size);
-        fn_8015DAB0((void*)context->handle);
-        context->end = (u32)start + ((size + 31) & ~31);
-        fn_8015D458(lbl_8023D020 + 0x858, (void*)context->end, fn_8015AA14());
-        fn_8015DAB0((void*)context->end);
-        context->state = 253;
+    {
+        void* start = fn_80138164();
+        active->handle = fn_80024638(data + 0x848, start, &sizes[3]);
+        fn_8015DAB0((void*)active->handle);
+        active->end = (u32)start + ((sizes[3] + 31) & ~31);
+        fn_8015D458(data + 0x858, (void*)active->end, fn_8015AA14());
+        fn_8015DAB0((void*)active->end);
+        active->state = 253;
         break;
+    }
     case 4:
-        start = fn_80138164();
-        context->handle = fn_80024638(lbl_8023D020 + 0x848, start, &size);
-        fn_8015DAB0((void*)context->handle);
-        context->end = (u32)start + ((size + 31) & ~31);
-        fn_8015D458(lbl_8023D020 + 0x858, (void*)context->end, fn_8015AA14());
-        fn_8015DAB0((void*)context->end);
-        fn_801E6CA0(lbl_8064C7AC, 0, 39, 0, 1);
+    {
+        void* start = fn_80138164();
+        active->handle = fn_80024638(data + 0x848, start, &sizes[2]);
+        fn_8015DAB0((void*)active->handle);
+        active->end = (u32)start + ((sizes[2] + 31) & ~31);
+        fn_8015D458(data + 0x858, (void*)active->end, fn_8015AA14());
+        fn_8015DAB0((void*)active->end);
+        fn_801E6CA0(lbl_8064C504, 0, 39, 0, 1);
         fn_801E6F9C(0);
-        context->state = 254;
+        active->state = 254;
         break;
+    }
     case 5:
         {
             void* second = fn_8015AA0C();
-            start = fn_80138164();
-            context->handle = fn_80024638(lbl_8023D020 + 0x848, start, &size);
-            fn_8015DAB0((void*)context->handle);
-            context->end = (u32)start + ((size + 31) & ~31);
-            fn_8015D458(lbl_8023D020 + 0x858, (void*)context->end, fn_8015AA14());
-            fn_8015DAB0((void*)context->end);
-            lbl_8064C794 = fn_80024638(lbl_8023D020 + 0x864, second, &size);
+            void* start = fn_80138164();
+            active->handle = fn_80024638(data + 0x848, start, &sizes[1]);
+            fn_8015DAB0((void*)active->handle);
+            active->end = (u32)start + ((sizes[1] + 31) & ~31);
+            fn_8015D458(data + 0x858, (void*)active->end, fn_8015AA14());
+            fn_8015DAB0((void*)active->end);
+            lbl_8064C794 = fn_80024638(data + 0x864, second, &sizes[1]);
         }
         fn_801E85A8();
         lbl_8064C248 = 1;
         fn_800B177C(1, (void*)fn_80023B40);
         fn_800B689C(0, 1);
         fn_800B2548(12, 0);
-        *(Block64*)(lbl_8023D020 + 0x75C + 0x60) = lbl_80238978;
-        *(Block64*)(lbl_8023D020 + 0x75C + 0x80) = lbl_80238998;
+        *(Block32*)(data + 0x75C + 0x60) = lbl_80238978;
+        *(Block32*)(data + 0x75C + 0x80) = lbl_80238998;
         fn_8001DE84(27, 0);
         fn_8001DE84(6, 0);
-        lbl_8064C5E8[0] = 1;
+        lbl_8064C6C8 = 1;
         break;
     case 14:
-        start = fn_80138164();
-        context->handle = fn_80024638(lbl_8023D020 + 0x848, start, &size);
-        fn_8015DAB0((void*)context->handle);
-        context->end = (u32)start + ((size + 31) & ~31);
-        fn_8015D458(lbl_8023D020 + 0x858, (void*)context->end, fn_8015AA14());
-        fn_8015DAB0((void*)context->end);
-        context->state = 252;
+    {
+        void* start = fn_80138164();
+        active->handle = fn_80024638(data + 0x848, start, &sizes[0]);
+        fn_8015DAB0((void*)active->handle);
+        active->end = (u32)start + ((sizes[0] + 31) & ~31);
+        fn_8015D458(data + 0x858, (void*)active->end, fn_8015AA14());
+        fn_8015DAB0((void*)active->end);
+        active->state = 252;
         fn_8001DE84(27, 0);
         fn_8001DE84(252, 0);
         fn_801EFE84(0);
         break;
+    }
+    }
     }
 
     fn_8001DE68();

@@ -4,12 +4,12 @@ typedef int s32;
 
 extern const char lbl_8023BEF8[];
 
-extern void* fn_80201B44(void);
+extern int fn_80201B44();
 extern void* fn_80158598(void*, s32);
 extern s32 fn_8016A598(void*);
-extern double fn_8016A694(void*, s32);
-extern void fn_80163BB4(void*, const char*, s32, ...);
-extern void* fn_80201814(s32);
+extern double fn_8016A694(void*, int);
+extern void fn_80163BB4(void*, const char*, ...);
+extern void* fn_80201814();
 extern void* fn_80201C24(void);
 extern void fn_801579E0(void*, s32, s32);
 extern s32 fn_80158514(void*, s32);
@@ -34,7 +34,7 @@ s32 fn_8001B4AC(void* script)
     s32 count;
     double value;
 
-    manager = fn_80201B44();
+    manager = (void*)fn_80201B44();
     list = fn_80158598(manager, 0);
     if (fn_8016A598(script) != 3) {
         fn_80163BB4(script, lbl_8023BEF8, 3, fn_8016A598(script));
@@ -67,7 +67,7 @@ s32 fn_8001B4AC(void* script)
         fn_80157B60(second_state, fn_80157AB8(first_state));
         fn_80157B3C(second_state, count);
         value = fn_80200534(first, -1, 75);
-        fn_800DBF60(fn_80201B44(), value, second_object, count, 0);
+        fn_800DBF60((void*)fn_80201B44(), value, second_object, count, 0);
     }
     return 0;
 }

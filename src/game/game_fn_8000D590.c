@@ -16,12 +16,12 @@ typedef struct ObjectInstance {
 
 extern const char lbl_8023BEF8[];
 extern s32 fn_8016A598(void*);
-extern double fn_8016A694(void*, s32);
+extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_8016A830(void*, double);
-extern void* fn_80201814(s32);
-extern ObjectInstance* fn_80201B8C(void*);
-extern s32 fn_80201B44(void);
+extern void* fn_80201814();
+extern void* fn_80201B8C();
+extern int fn_80201B44();
 extern void* fn_80072354(void*);
 extern void fn_80038308(void*, s32, s16*);
 extern void fn_80038464(void*, s32, s16*);

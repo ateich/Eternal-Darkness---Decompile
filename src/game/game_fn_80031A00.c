@@ -30,8 +30,8 @@ typedef struct EffectSlot {
     void* spawned;
 } EffectSlot;
 
-extern void* fn_80201814(s32);
-extern void* fn_80201BC8(void);
+extern void* fn_80201814();
+extern void* fn_80201BC8();
 extern s32 fn_8011F6A4(void*, s32, s32, s32, QueryResult*, s32);
 extern void* fn_80149E04(void);
 extern void fn_80147E88(EffectSlot*);

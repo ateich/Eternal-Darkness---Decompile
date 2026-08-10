@@ -32,8 +32,8 @@ extern const f32 lbl_8064DE94;
 extern s32 lbl_806518D8;
 
 extern s32 fn_8016A598(void*);
-extern double fn_8016A694(void*, s32);
-extern s32 fn_800F5C54(double);
+extern double fn_8016A694(void*, int);
+extern unsigned int fn_800F5C54();
 extern s32 fn_8015C4A4(s32, s32);
 extern Vec3s* fn_80158ABC(s32, s32, s32);
 extern s32 fn_80128258(void);
@@ -41,14 +41,14 @@ extern s32 fn_80128130(void);
 extern s32 fn_800453AC(s32, s32, s32, s32, s32, s32, s32, s32,
                       Vec3f*, s32, s32, f32);
 extern void fn_8020104C(s32, s32, s32, s32, f32);
-extern void fn_80201814(s32);
-extern s32 fn_80201BC8(void);
+extern void* fn_80201814();
+extern void* fn_80201BC8();
 extern s32 fn_801D3974(s32);
 extern void fn_8012C62C(s32, s32, s32*, s32*, s32*, s32);
 extern void fn_8011FA8C(s32, s32, s32);
 extern void fn_8012CBE8(s32, s32, Vec3f*, Vec3f*, Vec3f*, s32);
 extern void fn_8012F58C(s32, s32, s32, s32, s32, s32);
-extern void fn_80163BB4(void*, const char*, s32, ...);
+extern void fn_80163BB4(void*, const char*, ...);
 
 s32 fn_80019F98(void* script)
 {
@@ -96,7 +96,7 @@ s32 fn_80019F98(void* script)
             fn_8020104C(57, effect, effect, 0, value);
             fn_8020104C(156, effect, effect, 6, lbl_8064DCF0);
             fn_80201814(effect);
-            object = fn_80201BC8();
+            object = (s32)fn_80201BC8();
             kind = fn_801D3974(kind);
 
             values.v0 = kind;

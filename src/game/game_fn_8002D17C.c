@@ -13,9 +13,9 @@ extern const float lbl_8064E0C0;
 extern s32 lbl_80651908;
 
 extern s32 fn_80200C10(void*);
-extern s32 fn_80201BC8(void*);
-extern s32 fn_80201B54(void*);
-extern CallbackState* fn_80201B8C(void*);
+extern void* fn_80201BC8();
+extern int fn_80201B54();
+extern void* fn_80201B8C();
 extern s32 fn_80201EB8(void*);
 extern void fn_80128754(s32, s32);
 extern void fn_8011FA8C(s32, s32, s32);
@@ -28,12 +28,12 @@ extern void fn_801E8328(s32, void*);
 extern void fn_80201D34(void*, s32);
 extern void fn_80201D1C(void*, s32);
 extern s32 fn_80120BD0(s32);
-extern void fn_8020123C(s32, s32, s32, s32);
+extern unsigned long long fn_8020123C();
 
 s32 fn_8002D17C(void* callback, s32 phase, void* event)
 {
     s32 event_id = fn_80200C10(event);
-    s32 object = fn_80201BC8(callback);
+    s32 object = (s32)fn_80201BC8(callback);
     s32 object_id = fn_80201B54(callback);
     CallbackState* state = fn_80201B8C(callback);
 

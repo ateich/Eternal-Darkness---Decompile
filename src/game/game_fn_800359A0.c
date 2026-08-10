@@ -31,24 +31,24 @@ typedef struct ObjectInfo {
 extern s32 lbl_8064E208;
 extern double lbl_8064E210;
 
-extern s32 fn_80201B54(void*);
-extern void* fn_80201BC8(void*);
+extern int fn_80201B54();
+extern void* fn_80201BC8();
 extern void* fn_80201B94(void*);
 extern State* fn_80036D38(void*);
 extern void fn_80201E78(Vec3*, void*);
-extern ObjectInfo* fn_80201B8C(void*);
+extern void* fn_80201B8C();
 extern s32 fn_80036D5C(void*);
-extern void* fn_80201B44(s32);
+extern int fn_80201B44();
 extern void* fn_80201C48(void*);
 extern s32 fn_80201EB8(void*);
 extern s32 fn_80035958(void*);
-extern u64 fn_8020123C(s32, s32, s32, s32);
+extern unsigned long long fn_8020123C();
 extern s32 fn_80201CD4(void*);
 extern void fn_80201E60(void*, s32);
 extern void fn_80201DD8(void*, s32);
 extern void* fn_80201B9C(void);
 extern s32 fn_800CAF7C(void*);
-extern void* fn_80201814(void*);
+extern void* fn_80201814();
 extern void* fn_80201BC0(void*);
 extern u32 fn_80178E94(Vec3*, Vec3*);
 extern u8 fn_80204434(void*, Vec3*, float, s32);
@@ -105,7 +105,7 @@ s32 fn_800359A0(register void* source, register void* requested)
     } else {
         requested_id = 0;
     }
-    requested_object = fn_80201B44(requested_id);
+    requested_object = (void*)fn_80201B44(requested_id);
     if (requested != 0) {
         requested_flags = fn_80036D5C(requested);
     } else {

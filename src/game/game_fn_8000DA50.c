@@ -6,7 +6,7 @@ extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_8016A830(void*, double);
 extern void fn_80201B3C(void);
 extern void* fn_80205288(void);
-extern s32 fn_80201B54(void*);
+extern int fn_80201B54();
 
 s32 fn_8000DA50(void* script)
 {

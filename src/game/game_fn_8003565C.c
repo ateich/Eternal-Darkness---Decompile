@@ -18,13 +18,13 @@ extern const Vec3 lbl_80238D7C;
 
 extern void* fn_80201B9C(void);
 extern void* fn_80201BC0(void*);
-extern ObjectInfo* fn_80201B8C(void*);
-extern void* fn_80201BC8(void*);
+extern void* fn_80201B8C();
+extern void* fn_80201BC8();
 extern s32 fn_80201EB8(void*);
-extern s32 fn_80201B54(void*);
+extern int fn_80201B54();
 extern void fn_8011F114(Vec3*, void*);
 extern u32 fn_80178E94(const Vec3*, const Vec3*);
-extern u64 fn_8020123C(s32, s32, s32, s32);
+extern unsigned long long fn_8020123C();
 extern u32 fn_800FBFB0(void);
 
 s32 fn_8003565C(register void* target, register s32* selected)

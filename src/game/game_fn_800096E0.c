@@ -15,21 +15,21 @@ typedef struct Player {
 extern const char lbl_8023BEF8[];
 extern s32 lbl_8064D18C;
 
-extern u32 fn_800F5C54(double);
+extern unsigned int fn_800F5C54();
 extern Player* fn_8015C28C(s32);
 extern s32 fn_8016A598(void*);
-extern double fn_8016A694(void*, s32);
-extern void fn_80163BB4(void*, const char*, s32, s32, ...);
+extern double fn_8016A694(void*, int);
+extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_8016A830(void*, double);
 extern void* fn_80201B9C(void);
 extern s32 fn_80035628(void*);
-extern void* fn_80201B54(void*);
-extern void* fn_80201BC8(void*);
+extern int fn_80201B54();
+extern void* fn_80201BC8();
 extern void fn_800385D0(void*, s32, s16*);
 extern s32 fn_80036E50(void*);
 extern s32 fn_8011FB4C(void*);
 extern s32 fn_8013B8C0(void*, void*);
-extern void fn_8020123C(s32, s32, void*, s32);
+extern unsigned long long fn_8020123C();
 extern void* fn_80201BC0(void*);
 
 s32 fn_800096E0(void* script)
@@ -69,7 +69,7 @@ s32 fn_800096E0(void* script)
 
             kind = fn_80035628(iterator);
             state = -1;
-            object = fn_80201B54(iterator);
+            object = (void*)fn_80201B54(iterator);
             context = fn_80201BC8(iterator);
             fn_800385D0(object, 0, &state);
 

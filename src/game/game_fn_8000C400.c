@@ -16,11 +16,11 @@ typedef struct Vec3f {
 extern const char lbl_8023BEF8[];
 extern s32 lbl_8064D18C;
 extern s32 fn_8016A598(void*);
-extern double fn_8016A694(void*, s32);
+extern double fn_8016A694(void*, int);
 extern Vec3s* fn_8016A784(void*, s32);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void* fn_800CF3D4(Vec3f*, s32, s32, s32);
-extern s32 fn_80201B54(void*);
+extern int fn_80201B54();
 extern void fn_8016A830(void*, double);
 
 s32 fn_8000C400(void* script)

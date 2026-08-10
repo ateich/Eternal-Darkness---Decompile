@@ -9,7 +9,7 @@ typedef struct ObjectInfo {
     ResourceState* resources;
 } ObjectInfo;
 
-extern ObjectInfo* fn_80201B8C(void*);
+extern void* fn_80201B8C();
 
 void* fn_80036D5C(void* object)
 {

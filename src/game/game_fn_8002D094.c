@@ -11,8 +11,8 @@ typedef struct EffectState {
 
 extern s32 fn_80200C10(void*);
 extern EventFloat* fn_80200C38(void*);
-extern void* fn_80201B8C(void*);
-extern s32 fn_80201B54(void*);
+extern void* fn_80201B8C();
+extern int fn_80201B54();
 extern void fn_80201D2C(void*, s32);
 extern void fn_80201D14(void*, s32);
 extern void fn_801E8328(s32, void*);

@@ -20,11 +20,11 @@ typedef struct ObjectInfo {
     void* volatile resources;
 } ObjectInfo;
 
-extern ObjectInfo* fn_80201B8C(void*);
-extern s32 fn_80201B54(void*);
+extern void* fn_80201B8C();
+extern int fn_80201B54();
 extern void fn_80038308(void*, s32, s16*);
 extern void fn_80038464(void*, s32, s16*);
-extern void fn_8020123C(s32, s32, s32, Vec3*);
+extern unsigned long long fn_8020123C();
 
 void fn_80036C40(register void* object, register s32 index,
                  register s32 height)

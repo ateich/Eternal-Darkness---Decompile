@@ -49,9 +49,9 @@ extern const f32 lbl_8064E184;
 extern const double lbl_8064E188;
 
 extern s32 fn_80200C10(void*);
-extern ObjectInfo* fn_80201B8C(void*);
-extern s32 fn_80201B54(void*);
-extern void* fn_80201814(s32);
+extern void* fn_80201B8C();
+extern int fn_80201B54();
+extern void* fn_80201814();
 extern s32 fn_80201B4C(void*);
 extern void fn_80201D2C(void*, s32);
 extern void fn_80201D14(void*, s32);
@@ -80,7 +80,7 @@ s32 fn_8003232C(void* object, s32 action, void* event, s32* completed)
     register void* linked;
 
     event_id = fn_80200C10(event);
-    state = fn_80201B8C(object)->state4C;
+    state = ((ObjectInfo*)fn_80201B8C(object))->state4C;
     object_id = fn_80201B54(object);
 
     if (action == 0) {
@@ -171,7 +171,7 @@ s32 fn_8003232C(void* object, s32 action, void* event, s32* completed)
         if (event_id == 0x39) {
             void* parent = fn_80201814(state->object24);
             if (parent != 0) {
-                OwnerState* owner = fn_80201B8C(parent)->object8C;
+                OwnerState* owner = ((ObjectInfo*)fn_80201B8C(parent))->object8C;
                 if (owner->owner4C == object_id) {
                     owner->owner4C = 0;
                 } else if (owner->owner50 == object_id) {

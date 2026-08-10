@@ -3,11 +3,11 @@ typedef int s32;
 extern const char lbl_8023BEF8[];
 extern const char lbl_8023CA98[];
 extern s32 fn_8016A598(void*);
-extern double fn_8016A694(void*, s32);
+extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
-extern void* fn_80201814(s32);
+extern void* fn_80201814();
 extern void fn_800355F0(void*, s32);
-extern s32 fn_80201B44(void);
+extern int fn_80201B44();
 extern void fn_800427E0(s32);
 
 s32 fn_80012E34(void* script)

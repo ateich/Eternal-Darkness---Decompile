@@ -68,15 +68,15 @@ void fn_8001FE1C(s16 delta)
         break;
 
     case 11: {
-        s16 amount;
-        s32 count;
         s32 last;
+        s32 count;
+        s32 amount;
         u8 available;
         s32 invalid;
 
-        amount = delta;
         count = runtime->count;
         last = count - 1;
+        amount = delta;
         available = lbl_803003C8[0x1918];
 
         do {
