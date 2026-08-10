@@ -7,9 +7,14 @@ typedef struct OptionStrings {
     char first[12];
     char second[12];
     char third[12];
+    char pad[4];
 } OptionStrings;
 
-extern OptionStrings lbl_8023CFF8;
+OptionStrings lbl_8023CFF8 = {
+    "gamma1_0",
+    "gamma1_7",
+    "gamma2_2",
+};
 extern char lbl_802FC500[];
 extern char lbl_802FC608[];
 

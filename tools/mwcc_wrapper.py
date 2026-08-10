@@ -76,6 +76,12 @@ def main() -> None:
         "game_fn_80015D40.o",
         "game_fn_8001C078.o",
         "game_fn_8001CC00.o",
+        "game_fn_8001CE14.o",
+        "game_fn_8001D3F8.o",
+        "game_fn_8001D4C4.o",
+        "game_data_8023D77C.o",
+        "game_data_8023D884.o",
+        "game_fn_8001E644.o",
         "game_fn_80037AF4.o",
     ):
         set_section_alignment(output, b".data", 4)

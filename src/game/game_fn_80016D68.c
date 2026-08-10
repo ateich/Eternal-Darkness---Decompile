@@ -12,7 +12,7 @@ extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_8016B400(s32, s32, s32);
 extern void* fn_80201814();
-extern void* fn_80201C24(void*);
+extern void* fn_80201C24();
 extern s32 fn_80157BC4(void*);
 extern s32 fn_80157BF4(void*);
 extern s32 fn_8015821C(void*);

@@ -1,0 +1,24 @@
+{
+  "tool": "tools/signature_audit.py",
+  "scope": "ten most-declared symbols with disagreeing TU-local declarations",
+  "canonical_signatures": {
+    "fn_80201B9C": "void* fn_80201B9C()",
+    "fn_80201D14": "void fn_80201D14(void*, s32)",
+    "fn_80201D2C": "void fn_80201D2C(void*, s32)",
+    "fn_80200C10": "s32 fn_80200C10(void*)",
+    "fn_80201D1C": "void fn_80201D1C(void*, s32)",
+    "fn_80201D34": "void fn_80201D34(void*, s32)",
+    "fn_80156938": "void* fn_80156938()",
+    "fn_80201BC0": "void* fn_80201BC0(void*)",
+    "fn_80201C24": "void* fn_80201C24()",
+    "fn_80201B3C": "void* fn_80201B3C()"
+  },
+  "evidence": "Canonical declarations are supported by already-matching call sites. Old-style parameter lists are retained for multi-entry helpers whose matching callers intentionally supply differing register arguments.",
+  "post_audit": "none of these ten symbols remains in abi_divergent or cosmetic output",
+  "objdiff": {
+    "matching_functions": 608,
+    "complete_objects": 549,
+    "matched_code_bytes": 149988
+  },
+  "main_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

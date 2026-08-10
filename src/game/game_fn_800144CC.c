@@ -15,7 +15,7 @@ extern void* fn_8016A784(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_801D5898(Vec3f*, Vec3f*, s32, s32, s32, s32, s32, s32, s32,
                        s32, s32, s32, s32, s32, s32, s32, s32);
-extern s32 fn_80156938(void);
+extern void* fn_80156938();
 extern void fn_8017FF14(s32, s32);
 
 s32 fn_800144CC(void* script)
@@ -65,6 +65,6 @@ s32 fn_800144CC(void* script)
     fn_801D5898(&first_position, &second_position, third, fourth, fifth, sixth,
                 seventh, eighth, ninth, tenth, 1, eleventh, twelfth, thirteenth,
                 4, 0x2000, 0x100);
-    fn_8017FF14(fn_80156938(), fourteenth);
+    fn_8017FF14((s32)fn_80156938(), fourteenth);
     return 0;
 }

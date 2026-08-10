@@ -46,7 +46,7 @@ s32 fn_80018CC4(void* script)
     u8* body;
     s32 flags;
     s32 i;
-    volatile ValuePair values;
+    ValuePair values;
 
     body = &descriptor.bytes[40];
     count = (s32)fn_8016A694(script, 1);
@@ -66,8 +66,8 @@ s32 fn_80018CC4(void* script)
     body[1] = 8;
     body[2] = (u8)count;
     values.second = values.first = fn_801D3974(kind);
-    ((u8*)&values.first)[3] = 120;
     ((u8*)&values.second)[3] = 90;
+    ((u8*)&values.first)[3] = 120;
 
     switch (kind) {
     case 1:

@@ -1,5 +1,7 @@
 typedef unsigned int u32;
 
+char lbl_8023CFC0[16] = "BKSpecialText";
+
 extern u32 lbl_8064C648;
 extern u32 lbl_8064C630;
 extern void fn_801A9A40(u32, u32, u32);

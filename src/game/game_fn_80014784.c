@@ -16,7 +16,7 @@ extern void* fn_8016A784(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_801D551C(Vec3f*, Vec3f*, s32, s32, s32, s32, s32, s32, s32,
                        s32, s32, s32, s32);
-extern s32 fn_80156938(void);
+extern void* fn_80156938();
 extern void fn_8017FF14(s32, s32);
 extern u32 fn_80193860(s32);
 extern void fn_801938D8(s32, u32);
@@ -58,7 +58,7 @@ s32 fn_80014784(void* script)
     second_position.z = second[2];
     fn_801D551C(&first_position, &second_position, third, fourth, fifth, sixth,
                 seventh, eighth, 1, 0, 0x11, 10, 4);
-    object = fn_80156938();
+    object = (s32)fn_80156938();
     fn_8017FF14(object, ninth);
     fn_801938D8(object, (fn_80193860(object) & ~8) | 0x400);
     return 0;

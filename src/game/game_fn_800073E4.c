@@ -6,7 +6,7 @@ typedef unsigned int u32;
 extern int lbl_8064C5C8;
 extern int lbl_8064C5C4;
 
-extern void* fn_80156938(void*, int);
+extern void* fn_80156938();
 extern void* fn_80201BC8();
 extern int fn_801FA44C(void);
 extern int fn_80201EB8();

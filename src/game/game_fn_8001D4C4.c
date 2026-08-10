@@ -1,5 +1,7 @@
 typedef int s32;
 
+char lbl_8023CF7C[28] = "EDCountChararactersInRegion";
+
 extern void fn_8001007C(void);
 extern void fn_8016B29C(s32, void (*)(void));
 extern void fn_8016B26C(void*, s32);

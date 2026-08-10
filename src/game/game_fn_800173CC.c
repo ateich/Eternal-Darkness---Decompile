@@ -14,9 +14,9 @@ extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_8016A830(void*, double);
 extern int fn_80201B44();
 extern void* fn_80201814();
-extern s32 fn_80201B3C(void);
+extern void* fn_80201B3C();
 extern void fn_80205288(s32);
-extern void* fn_80201C24(void*);
+extern void* fn_80201C24();
 extern s32 fn_8004918C(void);
 extern void* fn_801A7778(s32);
 extern s32 fn_80158234(void*);
@@ -45,7 +45,7 @@ s32 fn_800173CC(void*)
         mr script, r3
     }
     related = fn_80201814(fn_80201B44());
-    fn_80205288(fn_80201B3C());
+    fn_80205288((s32)fn_80201B3C());
     result = 0;
 
     if (fn_8016A598(script) != 1) {

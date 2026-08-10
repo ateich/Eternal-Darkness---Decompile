@@ -5,6 +5,7 @@ typedef unsigned char byte;
 typedef unsigned short ushort;
 typedef unsigned int uint;
 typedef int bool;
+typedef int s32;
 #define false 0
 #define true 1
 
@@ -35,12 +36,12 @@ extern int fn_801A7668(); extern int fn_801A7670(); extern int fn_801AC9F4();
 extern int fn_801CEB2C(); extern int fn_801D1B10(); extern int fn_801D38BC();
 extern int fn_801D38E8(); extern int fn_801D39E0(); extern int fn_801DD0A8();
 extern int fn_801E2B28(); extern void fn_801E8328(); extern int fn_802006D4();
-extern int fn_80200C10(); extern int fn_80200C38(); extern int fn_8020104C();
+extern s32 fn_80200C10(void*); extern int fn_80200C38(); extern int fn_8020104C();
 extern unsigned long long fn_8020123C(); extern void* fn_80201814(); extern int fn_80201AE4();
 extern int fn_80201B44(); extern int fn_80201B54(); extern int fn_80201B5C();
-extern void* fn_80201B8C(); extern int fn_80201B9C(); extern int fn_80201BC0();
-extern void* fn_80201BC8(); extern void fn_80201D14(); extern void fn_80201D1C();
-extern void fn_80201D2C(); extern int fn_80201D34(); extern int fn_80201E78();
+extern void* fn_80201B8C(); extern void* fn_80201B9C(); extern void* fn_80201BC0(void*);
+extern void* fn_80201BC8(); extern void fn_80201D14(void*, s32); extern void fn_80201D1C(void*, s32);
+extern void fn_80201D2C(void*, s32); extern void fn_80201D34(void*, s32); extern int fn_80201E78();
 extern int fn_80201EB8(); extern int fn_80202160(); extern int fn_80204578();
 extern int fn_80211A6C(); extern float fn_80211B08();
 
@@ -138,7 +139,7 @@ undefined4 fn_8002FAE8(undefined4 param_1,int param_2,undefined4 param_3)
   int local_58;
   int local_54;
   
-  iVar4 = fn_80200C10(param_3);
+  iVar4 = fn_80200C10((void*)param_3);
   iVar5 = (int)fn_80201B8C(param_1);
   piVar24 = *(int **)(iVar5 + 0x40);
   uVar6 = fn_80201B54(param_1);
@@ -152,8 +153,8 @@ undefined4 fn_8002FAE8(undefined4 param_1,int param_2,undefined4 param_3)
         else {
           fn_8020104C((double)(float)piVar24[4],0x62,uVar6,uVar6,0);
         }
-        fn_80201D2C(param_1,1);
-        fn_80201D14(param_1,1);
+        fn_80201D2C((void*)param_1,1);
+        fn_80201D14((void*)param_1,1);
       }
       else {
         fn_8020123C(0x39,uVar6,uVar6,0);
@@ -263,8 +264,8 @@ undefined4 fn_8002FAE8(undefined4 param_1,int param_2,undefined4 param_3)
     }
     if (iVar4 == 0x39) {
       fn_801E8328(2,param_1);
-      fn_80201D34(param_1,0);
-      fn_80201D1C(param_1,1);
+      fn_80201D34((void*)param_1,0);
+      fn_80201D1C((void*)param_1,1);
       return 1;
     }
     if (iVar4 == 0x92) {
@@ -377,7 +378,7 @@ undefined4 fn_8002FAE8(undefined4 param_1,int param_2,undefined4 param_3)
     if (iVar4 == 100) {
       if (piVar24[1] == lbl_8064D18C) {
         uVar7 = fn_801A717C();
-        iVar4 = fn_80201B9C();
+        iVar4 = (int)fn_80201B9C();
         local_1d4 = lbl_80651914;
         local_1d0 = lbl_80651918;
         iVar5 = piVar24[2];
@@ -431,7 +432,7 @@ undefined4 fn_8002FAE8(undefined4 param_1,int param_2,undefined4 param_3)
           if (*piVar24 == 0) {
             local_60 = 0;
             if (piVar24[6] == 0) {
-              for (; iVar4 != 0; iVar4 = fn_80201BC0(iVar4)) {
+              for (; iVar4 != 0; iVar4 = (int)fn_80201BC0((void*)iVar4)) {
                 iVar11 = (int)fn_80201BC8(iVar4);
                 if (iVar11 == 0) {
                   puVar19 = &local_1cc;

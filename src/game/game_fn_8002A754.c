@@ -7,7 +7,7 @@ typedef struct State {
     u32 words[4];
 } State;
 
-extern void* fn_80156938(void*);
+extern void* fn_80156938();
 extern void* fn_80156930(void*);
 extern void* fn_80201BC8();
 extern void fn_8011F114(State*, void*);

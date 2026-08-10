@@ -44,8 +44,8 @@ extern u32 lbl_8064C6C4;
 extern u32 lbl_8064C6C8;
 extern u32 lbl_8064C670;
 extern void* lbl_8064C504;
-extern u32 lbl_8064C794;
-extern u32 lbl_8064C248;
+extern u32 lbl_8064C51C;
+extern u32 lbl_8064CA68;
 
 extern void* memset(void*, int, u32);
 extern void fn_8001D56C(void);
@@ -66,8 +66,8 @@ extern void fn_8015DAB0(void*);
 extern u32 fn_801A98F4(u32, u32);
 extern void fn_801A99B4(void);
 extern void fn_801AD4B4(u32, u32, u32, u32);
-extern void fn_801E6CA0(void*, u32, u32, u32, u32);
-extern void fn_801E6F9C(u32);
+extern void* fn_801E6CA0(void*, u32, u32, u32, u32);
+extern void fn_801E6F9C(void*, u32);
 extern void fn_801E85A8(void);
 extern void fn_801EFE84(u32);
 extern void fn_8020EF54(void*, void*);
@@ -75,11 +75,13 @@ extern void fn_8022A814(u32, u32);
 
 void fn_8001E144(u32 mode)
 {
+    u8* data = lbl_8023D020;
     GlobalState* global = &lbl_80302400;
     Context* context = &global->context;
-    u8* data = lbl_8023D020;
     Timings* timings = &global->timings;
     u32 sizes[5];
+    void* object;
+    u8* initial_data;
     fn_8022A814(0, 0);
     memset(context, 0, 0x44);
     context->limit = 200;
@@ -90,7 +92,9 @@ void fn_8001E144(u32 mode)
     lbl_8064C670 = 0;
     context->argument = mode;
     context->flags = 0;
-    fn_8020EF54(global->object, data + 0x83C);
+    object = global->object;
+    initial_data = data + 0x83C;
+    fn_8020EF54(object, initial_data);
     lbl_8064C6D0 = 0;
     fn_8001DE84(3, 0);
     fn_8001DE84(3, 0);
@@ -123,6 +127,7 @@ void fn_8001E144(u32 mode)
         timings->second = 3000;
         timings->third = 1500;
         timings->fourth = 1500;
+    case 0:
         {
             void* start = fn_80138164();
             active->handle = fn_80024638(data + 0x848, start, &sizes[4]);
@@ -157,8 +162,7 @@ void fn_8001E144(u32 mode)
         active->end = (u32)start + ((sizes[2] + 31) & ~31);
         fn_8015D458(data + 0x858, (void*)active->end, fn_8015AA14());
         fn_8015DAB0((void*)active->end);
-        fn_801E6CA0(lbl_8064C504, 0, 39, 0, 1);
-        fn_801E6F9C(0);
+        fn_801E6F9C(fn_801E6CA0(lbl_8064C504, 0, 39, 0, 1), 0);
         active->state = 254;
         break;
     }
@@ -171,15 +175,18 @@ void fn_8001E144(u32 mode)
             active->end = (u32)start + ((sizes[1] + 31) & ~31);
             fn_8015D458(data + 0x858, (void*)active->end, fn_8015AA14());
             fn_8015DAB0((void*)active->end);
-            lbl_8064C794 = fn_80024638(data + 0x864, second, &sizes[1]);
+            lbl_8064C51C = fn_80024638(data + 0x864, second, &sizes[1]);
         }
         fn_801E85A8();
-        lbl_8064C248 = 1;
+        lbl_8064CA68 = 1;
         fn_800B177C(1, (void*)fn_80023B40);
         fn_800B689C(0, 1);
         fn_800B2548(12, 0);
-        *(Block32*)(data + 0x75C + 0x60) = lbl_80238978;
-        *(Block32*)(data + 0x75C + 0x80) = lbl_80238998;
+        {
+            Block32* blocks = (Block32*)(data + 0x75C);
+            blocks[3] = lbl_80238978;
+            blocks[4] = lbl_80238998;
+        }
         fn_8001DE84(27, 0);
         fn_8001DE84(6, 0);
         lbl_8064C6C8 = 1;

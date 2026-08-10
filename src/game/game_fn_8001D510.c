@@ -1,5 +1,7 @@
 typedef unsigned int u32;
 
+char lbl_8023CF98[40] = "StopCurrCharControlAndForceToFrameOne";
+
 extern void* fn_8012070C(void);
 extern void* fn_801EF7F4(void);
 extern void* memcpy(void*, const void*, u32);

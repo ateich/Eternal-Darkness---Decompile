@@ -42,7 +42,7 @@ extern int fn_801E79FC(void*, int);
 extern unsigned long long fn_8020123C();
 extern void fn_80179DB0(S16Vec3*, S16Vec3*);
 extern void* fn_80153904(EffectState*, S16Vec3*, float, u16);
-extern void* fn_80156938(void*);
+extern void* fn_80156938();
 extern void fn_8017FF1C(void*, s32);
 extern s32 fn_80050730(s32, s32, u8*, u8*, s32, s32);
 extern void fn_801AAE68(float, s32, u8, s32, EffectState*, s32, s32, s32,

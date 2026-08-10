@@ -28,7 +28,7 @@ extern const float lbl_8064E134;
 extern const float lbl_8064E138;
 extern s32 lbl_8064D18C;
 
-extern void* fn_80156938(void*);
+extern void* fn_80156938();
 extern void* fn_80201B8C();
 extern s32 fn_80201B5C(void*);
 extern int fn_80201B54();

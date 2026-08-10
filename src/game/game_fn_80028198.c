@@ -47,7 +47,7 @@ extern void fn_801FA354(void);
 extern void fn_80028B44(void);
 extern void fn_8016B400(s32, s32, s32);
 extern void* fn_80201814();
-extern s32 fn_80201C24(void);
+extern void* fn_80201C24();
 extern s32 fn_80157BC4(void);
 extern s32 fn_80157BF4(s32);
 extern int fn_80201B44();
@@ -187,7 +187,7 @@ void fn_80028198(void)
             break;
         case 3: {
             void* object = fn_80201814(entry->value1C);
-            s32 scene = fn_80201C24();
+            s32 scene = (s32)fn_80201C24();
             s32 value1 = fn_80157BC4();
             s32 value2 = fn_80157BF4(scene);
             void* target = fn_80201814(entry->value1C);

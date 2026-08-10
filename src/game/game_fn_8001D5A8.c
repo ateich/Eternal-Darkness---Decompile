@@ -1,6 +1,9 @@
 typedef int s32;
 typedef unsigned int u32;
 
+char lbl_8023CFD0[24] = "BKDoesPlayerHaveRune";
+char lbl_8023CFE8[16] = "ScrLvl-1.gpk";
+
 typedef struct GlobalState {
     char pad_0[0x10];
     u32 flags;

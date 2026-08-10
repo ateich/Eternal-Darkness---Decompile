@@ -526,14 +526,13 @@ config.custom_build_rules = [
         "description": "EXTERNALIZE $in",
     },
     {
-        "name": "externalize_game_8001E644_switch",
+        "name": "name_game_8001E644_switch",
         "command": (
-            "python3 tools/externalize_elf_symbol.py $in @44 && "
             "build/binutils/powerpc-eabi-objcopy "
-            "--redefine-sym=@44=jumptable_8023D8D4 --remove-section=.data $in "
+            "--redefine-sym=@44=jumptable_8023D8D4 $in "
             "&& touch $out"
         ),
-        "description": "EXTERNALIZE SWITCH $in",
+        "description": "NAME SWITCH $in",
     },
     {
         "name": "name_game_8001FE1C_switch",
@@ -567,8 +566,8 @@ config.custom_build_steps = {
             "inputs": [f"build/{VERSION}/src/game/game_fn_8001FE1C.o"],
         },
         {
-            "outputs": [f"build/{VERSION}/src/game/game_fn_8001E644.externalized"],
-            "rule": "externalize_game_8001E644_switch",
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8001E644.named"],
+            "rule": "name_game_8001E644_switch",
             "inputs": [f"build/{VERSION}/src/game/game_fn_8001E644.o"],
         },
         {
@@ -1514,7 +1513,7 @@ config.libs = [
             Object(NonMatching, "game/game_fn_80018708.c"),
             Object(Matching, "game/game_fn_80018C14.c"),
             Object(
-                NonMatching,
+                Matching,
                 "game/game_fn_80018CC4.c",
                 extra_cflags=["-use_lmw_stmw on"],
             ),
@@ -1624,6 +1623,10 @@ config.libs = [
             Object(Matching, "game/game_fn_8001D56C.c"),
             Object(Matching, "game/game_fn_8001D5A8.c"),
             Object(NonMatching, "game/main.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_data_8023D020.c"),
+            Object(Matching, "game/game_data_8023D5B8.c"),
+            Object(Matching, "game/game_data_8023D77C.c"),
+            Object(Matching, "game/game_data_8023D884.c"),
             Object(Matching, "game/game_fn_8001D91C.c"),
             Object(Matching, "game/game_fn_8001D9FC.c"),
             Object(Matching, "game/game_fn_8001DA04.c"),
@@ -1639,6 +1642,7 @@ config.libs = [
             Object(NonMatching, "game/game_fn_8001E144.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_8001E604.c"),
             Object(Matching, "game/game_fn_8001E644.c"),
+            Object(Matching, "game/game_data_8023D918.c"),
             Object(NonMatching, "game/game_fn_8001E894.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_8001F754.c"),
             Object(Matching, "game/game_fn_8001F758.c", extra_cflags=["-use_lmw_stmw on"]),

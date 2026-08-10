@@ -34,7 +34,7 @@ extern s32 fn_80045240(s32);
 extern void fn_800FD39C(char*, const char*);
 extern void fn_800FD40C(char*, const char*);
 extern s32 fn_80036E50(void);
-extern void* fn_80201B3C(void);
+extern void* fn_80201B3C();
 extern s32 fn_801E394C(const char*);
 
 #pragma section ".data"
