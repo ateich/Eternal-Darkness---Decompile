@@ -11,14 +11,14 @@
     },
     {
       "category": "register-allocation",
-      "functions": ["fn_8000E96C", "fn_8001E644", "fn_8001FE1C", "fn_80021714", "fn_80032A5C"],
+      "functions": ["fn_8000E96C", "fn_8001CA04", "fn_8001E644", "fn_8001FE1C", "fn_80021714", "fn_80032A5C"],
       "precise_divergence": "Canonical MWCC assigns short-lived volatile integer or floating-point webs to different registers: f1/f4 instead of f0/f2, r5/r7 or r6/r8 in the opposite roles, f0-f3 in a different phase/constant rotation, or r4/r5 swapped.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
     },
     {
       "category": "register-allocation",
-      "functions": ["main", "fn_800169FC", "fn_8001DE84", "fn_8001DFEC", "fn_8002B5B4", "fn_80031694"],
+      "functions": ["main", "fn_800169FC", "fn_8001DE84", "fn_8001DFEC", "fn_8001E144", "fn_8001E894", "fn_8002B5B4", "fn_80031694"],
       "precise_divergence": "Canonical MWCC materializes, folds, or coalesces object, table, string, or stack-address bases differently from retail, changing temporary registers, indexed-versus-displacement loads, relocation counts, or prologue size.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
@@ -109,7 +109,7 @@
     },
     {
       "category": "instruction-scheduling",
-      "functions": ["fn_8002B748", "fn_80031544", "fn_80031D24", "fn_80033180"],
+      "functions": ["fn_8000F1DC", "fn_8001E144", "fn_80026320", "fn_8002B748", "fn_80031544", "fn_80031D24", "fn_80033180"],
       "precise_divergence": "Equivalent stores, loads, argument setup, or temporary copies occupy a different local scheduling window from retail, sometimes shifting subsequent relocation sites despite matching behavior.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
@@ -162,6 +162,13 @@
       "precise_divergence": "MWCC's dense-switch jump tables are compiler-owned data in the function's translation unit; leaving them externalized in aggregate data prevents the complete object from matching and linking at the retail layout.",
       "workaround": "Name and assign each generated jump-table region to its owning translation unit, normalize the split object's data alignment where documented, and shrink the standalone auto-data object accordingly.",
       "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8000A668, fn_8000EE9C, fn_8001E644, and fn_80020E94"]
+    },
+    {
+      "category": "jump-table-strategy",
+      "functions": ["fn_8002188C", "fn_80029358", "fn_80034708", "fn_800361F8", "fn_80043034", "fn_800433FC", "fn_800462C8", "fn_80046430", "fn_800473AC", "fn_8004998C"],
+      "precise_divergence": "MWCC-generated switch tables contain relocations to interior targets in their owning function, but those data bytes and relocations can be recovered exactly even while the function's code remains NonMatching or undecompiled.",
+      "workaround": "Represent the documented table as honest-C interior function addresses in a standalone data translation unit, and do not assign matching code ownership to the function until its instruction stream independently passes the match gate.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for game_data_8023DAB4/game_data_8023DAB8, game_data_8023E388, game_data_8023E448, game_data_8023E4E8, game_data_8023E868, game_data_8023EAC0, game_data_8023EAE8, game_data_8023EC18, game_data_8023EC50, game_data_8023ECBC, game_data_8023EE94, game_data_8023EEE4, game_data_8023EF34, and game_data_8023EF84"]
     },
     {
       "category": "float-constant-placement",
