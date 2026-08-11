@@ -15,7 +15,7 @@ extern int fn_80201B4C(void*);
 extern int fn_80201B5C(void*);
 #define fn_80201B5C(a) fn_80201B5C((void*)(a))
 
-extern void fn_80201B64(void*);
+extern int fn_80201B64(void*);
 extern void* fn_80201BC8();
 extern float fn_8011F6F0(void);
 extern void fn_8011F778(void*, float);

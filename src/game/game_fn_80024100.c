@@ -32,7 +32,7 @@ extern void fn_801EBDDC(void*);
 extern void fn_801EBA58(void*);
 extern u32 fn_8012070C(void);
 extern void fn_8015E918(char*, u32, u32, u32, u32);
-extern void fn_8001D9FC(s32);
+extern void fn_8001D9FC(int);
 extern void fn_801EF39C(s32);
 extern void fn_801F348C(u32*, s32);
 

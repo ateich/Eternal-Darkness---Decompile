@@ -45,7 +45,7 @@ extern s32 fn_8002EA18(s32);
 extern void* fn_800CE9A4(void*, s32, s32);
 extern void fn_801E8328();
 extern s32 fn_801D38E8(s32);
-extern s32 fn_80201AE4(void);
+extern int fn_80201AE4(void);
 extern unsigned long long fn_8020123C();
 extern void fn_802020B4(void*, int);
 extern s32 fn_800DE354(void);

@@ -27,7 +27,7 @@ extern void fn_801FA354(void);
 extern void fn_80046D38(s32);
 extern void fn_80028B44(void);
 extern void fn_8016ADF0(s16, s32, s32);
-extern void fn_8016B400(s32, s32, s32);
+extern void fn_8016B400(int, int, int);
 
 void fn_80027F44(s32 notify)
 {

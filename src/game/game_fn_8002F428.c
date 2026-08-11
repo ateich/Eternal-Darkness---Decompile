@@ -39,7 +39,7 @@ extern void* fn_80201814();
 extern void* fn_80201BC8();
 extern void fn_80121104(float);
 extern s32 fn_8011FB4C(void*);
-extern s32 fn_80201AE4(void);
+extern int fn_80201AE4(void);
 extern s32 fn_80047178(void);
 extern s32 fn_8012FA54(void*, s32);
 extern void fn_8012C478(void*, s32, s32);

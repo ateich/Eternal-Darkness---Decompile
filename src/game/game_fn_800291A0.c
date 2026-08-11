@@ -16,7 +16,7 @@ extern void* fn_80201BC8();
 extern int fn_80201B4C(void*);
 extern void fn_80202054(void*, s32);
 extern void* fn_8011F950(void);
-extern void* fn_8011EB04(void*);
+extern int fn_8011EB04(void*);
 extern Node* fn_8002A444(void*, void*);
 extern void fn_8012B954(void*);
 extern void fn_8011F938(void*, void*);
@@ -45,7 +45,7 @@ void fn_800291A0(void* source)
 
     if (fn_8011F950() == 0) {
         value = (void*)fn_80201B4C(source);
-        node = fn_8002A444(fn_8011EB04(object), value);
+        node = fn_8002A444((void*)fn_8011EB04(object), value);
 
         fn_80202054(source, 1);
         if (node != 0) {

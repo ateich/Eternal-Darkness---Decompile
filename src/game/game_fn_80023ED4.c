@@ -26,7 +26,7 @@ extern void fn_80043034(s32);
 extern int fn_801E79FC(void*, int);
 extern void fn_800B0414(s32, s32, s32, s32, s32);
 extern void fn_800452DC(s32);
-extern void fn_8001D9FC(s32);
+extern void fn_8001D9FC(int);
 extern void fn_80029358(void);
 extern u8* fn_8015C28C(s32);
 extern void fn_80046B0C(u8*);

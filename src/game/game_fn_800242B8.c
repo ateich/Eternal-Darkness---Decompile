@@ -1,5 +1,7 @@
 typedef unsigned int u32;
 
+typedef u32* Color;
+
 extern void* lbl_8064D74C;
 extern char lbl_8063B2AC[];
 extern char lbl_80265DA0[];
@@ -24,7 +26,7 @@ extern void fn_801F3960(u32*);
 extern void fn_801A8D38(int);
 extern void fn_80225F4C(u32, void*, u32);
 extern void fn_801ED3F4(u32);
-extern void fn_801A852C(u32*, u32, u32, u32);
+extern void fn_801A852C(Color, int, int, u32);
 extern void fn_801A8F08(u32, u32, u32, u32, u32, u32, u32);
 extern void fn_801E5FE4(void);
 extern void fn_80180AD0(void);

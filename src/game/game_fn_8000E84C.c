@@ -11,8 +11,8 @@ typedef struct Vec3 {
 extern const Vec3 lbl_80237F20;
 extern const float lbl_8064DCF0;
 extern void* fn_80201814();
-extern void fn_80201E78(Vec3*, void*);
-extern s32 fn_80035628(void*);
+extern void fn_80201E78(void*, void*);
+extern int fn_80035628(void*);
 extern void fn_80158D38(Vec3*, s32, s32, Vec3*);
 extern s32 fn_801D1B10(s32, s32, s32, s32);
 extern void* fn_801A717C(s32);

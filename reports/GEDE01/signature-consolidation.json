@@ -2,23 +2,44 @@
   "tool": "tools/signature_audit.py",
   "scope": "ten most-declared symbols with disagreeing TU-local declarations",
   "canonical_signatures": {
-    "fn_80201B9C": "void* fn_80201B9C()",
-    "fn_80201D14": "void fn_80201D14(void*, s32)",
-    "fn_80201D2C": "void fn_80201D2C(void*, s32)",
-    "fn_80200C10": "s32 fn_80200C10(void*)",
-    "fn_80201D1C": "void fn_80201D1C(void*, s32)",
-    "fn_80201D34": "void fn_80201D34(void*, s32)",
-    "fn_80156938": "void* fn_80156938()",
-    "fn_80201BC0": "void* fn_80201BC0(void*)",
-    "fn_80201C24": "void* fn_80201C24()",
-    "fn_80201B3C": "void* fn_80201B3C()"
+    "fn_8001D9FC": "void fn_8001D9FC(int)",
+    "fn_80038464": "int fn_80038464(void*, int, s16*)",
+    "fn_8011EB04": "int fn_8011EB04(void*)",
+    "fn_8016B400": "void fn_8016B400(int, int, int)",
+    "fn_801A852C": "void fn_801A852C(Color, int, int, u32)",
+    "fn_80201E78": "void fn_80201E78(void*, void*)",
+    "fn_80201AE4": "int fn_80201AE4(void)",
+    "fn_80201B64": "int fn_80201B64(void*)",
+    "fn_80204844": "void* fn_80204844(void*, int)",
+    "fn_80035628": "int fn_80035628(void*)"
   },
-  "evidence": "Canonical declarations are supported by already-matching call sites. Old-style parameter lists are retained for multi-entry helpers whose matching callers intentionally supply differing register arguments.",
-  "post_audit": "none of these ten symbols remains in abi_divergent or cosmetic output",
-  "objdiff": {
-    "matching_functions": 608,
-    "complete_objects": 549,
-    "matched_code_bytes": 149988
+  "evidence": {
+    "retail_callees": "The linked retail-equivalent ELF shows fn_8011EB04 and fn_80035628 reading through r3, fn_8016B400 consuming r3-r5, fn_801A852C reading the four-byte template through r3 and consuming r4-r6, fn_80201E78 consuming r3-r4 without a result, fn_80201AE4 returning the r13 global in r3, fn_80201B64 reading through r3 and returning in r3, and fn_80204844 consuming r3-r4 and returning the found node in r3.",
+    "matched_definitions": "Matching C definitions establish fn_8001D9FC as a one-integer setter, fn_80038464 as a three-argument integer-result getter, and fn_80035628 as a one-pointer integer-result getter.",
+    "call_sites": "Every declaration and call was unified. Explicit result casts or captured call results were added where old-style declarations had depended on live r3. The Color spelling preserves the established PPC EABI lowering: the UI caller's four-byte aggregate and the other callers' local pointer typedefs all place the read-only template address in r3 without changing generated code."
   },
+  "post_audit": {
+    "target_symbols_remaining_in_return_register_contradictions": 0,
+    "target_symbols_remaining_in_abi_divergent": 0,
+    "target_symbols_remaining_in_cosmetic": 0,
+    "all_abi_divergent_symbols": 199,
+    "all_cosmetic_symbols": 117
+  },
+  "per_symbol_rebuilds": {
+    "symbols_verified": 10,
+    "matched_functions_after_each": 610,
+    "complete_objects_after_each": 599,
+    "matched_code_bytes_after_each": 150800,
+    "matched_data_bytes_after_each": 15964,
+    "previously_matching_functions_lost_after_each": 0
+  },
+  "final_objdiff": {
+    "matching_functions": 610,
+    "complete_objects": 599,
+    "matched_code_bytes": 150800,
+    "matched_data_bytes": 15964
+  },
+  "progress_json_changed": false,
+  "next_gate": "0x8023FCD0",
   "main_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
 }

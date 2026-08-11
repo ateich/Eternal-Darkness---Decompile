@@ -14,7 +14,7 @@ extern void fn_801E5FB0(void*);
 extern void fn_80144C40(void);
 extern void fn_80144680(u32);
 extern void fn_80045B3C(s32);
-extern void fn_8016B400(s32, s32, s32);
+extern void fn_8016B400(int, int, int);
 extern void fn_80028198(void);
 
 void fn_80027640(s16 value, u32 handle)

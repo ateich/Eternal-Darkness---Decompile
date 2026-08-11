@@ -14,7 +14,7 @@ extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_80179DB0(Name*, void*);
 extern void* fn_80201814();
 extern void* fn_80201BC8();
-extern s32 fn_8011EB04(void);
+extern int fn_8011EB04(void*);
 extern s32 fn_8012FF34(void*, Name*, s32, s32);
 extern void fn_801302BC(void*, s32);
 extern void fn_8013037C(void*, float);
@@ -47,7 +47,7 @@ s32 fn_80008D24(void* script)
     fn_80201814(actor);
     object = fn_80201BC8();
 
-    stage = fn_8011EB04();
+    stage = fn_8011EB04(object);
     switch (stage) {
     case 28:
     case 79:

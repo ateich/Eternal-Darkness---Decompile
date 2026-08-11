@@ -45,7 +45,7 @@ extern void* fn_801E6CA0(void*, int, int, int, int);
 extern void fn_80027730(void*, s32, s32);
 extern void fn_801FA354(void);
 extern void fn_80028B44(void);
-extern void fn_8016B400(s32, s32, s32);
+extern void fn_8016B400(int, int, int);
 extern void* fn_80201814();
 extern void* fn_80201C24();
 extern s32 fn_80157BC4(void);

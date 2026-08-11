@@ -13,7 +13,7 @@ extern void* fn_80201C2C(void);
 extern int fn_80201B5C(void*);
 #define fn_80201B5C(a) fn_80201B5C((void*)(a))
 
-extern s32 fn_80201B64(void*);
+extern int fn_80201B64(void*);
 extern void* fn_80204A94(void*, void*);
 extern void* lbl_8064D18C;
 extern Command lbl_803023E0;

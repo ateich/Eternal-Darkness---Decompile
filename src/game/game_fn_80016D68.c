@@ -10,7 +10,7 @@ extern void* lbl_8064C504;
 extern s32 fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
-extern void fn_8016B400(s32, s32, s32);
+extern void fn_8016B400(int, int, int);
 extern void* fn_80201814();
 extern void* fn_80201C24();
 extern s32 fn_80157BC4(void*);
@@ -18,7 +18,7 @@ extern s32 fn_80157BF4(void*);
 extern s32 fn_8015821C(void*);
 extern int fn_801E79FC(void*, int);
 extern void fn_801B05E8(s32, s32, s32, s32, s32, s32, s32, s32);
-extern void* fn_80201AE4(void);
+extern int fn_80201AE4(void);
 extern void* fn_801E6CA0(void*, int, int, int, int);
 extern void fn_80027948(void*, s32, void*, s32, s32, s32, s32);
 

@@ -1,6 +1,7 @@
 typedef unsigned short u16;
 typedef int s32;
 typedef unsigned int u32;
+typedef u32* Color;
 typedef float f32;
 
 extern u32 lbl_8064C2A8;
@@ -17,7 +18,7 @@ extern void fn_8022B4B8(void*, s32);
 extern void fn_80210FB0(void*);
 extern void fn_8022B690(void*, s32);
 extern void fn_801ED468(s32);
-extern void fn_801A852C(void*, s32, s32, u32);
+extern void fn_801A852C(Color, int, int, u32);
 extern void fn_801F1034(void);
 extern void fn_801ECEC8(s32, s32, s32);
 extern void fn_80225F4C(s32, void*, s32);

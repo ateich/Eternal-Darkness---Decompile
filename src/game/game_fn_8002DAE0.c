@@ -67,7 +67,7 @@ extern void* fn_80201814();
 extern int fn_80201B5C(void*);
 #define fn_80201B5C(a) fn_80201B5C((void*)(a))
 
-extern s32 fn_80201B64(void*);
+extern int fn_80201B64(void*);
 extern void* fn_80201BC8();
 extern int fn_80201B44();
 extern void fn_801E8328();

@@ -7,7 +7,7 @@ extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void* fn_80201814();
 extern void* fn_80201BC8();
-extern s32 fn_8011EB04(void);
+extern int fn_8011EB04(void*);
 extern void* fn_80201C24();
 extern void fn_80157B94(void*, s32);
 
@@ -16,6 +16,7 @@ s32 fn_8001B6CC(void* script)
     s32 state;
     void* object;
     void* object_state;
+    void* transform;
     s32 value;
 
     if (fn_8016A598(script) != 1) {
@@ -24,8 +25,8 @@ s32 fn_8001B6CC(void* script)
     }
 
     object = fn_80201814((s32)fn_8016A694(script, 1));
-    if (object != 0 && fn_80201BC8() != 0) {
-        state = fn_8011EB04();
+    if (object != 0 && (transform = fn_80201BC8(object)) != 0) {
+        state = fn_8011EB04(transform);
         object_state = fn_80201C24(object);
         switch (state) {
     case 32:

@@ -13,7 +13,7 @@ extern int fn_801A5D04(void);
 extern int fn_80201B44();
 extern void* fn_80201814();
 extern void* fn_80201B9C();
-extern int fn_80204844(int, int);
+extern void* fn_80204844(void*, int);
 extern void fn_8006D444(void);
 extern int fn_8006BCB4(void);
 extern unsigned long long fn_8020123C();
@@ -53,7 +53,7 @@ void fn_80006D50(void)
 
     context = fn_80201B44();
     fn_80201814();
-    state = fn_80204844((int)fn_80201B9C(), 0x20);
+    state = (int)fn_80204844(fn_80201B9C(), 0x20);
     fn_8006D444();
     value = fn_8006BCB4();
 

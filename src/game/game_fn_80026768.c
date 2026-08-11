@@ -3,6 +3,7 @@ typedef unsigned char u8;
 typedef short s16;
 typedef int s32;
 typedef unsigned int u32;
+typedef u32* Color;
 typedef float f32;
 
 #pragma use_lmw_stmw on
@@ -57,7 +58,7 @@ extern const f32 lbl_8064DF98;
 extern const f32 lbl_8064DF9C;
 
 extern void fn_801F1034(void);
-extern void fn_801A852C(u32*, s32, s32, u32);
+extern void fn_801A852C(Color, int, int, u32);
 extern void fn_801A85D4(u32*, s32, s32, u32);
 extern void fn_801ECF50(s32);
 extern void fn_801A8D38(int);

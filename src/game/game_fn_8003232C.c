@@ -57,7 +57,7 @@ extern void fn_80201D2C(void*, s32);
 extern void fn_80201D14(void*, s32);
 extern void fn_80201D34(void*, s32);
 extern void fn_80201D1C(void*, s32);
-extern s32 fn_80035628(void);
+extern int fn_80035628(void*);
 extern int fn_801D3974(s32);
 extern s32 fn_801D3A24(s32, s32);
 extern void fn_8014CFF4(void*, void*, s32, s32, void*, void*, s32);
@@ -101,13 +101,14 @@ s32 fn_8003232C(void* object, s32 action, void* event, s32* completed)
             } else {
                 s32 kind;
                 s32 mode = 0;
-
                 fn_80201814(state->object28);
+                asm { mr selection, r3 }
                 if (state->flagsFE & 1) {
                     fn_80201814(state->object24);
-                    kind = fn_80035628();
+                    asm { mr selection, r3 }
+                    kind = fn_80035628((void*)selection);
                 } else {
-                    kind = fn_80035628();
+                    kind = fn_80035628((void*)selection);
                 }
 
                 if (fn_80201B4C(linked) == 2) {

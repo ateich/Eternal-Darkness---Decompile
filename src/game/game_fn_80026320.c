@@ -1,5 +1,6 @@
 typedef int s32;
 typedef unsigned int u32;
+typedef u32* Color;
 typedef unsigned char u8;
 typedef float f32;
 
@@ -30,7 +31,7 @@ extern const f32 lbl_8064DF74;
 extern const f32 lbl_8064DF78;
 
 extern void fn_80225F4C(s32, void*, s32);
-extern void fn_801A852C(u32*, u32, u32, u32);
+extern void fn_801A852C(Color, int, int, u32);
 extern void fn_80211268(Mtx, u8, f32);
 extern void fn_80211710(Mtx, Vec3f*, Vec3f*);
 extern void fn_801ECF50(s32);

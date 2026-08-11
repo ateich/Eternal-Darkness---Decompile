@@ -12,7 +12,7 @@ typedef struct Vec3 {
 
 extern int fn_80201EB8();
 extern int fn_80201B4C(void*);
-extern void fn_80201E78(Vec3*, void*);
+extern void fn_80201E78(void*, void*);
 extern void* fn_80201BC8();
 extern s32 fn_80179064(s32, s32, s32, s32);
 extern u8 fn_80204578(void*, Vec3*);

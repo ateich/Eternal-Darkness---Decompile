@@ -101,7 +101,7 @@ extern void fn_800CBAB8(void);
 extern void fn_800CBF40(void);
 
 extern void fn_8011FA8C(void*, int, int);
-extern s32 fn_8011EB04(void*);
+extern int fn_8011EB04(void*);
 extern void fn_801303F0(void*, s32, s32, float, float);
 extern void fn_8013041C(void*, void*);
 extern void fn_800C23D8(void);

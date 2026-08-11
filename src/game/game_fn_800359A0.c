@@ -35,7 +35,7 @@ extern int fn_80201B54();
 extern void* fn_80201BC8();
 extern void* fn_80201B94(void*);
 extern State* fn_80036D38(void*);
-extern void fn_80201E78(Vec3*, void*);
+extern void fn_80201E78(void*, void*);
 extern void* fn_80201B8C();
 extern unsigned int fn_80036D5C(void*);
 extern int fn_80201B44();

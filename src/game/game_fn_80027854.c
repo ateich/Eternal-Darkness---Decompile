@@ -18,7 +18,7 @@ extern void fn_80144C40(void);
 extern void fn_80144680(u32);
 extern void fn_80045C68(s32);
 extern unsigned long long fn_8020123C();
-extern void fn_8016B400(s32, s32, u32);
+extern void fn_8016B400(int, int, int);
 extern void fn_80028198(void);
 extern void fn_800277DC(s32, EventPayload*);
 

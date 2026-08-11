@@ -27,7 +27,7 @@ extern u8 lbl_802515D0[];
 extern char lbl_8064B2F0;
 extern void* lbl_8064C4E8;
 
-extern void fn_801A852C(Color, s32, s32, u32);
+extern void fn_801A852C(Color, int, int, u32);
 extern void fn_801A8DE8(void*, s16, s16, s16, s16, s32, s32, s32);
 extern void fn_801E3AA4(s32);
 extern void fn_801E5430(s16, s16);

@@ -74,7 +74,7 @@ extern int fn_801A94E4(void *, int, int, int);
 extern void *fn_801E741C(char *);
 
 extern void fn_800069FC(); extern void fn_80008134(); extern void fn_80008738(); extern void fn_80008D0C();
-extern void fn_80018ED4(); extern void fn_8001D4C4(); extern void fn_8001D9FC(); extern void fn_8001E144();
+extern void fn_80018ED4(); extern void fn_8001D4C4(); extern void fn_8001D9FC(int); extern void fn_8001E144();
 extern void fn_8002476C(); extern void fn_80024794(); extern void fn_800248C0(); extern void fn_8002495C();
 extern void fn_80024B74(); extern void fn_80024B78(); extern void fn_80024D08(); extern void fn_80024D3C();
 extern void fn_80025F48(); extern void fn_80026060(); extern void fn_80028098(); extern void fn_800280FC();
@@ -99,7 +99,7 @@ extern void fn_80149EFC(); extern void fn_80149F9C(); extern void fn_8014B76C();
 extern void fn_801568B8(void*, void*); extern void fn_801569A0(); extern void fn_80157504(); extern void fn_8015761C();
 extern void fn_8015AA28(); extern void fn_8015AEB8(); extern void fn_8015CA00(); extern void fn_8015CB00();
 extern void fn_8015D414(); extern void fn_8015DAB0(); extern void fn_8016AD28(); extern void fn_8016B3A4();
-extern void fn_8016B400(); extern void fn_8017AE20(); extern void fn_8017AE90(); extern void fn_8017D0D8();
+extern void fn_8016B400(int, int, int); extern void fn_8017AE20(); extern void fn_8017AE90(); extern void fn_8017D0D8();
 extern void fn_8017FFC0(); extern void fn_801801A4(); extern void fn_80180C54(); extern void fn_8018807C(float, float);
 extern void fn_80188384(); extern void fn_801A58FC(); extern void fn_801A5910(); extern void fn_801A6E34();
 extern void fn_801A6F64(); extern void fn_801A7D20(); extern void fn_801A7D44(); extern void fn_801A83A4();

@@ -24,7 +24,7 @@ extern void* fn_80201B8C();
 extern int fn_80201B44();
 extern void* fn_80072354(void*);
 extern int fn_80038308(void*, int, short*);
-extern void fn_80038464(void*, s32, s16*);
+extern int fn_80038464(void*, int, s16*);
 
 s32 fn_8000D590(void* script)
 {
