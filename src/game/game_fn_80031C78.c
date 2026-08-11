@@ -32,7 +32,7 @@ extern const u16 lbl_80651920;
  * MWCC's four-instruction constant copy in the retail r5/r0 register pair. */
 extern void fn_80181F5C(EffectDescriptor*, s32);
 extern void fn_80181FD8(void);
-extern u16 fn_801D3A24(s32, s32);
+extern s32 fn_801D3A24(s32, s32);
 extern void fn_80148008(Vec3f*, const Vec3s*, EffectDescriptor*, void (*)(void));
 
 void fn_80031C78(Vec3f* position, s32 object_id)

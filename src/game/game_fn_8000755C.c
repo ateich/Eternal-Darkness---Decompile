@@ -66,7 +66,7 @@ extern Vec3s* fn_80158ABC(int, int, void*);
 extern void fn_8011F104(void*, float, float, float);
 extern void fn_8012B7A0(void*, float);
 extern void fn_8011FB54(void*, s32);
-extern void fn_8012C62C(void*, s32, s32*, s32*, s32*, s32);
+extern void fn_8012C62C(void*, s32, void*, void*, void*, s32);
 extern void fn_802015A4(void*);
 extern void fn_801294DC(void*, s32, s32, s32);
 extern void fn_800C3D24(void);

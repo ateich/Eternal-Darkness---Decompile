@@ -94,6 +94,11 @@ def main() -> None:
         "game_data_8023E410.o",
         "game_data_8023E448.o",
         "game_data_8023E4E8.o",
+        "game_data_8023ECBC.o",
+        "game_data_8023EE94.o",
+        "game_data_8023EEE4.o",
+        "game_data_8023EF34.o",
+        "game_data_8023EF84.o",
         "game_fn_80028E88.o",
         "game_fn_80037AF4.o",
     ):

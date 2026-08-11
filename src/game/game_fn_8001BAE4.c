@@ -17,7 +17,7 @@ extern s32 fn_801586FC(s32, void*);
 extern s32 fn_801579F4(Object*);
 extern s32 fn_801579EC(Object*);
 extern u16 fn_80157948(Object*);
-extern u16 fn_80157994(Object*);
+extern u16 fn_80157994(void*);
 extern char lbl_8023BEF8[];
 extern double lbl_8064DD38;
 extern double lbl_8064DDB8;

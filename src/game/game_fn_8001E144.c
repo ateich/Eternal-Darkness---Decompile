@@ -55,7 +55,7 @@ extern u32 fn_80024638(void*, void*, u32*);
 extern void fn_80023B40(void);
 extern void fn_80042E3C(void);
 extern void fn_80042EDC(void);
-extern void fn_800B177C(u32, void*);
+extern void fn_800B177C(int, void*);
 extern void fn_800B2548(u32, u32);
 extern void fn_800B689C(u32, u32);
 extern void* fn_80138164(void);

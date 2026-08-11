@@ -12,7 +12,7 @@ extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_80211A90(Vec3*, Vec3*, f32);
 extern void fn_80211A48(Vec3*, Vec3*, Vec3*);
-extern void* fn_801D3A24(s32, s32);
+extern s32 fn_801D3A24(s32, s32);
 extern void fn_80152A88(Vec3*, Vec3*, void*, s32);
 extern Vec3 lbl_80237F38;
 extern char lbl_8023BEF8[];
@@ -36,7 +36,7 @@ s32 fn_8001D1BC(void* script)
     input.z = (f32)fn_8016A694(script, 4);
     fn_80211A90(&basis, &basis, (f32)fn_8016A694(script, 5));
     fn_80211A48(&basis, &input, &basis);
-    object = fn_801D3A24(value, 0x31);
+    object = (void*)fn_801D3A24(value, 0x31);
     fn_80152A88(&input, &basis, object, 4);
     return 1;
 }

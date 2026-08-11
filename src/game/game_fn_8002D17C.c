@@ -22,7 +22,7 @@ extern void fn_8011FA8C(void*, int, int);
 extern void fn_802020B4(void*, int);
 extern void fn_8020104C(int, void*, void*, int, float);
 #define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void*)(b), (void*)(c), (d), (e))
-extern void fn_8012C62C(s32, s32, s32*, s32*, s32*, s32);
+extern void fn_8012C62C(void*, s32, void*, void*, void*, s32);
 extern void fn_80201D2C(void*, s32);
 extern void fn_80201D14(void*, s32);
 extern void fn_801E8328();
@@ -57,7 +57,7 @@ s32 fn_8002D17C(void* callback, s32 phase, void* event)
                 value2 = lbl_80651908;
                 value1 = lbl_8064E0B8;
                 value0 = lbl_8064E0B4;
-                fn_8012C62C(object, 0xF, &value0, &value1, &value2, 4);
+                fn_8012C62C((void*)object, 0xF, &value0, &value1, &value2, 4);
             } else {
                 fn_8020104C(0x39, fn_80201B54(callback),
                             fn_80201B54(callback), 0, lbl_8064E0C0);

@@ -14,7 +14,7 @@ extern s32 fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_80045A24(s32, s32);
-extern void fn_80025A78(s32);
+extern void fn_80025A78(int);
 
 s32 fn_8001238C(void* script)
 {

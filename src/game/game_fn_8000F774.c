@@ -69,7 +69,7 @@ extern void fn_802015A4(void*);
 extern void fn_800CCA44(void*);
 extern void fn_801261F4(void*);
 extern void fn_801E8328();
-extern void fn_8012C62C(void*, s32, s32*, s32*, s32*, s32);
+extern void fn_8012C62C(void*, s32, void*, void*, void*, s32);
 extern void* fn_80156DA0(s32, void*);
 extern s32 fn_8011FCB0(void*);
 extern void fn_801568C8(void*, void*, void*, void*);

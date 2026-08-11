@@ -19,7 +19,7 @@ extern s32 fn_8016A598(void*);
 extern void fn_8016A830(void*, double);
 extern void fn_800AFBA8(void*);
 extern void fn_800AFDA4(void);
-extern void fn_80025A78(s32);
+extern void fn_80025A78(int);
 
 s32 fn_8001A6C4(void* script)
 {

@@ -52,7 +52,7 @@ extern int fn_80201B54();
 extern s32 fn_80035628(s32);
 extern void fn_80147E88(EffectDescriptor*);
 extern void fn_8019B13C(EffectDescriptor*);
-extern u16 fn_801D3A24(s32, s32);
+extern s32 fn_801D3A24(s32, s32);
 extern s32 fn_8011F598(void*, s32, s32, s32, QueryResult*, s32);
 extern SpawnedEffect* fn_80149E04(void);
 extern void fn_8014F4CC(EffectDescriptor*, SpawnedEffect*);

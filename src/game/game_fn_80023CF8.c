@@ -9,13 +9,13 @@ extern u8 lbl_8063B38C[];
 extern u8 lbl_80265DA0[];
 extern u8 lbl_80265EBC[];
 extern u8 lbl_806391F0[];
-extern u32 lbl_8064D74C;
+extern void* lbl_8064D74C;
 extern u32 lbl_8064CBA0;
 extern volatile s32 lbl_8064C600;
 
 extern void fn_800243E8(void);
 extern void fn_801EF530(void);
-extern void fn_801EF580(u32 value);
+extern void fn_801EF580(void* value);
 extern void fn_80024434(void);
 extern void fn_80156EBC(void);
 extern void fn_80156E50(u32 value);

@@ -63,7 +63,7 @@ extern void fn_8001DE68(void);
 extern void fn_8001DA18(void);
 extern s32 fn_800B193C(void);
 extern void fn_800B2AE8(void);
-extern void fn_800B177C(s32, void*);
+extern void fn_800B177C(int, void*);
 extern void fn_800B689C(s32, s32);
 extern void fn_800B2548(s32, s32);
 extern void fn_8002387C(s32);
@@ -107,7 +107,7 @@ extern void fn_80023A68(void);
 extern void fn_801A96A8(s32, s32, s32);
 extern void fn_8011C830(s32);
 extern void fn_801F85A4(void);
-extern void fn_80025A78(s32);
+extern void fn_80025A78(int);
 
 static inline s32 random_three(void)
 {

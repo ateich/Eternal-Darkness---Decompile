@@ -3,7 +3,7 @@ typedef unsigned char u8;
 extern void fn_800B18F8(void);
 extern u8 fn_80045230(void);
 extern void fn_800238BC(int);
-extern void fn_800B177C(int, void (*)(int));
+extern void fn_800B177C(int, void*);
 extern void fn_800B689C(int, int);
 extern void fn_800B2548(int, int);
 extern void fn_80020D90(int);

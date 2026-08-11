@@ -41,7 +41,7 @@ extern void fn_80201D14(void*, s32);
 extern void fn_80201D34(void*, s32);
 extern void fn_80201D1C(void*, s32);
 extern unsigned long long fn_8020123C();
-extern void fn_8012C62C(void*, s32, u32*, u32*, u32*, s32);
+extern void fn_8012C62C(void*, s32, void*, void*, void*, s32);
 extern void fn_80120AD0(s32, s32, s32, s32, f32, f32);
 extern void fn_800CAC5C(u8, void*, u32*, u32*, u32*);
 extern void fn_8012DBE8(void*, s32, u32*);

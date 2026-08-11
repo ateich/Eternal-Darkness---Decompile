@@ -40,7 +40,7 @@ extern const float lbl_8064E068;
 extern const float lbl_8064E138;
 
 extern void fn_8019B13C();
-extern u16 fn_801D3A24(s32, s32);
+extern s32 fn_801D3A24(s32, s32);
 extern void fn_8019AFEC(void);
 extern void fn_80147EC4(EffectDescriptor*);
 

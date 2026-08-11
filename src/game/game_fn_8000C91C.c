@@ -8,7 +8,7 @@ extern void fn_80163BB4(void*, const char*, ...);
 extern void* fn_80201814();
 extern int fn_80038308(void*, int, short*);
 extern void fn_80038878(s32, s32, s16);
-extern void fn_800389E0(void*, s32, s16, s32);
+extern int fn_800389E0(void*, int, s32, int);
 extern float fn_8010181C(float);
 extern void fn_8000C848(s32, s32, float, const char*, s32);
 

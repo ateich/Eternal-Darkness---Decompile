@@ -45,7 +45,7 @@ extern void fn_8020104C(int, void*, void*, int, float);
 extern void* fn_80201814();
 extern void* fn_80201BC8();
 extern int fn_801D3974(s32);
-extern void fn_8012C62C(s32, s32, s32*, s32*, s32*, s32);
+extern void fn_8012C62C(void*, s32, void*, void*, void*, s32);
 extern void fn_8011FA8C(void*, int, int);
 extern void fn_8012CBE8(s32, s32, Vec3f*, Vec3f*, Vec3f*, s32);
 extern void fn_8012F58C(s32, s32, s32, s32, s32, s32);
@@ -106,7 +106,7 @@ s32 fn_80019F98(void* script)
             values.v2 = kind;
             values.v0 = kind;
             values.v1 = lbl_806518D8;
-            fn_8012C62C((s32)state, 15, &values.v0, &values.v1,
+            fn_8012C62C(state, 15, &values.v0, &values.v1,
                          &values.v2, 2);
             fn_8011FA8C(state, 0, 0x1000000);
 
