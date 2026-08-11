@@ -39,7 +39,7 @@ extern int fn_80201B5C(void*);
 extern void* fn_80201BC8();
 extern s32 fn_8011F130(void*);
 extern void fn_801E32F8(InnerState*);
-extern void fn_801E8328();
+extern int fn_801E8328();
 extern void fn_80201D34(void*, s32);
 extern void fn_80201D1C(void*, s32);
 

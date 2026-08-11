@@ -12,8 +12,8 @@ extern char lbl_8064B4F0;
 extern s32 lbl_8064C864;
 extern char lbl_80331748[];
 extern s32 fn_80200C10(void *event);
-extern void *fn_80201BC8(void *context);
-extern void **fn_80201B8C(void *context);
+extern void* fn_80201BC8();
+extern void* fn_80201B8C();
 extern void *fn_80201B94(void *context);
 extern void fn_80130434(void *object, s32 value);
 extern void fn_801301B0(void *object, s32 set, s32 clear);
@@ -21,7 +21,7 @@ extern u32 fn_801A74C0(void *object);
 extern void fn_8011E174(s32 index, s32 value);
 extern u16 fn_801A7580(void *object);
 extern void *fn_801A7490(void *object);
-extern s32 fn_80201814(void *object);
+extern void* fn_80201814();
 extern void fn_800C3FE4(void *context, s32 value, void *object);
 extern void fn_800BEBE4(void *context, s32 value);
 extern s32 fn_80035FB8(void *context, char *first, char *second, char *third,
@@ -66,7 +66,7 @@ s32 fn_800572D8(void *context, void *event, u32 *result)
         if ((fn_801A74C0(linked) & 0x400) != 0 &&
             fn_801A7580(linked) != 0) {
             void *source = fn_801A7490(linked);
-            s32 resolved = fn_80201814(source);
+            s32 resolved = (s32)fn_80201814(source);
             fn_800C3FE4(context, resolved, linked);
         } else if ((state[0x90] & 2) != 0 && (state[0x90] & 8) == 0) {
             fn_800BEBE4(context, 400);
@@ -115,7 +115,7 @@ s32 fn_800572D8(void *context, void *event, u32 *result)
         void *linked = *(void **)*state_ref;
         if (fn_801A7580(linked) != 0) {
             void *source = fn_80201C48(value);
-            s32 resolved = fn_80201814(source);
+            s32 resolved = (s32)fn_80201814(source);
             fn_800C3FE4(context, resolved, linked);
         }
         return 1;

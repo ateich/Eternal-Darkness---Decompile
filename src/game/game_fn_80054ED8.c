@@ -15,19 +15,19 @@ extern s32 lbl_8064C86C;
 extern s32 lbl_8064D18C;
 
 extern s32 fn_80200C10(void *event);
-extern u8 *fn_80201B8C(void *object);
+extern void* fn_80201B8C();
 extern void *fn_80201B9C(void);
 extern void *fn_80201BC0(void *object);
-extern void *fn_80201BC8(void *object);
-extern void *fn_80201814(void *object);
-extern s32 fn_80201EB8(void *object);
-extern void *fn_80201B54(void *object);
+extern void* fn_80201BC8();
+extern void* fn_80201814();
+extern int fn_80201EB8();
+extern int fn_80201B54();
 extern void fn_80201D2C(void *object, s32 value);
 extern void fn_80201D14(void *object, s32 value);
 extern void fn_8011E174(s32 index, s32 value);
 extern void fn_80130434(void *object, s32 value);
 extern void fn_801301B0(void *object, s32 value, s32 mask);
-extern void fn_8011F114(Vec3 *position, void *object);
+extern void fn_8011F114(void*, void*);
 extern s32 fn_8003D69C(void *object);
 extern s32 fn_80036E50(void *object);
 extern unsigned int fn_80178E94(Vec3 *a, Vec3 *b);
@@ -88,7 +88,7 @@ s32 fn_80054ED8(void *context, void *event)
                     }
                     position = *source_position;
                     item_id = fn_80201EB8(item);
-                    related = fn_80201B54(item);
+                    related = (void *)fn_80201B54(item);
                     if (lbl_8064D18C == item_id && item_object != 0 &&
                         fn_80036E50(item) == 3 &&
                         fn_80178E94(&origin, &position) < 700 &&

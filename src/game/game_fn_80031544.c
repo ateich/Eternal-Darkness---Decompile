@@ -41,7 +41,7 @@ extern void fn_80149CC4(void*, Vec3*, s32, s32, s32);
 extern int fn_80035628(void*);
 extern s32 fn_801D39E0(s32);
 extern int fn_80201B54();
-extern void fn_801E8328();
+extern int fn_801E8328();
 extern void fn_801FDA7C(void);
 extern void fn_8014CA98(void);
 

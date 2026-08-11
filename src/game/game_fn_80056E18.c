@@ -6,13 +6,13 @@ typedef unsigned long long u64;
 #pragma use_lmw_stmw on
 
 extern s32 fn_80200C10(void *event);
-extern void *fn_80201BC8(void *context);
-extern s32 fn_80201B54(void *context);
-extern void *fn_80201B8C(void *context);
+extern void* fn_80201BC8();
+extern int fn_80201B54();
+extern void* fn_80201B8C();
 extern void fn_8011E310(s32, s32, s32, s32, s32, s32, s32);
 extern void *fn_80200C38(void *event);
 extern s32 fn_80063D60(void *value, void *runtime, u8 count);
-extern void fn_8020123C(s32 kind, s32 first, s32 second, s32 value);
+extern unsigned long long fn_8020123C();
 extern void fn_8012B344(void *object);
 extern void fn_80201D2C(void *context, s32 value);
 extern void fn_80201D14(void *context, s32 value);
@@ -22,7 +22,7 @@ extern void fn_80066754(void *context, void *event, u32 *result);
 extern void fn_8012B324(void *object);
 extern void fn_80201D34(void *context, s32 value);
 extern void fn_80201D1C(void *context, s32 value);
-extern void fn_801E8328(s32 kind, void *context);
+extern int fn_801E8328();
 
 s32 fn_80056E18(void *context, void *event, u32 *result)
 {

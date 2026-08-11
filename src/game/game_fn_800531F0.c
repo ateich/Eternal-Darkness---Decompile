@@ -76,7 +76,7 @@ extern void fn_80200FC0(s32, s32, s32, float);
 extern void* fn_80201ADC(void);
 extern void fn_80042974(void);
 extern void fn_80042A64(void);
-extern void* fn_80201BC8(void*);
+extern void* fn_80201BC8();
 extern void* fn_8011F950(void*);
 extern void fn_8012BA28(void*);
 extern void fn_801F5980(void);
@@ -106,7 +106,7 @@ extern void* fn_800E4594(s32);
 extern void fn_802367B0(void*, void*);
 extern void fn_80054700(void);
 extern void fn_80048620(s32);
-extern void fn_80201B44(void);
+extern int fn_80201B44(void);
 extern void fn_801D0D30(void);
 extern void fn_80046C98(s32);
 

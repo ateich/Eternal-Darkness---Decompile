@@ -43,7 +43,7 @@ extern void fn_8011FF18(s32);
 extern s32 fn_801D3944(s32);
 extern s32 fn_8002EA18(s32);
 extern void* fn_800CE9A4(void*, s32, s32);
-extern void fn_801E8328();
+extern int fn_801E8328();
 extern s32 fn_801D38E8(s32);
 extern int fn_80201AE4(void);
 extern unsigned long long fn_8020123C();

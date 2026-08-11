@@ -32,7 +32,7 @@ extern void* fn_80201B8C();
 extern int fn_80201B54();
 extern void fn_80201D2C(void*, s32);
 extern void fn_80201D14(void*, s32);
-extern void fn_801E8328();
+extern int fn_801E8328();
 extern s32 fn_80032A0C(void);
 extern void fn_801F6B6C(State* state, IVec3* position, s32 arg2, s32 arg3);
 extern s32 fn_80032924(State* state, IVec3* position);

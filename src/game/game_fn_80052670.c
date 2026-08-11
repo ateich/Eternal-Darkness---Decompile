@@ -63,7 +63,7 @@ extern void fn_80144430(s32, s32);
 extern void fn_801F3528(u32* value);
 extern void fn_801F348C(u32* value, s32 count);
 extern void fn_8015AD00(s32 value);
-extern void fn_80201B44(void);
+extern int fn_80201B44(void);
 extern void fn_801D0D30(void);
 extern void fn_800EE5A0(void);
 

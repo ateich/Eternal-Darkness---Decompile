@@ -14,14 +14,14 @@ typedef struct ObjectLink {
     SceneObject *object;
 } ObjectLink;
 
-extern ObjectLink *fn_80201B8C(void *owner);
-extern void *fn_80201814(u32 resource);
+extern void* fn_80201B8C();
+extern void* fn_80201814();
 extern void fn_8011F0E8(void *object, float *position);
 extern void fn_8012B7A0(void *object, float scale);
 
 void fn_80054CA0(void *owner, void *object, s32 force)
 {
-    SceneObject *source = fn_80201B8C(owner)->object;
+    SceneObject *source = ((ObjectLink *)fn_80201B8C(owner))->object;
 
     if (fn_80201814(source->resource) != 0 || force == 0) {
         fn_8011F0E8(object, source->position);

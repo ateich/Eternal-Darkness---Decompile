@@ -19,8 +19,8 @@ extern char lbl_8064B4E4;
 extern s32 lbl_8064C864;
 extern char lbl_80331748[];
 extern s32 fn_80200C10(void *event);
-extern void *fn_80201BC8(void *context);
-extern void **fn_80201B8C(void *context);
+extern void* fn_80201BC8();
+extern void* fn_80201B8C();
 extern void fn_800C39D0(void *context);
 extern void fn_800BEBE4(void *context, s32 value);
 extern s32 fn_80035FB8(void *context, char *first, char *second, char *third,
@@ -59,7 +59,7 @@ s32 fn_80058394(void *context_arg, void *event_arg, u32 *result)
     strings = lbl_80243A40;
     kind = fn_80200C10(event);
     object = fn_80201BC8(context);
-    state = (HandlerState *)*fn_80201B8C(context);
+    state = (HandlerState *)*(void **)fn_80201B8C(context);
 
     if (kind == 1) return 1;
     if (kind == 2) {

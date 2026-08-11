@@ -9,8 +9,8 @@ extern s32 lbl_8064E4FC;
 extern s32 lbl_8064E500;
 
 extern s32 fn_80200C10(void *event);
-extern void *fn_80201BC8(void *context);
-extern u8 *fn_80201B8C(void *context);
+extern void* fn_80201BC8();
+extern void* fn_80201B8C();
 extern void fn_8012DBE8(void *object, s32 index, u32 *value);
 extern void fn_8011F0E8(void *object, void *value);
 extern void fn_80048708(void *object);

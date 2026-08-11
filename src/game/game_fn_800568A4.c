@@ -8,7 +8,7 @@ typedef unsigned long long u64;
 extern char lbl_80243A40[];
 extern char lbl_8064B4E4;
 extern s32 fn_80200C10(void *event);
-extern void *fn_80201BC8(void *context);
+extern void* fn_80201BC8();
 extern void fn_80130434(void *object, s32 value);
 extern void fn_801301B0(void *object, s32 set, s32 clear);
 extern void fn_8011E174(s32 index, s32 value);

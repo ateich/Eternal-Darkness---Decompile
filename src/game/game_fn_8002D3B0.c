@@ -26,7 +26,7 @@ extern void fn_80201D14(void*, s32);
 extern void* fn_80201814();
 extern ObjectState* fn_80036D38(void*);
 extern void fn_801EF38C(s32);
-extern void fn_801E8328();
+extern int fn_801E8328();
 extern void fn_80201D34(void*, s32);
 extern void fn_80201D1C(void*, s32);
 extern int fn_801E79FC(void*, int);

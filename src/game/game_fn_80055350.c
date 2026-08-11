@@ -8,9 +8,9 @@ extern s32 lbl_8064C86C;
 extern s32 lbl_8064D18C;
 
 extern s32 fn_80200C10(void *event);
-extern void *fn_80201BC8(void *object);
-extern void *fn_80201B54(void *object);
-extern u8 *fn_80201B8C(void *object);
+extern void* fn_80201BC8();
+extern int fn_80201B54();
+extern void* fn_80201B8C();
 extern void fn_8011E174(s32 index, s32 value);
 extern void fn_801301B0(void *object, s32 set, s32 clear);
 extern void fn_801B05E8(s32, s32, s32, s32, s32, s32, s32, s32);
@@ -28,7 +28,7 @@ extern void fn_8012B344(void *object);
 extern void fn_800C63D8(void);
 extern void *fn_801294DC(void *object, s32 type, s32 value, s32 flags);
 extern s32 fn_80128EAC(void *object);
-extern void fn_8020123C(s32 kind, void *owner, void *target, s32 value);
+extern unsigned long long fn_8020123C();
 extern void fn_80128C28(void *object, void *callback, s32 value);
 extern void fn_80204810(void);
 extern void fn_80038308(void *object, s32 index, s16 *value);
@@ -40,7 +40,7 @@ s32 fn_80055350(void *context, void *event, s32 *result)
 {
     s32 kind = fn_80200C10(event);
     void *object = fn_80201BC8(context);
-    void *owner = fn_80201B54(context);
+    void *owner = (void *)fn_80201B54(context);
     u8 *state = fn_80201B8C(context);
 
     if (kind == 1) {

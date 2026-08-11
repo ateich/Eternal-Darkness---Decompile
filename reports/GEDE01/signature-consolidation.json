@@ -1,45 +1,58 @@
 {
   "tool": "tools/signature_audit.py",
-  "scope": "ten most-declared symbols with disagreeing TU-local declarations",
-  "canonical_signatures": {
-    "fn_8001D9FC": "void fn_8001D9FC(int)",
-    "fn_80038464": "int fn_80038464(void*, int, s16*)",
-    "fn_8011EB04": "int fn_8011EB04(void*)",
-    "fn_8016B400": "void fn_8016B400(int, int, int)",
-    "fn_801A852C": "void fn_801A852C(Color, int, int, u32)",
-    "fn_80201E78": "void fn_80201E78(void*, void*)",
-    "fn_80201AE4": "int fn_80201AE4(void)",
-    "fn_80201B64": "int fn_80201B64(void*)",
-    "fn_80204844": "void* fn_80204844(void*, int)",
-    "fn_80035628": "int fn_80035628(void*)"
+  "scope": "ten most-declared symbols with disagreeing TU-local declarations on 2026-08-11",
+  "canonical_declarations": {
+    "fn_80201814": "void* fn_80201814()",
+    "fn_80201B8C": "void* fn_80201B8C()",
+    "fn_80201BC8": "void* fn_80201BC8()",
+    "fn_80201B54": "int fn_80201B54()",
+    "fn_8020123C": "unsigned long long fn_8020123C()",
+    "fn_80201B44": "int fn_80201B44(void)",
+    "fn_801E8328": "int fn_801E8328()",
+    "fn_80201EB8": "int fn_80201EB8()",
+    "fn_80156938": "void* fn_80156938()",
+    "fn_8011F114": "void fn_8011F114(void*, void*)"
   },
+  "resolved_callee_abi": {
+    "fn_80201814": "Consumes the object id in r3 and returns the matching object pointer in r3.",
+    "fn_80201B8C": "Consumes an object pointer in r3 and returns the pointer stored at offset 0x28 in r3.",
+    "fn_80201BC8": "Consumes an object pointer in r3 and returns the pointer stored at offset 0x34 in r3.",
+    "fn_80201B54": "Consumes an object pointer in r3 and returns the signed 32-bit object id stored at offset 0x10 in r3.",
+    "fn_8020123C": "Consumes four 32-bit GPR arguments in r3-r6 and preserves the established 64-bit r3-r4 result contract used by matching callers.",
+    "fn_80201B44": "Consumes no arguments and returns the current object id from the r13 small-data global in r3.",
+    "fn_801E8328": "Consumes a 32-bit kind in r3 and a payload pointer in r4, then returns allocation success in r3.",
+    "fn_80201EB8": "Consumes an object pointer in r3 and returns its signed type id, or -1, in r3.",
+    "fn_80156938": "Consumes a callback/effect pointer in r3 and returns the pointer stored at offset 0x38 in r3.",
+    "fn_8011F114": "Consumes destination and source pointers in r3-r4, copies twelve bytes, and returns no value."
+  },
+  "declaration_policy": "Where older matching reconstructions rely on live incoming GPRs or retain decompiler-only extra arguments, the canonical source declaration intentionally keeps an unspecified parameter list while fixing the return register class. Tightening those parameter lists changes proven retail-matching code generation. Explicit pointer/integer casts were added only where unifying the correct return class required them; objdiff and the linked DOL verify that they are byte-neutral.",
   "evidence": {
-    "retail_callees": "The linked retail-equivalent ELF shows fn_8011EB04 and fn_80035628 reading through r3, fn_8016B400 consuming r3-r5, fn_801A852C reading the four-byte template through r3 and consuming r4-r6, fn_80201E78 consuming r3-r4 without a result, fn_80201AE4 returning the r13 global in r3, fn_80201B64 reading through r3 and returning in r3, and fn_80204844 consuming r3-r4 and returning the found node in r3.",
-    "matched_definitions": "Matching C definitions establish fn_8001D9FC as a one-integer setter, fn_80038464 as a three-argument integer-result getter, and fn_80035628 as a one-pointer integer-result getter.",
-    "call_sites": "Every declaration and call was unified. Explicit result casts or captured call results were added where old-style declarations had depended on live r3. The Color spelling preserves the established PPC EABI lowering: the UI caller's four-byte aggregate and the other callers' local pointer typedefs all place the read-only template address in r3 without changing generated code."
+    "retail_callees": "Disassembly of build/GEDE01/main.elf at 0x8011F114, 0x80156938, 0x801E8328, 0x8020123C, 0x80201814, 0x80201B44, 0x80201B54, 0x80201B8C, 0x80201BC8 and 0x80201EB8 establishes the consumed and returned PPC registers.",
+    "matching_call_sites": "All declaration variants and their callers were audited. Source-level casts normalize differing pointer and integer readings without introducing instructions; unspecified parameter lists preserve already-matching live-register call sequences.",
+    "linked_image": "Every symbol was followed by a rebuild and objdiff report. No previously matching function or object was lost, and the final linked image is byte-identical to retail."
   },
   "post_audit": {
     "target_symbols_remaining_in_return_register_contradictions": 0,
     "target_symbols_remaining_in_abi_divergent": 0,
     "target_symbols_remaining_in_cosmetic": 0,
-    "all_abi_divergent_symbols": 199,
-    "all_cosmetic_symbols": 117
+    "all_abi_divergent_symbols": 220,
+    "all_cosmetic_symbols": 155
   },
   "per_symbol_rebuilds": {
     "symbols_verified": 10,
-    "matched_functions_after_each": 610,
-    "complete_objects_after_each": 599,
-    "matched_code_bytes_after_each": 150800,
-    "matched_data_bytes_after_each": 15964,
+    "matching_functions_after_each": 683,
+    "complete_objects_after_each": 683,
+    "matched_code_bytes_after_each": 173444,
+    "matched_data_bytes_after_each": 20060,
     "previously_matching_functions_lost_after_each": 0
   },
   "final_objdiff": {
-    "matching_functions": 610,
-    "complete_objects": 599,
-    "matched_code_bytes": 150800,
-    "matched_data_bytes": 15964
+    "matching_functions": 683,
+    "complete_objects": 683,
+    "matched_code_bytes": 173444,
+    "matched_data_bytes": 20060
   },
   "progress_json_changed": false,
-  "next_gate": "0x8023FCD0",
+  "next_gate": "0x80058834",
   "main_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
 }

@@ -64,7 +64,7 @@ extern void* fn_80201BC0(void*);
 extern void* fn_80201814();
 extern void* fn_80201BC8();
 extern unsigned long long fn_8020123C();
-extern void fn_801E8328();
+extern int fn_801E8328();
 
 #define FIELD(data, offset) (*(void**)((data)->bytes + (offset)))
 

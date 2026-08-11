@@ -11,9 +11,9 @@ extern s32 lbl_8064C870;
 extern s32 lbl_8064C874;
 extern char lbl_80331748[];
 extern s32 fn_80200C10(void *event);
-extern void *fn_80201BC8(void *context);
+extern void* fn_80201BC8();
 extern void *fn_80201B94(void *context);
-extern void **fn_80201B8C(void *context);
+extern void* fn_80201B8C();
 extern void fn_801A9FA4(void *object, s32 value);
 extern void fn_8012B344(void *object);
 extern void *fn_801A7778(void *object);
@@ -27,7 +27,7 @@ extern void fn_80201D2C(void *context, s32 value);
 extern void fn_80201D14(void *context, s32 value);
 extern s32 fn_8004918C(void);
 extern void *fn_80201C48(void *value);
-extern s32 fn_80201814(void *object);
+extern void* fn_80201814();
 extern s32 fn_801A7490(void *object);
 extern u32 fn_801A7770(void *object);
 extern void fn_801A7678(void *object, u32 value);
@@ -97,7 +97,7 @@ s32 fn_80057AC0(void *context, void *event, u32 *result)
     if (kind == 43) {
         s32 current = fn_8004918C();
         void *linked = *(void **)*state_ref;
-        s32 resolved = fn_80201814(fn_80201C48(value));
+        s32 resolved = (s32)fn_80201814(fn_80201C48(value));
         if (linked != 0) {
             s32 owner = fn_801A7490(linked);
             s32 current_owner = fn_801A7490((void *)current);

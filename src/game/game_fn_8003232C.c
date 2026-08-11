@@ -68,7 +68,7 @@ extern void fn_8020104C(int, void*, void*, int, float);
 extern void fn_80191204(void*, s32);
 extern void fn_801911FC(void*, s32);
 extern u8 fn_80180130(void*);
-extern void fn_801E8328();
+extern int fn_801E8328();
 
 s32 fn_8003232C(void* object, s32 action, void* event, s32* completed)
 {

@@ -2,7 +2,7 @@ typedef signed int s32;
 typedef unsigned char u8;
 
 extern s32 fn_80200C10(void *event);
-extern void *fn_80201BC8(void *context);
+extern void* fn_80201BC8();
 extern void fn_8011E174(s32 index, s32 value);
 extern void fn_800C9B74(void *context, void *object);
 extern void fn_80201D2C(void *context, s32 value);
