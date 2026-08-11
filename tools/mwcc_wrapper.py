@@ -118,10 +118,15 @@ def main() -> None:
         "game_data_80240648.o",
         "game_data_802407A8.o",
         "game_data_80240908.o",
+        "game_fn_80050730.o",
         "game_fn_80028E88.o",
         "game_fn_80037AF4.o",
     ):
         set_section_alignment(output, b".data", 4)
+        payload = output.read_bytes().replace(b".comment\0", b".ignored\0")
+        output.write_bytes(payload)
+    if output is not None and output.name == "game_fn_80050A7C.o":
+        set_section_alignment(output, b".rodata", 4)
         payload = output.read_bytes().replace(b".comment\0", b".ignored\0")
         output.write_bytes(payload)
 
