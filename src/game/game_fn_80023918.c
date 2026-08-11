@@ -1,5 +1,6 @@
 typedef unsigned char u8;
 typedef unsigned int u32;
+typedef int s32;
 
 extern u32 lbl_8030241C[];
 extern u8 lbl_803026DC[];
@@ -13,7 +14,7 @@ extern void fn_800AFBA8(u8*);
 extern void fn_8001DE84(int, int);
 extern unsigned int fn_801A98F4(int, int);
 extern void fn_800B177C(int, void*);
-extern void fn_800B689C(int, int);
+extern void fn_800B689C(s32, s32);
 extern void fn_800B2548(int, int);
 extern void fn_8001DE68(void);
 extern void fn_80023800(int);

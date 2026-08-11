@@ -1,5 +1,6 @@
 typedef unsigned char u8;
 typedef unsigned int u32;
+typedef int s32;
 
 typedef struct RuntimeState {
     u8 pad_00[0x2C];
@@ -17,7 +18,7 @@ extern u32 lbl_8064CCF4;
 extern int lbl_8064D18C;
 extern void* lbl_8064D74C;
 
-extern void fn_801EFE84(int);
+extern void fn_801EFE84(s32);
 extern void fn_8001E644(int, int, int);
 extern void fn_801E7974(void*, int);
 extern u32 fn_8015AA0C(void);
@@ -27,7 +28,7 @@ extern void fn_800242B8(u32);
 extern void fn_801EF530(void);
 extern void fn_801EF580(void*);
 extern void fn_801EB194(int);
-extern void fn_801AD404(int, int, int);
+extern void fn_801AD404(s32, s32, s32);
 extern void fn_801AD4B4(int, int, int, int);
 extern void fn_801A99B4(void);
 extern int fn_801AD898(void);

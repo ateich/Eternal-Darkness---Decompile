@@ -1,4 +1,5 @@
 typedef unsigned int u32;
+typedef int s32;
 
 extern u32 lbl_8030241C[];
 extern void* lbl_8064C674;
@@ -14,7 +15,7 @@ extern void fn_80025A78(int);
 extern void fn_801E5FB0(void*);
 #define fn_801E5FB0(a) fn_801E5FB0((void*)(a))
 
-extern void fn_801AD404(int, int, int);
+extern void fn_801AD404(s32, s32, s32);
 extern void fn_801AD490(void);
 
 void fn_80023A68(void)

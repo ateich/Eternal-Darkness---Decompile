@@ -1,10 +1,11 @@
 typedef unsigned char u8;
+typedef int s32;
 
 extern void fn_800B18F8(void);
 extern u8 fn_80045230(void);
 extern void fn_800238BC(int);
 extern void fn_800B177C(int, void*);
-extern void fn_800B689C(int, int);
+extern void fn_800B689C(s32, s32);
 extern void fn_800B2548(int, int);
 extern void fn_80020D90(int);
 extern void fn_8001DE68(void);
