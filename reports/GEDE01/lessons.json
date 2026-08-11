@@ -4,21 +4,21 @@
   "lessons": [
     {
       "category": "register-allocation",
-      "functions": ["fn_8000F1DC", "fn_8000F774", "fn_8000FDE8", "fn_800173CC", "fn_80020150", "fn_80026320", "fn_80026DC8", "fn_8002BFE0", "fn_8002DAE0", "fn_8002F428", "fn_8002FAE8", "fn_80031D24", "fn_80033180", "fn_80034708", "fn_800359A0", "fn_80036374", "fn_800365C8"],
+      "functions": ["fn_8000F1DC", "fn_8000F774", "fn_8000FDE8", "fn_800173CC", "fn_80020150", "fn_80026320", "fn_80026DC8", "fn_8002BFE0", "fn_8002DAE0", "fn_8002F428", "fn_8002FAE8", "fn_80031D24", "fn_80033180", "fn_80034708", "fn_800359A0", "fn_80036374", "fn_800365C8", "fn_80050B08", "fn_80052900", "fn_800539D8", "fn_800542D0"],
       "precise_divergence": "Canonical MWCC rotates, swaps, or coalesces overlapping long-lived values across callee-saved GPRs differently from retail, even when size, control flow, and relocations otherwise agree.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
     },
     {
       "category": "register-allocation",
-      "functions": ["fn_8000E96C", "fn_8001CA04", "fn_80032A5C"],
+      "functions": ["fn_8000E96C", "fn_8001CA04", "fn_80032A5C", "fn_80052CC0", "fn_800542D0"],
       "precise_divergence": "Canonical MWCC assigns short-lived volatile integer or floating-point webs to different registers: f1/f4 instead of retail f0/f2, r3 instead of retail r5 for a converted mode, or r4/r5 in the opposite roles for a zero/max temporary and current byte.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
     },
     {
       "category": "register-allocation",
-      "functions": ["main", "fn_800169FC", "fn_8001DE84", "fn_8001DFEC", "fn_8001E144", "fn_8001E894", "fn_8002B5B4", "fn_80031694"],
+      "functions": ["main", "fn_800169FC", "fn_8001DE84", "fn_8001DFEC", "fn_8001E144", "fn_8001E894", "fn_8002B5B4", "fn_80031694", "fn_80052670", "fn_80052900", "fn_80052CC0", "fn_800531F0", "fn_800539D8"],
       "precise_divergence": "Canonical MWCC materializes, folds, or coalesces object, table, string, or stack-address bases differently from retail, changing temporary registers, indexed-versus-displacement loads, relocation counts, or prologue size.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
@@ -94,6 +94,13 @@
       "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80037AF4"]
     },
     {
+      "category": "register-allocation",
+      "functions": ["fn_80054040"],
+      "precise_divergence": "Keeping the spawned object in a distinct local shortens the incoming create-record lifetime and does not reproduce retail's r29 allocation.",
+      "workaround": "Reuse the incoming create-record local for the spawned object.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80054040"]
+    },
+    {
       "category": "instruction-scheduling",
       "functions": ["fn_80008014"],
       "precise_divergence": "GC/1.3 emits the loop-index copy in the loop body, while retail schedules the same copy in the loop latch.",
@@ -109,7 +116,7 @@
     },
     {
       "category": "instruction-scheduling",
-      "functions": ["fn_8000F1DC", "fn_8001E144", "fn_80026320", "fn_8002B748", "fn_80031544", "fn_80031D24", "fn_80033180"],
+      "functions": ["fn_8000F1DC", "fn_8001E144", "fn_80026320", "fn_8002B748", "fn_80031544", "fn_80031D24", "fn_80033180", "fn_80053048", "fn_800531F0", "fn_800539D8", "fn_800542D0"],
       "precise_divergence": "Equivalent stores, loads, argument setup, or temporary copies occupy a different local scheduling window from retail, sometimes shifting subsequent relocation sites despite matching behavior.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
@@ -136,6 +143,13 @@
       "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80021490"]
     },
     {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80049E74"],
+      "precise_divergence": "Canonical GC/1.3 emits ten signed-16-bit zero tests as extsh. instructions, while retail uses the equivalent cmpwi form; function size and all text relocations otherwise agree.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80049E74"]
+    },
+    {
       "category": "jump-table-strategy",
       "functions": ["fn_80006F30"],
       "precise_divergence": "Semantically equivalent conditional source did not reproduce retail's sparse branch tree; expressing the result handling as a switch over -2, -1, 0, and default did.",
@@ -158,10 +172,10 @@
     },
     {
       "category": "jump-table-strategy",
-      "functions": ["fn_8000A668", "fn_8000EE9C", "fn_8001E644", "fn_80020E94"],
+      "functions": ["fn_8000A668", "fn_8000EE9C", "fn_8001E644", "fn_80020E94", "fn_80050730"],
       "precise_divergence": "MWCC's dense-switch jump tables are compiler-owned data in the function's translation unit; leaving them externalized in aggregate data prevents the complete object from matching and linking at the retail layout.",
       "workaround": "Name and assign each generated jump-table region to its owning translation unit, normalize the split object's data alignment where documented, and shrink the standalone auto-data object accordingly.",
-      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8000A668, fn_8000EE9C, fn_8001E644, and fn_80020E94"]
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8000A668, fn_8000EE9C, fn_8001E644, fn_80020E94, and fn_80050730"]
     },
     {
       "category": "jump-table-strategy",
@@ -171,8 +185,22 @@
       "evidence": ["reports/GEDE01/progress.json: open_items entries for game_data_8023DAB4/game_data_8023DAB8, game_data_8023E388, game_data_8023E448, game_data_8023E4E8, game_data_8023E868, game_data_8023EAC0, game_data_8023EAE8, game_data_8023EC18, game_data_8023EC50, game_data_8023ECBC, game_data_8023EE94, game_data_8023EEE4, game_data_8023EF34, game_data_8023EF84, and game_data_8023F204 through game_data_80240908"]
     },
     {
+      "category": "jump-table-strategy",
+      "functions": ["fn_80049818", "fn_8004998C"],
+      "precise_divergence": "Canonical GC/1.3 folds retail's equivalent lower-bound branch-plus-jump pairs or nested-switch branches into shorter inverted branches, producing eight fewer code bytes.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80049818 and fn_8004998C"]
+    },
+    {
+      "category": "jump-table-strategy",
+      "functions": ["fn_80050B08"],
+      "precise_divergence": "Canonical GC/1.3's compiler-generated switch layout and ownership differ from retail within the recovered weapon-type and sound-type dispatch; generated code is 5796 bytes with 98 relocation-bearing instructions versus 5904 bytes and 100 in retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80050B08"]
+    },
+    {
       "category": "float-constant-placement",
-      "functions": ["fn_8000FDE8", "fn_800173CC", "fn_80018708", "fn_80018EF4", "fn_8001B294", "fn_8001C078", "fn_8001CA04", "fn_80026320", "fn_80026768", "fn_80026DC8", "fn_8002DAE0", "fn_8002F428", "fn_80031544", "fn_80033180", "fn_800359A0", "fn_80048ADC", "fn_80048B24"],
+      "functions": ["fn_8000FDE8", "fn_80015568", "fn_80015D40", "fn_800173CC", "fn_80018708", "fn_80018EF4", "fn_8001B294", "fn_8001C078", "fn_8001CA04", "fn_80026320", "fn_80026768", "fn_80026DC8", "fn_8002DAE0", "fn_8002F428", "fn_80031544", "fn_80033180", "fn_800359A0", "fn_80048ADC", "fn_80048B24", "fn_80052310"],
       "precise_divergence": "Canonical MWCC emits a signed- or unsigned-integer conversion bias as a compiler-private literal (often in sdata2), while retail relocates against an existing shared constant; code may otherwise be identical.",
       "workaround": "Externalize the conversion-bias constant to the retail symbol when its identity is known.",
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
