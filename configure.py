@@ -543,21 +543,20 @@ config.custom_build_rules = [
         "description": "NAME SWITCH $in",
     },
     {
-        "name": "externalize_game_80020E94_switch",
+        "name": "name_game_80020E94_switch",
         "command": (
-            "python3 tools/externalize_elf_symbol.py $in @57 && "
             "build/binutils/powerpc-eabi-objcopy "
-            "--redefine-sym=@57=jumptable_8023DA70 --remove-section=.data $in "
+            "--redefine-sym=@57=jumptable_8023DA70 $in "
             "&& touch $out"
         ),
-        "description": "EXTERNALIZE SWITCH $in",
+        "description": "NAME SWITCH $in",
     },
 ]
 config.custom_build_steps = {
     "post-compile": [
         {
-            "outputs": [f"build/{VERSION}/src/game/game_fn_80020E94.externalized"],
-            "rule": "externalize_game_80020E94_switch",
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80020E94.named"],
+            "rule": "name_game_80020E94_switch",
             "inputs": [f"build/{VERSION}/src/game/game_fn_80020E94.o"],
         },
         {
@@ -1333,11 +1332,9 @@ config.libs = [
             Object(NonMatching, "game/game_fn_8000FDE8.c"),
             Object(Matching, "game/game_fn_8000FFD8.c"),
             Object(Matching, "game/game_fn_8001007C.c"),
-            # 92.788734%: retail retains the overwritten first script
-            # argument's fctiwz/stfd/lwz conversion; canonical MWCC removes
-            # it. All 10 relocation targets/addends agree; 6/10 sites remain
-            # equal before the missing 12-byte sequence shifts the tail.
-            Object(NonMatching, "game/game_fn_800115CC.c"),
+            # 100%: argument 1 is the object id and argument 3 is the value;
+            # keeping them distinct preserves retail's three conversions.
+            Object(Matching, "game/game_fn_800115CC.c"),
             Object(Matching, "game/game_fn_800116E8.c"),
             Object(Matching, "game/game_fn_800117CC.c"),
             Object(Matching, "game/game_fn_80011888.c"),
@@ -1649,6 +1646,7 @@ config.libs = [
             Object(Matching, "game/game_fn_8001FB94.c"),
             Object(Matching, "game/game_fn_8001FE1C.c"),
             Object(Matching, "game/game_fn_8002014C.c"),
+            Object(Matching, "game/game_data_8023DA2C.c"),
             Object(NonMatching, "game/game_fn_80020150.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_80020D70.c"),
             Object(Matching, "game/game_fn_80020D90.c"),

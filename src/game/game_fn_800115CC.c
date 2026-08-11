@@ -25,6 +25,7 @@ extern void* fn_80201B8C();
 s32 fn_800115CC(void* script)
 {
     register s32 value;
+    s32 object_id;
     s32 option;
     void* entry;
     ObjectInfo* object;
@@ -34,10 +35,10 @@ s32 fn_800115CC(void* script)
         return 0;
     }
 
-    value = (s32)fn_8016A694(script, 1);
+    object_id = (s32)fn_8016A694(script, 1);
     option = (s32)fn_8016A694(script, 2);
     value = (s32)fn_8016A694(script, 3);
-    entry = fn_80201814(value);
+    entry = fn_80201814(object_id);
     if (entry != 0) {
         object = fn_80201B8C(entry);
         if (object->type == 7) {
