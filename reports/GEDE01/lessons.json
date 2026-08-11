@@ -39,10 +39,17 @@
     },
     {
       "category": "register-allocation",
-      "functions": ["fn_8000EC94"],
-      "precise_divergence": "Combining the object-info lookup with the halfword assignment lets canonical MWCC shorten the converted s32 value's lifetime and emit a redundant pre-call extsh that is absent from retail.",
-      "workaround": "Separate the object-info lookup from the halfword assignment so the s32 value remains live until the direct sth.",
-      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8000EC94"]
+      "functions": ["fn_8000EC94", "fn_8001BFD0"],
+      "precise_divergence": "Combining an object-info lookup with a later halfword assignment lets canonical MWCC shorten the converted s32 value's lifetime and emit a redundant extsh or clrlwi that is absent from retail.",
+      "workaround": "Evaluate the lookup separately into the documented typed pointer so the raw s32 remains live across the calls until the direct halfword store.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8000EC94 and fn_8001BFD0"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_800115CC"],
+      "precise_divergence": "Reusing the script-argument local for the option-switch result lets canonical MWCC eliminate the overwritten first argument's conversion, while retail preserves that value for the later fn_80201814 call.",
+      "workaround": "Recover a distinct object_id local so script argument 1 and the option-switch value have separate lifetimes.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800115CC"]
     },
     {
       "category": "register-allocation",
@@ -102,10 +109,17 @@
     },
     {
       "category": "instruction-scheduling",
-      "functions": ["fn_80018CC4", "fn_8002B748", "fn_80031544", "fn_80031D24", "fn_80033180"],
+      "functions": ["fn_8002B748", "fn_80031544", "fn_80031D24", "fn_80033180"],
       "precise_divergence": "Equivalent stores, loads, argument setup, or temporary copies occupy a different local scheduling window from retail, sometimes shifting subsequent relocation sites despite matching behavior.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80018CC4"],
+      "precise_divergence": "An unnecessary volatile qualifier on the local value pair and non-retail low-byte assignment order change the constant schedule and stack-store order.",
+      "workaround": "Remove the volatile qualifier and assign the duplicated transformed values' low bytes in retail order.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80018CC4"]
     },
     {
       "category": "instruction-scheduling",
@@ -144,10 +158,10 @@
     },
     {
       "category": "jump-table-strategy",
-      "functions": ["fn_8000A668"],
-      "precise_divergence": "The function's two dense switches require its 60-entry and 54-entry jump tables to be owned by the same translation unit; leaving them in aggregate data prevents promotion of the complete object.",
-      "workaround": "Assign .data 0x8023BF28-0x8023C0F0 to the translation unit and shrink the auto data object.",
-      "evidence": ["reports/GEDE01/progress.json: penultimate open_items entry"]
+      "functions": ["fn_8000A668", "fn_8000EE9C", "fn_8001E644", "fn_80020E94"],
+      "precise_divergence": "MWCC's dense-switch jump tables are compiler-owned data in the function's translation unit; leaving them externalized in aggregate data prevents the complete object from matching and linking at the retail layout.",
+      "workaround": "Name and assign each generated jump-table region to its owning translation unit, normalize the split object's data alignment where documented, and shrink the standalone auto-data object accordingly.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8000A668, fn_8000EE9C, fn_8001E644, and fn_80020E94"]
     },
     {
       "category": "float-constant-placement",

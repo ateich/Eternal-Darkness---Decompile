@@ -1,0 +1,16 @@
+typedef unsigned short u16;
+
+/* Per-texture bottom-right offsets used by fn_80027030. */
+#pragma force_active on
+u16 lbl_8023DFAC[9][2] = {
+    {0x2C, 0x20},
+    {0x2B, 0x35},
+    {0x23, 0x3F},
+    {0x2C, 0x31},
+    {0x26, 0x3F},
+    {0x25, 0x3B},
+    {0x23, 0x3F},
+    {0x28, 0x3C},
+    {0x38, 0x2F},
+};
+#pragma force_active reset
