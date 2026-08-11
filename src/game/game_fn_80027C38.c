@@ -22,7 +22,7 @@ extern u32 lbl_8064C6F8;
 extern s32 lbl_8064C700;
 extern s32 lbl_8064C708;
 
-extern void* fn_80201B9C();
+extern void* fn_80201B9C(void);
 extern void* fn_80204844(void*, int);
 extern Manager* fn_8006D444(void*);
 extern void fn_801E5FB0(void*);
@@ -40,7 +40,7 @@ void fn_80027C38(s32 value, EventPayload* payload)
     void* object;
     Manager* manager;
 
-    object = fn_80204844(fn_80201B9C(value), 0x20);
+    object = fn_80204844(fn_80201B9C(), 0x20);
     manager = fn_8006D444(object);
     if (payload->handle != 0) {
         fn_801E5FB0(payload->handle);

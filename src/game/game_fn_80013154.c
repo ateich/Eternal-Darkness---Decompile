@@ -1,7 +1,7 @@
 typedef int s32;
 
 extern double fn_8016A694(void*, int);
-extern int fn_80201B44();
+extern int fn_80201B44(void);
 extern void fn_800CC140(s32, s32, s32, s32, s32);
 
 s32 fn_80013154(void* script)

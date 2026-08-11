@@ -3,11 +3,11 @@ typedef int s32;
 
 extern s32 lbl_8064D18C;
 
-extern void* fn_80201B9C();
+extern void* fn_80201B9C(void);
 extern void* fn_80201BC8();
 extern void* fn_80201BC0(void*);
 extern s32 fn_8011FB4C(void*);
-extern int fn_80038308(void*, int, short*);
+extern int fn_80038308(void* object, int channel, short* value);
 extern s32 fn_8013B8C0(void*, void*);
 
 s32 fn_80034054(register void* target, register s32 check_value)

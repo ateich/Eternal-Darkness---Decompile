@@ -14,7 +14,7 @@ extern int fn_8011E86C(void);
 extern void fn_8016ADF0(s16, int, int);
 extern int fn_8011E84C(void);
 extern int fn_8011E85C(void);
-extern int fn_80201B44();
+extern int fn_80201B44(void);
 extern void fn_801D0D30(void);
 extern void fn_8011E26C(int);
 extern void fn_80027F44(int);

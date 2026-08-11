@@ -7,13 +7,13 @@ typedef int s32;
 
 extern const char lbl_8023BEF8[];
 extern s32 fn_800DE3F8(void);
-extern void fn_800DE354(void);
+extern s32 fn_800DE354(void);
 extern void* fn_80201814();
 extern s32 fn_8016A598(void*);
 extern void fn_80163BB4(void*, const char*, ...);
-extern int fn_80201B44();
+extern int fn_80201B44(void);
 extern unsigned long long fn_8020123C();
-extern int fn_80038308(void*, int, short*);
+extern int fn_80038308(void* object, int channel, short* value);
 extern int fn_80038464(void*, int, s16*);
 extern void fn_8016A830(void*, double);
 
@@ -35,8 +35,7 @@ s32 fn_80009AB4(void* script)
         return 0;
     }
 
-    fn_800DE354();
-    object = fn_80201814();
+    object = fn_80201814(fn_800DE354());
     if (handle != 0) {
         message_result =
             fn_8020123C(0x3B, fn_80201B44(), handle, 0) & 0xFFFFFFFFULL;

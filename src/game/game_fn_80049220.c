@@ -1,6 +1,6 @@
 typedef signed int s32;
 
-extern s32 fn_80201B54(void* object);
+extern int fn_80201B54();
 extern void* fn_80158598(s32 object_id, s32 index);
 extern s32 fn_80157E1C(void* object);
 extern s32 fn_80157FE0(void* object, s32 index, s32 value);

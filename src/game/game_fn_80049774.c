@@ -1,17 +1,17 @@
 typedef unsigned char u8;
 
-extern void* fn_80201B3C(int value);
-extern void* fn_80201B44(void* object);
+extern void* fn_80201B3C(void);
+extern int fn_80201B44(void);
 extern void* fn_80158598(void* object, int index);
 extern int fn_80157E1C(void* object);
 extern void* fn_80157E24(void* object, int index);
-extern void* fn_80201814(void* object);
+extern void* fn_80201814();
 extern void fn_802020B4(void* object, u8 value);
 
 void fn_80049774(int value)
 {
-    void* first = fn_80201B3C(value);
-    void* object = fn_80201B44(first);
+    void* first = fn_80201B3C();
+    void* object = (void*)fn_80201B44();
 
     if (first != 0) {
         u8 byte;

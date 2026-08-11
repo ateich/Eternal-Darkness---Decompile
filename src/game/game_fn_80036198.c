@@ -22,7 +22,7 @@ s32 fn_80036198(void* object, void* argument)
     register s32 id;
 
     id = fn_801A7498((void*)argument_r);
-    inner = ((Object*)fn_80201B8C(fn_80201814()))->inner;
+    inner = ((Object*)fn_80201B8C(fn_80201814(id)))->inner;
     fn_8020123C(0x30, id, inner->value, (void*)argument_r);
     return 1;
 }

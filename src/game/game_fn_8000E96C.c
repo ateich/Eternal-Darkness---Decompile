@@ -34,7 +34,7 @@ extern void* fn_8015C390(s32);
 extern void* fn_8015C2FC(s32);
 extern s32 fn_8016A598(void*);
 extern void fn_80163BB4(void*, const char*, ...);
-extern int fn_80201B44();
+extern int fn_80201B44(void);
 extern void* fn_80201814();
 extern void* fn_80201BC8();
 extern void fn_8013F3C0(float (*)[4], const Vec3*, const Vec3*,

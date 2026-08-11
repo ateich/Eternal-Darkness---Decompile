@@ -9,7 +9,7 @@ typedef struct Entry {
 
 extern s32 lbl_8064D18C;
 extern const char lbl_8023BEF8[];
-extern void* fn_80201B9C();
+extern void* fn_80201B9C(void);
 extern s32 fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);

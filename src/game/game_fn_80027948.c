@@ -32,7 +32,7 @@ extern void* fn_80155DB4(void*);
 extern void* fn_80201C24();
 extern void fn_80204E0C(void*, void*);
 extern s32 fn_801579F4(void*);
-extern void* fn_80201B3C();
+extern void* fn_80201B3C(void);
 extern int fn_80201EB8();
 extern void fn_8011FB54(void*, void*);
 extern void fn_8011FA8C(void*, int, int);

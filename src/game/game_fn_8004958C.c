@@ -16,10 +16,10 @@ extern u32 fn_80157994(void* object);
 extern s32 fn_80157E1C(void* list);
 extern void* fn_80157E24(void* list, s32 index);
 extern void* fn_80158598(void* object, s32 index);
-extern void* fn_80201814(void* entry);
-extern void* fn_80201B54(void* object);
-extern void* fn_80201BC8(void* object);
-extern void* fn_80201C24(void* object);
+extern void* fn_80201814();
+extern int fn_80201B54();
+extern void* fn_80201BC8();
+extern void* fn_80201C24();
 extern void fn_80205680(void* object, void* parent, s32 value);
 
 void fn_8004958C(void* object, s32 value)
@@ -29,7 +29,7 @@ void fn_8004958C(void* object, s32 value)
     s32 index;
     void* list;
 
-    parent = fn_80201B54(object);
+    parent = (void*)fn_80201B54(object);
     list = fn_80158598(parent, 0);
     if (list != 0) {
         count = fn_80157E1C(list);

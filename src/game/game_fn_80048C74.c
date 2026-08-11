@@ -19,13 +19,13 @@ extern int lbl_8064C834;
 
 extern void fn_801F683C(TransformData* value);
 extern void* fn_80201B94(void* object);
-extern void* fn_80201BC8(void* object);
-extern void* fn_80201B54(void* object);
+extern void* fn_80201BC8();
+extern int fn_80201B54();
 extern u32 fn_80201B64(void* object);
 extern void* fn_80201C48(void* object);
 extern void fn_80201DD8(void* object, u32 value);
 extern void fn_80211A6C(void* to, void* from, Vec3* output);
-extern void fn_8020123C(u32 event, void* first, void* second, void* object);
+extern unsigned long long fn_8020123C();
 
 extern void fn_801A6E90(void);
 extern void fn_801A6DEC(void* object);
@@ -83,7 +83,7 @@ void fn_80048C74(void* view)
     target = source;
     callback = fn_80201B94(view);
     actor = fn_80201BC8(view);
-    object = fn_80201B54(view);
+    object = (void*)fn_80201B54(view);
     fn_801A6E90();
     fn_80211A6C(&target.words[3], &target.words[0], &direction);
     fn_800490E8(direction.y, direction.x);

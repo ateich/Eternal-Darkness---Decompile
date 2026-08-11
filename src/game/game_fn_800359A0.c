@@ -38,7 +38,7 @@ extern State* fn_80036D38(void*);
 extern void fn_80201E78(void*, void*);
 extern void* fn_80201B8C();
 extern unsigned int fn_80036D5C(void*);
-extern int fn_80201B44();
+extern int fn_80201B44(void);
 extern void* fn_80201C48(void*);
 extern int fn_80201EB8();
 extern s32 fn_80035958(void*);
@@ -46,7 +46,7 @@ extern unsigned long long fn_8020123C();
 extern s32 fn_80201CD4(void*);
 extern void fn_80201E60(void*, s32);
 extern void fn_80201DD8(void*, s32);
-extern void* fn_80201B9C();
+extern void* fn_80201B9C(void);
 extern s32 fn_800CAF7C(void*);
 extern void* fn_80201814();
 extern void* fn_80201BC0(void*);
@@ -105,7 +105,7 @@ s32 fn_800359A0(register void* source, register void* requested)
     } else {
         requested_id = 0;
     }
-    requested_object = (void*)fn_80201B44(requested_id);
+    requested_object = (void*)fn_80201B44();
     if (requested != 0) {
         requested_flags = fn_80036D5C(requested);
     } else {

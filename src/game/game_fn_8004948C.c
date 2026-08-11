@@ -10,7 +10,7 @@ extern s32 fn_800FBFB0(void* object);
 extern u32 fn_80157888(void* object);
 extern s32 fn_80157C80(void* object);
 extern void fn_801A7680(void* destination, void* object);
-extern void* fn_80201C24(void* object);
+extern void* fn_80201C24();
 
 void fn_8004948C(void* object, void* destination, s32 mode)
 {

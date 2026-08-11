@@ -20,8 +20,8 @@ typedef struct Entry {
 extern const char lbl_8023BEF8[];
 extern s32 lbl_8064D18C;
 extern double lbl_8064DCF8;
-extern void* fn_80201B9C();
-extern int fn_80201B44();
+extern void* fn_80201B9C(void);
+extern int fn_80201B44(void);
 extern void* fn_80201814();
 extern void fn_80201E78(void*, void*);
 extern s32 fn_8016A598(void*);
@@ -54,7 +54,7 @@ s32 fn_8000A0A0(void* script)
     iterator = fn_80201B9C();
     count = 0;
     handle = fn_80201B44();
-    object = fn_80201814();
+    object = fn_80201814(handle);
     fn_80201E78(&position, object);
     if (fn_8016A598(script) != 0) {
         fn_80163BB4(script, lbl_8023BEF8, 0, fn_8016A598(script));

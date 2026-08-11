@@ -58,7 +58,7 @@ extern s32 fn_801D38E8(s32);
 extern void fn_801D3BE4(s32, s32*, s32*);
 extern s32 fn_801CEB2C(s32);
 extern int fn_801D3974(s32);
-extern int fn_80038308(void*, int, short*);
+extern int fn_80038308(void* object, int channel, short* value);
 extern int fn_80038464(void*, int, s16*);
 extern int fn_800389E0(void*, int, s32, int);
 extern s32 fn_80047178(void);

@@ -15,10 +15,10 @@ typedef struct ObjectData {
 
 extern void* fn_80201B8C();
 extern u32 fn_8020216C(void*);
-extern int fn_80038308(void*, int, short*);
+extern int fn_80038308(void* object, int channel, short* value);
 extern int fn_80038464(void*, int, s16*);
 extern int fn_80201B54();
-extern int fn_80201B44();
+extern int fn_80201B44(void);
 extern int fn_80070A6C(int);
 extern void* fn_80201BC8();
 extern void fn_80201D88(void*, s16);

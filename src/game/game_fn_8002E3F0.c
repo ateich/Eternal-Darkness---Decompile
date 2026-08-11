@@ -15,7 +15,7 @@ extern void fn_8020104C(int, void*, void*, int, float);
 #define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void*)(b), (void*)(c), (d), (e))
 extern void fn_80201D2C(void*, s32); extern void fn_80201D14(void*, s32);
 extern void* fn_801A717C(void); extern void fn_801A74A0(void*,s32); extern void fn_801A74A8(void*,s32); extern void fn_801A7538(void*,s32);
-extern void* fn_80201814(); extern int fn_80201B44(); extern s32 fn_80071DD8(void); extern s32 fn_801CEB2C(s32);
+extern void* fn_80201814(); extern int fn_80201B44(void); extern s32 fn_80071DD8(void); extern s32 fn_801CEB2C(s32);
 extern s32 fn_801D38E8(s32); extern int fn_80035628(void*); extern s32 fn_801D1B10(s16,s32,s32,u8);
 extern void fn_801A7518(void*,s32); extern void fn_801A7588(void*,s32); extern void fn_80149A68(void*,ShortVector*,s32,s32,s32);
 extern void fn_801A764C(void*,FloatVector*); extern void fn_801A74D8(void*,s32); extern void fn_801A7668(void*,s32); extern void fn_801A7670(void*,s32);
@@ -41,7 +41,7 @@ s32 fn_8002E3F0(void* callback, s32 phase, void* event)
                 ShortVector short_pos; FloatVector pos;
                 fn_801A74A0(effect, object_id); fn_801A74A8(effect, state->linked_id); fn_801A7538(effect, 1);
                 linked = fn_80201814(state->linked_id);
-                if (state->linked_id != fn_80201B44(linked) && fn_80071DD8() != 0) selection = 0;
+                if (state->linked_id != fn_80201B44() && fn_80071DD8() != 0) selection = 0;
                 else {
                     event_id = (u8)(((s16)fn_801CEB2C(state->type) >> 1) + 1);
                     selection = fn_801D1B10(state->index, fn_80035628(linked),

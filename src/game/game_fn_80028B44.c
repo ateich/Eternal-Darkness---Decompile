@@ -2,8 +2,8 @@ typedef unsigned int u32;
 typedef unsigned short u16;
 
 extern int lbl_8064C6FC;
-extern void* fn_80201B3C();
-extern void* fn_80201B9C();
+extern void* fn_80201B3C(void);
+extern void* fn_80201B9C(void);
 extern void* fn_80201BC0(void*);
 extern int fn_80201B4C(void*);
 extern unsigned int fn_80036D5C(void*);

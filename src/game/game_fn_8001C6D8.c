@@ -27,7 +27,7 @@ void fn_8001C6D8(void* arg)
 
     lbl_803023E0.words[7] = fn_802019EC((s32)fn_8016A694(saved_arg, 5), lbl_8064D18C);
     if ((s32)lbl_803023E0.words[7] > 0) {
-        item = fn_80201814();
+        item = fn_80201814(lbl_803023E0.words[7]);
         if (item != 0) {
             fn_80201ADC();
             context = fn_80201C2C();

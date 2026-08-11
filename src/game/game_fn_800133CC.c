@@ -12,7 +12,7 @@ extern void* fn_80201C24();
 extern void fn_80157B60(void*, u8);
 extern void fn_80157B3C(void*, s32);
 extern char* fn_80047D6C(void);
-extern int fn_80201B44();
+extern int fn_80201B44(void);
 extern void fn_800DBF60(s32, void*, s32, char*, float);
 
 s32 fn_800133CC(void* script)

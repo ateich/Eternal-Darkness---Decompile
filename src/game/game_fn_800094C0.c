@@ -29,7 +29,7 @@ extern s32 fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_8016A830(void*, double);
-extern void* fn_80201B9C();
+extern void* fn_80201B9C(void);
 extern void* fn_80201B8C();
 extern void* fn_80201BC8();
 extern int fn_80201B54();

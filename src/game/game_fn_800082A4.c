@@ -20,7 +20,7 @@ extern void fn_8022A814(s32, s32);
 extern void fn_8011E174(s32, s32);
 extern void fn_8011DFA8(void);
 extern void fn_8016B400(int, int, int);
-extern int fn_80201B44();
+extern int fn_80201B44(void);
 extern void fn_801D0D30(void);
 extern void* memcpy(void*, const void*, u32);
 extern void fn_800FBFA8(s32);
@@ -78,8 +78,7 @@ void fn_800082A4(void)
 
     fn_801EBA58(lbl_8064D68C);
     if (fn_801E79FC(lbl_8064C4E0, 0xD) != 0) {
-        fn_80201B44();
-        object = fn_80201814();
+        object = fn_80201814(fn_80201B44());
         if (object != 0) {
             fn_80201F80(object, 1, 0x33800);
         }

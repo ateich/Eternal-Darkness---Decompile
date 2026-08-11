@@ -16,7 +16,7 @@ typedef struct ObjectInfo {
 extern const Vec3 lbl_80238D70;
 extern const Vec3 lbl_80238D7C;
 
-extern void* fn_80201B9C();
+extern void* fn_80201B9C(void);
 extern void* fn_80201BC0(void*);
 extern void* fn_80201B8C();
 extern void* fn_80201BC8();
