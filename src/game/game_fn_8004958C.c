@@ -7,7 +7,7 @@ extern float lbl_8064E3B4;
 extern float lbl_8064E3B8;
 
 extern void fn_8011FC38(void* object, s32 value, s32 enabled);
-extern s32 fn_8011EB04(void* object);
+extern int fn_8011EB04(void* object);
 extern void fn_8011FE6C(void* object);
 extern void fn_80124664(void* object, s32 field, s32 mode, float value);
 extern void fn_801261F4(void* object);
@@ -15,7 +15,7 @@ extern void fn_8012B344(void* object);
 extern u32 fn_80157994(void* object);
 extern s32 fn_80157E1C(void* list);
 extern void* fn_80157E24(void* list, s32 index);
-extern void* fn_80158598(void* object, s32 index);
+extern void* fn_80158598(int object, int index);
 extern void* fn_80201814();
 extern int fn_80201B54();
 extern void* fn_80201BC8();
@@ -30,7 +30,7 @@ void fn_8004958C(void* object, s32 value)
     void* list;
 
     parent = (void*)fn_80201B54(object);
-    list = fn_80158598(parent, 0);
+    list = fn_80158598((s32)parent, 0);
     if (list != 0) {
         count = fn_80157E1C(list);
         index = 0;

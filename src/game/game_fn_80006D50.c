@@ -25,7 +25,7 @@ extern void fn_80200EAC(float, int, int, int, int);
 extern void fn_8001D9FC(int);
 extern void fn_80180BE4(void);
 extern void fn_800073DC(int);
-extern void fn_801EFE84(s32);
+extern void fn_801EFE84(int);
 extern void fn_80144C40(void);
 
 void fn_80006D50(void)

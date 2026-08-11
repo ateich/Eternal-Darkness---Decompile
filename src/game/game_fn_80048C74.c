@@ -21,7 +21,7 @@ extern void fn_801F683C(TransformData* value);
 extern void* fn_80201B94(void* object);
 extern void* fn_80201BC8();
 extern int fn_80201B54();
-extern u32 fn_80201B64(void* object);
+extern int fn_80201B64(void* object);
 extern void* fn_80201C48(void* object);
 extern void fn_80201DD8(void* object, u32 value);
 extern void fn_80211A6C(void* to, void* from, Vec3* output);

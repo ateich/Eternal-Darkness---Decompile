@@ -7,8 +7,8 @@ extern void* fn_8011FCE4(void* object);
 extern void fn_80008710(void* object, void* value);
 extern void fn_80045A24(s32 value, s32 flags);
 extern void fn_8001DA0C(void);
-extern void fn_8001D9FC(s32 mode);
-extern void fn_801EFE84(s32 value);
+extern void fn_8001D9FC(int mode);
+extern void fn_801EFE84(int value);
 
 typedef struct GameState {
     void* object;

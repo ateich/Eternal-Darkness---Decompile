@@ -18,7 +18,7 @@ extern u32 lbl_8064CCF4;
 extern int lbl_8064D18C;
 extern void* lbl_8064D74C;
 
-extern void fn_801EFE84(s32);
+extern void fn_801EFE84(int);
 extern void fn_8001E644(int, int, int);
 extern void fn_801E7974(void*, int);
 extern u32 fn_8015AA0C(void);

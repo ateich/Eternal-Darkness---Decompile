@@ -36,7 +36,7 @@ extern void fn_801A9A40(s32, s32, s32);
 extern u8 fn_801A9B30(void);
 extern void fn_801AC350(s32, s32, s32);
 extern void fn_801B14B8(void);
-extern void fn_801EFE84(s32);
+extern void fn_801EFE84(int);
 extern void fn_801EF530(void);
 extern void fn_801EF580(void*);
 extern void fn_8020D250(void*, s32, s32);

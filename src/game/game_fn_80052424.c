@@ -9,11 +9,11 @@ typedef struct GameState {
 } GameState;
 
 extern void* fn_80201ADC(void);
-extern s32 fn_80201B64(void* object);
+extern int fn_80201B64(void* object);
 extern void fn_80045A24(s32 value, s32 flags);
-extern void fn_801EFE84(s32 value);
+extern void fn_801EFE84(int value);
 extern void fn_8001DA0C(void);
-extern void fn_8001D9FC(s32 mode);
+extern void fn_8001D9FC(int mode);
 
 extern GameState lbl_803003C8;
 extern u8 lbl_8030F540[];

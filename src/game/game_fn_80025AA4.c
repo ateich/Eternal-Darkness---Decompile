@@ -15,7 +15,7 @@ extern u8* fn_801EB080(void);
 extern void DCFlushRange(void*, u32);
 extern void fn_801A99B4(void);
 extern void fn_802180A4(void*);
-extern void fn_801EFE84(s32);
+extern void fn_801EFE84(int);
 extern void fn_80217F88(void);
 extern void fn_80217324(void);
 

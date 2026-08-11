@@ -87,7 +87,7 @@ extern s32 fn_800CE914(void*, Point16*, Point16*, s32);
 extern void fn_801E8328();
 extern void fn_800CDD84(void*);
 extern int fn_80201B44(void);
-extern void* fn_80158598(void*, s32);
+extern void* fn_80158598(int, int);
 extern void fn_80158668(void);
 extern void fn_801586CC(void*, s32, void*, void*);
 extern void fn_800CCA44(void*);
@@ -335,9 +335,9 @@ void fn_8000755C(s32 arg0, s32 arg1, u32 flags)
     fn_801E8328(0xB, t6);
 
     fn_800CDD84(view);
-    fn_80158598((void*)fn_80201B44(), 1);
+    fn_80158598(fn_80201B44(), 1);
     fn_80158668();
-    fn_801586CC(fn_80158598((void*)fn_80201B44(), 1), 6, (void*)fn_800CBAB8,
+    fn_801586CC(fn_80158598(fn_80201B44(), 1), 6, (void*)fn_800CBAB8,
                 (void*)fn_800CBF40);
 
     if (lowbit == 0) {
