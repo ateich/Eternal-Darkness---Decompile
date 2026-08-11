@@ -35,7 +35,7 @@ extern void fn_800C3FE4(void *context, s32 value, void *object);
 extern void fn_800C39D0(void *context);
 extern void fn_800C2474(void *object, s32 value);
 extern s32 fn_80054C14(void *context, void *state);
-extern void fn_801261F4(void *object);
+extern s32 fn_801261F4(void *object);
 
 s32 fn_80057AC0(void *context, void *event, u32 *result)
 {

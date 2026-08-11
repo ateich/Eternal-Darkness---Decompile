@@ -42,8 +42,8 @@ extern void fn_80201D2C(void *context, s32 value);
 extern void fn_80201D14(void *context, s32 value);
 extern void fn_8012B344(void *object);
 extern void fn_800C2708(s32 value, s32 object_id);
-extern void fn_80038464(void *context, s32 index, s16 *value);
-extern void fn_800389E0(void *context, s32 index, s32 value, s32 enabled);
+extern int fn_80038464(void *context, s32 index, s16 *value);
+extern int fn_800389E0(void *context, s32 index, s32 value, s32 enabled);
 extern void fn_80120AD0(void *object, s32 value, s32 amount, s32 flags,
                        float first, float second);
 extern void fn_801B05E8(s32, s32, s32, s32, s32, s32, s32, s32);

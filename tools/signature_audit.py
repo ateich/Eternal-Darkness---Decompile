@@ -225,17 +225,14 @@ def audit(source_root: Path) -> dict[str, object]:
         if len(signatures) < 2:
             continue
         return_shapes = {item.return_shape for item in declarations}
-        consumed_return_shapes = {
-            item.return_shape for item in declarations
-            if item.return_shape != "none" and not item.unspecified_parameters
-        }
         abi_shapes = {item.abi_shape for item in declarations}
-        # A void declaration merely discards whatever the callee leaves in its
-        # result registers; it does not make the caller consume an incompatible
-        # register file.  Reserve the contradiction category for two non-void
-        # readings which require different PPC result registers (for example,
-        # f1 versus r3, or r3:r4 versus r3).
-        if len(consumed_return_shapes) > 1:
+        # `void` versus a value result is still a return-register contradiction:
+        # although a void caller simply ignores the physical register, both
+        # declarations cannot be the callee's true C signature.  Likewise, two
+        # value declarations which select different EABI register files cannot
+        # both be correct.  Spellings which select the same register file remain
+        # cosmetic and are separated below.
+        if len(return_shapes) > 1:
             category = "return_register_contradictions"
         elif len(abi_shapes) > 1:
             category = "abi_divergent"

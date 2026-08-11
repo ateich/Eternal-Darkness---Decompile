@@ -10,7 +10,7 @@ extern void fn_8011FC38(void* object, s32 value, s32 enabled);
 extern int fn_8011EB04(void* object);
 extern void fn_8011FE6C(void* object);
 extern void fn_80124664(void* object, s32 field, s32 mode, float value);
-extern void fn_801261F4(void* object);
+extern s32 fn_801261F4(void* object);
 extern void fn_8012B344(void* object);
 extern u32 fn_80157994(void* object);
 extern s32 fn_80157E1C(void* list);

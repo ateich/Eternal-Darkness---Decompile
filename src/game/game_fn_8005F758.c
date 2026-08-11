@@ -1,0 +1,105 @@
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+#pragma use_lmw_stmw on
+
+typedef struct Vec3 {
+    float x, y, z;
+} Vec3;
+
+typedef struct QueryResult {
+    u8 data[0x28];
+} QueryResult;
+
+typedef struct EmbeddedDescriptor {
+    u8 kind;
+    u8 variant;
+    u8 active;
+    u8 event;
+    u8 pad04[0xA];
+    short position[3];
+    u8 pad14[0x10];
+    u32 flags;
+} EmbeddedDescriptor;
+
+typedef struct EffectSlot {
+    u8 pad00[0x14];
+    EmbeddedDescriptor descriptor;
+    u8 pad3C[0x6C];
+    u32 owner;
+    u8 padAC[0x10];
+    u8 mode;
+    u8 padBD[3];
+    void *spawned;
+} EffectSlot;
+
+extern s32 lbl_8064D18C;
+
+extern void *fn_80201814(s32);
+extern void *fn_80201BC8(void *);
+extern s32 fn_8011FB4C(void *);
+extern s32 fn_8011F6A4(void *, s32, s32, s32, QueryResult *, s32);
+extern void *fn_80149E04(void);
+extern void fn_80147E88(EffectSlot *);
+extern void fn_8014A1E4(EffectSlot *, void *);
+extern void fn_80149B0C(void *, s32, s32);
+extern void fn_801938FC(EffectSlot *);
+extern void fn_801D3CAC(s32, s32, EmbeddedDescriptor *);
+extern void fn_801E8328(s32, EffectSlot *);
+
+void fn_8005F758(EffectSlot *slot, s32 object_id, Vec3 *position, s32 owner,
+                 s32 query_a, s32 query_b, u8 kind, u8 variant,
+                 s32 extra_flags, u8 mode)
+{
+    QueryResult query;
+    void *object;
+    void *manager;
+    EmbeddedDescriptor *descriptor;
+
+    object = fn_80201814(owner);
+    if (object == 0) {
+        return;
+    }
+
+    manager = fn_80201BC8(object);
+    if (manager == 0) {
+        return;
+    }
+    if (fn_8011FB4C(manager) != lbl_8064D18C) {
+        return;
+    }
+
+    if (fn_8011F6A4(manager, query_a, query_b, -1, &query, 1) == -1) {
+        return;
+    }
+
+    slot->spawned = fn_80149E04();
+    if (slot->spawned == 0) {
+        return;
+    }
+
+    fn_80147E88(slot);
+    fn_8014A1E4(slot, slot->spawned);
+    slot->mode = mode;
+    fn_80149B0C(slot->spawned, query_a, query_b);
+    slot->owner = owner;
+    fn_801938FC(slot);
+
+    descriptor = &slot->descriptor;
+    descriptor->kind = kind;
+    descriptor->variant = variant;
+    descriptor->event = 0x11;
+    descriptor->active = 0;
+    descriptor->flags |= 0x50;
+    fn_801D3CAC(object_id, 0, descriptor);
+
+    if (extra_flags != 0) {
+        descriptor->flags |= 0x4000;
+    }
+
+    descriptor->position[0] = (short)position->x;
+    descriptor->position[1] = (short)position->y;
+    descriptor->position[2] = (short)position->z;
+    fn_801E8328(0x11, slot);
+}

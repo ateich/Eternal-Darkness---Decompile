@@ -31,9 +31,9 @@ extern s32 fn_80128EAC(void *object);
 extern unsigned long long fn_8020123C();
 extern void fn_80128C28(void *object, void *callback, s32 value);
 extern void fn_80204810(void);
-extern void fn_80038308(void *object, s32 index, s16 *value);
-extern void fn_80038464(void *object, s32 index, s16 *value);
-extern void fn_800389E0(void *object, s32 index, s16 value, s32 mode);
+extern int fn_80038308(void *object, s32 index, s16 *value);
+extern int fn_80038464(void *object, s32 index, s16 *value);
+extern int fn_800389E0(void *object, s32 index, s16 value, s32 mode);
 extern void fn_801F86F4(s32 value);
 
 s32 fn_80055350(void *context, void *event, s32 *result)

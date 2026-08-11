@@ -11,7 +11,7 @@ extern void* fn_80201814();
 extern void* fn_80201BC8();
 extern unsigned int fn_80036D5C(void*);
 extern void fn_80036DA4(void*, u32);
-extern void fn_801261F4(void*);
+extern s32 fn_801261F4(void*);
 extern void fn_80120AD0(void*, s32, s32, s32, float, float);
 
 s32 fn_80009BE8(void* script)

@@ -34,7 +34,7 @@ extern void fn_80077880(void *context, HandlerState *state, void *event);
 extern s32 fn_8006D3E4(u32 value, s32 mode);
 extern void *fn_80200C38(void *event);
 extern s32 fn_80063D60(void *object, HandlerContext *handler, u8 value);
-extern void fn_8020123C(s32 kind, s32 source, void *target, s32 value);
+extern unsigned long long fn_8020123C(s32 kind, s32 source, void *target, s32 value);
 extern void fn_80201D2C(void *context, s32 value);
 extern void fn_80201D14(void *context, s32 value);
 extern void fn_800C63D8(void);

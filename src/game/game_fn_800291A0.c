@@ -27,7 +27,7 @@ extern void fn_80139D88(void*, Node*);
 extern void fn_8011FC38(void*, s32, s32);
 extern void fn_8011F7E0(void*, s32);
 extern s32 fn_8011FCEC(void*);
-extern void* fn_801261F4(void*);
+extern s32 fn_801261F4(void*);
 extern s32 fn_8015E4E8(void*);
 extern void fn_8011EBFC(void*);
 extern s32 fn_8012A100(void*, s32);
@@ -65,7 +65,7 @@ void fn_800291A0(void* source)
             fn_8011F7E0(object, 0);
 
             if (fn_8011FCEC(object) != -1) {
-                if (fn_8015E4E8(fn_801261F4(object)) == 0) {
+                if (fn_8015E4E8((void *)fn_801261F4(object)) == 0) {
                     fn_8011EBFC(object);
                 }
             } else if (fn_8012A100(object, 15) != 0) {

@@ -86,6 +86,25 @@ config.asflags = ["-mgekko", "--strip-local-absolute", "-I include", f"-I build/
 config.ldflags = ["-fp hardware", "-nodefaults"]
 config.custom_build_rules = [
     {
+        "name": "globalize_game_8005FD84_bias",
+        "command": (
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@25=lbl_8064E5C0 "
+            "--globalize-symbol=lbl_8064E5C0 $in && touch $out"
+        ),
+        "description": "GLOBALIZE $in",
+    },
+    {
+        "name": "externalize_game_8005EC6C_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @17 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@17=lbl_8064E5C0 --remove-section=.sdata2 $in "
+            "&& touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
         "name": "externalize_game_80033180_bias",
         "command": (
             "python3 tools/externalize_elf_symbol.py $in @95 && "
@@ -571,9 +590,27 @@ config.custom_build_rules = [
         ),
         "description": "NAME SWITCH $in",
     },
+    {
+        "name": "name_game_8005EE9C_switch",
+        "command": (
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@39=jumptable_80243D64 $in && touch $out"
+        ),
+        "description": "NAME SWITCH $in",
+    },
 ]
 config.custom_build_steps = {
     "post-compile": [
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8005FD84.globalized"],
+            "rule": "globalize_game_8005FD84_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8005FD84.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8005EC6C.externalized"],
+            "rule": "externalize_game_8005EC6C_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8005EC6C.o"],
+        },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_80052310.externalized"],
             "rule": "externalize_game_80052310_bias",
@@ -593,6 +630,11 @@ config.custom_build_steps = {
             "outputs": [f"build/{VERSION}/src/game/game_fn_80020E94.named"],
             "rule": "name_game_80020E94_switch",
             "inputs": [f"build/{VERSION}/src/game/game_fn_80020E94.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8005EE9C.named"],
+            "rule": "name_game_8005EE9C_switch",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8005EE9C.o"],
         },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8001FE1C.named"],
@@ -2324,6 +2366,24 @@ config.libs = [
     Object(NonMatching, "game/game_fn_8005BCC0.c"),
     Object(Matching, "game/game_fn_8005E94C.c"),
     Object(Matching, "game/game_fn_8005E9E4.c"),
+    Object(Matching, "game/game_fn_8005EA38.c", extra_cflags=["-use_lmw_stmw on"]),
+    Object(Matching, "game/game_fn_8005EC6C.c"),
+    Object(Matching, "game/game_fn_8005EE9C.c"),
+    Object(NonMatching, "game/game_fn_8005EF94.c", extra_cflags=["-use_lmw_stmw on"]),
+    Object(Matching, "game/game_fn_8005F758.c", extra_cflags=["-use_lmw_stmw on"]),
+    Object(NonMatching, "game/game_fn_8005F8D0.c", extra_cflags=["-use_lmw_stmw on"]),
+    Object(Matching, "game/game_fn_8005FCD4.c"),
+    Object(Matching, "game/game_fn_8005FD84.c", extra_cflags=["-use_lmw_stmw on"]),
+    Object(Matching, "game/game_fn_8005FF94.c", extra_cflags=["-use_lmw_stmw on"]),
+    Object(Matching, "game/game_fn_8006010C.c"),
+    Object(Matching, "game/game_fn_8006012C.c"),
+    Object(NonMatching, "game/game_fn_8006016C.c"),
+    Object(NonMatching, "game/game_fn_800601FC.c", extra_cflags=["-use_lmw_stmw on"]),
+    Object(NonMatching, "game/game_fn_8006053C.c", extra_cflags=["-use_lmw_stmw on"]),
+    Object(NonMatching, "game/game_fn_800606BC.c"),
+    Object(NonMatching, "game/game_fn_800607BC.c", extra_cflags=["-use_lmw_stmw on"]),
+    Object(Matching, "game/game_fn_80060840.c"),
+    Object(Matching, "game/game_fn_80060C24.c"),
             Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_80008B6C.c"),
             Object(Matching, "game/game_fn_80008BD8.c"),

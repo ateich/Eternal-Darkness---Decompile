@@ -47,7 +47,7 @@ extern void fn_800C2474(void *object, s32 value);
 extern void fn_802006D4(void *source, void *target, s32 value, s32 kind,
                         s32 extra);
 extern u64 fn_802011D4(void *event);
-extern void fn_801261F4(void *object);
+extern s32 fn_801261F4(void *object);
 extern void fn_8012B344(void *object);
 
 s32 fn_80058FF4(void *context, void *event, u32 *result)
