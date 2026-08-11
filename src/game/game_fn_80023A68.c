@@ -5,13 +5,15 @@ extern void* lbl_8064C674;
 extern u32 lbl_8064C694;
 extern int lbl_8064C6C8;
 
-extern u32 fn_801A98F4(int, int);
+extern unsigned int fn_801A98F4(int, int);
 extern void fn_800472B0(int);
 extern void fn_801E7004(void);
 extern void fn_8001DFEC(int, int);
 extern void fn_8001DE84(int, int);
 extern void fn_80025A78(int);
 extern void fn_801E5FB0(void*);
+#define fn_801E5FB0(a) fn_801E5FB0((void*)(a))
+
 extern void fn_801AD404(int, int, int);
 extern void fn_801AD490(void);
 

@@ -13,7 +13,7 @@ extern int fn_80201EB8();
 extern u32 fn_8011FAEC(void*);
 extern int fn_8002A858(void*, void*, void*);
 extern void fn_801568C0(void*, int);
-extern void fn_801568B8(void*, int);
+extern void fn_801568B8(void*, void*);
 extern void fn_8011F7E0(void*, int);
 extern void fn_80126880(void*);
 extern int fn_80156928(void*);

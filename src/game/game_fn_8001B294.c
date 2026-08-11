@@ -14,10 +14,10 @@ extern void* fn_80201B3C();
 extern int fn_80201B44();
 extern void* fn_80201C24();
 extern s32 fn_80038464(void*, s32, s16*);
-extern s32 fn_80038308(void*, s32, s16*);
+extern int fn_80038308(void*, int, short*);
 extern s32 fn_80157994(void*);
 extern void fn_80157A28(void*, s32);
-extern void* fn_801E6CA0(void*, s32, s32, s32, s32);
+extern void* fn_801E6CA0(void*, int, int, int, int);
 extern void fn_80027730(void*, s32, s32);
 
 s32 fn_8001B294(void* script)

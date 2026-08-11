@@ -31,7 +31,7 @@ typedef struct InnerState {
 extern s32 lbl_8064D18C;
 
 extern s32 fn_80200C10(void*);
-extern s32 fn_80200C38(void*);
+extern int fn_80200C38(void*);
 extern void* fn_80201B8C();
 extern int fn_80201B54();
 extern void fn_802020B4(void*, int);

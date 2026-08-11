@@ -8,9 +8,9 @@ extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern unsigned int fn_800F5C54();
 extern s32 fn_80047180(void);
-extern void* fn_801E6CA0(void*, u32, u32, s32, s32);
+extern void* fn_801E6CA0(void*, int, int, int, int);
 extern void fn_80027730(void*, s32, s32);
-extern void fn_801A98F4(s32, s32);
+extern unsigned int fn_801A98F4(int, int);
 
 s32 fn_80012B6C(void* script)
 {

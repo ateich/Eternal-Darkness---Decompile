@@ -34,7 +34,7 @@ extern void* fn_80201BC8();
 extern int fn_80201B4C(void*);
 extern int fn_80201EB8();
 extern void* fn_80201BC0(void*);
-extern void fn_8011F114(Vec3*, void*);
+extern void fn_8011F114(void*, void*);
 extern u32 fn_80179004(Vec3*, Vec3*);
 extern u32 fn_800361F8(ObjectInfo*);
 extern unsigned long long fn_8020123C();

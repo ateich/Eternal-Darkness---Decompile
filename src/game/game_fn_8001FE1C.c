@@ -20,7 +20,7 @@ extern u8 lbl_803003C8[];
 extern void fn_80144C40(void);
 extern s32 fn_800B193C(void);
 extern void fn_800B267C(s16);
-extern u32 fn_801A98F4(s32, s32);
+extern unsigned int fn_801A98F4(int, int);
 extern void fn_801A9964(u32);
 extern s32 fn_801E7578(u8);
 

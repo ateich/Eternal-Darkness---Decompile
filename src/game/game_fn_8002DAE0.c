@@ -54,7 +54,7 @@ extern const float lbl_8064E0AC;
 extern const float lbl_8064E0B0;
 
 extern s32 fn_80200C10(void*);
-extern s32 fn_80200C38(void*);
+extern int fn_80200C38(void*);
 extern s32 fn_80200C28(void*);
 extern s32 fn_80200C20(void*);
 extern void* fn_80201B8C();
@@ -64,7 +64,9 @@ extern void fn_80201D2C(void*, s32);
 extern void fn_80201D14(void*, s32);
 extern unsigned long long fn_8020123C();
 extern void* fn_80201814();
-extern s32 fn_80201B5C(void*);
+extern int fn_80201B5C(void*);
+#define fn_80201B5C(a) fn_80201B5C((void*)(a))
+
 extern s32 fn_80201B64(void*);
 extern void* fn_80201BC8();
 extern int fn_80201B44();

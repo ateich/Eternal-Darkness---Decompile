@@ -5,7 +5,7 @@ extern int lbl_8064B2C0;
 extern void* lbl_8064C650;
 
 extern void fn_800B18F8(void);
-extern u32 fn_801A98F4(int, int);
+extern unsigned int fn_801A98F4(int, int);
 extern void fn_8001DE84(int, int);
 extern void fn_801A9964(void*);
 

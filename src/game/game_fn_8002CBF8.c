@@ -29,7 +29,7 @@ extern const float lbl_8064E064;
 extern const float lbl_8064E0B0;
 
 extern s32 fn_80200C10(void*);
-extern EventData* fn_80200C38(void*);
+extern int fn_80200C38(void*);
 extern void* fn_80201B8C();
 extern int fn_80201B54();
 extern s32 fn_800460EC(void);
@@ -81,7 +81,7 @@ s32 fn_8002CBF8(void* callback, s32 phase, void* event)
             return 1;
         }
         if (event_id == 0x10) {
-            EventData* data = fn_80200C38(event);
+            EventData* data = (EventData*)fn_80200C38(event);
             s32 linked = 0;
             u16 kind;
 

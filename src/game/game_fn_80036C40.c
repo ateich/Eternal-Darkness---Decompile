@@ -22,7 +22,7 @@ typedef struct ObjectInfo {
 
 extern void* fn_80201B8C();
 extern int fn_80201B54();
-extern void fn_80038308(void*, s32, s16*);
+extern int fn_80038308(void*, int, short*);
 extern void fn_80038464(void*, s32, s16*);
 extern unsigned long long fn_8020123C();
 

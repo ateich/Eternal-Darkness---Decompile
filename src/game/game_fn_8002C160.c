@@ -26,9 +26,10 @@ extern void fn_80201E50(void*, u32);
 extern void fn_801E8328();
 extern void fn_80201D34(void*, s32);
 extern void fn_80201D1C(void*, s32);
-extern void fn_8011F114(Vec3*, void*);
+extern void fn_8011F114(void*, void*);
 extern void fn_8011F0E8(void*, Vec3*);
-extern void fn_8020104C(s32, s32, s32, s32, float);
+extern void fn_8020104C(int, void*, void*, int, float);
+#define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void*)(b), (void*)(c), (d), (e))
 
 s32 fn_8002C160(void* callback, s32 phase, void* event)
 {

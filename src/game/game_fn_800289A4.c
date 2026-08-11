@@ -12,7 +12,9 @@ extern void* fn_80201B9C();
 extern void* fn_80201BC0(void*);
 extern int fn_80201EB8();
 extern int fn_80201B4C(void*);
-extern s32 fn_80201B5C(void*);
+extern int fn_80201B5C(void*);
+#define fn_80201B5C(a) fn_80201B5C((void*)(a))
+
 extern void fn_80201B64(void*);
 extern void* fn_80201BC8();
 extern float fn_8011F6F0(void);

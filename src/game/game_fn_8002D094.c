@@ -10,7 +10,7 @@ typedef struct EffectState {
 } EffectState;
 
 extern s32 fn_80200C10(void*);
-extern EventFloat* fn_80200C38(void*);
+extern int fn_80200C38(void*);
 extern void* fn_80201B8C();
 extern int fn_80201B54();
 extern void fn_80201D2C(void*, s32);
@@ -32,7 +32,7 @@ s32 fn_8002D094(void* callback, s32 phase, void* event)
             return 1;
         }
         if (event_id == 0x27) {
-            state->target = fn_80200C38(event)->value;
+            state->target = ((EventFloat*)fn_80200C38(event))->value;
             return 1;
         }
         if (event_id == 0x39) {

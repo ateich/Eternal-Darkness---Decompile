@@ -29,7 +29,7 @@ extern void fn_80023230(s32, s32, s32, s32);
 extern void* fn_801EB080(void);
 extern void fn_801EC7F4(void*, void*);
 extern void fn_801ECC4C(void);
-extern void fn_801A8D38(s32);
+extern void fn_801A8D38(int);
 extern void fn_801A8FE8(void*, void*, s32, s32, s32);
 extern void fn_802262B8(s32);
 extern void fn_802266B0(void);

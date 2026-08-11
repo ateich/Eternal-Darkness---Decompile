@@ -25,7 +25,9 @@ extern s32 lbl_8064C708;
 extern void* fn_80201B9C();
 extern void* fn_80204844(void*, s32);
 extern Manager* fn_8006D444(void*);
-extern void fn_801E5FB0(u32);
+extern void fn_801E5FB0(void*);
+#define fn_801E5FB0(a) fn_801E5FB0((void*)(a))
+
 extern unsigned long long fn_8020123C();
 extern s32 fn_8006D2C8(Manager*, s32);
 extern int fn_80201B54();

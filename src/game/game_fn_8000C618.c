@@ -8,7 +8,9 @@ extern void fn_80163BB4(void*, const char*, ...);
 extern void* fn_80201B9C();
 extern void* fn_80201B8C();
 extern int fn_80201B54();
-extern s32 fn_80201B5C(void*);
+extern int fn_80201B5C(void*);
+#define fn_80201B5C(a) fn_80201B5C((void*)(a))
+
 extern int fn_80201EB8();
 extern void fn_802020B4(void*, int);
 extern void* fn_80201BC0(void*);

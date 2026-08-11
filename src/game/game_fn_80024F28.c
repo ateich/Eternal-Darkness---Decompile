@@ -96,7 +96,7 @@ extern void fn_80135510(); extern void fn_80137E04(); extern void fn_8013816C();
 extern void fn_80139298(); extern void fn_80140E60(float); extern void fn_80142944(); extern void fn_80144178();
 extern void fn_801443F4(); extern void fn_8014447C(); extern void fn_801445EC(); extern void fn_801445F4();
 extern void fn_80149EFC(); extern void fn_80149F9C(); extern void fn_8014B76C(); extern void fn_80155B5C();
-extern void fn_801568B8(); extern void fn_801569A0(); extern void fn_80157504(); extern void fn_8015761C();
+extern void fn_801568B8(void*, void*); extern void fn_801569A0(); extern void fn_80157504(); extern void fn_8015761C();
 extern void fn_8015AA28(); extern void fn_8015AEB8(); extern void fn_8015CA00(); extern void fn_8015CB00();
 extern void fn_8015D414(); extern void fn_8015DAB0(); extern void fn_8016AD28(); extern void fn_8016B3A4();
 extern void fn_8016B400(); extern void fn_8017AE20(); extern void fn_8017AE90(); extern void fn_8017D0D8();

@@ -19,7 +19,7 @@ extern s32 fn_8015821C(void*);
 extern int fn_801E79FC(void*, int);
 extern void fn_801B05E8(s32, s32, s32, s32, s32, s32, s32, s32);
 extern void* fn_80201AE4(void);
-extern void* fn_801E6CA0(void*, s32, s32, s32, s32);
+extern void* fn_801E6CA0(void*, int, int, int, int);
 extern void fn_80027948(void*, s32, void*, s32, s32, s32, s32);
 
 s32 fn_80016D68(void* script_arg)

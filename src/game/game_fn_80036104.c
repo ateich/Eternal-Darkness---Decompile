@@ -16,7 +16,8 @@ extern s32 fn_801A7498(void*);
 extern void* fn_80201814();
 extern void* fn_80201B8C();
 extern unsigned long long fn_8020123C();
-extern void fn_8020104C(s32, s32, s32, void*, float);
+extern void fn_8020104C(int, void*, void*, int, float);
+#define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void*)(b), (void*)(c), (d), (e))
 extern void fn_80128BE4(void*);
 
 s32 fn_80036104(void* object, void* argument)
@@ -28,7 +29,8 @@ s32 fn_80036104(void* object, void* argument)
     id = fn_801A7498((void*)argument_r);
     inner = ((Object*)fn_80201B8C(fn_80201814()))->inner;
     fn_8020123C(0x2F, id, inner->value, (void*)argument_r);
-    fn_8020104C(0x30, id, inner->value, (void*)argument_r, lbl_8064E1F8);
+    fn_8020104C(0x30, id, inner->value, (int)argument_r,
+                lbl_8064E1F8);
     fn_80128BE4(object);
     return 1;
 }

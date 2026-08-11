@@ -61,7 +61,7 @@ extern void fn_80229B88(s32, s32, s32, s32, s32);
 extern void fn_80229CCC(s32, s32, s32, s32, s32, s32);
 extern void fn_802262B8(s32);
 extern void fn_8022A2F4(s32);
-extern void fn_801A8D38(s32);
+extern void fn_801A8D38(int);
 extern void fn_801A8FE8(void*, void*, s32, s32, s32);
 
 void fn_8001DB04(u32 mode)

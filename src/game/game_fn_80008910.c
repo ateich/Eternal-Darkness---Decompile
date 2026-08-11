@@ -39,7 +39,7 @@ extern s32 fn_801AD72C(void);
 extern s32 fn_801B0B30(s32);
 extern void fn_80008CA0(void);
 extern void fn_80008C48(void);
-extern void* fn_801E6CA0(void*, s32, s32, u32, s32);
+extern void* fn_801E6CA0(void*, int, int, int, int);
 
 void fn_80008910(s32 type)
 {

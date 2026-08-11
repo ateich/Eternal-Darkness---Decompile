@@ -21,7 +21,7 @@ extern void fn_80027F10(void);
 extern void fn_80228B98(void*, u32);
 extern void fn_801EC7F4(void*, void*);
 extern void fn_801F3960(u32*);
-extern void fn_801A8D38(u32);
+extern void fn_801A8D38(int);
 extern void fn_80225F4C(u32, void*, u32);
 extern void fn_801ED3F4(u32);
 extern void fn_801A852C(u32*, u32, u32, u32);

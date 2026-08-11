@@ -38,10 +38,11 @@ extern void fn_8011FB54(void*, void*);
 extern void fn_8011FA8C(void*, int, int);
 extern void fn_8011FABC(void*, s32, s32);
 extern void fn_80205680(void*, void*, s32);
-extern void fn_8020104C(s32, void*, void*, s32, float);
+extern void fn_8020104C(int, void*, void*, int, float);
+#define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void*)(b), (void*)(c), (d), (e))
 extern void fn_80205C98(void);
 extern void fn_80205CE4(void);
-extern void fn_801568B8(void*, void (*)(void));
+extern void fn_801568B8(void*, void*);
 extern void fn_801568C0(void*, void (*)(void));
 extern u32 fn_80144628(s32, CallbackState*, s32);
 extern void fn_80144608(void);

@@ -53,7 +53,7 @@ extern void fn_801A872C(s32, s32, s32, s32, s32, s32, u32*);
 extern s32 fn_800B7EC0(void);
 extern s32 fn_800B194C(void);
 extern void fn_801ED5F4(s32, s32, s32, s32, s32, float);
-extern void fn_801A8D38(s32);
+extern void fn_801A8D38(int);
 extern void fn_800B2EC0(s32);
 
 extern const RectTriplet lbl_80238B44;

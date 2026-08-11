@@ -88,6 +88,13 @@ def main() -> None:
         "game_data_8023DD84.o",
         "game_data_8023DFAC.o",
         "game_data_8023E0E8.o",
+        "game_data_8023E154.o",
+        "game_data_8023E280.o",
+        "game_data_8023E388.o",
+        "game_data_8023E410.o",
+        "game_data_8023E448.o",
+        "game_data_8023E4E8.o",
+        "game_fn_80028E88.o",
         "game_fn_80037AF4.o",
     ):
         set_section_alignment(output, b".data", 4)

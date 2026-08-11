@@ -8,7 +8,9 @@ extern s32 lbl_8064C704;
 extern s32 lbl_8064C708;
 
 extern u32* fn_801E5D20(u32);
-extern void fn_801E5FB0(u32);
+extern void fn_801E5FB0(void*);
+#define fn_801E5FB0(a) fn_801E5FB0((void*)(a))
+
 extern void fn_80144C40(void);
 extern void fn_80144680(u32);
 extern void fn_80045B3C(s32);

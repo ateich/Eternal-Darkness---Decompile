@@ -39,7 +39,7 @@ extern void fn_800B283C(void);
 extern void fn_8001DFEC(s32, s32);
 extern s32 fn_800B193C(void);
 extern void fn_8001DE68(void);
-extern u32 fn_801A98F4(s32, s32);
+extern unsigned int fn_801A98F4(int, int);
 extern void fn_8001DE84(int, int);
 extern void fn_801E7974(void*, int);
 extern void fn_801E79A0(void*, s32);

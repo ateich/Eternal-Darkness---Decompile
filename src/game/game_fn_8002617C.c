@@ -18,7 +18,7 @@ extern const f32 lbl_8064DF6C;
 extern const f32 lbl_8064DF70;
 
 extern s32 fn_801ED3F4(void*);
-extern void fn_801A8D38(s32);
+extern void fn_801A8D38(int);
 extern void fn_802119B0(void*, f32, f32, f32, f32, f32, f32);
 extern void fn_8022B4B8(void*, s32);
 extern void fn_80026320(BatchEntry*);

@@ -84,7 +84,7 @@ extern s32 fn_80144470();
 extern s32 fn_801A852C();
 extern s32 fn_801A8660();
 extern s32 fn_801A872C();
-extern s32 fn_801A8D38();
+extern void fn_801A8D38(int);
 extern s32 fn_801A8F08();
 extern s32 fn_801A8FE8();
 extern s32 fn_801A90BC();
@@ -97,9 +97,11 @@ extern s32 fn_801E3AA4();
 extern s32 fn_801E5430();
 extern s32 fn_801E56AC();
 extern s32 fn_801E5AD0();
-extern s32 fn_801E5FB0();
+extern void fn_801E5FB0(void*);
+#define fn_801E5FB0(a) fn_801E5FB0((void*)(a))
+
 extern s32 fn_801E5FE4();
-extern s32 fn_801E6CA0();
+extern void* fn_801E6CA0(void*, int, int, int, int);
 extern s32 fn_801E7578();
 extern s32 fn_801E8D34();
 extern s32 fn_801EB080();
@@ -598,7 +600,7 @@ LAB_80023028:
       }
       if (*(int *)(&lbl_8023D2B0 + iVar4 * 0x10) + 0xc9 < *(int *)(unaff_r13 + -0x62e8)) {
         if (*(int *)(unaff_r13 + -0x630c) != 0) {
-          fn_801E5FB0();
+          fn_801E5FB0(*(void**)(unaff_r13 + -0x630c));
         }
         if (*(uint *)(unaff_r13 + -0x62ec) < 0x21) {
           *(uint *)(unaff_r13 + -0x62ec) = *(uint *)(unaff_r13 + -0x62ec) + 1;
@@ -621,7 +623,7 @@ LAB_80023028:
           uVar6 = 0;
         }
         else {
-          uVar6 = fn_801E6CA0(*(undefined4 *)(unaff_r13 + -0x6468),0,
+          uVar6 = (unsigned int)fn_801E6CA0((void*)*(undefined4 *)(unaff_r13 + -0x6468),0,
                                *(int *)(&lbl_8023D2A8 + iVar4),0,1);
         }
         iVar7 = *(int *)(&lbl_8023D2AC + iVar4);

@@ -46,7 +46,8 @@ extern void fn_801E8328();
 extern unsigned long long fn_8020123C();
 extern s32 fn_802006D4(s32, s32, s32, s32, s32);
 extern s32 fn_80200614(s32, s32, s32);
-extern void fn_8020104C(s32, s32, s32, s32, float);
+extern void fn_8020104C(int, void*, void*, int, float);
+#define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void*)(b), (void*)(c), (d), (e))
 extern void fn_80200460(s32, s32, s32, s32, float);
 extern void* fn_80201814();
 extern void* fn_80201BC8();
@@ -57,7 +58,7 @@ extern s32 fn_801D38E8(s32);
 extern void fn_801D3BE4(s32, s32*, s32*);
 extern s32 fn_801CEB2C(s32);
 extern int fn_801D3974(s32);
-extern void fn_80038308(void*, s32, s16*);
+extern int fn_80038308(void*, int, short*);
 extern s32 fn_80038464(void*, s32, s16*);
 extern void fn_800389E0(void*, s32, s16, s32);
 extern s32 fn_80047178(void);
@@ -72,7 +73,7 @@ extern s32 fn_800453AC(s32, s32, s32, float, s32, s32, s32, s32, s32, Vec3*, s32
 extern s32 fn_8006749C(s32);
 extern void fn_80120AD0(void*, s32, s32, u16, float, float);
 extern void fn_8019917C(void*);
-extern void fn_8011F114(Vec3*, void*);
+extern void fn_8011F114(void*, void*);
 extern void* memcpy(void*, const void*, u32);
 extern void fn_8019901C(void);
 

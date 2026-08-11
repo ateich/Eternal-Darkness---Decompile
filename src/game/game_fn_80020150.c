@@ -55,10 +55,12 @@ extern void fn_800B689C(s32, s32);
 extern void fn_800B65E4(s32);
 extern s32 fn_802201FC(s32);
 extern void fn_80020D70(void);
-extern void fn_801E5FB0(u32);
+extern void fn_801E5FB0(void*);
+#define fn_801E5FB0(a) fn_801E5FB0((void*)(a))
+
 extern u32* fn_801E5D08(u32);
 extern u32* fn_801E5D20(u32);
-extern u32 fn_801E6CA0(void*, s32, s32, s32, s32);
+extern void* fn_801E6CA0(void*, int, int, int, int);
 extern void fn_801E6F9C(u32, s32);
 extern void fn_801EF5EC(void);
 extern s32 fn_801AD72C(void);
@@ -66,7 +68,7 @@ extern void fn_801AD404(s32, s32, s32);
 extern void fn_801AD490(void);
 extern void fn_801AD4B4(s32, s32, s32, s32);
 extern void fn_801A99B4(void);
-extern u32 fn_801A98F4(s32, s32);
+extern unsigned int fn_801A98F4(int, int);
 extern void fn_801A9964(u32);
 extern void fn_8020F0F8(void*);
 extern void fn_8020EF80(void*);
@@ -124,7 +126,7 @@ void fn_80020150(void)
         runtime->third_handle = 0;
         runtime->counter = 0;
         runtime->mode = 19;
-        runtime->first_handle = fn_801E6CA0(lbl_8064C504, 0, 35, 0, 1);
+        runtime->first_handle = (u32)fn_801E6CA0(lbl_8064C504, 0, 35, 0, 1);
         *fn_801E5D08(runtime->first_handle) = lbl_8064C2AC;
         fn_801EF5EC();
         break;
@@ -226,9 +228,9 @@ void fn_80020150(void)
         if (runtime->counter <= 120)
             ready = lbl_8064C6D0 | (fn_8020ED10() == 1);
         if (lbl_8064C654 == 0 && fn_80218308() && ready && !lbl_8064C644) {
-            runtime->first_handle = fn_801E6CA0(lbl_8064C504,0,32,0,1);
-            runtime->second_handle = fn_801E6CA0(lbl_8064C504,0,33,0,1);
-            runtime->third_handle = fn_801E6CA0(lbl_8064C504,0,34,0,1);
+            runtime->first_handle = (u32)fn_801E6CA0(lbl_8064C504,0,32,0,1);
+            runtime->second_handle = (u32)fn_801E6CA0(lbl_8064C504,0,33,0,1);
+            runtime->third_handle = (u32)fn_801E6CA0(lbl_8064C504,0,34,0,1);
             *fn_801E5D08(runtime->first_handle) = lbl_8064C2AC;
             *fn_801E5D08(runtime->second_handle) = lbl_8064C2AC;
             *fn_801E5D08(runtime->third_handle) = lbl_8064C2AC;
@@ -301,7 +303,7 @@ void fn_80020150(void)
     case 252:
         if (elapsed >= 120) {
             fn_8001DE84(251,0);
-            runtime->first_handle = fn_801E6CA0(lbl_8064C504,0,
+            runtime->first_handle = (u32)fn_801E6CA0(lbl_8064C504,0,
                 lbl_803003C8[0] == 1 ? 62 : 40,0,1);
             fn_801E6F9C(runtime->first_handle,0);
         }

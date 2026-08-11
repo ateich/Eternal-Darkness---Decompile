@@ -22,7 +22,8 @@ extern void fn_801A7518(void*, s32);
 extern void fn_801A7538(void*, u16);
 extern void fn_801A7588(void*, s32);
 extern void fn_801A764C(void*, Vec3*);
-extern void fn_8020104C(s32, s32, s32, void*, float);
+extern void fn_8020104C(int, void*, void*, int, float);
+#define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void*)(b), (void*)(c), (d), (e))
 
 void fn_8000E84C(s32 object_id, s32 value)
 {
@@ -45,6 +46,6 @@ void fn_8000E84C(s32 object_id, s32 value)
         fn_80201E78(&transformed, object);
         fn_80158D38(&transformed, 2, 4, &position);
         fn_801A764C(event, &position);
-        fn_8020104C(0xED, 0, object_id, event, lbl_8064DCF0);
+        fn_8020104C(0xED, 0, object_id, (int)event, lbl_8064DCF0);
     }
 }

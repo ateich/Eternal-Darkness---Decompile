@@ -24,7 +24,7 @@ extern s32 lbl_8064C704;
 
 extern void* fn_80201814();
 extern void* fn_80155DB4(void*);
-extern void fn_801568B8(void*, void (*)(void));
+extern void fn_801568B8(void*, void*);
 extern void fn_80205C98(void);
 extern u32 fn_80144628(s32, EventDescriptor*, s32);
 extern void fn_80144608(u32);

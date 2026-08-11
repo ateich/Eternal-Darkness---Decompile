@@ -33,7 +33,7 @@ extern const float lbl_8064E0A8;
 extern const float lbl_8064E0AC;
 
 extern s32 fn_80200C10(void*);
-extern Vec3* fn_80200C38(void*);
+extern int fn_80200C38(void*);
 extern void fn_80200C20(void*);
 extern s32 fn_800460EC(s32);
 extern void* fn_80201B8C();
@@ -71,7 +71,7 @@ s32 fn_8002C7A8(void* callback, s32 phase, void* event)
             return 1;
         }
         if (event_id == 0x10) {
-            Vec3* values = fn_80200C38(event);
+            Vec3* values = (Vec3*)fn_80200C38(event);
             float scale;
             float normalized_y;
             float normalized_x;

@@ -50,9 +50,11 @@ extern s32 lbl_8064C694;
 extern double lbl_8064DEC8;
 
 extern void fn_80144C40(void);
-extern void fn_801E5FB0(u32);
+extern void fn_801E5FB0(void*);
+#define fn_801E5FB0(a) fn_801E5FB0((void*)(a))
+
 extern u32* fn_801E5D08(u32);
-extern u32 fn_801E6CA0(void*, s32, s32, s32, s32);
+extern void* fn_801E6CA0(void*, int, int, int, int);
 extern void fn_801EF5EC(void);
 extern void fn_8020ED80(s32);
 extern void fn_8001DFEC(s32, s32);
@@ -79,7 +81,7 @@ extern void fn_801E79A0(void*, s32);
 extern void fn_801E7974(void*, int);
 extern s32 fn_8012070C(void);
 extern void fn_8015E918(void*, s32, s32, s32, s32);
-extern u32 fn_801A98F4(s32, s32);
+extern unsigned int fn_801A98F4(int, int);
 extern void fn_800AFBA8(void*);
 extern void fn_80045230(void);
 extern void fn_800451C4(s32);
@@ -149,12 +151,12 @@ void fn_8001E894(void)
         runtime->second_handle = 0;
         runtime->third_handle = 0;
         if (runtime->previous_state == 0) {
-            runtime->first_handle = fn_801E6CA0(lbl_8064C504, 0, 35, 0, 1);
+            runtime->first_handle = (u32)fn_801E6CA0(lbl_8064C504, 0, 35, 0, 1);
             *fn_801E5D08(runtime->first_handle) = lbl_8064C2AC;
             fn_801EF5EC();
             fn_8020ED80(1);
         } else {
-            runtime->first_handle = fn_801E6CA0(lbl_8064C504, 0, 36, 0, 1);
+            runtime->first_handle = (u32)fn_801E6CA0(lbl_8064C504, 0, 36, 0, 1);
             *fn_801E5D08(runtime->first_handle) = lbl_8064C2AC;
             fn_8020ED80(0);
         }

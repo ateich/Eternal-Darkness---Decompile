@@ -17,6 +17,8 @@ typedef struct EventState {
 
 extern EventState lbl_80302040;
 extern void fn_801E5FB0(void*);
+#define fn_801E5FB0(a) fn_801E5FB0((void*)(a))
+
 
 void fn_80008CA0(void)
 {

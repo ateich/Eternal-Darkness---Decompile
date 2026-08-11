@@ -60,7 +60,7 @@ extern void fn_801F1034(void);
 extern void fn_801A852C(u32*, s32, s32, u32);
 extern void fn_801A85D4(u32*, s32, s32, u32);
 extern void fn_801ECF50(s32);
-extern void fn_801A8D38(s32);
+extern void fn_801A8D38(int);
 extern void fn_80226AB4(s32, s32, s32);
 extern void fn_80225F4C(s32, void*, s32);
 extern void fn_80026740(void);

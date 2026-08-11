@@ -25,7 +25,7 @@ typedef struct InnerObject {
 extern void* fn_80201B8C();
 extern void* fn_80201BC8();
 extern s32 fn_80066BB8(void*, s32);
-extern void fn_8011F114(Vec3*, void*);
+extern void fn_8011F114(void*, void*);
 extern s32 fn_80036B7C(void*, s32, Vec3*);
 
 s32 fn_80036A1C(register void* object, register s32 mask, register s32* value,

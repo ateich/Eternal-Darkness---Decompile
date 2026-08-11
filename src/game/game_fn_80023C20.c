@@ -14,7 +14,7 @@ extern void fn_80144680(void* object);
 extern void* fn_80144628(u32 kind, void* data, u32 flags);
 extern void fn_801EBA58(void* object);
 extern void fn_801F348C(u32* value, u32 duration);
-extern u32 fn_801A98F4(u32 resource, u32 priority);
+extern unsigned int fn_801A98F4(int, int);
 extern u32 fn_80024638(void* data, u32 value, void* output);
 extern void fn_801E85A8(void);
 extern void fn_80020150(void);

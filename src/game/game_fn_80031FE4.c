@@ -32,7 +32,7 @@ extern const u32 lbl_80651930;
 extern const u32 lbl_80651934;
 
 extern s32 fn_80200C10(void*);
-extern s32 fn_80200C38(void*);
+extern int fn_80200C38(void*);
 extern void* fn_80201B8C();
 extern int fn_80201B54();
 extern void* fn_80201BC8();

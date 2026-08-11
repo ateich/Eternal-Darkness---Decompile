@@ -57,6 +57,8 @@ extern void fn_80201D4C(void*, void*);
 extern void fn_802020B4(void*, int);
 extern void* fn_80201B9C();
 extern int fn_80201B5C(void*);
+#define fn_80201B5C(a) fn_80201B5C((void*)(a))
+
 extern void* fn_80201B8C();
 extern void* fn_80201BC0(void*);
 extern void* fn_80201814();

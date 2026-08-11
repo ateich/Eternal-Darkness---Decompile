@@ -41,7 +41,7 @@ extern void fn_801E5430(int, int);
 extern void fn_801E3A34(const u32*);
 extern void fn_801E56AC(float, const char*, ...);
 extern float fn_8012B750(void*);
-extern void fn_8011F114(Vec3*, void*);
+extern void fn_8011F114(void*, void*);
 extern void fn_801A7BA0(int, int, float);
 
 void fn_80006B38(void)

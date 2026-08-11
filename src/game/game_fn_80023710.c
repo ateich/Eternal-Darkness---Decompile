@@ -15,7 +15,7 @@ extern u32 lbl_8030241C[];
 extern void fn_800B18F8(void);
 extern void fn_800B7D20(void);
 extern void fn_8001DE84(int, int);
-extern u32 fn_801A98F4(int, int);
+extern unsigned int fn_801A98F4(int, int);
 
 void fn_80023710(void)
 {
