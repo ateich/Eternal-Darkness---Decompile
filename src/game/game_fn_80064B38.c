@@ -17,7 +17,7 @@ extern void *fn_80201B9C(void);
 extern void *fn_80204844(void *object, s32 value);
 extern void *fn_8006D444(void);
 extern s32 fn_8006D344(void *object, s32 flags, s32 zero);
-extern void fn_8020123C(s32 type, s32 source, s32 target, s32 value);
+extern unsigned long long fn_8020123C(s32 type, s32 source, s32 target, s32 value);
 extern s32 fn_80038308(s32 context, s32 index, s16 *value);
 extern s32 fn_80038464(s32 context, s32 index, s16 *value);
 extern s32 fn_80064E2C(s32 context, s32 value, s32 index, u16 mask,

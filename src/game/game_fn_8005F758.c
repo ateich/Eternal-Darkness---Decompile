@@ -46,7 +46,7 @@ extern void fn_8014A1E4(EffectSlot *, void *);
 extern void fn_80149B0C(void *, s32, s32);
 extern void fn_801938FC(EffectSlot *);
 extern void fn_801D3CAC(s32, s32, EmbeddedDescriptor *);
-extern void fn_801E8328(s32, EffectSlot *);
+extern int fn_801E8328(s32, EffectSlot *);
 
 void fn_8005F758(EffectSlot *slot, s32 object_id, Vec3 *position, s32 owner,
                  s32 query_a, s32 query_b, u8 kind, u8 variant,

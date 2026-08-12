@@ -35,7 +35,7 @@ extern s32 fn_80060D4C(s32, u32, s32, s32, s8);            /* extern */
 extern s32 fn_80060F10(s32, u32, s32);                     /* extern */
 extern M2C_UNK fn_80060F9C(s32, u32, s32, void *, s32, s32, s8); /* extern */
 extern u32 fn_800FBFB0();                                  /* extern */
-extern M2C_UNK fn_8011F114(f32 *, u32);                    /* extern */
+extern void fn_8011F114(f32 *, u32);                       /* extern */
 extern s32 fn_8011F598(u32, M2C_UNK, M2C_UNK, M2C_UNK, M2C_UNK *, M2C_UNK); /* extern */
 extern M2C_UNK fn_8011F778(u32, f32);                      /* extern */
 extern M2C_UNK fn_8011F788(u32, f32);                      /* extern */
@@ -51,7 +51,7 @@ extern s32 fn_801290D0(u32);                               /* extern */
 extern M2C_UNK fn_801294DC(u32, M2C_UNK, M2C_UNK, M2C_UNK); /* extern */
 extern M2C_UNK fn_801296F8(u32, M2C_UNK);                  /* extern */
 extern M2C_UNK fn_8012B324(u32);                           /* extern */
-extern M2C_UNK fn_8012B344(u32);                           /* extern */
+extern void fn_8012B344(u32);                              /* extern */
 extern M2C_UNK fn_8012C62C(u32, M2C_UNK, s32 *, s32 *, s32 *, M2C_UNK, s32); /* extern */
 extern M2C_UNK fn_8012FE10(u32, M2C_UNK, f32 *);           /* extern */
 extern s32 fn_8012FF34(u32, f32 *, M2C_UNK, M2C_UNK);      /* extern */
@@ -71,7 +71,7 @@ extern M2C_UNK fn_801A764C(s32, f32 *);                    /* extern */
 extern M2C_UNK fn_801A977C(u32, M2C_UNK);                  /* extern */
 extern M2C_UNK fn_801AAE68(M2C_UNK, M2C_UNK, M2C_UNK, f32 *, M2C_UNK, M2C_UNK, M2C_UNK, u16, f32); /* extern */
 extern M2C_UNK fn_801D14CC(s32);                           /* extern */
-extern M2C_UNK fn_801E8328(M2C_UNK, s32);                  /* extern */
+extern int fn_801E8328(M2C_UNK, s32);                      /* extern */
 extern M2C_UNK fn_802006D4(s32, s32, M2C_UNK, M2C_UNK, M2C_UNK); /* extern */
 extern s32 fn_80200C10(void *);                           /* extern */
 extern s32 fn_80200C20(s32);                               /* extern */
@@ -88,7 +88,7 @@ extern void *fn_80201B9C(void);                           /* extern */
 extern void *fn_80201BC8();                               /* extern */
 extern s32 fn_80201C48(s32);                               /* extern */
 extern void fn_80201D14(void *, s32);                     /* extern */
-extern M2C_UNK fn_80201D1C(s32, M2C_UNK);                  /* extern */
+extern void fn_80201D1C(s32, M2C_UNK);                     /* extern */
 extern void fn_80201D2C(void *, s32);                     /* extern */
 extern M2C_UNK fn_80201D34(s32, M2C_UNK);                  /* extern */
 extern s32 fn_80201EB8(s32, void *, s32);                  /* extern */
