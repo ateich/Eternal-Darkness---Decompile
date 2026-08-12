@@ -52,7 +52,7 @@ extern void *fn_80149E04(void);
 extern void fn_80147E88(RuntimeObject *object);
 extern void fn_801498AC(RuntimeObject *object, Component *component);
 extern void fn_80187968(RuntimeObject *object);
-extern void fn_801E8328(s32 kind, RuntimeObject *object);
+extern int fn_801E8328(s32 kind, RuntimeObject *object);
 extern s32 fn_801D39E0(s32 kind);
 extern void *fn_8014C68C(s32 owner, s32 kind, s32 enabled, s32 *value,
                          s32 time, s32 interval, s32 duration);

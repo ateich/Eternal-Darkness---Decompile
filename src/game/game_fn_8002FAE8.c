@@ -29,7 +29,7 @@ extern int fn_8011F598(); extern int fn_8011F6A4(); extern int fn_8011FAF4();
 extern int fn_80120AD0(); extern int fn_8012B690(); extern int fn_8013F4D0();
 extern int fn_8014317C(); extern int fn_8014CBC0(); extern int fn_80178E94();
 extern int fn_801858E0(); extern int fn_80185AE8(); extern int fn_801A717C();
-extern int fn_801A7228(); extern int fn_801A7470(); extern int fn_801A74A0();
+extern int fn_801A7228(); extern int fn_801A7470(); extern void fn_801A74A0();
 extern void fn_801A74A8(); extern int fn_801A74D8(); extern int fn_801A7518();
 extern int fn_801A7538(); extern int fn_801A7588(); extern int fn_801A764C();
 extern int fn_801A7668(); extern int fn_801A7670(); extern int fn_801AC9F4();

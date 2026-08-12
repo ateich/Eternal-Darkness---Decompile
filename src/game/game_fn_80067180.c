@@ -35,7 +35,7 @@ extern void fn_8012C5B0();
 extern s32 fn_80201B44();
 extern s32 fn_8015C910();
 extern void fn_8015C8A4();
-extern void fn_8020123C();
+extern unsigned long long fn_8020123C();
 
 void fn_80067180(s32 context)
 {

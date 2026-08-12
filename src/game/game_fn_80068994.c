@@ -14,7 +14,7 @@ extern void fn_801A7538(void *action, s32 value);
 extern void fn_801A7518(void *action, s32 value);
 extern void fn_801A7588(void *action, s32 value);
 extern void fn_801A7470(void *action, s32 kind);
-extern void fn_8020123C(s32 kind, s32 source, s32 target, s32 value);
+extern unsigned long long fn_8020123C(s32 kind, s32 source, s32 target, s32 value);
 extern void fn_801A7228(void *action);
 
 void fn_80068994(void *object, s32 event)

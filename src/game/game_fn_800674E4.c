@@ -13,7 +13,7 @@ extern s32 fn_801A717C();
 extern void fn_801A7470();
 extern void fn_801A74A0();
 extern void fn_801A74A8();
-extern void fn_8020123C();
+extern unsigned long long fn_8020123C();
 extern void fn_801A7228();
 extern s32 fn_80201814();
 extern void fn_800359A0();

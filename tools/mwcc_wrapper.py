@@ -10,6 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 WIBO = ROOT / ".tools" / "bin" / "wibo"
+OBJCOPY = ROOT / "build" / "binutils" / "powerpc-eabi-objcopy"
 
 
 def output_object(args: list[str]) -> Path | None:
@@ -65,6 +66,17 @@ def main() -> None:
     if result.returncode:
         raise SystemExit(result.returncode)
     output = output_object(args)
+    local_symbol_names = {
+        "game_data_80239BC0.o": ("lbl_80239BC0", "@62_80239BC0"),
+        "game_data_80239C88.o": ("lbl_80239C88", "@154_80239C88"),
+        "game_data_80239CAC.o": ("lbl_80239CAC", "@155_80239CAC"),
+    }
+    if output is not None and output.name in local_symbol_names:
+        old, new = local_symbol_names[output.name]
+        subprocess.run(
+            [str(OBJCOPY), "--redefine-sym", f"{old}={new}", str(output)],
+            check=True,
+        )
     if output is not None and output.name == "__init_cpp_exceptions.o":
         normalize_runtime_sections(output)
     if output is not None and output.name in (
@@ -183,6 +195,66 @@ def main() -> None:
         "game_data_802396E0.o",
         "game_data_802396F0.o",
         "game_data_8023972C.o",
+        "game_data_80239750.o",
+        "game_data_8023975C.o",
+        "game_data_80239768.o",
+        "game_data_80239778.o",
+        "game_data_80239788.o",
+        "game_data_8023979C.o",
+        "game_data_802397B0.o",
+        "game_data_802397BC.o",
+        "game_data_802397C8.o",
+        "game_data_802397D8.o",
+        "game_data_802397F0.o",
+        "game_data_80239800.o",
+        "game_data_8023980C.o",
+        "game_data_80239818.o",
+        "game_data_80239824.o",
+        "game_data_80239830.o",
+        "game_data_8023983C.o",
+        "game_data_80239854.o",
+        "game_data_80239860.o",
+        "game_data_8023986C.o",
+        "game_data_80239878.o",
+        "game_data_80239884.o",
+        "game_data_80239890.o",
+        "game_data_8023989C.o",
+        "game_data_802398A8.o",
+        "game_data_802398B8.o",
+        "game_data_802398C8.o",
+        "game_data_802398E0.o",
+        "game_data_802398EC.o",
+        "game_data_802398F8.o",
+        "game_data_80239934.o",
+        "game_data_80239940.o",
+        "game_data_8023994C.o",
+        "game_data_80239958.o",
+        "game_data_80239968.o",
+        "game_data_80239978.o",
+        "game_data_80239988.o",
+        "game_data_80239998.o",
+        "game_data_802399A8.o",
+        "game_data_802399B8.o",
+        "game_data_802399C8.o",
+        "game_data_802399D8.o",
+        "game_data_80239A78.o",
+        "game_data_80239B18.o",
+        "game_data_80239B24.o",
+        "game_data_80239B30.o",
+        "game_data_80239B40.o",
+        "game_data_80239B50.o",
+        "game_data_80239B74.o",
+        "game_data_80239B80.o",
+        "game_data_80239B8C.o",
+        "game_data_80239B98.o",
+        "game_data_80239BC0.o",
+        "game_data_80239BE0.o",
+        "game_data_80239C00.o",
+        "game_data_80239C10.o",
+        "game_data_80239C38.o",
+        "game_data_80239C60.o",
+        "game_data_80239C88.o",
+        "game_data_80239CAC.o",
     ):
         set_section_alignment(output, b".rodata", 4)
         payload = output.read_bytes().replace(b".comment\0", b".ignored\0")

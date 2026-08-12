@@ -2,7 +2,7 @@ typedef signed int s32;
 
 extern void *fn_80201814(s32 object_id);
 extern s32 fn_80201BC8(void *object);
-extern void fn_801294DC(s32 state, s32 kind, s32 value, s32 priority);
+extern void *fn_801294DC(s32 state, s32 kind, s32 value, s32 priority);
 extern void fn_802006D4(s32 source, s32 target, s32 kind, s32 value, s32 extra);
 
 s32 fn_800683E4(void *action, s32 object_id)

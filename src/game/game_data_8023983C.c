@@ -1,0 +1,6 @@
+typedef unsigned short u16;
+
+/* Ordered scene-resource identifiers with a zero terminator. */
+const volatile u16 lbl_8023983C[12] = {
+    0x2E, 0x2F, 0x30, 0x31, 0x32, 0x28, 0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0,
+};
