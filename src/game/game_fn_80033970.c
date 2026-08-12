@@ -26,20 +26,20 @@ typedef struct BoundObject {
 extern u8 lbl_80303D18[0x78];
 
 extern s32 fn_80200C10(void*);
-extern int fn_80200C38(void*);
+extern int fn_80200C38();
 extern s32 fn_80200C20(void*);
 extern void fn_802006D4(s32, s32, s32, s32, s32);
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern int fn_80201B54();
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 extern void* fn_80201B94(void*);
 extern int fn_80201AE4(void);
-extern void fn_80201D14(void*, s32);
+extern void fn_80201D14(void *, s32);
 extern void fn_80201D1C(void*, s32);
-extern void fn_80201D2C(void*, s32);
+extern void fn_80201D2C(void *, s32);
 extern void fn_80201D34(void*, s32);
 extern void fn_802020B4(void*, int);
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern BoundObject* fn_801FD6F4(void*);
 extern void fn_8011FB54(void*, s32);
 extern void fn_80046F28(void*, s32);

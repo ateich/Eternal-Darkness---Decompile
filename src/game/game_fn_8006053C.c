@@ -26,8 +26,8 @@ typedef struct RangeData {
 } RangeData;
 
 extern s32 fn_800FBFB0(void);
-extern void* fn_80201B8C();
-extern void* fn_80201BC8();
+extern void *fn_80201B8C();
+extern void *fn_80201BC8();
 extern void fn_800360B0(void *, u16 *);
 extern RangeData *fn_80072354(void *);
 extern void fn_8011F114(Vec3 *, void *);

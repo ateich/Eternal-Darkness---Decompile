@@ -35,9 +35,8 @@ typedef struct EffectSlot {
 } EffectSlot;
 
 extern s32 lbl_8064D18C;
-
-extern void* fn_80201814();
-extern void* fn_80201BC8();
+extern void *fn_80201814();
+extern void *fn_80201BC8();
 extern s32 fn_8011FB4C(void *);
 extern s32 fn_8011F6A4(void *, s32, s32, s32, QueryResult *, s32);
 extern void *fn_80149E04(void);
@@ -46,7 +45,7 @@ extern void fn_8014A1E4(EffectSlot *, void *);
 extern void fn_80149B0C(void *, s32, s32);
 extern void fn_801938FC(EffectSlot *);
 extern void fn_801D3CAC(s32, s32, EmbeddedDescriptor *);
-extern int fn_801E8328(s32, EffectSlot *);
+extern int fn_801E8328();
 
 void fn_8005F758(EffectSlot *slot, s32 object_id, Vec3 *position, s32 owner,
                  s32 query_a, s32 query_b, u8 kind, u8 variant,

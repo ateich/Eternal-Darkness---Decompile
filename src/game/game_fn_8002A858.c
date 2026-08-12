@@ -16,7 +16,7 @@ extern void* fn_80156928(void*);
 extern void* fn_80156938();
 extern s32 fn_8011FCB0(void*);
 extern void fn_801568C0(void*, void*);
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 extern void fn_800DBD74(void*);
 extern void* fn_80156930(void*);
 extern void fn_801568E4(void*);

@@ -13,7 +13,7 @@ typedef struct Status {
 } Status;
 
 extern void fn_80201ADC(void);
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 extern s32 fn_8016A598(void*);
 extern void fn_80163BB4(void*, const char*, ...);
 extern int fn_80070A6C(int);

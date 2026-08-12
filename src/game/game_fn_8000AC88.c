@@ -27,9 +27,9 @@ extern void fn_80163BB4(void*, const char*, ...);
 extern unsigned int fn_800F5C54();
 extern int fn_8015C4A4(int, int);
 extern Vec3s* fn_80158ABC(int, int, void*);
-extern void* fn_80201814();
-extern void* fn_80201B8C();
-extern void* fn_80201BC8();
+extern void *fn_80201814();
+extern void *fn_80201B8C();
+extern void *fn_80201BC8();
 extern void fn_8005F8D0(s32, Entry*, void*, Entry*, Entry*, s32, Vec3f*, u32,
                        s32);
 

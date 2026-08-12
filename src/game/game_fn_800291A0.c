@@ -11,8 +11,7 @@ typedef struct TypeInfo {
     char unknown_00[0x11C];
     void* value_11C;
 } TypeInfo;
-
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern int fn_80201B4C(void*);
 extern void fn_80202054(void*, s32);
 extern void* fn_8011F950(void);

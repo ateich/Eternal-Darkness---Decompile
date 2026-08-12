@@ -23,13 +23,12 @@ extern u32 lbl_80651950;
 extern const u32 lbl_8064E5E4;
 extern const u32 lbl_8064E5E8;
 extern const float lbl_8064E5EC;
-
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 extern int fn_80201B54();
-extern void* fn_80201BC8();
-extern void *fn_80200C38(void *);
+extern void *fn_80201BC8();
+extern int fn_80200C38();
 extern void *fn_801A7498(void *);
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern void fn_8011F114(Vec3 *, void *);
 extern void fn_801A7728(Vec3 *, void *);
 extern void fn_8012B344(void *);
@@ -66,7 +65,7 @@ void fn_8005FF94(void *entry, void *object)
     data = (EffectData *)runtime->effect_data;
     entry_id = fn_80201B54(entry);
     entry_object = fn_80201BC8(entry);
-    resource = fn_80200C38(object);
+    resource = (void *)fn_80200C38(object);
     created = fn_80201814(fn_801A7498(resource));
 
     fn_8011F114(&position, entry_object);

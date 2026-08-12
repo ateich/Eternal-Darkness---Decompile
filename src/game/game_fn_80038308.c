@@ -12,8 +12,7 @@ typedef struct ObjectData {
     s16 channel2;
     s16 channel3;
 } ObjectData;
-
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 extern int fn_80201EF4(void*, s16*);
 extern u32 fn_8020216C(void*);
 extern int fn_80038464(void*, int, s16*);

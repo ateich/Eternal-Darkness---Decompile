@@ -14,8 +14,7 @@ typedef struct HandlerState {
 
 extern f32 lbl_8064E63C;
 extern f32 lbl_8064E640;
-
-extern s32 fn_80200C38(s32 value);
+extern int fn_80200C38();
 extern s32 fn_801A74F8(void);
 extern u16 fn_801A7530(s32 value);
 extern s32 fn_80038308(s32 context, s32 index, s16 *value);

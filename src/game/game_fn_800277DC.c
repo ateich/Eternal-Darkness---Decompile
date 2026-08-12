@@ -13,7 +13,6 @@ extern s32 lbl_8064C708;
 
 extern void fn_801E5FB0(void*);
 #define fn_801E5FB0(a) fn_801E5FB0((void*)(a))
-
 extern unsigned long long fn_8020123C();
 
 void fn_800277DC(s16 state, EventPayload* payload)

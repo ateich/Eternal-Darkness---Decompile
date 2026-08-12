@@ -8,8 +8,7 @@ typedef struct QueryResult {
 typedef struct TemporaryDescriptor {
     u8 data[0x28];
 } TemporaryDescriptor;
-
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern s32 fn_8011F598(void*, s32, s32, s32, QueryResult*, s32);
 extern void fn_8013F4D0(TemporaryDescriptor*, void*, void*);
 extern s32 fn_8014317C(TemporaryDescriptor*, s32, s32, s32, s32);

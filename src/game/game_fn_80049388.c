@@ -1,10 +1,9 @@
 typedef signed int s32;
-
 extern int fn_80201B54();
 extern void* fn_80158598(int object_id, int index);
 extern s32 fn_80157E1C(void* object);
 extern void* fn_80157FE0(void* object, s32 index, s32 value);
-extern void* fn_80201814();
+extern void *fn_80201814();
 
 s32 fn_80049388(void* object, s32 index, s32 value)
 {

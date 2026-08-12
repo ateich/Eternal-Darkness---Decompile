@@ -3,13 +3,12 @@ typedef unsigned short u16;
 typedef int s32;
 
 extern const char lbl_8023BEF8[];
-
 extern int fn_80201B44(void);
 extern void* fn_80158598(int, int);
 extern s32 fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern void* fn_80201C24();
 extern void fn_801579E0(void*, s32, s32);
 extern s32 fn_80158514(void*, s32);

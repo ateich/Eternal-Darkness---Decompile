@@ -10,8 +10,7 @@ typedef struct Object {
     unsigned char pad_00[0x8C];
     InnerObject* inner;
 } Object;
-
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 
 s32 fn_80036060(void* object, u16 flags)
 {

@@ -8,12 +8,12 @@ extern char lbl_80243A40[];
 extern char lbl_8064B4E4;
 
 extern s32 fn_80200C10(void *event);
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern void fn_8011E174(s32 index, s32 value);
 extern s32 fn_8004918C(void);
 extern void fn_801A7778(s32 object);
-extern void fn_80201D2C(void *context, s32 value);
-extern void fn_80201D14(void *context, s32 value);
+extern void fn_80201D2C(void *, s32);
+extern void fn_80201D14(void *, s32);
 extern s32 fn_80035FB8(void *context, char *first, char *second, char *third,
                       char *value, char *fourth);
 extern void fn_8012B344(void *object);

@@ -16,9 +16,9 @@ extern u32 fn_80157994(void* object);
 extern s32 fn_80157E1C(void* list);
 extern void* fn_80157E24(void* list, s32 index);
 extern void* fn_80158598(int object, int index);
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern int fn_80201B54();
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern void* fn_80201C24();
 extern void fn_80205680(void* object, void* parent, s32 value);
 

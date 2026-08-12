@@ -17,14 +17,13 @@ typedef struct HandlerData {
     u8 pad0C[0x80];
     HandlerState *state;
 } HandlerData;
-
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 extern void *fn_80201B94(void *);
 extern s32 fn_80201C48(void *);
 extern int fn_80201B54();
 extern void fn_80060C28(s32, void *, HandlerData *);
 extern s32 fn_800359A0(void *, s32);
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern s32 fn_800601FC(void *, void *, void *);
 extern void fn_800BDEE4(void *, HandlerState *);
 extern void fn_80201D2C(void *, s32);

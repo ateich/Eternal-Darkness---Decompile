@@ -49,12 +49,12 @@ extern const f32 lbl_8064E184;
 extern const double lbl_8064E188;
 
 extern s32 fn_80200C10(void*);
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 extern int fn_80201B54();
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern int fn_80201B4C(void*);
-extern void fn_80201D2C(void*, s32);
-extern void fn_80201D14(void*, s32);
+extern void fn_80201D2C(void *, s32);
+extern void fn_80201D14(void *, s32);
 extern void fn_80201D34(void*, s32);
 extern void fn_80201D1C(void*, s32);
 extern int fn_80035628(void*);

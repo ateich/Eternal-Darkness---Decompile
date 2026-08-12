@@ -18,8 +18,8 @@ extern s32 fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void* fn_8016A784(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
-extern void* fn_80201814();
-extern void* fn_80201BC8();
+extern void *fn_80201814();
+extern void *fn_80201BC8();
 extern void fn_8011F0E8(void*, Vec3f*);
 
 s32 fn_8000BAA0(void* script)

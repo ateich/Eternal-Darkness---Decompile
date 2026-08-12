@@ -11,8 +11,8 @@ typedef struct Object {
 } Object;
 
 extern s32 fn_801A7498(void*);
-extern void* fn_80201814();
-extern void* fn_80201B8C();
+extern void *fn_80201814();
+extern void *fn_80201B8C();
 extern unsigned long long fn_8020123C();
 
 s32 fn_80036198(void* object, void* argument)

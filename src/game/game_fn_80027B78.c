@@ -4,10 +4,9 @@ typedef int s32;
 extern u32 lbl_8064DFE4;
 extern u32 lbl_8064DFE8;
 extern u32 lbl_8064DFEC;
-
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern void* fn_80201C2C(void*);
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern void fn_80204E0C(void*, void*);
 extern void fn_8011FA8C(void*, int, int);
 extern void fn_8012C62C(void*, s32, void*, void*, void*, s32);

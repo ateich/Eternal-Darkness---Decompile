@@ -15,13 +15,12 @@ typedef struct HandlerState {
 } HandlerState;
 
 extern f32 lbl_8064E638;
-
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 extern HandlerState *fn_80036D38(s32 context);
 extern s32 fn_80200C20(s32 value);
 extern int fn_80201B54();
-extern void* fn_80201814();
-extern void* fn_80201BC8();
+extern void *fn_80201814();
+extern void *fn_80201BC8();
 extern f32 fn_8012B750(s32 value);
 extern s32 fn_80204508(s32 context, s32 value);
 extern int fn_80201B44(void);

@@ -22,21 +22,21 @@ typedef struct HandlerState {
 
 extern u32 lbl_8064D5A8;
 extern s32 fn_80200C10(void *event);
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern int fn_80201B54();
 extern u32 fn_80036D5C(void *context);
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 extern void fn_8011E174(s32 value, s32 enabled);
 extern void fn_80036DA4(void *context, u32 flags);
 extern void fn_80077E14(void *context, void *object, void *event, s32 object_id,
                        HandlerState *state);
 extern void fn_80077880(void *context, HandlerState *state, void *event);
 extern s32 fn_8006D3E4(u32 value, s32 mode);
-extern void *fn_80200C38(void *event);
+extern int fn_80200C38();
 extern s32 fn_80063D60(void *object, HandlerContext *handler, u8 value);
 extern unsigned long long fn_8020123C();
-extern void fn_80201D2C(void *context, s32 value);
-extern void fn_80201D14(void *context, s32 value);
+extern void fn_80201D2C(void *, s32);
+extern void fn_80201D14(void *, s32);
 extern void fn_800C63D8(void);
 extern void fn_8012B344(void *object);
 extern void *fn_801294DC(void *object, s32 kind, s32 value, s32 extra);
@@ -92,7 +92,7 @@ s32 fn_80059678(void *context, void *event, u32 *result)
     if (kind == 44) {
         u32 flags = fn_80036D5C(context);
         if ((flags & 0x40) != 0 && fn_8006D3E4(0x40000, 0) == 0) {
-            void *value = fn_80200C38(event);
+            void *value = (void *)fn_80200C38(event);
             if (value != 0) {
                 s32 added = fn_80063D60(value, handler, state->progress);
                 if (state->progress >= 8 && (flags & 0x180) == 0) {

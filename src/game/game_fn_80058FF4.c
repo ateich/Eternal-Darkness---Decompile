@@ -15,15 +15,15 @@ typedef struct HandlerState {
 extern char lbl_80331748[];
 extern float lbl_8064E504;
 extern s32 fn_80200C10(void *event);
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern int fn_80201B54();
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 extern void fn_80130434(void *object, s32 value);
 extern void fn_801301B0(void *object, u32 clear, u32 set);
 extern u32 fn_801A74C0(void *object);
 extern void fn_8011E174(s32 value, s32 enabled);
 extern void *fn_801A7490(void *object);
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern u16 fn_801A7580(void *object);
 extern u32 fn_801A7570(void *object);
 extern s32 fn_8012915C(void *object);
@@ -32,14 +32,14 @@ extern s32 fn_800C4238(void *context, void *object, void *resolved,
 extern void fn_801A75A0(void *object, u16 value);
 extern void fn_800C3FE4(void *context, void *value, void *object);
 extern s32 fn_80070A6C(s32 value);
-extern void *fn_80200C38(void *event);
+extern int fn_80200C38();
 extern u32 fn_801A7780(void *object);
 extern void fn_801A74D8(void *object, u32 value);
 extern void *fn_8004918C(void);
 extern s32 fn_800C2FC4(void *context, void *event, u32 value);
 extern s32 fn_800BF848(void *context, void *event);
-extern void fn_80201D2C(void *context, s32 value);
-extern void fn_80201D14(void *context, s32 value);
+extern void fn_80201D2C(void *, s32);
+extern void fn_80201D14(void *, s32);
 extern void fn_8020104C(s32 kind, s32 source, s32 target, void *value,
                        float amount);
 extern void fn_800C39D0(void *context);
@@ -92,7 +92,7 @@ s32 fn_80058FF4(void *context, void *event, u32 *result)
     }
     if (kind == 40) {
         if (fn_80070A6C(0x200) == 0) {
-            void *linked = fn_80200C38(event);
+            void *linked = (void *)fn_80200C38(event);
             u32 flags = fn_801A7780(linked);
             if ((fn_801A74C0(linked) & 0x400) != 0) {
                 if (state->counter > 45) {

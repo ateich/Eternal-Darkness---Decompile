@@ -12,9 +12,8 @@ typedef struct ObjectData {
     u8 pad[0xEA];
     s16 current[15];
 } ObjectData;
-
-extern void* fn_80201814();
-extern void* fn_80201B8C();
+extern void *fn_80201814();
+extern void *fn_80201B8C();
 
 int fn_800385D0(int id, int index, s16* value)
 {

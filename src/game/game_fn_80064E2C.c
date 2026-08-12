@@ -23,14 +23,14 @@ extern u8 *fn_80036D38(s32 context);
 extern s32 fn_801A7488(s32 event);
 extern void fn_801A7744(EventPosition *position, s32 event);
 extern s32 fn_801A7498(s32 event);
-extern s32 fn_80201B54(s32 context);
-extern s32 fn_80201B44(void);
+extern int fn_80201B54();
+extern int fn_80201B44(void);
 extern u32 fn_801A74C0(s32 event);
-extern void *fn_80201814(s32 object);
+extern void *fn_80201814();
 extern s32 fn_80071D5C(void *object);
 extern s32 fn_801A74F8(s32 event);
 extern void fn_801A7518(s32 event, s16 value);
-extern u64 fn_8020123C(s32 type, s32 source, s32 target, s32 value);
+extern unsigned long long fn_8020123C();
 extern s32 fn_801E79FC(s32 object, s32 value);
 extern void fn_801E7974(s32 object, s32 value);
 extern void fn_80006954(s32 value);
@@ -42,7 +42,7 @@ extern void fn_801A74A8(s32 event, s32 owner);
 extern void fn_801A7538(s32 event, s32 value);
 extern void fn_801A764C(s32 event, EventPosition *position);
 extern void fn_801A7228(s32 event);
-extern void *fn_80201BC8(s32 context);
+extern void *fn_80201BC8();
 extern void fn_80120AD0(void *object, s32 zero, s32 amount, s32 kind,
                         float first, float second);
 

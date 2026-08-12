@@ -30,13 +30,12 @@ typedef struct ObjectInfo {
 
 extern s32 lbl_8064E208;
 extern double lbl_8064E210;
-
 extern int fn_80201B54();
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern void* fn_80201B94(void*);
 extern State* fn_80036D38(void*);
 extern void fn_80201E78(void*, void*);
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 extern unsigned int fn_80036D5C(void*);
 extern int fn_80201B44(void);
 extern void* fn_80201C48(void*);
@@ -48,7 +47,7 @@ extern void fn_80201E60(void*, s32);
 extern void fn_80201DD8(void*, s32);
 extern void* fn_80201B9C(void);
 extern s32 fn_800CAF7C(void*);
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern void* fn_80201BC0(void*);
 extern u32 fn_80178E94(Vec3*, Vec3*);
 extern u8 fn_80204434(void*, Vec3*, float, s32);

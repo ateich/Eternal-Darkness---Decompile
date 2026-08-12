@@ -3,21 +3,20 @@ typedef signed short s16;
 typedef signed int s32;
 
 extern s32 lbl_8064D18C;
-
-extern s32 fn_80200C38(void *event);
+extern int fn_80200C38();
 extern s32 fn_80201EB8(s32 context);
 extern s32 fn_801A74F8(s32 value);
 extern u16 fn_801A7530(s32 value);
 extern void fn_801A7488(s32 value);
 extern void fn_801A7498(s32 value);
-extern s32 fn_80201B54(s32 context);
+extern int fn_80201B54();
 extern void fn_80201F80(s32 context, s32 zero, s32 flags);
-extern s32 fn_80201B44(void);
+extern int fn_80201B44(void);
 extern void *fn_80201B9C(void);
 extern void *fn_80204844(void *object, s32 value);
 extern void *fn_8006D444(void);
 extern s32 fn_8006D344(void *object, s32 flags, s32 zero);
-extern unsigned long long fn_8020123C(s32 type, s32 source, s32 target, s32 value);
+extern unsigned long long fn_8020123C();
 extern s32 fn_80038308(s32 context, s32 index, s16 *value);
 extern s32 fn_80038464(s32 context, s32 index, s16 *value);
 extern s32 fn_80064E2C(s32 context, s32 value, s32 index, u16 mask,

@@ -3,7 +3,7 @@ typedef signed int s32;
 typedef unsigned int u32;
 
 extern void *fn_80201B9C(void);
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern s32 fn_80201EB8(void *object);
 extern u8 fn_80204508(void *first, void *second);
 extern s32 fn_80204180(void *first, void *second);

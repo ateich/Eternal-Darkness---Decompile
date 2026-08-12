@@ -29,14 +29,13 @@ extern const float lbl_8064E138;
 extern s32 lbl_8064D18C;
 
 extern void* fn_80156938();
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 extern int fn_80201B5C(void*);
 #define fn_80201B5C(a) fn_80201B5C((void*)(a))
-
 extern int fn_80201B54();
 extern unsigned long long fn_8020123C();
-extern void* fn_80201814();
-extern void* fn_80201BC8();
+extern void *fn_80201814();
+extern void *fn_80201BC8();
 extern void fn_80121104(float);
 extern s32 fn_8011FB4C(void*);
 extern int fn_80201AE4(void);

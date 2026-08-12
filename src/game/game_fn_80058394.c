@@ -19,16 +19,16 @@ extern char lbl_8064B4E4;
 extern s32 lbl_8064C864;
 extern char lbl_80331748[];
 extern s32 fn_80200C10(void *event);
-extern void* fn_80201BC8();
-extern void* fn_80201B8C();
+extern void *fn_80201BC8();
+extern void *fn_80201B8C();
 extern void fn_800C39D0(void *context);
 extern void fn_800BEBE4(void *context, s32 value);
 extern s32 fn_80035FB8(void *context, char *first, char *second, char *third,
                       char *value, char *fourth);
-extern void fn_80201D2C(void *context, s32 value);
-extern void fn_80201D14(void *context, s32 value);
+extern void fn_80201D2C(void *, s32);
+extern void fn_80201D14(void *, s32);
 extern s32 fn_80070A6C(s32 value);
-extern void *fn_80200C38(void *event);
+extern int fn_80200C38();
 extern u32 fn_801A7780(void *object);
 extern u8 fn_801A781C(void *object);
 extern s32 fn_800BF848(void *context, void *event);
@@ -86,7 +86,7 @@ s32 fn_80058394(void *context_arg, void *event_arg, u32 *result)
     }
     if (kind == 40) {
         if (fn_80070A6C(0x200) == 0) {
-            void *linked = fn_80200C38(event);
+            void *linked = (void *)fn_80200C38(event);
             u32 flags = fn_801A7780(linked);
             if (fn_801A781C(linked) == 0) {
                 if ((flags & 0x10018) != 0) {

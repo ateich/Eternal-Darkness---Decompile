@@ -40,7 +40,7 @@ extern const LookupPair lbl_80243CE4[];
 extern const LookupPair lbl_80243D24[];
 
 extern s32 fn_80200C10(void *event);
-extern s32 fn_80200C38(void *event);
+extern int fn_80200C38();
 extern s32 fn_8015C4A4(s32 value, s32 kind);
 extern Vec3s *fn_80158ABC(s32 value, s32 kind, void *extra);
 extern void fn_8011F114(Vec3 *position, void *object);

@@ -57,7 +57,7 @@ extern void* fn_80034708(Request*);
 extern int fn_80201B54();
 extern void fn_80201AEC(void*, void*);
 extern void fn_80201AF8(void*);
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern u32 fn_8011FAEC(void*);
 extern void fn_8011FADC(void*, u32);
 extern void fn_8011FE64(void*, void*);

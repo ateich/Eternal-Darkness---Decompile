@@ -17,11 +17,11 @@ extern float lbl_8064E07C;
 
 extern s32 fn_80200C10(void*);
 extern int fn_80201B54();
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern void* fn_80201B94(void*);
 extern u32 fn_80201CCC(void*);
-extern void fn_80201D2C(void*, s32);
-extern void fn_80201D14(void*, s32);
+extern void fn_80201D2C(void *, s32);
+extern void fn_80201D14(void *, s32);
 extern void fn_80201E50(void*, u32);
 extern int fn_801E8328();
 extern void fn_80201D34(void*, s32);

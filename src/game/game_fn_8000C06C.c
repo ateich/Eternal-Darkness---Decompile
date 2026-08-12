@@ -6,7 +6,7 @@ extern void* lbl_8064D5A8;
 extern s32 fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern s32 fn_800DE298(void*);
 extern void fn_8016A830(void*, double);
 

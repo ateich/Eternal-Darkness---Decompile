@@ -11,7 +11,7 @@ extern s32 lbl_8064C86C;
 extern s32 lbl_8064D18C;
 
 extern s32 fn_80200C10(void *event);
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern s32 fn_80054BCC(s32 value);
 extern void fn_8011E174(s32 index, s32 value);
 extern void fn_801301B0(void *object, s32 set, s32 clear);
@@ -27,8 +27,8 @@ extern s32 fn_800FBFB0(void);
 extern void fn_801B05E8(s32, s32, s32, s32, s32, s32, s32, s32);
 extern s32 fn_80035FB8(void *context, char *first, char *second, char *third,
                       char *value, char *fourth);
-extern void fn_80201D2C(void *context, s32 value);
-extern void fn_80201D14(void *context, s32 value);
+extern void fn_80201D2C(void *, s32);
+extern void fn_80201D14(void *, s32);
 extern void fn_801F86F4(s32 value);
 
 s32 fn_80057E3C(void *context, void *event, s32 *result)

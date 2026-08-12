@@ -8,7 +8,7 @@ extern int lbl_8064C5C8;
 extern int lbl_8064C5C4;
 
 extern void* fn_80156938();
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern int fn_801FA44C(void);
 extern int fn_80201EB8();
 extern u32 fn_8011FAEC(void*);

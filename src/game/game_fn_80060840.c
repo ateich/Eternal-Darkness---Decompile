@@ -7,14 +7,13 @@ typedef enum Result {
     ResultFive = 5,
     ResultSix = 6
 } Result;
-
-extern void *fn_80200C38(void *);
+extern int fn_80200C38();
 extern u16 fn_801A7434(void *);
 extern u32 fn_800FBFB0(void);
 
 Result fn_80060840(void *owner, s32 *special)
 {
-    void *context = fn_80200C38(owner);
+    void *context = (void *)fn_80200C38(owner);
     Result result = (Result)-1;
 
     switch (fn_801A7434(context)) {

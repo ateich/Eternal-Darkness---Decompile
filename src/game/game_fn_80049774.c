@@ -5,7 +5,7 @@ extern int fn_80201B44(void);
 extern void* fn_80158598(void* object, int index);
 extern int fn_80157E1C(void* object);
 extern void* fn_80157E24(void* object, int index);
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern void fn_802020B4(void* object, u8 value);
 
 void fn_80049774(int value)

@@ -4,8 +4,7 @@ typedef struct ObjectInfo {
     unsigned char pad_00[0x94];
     s32 value94;
 } ObjectInfo;
-
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 
 s32 fn_80035628(void* object)
 {

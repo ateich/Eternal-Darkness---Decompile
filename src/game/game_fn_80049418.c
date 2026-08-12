@@ -3,7 +3,7 @@ typedef signed int s32;
 extern void* lbl_8064C4E0;
 
 extern void* fn_80049388(void* object, s32 index, s32 value);
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern int fn_8011EB04(void* object);
 extern void fn_801E7974(void* object, int value);
 extern void fn_801E79A0(void* object, s32 value);

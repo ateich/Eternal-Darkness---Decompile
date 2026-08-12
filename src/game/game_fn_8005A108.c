@@ -49,9 +49,9 @@ extern char lbl_80243BE4[];
 extern char lbl_802FC5BC[];
 
 extern s32 fn_80200C10(void *event);
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern int fn_80201B54();
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 extern u32 fn_80036D5C(void *context);
 extern void fn_80036DA4(void *context, u32 flags);
 extern void fn_80130434(void *object, s32 value);
@@ -69,13 +69,13 @@ extern void fn_8011E310(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
 extern unsigned long long fn_8020123C();
 extern void fn_800C2474(void *object, s32 value);
 extern s32 fn_8006D3E4(u32 value, s32 mode);
-extern void *fn_80200C38(void *event);
+extern int fn_80200C38();
 extern s32 fn_80063D60(void *object, HandlerContext *handler, u8 value);
 extern void fn_800C63D8(void);
 extern u32 fn_8020216C(void *context);
 extern void fn_8012B344(void *object);
-extern void fn_80201D2C(void *context, s32 value);
-extern void fn_80201D14(void *context, s32 value);
+extern void fn_80201D2C(void *, s32);
+extern void fn_80201D14(void *, s32);
 extern void fn_8012B690(void *object, char *name, Vec3 *output);
 extern void fn_80211AAC(Vec3 *input, Vec3 *output);
 extern void fn_80211A90(Vec3 *input, Vec3 *output, float scale);
@@ -145,7 +145,7 @@ s32 fn_8005A108(void *context, void *event, u32 *result)
     if (kind == 44) {
         u32 flags = fn_80036D5C(context);
         if ((flags & 0x40) != 0 && fn_8006D3E4(0x40000, 0) == 0) {
-            void *value = fn_80200C38(event);
+            void *value = (void *)fn_80200C38(event);
             if (value != 0) {
                 state->progress += fn_80063D60(value, handler, state->progress);
                 if (state->progress >= 12) {

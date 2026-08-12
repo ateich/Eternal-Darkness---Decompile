@@ -13,9 +13,8 @@ typedef struct ObjectData {
     s16 current[15];
     s16 limit[15];
 } ObjectData;
-
-extern void* fn_80201814();
-extern void* fn_80201B8C();
+extern void *fn_80201814();
+extern void *fn_80201B8C();
 
 int fn_80038544(int id, int index, int value)
 {

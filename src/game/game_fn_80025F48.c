@@ -22,7 +22,7 @@ extern s32 fn_800462C8(s32);
 extern void* fn_80201B9C(void);
 extern void* fn_80204844(void*, int);
 extern int fn_80201B54();
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 extern unsigned long long fn_8020123C();
 extern void fn_8020104C(int, void*, void*, int, float);
 #define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void*)(b), (void*)(c), (d), (e))

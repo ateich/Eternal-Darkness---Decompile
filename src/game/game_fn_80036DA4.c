@@ -8,8 +8,7 @@ typedef struct ObjectInfo {
     u8 pad00[0x8C];
     ResourceState* resources;
 } ObjectInfo;
-
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 
 void fn_80036DA4(void* object, register void* value)
 {

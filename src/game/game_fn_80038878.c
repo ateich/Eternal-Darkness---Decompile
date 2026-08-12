@@ -24,9 +24,8 @@ typedef struct LinkedInfo {
     u8 pad[0x14];
     LinkedData* data;
 } LinkedInfo;
-
-extern void* fn_80201814();
-extern void* fn_80201B8C();
+extern void *fn_80201814();
+extern void *fn_80201B8C();
 extern Resource* fn_80072354(int);
 extern double lbl_8064E210;
 extern float lbl_8064E23C;

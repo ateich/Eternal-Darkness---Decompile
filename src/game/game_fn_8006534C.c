@@ -9,7 +9,7 @@ typedef struct RelationEntry {
 } RelationEntry;
 
 extern s32 fn_80035628(void *object);
-extern void *fn_80201B8C(void *object);
+extern void *fn_80201B8C();
 extern RelationEntry lbl_8023BA64[];
 
 s16 fn_8006534C(void *first, void *second, s16 value)

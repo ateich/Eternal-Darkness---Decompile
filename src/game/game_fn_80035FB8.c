@@ -1,6 +1,5 @@
 typedef int s32;
-
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern int fn_80201B64(void*);
 extern s32 fn_80201B6C(void*);
 extern int fn_80201B5C(void*);

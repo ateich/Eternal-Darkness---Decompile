@@ -19,8 +19,7 @@ typedef struct ObjectInfo {
     u8 pad00[0x8C];
     void* volatile resources;
 } ObjectInfo;
-
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 extern int fn_80201B54();
 extern int fn_80038308(void* object, int channel, short* value);
 extern int fn_80038464(void*, int, s16*);

@@ -5,8 +5,7 @@ typedef struct ObjectInfo {
     u8 pad00[0x9E];
     u8 value;
 } ObjectInfo;
-
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 
 s32 fn_80036E14(void* object)
 {

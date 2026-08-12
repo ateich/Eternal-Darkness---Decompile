@@ -26,7 +26,7 @@ extern void fn_80163BB4(void*, const char*, ...);
 extern void* fn_80201B9C(void);
 extern void* fn_80204844(void*, int);
 extern int fn_80201B54();
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 extern unsigned long long fn_8020123C();
 
 s32 fn_80019C10(void* script)

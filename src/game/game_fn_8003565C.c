@@ -18,8 +18,8 @@ extern const Vec3 lbl_80238D7C;
 
 extern void* fn_80201B9C(void);
 extern void* fn_80201BC0(void*);
-extern void* fn_80201B8C();
-extern void* fn_80201BC8();
+extern void *fn_80201B8C();
+extern void *fn_80201BC8();
 extern int fn_80201EB8();
 extern int fn_80201B54();
 extern void fn_8011F114(void*, void*);

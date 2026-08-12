@@ -30,9 +30,9 @@ extern float lbl_8064E504;
 extern float lbl_8064E54C;
 
 extern s32 fn_80200C10(void *event);
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern int fn_80201B54();
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 extern int fn_80201B44(void);
 extern void fn_801D0D30(s32 value);
 extern u32 fn_80036D5C(void *context);
@@ -43,15 +43,15 @@ extern int fn_800389E0(void *context, s32 index, s16 value, s32 mode);
 extern void fn_8011E310(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
 extern unsigned long long fn_8020123C();
 extern s32 fn_8006D3E4(u32 value, s32 mode);
-extern void *fn_80200C38(void *event);
+extern int fn_80200C38();
 extern s32 fn_80063D60(void *object, HandlerContext *handler, u8 value);
 extern void fn_800C63D8(void);
 extern void *fn_801294DC(void *object, s32 kind, s32 flags, s32 value);
 extern s32 fn_8012A1BC(void *object, s32 kind);
 extern void fn_80128A84(void *action, s32 index, s32 value);
 extern void fn_8012B344(void *object);
-extern void fn_80201D2C(void *context, s32 value);
-extern void fn_80201D14(void *context, s32 value);
+extern void fn_80201D2C(void *, s32);
+extern void fn_80201D14(void *, s32);
 extern void fn_80201138(s32 kind, void *context, s32 value, s32 id,
                        s32 flags, float scale);
 extern void fn_80128C28(void *action, void (*callback)(void), s32 value);
@@ -105,7 +105,7 @@ s32 fn_8005A75C(void *context, void *event, u32 *result)
     if (kind == 44) {
         if ((fn_80036D5C(context) & 0x40) != 0 &&
             (linked->flags & 1) == 0 && fn_8006D3E4(0x40000, 0) == 0) {
-            void *value = fn_80200C38(event);
+            void *value = (void *)fn_80200C38(event);
             if (value != 0) {
                 state->progress += fn_80063D60(value, handler, state->progress);
                 if (state->progress >= 12)
@@ -122,7 +122,7 @@ s32 fn_8005A75C(void *context, void *event, u32 *result)
     }
     if (kind == 159) {
         if ((linked->flags & 1) == 0) {
-            void *value = fn_80200C38(event);
+            void *value = (void *)fn_80200C38(event);
             s16 count;
             s32 complete;
             fn_80038308(context, 0, &count);

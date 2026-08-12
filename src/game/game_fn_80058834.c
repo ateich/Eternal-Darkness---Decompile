@@ -15,7 +15,7 @@ extern float lbl_8064E520, lbl_8064E524;
 extern s32 fn_80200C10(void *);
 extern void *fn_80201BC8();
 extern int fn_80201B54();
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 extern void fn_8011F114(Vec3 *, void *);
 extern void fn_80130434(void *, s32);
 extern void fn_801301B0(void *, u32, u32);
@@ -25,7 +25,7 @@ extern void *fn_8006D444(void);
 extern s32 fn_8006D344(void *, s32, s32);
 extern s32 fn_80088528(void *, Vec3 *);
 extern s32 fn_801A7490(void *);
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern u32 fn_801A74C0(void *), fn_801A7770(void *);
 extern void fn_80036B7C(void *, u32, Vec3 *);
 extern void fn_8011E174(s32, s32);
@@ -46,9 +46,10 @@ extern void fn_80128B8C(void *, Vec3 *), fn_80129BA4(void *, float, float);
 extern void *fn_80129A00(void *, s32, s32, float, float);
 extern void fn_80128C28(void *, void *, u32), fn_80128C44(void *, void *, u32);
 extern void fn_801A74D8(void *, u32), fn_801294DC(void *, s32, s32, s32);
-extern void fn_80201D2C(void *, s32), fn_80201D14(void *, s32);
+extern void fn_80201D2C(void *, s32);
+extern void fn_80201D14(void *, s32);
 extern s32 fn_80035FB8(void *, char *, char *, char *, char *, char *);
-extern void *fn_80200C38(void *);
+extern int fn_80200C38();
 extern s32 fn_80070A6C(s32);
 extern void fn_8020104C(s32, void *, void *, void *, float);
 extern void fn_800C39D0(void *), fn_800C2474(void *, s32);
@@ -182,7 +183,7 @@ s32 fn_80058834(void *context, void *event, u32 *result)
     }
     if (kind == 40) {
         if (fn_80070A6C(0x200) == 0) {
-            void *linked = fn_80200C38(event);
+            void *linked = (void *)fn_80200C38(event);
             if ((fn_801A74C0(linked) & 0x400) != 0)
                 fn_8020104C(40, (void *)value, (void *)value, linked, lbl_8064E504);
         }

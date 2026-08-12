@@ -8,17 +8,17 @@ typedef unsigned long long u64;
 extern float lbl_8064E504;
 
 extern s32 fn_80200C10(void *event);
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern void *fn_80201B94(void *context);
 extern int fn_80201B54();
-extern void* fn_80201B8C();
+extern void *fn_80201B8C();
 extern void *fn_801A7490(void *object);
 extern void fn_80201DD8(void *value, void *owner);
 extern unsigned long long fn_8020123C();
-extern void fn_80201D2C(void *context, s32 value);
-extern void fn_80201D14(void *context, s32 value);
+extern void fn_80201D2C(void *, s32);
+extern void fn_80201D14(void *, s32);
 extern s32 fn_80070A6C(s32 value);
-extern void *fn_80200C38(void *event);
+extern int fn_80200C38();
 extern u32 fn_801A74C0(void *object);
 extern void fn_8020104C(s32 kind, s32 source, s32 target, void *value,
                        float amount);
@@ -52,7 +52,7 @@ s32 fn_80058154(void *context, void *event, u32 *result)
     }
     if (kind == 40) {
         if (fn_80070A6C(0x200) == 0) {
-            void *linked = fn_80200C38(event);
+            void *linked = (void *)fn_80200C38(event);
             if ((fn_801A74C0(linked) & 2) == 0) {
                 message_result = fn_8020123C(0x45, object_id, object_id,
                                              linked) & 0xFFFFFFFFULL;

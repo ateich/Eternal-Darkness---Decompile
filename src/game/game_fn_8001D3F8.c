@@ -7,7 +7,7 @@ char lbl_8023CF6C[16] = "EDOkayToSeek";
 extern s32 fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern unsigned long long fn_8020123C();
 extern void fn_8016A830(void*, double);
 extern void fn_8016A7D8(void*);

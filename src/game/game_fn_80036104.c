@@ -13,8 +13,8 @@ typedef struct Object {
 extern float lbl_8064E1F8;
 
 extern s32 fn_801A7498(void*);
-extern void* fn_80201814();
-extern void* fn_80201B8C();
+extern void *fn_80201814();
+extern void *fn_80201B8C();
 extern unsigned long long fn_8020123C();
 extern void fn_8020104C(int, void*, void*, int, float);
 #define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void*)(b), (void*)(c), (d), (e))

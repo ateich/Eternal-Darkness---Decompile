@@ -9,15 +9,15 @@ extern s32 lbl_8064E4FC;
 extern s32 lbl_8064E500;
 
 extern s32 fn_80200C10(void *event);
-extern void* fn_80201BC8();
-extern void* fn_80201B8C();
+extern void *fn_80201BC8();
+extern void *fn_80201B8C();
 extern void fn_8012DBE8(void *object, s32 index, u32 *value);
 extern void fn_8011F0E8(void *object, void *value);
 extern void fn_80048708(void *object);
 extern void fn_8012C62C(void *object, s32 index, s32 *first, s32 *second,
                        s32 *third, s32 count);
-extern void fn_80201D2C(void *context, s32 value);
-extern void fn_80201D14(void *context, s32 value);
+extern void fn_80201D2C(void *, s32);
+extern void fn_80201D14(void *, s32);
 
 s32 fn_80055C88(void *context, void *event, s32 *result)
 {
