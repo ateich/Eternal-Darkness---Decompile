@@ -15,7 +15,7 @@ extern State* fn_8011FE34(void*);
 extern u32 fn_8011FAEC(void*);
 extern s32 fn_80128EAC(void*);
 extern s32 fn_8012A100(void*, s32);
-extern void fn_801294DC(void*, s32, s32, s32);
+extern void *fn_801294DC(void*, s32, s32, s32);
 extern void fn_8011F0E8(void*, State*);
 
 void fn_8002A754(void* callback, void* source_callback)

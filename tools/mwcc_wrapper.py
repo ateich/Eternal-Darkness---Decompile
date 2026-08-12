@@ -151,6 +151,15 @@ def main() -> None:
         "game_data_802391E8.o",
         "game_data_802393CC.o",
         "game_data_802393D8.o",
+        "game_data_802393E4.o",
+        "game_data_802393F0.o",
+        "game_data_802393FC.o",
+        "game_data_80239408.o",
+        "game_data_80239414.o",
+        "game_data_80239420.o",
+        "game_data_80239450.o",
+        "game_data_8023945C.o",
+        "game_data_80239490.o",
     ):
         set_section_alignment(output, b".rodata", 4)
         payload = output.read_bytes().replace(b".comment\0", b".ignored\0")

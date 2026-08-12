@@ -35,7 +35,7 @@ extern void fn_8012B344(void *);
 extern void fn_8012C62C(void *, s32, u32 *, u32 *, u32 *, s32);
 extern int fn_80201B44(void);
 extern void fn_80145478(s32);
-extern void fn_801294DC(void *, s32, s32, s32);
+extern void *fn_801294DC(void *, s32, s32, s32);
 extern void fn_800359A0(void *, void *);
 extern void fn_801D38BC(s32, u32 *, s16 *);
 extern void fn_8014F65C(Vec3 *, s32, float, s16, s32, u32 *);

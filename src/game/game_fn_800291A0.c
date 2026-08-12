@@ -31,7 +31,7 @@ extern s32 fn_8015E4E8(void*);
 extern void fn_8011EBFC(void*);
 extern s32 fn_8012A100(void*, s32);
 extern void* fn_8011EAB4(void*, s32);
-extern void fn_801294DC(void*, s32, s32, s32);
+extern void *fn_801294DC(void*, s32, s32, s32);
 
 void fn_800291A0(void* source)
 {
