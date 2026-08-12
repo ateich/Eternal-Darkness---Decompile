@@ -4,15 +4,15 @@
   "lessons": [
     {
       "category": "register-allocation",
-      "functions": ["fn_8000F1DC", "fn_8000F774", "fn_8000FDE8", "fn_800173CC", "fn_80020150", "fn_80026320", "fn_80026DC8", "fn_8002BFE0", "fn_8002DAE0", "fn_8002F428", "fn_8002FAE8", "fn_80031D24", "fn_80033180", "fn_80034708", "fn_800359A0", "fn_80036374", "fn_800365C8", "fn_80050B08", "fn_80052900", "fn_800539D8", "fn_800542D0", "fn_80058394", "fn_80058834", "fn_8005BCC0", "fn_8005F8D0", "fn_8006016C", "fn_800601FC", "fn_8006053C", "fn_800606BC", "fn_800607BC"],
+      "functions": ["fn_8000F1DC", "fn_8000F774", "fn_8000FDE8", "fn_800173CC", "fn_80020150", "fn_80026320", "fn_80026DC8", "fn_8002BFE0", "fn_8002DAE0", "fn_8002F428", "fn_8002FAE8", "fn_80031D24", "fn_80033180", "fn_80034708", "fn_800359A0", "fn_80036374", "fn_800365C8", "fn_80050B08", "fn_80052900", "fn_800539D8", "fn_800542D0", "fn_80058394", "fn_80058834", "fn_8005BCC0", "fn_8005F8D0", "fn_8006016C", "fn_800601FC", "fn_8006053C", "fn_800606BC", "fn_800607BC", "fn_80060904", "fn_80060F9C", "fn_800614A8", "fn_80063124", "fn_8006330C", "fn_80063D60", "fn_80063E64", "fn_80064B38", "fn_80064E2C", "fn_800654F8"],
       "precise_divergence": "Canonical MWCC rotates, swaps, or coalesces overlapping long-lived values across callee-saved GPRs or FPRs differently from retail, even when size, control flow, and relocations otherwise agree.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
     },
     {
       "category": "register-allocation",
-      "functions": ["fn_8000E96C", "fn_8001CA04", "fn_80032A5C", "fn_80052CC0", "fn_800542D0"],
-      "precise_divergence": "Canonical MWCC assigns short-lived volatile integer or floating-point webs to different registers: f1/f4 instead of retail f0/f2, r3 instead of retail r5 for a converted mode, or r4/r5 in the opposite roles for a zero/max temporary and current byte.",
+      "functions": ["fn_8000E96C", "fn_8001CA04", "fn_80032A5C", "fn_80052CC0", "fn_800542D0", "fn_80060C28"],
+      "precise_divergence": "Canonical MWCC assigns short-lived volatile integer or floating-point webs to different registers: f1/f4 instead of retail f0/f2, r3 instead of retail r5 for a converted mode, r4/r5 in the opposite roles for a zero/max temporary and current byte, or six different volatile-register choices in a branchless counter update.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
     },
@@ -116,7 +116,7 @@
     },
     {
       "category": "instruction-scheduling",
-      "functions": ["fn_8000F1DC", "fn_8001E144", "fn_80026320", "fn_8002B748", "fn_80031544", "fn_80031D24", "fn_80033180", "fn_80053048", "fn_800531F0", "fn_800539D8", "fn_800542D0", "fn_8005B528", "fn_8006016C", "fn_800601FC", "fn_8006053C", "fn_800606BC"],
+      "functions": ["fn_8000F1DC", "fn_8001E144", "fn_80026320", "fn_8002B748", "fn_80031544", "fn_80031D24", "fn_80033180", "fn_80053048", "fn_800531F0", "fn_800539D8", "fn_800542D0", "fn_8005B528", "fn_8006016C", "fn_800601FC", "fn_8006053C", "fn_800606BC", "fn_80060F9C", "fn_80063124", "fn_8006330C", "fn_80064E2C"],
       "precise_divergence": "Equivalent stores, loads, argument setup, or temporary copies occupy a different local scheduling window from retail, sometimes shifting subsequent relocation sites despite matching behavior.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
@@ -148,6 +148,13 @@
       "precise_divergence": "Canonical GC/1.3 emits ten signed-16-bit zero tests as extsh. instructions, while retail uses the equivalent cmpwi form; function size and all text relocations otherwise agree.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80049E74"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80063030"],
+      "precise_divergence": "Canonical GC/1.3 reverses the operands of one symmetric integer equality comparison; the 244-byte function and all 10 text relocations otherwise agree exactly with retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80063030"]
     },
     {
       "category": "jump-table-strategy",
@@ -193,10 +200,10 @@
     },
     {
       "category": "jump-table-strategy",
-      "functions": ["fn_80050B08", "fn_8005EF94"],
-      "precise_divergence": "Incomplete recovery of the source control flow leaves MWCC's generated switch layout or ownership different from retail: fn_80050B08 generates 5796 code bytes and 98 relocation-bearing instructions versus 5904 and 100 retail, while fn_8005EF94's 100-byte switch table remains unmatched pending exact control-flow recovery.",
+      "functions": ["fn_80050B08", "fn_8005EF94", "fn_800614A8"],
+      "precise_divergence": "Incomplete recovery of the source control flow leaves MWCC's generated switch layout or ownership different from retail: fn_80050B08 generates 5796 code bytes and 98 relocation-bearing instructions versus 5904 and 100 retail; fn_8005EF94's 100-byte switch table remains unmatched; and fn_800614A8's twelve irregular switches generate 6940 code bytes and 310 relocation-bearing instructions versus 6696 and 308 retail.",
       "workaround": null,
-      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80050B08 and fn_8005EF94"]
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80050B08, fn_8005EF94, and fn_800614A8"]
     },
     {
       "category": "float-constant-placement",
@@ -218,6 +225,27 @@
       "precise_divergence": "Canonical MWCC allocates the final signed-integer-to-double temporary in a fresh 0x10/0x14 stack slot, while retail reuses 0x8/0xC, producing four displacement differences.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8000EB14 and fn_8000EBD4"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_80060904"],
+      "precise_divergence": "Canonical GC/1.3 uses different stack-slot reuse and has one differing four-byte move, producing an 804-byte function versus 800 bytes in retail; both objects still contain 43 relocation-bearing instructions with the same semantic targets.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80060904"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_80060F9C", "fn_8006330C"],
+      "precise_divergence": "Canonical GC/1.3 selects a stack frame 16 bytes different from retail: fn_80060F9C retains the exact 1292-byte code size despite that frame-allocation delta, while fn_8006330C uses 0x40 bytes where retail uses 0x50 despite its exact 2412-byte code size.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80060F9C and fn_8006330C"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_800614A8", "fn_80063E64", "fn_800654F8"],
+      "precise_divergence": "Unrecovered stack-local or aggregate layout changes canonical MWCC's frame and access pattern from retail, contributing to code-size and relocation-count differences in these large dispatchers.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800614A8, fn_80063E64, and fn_800654F8"]
     },
     {
       "category": "calling-convention",
@@ -260,6 +288,13 @@
       "precise_divergence": "The recovered 26-argument effect record and aggregate layout do not reproduce retail's call setup: canonical GC/1.3 emits 956 bytes and 70 relocation-bearing instructions versus 1028 bytes and 68 in retail.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8005F8D0"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_80063E64", "fn_800654F8"],
+      "precise_divergence": "Incomplete call-signature recovery changes generated argument setup and relocation materialization: fn_80063E64 emits 3440 bytes and 179 relocation-bearing instructions versus 3284 and 184 retail, while fn_800654F8 emits 4552 bytes versus 4700 and substitutes two additional SDA21 references for four retail absolute-address materializations.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80063E64 and fn_800654F8"]
     },
     {
       "category": "inlining",
