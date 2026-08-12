@@ -48,7 +48,8 @@ s32 fn_8011FF38();                                  /* extern */
 s32 fn_801287C4(u32, s32 *, s32, s32);      /* extern */
 s32 fn_80128C28(s32 *, s32);                /* extern */
 s32 fn_80128C44(u32, s32 *, s32);           /* extern */
-u32 fn_801294DC(u32, s32, s32, s32);    /* extern */
+void *fn_801294DC(void *, s32, s32, s32);    /* extern */
+#define fn_801294DC(a, b, c, d) fn_801294DC((void *)(a), (b), (c), (d))
 s32 fn_8012A1FC(u32, s32);                      /* extern */
 s32 fn_8012B324(u32);                           /* extern */
 s32 fn_8012B344(u32);                           /* extern */
@@ -430,7 +431,7 @@ loop_100:
         case 37:                                    /* switch 4 */
             fn_80204508(context, fn_80201814(object_state->target));
             current_mode_2 = fn_8012A1FC(runtime, 0x27) + 0x1E;
-            temp_r3_6 = fn_801294DC(runtime, 0x27, 0x24, 8);
+            temp_r3_6 = (u32)fn_801294DC(runtime, 0x27, 0x24, 8);
             if (temp_r3_6 != 0U) {
                 event_type_2 = owner << 8;
                 fn_80128C28(&fn_80204810, event_type_2 | 6);

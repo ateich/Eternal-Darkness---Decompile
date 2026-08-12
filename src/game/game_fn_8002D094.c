@@ -16,8 +16,8 @@ extern int fn_80201B54();
 extern void fn_80201D2C(void *, s32);
 extern void fn_80201D14(void *, s32);
 extern int fn_801E8328();
-extern void fn_80201D34(void*, s32);
-extern void fn_80201D1C(void*, s32);
+extern void fn_80201D34(void *, s32);
+extern void fn_80201D1C(void *, s32);
 
 s32 fn_8002D094(void* callback, s32 phase, void* event)
 {

@@ -1,9 +1,10 @@
 typedef signed int s32;
 extern int fn_80200C38();
 extern void *fn_80201BC8();
-extern void fn_8011F114(void *output, s32 value);
+extern void fn_8011F114(void *, void *);
 extern int fn_80201B54();
-extern void *fn_801294DC(s32 object, s32 value, s32 flags, s32 kind);
+extern void *fn_801294DC(void *, int, int, int);
+#define fn_801294DC(a, b, c, d) fn_801294DC((void *)(a), (b), (c), (d))
 extern void fn_80204810(void);
 extern void fn_80128C44(void *object, void (*callback)(void), s32 value);
 extern void fn_80201D2C(void *, s32);
@@ -22,7 +23,7 @@ void fn_80066A0C(s32 context, void *event)
 
     event_value = fn_80200C38(event);
     object = (s32)fn_80201BC8(context);
-    fn_8011F114(local, object);
+    fn_8011F114(local, (void *)object);
     owner = fn_80201B54(context);
 
     created = fn_801294DC(object, 15, 0x31, 8);

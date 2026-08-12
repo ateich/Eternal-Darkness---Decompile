@@ -16,14 +16,14 @@ extern float lbl_8064E044;
 extern s32 fn_80200C10(void*);
 extern int fn_80201B54();
 extern void *fn_80201BC8();
-extern void fn_8020104C(int, void*, void*, int, float);
-#define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void*)(b), (void*)(c), (d), (e))
+extern void fn_8020104C(int, void *, void *, int, float);
+#define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void *)(b), (void *)(c), (int)(d), (e))
 extern void fn_8011FA8C(void*, int, int);
 extern void fn_80201D2C(void *, s32);
 extern void fn_80201D14(void *, s32);
 extern int fn_801E8328();
-extern void fn_80201D34(void*, s32);
-extern void fn_80201D1C(void*, s32);
+extern void fn_80201D34(void *, s32);
+extern void fn_80201D1C(void *, s32);
 extern void fn_800C8394(void*, s32);
 extern void fn_8012CBE8(void*, s32, Vec3*, Vec3*, Vec3*, s32);
 

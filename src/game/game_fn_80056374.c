@@ -22,7 +22,7 @@ extern s32 fn_80035FB8(void *context, char *first, char *second, char *third,
                       char *value, char *fourth);
 extern void fn_80201D2C(void *, s32);
 extern void fn_80201D14(void *, s32);
-extern void fn_8012B344(void *object);
+extern void fn_8012B344(void *);
 extern u64 fn_802011D4(void *event);
 extern u32 fn_801A6D9C(void *object);
 extern void fn_8007C90C(void *context, void *event);

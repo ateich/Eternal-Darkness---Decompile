@@ -55,8 +55,8 @@ extern void fn_802006D4(s32, s32, s32, s32, s32);
 extern void *fn_80201814();
 extern void fn_80201D2C(void *, s32);
 extern void fn_80201D14(void *, s32);
-extern void fn_80201D34(void*, s32);
-extern void fn_80201D1C(void*, s32);
+extern void fn_80201D34(void *, s32);
+extern void fn_80201D1C(void *, s32);
 
 s32 fn_8002E77C(void* callback, s32 phase, void* event)
 {

@@ -6,7 +6,7 @@ typedef unsigned int u32;
 extern void* lbl_8064C4F8;
 
 extern void* fn_80049304(void* object, s32 index);
-extern s32 fn_800FBFB0(void* object);
+extern int fn_800FBFB0(void);
 extern u32 fn_80157888(void* object);
 extern s32 fn_80157C80(void* object);
 extern void fn_801A7680(void* destination, void* object);
@@ -39,7 +39,7 @@ void fn_8004948C(void* object, void* destination, s32 mode)
             }
         } else if (mode != 0) {
             selected = first;
-            if ((fn_800FBFB0(second) & 1) != 0) {
+            if ((fn_800FBFB0() & 1) != 0) {
                 selected = second;
             }
         } else {

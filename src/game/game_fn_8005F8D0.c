@@ -52,9 +52,9 @@ extern const float lbl_8064E5DC;
 
 extern s32 fn_80066D04(void *, s32);
 extern s32 fn_8005EE9C(s32, s32, s32 *);
-extern void fn_8011F114(Vec3 *, void *);
+extern void fn_8011F114(void *, void *);
 extern s32 fn_8011F6A4(void *, s32, s32, s32, QueryResult *, s32);
-extern s32 fn_800FBFB0(void);
+extern int fn_800FBFB0(void);
 extern void fn_8005F758(void *, s32, Vec3 *, s32, s32, s32, u8, u8, s32, u8);
 extern void fn_801AAE68(float, s32, s32, s32, Vec3 *, s32, s32, s32, u16, s32);
 extern void fn_801D62D0(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32,
@@ -66,7 +66,8 @@ extern void fn_80211A90(Vec3 *, Vec3 *, float);
 extern void fn_80211A48(Vec3 *, Vec3 *, Vec3 *);
 extern s32 fn_801D3A24(s32, s32);
 extern void fn_8015295C(Vec3 *, Vec3 *, s32, s32, s32);
-extern void fn_8020104C(s32, s32, s32, s32, float);
+extern void fn_8020104C(int, void *, void *, int, float);
+#define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void *)(b), (void *)(c), (int)(d), (e))
 
 void fn_8005F8D0(s32 owner, void *entry, void *manager, SourceObject *source,
                  u8 *state_object, s32 unused, Vec3 *position, s8 config_kind,

@@ -60,7 +60,7 @@ extern void fn_8017A244(Vec3 *source, Vec4 *output, float scale);
 extern void fn_8012CF08(void *object, s32 kind, Vec4 first, Vec4 second,
                         s32 a, s32 b, float scale);
 extern void fn_8012F58C(void *object, s32 a, s32 b, s32 c, s32 d, s32 e);
-extern int fn_80038308(void *context, s32 index, s16 *value);
+extern int fn_80038308(void *, int, short *);
 extern int fn_800389E0(void *context, s32 index, s16 value, s32 mode);
 extern void *fn_8011F130(void *object);
 extern void fn_801AAE68(float scale, s32 kind, s32 value, s32 a, void *object,
@@ -73,7 +73,7 @@ extern int fn_80200C38();
 extern s32 fn_80063D60(void *object, HandlerContext *handler, u8 value);
 extern void fn_800C63D8(void);
 extern u32 fn_8020216C(void *context);
-extern void fn_8012B344(void *object);
+extern void fn_8012B344(void *);
 extern void fn_80201D2C(void *, s32);
 extern void fn_80201D14(void *, s32);
 extern void fn_8012B690(void *object, char *name, Vec3 *output);

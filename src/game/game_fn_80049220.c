@@ -4,7 +4,7 @@ extern void* fn_80158598(int object_id, int index);
 extern s32 fn_80157E1C(void* object);
 extern s32 fn_80157FE0(void* object, s32 index, s32 value);
 extern void* fn_80158514(void* object, s32 value);
-extern s32 fn_800FBFB0(void);
+extern int fn_800FBFB0(void);
 
 s32 fn_80049220(void* object, s32 mode)
 {

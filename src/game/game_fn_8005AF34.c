@@ -12,7 +12,7 @@ extern s32 fn_80200C10(void *event);
 extern void *fn_80201BC8();
 extern int fn_80201B54();
 extern s32 fn_80128EAC(void *object);
-extern void fn_8012B344(void *object);
+extern void fn_8012B344(void *);
 extern void fn_80201D2C(void *, s32);
 extern void fn_80201D14(void *, s32);
 extern int fn_80200C38();
@@ -23,7 +23,7 @@ extern void *fn_8004918C(void);
 extern s32 fn_80049694(void);
 extern s32 fn_801D1374(void);
 extern void *fn_80201B3C(void);
-extern int fn_80038308(void *context, s32 index, s16 *value);
+extern int fn_80038308(void *, int, short *);
 
 s32 fn_8005AF34(void *context, void *event, u32 *result)
 {

@@ -14,7 +14,7 @@ extern void* fn_80201B3C(void);
 extern int fn_80201B44(void);
 extern void* fn_80201C24();
 extern int fn_80038464(void*, int, s16*);
-extern int fn_80038308(void* object, int channel, short* value);
+extern int fn_80038308(void *, int, short *);
 extern s32 fn_80157994(void*);
 extern void fn_80157A28(void*, s32);
 extern void* fn_801E6CA0(void*, int, int, int, int);

@@ -10,7 +10,7 @@ extern float lbl_8064DFF8;
 extern void* fn_80201B3C(void);
 extern void* fn_80201B9C(void);
 extern void* fn_80201BC0(void*);
-extern int fn_80201EB8();
+extern int fn_80201EB8(void *);
 extern int fn_80201B4C(void*);
 extern int fn_80201B5C(void*);
 #define fn_80201B5C(a) fn_80201B5C((void*)(a))

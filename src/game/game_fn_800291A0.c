@@ -15,7 +15,8 @@ extern void *fn_80201BC8();
 extern int fn_80201B4C(void*);
 extern void fn_80202054(void*, s32);
 extern void* fn_8011F950(void);
-extern int fn_8011EB04(void*);
+extern int fn_8011EB04(void *);
+#define fn_8011EB04(a) fn_8011EB04((void *)(a))
 extern Node* fn_8002A444(void*, void*);
 extern void fn_8012B954(void*);
 extern void fn_8011F938(void*, void*);
@@ -31,7 +32,7 @@ extern s32 fn_8015E4E8(void*);
 extern void fn_8011EBFC(void*);
 extern s32 fn_8012A100(void*, s32);
 extern void* fn_8011EAB4(void*, s32);
-extern void *fn_801294DC(void*, s32, s32, s32);
+extern void *fn_801294DC(void *, int, int, int);
 
 void fn_800291A0(void* source)
 {

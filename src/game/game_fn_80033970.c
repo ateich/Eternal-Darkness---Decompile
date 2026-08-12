@@ -35,9 +35,9 @@ extern void *fn_80201B8C();
 extern void* fn_80201B94(void*);
 extern int fn_80201AE4(void);
 extern void fn_80201D14(void *, s32);
-extern void fn_80201D1C(void*, s32);
+extern void fn_80201D1C(void *, s32);
 extern void fn_80201D2C(void *, s32);
-extern void fn_80201D34(void*, s32);
+extern void fn_80201D34(void *, s32);
 extern void fn_802020B4(void*, int);
 extern void *fn_80201814();
 extern BoundObject* fn_801FD6F4(void*);
@@ -47,12 +47,13 @@ extern void fn_80046FC4(s32, s32);
 extern void fn_8012B324(void*);
 extern int fn_801E8328();
 extern s32 fn_80128EAC(void*);
-extern void fn_8011F114(void*, void*);
+extern void fn_8011F114(void *, void *);
 extern float fn_8012B750(void*);
 extern void fn_8011F0E8(void*, Vec3*);
 extern void fn_8012B7A0(void*, float);
-extern void* fn_801294DC(void*, s32, s32, s32);
-extern void fn_8012B344(void*);
+extern void *fn_801294DC(void *, int, int, int);
+#define fn_801294DC(a, b, c, d) fn_801294DC((void *)(a), (b), (c), (d))
+extern void fn_8012B344(void *);
 
 s32 fn_80033970(void* callback, s32 action, void* event, s32* completed)
 {

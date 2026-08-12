@@ -20,8 +20,8 @@ extern void fn_80201D14(void *, s32);
 extern s32 fn_80070A6C(s32 value);
 extern int fn_80200C38();
 extern u32 fn_801A74C0(void *object);
-extern void fn_8020104C(s32 kind, s32 source, s32 target, void *value,
-                       float amount);
+extern void fn_8020104C(int, void *, void *, int, float);
+#define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void *)(b), (void *)(c), (int)(d), (e))
 extern void fn_800C4AA0(void *context, void *event, u32 *result);
 extern void fn_800C4B6C(void *context, void *event);
 
@@ -60,7 +60,7 @@ s32 fn_80058154(void *context, void *event, u32 *result)
                     fn_8020123C(0x46, object_id, object_id, 0);
                 }
             } else {
-                fn_8020104C(0x28, object_id, object_id, linked,
+                fn_8020104C(0x28, (void *)object_id, (void *)object_id, (int)linked,
                             lbl_8064E504);
             }
         }

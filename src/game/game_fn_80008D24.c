@@ -14,7 +14,8 @@ extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_80179DB0(Name*, void*);
 extern void *fn_80201814();
 extern void *fn_80201BC8();
-extern int fn_8011EB04(void*);
+extern int fn_8011EB04(void *);
+#define fn_8011EB04(a) fn_8011EB04((void *)(a))
 extern s32 fn_8012FF34(void*, Name*, s32, s32);
 extern void fn_801302BC(void*, s32);
 extern void fn_8013037C(void*, float);

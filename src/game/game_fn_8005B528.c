@@ -22,7 +22,8 @@ extern float lbl_8064E558;
 extern s32 fn_80200C10(void *event);
 extern void *fn_80201BC8();
 extern int fn_80201B54();
-extern s32 fn_8011EB04(void *object);
+extern int fn_8011EB04(void *);
+#define fn_8011EB04(a) fn_8011EB04((void *)(a))
 extern void fn_8001D9FC(s32 value);
 extern void fn_801EFE84(s32 value);
 extern void fn_80130434(void *object, s32 value);
@@ -40,15 +41,16 @@ extern void fn_801ACD8C(void);
 extern s32 fn_80128EAC(void *object);
 extern void fn_80201D2C(void *, s32);
 extern void fn_80201D14(void *, s32);
-extern void fn_8012B344(void *object);
+extern void fn_8012B344(void *);
 extern void fn_800C2708(s32 value, s32 object_id);
 extern int fn_80038464(void *context, s32 index, s16 *value);
 extern int fn_800389E0(void *context, s32 index, s32 value, s32 enabled);
 extern void fn_80120AD0(void *object, s32 value, s32 amount, s32 flags,
                        float first, float second);
 extern void fn_801B05E8(s32, s32, s32, s32, s32, s32, s32, s32);
-extern void *fn_801294DC(void *object, s32 kind, s32 value, s32 extra);
-extern void fn_8020104C(s32 kind, s32 source, s32 target, s32 value, float scale);
+extern void *fn_801294DC(void *, int, int, int);
+extern void fn_8020104C(int, void *, void *, int, float);
+#define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void *)(b), (void *)(c), (int)(d), (e))
 extern void fn_801F348C(u32 *value, s32 frames);
 extern s32 fn_800AD3E4(void);
 extern void fn_80052424(s32 value, s32 next, s32 third, s32 fourth);

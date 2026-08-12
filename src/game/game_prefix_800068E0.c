@@ -6,7 +6,8 @@ extern u32 lbl_8064C5F0;
 extern u32 lbl_8064C5F4;
 extern int lbl_8064C5D8;
 
-extern int fn_8011EB04(void*);
+extern int fn_8011EB04(void *);
+#define fn_8011EB04(a) fn_8011EB04((void *)(a))
 extern void fn_8011EB14(void*);
 extern void fn_80128EAC(void*);
 extern void fn_80157438(int, int);

@@ -1,6 +1,6 @@
 extern void* lbl_8064C4E4;
 extern void* fn_80201BD0(void* object);
-extern int fn_80038308(void* object, int channel, short* value);
+extern int fn_80038308(void *, int, short *);
 
 short fn_800509DC(void)
 {

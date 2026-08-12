@@ -52,9 +52,9 @@ extern int fn_80201B54();
 extern void *fn_80201BC8();
 extern void *fn_80201B8C();
 extern void *fn_80201BC0(void *);
-extern s32 fn_80201EB8(void *);
+extern int fn_80201EB8(void *);
 extern void fn_80201E78(Vec3 *, void *);
-extern void fn_8011F114(Vec3 *, void *);
+extern void fn_8011F114(void *, void *);
 extern void fn_8012AB2C(void *);
 extern unsigned long long fn_8020123C();
 extern u32 fn_80178F14(s32, s32, s32, s32, s32, s32);
@@ -75,7 +75,8 @@ extern void fn_801D62D0(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32,
                        s32, s32, s32, s32, s32, s32);
 extern void fn_801AAE68(float, s32, s32, s32, Vec3 *, s32, s32, s32, u16, s32);
 extern s32 fn_801D39E0(s32);
-extern void fn_8020104C(s32, s32, s32, s32, float);
+extern void fn_8020104C(int, void *, void *, int, float);
+#define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void *)(b), (void *)(c), (int)(d), (e))
 extern void fn_801E2A48(void *, Vec3 *, s32 *, s32);
 
 static const s32 choices[4] = { 1, 0, 2, 3 };

@@ -2,7 +2,8 @@ typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned int u32;
 
-extern int fn_8011EB04(int value);
+extern int fn_8011EB04(void *);
+#define fn_8011EB04(a) fn_8011EB04((void *)(a))
 extern u16 fn_8012A244(int value);
 extern int fn_801A9EF4(int minimum, int maximum);
 

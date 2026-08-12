@@ -3,7 +3,8 @@ typedef unsigned int u32;
 
 #pragma use_lmw_stmw on
 
-extern int fn_8011EB04(void*);
+extern int fn_8011EB04(void *);
+#define fn_8011EB04(a) fn_8011EB04((void *)(a))
 extern u32 fn_8011FAEC(void*);
 extern s32 fn_80131458(void);
 extern s32 fn_8012671C(void);

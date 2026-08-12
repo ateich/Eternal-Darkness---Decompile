@@ -23,7 +23,7 @@ extern void *fn_80201814();
 extern void *fn_80201BC8();
 extern int fn_8015C4A4(int, int);
 extern Vec3s* fn_80158ABC(int, int, void*);
-extern void fn_8011F114(void*, void*);
+extern void fn_8011F114(void *, void *);
 extern s32 fn_80178E94(Vec3f*, Vec3f*);
 extern void fn_8016A830(void*, double);
 

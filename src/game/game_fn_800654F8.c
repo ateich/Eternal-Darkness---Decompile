@@ -16,8 +16,9 @@ typedef s32 M2C_UNK;
 #define M2C_FIELD(expr, type_ptr, offset) (*(type_ptr)((u8 *)(expr) + (offset)))
 
 /* Behavior-complete first-pass reconstruction of the event/damage dispatcher. */
-s32 fn_800FBFB0();                               /* extern */
-s32 fn_8011EB04();                               /* extern */
+int fn_800FBFB0(void);                               /* extern */
+int fn_8011EB04(void *);                               /* extern */
+#define fn_8011EB04(a) fn_8011EB04((void *)(a))
 M2C_UNK fn_8011F114();                    /* extern */
 s32 fn_8011F6A4(); /* extern */
 s32 fn_801207F0();                               /* extern */
@@ -63,7 +64,7 @@ void *fn_80201B8C();                             /* extern */
 M2C_UNK fn_80201B9C();                              /* extern */
 u32 fn_80201BC8();                 /* extern */
 void **fn_80201C24();                            /* extern */
-s32 fn_80201EB8();                                  /* extern */
+int fn_80201EB8(void *);                                  /* extern */
 u8 fn_80204578();                         /* extern */
 s32 fn_80204844();                           /* extern */
 M2C_UNK fn_80205868();      /* extern */
@@ -252,7 +253,7 @@ s32 fn_800654F8(u8 arg0) {
     var_r23 = 0;
     sp13C = fn_801A7490(&lbl_80239008);
     temp_r24 = fn_80201814();
-    temp_r14 = fn_80201EB8();
+    temp_r14 = fn_80201EB8((void *)temp_r24);
     sp150 = fn_801A74C0(arg0);
     if (((s32) lbl_8064D18C == temp_r14) || (temp_r14 == -1)) {
         sp134 = 0;
@@ -407,7 +408,7 @@ block_42:
             } else {
                 temp_r3_6 = 8 - (fn_800FBFB0() & 0xF);
                 sp84 = (f32) temp_r3_6;
-                temp_r3_7 = 8 - (fn_800FBFB0(temp_r3_6) & 0xF);
+                temp_r3_7 = 8 - (fn_800FBFB0() & 0xF);
                 temp_r3_8 = temp_r3_7 ^ 0x80000000;
                 spF0 = 0x43300000;
                 spF4 = temp_r3_8;

@@ -41,10 +41,11 @@ extern int fn_80201B54();
 extern s32 fn_80204180(void *, void *);
 extern s32 fn_8015C910(void);
 extern void *fn_8012AB2C(void *);
-extern void fn_8011F114(Vec3 *, void *);
+extern void fn_8011F114(void *, void *);
 extern void fn_8013F3C0(void *, Vec3 *, Vec3 *, float);
 extern s32 fn_8013FBE4(void *, void *, void *, s32, s32);
-extern void *fn_801294DC(void *, s32, s32, s32);
+extern void *fn_801294DC(void *, int, int, int);
+#define fn_801294DC(a, b, c, d) fn_801294DC((void *)(a), (b), (c), (d))
 extern void *fn_801A717C(void);
 extern void fn_801A7460(void *, s32);
 extern void fn_801A74A0(void *, s32);
@@ -63,7 +64,7 @@ extern void fn_80128C28(void *, void *, void *);
 extern void fn_80128C44(void *, void *, void *);
 extern void fn_80201D2C(void *, s32);
 extern void fn_80201D14(void *, s32);
-extern s32 fn_800FBFB0(void);
+extern int fn_800FBFB0(void);
 
 extern s32 fn_8006016C(s32, void *);
 extern s32 fn_8006012C(void);

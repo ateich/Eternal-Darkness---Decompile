@@ -7,7 +7,8 @@ extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void *fn_80201814();
 extern void *fn_80201BC8();
-extern int fn_8011EB04(void*);
+extern int fn_8011EB04(void *);
+#define fn_8011EB04(a) fn_8011EB04((void *)(a))
 extern void* fn_80201C24();
 extern void fn_80157B94(void*, s32);
 

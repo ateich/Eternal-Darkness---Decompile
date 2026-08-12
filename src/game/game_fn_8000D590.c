@@ -23,7 +23,7 @@ extern void *fn_80201814();
 extern void *fn_80201B8C();
 extern int fn_80201B44(void);
 extern void* fn_80072354(void*);
-extern int fn_80038308(void* object, int channel, short* value);
+extern int fn_80038308(void *, int, short *);
 extern int fn_80038464(void*, int, s16*);
 
 s32 fn_8000D590(void* script)

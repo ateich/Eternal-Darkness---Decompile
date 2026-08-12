@@ -4,7 +4,7 @@ typedef signed int s32;
 
 extern s32 lbl_8064D18C;
 extern int fn_80200C38();
-extern s32 fn_80201EB8(s32 context);
+extern int fn_80201EB8(void *);
 extern s32 fn_801A74F8(s32 value);
 extern u16 fn_801A7530(s32 value);
 extern void fn_801A7488(s32 value);
@@ -17,7 +17,7 @@ extern void *fn_80204844(void *object, s32 value);
 extern void *fn_8006D444(void);
 extern s32 fn_8006D344(void *object, s32 flags, s32 zero);
 extern unsigned long long fn_8020123C();
-extern s32 fn_80038308(s32 context, s32 index, s16 *value);
+extern int fn_80038308(void *, int, short *);
 extern s32 fn_80038464(s32 context, s32 index, s16 *value);
 extern s32 fn_80064E2C(s32 context, s32 value, s32 index, u16 mask,
                       s32 amount, s32 first, s32 second);
@@ -42,7 +42,7 @@ void fn_80064B38(s32 context, void *event, s32 *result)
     s32 bit;
 
     event_value = fn_80200C38(event);
-    current = fn_80201EB8(context);
+    current = fn_80201EB8((void *)context);
     if (lbl_8064D18C == current || current == -1) {
         amount = fn_801A74F8(event_value);
         mask = fn_801A7530(event_value);
@@ -68,7 +68,7 @@ void fn_80064B38(s32 context, void *event, s32 *result)
 
         for (index = 0; index < 4; index++) {
             bit = 1 << index;
-            if ((mask & bit) && fn_80038308(context, index, &first) &&
+            if ((mask & bit) && fn_80038308((void *)context, index, &first) &&
                 fn_80038464(context, index, &second)) {
                 output |= fn_80064E2C(context, event_value, index, bit,
                                       amount, first, second);
@@ -80,19 +80,19 @@ void fn_80064B38(s32 context, void *event, s32 *result)
         extra3 = fn_801A7510(event_value);
 
         bit = 1;
-        if ((s16)extra1 && fn_80038308(context, 1, &first) &&
+        if ((s16)extra1 && fn_80038308((void *)context, 1, &first) &&
             fn_80038464(context, 1, &second)) {
             output |= fn_80064E2C(context, event_value, 1, 1 << bit,
                                   extra1, first, second);
         }
         bit = 2;
-        if ((s16)extra2 && fn_80038308(context, 2, &first) &&
+        if ((s16)extra2 && fn_80038308((void *)context, 2, &first) &&
             fn_80038464(context, 2, &second)) {
             output |= fn_80064E2C(context, event_value, 2, 1 << bit,
                                   extra2, first, second);
         }
         bit = 3;
-        if ((s16)extra3 && fn_80038308(context, 3, &first) &&
+        if ((s16)extra3 && fn_80038308((void *)context, 3, &first) &&
             fn_80038464(context, 3, &second)) {
             output |= fn_80064E2C(context, event_value, 3, 1 << bit,
                                   extra3, first, second);

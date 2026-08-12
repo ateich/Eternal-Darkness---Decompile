@@ -17,7 +17,7 @@ extern f32 lbl_8064E640;
 extern int fn_80200C38();
 extern s32 fn_801A74F8(void);
 extern u16 fn_801A7530(s32 value);
-extern s32 fn_80038308(s32 context, s32 index, s16 *value);
+extern int fn_80038308(void *, int, short *);
 extern s32 fn_80038464(s32 context, s32 index, s16 *value);
 extern HandlerState *fn_80036D38(s32 context);
 extern int fn_80201B44(void);
@@ -26,9 +26,10 @@ extern s32 fn_80200C20(s32 value);
 extern unsigned long long fn_8020123C();
 extern void fn_8011F778(s32 object, f32 value);
 extern void fn_80048708(s32 object);
-extern void fn_8020104C(s32 kind, s32 first, s32 second, s32 flags, f32 value);
-extern void fn_80201D34(s32 context, s32 value);
-extern void fn_80201D1C(s32 context, s32 value);
+extern void fn_8020104C(int, void *, void *, int, float);
+#define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void *)(b), (void *)(c), (int)(d), (e))
+extern void fn_80201D34(void *, s32);
+extern void fn_80201D1C(void *, s32);
 
 s32 fn_80063124(s32 context, s32 object, s32 event, s32 current_object,
                  s32 unused, s32 *out_result)
@@ -56,7 +57,7 @@ s32 fn_80063124(s32 context, s32 object, s32 event, s32 current_object,
             HandlerState *state;
             s32 is_current;
 
-            if (fn_80038308(context, index, &remaining) == 0) {
+            if (fn_80038308((void *)context, index, &remaining) == 0) {
                 continue;
             }
             if (fn_80038464(context, index, &limit) == 0) {
@@ -84,8 +85,8 @@ s32 fn_80063124(s32 context, s32 object, s32 event, s32 current_object,
                 fn_8020123C(0x24, current_object, state->object_id, 0);
                 fn_8020104C(8, state->object_id, current_object, 0,
                             lbl_8064E640);
-                fn_80201D34(context, state->context_id);
-                fn_80201D1C(context, 1);
+                fn_80201D34((void *)context, state->context_id);
+                fn_80201D1C((void *)context, 1);
                 state->object_id = 0;
                 state->context_id = 0;
                 result |= 2;

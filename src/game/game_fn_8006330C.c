@@ -38,7 +38,8 @@ s32 fn_8011F778(s32, f32);                   /* extern */
 s32 fn_8011FA8C(s32, s32, s32); /* extern */
 s32 fn_8011FF38();                                  /* extern */
 s32 fn_80128C28(u32, void *, s32);            /* extern */
-u32 fn_801294DC(s32, s32, s32, s32);          /* extern */
+void *fn_801294DC(void *, s32, s32, s32);          /* extern */
+#define fn_801294DC(a, b, c, d) fn_801294DC((void *)(a), (b), (c), (d))
 s32 fn_8012B324(s32);                        /* extern */
 s32 fn_8012B344(s32);                        /* extern */
 s32 fn_8014D100(s32, void *, s32, s32);       /* extern */
@@ -296,7 +297,7 @@ s32 fn_8006330C(s32 arg0, s32 arg1, s32 arg2, u32 *arg3) {
             if ((s8) M2C_FIELD(temp_r31, u8 *, 0x160) == 0) {
 
             }
-            temp_r25_2 = fn_801294DC(temp_r25,
+            temp_r25_2 = (u32)fn_801294DC(temp_r25,
                                     (s8) M2C_FIELD(temp_r31, u8 *, 0x160) == 0 ? 0x5C : 0x62,
                                     0x20, 8);
             if (temp_r25_2 != 0) {

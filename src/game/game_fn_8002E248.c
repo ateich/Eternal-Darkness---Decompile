@@ -39,8 +39,8 @@ extern void *fn_80201BC8();
 extern s32 fn_8011F130(void*);
 extern void fn_801E32F8(InnerState*);
 extern int fn_801E8328();
-extern void fn_80201D34(void*, s32);
-extern void fn_80201D1C(void*, s32);
+extern void fn_80201D34(void *, s32);
+extern void fn_80201D1C(void *, s32);
 
 s32 fn_8002E248(void* callback, s32 phase, void* event)
 {

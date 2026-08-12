@@ -24,14 +24,15 @@ extern void *fn_80201BC8();
 extern f32 fn_8012B750(s32 value);
 extern s32 fn_80204508(s32 context, s32 value);
 extern int fn_80201B44(void);
-extern void *fn_801294DC(s32 object, s32 kind, s32 value, s32 flags);
+extern void *fn_801294DC(void *, int, int, int);
+#define fn_801294DC(a, b, c, d) fn_801294DC((void *)(a), (b), (c), (d))
 extern void fn_800359A0(s32 context, s32 value);
 extern void fn_8012B7A0(s32 object, f32 value);
 extern void fn_80204810(void);
 extern void fn_80128C28(void *object, void (*callback)(void), s32 value);
 extern s32 fn_80201B5C(s32 context);
-extern void fn_80201D34(s32 context, s32 value);
-extern void fn_80201D1C(s32 context, s32 value);
+extern void fn_80201D34(void *, s32);
+extern void fn_80201D1C(void *, s32);
 
 s32 fn_80062ED0(s32 context, s32 object, s32 event, s32 *out_result)
 {
@@ -65,8 +66,8 @@ s32 fn_80062ED0(s32 context, s32 object, s32 event, s32 *out_result)
             fn_80128C28(created, fn_80204810, (context_kind << 8) | 0x23);
             state->object_id = event_object;
             state->context_id = fn_80201B5C(context);
-            fn_80201D34(context, 0x13);
-            fn_80201D1C(context, 1);
+            fn_80201D34((void *)context, 0x13);
+            fn_80201D1C((void *)context, 1);
             result = 1;
         }
     }

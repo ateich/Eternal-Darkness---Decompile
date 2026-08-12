@@ -28,7 +28,8 @@ typedef struct SetupInfo {
 #define M2C_FIELD(expr, type_ptr, offset) (*(type_ptr)((s8 *)(expr) + (offset)))
 
 s32 fn_80033D5C();
-s32 fn_8011EB04();
+int fn_8011EB04(void *);
+#define fn_8011EB04(a) fn_8011EB04((void *)(a))
 M2C_UNK fn_8011F768();
 M2C_UNK fn_8011FA8C();
 M2C_UNK fn_8011FABC();
@@ -435,7 +436,7 @@ s32 fn_80034708(void *arg0) {
             var_r30 = fn_80033D5C(&lbl_8064B3FC, &lbl_80303BC0, arg0);
             fn_80201D3C(var_r30, 2);
             temp_r31 = fn_80201BC8(var_r30);
-            temp_r3_11 = fn_8011EB04();
+            temp_r3_11 = ((int (*)(void *))fn_8011EB04)(0);
             switch (temp_r3_11) {                   /* switch 3; irregular */
             case 18:                                /* switch 3 */
                 fn_80120AD0(temp_r31, 0, 0x64, 0x22, lbl_8064E1F8, lbl_8064E1FC);

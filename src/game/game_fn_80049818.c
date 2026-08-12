@@ -1,7 +1,8 @@
 typedef unsigned short u16;
 
 extern u16 fn_8012A244(int value);
-extern int fn_8011EB04(int value);
+extern int fn_8011EB04(void *);
+#define fn_8011EB04(a) fn_8011EB04((void *)(a))
 extern int fn_801A9EF4(int minimum, int maximum);
 
 u16 fn_80049818(int value)

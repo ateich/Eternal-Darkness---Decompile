@@ -13,15 +13,15 @@ extern void fn_8011E310(s32, s32, s32, s32, s32, s32, s32);
 extern int fn_80200C38();
 extern s32 fn_80063D60(void *value, void *runtime, u8 count);
 extern unsigned long long fn_8020123C();
-extern void fn_8012B344(void *object);
+extern void fn_8012B344(void *);
 extern void fn_80201D2C(void *, s32);
 extern void fn_80201D14(void *, s32);
 extern s32 fn_800A1060(void);
 extern u64 fn_802011D4(void *event);
 extern void fn_80066754(void *context, void *event, u32 *result);
 extern void fn_8012B324(void *object);
-extern void fn_80201D34(void *context, s32 value);
-extern void fn_80201D1C(void *context, s32 value);
+extern void fn_80201D34(void *, s32);
+extern void fn_80201D1C(void *, s32);
 extern int fn_801E8328();
 
 s32 fn_80056E18(void *context, void *event, u32 *result)

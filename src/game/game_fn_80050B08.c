@@ -11,7 +11,8 @@ extern u16 fn_80049818(s32, u8 *);
 extern u32 fn_80050A48(void);
 extern u16 fn_80050A7C(s32, u8 *);
 extern void fn_800EB458(const char *, ...);
-extern s32 fn_8011EB04(s32);
+extern int fn_8011EB04(void *);
+#define fn_8011EB04(a) fn_8011EB04((void *)(a))
 extern int fn_801A9EF4(int, int);
 extern u16 fn_801A9F44(s32, s32 *);
 extern u8 lbl_80238E60[];

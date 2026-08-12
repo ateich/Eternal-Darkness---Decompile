@@ -2,7 +2,8 @@ typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned int u32;
 
-extern int fn_8011EB04(u32 object);
+extern int fn_8011EB04(void *);
+#define fn_8011EB04(a) fn_8011EB04((void *)(a))
 extern int fn_8011EB14(u32 object);
 extern short fn_80050A20();
 extern short fn_800509DC();
