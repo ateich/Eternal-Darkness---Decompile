@@ -36,8 +36,8 @@ typedef struct EffectSlot {
 
 extern s32 lbl_8064D18C;
 
-extern void *fn_80201814(s32);
-extern void *fn_80201BC8(void *);
+extern void* fn_80201814();
+extern void* fn_80201BC8();
 extern s32 fn_8011FB4C(void *);
 extern s32 fn_8011F6A4(void *, s32, s32, s32, QueryResult *, s32);
 extern void *fn_80149E04(void);

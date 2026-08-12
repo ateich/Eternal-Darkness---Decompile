@@ -2,7 +2,7 @@ typedef signed int s32;
 typedef unsigned int u32;
 
 extern s32 fn_80200C38(void *event);
-extern s32 fn_80201B54(void *context);
+extern int fn_80201B54();
 extern void *fn_801294DC(void *object, s32 kind, s32 value, s32 extra);
 extern void fn_80204810(void);
 extern void fn_80128C28(void *object, void (*callback)(void), s32 value);

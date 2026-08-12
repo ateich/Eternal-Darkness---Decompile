@@ -47,21 +47,21 @@ extern const Pair lbl_80243CE4[];
 extern const Pair lbl_80243D24[];
 extern u8 lbl_8030F820[];
 
-extern void *fn_80201B9C(void *);
-extern s32 fn_80201B54(void *);
-extern void *fn_80201BC8(void *);
-extern RuntimeObject *fn_80201B8C(void *);
+extern void *fn_80201B9C(void);
+extern int fn_80201B54();
+extern void* fn_80201BC8();
+extern void* fn_80201B8C();
 extern void *fn_80201BC0(void *);
 extern s32 fn_80201EB8(void *);
 extern void fn_80201E78(Vec3 *, void *);
 extern void fn_8011F114(Vec3 *, void *);
 extern void fn_8012AB2C(void *);
-extern unsigned long long fn_8020123C(s32, s32, s32, s32);
+extern unsigned long long fn_8020123C();
 extern u32 fn_80178F14(s32, s32, s32, s32, s32, s32);
 extern void fn_8013F4D0(void *, Vec3 *, Vec3 *);
 extern void *fn_8014317C(void *, Vec3 *, void *, s32, s32);
 extern void fn_801DA27C(s32);
-extern void *fn_80201814(void);
+extern void* fn_80201814();
 extern s32 fn_80066BB8(void *, s32);
 extern s32 fn_80066D04(void *, s32);
 extern s32 fn_8005EE9C(s32, s32, s32 *);
@@ -82,7 +82,7 @@ static const s32 choices[4] = { 1, 0, 2, 3 };
 
 s32 fn_8005EF94(void *head, s32 limit, s32 *count, s32 create, s32 amount)
 {
-    void *node = fn_80201B9C(head);
+    void *node = fn_80201B9C();
     void *selected = 0;
     s32 best = limit == -1 ? -1 : limit;
     s32 result = 0;

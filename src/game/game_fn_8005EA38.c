@@ -9,11 +9,11 @@ typedef struct EventState {
 
 extern s32 lbl_8064D18C;
 
-extern s32 fn_80201B54(void *context);
+extern int fn_80201B54();
 extern void fn_80035628(void *context);
-extern EventState *fn_80201B8C(void *context);
+extern void* fn_80201B8C();
 extern s32 fn_80200C38(void *event);
-extern void *fn_80201814(s32 value);
+extern void* fn_80201814();
 extern void *fn_801A717C(void);
 extern void fn_801A74A8(void *effect, s32 value);
 extern void fn_801A74A0(void *effect, s32 value);
@@ -22,7 +22,7 @@ extern void fn_801A7518(void *effect, s32 value);
 extern void fn_801A7588(void *effect, u32 value);
 extern void fn_801A764C(void *effect, void *position);
 extern u8 fn_80204508(void *object, void *context);
-extern void fn_8020123C(s32 kind, s32 context_id, s32 event_value, void *effect);
+extern unsigned long long fn_8020123C();
 extern void fn_801A7470(void *effect, s32 value);
 extern void fn_801A74D8(void *effect, u32 value);
 extern void fn_801A7228(void *effect);

@@ -43,11 +43,11 @@ typedef enum Result {
 
 extern const float lbl_8064E5DC;
 
-extern OwnerData *fn_80201B8C(void *);
+extern void* fn_80201B8C();
 extern void *fn_80201B94(void *);
 extern void *fn_80201C48(void *);
-extern s32 fn_80201B54(void *);
-extern void *fn_80201814(void *);
+extern int fn_80201B54();
+extern void* fn_80201814();
 extern void fn_8011F114(Vec3 *, void *);
 extern s32 fn_80072354(void *);
 extern s32 fn_80060840(void *, s32 *);

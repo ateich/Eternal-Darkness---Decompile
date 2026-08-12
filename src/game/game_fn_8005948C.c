@@ -5,7 +5,7 @@ extern char lbl_80243A40[];
 extern char lbl_8064B4E4;
 extern void *lbl_8064C4E0;
 extern s32 fn_80200C10(void *event);
-extern void *fn_80201BC8(void *context);
+extern void* fn_80201BC8();
 extern void fn_80201D2C(void *context, s32 value);
 extern void fn_80201D14(void *context, s32 value);
 extern void fn_801E79A0(void *object, s32 value);

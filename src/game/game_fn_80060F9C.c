@@ -27,19 +27,19 @@ extern const float lbl_8064E600;
 extern const float lbl_8064E604;
 extern const float lbl_8064E608;
 
-extern OwnerData *fn_80201B8C(void *);
+extern void* fn_80201B8C();
 extern void *fn_80201B94(void *);
 extern void fn_8011F114(Vec3 *, void *);
 extern s32 fn_80066D04(void *, s32);
 extern void fn_800359A0(void *, s32);
 extern void fn_80201CD4(void *);
 extern void *fn_80201C48(void *);
-extern void *fn_80201B54(void *);
+extern int fn_80201B54();
 extern s32 fn_80060C28(void *, void *, void *);
 extern s32 fn_800CA7D4(void *, void *, void *, void *, s32, s32);
 extern s32 fn_80060904(void *, void *, void *);
-extern void *fn_80201814(void *);
-extern void *fn_80201BC8(void *);
+extern void* fn_80201814();
+extern void* fn_80201BC8();
 extern void fn_8012FE10(void *, s32, Vec3 *);
 extern s32 fn_8012FF34(void *, Vec3 *, s32, s32);
 extern void fn_801302BC(void *, s32);
@@ -102,7 +102,7 @@ s32 fn_80060F9C(void *owner, void *resource, void *probe, void *target,
     value = fn_80201C48(iterator);
     if ((s32)fn_80201C48(iterator) == 1 &&
         ((((u8 *)owner_data->state)[0x89] & 2) == 0)) {
-        fn_80060C28(fn_80201B54(owner), resource, owner_data);
+        fn_80060C28((void *)fn_80201B54(owner), resource, owner_data);
         goto done;
     }
     iterator = value;

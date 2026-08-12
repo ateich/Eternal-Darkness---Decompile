@@ -2,13 +2,13 @@ typedef unsigned char u8;
 typedef signed int s32;
 typedef unsigned int u32;
 
-extern void *fn_80201B9C(s32 context);
-extern void *fn_80201814(s32 value);
+extern void *fn_80201B9C(void);
+extern void* fn_80201814();
 extern s32 fn_80201EB8(void *object);
 extern u8 fn_80204508(void *first, void *second);
 extern s32 fn_80204180(void *first, void *second);
-extern s32 fn_80201B54(void *object);
-extern void fn_8020123C(s32 kind, s32 first, s32 second, s32 flags);
+extern int fn_80201B54();
+extern unsigned long long fn_8020123C();
 extern void *fn_80201BC0(void *object);
 
 s32 fn_80063030(s32 context, s32 value)
@@ -17,7 +17,7 @@ s32 fn_80063030(s32 context, s32 value)
     void *current;
     void *object;
 
-    current = fn_80201B9C(context);
+    current = fn_80201B9C();
     object = fn_80201814(value);
 
     while (current != 0 && object != 0) {

@@ -20,8 +20,8 @@ extern float lbl_8064E554;
 extern float lbl_8064E558;
 
 extern s32 fn_80200C10(void *event);
-extern void *fn_80201BC8(void *context);
-extern s32 fn_80201B54(void *context);
+extern void* fn_80201BC8();
+extern int fn_80201B54();
 extern s32 fn_8011EB04(void *object);
 extern void fn_8001D9FC(s32 value);
 extern void fn_801EFE84(s32 value);

@@ -18,13 +18,13 @@ typedef struct HandlerData {
     HandlerState *state;
 } HandlerData;
 
-extern HandlerData *fn_80201B8C(void *);
+extern void* fn_80201B8C();
 extern void *fn_80201B94(void *);
 extern s32 fn_80201C48(void *);
-extern s32 fn_80201B54(void *);
+extern int fn_80201B54();
 extern void fn_80060C28(s32, void *, HandlerData *);
 extern s32 fn_800359A0(void *, s32);
-extern void *fn_80201814(void *);
+extern void* fn_80201814();
 extern s32 fn_800601FC(void *, void *, void *);
 extern void fn_800BDEE4(void *, HandlerState *);
 extern void fn_80201D2C(void *, s32);

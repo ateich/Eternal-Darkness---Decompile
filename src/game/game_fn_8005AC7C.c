@@ -19,13 +19,13 @@ extern float lbl_8064E504;
 extern float lbl_8064E54C;
 
 extern s32 fn_80200C10(void *event);
-extern void *fn_80201BC8(void *context);
-extern s32 fn_80201B54(void *context);
-extern HandlerContext *fn_80201B8C(void *context);
+extern void* fn_80201BC8();
+extern int fn_80201B54();
+extern void* fn_80201B8C();
 extern u32 fn_80036D5C(void *context);
 extern void fn_80036DA4(void *context, u32 flags);
 extern s32 fn_80128F40(void *object);
-extern unsigned long long fn_8020123C(s32 kind, s32 source, void *target, s32 value);
+extern unsigned long long fn_8020123C();
 extern void fn_8011FA8C(void *object, s32 value, s32 flags);
 extern void fn_800C63D8(void);
 extern void fn_80201D2C(void *context, s32 value);

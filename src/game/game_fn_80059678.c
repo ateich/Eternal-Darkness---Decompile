@@ -22,10 +22,10 @@ typedef struct HandlerState {
 
 extern u32 lbl_8064D5A8;
 extern s32 fn_80200C10(void *event);
-extern void *fn_80201BC8(void *context);
-extern s32 fn_80201B54(void *context);
+extern void* fn_80201BC8();
+extern int fn_80201B54();
 extern u32 fn_80036D5C(void *context);
-extern HandlerContext *fn_80201B8C(void *context);
+extern void* fn_80201B8C();
 extern void fn_8011E174(s32 value, s32 enabled);
 extern void fn_80036DA4(void *context, u32 flags);
 extern void fn_80077E14(void *context, void *object, void *event, s32 object_id,
@@ -34,7 +34,7 @@ extern void fn_80077880(void *context, HandlerState *state, void *event);
 extern s32 fn_8006D3E4(u32 value, s32 mode);
 extern void *fn_80200C38(void *event);
 extern s32 fn_80063D60(void *object, HandlerContext *handler, u8 value);
-extern unsigned long long fn_8020123C(s32 kind, s32 source, void *target, s32 value);
+extern unsigned long long fn_8020123C();
 extern void fn_80201D2C(void *context, s32 value);
 extern void fn_80201D14(void *context, s32 value);
 extern void fn_800C63D8(void);

@@ -45,7 +45,7 @@ python3 configure.py --non-matching --build-dir build-mod
 .tools/bin/ninja -f build-mod/build.ninja
 ```
 
-See `docs/` for the clean-room boundary, current analysis, compiler experiment matrix, Ghidra workflow, and mod roadmap.
+See `docs/` for the clean-room boundary, current analysis, compiler experiment matrix, Ghidra workflow, mod roadmap, and PC execution track.
 
 <!-- progress:start -->
 ## Progress
@@ -54,9 +54,15 @@ Generated from `objdiff` build evidence (`reports/GEDE01/progress.json`), verifi
 
 | Metric | Matched | Total | Percent |
 | --- | ---: | ---: | ---: |
-| Code bytes | 187,772 | 2,300,692 | **8.16%** |
-| Functions | 710 | 8,216 | 8.64% |
-| Objects (TUs) | 711 | 1,134 | 62.70% |
+| Code bytes | 188,732 | 2,300,692 | **8.20%** |
+| Functions | 715 | 8,216 | 8.70% |
+| Objects (TUs) | 716 | 1,144 | 62.59% |
 
 Denominators are the whole retail `main.dol`. Percentages count only functions that `objdiff` reports at 100%, relocations included; reconstructions registered as documented `NonMatching` are not counted. Most matched objects are small, so the object percentage runs far ahead of the code percentage — **code bytes is the honest measure of how far along this is.**
 <!-- progress:end -->
+
+## PC execution
+
+Boot milestone (2026-08-11): **Eternal Darkness reaches the title screen on PC through DolRecomp + RecompCore with zero interpreter fallback for guest CPU execution.** The experiment is isolated on a separate `boot-experiment` branch and machine; it does not change the matching strategy, the exact-match acceptance bar, or scheduler priorities, and no runtime hacks land in this tree.
+
+The long-term goal is a PC port with a modern renderer, ray tracing, and upgraded textures, materials, and models while preserving the original gameplay logic. As matching coverage grows, recovered source functions are to progressively replace static-recompiled blocks under the gated host-replacement track defined in `docs/pc-execution.md`.

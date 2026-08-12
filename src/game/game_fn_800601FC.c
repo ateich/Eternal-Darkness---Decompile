@@ -35,10 +35,10 @@ typedef struct EntryList {
 extern const float lbl_8064E5D8;
 extern const float lbl_8064E5F0;
 
-extern void *fn_80201BC8(void *);
-extern OwnerData *fn_80201B8C(void *);
+extern void* fn_80201BC8();
+extern void* fn_80201B8C();
 extern s32 fn_80066D04(void *, s32);
-extern s32 fn_80201B54(void *);
+extern int fn_80201B54();
 extern s32 fn_80204180(void *, void *);
 extern s32 fn_8015C910(void);
 extern void *fn_8012AB2C(void *);

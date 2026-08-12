@@ -1,6 +1,6 @@
 typedef signed int s32;
 
-extern s32 fn_80201B54(void *context);
+extern int fn_80201B54();
 extern void *fn_80200C38(void *event);
 extern void fn_80201D34(void *context, void *value);
 extern void fn_80201D1C(void *context, s32 value);

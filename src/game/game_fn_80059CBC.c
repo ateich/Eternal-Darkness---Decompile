@@ -6,8 +6,8 @@ extern u32 lbl_8064D5A8;
 extern u32 lbl_8064E528;
 
 extern s32 fn_80200C10(void *event);
-extern void *fn_80201BC8(void *context);
-extern s32 fn_80201B54(void *context);
+extern void* fn_80201BC8();
+extern int fn_80201B54();
 extern void fn_8011E1C4(void);
 extern void fn_8011E174(s32 value, s32 enabled);
 extern void fn_8011FABC(void *object, s32 a, s32 b);

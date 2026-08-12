@@ -49,9 +49,9 @@ extern char lbl_80243BE4[];
 extern char lbl_802FC5BC[];
 
 extern s32 fn_80200C10(void *event);
-extern void *fn_80201BC8(void *context);
-extern s32 fn_80201B54(void *context);
-extern HandlerContext *fn_80201B8C(void *context);
+extern void* fn_80201BC8();
+extern int fn_80201B54();
+extern void* fn_80201B8C();
 extern u32 fn_80036D5C(void *context);
 extern void fn_80036DA4(void *context, u32 flags);
 extern void fn_80130434(void *object, s32 value);
@@ -66,7 +66,7 @@ extern void *fn_8011F130(void *object);
 extern void fn_801AAE68(float scale, s32 kind, s32 value, s32 a, void *object,
                         s32 b, s32 c, s32 d, unsigned short id, s32 extra);
 extern void fn_8011E310(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
-extern unsigned long long fn_8020123C(s32 kind, s32 source, void *target, s32 value);
+extern unsigned long long fn_8020123C();
 extern void fn_800C2474(void *object, s32 value);
 extern s32 fn_8006D3E4(u32 value, s32 mode);
 extern void *fn_80200C38(void *event);
@@ -86,7 +86,7 @@ extern void fn_8014D478(void *object, Vec3 *a, Vec3 *b, s32 c, s32 d,
                         void *data, s32 e);
 extern void fn_800CEA1C(s32 kind, s32 value, Vec3 *a, Vec3 *b, s32 c, s32 d,
                         void *data, float x, float y, float z);
-extern s32 fn_80201B44(void);
+extern int fn_80201B44(void);
 extern u64 fn_802011D4(void *event);
 
 s32 fn_8005A108(void *context, void *event, u32 *result)

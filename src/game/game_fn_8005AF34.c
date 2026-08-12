@@ -9,14 +9,14 @@ typedef unsigned long long u64;
 extern u8 lbl_8064C884;
 
 extern s32 fn_80200C10(void *event);
-extern void *fn_80201BC8(void *context);
-extern s32 fn_80201B54(void *context);
+extern void* fn_80201BC8();
+extern int fn_80201B54();
 extern s32 fn_80128EAC(void *object);
 extern void fn_8012B344(void *object);
 extern void fn_80201D2C(void *context, s32 value);
 extern void fn_80201D14(void *context, s32 value);
 extern s32 fn_80200C38(void *event);
-extern s32 fn_80201B44(void);
+extern int fn_80201B44(void);
 extern void fn_801D0D30(s32 value);
 extern u64 fn_802011D4(void *event);
 extern void *fn_8004918C(void);

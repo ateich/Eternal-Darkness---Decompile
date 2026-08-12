@@ -8,16 +8,16 @@ typedef struct OwnerData {
 } OwnerData;
 
 extern void *fn_801A7498(void *);
-extern void *fn_80201814(void *);
+extern void* fn_80201814();
 extern s32 fn_800607BC(void *, void *);
 extern u32 fn_80128EE4(void *);
-extern OwnerData *fn_80201B8C(void *);
+extern void* fn_80201B8C();
 extern void *fn_801A717C(void);
 extern void fn_8012B344(void *);
 extern void fn_801A7470(void *, s32);
 extern void fn_801A74A0(void *, void *);
 extern void fn_801A74A8(void *, void *);
-extern void fn_8020123C(s32, void *, void *, void *);
+extern unsigned long long fn_8020123C();
 extern void fn_801A7228(void *);
 
 s32 fn_800606BC(void *owner, void *resource)

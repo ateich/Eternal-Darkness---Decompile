@@ -1,17 +1,17 @@
 {
   "tool": "tools/signature_audit.py",
-  "scope": "ten most-declared symbols with disagreeing TU-local declarations on 2026-08-11",
+  "scope": "current ten most-declared symbols with disagreeing TU-local declarations on 2026-08-11",
   "canonical_declarations": {
     "fn_80201814": "void* fn_80201814()",
     "fn_80201B8C": "void* fn_80201B8C()",
     "fn_80201BC8": "void* fn_80201BC8()",
     "fn_80201B54": "int fn_80201B54()",
     "fn_8020123C": "unsigned long long fn_8020123C()",
+    "fn_80201D2C": "void fn_80201D2C(void*, s32)",
+    "fn_80201D14": "void fn_80201D14(void*, s32)",
+    "fn_80200C10": "s32 fn_80200C10(void*)",
     "fn_80201B44": "int fn_80201B44(void)",
-    "fn_801E8328": "int fn_801E8328()",
-    "fn_80201EB8": "int fn_80201EB8()",
-    "fn_80156938": "void* fn_80156938()",
-    "fn_8011F114": "void fn_8011F114(void*, void*)"
+    "fn_80201B9C": "void* fn_80201B9C(void)"
   },
   "resolved_callee_abi": {
     "fn_80201814": "Consumes the object id in r3 and returns the matching object pointer in r3.",
@@ -19,15 +19,15 @@
     "fn_80201BC8": "Consumes an object pointer in r3 and returns the pointer stored at offset 0x34 in r3.",
     "fn_80201B54": "Consumes an object pointer in r3 and returns the signed 32-bit object id stored at offset 0x10 in r3.",
     "fn_8020123C": "Consumes four 32-bit GPR arguments in r3-r6 and preserves the established 64-bit r3-r4 result contract used by matching callers.",
+    "fn_80201D2C": "Consumes an object pointer and value in r3-r4, stores the value at offset 0x18, and returns no value.",
+    "fn_80201D14": "Consumes an object pointer and value in r3-r4, stores the low byte at offset 0x20, and returns no value.",
+    "fn_80200C10": "Consumes an event pointer in r3 and returns the signed 32-bit word at offset 0 in r3.",
     "fn_80201B44": "Consumes no arguments and returns the current object id from the r13 small-data global in r3.",
-    "fn_801E8328": "Consumes a 32-bit kind in r3 and a payload pointer in r4, then returns allocation success in r3.",
-    "fn_80201EB8": "Consumes an object pointer in r3 and returns its signed type id, or -1, in r3.",
-    "fn_80156938": "Consumes a callback/effect pointer in r3 and returns the pointer stored at offset 0x38 in r3.",
-    "fn_8011F114": "Consumes destination and source pointers in r3-r4, copies twelve bytes, and returns no value."
+    "fn_80201B9C": "Consumes no arguments and returns the first object-list node from the current object manager in r3."
   },
   "declaration_policy": "Where older matching reconstructions rely on live incoming GPRs or retain decompiler-only extra arguments, the canonical source declaration intentionally keeps an unspecified parameter list while fixing the return register class. Tightening those parameter lists changes proven retail-matching code generation. Explicit pointer/integer casts were added only where unifying the correct return class required them; objdiff and the linked DOL verify that they are byte-neutral.",
   "evidence": {
-    "retail_callees": "Disassembly of build/GEDE01/main.elf at 0x8011F114, 0x80156938, 0x801E8328, 0x8020123C, 0x80201814, 0x80201B44, 0x80201B54, 0x80201B8C, 0x80201BC8 and 0x80201EB8 establishes the consumed and returned PPC registers.",
+    "retail_callees": "Disassembly of build/GEDE01/main.elf at 0x80200C10, 0x8020123C, 0x80201814, 0x80201B44, 0x80201B54, 0x80201B8C, 0x80201B9C, 0x80201BC8, 0x80201D14 and 0x80201D2C establishes the consumed and returned PPC registers.",
     "matching_call_sites": "All declaration variants and their callers were audited. Source-level casts normalize differing pointer and integer readings without introducing instructions; unspecified parameter lists preserve already-matching live-register call sequences.",
     "linked_image": "Every symbol was followed by a rebuild and objdiff report. No previously matching function or object was lost, and the final linked image is byte-identical to retail."
   },
@@ -35,24 +35,25 @@
     "target_symbols_remaining_in_return_register_contradictions": 0,
     "target_symbols_remaining_in_abi_divergent": 0,
     "target_symbols_remaining_in_cosmetic": 0,
-    "all_abi_divergent_symbols": 220,
-    "all_cosmetic_symbols": 155
+    "all_return_register_contradictions": 140,
+    "all_abi_divergent_symbols": 125,
+    "all_cosmetic_symbols": 181
   },
   "per_symbol_rebuilds": {
     "symbols_verified": 10,
-    "matching_functions_after_each": 683,
-    "complete_objects_after_each": 683,
-    "matched_code_bytes_after_each": 173444,
-    "matched_data_bytes_after_each": 20060,
+    "matching_functions_after_each": 710,
+    "complete_objects_after_each": 711,
+    "matched_code_bytes_after_each": 187772,
+    "matched_data_bytes_after_each": 20124,
     "previously_matching_functions_lost_after_each": 0
   },
   "final_objdiff": {
-    "matching_functions": 683,
-    "complete_objects": 683,
-    "matched_code_bytes": 173444,
-    "matched_data_bytes": 20060
+    "matching_functions": 710,
+    "complete_objects": 711,
+    "matched_code_bytes": 187772,
+    "matched_data_bytes": 20124
   },
   "progress_json_changed": false,
-  "next_gate": "0x80058834",
+  "next_gate": "0x80063E64",
   "main_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
 }

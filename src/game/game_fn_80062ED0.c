@@ -16,15 +16,15 @@ typedef struct HandlerState {
 
 extern f32 lbl_8064E638;
 
-extern RuntimeState *fn_80201B8C(s32 context);
+extern void* fn_80201B8C();
 extern HandlerState *fn_80036D38(s32 context);
 extern s32 fn_80200C20(s32 value);
-extern s32 fn_80201B54(s32 context);
-extern s32 fn_80201814(s32 value);
-extern s32 fn_80201BC8(s32 value);
+extern int fn_80201B54();
+extern void* fn_80201814();
+extern void* fn_80201BC8();
 extern f32 fn_8012B750(s32 value);
 extern s32 fn_80204508(s32 context, s32 value);
-extern s32 fn_80201B44(void);
+extern int fn_80201B44(void);
 extern void *fn_801294DC(s32 object, s32 kind, s32 value, s32 flags);
 extern void fn_800359A0(s32 context, s32 value);
 extern void fn_8012B7A0(s32 object, f32 value);
@@ -49,9 +49,9 @@ s32 fn_80062ED0(s32 context, s32 object, s32 event, s32 *out_result)
     state = fn_80036D38(context);
     event_object = fn_80200C20(event);
     context_kind = fn_80201B54(context);
-    object_value = fn_80201814(event_object);
-    amount = fn_8012B750(fn_80201BC8(object_value));
-    adjusted = (u8)fn_80204508(context, fn_80201814(event_object));
+    object_value = (s32)fn_80201814(event_object);
+    amount = fn_8012B750((s32)fn_80201BC8(object_value));
+    adjusted = (u8)fn_80204508(context, (s32)fn_80201814(event_object));
     result = 0;
 
     if (runtime == 0 || runtime->type != 0x25 || event_object == fn_80201B44()) {

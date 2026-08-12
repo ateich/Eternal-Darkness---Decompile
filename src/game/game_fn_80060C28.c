@@ -11,7 +11,7 @@ extern void *fn_801A717C(void);
 extern void fn_801A7470(void *, s32);
 extern void fn_801A74A0(void *, void *);
 extern void fn_801A74A8(void *, void *);
-extern void fn_8020123C(s32, void *, void *, void *);
+extern unsigned long long fn_8020123C();
 extern void *fn_80128E30(void *);
 extern s32 fn_80128EAC(void *);
 extern void fn_80128B10(void *, u16);
