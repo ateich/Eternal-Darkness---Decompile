@@ -133,6 +133,10 @@ def main() -> None:
         set_section_alignment(output, b".rodata", 4)
         payload = output.read_bytes().replace(b".comment\0", b".ignored\0")
         output.write_bytes(payload)
+    if output is not None and output.name == "game_data_80060C28.o":
+        set_section_alignment(output, b".sdata2", 4)
+        payload = output.read_bytes().replace(b".comment\0", b".ignored\0")
+        output.write_bytes(payload)
 
 
 if __name__ == "__main__":
