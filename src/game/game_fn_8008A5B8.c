@@ -12,7 +12,7 @@ extern u8 lbl_802FC5BC[];
 extern float lbl_8064EBBC;
 
 extern s32 fn_8006D548(s32, void*, s32, Vec3*, s32*, s32, s32);
-extern void fn_8011F114(Vec3*, void*);
+extern void fn_8011F114();
 extern s32 fn_80179064(s32, s32, s32, s32);
 extern void fn_800EBA80(s32, Vec3*, void*, s32, float);
 

@@ -17,8 +17,8 @@ extern int lbl_8064C578;
 extern void* lbl_8064D18C;
 
 extern int fn_80036D5C(void*);
-extern void* fn_80201EB8(void*);
-extern void* fn_80201BC8(void*);
+extern void* fn_80201EB8();
+extern void* fn_80201BC8();
 extern void fn_80201E78(Vec3*, void*);
 extern void fn_80036DA4(void*, int);
 extern void fn_80201D34(void*, int);
@@ -29,8 +29,8 @@ extern void fn_800BCCC4(void*, Vec3*);
 extern void fn_80201DD8(void*, void*);
 extern void fn_80201F44(void*, Vec3*);
 extern void fn_800BDEE4(void*, void*);
-extern void fn_80201D2C(void*, int);
-extern void fn_80201D14(void*, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 extern void fn_8008FB9C(void*, void*, void*, Vec3*, int*, void*, void*, Runtime*, void*);
 
 void fn_8008F960(void* object, void* actor, int* link, void* state,

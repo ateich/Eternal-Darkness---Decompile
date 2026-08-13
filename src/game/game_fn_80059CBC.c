@@ -19,8 +19,8 @@ extern void fn_80045A24(s32 a, s32 b);
 extern void fn_80025A78(s32 value);
 extern u32 fn_80036D5C(void *context);
 extern void fn_80036DA4(void *context, u32 flags);
-extern void fn_80201D2C(void *, int);
-extern void fn_80201D14(void *, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 extern void fn_80077F90(void *object);
 extern void fn_8012B344(void *);
 

@@ -20,11 +20,11 @@ typedef struct StateB80096710 {
 } StateB80096710;
 
 extern void fn_80204810(void);
-extern void* fn_80201BC8(void*);
+extern void* fn_80201BC8();
 extern void fn_80201E78(Vec3*, void*);
 extern Candidate80096710* fn_800935CC(int, void*, void*, int);
-extern void fn_80201D2C(void*, int);
-extern void fn_80201D14(void*, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 extern void* fn_801294DC(void*, int, int, int);
 extern void fn_80128C44(void*, void*, int);
 extern void fn_80128C28(void*, void*, int);

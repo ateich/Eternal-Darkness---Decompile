@@ -10,13 +10,13 @@ typedef struct ActorData8009A404 {
 } ActorData8009A404;
 
 extern int fn_80200C10(void*);
-extern void* fn_80201BC8(void*);
-extern void* fn_80201B54(void*);
-extern ActorData8009A404* fn_80201B8C(void*);
+extern void* fn_80201BC8();
+extern void* fn_80201B54();
+extern ActorData8009A404* fn_80201B8C();
 extern void* fn_80201B94(void*);
-extern void fn_80201D2C(void*, int);
-extern void fn_80201D14(void*, int);
-extern int fn_80201EB8(void*);
+extern void fn_80201D2C();
+extern void fn_80201D14();
+extern int fn_80201EB8();
 extern void fn_800BD2DC(void*, void*);
 extern void fn_800BD194(void*, void*);
 extern void fn_800C9E50(void*);
@@ -36,7 +36,7 @@ extern void fn_8012C62C(void*, int, u32*, u32*, u32*, int);
 extern void fn_800BE010(void*, void*);
 extern int fn_80201C48(void*);
 extern int fn_8009A2B8(void*, void*, void*, u8*, void*, void*, u32, int, float);
-extern void fn_8020123C(int, int, void*, int);
+extern unsigned long long fn_8020123C();
 extern int lbl_8064D18C;
 extern u32 lbl_806519E4, lbl_8064ED18, lbl_8064ED14;
 extern u32 lbl_8064ED20, lbl_8064ED1C, lbl_806519E8;

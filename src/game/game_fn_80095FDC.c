@@ -29,7 +29,7 @@ extern int fn_80095E64(void*, unsigned int);
 extern int fn_8011EB04(void*);
 extern void* fn_801E6CA0(void*, int, int, int, int);
 extern void fn_80027730(void*, int, int);
-extern void fn_8020123C(int, void*, void*, void*);
+extern unsigned long long fn_8020123C();
 extern void fn_8016B400(void*, int, int);
 
 int fn_80095FDC(register void* object, register void* owner,

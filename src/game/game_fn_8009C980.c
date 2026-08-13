@@ -1,4 +1,4 @@
-extern void* fn_80201814(int);
+extern void* fn_80201814();
 extern int fn_8009C820(void*, int);
 
 int fn_8009C980(register void* state, register int actor_id)

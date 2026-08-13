@@ -5,7 +5,7 @@ typedef struct EffectState {
     int secondary;
 } EffectState;
 
-extern unsigned long long fn_8020123C(int, int, int, int);
+extern unsigned long long fn_8020123C();
 
 /* NonMatching: behavior-complete frontier reconstruction; MWCC removes the
  * retail redundant branch around the primary/fallback selection. */

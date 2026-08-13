@@ -28,7 +28,7 @@ extern void *fn_80201BC8();
 extern void *memset(void *dest, int value, unsigned int size);
 extern void fn_801FABA4(void *object, int value);
 extern float fn_8012B750(void *object);
-extern void fn_8011F114(void *, void *);
+extern void fn_8011F114();
 extern int fn_80038308(Owner *owner, int channel, short *value);
 extern unsigned char lbl_80312948[];
 extern void *lbl_8064D18C;

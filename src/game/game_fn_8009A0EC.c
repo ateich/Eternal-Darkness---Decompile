@@ -1,18 +1,18 @@
 extern int fn_80200C10(void*);
-extern void* fn_80201BC8(void*);
-extern void* fn_80201B54(void*);
-extern void* fn_80201B8C(void*);
+extern void* fn_80201BC8();
+extern void* fn_80201B54();
+extern void* fn_80201B8C();
 extern void fn_80128754(void*, int);
 extern void fn_8011FA8C(void*, int, int);
-extern int fn_80201EB8(void*);
+extern int fn_80201EB8();
 extern void* fn_801294DC(void*, int, int, int);
 extern void fn_80128EAC(void*);
 extern int fn_8012A1BC(void*, int);
 extern void fn_801289A0(void*);
 extern void fn_80129FD0(void*, int, int);
 extern void fn_8011ECF8(void*, void*);
-extern void fn_80201D2C(void*, int);
-extern void fn_80201D14(void*, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 extern int lbl_8064D18C;
 
 int fn_8009A0EC(register void* object, register int phase, void* event)

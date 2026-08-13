@@ -9,12 +9,12 @@ typedef struct State80096E24 {
 
 extern int lbl_8064D18C;
 
-extern int fn_80201B44(void*);
-extern void* fn_80201814(int);
+extern int fn_80201B44();
+extern void* fn_80201814();
 extern void* fn_80201B9C(void);
 extern void* fn_80201BC0(void*);
-extern State80096E24* fn_80201B8C(void*);
-extern int fn_80201EB8(void*);
+extern State80096E24* fn_80201B8C();
+extern int fn_80201EB8();
 extern u32 fn_80036D5C(void*);
 extern void fn_80036DA4(void*, u32);
 extern void fn_800359A0(void*, void*);

@@ -6,11 +6,11 @@ typedef struct State80096D58 {
 } State80096D58;
 
 extern unsigned int fn_80036D5C(void*);
-extern void* fn_80201B54(void*);
+extern void* fn_80201B54();
 extern void fn_80201B64(void*);
-extern State80096D58* fn_80201B8C(void*);
-extern void fn_80201D2C(void*, int);
-extern void fn_80201D14(void*, int);
+extern State80096D58* fn_80201B8C();
+extern void fn_80201D2C();
+extern void fn_80201D14();
 extern void fn_80201D34(void*, int);
 extern void fn_80201D1C(void*, int);
 extern void fn_8012B344(void*);

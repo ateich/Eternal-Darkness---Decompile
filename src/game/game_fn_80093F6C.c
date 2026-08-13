@@ -16,13 +16,13 @@ extern float lbl_8064EC7C;
 extern float lbl_8064ECA4;
 
 extern void* fn_80201B94(void*);
-extern void fn_8011F114(Vec3_80093F6C*, void*);
+extern void fn_8011F114();
 extern int fn_80066D04(void*, int);
-extern void fn_80201D2C(void*, int);
-extern void fn_80201D14(void*, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 extern int fn_800359A0(void*, int);
 extern int fn_80201C48(void*);
-extern void* fn_80201814(void);
+extern void* fn_80201814();
 extern void fn_802045AC(void*, Vec3_80093F6C*);
 extern int fn_80178E94(Vec3_80093F6C*, Vec3_80093F6C*);
 extern float fn_800CB444(void*, void*);

@@ -27,17 +27,17 @@ typedef struct SpawnConfig {
 extern float lbl_8064EC10;
 
 extern void* fn_80201B9C(void*);
-extern void* fn_80201B44(void);
+extern void* fn_80201B44();
 extern void fn_800DE8FC(void*, Vec3*);
-extern Runtime* fn_80201B8C(void*);
-extern void* fn_80201EB8(void*);
-extern void* fn_80201B54(void*);
-extern unsigned long long fn_8020123C(int, void*, void*, int);
+extern Runtime* fn_80201B8C();
+extern void* fn_80201EB8();
+extern void* fn_80201B54();
+extern unsigned long long fn_8020123C();
 extern void* fn_80201BC0(void*);
 extern void fn_80043F44(SpawnConfig*);
 extern int fn_800FBFB0(void);
 extern void* fn_80034708(SpawnConfig*);
-extern void* fn_80201BC8(void);
+extern void* fn_80201BC8();
 extern void fn_80201D54(void*, void*);
 extern void fn_802015A4(void*);
 extern void fn_800CCA44(void*);

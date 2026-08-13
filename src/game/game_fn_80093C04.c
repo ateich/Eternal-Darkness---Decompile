@@ -16,13 +16,13 @@ typedef struct State80093C04 {
     int value;
 } State80093C04;
 
-extern void fn_80201B54(void*);
+extern int fn_80201B54();
 extern int fn_80200C20(void*);
 extern void* fn_801294DC(void*, int, int, int);
-extern Runtime80093C04* fn_80201B8C(void*);
+extern Runtime80093C04* fn_80201B8C();
 extern State80093C04* fn_80036D38(void*);
-extern void fn_80201D2C(void*, int);
-extern void fn_80201D14(void*, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 
 void fn_80093C04(register void* object, register void* resource,
                  register void* value_source, register int* result)

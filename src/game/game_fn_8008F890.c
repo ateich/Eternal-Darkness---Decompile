@@ -12,8 +12,8 @@ extern void fn_800DD314(void*, int, int, int);
 extern void fn_800DD050(void);
 extern void fn_8008F860(void*);
 extern void fn_8020104C(int, void*, void*, int, float);
-extern void fn_80201D2C(void*, int);
-extern void fn_80201D14(void*, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 
 void fn_8008F890(void* object, void* actor)
 {

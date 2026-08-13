@@ -14,12 +14,12 @@ extern u16 lbl_8064EC84;
 extern u8 lbl_8064EC86;
 
 extern void fn_800DE354(void);
-extern void* fn_80201814(void);
-extern int fn_80201EB8(void);
-extern void* fn_80201BC8(void*);
+extern void* fn_80201814();
+extern int fn_80201EB8();
+extern void* fn_80201BC8();
 extern u16 fn_8012DBE8(void*, int, u32*);
 extern int fn_800CB098(int, int, int, int, int, int);
-extern void* fn_80201B44(void);
+extern void* fn_80201B44();
 extern int fn_80036E50(void);
 
 int fn_80093264(void)

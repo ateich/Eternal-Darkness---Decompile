@@ -16,9 +16,9 @@ typedef struct Found800955A4 {
 } Found800955A4;
 
 extern Found800955A4* fn_800935CC(int, int, u32, int);
-extern void* fn_80201BC8(void*);
-extern void fn_80201D2C(void*, int);
-extern void fn_80201D14(void*, int);
+extern void* fn_80201BC8();
+extern void fn_80201D2C();
+extern void fn_80201D14();
 extern void fn_8016B400(int, void*, int);
 
 int fn_800955A4(register void* object, register void* arg,

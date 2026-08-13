@@ -24,15 +24,15 @@ extern const double lbl_8064EC90;
 extern const float lbl_8064ECBC;
 extern const double lbl_8064ECD8;
 
-extern ObjectData80096830* fn_80201B8C(void*);
+extern ObjectData80096830* fn_80201B8C();
 extern void fn_80201E78(Vec3*, void*);
 extern void* fn_801294DC(void*, int, int, int);
 extern Candidate80096830* fn_800935CC(int, void*, void*, int);
 extern unsigned int fn_80178E94(Vec3*, Vec3*);
 extern int fn_80200C38(void*);
 extern void fn_80128C44(void*, void*, int);
-extern void fn_80201D2C(void*, int);
-extern void fn_80201D14(void*, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 extern void fn_80201138(int, void*, int, int, int, float);
 extern void fn_80204810(void);
 

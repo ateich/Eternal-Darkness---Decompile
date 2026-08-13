@@ -23,7 +23,7 @@ extern s32 fn_801A9EF4(s32, s32);
 extern void *fn_80201814();
 extern void *fn_80201BC8();
 extern float fn_8012B750(void *);
-extern void fn_8011F114(void *, void *);
+extern void fn_8011F114();
 extern unsigned long long fn_8020123C();
 
 /* NonMatching: honest reconstruction of the effect/event callback. */

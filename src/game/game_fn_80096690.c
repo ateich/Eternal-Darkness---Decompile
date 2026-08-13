@@ -2,7 +2,7 @@ extern void* fn_801A717C(void*);
 extern void fn_801A74A0(void*, void*);
 extern void fn_801A74A8(void*, void*);
 extern void fn_801A7470(void*, void*);
-extern void fn_8020123C(int, void*, void*, void*);
+extern unsigned long long fn_8020123C();
 extern void fn_801A7228(void*);
 
 void fn_80096690(register void* object, register void* value)

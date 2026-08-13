@@ -28,9 +28,9 @@ extern float lbl_8064E720, lbl_8064E724, lbl_8064E728, lbl_8064E72C;
 extern Vec3 lbl_80239060, lbl_8023906C;
 extern u32 lbl_8064E714, lbl_8064E718, lbl_8064E71C, lbl_80651958;
 
-extern s32 fn_80201EB8(s32);
+extern s32 fn_80201EB8();
 extern void fn_8012AB2C(void *);
-extern void fn_8011F114(void *, void *);
+extern void fn_8011F114();
 extern unsigned long long fn_8020123C();
 extern void fn_8020104C(s32, s32, s32, s32, float);
 extern void *fn_80201B9C();

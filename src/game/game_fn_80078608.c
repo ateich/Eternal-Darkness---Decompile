@@ -5,7 +5,7 @@ extern void *fn_80201B9C();
 extern int fn_80201B54();
 extern void *fn_80201B8C();
 extern void *fn_80201BC0(void *object);
-extern int fn_80201EB8(void *object);
+extern int fn_80201EB8();
 extern unsigned long long fn_8020123C();
 
 /* NonMatching: behavior-complete list classification; declaration/register

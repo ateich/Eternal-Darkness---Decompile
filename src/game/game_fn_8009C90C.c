@@ -5,7 +5,7 @@ typedef struct State8009C90C {
     int actors[8];
 } State8009C90C;
 
-extern void* fn_80201814(int);
+extern void* fn_80201814();
 extern int fn_8009C870(State8009C90C*, int);
 
 int fn_8009C90C(register State8009C90C* state)

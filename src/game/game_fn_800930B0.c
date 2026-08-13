@@ -3,7 +3,7 @@ typedef struct Vec3_800930B0 {
 } Vec3_800930B0;
 
 extern Vec3_800930B0 lbl_80239688;
-extern void* fn_80201EB8(void*);
+extern void* fn_80201EB8();
 extern void fn_800453E8(void*, void*, void*, void*, float, int, int, void*, int,
                         Vec3_800930B0*, int, void*);
 extern float lbl_8064EC7C;

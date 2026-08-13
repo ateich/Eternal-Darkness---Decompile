@@ -7,12 +7,12 @@ typedef unsigned char u8;
 extern void *fn_80201B94(void *object);
 extern void *fn_80201B8C();
 extern int fn_80201B54();
-extern void fn_8011F114(void *, void *);
+extern void fn_8011F114();
 extern int fn_800359A0(void *object, int kind);
 extern int fn_80201C48(void *object);
 extern void fn_800BDEE4(void *object, void *value);
-extern void fn_80201D2C(void *, int);
-extern void fn_80201D14(void *, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 
 /* NonMatching: behavior-complete activation path; remaining differences are
  * local lifetime/register allocation and two redundant retail calls/moves. */

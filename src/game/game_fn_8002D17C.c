@@ -16,15 +16,15 @@ extern int fn_80200C10(void *);
 extern void *fn_80201BC8();
 extern int fn_80201B54();
 extern void *fn_80201B8C();
-extern int fn_80201EB8(void *);
+extern int fn_80201EB8();
 extern void fn_80128754(s32, s32);
 extern void fn_8011FA8C(void*, int, int);
 extern void fn_802020B4(void*, int);
 extern void fn_8020104C(int, void *, void *, int, float);
 #define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void *)(b), (void *)(c), (int)(d), (e))
 extern void fn_8012C62C(void*, s32, void*, void*, void*, s32);
-extern void fn_80201D2C(void *, int);
-extern void fn_80201D14(void *, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 extern int fn_801E8328();
 extern void fn_80201D34(void *, s32);
 extern void fn_80201D1C(void *, s32);

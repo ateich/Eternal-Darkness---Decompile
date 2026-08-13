@@ -27,8 +27,8 @@ extern int fn_800FBFB0(void);
 extern void fn_801B05E8(s32, s32, s32, s32, s32, s32, s32, s32);
 extern s32 fn_80035FB8(void *context, char *first, char *second, char *third,
                       char *value, char *fourth);
-extern void fn_80201D2C(void *, int);
-extern void fn_80201D14(void *, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 extern void fn_801F86F4(s32 value);
 
 s32 fn_80057E3C(void *context, void *event, s32 *result)

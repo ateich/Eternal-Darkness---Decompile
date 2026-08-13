@@ -17,7 +17,7 @@ typedef struct RuntimeState {
     int value;
 } RuntimeState;
 
-extern int fn_80201B44(void);
+extern int fn_80201B44();
 
 u8 fn_8008C9BC(State* state, ObjectState* object)
 {

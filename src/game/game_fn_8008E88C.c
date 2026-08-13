@@ -14,12 +14,12 @@ extern int lbl_8064D5A8;
 extern float lbl_8064EC2C;
 extern float lbl_8064EC30;
 
-extern Runtime* fn_80201B8C(void*);
-extern void fn_8011F114(Vec3*, void*);
+extern Runtime* fn_80201B8C();
+extern void fn_8011F114();
 extern void fn_802045AC(void*, Vec3*);
 extern int fn_80201C48(void*);
-extern void fn_80201D2C(void*, int);
-extern void fn_80201D14(void*, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 extern unsigned int fn_80178E94(void*, Vec3*);
 extern void fn_80038308(void*, int, short*);
 extern void fn_80038464(void*, int, short*);

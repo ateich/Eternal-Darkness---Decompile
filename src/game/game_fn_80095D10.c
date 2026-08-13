@@ -4,8 +4,8 @@ typedef struct Runtime80095D10 {
     int* values;
 } Runtime80095D10;
 
-extern void* fn_80201BC8(void*);
-extern Runtime80095D10* fn_80201B8C(void*);
+extern void* fn_80201BC8();
+extern Runtime80095D10* fn_80201B8C();
 extern void* fn_80201B3C(void);
 extern int fn_80128EAC(void*);
 extern void fn_80038308(void*, int, short*);

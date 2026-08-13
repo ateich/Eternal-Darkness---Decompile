@@ -5,11 +5,11 @@
 typedef signed short s16;
 
 extern void* fn_801A717C(void*);
-extern int fn_80201B44(void);
-extern void* fn_80201BC8(void*);
-extern void* fn_80201B54(void*);
+extern int fn_80201B44();
+extern void* fn_80201BC8();
+extern void* fn_80201B54();
 extern void* fn_80200C20(void*);
-extern void* fn_80201814(void);
+extern void* fn_80201814();
 extern int fn_80036E50(void);
 extern int fn_80090204(void*);
 extern void fn_800389E0(void*, int, int, int);
@@ -17,10 +17,10 @@ extern void fn_801A74A0(void*, void*);
 extern void fn_801A74A8(void*, int);
 extern void fn_801A7538(void*, int);
 extern void fn_801A7518(void*, int);
-extern unsigned long long fn_8020123C(int, void*, int, void*);
+extern unsigned long long fn_8020123C();
 extern void fn_8012B344(void*);
-extern void fn_80201D2C(void*, int);
-extern void fn_80201D14(void*, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 extern void fn_801A7228(void*);
 extern int lbl_8064C578;
 

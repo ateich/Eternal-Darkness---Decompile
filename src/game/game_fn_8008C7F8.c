@@ -16,13 +16,13 @@ typedef struct Event {
     int type;
 } Event;
 
-extern void* fn_80201814(void*);
-extern void* fn_80201B8C(void*);
+extern void* fn_80201814();
+extern void* fn_80201B8C();
 extern int fn_80201B5C(void*);
 extern u8 fn_8008C9BC(State*, void*);
 extern u8 fn_8008CA28(void*, void*);
-extern void* fn_80201BC8(void*);
-extern void fn_8011F114(Vec3*, void*);
+extern void* fn_80201BC8();
+extern void fn_8011F114();
 extern void fn_8008CBA4(State*);
 
 int fn_8008C7F8(State* state, void* object, Vec3* position, void* owner,

@@ -11,13 +11,13 @@ extern void* lbl_8064C4E4;
 extern int lbl_8064A80C;
 extern Vec3 lbl_8023963C;
 extern void* fn_80201B9C(void*);
-extern void fn_8011F114(Vec3*, void*);
-extern int fn_80201B54(void*);
-extern RuntimeD9F4* fn_80201B8C(void*);
-extern void* fn_80201BC8(void*);
-extern int fn_80201EB8(void*);
+extern void fn_8011F114();
+extern int fn_80201B54();
+extern RuntimeD9F4* fn_80201B8C();
+extern void* fn_80201BC8();
+extern int fn_80201EB8();
 extern unsigned int fn_80178E94(Vec3*, Vec3*);
-extern unsigned long long fn_8020123C(int, int, int, int);
+extern unsigned long long fn_8020123C();
 extern void* fn_80201BC0(void*);
 
 int fn_8008D9F4(void* object, void* unused4, void* unused5, int flags)

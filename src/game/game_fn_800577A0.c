@@ -23,8 +23,8 @@ extern void fn_801A75A0(s32 object, u16 value);
 extern void fn_800C3FE4(void *context, s32 value, s32 object);
 extern s32 fn_80035FB8(void *context, char *first, char *second, char *third,
                       char *value, char *fourth);
-extern void fn_80201D2C(void *, int);
-extern void fn_80201D14(void *, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 extern void fn_800C2474(void *object, s32 value);
 extern void *fn_80201C48(void *value);
 extern void fn_80130434(void *object, s32 value);

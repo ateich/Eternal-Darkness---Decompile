@@ -5,8 +5,8 @@ typedef struct Runtime80095E64 {
     int* values;
 } Runtime80095E64;
 
-extern Runtime80095E64* fn_80201B8C(void*);
-extern void* fn_80201BC8(void*);
+extern Runtime80095E64* fn_80201B8C();
+extern void* fn_80201BC8();
 extern int fn_80128EAC(void*);
 
 int fn_80095E64(register void* object, register unsigned int mode)

@@ -111,7 +111,7 @@ extern void fn_80163BB4(void*, const char*, ...);
 extern void* fn_8016A784(void*, int);
 extern double fn_8016A694(void*, int);
 extern unsigned int fn_800F5C54();
-extern int fn_80201EB8(void *);
+extern int fn_80201EB8();
 extern void *fn_80201B8C();
 extern void *fn_80201BC8();
 extern void fn_80201E78(void*, void*);

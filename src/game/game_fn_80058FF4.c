@@ -38,8 +38,8 @@ extern void fn_801A74D8(void *object, u32 value);
 extern void *fn_8004918C(void);
 extern s32 fn_800C2FC4(void *context, void *event, u32 value);
 extern s32 fn_800BF848(void *context, void *event);
-extern void fn_80201D2C(void *, int);
-extern void fn_80201D14(void *, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 extern void fn_8020104C(int, void *, void *, int, float);
 #define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void *)(b), (void *)(c), (int)(d), (e))
 extern void fn_800C39D0(void *context);

@@ -28,7 +28,7 @@ extern s32 fn_800FBFB0(void);
 extern EffectState *fn_801FD6F4(void *);
 extern void *fn_80201814();
 extern void *fn_80201BC8();
-extern void fn_8011F114(void *, void *);
+extern void fn_8011F114();
 extern s32 fn_801AC908(u32, Vec3 *, s32);
 extern u32 fn_801AC8AC(u16, u8, s32, Vec3 *);
 extern void fn_801FD880(void *, u8 *);

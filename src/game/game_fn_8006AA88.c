@@ -5,8 +5,8 @@ extern void *fn_80201BC8();
 extern u32 fn_8011F950(void *object);
 extern void *fn_801294DC(void *object, s32 kind, s32 a, s32 b);
 extern void fn_801E7974(void *manager, s32 kind);
-extern void fn_80201D2C(void *, int);
-extern void fn_80201D14(void *, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 
 extern void *lbl_8064C4E0;
 extern u32 lbl_8064C8A8;

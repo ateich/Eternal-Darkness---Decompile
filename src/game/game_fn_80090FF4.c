@@ -12,7 +12,7 @@ typedef struct Object Object;
 typedef struct Actor Actor;
 typedef struct Context Context;
 
-extern void* fn_80201B54(void*);
+extern void* fn_80201B54();
 extern int fn_8011FAEC(void*);
 extern void fn_800BE010(void*, void*);
 extern int fn_80201C48(void*);

@@ -19,7 +19,7 @@ typedef struct State {
 extern int fn_80128EAC(void *);
 extern void *fn_801A7498(void *);
 extern void *fn_801A7490(void *);
-extern void fn_8011F114(void *, void *);
+extern void fn_8011F114();
 extern void *fn_80201814();
 extern void *fn_80201BC8();
 extern void *fn_80201B8C();

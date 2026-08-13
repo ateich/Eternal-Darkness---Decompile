@@ -14,8 +14,8 @@ extern void fn_8011FADC(void *object, u32 flags);
 extern void fn_8006AFA0(Vec3 *out, s32 source);
 extern void fn_8006B0A0(Vec3 *value);
 extern void fn_801E79A0(void *manager, s32 kind);
-extern void fn_80201D2C(void *, int);
-extern void fn_80201D14(void *, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 extern void fn_801593FC(s32 id);
 extern void fn_801593B4(s32 id);
 

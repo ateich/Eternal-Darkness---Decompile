@@ -4,7 +4,7 @@ extern int lbl_8064D18C;
 
 extern void fn_800EA3A0(void *object, void *event, void *state);
 extern int fn_80035628(void *object);
-extern int fn_80201EB8(void *object);
+extern int fn_80201EB8();
 extern void fn_8019CFBC(void *value, int mode);
 extern void fn_800BD2DC(void *object, void *event);
 

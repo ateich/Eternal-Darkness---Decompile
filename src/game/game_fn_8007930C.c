@@ -3,7 +3,7 @@ typedef unsigned char u8;
 
 extern void *fn_80201B8C();
 extern int fn_80201B94(void *context);
-extern void fn_8011F114(void *, void *);
+extern void fn_8011F114();
 extern void fn_80128EE4(void *object);
 extern int fn_80201C48(int value);
 extern int fn_80201B54();
@@ -29,8 +29,8 @@ extern void fn_80204230(void);
 extern void fn_802042A4(void);
 extern void fn_80128C28(void *, void (*)(void), void *);
 extern void fn_80128C44(void *, void (*)(void), void *);
-extern void fn_80201D2C(void *, int);
-extern void fn_80201D14(void *, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 
 /* NonMatching: behavior-complete object activation and callback setup. */
 int fn_8007930C(void *context, void *object)

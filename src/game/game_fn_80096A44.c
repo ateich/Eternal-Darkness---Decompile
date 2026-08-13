@@ -13,15 +13,15 @@ extern void* lbl_8064C4F0;
 extern int fn_80200C10(void*);
 extern int fn_80200C38(void*);
 extern u32 fn_80200C20(void*);
-extern void* fn_80201BC8(void*);
-extern void* fn_80201B54(void*);
-extern void* fn_80201B8C(void*);
-extern int fn_80201EB8(void*);
+extern void* fn_80201BC8();
+extern void* fn_80201B54();
+extern void* fn_80201B8C();
+extern int fn_80201EB8();
 extern void fn_8011FA8C(void*, int, u32);
 extern void* fn_801294DC(void*, int, int, int);
 extern void fn_8011FE5C(void*, int);
-extern void fn_80201D2C(void*, int);
-extern void fn_80201D14(void*, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 extern void* fn_80095D10(void*);
 extern int fn_80095E64(void*, void*);
 extern void fn_8012B324(void*);
@@ -33,7 +33,7 @@ extern void fn_80095FDC(void*, void*, void*, State80096A44*, int);
 extern void fn_80096208(void*, void*, void*, State80096A44*, int);
 extern void fn_80096348(void*, void*, void*, State80096A44*, void*);
 extern void fn_801B05B0(void*, int);
-extern void fn_8020123C(int, void*, u32, int);
+extern unsigned long long fn_8020123C();
 
 int fn_80096A44(register void* object, register int event,
                 register void* resource, register u32* result)

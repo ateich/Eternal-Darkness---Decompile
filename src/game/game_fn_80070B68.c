@@ -3,7 +3,7 @@ extern void *fn_80201B9C();
 extern int fn_80201B4C(void *);
 extern void *fn_80201BC8();
 extern void *fn_80201B8C();
-extern int fn_80201EB8(void *);
+extern int fn_80201EB8();
 extern int fn_80201B54();
 extern unsigned long long fn_8020123C();
 extern void *fn_80201BC0(void *);

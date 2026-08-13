@@ -10,7 +10,7 @@ extern int fn_80062ED0(void*, void*, void*, void*);
 extern u32 fn_80036D5C(void*);
 extern void fn_80036DA4(void*, u32);
 extern int fn_80200C20(void*);
-extern int fn_80201B44(int);
+extern int fn_80201B44();
 extern void fn_80096E24(void*);
 
 int fn_80096F04(void* unused, register void* object, void* value,

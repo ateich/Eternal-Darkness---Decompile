@@ -64,7 +64,7 @@ void *fn_80201B8C();                             /* extern */
 M2C_UNK fn_80201B9C();                              /* extern */
 u32 fn_80201BC8();                 /* extern */
 void **fn_80201C24();                            /* extern */
-int fn_80201EB8(void *);                                  /* extern */
+int fn_80201EB8();                                  /* extern */
 u8 fn_80204578();                         /* extern */
 s32 fn_80204844();                           /* extern */
 M2C_UNK fn_80205868();      /* extern */

@@ -2,21 +2,21 @@ typedef struct Vec3_80094DD0 {
     float x, y, z;
 } Vec3_80094DD0;
 
-extern void* fn_80201B44(void*);
-extern void* fn_80201814(void);
-extern void* fn_80201B8C(void*);
+extern void* fn_80201B44();
+extern void* fn_80201814();
+extern void* fn_80201B8C();
 extern int fn_80036D5C(void*);
 extern int fn_80201B5C(void*);
-extern void* fn_80201B54(void*);
-extern void fn_8011F114(Vec3_80094DD0*, void*);
+extern void* fn_80201B54();
+extern void fn_8011F114();
 extern int fn_801E2004(void*);
 extern int fn_8011F760(void*);
-extern int fn_80201EB8(void*);
+extern int fn_80201EB8();
 extern int fn_80095D10(void*);
 extern int fn_80095E64(void*, int);
 extern unsigned char fn_80204508(void*, void*);
 extern int fn_800C17EC(void*, void*, Vec3_80094DD0*, int, int);
-extern void fn_8020123C(int, void*, void*, int);
+extern unsigned long long fn_8020123C();
 
 int fn_80094DD0(register void* object, register void* resource, void* unused)
 {

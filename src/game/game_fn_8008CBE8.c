@@ -5,7 +5,7 @@ typedef struct ObjectState {
     u32* value;
 } ObjectState;
 
-extern ObjectState* fn_80201B8C(void*);
+extern ObjectState* fn_80201B8C();
 
 u32 fn_8008CBE8(void* object, u32 value)
 {

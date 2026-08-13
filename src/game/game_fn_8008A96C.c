@@ -20,15 +20,15 @@ typedef struct ObjectInfo {
     void* field90;
 } ObjectInfo;
 
-extern ObjectInfo* fn_80201B8C(void*);
+extern ObjectInfo* fn_80201B8C();
 extern void* fn_80201B94(void*);
-extern void* fn_80201B54(void*);
-extern void* fn_80201BC8(void*);
+extern void* fn_80201B54();
+extern void* fn_80201BC8();
 extern void* fn_80201C48(void*);
-extern void fn_80201D2C(void*, int);
-extern void fn_80201D14(void*, int);
-extern void* fn_80201814(void*);
-extern void fn_8011F114(Vec3*, void*);
+extern void fn_80201D2C();
+extern void fn_80201D14();
+extern void* fn_80201814();
+extern void fn_8011F114();
 extern int fn_80128EE4(void*);
 extern int fn_8008A808(void*, int);
 extern void* fn_801294DC(void*, int, int, int);

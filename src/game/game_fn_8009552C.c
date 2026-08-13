@@ -6,8 +6,8 @@ typedef struct State8009552C {
 } State8009552C;
 
 extern void* fn_800935CC(int, int, u32, int);
-extern void fn_80201D2C(void*, int);
-extern void fn_80201D14(void*, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 
 int fn_8009552C(register void* object, void* unused,
                 register State8009552C* state)

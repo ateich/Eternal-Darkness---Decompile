@@ -15,9 +15,9 @@ typedef struct ActorData800971A0 {
 extern int fn_80200C38(void*);
 extern u32 fn_80036D5C(void*);
 extern int fn_801A7498(int);
-extern void* fn_80201814(void);
-extern ActorData800971A0* fn_80201B8C(void*);
-extern void* fn_80201BC8(void*);
+extern void* fn_80201814();
+extern ActorData800971A0* fn_80201B8C();
+extern void* fn_80201BC8();
 extern int fn_80092BBC(void*, void*, void*);
 extern void fn_80064B38(void*, void*, void*);
 

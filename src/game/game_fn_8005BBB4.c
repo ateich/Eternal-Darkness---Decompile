@@ -6,7 +6,7 @@ typedef unsigned int u32;
 extern int fn_80200C10(void *);
 extern void *fn_80201BC8();
 extern int fn_80201B54();
-extern void fn_8011F114(void *, void *);
+extern void fn_8011F114();
 extern void fn_800C2528(void *context);
 extern void fn_800DC9A8(void *context);
 extern void fn_800C262C(void *context, void *object, s32 object_id,

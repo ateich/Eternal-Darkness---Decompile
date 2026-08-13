@@ -4,7 +4,7 @@ typedef signed int s32;
 
 extern s32 lbl_8064D18C;
 extern int fn_80200C38();
-extern int fn_80201EB8(void *);
+extern int fn_80201EB8();
 extern s32 fn_801A74F8(s32 value);
 extern u16 fn_801A7530(s32 value);
 extern void fn_801A7488(s32 value);

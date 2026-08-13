@@ -5,10 +5,10 @@ typedef struct RuntimeInfo80093148 {
 
 extern void* fn_80201B3C(void);
 extern int fn_800359A0(void*, void*);
-extern RuntimeInfo80093148* fn_80201B8C(void*);
+extern RuntimeInfo80093148* fn_80201B8C();
 extern void fn_800BDEE4(void*, void*);
-extern void fn_80201D2C(void*, int);
-extern void fn_80201D14(void*, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 
 int fn_80093148(register void* object, void* unused)
 {

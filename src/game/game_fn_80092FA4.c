@@ -18,8 +18,8 @@ typedef struct Entry80092FA4 {
 extern void fn_80201E78(Vec3_80092FA4*, void*);
 extern Entry80092FA4* fn_800935CC(int, Vec3_80092FA4*, u32, int);
 extern void fn_80178E94(Vec3_80092FA4*, Vec3_80092FA4*);
-extern void fn_80201D2C(void*, int);
-extern void fn_80201D14(void*, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 
 int fn_80092FA4(register void* object, void* unused,
                 register State80092FA4* state)

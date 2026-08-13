@@ -26,8 +26,8 @@ extern s32 fn_800359A0(void *, s32);
 extern void *fn_80201814();
 extern s32 fn_800601FC(void *, void *, void *);
 extern void fn_800BDEE4(void *, HandlerState *);
-extern void fn_80201D2C(void *, int);
-extern void fn_80201D14(void *, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 
 s32 fn_80060D4C(void *owner, void *resource, void *target, u32 first_mask,
                  u32 second_mask)

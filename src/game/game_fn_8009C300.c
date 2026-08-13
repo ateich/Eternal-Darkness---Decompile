@@ -34,8 +34,8 @@ extern void fn_80149CC4(void*, Vec3_8009C300*, u32, u32, int);
 extern void* fn_801D39E0(void*);
 extern void fn_801FDA18(void);
 extern void fn_8014C9F4(void);
-extern int fn_80201B54(void*);
-extern int fn_80201EB8(void*);
+extern int fn_80201B54();
+extern int fn_80201EB8();
 extern void fn_801E8328(int);
 
 void fn_8009C300(register void* object, register u32 arg2, register u32 arg3)
