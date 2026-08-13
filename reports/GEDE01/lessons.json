@@ -2,10 +2,10 @@
   "schema_version": 2,
   "scope": "Distinct MWCC code-generation behaviors documented in reports/GEDE01/progress.json open_items and docs/matching.md",
   "source_snapshot": {
-    "repository_revision": "22ae51f5d631c8f8f2a90739513f18fc4c9eedc2",
-    "next_gate": "0x80239530",
+    "repository_revision": "17672b6e91d9d26b663d20ff5b3fe20df36ddad2",
+    "next_gate": "0x8023A160",
     "reports/GEDE01/progress.json": {
-      "sha256": "00ff4c134f2b55636ecdb3c23e929ffff6232c6307b198910da37cff73483b40",
+      "sha256": "130fd373f38733d451277f16cde527ec5f321f1f2ce21780eaf71a2e01470a6d",
       "scope": "open_items"
     },
     "docs/matching.md": {
@@ -15,7 +15,7 @@
   "lessons": [
     {
       "category": "register-allocation",
-      "functions": ["fn_8000F1DC", "fn_8000F774", "fn_8000FDE8", "fn_800173CC", "fn_80020150", "fn_80026320", "fn_80026DC8", "fn_8002BFE0", "fn_8002DAE0", "fn_8002F428", "fn_8002FAE8", "fn_80031D24", "fn_80033180", "fn_80034708", "fn_800359A0", "fn_80036374", "fn_800365C8", "fn_80050B08", "fn_80052900", "fn_800539D8", "fn_800542D0", "fn_80058394", "fn_80058834", "fn_8005BCC0", "fn_8005F8D0", "fn_8006016C", "fn_800601FC", "fn_8006053C", "fn_800606BC", "fn_800607BC", "fn_80060904", "fn_80060F9C", "fn_800614A8", "fn_80063124", "fn_8006330C", "fn_80063D60", "fn_80063E64", "fn_80064B38", "fn_80064E2C", "fn_800654F8"],
+      "functions": ["fn_8000F1DC", "fn_8000F774", "fn_8000FDE8", "fn_800173CC", "fn_80020150", "fn_80026320", "fn_80026DC8", "fn_8002BFE0", "fn_8002DAE0", "fn_8002F428", "fn_8002FAE8", "fn_80031D24", "fn_80033180", "fn_80034708", "fn_800359A0", "fn_80036374", "fn_800365C8", "fn_80050B08", "fn_80052900", "fn_800539D8", "fn_800542D0", "fn_80058394", "fn_80058834", "fn_8005BCC0", "fn_8005F8D0", "fn_8006016C", "fn_800601FC", "fn_8006053C", "fn_800606BC", "fn_800607BC", "fn_80060904", "fn_80060F9C", "fn_800614A8", "fn_80063124", "fn_8006330C", "fn_80063D60", "fn_80063E64", "fn_80064B38", "fn_80064E2C", "fn_800654F8", "fn_80067858", "fn_80068674", "fn_80068AAC"],
       "precise_divergence": "Canonical MWCC rotates, swaps, or coalesces overlapping long-lived values across callee-saved GPRs or FPRs differently from retail, even when size, control flow, and relocations otherwise agree.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
@@ -26,6 +26,13 @@
       "precise_divergence": "Canonical MWCC assigns short-lived volatile integer or floating-point webs to different registers: f1/f4 instead of retail f0/f2, r3 instead of retail r5 for a converted mode, r4/r5 in the opposite roles for a zero/max temporary and current byte, or six different volatile-register choices in a branchless counter update.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80067180", "fn_800674E4", "fn_80067764", "fn_80067EB8"],
+      "precise_divergence": "Canonical GC/1.3 assigns recovered local value webs differently from retail: fn_80067180, fn_800674E4, and fn_80067EB8 retain different local registers alongside other documented divergences, while fn_80067764 differs in its allocation of the -1 and zero constants and emits one redundant global-address move.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80067180, fn_800674E4, fn_80067764, and fn_80067EB8"]
     },
     {
       "category": "register-allocation",
@@ -127,7 +134,7 @@
     },
     {
       "category": "instruction-scheduling",
-      "functions": ["fn_8000F1DC", "fn_8001E144", "fn_80026320", "fn_8002B748", "fn_80031544", "fn_80031D24", "fn_80033180", "fn_80053048", "fn_800531F0", "fn_800539D8", "fn_800542D0", "fn_8005B528", "fn_8006016C", "fn_800601FC", "fn_8006053C", "fn_800606BC", "fn_80060F9C", "fn_80063124", "fn_8006330C", "fn_80064E2C"],
+      "functions": ["fn_8000F1DC", "fn_8001E144", "fn_80026320", "fn_8002B748", "fn_80031544", "fn_80031D24", "fn_80033180", "fn_80053048", "fn_800531F0", "fn_800539D8", "fn_800542D0", "fn_8005B528", "fn_8006016C", "fn_800601FC", "fn_8006053C", "fn_800606BC", "fn_80060F9C", "fn_80063124", "fn_8006330C", "fn_80064E2C", "fn_80066BB8", "fn_80067180", "fn_80067C20", "fn_80067EB8"],
       "precise_divergence": "Equivalent stores, loads, argument setup, or temporary copies occupy a different local scheduling window from retail, sometimes shifting subsequent relocation sites despite matching behavior.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
@@ -168,6 +175,27 @@
       "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80063030"]
     },
     {
+      "category": "instruction-scheduling",
+      "functions": ["fn_800674E4", "fn_80067650"],
+      "precise_divergence": "Canonical GC/1.3 lowers equivalent packed-flag materialization or clearing differently from retail, producing 360 bytes versus 364 for fn_800674E4 and 124 bytes versus 120 for fn_80067650 while preserving the respective 20 and 4 relocation-bearing instruction counts.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800674E4 and fn_80067650"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80067BAC", "fn_80067C20"],
+      "precise_divergence": "Canonical GC/1.3 uses a different branchless signed-bound lowering for the selector update; fn_80067BAC retains retail's exact 116-byte size, while the same lowering plus pointer-reload scheduling makes fn_80067C20 276 bytes versus 272 retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80067BAC and fn_80067C20"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_800680C0", "fn_80068674"],
+      "precise_divergence": "Canonical GC/1.3 lowers the recovered twelve-slot offset walk as a pointer walk instead of retail's indexed traversal, changing the loop instruction stream even though the recursive counting and stale-entry clearing behavior is preserved.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800680C0 and fn_80068674"]
+    },
+    {
       "category": "jump-table-strategy",
       "functions": ["fn_80006F30"],
       "precise_divergence": "Semantically equivalent conditional source did not reproduce retail's sparse branch tree; expressing the result handling as a switch over -2, -1, 0, and default did.",
@@ -176,17 +204,17 @@
     },
     {
       "category": "jump-table-strategy",
-      "functions": ["fn_800361F8"],
-      "precise_divergence": "Canonical GC/1.3 lowers sparse outer cases 3, 4, 5, 6, and 12 as a binary-search tree, while retail dispatches through an owned 10-entry jump table and has three additional dispatch relocations.",
+      "functions": ["fn_800361F8", "fn_80066E78"],
+      "precise_divergence": "Canonical GC/1.3 lowers recovered sparse cases as a decision tree while retail dispatches through a jump table: fn_800361F8's outer cases 3, 4, 5, 6, and 12 use an owned 10-entry table with three additional dispatch relocations, and fn_80066E78 emits 632 bytes and 14 relocation-bearing instructions versus retail's 776 bytes and 20.",
       "workaround": null,
-      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800361F8"]
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800361F8 and fn_80066E78"]
     },
     {
       "category": "jump-table-strategy",
       "functions": ["fn_800238BC"],
       "precise_divergence": "MWCC 2.4.2 roots a switch binary-search tree at the median case and emits a bare branch without a compare for an empty case; a retail pivot below the lowest visible case exposed a hidden case -1.",
       "workaround": "Recover the hidden empty case from the median pivot and represent case -1 explicitly.",
-      "evidence": ["reports/GEDE01/progress.json: final open_items entry"]
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800238BC"]
     },
     {
       "category": "jump-table-strategy",
@@ -217,10 +245,17 @@
       "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80050B08, fn_8005EF94, and fn_800614A8"]
     },
     {
+      "category": "jump-table-strategy",
+      "functions": ["fn_80066BB8", "fn_80067858", "fn_80068290"],
+      "precise_divergence": "Canonical GC/1.3 shapes equivalent boolean and failure control flow differently from retail: fn_80066BB8 differs in boolean branching at the exact 332-byte size, fn_80067858 uses a different early-return shape and grows from 448 to 456 bytes, and fn_80068290 merges retail's duplicated failure-result paths and shrinks from 340 to 320 bytes.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80066BB8, fn_80067858, and fn_80068290"]
+    },
+    {
       "category": "float-constant-placement",
-      "functions": ["fn_8000FDE8", "fn_80015568", "fn_80015D40", "fn_800173CC", "fn_80018708", "fn_80018EF4", "fn_8001B294", "fn_8001C078", "fn_8001CA04", "fn_80026320", "fn_80026768", "fn_80026DC8", "fn_8002DAE0", "fn_8002F428", "fn_80031544", "fn_80033180", "fn_800359A0", "fn_80048ADC", "fn_80048B24", "fn_80052310", "fn_8005EC6C", "fn_8005FD84"],
+      "functions": ["fn_8000FDE8", "fn_80015568", "fn_80015D40", "fn_800173CC", "fn_80018708", "fn_80018EF4", "fn_8001B294", "fn_8001C078", "fn_8001CA04", "fn_80026320", "fn_80026768", "fn_80026DC8", "fn_8002DAE0", "fn_8002F428", "fn_80031544", "fn_80033180", "fn_800359A0", "fn_80048ADC", "fn_80048B24", "fn_80052310", "fn_8005EC6C", "fn_8005FD84", "fn_800685A4"],
       "precise_divergence": "Canonical MWCC emits a signed- or unsigned-integer conversion bias as a compiler-private literal (often in sdata2), while retail relocates against an existing shared constant; code may otherwise be identical.",
-      "workaround": "Externalize the conversion-bias constant to the retail symbol when its identity is known.",
+      "workaround": "Externalize the conversion-bias constant to the retail symbol when its identity is known and can be represented honestly; no relocation-name-only workaround is known for fn_800685A4.",
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
     },
     {
@@ -253,10 +288,10 @@
     },
     {
       "category": "stack-slot-reuse",
-      "functions": ["fn_800614A8", "fn_80063E64", "fn_800654F8"],
+      "functions": ["fn_800614A8", "fn_80063E64", "fn_800654F8", "fn_80067180", "fn_80068290", "fn_80068AAC"],
       "precise_divergence": "Unrecovered stack-local or aggregate layout changes canonical MWCC's frame and access pattern from retail, contributing to code-size and relocation-count differences in these large dispatchers.",
       "workaround": null,
-      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800614A8, fn_80063E64, and fn_800654F8"]
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800614A8, fn_80063E64, fn_800654F8, fn_80067180, fn_80068290, and fn_80068AAC"]
     },
     {
       "category": "calling-convention",
@@ -320,6 +355,20 @@
       "precise_divergence": "Repeated recovered source helpers remain out of line in canonical output, while retail's much larger main function indicates different inlining or recovered expression boundaries; generated size is 1108 bytes versus 2060 retail.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80028198"]
+    },
+    {
+      "category": "inlining",
+      "functions": ["fn_80067848"],
+      "precise_divergence": "Canonical GC/1.3 eliminates the recovered twelve-iteration empty delay loop entirely and emits only a 4-byte blr, while retail retains a 16-byte loop.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80067848; an inline-assembly optimization barrier was explicitly rejected"]
+    },
+    {
+      "category": "inlining",
+      "functions": ["fn_8006845C"],
+      "precise_divergence": "Canonical GC/1.3 keeps the recovered inner reference-removal loop compact, while retail retains a six-way unrolled inner loop; generated code is 272 bytes versus 328 retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8006845C"]
     }
   ]
 }
