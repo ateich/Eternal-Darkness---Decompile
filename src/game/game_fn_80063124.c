@@ -21,7 +21,7 @@ extern int fn_80038308(void *, int, short *);
 extern s32 fn_80038464(s32 context, s32 index, s16 *value);
 extern HandlerState *fn_80036D38(s32 context);
 extern int fn_80201B44(void);
-extern void fn_800389E0(s32 context, s32 index, s32 value, s32 active);
+extern int fn_800389E0(s32 context, s32 index, s32 value, s32 active);
 extern s32 fn_80200C20(s32 value);
 extern unsigned long long fn_8020123C();
 extern void fn_8011F778(s32 object, f32 value);

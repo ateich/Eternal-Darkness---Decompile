@@ -21,7 +21,7 @@ extern void fn_8012C62C(void *object, s32 index, u32 *a, u32 *b, u32 *c,
                        s32 count);
 extern s32 fn_80066D04(void *context, s32 index);
 extern u32 fn_80036D5C(void *context);
-extern void fn_801261F4(void *object);
+extern s32 fn_801261F4(void *object);
 extern void fn_8012F58C(void *object, s32 index, s32 a, s32 b, s32 c, s32 d);
 
 void fn_80068FE0(void *context, void *object)
