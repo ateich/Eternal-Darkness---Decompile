@@ -2,10 +2,10 @@
   "schema_version": 2,
   "scope": "Distinct MWCC code-generation behaviors documented in reports/GEDE01/progress.json open_items and docs/matching.md",
   "source_snapshot": {
-    "repository_revision": "17672b6e91d9d26b663d20ff5b3fe20df36ddad2",
-    "next_gate": "0x8023A160",
+    "repository_revision": "6cd99e0761daa2dac82fd6b069f6e78be625966b",
+    "next_gate": "0x8006E3F8",
     "reports/GEDE01/progress.json": {
-      "sha256": "130fd373f38733d451277f16cde527ec5f321f1f2ce21780eaf71a2e01470a6d",
+      "sha256": "20e174f250622b439d2eaf2ecaa2c340089ec213a25cc22852b4767d23ebca2c",
       "scope": "open_items"
     },
     "docs/matching.md": {
@@ -22,10 +22,17 @@
     },
     {
       "category": "register-allocation",
-      "functions": ["fn_8000E96C", "fn_8001CA04", "fn_80032A5C", "fn_80052CC0", "fn_800542D0", "fn_80060C28"],
+      "functions": ["fn_8000E96C", "fn_8001CA04", "fn_80032A5C", "fn_80052CC0", "fn_800542D0", "fn_80060C28", "fn_8006C9F0"],
       "precise_divergence": "Canonical MWCC assigns short-lived volatile integer or floating-point webs to different registers: f1/f4 instead of retail f0/f2, r3 instead of retail r5 for a converted mode, r4/r5 in the opposite roles for a zero/max temporary and current byte, or six different volatile-register choices in a branchless counter update.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8006B70C", "fn_8006B96C"],
+      "precise_divergence": "Canonical MWCC assigns equivalent long-lived values to different saved registers from retail: fn_8006B70C swaps r30/r31 and changes prologue scheduling, while fn_8006B96C combines different allocation with its separately documented switch-order divergence.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8006B70C and fn_8006B96C"]
     },
     {
       "category": "register-allocation",
@@ -176,10 +183,10 @@
     },
     {
       "category": "instruction-scheduling",
-      "functions": ["fn_800674E4", "fn_80067650"],
-      "precise_divergence": "Canonical GC/1.3 lowers equivalent packed-flag materialization or clearing differently from retail, producing 360 bytes versus 364 for fn_800674E4 and 124 bytes versus 120 for fn_80067650 while preserving the respective 20 and 4 relocation-bearing instruction counts.",
+      "functions": ["fn_800674E4"],
+      "precise_divergence": "Canonical GC/1.3 lowers the recovered packed-flag materialization differently from retail, producing 360 bytes versus 364 while preserving all 20 relocation-bearing instructions.",
       "workaround": null,
-      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800674E4 and fn_80067650"]
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800674E4"]
     },
     {
       "category": "instruction-scheduling",
@@ -194,6 +201,34 @@
       "precise_divergence": "Canonical GC/1.3 lowers the recovered twelve-slot offset walk as a pointer walk instead of retail's indexed traversal, changing the loop instruction stream even though the recursive counting and stale-entry clearing behavior is preserved.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800680C0 and fn_80068674"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80067650", "fn_8006ABF0"],
+      "precise_divergence": "A generic read-modify-write expression can expand a packed-flag clear, while retail clears the selected bit with one rlwinm instruction.",
+      "workaround": "Express the clear as an AND with the documented constant mask.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80067650 and fn_8006ABF0"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8006B0A0"],
+      "precise_divergence": "A non-const declaration of the shared vertical-offset float changes the placement of its load relative to the position copy and forwarding call.",
+      "workaround": "Const-qualify the shared float to preserve retail load scheduling.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8006B0A0"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8006B40C", "fn_8006B488"],
+      "precise_divergence": "Canonical MWCC schedules aggregate initialization differently from retail: fn_8006B40C moves the first descriptor load, and fn_8006B488 reorders only the prologue initializer work; both retain retail size and all relocation targets.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8006B40C and fn_8006B488"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8006B0F0", "fn_8006B21C", "fn_8006D1DC", "fn_8006DEF8"],
+      "precise_divergence": "Canonical MWCC associates pointer expressions, common subexpressions, induction updates, and their temporary registers differently from retail, changing loop or branch scheduling even when the recovered behavior and relocation targets agree.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8006B0F0, fn_8006B21C, fn_8006D1DC, and fn_8006DEF8"]
     },
     {
       "category": "jump-table-strategy",
@@ -252,11 +287,32 @@
       "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80066BB8, fn_80067858, and fn_80068290"]
     },
     {
+      "category": "jump-table-strategy",
+      "functions": ["fn_8006AF20"],
+      "precise_divergence": "Semantically equivalent switch case ordering changes MWCC's branch layout for the mode-specific height offsets.",
+      "workaround": "Preserve the documented source case order.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8006AF20"]
+    },
+    {
+      "category": "jump-table-strategy",
+      "functions": ["fn_8006B620", "fn_8006B96C"],
+      "precise_divergence": "Equivalent recovered switch bodies receive a different block order from retail, changing jump-table relocation addends even when table size is exact; fn_8006B620 has all 39 entries but different return-block targets, while fn_8006B96C also differs in switch ordering, allocation, and table addends.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8006B620 and fn_8006B96C"]
+    },
+    {
       "category": "float-constant-placement",
-      "functions": ["fn_8000FDE8", "fn_80015568", "fn_80015D40", "fn_800173CC", "fn_80018708", "fn_80018EF4", "fn_8001B294", "fn_8001C078", "fn_8001CA04", "fn_80026320", "fn_80026768", "fn_80026DC8", "fn_8002DAE0", "fn_8002F428", "fn_80031544", "fn_80033180", "fn_800359A0", "fn_80048ADC", "fn_80048B24", "fn_80052310", "fn_8005EC6C", "fn_8005FD84", "fn_800685A4"],
+      "functions": ["fn_8000FDE8", "fn_80015568", "fn_80015D40", "fn_800173CC", "fn_80018708", "fn_80018EF4", "fn_8001B294", "fn_8001C078", "fn_8001CA04", "fn_80026320", "fn_80026768", "fn_80026DC8", "fn_8002DAE0", "fn_8002F428", "fn_80031544", "fn_80033180", "fn_800359A0", "fn_80048ADC", "fn_80048B24", "fn_80052310", "fn_8005EC6C", "fn_8005FD84"],
       "precise_divergence": "Canonical MWCC emits a signed- or unsigned-integer conversion bias as a compiler-private literal (often in sdata2), while retail relocates against an existing shared constant; code may otherwise be identical.",
-      "workaround": "Externalize the conversion-bias constant to the retail symbol when its identity is known and can be represented honestly; no relocation-name-only workaround is known for fn_800685A4.",
+      "workaround": "Externalize the conversion-bias constant to the retail symbol when its identity is known and can be represented honestly.",
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "float-constant-placement",
+      "functions": ["fn_800685A4"],
+      "precise_divergence": "The function's integer-conversion bias is compiler-owned data, while its other two floating constants belong to the adjacent shared sdata2 ownership unit; conflating those ownership classes prevents a complete source-linked match.",
+      "workaround": "Define the two shared floating constants in their natural ownership unit and retain the conversion bias as compiler-owned data for fn_800685A4.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for game_fn_800685A4"]
     },
     {
       "category": "float-constant-placement",
