@@ -7,7 +7,7 @@ typedef unsigned long long u64;
 
 extern float lbl_8064E504;
 
-extern s32 fn_80200C10(void *event);
+extern int fn_80200C10(void *);
 extern void *fn_80201BC8();
 extern void *fn_80201B94(void *context);
 extern int fn_80201B54();
@@ -15,8 +15,8 @@ extern void *fn_80201B8C();
 extern void *fn_801A7490(void *object);
 extern void fn_80201DD8(void *value, void *owner);
 extern unsigned long long fn_8020123C();
-extern void fn_80201D2C(void *, s32);
-extern void fn_80201D14(void *, s32);
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern s32 fn_80070A6C(s32 value);
 extern int fn_80200C38();
 extern u32 fn_801A74C0(void *object);

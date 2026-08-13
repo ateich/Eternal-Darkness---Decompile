@@ -1,6 +1,6 @@
 extern void *fn_801A7498(void *);
 extern void *fn_801A7490(void *);
-extern void fn_8020123C(int, void *, void *, void *);
+extern unsigned long long fn_8020123C();
 
 /* NonMatching: behavior-complete event forwarding; remaining differences are
  * an equivalent swap of the argument and first-result registers. */

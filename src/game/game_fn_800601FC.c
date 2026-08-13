@@ -62,8 +62,8 @@ extern void fn_801292E0(void *, s32 *, Entry **);
 extern s32 fn_801287C4(void *, void *, void *, s32);
 extern void fn_80128C28(void *, void *, void *);
 extern void fn_80128C44(void *, void *, void *);
-extern void fn_80201D2C(void *, s32);
-extern void fn_80201D14(void *, s32);
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern int fn_800FBFB0(void);
 
 extern s32 fn_8006016C(s32, void *);

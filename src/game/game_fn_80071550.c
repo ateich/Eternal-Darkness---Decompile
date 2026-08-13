@@ -12,10 +12,10 @@ typedef struct ObjectData {
 
 extern GlobalState lbl_803003C8;
 extern void *fn_80201B9C(void);
-extern ObjectData *fn_80201B8C(void *);
+extern void *fn_80201B8C();
 extern int fn_80201EB8(void *);
-extern void *fn_80201B54(void *);
-extern void fn_8020123C(int, int, void *, int);
+extern int fn_80201B54();
+extern unsigned long long fn_8020123C();
 extern void *fn_80201BC0(void *);
 
 void fn_80071550(int target, int enabled)
@@ -28,7 +28,7 @@ void fn_80071550(int target, int enabled)
             ObjectData *data = fn_80201B8C(object);
             if (data != 0 && data->type == 0x5D) {
                 int value = fn_80201EB8(object);
-                void *owner = fn_80201B54(object);
+                void *owner = (void *)fn_80201B54(object);
                 if (value != target) {
                     enabled = 0;
                 }

@@ -29,7 +29,7 @@ extern s32 lbl_8064C878;
 extern float lbl_8064E504;
 extern float lbl_8064E54C;
 
-extern s32 fn_80200C10(void *event);
+extern int fn_80200C10(void *);
 extern void *fn_80201BC8();
 extern int fn_80201B54();
 extern void *fn_80201B8C();
@@ -50,8 +50,8 @@ extern void *fn_801294DC(void *, int, int, int);
 extern s32 fn_8012A1BC(void *object, s32 kind);
 extern void fn_80128A84(void *action, s32 index, s32 value);
 extern void fn_8012B344(void *);
-extern void fn_80201D2C(void *, s32);
-extern void fn_80201D14(void *, s32);
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern void fn_80201138(s32 kind, void *context, s32 value, s32 id,
                        s32 flags, float scale);
 extern void fn_80128C28(void *action, void (*callback)(void), s32 value);

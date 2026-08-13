@@ -15,8 +15,8 @@ extern void *fn_801294DC(void *, int, int, int);
 extern void fn_80204810(void);
 extern void fn_80128C44(s32 object, void (*callback)(void), s32 value);
 extern void fn_80128C28(s32 object, void (*callback)(void), s32 value);
-extern void fn_80201D2C(void *, s32);
-extern void fn_80201D14(void *, s32);
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 
 void fn_80066754(s32 context, void *event, s32 *result)
 {

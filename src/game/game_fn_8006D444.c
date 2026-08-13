@@ -3,7 +3,7 @@ typedef struct Result {
     void *value;
 } Result;
 
-extern Result *fn_80201B8C(void *object);
+extern void *fn_80201B8C();
 
 void *fn_8006D444(void *object)
 {

@@ -1,7 +1,7 @@
 typedef signed int s32;
 typedef unsigned char u8;
 
-extern s32 fn_80200C10(void *event);
+extern int fn_80200C10(void *);
 
 s32 fn_80055EE0(void *context, void *event)
 {

@@ -13,10 +13,10 @@ typedef struct Owner {
 } Owner;
 
 extern void *fn_80201B94(void *);
-extern void *fn_80201B54(void *);
-extern Owner *fn_80201B8C(void *);
+extern int fn_80201B54();
+extern void *fn_80201B8C();
 extern void *fn_80201C48(void *);
-extern u64 fn_8020123C(int, void *, void *, int);
+extern unsigned long long fn_8020123C();
 
 /* NonMatching: behavior-complete paired-object event setup. The remaining
  * difference is the retail compiler's redundant low-word mask on the u64
@@ -30,8 +30,8 @@ void fn_8007412C(void *object, int mode)
     u64 result;
 
     first = fn_80201B94(object);
-    second = fn_80201B54(object);
-    node = fn_80201B8C(object)->node;
+    second = (void *)fn_80201B54(object);
+    node = ((Owner *)fn_80201B8C(object))->node;
     if (mode != 0) {
         value = node->value;
     } else {

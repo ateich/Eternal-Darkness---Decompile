@@ -28,15 +28,15 @@ typedef struct EventData {
 extern const float lbl_8064E064;
 extern const float lbl_8064E0B0;
 
-extern s32 fn_80200C10(void*);
+extern int fn_80200C10(void *);
 extern int fn_80200C38();
 extern void *fn_80201B8C();
 extern int fn_80201B54();
 extern s32 fn_800460EC(void);
 extern void fn_80026070(EffectState*);
 extern void fn_80027030(void);
-extern void fn_80201D2C(void *, s32);
-extern void fn_80201D14(void *, s32);
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern u16 fn_80158234(EventData*);
 extern s32 fn_80157994(void*);
 extern void *fn_80201814();

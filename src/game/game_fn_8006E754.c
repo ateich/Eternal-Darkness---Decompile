@@ -23,19 +23,19 @@ typedef struct Owner {
     Config *config;
 } Owner;
 
-extern void *fn_80201814(void *object);
-extern void *fn_80201BC8(void *object);
+extern void *fn_80201814();
+extern void *fn_80201BC8();
 extern int fn_8006BCE4(Owner *owner);
 extern void fn_8011F104(void *object, float x, float y, float z);
 extern void fn_8012B7A0(void *object, float angle);
 extern void fn_801D13D8(void *resource, int value);
-extern void fn_8011F114(Vec3 *out, void *object);
+extern void fn_8011F114(void *, void *);
 extern Vec3 *fn_8011F770(void *object);
 extern short *fn_8006ED3C(Owner *owner, int type, short *result);
 extern void fn_8012AC74(void *object, Vec3 *value, int count);
 extern void fn_800C1B50(void *resource, int type, int value, float a, float b);
 extern void fn_8012C478(void *object, int index, int value);
-extern void *fn_80201B54(void *object);
+extern int fn_80201B54();
 extern void *fn_80158598(void *object, int value);
 extern void *fn_80201C24(void *object);
 extern void fn_80157E34(void *object, int effect, int type, void *callback, int value);
@@ -56,7 +56,7 @@ static void start_effect(void *source, void *resource_object, Config *config,
     if (effect_object == 0) {
         return;
     }
-    target = fn_80158598(fn_80201B54(resource_object), 0);
+    target = fn_80158598((void *)fn_80201B54(resource_object), 0);
     vtable = (void **)fn_80201C24(effect_object);
     fn_80157E34(target, effect, type, *(void **)((unsigned char *)*vtable + 0x18), 0);
 }

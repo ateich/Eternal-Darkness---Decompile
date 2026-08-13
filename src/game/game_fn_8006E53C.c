@@ -10,7 +10,7 @@ extern void *fn_80204844(void *heap, int size);
 extern Owner *fn_8006D444(void);
 extern int fn_8006BCE4(Owner *owner);
 extern void fn_8006D1DC(void);
-extern void *fn_80201814(void *object);
+extern void *fn_80201814();
 extern void fn_8006E754(Owner *owner, int value);
 extern void fn_8006F544(Owner *owner, int value);
 extern void fn_80070C3C(void);

@@ -10,8 +10,8 @@ typedef struct TransitionState {
 } TransitionState;
 
 extern s32 fn_800AD354(void *object);
-extern void fn_80201D2C(void *, s32);
-extern void fn_80201D14(void *, s32);
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 
 s32 fn_80054C14(void *object, TransitionState *state)
 {

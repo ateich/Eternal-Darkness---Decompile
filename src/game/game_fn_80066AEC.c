@@ -7,8 +7,8 @@ extern void *fn_801294DC(void *object, s32 type, s32 flags, s32 value);
 extern void fn_80204810(void);
 extern void fn_80128C44(void *object, void (*callback)(void), s32 value);
 extern void fn_80128C28(void *object, void (*callback)(void), s32 value);
-extern void fn_80201D2C(void *context, s32 value);
-extern void fn_80201D14(void *context, s32 value);
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 
 s32 fn_80066AEC(s32 context)
 {

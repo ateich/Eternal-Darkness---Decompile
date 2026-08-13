@@ -8,9 +8,9 @@ typedef struct Owner {
 } Owner;
 
 extern int fn_8006BCE4(Owner *owner);
-extern void *fn_80201814(void *object);
+extern void *fn_80201814();
 extern void *fn_80036D38(void);
-extern void *fn_80201B54(void *object);
+extern int fn_80201B54();
 extern void fn_8006EE9C(Owner *owner);
 extern void fn_801261F4(void *object);
 extern void fn_8011F7E0(void *object, int value);
@@ -41,7 +41,7 @@ void fn_8006E3F8(Owner *owner)
     state = ((Owner *)owner_value)->state;
     fn_80201814(((Owner *)owner_value)->resource);
     object = fn_80201814(*(void **)((unsigned char *)fn_80036D38() + 0x44));
-    other = fn_80201B54(object);
+    other = (void *)fn_80201B54(object);
     fn_8006EE9C((Owner *)owner_value);
     if (kind == 0x17) {
         fn_801261F4(lbl_8064C4E4);

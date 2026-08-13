@@ -1,6 +1,6 @@
 extern void *fn_80049220(void *, int);
 extern void *fn_80049304(void *, void *);
-extern void *fn_80201BC8(void *);
+extern void *fn_80201BC8();
 extern int fn_8011EB04(void *);
 
 int fn_80071950(void *object)

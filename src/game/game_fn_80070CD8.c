@@ -14,9 +14,9 @@ typedef struct GlobalState {
 extern GlobalState lbl_803003C8;
 extern void *lbl_8064C4E0;
 extern int lbl_8064D18C;
-extern void fn_80201B44(int);
-extern void fn_80201814(void);
-extern ObjectData *fn_80201B8C(void);
+extern int fn_80201B44(void);
+extern void *fn_80201814();
+extern void *fn_80201B8C();
 extern int fn_801E79FC(void *, int);
 extern int fn_8015E4E8(void);
 extern void *fn_8007D944(void);
@@ -30,7 +30,7 @@ int fn_80070CD8(int flags)
 {
     ObjectData *data;
 
-    fn_80201B44(flags);
+    fn_80201B44();
     fn_80201814();
     data = fn_80201B8C();
     if (flags & 4) return 1;

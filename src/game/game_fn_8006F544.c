@@ -23,14 +23,14 @@ typedef struct Runtime {
     void *object;
 } Runtime;
 
-extern void *fn_80201814(void *object);
+extern void *fn_80201814();
 extern Runtime *fn_80036D38(void);
-extern int fn_80201B54(void *object);
-extern unsigned long long fn_8020123C(int kind, void *source, int target, int value);
+extern int fn_80201B54();
+extern unsigned long long fn_8020123C();
 extern void *fn_80155DB4(void *object);
 extern void fn_80156FF4(void *object);
-extern void *fn_80201B8C(void *object);
-extern void *fn_80201BC8(void *object);
+extern void *fn_80201B8C();
+extern void *fn_80201BC8();
 extern int fn_80201EB8(void *object);
 extern void fn_8011FB54(void *object, int value);
 extern void *memset(void *dest, int value, unsigned int size);

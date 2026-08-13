@@ -5,7 +5,7 @@ typedef unsigned char u8;
 extern u32 lbl_8064D5A8;
 extern u32 lbl_8064E528;
 
-extern s32 fn_80200C10(void *event);
+extern int fn_80200C10(void *);
 extern void *fn_80201BC8();
 extern int fn_80201B54();
 extern void fn_8011E1C4(void);
@@ -19,8 +19,8 @@ extern void fn_80045A24(s32 a, s32 b);
 extern void fn_80025A78(s32 value);
 extern u32 fn_80036D5C(void *context);
 extern void fn_80036DA4(void *context, u32 flags);
-extern void fn_80201D2C(void *, s32);
-extern void fn_80201D14(void *, s32);
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern void fn_80077F90(void *object);
 extern void fn_8012B344(void *);
 

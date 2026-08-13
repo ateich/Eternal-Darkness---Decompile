@@ -31,9 +31,9 @@ char lbl_80244394[] = "Ins: Timeline Visitation";
 
 extern void fn_8004736C(int);
 extern void fn_800719D8(void);
-extern void *fn_80201B44(void);
-extern void *fn_80201814(void *);
-extern ObjectInfo *fn_80201B8C(void *);
+extern int fn_80201B44(void);
+extern void *fn_80201814();
+extern void *fn_80201B8C();
 extern void fn_8006EDA0(void *, void *);
 extern int fn_800E4834(void);
 extern void fn_800E46CC(void);
@@ -61,7 +61,7 @@ void fn_8006F6A4(Owner *owner)
         config->flags = ((config->flags >> 3) << 3) | (config->flags & 3);
         config->flags |= 0x4000;
         first = fn_80201814(fn_80201B44());
-        second = fn_80201814(fn_80201B8C(first)->owner->object);
+        second = fn_80201814(((ObjectInfo *)fn_80201B8C(first))->owner->object);
         fn_8006EDA0(first, second);
         if (fn_800E4834()) {
             fn_800E46CC();

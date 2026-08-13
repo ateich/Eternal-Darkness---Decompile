@@ -16,8 +16,8 @@ typedef struct Owner {
     Config *config;
 } Owner;
 
-extern void *fn_80201814(void *object);
-extern void *fn_80201BC8(void *object);
+extern void *fn_80201814();
+extern void *fn_80201BC8();
 extern void fn_801FAD4C(void *object);
 extern int fn_80158D38(Vec3 *value, int type, int size, Vec3 *out);
 extern void fn_8006E754(Owner *owner, int enabled);

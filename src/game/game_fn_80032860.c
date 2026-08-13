@@ -1,11 +1,11 @@
 typedef int s32;
 
-extern s32 fn_80200C10(void*);
+extern int fn_80200C10(void *);
 extern s32 fn_80200C20(void*);
 extern int fn_80201B54();
 extern int fn_80201B44(void);
-extern void fn_80201D2C(void *, s32);
-extern void fn_80201D14(void *, s32);
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 
 s32 fn_80032860(void* object, s32 action, void* event, s32* completed)
 {

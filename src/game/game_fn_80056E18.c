@@ -5,7 +5,7 @@ typedef unsigned long long u64;
 
 #pragma use_lmw_stmw on
 
-extern s32 fn_80200C10(void *event);
+extern int fn_80200C10(void *);
 extern void *fn_80201BC8();
 extern int fn_80201B54();
 extern void *fn_80201B8C();
@@ -14,8 +14,8 @@ extern int fn_80200C38();
 extern s32 fn_80063D60(void *value, void *runtime, u8 count);
 extern unsigned long long fn_8020123C();
 extern void fn_8012B344(void *);
-extern void fn_80201D2C(void *, s32);
-extern void fn_80201D14(void *, s32);
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern s32 fn_800A1060(void);
 extern u64 fn_802011D4(void *event);
 extern void fn_80066754(void *context, void *event, u32 *result);

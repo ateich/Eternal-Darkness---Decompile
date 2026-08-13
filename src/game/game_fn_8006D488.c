@@ -8,7 +8,7 @@ typedef struct Node {
     void *object;
 } Node;
 
-extern Object *fn_80201814(void *object);
+extern void *fn_80201814();
 extern Node *fn_80036D38(Object *object);
 
 Object *fn_8006D488(Object *object)

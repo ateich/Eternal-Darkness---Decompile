@@ -7,7 +7,7 @@ typedef struct Object {
 
 extern void *fn_80201B9C(void);
 extern Object *fn_80204844(void *object, s32 kind);
-extern Object *fn_80201B8C(Object *object);
+extern void *fn_80201B8C();
 extern s32 fn_8006BCE4(void *object);
 
 s32 fn_8006D4DC(s32 value)

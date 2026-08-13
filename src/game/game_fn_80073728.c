@@ -5,14 +5,14 @@ typedef unsigned int u32;
 extern u32 fn_80128EE4(void *);
 extern void *fn_801A7498(void *);
 extern void *fn_801A7490(void *);
-extern void *fn_80201814(void *);
+extern void *fn_80201814();
 extern u32 fn_8003BD48(void *, void *);
 extern void *fn_801A717C(void);
 extern void fn_8012B344(void *);
 extern void fn_801A7470(void *, int);
 extern void fn_801A74A0(void *, void *);
 extern void fn_801A74A8(void *, void *);
-extern void fn_8020123C(int, void *, void *, void *);
+extern unsigned long long fn_8020123C();
 extern void fn_801A7228(void *);
 
 u32 fn_80073728(void *object, void *argument)

@@ -1,0 +1,28 @@
+typedef unsigned char u8;
+typedef signed short s16;
+
+extern void *fn_80200C20(void *);
+extern void *fn_80201814(void *);
+extern void *fn_80201B94(void *);
+extern int fn_80036D5C(void *);
+extern void fn_80036DA4(void *, int);
+extern void *fn_80201B8C(void *);
+extern int fn_80201C50(void *);
+
+/* NonMatching: behavior-complete object initialization and state snapshot.
+ * Remaining differences are MWCC callee-saved allocation and scheduling around
+ * the nested handle-resolution calls. */
+void fn_80077880(void *object, void *state, void *handle)
+{
+    void *resolved;
+    void *secondary;
+    u8 *info;
+
+    resolved = fn_80201814(fn_80200C20(handle));
+    secondary = fn_80201B94(resolved);
+    fn_80036DA4(object, fn_80036D5C(object) | 0x80);
+    info = (u8 *)fn_80201B8C(resolved);
+    *(s16 *)((u8 *)state + 0x152) = *(s16 *)(info + 0x98);
+    *(s16 *)((u8 *)state + 0x154) = *(s16 *)(info + 0x9A);
+    *(s16 *)((u8 *)state + 0x156) = fn_80201C50(secondary);
+}

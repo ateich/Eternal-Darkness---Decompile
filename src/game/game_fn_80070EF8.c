@@ -2,8 +2,8 @@ extern void *fn_80201B9C(void);
 extern void *fn_80204844(void *, int);
 extern void *fn_8006D444(void);
 extern int fn_8006BCE4(void *);
-extern int fn_80201B54(void *);
-extern void fn_8020123C(int, int, int, int);
+extern int fn_80201B54();
+extern unsigned long long fn_8020123C();
 
 void fn_80070EF8(void)
 {

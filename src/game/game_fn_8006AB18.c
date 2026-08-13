@@ -7,7 +7,7 @@ typedef union Color {
     u8 bytes[4];
 } Color;
 
-extern void *fn_80201BC8(void);
+extern void *fn_80201BC8();
 extern s32 fn_8011F130(void);
 extern void fn_801E79A0(void *manager, s32 kind);
 extern void fn_801AC9F4(s32 kind, s32 value, s32 position, s32 count);

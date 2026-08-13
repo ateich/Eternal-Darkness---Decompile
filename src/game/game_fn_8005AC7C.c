@@ -18,7 +18,7 @@ typedef struct HandlerState {
 extern float lbl_8064E504;
 extern float lbl_8064E54C;
 
-extern s32 fn_80200C10(void *event);
+extern int fn_80200C10(void *);
 extern void *fn_80201BC8();
 extern int fn_80201B54();
 extern void *fn_80201B8C();
@@ -28,8 +28,8 @@ extern s32 fn_80128F40(void *object);
 extern unsigned long long fn_8020123C();
 extern void fn_8011FA8C(void *object, s32 value, s32 flags);
 extern void fn_800C63D8(void);
-extern void fn_80201D2C(void *, s32);
-extern void fn_80201D14(void *, s32);
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern void fn_80201138(s32 kind, void *context, s32 value, s32 id,
                        s32 flags, float scale);
 

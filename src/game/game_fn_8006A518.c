@@ -1,11 +1,11 @@
 typedef signed int s32;
 typedef unsigned int u32;
 
-extern s32 fn_80200C10();
+extern int fn_80200C10(void *);
 extern s32 fn_80200C20();
 extern s32 fn_80200C28();
 extern s32 fn_80200C38();
-extern unsigned long long fn_8020123C(s32 kind, s32 a, s32 b, s32 c);
+extern unsigned long long fn_8020123C();
 extern void fn_801A7228(s32 value);
 extern int fn_801E8328(s32 kind, s32 object);
 extern void fn_80201D34(s32 object, s32 value);
