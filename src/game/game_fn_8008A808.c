@@ -17,7 +17,7 @@ extern void fn_800360B0(void*, void*);
 extern void* fn_80201C48(void*);
 extern void* fn_80072354(void*);
 extern void fn_8011F114(Vec3*, void*);
-extern void fn_80201814(void*);
+extern void* fn_80201814(void*);
 
 /* NonMatching: honest reconstruction of the randomized range selector. */
 s32 fn_8008A808(void* object, s32 enabled)

@@ -9,7 +9,7 @@ extern void fn_8012B344(void*);
 extern void fn_801A7470(void*, int);
 extern void fn_801A74A0(void*, void*);
 extern void fn_801A74A8(void*, int);
-extern void fn_8020123C(int, void*, void*, void*);
+extern unsigned long long fn_8020123C(int, void*, void*, void*);
 extern void fn_801A7228(void*);
 
 typedef struct Runtime8008D5D4 {

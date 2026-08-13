@@ -22,7 +22,7 @@ extern void* fn_80201A84(void*);
 extern u32 fn_800FBFB0(void);
 extern int fn_8011F6A4(void*, int, int, int, void*, int);
 extern void fn_8014D478(void*, Vec3*, Vec3*, int, int, void*, int);
-extern void fn_8020123C(int, int, void*, void*);
+extern unsigned long long fn_8020123C(int, int, void*, void*);
 extern void* fn_80158598(void*, int);
 extern int fn_80157FE0(void*, int, int);
 extern void fn_80158038(void*, int);

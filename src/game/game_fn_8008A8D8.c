@@ -1,6 +1,6 @@
 typedef signed int s32;
 
-extern void fn_80201814(void*);
+extern void* fn_80201814(void*);
 extern void* fn_80201BC8(void);
 extern void* fn_801294DC(void*, s32, s32, s32);
 
