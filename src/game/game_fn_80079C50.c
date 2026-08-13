@@ -10,7 +10,8 @@ typedef struct CycleWork {
 
 extern void *fn_80200C38(int value);
 extern void *fn_80201B54(void *object);
-extern void fn_8020123C(int type, void *owner, void *active, int flags);
+extern unsigned long long fn_8020123C(int type, void *owner, void *active,
+                                     int flags);
 extern void *fn_80201814(void *object);
 
 void fn_80079C50(void *object, int unused, int value, CycleWork *work)
