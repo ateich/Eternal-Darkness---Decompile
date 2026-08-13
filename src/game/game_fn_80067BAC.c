@@ -14,7 +14,7 @@ typedef struct ObjectState {
 } ObjectState;
 
 extern s32 lbl_8064C548;
-extern ObjectState *fn_80201B8C(void *object);
+extern void *fn_80201B8C();
 
 void fn_80067BAC(void *object)
 {

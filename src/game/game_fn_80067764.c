@@ -18,8 +18,8 @@ typedef struct ObjectState {
 
 extern u8 lbl_8030FBF8[];
 extern void *fn_80201B3C(void);
-extern void *fn_80201814(s32 object_id);
-extern ObjectState *fn_80201B8C(void *object);
+extern void *fn_80201814();
+extern void *fn_80201B8C();
 extern void *memset(void *dest, int value, unsigned long size);
 
 void fn_80067764(void)

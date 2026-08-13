@@ -30,20 +30,20 @@ extern u32 lbl_8064E714, lbl_8064E718, lbl_8064E71C, lbl_80651958;
 
 extern s32 fn_80201EB8(s32);
 extern void fn_8012AB2C(void *);
-extern void fn_8011F114(Vec3 *, void *);
-extern unsigned long long fn_8020123C(s32, s32, s32, s32);
+extern void fn_8011F114(void *, void *);
+extern unsigned long long fn_8020123C();
 extern void fn_8020104C(s32, s32, s32, s32, float);
-extern s32 fn_80201B9C(void);
+extern void *fn_80201B9C(void);
 extern int fn_80038308(s32, s32, u16 *);
 extern s32 *fn_800681C8(void);
-extern s32 fn_80200C20(s32), fn_80200C38(s32);
+extern s32 fn_80200C20(s32); extern int fn_80200C38();
 extern void fn_80067D30(s32), fn_800389E0(s32, s32, s32, s32), fn_80067B6C(void);
 extern void fn_800685A4(void *, s32);
 extern void fn_8012C62C(void *, s32, u32 *, u32 *, u32 *, s32);
 extern void fn_8014CCB0(void *, u32 *, s32), fn_8014D100(void *, u32 *, s32, s32);
 extern u16 fn_800681A0(s32, s32);
-extern void *fn_80201814(s32), *fn_80201B8C(s32), *fn_80201BC8(s32);
-extern s32 fn_80201B54(s32), fn_80201BC0(s32), fn_80204508(s32, s32);
+extern void *fn_80201814(), *fn_80201B8C(), *fn_80201BC8();
+extern int fn_80201B54(), fn_80201BC0(s32), fn_80204508(s32, s32);
 extern u32 fn_80178E94(Vec3 *, Vec3 *);
 extern void fn_8013F4D0(Vec3 *, Vec3 *, Vec3 *);
 extern s32 fn_8014317C(Vec3 *, Vec3 *, void *, s32, s32);
@@ -79,7 +79,7 @@ void fn_80068AAC(s32 source, s32 object_id, void *effect, RuntimeState **state,
         return;
     }
 
-    list_item = fn_80201B9C();
+    list_item = (s32)fn_80201B9C();
     fn_80038308(object_id, 0, &result);
     objects = fn_800681C8();
     event_value = fn_80200C20(event);

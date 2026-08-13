@@ -4,18 +4,18 @@ typedef unsigned int u32;
 
 extern s32 lbl_8064D18C;
 extern s32 fn_80036D38();
-extern s32 fn_80201B54();
+extern int fn_80201B54();
 extern s32 fn_80201B94();
 extern s32 fn_80200C20();
-extern s32 fn_80200C38();
-extern s32 fn_80201B8C();
+extern int fn_80200C38();
+extern void *fn_80201B8C();
 extern s32 fn_801A717C();
 extern void fn_801A7470();
 extern void fn_801A74A0();
 extern void fn_801A74A8();
 extern unsigned long long fn_8020123C();
 extern void fn_801A7228();
-extern s32 fn_80201814();
+extern void *fn_80201814();
 extern void fn_800359A0();
 extern s32 fn_800AD2B4();
 extern s32 fn_8015C9F0();
@@ -32,7 +32,7 @@ void fn_800674E4(s32 context, s32 event)
     s32 no_target = fn_80200C38(event) == -1;
     s32 effect;
 
-    state = fn_80201B8C(context);
+    state = (s32)fn_80201B8C(context);
     if (*(u8 *)(state + 0x9F) >= 3 && *(u8 *)(state + 0x9F) < 5) {
         effect = fn_801A717C();
         fn_801A7470(effect, 0x10);

@@ -20,7 +20,7 @@ typedef struct EventState {
     u8 mode;
 } EventState;
 
-extern s32 fn_80201B54(void *object);
+extern int fn_80201B54();
 extern void fn_8006845C(void *object);
 extern void fn_80068074(void *object);
 extern void fn_80187A34(void *sound, s32 fade);

@@ -1,34 +1,40 @@
 # Signature consolidation — 2026-08-12
 
 `tools/signature_audit.py` identified the ten most-declared symbols with
-disagreeing TU-local declarations. Retail callee bodies and already-matching
-call sites establish these canonical declarations:
+disagreeing TU-local declarations across all three audit categories. Retail
+callee behavior and already-matching call sites establish the physical ABI
+shown below. The canonical source declaration is deliberately old-style where
+matched callers forward a live `r3` value between adjacent calls: strengthening
+those declarations to prototypes changes retail code generation even though
+the inferred callee ABI is known.
 
-| Declarations | Symbol | Canonical declaration |
-| ---: | --- | --- |
-| 31 | `fn_8011F114` | `void fn_8011F114(void *, void *)` |
-| 30 | `fn_80201EB8` | `int fn_80201EB8(void *)` |
-| 28 | `fn_8012B344` | `void fn_8012B344(void *)` |
-| 27 | `fn_80201D1C` | `void fn_80201D1C(void *, s32)` |
-| 27 | `fn_80201D34` | `void fn_80201D34(void *, s32)` |
-| 21 | `fn_800FBFB0` | `int fn_800FBFB0(void)` |
-| 21 | `fn_8020104C` | `void fn_8020104C(int, void *, void *, int, float)` |
-| 19 | `fn_80038308` | `int fn_80038308(void *, int, short *)` |
-| 19 | `fn_801294DC` | `void *fn_801294DC(void *, int, int, int)` |
-| 18 | `fn_8011EB04` | `int fn_8011EB04(void *)` |
+| Declarations | Symbol | Inferred callee ABI | Canonical source declaration |
+| ---: | --- | --- | --- |
+| 162 | `fn_80201814` | one integer handle, pointer result | `void *fn_80201814()` |
+| 137 | `fn_80201B8C` | one object pointer, pointer result | `void *fn_80201B8C()` |
+| 122 | `fn_80201BC8` | one object pointer, pointer result | `void *fn_80201BC8()` |
+| 104 | `fn_80201B54` | one object pointer, integer result | `int fn_80201B54()` |
+| 68 | `fn_8020123C` | four GPR arguments, 64-bit result | `unsigned long long fn_8020123C()` |
+| 52 | `fn_80201B44` | no arguments, integer result | `int fn_80201B44(void)` |
+| 36 | `fn_8011F114` | two pointer arguments, no result | `void fn_8011F114(void *, void *)` |
+| 35 | `fn_80201B9C` | no arguments, pointer result | `void *fn_80201B9C(void)` |
+| 34 | `fn_80200C38` | one event argument, integer result | `int fn_80200C38()` |
+| 33 | `fn_801E8328` | integer kind and object pointer, integer result | `int fn_801E8328()` |
 
-The short retail bodies provide particularly strong evidence: `fn_8011EB04`
-loads word `0x244` from its sole `r3` argument; `fn_8011F114` copies three
-words from `r4` to `r3`; `fn_80201D1C` stores the low byte of `r4` through
-`r3`; `fn_80201D34` stores the full word; and `fn_80201EB8` dereferences only
-its `r3` object argument. The remaining declarations follow argument use in
-their retail bodies and consistent matching callers.
+The strongest evidence comes from the short retail accessors and matching call
+chains. `fn_80201B44`, `fn_80201B54`, `fn_80201B8C`, `fn_80201BC8`, and
+`fn_80200C38` are eight-byte accessors; the object accessors consume or forward
+`r3`. `fn_8011F114` copies three words from its `r4` source to its `r3`
+destination. Matching callers consistently provide four GPR values to
+`fn_8020123C` and two to `fn_801E8328`.
 
-After each symbol was consolidated, a normal matching rebuild completed and
-the linked DOL retained SHA-1
-`ea24b6af954876ce072562ff39cdb4c81d32be1f`. The final objdiff report remains
-at 715 matching functions, 188732 matched code bytes, 21988 matched data bytes,
-and 774 complete objects. A final unlimited signature audit reports none of
-these ten symbols in its contradiction, ABI-divergent, or cosmetic-difference
-sets. `reports/GEDE01/progress.json` was not changed; its `next_gate` remains
-`lbl_80239750` / `0x80239750`.
+Each symbol was followed by a normal rebuild and a fresh objdiff report. At
+every checkpoint all 969 previously complete objects remained complete and the
+aggregate measures stayed identical: 739 matching functions, 192456 matched
+code bytes, 31598 matched data bytes, and 969 complete objects. The final
+unlimited signature audit reports none of these ten symbols in its return
+contradiction, ABI-divergent, or cosmetic-difference sets.
+
+`reports/GEDE01/progress.json` match counts were not revised. The final linked
+DOL retains SHA-1 `ea24b6af954876ce072562ff39cdb4c81d32be1f`, and `next_gate`
+is explicitly restored to `0x8023B940` for the next matching session.

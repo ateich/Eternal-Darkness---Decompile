@@ -16,7 +16,7 @@ extern void* fn_80201C24();
 extern s32 fn_80157994(void*);
 extern void fn_80157A28(void*, s32);
 extern void* fn_801D0050(s32, u32*);
-extern void* fn_80201B9C(void);
+extern void *fn_80201B9C(void);
 extern void* fn_80204844(void*, int);
 extern void fn_8006D444(void);
 extern s32 fn_8006BCB4(void);

@@ -4,9 +4,9 @@ typedef signed short s16;
 
 extern u32 lbl_8064D18C;
 extern unsigned short lbl_8064C8A0;
-extern u32 fn_80200C38(s32 event);
+extern int fn_80200C38();
 extern s32 fn_80200C20(s32 event);
-extern s32 fn_80201B54(void *object);
+extern int fn_80201B54();
 extern void *fn_801A717C(void);
 extern void fn_801A74A0(void *action, s32 value);
 extern void fn_801A74A8(void *action, s32 owner);
@@ -14,7 +14,7 @@ extern void fn_801A7538(void *action, s32 value);
 extern void fn_801A7518(void *action, s32 value);
 extern void fn_801A7588(void *action, s32 value);
 extern void fn_801A7470(void *action, s32 kind);
-extern unsigned long long fn_8020123C(s32 kind, s32 source, s32 target, s32 value);
+extern unsigned long long fn_8020123C();
 extern void fn_801A7228(void *action);
 
 void fn_80068994(void *object, s32 event)

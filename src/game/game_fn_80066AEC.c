@@ -1,8 +1,8 @@
 typedef signed int s32;
 
-extern void *fn_80201BC8(s32 context);
-extern void fn_8011F114(s32 *local, void *object);
-extern s32 fn_80201B54(s32 context);
+extern void *fn_80201BC8();
+extern void fn_8011F114(void *, void *);
+extern int fn_80201B54();
 extern void *fn_801294DC(void *object, s32 type, s32 flags, s32 value);
 extern void fn_80204810(void);
 extern void fn_80128C44(void *object, void (*callback)(void), s32 value);

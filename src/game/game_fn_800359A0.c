@@ -45,7 +45,7 @@ extern unsigned long long fn_8020123C();
 extern s32 fn_80201CD4(void*);
 extern void fn_80201E60(void*, s32);
 extern void fn_80201DD8(void*, s32);
-extern void* fn_80201B9C(void);
+extern void *fn_80201B9C(void);
 extern s32 fn_800CAF7C(void*);
 extern void *fn_80201814();
 extern void* fn_80201BC0(void*);

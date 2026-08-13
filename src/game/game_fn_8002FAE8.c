@@ -41,7 +41,7 @@ extern s32 fn_80200C10(void*); extern int fn_80200C38(); extern void fn_8020104C
 extern unsigned long long fn_8020123C(); extern void* fn_80201814(); extern int fn_80201AE4(void);
 extern int fn_80201B44(void); extern int fn_80201B54(); extern int fn_80201B5C(void*);
 #define fn_80201B5C(a) fn_80201B5C((void*)(a))
-extern void *fn_80201B8C(); extern void* fn_80201B9C(void); extern void* fn_80201BC0(void*);
+extern void *fn_80201B8C(); extern void *fn_80201B9C(void); extern void* fn_80201BC0(void*);
 extern void *fn_80201BC8(); extern void fn_80201D14(void*, s32); extern void fn_80201D1C(void *, s32);
 extern void fn_80201D2C(void *, s32); extern void fn_80201D34(void *, s32); extern void fn_80201E78(void*, void*);
 extern int fn_80201EB8(void *); extern int fn_80202160(); extern int fn_80204578();

@@ -7,7 +7,7 @@ typedef struct ObjectInfo {
     u8 *state;
 } ObjectInfo;
 
-extern ObjectInfo *fn_80201B8C(s32 object);
+extern void *fn_80201B8C();
 
 s32 fn_8006A4D4(s32 object)
 {

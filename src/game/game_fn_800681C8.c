@@ -10,7 +10,7 @@ typedef struct ObjectState {
     RuntimeObject **installed;
 } ObjectState;
 
-extern ObjectState *fn_80201B8C(void);
+extern void *fn_80201B8C();
 
 s32 *fn_800681C8(void)
 {

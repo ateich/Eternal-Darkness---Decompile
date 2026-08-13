@@ -5,7 +5,7 @@ extern s32 lbl_8064D18C;
 extern s32 fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
-extern void* fn_80201B9C(void);
+extern void *fn_80201B9C(void);
 extern void *fn_80201B8C();
 extern int fn_80201B54();
 extern int fn_80201B5C(void*);

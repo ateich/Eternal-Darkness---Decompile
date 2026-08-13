@@ -10,7 +10,7 @@ typedef struct RuntimeObject {
 typedef struct RuntimeState { RuntimeObject *runtime; } RuntimeState;
 
 const float lbl_8064E710 = 150.0f;
-extern void fn_8011F114(Vec3 *out, s32 state);
+extern void fn_8011F114(void *, void *);
 extern void fn_801AC9F4(s32 kind, s32 value, Vec3 *position, s32 count);
 extern void fn_801D38BC(s32 kind, s32 *word, s16 *half);
 extern void fn_80152404(Vec3 *position, s16 value, s32 owner, s32 kind, s32 *word);
@@ -30,7 +30,7 @@ void fn_80068870(s32 unused1, s32 state_value, RuntimeState *state, s32 owner)
     s16 half;
     void *context;
 
-    fn_8011F114(&position, state_value);
+    fn_8011F114(&position, (void *)state_value);
     fn_801AC9F4(0x3B, 0x64, &position, 5);
     position.z += lbl_8064E710;
     fn_801D38BC(2, &result_word, &half);

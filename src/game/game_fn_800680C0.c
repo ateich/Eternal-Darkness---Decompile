@@ -2,8 +2,8 @@ typedef signed int s32;
 
 extern s32 lbl_8064C89C;
 extern s32 *fn_800681C8(void);
-extern void *fn_80201814(s32 object_id);
-extern s32 fn_80201B54(void *object);
+extern void *fn_80201814();
+extern int fn_80201B54();
 
 s32 fn_800680C0(void *object, s32 excluded_id)
 {

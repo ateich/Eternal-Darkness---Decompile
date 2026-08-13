@@ -45,14 +45,14 @@ typedef struct ObjectState {
 } ObjectState;
 
 extern u32 lbl_802FC5BC[];
-extern ObjectState *fn_80201B8C(void *object);
-extern s32 fn_80201BC8(void *object);
-extern s32 fn_80201B54(void *object);
+extern void *fn_80201B8C();
+extern void *fn_80201BC8();
+extern int fn_80201B54();
 extern void *fn_80149E04(void);
 extern void fn_80147E88(RuntimeObject *object);
 extern void fn_801498AC(RuntimeObject *object, Component *component);
 extern void fn_80187968(RuntimeObject *object);
-extern int fn_801E8328(s32 kind, RuntimeObject *object);
+extern int fn_801E8328();
 extern s32 fn_801D39E0(s32 kind);
 extern void *fn_8014C68C(s32 owner, s32 kind, s32 enabled, s32 *value,
                          s32 time, s32 interval, s32 duration);
@@ -65,7 +65,7 @@ void fn_80067EB8(void *object)
     RuntimeObject **installed = state != 0 ? state->installed : 0;
 
     if (installed != 0) {
-        s32 object_state = fn_80201BC8(object);
+        s32 object_state = (s32)fn_80201BC8(object);
         RuntimeObject *runtime;
         Component *component;
         s32 value;

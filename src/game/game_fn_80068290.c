@@ -12,10 +12,10 @@ typedef struct ObjectState {
     RuntimeObject **installed;
 } ObjectState;
 
-extern s32 fn_80201BC8(void *object);
-extern ObjectState *fn_80201B8C(void *object);
-extern s32 fn_80201B54(void *object);
-extern void fn_8011F114(void *result, s32 state);
+extern void *fn_80201BC8();
+extern void *fn_80201B8C();
+extern int fn_80201B54();
+extern void fn_8011F114(void *, void *);
 extern void fn_80200C20(s32 event);
 extern u32 fn_80036D5C(void *object);
 extern s32 fn_80066D04(void *object, s32 index);
@@ -33,10 +33,10 @@ s32 fn_80068290(void *object, s32 event, s32 *result)
     s32 owner_id;
     unsigned char local[8];
 
-    state = fn_80201BC8(object);
+    state = (s32)fn_80201BC8(object);
     object_state = fn_80201B8C(object);
     owner_id = fn_80201B54(object);
-    fn_8011F114(local, state);
+    fn_8011F114(local, (void *)state);
     fn_80200C20(event);
 
     if ((fn_80036D5C(object) & 0x80) != 0) {
