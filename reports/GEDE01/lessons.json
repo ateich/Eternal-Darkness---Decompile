@@ -2,10 +2,10 @@
   "schema_version": 2,
   "scope": "Distinct MWCC code-generation behaviors documented in reports/GEDE01/progress.json open_items and docs/matching.md",
   "source_snapshot": {
-    "repository_revision": "2359900f3d12822a8ea4dbc300106986c41b93d2",
-    "next_gate": "0x800813D0",
+    "repository_revision": "b7df1f466fe55a0f68127023e98739b3db9aae10",
+    "next_gate": "0x80093C04",
     "reports/GEDE01/progress.json": {
-      "sha256": "a4ef663e5218c6d42bd9fa38dda2a9d5c065f4492d1f696682978003508e5183",
+      "sha256": "e62d46ad5900364474be49e6e416a677044f58974d0d60eb840aef2abf0a4070",
       "scope": "open_items"
     },
     "docs/matching.md": {
@@ -437,6 +437,76 @@
       "category": "float-constant-placement",
       "functions": ["fn_8007B2F4", "fn_8007B540", "fn_8007B640", "fn_8007B828", "fn_8007BA3C"],
       "precise_divergence": "MWCC emits six-byte aggregate initializers under compiler-local symbols such as @4 and @5, while retail relocations name split shared symbols; the instruction bytes can otherwise be identical.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80087BA8", "fn_80087D64", "fn_80087EC4", "fn_80088298", "fn_80088A04", "fn_80088D04", "fn_80088F08", "fn_80088F4C", "fn_80089A34", "fn_8008A0B4", "fn_8008A2E0", "fn_8008A96C", "fn_8008ABD4", "fn_8008AE40", "fn_8008C7F8", "fn_8008D31C", "fn_8008D4B4", "fn_8008D5D4", "fn_8008D6E4", "fn_8008D9F4", "fn_8008DBA8", "fn_8008DD78", "fn_8008E110", "fn_8008E294", "fn_80092D90"],
+      "precise_divergence": "Declaration order and local lifetime boundaries make canonical MWCC rotate or otherwise reassign callee-saved and stack-backed value webs relative to retail, sometimes changing frame size or nearby scheduling while preserving the recovered behavior.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80093264"],
+      "precise_divergence": "Canonical MWCC swaps the otherwise equivalent loop pointer and index registers relative to retail; the function remains size-exact with all relocations equal.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80093264"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80088844", "fn_8008CA84", "fn_8008DD78", "fn_8008DF64", "fn_8008E110", "fn_8008E294", "fn_8008E430", "fn_8008E810", "fn_8008F064", "fn_80092D90", "fn_800930B0"],
+      "precise_divergence": "Canonical MWCC schedules equivalent address, aggregate-copy, floating-point, argument, condition, or temporary-register operations differently from retail, including integer and stack argument setup for the documented ten-argument effect call.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80087A24", "fn_80087BA8", "fn_80087D64", "fn_80087EC4", "fn_80088298", "fn_80088E44", "fn_8008D6E4"],
+      "precise_divergence": "Canonical MWCC lowers or schedules indexed byte stores and indexed address calculations differently from retail even when the surrounding reconstructed state update is equivalent.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80088060", "fn_80088A04"],
+      "precise_divergence": "Canonical MWCC schedules the signed random-remainder arithmetic differently from retail in randomized state and angle selection paths.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80088060 and fn_80088A04"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8008A5B8", "fn_8008A6F8", "fn_8008A96C", "fn_8008ABD4", "fn_8008AE40", "fn_8008C7F8", "fn_8008D6E4", "fn_8008D9F4", "fn_8008DBA8", "fn_8008E430", "fn_8008E71C", "fn_8008E810"],
+      "precise_divergence": "Equivalent comparisons, compound conditions, branches, and fallback paths receive a different MWCC lowering or block schedule from retail; documented instances include a reversed comparison operand and one redundant retail branch.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80090FF4"],
+      "precise_divergence": "Canonical MWCC lowers the recovered branchless signed-short clamp differently from retail while preserving the exact 304-byte size and all 11 relocation-bearing instructions.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80090FF4"]
+    },
+    {
+      "category": "jump-table-strategy",
+      "functions": ["fn_80088060"],
+      "precise_divergence": "Canonical MWCC lowers the recovered mode-classification switch differently from retail, contributing to a 532-byte generated function versus 568 bytes in retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80088060"]
+    },
+    {
+      "category": "float-constant-placement",
+      "functions": ["fn_800886D8", "fn_80088F4C", "fn_800934A0"],
+      "precise_divergence": "MWCC relocates an otherwise instruction-identical signed- or unsigned-integer conversion bias against a compiler-local anonymous symbol instead of retail's named shared constant.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800886D8, fn_80088F4C, and fn_800934A0"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_80087D64", "fn_80089A34", "fn_8008A0B4", "fn_8008A2E0", "fn_8008A5B8", "fn_8008A96C", "fn_8008ABD4", "fn_8008D6E4", "fn_8008E294", "fn_80092D90"],
+      "precise_divergence": "Recovered aggregate or stack-local lifetimes produce a different MWCC frame layout or slot assignment from retail, with documented instances changing generated function size as well as local access scheduling.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
     }
