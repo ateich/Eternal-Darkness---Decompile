@@ -47,7 +47,7 @@ extern const Pair lbl_80243CE4[];
 extern const Pair lbl_80243D24[];
 extern u8 lbl_8030F820[];
 
-extern void *fn_80201B9C(void);
+extern void *fn_80201B9C();
 extern int fn_80201B54();
 extern void *fn_80201BC8();
 extern void *fn_80201B8C();

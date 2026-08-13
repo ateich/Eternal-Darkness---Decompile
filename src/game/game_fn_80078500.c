@@ -5,10 +5,10 @@ typedef struct Vec3 {
 } Vec3;
 
 extern int fn_80128EAC(void *object);
-extern void fn_8011F114(Vec3 *output, void *object);
+extern void fn_8011F114(void *, void *);
 extern int fn_80128F40(void *object);
 extern int fn_8012A1BC(void *object, int kind);
-extern void *fn_80201B8C(void *object);
+extern void *fn_80201B8C();
 extern Vec3 *fn_80137FB8(void *handle);
 extern void fn_80211A6C(const Vec3 *a, const Vec3 *b, Vec3 *output);
 extern float fn_80211B08(const Vec3 *value);

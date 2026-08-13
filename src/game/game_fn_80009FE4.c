@@ -4,7 +4,7 @@ typedef int s32;
 
 extern const char lbl_8023BEF8[];
 extern double lbl_8064DCF8;
-extern int fn_80201B44(void);
+extern int fn_80201B44();
 extern s32 fn_8016A598(void*);
 extern void fn_80163BB4(void*, const char*, ...);
 extern unsigned long long fn_8020123C();

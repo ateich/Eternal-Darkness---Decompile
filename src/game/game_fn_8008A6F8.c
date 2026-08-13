@@ -1,0 +1,54 @@
+typedef unsigned char u8;
+typedef signed int s32;
+
+extern void* lbl_8064D18C;
+extern u8 lbl_803003C8[];
+extern float lbl_8064EBC0;
+extern float lbl_8064EBC4;
+
+extern void* fn_80201B8C(void*);
+extern void* fn_80201BC8(void*);
+extern s32 fn_80201B54(void*);
+extern s32 fn_80201EB8(void*);
+extern void fn_801E8328(s32, void*);
+extern void* fn_801294DC(void*, s32, s32, s32);
+extern void fn_80128C28(void*, void*, s32);
+extern void fn_8008A8D8(void);
+extern void fn_800389E0(void*, s32, s32, s32);
+extern void fn_80201138(s32, void*, s32, s32, s32, float);
+extern void fn_80201D2C(void*, s32);
+extern void fn_80201D14(void*, s32);
+
+/* NonMatching: honest reconstruction of the object-spawn callback. The
+ * remaining differences are one comparison operand order and scheduling of
+ * the zero-valued fifth GPR argument around the conditional float load. */
+void fn_8008A6F8(void* object)
+{
+    void* resource;
+    s32 object_id;
+    void* created;
+    s32 zero;
+    float scale;
+
+    fn_80201B8C(object);
+    resource = fn_80201BC8(object);
+    object_id = fn_80201B54(object);
+    if ((s32)lbl_8064D18C != fn_80201EB8(object)) {
+        fn_801E8328(2, object);
+        return;
+    }
+
+    created = fn_801294DC(resource, 0x18, 0x20, 0xA);
+    if (created == 0)
+        return;
+    fn_80128C28(created, fn_8008A8D8, object_id);
+    fn_800389E0(object, 0, 0, 1);
+    if (*(s32*)(lbl_803003C8 + 8) == 5)
+        scale = lbl_8064EBC0;
+    else
+        scale = lbl_8064EBC4;
+    zero = 0;
+    fn_80201138(0x11, object, 8, -1, zero, scale);
+    fn_80201D2C(object, 8);
+    fn_80201D14(object, 1);
+}

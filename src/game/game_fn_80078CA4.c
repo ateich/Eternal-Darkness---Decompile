@@ -1,6 +1,6 @@
 extern int fn_80200C20(void *handle);
-extern void *fn_80201814(int handle);
-extern int fn_80201B44(void *object);
+extern void *fn_80201814();
+extern int fn_80201B44();
 extern int fn_80201B5C(void *object);
 extern int fn_80036E50(void *object);
 

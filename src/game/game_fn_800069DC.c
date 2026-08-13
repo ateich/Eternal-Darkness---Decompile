@@ -18,7 +18,7 @@ extern unsigned char lbl_8023BAA0[];
 extern void fn_80006974(void);
 extern void* fn_80144628(int, void*, int);
 extern void fn_801446D4(void*, void (*)(void));
-extern int fn_80201B44(void);
+extern int fn_80201B44();
 extern void *fn_80201814();
 extern u32 fn_8020216C(void);
 extern int fn_801E79FC(void*, int);

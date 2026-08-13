@@ -7,7 +7,7 @@ extern void* fn_80158598(int, int);
 extern void fn_80158668(void*);
 extern int fn_801E8328();
 extern void *fn_80201814();
-extern int fn_80201B44(void);
+extern int fn_80201B44();
 
 s32 fn_8000EDF0(void* script)
 {

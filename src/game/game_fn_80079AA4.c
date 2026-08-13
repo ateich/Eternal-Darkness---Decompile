@@ -1,8 +1,8 @@
 extern float lbl_8064E938;
 extern void *fn_80200C38(int value);
-extern int fn_80201B54(void *object);
+extern int fn_80201B54();
 extern void *fn_801A7498(void *object);
-extern void *fn_80201814(void *object);
+extern void *fn_80201814();
 extern int fn_80128EAC(void *object);
 extern int fn_80201B5C(void *object);
 extern int fn_80204508(void *object, void *other);

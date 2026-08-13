@@ -13,10 +13,10 @@ typedef struct Vector {
     float z;
 } Vector;
 
-extern void* fn_80201B9C(void);
+extern void *fn_80201B9C();
 extern void* fn_80204844(void*, int);
 extern State* fn_8006D444(void);
-extern void* fn_80201814(void*);
+extern void *fn_80201814();
 extern int fn_80038308(void*, int, s16*);
 extern int fn_80038464(void*, int, s16*);
 extern int fn_800460EC(void);

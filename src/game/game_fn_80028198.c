@@ -50,7 +50,7 @@ extern void *fn_80201814();
 extern void* fn_80201C24();
 extern s32 fn_80157BC4(void);
 extern s32 fn_80157BF4(s32);
-extern int fn_80201B44(void);
+extern int fn_80201B44();
 extern void fn_80205680(void*, void*, s32);
 extern s32 fn_8015821C(s32);
 extern int fn_801E79FC(void*, int);

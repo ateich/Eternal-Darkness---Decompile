@@ -17,7 +17,7 @@ typedef struct GlobalState {
 
 extern GlobalState lbl_803003C8;
 
-extern void *fn_80201B9C(void);
+extern void *fn_80201B9C();
 extern void *fn_80204844(void *, int);
 extern Owner *fn_8006D444(void);
 extern int fn_8006BCE4(Owner *);

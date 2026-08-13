@@ -19,16 +19,16 @@ typedef struct State {
 extern int fn_80128EAC(void *);
 extern void *fn_801A7498(void *);
 extern void *fn_801A7490(void *);
-extern void fn_8011F114(Vec3 *, void *);
-extern void *fn_80201814(void *);
-extern void *fn_80201BC8(void *);
-extern void *fn_80201B8C(void *);
+extern void fn_8011F114(void *, void *);
+extern void *fn_80201814();
+extern void *fn_80201BC8();
+extern void *fn_80201B8C();
 extern int fn_80074440(void *, void *, State *, Vec3 *);
 extern void fn_80129BE4(void *);
 extern int fn_80074310(void *, Vec3 *, State *, Vec3 *);
 extern void fn_8011F6F0(void *);
 extern void *fn_80137E60(void *, Vec3 *);
-extern unsigned long long fn_8020123C(int, void *, void *, int);
+extern unsigned long long fn_8020123C();
 
 /* NonMatching: behavior-complete paired-object setup and routing. Retail and
  * base have the same 15 call/data relocations; the remaining differences are

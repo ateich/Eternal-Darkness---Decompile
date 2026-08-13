@@ -1,18 +1,18 @@
 typedef unsigned short u16;
 typedef int s32;
 
-extern s32 fn_80201B54(void *);
+extern int fn_80201B54();
 extern void *fn_8004918C(void);
-extern void *fn_80201BC8(void *);
+extern void *fn_80201BC8();
 extern void *fn_80158598(s32, s32);
 extern s32 fn_80157FE0(void *, s32, s32);
-extern void fn_80201814(s32);
+extern void *fn_80201814();
 extern void *fn_80201C24(void);
 extern u16 fn_80157948(void *);
 extern u16 fn_80157994(void *);
 extern s32 fn_802053B0(void *, void *);
-extern void fn_80201D2C(void *, s32);
-extern void fn_80201D14(void *, s32);
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern void *fn_801294DC(void *, s32, s32, s32);
 extern void fn_80128C28(void *, void *, s32);
 extern void fn_80128C44(void *, void *, s32);

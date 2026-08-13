@@ -12,7 +12,7 @@ extern u8 lbl_802FC5BC[];
 
 extern s32 fn_801A7498(void *);
 extern void *fn_8004914C(void *);
-extern void *fn_80201B9C(void *);
+extern void *fn_80201B9C();
 extern void *fn_80204844(void *, s32);
 extern s32 fn_8011F6A4(void *, s32, s32, s32, void *, s32);
 extern void *fn_8006D444(void *);
@@ -20,11 +20,11 @@ extern void fn_801AC9F4(s32, s32, Vec3 *, s32);
 extern s32 fn_800FBFB0(void);
 extern void fn_8014D478(s32, Vec3 *, Vec3 *, s32, s32, void *, s32);
 extern s32 fn_801A9EF4(s32, s32);
-extern void fn_80201814(void *);
-extern void *fn_80201BC8(void);
+extern void *fn_80201814();
+extern void *fn_80201BC8();
 extern float fn_8012B750(void *);
-extern void fn_8011F114(Vec3 *, void *);
-extern void fn_8020123C(s32, s32, s32, s32, s32);
+extern void fn_8011F114(void *, void *);
+extern unsigned long long fn_8020123C();
 
 /* NonMatching: honest reconstruction of the effect/event callback. */
 s32 fn_8007D4D8(void *unused, void *handle)

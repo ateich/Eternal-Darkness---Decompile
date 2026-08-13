@@ -12,13 +12,13 @@ typedef struct State {
 extern int fn_80128EAC(void *);
 extern void *fn_801A7498(void *);
 extern void *fn_801A7490(void *);
-extern void *fn_80201814(void *);
-extern void *fn_80201B8C(void *);
-extern void *fn_80201BC8(void *);
-extern void fn_8011F114(Vec3 *, void *);
+extern void *fn_80201814();
+extern void *fn_80201B8C();
+extern void *fn_80201BC8();
+extern void fn_8011F114(void *, void *);
 extern unsigned int fn_80178E94(const Vec3 *, const Vec3 *);
 extern void fn_80128BE4(void *);
-extern unsigned long long fn_8020123C(int, void *, void *, int);
+extern unsigned long long fn_8020123C();
 extern void fn_8011FA8C(void *, int, int);
 
 /* NonMatching: behavior-complete paired-object distance event handler. The

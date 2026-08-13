@@ -6,7 +6,7 @@ typedef struct GlobalState {
 } GlobalState;
 
 extern GlobalState lbl_803003C8;
-extern void *fn_80201B9C(void);
+extern void *fn_80201B9C();
 
 void fn_80071A58(u8 *flags)
 {

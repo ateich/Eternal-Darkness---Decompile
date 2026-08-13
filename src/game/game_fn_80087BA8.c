@@ -18,8 +18,8 @@ typedef struct Work {
 
 extern void* fn_8006ED3C(Work*, int, int*);
 extern int fn_8006D548(int, int, int, float*, int, int, int);
-extern void* fn_80201814(int);
-extern void* fn_80201BC8(void);
+extern void *fn_80201814();
+extern void *fn_80201BC8();
 extern u8 fn_8012B8A8(void*, float*);
 extern int lbl_8064C824;
 extern int fn_801A6D94(int);

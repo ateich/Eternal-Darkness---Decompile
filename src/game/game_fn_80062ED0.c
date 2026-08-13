@@ -23,7 +23,7 @@ extern void *fn_80201814();
 extern void *fn_80201BC8();
 extern f32 fn_8012B750(s32 value);
 extern s32 fn_80204508(s32 context, s32 value);
-extern int fn_80201B44(void);
+extern int fn_80201B44();
 extern void *fn_801294DC(void *, int, int, int);
 #define fn_801294DC(a, b, c, d) fn_801294DC((void *)(a), (b), (c), (d))
 extern void fn_800359A0(s32 context, s32 value);

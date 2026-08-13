@@ -6,7 +6,7 @@ typedef struct Object {
     u8 kind;
 } Object;
 
-extern void *fn_80201B9C(void);
+extern void *fn_80201B9C();
 extern void *fn_80204844(void *context, s32 kind);
 extern Object *fn_8006D444(void *resource);
 

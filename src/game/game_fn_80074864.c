@@ -28,7 +28,7 @@ typedef struct Status {
 } Status;
 
 extern int fn_800FBFB0(void);
-extern World *fn_80201B8C(void *);
+extern void *fn_80201B8C();
 extern Info *fn_80072354(void *);
 extern void fn_800360B0(void *, Status *);
 extern int fn_80066D04(void *, int);

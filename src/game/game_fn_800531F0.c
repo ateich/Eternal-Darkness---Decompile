@@ -106,7 +106,7 @@ extern void* fn_800E4594(s32);
 extern void fn_802367B0(void*, void*);
 extern void fn_80054700(void);
 extern void fn_80048620(s32);
-extern int fn_80201B44(void);
+extern int fn_80201B44();
 extern void fn_801D0D30(void);
 extern void fn_80046C98(s32);
 

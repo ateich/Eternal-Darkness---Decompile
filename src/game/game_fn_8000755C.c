@@ -86,7 +86,7 @@ extern s32 fn_800CF220(void*, s32, s32, s32, s32, s32, float, float);
 extern s32 fn_800CE914(void*, Point16*, Point16*, s32);
 extern int fn_801E8328();
 extern void fn_800CDD84(void*);
-extern int fn_80201B44(void);
+extern int fn_80201B44();
 extern void* fn_80158598(int, int);
 extern void fn_80158668(void);
 extern void fn_801586CC(void*, s32, void*, void*);

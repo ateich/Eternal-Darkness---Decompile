@@ -105,7 +105,7 @@ typedef struct Object {
 
 extern const char lbl_8023BEF8[];
 extern s32 lbl_8064D18C;
-extern void *fn_80201B9C(void);
+extern void *fn_80201B9C();
 extern s32 fn_8016A598(void*);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void* fn_8016A784(void*, int);

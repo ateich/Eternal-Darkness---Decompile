@@ -8,10 +8,10 @@ typedef struct State {
 extern int fn_80128EAC(void *);
 extern void *fn_801A7498(void *);
 extern void *fn_801A7490(void *);
-extern void *fn_80201814(void *);
-extern void *fn_80201B8C(void *);
+extern void *fn_80201814();
+extern void *fn_80201B8C();
 extern void fn_80128BE4(void *);
-extern unsigned long long fn_8020123C(int, void *, void *, int);
+extern unsigned long long fn_8020123C();
 
 /* NonMatching: behavior-complete paired-object activation handler. Retail and
  * base are equal-sized with identical relocations; MWCC assigns the two

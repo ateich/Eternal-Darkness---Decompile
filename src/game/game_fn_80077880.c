@@ -2,11 +2,11 @@ typedef unsigned char u8;
 typedef signed short s16;
 
 extern void *fn_80200C20(void *);
-extern void *fn_80201814(void *);
+extern void *fn_80201814();
 extern void *fn_80201B94(void *);
 extern int fn_80036D5C(void *);
 extern void fn_80036DA4(void *, int);
-extern void *fn_80201B8C(void *);
+extern void *fn_80201B8C();
 extern int fn_80201C50(void *);
 
 /* NonMatching: behavior-complete object initialization and state snapshot.

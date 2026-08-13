@@ -4,7 +4,7 @@ extern s32 lbl_8064D18C;
 extern char lbl_80243EDC[];
 
 extern void *fn_801E741C(char *name);
-extern int fn_80201B44(void);
+extern int fn_80201B44();
 extern s32 fn_802066E0(void *object, void *value);
 extern void fn_8011E26C(s32 value);
 

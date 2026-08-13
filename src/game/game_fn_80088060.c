@@ -6,7 +6,7 @@ typedef struct Work {
     u8 pad38[0x38]; int object_id; u8 pad3C[0xC4 - 0x3C]; Owner* owner;
 } Work;
 
-extern void* fn_80201814(int);
+extern void *fn_80201814();
 extern int lbl_8064C824;
 extern void fn_801A6E04(int);
 extern void* fn_8004918C(void);

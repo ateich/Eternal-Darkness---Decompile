@@ -1,12 +1,12 @@
 typedef struct Vec3 { float x, y, z; } Vec3;
 typedef unsigned char u8;
 
-extern u8 *fn_80201B8C(void *context);
+extern void *fn_80201B8C();
 extern int fn_80201B94(void *context);
-extern void fn_8011F114(Vec3 *out, void *object);
+extern void fn_8011F114(void *, void *);
 extern void fn_80128EE4(void *object);
 extern int fn_80201C48(int value);
-extern int fn_80201B54(void *context);
+extern int fn_80201B54();
 extern int fn_80079008(void *context, void *object);
 extern void *fn_801294DC(void *object, int kind, int flags, int value);
 extern void *fn_801A717C(void);

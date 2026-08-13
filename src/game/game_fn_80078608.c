@@ -1,12 +1,12 @@
 typedef unsigned char u8;
 
 extern int lbl_8064D18C;
-extern void *fn_80201B9C(void *object);
-extern void *fn_80201B54(void *object);
-extern void *fn_80201B8C(void *object);
+extern void *fn_80201B9C();
+extern int fn_80201B54();
+extern void *fn_80201B8C();
 extern void *fn_80201BC0(void *object);
 extern int fn_80201EB8(void *object);
-extern long long fn_8020123C(int kind, void *owner, void *entry, int flags);
+extern unsigned long long fn_8020123C();
 
 /* NonMatching: behavior-complete list classification; declaration/register
  * ordering is still under investigation. */
@@ -15,7 +15,7 @@ int fn_80078608(void *object, int *total, void **type3, void **type4,
 {
     void *item = fn_80201B9C(object);
     int found = 0;
-    void *owner = fn_80201B54(object);
+    void *owner = (void *)fn_80201B54(object);
     u8 *state = fn_80201B8C(object);
 
     *type6 = 0;
@@ -29,7 +29,7 @@ int fn_80078608(void *object, int *total, void **type3, void **type4,
         u8 *info = fn_80201B8C(item);
         if (info != 0 && fn_80201EB8(item) == lbl_8064D18C &&
             info[0x9E] == 2) {
-            void *entry = fn_80201B54(item);
+            void *entry = (void *)fn_80201B54(item);
             if (((int)fn_8020123C(0x4E, owner, entry, 0) & -1) != 0) {
                 switch (info[0x9F]) {
                 case 3:

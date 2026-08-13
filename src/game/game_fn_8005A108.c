@@ -86,7 +86,7 @@ extern void fn_8014D478(void *object, Vec3 *a, Vec3 *b, s32 c, s32 d,
                         void *data, s32 e);
 extern void fn_800CEA1C(s32 kind, s32 value, Vec3 *a, Vec3 *b, s32 c, s32 d,
                         void *data, float x, float y, float z);
-extern int fn_80201B44(void);
+extern int fn_80201B44();
 extern u64 fn_802011D4(void *event);
 
 s32 fn_8005A108(void *context, void *event, u32 *result)

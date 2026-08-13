@@ -13,7 +13,7 @@ typedef struct ScreenPosition {
     int z;
 } ScreenPosition;
 
-extern void* fn_80201B9C(void);
+extern void *fn_80201B9C();
 extern void* fn_80204844(void*, int);
 extern void* fn_8006D444(void);
 extern int fn_8006D344(void*, int, int);

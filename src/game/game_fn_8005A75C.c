@@ -33,7 +33,7 @@ extern int fn_80200C10(void *);
 extern void *fn_80201BC8();
 extern int fn_80201B54();
 extern void *fn_80201B8C();
-extern int fn_80201B44(void);
+extern int fn_80201B44();
 extern void fn_801D0D30(s32 value);
 extern u32 fn_80036D5C(void *context);
 extern void fn_80036DA4(void *context, u32 flags);

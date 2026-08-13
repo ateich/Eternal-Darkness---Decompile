@@ -5,7 +5,7 @@ typedef struct Owner {
     void *resource;
 } Owner;
 
-extern void *fn_80201B9C(void);
+extern void *fn_80201B9C();
 extern void *fn_80204844(void *heap, int size);
 extern Owner *fn_8006D444(void);
 extern int fn_8006BCE4(Owner *owner);

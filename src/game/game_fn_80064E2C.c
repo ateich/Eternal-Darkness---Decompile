@@ -24,7 +24,7 @@ extern s32 fn_801A7488(s32 event);
 extern void fn_801A7744(EventPosition *position, s32 event);
 extern s32 fn_801A7498(s32 event);
 extern int fn_80201B54();
-extern int fn_80201B44(void);
+extern int fn_80201B44();
 extern u32 fn_801A74C0(s32 event);
 extern void *fn_80201814();
 extern s32 fn_80071D5C(void *object);

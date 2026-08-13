@@ -12,17 +12,17 @@ typedef struct CallbackObject {
 } CallbackObject;
 
 extern void *fn_801A7498(void *);
-extern void *fn_80201814(void);
+extern void *fn_80201814();
 extern void *fn_801A7778(void *);
 extern void *fn_802053B0(void *, void *);
-extern CallbackOwner *fn_80201B8C(void *);
+extern void *fn_80201B8C();
 extern void *fn_80201C24(void *);
 extern u16 fn_80157994(void *);
 extern u16 fn_80157948(void *);
 extern void fn_80204EC8(void *, void *);
 extern void fn_801E8328(s32, void *);
 extern void fn_80157A28(void *, s32);
-extern void fn_8020123C(s32, void *, void *, void *);
+extern unsigned long long fn_8020123C();
 extern void fn_80157C98(void *, s32, s32);
 
 s32 fn_8007CFB0(void *unused, void *object)

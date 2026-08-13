@@ -11,7 +11,7 @@ typedef struct ObjectData {
 } ObjectData;
 
 extern GlobalState lbl_803003C8;
-extern void *fn_80201B9C(void);
+extern void *fn_80201B9C();
 extern void *fn_80201B8C();
 extern int fn_80201EB8(void *);
 extern int fn_80201B54();

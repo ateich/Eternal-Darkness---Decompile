@@ -13,21 +13,20 @@ extern const float lbl_8064E948;
 extern const float lbl_8064E94C;
 
 extern void *fn_80201B94(void *object);
-extern void *fn_80201B8C(void *object);
-extern void *fn_80201BC8(void *object);
+extern void *fn_80201B8C();
+extern void *fn_80201BC8();
 extern void *fn_80201C48(void *object);
-extern void *fn_80201814(void *object);
-extern void fn_80201D2C(void *object, int value);
-extern void fn_80201D14(void *object, int value);
+extern void *fn_80201814();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern int fn_80079008(void *object, void *target);
 extern int fn_8007930C(void *object, void *target, void *extra);
 extern void fn_800359A0(void *object, int value);
-extern void fn_8011F114(Vec3 *out, void *object);
+extern void fn_8011F114(void *, void *);
 extern unsigned int fn_80178E94(Vec3 *first, Vec3 *second);
 extern int fn_800CA7D4(void *owner, void *object, void *argument,
                       void *target, int type, int enabled);
-extern unsigned long long fn_8020123C(int type, void *owner, void *object,
-                                     int flags);
+extern unsigned long long fn_8020123C();
 extern int fn_8003E0E4(void *object, Vec3 *position, float first,
                       float second, int enabled);
 extern int fn_80204434(void *object, Vec3 *position, float value,

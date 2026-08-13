@@ -31,7 +31,7 @@ char lbl_80244394[] = "Ins: Timeline Visitation";
 
 extern void fn_8004736C(int);
 extern void fn_800719D8(void);
-extern int fn_80201B44(void);
+extern int fn_80201B44();
 extern void *fn_80201814();
 extern void *fn_80201B8C();
 extern void fn_8006EDA0(void *, void *);

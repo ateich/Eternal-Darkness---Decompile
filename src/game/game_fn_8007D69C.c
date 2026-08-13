@@ -7,7 +7,7 @@ typedef struct Description {
     u16 *values;
 } Description;
 
-extern void *fn_80201BC8(void);
+extern void *fn_80201BC8();
 extern void *fn_80049220(void *, s32);
 extern void *fn_80049304(void *, void *);
 extern s32 fn_8011EB14(void *);

@@ -1,6 +1,6 @@
 extern int lbl_8064D18C;
-extern void *fn_80201BC8(void *object);
-extern int fn_80201B54(void *object);
+extern void *fn_80201BC8();
+extern int fn_80201B54();
 extern int fn_80201EB8(void *object);
 extern int fn_80079008(void *object, void *resource);
 extern void fn_800CA2C8(void *object);
@@ -14,8 +14,8 @@ extern void fn_801287C4(void *action, void (*callback)(void *), void *arg, int v
 extern void fn_800389E0(void *object, int, int, int);
 extern void fn_80204810(void *object);
 extern void fn_80128A84(void *action, int, int);
-extern void fn_80201D2C(void *object, int);
-extern void fn_80201D14(void *object, int);
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern void fn_80201138(int, void *, int, int, int, float);
 
 /* NonMatching: instruction-identical; the split TU gives MWCC's generated

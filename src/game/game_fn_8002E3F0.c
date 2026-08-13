@@ -15,7 +15,7 @@ extern void fn_8020104C(int, void *, void *, int, float);
 #define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void *)(b), (void *)(c), (int)(d), (e))
 extern void fn_80201D2C(void *, int); extern void fn_80201D14(void *, int);
 extern void* fn_801A717C(void); extern void fn_801A74A0(void*,s32); extern void fn_801A74A8(void*,s32); extern void fn_801A7538(void*,s32);
-extern void *fn_80201814(); extern int fn_80201B44(void); extern s32 fn_80071DD8(void); extern s32 fn_801CEB2C(s32);
+extern void *fn_80201814(); extern int fn_80201B44(); extern s32 fn_80071DD8(void); extern s32 fn_801CEB2C(s32);
 extern s32 fn_801D38E8(s32); extern int fn_80035628(void*); extern s32 fn_801D1B10(s16,s32,s32,u8);
 extern void fn_801A7518(void*,s32); extern void fn_801A7588(void*,s32); extern void fn_80149A68(void*,ShortVector*,s32,s32,s32);
 extern void fn_801A764C(void*,FloatVector*); extern void fn_801A74D8(void*,s32); extern void fn_801A7668(void*,s32); extern void fn_801A7670(void*,s32);

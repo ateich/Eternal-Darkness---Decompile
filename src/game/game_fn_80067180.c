@@ -32,7 +32,7 @@ extern void fn_8014CBE8();
 extern s32 fn_80067728();
 extern s32 fn_80205868();
 extern void fn_8012C5B0();
-extern int fn_80201B44(void);
+extern int fn_80201B44();
 extern s32 fn_8015C910();
 extern void fn_8015C8A4();
 extern unsigned long long fn_8020123C();

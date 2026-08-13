@@ -10,7 +10,7 @@ extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void *fn_80201814();
 extern void fn_800355F0(void*, s32);
-extern int fn_80201B44(void);
+extern int fn_80201B44();
 extern void fn_800427E0(s32);
 
 s32 fn_80012E34(void* script)

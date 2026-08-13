@@ -16,7 +16,7 @@ extern void fn_8012B344(void *);
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);
 extern int fn_80200C38();
-extern int fn_80201B44(void);
+extern int fn_80201B44();
 extern void fn_801D0D30(s32 value);
 extern u64 fn_802011D4(void *event);
 extern void *fn_8004918C(void);
