@@ -29,9 +29,9 @@ typedef struct Runtime8009F700 {
 
 extern Context8009F700* fn_8006ED98(State8009F700*);
 extern void fn_8006DEF8(State8009F700*, int, void*, void*, int);
-extern void fn_80201814(void*);
+extern void* fn_80201814(void*);
 extern Runtime8009F700* fn_80201B8C(void);
-extern void fn_8020123C(int, int, void*, int);
+extern unsigned long long fn_8020123C(int, int, void*, int);
 
 int fn_8009F700(register State8009F700* state)
 {

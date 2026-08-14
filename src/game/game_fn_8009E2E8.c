@@ -23,7 +23,7 @@ extern int fn_80070CD8(void);
 extern void* fn_80201B9C(void);
 extern void* fn_80204844(void*, int);
 extern void* fn_80201B54(void*);
-extern void fn_8020123C(int, void*, void*, int);
+extern unsigned long long fn_8020123C(int, void*, void*, int);
 
 int fn_8009E2E8(register State8009E2E8* state)
 {

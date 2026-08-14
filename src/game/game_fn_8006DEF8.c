@@ -14,7 +14,7 @@ typedef struct SlotView {
     u8 count;
 } SlotView;
 
-extern void fn_8006ED3C(Owner *owner, u32 value, u32 *index);
+extern void* fn_8006ED3C(Owner *owner, u32 value, u32 *index);
 
 void fn_8006DEF8(Owner *owner, u32 value, u32 first, u32 second, u16 third)
 {

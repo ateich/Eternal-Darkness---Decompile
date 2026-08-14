@@ -6,7 +6,7 @@ extern void* fn_8006D444(void);
 extern void* fn_80201B54(void*);
 extern int fn_801E79FC(void*, int);
 extern int fn_8006BCB4(void*);
-extern void fn_8020123C(int, int, void*, int);
+extern unsigned long long fn_8020123C(int, int, void*, int);
 extern void* lbl_8064C4E0;
 
 int fn_800A0B68(void* state)

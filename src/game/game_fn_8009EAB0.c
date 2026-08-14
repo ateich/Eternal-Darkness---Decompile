@@ -40,7 +40,7 @@ extern void* fn_8007D944(void);
 extern int fn_8015E4E8(void);
 extern int fn_800460EC(void);
 extern int fn_800467F0(void*, int);
-extern void fn_8020123C(int, int, void*, int);
+extern unsigned long long fn_8020123C(int, int, void*, int);
 extern void* lbl_8064D18C;
 
 int fn_8009EAB0(register State8009EAB0* state)
