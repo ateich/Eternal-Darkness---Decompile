@@ -13,7 +13,7 @@ typedef struct Range800A4798 {
 } Range800A4798;
 
 extern int fn_801A74C0(void*);
-extern Runtime800A4798* fn_80201B8C(void*);
+extern Runtime800A4798* fn_80201B8C();
 extern void fn_80038464(void*, int, short*);
 extern u8 fn_801A7768(void*);
 extern int fn_801A7760(void*);

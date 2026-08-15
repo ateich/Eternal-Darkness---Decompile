@@ -15,11 +15,11 @@ typedef struct Context800A197C {
     Transform800A197C* transform;
 } Context800A197C;
 
-extern void* fn_80201B9C(void);
+extern void* fn_80201B9C();
 extern void* fn_80204844(void*, int);
 extern Context800A197C* fn_8006D444(void);
-extern void* fn_80201814(void*);
-extern void* fn_80201BC8(void);
+extern void* fn_80201814();
+extern void* fn_80201BC8();
 extern void fn_8011F104(void*, float, float, float);
 extern void fn_8012B7A0(void*, float);
 extern void fn_801D13D8(void*, int);

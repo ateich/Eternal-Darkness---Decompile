@@ -1,13 +1,13 @@
 typedef unsigned int u32;
 typedef unsigned long long u64;
 
-extern void* fn_80201B9C(void*);
+extern void* fn_80201B9C();
 extern void* fn_80204844(void*, int);
 extern void* fn_8006D444(void);
-extern void* fn_80201B54(void*);
+extern void* fn_80201B54();
 extern int fn_801E79FC(void*, int);
 extern int fn_8006BCB4(void*);
-extern u64 fn_8020123C(int, int, void*, int);
+extern u64 fn_8020123C();
 extern void* lbl_8064C4E0;
 
 int fn_800A0C0C(void* state)

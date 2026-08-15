@@ -26,15 +26,15 @@ typedef struct LinkedValue { u8 pad00[0x18]; int value; } LinkedValue;
 
 #pragma use_lmw_stmw on
 
-extern void* fn_80201B9C(void*);
+extern void* fn_80201B9C();
 extern void* fn_80204844(void*, int);
 extern Context* fn_8006D444(void);
 extern void fn_801A5C30(int);
-extern void* fn_80201814(void*);
-extern void* fn_80201BC8(void*);
+extern void* fn_80201814();
+extern void* fn_80201BC8();
 extern void fn_8014C23C(int, int, int);
 extern void fn_8012C478(void*, int, int);
-extern void* fn_80201B54(void*);
+extern void* fn_80201B54();
 extern void* fn_80158598(void*, int);
 extern LinkedInfo* fn_80201C24(void*);
 extern void fn_80157E34(void*, int, int, int, int);

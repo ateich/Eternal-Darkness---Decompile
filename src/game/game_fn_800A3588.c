@@ -12,7 +12,7 @@ typedef struct Object800A3588 {
     u8 enabled;
 } Object800A3588;
 
-extern void* fn_80201B54(void*);
+extern void* fn_80201B54();
 extern int fn_800A1B90(void*, void*, void*);
 extern void fn_80201E78(Vec800A3588*, void*);
 extern void* fn_801A717C(void);
@@ -24,7 +24,7 @@ extern void fn_801A7588(void*, int);
 extern void fn_801A764C(void*, Vec800A3588*);
 extern u8 fn_80204508(void*, void*);
 extern void fn_801A7470(void*, int);
-extern unsigned long long fn_8020123C(int, void*, void*, void*);
+extern unsigned long long fn_8020123C();
 extern void fn_801A7228(void*);
 
 /*

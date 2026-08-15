@@ -5,7 +5,7 @@ typedef struct Object800A4724 {
     int child;
 } Object800A4724;
 
-extern void* fn_80201814(int);
+extern void* fn_80201814();
 extern int fn_800A4368(Object800A4724*, int);
 
 int fn_800A4724(Object800A4724* object)

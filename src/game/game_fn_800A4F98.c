@@ -6,8 +6,8 @@ typedef struct Runtime800A4F98 {
 } Runtime800A4F98;
 
 extern int lbl_8064C544;
-extern void* fn_80201814(void*);
-extern Runtime800A4F98* fn_80201B8C(void*);
+extern void* fn_80201814();
+extern Runtime800A4F98* fn_80201B8C();
 
 int fn_800A4F98(int mode)
 {

@@ -1,7 +1,7 @@
 extern void fn_80201B94(void);
 extern int fn_80201C48(void);
-extern void* fn_80201814(void);
-extern int fn_80201BC8(void);
+extern void* fn_80201814();
+extern int fn_80201BC8();
 
 int fn_800A1CD0(void)
 {

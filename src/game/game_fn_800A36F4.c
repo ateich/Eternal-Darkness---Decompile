@@ -4,8 +4,8 @@ typedef struct Vec800A36F4 { float x, y, z; } Vec800A36F4;
 typedef struct Matrix800A36F4 { float v[3][4]; } Matrix800A36F4;
 typedef struct Object800A36F4 { u8 pad0[0x160]; void* active; } Object800A36F4;
 
-extern void* fn_80201BC8(void*);
-extern void fn_8011F114(Vec800A36F4*, void*);
+extern void* fn_80201BC8();
+extern void fn_8011F114();
 extern void fn_80211A6C(Vec800A36F4*, void*, Vec800A36F4*);
 extern int fn_800A4F44(Vec800A36F4*, float);
 extern void fn_80211AAC(Vec800A36F4*, Vec800A36F4*);

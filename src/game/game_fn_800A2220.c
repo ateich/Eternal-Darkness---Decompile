@@ -17,7 +17,7 @@ typedef struct Object800A2220 {
 } Object800A2220;
 
 extern Source800A2220* fn_80200C38(void*);
-extern void* fn_80201B54(void*);
+extern void* fn_80201B54();
 extern int fn_801D137C(void*);
 extern void fn_800A45B0(Object800A2220*, void*);
 

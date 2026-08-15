@@ -8,8 +8,8 @@ typedef struct Vec3 {
 extern unsigned char lbl_8031F7C0[];
 extern int lbl_8064C9FC;
 extern void* fn_80201B3C(void);
-extern void* fn_80201BC8(void*);
-extern void fn_80201B44(void);
+extern void* fn_80201BC8();
+extern int fn_80201B44();
 extern void fn_801D15C8(void);
 extern void fn_801F7C78(void);
 extern void* memcpy(void*, const void*, unsigned int);

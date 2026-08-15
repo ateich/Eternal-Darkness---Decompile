@@ -1,10 +1,10 @@
 typedef unsigned long long u64;
 
-extern void* fn_80201B9C(int);
+extern void* fn_80201B9C();
 extern int fn_80201B5C(void*);
 extern int fn_80201EB8(void*);
-extern void* fn_80201B54(void*);
-extern u64 fn_8020123C(int, int, void*, int);
+extern void* fn_80201B54();
+extern u64 fn_8020123C();
 extern void* fn_80201BC0(void*);
 
 void fn_800A18AC(register int owner)

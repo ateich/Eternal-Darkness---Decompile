@@ -43,15 +43,15 @@ typedef struct Info800A1278 {
 } Info800A1278;
 
 extern Context800A1278* fn_8006ED3C(State800A1278*, int, int*);
-extern void* fn_80201814(u32);
-extern void* fn_80201BC8(void*);
+extern void* fn_80201814();
+extern void* fn_80201BC8();
 extern Vec800A1278* fn_8011F770(void*);
-extern void fn_8011F114(Vec800A1278*, void*);
+extern void fn_8011F114();
 extern void fn_80128EE4(void*);
 extern void fn_80211A48(const Vec800A1278*, const Vec800A1278*, Vec800A1278*);
 extern Vec800A1278* fn_8011F130(void*);
 extern void fn_8012AC74(void*, Vec800A1278*, int);
-extern Info800A1278* fn_80201B8C(void*);
+extern Info800A1278* fn_80201B8C();
 extern Inner800A1278* fn_80036D38(void*);
 extern void fn_802020B4(void*, int);
 extern void fn_801A5C30(int);

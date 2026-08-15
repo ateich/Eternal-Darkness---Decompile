@@ -15,7 +15,7 @@ typedef struct Result {
     unsigned short pad;
 } Result;
 
-extern Owner *fn_80201B8C(void *);
+extern Owner *fn_80201B8C();
 extern void *memcpy(void *, const void *, unsigned int);
 
 unsigned short fn_800BB450(void *output, void *object)

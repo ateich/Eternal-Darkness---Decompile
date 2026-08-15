@@ -28,12 +28,12 @@ typedef struct Info800A15C0 {
 extern Context800A15C0* fn_8006ED98(State800A15C0*);
 extern u32 fn_8011E190(int);
 extern void fn_8006DEF8(State800A15C0*, u32, void*, void*, int);
-extern State800A15C0* fn_80201814(u32);
-extern Info800A15C0* fn_80201B8C(void*);
+extern State800A15C0* fn_80201814();
+extern Info800A15C0* fn_80201B8C();
 extern Inner800A15C0* fn_80036D38(void*);
 extern void fn_802020B4(void*, int);
 extern void fn_801A5C30(int);
-extern u64 fn_8020123C(int, int, u32, int);
+extern u64 fn_8020123C();
 
 int fn_800A15C0(register State800A15C0* state)
 {

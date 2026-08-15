@@ -1,7 +1,7 @@
 extern void* fn_80201B3C(void*);
 extern int fn_80036E50(void*);
-extern void* fn_80201B44(void);
-extern unsigned long long fn_8020123C(int, void*, void*, int);
+extern void* fn_80201B44();
+extern unsigned long long fn_8020123C();
 
 void fn_800A7F1C(void* object)
 {

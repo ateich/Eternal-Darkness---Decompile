@@ -27,14 +27,14 @@ typedef struct State800A0324 {
 } State800A0324;
 
 extern Vec800A0324 lbl_802396D4;
-extern void* fn_80201814(int);
-extern void* fn_80201BC8(void*);
-extern void fn_8011F114(Vec800A0324*, void*);
+extern void* fn_80201814();
+extern void* fn_80201BC8();
+extern void fn_8011F114();
 extern Object800A0324* fn_80036D38(void*);
 extern u32 fn_80178F14(int, int, int, int, int, int);
 extern void fn_80067180(void*);
-extern void* fn_80201B54(void*);
-extern unsigned long long fn_8020123C(int, void*, void*, int);
+extern void* fn_80201B54();
+extern unsigned long long fn_8020123C();
 extern void fn_8009EF8C(State800A0324*);
 
 int fn_800A0324(State800A0324* state)

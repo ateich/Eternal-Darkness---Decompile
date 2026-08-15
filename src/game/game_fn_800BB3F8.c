@@ -5,7 +5,7 @@ typedef struct Message {
 } Message;
 
 extern void *memcpy(void *, const void *, unsigned int);
-extern void *fn_80201B44(void);
+extern void *fn_80201B44();
 extern void fn_800CDE80(void *, unsigned int, float, int);
 
 unsigned short fn_800BB3F8(void *input, unsigned int flags)

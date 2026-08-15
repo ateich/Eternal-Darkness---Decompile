@@ -1,6 +1,6 @@
-extern void* fn_80201814(void*);
+extern void* fn_80201814();
 extern int fn_80201B5C(void);
-extern unsigned long long fn_8020123C(int, void*, void*, void*);
+extern unsigned long long fn_8020123C();
 
 void fn_800A37CC(void* arg0, void* arg1, void* arg2)
 {

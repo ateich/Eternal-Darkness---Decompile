@@ -16,14 +16,14 @@ typedef struct Context800A1438 {
 
 extern int fn_80070A6C(int);
 extern int fn_800462C8(int);
-extern void* fn_80201B9C(void);
+extern void* fn_80201B9C();
 extern void* fn_80204844(void*, int);
 extern Context800A1438* fn_8006D444(void);
-extern void* fn_80201B54(void*);
+extern void* fn_80201B54();
 extern int fn_80070CD8(int);
 extern int fn_801E79FC(void*, int);
 extern void fn_801E79A0(void*, int);
-extern u64 fn_8020123C(int, int, void*, void*);
+extern u64 fn_8020123C();
 extern void* lbl_8064C4E0;
 
 int fn_800A1438(void)

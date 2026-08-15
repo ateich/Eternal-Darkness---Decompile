@@ -3,14 +3,14 @@ typedef struct Vec3 {
 } Vec3;
 
 extern void* fn_801A717C(void);
-extern void* fn_80201B44(void);
+extern void* fn_80201B44();
 extern void fn_801A74A0(void*, void*);
 extern void fn_801A74A8(void*, void*);
 extern void fn_801A7538(void*, int);
 extern void fn_801A7518(void*, int);
 extern void fn_801A7470(void*, int);
 extern void fn_801A764C(void*, Vec3*);
-extern unsigned long long fn_8020123C(int, void*, void*, void*);
+extern unsigned long long fn_8020123C();
 extern void fn_801A7228(void*);
 
 void fn_800A7F8C(void* object, Vec3* position, int kind)

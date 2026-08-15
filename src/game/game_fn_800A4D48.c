@@ -11,7 +11,7 @@ typedef struct Object800A4D48 {
     void* handle;
 } Object800A4D48;
 
-extern void fn_8011F114(Vec3_800A4D48*);
+extern void fn_8011F114();
 extern int fn_801AC908(void*, Vec3_800A4D48*, int);
 extern void fn_800A4C98(Object800A4D48*, void*);
 

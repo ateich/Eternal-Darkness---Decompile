@@ -17,8 +17,8 @@ extern void fn_80128C44(void*, void (*)(void), int);
 extern void fn_80128C28(void*, void (*)(void), int);
 extern void fn_801292E0(void*, int*, CallbackEntry**);
 extern void fn_801287C4(void*, int (*)(void), int, int);
-extern void fn_80201D2C(void*, int);
-extern void fn_80201D14(void*, int);
+extern void fn_80201D2C();
+extern void fn_80201D14();
 
 void fn_800A80CC(int index, void* object, void* source, EffectState* state)
 {

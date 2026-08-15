@@ -60,7 +60,7 @@ extern float lbl_8064EE90;
 extern float lbl_8064EE94;
 extern double lbl_8064EE98;
 
-extern Context800A2B8C* fn_80201B8C(void);
+extern Context800A2B8C* fn_80201B8C();
 extern void* fn_80035628(void*);
 extern void fn_801857B4(Action800A2B8C*);
 extern void fn_801D38BC(void*, u32*, s16*);

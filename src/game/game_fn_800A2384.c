@@ -8,7 +8,7 @@ typedef struct Object800A2384 {
 
 extern void fn_800A4368(Object800A2384*, void*);
 extern int fn_800A30AC(Object800A2384*);
-extern int fn_80201B44(void);
+extern int fn_80201B44();
 extern int fn_801A7498(void*);
 extern void fn_800A30B8(Object800A2384*, int);
 

@@ -25,9 +25,9 @@ typedef struct Context800A1724 {
 } Context800A1724;
 
 extern Context800A1724* fn_8006ED98(State800A1724*);
-extern void* fn_80201814(u32);
-extern void* fn_80201BC8(void*);
-extern void fn_8011F114(Vec800A1724*, void*);
+extern void* fn_80201814();
+extern void* fn_80201BC8();
+extern void fn_8011F114();
 extern Vec800A1724* fn_8011F770(void*);
 extern void fn_8012AC74(void*, Vec800A1724*, int);
 

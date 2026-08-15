@@ -17,7 +17,7 @@ typedef struct Object800A397C {
 
 extern float lbl_8064EEA8;
 extern int lbl_8064D18C;
-extern void fn_8011F114(Vec800A397C*, void*);
+extern void fn_8011F114();
 extern void fn_801AAE68(float, int, int, int, Vec800A397C*, int, int, int,
                         u16, int);
 

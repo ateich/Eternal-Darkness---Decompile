@@ -11,8 +11,8 @@ typedef struct OuterState {
 } OuterState;
 
 extern void* lbl_8064C98C;
-extern void* fn_80201814(void*);
-extern OuterState* fn_80201B8C(void*);
+extern void* fn_80201814();
+extern OuterState* fn_80201B8C();
 
 int fn_800ACFE8(void)
 {

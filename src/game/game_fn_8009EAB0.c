@@ -32,15 +32,15 @@ typedef struct Context8009EAB0 {
     u32 flags;
 } Context8009EAB0;
 
-extern void* fn_80201B44(void);
-extern void* fn_80201814(void*);
-extern void* fn_80201B8C(void*);
+extern void* fn_80201B44();
+extern void* fn_80201814();
+extern void* fn_80201B8C();
 extern Context8009EAB0* fn_8006ED3C(State8009EAB0*, int, int*);
 extern void* fn_8007D944(void);
 extern int fn_8015E4E8(void);
 extern int fn_800460EC(void);
 extern int fn_800467F0(void*, int);
-extern unsigned long long fn_8020123C(int, int, void*, int);
+extern unsigned long long fn_8020123C();
 extern void* lbl_8064D18C;
 
 int fn_8009EAB0(register State8009EAB0* state)

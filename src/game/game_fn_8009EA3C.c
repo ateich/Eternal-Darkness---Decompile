@@ -19,9 +19,9 @@ typedef struct State8009EA3C {
     Work8009EA3C* work;
 } State8009EA3C;
 
-extern void* fn_80201B44(void);
-extern void* fn_80201814(void*);
-extern void* fn_80201B8C(void*);
+extern void* fn_80201B44();
+extern void* fn_80201814();
+extern void* fn_80201B8C();
 extern Context8009EA3C* fn_8006ED3C(State8009EA3C*, int, int*);
 extern void fn_800A509C(int);
 extern int* lbl_8064C5A8;

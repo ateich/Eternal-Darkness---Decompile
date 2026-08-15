@@ -14,13 +14,13 @@ extern float lbl_8064EEC8;
 extern float lbl_8064EECC;
 
 extern void* fn_80200C38(void*);
-extern Runtime800A3D90* fn_80201B8C(void*);
+extern Runtime800A3D90* fn_80201B8C();
 extern int fn_801A7770(void*);
 extern int fn_800A4EC8(void*, void*);
 extern int fn_800A2068(void*, void*);
 extern void fn_80066888(void*, void*, float, float);
 extern void fn_800A4978(void*, void*, Runtime800A3D90*);
-extern void* fn_80201B54(void*);
+extern void* fn_80201B54();
 extern void fn_80066754(void*, void*, void*);
 extern void fn_801F74C8(int, int, int);
 extern void fn_801441C0(int, int, int);

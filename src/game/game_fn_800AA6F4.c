@@ -20,9 +20,9 @@ typedef struct Outer {
 } Outer;
 
 extern CallbackState* fn_801FD6F4(void*);
-extern void* fn_80201814(void*);
-extern void* fn_80201BC8(void*);
-extern Outer* fn_80201B8C(void*);
+extern void* fn_80201814();
+extern void* fn_80201BC8();
+extern Outer* fn_80201B8C();
 extern void* fn_8011F130(void*);
 extern void fn_801FDEB4(void*, void*);
 extern void fn_801FDF74(void*, int);

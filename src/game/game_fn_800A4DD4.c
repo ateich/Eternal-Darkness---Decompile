@@ -11,7 +11,7 @@ typedef struct Info800A4DD4 {
 } Info800A4DD4;
 
 extern Info800A4DD4* fn_800A1D28(void*);
-extern void* fn_80201B54(void*);
+extern void* fn_80201B54();
 extern void fn_800A2E5C(Info800A4DD4*, int);
 extern void* fn_800CA4B8(void*, int, void*, int, unsigned int*, float (*)[3], void*);
 extern const float lbl_8023972C[3][3];

@@ -6,7 +6,7 @@ typedef struct Object800A2F0C {
     int handle;
 } Object800A2F0C;
 
-extern void* fn_80201814(int);
+extern void* fn_80201814();
 extern void fn_802020B4(void*, int);
 
 void fn_800A2F0C(Object800A2F0C* object, int value)

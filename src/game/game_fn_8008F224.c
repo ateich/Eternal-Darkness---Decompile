@@ -26,7 +26,7 @@ typedef struct SpawnConfig {
 
 extern float lbl_8064EC10;
 
-extern void* fn_80201B9C(void*);
+extern void* fn_80201B9C();
 extern void* fn_80201B44();
 extern void fn_800DE8FC(void*, Vec3*);
 extern Runtime* fn_80201B8C();

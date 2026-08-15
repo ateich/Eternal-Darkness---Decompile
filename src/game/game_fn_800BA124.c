@@ -8,10 +8,10 @@ typedef struct Entry {
 extern void fn_800A4F98(int);
 extern int fn_80201B5C(void *);
 extern int fn_80201B64(void *);
-extern void *fn_80201BC8(void *);
-extern int fn_80201B54(void *);
+extern void *fn_80201BC8();
+extern int fn_80201B54();
 extern int fn_80200614(int, int, int);
-extern Entry *fn_80201B8C(void *);
+extern Entry *fn_80201B8C();
 extern unsigned int fn_80204B10(void *, void *);
 
 #pragma use_lmw_stmw on

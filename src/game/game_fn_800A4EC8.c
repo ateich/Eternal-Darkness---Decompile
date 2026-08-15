@@ -18,7 +18,7 @@ typedef struct Runtime800A4EC8 {
 } Runtime800A4EC8;
 
 extern int fn_801A7590(void*);
-extern Runtime800A4EC8* fn_80201B8C(void*);
+extern Runtime800A4EC8* fn_80201B8C();
 
 int fn_800A4EC8(void* object, void* value)
 {

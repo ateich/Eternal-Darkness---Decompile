@@ -32,12 +32,12 @@ typedef struct Vec800A0140 {
 
 extern Context800A0140* fn_8006ED98(State800A0140*);
 extern void fn_8006DEF8(State800A0140*, int, void*, void*, int);
-extern void* fn_80201814(int);
-extern void* fn_80201BC8(void*);
-extern Info800A0140* fn_80201B8C(void);
+extern void* fn_80201814();
+extern void* fn_80201BC8();
+extern Info800A0140* fn_80201B8C();
 extern u32 fn_80128EE4(void);
 extern void fn_800C1B50(int, int, int, float);
-extern void fn_8011F114(Vec800A0140*, void*);
+extern void fn_8011F114();
 extern void fn_8012AC74(void*, Vec800A0140*, int);
 extern void fn_8020104C(int, int, int, int, float);
 extern Object800A0140* fn_80036D38(void*);
