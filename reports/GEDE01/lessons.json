@@ -2,10 +2,10 @@
   "schema_version": 2,
   "scope": "Distinct MWCC code-generation behaviors documented in reports/GEDE01/progress.json open_items and docs/matching.md",
   "source_snapshot": {
-    "repository_revision": "b7df1f466fe55a0f68127023e98739b3db9aae10",
-    "next_gate": "0x80093C04",
+    "repository_revision": "7b2d7dd6c3ac9b82b44ba6b05f4c11ac3d90ab21",
+    "next_gate": "0x800A3588",
     "reports/GEDE01/progress.json": {
-      "sha256": "e62d46ad5900364474be49e6e416a677044f58974d0d60eb840aef2abf0a4070",
+      "sha256": "49efd1e2662932198a8ca910a7062c4cb6317a7bb15e06ad5b252fbd87b6ebc9",
       "scope": "open_items"
     },
     "docs/matching.md": {
@@ -22,8 +22,8 @@
     },
     {
       "category": "register-allocation",
-      "functions": ["fn_8000E96C", "fn_8001CA04", "fn_80032A5C", "fn_80052CC0", "fn_800542D0", "fn_80060C28", "fn_8006C9F0", "fn_8006ECD4"],
-      "precise_divergence": "Canonical MWCC assigns short-lived volatile integer or floating-point webs to different registers: f1/f4 instead of retail f0/f2, r3 instead of retail r5 for a converted mode, r4/r5 in the opposite roles for a zero/max temporary and current byte, or six different volatile-register choices in a branchless counter update.",
+      "functions": ["fn_8000E96C", "fn_8001CA04", "fn_80032A5C", "fn_80052CC0", "fn_800542D0", "fn_80060C28", "fn_8006C9F0", "fn_8006ECD4", "fn_800A2D1C"],
+      "precise_divergence": "Canonical MWCC assigns short-lived volatile integer or floating-point webs to different registers: f1/f4 instead of retail f0/f2, r3 instead of retail r5 for a converted mode, r4/r5 in the opposite roles for a zero/max temporary and current byte, six different volatile-register choices in a branchless counter update, or a different volatile register for an initial null check.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
     },
@@ -176,10 +176,10 @@
     },
     {
       "category": "instruction-scheduling",
-      "functions": ["fn_80063030"],
-      "precise_divergence": "Canonical GC/1.3 reverses the operands of one symmetric integer equality comparison; the 244-byte function and all 10 text relocations otherwise agree exactly with retail.",
+      "functions": ["fn_80063030", "fn_80096F04"],
+      "precise_divergence": "Canonical GC/1.3 reverses the operands of a symmetric integer equality comparison; each documented function is size-exact and all text relocations otherwise agree with retail.",
       "workaround": null,
-      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80063030"]
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80063030 and fn_80096F04"]
     },
     {
       "category": "instruction-scheduling",
@@ -253,10 +253,10 @@
     },
     {
       "category": "jump-table-strategy",
-      "functions": ["fn_8000A668", "fn_8000EE9C", "fn_8001E644", "fn_80020E94", "fn_80050730", "fn_8005EE9C", "fn_80071A58"],
+      "functions": ["fn_8000A668", "fn_8000EE9C", "fn_8001E644", "fn_80020E94", "fn_80050730", "fn_8005EE9C", "fn_80071A58", "fn_800A1060", "fn_800A1580"],
       "precise_divergence": "MWCC's dense-switch jump tables are compiler-owned data in the function's translation unit; leaving them externalized in aggregate data prevents the complete object from matching and linking at the retail layout.",
       "workaround": "Name and assign each generated jump-table region to its owning translation unit, normalize the split object's data alignment where documented, and shrink the standalone auto-data object accordingly.",
-      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8000A668, fn_8000EE9C, fn_8001E644, fn_80020E94, fn_80050730, and fn_8005EE9C"]
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
     },
     {
       "category": "jump-table-strategy",
@@ -274,10 +274,10 @@
     },
     {
       "category": "jump-table-strategy",
-      "functions": ["fn_80050B08", "fn_8005EF94", "fn_800614A8"],
-      "precise_divergence": "Incomplete recovery of the source control flow leaves MWCC's generated switch layout or ownership different from retail: fn_80050B08 generates 5796 code bytes and 98 relocation-bearing instructions versus 5904 and 100 retail; fn_8005EF94's 100-byte switch table remains unmatched; and fn_800614A8's twelve irregular switches generate 6940 code bytes and 310 relocation-bearing instructions versus 6696 and 308 retail.",
+      "functions": ["fn_80050B08", "fn_8005EF94", "fn_800614A8", "fn_80095E64"],
+      "precise_divergence": "Incomplete recovery of source control flow or table ownership leaves MWCC's generated switch layout different from retail: fn_80050B08 generates 5796 code bytes and 98 relocation-bearing instructions versus 5904 and 100 retail; fn_8005EF94's 100-byte table remains unmatched; fn_800614A8's twelve irregular switches generate 6940 code bytes and 310 relocation-bearing instructions versus 6696 and 308 retail; and fn_80095E64 retains switch-table ownership differences.",
       "workaround": null,
-      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80050B08, fn_8005EF94, and fn_800614A8"]
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
     },
     {
       "category": "jump-table-strategy",
@@ -302,7 +302,7 @@
     },
     {
       "category": "float-constant-placement",
-      "functions": ["fn_8000FDE8", "fn_80015568", "fn_80015D40", "fn_800173CC", "fn_80018708", "fn_80018EF4", "fn_8001B294", "fn_8001C078", "fn_8001CA04", "fn_80026320", "fn_80026768", "fn_80026DC8", "fn_8002DAE0", "fn_8002F428", "fn_80031544", "fn_80033180", "fn_800359A0", "fn_80048ADC", "fn_80048B24", "fn_80052310", "fn_8005EC6C", "fn_8005FD84", "fn_80078500", "fn_80079908"],
+      "functions": ["fn_8000FDE8", "fn_80015568", "fn_80015D40", "fn_800173CC", "fn_80018708", "fn_80018EF4", "fn_8001B294", "fn_8001C078", "fn_8001CA04", "fn_80026320", "fn_80026768", "fn_80026DC8", "fn_8002DAE0", "fn_8002F428", "fn_80031544", "fn_80033180", "fn_800359A0", "fn_80048ADC", "fn_80048B24", "fn_80052310", "fn_8005EC6C", "fn_8005FD84", "fn_80078500", "fn_80079908", "fn_800886D8", "fn_80088F4C", "fn_800934A0", "fn_80095D10", "fn_8009C424", "fn_800A2FCC", "fn_800A3180"],
       "precise_divergence": "Canonical MWCC emits a signed- or unsigned-integer conversion bias as a compiler-private literal (often in sdata2), while retail relocates against an existing shared constant; code may otherwise be identical.",
       "workaround": "Externalize the conversion-bias constant to the retail symbol when its identity is known and can be represented honestly.",
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
@@ -435,14 +435,14 @@
     },
     {
       "category": "float-constant-placement",
-      "functions": ["fn_8007B2F4", "fn_8007B540", "fn_8007B640", "fn_8007B828", "fn_8007BA3C"],
-      "precise_divergence": "MWCC emits six-byte aggregate initializers under compiler-local symbols such as @4 and @5, while retail relocations name split shared symbols; the instruction bytes can otherwise be identical.",
+      "functions": ["fn_8007B2F4", "fn_8007B540", "fn_8007B640", "fn_8007B828", "fn_8007BA3C", "fn_8009E4BC", "fn_8009E808"],
+      "precise_divergence": "MWCC emits aggregate initializers under compiler-local symbols such as @4 and @5, while retail relocations name split shared symbols; documented cases include six-byte aggregates and a four-sound initializer, and instruction bytes can otherwise be identical.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
     },
     {
       "category": "register-allocation",
-      "functions": ["fn_80087BA8", "fn_80087D64", "fn_80087EC4", "fn_80088298", "fn_80088A04", "fn_80088D04", "fn_80088F08", "fn_80088F4C", "fn_80089A34", "fn_8008A0B4", "fn_8008A2E0", "fn_8008A96C", "fn_8008ABD4", "fn_8008AE40", "fn_8008C7F8", "fn_8008D31C", "fn_8008D4B4", "fn_8008D5D4", "fn_8008D6E4", "fn_8008D9F4", "fn_8008DBA8", "fn_8008DD78", "fn_8008E110", "fn_8008E294", "fn_80092D90"],
+      "functions": ["fn_80087BA8", "fn_80087D64", "fn_80087EC4", "fn_80088298", "fn_80088A04", "fn_80088D04", "fn_80088F08", "fn_80088F4C", "fn_80089A34", "fn_8008A0B4", "fn_8008A2E0", "fn_8008A96C", "fn_8008ABD4", "fn_8008AE40", "fn_8008C7F8", "fn_8008D31C", "fn_8008D4B4", "fn_8008D5D4", "fn_8008D6E4", "fn_8008D9F4", "fn_8008DBA8", "fn_8008DD78", "fn_8008E110", "fn_8008E294", "fn_80092D90", "fn_80093D20", "fn_80093F6C", "fn_80095E64", "fn_80096710", "fn_8009A0EC", "fn_8009A404", "fn_8009E2E8", "fn_8009E4BC", "fn_8009E808", "fn_8009F664", "fn_8009F700", "fn_800A0140", "fn_800A0324", "fn_800A0CC0", "fn_800A0DE4", "fn_800A1278", "fn_800A197C", "fn_800A1AF0", "fn_800A2688", "fn_800A3180"],
       "precise_divergence": "Declaration order and local lifetime boundaries make canonical MWCC rotate or otherwise reassign callee-saved and stack-backed value webs relative to retail, sometimes changing frame size or nearby scheduling while preserving the recovered behavior.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
@@ -456,7 +456,7 @@
     },
     {
       "category": "instruction-scheduling",
-      "functions": ["fn_80088844", "fn_8008CA84", "fn_8008DD78", "fn_8008DF64", "fn_8008E110", "fn_8008E294", "fn_8008E430", "fn_8008E810", "fn_8008F064", "fn_80092D90", "fn_800930B0"],
+      "functions": ["fn_80088844", "fn_8008CA84", "fn_8008DD78", "fn_8008DF64", "fn_8008E110", "fn_8008E294", "fn_8008E430", "fn_8008E810", "fn_8008F064", "fn_80092D90", "fn_800930B0", "fn_80093D20", "fn_80093F6C", "fn_8009F664", "fn_8009F700", "fn_800A0140", "fn_800A0324", "fn_800A0CC0", "fn_800A0DE4", "fn_800A197C", "fn_800A1AF0", "fn_800A2688"],
       "precise_divergence": "Canonical MWCC schedules equivalent address, aggregate-copy, floating-point, argument, condition, or temporary-register operations differently from retail, including integer and stack argument setup for the documented ten-argument effect call.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
@@ -477,17 +477,17 @@
     },
     {
       "category": "instruction-scheduling",
-      "functions": ["fn_8008A5B8", "fn_8008A6F8", "fn_8008A96C", "fn_8008ABD4", "fn_8008AE40", "fn_8008C7F8", "fn_8008D6E4", "fn_8008D9F4", "fn_8008DBA8", "fn_8008E430", "fn_8008E71C", "fn_8008E810"],
+      "functions": ["fn_8008A5B8", "fn_8008A6F8", "fn_8008A96C", "fn_8008ABD4", "fn_8008AE40", "fn_8008C7F8", "fn_8008D6E4", "fn_8008D9F4", "fn_8008DBA8", "fn_8008E430", "fn_8008E71C", "fn_8008E810", "fn_80095D10", "fn_80095E64", "fn_8009A0EC", "fn_8009A404", "fn_800A0140", "fn_800A0324"],
       "precise_divergence": "Equivalent comparisons, compound conditions, branches, and fallback paths receive a different MWCC lowering or block schedule from retail; documented instances include a reversed comparison operand and one redundant retail branch.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
     },
     {
       "category": "instruction-scheduling",
-      "functions": ["fn_80090FF4"],
-      "precise_divergence": "Canonical MWCC lowers the recovered branchless signed-short clamp differently from retail while preserving the exact 304-byte size and all 11 relocation-bearing instructions.",
+      "functions": ["fn_80090FF4", "fn_80095894"],
+      "precise_divergence": "Canonical MWCC lowers or schedules recovered branchless signed-short arithmetic differently from retail: fn_80090FF4 differs in clamp lowering, while fn_80095894 has six volatile-register scheduling differences in its saturating timer decrement; both remain size-exact with all relocations equal.",
       "workaround": null,
-      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80090FF4"]
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80090FF4 and fn_80095894"]
     },
     {
       "category": "jump-table-strategy",
@@ -497,18 +497,60 @@
       "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80088060"]
     },
     {
-      "category": "float-constant-placement",
-      "functions": ["fn_800886D8", "fn_80088F4C", "fn_800934A0"],
-      "precise_divergence": "MWCC relocates an otherwise instruction-identical signed- or unsigned-integer conversion bias against a compiler-local anonymous symbol instead of retail's named shared constant.",
-      "workaround": null,
-      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800886D8, fn_80088F4C, and fn_800934A0"]
-    },
-    {
       "category": "stack-slot-reuse",
-      "functions": ["fn_80087D64", "fn_80089A34", "fn_8008A0B4", "fn_8008A2E0", "fn_8008A5B8", "fn_8008A96C", "fn_8008ABD4", "fn_8008D6E4", "fn_8008E294", "fn_80092D90"],
+      "functions": ["fn_80087D64", "fn_80089A34", "fn_8008A0B4", "fn_8008A2E0", "fn_8008A5B8", "fn_8008A96C", "fn_8008ABD4", "fn_8008D6E4", "fn_8008E294", "fn_80092D90", "fn_80093D20", "fn_80093F6C", "fn_8009A0EC", "fn_8009A404", "fn_8009E2E8", "fn_800A0140", "fn_800A0324"],
       "precise_divergence": "Recovered aggregate or stack-local lifetimes produce a different MWCC frame layout or slot assignment from retail, with documented instances changing generated function size as well as local access scheduling.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_800A1B90"],
+      "precise_divergence": "Separating the nested aggregate calls changes MWCC's hidden-return and by-value temporary ordering relative to retail.",
+      "workaround": "Keep the calls as the documented direct nested aggregate expression.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800A1B90"]
+    },
+    {
+      "category": "float-constant-placement",
+      "functions": ["fn_800A2130"],
+      "precise_divergence": "The function generates a 16-byte sdata2 constant pool whose two retail symbols must remain externally visible because later retail code references them; leaving the compiler literals private loses canonical ownership and relocation identity.",
+      "workaround": "Globalize both compiler-generated constants under their canonical retail symbols in the owning translation unit.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800A2130"]
+    },
+    {
+      "category": "jump-table-strategy",
+      "functions": ["fn_80095FDC"],
+      "precise_divergence": "A matched split translation unit can generate private switch-table references even though the canonical retail tables remain owned by an existing standalone data unit.",
+      "workaround": "Externalize the compiler-generated references to jumptable_8024528C and jumptable_80245308 without moving their established data ownership.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80095FDC"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_800A1DA0"],
+      "precise_divergence": "Canonical MWCC assigns the generated three-word Vec3i by-value argument copy to stack slots in a different order from retail, alongside a halfword address-formation difference.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800A1DA0"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_800A2414"],
+      "precise_divergence": "Canonical MWCC lowers the same two-byte state-field comparison as unsigned cmplwi while retail uses signed cmpwi; the function is otherwise size-exact and has no relocations.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800A2414"]
+    },
+    {
+      "category": "inlining",
+      "functions": ["fn_800A3104"],
+      "precise_divergence": "Retail's combined-TU inlining boundary retains an unsigned-byte normalization through r0 followed by mr r31, while compiling the function as an independent translation unit coalesces the value directly into r31 and removes four bytes.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800A3104"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_800A32B8"],
+      "precise_divergence": "Canonical MWCC schedules the floating-constant load before the saved-register and descriptor stores, while retail orders those stores first; code size and all nine relocations remain equal.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800A32B8"]
     }
   ]
 }
