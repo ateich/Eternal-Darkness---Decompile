@@ -24,7 +24,7 @@ extern void fn_801A7588(void*, int);
 extern void fn_801A764C(void*, Vec800A3588*);
 extern u8 fn_80204508(void*, void*);
 extern void fn_801A7470(void*, int);
-extern void fn_8020123C(int, void*, void*, void*);
+extern unsigned long long fn_8020123C(int, void*, void*, void*);
 extern void fn_801A7228(void*);
 
 /*

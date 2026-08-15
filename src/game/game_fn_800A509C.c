@@ -45,7 +45,7 @@ extern void fn_80201E78(Local800A509C*, void*, int);
 extern void* fn_80034708(Local800A509C*);
 extern void fn_801261F4(void*);
 extern void fn_8012B7A0(void*, float);
-extern void fn_80201B54(void*);
+extern void* fn_80201B54(void*);
 extern void fn_80201AF8(int);
 extern void fn_802015A4(void*);
 extern void* fn_80156DA0(int, Local800A509C*);

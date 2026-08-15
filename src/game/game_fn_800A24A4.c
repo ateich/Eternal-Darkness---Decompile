@@ -17,9 +17,9 @@ typedef struct Source800A24A4 {
     int countdown;
 } Source800A24A4;
 
-extern void fn_80201B8C(void*);
+extern void* fn_80201B8C(void*);
 extern void fn_8011F114(Vec3i800A24A4*, void*);
-extern void fn_80201B54(void*);
+extern void* fn_80201B54(void*);
 extern void fn_80201B94(void*);
 extern void fn_80201C48(void);
 extern void* fn_80201814(void);

@@ -11,7 +11,7 @@ extern Vec3 fn_80201E78(void*);
 extern void fn_80211A6C(Vec3, Object800A1B90*, Vec3*);
 extern int fn_800A4F44(Vec3*, float);
 extern void* fn_80201B54(void*);
-extern void fn_8020123C(int, int, void*, Object800A1B90*);
+extern unsigned long long fn_8020123C(int, int, void*, Object800A1B90*);
 
 int fn_800A1B90(Object800A1B90* object, int value, void* entity)
 {

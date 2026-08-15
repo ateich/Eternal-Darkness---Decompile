@@ -5,7 +5,7 @@ typedef struct Object800A4530 {
     int child;
 } Object800A4530;
 
-extern void fn_8020123C(int, int, int, int);
+extern unsigned long long fn_8020123C(int, int, int, int);
 
 int fn_800A4530(Object800A4530* object, int arg1, int arg2, int clear)
 {

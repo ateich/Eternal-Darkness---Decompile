@@ -9,7 +9,7 @@ extern void* fn_80201814(void*);
 extern int fn_80201B64(void*);
 extern int fn_80036E50(void*);
 extern void fn_8020104C(int, void*, void*, int, float);
-extern void fn_8020123C(int, void*, void*, int);
+extern unsigned long long fn_8020123C(int, void*, void*, int);
 
 void fn_800A831C(void* context, EventState* state)
 {

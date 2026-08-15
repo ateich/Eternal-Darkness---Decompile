@@ -21,7 +21,7 @@ typedef struct ObjectState {
 
 extern int fn_80201B54(void*);
 extern ObjectState* fn_80201B8C(void*);
-extern void fn_8020123C(int, int, int, int);
+extern unsigned long long fn_8020123C(int, int, int, int);
 extern Vec3i* fn_8011F130(void*);
 extern int* lbl_8064C5A8;
 extern int lbl_8023BA20[];

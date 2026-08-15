@@ -13,7 +13,7 @@ extern void* fn_80201ADC(void);
 extern void fn_80038308(void*, int, s16*);
 extern void fn_800389E0(void*, int, s16, int);
 extern void fn_80036C40(void*, int, s16);
-extern void fn_8020123C(int, int, int, int);
+extern unsigned long long fn_8020123C(int, int, int, int);
 extern int lbl_8064C544;
 
 int fn_800A57D4(int* timer, Runtime800A57D4* runtime)

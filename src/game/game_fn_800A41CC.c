@@ -20,12 +20,12 @@ extern void fn_8012DBE8(void*, int, u32*);
 extern void fn_8006A478(void*);
 extern int fn_80201B5C(void*);
 extern void fn_800CAC5C(int, int, int*, int*, int*);
-extern void fn_8020123C(int, void*, void*, int);
+extern unsigned long long fn_8020123C(int, void*, void*, int);
 extern void fn_80201D44(void*, int);
 extern void fn_802015A4(void*);
 extern void fn_80201D34(void*, int);
 extern void fn_80201D1C(void*, int);
-extern void fn_801E8328(int, void*);
+extern int fn_801E8328(int, void*);
 extern int fn_800A4368(Object800A41CC*, void*);
 
 void fn_800A41CC(Object800A41CC* object, void* context)
