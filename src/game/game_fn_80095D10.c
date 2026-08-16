@@ -5,7 +5,7 @@ typedef struct Runtime80095D10 {
 } Runtime80095D10;
 
 extern void *fn_80201BC8();
-extern Runtime80095D10*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void* fn_80201B3C(void);
 extern int fn_80128EAC(void*);
 extern void fn_80038308(void*, int, short*);
@@ -24,7 +24,7 @@ int fn_80095D10(register void* object)
     short denominator;
 
     owner = fn_80201BC8(object);
-    values = fn_80201B8C(object)->values;
+    values = ((Runtime80095D10*)fn_80201B8C(object))->values;
     if (values[0] != 0) {
         return 1;
     }

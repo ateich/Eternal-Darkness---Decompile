@@ -8,13 +8,13 @@ typedef struct Vec3 {
 
 extern Vec3 lbl_802399B8;
 
-extern int fn_80201B54(void *);
+extern int fn_80201B54();
 extern void fn_800BD194(void *, Vec3 *);
 extern void fn_8011F0E8(void *, Vec3 *);
 extern void fn_80048708(void *);
 extern int fn_800DE298(void *);
 extern void fn_801261F4(void *);
-extern void fn_8020123C(int, int, int, int);
+extern unsigned long long fn_8020123C();
 
 void fn_800DFEB0(void *object, void *resource, Vec3 *position,
                  int *first_delay, int *second_delay)

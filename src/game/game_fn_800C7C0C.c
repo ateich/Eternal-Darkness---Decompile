@@ -18,8 +18,8 @@ extern void *fn_80201C48(void *);
 extern void *fn_80201814();
 extern int fn_8011EB04(void *);
 extern void fn_8011F0E8(void *, Vec3 *);
-extern void *fn_80201B54();
-extern void *fn_80201B44();
+extern int fn_80201B54();
+extern int fn_80201B44();
 extern unsigned long long fn_8020123C();
 extern unsigned int lbl_8064D5A8;
 extern void *fn_801A717C(void);
@@ -68,8 +68,8 @@ void fn_800C7C0C(void *object)
         fn_8011F0E8(relation, &locals.position);
     }
 
-    relation = fn_80201B54(object);
-    if ((int)parent != (int)fn_80201B44(relation)) {
+    relation = ((void *)fn_80201B54(object));
+    if ((int)parent != (int)((void *)fn_80201B44(relation))) {
         fn_8020123C(0x24, parent, relation, 0);
         fn_8020123C(8, relation, parent, 0);
         return;

@@ -13,7 +13,7 @@ typedef struct Vec3 {
     float z;
 } Vec3;
 
-extern unsigned long long fn_8020123C(int, void *, void *, int);
+extern unsigned long long fn_8020123C();
 extern void *fn_80201B3C(void);
 extern Vec3 fn_80201E78(void *);
 extern void fn_801AC9F4(int, int, Vec3 *, int);

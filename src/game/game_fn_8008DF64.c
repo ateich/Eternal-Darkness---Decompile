@@ -9,7 +9,7 @@ extern int lbl_8064D18C;
 extern int lbl_8064C578;
 
 extern int fn_80201B54();
-extern void*fn_80201B8C();
+extern void *fn_80201B8C();
 extern int fn_80201EB8();
 extern void *fn_80201814();
 extern void fn_80072618(Vec8008DF64*, Vec8008DF64*, int, int);

@@ -7,7 +7,7 @@ typedef struct RuntimeState {
 } RuntimeState;
 
 extern void *fn_80201B9C();
-extern RuntimeState *fn_80201B8C();
+extern void *fn_80201B8C();
 extern int fn_80201EB8(void *);
 extern void *fn_80201BC8();
 extern void *fn_80201BC0(void *);
@@ -18,7 +18,7 @@ void fn_800CCDA8(int mode, int owner)
 {
     void *object = fn_80201B9C();
     while (object != 0) {
-        RuntimeState *state = fn_80201B8C(object);
+        RuntimeState *state = ((RuntimeState *)fn_80201B8C(object));
         if (state != 0 && owner == fn_80201EB8(object) &&
             state->group == 2 && state->kind == 4) {
             void *resource = fn_80201BC8(object);

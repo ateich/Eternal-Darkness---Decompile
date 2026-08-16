@@ -18,8 +18,8 @@ typedef struct State80093C04 {
 
 extern int fn_80201B54();
 extern int fn_80200C20(void*);
-extern void* fn_801294DC(void*, int, int, int);
-extern Runtime80093C04*fn_80201B8C();
+extern void *fn_801294DC(void *, int, int, int);
+extern void *fn_80201B8C();
 extern State80093C04* fn_80036D38(void*);
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);
@@ -32,7 +32,7 @@ void fn_80093C04(register void* object, register void* resource,
     fn_80201B54(object);
     value_source = (void*)fn_80200C20(value_source);
     if (fn_801294DC(resource, 0x25, 0x25, 8) != 0) {
-        runtime = fn_80201B8C(object);
+        runtime = ((Runtime80093C04*)fn_80201B8C(object));
         {
             State80093C04* state = fn_80036D38(object);
             if (runtime != 0 && runtime->flags != 0) {

@@ -38,8 +38,8 @@ extern float lbl_8064F6A0;
 extern float lbl_8064F6A4;
 extern int lbl_8064D18C;
 
-extern void *fn_80201BC8(int);
-extern int fn_80201B54(int);
+extern void *fn_80201BC8();
+extern int fn_80201B54();
 extern int fn_8011F6A4(void *, int, int, int, Vec3 *, int);
 extern void fn_80154340(int, int, int, int, int, int, int, float);
 extern void fn_801A19BC(EffectDesc *);

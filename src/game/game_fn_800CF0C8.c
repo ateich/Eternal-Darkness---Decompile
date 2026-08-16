@@ -30,7 +30,7 @@ extern float lbl_8064F334;
 extern float lbl_8064F338;
 extern float lbl_8064F33C;
 extern void *fn_80037AF4(int);
-extern RuntimeState *fn_80201B8C();
+extern void *fn_80201B8C();
 extern int fn_80201B54();
 extern void fn_802015A4(void *);
 extern void fn_80038464(void *, int, short *);
@@ -40,7 +40,7 @@ void *fn_800CF0C8(void *owner, u16 first_id, u16 second_id, u8 flag,
                   int slot, u16 extra, float first, float second)
 {
     void *object = fn_80037AF4(0xB);
-    Payload *payload = fn_80201B8C(object)->payload;
+    Payload *payload = ((RuntimeState *)fn_80201B8C(object))->payload;
     short value;
     int object_id;
 
@@ -75,6 +75,6 @@ void *fn_800CF0C8(void *owner, u16 first_id, u16 second_id, u8 flag,
     payload->selected = payload->value;
     fn_802015A4(object);
     object_id = fn_80201B54(object);
-    fn_80201B8C(owner)->slots[slot + 1] = object_id;
+    ((RuntimeState *)fn_80201B8C(owner))->slots[slot + 1] = object_id;
     return object;
 }

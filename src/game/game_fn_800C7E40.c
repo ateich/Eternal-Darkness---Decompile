@@ -22,8 +22,8 @@ extern void *fn_80201814();
 extern void fn_80201E78(void *, void *);
 extern unsigned int fn_80178E94(void *, unsigned int *);
 extern int fn_8011EB04(void *);
-extern void *fn_80201B54();
-extern void *fn_80201B44();
+extern int fn_80201B54();
+extern int fn_80201B44();
 extern unsigned long long fn_8020123C();
 extern Vec3 lbl_8023989C;
 extern void *fn_801A717C(void);
@@ -85,9 +85,9 @@ void fn_800C7E40(void *object)
         return;
     }
 
-    relation = fn_80201B54(object);
+    relation = ((void *)fn_80201B54(object));
     if (kind != 0xFB) {
-        if ((int)parent != (int)fn_80201B44(relation)) {
+        if ((int)parent != (int)((void *)fn_80201B44(relation))) {
             fn_8020123C(0xD8, relation, relation, 0);
             return;
         }
@@ -101,7 +101,7 @@ void fn_800C7E40(void *object)
     }
 
     locals.direction = lbl_8023989C;
-    if ((int)parent == (int)fn_80201B44(relation)) {
+    if ((int)parent == (int)((void *)fn_80201B44(relation))) {
         sound = fn_801A717C();
         constant = lbl_802FC5BC + 0x18;
         fn_800CEA1C(0x17, 3, locals.reference, 0, 5, 5, lbl_8064F22C,

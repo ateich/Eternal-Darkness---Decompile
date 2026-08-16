@@ -12,7 +12,7 @@ typedef struct EffectState {
 
 extern void fn_80204810(void);
 extern int fn_800A8040(void);
-extern void* fn_801294DC(void*, int, int, int);
+extern void *fn_801294DC(void *, int, int, int);
 extern void fn_80128C44(void*, void (*)(void), int);
 extern void fn_80128C28(void*, void (*)(void), int);
 extern void fn_801292E0(void*, int*, CallbackEntry**);

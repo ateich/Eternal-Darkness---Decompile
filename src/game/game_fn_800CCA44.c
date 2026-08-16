@@ -10,17 +10,17 @@ typedef struct Resource {
     short value;
 } Resource;
 
-extern RuntimeState *fn_80201B8C();
-extern void *fn_80201B54();
+extern void *fn_80201B8C();
+extern int fn_80201B54();
 extern void fn_8016B400(int, void *, int);
 
 int fn_800CCA44(void *object)
 {
-    RuntimeState *state = fn_80201B8C(object);
+    RuntimeState *state = ((RuntimeState *)fn_80201B8C(object));
     Resource *resource = state != 0 ? state->resource : 0;
 
     if (resource != 0 && resource->value != 0 && resource->value > 0) {
-        void *model = fn_80201B54(object);
+        void *model = ((void *)fn_80201B54(object));
         int value = resource->value;
         fn_8016B400(value, model, 0);
         return 1;

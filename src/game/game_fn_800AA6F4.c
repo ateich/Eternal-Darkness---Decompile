@@ -22,7 +22,7 @@ typedef struct Outer {
 extern CallbackState* fn_801FD6F4(void*);
 extern void *fn_80201814();
 extern void *fn_80201BC8();
-extern Outer*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void* fn_8011F130(void*);
 extern void fn_801FDEB4(void*, void*);
 extern void fn_801FDF74(void*, int);
@@ -36,7 +36,7 @@ int fn_800AA6F4(void* object)
         void* target = fn_80201814((void*)state->target);
         if (target != 0) {
             void* position = fn_80201BC8(target);
-            Outer* outer = fn_80201B8C(target);
+            Outer* outer = ((Outer*)fn_80201B8C(target));
             Inner* inner = outer->inner;
 
             if (inner->active == 1) {

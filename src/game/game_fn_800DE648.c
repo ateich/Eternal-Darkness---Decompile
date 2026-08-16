@@ -4,7 +4,7 @@ typedef struct Vec3 {
     float z;
 } Vec3;
 
-extern void *fn_80201BC8(void *);
+extern void *fn_80201BC8();
 extern Vec3 fn_80201E78(void *);
 extern float fn_8012B7D0(void *, Vec3 *);
 extern void fn_8012B7A0(void *);

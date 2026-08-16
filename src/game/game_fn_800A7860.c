@@ -7,7 +7,7 @@ typedef struct State800A7860 {
 } State800A7860;
 
 extern void *fn_80201814();
-extern State800A7860*fn_80201B8C();
+extern void *fn_80201B8C();
 
 u32 fn_800A7860(void* object)
 {
@@ -15,7 +15,7 @@ u32 fn_800A7860(void* object)
     State800A7860* state = fn_80201814(object);
 
     if (state != 0) {
-        state = fn_80201B8C(state);
+        state = ((State800A7860*)fn_80201B8C(state));
         if (state != 0) {
             switch (state->kind) {
             case 6:

@@ -9,8 +9,8 @@ typedef struct Data8008E110 {
 
 extern int fn_80201B54();
 extern void *fn_80201814();
-extern void* fn_801294DC(void*, int, int, int);
-extern u64 fn_8020123C();
+extern void *fn_801294DC(void *, int, int, int);
+extern unsigned long long fn_8020123C();
 extern int fn_800DE3F8(void);
 extern void* fn_800CCF60(void*, int, int, void*, int, int, int, int, int, int,
                          int);

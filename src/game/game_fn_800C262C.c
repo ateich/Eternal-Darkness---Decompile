@@ -7,7 +7,7 @@ typedef struct Vec3 {
 extern void fn_80204810(void);
 
 extern void *fn_801294DC(void *, int, int, int);
-extern void **fn_80201B8C();
+extern void *fn_80201B8C();
 extern void fn_8011F114();
 extern float fn_8012B750(void *);
 extern void fn_80128C28(void *, void *, u32);
@@ -22,7 +22,7 @@ void fn_800C262C(void *context, void *object, int object_id,
     void *entry = fn_801294DC(object, 143, 32, 8);
 
     if (entry != 0) {
-        void **state_ref = fn_80201B8C(context);
+        void **state_ref = ((void **)fn_80201B8C(context));
         if (state_ref != 0) {
             unsigned char *state = (unsigned char *)state_ref[0];
             if (state != 0) {

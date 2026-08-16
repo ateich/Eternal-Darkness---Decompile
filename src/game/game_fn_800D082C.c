@@ -12,14 +12,14 @@ typedef struct State {
 } State;
 
 extern void fn_801A7498(void *);
-extern void *fn_80201814(void);
+extern void *fn_80201814();
 extern State *fn_800A1D28(void *);
 extern int fn_8003BD48(void *, void *);
-extern int fn_80201B54(void *);
+extern int fn_80201B54();
 extern void *fn_801A74B8(void *);
 extern void fn_800A37CC(int, void *, void *);
 extern int fn_801A7468(void *);
-extern void fn_8011F114(Vec3 *, void *);
+extern void fn_8011F114();
 extern void fn_8011F6A4(void *, int, int, int, Vec3 *, int);
 extern void fn_80211A6C(Vec3 *, Vec3 *, Vec3 *);
 extern void fn_80211B08(Vec3 *);

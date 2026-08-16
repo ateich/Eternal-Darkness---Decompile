@@ -11,8 +11,8 @@ typedef struct ActorData8009A404 {
 
 extern int fn_80200C10(void*);
 extern void *fn_80201BC8();
-extern void* fn_80201B54();
-extern ActorData8009A404*fn_80201B8C();
+extern int fn_80201B54();
+extern void *fn_80201B8C();
 extern void* fn_80201B94(void*);
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);
@@ -58,8 +58,8 @@ int fn_8009A404(register void* object, register int phase, register void* event)
 
     kind = fn_80200C10(event);
     room = fn_80201BC8(object);
-    actor_id = fn_80201B54(object);
-    data = fn_80201B8C(object);
+    actor_id = ((void*)fn_80201B54(object));
+    data = ((ActorData8009A404*)fn_80201B8C(object));
     actor = data->actor;
     context = fn_80201B94(object);
     if (phase == 0) {

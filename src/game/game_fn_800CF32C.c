@@ -19,7 +19,7 @@ typedef struct RuntimeState {
 } RuntimeState;
 
 extern void *fn_80037AF4(int);
-extern RuntimeState *fn_80201B8C();
+extern void *fn_80201B8C();
 extern int fn_80201B54();
 extern void fn_802015A4(void *);
 
@@ -28,7 +28,7 @@ void *fn_800CF32C(void *owner, u16 first_id, u16 second_id, u8 flag,
                   float first, float second)
 {
     void *object = fn_80037AF4(0x14);
-    Payload *payload = fn_80201B8C(object)->payload;
+    Payload *payload = ((RuntimeState *)fn_80201B8C(object))->payload;
     int object_id;
 
     payload->owner = fn_80201B54(owner);
@@ -39,6 +39,6 @@ void *fn_800CF32C(void *owner, u16 first_id, u16 second_id, u8 flag,
     payload->flag = flag;
     fn_802015A4(object);
     object_id = fn_80201B54(object);
-    *(int *)((u8 *)fn_80201B8C(owner)->links + 0x10) = object_id;
+    *(int *)((u8 *)((RuntimeState *)fn_80201B8C(owner))->links + 0x10) = object_id;
     return object;
 }

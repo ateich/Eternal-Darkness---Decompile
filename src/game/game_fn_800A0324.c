@@ -33,7 +33,7 @@ extern void fn_8011F114();
 extern Object800A0324* fn_80036D38(void*);
 extern u32 fn_80178F14(int, int, int, int, int, int);
 extern void fn_80067180(void*);
-extern void* fn_80201B54();
+extern int fn_80201B54();
 extern unsigned long long fn_8020123C();
 extern void fn_8009EF8C(State800A0324*);
 
@@ -71,8 +71,8 @@ int fn_800A0324(State800A0324* state)
                 if (fn_80178F14((int)copy.x, (int)copy.y, (int)copy.z,
                                 (int)origin.x, (int)origin.y, (int)origin.z) <= 150) {
                     fn_80067180(actor);
-                    first = fn_80201B54(linked);
-                    fn_8020123C(0x56, fn_80201B54(linked), first, 0);
+                    first = ((void*)fn_80201B54(linked));
+                    fn_8020123C(0x56, ((void*)fn_80201B54(linked)), first, 0);
                 }
             }
         }

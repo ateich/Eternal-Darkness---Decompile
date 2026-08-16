@@ -12,11 +12,11 @@ typedef struct RuntimeState {
 } RuntimeState;
 
 extern int lbl_8064D738;
-extern RuntimeState *fn_80201B8C();
+extern void *fn_80201B8C();
 
 void fn_800CE698(void *object)
 {
-    Data *data = fn_80201B8C(object)->data;
+    Data *data = ((RuntimeState *)fn_80201B8C(object))->data;
     int index;
     u8 *base;
     int *output;

@@ -20,7 +20,7 @@ typedef struct Vec {
 } Vec;
 
 extern void *fn_801A7498(void *);
-extern void *fn_80201814(void *);
+extern void *fn_80201814();
 extern Actor *fn_800A1D28(void *);
 extern ShortVec *fn_8017FDE4(void *);
 extern void fn_801A75C0(Vec *, void *, int, Vec *);

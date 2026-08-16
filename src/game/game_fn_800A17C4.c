@@ -24,7 +24,7 @@ typedef struct Info800A17C4 {
 
 extern Context800A17C4* fn_8006ED98(State800A17C4*);
 extern void *fn_80201814();
-extern Info800A17C4*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void fn_8020104C(int, int, u32, int, float);
 extern float lbl_8064EDB4;
 
@@ -36,7 +36,7 @@ int fn_800A17C4(register State800A17C4* state)
 
     context = fn_8006ED98(state);
     if (context != 0) {
-        resource = fn_80201B8C(fn_80201814(state->resource))->inner->resource;
+        resource = ((Info800A17C4*)fn_80201B8C(fn_80201814(state->resource)))->inner->resource;
         switch (context->mode) {
         case 34:
             if (context->counter <= 10) {

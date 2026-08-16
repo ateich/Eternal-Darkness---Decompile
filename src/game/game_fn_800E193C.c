@@ -1,6 +1,6 @@
 typedef struct Vec3 { float x, y, z; } Vec3;
 
-extern void fn_80201B44(void);
+extern int fn_80201B44();
 extern void *fn_80201B3C(void);
 extern void fn_80201E78(Vec3 *, void *);
 extern void fn_80179064(int, int, int, int);

@@ -30,7 +30,7 @@ typedef struct Runtime8009F700 {
 extern Context8009F700* fn_8006ED98(State8009F700*);
 extern void fn_8006DEF8(State8009F700*, int, void*, void*, int);
 extern void *fn_80201814();
-extern Runtime8009F700*fn_80201B8C();
+extern void *fn_80201B8C();
 extern unsigned long long fn_8020123C();
 
 int fn_8009F700(register State8009F700* state)
@@ -51,7 +51,7 @@ int fn_8009F700(register State8009F700* state)
             fn_8006DEF8(state, context->kind, 0, 0, 0);
         }
         fn_80201814(state->field_38);
-        runtime = fn_80201B8C();
+        runtime = ((Runtime8009F700*)fn_80201B8C());
         fn_8020123C(81, 0, runtime->field_8C->field_44, 0);
         result = 1;
     }

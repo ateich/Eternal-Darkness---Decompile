@@ -17,13 +17,13 @@ extern u32 lbl_8064D18C;
 extern void *lbl_8064C504;
 extern void *fn_80204A8C(void);
 extern void *fn_80201AE4(void);
-extern void *fn_80201B44(void);
-extern void *fn_80201814(void *);
+extern int fn_80201B44();
+extern void *fn_80201814();
 extern Vec3 fn_80201E78(void *);
 extern void fn_80043F44(SpawnInfo *);
 extern void *fn_80034708(SpawnInfo *);
-extern void *fn_80201BC8(void *);
-extern void *fn_80201B54(void *);
+extern void *fn_80201BC8();
+extern int fn_80201B54();
 extern void fn_80204CE4(void *, void *);
 extern void fn_80201D54(void *, u32);
 extern void fn_802015A4(void *);
@@ -50,7 +50,7 @@ void fn_800DE704(void)
 {
     void *context = fn_80204A8C();
     void *source = fn_80201AE4();
-    void *owner = fn_80201B44();
+    void *owner = ((void *)fn_80201B44());
     void *parent;
     Vec3 position;
     SpawnInfo spawn;
@@ -70,7 +70,7 @@ void fn_800DE704(void)
     spawn.position = position;
     object = fn_80034708(&spawn);
     info = fn_80201BC8(object);
-    parent = fn_80201B54(object);
+    parent = ((void *)fn_80201B54(object));
     fn_80204CE4(object, context);
     fn_80201D54(object, lbl_8064D18C);
     fn_802015A4(object);

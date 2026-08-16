@@ -15,7 +15,7 @@ typedef struct Runtime800A41CC {
 
 extern void* fn_80201890(void*);
 extern void *fn_80201814();
-extern Runtime800A41CC*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void fn_8012DBE8(void*, int, u32*);
 extern void fn_8006A478(void*);
 extern int fn_80201B5C(void*);
@@ -47,7 +47,7 @@ void fn_800A41CC(Object800A41CC* object, void* context)
             remove = 0;
             model = fn_80201890(child);
             entity = fn_80201814(child);
-            runtime = fn_80201B8C(entity);
+            runtime = ((Runtime800A41CC*)fn_80201B8C(entity));
             fn_8012DBE8(model, 15, &color);
 
             if (runtime->type == 3 && runtime->state == 2) {

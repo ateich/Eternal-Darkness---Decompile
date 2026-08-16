@@ -3,7 +3,7 @@ typedef signed char s8;
 extern int lbl_803003C8[];
 extern int lbl_8064C98C;
 extern void *fn_80201814();
-extern void*fn_80201B8C();
+extern void *fn_80201B8C();
 
 int fn_800AD2DC(int object)
 {

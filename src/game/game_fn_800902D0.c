@@ -6,7 +6,7 @@ extern int lbl_8064D18C;
 extern float lbl_8064EC48;
 extern void fn_8011F114();
 extern int fn_80036D5C(void*);
-extern void* fn_80201B54();
+extern int fn_80201B54();
 extern int fn_80201EB8();
 extern void fn_8008F960(void*, void*, void*, void*, void*, void*);
 extern void fn_800DD314(void*, int, int, int);
@@ -35,7 +35,7 @@ void fn_800902D0(void* object, void* actor, void* arg3, void* arg4,
     fn_8011F114(&original, actor);
     position = original;
     flags = fn_80036D5C(object);
-    owner = fn_80201B54(object);
+    owner = ((void*)fn_80201B54(object));
     associated = fn_80201EB8(object);
     lbl_8064C56C = 0;
     if (flags & 0x100000) {

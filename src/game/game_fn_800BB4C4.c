@@ -5,7 +5,7 @@ typedef struct Message {
 } Message;
 
 extern void *memcpy(void *, const void *, unsigned int);
-extern void *fn_80201B54();
+extern int fn_80201B54();
 extern void fn_80201E78(void *, void *);
 extern void *fn_80201EB8(void *);
 extern void *fn_801D9FE4(unsigned int, int);
@@ -30,7 +30,7 @@ unsigned short fn_800BB4C4(void *input, void *object)
 
     memcpy(&message, input, sizeof(message));
     if (message.count > 0) {
-        owner = fn_80201B54(object);
+        owner = ((void *)fn_80201B54(object));
         fn_80201E78(vector, object);
         runtime = fn_80201EB8(object);
         result = fn_801D9FE4(message.value, message.count);
@@ -38,7 +38,7 @@ unsigned short fn_800BB4C4(void *input, void *object)
                             &a, &b, &d, &c);
         result = fn_800CD458(owner, message.value, message.count, a, b, d,
                             result);
-        * (void **)c = fn_80201B54(result);
+        * (void **)c = ((void *)fn_80201B54(result));
         fn_8020104C(0x5c, *(void **)c, *(void **)c, 0, lbl_8064F0C4);
     }
     return sizeof(message);

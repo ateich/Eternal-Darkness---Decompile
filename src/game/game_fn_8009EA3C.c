@@ -19,9 +19,9 @@ typedef struct State8009EA3C {
     Work8009EA3C* work;
 } State8009EA3C;
 
-extern void* fn_80201B44();
+extern int fn_80201B44();
 extern void *fn_80201814();
-extern void*fn_80201B8C();
+extern void *fn_80201B8C();
 extern Context8009EA3C* fn_8006ED3C(State8009EA3C*, int, int*);
 extern void fn_800A509C(int);
 extern int* lbl_8064C5A8;
@@ -31,7 +31,7 @@ int fn_8009EA3C(register State8009EA3C* state)
     int index;
     Context8009EA3C* context;
 
-    fn_80201B8C(fn_80201814(fn_80201B44()));
+    fn_80201B8C(fn_80201814(((void*)fn_80201B44())));
     context = fn_8006ED3C(state, 0x17, &index);
     context->counter = 0;
     state->work->flags &= ~(1U << 15);

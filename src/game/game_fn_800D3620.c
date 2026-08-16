@@ -4,12 +4,12 @@ typedef struct Vec3 { u32 x, y, z; } Vec3;
 extern const Vec3 lbl_80248AE4;
 extern void *fn_80201B94(void *);
 extern int fn_80201C48(void *);
-extern int fn_80201B54(void *);
+extern int fn_80201B54();
 extern void fn_80201DD8(void *, int);
-extern void fn_8011F114(Vec3 *, void *);
+extern void fn_8011F114();
 extern void fn_8012B690(void *, const Vec3 *, Vec3 *);
 extern void fn_80211A48(Vec3 *, Vec3 *, Vec3 *);
-extern unsigned long long fn_8020123C(int, int, int, void *);
+extern unsigned long long fn_8020123C();
 
 int fn_800D3620(void *state, void *object)
 {

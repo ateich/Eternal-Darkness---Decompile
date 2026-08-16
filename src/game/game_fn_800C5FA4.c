@@ -10,14 +10,14 @@ typedef struct Owner {
 } Owner;
 
 extern void *fn_80201B3C(void);
-extern Owner *fn_80201B8C();
+extern void *fn_80201B8C();
 
 int fn_800C5FA4(void)
 {
     int result = 0;
 
     if (fn_80201B3C() != 0) {
-        Owner *owner = fn_80201B8C();
+        Owner *owner = ((Owner *)fn_80201B8C());
         if (owner->inner != 0) {
             result = owner->inner->value;
         }

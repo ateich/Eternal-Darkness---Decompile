@@ -32,7 +32,7 @@ typedef struct Global8009F258 {
 extern Context8009F258* fn_8006ED3C(State8009F258*, int, int*);
 extern void fn_8006DEF8(State8009F258*, int, void*, void*, int);
 extern void *fn_80201814();
-extern Global8009F258*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void fn_8020104C(int, int, void*, int, float);
 extern void (*lbl_8064C8C4)(void);
 extern void fn_80144430(int, int);
@@ -54,7 +54,7 @@ int fn_8009F258(register State8009F258* state)
             fn_8006DEF8(state, 0x1D, 0, 0, 0);
         }
         fn_80201814(*(void**)((u8*)state + 0x38));
-        fn_8020104C(0x51, 0, fn_80201B8C()->inner->object, 0, lbl_8064EDD8);
+        fn_8020104C(0x51, 0, ((Global8009F258*)fn_80201B8C())->inner->object, 0, lbl_8064EDD8);
         lbl_8064C8C4 = 0;
         fn_80144430(4, 0);
         result = 1;

@@ -24,7 +24,7 @@ typedef struct Object80095654 {
 extern void *fn_80201BC8();
 extern void fn_80201E78(void*, void*);
 extern Event80095654* fn_800935CC(int, void*, u32, int);
-extern void* fn_801294DC(void*, int, int, int);
+extern void *fn_801294DC(void *, int, int, int);
 extern void fn_80128C44(void*, void*, int);
 extern void fn_80128C28(void*, void*, int);
 extern void fn_80204810(void);

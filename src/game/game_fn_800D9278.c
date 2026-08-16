@@ -15,13 +15,13 @@ typedef struct Runtime {
 extern Runtime *fn_800A1D28(void *);
 extern void *fn_800A1CD0(void *);
 extern void *fn_80201B94(void *);
-extern void *fn_80201B54(void *);
+extern int fn_80201B54();
 extern void *fn_80201C48(void *);
-extern void *fn_80201814(void *);
-extern void *fn_80201BC8(void *);
-extern void fn_8011F114(Vec3 *, void *);
+extern void *fn_80201814();
+extern void *fn_80201BC8();
+extern void fn_8011F114();
 extern int fn_80179064(int, int, int, int);
-extern unsigned long long fn_8020123C(int, void *, void *, int);
+extern unsigned long long fn_8020123C();
 
 int fn_800D9278(void *unused, void *object)
 {
@@ -33,7 +33,7 @@ int fn_800D9278(void *unused, void *object)
     (void)unused;
     fn_800A1CD0(object);
     owner = fn_80201B94(object);
-    attached = fn_80201B54(object);
+    attached = ((void *)fn_80201B54(object));
     candidate = fn_80201C48(owner);
     if (candidate != 0) {
         Vec3 position;

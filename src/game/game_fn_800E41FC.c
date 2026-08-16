@@ -1,9 +1,9 @@
-extern void *fn_80201BC8(int);
-extern int fn_80201B54(int);
+extern void *fn_80201BC8();
+extern int fn_80201B54();
 extern void fn_8011FE5C(void *, int);
 extern void *fn_8011F950(void *);
 extern void *fn_801294DC(void *, int, int, int);
-extern void fn_8020123C(int, int, int, int);
+extern unsigned long long fn_8020123C();
 extern int fn_800E4520(int, int);
 
 void fn_800E41FC(int id)

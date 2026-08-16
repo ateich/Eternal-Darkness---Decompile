@@ -1,7 +1,7 @@
 extern void *fn_80201C24(void *);
 extern void *fn_80157918(void *);
 extern int fn_80200C38(void *);
-extern void *fn_80201B44(void);
+extern int fn_80201B44();
 extern void fn_800DC250(void *, void *, void *, int);
 
 void fn_800DBA0C(void *context, void *value)
@@ -15,5 +15,5 @@ void fn_800DBA0C(void *context, void *value)
     } else {
         converted = 0;
     }
-    fn_800DC250(fn_80201B44(), context, payload, converted);
+    fn_800DC250(((void *)fn_80201B44()), context, payload, converted);
 }

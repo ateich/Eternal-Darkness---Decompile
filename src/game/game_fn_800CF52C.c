@@ -6,7 +6,7 @@ typedef struct RuntimeState {
 } RuntimeState;
 
 extern void *fn_80205288(void *);
-extern RuntimeState *fn_80201B8C();
+extern void *fn_80201B8C();
 
 int fn_800CF52C(void *object)
 {
@@ -15,7 +15,7 @@ int fn_800CF52C(void *object)
 
     object = object != 0 ? fn_80205288(object) : 0;
     result = 0;
-    state = object != 0 ? fn_80201B8C(object) : 0;
+    state = object != 0 ? ((RuntimeState *)fn_80201B8C(object)) : 0;
     if (state != 0 && state->kind == 0x12) {
         result = 1;
     }

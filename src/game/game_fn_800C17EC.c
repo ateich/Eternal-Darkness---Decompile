@@ -13,7 +13,7 @@ extern double lbl_8064F170;
 extern void *fn_80201BC8();
 extern void fn_8011F114();
 extern int fn_80201EB8(void *);
-extern void *fn_80201B54();
+extern int fn_80201B54();
 extern u32 fn_80179004(Vec3 *, Vec3 *);
 
 #pragma use_lmw_stmw on
@@ -38,7 +38,7 @@ int fn_800C17EC(void *object, void *other, Vec3 *point, int expected, int id)
     }
     position = *source;
     current = fn_80201EB8(object);
-    fn_80201B54(object);
+    ((void *)fn_80201B54(object));
     height = position.z - point->z;
     distance = fn_80179004(point, &position);
     {

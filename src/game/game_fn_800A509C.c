@@ -27,7 +27,7 @@ extern int fn_80201B44();
 extern void fn_80043F44(Local800A509C*);
 extern void *fn_80201814();
 extern void* fn_80155DB4(void*);
-extern Runtime800A509C*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void fn_801568FC(void*, void*);
 extern void fn_8002AA18(void);
 extern void fn_8002A508(void);
@@ -45,7 +45,7 @@ extern void fn_80201E78(Local800A509C*, void*, int);
 extern void* fn_80034708(Local800A509C*);
 extern void fn_801261F4(void*);
 extern void fn_8012B7A0(void*, float);
-extern void* fn_80201B54();
+extern int fn_80201B54();
 extern void fn_80201AF8(int);
 extern void fn_802015A4(void*);
 extern void* fn_80156DA0(int, Local800A509C*);
@@ -90,7 +90,7 @@ void fn_800A509C(int mode)
         break;
     }
 
-    runtime = fn_80201B8C(object);
+    runtime = ((Runtime800A509C*)fn_80201B8C(object));
     fn_801568FC(context, fn_8002AA18);
     fn_80201D3C(object, 1);
     fn_80201D54(object, -2);
@@ -108,14 +108,14 @@ void fn_800A509C(int mode)
 
     created = fn_80034708(&local);
     createdContext = fn_80201BC8(created);
-    runtime = fn_80201B8C(created);
+    runtime = ((Runtime800A509C*)fn_80201B8C(created));
     fn_801261F4(createdContext);
     fn_8012B7A0(createdContext, local.scale);
     fn_80201D54(created, local.value);
     fn_80201D3C(created, 0);
     runtime->state = 1;
     runtime->owner = (void*)original;
-    fn_80201B54(created);
+    ((void*)fn_80201B54(created));
     fn_80201AF8((int)created);
     fn_802015A4(created);
 

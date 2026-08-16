@@ -12,8 +12,8 @@ typedef struct Actor {
     u16 field284;
 } Actor;
 
-extern void *fn_80201BC8(void *);
-extern void *fn_80201B54(void *);
+extern void *fn_80201BC8();
+extern int fn_80201B54();
 extern void fn_800A43E8(void *, void *);
 extern void fn_8012C478(void *, int, int);
 extern void fn_800DA308(void *, int);
@@ -26,7 +26,7 @@ void fn_800D8F38(Actor *actor, void *object, int kind)
 
     switch (kind) {
     case 1:
-        value = fn_80201B54(object);
+        value = ((void *)fn_80201B54(object));
         fn_800A43E8(actor, value);
         fn_8012C478(runtime, 0, 0);
         break;

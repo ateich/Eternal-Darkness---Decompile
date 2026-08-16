@@ -11,7 +11,7 @@ extern int fn_80201B64(void *);
 extern void *fn_80201BC8();
 extern int fn_80201B54();
 extern int fn_80200614(int, int, int);
-extern Entry *fn_80201B8C();
+extern void *fn_80201B8C();
 extern unsigned int fn_80204B10(void *, void *);
 
 #pragma use_lmw_stmw on
@@ -40,7 +40,7 @@ int fn_800BA124(void *object, unsigned int check_id, int wanted_id)
     }
     if (data != 0 && !blocked && type != 35 && type != 79 && type != 21 &&
         type != 83 && (type != 88 || subtype != 8)) {
-        entry = fn_80201B8C(object);
+        entry = ((Entry *)fn_80201B8C(object));
         if (entry != 0) {
             kind = entry->kind;
             is_kind_19 = kind == 19;

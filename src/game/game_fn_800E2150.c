@@ -15,13 +15,13 @@ typedef struct EventData {
     int object_id;
 } EventData;
 
-extern void *fn_80201814(int);
+extern void *fn_80201814();
 extern void *fn_80155DB4(void *);
-extern void *fn_80201BC8(void *);
-extern void fn_80201B8C(void *);
+extern void *fn_80201BC8();
+extern void *fn_80201B8C();
 extern void fn_80201C24(void *);
 extern int fn_8012FDA0(void *, int);
-extern void fn_8011F114(Vec3 *, void *);
+extern void fn_8011F114();
 extern void fn_80127FD8(void *, int, Matrix34 *);
 extern void fn_80211EFC(Quat *, Matrix34 *);
 extern void fn_80127DF8(void *, int, Matrix34 *);

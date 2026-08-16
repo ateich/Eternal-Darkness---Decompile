@@ -3,7 +3,7 @@ typedef unsigned int u32;
 
 extern void fn_801A7498(void *);
 extern void *fn_80201814();
-extern void **fn_80201B8C();
+extern void *fn_80201B8C();
 extern void fn_802042A4(void *, void *);
 extern void fn_801A74D8(void *, int);
 extern int fn_800BFF84(void *, void *);
@@ -21,7 +21,7 @@ int fn_800C0240(void *object, void *event)
 
     fn_801A7498(event);
     fn_80201814();
-    runtime = *fn_80201B8C();
+    runtime = *((void **)fn_80201B8C());
     fn_802042A4(object, event);
     fn_801A74D8(event, 0x80);
     fn_800BFF84(object, event);

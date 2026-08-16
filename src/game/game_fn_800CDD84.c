@@ -21,7 +21,7 @@ extern const float lbl_8064F2C0;
 extern void *fn_80201B9C();
 extern void *fn_80204844(void *, int);
 extern void *fn_80037AF4(int);
-extern RuntimeState *fn_80201B8C();
+extern void *fn_80201B8C();
 extern int fn_80201B54();
 extern void fn_802015A4(void *);
 extern int fn_801E8328(int, void *);
@@ -43,10 +43,10 @@ void *fn_800CDD84(void *owner)
     if (object == 0) {
         object = fn_80037AF4(0x20);
     }
-    payload = (Payload *)fn_80201B8C(object)->payload;
+    payload = (Payload *)((RuntimeState *)fn_80201B8C(object))->payload;
     payload->owner = fn_80201B54(owner);
     fn_802015A4(object);
-    state = fn_80201B8C(owner);
+    state = ((RuntimeState *)fn_80201B8C(owner));
     state->resource = state->resource;
     ((OwnerResource *)state->resource)->linked = fn_80201B54(object);
     if (!found) {

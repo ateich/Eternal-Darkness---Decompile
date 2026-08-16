@@ -32,9 +32,9 @@ typedef struct Context8009EAB0 {
     u32 flags;
 } Context8009EAB0;
 
-extern void* fn_80201B44();
+extern int fn_80201B44();
 extern void *fn_80201814();
-extern void*fn_80201B8C();
+extern void *fn_80201B8C();
 extern Context8009EAB0* fn_8006ED3C(State8009EAB0*, int, int*);
 extern void* fn_8007D944(void);
 extern int fn_8015E4E8(void);
@@ -49,7 +49,7 @@ int fn_8009EAB0(register State8009EAB0* state)
     register int done = 0;
     Context8009EAB0* context;
 
-    fn_80201B8C(fn_80201814(fn_80201B44()));
+    fn_80201B8C(fn_80201814(((void*)fn_80201B44())));
     context = fn_8006ED3C(state, 0x17, &index);
     if (state->work->flags & 0x8000) {
         if (!fn_8007D944() && !fn_8015E4E8() && !fn_800460EC()) {
@@ -70,7 +70,7 @@ int fn_8009EAB0(register State8009EAB0* state)
         }
     }
     if (!(context->flags & 0x40000) && done) {
-        fn_8020123C(8, 0, fn_80201B44(), 0);
+        fn_8020123C(8, 0, ((void*)fn_80201B44()), 0);
         context->flags = (context->flags | 0x40000) | 0x100;
         state->entries[index].field_02 = 2;
         state->entries[index].field_03 = 4;

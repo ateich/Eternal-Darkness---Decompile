@@ -3,7 +3,7 @@ extern int lbl_8064D18C;
 
 extern int fn_80201910(int);
 extern void fn_801E7974(void *, int);
-extern int fn_80201B44(void);
+extern int fn_80201B44();
 extern int fn_802066E0(int, unsigned int);
 extern void fn_8011E26C(int);
 

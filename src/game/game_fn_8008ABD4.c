@@ -17,11 +17,11 @@ typedef struct Data8C {
 } Data8C;
 
 extern void *fn_80201BC8();
-extern Info*fn_80201B8C();
-extern void* fn_80201B54();
+extern void *fn_80201B8C();
+extern int fn_80201B54();
 extern int fn_8015C910(void);
 extern int fn_80204180(void*, void*);
-extern void* fn_801294DC(void*, int, int, int);
+extern void *fn_801294DC(void *, int, int, int);
 extern void* fn_801A717C(void);
 extern void fn_801A7460(void*, int);
 extern void fn_801A74A0(void*, void*);
@@ -61,9 +61,9 @@ int fn_8008ABD4(void* object, void* other, int unused, int forced)
     otherPosition = fn_80201BC8(other);
     if (objectPosition == 0 || otherPosition == 0)
         return 0;
-    info = fn_80201B8C(object);
-    owner = fn_80201B54(object);
-    otherOwner = other != 0 ? fn_80201B54(other) : 0;
+    info = ((Info*)fn_80201B8C(object));
+    owner = ((void*)fn_80201B54(object));
+    otherOwner = other != 0 ? ((void*)fn_80201B54(other)) : 0;
     if (fn_8015C910() != 0)
         return 0;
     distance = fn_80204180(object, other);

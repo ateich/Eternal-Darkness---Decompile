@@ -4,7 +4,7 @@ typedef unsigned int u32;
 
 extern void *fn_80201B8C();
 extern u32 fn_80036D5C(void *);
-extern void *fn_80201B54();
+extern int fn_80201B54();
 extern void fn_80036DA4(void *, u32);
 extern void fn_8016B400(int, void *, int);
 
@@ -19,7 +19,7 @@ int fn_800CA2C8(void *object)
         int has_id;
         info = fn_80201B8C(object);
         flags = fn_80036D5C(object);
-        model = fn_80201B54(object);
+        model = ((void *)fn_80201B54(object));
 
         has_id = 0;
         if (info != 0 && *(void **)(info + 0x8C) != 0) {

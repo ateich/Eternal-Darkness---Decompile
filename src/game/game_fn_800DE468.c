@@ -1,5 +1,5 @@
 extern void fn_801A98F4(int, int);
-extern int fn_80201B44(void);
+extern int fn_80201B44();
 extern void fn_801ACACC(int, int, int, int);
 
 void fn_800DE468(int alternate)

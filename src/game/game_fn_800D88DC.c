@@ -5,8 +5,8 @@ typedef struct Vec3 {
     float x, y, z;
 } Vec3;
 
-extern s32 fn_80201B54(void *);
-extern void *fn_801294DC(void *, s32, s32, s32);
+extern int fn_80201B54();
+extern void *fn_801294DC(void *, int, int, int);
 extern void fn_800D8B74(s32, void *);
 extern void *fn_800A1D28(void *);
 extern void fn_802045AC(void *, Vec3 *);
@@ -17,8 +17,8 @@ extern void fn_80129BA4(void *, float, float);
 extern void fn_801287C4(void *, void *, void *, s32);
 extern void fn_80128C44(void *, void *, s32);
 extern void fn_80128C28(void *, void *, s32);
-extern void fn_80201D2C(void *, s32);
-extern void fn_80201D14(void *, s32);
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern void fn_800D93B4(void);
 extern void fn_800DA0C4(void);
 extern void fn_800DA05C(void);
@@ -42,7 +42,7 @@ s32 fn_800D88DC(void *object, void *resource)
     float value;
     s32 result = 1;
 
-    object_id = fn_80201B54(object);
+    object_id = ((s32)fn_80201B54(object));
     created = fn_801294DC(resource, 5, 0x100, 6);
     if (created == 0) {
         return 0;

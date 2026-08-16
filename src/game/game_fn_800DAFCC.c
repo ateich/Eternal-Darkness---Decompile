@@ -4,7 +4,7 @@ typedef struct Entry {
 } Entry;
 
 extern Entry **fn_801FD240(void *);
-extern int fn_80201B54(void *);
+extern int fn_80201B54();
 extern void **fn_80047D6C(void);
 extern void fn_801FD534(void *);
 

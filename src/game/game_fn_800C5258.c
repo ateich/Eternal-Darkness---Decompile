@@ -7,7 +7,7 @@ typedef struct Owner {
 
 extern void *fn_801A7498(void *);
 extern void *fn_80201814();
-extern Owner *fn_80201B8C();
+extern void *fn_80201B8C();
 extern unsigned long long fn_8020123C();
 
 int fn_800C5258(void *unused, void *object)
@@ -19,7 +19,7 @@ int fn_800C5258(void *unused, void *object)
     saved_object = object;
     value = fn_801A7498(saved_object);
     fn_80201814(value);
-    owner = fn_80201B8C();
+    owner = ((Owner *)fn_80201B8C());
     fn_8020123C(0x31, value, owner->data[7], saved_object);
     return 1;
 }

@@ -2,12 +2,12 @@ typedef struct Vec3_80094DD0 {
     float x, y, z;
 } Vec3_80094DD0;
 
-extern void* fn_80201B44();
+extern int fn_80201B44();
 extern void *fn_80201814();
-extern void*fn_80201B8C();
+extern void *fn_80201B8C();
 extern int fn_80036D5C(void*);
 extern int fn_80201B5C(void*);
-extern void* fn_80201B54();
+extern int fn_80201B54();
 extern void fn_8011F114();
 extern int fn_801E2004(void*);
 extern int fn_8011F760(void*);
@@ -30,12 +30,12 @@ int fn_80094DD0(register void* object, register void* resource, void* unused)
     register int special;
     Vec3_80094DD0 position;
 
-    component = fn_80201B44(object);
+    component = ((void*)fn_80201B44(object));
     other = fn_80201814();
     state = fn_80201B8C(object);
     flags = fn_80036D5C(object);
     fn_80201B5C(object);
-    state = fn_80201B54(object);
+    state = ((void*)fn_80201B54(object));
     fn_8011F114(&position, resource);
 
     if ((flags & 0x80) != 0 || (flags & 0x200000) != 0) {

@@ -34,7 +34,7 @@ extern void *fn_80201814();
 extern void *fn_80201BC8();
 extern void fn_8014C23C(int, int, int);
 extern void fn_8012C478(void*, int, int);
-extern void* fn_80201B54();
+extern int fn_80201B54();
 extern void* fn_80158598(void*, int);
 extern LinkedInfo* fn_80201C24(void*);
 extern void fn_80157E34(void*, int, int, int, int);
@@ -76,7 +76,7 @@ int fn_800A0DE4(void* state)
     if (work->handle1 != -1) {
         linked = fn_80201814((void*)work->handle1);
         if (linked != 0) {
-            indexed = fn_80158598(fn_80201B54(object), 0);
+            indexed = fn_80158598(((void*)fn_80201B54(object)), 0);
             fn_80157E34(indexed, work->handle1, 2,
                         ((LinkedValue*)fn_80201C24(linked)->value)->value, 0);
             fn_8004948C(object, fn_8004918C(), 0);
@@ -86,7 +86,7 @@ int fn_800A0DE4(void* state)
     if (work->handle0 != -1) {
         linked = fn_80201814((void*)work->handle0);
         if (linked != 0) {
-            indexed = fn_80158598(fn_80201B54(object), 0);
+            indexed = fn_80158598(((void*)fn_80201B54(object)), 0);
             fn_80157E34(indexed, work->handle0, 1,
                         ((LinkedValue*)fn_80201C24(linked)->value)->value, 0);
         }
@@ -95,7 +95,7 @@ int fn_800A0DE4(void* state)
     if (work->handle2 != -1) {
         linked = fn_80201814((void*)work->handle2);
         if (linked != 0) {
-            indexed = fn_80158598(fn_80201B54(object), 0);
+            indexed = fn_80158598(((void*)fn_80201B54(object)), 0);
             fn_80157E34(indexed, work->handle2, 4,
                         ((LinkedValue*)fn_80201C24(linked)->value)->value, 0);
         }

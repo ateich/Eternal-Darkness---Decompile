@@ -3,7 +3,7 @@ typedef signed int s32;
 extern void *fn_80201BC8();
 extern void fn_8011F114();
 extern int fn_80201B54();
-extern void *fn_801294DC(void *object, s32 type, s32 flags, s32 value);
+extern void *fn_801294DC(void *, int, int, int);
 extern void fn_80204810(void);
 extern void fn_80128C44(void *object, void (*callback)(void), s32 value);
 extern void fn_80128C28(void *object, void (*callback)(void), s32 value);

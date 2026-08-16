@@ -1,5 +1,5 @@
 extern int fn_80079008(void *context, void *object);
-extern void *fn_801294DC(void *object, int kind, int flags, int enabled);
+extern void *fn_801294DC(void *, int, int, int);
 
 void fn_80079054(void *context, unsigned int flags, void *object)
 {

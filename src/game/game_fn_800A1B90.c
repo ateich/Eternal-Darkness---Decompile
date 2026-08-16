@@ -10,7 +10,7 @@ typedef struct Object800A1B90 {
 extern Vec3 fn_80201E78(void*);
 extern void fn_80211A6C(Vec3, Object800A1B90*, Vec3*);
 extern int fn_800A4F44(Vec3*, float);
-extern void* fn_80201B54();
+extern int fn_80201B54();
 extern unsigned long long fn_8020123C();
 
 int fn_800A1B90(Object800A1B90* object, int value, void* entity)
@@ -22,7 +22,7 @@ int fn_800A1B90(Object800A1B90* object, int value, void* entity)
         fn_80211A6C(fn_80201E78(entity), object, &delta);
         result = fn_800A4F44(&delta, object->radius) > 0;
         if (result) {
-            fn_8020123C(0xA5, value, fn_80201B54(entity), object);
+            fn_8020123C(0xA5, value, ((void*)fn_80201B54(entity)), object);
         }
     }
     return result;

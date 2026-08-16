@@ -12,7 +12,7 @@ typedef struct Object800A3588 {
     u8 enabled;
 } Object800A3588;
 
-extern void* fn_80201B54();
+extern int fn_80201B54();
 extern int fn_800A1B90(void*, void*, void*);
 extern void fn_80201E78(Vec800A3588*, void*);
 extern void* fn_801A717C(void);
@@ -42,13 +42,13 @@ int fn_800A3588(Object800A3588* object, void* arg1, void* arg2, void* arg3,
     int found;
 
     if (object->active != 0) {
-        converted = fn_80201B54(arg1);
+        converted = ((void*)fn_80201B54(arg1));
         found = fn_800A1B90(arg2, converted, arg3);
         if (create != 0 && found == 0 && object->enabled != 0) {
             fn_80201E78(&source, arg3);
             position = source;
             effect = fn_801A717C();
-            create = (int)fn_80201B54(arg3);
+            create = (int)((void*)fn_80201B54(arg3));
             fn_801A74D8(effect, 0x100);
             fn_801A74A0(effect, converted);
             fn_801A7538(effect, 5);

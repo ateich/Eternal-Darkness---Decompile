@@ -3,8 +3,8 @@ typedef struct Color { unsigned char r, g, b, a; } Color;
 extern const Color lbl_8064F628;
 extern const Color lbl_8064F62C;
 extern const Color lbl_80651B28;
-extern void fn_80201B54(void *);
-extern void *fn_80201B8C(void *);
+extern int fn_80201B54();
+extern void *fn_80201B8C();
 extern void *fn_80201890(void *);
 extern void fn_8012C62C(void *, int, Color, Color, Color, int);
 

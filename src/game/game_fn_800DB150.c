@@ -4,7 +4,7 @@ typedef struct GameState {
 } GameState;
 
 extern void *fn_80201C24(void *);
-extern int fn_80201B54(void *);
+extern int fn_80201B54();
 extern unsigned char fn_80157AB8(void *);
 extern int fn_801D1AC0(int);
 extern int fn_801E79FC(void *, int);

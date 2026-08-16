@@ -24,7 +24,7 @@ typedef struct Payload {
 extern const float lbl_8064F2B0;
 extern const float lbl_8064F30C;
 extern void *fn_80201814();
-extern RuntimeState *fn_80201B8C();
+extern void *fn_80201B8C();
 extern void fn_802006D4(int, int, int, int, int);
 extern void *fn_80037AF4(int);
 extern int fn_80201B54();
@@ -46,7 +46,7 @@ void *fn_800CD568(int first, int owner, int second, void *third, float time,
 
     resolved = fn_80201814(owner);
     if (resolved != 0) {
-        state = fn_80201B8C(resolved);
+        state = ((RuntimeState *)fn_80201B8C(resolved));
         linked = ((OwnerResource *)state->resource)->linked;
         previous = linked;
         if (linked != 0) {
@@ -60,7 +60,7 @@ void *fn_800CD568(int first, int owner, int second, void *third, float time,
             }
         }
         if (object != 0) {
-            payload = (Payload *)fn_80201B8C(object)->payload;
+            payload = (Payload *)((RuntimeState *)fn_80201B8C(object))->payload;
             if (previous != 0) {
                 fn_801E32F8(payload);
             }

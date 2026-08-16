@@ -6,7 +6,7 @@ extern u32 lbl_8064CA8C;
 extern void *fn_801A7498(void *);
 extern void *fn_80201814();
 extern int fn_80201B54();
-extern void **fn_80201B8C();
+extern void *fn_80201B8C();
 extern u32 fn_8003BD48(void *, void *);
 extern u32 fn_80128EE4(void *);
 extern int fn_80128F40(void *);
@@ -35,7 +35,7 @@ int fn_800C1D60(void *object, void *event)
     int delta;
 
     fn_80201B54(event_object);
-    state = fn_80201B8C(event_object);
+    state = ((void **)fn_80201B8C(event_object));
     runtime = (u8 *)state[0];
     flags = fn_8003BD48(object, event);
     mode = fn_80128EE4(object);

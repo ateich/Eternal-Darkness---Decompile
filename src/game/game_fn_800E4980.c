@@ -9,7 +9,7 @@ extern Vec3 lbl_80325CE0;
 extern float lbl_8064F6B0;
 extern float lbl_8064F6B4;
 extern int fn_800FBFB0(void);
-extern void fn_8011F114(Vec3 *, void *);
+extern void fn_8011F114();
 
 void fn_800E4980(void)
 {

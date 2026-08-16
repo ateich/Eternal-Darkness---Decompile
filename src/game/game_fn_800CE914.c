@@ -18,7 +18,7 @@ typedef struct Resource {
 } Resource;
 
 extern void *fn_80037AF4(int);
-extern RuntimeState *fn_80201B8C();
+extern void *fn_80201B8C();
 extern void fn_800CD1FC(Payload *, void *, void *, int);
 extern int fn_80201B54();
 extern void fn_802015A4(void *);
@@ -27,11 +27,11 @@ extern void fn_802015A4(void *);
 void *fn_800CE914(void *owner, void *first, void *second, int third)
 {
     void *object = fn_80037AF4(0x16);
-    Payload *payload = (Payload *)fn_80201B8C(object)->payload;
+    Payload *payload = (Payload *)((RuntimeState *)fn_80201B8C(object))->payload;
 
     fn_800CD1FC(payload, first, second, third);
     payload->owner = fn_80201B54(owner);
     fn_802015A4(object);
-    ((Resource *)fn_80201B8C(owner)->resource)->linked = fn_80201B54(object);
+    ((Resource *)((RuntimeState *)fn_80201B8C(owner))->resource)->linked = fn_80201B54(object);
     return object;
 }

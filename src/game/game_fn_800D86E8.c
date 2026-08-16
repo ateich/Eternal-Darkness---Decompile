@@ -6,7 +6,7 @@ typedef struct Object {
 } Object;
 
 extern void fn_800A2384(Object *);
-extern int fn_80201B44(void);
+extern int fn_80201B44();
 
 void fn_800D86E8(Object *object, int value)
 {

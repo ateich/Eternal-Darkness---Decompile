@@ -1,5 +1,5 @@
 extern void *fn_80201BC8();
-extern void *fn_80201B54();
+extern int fn_80201B54();
 extern void fn_80201910(void *);
 extern int fn_8011F130(void *);
 extern void fn_801F74C8(int, int, int);
@@ -21,7 +21,7 @@ void fn_800C81E0(void *object)
     void *owner;
     void *effect;
 
-    owner = fn_80201B54(object);
+    owner = ((void *)fn_80201B54(object));
     count = fn_8011F130(lbl_8064C4E4);
 
     fn_801F74C8(0xAE, 1, 5);

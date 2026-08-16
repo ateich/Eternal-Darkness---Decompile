@@ -52,9 +52,9 @@ extern unsigned int fn_80178E94(Vec3*, Vec3*);
 extern int fn_800DE3F8(void);
 extern void fn_80140E58(void);
 extern u8 fn_80203F60(void*, void*, Vec3*, Vec3*, int);
-extern void* fn_801294DC(void*, int, int, int);
+extern void *fn_801294DC(void *, int, int, int);
 extern unsigned long long fn_8020123C();
-extern RuntimeD6E4*fn_80201B8C();
+extern void *fn_80201B8C();
 extern int fn_800DEA28(void*);
 extern void fn_80204810(void);
 extern void fn_80128C28(void*, void (*)(void), int);
@@ -123,7 +123,7 @@ int fn_8008D6E4(void* object, void* resource)
         fn_8012B344(resource);
         return 0;
     }
-    runtime = fn_80201B8C(object);
+    runtime = ((RuntimeD6E4*)fn_80201B8C(object));
     values = (ValuesD6E4*)runtime->values;
     if (fn_800DEA28(target)) {
         values->second = object_id;

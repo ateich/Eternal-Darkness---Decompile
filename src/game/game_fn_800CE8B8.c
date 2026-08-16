@@ -11,10 +11,10 @@ typedef struct RuntimeState {
     Data *data;
 } RuntimeState;
 
-extern RuntimeState *fn_80201B8C();
+extern void *fn_80201B8C();
 
 void fn_800CE8B8(void *object)
 {
-    Data *data = fn_80201B8C(object)->data;
+    Data *data = ((RuntimeState *)fn_80201B8C(object))->data;
     data->speed = -data->speed;
 }

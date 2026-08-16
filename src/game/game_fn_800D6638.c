@@ -14,8 +14,8 @@ typedef struct Actor {
 } Actor;
 
 extern float lbl_8064F3D8;
-extern int fn_80201B54(void *);
-extern unsigned long long fn_8020123C(int, int, void *, int);
+extern int fn_80201B54();
+extern unsigned long long fn_8020123C();
 extern void fn_8020104C(int, int, void *, int, float);
 
 void fn_800D6638(Actor *actor, void *object, int action)

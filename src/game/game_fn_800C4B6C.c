@@ -6,7 +6,7 @@ extern int lbl_8064B714;
 extern float lbl_8064F140;
 
 extern void *fn_80201BC8();
-extern void *fn_80201B54();
+extern int fn_80201B54();
 extern u16 fn_801291CC(void *);
 extern unsigned long long fn_8020123C();
 extern void fn_8020104C(int, void *, void *, void *, float);
@@ -14,7 +14,7 @@ extern void fn_8020104C(int, void *, void *, void *, float);
 void fn_800C4B6C(void *context)
 {
     void *object = fn_80201BC8(context);
-    void *value = fn_80201B54(context);
+    void *value = ((void *)fn_80201B54(context));
 
     if (lbl_8064B714 >= 0) {
         if (fn_801291CC(object) <= 5) {

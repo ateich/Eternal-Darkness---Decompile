@@ -18,13 +18,13 @@ typedef struct Runtime800A4EC8 {
 } Runtime800A4EC8;
 
 extern int fn_801A7590(void*);
-extern Runtime800A4EC8*fn_80201B8C();
+extern void *fn_80201B8C();
 
 int fn_800A4EC8(void* object, void* value)
 {
     int mask = fn_801A7590(value);
     int result = 0;
-    Runtime800A4EC8* runtime = fn_80201B8C(object);
+    Runtime800A4EC8* runtime = ((Runtime800A4EC8*)fn_80201B8C(object));
     Entry800A4EC8* entry = runtime->entry;
     Values800A4EC8* values = runtime->values;
 

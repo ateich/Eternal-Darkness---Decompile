@@ -14,7 +14,7 @@ extern int lbl_8064D5A8;
 extern float lbl_8064EC2C;
 extern float lbl_8064EC30;
 
-extern Runtime*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void fn_8011F114();
 extern void fn_802045AC(void*, Vec3*);
 extern int fn_80201C48(void*);
@@ -32,7 +32,7 @@ extern void fn_8012976C(void*, int, int, Vec3*, float);
 void fn_8008E88C(void* object, void* actor, void* unused, void* distance_ctx,
                  void* unused2, void* status)
 {
-    Runtime* runtime = fn_80201B8C(object);
+    Runtime* runtime = ((Runtime*)fn_80201B8C(object));
     void* resource = runtime->resource;
     Vec3 position;
     Vec3 hit;

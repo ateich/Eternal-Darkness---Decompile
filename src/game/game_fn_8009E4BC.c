@@ -31,7 +31,7 @@ extern Context8009E4BC* fn_8006ED3C(State8009E4BC*, int, int*);
 extern void fn_801EFE84(int);
 extern void fn_8006DEF8(State8009E4BC*, int, void*, void*, int);
 extern void *fn_80201814();
-extern Global8009E4BC*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void fn_8020104C(int, int, void*, int, float);
 extern void* fn_80036D38(void*);
 extern void fn_802020B4(void*, int);
@@ -60,7 +60,7 @@ int fn_8009E4BC(register State8009E4BC* state)
             }
             {
                 void* object = fn_80201814(*(void**)((u8*)state + 0x38));
-                fn_8020104C(0x51, 0, fn_80201B8C()->inner->object, 0, lbl_8064EDC0);
+                fn_8020104C(0x51, 0, ((Global8009E4BC*)fn_80201B8C())->inner->object, 0, lbl_8064EDC0);
                 fn_802020B4(fn_80201814(*(void**)((u8*)fn_80036D38(object) + 0x44)), 0);
             }
             fn_801A5C30(0);

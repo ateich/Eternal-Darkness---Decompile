@@ -11,7 +11,7 @@ typedef struct Info800A4DD4 {
 } Info800A4DD4;
 
 extern Info800A4DD4* fn_800A1D28(void*);
-extern void* fn_80201B54();
+extern int fn_80201B54();
 extern void fn_800A2E5C(Info800A4DD4*, int);
 extern void* fn_800CA4B8(void*, int, void*, int, unsigned int*, float (*)[3], void*);
 extern const float lbl_8023972C[3][3];
@@ -35,7 +35,7 @@ int fn_800A4DD4(void* object, void* context, void* unused, void* callback)
     values[0] = info->value;
     values[1] = info->value;
     values[2] = info->value;
-    fn_80201B54(object);
+    ((void*)fn_80201B54(object));
     info->handle = fn_800CA4B8(object, 5, context, 3, values, matrix, callback);
     if (info->handle != 0) {
         fn_800A2E5C(info, 3);

@@ -1,13 +1,13 @@
-extern void fn_80201BC8(void *);
+extern void *fn_80201BC8();
 extern int fn_8011FAEC(void);
 extern void *fn_80201C24(void *);
 extern int fn_80157894(void *);
 extern void **fn_80047D6C(void);
-extern int fn_80201B54(void *);
-extern void fn_8020123C(int, int, int, void **);
+extern int fn_80201B54();
+extern unsigned long long fn_8020123C();
 extern void fn_80157B6C(void *, int);
 extern int fn_801579F4(void *);
-extern void *fn_80201814(void);
+extern void *fn_80201814();
 extern void fn_800DB37C(void *, int);
 extern void fn_800DBA0C(void *, int);
 

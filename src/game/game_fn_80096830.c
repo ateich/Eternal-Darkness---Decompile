@@ -24,9 +24,9 @@ extern const double lbl_8064EC90;
 extern const float lbl_8064ECBC;
 extern const double lbl_8064ECD8;
 
-extern ObjectData80096830*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void fn_80201E78(Vec3*, void*);
-extern void* fn_801294DC(void*, int, int, int);
+extern void *fn_801294DC(void *, int, int, int);
 extern Candidate80096830* fn_800935CC(int, void*, void*, int);
 extern unsigned int fn_80178E94(Vec3*, Vec3*);
 extern int fn_80200C38(void*);
@@ -49,7 +49,7 @@ void fn_80096830(register int index, register void* object,
 
     action = resource;
     random = random_context;
-    state = fn_80201B8C(object)->state;
+    state = ((ObjectData80096830*)fn_80201B8C(object))->state;
     fn_80201E78(&position, object);
     action = fn_801294DC(action, 0x8E, 0x31, 8);
     if (action != 0) {

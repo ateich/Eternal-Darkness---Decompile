@@ -23,7 +23,7 @@ extern float fn_8012B7D0(void*, Vec3*);
 extern float fn_8012B750(void*);
 extern void fn_8017A12C(float*, float, float);
 extern void fn_800BE86C(void*, Vec3*, int, int, float);
-extern void* fn_801294DC(void*, int, int, int);
+extern void *fn_801294DC(void *, int, int, int);
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);
 

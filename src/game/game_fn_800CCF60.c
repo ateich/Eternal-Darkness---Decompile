@@ -35,8 +35,8 @@ typedef struct Payload {
 } Payload;
 
 extern void *fn_80037AF4(int);
-extern RuntimeState *fn_80201B8C();
-extern void *fn_80201B54();
+extern void *fn_80201B8C();
+extern int fn_80201B54();
 extern void fn_802015A4(void *);
 extern int fn_801E8328(int, void *);
 
@@ -46,16 +46,16 @@ void *fn_800CCF60(void *owner, int first, int second, void *related,
                   int byte_fc, int byte_fd, u16 half_fe)
 {
     void *object = fn_80037AF4(0x2B);
-    Payload *payload = (Payload *)fn_80201B8C(object)->payload;
+    Payload *payload = (Payload *)((RuntimeState *)fn_80201B8C(object))->payload;
 
     payload->byte_fc = byte_fc;
     payload->byte_fd = byte_fd;
     payload->half_fe = half_fe;
-    payload->owner_model = (int)fn_80201B54(owner);
+    payload->owner_model = (int)((void *)fn_80201B54(owner));
     payload->first = first;
     payload->second = second;
     if (related != 0) {
-        payload->related_model = fn_80201B54(related);
+        payload->related_model = ((void *)fn_80201B54(related));
         payload->third = third;
         payload->fourth = fourth;
     } else {
@@ -65,9 +65,9 @@ void *fn_800CCF60(void *owner, int first, int second, void *related,
     payload->value = value;
     fn_802015A4(object);
 
-    payload = (Payload *)fn_80201B54(object);
+    payload = (Payload *)((void *)fn_80201B54(object));
     {
-        RuntimeState *state = fn_80201B8C(owner);
+        RuntimeState *state = ((RuntimeState *)fn_80201B8C(owner));
         OwnerResource *resource = state->owner_resource;
         int slot;
         slot = 0;

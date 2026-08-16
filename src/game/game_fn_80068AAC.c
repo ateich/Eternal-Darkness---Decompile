@@ -45,7 +45,7 @@ extern u16 fn_800681A0(s32, s32);
 extern void *fn_80201814();
 extern void *fn_80201B8C();
 extern void *fn_80201BC8();
-extern int fn_80201B54(), fn_80201BC0(s32), fn_80204508(s32, s32);
+extern int fn_80201B54();
 extern u32 fn_80178E94(Vec3 *, Vec3 *);
 extern void fn_8013F4D0(Vec3 *, Vec3 *, Vec3 *);
 extern s32 fn_8014317C(Vec3 *, Vec3 *, void *, s32, s32);

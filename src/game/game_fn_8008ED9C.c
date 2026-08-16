@@ -16,14 +16,14 @@ extern float lbl_8064EC34;
 
 extern void fn_8011F114();
 extern unsigned int fn_80178E94(Vec3*, void*);
-extern void* fn_80201B54();
-extern Runtime*fn_80201B8C();
+extern int fn_80201B54();
+extern void *fn_80201B8C();
 extern float fn_8011F6F8(void*);
 extern int fn_8003E1F0(void*, Vec3*, int, float);
 extern unsigned char fn_80204434(void*, Vec3*, int, float);
 extern int fn_8008D4B4(void*, void*, void*);
 extern int fn_800CA7D4(void*, void*, void*, void*, int, int);
-extern void* fn_80201B44();
+extern int fn_80201B44();
 extern void fn_8008D31C(void*, void*, void*, Runtime*, void*, int, void*);
 extern int fn_8012AFC4(void*);
 extern void fn_80129928(void*, Vec3*);
@@ -43,8 +43,8 @@ void fn_8008ED9C(void* object, void* actor, void* distance_ctx, void* callback)
     fn_8011F114(&source, lbl_8064C4E4);
     reference = source;
     distance = fn_80178E94(&reference, distance_ctx);
-    owner = fn_80201B54(object);
-    runtime = fn_80201B8C(object);
+    owner = ((void*)fn_80201B54(object));
+    runtime = ((Runtime*)fn_80201B8C(object));
     resource = runtime->resource;
     if (distance < 500 &&
         fn_8003E1F0(object, &reference, 1,
@@ -54,7 +54,7 @@ void fn_8008ED9C(void* object, void* actor, void* distance_ctx, void* callback)
             return;
         }
         if (fn_800CA7D4(owner, object, resource, actor, 30, 1)) {
-            fn_8008D31C(object, owner, fn_80201B44(), runtime, actor, 5,
+            fn_8008D31C(object, owner, ((void*)fn_80201B44()), runtime, actor, 5,
                         distance_ctx);
         } else if (fn_8012AFC4(actor)) {
             fn_80129928(actor, &reference);

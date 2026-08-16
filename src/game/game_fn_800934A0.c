@@ -20,8 +20,8 @@ extern float lbl_8064EC7C;
 extern float lbl_8064EC88;
 
 extern int fn_80201B54();
-extern Runtime800934A0*fn_80201B8C();
-extern void* fn_801294DC(void*, int, int, int);
+extern void *fn_80201B8C();
+extern void *fn_801294DC(void *, int, int, int);
 extern Entry800934A0* fn_800935CC(void*, void*, u32, int);
 extern void fn_80128C28(void*, void (*)(void), int);
 extern void fn_80204810(void);
@@ -38,7 +38,7 @@ void fn_800934A0(register void* object, register void* event, void* unused,
     float value;
 
     kind = fn_80201B54(object);
-    state = fn_80201B8C(object)->state;
+    state = ((Runtime800934A0*)fn_80201B8C(object))->state;
     action = fn_801294DC(event, 143, 32, 8);
     if (action != 0) {
         Entry800934A0* entry = fn_800935CC(0, 0, state->entry_id, 4);

@@ -15,8 +15,8 @@ extern float lbl_8064EC24;
 
 extern void* fn_8008F224(void*, int, int);
 extern void *fn_80201814();
-extern void*fn_80201B8C();
-extern void* fn_80201B44();
+extern void *fn_80201B8C();
+extern int fn_80201B44();
 extern void fn_801ACACC(int, int, void*, int);
 extern void fn_800DE4D8(void*, int);
 extern void *fn_80201BC8();
@@ -44,7 +44,7 @@ void fn_80090004(void* object, void* actor, void* target, void* unused4,
     int next;
 
     fn_80201B8C(state);
-    fn_801ACACC(0xC1, 0x4B, fn_80201B44(), 0x82);
+    fn_801ACACC(0xC1, 0x4B, ((void*)fn_80201B44()), 0x82);
     fn_800DE4D8(owner, 2);
     fn_8011FA8C(fn_80201BC8(state), 0, 0x02000000);
     fn_80036DA4(state, fn_80036D5C(state) | 0x80000);

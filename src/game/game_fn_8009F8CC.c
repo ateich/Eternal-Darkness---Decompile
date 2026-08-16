@@ -11,7 +11,7 @@ typedef struct Link8009F8CC {
     void* field_44;
 } Link8009F8CC;
 
-extern void* fn_80201B44();
+extern int fn_80201B44();
 extern void *fn_80201814();
 extern Context8009F8CC* fn_8006ED3C(void*, int, int*);
 extern Link8009F8CC* fn_80036D38(void*);
@@ -31,7 +31,7 @@ int fn_8009F8CC(register void* state)
     void* linked;
     int index;
 
-    runtime = fn_80201814(fn_80201B44());
+    runtime = fn_80201814(((void*)fn_80201B44()));
     context = fn_8006ED3C(state, 15, &index);
     linked = fn_80201814(fn_80036D38(runtime)->field_44);
     fn_802020B4(linked, 0);

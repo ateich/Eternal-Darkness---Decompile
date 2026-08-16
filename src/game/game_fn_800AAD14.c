@@ -20,7 +20,7 @@ typedef struct ObjectState {
 #define NONNEG(a) ((a) & (((-(a)) & ~(a)) >> 31))
 
 extern int fn_80201B54();
-extern ObjectState*fn_80201B8C();
+extern void *fn_80201B8C();
 extern unsigned long long fn_8020123C();
 extern Vec3i* fn_8011F130(void*);
 extern int* lbl_8064C5A8;
@@ -31,7 +31,7 @@ int fn_800AAD14(void* object, void* position)
 {
     EffectState* effect;
     int owner = fn_80201B54(object);
-    effect = fn_80201B8C(object)->effect;
+    effect = ((ObjectState*)fn_80201B8C(object))->effect;
 
     if (effect->active == 1) {
         if (effect->timer > 0) {

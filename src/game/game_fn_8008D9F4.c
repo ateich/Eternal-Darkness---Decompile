@@ -13,7 +13,7 @@ extern Vec3 lbl_8023963C;
 extern void* fn_80201B9C();
 extern void fn_8011F114();
 extern int fn_80201B54();
-extern RuntimeD9F4*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void *fn_80201BC8();
 extern int fn_80201EB8();
 extern unsigned int fn_80178E94(Vec3*, Vec3*);
@@ -38,7 +38,7 @@ int fn_8008D9F4(void* object, void* unused4, void* unused5, int flags)
     base = initial;
     own_id = fn_80201B54(object);
     while (current != 0) {
-        RuntimeD9F4* runtime = fn_80201B8C(current);
+        RuntimeD9F4* runtime = ((RuntimeD9F4*)fn_80201B8C(current));
         void* attachment = fn_80201BC8(current);
         Vec3* selected;
         int candidate_id;

@@ -15,14 +15,14 @@ typedef struct Result {
     unsigned short pad;
 } Result;
 
-extern Owner *fn_80201B8C();
+extern void *fn_80201B8C();
 extern void *memcpy(void *, const void *, unsigned int);
 
 unsigned short fn_800BB450(void *output, void *object)
 {
     signed short value = 0;
     Result result;
-    Owner *owner = fn_80201B8C(object);
+    Owner *owner = ((Owner *)fn_80201B8C(object));
 
     if (owner != 0 && owner->source != 0) {
         value = owner->source->value;

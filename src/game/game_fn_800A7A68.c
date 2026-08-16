@@ -4,15 +4,15 @@ typedef struct Entry { int value; int kind; int pad8; } Entry;
 typedef struct EntryList { int count; Entry* entries; } EntryList;
 typedef struct State { u8 pad0[0x90]; void* field90; } State;
 
-extern void*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void* fn_80201B94(void*);
 extern void fn_8011F114();
 extern void fn_80128EE4(void*);
 extern void* fn_80201C48(void*);
-extern void* fn_80201B54();
+extern int fn_80201B54();
 extern void *fn_80201814();
 extern void *fn_80201BC8();
-extern void* fn_801294DC(void*, int, int, int);
+extern void *fn_801294DC(void *, int, int, int);
 extern void* fn_801A717C(void);
 extern void* fn_80072354(void*);
 extern void fn_801A7460(void*, int);
@@ -63,7 +63,7 @@ int fn_800A7A68(void* context, void* object)
     copy = position;
     fn_80128EE4(object);
     target = fn_80201C48(actor);
-    owner = fn_80201B54(context);
+    owner = ((void*)fn_80201B54(context));
     target = fn_80201814(target);
     if (target == 0) return 0;
     fn_8011F114(&position, fn_80201BC8(target));

@@ -21,7 +21,7 @@ extern int fn_80201B54();
 extern int fn_80201EB8(void *);
 extern void *fn_80201BC8();
 extern void fn_8011F114();
-extern NodeInfo *fn_80201B8C();
+extern void *fn_80201B8C();
 extern unsigned long long fn_8020123C();
 extern Vec3 *fn_800C43AC(Vec3 *, void *);
 extern unsigned int fn_80178E94(Vec3 *, Vec3 *);
@@ -42,7 +42,7 @@ void *fn_800BE938(void *object, int enabled)
 
     fn_8011F114(&object_position, object_position_object);
     while (cursor != 0) {
-        NodeInfo *info = fn_80201B8C(cursor);
+        NodeInfo *info = ((NodeInfo *)fn_80201B8C(cursor));
         unsigned int *flags = info != 0 ? info->flags : 0;
         void *candidate_position_object = fn_80201BC8(cursor);
         int candidate_owner = fn_80201B54(cursor);
@@ -83,7 +83,7 @@ void *fn_800BE938(void *object, int enabled)
     }
 
     if (selected != 0) {
-        NodeInfo *selected_info = fn_80201B8C(selected);
+        NodeInfo *selected_info = ((NodeInfo *)fn_80201B8C(selected));
         *selected_info->flags |= 0x10000;
     }
     return selected;

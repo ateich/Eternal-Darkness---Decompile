@@ -8,7 +8,7 @@ typedef struct Actor {
 } Actor;
 
 extern void *fn_801A717C(void);
-extern int fn_80201B54(void *);
+extern int fn_80201B54();
 extern int fn_801A74B8(void *);
 extern void fn_801A74A0(void *, int);
 extern void fn_801A7538(void *, int);

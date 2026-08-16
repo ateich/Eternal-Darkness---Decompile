@@ -6,12 +6,12 @@ extern u8 lbl_803003C8[];
 extern float lbl_8064EBC0;
 extern float lbl_8064EBC4;
 
-extern void*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void *fn_80201BC8();
-extern s32 fn_80201B54();
+extern int fn_80201B54();
 extern s32 fn_80201EB8();
 extern int fn_801E8328(s32, void*);
-extern void* fn_801294DC(void*, s32, s32, s32);
+extern void *fn_801294DC(void *, int, int, int);
 extern void fn_80128C28(void*, void*, s32);
 extern void fn_8008A8D8(void);
 extern void fn_800389E0(void*, s32, s32, s32);
@@ -32,7 +32,7 @@ void fn_8008A6F8(void* object)
 
     fn_80201B8C(object);
     resource = fn_80201BC8(object);
-    object_id = fn_80201B54(object);
+    object_id = ((s32)fn_80201B54(object));
     if ((s32)lbl_8064D18C != fn_80201EB8(object)) {
         fn_801E8328(2, object);
         return;

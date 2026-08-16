@@ -27,11 +27,11 @@ typedef struct SpawnConfig {
 extern float lbl_8064EC10;
 
 extern void* fn_80201B9C();
-extern void* fn_80201B44();
+extern int fn_80201B44();
 extern void fn_800DE8FC(void*, Vec3*);
-extern Runtime*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void* fn_80201EB8();
-extern void* fn_80201B54();
+extern int fn_80201B54();
 extern unsigned long long fn_8020123C();
 extern void* fn_80201BC0(void*);
 extern void fn_80043F44(SpawnConfig*);
@@ -63,13 +63,13 @@ void* fn_8008F224(void* object, int create, int transfer)
     short value;
 
     current = fn_80201B9C(object);
-    source_owner = fn_80201B44();
+    source_owner = ((void*)fn_80201B44());
     fn_800DE8FC(object, &position);
     while (current != 0 && found == 0) {
-        Runtime* runtime = fn_80201B8C(current);
+        Runtime* runtime = ((Runtime*)fn_80201B8C(current));
         if (runtime != 0) {
             void* candidate = fn_80201EB8(current);
-            void* candidate_owner = fn_80201B54(current);
+            void* candidate_owner = ((void*)fn_80201B54(current));
             if (candidate == object && runtime->type == 2 &&
                 runtime->subtype == 10 &&
                 (int)fn_8020123C(59, 0, candidate_owner, 0) != 0) {
@@ -135,7 +135,7 @@ void* fn_8008F224(void* object, int create, int transfer)
             }
             spawned = fn_80034708(&config);
             fn_80201BC8();
-            owner = fn_80201B54(spawned);
+            owner = ((void*)fn_80201B54(spawned));
             fn_80201D54(spawned, object);
             fn_802015A4(spawned);
             fn_800CCA44(spawned);
@@ -143,12 +143,12 @@ void* fn_8008F224(void* object, int create, int transfer)
             flags = fn_80201CD4();
             fn_80201DD8(state, source_owner);
             fn_80201E60(state, flags | 1);
-            runtime = fn_80201B8C(spawned);
+            runtime = ((Runtime*)fn_80201B8C(spawned));
             runtime->data[1] = 0xAD7;
             fn_801E8328(1, spawned, runtime->data);
         }
     } else {
-        owner = fn_80201B54(found);
+        owner = ((void*)fn_80201B54(found));
         if (transfer != 0) {
             void* actor = fn_80201BC8();
             fn_80038464(found, 0, &value);

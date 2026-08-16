@@ -10,7 +10,7 @@ typedef struct State80095894 {
     int timer;
 } State80095894;
 
-extern Runtime80095894*fn_80201B8C();
+extern void *fn_80201B8C();
 extern int fn_800931D0(void*, void*, void*);
 extern int fn_80092C30(void*, void*);
 extern void fn_80201D2C(void *, int);
@@ -22,7 +22,7 @@ int fn_80095894(register void* object, void* unused,
     register Runtime80095894* runtime;
     register int timer;
 
-    runtime = fn_80201B8C(object);
+    runtime = ((Runtime80095894*)fn_80201B8C(object));
     timer = context->timer;
     context->timer = (timer - 1) & ((-timer & ~timer) >> 31);
     if (fn_800931D0(object, state, context) ||

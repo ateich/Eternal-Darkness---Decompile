@@ -17,13 +17,13 @@ typedef struct Runtime {
     void *resource;
 } Runtime;
 
-extern Runtime *fn_80201B8C(void *);
+extern void *fn_80201B8C();
 extern void *fn_801D5898(void *, void *, void *, int, int, int, int, int, int, int,
                          int, int, int, int, int, int, int);
 
 int fn_800D9614(void *unused, void *object)
 {
-    Runtime *runtime = fn_80201B8C(object);
+    Runtime *runtime = ((Runtime *)fn_80201B8C(object));
     Actor *actor;
 
     (void)unused;

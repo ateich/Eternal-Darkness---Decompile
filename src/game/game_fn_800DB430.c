@@ -4,11 +4,11 @@ typedef struct Triple {
     unsigned int z;
 } Triple;
 
-extern void *fn_80201BC8(void *);
+extern void *fn_80201BC8();
 extern void *fn_80201C24(void *);
 extern int fn_801579F4(void *);
 extern void fn_8012C62C(void *, int, unsigned int *, unsigned int *, unsigned int *, int);
-extern void *fn_80201814(int);
+extern void *fn_80201814();
 extern unsigned int lbl_8064F48C;
 extern unsigned int lbl_8064F490;
 extern unsigned int lbl_8064F494;

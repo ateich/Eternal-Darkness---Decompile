@@ -1,4 +1,4 @@
-extern void* fn_801294DC(void*, int, int, int);
+extern void *fn_801294DC(void *, int, int, int);
 extern void* fn_80072354(void*);
 extern void* fn_801A717C(void*);
 extern void fn_801A7460(void*, void*);

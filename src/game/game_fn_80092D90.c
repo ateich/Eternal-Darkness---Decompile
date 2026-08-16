@@ -25,7 +25,7 @@ typedef struct QueryResult80092D90 {
 } QueryResult80092D90;
 
 extern float lbl_8064EC78;
-extern RuntimeInfo80092D90*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void* fn_80201B94(void*);
 extern void fn_80094DD0(void*, void*, void*);
 extern void fn_800931D0(void*, void*, State80092D90*);
@@ -57,7 +57,7 @@ int fn_80092D90(register void* object, register void* arg2,
     Vec3_80092D90 copied_position;
     int result = 0;
 
-    target = fn_80201B8C(object)->value68;
+    target = ((RuntimeInfo80092D90*)fn_80201B8C(object))->value68;
     runtime = fn_80201B94(object);
     fn_80094DD0(object, arg2, arg4);
     fn_800931D0(object, arg3, state);

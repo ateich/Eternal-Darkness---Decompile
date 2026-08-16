@@ -3,7 +3,7 @@ typedef signed short s16;
 extern void *fn_80201BC8();
 extern int fn_80201EB8();
 extern int fn_800AD1D0(int);
-extern void* fn_80201B54();
+extern int fn_80201B54();
 extern void fn_80038878(void*, int, s16);
 extern void fn_800389E0(void*, int, s16, int);
 extern int fn_800DE298(void*);
@@ -28,7 +28,7 @@ void fn_8008CC84(void* object)
         break;
     }
 
-    fn_80038878(fn_80201B54(object), 0, delay);
+    fn_80038878(((void*)fn_80201B54(object)), 0, delay);
     fn_800389E0(object, 0, delay, 0);
     if (fn_800DE298(object)) {
         fn_801261F4(runtime);

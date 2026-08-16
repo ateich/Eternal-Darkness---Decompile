@@ -31,7 +31,7 @@ typedef struct RuntimeState {
 } RuntimeState;
 
 extern void *fn_80037AF4(int);
-extern RuntimeState *fn_80201B8C();
+extern void *fn_80201B8C();
 extern void fn_802015A4(void *);
 extern int fn_801E8328(int, void *);
 
@@ -40,7 +40,7 @@ void *fn_800CF46C(Vec3f *position, Vec3s *rotation, s16 field1C,
                   int owner, s16 field1E, u8 field22, s16 field20, int value)
 {
     void *object = fn_80037AF4(0x4D);
-    Payload *payload = fn_80201B8C(object)->payload;
+    Payload *payload = ((RuntimeState *)fn_80201B8C(object))->payload;
 
     payload->position.x = position->x;
     payload->position.y = position->y;

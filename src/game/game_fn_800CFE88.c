@@ -1,5 +1,5 @@
 extern int fn_800A4F98(int);
-extern void *fn_80201814(void);
+extern void *fn_80201814();
 extern int fn_80201EB8(void *);
 
 int fn_800CFE88(void *object)

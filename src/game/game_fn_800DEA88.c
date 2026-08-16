@@ -1,6 +1,6 @@
 extern void *fn_801A7498(void *);
-extern void *fn_80201814(void *);
-extern void *fn_80201BC8(void *);
+extern void *fn_80201814();
+extern void *fn_80201BC8();
 extern void fn_800DD314(void *, int, int, int);
 
 int fn_800DEA88(void *unused, void *object)

@@ -14,7 +14,7 @@ typedef struct DistanceThresholds {
     u16 field_06;
 } DistanceThresholds;
 
-extern void *fn_80201B8C(void *);
+extern void *fn_80201B8C();
 extern int fn_800FBFB0(void);
 extern Vec3 fn_80201E78(void *);
 extern void *fn_80201B3C(void);

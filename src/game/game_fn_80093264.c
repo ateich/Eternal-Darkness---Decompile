@@ -19,7 +19,7 @@ extern int fn_80201EB8();
 extern void *fn_80201BC8();
 extern u16 fn_8012DBE8(void*, int, u32*);
 extern int fn_800CB098(int, int, int, int, int, int);
-extern void* fn_80201B44();
+extern int fn_80201B44();
 extern int fn_80036E50(void);
 
 int fn_80093264(void)
@@ -57,7 +57,7 @@ int fn_80093264(void)
                               lbl_8064D18C, 1, 0);
     }
 
-    fn_80201B44();
+    ((void*)fn_80201B44());
     if (fn_80201814() != 0) {
         switch (fn_80036E50()) {
         case 3:

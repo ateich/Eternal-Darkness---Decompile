@@ -7,7 +7,7 @@ typedef signed short s16;
 extern void* fn_801A717C(void*);
 extern int fn_80201B44();
 extern void *fn_80201BC8();
-extern void* fn_80201B54();
+extern int fn_80201B54();
 extern void* fn_80200C20(void*);
 extern void *fn_80201814();
 extern int fn_80036E50(void);
@@ -35,7 +35,7 @@ void fn_8008CDA0(void* object, void* source)
     effect = fn_801A717C(object);
     value = fn_80201B44();
     runtime = fn_80201BC8(object);
-    target = fn_80201B54(object);
+    target = ((void*)fn_80201B54(object));
 
     fn_80200C20(source);
     if (!fn_80201814() || fn_80036E50() != 6) {

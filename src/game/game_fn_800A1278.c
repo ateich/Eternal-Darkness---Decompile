@@ -51,7 +51,7 @@ extern void fn_80128EE4(void*);
 extern void fn_80211A48(const Vec800A1278*, const Vec800A1278*, Vec800A1278*);
 extern Vec800A1278* fn_8011F130(void*);
 extern void fn_8012AC74(void*, Vec800A1278*, int);
-extern Info800A1278*fn_80201B8C();
+extern void *fn_80201B8C();
 extern Inner800A1278* fn_80036D38(void*);
 extern void fn_802020B4(void*, int);
 extern void fn_801A5C30(int);
@@ -94,7 +94,7 @@ int fn_800A1278(State800A1278* state)
         fn_80211A48(fn_8011F130(transform), &offset, &offset);
         fn_8012AC74(transform, fn_8011F130(transform), 3);
     } else if (position->z >= lbl_8064EE68) {
-        info = fn_80201B8C(object);
+        info = ((Info800A1278*)fn_80201B8C(object));
         fn_802020B4(fn_80201814(fn_80036D38(object)->resource), 0);
         fn_801A5C30(0);
         for (i = 0; i < 3; i++) {

@@ -11,7 +11,7 @@ typedef struct Target {
 
 /* Honest C reconstruction; register allocation differs at the prologue. */
 
-extern int fn_80201B54(void *);
+extern int fn_80201B54();
 extern Target *fn_800A1D28(void *);
 extern void fn_800D04A4(Vec3 *, void *);
 extern void fn_800CA530(void);

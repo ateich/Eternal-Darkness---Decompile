@@ -16,7 +16,7 @@ extern int fn_80200C38(void*);
 extern u32 fn_80036D5C(void*);
 extern int fn_801A7498(int);
 extern void *fn_80201814();
-extern ActorData800971A0*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void *fn_80201BC8();
 extern int fn_80092BBC(void*, void*, void*);
 extern void fn_80064B38(void*, void*, void*);
@@ -38,7 +38,7 @@ void fn_800971A0(void* unused, register void* object, register void* random,
     fn_801A7498(random_value);
     actor_data = fn_80201814();
     if (actor_data != 0) {
-        actor_data = fn_80201B8C(actor_data);
+        actor_data = ((ActorData800971A0*)fn_80201B8C(actor_data));
     } else {
         actor_data = 0;
     }

@@ -6,9 +6,9 @@ typedef struct State80096D58 {
 } State80096D58;
 
 extern unsigned int fn_80036D5C(void*);
-extern void* fn_80201B54();
+extern int fn_80201B54();
 extern void fn_80201B64(void*);
-extern State80096D58*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);
 extern void fn_80201D34(void*, int);
@@ -24,10 +24,10 @@ void fn_80096D58(register void* object, register void* resource)
     State80096D58* state;
 
     flags = fn_80036D5C(object);
-    fn_80201B54(object);
+    ((void*)fn_80201B54(object));
     if (flags & 0x80000) {
         fn_80201B64(object);
-        state = fn_80201B8C(object);
+        state = ((State80096D58*)fn_80201B8C(object));
         state->kind = 0x18;
         fn_80201D2C(object, 1);
         fn_80201D14(object, 1);

@@ -1,5 +1,5 @@
-extern int fn_80201B54(int);
-extern void *fn_80201BC8(int);
+extern int fn_80201B54();
+extern void *fn_80201BC8();
 extern void *fn_801294DC(void *, int, int, int);
 extern void fn_801593B4(int);
 extern int fn_800E44E0(void *, int, int);
@@ -7,8 +7,8 @@ extern int fn_800E4520(void *, int, int);
 extern void fn_801287C4(void *, void *, int, int);
 extern void fn_80128C28(void *, void *, int);
 extern void fn_80204810(void);
-extern void fn_80201D2C(int, int);
-extern void fn_80201D14(int, int);
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern void fn_801B0CA4(int, int);
 extern void fn_800E43CC(void *);
 
@@ -27,8 +27,8 @@ void fn_800E42E8(int id, int finish)
         fn_801287C4(created, fn_800E44E0, 0, 30);
         fn_801287C4(created, fn_800E4520, 0, 60);
         fn_80128C28(created, fn_80204810, (object << 8) | 20);
-        fn_80201D2C(id, 15);
-        fn_80201D14(id, 1);
+        fn_80201D2C((void *)id, 15);
+        fn_80201D14((void *)id, 1);
     }
     fn_801B0CA4(-1, 39);
     if (finish != 0)

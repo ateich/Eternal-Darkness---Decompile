@@ -3,9 +3,9 @@ typedef struct Vec3 {
 } Vec3;
 
 extern void fn_8011F114();
-extern void* fn_80201B54();
+extern int fn_80201B54();
 extern void* fn_80201B94(void*);
-extern void*fn_80201B8C();
+extern void *fn_80201B8C();
 extern int fn_80201B44();
 extern void *fn_80201814();
 extern void fn_80201E78(Vec3*, void*);
@@ -32,7 +32,7 @@ int fn_8008D4B4(void* object, void* resource)
     int result = 0;
 
     fn_8011F114(&position);
-    target = fn_80201B54(object);
+    target = ((void*)fn_80201B54(object));
     runtime = fn_80201B94(object);
     data = fn_80201B8C(object);
     value = fn_80201B44();

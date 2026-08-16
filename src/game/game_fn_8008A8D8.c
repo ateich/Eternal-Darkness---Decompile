@@ -2,7 +2,7 @@ typedef signed int s32;
 
 extern void *fn_80201814();
 extern void *fn_80201BC8();
-extern void* fn_801294DC(void*, s32, s32, s32);
+extern void *fn_801294DC(void *, int, int, int);
 
 s32 fn_8008A8D8(void* unused, void* object)
 {

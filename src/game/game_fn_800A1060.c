@@ -25,7 +25,7 @@ typedef struct GlobalState {
 
 extern void* fn_80201B9C();
 extern ObjectInfo* fn_80204844(void*, int);
-extern ObjectInfo*fn_80201B8C();
+extern void *fn_80201B8C();
 extern int fn_8006BCE4(Actor*);
 extern int fn_80070A6C(int);
 extern int fn_801E79FC(void*, int);
@@ -43,7 +43,7 @@ int fn_800A1060(void)
 
     object = fn_80204844(fn_80201B9C(), 0x20);
     if (object != 0) {
-        actor = fn_80201B8C(object)->actor;
+        actor = ((ObjectInfo*)fn_80201B8C(object))->actor;
         if (actor != 0) {
             kind = fn_8006BCE4(actor);
             work = actor->work;

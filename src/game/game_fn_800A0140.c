@@ -34,7 +34,7 @@ extern Context800A0140* fn_8006ED98(State800A0140*);
 extern void fn_8006DEF8(State800A0140*, int, void*, void*, int);
 extern void *fn_80201814();
 extern void *fn_80201BC8();
-extern Info800A0140*fn_80201B8C();
+extern void *fn_80201B8C();
 extern u32 fn_80128EE4(void);
 extern void fn_800C1B50(int, int, int, float);
 extern void fn_8011F114();
@@ -88,7 +88,7 @@ int fn_800A0140(State800A0140* state)
                 fn_8006DEF8(state, context->mode, 0, 0, 0);
             }
             object = fn_80201814(state->resource);
-            info = fn_80201B8C();
+            info = ((Info800A0140*)fn_80201B8C());
             fn_8020104C(0x51, 0, info->owner->resource, 0, lbl_8064EDB8);
             object = fn_80201814(fn_80036D38(object)->resource);
             fn_800C1B50(state->resource, 15, 1, lbl_8064EDB8);

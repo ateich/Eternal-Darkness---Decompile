@@ -12,7 +12,7 @@ typedef struct Actor {
     unsigned char flag_0 : 1;
 } Actor;
 
-extern void *fn_80201BC8(void *);
+extern void *fn_80201BC8();
 extern Actor *fn_800A1D28(void *);
 extern void fn_800A4724(Actor *);
 extern void fn_800A4D48(Actor *, void *);

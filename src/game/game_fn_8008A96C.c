@@ -20,9 +20,9 @@ typedef struct ObjectInfo {
     void* field90;
 } ObjectInfo;
 
-extern ObjectInfo*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void* fn_80201B94(void*);
-extern void* fn_80201B54();
+extern int fn_80201B54();
 extern void *fn_80201BC8();
 extern void* fn_80201C48(void*);
 extern void fn_80201D2C(void *, int);
@@ -31,7 +31,7 @@ extern void *fn_80201814();
 extern void fn_8011F114();
 extern int fn_80128EE4(void*);
 extern int fn_8008A808(void*, int);
-extern void* fn_801294DC(void*, int, int, int);
+extern void *fn_801294DC(void *, int, int, int);
 extern void* fn_801A717C(void);
 extern void fn_801A7460(void*, int);
 extern void fn_801A74A0(void*, void*);
@@ -55,7 +55,7 @@ extern void fn_802042A4(void);
 
 int fn_8008A96C(void* object, void* resource, void* unused)
 {
-    ObjectInfo* info = fn_80201B8C(object);
+    ObjectInfo* info = ((ObjectInfo*)fn_80201B8C(object));
     void* object2 = fn_80201B94(object);
     Vec3 position;
     Vec3 positionCopy;
@@ -76,7 +76,7 @@ int fn_8008A96C(void* object, void* resource, void* unused)
     positionCopy = position;
     flags = fn_80128EE4(resource);
     related = fn_80201C48(object2);
-    owner = fn_80201B54(object);
+    owner = ((void*)fn_80201B54(object));
 
     if ((flags & 0x20) == 0 && fn_80201814(related) != 0) {
         void* relatedPosition = fn_80201BC8(related);

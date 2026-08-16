@@ -29,11 +29,11 @@ extern Context800A15C0* fn_8006ED98(State800A15C0*);
 extern u32 fn_8011E190(int);
 extern void fn_8006DEF8(State800A15C0*, u32, void*, void*, int);
 extern void *fn_80201814();
-extern Info800A15C0*fn_80201B8C();
+extern void *fn_80201B8C();
 extern Inner800A15C0* fn_80036D38(void*);
 extern void fn_802020B4(void*, int);
 extern void fn_801A5C30(int);
-extern u64 fn_8020123C();
+extern unsigned long long fn_8020123C();
 
 int fn_800A15C0(register State800A15C0* state)
 {
@@ -50,7 +50,7 @@ int fn_800A15C0(register State800A15C0* state)
             fn_8006DEF8(state, context->event, 0, 0, 0);
         }
         state = fn_80201814(state->resource);
-        info = fn_80201B8C(state);
+        info = ((Info800A15C0*)fn_80201B8C(state));
         fn_802020B4(fn_80201814(fn_80036D38(state)->resource), 0);
         fn_801A5C30(0);
         fn_8020123C(0x51, 0, info->inner->resource, 0);

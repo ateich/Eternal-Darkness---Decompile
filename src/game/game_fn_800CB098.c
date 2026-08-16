@@ -12,9 +12,9 @@ typedef struct RuntimeState {
 
 extern int lbl_8064D18C;
 extern void *fn_80201B9C();
-extern RuntimeState *fn_80201B8C();
+extern void *fn_80201B8C();
 extern int fn_80201EB8(void *);
-extern u32 fn_80201B54();
+extern int fn_80201B54();
 extern void *fn_80201BC0(void *);
 extern unsigned long long fn_8020123C();
 
@@ -34,7 +34,7 @@ int fn_800CB098(s8 kind, s8 subtype, int state, int owner, int dispatch,
     wanted_subtype = subtype;
 
     while (object != 0) {
-        RuntimeState *runtime = fn_80201B8C(object);
+        RuntimeState *runtime = ((RuntimeState *)fn_80201B8C(object));
         if (runtime != 0) {
             int object_owner = fn_80201EB8(object);
             int owner_matches;
@@ -45,7 +45,7 @@ int fn_800CB098(s8 kind, s8 subtype, int state, int owner, int dispatch,
             owner_matches = owner == -1 ? 1 :
                 (owner == object_owner && object_owner != -1);
             if (kind_matches && subtype_matches && state_matches && owner_matches) {
-                u32 handle = fn_80201B54(object);
+                u32 handle = ((u32)fn_80201B54(object));
                 int accepted;
                 if (dispatch != 0) {
                     accepted = (int)(fn_8020123C(59, 0, handle, 0) &

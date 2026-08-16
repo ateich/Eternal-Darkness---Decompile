@@ -10,7 +10,7 @@ typedef struct OwnerData {
 } OwnerData;
 
 extern s32 fn_800FBFB0(void);
-extern OwnerData*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void* fn_80201B94(void*);
 extern void *fn_80201BC8();
 extern void fn_800360B0(void*, void*);
@@ -33,7 +33,7 @@ s32 fn_8008A808(void* object, s32 enabled)
 
     random = fn_800FBFB0() % 100;
     result = -1;
-    owner = fn_80201B8C(object);
+    owner = ((OwnerData*)fn_80201B8C(object));
     secondary = fn_80201B94(object);
     resource = fn_80201BC8(object);
     fn_800360B0(object, &status);

@@ -8,7 +8,7 @@ extern void fn_80128EE4(void *object);
 extern int fn_80201C48(int value);
 extern int fn_80201B54();
 extern int fn_80079008(void *context, void *object);
-extern void *fn_801294DC(void *object, int kind, int flags, int value);
+extern void *fn_801294DC(void *, int, int, int);
 extern void *fn_801A717C(void);
 extern int fn_80072354(int value);
 extern void fn_801A7460(void *, int);

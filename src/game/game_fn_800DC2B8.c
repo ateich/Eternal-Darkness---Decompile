@@ -2,9 +2,9 @@ typedef unsigned char u8;
 typedef unsigned short u16;
 typedef signed short s16;
 
-extern void *fn_80201814(int);
+extern void *fn_80201814();
 extern void *fn_80201C24(void *);
-extern void *fn_80201BC8(void *);
+extern void *fn_80201BC8();
 extern int fn_8006749C(u8);
 extern void fn_80120AD0(void *, int, s16, u16, float, float);
 extern void fn_802006D4(int, int, int, int, int);

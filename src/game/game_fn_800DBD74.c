@@ -1,8 +1,8 @@
 typedef unsigned char u8;
 typedef unsigned short u16;
 
-extern void *fn_80201B8C(void *);
-extern void *fn_80201BC8(void *);
+extern void *fn_80201B8C();
+extern void *fn_80201BC8();
 extern int fn_8011EB04(void *);
 extern void *fn_80201C24(void *);
 extern void fn_801261F4(void *);

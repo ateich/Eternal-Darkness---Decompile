@@ -19,11 +19,11 @@ extern int fn_800462C8(int);
 extern void* fn_80201B9C();
 extern void* fn_80204844(void*, int);
 extern Context800A1438* fn_8006D444(void);
-extern void* fn_80201B54();
+extern int fn_80201B54();
 extern int fn_80070CD8(int);
 extern int fn_801E79FC(void*, int);
 extern void fn_801E79A0(void*, int);
-extern u64 fn_8020123C();
+extern unsigned long long fn_8020123C();
 extern void* lbl_8064C4E0;
 
 int fn_800A1438(void)
@@ -39,7 +39,7 @@ int fn_800A1438(void)
         } else {
             object = fn_80204844(fn_80201B9C(), 0x20);
             context = fn_8006D444();
-            actor = fn_80201B54(object);
+            actor = ((void*)fn_80201B54(object));
             if (fn_80070CD8(1) != 0 && fn_800462C8(0) == 0 &&
                 fn_801E79FC(lbl_8064C4E0, 0x466) != 0 && context->count >= 2) {
                 fn_8020123C(0x52, 0, actor, 0);

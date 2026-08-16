@@ -1,6 +1,6 @@
 extern void *fn_80201C24(void *);
 extern int fn_801579F4(void *);
-extern void *fn_80201814(void);
+extern void *fn_80201814();
 extern void fn_800DB9B0(void *);
 
 void fn_800DB62C(void *context)

@@ -12,7 +12,7 @@ typedef struct Object Object;
 typedef struct Actor Actor;
 typedef struct Context Context;
 
-extern void* fn_80201B54();
+extern int fn_80201B54();
 extern int fn_8011FAEC(void*);
 extern void fn_800BE010(void*, void*);
 extern int fn_80201C48(void*);
@@ -31,7 +31,7 @@ void fn_80090FF4(Object* object, Actor* actor, ActorState* state,
     int flags;
     void* owner;
 
-    owner = fn_80201B54(object);
+    owner = ((void*)fn_80201B54(object));
     flags = fn_8011FAEC(actor);
 
     timers->first = (timers->first - 1) & ~-(timers->first < 1);

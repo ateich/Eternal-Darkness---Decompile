@@ -15,7 +15,7 @@ extern int fn_801A6DC4(void *);
 extern int fn_801A6DCC(void *);
 extern u32 fn_801A6D9C(void *);
 extern void *fn_80201BC8();
-extern void **fn_80201B8C();
+extern void *fn_80201B8C();
 extern u32 fn_80128EE4(void *);
 extern void *fn_801294DC(void *, int, int, int);
 extern u32 fn_8011FAEC(void *);
@@ -48,7 +48,7 @@ void fn_800C030C(void *context, void *encoded, float scale)
     int selection = fn_801A6DCC(parsed);
     u32 parsed_flags = fn_801A6D9C(parsed);
     void *object = fn_80201BC8(context);
-    void **state = fn_80201B8C(context);
+    void **state = ((void **)fn_80201B8C(context));
     u32 status = fn_80128EE4(object);
     int action_flags = 0x21;
     int changed = 0;

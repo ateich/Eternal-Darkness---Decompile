@@ -8,16 +8,16 @@ typedef struct EventData {
 } EventData;
 
 extern int fn_80200C10(EventData *);
-extern int fn_80201B54(void *);
-extern void *fn_80201BC8(void *);
+extern int fn_80201B54();
+extern void *fn_80201BC8();
 extern void fn_80201B94(void *);
-extern void fn_80201B8C(void *);
+extern void *fn_80201B8C();
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);
 extern void fn_801E8328(int, void *);
 extern void fn_80201D34(void *, int);
 extern void fn_80201D1C(void *, int);
-extern void fn_8020123C(int, int, int, int);
+extern unsigned long long fn_8020123C();
 extern void *fn_80200C38(EventData *);
 extern void fn_8012C62C(void *, void *, Vec3 *, Vec3 *, Vec3 *, int);
 extern void fn_8020104C(float, int, int, int);

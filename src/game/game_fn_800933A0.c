@@ -3,7 +3,7 @@ typedef unsigned int u32;
 extern u32 fn_80036D5C(void*);
 extern int fn_80201B54();
 extern int fn_80128EAC(void*);
-extern void* fn_801294DC(void*, int, int, int);
+extern void *fn_801294DC(void *, int, int, int);
 extern void fn_80128C28(void*, void (*)(void), int);
 extern void fn_80204810(void);
 extern void fn_80201D2C(void *, int);

@@ -6,18 +6,18 @@ typedef struct Triple {
     u32 z;
 } Triple;
 
-extern void *fn_80201BC8(void *);
+extern void *fn_80201BC8();
 extern void *fn_80201C24(void *);
 extern void *fn_80155DB4(void *);
-extern int fn_80201B44(void);
+extern int fn_80201B44();
 extern void *fn_80158598(int, int);
-extern int fn_80201B54(void *);
+extern int fn_80201B54();
 extern int fn_80158264(void *, void *, int);
 extern int fn_801E1ED4(int);
 extern int fn_801E2004(int);
 extern void fn_8012C62C(void *, int, u32 *, u32 *, u32 *, int);
 extern void fn_8012F58C(void *, int, int, int, int, int);
-extern void *fn_80201814(int);
+extern void *fn_80201814();
 extern void fn_8002A754(void *, void *);
 extern void fn_800CC140(int, int, int, void *, int);
 extern u32 fn_80157864(void *, int);

@@ -2,8 +2,8 @@ extern void *lbl_8064C4E0;
 extern const float lbl_8064F61C;
 extern const float lbl_8064F620;
 extern const float lbl_8064F624;
-extern void *fn_80201B54();
-extern void *fn_80201B8C(void *);
+extern int fn_80201B54();
+extern void *fn_80201B8C();
 extern void fn_801E7974(void *, int);
 extern void fn_801593FC(int);
 extern void fn_800E1BF4(void *);
@@ -17,8 +17,8 @@ void fn_800E19CC(void *object)
     void **resource;
     void *id;
 
-    fn_80201B54();
-    id = fn_80201B54(object);
+    ((void *)fn_80201B54());
+    id = ((void *)fn_80201B54(object));
     resource = *(void ***)((unsigned char *)fn_80201B8C(object) + 0x78);
     fn_801E7974(lbl_8064C4E0, 0x468);
     fn_801593FC(0x7D);

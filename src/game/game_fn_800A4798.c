@@ -13,7 +13,7 @@ typedef struct Range800A4798 {
 } Range800A4798;
 
 extern int fn_801A74C0(void*);
-extern Runtime800A4798*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void fn_80038464(void*, int, short*);
 extern u8 fn_801A7768(void*);
 extern int fn_801A7760(void*);
@@ -29,7 +29,7 @@ void fn_800A4798(void* object, void* value)
 {
     int result;
     int enabled = (fn_801A74C0(value) >> 16) & 1;
-    Runtime800A4798* runtime = fn_80201B8C(object);
+    Runtime800A4798* runtime = ((Runtime800A4798*)fn_80201B8C(object));
 
     if (enabled) {
         short raw;

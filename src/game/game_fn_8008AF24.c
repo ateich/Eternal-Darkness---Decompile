@@ -6,7 +6,7 @@ typedef struct Vec3 {
 
 extern void fn_8011FAEC(void*);
 extern void fn_8011F114();
-extern void* fn_80201B54();
+extern int fn_80201B54();
 extern int fn_8008C7C0(void*, int);
 extern void* fn_80201B94(void*);
 extern void* fn_80201C48(void*);
@@ -33,7 +33,7 @@ int fn_8008AF24(void* object, void* resource, void* argument, u32 flags, u32 mas
     if ((flags & mask) == 0) {
         fn_8011F114(&position, resource);
         positionCopy = position;
-        fn_80201B54(object);
+        ((void*)fn_80201B54(object));
         if (fn_8008C7C0(object, 0)) {
             target = fn_80201814(fn_80201C48(fn_80201B94(object)));
             fn_802045AC(object, &objectPosition);

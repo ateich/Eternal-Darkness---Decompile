@@ -13,7 +13,7 @@ extern int fn_80201B44();
 extern void *fn_80201814();
 extern void* fn_80201B9C();
 extern void* fn_80201BC0(void*);
-extern State80096E24*fn_80201B8C();
+extern void *fn_80201B8C();
 extern int fn_80201EB8();
 extern u32 fn_80036D5C(void*);
 extern void fn_80036DA4(void*, u32);
@@ -31,7 +31,7 @@ void fn_80096E24(register void* object)
     case 0xCF:
         current = fn_80201B9C();
         while (current != 0) {
-            state = fn_80201B8C(current);
+            state = ((State80096E24*)fn_80201B8C(current));
             flags = fn_80036D5C(object);
             if (fn_80201EB8(current) == lbl_8064D18C &&
                 current != object && (flags & 0x8000) && state != 0 &&

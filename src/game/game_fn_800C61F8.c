@@ -10,7 +10,7 @@ typedef struct Owner {
     Inner *inner;
 } Owner;
 
-extern Owner *fn_80201B8C();
+extern void *fn_80201B8C();
 extern void fn_8011E174(int, int);
 
 void fn_800C61F8(void *context, int kind)
@@ -18,7 +18,7 @@ void fn_800C61F8(void *context, int kind)
     Owner *owner;
 
     if (kind == 0x53) {
-        owner = fn_80201B8C(context);
+        owner = ((Owner *)fn_80201B8C(context));
         if (owner->inner->active != 0) {
             fn_8011E174(8, 0);
         }

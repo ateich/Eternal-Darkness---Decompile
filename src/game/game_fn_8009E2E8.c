@@ -22,7 +22,7 @@ extern void fn_800A1580(int);
 extern int fn_80070CD8(void);
 extern void* fn_80201B9C();
 extern void* fn_80204844(void*, int);
-extern void* fn_80201B54();
+extern int fn_80201B54();
 extern unsigned long long fn_8020123C();
 
 int fn_8009E2E8(register State8009E2E8* state)
@@ -38,8 +38,8 @@ int fn_8009E2E8(register State8009E2E8* state)
         if (fn_80070CD8() == 0) {
             value = fn_80204844(fn_80201B9C(), 0x20);
             result = 0;
-            first = fn_80201B54(value);
-            fn_8020123C(0x52, fn_80201B54(value), first, 0);
+            first = ((void*)fn_80201B54(value));
+            fn_8020123C(0x52, ((void*)fn_80201B54(value)), first, 0);
         }
     }
     return result;

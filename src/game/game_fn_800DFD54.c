@@ -7,7 +7,7 @@ typedef struct Payload {
 #pragma use_lmw_stmw on
 
 extern int lbl_8064B80C;
-extern int fn_80201B54(void *);
+extern int fn_80201B54();
 extern int fn_8011FB4C(void *);
 extern int fn_80200C38(void *);
 extern void fn_8012DBE8(void *, int, Payload *);

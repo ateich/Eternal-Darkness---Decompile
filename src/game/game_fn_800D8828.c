@@ -1,17 +1,17 @@
 typedef unsigned char u8;
 typedef int s32;
 
-extern s32 fn_80201B54(void *);
+extern int fn_80201B54();
 extern s32 fn_800460EC(void);
 extern void fn_800D6974(void *, void *);
 extern void fn_802006D4(s32, s32, s32, s32, s32);
-extern void fn_80201D2C(void *, s32);
-extern void fn_80201D14(void *, s32);
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 
 void fn_800D8828(void *object, void *other)
 {
     s32 ready = 1;
-    s32 other_id = fn_80201B54(other);
+    s32 other_id = ((s32)fn_80201B54(other));
 
     if (((((u8 *)object)[0x2A2] >> 7) & 1) != 0 || fn_800460EC() != 0) {
         ready = 0;

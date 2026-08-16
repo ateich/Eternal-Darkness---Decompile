@@ -3,7 +3,7 @@ typedef struct Vec3 {
 } Vec3;
 
 extern void* fn_801A717C(void);
-extern void* fn_80201B44();
+extern int fn_80201B44();
 extern void fn_801A74A0(void*, void*);
 extern void fn_801A74A8(void*, void*);
 extern void fn_801A7538(void*, int);
@@ -16,7 +16,7 @@ extern void fn_801A7228(void*);
 void fn_800A7F8C(void* object, Vec3* position, int kind)
 {
     void* effect = fn_801A717C();
-    void* owner = fn_80201B44();
+    void* owner = ((void*)fn_80201B44());
 
     fn_801A74A0(effect, object);
     fn_801A74A8(effect, owner);

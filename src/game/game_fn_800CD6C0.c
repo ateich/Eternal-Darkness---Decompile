@@ -33,7 +33,7 @@ typedef struct Payload {
 } Payload;
 
 extern void *fn_80201814();
-extern RuntimeState *fn_80201B8C();
+extern void *fn_80201B8C();
 extern int fn_80201B44();
 extern unsigned long long fn_8020123C();
 extern void *fn_80037AF4(int);
@@ -64,7 +64,7 @@ void *fn_800CD6C0(int argFirst, int argSecond, void *argThird, u8 argFlags,
 
     resolved = fn_80201814(first);
     if (resolved != 0) {
-        state = fn_80201B8C(resolved);
+        state = ((RuntimeState *)fn_80201B8C(resolved));
         if (first == fn_80201B44(state)) {
             int linked = state->resource->slots[0];
             if (linked != 0) {
@@ -90,7 +90,7 @@ void *fn_800CD6C0(int argFirst, int argSecond, void *argThird, u8 argFlags,
         if (state != 0) {
             state->resource->slots[slot] = id;
         }
-        payload = (Payload *)fn_80201B8C(object)->payload;
+        payload = (Payload *)((RuntimeState *)fn_80201B8C(object))->payload;
         payload->flags = flags;
         payload->first = first;
         payload->second = second;

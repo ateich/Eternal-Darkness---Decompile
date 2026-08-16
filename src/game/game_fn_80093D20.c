@@ -11,12 +11,12 @@ typedef struct Runtime80093D20 {
 extern int lbl_8064D18C;
 extern float lbl_8064EC98;
 
-extern Runtime80093D20*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void *fn_80201BC8();
 extern int fn_80201B54();
 extern int fn_80201EB8();
 extern u32 fn_80036D5C(void*);
-extern void* fn_801294DC(void*, int, int, int);
+extern void *fn_801294DC(void *, int, int, int);
 extern void fn_801287C4(void*, void*, int, int);
 extern void fn_80128C28(void*, void*, int);
 extern void fn_80128C44(void*, void*, int);
@@ -39,7 +39,7 @@ extern void fn_80201138(float, int, void*, int, int, int, int);
 
 void fn_80093D20(register void* object, register void* source)
 {
-    register Runtime80093D20* runtime = fn_80201B8C(object);
+    register Runtime80093D20* runtime = ((Runtime80093D20*)fn_80201B8C(object));
     register void* resource = fn_80201BC8(object);
     register int id = fn_80201B54(object);
     register int room = fn_80201EB8(object);

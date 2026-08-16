@@ -1,11 +1,11 @@
 extern int fn_80200C10(void*);
 extern void *fn_80201BC8();
-extern void* fn_80201B54();
-extern void*fn_80201B8C();
+extern int fn_80201B54();
+extern void *fn_80201B8C();
 extern void fn_80128754(void*, int);
 extern void fn_8011FA8C(void*, int, int);
 extern int fn_80201EB8();
-extern void* fn_801294DC(void*, int, int, int);
+extern void *fn_801294DC(void *, int, int, int);
 extern void fn_80128EAC(void*);
 extern int fn_8012A1BC(void*, int);
 extern void fn_801289A0(void*);
@@ -25,7 +25,7 @@ int fn_8009A0EC(register void* object, register int phase, void* event)
 
     kind = fn_80200C10(event);
     room = fn_80201BC8(object);
-    fn_80201B54(object);
+    ((void*)fn_80201B54(object));
     fn_80201B8C(object);
     if (kind == 3) {
         fn_80128754(room, -1);

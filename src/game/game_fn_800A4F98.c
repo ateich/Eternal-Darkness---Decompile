@@ -7,7 +7,7 @@ typedef struct Runtime800A4F98 {
 
 extern int lbl_8064C544;
 extern void *fn_80201814();
-extern Runtime800A4F98*fn_80201B8C();
+extern void *fn_80201B8C();
 
 int fn_800A4F98(int mode)
 {
@@ -21,7 +21,7 @@ int fn_800A4F98(int mode)
         return lbl_8064C544 & -(fn_80201814((void*)lbl_8064C544) != 0);
     case 1:
         object = fn_80201814((void*)lbl_8064C544);
-        runtime = object != 0 ? fn_80201B8C(object) : 0;
+        runtime = object != 0 ? ((Runtime800A4F98*)fn_80201B8C(object)) : 0;
         matches = runtime != 0 && runtime->state == 1;
         result = -matches;
         result |= matches;
@@ -30,7 +30,7 @@ int fn_800A4F98(int mode)
         return result;
     case 2:
         object = fn_80201814((void*)lbl_8064C544);
-        runtime = object != 0 ? fn_80201B8C(object) : 0;
+        runtime = object != 0 ? ((Runtime800A4F98*)fn_80201B8C(object)) : 0;
         matches = runtime != 0 && runtime->state == 2;
         result = -matches;
         result |= matches;

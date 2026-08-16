@@ -19,7 +19,7 @@ extern void fn_8011F114();
 extern void fn_80200C20(s32 event);
 extern u32 fn_80036D5C(void *object);
 extern s32 fn_80066D04(void *object, s32 index);
-extern void *fn_801294DC(s32 state, s32 kind, s32 value, s32 priority);
+extern void *fn_801294DC(void *, int, int, int);
 extern s32 fn_800683E4(void *action, s32 object_id);
 extern void fn_80128C28(void *action, void *callback, s32 owner_id);
 extern void fn_80067BAC(void *object);
@@ -48,7 +48,7 @@ s32 fn_80068290(void *object, s32 event, s32 *result)
 
     if (fn_80066D04(object, 0) != 0 && object_state->installed != 0 &&
         *object_state->installed != 0 && (*object_state->installed)->active == 0) {
-        void *action = fn_801294DC(state, 0x2B, 0x24, 10);
+        void *action = fn_801294DC((void *)state, 0x2B, 0x24, 10);
         if (action != 0) {
             fn_80128C28(action, (void *)fn_800683E4, owner_id);
             fn_80067BAC(object);

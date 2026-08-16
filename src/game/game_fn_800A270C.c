@@ -11,14 +11,14 @@ typedef struct Context800A270C {
     State800A270C* state;
 } Context800A270C;
 
-extern Context800A270C*fn_80201B8C();
+extern void *fn_80201B8C();
 extern int fn_800A30C0(State800A270C*);
 extern void fn_800A3C4C(void*, Context800A270C*, int, unsigned char);
 extern void fn_800A3104(State800A270C*, int);
 
 int fn_800A270C(void* unused, void* object, int value)
 {
-    Context800A270C* context = fn_80201B8C(unused);
+    Context800A270C* context = ((Context800A270C*)fn_80201B8C(unused));
     State800A270C* state = context->state;
 
     if (!fn_800A30C0(state)) {

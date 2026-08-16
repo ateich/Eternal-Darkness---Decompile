@@ -12,9 +12,9 @@ typedef struct Actor {
 } Actor;
 
 extern float lbl_8064F440;
-extern int fn_80201B54(void *);
-extern void *fn_80201B8C(void *);
-extern void fn_8011F114(Vec *, void *);
+extern int fn_80201B54();
+extern void *fn_80201B8C();
+extern void fn_8011F114();
 extern void fn_800CA530(void);
 extern void *fn_801D0814(int, int, int, Vec *, int, int, void (*)(void), int,
                          Vec *);

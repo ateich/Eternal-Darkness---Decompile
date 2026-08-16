@@ -7,8 +7,8 @@ extern float lbl_8064F1A8;
 extern float lbl_8064F1F4;
 extern float lbl_8064F1F8;
 
-extern s32 fn_80201B44();
-extern s32 fn_80201B54();
+extern int fn_80201B44();
+extern int fn_80201B54();
 extern void fn_80038308(void *, int, s16 *);
 extern void fn_80038464(void *, int, s16 *);
 extern void fn_801441C0(int, int, int);
@@ -24,8 +24,8 @@ void fn_800C65FC(void *object)
     if (object == 0) {
         return;
     }
-    current = fn_80201B44();
-    if (current != fn_80201B54(object)) {
+    current = ((s32)fn_80201B44());
+    if (current != ((s32)fn_80201B54(object))) {
         return;
     }
     if ((lbl_8064D5A8 & 0x3F) != 0 &&

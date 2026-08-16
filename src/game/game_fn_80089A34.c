@@ -15,8 +15,8 @@ extern void fn_801A7470(void*, int);
 extern void* fn_8006ED3C(Work*, int, int*);
 extern void *fn_80201814();
 extern void *fn_80201BC8();
-extern void*fn_80201B8C();
-extern void* fn_80201B54();
+extern void *fn_80201B8C();
+extern int fn_80201B54();
 extern void* fn_80205868(void*, int, Vec3*, int);
 extern void* fn_80201A84(void*);
 extern u32 fn_800FBFB0(void);
@@ -60,7 +60,7 @@ int fn_80089A34(Work* work)
 
         __builtin_memcpy(descriptor, lbl_80239560, sizeof descriptor);
         fn_80201B8C(owner);
-        model = fn_80201B54(owner);
+        model = ((void*)fn_80201B54(owner));
         if (lbl_8064B820 != 0) {
             spawned = fn_80205868(scene, identifier, &direction, 0x2000);
             if (spawned != 0)
@@ -83,7 +83,7 @@ int fn_80089A34(Work* work)
 
         if (identifier >= 2 && identifier < 4) {
             if (spawned != 0) {
-                void* animation = fn_80158598(fn_80201B54(owner), 0);
+                void* animation = fn_80158598(((void*)fn_80201B54(owner)), 0);
                 int handle = fn_80157FE0(animation, identifier == 2 ? 1 : 2, 0);
                 *(int*)(runtime + (identifier == 2 ? 0x9C : 0xA0)) = handle;
                 if (handle != -1)
@@ -98,7 +98,7 @@ int fn_80089A34(Work* work)
             void* state = fn_80036D38(owner);
             *(u32*)(runtime + 0x20) |= 3;
             if (spawned != 0) {
-                void* animation = fn_80158598(fn_80201B54(owner), 0);
+                void* animation = fn_80158598(((void*)fn_80201B54(owner)), 0);
                 int handle = fn_80157FE0(animation, 4, 0);
                 *(int*)(runtime + 0xA4) = handle;
                 if (handle != -1)

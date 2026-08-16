@@ -14,11 +14,11 @@ extern int fn_80200C10(void*);
 extern int fn_80200C38(void*);
 extern u32 fn_80200C20(void*);
 extern void *fn_80201BC8();
-extern void* fn_80201B54();
-extern void*fn_80201B8C();
+extern int fn_80201B54();
+extern void *fn_80201B8C();
 extern int fn_80201EB8();
 extern void fn_8011FA8C(void*, int, u32);
-extern void* fn_801294DC(void*, int, int, int);
+extern void *fn_801294DC(void *, int, int, int);
 extern void fn_8011FE5C(void*, int);
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);
@@ -45,7 +45,7 @@ int fn_80096A44(register void* object, register int event,
 
     kind = fn_80200C10(resource);
     action_owner = fn_80201BC8(object);
-    linked = fn_80201B54(object);
+    linked = ((void*)fn_80201B54(object));
     state = *(State80096A44**)((u8*)fn_80201B8C(object) + 0x68);
 
     if (event == 0) {

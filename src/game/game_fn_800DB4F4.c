@@ -6,10 +6,10 @@ typedef struct Triple {
 
 extern void *fn_80201C24(void *);
 extern int fn_801579F4(void *);
-extern void *fn_80201814(int);
+extern void *fn_80201814();
 extern void *fn_80155DB4(void *);
-extern void *fn_80201BC8(void *);
-extern int fn_80201B44(void);
+extern void *fn_80201BC8();
+extern int fn_80201B44();
 extern void fn_800DB95C(void *);
 extern void fn_800DB874(void *);
 extern void fn_80157C98(void *, int, int);

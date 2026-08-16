@@ -11,7 +11,7 @@ typedef struct Runtime {
 
 extern Runtime *fn_800A1D28(void *);
 extern void *fn_800A1CD0(void *);
-extern void fn_8011F114(Vec3 *, void *);
+extern void fn_8011F114();
 
 int fn_800D93B4(void *unused, void *object)
 {

@@ -17,9 +17,9 @@ typedef struct Source800A24A4 {
     int countdown;
 } Source800A24A4;
 
-extern void*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void fn_8011F114();
-extern void* fn_80201B54();
+extern int fn_80201B54();
 extern void* fn_80201B94(void*);
 extern void fn_80201C48(void);
 extern void *fn_80201814();
@@ -39,7 +39,7 @@ int fn_800A24A4(void* object, void* context, Source800A24A4* source, void* value
 
     fn_80201B8C(object);
     fn_8011F114(&first, context);
-    fn_80201B54(object);
+    ((void*)fn_80201B54(object));
     fn_80201B94(object);
     fn_80201C48();
     active = fn_80201814();

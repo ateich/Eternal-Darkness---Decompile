@@ -6,7 +6,7 @@ typedef struct RuntimeState {
     u8 subtype;
 } RuntimeState;
 
-extern RuntimeState *fn_80201B8C();
+extern void *fn_80201B8C();
 extern void *fn_80201BC8();
 extern int fn_80066D04(void *, int);
 
@@ -15,7 +15,7 @@ int fn_800CAF7C(void *object)
     int result = 0;
     RuntimeState *state;
 
-    if (object != 0 && (state = fn_80201B8C(object)) != 0 &&
+    if (object != 0 && (state = ((RuntimeState *)fn_80201B8C(object))) != 0 &&
         fn_80201BC8(object) != 0) {
         if (state->kind == 2 && state->subtype == 4) {
             int value = fn_80066D04(object, 8);

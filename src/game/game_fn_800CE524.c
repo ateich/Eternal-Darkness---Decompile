@@ -28,12 +28,12 @@ typedef struct RuntimeState {
 } RuntimeState;
 
 extern int lbl_8064D738;
-extern RuntimeState *fn_80201B8C();
+extern void *fn_80201B8C();
 
 void fn_800CE524(void *object)
 {
     int index;
-    Data *data = fn_80201B8C(object)->data;
+    Data *data = ((RuntimeState *)fn_80201B8C(object))->data;
     s16 span = data->span;
     Entry *entry;
     u8 *entries = (u8 *)data + 0x78;

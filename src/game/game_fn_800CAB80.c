@@ -9,9 +9,9 @@ typedef struct RuntimeState {
 extern int lbl_8064D18C;
 extern const float lbl_8064F29C;
 extern void *fn_80201B9C();
-extern RuntimeState *fn_80201B8C();
+extern void *fn_80201B8C();
 extern int fn_80201EB8(void *);
-extern u32 fn_80201B54();
+extern int fn_80201B54();
 extern void *fn_80201BC0(void *);
 extern unsigned long long fn_8020123C();
 extern void fn_8020104C(int, u32, u32, void *, float);
@@ -25,9 +25,9 @@ int fn_800CAB80(int mode)
     object = fn_80201B9C();
     count = 0;
     while (object != 0) {
-        RuntimeState *state = fn_80201B8C(object);
+        RuntimeState *state = ((RuntimeState *)fn_80201B8C(object));
         int owner = fn_80201EB8(object);
-        u32 handle = fn_80201B54(object);
+        u32 handle = ((u32)fn_80201B54(object));
 
         if (state != 0 && lbl_8064D18C == owner && state->kind == 2) {
             switch (mode) {

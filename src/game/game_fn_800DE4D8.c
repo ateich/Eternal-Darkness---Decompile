@@ -4,8 +4,8 @@ extern u32 lbl_8064F4FC;
 extern u32 lbl_8064F500;
 extern u32 lbl_802399A8[3];
 
-extern void *fn_80201814(void *);
-extern void *fn_80201BC8(void *);
+extern void *fn_80201814();
+extern void *fn_80201BC8();
 extern int fn_8011EB04(void *);
 extern u32 fn_800FBFB0(void);
 extern void fn_801B05E8(int, int, int, int, int, int, int, int);

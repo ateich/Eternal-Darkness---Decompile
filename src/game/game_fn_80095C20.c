@@ -10,7 +10,7 @@ extern int lbl_8064D5A8;
 extern void fn_80094DD0(void*, void*, void*);
 extern int fn_80036D5C(void*);
 extern int fn_80093264(void);
-extern void* fn_801294DC(void*, int, int, int);
+extern void *fn_801294DC(void *, int, int, int);
 extern void fn_80128C28(void*, void*, int);
 extern void fn_80204810(void);
 extern void fn_80201D2C(void *, int);

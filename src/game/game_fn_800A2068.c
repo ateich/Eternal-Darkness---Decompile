@@ -16,10 +16,10 @@ typedef struct Context800A2068 {
     Target800A2068* target;
 } Context800A2068;
 
-extern Context800A2068*fn_80201B8C();
+extern void *fn_80201B8C();
 
 void fn_800A2068(void* object, void* argument)
 {
-    Context800A2068* context = fn_80201B8C(object);
+    Context800A2068* context = ((Context800A2068*)fn_80201B8C(object));
     context->target->vtable->callback(object, argument);
 }

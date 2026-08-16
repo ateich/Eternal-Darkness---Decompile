@@ -7,9 +7,9 @@ typedef struct RuntimeData {
     void* transform;
 } RuntimeData;
 
-extern RuntimeData*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void* fn_80201B94(void*);
-extern void* fn_80201B54();
+extern int fn_80201B54();
 extern int fn_80201B44();
 extern void *fn_80201814();
 extern void fn_8011F114();
@@ -32,9 +32,9 @@ extern void* lbl_8064A80C;
  */
 int fn_8008CEF0(void* object, void* position, void* context)
 {
-    RuntimeData* data = fn_80201B8C(object);
+    RuntimeData* data = ((RuntimeData*)fn_80201B8C(object));
     void* runtime = fn_80201B94(object);
-    void* target = fn_80201B54(object);
+    void* target = ((void*)fn_80201B54(object));
     int value = fn_80201B44();
     void* mode = fn_80201814();
     s16 numerator;

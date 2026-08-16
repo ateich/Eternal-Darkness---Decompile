@@ -3,9 +3,9 @@ typedef struct Object800A1D28 {
     void* value;
 } Object800A1D28;
 
-extern Object800A1D28*fn_80201B8C();
+extern void *fn_80201B8C();
 
 void* fn_800A1D28(void)
 {
-    return fn_80201B8C()->value;
+    return ((Object800A1D28*)fn_80201B8C())->value;
 }

@@ -8,7 +8,7 @@ typedef struct EventData {
     int value;
 } EventData;
 
-extern void *fn_80201814(int);
+extern void *fn_80201814();
 extern void fn_801291F0(void *, int, unsigned char);
 extern void *fn_801294DC(void *, int, int, int);
 extern void fn_80128C44(void *, void *, int);

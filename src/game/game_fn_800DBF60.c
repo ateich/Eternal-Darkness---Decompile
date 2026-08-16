@@ -3,9 +3,9 @@ typedef unsigned short u16;
 typedef signed short s16;
 
 extern void *fn_80201C24(void *);
-extern int fn_80201B54(void *);
+extern int fn_80201B54();
 extern void fn_8020104C(int, float, int, int, int);
-extern void *fn_80201814(int);
+extern void *fn_80201814();
 extern void *fn_80155DB4(void *);
 extern void fn_80201E78(void *, void *);
 extern void *fn_80157924(void *);

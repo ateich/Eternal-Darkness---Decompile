@@ -5,12 +5,12 @@ typedef struct ObjectState {
     u32* value;
 } ObjectState;
 
-extern ObjectState*fn_80201B8C();
+extern void *fn_80201B8C();
 
 u32 fn_8008CBE8(void* object, u32 value)
 {
     u32 old_value;
-    ObjectState* state = fn_80201B8C(object);
+    ObjectState* state = ((ObjectState*)fn_80201B8C(object));
     old_value = *state->value;
     *state->value = value;
     return old_value;

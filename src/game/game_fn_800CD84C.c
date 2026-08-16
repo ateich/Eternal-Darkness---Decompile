@@ -10,14 +10,14 @@ typedef struct RuntimeState {
     volatile Resource * volatile resource;
 } RuntimeState;
 
-extern RuntimeState *fn_80201B8C();
+extern void *fn_80201B8C();
 
 int fn_800CD84C(void *object)
 {
     int count = 0;
 
     if (object != 0) {
-        RuntimeState *state = fn_80201B8C(object);
+        RuntimeState *state = ((RuntimeState *)fn_80201B8C(object));
         if (state->resource->slots[0] != 0) {
             count = 1;
         }

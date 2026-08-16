@@ -1,41 +1,51 @@
 # Signature consolidation — 2026-08-16
 
-This session used `tools/signature_audit.py` to select the ten most-declared
-symbols whose TU-local declarations disagreed. It matched no new functions and
-did not modify `reports/GEDE01/progress.json`.
+`tools/signature_audit.py --json --limit 0` identified the ten most-declared
+symbols with disagreeing TU-local extern declarations.  Their declarations are
+now unified as follows:
 
-## Recovered contracts
-
-| Symbol | Declarations audited | Unified PPC EABI contract |
+| Symbol | Declarations | Canonical declaration |
 | --- | ---: | --- |
-| `fn_80201B8C` | 297 | pointer/word result in `r3`; caller-supplied object in `r3` |
-| `fn_80201814` | 287 | pointer/word result in `r3`; caller-supplied key in `r3` |
-| `fn_80201BC8` | 233 | pointer/word result in `r3`; caller-supplied object in `r3` |
-| `fn_80201B54` | 225 | word result in `r3`; caller-supplied object in `r3` |
-| `fn_8020123C` | 142 | 64-bit result in `r3:r4`; four caller-supplied GPR arguments |
-| `fn_80201D14` | 133 | no result; object and value in `r3`/`r4` |
-| `fn_80201D2C` | 133 | no result; object and value in `r3`/`r4` |
-| `fn_8011F114` | 86 | no result; destination and source in `r3`/`r4` |
-| `fn_80201B44` | 85 | word/pointer result in `r3`; mixed-arity matching callers preserve an unspecified list |
-| `fn_80201B9C` | 75 | pointer result in `r3`; mixed-arity matching callers preserve an unspecified list |
+| `fn_80201B8C` | 314 | `extern void *fn_80201B8C();` |
+| `fn_80201814` | 309 | `extern void *fn_80201814();` |
+| `fn_80201BC8` | 278 | `extern void *fn_80201BC8();` |
+| `fn_80201B54` | 269 | `extern int fn_80201B54();` |
+| `fn_8020123C` | 153 | `extern unsigned long long fn_8020123C();` |
+| `fn_80201D14` | 150 | `extern void fn_80201D14(void *, int);` |
+| `fn_80201D2C` | 150 | `extern void fn_80201D2C(void *, int);` |
+| `fn_8011F114` | 96 | `extern void fn_8011F114();` |
+| `fn_80201B44` | 96 | `extern int fn_80201B44();` |
+| `fn_801294DC` | 81 | `extern void *fn_801294DC(void *, int, int, int);` |
 
-Unspecified parameter lists are intentional where matching callers use
-different source-level arities while preserving retail register state. Typed
-pointer return aliases remain where matching C directly dereferences the result;
-the audit classifies these as cosmetic because they select the same EABI return
-register. After consolidation, none of the ten symbols appears in the audit's
-return-register contradiction or ABI-divergent categories.
+The retail bodies establish the important ABI facts directly:
 
-## Verification
+- `fn_80201B54`, `fn_80201B8C`, and `fn_80201BC8` load one word from offsets
+  `0x10`, `0x28`, and `0x34` of the object in `r3`, respectively, then return.
+- `fn_80201B44` loads the word at SDA symbol `lbl_8064F828` into `r3` and
+  returns.
+- `fn_80201D14` stores the low byte of `r4` at object offset `0x20`;
+  `fn_80201D2C` stores the full `r4` word at offset `0x18`.
+- `fn_8011F114` copies three words from the source in `r4` to the destination
+  in `r3`.
+- `fn_80201814` consumes the lookup key in `r3` and returns the found pointer
+  in `r3`.
+- `fn_8020123C` consumes four GPR arguments and preserves the retail 64-bit
+  result ABI in `r3:r4`.
+- `fn_801294DC` consumes four GPR arguments and returns its result in `r3`.
 
-The full build was run after each symbol. Fresh objdiff reports retained the
-pre-session baseline of 1,436 matched functions and 1,662 complete units, with
-all aggregate measures identical. The final full build passed the configured
-DOL hash gate:
+Unspecified parameter lists are intentional where matching callers use mixed
+source-level arity or rely on an already-live argument register.  TU-specific
+recovered struct views are retained as explicit casts at use sites instead of
+being encoded as contradictory callee return types.
+
+After each symbol was consolidated, the project was rebuilt and compared with
+the pre-session objdiff baseline.  The final `report_changes.json` has identical
+`from` and `to` measures: 313,132 complete code bytes, 33,870 complete data
+bytes, 1,574 matched functions, and 1,805 complete units.  No previously
+matching object regressed.
+
+Final linked image:
 
 `ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol`
 
-The final evidence is retained in the ignored build tree as
-`build/GEDE01/consolidation-final.json`,
-`build/GEDE01/consolidation-final-audit.json`, and
-`build/GEDE01/consolidation-final-build.log`.
+`reports/GEDE01/progress.json` was not modified.

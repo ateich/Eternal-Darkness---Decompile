@@ -4,7 +4,7 @@ typedef int s32;
 extern int fn_80201B54();
 extern void *fn_8004918C(void);
 extern void *fn_80201BC8();
-extern void *fn_801294DC(void *, s32, s32, s32);
+extern void *fn_801294DC(void *, int, int, int);
 extern int fn_80201B44();
 extern void *fn_80201814();
 extern void *fn_801A7778(void *);

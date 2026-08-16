@@ -14,7 +14,7 @@ typedef struct ActorState {
     u8 flag_01 : 1;
 } ActorState;
 
-extern void *fn_80201BC8(void *);
+extern void *fn_80201BC8();
 extern ActorState *fn_800A1D28(void *);
 extern void fn_800A4724(ActorState *);
 extern void fn_800A4D48(ActorState *, void *);

@@ -12,14 +12,14 @@ typedef struct OuterState {
 
 extern void* lbl_8064C98C;
 extern void *fn_80201814();
-extern OuterState*fn_80201B8C();
+extern void *fn_80201B8C();
 
 int fn_800ACFE8(void)
 {
     int result = -1;
     void* object = fn_80201814(lbl_8064C98C);
     if (object != 0) {
-        result = fn_80201B8C(object)->inner->value;
+        result = ((OuterState*)fn_80201B8C(object))->inner->value;
     }
     return result;
 }

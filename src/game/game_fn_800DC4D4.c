@@ -2,7 +2,7 @@ typedef unsigned int u32;
 
 extern void *fn_80201B9C(void *);
 extern void *fn_80201B94(void *);
-extern void *fn_80201BC8(void *);
+extern void *fn_80201BC8();
 extern float *fn_8011F130(void *);
 extern int fn_80204844(void *, int);
 extern int fn_8006D444(void);
@@ -12,7 +12,7 @@ extern int fn_80204D98(void);
 extern int fn_8011FB4C(void *);
 extern void *fn_802051A4(void *);
 extern void *fn_80205134(void *);
-extern void *fn_80201814(void *);
+extern void *fn_80201814();
 extern int fn_80201B5C(void *);
 extern int fn_80201B64(void *);
 extern void *fn_80201C24(void *);

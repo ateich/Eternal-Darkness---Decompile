@@ -15,7 +15,7 @@ typedef struct RuntimeState {
 extern const Vec3f lbl_80239934;
 extern float lbl_8064F340;
 extern int lbl_8064D18C;
-extern RuntimeState *fn_80201B8C();
+extern void *fn_80201B8C();
 extern void *fn_80201BC8();
 extern void fn_8011F114();
 extern void fn_801AAE68(int, int, int, Vec3f *, int, int, int, u16, int,
@@ -31,7 +31,7 @@ void fn_800CF598(void *object)
     if (object == 0) {
         return;
     }
-    state = fn_80201B8C(object);
+    state = ((RuntimeState *)fn_80201B8C(object));
     source = fn_80201BC8(object);
     position = lbl_80239934;
     effect = 622;

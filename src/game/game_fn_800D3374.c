@@ -10,7 +10,7 @@ typedef struct ActorState {
     u16 secondary_timer;
 } ActorState;
 
-extern int fn_80201B54(void *);
+extern int fn_80201B54();
 extern void fn_800A43E8(ActorState *, int);
 
 void fn_800D3374(ActorState *state, void *object, int event)

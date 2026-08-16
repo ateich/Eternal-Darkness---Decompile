@@ -14,12 +14,12 @@ typedef struct Context800A2B04 {
     State800A2B04* state;
 } Context800A2B04;
 
-extern Context800A2B04*fn_80201B8C();
+extern void *fn_80201B8C();
 extern int fn_800FBFB0(void);
 
 int fn_800A2B04(void* object, int value)
 {
-    Context800A2B04* context = fn_80201B8C(object);
+    Context800A2B04* context = ((Context800A2B04*)fn_80201B8C(object));
     int result = context->state->vtable->select(object, value);
 
     if (result == -1) {

@@ -7,7 +7,7 @@ extern const float lbl_8064EF18;
 
 extern void *fn_80201814();
 extern void* fn_80201EB8(void*);
-extern void* fn_80201B54();
+extern int fn_80201B54();
 extern void fn_800453E8(int, int, void*, int, int, int, int, int, u32*, int,
                        void*, float);
 
@@ -22,5 +22,5 @@ void fn_800A76A0(void)
     values[2] = lbl_80239750[2];
     fn_800453E8(2, 0xBA, object, 0x60, 0, 0, 0x341, 0,
                 values, 3, owner, lbl_8064EF18);
-    lbl_8064C988 = fn_80201B54();
+    lbl_8064C988 = ((void*)fn_80201B54());
 }

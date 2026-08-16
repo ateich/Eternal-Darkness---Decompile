@@ -13,14 +13,14 @@ extern int lbl_8064C864;
 extern int lbl_8064B714;
 extern int lbl_8064CA88;
 
-extern State **fn_80201B8C();
-extern void *fn_80201B54();
+extern void *fn_80201B8C();
+extern int fn_80201B54();
 extern void fn_802006D4(void *, void *, int, int, int);
 
 void fn_800C39D0(void *context)
 {
-    State **state_ref = fn_80201B8C(context);
-    void *owner = fn_80201B54(context);
+    State **state_ref = ((State **)fn_80201B8C(context));
+    void *owner = ((void *)fn_80201B54(context));
     State *state = *state_ref;
 
     if (lbl_8064C864 == 0) {

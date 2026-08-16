@@ -34,7 +34,7 @@ extern Context8009EF8C* fn_8006ED98(State8009EF8C*);
 extern int fn_800467F0(void*, int);
 extern void fn_8006DEF8(State8009EF8C*, void*, void*, void*, int);
 extern void *fn_80201814();
-extern Global8009EF8C*fn_80201B8C();
+extern void *fn_80201B8C();
 extern void fn_8020104C(int, int, void*, int, float);
 extern void* fn_80036D38(void*);
 extern void fn_802020B4(void*, int);
@@ -56,7 +56,7 @@ int fn_8009EF8C(register State8009EF8C* state)
             fn_8006DEF8(state, context->event, 0, 0, 0);
         }
         state = fn_80201814(*(void**)((u8*)state + 0x38));
-        fn_8020104C(0x51, 0, fn_80201B8C()->inner->object, 0, lbl_8064EDD8);
+        fn_8020104C(0x51, 0, ((Global8009EF8C*)fn_80201B8C())->inner->object, 0, lbl_8064EDD8);
         fn_802020B4(fn_80201814(*(void**)((u8*)fn_80036D38(state) + 0x44)), 0);
         fn_801A5C30(0);
         result = 1;

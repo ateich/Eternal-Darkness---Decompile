@@ -13,7 +13,7 @@ typedef struct Actor {
 } Actor;
 
 extern void *fn_80201A84(void *);
-extern void fn_8011F114(Vec3 *, void *);
+extern void fn_8011F114();
 extern void *fn_80155330(int, void *, int, int, Vec3 *, int);
 extern float lbl_8064F440;
 

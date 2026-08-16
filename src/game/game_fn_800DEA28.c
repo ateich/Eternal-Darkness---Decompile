@@ -5,11 +5,11 @@ typedef struct ActorState {
     u8 type;
 } ActorState;
 
-extern ActorState *fn_80201B8C(void *);
+extern void *fn_80201B8C();
 
 int fn_800DEA28(void *actor)
 {
-    ActorState *state = actor != 0 ? fn_80201B8C(actor) : 0;
+    ActorState *state = actor != 0 ? ((ActorState *)fn_80201B8C(actor)) : 0;
 
     if (actor != 0 && state != 0) {
         return state->type == 10;
