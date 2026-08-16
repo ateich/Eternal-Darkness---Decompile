@@ -13,7 +13,7 @@ typedef struct UpdateState {
 extern int fn_800AD3A4(void*);
 extern void fn_800A80CC(int, void*, void*, UpdateState*);
 extern int fn_800A82C8(void);
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern int fn_80036E50(void*);
 extern int fn_80201B64(void*);
 extern void fn_800A821C(int, void*, void*, void*, UpdateState*, void*);

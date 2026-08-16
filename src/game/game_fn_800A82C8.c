@@ -9,7 +9,7 @@ typedef struct OuterState {
 } OuterState;
 
 extern void* fn_80201ADC(void);
-extern OuterState* fn_80201B8C();
+extern OuterState*fn_80201B8C();
 
 void* fn_800A82C8(void)
 {

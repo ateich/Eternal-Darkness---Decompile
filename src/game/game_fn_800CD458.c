@@ -23,10 +23,10 @@ typedef struct Payload {
     int fourth;
 } Payload;
 
-extern void *fn_80201814(int);
-extern RuntimeState *fn_80201B8C(void *);
+extern void *fn_80201814();
+extern RuntimeState *fn_80201B8C();
 extern void *fn_80037AF4(int);
-extern int fn_80201B54(void *);
+extern int fn_80201B54();
 extern void fn_801DACA4(int, int);
 extern void fn_801DABFC(Payload *);
 extern void fn_801DA140(int, int, void *);

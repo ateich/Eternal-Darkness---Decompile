@@ -5,8 +5,8 @@ extern int fn_80200C10(void *);
 extern void *fn_80201BC8();
 extern void fn_8011E174(s32 index, s32 value);
 extern void fn_800C9B74(void *context, void *object);
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern void fn_800C9AD4(void *context, void *object);
 
 s32 fn_80055A64(void *context, void *event)

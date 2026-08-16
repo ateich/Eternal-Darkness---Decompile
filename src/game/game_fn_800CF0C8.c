@@ -30,8 +30,8 @@ extern float lbl_8064F334;
 extern float lbl_8064F338;
 extern float lbl_8064F33C;
 extern void *fn_80037AF4(int);
-extern RuntimeState *fn_80201B8C(void *);
-extern int fn_80201B54(void *);
+extern RuntimeState *fn_80201B8C();
+extern int fn_80201B54();
 extern void fn_802015A4(void *);
 extern void fn_80038464(void *, int, short *);
 

@@ -18,9 +18,9 @@ typedef struct Resource {
 } Resource;
 
 extern void *fn_80037AF4(int);
-extern RuntimeState *fn_80201B8C(void *);
+extern RuntimeState *fn_80201B8C();
 extern void fn_800CD1FC(Payload *, void *, void *, int);
-extern int fn_80201B54(void *);
+extern int fn_80201B54();
 extern void fn_802015A4(void *);
 
 #pragma use_lmw_stmw on

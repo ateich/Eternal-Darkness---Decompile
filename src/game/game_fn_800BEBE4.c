@@ -8,14 +8,14 @@ typedef struct Vec3 {
 
 extern const Vec3 lbl_80239800;
 extern const Vec3 lbl_8023980C;
-extern void *fn_80201B9C(void);
-extern void *fn_80201BC8(void *);
-extern Vec3 *fn_8011F114(Vec3 *, void *);
+extern void *fn_80201B9C();
+extern void *fn_80201BC8();
+extern void fn_8011F114();
 extern int fn_80201EB8(void *);
-extern int fn_80201B54(void *);
+extern int fn_80201B54();
 extern void *fn_80201BC0(void *);
 extern unsigned int fn_80178E94(Vec3 *, Vec3 *);
-extern unsigned long long fn_8020123C(int, int, int, int);
+extern unsigned long long fn_8020123C();
 
 void fn_800BEBE4(void *object, unsigned int limit)
 {

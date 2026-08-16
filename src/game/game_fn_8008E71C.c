@@ -7,7 +7,7 @@ typedef struct EffectState {
 
 extern unsigned int fn_80036D5C(void*);
 extern void fn_80036DA4(void*, unsigned int);
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern void fn_8012B344(void*);
 extern void fn_80201D34(void*, int);
 extern void fn_80201D1C(void*, int);

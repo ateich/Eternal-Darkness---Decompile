@@ -3,8 +3,8 @@ extern void fn_80204810(void);
 extern void fn_80128C28(void*, void*, int);
 extern void fn_80128C44(void*, void*, int);
 extern void fn_800DD314(void*, int, int, int);
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 
 void fn_8008E670(void* object, int object_id, void* resource)
 {

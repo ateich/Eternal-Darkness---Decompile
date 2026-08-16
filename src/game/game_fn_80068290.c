@@ -15,7 +15,7 @@ typedef struct ObjectState {
 extern void *fn_80201BC8();
 extern void *fn_80201B8C();
 extern int fn_80201B54();
-extern void *fn_8011F114();
+extern void fn_8011F114();
 extern void fn_80200C20(s32 event);
 extern u32 fn_80036D5C(void *object);
 extern s32 fn_80066D04(void *object, s32 index);

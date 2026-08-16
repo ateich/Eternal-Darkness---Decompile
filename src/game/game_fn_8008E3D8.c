@@ -1,6 +1,6 @@
 extern void fn_8012B344(void*);
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 
 typedef struct Data8008E3D8 {
     unsigned char pad0[0xc];

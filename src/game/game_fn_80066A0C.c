@@ -1,14 +1,14 @@
 typedef signed int s32;
 extern int fn_80200C38();
 extern void *fn_80201BC8();
-extern void *fn_8011F114();
+extern void fn_8011F114();
 extern int fn_80201B54();
 extern void *fn_801294DC(void *, int, int, int);
 #define fn_801294DC(a, b, c, d) fn_801294DC((void *)(a), (b), (c), (d))
 extern void fn_80204810(void);
 extern void fn_80128C44(void *object, void (*callback)(void), s32 value);
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern s32 fn_801A76E4(s32 event);
 extern void fn_80201138(s32 type, s32 context, s32 value, s32 index,
                         s32 flags);

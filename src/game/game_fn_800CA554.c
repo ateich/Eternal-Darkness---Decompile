@@ -9,7 +9,7 @@ typedef struct EventPayload {
 
 extern u32 fn_801DE5C4(void *);
 extern u32 fn_801DE5CC(void *);
-extern void fn_8020123C(u8, u32, u32, EventPayload *);
+extern unsigned long long fn_8020123C();
 
 int fn_800CA554(register void *object, register u32 packed)
 {

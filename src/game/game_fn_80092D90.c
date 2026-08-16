@@ -25,7 +25,7 @@ typedef struct QueryResult80092D90 {
 } QueryResult80092D90;
 
 extern float lbl_8064EC78;
-extern RuntimeInfo80092D90* fn_80201B8C();
+extern RuntimeInfo80092D90*fn_80201B8C();
 extern void* fn_80201B94(void*);
 extern void fn_80094DD0(void*, void*, void*);
 extern void fn_800931D0(void*, void*, State80092D90*);
@@ -42,8 +42,8 @@ extern void fn_800BE010(void*, State80092D90*);
 extern void fn_800BDEE4(void*, State80092D90*);
 extern int fn_8009A2B8(void*, void*, void*, State80092D90*, void*, int, int,
                        int, float);
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 
 int fn_80092D90(register void* object, register void* arg2,
                 register void* arg3, register void* arg4,

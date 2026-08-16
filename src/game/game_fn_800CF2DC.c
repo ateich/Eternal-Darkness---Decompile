@@ -16,7 +16,7 @@ typedef struct RuntimeState {
     Payload *payload;
 } RuntimeState;
 
-extern RuntimeState *fn_80201B8C(void *);
+extern RuntimeState *fn_80201B8C();
 extern void fn_80026DC8(s16, s16, float, float, s16, s16, u8, int);
 
 void fn_800CF2DC(void *object)

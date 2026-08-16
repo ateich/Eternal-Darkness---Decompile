@@ -14,8 +14,8 @@ typedef struct Runtime800A41CC {
 } Runtime800A41CC;
 
 extern void* fn_80201890(void*);
-extern void* fn_80201814();
-extern Runtime800A41CC* fn_80201B8C();
+extern void *fn_80201814();
+extern Runtime800A41CC*fn_80201B8C();
 extern void fn_8012DBE8(void*, int, u32*);
 extern void fn_8006A478(void*);
 extern int fn_80201B5C(void*);

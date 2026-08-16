@@ -1,5 +1,5 @@
 typedef struct Message { unsigned int value; float time; } Message;
-extern void *memcpy(void *, const void *, unsigned int); extern void *fn_80201B54(void *);
+extern void *memcpy(void *, const void *, unsigned int); extern void *fn_80201B54();
 extern void fn_800CDAD8(unsigned int, void *, int, float);
 extern float lbl_8064F010;
 unsigned short fn_800BBBC4(void *input, void *object)

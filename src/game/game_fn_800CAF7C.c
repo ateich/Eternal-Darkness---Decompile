@@ -6,8 +6,8 @@ typedef struct RuntimeState {
     u8 subtype;
 } RuntimeState;
 
-extern RuntimeState *fn_80201B8C(void *);
-extern void *fn_80201BC8(void *);
+extern RuntimeState *fn_80201B8C();
+extern void *fn_80201BC8();
 extern int fn_80066D04(void *, int);
 
 int fn_800CAF7C(void *object)

@@ -9,7 +9,7 @@ typedef struct Vec3 {
 extern float lbl_8064E4E8;
 
 extern float fn_8012B750(void *object);
-extern void *fn_8011F114();
+extern void fn_8011F114();
 extern void fn_80054CA0(void *owner, void *object, s32 force);
 extern void *fn_8013BAAC(void *context, void *object, float value);
 extern void *fn_8013BE5C(void *context, void *object);

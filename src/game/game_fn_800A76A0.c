@@ -5,7 +5,7 @@ extern void* lbl_8064C988;
 extern const u32 lbl_80239750[3];
 extern const float lbl_8064EF18;
 
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern void* fn_80201EB8(void*);
 extern void* fn_80201B54();
 extern void fn_800453E8(int, int, void*, int, int, int, int, int, u32*, int,

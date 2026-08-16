@@ -1,4 +1,4 @@
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern int fn_80201B5C(void);
 extern unsigned long long fn_8020123C();
 

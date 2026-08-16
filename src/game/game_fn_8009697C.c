@@ -2,8 +2,8 @@ extern int fn_80200C38(void*);
 extern void* fn_801294DC(void*, int, int, int);
 extern void fn_80128C44(void*, void*, int);
 extern void fn_80128C28(void*, void*, int);
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern void fn_80204810(void);
 
 void fn_8009697C(register int index, register void* object,

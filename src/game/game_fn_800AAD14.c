@@ -20,7 +20,7 @@ typedef struct ObjectState {
 #define NONNEG(a) ((a) & (((-(a)) & ~(a)) >> 31))
 
 extern int fn_80201B54();
-extern ObjectState* fn_80201B8C();
+extern ObjectState*fn_80201B8C();
 extern unsigned long long fn_8020123C();
 extern Vec3i* fn_8011F130(void*);
 extern int* lbl_8064C5A8;

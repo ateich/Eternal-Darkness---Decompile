@@ -3,7 +3,7 @@ typedef struct Event {
     void* object;
 } Event;
 
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern void fn_8012B344(void*);
 extern void fn_80201D34(void*, int);
 extern void fn_80201D1C(void*, int);

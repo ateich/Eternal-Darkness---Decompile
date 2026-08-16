@@ -8,8 +8,8 @@ typedef struct EventState {
 
 extern void* fn_800A78E0(void*, EventState*, void*);
 extern void* fn_801294DC(void*, int, int, int);
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 
 void fn_800A821C(int kind, void* extra, void* context, void* source,
                  EventState* state)

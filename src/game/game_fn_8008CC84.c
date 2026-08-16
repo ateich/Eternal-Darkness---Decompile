@@ -1,6 +1,6 @@
 typedef signed short s16;
 
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern int fn_80201EB8();
 extern int fn_800AD1D0(int);
 extern void* fn_80201B54();

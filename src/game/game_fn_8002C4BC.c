@@ -25,14 +25,14 @@ extern const Vec3 lbl_8023E41C;
 extern int fn_80200C10(void *);
 extern void *fn_80201B8C();
 extern int fn_80201B54();
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern int fn_801E8328();
 extern void fn_80201D34(void *, s32);
 extern void fn_80201D1C(void *, s32);
 extern void *fn_80201814();
 extern void *fn_80201BC8();
-extern void *fn_8011F114();
+extern void fn_8011F114();
 extern void fn_8017AB08(const Vec3*, Vec3*, float);
 extern void fn_8012B690(void*, Vec3*, Vec3*);
 

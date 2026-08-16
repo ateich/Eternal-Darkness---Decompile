@@ -10,14 +10,14 @@ typedef struct OwnerData {
 } OwnerData;
 
 extern s32 fn_800FBFB0(void);
-extern OwnerData* fn_80201B8C();
+extern OwnerData*fn_80201B8C();
 extern void* fn_80201B94(void*);
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern void fn_800360B0(void*, void*);
 extern void* fn_80201C48(void*);
 extern void* fn_80072354(void*);
-extern void *fn_8011F114();
-extern void* fn_80201814();
+extern void fn_8011F114();
+extern void *fn_80201814();
 
 /* NonMatching: honest reconstruction of the randomized range selector. */
 s32 fn_8008A808(void* object, s32 enabled)

@@ -3,7 +3,7 @@ typedef signed short s16;
 extern float lbl_8064F29C;
 extern double lbl_8064F2A0;
 
-extern void *fn_80201BC8(void *);
+extern void *fn_80201BC8();
 extern int fn_80038308(void *, int, s16 *);
 extern int fn_80038464(void *, int, s16 *);
 extern int fn_80201B64(void *);

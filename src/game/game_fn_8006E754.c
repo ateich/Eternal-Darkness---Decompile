@@ -29,7 +29,7 @@ extern int fn_8006BCE4(Owner *owner);
 extern void fn_8011F104(void *object, float x, float y, float z);
 extern void fn_8012B7A0(void *object, float angle);
 extern void fn_801D13D8(void *resource, int value);
-extern void *fn_8011F114();
+extern void fn_8011F114();
 extern Vec3 *fn_8011F770(void *object);
 extern short *fn_8006ED3C(Owner *owner, int type, short *result);
 extern void fn_8012AC74(void *object, Vec3 *value, int count);

@@ -6,14 +6,14 @@ typedef struct State800972D0 {
     u32 actor_id;
 } State800972D0;
 
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern int fn_80095D10(void*);
 extern int fn_80095E64(void*, int);
 extern int fn_80200C38(void*);
 extern int fn_80200C20(void*);
-extern void* fn_80201814();
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void *fn_80201814();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern int fn_80201B54();
 extern int fn_80095FDC(void*, void*, int, State800972D0*, int);
 extern void fn_80201138(int, void*, int, int, int, float);

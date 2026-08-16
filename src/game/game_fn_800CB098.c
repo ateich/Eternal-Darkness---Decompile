@@ -11,12 +11,12 @@ typedef struct RuntimeState {
 } RuntimeState;
 
 extern int lbl_8064D18C;
-extern void *fn_80201B9C(void);
-extern RuntimeState *fn_80201B8C(void *);
+extern void *fn_80201B9C();
+extern RuntimeState *fn_80201B8C();
 extern int fn_80201EB8(void *);
-extern u32 fn_80201B54(void *);
+extern u32 fn_80201B54();
 extern void *fn_80201BC0(void *);
-extern unsigned long long fn_8020123C(int, u32, u32, int);
+extern unsigned long long fn_8020123C();
 
 #pragma use_lmw_stmw on
 int fn_800CB098(s8 kind, s8 subtype, int state, int owner, int dispatch,

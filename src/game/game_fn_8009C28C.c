@@ -12,7 +12,7 @@ typedef struct RoomState8009C28C {
 
 extern int lbl_8064D18C;
 extern int fn_800CB098(int, int, int, int, int, int);
-extern Room8009C28C* fn_80201B8C();
+extern Room8009C28C*fn_80201B8C();
 
 int fn_8009C28C(register void* object)
 {

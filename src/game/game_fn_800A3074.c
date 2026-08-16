@@ -1,4 +1,4 @@
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern int fn_80201B5C(void*);
 
 int fn_800A3074(int handle)

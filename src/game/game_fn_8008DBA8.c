@@ -1,7 +1,7 @@
 #pragma use_lmw_stmw on
 extern void* fn_801A7498(void*);
 extern int fn_801A7490(void*);
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern int fn_8003BD48(void*, void*);
 extern int fn_80128EAC(void*);
 extern int fn_801A74B8(void*);
@@ -18,8 +18,8 @@ extern void fn_80128B10(void*, int);
 extern int fn_801290D0(void*);
 extern void fn_80128F74(void*, int);
 extern void fn_80201DD8(void*, int);
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 
 int fn_8008DBA8(void* object, void* effect)
 {

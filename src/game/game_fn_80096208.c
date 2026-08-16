@@ -16,16 +16,16 @@ extern const float lbl_8064EC7C;
 extern const float lbl_8064ECE0;
 extern const float lbl_8064ECE4;
 
-extern void* fn_80201814();
-extern void* fn_80201BC8();
-extern void *fn_8011F114();
+extern void *fn_80201814();
+extern void *fn_80201BC8();
+extern void fn_8011F114();
 extern float fn_8012B7D0(void*, Vec3*);
 extern float fn_8012B750(void*);
 extern void fn_8017A12C(float*, float, float);
 extern void fn_800BE86C(void*, Vec3*, int, int, float);
 extern void* fn_801294DC(void*, int, int, int);
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 
 int fn_80096208(register void* object, register void* resource, void* unused,
                 register State80096208* state, register int use_direction)

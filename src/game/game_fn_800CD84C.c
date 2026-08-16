@@ -10,7 +10,7 @@ typedef struct RuntimeState {
     volatile Resource * volatile resource;
 } RuntimeState;
 
-extern RuntimeState *fn_80201B8C(void *);
+extern RuntimeState *fn_80201B8C();
 
 int fn_800CD84C(void *object)
 {

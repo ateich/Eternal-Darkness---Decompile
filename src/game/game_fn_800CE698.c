@@ -12,7 +12,7 @@ typedef struct RuntimeState {
 } RuntimeState;
 
 extern int lbl_8064D738;
-extern RuntimeState *fn_80201B8C(void *);
+extern RuntimeState *fn_80201B8C();
 
 void fn_800CE698(void *object)
 {

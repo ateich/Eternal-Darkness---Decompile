@@ -1,13 +1,13 @@
 extern void *fn_800BE938(void *, int);
 extern void fn_800C63D8(void);
 extern void *fn_80201B94(void *);
-extern void *fn_80201B54(void *);
-extern void *fn_80201BC8(void *);
-extern void **fn_80201B8C(void *);
+extern void *fn_80201B54();
+extern void *fn_80201BC8();
+extern void **fn_80201B8C();
 extern void fn_80201DD8(void *, void *);
 extern void fn_801A74A8(void *, void *);
 extern void fn_801A67C4(void *, void *);
-extern unsigned long long fn_8020123C(int, void *, void *, int);
+extern unsigned long long fn_8020123C();
 
 #pragma use_lmw_stmw on
 

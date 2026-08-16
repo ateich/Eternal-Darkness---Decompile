@@ -5,7 +5,7 @@ typedef struct GameState {
 
 extern int lbl_8064D5A8;
 extern GameState lbl_803003C8;
-extern void *fn_80201BC8(void *);
+extern void *fn_80201BC8();
 extern int fn_80128EE4(void *);
 extern int fn_80038308(void *, int, short *);
 extern void fn_800389E0(void *, int, short, int);

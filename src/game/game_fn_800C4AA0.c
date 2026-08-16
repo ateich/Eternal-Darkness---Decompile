@@ -9,7 +9,7 @@ extern void *lbl_803251E4[3];
 extern int lbl_8064CA88;
 extern int lbl_8064B714;
 
-extern State **fn_80201B8C(void *);
+extern State **fn_80201B8C();
 extern void *fn_80200C38(void *);
 extern void fn_801A7324(void *, void *);
 extern void fn_801A74D8(void *, int);

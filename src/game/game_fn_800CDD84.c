@@ -18,11 +18,11 @@ typedef struct OwnerResource {
 } OwnerResource;
 
 extern const float lbl_8064F2C0;
-extern void *fn_80201B9C(void *);
+extern void *fn_80201B9C();
 extern void *fn_80204844(void *, int);
 extern void *fn_80037AF4(int);
-extern RuntimeState *fn_80201B8C(void *);
-extern int fn_80201B54(void *);
+extern RuntimeState *fn_80201B8C();
+extern int fn_80201B54();
 extern void fn_802015A4(void *);
 extern void fn_801E8328(int, void *);
 extern void fn_8020104C(int, int, int, int, float);

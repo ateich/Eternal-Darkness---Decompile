@@ -28,11 +28,11 @@ typedef struct Owner {
 } Owner;
 
 extern void *memcpy(void *, const void *, unsigned int);
-extern void *fn_80201B54(void *);
+extern void *fn_80201B54();
 extern float fn_80200534(void *, int, int);
 extern int fn_80117E58(void);
 extern float fn_80200BDC(void);
-extern Owner *fn_80201B8C(void *);
+extern Owner *fn_80201B8C();
 extern float lbl_8064F010;
 extern double lbl_8064F020;
 

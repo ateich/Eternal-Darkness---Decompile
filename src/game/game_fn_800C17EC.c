@@ -10,10 +10,10 @@ typedef struct Vec3 {
 extern const Vec3 lbl_80239818;
 extern float lbl_8064F160, lbl_8064F164, lbl_8064F168;
 extern double lbl_8064F170;
-extern void *fn_80201BC8(void *);
-extern Vec3 *fn_8011F114(Vec3 *, void *);
+extern void *fn_80201BC8();
+extern void fn_8011F114();
 extern int fn_80201EB8(void *);
-extern void *fn_80201B54(void *);
+extern void *fn_80201B54();
 extern u32 fn_80179004(Vec3 *, Vec3 *);
 
 #pragma use_lmw_stmw on

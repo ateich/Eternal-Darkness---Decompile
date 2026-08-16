@@ -6,7 +6,7 @@ extern float lbl_8064F330;
 extern int fn_80128408(void);
 extern void *fn_800CEC24(int, int, void *, void *, int, void *, float, float,
                          float);
-extern int fn_80201B54(void *);
+extern int fn_80201B54();
 extern void fn_8020104C(int, int, int, int, float);
 
 #pragma use_lmw_stmw on

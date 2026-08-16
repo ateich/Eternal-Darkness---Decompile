@@ -11,7 +11,7 @@ typedef struct State {
     void *handle;
 } State;
 
-extern void *fn_8011F114();
+extern void fn_8011F114();
 extern void fn_80211A6C(const Vec3 *, const Vec3 *, Vec3 *);
 extern float fn_80211AF0(const Vec3 *);
 extern void *fn_80137FB8(void *);

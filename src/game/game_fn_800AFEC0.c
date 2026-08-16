@@ -3,7 +3,7 @@ typedef unsigned int u32;
 
 extern unsigned char lbl_8031F7C0[];
 extern void* fn_80201B3C(void);
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern void* fn_8011F130(void);
 extern float fn_8012B750(void*);
 extern u32 fn_8011FB4C(void*);

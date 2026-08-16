@@ -14,7 +14,7 @@ extern f32 lbl_8064E6C8;
 extern void *fn_80201B8C();
 extern void *fn_80201BC8();
 extern s32 fn_80072354();
-extern void *fn_8011F114();
+extern void fn_8011F114();
 extern int fn_80201B54();
 extern s32 fn_80036D38();
 extern s32 fn_8011EB1C();

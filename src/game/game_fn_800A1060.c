@@ -25,7 +25,7 @@ typedef struct GlobalState {
 
 extern void* fn_80201B9C();
 extern ObjectInfo* fn_80204844(void*, int);
-extern ObjectInfo* fn_80201B8C();
+extern ObjectInfo*fn_80201B8C();
 extern int fn_8006BCE4(Actor*);
 extern int fn_80070A6C(int);
 extern int fn_801E79FC(void*, int);

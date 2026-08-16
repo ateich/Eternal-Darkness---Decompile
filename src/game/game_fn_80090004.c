@@ -14,12 +14,12 @@ extern int lbl_8064C578;
 extern float lbl_8064EC24;
 
 extern void* fn_8008F224(void*, int, int);
-extern void* fn_80201814();
-extern void* fn_80201B8C();
+extern void *fn_80201814();
+extern void*fn_80201B8C();
 extern void* fn_80201B44();
 extern void fn_801ACACC(int, int, void*, int);
 extern void fn_800DE4D8(void*, int);
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern void fn_8011FA8C(void*, int, int);
 extern int fn_80036D5C(void*);
 extern void fn_80036DA4(void*, int);
@@ -29,8 +29,8 @@ extern void fn_80201D1C(void*, int);
 extern void fn_8008F860(void*);
 extern void fn_800BD2DC(void*, void*);
 extern void fn_8011FB54(void*, void*);
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern void fn_80201138(int, void*, int, int, int, float);
 extern void fn_8020104C(int, void*, void*, int, float);
 

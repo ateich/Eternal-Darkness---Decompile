@@ -14,7 +14,7 @@ extern float lbl_8064EEC8;
 extern float lbl_8064EECC;
 
 extern void* fn_80200C38(void*);
-extern Runtime800A3D90* fn_80201B8C();
+extern Runtime800A3D90*fn_80201B8C();
 extern int fn_801A7770(void*);
 extern int fn_800A4EC8(void*, void*);
 extern int fn_800A2068(void*, void*);

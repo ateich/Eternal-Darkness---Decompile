@@ -38,8 +38,8 @@ extern int fn_80200C10(void *);
 extern void *fn_80201B8C();
 extern int fn_80201B54();
 extern void fn_802020B4(void*, int);
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern void fn_80201D34(void *, s32);
 extern void fn_80201D1C(void *, s32);
 extern int fn_801E8328();
@@ -73,7 +73,7 @@ extern s32 fn_800453AC(s32, s32, s32, float, s32, s32, s32, s32, s32, Vec3*, s32
 extern s32 fn_8006749C(s32);
 extern void fn_80120AD0(void*, s32, s32, u16, float, float);
 extern void fn_8019917C(void*);
-extern void *fn_8011F114();
+extern void fn_8011F114();
 extern void* memcpy(void*, const void*, u32);
 extern void fn_8019901C(void);
 

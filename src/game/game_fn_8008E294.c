@@ -10,7 +10,7 @@ typedef struct Data8008E294 {
 
 extern void* fn_8015C2FC(int);
 extern int fn_80036D5C(void*);
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern void fn_80201E78(Vec3*, void*);
 extern const float lbl_80239654[3];
 extern u32 fn_80178E94(Vec3*, Vec3*);

@@ -10,9 +10,9 @@ typedef struct Info {
 
 extern void* fn_801A7498(void*);
 extern void* fn_801A7490(void*);
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern void* fn_800CC458(void*, void*, int);
-extern Info* fn_80201B8C();
+extern Info*fn_80201B8C();
 extern void* fn_80035628(void*);
 extern void fn_800355F0(void*, void*);
 

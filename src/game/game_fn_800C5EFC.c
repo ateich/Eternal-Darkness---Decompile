@@ -6,7 +6,7 @@ extern int fn_80200C10(void *);
 extern u32 fn_801A7530(void *);
 extern s16 fn_801A74F8(void *);
 extern void *fn_801A7498(void *);
-extern unsigned long long fn_8020123C(int, void *, void *, int);
+extern unsigned long long fn_8020123C();
 
 void fn_800C5EFC(void *context, void *object)
 {

@@ -9,7 +9,7 @@ extern int fn_801A7934(void *);
 extern u32 fn_801A78EC(void *);
 extern u32 fn_801A7910(void *);
 extern int fn_801A7490(void *);
-extern void *fn_80201814(void *);
+extern void *fn_80201814();
 extern int fn_80204180(void *, void *);
 
 int fn_800C6F50(void *object, void *event)

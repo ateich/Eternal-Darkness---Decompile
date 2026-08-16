@@ -16,8 +16,8 @@ typedef struct RuntimeState {
     IdGroup *ids;
 } RuntimeState;
 
-extern RuntimeState *fn_80201B8C(void *);
-extern void fn_8020123C(int, int, int, int);
+extern RuntimeState *fn_80201B8C();
+extern unsigned long long fn_8020123C();
 
 void fn_800C9A2C(void *object)
 {

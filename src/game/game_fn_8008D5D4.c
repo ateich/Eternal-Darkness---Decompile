@@ -1,9 +1,9 @@
 extern void* fn_801A7498(void*);
 extern int fn_801A7490(void*);
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern int fn_8003BD48(void*, void*);
 extern int fn_80128EE4(void*);
-extern void* fn_80201B8C();
+extern void*fn_80201B8C();
 extern void* fn_801A717C(void*);
 extern void fn_8012B344(void*);
 extern void fn_801A7470(void*, int);

@@ -14,7 +14,7 @@ typedef struct Context800A2B04 {
     State800A2B04* state;
 } Context800A2B04;
 
-extern Context800A2B04* fn_80201B8C();
+extern Context800A2B04*fn_80201B8C();
 extern int fn_800FBFB0(void);
 
 int fn_800A2B04(void* object, int value)

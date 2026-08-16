@@ -14,8 +14,8 @@ extern void fn_801287C4(void *action, void (*callback)(void *), void *arg, int v
 extern void fn_800389E0(void *object, int, int, int);
 extern void fn_80204810(void *object);
 extern void fn_80128A84(void *action, int, int);
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern void fn_80201138(int, void *, int, int, int, float);
 
 /* NonMatching: instruction-identical; the split TU gives MWCC's generated

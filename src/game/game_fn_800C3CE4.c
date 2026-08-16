@@ -4,7 +4,7 @@ typedef struct State {
 } State;
 
 extern void *fn_80201B3C(void);
-extern State **fn_80201B8C(void *);
+extern State **fn_80201B8C();
 
 void fn_800C3CE4(float value)
 {

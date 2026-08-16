@@ -33,8 +33,8 @@ typedef struct Global8009EF8C {
 extern Context8009EF8C* fn_8006ED98(State8009EF8C*);
 extern int fn_800467F0(void*, int);
 extern void fn_8006DEF8(State8009EF8C*, void*, void*, void*, int);
-extern void* fn_80201814();
-extern Global8009EF8C* fn_80201B8C();
+extern void *fn_80201814();
+extern Global8009EF8C*fn_80201B8C();
 extern void fn_8020104C(int, int, void*, int, float);
 extern void* fn_80036D38(void*);
 extern void fn_802020B4(void*, int);

@@ -10,8 +10,8 @@ typedef struct Resource {
     short value;
 } Resource;
 
-extern RuntimeState *fn_80201B8C(void *);
-extern void *fn_80201B54(void *);
+extern RuntimeState *fn_80201B8C();
+extern void *fn_80201B54();
 extern void fn_8016B400(int, void *, int);
 
 int fn_800CCA44(void *object)

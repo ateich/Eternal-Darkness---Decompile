@@ -5,8 +5,8 @@ extern float lbl_8064E5FC;
 extern void *fn_801294DC(void *, int, int, int);
 extern void fn_80201138(s32 kind, void *context, s32 value, s32 id,
                        s32 flags, float scale);
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 
 s32 fn_80060F10(void *context, void *object)
 {

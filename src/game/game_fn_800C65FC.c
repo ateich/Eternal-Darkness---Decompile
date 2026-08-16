@@ -7,8 +7,8 @@ extern float lbl_8064F1A8;
 extern float lbl_8064F1F4;
 extern float lbl_8064F1F8;
 
-extern s32 fn_80201B44(void);
-extern s32 fn_80201B54(void *);
+extern s32 fn_80201B44();
+extern s32 fn_80201B54();
 extern void fn_80038308(void *, int, s16 *);
 extern void fn_80038464(void *, int, s16 *);
 extern void fn_801441C0(int, int, int);

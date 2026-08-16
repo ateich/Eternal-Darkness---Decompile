@@ -6,10 +6,10 @@ typedef struct Runtime80093B80 {
 } Runtime80093B80;
 
 extern int fn_800359A0(void*, int);
-extern Runtime80093B80* fn_80201B8C();
+extern Runtime80093B80*fn_80201B8C();
 extern void fn_800BDEE4(void*, void*);
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 
 int fn_80093B80(register void* object, void* unused1, void* unused2,
                 int flags1, int flags2)

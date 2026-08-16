@@ -17,11 +17,11 @@ typedef struct Owner {
 } Owner;
 
 extern void *memcpy(void *, const void *, unsigned int);
-extern void *fn_80201B54(void *);
+extern void *fn_80201B54();
 extern float fn_80200534(void *, int, int);
 extern int fn_80117E58(void);
 extern float fn_80200BDC(void);
-extern Owner *fn_80201B8C(void *);
+extern Owner *fn_80201B8C();
 
 unsigned short fn_800BB5C4(void *output, void *object)
 {

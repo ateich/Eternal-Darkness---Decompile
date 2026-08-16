@@ -8,8 +8,8 @@ extern int fn_8006CB30(void *);
 extern void fn_8006CAE4(void *, int, int);
 extern void fn_8006BD78(Owner *);
 extern void fn_802020B4(void *, int);
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 
 int fn_80070884(Owner *owner, void *object)
 {

@@ -2,8 +2,8 @@ extern void* lbl_8064C98C;
 extern void* lbl_8064D18C;
 extern float lbl_8064EF30;
 
-extern void* fn_80201814();
-extern void* fn_80201BC8();
+extern void *fn_80201814();
+extern void *fn_80201BC8();
 extern int fn_800A8034(void*);
 extern void* fn_8011F130(void*);
 extern void fn_801DC2B8(void*, void*, void*, void*, int);

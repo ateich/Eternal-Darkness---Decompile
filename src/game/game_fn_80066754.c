@@ -4,7 +4,7 @@ typedef signed int s32;
 extern s32 lbl_8064D18C;
 extern int fn_80200C38();
 extern void *fn_80201BC8();
-extern void *fn_8011F114();
+extern void fn_8011F114();
 extern int fn_80201B54();
 extern s32 fn_801A7488(s32 value);
 extern u32 fn_801A74C0(s32 value);
@@ -15,8 +15,8 @@ extern void *fn_801294DC(void *, int, int, int);
 extern void fn_80204810(void);
 extern void fn_80128C44(s32 object, void (*callback)(void), s32 value);
 extern void fn_80128C28(s32 object, void (*callback)(void), s32 value);
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 
 void fn_80066754(s32 context, void *event, s32 *result)
 {

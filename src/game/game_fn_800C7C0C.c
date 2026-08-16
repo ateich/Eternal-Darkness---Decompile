@@ -11,16 +11,16 @@ typedef struct Locals {
 
 #pragma use_lmw_stmw on
 
-extern void *fn_80201BC8(void *);
+extern void *fn_80201BC8();
 extern int fn_8011F598(void *, int, int, int, void *, int);
 extern void *fn_80201B94(void *);
 extern void *fn_80201C48(void *);
-extern void *fn_80201814(void *);
+extern void *fn_80201814();
 extern int fn_8011EB04(void *);
 extern void fn_8011F0E8(void *, Vec3 *);
-extern void *fn_80201B54(void *);
-extern void *fn_80201B44(void *);
-extern void fn_8020123C(int, void *, void *, void *);
+extern void *fn_80201B54();
+extern void *fn_80201B44();
+extern unsigned long long fn_8020123C();
 extern unsigned int lbl_8064D5A8;
 extern void *fn_801A717C(void);
 extern void fn_801441C0(int, int, int);

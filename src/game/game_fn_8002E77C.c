@@ -53,8 +53,8 @@ extern s32 fn_802066E0(s32, s32);
 extern void fn_8011DD8C(s32, s32);
 extern void fn_802006D4(s32, s32, s32, s32, s32);
 extern void *fn_80201814();
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern void fn_80201D34(void *, s32);
 extern void fn_80201D1C(void *, s32);
 

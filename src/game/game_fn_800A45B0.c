@@ -13,7 +13,7 @@ typedef struct Object800A45B0 {
     Flags800A45B0 flags;
 } Object800A45B0;
 
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern int fn_800A44E0(Object800A45B0*, int);
 extern void fn_802020B4(void*, int);
 

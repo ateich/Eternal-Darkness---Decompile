@@ -8,12 +8,12 @@ typedef struct RuntimeState {
 
 extern int lbl_8064D18C;
 extern const float lbl_8064F29C;
-extern void *fn_80201B9C(void);
-extern RuntimeState *fn_80201B8C(void *);
+extern void *fn_80201B9C();
+extern RuntimeState *fn_80201B8C();
 extern int fn_80201EB8(void *);
-extern u32 fn_80201B54(void *);
+extern u32 fn_80201B54();
 extern void *fn_80201BC0(void *);
-extern void fn_8020123C(int, u32, u32, void *);
+extern unsigned long long fn_8020123C();
 extern void fn_8020104C(int, u32, u32, void *, float);
 
 #pragma use_lmw_stmw on

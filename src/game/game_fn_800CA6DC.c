@@ -20,7 +20,7 @@ typedef struct Event {
     EventArguments arguments;
 } Event;
 
-extern u32 fn_80201B54(void *);
+extern u32 fn_80201B54();
 extern void fn_800CA660(void *, u32 *);
 extern int fn_800CA530(void *);
 extern int fn_801D0794(u32, int, u32, EventArguments *, int, int,

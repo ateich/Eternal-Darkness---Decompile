@@ -7,8 +7,8 @@ typedef struct RuntimeState {
 } RuntimeState;
 
 extern const float lbl_8064F308;
-extern void *fn_80201B9C(void);
-extern RuntimeState *fn_80201B8C(void *);
+extern void *fn_80201B9C();
+extern RuntimeState *fn_80201B8C();
 extern int fn_80201EB8(void *);
 extern void *fn_80201BC0(void *);
 extern void fn_800C96D4(void *, int, int, int, int, int, float);

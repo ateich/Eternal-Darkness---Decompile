@@ -9,16 +9,16 @@ extern int lbl_8064D18C;
 extern int lbl_8064C578;
 
 extern int fn_80201B54();
-extern void* fn_80201B8C();
+extern void*fn_80201B8C();
 extern int fn_80201EB8();
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern void fn_80072618(Vec8008DF64*, Vec8008DF64*, int, int);
 extern void fn_8012B344(void*);
 extern void fn_8011F0E8(void*, Vec8008DF64*);
 extern void fn_8011FA8C(void*, int, int);
 extern void fn_8011FB54(void*, int);
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 
 typedef struct Nested8008DF64 {
     unsigned char pad0[0x30];

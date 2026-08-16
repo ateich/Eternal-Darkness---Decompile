@@ -22,7 +22,7 @@ extern void *fn_80201B8C();
 extern void *fn_80201BC8();
 extern int fn_80201EB8();
 extern int fn_80201B54();
-extern void *fn_8011F114();
+extern void fn_8011F114();
 extern u32 fn_80178E94(const Vec3*, const Vec3*);
 extern unsigned long long fn_8020123C();
 extern int fn_800FBFB0(void);

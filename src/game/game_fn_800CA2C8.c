@@ -2,9 +2,9 @@ typedef signed short s16;
 typedef unsigned char u8;
 typedef unsigned int u32;
 
-extern void *fn_80201B8C(void *);
+extern void *fn_80201B8C();
 extern u32 fn_80036D5C(void *);
-extern void *fn_80201B54(void *);
+extern void *fn_80201B54();
 extern void fn_80036DA4(void *, u32);
 extern void fn_8016B400(int, void *, int);
 

@@ -16,8 +16,8 @@ typedef struct Data8C {
     u16 timer;
 } Data8C;
 
-extern void* fn_80201BC8();
-extern Info* fn_80201B8C();
+extern void *fn_80201BC8();
+extern Info*fn_80201B8C();
 extern void* fn_80201B54();
 extern int fn_8015C910(void);
 extern int fn_80204180(void*, void*);
@@ -37,8 +37,8 @@ extern void fn_801A764C(void*, void*);
 extern void fn_801287C4(void*, void*, void*, int);
 extern void fn_80128C28(void*, void*, void*);
 extern void fn_80128C44(void*, void*, void*);
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern int fn_800FBFB0(void);
 extern void fn_8008AE40(void);
 extern void fn_8008C7A0(void);

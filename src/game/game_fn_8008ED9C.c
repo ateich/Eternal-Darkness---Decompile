@@ -14,10 +14,10 @@ extern float lbl_8064EC20;
 extern float lbl_8064EC30;
 extern float lbl_8064EC34;
 
-extern void *fn_8011F114();
+extern void fn_8011F114();
 extern unsigned int fn_80178E94(Vec3*, void*);
 extern void* fn_80201B54();
-extern Runtime* fn_80201B8C();
+extern Runtime*fn_80201B8C();
 extern float fn_8011F6F8(void*);
 extern int fn_8003E1F0(void*, Vec3*, int, float);
 extern unsigned char fn_80204434(void*, Vec3*, int, float);
@@ -28,8 +28,8 @@ extern void fn_8008D31C(void*, void*, void*, Runtime*, void*, int, void*);
 extern int fn_8012AFC4(void*);
 extern void fn_80129928(void*, Vec3*);
 extern void fn_8012976C(void*, int, int, Vec3*, float);
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 
 void fn_8008ED9C(void* object, void* actor, void* distance_ctx, void* callback)
 {

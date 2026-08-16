@@ -15,9 +15,9 @@ typedef struct RuntimeState {
 extern const Vec3f lbl_80239934;
 extern float lbl_8064F340;
 extern int lbl_8064D18C;
-extern RuntimeState *fn_80201B8C(void *);
-extern void *fn_80201BC8(void *);
-extern void fn_8011F114(Vec3f *, void *);
+extern RuntimeState *fn_80201B8C();
+extern void *fn_80201BC8();
+extern void fn_8011F114();
 extern void fn_801AAE68(int, int, int, Vec3f *, int, int, int, u16, int,
                        float);
 

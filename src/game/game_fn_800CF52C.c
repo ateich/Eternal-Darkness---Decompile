@@ -6,7 +6,7 @@ typedef struct RuntimeState {
 } RuntimeState;
 
 extern void *fn_80205288(void *);
-extern RuntimeState *fn_80201B8C(void *);
+extern RuntimeState *fn_80201B8C();
 
 int fn_800CF52C(void *object)
 {

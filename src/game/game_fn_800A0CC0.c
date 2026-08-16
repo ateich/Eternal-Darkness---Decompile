@@ -33,13 +33,13 @@ typedef struct Actor {
     u32 flags;
 } Actor;
 
-extern void* fn_80201814();
-extern void* fn_80201BC8();
+extern void *fn_80201814();
+extern void *fn_80201BC8();
 extern Actor* fn_80036D38(void*);
 extern void* fn_80158598(void*, int);
 extern int fn_80157FE0(void*, int, int);
 extern float fn_8012B750(void*);
-extern void *fn_8011F114();
+extern void fn_8011F114();
 extern void fn_801E79A0(void*, int);
 extern void fn_80067180(void*);
 extern void* lbl_8064C4E0;

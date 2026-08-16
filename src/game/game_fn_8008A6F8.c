@@ -6,8 +6,8 @@ extern u8 lbl_803003C8[];
 extern float lbl_8064EBC0;
 extern float lbl_8064EBC4;
 
-extern void* fn_80201B8C();
-extern void* fn_80201BC8();
+extern void*fn_80201B8C();
+extern void *fn_80201BC8();
 extern s32 fn_80201B54();
 extern s32 fn_80201EB8();
 extern int fn_801E8328(s32, void*);
@@ -16,8 +16,8 @@ extern void fn_80128C28(void*, void*, s32);
 extern void fn_8008A8D8(void);
 extern void fn_800389E0(void*, s32, s32, s32);
 extern void fn_80201138(s32, void*, s32, s32, s32, float);
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 
 /* NonMatching: honest reconstruction of the object-spawn callback. The
  * remaining differences are one comparison operand order and scheduling of

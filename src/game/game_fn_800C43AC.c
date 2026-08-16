@@ -12,10 +12,10 @@ typedef struct QueryResult {
 
 extern const Vec3 lbl_80239860;
 
-extern void *fn_80201BC8(void *);
+extern void *fn_80201BC8();
 extern int fn_80201B5C(void *);
 extern int fn_8011F6A4(void *, int, int, int, QueryResult *, int);
-extern void *fn_8011F114(Vec3 *, void *);
+extern void fn_8011F114();
 
 void fn_800C43AC(Vec3 *out, void *object)
 {

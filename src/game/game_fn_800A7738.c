@@ -6,7 +6,7 @@ extern void* lbl_8064C988;
 extern u8 lbl_8031D718[9];
 
 extern void fn_801D19FC(void*, void*);
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern void fn_8014CBC0(void*);
 extern void* fn_80205288(void*);
 extern void* fn_80201C24(void);

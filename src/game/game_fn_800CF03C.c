@@ -20,7 +20,7 @@ typedef struct RuntimeState {
     TransformSource *transform;
 } RuntimeState;
 
-extern RuntimeState *fn_80201B8C(void *);
+extern RuntimeState *fn_80201B8C();
 extern void fn_801E7BF0(Vec3 *, Vec3 *, Vec3 *, u32 *);
 extern void fn_801ECC4C(void);
 

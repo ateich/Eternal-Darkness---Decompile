@@ -6,9 +6,9 @@ typedef struct Owner {
 } Owner;
 
 extern void *fn_801A7498(void *);
-extern void *fn_80201814(void *);
-extern Owner *fn_80201B8C(void);
-extern unsigned long long fn_8020123C(int, void *, void *, void *);
+extern void *fn_80201814();
+extern Owner *fn_80201B8C();
+extern unsigned long long fn_8020123C();
 
 int fn_800C5258(void *unused, void *object)
 {

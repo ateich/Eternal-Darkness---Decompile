@@ -20,7 +20,7 @@ typedef struct Context800A2688 {
     State800A2688* state;
 } Context800A2688;
 
-extern Context800A2688* fn_80201B8C();
+extern Context800A2688*fn_80201B8C();
 extern int fn_800A30C0(State800A2688*);
 extern void fn_800A3C4C(void*, Context800A2688*, int, int);
 extern void fn_800A3104(State800A2688*, int);

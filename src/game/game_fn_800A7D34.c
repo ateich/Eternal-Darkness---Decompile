@@ -10,8 +10,8 @@ typedef struct QueryResult {
 
 extern void* lbl_8064C988;
 extern const float lbl_8064EF1C;
-extern void* fn_80201814();
-extern void* fn_80201BC8();
+extern void *fn_80201814();
+extern void *fn_80201BC8();
 extern int fn_8011F598(void*, int, int, int, QueryResult*, int);
 
 void fn_800A7D34(Vec3* first_out, Vec3* second_out, Vec3* center_out)

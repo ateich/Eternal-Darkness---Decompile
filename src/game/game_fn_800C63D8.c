@@ -10,8 +10,8 @@ typedef struct Owner {
     State *state;
 } Owner;
 
-extern void *fn_80201B9C(void);
-extern Owner *fn_80201B8C(void *);
+extern void *fn_80201B9C();
+extern Owner *fn_80201B8C();
 extern void *fn_80201BC0(void *);
 
 void fn_800C63D8(void)

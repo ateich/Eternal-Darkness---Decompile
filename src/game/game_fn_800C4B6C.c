@@ -5,10 +5,10 @@ extern int lbl_8064CA88;
 extern int lbl_8064B714;
 extern float lbl_8064F140;
 
-extern void *fn_80201BC8(void *);
-extern void *fn_80201B54(void *);
+extern void *fn_80201BC8();
+extern void *fn_80201B54();
 extern u16 fn_801291CC(void *);
-extern unsigned long long fn_8020123C(int, void *, void *, void *);
+extern unsigned long long fn_8020123C();
 extern void fn_8020104C(int, void *, void *, void *, float);
 
 void fn_800C4B6C(void *context)

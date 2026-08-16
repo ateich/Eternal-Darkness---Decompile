@@ -10,7 +10,7 @@ typedef struct RuntimeObject {
 typedef struct RuntimeState { RuntimeObject *runtime; } RuntimeState;
 
 const float lbl_8064E710 = 150.0f;
-extern void *fn_8011F114();
+extern void fn_8011F114();
 extern void fn_801AC9F4(s32 kind, s32 value, Vec3 *position, s32 count);
 extern void fn_801D38BC(s32 kind, s32 *word, s16 *half);
 extern void fn_80152404(Vec3 *position, s16 value, s32 owner, s32 kind, s32 *word);

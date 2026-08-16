@@ -11,9 +11,9 @@ typedef struct Transform {
 
 extern float lbl_8064F1FC;
 
-extern void *fn_80201BC8(void *);
+extern void *fn_80201BC8();
 extern float fn_8011F6F0(void);
-extern Vec3 *fn_8011F114(Vec3 *, void *);
+extern void fn_8011F114();
 extern Vec3 *fn_80211A6C(void *, const Vec3 *, Vec3 *);
 extern Vec3 *fn_80211AAC(Vec3 *, const Vec3 *);
 extern Vec3 *fn_80211A90(Vec3 *, Vec3 *, float);

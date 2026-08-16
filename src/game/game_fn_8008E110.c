@@ -8,14 +8,14 @@ typedef struct Data8008E110 {
 } Data8008E110;
 
 extern int fn_80201B54();
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern void* fn_801294DC(void*, int, int, int);
 extern u64 fn_8020123C();
 extern int fn_800DE3F8(void);
 extern void* fn_800CCF60(void*, int, int, void*, int, int, int, int, int, int,
                          int);
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 extern int fn_8008E078(void*, void*, void*);
 
 /* NonMatching: behavior-complete frontier reconstruction; remaining differences

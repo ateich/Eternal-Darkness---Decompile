@@ -11,7 +11,7 @@ typedef struct State {
     Inner* inner;
 } State;
 
-extern State* fn_80201B8C();
+extern State*fn_80201B8C();
 extern void* fn_801294DC(void*, int, int, int);
 
 void fn_8008A914(void* object, u32 flags, void* resource)

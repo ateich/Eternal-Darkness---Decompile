@@ -9,10 +9,10 @@ typedef struct Component {
 
 #pragma use_lmw_stmw on
 
-extern void *fn_80201B9C(void *);
+extern void *fn_80201B9C();
 extern int fn_80201EB8(void *);
-extern int fn_80201B54(void *);
-extern Component *fn_80201B8C(void *);
+extern int fn_80201B54();
+extern Component *fn_80201B8C();
 extern void fn_801A764C(void *, void *);
 extern int fn_800C8568(void *, void *, void *, void *, void *, void *, void *);
 

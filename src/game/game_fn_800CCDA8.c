@@ -6,10 +6,10 @@ typedef struct RuntimeState {
     u8 kind;
 } RuntimeState;
 
-extern void *fn_80201B9C(void);
-extern RuntimeState *fn_80201B8C(void *);
+extern void *fn_80201B9C();
+extern RuntimeState *fn_80201B8C();
 extern int fn_80201EB8(void *);
-extern void *fn_80201BC8(void *);
+extern void *fn_80201BC8();
 extern void *fn_80201BC0(void *);
 extern void fn_8012C478(void *, int, int);
 

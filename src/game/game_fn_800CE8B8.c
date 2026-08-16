@@ -11,7 +11,7 @@ typedef struct RuntimeState {
     Data *data;
 } RuntimeState;
 
-extern RuntimeState *fn_80201B8C(void *);
+extern RuntimeState *fn_80201B8C();
 
 void fn_800CE8B8(void *object)
 {

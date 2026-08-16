@@ -6,15 +6,15 @@ typedef struct Event80095654 { u8 pad00[0x14]; int value; } Event80095654;
 typedef struct Context80095654 { u8 pad00[0x68]; void* object; } Context80095654;
 typedef struct Object80095654 { u8 pad00[0x30]; short value; } Object80095654;
 
-extern void* fn_80201BC8();
+extern void *fn_80201BC8();
 extern void fn_80201E78(void*, void*);
 extern Event80095654* fn_800935CC(int, void*, u32, int);
 extern void* fn_801294DC(void*, int, int, int);
 extern void fn_80128C44(void*, void*, int);
 extern void fn_80128C28(void*, void*, int);
 extern void fn_80204810(void);
-extern void fn_80201D2C();
-extern void fn_80201D14();
+extern void fn_80201D2C(void *, int);
+extern void fn_80201D14(void *, int);
 
 int fn_80095774(register void* object, register int index,
                 register State80095654* state,

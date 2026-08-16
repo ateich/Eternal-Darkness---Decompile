@@ -4,9 +4,9 @@ typedef unsigned int u32;
 extern u32 lbl_8064CA8C;
 
 extern void *fn_801A7498(void *);
-extern void *fn_80201814(void *);
-extern int fn_80201B54(void *);
-extern void **fn_80201B8C(void *);
+extern void *fn_80201814();
+extern int fn_80201B54();
+extern void **fn_80201B8C();
 extern u32 fn_8003BD48(void *, void *);
 extern u32 fn_80128EE4(void *);
 extern int fn_80128F40(void *);

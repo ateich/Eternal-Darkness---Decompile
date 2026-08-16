@@ -31,7 +31,7 @@ typedef struct RuntimeState {
 } RuntimeState;
 
 extern void *fn_80037AF4(int);
-extern RuntimeState *fn_80201B8C(void *);
+extern RuntimeState *fn_80201B8C();
 extern void fn_802015A4(void *);
 extern void fn_801E8328(int, void *);
 

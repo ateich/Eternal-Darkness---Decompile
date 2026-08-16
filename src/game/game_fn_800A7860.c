@@ -6,8 +6,8 @@ typedef struct State800A7860 {
     u8 kind;
 } State800A7860;
 
-extern void* fn_80201814();
-extern State800A7860* fn_80201B8C();
+extern void *fn_80201814();
+extern State800A7860*fn_80201B8C();
 
 u32 fn_800A7860(void* object)
 {
