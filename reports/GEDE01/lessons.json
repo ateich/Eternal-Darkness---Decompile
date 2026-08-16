@@ -2,10 +2,10 @@
   "schema_version": 2,
   "scope": "Distinct MWCC code-generation behaviors documented in reports/GEDE01/progress.json open_items and docs/matching.md",
   "source_snapshot": {
-    "repository_revision": "e01625df8da6428ff220ecf029407b610fffa876",
-    "next_gate": "0x800CAC5C",
+    "repository_revision": "9603c50b544daa59e4d4bdd226ed8ae8c7571921",
+    "next_gate": "0x800DEAD8",
     "reports/GEDE01/progress.json": {
-      "sha256": "49b8b01c3b9e8357ba709e812932456212ebb98708aa83bbc8ab45357b3043e4",
+      "sha256": "0a6da89d521fd1c1d079027f4fbb2da5b817b0a1a637fb9438939fcc961806c3",
       "scope": "open_items"
     },
     "docs/matching.md": {
@@ -733,6 +733,118 @@
       "precise_divergence": "The recovered saturating decrement does not select retail's signed-maximum expression idiom and also changes the callee-saved allocation.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800CA5C0 through fn_800CAB80"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_800CAF7C"],
+      "precise_divergence": "Reassociating the result, value, and call addition changes MWCC's integer-add instruction association from retail even though the arithmetic result is equivalent.",
+      "workaround": "Retain the documented result + value + call source expression.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800CAC5C through fn_800CB694"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_800CCF60", "fn_800CD458", "fn_800CD568", "fn_800CDD84", "fn_800CFE88", "fn_800D9C48", "fn_800D9D64", "fn_800DA110", "fn_800DA1D4", "fn_800DB204", "fn_800DB37C", "fn_800DBB24"],
+      "precise_divergence": "Declaration order, initialization point, explicit intermediate values, or deliberate local reuse changes MWCC's long-lived saved-register assignment and can lose retail r28-r31 lifetimes.",
+      "workaround": "Preserve the documented declaration and initialization order, introduce the named intermediate identity/result values, and reuse the documented runtime-state, cursor, context, or owner local.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_800CB098", "fn_800CD6C0", "fn_800CD84C", "fn_800CE524", "fn_800CE698", "fn_800CFA3C", "fn_800D078C", "fn_800D34B8", "fn_800D3598", "fn_800D3620", "fn_800D373C", "fn_800D38CC", "fn_800D607C", "fn_800D61C4", "fn_800D6638", "fn_800D88DC", "fn_800D8EC4", "fn_800D9064", "fn_800D9278", "fn_800D9E10", "fn_800D9F2C", "fn_800D9FE0", "fn_800DA05C", "fn_800DB2BC", "fn_800DB4F4", "fn_800DB660", "fn_800DBC0C", "fn_800DC3A0", "fn_800DCFE0", "fn_800DE704"],
+      "precise_divergence": "Canonical MWCC assigns equivalent boolean, integer, pointer, or floating value webs to different volatile or callee-saved registers from retail; documented cases range from a final r3/r4 scratch choice to r30/r31 and FPR rotations.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_800CCA44", "fn_800CEA1C", "fn_800D4100", "fn_800D6294", "fn_800D9AE8", "fn_800DA278", "fn_800DB9B0", "fn_800DBA0C"],
+      "precise_divergence": "Flattening a returned or converted value into its consumer lets MWCC bypass retail's volatile transfer through r0 or choose different r0/r4 lanes.",
+      "workaround": "Retain the documented model, value, available-count, returned-vector, scheduler-state, state, owner, or converted-value temporary; directly nest fn_8011F130 where documented.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_800CCF60", "fn_800CD458", "fn_800CD568"],
+      "precise_divergence": "Non-volatile owner-resource links let MWCC retain values instead of performing retail's stack-slot reloads.",
+      "workaround": "Qualify the documented owner-resource links volatile.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800CCF60 through fn_800CD568"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_800CF03C", "fn_800CF598", "fn_800CFF04", "fn_800D04A4", "fn_800D082C", "fn_800D322C", "fn_800D34B8", "fn_800D3620", "fn_800D373C", "fn_800D88DC", "fn_800D9064", "fn_800D9278", "fn_800DB4F4", "fn_800DB660", "fn_800DBC0C", "fn_800DE648", "fn_800DE704"],
+      "precise_divergence": "Aggregate declaration order, assignment order, duplication, or nesting changes MWCC's stack-object placement and aggregate load/store schedule relative to retail.",
+      "workaround": "For matched cases, use fn_800CF03C's explicit declarations and reverse assignments, fn_800CFF04's duplicate Vec3 temporaries, and fn_800D04A4's aggregate initialization and assignment; no workaround is recorded for the remaining functions.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_800CC3BC", "fn_800CCDA8", "fn_800CCE78", "fn_800CE914", "fn_800CE9A4", "fn_800CEA1C", "fn_800CEB10", "fn_800CF0C8", "fn_800CF220", "fn_800CF2DC", "fn_800CF3D4", "fn_800CFFFC", "fn_800D05FC", "fn_800D06DC", "fn_800D0A04", "fn_800D0AA8", "fn_800D64A8", "fn_800D8CB8", "fn_800D91AC"],
+      "precise_divergence": "Retail's inline GPR, and in one documented TU floating-point, save/restore sequences are not selected without the translation-unit register-save pragma.",
+      "workaround": "Enable the TU-local use_lmw_stmw pragma while preserving the documented long-lived arguments.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_800CF32C", "fn_800DB874"],
+      "precise_divergence": "An incomplete callee prototype or passing an aggregate indirectly changes MWCC's argument register lanes or suppresses retail's outgoing aggregate copy.",
+      "workaround": "Use the recovered eight-argument fn_80026DC8 prototype and pass fn_800DB874's four-word descriptor by value.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800CF220 through fn_800CF3D4 and fn_800DB874"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_800DBA84"],
+      "precise_divergence": "A signed predicate result selects signed cmpwi rather than retail's unsigned cmplwi encoding.",
+      "workaround": "Declare the documented predicate return types unsigned.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800DB62C through fn_800DBA84"]
+    },
+    {
+      "category": "jump-table-strategy",
+      "functions": ["fn_800CCDA8", "fn_800CF598", "fn_800CFFFC", "fn_800D0510", "fn_800D30A4", "fn_800D3148", "fn_800D3374", "fn_800D4214", "fn_800D5FA0", "fn_800D6314", "fn_800D6A28", "fn_800D8B74", "fn_800D8F38", "fn_800D91AC", "fn_800DD284"],
+      "precise_divergence": "Equivalent if/else or reordered switch source changes MWCC's branch-tree shape, block placement, redundant branch retention, or jump-table targets; omitted empty/no-op cases can change the emitted layout even when behavior is unchanged.",
+      "workaround": "Use explicit mode branches or source-level switches, preserve the documented case/default order, and retain empty case 3 or no-op cases 239 and 240 where recorded; no workaround is known for fn_800CF598, fn_800D4214, or fn_800D6A28.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "float-constant-placement",
+      "functions": ["fn_800CB760", "fn_800CB8F4", "fn_800D9F2C"],
+      "precise_divergence": "Canonical split-TU output uses a different signed-integer conversion-bias symbol identity from retail while the instruction bytes, function size, and other relocations can agree.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800CB760, fn_800CB8F4, and fn_800D9F2C"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_800CF598", "fn_800CFA3C", "fn_800CFC04", "fn_800CFCD4", "fn_800D078C", "fn_800D082C", "fn_800D322C", "fn_800D34B8", "fn_800D3598", "fn_800D3620", "fn_800D373C", "fn_800D38CC", "fn_800D607C", "fn_800D61C4", "fn_800D6638", "fn_800D88DC", "fn_800D9064", "fn_800D9278", "fn_800DA308", "fn_800DB2BC", "fn_800DB430", "fn_800DB4F4", "fn_800DB660", "fn_800DBC0C", "fn_800DC2B8", "fn_800DE648"],
+      "precise_divergence": "Canonical MWCC schedules equivalent aggregate copies, initializer stores, loop operations, floating-point work, prologue work, expression evaluation, or call arguments differently from retail; several documented functions remain size-exact despite the reordered instructions.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_800D30A4", "fn_800D3148", "fn_800D3374", "fn_800D8828"],
+      "precise_divergence": "Ordinary bitfield expressions do not necessarily select retail's rlwimi/extrwi instruction forms.",
+      "workaround": "Use the documented explicit byte bitfields or shift-and-mask idiom.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800D30A4 through fn_800D3374 and fn_800D8828"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_800DB95C"],
+      "precise_divergence": "Canonical MWCC reverses the encoded cmpw operands for a symmetric equality test while preserving function size, semantics, and all relocations.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800DB62C through fn_800DBA84"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_800DE8FC"],
+      "precise_divergence": "Canonical MWCC reverses nine independent paired floating-point load orderings while preserving the exact 300-byte function size and all 30 relocation-bearing instructions.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800DEA28 and fn_800DEA88"]
+    },
+    {
+      "category": "inlining",
+      "functions": ["fn_800DAFCC"],
+      "precise_divergence": "A straightforward ten-entry source loop lowers to five checks per counted iteration, while retail checks six entries per iteration and therefore has a different unrolled loop body and relocation count.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800DA278 through fn_800DAFCC"]
     }
   ]
 }

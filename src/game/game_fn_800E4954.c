@@ -1,0 +1,7 @@
+extern int fn_800FBFB0(void);
+extern unsigned short lbl_8064B7E4[2];
+
+unsigned short fn_800E4954(void)
+{
+    return lbl_8064B7E4[fn_800FBFB0() & 1];
+}
