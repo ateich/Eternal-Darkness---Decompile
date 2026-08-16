@@ -29,7 +29,7 @@ extern void fn_80120AD0(void *, int, s16, u16, float, float);
 extern int fn_8011F130(void *);
 extern void fn_800DC3A0(void *, int, void *, u8, u8, int);
 extern int fn_801E855C(int, void *, int);
-extern void fn_801E8328(int, void *);
+extern int fn_801E8328(int, void *);
 extern float lbl_8064F460;
 extern float lbl_8064F464;
 extern u8 lbl_80325B80[];

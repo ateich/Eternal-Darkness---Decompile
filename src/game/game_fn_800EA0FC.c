@@ -12,9 +12,9 @@ typedef struct Object {
 
 extern void *fn_80201B54(void *);
 extern int fn_80200C20(void *);
-extern void fn_80201814(int);
+extern void *fn_80201814(int);
 extern SlotState *fn_800EA08C(void);
-extern void fn_8020123C(int, void *, int, int);
+extern unsigned long long fn_8020123C(int, void *, int, int);
 extern int lbl_8064D5A8;
 
 void fn_800EA0FC(void *arg0, Object *object, int value, void *id, int *result)

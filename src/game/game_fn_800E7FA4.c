@@ -3,7 +3,7 @@ extern int fn_80201B54(void *);
 extern int fn_80201910(int);
 extern int fn_801E79FC(void *, int);
 extern int fn_80201B64(void *);
-extern void fn_8020123C(int, int, int, int);
+extern unsigned long long fn_8020123C(int, int, int, int);
 
 void fn_800E7FA4(void *object)
 {

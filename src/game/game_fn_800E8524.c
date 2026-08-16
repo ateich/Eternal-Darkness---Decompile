@@ -4,7 +4,7 @@ extern int fn_8012A1FC(void *, int);
 extern int fn_8012A1BC(void *, int);
 extern int fn_800FBFB0(void);
 extern void fn_801291F0(void *, int, unsigned char);
-extern void fn_801294DC(void *, int, int, int);
+extern void *fn_801294DC(void *, int, int, int);
 extern void fn_80129FD0(void *, int, int);
 
 void fn_800E8524(void *object, int enabled)

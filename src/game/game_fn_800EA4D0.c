@@ -15,7 +15,7 @@ typedef struct Wrapper {
 
 extern void *fn_80201814(void *);
 extern Wrapper *fn_80201B8C(void *);
-extern void fn_8020123C(int, void *, int, int);
+extern unsigned long long fn_8020123C(int, void *, int, int);
 
 void fn_800EA4D0(void *context, int handle)
 {
