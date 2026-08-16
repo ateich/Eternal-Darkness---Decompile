@@ -1,10 +1,10 @@
 extern int lbl_8064D18C;
 extern float lbl_8064F7FC;
-extern int fn_80201B54(void *);
-extern int fn_80201EB8(void *);
+extern int fn_80201B54();
+extern int fn_80201EB8();
 extern void fn_802006D4(int, int, int, int, int);
 extern void fn_80201138(int, void *, int, int, int, float);
-extern void *fn_80201BC8(void *);
+extern void *fn_80201BC8();
 extern void *fn_8011F130(void *);
 extern void fn_801F74C8(int, int, int);
 extern void fn_801441C0(int, int, int);

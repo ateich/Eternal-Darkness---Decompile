@@ -1,5 +1,5 @@
 extern float lbl_8064E938;
-extern void *fn_80200C38(int value);
+extern int fn_80200C38();
 extern int fn_80201B54();
 extern void *fn_801A7498(void *object);
 extern void *fn_80201814();
@@ -17,7 +17,7 @@ extern void fn_801A7518(void *object, int value);
  * value update, dispatch, and restoration. */
 void fn_80079AA4(void *object, void *resource, int value, void *work)
 {
-    void *wrapper = fn_80200C38(value);
+    void *wrapper = (void *)fn_80200C38(value);
     void *candidate;
     int type;
 

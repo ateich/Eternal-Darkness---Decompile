@@ -10,7 +10,7 @@ typedef struct RuntimeD9F4 {
 extern void* lbl_8064C4E4;
 extern int lbl_8064A80C;
 extern Vec3 lbl_8023963C;
-extern void* fn_80201B9C();
+extern void *fn_80201B9C();
 extern void fn_8011F114();
 extern int fn_80201B54();
 extern void *fn_80201B8C();

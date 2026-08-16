@@ -17,7 +17,7 @@ extern int lbl_8064C578;
 extern void* lbl_8064D18C;
 
 extern int fn_80036D5C(void*);
-extern void* fn_80201EB8();
+extern int fn_80201EB8();
 extern void *fn_80201BC8();
 extern void fn_80201E78(Vec3*, void*);
 extern void fn_80036DA4(void*, int);
@@ -37,7 +37,7 @@ void fn_8008F960(void* object, void* actor, int* link, void* state,
                  Runtime* runtime, void* extra)
 {
     int flags = fn_80036D5C(object);
-    void* associated = fn_80201EB8(object);
+    void* associated = (void *)fn_80201EB8(object);
     void* current = fn_80201BC8(object);
     Vec3 transform;
 

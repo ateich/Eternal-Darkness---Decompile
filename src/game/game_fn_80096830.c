@@ -29,7 +29,7 @@ extern void fn_80201E78(Vec3*, void*);
 extern void *fn_801294DC(void *, int, int, int);
 extern Candidate80096830* fn_800935CC(int, void*, void*, int);
 extern unsigned int fn_80178E94(Vec3*, Vec3*);
-extern int fn_80200C38(void*);
+extern int fn_80200C38();
 extern void fn_80128C44(void*, void*, int);
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);

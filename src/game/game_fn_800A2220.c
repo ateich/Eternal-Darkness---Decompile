@@ -16,14 +16,14 @@ typedef struct Object800A2220 {
     s8 countdown;
 } Object800A2220;
 
-extern Source800A2220* fn_80200C38(void*);
+extern int fn_80200C38();
 extern int fn_80201B54();
 extern int fn_801D137C(void*);
 extern void fn_800A45B0(Object800A2220*, void*);
 
 void fn_800A2220(Object800A2220* object, void* context, void* source)
 {
-    void* value = fn_80200C38(source)->value;
+    void* value = ((Source800A2220 *)fn_80200C38(source))->value;
     ((void*)fn_80201B54(context));
 
     switch (object->state) {

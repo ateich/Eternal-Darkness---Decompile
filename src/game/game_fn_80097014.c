@@ -17,7 +17,7 @@ typedef struct ActorData80097014 {
     u8 subtype;
 } ActorData80097014;
 
-extern int fn_80200C38(void*);
+extern int fn_80200C38();
 extern int fn_80200C20(void*);
 extern u32 fn_80036D5C(void*);
 extern void fn_80036DA4(void*, u32);

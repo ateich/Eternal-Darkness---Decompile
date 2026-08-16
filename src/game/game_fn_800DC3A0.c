@@ -36,7 +36,7 @@ typedef struct EffectState {
 
 extern void fn_8014CBC0(EffectState *);
 extern void *fn_80201814();
-extern int fn_80201EB8(void *);
+extern int fn_80201EB8();
 extern int fn_801D39E0(int);
 extern void fn_801FDC24(void);
 extern void fn_8014C5D4(void);

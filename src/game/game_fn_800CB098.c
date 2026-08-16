@@ -13,7 +13,7 @@ typedef struct RuntimeState {
 extern int lbl_8064D18C;
 extern void *fn_80201B9C();
 extern void *fn_80201B8C();
-extern int fn_80201EB8(void *);
+extern int fn_80201EB8();
 extern int fn_80201B54();
 extern void *fn_80201BC0(void *);
 extern unsigned long long fn_8020123C();

@@ -11,7 +11,7 @@ extern const Vec3 lbl_8023980C;
 extern void *fn_80201B9C();
 extern void *fn_80201BC8();
 extern void fn_8011F114();
-extern int fn_80201EB8(void *);
+extern int fn_80201EB8();
 extern int fn_80201B54();
 extern void *fn_80201BC0(void *);
 extern unsigned int fn_80178E94(Vec3 *, Vec3 *);

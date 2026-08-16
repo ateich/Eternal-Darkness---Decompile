@@ -23,7 +23,7 @@ typedef struct GlobalState {
     int mode;
 } GlobalState;
 
-extern void* fn_80201B9C();
+extern void *fn_80201B9C();
 extern ObjectInfo* fn_80204844(void*, int);
 extern void *fn_80201B8C();
 extern int fn_8006BCE4(Actor*);

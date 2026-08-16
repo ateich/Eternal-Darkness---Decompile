@@ -8,7 +8,7 @@ extern void *memcpy(void *, const void *, unsigned int);
 extern float lbl_8064F010;
 extern int fn_80201B54();
 extern void fn_80201E78(void *, void *);
-extern void *fn_80201EB8(void *);
+extern int fn_80201EB8();
 extern void *fn_801E2E1C(unsigned int, void *, unsigned int);
 extern void fn_801E3020(void *, unsigned int, void *, unsigned int, void *,
                        void *, void *, void *, void *, void *);
@@ -32,7 +32,7 @@ unsigned short fn_800BB6A0(void *input, void *object)
     if (message.time >= lbl_8064F010) {
         owner = ((void *)fn_80201B54(object));
         fn_80201E78(vector, object);
-        runtime = fn_80201EB8(object);
+        runtime = (void *)fn_80201EB8(object);
         resource = fn_801E2E1C(message.second, owner, message.first);
         fn_801E3020(runtime, message.second, vector, message.first, owner, &a,
                     &b, &c, &d, resource);

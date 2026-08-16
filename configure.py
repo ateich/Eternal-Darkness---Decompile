@@ -86,6 +86,26 @@ config.asflags = ["-mgekko", "--strip-local-absolute", "-I include", f"-I build/
 config.ldflags = ["-fp hardware", "-nodefaults"]
 config.custom_build_rules = [
     {
+        "name": "externalize_game_801128E4_signed_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @6 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@6=lbl_8064FF70 --remove-section=.sdata2 $in "
+            "&& touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "externalize_game_801126E0_unsigned_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @9 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@9=lbl_8064FF68 --remove-section=.sdata2 $in "
+            "&& touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
         "name": "externalize_game_800E4980_bias",
         "command": (
             "python3 tools/externalize_elf_symbol.py $in @11 && "
@@ -881,9 +901,34 @@ config.custom_build_rules = [
         ),
         "description": "EXTERNALIZE $in",
     },
+    {
+        "name": "externalize_game_8010F184_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @6 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@6=lbl_8064FE78 --remove-section=.sdata2 $in "
+            "&& touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
 ]
 config.custom_build_steps = {
     "post-compile": [
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_801128E4.externalized"],
+            "rule": "externalize_game_801128E4_signed_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_801128E4.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_801126E0.externalized"],
+            "rule": "externalize_game_801126E0_unsigned_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_801126E0.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8010F184.externalized"],
+            "rule": "externalize_game_8010F184_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8010F184.o"],
+        },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_80109EEC.externalized"],
             "rule": "externalize_game_80109EEC_coordinates",
@@ -4494,6 +4539,71 @@ config.libs = [
             Object(Matching, "game/game_fn_8010F168.c"),
             Object(Matching, "game/game_fn_8010F174.c"),
             Object(Matching, "game/game_fn_8010F180.c"),
+            Object(Matching, "game/game_fn_8010F184.c"),
+            Object(Matching, "game/game_fn_8010F218.c"),
+            # Honest periodic controller update; remaining differences are MWCC
+            # long-return lowering and local allocation around the query chain.
+            Object(NonMatching, "game/game_fn_8010F2A4.c"),
+            Object(Matching, "game/game_fn_8010F3DC.c"),
+            Object(Matching, "game/game_fn_8010F404.c"),
+            # Honest selector test; remaining difference is argument-register
+            # scheduling around the three-way selection helper.
+            Object(NonMatching, "game/game_fn_8010F8B0.c"),
+            Object(Matching, "game/game_fn_8010F930.c"),
+            # Honest mode update; remaining differences are two equivalent
+            # selection-helper schedules.
+            Object(NonMatching, "game/game_fn_8010F9D8.c"),
+            # Honest mode dispatch; remaining differences are selection-table
+            # argument-register scheduling.
+            Object(NonMatching, "game/game_fn_8010FB5C.c"),
+            # Honest signed selection cursor update; remaining differences are
+            # local allocation and branch scheduling in the bounded scan.
+            Object(NonMatching, "game/game_fn_8010FC3C.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_8010FED4.c"),
+            # Large mode dispatcher retained as assembly after bounded triage.
+            # Honest event callback reconstruction; remaining differences are
+            # saved-register allocation around the selection helpers.
+            Object(NonMatching, "game/game_fn_8011038C.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_80110534.c"),
+            Object(Matching, "game/game_fn_801116A4.c"),
+            Object(Matching, "game/game_fn_80111724.c"),
+            Object(Matching, "game/game_fn_80111750.c"),
+            Object(Matching, "game/game_fn_80111780.c"),
+            Object(Matching, "game/game_fn_801118E8.c"),
+            Object(Matching, "game/game_fn_80111BB0.c"),
+            Object(Matching, "game/game_fn_80112230.c"),
+            Object(Matching, "game/game_fn_80112258.c"),
+            Object(Matching, "game/game_fn_80112614.c"),
+            Object(Matching, "game/game_fn_8011261C.c"),
+            Object(Matching, "game/game_fn_801126E0.c"),
+            # Honest behavior-complete C; MWCC coalesces the item/horizontal
+            # live ranges instead of retaining retail's r28-r30 allocation.
+            Object(NonMatching, "game/game_fn_80112754.c"),
+            Object(Matching, "game/game_fn_801128AC.c"),
+            Object(Matching, "game/game_fn_801128E4.c"),
+            Object(Matching, "game/game_fn_80112928.c"),
+            Object(Matching, "game/game_fn_801132B8.c"),
+            Object(Matching, "game/game_fn_801139D4.c"),
+            Object(Matching, "game/game_fn_80113AB8.c"),
+            Object(Matching, "game/game_fn_80113B50.c"),
+            Object(Matching, "game/game_fn_80113B64.c"),
+            Object(Matching, "game/game_fn_80113BA8.c"),
+            Object(Matching, "game/game_fn_80113CF8.c"),
+            Object(Matching, "game/game_fn_80113D50.c"),
+            # Honest table search; the retail unroll assigns shape/entry to
+            # r7/r6 while this compiler source shape assigns them to r6/r7.
+            Object(NonMatching, "game/game_fn_80113E48.c"),
+            Object(Matching, "game/game_fn_80113F54.c"),
+            Object(Matching, "game/game_fn_80114048.c"),
+            # Instruction-byte exact honest C; the two retail text relocations
+            # name the separately owned canonical jump table rather than the
+            # compiler-local table emitted for this split object.
+            Object(NonMatching, "game/game_fn_801141B8.c"),
+            Object(Matching, "game/game_fn_80117A7C.c"),
+            Object(Matching, "game/game_fn_80117AAC.c"),
+            Object(Matching, "game/game_fn_80117E58.c"),
+            Object(Matching, "game/game_fn_80117EC8.c"),
+            Object(NonMatching, "game/game_fn_80117EF0.c"),
             Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_80008B6C.c"),
             Object(Matching, "game/game_fn_80008BD8.c"),

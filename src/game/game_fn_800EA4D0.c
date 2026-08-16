@@ -13,16 +13,16 @@ typedef struct Wrapper {
     Object *object;
 } Wrapper;
 
-extern void *fn_80201814(void *);
-extern Wrapper *fn_80201B8C(void *);
-extern unsigned long long fn_8020123C(int, void *, int, int);
+extern void *fn_80201814();
+extern void *fn_80201B8C();
+extern unsigned long long fn_8020123C();
 
 void fn_800EA4D0(void *context, int handle)
 {
     SlotState *slots;
     int i;
 
-    slots = fn_80201B8C(fn_80201814(context))->object->slots;
+    slots = ((Wrapper *)fn_80201B8C(fn_80201814(context)))->object->slots;
     for (i = 0; i < 3; i++) {
         if (slots->handles[i] == handle) {
             fn_8020123C(0x39, context, handle, 0);

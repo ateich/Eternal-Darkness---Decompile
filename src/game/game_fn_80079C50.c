@@ -8,14 +8,14 @@ typedef struct CycleWork {
     void *active;
 } CycleWork;
 
-extern void *fn_80200C38(int value);
+extern int fn_80200C38();
 extern int fn_80201B54();
 extern unsigned long long fn_8020123C();
 extern void *fn_80201814();
 
 void fn_80079C50(void *object, int unused, int value, CycleWork *work)
 {
-    void **wrapper = fn_80200C38(value);
+    void **wrapper = (void **)fn_80200C38(value);
     void *owner = (void *)fn_80201B54(object);
     int resource = (int)wrapper[8];
 

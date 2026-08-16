@@ -7,10 +7,10 @@ typedef struct Vec3i {
 extern int lbl_8064D18C;
 extern float lbl_8064F7EC;
 extern volatile float lbl_8064F7F0;
-extern int fn_80200C38(void *);
+extern int fn_80200C38();
 extern void *fn_8004910C(int);
-extern int fn_80201B54(void *);
-extern void *fn_80201BC8(void *);
+extern int fn_80201B54();
+extern void *fn_80201BC8();
 extern int fn_8011EB04(void *);
 extern int fn_80047CB4(void);
 extern Vec3i fn_80201E78(void *);

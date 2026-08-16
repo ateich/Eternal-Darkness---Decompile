@@ -5,7 +5,7 @@ extern int lbl_8064C560, lbl_8064C564, lbl_8064C578, lbl_8064C56C;
 extern int lbl_8064D18C;
 extern float lbl_8064EC44, lbl_8064EC4C;
 extern void fn_8011F114();
-extern int fn_80200C38(void*);
+extern int fn_80200C38();
 extern int fn_80201B54();
 extern int fn_80201EB8();
 extern int fn_80090204(void*);

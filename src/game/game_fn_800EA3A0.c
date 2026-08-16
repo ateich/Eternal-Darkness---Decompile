@@ -8,13 +8,13 @@ typedef struct Object {
     SlotState *slots;
 } Object;
 
-extern void *fn_80201B54(void *);
-extern unsigned long long fn_8020123C(int, void *, int, int);
+extern int fn_80201B54();
+extern unsigned long long fn_8020123C();
 extern void fn_800EA0D0(void *);
 
 void fn_800EA3A0(void *arg0, Object *object)
 {
-    void *context = fn_80201B54(arg0);
+    void *context = (void *)fn_80201B54(arg0);
     int i;
     SlotState *slots = object->slots;
 

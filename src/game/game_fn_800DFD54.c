@@ -9,7 +9,7 @@ typedef struct Payload {
 extern int lbl_8064B80C;
 extern int fn_80201B54();
 extern int fn_8011FB4C(void *);
-extern int fn_80200C38(void *);
+extern int fn_80200C38();
 extern void fn_8012DBE8(void *, int, Payload *);
 extern int fn_800DE298(void *);
 extern void fn_8012C62C(void *, int, Payload *, Payload *, Payload *, int);

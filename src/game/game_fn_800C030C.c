@@ -7,7 +7,7 @@ extern u32 lbl_8064B71C;
 extern float lbl_8064F110, lbl_8064F114, lbl_8064F140, lbl_8064F144;
 extern float lbl_8064F148, lbl_8064F14C, lbl_8064F150;
 
-extern void *fn_80200C38(void *);
+extern int fn_80200C38();
 extern u16 fn_801A6DE4(void *);
 extern float fn_801A6DDC(void *);
 extern float fn_801A6DD4(void *);
@@ -40,7 +40,7 @@ extern void fn_801285F8(int);
 
 void fn_800C030C(void *context, void *encoded, float scale)
 {
-    void *parsed = fn_80200C38(encoded);
+    void *parsed = (void *)fn_80200C38(encoded);
     u16 mode = fn_801A6DE4(parsed);
     float range = fn_801A6DDC(parsed);
     float base = fn_801A6DD4(parsed);

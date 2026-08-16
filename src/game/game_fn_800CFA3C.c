@@ -14,7 +14,7 @@ extern u8 lbl_80300368[];
 extern int lbl_8064D18C;
 
 extern void *fn_80201B3C(void *);
-extern int fn_80201EB8(void *);
+extern int fn_80201EB8();
 extern void fn_8016AFB0(s16);
 extern void fn_8016ADF0(s16, s16, s16);
 extern void *memcpy(void *, const void *, unsigned long);

@@ -7,7 +7,7 @@ typedef struct Message {
 extern void *memcpy(void *, const void *, unsigned int);
 extern int fn_80201B54();
 extern void fn_80201E78(void *, void *);
-extern void *fn_80201EB8(void *);
+extern int fn_80201EB8();
 extern void *fn_801D9FE4(unsigned int, int);
 extern void *fn_801DA3B0(void *, unsigned int, void *, void *, void *, int,
                         void *, void *, void *, void *);
@@ -32,7 +32,7 @@ unsigned short fn_800BB4C4(void *input, void *object)
     if (message.count > 0) {
         owner = ((void *)fn_80201B54(object));
         fn_80201E78(vector, object);
-        runtime = fn_80201EB8(object);
+        runtime = (void *)fn_80201EB8(object);
         result = fn_801D9FE4(message.value, message.count);
         result = fn_801DA3B0(runtime, message.value, vector, result, owner, 0,
                             &a, &b, &d, &c);

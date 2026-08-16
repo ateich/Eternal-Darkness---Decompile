@@ -7,7 +7,7 @@ extern void fn_80120B4C(void *);
 extern int fn_80201AE4(void);
 extern int fn_80201B54();
 extern int fn_801586FC(int, int);
-extern void *fn_80200C38(void *);
+extern int fn_80200C38();
 extern int fn_801FE25C(void *);
 extern void fn_801FE024(void *, int);
 extern void fn_801FDFEC(void *, int);
@@ -26,7 +26,7 @@ void fn_800DBB24(void *context, void *value)
         int id = fn_80201AE4();
         int owner = fn_80201B54(context);
         if (fn_801586FC(owner, id) != 0) {
-        void **handle = fn_80200C38(value);
+        void **handle = (void **)fn_80200C38(value);
         if (handle != 0 && fn_801FE25C(*handle) != 0) {
             fn_801FE024(*handle, 1);
             fn_801FDFEC(*handle, 2);

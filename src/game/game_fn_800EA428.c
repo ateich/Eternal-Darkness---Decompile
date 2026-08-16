@@ -9,14 +9,14 @@ typedef struct Object {
     SlotState *slots;
 } Object;
 
-extern void *fn_80201B54(void *);
-extern void *fn_80201BC8(void *);
+extern int fn_80201B54();
+extern void *fn_80201BC8();
 extern int fn_80130670(void *, int, int);
-extern unsigned long long fn_8020123C(int, void *, int, int);
+extern unsigned long long fn_8020123C();
 
 void fn_800EA428(void *arg0, Object *object, int value)
 {
-    void *context = fn_80201B54(arg0);
+    void *context = (void *)fn_80201B54(arg0);
     SlotState *slots = object->slots;
     int i;
 

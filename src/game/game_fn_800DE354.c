@@ -1,6 +1,6 @@
 typedef unsigned char u8;
 
-extern void *fn_80201B9C(void);
+extern void *fn_80201B9C();
 extern void *fn_80201B8C();
 extern int fn_80201B5C(void *);
 extern int fn_80201B54();

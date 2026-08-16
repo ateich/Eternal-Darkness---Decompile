@@ -2,7 +2,7 @@ typedef unsigned char u8;
 typedef unsigned int u32;
 
 extern void *fn_80201B8C();
-extern int fn_80200C38(void *);
+extern int fn_80200C38();
 extern int fn_801261F4(void *);
 extern int fn_8011FCEC(void *);
 extern void fn_8011EBFC(void *);

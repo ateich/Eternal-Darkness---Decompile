@@ -26,11 +26,11 @@ typedef struct SpawnConfig {
 
 extern float lbl_8064EC10;
 
-extern void* fn_80201B9C();
+extern void *fn_80201B9C();
 extern int fn_80201B44();
 extern void fn_800DE8FC(void*, Vec3*);
 extern void *fn_80201B8C();
-extern void* fn_80201EB8();
+extern int fn_80201EB8();
 extern int fn_80201B54();
 extern unsigned long long fn_8020123C();
 extern void* fn_80201BC0(void*);
@@ -68,7 +68,7 @@ void* fn_8008F224(void* object, int create, int transfer)
     while (current != 0 && found == 0) {
         Runtime* runtime = ((Runtime*)fn_80201B8C(current));
         if (runtime != 0) {
-            void* candidate = fn_80201EB8(current);
+            void* candidate = (void *)fn_80201EB8(current);
             void* candidate_owner = ((void*)fn_80201B54(current));
             if (candidate == object && runtime->type == 2 &&
                 runtime->subtype == 10 &&

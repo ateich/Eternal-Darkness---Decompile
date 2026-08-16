@@ -18,7 +18,7 @@ extern int fn_801E8328(int, void *);
 extern void fn_80201D34(void *, int);
 extern void fn_80201D1C(void *, int);
 extern unsigned long long fn_8020123C();
-extern void *fn_80200C38(EventData *);
+extern int fn_80200C38();
 extern void fn_8012C62C(void *, void *, Vec3 *, Vec3 *, Vec3 *, int);
 extern void fn_8020104C(float, int, int, int);
 
@@ -63,7 +63,7 @@ int fn_800E1E68(void *object, int event, EventData *data)
             Vec3 a = {0.0f, 0.0f, 0.0f};
             Vec3 b = {0.0f, 0.0f, 0.0f};
             Vec3 c = {0.0f, 0.0f, 0.0f};
-            void *resource = fn_80200C38(data);
+            void *resource = (void *)fn_80200C38(data);
             fn_8012C62C(owner, resource, &a, &b, &c, 6);
             if ((int)resource == 8) {
                 fn_80201D2C(object, 14);

@@ -9,7 +9,7 @@ typedef struct State800972D0 {
 extern void *fn_80201BC8();
 extern int fn_80095D10(void*);
 extern int fn_80095E64(void*, int);
-extern int fn_80200C38(void*);
+extern int fn_80200C38();
 extern int fn_80200C20(void*);
 extern void *fn_80201814();
 extern void fn_80201D2C(void *, int);

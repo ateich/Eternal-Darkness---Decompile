@@ -16,7 +16,7 @@ typedef struct Context800A1438 {
 
 extern int fn_80070A6C(int);
 extern int fn_800462C8(int);
-extern void* fn_80201B9C();
+extern void *fn_80201B9C();
 extern void* fn_80204844(void*, int);
 extern Context800A1438* fn_8006D444(void);
 extern int fn_80201B54();

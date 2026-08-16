@@ -26,7 +26,7 @@ typedef struct LinkedValue { u8 pad00[0x18]; int value; } LinkedValue;
 
 #pragma use_lmw_stmw on
 
-extern void* fn_80201B9C();
+extern void *fn_80201B9C();
 extern void* fn_80204844(void*, int);
 extern Context* fn_8006D444(void);
 extern void fn_801A5C30(int);

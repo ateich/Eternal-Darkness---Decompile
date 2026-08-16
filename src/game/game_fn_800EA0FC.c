@@ -10,16 +10,16 @@ typedef struct Object {
     SlotState *slots;
 } Object;
 
-extern void *fn_80201B54(void *);
+extern int fn_80201B54();
 extern int fn_80200C20(void *);
-extern void *fn_80201814(int);
+extern void *fn_80201814();
 extern SlotState *fn_800EA08C(void);
-extern unsigned long long fn_8020123C(int, void *, int, int);
+extern unsigned long long fn_8020123C();
 extern int lbl_8064D5A8;
 
 void fn_800EA0FC(void *arg0, Object *object, int value, void *id, int *result)
 {
-    void *context = fn_80201B54(arg0);
+    void *context = (void *)fn_80201B54(arg0);
     int converted = fn_80200C20(id);
     SlotState *slots;
     int oldest;

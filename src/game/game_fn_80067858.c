@@ -20,7 +20,7 @@ extern RuntimeSlot lbl_8030FBF8[12];
 extern s32 lbl_8064D18C;
 extern void *fn_80201814();
 extern void *fn_80201B8C();
-extern s32 fn_80201EB8();
+extern int fn_80201EB8();
 
 s32 fn_80067858(s32 object_id)
 {

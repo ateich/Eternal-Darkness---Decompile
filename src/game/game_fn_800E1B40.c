@@ -2,7 +2,7 @@ typedef struct Vec3 {
     float x, y, z;
 } Vec3;
 
-extern void *fn_80200C38(void *);
+extern int fn_80200C38();
 extern void *fn_8004914C(void);
 extern void fn_801A7744(Vec3 *, void *);
 extern int fn_8011EB04(void *);
@@ -13,7 +13,7 @@ extern void fn_801AC9F4(int, int, Vec3 *, int);
 int fn_800E1B40(void *unused, void *object)
 {
     int result = 0;
-    void *resource = fn_80200C38(object);
+    void *resource = (void *)fn_80200C38(object);
     void *current = fn_8004914C();
     Vec3 position;
 

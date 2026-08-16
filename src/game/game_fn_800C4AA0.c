@@ -10,14 +10,14 @@ extern int lbl_8064CA88;
 extern int lbl_8064B714;
 
 extern void *fn_80201B8C();
-extern void *fn_80200C38(void *);
+extern int fn_80200C38();
 extern void fn_801A7324(void *, void *);
 extern void fn_801A74D8(void *, int);
 
 void fn_800C4AA0(void *context, void *resource_id, void **out)
 {
     State **state_ref = ((State **)fn_80201B8C(context));
-    void *resource = fn_80200C38(resource_id);
+    void *resource = (void *)fn_80200C38(resource_id);
     State *state = *state_ref;
 
     resource_id = 0;

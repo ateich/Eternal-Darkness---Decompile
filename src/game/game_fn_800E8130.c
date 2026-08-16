@@ -9,13 +9,13 @@ typedef struct Vec3 {
 extern int lbl_8064D18C;
 extern float lbl_8064F7E8;
 extern float lbl_8064F7F4;
-extern int fn_80201B54(void *);
-extern int fn_80201EB8(void *);
+extern int fn_80201B54();
+extern int fn_80201EB8();
 extern void fn_802006D4(int, int, int, int, int);
 extern void fn_80201138(int, void *, int, int, int, float);
 extern void *fn_80201B94(void *);
 extern int fn_80201C48(void *);
-extern void *fn_80201814(int);
+extern void *fn_80201814();
 extern void *fn_801A717C(void);
 extern void fn_80201E78(Vec3 *, void *);
 extern void fn_801A74A0(void *, int);
@@ -25,7 +25,7 @@ extern void fn_801A7518(void *, int);
 extern void fn_801A7550(void *, int);
 extern void fn_801A764C(void *, Vec3 *);
 extern void fn_801A7470(void *, int);
-extern unsigned long long fn_8020123C(int, int, int, void *);
+extern unsigned long long fn_8020123C();
 extern void fn_801A7228(void *);
 extern void fn_800E828C(void *, int, int, float);
 

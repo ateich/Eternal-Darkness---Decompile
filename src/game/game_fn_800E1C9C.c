@@ -2,9 +2,9 @@ typedef struct Vec3 {
     float x, y, z;
 } Vec3;
 
-extern void *fn_80201B9C(void *);
+extern void *fn_80201B9C();
 extern int fn_80201B5C(void *);
-extern int fn_80201EB8(void *);
+extern int fn_80201EB8();
 extern int fn_80201B54();
 extern void fn_80201E78(Vec3 *, void *);
 extern unsigned int fn_80179064(int, int, int, int);
