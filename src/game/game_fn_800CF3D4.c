@@ -22,7 +22,7 @@ extern void *fn_80037AF4(int);
 extern RuntimeState *fn_80201B8C();
 extern void fn_802015A4(void *);
 extern void fn_80032CB0(Payload *, int);
-extern void fn_801E8328(int, void *);
+extern int fn_801E8328(int, void *);
 
 #pragma use_lmw_stmw on
 void *fn_800CF3D4(Vec3 *position, int value, int setup, int kind)

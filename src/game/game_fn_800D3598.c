@@ -2,7 +2,7 @@ extern int fn_80201B94(void *);
 extern int fn_80201C48(int);
 extern int fn_80201B54(void *);
 extern void fn_80129FD0(void *, int, int);
-extern void fn_8020123C(int, int, int, int);
+extern unsigned long long fn_8020123C(int, int, int, int);
 
 int fn_800D3598(void *state, void *object)
 {

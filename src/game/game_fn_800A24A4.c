@@ -20,7 +20,7 @@ typedef struct Source800A24A4 {
 extern void*fn_80201B8C();
 extern void fn_8011F114();
 extern void* fn_80201B54();
-extern void fn_80201B94(void*);
+extern void* fn_80201B94(void*);
 extern void fn_80201C48(void);
 extern void *fn_80201814();
 extern int fn_802045AC(void*, Vec3i800A24A4*);

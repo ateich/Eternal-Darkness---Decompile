@@ -37,7 +37,7 @@ extern void fn_8014CBC0(Descriptor *);
 extern void fn_80149CC4(void *, Vec3 *, void *, void *, int);
 extern int fn_801D39E0(int);
 extern void *fn_80201B54(void *);
-extern void fn_801E8328(int);
+extern int fn_801E8328(int);
 
 void fn_800D9064(void *object, void *arg1, void *arg2)
 {

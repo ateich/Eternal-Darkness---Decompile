@@ -31,7 +31,7 @@ extern void fn_801DACA4(int, int);
 extern void fn_801DABFC(Payload *);
 extern void fn_801DA140(int, int, void *);
 extern void fn_802015A4(void *);
-extern void fn_801E8328(int, void *);
+extern int fn_801E8328(int, void *);
 
 #pragma use_lmw_stmw on
 void *fn_800CD458(int owner, int first, u16 kind, int second, int third,

@@ -30,7 +30,7 @@ extern void *fn_80037AF4(int);
 extern int fn_80201B54();
 extern void fn_801E32F8(Payload *);
 extern void fn_802015A4(void *);
-extern void fn_801E8328(int, void *);
+extern int fn_801E8328(int, void *);
 extern void fn_8020104C(int, int, int, int, float);
 
 #pragma use_lmw_stmw on

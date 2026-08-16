@@ -5,7 +5,7 @@ extern void fn_802020B4(void *, int);
 extern void *fn_80201B8C();
 extern void fn_800EB20C(void *, void *, int);
 extern void fn_802015A4(void *);
-extern void fn_801E8328(int, void *);
+extern int fn_801E8328(int, void *);
 
 void *fn_800CC458(void *source, void *unused, int value)
 {
