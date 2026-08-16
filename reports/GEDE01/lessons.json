@@ -2,10 +2,10 @@
   "schema_version": 2,
   "scope": "Distinct MWCC code-generation behaviors documented in reports/GEDE01/progress.json open_items and docs/matching.md",
   "source_snapshot": {
-    "repository_revision": "ba21d3d9581165b46efef03c20a39067b0dd9b40",
-    "next_gate": "0x800B4028",
+    "repository_revision": "e01625df8da6428ff220ecf029407b610fffa876",
+    "next_gate": "0x800CAC5C",
     "reports/GEDE01/progress.json": {
-      "sha256": "eae5d8c5b80387eee5b44ff400b593e70e0b1b63396b33482471bcdcb5ec017e",
+      "sha256": "49b8b01c3b9e8357ba709e812932456212ebb98708aa83bbc8ab45357b3043e4",
       "scope": "open_items"
     },
     "docs/matching.md": {
@@ -600,6 +600,139 @@
       "precise_divergence": "Hand-expanded field copying does not reproduce MWCC's retail counted loop for the 440-byte state aggregate.",
       "workaround": "Use native assignment of the complete typed state aggregate.",
       "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800B3C78"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_800B4660"],
+      "precise_divergence": "Sharing one output local across switch arms does not reproduce retail's case-specific stack-slot assignment.",
+      "workaround": "Use separate case-local output variables.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800B4028 through fn_800B4938"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_800B566C", "fn_800B5828"],
+      "precise_divergence": "A callback declaration that omits the live status argument does not preserve the retail status value in r4.",
+      "workaround": "Declare the callbacks with both recovered arguments.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800B4990 through fn_800B5F1C"]
+    },
+    {
+      "category": "jump-table-strategy",
+      "functions": ["fn_800B433C", "fn_800B43B4", "fn_800B5D10", "fn_800B64AC", "fn_800B6D10", "fn_800CA6DC"],
+      "precise_divergence": "Source case membership and ordering control MWCC's retained branches, comparison-tree shape, handler layout, and jump-table addends; semantically equivalent reordered or omitted no-op cases do not reproduce retail.",
+      "workaround": "Preserve the documented case order, including the one-case switch and explicit sparse no-op cases.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800B4028 through fn_800B4938, fn_800B4990 through fn_800B5F1C, fn_800B64AC through fn_800B6C88, fn_800B6D10 through fn_800B7EC0, and fn_800CA5C0 through fn_800CAB80"]
+    },
+    {
+      "category": "jump-table-strategy",
+      "functions": ["fn_800B5F78", "fn_800B6024", "fn_800B611C", "fn_800B61B8", "fn_800B6234", "fn_800B63C0", "fn_800B64AC", "fn_800B6548", "fn_800B6C00", "fn_800B6C88", "fn_800B6D10", "fn_800CA13C"],
+      "precise_divergence": "MWCC-owned switch tables must remain with their generating translation units; incorrect ownership or alignment changes data bytes, table relocations, or the following table's retail layout.",
+      "workaround": "Assign the complete generated tables and adjacent documented owned data to their source units and normalize the wrapper data alignment to four bytes.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800B5F78 through fn_800B63C0, fn_800B64AC through fn_800B6C88, fn_800B6D10 through fn_800B7EC0, and fn_800C9D68 through fn_800CA530"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_800B6234", "fn_800C0240"],
+      "precise_divergence": "A distinct result local changes MWCC's value lifetime and register choice relative to retail's reuse of an existing value register.",
+      "workaround": "Reuse the status parameter for fn_800B6234's queried state and use the documented conditional result expression in fn_800C0240.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800B5F78 through fn_800B63C0 and fn_800C0240"]
+    },
+    {
+      "category": "inlining",
+      "functions": ["fn_800B6A48", "fn_800B6B00", "fn_800BD5F4", "fn_800BD828"],
+      "precise_divergence": "MWCC's loop body shape depends on a compile-time fixed trip count: the documented loops select fully or partially unrolled float updates, a 500-entry eight-way unroll, and a four-entry remainder.",
+      "workaround": "Express the traversal as the documented fixed-count source loop.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800B64AC through fn_800B6C88 and fn_800BD5F4 through fn_800BD944"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_800B8E28", "fn_800BBC40"],
+      "precise_divergence": "Hand-written field stores schedule differently from retail's aggregate Color copy or explicit seven-entry initializer store sequence.",
+      "workaround": "Use aggregate Color assignments in fn_800B8E28 and explicit initializer assignments in fn_800BBC40.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800B8DBC through fn_800B8F94 and fn_800BBC40 through fn_800BC000"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_800B84DC", "fn_800BB5C4", "fn_800BB7A8", "fn_800BBAF0", "fn_800BFF14", "fn_800C1D60", "fn_800C3A74", "fn_800C4AA0", "fn_800C5258", "fn_800C7C0C", "fn_800C7E40", "fn_800CA7D4"],
+      "precise_divergence": "Canonical MWCC assigns documented signed-short, floating, pointer, or callee-saved lifetimes to different saved-register pairs or rotations from retail, sometimes also changing prologue or expression scheduling.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_800BBE18", "fn_800C280C", "fn_800C7A54", "fn_800C92E8", "fn_800C9508"],
+      "precise_divergence": "Declaration or temporary-expression shape changes MWCC's volatile or short-lived GPR assignment relative to retail, including r8-r11 initializer allocation, an r0 transfer, and equivalent r4/r6 or r6/r7 scratch choices.",
+      "workaround": "Where documented, preserve declaration order or introduce the explicit transfer temporary; no workaround is known for fn_800C92E8 or fn_800C9508.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_800BB4C4", "fn_800B84DC", "fn_800BE70C", "fn_800C1D60", "fn_800C4AA0", "fn_800C77B4", "fn_800C77FC", "fn_800C7844"],
+      "precise_divergence": "Canonical MWCC schedules equivalent constant loads/stores, indexed resource operations, float argument setup, selected-pointer expressions, prologue work, or ordinary argument setup differently from retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_800BB6A0", "fn_800BB8AC", "fn_800BBA84", "fn_800BBBC4", "fn_800C2708"],
+      "precise_divergence": "Changing a floating argument's recovered source position or flattening nested call arguments changes MWCC's retail argument evaluation and load schedule.",
+      "workaround": "Place each float between the recovered pointer arguments and retain the documented nested call expression.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800BB6A0, fn_800BB8AC through fn_800BBBC4, and fn_800C2708"]
+    },
+    {
+      "category": "float-constant-placement",
+      "functions": ["fn_800BB5C4", "fn_800BB7A8", "fn_800BB9A4", "fn_800BBAF0", "fn_800BCCC4", "fn_800C17EC", "fn_800C59F0", "fn_800C644C", "fn_800C65FC"],
+      "precise_divergence": "Split-TU MWCC may emit signed- or unsigned-integer conversion constants under private identities instead of retail's shared symbol, so instruction bytes can match while one relocation remains unequal; where retail owns a local pool, externalizing it is likewise wrong.",
+      "workaround": "Use local constant ownership for fn_800BCCC4; otherwise externalize the conversion constant to the documented retail symbol when the compiler permits it.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_800BE8D4", "fn_800C4E94", "fn_800C65FC"],
+      "precise_divergence": "Canonical GC/1.3 reverses the encoded operands of a symmetric integer equality or comparison while preserving size, semantics, and call relocations.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_800BEBE4", "fn_800C677C", "fn_800C7E40", "fn_800C8394", "fn_800C8568", "fn_800CA6DC"],
+      "precise_divergence": "Aggregate declaration order, temporary separation, or payload typing changes MWCC's local/outgoing frame size and slot assignment relative to retail.",
+      "workaround": "Use separate aggregate temporaries in fn_800BEBE4, reverse the documented declaration order in fn_800C677C, and retain fn_800CA6DC's recovered 0x1C payload; no workaround is recorded for the other functions.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_800BD638", "fn_800BD750"],
+      "precise_divergence": "A normalized structured loop can remove retail's compiler-retained initial branch in linked-list traversal routines.",
+      "workaround": "Express the documented source-level loop test edge explicitly.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800BD5F4 through fn_800BD944"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_800BDE24", "fn_800BE158", "fn_800BE2CC"],
+      "precise_divergence": "Split-TU address materialization, repeated indexed-pool addressing, and declaration-sensitive expression scheduling differ from retail, changing function size in each documented routine.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800BE0F4 through fn_800BE390"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_800C3958"],
+      "precise_divergence": "Canonical MWCC selects a different update-form byte-load sequence from retail for the recovered state update.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800C3854 through fn_800C3CE4"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_800C849C"],
+      "precise_divergence": "Canonical MWCC schedules the integer-to-float conversion differently and selects a different threshold register from retail while retaining exact function size.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800C9164 through fn_800C9268"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_800CA7D4"],
+      "precise_divergence": "The recovered saturating decrement does not select retail's signed-maximum expression idiom and also changes the callee-saved allocation.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_800CA5C0 through fn_800CAB80"]
     }
   ]
 }

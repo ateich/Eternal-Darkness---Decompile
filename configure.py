@@ -3875,6 +3875,59 @@ config.libs = [
             # callee-saved allocation and signed max-expression codegen.
             Object(NonMatching, "game/game_fn_800CA7D4.c"),
             Object(Matching, "game/game_fn_800CAB80.c"),
+            Object(Matching, "game/game_fn_800CAC5C.c"),
+            Object(Matching, "game/game_fn_800CAF7C.c"),
+            # 96.71171% honest-C reconstruction; remaining differences are
+            # MWCC boolean-result register allocation and normalization.
+            Object(NonMatching, "game/game_fn_800CB098.c"),
+            Object(Matching, "game/game_fn_800CB694.c"),
+            # 99.95049% size-exact honest-C reconstruction; every instruction
+            # byte matches, but the conversion bias remains TU-local.
+            Object(NonMatching, "game/game_fn_800CB760.c"),
+            # 99.91151% size-exact honest-C reconstruction; every instruction
+            # byte matches, but two uses of the conversion bias remain TU-local.
+            Object(NonMatching, "game/game_fn_800CB8F4.c"),
+            Object(Matching, "game/game_fn_800CC2D8.c"),
+            Object(Matching, "game/game_fn_800CC3BC.c"),
+            Object(Matching, "game/game_fn_800CC458.c"),
+            Object(Matching, "game/game_fn_800CCA44.c"),
+            Object(Matching, "game/game_fn_800CCDA8.c"),
+            Object(Matching, "game/game_fn_800CCE78.c"),
+            Object(Matching, "game/game_fn_800CCF60.c"),
+            Object(Matching, "game/game_fn_800CD458.c"),
+            Object(Matching, "game/game_fn_800CD568.c"),
+            # 97.52525% size-exact honest-C reconstruction; remaining
+            # differences are a global callee-saved-register permutation.
+            Object(NonMatching, "game/game_fn_800CD6C0.c"),
+            # 99.655174% size-exact honest-C reconstruction; remaining
+            # differences are one equivalent final r3/r4 scratch choice.
+            Object(NonMatching, "game/game_fn_800CD84C.c"),
+            Object(Matching, "game/game_fn_800CDD84.c"),
+            Object(Matching, "game/game_fn_800CE3BC.c"),
+            # 96.36364% size-exact honest-C reconstruction; remaining
+            # differences are an equivalent r4/r5 data/index allocation pair.
+            Object(NonMatching, "game/game_fn_800CE524.c"),
+            # 94.809525% honest-C reconstruction; remaining differences are
+            # base-pointer materialization and equivalent indexed stores.
+            Object(NonMatching, "game/game_fn_800CE698.c"),
+            Object(Matching, "game/game_fn_800CE8B8.c"),
+            Object(Matching, "game/game_fn_800CE8E8.c"),
+            Object(Matching, "game/game_fn_800CE914.c"),
+            Object(Matching, "game/game_fn_800CE9A4.c"),
+            Object(Matching, "game/game_fn_800CEA1C.c"),
+            Object(Matching, "game/game_fn_800CEB10.c"),
+            Object(Matching, "game/game_fn_800CEF94.c"),
+            Object(Matching, "game/game_fn_800CEFE8.c"),
+            Object(Matching, "game/game_fn_800CF03C.c"),
+            Object(Matching, "game/game_fn_800CF0C8.c"),
+            Object(Matching, "game/game_fn_800CF220.c"),
+            Object(Matching, "game/game_fn_800CF2DC.c"),
+            Object(Matching, "game/game_fn_800CF32C.c"),
+            Object(Matching, "game/game_fn_800CF3D4.c"),
+            Object(Matching, "game/game_fn_800CF46C.c"),
+            Object(Matching, "game/game_fn_800CF52C.c"),
+            Object(NonMatching, "game/game_fn_800CF598.c"),
+            Object(Matching, "game/game_fn_800CF8D0.c"),
             Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_80008B6C.c"),
             Object(Matching, "game/game_fn_80008BD8.c"),
