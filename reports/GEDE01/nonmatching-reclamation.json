@@ -115,18 +115,78 @@
     "new_functions_matched_this_session": 0
   },
   "current_reaudit": {
-    "date": "2026-08-15",
-    "scope": "Every current Object(NonMatching, ...) declaration rechecked after the game .text frontier advanced to 0x800BFFDC",
-    "nonmatching_declarations_scanned": 241,
+    "date": "2026-08-16",
+    "scope": "Every current Object(NonMatching, ...) declaration cross-checked against build/GEDE01/report.json after the game .text frontier advanced through 0x800D6314",
+    "nonmatching_declarations_scanned_before_promotion": 288,
+    "nonmatching_declarations_scanned_after_promotion": 283,
     "report_units_unresolved": 0,
-    "fuzzy_100_candidates": [
+    "fuzzy_100_candidates_before_promotion": [
       "game/game_data_80239E10.c",
-      "game/game_data_80239E18.c"
+      "game/game_data_80239E18.c",
+      "game/game_fn_800C17EC.c",
+      "game/game_fn_800C4E94.c",
+      "game/game_fn_800C59F0.c",
+      "game/game_fn_800C644C.c",
+      "game/game_fn_800CB760.c",
+      "game/game_fn_800CB8F4.c"
     ],
-    "additional_promotable_candidates": 0,
-    "result": "No reclaimed code object regressed to NonMatching and no newly promotable code object was missed. The only remaining fuzzy-100 NonMatching units are the two documented shared-string-base data exclusions.",
-    "linked_code_bytes": 278620,
-    "game_code_linked_bytes": 275592,
+    "promoted": [
+      {
+        "object": "game/game_fn_800C17EC.c",
+        "code_bytes": 336,
+        "externalized_symbols": {
+          "@16": "lbl_8064F170"
+        }
+      },
+      {
+        "object": "game/game_fn_800C59F0.c",
+        "code_bytes": 156,
+        "externalized_symbols": {
+          "@8": "lbl_8064F158"
+        }
+      },
+      {
+        "object": "game/game_fn_800C644C.c",
+        "code_bytes": 432,
+        "externalized_symbols": {
+          "@15": "lbl_8064F158"
+        }
+      },
+      {
+        "object": "game/game_fn_800CB760.c",
+        "code_bytes": 404,
+        "externalized_symbols": {
+          "@28": "lbl_8064F2A0"
+        }
+      },
+      {
+        "object": "game/game_fn_800CB8F4.c",
+        "code_bytes": 452,
+        "externalized_symbols": {
+          "@26": "lbl_8064F2A0"
+        }
+      }
+    ],
+    "promoted_totals": {
+      "objects": 5,
+      "functions": 5,
+      "code_bytes": 1780
+    },
+    "remaining_fuzzy_100_nonmatching": [
+      "game/game_data_80239E10.c",
+      "game/game_data_80239E18.c",
+      "game/game_fn_800C4E94.c"
+    ],
+    "exclusions": {
+      "game/game_data_80239E10.c and game/game_data_80239E18.c": "Byte-exact data units retained as NonMatching because linking either split owner breaks the retail TU-local shared string-base ownership boundary.",
+      "game/game_fn_800C4E94.c": "Objdiff fuzzy_match_percent is 100.0, but direct DOL comparison finds two unequal instruction bytes at the cmplw operand-order site; it is not byte-identical and was not promoted."
+    },
+    "linked_code_bytes_before": 297620,
+    "linked_code_bytes_after": 299400,
+    "linked_code_bytes_delta": 1780,
+    "game_code_linked_bytes_before": 294592,
+    "game_code_linked_bytes_after": 296372,
+    "game_code_linked_bytes_delta": 1780,
     "full_build": "passed",
     "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
     "new_functions_matched_this_session": 0
