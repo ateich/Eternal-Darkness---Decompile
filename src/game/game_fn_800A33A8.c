@@ -6,7 +6,7 @@ typedef struct Value800A33A8 {
 } Value800A33A8;
 
 extern void* lbl_8064C4E4;
-extern void fn_8011F114();
+extern void *fn_8011F114();
 extern u32 fn_80178E94(void*, Value800A33A8*);
 extern void fn_801F74C8(int, int, int);
 extern void fn_801441C0(int, int, int);

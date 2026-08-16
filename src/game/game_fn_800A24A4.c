@@ -18,7 +18,7 @@ typedef struct Source800A24A4 {
 } Source800A24A4;
 
 extern void* fn_80201B8C();
-extern void fn_8011F114();
+extern void *fn_8011F114();
 extern void* fn_80201B54();
 extern void fn_80201B94(void*);
 extern void fn_80201C48(void);

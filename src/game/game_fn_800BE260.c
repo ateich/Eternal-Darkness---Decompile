@@ -11,7 +11,7 @@ typedef struct Slot {
 } Slot;
 
 extern Slot lbl_80320DF0[];
-extern void fn_80201B54(void *);
+extern int fn_80201B54(void *);
 
 int fn_800BE260(void *object, RuntimeState *runtime)
 {

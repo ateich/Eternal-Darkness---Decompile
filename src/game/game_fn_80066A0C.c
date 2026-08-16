@@ -1,7 +1,7 @@
 typedef signed int s32;
 extern int fn_80200C38();
 extern void *fn_80201BC8();
-extern void fn_8011F114();
+extern void *fn_8011F114();
 extern int fn_80201B54();
 extern void *fn_801294DC(void *, int, int, int);
 #define fn_801294DC(a, b, c, d) fn_801294DC((void *)(a), (b), (c), (d))

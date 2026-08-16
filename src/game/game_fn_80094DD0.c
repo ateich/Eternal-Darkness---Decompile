@@ -8,7 +8,7 @@ extern void* fn_80201B8C();
 extern int fn_80036D5C(void*);
 extern int fn_80201B5C(void*);
 extern void* fn_80201B54();
-extern void fn_8011F114();
+extern void *fn_8011F114();
 extern int fn_801E2004(void*);
 extern int fn_8011F760(void*);
 extern int fn_80201EB8();

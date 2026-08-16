@@ -16,7 +16,7 @@ extern u32 fn_8020216C(void *);
 extern void fn_80157A28(void *, u8);
 extern u8 fn_80157A80(void *);
 extern void fn_80157A8C(void *, u8);
-extern void fn_8020123C(int, int, int, void *);
+extern unsigned long long fn_8020123C(int, int, int, void *);
 extern void fn_80201B3C(void);
 extern void *fn_80205288(void);
 extern void *fn_802053B0(void *, void *);

@@ -37,7 +37,7 @@ extern void* fn_80201BC8();
 extern Info800A0140* fn_80201B8C();
 extern u32 fn_80128EE4(void);
 extern void fn_800C1B50(int, int, int, float);
-extern void fn_8011F114();
+extern void *fn_8011F114();
 extern void fn_8012AC74(void*, Vec800A0140*, int);
 extern void fn_8020104C(int, int, int, int, float);
 extern Object800A0140* fn_80036D38(void*);

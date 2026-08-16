@@ -14,7 +14,7 @@ extern float lbl_8064EC20;
 extern float lbl_8064EC30;
 extern float lbl_8064EC34;
 
-extern void fn_8011F114();
+extern void *fn_8011F114();
 extern unsigned int fn_80178E94(Vec3*, void*);
 extern void* fn_80201B54();
 extern Runtime* fn_80201B8C();

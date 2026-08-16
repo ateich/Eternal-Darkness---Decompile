@@ -7,7 +7,7 @@ typedef unsigned char u8;
 extern void *fn_80201B94(void *object);
 extern void *fn_80201B8C();
 extern int fn_80201B54();
-extern void fn_8011F114();
+extern void *fn_8011F114();
 extern int fn_800359A0(void *object, int kind);
 extern int fn_80201C48(void *object);
 extern void fn_800BDEE4(void *object, void *value);

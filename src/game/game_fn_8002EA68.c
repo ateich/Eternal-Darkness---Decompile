@@ -73,7 +73,7 @@ extern s32 fn_800453AC(s32, s32, s32, float, s32, s32, s32, s32, s32, Vec3*, s32
 extern s32 fn_8006749C(s32);
 extern void fn_80120AD0(void*, s32, s32, u16, float, float);
 extern void fn_8019917C(void*);
-extern void fn_8011F114();
+extern void *fn_8011F114();
 extern void* memcpy(void*, const void*, u32);
 extern void fn_8019901C(void);
 

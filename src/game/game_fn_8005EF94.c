@@ -54,7 +54,7 @@ extern void *fn_80201B8C();
 extern void *fn_80201BC0(void *);
 extern int fn_80201EB8();
 extern void fn_80201E78(Vec3 *, void *);
-extern void fn_8011F114();
+extern void *fn_8011F114();
 extern void fn_8012AB2C(void *);
 extern unsigned long long fn_8020123C();
 extern u32 fn_80178F14(s32, s32, s32, s32, s32, s32);

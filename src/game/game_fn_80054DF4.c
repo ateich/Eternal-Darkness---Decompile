@@ -11,7 +11,7 @@ extern u8 lbl_8063CD18[];
 extern u8 lbl_8063C6B8[];
 
 extern float fn_8012B750(void *object);
-extern void fn_8011F114();
+extern void *fn_8011F114();
 extern void fn_80054CA0(void *owner, void *object, s32 force);
 extern void fn_801F8748(void *context, void *object, s32 arg2, s32 arg3, s32 arg4);
 extern void fn_801F6FFC(void *object);

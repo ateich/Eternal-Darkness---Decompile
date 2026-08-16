@@ -22,7 +22,7 @@ extern void fn_80201D14();
 extern int fn_80079008(void *object, void *target);
 extern int fn_8007930C(void *object, void *target, void *extra);
 extern void fn_800359A0(void *object, int value);
-extern void fn_8011F114();
+extern void *fn_8011F114();
 extern unsigned int fn_80178E94(Vec3 *first, Vec3 *second);
 extern int fn_800CA7D4(void *owner, void *object, void *argument,
                       void *target, int type, int enabled);

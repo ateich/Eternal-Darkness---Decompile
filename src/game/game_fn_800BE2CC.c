@@ -22,7 +22,7 @@ typedef struct Pool {
 
 extern Slot lbl_80320DF0[];
 extern Pool lbl_80320FD0[];
-extern void fn_80201B54(void *);
+extern int fn_80201B54(void *);
 extern void fn_800BCCC4(void *, void *);
 
 int fn_800BE2CC(void *object, RuntimeState *runtime, void *output)

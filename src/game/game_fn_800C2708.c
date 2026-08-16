@@ -13,7 +13,7 @@ extern void fn_8015C948(int, void *, void *, int, int, int, int, int, int, int,
                         int);
 extern void *fn_80201814(void *);
 extern void **fn_80201B8C(void *);
-extern void fn_8020123C(int, void *, int, int);
+extern unsigned long long fn_8020123C(int, void *, int, int);
 
 int fn_800C2708(int unused, void *object)
 {

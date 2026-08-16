@@ -26,7 +26,7 @@ extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern int fn_80201B44();
 extern void *fn_80201814();
-extern void fn_8011F114();
+extern void *fn_8011F114();
 extern Vec4* fn_8011FE34(void*);
 extern int fn_80038308(void *, int, short *);
 extern unsigned int fn_800F5C54();

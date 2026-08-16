@@ -16,7 +16,7 @@ extern void fn_8006ED98(State800A16AC*);
 extern void* fn_80201814();
 extern void* fn_80201BC8();
 extern void fn_800C1B50(u32, int, int, float, float);
-extern void fn_8011F114();
+extern void *fn_8011F114();
 extern void fn_8012AC74(void*, Vec800A16AC*, int);
 extern float lbl_8064EDB8;
 

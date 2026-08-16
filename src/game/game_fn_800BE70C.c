@@ -11,7 +11,7 @@ extern double fn_8012B750(void *);
 extern void fn_8017A12C(float *, float, float);
 extern void fn_8017A010(float *, float, float, float, int);
 extern void fn_8012B7A0(void *, float);
-extern void fn_801294DC(void *, int, int, int);
+extern void *fn_801294DC(void *, int, int, int);
 
 int fn_800BE70C(void *object, Vec3 *position, int type, float *delta_out,
                 float turn_speed, float first_limit, float second_limit)

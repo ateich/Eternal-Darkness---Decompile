@@ -3803,6 +3803,78 @@ config.libs = [
             Object(NonMatching, "game/game_fn_800C644C.c"),
             Object(NonMatching, "game/game_fn_800C65FC.c"),
             Object(Matching, "game/game_fn_800C677C.c"),
+            Object(Matching, "game/game_fn_800C6F50.c"),
+            Object(Matching, "game/game_fn_800C7028.c"),
+            # 83.05556%: size differs by one instruction due to argument-save scheduling.
+            Object(NonMatching, "game/game_fn_800C77B4.c"),
+            # 83.05556%: size differs by one instruction due to argument-save scheduling.
+            Object(NonMatching, "game/game_fn_800C77FC.c"),
+            # 53.846153%: size-exact; argument setup is scheduled around the prologue differently.
+            Object(NonMatching, "game/game_fn_800C7844.c"),
+            Object(Matching, "game/game_fn_800C7878.c"),
+            Object(Matching, "game/game_fn_800C78C4.c"),
+            Object(Matching, "game/game_fn_800C7A54.c"),
+            Object(Matching, "game/game_fn_800C7AEC.c"),
+            Object(Matching, "game/game_fn_800C7B74.c"),
+            # 99.91071%: size-exact; two instructions allocate the short-lived
+            # secondary runtime to r30 rather than retail's reused r27.
+            Object(NonMatching, "game/game_fn_800C7C0C.c"),
+            Object(Matching, "game/game_fn_800C7DCC.c"),
+            # 91.72941%: behavior-complete; remaining differences are the
+            # aggregate/outgoing stack area and callee-saved register allocation.
+            Object(NonMatching, "game/game_fn_800C7E40.c"),
+            Object(Matching, "game/game_fn_800C80E8.c"),
+            Object(Matching, "game/game_fn_800C81E0.c"),
+            Object(Matching, "game/game_fn_800C82F0.c"),
+            # 76.475%: behavior-complete color interpolation setup; remaining
+            # differences are aggregate stack placement and byte-copy scheduling.
+            Object(NonMatching, "game/game_fn_800C8394.c"),
+            Object(Matching, "game/game_fn_800C8434.c"),
+            # 88.039215%: size-exact behavior-complete angle interpolation;
+            # remaining differences are float-conversion scheduling and threshold register choice.
+            Object(NonMatching, "game/game_fn_800C849C.c"),
+            # 87.864%: behavior-complete peer scan and dispatch; remaining
+            # differences are aggregate stack placement and temporary scheduling.
+            Object(NonMatching, "game/game_fn_800C8568.c"),
+            Object(Matching, "game/game_fn_800C9164.c"),
+            Object(Matching, "game/game_fn_800C91F8.c"),
+            Object(Matching, "game/game_fn_800C9268.c"),
+            Object(Matching, "game/game_fn_800C928C.c"),
+            # 99.18519%: size-exact vector effect wrapper; the remaining
+            # differences are equivalent r4/r6 scratch allocation and scheduling.
+            Object(NonMatching, "game/game_fn_800C92E8.c"),
+            Object(Matching, "game/game_fn_800C94FC.c"),
+            # 97.0% initial honest-C reconstruction; equivalent r6/r7 allocation.
+            Object(NonMatching, "game/game_fn_800C9508.c"),
+            Object(Matching, "game/game_fn_800C9660.c"),
+            Object(Matching, "game/game_fn_800C96B4.c"),
+            Object(Matching, "game/game_fn_800C96C4.c"),
+            Object(Matching, "game/game_fn_800C96CC.c"),
+            Object(Matching, "game/game_fn_800C99B4.c"),
+            Object(Matching, "game/game_fn_800C9A2C.c"),
+            Object(Matching, "game/game_fn_800C9AD4.c"),
+            Object(Matching, "game/game_fn_800C9B08.c"),
+            Object(Matching, "game/game_fn_800C9B74.c"),
+            Object(Matching, "game/game_fn_800C9BA8.c"),
+            # 87.34849% size-exact honest-C reconstruction; remaining
+            # differences are branch layout and split signed-conversion constant identity.
+            Object(NonMatching, "game/game_fn_800C9C60.c"),
+            Object(Matching, "game/game_fn_800C9D68.c"),
+            Object(Matching, "game/game_fn_800CA13C.c"),
+            Object(Matching, "game/game_fn_800CA1BC.c"),
+            Object(Matching, "game/game_fn_800CA2C8.c"),
+            Object(Matching, "game/game_fn_800CA4B8.c"),
+            Object(Matching, "game/game_fn_800CA530.c"),
+            # 83.888885% size-exact honest-C reconstruction; remaining
+            # differences are equivalent r29-r31 allocation and prologue scheduling.
+            Object(NonMatching, "game/game_fn_800CA554.c"),
+            Object(Matching, "game/game_fn_800CA5C0.c"),
+            Object(Matching, "game/game_fn_800CA660.c"),
+            Object(Matching, "game/game_fn_800CA6DC.c"),
+            # 89.25532% honest-C reconstruction; remaining differences are
+            # callee-saved allocation and signed max-expression codegen.
+            Object(NonMatching, "game/game_fn_800CA7D4.c"),
+            Object(Matching, "game/game_fn_800CAB80.c"),
             Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_80008B6C.c"),
             Object(Matching, "game/game_fn_80008BD8.c"),

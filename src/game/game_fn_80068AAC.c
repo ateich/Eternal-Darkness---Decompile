@@ -30,7 +30,7 @@ extern u32 lbl_8064E714, lbl_8064E718, lbl_8064E71C, lbl_80651958;
 
 extern s32 fn_80201EB8();
 extern void fn_8012AB2C(void *);
-extern void fn_8011F114();
+extern void *fn_8011F114();
 extern unsigned long long fn_8020123C();
 extern void fn_8020104C(s32, s32, s32, s32, float);
 extern void *fn_80201B9C();

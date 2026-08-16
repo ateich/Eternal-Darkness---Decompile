@@ -24,7 +24,7 @@ extern int fn_80031544(); extern int fn_80031694(); extern int fn_800317AC();
 extern int fn_80031948(); extern int fn_80031A00(); extern int fn_80031BE0();
 extern int fn_80031C78(); extern int fn_80031D24(); extern int fn_80035628(void*);
 extern int fn_800359A0(); extern int fn_80066D04(); extern int fn_80071DD8();
-extern int fn_800C43AC(); extern int fn_8011EB04(void *); extern void fn_8011F114();
+extern int fn_800C43AC(); extern int fn_8011EB04(void *); extern void *fn_8011F114();
 extern int fn_8011F598(); extern int fn_8011F6A4(); extern int fn_8011FAF4();
 extern int fn_80120AD0(); extern int fn_8012B690(); extern int fn_8013F4D0();
 extern int fn_8014317C(); extern int fn_8014CBC0(); extern int fn_80178E94();

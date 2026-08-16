@@ -32,7 +32,7 @@ extern void fn_80201D34(void *, s32);
 extern void fn_80201D1C(void *, s32);
 extern void *fn_80201814();
 extern void *fn_80201BC8();
-extern void fn_8011F114();
+extern void *fn_8011F114();
 extern void fn_8017AB08(const Vec3*, Vec3*, float);
 extern void fn_8012B690(void*, Vec3*, Vec3*);
 

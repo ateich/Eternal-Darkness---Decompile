@@ -7,7 +7,7 @@ extern void **fn_80201B8C(void *);
 extern void fn_80201DD8(void *, void *);
 extern void fn_801A74A8(void *, void *);
 extern void fn_801A67C4(void *, void *);
-extern void fn_8020123C(int, void *, void *, int);
+extern unsigned long long fn_8020123C(int, void *, void *, int);
 
 #pragma use_lmw_stmw on
 

@@ -8,7 +8,7 @@ extern float lbl_8064F140;
 extern void *fn_80201BC8(void *);
 extern void *fn_80201B54(void *);
 extern u16 fn_801291CC(void *);
-extern void fn_8020123C(int, void *, void *, void *);
+extern unsigned long long fn_8020123C(int, void *, void *, void *);
 extern void fn_8020104C(int, void *, void *, void *, float);
 
 void fn_800C4B6C(void *context)
