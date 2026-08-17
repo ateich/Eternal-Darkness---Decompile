@@ -1,0 +1,125 @@
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned int u32;
+
+typedef struct Set {
+    u8 count;
+    u8 pad1[3];
+    u16 active;
+    u8 pad6[2];
+    u32 id;
+    u8 padC[0x3C];
+    u32 value48;
+    u8 pad4C[0x3C];
+    void* object88;
+} Set;
+
+typedef struct Value {
+    float pad0, pad4;
+    float x, y, z;
+    u8 trailing[0x10];
+} Value;
+
+extern int fn_80157034(void*);
+extern Set* fn_80156938(void*);
+extern int fn_80157050(Set*);
+extern u32 fn_80036D5C(Set*);
+extern u8 fn_80202160(Set*);
+extern void fn_8017FF24(void*, int, int);
+extern void fn_8017FD6C(void*);
+extern void* fn_80201BC8(Set*);
+extern int fn_8012FA54(void*, u32);
+extern int fn_8012DC94(void*, u32);
+extern void fn_8011F6A4(void*, u32, u32, int, Value*, int);
+extern short* fn_8017FDE4(void*);
+extern void fn_8014B604(float*, short*);
+
+void fn_8014B0F0(void* left, void* right)
+{
+    int count;
+    Set* set;
+    Set* entry;
+    int i;
+    int mode;
+    u16 bit;
+    Set* right_set;
+    int update;
+    Value value;
+
+    if (left == 0) {
+        return;
+    }
+    right_set = 0;
+    update = 0;
+    mode = 0;
+    if (right != 0 && fn_80157034(right) == 0) {
+        right_set = fn_80156938(right);
+        if (right_set != 0 && fn_80157050(right_set) == 0) {
+            if ((fn_80036D5C(right_set) & 0x04000000) == 0) {
+                update = 1;
+            }
+            mode = fn_80202160(right_set);
+        }
+    }
+
+    set = fn_80156938(left);
+    if (set == 0) {
+        return;
+    }
+    count = set->count;
+    entry = set;
+    bit = 1;
+    for (i = 0; i < count; i++) {
+        if ((set->active & bit) != 0 && entry->object88 != 0) {
+            if (mode != 0) {
+                fn_8017FF24(entry->object88, 0, 8);
+            } else {
+                fn_8017FF24(entry->object88, 8, 0);
+            }
+        }
+        bit <<= 1;
+        entry = (Set*)((char*)entry + 4);
+    }
+
+    if (update == 0) {
+        entry = set;
+        bit = 1;
+        for (i = 0; i < count; i++) {
+            if ((set->active & bit) != 0 && entry->object88 != 0) {
+                fn_8017FD6C(entry->object88);
+                set->active &= ~bit;
+            }
+            bit <<= 1;
+            entry = (Set*)((char*)entry + 4);
+        }
+        return;
+    }
+
+    {
+        void* context = fn_80201BC8(right_set);
+        float* x = &value.x;
+        float* y = &value.y;
+        float* z = &value.z;
+        entry = set;
+        bit = 1;
+        for (i = 0; i < count; i++) {
+            if ((set->active & bit) != 0 && entry->object88 != 0) {
+                if (fn_8012FA54(context, entry->value48) != 0 ||
+                    fn_8012DC94(context, entry->value48) == 0) {
+                    short* position;
+                    fn_8011F6A4(context, entry->id, entry->value48,
+                                -1, &value, 1);
+                    position = fn_8017FDE4(entry->object88);
+                    fn_8014B604(x, position);
+                    fn_8014B604(y, position + 1);
+                    fn_8014B604(z, position + 2);
+                } else {
+                    fn_8017FD6C(entry->object88);
+                    set->active &= ~bit;
+                }
+            }
+            bit <<= 1;
+            entry = (Set*)((char*)entry + 4);
+        }
+    }
+}

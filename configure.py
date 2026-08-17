@@ -931,9 +931,41 @@ config.custom_build_rules = [
         ),
         "description": "EXTERNALIZE $in",
     },
+    {
+        "name": "externalize_game_8014AF38_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @11 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@11=lbl_80650490 --remove-section=.sdata2 $in "
+            "&& touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "externalize_game_8014B494_biases",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @7 && "
+            "python3 tools/externalize_elf_symbol.py $in @9 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@7=lbl_80650490 "
+            "--redefine-sym=@9=lbl_806504A0 --remove-section=.sdata2 $in "
+            "&& touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
 ]
 config.custom_build_steps = {
     "post-compile": [
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8014B494.externalized"],
+            "rule": "externalize_game_8014B494_biases",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8014B494.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8014AF38.externalized"],
+            "rule": "externalize_game_8014AF38_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8014AF38.o"],
+        },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8012DB28.externalized"],
             "rule": "externalize_game_8012DB28_signed_bias",
@@ -5352,6 +5384,68 @@ config.libs = [
             Object(Matching, "game/game_fn_80149220.c"),
             Object(Matching, "game/game_fn_80149360.c"),
             Object(Matching, "game/game_fn_8014939C.c"),
+            Object(NonMatching, "game/game_fn_801493D4.c"),
+            Object(Matching, "game/game_fn_80149524.c"),
+            Object(Matching, "game/game_fn_80149590.c"),
+            Object(Matching, "game/game_fn_801495FC.c"),
+            Object(Matching, "game/game_fn_80149668.c"),
+            Object(Matching, "game/game_fn_801496D8.c"),
+            Object(Matching, "game/game_fn_80149748.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_801497E0.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_801498AC.c"),
+            Object(Matching, "game/game_fn_80149920.c"),
+            Object(Matching, "game/game_fn_801499C4.c"),
+            Object(Matching, "game/game_fn_80149A68.c"),
+            Object(Matching, "game/game_fn_80149B0C.c"),
+            Object(Matching, "game/game_fn_80149B38.c"),
+            Object(Matching, "game/game_fn_80149B60.c"),
+            Object(Matching, "game/game_fn_80149C1C.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_80149CC4.c"),
+            Object(Matching, "game/game_fn_80149D48.c"),
+            Object(NonMatching, "game/game_fn_80149D58.c"),
+            Object(Matching, "game/game_fn_80149D64.c"),
+            Object(Matching, "game/game_fn_80149D98.c"),
+            Object(Matching, "game/game_fn_80149E04.c"),
+            Object(Matching, "game/game_fn_80149E28.c"),
+            Object(Matching, "game/game_fn_80149EB8.c"),
+            Object(Matching, "game/game_fn_80149EFC.c"),
+            Object(Matching, "game/game_fn_80149F9C.c"),
+            Object(Matching, "game/game_fn_80149FCC.c"),
+            Object(Matching, "game/game_fn_80149FDC.c"),
+            Object(Matching, "game/game_fn_8014A040.c"),
+            Object(Matching, "game/game_fn_8014A0A8.c"),
+            Object(Matching, "game/game_fn_8014A110.c"),
+            Object(Matching, "game/game_fn_8014A178.c"),
+            Object(Matching, "game/game_fn_8014A1E4.c"),
+            Object(Matching, "game/game_fn_8014A248.c"),
+            Object(Matching, "game/game_fn_8014A2AC.c"),
+            Object(Matching, "game/game_fn_8014A314.c"),
+            Object(NonMatching, "game/game_fn_8014A378.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(NonMatching, "game/game_fn_8014A6BC.c"),
+            Object(NonMatching, "game/game_fn_8014AA1C.c"),
+            Object(NonMatching, "game/game_fn_8014ACDC.c"),
+            Object(Matching, "game/game_fn_8014AE54.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_8014AF38.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_8014B014.c"),
+            Object(NonMatching, "game/game_fn_8014B0F0.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_8014B33C.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_8014B454.c"),
+            Object(Matching, "game/game_fn_8014B494.c"),
+            Object(NonMatching, "game/game_fn_8014B604.c"),
+            Object(NonMatching, "game/game_fn_8014B610.c"),
+            Object(Matching, "game/game_fn_8014B738.c"),
+            Object(Matching, "game/game_fn_8014B768.c"),
+            Object(Matching, "game/game_fn_8014B76C.c"),
+            Object(NonMatching, "game/game_fn_8014B7B0.c"),
+            Object(Matching, "game/game_fn_8014B888.c"),
+            Object(Matching, "game/game_fn_8014B8D0.c"),
+            Object(Matching, "game/game_fn_8014B928.c"),
+            Object(Matching, "game/game_fn_8014B990.c"),
+            Object(NonMatching, "game/game_fn_8014BA14.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(NonMatching, "game/game_fn_8014BEC4.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_8014C060.c"),
+            Object(NonMatching, "game/game_fn_8014C23C.c"),
+            Object(Matching, "game/game_fn_8014C37C.c"),
             Object(NonMatching, "game/game_fn_8012356C.c"),
             Object(Matching, "game/game_fn_80008B38.c"),
             Object(Matching, "game/game_fn_80008B6C.c"),
