@@ -3,12 +3,13 @@ typedef unsigned short u16;
 typedef signed short s16;
 
 extern void *fn_80201814();
-extern void *fn_80201C24(void *);
+extern void* fn_80201C24();
 extern void *fn_80201BC8();
 extern int fn_8006749C(u8);
 extern void fn_80120AD0(void *, int, s16, u16, float, float);
 extern void fn_802006D4(int, int, int, int, int);
-extern void fn_8020104C(int, float, int, int, int);
+extern void fn_8020104C(int, void*, void*, int, float);
+#define fn_8020104C(a,b,c,d,e) fn_8020104C((a),(void*)(c),(void*)(d),(int)(e),(b))
 extern float lbl_8064F460;
 
 void fn_800DC2B8(int owner, int kind, int level, float amount)

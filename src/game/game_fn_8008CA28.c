@@ -1,6 +1,6 @@
 typedef unsigned char u8;
 
-extern void* fn_80201B3C(void*);
+extern void* fn_80201B3C();
 
 u8 fn_8008CA28(void* object, void* owner)
 {

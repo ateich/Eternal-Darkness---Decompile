@@ -75,7 +75,8 @@ extern void fn_80201DE0(void*, s32);
 extern void fn_80201E60(void*, s32);
 extern void fn_80035534(ChildObject*, SetupInfo*);
 extern s32 fn_80072368(s32);
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void fn_80201D3C(void*, s32);
 extern void fn_80201D44(void*, s32);
 extern void fn_80138614(s32);

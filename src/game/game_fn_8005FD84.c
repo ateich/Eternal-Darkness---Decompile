@@ -31,7 +31,8 @@ extern const double lbl_8064E5C0;
 extern const float lbl_8064E5DC;
 extern const float lbl_8064E5E0;
 
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern s32 fn_8005EF94(void *, s32, s32 *, s32, s32);
 extern void fn_8005F8D0(s32, void *, void *, void *, EffectState *, u8,
                        s32, s32, s32);

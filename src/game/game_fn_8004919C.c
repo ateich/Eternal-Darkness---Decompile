@@ -7,7 +7,7 @@ extern int fn_801A5CE0(void);
 extern u8 fn_80128EE4(void* object);
 extern int fn_801A6D94(void* object);
 extern int fn_801D0CD8(void);
-extern void* fn_80201B3C(void);
+extern void* fn_80201B3C();
 extern int fn_80201B64(void* object);
 
 int fn_8004919C(void)

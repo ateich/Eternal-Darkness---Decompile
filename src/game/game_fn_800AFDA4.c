@@ -2,7 +2,7 @@ typedef unsigned short u16;
 
 extern unsigned char lbl_8031F7C0[];
 extern int lbl_8064C5BC;
-extern void* fn_80201B3C(void);
+extern void* fn_80201B3C();
 extern u16 fn_800B9578(void*, void*, unsigned int*, int);
 
 int fn_800AFDA4(void)

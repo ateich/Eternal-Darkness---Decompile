@@ -46,7 +46,7 @@ extern int fn_801E8328();
 extern unsigned long long fn_8020123C();
 extern s32 fn_802006D4(s32, s32, s32, s32, s32);
 extern s32 fn_80200614(s32, s32, s32);
-extern void fn_8020104C(int, void *, void *, int, float);
+extern void fn_8020104C(int, void*, void*, int, float);
 #define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void *)(b), (void *)(c), (int)(d), (e))
 extern void fn_80200460(s32, s32, s32, s32, float);
 extern void *fn_80201814();

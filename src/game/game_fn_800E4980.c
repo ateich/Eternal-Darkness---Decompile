@@ -8,7 +8,8 @@ extern void *lbl_8064C4E4;
 extern Vec3 lbl_80325CE0;
 extern float lbl_8064F6B0;
 extern float lbl_8064F6B4;
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void fn_8011F114();
 
 void fn_800E4980(void)

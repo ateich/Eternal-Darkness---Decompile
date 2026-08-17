@@ -6,7 +6,7 @@ typedef struct Triple {
     u32 z;
 } Triple;
 
-extern void *fn_80201C24(void *);
+extern void* fn_80201C24();
 extern void *fn_80201BC8();
 extern u32 fn_80157894(void *);
 extern void fn_801261F4(void *);

@@ -26,7 +26,7 @@ extern s32 fn_80200C20(s32 value);
 extern unsigned long long fn_8020123C();
 extern void fn_8011F778(s32 object, f32 value);
 extern void fn_80048708(s32 object);
-extern void fn_8020104C(int, void *, void *, int, float);
+extern void fn_8020104C(int, void*, void*, int, float);
 #define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void *)(b), (void *)(c), (int)(d), (e))
 extern void fn_80201D34(void *, s32);
 extern void fn_80201D1C(void *, s32);

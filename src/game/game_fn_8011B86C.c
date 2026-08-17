@@ -25,7 +25,8 @@ extern void fn_800073DC(int);
 extern void fn_801EB194(int);
 extern void fn_801187F4(void);
 extern int fn_80201B54();
-extern void fn_8020104C(int, int, int, int, float);
+extern void fn_8020104C(int, void*, void*, int, float);
+#define fn_8020104C(a,b,c,d,e) fn_8020104C((int)(a),(void*)(b),(void*)(c),(int)(d),(float)(e))
 extern void fn_801AD404(int, int, int);
 extern void fn_801AD490(void);
 extern void fn_801AD528(int, int);

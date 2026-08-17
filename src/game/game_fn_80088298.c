@@ -18,7 +18,8 @@ extern Object44* fn_80036D38(void);
 extern void *fn_80201814();
 extern void *fn_80201B8C();
 extern void fn_802020B4(void*, int);
-extern void fn_8020104C(int, int, int, int, float);
+extern void fn_8020104C(int, void*, void*, int, float);
+#define fn_8020104C(a,b,c,d,e) fn_8020104C((int)(a),(void*)(b),(void*)(c),(int)(d),(float)(e))
 extern int lbl_8064C824;
 extern int fn_801A6D94(int);
 extern void fn_801A6E04(int);

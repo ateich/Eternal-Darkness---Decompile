@@ -23,7 +23,7 @@ extern float lbl_8064F2AC;
 extern float lbl_8064F2B0;
 
 extern void *fn_80201BC8();
-extern u32 fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
 extern int fn_8011F6A4(void *, int, int, int, QueryResult *, int);
 extern void fn_8014D478(void *, Vec3 *, Vec3 *, int, int, void *, int);
 

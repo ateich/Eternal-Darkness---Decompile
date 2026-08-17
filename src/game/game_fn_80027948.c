@@ -31,13 +31,13 @@ extern void* fn_80155DB4(void*);
 extern void* fn_80201C24();
 extern void fn_80204E0C(void*, void*);
 extern s32 fn_801579F4(void*);
-extern void* fn_80201B3C(void);
+extern void* fn_80201B3C();
 extern int fn_80201EB8();
 extern void fn_8011FB54(void*, void*);
 extern void fn_8011FA8C(void*, int, int);
 extern void fn_8011FABC(void*, s32, s32);
 extern void fn_80205680(void*, void*, s32);
-extern void fn_8020104C(int, void *, void *, int, float);
+extern void fn_8020104C(int, void*, void*, int, float);
 #define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void *)(b), (void *)(c), (int)(d), (e))
 extern void fn_80205C98(void);
 extern void fn_80205CE4(void);

@@ -22,7 +22,7 @@ extern void *fn_80201BC8();
 extern void fn_8011FA8C(void*, int, int);
 extern void fn_8011F788(void*, float);
 extern void fn_8011F798(void*, float);
-extern void fn_8020104C(int, void *, void *, int, float);
+extern void fn_8020104C(int, void*, void*, int, float);
 #define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void *)(b), (void *)(c), (int)(d), (e))
 extern unsigned long long fn_8020123C();
 extern void fn_80201D2C(void *, int);

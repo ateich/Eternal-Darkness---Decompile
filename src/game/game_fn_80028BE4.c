@@ -4,7 +4,7 @@ typedef unsigned int u32;
 extern s32 lbl_8064C6FC;
 extern s32 lbl_8064D18C;
 
-extern void* fn_80201B3C(void);
+extern void* fn_80201B3C();
 extern void *fn_80201B9C();
 extern void* fn_80201BC0(void*);
 extern int fn_80201EB8();

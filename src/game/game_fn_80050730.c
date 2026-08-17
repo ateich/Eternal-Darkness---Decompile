@@ -5,7 +5,8 @@ typedef unsigned int u32;
 #pragma use_lmw_stmw on
 
 extern int fn_801A9EF4(int low, int high);
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern u32 lbl_8064E4B4;
 extern u16 lbl_8064E4B8;
 

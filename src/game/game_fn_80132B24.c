@@ -42,7 +42,7 @@ extern float lbl_80650250;
 extern void* fn_801FD6F4(int);
 extern void fn_801FD6AC(void*, Record*, float*, int);
 extern void fn_801FE8DC(float*, float, float, float);
-extern void fn_801E8328(int, int*);
+extern int fn_801E8328();
 
 void fn_80132B24(Batch* batch, u16 value)
 {

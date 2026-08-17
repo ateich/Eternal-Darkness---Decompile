@@ -49,7 +49,7 @@ extern void fn_80120AD0(void *object, s32 value, s32 amount, s32 flags,
                        float first, float second);
 extern void fn_801B05E8(s32, s32, s32, s32, s32, s32, s32, s32);
 extern void *fn_801294DC(void *, int, int, int);
-extern void fn_8020104C(int, void *, void *, int, float);
+extern void fn_8020104C(int, void*, void*, int, float);
 #define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void *)(b), (void *)(c), (int)(d), (e))
 extern void fn_801F348C(u32 *value, s32 frames);
 extern s32 fn_800AD3E4(void);

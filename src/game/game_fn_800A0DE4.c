@@ -36,7 +36,8 @@ extern void fn_8014C23C(int, int, int);
 extern void fn_8012C478(void*, int, int);
 extern int fn_80201B54();
 extern void* fn_80158598(void*, int);
-extern LinkedInfo* fn_80201C24(void*);
+extern void* fn_80201C24();
+#define fn_80201C24(a) ((LinkedInfo*)fn_80201C24(a))
 extern void fn_80157E34(void*, int, int, int, int);
 extern void* fn_8004918C(void);
 extern void fn_8004948C(void*, void*, int);

@@ -14,7 +14,7 @@ extern void *fn_802051A4(void *);
 extern void *fn_80205134(void *);
 extern void *fn_80201814();
 extern void *fn_80201B8C();
-extern void *fn_80201C24(void *);
+extern void* fn_80201C24();
 extern u32 fn_80179064(int, int, int, int);
 extern u32 fn_80157894(void *);
 extern int fn_801E1E38(void);

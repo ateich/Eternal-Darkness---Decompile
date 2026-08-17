@@ -7,7 +7,7 @@ typedef struct ObjectState {
 
 extern void *fn_80201B8C();
 extern u32 fn_8011FAEC(void*);
-extern void* fn_80201B3C(void);
+extern void* fn_80201B3C();
 extern int fn_80201B5C(void*);
 
 int fn_8008C93C(void* object, void* resource)

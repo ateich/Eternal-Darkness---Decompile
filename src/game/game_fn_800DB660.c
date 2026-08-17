@@ -7,7 +7,7 @@ typedef struct Triple {
 } Triple;
 
 extern void *fn_80201BC8();
-extern void *fn_80201C24(void *);
+extern void* fn_80201C24();
 extern void *fn_80155DB4(void *);
 extern int fn_80201B44();
 extern void *fn_80158598(int, int);

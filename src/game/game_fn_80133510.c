@@ -26,7 +26,7 @@ typedef struct Manager {
     Entry* entries;
 } Manager;
 
-extern void fn_8011F114(Vec3*, void*);
+extern void fn_8011F114();
 extern void fn_8012B7A0(void*, float);
 extern float lbl_80650248;
 

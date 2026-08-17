@@ -9,7 +9,8 @@ extern void *fn_80201BC8();
 extern int fn_80201B54();
 extern u16 fn_801291CC(void *);
 extern unsigned long long fn_8020123C();
-extern void fn_8020104C(int, void *, void *, void *, float);
+extern void fn_8020104C(int, void*, void*, int, float);
+#define fn_8020104C(a,b,c,d,e) fn_8020104C((int)(a),(void*)(b),(void*)(c),(int)(d),(float)(e))
 
 void fn_800C4B6C(void *context)
 {

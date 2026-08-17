@@ -11,7 +11,7 @@ extern float lbl_8064E064, lbl_8064E06C;
 extern const double lbl_8064E038;
 extern s32 lbl_8064D18C;
 extern int fn_80200C10(void *); extern void *fn_80201B8C(); extern int fn_80201B54();
-extern void fn_8020104C(int, void *, void *, int, float);
+extern void fn_8020104C(int, void*, void*, int, float);
 #define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void *)(b), (void *)(c), (int)(d), (e))
 extern void fn_80201D2C(void *, int); extern void fn_80201D14(void *, int);
 extern void* fn_801A717C(void); extern void fn_801A74A0(void*,s32); extern void fn_801A74A8(void*,s32); extern void fn_801A7538(void*,s32);

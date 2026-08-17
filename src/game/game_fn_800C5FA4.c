@@ -9,7 +9,7 @@ typedef struct Owner {
     Inner *inner;
 } Owner;
 
-extern void *fn_80201B3C(void);
+extern void* fn_80201B3C();
 extern void *fn_80201B8C();
 
 int fn_800C5FA4(void)

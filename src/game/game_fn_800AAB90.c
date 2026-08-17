@@ -4,7 +4,8 @@ typedef struct Vec3i {
     int z;
 } Vec3i;
 
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern int fn_8011F598(int, int, int, int, void*, int);
 extern void fn_80179DB0(Vec3i*, void*);
 extern void* lbl_8064C5A8;
@@ -12,7 +13,8 @@ extern float lbl_8064EF7C;
 extern void fn_801D6B44(int, int, int, int, Vec3i*, int, int, int, int, int,
                        int, int, int, int, int, int, int, int, int, int,
                        int, int);
-extern void fn_8020104C(int, float, int, int, int);
+extern void fn_8020104C(int, void*, void*, int, float);
+#define fn_8020104C(a,b,c,d,e) fn_8020104C((a),(void*)(c),(void*)(d),(int)(e),(b))
 
 void fn_800AAB90(int owner, int search, int option, int value, int resource,
                  void** positions, int position_count)

@@ -1,6 +1,6 @@
 extern int fn_80201B54();
 extern void fn_802006D4(void *, void *, int, int, int);
-extern void fn_8020104C(int, void *, void *, int, float);
+extern void fn_8020104C(int, void*, void*, int, float);
 
 void fn_800C59F0(void *object, int value)
 {

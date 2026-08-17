@@ -30,7 +30,7 @@ extern void fn_801292E0(void*, int*, Entry**);
 extern void fn_801287C4(void*, void*, void*, int);
 extern void* fn_80201C2C(void*);
 extern void* fn_80205288(void*);
-extern void* fn_80201C24(void);
+extern void* fn_80201C24();
 extern void fn_801A7680(void*, void*);
 extern void fn_801A7478(void*, void*);
 extern void fn_80129334(void*, int, int*, int);

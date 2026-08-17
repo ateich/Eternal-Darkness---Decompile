@@ -22,7 +22,7 @@ extern u64 fn_802011D4(void *event);
 extern void *fn_8004918C(void);
 extern s32 fn_80049694(void);
 extern s32 fn_801D1374(void);
-extern void *fn_80201B3C(void);
+extern void* fn_80201B3C();
 extern int fn_80038308(void *, int, short *);
 
 s32 fn_8005AF34(void *context, void *event, u32 *result)

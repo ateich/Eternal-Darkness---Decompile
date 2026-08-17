@@ -20,7 +20,8 @@ extern void fn_80201D1C(void *, int);
 extern unsigned long long fn_8020123C();
 extern int fn_80200C38();
 extern void fn_8012C62C(void *, void *, Vec3 *, Vec3 *, Vec3 *, int);
-extern void fn_8020104C(float, int, int, int);
+extern void fn_8020104C(int, void*, void*, int, float);
+#define fn_8020104C(a,b,c,d) fn_8020104C((b),(void*)(c),(void*)(d),0,(a))
 
 int fn_800E1E68(void *object, int event, EventData *data)
 {

@@ -6,7 +6,8 @@ typedef struct Vec3 {
     float z;
 } Vec3;
 
-extern s32 fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void fn_80211AAC(Vec3 *out, const Vec3 *in);
 extern void fn_80211A90(Vec3 *out, const Vec3 *in, float scale);
 extern void fn_80205868(void *object, s32 kind, const Vec3 *direction, s32 flags);

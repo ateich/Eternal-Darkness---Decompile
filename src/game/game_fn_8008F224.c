@@ -35,7 +35,8 @@ extern int fn_80201B54();
 extern unsigned long long fn_8020123C();
 extern void* fn_80201BC0(void*);
 extern void fn_80043F44(SpawnConfig*);
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void* fn_80034708(SpawnConfig*);
 extern void *fn_80201BC8();
 extern void fn_80201D54(void*, void*);

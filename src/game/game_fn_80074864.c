@@ -27,7 +27,8 @@ typedef struct Status {
     u16 flags;
 } Status;
 
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void *fn_80201B8C();
 extern Info *fn_80072354(void *);
 extern void fn_800360B0(void *, Status *);

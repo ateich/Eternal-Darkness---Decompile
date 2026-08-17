@@ -3,7 +3,7 @@ typedef struct State {
     float value;
 } State;
 
-extern void *fn_80201B3C(void);
+extern void* fn_80201B3C();
 extern void *fn_80201B8C();
 
 void fn_800C3CE4(float value)

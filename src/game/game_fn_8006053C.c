@@ -25,7 +25,8 @@ typedef struct RangeData {
     s8 high;
 } RangeData;
 
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void *fn_80201B8C();
 extern void *fn_80201BC8();
 extern void fn_800360B0(void *, u16 *);

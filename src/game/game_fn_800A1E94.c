@@ -6,7 +6,8 @@ typedef struct Object800A1E94 {
     s8 value;
 } Object800A1E94;
 
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 
 int fn_800A1E94(Object800A1E94* object)
 {

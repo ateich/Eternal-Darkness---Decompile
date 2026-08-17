@@ -1,5 +1,6 @@
 extern void *fn_80201BC8();
-extern unsigned int fn_80201B3C(void *);
+extern void* fn_80201B3C();
+#define fn_80201B3C(a) ((unsigned int)fn_80201B3C(a))
 extern void *fn_80201C2C(void);
 extern unsigned int fn_80204A94(void *, void *);
 extern int fn_80200C38();

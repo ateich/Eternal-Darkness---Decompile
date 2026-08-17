@@ -29,7 +29,7 @@ extern s32 fn_8015E4E8(EffectState *);
 extern s32 fn_801FE52C(void *);
 extern void *fn_80201814();
 extern s32 fn_80155DB4(void);
-extern void *fn_80201C24(void *);
+extern void* fn_80201C24();
 extern void *fn_80201BC8();
 extern s32 fn_8011F6A4(void *, s32, s32, s32, HitResult *, s32);
 extern void fn_801FE890(void *, Vec3 *);

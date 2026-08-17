@@ -37,7 +37,7 @@ extern void fn_800C1B50(void *resource, int type, int value, float a, float b);
 extern void fn_8012C478(void *object, int index, int value);
 extern int fn_80201B54();
 extern void *fn_80158598(void *object, int value);
-extern void *fn_80201C24(void *object);
+extern void* fn_80201C24();
 extern void fn_80157E34(void *object, int effect, int type, void *callback, int value);
 extern void fn_800389E0(void *resource, int channel, int value, int zero);
 extern const float lbl_8064E7E0;

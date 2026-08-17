@@ -9,7 +9,7 @@ extern void fn_801D19FC(void*, void*);
 extern void *fn_80201814();
 extern void fn_8014CBC0(void*);
 extern void* fn_80205288(void*);
-extern void* fn_80201C24(void);
+extern void* fn_80201C24();
 extern int fn_800AD1D0(int);
 extern void fn_80157B60(void*, u8);
 extern void fn_80157B3C(void*, int);

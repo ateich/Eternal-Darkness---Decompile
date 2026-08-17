@@ -26,7 +26,8 @@ extern void *fn_80201814();
 extern void fn_80201E78(Vec3*, void*);
 extern u32 fn_80178E94(Vec3*, Vec3*);
 extern void fn_80201DD8(void*, int);
-extern void fn_8020104C(int, int, int, int, float);
+extern void fn_8020104C(int, void*, void*, int, float);
+#define fn_8020104C(a,b,c,d,e) fn_8020104C((int)(a),(void*)(b),(void*)(c),(int)(d),(float)(e))
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);
 extern void fn_80036DA4(void*, u32);

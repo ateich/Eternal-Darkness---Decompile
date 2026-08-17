@@ -24,7 +24,8 @@ typedef struct EffectState {
 
 extern u32 lbl_8064D954;
 extern u8 lbl_8064C604[];
-extern s32 fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern EffectState *fn_801FD6F4(void *);
 extern void *fn_80201814();
 extern void *fn_80201BC8();

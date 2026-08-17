@@ -25,7 +25,8 @@ typedef struct Info800A17C4 {
 extern Context800A17C4* fn_8006ED98(State800A17C4*);
 extern void *fn_80201814();
 extern void *fn_80201B8C();
-extern void fn_8020104C(int, int, u32, int, float);
+extern void fn_8020104C(int, void*, void*, int, float);
+#define fn_8020104C(a,b,c,d,e) fn_8020104C((int)(a),(void*)(b),(void*)(c),(int)(d),(float)(e))
 extern float lbl_8064EDB4;
 
 int fn_800A17C4(register State800A17C4* state)

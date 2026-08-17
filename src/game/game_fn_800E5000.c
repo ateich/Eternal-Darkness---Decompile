@@ -1,4 +1,5 @@
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 
 unsigned short fn_800E5000(void)
 {

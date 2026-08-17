@@ -20,7 +20,8 @@ extern void fn_801A5C30(int value);
 extern void fn_802020B4(void *object, int value);
 extern int fn_80200614(void *object, int index, int value);
 extern float fn_80200534(void *object, int index, int value);
-extern void fn_8020104C(int type, int zero, void *object, int other, float time);
+extern void fn_8020104C(int, void*, void*, int, float);
+#define fn_8020104C(a,b,c,d,e) fn_8020104C((int)(a),(void*)(b),(void*)(c),(int)(d),(float)(e))
 extern void fn_8011E174(int value, int zero);
 extern void *lbl_8064C4E4;
 extern void *lbl_8064C4E0;

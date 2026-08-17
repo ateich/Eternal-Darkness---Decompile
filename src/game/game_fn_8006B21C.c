@@ -25,7 +25,8 @@ extern void fn_8006B40C(void);
 extern void fn_800AE2D4(s32 mode);
 extern void fn_80088F08(s32 first, s32 second);
 extern void fn_800891F4(s32 value);
-extern s32 fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 
 void fn_8006B21C(s32 mode)
 {

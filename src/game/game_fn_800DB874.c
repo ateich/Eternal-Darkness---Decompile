@@ -6,7 +6,7 @@ typedef struct FourWords {
 
 extern FourWords lbl_80239998;
 extern void *fn_80201BC8();
-extern void *fn_80201C24(void *);
+extern void* fn_80201C24();
 extern void fn_8012B7A0(void *, float);
 extern void fn_8012CDF0(void *, int, FourWords, int);
 extern void fn_8012C198(void *);

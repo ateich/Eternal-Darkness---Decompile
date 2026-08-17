@@ -40,7 +40,7 @@ extern s32 fn_80128258(void);
 extern s32 fn_80128130(void);
 extern s32 fn_800453AC(s32, s32, s32, s32, s32, s32, s32, s32,
                       Vec3f*, s32, s32, f32);
-extern void fn_8020104C(int, void *, void *, int, float);
+extern void fn_8020104C(int, void*, void*, int, float);
 #define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void *)(b), (void *)(c), (int)(d), (e))
 extern void *fn_80201814();
 extern void *fn_80201BC8();

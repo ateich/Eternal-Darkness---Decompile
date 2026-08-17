@@ -14,9 +14,10 @@ typedef struct DistanceThresholds {
 } DistanceThresholds;
 
 extern DistanceThresholds lbl_8064B730;
-extern int fn_800FBFB0(void *);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0(a) ((int)fn_800FBFB0(a))
 extern void fn_80201E78(Vec3 *, void *);
-extern void *fn_80201B3C(void);
+extern void* fn_80201B3C();
 extern void fn_80211A6C(const Vec3 *, const Vec3 *, Vec3 *);
 extern float fn_80211B08(const Vec3 *);
 

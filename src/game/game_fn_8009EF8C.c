@@ -35,7 +35,8 @@ extern int fn_800467F0(void*, int);
 extern void fn_8006DEF8(State8009EF8C*, void*, void*, void*, int);
 extern void *fn_80201814();
 extern void *fn_80201B8C();
-extern void fn_8020104C(int, int, void*, int, float);
+extern void fn_8020104C(int, void*, void*, int, float);
+#define fn_8020104C(a,b,c,d,e) fn_8020104C((int)(a),(void*)(b),(void*)(c),(int)(d),(float)(e))
 extern void* fn_80036D38(void*);
 extern void fn_802020B4(void*, int);
 extern void fn_801A5C30(int);

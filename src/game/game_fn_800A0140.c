@@ -39,7 +39,8 @@ extern u32 fn_80128EE4(void);
 extern void fn_800C1B50(int, int, int, float);
 extern void fn_8011F114();
 extern void fn_8012AC74(void*, Vec800A0140*, int);
-extern void fn_8020104C(int, int, int, int, float);
+extern void fn_8020104C(int, void*, void*, int, float);
+#define fn_8020104C(a,b,c,d,e) fn_8020104C((int)(a),(void*)(b),(void*)(c),(int)(d),(float)(e))
 extern Object800A0140* fn_80036D38(void*);
 extern void fn_802020B4(void*, int);
 extern void fn_801A5C30(int);

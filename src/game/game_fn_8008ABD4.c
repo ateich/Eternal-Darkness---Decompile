@@ -39,7 +39,8 @@ extern void fn_80128C28(void*, void*, void*);
 extern void fn_80128C44(void*, void*, void*);
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void fn_8008AE40(void);
 extern void fn_8008C7A0(void);
 extern void fn_802042A4(void);

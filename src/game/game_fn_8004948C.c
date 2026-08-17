@@ -6,7 +6,8 @@ typedef unsigned int u32;
 extern void* lbl_8064C4F8;
 
 extern void* fn_80049304(void* object, s32 index);
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern u32 fn_80157888(void* object);
 extern s32 fn_80157C80(void* object);
 extern void fn_801A7680(void* destination, void* object);

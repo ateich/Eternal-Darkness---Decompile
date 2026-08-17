@@ -36,7 +36,7 @@ extern int fn_801A7668(); extern int fn_801A7670(); extern int fn_801AC9F4();
 extern int fn_801CEB2C(); extern int fn_801D1B10(); extern int fn_801D38BC();
 extern int fn_801D38E8(); extern int fn_801D39E0(); extern int fn_801DD0A8();
 extern int fn_801E8328(); extern int fn_801E8328(); extern int fn_802006D4();
-extern int fn_80200C10(void *); extern int fn_80200C38(); extern void fn_8020104C(int, void *, void *, int, float);
+extern int fn_80200C10(void *); extern int fn_80200C38(); extern void fn_8020104C(int, void*, void*, int, float);
 #define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void *)(b), (void *)(c), (int)(d), (e))
 extern unsigned long long fn_8020123C(); extern void *fn_80201814(); extern int fn_80201AE4(void);
 extern int fn_80201B44(); extern int fn_80201B54(); extern int fn_80201B5C(void*);

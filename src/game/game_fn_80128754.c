@@ -6,7 +6,7 @@ typedef struct Owner {
     s16 value;
 } Owner;
 
-extern unsigned int fn_800FBFB0(Owner*);
+extern unsigned int fn_800FBFB0();
 
 void fn_80128754(Owner* owner, int value)
 {

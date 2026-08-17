@@ -25,7 +25,8 @@ extern int fn_80201B54();
 extern void fn_8011F114();
 extern u32 fn_80178E94(const Vec3*, const Vec3*);
 extern unsigned long long fn_8020123C();
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 
 s32 fn_8003565C(register void* target, register s32* selected)
 {

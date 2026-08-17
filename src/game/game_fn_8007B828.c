@@ -30,7 +30,8 @@ extern void fn_80211A90(Vec3 *, Vec3 *, float);
 extern void fn_801AAE68(float, s32, s32, s32, Vec3 *, s32, s32, s32,
                         u16, s32);
 extern void fn_8018358C(EffectParams *);
-extern s32 fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern s32 fn_8007BC44(Vec3 *);
 extern void fn_80148008(Vec3 *, void *, EffectParams *, void (*)(void));
 extern void fn_801834F0(void);

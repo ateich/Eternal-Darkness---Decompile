@@ -7,7 +7,8 @@ extern int fn_80128408(void);
 extern void *fn_800CEC24(int, int, void *, void *, int, void *, float, float,
                          float);
 extern int fn_80201B54();
-extern void fn_8020104C(int, int, int, int, float);
+extern void fn_8020104C(int, void*, void*, int, float);
+#define fn_8020104C(a,b,c,d,e) fn_8020104C((int)(a),(void*)(b),(void*)(c),(int)(d),(float)(e))
 
 #pragma use_lmw_stmw on
 void fn_800CEB10(int kind, int value, void *first, void *second, int mode,

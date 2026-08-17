@@ -56,7 +56,8 @@ extern Inner800A1278* fn_80036D38(void*);
 extern void fn_802020B4(void*, int);
 extern void fn_801A5C30(int);
 extern void fn_8006DEF8(State800A1278*, u32, void*, void*, int);
-extern void fn_8020104C(int, int, u32, int, float);
+extern void fn_8020104C(int, void*, void*, int, float);
+#define fn_8020104C(a,b,c,d,e) fn_8020104C((int)(a),(void*)(b),(void*)(c),(int)(d),(float)(e))
 extern const Vec800A1278 lbl_802396E0;
 extern float lbl_8064EE68;
 extern float lbl_8064EDB8;

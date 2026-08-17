@@ -8,7 +8,7 @@ typedef struct ActorState {
 } ActorState;
 
 extern int fn_80200C10(void *);
-extern void *fn_80201B3C(void);
+extern void* fn_80201B3C();
 extern int fn_80201B54();
 extern int fn_80200C20(void *);
 extern void *fn_80201BC8();

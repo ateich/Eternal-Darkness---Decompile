@@ -30,7 +30,8 @@ typedef struct PointTable {
 } PointTable;
 
 extern PointTable *fn_8015C390(s32 table_kind);
-extern s32 fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern u32 fn_80178F14(s32 ax, s32 ay, s32 az, s32 bx, s32 by, s32 bz);
 
 static void copy_point(PointEntry *entry, Vec3 *position, u32 *value, u32 *kind)

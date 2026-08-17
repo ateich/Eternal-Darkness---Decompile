@@ -4,7 +4,7 @@ typedef struct Object {
 } Object;
 
 extern void fn_8004910C(void *value);
-extern void *fn_80201C24(void);
+extern void* fn_80201C24();
 extern unsigned short fn_80158234(void);
 extern void fn_8007BA3C(Object *object, void *arg);
 extern void fn_8007B828(Object *object);

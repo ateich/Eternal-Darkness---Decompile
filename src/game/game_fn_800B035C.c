@@ -1,7 +1,7 @@
 extern unsigned char lbl_8031F7C0[];
 extern int lbl_8064D18C;
 extern int lbl_8064CDC4;
-extern void* fn_80201B3C(void);
+extern void* fn_80201B3C();
 extern void *fn_80201BC8();
 extern void* memcpy(void*, const void*, unsigned int);
 extern void fn_800B01D8(void);

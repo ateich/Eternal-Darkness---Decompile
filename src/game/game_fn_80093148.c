@@ -3,7 +3,7 @@ typedef struct RuntimeInfo80093148 {
     void* value8C;
 } RuntimeInfo80093148;
 
-extern void* fn_80201B3C(void);
+extern void* fn_80201B3C();
 extern int fn_800359A0(void*, void*);
 extern void *fn_80201B8C();
 extern void fn_800BDEE4(void*, void*);

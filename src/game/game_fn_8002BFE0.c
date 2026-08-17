@@ -21,7 +21,8 @@ extern float lbl_8064E064;
 extern float lbl_8064E068;
 
 extern void fn_8012CEA4(void*, s32, Vec4*);
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void fn_8017A244(Vec3*, Vec4*, float);
 extern void fn_8012CF08(void*, s32, Vec4, Vec4, s32, s32, float);
 extern void fn_8012F58C(void*, s32, s32, s32, s32, s32);

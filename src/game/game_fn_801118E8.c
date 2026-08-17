@@ -6,7 +6,7 @@ extern unsigned int fn_8020216C(void);
 extern void* fn_80201C2C(void*);
 extern void* fn_802051A4(void*);
 extern void* fn_80205134(void*);
-extern void* fn_80201C24(void*);
+extern void* fn_80201C24();
 extern int fn_8015821C(void);
 extern int fn_801E79FC(unsigned int*, int);
 

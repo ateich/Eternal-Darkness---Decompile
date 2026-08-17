@@ -27,7 +27,8 @@ extern void fn_801AAE68(float intensity, s32 effect_type, s32 value, s32 arg3,
                         const Vec3 *position, s32 arg5, s32 arg6, s32 arg7,
                         u16 owner, s32 arg9);
 extern void fn_8018358C(EffectParams *params);
-extern s32 fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void fn_80148008(Vec3 *position, void *descriptor,
                        EffectParams *params, void (*callback)(void));
 extern void fn_801834F0(void);

@@ -4,7 +4,7 @@ typedef unsigned short u16;
 extern void *fn_80201B8C();
 extern void *fn_80201BC8();
 extern int fn_8011EB04(void *);
-extern void *fn_80201C24(void *);
+extern void* fn_80201C24();
 extern void fn_801261F4(void *);
 extern u16 fn_80157994(void *);
 extern void fn_80124664(void *, int, int, float);
