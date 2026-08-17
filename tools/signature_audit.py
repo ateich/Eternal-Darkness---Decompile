@@ -42,6 +42,11 @@ TYPE_WORDS = {
     "int8_t", "uint8_t", "int16_t", "uint16_t", "int32_t", "uint32_t",
     "int64_t", "uint64_t", "size_t", "ptrdiff_t", "bool", "_Bool",
 }
+AGGREGATE_TYPES: set[str] = set()
+AGGREGATE_TYPEDEF = re.compile(
+    r"\btypedef\s+(?:struct|union)\b[^;{]*\{.*?\}\s*([A-Za-z_]\w*)\s*;",
+    re.DOTALL,
+)
 
 
 @dataclass(frozen=True)
@@ -69,9 +74,12 @@ class Declaration:
 
     @property
     def abi_shape(self) -> tuple[str, tuple[str, ...], bool, bool]:
+        parameter_shapes = tuple(parameter_register_shape(p) for p in self.parameters)
+        if is_aggregate(self.return_type):
+            parameter_shapes = ("GPR:1(hidden-result)",) + parameter_shapes
         return (
             self.return_shape,
-            tuple(parameter_register_shape(p) for p in self.parameters),
+            parameter_shapes,
             self.variadic,
             self.unspecified_parameters,
         )
@@ -149,9 +157,14 @@ def return_register_shape(type_name: str) -> str:
         return "FPR:f1"
     if base in INT64_TYPES:
         return "GPR:r3-r4"
-    if base.startswith(("struct ", "union ")):
-        return "aggregate/hidden-result"
+    if is_aggregate(type_name):
+        return "none"
     return "GPR:r3"
+
+
+def is_aggregate(type_name: str) -> bool:
+    base = base_type(type_name)
+    return base.startswith(("struct ", "union ")) or base in AGGREGATE_TYPES
 
 
 def parameter_register_shape(type_name: str) -> str:
@@ -211,7 +224,11 @@ def declarations_in(path: Path, source_root: Path) -> Iterable[Declaration]:
 
 def audit(source_root: Path) -> dict[str, object]:
     grouped: dict[str, list[Declaration]] = defaultdict(list)
-    for path in sorted(source_root.rglob("*.c")):
+    paths = sorted(source_root.rglob("*.c"))
+    AGGREGATE_TYPES.clear()
+    for path in paths:
+        AGGREGATE_TYPES.update(AGGREGATE_TYPEDEF.findall(path.read_text(encoding="utf-8")))
+    for path in paths:
         for declaration in declarations_in(path, source_root):
             grouped[declaration.symbol].append(declaration)
 

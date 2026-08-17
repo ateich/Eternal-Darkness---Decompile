@@ -11,13 +11,13 @@ extern void *fn_80201B94(void *);
 extern void fn_80201B5C(void *);
 extern u32 fn_80201CDC(void *);
 extern unsigned long long fn_8020123C();
-extern void fn_80201C24(void *);
+extern void *fn_80201C24(void *);
 extern void fn_80201E50(void *, u32);
 extern void fn_8001D9FC(int);
 extern void fn_801EFE84(int);
 extern void fn_802020B4(void *, int);
 extern void fn_80201ADC(void);
-extern void fn_80201B3C(void);
+extern void *fn_80201B3C(void);
 
 void *fn_800E0708(void *object, u16 value, u32 flags)
 {

@@ -1,12 +1,12 @@
 extern int lbl_803003C8[];
 extern unsigned int* lbl_8064C4E0;
-extern void fn_80201B44(void);
+extern int fn_80201B44(void);
 extern void* fn_80201814(void);
 extern unsigned int fn_8020216C(void);
 extern void* fn_80201C2C(void*);
 extern void* fn_802051A4(void*);
 extern void* fn_80205134(void*);
-extern void fn_80201C24(void*);
+extern void* fn_80201C24(void*);
 extern int fn_8015821C(void);
 extern int fn_801E79FC(unsigned int*, int);
 

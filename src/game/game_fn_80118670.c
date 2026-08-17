@@ -1,5 +1,5 @@
 extern void *fn_8015C28C(int);
-extern void fn_80201B44(void);
+extern int fn_80201B44(void);
 extern void *fn_80201814(void);
 extern void *fn_80201BC8(void);
 extern unsigned int lbl_8064D18C;
@@ -15,7 +15,7 @@ extern void *fn_80049304(void *, void *);
 extern void fn_8007D69C(void *);
 extern void *fn_8011FCE4(void);
 extern void fn_8011FC38(void *, void *, int);
-extern void fn_80201C24(void *);
+extern void *fn_80201C24(void *);
 extern int fn_801579EC(void);
 
 void fn_80118670(void)

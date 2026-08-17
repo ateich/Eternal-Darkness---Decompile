@@ -5,7 +5,7 @@ extern int fn_80070CD8(int);
 extern int fn_800460EC(void);
 extern int fn_801A5CE0(void);
 extern int fn_80201B44(void);
-extern void fn_80201814(void);
+extern void* fn_80201814(void);
 extern int fn_80201B9C(void);
 extern void fn_80204844(int, int);
 extern void fn_8006D444(void);
