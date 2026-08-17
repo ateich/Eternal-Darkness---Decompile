@@ -1,5 +1,5 @@
 extern int lbl_8064CA38;
-extern void fn_801A98F4(int, int);
+extern int fn_801A98F4(int, int);
 
 void fn_800B1AB0(void)
 {

@@ -4,7 +4,7 @@ extern int lbl_8064CDC8;
 extern int fn_8017BB60(s16);
 extern int fn_800B9460(void);
 extern int fn_800B7EC0(void);
-extern void fn_801A98F4(int, int);
+extern int fn_801A98F4(int, int);
 extern int fn_800B194C(void);
 extern int fn_800B1944(void);
 extern void fn_800B3064(int);

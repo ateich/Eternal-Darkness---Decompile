@@ -9,7 +9,7 @@ extern void *fn_80201BC8();
 extern int fn_8011EB04(void *);
 extern u32 fn_800FBFB0(void);
 extern void fn_801B05E8(int, int, int, int, int, int, int, int);
-extern void fn_801A98F4(int, int);
+extern int fn_801A98F4(int, int);
 
 void fn_800DE4D8(void *object, int alternate)
 {

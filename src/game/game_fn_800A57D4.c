@@ -10,7 +10,7 @@ extern void* fn_8015C910(void);
 extern int fn_800460EC(void);
 extern int fn_8006D4DC(int);
 extern void* fn_80201ADC(void);
-extern void fn_80038308(void*, int, s16*);
+extern int fn_80038308(void*, int, s16*);
 extern void fn_800389E0(void*, int, s16, int);
 extern void fn_80036C40(void*, int, s16);
 extern unsigned long long fn_8020123C();

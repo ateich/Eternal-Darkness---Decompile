@@ -5,7 +5,7 @@ extern u32 lbl_8064D5A8;
 extern double lbl_8064F158;
 extern float lbl_8064F1A8;
 
-extern void fn_80038308(void *, int, s16 *);
+extern int fn_80038308(void *, int, s16 *);
 extern void fn_80038464(void *, int, s16 *);
 extern void fn_80036C40(void *, int, s16);
 

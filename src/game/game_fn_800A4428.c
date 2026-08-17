@@ -4,7 +4,7 @@ extern float lbl_8064EE70;
 
 extern int fn_80201B54();
 extern void *fn_80201B8C();
-extern void fn_80038308(void*, int, s16*);
+extern int fn_80038308(void*, int, s16*);
 extern void fn_80038464(void*, int, s16*);
 
 int fn_800A4428(void* object, int value)

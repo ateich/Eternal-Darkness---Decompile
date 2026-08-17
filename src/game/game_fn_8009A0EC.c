@@ -6,7 +6,7 @@ extern void fn_80128754(void*, int);
 extern void fn_8011FA8C(void*, int, int);
 extern int fn_80201EB8();
 extern void *fn_801294DC(void *, int, int, int);
-extern void fn_80128EAC(void*);
+extern int fn_80128EAC(void*);
 extern int fn_8012A1BC(void*, int);
 extern void fn_801289A0(void*);
 extern void fn_80129FD0(void*, int, int);

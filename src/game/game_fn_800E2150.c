@@ -28,7 +28,7 @@ extern void fn_80127DF8(void *, int, Matrix34 *);
 extern void fn_8012B690(void *, Vec3 *, Vec3 *);
 extern void fn_800CC140(void *, int, int, int, int);
 extern void fn_80204FDC(void *);
-extern void fn_801A98F4(int, int);
+extern int fn_801A98F4(int, int);
 extern int fn_8011FCB0(void *);
 extern void fn_801568C8(void *, void *, void *, void *);
 extern void fn_80156904(void *, int);

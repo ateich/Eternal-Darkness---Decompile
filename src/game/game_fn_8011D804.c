@@ -7,7 +7,7 @@ extern unsigned char lbl_8064B9B8;
 extern int fn_800B193C(void);
 extern void fn_800B2AE8(void);
 extern void fn_80144C40(void);
-extern void fn_801A98F4(int, int);
+extern int fn_801A98F4(int, int);
 extern int fn_801E8D34(int);
 
 void fn_8011D804(void)

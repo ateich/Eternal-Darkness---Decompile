@@ -15,7 +15,7 @@ extern int fn_80201B5C(void*);
 extern void *fn_80201B8C();
 extern void *fn_80201BC8();
 extern void fn_80066754(void*, void*, void*);
-extern void fn_80128EAC(void*);
+extern int fn_80128EAC(void*);
 
 void fn_8008EFA8(void* object, void* event, void* data)
 {

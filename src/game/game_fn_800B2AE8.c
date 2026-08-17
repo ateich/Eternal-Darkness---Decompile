@@ -8,7 +8,7 @@ extern int fn_800B7EC0(void);
 extern int fn_800B84C8(void);
 extern int fn_800B8F38(void);
 extern u8 fn_800B8F94(void);
-extern void fn_801A98F4(int, int);
+extern int fn_801A98F4(int, int);
 extern int fn_800B194C(void);
 extern void fn_800B3064(int);
 extern void fn_800B3178(int, int);

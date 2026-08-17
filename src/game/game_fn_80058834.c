@@ -20,7 +20,7 @@ extern void fn_8011F114();
 extern void fn_80130434(void *, s32);
 extern void fn_801301B0(void *, u32, u32);
 extern void *fn_80201B9C();
-extern void fn_80204844(void *, s32);
+extern void* fn_80204844(void *, s32);
 extern void *fn_8006D444(void);
 extern s32 fn_8006D344(void *, s32, s32);
 extern s32 fn_80088528(void *, Vec3 *);

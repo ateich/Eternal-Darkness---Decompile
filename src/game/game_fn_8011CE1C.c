@@ -13,7 +13,7 @@ extern void fn_8011C830(int);
 extern void fn_8011CD98(void);
 extern void fn_8011CDD4(void);
 extern void fn_80144C40(void);
-extern void fn_801A98F4(int, int);
+extern int fn_801A98F4(int, int);
 extern void fn_801E8B24(int, int, int);
 
 void fn_8011CE1C(void)

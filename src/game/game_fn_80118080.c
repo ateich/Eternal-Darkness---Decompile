@@ -1,4 +1,4 @@
-extern void fn_801A98F4(int, int);
+extern int fn_801A98F4(int, int);
 
 void fn_80118080(void)
 {

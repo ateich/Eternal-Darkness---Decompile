@@ -33,7 +33,7 @@ extern float fn_8012B750(void*);
 extern void fn_8017A12C(float*, float, float);
 extern int fn_800938E4(void*, void*, int);
 extern int fn_8012AFC4(void*);
-extern void fn_80128E30(void*);
+extern void* fn_80128E30(void*);
 extern void fn_80128C3C(float);
 extern void fn_80129928(void*, Vec3_80093F6C*);
 extern void fn_8012976C(float, void*, int, int, Vec3_80093F6C*);

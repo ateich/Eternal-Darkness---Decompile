@@ -1,6 +1,6 @@
 extern void *fn_80201BC8();
 extern void *fn_80201B8C();
-extern void fn_80038308(void *, int, void *);
+extern int fn_80038308(void *, int, void *);
 extern void *memset(void *, int, unsigned int);
 extern void *memcpy(void *, const void *, unsigned int);
 

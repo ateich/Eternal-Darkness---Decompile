@@ -13,7 +13,7 @@ typedef struct Object {
 extern int fn_8006D3E4(int mask, int value);
 extern Object* fn_8006D444(void);
 extern void *fn_80201B9C();
-extern void fn_80204844(void* object, int value);
+extern void* fn_80204844(void* object, int value);
 
 int fn_800522A4(void)
 {
