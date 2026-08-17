@@ -7,7 +7,7 @@ extern s32 fn_80200C28();
 extern int fn_80200C38();
 extern unsigned long long fn_8020123C();
 extern void fn_801A7228(s32 value);
-extern int fn_801E8328(s32 kind, s32 object);
+extern int fn_801E8328();
 extern void fn_80201D34(s32 object, s32 value);
 extern void fn_80201D1C(s32 object, s32 value);
 

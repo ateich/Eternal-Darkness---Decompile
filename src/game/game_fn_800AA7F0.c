@@ -22,7 +22,7 @@ extern float lbl_8064EF78;
 extern void fn_8014CBC0(Effect*);
 extern int fn_800AA6F4(void*);
 extern void fn_801FE8DC(int*, void*, float, float, float);
-extern int fn_801E8328(int, Effect*);
+extern int fn_801E8328();
 
 void fn_800AA7F0(Effect* effect, Vec3i* position, int* value, int kind,
                  int flag, int owner)

@@ -30,7 +30,7 @@ extern void fn_80184990(void);
 extern void fn_80184740(void*);
 extern int fn_801E79FC(void*, int);
 extern void fn_80149B38(void*);
-extern int fn_801E8328(int, void*);
+extern int fn_801E8328();
 extern u32 lbl_8064EBA0;
 extern void* lbl_8064C4E0;
 

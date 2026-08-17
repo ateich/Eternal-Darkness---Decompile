@@ -5,7 +5,7 @@ typedef signed int s32;
 typedef unsigned int u32;
 
 extern u8 lbl_802FC5BC[];
-extern s32 fn_80201B94(s32 value);
+extern void* fn_80201B94();
 extern s16 fn_80201C8C(s32 value);
 
 s32 fn_80066E78(u32 flags, s16 divisor, u8 kind, s32 value,
@@ -15,7 +15,7 @@ s32 fn_80066E78(u32 flags, s16 divisor, u8 kind, s32 value,
     s16 scaled;
     s16 base;
 
-    base = fn_80201C8C(fn_80201B94(value));
+    base = fn_80201C8C((s32)fn_80201B94(value));
     scaled = divisor != 0 ? base / divisor : 0;
     if (flags & 1) {
         switch (kind) {

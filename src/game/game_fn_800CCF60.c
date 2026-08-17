@@ -38,7 +38,7 @@ extern void *fn_80037AF4(int);
 extern void *fn_80201B8C();
 extern int fn_80201B54();
 extern void fn_802015A4(void *);
-extern int fn_801E8328(int, void *);
+extern int fn_801E8328();
 
 #pragma use_lmw_stmw on
 void *fn_800CCF60(void *owner, int first, int second, void *related,

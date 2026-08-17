@@ -13,7 +13,7 @@ extern int fn_80201B54();
 extern int fn_80200C20(void *);
 extern void *fn_80201BC8();
 extern void *fn_80201B8C();
-extern int fn_80201B94(void *);
+extern void* fn_80201B94();
 extern void fn_8011F114();
 extern int fn_80201B44();
 extern void fn_80201DD8(int, int);
@@ -37,7 +37,7 @@ int fn_800D0B74(void *object, int alternate, void *event, int value)
     int event_value = fn_80200C20(event);
     void *resource = fn_80201BC8(object);
     ActorState *state = ((ActorState *)fn_80201B8C(object));
-    int mode = fn_80201B94(object);
+    int mode = (int)fn_80201B94(object);
     int object_id = fn_80201B54(object);
     float position[3];
     int active = fn_80201B44();

@@ -9,7 +9,7 @@ typedef struct Actor {
 
 extern s32 fn_80036D38(s32 context);
 extern int fn_80201B54();
-extern void *fn_80201B94(s32 context);
+extern void* fn_80201B94();
 extern void fn_80201DD8(void *object, s32 value);
 
 void fn_80067650(s32 context)

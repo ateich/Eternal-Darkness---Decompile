@@ -13,7 +13,7 @@ extern void fn_801A74A0(void*, void*);
 extern void fn_801A74A8(void*, int);
 extern unsigned long long fn_8020123C();
 extern void fn_801A7228(void*);
-extern void* fn_80201B94(void*);
+extern void* fn_80201B94();
 extern void fn_80128B10(void*, int);
 extern int fn_801290D0(void*);
 extern void fn_80128F74(void*, int);

@@ -18,7 +18,7 @@ extern float lbl_8064E07C;
 extern int fn_80200C10(void *);
 extern int fn_80201B54();
 extern void *fn_80201BC8();
-extern void* fn_80201B94(void*);
+extern void* fn_80201B94();
 extern u32 fn_80201CCC(void*);
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);

@@ -13,8 +13,8 @@ extern void fn_801E8B6C(unsigned int, int);
 extern void fn_801E8B24(unsigned int, int, int);
 extern void fn_80144C40(void);
 extern int fn_8010F8B0(int);
-extern int fn_80201B44(void);
-extern void* fn_80201814(void);
+extern int fn_80201B44();
+extern void* fn_80201814();
 extern unsigned int fn_8020216C(void);
 extern int fn_801E7B24(unsigned int*, int, int);
 

@@ -14,7 +14,7 @@ extern char lbl_80331748[];
 extern int fn_80200C10(void *);
 extern void *fn_80201BC8();
 extern void *fn_80201B8C();
-extern void *fn_80201B94(void *context);
+extern void* fn_80201B94();
 extern void fn_80130434(void *object, s32 value);
 extern void fn_801301B0(void *object, s32 set, s32 clear);
 extern u32 fn_801A74C0(void *object);

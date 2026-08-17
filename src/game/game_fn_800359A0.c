@@ -32,7 +32,7 @@ extern s32 lbl_8064E208;
 extern double lbl_8064E210;
 extern int fn_80201B54();
 extern void *fn_80201BC8();
-extern void* fn_80201B94(void*);
+extern void* fn_80201B94();
 extern State* fn_80036D38(void*);
 extern void fn_80201E78(void*, void*);
 extern void *fn_80201B8C();

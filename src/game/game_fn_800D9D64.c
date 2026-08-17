@@ -14,7 +14,7 @@ typedef struct Entry {
 
 extern Entry lbl_80325850[];
 extern void *fn_80201B8C();
-extern void *fn_80201B94(void *);
+extern void* fn_80201B94();
 extern int fn_80201C48(void *);
 extern int fn_80193860(void *);
 extern void fn_801938D8(void *, int);

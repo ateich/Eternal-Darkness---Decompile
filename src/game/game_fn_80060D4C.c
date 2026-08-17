@@ -18,7 +18,7 @@ typedef struct HandlerData {
     HandlerState *state;
 } HandlerData;
 extern void *fn_80201B8C();
-extern void *fn_80201B94(void *);
+extern void* fn_80201B94();
 extern s32 fn_80201C48(void *);
 extern int fn_80201B54();
 extern void fn_80060C28(s32, void *, HandlerData *);

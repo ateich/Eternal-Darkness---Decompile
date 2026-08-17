@@ -21,7 +21,7 @@ typedef struct ObjectInfo {
 } ObjectInfo;
 
 extern void *fn_80201B8C();
-extern void* fn_80201B94(void*);
+extern void* fn_80201B94();
 extern int fn_80201B54();
 extern void *fn_80201BC8();
 extern void* fn_80201C48(void*);

@@ -1,4 +1,4 @@
-extern void *fn_80201B94(void);
+extern void* fn_80201B94();
 extern int fn_80201C48(void);
 extern void *fn_80201814();
 extern void *fn_80201BC8();

@@ -1,7 +1,7 @@
 extern int lbl_803003C8[];
 extern unsigned int* lbl_8064C4E0;
-extern int fn_80201B44(void);
-extern void* fn_80201814(void);
+extern int fn_80201B44();
+extern void* fn_80201814();
 extern unsigned int fn_8020216C(void);
 extern void* fn_80201C2C(void*);
 extern void* fn_802051A4(void*);

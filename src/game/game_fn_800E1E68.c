@@ -7,14 +7,14 @@ typedef struct EventData {
     void *object;
 } EventData;
 
-extern int fn_80200C10(EventData *);
+extern int fn_80200C10(void*);
 extern int fn_80201B54();
 extern void *fn_80201BC8();
-extern void *fn_80201B94(void *);
+extern void* fn_80201B94();
 extern void *fn_80201B8C();
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);
-extern int fn_801E8328(int, void *);
+extern int fn_801E8328();
 extern void fn_80201D34(void *, int);
 extern void fn_80201D1C(void *, int);
 extern unsigned long long fn_8020123C();

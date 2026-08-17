@@ -5,7 +5,7 @@ typedef struct ActorState { u8 pad[0x286]; u8 count; } ActorState;
 extern float lbl_8064F368;
 extern float lbl_8064F394;
 extern float lbl_8064F398;
-extern void *fn_80201B94(void *);
+extern void* fn_80201B94();
 extern ActorState *fn_800A1D28(void *);
 extern void fn_80129108(void *, int, int);
 extern void fn_801296F8(void *, int);

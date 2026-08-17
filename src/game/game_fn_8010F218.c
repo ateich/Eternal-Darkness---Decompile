@@ -19,7 +19,7 @@ typedef struct Entry {
 extern void* lbl_80331720[6];
 extern Entry lbl_80330E88[];
 extern int fn_801E8D24(void*);
-extern void fn_8011F114(Vec3*, void*);
+extern void fn_8011F114();
 extern void fn_8012CEA4(void*, int, Vec4*);
 extern void fn_801F6B6C(Vec3*, ScreenPosition*, int, int);
 

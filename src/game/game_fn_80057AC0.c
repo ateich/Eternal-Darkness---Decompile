@@ -12,7 +12,7 @@ extern s32 lbl_8064C874;
 extern char lbl_80331748[];
 extern int fn_80200C10(void *);
 extern void *fn_80201BC8();
-extern void *fn_80201B94(void *context);
+extern void* fn_80201B94();
 extern void *fn_80201B8C();
 extern void fn_801A9FA4(void *object, s32 value);
 extern void fn_8012B344(void *);

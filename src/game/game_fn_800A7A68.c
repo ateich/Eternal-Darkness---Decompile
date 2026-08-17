@@ -5,7 +5,7 @@ typedef struct EntryList { int count; Entry* entries; } EntryList;
 typedef struct State { u8 pad0[0x90]; void* field90; } State;
 
 extern void *fn_80201B8C();
-extern void* fn_80201B94(void*);
+extern void* fn_80201B94();
 extern void fn_8011F114();
 extern void fn_80128EE4(void*);
 extern void* fn_80201C48(void*);

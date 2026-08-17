@@ -42,7 +42,7 @@ typedef struct EffectD6E4 {
     u8 padAC[0x20];
 } EffectD6E4;
 
-extern void* fn_80201B94(void*);
+extern void* fn_80201B94();
 extern int fn_80201C48(void*);
 extern int fn_80201B54();
 extern void *fn_80201814();

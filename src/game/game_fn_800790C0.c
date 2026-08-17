@@ -4,7 +4,7 @@ typedef struct Vec3 {
 
 typedef unsigned char u8;
 
-extern void *fn_80201B94(void *object);
+extern void* fn_80201B94();
 extern void *fn_80201B8C();
 extern int fn_80201B54();
 extern void fn_8011F114();

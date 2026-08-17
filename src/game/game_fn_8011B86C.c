@@ -18,13 +18,13 @@ extern void fn_801ED3F4(int);
 extern void fn_801A8D38(int);
 extern void fn_801A9250(short, int, int);
 extern void fn_801A91D4(short, int, int);
-extern int fn_80201B9C(void);
+extern void* fn_80201B9C();
 extern int fn_80204844(int, int);
 extern void fn_801EFE84(int);
 extern void fn_800073DC(int);
 extern void fn_801EB194(int);
 extern void fn_801187F4(void);
-extern int fn_80201B54(int);
+extern int fn_80201B54();
 extern void fn_8020104C(int, int, int, int, float);
 extern void fn_801AD404(int, int, int);
 extern void fn_801AD490(void);
@@ -60,7 +60,7 @@ void fn_8011B86C(void)
         fn_801A91D4((short)lbl_8064CE30, 255, 0);
     }
     if (lbl_8064D5A8 == lbl_8064CE34) {
-        handle = fn_80204844(fn_80201B9C(), 32);
+        handle = fn_80204844((int)fn_80201B9C(), 32);
         fn_801EFE84(1);
         fn_800073DC(2);
         changed = 1;

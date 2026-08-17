@@ -18,7 +18,7 @@ extern u32 lbl_8064C820;
 extern int lbl_8064C834;
 
 extern void fn_801F683C(TransformData* value);
-extern void* fn_80201B94(void* object);
+extern void* fn_80201B94();
 extern void *fn_80201BC8();
 extern int fn_80201B54();
 extern int fn_80201B64(void* object);

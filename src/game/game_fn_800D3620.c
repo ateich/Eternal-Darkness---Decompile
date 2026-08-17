@@ -2,7 +2,7 @@ typedef unsigned int u32;
 typedef struct Vec3 { u32 x, y, z; } Vec3;
 
 extern const Vec3 lbl_80248AE4;
-extern void *fn_80201B94(void *);
+extern void* fn_80201B94();
 extern int fn_80201C48(void *);
 extern int fn_80201B54();
 extern void fn_80201DD8(void *, int);

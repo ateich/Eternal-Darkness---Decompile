@@ -11,7 +11,7 @@ typedef struct OwnerData {
 
 extern s32 fn_800FBFB0(void);
 extern void *fn_80201B8C();
-extern void* fn_80201B94(void*);
+extern void* fn_80201B94();
 extern void *fn_80201BC8();
 extern void fn_800360B0(void*, void*);
 extern void* fn_80201C48(void*);

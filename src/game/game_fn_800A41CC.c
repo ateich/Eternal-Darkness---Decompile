@@ -25,7 +25,7 @@ extern void fn_80201D44(void*, int);
 extern void fn_802015A4(void*);
 extern void fn_80201D34(void*, int);
 extern void fn_80201D1C(void*, int);
-extern int fn_801E8328(int, void*);
+extern int fn_801E8328();
 extern int fn_800A4368(Object800A41CC*, void*);
 
 void fn_800A41CC(Object800A41CC* object, void* context)

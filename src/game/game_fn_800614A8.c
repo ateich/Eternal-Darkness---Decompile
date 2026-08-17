@@ -85,7 +85,7 @@ extern M2C_UNK fn_80201350(s32, M2C_UNK);                  /* extern */
 extern void *fn_80201814();                                /* extern */
 extern int fn_80201B54();                                 /* extern */
 extern void *fn_80201B8C();                                /* extern */
-extern s32 fn_80201B94(s32);                               /* extern */
+extern void* fn_80201B94();                               /* extern */
 extern void *fn_80201B9C();                           /* extern */
 extern void *fn_80201BC8();                               /* extern */
 extern s32 fn_80201C48(s32);                               /* extern */
@@ -260,7 +260,7 @@ s32 fn_800614A8(s32 arg0, s32 arg1, s32 arg2, s32 *arg3) {
     temp_r21 = fn_80201B8C(arg0);
     temp_r27 = M2C_FIELD(temp_r21, void **, 0x8C);
     temp_r28 = M2C_FIELD(temp_r21, void **, 8);
-    temp_r17 = fn_80201B94(arg0);
+    temp_r17 = (s32)fn_80201B94(arg0);
     temp_r26 = fn_80201B54(arg0);
     fn_8011F114(&sp8C, (void *)temp_r31);
     temp_r4 = M2C_FIELD(temp_r21, void **, 0x8C);

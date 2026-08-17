@@ -43,7 +43,7 @@ typedef enum Result {
 
 extern const float lbl_8064E5DC;
 extern void *fn_80201B8C();
-extern void *fn_80201B94(void *);
+extern void* fn_80201B94();
 extern void *fn_80201C48(void *);
 extern int fn_80201B54();
 extern void *fn_80201814();

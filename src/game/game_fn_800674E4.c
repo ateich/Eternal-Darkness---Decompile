@@ -5,7 +5,7 @@ typedef unsigned int u32;
 extern s32 lbl_8064D18C;
 extern s32 fn_80036D38();
 extern int fn_80201B54();
-extern s32 fn_80201B94();
+extern void* fn_80201B94();
 extern s32 fn_80200C20();
 extern int fn_80200C38();
 extern void *fn_80201B8C();
@@ -26,7 +26,7 @@ void fn_800674E4(s32 context, s32 event)
 {
     s32 actor = fn_80036D38(context);
     s32 owner = fn_80201B54(context);
-    s32 owner_object = fn_80201B94(context);
+    s32 owner_object = (s32)fn_80201B94(context);
     s32 event_id = fn_80200C20(event);
     s32 state;
     s32 no_target = fn_80200C38(event) == -1;

@@ -2,7 +2,7 @@ typedef struct Vec3 { float x, y, z; } Vec3;
 typedef unsigned char u8;
 
 extern void *fn_80201B8C();
-extern int fn_80201B94(void *context);
+extern void* fn_80201B94();
 extern void fn_8011F114();
 extern void fn_80128EE4(void *object);
 extern int fn_80201C48(int value);
@@ -36,7 +36,7 @@ extern void fn_80201D14(void *, int);
 int fn_8007930C(void *context, void *object)
 {
     u8 *state = fn_80201B8C(context);
-    int owner = fn_80201B94(context);
+    int owner = (int)fn_80201B94(context);
     Vec3 position;
     Vec3 copy;
     int result = 0;

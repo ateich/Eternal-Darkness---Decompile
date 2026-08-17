@@ -26,7 +26,7 @@ typedef struct QueryResult80092D90 {
 
 extern float lbl_8064EC78;
 extern void *fn_80201B8C();
-extern void* fn_80201B94(void*);
+extern void* fn_80201B94();
 extern void fn_80094DD0(void*, void*, void*);
 extern void fn_800931D0(void*, void*, State80092D90*);
 extern int fn_80092C30(void*, void*);

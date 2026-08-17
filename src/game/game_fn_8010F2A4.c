@@ -1,13 +1,13 @@
 extern unsigned short lbl_8064CCAC;
 extern unsigned char lbl_80332140[];
 
-extern void* fn_80201B9C(void);
+extern void* fn_80201B9C();
 extern void* fn_80204844(void*, int);
 extern int fn_8006D444(void);
 extern void fn_8010BFF0(void);
 extern void fn_8010AD7C(void);
-extern unsigned int fn_80201B54(void*);
-extern unsigned long long fn_8020123C(int, int, unsigned int, int);
+extern int fn_80201B54();
+extern unsigned long long fn_8020123C();
 extern void fn_8014C23C(int, int, int);
 extern void fn_80046398(int, int, int, int);
 

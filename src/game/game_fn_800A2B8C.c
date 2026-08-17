@@ -67,7 +67,7 @@ extern void fn_801D38BC(void*, u32*, s16*);
 extern void fn_80185A44(void);
 extern void fn_80201E78(Vec3*, void*);
 extern void* memcpy(void*, const void*, unsigned int);
-extern int fn_801E8328(int, Action800A2B8C*);
+extern int fn_801E8328();
 
 void fn_800A2B8C(void* object, u16 value)
 {

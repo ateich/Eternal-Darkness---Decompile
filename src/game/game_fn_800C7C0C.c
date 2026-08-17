@@ -13,7 +13,7 @@ typedef struct Locals {
 
 extern void *fn_80201BC8();
 extern int fn_8011F598(void *, int, int, int, void *, int);
-extern void *fn_80201B94(void *);
+extern void* fn_80201B94();
 extern void *fn_80201C48(void *);
 extern void *fn_80201814();
 extern int fn_8011EB04(void *);
