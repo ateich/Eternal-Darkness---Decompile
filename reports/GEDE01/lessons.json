@@ -2,10 +2,10 @@
   "schema_version": 2,
   "scope": "Distinct MWCC code-generation behaviors documented in reports/GEDE01/progress.json open_items and docs/matching.md",
   "source_snapshot": {
-    "repository_revision": "a589b6a223e3401698acabd35044f37b23b6118b",
-    "next_gate": "0x800FC124",
+    "repository_revision": "62eba97aae16e5f5ddbc90e2e699355dde6d3e31",
+    "next_gate": "0x8011FCF4",
     "reports/GEDE01/progress.json": {
-      "sha256": "f64b56b1638029a597b2b8fb56f3befd0627889fb014365e691472161535a342",
+      "sha256": "0b9775b5d73b1fc79522368dd79049519adc5bf841188054c62ff08f6f0590f9",
       "scope": "open_items"
     },
     "docs/matching.md": {
@@ -1020,6 +1020,153 @@
       "precise_divergence": "Direct long-long shift expressions recurse through the same runtime helper being reconstructed, while word-expanded C avoids recursion but does not reproduce the helper's special register allocation.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entry for __unregister_fragment and __register_fragment"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_800FD018", "fn_800FD1E8", "fn_80106AC0", "fn_80109424", "fn_801098C0", "fn_80112754", "fn_80113E48", "fn_80117EF0", "fn_80118370", "fn_80118670", "fn_80119DB4", "fn_8011C0F0", "fn_8011C6BC"],
+      "precise_divergence": "Declaration order, saved-value retention, live-range coalescing, indexed-address formation, or call shape assigns equivalent local values to different volatile or callee-saved registers from retail; documented examples include r5/r6, r8/r10, r28-r30, and a materialized r6 zero instead of reuse of r3.",
+      "workaround": "Preserve fn_800FD1E8's declaration order; no workaround is recorded for the remaining functions.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800FD198 through strlen, fn_8010278C through fn_80106A8C, fn_80109574 through fn_80109AD4, fn_801128AC through fn_80112928, fn_80113D50 through fn_80113F54, fn_80114048 through fn_80117EC8, fn_80117F30 through fn_80118528, fn_8011857C through fn_80119C2C, fn_80119E3C through fn_80119F6C, fn_8011C028 through fn_8011C468, and fn_8011C4D8 through fn_8011C830"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80109574", "fn_801132B8", "fn_801139D4", "fn_8011D470", "fn_8011EA00", "fn_8011F700"],
+      "precise_divergence": "Expression flattening, declaration order, assignment order, or a post-call reload changes MWCC's volatile or saved-value lifetime and therefore its retail register assignment.",
+      "workaround": "Use the documented flattened expression in fn_80109574, expression grouping in fn_801132B8 and fn_801139D4, reversed first assignments in fn_8011D470, declaration order in fn_8011EA00, and reload the owner after fn_80140E58 in fn_8011F700.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80109574 through fn_80109AD4, fn_801132B8 through fn_80113CF8, fn_8011D36C through fn_8011D5C0, fn_8011E918 through fn_8011EB04, and fn_8011F6A4 through fn_8011F950"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8011CD00"],
+      "precise_divergence": "Declaring the 160-byte lbl_8024EC08 object too narrowly permits small-data lowering instead of retail's full-address materialization.",
+      "workaround": "Declare lbl_8024EC08 at its documented full 160-byte extent.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8011CC20 through fn_8011CFF8"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80111724", "fn_80111750"],
+      "precise_divergence": "Incorrect ownership of lbl_8064CCF4 changes the SDA relocations used by the paired serialization adapters.",
+      "workaround": "Preserve canonical ownership of lbl_8064CCF4.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8010FED4 through fn_80111750"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_800FD350", "fn_801028A8", "fn_80102C6C", "fn_80109CB0", "fn_80109D20", "fn_8010F8B0", "fn_8010F9D8", "fn_8010FB5C", "fn_80118370", "fn_8011C0F0", "fn_8011EAB4"],
+      "precise_divergence": "Initialization point, repeated bit-reader operations, SDA loads across a branch, selection-table arguments, indexed halfword loads, or precomputed call arguments are scheduled differently from retail.",
+      "workaround": "Delay fn_800FD350's count initialization and precompute fn_8011EAB4's arguments; no workaround is recorded for the remaining functions.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800FD198 through strlen, fn_8010278C through fn_80106A8C, fn_80109B24 through fn_80109D90, fn_8010F930, fn_80117F30 through fn_80118528, fn_8011C028 through fn_8011C468, and fn_8011E918 through fn_8011EB04"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fwide", "fn_80109198", "fn_80113D50", "fn_80113F54", "fn_8011FA8C", "fn_8011FAAC", "fn_8011FABC", "fn_8011FAFC", "fn_8011FB24", "fn_8011FB6C"],
+      "precise_divergence": "Source-level bitfield, inequality, grouped-constant, wrapped-mask, and unsigned one-bit-mask spellings control MWCC's selection of retail extrwi/rlwimi, subfic/subi/or, immediate-construction, and rotate-and-mask instruction forms.",
+      "workaround": "Use the documented RuntimeFile byte bitfield, inequality expression, grouped constants, wrapped rlwinm mask, and unsigned one-bit masks.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800FEC70 through fn_80102408, fn_80108BD4 through fn_8010940C, fn_80113D50 through fn_80113F54, and fn_8011F958 through fn_8011FCEC"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8011F244", "fn_8011FA6C", "fn_8011FA7C"],
+      "precise_divergence": "Opaque byte arithmetic does not necessarily select retail's indexed-addressing instructions: typed 28-byte records produce the mulli/add/lhz sequence, while typed pointer arrays produce the indexed pointer loads.",
+      "workaround": "Use the documented typed Record and pointer-array declarations.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8011F244 through fn_8011F574 and fn_8011F958 through fn_8011FCEC"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80109B94", "fn_8011BA1C"],
+      "precise_divergence": "Non-volatile polling state permits MWCC to reorder or reuse readiness loads instead of retaining retail's ordered global-load sequence.",
+      "workaround": "Declare the documented readiness globals volatile.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80109B24 through fn_80109D90 and fn_8011B86C through fn_8011BD20"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8011ECF8", "fn_8011F304"],
+      "precise_divergence": "Equivalent zero initialization can lower as copied zero values, immediate loads, or repeated SDA loads rather than retail's selected zero materialization and reuse.",
+      "workaround": "Use fn_8011F304's documented shared zero temporary; no workaround is recorded for fn_8011ECF8.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8011EB0C through fn_8011ECF8 and fn_8011F244 through fn_8011F574"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_800FD0C8", "fn_80101960", "fn_80109424", "fn_801098C0", "fn_8011C028", "fn_8011C4D8"],
+      "precise_divergence": "Aggregate-copy scheduling, union declaration order, aggregate store ordering, branch-local lifetime, or merging distinct color copies changes MWCC's retail stack slots and load/store sequence.",
+      "workaround": "Reverse fn_80101960's union declaration order, use branch-local color temporaries in fn_8011C028, and preserve six distinct color copies in fn_8011C4D8; no workaround is recorded for the remaining functions.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_800FD198 through strlen, fn_800FEC70 through fn_80102408, fn_80109574 through fn_80109AD4, fn_8011C028 through fn_8011C468, and fn_8011C4D8 through fn_8011C830"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_80109EEC"],
+      "precise_divergence": "Allowing the 32-byte coordinate initializer to remain compiler-local gives it different ownership and address relocations from retail's separately owned lbl_8023A278 object.",
+      "workaround": "Externalize the initializer to retail-owned lbl_8023A278.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80109DBC through fn_8010C1CC"]
+    },
+    {
+      "category": "float-constant-placement",
+      "functions": ["fn_801098C0", "fn_8010F184", "fn_801126E0", "fn_801128E4"],
+      "precise_divergence": "A split translation unit can give signed- or unsigned-integer conversion biases compiler-local identities instead of the retail-owned constant symbols, leaving relocation ownership divergent.",
+      "workaround": "Externalize the documented biases to lbl_8064FE78, lbl_8064FF68, and lbl_8064FF70; no owner is recorded for fn_801098C0.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80109574 through fn_80109AD4, fn_8010F184 through fn_8010F404, fn_80112230 through fn_801126E0, and fn_801128AC through fn_80112928"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_8010278C", "fn_80106A6C", "fn_80106A8C", "fn_801078C0"],
+      "precise_divergence": "Canonical GC/1.3 emits the wrong wrapper frame for the image-codec object cluster, while the object-local GC/1.2.5n compiler island reproduces retail exactly.",
+      "workaround": "Compile the documented image-codec cluster with GC/1.2.5n; return to GC/1.3 for the following queue cluster.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8010278C through fn_80106A8C and fn_801078C0 through fn_80108510"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_8010DA50", "fn_8010F2A4", "fn_8011B74C", "fn_8011F140"],
+      "precise_divergence": "Recovered narrow, 64-bit, or paired-single conversion spelling changes ABI-visible return lowering: the documented cases require a shared extsh epilogue, a retained 64-bit mask before narrowing, or retail-specific long-return and paired-single u16 conversion sequences.",
+      "workaround": "Return fn_8010DA50's integer temporary through an explicit short cast and preserve fn_8011B74C's 64-bit mask before narrowing; no workaround is recorded for fn_8010F2A4 or fn_8011F140.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8010DA50 through fn_8010F180, fn_8010F184 through fn_8010F404, fn_8011A79C through fn_8011B864, and fn_8011F0C0 through fn_8011F220"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_80113CF8"],
+      "precise_divergence": "Unsigned spelling of the per-digit bit selects an unsigned comparison instead of retail cmpwi.",
+      "workaround": "Use the documented signed spelling for the per-digit bit.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_801132B8 through fn_80113CF8"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8011C830"],
+      "precise_divergence": "Precomputing nested getter results changes retail's right-to-left call evaluation and argument setup.",
+      "workaround": "Pass the getter calls directly as nested arguments.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8011C4D8 through fn_8011C830"]
+    },
+    {
+      "category": "jump-table-strategy",
+      "functions": ["fn_8010D2D4"],
+      "precise_divergence": "The recovered state-dependent controller update selects a different sparse-switch lowering from retail and emits four extra bytes.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8010DA50 through fn_8010F180"]
+    },
+    {
+      "category": "jump-table-strategy",
+      "functions": ["fn_801141B8"],
+      "precise_divergence": "Instruction bytes are exact, but MWCC's compiler-local switch table receives the two address relocations that retail directs to separately owned jumptable_8024E0F8.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80114048 through fn_80117EC8"]
+    },
+    {
+      "category": "jump-table-strategy",
+      "functions": ["fn_801096C4", "fn_8011D604", "fn_8011D638", "fn_8011D698", "fn_8011D6DC", "fn_8011D724", "fn_8011D804"],
+      "precise_divergence": "Equivalent loop or guarded conditional spelling does not retain retail's control-flow edges or redundant branch layout.",
+      "workaround": "Spell fn_801096C4's paired probes as a short-circuit loop and use source-level switches for the documented guarded wrappers.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80109574 through fn_80109AD4 and fn_8011D604 through fn_8011DD8C"]
+    },
+    {
+      "category": "inlining",
+      "functions": ["fn_8010242C"],
+      "precise_divergence": "The recovered image-codec loop selects a different MWCC unrolling shape from retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8010278C through fn_80106A8C"]
+    },
+    {
+      "category": "inlining",
+      "functions": ["fn_8011EA00"],
+      "precise_divergence": "MWCC retains a count-driven empty loop instead of optimizing it away.",
+      "workaround": "Keep the documented empty loop with its count-driven bound.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8011E918 through fn_8011EB04"]
     }
   ]
 }
