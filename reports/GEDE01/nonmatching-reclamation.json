@@ -116,52 +116,48 @@
   },
   "current_reaudit": {
     "date": "2026-08-16",
-    "scope": "Every current Object(NonMatching, ...) declaration cross-checked against build/GEDE01/report.json after the game .text frontier advanced through 0x800ED9D8",
-    "nonmatching_declarations_scanned_before_promotion": 334,
-    "nonmatching_declarations_scanned_after_promotion": 332,
+    "scope": "Every current Object(NonMatching, ...) declaration cross-checked against build/GEDE01/report.json after the game .text frontier advanced through 0x80117EF0; rounded unit-level 100.0 scores were then checked at instruction and relocation precision",
+    "nonmatching_declarations_scanned_before_promotion": 376,
+    "nonmatching_declarations_scanned_after_promotion": 376,
     "report_units_unresolved": 0,
     "fuzzy_100_candidates_before_promotion": [
       "game/game_data_80239E10.c",
       "game/game_data_80239E18.c",
       "game/game_fn_800C4E94.c",
-      "game/game_fn_800E9F40.c",
-      "game/game_fn_800E9F84.c"
+      "game/game_TRKNubWelcome.c",
+      "game/game_TRK_main.c",
+      "game/game_fn_801141B8.c"
     ],
-    "promoted": [
-      {
-        "object": "game/game_fn_800E9F40.c",
-        "code_bytes": 68,
-        "functions": 1
-      },
-      {
-        "object": "game/game_fn_800E9F84.c",
-        "code_bytes": 72,
-        "functions": 1
-      }
-    ],
+    "promoted": [],
     "promoted_totals": {
-      "objects": 2,
-      "functions": 2,
-      "code_bytes": 140
+      "objects": 0,
+      "functions": 0,
+      "code_bytes": 0
     },
     "remaining_fuzzy_100_nonmatching": [
       "game/game_data_80239E10.c",
       "game/game_data_80239E18.c",
-      "game/game_fn_800C4E94.c"
+      "game/game_fn_800C4E94.c",
+      "game/game_TRKNubWelcome.c",
+      "game/game_TRK_main.c",
+      "game/game_fn_801141B8.c"
     ],
     "exclusions": {
       "game/game_data_80239E10.c and game/game_data_80239E18.c": "Byte-exact data units retained as NonMatching because linking either split owner breaks the retail TU-local shared string-base ownership boundary.",
-      "game/game_fn_800C4E94.c": "Objdiff fuzzy_match_percent is 100.0, but direct DOL comparison finds two unequal instruction bytes at the cmplw operand-order site; it is not byte-identical and was not promoted."
+      "game/game_fn_800C4E94.c": "The report rounds the unit fuzzy_match_percent to 100.0, but instruction-level objdiff is 99.77778%: the two calls at offsets 0x60 and 0x6C target fn_80157994 and fn_80157948 in the opposite order from retail. It is not byte-identical and was not promoted.",
+      "game/game_TRKNubWelcome.c": "The report rounds the unit fuzzy_match_percent to 100.0, but instruction/relocation-level objdiff is 99.0%: the generated address pair names lbl_80239BC0 while retail names TU-local @62_80239BC0. It fails the relocation-identity gate and was not promoted.",
+      "game/game_TRK_main.c": "The report rounds the unit fuzzy_match_percent to 100.0, but instruction/relocation-level objdiff is 98.82353%: four generated relocations name TRK_mainError while retail names TU-local TRK_mainError_8032A570. It fails the relocation-identity gate and was not promoted.",
+      "game/game_fn_801141B8.c": "The report rounds the unit fuzzy_match_percent to 100.0, but instruction/relocation-level objdiff is 99.84042%: the generated switch relocations name compiler-local @29 while retail names the separately owned jumptable_8024E0F8. It fails the relocation-identity gate and was not promoted."
     },
-    "linked_code_bytes_before": 316260,
-    "linked_code_bytes_after": 316400,
-    "linked_code_bytes_delta": 140,
-    "game_code_linked_bytes_before": 313232,
-    "game_code_linked_bytes_after": 313372,
-    "game_code_linked_bytes_delta": 140,
-    "linked_objects_before": 1845,
-    "linked_objects_after": 1847,
-    "linked_objects_delta": 2,
+    "linked_code_bytes_before": 334412,
+    "linked_code_bytes_after": 334412,
+    "linked_code_bytes_delta": 0,
+    "game_code_linked_bytes_before": 331384,
+    "game_code_linked_bytes_after": 331384,
+    "game_code_linked_bytes_delta": 0,
+    "linked_objects_before": 2051,
+    "linked_objects_after": 2051,
+    "linked_objects_delta": 0,
     "full_build": "passed",
     "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
     "new_functions_matched_this_session": 0
