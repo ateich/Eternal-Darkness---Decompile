@@ -115,18 +115,15 @@
     "new_functions_matched_this_session": 0
   },
   "current_reaudit": {
-    "date": "2026-08-16",
-    "scope": "Every current Object(NonMatching, ...) declaration cross-checked against build/GEDE01/report.json after the game .text frontier advanced through 0x80117EF0; rounded unit-level 100.0 scores were then checked at instruction and relocation precision",
-    "nonmatching_declarations_scanned_before_promotion": 376,
-    "nonmatching_declarations_scanned_after_promotion": 376,
+    "date": "2026-08-17",
+    "scope": "Every current Object(NonMatching, ...) declaration cross-checked against a freshly regenerated build/GEDE01/report.json at the 0x8013B24C game .text frontier; every unit-level fuzzy_match_percent 100.0 candidate was then checked with one-shot objdiff at section, instruction, and relocation precision",
+    "nonmatching_declarations_scanned": 502,
     "report_units_unresolved": 0,
-    "fuzzy_100_candidates_before_promotion": [
-      "game/game_data_80239E10.c",
-      "game/game_data_80239E18.c",
-      "game/game_fn_800C4E94.c",
+    "fuzzy_100_candidates": [
       "game/game_TRKNubWelcome.c",
       "game/game_TRK_main.c",
-      "game/game_fn_801141B8.c"
+      "game/game_data_80239E10.c",
+      "game/game_data_80239E18.c"
     ],
     "promoted": [],
     "promoted_totals": {
@@ -135,31 +132,29 @@
       "code_bytes": 0
     },
     "remaining_fuzzy_100_nonmatching": [
-      "game/game_data_80239E10.c",
-      "game/game_data_80239E18.c",
-      "game/game_fn_800C4E94.c",
       "game/game_TRKNubWelcome.c",
       "game/game_TRK_main.c",
-      "game/game_fn_801141B8.c"
+      "game/game_data_80239E10.c",
+      "game/game_data_80239E18.c"
     ],
     "exclusions": {
-      "game/game_data_80239E10.c and game/game_data_80239E18.c": "Byte-exact data units retained as NonMatching because linking either split owner breaks the retail TU-local shared string-base ownership boundary.",
-      "game/game_fn_800C4E94.c": "The report rounds the unit fuzzy_match_percent to 100.0, but instruction-level objdiff is 99.77778%: the two calls at offsets 0x60 and 0x6C target fn_80157994 and fn_80157948 in the opposite order from retail. It is not byte-identical and was not promoted.",
-      "game/game_TRKNubWelcome.c": "The report rounds the unit fuzzy_match_percent to 100.0, but instruction/relocation-level objdiff is 99.0%: the generated address pair names lbl_80239BC0 while retail names TU-local @62_80239BC0. It fails the relocation-identity gate and was not promoted.",
-      "game/game_TRK_main.c": "The report rounds the unit fuzzy_match_percent to 100.0, but instruction/relocation-level objdiff is 98.82353%: four generated relocations name TRK_mainError while retail names TU-local TRK_mainError_8032A570. It fails the relocation-identity gate and was not promoted.",
-      "game/game_fn_801141B8.c": "The report rounds the unit fuzzy_match_percent to 100.0, but instruction/relocation-level objdiff is 99.84042%: the generated switch relocations name compiler-local @29 while retail names the separately owned jumptable_8024E0F8. It fails the relocation-identity gate and was not promoted."
+      "game/game_TRKNubWelcome.c": "The aggregate report rounds the unit to 100.0, but one-shot objdiff scores .text at 99.0%. Two relocation arguments name retail TU-local @62_80239BC0 on the target side and lbl_80239BC0 on the built side.",
+      "game/game_TRK_main.c": "The aggregate report rounds the unit to 100.0, but one-shot objdiff scores .text at 98.82353%. Four relocation arguments name retail TU-local TRK_mainError_8032A570 on the target side and TRK_mainError on the built side.",
+      "game/game_data_80239E10.c": "The aggregate report's unit-level 100.0 is not an exact-data result: one-shot objdiff scores the section at 0.0% because retail owns 8 bytes in .rodata while the built object emits 10 bytes in .sdata2. Promoting it would also violate the established shared string-base ownership boundary.",
+      "game/game_data_80239E18.c": "The aggregate report's unit-level 100.0 is not an exact-data result: one-shot objdiff scores .rodata at 96.1039% because the built object supplies three trailing zero bytes that are absent from its split target. It remains behind the shared string-base ownership boundary."
     },
-    "linked_code_bytes_before": 334412,
-    "linked_code_bytes_after": 334412,
+    "linked_code_bytes_before": 374488,
+    "linked_code_bytes_after": 374488,
     "linked_code_bytes_delta": 0,
-    "game_code_linked_bytes_before": 331384,
-    "game_code_linked_bytes_after": 331384,
+    "game_code_linked_bytes_before": 371460,
+    "game_code_linked_bytes_after": 371460,
     "game_code_linked_bytes_delta": 0,
-    "linked_objects_before": 2051,
-    "linked_objects_after": 2051,
+    "linked_objects_before": 2521,
+    "linked_objects_after": 2521,
     "linked_objects_delta": 0,
     "full_build": "passed",
     "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "expected_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
     "new_functions_matched_this_session": 0
   }
 }
