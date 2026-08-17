@@ -2,10 +2,10 @@
   "schema_version": 2,
   "scope": "Distinct MWCC code-generation behaviors documented in reports/GEDE01/progress.json open_items and docs/matching.md",
   "source_snapshot": {
-    "repository_revision": "62eba97aae16e5f5ddbc90e2e699355dde6d3e31",
-    "next_gate": "0x8011FCF4",
+    "repository_revision": "5bf922df88e1dba67725ea41d0cc355099a6191c",
+    "next_gate": "0x80131460",
     "reports/GEDE01/progress.json": {
-      "sha256": "0b9775b5d73b1fc79522368dd79049519adc5bf841188054c62ff08f6f0590f9",
+      "sha256": "3c0f60e99110c10285066bb0dd4913c92a48a06b0f7339e11b8477a1afb7db27",
       "scope": "open_items"
     },
     "docs/matching.md": {
@@ -1167,6 +1167,111 @@
       "precise_divergence": "MWCC retains a count-driven empty loop instead of optimizing it away.",
       "workaround": "Keep the documented empty loop with its count-driven bound.",
       "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8011E918 through fn_8011EB04"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8011FCF4", "fn_80120A30", "fn_8012A13C", "fn_8012B018", "fn_8012F58C", "fn_8012FBF4"],
+      "precise_divergence": "Equivalent pointer walks or opaque byte arithmetic do not necessarily select retail's indexed loads/stores, pointer-advance point, or repeated count-load schedule.",
+      "workaround": "Use the documented array-index, containing-table, struct-field, and explicit pointer-advance spellings; for fn_8012A13C, re-read the halfword count at each decision and advance only after the null test.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8011FCF4 through fn_8011FF38, fn_801209DC through fn_80120BD0, fn_8012A100 through fn_8012A24C, fn_8012ADA4 through fn_8012B018, fn_8012F58C through fn_8012F700, and fn_8012FA54 through fn_8012FBF4"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8011FD64", "fn_8012692C", "fn_80129BE4", "fn_80130670"],
+      "precise_divergence": "Semantically equivalent boolean, negation, or packed-mask expressions can select different branch and rotate-and-mask instruction forms from retail.",
+      "workaround": "Use direct unsigned masks, the documented unsigned two's-complement spelling, and the recorded signed-word or value & ~0x8000 mask expression.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8011FCF4 through fn_8011FF38, fn_8012671C through fn_80126A00, fn_80129AF4 through fn_80129D54, and fn_8013009C through fn_80130718"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_8011FF40"],
+      "precise_divergence": "Passing the recovered Color4 indirectly does not reproduce retail's outgoing stack copy.",
+      "workaround": "Pass Color4 by value and retain the fixed-size volatile three-byte color arrays.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8011FF40 through fn_80120B4C"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_801209DC", "fn_80120AD0", "fn_80124128", "fn_80127128", "fn_8012ABEC", "fn_8012D9D4", "fn_8012F58C", "fn_801300F0", "fn_8013057C", "fn_80131388", "fn_80131408"],
+      "precise_divergence": "Declaration, initialization, assignment, or expression order changes MWCC's branch shape, aggregate-copy order, load/reload schedule, or operand allocation relative to retail.",
+      "workaround": "Preserve the exact declaration and initialization points, named temporaries, pointer-addition operand order, and aggregate spellings recorded in the cited open_items.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries from fn_801209DC through fn_80131458 for every listed function"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_801208CC", "fn_80120B58", "fn_80122638", "fn_8012356C", "fn_801235E4", "fn_80124664", "fn_80124750", "fn_801247F8", "fn_80125DE0", "fn_80126084", "fn_80126A00", "fn_80126E80", "fn_80126FE0", "fn_80127178", "fn_801274F4", "fn_80129C2C", "fn_8012AC74", "fn_8012B750", "fn_8012CCF0", "fn_8012CDF0", "fn_8012CF08", "fn_8012F700", "fn_8012FEC8", "fn_8012FF34", "fn_801301B0", "fn_80130258"],
+      "precise_divergence": "Canonical MWCC assigns equivalent integer, pointer, or floating-point value webs to different volatile or callee-saved registers from retail; several functions remain size-exact and relocation-complete despite the alternate allocation.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries from fn_801209DC through fn_80130718 for every listed function"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80121EC0", "fn_80124128", "fn_801248FC", "fn_8012671C", "fn_8012B388", "fn_8012B830", "fn_8012B954", "fn_8012B9C8", "fn_8012BA28", "fn_8012BBE4", "fn_8012BC98", "fn_8012C0A8", "fn_8012C198", "fn_8012E3AC", "fn_8012E42C", "fn_8012E498", "fn_8012E504", "fn_8012E524", "fn_801305D4"],
+      "precise_divergence": "Local declaration order controls MWCC's saved- and volatile-register assignment, including reversed loop index/count registers, serializer r29/r28/r27 allocation, and retail r29-r31 lifetimes.",
+      "workaround": "Use the declaration and separate-initialization order recorded for each function.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries from fn_80121104 through fn_80130718 for every listed function"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80122638", "fn_8012343C", "fn_801235E4", "fn_80129108", "fn_80129D54", "fn_8012A13C", "fn_8012ABEC", "fn_8012B8A8", "fn_8012C774", "fn_8012CCF0", "fn_8012CDF0", "fn_8012CF08", "fn_8012FEC8", "fn_8012FF34"],
+      "precise_divergence": "Canonical MWCC schedules equivalent iterator work, comparison loads, epilogue restores, callback setup, constant loads, or ordinary loads differently from retail.",
+      "workaround": "Where documented, mark lbl_80650118 volatile, delay the flags initializer, or re-read and advance values at the retail points; no workaround is recorded for the remaining functions.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries from fn_80123198 through fn_8012FFE0 for every listed function"]
+    },
+    {
+      "category": "jump-table-strategy",
+      "functions": ["fn_80123708", "fn_8012B408"],
+      "precise_divergence": "Collapsing duplicate switch bodies or recovering a sparse classifier with a different case layout changes MWCC's retail sparse-switch control flow and function size.",
+      "workaround": "Preserve fn_80123708's duplicate switch bodies; no workaround is recorded for fn_8012B408.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80123708 through fn_80124128 and fn_8012B7A0 through fn_8012BA28"]
+    },
+    {
+      "category": "float-constant-placement",
+      "functions": ["fn_801247F8", "fn_80126A00", "fn_8012DB28", "fn_80130998"],
+      "precise_divergence": "Split-TU compilation can give the signed-integer conversion bias a compiler-local identity instead of the retail-owned constant, leaving relocation ownership unequal even when code is otherwise close or exact.",
+      "workaround": "Bind or assign the compiler-generated bias to the documented retail owner: lbl_806501E8 for fn_8012DB28 and the eight-byte region at 0x80650220 for fn_80130998; no owner is recorded for fn_801247F8 or fn_80126A00.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_801248FC, fn_8012671C through fn_80126A00, fn_8012DA44 through fn_8012E19C, and fn_80130980 through fn_80130998"]
+    },
+    {
+      "category": "inlining",
+      "functions": ["fn_80125284", "fn_801252D8"],
+      "precise_divergence": "Gekko HID2/GQR6 mtspr writes have no ordinary-C spelling, while placing constant construction outside the helper changes retail register allocation and scheduling.",
+      "workaround": "Use minimal inline assembly only for mtspr and keep constant construction in the inline helper.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80125284 through fn_80125D88"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_801274F4", "fn_8012F58C"],
+      "precise_divergence": "Without the translation-unit register-save option, MWCC selects a different save helper or epilogue from retail for functions with several live registers.",
+      "workaround": "Enable the documented TU-local use_lmw_stmw option; the cited NonMatching functions still retain separate register/scheduling divergences.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80127128 through fn_80127208, fn_80127658, and fn_8012F58C through fn_8012F700"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_801270DC", "fn_8012744C", "fn_8012BDCC", "fn_8012BE18", "fn_8012BE64", "fn_8012BE78"],
+      "precise_divergence": "Scalar honest C does not recover retail's Gekko paired-single or psq lowering for packed or quantized vector conversions in these split translation units.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80127128 through fn_80127208, fn_80127658, and fn_8012BE8C through fn_8012C46C"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_8011FF40", "fn_80128058", "fn_8012D66C", "fn_8012E200", "fn_8012E3AC", "fn_8012E42C", "fn_8012E498", "fn_8012FE10"],
+      "precise_divergence": "Aggregate type, declaration order, or lifetime changes MWCC's outgoing copy, local stack spill, scratch storage, frame size, or slot coalescing relative to retail.",
+      "workaround": "Use the documented Color4, Position, four-word, and four-byte aggregate spellings, natural matrix-local order, and full QueryResult size; no workaround is recorded for fn_8012E200's lifetime coalescing.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries from fn_8011FF40 through fn_8012FFE0 for every listed function"]
+    },
+    {
+      "category": "inlining",
+      "functions": ["fn_8012C478", "fn_8012C5B0", "fn_8012CAC4"],
+      "precise_divergence": "Permitting MWCC to inline the recovered recursive helpers changes the original recursive call and frame shape.",
+      "workaround": "Apply the documented dont_inline pragma together with use_lmw_stmw.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8012C478 through fn_8012CAC4"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8012D9D4", "fn_8012E19C", "fn_801300F0", "fn_8013057C", "fn_80131388", "fn_80131408"],
+      "precise_divergence": "Eliding named temporaries, volatile reads, or explicit update expressions shortens value lifetimes and changes MWCC's retail GPR/FPR assignment or operand ordering.",
+      "workaround": "Retain the named zero, amount, and result temporaries, the documented volatile read, the explicit seconds update, and base-first pointer additions.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8012D66C through fn_8012D9D4, fn_8012DA44 through fn_8012E19C, fn_8013009C through fn_80130718, and fn_801312C0 through fn_80131458"]
     }
   ]
 }
