@@ -53,7 +53,7 @@ extern void fn_800BDEE4(void*, void*);
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);
 extern int fn_800DE298(void*);
-extern void fn_801261F4(void*);
+extern int fn_801261F4(void*);
 extern void fn_800DFD54(int, void*, void*, int);
 
 void fn_8008F5B4(void* object, void* actor, void* unused3, void* unused4,

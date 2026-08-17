@@ -11,7 +11,7 @@ typedef struct State {
     short timer;
 } State;
 
-extern void fn_801A7498(void *);
+extern void* fn_801A7498(void *);
 extern void *fn_80201814();
 extern State *fn_800A1D28(void *);
 extern int fn_8003BD48(void *, void *);

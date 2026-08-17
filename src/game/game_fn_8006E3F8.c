@@ -12,7 +12,7 @@ extern void *fn_80201814();
 extern void *fn_80036D38(void);
 extern int fn_80201B54();
 extern void fn_8006EE9C(Owner *owner);
-extern void fn_801261F4(void *object);
+extern int fn_801261F4(void *object);
 extern void fn_8011F7E0(void *object, int value);
 extern int fn_801E79FC(void *object, int value);
 extern void fn_8004736C(int value);

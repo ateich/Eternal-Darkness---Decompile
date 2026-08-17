@@ -15,7 +15,7 @@ typedef struct Owner {
     RuntimeBank* bank;
 } Owner;
 
-extern void fn_801261F4(void);
+extern int fn_801261F4(void);
 
 Runtime* fn_80128E30(Owner* owner)
 {

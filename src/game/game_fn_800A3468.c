@@ -25,7 +25,7 @@ typedef struct Info800A3468 {
 extern float lbl_8064EEA4;
 extern int fn_801A7468(void*);
 extern int fn_8011F6A4(u32, int, int, int, Result800A3468*, int);
-extern void fn_801A7498(void*);
+extern void* fn_801A7498(void*);
 extern void *fn_80201814();
 extern Info800A3468* fn_800A1D28(void*);
 extern void fn_800A33A8(Vec3_800A3468*);

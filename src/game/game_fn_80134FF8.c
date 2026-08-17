@@ -18,7 +18,7 @@ struct Object {
     Slot* slot;
 };
 
-extern void fn_801261F4(void*);
+extern int fn_801261F4(void*);
 extern Slot* fn_8013507C(void*, Object*);
 
 int fn_80134FF8(void* manager, Object* object)

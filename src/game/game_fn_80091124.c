@@ -20,7 +20,7 @@ extern u32 fn_80036D5C(void*);
 extern int fn_80201B54();
 extern void fn_8008CC84(void*);
 extern void fn_8008F860(int);
-extern void fn_801261F4(void*);
+extern int fn_801261F4(void*);
 extern void fn_800DD314(void*, int, int, int);
 extern void *fn_80201814();
 extern void fn_80201E78(Vec3*, void*);

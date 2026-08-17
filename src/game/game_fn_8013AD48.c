@@ -11,7 +11,7 @@ extern float lbl_806502B8;
 extern float lbl_806502CC;
 extern float lbl_806502D0;
 extern float lbl_806502D4;
-extern void fn_8011EB04(void*);
+extern int fn_8011EB04(void*);
 extern int fn_8011EB1C(void*);
 extern int fn_8011FB4C(void*);
 extern unsigned int fn_8011FAEC(void*);

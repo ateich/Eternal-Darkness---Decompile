@@ -13,7 +13,7 @@ extern void fn_800BD194(void *, Vec3 *);
 extern void fn_8011F0E8(void *, Vec3 *);
 extern void fn_80048708(void *);
 extern int fn_800DE298(void *);
-extern void fn_801261F4(void *);
+extern int fn_801261F4(void *);
 extern unsigned long long fn_8020123C();
 
 void fn_800DFEB0(void *object, void *resource, Vec3 *position,

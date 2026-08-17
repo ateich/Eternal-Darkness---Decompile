@@ -45,7 +45,7 @@ extern void *fn_80201B8C(); extern void *fn_80201B9C(); extern void* fn_80201BC0
 extern void *fn_80201BC8(); extern void fn_80201D14(void *, int); extern void fn_80201D1C(void *, s32);
 extern void fn_80201D2C(void *, int); extern void fn_80201D34(void *, s32); extern void fn_80201E78(void*, void*);
 extern int fn_80201EB8(); extern int fn_80202160(); extern int fn_80204578();
-extern int fn_80211A6C(); extern float fn_80211B08();
+extern void fn_80211A6C(); extern float fn_80211B08();
 
 undefined4 fn_8002FAE8(undefined4 param_1,int param_2,undefined4 param_3)
 

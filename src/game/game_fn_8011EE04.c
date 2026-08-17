@@ -19,7 +19,7 @@ extern void fn_8011FE5C(void*, int);
 extern void fn_8011FB44(void*, int);
 extern void fn_80128C50(void*);
 extern void fn_8012260C(void*);
-extern void fn_801261F4(void*);
+extern int fn_801261F4(void*);
 extern void fn_80120AD0(void*, float, float, int, int);
 extern const u32 lbl_8023A680[4];
 extern u8 lbl_8024EDD4[];

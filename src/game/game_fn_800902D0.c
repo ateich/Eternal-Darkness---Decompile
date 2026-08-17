@@ -15,7 +15,7 @@ extern void fn_8008F5B4(void*, void*, void*, Vec3*, void*, void*, void*, void*, 
 extern void fn_80090004(void*, void*, void*, Vec3*, void*, void*, void*, void*, int);
 extern void fn_8008F890(void*, void*, void*);
 extern int fn_800DE298(void*);
-extern void fn_801261F4(void*);
+extern int fn_801261F4(void*);
 extern unsigned long long fn_8020123C();
 extern void fn_8011F778(void*, float);
 extern void fn_8011F788(void*, float);

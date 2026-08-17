@@ -8,7 +8,7 @@ extern int fn_80201EB8();
 extern s32 fn_801A74F8(s32 value);
 extern u16 fn_801A7530(s32 value);
 extern void fn_801A7488(s32 value);
-extern void fn_801A7498(s32 value);
+extern void* fn_801A7498(s32 value);
 extern int fn_80201B54();
 extern void fn_80201F80(s32 context, s32 zero, s32 flags);
 extern int fn_80201B44();

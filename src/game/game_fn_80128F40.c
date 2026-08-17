@@ -10,7 +10,7 @@ typedef struct Owner {
     Link* link;
 } Owner;
 
-extern void fn_801261F4(void);
+extern int fn_801261F4(void);
 
 void* fn_80128F40(Owner* owner)
 {
