@@ -1,0 +1,35 @@
+{
+  "status": "resolved",
+  "scope": "GEDE01 failed-merge recovery; no additional decompilation",
+  "agent_branch": "agent/8f1c3278-8547-4bb9-b1a3-8f74c2df5aeb",
+  "checkpoint_branch": "checkpoint/foundry-runtime-2026-07-17",
+  "inspection": {
+    "agent_head": "3012a9e80fb90c031c614057fc2449a16ab70ff8",
+    "checkpoint_head": "b403e4241926315dcfaef452f047fbbedb332a53",
+    "merge_base": "e42f66ed2b2bed73a3f27e15fb4cd2f0809cdd0b",
+    "checkpoint_only_commits": 727,
+    "agent_only_commits": 2,
+    "agent_worktree_dirty": false,
+    "agent_merge_in_progress": false,
+    "initial_unmerged_paths": []
+  },
+  "preserved_commits": [
+    {
+      "commit": "3e1ebd8fd858e5fe35c564dda1d640edec7c3a0b",
+      "subject": "fix: recover interrupted decomp continuations"
+    },
+    {
+      "commit": "3012a9e80fb90c031c614057fc2449a16ab70ff8",
+      "subject": "Match game constructors through 80150950"
+    }
+  ],
+  "integration": {
+    "strategy": "merge checkpoint into the preserved agent branch, producing a descendant that the checkpoint can integrate without discarding either lineage",
+    "conflicting_paths": [
+      "scripts/decomp-scheduler.mjs"
+    ],
+    "resolution": "Retained checkpoint target-selection, no-op, throughput, and artifact-path safeguards; retained startup-timeout recovery; added explicit merge-failure integration-recovery halt semantics.",
+    "expected_next_target": "0x80150A24",
+    "expected_next_symbol": "fn_80150A24"
+  }
+}

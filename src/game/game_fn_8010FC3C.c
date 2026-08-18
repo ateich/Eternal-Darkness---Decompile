@@ -14,7 +14,7 @@ extern int lbl_8064CD1C;
 
 extern void fn_80144C40(void);
 extern int fn_80201B44();
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern unsigned int fn_8020216C(void);
 extern int fn_801E8D34(unsigned int);
 extern int fn_801E7B24(unsigned int*, int, int);

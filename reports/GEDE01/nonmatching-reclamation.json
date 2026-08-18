@@ -115,21 +115,31 @@
     "new_functions_matched_this_session": 0
   },
   "current_reaudit": {
-    "date": "2026-08-17",
-    "scope": "Every current Object(NonMatching, ...) declaration cross-checked against a freshly regenerated build/GEDE01/report.json at the 0x8013B24C game .text frontier; every unit-level fuzzy_match_percent 100.0 candidate was then checked with one-shot objdiff at section, instruction, and relocation precision",
-    "nonmatching_declarations_scanned": 502,
+    "date": "2026-08-18",
+    "scope": "Every current Object(NonMatching, ...) declaration cross-checked against a freshly regenerated build/GEDE01/report.json; every unit-level fuzzy_match_percent 100.0 candidate was then checked with one-shot objdiff at section, instruction, and relocation precision",
+    "nonmatching_declarations_scanned": 558,
     "report_units_unresolved": 0,
     "fuzzy_100_candidates": [
       "game/game_TRKNubWelcome.c",
       "game/game_TRK_main.c",
       "game/game_data_80239E10.c",
-      "game/game_data_80239E18.c"
+      "game/game_data_80239E18.c",
+      "game/game_fn_8013F078.c"
     ],
-    "promoted": [],
+    "promoted": [
+      {
+        "object": "game/game_fn_8013F078.c",
+        "function": "fn_8013F078",
+        "code_bytes": 484,
+        "relocation_bearing_instructions": 8,
+        "one_shot_match_percent": 100.0,
+        "evidence": "build/GEDE01/fndiff_fn_8013F078.json"
+      }
+    ],
     "promoted_totals": {
-      "objects": 0,
-      "functions": 0,
-      "code_bytes": 0
+      "objects": 1,
+      "functions": 1,
+      "code_bytes": 484
     },
     "remaining_fuzzy_100_nonmatching": [
       "game/game_TRKNubWelcome.c",
@@ -143,15 +153,15 @@
       "game/game_data_80239E10.c": "The aggregate report's unit-level 100.0 is not an exact-data result: one-shot objdiff scores the section at 0.0% because retail owns 8 bytes in .rodata while the built object emits 10 bytes in .sdata2. Promoting it would also violate the established shared string-base ownership boundary.",
       "game/game_data_80239E18.c": "The aggregate report's unit-level 100.0 is not an exact-data result: one-shot objdiff scores .rodata at 96.1039% because the built object supplies three trailing zero bytes that are absent from its split target. It remains behind the shared string-base ownership boundary."
     },
-    "linked_code_bytes_before": 374488,
-    "linked_code_bytes_after": 374488,
-    "linked_code_bytes_delta": 0,
-    "game_code_linked_bytes_before": 371460,
-    "game_code_linked_bytes_after": 371460,
-    "game_code_linked_bytes_delta": 0,
-    "linked_objects_before": 2521,
-    "linked_objects_after": 2521,
-    "linked_objects_delta": 0,
+    "linked_code_bytes_before": 400724,
+    "linked_code_bytes_after": 401208,
+    "linked_code_bytes_delta": 484,
+    "game_code_linked_bytes_before": 397696,
+    "game_code_linked_bytes_after": 398180,
+    "game_code_linked_bytes_delta": 484,
+    "linked_objects_before": 2709,
+    "linked_objects_after": 2710,
+    "linked_objects_delta": 1,
     "full_build": "passed",
     "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
     "expected_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",

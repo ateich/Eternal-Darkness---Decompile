@@ -1,7 +1,7 @@
 extern unsigned short lbl_8064CCAC;
 extern unsigned char lbl_80332140[];
 
-extern void* fn_80201B9C();
+extern void *fn_80201B9C();
 extern void* fn_80204844(void*, int);
 extern int fn_8006D444(void);
 extern void fn_8010BFF0(void);

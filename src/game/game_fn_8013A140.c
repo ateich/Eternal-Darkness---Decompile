@@ -2,14 +2,14 @@ typedef struct Vec3 { float x, y, z; } Vec3;
 
 extern unsigned int fn_8011FAEC(void*);
 extern int lbl_8064514C;
-extern void* fn_80201B9C(void);
-extern void* fn_80201BC8(void*);
+extern void *fn_80201B9C();
+extern void *fn_80201BC8();
 extern void* fn_80201BC0(void*);
 extern int fn_8011FB4C(void*);
 extern Vec3* fn_8011F130(void*);
 extern float fn_8011F6F0(void*);
 extern int fn_80137658(float, void*, Vec3*, void*, void*);
-extern void fn_8011F114(Vec3*, void*);
+extern void fn_8011F114();
 extern void fn_8011F104(float, float, float, void*);
 extern void fn_8011F0E8(void*, Vec3*);
 

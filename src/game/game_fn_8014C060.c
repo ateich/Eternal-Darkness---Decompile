@@ -20,7 +20,7 @@ extern void fn_80196578(Effect*);
 extern void fn_8018F81C(Effect*, int);
 extern void fn_8019663C(void);
 extern void* memcpy(void*, const void*, unsigned int);
-extern void fn_801E8328(int, Effect*);
+extern int fn_801E8328();
 
 void fn_8014C060(Vec3* source, int context, Vec3* reference, void* data,
                  int unused7, Effect* effect, Vec3* fallback)

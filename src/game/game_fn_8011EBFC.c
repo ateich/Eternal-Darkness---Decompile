@@ -7,7 +7,7 @@ extern void fn_80129DE0(void* object, void* source, int enabled, int value);
 extern int fn_8012A1BC(void* object, int value);
 extern void fn_80129FD0(void* object, int value, int unused);
 extern void fn_80201A84(void* object);
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern int fn_80202160(void);
 extern void fn_8011ECF8(void* object, void* source);
 

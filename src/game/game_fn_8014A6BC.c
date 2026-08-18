@@ -6,7 +6,8 @@ extern SlotSet* fn_80156938(void*); extern u32 fn_80193860(void*); extern void f
 extern int fn_8017FD98(void*); extern void fn_801938D8(void*,u32); extern void fn_8017FD6C(void*);
 extern int fn_801562DC(void*); extern u8 fn_80193870(void*); extern u8 fn_80193888(void*);
 extern u8 fn_80193878(void*); extern u8 fn_80193868(void*); extern void fn_801938B8(void*,u8);
-extern void fn_801938B0(void*,u8); extern int fn_800FBFB0(void); extern void fn_8017FE1C(void*,void*);
+extern void fn_801938B0(void*,u8); extern unsigned int fn_800FBFB0(); extern void fn_8017FE1C(void*,void*);
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void fn_801939DC(void); extern u8 fn_80193890(void*); extern void fn_801938C0(void*,u8);
 extern u8 fn_80193898(void*); extern u8 fn_80193858(void*); extern void* fn_8017FDE4(void*);
 extern void fn_8014B454(void*,void*,u8,int,int); extern u8 fn_80193850(void*); extern void* fn_801938A8(void*);

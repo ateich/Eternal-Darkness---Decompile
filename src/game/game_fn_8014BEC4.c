@@ -8,10 +8,10 @@ extern const float lbl_806504B8;
 extern const float lbl_806504BC;
 extern const float lbl_806504C0;
 
-extern void* fn_80201814(void);
-extern void* fn_80201BC8(void*);
+extern void *fn_80201814();
+extern void *fn_80201BC8();
 extern void fn_8012B690(void*, Vec3*, Vec3*);
-extern void fn_8011F114(Vec3*, void*);
+extern void fn_8011F114();
 extern void fn_80211A6C(Vec3*, Vec3*, Vec3*);
 extern void fn_80211AAC(Vec3*, Vec3*);
 extern int fn_80179064(int, int, int, int);

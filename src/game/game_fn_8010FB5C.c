@@ -10,7 +10,7 @@ extern int fn_801E8D34(unsigned int);
 extern int fn_801E7B24(unsigned int*, int, int);
 extern int fn_801E7AD0(unsigned int*, int, int);
 extern int fn_80201B44();
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern unsigned int fn_8020216C(void);
 
 void fn_8010FB5C(int value)

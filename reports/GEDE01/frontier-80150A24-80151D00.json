@@ -1,0 +1,88 @@
+{
+  "objdiff_version": "3.6.1",
+  "range_start": "0x80150A24",
+  "range_end": "0x80151D00",
+  "ownership_rule": "For incomplete NonMatching objects, emitted function bytes measure reconstruction coverage only; they do not claim contiguous ownership of the larger retail extent. Compiler-created local helpers are excluded unless they correspond to a separate retail symbol; the final TUs emit no such helper.",
+  "owned_code_bytes_added": 3604,
+  "ownership_semantics": "provisional reconstruction coverage, not contiguous retail ownership",
+  "retail_code_bytes_in_range": 4828,
+  "retail_code_bytes_unrepresented": 1224,
+  "reconstruction_coverage_percent": 74.647887,
+  "matched_code_bytes_added": 0,
+  "alignment_method": {
+    "primary": "Fresh per-TU compilation followed by objdiff v3.6.1 symbol-local alignment against the named retail function.",
+    "reliability_test": "The shared-body 3.189732% result is retired because it did not measure fn_80151600-specific source. Fresh independently compiled raw objdiff values are published transparently for all three functions, but are labeled raw alignment diagnostics rather than reconstruction-coverage percentages.",
+    "fn_80151600_structural_evidence": [
+      "The final emitted body is distinct from fn_80150F20: 1264 versus 1272 bytes.",
+      "Retail and C both use fn_8017D908 in both flag branches; fn_80150F20 instead uses fn_8017D700 in its flag-1 branch.",
+      "Retail and C both select lbl_8023A778 and the 2-unit Z gate; fn_80150F20 selects lbl_8023A76C and a 20-unit Z gate.",
+      "The old 3.189732% was produced by one shared generated body. The independent body changes the raw objdiff diagnostic to 56.60491; this value is recorded transparently without treating it as source-coverage accounting."
+    ]
+  },
+  "functions": [
+    {
+      "name": "fn_80150A24",
+      "target_bytes": 1276,
+      "base_bytes": 1068,
+      "match_percent": null,
+      "objdiff_raw_percent": 69.26646,
+      "retail_bytes_unrepresented": 208,
+      "target_relocations": 43,
+      "base_relocations": 42,
+      "status": "NonMatching",
+      "focused_attempt_count": 4,
+      "attempts": [
+        {"attempt": 1, "change": "Expanded the shared macro body into an independent TU and removed variant selection.", "base_bytes": 1088, "objdiff_raw_percent": 58.125393},
+        {"attempt": 2, "change": "Recovered the direct fn_8017D700(work) steering call, 20-unit three-axis gate, and iterator-entry control flow from retail.", "base_bytes": 1068, "objdiff_raw_percent": 68.749214},
+        {"attempt": 3, "change": "Documented the fn_8011EB1C NULL-sentinel call, but mistakenly expressed the first two classifiers as a short-circuit chain.", "base_bytes": 1064, "objdiff_raw_percent": 67.61442},
+        {"attempt": 4, "change": "Removed the out-of-line abs helper and restored retail's unconditional fn_80201EB8/fn_80201B4C calls before the comparisons.", "base_bytes": 1068, "objdiff_raw_percent": 69.26646}
+      ]
+    },
+    {
+      "name": "fn_80150F20",
+      "target_bytes": 1760,
+      "base_bytes": 1272,
+      "match_percent": null,
+      "objdiff_raw_percent": 5.6522727,
+      "retail_bytes_unrepresented": 488,
+      "target_relocations": 60,
+      "base_relocations": 51,
+      "status": "NonMatching",
+      "focused_attempt_count": 4,
+      "attempts": [
+        {"attempt": 1, "change": "Expanded the shared macro body into an independent flag-sensitive TU.", "base_bytes": 1192, "objdiff_raw_percent": 2.825},
+        {"attempt": 2, "change": "Added the retail pre-scan owner write and separated actor-relative fn_8017D700 from work-relative fn_8017D908 steering.", "base_bytes": 1272, "objdiff_raw_percent": 5.6295457},
+        {"attempt": 3, "change": "Documented the NULL-sentinel ABI at 0x80151344, but mistakenly expressed the first two classifier calls as short-circuit conditions.", "base_bytes": 1268, "objdiff_raw_percent": 5.7227273},
+        {"attempt": 4, "change": "Removed the out-of-line abs helper and restored unconditional classifier calls and retail comparison order.", "base_bytes": 1272, "objdiff_raw_percent": 5.6522727}
+      ]
+    },
+    {
+      "name": "fn_80151600",
+      "target_bytes": 1792,
+      "base_bytes": 1264,
+      "match_percent": null,
+      "objdiff_raw_percent": 56.60491,
+      "retail_bytes_unrepresented": 528,
+      "target_relocations": 60,
+      "base_relocations": 51,
+      "status": "NonMatching",
+      "focused_attempt_count": 4,
+      "attempts": [
+        {"attempt": 1, "change": "Expanded the shared macro body into an independent narrow-Z TU; fresh function-specific compilation retired the former shared-body 3.189732 diagnostic.", "base_bytes": 1192, "objdiff_raw_percent": 54.100445},
+        {"attempt": 2, "change": "Recovered both retail fn_8017D908 forms, actor-relative distance tests, the 2-unit Z gate, and the pre-scan owner write.", "base_bytes": 1264, "objdiff_raw_percent": 55.84598},
+        {"attempt": 3, "change": "Documented the NULL-sentinel ABI at 0x80151A44, but mistakenly expressed the first two classifier calls as short-circuit conditions.", "base_bytes": 1260, "objdiff_raw_percent": 56.28348},
+        {"attempt": 4, "change": "Removed the out-of-line abs helper and restored unconditional classifier calls and retail comparison order.", "base_bytes": 1264, "objdiff_raw_percent": 56.60491}
+      ]
+    }
+  ],
+  "matching_functions": 2466,
+  "matching_code_bytes": 398068,
+  "linked_code_bytes": 397444,
+  "matching_objects": 2695,
+  "total_objects": 3968,
+  "game_code_matching_bytes": 395040,
+  "game_code_linked_bytes": 394416,
+  "dol_sha1_integrity_gate": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "dol_sha1_evidentiary_limit": "NonMatching objects link original blobs, so the unchanged DOL hash verifies build integrity only and is not reconstruction-quality evidence.",
+  "next_target": "0x80151D00"
+}

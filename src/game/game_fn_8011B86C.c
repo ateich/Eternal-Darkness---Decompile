@@ -18,7 +18,7 @@ extern void fn_801ED3F4(int);
 extern void fn_801A8D38(int);
 extern void fn_801A9250(short, int, int);
 extern void fn_801A91D4(short, int, int);
-extern void* fn_80201B9C();
+extern void *fn_80201B9C();
 extern int fn_80204844(int, int);
 extern void fn_801EFE84(int);
 extern void fn_800073DC(int);

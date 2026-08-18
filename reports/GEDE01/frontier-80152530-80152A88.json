@@ -1,0 +1,86 @@
+{
+  "range_start": "0x80152530",
+  "range_end": "0x80152A88",
+  "matched_code_bytes": 1368,
+  "functions": [
+    {
+      "symbol": "fn_80152530",
+      "retail_bytes": 480,
+      "generated_bytes": 480,
+      "match_percent": 100.0,
+      "retail_relocations": 18,
+      "generated_relocations": 18,
+      "relocations_equal": true,
+      "evidence": "build/GEDE01/fndiff_fn_80152530.json",
+      "attempts": [
+        {
+          "match_percent": 97.208336,
+          "generated_bytes": 468,
+          "divergence": "An unsigned RNG prototype omitted retail's signed xoris integer-to-double conversion in all three random-vector components."
+        },
+        {
+          "match_percent": 99.833336,
+          "generated_bytes": 480,
+          "divergence": "Instructions matched, but compiler-generated local constants had different relocation targets until the retail 0x80650598-0x806505A8 .sdata2 ownership was assigned."
+        },
+        {
+          "match_percent": 100.0,
+          "generated_bytes": 480,
+          "divergence": "None; instruction bytes and all relocation-bearing instructions agree."
+        }
+      ]
+    },
+    {
+      "symbol": "fn_80152710",
+      "retail_bytes": 296,
+      "generated_bytes": 296,
+      "match_percent": 100.0,
+      "retail_relocations": 11,
+      "generated_relocations": 11,
+      "relocations_equal": true,
+      "evidence": "build/GEDE01/fndiff_fn_80152710.json"
+    },
+    {
+      "symbol": "fn_80152838",
+      "retail_bytes": 292,
+      "generated_bytes": 292,
+      "match_percent": 100.0,
+      "retail_relocations": 9,
+      "generated_relocations": 9,
+      "relocations_equal": true,
+      "evidence": "build/GEDE01/fndiff_fn_80152838.json"
+    },
+    {
+      "symbol": "fn_8015295C",
+      "retail_bytes": 300,
+      "generated_bytes": 300,
+      "match_percent": 100.0,
+      "retail_relocations": 9,
+      "generated_relocations": 9,
+      "relocations_equal": true,
+      "evidence": "build/GEDE01/fndiff_fn_8015295C.json"
+    }
+  ],
+  "matched_relocation_instructions": "47/47",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "inline_assembly_used": false,
+  "shared_reconstruction_used": false,
+  "coverage_note": "Every byte in the declared 0x80152530-0x80152A88 range belongs to one of the four independently reconstructed, byte-identical translation units above.",
+  "next_target": "0x80152A88",
+  "remaining_open_spans": [
+    {
+      "start": "0x80152A88",
+      "end": "0x80153104",
+      "bytes": 1660,
+      "status": "unattempted",
+      "note": "Next contiguous frontier span before the already matched helper cluster."
+    },
+    {
+      "start": "0x8015319C",
+      "end": "0x80153250",
+      "bytes": 180,
+      "status": "unattempted",
+      "note": "Older disclosed interior gap between already matched helper TUs."
+    }
+  ]
+}

@@ -24,7 +24,8 @@ extern u8 fn_80193878(void*);
 extern u8 fn_80193868(void*);
 extern void fn_801938B8(void*, u8);
 extern void fn_801938B0(void*, u8);
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void fn_8017FE1C(void*, void*);
 extern void fn_801939DC(void);
 extern u8 fn_80193890(void*);

@@ -13,8 +13,8 @@ extern float lbl_806502CC;
 extern float lbl_806502D0;
 extern float lbl_806502D4;
 
-extern void* fn_80201B9C(void);
-extern void* fn_80201BC8(void*);
+extern void *fn_80201B9C();
+extern void *fn_80201BC8();
 extern void* fn_80201BC0(void*);
 extern void* fn_80201CDC(void*);
 extern void* fn_8011FB4C(void*);

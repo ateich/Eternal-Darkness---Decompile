@@ -27,7 +27,7 @@ extern u32 fn_80036D5C(Set*);
 extern u8 fn_80202160(Set*);
 extern void fn_8017FF24(void*, int, int);
 extern void fn_8017FD6C(void*);
-extern void* fn_80201BC8(Set*);
+extern void *fn_80201BC8();
 extern int fn_8012FA54(void*, u32);
 extern int fn_8012DC94(void*, u32);
 extern void fn_8011F6A4(void*, u32, u32, int, Value*, int);

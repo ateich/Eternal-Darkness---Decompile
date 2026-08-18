@@ -1,5 +1,5 @@
 extern void* memcpy(void*, const void*, unsigned int);
-extern void* fn_80201BC8(void*);
+extern void *fn_80201BC8();
 extern unsigned int lbl_80651BD8;
 extern unsigned short lbl_80651BDC;
 extern unsigned int lbl_80651BE0;

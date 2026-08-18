@@ -9,7 +9,7 @@ extern unsigned int lbl_80331748[];
 
 extern int fn_801E8D34(int);
 extern int fn_80201B44();
-extern void* fn_80201814();
+extern void *fn_80201814();
 extern unsigned int fn_8020216C(void);
 
 int fn_801132B8(int mode)

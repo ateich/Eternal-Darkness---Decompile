@@ -28,7 +28,7 @@ typedef struct Triple {
 } Triple;
 
 extern Manager* fn_8015E4A4(void);
-extern void* fn_80201B9C();
+extern void *fn_80201B9C();
 extern int fn_8013864C(int, int);
 extern void fn_80053E50(float, int, int, int, int, int, int, int, int,
                        Triple, int);
