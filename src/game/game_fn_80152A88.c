@@ -14,7 +14,7 @@ extern void fn_80181F5C(void*);
 extern void fn_80182014(void);
 extern int fn_800FBFB0(void);
 extern void* memcpy(void*, const void*, u32);
-extern void fn_801E8328(int, void*);
+extern int fn_801E8328(int, void*);
 
 void fn_80152A88(Vec3f* position, Vec3f* target, u16 kind, u8 mode)
 {

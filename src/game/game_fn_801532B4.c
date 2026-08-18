@@ -11,7 +11,7 @@ extern u32 lbl_80651C68;
 extern u16 lbl_80651C6C;
 extern u8* fn_80156938(void*);
 extern void* fn_80201BC8(void*);
-extern void fn_8011F6A4(void*, u32, u32, int, u32*, int);
+extern int fn_8011F6A4(void*, u32, u32, int, u32*, int);
 extern void fn_80182B84(void*);
 extern void fn_80182BCC(void);
 extern void fn_80148008(void*, SmallDescriptor*, void*, void (*)(void));

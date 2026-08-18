@@ -25,7 +25,7 @@ extern u32 fn_80179004(Vec3*, Vec3*);
 extern void fn_801A764C(void*, Vec3*);
 extern void fn_801A7670(void*, int);
 extern void fn_8020104C(int, int, int, void*, float);
-extern void fn_801A98F4(int, int);
+extern int fn_801A98F4(int, int);
 
 void fn_8014BA14(s16* first, s16* second, int id, void* owner)
 {

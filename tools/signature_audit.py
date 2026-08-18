@@ -224,7 +224,11 @@ def declarations_in(path: Path, source_root: Path) -> Iterable[Declaration]:
 
 def audit(source_root: Path) -> dict[str, object]:
     grouped: dict[str, list[Declaration]] = defaultdict(list)
-    paths = sorted(source_root.rglob("*.c"))
+    paths = sorted(
+        path
+        for path in source_root.rglob("*")
+        if path.is_file() and path.suffix in {".c", ".h"}
+    )
     AGGREGATE_TYPES.clear()
     for path in paths:
         AGGREGATE_TYPES.update(AGGREGATE_TYPEDEF.findall(path.read_text(encoding="utf-8")))

@@ -37,7 +37,7 @@ extern void fn_8011F114(TargetVec3f*, void*);
 extern s32 fn_8011EB1C(void*);
 extern u32 fn_80179004(TargetVec3f*, TargetVec3f*);
 extern float fn_8011F6F8(void);
-extern void fn_8020123C(s32, s32, void*, void*);
+extern unsigned long long fn_8020123C(s32, s32, void*, void*);
 extern void* fn_801A717C(void);
 extern void fn_801A74A0(void*, s32);
 extern void fn_801A74A8(void*, void*);

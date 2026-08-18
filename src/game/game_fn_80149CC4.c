@@ -1,5 +1,5 @@
 extern void *fn_80201BC8();
-extern void fn_8011F6A4(void*, void*, void*, int, void*, int);
+extern int fn_8011F6A4(void*, void*, void*, int, void*, int);
 
 typedef struct Vector3 {
     float x;

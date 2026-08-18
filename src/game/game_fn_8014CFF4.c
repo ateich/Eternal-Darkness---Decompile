@@ -7,7 +7,7 @@ extern void fn_80147E88(void*);
 extern void fn_80149668(void*, void*);
 extern void fn_80149B0C(void*, int, int);
 extern void fn_801913F4(void*);
-extern void fn_801E8328(int, void*);
+extern int fn_801E8328(int, void*);
 
 void fn_8014CFF4(void* state, void* owner, int first, int second,
                  float* position, int extra, int flag)

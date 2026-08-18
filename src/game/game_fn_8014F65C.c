@@ -9,7 +9,7 @@ typedef struct Vec3Words {
 extern void fn_8014FFE0(void);
 extern u8* fn_80149D98(void*);
 extern void fn_80149D64(void*);
-extern void fn_801A98F4(int, int);
+extern int fn_801A98F4(int, int);
 
 void fn_8014F65C(Vec3Words* position, u16 first, u16 second,
                  u32 value, u32* source, float scale)

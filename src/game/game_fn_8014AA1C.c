@@ -4,7 +4,7 @@ typedef struct Vec { float x,y,z; } Vec;
 extern Set* fn_80156938(void*); extern int fn_80157034(void*); extern u32 fn_80036D5C(void);
 extern void fn_8017FD6C(void*); extern void *fn_80201BC8(); extern int fn_8012FA54(void*,u32);
 extern int fn_8012DC94(void*,u32); extern void* fn_80193848(void*); extern void *fn_80201814();
-extern void* fn_80155DB4(void*); extern u32 fn_80193838(void*); extern void fn_8011F6A4(void*,u32,u32,int,Vec*,int);
+extern void* fn_80155DB4(void*); extern u32 fn_80193838(void*); extern int fn_8011F6A4(void*,u32,u32,int,Vec*,int);
 extern short* fn_8017FDE4(void*); extern u32 fn_80193840(void*); extern short* fn_801938A8(void*);
 extern void fn_8014B604(float*,short*);
 void fn_8014AA1C(void* left, void* right) {

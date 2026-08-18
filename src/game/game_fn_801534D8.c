@@ -9,7 +9,7 @@ typedef struct QueryResult {
 } QueryResult;
 
 extern void* fn_80201BC8(void*);
-extern void fn_8011F6A4(void*, int, int, int, QueryResult*, int);
+extern int fn_8011F6A4(void*, int, int, int, QueryResult*, int);
 extern void fn_8017970C(Vec3*, Vec3*, Vec3*, float);
 
 void fn_801534D8(void* object, float fraction, short* rotation)

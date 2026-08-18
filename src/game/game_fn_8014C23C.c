@@ -35,7 +35,7 @@ extern void* memcpy(void*, const void*, unsigned int);
 extern void* fn_80147EC4(Effect*);
 extern void fn_801568B8(void*, int);
 extern void fn_80180AC8(void*, int);
-extern void fn_801A98F4(int, int);
+extern int fn_801A98F4(int, int);
 
 void fn_8014C23C(u16 kind, u8 variant, s8 strength)
 {

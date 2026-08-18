@@ -13,7 +13,7 @@ extern u8* fn_80149D98(void*);
 extern void fn_80149D64(void*);
 extern void fn_801857B4(void*);
 extern void fn_80185A44(void);
-extern void fn_801E8328(int, void*);
+extern int fn_801E8328(int, void*);
 extern void* memcpy(void*, const void*, unsigned int);
 
 void fn_8014FCF4(Vec3Words* position, u16 value, u16 target,

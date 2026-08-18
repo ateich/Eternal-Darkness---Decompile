@@ -2,7 +2,7 @@ typedef unsigned int u32;
 
 extern void* fn_80156938(void*);
 extern void* fn_80201BC8(void*);
-extern void fn_8011F6A4(void*, u32, u32, int, u32*, int);
+extern int fn_8011F6A4(void*, u32, u32, int, u32*, int);
 extern void* fn_8017FDE4(void*);
 extern void fn_80149B60(void*, void*, u32, u32, int);
 

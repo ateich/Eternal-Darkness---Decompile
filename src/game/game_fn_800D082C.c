@@ -20,7 +20,7 @@ extern void *fn_801A74B8(void *);
 extern void fn_800A37CC(int, void *, void *);
 extern int fn_801A7468(void *);
 extern void fn_8011F114();
-extern void fn_8011F6A4(void *, int, int, int, Vec3 *, int);
+extern int fn_8011F6A4(void *, int, int, int, Vec3 *, int);
 extern void fn_80211A6C(Vec3 *, Vec3 *, Vec3 *);
 extern void fn_80211B08(Vec3 *);
 

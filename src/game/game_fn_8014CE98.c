@@ -8,7 +8,7 @@ extern void fn_801496D8(void*, void*);
 extern void* fn_80201B3C(void);
 extern void fn_80149B0C(void*, int, int);
 extern void fn_801913F4(void*);
-extern void fn_801E8328(int, void*);
+extern int fn_801E8328(int, void*);
 
 void fn_8014CE98(void* state, void* owner, int first, int second,
                  void* source, int callback, int callback_arg, u16 value,

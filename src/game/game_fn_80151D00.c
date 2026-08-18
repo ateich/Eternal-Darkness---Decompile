@@ -22,7 +22,7 @@ extern float lbl_80650584;
 extern s32 lbl_8064D18C;
 
 extern void fn_80199128(void*, s32);
-extern void fn_8020123C(s32, s32, s32, s32);
+extern unsigned long long fn_8020123C(s32, s32, s32, s32);
 extern void fn_8019B134(void*, s32);
 extern void fn_8019B13C(void*);
 extern void* fn_80148008(Vec3f*, void*, void*, void (*)(void));
@@ -37,7 +37,7 @@ extern void fn_8019A3A4(void*);
 extern void fn_8019A300(void);
 extern Vec3s* fn_8017FDA8(void*, s32);
 extern void* memcpy(void*, const void*, u32);
-extern void fn_801E8328(s32, void*);
+extern int fn_801E8328(s32, void*);
 extern void fn_80199EBC(void*);
 extern void fn_80199E18(void);
 extern void fn_8014F700(Vec3f*, s16, void*);
