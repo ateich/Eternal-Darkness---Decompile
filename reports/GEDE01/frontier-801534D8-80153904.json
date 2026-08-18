@@ -1,0 +1,28 @@
+{
+  "range_start": "0x801534D8",
+  "range_end": "0x80153904",
+  "range_accounting": "The complete 0x42C-byte range is represented by four independent translation units: three verified matches totaling 388 bytes and the intervening size-exact 680-byte fn_801535D8 honest NonMatching reconstruction. There are no unaccounted interior spans.",
+  "new_matches": [
+    {"symbol": "fn_801534D8", "retail_bytes": 256, "generated_bytes": 256, "objdiff_percent": 100.0, "relocations_equal": "4/4"},
+    {"symbol": "fn_80153880", "retail_bytes": 24, "generated_bytes": 24, "objdiff_percent": 100.0, "relocations_equal": "0/0"},
+    {"symbol": "fn_80153898", "retail_bytes": 108, "generated_bytes": 108, "objdiff_percent": 100.0, "relocations_equal": "4/4"}
+  ],
+  "nonmatching_attempts": [
+    {
+      "symbol": "fn_801535D8",
+      "retail_bytes": 680,
+      "generated_bytes": 680,
+      "best_objdiff_percent": 98.382355,
+      "attempts": [
+        "Initial behavior-complete reconstruction generated 676 bytes at 92.62941%; compound early-exit lowering added an extra branch and shifted the callback body by four bytes.",
+        "Splitting the three guard conditions and moving the mode defaults before fn_80157B6C produced a size-exact 680-byte function at 98.382355%.",
+        "Nested guards and a shared exit label retained 98.382355%; the remaining differences are equivalent r29/r30/r31 allocation and the order of the u16/u8 masks around fn_8017FEA4 and fn_80199118."
+      ],
+      "blocking_codegen_divergence": "MWCC assigns the recovered other-state, owner and runtime lifetimes to r31/r29/r30 instead of retail r29/r30/r31 after the size-fixing guard rewrite; one equivalent clrlwi/and evaluation order also differs."
+    }
+  ],
+  "session_matched_bytes": 388,
+  "session_relocations_equal": "8/8",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "next_target": "0x80153904"
+}

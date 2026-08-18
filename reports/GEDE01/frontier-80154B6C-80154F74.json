@@ -1,0 +1,33 @@
+{
+  "range_start": "0x80154B6C",
+  "range_end": "0x80154F74",
+  "range_accounting": "The complete contiguous 0x408-byte range is represented by six independent translation units. Four functions are verified at 100%; fn_80154CB4 and fn_80154DB4 are explicitly documented honest NonMatching attempts. There are no unaccounted interior spans.",
+  "new_matches": [
+    {"symbol": "fn_80154B6C", "retail_bytes": 328, "generated_bytes": 328, "objdiff_percent": 100.0, "relocations_equal": "12/12"},
+    {"symbol": "fn_80154D24", "retail_bytes": 144, "generated_bytes": 144, "objdiff_percent": 100.0, "relocations_equal": "6/6"},
+    {"symbol": "fn_80154EC0", "retail_bytes": 80, "generated_bytes": 80, "objdiff_percent": 100.0, "relocations_equal": "2/2"},
+    {"symbol": "fn_80154F10", "retail_bytes": 100, "generated_bytes": 100, "objdiff_percent": 100.0, "relocations_equal": "5/5"}
+  ],
+  "nonmatching_attempts": [
+    {
+      "symbol": "fn_80154CB4",
+      "retail_bytes": 112,
+      "generated_bytes": 112,
+      "objdiff_percent": 71.42857,
+      "attempts": 2,
+      "blocking_divergence": "The body, frame size, calls and result path are size-exact. MWCC hoists the fn_801A1B34 address materialization ahead of the floating constant load, while retail loads lbl_80650608 first and interleaves the callback-address pair with prologue stores; the remaining bytes differ only through this prologue/constant schedule."
+    },
+    {
+      "symbol": "fn_80154DB4",
+      "retail_bytes": 268,
+      "generated_bytes": 256,
+      "objdiff_percent": 95.29851,
+      "attempts": 1,
+      "blocking_divergence": "The recovered descriptor construction, calls and cleanup path compile closely, but retail retains a redundant nested value/kind conditional branch that canonical C folds away. That 12-byte control-flow difference and associated descriptor register allocation prevent a byte match."
+    }
+  ],
+  "session_matched_bytes": 652,
+  "session_relocations_equal": "25/25",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "next_target": "0x80154F74"
+}

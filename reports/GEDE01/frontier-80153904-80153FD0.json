@@ -1,0 +1,28 @@
+{
+  "range_start": "0x80153904",
+  "range_end": "0x80153FD0",
+  "range_accounting": "The complete 0x6CC-byte range is represented by five independent translation units: four verified matches totaling 1004 bytes and the intervening 736-byte retail fn_80153A24 represented by an independent 728-byte honest NonMatching reconstruction. There are no unaccounted interior spans.",
+  "new_matches": [
+    {"symbol": "fn_80153904", "retail_bytes": 288, "generated_bytes": 288, "objdiff_percent": 100.0, "relocations_equal": "14/14"},
+    {"symbol": "fn_80153D04", "retail_bytes": 236, "generated_bytes": 236, "objdiff_percent": 100.0, "relocations_equal": "12/12"},
+    {"symbol": "fn_80153DF0", "retail_bytes": 272, "generated_bytes": 272, "objdiff_percent": 100.0, "relocations_equal": "12/12"},
+    {"symbol": "fn_80153F00", "retail_bytes": 208, "generated_bytes": 208, "objdiff_percent": 100.0, "relocations_equal": "6/6"}
+  ],
+  "nonmatching_attempts": [
+    {
+      "symbol": "fn_80153A24",
+      "retail_bytes": 736,
+      "generated_bytes": 728,
+      "best_objdiff_percent": 87.79891,
+      "attempts": [
+        "Recovered both independently initialized 0xB0-byte descriptor templates, the angle loop, sine/cosine position generation, aggregate copies, position stores and both fn_801E8328 submissions.",
+        "Enabled MWCC use_lmw_stmw to reproduce the retail multi-register prologue/epilogue; the result reached 87.79891% with all 15 relocation-bearing instructions retained on both sides."
+      ],
+      "blocking_codegen_divergence": "MWCC assigns the recovered origin/count/radius/output-array lifetimes to r22-r28 instead of retail r23-r31, schedules the descriptor constant stores differently, and emits 728 rather than 736 bytes because one still-unidentified retail descriptor store is absent."
+    }
+  ],
+  "session_matched_bytes": 1004,
+  "session_relocations_equal": "44/44",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "next_target": "0x80153FD0"
+}
