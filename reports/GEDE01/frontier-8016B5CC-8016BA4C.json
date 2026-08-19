@@ -1,0 +1,37 @@
+{
+  "range_start": "0x8016B5CC",
+  "range_end": "0x8016BA4C",
+  "accounted_bytes": 1152,
+  "matched_bytes": 20,
+  "unaccounted_spans": [],
+  "nonmatching_spans": [
+    {
+      "start": "0x8016B5CC",
+      "end": "0x8016B914",
+      "symbol": "fn_8016B5CC",
+      "best_objdiff_percent": 88.42857,
+      "retail_bytes": 840,
+      "generated_bytes": 832,
+      "relocations_equal": "32/55",
+      "divergence": "The honest custom-arena realloc reconstruction recovers initialization, allocation, release, coalescing and realloc behavior. Correcting the successful-allocation early return raised the match from 84.09524% to 88.42857%; remaining differences are concentrated in MWCC's six-way-unrolled free-span scan, CTR loop formation and associated r3-r8 allocation."
+    },
+    {
+      "start": "0x8016B914",
+      "end": "0x8016BA38",
+      "symbol": "fn_8016B914",
+      "best_objdiff_percent": 38.835617,
+      "retail_bytes": 292,
+      "generated_bytes": 116,
+      "relocations_equal": "8/19",
+      "divergence": "Retail retains the otherwise dead absolute-span total and eight-way unrolls the 1536-entry ledger traversal into a 192-iteration CTR loop; canonical GC/1.3 eliminates the dead recurrence and keeps only a compact scalar loop."
+    }
+  ],
+  "functions": [
+    { "symbol": "fn_8016B5CC", "address": "0x8016B5CC", "size": 840, "generated_size": 832, "match_percent": 88.42857, "relocations_equal": "32/55", "status": "NonMatching", "evidence": "build/GEDE01/fndiff_fn_8016B5CC.json" },
+    { "symbol": "fn_8016B914", "address": "0x8016B914", "size": 292, "generated_size": 116, "match_percent": 38.835617, "relocations_equal": "8/19", "status": "NonMatching", "evidence": "build/GEDE01/fndiff_fn_8016B914.json" },
+    { "symbol": "fn_8016BA38", "address": "0x8016BA38", "size": 20, "generated_size": 20, "match_percent": 100.0, "relocations_equal": "3/3", "status": "Matching", "evidence": "build/GEDE01/fndiff_fn_8016BA38.json" }
+  ],
+  "next_target": "0x8016BA4C",
+  "next_gate": "Continue at fn_8016BA4C while retaining fn_8016B5CC and fn_8016B914 as the newly documented honest NonMatching spans, fn_8016B400 at 98.666664%, and fn_8016ADF0 at 40.683544%, in cumulative frontier reporting.",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

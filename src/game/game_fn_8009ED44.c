@@ -33,7 +33,7 @@ extern void fn_8006BEE4(Context8009ED44*, void (*)(void));
 extern void fn_8006DEF8(State8009ED44*, int, void*, void*, int);
 extern void fn_8009EEBC(void);
 extern void* memset(void*, int, unsigned int);
-extern void fn_800FD40C(char*, const char*);
+extern char* fn_800FD40C(char*, const char*);
 extern char lbl_80245514[];
 
 void fn_8009ED44(register State8009ED44* state)

@@ -25,7 +25,7 @@ extern void fn_8006EB60(void);
 extern void fn_8006BEE4(Context8009EC34*, void (*)(void));
 extern void fn_8006C9E4(Context8009EC34*, int);
 extern void fn_8006DEF8(State8009EC34*, int, void*, void*, int);
-extern void fn_800FD40C(char*, const char*);
+extern char* fn_800FD40C(char*, const char*);
 extern char lbl_802454FC[];
 
 void fn_8009EC34(register State8009EC34* state)

@@ -26,7 +26,7 @@ extern void fn_80087D64(void);
 extern void fn_80087EC4(void);
 extern void fn_80088060(void);
 extern void fn_80088298(void);
-extern void fn_800FD40C(void*, const void*);
+extern char* fn_800FD40C(void*, const void*);
 extern const u8 lbl_802450A8[];
 extern int lbl_8064C8C4;
 extern u8 lbl_8064C91C;

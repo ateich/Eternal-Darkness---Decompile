@@ -1,5 +1,5 @@
 extern char* lbl_8023A7F8[];
-extern void fn_800FD40C(char*, char*);
+extern char* fn_800FD40C(char*, char*);
 
 void fn_80162188(int value, char* output)
 {

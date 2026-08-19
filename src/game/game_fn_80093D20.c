@@ -34,7 +34,7 @@ extern void fn_801A7518(void*, short);
 extern unsigned long long fn_8020123C();
 extern void fn_801A7228(void*);
 extern void fn_8003CB6C(void);
-extern void fn_800389E0(void*, int, int, int);
+extern int fn_800389E0(void*, int, int, int);
 extern void fn_80201138(float, int, void*, int, int, int, int);
 
 void fn_80093D20(register void* object, register void* source)

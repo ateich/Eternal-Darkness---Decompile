@@ -42,7 +42,7 @@ extern void fn_800E4674(void);
 extern void fn_80043708(int);
 extern void fn_80042818(int);
 extern void fn_8009E130(Owner *);
-extern void fn_800FD40C(void *, const char *);
+extern char* fn_800FD40C(void *, const char *);
 
 void fn_8006F6A4(Owner *owner)
 {

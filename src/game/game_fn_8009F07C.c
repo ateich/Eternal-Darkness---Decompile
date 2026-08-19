@@ -29,7 +29,7 @@ extern void fn_8006BEE4(Context8009F07C*, void (*)(void));
 extern void fn_8006DEF8(State8009F07C*, int, void*, void*, int);
 extern void fn_8009F1C4(void);
 extern void fn_8009F258(void);
-extern void fn_800FD40C(char*, const char*);
+extern char* fn_800FD40C(char*, const char*);
 extern char lbl_80245528[];
 
 void fn_8009F07C(register State8009F07C* state)

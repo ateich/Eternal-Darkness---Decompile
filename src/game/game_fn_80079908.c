@@ -11,7 +11,7 @@ extern int fn_8012A1BC(void *resource, int type);
 extern void fn_80129FD0(void *resource, int value, int flags);
 extern void fn_800798C4(void *object);
 extern void fn_801287C4(void *action, void (*callback)(void *), void *arg, int value);
-extern void fn_800389E0(void *object, int, int, int);
+extern int fn_800389E0(void *object, int, int, int);
 extern void fn_80204810(void *object);
 extern void fn_80128A84(void *action, int, int);
 extern void fn_80201D2C(void *, int);

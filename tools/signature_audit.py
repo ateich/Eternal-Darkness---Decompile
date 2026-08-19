@@ -185,41 +185,55 @@ def declarations_in(path: Path, source_root: Path) -> Iterable[Declaration]:
     text = COMMENTS.sub(lambda match: "\n" * match.group(0).count("\n"), original)
     for statement in EXTERN_STATEMENT.finditer(text):
         body = statement.group("body")
-        function = FUNCTION_NAME.search(body)
-        if function is None:
+        functions = []
+        depth = 0
+        search_from = 0
+        for function in FUNCTION_NAME.finditer(body):
+            for char in body[search_from:function.start()]:
+                if char == "(":
+                    depth += 1
+                elif char == ")":
+                    depth -= 1
+            search_from = function.start()
+            if depth == 0:
+                functions.append(function)
+        if not functions:
             continue
 
-        return_type = squash_space(body[: function.start()])
-        cursor = function.end()
-        depth = 1
-        while cursor < len(body) and depth:
-            if body[cursor] == "(":
-                depth += 1
-            elif body[cursor] == ")":
-                depth -= 1
-            cursor += 1
-        if depth:
-            continue
+        # A comma-separated declaration shares the first declarator's type:
+        # `extern void fn_A(void), fn_B(int);` declares both functions as void.
+        return_type = squash_space(body[: functions[0].start()])
+        for function in functions:
+            cursor = function.end()
+            depth = 1
+            while cursor < len(body) and depth:
+                if body[cursor] == "(":
+                    depth += 1
+                elif body[cursor] == ")":
+                    depth -= 1
+                cursor += 1
+            if depth:
+                continue
 
-        parameter_text = body[function.end(): cursor - 1]
-        unspecified_parameters = not parameter_text.strip()
-        raw_parameters = split_parameters(parameter_text)
-        variadic = bool(raw_parameters and raw_parameters[-1] == "...")
-        if variadic:
-            raw_parameters.pop()
-        if raw_parameters == ["void"]:
-            raw_parameters = []
-        parameters = tuple(parameter_type(item) for item in raw_parameters)
-        line = text.count("\n", 0, statement.start()) + 1
-        yield Declaration(
-            symbol=function.group(1),
-            return_type=return_type,
-            parameters=parameters,
-            variadic=variadic,
-            unspecified_parameters=unspecified_parameters,
-            path=str(path.relative_to(ROOT)),
-            line=line,
-        )
+            parameter_text = body[function.end(): cursor - 1]
+            unspecified_parameters = not parameter_text.strip()
+            raw_parameters = split_parameters(parameter_text)
+            variadic = bool(raw_parameters and raw_parameters[-1] == "...")
+            if variadic:
+                raw_parameters.pop()
+            if raw_parameters == ["void"]:
+                raw_parameters = []
+            parameters = tuple(parameter_type(item) for item in raw_parameters)
+            line = text.count("\n", 0, statement.start() + function.start()) + 1
+            yield Declaration(
+                symbol=function.group(1),
+                return_type=return_type,
+                parameters=parameters,
+                variadic=variadic,
+                unspecified_parameters=unspecified_parameters,
+                path=str(path.relative_to(ROOT)),
+                line=line,
+            )
 
 
 def audit(source_root: Path) -> dict[str, object]:

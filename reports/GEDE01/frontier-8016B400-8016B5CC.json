@@ -1,0 +1,26 @@
+{
+  "range_start": "0x8016B400",
+  "range_end": "0x8016B5CC",
+  "accounted_bytes": 460,
+  "matched_bytes": 280,
+  "unaccounted_spans": [],
+  "nonmatching_spans": [
+    {
+      "start": "0x8016B400",
+      "end": "0x8016B4B4",
+      "symbol": "fn_8016B400",
+      "best_objdiff_percent": 98.666664,
+      "retail_bytes": 180,
+      "generated_bytes": 180,
+      "relocations_equal": "13/13",
+      "divergence": "The reconstruction is instruction-for-instruction identical except at 0x8016B454: retail uses indexed lwzx r0,r7,r0 while canonical MWCC reuses the already formed entry pointer and emits the semantically equivalent displacement-form lwz r0,0(r4)."
+    }
+  ],
+  "functions": [
+    { "symbol": "fn_8016B400", "address": "0x8016B400", "size": 180, "generated_size": 180, "match_percent": 98.666664, "relocations_equal": "13/13", "status": "NonMatching", "evidence": "build/GEDE01/fndiff_fn_8016B400.json" },
+    { "symbol": "fn_8016B4B4", "address": "0x8016B4B4", "size": 280, "generated_size": 280, "match_percent": 100.0, "relocations_equal": "37/37", "status": "Matching", "evidence": "build/GEDE01/fndiff_fn_8016B4B4.json" }
+  ],
+  "next_target": "0x8016B5CC",
+  "next_gate": "Match consecutive fn_8016B5CC upward; preserve fn_8016B400 as the explicitly accounted 0x8016B400-0x8016B4B4 NonMatching span at 98.666664%, and fn_8016ADF0 as the earlier 0x8016ADF0-0x8016AF2C NonMatching gap at 40.683544%, in cumulative frontier reporting.",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

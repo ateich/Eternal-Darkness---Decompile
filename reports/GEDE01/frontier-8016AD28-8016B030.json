@@ -1,0 +1,19 @@
+{
+  "range_start": "0x8016AD28",
+  "range_end": "0x8016B030",
+  "accounted_bytes": 776,
+  "matched_bytes": 460,
+  "unaccounted_spans": [],
+  "nonmatching_spans": [
+    { "start": "0x8016ADF0", "end": "0x8016AF2C", "symbol": "fn_8016ADF0", "size": 316 }
+  ],
+  "functions": [
+    { "symbol": "fn_8016AD28", "address": "0x8016AD28", "size": 200, "generated_size": 200, "match_percent": 100.0, "relocations_equal": "10/10", "status": "Matching", "evidence": "build/GEDE01/fndiff_fn_8016AD28.json" },
+    { "symbol": "fn_8016ADF0", "address": "0x8016ADF0", "size": 316, "generated_size": 136, "match_percent": 40.683544, "relocations_equal": "2/6", "status": "NonMatching", "evidence": "build/GEDE01/fndiff_fn_8016ADF0.json", "divergence": "Canonical MWCC keeps the ten-entry search as a compact scalar loop, while retail emits five search bodies inside a two-iteration CTR loop; this changes the loop branch layout and r6-r9 allocation and shifts the final four of six ELF relocations." },
+    { "symbol": "fn_8016AF2C", "address": "0x8016AF2C", "size": 132, "generated_size": 132, "match_percent": 100.0, "relocations_equal": "3/3", "status": "Matching", "evidence": "build/GEDE01/fndiff_fn_8016AF2C.json" },
+    { "symbol": "fn_8016AFB0", "address": "0x8016AFB0", "size": 128, "generated_size": 128, "match_percent": 100.0, "relocations_equal": "5/5", "status": "Matching", "evidence": "build/GEDE01/fndiff_fn_8016AFB0.json" }
+  ],
+  "next_target": "0x8016B030",
+  "next_gate": "Match consecutive fn_8016B030 upward; fn_8016ADF0 remains the explicitly accounted 0x8016ADF0-0x8016AF2C NonMatching gap at 40.683544% and must remain visible in frontier reporting.",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

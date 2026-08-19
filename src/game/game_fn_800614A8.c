@@ -18,7 +18,7 @@ typedef s32 M2C_UNK;
 extern M2C_UNK fn_800359A0(s32, u32);                      /* extern */
 extern s32 fn_80035FB8(s32, void *, M2C_UNK *, void *, M2C_UNK *, void *); /* extern */
 extern s32 fn_80036D5C(s32);                               /* extern */
-extern M2C_UNK fn_80036DA4(s32, s32);                      /* extern */
+extern void fn_80036DA4(s32, s32);                         /* extern */
 extern s32 fn_80036E50();                                  /* extern */
 extern int fn_80038308(void *, int, short *);           /* extern */
 extern M2C_UNK fn_800389E0(s32, M2C_UNK, s16, M2C_UNK);    /* extern */
@@ -71,7 +71,7 @@ extern s32 fn_801A7488();                                  /* extern */
 extern void fn_801A74A0(s32, s32);                         /* extern */
 extern void fn_801A74A8(s32, s32);                         /* extern */
 extern s32 fn_801A74C0();                                  /* extern */
-extern M2C_UNK fn_801A764C(s32, f32 *);                    /* extern */
+extern void fn_801A764C(s32, f32 *);                       /* extern */
 extern M2C_UNK fn_801A977C(u32, M2C_UNK);                  /* extern */
 extern M2C_UNK fn_801AAE68(M2C_UNK, M2C_UNK, M2C_UNK, f32 *, M2C_UNK, M2C_UNK, M2C_UNK, u16, f32); /* extern */
 extern M2C_UNK fn_801D14CC(s32);                           /* extern */

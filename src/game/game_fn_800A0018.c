@@ -23,7 +23,7 @@ extern void fn_8006EB60(void);
 extern void fn_8006BEE4(Context800A0018*, void (*)(void));
 extern void fn_8006DEF8(State800A0018*, int, void*, void*, int);
 extern void fn_800A0140(void);
-extern void fn_800FD40C(char*, const char*);
+extern char* fn_800FD40C(char*, const char*);
 extern char lbl_802455B8[];
 extern char lbl_802455D0[];
 extern float lbl_8064C930;

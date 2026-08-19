@@ -13,7 +13,7 @@ extern void fn_8006E20C(void);
 extern void fn_8006BEE4(RequestContext*, void (*)(void));
 extern void fn_8006DEF8(void*, int, void (*)(void), void*, int);
 extern void fn_800AEB48(void);
-extern void fn_800FD40C(void*, const void*, void*);
+extern char* fn_800FD40C(void*, const void*, void*);
 extern unsigned int fn_801A9B28(void);
 extern unsigned int fn_801A9B30(void);
 extern void* memset(void*, int, unsigned int);

@@ -12,7 +12,7 @@ extern void* fn_80200C20(void*);
 extern void *fn_80201814();
 extern int fn_80036E50(void);
 extern int fn_80090204(void*);
-extern void fn_800389E0(void*, int, int, int);
+extern int fn_800389E0(void*, int, int, int);
 extern void fn_801A74A0(void*, void*);
 extern void fn_801A74A8(void*, int);
 extern void fn_801A7538(void*, int);

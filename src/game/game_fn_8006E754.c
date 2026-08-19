@@ -39,7 +39,7 @@ extern int fn_80201B54();
 extern void *fn_80158598(void *object, int value);
 extern void* fn_80201C24();
 extern void fn_80157E34(void *object, int effect, int type, void *callback, int value);
-extern void fn_800389E0(void *resource, int channel, int value, int zero);
+extern int fn_800389E0(void *resource, int channel, int value, int zero);
 extern const float lbl_8064E7E0;
 
 static void start_effect(void *source, void *resource_object, Config *config,

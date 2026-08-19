@@ -7,7 +7,7 @@ typedef struct State80096D58 {
 
 extern unsigned int fn_80036D5C(void*);
 extern int fn_80201B54();
-extern void fn_80201B64(void*);
+extern int fn_80201B64(void*);
 extern void *fn_80201B8C();
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);

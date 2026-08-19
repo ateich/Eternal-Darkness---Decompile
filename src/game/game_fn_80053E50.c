@@ -33,7 +33,7 @@ extern void fn_80043F44(Request*);
 extern s32 fn_8007255C(s32, void*);
 extern void* fn_80054040(void*, void*, Request*);
 extern void *fn_80201BC8();
-extern void fn_8011FAEC(void);
+extern unsigned int fn_8011FAEC(void);
 extern void fn_8012B7A0(void*, float);
 extern void fn_8011EAF4(void*, s32);
 extern void fn_80201D54(void*, s32);

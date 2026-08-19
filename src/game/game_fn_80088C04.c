@@ -15,7 +15,7 @@ extern void fn_8006BEE4(Context*, void (*)(void));
 extern void fn_8006EB60(void);
 extern void fn_8006DEF8(Work*, int, void*, void*, int);
 extern int fn_80088B04(void*);
-extern void fn_800FD40C(void*, const void*);
+extern char* fn_800FD40C(void*, const void*);
 extern const u8 lbl_802450C0[];
 
 void fn_80088C04(Work* work)

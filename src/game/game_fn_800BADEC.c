@@ -1,7 +1,7 @@
 extern void *fn_80201BC8();
 extern void *fn_80201B8C();
 extern void *memcpy(void *, const void *, unsigned int);
-extern void fn_800389E0(void *, int, signed short, int);
+extern int fn_800389E0(void *, int, signed short, int);
 
 unsigned short fn_800BADEC(void *input, void *object)
 {

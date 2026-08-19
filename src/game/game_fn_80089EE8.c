@@ -23,7 +23,7 @@ extern void fn_8006EA4C(void);
 extern void fn_8006EB60(void);
 extern void fn_8008A0B4(void);
 extern void fn_8008A2E0(void);
-extern void fn_800FD40C(void*, const void*);
+extern char* fn_800FD40C(void*, const void*);
 extern void* memset(void*, int, unsigned int);
 extern const u8 lbl_80245164[];
 
