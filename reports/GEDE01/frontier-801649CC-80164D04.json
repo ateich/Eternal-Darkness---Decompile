@@ -1,0 +1,25 @@
+{
+  "range_start": "0x801649CC",
+  "range_end": "0x80164D04",
+  "accounted_bytes": 824,
+  "matched_bytes": 440,
+  "unaccounted_spans": [],
+  "nonmatching_spans": [
+    {
+      "start": "0x80164A64",
+      "end": "0x80164BE4",
+      "symbol": "fn_80164A64",
+      "best_match_percent": 99.791664,
+      "blocker": "Canonical MWCC schedules the final call's independent object and allocator moves as mr r4,r29 followed by mr r3,r31, while retail emits mr r3,r31 followed by mr r4,r29; generated size, behavior, and all relocations otherwise agree."
+    }
+  ],
+  "functions": [
+    {"symbol":"fn_801649CC","address":"0x801649CC","size":152,"generated_size":152,"match_percent":100.0,"relocations_equal":"1/1","status":"Matching","evidence":"build/GEDE01/fndiff_fn_801649CC.json"},
+    {"symbol":"fn_80164A64","address":"0x80164A64","size":384,"generated_size":384,"match_percent":99.791664,"relocations_equal":"22/22","status":"NonMatching","blocker":"The only differences are two independent pre-call moves in opposite schedule order: retail mr r3,r31 then mr r4,r29; canonical MWCC emits mr r4,r29 then mr r3,r31.","evidence":"build/GEDE01/fndiff_fn_80164A64.json"},
+    {"symbol":"fn_80164BE4","address":"0x80164BE4","size":152,"generated_size":152,"match_percent":100.0,"relocations_equal":"9/9","status":"Matching","evidence":"build/GEDE01/fndiff_fn_80164BE4.json"},
+    {"symbol":"fn_80164C7C","address":"0x80164C7C","size":136,"generated_size":136,"match_percent":100.0,"relocations_equal":"5/5","status":"Matching","evidence":"build/GEDE01/fndiff_fn_80164C7C.json"}
+  ],
+  "next_target": "0x80164D04",
+  "next_gate": "Attempt the 240-byte fn_80164D04 next and continue consecutively toward the jumptable_8023BF28 data-ownership boundary; every byte in this report range is accounted, with fn_80164A64 explicitly retained as the sole NonMatching span.",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

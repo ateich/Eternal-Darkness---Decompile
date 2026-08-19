@@ -5,7 +5,7 @@ extern void *fn_800DE3F8(void *);
 extern int fn_80201B44();
 extern unsigned long long fn_8020123C();
 extern int fn_80038308(void *, int, s16 *);
-extern void fn_80038464(void *, int, s16 *);
+extern int fn_80038464(void *, int, s16 *);
 extern void fn_800389E0(void *, int, s16, int);
 
 void fn_800E0330(void *object)

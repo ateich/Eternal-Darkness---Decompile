@@ -2,7 +2,7 @@ typedef signed short s16;
 
 extern void *fn_80201B8C();
 extern int fn_80038308(void*, int, s16*);
-extern void fn_80038464(void*, int, s16*);
+extern int fn_80038464(void*, int, s16*);
 
 int fn_800A2130(void* object)
 {

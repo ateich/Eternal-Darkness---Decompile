@@ -36,7 +36,7 @@ extern void fn_8019FF5C(void*);
 extern unsigned int fn_800FBFB0();
 #define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void fn_801A0008(void);
-extern void fn_80148008(Vec3f*, const Vec3s*, void*, void (*)(void));
+extern void* fn_80148008(Vec3f*, const Vec3s*, void*, void (*)(void));
 extern void* memset(void*, s32, unsigned long);
 
 s32 fn_80019244(void* script)

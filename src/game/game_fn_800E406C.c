@@ -45,7 +45,7 @@ extern void fn_80154340(int, int, int, int, int, int, int, float);
 extern void fn_801A19BC(EffectDesc *);
 extern void fn_801AAE68(int, int, int, float, Vec3 *, int, int, int, u16, int);
 extern void fn_801A1BD0(void);
-extern void fn_80148008(Vec3 *, ResourceKey *, EffectDesc *, void *);
+extern void* fn_80148008(Vec3 *, ResourceKey *, EffectDesc *, void *);
 extern void fn_8019D560(EffectDesc *);
 extern void fn_80152F90(Vec3 *, ResourceKey *, EffectDesc *, int);
 

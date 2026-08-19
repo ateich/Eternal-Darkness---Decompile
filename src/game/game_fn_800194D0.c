@@ -48,7 +48,7 @@ extern int fn_8015C4A4(int, int);
 extern EffectRecordTable* fn_8015C390(s32);
 extern void fn_8019DFA0(EffectDescriptor*);
 extern void fn_8019DFF8(void);
-extern void fn_80148008(Vec3f*, const Vec3s*, EffectDescriptor*, void (*)(void));
+extern void* fn_80148008(Vec3f*, const Vec3s*, EffectDescriptor*, void (*)(void));
 
 s32 fn_800194D0(void* script)
 {

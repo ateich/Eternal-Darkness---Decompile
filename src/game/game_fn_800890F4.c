@@ -17,7 +17,7 @@ extern void *fn_80201B9C();
 extern void* fn_80204844(void*, int);
 extern void* fn_8006D444(void);
 extern int fn_8006D344(void*, int, int);
-extern void fn_8004918C(void);
+extern void* fn_8004918C(void);
 extern unsigned int fn_801A7780(void);
 extern void fn_801F6B6C(Vector*, ScreenPosition*, int, int);
 extern void fn_801B0CA4(int, int);

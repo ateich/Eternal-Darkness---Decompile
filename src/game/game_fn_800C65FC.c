@@ -10,7 +10,7 @@ extern float lbl_8064F1F8;
 extern int fn_80201B44();
 extern int fn_80201B54();
 extern int fn_80038308(void *, int, s16 *);
-extern void fn_80038464(void *, int, s16 *);
+extern int fn_80038464(void *, int, s16 *);
 extern void fn_801441C0(int, int, int);
 extern int fn_801A98F4(int, int);
 

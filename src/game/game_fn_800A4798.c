@@ -14,7 +14,7 @@ typedef struct Range800A4798 {
 
 extern int fn_801A74C0(void*);
 extern void *fn_80201B8C();
-extern void fn_80038464(void*, int, short*);
+extern int fn_80038464(void*, int, short*);
 extern u8 fn_801A7768(void*);
 extern int fn_801A7760(void*);
 extern void fn_801A7518(void*, int);

@@ -9,7 +9,7 @@ extern u32 lbl_8064D010;
 extern int lbl_805AE000;
 extern int lbl_805ADFE0;
 
-extern int fn_8020D250(void*, int, int);
+extern void fn_8020D250(void*, int, int);
 extern int fn_8020D318(void*, int, int);
 
 void* fn_80138A6C(u32 size, int mode)

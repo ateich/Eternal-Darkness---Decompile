@@ -33,7 +33,7 @@ extern void *fn_80037AF4(int);
 extern void *fn_80201B8C();
 extern int fn_80201B54();
 extern void fn_802015A4(void *);
-extern void fn_80038464(void *, int, short *);
+extern int fn_80038464(void *, int, short *);
 
 #pragma use_lmw_stmw on
 void *fn_800CF0C8(void *owner, u16 first_id, u16 second_id, u8 flag,

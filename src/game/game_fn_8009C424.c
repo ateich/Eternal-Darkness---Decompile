@@ -15,7 +15,7 @@ extern void *fn_80201814();
 extern int fn_80201B5C(void*);
 extern int fn_80036E14(void*);
 extern int fn_80038308(void*, int, short*);
-extern void fn_80038464(void*, int, short*);
+extern int fn_80038464(void*, int, short*);
 extern const double lbl_8064ED80;
 extern const float lbl_8064ED88;
 

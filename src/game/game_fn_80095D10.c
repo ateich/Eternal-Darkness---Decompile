@@ -9,7 +9,7 @@ extern void *fn_80201B8C();
 extern void* fn_80201B3C();
 extern int fn_80128EAC(void*);
 extern int fn_80038308(void*, int, short*);
-extern void fn_80038464(void*, int, short*);
+extern int fn_80038464(void*, int, short*);
 extern int fn_80201B64(void*);
 extern const float lbl_8064ECD4;
 

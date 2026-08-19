@@ -33,7 +33,7 @@ extern void fn_8018358C(EffectParams *);
 extern unsigned int fn_800FBFB0();
 #define fn_800FBFB0() ((int)fn_800FBFB0())
 extern s32 fn_8007BC44(Vec3 *);
-extern void fn_80148008(Vec3 *, void *, EffectParams *, void (*)(void));
+extern void* fn_80148008(Vec3 *, void *, EffectParams *, void (*)(void));
 extern void fn_801834F0(void);
 extern void fn_80179B64(Vec3 *, void *);
 extern void fn_8019FF5C(EffectParams *);

@@ -63,7 +63,7 @@ extern M2C_UNK fn_801302BC(u32, M2C_UNK);                  /* extern */
 extern s32 fn_801305D4(u32);                               /* extern */
 extern M2C_UNK fn_80179064(s32, s32, s32, s32);            /* extern */
 extern s32 fn_801A717C();                                  /* extern */
-extern M2C_UNK fn_801A7228();                              /* extern */
+extern void fn_801A7228();                                 /* extern */
 extern M2C_UNK fn_801A7470();                              /* extern */
 extern s32 fn_801A7488();                                  /* extern */
 extern void fn_801A74A0(s32, s32);                         /* extern */
