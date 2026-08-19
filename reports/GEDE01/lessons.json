@@ -2,10 +2,10 @@
   "schema_version": 2,
   "scope": "Distinct MWCC code-generation behaviors documented in reports/GEDE01/progress.json open_items and docs/matching.md",
   "source_snapshot": {
-    "repository_revision": "0a600c67674b98b20688e6c53fc8fb370c14710c",
-    "next_gate": "0x801493D4",
+    "repository_revision": "f7880b16081355b84b06c9e83c352086a83bb3f0",
+    "next_gate": "0x80156920",
     "reports/GEDE01/progress.json": {
-      "sha256": "97cf92b2fa7a70a11c56bda6d132348e1500fcac69d2734caa1255389104d87a",
+      "sha256": "5981fc47d35c051cbc0b6ce0d265cda10119f64a95e7fd13cb5ea8a5d4af781f",
       "scope": "open_items"
     },
     "docs/matching.md": {
@@ -1398,6 +1398,146 @@
       "precise_divergence": "Returning the free-entry search result directly permits tail-return shaping, while retail retains separate non-tail return branches through a named result local.",
       "workaround": "Retain a separate result local in fn_801429A8.",
       "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_801420F8 through fn_80142FCC"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_801493D4", "fn_8014B7B0"],
+      "precise_divergence": "Canonical GC/1.3 emits frames 16 bytes smaller than retail even though the generated functions are size-exact, relocation-exact, and otherwise nearly or completely instruction-exact; only the frame adjustment and corresponding stack offsets differ.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_801493D4 through fn_80149748 and fn_8014B7B0 through fn_8014B990"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80149748", "fn_801497E0", "fn_8014B33C", "fn_8014C5D4", "fn_8014C87C", "fn_8014C9F4"],
+      "precise_divergence": "Local declaration order controls MWCC's exact callee-saved allocation across the documented r24-r31, r27-r31, or r28-r31 value webs.",
+      "workaround": "Order locals according to their retail callee-saved lifetimes as documented for each function.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_801493D4 through fn_80149748, fn_801497E0 through fn_80149B60, fn_8014B0F0 through fn_8014B76C, fn_8014C470 through fn_8014C7B8, and fn_8014C7C0 through fn_8014CBC0"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_80149920", "fn_801499C4", "fn_8014AE54", "fn_8014B014"],
+      "precise_divergence": "Narrowing an intermediate transform aggregate shortens its stack extent and changes the retail frame and subsequent slot offsets.",
+      "workaround": "Retain the complete 36-byte transform result.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_801497E0 through fn_80149B60 and fn_8014AE54 through fn_8014B014"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_80149D58", "fn_8014B604"],
+      "precise_divergence": "Scalar honest C lowers the quantized conversion as fctiwz/sth and emits 32 bytes, while retail uses a 12-byte Gekko-specific psq_st sequence.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80149C1C through fn_8014A040 and fn_8014A6BC through fn_8014B768"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8014A378", "fn_8014B0F0", "fn_801535D8", "fn_80153A24", "fn_80154DB4", "fn_80154F74", "fn_80155330", "fn_80156480"],
+      "precise_divergence": "Canonical MWCC assigns equivalent long-lived state, loop, descriptor, pointer, or flag-word values to different volatile or callee-saved registers; several cited functions remain size- and relocation-exact despite the alternate allocation.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "float-constant-placement",
+      "functions": ["fn_8014AF38", "fn_8014B494"],
+      "precise_divergence": "Split-TU compilation gives signed or unsigned integer-conversion biases compiler-local identities instead of the retail-owned small-data constants.",
+      "workaround": "Externalize the biases to retail-owned lbl_80650490 and, for the unsigned conversion in fn_8014B494, lbl_806504A0.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8014AE54 through fn_8014B014 and fn_8014B0F0 through fn_8014B76C"]
+    },
+    {
+      "category": "jump-table-strategy",
+      "functions": ["fn_8014CB90", "fn_8014DA68", "fn_801502C0"],
+      "precise_divergence": "Combining or reshaping semantically separate switch bodies changes MWCC's sparse comparison tree from retail.",
+      "workaround": "Use the documented direct switch and retain separate case bodies.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8014C7C0 through fn_8014CBC0, fn_8014D100 through fn_8014DA68, and fn_801502C0 through fn_80150950"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8014D98C", "fn_8014F320", "fn_80154570", "fn_801545E4", "fn_80154754"],
+      "precise_divergence": "Scalar-member initialization or mutation schedules loads and stores differently from retail's aggregate or explicitly staged source form.",
+      "workaround": "Use aggregate Vec3 assignments, retain an explicit float temporary, and group both RGB mutations before the three whole-word copies as documented.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8014D100 through fn_8014DA68, fn_8014EC30 through fn_8014F320, and fn_80154570 through fn_80154754"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8014EC30", "fn_8014ECD8", "fn_8014F834", "fn_80153A24", "fn_80153FD0", "fn_80154CB4", "fn_80154F74", "fn_80155158"],
+      "precise_divergence": "Equivalent result, constant, descriptor, recursive-loop, or selection-loop work occupies a different local schedule from retail, sometimes shifting otherwise semantically aligned relocation sites.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "inlining",
+      "functions": ["fn_8014F3A4"],
+      "precise_divergence": "Expressing a fixed 0xB0-byte structure copy field-by-field does not reproduce retail's compiler-generated 22-iteration aggregate copy loop.",
+      "workaround": "Use a single 0xB0-byte aggregate assignment.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8014F3A4 through fn_8014F834"]
+    },
+    {
+      "category": "float-constant-placement",
+      "functions": ["fn_8014F834", "fn_8014F9D4", "fn_8014FB80", "fn_8014FCF4"],
+      "precise_divergence": "Equivalent floating constants are scheduled or owned differently in split constructor translation units, shifting relocation sites even where target sequences remain semantically aligned.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8014F3A4 through fn_8014F834 and fn_8014F9D4 through fn_8015023C"]
+    },
+    {
+      "category": "float-constant-placement",
+      "functions": ["fn_80152530", "fn_80155814"],
+      "precise_divergence": "Compiler-generated signed or unsigned conversion biases and ordinary float constants must retain retail small-data ownership for code and relocation identity to match.",
+      "workaround": "Assign fn_80152530's -30.0f and signed-conversion bias to 0x80650598-0x806505A8, and externalize fn_80155814's unsigned-conversion bias to lbl_80650618.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80152530 through fn_8015295C and fn_80155814 through fn_80155ABC"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_8015319C", "fn_801532B4", "fn_801533A8", "fn_80153464", "fn_801547CC", "fn_80154B6C", "fn_80155158"],
+      "precise_divergence": "Aggregate typing and local-array extent determine MWCC's exact frame size and stack offsets; incomplete descriptor or coordinate types produce smaller frames than retail.",
+      "workaround": "Use the documented exact descriptor sizes and six-byte Coord3 copy; no complete workaround is recorded for fn_801547CC or fn_80155158.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80155ABC"],
+      "precise_divergence": "An untyped or flattened point expression lets MWCC hoist a loop-invariant address and changes the retail r27-r31 allocation.",
+      "workaround": "Recover the typed object->point expression.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80155814 through fn_80155ABC"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80155B5C"],
+      "precise_divergence": "Default propagation and declaration order do not reproduce retail's r4/r0 allocation for the allocation-size arithmetic.",
+      "workaround": "Use the documented TU-local opt_propagation pragma and declaration order.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80155B5C through fn_80155C88"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_80154A98", "fn_801561B4"],
+      "precise_divergence": "Without the translation-unit register-save option, MWCC does not select retail's five-register lmw/stmw save/restore sequence.",
+      "workaround": "Enable the TU-local use_lmw_stmw pragma.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_801547CC through fn_80154A98 and fn_801561B4 through fn_801562DC"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_801566E0"],
+      "precise_divergence": "Reusing the input list head as the returned head changes MWCC's retail r3/r5/r31 lifetime allocation.",
+      "workaround": "Keep the input head immutable and store the returned head in a separate local.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_801565E0 through fn_801566E0"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_8014E000", "fn_8014E20C", "fn_80154B6C"],
+      "precise_divergence": "Using a generic vector type instead of the recovered six-byte Coord3 changes aggregate copies, frame layout, and the associated register/load-store schedule.",
+      "workaround": "Use the recovered six-byte Coord3 type and preserve the documented declaration order or constant-copy form.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8014DB5C through fn_8014E20C and fn_80154B6C through fn_80154F10"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8014F3A4", "fn_8015319C", "fn_801532B4", "fn_801533A8", "fn_80153464", "fn_80155C88"],
+      "precise_divergence": "Unsigned field types select different mask or extension forms from retail where the original narrow fields are signed bytes.",
+      "workaround": "Declare the documented flags, sentinel fields, and path bytes as signed byte types to reproduce rlwinm, -1/-2 immediates, and extsb sequences.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8014F3A4 through fn_8014F834, fn_8015319C through fn_80153464, and fn_80155B5C through fn_80155C88"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80155D50", "fn_80155D64"],
+      "precise_divergence": "Ordinary empty conditional hooks omit retail's placeholder nop even though the surrounding conditional C is otherwise correct.",
+      "workaround": "Retain one explicit nop inside each honest conditional hook.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80155D50 through fn_80155EF4"]
     }
   ]
 }
