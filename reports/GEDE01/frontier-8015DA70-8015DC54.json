@@ -1,0 +1,57 @@
+{
+  "range_start": "0x8015DA70",
+  "range_end": "0x8015DC54",
+  "accounted_bytes": 484,
+  "matched_bytes": 276,
+  "unaccounted_spans": [],
+  "nonmatching_spans": [
+    {
+      "start": "0x8015DB84",
+      "end": "0x8015DC54",
+      "symbol": "fn_8015DB84",
+      "reason": "Retail uses a branch-based four-instruction boolean materialization for the two byte fields, while canonical MWCC folds the honest C comparison into a branchless subf/subf/or/srwi sequence. Generated code is 204 bytes versus 208 retail bytes; the unsigned-conversion bias also remains TU-local instead of resolving to retail-owned lbl_80650640."
+    }
+  ],
+  "functions": [
+    {
+      "symbol": "fn_8015DA70",
+      "address": "0x8015DA70",
+      "size": 64,
+      "generated_size": 64,
+      "match_percent": 100.0,
+      "relocations_equal": "1/1",
+      "status": "Matching"
+    },
+    {
+      "symbol": "fn_8015DAB0",
+      "address": "0x8015DAB0",
+      "size": 196,
+      "generated_size": 196,
+      "match_percent": 100.0,
+      "relocations_equal": "0/0",
+      "status": "Matching"
+    },
+    {
+      "symbol": "fn_8015DB74",
+      "address": "0x8015DB74",
+      "size": 16,
+      "generated_size": 16,
+      "match_percent": 100.0,
+      "relocations_equal": "0/0",
+      "status": "Matching"
+    },
+    {
+      "symbol": "fn_8015DB84",
+      "address": "0x8015DB84",
+      "size": 208,
+      "generated_size": 204,
+      "match_percent": 81.25,
+      "relocations_equal": "4/4",
+      "status": "NonMatching",
+      "codegen_divergence": "Canonical MWCC emits branchless subf/subf/or/srwi inequality materialization instead of retail's cmplw/bne/li/b/li sequence; the compiler-generated unsigned conversion bias is still TU-local rather than externalized to lbl_80650640."
+    }
+  ],
+  "next_target": "0x8015DC54",
+  "next_gate": "Attempt fn_8015DC54 next and continue consecutively toward the jumptable_8023BF28 data-ownership boundary; every byte from 0x8015DA70 through 0x8015DC54 is accounted, including documented NonMatching fn_8015DB84.",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

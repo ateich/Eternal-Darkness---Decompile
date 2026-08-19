@@ -1,0 +1,36 @@
+{
+  "range_start": "0x8015DC54",
+  "range_end": "0x8015DF60",
+  "matched_bytes": 232,
+  "accounted_bytes": 780,
+  "unaccounted_spans": [],
+  "nonmatching_spans": [
+    {
+      "start": "0x8015DC54",
+      "end": "0x8015DD48",
+      "symbol": "fn_8015DC54",
+      "score": 65.459015,
+      "retail_bytes": 244,
+      "generated_bytes": 264,
+      "blocker": "Canonical MWCC collapses retail's cmplw/bne/li/b/li byte comparison to subf/subf/or/srwi and coalesces the long-lived context arguments into r28-r30 rather than retail r27-r29; the shared unsigned-conversion relocation is externalized correctly."
+    },
+    {
+      "start": "0x8015DD94",
+      "end": "0x8015DEC4",
+      "symbol": "fn_8015DD94",
+      "score": 83.0921,
+      "retail_bytes": 304,
+      "generated_bytes": 300,
+      "blocker": "Initialization semantics and control flow agree, but MWCC hoists the E72D60/DBCAA0 constants and global base into r4/r6 before the stores; retail interleaves constant construction with the field14 load-copy and retains the queue base in r31 four bytes later."
+    }
+  ],
+  "functions": [
+    {"symbol":"fn_8015DC54","address":"0x8015DC54","size":244,"status":"NonMatching","match_percent":65.459015,"evidence":"build/GEDE01/fndiff_fn_8015DC54.json"},
+    {"symbol":"fn_8015DD48","address":"0x8015DD48","size":76,"status":"Matching","match_percent":100.0,"relocations":"5/5","evidence":"build/GEDE01/fndiff_fn_8015DD48.json"},
+    {"symbol":"fn_8015DD94","address":"0x8015DD94","size":304,"status":"NonMatching","match_percent":83.0921,"evidence":"build/GEDE01/fndiff_fn_8015DD94.json"},
+    {"symbol":"fn_8015DEC4","address":"0x8015DEC4","size":96,"status":"Matching","match_percent":100.0,"relocations":"8/8","evidence":"build/GEDE01/fndiff_fn_8015DEC4.json"},
+    {"symbol":"fn_8015DF24","address":"0x8015DF24","size":60,"status":"Matching","match_percent":100.0,"relocations":"5/5","evidence":"build/GEDE01/fndiff_fn_8015DF24.json"}
+  ],
+  "next_target": "0x8015DF60",
+  "next_gate": "Attempt fn_8015DF60 next and continue consecutively toward the jumptable_8023BF28 data-ownership boundary; every byte from 0x8015DC54 through 0x8015DF60 is accounted, including documented NonMatching fn_8015DC54 and fn_8015DD94."
+}

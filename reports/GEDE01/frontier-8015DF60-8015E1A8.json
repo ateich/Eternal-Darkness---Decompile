@@ -1,0 +1,34 @@
+{
+  "range_start": "0x8015DF60",
+  "range_end": "0x8015E1A8",
+  "matched_bytes": 200,
+  "accounted_bytes": 584,
+  "unaccounted_spans": [],
+  "nonmatching_spans": [
+    {
+      "start": "0x8015DF60",
+      "end": "0x8015E0A0",
+      "symbol": "fn_8015DF60",
+      "score": 85.2375,
+      "retail_bytes": 320,
+      "generated_bytes": 300,
+      "blocker": "The interrupt-protected capacity calculation and volatile ring-buffer reads are recovered, but canonical MWCC retains one global base while retail rematerializes lbl_805BB1E0 before two minimum expressions; it also lowers the pointer differences as signed cmpw where retail uses cmplw for the 0x10000 clamps."
+    },
+    {
+      "start": "0x8015E168",
+      "end": "0x8015E1A8",
+      "symbol": "fn_8015E168",
+      "score": 80.9375,
+      "retail_bytes": 64,
+      "generated_bytes": 68,
+      "blocker": "The aligned-address setup, two descriptor stores and allocator call are recovered, but canonical MWCC hoists a duplicate lbl_8064D160 SDA address into r6; retail materializes it after the first store in r4 and reuses r4 for both the second store and call argument."
+    }
+  ],
+  "functions": [
+    {"symbol":"fn_8015DF60","address":"0x8015DF60","size":320,"status":"NonMatching","match_percent":85.2375,"evidence":"build/GEDE01/fndiff_fn_8015DF60.json"},
+    {"symbol":"fn_8015E0A0","address":"0x8015E0A0","size":200,"status":"Matching","match_percent":100.0,"relocations":"16/16","evidence":"build/GEDE01/fndiff_fn_8015E0A0.json"},
+    {"symbol":"fn_8015E168","address":"0x8015E168","size":64,"status":"NonMatching","match_percent":80.9375,"evidence":"build/GEDE01/fndiff_fn_8015E168.json"}
+  ],
+  "next_target": "0x8015E1A8",
+  "next_gate": "Attempt fn_8015E1A8 next and continue consecutively toward the jumptable_8023BF28 data-ownership boundary; every byte from 0x8015DF60 through 0x8015E1A8 is accounted by one exact match and two documented independent NonMatching C reconstructions."
+}
