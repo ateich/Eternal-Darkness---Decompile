@@ -1,0 +1,54 @@
+{
+  "range_start": "0x8016938C",
+  "range_end": "0x80169740",
+  "accounted_bytes": 948,
+  "matched_bytes": 524,
+  "unaccounted_spans": [],
+  "nonmatching_spans": [
+    {
+      "symbol": "fn_801694A8",
+      "address": "0x801694A8",
+      "size": 424,
+      "generated_size": 464,
+      "match_percent": 57.915092,
+      "retail_relocations": 12,
+      "generated_relocations": 14,
+      "blocker": "Canonical MWCC keeps extra loop temporaries live, selects r20-r27 instead of retail r23-r31, and expands the stack frame from 0x30 to 0x40."
+    }
+  ],
+  "functions": [
+    {
+      "symbol": "fn_8016938C",
+      "address": "0x8016938C",
+      "size": 284,
+      "generated_size": 284,
+      "match_percent": 100.0,
+      "relocations_equal": "4/4",
+      "status": "Matching",
+      "evidence": "build/GEDE01/fndiff_fn_8016938C.json"
+    },
+    {
+      "symbol": "fn_801694A8",
+      "address": "0x801694A8",
+      "size": 424,
+      "generated_size": 464,
+      "match_percent": 57.915092,
+      "relocations_equal": "12 retail/14 generated",
+      "status": "NonMatching",
+      "evidence": "build/GEDE01/fndiff_fn_801694A8.json"
+    },
+    {
+      "symbol": "fn_80169650",
+      "address": "0x80169650",
+      "size": 240,
+      "generated_size": 240,
+      "match_percent": 100.0,
+      "relocations_equal": "7/7",
+      "status": "Matching",
+      "evidence": "build/GEDE01/fndiff_fn_80169650.json"
+    }
+  ],
+  "next_target": "0x80169740",
+  "next_gate": "Attempt the 108-byte fn_80169740 consecutive routine next and continue toward the jumptable_8023BF28 data-ownership boundary; fn_801694A8 is the documented NonMatching span immediately behind this gate.",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}
