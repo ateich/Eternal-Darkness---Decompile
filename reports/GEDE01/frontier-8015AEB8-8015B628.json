@@ -1,0 +1,19 @@
+{
+  "range_start": "0x8015AEB8",
+  "range_end": "0x8015B628",
+  "accounted_bytes": 1904,
+  "matched_bytes": 96,
+  "unaccounted_spans": [],
+  "nonmatching_spans": [
+    {"symbol":"fn_8015AEB8","address":"0x8015AEB8","size":956,"match_percent":10.121339,"status":"NonMatching","divergence":"The partial initializer uses a 0x10 frame and one saved register versus retail's 0x50 frame and r16-r31 lifetimes; repeated copy and buffer-registration scheduling remains unrecovered."},
+    {"symbol":"fn_8015B274","address":"0x8015B274","size":852,"match_percent":23.399061,"status":"NonMatching","divergence":"The recovered stream-decoder skeleton uses a 0x40 frame versus retail's 0x2A0 frame; the 256-byte permutation table and backreference decode loops still produce different register allocation and control flow."}
+  ],
+  "functions": [
+    {"symbol":"fn_8015AEB8","address":"0x8015AEB8","size":956,"match_percent":10.121339,"status":"NonMatching"},
+    {"symbol":"fn_8015B274","address":"0x8015B274","size":852,"match_percent":23.399061,"status":"NonMatching"},
+    {"symbol":"fn_8015B5C8","address":"0x8015B5C8","size":96,"match_percent":100.0,"relocations_equal":"1/1","status":"Matching"}
+  ],
+  "next_target": "0x8015B628",
+  "next_gate": "Attempt fn_8015B628 next and continue consecutively toward the jumptable_8023BF28 data-ownership boundary. The covered span has no unaccounted bytes; fn_8015AEB8 and fn_8015B274 remain explicitly documented NonMatching reconstructions.",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}
