@@ -31,7 +31,7 @@ extern s32 fn_80071D5C(void *object);
 extern s32 fn_801A74F8(s32 event);
 extern void fn_801A7518(s32 event, s16 value);
 extern unsigned long long fn_8020123C();
-extern s32 fn_801E79FC(s32 object, s32 value);
+extern int fn_801E79FC(void*, int);
 extern void fn_801E7974(s32 object, s32 value);
 extern void fn_80006954(s32 value);
 extern s32 fn_800389E0(s32 context, s32 index, s16 value, s32 active);
@@ -95,14 +95,14 @@ s32 fn_80064E2C(s32 context, s32 event, s32 index, u16 mask, s32 amount,
     }
 
     if ((mask & 1) && is_current_owner) {
-        if (fn_801E79FC(lbl_8064C4E0, 0x360) == 0 &&
+        if (fn_801E79FC((void *)lbl_8064C4E0, 0x360) == 0 &&
             *(s32 *)(lbl_803003C8 + 8) == 1) {
             lbl_8064C5D8 = 1;
             fn_80006954(100);
             fn_801E7974(lbl_8064C4E0, 0x2B6);
         }
     } else if ((mask & 2) && is_current_owner) {
-        if (fn_801E79FC(lbl_8064C4E0, 0x2CD) == 0 &&
+        if (fn_801E79FC((void *)lbl_8064C4E0, 0x2CD) == 0 &&
             *(s32 *)(lbl_803003C8 + 8) == 2) {
             lbl_8064C5D8 = 1;
             fn_80006954(100);
@@ -176,7 +176,7 @@ s32 fn_80064E2C(s32 context, s32 event, s32 index, u16 mask, s32 amount,
         }
     } else if (feedback == 2) {
         if (object != 0 && lbl_8064C594 != 0 &&
-            fn_801E79FC(lbl_8064C4E0, 0x257) != 0) {
+            fn_801E79FC((void *)lbl_8064C4E0, 0x257) != 0) {
             fn_80120AD0(object, 0, 100, 0xA, lbl_8064E698,
                          lbl_8064E69C);
         }

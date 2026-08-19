@@ -5,7 +5,7 @@ extern void *fn_80156938();
 extern void *fn_80201BC8();
 extern int fn_801990E8(void*);
 extern int fn_8012FAB4(void*, int);
-extern void* fn_80201C24(void*);
+extern void* fn_80201C24();
 extern int fn_80157894(void);
 extern void fn_80157B6C(void*, int);
 extern void fn_80199154(void*, int);
@@ -19,7 +19,8 @@ extern int fn_80199108(void*);
 extern int fn_8017FEA4(void*);
 extern u8 fn_80199118(void*);
 extern int fn_80199100(void*);
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void* fn_8017FDA8(void*, int);
 extern void fn_801534D8(void*, float, short*);
 extern void fn_8019916C(void*, int);

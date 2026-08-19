@@ -19,7 +19,7 @@ extern void fn_8017B7C8(void);
 extern void fn_80042DA8(void);
 extern int fn_800AF844(void);
 extern int fn_8006BE44(void);
-extern int fn_801E79FC(int, int);
+extern int fn_801E79FC(void*, int);
 extern void fn_801E79A0(int, int);
 extern void fn_800B25AC(void);
 extern void fn_800B689C(int, int);
@@ -38,12 +38,12 @@ void fn_8011BA1C(void)
     lbl_8064CA40 = fn_800AF844();
     lbl_8064CE44 = 0;
     lbl_8064C9E8 = 0;
-    if (fn_8006BE44() >= 2 && fn_801E79FC(lbl_8064C4E0, 476) == 0 &&
-        fn_801E79FC(lbl_8064C4E0, 475) != 0) {
+    if (fn_8006BE44() >= 2 && fn_801E79FC((void *)lbl_8064C4E0, 476) == 0 &&
+        fn_801E79FC((void *)lbl_8064C4E0, 475) != 0) {
         lbl_8064CE44 = 1;
         fn_801E79A0(lbl_8064C4E0, 475);
     }
-    if (fn_801E79FC(lbl_8064C4E0, 823) != 0) {
+    if (fn_801E79FC((void *)lbl_8064C4E0, 823) != 0) {
         if (lbl_8064CA40 != 0) {
             fn_800B25AC();
             fn_800B689C(0, 1);

@@ -16,7 +16,8 @@ extern void fn_8011F114();
 extern void fn_8012DBE8(void*, int, Color*);
 extern void fn_8012C62C(void*, int, Color*, Color*, Color*, int);
 extern void fn_801A19BC(EffectDesc*);
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void fn_8011F598(void*, int, int, int, void*, int);
 extern void* fn_80148008(void*, void*, EffectDesc*, void*);
 extern void fn_801A1BD0(void);

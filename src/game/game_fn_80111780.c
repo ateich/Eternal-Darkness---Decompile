@@ -2,7 +2,7 @@ extern unsigned int* lbl_8064C4E0;
 extern unsigned int lbl_80331748[];
 extern int fn_801118E8(void);
 extern int fn_80111BB0(void);
-extern int fn_801E79FC(unsigned int*, int);
+extern int fn_801E79FC(void*, int);
 
 int fn_80111780(void)
 {

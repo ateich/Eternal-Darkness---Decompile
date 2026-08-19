@@ -23,7 +23,8 @@ extern void* lbl_8064C4E0;
 extern int lbl_802FC5BC[];
 
 extern void fn_8012B690(void*, Vec3*, Vec3*);
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void fn_8017EA58(Work*);
 extern int fn_801E79FC(void*, int);
 extern void* fn_80148008(Vec3*, u16*, Work*, void (*)(void));

@@ -33,7 +33,7 @@ extern void fn_801ED118(void);
 extern void fn_801EDA7C(void*, int, int, int);
 extern void fn_801ECF50(int);
 extern void fn_80226C18(int, int);
-extern int fn_801E79FC(u32, u32);
+extern int fn_801E79FC(void*, int);
 extern void fn_80140E70(void*, DebugVertex*, u8, int, u32);
 extern void fn_800F9D4C(char*, const char*, ...);
 extern void fn_800ED4BC(char*, int, const char*, ...);
@@ -58,7 +58,7 @@ void fn_80141484(DebugBatch* batch, u32 value)
     i = 0;
     while (i < batch->count) {
         DebugVertex* vertex = (DebugVertex*)((u8*)vertices + source->slot * 0x38);
-        u8 color = fn_801E79FC(lbl_8064C4E0, source->value) ? 6 : 12;
+        u8 color = fn_801E79FC((void *)lbl_8064C4E0, source->value) ? 6 : 12;
         fn_80140E70(output, vertex, color, 4, value);
         i++;
         source++;

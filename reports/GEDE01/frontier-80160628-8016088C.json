@@ -1,0 +1,17 @@
+{
+  "range_start": "0x80160628",
+  "range_end": "0x8016088C",
+  "accounted_bytes": 612,
+  "matched_bytes": 468,
+  "unaccounted_spans": [],
+  "nonmatching_spans": ["0x80160748-0x801607D8"],
+  "functions": [
+    {"symbol":"fn_80160628","address":"0x80160628","size":288,"generated_size":288,"match_percent":100.0,"relocations_equal":"1/1","status":"Matching","evidence":"build/GEDE01/fndiff_fn_80160628.json"},
+    {"symbol":"fn_80160748","address":"0x80160748","size":144,"generated_size":140,"match_percent":66.94444,"relocations_equal":"1/1","status":"NonMatching","blocker":"Canonical MWCC either recognizes and eight-way unrolls the natural backward 16-byte entry-copy loop, producing 292 bytes, or retains the explicit loop at 140 bytes but coalesces the count and entry pointer and emits a different top-tested branch shape than retail's 144-byte r5/r3 bottom-tested loop.","evidence":"build/GEDE01/fndiff_fn_80160748.json"},
+    {"symbol":"fn_801607D8","address":"0x801607D8","size":112,"generated_size":112,"match_percent":100.0,"relocations_equal":"1/1","status":"Matching","evidence":"build/GEDE01/fndiff_fn_801607D8.json"},
+    {"symbol":"fn_80160848","address":"0x80160848","size":68,"generated_size":68,"match_percent":100.0,"relocations_equal":"2/2","status":"Matching","evidence":"build/GEDE01/fndiff_fn_80160848.json"}
+  ],
+  "next_target": "0x8016088C",
+  "next_gate": "Attempt fn_8016088C next and continue consecutively toward the jumptable_8023BF28 data-ownership boundary; every code byte in this report's range is independently owned, with fn_80160748 explicitly retained as the sole NonMatching span.",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

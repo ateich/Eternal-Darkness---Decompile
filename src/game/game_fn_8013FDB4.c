@@ -10,7 +10,8 @@ extern float fn_80211D4C(const void*, const Vec3*);
 extern void *fn_80201B9C();
 extern void *fn_80201BC8();
 extern int fn_80201EB8();
-extern int fn_80201B94(void*);
+extern void* fn_80201B94();
+#define fn_80201B94(a) ((int)fn_80201B94(a))
 extern int fn_8011FAEC(void*);
 extern int fn_80201CDC(void*);
 extern int fn_80047C70(void*);

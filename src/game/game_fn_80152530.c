@@ -12,7 +12,8 @@ extern void* fn_80149D98(void (*)(void));
 extern void fn_80149D64(void*);
 extern void fn_801858E0(void*);
 extern void fn_80185C64(void);
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void* memcpy(void*, const void*, u32);
 extern int fn_801E8328();
 extern u32 lbl_80651C58;

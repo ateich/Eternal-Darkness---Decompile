@@ -24,7 +24,7 @@ extern void fn_80201E78(Vec3*, void*);
 extern u32 fn_80179004(Vec3*, Vec3*);
 extern void fn_801A764C(void*, Vec3*);
 extern void fn_801A7670(void*, int);
-extern void fn_8020104C(int, int, int, void*, float);
+extern void fn_8020104C(int, void*, void*, int, float);
 extern int fn_801A98F4(int, int);
 
 void fn_8014BA14(s16* first, s16* second, int id, void* owner)
@@ -107,6 +107,6 @@ void fn_8014BA14(s16* first, s16* second, int id, void* owner)
     else
         fn_801A764C(spawn, db < dm ? &b : &middle);
     fn_801A7670(spawn, 0);
-    fn_8020104C(237, -1, zone, spawn, lbl_806504AC);
+    fn_8020104C(237, (void *)-1, (void *)zone, (int)spawn, lbl_806504AC);
     fn_801A98F4(552, 100);
 }

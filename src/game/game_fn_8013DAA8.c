@@ -12,7 +12,7 @@ typedef struct Group {
 
 extern void* lbl_8064C4E0;
 extern float lbl_80650354;
-extern int fn_801E79FC(void*, void*);
+extern int fn_801E79FC(void*, int);
 extern int fn_8013D998(const Vec3*, const void*, const void*, Vec3*);
 extern float fn_80211D4C(const Vec3*, const Vec3*);
 
@@ -27,7 +27,7 @@ Entry* fn_8013DAA8(const Vec3* point, const Group* group, Vec3* result)
     i = 0;
 
     while (i < group->count) {
-        if (fn_801E79FC(lbl_8064C4E0, entry->resource) &&
+        if (fn_801E79FC(lbl_8064C4E0, (int)entry->resource) &&
             fn_8013D998(point, group->records + entry->index * 56,
                         context, &candidate)) {
             float distance = fn_80211D4C(&candidate, point);

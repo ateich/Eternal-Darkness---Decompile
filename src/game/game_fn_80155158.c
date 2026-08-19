@@ -10,7 +10,7 @@ extern int fn_8015C9F0(void);
 extern u32 fn_8015E780(void);
 extern void* fn_801552AC(void*);
 extern void *fn_80156938();
-extern u32 fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
 extern void fn_80179B08(void*, void*);
 extern void fn_80154D24(void*, void*, void*);
 

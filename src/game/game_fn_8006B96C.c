@@ -5,7 +5,7 @@ typedef unsigned short u16;
 extern u8 lbl_80243EE8[];
 extern u16 lbl_8064AF90[];
 extern void *lbl_8064C4E0;
-extern s32 fn_801E79FC(void *object, s32 value);
+extern int fn_801E79FC(void*, int);
 
 s32 fn_8006B96C(s32 event, s32 mode)
 {

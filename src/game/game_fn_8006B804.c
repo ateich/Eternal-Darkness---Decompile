@@ -14,7 +14,7 @@ typedef struct GlobalState {
 extern GlobalState lbl_803003C8;
 extern void *lbl_8064C4E0;
 extern RuntimeState *fn_8006D1DC(s32 size);
-extern s32 fn_801E79FC(void *object, s32 value);
+extern int fn_801E79FC(void*, int);
 extern void fn_801E79A0(void *object, s32 value);
 
 s32 fn_8006B804(void *unused, s32 event)

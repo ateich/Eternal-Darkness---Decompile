@@ -1,4 +1,5 @@
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0();
+#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void fn_801534D8(void*, float, short*);
 
 void fn_80153898(void* object, short* rotation)

@@ -1,8 +1,8 @@
 extern unsigned int lbl_8064D148;
 extern float lbl_80650630;
-extern int fn_80201B44(void);
-extern void fn_80201814(void);
-extern int fn_80201EB8(void);
+extern int fn_80201B44();
+extern void *fn_80201814();
+extern int fn_80201EB8();
 extern void fn_80200EAC(int, int, int, float, int);
 
 void fn_8015C8A4(unsigned int mask, int enabled)

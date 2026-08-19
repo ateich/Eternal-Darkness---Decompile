@@ -6,7 +6,7 @@ extern void *fn_80201814();
 extern unsigned int fn_8020216C(void);
 extern int fn_801E8D34(unsigned int);
 extern int fn_801E7B24(unsigned int*, int, int);
-extern int fn_801E79FC(unsigned int, int);
+extern int fn_801E79FC(void*, int);
 
 int fn_8010F8B0(int index)
 {
@@ -20,5 +20,5 @@ int fn_8010F8B0(int index)
 
     value = fn_801E8D34(lbl_80331738[2]);
     value = fn_801E7B24(lbl_8024E388, 3, value);
-    return fn_801E79FC(lbl_8024E388[index], value);
+    return fn_801E79FC((void *)lbl_8024E388[index], value);
 }

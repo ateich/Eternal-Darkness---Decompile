@@ -1,0 +1,26 @@
+{
+  "range_start": "0x8015ECF8",
+  "range_end": "0x8015EFEC",
+  "accounted_bytes": 756,
+  "matched_bytes": 556,
+  "unaccounted_spans": [],
+  "nonmatching_spans": [
+    {
+      "start": "0x8015ECF8",
+      "end": "0x8015EDC0",
+      "symbol": "fn_8015ECF8",
+      "reason": "The honest C reaches 74.3% with all 3/3 relocations equal. Retail lowers the signed max(count - 20, 0) through subfc/subfe/andc and retains an index/byte-offset loop in r7/r6; canonical MWCC emits a conditional bound and converts the scan to a CTR loop, producing 204 bytes instead of retail's 200. Three bounded expression-shape attempts did not recover retail scheduling."
+    }
+  ],
+  "functions": [
+    {"symbol":"fn_8015ECF8","address":"0x8015ECF8","size":200,"generated_size":204,"match_percent":74.3,"relocations_equal":"3/3","status":"NonMatching"},
+    {"symbol":"fn_8015EDC0","address":"0x8015EDC0","size":148,"generated_size":148,"match_percent":100.0,"relocations_equal":"5/5","status":"Matching"},
+    {"symbol":"fn_8015EE54","address":"0x8015EE54","size":64,"generated_size":64,"match_percent":100.0,"relocations_equal":"2/2","status":"Matching"},
+    {"symbol":"fn_8015EE94","address":"0x8015EE94","size":68,"generated_size":68,"match_percent":100.0,"relocations_equal":"1/1","status":"Matching"},
+    {"symbol":"fn_8015EED8","address":"0x8015EED8","size":116,"generated_size":116,"match_percent":100.0,"relocations_equal":"2/2","status":"Matching"},
+    {"symbol":"fn_8015EF4C","address":"0x8015EF4C","size":160,"generated_size":160,"match_percent":100.0,"relocations_equal":"3/3","status":"Matching"}
+  ],
+  "next_target": "0x8015EFEC",
+  "next_gate": "Attempt fn_8015EFEC next and continue consecutively toward the jumptable_8023BF28 data-ownership boundary; fn_8015ECF8 is the sole documented NonMatching span in this range, and no bytes in 0x8015ECF8-0x8015EFEC are unaccounted.",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

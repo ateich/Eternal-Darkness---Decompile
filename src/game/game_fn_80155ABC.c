@@ -1,6 +1,6 @@
 extern void *fn_80201B9C();
 extern void *fn_80201BC8();
-extern void* fn_80201B94(void*);
+extern void* fn_80201B94();
 extern void* fn_80201BC0(void*);
 extern void* fn_80201E48(void);
 extern void* fn_8011F130(void*);
