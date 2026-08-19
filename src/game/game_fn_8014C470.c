@@ -9,10 +9,10 @@ typedef struct Resource {
 } Resource;
 
 extern int lbl_8064D18C;
-extern void* fn_80156938(void*);
+extern void *fn_80156938();
 extern Resource* fn_801FD6F4(void);
 extern void* fn_80201ADC(void);
-extern void* fn_80201BC8(void*);
+extern void *fn_80201BC8();
 extern int fn_801FE25C(void*);
 extern int fn_8015C910(void);
 extern int fn_80047178(void);

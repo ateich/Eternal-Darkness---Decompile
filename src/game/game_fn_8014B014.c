@@ -17,7 +17,7 @@ typedef struct Value {
     u8 trailing[0x10];
 } Value;
 
-extern Set* fn_80156938(void*);
+extern void *fn_80156938();
 extern void *fn_80201BC8();
 extern int fn_8011F6A4(void*, u32, u32, int, Value*, int);
 extern short* fn_801938A8(void*);

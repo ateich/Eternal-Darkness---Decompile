@@ -1,7 +1,7 @@
 extern float lbl_8023A728[3];
 extern double lbl_806504F0;
-extern void* fn_80156938(void*);
-extern void* fn_80201BC8(void*);
+extern void *fn_80156938();
+extern void *fn_80201BC8();
 extern short fn_801FE9DC(void*);
 extern void fn_8012B690(void*, float*, float*);
 extern void fn_801FDEB4(void*, float*);

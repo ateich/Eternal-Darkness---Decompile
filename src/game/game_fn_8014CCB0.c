@@ -27,7 +27,7 @@ extern int fn_800FBFB0(void);
 extern void fn_8017EA58(Work*);
 extern int fn_801E79FC(void*, int);
 extern void* fn_80148008(Vec3*, u16*, Work*, void (*)(void));
-extern void* fn_80156938(void*);
+extern void *fn_80156938();
 extern void fn_8017FF1C(void*, int);
 extern void fn_80183DD4(Work*);
 extern void fn_8017EAA8(void);

@@ -5,7 +5,7 @@ extern float lbl_80650608;
 extern void fn_801A1B34(void);
 typedef void (*Callback)(void);
 extern void* fn_80148008(Vec3*, void*, void*, Callback);
-extern void* fn_80156938(void*);
+extern void *fn_80156938();
 extern void fn_8017FF1C(void*, int);
 
 void* fn_80154CB4(Vec3* position, void* rotation, void* descriptor, float scale)

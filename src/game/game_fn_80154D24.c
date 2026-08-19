@@ -4,7 +4,7 @@ typedef struct Vec3 { u32 x, y, z; } Vec3;
 extern void fn_8019F228(void*);
 extern void fn_8019F284(void);
 extern void* fn_80148008(Vec3*, void*, void*, void*);
-extern void* fn_80156938(void*);
+extern void *fn_80156938();
 extern void fn_8017FF1C(void*, int);
 
 void* fn_80154D24(Vec3* position, void* rotation, void* descriptor)

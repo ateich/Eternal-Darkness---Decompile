@@ -9,7 +9,7 @@ extern u8 lbl_8031CD84[];
 
 extern void fn_80080458(int, u8);
 extern void *fn_80154340(float, int, u8, int, u8, int, int, int);
-extern EffectRuntime *fn_80156938(void *);
+extern void *fn_80156938();
 extern void fn_80180384(void *, int);
 
 int fn_80080588(int object, int index, u8 enabled, float lifetime)

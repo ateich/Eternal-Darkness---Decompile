@@ -14,7 +14,7 @@ extern void fn_80182380(EffectDescriptor*);
 extern void fn_80182448(void);
 extern float fn_80048C2C(float);
 extern float fn_80048C50(float);
-extern int fn_801E8328(int, EffectDescriptor*);
+extern int fn_801E8328();
 
 void fn_80153A24(Vec3* origin, int count, u16 radius, u16 first_kind,
                  u16 second_kind, EffectDescriptor* first,

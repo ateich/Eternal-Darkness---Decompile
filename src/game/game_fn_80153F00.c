@@ -13,7 +13,7 @@ typedef struct Descriptor {
 extern void fn_80183DD4(Descriptor*);
 extern void fn_80183EE0(void);
 extern void* fn_80148008(Vec3f*, void*, Descriptor*, void (*)(void));
-extern void* fn_80156938(void*);
+extern void *fn_80156938();
 extern void fn_8017FF1C(void*, int);
 
 void fn_80153F00(u8 style, u8 mode, u8 kind, u8 type, u32* color,

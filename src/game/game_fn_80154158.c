@@ -4,7 +4,7 @@ typedef struct Vec3f {
 
 extern void fn_801A1BD0(void);
 extern void* fn_80148008(Vec3f*, void*, void*, void (*)(void));
-extern void* fn_80156938(void*);
+extern void *fn_80156938();
 extern void fn_8017FF1C(void*, int);
 
 void* fn_80154158(Vec3f* position, void* resource, void* descriptor)

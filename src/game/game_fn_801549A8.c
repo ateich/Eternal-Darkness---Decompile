@@ -8,7 +8,7 @@ typedef struct Vec3 {
 
 extern void fn_8019F800(void);
 extern void* fn_80148008(Vec3*, int, int, void*);
-extern void* fn_80156938(void*);
+extern void *fn_80156938();
 extern void fn_8017FF1C(void*, int);
 
 void* fn_801549A8(Vec3* position, int arg)

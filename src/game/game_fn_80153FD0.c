@@ -14,7 +14,7 @@ extern void fn_8019CFC4(void*);
 extern void fn_80148A98(void*, void*);
 extern void fn_80149B38(void*);
 extern void fn_80184740(void*);
-extern int fn_801E8328(int, void*, void*);
+extern int fn_801E8328();
 extern void fn_80149EB8(void*);
 extern u8 lbl_802FC5BC[];
 

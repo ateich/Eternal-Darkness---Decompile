@@ -21,7 +21,7 @@ typedef struct Value {
 } Value;
 
 extern int fn_80157034(void*);
-extern Set* fn_80156938(void*);
+extern void *fn_80156938();
 extern int fn_80157050(Set*);
 extern u32 fn_80036D5C(Set*);
 extern u8 fn_80202160(Set*);

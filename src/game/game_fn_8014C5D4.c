@@ -1,8 +1,8 @@
 typedef unsigned char u8;
 typedef struct Resource { u8 pad[0x29]; u8 flags; } Resource;
 
-extern void* fn_80156938(void*);
-extern void* fn_80201BC8(void*);
+extern void *fn_80156938();
+extern void *fn_80201BC8();
 extern Resource* fn_801FD6F4(void);
 extern int fn_801FE494(void*);
 extern int fn_801FE4C8(void*);

@@ -31,7 +31,7 @@ typedef struct Work {
 extern void* lbl_802FC5BC[];
 extern void fn_801487AC(void);
 extern void fn_801556DC(void);
-extern void* fn_80201814(void*);
+extern void *fn_80201814();
 extern void* fn_80155DB4(void*);
 extern void* fn_80149E04(void);
 extern void fn_80147E88(Work*);

@@ -31,7 +31,7 @@ extern void fn_8018358C(EffectParams800A32B8*);
 extern void fn_801833B8(void);
 extern void* fn_80148008(Vec3_800A32B8*, void*, EffectParams800A32B8*,
                          void (*)(void));
-extern void* fn_80156938(void*);
+extern void *fn_80156938();
 extern void fn_8017FF1C(void*, int);
 
 /*

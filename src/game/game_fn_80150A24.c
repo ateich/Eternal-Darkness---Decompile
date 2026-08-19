@@ -1,6 +1,8 @@
 /* NonMatching: independent honest-C reconstruction from retail control flow. */
 #include "src/game/game_targeting_types.h"
 
+#define fn_80201B54(...) ((void *)fn_80201B54(__VA_ARGS__))
+
 void fn_80150A24(void* raw_instance)
 {
     u8* instance = raw_instance;

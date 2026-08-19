@@ -15,10 +15,10 @@ typedef struct QueryResult {
 extern void* lbl_8064D18C;
 extern float lbl_80650514;
 
-extern void* fn_80201814(void*);
-extern void* fn_80201BC8(void*);
-extern void* fn_80201B8C(void*);
-extern int fn_80201EB8(void*);
+extern void *fn_80201814();
+extern void *fn_80201BC8();
+extern void *fn_80201B8C();
+extern int fn_80201EB8();
 extern int fn_8012FA54(void*, int);
 extern int fn_8011F6A4(void*, int, int, int, QueryResult*, int);
 extern void fn_8017F794(void*);

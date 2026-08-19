@@ -24,7 +24,7 @@ extern void fn_80147E88(void*);
 extern void fn_801489B4(void*, void*);
 extern void fn_80184740(void*);
 extern void fn_80149B38(void*);
-extern int fn_801E8328(int, void*);
+extern int fn_801E8328();
 extern void* memcpy(void*, const void*, unsigned int);
 
 /* NonMatching: behavior- and size-exact entry/resource initializer at

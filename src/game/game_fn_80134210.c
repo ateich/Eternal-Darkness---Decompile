@@ -17,7 +17,7 @@ typedef struct Manager {
 } Manager;
 
 extern void* lbl_8064CF58;
-extern void* fn_80156938(void*);
+extern void *fn_80156938();
 extern void fn_80156FF4(void*);
 extern void fn_80153104(void*);
 extern void fn_801544C4(void*, int);

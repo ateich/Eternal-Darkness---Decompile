@@ -9,7 +9,7 @@ typedef struct Vec3 {
 extern void fn_80182B84(void*);
 extern void fn_80182BCC(void);
 extern void* fn_80148008(Vec3*, void*, void*, void (*)(void));
-extern void* fn_80156938(void*);
+extern void *fn_80156938();
 extern void fn_8017FF1C(void*, int);
 
 void* fn_801533A8(Vec3* position, void* object, u8 kind, u8 mode,

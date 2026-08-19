@@ -8,7 +8,7 @@ extern u32 lbl_80651C90;
 extern u16 lbl_80651C94;
 extern void fn_801A4FCC(void);
 extern void* fn_80148008(Vec3*, Coord3*, void*, void*);
-extern void* fn_80156938(void*);
+extern void *fn_80156938();
 extern void fn_8017FF1C(void*, int);
 
 void* fn_80155748(Vec3* position_in, void* descriptor)

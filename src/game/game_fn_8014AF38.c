@@ -11,7 +11,7 @@ typedef struct Set {
     void* objects[16];
 } Set;
 
-extern Set* fn_80156938(void*);
+extern void *fn_80156938();
 extern short* fn_801938A8(void*);
 extern void fn_801534D8(Set*, short*, float);
 

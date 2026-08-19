@@ -8,7 +8,7 @@ typedef struct QueryResult {
     unsigned char tail[20];
 } QueryResult;
 
-extern void* fn_80201BC8(void*);
+extern void *fn_80201BC8();
 extern int fn_8011F6A4(void*, int, int, int, QueryResult*, int);
 extern void fn_8017970C(Vec3*, Vec3*, Vec3*, float);
 

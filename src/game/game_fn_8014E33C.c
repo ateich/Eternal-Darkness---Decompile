@@ -11,7 +11,7 @@ typedef struct InstanceList {
     u8 entries[1];
 } InstanceList;
 
-extern InstanceList* fn_80156938(void*);
+extern void *fn_80156938();
 extern int fn_80157034(void*);
 extern int fn_801800F8(void*);
 extern int fn_80180114(void*);

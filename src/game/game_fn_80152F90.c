@@ -7,7 +7,7 @@ typedef struct Vec3f {
 
 extern void fn_8019D66C(void);
 extern void* fn_80148008(Vec3f*, void*, void*, void (*)(void));
-extern u8* fn_80156938(void*);
+extern void *fn_80156938();
 extern void fn_80180374(void*, u8);
 extern void fn_8017FF1C(void*, int);
 extern void* fn_8015E780(void);

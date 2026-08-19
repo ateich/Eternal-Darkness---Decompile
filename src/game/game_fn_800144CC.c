@@ -15,7 +15,7 @@ extern void* fn_8016A784(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_801D5898(Vec3f*, Vec3f*, s32, s32, s32, s32, s32, s32, s32,
                        s32, s32, s32, s32, s32, s32, s32, s32);
-extern void* fn_80156938();
+extern void *fn_80156938();
 extern void fn_8017FF14(s32, s32);
 
 s32 fn_800144CC(void* script)

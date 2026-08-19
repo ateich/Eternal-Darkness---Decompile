@@ -5,7 +5,7 @@ typedef struct EffectDescriptor {
     u8 data[0xC8];
 } EffectDescriptor;
 
-extern void* fn_80201814(void*);
+extern void *fn_80201814();
 extern void* fn_80155DB4(void);
 extern void* fn_80149E04(void);
 extern void fn_80147E88(EffectDescriptor*);

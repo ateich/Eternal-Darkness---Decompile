@@ -16,7 +16,7 @@ extern void* fn_8016A784(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_801D551C(Vec3f*, Vec3f*, s32, s32, s32, s32, s32, s32, s32,
                        s32, s32, s32, s32);
-extern void* fn_80156938();
+extern void *fn_80156938();
 extern void fn_8017FF14(s32, s32);
 extern u32 fn_80193860(s32);
 extern void fn_801938D8(s32, u32);

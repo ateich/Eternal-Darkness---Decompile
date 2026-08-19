@@ -4,7 +4,7 @@ typedef unsigned int u32;
 
 typedef struct Descriptor { u8 bytes[0xC0]; } Descriptor;
 
-extern void* fn_80201814(void*);
+extern void *fn_80201814();
 extern void* fn_80155DB4(void);
 extern void* memset(void*, int, u32);
 extern void* fn_80149E04(void);

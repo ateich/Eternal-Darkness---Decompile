@@ -10,7 +10,7 @@ typedef struct Actor {
 } Actor;
 
 extern void fn_8019B134(void *, int);
-extern void *fn_80156938(void *);
+extern void *fn_80156938();
 extern int fn_80193860(void);
 extern void fn_801938D8(void *, int);
 

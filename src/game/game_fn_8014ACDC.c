@@ -1,7 +1,7 @@
 typedef unsigned char u8; typedef unsigned int u32;
 typedef struct Set { u8 count;u8 p1[7];u32 id;u8 pC[0x3C];u32 value48;u8 p4C[0x3C];void* objects[16]; } Set;
 typedef struct Vec {float x,y,z;} Vec;
-extern Set* fn_80156938(void*);extern void *fn_80201BC8();extern u8 fn_801938A0(void*);extern u8 fn_80193880(void*);
+extern void *fn_80156938();extern void *fn_80201BC8();extern u8 fn_801938A0(void*);extern u8 fn_80193880(void*);
 extern int fn_8011F6A4(void*,u32,u32,int,Vec*,int);extern short* fn_8017FDE4(void*);extern short* fn_801938A8(void*);
 extern void fn_8014B604(float*,short*);extern void fn_8012DBE8(void*,int,u8*);extern u32 fn_80193860(void*);extern void fn_801938D8(void*,u32);
 void fn_8014ACDC(void* left,void* right){Set* rs=fn_80156938(right);Set* ls=fn_80156938(left);int i;Vec v;u8 info[4];

@@ -1,6 +1,6 @@
 extern float lbl_806504EC;
-extern void* fn_80156938(void*);
-extern void* fn_80201BC8(void*);
+extern void *fn_80156938();
+extern void *fn_80201BC8();
 extern int fn_801FE494(void*);
 extern int fn_801FE4C8(void*);
 extern void fn_80149CC4(void*, float*, int, int, int);

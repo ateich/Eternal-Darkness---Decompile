@@ -11,7 +11,7 @@ typedef struct SlotSet {
     void* objects[16];
 } SlotSet;
 
-extern SlotSet* fn_80156938(void*);
+extern void *fn_80156938();
 extern u32 fn_80193860(void*);
 extern void fn_801938C8(void*, u8);
 extern int fn_8017FD98(void*);

@@ -3,7 +3,7 @@ typedef signed short s16;
 typedef unsigned char u8;
 typedef unsigned short u16;
 
-extern void* fn_80201814(void*);
+extern void *fn_80201814();
 extern void* fn_80155DB4(void);
 extern void* fn_80149E04(void);
 extern void fn_80147E88(void*);

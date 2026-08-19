@@ -13,7 +13,7 @@ extern void fn_80149D64(void*);
 extern void fn_80181F5C(void*);
 extern void fn_80182014(void);
 extern void* memcpy(void*, const void*, u32);
-extern int fn_801E8328(int, void*);
+extern int fn_801E8328();
 
 void fn_80152838(Vec3f* position, Vec3f* target, u8 mode)
 {

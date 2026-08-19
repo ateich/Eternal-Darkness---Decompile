@@ -2,7 +2,7 @@ typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned int u32;
 typedef struct SlotSet { u8 count; u8 pad1[3]; u16 mask; u16 active; u8 pad8[0x80]; void* objects[16]; } SlotSet;
-extern SlotSet* fn_80156938(void*); extern u32 fn_80193860(void*); extern void fn_801938C8(void*,u8);
+extern void *fn_80156938(); extern u32 fn_80193860(void*); extern void fn_801938C8(void*,u8);
 extern int fn_8017FD98(void*); extern void fn_801938D8(void*,u32); extern void fn_8017FD6C(void*);
 extern int fn_801562DC(void*); extern u8 fn_80193870(void*); extern u8 fn_80193888(void*);
 extern u8 fn_80193878(void*); extern u8 fn_80193868(void*); extern void fn_801938B8(void*,u8);

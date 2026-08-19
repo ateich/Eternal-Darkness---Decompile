@@ -17,7 +17,7 @@ typedef struct Vec {
     u8 trailing[0x10];
 } Vec;
 
-extern Set* fn_80156938(void*);
+extern void *fn_80156938();
 extern void *fn_80201BC8();
 extern u8 fn_801938A0(void*);
 extern int fn_8011F6A4(void*, u32, u32, int, Vec*, int);

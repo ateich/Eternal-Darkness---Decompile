@@ -1,4 +1,4 @@
-extern void* fn_80156938(void*);
+extern void *fn_80156938();
 extern int fn_801800F8(void*);
 extern void fn_80188268(void*);
 

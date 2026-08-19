@@ -45,7 +45,7 @@ extern void fn_80179B64(void*, void*);
 extern void fn_801D3CAC(s32, s32, EmbeddedDescriptor*);
 extern void* fn_80148008(Vec3f*, const Vec3s*, PrimarySlot*, void (*)(void));
 extern void fn_801936FC(void);
-extern void* fn_80156938();
+extern void *fn_80156938();
 extern void fn_8017FF1C(void*, u8);
 extern void* fn_80149E04(void);
 extern void fn_80147E88(EffectSlot*);

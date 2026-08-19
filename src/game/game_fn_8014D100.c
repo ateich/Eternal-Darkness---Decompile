@@ -38,11 +38,11 @@ extern int fn_801E79FC(void*, int);
 extern void* fn_80148008(Vec3*, u16*, EffectWork*, void (*)(void));
 extern void fn_8017EAA8(void);
 extern void fn_80183EE0(void);
-extern void* fn_80156938(void*);
+extern void *fn_80156938();
 extern void fn_8017FF1C(void*, int);
 extern void* fn_80201A84(void*);
-extern void* fn_80201814(void*);
-extern void* fn_80201B8C(void*);
+extern void *fn_80201814();
+extern void *fn_80201B8C();
 extern int fn_800676C8(u8);
 extern void fn_80052310(int, u16*);
 

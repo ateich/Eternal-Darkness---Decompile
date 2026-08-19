@@ -1,7 +1,7 @@
 typedef unsigned char u8;
 typedef unsigned int u32;
 
-extern u8* fn_80156938(void*);
+extern void *fn_80156938();
 extern void* fn_8017FDA8(void*, int);
 extern void fn_80149B60(void*, void*, u32, u32, int);
 

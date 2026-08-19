@@ -54,7 +54,7 @@ extern void* lbl_8064C848;
 extern const double lbl_8064E4E0;
 
 extern EffectList* fn_8015E4A4(void);
-extern void* fn_80156938();
+extern void *fn_80156938();
 extern Vec3s* fn_8017FDE4(void);
 extern Vec3s* fn_801938A8(void*);
 extern void fn_80156FF4(void*);

@@ -7,14 +7,14 @@ extern float lbl_806504DC;
 extern void fn_8014B768(void);
 extern void fn_8014C7C0(void);
 extern void fn_8014C87C(void);
-extern void* fn_80201814(void*);
+extern void *fn_80201814();
 extern Job* fn_80149D98(void (*)(void));
 extern void fn_80149D64(void);
-extern void* fn_80201BC8(void*);
+extern void *fn_80201BC8();
 extern int fn_8011F6A4(void*, int, int, int, void*, int);
 extern void fn_8014CBC0(void*);
 extern void fn_801FE8DC(void*, void (*)(void), int, int, int, void (*)(void), float, float, float);
-extern int fn_801E8328(int, void*);
+extern int fn_801E8328();
 
 void* fn_8014C68C(void* owner, int start, int finish, int* value,
                   int initial, int final, u16 count)
