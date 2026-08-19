@@ -12,7 +12,7 @@ extern u32 lbl_8064C6C4;
 extern void fn_800B18F8(void);
 extern void fn_800AFBA8(u8*);
 extern void fn_8001DE84(int, int);
-extern unsigned int fn_801A98F4(int, int);
+extern int fn_801A98F4(int, int);
 extern void fn_800B177C(int, void*);
 extern void fn_800B689C(s32, s32);
 extern void fn_800B2548(int, int);

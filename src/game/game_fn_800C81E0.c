@@ -9,7 +9,7 @@ extern void *fn_801294DC(void *, int, int, int);
 extern int fn_8012A1BC(void *, int);
 extern void fn_801287C4(void *, void (*)(void), void *, int);
 extern void fn_80128A84(void *, int, int);
-extern void fn_80128C28(void *, void (*)(void), void *);
+extern void fn_80128C28();
 extern void fn_800C7844(void);
 extern void fn_800C77FC(void);
 extern void *lbl_8064C4E4;

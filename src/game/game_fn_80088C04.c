@@ -10,7 +10,7 @@ typedef struct Work {
     u8 bytes[0xC4];
 } Work;
 
-extern Context* fn_8006ED3C(Work*, int, int*);
+extern void *fn_8006ED3C();
 extern void fn_8006BEE4(Context*, void (*)(void));
 extern void fn_8006EB60(void);
 extern void fn_8006DEF8(Work*, int, void*, void*, int);

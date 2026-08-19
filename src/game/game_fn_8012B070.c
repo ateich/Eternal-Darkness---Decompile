@@ -22,10 +22,12 @@ typedef struct State8012B070 {
     u16 state;
 } State8012B070;
 
-extern State8012B070* fn_80128E30(void*);
+#define FN_80128E30_RETURN State8012B070*
+#define FN_80128E30_PARAMETERS void*
+extern FN_80128E30_RETURN fn_80128E30(FN_80128E30_PARAMETERS);
 extern int fn_8012B018(void*, int*);
 extern void fn_80128C50(State8012B070*);
-extern void fn_80211A6C(const Vec8012B070*, const void*, Vec8012B070*);
+extern void fn_80211A6C();
 extern float fn_800490E8(float, float);
 extern void* fn_8012A13C(void*, void*);
 extern void fn_80129DE0(void*, State8012B070*, int, int);

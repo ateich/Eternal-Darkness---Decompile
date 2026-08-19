@@ -15,7 +15,7 @@ typedef struct Object {
     RuntimeState* runtime;
 } Object;
 
-extern void fn_80125ECC(void*);
+extern void fn_80125ECC(void *);
 
 int fn_8012FFE0(Object* object, int flags, u8 index)
 {

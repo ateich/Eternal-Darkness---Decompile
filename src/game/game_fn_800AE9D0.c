@@ -7,7 +7,7 @@ typedef struct RequestContext {
     short timer;
 } RequestContext;
 
-extern RequestContext* fn_8006ED3C(void*, int, u32*);
+extern void *fn_8006ED3C();
 extern void fn_8006EB60(void);
 extern void fn_8006E20C(void);
 extern void fn_8006BEE4(RequestContext*, void (*)(void));

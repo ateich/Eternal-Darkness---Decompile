@@ -14,7 +14,7 @@ typedef struct State8009E710 {
     Entry8009E710 entries[1];
 } State8009E710;
 
-extern void* fn_8006ED3C(State8009E710*, int, int*);
+extern void *fn_8006ED3C();
 extern void fn_8006BEE4(void*, void (*)(void));
 extern void fn_8006EB60(void);
 extern void fn_8006DEF8(State8009E710*, int, void (*)(void), void*, int);

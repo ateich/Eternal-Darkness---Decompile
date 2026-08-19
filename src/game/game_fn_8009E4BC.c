@@ -27,7 +27,7 @@ typedef struct Global8009E4BC {
     Inner8009E4BC* inner;
 } Global8009E4BC;
 
-extern Context8009E4BC* fn_8006ED3C(State8009E4BC*, int, int*);
+extern void *fn_8006ED3C();
 extern void fn_801EFE84(int);
 extern void fn_8006DEF8(State8009E4BC*, int, void*, void*, int);
 extern void *fn_80201814();

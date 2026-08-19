@@ -12,7 +12,7 @@ extern int fn_80201B54();
 extern int fn_80201EB8();
 extern int fn_801E8328();
 extern void *fn_801294DC(void *, int, int, int);
-extern void fn_80128C28(void*, void*, s32);
+extern void fn_80128C28();
 extern void fn_8008A8D8(void);
 extern void fn_800389E0(void*, s32, s32, s32);
 extern void fn_80201138(s32, void*, s32, s32, s32, float);

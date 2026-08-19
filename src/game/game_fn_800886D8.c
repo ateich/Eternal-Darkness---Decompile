@@ -4,7 +4,7 @@ typedef signed short s16;
 typedef struct Context { u8 pad[8]; s16 counter; } Context;
 typedef struct Work { u8 pad[0x3C]; float value; } Work;
 
-extern Context* fn_8006ED3C(Work*, int, int*);
+extern void *fn_8006ED3C();
 extern int fn_800891FC(void);
 extern void fn_800891F4(int);
 extern unsigned int fn_800FBFB0();

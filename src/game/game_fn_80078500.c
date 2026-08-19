@@ -10,7 +10,7 @@ extern int fn_80128F40(void *object);
 extern int fn_8012A1BC(void *object, int kind);
 extern void *fn_80201B8C();
 extern Vec3 *fn_80137FB8(void *handle);
-extern void fn_80211A6C(const Vec3 *a, const Vec3 *b, Vec3 *output);
+extern void fn_80211A6C();
 extern float fn_80211B08(const Vec3 *value);
 extern void fn_80211AAC(const Vec3 *input, Vec3 *output);
 extern void fn_80211A90(const Vec3 *input, Vec3 *output, float scale);

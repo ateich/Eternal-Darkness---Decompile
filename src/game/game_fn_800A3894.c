@@ -14,7 +14,7 @@ typedef struct Object800A3894 {
 } Object800A3894;
 
 extern u16 fn_801869DC(void*);
-extern void fn_80211A6C(void*, void*, Vec800A3894*);
+extern void fn_80211A6C();
 extern void fn_80211AAC(Vec800A3894*, Vec800A3894*);
 extern void fn_80211A90(Vec800A3894*, Vec800A3894*, float);
 extern void fn_80211A48(void*, Vec800A3894*, Vec800A3894*);

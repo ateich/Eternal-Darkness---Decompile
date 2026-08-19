@@ -6,7 +6,7 @@ typedef struct Vec4 { float x, y, z, w; } Vec4;
 typedef struct Pair { u32 first, second; } Pair;
 
 extern float lbl_806501D8;
-extern void fn_80125ECC(u8*);
+extern void fn_80125ECC(void *);
 extern void fn_8012BE78(const float*, short*);
 extern void fn_8012F6E8(void*);
 

@@ -28,7 +28,7 @@ typedef struct Object {
     Entry** entries;
 } Object;
 
-extern void fn_80125ECC(void*);
+extern void fn_80125ECC(void *);
 extern int fn_8011F6A4(void*, int, int, int, QueryResult*, int);
 extern void fn_80127F90(void*, u16, Vec3*);
 

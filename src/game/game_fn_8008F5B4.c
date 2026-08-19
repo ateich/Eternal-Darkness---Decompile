@@ -33,8 +33,9 @@ extern int lbl_8064C55C;
 extern void fn_800DD314(void*, int, int, int);
 extern void* fn_8008F224(void*, int, int);
 extern void *fn_80201814();
-extern void fn_80201E78(Transform*, void*);
-extern void fn_80072618(Transform*, Vec3*, int, int);
+#define FN_80201E78_RETURN void
+#define FN_80201E78_PARAMETERS Transform*, void*
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern void fn_80072618(Transform*, Vec3*, int, int);
 extern void fn_8011F0E8(void*, Vec3*);
 extern void fn_80048708(void*);
 extern void fn_8012B7D0(void*, Vec3*);

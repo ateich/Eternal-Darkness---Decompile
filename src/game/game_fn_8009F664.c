@@ -22,7 +22,7 @@ typedef struct Context8009F664 {
     s16 counter;
 } Context8009F664;
 
-extern Context8009F664* fn_8006ED3C(State8009F664*, int, int*);
+extern void *fn_8006ED3C();
 
 int fn_8009F664(register State8009F664* state)
 {

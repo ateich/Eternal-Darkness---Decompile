@@ -11,7 +11,7 @@ extern const float lbl_806501D4;
 
 extern void* fn_8011F130(void*);
 extern void fn_8012B690(void*, const Vec8012B8A8*, Vec8012B8A8*);
-extern void fn_80211A6C(const Vec8012B8A8*, const Vec8012B8A8*, Vec8012B8A8*);
+extern void fn_80211A6C();
 extern float fn_80211B44(const Vec8012B8A8*, const Vec8012B8A8*);
 
 u8 fn_8012B8A8(void* owner, const Vec8012B8A8* position)

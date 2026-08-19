@@ -17,7 +17,7 @@ typedef struct Context8009DE50 {
     u32 flags;
 } Context8009DE50;
 
-extern Context8009DE50* fn_8006ED3C(State8009DE50*, int, int*);
+extern void *fn_8006ED3C();
 extern void fn_8006EA4C(void);
 extern void fn_8006BEE4(Context8009DE50*, void (*)(void));
 extern void fn_8006DEF8(State8009DE50*, int, void*, void*, int);

@@ -7,7 +7,7 @@ typedef struct Context {
 } Context;
 
 extern int fn_80070CD8(int);
-extern Context* fn_8006ED3C(void*, int, int*);
+extern void *fn_8006ED3C();
 extern void fn_801F74C8(int, int);
 extern int fn_801A98F4(int, int);
 extern void fn_801441C0(int, int, int);

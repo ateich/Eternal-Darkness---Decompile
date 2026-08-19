@@ -26,7 +26,7 @@ extern const float lbl_8064E9AC;
 extern const float lbl_8064E9B0;
 extern void fn_801F74C8(s32, s32, s32);
 extern void fn_801441C0(s32, s32, s32);
-extern void fn_80211A6C(const void *, const Vec3 *, Vec3 *);
+extern void fn_80211A6C();
 extern void fn_80211AAC(Vec3 *, Vec3 *);
 extern void fn_80211A90(Vec3 *, Vec3 *, float);
 extern void fn_80211A48(Vec3 *, Vec3 *, Vec3 *);

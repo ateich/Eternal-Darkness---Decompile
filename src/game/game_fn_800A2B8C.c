@@ -65,8 +65,9 @@ extern void* fn_80035628(void*);
 extern void fn_801857B4(Action800A2B8C*);
 extern void fn_801D38BC(void*, u32*, s16*);
 extern void fn_80185A44(void);
-extern void fn_80201E78(Vec3*, void*);
-extern void* memcpy(void*, const void*, unsigned int);
+#define FN_80201E78_RETURN void
+#define FN_80201E78_PARAMETERS Vec3*, void*
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern void* memcpy(void*, const void*, unsigned int);
 extern int fn_801E8328();
 
 void fn_800A2B8C(void* object, u16 value)

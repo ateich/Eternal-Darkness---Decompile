@@ -20,7 +20,7 @@ typedef struct State {
 } State;
 
 extern State* fn_8006ED98(Work*);
-extern State* fn_8006ED3C(Work*, int, int*);
+extern void *fn_8006ED3C();
 extern void *fn_80201814();
 extern void fn_80088A04(Work*);
 extern int fn_8006ECD4(Work*, int);

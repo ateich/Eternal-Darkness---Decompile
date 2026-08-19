@@ -22,7 +22,7 @@ typedef struct Work {
 typedef struct Vec3 { float x, y, z; } Vec3;
 typedef struct SVec3 { s16 x, y, z; } SVec3;
 
-extern Context* fn_8006ED3C(Work*, int, int*);
+extern void *fn_8006ED3C();
 extern void fn_8006BEE4(Context*, void (*)(void));
 extern void fn_8006EA4C(void);
 extern u32 fn_801809A0(void*);

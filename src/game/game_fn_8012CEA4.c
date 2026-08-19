@@ -7,7 +7,7 @@ typedef struct Vec4 {
     float w;
 } Vec4;
 
-extern void fn_80125ECC(u8*);
+extern void fn_80125ECC(void *);
 extern void fn_8012BE64(void*, Vec4*);
 
 void fn_8012CEA4(u8* state, int index, Vec4* value)

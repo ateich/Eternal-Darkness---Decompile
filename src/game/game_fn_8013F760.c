@@ -9,7 +9,7 @@ typedef struct Params {
 extern float lbl_806503A8;
 extern void fn_80179C10(Vec3*, float, float, const Vec3*, float, unsigned char);
 extern void fn_80211A48(const Vec3*, const Vec3*, Vec3*);
-extern void fn_80211A6C(const Vec3*, const Vec3*, Vec3*);
+extern void fn_80211A6C();
 
 void fn_8013F760(const Vec3* origin, Params* params, float extent,
                  Vec3* out)

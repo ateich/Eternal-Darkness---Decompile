@@ -6,7 +6,7 @@ extern int fn_80201B54();
 extern void *fn_801294DC(void *, int, int, int);
 extern void fn_80204810(void);
 extern void fn_80128C44(void *object, void (*callback)(void), s32 value);
-extern void fn_80128C28(void *object, void (*callback)(void), s32 value);
+extern void fn_80128C28();
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);
 

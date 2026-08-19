@@ -7,8 +7,9 @@ typedef struct Message {
 extern void *memcpy(void *, const void *, unsigned int);
 extern float lbl_8064F010;
 extern int fn_80201B54();
-extern void fn_80201E78(void *, void *);
-extern int fn_80201EB8();
+#define FN_80201E78_RETURN void
+#define FN_80201E78_PARAMETERS void *, void *
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern int fn_80201EB8();
 extern void *fn_801E2E1C(unsigned int, void *, unsigned int);
 extern void fn_801E3020(void *, unsigned int, void *, unsigned int, void *,
                        void *, void *, void *, void *, void *);

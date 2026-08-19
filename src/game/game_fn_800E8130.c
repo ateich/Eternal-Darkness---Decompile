@@ -17,8 +17,9 @@ extern void* fn_80201B94();
 extern int fn_80201C48(void *);
 extern void *fn_80201814();
 extern void *fn_801A717C(void);
-extern void fn_80201E78(Vec3 *, void *);
-extern void fn_801A74A0(void *, int);
+#define FN_80201E78_RETURN void
+#define FN_80201E78_PARAMETERS Vec3 *, void *
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern void fn_801A74A0(void *, int);
 extern void fn_801A74A8(void *, int);
 extern void fn_801A7538(void *, int);
 extern void fn_801A7518(void *, int);

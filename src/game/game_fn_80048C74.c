@@ -24,7 +24,7 @@ extern int fn_80201B54();
 extern int fn_80201B64(void* object);
 extern void* fn_80201C48(void* object);
 extern void fn_80201DD8(void* object, u32 value);
-extern void fn_80211A6C(void* to, void* from, Vec3* output);
+extern void fn_80211A6C();
 extern unsigned long long fn_8020123C();
 
 extern void fn_801A6E90(void);

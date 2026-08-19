@@ -1,6 +1,8 @@
 typedef unsigned char u8;
 
-extern u8* fn_80128E30(void*);
+#define FN_80128E30_RETURN u8*
+#define FN_80128E30_PARAMETERS void*
+extern FN_80128E30_RETURN fn_80128E30(FN_80128E30_PARAMETERS);
 extern const float lbl_806501A8;
 
 void fn_80129BE4(void* owner)

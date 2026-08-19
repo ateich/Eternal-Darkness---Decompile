@@ -25,8 +25,9 @@ extern const float lbl_8064ECBC;
 extern const double lbl_8064ECD8;
 
 extern void *fn_80201B8C();
-extern void fn_80201E78(Vec3*, void*);
-extern void *fn_801294DC(void *, int, int, int);
+#define FN_80201E78_RETURN void
+#define FN_80201E78_PARAMETERS Vec3*, void*
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern void *fn_801294DC(void *, int, int, int);
 extern Candidate80096830* fn_800935CC(int, void*, void*, int);
 extern unsigned int fn_80178E94(Vec3*, Vec3*);
 extern int fn_80200C38();

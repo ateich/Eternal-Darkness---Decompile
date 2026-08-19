@@ -16,7 +16,7 @@ typedef struct Object {
     Entry** entries;
 } Object;
 
-extern void fn_80125ECC(void*);
+extern void fn_80125ECC(void *);
 extern void fn_80127F90(void*, u16, void*);
 
 int fn_8012FD1C(Object* object, int index, void* output)

@@ -21,7 +21,7 @@ extern u32 fn_80036D5C(void *object);
 extern s32 fn_80066D04(void *object, s32 index);
 extern void *fn_801294DC(void *, int, int, int);
 extern s32 fn_800683E4(void *action, s32 object_id);
-extern void fn_80128C28(void *action, void *callback, s32 owner_id);
+extern void fn_80128C28();
 extern void fn_80067BAC(void *object);
 extern void fn_80201D34(void *object, s32 value);
 extern void fn_80201D1C(void *object, s32 value);

@@ -2,7 +2,7 @@ typedef struct Vec3 { float x, y, z; } Vec3;
 typedef struct Result { Vec3 normal; Vec3 point; } Result;
 
 extern float lbl_80650350, lbl_80650378;
-extern void fn_80211A6C(const Vec3*, const Vec3*, Vec3*);
+extern void fn_80211A6C();
 extern void fn_80211A90(Vec3*, const Vec3*, float);
 extern float fn_80211B08(const Vec3*);
 

@@ -10,7 +10,7 @@ typedef struct State8009DE10 {
     Work8009DE10* work;
 } State8009DE10;
 
-extern void* fn_8006ED3C(State8009DE10*, int, int*);
+extern void *fn_8006ED3C();
 extern void fn_801A5BA0(void*);
 
 int fn_8009DE10(register State8009DE10* state)

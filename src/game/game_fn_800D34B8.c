@@ -6,7 +6,7 @@ typedef struct Vec3 {
 
 extern const Vec3 lbl_80239958;
 extern float lbl_8064F390;
-extern void fn_80211A6C(Vec3 *, Vec3 *, Vec3 *);
+extern void fn_80211A6C();
 extern void fn_80211A90(Vec3 *, Vec3 *, float);
 extern void fn_8012FD1C(void *, int, Vec3 *);
 extern void *fn_8011F130(void *);

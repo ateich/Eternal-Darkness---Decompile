@@ -16,7 +16,7 @@ typedef struct Work {
     Owner* owner;
 } Work;
 
-extern void* fn_8006ED3C(Work*, int, int*);
+extern void *fn_8006ED3C();
 extern int fn_8006D548(int, int, int, float*, int, int, int);
 extern void *fn_80201814();
 extern void *fn_80201BC8();

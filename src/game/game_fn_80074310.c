@@ -12,7 +12,7 @@ typedef struct State {
 } State;
 
 extern int fn_80128F40(void *);
-extern void fn_80211A6C(const Vec3 *, const Vec3 *, Vec3 *);
+extern void fn_80211A6C();
 extern float fn_80211B08(const Vec3 *);
 extern void fn_80211AAC(const Vec3 *, Vec3 *);
 extern void fn_80211A90(const Vec3 *, Vec3 *, float);

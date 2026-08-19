@@ -29,7 +29,7 @@ typedef struct Global8009F258 {
     Inner8009F258* inner;
 } Global8009F258;
 
-extern Context8009F258* fn_8006ED3C(State8009F258*, int, int*);
+extern void *fn_8006ED3C();
 extern void fn_8006DEF8(State8009F258*, int, void*, void*, int);
 extern void *fn_80201814();
 extern void *fn_80201B8C();

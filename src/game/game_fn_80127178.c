@@ -21,7 +21,9 @@ typedef struct Pair {
     u32 count;
 } Pair;
 
-extern Runtime* fn_80128E30(Owner*);
+#define FN_80128E30_RETURN Runtime*
+#define FN_80128E30_PARAMETERS Owner*
+extern FN_80128E30_RETURN fn_80128E30(FN_80128E30_PARAMETERS);
 extern void fn_80127128(void*, u32, State*, int, int*);
 
 void fn_80127178(Owner* owner, int index, int direction)

@@ -19,8 +19,9 @@ extern void *fn_80204A8C(void);
 extern void *fn_80201AE4(void);
 extern int fn_80201B44();
 extern void *fn_80201814();
-extern Vec3 fn_80201E78(void *);
-extern void fn_80043F44(SpawnInfo *);
+#define FN_80201E78_RETURN Vec3
+#define FN_80201E78_PARAMETERS void *
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern void fn_80043F44(SpawnInfo *);
 extern void *fn_80034708(SpawnInfo *);
 extern void *fn_80201BC8();
 extern int fn_80201B54();

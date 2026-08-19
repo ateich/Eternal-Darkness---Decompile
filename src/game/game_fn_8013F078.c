@@ -11,7 +11,7 @@ typedef struct Result { Vec3 normal; Vec3 point; } Result;
 extern float lbl_80650350, lbl_8065039C;
 extern float fn_80211B44(const Vec3*, const Vec3*);
 extern float fn_80211D4C(const Vec3*, const Vec3*);
-extern void fn_80211A6C(const Vec3*, const Vec3*, Vec3*);
+extern void fn_80211A6C();
 extern void fn_80211AAC(Vec3*, const Vec3*);
 extern int fn_8013D560(Vec3*, const Surface*, const void*);
 extern void fn_8013C068(Vec3*, const Surface*, const void*, Vec3*);

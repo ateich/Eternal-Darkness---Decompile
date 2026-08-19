@@ -2,7 +2,7 @@ typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned int u32;
 
-extern void fn_80125ECC(void*);
+extern void fn_80125ECC(void *);
 extern void fn_8012BE18(const void*, void*, int);
 
 int fn_8012E114(u8* owner, u32 index, void* output)

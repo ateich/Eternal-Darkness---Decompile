@@ -7,8 +7,9 @@ typedef struct Object800A1B90 {
     float radius;
 } Object800A1B90;
 
-extern Vec3 fn_80201E78(void*);
-extern void fn_80211A6C(Vec3, Object800A1B90*, Vec3*);
+#define FN_80201E78_RETURN Vec3
+#define FN_80201E78_PARAMETERS void*
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern void fn_80211A6C();
 extern int fn_800A4F44(Vec3*, float);
 extern int fn_80201B54();
 extern unsigned long long fn_8020123C();

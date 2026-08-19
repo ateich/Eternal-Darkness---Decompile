@@ -12,7 +12,9 @@ typedef struct Runtime {
     u32 flags;
 } Runtime;
 
-extern Runtime* fn_80128E30(void*);
+#define FN_80128E30_RETURN Runtime*
+#define FN_80128E30_PARAMETERS void*
+extern FN_80128E30_RETURN fn_80128E30(FN_80128E30_PARAMETERS);
 
 void fn_80128B8C(void* owner, Vec3* vector)
 {

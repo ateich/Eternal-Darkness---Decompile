@@ -10,7 +10,7 @@ typedef struct Shape {
 } Shape;
 
 extern float lbl_806503A8, lbl_806503AC, lbl_806503B0, lbl_806503B4;
-extern void fn_80211A6C(const Vec3*, const Vec3*, Vec3*);
+extern void fn_80211A6C();
 extern void fn_80211A90(Vec3*, const Vec3*, float);
 extern float fn_80211B08(const Vec3*);
 

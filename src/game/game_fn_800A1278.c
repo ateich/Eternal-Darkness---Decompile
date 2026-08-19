@@ -42,7 +42,7 @@ typedef struct Info800A1278 {
     Inner800A1278* inner;
 } Info800A1278;
 
-extern Context800A1278* fn_8006ED3C(State800A1278*, int, int*);
+extern void *fn_8006ED3C();
 extern void *fn_80201814();
 extern void *fn_80201BC8();
 extern Vec800A1278* fn_8011F770(void*);

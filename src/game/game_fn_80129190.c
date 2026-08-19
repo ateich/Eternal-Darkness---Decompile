@@ -1,4 +1,6 @@
-extern void* fn_80128E30(void*);
+#define FN_80128E30_RETURN void*
+#define FN_80128E30_PARAMETERS void*
+extern FN_80128E30_RETURN fn_80128E30(FN_80128E30_PARAMETERS);
 extern void fn_801291C4(void*, unsigned short);
 
 void fn_80129190(void* owner, unsigned short value)

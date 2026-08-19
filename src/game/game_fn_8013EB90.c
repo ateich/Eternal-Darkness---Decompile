@@ -13,7 +13,7 @@ extern float lbl_80650350, lbl_80650378, lbl_8065039C;
 extern void fn_8013C264(const Vec3*, const Vec3*, Vec3*, const Vec3*, Vec3*);
 extern float fn_8013C418(const Vec3*, const Vec3*, const Vec3*, Vec3*);
 extern float fn_80211D4C(const Vec3*, const Vec3*);
-extern void fn_80211A6C(const Vec3*, const Vec3*, Vec3*);
+extern void fn_80211A6C();
 extern void fn_80211A90(Vec3*, const Vec3*, float);
 extern float fn_80211B08(const Vec3*);
 extern float fn_800ED720(float);

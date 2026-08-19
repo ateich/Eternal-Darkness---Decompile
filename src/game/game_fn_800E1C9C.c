@@ -6,8 +6,9 @@ extern void *fn_80201B9C();
 extern int fn_80201B5C(void *);
 extern int fn_80201EB8();
 extern int fn_80201B54();
-extern void fn_80201E78(Vec3 *, void *);
-extern unsigned int fn_80179064(int, int, int, int);
+#define FN_80201E78_RETURN void
+#define FN_80201E78_PARAMETERS Vec3 *, void *
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern unsigned int fn_80179064(int, int, int, int);
 extern void *fn_80201BC0(void *);
 
 int fn_800E1C9C(void *object)

@@ -1,7 +1,7 @@
 extern void *fn_80201BC8();
 extern void fn_800A2D78(void *);
 extern void fn_800A2598(void *);
-extern void fn_8012B344(void *);
+extern void fn_8012B344();
 
 void fn_800D40A8(void *state, void *object)
 {

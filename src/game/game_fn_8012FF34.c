@@ -20,7 +20,7 @@ typedef struct Object {
 } Object;
 
 extern float lbl_806501DC;
-extern void fn_80125ECC(void*);
+extern void fn_80125ECC(void *);
 extern int fn_8012FFE0(void*, int, int);
 
 void fn_8012FF34(Object* object, Vec3* position, int flags, int index)

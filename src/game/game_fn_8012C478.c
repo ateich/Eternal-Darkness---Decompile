@@ -5,7 +5,7 @@ typedef struct State { u8 pad[0x17C]; Slot slots[32]; } State;
 
 #pragma use_lmw_stmw on
 
-extern void fn_80125ECC(u8*);
+extern void fn_80125ECC(void *);
 
 void fn_8012C478(State* object, int index, int enabled)
 {

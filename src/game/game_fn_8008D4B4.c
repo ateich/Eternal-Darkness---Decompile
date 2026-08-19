@@ -8,8 +8,9 @@ extern void* fn_80201B94();
 extern void *fn_80201B8C();
 extern int fn_80201B44();
 extern void *fn_80201814();
-extern void fn_80201E78(Vec3*, void*);
-extern int fn_80204180(void*, void*);
+#define FN_80201E78_RETURN void
+#define FN_80201E78_PARAMETERS Vec3*, void*
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern int fn_80204180(void*, void*);
 extern unsigned char fn_80204434(void*, Vec3*, int, float);
 extern int fn_8008D31C(void*, void*, int, void*, void*, int, Vec3*);
 extern Vec3 lbl_80239630;

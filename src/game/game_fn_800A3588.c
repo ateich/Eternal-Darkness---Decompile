@@ -14,8 +14,9 @@ typedef struct Object800A3588 {
 
 extern int fn_80201B54();
 extern int fn_800A1B90(void*, void*, void*);
-extern void fn_80201E78(Vec800A3588*, void*);
-extern void* fn_801A717C(void);
+#define FN_80201E78_RETURN void
+#define FN_80201E78_PARAMETERS Vec800A3588*, void*
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern void* fn_801A717C(void);
 extern void fn_801A74D8(void*, int);
 extern void fn_801A74A0(void*, void*);
 extern void fn_801A7538(void*, int);

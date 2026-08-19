@@ -19,7 +19,7 @@ typedef struct Object {
     Entry** entries;
 } Object;
 
-extern void fn_80125ECC(void*);
+extern void fn_80125ECC(void *);
 
 void fn_8012FB50(Object* object, int index)
 {

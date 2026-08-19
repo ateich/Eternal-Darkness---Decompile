@@ -16,7 +16,7 @@ extern int fn_801A7770(void*);
 extern int fn_8011F6A4(void*, int, int, int, void*, int);
 extern void* fn_801A7778(void*);
 extern void fn_8003B0BC(void*, Vec800A40C4*, Vec800A40C4*, void*, int, int);
-extern void fn_80211A6C(Vec800A40C4*, Vec800A40C4*, Vec800A40C4*);
+extern void fn_80211A6C();
 extern void fn_80211A90(Vec800A40C4*, Vec800A40C4*, float);
 extern void fn_800A1C50(Vec800A40C4*, Vec800A40C4*, void*, void*);
 

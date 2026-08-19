@@ -30,7 +30,7 @@ typedef struct State8009EEBC {
     Owner8009EEBC* owner;
 } State8009EEBC;
 
-extern void* fn_8006ED3C(State8009EEBC*, int, int*);
+extern void *fn_8006ED3C();
 extern void fn_8019DFA0(Resource8009EEBC*);
 extern void fn_8019DFF8(void);
 extern void fn_80147EC4(Resource8009EEBC*);

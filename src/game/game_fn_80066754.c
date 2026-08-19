@@ -14,7 +14,7 @@ extern void *fn_801294DC(void *, int, int, int);
 #define fn_801294DC(a, b, c, d) fn_801294DC((void *)(a), (b), (c), (d))
 extern void fn_80204810(void);
 extern void fn_80128C44(s32 object, void (*callback)(void), s32 value);
-extern void fn_80128C28(s32 object, void (*callback)(void), s32 value);
+extern void fn_80128C28();
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);
 

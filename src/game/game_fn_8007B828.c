@@ -23,7 +23,7 @@ typedef struct EffectParams {
 extern volatile s32 lbl_8064D18C;
 extern const float lbl_8064E998;
 extern const float lbl_8064E9BC;
-extern void fn_80211A6C(const void *, const void *, Vec3 *);
+extern void fn_80211A6C();
 extern void fn_80211AAC(Vec3 *, Vec3 *);
 extern void fn_80211C78(Vec3 *, Vec3 *, Vec3 *);
 extern void fn_80211A90(Vec3 *, Vec3 *, float);

@@ -29,7 +29,7 @@ extern void *fn_801294DC(void *, int, int, int);
 extern void fn_800359A0(s32 context, s32 value);
 extern void fn_8012B7A0(s32 object, f32 value);
 extern void fn_80204810(void);
-extern void fn_80128C28(void *object, void (*callback)(void), s32 value);
+extern void fn_80128C28();
 extern s32 fn_80201B5C(s32 context);
 extern void fn_80201D34(void *, s32);
 extern void fn_80201D1C(void *, s32);

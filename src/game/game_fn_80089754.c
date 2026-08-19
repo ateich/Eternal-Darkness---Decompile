@@ -17,7 +17,7 @@ typedef struct Work {
     Runtime* runtime;
 } Work;
 
-extern Context* fn_8006ED3C(Work*, int, int*);
+extern void *fn_8006ED3C();
 extern u32 fn_801809A0(void*);
 extern void* fn_80155DB4(void*);
 extern int fn_80157034(void*);

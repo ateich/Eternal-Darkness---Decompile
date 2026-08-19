@@ -5,7 +5,9 @@ typedef struct CopyBlock {
     u32 words[68];
 } CopyBlock;
 
-extern void* fn_80128E30(void* object);
+#define FN_80128E30_RETURN void*
+#define FN_80128E30_PARAMETERS void*
+extern FN_80128E30_RETURN fn_80128E30(FN_80128E30_PARAMETERS);
 extern int fn_80128F40(void* object);
 
 void fn_8011EB24(void* object)

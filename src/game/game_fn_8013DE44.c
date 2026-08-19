@@ -4,7 +4,7 @@ extern float lbl_80650350;
 extern float lbl_8065035C;
 extern float lbl_80650360;
 extern float lbl_80650364;
-extern void fn_80211A6C(const Vec3*, const Vec3*, Vec3*);
+extern void fn_80211A6C();
 extern float fn_80211B44(const Vec3*, const Vec3*);
 extern float fn_800ED720(float);
 

@@ -6,7 +6,7 @@ typedef struct Context8009F1C4 {
     s16 counter;
 } Context8009F1C4;
 
-extern Context8009F1C4* fn_8006ED3C(void*, int, int*);
+extern void *fn_8006ED3C();
 extern void* fn_8006D488(void*);
 extern void fn_802020B4(void*, int);
 extern void fn_801A5C30(int);

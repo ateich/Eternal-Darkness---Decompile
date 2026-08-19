@@ -41,7 +41,7 @@ extern void fn_80211A48(s32, s32, Vec3*);
 extern s32 fn_8011F7D8(void*);
 extern float fn_8011F6F8(void*);
 extern s32 fn_8017E4E4(Vec3*, s32, float, float, float, float);
-extern void fn_80211A6C(Vec3*, s32, s32);
+extern void fn_80211A6C();
 extern void fn_800C8394(void*, s32);
 
 s32 fn_8002BC7C(void* callback, s32 phase, void* event)

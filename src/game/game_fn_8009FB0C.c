@@ -17,7 +17,7 @@ typedef struct Context8009FB0C {
     short counter;
 } Context8009FB0C;
 
-extern Context8009FB0C* fn_8006ED3C(State8009FB0C*, int, int*);
+extern void *fn_8006ED3C();
 extern void fn_8009FD08(void);
 extern int fn_80070CD8(int);
 extern void* fn_8006D488(State8009FB0C*);

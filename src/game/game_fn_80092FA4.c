@@ -15,8 +15,9 @@ typedef struct Entry80092FA4 {
     Vec3_80092FA4 position;
 } Entry80092FA4;
 
-extern void fn_80201E78(Vec3_80092FA4*, void*);
-extern Entry80092FA4* fn_800935CC(int, Vec3_80092FA4*, u32, int);
+#define FN_80201E78_RETURN void
+#define FN_80201E78_PARAMETERS Vec3_80092FA4*, void*
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern Entry80092FA4* fn_800935CC(int, Vec3_80092FA4*, u32, int);
 extern unsigned int fn_80178E94(Vec3_80092FA4*, Vec3_80092FA4*);
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);

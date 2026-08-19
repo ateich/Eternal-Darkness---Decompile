@@ -17,7 +17,7 @@ typedef struct State8009E0D4 {
     Work8009E0D4* work;
 } State8009E0D4;
 
-extern Context8009E0D4* fn_8006ED3C(State8009E0D4*, int, int*);
+extern void *fn_8006ED3C();
 
 int fn_8009E0D4(register State8009E0D4* state)
 {

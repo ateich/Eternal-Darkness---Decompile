@@ -9,8 +9,9 @@ extern void *fn_80201814();
 extern int fn_8011FB4C(void *);
 extern int fn_8011F598(void *, int, int, int, void *, int);
 extern int fn_80201EB8();
-extern void fn_80201E78(Vec3 *, void *);
-extern void fn_800C849C(void *, Vec3 *, float);
+#define FN_80201E78_RETURN void
+#define FN_80201E78_PARAMETERS Vec3 *, void *
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern void fn_800C849C(void *, Vec3 *, float);
 extern int lbl_8064D18C;
 extern float lbl_8064F240;
 

@@ -23,7 +23,7 @@ extern unsigned char lbl_8063D378[];
 
 extern s16 fn_80144A2C(u32, s32, s32, s32);
 extern u32 fn_80144710(u32, s32, s32);
-extern void fn_80211A6C(const Vec3*, const Vec3*, Vec3*);
+extern void fn_80211A6C();
 extern f32 fn_80211B08(const Vec3*);
 extern void fn_80211A90(const Vec3*, Vec3*, f32);
 extern void fn_80211A48(const Vec3*, const Vec3*, Vec3*);

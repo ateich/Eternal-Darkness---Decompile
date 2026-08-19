@@ -1,4 +1,6 @@
-extern int fn_80128E30(void*);
+#define FN_80128E30_RETURN int
+#define FN_80128E30_PARAMETERS void*
+extern FN_80128E30_RETURN fn_80128E30(FN_80128E30_PARAMETERS);
 extern void fn_8012B290(void*, void*);
 extern int fn_8012B070(void*);
 

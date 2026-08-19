@@ -6,7 +6,9 @@ extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void *fn_80201814();
 extern void *fn_80201BC8();
-extern void* fn_80128E30(void*);
+#define FN_80128E30_RETURN void*
+#define FN_80128E30_PARAMETERS void*
+extern FN_80128E30_RETURN fn_80128E30(FN_80128E30_PARAMETERS);
 extern void fn_8012880C(void*, s32, s32);
 
 s32 fn_8000A4FC(void* script)

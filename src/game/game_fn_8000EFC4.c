@@ -114,8 +114,9 @@ extern unsigned int fn_800F5C54();
 extern int fn_80201EB8();
 extern void *fn_80201B8C();
 extern void *fn_80201BC8();
-extern void fn_80201E78(void*, void*);
-extern u32 fn_80178F14(s32, s32, s32, s32, s32, s32);
+#define FN_80201E78_RETURN void
+#define FN_80201E78_PARAMETERS void*, void*
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern u32 fn_80178F14(s32, s32, s32, s32, s32, s32);
 extern void* fn_80201BC0(void*);
 extern int fn_80201B54();
 extern void fn_8016A830(void*, double);

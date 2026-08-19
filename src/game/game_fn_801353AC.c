@@ -20,7 +20,9 @@ typedef struct Runtime2 { void* value; } Runtime2;
 typedef struct Runtime1 { char pad_0[4]; Runtime2* next; } Runtime1;
 typedef struct Runtime { char pad_0[0xB8]; Runtime1* next; } Runtime;
 
-extern Runtime* fn_80128E30(Object*);
+#define FN_80128E30_RETURN Runtime*
+#define FN_80128E30_PARAMETERS Object*
+extern FN_80128E30_RETURN fn_80128E30(FN_80128E30_PARAMETERS);
 extern u32 lbl_8064CFB4;
 
 int fn_801353AC(Object* object, Range* range)

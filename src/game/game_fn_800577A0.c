@@ -32,7 +32,7 @@ extern void fn_801301B0(void *object, s32 set, s32 clear);
 extern void fn_800C39D0(void *context);
 extern s32 fn_80054C14(void *context, void *state);
 extern void fn_8005E94C(void *object, void *state);
-extern void fn_8012B344(void *);
+extern void fn_8012B344();
 extern u64 fn_802011D4(void *event);
 
 s32 fn_800577A0(void *context, void *event, u32 *result)

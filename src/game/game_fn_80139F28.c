@@ -16,7 +16,7 @@ extern void fn_80139E20(void*, Vec3*, void*);
 extern unsigned int fn_8011FAF4(void*);
 extern void fn_8011F114();
 extern Vec3* fn_8011F130(void*);
-extern void fn_80211A6C(Vec3*, const Vec3*, const Vec3*);
+extern void fn_80211A6C();
 extern void fn_8013F4D0(void*, void*, void*);
 extern int fn_8011EB1C(void*);
 extern int fn_80201B5C(void*);

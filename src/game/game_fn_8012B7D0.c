@@ -1,4 +1,4 @@
-extern void fn_80211A6C(const void*, const void*, float*);
+extern void fn_80211A6C();
 extern float fn_800490E8(float, float);
 extern const float lbl_806501D0;
 

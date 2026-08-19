@@ -23,7 +23,7 @@ extern int fn_80201B54();
 extern void *fn_80201B8C();
 extern void *fn_801294DC(void *, int, int, int);
 extern Entry800934A0* fn_800935CC(void*, void*, u32, int);
-extern void fn_80128C28(void*, void (*)(void), int);
+extern void fn_80128C28();
 extern void fn_80204810(void);
 extern void fn_80201138(int, void*, int, int, int, float);
 extern void fn_80201D2C(void *, int);

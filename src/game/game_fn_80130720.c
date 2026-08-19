@@ -11,7 +11,7 @@ extern int lbl_8064CF30;
 extern Object* lbl_8064C4E4;
 extern u8 lbl_802FC53C[];
 extern float lbl_805AADC8[];
-extern void fn_80125ECC(Object*);
+extern void fn_80125ECC(void *);
 extern void fn_801ED468(int);
 extern void fn_80226D28(int);
 extern void fn_801ED118(void);

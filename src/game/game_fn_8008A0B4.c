@@ -36,7 +36,7 @@ typedef struct Work {
     Runtime* runtime;
 } Work;
 
-extern void* fn_8006ED3C(Work*, int, int*);
+extern void *fn_8006ED3C();
 extern int fn_8006D548(int, int, int, Vec3*, SpawnConfig*, int, ...);
 extern void fn_8008799C(u8);
 extern u16 fn_800879E0(u8);

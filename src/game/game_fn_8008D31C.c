@@ -11,7 +11,7 @@ extern void fn_801A7550(void*, int);
 extern void fn_801A7558(void*, int);
 extern void fn_801A764C(void*, int);
 extern void fn_801287C4(void*, void*, void*, int);
-extern void fn_80128C28(void*, void*, void*);
+extern void fn_80128C28();
 extern void fn_80128C44(void*, void*, void*);
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);

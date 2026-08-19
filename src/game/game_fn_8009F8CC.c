@@ -13,7 +13,7 @@ typedef struct Link8009F8CC {
 
 extern int fn_80201B44();
 extern void *fn_80201814();
-extern Context8009F8CC* fn_8006ED3C(void*, int, int*);
+extern void *fn_8006ED3C();
 extern Link8009F8CC* fn_80036D38(void*);
 extern void fn_802020B4(void*, int);
 extern void fn_801A5C30(int);

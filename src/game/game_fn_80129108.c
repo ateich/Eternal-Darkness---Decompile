@@ -6,7 +6,9 @@ typedef struct Runtime {
     s32 flags;
 } Runtime;
 
-extern Runtime* fn_80128E30(void*);
+#define FN_80128E30_RETURN Runtime*
+#define FN_80128E30_PARAMETERS void*
+extern FN_80128E30_RETURN fn_80128E30(FN_80128E30_PARAMETERS);
 
 s32 fn_80129108(void* owner, s32 clearMask, s32 setMask)
 {

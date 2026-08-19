@@ -41,7 +41,7 @@ extern void fn_801ACD8C(void);
 extern s32 fn_80128EAC(void *object);
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);
-extern void fn_8012B344(void *);
+extern void fn_8012B344();
 extern void fn_800C2708(s32 value, s32 object_id);
 extern int fn_80038464(void *context, s32 index, s16 *value);
 extern int fn_800389E0(void *context, s32 index, s32 value, s32 enabled);

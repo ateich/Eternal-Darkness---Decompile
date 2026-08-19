@@ -8,8 +8,9 @@ extern void fn_8020104C(int, void*, void*, int, float);
 #define fn_8020104C(a,b,c,d,e) fn_8020104C((a),(void*)(c),(void*)(d),(int)(e),(b))
 extern void *fn_80201814();
 extern void *fn_80155DB4(void *);
-extern void fn_80201E78(void *, void *);
-extern void *fn_80157924(void *);
+#define FN_80201E78_RETURN void
+#define FN_80201E78_PARAMETERS void *, void *
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern void *fn_80157924(void *);
 extern void fn_80199130(void *, int);
 extern void fn_80199138(void *, void *);
 extern void fn_8007C17C(void *);

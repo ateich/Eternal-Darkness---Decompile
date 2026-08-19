@@ -10,7 +10,7 @@ extern int fn_8011EB1C(void*);
 extern int fn_8011EB04(void*);
 extern void* fn_8011F770(void*);
 extern void fn_80211A48(const Vec8012AC74*, const void*, Vec8012AC74*);
-extern void fn_80211A6C(const Vec8012AC74*, const void*, Vec8012AC74*);
+extern void fn_80211A6C();
 extern void fn_80139F28(void*, const Vec8012AC74*, const Vec8012AC74*,
                        Vec8012AC74*, int);
 extern void fn_8013A140(void*);

@@ -30,7 +30,7 @@ typedef struct Work {
     u8 active;
 } Work;
 
-extern void* fn_8006ED3C(Work*, int, int*);
+extern void *fn_8006ED3C();
 extern unsigned int fn_800FBFB0();
 #define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void fn_801F69F0(Int3*, Vec3*, int);

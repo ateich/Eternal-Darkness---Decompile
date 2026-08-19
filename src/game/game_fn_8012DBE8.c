@@ -2,7 +2,7 @@ typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned int u32;
 
-extern void fn_80125ECC(void*);
+extern void fn_80125ECC(void *);
 
 u16 fn_8012DBE8(u8* owner, u32 index, u8* color)
 {

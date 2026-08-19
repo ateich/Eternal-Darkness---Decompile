@@ -25,7 +25,7 @@ extern void* fn_80201C48(void);
 extern void *fn_80201814();
 extern int fn_802045AC(void*, Vec3i800A24A4*);
 extern u8 fn_80204578(void*, Vec3i800A24A4*);
-extern void fn_80211A6C(Vec3i800A24A4*, Vec3i800A24A4*, Vec3i800A24A4*);
+extern void fn_80211A6C();
 extern int fn_800A4F44(Vec3i800A24A4*, float);
 extern float lbl_8064EE80;
 

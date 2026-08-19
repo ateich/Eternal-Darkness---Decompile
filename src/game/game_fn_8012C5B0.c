@@ -3,7 +3,7 @@ typedef unsigned short u16;
 typedef struct Slot { unsigned int value; u16 flags; u16 pad; } Slot;
 typedef struct State { u8 pad[0x17C]; Slot slots[32]; } State;
 
-extern void fn_80125ECC(u8*);
+extern void fn_80125ECC(void *);
 extern void fn_8012C478(State*, int, int);
 
 void fn_8012C5B0(State* object, int index)

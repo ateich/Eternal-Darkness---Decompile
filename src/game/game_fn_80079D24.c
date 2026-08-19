@@ -31,10 +31,12 @@ extern int fn_8003E0E4(void *object, Vec3 *position, float first,
                       float second, int enabled);
 extern int fn_80204434(void *object, Vec3 *position, float value,
                       float *result);
-extern void *fn_80128E30(void *object);
+#define FN_80128E30_RETURN void*
+#define FN_80128E30_PARAMETERS void*
+extern FN_80128E30_RETURN fn_80128E30(FN_80128E30_PARAMETERS);
 extern void fn_80128C3C(void *object, float value);
 extern int fn_8012AFC4(void *object);
-extern void fn_8012B344(void *object);
+extern void fn_8012B344();
 extern int fn_801290D0(void *object);
 extern void fn_80128F74(void *object, int flags);
 extern void fn_80129928(void *object, Vec3 *position);

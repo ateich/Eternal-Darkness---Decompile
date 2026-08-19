@@ -3,8 +3,9 @@ typedef struct Vec3 {
 } Vec3;
 
 extern int lbl_8064D18C;
-extern void fn_80201E78(Vec3 *, void *);
-extern void *fn_80201B9C();
+#define FN_80201E78_RETURN void
+#define FN_80201E78_PARAMETERS Vec3 *, void *
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern void *fn_80201B9C();
 extern int fn_80201B4C(void *);
 extern int fn_80201EB8();
 extern int fn_80036DF0(void *);

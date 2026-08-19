@@ -6,7 +6,7 @@ typedef struct Object800A36F4 { u8 pad0[0x160]; void* active; } Object800A36F4;
 
 extern void *fn_80201BC8();
 extern void fn_8011F114();
-extern void fn_80211A6C(Vec800A36F4*, void*, Vec800A36F4*);
+extern void fn_80211A6C();
 extern int fn_800A4F44(Vec800A36F4*, float);
 extern void fn_80211AAC(Vec800A36F4*, Vec800A36F4*);
 extern float fn_8011F6F8(void*);

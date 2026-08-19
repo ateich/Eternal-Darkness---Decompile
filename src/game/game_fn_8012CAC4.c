@@ -1,7 +1,7 @@
 typedef unsigned char u8;
 typedef unsigned short u16;
 
-extern void fn_80125ECC(u8*);
+extern void fn_80125ECC(void *);
 
 #pragma use_lmw_stmw on
 #pragma dont_inline on

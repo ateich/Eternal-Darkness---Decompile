@@ -33,7 +33,9 @@ typedef struct Definition {
     void* second_entries;
 } Definition;
 
-extern Runtime* fn_80128E30(Owner*);
+#define FN_80128E30_RETURN Runtime*
+#define FN_80128E30_PARAMETERS Owner*
+extern FN_80128E30_RETURN fn_80128E30(FN_80128E30_PARAMETERS);
 extern void fn_80127714(void*, u16, void*, int, void*, int);
 
 void fn_80127658(Owner* owner, int index, void* value, int flag)

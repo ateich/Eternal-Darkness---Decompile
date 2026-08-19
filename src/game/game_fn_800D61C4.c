@@ -15,8 +15,9 @@ typedef struct Vec3 {
 
 extern unsigned long long fn_8020123C();
 extern void* fn_80201B3C();
-extern Vec3 fn_80201E78(void *);
-extern void fn_801AC9F4(int, int, Vec3 *, int);
+#define FN_80201E78_RETURN Vec3
+#define FN_80201E78_PARAMETERS void *
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern void fn_801AC9F4(int, int, Vec3 *, int);
 
 int fn_800D61C4(Actor *actor, void *object)
 {

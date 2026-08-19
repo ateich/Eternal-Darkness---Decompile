@@ -4,7 +4,7 @@ extern void *fn_80201814();
 extern void *fn_80201BC8();
 extern void fn_8011FA8C(void *, int, int);
 extern void *fn_801294DC(void *, int, int, int);
-extern void fn_80128C28(void *, int (*)(int, void *), void *);
+extern void fn_80128C28();
 extern int fn_800C77B4(int, void *);
 extern int fn_800C7878(int, void *);
 

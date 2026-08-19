@@ -46,7 +46,7 @@ extern void fn_801A764C(void*, Vec3*);
 extern void* fn_80072354(void*);
 extern void fn_801292E0(void*, int*, Entry**);
 extern void fn_801287C4(void*, void*, void*, int);
-extern void fn_80128C28(void*, void*, void*);
+extern void fn_80128C28();
 extern void fn_80128C44(void*, void*, void*);
 extern void fn_8003B8A0(void);
 extern void fn_8003BD48(void);

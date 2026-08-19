@@ -4,7 +4,7 @@ typedef struct Event {
 } Event;
 
 extern void *fn_80201814();
-extern void fn_8012B344(void*);
+extern void fn_8012B344();
 extern void fn_80201D34(void*, int);
 extern void fn_80201D1C(void*, int);
 extern unsigned int fn_80036D5C(void*);

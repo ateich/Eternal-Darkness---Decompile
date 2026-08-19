@@ -15,7 +15,7 @@ extern void fn_802045AC(void*, Vec3*);
 extern int fn_80179064(int, int, int, int);
 extern float fn_800CB444(void*, void*);
 extern int fn_8012AFC4(void*);
-extern void fn_8012B344(void*);
+extern void fn_8012B344();
 extern int fn_8008A96C(void*, void*, void*);
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);

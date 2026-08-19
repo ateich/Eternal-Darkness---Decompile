@@ -23,7 +23,7 @@ typedef struct Context800A1150 {
     u32 flags;
 } Context800A1150;
 
-extern Context800A1150* fn_8006ED3C(State800A1150*, int, int*);
+extern void *fn_8006ED3C();
 extern void fn_8006EB60(void);
 extern void fn_8006BEE4(Context800A1150*, void (*)(void));
 extern void fn_8006DEF8(State800A1150*, int, void*, void*, int);

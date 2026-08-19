@@ -1,7 +1,7 @@
 typedef unsigned char u8;
 
 extern float lbl_806501D8;
-extern void fn_80125ECC(u8*);
+extern void fn_80125ECC(void *);
 
 float fn_8012D01C(u8* state, int index)
 {

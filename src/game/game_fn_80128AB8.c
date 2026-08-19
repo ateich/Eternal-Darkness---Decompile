@@ -14,7 +14,9 @@ typedef struct Runtime {
     u16 value;
 } Runtime;
 
-extern Runtime* fn_80128E30(Owner*);
+#define FN_80128E30_RETURN Runtime*
+#define FN_80128E30_PARAMETERS Owner*
+extern FN_80128E30_RETURN fn_80128E30(FN_80128E30_PARAMETERS);
 
 int fn_80128AB8(Owner* owner, u32 value)
 {

@@ -1,5 +1,5 @@
 extern int lbl_8064B788;
-extern int fn_801A98F4(unsigned short, int);
+extern int fn_801A98F4(int, int);
 
 void fn_800DB348(void)
 {

@@ -12,7 +12,9 @@ extern void fn_801A7470(void *, s32);
 extern void fn_801A74A0(void *, void *);
 extern void fn_801A74A8(void *, void *);
 extern unsigned long long fn_8020123C();
-extern void *fn_80128E30(void *);
+#define FN_80128E30_RETURN void*
+#define FN_80128E30_PARAMETERS void*
+extern FN_80128E30_RETURN fn_80128E30(FN_80128E30_PARAMETERS);
 extern s32 fn_80128EAC(void *);
 extern void fn_80128B10(void *, u16);
 extern void fn_801A7228(void *);

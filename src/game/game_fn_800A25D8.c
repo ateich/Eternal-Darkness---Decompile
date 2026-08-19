@@ -8,7 +8,9 @@ extern int fn_802045AC(void*, Vec3i800A25D8*);
 extern float fn_8012B7D0(void*, Vec3i800A25D8*);
 extern float fn_8012B750(void*);
 extern void fn_8017A12C(float*, float, float);
-extern void* fn_80128E30(void*);
+#define FN_80128E30_RETURN void*
+#define FN_80128E30_PARAMETERS void*
+extern FN_80128E30_RETURN fn_80128E30(FN_80128E30_PARAMETERS);
 extern void fn_80129BA4(void*, float, float);
 extern int fn_801290D0(void*);
 extern void fn_80128F74(void*, int);

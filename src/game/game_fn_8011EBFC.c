@@ -1,7 +1,9 @@
 typedef unsigned char u8;
 typedef unsigned int u32;
 
-extern void* fn_80128E30(void* object);
+#define FN_80128E30_RETURN void*
+#define FN_80128E30_PARAMETERS void*
+extern FN_80128E30_RETURN fn_80128E30(FN_80128E30_PARAMETERS);
 extern void* fn_8012A13C(void* object, int value);
 extern void fn_80129DE0(void* object, void* source, int enabled, int value);
 extern int fn_8012A1BC(void* object, int value);

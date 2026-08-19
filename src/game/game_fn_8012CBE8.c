@@ -4,7 +4,7 @@ typedef unsigned short u16;
 typedef struct Vec3 { float x, y, z; } Vec3;
 
 extern float lbl_806501D8;
-extern void fn_80125ECC(u8*);
+extern void fn_80125ECC(void *);
 extern int fn_801261F4(u8*);
 extern void fn_8012BDCC(const float*, short*, int);
 extern void fn_8012F6E8(void*);

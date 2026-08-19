@@ -24,8 +24,9 @@ typedef struct ObjectState {
 extern s32 lbl_8064C548;
 extern u16 lbl_8064DC88[];
 extern void *fn_80201B8C();
-extern void fn_80201E78(Vec3 *out, void *object);
-extern void fn_801AC980(s32 handle, s32 fade);
+#define FN_80201E78_RETURN void
+#define FN_80201E78_PARAMETERS Vec3 *out, void *object
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern void fn_801AC980(s32 handle, s32 fade);
 extern s32 fn_801AC908(s32 handle, s32 arg, s32 volume);
 extern s32 fn_801AC8AC(u16 id, s32 volume, s32 time, Vec3 *position);
 

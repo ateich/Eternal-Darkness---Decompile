@@ -13,7 +13,7 @@ typedef struct Object {
 
 #pragma use_lmw_stmw on
 
-extern void fn_80125ECC(void*);
+extern void fn_80125ECC(void *);
 
 u16 fn_8012FCB0(Object* object, int index, u16 clear, u16 set)
 {

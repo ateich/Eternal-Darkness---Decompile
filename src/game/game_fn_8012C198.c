@@ -1,6 +1,6 @@
 typedef unsigned char u8;
 
-extern void fn_80125ECC(u8*);
+extern void fn_80125ECC(void *);
 extern void fn_8012C1F8(u8*);
 
 void fn_8012C198(u8* owner)

@@ -46,7 +46,7 @@ extern Vec3s *fn_80158ABC(s32 value, s32 kind, void *extra);
 extern void fn_8011F114();
 extern s32 fn_8011F6A4(void *object, s32 first, s32 second, s32 index,
                        QueryResult *result, s32 mode);
-extern void fn_80211A6C(Vec3 *left, Vec3 *right, Vec3 *output);
+extern void fn_80211A6C();
 extern void fn_80211AAC(Vec3 *input, Vec3 *output);
 extern void fn_80211A90(Vec3 *input, Vec3 *output, float scale);
 extern void fn_80211A48(Vec3 *left, Vec3 *right, Vec3 *output);

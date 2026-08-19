@@ -6,8 +6,9 @@ typedef struct Vec3 {
     float z;
 } Vec3;
 
-extern void fn_80201E78(Vec3 *out, void *object);
-extern float lbl_8064E7B8;
+#define FN_80201E78_RETURN void
+#define FN_80201E78_PARAMETERS Vec3 *out, void *object
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern float lbl_8064E7B8;
 extern float lbl_8064E7BC;
 extern float lbl_8064E7C0;
 extern float lbl_8064E7C4;

@@ -9,7 +9,9 @@ extern int fn_80178E94(Vec3*, Vec3*);
 extern int fn_800BE2CC(void*, void*, Vec3*);
 extern void fn_800BE390(void*, void*);
 extern int fn_8012AFC4(void*);
-extern void* fn_80128E30(void*);
+#define FN_80128E30_RETURN void*
+#define FN_80128E30_PARAMETERS void*
+extern FN_80128E30_RETURN fn_80128E30(FN_80128E30_PARAMETERS);
 extern void fn_80128C3C(void*, float);
 extern void fn_80129928(void*, Vec3*);
 extern void fn_8012976C(void*, void*, int, Vec3*, float);

@@ -23,7 +23,7 @@ typedef struct Context8009F41C {
     u32 flags;
 } Context8009F41C;
 
-extern Context8009F41C* fn_8006ED3C(State8009F41C*, int, int*);
+extern void *fn_8006ED3C();
 extern void fn_8006EB60(void);
 extern void fn_8006BEE4(Context8009F41C*, void (*)(void));
 extern void fn_8006DEF8(State8009F41C*, int, void*, void*, int);

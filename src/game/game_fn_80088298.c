@@ -9,7 +9,7 @@ typedef struct Object44 { u8 pad[0x44]; int object_id; } Object44;
 typedef struct Object8C { u8 pad[0x8C]; Object44* object; } Object8C;
 
 extern EventState* fn_8006ED98(Work*);
-extern void* fn_8006ED3C(Work*, int, int*);
+extern void *fn_8006ED3C();
 extern int fn_8006ECD4(Work*, int);
 extern void fn_8006DEF8(Work*, int, void*, void*, int);
 extern void fn_8006EA4C(void);

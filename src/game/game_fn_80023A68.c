@@ -6,7 +6,7 @@ extern void* lbl_8064C674;
 extern u32 lbl_8064C694;
 extern int lbl_8064C6C8;
 
-extern unsigned int fn_801A98F4(int, int);
+extern int fn_801A98F4(int, int);
 extern void fn_800472B0(int);
 extern void fn_801E7004(void);
 extern void fn_8001DFEC(int, int);

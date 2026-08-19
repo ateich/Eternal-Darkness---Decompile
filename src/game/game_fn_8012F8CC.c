@@ -32,7 +32,7 @@ typedef struct SerializedItem {
 
 extern u32 lbl_80651B98;
 extern void* memcpy(void*, const void*, unsigned long);
-extern void fn_80125ECC(void*);
+extern void fn_80125ECC(void *);
 extern int fn_801261F4(void*);
 extern void fn_8012C478(void*, int, int);
 extern void fn_8012C62C(void*, int, u32*, u32*, u32*, u16);

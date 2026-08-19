@@ -41,8 +41,9 @@ extern int fn_80201AE4(void);
 extern void fn_80046FC4(int, int);
 extern void *fn_80201BC8();
 extern void fn_8012C478(void*, int, int);
-extern void fn_80201E78(Local800A509C*, void*, int);
-extern void* fn_80034708(Local800A509C*);
+#define FN_80201E78_RETURN void
+#define FN_80201E78_PARAMETERS Local800A509C*, void*, int
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern void* fn_80034708(Local800A509C*);
 extern int fn_801261F4(void*);
 extern void fn_8012B7A0(void*, float);
 extern int fn_80201B54();

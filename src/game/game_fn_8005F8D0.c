@@ -61,7 +61,7 @@ extern void fn_801AAE68(float, s32, s32, s32, Vec3 *, s32, s32, s32, u16, s32);
 extern void fn_801D62D0(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32,
                        s32, s32, s32, s32, s32, s32, s32, s32, s32, s32,
                        s32, s32, s32, s32, s32, s32);
-extern void fn_80211A6C(Vec3 *, Vec3 *, Vec3 *);
+extern void fn_80211A6C();
 extern void fn_80211AAC(Vec3 *, Vec3 *);
 extern void fn_80211A90(Vec3 *, Vec3 *, float);
 extern void fn_80211A48(Vec3 *, Vec3 *, Vec3 *);

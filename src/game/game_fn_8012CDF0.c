@@ -5,7 +5,7 @@ typedef unsigned int u32;
 typedef struct FourWords { u32 words[4]; } FourWords;
 
 extern float lbl_806501D8;
-extern void fn_80125ECC(u8*);
+extern void fn_80125ECC(void *);
 extern void fn_8012BE78(const float*, short*);
 
 #pragma use_lmw_stmw on

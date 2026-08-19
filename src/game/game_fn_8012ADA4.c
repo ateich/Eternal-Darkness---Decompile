@@ -6,7 +6,9 @@ typedef struct Vec8012ADA4 {
     float z;
 } Vec8012ADA4;
 
-extern u8* fn_80128E30(void*);
+#define FN_80128E30_RETURN u8*
+#define FN_80128E30_PARAMETERS void*
+extern FN_80128E30_RETURN fn_80128E30(FN_80128E30_PARAMETERS);
 extern void fn_801231D8(Vec8012ADA4*, void*, void*);
 extern float fn_8012CB60(void*, int, int);
 extern void fn_80211A90(Vec8012ADA4*, Vec8012ADA4*, float);

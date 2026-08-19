@@ -7,7 +7,7 @@ typedef struct Object {
     u8** entries;
 } Object;
 
-extern void fn_80125ECC(void*);
+extern void fn_80125ECC(void *);
 
 u16 fn_8012F674(void* object, u32 group, u32 index)
 {

@@ -34,8 +34,9 @@ extern int fn_80201B54();
 extern void *fn_80201BC8();
 extern void* fn_80201B94();
 extern State* fn_80036D38(void*);
-extern void fn_80201E78(void*, void*);
-extern void *fn_80201B8C();
+#define FN_80201E78_RETURN void
+#define FN_80201E78_PARAMETERS void*, void*
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern void *fn_80201B8C();
 extern unsigned int fn_80036D5C(void*);
 extern int fn_80201B44();
 extern void* fn_80201C48(void*);

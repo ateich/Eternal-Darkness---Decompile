@@ -15,7 +15,9 @@ typedef struct Entry {
     u32 unknown8;
 } Entry;
 
-extern Queue* fn_80128E30(void*);
+#define FN_80128E30_RETURN Queue*
+#define FN_80128E30_PARAMETERS void*
+extern FN_80128E30_RETURN fn_80128E30(FN_80128E30_PARAMETERS);
 extern void fn_801292E0(void*, int*, Entry**);
 
 int fn_801288DC(void* owner, int value)

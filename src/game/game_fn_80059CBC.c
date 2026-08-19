@@ -22,7 +22,7 @@ extern void fn_80036DA4(void *context, u32 flags);
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);
 extern void fn_80077F90(void *object);
-extern void fn_8012B344(void *);
+extern void fn_8012B344();
 
 s32 fn_80059CBC(void *context, void *event)
 {

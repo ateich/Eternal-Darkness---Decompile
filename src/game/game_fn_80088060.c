@@ -16,7 +16,7 @@ extern int fn_801A76B8(void*);
 extern int fn_801578AC(void);
 extern unsigned int fn_800FBFB0();
 #define fn_800FBFB0() ((int)fn_800FBFB0())
-extern void* fn_8006ED3C(Work*, int, int*);
+extern void *fn_8006ED3C();
 extern void fn_80088D04(void);
 extern void* lbl_8064C8C4;
 extern u8 lbl_8064C91C;

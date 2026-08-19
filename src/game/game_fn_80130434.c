@@ -24,7 +24,7 @@ typedef struct Object {
 #pragma use_lmw_stmw on
 
 extern float lbl_806501DC;
-extern void fn_80125ECC(void*);
+extern void fn_80125ECC(void *);
 extern void fn_8012CEA4(Object*, int, Vec4*);
 extern void fn_8012CF08(Object*, int, Vec4*, Matrix*, int, int);
 extern void fn_8017A5A8(Vec4*, Matrix*, float);

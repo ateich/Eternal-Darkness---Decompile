@@ -13,8 +13,9 @@ extern int fn_80201B54();
 extern void *fn_80201BC8();
 extern int fn_8011EB04(void *);
 extern int fn_80047CB4(void);
-extern Vec3i fn_80201E78(void *);
-extern void fn_80154340(int, int, int, int, float, int, int, int);
+#define FN_80201E78_RETURN Vec3i
+#define FN_80201E78_PARAMETERS void *
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern void fn_80154340(int, int, int, int, float, int, int, int);
 extern void fn_801AAE68(float, int, int, int, Vec3i *, int, int, int, unsigned short, int);
 
 int fn_800E801C(void *object, void *source)

@@ -31,7 +31,7 @@ extern void fn_8012B7A0(void *object, float angle);
 extern void fn_801D13D8(void *resource, int value);
 extern void fn_8011F114();
 extern Vec3 *fn_8011F770(void *object);
-extern short *fn_8006ED3C(Owner *owner, int type, short *result);
+extern void *fn_8006ED3C();
 extern void fn_8012AC74(void *object, Vec3 *value, int count);
 extern void fn_800C1B50(void *resource, int type, int value, float a, float b);
 extern void fn_8012C478(void *object, int index, int value);

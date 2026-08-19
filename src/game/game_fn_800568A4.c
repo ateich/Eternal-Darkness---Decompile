@@ -19,7 +19,7 @@ extern void fn_80201D14(void *, int);
 extern s32 fn_80035FB8(void *context, char *first, char *second, char *third,
                       char *value, char *fourth);
 extern s32 fn_800462C8(s32 value);
-extern void fn_8012B344(void *);
+extern void fn_8012B344();
 extern u64 fn_802011D4(void *event);
 
 s32 fn_800568A4(void *context, void *event, u32 *result)

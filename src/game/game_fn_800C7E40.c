@@ -19,8 +19,9 @@ extern int fn_8011F598(void *, int, int, int, void *, int);
 extern void* fn_80201B94();
 extern void *fn_80201C48(void *);
 extern void *fn_80201814();
-extern void fn_80201E78(void *, void *);
-extern unsigned int fn_80178E94(void *, unsigned int *);
+#define FN_80201E78_RETURN void
+#define FN_80201E78_PARAMETERS void *, void *
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern unsigned int fn_80178E94(void *, unsigned int *);
 extern int fn_8011EB04(void *);
 extern int fn_80201B54();
 extern int fn_80201B44();

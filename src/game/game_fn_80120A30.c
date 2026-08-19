@@ -8,7 +8,7 @@ typedef struct QueueEntry {
 extern unsigned lbl_8064CEE4;
 extern QueueEntry lbl_804ED180[];
 extern unsigned char lbl_8063D378[];
-extern void fn_80211A6C(void* object, void* context, float* position);
+extern void fn_80211A6C();
 
 void fn_80120A30(void* first, void* second, void* third)
 {

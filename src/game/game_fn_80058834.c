@@ -31,7 +31,7 @@ extern void fn_80036B7C(void *, u32, Vec3 *);
 extern void fn_8011E174(s32, s32);
 extern float fn_8012B7D0(void *, Vec3 *), fn_8012B750(void *);
 extern void fn_8017A12C(float *, float, float);
-extern void fn_80211A6C(Vec3 *, Vec3 *, Vec3 *);
+extern void fn_80211A6C();
 extern float fn_80211B08(Vec3 *);
 extern u8 fn_80204434(void *, Vec3 *, s32, float);
 extern void fn_8012B6FC(void *, Vec3 *, Vec3 *);
@@ -45,7 +45,7 @@ extern s32 fn_801A77B0(void *);
 extern void *fn_8012976C(void *, s32, u32, Vec3 *, float);
 extern void fn_80128B8C(void *, Vec3 *), fn_80129BA4(void *, float, float);
 extern void *fn_80129A00(void *, s32, s32, float, float);
-extern void fn_80128C28(void *, void *, u32), fn_80128C44(void *, void *, u32);
+extern void fn_80128C28(), fn_80128C44(void *, void *, u32);
 extern void fn_801A74D8(void *, u32);
 extern void *fn_801294DC(void *, int, int, int);
 #define fn_801294DC(a, b, c, d) fn_801294DC((void *)(a), (b), (c), (d))
@@ -60,7 +60,7 @@ extern void fn_800C39D0(void *), fn_800C2474(void *, s32);
 extern void fn_802006D4(void *, void *, s32, s32, s32);
 extern u64 fn_802011D4(void *);
 extern s32 fn_801261F4(void *);
-extern void fn_8012B344(void *);
+extern void fn_8012B344();
 extern void fn_80204810(void);
 
 s32 fn_80058834(void *context, void *event, u32 *result)

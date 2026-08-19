@@ -19,8 +19,9 @@ extern void* lbl_8064D18C;
 extern int fn_80036D5C(void*);
 extern int fn_80201EB8();
 extern void *fn_80201BC8();
-extern void fn_80201E78(Vec3*, void*);
-extern void fn_80036DA4(void*, int);
+#define FN_80201E78_RETURN void
+#define FN_80201E78_PARAMETERS Vec3*, void*
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern void fn_80036DA4(void*, int);
 extern void fn_80201D34(void*, int);
 extern void fn_80201D1C(void*, int);
 extern Wrapper* fn_800BC100(int, int, int*, int, int, int, int);

@@ -1,4 +1,4 @@
-extern void fn_8012B344(void*);
+extern void fn_8012B344();
 
 void fn_8012B324(void* owner)
 {

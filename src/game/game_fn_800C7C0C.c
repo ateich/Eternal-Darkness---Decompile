@@ -31,8 +31,9 @@ extern unsigned char lbl_802FC5BC[];
 extern void fn_800CEA1C(int, int, Vec3 *, int, int, int, float, float,
                        float, void *);
 extern void fn_8014D478(void *, Vec3 *, Vec3 *, int, int, void *, int);
-extern void fn_80201E78(void *, void *);
-extern void fn_801A74A0(void *, void *);
+#define FN_80201E78_RETURN void
+#define FN_80201E78_PARAMETERS void *, void *
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern void fn_801A74A0(void *, void *);
 extern void fn_801A74A8(void *, void *);
 extern void fn_801A7538(void *, int);
 extern void fn_801A7518(void *, int);

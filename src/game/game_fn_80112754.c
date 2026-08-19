@@ -2,7 +2,7 @@ extern void* lbl_8064C504;
 extern int lbl_80331A08[];
 
 extern double fn_8016A694(void*, int);
-extern int fn_800F5C54(double);
+extern unsigned int fn_800F5C54();
 extern void* fn_801E6CA0(void*, int, int, int, int);
 extern int fn_801E8D24(int);
 extern int fn_801E63F0(void);

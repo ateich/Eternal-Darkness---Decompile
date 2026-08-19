@@ -6,7 +6,7 @@ extern int lbl_80331A08[];
 extern const double lbl_8064FF60;
 
 extern double fn_8016A694(void*, int);
-extern int fn_800F5C54(double);
+extern unsigned int fn_800F5C54();
 extern int fn_801E6CA0(void*, int, int, int, int);
 extern void fn_801E8B24(int, int, int);
 

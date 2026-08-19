@@ -46,13 +46,13 @@ s32 fn_8011FA8C(u32, s32, s32);         /* extern */
 s32 fn_8011FB4C(u32);                               /* extern */
 s32 fn_8011FF38();                                  /* extern */
 s32 fn_801287C4(u32, s32 *, s32, s32);      /* extern */
-s32 fn_80128C28(s32 *, s32);                /* extern */
+s32 fn_80128C28();                /* extern */
 s32 fn_80128C44(u32, s32 *, s32);           /* extern */
 void *fn_801294DC(void *, s32, s32, s32);    /* extern */
 #define fn_801294DC(a, b, c, d) fn_801294DC((void *)(a), (b), (c), (d))
 s32 fn_8012A1FC(u32, s32);                      /* extern */
 s32 fn_8012B324(u32);                           /* extern */
-s32 fn_8012B344(u32);                           /* extern */
+s32 fn_8012B344();                           /* extern */
 s32 fn_8012C62C(); /* extern */
 s32 fn_8012F58C(u32, s32, s32, s32, s32, s32); /* extern */
 s32 fn_80157E1C();                                  /* extern */

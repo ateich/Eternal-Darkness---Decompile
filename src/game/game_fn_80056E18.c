@@ -13,7 +13,7 @@ extern void fn_8011E310(s32, s32, s32, s32, s32, s32, s32);
 extern int fn_80200C38();
 extern s32 fn_80063D60(void *value, void *runtime, u8 count);
 extern unsigned long long fn_8020123C();
-extern void fn_8012B344(void *);
+extern void fn_8012B344();
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);
 extern s32 fn_800A1060(void);

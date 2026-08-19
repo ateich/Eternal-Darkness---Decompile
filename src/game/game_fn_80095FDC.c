@@ -23,7 +23,7 @@ extern int lbl_8064D1DC;
 extern int lbl_8064D1E0;
 
 extern int fn_80128EAC(void*);
-extern void fn_8012B344(void*);
+extern void fn_8012B344();
 extern int fn_80095D10(void*);
 extern int fn_80095E64(void*, unsigned int);
 extern int fn_8011EB04(void*);

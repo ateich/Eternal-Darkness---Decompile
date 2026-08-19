@@ -1,0 +1,41 @@
+{
+  "range_start": "0x8016731C",
+  "range_end": "0x80167558",
+  "matched_bytes": 312,
+  "accounted_bytes": 572,
+  "functions": [
+    {
+      "symbol": "fn_8016731C",
+      "range": "0x8016731C-0x80167380",
+      "status": "Matching",
+      "retail_bytes": 100,
+      "generated_bytes": 100,
+      "match_percent": 100.0,
+      "relocations_equal": "3/3",
+      "evidence": "build/GEDE01/fndiff_fn_8016731C.json"
+    },
+    {
+      "symbol": "fn_80167380",
+      "range": "0x80167380-0x80167454",
+      "status": "Matching",
+      "retail_bytes": 212,
+      "generated_bytes": 212,
+      "match_percent": 100.0,
+      "relocations_equal": "6/6",
+      "evidence": "build/GEDE01/fndiff_fn_80167380.json"
+    },
+    {
+      "symbol": "fn_80167454",
+      "range": "0x80167454-0x80167558",
+      "status": "NonMatching",
+      "retail_bytes": 260,
+      "generated_bytes": 252,
+      "best_match_percent": 93.53846,
+      "retail_relocations_retained": "6/6",
+      "blocker": "Canonical MWCC folds retail's bgt plus separate epilogue branch into ble, omits the retail pre-loop jump, schedules the integer-to-double setup differently, and leaves the conversion bias TU-local.",
+      "evidence": "build/GEDE01/fndiff_fn_80167454.json"
+    }
+  ],
+  "next_target": "0x80167558",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

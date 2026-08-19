@@ -20,7 +20,7 @@ typedef struct Context8009E39C {
     s16 counter;
 } Context8009E39C;
 
-extern Context8009E39C* fn_8006ED3C(State8009E39C*, int, int*);
+extern void *fn_8006ED3C();
 extern void fn_8006EB60(void);
 extern void fn_8006BEE4(Context8009E39C*, void (*)(void));
 extern void fn_8006C9E4(Context8009E39C*, int);

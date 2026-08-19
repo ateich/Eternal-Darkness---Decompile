@@ -1,6 +1,6 @@
 typedef unsigned char u8;
 
-extern void fn_80125ECC(u8*);
+extern void fn_80125ECC(void *);
 
 void fn_8012D074(u8* state, int index, float value)
 {

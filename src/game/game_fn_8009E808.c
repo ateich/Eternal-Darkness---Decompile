@@ -9,7 +9,7 @@ typedef struct Context8009E808 {
     u32 flags;
 } Context8009E808;
 
-extern Context8009E808* fn_8006ED3C(void*, int, int*);
+extern void *fn_8006ED3C();
 extern void fn_801E7974(void*, int);
 extern void* fn_8006D488(void*);
 extern void fn_802020B4(void*, int);

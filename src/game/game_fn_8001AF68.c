@@ -19,7 +19,7 @@ extern int fn_80038308(void *, int, short *);
 extern int fn_800389E0(void*, int, s32, int);
 extern s32 fn_80157994(void*);
 extern void fn_80157A28(void*, s32);
-extern unsigned int fn_801A98F4(int, int);
+extern int fn_801A98F4(int, int);
 extern void* fn_801E6CA0(void*, int, int, int, int);
 extern void fn_80027730(void*, s32, s32);
 

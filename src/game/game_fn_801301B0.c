@@ -1,7 +1,7 @@
 typedef unsigned char u8;
 typedef struct RuntimeState { u8 pad[0x54]; u8 flags; } RuntimeState;
 typedef struct Object { u8 pad[0x290]; RuntimeState* runtime; } Object;
-extern void fn_80125ECC(void*);
+extern void fn_80125ECC(void *);
 void fn_801301B0(Object* object, u8 clear, u8 set)
 {
     RuntimeState* runtime;

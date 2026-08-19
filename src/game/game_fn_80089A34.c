@@ -12,7 +12,7 @@ typedef struct Work { u8 bytes[0xC4]; void* runtime; } Work;
 extern void* fn_801A717C(void);
 extern void fn_801A7228(void*);
 extern void fn_801A7470(void*, int);
-extern void* fn_8006ED3C(Work*, int, int*);
+extern void *fn_8006ED3C();
 extern void *fn_80201814();
 extern void *fn_80201BC8();
 extern void *fn_80201B8C();
