@@ -2,10 +2,10 @@
   "schema_version": 2,
   "scope": "Distinct MWCC code-generation behaviors documented in reports/GEDE01/progress.json open_items and docs/matching.md",
   "source_snapshot": {
-    "repository_revision": "1a8e43310da7903e56b7e574a667a15cb734acd1",
-    "next_gate": "0x8015D6D0",
+    "repository_revision": "a4de047f74bc9fd91c269530f9b5165d2c309276",
+    "next_gate": "0x801650A8",
     "reports/GEDE01/progress.json": {
-      "sha256": "2fe191cf5973674a7933d5d1f28df45ed9281a813b3ee019324e439d3b609a72",
+      "sha256": "3c270f9505edfb84fc2df0a3093cb4c0be7ee9d4964c27afa37cfe6fd8904e3c",
       "scope": "open_items"
     },
     "docs/matching.md": {
@@ -1636,6 +1636,104 @@
       "precise_divergence": "Local declaration order determines MWCC's exact assignment of the function's two retail stack slots.",
       "workaround": "Preserve the documented declaration order.",
       "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8015D458 through fn_8015D6A0"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8015D7D4", "fn_8015DC54", "fn_8015E1A8", "fn_8015EC10", "fn_8015F9D4", "fn_80160480", "fn_80160B18", "fn_80161798", "fn_80161C30"],
+      "precise_divergence": "Canonical MWCC assigns equivalent long-lived loop, state, source, context, lookup, node, and walker values to different volatile or callee-saved registers from retail; several cited functions retain exact size and relocations despite operand-register differences.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8015F334", "fn_8015F4D0", "fn_8015F8B4", "fn_80161948"],
+      "precise_divergence": "Local declaration order and deliberately disjoint live ranges determine MWCC's retail callee-saved allocation: r27-r29 in fn_8015F334, reused r29 in fn_8015F4D0, r31/r30 in fn_8015F8B4, and r27-r31 in fn_80161948.",
+      "workaround": "Preserve the documented declaration order; in fn_8015F4D0, reuse r29 by keeping the type and position live ranges disjoint.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8015F12C through fn_8015F47C, fn_8015F4D0 through fn_8015F7D4, fn_8015F8B4 through fn_8015F9B0, and fn_80161948 through fn_80161B58"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8015E5DC", "fn_8015E7A8", "fn_8015E9EC"],
+      "precise_divergence": "Type and volatility choices change address/value placement: volatile stream/manager fields retain retail's update-form base and repeated load, a pointer return retains fn_8015E7A8's r3 load/store allocation, and canonical MWCC otherwise forms fn_8015E9EC's aligned size directly in r31 instead of retail's delayed r4-to-r31 move.",
+      "workaround": "Mark the documented stream and manager fields volatile, preserve fn_8015E7A8's pointer return, and retain the aligned-size expression shape; no complete workaround is known for fn_8015E9EC.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8015E5DC through fn_8015E7A8 and fn_8015E918 through fn_8015EAD0"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8015DB84", "fn_8015DC54", "fn_8015E7C8", "fn_8015ECF8", "fn_801613C8", "fn_80161E20"],
+      "precise_divergence": "Equivalent predicates and loop bounds receive different lowerings: branchless subf/or materialization versus retail compare/branch sequences, direct bound branches versus multi-instruction predicate materialization, branchless signed maximum versus a conditional bound, CTR loops versus index/byte-offset loops, and inverted branches with an extra backedge.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for every listed function"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8015DD94", "fn_8015DF60"],
+      "precise_divergence": "Canonical MWCC constructs or folds shared global bases differently and schedules the associated stores differently from retail; fn_8015DF60 also selects a different signedness-sensitive minimum lowering.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8015DC54 through fn_8015DF24 and fn_8015DF60 through fn_8015E168"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8015FF18", "fn_80162BEC", "fn_80164158", "fn_80164A64"],
+      "precise_divergence": "Source expression shape controls local scheduling: MWCC may increment an index in place instead of forming it separately, combine decimal-escape addition/subtraction, return a post-update rather than pre-increment index, or reverse two independent final-call argument moves.",
+      "workaround": "Split fn_80162BEC's decimal accumulation into addition and subtraction statements and return fn_80164158's pre-increment index; no known honest-C workaround is recorded for fn_8015FF18 or fn_80164A64.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8015F9D4 through fn_8015FFE8, fn_801624A8 through fn_80162BEC, fn_80163FE4 through fn_80164158, and fn_801649CC through fn_80164C7C"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80163B14"],
+      "precise_divergence": "The signedness of the numeric-conversion end pointer determines whether MWCC emits retail's extsb. instruction.",
+      "workaround": "Give the end pointer the exact documented signed type.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80163224 through fn_80163B14"]
+    },
+    {
+      "category": "jump-table-strategy",
+      "functions": ["fn_8015F0C0"],
+      "precise_divergence": "Separate source bodies for cases 38/40 and 39/41 do not reproduce retail's shared return blocks and exact 40-byte compiler-generated jump table.",
+      "workaround": "Group cases 38 with 40 and 39 with 41 so MWCC shares the return blocks.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8015EFEC through fn_8015F0C0"]
+    },
+    {
+      "category": "jump-table-strategy",
+      "functions": ["fn_8015F9D4", "fn_801600AC"],
+      "precise_divergence": "A 49-way parser dispatch requires the retail branch layout, value lifetimes, and compiler-owned 196-byte jumptable_8024F440; the preliminary fn_8015F9D4 source does not recover that shape, while fn_801600AC does.",
+      "workaround": "Assign jumptable_8024F440 to fn_801600AC's translation unit and preserve its packed-token switch structure; no complete source workaround is known for fn_8015F9D4.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8015F9D4 through fn_8015FFE8 and fn_80160024 through fn_80160280"]
+    },
+    {
+      "category": "jump-table-strategy",
+      "functions": ["fn_801616EC"],
+      "precise_divergence": "Source case order controls MWCC's comparison-tree order and placement of case bodies.",
+      "workaround": "Preserve the documented retail source case order.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8016158C through fn_801618D0"]
+    },
+    {
+      "category": "float-constant-placement",
+      "functions": ["fn_8015DB84"],
+      "precise_divergence": "Split-TU compilation retains the unsigned-conversion bias as a private constant instead of using retail-owned lbl_80650640.",
+      "workaround": "Externalize the compiler-generated conversion bias to lbl_80650640.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_8015DA70 through fn_8015DB84"]
+    },
+    {
+      "category": "inlining",
+      "functions": ["fn_80160748", "fn_801608D0", "fn_8016425C", "fn_8016437C"],
+      "precise_divergence": "Typed loops can trigger MWCC's eight-way unrolling for backward 16-byte record copies and value-transfer paths; alternate explicit loops can instead retain a top-tested branch and coalesce pointer/count registers.",
+      "workaround": "Use the documented typed 16-byte record or value-transfer loop that produces retail's eight-way unrolling.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80160628 through fn_80160848, fn_8016088C through fn_80160AA0, and fn_801641D4 through fn_80164908"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_80161044", "fn_8016166C", "fn_80164908"],
+      "precise_divergence": "Register pressure and stack-address folding can make canonical MWCC save r26-r31 with _savegpr_26/_restgpr_26 calls where retail retains r24-r31 with inline stmw/lmw; TU-local bulk-save policy is therefore codegen-visible.",
+      "workaround": "Use the TU-local use_lmw_stmw pragma where the retail function uses inline bulk saves; no complete honest-C workaround is recorded for fn_80161044's additional live-range mismatch.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_80161044 through fn_80161244, fn_8016158C through fn_801618D0, and fn_801641D4 through fn_80164908"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_8015F414", "fn_8015F448", "fn_80161B0C"],
+      "precise_divergence": "Introducing temporaries around call arguments changes MWCC's volatile argument-register lifetimes; direct ternary arguments and the original three-argument helper call reproduce retail allocation.",
+      "workaround": "Pass the documented ternaries directly and preserve the original three-argument capacity-helper signature and call.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8015F12C through fn_8015F47C and fn_80161948 through fn_80161B58"]
     }
   ]
 }

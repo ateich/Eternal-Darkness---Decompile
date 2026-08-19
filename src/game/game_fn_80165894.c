@@ -1,0 +1,13 @@
+int fn_80165894(int token)
+{
+    switch (token) {
+    case 260:
+    case 261:
+    case 262:
+    case 273:
+    case 284:
+        return 1;
+    default:
+        return 0;
+    }
+}
