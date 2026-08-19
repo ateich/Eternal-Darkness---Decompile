@@ -16,7 +16,7 @@ extern float fn_8011F6F0(void);
 extern void fn_8011F114();
 extern void fn_80211A6C(void *, const Vec3 *, Vec3 *);
 extern Vec3 *fn_80211AAC(Vec3 *, const Vec3 *);
-extern Vec3 *fn_80211A90(Vec3 *, Vec3 *, float);
+extern void fn_80211A90(Vec3 *, Vec3 *, float);
 extern Vec3 *fn_80211A48(Vec3 *, const Vec3 *, Vec3 *);
 extern void fn_8012AC74(void *, Vec3 *, int);
 

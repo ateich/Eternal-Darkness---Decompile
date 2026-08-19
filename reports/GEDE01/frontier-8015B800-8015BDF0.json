@@ -1,0 +1,16 @@
+{
+  "range_start": "0x8015B800",
+  "range_end": "0x8015BDF0",
+  "accounted_bytes": 1520,
+  "matched_bytes": 68,
+  "unaccounted_spans": [],
+  "nonmatching_spans": ["0x8015B800-0x8015BCB0", "0x8015BCB0-0x8015BDAC"],
+  "functions": [
+    {"symbol":"fn_8015B800","address":"0x8015B800","size":1200,"generated_size":1208,"match_percent":86.166664,"relocations":"127 retail/116 generated","status":"NonMatching","blocker":"The recovered event loop and eleven-way dispatch are blocked by an eight-byte size excess, r26-r31 lifetime allocation, repeated slot-base address propagation, and switch-case scheduling."},
+    {"symbol":"fn_8015BCB0","address":"0x8015BCB0","size":252,"generated_size":252,"match_percent":99.20635,"relocations_equal":"8/8","status":"NonMatching","blocker":"Only the second counted-copy loop differs: MWCC cyclically assigns the count/output/limit temporaries to r4/r5/r6 where retail uses r6/r4/r5."},
+    {"symbol":"fn_8015BDAC","address":"0x8015BDAC","size":68,"generated_size":68,"match_percent":100.0,"relocations_equal":"3/3","status":"Matching"}
+  ],
+  "next_target": "0x8015BDF0",
+  "next_gate": "Attempt fn_8015BDF0 next, the consecutive 560-byte function; every byte through 0x8015BDF0 is accounted, with the two explicit NonMatching spans above.",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

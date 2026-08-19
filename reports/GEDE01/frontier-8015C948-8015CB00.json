@@ -1,0 +1,19 @@
+{
+  "range_start": "0x8015C948",
+  "range_end": "0x8015CB00",
+  "accounted_bytes": 440,
+  "matched_bytes": 192,
+  "unaccounted_spans": [],
+  "nonmatching_spans": [
+    {"start":"0x8015CA08","end":"0x8015CB00","reason":"Size-exact honest C reaches 99.83871% with 31/31 relocations equal; MWCC selects r0 for the duration decrement/store while retail retains the loaded duration in r4."}
+  ],
+  "functions": [
+    {"symbol":"fn_8015C948","address":"0x8015C948","size":168,"generated_size":168,"match_percent":100.0,"relocations_equal":"18/18","status":"Matching"},
+    {"symbol":"fn_8015C9F0","address":"0x8015C9F0","size":16,"generated_size":16,"match_percent":100.0,"relocations_equal":"3/3","status":"Matching"},
+    {"symbol":"fn_8015CA00","address":"0x8015CA00","size":8,"generated_size":8,"match_percent":100.0,"relocations_equal":"1/1","status":"Matching"},
+    {"symbol":"fn_8015CA08","address":"0x8015CA08","size":248,"generated_size":248,"match_percent":99.83871,"relocations_equal":"31/31","status":"NonMatching","attempts":["post-decrement expression: size-exact, r0 decrement/store instead of retail r4","explicit duration local declared after state pointer: size-exact, base/duration register allocation changes to r4/r5","duration local declared before state pointer: size-exact, same r4/r5 allocation divergence"]}
+  ],
+  "next_target": "0x8015CB00",
+  "next_gate": "Attempt fn_8015CB00 next, the consecutive 176-byte message-queue control routine; every byte from 0x8015C948 through 0x8015CB00 is accounted, with 0x8015CA08-0x8015CB00 explicitly NonMatching.",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

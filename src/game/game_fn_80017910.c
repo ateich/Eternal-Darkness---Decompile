@@ -7,7 +7,7 @@ extern s32 fn_8016A598(void*);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void *fn_80201B9C();
 extern void* fn_80204844(void*, int);
-extern void fn_8006D444(void);
+extern void *fn_8006D444(void);
 extern s32 fn_8009E2E8(void);
 extern void fn_8016A830(void*, double);
 

@@ -1,4 +1,4 @@
-extern unsigned int fn_8011FA8C(void* object, unsigned int clear, unsigned int set);
+extern void fn_8011FA8C(void* object, unsigned int clear, unsigned int set);
 extern void fn_80138568(void* object, void* a, void* b, void* c);
 
 void fn_8011FBD0(void* object, int value, int preserve)

@@ -1,0 +1,19 @@
+typedef unsigned int u32;
+
+typedef struct Status {
+    unsigned char pad0[0x34];
+    u32 size;
+} Status;
+
+extern int fn_80213394(void*, Status*);
+
+u32 fn_8015D630(void* object)
+{
+    Status status;
+    u32 result = 0;
+
+    if (fn_80213394(object, &status)) {
+        result = status.size;
+    }
+    return result;
+}
