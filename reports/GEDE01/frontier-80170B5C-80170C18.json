@@ -1,0 +1,19 @@
+{
+  "session_id": "session-1137",
+  "range_start": "0x80170B5C",
+  "range_end": "0x80170C18",
+  "matched_functions": ["fn_80170B5C"],
+  "matched_code_bytes": 188,
+  "matching_relocations": 9,
+  "nonmatching_functions": {},
+  "unaccounted_spans": [],
+  "review_remediation": "The signed 16-bit default-value spelling pre-existed in fn_80170A40. The new finding is that signedness must propagate through the first callee parameter. Cross-TU evidence also corrects fn_8016B0B4's second parameter from u16 to int: both its definition and fn_80170B5C remain 100% without a caller-side truncation.",
+  "next_target": "0x80170C18",
+  "next_gate": "Attempt the consecutive 108-byte fn_80170C18 routine next and continue upward toward the jumptable_8023BF28 data-ownership boundary.",
+  "objdiff_evidence": [
+    "reports/GEDE01/objdiff-fn_8016B0B4.json",
+    "reports/GEDE01/objdiff-fn_80170980.json",
+    "reports/GEDE01/objdiff-fn_80170B5C.json"
+  ],
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

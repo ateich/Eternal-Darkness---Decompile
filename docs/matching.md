@@ -9,6 +9,8 @@ Do not mark either matching until DTK produces reviewed object boundaries and ob
 
 Routine loop: recover boundary and ABI, write minimal C/C++, compile with one recorded candidate, inspect objdiff instruction/relocation deltas, change one codegen variable, and record the result. Never accept functionally equivalent output in a matching build. Keep functional mods under `--non-matching` and a separate build tree.
 
+Post-compile `objcopy --redefine-sym` rules are build-level ELF normalization, not source-level matches. The normalizations for `@62_80239BC0`, `TRK_mainError_8032A570`, and `@stringBase0_80239E18` join the existing rules in `configure.py`; each carries exact objdiff and whole-DOL SHA-1 evidence, but each remains explicit technical debt until the C source and pinned MWCC toolchain emit the retail local-symbol identity without rewriting.
+
 ## Current first-TU evidence
 
 DTK's first local split identified the following two SDK objects:

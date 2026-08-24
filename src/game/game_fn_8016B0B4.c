@@ -10,7 +10,7 @@ typedef struct Entry {
 
 extern Entry lbl_805FAA60[10];
 
-void fn_8016B0B4(s16 id, u16 value)
+void fn_8016B0B4(s16 id, int value)
 {
     int i;
     int selected = -1;

@@ -1,0 +1,121 @@
+{
+  "session_id": "a91bf794-0aed-4481-bed6-e9c010372585",
+  "scheduler_label": "session-1130",
+  "session_provenance": "No new commit was created by authoritative session a91bf794-0aed-4481-bed6-e9c010372585. Commit def183e18e7276f11711c82931fa15b25876d3e6 pre-existed that session and was already merged into checkpoint/foundry-runtime-2026-07-17; the session re-verified its reclamation evidence.",
+  "assignment": "reclaim objdiff-100 units still registered NonMatching; match no new functions",
+  "starting_target": "0x8016FEF8",
+  "ending_next_target": "0x8016FEF8",
+  "frontier_changed": false,
+  "inventory": {
+    "unique_nonmatching_objects_before": 624,
+    "unique_nonmatching_objects_after": 621,
+    "unit_fuzzy_100_candidates": 4,
+    "reclaimed_objects": 3,
+    "retained_nonmatching_candidates": 1
+  },
+  "accounting": {
+    "before": {
+      "complete_objects": 3349,
+      "matched_code_bytes": 489612,
+      "matched_data_bytes": 34486,
+      "matched_functions": 3118,
+      "linked_code_bytes": 489472,
+      "linked_data_bytes": 34570,
+      "game_linked_code_bytes": 486444
+    },
+    "after": {
+      "complete_objects": 3352,
+      "matched_code_bytes": 489612,
+      "matched_data_bytes": 34486,
+      "matched_functions": 3118,
+      "linked_code_bytes": 489580,
+      "linked_data_bytes": 34610,
+      "game_linked_code_bytes": 486552
+    },
+    "delta": {
+      "complete_objects": 3,
+      "matched_code_bytes": 0,
+      "matched_data_bytes": 0,
+      "matched_functions": 0,
+      "linked_code_bytes": 108,
+      "linked_data_bytes": 40,
+      "game_linked_code_bytes": 108
+    },
+    "note": "Matched-byte and function totals did not rise because objdiff already counted the unit-level 100% results while the objects were NonMatching; the pre-existing consolidation made three of those results link-complete before authoritative session a91bf794-0aed-4481-bed6-e9c010372585 re-verified them."
+  },
+  "data_candidate_decision_basis": "The two data candidates use the same exact-link gate: game_data_80239E10 stays NonMatching because its generated section ownership and size differ from retail, while game_data_80239E18 is Matching despite objdiff's 96.1039% section score because linking the compiled object still reproduces the retail DOL SHA-1 exactly, proving its three reported padding bytes are a scoring artifact rather than a binary difference.",
+  "candidates": [
+    {
+      "object": "game/game_TRKNubWelcome.c",
+      "status_before": "NonMatching",
+      "status_after": "Matching",
+      "unit_fuzzy_match_percent": 100.0,
+      "code_bytes": 40,
+      "function": "TRKNubWelcome",
+      "function_match_percent": 100.0,
+      "relocations_equal": "3/3",
+      "link_normalization": "lbl_80239BC0 to retail local-symbol identity @62_80239BC0",
+      "evidence": "reports/GEDE01/objdiff-consolidation-game_TRKNubWelcome.json"
+    },
+    {
+      "object": "game/game_TRK_main.c",
+      "status_before": "NonMatching",
+      "status_after": "Matching",
+      "unit_fuzzy_match_percent": 100.0,
+      "code_bytes": 68,
+      "function": "TRK_main",
+      "function_match_percent": 100.0,
+      "relocations_equal": "8/8",
+      "link_normalization": "TRK_mainError to retail local-symbol identity TRK_mainError_8032A570",
+      "evidence": "reports/GEDE01/objdiff-consolidation-game_TRK_main.json"
+    },
+    {
+      "object": "game/game_data_80239E18.c",
+      "status_before": "NonMatching",
+      "status_after": "Matching",
+      "unit_fuzzy_match_percent": 100.0,
+      "data_bytes": 40,
+      "section_fuzzy_match_percent": 96.1039,
+      "section_scoring_note": "objdiff marks three terminal padding bytes as an insertion even though target and generated objdump bytes agree; the exact whole-DOL SHA-1 gate passes after linking this source object",
+      "link_normalization": "lbl_80239E18 to retail local-symbol identity @stringBase0_80239E18",
+      "evidence": "reports/GEDE01/objdiff-consolidation-game_data_80239E18.json"
+    },
+    {
+      "object": "game/game_data_80239E10.c",
+      "status_before": "NonMatching",
+      "status_after": "NonMatching",
+      "unit_fuzzy_match_percent": 100.0,
+      "retail_layout": ".rodata, 8 bytes",
+      "generated_layout": ".sdata2, 10 bytes",
+      "reason_not_reclaimed": "unit-level fuzzy score is a false positive; section ownership and size are not exact",
+      "evidence": "reports/GEDE01/objdiff-consolidation-game_data_80239E10.json"
+    }
+  ],
+  "verification": {
+    "configure": "python3 configure.py",
+    "build": ".tools/bin/ninja",
+    "build_result": "success",
+    "objdiff_version": "3.6.1",
+    "dol_sha1_expected": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "dol_sha1_actual": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "dol_sha1_unchanged": true
+  },
+  "review_remediation_verification": {
+    "date": "2026-08-24",
+    "authoritative_session_id": "a91bf794-0aed-4481-bed6-e9c010372585",
+    "configure_and_build": "python3 configure.py && .tools/bin/ninja",
+    "objdiff_version": "3.6.1",
+    "fresh_objdiff_units": [
+      "main/game/game_TRKNubWelcome",
+      "main/game/game_TRK_main",
+      "main/game/game_data_80239E10",
+      "main/game/game_data_80239E18"
+    ],
+    "code_relocations_equal": {
+      "game/game_TRKNubWelcome.c": "3/3",
+      "game/game_TRK_main.c": "8/8"
+    },
+    "dol_sha1_actual": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "frontier_after_verification": "0x8016FEF8"
+  }
+}

@@ -86,11 +86,85 @@ config.asflags = ["-mgekko", "--strip-local-absolute", "-I include", f"-I build/
 config.ldflags = ["-fp hardware", "-nodefaults"]
 config.custom_build_rules = [
     {
+        "name": "externalize_game_80170A40_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @19 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@19=lbl_806506B0 --remove-section=.sdata2 "
+            "--rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "externalize_game_8017038C_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @9 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@9=lbl_806506A8 --remove-section=.sdata2 "
+            "--rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "externalize_game_801704F8_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @11 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@11=lbl_806506A8 --remove-section=.sdata2 "
+            "--rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "externalize_game_801706DC_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @16 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@16=lbl_806506A8 --remove-section=.sdata2 "
+            "--rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "normalize_game_TRKNubWelcome_symbols",
+        "command": (
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=lbl_80239BC0=@62_80239BC0 $in && touch $out"
+        ),
+        "description": "NORMALIZE $in",
+    },
+    {
+        "name": "normalize_game_TRK_main_symbols",
+        "command": (
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=TRK_mainError=TRK_mainError_8032A570 $in && touch $out"
+        ),
+        "description": "NORMALIZE $in",
+    },
+    {
+        "name": "normalize_game_data_80239E18_symbols",
+        "command": (
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=lbl_80239E18=@stringBase0_80239E18 $in && touch $out"
+        ),
+        "description": "NORMALIZE $in",
+    },
+    {
         "name": "externalize_game_8016E8F8_bias",
         "command": (
             "python3 tools/externalize_elf_symbol.py $in @25 && "
             "build/binutils/powerpc-eabi-objcopy "
             "--redefine-sym=@25=lbl_806506A8 --remove-section=.sdata2 "
+            "--rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "externalize_game_8016FEF8_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @11 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@11=lbl_806506A8 --remove-section=.sdata2 "
             "--rename-section=.comment=.ignored $in && touch $out"
         ),
         "description": "EXTERNALIZE $in",
@@ -1173,9 +1247,44 @@ config.custom_build_rules = [
 config.custom_build_steps = {
     "post-compile": [
         {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80170A40.externalized"],
+            "rule": "externalize_game_80170A40_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80170A40.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_801706DC.externalized"],
+            "rule": "externalize_game_801706DC_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_801706DC.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_TRKNubWelcome.normalized"],
+            "rule": "normalize_game_TRKNubWelcome_symbols",
+            "inputs": [f"build/{VERSION}/src/game/game_TRKNubWelcome.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_TRK_main.normalized"],
+            "rule": "normalize_game_TRK_main_symbols",
+            "inputs": [f"build/{VERSION}/src/game/game_TRK_main.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_data_80239E18.normalized"],
+            "rule": "normalize_game_data_80239E18_symbols",
+            "inputs": [f"build/{VERSION}/src/game/game_data_80239E18.o"],
+        },
+        {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8016E8F8.externalized"],
             "rule": "externalize_game_8016E8F8_bias",
             "inputs": [f"build/{VERSION}/src/game/game_fn_8016E8F8.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8016FEF8.externalized"],
+            "rule": "externalize_game_8016FEF8_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8016FEF8.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_801704F8.externalized"],
+            "rule": "externalize_game_801704F8_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_801704F8.o"],
         },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8016DF4C.normalized"],
@@ -1221,6 +1330,11 @@ config.custom_build_steps = {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8016C0BC.externalized"],
             "rule": "externalize_game_8016C0BC_bias",
             "inputs": [f"build/{VERSION}/src/game/game_fn_8016C0BC.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8017038C.externalized"],
+            "rule": "externalize_game_8017038C_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8017038C.o"],
         },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8016BE1C.externalized"],
@@ -3382,8 +3496,10 @@ config.libs = [
     Object(Matching, "game/game_data_80239CE8.c"),
     Object(Matching, "game/game_data_80239D00.c"),
     Object(Matching, "game/game_data_80239DE0.c", extra_cflags=["-sdata 0"]),
+    # Unit-level fuzzy score is 100%, but the generated bytes live in .sdata2
+    # (10 bytes) rather than retail's .rodata (8 bytes); keep it out of the link.
     Object(NonMatching, "game/game_data_80239E10.c", extra_cflags=["-sdata 0"]),
-    Object(NonMatching, "game/game_data_80239E18.c", extra_cflags=["-sdata 0"]),
+    Object(Matching, "game/game_data_80239E18.c", extra_cflags=["-sdata 0"]),
     Object(Matching, "game/game_data_80239E40.c"),
     Object(Matching, "game/game_data_80239E68.c"),
     Object(Matching, "game/game_data_80239E88.c"),
@@ -4719,7 +4835,7 @@ config.libs = [
             Object(Matching, "game/game_fn_800EEF34.c"),
             Object(NonMatching, "game/game_TRKGetNextEvent.c"),
             Object(Matching, "game/game_TRKInitializeEventQueue.c"),
-            Object(NonMatching, "game/game_TRKNubWelcome.c"),
+            Object(Matching, "game/game_TRKNubWelcome.c"),
             Object(Matching, "game/game_TRKTerminateNub.c"),
             Object(NonMatching, "game/game_TRKInitializeNub.c", extra_cflags=["-sdata 0"]),
             Object(NonMatching, "game/game_fn_800EF56C.c", extra_cflags=["-use_lmw_stmw on"]),
@@ -4781,8 +4897,7 @@ config.libs = [
             Object(Matching, "game/game_fn_800F5030.c", extra_cflags=["-sdata 0"]),
             Object(Matching, "game/game_EnableMetroTRKInterrupts.c"),
             Object(Matching, "game/game_fn_800F5400.c"),
-            # Instruction-exact; the local TRK_mainError relocation cannot be named externally.
-            Object(NonMatching, "game/game_TRK_main.c", extra_cflags=["-sdata 0"]),
+            Object(Matching, "game/game_TRK_main.c", extra_cflags=["-sdata 0"]),
             Object(Matching, "game/game_TRKUARTInterruptHandler.c"),
             Object(Matching, "game/game_TRK_board_display.c"),
             Object(Matching, "game/game_UnreserveEXI2Port.c"),
@@ -6612,6 +6727,28 @@ config.libs = [
             Object(Matching, "game/game_fn_8016FC68.c"),
             Object(Matching, "game/game_fn_8016FD3C.c"),
             Object(Matching, "game/game_fn_8016FE4C.c"),
+            Object(Matching, "game/game_fn_8016FEF8.c"),
+            Object(Matching, "game/game_fn_8016FFA8.c"),
+            Object(Matching, "game/game_fn_8016FFDC.c"),
+            Object(Matching, "game/game_fn_80170090.c"),
+            Object(Matching, "game/game_fn_80170144.c"),
+            Object(Matching, "game/game_fn_801701D4.c"),
+            Object(Matching, "game/game_fn_8017026C.c"),
+            Object(Matching, "game/game_fn_801702FC.c"),
+            Object(Matching, "game/game_fn_8017038C.c"),
+            Object(Matching, "game/game_fn_80170438.c"),
+            Object(Matching, "game/game_fn_801704F8.c"),
+            Object(Matching, "game/game_fn_801705D4.c"),
+            Object(Matching, "game/game_fn_80170658.c"),
+            Object(Matching, "game/game_fn_801706DC.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_80170814.c"),
+            Object(Matching, "game/game_fn_80170880.c"),
+            Object(Matching, "game/game_fn_80170980.c"),
+            Object(Matching, "game/game_fn_80170A40.c"),
+            Object(Matching, "game/game_fn_80170B5C.c"),
+            Object(Matching, "game/game_fn_80170C18.c"),
+            Object(Matching, "game/game_fn_80170C84.c"),
+            Object(Matching, "game/game_fn_80170D04.c"),
             Object(Matching, "game/game_data_806506A8.c"),
             Object(NonMatching, "game/game_fn_8012356C.c"),
             Object(Matching, "game/game_fn_80008B38.c"),
