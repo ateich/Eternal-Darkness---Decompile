@@ -1,0 +1,45 @@
+{
+  "session_id": "session-1149",
+  "range_start": "0x80171BB4",
+  "range_end": "0x80171FBC",
+  "matched_bytes": 140,
+  "evidence_format": "objdiff-cli 3.6.1 JSON with target/base instructions and relocation records",
+  "nonmatching_functions_added": 2,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "symbol": "fn_80171BB4",
+      "range": "0x80171BB4-0x80171D6C",
+      "code_bytes": 440,
+      "generated_bytes": 444,
+      "objdiff_percent": 97.045456,
+      "status": "NonMatching",
+      "blocking_divergence": "Canonical MWCC materializes the retained lbl_8024FF00 low address through r0 and copies it to r31, adding four bytes; retail writes it directly to r28, with consequent r24-r31 allocation differences.",
+      "evidence": "reports/GEDE01/objdiff-fn_80171BB4.json"
+    },
+    {
+      "symbol": "fn_80171D6C",
+      "range": "0x80171D6C-0x80171F30",
+      "code_bytes": 452,
+      "generated_bytes": 456,
+      "objdiff_percent": 97.07964,
+      "status": "NonMatching",
+      "blocking_divergence": "The same canonical MWCC shared-string-base materialization adds four bytes and changes callee-saved allocation; the independent C retains the full argument conversion, clamp, diagnostic and dispatch behavior.",
+      "evidence": "reports/GEDE01/objdiff-fn_80171D6C.json"
+    },
+    {
+      "symbol": "fn_80171F30",
+      "range": "0x80171F30-0x80171FBC",
+      "code_bytes": 140,
+      "objdiff_percent": 100.0,
+      "instruction_count": "35/35",
+      "instruction_differences": 0,
+      "text_relocations_equal": "8/8",
+      "status": "Matching",
+      "evidence": "reports/GEDE01/objdiff-fn_80171F30.json"
+    }
+  ],
+  "next_target": "0x80171FBC",
+  "next_gate": "Attempt the consecutive fn_80171FBC routine next; the two preceding NonMatching spans remain explicit codegen-debt entries and are fully accounted in this frontier.",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

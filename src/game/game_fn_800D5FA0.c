@@ -17,7 +17,7 @@ extern int fn_800460EC(void);
 extern void fn_800D40A8(Actor *, void *);
 extern void fn_800A41CC(Actor *, int);
 extern void fn_800A2E5C(Actor *, int);
-extern void fn_802006D4(int, int, int, int, int);
+extern int fn_802006D4(int, int, int, int, int);
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);
 

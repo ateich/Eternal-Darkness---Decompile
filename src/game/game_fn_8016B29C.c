@@ -12,7 +12,7 @@ extern Context* lbl_8064D1C0;
 
 extern void* fn_801FEA8C(u32, int, const char*, int);
 extern void* memset(void*, int, unsigned long);
-extern void fn_8016B5CC(int, int, int, const char*, int);
+extern void* fn_8016B5CC(int, int, int, const char*, int);
 extern void fn_8016B030(int);
 extern Context* fn_80166894(int);
 extern void fn_80177408(void);

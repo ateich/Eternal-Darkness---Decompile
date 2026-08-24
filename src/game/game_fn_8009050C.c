@@ -9,7 +9,7 @@ extern int fn_80200C38();
 extern int fn_80201B54();
 extern int fn_80201EB8();
 extern int fn_80090204(void*);
-extern void fn_802006D4(void*, void*, int, int, int);
+extern int fn_802006D4(void*, void*, int, int, int);
 extern void fn_8020104C(int, void*, void*, int, float);
 extern void fn_8008FB9C(void*, void*, void*, Vec3*, void*, void*, void*, void*, int);
 extern void fn_80090004(void*, void*, void*, Vec3*, void*, void*, void*, void*, int);

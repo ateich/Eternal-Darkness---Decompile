@@ -15,7 +15,7 @@ extern int lbl_8064CA88;
 
 extern void *fn_80201B8C();
 extern int fn_80201B54();
-extern void fn_802006D4(void *, void *, int, int, int);
+extern int fn_802006D4(void *, void *, int, int, int);
 
 void fn_800C39D0(void *context)
 {

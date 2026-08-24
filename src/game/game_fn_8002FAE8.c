@@ -31,11 +31,11 @@ extern int fn_8014317C(); extern int fn_8014CBC0(); extern int fn_80178E94();
 extern int fn_801858E0(); extern int fn_80185AE8(); extern int fn_801A717C();
 extern void fn_801A7228(); extern int fn_801A7470(); extern void fn_801A74A0();
 extern void fn_801A74A8(); extern int fn_801A74D8(); extern void fn_801A7518();
-extern int fn_801A7538(); extern int fn_801A7588(); extern void fn_801A764C();
+extern void fn_801A7538(); extern int fn_801A7588(); extern void fn_801A764C();
 extern int fn_801A7668(); extern int fn_801A7670(); extern int fn_801AC9F4();
 extern int fn_801CEB2C(); extern int fn_801D1B10(); extern int fn_801D38BC();
 extern int fn_801D38E8(); extern int fn_801D39E0(); extern int fn_801DD0A8();
-extern int fn_801E8328(); extern int fn_801E8328(); extern int fn_802006D4();
+extern int fn_801E8328(); extern int fn_801E8328(); extern s32 fn_802006D4();
 extern int fn_80200C10(void *); extern int fn_80200C38(); extern void fn_8020104C(int, void*, void*, int, float);
 #define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void *)(b), (void *)(c), (int)(d), (e))
 extern unsigned long long fn_8020123C(); extern void *fn_80201814(); extern int fn_80201AE4(void);

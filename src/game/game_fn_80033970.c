@@ -28,7 +28,7 @@ extern u8 lbl_80303D18[0x78];
 extern int fn_80200C10(void *);
 extern int fn_80200C38();
 extern s32 fn_80200C20(void*);
-extern void fn_802006D4(s32, s32, s32, s32, s32);
+extern s32 fn_802006D4(s32, s32, s32, s32, s32);
 extern void *fn_80201BC8();
 extern int fn_80201B54();
 extern void *fn_80201B8C();

@@ -51,7 +51,7 @@ extern void fn_802020B4(void*, int);
 extern s32 fn_800DE354(void);
 extern s32 fn_802066E0(s32, s32);
 extern void fn_8011DD8C(s32, s32);
-extern void fn_802006D4(s32, s32, s32, s32, s32);
+extern s32 fn_802006D4(s32, s32, s32, s32, s32);
 extern void *fn_80201814();
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);

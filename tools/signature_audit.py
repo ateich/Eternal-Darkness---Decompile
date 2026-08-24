@@ -25,6 +25,7 @@ from typing import Iterable
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SOURCE = ROOT / "src" / "game"
+DEFAULT_RETAIL_EVIDENCE = ROOT / "config" / "GEDE01" / "retail-return-shapes.json"
 FUNCTION_NAME = re.compile(r"\b(fn_[0-9A-Fa-f]+)\s*\(")
 EXTERN_STATEMENT = re.compile(r"\bextern\b(?P<body>.*?);", re.DOTALL)
 COMMENTS = re.compile(r"/\*.*?\*/|//[^\n]*", re.DOTALL)
@@ -86,6 +87,18 @@ class Declaration:
             self.variadic,
             self.unspecified_parameters,
         )
+
+
+@dataclass(frozen=True)
+class Definition:
+    symbol: str
+    return_type: str
+    path: str
+    line: int
+
+    @property
+    def return_shape(self) -> str:
+        return return_register_shape(self.return_type)
 
 
 def squash_space(text: str) -> str:
@@ -163,6 +176,22 @@ def return_register_shape(type_name: str) -> str:
     if is_aggregate(type_name):
         return "none"
     return "GPR:r3"
+
+
+def return_value_kind(type_name: str) -> str:
+    """Classify source-level result semantics beyond the physical register file."""
+    base = base_type(type_name)
+    if base == "void":
+        return "void"
+    if "*" in base or base == "function-pointer":
+        return "pointer"
+    if base in FLOAT_TYPES | DOUBLE_TYPES:
+        return "floating"
+    if base in INT64_TYPES:
+        return "integer64"
+    if is_aggregate(type_name):
+        return "aggregate"
+    return "integer"
 
 
 def is_aggregate(type_name: str) -> bool:
@@ -246,8 +275,54 @@ def declarations_in(path: Path, source_root: Path) -> Iterable[Declaration]:
             )
 
 
-def audit(source_root: Path) -> dict[str, object]:
+def definition_in(path: Path) -> Definition | None:
+    """Recover the primary function definition from a per-function game TU."""
+    match = re.fullmatch(r"game_(fn_[0-9A-Fa-f]+)", path.stem)
+    if match is None:
+        return None
+    symbol = match.group(1)
+    original = path.read_text(encoding="utf-8")
+    text = COMMENTS.sub(lambda item: "\n" * item.group(0).count("\n"), original)
+    header = re.compile(
+        rf"(?m)^[ \t]*(?!extern\b)(?P<return>[A-Za-z_]"
+        rf"[A-Za-z0-9_ \t*]*?)[ \t]+{re.escape(symbol)}[ \t]*\("
+    )
+    for candidate in header.finditer(text):
+        cursor = candidate.end()
+        depth = 1
+        while cursor < len(text) and depth:
+            if text[cursor] == "(":
+                depth += 1
+            elif text[cursor] == ")":
+                depth -= 1
+            cursor += 1
+        if depth or not re.match(r"\s*\{", text[cursor:]):
+            continue
+        return_type = re.sub(
+            r"\b(?:static|inline|__inline)\b", "", candidate.group("return")
+        )
+        return Definition(
+            symbol=symbol,
+            return_type=squash_space(return_type),
+            path=str(path.relative_to(ROOT)),
+            line=text.count("\n", 0, candidate.start()) + 1,
+        )
+    return None
+
+
+def load_retail_evidence(path: Path) -> dict[str, dict[str, str]]:
+    if not path.is_file():
+        return {}
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    symbols = payload.get("symbols", {})
+    if not isinstance(symbols, dict):
+        raise ValueError(f"{path}: 'symbols' must be an object")
+    return symbols
+
+
+def audit(source_root: Path, retail_evidence_path: Path = DEFAULT_RETAIL_EVIDENCE) -> dict[str, object]:
     grouped: dict[str, list[Declaration]] = defaultdict(list)
+    definitions: dict[str, Definition] = {}
     paths = sorted(
         path
         for path in source_root.rglob("*")
@@ -259,6 +334,11 @@ def audit(source_root: Path) -> dict[str, object]:
     for path in paths:
         for declaration in declarations_in(path, source_root):
             grouped[declaration.symbol].append(declaration)
+        definition = definition_in(path)
+        if definition is not None:
+            definitions[definition.symbol] = definition
+
+    retail_evidence = load_retail_evidence(retail_evidence_path)
 
     categories: dict[str, list[dict[str, object]]] = {
         "return_register_contradictions": [],
@@ -311,10 +391,67 @@ def audit(source_root: Path) -> dict[str, object]:
 
     for entries in categories.values():
         entries.sort(key=lambda item: (-int(item["declarations"]), str(item["symbol"])))
+
+    ground_truth_contradictions: list[dict[str, object]] = []
+    for symbol, declarations in sorted(grouped.items()):
+        definition = definitions.get(symbol)
+        evidence = retail_evidence.get(symbol)
+        if definition is not None:
+            expected_kind = return_value_kind(definition.return_type)
+            disagreeing = [
+                item for item in declarations
+                if return_value_kind(item.return_type) != expected_kind
+            ]
+            truth = {
+                "kind": "definition",
+                "return_type": definition.return_type,
+                "return_value_kind": expected_kind,
+                "return_shape": definition.return_shape,
+                "source": f"{definition.path}:{definition.line}",
+            }
+        elif evidence is not None:
+            expected_shape = evidence["return_shape"]
+            disagreeing = [
+                item for item in declarations if item.return_shape != expected_shape
+            ]
+            truth = {
+                "kind": "retail-epilogue",
+                "return_shape": expected_shape,
+                "source": evidence["source"],
+                "detail": evidence.get("detail", ""),
+            }
+        else:
+            continue
+        if not disagreeing:
+            continue
+        variants = Counter(item.signature for item in disagreeing)
+        ground_truth_contradictions.append({
+            "symbol": symbol,
+            "declarations": len(declarations),
+            "ground_truth": truth,
+            "disagreeing_declarations": len(disagreeing),
+            "variants": [
+                {
+                    "signature": signature,
+                    "count": count,
+                    "sites": [
+                        f"{item.path}:{item.line}"
+                        for item in disagreeing if item.signature == signature
+                    ],
+                }
+                for signature, count in variants.most_common()
+            ],
+        })
+    ground_truth_contradictions.sort(
+        key=lambda item: (-int(item["declarations"]), str(item["symbol"]))
+    )
     return {
         "source": str(source_root.relative_to(ROOT)),
         "declarations": sum(len(items) for items in grouped.values()),
         "symbols": len(grouped),
+        "definitions": len(definitions),
+        "retail_evidence_symbols": len(retail_evidence),
+        "ground_truth_contradictions": ground_truth_contradictions,
         **categories,
     }
 
@@ -325,6 +462,7 @@ def print_report(report: dict[str, object], limit: int | None) -> None:
         f"{report['symbols']} symbols under {report['source']}"
     )
     headings = (
+        ("ground_truth_contradictions", "GROUND-TRUTH CONTRADICTIONS"),
         ("return_register_contradictions", "RETURN-REGISTER CONTRADICTIONS"),
         ("abi_divergent", "ABI-DIVERGENT DECLARATIONS"),
         ("cosmetic", "COSMETIC DECLARATION DIFFERENCES"),
@@ -336,7 +474,20 @@ def print_report(report: dict[str, object], limit: int | None) -> None:
         print(f"\n{heading}: {len(entries)} symbol(s)")
         for entry in shown:
             print(f"  {entry['symbol']} ({entry['declarations']} declarations)")
+            if key == "ground_truth_contradictions":
+                truth = entry["ground_truth"]
+                print(
+                    f"    truth={truth['kind']} return={truth['return_shape']} "
+                    f"source={truth['source']}"
+                )
             for variant in entry["variants"]:
+                if key == "ground_truth_contradictions":
+                    sites = ", ".join(variant["sites"][:8])
+                    if len(variant["sites"]) > 8:
+                        sites += f", ... {len(variant['sites']) - 8} more"
+                    print(f"    [{variant['count']}x] {variant['signature']}")
+                    print(f"      {sites}")
+                    continue
                 abi = variant["abi"]
                 params = ",".join(abi["parameters"]) or "none"
                 suffix = ",variadic" if abi["variadic"] else ""
@@ -358,6 +509,10 @@ def print_report(report: dict[str, object], limit: int | None) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source", type=Path, default=DEFAULT_SOURCE)
+    parser.add_argument(
+        "--retail-evidence", type=Path, default=DEFAULT_RETAIL_EVIDENCE,
+        help="JSON file of manually verified retail callee return shapes",
+    )
     parser.add_argument("--json", action="store_true", help="emit machine-readable JSON")
     parser.add_argument(
         "--limit", type=int, default=10,
@@ -365,7 +520,7 @@ def main() -> int:
     )
     args = parser.parse_args()
     source = args.source.resolve()
-    report = audit(source)
+    report = audit(source, args.retail_evidence.resolve())
     if args.json:
         print(json.dumps(report, indent=2))
     else:

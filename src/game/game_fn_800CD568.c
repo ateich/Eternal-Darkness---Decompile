@@ -25,7 +25,7 @@ extern const float lbl_8064F2B0;
 extern const float lbl_8064F30C;
 extern void *fn_80201814();
 extern void *fn_80201B8C();
-extern void fn_802006D4(int, int, int, int, int);
+extern int fn_802006D4(int, int, int, int, int);
 extern void *fn_80037AF4(int);
 extern int fn_80201B54();
 extern void fn_801E32F8(Payload *);

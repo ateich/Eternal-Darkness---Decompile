@@ -1,4 +1,4 @@
-extern void fn_802006D4(void*, void*, int, int, int);
+extern int fn_802006D4(void*, void*, int, int, int);
 
 void fn_8008F860(void* object)
 {
