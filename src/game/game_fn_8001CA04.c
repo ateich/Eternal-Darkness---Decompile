@@ -1,7 +1,7 @@
 typedef unsigned int u32;
 typedef int s32;
 
-extern s32 fn_8016A598(void*);
+extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_8016A7D8(void*);
 extern void fn_8016A830(void*, double);

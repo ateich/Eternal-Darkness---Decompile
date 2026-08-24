@@ -50,7 +50,7 @@ extern GameState lbl_803020E4;
 extern PairSource lbl_802FC5BC;
 extern void* lbl_8064C618;
 
-extern s32 fn_8016A598(void*);
+extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_80187A34(void*, s32);

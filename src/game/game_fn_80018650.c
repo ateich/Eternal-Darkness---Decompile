@@ -2,7 +2,7 @@ typedef int s32;
 
 extern const char lbl_8023BEF8[];
 
-extern s32 fn_8016A598(void*);
+extern int fn_8016A598(void*);
 extern void fn_80163BB4(void*, const char*, ...);
 extern double fn_8016A694(void*, int);
 extern void fn_8014B888(s32, void**, s32*);

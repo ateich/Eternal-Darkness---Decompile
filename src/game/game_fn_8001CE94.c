@@ -8,7 +8,7 @@ char lbl_8023CEE0[24] = "EDQueryPlayerOkToBrush";
 char lbl_8023CEF8[36] = "EDStartSubtitlesForMikeDestroyThis";
 char lbl_8023CF1C[36] = "EDStartSubtitlesForAlexClockPuzzle";
 
-extern s32 fn_8016A598(void*);
+extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_8016A830(void*, double);
 extern void fn_80163BB4(void*, const char*, ...);

@@ -1,7 +1,7 @@
 typedef int s32;
 
 char lbl_8023CA4C[] = "invalid args of %i";
-extern s32 fn_8016A598(void*);
+extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_80025A78(int);

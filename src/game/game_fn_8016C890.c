@@ -1,10 +1,10 @@
 extern int fn_8016A598(void*);
 extern void fn_80163BB4(void*, const char*, ...);
 extern double fn_8016A694(void*, int);
-extern void* fn_80201814(int);
+extern void *fn_80201814();
 extern void fn_80201D34(void*, int);
 extern void fn_80201D1C(void*, int);
-extern void fn_8020123C(int, int, int, int);
+extern unsigned long long fn_8020123C();
 extern const char lbl_8024FF00[];
 
 int fn_8016C890(void* state)

@@ -1,7 +1,7 @@
 typedef int s32;
 
 extern s32 fn_800CAB80(void);
-extern s32 fn_8016A598(void*);
+extern int fn_8016A598(void*);
 extern void fn_8016A830(void*, double);
 
 s32 fn_8000E054(void* script)

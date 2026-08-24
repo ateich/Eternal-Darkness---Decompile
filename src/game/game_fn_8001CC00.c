@@ -2,7 +2,7 @@ typedef int s32;
 
 char lbl_8023CDFC[28] = "EDCreateEnchantedExplosion";
 
-extern s32 fn_8016A598(void*);
+extern int fn_8016A598(void*);
 extern void fn_80163BB4(void*, const char*, ...);
 extern s32 lbl_8064C5D8;
 extern char lbl_8023BEF8[];

@@ -1,0 +1,20 @@
+{
+  "session_id": "session-1126",
+  "range_start": "0x8016FA08",
+  "range_end": "0x8016FC68",
+  "matched_functions": ["fn_8016FB94"],
+  "matched_code_bytes": 212,
+  "nonmatching_functions": {
+    "fn_8016FA08": {
+      "target_size": 396,
+      "base_size": 400,
+      "best_match_percent": 97.77778,
+      "divergence": "The best base-relative linker-pool reconstruction models the three non-base addresses as offsets from lbl_8024FF00; MWCC materializes that base's low half into r0 and then moves it to r31. Retail forms the low address directly in r31, adding one generated instruction and changing retail's zero-offset addi argument to mr. This is an unresolved source/codegen divergence, not a confirmed canonical-MWCC limitation: an experimental trial that instead declared and referenced four distinct labels was size-exact but fell to 84.56566% because MWCC rematerialized each address and changed saved-register allocation.",
+      "evidence": "reports/GEDE01/objdiff-fn_8016FA08.json"
+    }
+  },
+  "unaccounted_spans": [],
+  "next_target": "0x8016FC68",
+  "next_gate": "Attempt the consecutive 212-byte fn_8016FC68 routine next toward the jumptable_8023BF28 data-ownership boundary; the 0x8016FA08-0x8016FC68 range is fully accounted by one documented NonMatching function followed by one 100% match.",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

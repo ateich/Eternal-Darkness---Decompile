@@ -5,7 +5,7 @@ extern const char lbl_80244EDC[];
 extern unsigned char lbl_8031CD84[];
 extern s32 lbl_8064C8F0;
 
-extern s32 fn_8016A598(void *);
+extern int fn_8016A598(void *);
 extern void fn_80163BB4(void *, const char *, ...);
 extern void fn_8016A830(void *, double);
 

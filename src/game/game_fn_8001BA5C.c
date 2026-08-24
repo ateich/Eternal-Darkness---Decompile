@@ -1,6 +1,6 @@
 typedef int s32;
 
-extern s32 fn_8016A598(void*);
+extern int fn_8016A598(void*);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void* fn_8007D944(void);
 extern void fn_8016A830(void*, double);

@@ -52,7 +52,7 @@ extern s32 lbl_8064DD20;
 extern s32 lbl_8064DD24;
 extern s32 lbl_8064DD28;
 
-extern s32 fn_8016A598(void*);
+extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void* fn_8016A784(void*, int);
 extern void fn_8016A830(void*, double);

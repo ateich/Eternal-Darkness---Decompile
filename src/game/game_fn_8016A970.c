@@ -13,7 +13,7 @@ typedef struct Value {
 } Value;
 
 extern char lbl_8024FE6C[];
-extern void fn_80163BB4(Context*, const char*, ...);
+extern void fn_80163BB4(void*, const char*, ...);
 extern void* fn_80167014(Context*, void*, int);
 extern void fn_8016057C(Context*, int);
 

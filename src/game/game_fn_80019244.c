@@ -26,7 +26,7 @@ extern const u32 lbl_8064DE80;
 extern const u16 lbl_8064DE84;
 extern const double lbl_8064DCE8;
 
-extern s32 fn_8016A598(void*);
+extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern unsigned int fn_800F5C54();

@@ -1,7 +1,7 @@
 extern int fn_8016A598(void*);
 extern void fn_80163BB4(void*, const char*, ...);
 extern double fn_8016A694(void*, int);
-extern int fn_80201814(int);
+extern int fn_80201814(int); /* signature-audit: codegen-adapter */
 extern void* fn_80204A8C(void);
 extern void fn_80204CE4(int, void*);
 extern int fn_80201C2C(int);

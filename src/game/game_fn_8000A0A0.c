@@ -25,7 +25,7 @@ extern int fn_80201B44();
 extern void *fn_80201814();
 #define FN_80201E78_RETURN void
 #define FN_80201E78_PARAMETERS void*, void*
-extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern s32 fn_8016A598(void*);
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern int fn_8016A598(void*);
 extern void fn_80163BB4(void*, const char*, ...);
 extern unsigned long long fn_8020123C();
 extern void *fn_80201B8C();

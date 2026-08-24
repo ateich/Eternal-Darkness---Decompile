@@ -2,7 +2,7 @@ typedef unsigned short u16;
 
 extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
-extern void fn_80163BB4(void*, const char*, int, ...);
+extern void fn_80163BB4(void*, const char*, ...);
 extern void* fn_800F5C54(double);
 extern void fn_8016D9C0(unsigned int, u16*, u16*);
 extern void fn_801F6198(void*, u16, u16);

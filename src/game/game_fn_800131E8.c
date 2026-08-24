@@ -3,7 +3,7 @@ typedef int s32;
 extern const char lbl_8023BEF8[];
 extern const double lbl_8064DCE8;
 extern void* fn_80201B3C();
-extern s32 fn_8016A598(void*);
+extern int fn_8016A598(void*);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void* fn_80049220(void*, s32);
 extern void* fn_80049304(void*, void*);

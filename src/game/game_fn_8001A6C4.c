@@ -15,7 +15,7 @@ char lbl_8023CC30[] =
     "\nInvalid Num of Args Expecting 1 or 0, and got %i\n";
 
 extern double fn_8016A694(void*, int);
-extern s32 fn_8016A598(void*);
+extern int fn_8016A598(void*);
 extern void fn_8016A830(void*, double);
 extern void fn_800AFBA8(void*);
 extern void fn_800AFDA4(void);

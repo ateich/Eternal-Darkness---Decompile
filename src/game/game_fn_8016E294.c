@@ -7,7 +7,7 @@ typedef struct DVDFileInfo {
 extern void* fn_8015E4A4(void);
 extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
-extern void fn_80163BB4(void*, const char*, int, ...);
+extern void fn_80163BB4(void*, const char*, ...);
 extern int fn_800F9D4C(char*, const char*, ...);
 extern int fn_802136A4(const char*);
 extern int fn_80213394(const char*, DVDFileInfo*);

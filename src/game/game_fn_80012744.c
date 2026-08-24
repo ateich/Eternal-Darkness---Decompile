@@ -11,7 +11,7 @@ extern const char lbl_8023BEF8[];
 extern GameState lbl_803003C8;
 extern void* lbl_8064C4E0;
 extern s32 lbl_8064C5D8;
-extern s32 fn_8016A598(void*);
+extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_80113B50(s32);

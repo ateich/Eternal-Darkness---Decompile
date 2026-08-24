@@ -40,7 +40,7 @@ extern const char lbl_8023BEF8[];
 extern const u32 lbl_806518D0;
 extern const u16 lbl_806518D4;
 
-extern s32 fn_8016A598(void*);
+extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern unsigned int fn_800F5C54();

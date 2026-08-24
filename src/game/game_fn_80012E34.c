@@ -5,7 +5,7 @@ char lbl_8023CA98[] =
     "Invalid Alignment of %i\0"
     "( Error: pStartVert is NULL )\0\0\0"
     "( Error: pEndVert is NULL )";
-extern s32 fn_8016A598(void*);
+extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void *fn_80201814();

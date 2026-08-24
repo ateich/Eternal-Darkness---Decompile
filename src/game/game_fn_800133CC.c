@@ -4,7 +4,7 @@ typedef unsigned char u8;
 extern const char lbl_8023BEF8[];
 extern char lbl_8030206C[];
 extern void fn_8014CBC0(char*);
-extern s32 fn_8016A598(void*);
+extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void *fn_80201814();
