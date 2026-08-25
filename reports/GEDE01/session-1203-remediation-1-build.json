@@ -1,0 +1,24 @@
+{
+  "session_id": "session-1203-remediation-1",
+  "scope": "externalize_game_8017960C_bias verification guard",
+  "guard_context": "The configure.py custom_build_rules normalization pass already rewrote this rule's two-argument externalizer invocation to the guarded four-argument command, so the configure.py source edit is explicit defense-in-depth and not a behavioral repair.",
+  "build_command": "python3 configure.py && .tools/bin/ninja",
+  "build_result": "success",
+  "externalize_command": "python3 tools/externalize_elf_symbol.py $in @6 lbl_806508A8 orig/GEDE01/sys/main.dol",
+  "local_symbol": "@6",
+  "retail_symbol": "lbl_806508A8",
+  "retail_value": "4330000080000000",
+  "retail_value_verified": true,
+  "objdiff_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8017960C fn_8017960C -c function_reloc_diffs=name_address -o reports/GEDE01/objdiff-fn_8017960C-session-1203-remediation-1.json --format json",
+  "objdiff_result": {
+    "function": "fn_8017960C",
+    "matched_bytes": 128,
+    "match_percent": 100.0,
+    "relocations_equal": true
+  },
+  "sha1_command": "sha1sum -c config/GEDE01/build.sha1",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "expected_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "dol_hash_matches": true,
+  "next_target": "0x801796D4"
+}

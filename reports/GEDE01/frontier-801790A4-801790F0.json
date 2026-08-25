@@ -1,0 +1,26 @@
+{
+  "session_id": "session-1201-remediation-1",
+  "range_start": "0x801790A4",
+  "range_end": "0x801790F0",
+  "next_target": "0x801790F0",
+  "next_gate": "Attempt fn_801790F0 at 0x801790F0 as the immediate consecutive retail function; it remains unregistered and must receive a real reconstruction attempt before any later function is claimed.",
+  "matched_bytes": 0,
+  "nonmatching_bytes": 76,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "symbol": "fn_801790A4",
+      "start": "0x801790A4",
+      "end": "0x801790F0",
+      "status": "NonMatching",
+      "retail_bytes": 76,
+      "generated_bytes": 72,
+      "retail_instructions": 19,
+      "generated_instructions": 18,
+      "match_percent": 91.052635,
+      "blocker": "Canonical GC/1.3 assigns the absolute deltas to f1/f3 rather than retail f3/f1 and eliminates retail's second zero load; the corresponding compare, minimum selection and sum registers diverge.",
+      "evidence": "objdiff-fn_801790A4-session-1201-remediation-1.json"
+    }
+  ],
+  "remediation": "Removed the placeholder fn_801790F0 registration and the downstream fn_80179370 registration so neither can advance or bypass the honest frontier."
+}
