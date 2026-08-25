@@ -1,0 +1,100 @@
+{
+  "session_id": "session-1170",
+  "remediation": "review correction 1 of 3",
+  "assignment": "Enumerate every Object(NonMatching, ...) registration, use fresh objdiff results to identify candidates, and reclaim only exact section matches; match no new functions",
+  "starting_target": "0x80174610",
+  "ending_next_target": "0x80174610",
+  "frontier_changed": false,
+  "method": {
+    "registration_source": "configure.py",
+    "registration_parser": "Python AST: live Object calls whose first positional argument is the NonMatching name and whose second positional argument is a constant string; unlike a line-scoped textual match, this accepts arbitrary whitespace and newlines and excludes comments",
+    "score_source": "build/GEDE01/report.json",
+    "score_generator": "objdiff-cli v3.6.1 report generate",
+    "join_key": "configure.py object path to objdiff unit metadata.source_path after removing the src/ prefix",
+    "mapped_registrations": 652,
+    "unmapped_registrations": 0,
+    "candidate_prefilter": "The aggregate unit fuzzy_match_percent may identify work to inspect, but never proves an exact match.",
+    "reclaim_gate": "For each prefiltered candidate, run a fresh one-shot objdiff and require every retail code or data section to have match_percent == 100.0, with identical generated section ownership and size; then preserve the exact-link and retail-DOL SHA-1 gates.",
+    "zero_code_rule": "A unit with total_code == 0 cannot qualify through matched_code_percent, complete_code_percent, matched_functions_percent, or aggregate fuzzy_match_percent because those code measures are vacuously 100.0. Its data sections must independently pass the section gate."
+  },
+  "inventory": {
+    "unique_nonmatching_registrations_before": 652,
+    "unique_nonmatching_registrations_after": 652,
+    "fresh_objdiff_units_examined": 4776,
+    "registered_nonmatching_objects_examined": 652,
+    "unit_fuzzy_100_prefilter_candidates": 1,
+    "exact_section_100_candidates": 0,
+    "reclaimed_registered_objects": 0,
+    "retained_nonmatching_candidates": 1
+  },
+  "inventory_correction": {
+    "previous_incorrect_count": 628,
+    "correct_count": 652,
+    "missed_multiline_registrations": 24,
+    "fresh_one_shot_objdiff_results": [
+      {"object": "game/game_fn_8000E96C.c", "retail_text_bytes": 424, "text_match_percent": 99.81132},
+      {"object": "game/game_fn_80026768.c", "retail_text_bytes": 1604, "text_match_percent": 60.71322},
+      {"object": "game/game_fn_80026DC8.c", "retail_text_bytes": 616, "text_match_percent": 80.28571},
+      {"object": "game/game_fn_80028198.c", "retail_text_bytes": 2060, "text_match_percent": 46.598057},
+      {"object": "game/game_fn_8002B748.c", "retail_text_bytes": 824, "text_match_percent": 96.79612},
+      {"object": "game/game_fn_8002BFE0.c", "retail_text_bytes": 384, "text_match_percent": 97.395836},
+      {"object": "game/game_fn_8002DAE0.c", "retail_text_bytes": 1896, "text_match_percent": 97.49789},
+      {"object": "game/game_fn_8002F428.c", "retail_text_bytes": 1728, "text_match_percent": 99.35185},
+      {"object": "game/game_fn_8002FAE8.c", "retail_text_bytes": 6748, "text_match_percent": 65.52045},
+      {"object": "game/game_fn_80031544.c", "retail_text_bytes": 336, "text_match_percent": 91.690475},
+      {"object": "game/game_fn_80031694.c", "retail_text_bytes": 280, "text_match_percent": 95.57143},
+      {"object": "game/game_fn_80031D24.c", "retail_text_bytes": 704, "text_match_percent": 94.46023},
+      {"object": "game/game_fn_80032A5C.c", "retail_text_bytes": 188, "text_match_percent": 99.14893},
+      {"object": "game/game_fn_80033180.c", "retail_text_bytes": 1608, "text_match_percent": 83.04975},
+      {"object": "game/game_fn_800337C8.c", "retail_text_bytes": 424, "text_match_percent": 83.86793},
+      {"object": "game/game_fn_80034708.c", "retail_text_bytes": 3628, "text_match_percent": 95.38258},
+      {"object": "game/game_fn_800359A0.c", "retail_text_bytes": 1560, "text_match_percent": 94.22564},
+      {"object": "game/game_fn_80036374.c", "retail_text_bytes": 596, "text_match_percent": 98.993286},
+      {"object": "game/game_fn_800365C8.c", "retail_text_bytes": 1108, "text_match_percent": 90.736465},
+      {"object": "game/game_fn_801235E4.c", "retail_text_bytes": 292, "text_match_percent": 98.561646},
+      {"object": "game/game_fn_80124A40.c", "retail_text_bytes": 892, "text_match_percent": 66.53363},
+      {"object": "game/game_fn_80157360.c", "retail_text_bytes": 216, "text_match_percent": 97.77778},
+      {"object": "game/game_fn_8015D7D4.c", "retail_text_bytes": 500, "text_match_percent": 95.64},
+      {"object": "game/game_fn_80166E3C.c", "retail_text_bytes": 272, "text_match_percent": 98.23529}
+    ],
+    "outcome": "All 24 omitted registrations fail the 100% section gate, so correcting the inventory does not change the zero-reclaim result."
+  },
+  "objdiff_unit_accounting": {
+    "before": {"matched_code_bytes": 504768, "matched_data_bytes": 34486, "complete_code_bytes": 504736, "complete_data_bytes": 34610, "complete_units": 3424, "total_units": 4776},
+    "after": {"matched_code_bytes": 504768, "matched_data_bytes": 34486, "complete_code_bytes": 504736, "complete_data_bytes": 34610, "complete_units": 3424, "total_units": 4776},
+    "delta": {"matched_code_bytes": 0, "matched_data_bytes": 0, "complete_code_bytes": 0, "complete_data_bytes": 0, "complete_units": 0, "nonmatching_registrations": 0},
+    "terminology": "These are objdiff report units and byte measures. The 4776 total units include auto-generated units and are not the same population as configure.py registered objects or the 652 NonMatching registrations.",
+    "note": "No bytes or units were reclaimed. No new functions were matched."
+  },
+  "candidates": [
+    {
+      "object": "game/game_data_80239E10.c",
+      "status_before": "NonMatching",
+      "status_after": "NonMatching",
+      "aggregate_unit_measures": {"unit_fuzzy_match_percent": 100.0, "total_code": 0, "total_data": 8, "matched_code_percent": 100.0, "complete_code_percent": 100.0, "matched_functions_percent": 100.0, "code_measures_vacuous": true},
+      "exact_section_gate": {"passed": false, "retail_section": ".rodata", "retail_size": 8, "retail_match_percent": 0.0, "generated_section": ".sdata2", "generated_size": 10},
+      "exact_matched_bytes_reclaimed": 0,
+      "retail_layout": ".rodata, 8 bytes: 2e00004300000000",
+      "generated_layout": ".sdata2, 10 bytes: 2e000000004300000000",
+      "symbol_layout_difference": "retail lbl_80239E12 is at offset 2; generated lbl_80239E12 is at offset 4",
+      "reason_not_reclaimed": "This data-only unit's aggregate score is a vacuous-code false positive. Section ownership, section size, byte layout and symbol offsets differ, so linking this object would not be byte-identical.",
+      "backlog": "Attempt a bounded data repair in a future matching session: force .rodata placement and recover the u16 packing/alignment that places lbl_80239E12 at offset 2. This remediation only records the work and does not change source or matching status.",
+      "evidence": "reports/GEDE01/objdiff-consolidation-game_data_80239E10-session-1170.json"
+    }
+  ],
+  "verification": {
+    "verified_at": "2026-08-24T22:24:46-04:00",
+    "report_command": ".tools/bin/ninja build/GEDE01/report.json",
+    "report_sha256": "e21f4fa3dcb7591dbf50fee9da10b9e016d645d97bf405834709452a5fea63c8",
+    "affected_object_diff_command_template": "build/tools/objdiff-cli diff -p . -u main/<object-without-.c> -o - --format json",
+    "affected_objects_freshly_diffed": 25,
+    "candidate_diff_command": "build/tools/objdiff-cli diff -p . -u main/game/game_data_80239E10 -o - --format json-pretty",
+    "candidate_diff_sha256": "dcdaf660d16fef2d5c52b76ace9346306ddb5d00205c7dc74d134984568b193d",
+    "build_command": ".tools/bin/ninja build/GEDE01/ok",
+    "build_gate_passed": true,
+    "objdiff_version": "3.6.1",
+    "dol_sha1_expected": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "dol_sha1_actual": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "dol_sha1_unchanged": true
+  }
+}

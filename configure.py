@@ -1372,6 +1372,11 @@ config.custom_build_steps = {
             "inputs": [f"build/{VERSION}/src/game/game_fn_80174184.o"],
         },
         {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8017553C.externalized"],
+            "rule": "externalize_game_80170E9C_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8017553C.o"],
+        },
+        {
             "outputs": [f"build/{VERSION}/src/game/game_fn_80173D44.externalized"],
             "rule": "externalize_game_80173D44_bias",
             "inputs": [f"build/{VERSION}/src/game/game_fn_80173D44.o"],
@@ -7017,6 +7022,33 @@ config.libs = [
             Object(NonMatching, "game/game_fn_80173F04.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_80174184.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_80174358.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_80174610.c"),
+            Object(Matching, "game/game_fn_80174694.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_801748EC.c"),
+            # 99.830505%: exact-size honest C; only fcmpu operand order differs.
+            Object(NonMatching, "game/game_fn_801749A8.c"),
+            Object(Matching, "game/game_fn_80174A94.c"),
+            Object(Matching, "game/game_fn_80174B14.c"),
+            Object(Matching, "game/game_fn_80174B94.c"),
+            Object(Matching, "game/game_fn_80174C34.c"),
+            Object(Matching, "game/game_fn_80174CD4.c"),
+            Object(Matching, "game/game_fn_80174DB8.c"),
+            Object(Matching, "game/game_fn_80174EB4.c"),
+            # 90.112680% exact-size honest C; callback/constant setup retains
+            # five scheduling differences and one local-constant relocation.
+            Object(NonMatching, "game/game_fn_80174F2C.c"),
+            Object(Matching, "game/game_fn_80175164.c"),
+            Object(Matching, "game/game_fn_801751DC.c"),
+            Object(Matching, "game/game_fn_80175244.c"),
+            # 95.642204% exact-size honest C; callback address materialization
+            # and descriptor-pointer scheduling differ across 19 instructions.
+            Object(NonMatching, "game/game_fn_801752B0.c"),
+            Object(Matching, "game/game_fn_80175464.c"),
+            Object(Matching, "game/game_fn_801754D0.c"),
+            Object(Matching, "game/game_fn_80175534.c"),
+            Object(Matching, "game/game_fn_8017553C.c"),
+            Object(NonMatching, "game/game_fn_801755FC.c"),
+            Object(Matching, "game/game_fn_8017583C.c"),
             Object(Matching, "game/game_data_806506A8.c"),
             Object(NonMatching, "game/game_fn_8012356C.c"),
             Object(Matching, "game/game_fn_80008B38.c"),

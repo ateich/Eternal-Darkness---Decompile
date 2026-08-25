@@ -1,0 +1,45 @@
+{
+  "session_id": "session-1173",
+  "range_start": "0x801748EC",
+  "range_end": "0x80174B14",
+  "matched_code_bytes": 316,
+  "nonmatching_code_bytes": 236,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "symbol": "fn_801748EC",
+      "range": "0x801748EC-0x801749A8",
+      "status": "Matching",
+      "code_bytes": 188,
+      "instructions": 47,
+      "match_percent": 100.0,
+      "text_relocations_equal": "9/9",
+      "evidence": "eternal-darkness-decomp/reports/GEDE01/objdiff-fn_801748EC-session-1173.json"
+    },
+    {
+      "symbol": "fn_801749A8",
+      "range": "0x801749A8-0x80174A94",
+      "status": "NonMatching",
+      "code_bytes": 236,
+      "instructions": 59,
+      "match_percent": 99.830505,
+      "text_relocations_equal": "13/13",
+      "specific_divergence": "The reconstruction and retail are size-identical and all relocations agree; canonical MWCC emits fcmpu cr0,f0,f1 while retail emits fcmpu cr0,f1,f0 at function offset 0x58.",
+      "evidence": "eternal-darkness-decomp/reports/GEDE01/objdiff-fn_801749A8-session-1173.json"
+    },
+    {
+      "symbol": "fn_80174A94",
+      "range": "0x80174A94-0x80174B14",
+      "status": "Matching",
+      "code_bytes": 128,
+      "instructions": 32,
+      "match_percent": 100.0,
+      "text_relocations_equal": "7/7",
+      "evidence": "eternal-darkness-decomp/reports/GEDE01/objdiff-fn_80174A94-session-1173.json"
+    }
+  ],
+  "fallback_used": true,
+  "nonmatching_added": 1,
+  "next_target": "0x80174B14",
+  "next_gate": "Attempt consecutive fn_80174B14 at 0x80174B14 and continue upward toward the jumptable_8023BF28 data-ownership boundary. The declared range has no unaccounted span; fn_801749A8 remains explicit NonMatching debt inside it."
+}
