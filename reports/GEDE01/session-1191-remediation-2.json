@@ -1,0 +1,58 @@
+{
+  "session_id": "session-1191",
+  "remediation": 2,
+  "scope": "provenance correction only; frontier unchanged",
+  "configure_command": "python3 configure.py",
+  "build_command": ".tools/bin/ninja",
+  "build_result": "success",
+  "canonical_rule_source": "configure.py",
+  "explicit_guarded_invocation": "python3 tools/externalize_elf_symbol.py $in @9 lbl_806506A8 orig/GEDE01/sys/main.dol",
+  "generated_rule_audit": {
+    "externalization_rules": 120,
+    "externalizer_invocations": 133,
+    "four_argument_invocations": 133,
+    "unguarded_invocations": 0,
+    "wrong_retail_dol_invocations": 0
+  },
+  "whole_project_objdiff": {
+    "units": 4828,
+    "default_report": "reports/GEDE01/session-1191-objdiff.json",
+    "default_report_sha256": "c0614af4ec8fa862298f01d50c18b6cf6ab5a46cc4a4f80e40c3a76b3944643d",
+    "relocation_strict_report": "reports/GEDE01/session-1191-reloc-strict.json",
+    "relocation_strict_report_sha256": "6671678e446ae1eeefcf0744350041b87f17b98760a7b63e29e6e0bde94f3843"
+  },
+  "function_objdiffs": [
+    {
+      "symbol": "fn_80176DF4",
+      "report": "reports/GEDE01/objdiff-fn_80176DF4-session-1191.json",
+      "report_sha256": "821e9322e4cc6dc550f98999889c7e98ce3da52fe788030a9623bdd419e39aca",
+      "bytes_equal": 164,
+      "instructions_equal": 41,
+      "relocation_bearing_instructions_equal": 9,
+      "match_percent": 100.0
+    },
+    {
+      "symbol": "fn_80176E98",
+      "report": "reports/GEDE01/objdiff-fn_80176E98-session-1191.json",
+      "report_sha256": "27920ba498f7884310a6697b2bba1b490bc8293273f8f8eabb13043c85cf6e60",
+      "bytes_equal": 156,
+      "instructions_equal": 39,
+      "relocation_bearing_instructions_equal": 8,
+      "match_percent": 100.0
+    },
+    {
+      "symbol": "fn_80176F34",
+      "report": "reports/GEDE01/objdiff-fn_80176F34-session-1191.json",
+      "report_sha256": "ac51bd533071b9ab4614566d754d3a292f8de38f84cc42890d4ece8f26aacaac",
+      "bytes_equal": 108,
+      "instructions_equal": 27,
+      "relocation_bearing_instructions_equal": 6,
+      "match_percent": 100.0
+    }
+  ],
+  "dol_path": "build/GEDE01/main.dol",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "expected_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "dol_hash_match": true,
+  "next_target": "0x80176FA0"
+}

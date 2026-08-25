@@ -2,15 +2,25 @@
   "schema_version": 2,
   "scope": "Distinct MWCC code-generation behaviors documented in reports/GEDE01/progress.json open_items and docs/matching.md",
   "source_snapshot": {
-    "repository_revision": "fb00cf7f0a367cb5bd9c4cb52bf942f9f448e0b3",
-    "next_target": "0x80171FBC",
+    "repository_revision": "29474887c9490c1c3e85b9af707ef08e3cc5f777",
+    "next_target": "0x80176DF4",
     "reports/GEDE01/progress.json": {
-      "sha256": "6b704fcb122397bf4684ed19ec763edffaf4651fa9f2e7310ab8e5db11338ed3",
+      "sha256": "b62985212ec1af207fae3cd53d9d1243c6bbd278ec5784118fa402fe83e9952c",
       "scope": "open_items"
     },
     "docs/matching.md": {
       "sha256": "b129f2a5ece2733f7b1b0cc37ff98083ca7b8338fabd36a0dacfd2ffe3e6c04c"
     }
+  },
+  "consolidation_audit": {
+    "original_consolidation_commit": "86d029104eb5ed6ad01b6af03963ea2cf924d2a4",
+    "comparison_base": "29474887c9490c1c3e85b9af707ef08e3cc5f777",
+    "scope": "Compared with source_snapshot.repository_revision, 15 lessons were appended and 0 pre-existing entries were modified or removed; all 275 carried-forward entry objects are byte-identical.",
+    "carried_forward_lessons": 275,
+    "new_lessons": 15,
+    "modified_existing_lessons": 0,
+    "removed_lessons": 0,
+    "total_lessons": 290
   },
   "lessons": [
     {
@@ -1937,6 +1947,111 @@
       "precise_divergence": "Semantically equivalent source ordering changes MWCC's local branch, operand, call, or truncation schedule: inverted null control flow, reversed fmuls operands, a different object-pointer argument load, or a redundant second integer truncation.",
       "workaround": "Use fn_8016F400's explicit positive branch, fn_8016F4CC's constant-first multiplication, fn_8016FE4C's documented object-pointer argument, and fn_80170980's implicit case-2 assignment.",
       "evidence": ["reports/GEDE01/progress.json: open_items entries for fn_8016F2AC through fn_8016F4CC, fn_8016FE4C, and fn_80170980 through fn_80170A40"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_80171FBC"],
+      "precise_divergence": "The source order of two byte-output arguments assigns their stack slots opposite retail.",
+      "workaround": "Reverse the byte-output arguments so MWCC uses the retail stack-slot addresses.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1151"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80172150", "fn_80172204", "fn_801726EC", "fn_80173770", "fn_80174358", "fn_80174694", "fn_801762E8"],
+      "precise_divergence": "Declaration order and the lifetime of a named converted value determine the documented retail callee-saved allocations, ranging from r31/r30 pairs through r19-r31.",
+      "workaround": "Preserve the recorded declaration order and declare fn_80172150's converted value before its use.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1152, 1153, 1155, 1164, 1168, 1170, and 1185"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80172204", "fn_80172610"],
+      "precise_divergence": "Factoring a positive-value test does not reproduce retail's branchless max-with-zero lowering.",
+      "workaround": "Repeat the positive-value ternary at the documented use site.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1153 and 1154"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_801734B4", "fn_80179904"],
+      "precise_divergence": "Declaring fn_80179904's second parameter as int introduces a redundant call-site cast and changes the addi/extsh schedule.",
+      "workaround": "Declare the second parameter as short.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1162"]
+    },
+    {
+      "category": "inlining",
+      "functions": ["fn_801726EC", "fn_80173770", "fn_80174358", "fn_80174694"],
+      "precise_divergence": "The project-default save/restore policy does not emit retail's bulk register-save instructions for these large functions.",
+      "workaround": "Enable the documented TU-local -use_lmw_stmw option.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1155, 1164, 1168, and 1170"]
+    },
+    {
+      "category": "inlining",
+      "functions": ["fn_80173B6C", "fn_80175164"],
+      "precise_divergence": "Optimizing C removes retail instruction sequences that intentionally perform a paired-single load/store return or an empty 12-iteration timing loop.",
+      "workaround": "Use the documented narrow SDK-style inline-assembly statement blocks for only the psq_l/stfs/blr sequence or li/mtctr/bdnz loop.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1165 and 1175"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_80173D44", "fn_80174CD4", "fn_80174DB8", "fn_80174694"],
+      "precise_divergence": "Aggregate declaration order and recovered padding control MWCC's frame size, field offsets, stack-slot placement, and aggregate-copy store order; the unresolved fn_80173D44 remains at 0xE0 versus retail's 0xF0 frame.",
+      "workaround": "Preserve the documented aggregate declaration order and fn_80174694's recovered eight-byte descriptor gap; no honest-C workaround is known for fn_80173D44.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1167, 1170, and 1174"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80173BDC", "fn_80173D44", "fn_80174F2C", "fn_801752B0"],
+      "precise_divergence": "Canonical MWCC schedules initializer loads, descriptor copies, callback-address materialization, and floating-constant setup in different windows from retail even where size and semantic relocation sequence agree.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1166, 1167, 1175, and 1177"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_801749A8"],
+      "precise_divergence": "Canonical MWCC emits fcmpu cr0,f0,f1 where retail uses the semantically equivalent reversed operands fcmpu cr0,f1,f0.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1173"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_801755FC"],
+      "precise_divergence": "Canonical GC/1.3 exchanges r6 and r7 across the final aggregate-copy load, store, and two address-materialization instructions.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1179"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80175A08", "fn_80175BB8", "fn_80176A94"],
+      "precise_divergence": "Canonical MWCC forms a shared string-table low half through r0 and then copies it to r31, while retail delays addi and writes directly to r31; fn_80176A94 also allocates the converted ID directly to r30 instead of moving it from r3.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1182 and 1188"]
+    },
+    {
+      "category": "jump-table-strategy",
+      "functions": ["fn_80175BB8"],
+      "precise_divergence": "The recovered setter switch retains a compiler-generated jump table whose relocation naming differs from retail alongside the shared-string-base schedule divergence.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1182"]
+    },
+    {
+      "category": "float-constant-placement",
+      "functions": ["fn_80109EEC", "fn_80173770", "fn_80174358", "fn_80174F2C", "fn_801752B0", "fn_8017553C", "fn_80175E64", "fn_80176098", "fn_80176160", "fn_80176220", "fn_8017652C"],
+      "precise_divergence": "Split compilation assigns compiler-local identity to signed-conversion bias constants, or in fn_80109EEC to a 32-byte coordinate table whose contents differ from retail, so relocation-strict comparison rejects otherwise matching instructions.",
+      "workaround": "Use the established exact-value post-compile externalization for the documented conversion biases; no matching source-level workaround is recorded for fn_80109EEC's coordinate table.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for the signature audit and sessions 1164, 1168, 1175, 1177, 1178, 1182, 1184, 1186"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_80176098", "fn_80176160", "fn_80176220"],
+      "precise_divergence": "Incorrect recovered return types or overly direct conversion spelling changes MWCC's signed, unsigned, and zero-extended halfword result-conversion sequences.",
+      "workaround": "Use the recovered return types and the documented named integer locals.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1184"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8017553C", "fn_80176098", "fn_80176160", "fn_80176220", "fn_801763D8", "fn_80176D14"],
+      "precise_divergence": "Flattening conversion results, numeric assignments, or a returned runtime pointer into their consumers changes retail's conversion temporary, store order, object-ID reuse, or live r3 handoff schedule.",
+      "workaround": "Name integer results before conversion, preserve direct consecutive assignments, and pass fn_80201814's non-null return directly to fn_80201BC8.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1178, 1184, 1185, and 1189"]
     }
   ]
 }

@@ -1,0 +1,41 @@
+{
+  "remediation": "lesson consolidation provenance only",
+  "frontier_advanced": false,
+  "next_target": "0x80176DF4",
+  "compiled_objects_affected": [],
+  "compiled_objects_affected_reason": "Only reports/GEDE01/lessons.json metadata changed; no source, split, symbol, or toolchain input changed.",
+  "lesson_entry_audit": {
+    "comparison_base": "29474887c9490c1c3e85b9af707ef08e3cc5f777",
+    "consolidation_commit": "86d029104eb5ed6ad01b6af03963ea2cf924d2a4",
+    "carried_forward_byte_identical": 275,
+    "appended": 15,
+    "modified": 0,
+    "removed": 0,
+    "result_count": 290
+  },
+  "canonical_rebuild": {
+    "command": ".tools/bin/ninja build/GEDE01/main.dol build/GEDE01/report.json",
+    "result": "success",
+    "objdiff_report": "build/GEDE01/report.json",
+    "objdiff_report_sha256": "cede1475d36f5a18f1e1a7f91b8d106fadb059f19ef851f27ff26fa127190007",
+    "objdiff_units": 4825
+  },
+  "relocation_strict_frontier_regression": {
+    "object": "main/game/game_fn_80176D14",
+    "symbol": "fn_80176D14",
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80176D14 fn_80176D14 -o reports/GEDE01/lessons-remediation-2-frontier-objdiff.json --format json -c function_reloc_diffs=name_address",
+    "report": "reports/GEDE01/lessons-remediation-2-frontier-objdiff.json",
+    "report_sha256": "6ade03e28c50fde1c49b046183fcbba4290f64cba1f1adf1704a11d0d89488a8",
+    "text_bytes": 224,
+    "instructions_equal": 56,
+    "relocation_bearing_instructions_equal": 15,
+    "match_percent": 100.0
+  },
+  "linked_dol": {
+    "path": "build/GEDE01/main.dol",
+    "size": 3156384,
+    "sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "expected_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "hash_match": true
+  }
+}

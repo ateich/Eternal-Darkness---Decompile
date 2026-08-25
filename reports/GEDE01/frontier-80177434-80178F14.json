@@ -1,0 +1,27 @@
+{
+  "session_id": "session-1196",
+  "range_start": "0x80177434",
+  "range_end": "0x80178F14",
+  "next_target": "0x80178F14",
+  "matched_bytes": 128,
+  "nonmatching_bytes": 6752,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "symbol": "fn_80177434", "start": "0x80177434", "end": "0x80178E94",
+      "status": "NonMatching", "size": 6752, "match_percent": 99.69194,
+      "instructions_equal": 1684, "instructions_total": 1690,
+      "codegen_divergence": "Canonical GC/1.3 materializes lbl_80250588 with addi into r4 and then moves r4 to r31; retail delays addi directly into r31. The extra move changes first-entry r3/r4 lifetimes while the remaining registration sequence agrees.",
+      "evidence": "reports/GEDE01/objdiff-fn_80177434-session-1196.json"
+    },
+    {
+      "symbol": "fn_80178E94", "start": "0x80178E94", "end": "0x80178F14",
+      "status": "Matching", "size": 128, "match_percent": 100.0,
+      "instructions_equal": 32, "instructions_total": 32,
+      "relocation_bearing_instructions_equal": 1, "relocation_bearing_instructions_total": 1,
+      "elf_text_relocation_entries": 1,
+      "evidence": "reports/GEDE01/objdiff-fn_80178E94-session-1196.json"
+    }
+  ],
+  "accounting": "Every byte in 0x80177434-0x80178F14 belongs to one independent honest-C translation unit. The assigned 6752-byte function is explicit NonMatching debt contributing zero matched bytes, and the immediate 128-byte fallback matches. There is no interior gap, shared reconstruction, inline assembly or unaccounted span."
+}

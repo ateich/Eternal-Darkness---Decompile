@@ -1,0 +1,41 @@
+{
+  "session_id": "session-1198",
+  "range_start": "0x80178F88",
+  "range_end": "0x80179064",
+  "next_target": "0x80179064",
+  "matched_bytes": 96,
+  "nonmatching_bytes": 124,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "symbol": "fn_80178F88",
+      "start": "0x80178F88",
+      "end": "0x80179004",
+      "status": "NonMatching",
+      "retail_size": 124,
+      "generated_size": 124,
+      "match_percent": 99.03226,
+      "instructions_equal": 29,
+      "instructions_total": 31,
+      "relocation_bearing_instructions_equal": 0,
+      "relocation_bearing_instructions_total": 4,
+      "codegen_divergence": "Canonical MWCC selects f0 rather than retail f1 for the final sum and reverses the quarter-constant FPR in the fused multiply-add; compiler-local constant relocation names also differ.",
+      "evidence": "reports/GEDE01/objdiff-fn_80178F88-session-1198.json"
+    },
+    {
+      "symbol": "fn_80179004",
+      "start": "0x80179004",
+      "end": "0x80179064",
+      "status": "Matching",
+      "retail_size": 96,
+      "generated_size": 96,
+      "match_percent": 100.0,
+      "instructions_equal": 24,
+      "instructions_total": 24,
+      "relocation_bearing_instructions_equal": 0,
+      "relocation_bearing_instructions_total": 0,
+      "evidence": "reports/GEDE01/objdiff-fn_80179004-session-1198.json"
+    }
+  ],
+  "accounting": "Every byte in 0x80178F88-0x80179064 is independently owned: 124 NonMatching bytes and 96 matched bytes, with no gap, shared reconstruction or inline assembly."
+}

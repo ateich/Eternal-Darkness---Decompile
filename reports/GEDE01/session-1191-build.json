@@ -1,0 +1,56 @@
+{
+  "session_id": "session-1191",
+  "build_command": ".tools/bin/ninja",
+  "build_result": "success",
+  "dol_path": "build/GEDE01/main.dol",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "expected_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "dol_hash_match": true,
+  "default_objdiff": "reports/GEDE01/session-1191-objdiff.json",
+  "relocation_strict_objdiff": "reports/GEDE01/session-1191-reloc-strict.json",
+  "function_objdiffs": [
+    "reports/GEDE01/objdiff-fn_80176DF4-session-1191.json",
+    "reports/GEDE01/objdiff-fn_80176E98-session-1191.json",
+    "reports/GEDE01/objdiff-fn_80176F34-session-1191.json"
+  ],
+  "function_reloc_diffs": "name_address",
+  "matched_bytes": 428,
+  "instructions_equal": 107,
+  "relocation_bearing_instructions_equal": 23,
+  "elf_text_relocation_entries": 23,
+  "verification": {
+    "function_objdiff_command": "build/tools/objdiff-cli diff -p . -u UNIT SYMBOL -o FUNCTION_REPORT --format json -c function_reloc_diffs=name_address",
+    "default_report_command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1191-objdiff.json -f json-pretty",
+    "relocation_strict_report_command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1191-reloc-strict.json -f json-pretty -c function_reloc_diffs=name_address",
+    "dol_sha1_command": "sha1sum build/GEDE01/main.dol",
+    "result": "success"
+  },
+  "review_remediation_1": {
+    "result": "success",
+    "post_compile_edge_rerun": true,
+    "externalized_object_symbol": "lbl_806506A8",
+    "externalized_object_local_symbol_absent": "@9",
+    "externalized_object_sdata2_absent": true,
+    "retail_value_cross_check": "externalize_elf_symbol.py verified @9 against lbl_806506A8 in orig/GEDE01/sys/main.dol",
+    "fn_80176DF4_match_percent": 100.0,
+    "fn_80176DF4_instruction_differences": 0,
+    "boundary_verification": "fn_80176DF4 is one 164-byte function from 0x80176DF4 through 0x80176E98; 0x80176E4C is its fctiwz instruction, not an internal blr",
+    "full_rebuild_result": "success",
+    "dol_sha1_after_full_rebuild": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+  },
+  "review_remediation_2": {
+    "result": "success",
+    "canonical_rule_source": "configure.py",
+    "explicit_rule_command": "python3 tools/externalize_elf_symbol.py $in @9 lbl_806506A8 orig/GEDE01/sys/main.dol",
+    "generated_externalization_rules": 120,
+    "generated_externalizer_invocations": 133,
+    "unguarded_generated_invocations": 0,
+    "full_rebuild_result": "success",
+    "whole_project_objdiff_units": 4828,
+    "fresh_function_objdiffs": 3,
+    "fresh_function_matches_at_100_percent": 3,
+    "fresh_relocation_bearing_instructions_equal": 23,
+    "dol_sha1_after_full_rebuild": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "evidence": "reports/GEDE01/session-1191-remediation-2.json"
+  }
+}
