@@ -1,0 +1,41 @@
+{
+  "session_id": "session-1233-remediation-2",
+  "scope": "Review remediation only; frontier unchanged at 0x8017B80C",
+  "build": {
+    "command": ".tools/bin/ninja build/GEDE01/main.dol",
+    "result": "success",
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "retail_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "hash_gate": "pass"
+  },
+  "objdiff_config": "function_reloc_diffs=name_address",
+  "affected_objects": [
+    {"unit":"main/game/game_fn_8017B47C","symbol":"fn_8017B47C","bytes":"120/120","instructions":"30/30","match_percent":100.0,"relocations_equal":"1/1","evidence":"reports/GEDE01/objdiff-fn_8017B47C-session-1233-remediation-2.json"},
+    {"unit":"main/game/game_fn_8017AF90","symbol":"fn_8017AF90","bytes":"228/228","instructions":"57/57","match_percent":100.0,"relocations_equal":"8/8","evidence":"reports/GEDE01/objdiff-fn_8017AF90-session-1233-remediation-2.json"},
+    {"unit":"main/game/game_fn_8017B0C8","symbol":"fn_8017B0C8","bytes":"228/228","instructions":"57/57","match_percent":100.0,"relocations_equal":"9/9","evidence":"reports/GEDE01/objdiff-fn_8017B0C8-session-1233-remediation-2.json"},
+    {"unit":"main/game/game_fn_800B6234","symbol":"fn_800B6234","bytes":"396/396","instructions":"99/99","match_percent":100.0,"relocations_equal":"20/20","evidence":"reports/GEDE01/objdiff-fn_800B6234-session-1233-remediation-2.json"},
+    {"unit":"main/game/game_fn_800B6718","symbol":"fn_800B6718","bytes":"296/296","instructions":"74/74","match_percent":100.0,"relocations_equal":"21/21","evidence":"reports/GEDE01/objdiff-fn_800B6718-session-1233-remediation-2.json"}
+  ],
+  "tree_reports": {
+    "default": "reports/GEDE01/session-1233-remediation-2-objdiff.json",
+    "relocation_strict": "reports/GEDE01/session-1233-remediation-2-reloc-strict.json",
+    "default_matching_functions": 3317,
+    "default_matching_code_bytes": 520904,
+    "strict_matching_functions": 3311,
+    "strict_matching_code_bytes": 519040
+  },
+  "signature_audit": {
+    "evidence": "reports/GEDE01/signature-audit-session-1233-remediation-2.json",
+    "retail_evidence_symbols": 11,
+    "ground_truth_contradictions": 441,
+    "fn_8017B47C_ground_truth_contradiction": false,
+    "detail": "Restoring the callee definition to GPR:r3 removes the four-site fn_8017B47C contradiction introduced by remediation 1. The unrelated pre-existing fn_8017B294 contradiction remains outside this remediation."
+  },
+  "data_accounting": {
+    "nonmatching_data_bytes": 60,
+    "retail_data_bytes": 36,
+    "generated_only_sdata2_bytes": 24,
+    "unaccounted_data_spans": []
+  },
+  "next_target": "0x8017B80C"
+}

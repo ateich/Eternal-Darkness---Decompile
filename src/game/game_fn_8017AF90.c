@@ -22,7 +22,7 @@ extern int fn_8017B47C(int, int*, int*);
 extern int fn_80220A68(int, void*, void*);
 extern int fn_8017BD78(Request*);
 extern void fn_8017C724(Request*);
-extern void fn_8017BA64(void);
+extern void fn_8017BA64(unsigned int);
 
 int fn_8017AF90(int value)
 {

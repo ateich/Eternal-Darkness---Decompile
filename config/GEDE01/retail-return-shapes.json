@@ -25,6 +25,26 @@
       "source": "orig/GEDE01/sys/main.dol:8020D318-8020D3F4",
       "detail": "The no-message path writes 0 to r3 at 0x8020D360 and the success path writes 1 to r3 at 0x8020D3D0; both flow to the common epilogue and blr at 0x8020D3F0."
     },
+    "fn_80220234": {
+      "return_shape": "GPR:r3",
+      "source": "orig/GEDE01/sys/main.dol:80220234-802203B0",
+      "detail": "All exits produce a signed status in r3: early failures load -128 or -3, and the common path moves the status held in r30 to r3 at 0x80220398 before the epilogue."
+    },
+    "fn_8017B47C": {
+      "return_shape": "GPR:r3",
+      "source": "orig/GEDE01/sys/main.dol:8017B47C-8017B4F4",
+      "detail": "Each loop iteration calls fn_80220234 at 0x8017B4B8. A zero result branches directly to the epilogue at 0x8017B4D4, while loop exhaustion reaches the same epilogue with the last nonzero result; no instruction overwrites r3 before blr at 0x8017B4F0. Four independently matching retail callers consume this status from r3."
+    },
+    "fn_8017B8AC": {
+      "return_shape": "GPR:r3",
+      "source": "orig/GEDE01/sys/main.dol:8017B8AC-8017B8BC",
+      "detail": "The accessor forms lbl_8064A580 in r3, loads its signed integer field at offset 0x18 back into r3 at 0x8017B8B4, and returns it directly at 0x8017B8B8."
+    },
+    "fn_8017B904": {
+      "return_shape": "GPR:r3",
+      "source": "orig/GEDE01/sys/main.dol:8017B904-8017B914",
+      "detail": "The accessor forms lbl_8064A580 in r3, loads its signed integer field at offset 0x1C back into r3 at 0x8017B90C, and returns it directly at 0x8017B910."
+    },
     "fn_80211A48": {
       "return_shape": "none",
       "source": "orig/GEDE01/sys/main.dol:80211A48-80211A6C",

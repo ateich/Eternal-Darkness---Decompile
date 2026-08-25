@@ -1,0 +1,39 @@
+{
+  "session_id": "session-1234-remediation-1",
+  "scope": "review remediation only; frontier unchanged",
+  "build_command": ".tools/bin/ninja",
+  "build_result": "success",
+  "dol_path": "build/GEDE01/main.dol",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "expected_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "hash_matches": true,
+  "function_reloc_diffs": "name_address",
+  "objects": [
+    {
+      "symbol": "fn_8017B80C",
+      "source": "src/game/game_fn_8017B80C.c",
+      "objdiff_evidence": "reports/GEDE01/objdiff-fn_8017B80C-session-1234-remediation-1.json",
+      "code_bytes_equal": "72/72",
+      "instructions_equal": "18/18",
+      "match_percent": 100.0,
+      "rela_text_size_bytes": 36,
+      "elf_rela_entry_size_bytes": 12,
+      "elf_relocations_equal": "3/3"
+    },
+    {
+      "symbol": "fn_8017B854",
+      "source": "src/game/game_fn_8017B854.c",
+      "objdiff_evidence": "reports/GEDE01/objdiff-fn_8017B854-session-1234-remediation-1.json",
+      "code_bytes_equal": "16/16",
+      "instructions_equal": "4/4",
+      "match_percent": 100.0,
+      "rela_text_size_bytes": 24,
+      "elf_rela_entry_size_bytes": 12,
+      "elf_relocations_equal": "2/2"
+    }
+  ],
+  "aggregate_code_bytes_equal": "88/88",
+  "aggregate_instructions_equal": "22/22",
+  "aggregate_elf_relocations_equal": "5/5",
+  "next_target": "0x8017B864"
+}

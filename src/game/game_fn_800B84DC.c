@@ -7,7 +7,7 @@ extern float lbl_8064F070;
 extern float lbl_8064F01C;
 extern s16 fn_800B8F38(void);
 extern int fn_8017BB60(void);
-extern void fn_80220234(int, int *, int *);
+extern int fn_80220234(int, int *, int *);
 extern int fn_800B194C(void);
 extern int fn_801E6350(void *);
 extern int fn_801E6380(void *);

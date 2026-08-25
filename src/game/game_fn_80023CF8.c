@@ -34,7 +34,7 @@ extern void fn_800B7EF4(u8 value, u32 mask);
 extern s32 fn_800B8F80(void);
 extern void fn_800B8F9C(void);
 extern s32 fn_8017BB60(void);
-extern void fn_80220234(u32 index, u32* first, u32* second);
+extern int fn_80220234(int index, int* first, int* second);
 extern void fn_80156B1C(u32 value);
 extern void fn_801571C4(void);
 extern void fn_801F35A8(void);
@@ -53,8 +53,8 @@ extern void fn_8020F0F8(void* data);
 
 void fn_80023CF8(void)
 {
-    u32 first;
-    u32 second;
+    int first;
+    int second;
 
     fn_800243E8();
     fn_801EF530();
