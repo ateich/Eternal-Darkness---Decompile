@@ -62,7 +62,7 @@ extern s32 fn_800BE2CC(void *, void *, Vec3 *);
 extern s32 fn_800BE260(void *, void *);
 extern void fn_800BE390(void *, void *);
 extern s32 fn_80128EAC(void *);
-extern void fn_8012B344();
+extern void fn_8012B344(void*);
 
 s32 fn_80060F9C(void *owner, void *resource, void *probe, void *target,
                 void *alternate, s32 mask, s32 flags)

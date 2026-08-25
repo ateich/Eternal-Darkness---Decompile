@@ -1,0 +1,24 @@
+{
+  "session_id": "session-1167",
+  "range_start": "0x80173D44",
+  "range_end": "0x80173F04",
+  "range_accounting": "Every byte in the declared range is independently owned by fn_80173D44, but the honest-C reconstruction is NonMatching. Earlier 0x80173BDC-0x80173D44 remains separate pre-existing NonMatching debt.",
+  "matched_bytes": 0,
+  "nonmatching_bytes": 448,
+  "functions": [
+    {
+      "symbol": "fn_80173D44",
+      "range": "0x80173D44-0x80173F04",
+      "size": 448,
+      "match_percent": 90.66071,
+      "status": "NonMatching",
+      "instruction_result": "Both sides are exactly 448 bytes and 112 instructions, but objdiff reports four inserts and four deletes. Without the load-bearing volatile local, canonical GC/1.3 uses a 0xE0-byte frame and r30/r31 lifetimes while retail uses a 0xF0-byte frame and retains only r31; initializer, parameter-store, aggregate-copy and epilogue instructions consequently differ.",
+      "relocation_result": "Both sides contain 21 text relocation-bearing instructions with the same type, target and addend sequence. Thirteen occur at equal offsets; the three initializer relocations and final five callback/effect relocations are displaced by the divergent schedules, so relocation equality is not claimed.",
+      "evidence": "reports/GEDE01/objdiff-fn_80173D44.json"
+    }
+  ],
+  "fallback": "The handoff explicitly prohibited retrying preserved NonMatching fn_80173BDC, so work continued at the immediately consecutive boundary. Review remediation removed both the scheduling-only inline assembly and the load-bearing volatile qualifier, then registered fn_80173D44 as honest-C NonMatching. The qualifier had artificially raised objdiff from 90.66071% to 96.42857% without producing a match. The established post-compile externalization rewrites compiler-local @13 to retail lbl_806506A8 and removes the compiler-created .sdata2 section; it is retained and disclosed, but does not make the instruction or relocation schedules equal.",
+  "build_evidence": "reports/GEDE01/session-1167-build.json",
+  "next_target": "0x80173F04",
+  "next_gate": "Continue new matching work at 0x80173F04. Preserve fn_80173BDC and fn_80173D44 as explicit NonMatching debt in open_items; do not use either debt item as the scheduler target."
+}

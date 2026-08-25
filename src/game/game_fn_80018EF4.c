@@ -20,7 +20,7 @@ extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void* fn_8016A784(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
-extern unsigned int fn_800F5C54();
+extern unsigned int fn_800F5C54(double);
 extern void fn_801D6FEC(s32, Vec3f*, f32);
 
 s32 fn_80018EF4(void* script)

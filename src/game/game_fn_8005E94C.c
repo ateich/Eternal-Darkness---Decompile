@@ -12,7 +12,7 @@ extern u32 fn_801291CC(void *object);
 extern s32 fn_80128F40(void *object);
 extern s32 fn_80128EAC(void *object);
 extern s32 fn_8012A1BC(void *object, s32 value);
-extern void fn_8012B344();
+extern void fn_8012B344(void*);
 
 void fn_8005E94C(void *object, HandlerState *state)
 {

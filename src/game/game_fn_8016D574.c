@@ -1,7 +1,7 @@
 extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
-extern void fn_8020104C(int, int, int, int, float);
+extern void fn_8020104C(int, void*, void*, int, float);
 extern const char lbl_8024FF00[];
 
 int fn_8016D574(void* state)
@@ -22,7 +22,7 @@ int fn_8016D574(void* state)
     z = (float)fn_8016A694(state, 4);
     flags = (int)fn_8016A694(state, 5);
     if (x != 0) {
-        fn_8020104C(y, 0, x, flags, z);
+        fn_8020104C(y, 0, (void*)x, flags, z);
     }
     return 0;
 }

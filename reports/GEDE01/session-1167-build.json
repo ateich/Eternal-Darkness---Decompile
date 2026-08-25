@@ -1,0 +1,40 @@
+{
+  "session_id": "session-1167",
+  "scope": "Review remediation of fn_80173D44 at 0x80173D44-0x80173F04; remove scheduling-only inline assembly and the load-bearing volatile qualifier, classify from fresh objdiff evidence, and preserve the exact-build gate.",
+  "toolchain": { "compiler": "GC/1.3", "objdiff": "v3.6.1", "dtk": "v1.8.3" },
+  "commands": [
+    {
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80173D44 fn_80173D44 -o reports/GEDE01/objdiff-fn_80173D44.json --format json",
+      "exit_code": 0,
+      "result": "fn_80173D44 is NonMatching at 90.660710%. Both sides are 448 bytes with 112 instructions and 21 text relocation-bearing instructions; objdiff reports four inserts and four deletes. All relocation type/target/addend sequences agree, but only 13/21 offsets agree because the honest C uses a different frame, saved-register set and later schedule."
+    },
+    {
+      "command": ".tools/bin/ninja",
+      "exit_code": 0,
+      "result": "Canonical full rebuild completed; CHECK config/GEDE01/build.sha1 reported build/GEDE01/main.dol: OK."
+    },
+    {
+      "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol build/GEDE01/report.json reports/GEDE01/objdiff-fn_80173D44.json",
+      "exit_code": 0,
+      "stdout": [
+        "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+        "ea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol",
+        "9e8f61a4a117746411a0cf58b0b657a5cb3c57ef  build/GEDE01/report.json",
+        "a0fe56a27c466a87cec74f3d9300d1215a46b836  reports/GEDE01/objdiff-fn_80173D44.json"
+      ]
+    }
+  ],
+  "aggregate_objdiff": {
+    "matching_objects": 3422,
+    "total_objects": 4773,
+    "matching_functions": 3188,
+    "total_functions": 8216,
+    "matching_code_bytes": 503604,
+    "total_code_bytes": 2300692,
+    "game_code_matching_bytes": 500576,
+    "game_code_total_bytes": 823648
+  },
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "dol_matches_retail": true,
+  "worktree_clean_after_commit": true
+}

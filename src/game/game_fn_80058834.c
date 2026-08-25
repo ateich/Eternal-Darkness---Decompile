@@ -60,7 +60,7 @@ extern void fn_800C39D0(void *), fn_800C2474(void *, s32);
 extern s32 fn_802006D4(void *, void *, s32, s32, s32);
 extern u64 fn_802011D4(void *);
 extern s32 fn_801261F4(void *);
-extern void fn_8012B344();
+extern void fn_8012B344(void*);
 extern void fn_80204810(void);
 
 s32 fn_80058834(void *context, void *event, u32 *result)

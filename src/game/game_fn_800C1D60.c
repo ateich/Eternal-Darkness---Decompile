@@ -20,7 +20,7 @@ extern void fn_80128F74(void *, u32);
 extern int fn_80050950(void);
 extern int fn_80050B08(int, int, int, u8 *, int, int, int);
 extern void fn_80204028(void *, int, int, int);
-extern void fn_8012B344();
+extern void fn_8012B344(void*);
 
 #pragma use_lmw_stmw on
 

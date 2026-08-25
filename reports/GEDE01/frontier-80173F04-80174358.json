@@ -1,0 +1,33 @@
+{
+  "session_id": "session-1168",
+  "range_start": "0x80173F04",
+  "range_end": "0x80174358",
+  "matched_bytes": 468,
+  "nonmatching_bytes": 640,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "symbol": "fn_80173F04",
+      "range": "0x80173F04-0x80174184",
+      "status": "NonMatching",
+      "retail_bytes": 640,
+      "generated_bytes": 632,
+      "objdiff_percent": 95.675,
+      "matched_bytes_claimed": 0,
+      "blocking_divergence": "After removal of the load-bearing volatile qualifier, canonical GC/1.3 emits 632 bytes and 158 instructions versus retail's 640 bytes and 160 instructions. All 29 relocation type/target/addend records remain in the same semantic sequence, but only one remains at the same offset because the honest-C prologue, stack layout and later register schedules diverge."
+    },
+    {
+      "symbol": "fn_80174184",
+      "range": "0x80174184-0x80174358",
+      "status": "Matching",
+      "retail_bytes": 468,
+      "generated_bytes": 468,
+      "objdiff_percent": 100.0,
+      "instructions": 117,
+      "relocations_equal": "21/21",
+      "matched_bytes_claimed": 468
+    }
+  ],
+  "next_target": "0x80174358",
+  "next_gate": "Continue new matching work at 0x80174358. Preserve fn_80173BDC, fn_80173D44 and fn_80173F04 as explicit NonMatching debt in open_items; do not use those debt items as the scheduler target."
+}

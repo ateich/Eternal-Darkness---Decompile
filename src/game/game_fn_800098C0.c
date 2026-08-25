@@ -13,7 +13,7 @@ typedef struct Player {
 
 extern const char lbl_8023BEF8[];
 
-extern unsigned int fn_800F5C54();
+extern unsigned int fn_800F5C54(double);
 extern Player* fn_8015C28C(s32);
 extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);

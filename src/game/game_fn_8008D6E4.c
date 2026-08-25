@@ -75,7 +75,7 @@ extern int fn_80148300(void*, EffectD6E4*, void*);
 extern void fn_80149EB8(void*);
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);
-extern void fn_8012B344();
+extern void fn_8012B344(void*);
 extern float lbl_8064EFA4;
 extern float lbl_8064EFA8;
 extern u32 lbl_8064A80C;

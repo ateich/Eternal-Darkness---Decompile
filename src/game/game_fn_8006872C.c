@@ -30,7 +30,7 @@ extern void *fn_8014C7B8(void *effect);
 extern signed char fn_801FEA10(void);
 extern void fn_801FE934(void *context, s32 value);
 extern void fn_80149E28(void *effect);
-extern void fn_8012B344();
+extern void fn_8012B344(void*);
 extern void fn_80067D30(void *object);
 extern void fn_80068FE0(void *object, s32 event);
 extern void fn_80067B6C(void);
@@ -61,7 +61,7 @@ void fn_8006872C(void *object, EventState *event_state, s32 unused,
         fn_80149E28(state->runtime->effect);
         state->runtime->effect = 0;
     }
-    fn_8012B344(event);
+    fn_8012B344((void*)event);
     fn_80067D30(object);
     fn_80068FE0(object, event);
     fn_80067B6C();

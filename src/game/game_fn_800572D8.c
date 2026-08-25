@@ -39,7 +39,7 @@ extern void *fn_80201C48(void *value);
 extern void fn_800C39D0(void *context);
 extern s32 fn_80054C14(void *context, void *state);
 extern void fn_8005E94C(void *object, void *state);
-extern void fn_8012B344();
+extern void fn_8012B344(void*);
 extern u64 fn_802011D4(void *event);
 extern s32 fn_801261F4(void *object);
 

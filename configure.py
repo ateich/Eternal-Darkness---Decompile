@@ -1313,9 +1313,84 @@ config.custom_build_rules = [
         ),
         "description": "EXTERNALIZE $in",
     },
+    {
+        "name": "externalize_game_80173D44_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @13 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@13=lbl_806506A8 --remove-section=.sdata2 "
+            "$in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "externalize_game_80174184_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @16 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@16=lbl_806506A8 --remove-section=.sdata2 "
+            "$in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "externalize_game_80173F04_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @22 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@22=lbl_806506A8 --remove-section=.sdata2 "
+            "$in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "externalize_game_80174358_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @22 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@22=lbl_806506A8 --remove-section=.sdata2 "
+            "$in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
 ]
 config.custom_build_steps = {
     "post-compile": [
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80174358.externalized"],
+            "rule": "externalize_game_80174358_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80174358.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80173F04.externalized"],
+            "rule": "externalize_game_80173F04_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80173F04.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80174184.externalized"],
+            "rule": "externalize_game_80174184_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80174184.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80173D44.externalized"],
+            "rule": "externalize_game_80173D44_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80173D44.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80173770.externalized"],
+            "rule": "externalize_game_801726EC_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80173770.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_801734B4.externalized"],
+            "rule": "externalize_game_8016E8F8_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_801734B4.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80173270.externalized"],
+            "rule": "externalize_game_8016C238_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80173270.o"],
+        },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_80172DB8.externalized"],
             "rule": "externalize_game_8016C238_bias",
@@ -6925,6 +7000,23 @@ config.libs = [
             Object(Matching, "game/game_fn_80172FF0.c"),
             Object(Matching, "game/game_fn_80173104.c"),
             Object(Matching, "game/game_fn_8017320C.c"),
+            Object(Matching, "game/game_fn_80173270.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_801734B4.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_80173770.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_801739E8.c"),
+            Object(Matching, "game/game_fn_80173B6C.c"),
+            Object(Matching, "game/game_fn_80173B78.c"),
+            # 87.977776%: exact-size honest C; the packed rotation initializer
+            # and Vec3 aggregate copy remain scheduled differently from retail.
+            Object(NonMatching, "game/game_fn_80173BDC.c"),
+            # 90.660710%: exact-size honest C; initializer/prologue scheduling
+            # and later value/register lifetimes remain different from retail.
+            Object(NonMatching, "game/game_fn_80173D44.c"),
+            # 95.675000%: honest C; removing a load-bearing volatile exposes an
+            # eight-byte size and broad stack/register scheduling divergence.
+            Object(NonMatching, "game/game_fn_80173F04.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_80174184.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_80174358.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_data_806506A8.c"),
             Object(NonMatching, "game/game_fn_8012356C.c"),
             Object(Matching, "game/game_fn_80008B38.c"),

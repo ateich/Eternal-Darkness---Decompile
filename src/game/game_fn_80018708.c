@@ -24,7 +24,7 @@ extern s32 lbl_8064D18C;
 extern double fn_8016A694(void*, int);
 extern int fn_8016A598(void*);
 extern void fn_80163BB4(void*, const char*, ...);
-extern unsigned int fn_800F5C54();
+extern unsigned int fn_800F5C54(double);
 extern void fn_80196578(void*);
 extern void fn_8018F81C(void*, u8);
 extern int fn_801D3974(s32);

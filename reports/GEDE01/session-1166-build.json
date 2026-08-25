@@ -1,0 +1,39 @@
+{
+  "session_id": "session-1166",
+  "scope": "Assigned fn_80173BDC at 0x80173BDC-0x80173D44; remediation verifies the recovered six-byte Vec3s symbol and preserves the honest NonMatching frontier.",
+  "toolchain": {
+    "compiler": "GC/1.3",
+    "objdiff": "v3.6.1",
+    "dtk": "v1.8.3"
+  },
+  "objdiff": {
+    "symbol": "fn_80173BDC",
+    "target_bytes": 360,
+    "base_bytes": 360,
+    "target_instructions": 90,
+    "base_instructions": 90,
+    "target_text_relocations": 19,
+    "base_text_relocations": 19,
+    "match_percent": 87.977776,
+    "evidence_sha1": "65000206d0d98780cb77d4d11fc8fd6a7bdb1ba8"
+  },
+  "aggregate_objdiff": {
+    "report_sha1": "4f288351da03063fd9c68f202b29040b2445f1e0",
+    "matching_objects": 3422,
+    "total_objects": 4772,
+    "matching_functions": 3188,
+    "total_functions": 8216,
+    "matching_code_bytes": 503604,
+    "total_code_bytes": 2300692,
+    "game_code_matching_bytes": 500576,
+    "game_code_total_bytes": 823200
+  },
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "retail_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "dol_matches_retail": true,
+  "dol_hash_gate_caveat": "configure.py registers game/game_fn_80173BDC.c as NonMatching, so the canonical DOL links the retail object; this hash confirms no whole-DOL regression but does not validate this session's C reconstruction.",
+  "remediation_2_verification": "Fresh full rebuild and objdiff regeneration on 2026-08-24 reproduced the recorded 87.977776% function result, 65000206d0d98780cb77d4d11fc8fd6a7bdb1ba8 evidence SHA-1, and retail DOL SHA-1 without changing the frontier.",
+  "matched_bytes_this_session": 0,
+  "nonmatching_bytes_this_session": 360,
+  "worktree_clean_after_commit": true
+}

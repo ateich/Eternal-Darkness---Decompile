@@ -24,7 +24,7 @@ extern s32 fn_80054D14(void *context, void *owner, void *object, s32 force);
 extern void fn_80054DF4(void *context, void *owner, void *object, s32 force);
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);
-extern void fn_8012B344();
+extern void fn_8012B344(void*);
 extern void fn_800C63D8(void);
 extern void *fn_801294DC(void *, int, int, int);
 extern s32 fn_80128EAC(void *object);

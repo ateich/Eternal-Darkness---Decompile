@@ -1,0 +1,24 @@
+{
+  "session_id": "session-1162",
+  "range_start": "0x801734B4",
+  "range_end": "0x80173770",
+  "range_accounting": "The sole 700-byte function in this declared range is independently owned and matched by honest C; there is no interior gap or NonMatching debt.",
+  "matched_bytes": 700,
+  "nonmatching_bytes": 0,
+  "functions": [
+    {
+      "symbol": "fn_801734B4",
+      "range": "0x801734B4-0x80173770",
+      "size": 700,
+      "match_percent": 100.0,
+      "status": "Matching",
+      "instruction_result": "All 700/700 code bytes and all 175/175 instructions agree. Correcting fn_80179904's second parameter from int to short lets MWCC schedule addi r3,r1,0x1C before extsh r4,r28 exactly as retail.",
+      "relocation_result": "All 25/25 ELF text relocations agree in offset, type, target and addend after the established post-compile externalization maps compiler-local @25 to retail lbl_806506A8.",
+      "evidence": "reports/GEDE01/objdiff-fn_801734B4.json"
+    }
+  ],
+  "fallback": "No fallback is required because remediation brought the assigned function to 100% instruction and relocation equality.",
+  "build_evidence": "reports/GEDE01/remediation-session-1162-build.json",
+  "next_target": "0x80173770",
+  "next_gate": "The repaired owned range ends at 0x80173770 with no NonMatching debt; any continuation must begin exactly there and independently verify the next retail range."
+}

@@ -22,7 +22,7 @@ typedef struct LookupResult {
 extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
-extern unsigned int fn_800F5C54();
+extern unsigned int fn_800F5C54(double);
 extern int fn_8015C4A4(int, int);
 extern Vec3s* fn_80158CC8(s32, s32, LookupResult*);
 extern s32 fn_800382C0(void);

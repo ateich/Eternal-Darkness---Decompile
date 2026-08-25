@@ -16,7 +16,7 @@ extern double fn_8016A694(void*, int);
 extern void* fn_8016A784(void*, int);
 extern void fn_8016A830(void*, double);
 extern void fn_80163BB4(void*, const char*, ...);
-extern unsigned int fn_800F5C54();
+extern unsigned int fn_800F5C54(double);
 extern void *fn_80201814();
 extern int fn_80201B54();
 extern void fn_800CCF60(void*, s32, s32, s32, s32, s32, Vec3*, s32, s32, s32,

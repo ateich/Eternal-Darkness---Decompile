@@ -4,6 +4,7 @@ extern const char lbl_8023BEF8[];
 extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
+/* ABI adapter: this matching caller intentionally reuses the live f1 value. */
 extern unsigned int fn_800F5C54();
 extern void fn_800C9508(s32, s32);
 

@@ -73,7 +73,7 @@ extern int fn_80200C38();
 extern s32 fn_80063D60(void *object, HandlerContext *handler, u8 value);
 extern void fn_800C63D8(void);
 extern u32 fn_8020216C(void *context);
-extern void fn_8012B344();
+extern void fn_8012B344(void*);
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);
 extern void fn_8012B690(void *object, char *name, Vec3 *output);

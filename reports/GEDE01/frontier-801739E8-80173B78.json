@@ -1,0 +1,34 @@
+{
+  "session_id": "session-1164",
+  "range_start": "0x801739E8",
+  "range_end": "0x80173B78",
+  "range_accounting": "Every byte is independently owned and matched: fn_801739E8 accounts for 388 C bytes and immediately adjacent fn_80173B6C accounts for 12 C bytes using the GC SDK inline-assembly statement idiom; there is no interior gap.",
+  "matched_bytes": 400,
+  "nonmatching_bytes": 0,
+  "functions": [
+    {
+      "symbol": "fn_801739E8",
+      "range": "0x801739E8-0x80173B6C",
+      "size": 388,
+      "match_percent": 100.0,
+      "status": "Matching",
+      "instruction_result": "All 388/388 code bytes and all 97/97 instructions agree.",
+      "relocation_result": "All 22/22 text relocations agree in offset, type, target and addend after correcting the artificial .sdata2 symbol split so lbl_806506E4 owns the complete six-byte Vec3s.",
+      "evidence": "reports/GEDE01/objdiff-fn_801739E8.json"
+    },
+    {
+      "symbol": "fn_80173B6C",
+      "range": "0x80173B6C-0x80173B78",
+      "size": 12,
+      "match_percent": 100.0,
+      "status": "Matching",
+      "instruction_result": "All 12/12 code bytes and all 3/3 instructions agree. A C function containing the GC SDK-style asm statement block emits retail's psq_l/stfs/blr sequence under the configured GC/1.3 flags.",
+      "relocation_result": "Both retail and generated objects contain zero relocations.",
+      "evidence": "reports/GEDE01/objdiff-fn_80173B6C.json"
+    }
+  ],
+  "fallback": "No whole-function assembly fallback or NonMatching debt remains. fn_80173B6C is a C function with one GC SDK-style inline-assembly statement block for the paired-single load.",
+  "build_evidence": "reports/GEDE01/session-1164-build.json",
+  "next_target": "0x80173B78",
+  "next_gate": "Begin exactly at the consecutive frontier 0x80173B78; every byte through 0x80173B78 is independently owned and matched."
+}

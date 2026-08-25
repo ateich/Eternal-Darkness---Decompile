@@ -36,7 +36,7 @@ extern int fn_80204434(void *object, Vec3 *position, float value,
 extern FN_80128E30_RETURN fn_80128E30(FN_80128E30_PARAMETERS);
 extern void fn_80128C3C(void *object, float value);
 extern int fn_8012AFC4(void *object);
-extern void fn_8012B344();
+extern void fn_8012B344(void*);
 extern int fn_801290D0(void *object);
 extern void fn_80128F74(void *object, int flags);
 extern void fn_80129928(void *object, Vec3 *position);

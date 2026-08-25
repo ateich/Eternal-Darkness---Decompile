@@ -55,7 +55,7 @@ extern void *fn_801294DC(void *, int, int, int);   /* extern */
 #define fn_801294DC(a, b, c, d) fn_801294DC((void *)(a), (b), (c), (d))
 extern M2C_UNK fn_801296F8(u32, M2C_UNK);                  /* extern */
 extern M2C_UNK fn_8012B324(u32);                           /* extern */
-extern void fn_8012B344();                              /* extern */
+extern void fn_8012B344(void*);                              /* extern */
 extern void fn_8012C62C(u32, M2C_UNK, s32 *, s32 *, s32 *, M2C_UNK, s32); /* extern */
 extern M2C_UNK fn_8012FE10(u32, M2C_UNK, f32 *);           /* extern */
 extern s32 fn_8012FF34(u32, f32 *, M2C_UNK, M2C_UNK);      /* extern */

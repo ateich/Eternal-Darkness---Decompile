@@ -43,7 +43,7 @@ extern const u16 lbl_806518D4;
 extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
-extern unsigned int fn_800F5C54();
+extern unsigned int fn_800F5C54(double);
 extern int fn_8015C4A4(int, int);
 extern EffectRecordTable* fn_8015C390(s32);
 extern void fn_8019DFA0(EffectDescriptor*);

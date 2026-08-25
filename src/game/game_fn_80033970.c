@@ -53,7 +53,7 @@ extern void fn_8011F0E8(void*, Vec3*);
 extern void fn_8012B7A0(void*, float);
 extern void *fn_801294DC(void *, int, int, int);
 #define fn_801294DC(a, b, c, d) fn_801294DC((void *)(a), (b), (c), (d))
-extern void fn_8012B344();
+extern void fn_8012B344(void*);
 
 s32 fn_80033970(void* callback, s32 action, void* event, s32* completed)
 {
