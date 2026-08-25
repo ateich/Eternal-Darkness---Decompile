@@ -1,0 +1,53 @@
+{
+  "session_id": "session-1183-remediation-3",
+  "frontier": "0x80176098",
+  "build": "passed",
+  "build_sha1_gate": "OK",
+  "main_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "canonical_report": {
+    "config": "function_reloc_diffs=none",
+    "matching_functions": 3213,
+    "matching_code_bytes": 508628,
+    "linked_code_bytes": 508416,
+    "game_matching_functions": 3151,
+    "game_matching_code_bytes": 505600,
+    "game_linked_code_bytes": 505388
+  },
+  "relocation_strict_report": {
+    "config": "function_reloc_diffs=name_address",
+    "matching_functions": 3207,
+    "matching_code_bytes": 506764,
+    "linked_code_bytes": 508416,
+    "game_matching_functions": 3145,
+    "game_matching_code_bytes": 503736,
+    "game_linked_code_bytes": 505388
+  },
+  "objdiff_relocation_strict": {
+    "fn_800119FC": {"bytes": 344, "match_percent": 100.0},
+    "fn_80095FDC": {"bytes": 556, "match_percent": 100.0, "classification": "two relocation-backed data invocations with no externalizer value evidence"},
+    "fn_80109EEC": {"bytes": 180, "match_percent": 98.888885, "status": "NonMatching", "canonical_matched_bytes": 180, "canonical_matched_functions": 1},
+    "fn_801141B8": {"bytes": 376, "match_percent": 100.0, "classification": "one relocation-backed data invocation with no externalizer value evidence"},
+    "fn_80175F0C": {"bytes": 200, "match_percent": 100.0},
+    "fn_80175FD4": {"bytes": 196, "match_percent": 100.0}
+  },
+  "fresh_objdiff_summary": "reports/GEDE01/session-1183-remediation-1-objdiff.json",
+  "externalize_value_guard": {
+    "tool_invoking_rules": 114,
+    "tool_invocations_across_rules": 123,
+    "tool_invoking_build_edges": 187,
+    "tool_executions_per_full_build": 196,
+    "tool_exact_value_comparisons_per_full_build": 193,
+    "externalize_named_rules": 113,
+    "externalize_named_invocations": 122,
+    "guarded_build_edges": 186,
+    "guarded_executions_per_full_build": 195,
+    "exact_value_comparisons_per_full_build": 192,
+    "relocation_backed_no_value_evidence_executions": 3,
+    "normalization_tool_invocations": 1,
+    "unmapped_normalization_invocations": 0,
+    "negative_test": "fresh game_fn_80052310 @8 rejected against wrong retail lbl_8064E4C4: local 4330000080000000 versus retail 80000000000000ff; exit 1",
+    "relocation_exemption_test": "fresh game_fn_801141B8 @29 accepted against wrong retail jumptable_80245308; exit 0, demonstrating that the relocation-backed exemption supplies no value evidence",
+    "dependency": "orig/GEDE01/sys/main.dol is an implicit input of every mapped externalization edge",
+    "selection": "all 123 tool invocations pass retail identity; the 122 invocations in externalize-named rules execute 195 times across 186 edges, of which 192 compare exact bytes and three relocation-backed executions provide no value evidence"
+  }
+}

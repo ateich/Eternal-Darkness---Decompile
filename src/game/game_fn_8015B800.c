@@ -23,7 +23,7 @@ extern void fn_80159DD0(s16, int);
 extern void fn_8015DEC4(void);
 extern void fn_8015DF24(void);
 extern void fn_8020D250(void*, int, int);
-extern void fn_8020D318(void*, u32*, int);
+extern int fn_8020D318(void*, u32*, int);
 extern void fn_802101F4(void*, int);
 
 static s16 slot_id(int slot)

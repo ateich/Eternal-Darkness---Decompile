@@ -22,7 +22,7 @@ typedef struct WorkerState {
 
 extern Request* fn_801587C4(void);
 extern void fn_8020D250(void*, void*, int);
-extern void fn_8020D318(void*, void**, int);
+extern int fn_8020D318(void*, void**, int);
 extern void fn_80158850(void*);
 
 void fn_8015D4EC(void* destination, int value, WorkerState* state)

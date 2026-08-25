@@ -2,7 +2,7 @@ extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void* fn_802019EC(int, void*);
-extern void fn_8020123C(int, int, void*, int);
+extern unsigned long long fn_8020123C(int, int, void*, int);
 extern const char lbl_8024FF00[];
 extern void* lbl_8064D18C;
 

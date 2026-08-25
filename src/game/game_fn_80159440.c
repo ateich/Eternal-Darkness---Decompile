@@ -40,7 +40,7 @@ extern void fn_800459C0(void);
 extern int fn_801358B4(int);
 extern u32 fn_8022658C(void);
 extern void fn_8015BDF0(int, void*);
-extern void fn_8020D318(void*, void*, int);
+extern int fn_8020D318(void*, void*, int);
 extern void fn_80228D9C(void);
 extern void fn_80159184(u32);
 extern void fn_801F7034(void*, int);

@@ -2,7 +2,7 @@ extern int fn_800467E8(void);
 extern void* memset(void*, int, unsigned int);
 extern void fn_8015E7A8(void);
 extern void fn_80139298(void);
-extern void fn_8020D318(void*, void*, int);
+extern int fn_8020D318(void*, void*, int);
 extern void fn_8020D1F0(void*, void*, int);
 
 extern void* volatile lbl_8064CFC0;

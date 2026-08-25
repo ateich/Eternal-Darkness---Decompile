@@ -27,7 +27,7 @@ typedef struct ArchiveState {
 } ArchiveState;
 
 extern ArchiveState lbl_805BB1E0;
-extern void fn_8020D318(void*, u32*, int);
+extern int fn_8020D318(void*, u32*, int);
 extern void fn_8015B628(Stream*);
 
 void* fn_8015B708(Stream* stream)

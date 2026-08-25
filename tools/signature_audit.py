@@ -29,10 +29,6 @@ DEFAULT_RETAIL_EVIDENCE = ROOT / "config" / "GEDE01" / "retail-return-shapes.jso
 FUNCTION_NAME = re.compile(r"\b(fn_[0-9A-Fa-f]+)\s*\(")
 EXTERN_STATEMENT = re.compile(r"\bextern\b(?P<body>.*?);", re.DOTALL)
 COMMENTS = re.compile(r"/\*.*?\*/|//[^\n]*", re.DOTALL)
-CODEGEN_ADAPTER = re.compile(
-    r"\bextern\b[^;\n]*;[ \t]*/\*\s*signature-audit:\s*codegen-adapter\s*\*/",
-)
-
 FLOAT_TYPES = {"float", "f32"}
 DOUBLE_TYPES = {"double", "f64"}
 INT64_TYPES = {
@@ -50,6 +46,9 @@ AGGREGATE_TYPES: set[str] = set()
 AGGREGATE_TYPEDEF = re.compile(
     r"\btypedef\s+(?:struct|union)\b[^;{]*\{.*?\}\s*([A-Za-z_]\w*)\s*;",
     re.DOTALL,
+)
+OBJECT_DEFINE = re.compile(
+    r"(?m)^[ \t]*#define[ \t]+([A-Za-z_]\w*)[ \t]+([^\n]+)$"
 )
 
 
@@ -165,6 +164,8 @@ def base_type(type_name: str) -> str:
 
 def return_register_shape(type_name: str) -> str:
     base = base_type(type_name)
+    if base in {"M2C_UNK", "UNK_TYPE"}:
+        return "unknown"
     if base == "void":
         return "none"
     if "*" in base or base == "function-pointer":
@@ -214,16 +215,27 @@ def parameter_register_shape(type_name: str) -> str:
 
 def declarations_in(path: Path, source_root: Path) -> Iterable[Declaration]:
     original = path.read_text(encoding="utf-8")
-    # A handful of matching MWCC callers require a deliberately ABI-equivalent
-    # local prototype spelling to preserve register allocation.  Their audited
-    # canonical declaration is supplied by the rest of the call-site corpus;
-    # do not reclassify these explicitly marked codegen adapters as drift.
-    original = CODEGEN_ADAPTER.sub(
-        lambda match: "\n" * match.group(0).count("\n"), original
-    )
     text = COMMENTS.sub(lambda match: "\n" * match.group(0).count("\n"), original)
+    # Some matching TUs use object-like macros to retain ABI-equivalent source
+    # spellings whose aggregate-return lowering differs in MWCC.  Audit the
+    # expanded declaration, not the macro identifier (which otherwise looks
+    # like an integer typedef and creates a false return-register conflict).
+    defines = dict(OBJECT_DEFINE.findall(text))
+
+    def expand_macros(body: str) -> str:
+        for _ in range(8):
+            expanded = re.sub(
+                r"\b[A-Za-z_]\w*\b",
+                lambda item: defines.get(item.group(0), item.group(0)),
+                body,
+            )
+            if expanded == body:
+                break
+            body = expanded
+        return body
+
     for statement in EXTERN_STATEMENT.finditer(text):
-        body = statement.group("body")
+        body = expand_macros(statement.group("body"))
         functions = []
         depth = 0
         search_from = 0
@@ -357,7 +369,8 @@ def audit(source_root: Path, retail_evidence_path: Path = DEFAULT_RETAIL_EVIDENC
         # value declarations which select different EABI register files cannot
         # both be correct.  Spellings which select the same register file remain
         # cosmetic and are separated below.
-        if len(return_shapes) > 1:
+        known_return_shapes = return_shapes - {"unknown"}
+        if len(known_return_shapes) > 1:
             category = "return_register_contradictions"
         elif len(abi_shapes) > 1:
             category = "abi_divergent"
@@ -515,14 +528,21 @@ def main() -> int:
     )
     parser.add_argument("--json", action="store_true", help="emit machine-readable JSON")
     parser.add_argument(
+        "--json-output", type=Path,
+        help="write the complete machine-readable report to this path",
+    )
+    parser.add_argument(
         "--limit", type=int, default=10,
         help="maximum symbols shown per category (0 means unlimited; default: 10)",
     )
     args = parser.parse_args()
     source = args.source.resolve()
     report = audit(source, args.retail_evidence.resolve())
+    serialized = json.dumps(report, indent=2) + "\n"
+    if args.json_output is not None:
+        args.json_output.write_text(serialized, encoding="utf-8")
     if args.json:
-        print(json.dumps(report, indent=2))
+        print(serialized, end="")
     else:
         print_report(report, None if args.limit == 0 else args.limit)
     return 0

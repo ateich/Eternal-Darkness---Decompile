@@ -23,7 +23,7 @@ extern unsigned char lbl_805E2ABC[];
 
 extern int OSDisableInterrupts(void);
 extern void OSRestoreInterrupts(int);
-extern void fn_8020D318(void*, int, int);
+extern int fn_8020D318(void*, int, int);
 
 int fn_801397F8(u32* out_size, int kind, int owner, int wait)
 {

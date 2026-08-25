@@ -2,7 +2,7 @@ extern void* fn_8011FE34(void*);
 extern void fn_8017A284(void*, float*, float*);
 extern const double lbl_806501C8;
 
-void fn_8012B750(void* object)
+float fn_8012B750(void* object)
 {
     float value[4];
     float output;
@@ -15,4 +15,5 @@ void fn_8012B750(void* object)
         output = value[0];
     }
     value[0] = output;
+    return value[0];
 }

@@ -1,0 +1,15 @@
+{
+  "session_id": "session-1188",
+  "range_start": "0x80176A94",
+  "range_end": "0x80176D14",
+  "next_target": "0x80176D14",
+  "matched_bytes": 368,
+  "nonmatching_bytes": 272,
+  "unaccounted_spans": [],
+  "functions": [
+    {"symbol": "fn_80176A94", "start": "0x80176A94", "end": "0x80176BA4", "status": "NonMatching", "size": 272, "generated_size": 276, "match_percent": 96.54412, "retail_instructions": 68, "generated_instructions": 69, "retail_relocations": 18, "generated_relocations": 19, "blocker": "Canonical GC/1.3 materializes the shared string-table low half into r0 and then moves it to r31, adding four bytes where retail delays addi directly into r31; it also folds the converted numeric ID directly into r30 where retail loads through r3 before moving it to r30.", "evidence": "reports/GEDE01/objdiff-fn_80176A94-session-1188.json"},
+    {"symbol": "fn_80176BA4", "start": "0x80176BA4", "end": "0x80176C64", "status": "Matching", "size": 192, "match_percent": 100.0, "instructions_equal": 48, "instructions_total": 48, "relocations_equal": 9, "relocations_total": 9, "evidence": "reports/GEDE01/objdiff-fn_80176BA4-session-1188.json"},
+    {"symbol": "fn_80176C64", "start": "0x80176C64", "end": "0x80176D14", "status": "Matching", "size": 176, "match_percent": 100.0, "instructions_equal": 44, "instructions_total": 44, "relocations_equal": 9, "relocations_total": 9, "evidence": "reports/GEDE01/objdiff-fn_80176C64-session-1188.json"}
+  ],
+  "accounting": "Every byte in the declared range belongs to one independent honest-C translation unit: 0x80176A94-0x80176BA4 is explicit NonMatching debt contributing zero matched bytes, while 0x80176BA4-0x80176D14 contributes 368 matched bytes. There is no interior gap, shared reconstruction, inline assembly or unaccounted span."
+}

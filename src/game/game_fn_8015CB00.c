@@ -3,7 +3,7 @@ extern unsigned char lbl_805E27DC[];
 extern unsigned char lbl_805DB240[];
 
 extern void fn_8020D250(void*, int, int);
-extern void fn_8020D318(void*, unsigned int*, int);
+extern int fn_8020D318(void*, unsigned int*, int);
 
 void fn_8015CB00(int mode)
 {

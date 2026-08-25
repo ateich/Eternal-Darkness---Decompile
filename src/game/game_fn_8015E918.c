@@ -14,7 +14,7 @@ extern int fn_802137F4(FileInfo*, void*, u32, int, int);
 extern void fn_8021345C(FileInfo*);
 extern void DCInvalidateRange(void*, u32);
 extern void fn_8021B730(void*, int, int, int, void*, void*, u32, void*);
-extern void fn_8020D318(void*, int, int);
+extern int fn_8020D318(void*, int, int);
 extern void fn_8015E8E8(void);
 
 u32 fn_8015E918(char* path, void* value, u32 unused, void* destination, u32 unused2)

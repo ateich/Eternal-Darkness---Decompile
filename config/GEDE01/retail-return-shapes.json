@@ -4,6 +4,36 @@
       "return_shape": "GPR:r3",
       "source": "build/GEDE01/asm/auto_03_801CE384_text.s:802007AC-802007D8",
       "detail": "The loop increments r27 at 0x802007AC and the epilogue moves r27 to r3 at 0x802007C4 before returning."
+    },
+    "fn_8012B750": {
+      "return_shape": "FPR:f1",
+      "source": "orig/GEDE01/sys/main.dol:8012B750-8012B7A0",
+      "detail": "Both value paths load or negate the result into f1 at 0x8012B77C-0x8012B788; the epilogue does not overwrite f1 before blr at 0x8012B79C."
+    },
+    "fn_8020123C": {
+      "return_shape": "GPR:r3-r4",
+      "source": "orig/GEDE01/sys/main.dol:8020123C-802012A0",
+      "detail": "The final call to fn_8020088C at 0x80201288 produces r3:r4; fn_8020123C restores only r0 and r31 and returns without overwriting either result register. fn_8020088C's epilogue explicitly loads r4 at 0x80200AFC and moves r31 to r3 at 0x80200B00."
+    },
+    "fn_80201E78": {
+      "return_shape": "none",
+      "source": "orig/GEDE01/sys/main.dol:80201E78-80201EB8",
+      "detail": "The callee preserves incoming r3 as a destination pointer, resolves the source through fn_80201BC8, and passes destination and source to fn_8011F114. This is an aggregate hidden-result convention, not a scalar return register."
+    },
+    "fn_8020D318": {
+      "return_shape": "GPR:r3",
+      "source": "orig/GEDE01/sys/main.dol:8020D318-8020D3F4",
+      "detail": "The no-message path writes 0 to r3 at 0x8020D360 and the success path writes 1 to r3 at 0x8020D3D0; both flow to the common epilogue and blr at 0x8020D3F0."
+    },
+    "fn_80211A48": {
+      "return_shape": "none",
+      "source": "orig/GEDE01/sys/main.dol:80211A48-80211A6C",
+      "detail": "The paired-single add stores its result through the third parameter in r5 and returns directly at 0x80211A68 without writing r3."
+    },
+    "fn_80211AAC": {
+      "return_shape": "none",
+      "source": "orig/GEDE01/sys/main.dol:80211AAC-80211AF0",
+      "detail": "The normalized vector is stored through the second parameter in r4 and the function returns directly at 0x80211AEC without writing r3."
     }
   }
 }

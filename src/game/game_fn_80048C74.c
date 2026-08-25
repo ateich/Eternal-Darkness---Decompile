@@ -49,7 +49,7 @@ extern void fn_801A7560(void* object, u32 value);
 extern void fn_801A75A0(void* object, u32 value);
 extern void fn_801A74E8(void* object, u32 value);
 
-extern void fn_8012B750(void* object);
+extern float fn_8012B750(void* object);
 extern u8 fn_80128EE4(void* object);
 extern u32 fn_801290D0(void* object);
 extern u32 fn_8011FB24(void* object);

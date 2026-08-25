@@ -1,0 +1,30 @@
+{
+  "session_id": "session-1183-remediation-2",
+  "frontier": "0x80176098",
+  "build": "passed",
+  "build_sha1_gate": "OK",
+  "main_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "objdiff": {
+    "fn_800119FC": {"bytes": 344, "instructions_equal": 86, "instructions_total": 86, "relocations_equal": 16, "relocations_total": 16, "match_percent": 100.0},
+    "fn_80109EEC": {"bytes": 180, "instructions_equal": 43, "instructions_total": 45, "relocations_equal": 12, "relocations_total": 14, "match_percent": 98.888885, "status": "NonMatching"},
+    "fn_80175F0C": {"bytes": 200, "instructions_equal": 50, "instructions_total": 50, "relocations_equal": 10, "relocations_total": 10, "match_percent": 100.0},
+    "fn_80175FD4": {"bytes": 196, "instructions_equal": 49, "instructions_total": 49, "relocations_equal": 13, "relocations_total": 13, "match_percent": 100.0}
+  },
+  "externalize_value_guard": {
+    "inventory": {
+      "externalize_named_rules": 114,
+      "externalize_named_sdata2_rules": 110,
+      "externalize_named_sdata2_invocations": 118,
+      "all_rules_invoking_externalizer": 115,
+      "all_externalizer_invocations": 124,
+      "configured_guarded_invocations": 121,
+      "active_guarded_invocations": 120,
+      "unguarded_relocation_backed_data_invocations": 3
+    },
+    "positive": "all 120 active relocation-free .sdata2 and .rodata externalizations passed exact local-to-retail byte comparison during the full build",
+    "negative": "game_fn_80109EEC @4 was independently rejected: local 65645f61695f50726f6a656374696c6500000000000000000000000000000000 versus retail lbl_8023A278 0126002b0078002000d9003e0048002001a4003e005600200124005700790020",
+    "excluded": "the two game_fn_80095FDC and one game_fn_801141B8 .data jump-table invocations are relocation-backed zeros before link and cannot be byte-compared",
+    "dependency": "orig/GEDE01/sys/main.dol is an implicit input of every active guarded externalization edge",
+    "rewrite": "externalizer invocations are matched as complete whitespace-delimited local-symbol tokens, preventing @1 from matching @10"
+  }
+}

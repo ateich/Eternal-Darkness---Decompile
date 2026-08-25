@@ -8,7 +8,7 @@ extern unsigned char lbl_8064D130;
 extern void fn_8015CDF0(void);
 extern void fn_8015D6A0(void);
 extern void fn_8020D1F0(void*, void*, int);
-extern void fn_8020D318(void*, void*, int);
+extern int fn_8020D318(void*, void*, int);
 extern int fn_80213394(void*, DVDFileInfo*);
 extern void fn_8021345C(DVDFileInfo*);
 extern int fn_80213704(DVDFileInfo*, void*, int, int, void*, int);
