@@ -12,6 +12,8 @@ extern int fn_801E8D24(void*);
 extern void fn_80119224(int, int);
 extern void fn_801A8974(int, int, int, int, int, int);
 
+/* NonMatching: the default function_reloc_diffs=none report ignores the sole
+ * relocation-target divergence; the strict tree-wide score is 99.77778%. */
 void fn_80109EEC(int arg)
 {
     Coordinates values[4] = {

@@ -1,0 +1,41 @@
+{
+  "session_id": "session-1210-remediation-3",
+  "date": "2026-08-25",
+  "scope": "Evidence-semantics remediation; no matching registration or frontier change",
+  "full_build": "passed",
+  "build_command": "./.tools/bin/ninja",
+  "objdiff_version": "3.6.1",
+  "affected_objects": {
+    "main/game/game_fn_80109EEC": {
+      "text_match_percent": 98.888885,
+      "instruction_argument_mismatches": 10,
+      "exact_relocation_gate": "failed",
+      "evidence": "reports/GEDE01/reclaim-session-1210-game_fn_80109EEC.json",
+      "evidence_sha1": "7fa1f400fd2ea3e72298e047543da25b389ce9c7"
+    },
+    "main/game/game_data_80239E10": {
+      "target_section": ".rodata, 8 bytes",
+      "base_section": ".sdata2, 10 bytes",
+      "exact_section_match_percent": 0.0,
+      "evidence": "reports/GEDE01/reclaim-session-1210-game_data_80239E10.json",
+      "evidence_sha1": "23d8ba1495505b6ebf09b9f0da174dd8ca3eddb1"
+    }
+  },
+  "aggregate_report": {
+    "path": "build/GEDE01/report.json",
+    "sha1": "98c16aed37d9534a002f987844e9daf8a9b04f91",
+    "configuration_semantics": "The default function_reloc_diffs=none report credits fn_80109EEC; the relocation-strict totals of 514328 bytes and 3264 functions already exclude it",
+    "known_metric_gap": "game_data_80239E10 retains vacuous 100% code measures under relocation-strict despite zero exact section agreement"
+  },
+  "progress": {
+    "path": "reports/GEDE01/progress.json",
+    "sha1": "d3f933abd7c2b81cd8d67ed061773fd1db7f353d",
+    "next_target": "0x80179D78",
+    "frontier_advanced": false
+  },
+  "dol": {
+    "path": "build/GEDE01/main.dol",
+    "sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "expected_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+  }
+}

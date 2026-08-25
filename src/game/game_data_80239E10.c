@@ -1,5 +1,7 @@
 typedef unsigned short u16;
 
+/* NonMatching: aggregate progress reports 100%, but retail owns 8 bytes in
+ * .rodata while this TU emits 10 bytes in .sdata2. */
 /* Current-directory and wide-character C-locale tokens. */
 const volatile char lbl_80239E10[2] = ".";
 const volatile u16 lbl_80239E12[2] = { 'C', 0 };

@@ -1,0 +1,184 @@
+{
+  "session_id": "session-1210",
+  "date": "2026-08-25",
+  "assignment": "Consolidate already-matching Object(NonMatching, ...) registrations without matching new functions or advancing the frontier",
+  "starting_target": "0x80179D78",
+  "ending_next_target": "0x80179D78",
+  "frontier_advanced": false,
+  "enumeration": {
+    "source": "configure.py",
+    "method": "Parsed every literal C source path with Object\\(\\s*NonMatching\\s*,\\s*['\\\"]([^'\\\"]+\\.c)['\\\"] across line boundaries and resolved main/<path-without-.c> against a freshly generated build/GEDE01/report.json; when objdiff omits fuzzy_match_percent for a zero-valued unit, the parser records 0.0 rather than requiring the absent key",
+    "nonmatching_declarations_before": 664,
+    "unique_nonmatching_declarations_before": 664,
+    "single_line_declarations": 640,
+    "multi_line_declarations": 24,
+    "report_units_resolved": 664,
+    "report_units_unresolved": 0,
+    "report_units_with_absent_fuzzy_match_percent_treated_as_zero": [
+      "game/game_fn_8008CA84.c",
+      "game/game_fn_8012BE18.c",
+      "game/game_fn_8012BE64.c",
+      "game/game_fn_8012BE78.c",
+      "game/game_fn_8013C418.c",
+      "game/game_fn_80149D58.c",
+      "game/game_fn_8014B604.c"
+    ],
+    "aggregate_fuzzy_100_candidates": 2,
+    "previously_omitted_multi_line_units": [
+      {"object": "game/game_fn_8000E96C.c", "aggregate_fuzzy_match_percent": 99.81132},
+      {"object": "game/game_fn_80026768.c", "aggregate_fuzzy_match_percent": 62.122196},
+      {"object": "game/game_fn_80026DC8.c", "aggregate_fuzzy_match_percent": 80.318184},
+      {"object": "game/game_fn_80028198.c", "aggregate_fuzzy_match_percent": 46.88932},
+      {"object": "game/game_fn_8002B748.c", "aggregate_fuzzy_match_percent": 96.79612},
+      {"object": "game/game_fn_8002BFE0.c", "aggregate_fuzzy_match_percent": 97.447914},
+      {"object": "game/game_fn_8002DAE0.c", "aggregate_fuzzy_match_percent": 97.51899},
+      {"object": "game/game_fn_8002F428.c", "aggregate_fuzzy_match_percent": 99.35185},
+      {"object": "game/game_fn_8002FAE8.c", "aggregate_fuzzy_match_percent": 65.68465},
+      {"object": "game/game_fn_80031544.c", "aggregate_fuzzy_match_percent": 91.92857},
+      {"object": "game/game_fn_80031694.c", "aggregate_fuzzy_match_percent": 95.57143},
+      {"object": "game/game_fn_80031D24.c", "aggregate_fuzzy_match_percent": 94.46023},
+      {"object": "game/game_fn_80032A5C.c", "aggregate_fuzzy_match_percent": 99.14893},
+      {"object": "game/game_fn_80033180.c", "aggregate_fuzzy_match_percent": 83.07462},
+      {"object": "game/game_fn_800337C8.c", "aggregate_fuzzy_match_percent": 83.86793},
+      {"object": "game/game_fn_80034708.c", "aggregate_fuzzy_match_percent": 95.39912},
+      {"object": "game/game_fn_800359A0.c", "aggregate_fuzzy_match_percent": 94.22564},
+      {"object": "game/game_fn_80036374.c", "aggregate_fuzzy_match_percent": 99.093956},
+      {"object": "game/game_fn_800365C8.c", "aggregate_fuzzy_match_percent": 90.77256},
+      {"object": "game/game_fn_801235E4.c", "aggregate_fuzzy_match_percent": 98.561646},
+      {"object": "game/game_fn_80124A40.c", "aggregate_fuzzy_match_percent": 66.75785},
+      {"object": "game/game_fn_80157360.c", "aggregate_fuzzy_match_percent": 97.87037},
+      {"object": "game/game_fn_8015D7D4.c", "aggregate_fuzzy_match_percent": 95.64},
+      {"object": "game/game_fn_80166E3C.c", "aggregate_fuzzy_match_percent": 98.23529}
+    ]
+  },
+  "candidates": [
+    {
+      "object": "game/game_fn_80109EEC.c",
+      "aggregate_fuzzy_match_percent": 100.0,
+      "code_bytes": 180,
+      "one_shot_objdiff_text_match_percent": 98.888885,
+      "one_shot_instruction_argument_mismatches": 10,
+      "mismatch_addresses": [
+        "0x8",
+        "0x10",
+        "0x20",
+        "0x24",
+        "0x28",
+        "0x2C",
+        "0x30",
+        "0x34",
+        "0x38",
+        "0x3C"
+      ],
+      "exact_relocation_gate": "failed",
+      "reason": "Retail references external lbl_8023A278, while the compiled object references TU-local @4. The compiled 32-byte initializer also differs from retail lbl_8023A278, so externalizing it would conceal a semantic data mismatch.",
+      "raw_evidence": "reports/GEDE01/reclaim-session-1210-game_fn_80109EEC.json",
+      "disposition": "remain NonMatching"
+    },
+    {
+      "object": "game/game_data_80239E10.c",
+      "aggregate_fuzzy_match_percent": 100.0,
+      "data_bytes": 8,
+      "one_shot_objdiff_section_match_percent": 0.0,
+      "target_section": {
+        "name": ".rodata",
+        "size": 8
+      },
+      "base_section": {
+        "name": ".sdata2",
+        "size": 10
+      },
+      "exact_section_gate": "failed",
+      "reason": "The compiled object has different section ownership, alignment, and size from the retail split object.",
+      "raw_evidence": "reports/GEDE01/reclaim-session-1210-game_data_80239E10.json",
+      "disposition": "remain NonMatching"
+    }
+  ],
+  "reclamation": {
+    "promoted_objects": [],
+    "promoted_object_count": 0,
+    "promoted_function_count": 0,
+    "reclaimed_code_bytes": 0,
+    "reclaimed_data_bytes": 0,
+    "new_functions_matched_this_session": 0
+  },
+  "open_items": [
+    {
+      "object": "game/game_fn_80109EEC.c",
+      "kind": "initializer_and_relocation_divergence",
+      "detail": "Retail fn_80109EEC references external lbl_8023A278, but the honest-C object emits TU-local @4 and its 32-byte initializer differs from retail lbl_8023A278. Do not externalize or count the function as matched until both data contents and relocation identity agree."
+    },
+    {
+      "object": "game/game_data_80239E10.c",
+      "kind": "section_ownership_divergence",
+      "detail": "Retail owns 8 bytes in .rodata while the compiled object emits 10 bytes in .sdata2. Preserve the NonMatching registration until section ownership, size, alignment, and shared string-base ownership are reconstructed exactly."
+    }
+  ],
+  "reporting_cases": {
+    "configuration_semantics": {
+      "object": "game/game_fn_80109EEC.c",
+      "default_config_result": "function_reloc_diffs=none ignores the sole relocation-target divergence and reports fuzzy_match_percent 100.0, matched_code 180/180, and matched_functions 1/1",
+      "relocation_strict_result": "function_reloc_diffs=name_address reports fuzzy_match_percent 99.77778 with no matched_code and no matched_functions; the tree-wide strict totals 514328 matched code bytes and 3264 matched functions already exclude this unit",
+      "disposition": "documented configuration semantics; no metric-generator repair required"
+    },
+    "metric_generator_artifact": {
+      "severity": "progress_metric_unreliable_for_exact_data_reclamation",
+      "affected_object": "game/game_data_80239E10.c",
+      "strict_report_result": "fuzzy_match_percent 100.0 and complete_code_percent 100.0",
+      "direct_objdiff_result": "0.0% with no section name in common: retail .rodata versus built .sdata2",
+      "impact": "The strict aggregate unit measures remain vacuously perfect despite zero exact section agreement; generator repair is warranted for this data-only case, and direct section evidence must drive promotion."
+    },
+    "direct_checks": [
+      {
+        "object": "game/game_fn_80109EEC.c",
+        "default_report_result": "fuzzy_match_percent 100.0, matched_code 180/180, matched_functions 1/1",
+        "direct_objdiff_result": ".text 98.888885% with 10 instruction-argument mismatches and a failed exact relocation gate"
+      },
+      {
+        "object": "game/game_data_80239E10.c",
+        "aggregate_report_result": "fuzzy_match_percent 100.0",
+        "direct_objdiff_result": "0.0% with no section name in common: retail .rodata versus built .sdata2"
+      }
+    ]
+  },
+  "accounting": {
+    "nonmatching_declarations_before": 664,
+    "nonmatching_declarations_after": 664,
+    "nonmatching_declarations_delta": 0,
+    "matched_code_bytes_before": 516192,
+    "matched_code_bytes_after": 516192,
+    "matched_code_bytes_delta": 0,
+    "linked_code_bytes_before": 515980,
+    "linked_code_bytes_after": 515980,
+    "linked_code_bytes_delta": 0,
+    "game_matched_code_bytes_before": 513164,
+    "game_matched_code_bytes_after": 513164,
+    "game_matched_code_bytes_delta": 0,
+    "game_linked_code_bytes_before": 512952,
+    "game_linked_code_bytes_after": 512952,
+    "game_linked_code_bytes_delta": 0,
+    "linked_units_before": 3503,
+    "linked_units_after": 3503,
+    "linked_units_delta": 0,
+    "headline_metric_caveat": "The default function_reloc_diffs=none headline intentionally credits fn_80109EEC; relocation_strict matching_code_bytes 514328 and matching_functions 3264 already exclude it. game_data_80239E10 remains a separate data-only metric-generator artifact."
+  },
+  "verification": {
+    "objdiff_version": "3.6.1",
+    "full_build": "passed",
+    "affected_objects_checked": [
+      "main/game/game_fn_80109EEC",
+      "main/game/game_data_80239E10"
+    ],
+    "objdiff_evidence_sha1": {
+      "reports/GEDE01/reclaim-session-1210-game_fn_80109EEC.json": "7fa1f400fd2ea3e72298e047543da25b389ce9c7",
+      "reports/GEDE01/reclaim-session-1210-game_data_80239E10.json": "23d8ba1495505b6ebf09b9f0da174dd8ca3eddb1"
+    },
+    "report_path": "build/GEDE01/report.json",
+    "report_sha1": "98c16aed37d9534a002f987844e9daf8a9b04f91",
+    "progress_path": "reports/GEDE01/progress.json",
+    "progress_sha1": "d3f933abd7c2b81cd8d67ed061773fd1db7f353d",
+    "dol_path": "build/GEDE01/main.dol",
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "expected_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+  }
+}

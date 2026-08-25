@@ -2052,6 +2052,14 @@
       "precise_divergence": "Flattening conversion results, numeric assignments, or a returned runtime pointer into their consumers changes retail's conversion temporary, store order, object-ID reuse, or live r3 handoff schedule.",
       "workaround": "Name integer results before conversion, preserve direct consecutive assignments, and pass fn_80201814's non-null return directly to fn_80201BC8.",
       "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1178, 1184, 1185, and 1189"]
+    },
+    {
+      "category": "progress-measurement-semantics",
+      "functions": ["fn_80109EEC"],
+      "affected_objects": ["game/game_fn_80109EEC.c", "game/game_data_80239E10.c"],
+      "precise_divergence": "The two apparent aggregate-report false positives have different causes. fn_80109EEC differs only in its relocation target, so the documented default function_reloc_diffs=none semantics credit it with 180 matched code bytes and one matched function; relocation_strict already excludes it, reporting 99.77778% with no matched_code or matched_functions and honest totals of 514328 bytes and 3264 functions. By contrast, game_data_80239E10 still reports fuzzy_match_percent and complete_code_percent 100.0 under relocation-strict despite zero exact section agreement, which is a genuine metric-generator artifact.",
+      "workaround": "Use relocation_strict totals when relocation-target equality matters, and reserve metric-generator repair for the data-only game_data_80239E10 case. Require direct section, instruction, and relocation comparison before promotion. Treat an absent fuzzy_match_percent key as 0.0 because objdiff omits zero-valued measures; seven session-1210 audited units use this representation.",
+      "evidence": ["reports/GEDE01/nonmatching-reclamation-session-1210.json", "reports/GEDE01/progress.json: session-1210 remediation 3 open_item", "reports/GEDE01/session-1209-reloc-strict.json"]
     }
   ]
 }

@@ -1,0 +1,45 @@
+{
+  "session_id": "session-1217-remediation-1",
+  "scope": "Correct session-1217 relocation-count evidence without advancing the frontier",
+  "build_command": ".tools/bin/ninja",
+  "build_result": "passed",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "expected_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "next_target": "0x8017A34C",
+  "objdiff_config": "function_reloc_diffs=name_address",
+  "objects": [
+    {
+      "unit": "main/game/game_fn_8017A244",
+      "symbol": "fn_8017A244",
+      "text_bytes": "64/64 equal",
+      "instructions": "16/16 equal",
+      "relocations": "1/1 equal",
+      "rela_text_bytes": 12,
+      "report": "reports/GEDE01/objdiff-fn_8017A244-session-1217-remediation-1.json"
+    },
+    {
+      "unit": "main/game/game_fn_8017A284",
+      "symbol": "fn_8017A284",
+      "text_bytes": "200/200 equal",
+      "instructions": "50/50 equal",
+      "relocations": "8/8 equal",
+      "rela_text_bytes": 96,
+      "relocation_targets": [
+        "fn_8003315C",
+        "lbl_80650894",
+        "lbl_80650878",
+        "fn_800ED720",
+        "lbl_80650860",
+        "lbl_806508D0",
+        "lbl_80650878",
+        "lbl_80650878"
+      ],
+      "report": "reports/GEDE01/objdiff-fn_8017A284-session-1217-remediation-1.json"
+    }
+  ],
+  "aggregate": {
+    "text_bytes": "264/264 equal",
+    "instructions": "66/66 equal",
+    "relocations": "9/9 equal"
+  }
+}
