@@ -1,7 +1,7 @@
 extern void fn_8016A830(void*, double);
 extern void fn_8016AB20(void*, const char*);
 extern void fn_8016AA34(void*, const char*);
-extern void fn_8016A694(void*, int);
+extern double fn_8016A694(void*, int);
 extern void fn_8016A5B0(void*, int);
 
 extern char lbl_80250588[];

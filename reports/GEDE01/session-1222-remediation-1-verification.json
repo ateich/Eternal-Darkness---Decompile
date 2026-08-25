@@ -1,0 +1,60 @@
+{
+  "session_id": "session-1222-remediation-1",
+  "scope": "review remediation only; frontier unchanged",
+  "source_experiment": "swapped right_y and left_y declaration order in fn_8017A7D4",
+  "experiment_result": "canonical output unchanged; fn_8017A7D4 remains NonMatching",
+  "objdiff_config": "function_reloc_diffs=name_address",
+  "relocation_strict_report": "reports/GEDE01/session-1222-remediation-1-reloc-strict.json",
+  "standalone_commits": [
+    "a949bb5f fn_8017A6D8",
+    "6251a05c fn_8017A71C",
+    "9a96c6f1 fn_8017A750",
+    "f365ed99 fn_8017A7D4"
+  ],
+  "objects": [
+    {
+      "name": "main/game/game_fn_8017A6D8",
+      "bytes": 68,
+      "instructions_equal": "17/17",
+      "relocations_equal": "0/0",
+      "match_percent": 100.0,
+      "evidence": "reports/GEDE01/objdiff-fn_8017A6D8-session-1222-remediation-1.json"
+    },
+    {
+      "name": "main/game/game_fn_8017A71C",
+      "bytes": 52,
+      "instructions_equal": "13/13",
+      "relocations_equal": "0/0",
+      "match_percent": 100.0,
+      "evidence": "reports/GEDE01/objdiff-fn_8017A71C-session-1222-remediation-1.json"
+    },
+    {
+      "name": "main/game/game_fn_8017A750",
+      "bytes": 132,
+      "instructions_equal": "33/33",
+      "relocations_equal": "4/4",
+      "match_percent": 100.0,
+      "evidence": "reports/GEDE01/objdiff-fn_8017A750-session-1222-remediation-1.json"
+    },
+    {
+      "name": "main/game/game_fn_8017A7D4",
+      "bytes": 484,
+      "instructions_equal": "100/121",
+      "instruction_words_different": 21,
+      "load_order_differences": ["0x38", "0x40"],
+      "fpr_coloring_only_differences": 19,
+      "relocations_equal": "10/10",
+      "match_percent": 98.96694,
+      "evidence": "reports/GEDE01/objdiff-fn_8017A7D4-session-1222-remediation-1.json"
+    }
+  ],
+  "range_start": "0x8017A6D8",
+  "range_end": "0x8017A9B8",
+  "next_target": "0x8017A9B8",
+  "matched_bytes": 252,
+  "nonmatching_bytes": 484,
+  "build_command": ".tools/bin/ninja",
+  "build_result": "passed",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "expected_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

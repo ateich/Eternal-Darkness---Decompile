@@ -1,0 +1,46 @@
+{
+  "session_id": "session-1225-remediation-1",
+  "scope": "Correct session-1225 evidence and document the existing fn_8017AC20 divergence without advancing the frontier",
+  "build_command": ".tools/bin/ninja",
+  "build_result": "passed",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "expected_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "range_start": "0x8017AC20",
+  "range_end": "0x8017AD00",
+  "next_target": "0x8017AD00",
+  "matched_bytes": 32,
+  "nonmatching_bytes": 192,
+  "objdiff_config": "function_reloc_diffs=name_address",
+  "objects": [
+    {
+      "unit": "main/game/game_fn_8017AC20",
+      "symbol": "fn_8017AC20",
+      "status": "NonMatching",
+      "text_bytes": "192/192 same size",
+      "instructions_equal": "36/48",
+      "instruction_words_different": 12,
+      "relocation_entries": "6/6",
+      "relocations_equal": "3/6",
+      "relocation_targets_equal": "5/6",
+      "retail_rela_text_bytes": 72,
+      "generated_rela_text_bytes": 72,
+      "retail_offset_0x0c_target": "lbl_806508A8",
+      "generated_offset_0x0c_target": "@18",
+      "generated_private_section": ".sdata2, 8 bytes",
+      "generated_extra_symbols": ["@18", "[.sdata2-0]"],
+      "match_percent": 84.479164,
+      "evidence": "reports/GEDE01/objdiff-fn_8017AC20-session-1225-remediation-1.json"
+    },
+    {
+      "unit": "main/game/game_fn_8017ACE0",
+      "symbol": "fn_8017ACE0",
+      "status": "Matching",
+      "text_bytes": "32/32 equal",
+      "instructions_equal": "8/8",
+      "relocation_entries": "1/1",
+      "relocations_equal": "1/1",
+      "match_percent": 100.0,
+      "evidence": "reports/GEDE01/objdiff-fn_8017ACE0-session-1225-remediation-1.json"
+    }
+  ]
+}

@@ -4,7 +4,7 @@ extern void fn_80163BB4(void*, const char*, ...);
 extern void* fn_80201814(int);
 extern void* fn_80201ADC(void);
 extern void fn_80204EC8(void*, void*);
-extern void fn_801E8328(int, void*);
+extern int fn_801E8328(int, void*);
 extern const char lbl_8024FF00[];
 
 int fn_80176488(void* state)

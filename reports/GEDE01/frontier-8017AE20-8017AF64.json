@@ -1,0 +1,14 @@
+{
+  "session_id": "session-1227",
+  "range_start": "0x8017AE20",
+  "range_end": "0x8017AF64",
+  "range_accounting": "The complete contiguous 0x144-byte range is represented by three independent honest-C translation units: fn_8017AE20 and fn_8017AF44 match at 100%, while fn_8017AE90 is an exact-size documented NonMatching attempt. There are no gaps, shared reconstructions, inline assembly, or unaccounted spans.",
+  "matched_bytes": 144,
+  "nonmatching_bytes": 180,
+  "functions": [
+    {"symbol":"fn_8017AE20","start":"0x8017AE20","end":"0x8017AE90","status":"Matching","size":112,"match_percent":100.0,"instructions_equal":"28/28","relocations_equal":"12/12","evidence":"reports/GEDE01/objdiff-fn_8017AE20-session-1227.json"},
+    {"symbol":"fn_8017AE90","start":"0x8017AE90","end":"0x8017AF44","status":"NonMatching","size":180,"match_percent":99.77778,"instructions_equal":"43/45","relocations_equal":"17/17","blocker":"Canonical GC/1.3 emits li r4,0 before li r3,0 for the two-zero fn_8017BA54 call, while retail emits li r3,0 before li r4,0; all other instructions and relocations agree.","evidence":"reports/GEDE01/objdiff-fn_8017AE90-session-1227.json"},
+    {"symbol":"fn_8017AF44","start":"0x8017AF44","end":"0x8017AF64","status":"Matching","size":32,"match_percent":100.0,"instructions_equal":"8/8","relocations_equal":"1/1","evidence":"reports/GEDE01/objdiff-fn_8017AF44-session-1227.json"}
+  ],
+  "next_target": "0x8017AF64"
+}

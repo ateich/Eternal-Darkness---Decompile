@@ -1474,6 +1474,17 @@ config.custom_build_rules = [
         "description": "EXTERNALIZE $in",
     },
     {
+        "name": "externalize_game_8017A9B8_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @6 lbl_806508A8 orig/GEDE01/sys/main.dol && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@6=lbl_806508A8 --remove-section=.sdata2 "
+            "--rename-section=.comment=.ignored $in "
+            "&& touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
         "name": "externalize_game_80179A18_zero",
         "command": (
             "python3 tools/externalize_elf_symbol.py $in @7 lbl_806508C0 orig/GEDE01/sys/main.dol && "
@@ -1948,6 +1959,11 @@ config.custom_build_steps = {
             "outputs": [f"build/{VERSION}/src/game/game_fn_80179904.externalized"],
             "rule": "externalize_game_80179904_bias",
             "inputs": [f"build/{VERSION}/src/game/game_fn_80179904.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8017A9B8.externalized"],
+            "rule": "externalize_game_8017A9B8_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8017A9B8.o"],
         },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_80179A18.externalized"],
@@ -7587,6 +7603,29 @@ config.libs = [
             Object(Matching, "game/game_fn_8017A574.c"),
             Object(NonMatching, "game/game_fn_8017A5A8.c"),
             Object(Matching, "game/game_fn_8017A630.c"),
+            Object(NonMatching, "game/game_fn_8017A65C.c"),
+            Object(Matching, "game/game_fn_8017A694.c"),
+            Object(Matching, "game/game_fn_8017A6D8.c"),
+            Object(Matching, "game/game_fn_8017A71C.c"),
+            Object(Matching, "game/game_fn_8017A750.c"),
+            Object(NonMatching, "game/game_fn_8017A7D4.c"),
+            Object(Matching, "game/game_fn_8017A9B8.c"),
+            Object(Matching, "game/game_fn_8017AB08.c"),
+            Object(Matching, "game/game_fn_8017ABA0.c"),
+            Object(Matching, "game/game_fn_8017ABE0.c"),
+            Object(NonMatching, "game/game_fn_8017AC20.c"),
+            Object(Matching, "game/game_fn_8017ACE0.c"),
+            Object(Matching, "game/game_fn_8017AD00.c"),
+            Object(Matching, "game/game_fn_8017AD7C.c"),
+            Object(Matching, "game/game_fn_8017AE0C.c"),
+            Object(Matching, "game/game_fn_8017AE20.c"),
+            Object(NonMatching, "game/game_fn_8017AE90.c"),
+            Object(Matching, "game/game_fn_8017AF44.c"),
+            Object(Matching, "game/game_fn_8017AF64.c"),
+            Object(Matching, "game/game_fn_8017AF78.c"),
+            Object(Matching, "game/game_fn_8017AF90.c"),
+            Object(Matching, "game/game_fn_8017B074.c"),
+            Object(Matching, "game/game_fn_8017B0C8.c"),
         ],
     },
     {
