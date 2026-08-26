@@ -1,0 +1,59 @@
+{
+  "session": "session-1290-remediation-3",
+  "scope": "Review-only verification of the session-1290 consolidation corrections; no frontier advance or source change",
+  "build": {
+    "command": ".tools/bin/ninja -f build.ninja",
+    "result": "success",
+    "dol_path": "build/GEDE01/main.dol",
+    "dol_size": 3156384,
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "retail_path": "orig/GEDE01/sys/main.dol",
+    "retail_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "byte_compare": "equal"
+  },
+  "affected_objects": [
+    {
+      "unit": "main/game/game_fn_80109EEC",
+      "symbol": "fn_80109EEC",
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80109EEC fn_80109EEC -o reports/GEDE01/objdiff-game_fn_80109EEC-session-1290-remediation-3.json --format json-pretty -c function_reloc_diffs=name_address",
+      "result": {
+        "section": ".text",
+        "target_bytes": 180,
+        "generated_bytes": 180,
+        "match_percent": 100.0,
+        "instructions": 45,
+        "instruction_diff_nodes": 0,
+        "relocation_diff_nodes": 0
+      },
+      "fresh_report_sha256": "6d4d1dab742ffe6e7cb3b2934ec0fae82e54180143d8de6e709c83b929f5bcc1",
+      "retained_report": "reports/GEDE01/objdiff-game_fn_80109EEC-session-1290-remediation-1.json",
+      "retained_report_sha256": "6d4d1dab742ffe6e7cb3b2934ec0fae82e54180143d8de6e709c83b929f5bcc1",
+      "retention": "Fresh output was byte-identical to the retained report; the redundant remediation-3 output was not committed"
+    },
+    {
+      "unit": "main/game/game_data_8023A278",
+      "symbol": "lbl_8023A278",
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_data_8023A278 -o reports/GEDE01/objdiff-game_data_8023A278-session-1290-remediation-3.json --format json-pretty -c function_reloc_diffs=name_address",
+      "result": {
+        "section": ".rodata",
+        "target_bytes": 32,
+        "generated_bytes": 32,
+        "match_percent": 100.0,
+        "data_diff_nodes": 0,
+        "relocation_diff_nodes": 0
+      },
+      "fresh_report_sha256": "42214eda6218cb9ec2b0542f3bed7714fc5d73b6195748b749a807d8df16f82f",
+      "retained_report": "reports/GEDE01/objdiff-game_data_8023A278-session-1290-remediation-2.json",
+      "retained_report_sha256": "42214eda6218cb9ec2b0542f3bed7714fc5d73b6195748b749a807d8df16f82f",
+      "retention": "Fresh output was byte-identical to the retained report; the redundant remediation-3 output was not committed"
+    }
+  ],
+  "consolidation_state": {
+    "report": "reports/GEDE01/nonmatching-100-percent-consolidation-session-1290.json",
+    "progress": "reports/GEDE01/progress.json",
+    "next_target": "0x8018183C",
+    "frontier_advanced": false,
+    "progress_updated": false
+  },
+  "deleted_duplicate": "reports/GEDE01/objdiff-game_fn_80109EEC-session-1290-remediation-2.json"
+}

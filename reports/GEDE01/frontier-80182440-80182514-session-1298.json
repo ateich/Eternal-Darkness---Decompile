@@ -1,0 +1,34 @@
+{
+  "session_id": "session-1298",
+  "range_start": "0x80182440",
+  "range_end": "0x80182514",
+  "next_target": "0x80182514",
+  "matched_bytes": 8,
+  "nonmatching_bytes": 204,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "symbol": "fn_80182440",
+      "start": "0x80182440",
+      "end": "0x80182448",
+      "size": 8,
+      "status": "Matching",
+      "objdiff_percent": 100.0,
+      "relocations": "0/0 equal"
+    },
+    {
+      "symbol": "fn_80182448",
+      "start": "0x80182448",
+      "end": "0x80182514",
+      "size": 204,
+      "status": "NonMatching",
+      "objdiff_percent": 94.90196,
+      "relocations": "13/14 offsets equal; all 14 targets and types retained",
+      "divergence": "Canonical GC/1.3 schedules the lbl_806509B8 lfs after the object count and callback stores, while retail hoists that load immediately before both stores; the surrounding size, register allocation and control flow agree."
+    }
+  ],
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "full_build": "passed",
+  "assembly_added": false,
+  "shared_reconstructions": false
+}
