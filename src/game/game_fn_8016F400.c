@@ -17,8 +17,8 @@ extern double fn_8016A694(void*, int);
 extern void* fn_8016A784(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void fn_80179DB0(Vec3*, Vec3s*);
-extern void* fn_80201814(int);
-extern void* fn_80201BC8(void*);
+extern void *fn_80201814();
+extern void *fn_80201BC8();
 extern void fn_8011F0E8(void*, Vec3*);
 extern const char lbl_8024FF00[];
 

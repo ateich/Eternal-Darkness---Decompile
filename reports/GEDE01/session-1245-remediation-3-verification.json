@@ -1,0 +1,82 @@
+{
+  "session_id": "session-1245-remediation-3",
+  "scope": "review remediation only; frontier unchanged",
+  "build_command": ".tools/bin/ninja",
+  "build_result": "success",
+  "dol_path": "build/GEDE01/main.dol",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "expected_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "hash_matches": true,
+  "objdiff_config": "function_reloc_diffs=name_address",
+  "affected_functions": [
+    {
+      "symbol": "fn_8017C1C8",
+      "evidence": "reports/GEDE01/objdiff-fn_8017C1C8-session-1245-remediation-3.json",
+      "evidence_sha256": "f3d0ff53454b9940e7edd9f756d4a5e54156c0ba6c0672be36e6f5985e0eda8a",
+      "retail_bytes": 232,
+      "generated_bytes": 228,
+      "objdiff_percent": 89.13793,
+      "status": "NonMatching",
+      "instruction_differences": {
+        "total": 19,
+        "DIFF_ARG_MISMATCH": 13,
+        "DIFF_DELETE": 3,
+        "DIFF_INSERT": 2,
+        "DIFF_REPLACE": 1
+      },
+      "relocation_bearing_instructions_equal": "18/22",
+      "elf_relocations_equal": "11/13"
+    },
+    {
+      "symbol": "fn_8017C2B0",
+      "evidence": "reports/GEDE01/objdiff-fn_8017C2B0-session-1245-remediation-3.json",
+      "evidence_sha256": "0d892858181cdf9a0870d772f50412f769b0e3ccfea3148ceafedce619d9fc45",
+      "retail_bytes": 124,
+      "generated_bytes": 124,
+      "objdiff_percent": 100.0,
+      "status": "Matching",
+      "relocation_bearing_instructions_equal": "5/5",
+      "elf_relocations_equal": "3/3"
+    }
+  ],
+  "historical_comparison": {
+    "snapshot_commit": "458bd1ae6c4d3542a9148a1ff50be7a21148ccab",
+    "fn_8017C1C8_objdiff_percent": 93.586205,
+    "fn_8017C1C8_instruction_differences": {
+      "total": 11,
+      "DIFF_ARG_MISMATCH": 8,
+      "DIFF_DELETE": 2,
+      "DIFF_INSERT": 1,
+      "DIFF_REPLACE": 0
+    },
+    "fn_8017C1C8_relocation_bearing_instructions_equal": "16/22",
+    "correction": "The historical 20/22 annotation was wrong: six of the 22 annotated instructions carry DIFF_* markers, leaving 16 equal."
+  },
+  "commit_input_equivalence_check": {
+    "commit": "f962f0894d35f192ae82543428858edf13fa619a",
+    "tracked_build_inputs_equal_to_head": true,
+    "differing_paths_scope": "reports/GEDE01/*.json only",
+    "head_full_build_result": "success",
+    "head_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "isolated_build_claimed": false,
+    "correction": "The earlier isolated rerun retained no object hash, build-tree path, or log, so its objdiff copy is not treated as isolated-build evidence. Its failure is explained by the pre-existing non-idempotent externalize_game_8017718C_bias rule, which externalizes @9 and renames that symbol in the input object itself; rerunning the rule against the mutated object necessarily reports @9 absent. This does not establish a defect in f962f089."
+  },
+  "aggregate_reports": {
+    "default": {
+      "path": "reports/GEDE01/session-1245-remediation-3-objdiff.json",
+      "sha256": "08274c3a29725507c69f04569e4232fdfe21db86df5c351e7eedfa5e39f2290d",
+      "matching_code_bytes": 523264,
+      "matching_functions": 3345
+    },
+    "relocation_strict": {
+      "path": "reports/GEDE01/session-1245-remediation-3-reloc-strict.json",
+      "sha256": "432391ed5e1d73b7316359fdec5a109096907c94afa6d141cb2387e6b598fe62",
+      "matching_code_bytes": 521400,
+      "matching_functions": 3339
+    }
+  },
+  "frontier": {
+    "next_target": "0x8017C32C",
+    "retained_debt": "fn_8017C1C8"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "session_id": "session-1248",
+  "range_start": "0x8017C810",
+  "range_end": "0x8017C8E0",
+  "next_target": "0x8017C8E0",
+  "matched_bytes": 0,
+  "nonmatching_bytes": 208,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "name": "fn_8017C810",
+      "start": "0x8017C810",
+      "end": "0x8017C8E0",
+      "size": 208,
+      "status": "NonMatching",
+      "match_percent": 99.51923,
+      "target_size": 208,
+      "generated_size": 208,
+      "relocations_equal": "9/9",
+      "blocker": "Canonical GC/1.3 selects r0 instead of retail r4 for the switch discriminator load and four comparisons. Review remediation 1 switched directly on request->result without a local hoist; the generated 208-byte object and five-instruction mismatch set were identical, disproving the local-hoist hypothesis."
+    }
+  ],
+  "fallback_attempt": {
+    "name": "fn_8017C8E0",
+    "match_percent": 99.545456,
+    "registered": false,
+    "owned": false,
+    "reason_removed": "Same r0 versus retail r4 switch-discriminator allocation; removed to respect the one-new-NonMatching limit and not replayed during remediation."
+  },
+  "remediation_1_experiment": {
+    "hypothesis": "Switching directly on request->result, without a hoisted discriminator local, may preserve the value in retail r4.",
+    "result": "Falsified: canonical GC/1.3 generated the same 208-byte fn_8017C810 object at 99.51923%, with r0 still used at offsets 0x14, 0x18, 0x24, 0x30 and 0x3C while retail uses r4.",
+    "type_cleanup": "Removed the unsupported RequestResult enum from fn_8017C810 and fn_8017C724; plain int and direct-member switch forms are codegen-neutral.",
+    "next_requirement": "Keep next_target at 0x8017C8E0, but require a genuinely different register-allocation hypothesis before retrying or registering that function."
+  }
+}

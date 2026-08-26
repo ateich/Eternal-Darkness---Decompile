@@ -3,8 +3,8 @@ typedef unsigned int u32;
 extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
-extern void* fn_80201814(int);
-extern void* fn_80201BC8(void);
+extern void *fn_80201814();
+extern void *fn_80201BC8();
 extern void fn_8012C62C(void*, int, u32*, u32*, u32*, int);
 extern const char lbl_8024FF00[];
 extern const u32 lbl_80651CB0;
@@ -24,7 +24,7 @@ int fn_8017583C(void* state)
         return 0;
     }
 
-    runtime = fn_80201814(fn_8016A694(state, 1));
+    runtime = fn_80201814((int)fn_8016A694(state, 1));
     if (runtime != 0) {
         object = fn_80201BC8();
         third = lbl_80651CB8;

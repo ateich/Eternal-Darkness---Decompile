@@ -1,0 +1,50 @@
+{
+  "session_id": "session-1249-remediation-1",
+  "scope": "Review corrections only; frontier unchanged at 0x8017C964",
+  "build": {
+    "command": ".tools/bin/ninja",
+    "status": "passed",
+    "dol_path": "build/GEDE01/main.dol",
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+  },
+  "canonical_function": {
+    "name": "fn_8017C8E0",
+    "objdiff_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8017C8E0 fn_8017C8E0 -o reports/GEDE01/objdiff-fn_8017C8E0-session-1249-remediation-1.json --format json-pretty -c function_reloc_diffs=name_address",
+    "target_bytes": 132,
+    "generated_bytes": 132,
+    "target_instructions": 33,
+    "generated_instructions": 33,
+    "match_percent": 99.545456,
+    "instruction_word_differences": [
+      {"offset": "0x14", "retail": "lwz r4, 8(r3)", "generated": "lwz r0, 8(r3)"},
+      {"offset": "0x18", "retail": "cmpwi r4, 0", "generated": "cmpwi r0, 0"},
+      {"offset": "0x24", "retail": "cmpwi r4, -1", "generated": "cmpwi r0, -1"}
+    ],
+    "control_flow": "identical",
+    "relocations": {
+      "comparison": "7/7 equal by offset, type, symbol and addend",
+      "readelf_command": "readelf -r build/GEDE01/obj/game/game_fn_8017C8E0.o && readelf -r build/GEDE01/src/game/game_fn_8017C8E0.o",
+      "records": [
+        {"offset": "0x38", "type": "R_PPC_REL24", "symbol": "fn_8017B344", "addend": 0},
+        {"offset": "0x40", "type": "R_PPC_REL24", "symbol": "fn_8017B3C8", "addend": 0},
+        {"offset": "0x48", "type": "R_PPC_REL24", "symbol": "fn_8017B35C", "addend": 0},
+        {"offset": "0x4C", "type": "R_PPC_REL24", "symbol": "fn_8017BA54", "addend": 0},
+        {"offset": "0x5E", "type": "R_PPC_ADDR16_HA", "symbol": "lbl_80251020", "addend": 0},
+        {"offset": "0x62", "type": "R_PPC_ADDR16_LO", "symbol": "lbl_80251020", "addend": 0},
+        {"offset": "0x64", "type": "R_PPC_REL24", "symbol": "fn_8017BA60", "addend": 0}
+      ]
+    }
+  },
+  "hypothesis": {
+    "source_spelling": "volatile int discriminator = request->result; switch (discriminator)",
+    "purpose": "Test whether forcing a distinct automatic storage lifetime changes allocation from canonical r0 to retail r4",
+    "result": "falsified",
+    "generated_bytes": 140,
+    "match_percent": 93.30303,
+    "raw_objdiff": "reports/GEDE01/objdiff-fn_8017C8E0-volatile-discriminator-hypothesis-session-1249-remediation-1.json"
+  },
+  "aggregate_reports": {
+    "default": "reports/GEDE01/session-1249-remediation-1-objdiff.json",
+    "relocation_strict": "reports/GEDE01/session-1249-remediation-1-reloc-strict.json"
+  }
+}

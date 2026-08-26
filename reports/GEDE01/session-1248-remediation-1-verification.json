@@ -1,0 +1,73 @@
+{
+  "session_id": "session-1248-remediation-1",
+  "scope": "Review remediation only; no frontier advancement or new function registration.",
+  "build": {
+    "command": ".tools/bin/ninja",
+    "result": "passed",
+    "dol_path": "build/GEDE01/main.dol",
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "expected_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "hash_equal": true
+  },
+  "report_regeneration": {
+    "command": ".tools/bin/ninja build/GEDE01/report.json",
+    "path": "build/GEDE01/report.json",
+    "sha256": "34c239d232e44734d391f2c9c204abb18d967c454103670ec217942fa5aa8c3e",
+    "identical_to_fresh_default_report": true,
+    "stale_session_1247_report_replaced": true
+  },
+  "aggregate_reports": {
+    "default": {
+      "path": "reports/GEDE01/session-1248-remediation-1-objdiff.json",
+      "sha256": "34c239d232e44734d391f2c9c204abb18d967c454103670ec217942fa5aa8c3e",
+      "total_objects": 4960,
+      "matching_objects": 3583,
+      "matching_functions": 3350,
+      "matching_code_bytes": 524280,
+      "linked_code_bytes": 524068
+    },
+    "relocation_strict": {
+      "command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1248-remediation-1-reloc-strict.json -f json -c function_reloc_diffs=name_address",
+      "path": "reports/GEDE01/session-1248-remediation-1-reloc-strict.json",
+      "sha256": "44659ca41c507d05dde89ea18e31dc368ab81c8085ab4832a184c6da0e038772",
+      "total_objects": 4960,
+      "matching_objects": 3583,
+      "matching_functions": 3344,
+      "matching_code_bytes": 522416,
+      "linked_code_bytes": 524068
+    }
+  },
+  "focused_experiment": {
+    "hypothesis": "A direct switch on request->result without a hoisted local may keep the discriminator in retail r4.",
+    "source_change": "Both affected functions now use an honest int result field and switch directly on request->result; the unsupported RequestResult enum and hoisted local were removed.",
+    "result": "Falsified. Canonical GC/1.3 emitted the same instruction streams as before, including r0 for the discriminator; neither score nor mismatch set changed.",
+    "fn_8017C810": {
+      "path": "reports/GEDE01/objdiff-fn_8017C810-session-1248-remediation-1.json",
+      "sha256": "96a9e6daa2ccf6f004bffd06d35b004a0a020285d2bfe95ffce28c20ccffafc6",
+      "target_size": 208,
+      "generated_size": 208,
+      "match_percent": 99.51923,
+      "relocations_equal": "9/9",
+      "mismatch_offsets": ["0x14", "0x18", "0x24", "0x30", "0x3C"],
+      "mismatch": "Retail uses r4 and canonical uses r0 for the load and four comparisons."
+    },
+    "fn_8017C724": {
+      "path": "reports/GEDE01/objdiff-fn_8017C724-session-1248-remediation-1.json",
+      "sha256": "ed2005cfe7a544bab2207d3f1aa354d7511c762718a4f36e498f6dc05e2b1851",
+      "target_size": 236,
+      "generated_size": 236,
+      "match_percent": 99.40678,
+      "relocations_equal": "14/14",
+      "mismatch_offsets": ["0x14", "0x18", "0x24", "0x30", "0x3C", "0xC4", "0xC8"],
+      "mismatch": "The same five discriminator register differences remain, plus the existing reversed zero-argument setup moves."
+    }
+  },
+  "frontier": {
+    "accepted_frontier": "0x8017C810",
+    "candidate_frontier": "0x8017C8E0",
+    "next_target": "0x8017C8E0",
+    "advanced": false,
+    "matched_bytes_added": 0,
+    "next_requirement": "Do not replay hoisted-local or direct-member switch forms; test and record a genuinely different register-allocation hypothesis before retrying fn_8017C8E0."
+  }
+}

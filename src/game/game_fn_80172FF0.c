@@ -15,7 +15,7 @@ extern double fn_8016A694(void*, int);
 extern void fn_8016A970(void*, void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern ShortVector* fn_8016BA38(int);
-extern void* fn_80201814(int);
+extern void *fn_80201814();
 extern void fn_80201E78(FloatVector*, void*);
 extern const char lbl_8024FF00[];
 

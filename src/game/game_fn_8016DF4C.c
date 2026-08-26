@@ -1,7 +1,7 @@
 extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_8016A830(void*, double);
-extern void* fn_800F5C54(double);
+extern unsigned int fn_800F5C54(double);
 extern int fn_80047180(void);
 extern void* fn_80201B3C(void);
 extern void fn_802020B4(void*, int);
@@ -30,8 +30,8 @@ int fn_8016DF4C(void* state)
         optional = (int)fn_8016A694(state, 7);
     case 6:
         arg1 = (int)fn_8016A694(state, 1);
-        arg2 = fn_800F5C54(fn_8016A694(state, 2));
-        arg3 = fn_800F5C54(fn_8016A694(state, 3));
+        arg2 = (void *)fn_800F5C54(fn_8016A694(state, 2));
+        arg3 = (void *)fn_800F5C54(fn_8016A694(state, 3));
         selector = (int)fn_8016A694(state, 4);
         arg5 = (int)fn_8016A694(state, 5);
         arg6 = (int)fn_8016A694(state, 6);

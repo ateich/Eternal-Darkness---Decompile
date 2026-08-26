@@ -7,8 +7,8 @@ typedef struct Color {
 extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
-extern void* fn_80201814(int);
-extern void* fn_80201BC8(void);
+extern void *fn_80201814();
+extern void *fn_80201BC8();
 extern void fn_8012C62C(void*, int, Color*, Color*, Color*, int);
 extern const char lbl_8024FF00[];
 
@@ -30,7 +30,7 @@ int fn_801755FC(void* state)
         return 0;
     }
 
-    runtime = fn_80201814(fn_8016A694(state, 1));
+    runtime = fn_80201814((int)fn_8016A694(state, 1));
     if (runtime != 0) {
         object = fn_80201BC8();
         if (object != 0) {

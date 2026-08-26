@@ -1,8 +1,8 @@
 extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
-extern void* fn_80201814(int);
-extern void* fn_80201BC8(void*);
+extern void *fn_80201814();
+extern void *fn_80201BC8();
 extern void fn_8012C478(void*, int, int);
 extern const char lbl_8024FF00[];
 
@@ -15,7 +15,7 @@ int fn_80174C34(void* state)
         return 0;
     }
 
-    object = fn_80201814(fn_8016A694(state, 1));
+    object = fn_80201814((int)fn_8016A694(state, 1));
     if (object != 0) {
         object = fn_80201BC8(object);
         if (object != 0) {

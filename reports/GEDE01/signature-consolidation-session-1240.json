@@ -1,0 +1,83 @@
+{
+  "session_id": "session-1240",
+  "kind": "signature-consolidation",
+  "starting_target": "0x8017BBD0",
+  "ending_next_target": "0x8017BBD0",
+  "frontier_changed": false,
+  "accounting": {
+    "matched_code_bytes_added": 0,
+    "matching_functions_added": 0,
+    "nonmatching_code_bytes_added": 0,
+    "nonmatching_data_bytes_added": 0,
+    "nonmatching_functions_added": 0,
+    "functions_matched_this_session": 0
+  },
+  "progress_unchanged": {
+    "sha1": "2d80397b49e68094c0e1fd629d05066bcd57ab43",
+    "matching_code_bytes": 521868,
+    "matching_functions": 3339,
+    "relocation_strict_matching_code_bytes": 520004,
+    "relocation_strict_matching_functions": 3333,
+    "next_target": "0x8017BBD0",
+    "next_gate_rewritten": false
+  },
+  "symbols": [
+    {"order": 1, "symbol": "fn_80201814", "pre_declarations": 394, "canonical": "void *fn_80201814()", "files_changed": 42, "evidence": "matching callers and recovered callee consume an object id in r3 and return an object pointer in r3; explicit integer conversions preserve four MWCC double-to-id call sites"},
+    {"order": 2, "symbol": "fn_80201BC8", "pre_declarations": 354, "canonical": "void *fn_80201BC8()", "files_changed": 28, "evidence": "matching callers and recovered callee consume an object pointer in r3 where supplied and return the pointer field at offset 0x34 in r3"},
+    {"order": 3, "symbol": "fn_8020123C", "pre_declarations": 173, "canonical": "unsigned long long fn_8020123C()", "files_changed": 2, "evidence": "matching call sites supply four GPR arguments and consume the established 64-bit r3-r4 result"},
+    {"order": 4, "symbol": "fn_80201B44", "pre_declarations": 119, "canonical": "int fn_80201B44()", "files_changed": 1, "evidence": "matching callers consume a signed object id in r3"},
+    {"order": 5, "symbol": "fn_80156938", "pre_declarations": 90, "canonical": "void *fn_80156938(Object *)", "files_changed": 0, "declaration_state": "the three pre-existing void * parameter prototypes are restored; 87 older declarations still use unspecified parameters and remain reported as ABI-divergent", "evidence": "the in-tree definition consumes Object * in r3 and returns the pointer field at offset 0x38 in r3"},
+    {"order": 6, "symbol": "fn_80201EB8", "pre_declarations": 89, "canonical": "int fn_80201EB8()", "files_changed": 1, "evidence": "matching callers consume the scalar type value returned in r3"},
+    {"order": 7, "symbol": "fn_801E8328", "pre_declarations": 86, "canonical": "int fn_801E8328()", "files_changed": 1, "evidence": "matching callers supply an operation selector and operation-specific GPR payload and consume status in r3"},
+    {"order": 8, "symbol": "fn_800F5C54", "pre_declarations": 83, "canonical": "unsigned int fn_800F5C54(double)", "files_changed": 1, "declaration_state": "all 83 declarations carry the definition-matched double parameter", "evidence": "the in-tree definition consumes double in f1 and returns an unsigned 32-bit identifier in r3; the one live-f1 adapter is now an explicit nested call and remains byte-identical"},
+    {"order": 9, "symbol": "fn_800FBFB0", "pre_declarations": 72, "canonical": "unsigned int fn_800FBFB0(void)", "files_changed": 3, "declaration_state": "the pre-existing strict void prototype is restored and both formerly argument-passing callers now carry it; 69 older declarations still use unspecified parameters and remain reported as ABI-divergent", "evidence": "the in-tree definition takes no parameters and returns an unsigned random word in r3; 64 pre-existing self-shadowing macros provide signed-call semantics, while the explicit cast in fn_8017718C covers only that caller"},
+    {"order": 10, "symbol": "fn_80201C24", "pre_declarations": 67, "canonical": "void *fn_80201C24()", "files_changed": 8, "evidence": "matching callers consume an object or context pointer returned in r3"}
+  ],
+  "audit": {
+    "tool": "tools/signature_audit.py",
+    "target_symbols_remaining_in_return_register_contradictions": 0,
+    "target_symbols_remaining_in_abi_divergent": 2,
+    "target_symbols_remaining_in_cosmetic": 0,
+    "repo_wide_ground_truth_contradictions": 442,
+    "target_symbols_in_ground_truth_contradictions": 0,
+    "scope_note": "zero is established only for return-register and ground-truth return-kind contradictions; unspecified parameter lists are not evidence of a resolved prototype and the two remaining target parameter disagreements are retained above",
+    "original_report": "reports/GEDE01/signature-audit-session-1240.json",
+    "remediation_report": "reports/GEDE01/signature-audit-session-1240-remediation-1.json"
+  },
+  "per_symbol_verification": {
+    "rebuilds": 10,
+    "all_rebuilds_succeeded": true,
+    "all_aggregate_objdiff_measures_equal_to_baseline": true,
+    "baseline_and_each_step": {
+      "matched_code_bytes": 520004,
+      "matched_functions": 3333,
+      "complete_code_bytes": 521656,
+      "complete_units": 3572
+    },
+    "previously_matching_objects_lost": 0,
+    "final_objdiff": "reports/GEDE01/signature-audit-session-1240-objdiff.json"
+  },
+  "remediation_1_verification": {
+    "build_command": ".tools/bin/ninja build/GEDE01/main.dol build/GEDE01/report.json",
+    "build_succeeded": true,
+    "objdiff_command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/signature-audit-session-1240-remediation-1-objdiff.json --format json -c function_reloc_diffs=name_address",
+    "affected_units_checked": 86,
+    "affected_units_at_100_percent": 77,
+    "affected_preexisting_nonmatching_units": 9,
+    "all_affected_unit_measures_and_function_results_equal_to_pre_remediation_baseline": true,
+    "aggregate_measures_equal_to_pre_remediation_baseline": true,
+    "matched_code_bytes": 520004,
+    "matched_functions": 3333,
+    "complete_code_bytes": 521656,
+    "complete_units": 3572,
+    "previously_matching_objects_lost": 0,
+    "objdiff": "reports/GEDE01/signature-audit-session-1240-remediation-1-objdiff.json",
+    "progress_json_changed": false,
+    "progress_json_sha1": "2d80397b49e68094c0e1fd629d05066bcd57ab43"
+  },
+  "dol": {
+    "path": "build/GEDE01/main.dol",
+    "sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "unchanged": true
+  }
+}

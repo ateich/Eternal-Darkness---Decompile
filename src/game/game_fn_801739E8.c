@@ -16,7 +16,7 @@ typedef struct Vec3 {
 extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
-extern int fn_800F5C54(double);
+extern unsigned int fn_800F5C54(double);
 extern int fn_8015C4A4(int, int);
 extern Vec3s* fn_80158ABC(int, int, void*);
 extern float fn_80173B6C(short*, float*);

@@ -1,0 +1,14 @@
+{
+  "session_id": "session-1241",
+  "range_start": "0x8017BBD0",
+  "range_end": "0x8017BD3C",
+  "next_target": "0x8017BD3C",
+  "matched_bytes": 108,
+  "nonmatching_code_bytes": 256,
+  "unaccounted_spans": [],
+  "functions": [
+    {"symbol":"fn_8017BBD0","address":"0x8017BBD0","size":256,"status":"NonMatching","match_percent":78.4375,"relocation_bearing_instructions":"22/22 semantically aligned","divergence":"Canonical MWCC emits a different branchless unsigned queue-index wrap idiom and resulting early r6-r11 register allocation; later entry stores and calls align.","evidence":"reports/GEDE01/objdiff-fn_8017BBD0-session-1241.json"},
+    {"symbol":"fn_8017BCD0","address":"0x8017BCD0","size":108,"status":"Matching","match_percent":100.0,"relocation_bearing_instructions_equal":"8/8","evidence":"reports/GEDE01/objdiff-fn_8017BCD0-session-1241.json"}
+  ],
+  "next_gate": "Attempt consecutive function at 0x8017BD3C toward the jumptable_8023BF28 data-ownership boundary; this declared report range has no unaccounted spans and explicitly accounts for fn_8017BBD0 as NonMatching codegen debt."
+}

@@ -1,7 +1,7 @@
 extern int fn_8016A598(void*);
 extern void fn_80163BB4(void*, const char*, ...);
 extern double fn_8016A694(void*, int);
-extern int fn_80201814(int);
+extern void *fn_80201814();
 extern void* fn_80204A8C(void);
 extern void fn_80204CE4(int, void*);
 extern int fn_80201C2C(int);
@@ -26,14 +26,14 @@ int fn_8016CEF0(void* state)
     third = (int)fn_8016A694(state, 3);
 
     if (first == -2) {
-        second = fn_80201814(second);
+        second = (int)fn_80201814(second);
         if (second != 0) {
             fn_80204CE4(second, fn_80204A8C());
         }
     } else {
-        first = fn_80201814(first);
+        first = (int)fn_80201814(first);
         if (first != 0) {
-            second = fn_80201814(second);
+            second = (int)fn_80201814(second);
             if (second != 0) {
                 int value = fn_80201C2C(first);
                 if (value == 0) {

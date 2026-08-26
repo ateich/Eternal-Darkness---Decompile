@@ -1,0 +1,36 @@
+{
+  "session_id": "session-1245",
+  "range_start": "0x8017C1C8",
+  "range_end": "0x8017C32C",
+  "accepted_frontier": "0x8017C32C",
+  "next_target": "0x8017C32C",
+  "matched_bytes": 124,
+  "nonmatching_bytes": 232,
+  "functions": [
+    {
+      "symbol": "fn_8017C1C8",
+      "range": "0x8017C1C8-0x8017C2B0",
+      "status": "NonMatching",
+      "retail_bytes": 232,
+      "generated_bytes": 228,
+      "objdiff_percent": 89.13793,
+      "relocation_bearing_instructions_equal": "18/22",
+      "elf_relocations_equal": "11/13 equal by offset, type, target and addend",
+      "blocker": "The typed u64 values[index] form is the retained layout-faithful lead: it emits retail's 0x34 then 0x30 store order and improves objdiff relocation/data-flow annotation equality from the corrected historical 16/22 to 18/22, but lowers the score from the raw-cast form's 93.586205% to 89.137930%. Instruction divergence rises from 11 differences (8 DIFF_ARG_MISMATCH, 2 DIFF_DELETE, 1 DIFF_INSERT) to 19 (13 DIFF_ARG_MISMATCH, 3 DIFF_DELETE, 2 DIFF_INSERT, 1 DIFF_REPLACE) because the prologue, register allocation, request-field accesses and final fn_8017AF78 call offset regress. Preserve the discarded raw-cast result as a future matching lead while retaining the typed layout."
+    },
+    {
+      "symbol": "fn_8017C2B0",
+      "range": "0x8017C2B0-0x8017C32C",
+      "status": "Matching",
+      "retail_bytes": 124,
+      "generated_bytes": 124,
+      "objdiff_percent": 100.0,
+      "relocation_bearing_instructions_equal": "5/5",
+      "elf_relocations_equal": "3/3"
+    }
+  ],
+  "unaccounted_spans": [],
+  "frontier_note": "The full declared range is independently owned and accounted. Following the established chain convention for explicitly recorded NonMatching debt, the dispatch frontier advances to 0x8017C32C while fn_8017C1C8 remains unresolved debt; this accounting correction does not claim its 232 bytes as matched.",
+  "type_layout_correction": "Both translation units now use identical Request and GlobalState declarations with plain u8 Request.value, matching the five established sibling declarations. GlobalState offset 0x30 is retained as the recovered u64 values[2] member, and fn_8017C1C8 writes values[index] directly instead of bypassing it with raw byte-offset casts.",
+  "commit_gate_correction": "The tracked build inputs at f962f089 and HEAD are identical: git diff f962f089..HEAD changes only reports/GEDE01 JSON and changes nothing under src/, config/, or configure.py. A fresh complete rebuild at HEAD from those identical inputs succeeds and produces the exact retail DOL SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f. The earlier isolated rerun did not establish a commit defect: externalize_game_8017718C_bias externalizes @9 and then renames @9 to lbl_806506A8 in the input object itself, so the rule is intentionally mutating and cannot be rerun against its already-externalized output. No provenance for the purported isolated object was retained, so no isolated-build claim is made; the full-buildable statement is supported by the input identity and fresh successful HEAD rebuild."
+}

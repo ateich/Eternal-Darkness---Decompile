@@ -19,7 +19,7 @@ typedef struct RuntimeInfo {
 extern RuntimeInfo* fn_8015C28C(int);
 extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
-extern u32 fn_800F5C54(double);
+extern unsigned int fn_800F5C54(double);
 extern void fn_8016A830(void*, double);
 extern void fn_8016A7D8(void*);
 extern void fn_80163BB4(void*, const char*, ...);

@@ -1,0 +1,55 @@
+{
+  "session_id": "session-1245-remediation-2",
+  "scope": "review remediation only; frontier unchanged",
+  "build_command": ".tools/bin/ninja",
+  "build_result": "success",
+  "dol_path": "build/GEDE01/main.dol",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "expected_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "hash_matches": true,
+  "objdiff_config": "function_reloc_diffs=name_address",
+  "affected_functions": [
+    {
+      "symbol": "fn_8017C1C8",
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8017C1C8 fn_8017C1C8 -o reports/GEDE01/objdiff-fn_8017C1C8-session-1245-remediation-2.json --format json -c function_reloc_diffs=name_address",
+      "evidence": "reports/GEDE01/objdiff-fn_8017C1C8-session-1245-remediation-2.json",
+      "evidence_sha256": "f3d0ff53454b9940e7edd9f756d4a5e54156c0ba6c0672be36e6f5985e0eda8a",
+      "retail_bytes": 232,
+      "generated_bytes": 228,
+      "objdiff_percent": 89.13793,
+      "status": "NonMatching",
+      "relocation_bearing_instructions_equal": "18/22",
+      "elf_relocations_equal": "11/13"
+    },
+    {
+      "symbol": "fn_8017C2B0",
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8017C2B0 fn_8017C2B0 -o reports/GEDE01/objdiff-fn_8017C2B0-session-1245-remediation-2.json --format json -c function_reloc_diffs=name_address",
+      "evidence": "reports/GEDE01/objdiff-fn_8017C2B0-session-1245-remediation-2.json",
+      "evidence_sha256": "0d892858181cdf9a0870d772f50412f769b0e3ccfea3148ceafedce619d9fc45",
+      "retail_bytes": 124,
+      "generated_bytes": 124,
+      "objdiff_percent": 100.0,
+      "status": "Matching",
+      "relocation_bearing_instructions_equal": "5/5",
+      "elf_relocations_equal": "3/3"
+    }
+  ],
+  "aggregate_reports": {
+    "default": {
+      "path": "reports/GEDE01/session-1245-remediation-2-objdiff.json",
+      "sha256": "08274c3a29725507c69f04569e4232fdfe21db86df5c351e7eedfa5e39f2290d",
+      "matching_code_bytes": 523264,
+      "matching_functions": 3345
+    },
+    "relocation_strict": {
+      "path": "reports/GEDE01/session-1245-remediation-2-reloc-strict.json",
+      "sha256": "432391ed5e1d73b7316359fdec5a109096907c94afa6d141cb2387e6b598fe62",
+      "matching_code_bytes": 521400,
+      "matching_functions": 3339
+    }
+  },
+  "frontier": {
+    "next_target": "0x8017C32C",
+    "retained_debt": "fn_8017C1C8"
+  }
+}

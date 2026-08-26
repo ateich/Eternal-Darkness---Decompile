@@ -1,9 +1,9 @@
 extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
-extern int fn_800F5C54(double);
+extern unsigned int fn_800F5C54(double);
 extern void fn_80163BB4(void*, const char*, ...);
-extern void* fn_80201814(int);
-extern void* fn_80201BC8(void*);
+extern void *fn_80201814();
+extern void *fn_80201BC8();
 extern void* fn_801294DC(void*, int, int, int);
 extern void fn_8016A970(void*, void*, int);
 extern const char lbl_8024FF00[];

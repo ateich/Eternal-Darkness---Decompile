@@ -1,0 +1,48 @@
+{
+  "session_id": "session-1249",
+  "range_start": "0x8017C8E0",
+  "range_end": "0x8017C964",
+  "next_target": "0x8017C964",
+  "matched_bytes": 0,
+  "nonmatching_bytes": 132,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "name": "fn_8017C8E0",
+      "start": "0x8017C8E0",
+      "end": "0x8017C964",
+      "size": 132,
+      "status": "NonMatching",
+      "match_percent": 99.545456,
+      "target_size": 132,
+      "generated_size": 132,
+      "relocations_equal": "7/7",
+      "blocker": "Exactly three instruction words differ: at +0x14 retail lwz r4,8(r3) versus canonical lwz r0,8(r3), at +0x18 retail cmpwi r4,0 versus canonical cmpwi r0,0, and at +0x24 retail cmpwi r4,-1 versus canonical cmpwi r0,-1. The body, size, control-flow destinations and all seven relocations agree."
+    }
+  ],
+  "fallback_attempt": {
+    "name": "fn_8017C964",
+    "registered": false,
+    "owned": false,
+    "result": "Removed after reproducing the 168-byte control-flow shape but encountering the same canonical r0 versus retail r4 discriminator allocation."
+  },
+  "prior_gate_remediation": {
+    "hypothesis": "Force the discriminator through a volatile automatic int before the switch, a materially different lifetime and storage hypothesis from the previously tested hoisted ordinary local and direct-member switch forms.",
+    "result": "Falsified. GC/1.3 still selects r0, creates a 0x20-byte frame instead of retail's 0x10-byte frame, inserts stw r0,8(r1) and lwz r0,8(r1), grows the function from 132 to 140 bytes, and scores 93.30303%.",
+    "generated_mismatch_set": [
+      "+0x00 frame allocation -0x10 versus -0x20",
+      "+0x08 saved LR slot +0x14 versus +0x24",
+      "+0x0C saved r31 slot +0x0C versus +0x1C",
+      "+0x14 discriminator load r4 versus r0",
+      "+0x18 and +0x1C generated-only stack store and reload",
+      "retail +0x18 versus generated +0x20 comparison register r4 versus r0",
+      "retail +0x24 versus generated +0x2C comparison register r4 versus r0",
+      "retail +0x70 versus generated +0x78 LR restore slot +0x14 versus +0x24",
+      "retail +0x74 versus generated +0x7C r31 restore slot +0x0C versus +0x1C",
+      "retail +0x7C versus generated +0x84 frame release +0x10 versus +0x20"
+    ],
+    "evidence": "reports/GEDE01/objdiff-fn_8017C8E0-volatile-discriminator-hypothesis-session-1249-remediation-1.json"
+  },
+  "session_timing_correction": "Session 1249 stopped about six minutes before its stated cutoff after one registered NonMatching function and one removed fallback. The committed session record provides no contemporaneous reason for that early stop, so remediation does not invent one.",
+  "next_gate": "Keep next_target at 0x8017C964, but suspend ordinary frontier throughput on this switch family. First run a dedicated r0-versus-r4 allocation investigation covering compiler flags and the discriminator's true source expression; do not register another same-family NonMatching TU as progress."
+}

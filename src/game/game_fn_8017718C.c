@@ -1,7 +1,7 @@
 extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0(void);
 extern void fn_8016A830(void*, double);
 extern const char lbl_8024FF00[];
 
@@ -16,7 +16,7 @@ int fn_8017718C(void* state)
     }
 
     divisor = (int)fn_8016A694(state, 1);
-    value = fn_800FBFB0() % divisor;
+    value = (int)fn_800FBFB0() % divisor;
     fn_8016A830(state, (double)value);
     return 1;
 }

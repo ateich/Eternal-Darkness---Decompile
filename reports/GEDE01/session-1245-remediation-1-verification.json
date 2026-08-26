@@ -1,0 +1,57 @@
+{
+  "session_id": "session-1245-remediation-1",
+  "historical_snapshot_commit": "458bd1ae6c4d3542a9148a1ff50be7a21148ccab",
+  "scope": "historical remediation-1 measurements; hashes identify blobs at the historical snapshot commit, not the later files at the same working-tree paths",
+  "build_command": ".tools/bin/ninja",
+  "build_result": "success",
+  "dol_path": "build/GEDE01/main.dol",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "expected_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "hash_matches": true,
+  "default_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1245-objdiff.json -f json",
+    "historical_path": "reports/GEDE01/session-1245-objdiff.json",
+    "historical_sha256": "ba3181c86668a66aa972e42e6501d3d66c0656481b68eba93a88e76ebbfcbac1",
+    "matching_code_bytes": 523264,
+    "matching_functions": 3345
+  },
+  "relocation_strict_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1245-reloc-strict.json -f json -c function_reloc_diffs=name_address",
+    "config": "function_reloc_diffs=name_address",
+    "historical_path": "reports/GEDE01/session-1245-reloc-strict.json",
+    "historical_sha256": "363e5d68390c8a21e58d7ebbed88a4bc3f9901381e3cc6511745b0e75ea57085",
+    "matching_code_bytes": 521400,
+    "matching_functions": 3339
+  },
+  "affected_functions": [
+    {
+      "symbol": "fn_8017C1C8",
+      "historical_evidence_path": "reports/GEDE01/objdiff-fn_8017C1C8-session-1245.json",
+      "historical_evidence_sha256": "8aa036784bca30e6a53b1c16daf57317e642147516714dfc063bb435e5bfc9bf",
+      "retail_bytes": 232,
+      "generated_bytes": 228,
+      "objdiff_percent": 93.586205,
+      "status": "NonMatching",
+      "relocation_bearing_instructions_equal": "16/22",
+      "original_incorrect_annotation": "20/22",
+      "correction_note": "The historical objdiff blob contains 22 relocation or synthetic R_PPC_NONE data-flow annotated instructions; six carry DIFF_* markers, so 16/22, not 20/22, are equal. This correction changes only the annotation and preserves the measurements and hashes from remediation 1.",
+      "elf_relocations_equal": "11/13"
+    },
+    {
+      "symbol": "fn_8017C2B0",
+      "historical_evidence_path": "reports/GEDE01/objdiff-fn_8017C2B0-session-1245.json",
+      "historical_evidence_sha256": "0d892858181cdf9a0870d772f50412f769b0e3ccfea3148ceafedce619d9fc45",
+      "retail_bytes": 124,
+      "generated_bytes": 124,
+      "objdiff_percent": 100.0,
+      "status": "Matching",
+      "relocation_bearing_instructions_equal": "5/5",
+      "elf_relocations_equal": "3/3"
+    }
+  ],
+  "frontier": {
+    "next_target": "0x8017C32C",
+    "retained_debt": "fn_8017C1C8"
+  },
+  "audit_trail_note": "Remediation 2 changed fn_8017C1C8 source and regenerated the files that retain the session-1245 names. Its later 89.137930% measurements and hashes belong only in session-1245-remediation-2-verification.json; they are intentionally not substituted here."
+}

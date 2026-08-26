@@ -35,12 +35,12 @@ typedef struct SpawnedEffect {
 extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
-extern int fn_800F5C54(double);
+extern unsigned int fn_800F5C54(double);
 extern SpawnedEffect* fn_80149E04(void);
 extern void fn_80147E88(EffectDescriptor*);
 extern void fn_8014F4CC(EffectDescriptor*, SpawnedEffect*);
 extern void fn_8019B13C(EffectDescriptor*);
-extern void* fn_80201814(int);
+extern void *fn_80201814();
 extern void* fn_80155DB4(void);
 extern void* fn_80148300(void*, EffectDescriptor*, SpawnedEffect*);
 extern void fn_80149EB8(SpawnedEffect*);

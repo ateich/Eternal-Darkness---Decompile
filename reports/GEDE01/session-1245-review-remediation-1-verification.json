@@ -1,0 +1,77 @@
+{
+  "session_id": "session-1245-review-remediation-1",
+  "scope": "review remediation only; frontier unchanged",
+  "build_command": ".tools/bin/ninja",
+  "build_result": "success after complete source rebuild",
+  "dol_path": "build/GEDE01/main.dol",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "expected_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "hash_matches": true,
+  "commit_input_equivalence": {
+    "base_commit": "f962f0894d35f192ae82543428858edf13fa619a",
+    "head_before_remediation": "40fb5eea",
+    "git_diff_build_inputs_exit": 0,
+    "build_input_paths_checked": [
+      "src/",
+      "config/",
+      "configure.py"
+    ],
+    "differing_paths_scope": "reports/GEDE01/*.json only",
+    "conclusion": "f962f089 and the pre-remediation HEAD have identical tracked build inputs; the successful fresh HEAD rebuild therefore verifies those inputs as full-buildable. No isolated f962f089 build is claimed."
+  },
+  "externalization_rerun_diagnosis": {
+    "rule": "externalize_game_8017718C_bias",
+    "input_path": "build/GEDE01/src/game/game_fn_8017718C.o",
+    "fresh_externalized_input_sha256": "50ea1e35d9ad05f27e847c87dee44f1a77530f68fa9dedc9501c5abe72ee30d4",
+    "symbol_after_rule": "lbl_806506A8",
+    "original_symbol_after_rule_count": 0,
+    "cause": "The rule externalizes @9 and then objcopy renames @9 to lbl_806506A8 in the input object itself. A rerun against that mutated object cannot find @9; this is rule non-idempotency, not a commit defect."
+  },
+  "objdiff_config": "function_reloc_diffs=name_address",
+  "affected_functions": [
+    {
+      "symbol": "fn_8017C1C8",
+      "generated_object": "build/GEDE01/src/game/game_fn_8017C1C8.o",
+      "generated_object_sha256": "fc87eec1c15f248d6acda6eed2683afa4727959ad5497dcbbe494ea59b4e23e1",
+      "evidence": "reports/GEDE01/objdiff-fn_8017C1C8-session-1245-review-remediation-1.json",
+      "evidence_sha256": "f3d0ff53454b9940e7edd9f756d4a5e54156c0ba6c0672be36e6f5985e0eda8a",
+      "retail_bytes": 232,
+      "generated_bytes": 228,
+      "objdiff_percent": 89.13793,
+      "status": "NonMatching",
+      "relocation_bearing_instructions_equal": "18/22",
+      "elf_relocations_equal": "11/13"
+    },
+    {
+      "symbol": "fn_8017C2B0",
+      "generated_object": "build/GEDE01/src/game/game_fn_8017C2B0.o",
+      "generated_object_sha256": "5bcedc9b41b005202ff386c0387d85f74f293a77855cbc0961c66eb5acb769f7",
+      "evidence": "reports/GEDE01/objdiff-fn_8017C2B0-session-1245-review-remediation-1.json",
+      "evidence_sha256": "0d892858181cdf9a0870d772f50412f769b0e3ccfea3148ceafedce619d9fc45",
+      "retail_bytes": 124,
+      "generated_bytes": 124,
+      "objdiff_percent": 100.0,
+      "status": "Matching",
+      "relocation_bearing_instructions_equal": "5/5",
+      "elf_relocations_equal": "3/3"
+    }
+  ],
+  "aggregate_reports": {
+    "default": {
+      "path": "reports/GEDE01/session-1245-review-remediation-1-objdiff.json",
+      "sha256": "08274c3a29725507c69f04569e4232fdfe21db86df5c351e7eedfa5e39f2290d",
+      "matching_code_bytes": 523264,
+      "matching_functions": 3345
+    },
+    "relocation_strict": {
+      "path": "reports/GEDE01/session-1245-review-remediation-1-reloc-strict.json",
+      "sha256": "432391ed5e1d73b7316359fdec5a109096907c94afa6d141cb2387e6b598fe62",
+      "matching_code_bytes": 521400,
+      "matching_functions": 3339
+    }
+  },
+  "frontier": {
+    "next_target": "0x8017C32C",
+    "retained_debt": "fn_8017C1C8"
+  }
+}

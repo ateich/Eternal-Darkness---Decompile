@@ -4,7 +4,7 @@ typedef int s32;
 extern int fn_8016A598(void*);
 extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
-extern void* fn_800F5C54(double);
+extern unsigned int fn_800F5C54(double);
 extern u16 fn_800289A4(void*, s32, s32);
 extern void fn_801FA198(void*, void*, s32, s32, s32, s32, s32, s32, s32);
 extern char lbl_8023BEF8[];
@@ -24,7 +24,7 @@ s32 fn_8001CFB8(void* script)
         return 0;
     }
 
-    first = fn_800F5C54(fn_8016A694(script, 1));
+    first = (void *)fn_800F5C54(fn_8016A694(script, 1));
     second = (s32)fn_8016A694(script, 2);
     third = (s32)fn_8016A694(script, 3);
     fourth = (s32)fn_8016A694(script, 4);
