@@ -1,0 +1,150 @@
+{
+  "session_id": "session-1280",
+  "kind": "signature-consolidation",
+  "status": "partial-complete",
+  "rejected_commit": "57e6a78d",
+  "remediation": "1-of-3",
+  "starting_target": "0x801807B0",
+  "ending_next_target": "0x801807B0",
+  "frontier_changed": false,
+  "accounting": {
+    "matched_code_bytes_added": 0,
+    "matching_functions_added": 0,
+    "nonmatching_code_bytes_added": 0,
+    "nonmatching_functions_added": 0,
+    "functions_matched_this_session": 0,
+    "relocation_strict_matching_code_bytes": 532108,
+    "relocation_strict_matching_functions": 3445,
+    "total_code_bytes": 2300692,
+    "total_functions": 8216,
+    "nonmatching_code_bytes": 1768584,
+    "nonmatching_functions": 4771
+  },
+  "selection": {
+    "tool": "tools/signature_audit.py",
+    "policy": "Tree-wide union of return-register, ABI-divergent, and cosmetic disagreements, sorted by declaration count.",
+    "symbols": [
+      "fn_80156938",
+      "fn_800FBFB0",
+      "fn_80201B3C",
+      "fn_80128C28",
+      "fn_80201E78",
+      "fn_80128E30",
+      "fn_801A98F4",
+      "fn_8016A784",
+      "fn_80201D1C",
+      "fn_80201D34"
+    ]
+  },
+  "unified": [],
+  "reverted_as_invalid": [
+    {
+      "symbol": "fn_80156938",
+      "declarations": 90,
+      "rejected_signature": "void *fn_80156938()",
+      "reason": "The rewrite discarded the verified pointer parameter consumed in r3. The original typed declarations were restored."
+    },
+    {
+      "symbol": "fn_800FBFB0",
+      "declarations": 78,
+      "rejected_signature": "unsigned int fn_800FBFB0()",
+      "reason": "The bulk rewrite removed void parameter lists and swallowed one declaration into a comment. The original declarations were restored; the remaining void-return contradiction is recorded by the audit."
+    },
+    {
+      "symbol": "fn_80201B3C",
+      "declarations": 54,
+      "rejected_signature": "void *fn_80201B3C()",
+      "reason": "Fifty edits changed only pointer-star whitespace and two discarded explicit void parameter lists. None constituted a type unification, so all were reverted."
+    },
+    {
+      "symbol": "fn_80128C28",
+      "declarations": 50,
+      "rejected_signature": "void fn_80128C28()",
+      "reason": "The unspecified parameter list discarded the verified three-GPR call shape and one rewrite also deleted the sibling fn_80128C44 declaration. Both source edits were reverted."
+    },
+    {
+      "symbol": "fn_80201D1C",
+      "declarations": 44,
+      "rejected_signature": "void fn_80201D1C()",
+      "reason": "Matching call sites pass a pointer and scalar in r3 and r4. Replacing typed two-argument prototypes with an unspecified list removed argument checking and corrupted declarations in two translation units; all edits were reverted."
+    },
+    {
+      "symbol": "fn_80201D34",
+      "declarations": 44,
+      "rejected_signature": "void fn_80201D34()",
+      "reason": "Matching call sites pass a pointer and scalar in r3 and r4. Replacing typed two-argument prototypes with an unspecified list removed argument checking and corrupted declarations in two translation units; all edits were reverted."
+    }
+  ],
+  "remaining": [
+    {
+      "symbol": "fn_80156938",
+      "declarations": 90,
+      "reason": "The owned definition proves a pointer argument and pointer return. Consolidation requires typed call-site evidence without replacing the parameter list with an unspecified list."
+    },
+    {
+      "symbol": "fn_800FBFB0",
+      "declarations": 78,
+      "reason": "The owned definition proves an unsigned scalar return, but one void-return declaration remains and explicit void parameter lists must be preserved."
+    },
+    {
+      "symbol": "fn_80201B3C",
+      "declarations": 54,
+      "reason": "Pointer-star whitespace is not a signature disagreement. The two explicit void parameter lists must not be weakened to unspecified lists."
+    },
+    {
+      "symbol": "fn_80128C28",
+      "declarations": 50,
+      "reason": "Matching callers prove the three-GPR call shape. Consolidation must preserve the typed parameters and the neighboring fn_80128C44 declaration."
+    },
+    {
+      "symbol": "fn_80201D1C",
+      "declarations": 44,
+      "reason": "Matching callers prove pointer and scalar arguments in r3 and r4. A single typed source-level spelling still requires byte-neutral adapters for local typedef differences."
+    },
+    {
+      "symbol": "fn_80201D34",
+      "declarations": 44,
+      "reason": "Matching callers prove pointer and scalar arguments in r3 and r4. A single typed source-level spelling still requires byte-neutral adapters for local typedef differences."
+    },
+    {
+      "symbol": "fn_80201E78",
+      "declarations": 49,
+      "reason": "Retail proves a 12-byte aggregate hidden-result ABI. Matching callers currently express both aggregate return and explicit destination forms, including one three-argument codegen constraint; unification requires typed byte-neutral call adapters."
+    },
+    {
+      "symbol": "fn_80128E30",
+      "declarations": 46,
+      "reason": "Matching callers dereference several TU-local structure views directly. Replacing them with void pointer return declarations does not compile; typed byte-neutral result adapters are required."
+    },
+    {
+      "symbol": "fn_801A98F4",
+      "declarations": 46,
+      "reason": "One matching caller requires unsigned-short and unsigned-char argument conversions. Flattening it to the majority int prototype changes the object and linked image; a call adapter is required."
+    },
+    {
+      "symbol": "fn_8016A784",
+      "declarations": 45,
+      "reason": "Matching callers dereference several typed pointer results. Unification requires typed byte-neutral result adapters rather than an unsafe scalar spelling rewrite."
+    }
+  ],
+  "verification": {
+    "baseline_objdiff": "eternal-darkness-decomp/reports/GEDE01/signature-audit-session-1280-baseline-objdiff.json",
+    "rejected_session_objdiff": "eternal-darkness-decomp/reports/GEDE01/signature-audit-session-1280-current-objdiff.json",
+    "remediated_objdiff": "eternal-darkness-decomp/reports/GEDE01/signature-audit-session-1280-remediation-1-objdiff.json",
+    "full_audit": "eternal-darkness-decomp/reports/GEDE01/signature-audit-session-1280-remediation-1.json",
+    "affected_object_objdiff_summary": "eternal-darkness-decomp/reports/GEDE01/signature-consolidation-session-1280-remediation-1-verification.json",
+    "baseline_and_rejected_session_measures_equal": false,
+    "baseline_and_remediated_measures_equal": true,
+    "baseline_fuzzy_match_percent": 34.541992,
+    "rejected_session_fuzzy_match_percent": 34.541397,
+    "remediated_fuzzy_match_percent": 34.541992,
+    "previously_matching_objects_lost": 0,
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "dol_byte_equal_to_retail": true,
+    "progress_json_sha1": "7a009fe7453a44c83d18a24b54e30698e7c64a95",
+    "next_target_unchanged": true,
+    "next_gate_rewritten": false,
+    "source_translation_units_reverted": 111,
+    "valid_symbols_unified": 0
+  }
+}

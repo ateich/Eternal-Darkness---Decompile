@@ -1,0 +1,32 @@
+{
+  "session_id": "session-1287",
+  "range_start": "0x801810A0",
+  "range_end": "0x80181530",
+  "next_target": "0x80181530",
+  "matched_bytes": 332,
+  "nonmatching_bytes": 836,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "name": "fn_801810A0",
+      "address": "0x801810A0",
+      "size": 836,
+      "generated_size": 840,
+      "match_percent": 95.64115,
+      "relocations": "15/15 semantic sequence; signed-conversion bias target differs",
+      "status": "NonMatching",
+      "blocker": "Canonical GC/1.3 uses a 0xA0 frame instead of retail's 0xD0 frame, binds the signed-short conversion bias to TU-local @39 instead of lbl_80650970, and schedules the selector copy and loop increments differently.",
+      "evidence": "reports/GEDE01/objdiff-fn_801810A0-session-1287.json"
+    },
+    {
+      "name": "fn_801813E4",
+      "address": "0x801813E4",
+      "size": 332,
+      "generated_size": 332,
+      "match_percent": 100.0,
+      "relocations_equal": "7/7",
+      "status": "Matching",
+      "evidence": "reports/GEDE01/objdiff-fn_801813E4-session-1287.json"
+    }
+  ]
+}
