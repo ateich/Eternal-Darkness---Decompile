@@ -19,7 +19,7 @@ extern void fn_8011F114();
 extern unsigned int fn_80178E94(const Vec3 *, const Vec3 *);
 extern void fn_80128BE4(void *);
 extern unsigned long long fn_8020123C();
-extern void fn_8011FA8C(void *, int, int);
+extern unsigned int fn_8011FA8C(void *, int, int);
 
 /* NonMatching: behavior-complete paired-object distance event handler. The
  * remaining differences are callee-saved register allocation and one

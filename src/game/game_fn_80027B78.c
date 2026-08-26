@@ -8,8 +8,8 @@ extern void *fn_80201814();
 extern void* fn_80201C2C(void*);
 extern void *fn_80201BC8();
 extern void fn_80204E0C(void*, void*);
-extern void fn_8011FA8C(void*, int, int);
-extern void fn_8012C62C(void*, s32, void*, void*, void*, s32);
+extern unsigned int fn_8011FA8C(void*, int, int);
+extern void* fn_8012C62C(void*, s32, void*, void*, void*, s32);
 
 void fn_80027B78(void* first, void* second)
 {

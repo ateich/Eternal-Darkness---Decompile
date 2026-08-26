@@ -26,7 +26,7 @@ extern u32 fn_80036D5C(void *context);
 extern void fn_80036DA4(void *context, u32 flags);
 extern s32 fn_80128F40(void *object);
 extern unsigned long long fn_8020123C();
-extern void fn_8011FA8C(void *object, s32 value, s32 flags);
+extern unsigned int fn_8011FA8C(void *object, s32 value, s32 flags);
 extern void fn_800C63D8(void);
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);

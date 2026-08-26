@@ -17,7 +17,7 @@ extern u32 lbl_8064E750;
 extern u32 lbl_8064E754;
 extern u32 lbl_8064E758;
 
-extern void fn_8012C62C(void *object, s32 index, u32 *a, u32 *b, u32 *c,
+extern void* fn_8012C62C(void *object, s32 index, u32 *a, u32 *b, u32 *c,
                        s32 count);
 extern s32 fn_80066D04(void *context, s32 index);
 extern u32 fn_80036D5C(void *context);

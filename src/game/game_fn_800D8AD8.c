@@ -8,7 +8,7 @@ typedef struct Progress {
     u8 active;
 } Progress;
 
-extern void fn_8011FA8C(void *, int, int);
+extern unsigned int fn_8011FA8C(void *, int, int);
 extern void fn_8011F0C0(void *, float, float, float);
 extern float lbl_8064F418;
 extern float lbl_8064F424;

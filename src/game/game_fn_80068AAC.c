@@ -41,7 +41,7 @@ extern s32 fn_80200C20(s32); extern int fn_80200C38();
 extern void fn_80067D30(s32), fn_80067B6C(void);
 extern int fn_800389E0(s32, s32, s32, s32);
 extern void fn_800685A4(void *, s32);
-extern void fn_8012C62C(void *, s32, u32 *, u32 *, u32 *, s32);
+extern void* fn_8012C62C(void *, s32, u32 *, u32 *, u32 *, s32);
 extern void fn_8014CCB0(void *, u32 *, s32), fn_8014D100(void *, u32 *, s32, s32);
 extern u16 fn_800681A0(s32, s32);
 extern void *fn_80201814();

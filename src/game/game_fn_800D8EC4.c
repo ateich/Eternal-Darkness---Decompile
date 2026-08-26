@@ -8,7 +8,7 @@ typedef struct Defaults {
 } Defaults;
 
 extern void fn_8012C478(void *, int, void *, u32);
-extern void fn_8012C62C(void *, int, u32 *, u32 *, u32 *, int);
+extern void* fn_8012C62C(void *, int, u32 *, u32 *, u32 *, int);
 
 void fn_800D8EC4(void *unused, void *object, void *argument)
 {

@@ -1,6 +1,6 @@
 typedef unsigned int Color;
-extern void fn_8012DBE8(void *, int, Color *);
-extern void fn_8012C62C(void *, int, Color *, Color *, Color *, int);
+extern unsigned short fn_8012DBE8(void *, int, Color *);
+extern void* fn_8012C62C(void *, int, Color *, Color *, Color *, int);
 extern Color lbl_8064F244;
 extern Color lbl_8064F248;
 

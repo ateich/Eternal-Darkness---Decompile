@@ -27,7 +27,7 @@ extern unsigned int fn_800FBFB0();
 extern void* fn_80201B3C();
 #define FN_80201E78_RETURN void
 #define FN_80201E78_PARAMETERS Vec3i*, void*
-extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern void fn_801AC9F4(u16, int, Vec3i, int);
+extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern int fn_801AC9F4(u16, int, Vec3i, int);
 extern void fn_800A2DBC(Object800A1DA0*);
 
 int fn_800A1DA0(Object800A1DA0* object, u8 chance)

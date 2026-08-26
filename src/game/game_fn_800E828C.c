@@ -13,7 +13,7 @@ extern void fn_8011F114();
 extern void fn_8011FEDC(void *, int);
 extern void fn_8011FEFC(void *, int);
 extern void fn_8011FEEC(void *, float);
-extern void fn_8011FA8C(void *, int, int);
+extern unsigned int fn_8011FA8C(void *, int, int);
 extern void fn_801AAE68(float, int, int, int, Vec3 *, int, int, int, unsigned short, int);
 
 void fn_800E828C(void *object, int value, int enabled, float scale)

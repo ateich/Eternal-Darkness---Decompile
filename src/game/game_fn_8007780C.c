@@ -1,6 +1,6 @@
 typedef unsigned char u8;
 
-extern void fn_8011FA8C(void *, int, int);
+extern unsigned int fn_8011FA8C(void *, int, int);
 extern void fn_80137ED0(int);
 
 int fn_8007780C(void *object, void *state)

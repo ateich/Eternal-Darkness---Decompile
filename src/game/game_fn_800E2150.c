@@ -40,7 +40,7 @@ extern void *fn_8011FB4C(void *);
 extern void fn_8011FB54(void *, void *);
 extern void fn_8011F0E8(void *, Vec3 *);
 extern Quat *fn_8011FE34(void *);
-extern void fn_8011FA8C(void *, int, int);
+extern unsigned int fn_8011FA8C(void *, int, int);
 
 extern void fn_8002A590(void);
 extern void fn_8002A508(void);

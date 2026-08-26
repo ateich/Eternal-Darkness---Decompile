@@ -7,7 +7,7 @@ extern int fn_8011F6A4(void*, u32, u32, int, u32*, int);
 extern void* fn_8017FDE4(void*);
 extern void fn_80149B60(void*, void*, u32, u32, int);
 extern void* fn_8017FE04(void*);
-extern void fn_8012DBE8(void*, int, u8*);
+extern unsigned short fn_8012DBE8(void*, int, u8*);
 
 void fn_80152E3C(void* first, void* second)
 {

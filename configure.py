@@ -87,6 +87,26 @@ config.asflags = ["-mgekko", "--strip-local-absolute", "-I include", f"-I build/
 config.ldflags = ["-fp hardware", "-nodefaults"]
 config.custom_build_rules = [
     {
+        "name": "externalize_game_8017E958_signed_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @6 lbl_80650930 orig/GEDE01/sys/main.dol && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@6=lbl_80650930 --remove-section=.sdata2 "
+            "--rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "externalize_game_8017E850_signed_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @6 lbl_80650930 orig/GEDE01/sys/main.dol && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@6=lbl_80650930 --remove-section=.sdata2 "
+            "--rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
         "name": "externalize_game_8017718C_bias",
         "command": (
             "python3 tools/externalize_elf_symbol.py $in @9 lbl_806506A8 orig/GEDE01/sys/main.dol && "
@@ -1650,6 +1670,16 @@ for rule in config.custom_build_rules:
     guarded_externalize_rules.add(rule["name"])
 config.custom_build_steps = {
     "post-compile": [
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8017E958.externalized"],
+            "rule": "externalize_game_8017E958_signed_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8017E958.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8017E850.externalized"],
+            "rule": "externalize_game_8017E850_signed_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8017E850.o"],
+        },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8017718C.externalized"],
             "rule": "externalize_game_8017718C_bias",
@@ -7708,6 +7738,32 @@ config.libs = [
             Object(NonMatching, "game/game_fn_8017D508.c"),
             Object(NonMatching, "game/game_fn_8017D700.c"),
             Object(Matching, "game/game_fn_8017D908.c"),
+            Object(Matching, "game/game_fn_8017DA60.c"),
+            Object(Matching, "game/game_fn_8017DB70.c"),
+            Object(Matching, "game/game_fn_8017DC88.c"),
+            Object(Matching, "game/game_fn_8017DCA8.c"),
+            Object(Matching, "game/game_fn_8017DCE8.c"),
+            Object(Matching, "game/game_fn_8017DD28.c"),
+            Object(Matching, "game/game_fn_8017E17C.c"),
+            Object(Matching, "game/game_fn_8017E1B0.c"),
+            Object(NonMatching, "game/game_fn_8017E1E4.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_8017E2B0.c"),
+            Object(Matching, "game/game_fn_8017E32C.c"),
+            Object(Matching, "game/game_fn_8017E40C.c"),
+            Object(Matching, "game/game_fn_8017E4E4.c"),
+            Object(Matching, "game/game_fn_8017E734.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_8017E804.c"),
+            Object(Matching, "game/game_fn_8017E850.c"),
+            Object(Matching, "game/game_fn_8017E958.c"),
+            Object(Matching, "game/game_fn_8017EA58.c"),
+            Object(Matching, "game/game_fn_8017EAA8.c"),
+            Object(Matching, "game/game_fn_8017EB4C.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_8017ED50.c"),
+            Object(Matching, "game/game_fn_8017ED64.c"),
+            Object(Matching, "game/game_fn_8017EDB4.c"),
+            Object(NonMatching, "game/game_fn_8017EE58.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_8017F084.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(NonMatching, "game/game_fn_8017F120.c", extra_cflags=["-use_lmw_stmw on"]),
         ],
     },
     {

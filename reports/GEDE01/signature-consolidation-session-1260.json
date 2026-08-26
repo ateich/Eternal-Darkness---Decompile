@@ -1,0 +1,103 @@
+{
+  "session_id": "session-1260",
+  "remediation": "review-remediation-1",
+  "kind": "signature-consolidation",
+  "starting_target": "0x8017DA60",
+  "ending_next_target": "0x8017DA60",
+  "frontier_changed": false,
+  "accounting": {
+    "matched_code_bytes_added": 0,
+    "matching_functions_added": 0,
+    "nonmatching_code_bytes_added": 0,
+    "nonmatching_functions_added": 0,
+    "functions_matched_this_session": 0
+  },
+  "progress_unchanged": {
+    "sha1": "d3c4a9c8f25f099fd89126c10e6952a77159d094",
+    "matching_code_bytes": 525904,
+    "matching_functions": 3366,
+    "relocation_strict_matching_code_bytes": 524040,
+    "relocation_strict_matching_functions": 3360,
+    "next_target": "0x8017DA60",
+    "next_gate_rewritten": false
+  },
+  "audit": {
+    "tool": "tools/signature_audit.py",
+    "extern_declarations": 16565,
+    "symbols": 3858,
+    "categories_before": {
+      "return_register_contradictions": 190,
+      "ground_truth_contradictions": 442
+    },
+    "categories_after": {
+      "return_register_contradictions": 189,
+      "ground_truth_contradictions": 438
+    },
+    "selection_correction": "The original five-symbol selection was category-local to return_register_contradictions, not tree-wide. It omitted the larger ground_truth_contradictions category. The remediation audited both categories.",
+    "semantic_limit": "The tool calls any owned source definition ground truth without consulting objdiff status or retail consumers. Its ground_truth label is therefore a source-definition comparison, not proof by itself.",
+    "persisted_full_tree_dump": "reports/GEDE01/signature-audit-session-1260.json",
+    "persisted_text_dump": "reports/GEDE01/signature-audit-session-1260.txt",
+    "remediation_rerun": "Performed to temporary files only to avoid another near-duplicate multi-megabyte report."
+  },
+  "corrections": [
+    {
+      "symbol": "fn_8011FA8C",
+      "declarations_corrected": 36,
+      "return_shape": "GPR:r3",
+      "source_type": "unsigned int",
+      "evidence": "Owned definition src/game/game_fn_8011FA8C.c is 100 percent matching at 32 bytes and explicitly returns the previous flags value. The 36 void declarations were corrected to unsigned int."
+    },
+    {
+      "symbol": "fn_8012C62C",
+      "declarations_corrected": 35,
+      "return_shape": "GPR:r3",
+      "source_type": "void*",
+      "evidence": "The owned TU is NonMatching at 67.07317 percent, so its source type is not treated as match proof. Retail directly establishes the return: the failure exit loads zero into r3 at 0x8012C68C, the normal exit moves r30 into r3 at 0x8012C75C, and both return through blr. The 35 void declarations were corrected to void* while preserving their parameter lists."
+    },
+    {
+      "symbol": "fn_80178E94",
+      "declarations_corrected": 0,
+      "definition_corrected": true,
+      "return_shape": "GPR:r3",
+      "source_type": "unsigned int",
+      "evidence": "The review-proposed void caller rewrite was rejected after retail inspection. The 100 percent matching wrapper passes through r3 from fn_80178F14, whose owned definition returns unsigned int, and multiple retail-matching callers consume the value. The wrapper definition and callee declaration were corrected instead; its 29 value-return declarations remain intact."
+    }
+  ],
+  "corrected_prior_claims": [
+    {
+      "symbol": "fn_800FD40C",
+      "evidence": "Declaration consensus establishes only a GPR:r3 return class. There is no owned definition, retail-return-shape entry, or cited matching consumer that anchors char* specifically; the prior string-copy and pointer assertion was unsupported."
+    },
+    {
+      "claim": "five highest-use return-register contradictions",
+      "correction": "Five highest-use entries only within return_register_contradictions; not tree-wide and not inclusive of ground_truth_contradictions."
+    },
+    {
+      "claim": "Strict objdiff verified signature corrections",
+      "correction": "Fresh objdiff proves no codegen or relocation regression. It does not independently prove return-type semantics where callers discard results. Equality for pre-existing NonMatching objects is only a baseline comparison."
+    }
+  ],
+  "verification": {
+    "build_command": "python3 configure.py --version GEDE01 then .tools/bin/ninja build/GEDE01/main.dol build/GEDE01/report.json",
+    "build_succeeded": true,
+    "objdiff_command": "build/tools/objdiff-cli report generate -p . -o /tmp/signature-remediation-objdiff.json --format json -c function_reloc_diffs=name_address",
+    "compact_affected_object_evidence": "reports/GEDE01/signature-audit-session-1260-objdiff.json",
+    "baseline": "session-1260 committed objdiff at 7b5ee376",
+    "affected_objects_checked": 67,
+    "affected_matching_objects": 35,
+    "affected_preexisting_nonmatching_objects": 32,
+    "all_affected_unit_measures_sections_and_functions_equal_to_baseline": true,
+    "previously_matching_objects_lost": 0,
+    "matched_code_bytes": 524040,
+    "matched_functions": 3360,
+    "complete_code_bytes": 525692,
+    "complete_units": 3599
+  },
+  "dol": {
+    "path": "build/GEDE01/main.dol",
+    "retail_path": "orig/GEDE01/sys/main.dol",
+    "sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "byte_equal_to_retail": true,
+    "unchanged": true
+  }
+}

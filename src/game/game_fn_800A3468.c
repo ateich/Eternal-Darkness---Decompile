@@ -30,7 +30,7 @@ extern void *fn_80201814();
 extern Info800A3468* fn_800A1D28(void*);
 extern void fn_800A33A8(Vec3_800A3468*);
 extern void fn_800A32B8(Vec3_800A3468*);
-extern void fn_801AC9F4(u16, int, Vec3_800A3468*, int);
+extern int fn_801AC9F4(u16, int, Vec3_800A3468*, int);
 
 int fn_800A3468(u32 handle, void* resource)
 {

@@ -19,7 +19,7 @@ extern u32 lbl_8064F384;
 extern u32 lbl_8064F388;
 extern u32 lbl_8064F38C;
 
-extern void fn_8012DBE8(void *, int, u32 *);
+extern unsigned short fn_8012DBE8(void *, int, u32 *);
 extern void fn_800A1AF0(void *, int, int, int, Vec3 *, u32 *, u32 *, u16);
 extern void fn_800A3C84(void *, int, int, int);
 extern void fn_800CFFFC(void *, ActorState *);

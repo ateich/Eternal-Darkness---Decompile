@@ -14,7 +14,7 @@ extern u32 lbl_8064F444;
 extern u32 lbl_8064F448;
 extern u32 lbl_8064F44C;
 extern u32 lbl_8064F450;
-extern void fn_8012DBE8(void *, int, u32 *);
+extern unsigned short fn_8012DBE8(void *, int, u32 *);
 extern void fn_800A1AF0(void *, int, void *, void *, u32 *, u32 *, u32 *, u16, u32);
 extern void fn_800A3C84(void *, int, void *, void *);
 extern void fn_800D91AC(void *, Actor *);

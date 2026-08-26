@@ -34,7 +34,7 @@ extern s32 fn_801579F4(void*);
 extern void* fn_80201B3C();
 extern int fn_80201EB8();
 extern void fn_8011FB54(void*, void*);
-extern void fn_8011FA8C(void*, int, int);
+extern unsigned int fn_8011FA8C(void*, int, int);
 extern void fn_8011FABC(void*, s32, s32);
 extern void fn_80205680(void*, void*, s32);
 extern void fn_8020104C(int, void*, void*, int, float);

@@ -19,7 +19,7 @@ extern float lbl_8064E060;
 extern int fn_80200C10(void *);
 extern int fn_80201B54();
 extern void *fn_80201BC8();
-extern void fn_8011FA8C(void*, int, int);
+extern unsigned int fn_8011FA8C(void*, int, int);
 extern void fn_8011F788(void*, float);
 extern void fn_8011F798(void*, float);
 extern void fn_8020104C(int, void*, void*, int, float);

@@ -42,7 +42,7 @@ s32 fn_8011E310(s32, s32, s32, s32, s32, s32, s32); /* extern */
 s32 fn_8011E800(s32);                       /* extern */
 s32 fn_8011F114();                /* extern */
 s32 fn_8011F778(u32, f32);                      /* extern */
-s32 fn_8011FA8C(u32, s32, s32);         /* extern */
+unsigned int fn_8011FA8C(u32, s32, s32);         /* extern */
 s32 fn_8011FB4C(u32);                               /* extern */
 s32 fn_8011FF38();                                  /* extern */
 s32 fn_801287C4(u32, s32 *, s32, s32);      /* extern */

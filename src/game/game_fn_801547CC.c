@@ -13,8 +13,8 @@ extern u16 lbl_806505F8;
 extern float lbl_806505FC;
 extern void fn_80149E28(void*);
 extern void fn_8011F114();
-extern void fn_8012DBE8(void*, int, Color*);
-extern void fn_8012C62C(void*, int, Color*, Color*, Color*, int);
+extern unsigned short fn_8012DBE8(void*, int, Color*);
+extern void* fn_8012C62C(void*, int, Color*, Color*, Color*, int);
 extern void fn_801A19BC(EffectDesc*);
 extern unsigned int fn_800FBFB0();
 #define fn_800FBFB0() ((int)fn_800FBFB0())

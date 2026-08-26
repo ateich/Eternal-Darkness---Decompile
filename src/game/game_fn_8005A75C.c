@@ -37,7 +37,7 @@ extern int fn_80201B44();
 extern void fn_801D0D30(s32 value);
 extern u32 fn_80036D5C(void *context);
 extern void fn_80036DA4(void *context, u32 flags);
-extern void fn_8011FA8C(void *object, s32 value, s32 flags);
+extern unsigned int fn_8011FA8C(void *object, s32 value, s32 flags);
 extern int fn_80038308(void *, int, short *);
 extern int fn_800389E0(void *context, s32 index, s16 value, s32 mode);
 extern void fn_8011E310(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);

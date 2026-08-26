@@ -18,8 +18,8 @@ extern u32 lbl_806505E8;
 extern u32 lbl_806505EC;
 
 extern void fn_80149E28(void* work);
-extern void fn_8012DBE8(void* object, int index, Color* color);
-extern void fn_8012C62C(void* object, int index, Color* first, Color* second,
+extern unsigned short fn_8012DBE8(void* object, int index, Color* color);
+extern void* fn_8012C62C(void* object, int index, Color* first, Color* second,
                         Color* third, int mode);
 extern void fn_8012C774(void* object, u32* first, u32* second, u32* third,
                         int mode);

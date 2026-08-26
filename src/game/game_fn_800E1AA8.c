@@ -6,7 +6,7 @@ extern const Color lbl_80651B28;
 extern int fn_80201B54();
 extern void *fn_80201B8C();
 extern void *fn_80201890(void *);
-extern void fn_8012C62C(void *, int, Color, Color, Color, int);
+extern void* fn_8012C62C(void *, int, Color, Color, Color, int);
 
 void fn_800E1AA8(void *object)
 {

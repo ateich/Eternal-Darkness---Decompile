@@ -2,8 +2,8 @@ extern unsigned int lbl_80651B30;
 extern unsigned int lbl_8064F640;
 extern unsigned int lbl_8064F644;
 
-extern void fn_8011FA8C(void *, int, int);
-extern void fn_8012C62C(void *, int, unsigned int *, unsigned int *,
+extern unsigned int fn_8011FA8C(void *, int, int);
+extern void* fn_8012C62C(void *, int, unsigned int *, unsigned int *,
                         unsigned int *, int);
 
 void fn_800E2344(void *unused, void *object)

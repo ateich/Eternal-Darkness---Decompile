@@ -12,7 +12,7 @@ typedef struct QueryResult {
 
 extern int fn_8011F6A4(void *, int, int, int, QueryResult *, int);
 extern void fn_80152838(Vec3 *, Vec3 *, int);
-extern void fn_801AC9F4(int, int, Vec3 *, int);
+extern int fn_801AC9F4(int, int, Vec3 *, int);
 extern float lbl_8064F6A8;
 
 void fn_800E43CC(void *resource)

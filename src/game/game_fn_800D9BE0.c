@@ -7,7 +7,7 @@ typedef struct Actor {
 
 extern Actor *fn_800A1D28(void *);
 extern void fn_800A33A8(void *);
-extern void fn_801AC9F4(int, int, void *, int);
+extern int fn_801AC9F4(int, int, void *, int);
 extern void fn_800D9C48(void *, void *);
 
 int fn_800D9BE0(void *unused, void *object)

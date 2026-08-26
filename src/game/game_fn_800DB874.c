@@ -11,7 +11,7 @@ extern void fn_8012B7A0(void *, float);
 extern void fn_8012CDF0(void *, int, FourWords, int);
 extern void fn_8012C198(void *);
 extern void fn_8011FABC(void *, int, int);
-extern void fn_8011FA8C(void *, int, int);
+extern unsigned int fn_8011FA8C(void *, int, int);
 extern void fn_80157C98(void *, int, int);
 extern float lbl_8064F464;
 

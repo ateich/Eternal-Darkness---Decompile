@@ -35,7 +35,7 @@ s32 fn_80072354(s32);                        /* extern */
 s32 fn_800BD2DC(s32, void *);                /* extern */
 s32 fn_8011F114();          /* extern */
 s32 fn_8011F778(s32, f32);                   /* extern */
-s32 fn_8011FA8C(s32, s32, s32); /* extern */
+unsigned int fn_8011FA8C(s32, s32, s32); /* extern */
 s32 fn_8011FF38();                                  /* extern */
 s32 fn_80128C28();            /* extern */
 void *fn_801294DC(void *, s32, s32, s32);          /* extern */

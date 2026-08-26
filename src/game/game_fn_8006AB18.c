@@ -10,9 +10,9 @@ typedef union Color {
 extern void *fn_80201BC8();
 extern s32 fn_8011F130(void);
 extern void fn_801E79A0(void *manager, s32 kind);
-extern void fn_801AC9F4(s32 kind, s32 value, s32 position, s32 count);
-extern void fn_8012DBE8(void *object, s32 index, u32 *value);
-extern void fn_8012C62C(void *object, s32 index, u32 *first, u32 *second,
+extern int fn_801AC9F4(s32 kind, s32 value, s32 position, s32 count);
+extern unsigned short fn_8012DBE8(void *object, s32 index, u32 *value);
+extern void* fn_8012C62C(void *object, s32 index, u32 *first, u32 *second,
                        u32 *third, s32 count);
 
 extern void *lbl_8064C4E0;

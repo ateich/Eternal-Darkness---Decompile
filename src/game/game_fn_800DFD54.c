@@ -10,9 +10,9 @@ extern int lbl_8064B80C;
 extern int fn_80201B54();
 extern int fn_8011FB4C(void *);
 extern int fn_80200C38();
-extern void fn_8012DBE8(void *, int, Payload *);
+extern unsigned short fn_8012DBE8(void *, int, Payload *);
 extern int fn_800DE298(void *);
-extern void fn_8012C62C(void *, int, Payload *, Payload *, Payload *, int);
+extern void* fn_8012C62C(void *, int, Payload *, Payload *, Payload *, int);
 
 void fn_800DFD54(int enabled, void *object, void *resource, void *event)
 {

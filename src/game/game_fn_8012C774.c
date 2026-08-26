@@ -3,7 +3,7 @@ typedef unsigned char u8;
 #pragma use_lmw_stmw on
 
 extern int fn_8012FA54(u8*, int);
-extern void fn_8012C62C(u8*, int, void*, void*, void*, int);
+extern void* fn_8012C62C(u8*, int, void*, void*, void*, int);
 
 void fn_8012C774(u8* state, void* a, void* b, void* c, int flags)
 {

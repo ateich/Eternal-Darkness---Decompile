@@ -17,7 +17,7 @@ extern const volatile u32 lbl_8023A76C[3];
 extern const volatile u32 lbl_8023A778[4];
 
 extern TargetVec3s* fn_8017FDA8(void*, s32);
-extern void fn_801AC9F4(s32, s32, TargetVec3f*, s32);
+extern int fn_801AC9F4(s32, s32, TargetVec3f*, s32);
 extern void fn_8017D700(TargetVec3s*, void*, s32, void*, s32, s32, s32, s32);
 extern void fn_8017D908(TargetVec3s*, void*, void*, s32, s32, s32);
 extern u32 fn_8019BBB4(void*);

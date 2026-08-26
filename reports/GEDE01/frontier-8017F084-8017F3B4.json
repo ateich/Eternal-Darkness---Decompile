@@ -1,0 +1,40 @@
+{
+  "session_id": "session-1269",
+  "range_start": "0x8017F084",
+  "range_end": "0x8017F3B4",
+  "next_target": "0x8017F3B4",
+  "matched_bytes": 156,
+  "nonmatching_bytes": 660,
+  "functions": [
+    {
+      "name": "fn_8017F084",
+      "start": "0x8017F084",
+      "end": "0x8017F120",
+      "size": 156,
+      "status": "Matching",
+      "match_percent": 100.0,
+      "relocations_equal": true
+    },
+    {
+      "name": "fn_8017F120",
+      "start": "0x8017F120",
+      "end": "0x8017F3B4",
+      "size": 660,
+      "status": "NonMatching",
+      "match_percent": 70.32727,
+      "retail_size": 660,
+      "generated_size": 504,
+      "codegen_divergence": "Canonical GC/1.3 selects a four-entry first-loop unroll with an 0xE0 pointer stride, while retail peels and unrolls eight entries with an 0x1C0 stride; the changed loop shape also shifts persistent-register allocation."
+    }
+  ],
+  "evidence": {
+    "matching_function_objdiff": "reports/GEDE01/objdiff-fn_8017F084-session-1269.json",
+    "nonmatching_function_objdiff": "reports/GEDE01/objdiff-fn_8017F120-session-1269.json",
+    "default_objdiff": "reports/GEDE01/session-1269-objdiff.json",
+    "relocation_strict_objdiff": "reports/GEDE01/session-1269-reloc-strict.json",
+    "build": "reports/GEDE01/session-1269-build.json"
+  },
+  "accounting": "Every byte in 0x8017F084-0x8017F3B4 belongs to one of two independent honest-C translation units: 156 matched bytes followed by 660 explicit NonMatching bytes. There is no interior gap, shared reconstruction, fallback jump, or assembly.",
+  "next_gate": "Attempt consecutive 844-byte fn_8017F3B4 at 0x8017F3B4; fn_8017F120 remains explicit NonMatching codegen debt behind the frontier.",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

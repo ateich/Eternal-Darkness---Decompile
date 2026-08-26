@@ -1,0 +1,30 @@
+{
+  "session_id": "session-1268",
+  "range_start": "0x8017EE58",
+  "range_end": "0x8017F084",
+  "next_target": "0x8017F084",
+  "matched_bytes": 0,
+  "nonmatching_bytes": 556,
+  "functions": [
+    {
+      "name": "fn_8017EE58",
+      "start": "0x8017EE58",
+      "end": "0x8017F084",
+      "size": 556,
+      "status": "NonMatching",
+      "match_percent": 94.40288,
+      "retail_size": 556,
+      "generated_size": 548,
+      "codegen_divergence": "Canonical GC/1.3 folds two u8 loop-index materializations and schedules the second fn_80180518 argument setup differently; retail retains the separate truncations and two additional instructions."
+    }
+  ],
+  "evidence": {
+    "function_objdiff": "reports/GEDE01/objdiff-fn_8017EE58-session-1268.json",
+    "default_objdiff": "reports/GEDE01/session-1268-remediation-1-objdiff.json",
+    "relocation_strict_objdiff": "reports/GEDE01/session-1268-remediation-1-reloc-strict.json",
+    "build": "reports/GEDE01/session-1268-remediation-1-build.json"
+  },
+  "accounting": "Every byte in 0x8017EE58-0x8017F084 belongs to the independent honest-C fn_8017EE58 translation unit. The entire 556-byte range is explicit NonMatching codegen debt; there is no interior gap, fallback, shared reconstruction, or assembly.",
+  "next_gate": "Attempt consecutive 156-byte fn_8017F084 at 0x8017F084 and continue contiguously toward the jumptable_8023BF28 data-ownership boundary.",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

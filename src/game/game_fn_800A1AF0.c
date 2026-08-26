@@ -1,6 +1,6 @@
 typedef unsigned int u32;
 
-extern void fn_8012C62C(void*, int, u32*, u32*, u32*, int);
+extern void* fn_8012C62C(void*, int, u32*, u32*, u32*, int);
 extern void fn_8012F58C(void*, int, int, int, int, int);
 extern void fn_8012C278(void*, int, int, int, u32*, u32*, u32*, int);
 

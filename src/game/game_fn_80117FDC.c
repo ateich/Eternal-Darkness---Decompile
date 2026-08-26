@@ -1,5 +1,5 @@
 extern void *fn_80156938();
-extern void fn_8011FA8C(void *, int, int);
+extern unsigned int fn_8011FA8C(void *, int, int);
 extern int fn_8011FCB0(void *);
 extern void fn_8012D0D0(void *);
 extern void fn_80124DBC(void *);

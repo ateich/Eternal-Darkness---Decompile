@@ -2,7 +2,7 @@ extern void *fn_80201BC8();
 extern void* fn_80201C24();
 extern int fn_801579F4(void *);
 extern void *fn_80201814();
-extern void fn_8011FA8C(void *, int, int);
+extern unsigned int fn_8011FA8C(void *, int, int);
 
 void fn_800DBEC4(void *context)
 {

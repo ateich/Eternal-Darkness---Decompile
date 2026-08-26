@@ -8,7 +8,7 @@ extern void fn_801A7744(Vec3 *, void *);
 extern int fn_8011EB04(void *);
 extern int fn_80047CB4(void);
 extern void *fn_8015C910(void);
-extern void fn_801AC9F4(int, int, Vec3 *, int);
+extern int fn_801AC9F4(int, int, Vec3 *, int);
 
 int fn_800E1B40(void *unused, void *object)
 {

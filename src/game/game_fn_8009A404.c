@@ -32,7 +32,7 @@ extern void fn_800BCCC4(void*, Vec3*);
 extern void fn_80201DD8(void*, int);
 extern void fn_80201F44(void*, Vec3*);
 extern void fn_800BDEE4(void*, void*);
-extern void fn_8012C62C(void*, int, u32*, u32*, u32*, int);
+extern void* fn_8012C62C(void*, int, u32*, u32*, u32*, int);
 extern void fn_800BE010(void*, void*);
 extern int fn_80201C48(void*);
 extern int fn_8009A2B8(void*, void*, void*, u8*, void*, void*, u32, int, float);

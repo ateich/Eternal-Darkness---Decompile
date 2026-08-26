@@ -25,7 +25,7 @@ typedef struct MessageQueue {
 } MessageQueue;
 
 extern MessageQueue lbl_8064A7C8;
-extern void fn_800FD40C(char*, const char*);
+extern char* fn_800FD40C(char*, const char*);
 extern u64 OSGetTime(void);
 
 int fn_8017BBD0(u32 value, u8 kind, const char* text, u32 flags, u32 user_data)

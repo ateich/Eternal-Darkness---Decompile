@@ -20,7 +20,7 @@ extern int fn_80201B44();
 extern void fn_801ACACC(int, int, void*, int);
 extern void fn_800DE4D8(void*, int);
 extern void *fn_80201BC8();
-extern void fn_8011FA8C(void*, int, int);
+extern unsigned int fn_8011FA8C(void*, int, int);
 extern int fn_80036D5C(void*);
 extern void fn_80036DA4(void*, int);
 extern int fn_80201EB8();

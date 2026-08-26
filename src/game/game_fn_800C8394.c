@@ -6,8 +6,8 @@ typedef union Color {
     u8 channel[4];
 } Color;
 
-extern void fn_8012DBE8(void *, int, Color *);
-extern void fn_8012C62C(void *, int, Color *, Color *, Color *, int);
+extern unsigned short fn_8012DBE8(void *, int, Color *);
+extern void* fn_8012C62C(void *, int, Color *, Color *, Color *, int);
 extern u32 lbl_80651A68;
 extern u32 lbl_80651A6C;
 

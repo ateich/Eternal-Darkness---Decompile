@@ -12,7 +12,7 @@ extern void fn_8012C478(void *, int, int);
 extern int fn_8011EB04(void *);
 extern void fn_8012CBE8(void *, int, u32 *, u32 *, u32 *, int);
 extern void fn_8012F58C(void *, int, int, int, int, int);
-extern void fn_8012C62C(void *, int, u32 *, u32 *, u32 *, int);
+extern void* fn_8012C62C(void *, int, u32 *, u32 *, u32 *, int);
 
 void fn_800BFFDC(void *object, void *state, int enabled)
 {

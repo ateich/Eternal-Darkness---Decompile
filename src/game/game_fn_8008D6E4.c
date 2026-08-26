@@ -60,7 +60,7 @@ extern int fn_800DEA28(void*);
 extern void fn_80204810(void);
 extern void fn_80128C28();
 extern void *fn_80201BC8();
-extern void fn_8011FA8C(void*, int, int);
+extern unsigned int fn_8011FA8C(void*, int, int);
 extern void fn_8011FABC(void*, int, int);
 extern int fn_801D3974(void*);
 extern void fn_8011FF24(int*);

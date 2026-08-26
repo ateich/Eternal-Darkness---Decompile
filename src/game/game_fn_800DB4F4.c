@@ -15,7 +15,7 @@ extern void fn_800DB874(void *);
 extern void fn_80157C98(void *, int, int);
 extern void fn_8002A754(void *, void *);
 extern unsigned int fn_80157864(void *, int);
-extern void fn_8012C62C(void *, int, unsigned int *, unsigned int *, unsigned int *, int);
+extern void* fn_8012C62C(void *, int, unsigned int *, unsigned int *, unsigned int *, int);
 extern unsigned int lbl_8064F48C;
 extern unsigned int lbl_8064F490;
 extern unsigned int lbl_8064F494;

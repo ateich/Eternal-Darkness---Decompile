@@ -47,7 +47,7 @@ extern void *fn_80201814();
 extern void *fn_80201BC8();
 extern Vec800A1278* fn_8011F770(void*);
 extern void fn_8011F114();
-extern void fn_80128EE4(void*);
+extern u8 fn_80128EE4(void*);
 extern void fn_80211A48(const Vec800A1278*, const Vec800A1278*, Vec800A1278*);
 extern Vec800A1278* fn_8011F130(void*);
 extern void fn_8012AC74(void*, Vec800A1278*, int);

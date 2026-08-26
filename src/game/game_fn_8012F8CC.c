@@ -35,7 +35,7 @@ extern void* memcpy(void*, const void*, unsigned long);
 extern void fn_80125ECC(void *);
 extern int fn_801261F4(void*);
 extern void fn_8012C478(void*, int, int);
-extern void fn_8012C62C(void*, int, u32*, u32*, u32*, u16);
+extern void* fn_8012C62C(void*, int, u32*, u32*, u32*, u16);
 
 int fn_8012F8CC(const u8* input, Object* object)
 {

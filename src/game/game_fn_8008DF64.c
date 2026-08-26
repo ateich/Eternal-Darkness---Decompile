@@ -15,7 +15,7 @@ extern void *fn_80201814();
 extern void fn_80072618(Vec8008DF64*, Vec8008DF64*, int, int);
 extern void fn_8012B344(void*);
 extern void fn_8011F0E8(void*, Vec8008DF64*);
-extern void fn_8011FA8C(void*, int, int);
+extern unsigned int fn_8011FA8C(void*, int, int);
 extern void fn_8011FB54(void*, int);
 extern void fn_80201D2C(void *, int);
 extern void fn_80201D14(void *, int);

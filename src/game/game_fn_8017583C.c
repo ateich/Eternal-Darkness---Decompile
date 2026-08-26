@@ -5,7 +5,7 @@ extern double fn_8016A694(void*, int);
 extern void fn_80163BB4(void*, const char*, ...);
 extern void *fn_80201814();
 extern void *fn_80201BC8();
-extern void fn_8012C62C(void*, int, u32*, u32*, u32*, int);
+extern void* fn_8012C62C(void*, int, u32*, u32*, u32*, int);
 extern const char lbl_8024FF00[];
 extern const u32 lbl_80651CB0;
 extern const u32 lbl_80651CB4;
