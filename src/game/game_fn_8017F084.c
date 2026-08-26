@@ -8,7 +8,7 @@ typedef struct State {
     u32 handles[16];
 } State;
 
-extern void fn_800FBFB0(void);
+extern u32 fn_800FBFB0(void);
 
 void fn_8017F084(u8* object, u8* config)
 {

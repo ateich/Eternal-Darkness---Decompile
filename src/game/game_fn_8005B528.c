@@ -30,7 +30,7 @@ extern void fn_80130434(void *object, s32 value);
 extern void fn_801301B0(void *object, s32 set, s32 clear);
 extern void fn_8011E1C4(void);
 extern void fn_8011E174(s32 value, s32 enabled);
-extern void fn_8015C910(void);
+extern u32 fn_8015C910(void);
 extern void fn_80128754(void *object, s32 value);
 extern s32 fn_800A1060(void);
 extern s32 fn_802006D4(s32 source, s32 target, s32 value, s32 kind, s32 flags);
