@@ -1,0 +1,43 @@
+{
+  "session": "session-1258-remediation-1",
+  "scope": "Review remediation only; no reconstruction or fn_8017D508 attempt",
+  "configure_command": "python3 configure.py",
+  "build_command": ".tools/bin/ninja",
+  "build": "passed",
+  "dol": "build/GEDE01/main.dol",
+  "retail_dol": "orig/GEDE01/sys/main.dol",
+  "sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "expected_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "sha1_equal": true,
+  "byte_equal": true,
+  "default_report": {
+    "path": "build/GEDE01/report.json",
+    "matching_functions": 3365,
+    "matching_objects": 3598,
+    "matching_code_bytes": 525560,
+    "linked_code_bytes": 525348
+  },
+  "relocation_strict_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1258-remediation-1-reloc-strict.json -f json-pretty -c function_reloc_diffs=name_address",
+    "path": "reports/GEDE01/session-1258-remediation-1-reloc-strict.json",
+    "matching_functions": 3359,
+    "matching_code_bytes": 523696,
+    "game_matching_functions": 3297,
+    "game_matching_code_bytes": 520668
+  },
+  "function_report": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8017D318 fn_8017D318 -o reports/GEDE01/objdiff-fn_8017D318-session-1258-remediation-1.json --format json-pretty -c function_reloc_diffs=name_address",
+    "symbol": "fn_8017D318",
+    "path": "reports/GEDE01/objdiff-fn_8017D318-session-1258-remediation-1.json",
+    "retail_bytes": 496,
+    "generated_bytes": 500,
+    "retail_instructions": 124,
+    "generated_instructions": 125,
+    "match_percent": 90.604836,
+    "retail_text_relocations": 0,
+    "generated_text_relocations": 0,
+    "relocations_equal": true,
+    "structural_divergence": "Generated code contains an additional move in the third signed-acceleration clamp region before extsh."
+  },
+  "next_target": "0x8017D508"
+}

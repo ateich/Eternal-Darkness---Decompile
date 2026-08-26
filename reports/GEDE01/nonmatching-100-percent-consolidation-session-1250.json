@@ -1,0 +1,122 @@
+{
+  "session_id": "session-1250",
+  "assignment": "Enumerate every live Object(NonMatching, ...) registration and reclaim only already-exact objdiff units; match no new functions",
+  "starting_target": "0x8017C964",
+  "ending_next_target": "0x8017C964",
+  "frontier_changed": false,
+  "method": {
+    "registration_source": "configure.py",
+    "registration_parser": "Python AST: live Object calls whose first positional argument is the NonMatching name and whose second positional argument is a constant string",
+    "score_source": "freshly regenerated build/GEDE01/report.json",
+    "join_key": "main/<configure object path without .c>",
+    "prefilter": "unit measures.fuzzy_match_percent == 100.0",
+    "exact_gate": "A candidate is reclaimable only when a fresh one-shot objdiff proves exact retail section ownership and size, byte-identical code or data, and identical relocation targets. Aggregate fuzzy score alone is not evidence of an exact match."
+  },
+  "inventory": {
+    "objdiff_units_examined": 4961,
+    "nonmatching_registrations_before": 677,
+    "unique_nonmatching_registrations_before": 677,
+    "mapped_nonmatching_registrations": 677,
+    "unmapped_nonmatching_registrations": 0,
+    "aggregate_fuzzy_100_candidates": 2,
+    "exact_candidates": 0,
+    "reclaimed_objects": 0,
+    "reclaimed_functions": 0,
+    "reclaimed_code_bytes": 0,
+    "reclaimed_data_bytes": 0,
+    "nonmatching_registrations_after": 677,
+    "unique_nonmatching_registrations_after": 677,
+    "nonmatching_registrations_delta": 0
+  },
+  "candidates": [
+    {
+      "object": "game/game_fn_80109EEC.c",
+      "status_before": "NonMatching",
+      "status_after": "NonMatching",
+      "aggregate_unit_measures": {
+        "fuzzy_match_percent": 100.0,
+        "total_code_bytes": 180,
+        "matched_code_bytes": 180,
+        "matched_code_percent": 100.0,
+        "matched_functions": 1,
+        "total_functions": 1
+      },
+      "exact_gate": {
+        "passed": false,
+        "retail_text_bytes": 180,
+        "generated_text_bytes": 180,
+        "one_shot_text_match_percent": 98.888885,
+        "instruction_argument_mismatches": 10,
+        "retail_table_symbol": "lbl_8023A278",
+        "generated_table_symbol": "@4",
+        "retail_generated_section_ownership_equal": false,
+        "generated_extra_rodata_bytes": 32
+      },
+      "reason_not_reclaimed": "The aggregate report ignores the local coordinate-table relocation identity. Fresh one-shot objdiff records HA and LO relocation targets to retail lbl_8023A278 versus generated TU-local @4, associated table-load argument mismatches, and an extra generated 32-byte .rodata section. This is not an exact relocation or section-layout match.",
+      "evidence": "reports/GEDE01/objdiff-consolidation-game_fn_80109EEC-session-1250.json",
+      "evidence_sha256": "c00c1054166d8d707ce9576f0898c0572b8265e6cb84f19ce9dea9cb067fad74"
+    },
+    {
+      "object": "game/game_data_80239E10.c",
+      "status_before": "NonMatching",
+      "status_after": "NonMatching",
+      "aggregate_unit_measures": {
+        "fuzzy_match_percent": 100.0,
+        "total_code_bytes": 0,
+        "total_data_bytes": 8,
+        "matched_code_percent": 100.0,
+        "complete_code_percent": 100.0,
+        "code_measures_vacuous": true
+      },
+      "exact_gate": {
+        "passed": false,
+        "retail_section": ".rodata",
+        "retail_size": 8,
+        "retail_match_percent": 0.0,
+        "generated_section": ".sdata2",
+        "generated_size": 10,
+        "generated_match_percent": 0.0
+      },
+      "reason_not_reclaimed": "This data-only unit is an aggregate-score false positive. Section ownership, section size, byte layout, and symbol offsets differ.",
+      "evidence": "reports/GEDE01/objdiff-consolidation-game_data_80239E10-session-1250.json",
+      "evidence_sha256": "dcdaf660d16fef2d5c52b76ace9346306ddb5d00205c7dc74d134984568b193d"
+    }
+  ],
+  "objdiff_matched_byte_accounting": {
+    "before": {
+      "matched_code_bytes": 524280,
+      "matched_data_bytes": 34558,
+      "complete_code_bytes": 524068,
+      "complete_data_bytes": 34682,
+      "complete_units": 3583,
+      "total_units": 4961
+    },
+    "after": {
+      "matched_code_bytes": 524280,
+      "matched_data_bytes": 34558,
+      "complete_code_bytes": 524068,
+      "complete_data_bytes": 34682,
+      "complete_units": 3583,
+      "total_units": 4961
+    },
+    "delta": {
+      "matched_code_bytes": 0,
+      "matched_data_bytes": 0,
+      "complete_code_bytes": 0,
+      "complete_data_bytes": 0,
+      "complete_units": 0
+    },
+    "new_functions_matched_this_session": 0
+  },
+  "verification": {
+    "report_command": ".tools/bin/ninja build/GEDE01/report.json",
+    "report_sha256": "58c0a8c3cbba2b936e86db6c9a625261ca73bb591f92db8362af9ceda50382a5",
+    "candidate_diff_command_template": "build/tools/objdiff-cli diff -p . -u main/<object-without-.c> -o <evidence> --format json-pretty",
+    "fresh_candidate_diffs": 2,
+    "build_command": ".tools/bin/ninja build/GEDE01/ok",
+    "build_gate_passed": true,
+    "dol_sha1_expected": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "dol_sha1_actual": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "dol_sha1_unchanged": true
+  }
+}

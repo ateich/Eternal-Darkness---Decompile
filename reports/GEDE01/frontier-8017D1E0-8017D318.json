@@ -1,0 +1,41 @@
+{
+  "session": "session-1257",
+  "range_start": "0x8017D1E0",
+  "range_end": "0x8017D318",
+  "next_target": "0x8017D318",
+  "matched_bytes": 100,
+  "nonmatching_bytes": 212,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "symbol": "fn_8017D1E0",
+      "start": "0x8017D1E0",
+      "end": "0x8017D2B4",
+      "status": "NonMatching",
+      "bytes": 212,
+      "best_percent": 76.69811
+    },
+    {
+      "symbol": "fn_8017D2B4",
+      "start": "0x8017D2B4",
+      "end": "0x8017D318",
+      "status": "Matching",
+      "bytes": 100,
+      "percent": 100.0
+    }
+  ],
+  "continuation_record": {
+    "symbol": "fn_8017D318",
+    "attempted_in_session_1257": false,
+    "reason": "The assigned 212-byte fn_8017D1E0 reconstruction and codegen investigation consumed the reconstruction window before the consecutive 100-byte fn_8017D2B4 match was completed. Session 1257 therefore stopped at the next honest frontier; remediation 1 verifies evidence only and does not advance it."
+  },
+  "verification": {
+    "function_reloc_diffs": "name_address",
+    "raw_function_reports": [
+      "reports/GEDE01/objdiff-fn_8017D1E0-session-1257.json",
+      "reports/GEDE01/objdiff-fn_8017D2B4-session-1257.json"
+    ],
+    "raw_aggregate_report": "reports/GEDE01/session-1257-reloc-strict.json",
+    "build_report": "reports/GEDE01/session-1257-build.json"
+  }
+}

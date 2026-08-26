@@ -1,0 +1,48 @@
+{
+  "session": "session-1257-remediation-1",
+  "scope": "Evidence remediation only; the frontier was not advanced.",
+  "configure_command": "python3 configure.py",
+  "build_command": ".tools/bin/ninja",
+  "build": "passed",
+  "link_verified_after_graph_regeneration": true,
+  "timestamps_epoch": {
+    "build_ninja": 1787720318,
+    "game_fn_8017D2B4_object": 1787719549,
+    "main_elf": 1787720492,
+    "main_dol": 1787720493
+  },
+  "dol": "build/GEDE01/main.dol",
+  "retail_dol": "orig/GEDE01/sys/main.dol",
+  "sha1_command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+  "cmp_command": "cmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+  "sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "expected_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "sha1_equal": true,
+  "byte_equal": true,
+  "default_report": {
+    "path": "build/GEDE01/report.json",
+    "matching_functions": 3365,
+    "matching_objects": 3598,
+    "matching_code_bytes": 525560,
+    "linked_code_bytes": 525348
+  },
+  "relocation_strict_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1257-reloc-strict.json -f json-pretty -c function_reloc_diffs=name_address",
+    "path": "reports/GEDE01/session-1257-reloc-strict.json",
+    "matching_functions": 3359,
+    "matching_code_bytes": 523696,
+    "game_matching_functions": 3297,
+    "game_matching_code_bytes": 520668
+  },
+  "function_reports": [
+    {
+      "symbol": "fn_8017D1E0",
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8017D1E0 fn_8017D1E0 -o reports/GEDE01/objdiff-fn_8017D1E0-session-1257.json --format json-pretty -c function_reloc_diffs=name_address"
+    },
+    {
+      "symbol": "fn_8017D2B4",
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8017D2B4 fn_8017D2B4 -o reports/GEDE01/objdiff-fn_8017D2B4-session-1257.json --format json-pretty -c function_reloc_diffs=name_address"
+    }
+  ],
+  "next_target": "0x8017D318"
+}
