@@ -2,10 +2,10 @@
   "schema_version": 2,
   "scope": "Distinct MWCC code-generation behaviors documented in reports/GEDE01/progress.json open_items and docs/matching.md",
   "source_snapshot": {
-    "repository_revision": "017f304a164ef82b4b437fb528a1600b9664305c",
-    "next_target": "0x8017B1AC",
+    "repository_revision": "d6fc77ad7581ca69828d71695b98c49ae45204b6",
+    "next_target": "0x8017F3B4",
     "reports/GEDE01/progress.json": {
-      "sha256": "7bef5808bf2c4d512024a5ea69ca3bcaccfe5adaf5892d099e36977b66484579",
+      "sha256": "e6620f74853736ad8decb47415969f8332c482048fa6a2be0c1ff74134fa9eaf",
       "scope": "open_items"
     },
     "docs/matching.md": {
@@ -15,12 +15,12 @@
   "consolidation_audit": {
     "original_consolidation_commit": "86d029104eb5ed6ad01b6af03963ea2cf924d2a4",
     "comparison_base": "9036017d38d768d26731df5833c1b14417e215ba",
-    "scope": "Refreshed the catalog through session-1229: 290 MWCC code-generation lessons were carried forward unchanged, 17 distinct documented behaviors were appended, and the session-1210 progress-measurement entry was removed because it is not an MWCC code-generation behavior and its category is outside this schema's allowed set.",
-    "carried_forward_lessons": 290,
-    "new_lessons": 17,
+    "scope": "Refreshed the catalog through session-1269 without changing generated progress accounting: 307 MWCC code-generation lessons were carried forward unchanged and 21 distinct repository-documented behaviors were appended.",
+    "carried_forward_lessons": 307,
+    "new_lessons": 21,
     "modified_existing_lessons": 0,
-    "removed_lessons": 1,
-    "total_lessons": 307
+    "removed_lessons": 0,
+    "total_lessons": 328
   },
   "lessons": [
     {
@@ -2171,6 +2171,153 @@
       "precise_divergence": "Canonical GC/1.3 emits the two zero argument loads for fn_8017BA54 in r4-then-r3 order, while retail emits r3-then-r4; all other instructions and all relocations agree.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1227"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8017B294"],
+      "precise_divergence": "Canonical GC/1.3 folds the active-byte pointer adjustment into the final store, omitting retail's addi r31,r31,0x40 and shifting the unsigned zero comparison and branch.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1231"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_8017B47C", "fn_8017B7FC", "fn_8017B8AC", "fn_8017B904"],
+      "precise_divergence": "Void or otherwise inconsistent cross-TU declarations hide retail's signed integer result in r3 and can change the callers' integer-to-double conversion contract.",
+      "workaround": "Use the repository-verified signed int return declarations consistently in each definition and caller.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1233 remediation 2", "reports/GEDE01/progress.json: open_items entry for session-1234 remediation 1"]
+    },
+    {
+      "category": "jump-table-strategy",
+      "functions": ["fn_8017B4F4"],
+      "precise_divergence": "Canonical GC/1.3 merges retail's distinct case 1/4 and case 5/8 bodies, changing the jump-table targets; only 1 of 9 table relocations agrees.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1233 remediation 2"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_8017B4F4"],
+      "precise_divergence": "The merged case bodies in canonical GC/1.3 produce stack-slot schedules different from retail alongside a generated-only 24-byte floating-point constant pool.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1233 remediation 2"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8017BA64"],
+      "precise_divergence": "A signed index assigns the loop index and saved callback to r29 and r30 opposite retail's allocation.",
+      "workaround": "Recover the index as unsigned so MWCC assigns the index to r30 and callback to r29.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1237 and 1238"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8017BBD0"],
+      "precise_divergence": "Canonical GC/1.3 selects a different branchless unsigned queue-index wrap idiom, shortening the function by eight bytes and changing the early r6-r11 register web.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1241"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8017C1C8"],
+      "precise_divergence": "The typed u64 values[index] form preserves retail's recovered layout and store order but emits 19 instruction differences and moves two real text relocations; the discarded raw-cast form reduced instruction differences while worsening annotated data-flow equality.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1245 review remediation 1"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8017C724", "fn_8017C810", "fn_8017C8E0", "fn_8017C964", "fn_8017CB20"],
+      "precise_divergence": "Canonical GC/1.3 selects r0 for a recovered result-state discriminator where retail uses r4; direct-switch and local-hoist spellings are codegen-neutral, while volatile forces a stack spill and larger frame.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1247, 1248 remediation 1, 1249 remediation 1, and 1252 remediation"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8017C724"],
+      "precise_divergence": "Canonical GC/1.3 reverses the two zero-argument setup moves in the default path while preserving exact size and all relocations.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1247"]
+    },
+    {
+      "category": "jump-table-strategy",
+      "functions": ["fn_8017CA0C", "fn_8017CB20"],
+      "precise_divergence": "Canonical GC/1.3 lowers the recovered result-state dispatch into a shorter if/else layout; in fn_8017CB20 it also folds duplicated case-local stores into one shared store, shortening retail's branch layout by 12 bytes.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1252 remediation"]
+    },
+    {
+      "category": "inlining",
+      "functions": ["fn_8017CCD8"],
+      "precise_divergence": "Enabling -use_lmw_stmw incorrectly replaces retail's four individual r28-r31 saves and restores with bulk stmw and lmw instructions.",
+      "workaround": "Keep the per-object -use_lmw_stmw option disabled for fn_8017CCD8.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1253 remediation 1"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8017CCD8"],
+      "precise_divergence": "Canonical GC/1.3 omits retail's second u16 count truncation before the 12-byte entry stride, shifts global-base materialization and the cursor load, moves one relocation by four bytes, and reverses two independent tail additions.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1253 remediation 1"]
+    },
+    {
+      "category": "inlining",
+      "functions": ["fn_8017D144"],
+      "precise_divergence": "The default per-object setting emits save/restore helper behavior instead of retail's inline stmw and lmw, making the function eight bytes larger.",
+      "workaround": "Enable the established per-object -use_lmw_stmw option for fn_8017D144.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1256 review remediation 1"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8017D144", "fn_8017D318", "fn_8017D508", "fn_8017D700"],
+      "precise_divergence": "Canonical GC/1.3 assigns recovered count, byte-offset, signed-bound, delta, z, and dy live ranges to different volatile or callee-saved GPR webs from retail, sometimes retaining an extra move.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1256 review remediation 1, 1258, and 1259"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8017D1E0"],
+      "precise_divergence": "Signed-short temporaries make canonical GC/1.3 insert extsh truncations around each absolute-difference update; int temporaries remove them but select srawi/xor/subf branchless absolute value instead of retail's subf./bge/neg sequence.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1257"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8017E1E4"],
+      "precise_divergence": "Canonical GC/1.3 reassociates both z-axis sums, loading base z before the random-bit mask and folding the signed offset last; its negative branch also uses subf instead of retail's mulli-minus-one sequence.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1263"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8017E2B0"],
+      "precise_divergence": "Common-subexpression optimization removes retail's repeated u16 threshold conversions and branch-based absolute differences.",
+      "workaround": "Use the documented per-TU opt_common_subs pragma setting to preserve the repeated conversions and branch lowering.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1263"]
+    },
+    {
+      "category": "float-constant-placement",
+      "functions": ["fn_8017E850", "fn_8017E958"],
+      "precise_divergence": "Split compilation gives MWCC's signed-integer conversion bias compiler-local identity instead of retail's shared lbl_80650930 relocation owner.",
+      "workaround": "Guarded externalization verifies the generated bias bytes against retail lbl_80650930 before rebinding the compiler-local symbol.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1265 and 1266"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8017EB4C", "fn_8017F084"],
+      "precise_divergence": "Declaration order controls MWCC's overlapping loop and initializer live ranges, including retail's r31-r29 allocation in fn_8017EB4C and r30-r27 allocation in fn_8017F084.",
+      "workaround": "Preserve the recorded declaration order; in fn_8017F084 declare the signed count before the state pointer, pair counter, byte index, and zero constant.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1267 and 1269"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8017EE58"],
+      "precise_divergence": "Canonical GC/1.3 folds the separate u8 loop-index materialization before the 0x38 multiply and the explicit truncation of index plus one, then schedules the second fn_80180518 arguments differently, emitting two fewer instructions than retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1268"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8017F120"],
+      "precise_divergence": "Canonical GC/1.3 selects a four-entry first-loop unroll with an 0xE0 pointer stride, while retail peels and unrolls eight entries with an 0x1C0 stride, changing branch layout and persistent-register allocation and shortening generated code by 156 bytes.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1269"]
     }
   ]
 }
