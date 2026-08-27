@@ -1,0 +1,16 @@
+{
+  "session_id": "session-1312",
+  "range_start": "0x8018437C",
+  "range_end": "0x801847AC",
+  "next_target": "0x801847AC",
+  "matched_bytes": 108,
+  "nonmatching_bytes": 964,
+  "unaccounted_spans": [],
+  "functions": [
+    {"symbol": "fn_8018437C", "start": "0x8018437C", "end": "0x80184740", "bytes": 964, "generated_bytes": 896, "instructions": 255, "match_percent": 77.18257, "status": "NonMatching", "relocations_equal": false, "retail_relocations": 38, "generated_relocations": 41, "divergence": "Canonical GC/1.3 emits a 0x50-byte frame and helper-based saved-register sequence instead of retail's 0x80-byte frame and stmw/lmw r20-r31 sequence; loop register allocation, branch scheduling and relocation count remain different.", "evidence": "reports/GEDE01/objdiff-game_fn_8018437C-session-1312.json"},
+    {"symbol": "fn_80184740", "start": "0x80184740", "end": "0x801847AC", "bytes": 108, "instructions": 27, "match_percent": 100.0, "status": "Matching", "relocations_equal": true, "relocations": 2, "technique": "The volatile one-word aggregate named retained is a narrowly scoped codegen-forcing artifact used to retain retail's otherwise dead stack copy and 0x10-byte frame. It is unlikely to reflect the original source and must not be propagated as a general reconstruction idiom.", "evidence": "reports/GEDE01/objdiff-game_fn_80184740-session-1312.json"}
+  ],
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "whole_function_assembly_added": 0,
+  "shared_reconstructions": 0
+}

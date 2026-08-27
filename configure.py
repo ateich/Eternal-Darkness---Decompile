@@ -7924,6 +7924,37 @@ config.libs = [
             Object(NonMatching, "game/game_fn_80183F70.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(NonMatching, "game/game_fn_80184094.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_8018422C.c"),
+            Object(Matching, "game/game_fn_8018424C.c"),
+            Object(Matching, "game/game_fn_801842A8.c"),
+            Object(NonMatching, "game/game_fn_8018437C.c"),
+            Object(Matching, "game/game_fn_80184740.c"),
+            Object(Matching, "game/game_fn_801847AC.c"),
+            Object(Matching, "game/game_fn_80184818.c"),
+            Object(Matching, "game/game_fn_80184884.c"),
+            Object(Matching, "game/game_fn_801848AC.c"),
+            Object(Matching, "game/game_fn_80184950.c"),
+            Object(Matching, "game/game_fn_80184990.c"),
+            Object(Matching, "game/game_fn_801849E0.c"),
+            Object(Matching, "game/game_fn_80184A68.c"),
+            Object(Matching, "game/game_fn_80184C1C.c"),
+            Object(Matching, "game/game_fn_80184C7C.c"),
+            Object(Matching, "game/game_fn_80184C98.c"),
+            Object(Matching, "game/game_fn_80184CC4.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(NonMatching, "game/game_fn_80184E3C.c"),
+            Object(Matching, "game/game_fn_80185000.c"),
+            Object(Matching, "game/game_fn_80185008.c"),
+            Object(Matching, "game/game_fn_8018504C.c"),
+            Object(Matching, "game/game_fn_80185078.c"),
+            Object(Matching, "game/game_fn_801850CC.c"),
+            Object(Matching, "game/game_fn_801850E4.c"),
+            Object(Matching, "game/game_fn_801850FC.c"),
+            Object(NonMatching, "game/game_fn_80185108.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_801851A0.c"),
+            Object(NonMatching, "game/game_fn_8018524C.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_801853F0.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_80185494.c"),
+            Object(Matching, "game/game_fn_8018549C.c"),
+            Object(Matching, "game/game_fn_801854A8.c"),
         ],
     },
     {
@@ -8009,6 +8040,10 @@ config.progress_report_args = []
 config.reconfig_deps = [Path("config") / VERSION / "toolchain.yml"]
 
 if args.mode == "configure":
+    # project.py snapshots argv for Ninja reruns; omit the mode so the progress
+    # rule can append its own positional mode without producing two modes.
+    if len(sys.argv) > 1 and sys.argv[1] == "configure":
+        del sys.argv[1]
     generate_build(config)
 elif args.mode == "progress":
     calculate_progress(config)

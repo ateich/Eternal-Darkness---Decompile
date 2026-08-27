@@ -1,0 +1,52 @@
+{
+  "session_id": "session-1318-review-remediation-2",
+  "scope": "fix the default canonical build and verify the existing fn_801851A0 match without advancing the frontier",
+  "frontier": {
+    "range_start": "0x801851A0",
+    "range_end": "0x8018524C",
+    "next_target": "0x8018524C",
+    "matched_bytes": 172,
+    "nonmatching_bytes": 0
+  },
+  "build_graph_fix": {
+    "tracked_source": "configure.py",
+    "generated_configure_args": "--version GEDE01",
+    "generated_progress_command": "\"/usr/bin/python3\" configure.py --version GEDE01 progress",
+    "duplicate_positional_mode_removed": true
+  },
+  "affected_objects": [
+    {
+      "unit": "main/game/game_fn_801851A0",
+      "object": "build/GEDE01/src/game/game_fn_801851A0.o",
+      "object_sha1": "f4e060da2345d503ffdb82b677ca1211f2233b73",
+      "objdiff_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801851A0 fn_801851A0 -o reports/GEDE01/objdiff-game_fn_801851A0-session-1318-review-remediation-2.json --format json-pretty -c function_reloc_diffs=name_address",
+      "objdiff_config": "function_reloc_diffs=name_address",
+      "function": "fn_801851A0",
+      "retail_bytes": 172,
+      "generated_bytes": 172,
+      "instructions_equal": 43,
+      "instruction_differences": 0,
+      "match_percent": 100.0,
+      "target_relocations": 2,
+      "generated_relocations": 2,
+      "relocations_equal": true,
+      "evidence": "reports/GEDE01/objdiff-game_fn_801851A0-session-1318-review-remediation-2.json"
+    }
+  ],
+  "canonical_build": {
+    "command": "./.tools/bin/ninja",
+    "exit_code": 0,
+    "default_target": "progress",
+    "report_sha1": "87266cebd0c115c265412ad16f9d8cec9025f32b",
+    "main_elf_mtime": "2026-08-26T20:33:13.311193657-04:00",
+    "main_dol_mtime": "2026-08-26T20:33:13.598197146-04:00",
+    "integrated_sha1_check": "build/GEDE01/main.dol: OK",
+    "manual_sha1_check_command": "sha1sum -c config/GEDE01/build.sha1",
+    "manual_sha1_check_passed": true,
+    "main_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "retail_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "retail_cmp_equal": true
+  },
+  "relocation_strict_aggregate_regenerated": false,
+  "relocation_strict_aggregate_note": "The headline strict aggregate remains the disclosed session-1317 aggregate plus fn_801851A0; this remediation freshly reran strict objdiff only for the affected object."
+}

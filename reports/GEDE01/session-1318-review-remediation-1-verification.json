@@ -1,0 +1,43 @@
+{
+  "session_id": "session-1318-review-remediation-1",
+  "scope": "verify existing fn_801851A0 match without advancing the frontier",
+  "frontier": {
+    "range_start": "0x801851A0",
+    "range_end": "0x8018524C",
+    "next_target": "0x8018524C",
+    "matched_bytes": 172,
+    "nonmatching_bytes": 0
+  },
+  "affected_objects": [
+    {
+      "unit": "main/game/game_fn_801851A0",
+      "object": "build/GEDE01/src/game/game_fn_801851A0.o",
+      "object_sha1": "f4e060da2345d503ffdb82b677ca1211f2233b73",
+      "objdiff_config": "function_reloc_diffs=name_address",
+      "function": "fn_801851A0",
+      "retail_bytes": 172,
+      "generated_bytes": 172,
+      "instructions_equal": 43,
+      "instruction_differences": 0,
+      "match_percent": 100.0,
+      "target_relocations": 2,
+      "generated_relocations": 2,
+      "relocations_equal": true,
+      "evidence": "reports/GEDE01/objdiff-game_fn_801851A0-session-1318-review-remediation-1.json"
+    }
+  ],
+  "canonical_build": {
+    "command": "./.tools/bin/ninja build/GEDE01/main.dol",
+    "exit_code": 0,
+    "report_sha1": "87266cebd0c115c265412ad16f9d8cec9025f32b",
+    "main_elf_mtime": "2026-08-26T20:22:47.674626038-04:00",
+    "main_dol_mtime": "2026-08-26T20:22:47.966629488-04:00",
+    "sha1_check_command": "sha1sum -c config/GEDE01/build.sha1",
+    "sha1_check_passed": true,
+    "main_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "retail_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "retail_cmp_equal": true
+  },
+  "relocation_strict_aggregate_regenerated": false,
+  "relocation_strict_aggregate_note": "The headline strict aggregate remains the disclosed session-1317 aggregate plus fn_801851A0; this remediation freshly reran strict objdiff only for the affected object."
+}
