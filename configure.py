@@ -87,6 +87,125 @@ config.asflags = ["-mgekko", "--strip-local-absolute", "-I include", f"-I build/
 config.ldflags = ["-fp hardware", "-nodefaults"]
 config.custom_build_rules = [
     {
+        "name": "externalize_game_80189968_constants",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @16 lbl_80650A70 orig/GEDE01/sys/main.dol && "
+            "build/binutils/powerpc-eabi-objcopy --redefine-sym=@16=lbl_80650A70 "
+            "--remove-section=.sdata2 --rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "externalize_game_80189760_constants",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @16 lbl_80650A70 orig/GEDE01/sys/main.dol && "
+            "build/binutils/powerpc-eabi-objcopy --redefine-sym=@16=lbl_80650A70 "
+            "--remove-section=.sdata2 --rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "externalize_game_801896A0_constants",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @9 lbl_80650A70 orig/GEDE01/sys/main.dol && "
+            "build/binutils/powerpc-eabi-objcopy --redefine-sym=@9=lbl_80650A70 "
+            "--remove-section=.sdata2 --rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "externalize_game_801895E8_constants",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @9 lbl_80650A70 orig/GEDE01/sys/main.dol && "
+            "build/binutils/powerpc-eabi-objcopy --redefine-sym=@9=lbl_80650A70 "
+            "--remove-section=.sdata2 --rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "externalize_game_80189390_constants",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @13 lbl_80650A70 orig/GEDE01/sys/main.dol && "
+            "python3 tools/externalize_elf_symbol.py $in @10 lbl_80650A88 orig/GEDE01/sys/main.dol && "
+            "python3 tools/externalize_elf_symbol.py $in @11 lbl_80650A90 orig/GEDE01/sys/main.dol && "
+            "python3 tools/externalize_elf_symbol.py $in @21 lbl_80650A78 orig/GEDE01/sys/main.dol && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@13=lbl_80650A70 --redefine-sym=@10=lbl_80650A88 "
+            "--redefine-sym=@11=lbl_80650A90 --redefine-sym=@21=lbl_80650A78 "
+            "--remove-section=.sdata2 --rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "externalize_game_801891D8_constants",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @12 lbl_80650A70 orig/GEDE01/sys/main.dol && "
+            "python3 tools/externalize_elf_symbol.py $in @9 lbl_80650A88 orig/GEDE01/sys/main.dol && "
+            "python3 tools/externalize_elf_symbol.py $in @19 lbl_80650A78 orig/GEDE01/sys/main.dol && "
+            "python3 tools/externalize_elf_symbol.py $in @10 lbl_80650A8C orig/GEDE01/sys/main.dol && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@12=lbl_80650A70 --redefine-sym=@9=lbl_80650A88 "
+            "--redefine-sym=@19=lbl_80650A78 --redefine-sym=@10=lbl_80650A8C "
+            "--remove-section=.sdata2 --rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "externalize_game_80189028_constants",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @11 lbl_80650A70 orig/GEDE01/sys/main.dol && "
+            "python3 tools/externalize_elf_symbol.py $in @9 lbl_80650A88 orig/GEDE01/sys/main.dol && "
+            "python3 tools/externalize_elf_symbol.py $in @18 lbl_80650A78 orig/GEDE01/sys/main.dol && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@11=lbl_80650A70 --redefine-sym=@9=lbl_80650A88 "
+            "--redefine-sym=@18=lbl_80650A78 "
+            "--remove-section=.sdata2 --rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "externalize_game_80188E28_constants",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @11 lbl_80650A70 orig/GEDE01/sys/main.dol && "
+            "python3 tools/externalize_elf_symbol.py $in @9 lbl_80650A88 orig/GEDE01/sys/main.dol && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@11=lbl_80650A70 --redefine-sym=@9=lbl_80650A88 "
+            "--remove-section=.sdata2 --rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "externalize_game_80188C1C_constants",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @14 lbl_80650A78 orig/GEDE01/sys/main.dol && "
+            "python3 tools/externalize_elf_symbol.py $in @12 lbl_80650A80 orig/GEDE01/sys/main.dol && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@14=lbl_80650A78 --redefine-sym=@12=lbl_80650A80 "
+            "--remove-section=.sdata2 --rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "externalize_game_80188B44_unsigned_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @9 lbl_80650A78 orig/GEDE01/sys/main.dol && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@9=lbl_80650A78 --remove-section=.sdata2 "
+            "--rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "externalize_game_80188A7C_signed_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @8 lbl_80650A70 orig/GEDE01/sys/main.dol && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@8=lbl_80650A70 --remove-section=.sdata2 "
+            "--rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
         "name": "externalize_game_801878E0_constants",
         "command": (
             "python3 tools/externalize_elf_symbol.py $in @6 lbl_80650A40 orig/GEDE01/sys/main.dol && "
@@ -1751,6 +1870,61 @@ for rule in config.custom_build_rules:
     guarded_externalize_rules.add(rule["name"])
 config.custom_build_steps = {
     "post-compile": [
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80189968.externalized"],
+            "rule": "externalize_game_80189968_constants",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80189968.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80189760.externalized"],
+            "rule": "externalize_game_80189760_constants",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80189760.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_801896A0.externalized"],
+            "rule": "externalize_game_801896A0_constants",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_801896A0.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_801895E8.externalized"],
+            "rule": "externalize_game_801895E8_constants",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_801895E8.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80189390.externalized"],
+            "rule": "externalize_game_80189390_constants",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80189390.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_801891D8.externalized"],
+            "rule": "externalize_game_801891D8_constants",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_801891D8.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80189028.externalized"],
+            "rule": "externalize_game_80189028_constants",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80189028.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80188E28.externalized"],
+            "rule": "externalize_game_80188E28_constants",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80188E28.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80188C1C.externalized"],
+            "rule": "externalize_game_80188C1C_constants",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80188C1C.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80188B44.externalized"],
+            "rule": "externalize_game_80188B44_unsigned_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80188B44.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80188A7C.externalized"],
+            "rule": "externalize_game_80188A7C_signed_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80188A7C.o"],
+        },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_801878E0.externalized"],
             "rule": "externalize_game_801878E0_constants",
@@ -8116,6 +8290,31 @@ config.libs = [
             Object(Matching, "game/game_fn_80188560.c"),
             Object(Matching, "game/game_fn_8018856C.c"),
             Object(Matching, "game/game_fn_80188578.c"),
+            Object(Matching, "game/game_fn_80188584.c"),
+            Object(Matching, "game/game_fn_80188648.c"),
+            Object(Matching, "game/game_fn_8018865C.c"),
+            Object(Matching, "game/game_fn_80188710.c"),
+            Object(Matching, "game/game_fn_801887C4.c"),
+            Object(Matching, "game/game_fn_80188868.c"),
+            Object(Matching, "game/game_fn_80188930.c"),
+            Object(Matching, "game/game_fn_801889D8.c"),
+            Object(Matching, "game/game_fn_80188A7C.c"),
+            Object(Matching, "game/game_fn_80188B44.c"),
+            Object(Matching, "game/game_fn_80188C1C.c"),
+            Object(Matching, "game/game_fn_80188E28.c"),
+            Object(Matching, "game/game_fn_80189028.c"),
+            Object(Matching, "game/game_fn_801891D8.c"),
+            Object(Matching, "game/game_fn_80189390.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_801895E8.c"),
+            Object(Matching, "game/game_fn_801896A0.c"),
+            Object(Matching, "game/game_fn_80189760.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_80189968.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_80189B70.c"),
+            Object(NonMatching, "game/game_fn_80189C14.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(NonMatching, "game/game_fn_80189E7C.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(NonMatching, "game/game_fn_8018A060.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(NonMatching, "game/game_fn_8018A1C8.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_8018A310.c", extra_cflags=["-use_lmw_stmw on"]),
         ],
     },
     {

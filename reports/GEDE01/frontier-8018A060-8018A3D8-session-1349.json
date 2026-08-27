@@ -1,0 +1,19 @@
+{
+  "session_id": "session-1349",
+  "starting_target": "0x8018A060",
+  "range_start": "0x8018A060",
+  "range_end": "0x8018A3D8",
+  "ending_next_target": "0x8018A3D8",
+  "next_target": "0x8018A3D8",
+  "matched_bytes": 200,
+  "nonmatching_bytes": 688,
+  "unaccounted_spans": [],
+  "functions": [
+    {"name":"fn_8018A060","address":"0x8018A060","size":360,"status":"NonMatching","best_objdiff_percent":97.0,"generated_size":360,"relocations_equal":false,"target_relocation_count":27,"generated_relocation_count":27,"blocker":"Canonical GC/1.3 rotates the persistent object, buffer pointers, loop variables and flush sizes across callee-saved registers relative to retail despite size-exact control flow and instruction selection.","evidence":"reports/GEDE01/objdiff-game_fn_8018A060-session-1349.json"},
+    {"name":"fn_8018A1C8","address":"0x8018A1C8","size":328,"status":"NonMatching","best_objdiff_percent":96.34146,"generated_size":328,"relocations_equal":false,"target_relocation_count":18,"generated_relocation_count":18,"blocker":"Canonical GC/1.3 selects a different callee-saved register permutation for the object, three buffers, sizes and nested loop induction values than retail.","evidence":"reports/GEDE01/objdiff-game_fn_8018A1C8-session-1349.json"},
+    {"name":"fn_8018A310","address":"0x8018A310","size":200,"status":"Matching","objdiff_percent":100.0,"relocations_equal":true,"relocation_count":14,"evidence":"reports/GEDE01/objdiff-game_fn_8018A310-session-1349.json"}
+  ],
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "verification_evidence": "reports/GEDE01/session-1349-verification.json",
+  "result": "Matched 200 contiguous-frontier bytes; two preceding independent honest-C functions remain explicit NonMatching debt, including expected strict name/address relocation inequality for both NonMatching translation units. The command and raw output beside every figure are in verification_evidence."
+}

@@ -34,7 +34,7 @@ extern void fn_800719D8(void);
 extern int fn_80201B44();
 extern void *fn_80201814();
 extern void *fn_80201B8C();
-extern void fn_8006EDA0(void *, void *);
+extern int fn_8006EDA0(void *, void *);
 extern int fn_800E4834(void);
 extern void fn_800E46CC(void);
 extern int fn_800E5044(void);

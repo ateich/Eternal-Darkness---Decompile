@@ -1,0 +1,51 @@
+{
+  "session_id": "session-1349",
+  "config": "function_reloc_diffs=name_address",
+  "range_start": "0x8018A060",
+  "range_end": "0x8018A3D8",
+  "provenance": {
+    "generation_command": "for unit in 8018A060 8018A1C8 8018A310; do build/tools/objdiff-cli diff -p . -u main/game/game_fn_${unit} fn_${unit} -o reports/GEDE01/objdiff-game_fn_${unit}-session-1349.json --format json-pretty -c function_reloc_diffs=name_address >/dev/null 2>&1 && printf 'fn_%s objdiff_exit=0 evidence=reports/GEDE01/objdiff-game_fn_%s-session-1349.json\\n' \"$unit\" \"$unit\"; done",
+    "generation_raw_output": "fn_8018A060 objdiff_exit=0 evidence=reports/GEDE01/objdiff-game_fn_8018A060-session-1349.json\nfn_8018A1C8 objdiff_exit=0 evidence=reports/GEDE01/objdiff-game_fn_8018A1C8-session-1349.json\nfn_8018A310 objdiff_exit=0 evidence=reports/GEDE01/objdiff-game_fn_8018A310-session-1349.json\n",
+    "objdiff_measurement_command": "See affected_object_objdiff_measurement in reports/GEDE01/session-1349-verification.json",
+    "objdiff_measurement_raw_output": "fn_8018A060 target_bytes=360 base_bytes=360 match_percent=97.0\nfn_8018A1C8 target_bytes=328 base_bytes=328 match_percent=96.34146\nfn_8018A310 target_bytes=200 base_bytes=200 match_percent=100.0\n",
+    "relocation_measurement_command": "See affected_object_relocations in reports/GEDE01/session-1349-verification.json",
+    "relocation_measurement_raw_output": "fn_8018A060 left_relocations=27 right_relocations=27 name_address_equal=false\nfn_8018A1C8 left_relocations=18 right_relocations=18 name_address_equal=false\nfn_8018A310 left_relocations=14 right_relocations=14 name_address_equal=true\n"
+  },
+  "functions": [
+    {
+      "symbol": "fn_8018A060",
+      "object": "main/game/game_fn_8018A060",
+      "objdiff_evidence": "reports/GEDE01/objdiff-game_fn_8018A060-session-1349.json",
+      "target_relocation_bearing_instructions": 27,
+      "generated_relocation_bearing_instructions": 27,
+      "relocations_equal": false,
+      "match_percent": 97.0,
+      "target_code_bytes": 360,
+      "generated_code_bytes": 360
+    },
+    {
+      "symbol": "fn_8018A1C8",
+      "object": "main/game/game_fn_8018A1C8",
+      "objdiff_evidence": "reports/GEDE01/objdiff-game_fn_8018A1C8-session-1349.json",
+      "target_relocation_bearing_instructions": 18,
+      "generated_relocation_bearing_instructions": 18,
+      "relocations_equal": false,
+      "match_percent": 96.34146,
+      "target_code_bytes": 328,
+      "generated_code_bytes": 328
+    },
+    {
+      "symbol": "fn_8018A310",
+      "object": "main/game/game_fn_8018A310",
+      "objdiff_evidence": "reports/GEDE01/objdiff-game_fn_8018A310-session-1349.json",
+      "target_relocation_bearing_instructions": 14,
+      "generated_relocation_bearing_instructions": 14,
+      "relocations_equal": true,
+      "match_percent": 100.0,
+      "target_code_bytes": 200,
+      "generated_code_bytes": 200
+    }
+  ],
+  "relocations_equal": false,
+  "note": "Strict name/address equality fails for both NonMatching translation units and passes for the Matching translation unit. No aggregate match claim is made."
+}

@@ -1,0 +1,77 @@
+{
+  "session_id": "session-1349",
+  "remediation": "review-remediation-2",
+  "build_report": "build/GEDE01/report.json",
+  "dol_path": "build/GEDE01/main.dol",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "expected_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "dol_sha1_equal": true,
+  "matching_functions": 3600,
+  "matching_objects": 3835,
+  "matching_code_bytes": 557052,
+  "linked_code_bytes": 557020,
+  "session_matched_functions": ["fn_8018A310"],
+  "session_matched_bytes": 200,
+  "session_nonmatching_bytes": 688,
+  "next_target": "0x8018A3D8",
+  "field_provenance": {
+    "dol_sha1,dol_sha1_equal": "dol_sha1",
+    "matching_functions,matching_objects,matching_code_bytes,linked_code_bytes": "global_progress",
+    "session_matched_functions,session_matched_bytes,session_nonmatching_bytes": "session_summary",
+    "next_target": "frontier_accounting"
+  },
+  "verification": [
+    {
+      "gate": "canonical_build",
+      "command": "(./.tools/bin/ninja >/dev/null 2>&1 && printf 'build_exit=0\\n')",
+      "raw_output": "build_exit=0\n"
+    },
+    {
+      "gate": "dol_sha1",
+      "command": "sha1sum build/GEDE01/main.dol",
+      "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\n",
+      "expected": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+      "equal": true
+    },
+    {
+      "gate": "affected_object_objdiff_generation",
+      "command": "for unit in 8018A060 8018A1C8 8018A310; do build/tools/objdiff-cli diff -p . -u main/game/game_fn_${unit} fn_${unit} -o reports/GEDE01/objdiff-game_fn_${unit}-session-1349.json --format json-pretty -c function_reloc_diffs=name_address >/dev/null 2>&1 && printf 'fn_%s objdiff_exit=0 evidence=reports/GEDE01/objdiff-game_fn_%s-session-1349.json\\n' \"$unit\" \"$unit\"; done",
+      "raw_output": "fn_8018A060 objdiff_exit=0 evidence=reports/GEDE01/objdiff-game_fn_8018A060-session-1349.json\nfn_8018A1C8 objdiff_exit=0 evidence=reports/GEDE01/objdiff-game_fn_8018A1C8-session-1349.json\nfn_8018A310 objdiff_exit=0 evidence=reports/GEDE01/objdiff-game_fn_8018A310-session-1349.json\n"
+    },
+    {
+      "gate": "affected_object_objdiff_measurement",
+      "command": "for unit in 8018A060 8018A1C8 8018A310; do f=reports/GEDE01/objdiff-game_fn_${unit}-session-1349.json; jq -r '[\"fn_\" + ($unit), \"target_bytes=\" + (.left.sections[] | select(.name==\".text\") | .size), \"base_bytes=\" + (.right.sections[] | select(.name==\".text\") | .size), \"match_percent=\" + ((.left.sections[] | select(.name==\".text\") | .match_percent)|tostring)] | join(\" \")' --arg unit \"$unit\" \"$f\"; done",
+      "raw_output": "fn_8018A060 target_bytes=360 base_bytes=360 match_percent=97.0\nfn_8018A1C8 target_bytes=328 base_bytes=328 match_percent=96.34146\nfn_8018A310 target_bytes=200 base_bytes=200 match_percent=100.0\n"
+    },
+    {
+      "gate": "affected_object_relocations",
+      "command": "for unit in 8018A060 8018A1C8 8018A310; do f=reports/GEDE01/objdiff-game_fn_${unit}-session-1349.json; left=$(jq -r '.left.symbols[]?.instructions[]? | select(.instruction.relocation) | [(.instruction.address // \"0\"), .instruction.relocation.type_name, .instruction.formatted] | @tsv' \"$f\"); right=$(jq -r '.right.symbols[]?.instructions[]? | select(.instruction.relocation) | [(.instruction.address // \"0\"), .instruction.relocation.type_name, .instruction.formatted] | @tsv' \"$f\"); left_count=$(printf '%s\\n' \"$left\" | sed '/^$/d' | wc -l); right_count=$(printf '%s\\n' \"$right\" | sed '/^$/d' | wc -l); if [ \"$left\" = \"$right\" ]; then equal=true; else equal=false; fi; printf 'fn_%s left_relocations=%s right_relocations=%s name_address_equal=%s\\n' \"$unit\" \"$left_count\" \"$right_count\" \"$equal\"; done",
+      "raw_output": "fn_8018A060 left_relocations=27 right_relocations=27 name_address_equal=false\nfn_8018A1C8 left_relocations=18 right_relocations=18 name_address_equal=false\nfn_8018A310 left_relocations=14 right_relocations=14 name_address_equal=true\n"
+    },
+    {
+      "gate": "frontier_accounting",
+      "command": "python3 tools/frontier_accounting.py --splits config/GEDE01/splits.txt --configure configure.py --start 0x8018A060 --end 0x8018A3D8",
+      "raw_output": "0x8018a060-0x8018a1c8=360:NonMatching 0x8018a1c8-0x8018a310=328:NonMatching 0x8018a310-0x8018a3d8=200:Matching\nmatched_bytes=200 nonmatching_bytes=688 range_bytes=888 accounted_bytes=888 next_target=0x8018a3d8\n"
+    },
+    {
+      "gate": "global_progress",
+      "command": "jq -r '\"matching_functions=\\(.matching_functions) matching_objects=\\(.matching_objects) matching_code_bytes=\\(.matching_code_bytes) linked_code_bytes=\\(.linked_code_bytes)\"' reports/GEDE01/progress.json",
+      "raw_output": "matching_functions=3600 matching_objects=3835 matching_code_bytes=557052 linked_code_bytes=557020\n"
+    },
+    {
+      "gate": "session_summary",
+      "command": "jq -r '\"session_matched_functions=\" + ([.functions[] | select(.status==\"Matching\") | .name] | join(\",\")) + \" session_matched_bytes=\" + ([.functions[] | select(.status==\"Matching\") | .size] | add | tostring) + \" session_nonmatching_bytes=\" + ([.functions[] | select(.status==\"NonMatching\") | .size] | add | tostring)' reports/GEDE01/frontier-8018A060-8018A3D8-session-1349.json",
+      "raw_output": "session_matched_functions=fn_8018A310 session_matched_bytes=200 session_nonmatching_bytes=688\n"
+    },
+    {
+      "gate": "frontier_commit_chain",
+      "command": "git show -s --format='%h %s' e5b37463 3f6337a0 7c3f674f ad441bfe",
+      "raw_output": "e5b37463 Attempt fn_8018A060 reconstruction\n3f6337a0 Attempt fn_8018A1C8 reconstruction\n7c3f674f Match fn_8018A310\nad441bfe Report session 1349 frontier progress\n"
+    },
+    {
+      "gate": "no_asm_added",
+      "command": "git diff --name-only e5b37463^..ad441bfe | if rg '\\.(s|S|asm)$'; then exit 1; else printf 'asm_files_added=0\\n'; fi",
+      "raw_output": "asm_files_added=0\n"
+    }
+  ]
+}

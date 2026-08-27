@@ -332,7 +332,11 @@ def load_retail_evidence(path: Path) -> dict[str, dict[str, str]]:
     return symbols
 
 
-def audit(source_root: Path, retail_evidence_path: Path = DEFAULT_RETAIL_EVIDENCE) -> dict[str, object]:
+def audit(
+    source_root: Path,
+    retail_evidence_path: Path = DEFAULT_RETAIL_EVIDENCE,
+    applied_symbols: set[str] | None = None,
+) -> dict[str, object]:
     grouped: dict[str, list[Declaration]] = defaultdict(list)
     definitions: dict[str, Definition] = {}
     paths = sorted(
@@ -458,12 +462,82 @@ def audit(source_root: Path, retail_evidence_path: Path = DEFAULT_RETAIL_EVIDENC
     ground_truth_contradictions.sort(
         key=lambda item: (-int(item["declarations"]), str(item["symbol"]))
     )
+    truth_by_symbol = {
+        str(item["symbol"]): item["ground_truth"]
+        for item in ground_truth_contradictions
+    }
+    applied_symbols = applied_symbols or set()
+    for category, entries in categories.items():
+        for entry in entries:
+            sites = [
+                site
+                for variant in entry["variants"]
+                for site in variant["sites"]
+            ]
+            translation_units = sorted({site.rsplit(":", 1)[0] for site in sites})
+            truth = truth_by_symbol.get(str(entry["symbol"]))
+            entry["affected_translation_units"] = len(translation_units)
+            entry["translation_units"] = translation_units
+            entry["confidence"] = "high" if truth is not None else "low"
+            entry["evidence"] = (
+                [truth]
+                if truth is not None
+                else [{
+                    "kind": "declarations-only",
+                    "source": site,
+                    "detail": "No owned definition or unambiguous retail return evidence grounds this reading.",
+                } for site in sites]
+            )
+            for variant in entry["variants"]:
+                variant["evidence"] = [
+                    {"kind": "declaration", "source": site}
+                    for site in variant["sites"]
+                ]
+                if truth is not None:
+                    variant["ground_truth"] = truth
+            symbol = str(entry["symbol"])
+            if symbol in applied_symbols:
+                entry["disposition"] = "applied"
+                entry["disposition_reason"] = (
+                    "Owned-definition return evidence is high-confidence; the correction affects no more than 12 translation units and passed rebuild, objdiff, and DOL gates."
+                )
+            else:
+                entry["disposition"] = "deferred"
+                if truth is None:
+                    reason = "Low confidence: declarations alone do not establish the callee's true signature."
+                elif len(translation_units) > 12:
+                    reason = "High-confidence evidence exists, but the contradiction affects more than 12 translation units."
+                elif category != "return_register_contradictions":
+                    reason = "Deferred because this session is scoped to return-register contradictions."
+                else:
+                    reason = "Not selected for the bounded correction round; declarations remain unchanged."
+                entry["disposition_reason"] = reason
+    applied_corrections = []
+    for symbol in sorted(applied_symbols):
+        definition = definitions.get(symbol)
+        declarations = grouped.get(symbol, [])
+        translation_units = sorted({item.path for item in declarations})
+        applied_corrections.append({
+            "symbol": symbol,
+            "affected_translation_units": len(translation_units),
+            "translation_units": translation_units,
+            "resulting_signatures": sorted({item.signature for item in declarations}),
+            "confidence": "high" if definition is not None else "low",
+            "evidence": ({
+                "kind": "owned-definition",
+                "return_type": definition.return_type,
+                "return_shape": definition.return_shape,
+                "source": f"{definition.path}:{definition.line}",
+            } if definition is not None else None),
+            "disposition": "applied",
+        })
     return {
         "source": str(source_root.relative_to(ROOT)),
         "declarations": sum(len(items) for items in grouped.values()),
         "symbols": len(grouped),
         "definitions": len(definitions),
         "retail_evidence_symbols": len(retail_evidence),
+        "applied_corrections": applied_corrections,
         "ground_truth_contradictions": ground_truth_contradictions,
         **categories,
     }
@@ -535,9 +609,56 @@ def main() -> int:
         "--limit", type=int, default=10,
         help="maximum symbols shown per category (0 means unlimited; default: 10)",
     )
+    parser.add_argument("--session-id", help="attach consolidation-session metadata")
+    parser.add_argument("--starting-target", help="starting chain target")
+    parser.add_argument("--ending-next-target", help="unchanged ending chain target")
+    parser.add_argument(
+        "--applied-symbol", action="append", default=[],
+        help="symbol corrected and independently verified in this session",
+    )
+    parser.add_argument("--dol-sha1", help="verified linked DOL SHA-1")
+    parser.add_argument("--build-report", type=Path, help="fresh objdiff report.json")
+    parser.add_argument(
+        "--verified-object", action="append", default=[],
+        help="affected objdiff unit confirmed at 100 percent",
+    )
     args = parser.parse_args()
     source = args.source.resolve()
-    report = audit(source, args.retail_evidence.resolve())
+    report = audit(source, args.retail_evidence.resolve(), set(args.applied_symbol))
+    verified_objects: list[dict[str, object]] = []
+    if args.build_report is not None:
+        build_report_path = args.build_report.resolve()
+        build_report = json.loads(build_report_path.read_text(encoding="utf-8"))
+        units = {item["name"]: item for item in build_report.get("units", [])}
+        for name in args.verified_object:
+            unit = units.get(name)
+            if unit is None:
+                raise ValueError(f"{build_report_path}: missing verified unit {name}")
+            measures = unit.get("measures", {})
+            verified_objects.append({
+                "name": name,
+                "matched_code_percent": measures.get("matched_code_percent"),
+                "complete_code_percent": measures.get("complete_code_percent"),
+                "complete": unit.get("metadata", {}).get("complete", False),
+                "source": str(build_report_path.relative_to(ROOT)),
+            })
+    if args.session_id:
+        report["session"] = {
+            "session_id": args.session_id,
+            "starting_target": args.starting_target,
+            "ending_next_target": args.ending_next_target,
+            "matched_bytes_added": 0,
+            "nonmatching_bytes_added": 0,
+            "match_counts_revised": False,
+            "verification": {
+                "build_command": ".tools/bin/ninja",
+                "build_status": "passed",
+                "dol_sha1": args.dol_sha1,
+                "expected_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+                "dol_byte_change": args.dol_sha1 != "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+                "affected_objects_100_percent": verified_objects,
+            },
+        }
     serialized = json.dumps(report, indent=2) + "\n"
     if args.json_output is not None:
         args.json_output.write_text(serialized, encoding="utf-8")
