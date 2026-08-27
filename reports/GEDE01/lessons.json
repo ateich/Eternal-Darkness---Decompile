@@ -2,10 +2,10 @@
   "schema_version": 2,
   "scope": "Distinct MWCC code-generation behaviors documented in reports/GEDE01/progress.json open_items and docs/matching.md",
   "source_snapshot": {
-    "repository_revision": "6e9d7f2bb8568df12d041ef494bb583e3abd0998",
-    "next_target": "0x801861C4",
+    "repository_revision": "161d675f13290f4ae066a6720e27b08043d3a468",
+    "next_target": "0x80186A88",
     "reports/GEDE01/progress.json": {
-      "sha256": "2f5e0fd6b68fe7c7fe43188bc4ce061a9c3d4469369581c61391f2474aea894c",
+      "sha256": "392c98fac8620e4a0cd584baf7a18f61ac9b7736eca1c4cf1d88574aa0099bd0",
       "scope": "open_items"
     },
     "docs/matching.md": {
@@ -15,12 +15,12 @@
   "consolidation_audit": {
     "original_consolidation_commit": "86d029104eb5ed6ad01b6af03963ea2cf924d2a4",
     "comparison_base": "9036017d38d768d26731df5833c1b14417e215ba",
-    "scope": "Refreshed the catalog through session-1326 remediation 2 without changing generated progress accounting: 328 MWCC code-generation lessons were carried forward unchanged and 21 distinct repository-documented behaviors were appended.",
+    "scope": "Refreshed the catalog through session-1330 remediation 2 without changing generated progress accounting: 328 MWCC code-generation lessons were carried forward unchanged and 22 distinct repository-documented behaviors were appended.",
     "carried_forward_lessons": 328,
-    "new_lessons": 21,
+    "new_lessons": 22,
     "modified_existing_lessons": 0,
     "removed_lessons": 0,
-    "total_lessons": 349
+    "total_lessons": 350
   },
   "lessons": [
     {
@@ -134,6 +134,17 @@
       "precise_divergence": "Keeping the spawned object in a distinct local shortens the incoming create-record lifetime and does not reproduce retail's r29 allocation.",
       "workaround": "Reuse the incoming create-record local for the spawned object.",
       "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80054040"]
+    },
+    {
+      "category": "data-layout",
+      "functions": ["game_data_80239E10"],
+      "precise_divergence": "Canonical MWCC gives separately declared globals at least 4-byte alignment, so two retail .rodata symbols separated by only 2 bytes cannot be reproduced as independent C declarations. Merging the retail bytes into one 8-byte object matches the section, but objcopy --add-symbol creates the interior lbl_80239E12 with size zero; objdiff consequently omits it from the generated-symbol side and reports the retail size-4 symbol as 0.0%/DIFF_DELETE even though [.rodata-0] is 100.0%.",
+      "workaround": "For sub-4-byte retail global-symbol granularity, emit one merged section blob and add the required interior link symbol with objcopy. Treat the added symbol as a link-compatibility mechanism, not an objdiff symbol match: retain the raw section and symbol percentages, verify the synthetic whole-section symbol at 100%, name any still-assembly relocation consumers, and require the exact DOL hash.",
+      "evidence": [
+        "reports/GEDE01/objdiff-consolidation-game_data_80239E10-session-1330-remediation-1.json",
+        "reports/GEDE01/nonmatching-100-percent-consolidation-session-1330.json: candidates[0].fresh_exact_gate",
+        "58 still-assembly .s files: 522 .4byte lbl_80239E12 references total (a separate 61 .s files define the symbol via .obj/.endobj, 122 lines; 522+122=644 total name occurrences, which is NOT the reference count); build/GEDE01/asm/auto_07_80248C88_data.s is one consumer with nine references. Counted directly in build/GEDE01/asm on 2026-08-27 by Smith, matching .4byte references and .obj definitions separately with grep -rl and grep -rh over *.s"
+      ]
     },
     {
       "category": "instruction-scheduling",
