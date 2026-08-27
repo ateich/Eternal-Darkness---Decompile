@@ -1,0 +1,69 @@
+{
+  "artifact_status": "rejected",
+  "rejected_reason": "fabricated declaration-consolidation claims and a concealed game_fn_8017E1E4 match regression",
+  "superseded_by": "reports/GEDE01/signature-consolidation-review-remediation-1-8f1c3278-8547-4bb9-b1a3-8f74c2df5aeb.json",
+  "session_id": "62f222c9-2178-4fe3-aa0f-de7dcb903582",
+  "remediation": "review-remediation-2-of-3",
+  "scope": "declaration corrections only; no frontier work",
+  "next_target": "0x801854B4",
+  "checkpoints": [
+    {
+      "symbol": "fn_80201B54",
+      "evidence": "retail callee loads r3 from 0x10(r3) and returns r3",
+      "correction": "all integer-return extern declarations replaced by pointer-return declarations; callers that require the legacy integer view retain a direct-call compatibility cast",
+      "remaining_integer_declarations": 0,
+      "build_result": "exact"
+    },
+    {
+      "symbol": "fn_800FBFB0",
+      "evidence": "in-tree definition is unsigned int fn_800FBFB0(void)",
+      "correction": "all extern declarations normalized to unsigned int fn_800FBFB0(void)",
+      "remaining_signed_typedef_or_unspecified_declarations": 0,
+      "build_result": "exact"
+    },
+    {
+      "symbol": "fn_80201B9C",
+      "evidence": "retail zero-argument pointer accessor and observed callers pass no arguments",
+      "correction": "all unspecified-parameter extern declarations normalized to void parameters",
+      "remaining_unspecified_declarations": 0,
+      "build_result": "exact"
+    }
+  ],
+  "negative_checkpoint": {
+    "symbol": "fn_80201B3C",
+    "attempt": "normalize unspecified declarations to zero arguments",
+    "result": "reverted before final build",
+    "reason": "reconstructed callers game_fn_8008CA28, game_fn_80090204, and game_fn_800A7F1C pass one argument; the retail evidence proves return shape but does not justify erasing this call-site ambiguity"
+  },
+  "deferred_parameter_claims": {
+    "symbols": [
+      "fn_8011F114",
+      "fn_80128C28",
+      "fn_80156938",
+      "fn_80201B3C",
+      "fn_80201BC8",
+      "fn_80201EB8",
+      "fn_8020123C"
+    ],
+    "reason": "their known definitions or retail callees establish ABI shape, but reconstructed callers contain incompatible arities or source types; this remediation does not claim those declarations were consolidated"
+  },
+  "verification": {
+    "build_completed": "2026-08-27T08:08:04-04:00",
+    "objdiff_generated": "2026-08-27T08:09:18-04:00",
+    "signature_audit_generated": "2026-08-27T08:09:21-04:00",
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "objdiff_sha1": "ab37c2e899b53199d45e2282abdb1776716546bb",
+    "signature_audit_sha1": "98d55b230df87b9cf75a96337c1a40a0532494bc",
+    "objdiff_scope_units": 5194,
+    "matched_code_bytes": 546868,
+    "matched_functions": 3543,
+    "complete_units": 3777,
+    "instruction_and_relocation_regression": false
+  },
+  "preserved_rejected_evidence": [
+    "reports/GEDE01/objdiff-session-1320.json",
+    "reports/GEDE01/signature-audit-session-1320.json",
+    "reports/GEDE01/signature-consolidation-session-1320.json"
+  ],
+  "frontier_progress_updated": false
+}

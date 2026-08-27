@@ -1,0 +1,125 @@
+{
+  "session_id": "8f1c3278-8547-4bb9-b1a3-8f74c2df5aeb",
+  "remediation": "review-remediation-1-of-3",
+  "followup_remediation": "review-remediation-3-of-3",
+  "scope": "blocking regression and evidence corrections only; no frontier work",
+  "next_target": "0x801854B4",
+  "corrections": [
+    {
+      "symbol": "fn_800FBFB0",
+      "unit": "main/game/game_fn_8017E1E4",
+      "finding": "the retained unsigned caller declaration changed signed radius subtraction to unsigned arithmetic and concealed a real objdiff regression",
+      "remediation_1_fuzzy_match_percent": 92.45098,
+      "rejected_remediation_3_fuzzy_match_percent": 85.68627,
+      "reported_regression_points": -6.76471,
+      "decision": "reverted this caller TU to extern int fn_800FBFB0(void)",
+      "corrected_fuzzy_match_percent": 92.45098,
+      "recovered_points": 6.76471,
+      "definition": "unsigned int fn_800FBFB0(void)",
+      "final_declarations": 92,
+      "unsigned_declarations": 90,
+      "signed_declarations": 2,
+      "signed_declaration_sites": [
+        "src/game/game_fn_800654F8.c:19",
+        "src/game/game_fn_8017E1E4.c:12"
+      ],
+      "audit_parser_limitation": "the audit retains the raw extern-only parser total of 16980; a corpus-wide independent audit found 229 omitted declaration lines across 117 symbols, including game_fn_800654F8.c:19",
+      "classification_warning": "the consistent/cosmetic assignments for those 117 symbols are unvalidated because the parser never saw all variants; cosmetic may conceal further live-codegen signedness splits of the same class demonstrated by fn_800FBFB0 in game_fn_8017E1E4",
+      "abi_note": "the definition fixes the GPR return shape but does not prove either original caller TU's signedness; both callers keep their match-supported signed declarations until the source-level ABI mismatch can be resolved without changing retail code generation"
+    },
+    {
+      "symbol": "fn_80201B9C",
+      "action": "deleted the fabricated fn_80201B9C checkpoint; no source change is claimed"
+    },
+    {
+      "artifacts": "review-remediation-2 evidence",
+      "action": "marked all three rejected remediation-2 artifacts directly with artifact_status and superseded_by metadata"
+    }
+  ],
+  "objdiff_investigation": {
+    "comparison": "review-remediation-1 baseline through rejected remediation-3 and corrected post-build report",
+    "remediation_1_to_rejected_remediation_3_delta_units": [
+      {
+        "unit": "main/game/game_fn_8017E1E4",
+        "before": 92.45098,
+        "after": 85.68627,
+        "delta_points": -6.76471
+      }
+    ],
+    "rejected_remediation_3_to_corrected_delta_units": [
+      {
+        "unit": "main/game/game_fn_8017E1E4",
+        "before": 85.68627,
+        "after": 92.45098,
+        "delta_points": 6.76471
+      }
+    ],
+    "remediation_1_to_corrected_delta_units": [],
+    "same_tree_repeated_generation_measured": true,
+    "cross_tree_unit_identity_observed": true,
+    "same_tree_report_sha1s": [
+      "3a0a0faa6f42c381f6fef2ec16e4111647b33f74",
+      "3a0a0faa6f42c381f6fef2ec16e4111647b33f74"
+    ],
+    "finding": "the final build's report and an independent post-build report regeneration on the unchanged tree both hash to 3a0a0faa6f42c381f6fef2ec16e4111647b33f74; separately, the corrected 5194-unit report is unit-for-unit equal to remediation-1 while the rejected remediation-3 tree differs only at game_fn_8017E1E4",
+    "regression_claim": "the concealed 6.76471-point game_fn_8017E1E4 regression is reported and recovered; no instruction, relocation, or unit-measure regression remains versus remediation-1"
+  },
+  "verification": {
+    "completed": "2026-08-27T08:55:42-04:00",
+    "remediation_3_verification": "reports/GEDE01/session-1318-review-remediation-3-verification.json",
+    "canonical_build_exit": 0,
+    "canonical_build_completed": "2026-08-27T08:55:42-04:00",
+    "objdiff_generated_after_final_build": "2026-08-27T08:55:42-04:00",
+    "affected_source_files_from_rejected_remediation": 288,
+    "affected_c_objects_from_rejected_remediation": 287,
+    "affected_c_objects_present_in_full_objdiff": 287,
+    "objdiff_scope_units": 5194,
+    "matched_code_bytes": 546868,
+    "matched_functions": 3543,
+    "complete_units": 3777,
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "objdiff_sha1": "3a0a0faa6f42c381f6fef2ec16e4111647b33f74",
+    "focused_objdiff_sha1": "ca98b0ae109e651a90afc5e8bae4ddfe3a467b87",
+    "signature_audit_prior_sha1": "8c46f0092e397fdcd90c6721485f8b09f8d18c04",
+    "signature_audit_sha1": "da36b15d62e53dea3191708167523fa0fcba4d8b",
+    "focused_object_sha1": "ed22d1904c324d22cbb9d062e9ea809ec381a866",
+    "focused_object_retail_code_bytes": 204,
+    "focused_object_reconstructed_code_bytes": 200,
+    "focused_object_instruction_rows_per_side": 52,
+    "focused_object_relocations_per_side": 4,
+    "remediation_2_affected_objects_verified": 2,
+    "remediation_2_focused_evidence": [
+      {
+        "unit": "main/game/game_fn_800654F8",
+        "objdiff_sha1": "487d10a2e379d02f98815631395ba8d2ee8efb38",
+        "object_sha1": "c14b46a39d5c1285c1460cc34888efb908b54c07",
+        "retail_code_bytes": 4700,
+        "reconstructed_code_bytes": 4552,
+        "fuzzy_match_percent": 82.98042,
+        "instruction_rows_per_side": 1233,
+        "retail_relocations": 179,
+        "reconstructed_relocations": 159,
+        "match_claim": false
+      },
+      {
+        "unit": "main/game/game_fn_8017E1E4",
+        "objdiff_sha1": "ca98b0ae109e651a90afc5e8bae4ddfe3a467b87",
+        "object_sha1": "ed22d1904c324d22cbb9d062e9ea809ec381a866",
+        "retail_code_bytes": 204,
+        "reconstructed_code_bytes": 200,
+        "fuzzy_match_percent": 92.45098,
+        "instruction_rows_per_side": 52,
+        "relocations_per_side": 4,
+        "relocations_equal": true,
+        "match_claim": false
+      }
+    ]
+  },
+  "superseded_artifacts": [
+    "reports/GEDE01/objdiff-review-remediation-2-62f222c9-2178-4fe3-aa0f-de7dcb903582.json",
+    "reports/GEDE01/signature-audit-review-remediation-2-62f222c9-2178-4fe3-aa0f-de7dcb903582.json",
+    "reports/GEDE01/signature-consolidation-review-remediation-2-62f222c9-2178-4fe3-aa0f-de7dcb903582.json",
+    "reports/GEDE01/signature-consolidation-review-remediation-3-8f1c3278-8547-4bb9-b1a3-8f74c2df5aeb.json"
+  ],
+  "frontier_progress_updated": false
+}

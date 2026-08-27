@@ -19,7 +19,7 @@ extern int fn_80199108(void*);
 extern int fn_8017FEA4(void*);
 extern u8 fn_80199118(void*);
 extern int fn_80199100(void*);
-extern unsigned int fn_800FBFB0();
+extern unsigned int fn_800FBFB0(void);
 #define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void* fn_8017FDA8(void*, int);
 extern void fn_801534D8(void*, float, short*);

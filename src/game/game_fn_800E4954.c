@@ -1,4 +1,4 @@
-extern unsigned int fn_800FBFB0();
+extern unsigned int fn_800FBFB0(void);
 #define fn_800FBFB0() ((int)fn_800FBFB0())
 extern unsigned short lbl_8064B7E4[2];
 

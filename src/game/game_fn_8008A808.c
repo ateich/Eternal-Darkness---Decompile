@@ -9,7 +9,7 @@ typedef struct OwnerData {
     void* range;
 } OwnerData;
 
-extern unsigned int fn_800FBFB0();
+extern unsigned int fn_800FBFB0(void);
 #define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void *fn_80201B8C();
 extern void* fn_80201B94();

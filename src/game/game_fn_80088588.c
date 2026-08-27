@@ -7,7 +7,7 @@ typedef struct Work { u8 bytes[0xC4]; Owner* owner; } Work;
 
 extern Context* fn_8006D1DC(int);
 extern void fn_8006D198(Work*, Context*, int);
-extern unsigned int fn_800FBFB0();
+extern unsigned int fn_800FBFB0(void);
 #define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void fn_8006BEE4(Context*, void (*)(void));
 extern void fn_8006DEF8(Work*, int, void*, void*, int);

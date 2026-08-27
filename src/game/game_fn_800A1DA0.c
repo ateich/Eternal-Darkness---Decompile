@@ -22,7 +22,7 @@ typedef struct Object800A1DA0 {
     u16 timer;
 } Object800A1DA0;
 
-extern unsigned int fn_800FBFB0();
+extern unsigned int fn_800FBFB0(void);
 #define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void* fn_80201B3C();
 #define FN_80201E78_RETURN void

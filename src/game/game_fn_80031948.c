@@ -25,7 +25,7 @@ typedef struct EffectDescriptor {
 } EffectDescriptor;
 
 extern void fn_80181F5C(EffectDescriptor*);
-extern unsigned int fn_800FBFB0();
+extern unsigned int fn_800FBFB0(void);
 #define fn_800FBFB0() ((int)fn_800FBFB0())
 extern s32 fn_801D3A24(s32, s32);
 extern void fn_80182014(void);

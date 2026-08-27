@@ -7,7 +7,7 @@ typedef struct Work { u8 pad[0x3C]; float value; } Work;
 extern void *fn_8006ED3C();
 extern int fn_800891FC(void);
 extern void fn_800891F4(int);
-extern unsigned int fn_800FBFB0();
+extern unsigned int fn_800FBFB0(void);
 #define fn_800FBFB0() ((int)fn_800FBFB0())
 extern int fn_80088818(void);
 extern void fn_801FA66C(int, int, float);

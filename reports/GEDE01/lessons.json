@@ -2,10 +2,10 @@
   "schema_version": 2,
   "scope": "Distinct MWCC code-generation behaviors documented in reports/GEDE01/progress.json open_items and docs/matching.md",
   "source_snapshot": {
-    "repository_revision": "78f46f4af93ad443cf783c4b8c7919706e3821c9",
-    "next_target": "0x8018424C",
+    "repository_revision": "6e9d7f2bb8568df12d041ef494bb583e3abd0998",
+    "next_target": "0x801861C4",
     "reports/GEDE01/progress.json": {
-      "sha256": "63854e4c96eed81e51eb2e5d7d5ab6a5d28504f70f3896a734e96f5e87b3ca2d",
+      "sha256": "2f5e0fd6b68fe7c7fe43188bc4ce061a9c3d4469369581c61391f2474aea894c",
       "scope": "open_items"
     },
     "docs/matching.md": {
@@ -15,12 +15,12 @@
   "consolidation_audit": {
     "original_consolidation_commit": "86d029104eb5ed6ad01b6af03963ea2cf924d2a4",
     "comparison_base": "9036017d38d768d26731df5833c1b14417e215ba",
-    "scope": "Refreshed the catalog through session-1309 without changing generated progress accounting: 328 MWCC code-generation lessons were carried forward unchanged and 20 distinct repository-documented behaviors were appended.",
+    "scope": "Refreshed the catalog through session-1326 remediation 2 without changing generated progress accounting: 328 MWCC code-generation lessons were carried forward unchanged and 21 distinct repository-documented behaviors were appended.",
     "carried_forward_lessons": 328,
-    "new_lessons": 20,
+    "new_lessons": 21,
     "modified_existing_lessons": 0,
     "removed_lessons": 0,
-    "total_lessons": 348
+    "total_lessons": 349
   },
   "lessons": [
     {
@@ -2458,6 +2458,16 @@
       "precise_divergence": "Narrow loop-local types do not reproduce retail's r28-r30 allocation and comparison sequence.",
       "workaround": "Use integer loop locals.",
       "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1307"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80185FD0"],
+      "precise_divergence": "Canonical GC/1.3 compares two direct u16 operands with cmplw, but adding explicit int casts to both operands selects retail's cmpw even though standard integer promotion already makes the casts semantically redundant.",
+      "workaround": "When retail uses cmpw for an equality comparison between recovered u16 values, try explicit int casts on both operands; do not assume MWCC's direct narrow comparison follows standard integer-promotion codegen.",
+      "evidence": [
+        "reports/GEDE01/objdiff-game_fn_80185FD0-session-1326-remediation-2.json",
+        "reports/GEDE01/frontier-80185FD0-801861C4-session-1326.json: remediation_2.signed_compare_trial"
+      ]
     }
   ]
 }

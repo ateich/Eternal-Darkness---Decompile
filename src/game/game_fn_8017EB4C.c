@@ -22,7 +22,7 @@ extern void* memcpy(void*, const void*, unsigned int);
 extern void fn_801804AC(void*, ShortCoord3*, ShortCoord3*, ShortCoord3*);
 extern void fn_80179904(ShortCoord3*, s16);
 extern void fn_8018F014(ShortCoord3*, int);
-extern u32 fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0(void);
 extern void fn_80180554(void*, ShortCoord3*, ShortCoord3*, ShortCoord3*, u16,
                         int);
 extern void fn_801805E0(void*, int, u8, u32, u8*, float);

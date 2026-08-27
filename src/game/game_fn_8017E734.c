@@ -1,6 +1,6 @@
 typedef signed short s16;
 
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0(void);
 
 void fn_8017E734(s16* output, s16* base, s16* change, s16* limit,
                  s16* accumulator)

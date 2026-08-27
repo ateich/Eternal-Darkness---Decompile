@@ -31,7 +31,7 @@ typedef struct Work {
 } Work;
 
 extern void *fn_8006ED3C();
-extern unsigned int fn_800FBFB0();
+extern unsigned int fn_800FBFB0(void);
 #define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void fn_801F69F0(Int3*, Vec3*, int);
 extern Settings lbl_8031D3B8;

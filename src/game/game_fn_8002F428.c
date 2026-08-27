@@ -44,7 +44,7 @@ extern s32 fn_8012FA54(void*, s32);
 extern void fn_8012C478(void*, s32, s32);
 extern void fn_801499C4(void*, s16*, s32, s32, s32);
 extern void fn_8011F114();
-extern unsigned int fn_800FBFB0();
+extern unsigned int fn_800FBFB0(void);
 #define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void fn_8011FB54(void*, s32);
 extern void fn_8011F0E8(void*, Vec3*);

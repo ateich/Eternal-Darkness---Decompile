@@ -68,7 +68,7 @@ extern void* memcpy(void*, const void*, unsigned int);
 extern void fn_8018163C(Entry801810A0*, ShortCoord3*, u8, u16);
 extern void fn_80211380(FloatCoord3*, FloatCoord3*, float);
 extern void fn_80211710(FloatCoord3*, FloatCoord3*, FloatCoord3*);
-extern u32 fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0(void);
 extern void fn_8018E230(Entry801810A0*, u8*, int, u8, int, int);
 extern void fn_8018E260(Entry801810A0*, int, int);
 extern void fn_801806D4(u8*, u32*, int);

@@ -4,7 +4,7 @@ typedef struct Vec3i {
     int z;
 } Vec3i;
 
-extern unsigned int fn_800FBFB0();
+extern unsigned int fn_800FBFB0(void);
 #define fn_800FBFB0() ((int)fn_800FBFB0())
 extern int fn_8011F598(int, int, int, int, void*, int);
 extern void fn_80179DB0(Vec3i*, void*);

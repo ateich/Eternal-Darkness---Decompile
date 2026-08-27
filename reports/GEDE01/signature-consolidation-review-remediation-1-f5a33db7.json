@@ -1,0 +1,46 @@
+{
+  "session_id": "f5a33db7-375f-478a-9561-c580ad04b01b",
+  "remediation": 1,
+  "starting_target": "0x801854B4",
+  "ending_next_target": "0x801854B4",
+  "frontier_changed": false,
+  "correction": {
+    "action": "Reverted the invalid session-1320 source consolidation and its structurally blind zero-disagreement claim. Restored the pre-session declarations, including known typed definitions and zero-argument void prototypes, and removed the fn_80201B54 integer-return cast.",
+    "new_matching_functions": 0,
+    "new_matching_code_bytes": 0,
+    "progress_json_changed": false,
+    "unresolved_declaration_drift_is_not_claimed_clean": true
+  },
+  "retail_callee_evidence": {
+    "fn_80201B3C": "0x80201B3C loads the global at lbl_8064D88C into r3 and returns; this is a zero-argument pointer accessor.",
+    "fn_80201B54": "0x80201B54 loads r3 from 0x10(r3) and returns; this takes one pointer and returns a pointer-sized field, so the inserted integer-return cast was wrong.",
+    "fn_80201B9C": "0x80201B9C calls fn_802014AC without consuming incoming r3, then loads r3 from result+4; this is a zero-argument pointer accessor.",
+    "fn_80201BC8": "0x80201BC8 loads r3 from 0x34(r3) and returns; this takes one pointer and returns a pointer.",
+    "fn_80201EB8": "0x80201EB8 tests r3, follows r3+0x34, calls fn_8011FB4C, or returns -1; this takes one pointer and returns a signed 32-bit value.",
+    "fn_8020123C": "0x8020123C stores incoming r3, r4, and r5, preserves r6, and returns the r3:r4 pair produced by fn_8020088C. Retail evidence therefore supports four word inputs and a 64-bit return shape; this shape was not inferred from the NonMatching caller."
+  },
+  "known_in_tree_definitions": [
+    "void fn_8011F114(Vec3*, Vec3*)",
+    "void* fn_80156938(Object*)",
+    "void fn_80128C28(Runtime*, u32, u32)",
+    "unsigned int fn_800FBFB0(void)"
+  ],
+  "verification": {
+    "build_command": ".tools/bin/ninja",
+    "build_status": "passed",
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "progress_json_sha1": "7f3edbdce2c67cbc1af4d275aefb6de5bdfddb7b",
+    "objdiff_report": "reports/GEDE01/objdiff-review-remediation-1-f5a33db7.json",
+    "signature_audit": "reports/GEDE01/signature-audit-review-remediation-1-f5a33db7.json",
+    "affected_objects": 114,
+    "affected_complete_objects": 86,
+    "affected_complete_retail_bytes": 19168,
+    "affected_preexisting_nonmatching_objects": 28,
+    "matching_regressions": 0
+  },
+  "affected_object_ledger": {
+    "source": "The objdiff report above contains all 114 affected unit entries with instruction and relocation-aware completion measures.",
+    "complete_units": ["main/game/game_fn_800073E4", "main/game/game_fn_800144CC", "main/game/game_fn_80014784", "main/game/game_fn_80019940", "main/game/game_fn_8002A4C8", "main/game/game_fn_8002A508", "main/game/game_fn_8002A590", "main/game/game_fn_8002A63C", "main/game/game_fn_8002A6CC", "main/game/game_fn_8002A754", "main/game/game_fn_8002A858", "main/game/game_fn_8002AA18", "main/game/game_fn_8002AB08", "main/game/game_fn_8002AB84", "main/game/game_fn_8002B624", "main/game/game_fn_8002B650", "main/game/game_fn_8002B688", "main/game/game_fn_80080588", "main/game/game_fn_800CFF04", "main/game/game_fn_800D4100", "main/game/game_fn_800D9AE8", "main/game/game_fn_800DA278", "main/game/game_fn_80117F30", "main/game/game_fn_80117FA0", "main/game/game_fn_80117FDC", "main/game/game_fn_80128754", "main/game/game_fn_80134210", "main/game/game_fn_80148254", "main/game/game_fn_80148294", "main/game/game_fn_8014883C", "main/game/game_fn_80148C0C", "main/game/game_fn_80148D08", "main/game/game_fn_80149748", "main/game/game_fn_801497E0", "main/game/game_fn_80149920", "main/game/game_fn_8014AE54", "main/game/game_fn_8014AF38", "main/game/game_fn_8014B014", "main/game/game_fn_8014B33C", "main/game/game_fn_8014C5B0", "main/game/game_fn_8014C5D4", "main/game/game_fn_8014C87C", "main/game/game_fn_8014C9F4", "main/game/game_fn_8014E000", "main/game/game_fn_8014E20C", "main/game/game_fn_8014E33C", "main/game/game_fn_8014E52C", "main/game/game_fn_8014F53C", "main/game/game_fn_80152E3C", "main/game/game_fn_80152F04", "main/game/game_fn_80152F90", "main/game/game_fn_80153104", "main/game/game_fn_80153140", "main/game/game_fn_801532B4", "main/game/game_fn_801533A8", "main/game/game_fn_80153F00", "main/game/game_fn_80154158", "main/game/game_fn_80154428", "main/game/game_fn_801544C4", "main/game/game_fn_80154514", "main/game/game_fn_801549A8", "main/game/game_fn_80154D24", "main/game/game_fn_80154EC0", "main/game/game_fn_80154F10", "main/game/game_fn_801552AC", "main/game/game_fn_80155644", "main/game/game_fn_801556DC", "main/game/game_fn_80155748", "main/game/game_fn_801557C4", "main/game/game_fn_8016BDD8", "main/game/game_fn_8016DF4C", "main/game/game_fn_8016F088", "main/game/game_fn_8017718C", "main/game/game_fn_8017E734", "main/game/game_fn_8017EB4C", "main/game/game_fn_8017F084", "main/game/game_fn_8017F87C", "main/game/game_fn_80180ED8", "main/game/game_fn_80181530", "main/game/game_fn_80181A00", "main/game/game_fn_80181F5C", "main/game/game_fn_801820B0", "main/game/game_fn_80182C68", "main/game/game_fn_8018322C", "main/game/game_fn_801835F4", "main/game/game_fn_80183A68"],
+    "preexisting_nonmatching_units": ["main/game/game_fn_8002B748", "main/game/game_fn_8002F428", "main/game/game_fn_80031D24", "main/game/game_fn_800542D0", "main/game/game_fn_80058834", "main/game/game_fn_800A32B8", "main/game/game_fn_80148730", "main/game/game_fn_8014A378", "main/game/game_fn_8014B0F0", "main/game/game_fn_8014C470", "main/game/game_fn_8014CA98", "main/game/game_fn_8014CCB0", "main/game/game_fn_8014D100", "main/game/game_fn_80150400", "main/game/game_fn_80151D00", "main/game/game_fn_801535D8", "main/game/game_fn_801547CC", "main/game/game_fn_80154CB4", "main/game/game_fn_80155158", "main/game/game_fn_80173BDC", "main/game/game_fn_80173D44", "main/game/game_fn_80173F04", "main/game/game_fn_8017E1E4", "main/game/game_fn_8017F3B4", "main/game/game_fn_801810A0", "main/game/game_fn_80182514", "main/game/game_fn_8018284C", "main/game/game_fn_8018437C"]
+  }
+}

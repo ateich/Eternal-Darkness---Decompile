@@ -54,7 +54,7 @@ extern s32 fn_80066D04(void *, s32);
 extern s32 fn_8005EE9C(s32, s32, s32 *);
 extern void fn_8011F114();
 extern s32 fn_8011F6A4(void *, s32, s32, s32, QueryResult *, s32);
-extern unsigned int fn_800FBFB0();
+extern unsigned int fn_800FBFB0(void);
 #define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void fn_8005F758(void *, s32, Vec3 *, s32, s32, s32, u8, u8, s32, u8);
 extern void fn_801AAE68(float, s32, s32, s32, Vec3 *, s32, s32, s32, u16, s32);

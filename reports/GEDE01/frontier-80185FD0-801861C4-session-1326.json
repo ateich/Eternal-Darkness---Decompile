@@ -1,0 +1,91 @@
+{
+  "session_id": "session-1326",
+  "range_start": "0x80185FD0",
+  "range_end": "0x801861C4",
+  "next_target": "0x801861C4",
+  "matched_bytes": 0,
+  "nonmatching_bytes": 500,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "name": "fn_80185FD0",
+      "start": "0x80185FD0",
+      "end": "0x801861C4",
+      "size": 500,
+      "status": "NonMatching",
+      "objdiff_percent": 95.8,
+      "target_instructions": 125,
+      "generated_instructions": 125,
+      "target_relocations": 19,
+      "generated_relocations": 19,
+      "divergence": "Canonical GC/1.3 still assigns the seven non-flag preserved values differently from retail after declaration-order, first-use, loop-form, and changed-flag initialization experiments. The explicit signed generation comparison removes the prior cmplw divergence; frame, control flow, instruction count and call schedule align. Both sides have 19 relocations, but the two lbl_80650A20 SDA21 relocations move from retail offsets 0x164 and 0x17C to generated offsets 0x168 and 0x180 with the remaining float-load swaps; the other 17 relocation offsets align."
+    }
+  ],
+  "remediation_1": {
+    "register_qualifiers_removed": 8,
+    "allocation_trials": [
+      "declaration order with vector_offset first",
+      "vector_offset initialized at declaration",
+      "changed flag declaration separated from initialization",
+      "loop induction initialization and increments moved into for clauses",
+      "self parameter used directly instead of a local alias"
+    ],
+    "best_verified_percent": 95.8,
+    "remaining_non_register_differences": [
+      "two float-load scheduling pairs at offsets 0x164/0x168 and 0x17C/0x180"
+    ],
+    "fallback_triage": {
+      "name": "fn_801861C4",
+      "size": 1064,
+      "target_instructions": 266,
+      "target_relocations": 39,
+      "frame_bytes": 512,
+      "result": "opened and rejected as a quick 100%-able fallback because it is a larger matrix/vector reconstruction, not a leaf candidate"
+    },
+    "next_target": "0x801861C4"
+  },
+  "remediation_2": {
+    "lesson_catalog_consulted": {
+      "prior_entries": [74, 111, 123, 253],
+      "result": "The existing signedness lessons identify cmpw versus cmplw as a type-recovery signal; a new fn_80185FD0-specific lesson records the sharper u16-to-u16 behavior."
+    },
+    "signed_compare_trial": {
+      "source_shape": "explicit int casts on both u16 operands",
+      "semantic_effect": "none under standard integer promotion",
+      "codegen_effect": "canonical GC/1.3 changes cmplw to retail cmpw",
+      "verified_percent": 95.8
+    },
+    "float_scheduling_trials": [
+      {
+        "source_shape": "three separately scoped float locals",
+        "verified_percent": 95.8,
+        "diff_replace_offsets": ["0x164", "0x168", "0x17C", "0x180"],
+        "result": "unchanged"
+      },
+      {
+        "source_shape": "Vec3 x/y/z member access",
+        "verified_percent": 95.8,
+        "diff_replace_offsets": ["0x164", "0x168", "0x17C", "0x180"],
+        "result": "unchanged"
+      }
+    ],
+    "strict_relocation_result": {
+      "config": "function_reloc_diffs=name_address",
+      "target_relocations": 19,
+      "generated_relocations": 19,
+      "equal_offset_type_target_addend": 17,
+      "moved_relocations": [
+        "lbl_80650A20 R_PPC_EMB_SDA21: retail 0x164, generated 0x168",
+        "lbl_80650A20 R_PPC_EMB_SDA21: retail 0x17C, generated 0x180"
+      ]
+    },
+    "fallback_triage_correction": "Only immediate consecutive fn_801861C4 was inspected. Its 1064-byte size, 39 relocations and matrix/vector structure do not establish whether it can reach 100%; no broader candidate survey or feasibility conclusion is claimed because remediation scope forbids frontier work.",
+    "retention": {
+      "reloc_strict_dumps": 122,
+      "reloc_strict_dump_mib": 442.76,
+      "reports_directory_mib": 949,
+      "disposition": "acknowledged and deliberately deferred; deleting historical evidence is outside this correction-only scope, and this remediation retains only compact per-function and verification evidence"
+    },
+    "next_target": "0x801861C4"
+  }
+}

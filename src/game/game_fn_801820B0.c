@@ -24,7 +24,7 @@ extern void fn_80180554(void*, void*, void*, SixBytes*, u16, s16);
 extern void fn_801805E0(void*, int, u8, int, float, void*);
 extern void fn_80180518(void*, u8, int);
 extern void fn_8018F014(void*, u8);
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0(void);
 extern void fn_8018CEC0(void*, u8);
 extern void fn_8018C540(void*, void*, u8, int, u16);
 extern void fn_801F5A04(void*, s16, void*, void*);

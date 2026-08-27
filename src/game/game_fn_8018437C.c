@@ -31,7 +31,7 @@ extern void fn_801A7588(void*, int);
 extern void fn_801A7470(void*, int);
 extern void fn_801A764C(void*, void*);
 extern void fn_801A7228(void*);
-extern u32 fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0(void);
 extern void* memcpy(void*, const void*, u32);
 extern int fn_8018E26C(void*, void*);
 extern void fn_8018E230(void*, void*, int, u8, u8, int);

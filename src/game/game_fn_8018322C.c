@@ -5,7 +5,7 @@ extern int fn_80180430(u8*, u8);
 extern void fn_80180518(u8*, u8, int);
 extern int fn_80180454(u8*);
 extern void fn_8017E1B0(u8*, u8*);
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0(void);
 extern void fn_8018E230(u8*, u8*, int, u8, u8, int);
 extern u8 fn_8018E26C(u8*, u8*);
 extern void* memcpy(void*, const void*, unsigned int);

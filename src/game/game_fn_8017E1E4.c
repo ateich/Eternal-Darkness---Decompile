@@ -6,6 +6,9 @@ typedef struct Vec3s {
     s16 z;
 } Vec3s;
 
+/* The unsigned definition is known, but this caller needs a signed declaration
+ * to reproduce retail's signed radius subtraction. Resolve the source-level ABI
+ * mismatch only when this TU can retain its retail code generation. */
 extern int fn_800FBFB0(void);
 
 void fn_8017E1E4(Vec3s* current, Vec3s* base, s16 radius, s16 z_offset)

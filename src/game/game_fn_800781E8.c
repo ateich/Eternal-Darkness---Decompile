@@ -1,7 +1,7 @@
 typedef signed int s32;
 
 extern s32 fn_80128EAC(void *object);
-extern unsigned int fn_800FBFB0();
+extern unsigned int fn_800FBFB0(void);
 #define fn_800FBFB0() ((int)fn_800FBFB0())
 extern s32 fn_800460EC(void);
 extern void fn_8012965C(void *object, s32 a, s32 b, s32 c);

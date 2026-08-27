@@ -19,7 +19,7 @@ extern u8 lbl_80607120[];
 extern u8 lbl_80606318[];
 extern u8 lbl_80606328[];
 
-extern u32 fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0(void);
 extern void fn_801804AC(void*, void*, void*, void*);
 extern void fn_80180554(void*, void*, void*, void*, u16, int);
 extern void fn_801805E0(void*, int, u8, u8, void*, float);

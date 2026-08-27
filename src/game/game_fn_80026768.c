@@ -68,7 +68,7 @@ extern void fn_80026740(void);
 extern void fn_80026754(s32, s32, s32);
 extern void fn_80026DAC(s32, s32);
 extern void fn_80026DBC(u32);
-extern unsigned int fn_800FBFB0();
+extern unsigned int fn_800FBFB0(void);
 #define fn_800FBFB0() ((int)fn_800FBFB0())
 extern s32 fn_801ED3F4(void*);
 extern void fn_801A8F08(s16, s16, s16, s16, s32, s32, s32, s32, s32);

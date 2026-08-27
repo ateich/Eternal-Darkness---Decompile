@@ -25,7 +25,7 @@ extern void fn_8018E230(void*, void*, int, int, s8, u8);
 extern void fn_8018CD18(void*, int, u16);
 extern void fn_8018CB70(void*, int, u16);
 extern void fn_8018C540(void*, void*, u8, int, u16);
-extern u32 fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0(void);
 extern void fn_801F5A04(void*, s16, void*, void*);
 
 void fn_801835F4(u8* self, void* arg1, void* arg2, u8* desc)

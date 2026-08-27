@@ -19,7 +19,7 @@ extern u8 lbl_80606328[];
 
 extern void* memset(void*, int, unsigned int);
 extern void* memcpy(void*, const void*, unsigned int);
-extern u32 fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0(void);
 extern void fn_80179904(ShortCoord3*, s16);
 extern void fn_801804AC(void*, ShortCoord3*, ShortCoord3*, ShortCoord3*);
 extern void fn_80180554(void*, ShortCoord3*, ShortCoord3*, ShortCoord3*, u16,

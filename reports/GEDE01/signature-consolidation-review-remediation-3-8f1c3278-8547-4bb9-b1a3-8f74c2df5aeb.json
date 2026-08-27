@@ -1,0 +1,100 @@
+{
+  "artifact_status": "rejected",
+  "rejected_reason": "concealed game_fn_8017E1E4 match regression and pre-final-build objdiff evidence",
+  "superseded_by": "reports/GEDE01/signature-consolidation-review-remediation-1-8f1c3278-8547-4bb9-b1a3-8f74c2df5aeb.json",
+  "session_id": "8f1c3278-8547-4bb9-b1a3-8f74c2df5aeb",
+  "remediation": "review-remediation-3-of-3",
+  "scope": "blocking declaration and evidence corrections only; no frontier work",
+  "next_target": "0x801854B4",
+  "corrections": [
+    {
+      "symbol": "fn_80201B54",
+      "action": "rolled back the remediation-2 pointer-return plus same-name variadic-macro sweep",
+      "reason": "the macros erased arity and cast 287 callers back to int, so they did not deliver the claimed source-level correction and were not plausible retail MWCC source",
+      "removed_macros": 287,
+      "preexisting_macros_remaining": 3,
+      "restored_legacy_extern_int_declarations": 288,
+      "final_integer_return_declarations": 292,
+      "rejected_checkpoint_remaining_integer_declarations": 4,
+      "rejected_checkpoint_residual_sites": [
+        "src/game/game_fn_80063E64.c:80:s32",
+        "src/game/game_fn_8006330C.c:66:s32",
+        "src/game/game_fn_800654F8.c:62:s32",
+        "src/game/game_fn_80034708.c:43:M2C_UNK"
+      ],
+      "known_pointer_prototype_retained": "src/game/game_fn_8018437C.c:18:void* fn_80201B54(void*)",
+      "abi_note": "retail establishes a pointer argument and GPR r3 pointer-shaped result, but mass-changing legacy callers is deferred until each call-site source type can be corrected without compatibility macros"
+    },
+    {
+      "symbol": "fn_80201B9C",
+      "action": "deleted the fabricated remediation-2 checkpoint; no source change is claimed",
+      "final_declarations": 95,
+      "unspecified_parameter_declarations": 94,
+      "void_parameter_declarations": 1,
+      "observed_calls": 101,
+      "observed_zero_argument_calls": 86,
+      "observed_one_argument_calls": 15,
+      "one_argument_breakdown": {
+        "object": 7,
+        "state": 3,
+        "owner": 2,
+        "context": 2,
+        "self": 1
+      },
+      "conclusion": "the callers contradict the rejected zero-argument claim; parameter consolidation remains deferred"
+    },
+    {
+      "symbol": "fn_800FBFB0",
+      "action": "retained definition-backed normalization to unsigned int fn_800FBFB0(void)",
+      "normalized_declarations": 91,
+      "other_declarations": 0,
+      "evidence": "in-tree definition is unsigned int fn_800FBFB0(void)"
+    }
+  ],
+  "objdiff_investigation": {
+    "unit": "main/game/game_fn_8018437C",
+    "session_1320_fuzzy_match_percent": 77.46888,
+    "remediation_2_fuzzy_match_percent": 77.28631,
+    "fresh_fuzzy_match_percent": 77.28631,
+    "forced_recompile_object_sha1": "062c5596b2ab32d70a5dc19fb6641635afd14974",
+    "repeated_report_generation_stable": true,
+    "finding": "changing only u32 versus unsigned int did not alter the object or restore 77.46888; fresh output is deterministic and the session-1320 artifact is not a comparable post-remediation-1 baseline",
+    "fresh_vs_remediation_2_delta_units": 0,
+    "fresh_vs_session_1320_delta_units": [
+      "main/game/game_fn_8018437C"
+    ],
+    "regression_claim": "no new instruction or relocation regression versus the immediately preceding remediation-2 tree; no claim of equality to session 1320"
+  },
+  "deferred_parameter_claims": {
+    "symbols": [
+      "fn_80201B3C",
+      "fn_80201BC8",
+      "fn_80201EB8",
+      "fn_8011F114",
+      "fn_80128C28",
+      "fn_80156938",
+      "fn_8020123C"
+    ],
+    "reason": "known definitions or retail callees establish some ABI shape, but reconstructed callers contain incompatible arities or source types; this remediation makes no consolidation claim for these symbols"
+  },
+  "verification": {
+    "completed": "2026-08-27T08:22:16-04:00",
+    "canonical_build_exit": 0,
+    "affected_source_files": 288,
+    "affected_c_objects": 287,
+    "affected_c_objects_present_in_full_objdiff": 287,
+    "objdiff_scope_units": 5194,
+    "matched_code_bytes": 546868,
+    "matched_functions": 3543,
+    "complete_units": 3777,
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "objdiff_sha1": "ab37c2e899b53199d45e2282abdb1776716546bb",
+    "signature_audit_sha1": "8344cfc925dafb3b5f862a240c342474fd2653bc"
+  },
+  "preserved_rejected_artifacts": [
+    "reports/GEDE01/objdiff-review-remediation-2-62f222c9-2178-4fe3-aa0f-de7dcb903582.json",
+    "reports/GEDE01/signature-audit-review-remediation-2-62f222c9-2178-4fe3-aa0f-de7dcb903582.json",
+    "reports/GEDE01/signature-consolidation-review-remediation-2-62f222c9-2178-4fe3-aa0f-de7dcb903582.json"
+  ],
+  "frontier_progress_updated": false
+}

@@ -52,7 +52,7 @@ extern s32 fn_80072354(void *);
 extern s32 fn_80060840(void *, s32 *);
 extern s32 fn_8006053C(void *, s32);
 extern s32 fn_800601FC();
-extern unsigned int fn_800FBFB0();
+extern unsigned int fn_800FBFB0(void);
 #define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void *fn_801294DC(void *, int, int, int);
 #define fn_801294DC(a, b, c, d) fn_801294DC((void *)(a), (b), (c), (d))

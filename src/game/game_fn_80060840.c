@@ -9,7 +9,7 @@ typedef enum Result {
 } Result;
 extern int fn_80200C38();
 extern u16 fn_801A7434(void *);
-extern unsigned int fn_800FBFB0();
+extern unsigned int fn_800FBFB0(void);
 #define fn_800FBFB0() ((int)fn_800FBFB0())
 
 Result fn_80060840(void *owner, s32 *special)

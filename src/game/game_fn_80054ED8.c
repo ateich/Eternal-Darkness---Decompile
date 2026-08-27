@@ -32,7 +32,7 @@ extern s32 fn_8003D69C(void *object);
 extern s32 fn_80036E50(void *object);
 extern unsigned int fn_80178E94(Vec3 *a, Vec3 *b);
 extern void *fn_801E741C(char *name);
-extern unsigned int fn_800FBFB0();
+extern unsigned int fn_800FBFB0(void);
 #define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void fn_80145490(void);
 extern void fn_801F86F4(s32 value);

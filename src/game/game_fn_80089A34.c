@@ -19,7 +19,7 @@ extern void *fn_80201B8C();
 extern int fn_80201B54();
 extern void* fn_80205868(void*, int, Vec3*, int);
 extern void* fn_80201A84(void*);
-extern unsigned int fn_800FBFB0();
+extern unsigned int fn_800FBFB0(void);
 extern int fn_8011F6A4(void*, int, int, int, void*, int);
 extern void fn_8014D478(void*, Vec3*, Vec3*, int, int, void*, int);
 extern unsigned long long fn_8020123C();

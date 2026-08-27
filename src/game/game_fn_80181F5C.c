@@ -3,7 +3,7 @@ typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned int u32;
 
-extern u32 fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0(void);
 
 void fn_80181F5C(u8* effect)
 {

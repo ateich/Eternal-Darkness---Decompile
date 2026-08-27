@@ -14,7 +14,7 @@ extern int fn_8015C9F0(void);
 extern void fn_80149E28(void*);
 extern void fn_801A1A04(EffectDesc*);
 extern void* fn_80154CB4(Vec3*, short*, EffectDesc*, float);
-extern unsigned int fn_800FBFB0();
+extern unsigned int fn_800FBFB0(void);
 #define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void* fn_80154D24(Vec3*, void*, EffectWork*);
 

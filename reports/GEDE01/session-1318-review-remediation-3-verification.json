@@ -1,0 +1,58 @@
+{
+  "session_id": "session-1318-review-remediation-3",
+  "scope": "correct declaration-audit metadata and reverify the two previously affected objects without source or frontier changes",
+  "next_target": "0x801854B4",
+  "audit_correction": {
+    "raw_parser_declarations": 16980,
+    "omitted_declaration_lines": 229,
+    "symbols_with_unseen_variants": 117,
+    "prior_amended_audit_sha1": "8c46f0092e397fdcd90c6721485f8b09f8d18c04",
+    "corrected_audit_sha1": "da36b15d62e53dea3191708167523fa0fcba4d8b",
+    "bucket_warning": "consistent and cosmetic classifications for the 117 affected symbols are unvalidated; unseen variants may conceal further live-codegen signedness splits"
+  },
+  "canonical_build": {
+    "completed": "2026-08-27T08:55:42-04:00",
+    "command": "./.tools/bin/ninja",
+    "exit_code": 0,
+    "integrated_sha1_check": "build/GEDE01/main.dol: OK",
+    "manual_sha1_check_command": "sha1sum -c config/GEDE01/build.sha1",
+    "manual_sha1_check_passed": true,
+    "main_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "retail_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "retail_cmp_equal": true,
+    "report_sha1": "3a0a0faa6f42c381f6fef2ec16e4111647b33f74"
+  },
+  "affected_objects": [
+    {
+      "unit": "main/game/game_fn_800654F8",
+      "object": "build/GEDE01/src/game/game_fn_800654F8.o",
+      "object_sha1": "c14b46a39d5c1285c1460cc34888efb908b54c07",
+      "objdiff_config": "function_reloc_diffs=name_address",
+      "objdiff_sha1": "487d10a2e379d02f98815631395ba8d2ee8efb38",
+      "retail_code_bytes": 4700,
+      "reconstructed_code_bytes": 4552,
+      "fuzzy_match_percent": 82.98042,
+      "instruction_rows_per_side": 1233,
+      "retail_relocations": 179,
+      "reconstructed_relocations": 159,
+      "match_claim": false,
+      "evidence": "reports/GEDE01/objdiff-game_fn_800654F8-review-remediation-3-8f1c3278-8547-4bb9-b1a3-8f74c2df5aeb.json"
+    },
+    {
+      "unit": "main/game/game_fn_8017E1E4",
+      "object": "build/GEDE01/src/game/game_fn_8017E1E4.o",
+      "object_sha1": "ed22d1904c324d22cbb9d062e9ea809ec381a866",
+      "objdiff_config": "function_reloc_diffs=name_address",
+      "objdiff_sha1": "ca98b0ae109e651a90afc5e8bae4ddfe3a467b87",
+      "retail_code_bytes": 204,
+      "reconstructed_code_bytes": 200,
+      "fuzzy_match_percent": 92.45098,
+      "instruction_rows_per_side": 52,
+      "relocations_per_side": 4,
+      "relocations_equal": true,
+      "match_claim": false,
+      "evidence": "reports/GEDE01/objdiff-game_fn_8017E1E4-review-remediation-3-8f1c3278-8547-4bb9-b1a3-8f74c2df5aeb.json"
+    }
+  ],
+  "frontier_progress_updated": false
+}

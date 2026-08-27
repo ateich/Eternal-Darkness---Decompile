@@ -10,7 +10,7 @@ extern void fn_80180518(void*, u8, int);
 extern int fn_8018E26C(void*, void*);
 extern void fn_8018EFB0(void*, int, int);
 extern void fn_8017D2B4(void*, void*, void*);
-extern int fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0(void);
 extern void fn_8018E230(void*, void*, int, int, int, int);
 extern float lbl_8063D378[];
 

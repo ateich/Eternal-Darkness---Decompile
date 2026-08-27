@@ -31,7 +31,7 @@ extern int lbl_802FC5BC[];
 
 extern int fn_8011F6A4(void*, int, int, int, SearchResult*, int);
 extern void fn_8012B690(void*, Vec3*, Vec3*);
-extern unsigned int fn_800FBFB0();
+extern unsigned int fn_800FBFB0(void);
 #define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void fn_8017EA58(EffectWork*);
 extern void fn_80183DD4(EffectWork*);

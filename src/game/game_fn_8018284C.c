@@ -17,7 +17,7 @@ typedef struct Config {
 
 extern void* memcpy(void*, const void*, u32);
 extern void fn_8018EFB0(Vec3s*, u16, int);
-extern u32 fn_800FBFB0(void);
+extern unsigned int fn_800FBFB0(void);
 extern void fn_80180554(void*, void*, Vec3s*, void*, u16, int);
 extern void fn_8018E230(void*, void*, int, int, s8, u8);
 extern void fn_80185108(void*);

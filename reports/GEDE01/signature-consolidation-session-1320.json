@@ -1,0 +1,58 @@
+{
+  "session_id": "session-1320",
+  "session_kind": "consolidation",
+  "starting_target": "0x801854B4",
+  "ending_next_target": "0x801854B4",
+  "frontier_changed": false,
+  "selection": {
+    "tool": "tools/signature_audit.py",
+    "policy": "Tree-wide union of return-register, ABI-divergent, and cosmetic disagreements, sorted by declaration count",
+    "symbols": [
+      {"symbol": "fn_80201BC8", "pre_declarations": 355, "canonical": "void *fn_80201BC8()"},
+      {"symbol": "fn_80201B54", "pre_declarations": 289, "canonical": "int fn_80201B54()"},
+      {"symbol": "fn_8020123C", "pre_declarations": 174, "canonical": "unsigned long long fn_8020123C()"},
+      {"symbol": "fn_8011F114", "pre_declarations": 105, "canonical": "void fn_8011F114()"},
+      {"symbol": "fn_80201B9C", "pre_declarations": 95, "canonical": "void *fn_80201B9C()"},
+      {"symbol": "fn_800FBFB0", "pre_declarations": 91, "canonical": "unsigned int fn_800FBFB0()"},
+      {"symbol": "fn_80156938", "pre_declarations": 90, "canonical": "void *fn_80156938()"},
+      {"symbol": "fn_80201EB8", "pre_declarations": 90, "canonical": "int fn_80201EB8()"},
+      {"symbol": "fn_80201B3C", "pre_declarations": 54, "canonical": "void *fn_80201B3C()"},
+      {"symbol": "fn_80128C28", "pre_declarations": 50, "canonical": "void fn_80128C28()"}
+    ],
+    "target_disagreements_after": 0,
+    "rationale": "Matching call sites establish each return-register class. Old-style parameter lists preserve the different retail register-level invocation forms already required by matching callers. fn_80201B54 uses a byte-neutral explicit result cast at the pointer-consuming caller."
+  },
+  "accounting": {
+    "new_matching_functions": 0,
+    "new_matching_code_bytes": 0,
+    "new_nonmatching_functions": 0,
+    "new_nonmatching_code_bytes": 0,
+    "canonical_matching_functions": 3543,
+    "canonical_matching_code_bytes": 546868,
+    "canonical_nonmatching_functions": 4673,
+    "canonical_nonmatching_code_bytes": 1753824,
+    "total_functions": 8216,
+    "total_code_bytes": 2300692
+  },
+  "affected_objects": {
+    "translation_units": 114,
+    "previously_matching_objects": 86,
+    "previously_matching_retail_bytes": 19168,
+    "previously_matching_objects_still_100_percent": 86,
+    "pre_existing_nonmatching_objects": 28,
+    "pre_existing_nonmatching_retail_bytes": 19580,
+    "matching_regressions": 0
+  },
+  "verification": {
+    "build_command": ".tools/bin/ninja",
+    "build_status": "passed",
+    "objdiff_report": "reports/GEDE01/objdiff-session-1320.json",
+    "signature_audit": "reports/GEDE01/signature-audit-session-1320.json",
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "dol_byte_change": false,
+    "progress_json_sha1": "7f3edbdce2c67cbc1af4d275aefb6de5bdfddb7b",
+    "progress_counts_changed": false,
+    "next_target_unchanged": true,
+    "next_gate_rewritten": false
+  }
+}
