@@ -1,0 +1,15 @@
+{
+  "session_id": "session-1409",
+  "range_start": "0x80193E1C",
+  "range_end": "0x80193F3C",
+  "next_target": "0x80193F3C",
+  "matched_bytes": 288,
+  "nonmatching_bytes": 0,
+  "unaccounted_spans": [],
+  "functions": [
+    {"symbol":"fn_80193E1C","start":"0x80193E1C","end":"0x80193F3C","retail_size":288,"generated_size":288,"status":"Matching","match_percent":100.0,"relocations_equal":"3/3","evidence":"reports/GEDE01/objdiff-game_fn_80193E1C-session-1409.json"}
+  ],
+  "measurement_command": "jq -c --arg name fn_80193E1C '{symbol:$name,retail_size:(.left.symbols[]|select(.name==$name)|.size|tonumber),generated_size:(.right.symbols[]|select(.name==$name)|.size|tonumber),match_percent:(.left.symbols[]|select(.name==$name)|.match_percent),left_relocation_instructions:([.left.symbols[]|select(.name==$name)|.instructions[]|select(.instruction.relocation != null)]|length),right_relocation_instructions:([.right.symbols[]|select(.name==$name)|.instructions[]|select(.instruction.relocation != null)]|length)}' reports/GEDE01/objdiff-game_fn_80193E1C-session-1409.json",
+  "measurement_raw_output": "{\"symbol\":\"fn_80193E1C\",\"retail_size\":288,\"generated_size\":288,\"match_percent\":100.0,\"left_relocation_instructions\":3,\"right_relocation_instructions\":3}",
+  "accounting": "Every byte in the declared range is owned by one independent honest-C translation unit and matches; there is no gap, shared reconstruction, NonMatching debt, or assembly. Immediate fn_80193F3C was inspected but remains outside this declared range and unowned."
+}

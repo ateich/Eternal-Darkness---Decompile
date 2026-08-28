@@ -1,0 +1,16 @@
+{
+  "session_id": "session-1408",
+  "range_start": "0x80193CB4",
+  "range_end": "0x80193E1C",
+  "next_target": "0x80193E1C",
+  "matched_bytes": 360,
+  "nonmatching_bytes": 0,
+  "unaccounted_spans": [],
+  "functions": [
+    {"symbol":"fn_80193CB4","start":"0x80193CB4","end":"0x80193D64","retail_size":176,"generated_size":176,"status":"Matching","match_percent":100.0,"relocations_equal":"4/4","evidence":"reports/GEDE01/objdiff-game_fn_80193CB4-session-1408.json"},
+    {"symbol":"fn_80193D64","start":"0x80193D64","end":"0x80193E1C","retail_size":184,"generated_size":184,"status":"Matching","match_percent":100.0,"relocations_equal":"1/1","evidence":"reports/GEDE01/objdiff-game_fn_80193D64-session-1408.json"}
+  ],
+  "measurement_command": "for sym in 80193CB4 80193D64; do jq -c --arg name \"fn_$sym\" '{symbol:$name,retail_size:(.left.symbols[]|select(.name==$name)|.size|tonumber),generated_size:(.right.symbols[]|select(.name==$name)|.size|tonumber),match_percent:(.left.symbols[]|select(.name==$name)|.match_percent),left_relocation_instructions:([.left.symbols[]|select(.name==$name)|.instructions[]|select(.instruction.relocation != null)]|length),right_relocation_instructions:([.right.symbols[]|select(.name==$name)|.instructions[]|select(.instruction.relocation != null)]|length)}' reports/GEDE01/objdiff-game_fn_${sym}-session-1408.json; done",
+  "measurement_raw_output": "{\"symbol\":\"fn_80193CB4\",\"retail_size\":176,\"generated_size\":176,\"match_percent\":100.0,\"left_relocation_instructions\":4,\"right_relocation_instructions\":4}\n{\"symbol\":\"fn_80193D64\",\"retail_size\":184,\"generated_size\":184,\"match_percent\":100.0,\"left_relocation_instructions\":1,\"right_relocation_instructions\":1}",
+  "accounting": "Every byte in the declared range is owned by one independent honest-C translation unit and matches; there is no gap, shared reconstruction, NonMatching debt, or assembly."
+}

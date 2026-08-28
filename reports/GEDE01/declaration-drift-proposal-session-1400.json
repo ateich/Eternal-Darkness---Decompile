@@ -1,0 +1,636 @@
+{
+  "source": "src/game",
+  "audit_totals": {
+    "declarations": 17706,
+    "symbols": 4101,
+    "definitions": 4289,
+    "retail_evidence_symbols": 11
+  },
+  "audit_count_verification": {
+    "command": "python3 tools/signature_audit.py --json-output build/GEDE01/signature-audit-session-1400-remediation-1.raw.json --session-id a9a80306-7af8-429d-8f42-98a59a65fd43 --starting-target 0x801925F0 --ending-next-target 0x801925F0 --build-report build/GEDE01/report.json >/dev/null; jq -c '{declarations,symbols,definitions,retail_evidence_symbols}' build/GEDE01/signature-audit-session-1400-remediation-1.raw.json; jq -c '[.abi_divergent[],.return_register_contradictions[],.cosmetic[] | select(.symbol==\"fn_80201814\" or .symbol==\"fn_80201BC8\" or .symbol==\"fn_80201B54\" or .symbol==\"fn_8020123C\" or .symbol==\"fn_800FBFB0\" or .symbol==\"fn_8011F114\" or .symbol==\"fn_80201B9C\" or .symbol==\"fn_80201EB8\" or .symbol==\"fn_80156938\" or .symbol==\"fn_80201B3C\") | {symbol,declarations,variants:[.variants[]|{signature,count}]}] | sort_by(-.declarations,.symbol)' build/GEDE01/signature-audit-session-1400-remediation-1.raw.json",
+    "raw_output": "{\"declarations\":17706,\"symbols\":4101,\"definitions\":4289,\"retail_evidence_symbols\":11}\n[{\"symbol\":\"fn_80201814\",\"declarations\":398,\"variants\":[{\"signature\":\"void* fn_80201814()\",\"count\":394},{\"signature\":\"void* fn_80201814(void*)\",\"count\":4}]},{\"symbol\":\"fn_80201BC8\",\"declarations\":359,\"variants\":[{\"signature\":\"void* fn_80201BC8()\",\"count\":354},{\"signature\":\"void* fn_80201BC8(void*)\",\"count\":2},{\"signature\":\"void* fn_80201BC8(void)\",\"count\":2},{\"signature\":\"s32 fn_80201BC8(void)\",\"count\":1}]},{\"symbol\":\"fn_80201B54\",\"declarations\":290,\"variants\":[{\"signature\":\"int fn_80201B54()\",\"count\":288},{\"signature\":\"void* fn_80201B54(void*)\",\"count\":2}]},{\"symbol\":\"fn_8020123C\",\"declarations\":175,\"variants\":[{\"signature\":\"unsigned long long fn_8020123C()\",\"count\":174},{\"signature\":\"int fn_8020123C(int, int, void*, void*)\",\"count\":1}]},{\"symbol\":\"fn_800FBFB0\",\"declarations\":107,\"variants\":[{\"signature\":\"unsigned int fn_800FBFB0(void)\",\"count\":95},{\"signature\":\"int fn_800FBFB0(void)\",\"count\":10},{\"signature\":\"u32 fn_800FBFB0(void)\",\"count\":1},{\"signature\":\"s32 fn_800FBFB0(void)\",\"count\":1}]},{\"symbol\":\"fn_8011F114\",\"declarations\":105,\"variants\":[{\"signature\":\"void fn_8011F114()\",\"count\":104},{\"signature\":\"void fn_8011F114(void*, void*)\",\"count\":1}]},{\"symbol\":\"fn_80201B9C\",\"declarations\":96,\"variants\":[{\"signature\":\"void* fn_80201B9C()\",\"count\":94},{\"signature\":\"void* fn_80201B9C(void)\",\"count\":2}]},{\"symbol\":\"fn_80201EB8\",\"declarations\":93,\"variants\":[{\"signature\":\"int fn_80201EB8()\",\"count\":89},{\"signature\":\"int fn_80201EB8(void*)\",\"count\":3},{\"signature\":\"s32 fn_80201EB8(void*)\",\"count\":1}]},{\"symbol\":\"fn_80156938\",\"declarations\":90,\"variants\":[{\"signature\":\"void* fn_80156938()\",\"count\":87},{\"signature\":\"void* fn_80156938(void*)\",\"count\":3}]},{\"symbol\":\"fn_80201B3C\",\"declarations\":54,\"variants\":[{\"signature\":\"void* fn_80201B3C()\",\"count\":52},{\"signature\":\"void* fn_80201B3C(void)\",\"count\":2}]}]"
+  },
+  "retail_parameter_evidence": {
+    "command": "{ build/binutils/powerpc-eabi-objdump -EB -D -b binary -m powerpc:common --adjust-vma=0x800042e0 --start-address=0x80201814 --stop-address=0x80201890 orig/GEDE01/sys/main.dol; build/binutils/powerpc-eabi-objdump -EB -D -b binary -m powerpc:common --adjust-vma=0x800042e0 --start-address=0x80201b54 --stop-address=0x80201b5c orig/GEDE01/sys/main.dol; build/binutils/powerpc-eabi-objdump -EB -D -b binary -m powerpc:common --adjust-vma=0x800042e0 --start-address=0x80201bc8 --stop-address=0x80201bd0 orig/GEDE01/sys/main.dol; build/binutils/powerpc-eabi-objdump -EB -D -b binary -m powerpc:common --adjust-vma=0x800042e0 --start-address=0x80201eb8 --stop-address=0x80201ef4 orig/GEDE01/sys/main.dol; } | awk '/^80201828:|^80201838:|^80201b54:|^80201b58:|^80201bc8:|^80201bcc:|^80201ec0:|^80201ecc:|^80201ed8:|^80201ee0:/'",
+    "raw_output": "80201828:\t7c 7e 1b 78 \tmr      r30,r3\n80201838:\t7c 1e 18 00 \tcmpw    r30,r3\n80201b54:\t80 63 00 10 \tlwz     r3,16(r3)\n80201b58:\t4e 80 00 20 \tblr\n80201bc8:\t80 63 00 34 \tlwz     r3,52(r3)\n80201bcc:\t4e 80 00 20 \tblr\n80201ec0:\t28 03 00 00 \tcmplwi  r3,0\n80201ecc:\t80 63 00 34 \tlwz     r3,52(r3)\n80201ed8:\t4b f1 dc 75 \tbl      0x8011fb4c\n80201ee0:\t38 60 ff ff \tli      r3,-1",
+    "interpretation": "Each retail callee consumes incoming r3. This establishes one GPR argument for fn_80201814, fn_80201B54, fn_80201BC8, and fn_80201EB8; it does not by itself settle the semantic return type of fn_80201B54."
+  },
+  "selection": "Ten most-declared symbols with disagreeing declarations, ranked globally by declaration count then symbol.",
+  "proposal_only": true,
+  "symbols": [
+    {
+      "symbol": "fn_80201814",
+      "category": "abi_divergent",
+      "competing_declarations": [
+        {
+          "signature": "void* fn_80201814()",
+          "declaring_tu_count": 394,
+          "example_sites": [
+            "src/game/game_fn_800069DC.c:22",
+            "src/game/game_fn_80006D50.c:15",
+            "src/game/game_fn_800082A4.c:31"
+          ]
+        },
+        {
+          "signature": "void* fn_80201814(void*)",
+          "declaring_tu_count": 4,
+          "example_sites": [
+            "src/game/game_fn_80191568.c:10",
+            "src/game/game_fn_80191C8C.c:21",
+            "src/game/game_fn_80191F58.c:26"
+          ]
+        }
+      ],
+      "total_affected_tu_count": 398,
+      "estimated_blast_radius_tus": 398,
+      "believed_correct_reading": {
+        "reading": "void* fn_80201814(void*)",
+        "basis": "Retail stores incoming r3 in r30 at 0x80201828 and uses it in comparisons; the cited calls pass one argument."
+      },
+      "call_site_evidence": [
+        {
+          "source": "src/game/game_fn_800069DC.c:60",
+          "source_text": "fn_80201814(fn_80201B44());"
+        },
+        {
+          "source": "src/game/game_fn_80006D50.c:56",
+          "source_text": "fn_80201814(context);"
+        },
+        {
+          "source": "src/game/game_fn_800082A4.c:81",
+          "source_text": "object = fn_80201814(fn_80201B44());"
+        },
+        {
+          "source": "src/game/game_fn_80008D24.c:48",
+          "source_text": "fn_80201814(actor);"
+        }
+      ],
+      "contradictory_call_site_evidence": [
+        {
+          "source": "src/game/game_fn_8011EBFC.c:43",
+          "source_text": "if (fn_80201814() != 0 && (u8)fn_80202160() != 0) {",
+          "reason": "This zero-argument call contradicts retail's preservation and later use of incoming r3."
+        }
+      ],
+      "confidence": "high",
+      "disposition": "deferred",
+      "disposition_reason": "Retail establishes the parameter shape, but declaration and call-site cleanup is outside this proposal-only remediation."
+    },
+    {
+      "symbol": "fn_80201BC8",
+      "category": "abi_divergent",
+      "competing_declarations": [
+        {
+          "signature": "void* fn_80201BC8()",
+          "declaring_tu_count": 354,
+          "example_sites": [
+            "src/game/game_fn_800073E4.c:11",
+            "src/game/game_fn_8000755C.c:60",
+            "src/game/game_fn_80008D24.c:16"
+          ]
+        },
+        {
+          "signature": "void* fn_80201BC8(void*)",
+          "declaring_tu_count": 2,
+          "example_sites": [
+            "src/game/game_fn_8018437C.c:17",
+            "src/game/game_fn_8018F378.c:21"
+          ]
+        },
+        {
+          "signature": "void* fn_80201BC8(void)",
+          "declaring_tu_count": 2,
+          "example_sites": [
+            "src/game/game_fn_8018E934.c:7",
+            "src/game/game_fn_80191C8C.c:22"
+          ]
+        },
+        {
+          "signature": "s32 fn_80201BC8(void)",
+          "declaring_tu_count": 1,
+          "example_sites": [
+            "src/game/game_fn_8018812C.c:12"
+          ]
+        }
+      ],
+      "total_affected_tu_count": 359,
+      "estimated_blast_radius_tus": 359,
+      "believed_correct_reading": {
+        "reading": "void* fn_80201BC8(void*)",
+        "basis": "The complete retail body is lwz r3,52(r3); blr, proving one incoming GPR argument and a GPR r3 result."
+      },
+      "call_site_evidence": [
+        {
+          "source": "src/game/game_fn_800073E4.c:37",
+          "source_text": "context = fn_80201BC8(item);"
+        },
+        {
+          "source": "src/game/game_fn_8000755C.c:285",
+          "source_text": "handle = fn_80201BC8(view);"
+        },
+        {
+          "source": "src/game/game_fn_800365C8.c:97",
+          "source_text": "source_transform = fn_80201BC8(source);"
+        }
+      ],
+      "contradictory_call_site_evidence": [
+        {
+          "source": "src/game/game_fn_80008D24.c:49",
+          "source_text": "object = fn_80201BC8();",
+          "reason": "This zero-argument call contradicts the retail callee's direct use of incoming r3 and remains declaration drift to remediate later."
+        }
+      ],
+      "confidence": "high",
+      "disposition": "deferred",
+      "disposition_reason": "Retail establishes the parameter and return register shapes, but declaration and call-site cleanup is outside this proposal-only remediation."
+    },
+    {
+      "symbol": "fn_80201B54",
+      "category": "abi_divergent",
+      "competing_declarations": [
+        {
+          "signature": "int fn_80201B54()",
+          "declaring_tu_count": 288,
+          "example_sites": [
+            "src/game/game_fn_80006D50.c:23",
+            "src/game/game_fn_8000755C.c:57",
+            "src/game/game_fn_800094C0.c:35"
+          ]
+        },
+        {
+          "signature": "void* fn_80201B54(void*)",
+          "declaring_tu_count": 2,
+          "example_sites": [
+            "src/game/game_fn_8018437C.c:18",
+            "src/game/game_fn_8018F378.c:23"
+          ]
+        }
+      ],
+      "total_affected_tu_count": 290,
+      "estimated_blast_radius_tus": 290,
+      "believed_correct_reading": {
+        "reading": {
+          "parameter_shape": "GPR:r3 (one pointer-like argument)",
+          "return_shape": "GPR:r3",
+          "semantic_return_type": "unresolved between integer and pointer-like uses"
+        },
+        "basis": "The complete retail body is lwz r3,16(r3); blr, proving one incoming GPR argument and one GPR result. Retail bytes do not distinguish the result's C semantic type."
+      },
+      "resolution_status": "partially_resolved_from_retail",
+      "unresolved_dimensions": [
+        "semantic C return type remains contested between integer and pointer-like uses",
+        "zero-argument source callers remain inconsistent with the retail one-argument ABI"
+      ],
+      "call_site_evidence": [
+        {
+          "source": "src/game/game_fn_80006D50.c:76",
+          "source_text": "result = fn_8020123C(0x54, 0, fn_80201B54(state), 0) & 0xFFFFFFFFULL;"
+        },
+        {
+          "source": "src/game/game_fn_800094C0.c:82",
+          "source_text": "fn_80201B54(iterator);"
+        },
+        {
+          "source": "src/game/game_fn_800096E0.c:72",
+          "source_text": "object = (void*)fn_80201B54(iterator);"
+        }
+      ],
+      "contradictory_call_site_evidence": [
+        {
+          "source": "src/game/game_fn_8000755C.c:281",
+          "source_text": "handle = (void*)fn_80201B54();",
+          "reason": "The zero-argument call contradicts retail's dereference of incoming r3; the pointer cast also demonstrates why the semantic return type remains unresolved."
+        }
+      ],
+      "confidence": "mixed",
+      "disposition": "deferred",
+      "disposition_reason": "Retail settles the one-argument ABI shape, while the result's semantic C type remains unresolved; no declaration cleanup is attempted here."
+    },
+    {
+      "symbol": "fn_8020123C",
+      "category": "return_register_contradictions",
+      "competing_declarations": [
+        {
+          "signature": "unsigned long long fn_8020123C()",
+          "declaring_tu_count": 174,
+          "example_sites": [
+            "src/game/game_fn_800069DC.c:25",
+            "src/game/game_fn_80006D50.c:20",
+            "src/game/game_fn_800096E0.c:32"
+          ]
+        },
+        {
+          "signature": "int fn_8020123C(int, int, void*, void*)",
+          "declaring_tu_count": 1,
+          "example_sites": [
+            "src/game/game_fn_8018F378.c:26"
+          ]
+        }
+      ],
+      "total_affected_tu_count": 175,
+      "estimated_blast_radius_tus": 175,
+      "believed_correct_reading": {
+        "reading": {
+          "kind": "retail-epilogue",
+          "return_shape": "GPR:r3-r4",
+          "source": "orig/GEDE01/sys/main.dol:8020123C-802012A0",
+          "detail": "The final call to fn_8020088C at 0x80201288 produces r3:r4; fn_8020123C restores only r0 and r31 and returns without overwriting either result register. fn_8020088C's epilogue explicitly loads r4 at 0x80200AFC and moves r31 to r3 at 0x80200B00."
+        },
+        "basis": "Owned definition or unambiguous retail evidence overrides declaration plurality."
+      },
+      "call_site_evidence": [
+        {
+          "source": "src/game/game_fn_800069DC.c:77",
+          "source_text": "result = fn_8020123C(0xB9, 0, fn_80201B44(), 0) & 0xFFFFFFFFULL;"
+        },
+        {
+          "source": "src/game/game_fn_80006D50.c:61",
+          "source_text": "result = fn_8020123C(0x87, 0, context, 0) & 0xFFFFFFFFULL;"
+        },
+        {
+          "source": "src/game/game_fn_800096E0.c:91",
+          "source_text": "fn_8020123C(8, 0, object, 0);"
+        },
+        {
+          "source": "src/game/game_fn_800099D8.c:30",
+          "source_text": "fn_8020123C(0x3B, fn_80201B44(), handle, 0) & 0xFFFFFFFFULL;"
+        }
+      ],
+      "confidence": "high",
+      "disposition": "deferred",
+      "disposition_reason": "High-confidence evidence exists, but the contradiction affects more than 12 translation units."
+    },
+    {
+      "symbol": "fn_800FBFB0",
+      "category": "cosmetic",
+      "competing_declarations": [
+        {
+          "signature": "unsigned int fn_800FBFB0(void)",
+          "declaring_tu_count": 95,
+          "example_sites": [
+            "src/game/game_fn_80019244.c:36",
+            "src/game/game_fn_8001E894.c:90",
+            "src/game/game_fn_80026768.c:71"
+          ]
+        },
+        {
+          "signature": "int fn_800FBFB0(void)",
+          "declaring_tu_count": 10,
+          "example_sites": [
+            "src/game/game_fn_8017E1E4.c:12",
+            "src/game/game_fn_80186C88.c:5",
+            "src/game/game_fn_80186D74.c:5"
+          ]
+        },
+        {
+          "signature": "u32 fn_800FBFB0(void)",
+          "declaring_tu_count": 1,
+          "example_sites": [
+            "src/game/game_fn_8018CEC0.c:7"
+          ]
+        },
+        {
+          "signature": "s32 fn_800FBFB0(void)",
+          "declaring_tu_count": 1,
+          "example_sites": [
+            "src/game/game_fn_8019197C.c:27"
+          ]
+        }
+      ],
+      "total_affected_tu_count": 107,
+      "estimated_blast_radius_tus": 107,
+      "believed_correct_reading": {
+        "reading": "unsigned int fn_800FBFB0(void)",
+        "basis": "Provisional plurality reading only; callers establish observed argument/result use but not the true callee signature."
+      },
+      "call_site_evidence": [
+        {
+          "source": "src/game/game_fn_80019244.c:87",
+          "source_text": "*(u16*)&descriptor.bytes[6] = third + (fn_800FBFB0() & 3);"
+        },
+        {
+          "source": "src/game/game_fn_8001E894.c:115",
+          "source_text": "s32 value = fn_800FBFB0();"
+        },
+        {
+          "source": "src/game/game_fn_80026768.c:186",
+          "source_text": "point->y = limit + (fn_800FBFB0() & 0x1F);"
+        },
+        {
+          "source": "src/game/game_fn_8002BFE0.c:46",
+          "source_text": "random = (fn_800FBFB0() & 0xF) + 10;"
+        }
+      ],
+      "confidence": "low",
+      "disposition": "deferred",
+      "disposition_reason": "Low confidence: callers establish integer-like use but not signedness."
+    },
+    {
+      "symbol": "fn_8011F114",
+      "category": "abi_divergent",
+      "competing_declarations": [
+        {
+          "signature": "void fn_8011F114()",
+          "declaring_tu_count": 104,
+          "example_sites": [
+            "src/game/game_fn_80006B38.c:44",
+            "src/game/game_fn_8000AEB4.c:17",
+            "src/game/game_fn_8000BC40.c:26"
+          ]
+        },
+        {
+          "signature": "void fn_8011F114(void*, void*)",
+          "declaring_tu_count": 1,
+          "example_sites": [
+            "src/game/game_fn_8018437C.c:20"
+          ]
+        }
+      ],
+      "total_affected_tu_count": 105,
+      "estimated_blast_radius_tus": 105,
+      "believed_correct_reading": {
+        "reading": "void fn_8011F114(Vec3*, Vec3*)",
+        "basis": "The owned definition at src/game/game_fn_8011F114.c:7 takes destination and source pointers, and all cited calls pass two pointers."
+      },
+      "call_site_evidence": [
+        {
+          "source": "src/game/game_fn_80006B38.c:98",
+          "source_text": "fn_8011F114(&player_position, lbl_8064C4E4);"
+        },
+        {
+          "source": "src/game/game_fn_8000AEB4.c:39",
+          "source_text": "fn_8011F114(&source, info);"
+        },
+        {
+          "source": "src/game/game_fn_8000BC40.c:54",
+          "source_text": "fn_8011F114(&position, object);"
+        },
+        {
+          "source": "src/game/game_fn_80013F88.c:46",
+          "source_text": "fn_8011F114(&lbl_80301D08, lbl_8064C4E4);"
+        }
+      ],
+      "contradictory_call_site_evidence": [
+        {
+          "source": "src/game/game_fn_80091124.c:50",
+          "source_text": "fn_8011F114(&position);",
+          "reason": "This one-argument call contradicts the owned two-argument definition."
+        }
+      ],
+      "confidence": "high",
+      "disposition": "deferred",
+      "disposition_reason": "The owned definition establishes the signature, but declaration and call-site cleanup is outside this proposal-only remediation."
+    },
+    {
+      "symbol": "fn_80201B9C",
+      "category": "abi_divergent",
+      "competing_declarations": [
+        {
+          "signature": "void* fn_80201B9C()",
+          "declaring_tu_count": 94,
+          "example_sites": [
+            "src/game/game_fn_80006D50.c:16",
+            "src/game/game_fn_800094C0.c:32",
+            "src/game/game_fn_800096E0.c:24"
+          ]
+        },
+        {
+          "signature": "void* fn_80201B9C(void)",
+          "declaring_tu_count": 2,
+          "example_sites": [
+            "src/game/game_fn_8018437C.c:14",
+            "src/game/game_fn_8018F378.c:19"
+          ]
+        }
+      ],
+      "total_affected_tu_count": 96,
+      "estimated_blast_radius_tus": 96,
+      "believed_correct_reading": {
+        "reading": "void* fn_80201B9C()",
+        "basis": "Provisional plurality reading only; callers establish observed argument/result use but not the true callee signature."
+      },
+      "call_site_evidence": [
+        {
+          "source": "src/game/game_fn_80006D50.c:57",
+          "source_text": "state = (int)fn_80204844(fn_80201B9C(), 0x20);"
+        },
+        {
+          "source": "src/game/game_fn_800094C0.c:72",
+          "source_text": "iterator = fn_80201B9C();"
+        },
+        {
+          "source": "src/game/game_fn_800096E0.c:62",
+          "source_text": "iterator = fn_80201B9C();"
+        },
+        {
+          "source": "src/game/game_fn_8000A0A0.c:54",
+          "source_text": "iterator = fn_80201B9C();"
+        }
+      ],
+      "confidence": "low",
+      "disposition": "deferred",
+      "disposition_reason": "Low confidence: declarations alone do not establish the callee's true signature."
+    },
+    {
+      "symbol": "fn_80201EB8",
+      "category": "abi_divergent",
+      "competing_declarations": [
+        {
+          "signature": "int fn_80201EB8()",
+          "declaring_tu_count": 89,
+          "example_sites": [
+            "src/game/game_fn_800073E4.c:13",
+            "src/game/game_fn_8000A0A0.c:32",
+            "src/game/game_fn_8000A400.c:17"
+          ]
+        },
+        {
+          "signature": "int fn_80201EB8(void*)",
+          "declaring_tu_count": 3,
+          "example_sites": [
+            "src/game/game_fn_8018437C.c:19",
+            "src/game/game_fn_8018E934.c:10",
+            "src/game/game_fn_8018F378.c:24"
+          ]
+        },
+        {
+          "signature": "s32 fn_80201EB8(void*)",
+          "declaring_tu_count": 1,
+          "example_sites": [
+            "src/game/game_fn_8018812C.c:15"
+          ]
+        }
+      ],
+      "total_affected_tu_count": 93,
+      "estimated_blast_radius_tus": 93,
+      "believed_correct_reading": {
+        "reading": "int fn_80201EB8(void*)",
+        "basis": "Retail tests incoming r3 at 0x80201EC0 and dereferences it at 0x80201ECC; the cited calls pass one pointer-like argument and consume the GPR result as an integer identifier."
+      },
+      "call_site_evidence": [
+        {
+          "source": "src/game/game_fn_800073E4.c:43",
+          "source_text": "child = (void*)fn_80201EB8(item);"
+        },
+        {
+          "source": "src/game/game_fn_8000A0A0.c:68",
+          "source_text": "if (entry != 0 && lbl_8064D18C == fn_80201EB8(iterator) &&"
+        },
+        {
+          "source": "src/game/game_fn_8000A400.c:34",
+          "source_text": "if (entry != 0 && lbl_8064D18C == fn_80201EB8(iterator) &&"
+        },
+        {
+          "source": "src/game/game_fn_8000B36C.c:27",
+          "source_text": "value = fn_80201EB8(object);"
+        }
+      ],
+      "contradictory_call_site_evidence": [
+        {
+          "source": "src/game/game_fn_80093264.c:45",
+          "source_text": "i = fn_80201EB8();",
+          "reason": "This zero-argument call contradicts retail's test and dereference of incoming r3."
+        }
+      ],
+      "confidence": "high",
+      "disposition": "deferred",
+      "disposition_reason": "Retail establishes the one-argument ABI and integer-like result use, but declaration and call-site cleanup is outside this proposal-only remediation."
+    },
+    {
+      "symbol": "fn_80156938",
+      "category": "abi_divergent",
+      "competing_declarations": [
+        {
+          "signature": "void* fn_80156938()",
+          "declaring_tu_count": 87,
+          "example_sites": [
+            "src/game/game_fn_800073E4.c:10",
+            "src/game/game_fn_800144CC.c:18",
+            "src/game/game_fn_80014784.c:19"
+          ]
+        },
+        {
+          "signature": "void* fn_80156938(void*)",
+          "declaring_tu_count": 3,
+          "example_sites": [
+            "src/game/game_fn_80173BDC.c:28",
+            "src/game/game_fn_80173D44.c:25",
+            "src/game/game_fn_80173F04.c:25"
+          ]
+        }
+      ],
+      "total_affected_tu_count": 90,
+      "estimated_blast_radius_tus": 90,
+      "believed_correct_reading": {
+        "reading": "void* fn_80156938(Object*)",
+        "basis": "The owned definition at src/game/game_fn_80156938.c:6 takes one Object pointer and returns object->value38; the ordinary cited call passes one object."
+      },
+      "call_site_evidence": [
+        {
+          "source": "src/game/game_fn_80019940.c:74",
+          "source_text": "fn_8017FF1C(fn_80156938(effect), 4);"
+        }
+      ],
+      "additional_call_form_divergence": {
+        "source": "src/game/game_fn_800073E4.c:30",
+        "source_text": "void* item = fn_80156938(object, value);",
+        "reason": "This two-argument call matches neither listed declaration variant nor the owned one-argument definition; declaration-based blast-radius figures are therefore floors for source cleanup."
+      },
+      "contradictory_call_site_evidence": [
+        {
+          "source": "src/game/game_fn_80117F30.c:7",
+          "source_text": "void *object = fn_80156938();",
+          "reason": "This zero-argument call contradicts the owned one-argument definition."
+        }
+      ],
+      "confidence": "high",
+      "disposition": "deferred",
+      "disposition_reason": "The owned definition establishes the signature, but declaration and call-site cleanup is outside this proposal-only remediation."
+    },
+    {
+      "symbol": "fn_80201B3C",
+      "category": "abi_divergent",
+      "competing_declarations": [
+        {
+          "signature": "void* fn_80201B3C()",
+          "declaring_tu_count": 52,
+          "example_sites": [
+            "src/game/game_fn_8000A668.c:10",
+            "src/game/game_fn_8000D070.c:3",
+            "src/game/game_fn_8000DA50.c:7"
+          ]
+        },
+        {
+          "signature": "void* fn_80201B3C(void)",
+          "declaring_tu_count": 2,
+          "example_sites": [
+            "src/game/game_fn_8016BDD8.c:1",
+            "src/game/game_fn_8016DF4C.c:6"
+          ]
+        }
+      ],
+      "total_affected_tu_count": 54,
+      "estimated_blast_radius_tus": 54,
+      "believed_correct_reading": {
+        "reading": "void* fn_80201B3C()",
+        "basis": "Provisional plurality reading only; callers establish observed argument/result use but not the true callee signature."
+      },
+      "call_site_evidence": [
+        {
+          "source": "src/game/game_fn_8000A668.c:24",
+          "source_text": "fn_80201B3C();"
+        },
+        {
+          "source": "src/game/game_fn_8000D070.c:8",
+          "source_text": "fn_80201B3C();"
+        },
+        {
+          "source": "src/game/game_fn_8000DA50.c:21",
+          "source_text": "fn_80201B3C();"
+        },
+        {
+          "source": "src/game/game_fn_8000DAF4.c:21",
+          "source_text": "context = fn_80201B3C();"
+        }
+      ],
+      "confidence": "low",
+      "disposition": "deferred",
+      "disposition_reason": "Low confidence: declarations alone do not establish the callee's true signature."
+    }
+  ],
+  "session": {
+    "session_id": "a9a80306-7af8-429d-8f42-98a59a65fd43",
+    "repository_session_label": "session-1400",
+    "starting_target": "0x801925F0",
+    "ending_next_target": "0x801925F0",
+    "matched_bytes_added": 0,
+    "nonmatching_bytes_added": 0,
+    "match_counts_revised": false,
+    "verification": {
+      "build_command": ".tools/bin/ninja",
+      "build_status": "passed",
+      "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+      "expected_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+      "dol_byte_change": false,
+      "affected_objects_100_percent": [],
+      "source_object_scope": {
+        "command": "git diff --name-only HEAD -- src | sed -n '1,200p'; git diff --name-only HEAD -- src | wc -l",
+        "raw_output": "0",
+        "interpretation": "No source file differs from the committed session snapshot, so this report-only remediation has no affected translation-unit object requiring an individual objdiff."
+      },
+      "full_build_and_dol_gate": {
+        "command": "set -o pipefail; .tools/bin/ninja 2>&1 | tail -12; sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol; cmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol; printf 'cmp_exit=%s\\n' \"$?\"",
+        "raw_output": "build/GEDE01/main.dol: OK\n[511/511] PROGRESS\nProgress:\n  All: 37.61% fuzzy, 24.93% matched, 24.93% linked (3919 / 5399 files)\n    Code: 573652 / 2300692 bytes (3684 / 8216 functions)\n    Data: 34626 / 4305642 bytes (0.80%)\n  Game Code: 90.99% fuzzy, 60.22% matched, 60.22% linked (3901 / 4675 files)\n    Code: 570624 / 947568 bytes (3622 / 4396 functions)\n    Data: 34402 / 35510 bytes (96.88%)\n  SDK/Runtime: 100.00% fuzzy, 100.00% matched, 100.00% linked (18 / 18 files)\n    Code: 3028 / 3028 bytes (62 / 62 functions)\n    Data: 224 / 224 bytes (100.00%)\nea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol\ncmp_exit=0"
+      },
+      "strict_objdiff_gate": {
+        "command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1400-remediation-1-reloc-strict.json -f json -c function_reloc_diffs=name_address && jq -c '{matching_functions:.measures.matched_functions,total_functions:.measures.total_functions,matching_code_bytes:.measures.matched_code,total_code_bytes:.measures.total_code,game_matching_functions:(.categories[]|select(.id==\"game\")|.measures.matched_functions),game_matching_code_bytes:(.categories[]|select(.id==\"game\")|.measures.matched_code)}' reports/GEDE01/session-1400-remediation-1-reloc-strict.json",
+        "raw_output": " INFO Loading project .\n INFO Generating report for 5399 units (using 8 threads)\n INFO Report generated in 0.134s\n INFO Writing to reports/GEDE01/session-1400-remediation-1-reloc-strict.json\n{\"matching_functions\":3679,\"total_functions\":8216,\"matching_code_bytes\":\"571968\",\"total_code_bytes\":\"2300692\",\"game_matching_functions\":3617,\"game_matching_code_bytes\":\"568940\"}",
+        "artifact": "reports/GEDE01/session-1400-remediation-1-reloc-strict.json"
+      },
+      "frontier_and_progress_gate": {
+        "command": "jq -c '{next_target,matching_code_bytes,total_code_bytes,matching_functions,total_functions,matching_objects,total_objects}' reports/GEDE01/progress.json; jq -c '{session_id:.session.session_id,repository_session_label:.session.repository_session_label,starting_target:.session.starting_target,ending_next_target:.session.ending_next_target}' reports/GEDE01/declaration-drift-proposal-session-1400.json",
+        "raw_output": "{\"next_target\":\"0x801925F0\",\"matching_code_bytes\":573652,\"total_code_bytes\":2300692,\"matching_functions\":3684,\"total_functions\":8216,\"matching_objects\":3919,\"total_objects\":5399}\n{\"session_id\":\"a9a80306-7af8-429d-8f42-98a59a65fd43\",\"repository_session_label\":\"session-1400\",\"starting_target\":\"0x801925F0\",\"ending_next_target\":\"0x801925F0\"}"
+      }
+    }
+  }
+}

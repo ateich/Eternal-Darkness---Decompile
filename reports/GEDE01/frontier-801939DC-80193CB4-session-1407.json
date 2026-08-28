@@ -1,0 +1,19 @@
+{
+  "session_id": "session-1407-remediation-1",
+  "range_start": "0x801939DC",
+  "range_end": "0x80193CB4",
+  "next_target": "0x80193CB4",
+  "matched_bytes": 728,
+  "nonmatching_bytes": 0,
+  "unaccounted_spans": [],
+  "functions": [
+    {"symbol":"fn_801939DC","start":"0x801939DC","end":"0x80193AB8","retail_size":220,"generated_size":220,"status":"Matching","match_percent":100.0,"relocations_equal":"16/16","evidence":"reports/GEDE01/objdiff-game_fn_801939DC-session-1407-remediation-1.json"},
+    {"symbol":"fn_80193AB8","start":"0x80193AB8","end":"0x80193B94","retail_size":220,"generated_size":220,"status":"Matching","match_percent":100.0,"relocations_equal":"16/16","evidence":"reports/GEDE01/objdiff-game_fn_80193AB8-session-1407-remediation-1.json"},
+    {"symbol":"fn_80193B94","start":"0x80193B94","end":"0x80193CB4","retail_size":288,"generated_size":288,"status":"Matching","match_percent":100.0,"relocations_equal":"8/8","evidence":"reports/GEDE01/objdiff-game_fn_80193B94-session-1407-remediation-1.json"}
+  ],
+  "measurement_command": "for sym in 801939DC 80193AB8 80193B94; do jq -c --arg name \"fn_$sym\" '{symbol:$name,retail_size:(.left.symbols[]|select(.name==$name)|.size|tonumber),generated_size:(.right.symbols[]|select(.name==$name)|.size|tonumber),match_percent:(.left.symbols[]|select(.name==$name)|.match_percent),left_relocation_instructions:([.left.symbols[]|select(.name==$name)|.instructions[]|select(.instruction.relocation != null)]|length),right_relocation_instructions:([.right.symbols[]|select(.name==$name)|.instructions[]|select(.instruction.relocation != null)]|length),diff_kinds:([.right.symbols[]|select(.name==$name)|.instructions[]|.diff_kind // \"NONE\"]|group_by(.)|map({kind:.[0],count:length}))}' \"reports/GEDE01/objdiff-game_fn_${sym}-session-1407-remediation-1.json\"; done",
+  "measurement_raw_output": "{\"symbol\":\"fn_801939DC\",\"retail_size\":220,\"generated_size\":220,\"match_percent\":100.0,\"left_relocation_instructions\":16,\"right_relocation_instructions\":16,\"diff_kinds\":[{\"kind\":\"NONE\",\"count\":55}]}\n{\"symbol\":\"fn_80193AB8\",\"retail_size\":220,\"generated_size\":220,\"match_percent\":100.0,\"left_relocation_instructions\":16,\"right_relocation_instructions\":16,\"diff_kinds\":[{\"kind\":\"NONE\",\"count\":55}]}\n{\"symbol\":\"fn_80193B94\",\"retail_size\":288,\"generated_size\":288,\"match_percent\":100.0,\"left_relocation_instructions\":8,\"right_relocation_instructions\":8,\"diff_kinds\":[{\"kind\":\"NONE\",\"count\":72}]}",
+  "accounting_measurement_command": "jq -sc '{matched_bytes:(map(.left.symbols[0].size|tonumber)|add),matching_functions:(map(select(.left.symbols[0].match_percent==100.0 and .left.symbols[0].size==.right.symbols[0].size and ([.right.symbols[0].instructions[]|select(.diff_kind != null)]|length)==0))|length),nonmatching_functions:(map(select(.left.symbols[0].match_percent!=100.0 or .left.symbols[0].size!=.right.symbols[0].size or ([.right.symbols[0].instructions[]|select(.diff_kind != null)]|length)!=0))|length)}' reports/GEDE01/objdiff-game_fn_801939DC-session-1407-remediation-1.json reports/GEDE01/objdiff-game_fn_80193AB8-session-1407-remediation-1.json reports/GEDE01/objdiff-game_fn_80193B94-session-1407-remediation-1.json",
+  "accounting_measurement_raw_output": "{\"matched_bytes\":728,\"matching_functions\":3,\"nonmatching_functions\":0}",
+  "accounting": "Every byte remains owned by one independent honest-C translation unit; there is no gap, shared reconstruction, or assembly. Remediation changes no range boundary and leaves next_target fixed at 0x80193CB4."
+}

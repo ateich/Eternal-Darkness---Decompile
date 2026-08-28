@@ -1,0 +1,33 @@
+{
+  "session_id": "session-1403-remediation-1",
+  "accepted_frontier": "0x801931C4",
+  "next_target": "0x801931C4",
+  "match_gate_reached": false,
+  "measurements": [
+    {
+      "description": "Guarded constant-value verification and externalization for both affected objects",
+      "command": "touch src/game/game_fn_80192F54.c src/game/game_fn_801931C4.c && .tools/bin/ninja build/GEDE01/src/game/game_fn_80192F54.externalized build/GEDE01/src/game/game_fn_801931C4.externalized",
+      "raw_output": "[1/4] MWCC build/GEDE01/src/game/game_fn_80192F54.o\n### mwcceppc.exe Usage Warning:\n#   Specified directory 'include' not found\n[2/4] MWCC build/GEDE01/src/game/game_fn_801931C4.o\n### mwcceppc.exe Usage Warning:\n#   Specified directory 'include' not found\n[3/4] EXTERNALIZE build/GEDE01/src/game/game_fn_80192F54.o\n[4/4] EXTERNALIZE build/GEDE01/src/game/game_fn_801931C4.o"
+    },
+    {
+      "description": "Fresh fn_80192F54 objdiff measurement",
+      "command": "jq '.left.symbols[0] | {name,size,match_percent,instruction_count:(.instructions|length),diff_kinds:([.instructions[].diff_kind]|group_by(.)|map({kind:.[0],count:length}))}' reports/GEDE01/objdiff-game_fn_80192F54-session-1403-remediation-1.json && jq '.right.symbols[0] | {name,size,instruction_count:(.instructions|length)}' reports/GEDE01/objdiff-game_fn_80192F54-session-1403-remediation-1.json",
+      "raw_output": "{\n  \"name\": \"fn_80192F54\",\n  \"size\": \"624\",\n  \"match_percent\": 99.45513,\n  \"instruction_count\": 156,\n  \"diff_kinds\": [\n    {\n      \"kind\": null,\n      \"count\": 144\n    },\n    {\n      \"kind\": \"DIFF_ARG_MISMATCH\",\n      \"count\": 12\n    }\n  ]\n}\n{\n  \"name\": \"fn_80192F54\",\n  \"size\": \"624\",\n  \"instruction_count\": 156\n}"
+    },
+    {
+      "description": "Fresh fn_801931C4 objdiff measurement",
+      "command": "jq '.left.symbols[0] | {name,size,match_percent,instruction_count:(.instructions|length),diff_kinds:([.instructions[].diff_kind]|group_by(.)|map({kind:.[0],count:length}))}' reports/GEDE01/objdiff-game_fn_801931C4-session-1403-remediation-1.json && jq '.right.symbols[0] | {name,size,instruction_count:(.instructions|length)}' reports/GEDE01/objdiff-game_fn_801931C4-session-1403-remediation-1.json",
+      "raw_output": "{\n  \"name\": \"fn_801931C4\",\n  \"size\": \"1336\",\n  \"match_percent\": 99.07185,\n  \"instruction_count\": 334,\n  \"diff_kinds\": [\n    {\n      \"kind\": null,\n      \"count\": 274\n    },\n    {\n      \"kind\": \"DIFF_ARG_MISMATCH\",\n      \"count\": 60\n    }\n  ]\n}\n{\n  \"name\": \"fn_801931C4\",\n  \"size\": \"1336\",\n  \"instruction_count\": 334\n}"
+    },
+    {
+      "description": "Normalized real ELF text relocation identity for every affected object",
+      "command": "for symbol in fn_80192F54 fn_801931C4; do diff -u <(build/binutils/powerpc-eabi-readelf -r build/GEDE01/obj/game/game_${symbol}.o | sed -n '/Relocation section .rela.text/,/^$/p' | sed -E 's/[[:space:]]+[0-9a-f]+[[:space:]]+R_PPC/ R_PPC/') <(build/binutils/powerpc-eabi-readelf -r build/GEDE01/src/game/game_${symbol}.o | sed -n '/Relocation section .rela.text/,/^$/p' | sed -E 's/[[:space:]]+[0-9a-f]+[[:space:]]+R_PPC/ R_PPC/') && echo \"$symbol relocation tables equal\"; done",
+      "raw_output": "fn_80192F54 relocation tables equal\nfn_801931C4 relocation tables equal"
+    },
+    {
+      "description": "Final DOL hash",
+      "command": "sha1sum build/GEDE01/main.dol",
+      "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+    }
+  ]
+}

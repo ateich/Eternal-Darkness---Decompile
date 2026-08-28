@@ -1,0 +1,44 @@
+{
+  "session_id": "session-1402",
+  "full_build_command": ".tools/bin/ninja",
+  "full_build_result": "success; config/GEDE01/build.sha1 reported build/GEDE01/main.dol OK",
+  "dol_sha1_command": "sha1sum build/GEDE01/main.dol",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "progress_command": "python3 configure.py progress",
+  "report_source": "build/GEDE01/report.json",
+  "report_measures": {
+    "matching_objects": 3921,
+    "total_objects": 5403,
+    "matching_functions": 3686,
+    "total_functions": 8216,
+    "matching_code_bytes": 574104,
+    "linked_code_bytes": 574072,
+    "total_code_bytes": 2300692,
+    "game_matching_code_bytes": 571076,
+    "game_linked_code_bytes": 571044,
+    "game_total_code_bytes": 949972
+  },
+  "objdiff_commands": [
+    "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801929A4 fn_801929A4 -o reports/GEDE01/objdiff-fn_801929A4-session-1402.json --format json",
+    "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80192E8C fn_80192E8C -o reports/GEDE01/objdiff-fn_80192E8C-session-1402.json --format json"
+  ],
+  "assigned_attempt": {
+    "symbol": "fn_801929A4",
+    "retail_bytes": 1256,
+    "generated_bytes": 1256,
+    "match_percent": 99.02866,
+    "relocation_annotations_retail": 35,
+    "relocation_annotations_generated": 35
+  },
+  "matched_function": {
+    "symbol": "fn_80192E8C",
+    "retail_bytes": 200,
+    "generated_bytes": 200,
+    "match_percent": 100.0,
+    "relocation_annotations_retail": 11,
+    "relocation_annotations_generated": 11,
+    "relocations_equal": true
+  },
+  "matched_bytes_this_session": 200,
+  "nonmatching_bytes_this_session": 1256
+}

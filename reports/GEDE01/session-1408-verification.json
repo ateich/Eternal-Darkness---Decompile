@@ -1,0 +1,20 @@
+{
+  "session_id": "session-1408",
+  "starting_target": "0x80193CB4",
+  "ending_next_target": "0x80193E1C",
+  "build_command": ".tools/bin/ninja build/GEDE01/main.dol build/GEDE01/report.json",
+  "build_result": "success",
+  "objdiff_command": "for sym in 80193CB4 80193D64; do build/tools/objdiff-cli diff -p . -u main/game/game_fn_$sym fn_$sym -o reports/GEDE01/objdiff-game_fn_${sym}-session-1408.json --format json -c function_reloc_diffs=name_address; done",
+  "function_measurement_raw_output": "{\"symbol\":\"fn_80193CB4\",\"retail_size\":176,\"generated_size\":176,\"match_percent\":100.0,\"left_relocation_instructions\":4,\"right_relocation_instructions\":4,\"diff_kinds\":[{\"kind\":\"NONE\",\"count\":44}]}\n{\"symbol\":\"fn_80193D64\",\"retail_size\":184,\"generated_size\":184,\"match_percent\":100.0,\"left_relocation_instructions\":1,\"right_relocation_instructions\":1,\"diff_kinds\":[{\"kind\":\"NONE\",\"count\":46}]}",
+  "report_counter_command": "jq -c '{matching_objects:(.measures.complete_units|tonumber),total_objects:(.measures.total_units|tonumber),matching_functions:(.measures.matched_functions|tonumber),total_functions:(.measures.total_functions|tonumber),matching_code_bytes:(.measures.matched_code|tonumber),linked_code_bytes:(.measures.complete_code|tonumber),code_percent:.measures.matched_code_percent,function_percent:.measures.matched_functions_percent,game_code_matching_bytes:(.categories[]|select(.id==\"game\")|.measures.matched_code|tonumber),game_code_linked_bytes:(.categories[]|select(.id==\"game\")|.measures.complete_code|tonumber)}' build/GEDE01/report.json",
+  "report_counter_raw_output": "{\"matching_objects\":3950,\"total_objects\":5435,\"matching_functions\":3715,\"total_functions\":8216,\"matching_code_bytes\":575900,\"linked_code_bytes\":575868,\"code_percent\":25.031599,\"function_percent\":45.21665,\"game_code_matching_bytes\":572872,\"game_code_linked_bytes\":572840}",
+  "strict_report_command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1408-reloc-strict.json --format json -c function_reloc_diffs=name_address",
+  "strict_counter_raw_output": "{\"matching_functions\":3710,\"matching_code_bytes\":574216,\"game_matching_functions\":3648,\"game_matching_code_bytes\":571188}",
+  "dol_sha1_command": "sha1sum build/GEDE01/main.dol",
+  "dol_sha1_raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+  "matched_bytes": 360,
+  "nonmatching_bytes": 0,
+  "matching_functions": 2,
+  "matched_function_sizes": [176,184],
+  "unaccounted_spans": []
+}
