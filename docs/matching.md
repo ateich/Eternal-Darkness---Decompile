@@ -263,3 +263,24 @@ the branch-dead state register and emits four different instructions, while the
 qualified form reproduces the retail `r27` lifetime exactly. Objdiff reports
 376/376 code bytes and all 20 relocations at 100%, and the whole-DOL SHA-1 gate
 remains `ea24b6af954876ce072562ff39cdb4c81d32be1f`.
+
+## Script constant registration and its string pool
+
+`fn_80177434` registers the game's 93 script constant names and was parked at
+99.69194% (session-1196) over six instructions: the base of the supposed name
+table `lbl_80250588` reached r31 through a temp copy, and the two offset-0
+name references compiled to `mr` where retail has `addi r4,r31,0`. No variable
+form, cast, scope, pragma, optimizer level, or compiler candidate changes the
+copy shape; a probe TU confirmed the backend never emits an addi-0 copy of a
+pointer variable. The resolution is that `lbl_80250588` is not a table but the
+TU's own `-str reuse` string pool: the promoted source passes the 93 name
+string literals directly, which reproduces the pool byte-for-byte (verified
+against retail data at 0x80250588), materializes the pool base straight into
+r31, and emits every reference as `addi r4,r31,offset`, including offset 0
+under GC/1.3.2, which this unit is now pinned to (GC/1.3 folds the offset-0
+form to `mr`; GC/1.3.2 through GC/2.6 preserve it). The new
+`tools/externalize_string_pool.py` rule verifies the pool bytes against the
+retail DOL, repoints the two base relocations to `lbl_80250588`, and removes
+the TU's data section so the shared data unit keeps ownership. Objdiff reports
+6752/6752 bytes and all relocations at 100%, and the whole-DOL SHA-1 gate
+remains `ea24b6af954876ce072562ff39cdb4c81d32be1f`.

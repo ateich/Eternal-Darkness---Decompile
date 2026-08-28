@@ -1893,6 +1893,18 @@ config.custom_build_rules = [
         ),
         "description": "EXTERNALIZE $in",
     },
+    {
+        "name": "externalize_string_pool_80250588",
+        "command": (
+            "build/binutils/powerpc-eabi-objcopy "
+            "--add-symbol lbl_80250588=.data:0,global,object $in && "
+            "python3 tools/externalize_string_pool.py $in lbl_80250588 "
+            "orig/GEDE01/sys/main.dol && "
+            "build/binutils/powerpc-eabi-objcopy --strip-symbol='...data.0' "
+            "--remove-section=.data $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
 ]
 
 # A renamed compiler-local symbol must contain the retail value it claims to
@@ -1937,6 +1949,11 @@ for rule in config.custom_build_rules:
     guarded_externalize_rules.add(rule["name"])
 config.custom_build_steps = {
     "post-compile": [
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80177434.externalized"],
+            "rule": "externalize_string_pool_80250588",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80177434.o"],
+        },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8018F81C.externalized"],
             "rule": "externalize_game_8018F81C_constants",
@@ -7921,7 +7938,7 @@ config.libs = [
             Object(Matching, "game/game_fn_801772C8.c"),
             Object(Matching, "game/game_fn_80177388.c"),
             Object(Matching, "game/game_fn_80177408.c"),
-            Object(NonMatching, "game/game_fn_80177434.c"),
+            Object(Matching, "game/game_fn_80177434.c", mw_version="GC/1.3.2"),
             Object(Matching, "game/game_fn_80178E94.c"),
             Object(NonMatching, "game/game_fn_80178F14.c"),
             Object(NonMatching, "game/game_fn_80178F88.c"),
