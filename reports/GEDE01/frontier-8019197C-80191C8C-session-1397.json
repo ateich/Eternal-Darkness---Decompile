@@ -1,0 +1,42 @@
+{
+  "session_id": "session-1397-remediation-1",
+  "scope": "Review remediation only; no new target opened and no frontier movement.",
+  "range_start": "0x8019197C",
+  "range_end": "0x80191C8C",
+  "next_target": "0x80191C8C",
+  "matched_bytes": 784,
+  "nonmatching_bytes": 0,
+  "unaccounted_spans": [],
+  "range_measurement_command": "python3 - <<'PY'\nstart = 0x8019197C\nmid = 0x80191BA8\nend = 0x80191C8C\nfirst = mid - start\nsecond = end - mid\nmatched = first + second\nnonmatching = 0\naccounted = matched + nonmatching\nprint(f'fn_8019197C_bytes={first}')\nprint(f'fn_80191BA8_bytes={second}')\nprint(f'matched_bytes={matched}')\nprint(f'nonmatching_bytes={nonmatching}')\nprint(f'range_bytes={end-start}')\nprint(f'accounted_bytes={accounted}')\nprint(f'next_target=0x{end:08X}')\nPY",
+  "range_measurement_raw_output": "fn_8019197C_bytes=556\nfn_80191BA8_bytes=228\nmatched_bytes=784\nnonmatching_bytes=0\nrange_bytes=784\naccounted_bytes=784\nnext_target=0x80191C8C",
+  "functions": [
+    {
+      "name": "fn_8019197C",
+      "start": "0x8019197C",
+      "end": "0x80191BA8",
+      "retail_size": 556,
+      "generated_size": 556,
+      "retail_real_instructions": 139,
+      "generated_real_instructions": 139,
+      "status": "Matching",
+      "objdiff_percent": 100.0,
+      "relocations_equal": true,
+      "correction": "Recovered the retail symbols and types, retained the conversion bias as a double, externalized compiler-local @19 to lbl_80650B18 with the guarded project rule, kept the initial float live across the field stores, and read the signed subtype through a signed-byte lvalue. Canonical GC/1.3 now reproduces every instruction and relocation."
+    },
+    {
+      "name": "fn_80191BA8",
+      "start": "0x80191BA8",
+      "end": "0x80191C8C",
+      "retail_size": 228,
+      "generated_size": 228,
+      "retail_real_instructions": 57,
+      "generated_real_instructions": 57,
+      "status": "Matching",
+      "objdiff_percent": 100.0,
+      "relocations_equal": true
+    }
+  ],
+  "function_measurement_command": "for fn in fn_8019197C fn_80191BA8; do jq -r --arg fn \"$fn\" '\"function=\"+$fn,\"retail_text_size=\"+([.left.sections[]|select(.name==\".text\")|.size][0]),\"generated_text_size=\"+([.right.sections[]|select(.name==\".text\")|.size][0]),\"retail_function_size=\"+.left.symbols[0].size,\"generated_function_size=\"+.right.symbols[0].size,\"retail_real_instructions=\"+([.left.symbols[0].instructions[]|select(.instruction != null)]|length|tostring),\"generated_real_instructions=\"+([.right.symbols[0].instructions[]|select(.instruction != null)]|length|tostring),\"match_percent=\"+(.left.symbols[0].match_percent|tostring),\"diff_kind_counts=\"+([.left.symbols[0].instructions[]|.diff_kind//\"DIFF_NONE\"]|group_by(.)|map({kind:.[0],count:length})|tojson)' \"reports/GEDE01/objdiff-game_${fn}-session-1397-remediation-1.json\"; done",
+  "function_measurement_raw_output": "function=fn_8019197C\nretail_text_size=556\ngenerated_text_size=556\nretail_function_size=556\ngenerated_function_size=556\nretail_real_instructions=139\ngenerated_real_instructions=139\nmatch_percent=100.0\ndiff_kind_counts=[{\"kind\":\"DIFF_NONE\",\"count\":139}]\nfunction=fn_80191BA8\nretail_text_size=228\ngenerated_text_size=228\nretail_function_size=228\ngenerated_function_size=228\nretail_real_instructions=57\ngenerated_real_instructions=57\nmatch_percent=100.0\ndiff_kind_counts=[{\"kind\":\"DIFF_NONE\",\"count\":57}]",
+  "verification_evidence": "reports/GEDE01/session-1397-remediation-1-verification.json"
+}

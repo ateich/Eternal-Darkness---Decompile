@@ -1,0 +1,18 @@
+{
+  "session_id": "session-1398",
+  "full_build_command": ".tools/bin/ninja",
+  "full_build_result": "success; build/GEDE01/main.dol SHA-1 gate reported OK and build/GEDE01/report.json was regenerated",
+  "dol_sha1_command": "sha1sum build/GEDE01/main.dol",
+  "dol_sha1_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+  "ordinary_report": {"matching_objects":3918,"total_objects":5397,"matching_functions":3683,"total_functions":8216,"matching_code_bytes":572692,"linked_code_bytes":572660,"matching_data_bytes":34626,"linked_data_bytes":34750,"game_matching_code_bytes":569664,"game_linked_code_bytes":569632,"sdk_matching_code_bytes":3028},
+  "strict_report_command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1398-reloc-strict.json -f json -c function_reloc_diffs=name_address",
+  "strict_report": {"matching_functions":3678,"matching_code_bytes":571008,"game_matching_functions":3616,"game_matching_code_bytes":567980},
+  "object_diff_command_template": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_ADDRESS fn_ADDRESS -o reports/GEDE01/objdiff-game_fn_ADDRESS-session-1398.json --format json-pretty -c function_reloc_diffs=name_address",
+  "objects": [
+    {"name":"fn_80191C8C","retail_size":504,"generated_size":504,"match_percent":100.0,"retail_real_instructions":126,"generated_real_instructions":126,"retail_relocations":6,"generated_relocations":6,"instruction_differences":0},
+    {"name":"fn_80191E84","retail_size":128,"generated_size":128,"match_percent":100.0,"retail_real_instructions":32,"generated_real_instructions":32,"retail_relocations":1,"generated_relocations":1,"instruction_differences":0},
+    {"name":"fn_80191F04","retail_size":84,"generated_size":84,"match_percent":100.0,"retail_real_instructions":21,"generated_real_instructions":21,"retail_relocations":1,"generated_relocations":1,"instruction_differences":0}
+  ],
+  "arithmetic": {"fn_80191C8C_bytes":504,"fn_80191E84_bytes":128,"fn_80191F04_bytes":84,"matched_bytes":716,"nonmatching_bytes":0,"range_bytes":716,"accounted_bytes":716},
+  "next_target": "0x80191F58"
+}
