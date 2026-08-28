@@ -1,0 +1,35 @@
+{
+  "session_id": "2b1fdd58-aeae-49a4-98ca-4777f6aae352",
+  "range_start": "0x8018AA30",
+  "range_end": "0x8018ABD4",
+  "next_target": "0x8018ABD4",
+  "matched_bytes": 0,
+  "nonmatching_bytes": 420,
+  "range_measurement_command": "printf 'range_start=0x8018AA30\\nrange_end=0x8018ABD4\\nrange_bytes=%d\\nmatched_bytes=0\\nnonmatching_bytes=%d\\n' \"$((0x8018ABD4-0x8018AA30))\" \"$((0x8018ABD4-0x8018AA30))\"",
+  "range_measurement_raw_output": "range_start=0x8018AA30\nrange_end=0x8018ABD4\nrange_bytes=420\nmatched_bytes=0\nnonmatching_bytes=420",
+  "functions": [
+    {
+      "name": "fn_8018AA30",
+      "start": "0x8018AA30",
+      "end": "0x8018ABD4",
+      "retail_size": 420,
+      "generated_size": 420,
+      "objdiff_percent": 94.85714,
+      "measurement_command": "jq -r '\"left_name=\\(.left.symbols[0].name)\",\"left_instructions=\\(.left.symbols[0].instructions|length)\",\"right_instructions=\\(.right.symbols[0].instructions|length)\",\"target_bytes=\\(.left.symbols[0].size)\",\"generated_bytes=\\(.right.symbols[0].size)\",\"match_percent=\\(.left.symbols[0].match_percent)\"' reports/GEDE01/objdiff-game_fn_8018AA30-session-2b1fdd58-aeae-49a4-98ca-4777f6aae352-remediation-1.json",
+      "measurement_raw_output": "left_name=fn_8018AA30\nleft_instructions=107\nright_instructions=107\ntarget_bytes=420\ngenerated_bytes=420\nmatch_percent=94.85714",
+      "status": "NonMatching",
+      "divergence": "Canonical GC/1.3 assigns the small-count byte offset to r20 and the fn_8018D020 callback to r21, while retail initializes loop state in r19, copies it to byte-offset r21, and materializes the callback directly in r20; the callback HA/LO relocation pair is consequently shifted."
+    }
+  ],
+  "fallback_attempt": {
+    "name": "fn_8018ABD4",
+    "best_objdiff_percent": null,
+    "registered": false,
+    "reason": "Unverified in remediation 1: no source or dedicated objdiff evidence for this discarded candidate survives in the worktree or reachable git history, so no score or codegen claim is retained. Stale ignored build output is not evidence."
+  },
+  "unaccounted_spans": [],
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "objdiff_evidence": "reports/GEDE01/objdiff-game_fn_8018AA30-session-2b1fdd58-aeae-49a4-98ca-4777f6aae352-remediation-1.json",
+  "strict_report": "reports/GEDE01/session-2b1fdd58-aeae-49a4-98ca-4777f6aae352-remediation-1-reloc-strict.json",
+  "verification_report": "reports/GEDE01/session-2b1fdd58-aeae-49a4-98ca-4777f6aae352-remediation-1-verification.json"
+}

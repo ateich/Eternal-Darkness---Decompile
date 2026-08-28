@@ -1,0 +1,62 @@
+{
+  "session_id": "session-1358-remediation-3",
+  "scope": "Correction-only review remediation. No source, split, compiler flag, object status, match credit, frontier, or next_target change.",
+  "affected_object": "main/game/game_fn_8018B058",
+  "source_change": "none",
+  "build": {
+    "command": "python3 configure.py --version GEDE01 && .tools/bin/ninja",
+    "raw_output_tail": "[491/493] DOL build/GEDE01/main.dol\n[492/493] CHECK config/GEDE01/build.sha1\nbuild/GEDE01/main.dol: OK\n[493/493] PROGRESS\nProgress:\n  All: 36.36% fuzzy, 24.23% matched, 24.23% linked (3836 / 5284 files)\n    Code: 557464 / 2300692 bytes (3601 / 8216 functions)\n    Data: 34606 / 4305646 bytes (0.80%)\n  Game Code: 90.81% fuzzy, 60.40% matched, 60.40% linked (3818 / 4562 files)\n    Code: 554436 / 917904 bytes (3539 / 4283 functions)\n    Data: 34382 / 35478 bytes (96.91%)\n  SDK/Runtime: 100.00% fuzzy, 100.00% matched, 100.00% linked (18 / 18 files)\n    Code: 3028 / 3028 bytes (62 / 62 functions)\n    Data: 224 / 224 bytes (100.00%)",
+    "exit_status": 0,
+    "result": "success"
+  },
+  "objdiff": {
+    "pre_regeneration_hash_command": "sha256sum reports/GEDE01/objdiff-game_fn_8018B058-session-1358.json reports/GEDE01/session-1358-reloc-strict.json build/GEDE01/report.json",
+    "pre_regeneration_hash_raw_output": "78ae1bd2340334c00d60c98a3881856009d0849eaf145202b3a4ccaf98d23162  reports/GEDE01/objdiff-game_fn_8018B058-session-1358.json\nf2a6144dff932a183d8cf4e6118faecea1f015b3b75dedb3e71adeb801f38a06  reports/GEDE01/session-1358-reloc-strict.json\nd028543301685f6562eecc04513acde6fe7a267572932f3c1556733a5c8b5a29  build/GEDE01/report.json",
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8018B058 fn_8018B058 -o reports/GEDE01/objdiff-game_fn_8018B058-session-1358.json --format json-pretty -c function_reloc_diffs=name_address; echo fn_8018B058_exit=$?; sha256sum reports/GEDE01/objdiff-game_fn_8018B058-session-1358.json",
+    "raw_output": " INFO Writing to reports/GEDE01/objdiff-game_fn_8018B058-session-1358.json\nfn_8018B058_exit=0\n78ae1bd2340334c00d60c98a3881856009d0849eaf145202b3a4ccaf98d23162  reports/GEDE01/objdiff-game_fn_8018B058-session-1358.json",
+    "measurement_command": "jq -r '\"retail_bytes=\\(.left.symbols[0].size) generated_bytes=\\(.right.symbols[0].size) match_percent=\\(.left.symbols[0].match_percent) left_instructions=\\(.left.symbols[0].instructions|length) right_instructions=\\(.right.symbols[0].instructions|length)\"' reports/GEDE01/objdiff-game_fn_8018B058-session-1358.json",
+    "measurement_raw_output": "retail_bytes=440 generated_bytes=440 match_percent=99.59091 left_instructions=110 right_instructions=110",
+    "matched_bytes_claimed": 0,
+    "exact_match_gate": "failed; fn_8018B058 is not byte-identical",
+    "regeneration_result": "The post-regeneration SHA-256 equals the pre-regeneration SHA-256, so regeneration reproduced the retained canonical objdiff file byte-for-byte and it does not appear in git show --stat."
+  },
+  "ordinary_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json -f json; echo ordinary_report_exit=$?; sha256sum build/GEDE01/report.json",
+    "raw_output": " INFO Loading project .\n INFO Generating report for 5284 units (using 8 threads)\n INFO Report generated in 0.123s\n INFO Writing to build/GEDE01/report.json\nordinary_report_exit=0\nd028543301685f6562eecc04513acde6fe7a267572932f3c1556733a5c8b5a29  build/GEDE01/report.json",
+    "measurement_command": "jq -c '{matching_functions:.measures.matched_functions,complete_units:.measures.complete_units,matching_code_bytes:.measures.matched_code,linked_code_bytes:.measures.complete_code,total_functions:.measures.total_functions,total_objects:.measures.total_units,game_code_total_bytes:(.categories[]|select(.id==\"game\")|.measures.total_code),overall_match_percent:.measures.matched_code_percent}' build/GEDE01/report.json",
+    "measurement_raw_output": "{\"matching_functions\":3601,\"complete_units\":3836,\"matching_code_bytes\":\"557464\",\"linked_code_bytes\":\"557432\",\"total_functions\":8216,\"total_objects\":5284,\"game_code_total_bytes\":\"917904\",\"overall_match_percent\":24.230274}",
+    "regeneration_result": "The post-regeneration SHA-256 equals the pre-regeneration SHA-256, so regeneration reproduced build/GEDE01/report.json byte-for-byte."
+  },
+  "strict_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1358-reloc-strict.json -f json -c function_reloc_diffs=name_address; echo strict_report_exit=$?; sha256sum reports/GEDE01/session-1358-reloc-strict.json",
+    "raw_output": " INFO Loading project .\n INFO Generating report for 5284 units (using 8 threads)\n INFO Report generated in 0.126s\n INFO Writing to reports/GEDE01/session-1358-reloc-strict.json\nstrict_report_exit=0\nf2a6144dff932a183d8cf4e6118faecea1f015b3b75dedb3e71adeb801f38a06  reports/GEDE01/session-1358-reloc-strict.json",
+    "measurement_command": "jq -c '{matching_functions:.measures.matched_functions,complete_units:.measures.complete_units,matching_code_bytes:.measures.matched_code,linked_code_bytes:.measures.complete_code,total_functions:.measures.total_functions,total_objects:.measures.total_units,game_code_total_bytes:(.categories[]|select(.id==\"game\")|.measures.total_code),game_matching_functions:(.categories[]|select(.id==\"game\")|.measures.matched_functions),game_matching_code_bytes:(.categories[]|select(.id==\"game\")|.measures.matched_code)}' reports/GEDE01/session-1358-reloc-strict.json",
+    "measurement_raw_output": "{\"matching_functions\":3596,\"complete_units\":3836,\"matching_code_bytes\":\"555780\",\"linked_code_bytes\":\"557432\",\"total_functions\":8216,\"total_objects\":5284,\"game_code_total_bytes\":\"917904\",\"game_matching_functions\":3534,\"game_matching_code_bytes\":\"552752\"}",
+    "regeneration_result": "The post-regeneration SHA-256 equals the pre-regeneration SHA-256, so regeneration reproduced the retained canonical strict report byte-for-byte and it does not appear in git show --stat."
+  },
+  "coverage_accounting": {
+    "command": "jq -s -c '{before:{matching_functions:.[0].matching_functions,matching_objects:.[0].matching_objects,matching_code_bytes:.[0].matching_code_bytes,linked_code_bytes:.[0].linked_code_bytes,total_objects:.[0].total_objects,game_code_total_bytes:.[0].game_code_total_bytes},after:{matching_functions:.[1].matching_functions,matching_objects:.[1].matching_objects,matching_code_bytes:.[1].matching_code_bytes,linked_code_bytes:.[1].linked_code_bytes,total_objects:.[1].total_objects,game_code_total_bytes:.[1].game_code_total_bytes},delta:{matching_functions:(.[1].matching_functions-.[0].matching_functions),matching_objects:(.[1].matching_objects-.[0].matching_objects),matching_code_bytes:(.[1].matching_code_bytes-.[0].matching_code_bytes),linked_code_bytes:(.[1].linked_code_bytes-.[0].linked_code_bytes),total_objects:(.[1].total_objects-.[0].total_objects),game_code_total_bytes:(.[1].game_code_total_bytes-.[0].game_code_total_bytes)}}' <(git show 7c447912:eternal-darkness-decomp/reports/GEDE01/progress.json) reports/GEDE01/progress.json",
+    "raw_output": "{\"before\":{\"matching_functions\":3601,\"matching_objects\":3836,\"matching_code_bytes\":557464,\"linked_code_bytes\":557432,\"total_objects\":5283,\"game_code_total_bytes\":917464},\"after\":{\"matching_functions\":3601,\"matching_objects\":3836,\"matching_code_bytes\":557464,\"linked_code_bytes\":557432,\"total_objects\":5284,\"game_code_total_bytes\":917904},\"delta\":{\"matching_functions\":0,\"matching_objects\":0,\"matching_code_bytes\":0,\"linked_code_bytes\":0,\"total_objects\":1,\"game_code_total_bytes\":440}}",
+    "throughput_gate": "failed; matching functions, matching objects, matching code bytes, and linked code bytes all changed by zero",
+    "scope_conflict": "The throughput gate is unsatisfiable within remediation 3 because the assigned scope forbids frontier advancement and unrelated matching work. It is reported as failed, not waived or passed."
+  },
+  "relocations": {
+    "command": "cmp <(build/binutils/powerpc-eabi-readelf -r build/GEDE01/obj/game/game_fn_8018B058.o | awk '/^[0-9]/{print $1,$3,$5,$6,$7}') <(build/binutils/powerpc-eabi-readelf -r build/GEDE01/src/game/game_fn_8018B058.o | awk '/^[0-9]/{print $1,$3,$5,$6,$7}'); echo normalized_relocation_cmp_exit=$?; printf 'retail_relocation_records='; build/binutils/powerpc-eabi-readelf -r build/GEDE01/obj/game/game_fn_8018B058.o | awk '/^[0-9]/{n++} END{print n+0}'; printf 'generated_relocation_records='; build/binutils/powerpc-eabi-readelf -r build/GEDE01/src/game/game_fn_8018B058.o | awk '/^[0-9]/{n++} END{print n+0}'",
+    "raw_output": "normalized_relocation_cmp_exit=0\nretail_relocation_records=27\ngenerated_relocation_records=27",
+    "result": "success; normalized relocation records are equal"
+  },
+  "dol": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol; cmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol; echo dol_cmp_exit=$?",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol\ndol_cmp_exit=0",
+    "result": "success; rebuilt DOL equals retail"
+  },
+  "tracked_source_audit": {
+    "command": "git diff 7db8e96b HEAD -- src config; echo source_config_diff_exit=$?",
+    "raw_output": "source_config_diff_exit=0",
+    "result": "No source or config difference remains from the pre-variant-audit commit."
+  },
+  "variant_audit_retention": "The remediation-2 family and variant reports under build/GEDE01/remediation-2-audit are ignored workspace-only files and are not retained as durable artifacts; only their commands and verbatim measurement outputs are retained in notes/u16-induction-register-coloring.md.",
+  "systemic_note": "notes/u16-induction-register-coloring.md",
+  "ending_next_target": "0x8018B210",
+  "overall_result": "Build, report generation, normalized relocation comparison, and DOL equality gates succeeded. The fn_8018B058 exact-match gate and the coverage/throughput gate failed."
+}

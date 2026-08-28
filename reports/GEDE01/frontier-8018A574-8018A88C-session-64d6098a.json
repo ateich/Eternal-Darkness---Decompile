@@ -1,0 +1,28 @@
+{
+  "session_id": "64d6098a-fbf3-4969-bbed-e5fb4f2633f3",
+  "starting_target": "0x8018A574",
+  "range_start": "0x8018A574",
+  "range_end": "0x8018A88C",
+  "ending_next_target": "0x8018A88C",
+  "next_target": "0x8018A88C",
+  "matched_bytes": 0,
+  "nonmatching_bytes": 792,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "name": "fn_8018A574",
+      "address": "0x8018A574",
+      "size": 792,
+      "generated_size": 792,
+      "status": "NonMatching",
+      "objdiff_percent": 99.69697,
+      "blocker": "The final emitter has seven displayed DIFF_ARG_MISMATCH instruction pairs. Objdiff's register mapping reconciles those to six lost operand-score points: retail radius r8 maps consistently to built r3, while the remaining x, y, x-plus-radius and y-plus-radius live ranges do not follow one coherent rename. Declaration-order, assignment-order, raw-result-lifetime and field-wise-store permutations were rebuilt and rejected; this is preserved as source-level matching debt, not asserted to be irreducible compiler behavior.",
+      "evidence": "reports/GEDE01/objdiff-game_fn_8018A574-remediation-1.json",
+      "measurement_command": "jq -r 'def ins($s): $s.symbols[0].instructions; \"left_instructions=\\(ins(.left)|length)\",\"right_instructions=\\(ins(.right)|length)\",\"target_bytes=\\(.left.symbols[0].size)\",\"generated_bytes=\\(.right.symbols[0].size)\",\"match_percent=\\(.left.symbols[0].match_percent)\",\"diff_kind_counts=\\(([ins(.left)[]|(.diff_kind // \"DIFF_NONE\")]|group_by(.)|map({kind:.[0],count:length})|tojson))\",\"max_score=\\((ins(.left)|length)*10)\",\"earned_score=\\((((ins(.left)|length)*10)*.left.symbols[0].match_percent/100)|round)\",\"lost_score=\\(((ins(.left)|length)*10)-((((ins(.left)|length)*10)*.left.symbols[0].match_percent/100)|round))\"' reports/GEDE01/objdiff-game_fn_8018A574-remediation-1.json",
+      "measurement_raw_output": "left_instructions=198\nright_instructions=198\ntarget_bytes=792\ngenerated_bytes=792\nmatch_percent=99.69697\ndiff_kind_counts=[{\"kind\":\"DIFF_ARG_MISMATCH\",\"count\":7},{\"kind\":\"DIFF_NONE\",\"count\":191}]\nmax_score=1980\nearned_score=1974\nlost_score=6"
+    }
+  ],
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "verification_evidence": "reports/GEDE01/session-64d6098a-remediation-1-verification.json",
+  "result": "No function reached 100%; all 792 contiguous bytes are honestly owned as one NonMatching C translation unit."
+}

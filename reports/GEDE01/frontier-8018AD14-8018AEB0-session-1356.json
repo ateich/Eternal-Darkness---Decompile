@@ -1,0 +1,16 @@
+{
+  "session_id": "session-1356",
+  "range_start": "0x8018AD14",
+  "range_end": "0x8018AEB0",
+  "next_target": "0x8018AEB0",
+  "accounting": [{"symbol":"fn_8018AD14","start":"0x8018AD14","end":"0x8018AEB0","bytes":412,"status":"NonMatching","objdiff_percent":95.67961}],
+  "matched_bytes": 0,
+  "nonmatching_bytes": 412,
+  "unaccounted_spans": [],
+  "divergence": "The tested retail-order byte_offset = i = 0 spelling remains NonMatching. Retail initializes i with li r20 before reloading object_data, copies that zero to byte_offset with mr r23,r20, and materializes fn_8018D020 in r22. Canonical GC/1.3 reloads object_data into r22, materializes the callback in r23, then emits independent li instructions for i in r20 and byte_offset in r21. The divergence includes instruction form, scheduling, register allocation, and callback relocation placement; it is not a pure register permutation.",
+  "verification": "reports/GEDE01/session-1356-verification.json",
+  "objdiff_evidence": "reports/GEDE01/objdiff-game_fn_8018AD14-session-1356-remediation-1.json",
+  "ordinary_report": "reports/GEDE01/session-1356-remediation-1-report.json",
+  "strict_report": "reports/GEDE01/session-1356-remediation-1-reloc-strict.json",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

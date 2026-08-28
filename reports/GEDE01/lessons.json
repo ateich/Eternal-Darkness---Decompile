@@ -2,11 +2,11 @@
   "schema_version": 2,
   "scope": "Distinct MWCC code-generation behaviors documented in reports/GEDE01/progress.json open_items and docs/matching.md",
   "source_snapshot": {
-    "repository_revision": "161d675f13290f4ae066a6720e27b08043d3a468",
-    "next_target": "0x80186A88",
+    "repository_revision": "be1af9597829d4d54c947c928fb35cb6cd977ed9",
+    "next_target": "0x8018A3D8",
     "reports/GEDE01/progress.json": {
-      "sha256": "392c98fac8620e4a0cd584baf7a18f61ac9b7736eca1c4cf1d88574aa0099bd0",
-      "scope": "open_items"
+      "sha256": "565d1cd9c9536bb8fe4b5723f6a1905b636835f95d3aac08aecf9e3c3cf0d84a",
+      "scope": "whole_file"
     },
     "docs/matching.md": {
       "sha256": "b129f2a5ece2733f7b1b0cc37ff98083ca7b8338fabd36a0dacfd2ffe3e6c04c"
@@ -15,12 +15,10 @@
   "consolidation_audit": {
     "original_consolidation_commit": "86d029104eb5ed6ad01b6af03963ea2cf924d2a4",
     "comparison_base": "9036017d38d768d26731df5833c1b14417e215ba",
-    "scope": "Refreshed the catalog through session-1330 remediation 2 without changing generated progress accounting: 328 MWCC code-generation lessons were carried forward unchanged and 22 distinct repository-documented behaviors were appended.",
-    "carried_forward_lessons": 328,
-    "new_lessons": 22,
-    "modified_existing_lessons": 0,
-    "removed_lessons": 0,
-    "total_lessons": 350
+    "scope": "Refreshed the catalog through session-1349 without changing generated progress accounting. Preserved behaviors outside the mandated MWCC taxonomy in out_of_taxonomy rather than deleting or force-fitting them.",
+    "total_lessons": 362,
+    "measurement_command": "jq -r '\"lessons=\" + ((.lessons|length)|tostring) + \" out_of_taxonomy=\" + ((.out_of_taxonomy|length)|tostring) + \" total_catalog_records=\" + (((.lessons|length)+(.out_of_taxonomy|length))|tostring)' reports/GEDE01/lessons.json",
+    "measurement_raw_output": "lessons=362 out_of_taxonomy=2 total_catalog_records=364"
   },
   "lessons": [
     {
@@ -134,17 +132,6 @@
       "precise_divergence": "Keeping the spawned object in a distinct local shortens the incoming create-record lifetime and does not reproduce retail's r29 allocation.",
       "workaround": "Reuse the incoming create-record local for the spawned object.",
       "evidence": ["reports/GEDE01/progress.json: open_items entry for fn_80054040"]
-    },
-    {
-      "category": "data-layout",
-      "functions": ["game_data_80239E10"],
-      "precise_divergence": "Canonical MWCC gives separately declared globals at least 4-byte alignment, so two retail .rodata symbols separated by only 2 bytes cannot be reproduced as independent C declarations. Merging the retail bytes into one 8-byte object matches the section, but objcopy --add-symbol creates the interior lbl_80239E12 with size zero; objdiff consequently omits it from the generated-symbol side and reports the retail size-4 symbol as 0.0%/DIFF_DELETE even though [.rodata-0] is 100.0%.",
-      "workaround": "For sub-4-byte retail global-symbol granularity, emit one merged section blob and add the required interior link symbol with objcopy. Treat the added symbol as a link-compatibility mechanism, not an objdiff symbol match: retain the raw section and symbol percentages, verify the synthetic whole-section symbol at 100%, name any still-assembly relocation consumers, and require the exact DOL hash.",
-      "evidence": [
-        "reports/GEDE01/objdiff-consolidation-game_data_80239E10-session-1330-remediation-1.json",
-        "reports/GEDE01/nonmatching-100-percent-consolidation-session-1330.json: candidates[0].fresh_exact_gate",
-        "58 still-assembly .s files: 522 .4byte lbl_80239E12 references total (a separate 61 .s files define the symbol via .obj/.endobj, 122 lines; 522+122=644 total name occurrences, which is NOT the reference count); build/GEDE01/asm/auto_07_80248C88_data.s is one consumer with nine references. Counted directly in build/GEDE01/asm on 2026-08-27 by Smith, matching .4byte references and .obj definitions separately with grep -rl and grep -rh over *.s"
-      ]
     },
     {
       "category": "instruction-scheduling",
@@ -2479,6 +2466,119 @@
         "reports/GEDE01/objdiff-game_fn_80185FD0-session-1326-remediation-2.json",
         "reports/GEDE01/frontier-80185FD0-801861C4-session-1326.json: remediation_2.signed_compare_trial"
       ]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80186A88"],
+      "precise_divergence": "Canonical GC/1.3 assigns the long-lived self, state, entry, generation, count, index, and vector-offset webs to a different r24-r31 cycle from retail and schedules the setup loads differently.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1331"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80186F70"],
+      "precise_divergence": "Canonical GC/1.3 assigns magnitude and branch-local indices across r26-r28 instead of retail's r27-r28 reuse, expanding the saved range to r26.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1332"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80188384"],
+      "precise_divergence": "Canonical GC/1.3 assigns the input pointer, counts, indices, and second-loop limit to a different r28-r31 persistent-register cycle from retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1339"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80189C14"],
+      "precise_divergence": "Canonical GC/1.3 uses r31/r27/r23-r21 for the generated self, count, and buffers where retail uses r16/r26/r21/r19/r18.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1347"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80189E7C"],
+      "precise_divergence": "Canonical GC/1.3 rotates the persistent self, three buffer pointers, and three flush-size values across r24-r30 relative to retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1348"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8018A060", "fn_8018A1C8"],
+      "precise_divergence": "Canonical GC/1.3 assigns the persistent object, buffer, loop, and size live ranges to different callee-saved registers from retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1349"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80186C88"],
+      "precise_divergence": "Retail uses two branch-specific r27-r29 saved-register cycles; the recorded successful source condition is independently scoped, declaration-ordered branch locals. The evidence records no unscoped trial.",
+      "workaround": "Scope and order declarations independently inside the two branches.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1331"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_801871F0", "fn_80187320", "fn_801882D0"],
+      "precise_divergence": "Equivalent address expressions select different temporaries from retail: fn_801871F0 uses a precomputed axis offset instead of entry+0xA; fn_80187320 selects opposite r0/r9 temporaries for signed integer-to-float setup and exchanges indexed-halfword base/index operands; fn_801882D0 materializes lbl_80606460 through r0 before moving it to r31 instead of relocating addi directly into r31.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1333, 1334, and 1338"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80187488", "fn_801875FC"],
+      "precise_divergence": "The recovered size-exact integer and floating bounce/random loops retain declaration-order and instruction-scheduling differences from retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1334"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80187968"],
+      "precise_divergence": "Canonical GC/1.3 coalesces the distinct 0xFC and -4 byte constants, omits one li instruction, and schedules the initialized volatile-register cycle differently from retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1335"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_80187BB4", "fn_80189C14"],
+      "precise_divergence": "Canonical GC/1.3 does not reproduce retail's conversion-temporary layout: signed-byte and floating conversions use a different stack schedule in fn_80187BB4, while fn_80189C14 reverses the input and output Vec3 stack slots.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1336 and 1347"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80187E40"],
+      "precise_divergence": "Alongside its shorter MAX/MIN branch lowering, canonical GC/1.3 allocates the persistent floating values differently from retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1337"]
+    },
+    {
+      "category": "float-constant-placement",
+      "functions": ["fn_80186E10", "fn_80187120", "fn_801878E0", "fn_80188C1C", "fn_80188E28"],
+      "precise_divergence": "Split compilation emits compiler-local integer-to-float conversion constants rather than the retail-owned sdata2 symbols, so the code can match while the relocation target identity does not until the generated bytes are validated and rebound.",
+      "workaround": "Use guarded externalization only after validating the compiler-local zero, signed or unsigned conversion bias, and accompanying float/double bytes against the cited retail symbols.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1332, 1333, 1335, 1344, and 1345"]
+    }
+  ],
+  "out_of_taxonomy": [
+    {
+      "category": "data-layout",
+      "functions": ["game_data_80239E10"],
+      "precise_divergence": "Canonical MWCC cannot reproduce the retail sub-word separation as independent C declarations. Merging the retail bytes into one object matches the section, but objcopy --add-symbol creates the interior lbl_80239E12 without an extent; objdiff consequently omits it from the generated-symbol side even though the synthetic whole-section symbol matches exactly.",
+      "workaround": "For retail global-symbol granularity finer than canonical natural alignment, emit one merged section blob and add the required interior link symbol with objcopy. Treat the added symbol as a link-compatibility mechanism, not an objdiff symbol match: retain the raw section and symbol measurements, name any still-assembly relocation consumers, and require the exact DOL hash.",
+      "evidence": [
+        "reports/GEDE01/objdiff-consolidation-game_data_80239E10-session-1330-remediation-1.json",
+        "reports/GEDE01/nonmatching-100-percent-consolidation-session-1330.json: candidates[0].fresh_exact_gate",
+        "reports/GEDE01/progress.json: open_items entry for session-1330"
+      ],
+      "taxonomy_note": "Preserved here because data layout is outside the mandated MWCC code-generation taxonomy."
+    },
+    {
+      "category": "instruction-selection-lowering",
+      "functions": ["fn_80187A4C", "fn_80187E40"],
+      "precise_divergence": "Canonical GC/1.3 omits retail's redundant byte truncation after a right shift in fn_80187A4C and lowers fn_80187E40's nested MAX/MIN clamps with a shorter branch form.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1336 and 1337"],
+      "taxonomy_note": "Preserved here because instruction selection and lowering are not instruction scheduling."
     }
   ]
 }

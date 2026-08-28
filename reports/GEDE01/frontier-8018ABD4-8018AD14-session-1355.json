@@ -1,0 +1,33 @@
+{
+  "session_id": "session-1355",
+  "range_start": "0x8018ABD4",
+  "range_end": "0x8018AD14",
+  "next_target": "0x8018AD14",
+  "functions": [
+    {
+      "name": "fn_8018ABD4",
+      "start": "0x8018ABD4",
+      "end": "0x8018AD14",
+      "retail_bytes": 320,
+      "generated_bytes": 320,
+      "objdiff_percent": 99.625,
+      "status": "NonMatching",
+      "matched_bytes": 0,
+      "divergence": "Canonical GC/1.3 assigns the fn_8018D020 callback and 24-byte vertex offset live ranges to r27 and r26 opposite retail r26 and r27, producing five operand differences with otherwise identical size and instruction selection."
+    }
+  ],
+  "matched_bytes": 0,
+  "nonmatching_functions_added": 1,
+  "unaccounted_spans": [],
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "headline_counters_from": "build/GEDE01/report.json",
+  "matching_functions": 3601,
+  "matching_objects": 3836,
+  "matching_code_bytes": 557464,
+  "linked_code_bytes": 557432,
+  "objdiff_evidence": "reports/GEDE01/objdiff-game_fn_8018ABD4-session-1355-remediation-1.json",
+  "strict_report": "reports/GEDE01/session-1355-remediation-1-reloc-strict.json",
+  "counter_reconciliation": "The headline counters use ordinary build/GEDE01/report.json acceptance. The strict report uses function_reloc_diffs=name_address and therefore rejects additional functions and code bytes whose relocation names or addresses differ. These are distinct accounting modes, not two claims for the same predicate; exact extraction commands and raw outputs are in reports/GEDE01/session-1355-remediation-1-verification.json.",
+  "reusable_lesson": "Correcting the ABI from four apparent parameters to one object argument, declaring the callback with its recovered six-parameter function type, and removing the no-op comma expression leaves the same r26/r27 callback-versus-byte-offset swap. Dead parameters and discarded comma operands must not be retained as register-allocation bait; this declaration-order variant is a measured dead end.",
+  "verification": "reports/GEDE01/session-1355-remediation-1-verification.json"
+}

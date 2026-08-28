@@ -1,0 +1,16 @@
+{
+  "session_id": "session-1359",
+  "build_command": ".tools/bin/ninja build/GEDE01/ok",
+  "build_result": "success; canonical DOL check passed",
+  "objdiff_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8018B210 fn_8018B210 -o reports/GEDE01/objdiff-game_fn_8018B210-session-1359.json --format json-pretty -c function_reloc_diffs=name_address",
+  "ordinary_report_command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json -f json",
+  "strict_report_command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1359-reloc-strict.json -f json -c function_reloc_diffs=name_address",
+  "dol_sha1_command": "sha1sum build/GEDE01/main.dol",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "before": {"matching_functions": 3601, "matching_objects": 3836, "matching_code_bytes": 557464, "linked_code_bytes": 557432},
+  "after": {"matching_functions": 3601, "matching_objects": 3836, "matching_code_bytes": 557464, "linked_code_bytes": 557432},
+  "assigned_result": {"symbol": "fn_8018B210", "retail_bytes": 440, "generated_bytes": 440, "match_percent": 99.59091, "matched_bytes_claimed": 0},
+  "nonmatching_count": 1,
+  "coverage_increased": false,
+  "worktree_range_accounted": "0x8018B210-0x8018B3C8"
+}
