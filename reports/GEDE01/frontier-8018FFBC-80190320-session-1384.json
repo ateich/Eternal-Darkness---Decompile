@@ -1,0 +1,19 @@
+{
+  "session_id": "session-1384",
+  "range_start": "0x8018FFBC",
+  "range_end": "0x80190320",
+  "matched_code_bytes": 160,
+  "nonmatching_code_bytes": 708,
+  "unaccounted_spans": [],
+  "functions": [
+    {"symbol":"fn_8018FFBC","start":"0x8018FFBC","end":"0x80190280","size":708,"status":"NonMatching","match_percent":97.62712,"relocation_records":{"retail":2,"built":2,"comparison":"equal under function_reloc_diffs=name_address"},"relocation_instructions":"both relocation-bearing instructions are DIFF_ARG_MISMATCH because their register operands differ","evidence":"reports/GEDE01/objdiff-game_fn_8018FFBC-session-1384.json","divergence":"GC/1.3 entry-block register allocation and unrolled induction-increment scheduling differ from retail"},
+    {"symbol":"fn_80190280","start":"0x80190280","end":"0x80190320","size":160,"status":"Matching","match_percent":100.0,"relocation_records":{"retail":1,"built":1,"comparison":"equal under function_reloc_diffs=name_address"},"relocation_instructions":"equal","evidence":"reports/GEDE01/objdiff-game_fn_80190280-session-1384.json"}
+  ],
+  "next_target": "0x80190320",
+  "shared_reconstruction": false,
+  "assembly_added": false,
+  "fresh_measurement": {
+    "command": "for addr in 8018FFBC 80190280; do jq -r --arg symbol \"fn_$addr\" '\"symbol=\\($symbol)\",\"retail_text_size=\\(.left.symbols[]|select(.name==$symbol)|.size)\",\"built_text_size=\\(.right.symbols[]|select(.name==$symbol)|.size)\",\"match_percent=\\(.left.symbols[]|select(.name==$symbol)|.match_percent)\",\"retail_relocation_records=\\([.left.symbols[]|select(.name==$symbol)|.instructions[].instruction.relocation?|select(.type != null)]|length)\",\"built_relocation_records=\\([.right.symbols[]|select(.name==$symbol)|.instructions[].instruction.relocation?|select(.type != null)]|length)\",([.left.symbols[]|select(.name==$symbol)|.instructions[]|select(.instruction.relocation?.type != null)|\"retail_reloc_instruction=\\(.instruction.formatted) diff_kind=\\(.diff_kind // \\\"NONE\\\")\"]|.[]),([.right.symbols[]|select(.name==$symbol)|.instructions[]|select(.instruction.relocation?.type != null)|\"built_reloc_instruction=\\(.instruction.formatted) diff_kind=\\(.diff_kind // \\\"NONE\\\")\"]|.[])' \"reports/GEDE01/objdiff-game_fn_${addr}-session-1384.json\"; done",
+    "raw_output": "symbol=fn_8018FFBC\nretail_text_size=708\nbuilt_text_size=708\nmatch_percent=97.62712\nretail_relocation_records=2\nbuilt_relocation_records=2\nretail_reloc_instruction=lis r7, lbl_80607120@ha diff_kind=DIFF_ARG_MISMATCH\nretail_reloc_instruction=addi r8, r7, lbl_80607120@l diff_kind=DIFF_ARG_MISMATCH\nbuilt_reloc_instruction=lis r8, lbl_80607120@ha diff_kind=DIFF_ARG_MISMATCH\nbuilt_reloc_instruction=addi r6, r8, lbl_80607120@l diff_kind=DIFF_ARG_MISMATCH\nsymbol=fn_80190280\nretail_text_size=160\nbuilt_text_size=160\nmatch_percent=100.0\nretail_relocation_records=1\nbuilt_relocation_records=1\nretail_reloc_instruction=bl fn_8018FEDC diff_kind=NONE\nbuilt_reloc_instruction=bl fn_8018FEDC diff_kind=NONE"
+  }
+}

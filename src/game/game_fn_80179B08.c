@@ -10,7 +10,7 @@ typedef struct Coord3 {
     float z;
 } Coord3;
 
-extern void fn_80179B58(short*, float*);
+extern float fn_80179B58(short*, float*);
 
 void fn_80179B08(ShortCoord3* source, Coord3* destination)
 {

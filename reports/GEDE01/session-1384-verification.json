@@ -1,0 +1,34 @@
+{
+  "session_id": "session-1384",
+  "remediation": "review remediation 1 of 3",
+  "build_command": ".tools/bin/ninja >/dev/null 2>&1; printf 'NINJA_EXIT=%s\\n' \"$?\"",
+  "build_raw_output": "NINJA_EXIT=0",
+  "ordinary_report": "build/GEDE01/report.json",
+  "strict_report": "reports/GEDE01/session-1384-reloc-strict.json",
+  "strict_report_command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1384-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address >/dev/null 2>&1; printf 'STRICT_REPORT_EXIT=%s\\n' \"$?\"",
+  "strict_report_raw_output": "STRICT_REPORT_EXIT=0",
+  "objdiff_config": "function_reloc_diffs=name_address",
+  "objdiff_commands": [
+    "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8018FFBC fn_8018FFBC -o reports/GEDE01/objdiff-game_fn_8018FFBC-session-1384.json --format json-pretty -c function_reloc_diffs=name_address >/dev/null 2>&1; printf 'OBJDIFF_8018FFBC_EXIT=%s\\n' \"$?\"",
+    "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80190280 fn_80190280 -o reports/GEDE01/objdiff-game_fn_80190280-session-1384.json --format json-pretty -c function_reloc_diffs=name_address >/dev/null 2>&1; printf 'OBJDIFF_80190280_EXIT=%s\\n' \"$?\""
+  ],
+  "objdiff_raw_output": "OBJDIFF_8018FFBC_EXIT=0\nOBJDIFF_80190280_EXIT=0",
+  "relocation_section_command": "readelf -SW build/GEDE01/src/game/game_fn_8018FFBC.o | rg '\\.rela\\.text'; readelf -SW build/GEDE01/src/game/game_fn_80190280.o | rg '\\.rela\\.text'",
+  "relocation_section_raw_output": "  [ 2] .rela.text        RELA            00000000 0002f8 000018 0c      3   1  4\n  [ 2] .rela.text        RELA            00000000 0000d4 00000c 0c      3   1  4",
+  "relocation_measurement": "The section rows show entry size 0x0c; fn_8018FFBC has section size 0x18 and fn_80190280 has section size 0x0c. The per-function command and verbatim output are embedded in frontier-8018FFBC-80190320-session-1384.json.",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "dol_command": "sha1sum build/GEDE01/main.dol; cmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol; printf 'DOL_CMP_EXIT=%s\\n' \"$?\"",
+  "dol_raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nDOL_CMP_EXIT=0",
+  "counter_command": "jq -r '\"matching_objects=\\(.measures.complete_units)\",\"total_objects=\\(.measures.total_units)\",\"matching_functions=\\(.measures.matched_functions)\",\"total_functions=\\(.measures.total_functions)\",\"matching_code_bytes=\\(.measures.matched_code)\",\"linked_code_bytes=\\(.measures.complete_code)\",\"total_code_bytes=\\(.measures.total_code)\",\"matching_data_bytes=\\(.measures.matched_data)\",\"total_data_bytes=\\(.measures.total_data)\"' build/GEDE01/report.json; jq -r '\"strict_matching_functions=\\(.measures.matched_functions)\",\"strict_matching_code_bytes=\\(.measures.matched_code)\",\"strict_game_matching_functions=\\(.categories[]|select(.id==\\\"game\\\")|.measures.matched_functions)\",\"strict_game_matching_code_bytes=\\(.categories[]|select(.id==\\\"game\\\")|.measures.matched_code)\"' reports/GEDE01/session-1384-reloc-strict.json",
+  "counter_raw_output": "matching_objects=3885\ntotal_objects=5359\nmatching_functions=3650\ntotal_functions=8216\nmatching_code_bytes=567216\nlinked_code_bytes=567184\ntotal_code_bytes=2300692\nmatching_data_bytes=34626\ntotal_data_bytes=4305642\nstrict_matching_functions=3645\nstrict_matching_code_bytes=565532\nstrict_game_matching_functions=3583\nstrict_game_matching_code_bytes=562504",
+  "matched_code_bytes": 160,
+  "nonmatching_code_bytes": 708,
+  "headline_counters": {"matching_functions":3650,"matching_objects":3885,"matching_code_bytes":567216,"linked_code_bytes":567184},
+  "strict_counters": {"matching_functions":3645,"matching_code_bytes":565532},
+  "evidence": [
+    "reports/GEDE01/objdiff-game_fn_8018FFBC-session-1384.json",
+    "reports/GEDE01/objdiff-game_fn_80190280-session-1384.json",
+    "reports/GEDE01/frontier-8018FFBC-80190320-session-1384.json"
+  ],
+  "next_target": "0x80190320"
+}
