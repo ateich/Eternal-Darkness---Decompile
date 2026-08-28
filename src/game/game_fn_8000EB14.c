@@ -17,6 +17,7 @@ extern void *fn_80201B8C();
 s32 fn_8000EB14(void* script)
 {
     s32 value = -1;
+    s32 i;
     void* object;
 
     if (fn_8016A598(script) != 1) {
@@ -28,6 +29,8 @@ s32 fn_8000EB14(void* script)
     if (object != 0) {
         value = ((ObjectInfo*)fn_80201B8C(object))->value;
     }
-    fn_8016A830(script, value);
+    for (i = 0; i < 1; i++) {
+        fn_8016A830(script, value);
+    }
     return 1;
 }

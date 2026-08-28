@@ -1,0 +1,35 @@
+{
+  "session_id": "session-0dc838b9-7d21-4193-9381-d6439383152f",
+  "full_build": "passed",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "report_source": "build/GEDE01/report.json",
+  "headline": {
+    "matching_functions": 3665,
+    "matching_objects": 3900,
+    "matching_code_bytes": 569844,
+    "linked_code_bytes": 569812
+  },
+  "session_matched_code_bytes": 384,
+  "session_nonmatching_code_bytes": 0,
+  "objdiff_config": "function_reloc_diffs=name_address",
+  "functions": [
+    {
+      "symbol": "fn_8000EB14",
+      "size": 192,
+      "match_percent": 100.0,
+      "relocations_equal": true
+    },
+    {
+      "symbol": "fn_8000EBD4",
+      "size": 192,
+      "match_percent": 100.0,
+      "relocations_equal": true
+    }
+  ],
+  "commands": {
+    "full_build": ".tools/bin/ninja",
+    "ordinary_report": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json -f json",
+    "strict_report": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-0dc838b9-7d21-4193-9381-d6439383152f-reloc-strict.json -f json -c function_reloc_diffs=name_address",
+    "dol_hash": "sha1sum build/GEDE01/main.dol"
+  }
+}

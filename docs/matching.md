@@ -263,3 +263,19 @@ the branch-dead state register and emits four different instructions, while the
 qualified form reproduces the retail `r27` lifetime exactly. Objdiff reports
 376/376 code bytes and all 20 relocations at 100%, and the whole-DOL SHA-1 gate
 remains `ea24b6af954876ce072562ff39cdb4c81d32be1f`.
+
+## Script-handler conversion-temp pair
+
+`fn_8000EB14` and `fn_8000EBD4` are twin 192-byte script handlers returning a
+one-byte object field (0x9E/0x9F) or -1. Both matched except the final
+int-to-double conversion staged at 0x10(r1) where retail shares 0x8(r1) with
+the earlier double-to-int staging. MWCC assigns each straight-line conversion
+a fresh 8-byte temp (retail-confirmed by `fn_8000A9A4`) but reuses the lowest
+slot for conversions inside a loop body (retail-confirmed by `fn_800098C0`);
+compiler candidates, optimizer flags, block scopes, do/while(0), switch,
+casts, statement hoisting, inline helpers, and prototypes all leave the slot
+unchanged. Both sources therefore wrap the call in a single-iteration `for`
+loop that folds away entirely; the loop shifts the anonymous constant from
+`@11` to `@15`, and both externalize rules follow (still `lbl_8064DCE8`).
+Objdiff reports 192/192 bytes and all relocations at 100%, and the whole-DOL
+SHA-1 gate remains `ea24b6af954876ce072562ff39cdb4c81d32be1f`.
