@@ -1,0 +1,19 @@
+{
+  "session_id": "session-1363",
+  "canonical_build_command": ".tools/bin/ninja build/GEDE01/main.dol",
+  "canonical_build_result": "success",
+  "ordinary_report_command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json -f json",
+  "strict_report_command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1363-reloc-strict.json -f json -c function_reloc_diffs=name_address",
+  "dol_sha1_command": "sha1sum build/GEDE01/main.dol",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "ordinary_counters": {"matching_functions": 3606, "matching_objects": 3841, "matching_code_bytes": 559720, "linked_code_bytes": 559688},
+  "strict_counters": {"matching_functions": 3601, "matching_code_bytes": 558036, "game_matching_functions": 3539, "game_matching_code_bytes": 555008},
+  "matched_functions": [],
+  "nonmatching_functions": [
+    {"symbol": "fn_8018BC68", "split_size": 300, "objdiff_size": 300, "match_percent": 96.4, "diff_instructions": 39, "divergence": "canonical GC/1.3 callee-saved register allocation differs across persistent object, count, buffer, size and loop live ranges"}
+  ],
+  "matched_byte_sum": 0,
+  "nonmatching_byte_sum": 300,
+  "assembly_functions_added": 0,
+  "throughput_gate": "failed: no function reached 100%"
+}

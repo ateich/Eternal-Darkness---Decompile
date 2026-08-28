@@ -1,0 +1,56 @@
+{
+  "session_id": "session-1367-remediation-1",
+  "scope": "Review remediation only; no frontier source or split was added and the existing next_target remains unchanged.",
+  "history_subject_audit": {
+    "command": "git log --format='%h %s' -5",
+    "raw_output": "ae1776ec Remediate session 1367 evidence and metadata\n4e3dd37f Record session 1367 frontier evidence\n0db8ba79 Match fn_8018D160\nef5ac17d Match fn_8018D0D0\n84417be5 Reconstruct fn_8018D020 (NonMatching)"
+  },
+  "object_registration_audit": {
+    "command": "rg -n 'Object\\((NonMatching|Matching), \"game/game_fn_8018D(020|0D0|160)\\.c\"\\)' configure.py",
+    "raw_output": "8347:            Object(NonMatching, \"game/game_fn_8018D020.c\"),\n8348:            Object(Matching, \"game/game_fn_8018D0D0.c\"),\n8349:            Object(Matching, \"game/game_fn_8018D160.c\"),"
+  },
+  "canonical_build": {
+    "command": ".tools/bin/ninja build/GEDE01/main.dol >/dev/null 2>&1; printf 'BUILD_EXIT=%s\\n' $?",
+    "raw_output": "BUILD_EXIT=0"
+  },
+  "ordinary_report_generation": {
+    "command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json -f json >/dev/null 2>&1; printf 'ORDINARY_REPORT_EXIT=%s\\n' $?",
+    "raw_output": "ORDINARY_REPORT_EXIT=0"
+  },
+  "ordinary_counters": {
+    "command": "jq -r '\"ordinary total_units=\" + (.measures.total_units|tostring), \"ordinary complete_units=\" + (.measures.complete_units|tostring), \"ordinary total_functions=\" + (.measures.total_functions|tostring), \"ordinary matched_functions=\" + (.measures.matched_functions|tostring), \"ordinary matched_functions_percent=\" + (.measures.matched_functions_percent|tostring), \"ordinary matched_code=\" + .measures.matched_code, \"ordinary total_code=\" + .measures.total_code, \"ordinary matched_code_percent=\" + (.measures.matched_code_percent|tostring), \"ordinary complete_code=\" + .measures.complete_code, \"ordinary matched_data=\" + .measures.matched_data, \"ordinary total_data=\" + .measures.total_data, \"ordinary complete_data=\" + .measures.complete_data, \"game matched_code=\" + (.categories[] | select(.id==\"game\") | .measures.matched_code), \"game total_code=\" + (.categories[] | select(.id==\"game\") | .measures.total_code), \"game complete_code=\" + (.categories[] | select(.id==\"game\") | .measures.complete_code)' build/GEDE01/report.json",
+    "raw_output": "ordinary total_units=5308\nordinary complete_units=3847\nordinary total_functions=8216\nordinary matched_functions=3612\nordinary matched_functions_percent=43.963\nordinary matched_code=560896\nordinary total_code=2300692\nordinary matched_code_percent=24.379448\nordinary complete_code=560864\nordinary matched_data=34606\nordinary total_data=4305646\nordinary complete_data=34738\ngame matched_code=557868\ngame total_code=926064\ngame complete_code=557836"
+  },
+  "strict_report_generation": {
+    "command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1367-remediation-1-reloc-strict.json -f json -c function_reloc_diffs=name_address >/dev/null 2>&1; printf 'STRICT_REPORT_EXIT=%s\\n' $?",
+    "raw_output": "STRICT_REPORT_EXIT=0"
+  },
+  "strict_counters": {
+    "command": "jq -r '\"strict matched_functions=\" + (.measures.matched_functions|tostring), \"strict matched_code=\" + .measures.matched_code, \"strict total_code=\" + .measures.total_code, \"strict game matched_functions=\" + ((.categories[] | select(.id==\"game\") | .measures.matched_functions)|tostring), \"strict game matched_code=\" + (.categories[] | select(.id==\"game\") | .measures.matched_code), \"strict game total_code=\" + (.categories[] | select(.id==\"game\") | .measures.total_code)' reports/GEDE01/session-1367-remediation-1-reloc-strict.json",
+    "raw_output": "strict matched_functions=3607\nstrict matched_code=559212\nstrict total_code=2300692\nstrict game matched_functions=3545\nstrict game matched_code=556184\nstrict game total_code=926064"
+  },
+  "affected_object_objdiff_generation": {
+    "command_template": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_ADDRESS fn_ADDRESS -o reports/GEDE01/objdiff-game_fn_ADDRESS-session-1367-remediation-1.json --format json-pretty -c function_reloc_diffs=name_address >/dev/null 2>&1; printf 'OBJDIFF_ADDRESS_EXIT=%s\\n' $?",
+    "raw_output": "OBJDIFF_8018D020_EXIT=0\nOBJDIFF_8018D0D0_EXIT=0\nOBJDIFF_8018D160_EXIT=0"
+  },
+  "affected_object_measurements": {
+    "command": "for address in 8018D020 8018D0D0 8018D160; do jq -r --arg fn \"fn_$address\" '([.left.sections[] | select(.name == \".text\") | (.size|tonumber)] | add) as $left_size | ([.right.sections[] | select(.name == \".text\") | (.size|tonumber)] | add) as $right_size | ([.left.symbols[] | select(.name == $fn) | .match_percent][0]) as $score | \"\\($fn) left_text_size=\\($left_size) right_text_size=\\($right_size) match_percent=\\($score)\"' \"reports/GEDE01/objdiff-game_fn_${address}-session-1367-remediation-1.json\"; done",
+    "raw_output": "fn_8018D020 left_text_size=176 right_text_size=176 match_percent=99.09091\nfn_8018D0D0 left_text_size=144 right_text_size=144 match_percent=100.0\nfn_8018D160 left_text_size=144 right_text_size=144 match_percent=100.0"
+  },
+  "affected_object_relocations": {
+    "command": "for address in 8018D020 8018D0D0 8018D160; do jq -r --arg fn \"fn_$address\" '([.left.symbols[] | select(.name == $fn) | .instructions[] | select(.instruction.relocation != null)] | length) as $left_relocs | ([.right.symbols[] | select(.name == $fn) | .instructions[] | select(.instruction.relocation != null)] | length) as $right_relocs | ([.left.symbols[] | select(.name == $fn) | .match_percent][0]) as $score | \"\\($fn) left_relocation_instructions=\\($left_relocs) right_relocation_instructions=\\($right_relocs) match_percent=\\($score)\"' \"reports/GEDE01/objdiff-game_fn_${address}-session-1367-remediation-1.json\"; done",
+    "raw_output": "fn_8018D020 left_relocation_instructions=0 right_relocation_instructions=0 match_percent=99.09091\nfn_8018D0D0 left_relocation_instructions=5 right_relocation_instructions=5 match_percent=100.0\nfn_8018D160 left_relocation_instructions=5 right_relocation_instructions=5 match_percent=100.0"
+  },
+  "typedef_audit": {
+    "command": "rg -n '^typedef signed short s16;' src/game/game_fn_8018D020.c src/game/game_fn_8018D0D0.c src/game/game_fn_8018D160.c || true",
+    "raw_output": "src/game/game_fn_8018D020.c:1:typedef signed short s16;"
+  },
+  "frontier_gate": {
+    "command": "jq -r '\"frontier next_target=\" + .next_target' reports/GEDE01/frontier-8018D020-8018D1F0-session-1367.json",
+    "raw_output": "frontier next_target=0x8018D1F0"
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+  }
+}

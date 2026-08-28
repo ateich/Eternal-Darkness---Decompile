@@ -21,7 +21,7 @@ extern void fn_8011F114(void*, void*);
 extern u16 fn_8011F760(void*);
 extern float fn_8011F6F0(void*);
 extern u32 fn_80179064(int, int, s16, s16);
-extern int fn_8020123C(int, int, int, int);
+extern unsigned long long fn_8020123C();
 extern void* fn_801A717C(void);
 extern void fn_80179B08(void*, void*);
 extern void fn_801A74A8(void*, void*);

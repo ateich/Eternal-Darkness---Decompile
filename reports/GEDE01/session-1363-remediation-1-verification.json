@@ -1,0 +1,43 @@
+{
+  "session_id": "session-1363-remediation-1",
+  "scope": "Review remediation only; no fn_8018BD94 source or split was created and next_target remains 0x8018BD94.",
+  "canonical_build": {
+    "command": ".tools/bin/ninja build/GEDE01/main.dol >/dev/null 2>&1; printf 'BUILD_EXIT=%s\\n' $?",
+    "raw_output": "BUILD_EXIT=0"
+  },
+  "ordinary_report_generation": {
+    "command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json -f json >/dev/null 2>&1; printf 'ORDINARY_REPORT_EXIT=%s\\n' $?",
+    "raw_output": "ORDINARY_REPORT_EXIT=0"
+  },
+  "ordinary_counters": {
+    "command": "jq -r '\"ordinary matched_functions=\" + (.measures.matched_functions|tostring), \"ordinary complete_units=\" + (.measures.complete_units|tostring), \"ordinary matched_code=\" + .measures.matched_code, \"ordinary total_code=\" + .measures.total_code, \"ordinary matched_code_percent=\" + (.measures.matched_code_percent|tostring), \"game matched_code=\" + (.categories[] | select(.id==\"game\") | .measures.matched_code), \"game total_code=\" + (.categories[] | select(.id==\"game\") | .measures.total_code), \"game complete_code=\" + (.categories[] | select(.id==\"game\") | .measures.complete_code)' build/GEDE01/report.json",
+    "raw_output": "ordinary matched_functions=3606\nordinary complete_units=3841\nordinary matched_code=559720\nordinary total_code=2300692\nordinary matched_code_percent=24.328333\ngame matched_code=556692\ngame total_code=920852\ngame complete_code=556660"
+  },
+  "game_denominator_cross_check": {
+    "command": "jq -r '\"root total_code=\" + .measures.total_code, \"game category total_code=\" + (.categories[] | select(.id==\"game\") | .measures.total_code), \"game unit-sum total_code=\" + ([.units[] | select((.metadata.progress_categories // []) | index(\"game\")) | (.measures.total_code // \"0\" | tonumber)] | add | tostring)' build/GEDE01/report.json",
+    "raw_output": "root total_code=2300692\ngame category total_code=920852\ngame unit-sum total_code=920852"
+  },
+  "affected_object_objdiff": {
+    "generation_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8018BC68 fn_8018BC68 -o reports/GEDE01/objdiff-game_fn_8018BC68-session-1363-remediation-1.json --format json-pretty -c function_reloc_diffs=name_address >/dev/null 2>&1; printf 'OBJDIFF_EXIT=%s\\n' $?",
+    "generation_raw_output": "OBJDIFF_EXIT=0",
+    "measurement_command": "jq '{left_text_size: ([.left.sections[] | select(.name == \".text\") | (.size|tonumber)] | add), right_text_size: ([.right.sections[] | select(.name == \".text\") | (.size|tonumber)] | add), left_function: ([.left.symbols[] | select(.name == \"fn_8018BC68\") | {name,size,match_percent}][0]), right_function: ([.right.symbols[] | select(.name == \"fn_8018BC68\") | {name,size,match_percent}][0])}' reports/GEDE01/objdiff-game_fn_8018BC68-session-1363-remediation-1.json",
+    "measurement_raw_output": "{\n  \"left_text_size\": 300,\n  \"right_text_size\": 300,\n  \"left_function\": {\n    \"name\": \"fn_8018BC68\",\n    \"size\": \"300\",\n    \"match_percent\": 96.4\n  },\n  \"right_function\": {\n    \"name\": \"fn_8018BC68\",\n    \"size\": \"300\",\n    \"match_percent\": 96.4\n  }\n}"
+  },
+  "strict_report_generation": {
+    "command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1363-remediation-1-reloc-strict.json -f json -c function_reloc_diffs=name_address >/dev/null 2>&1; printf 'STRICT_REPORT_EXIT=%s\\n' $?",
+    "raw_output": "STRICT_REPORT_EXIT=0"
+  },
+  "strict_counters": {
+    "command": "jq -r '\"strict matched_functions=\" + (.measures.matched_functions|tostring), \"strict matched_code=\" + .measures.matched_code, \"strict total_code=\" + .measures.total_code, \"strict game matched_functions=\" + ((.categories[] | select(.id==\"game\") | .measures.matched_functions)|tostring), \"strict game matched_code=\" + (.categories[] | select(.id==\"game\") | .measures.matched_code), \"strict game total_code=\" + (.categories[] | select(.id==\"game\") | .measures.total_code)' reports/GEDE01/session-1363-remediation-1-reloc-strict.json",
+    "raw_output": "strict matched_functions=3601\nstrict matched_code=558036\nstrict total_code=2300692\nstrict game matched_functions=3539\nstrict game matched_code=555008\nstrict game total_code=920852"
+  },
+  "fn_8018BD94_attempt_audit": {
+    "command": "rg -n 'fn_8018BD94|8018BD94' src/game config/GEDE01/splits.txt | head -20",
+    "raw_output": "config/GEDE01/splits.txt:13874:\t.text       start:0x8018BC68 end:0x8018BD94\nsrc/game/game_fn_801833B8.c:10:extern void fn_8018BD94(void);\nsrc/game/game_fn_801833B8.c:21:        *(void (**)(void))(result + 0x148) = fn_8018BD94;",
+    "conclusion": "No implementation, dedicated split, or attempt artifact exists for fn_8018BD94; the references are the preceding split boundary and a pre-existing extern/callback use. The prior session recorded no evidence-backed reason for stopping before this target."
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+  }
+}

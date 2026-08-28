@@ -1,0 +1,57 @@
+{
+  "session_id": "session-1366",
+  "range_start": "0x8018CB70",
+  "range_end": "0x8018D020",
+  "next_target": "0x8018D020",
+  "range_bytes": 1200,
+  "matched_bytes": 108,
+  "nonmatching_bytes": 1092,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "name": "fn_8018CB70",
+      "start": "0x8018CB70",
+      "end": "0x8018CD18",
+      "bytes": 424,
+      "generated_bytes": 424,
+      "status": "NonMatching",
+      "score": 95.80189,
+      "blocking_divergence": "Canonical GC/1.3 schedules the offset-derived second-buffer pointer before the unrolled-loop bound and colors the persistent count, pointer, group and bound across r6-r9 differently from retail."
+    },
+    {
+      "name": "fn_8018CD18",
+      "start": "0x8018CD18",
+      "end": "0x8018CEC0",
+      "bytes": 424,
+      "generated_bytes": 424,
+      "status": "NonMatching",
+      "score": 95.896225,
+      "blocking_divergence": "Canonical GC/1.3 reproduces the unrolled stores and control flow but colors the persistent count, second-buffer pointer, group and bound differently from retail."
+    },
+    {
+      "name": "fn_8018CEC0",
+      "start": "0x8018CEC0",
+      "end": "0x8018CFB4",
+      "bytes": 244,
+      "generated_bytes": 232,
+      "status": "NonMatching",
+      "score": 71.36066,
+      "blocking_divergence": "Canonical GC/1.3 folds the four-word destination-to-mirror copies and schedules the random-index arithmetic differently, producing 232 bytes versus retail's 244 bytes."
+    },
+    {
+      "name": "fn_8018CFB4",
+      "start": "0x8018CFB4",
+      "end": "0x8018D020",
+      "bytes": 108,
+      "status": "Matching",
+      "score": 100.0,
+      "relocations_equal": true,
+      "relocation_records": 6
+    }
+  ],
+  "next_gate": "Attempt fn_8018D020 at 0x8018D020 and continue consecutively toward the jumptable_8023BF28 data-ownership boundary; 0x8018CB70-0x8018CFB4 remains explicit NonMatching codegen debt and no byte in this report range is unaccounted.",
+  "build_report": "build/GEDE01/report.json",
+  "strict_report": "reports/GEDE01/session-1366-reloc-strict.json",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "clean_worktree_required_after_commit": true
+}
