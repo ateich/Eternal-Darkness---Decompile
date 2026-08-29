@@ -1,0 +1,112 @@
+{
+  "session_id": "session-1450",
+  "assignment": "reclaim objdiff-100 units still registered NonMatching; match no new functions",
+  "starting_target": "0x8019BBF0",
+  "ending_next_target": "0x8019BBF0",
+  "frontier_changed": false,
+  "authoritative_chain_merged_commit": "1c81e9c4abaa6e48303eb1947b7c52f124e97f0e",
+  "baseline_agent_commit": "0e55599b006c55a7eca85f5b512c8f4da967f888",
+  "inventory": {
+    "parse_scope": "every literal Object(NonMatching, registration in configure.py",
+    "nonmatching_registrations_before": 778,
+    "unique_nonmatching_objects_before": 778,
+    "nonmatching_registrations_after": 778,
+    "unique_nonmatching_objects_after": 778,
+    "units_found_in_objdiff_report": 778,
+    "units_missing_from_objdiff_report": 0,
+    "unit_fuzzy_100_candidates": 0,
+    "reclaimed_objects": 0,
+    "retained_nonmatching_candidates": 0,
+    "candidate_objects": []
+  },
+  "nonmatching_accounting": {
+    "before": {
+      "objects": 778,
+      "retail_code_bytes": 363588,
+      "retail_data_bytes": 976,
+      "retail_functions": 779
+    },
+    "after": {
+      "objects": 778,
+      "retail_code_bytes": 363588,
+      "retail_data_bytes": 976,
+      "retail_functions": 779
+    },
+    "delta": {
+      "objects": 0,
+      "retail_code_bytes": 0,
+      "retail_data_bytes": 0,
+      "retail_functions": 0
+    }
+  },
+  "matched_accounting": {
+    "standard_before": {
+      "matching_objects": 4032,
+      "matching_functions": 3797,
+      "matching_code_bytes": 596396,
+      "matching_data_bytes": 34626,
+      "linked_code_bytes": 596364,
+      "linked_data_bytes": 34750
+    },
+    "standard_after": {
+      "matching_objects": 4032,
+      "matching_functions": 3797,
+      "matching_code_bytes": 596396,
+      "matching_data_bytes": 34626,
+      "linked_code_bytes": 596364,
+      "linked_data_bytes": 34750
+    },
+    "standard_delta": {
+      "matching_objects": 0,
+      "matching_functions": 0,
+      "matching_code_bytes": 0,
+      "matching_data_bytes": 0,
+      "linked_code_bytes": 0,
+      "linked_data_bytes": 0
+    },
+    "relocation_strict_after": {
+      "matching_functions": 3792,
+      "matching_code_bytes": 594712,
+      "game_matching_functions": 3730,
+      "game_matching_code_bytes": 591684
+    },
+    "session_credit": {
+      "matched_code_bytes": 0,
+      "nonmatching_code_bytes_added": 0,
+      "functions_matched": 0,
+      "functions_reconstructed_nonmatching": 0
+    }
+  },
+  "closest_nonmatching_units": [
+    {
+      "object": "game/game_fn_80192318.c",
+      "fuzzy_match_percent": 99.93407,
+      "retail_code_bytes": 728
+    },
+    {
+      "object": "game/game_fn_8015CFFC.c",
+      "fuzzy_match_percent": 99.91304,
+      "retail_code_bytes": 460
+    },
+    {
+      "object": "game/game_fn_800C7C0C.c",
+      "fuzzy_match_percent": 99.91071,
+      "retail_code_bytes": 448
+    }
+  ],
+  "conclusion": "A fresh complete build and both standard and relocation-strict aggregate reports contain no current NonMatching unit at fuzzy_match_percent 100.0. No registration is safe to promote in this bounded consolidation session.",
+  "evidence": {
+    "configure_command": "python3 configure.py",
+    "build_command": ".tools/bin/ninja",
+    "build_result": "success: 533 of 533 steps",
+    "standard_report": "build/GEDE01/report.json",
+    "standard_report_freshly_generated": true,
+    "strict_report_command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1450-reloc-strict.json -f json-pretty -c function_reloc_diffs=name_address",
+    "strict_report": "reports/GEDE01/session-1450-reloc-strict.json",
+    "objdiff_version": "3.6.1",
+    "dol_sha1_command": "sha1sum build/GEDE01/main.dol",
+    "dol_sha1_expected": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "dol_sha1_actual": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "dol_sha1_unchanged": true
+  }
+}
