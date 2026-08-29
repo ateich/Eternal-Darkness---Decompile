@@ -1,0 +1,64 @@
+{
+  "session_id": "session-1481",
+  "remediation": "review-remediation-1",
+  "range_start": "0x801A0450",
+  "range_end_examined": "0x801A1A4C",
+  "next_target": "0x801A0450",
+  "frontier_advanced": false,
+  "accounting": [
+    {
+      "symbol": "fn_801A0450",
+      "start": "0x801A0450",
+      "end": "0x801A19BC",
+      "retail_bytes": 5484,
+      "generated_bytes_of_discarded_candidate": 280,
+      "discarded_candidate_match_percent": 4.1692195,
+      "matched_bytes_credited": 0,
+      "status": "Unreconstructed",
+      "divergence": "No viable reconstruction was recovered. The removed candidate was shape-only: it omitted retail's repeated floating-point conversion arithmetic and asserted an output layout contradicted by the symbol map. Its objdiff is retained only as invalidation evidence and must not be used as recovered semantics.",
+      "measurement_command": "jq -c '{retail_bytes:(.left.symbols[]|select(.name==\"fn_801A0450\")|.size|tonumber),generated_bytes:(.right.symbols[]|select(.name==\"fn_801A0450\")|.size|tonumber),match_percent:(.left.symbols[]|select(.name==\"fn_801A0450\")|.match_percent),retail_instructions:([.left.symbols[]|select(.name==\"fn_801A0450\")|.instructions[]|select(.instruction)]|length),generated_instructions:([.right.symbols[]|select(.name==\"fn_801A0450\")|.instructions[]|select(.instruction)]|length),equal_rows:([.left.symbols[]|select(.name==\"fn_801A0450\")|.instructions[]|select(.diff_kind==null and .instruction)]|length),delete_rows:([.left.symbols[]|select(.name==\"fn_801A0450\")|.instructions[]|select(.diff_kind==\"DIFF_DELETE\")]|length)}' reports/GEDE01/objdiff-game_fn_801A0450-session-1481-remediation-1-invalidated.json",
+      "measurement_raw_output": "{\"retail_bytes\":5484,\"generated_bytes\":280,\"match_percent\":4.1692195,\"retail_instructions\":1371,\"generated_instructions\":70,\"equal_rows\":3,\"delete_rows\":1301}"
+    },
+    {
+      "symbol": "fn_801A19BC",
+      "start": "0x801A19BC",
+      "end": "0x801A1A04",
+      "retail_bytes": 72,
+      "generated_bytes": 72,
+      "match_percent": 100.0,
+      "matched_bytes_credited": 72,
+      "relocations": "1/1 equal",
+      "status": "MatchingOutsideFrontier",
+      "measurement_command": "jq -c --arg s fn_801A19BC '{symbol:$s,retail_bytes:(.left.symbols[]|select(.name==$s)|.size|tonumber),generated_bytes:(.right.symbols[]|select(.name==$s)|.size|tonumber),match_percent:(.left.symbols[]|select(.name==$s)|.match_percent),retail_instructions:([.left.symbols[]|select(.name==$s)|.instructions[]|select(.instruction)]|length),generated_instructions:([.right.symbols[]|select(.name==$s)|.instructions[]|select(.instruction)]|length),difference_rows:([.left.symbols[]|select(.name==$s)|.instructions[]|select(.diff_kind!=null)]|length),retail_relocations:([.left.symbols[]|select(.name==$s)|.instructions[]|select(.instruction.relocation!=null)]|length),generated_relocations:([.right.symbols[]|select(.name==$s)|.instructions[]|select(.instruction.relocation!=null)]|length),relocations_equal:([.left.symbols[]|select(.name==$s)|.instructions[]|select(.instruction.relocation!=null)|.instruction.relocation]==[.right.symbols[]|select(.name==$s)|.instructions[]|select(.instruction.relocation!=null)|.instruction.relocation])}' reports/GEDE01/objdiff-game_fn_801A19BC-session-1481-remediation-1.json",
+      "measurement_raw_output": "{\"symbol\":\"fn_801A19BC\",\"retail_bytes\":72,\"generated_bytes\":72,\"match_percent\":100.0,\"retail_instructions\":18,\"generated_instructions\":18,\"difference_rows\":0,\"retail_relocations\":1,\"generated_relocations\":1,\"relocations_equal\":true}"
+    },
+    {
+      "symbol": "fn_801A1A04",
+      "start": "0x801A1A04",
+      "end": "0x801A1A4C",
+      "retail_bytes": 72,
+      "generated_bytes": 72,
+      "match_percent": 100.0,
+      "matched_bytes_credited": 72,
+      "relocations": "1/1 equal",
+      "status": "MatchingOutsideFrontier",
+      "measurement_command": "jq -c --arg s fn_801A1A04 '{symbol:$s,retail_bytes:(.left.symbols[]|select(.name==$s)|.size|tonumber),generated_bytes:(.right.symbols[]|select(.name==$s)|.size|tonumber),match_percent:(.left.symbols[]|select(.name==$s)|.match_percent),retail_instructions:([.left.symbols[]|select(.name==$s)|.instructions[]|select(.instruction)]|length),generated_instructions:([.right.symbols[]|select(.name==$s)|.instructions[]|select(.instruction)]|length),difference_rows:([.left.symbols[]|select(.name==$s)|.instructions[]|select(.diff_kind!=null)]|length),retail_relocations:([.left.symbols[]|select(.name==$s)|.instructions[]|select(.instruction.relocation!=null)]|length),generated_relocations:([.right.symbols[]|select(.name==$s)|.instructions[]|select(.instruction.relocation!=null)]|length),relocations_equal:([.left.symbols[]|select(.name==$s)|.instructions[]|select(.instruction.relocation!=null)|.instruction.relocation]==[.right.symbols[]|select(.name==$s)|.instructions[]|select(.instruction.relocation!=null)|.instruction.relocation])}' reports/GEDE01/objdiff-game_fn_801A1A04-session-1481-remediation-1.json",
+      "measurement_raw_output": "{\"symbol\":\"fn_801A1A04\",\"retail_bytes\":72,\"generated_bytes\":72,\"match_percent\":100.0,\"retail_instructions\":18,\"generated_instructions\":18,\"difference_rows\":0,\"retail_relocations\":1,\"generated_relocations\":1,\"relocations_equal\":true}"
+    }
+  ],
+  "contiguous_matched_bytes_from_frontier": 0,
+  "matched_bytes_outside_frontier": 144,
+  "owned_nonmatching_bytes": 0,
+  "unaccounted_spans": [
+    {
+      "start": "0x801A0450",
+      "end": "0x801A19BC",
+      "retail_bytes": 5484,
+      "reason": "No viable reconstruction recovered; source and build ownership removed."
+    }
+  ],
+  "summary_measurement_command": "jq -s -c '{retained_objects:length,retained_matched_bytes:(map(.left.symbols[0].size|tonumber)|add),retained_difference_rows:(map([.left.symbols[0].instructions[]|select(.diff_kind!=null)]|length)|add),retained_relocations:(map([.left.symbols[0].instructions[]|select(.instruction.relocation!=null)]|length)|add)}' reports/GEDE01/objdiff-game_fn_801A19BC-session-1481-remediation-1.json reports/GEDE01/objdiff-game_fn_801A1A04-session-1481-remediation-1.json",
+  "summary_measurement_raw_output": "{\"retained_objects\":2,\"retained_matched_bytes\":144,\"retained_difference_rows\":0,\"retained_relocations\":2}",
+  "assembly_added": false,
+  "verification": "reports/GEDE01/session-1481-remediation-1-verification.json"
+}

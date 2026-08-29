@@ -54,9 +54,9 @@ Generated from `objdiff` build evidence (`reports/GEDE01/progress.json`), verifi
 
 | Metric | Matched | Total | Percent |
 | --- | ---: | ---: | ---: |
-| Code bytes | 605,336 | 2,300,692 | **26.31%** |
-| Functions | 3,853 | 8,216 | 46.90% |
-| Objects (TUs) | 4,088 | 5,617 | 72.78% |
+| Code bytes | 606,884 | 2,300,692 | **26.38%** |
+| Functions | 3,864 | 8,216 | 47.03% |
+| Objects (TUs) | 4,099 | 5,633 | 72.77% |
 
 Denominators are the whole retail `main.dol`. Percentages count only functions that `objdiff` reports at 100%, relocations included; reconstructions registered as documented `NonMatching` are not counted. Most matched objects are small, so the object percentage runs far ahead of the code percentage — **code bytes is the honest measure of how far along this is.**
 <!-- progress:end -->

@@ -202,6 +202,9 @@ def main() -> int:
     parser.add_argument("--facts-log", type=Path)
     parser.add_argument("--verification-log", type=Path)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--session-id")
+    parser.add_argument("--starting-target")
+    parser.add_argument("--ending-next-target")
     parser.add_argument("--applied-symbol", action="append", default=[])
     parser.add_argument("--tested-reverted-symbol", action="append", default=[])
     args = parser.parse_args()
@@ -216,6 +219,10 @@ def main() -> int:
         return 0
     if args.output is None or args.facts_log is None or args.verification_log is None:
         parser.error("generation requires --output, --facts-log, and --verification-log")
+    if args.session_id is None or args.starting_target is None or args.ending_next_target is None:
+        parser.error(
+            "generation requires --session-id, --starting-target, and --ending-next-target"
+        )
     recorded_facts = args.facts_log.read_text(encoding="utf-8")
     if recorded_facts != raw_facts:
         raise ValueError("facts log does not match a fresh measurement")
@@ -238,26 +245,42 @@ def main() -> int:
             item["disposition_reason"] = (
                 "Low confidence: declarations and their call sites do not establish the callee signature."
             )
+        elif int(item["estimated_blast_radius_tus"]) > 12:
+            item["disposition"] = "proposal-only"
+            item["disposition_reason"] = (
+                "Proposal only: the high-confidence candidate has a measured blast radius of "
+                f"{item['estimated_blast_radius_tus']} TUs, exceeding the 12-TU rewrite ceiling."
+            )
         else:
             item["disposition"] = "proposal-only"
             item["disposition_reason"] = "High-confidence candidate was not applied."
         item["measurement_evidence_ref"] = "measurement_evidence"
 
+    disposition_args = " ".join(
+        [f"--applied-symbol {symbol}" for symbol in args.applied_symbol]
+        + [f"--tested-reverted-symbol {symbol}" for symbol in args.tested_reverted_symbol]
+    )
+    if disposition_args:
+        disposition_args += " "
     report = {
         "schema_version": 2,
         "report_kind": "declaration-drift-reduction-proposal",
         "generated_by": "tools/declaration_drift_proposal.py",
         "generation_command": (
             f"python3 tools/declaration_drift_proposal.py --baseline-ref {args.baseline_ref} "
-            "--facts-log reports/GEDE01/declaration-drift-proposal-session-1440-facts.txt "
-            "--verification-log reports/GEDE01/declaration-drift-proposal-session-1440-verification.txt "
-            "--tested-reverted-symbol fn_8020123C --output reports/GEDE01/declaration-drift-proposal-session-1440.json"
+            f"--facts-log {args.facts_log} --verification-log {args.verification_log} "
+            f"--session-id {args.session_id} --starting-target {args.starting_target} "
+            f"--ending-next-target {args.ending_next_target} {disposition_args}"
+            f"--output {args.output}"
         ),
         "session": {
-            "session_id": "session-1440-remediation-1",
-            "starting_target": "0x8019A150",
-            "ending_next_target": "0x8019A150",
+            "session_id": args.session_id,
+            "starting_target": args.starting_target,
+            "ending_next_target": args.ending_next_target,
             "frontier_changed": False,
+            "matched_bytes_added": 0,
+            "nonmatching_bytes_added": 0,
+            "match_counts_revised": False,
         },
         "selection_rule": (
             "Rank signature-disagreeing symbols by total declaration count descending, then symbol ascending. "
@@ -269,7 +292,7 @@ def main() -> int:
             "raw_output": recorded_facts,
         },
         "verification_evidence": {
-            "command": "cat reports/GEDE01/declaration-drift-proposal-session-1440-verification.txt",
+            "command": f"cat {args.verification_log}",
             "raw_output": args.verification_log.read_text(encoding="utf-8"),
         },
         "symbols": measurement["selected_symbols"],

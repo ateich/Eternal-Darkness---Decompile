@@ -1,0 +1,32 @@
+{
+  "session_id": "session-1485-remediation-1",
+  "range_start": "0x801A1C78",
+  "range_end": "0x801A1E14",
+  "next_target": "0x801A1E14",
+  "matched_bytes": 412,
+  "nonmatching_bytes": 0,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "symbol": "fn_801A1C78",
+      "start": "0x801A1C78",
+      "end": "0x801A1E14",
+      "size": 412,
+      "match_percent": 100.0,
+      "relocations_equal": true,
+      "status": "Matching"
+    }
+  ],
+  "function_measurement": {
+    "command": "jq -r '[.left.symbols[]|select(.name==\"fn_801A1C78\")|.size,.match_percent] as $l | [.right.symbols[]|select(.name==\"fn_801A1C78\")|.size,.match_percent] as $r | ([.left.symbols[]|select(.name==\"fn_801A1C78\")|.instructions[]|select(.instruction != null)]|length) as $li | ([.right.symbols[]|select(.name==\"fn_801A1C78\")|.instructions[]|select(.instruction != null)]|length) as $ri | ([.left.symbols[]|select(.name==\"fn_801A1C78\")|.instructions[]|select(.diff_kind != null)]|length) as $d | \"left_size=\\($l[0]) right_size=\\($r[0]) left_match_percent=\\($l[1]) right_match_percent=\\($r[1]) left_instructions=\\($li) right_instructions=\\($ri) difference_rows=\\($d)\"' reports/GEDE01/objdiff-game_fn_801A1C78-session-1485-remediation-1.json",
+    "raw_output": "left_size=412 right_size=412 left_match_percent=100.0 right_match_percent=100.0 left_instructions=103 right_instructions=103 difference_rows=0"
+  },
+  "relocation_measurement": {
+    "command": "jq -r 'def relocs: [.symbols[] | select(.name==\"fn_801A1C78\") | .instructions[] | select(.instruction.relocation != null) | {address:.instruction.address,type:.instruction.relocation.type_name,formatted:.instruction.formatted,addend:(.instruction.relocation.addend // null)}]; (.left|relocs) as $l | (.right|relocs) as $r | \"relocation_identity_equal=\\($l==$r) relocation_entries=\\($l|length)\"' reports/GEDE01/objdiff-game_fn_801A1C78-session-1485-remediation-1.json",
+    "raw_output": "relocation_identity_equal=true relocation_entries=23"
+  },
+  "next_target_measurement": {
+    "command": "rg -n '^fn_801A1C78 =|^fn_801A1E14 =' config/GEDE01/symbols.txt",
+    "raw_output": "6142:fn_801A1C78 = .text:0x801A1C78; // type:function size:0x19C\n6143:fn_801A1E14 = .text:0x801A1E14; // type:function size:0x104"
+  }
+}

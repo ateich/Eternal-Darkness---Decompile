@@ -1,0 +1,42 @@
+{
+  "session_id": "session-1489",
+  "remediation": "review-remediation-2",
+  "range_start": "0x801A2A54",
+  "range_end": "0x801A2AB4",
+  "range_end_examined": "0x801A2AB4",
+  "next_target": "0x801A2AB4",
+  "matched_bytes": 0,
+  "nonmatching_bytes": 96,
+  "functions": [
+    {
+      "symbol": "fn_801A2A54",
+      "start": "0x801A2A54",
+      "end": "0x801A2AB4",
+      "status": "NonMatching",
+      "retail_bytes": 96,
+      "generated_bytes": 96,
+      "match_percent": 74.375,
+      "matched_bytes_credited": 0,
+      "retail_instructions": 24,
+      "generated_instructions": 24,
+      "difference_rows": 9,
+      "retail_relocations": 2,
+      "generated_relocations": 2,
+      "relocations_equal": false,
+      "blocker": "The generated object materializes the unsigned-conversion double as private constant @8 rather than retail's external lbl_80650D20, while only lbl_80650D1C remains externally referenced by both objects; instruction scheduling and relocation targets therefore differ. It is not a byte match and receives no matched-byte credit.",
+      "evidence": "reports/GEDE01/objdiff-game_fn_801A2A54-session-1489-remediation-2.json",
+      "measurement_command": "jq -c --arg s fn_801A2A54 '{symbol:$s,retail_bytes:(.left.symbols[]|select(.name==$s)|.size|tonumber),generated_bytes:(.right.symbols[]|select(.name==$s)|.size|tonumber),match_percent:(.left.symbols[]|select(.name==$s)|.match_percent),retail_instructions:([.left.symbols[]|select(.name==$s)|.instructions[]|select(.instruction)]|length),generated_instructions:([.right.symbols[]|select(.name==$s)|.instructions[]|select(.instruction)]|length),difference_rows:([.left.symbols[]|select(.name==$s)|.instructions[]|select(.diff_kind!=null)]|length),retail_relocations:([.left.symbols[]|select(.name==$s)|.instructions[]|select(.instruction.relocation!=null)]|length),generated_relocations:([.right.symbols[]|select(.name==$s)|.instructions[]|select(.instruction.relocation!=null)]|length),relocations_equal:([.left.symbols[]|select(.name==$s)|.instructions[]|select(.instruction.relocation!=null)|.instruction.relocation]==[.right.symbols[]|select(.name==$s)|.instructions[]|select(.instruction.relocation!=null)|.instruction.relocation])}' reports/GEDE01/objdiff-game_fn_801A2A54-session-1489-remediation-2.json",
+      "measurement_raw_output": "{\"symbol\":\"fn_801A2A54\",\"retail_bytes\":96,\"generated_bytes\":96,\"match_percent\":74.375,\"retail_instructions\":24,\"generated_instructions\":24,\"difference_rows\":9,\"retail_relocations\":2,\"generated_relocations\":2,\"relocations_equal\":false}"
+    }
+  ],
+  "accounting_measurement_command": "jq -c --arg s fn_801A2A54 '(.left.symbols[]|select(.name==$s)) as $l | (.right.symbols[]|select(.name==$s)) as $r | {retail_bytes:($l.size|tonumber),generated_bytes:($r.size|tonumber),match_percent:$l.match_percent,matched_bytes_credited:(if $l.match_percent==100 and $r.match_percent==100 then ($l.size|tonumber) else 0 end),nonmatching_bytes:(if $l.match_percent==100 and $r.match_percent==100 then 0 else ($l.size|tonumber) end)}' reports/GEDE01/objdiff-game_fn_801A2A54-session-1489-remediation-2.json",
+  "accounting_measurement_raw_output": "{\"retail_bytes\":96,\"generated_bytes\":96,\"match_percent\":74.375,\"matched_bytes_credited\":0,\"nonmatching_bytes\":96}",
+  "split_ownership_command": "sed -n '14897,14900p' config/GEDE01/splits.txt",
+  "split_ownership_raw_output": "game/game_fn_801A2A54.c:\n\t.text       start:0x801A2A54 end:0x801A2AB4\n\ndolphin/exi/EXIUart.c:",
+  "constant_pool_ownership": "No constant-data range is assigned to this translation unit; no constant-pool ownership is claimed.",
+  "constant_divergence_command": "jq -r --arg s fn_801A2A54 '\"retail\", (.left.symbols[]|select(.name==$s)|.instructions[]|select(.instruction.relocation!=null)|\"offset=\\(.instruction.address) instruction=\\(.instruction.formatted)\"), \"generated\", (.right.symbols[]|select(.name==$s)|.instructions[]|select(.instruction.relocation!=null)|\"offset=\\(.instruction.address) instruction=\\(.instruction.formatted)\")' reports/GEDE01/objdiff-game_fn_801A2A54-session-1489-remediation-2.json",
+  "constant_divergence_raw_output": "retail\noffset=24 instruction=lfs f0, lbl_80650D1C@sda21\noffset=32 instruction=lfd f1, lbl_80650D20@sda21\ngenerated\noffset=24 instruction=lfd f1, @8@sda21\noffset=36 instruction=lfs f0, lbl_80650D1C@sda21",
+  "fallback": "No fallback function was attempted in the original session. This remediation does not substitute new matching work for that missed gate and does not advance the frontier.",
+  "next_gate": "Continue forward from immediate consecutive fn_801A2AB4; account for its full function before advancing, without retrying fn_801A2A54 in that session.",
+  "verification": "reports/GEDE01/session-1489-remediation-2-verification.json"
+}
