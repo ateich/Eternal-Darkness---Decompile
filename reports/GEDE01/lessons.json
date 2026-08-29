@@ -2,10 +2,10 @@
   "schema_version": 2,
   "scope": "Distinct MWCC code-generation behaviors documented in reports/GEDE01/progress.json open_items and docs/matching.md",
   "source_snapshot": {
-    "repository_revision": "fa292634c3a3e67917155f3a5f77785bb51db916",
-    "next_target": "0x801989CC",
+    "repository_revision": "ba2b75aa1de39ffa1b2e9ef59ee8e4cad9d97b04",
+    "next_target": "0x8019F228",
     "reports/GEDE01/progress.json": {
-      "sha256": "954419303dff6c07f0eabeb51029e8222005e538ae05d0eac87e91c084bd58fd",
+      "sha256": "12a1f41caea77950ee1aba897a56fb23e1bc30fa905efd51ccd0a313dd3392c0",
       "scope": "whole_file"
     },
     "docs/matching.md": {
@@ -14,12 +14,15 @@
   },
   "consolidation_audit": {
     "original_consolidation_commit": "86d029104eb5ed6ad01b6af03963ea2cf924d2a4",
-    "comparison_base": "81fed47412dc8e85da418605e915bf78cd1ad5b5",
-    "latest_consolidation_session": "session-1430",
-    "scope": "Refreshed the catalog through session-1429 without changing generated progress accounting. Preserved behaviors outside the mandated MWCC taxonomy in out_of_taxonomy rather than deleting or force-fitting them.",
-    "total_lessons": 433,
+    "comparison_base": "b6f963fbb8643a04ab4358a988239961639dd07e",
+    "latest_consolidation_session": "session-1470",
+    "scope": "Refreshed the catalog through session-1469 without changing generated progress accounting. The preceding remediation removed broad register-allocation and instruction-scheduling umbrellas; this review remediation discloses that deletion and replaces the lost coverage with one record per evidenced behavior. Retained the preexisting out_of_taxonomy records and added the evidenced instruction-selection-lowering and relocation-equality records rather than deleting or force-fitting them.",
+    "total_lessons": 459,
     "measurement_command": "jq -r '\"lessons=\" + ((.lessons|length)|tostring) + \" out_of_taxonomy=\" + ((.out_of_taxonomy|length)|tostring) + \" total_catalog_records=\" + (((.lessons|length)+(.out_of_taxonomy|length))|tostring)' reports/GEDE01/lessons.json",
-    "measurement_raw_output": "lessons=433 out_of_taxonomy=2 total_catalog_records=435"
+    "measurement_raw_output": "lessons=459 out_of_taxonomy=5 total_catalog_records=464",
+    "delta_measurement_command": "jq -s -r '.[0] as $base | .[1] as $current | \"new_lessons=\\(($current.lessons|length)-($base.lessons|length)) new_out_of_taxonomy=\\(($current.out_of_taxonomy|length)-($base.out_of_taxonomy|length)) total_new_records=\\((($current.lessons|length)+($current.out_of_taxonomy|length))-(($base.lessons|length)+($base.out_of_taxonomy|length)))\"' <(git show b6f963fbb:eternal-darkness-decomp/reports/GEDE01/lessons.json) reports/GEDE01/lessons.json",
+    "delta_measurement_raw_output": "new_lessons=26 new_out_of_taxonomy=3 total_new_records=29",
+    "added_out_of_taxonomy_categories": ["instruction-selection-lowering", "relocation-bearing-instruction-operands", "relocation-target-identity"]
   },
   "lessons": [
     {
@@ -3055,6 +3058,188 @@
       "precise_divergence": "In an otherwise size-exact unrolled coordinate-delta loop, canonical GC/1.3 assigns the entry and vertex induction pointers to r5/r6 instead of retail r7/r5.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1428"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80199868"],
+      "precise_divergence": "Canonical GC/1.3 colors the long-lived object, group base, entry pointer, and induction variables across r25-r30 differently from retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1437"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80199F10"],
+      "precise_divergence": "Canonical GC/1.3 assigns the long-lived object, configuration, record, index, packet, and constant locals to a different preserved-register set than retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1439"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8019BDE8"],
+      "precise_divergence": "Canonical GC/1.3 maps the long-lived count, entry, configuration, first, object, and second values to r28, r27, r31, r30, r29, and r26 instead of retail r31, r30, r29, r28, r27, and r26.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1452"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8019C06C"],
+      "precise_divergence": "Canonical GC/1.3 assigns the long-lived cursor, frame, and count values to r29, r31, and r30 instead of retail r31, r30, and r29.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1453"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8019C3B8"],
+      "precise_divergence": "Canonical GC/1.3 rotates the persistent object, buffer, callback, and vertex-offset live ranges relative to retail; the fresh relocation-bearing instruction comparison specifically shows the fn_8018D020 address temporary in r30 instead of retail r26.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/frontier-8019C3B8-8019C7A8-session-1454.json: review_remediation_1.relocated_instruction_comparison"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8019C4E4"],
+      "precise_divergence": "Canonical GC/1.3 rotates the long-lived count, entry, configuration, first, and object registers relative to retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1454"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8019CE08"],
+      "precise_divergence": "Canonical GC/1.3 and retail choose opposite source registers for the commutative and instruction.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1456"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8019CE34"],
+      "precise_divergence": "Canonical GC/1.3 assigns the masked index and entry base to r5 and r4 opposite retail r4 and r5.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1456"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8019D560"],
+      "precise_divergence": "Canonical GC/1.3 keeps the initializer constants live in r5-r12 instead of retail r3-r10 and rotates those values throughout the store sequence.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1459"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8019DA3C"],
+      "precise_divergence": "Canonical GC/1.3 assigns the long-lived effect-entry loop values to different registers from retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1463"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8019DEFC"],
+      "precise_divergence": "Canonical GC/1.3 assigns state, signed delta, timer pointer, and loop index to r7-r10 differently from retail r8, r10, r6, and r9.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1464"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8019E0B0"],
+      "precise_divergence": "Canonical GC/1.3 uses a different saved-register allocation across the recovered calls and loops than retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1466"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8019ECA0"],
+      "precise_divergence": "Canonical GC/1.3 assigns the long-lived matrix-processing values across r21-r31 differently from retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1468"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8019F00C"],
+      "precise_divergence": "Canonical GC/1.3 assigns the parameters and outer-loop state to different saved registers from retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1469"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8019B4D4"],
+      "precise_divergence": "Canonical GC/1.3 folds the conditional texture temporary instead of preserving retail's distinct value lifetime, contributing to the different setup of two fn_801805E0 arguments.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1447"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8019A5DC", "fn_8019B4D4", "fn_8019D030"],
+      "precise_divergence": "Canonical GC/1.3 schedules call argument setup differently from retail around RNG-derived state, fn_8018E230, and fn_801805E0; fn_8019D030 also orders three bit-mask extractions differently.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1442, 1443, 1447, and 1458"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8019A8C4"],
+      "precise_divergence": "Canonical GC/1.3 schedules the saved-register prologue, stack aggregates, and width and mask calculations differently from retail, producing an eight-byte-shorter body despite equal relocation-bearing instruction counts.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1444"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80198C8C"],
+      "precise_divergence": "Canonical GC/1.3 retains and advances different loop-index and pointer induction variables from retail across the recovered entry-update loops.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1433"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80199F10"],
+      "precise_divergence": "Canonical GC/1.3 schedules the recovered initialization, record loop, resource binding, randomized entry setup, and optional tail work differently from retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1439"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8019DA3C"],
+      "precise_divergence": "Canonical GC/1.3 schedules branches differently across the effect-entry loop and emits an additional instruction.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1463"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8019E0B0"],
+      "precise_divergence": "Canonical GC/1.3 schedules calls and forms the loop and index work differently from retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1466"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8019F00C"],
+      "precise_divergence": "Canonical GC/1.3 forms and schedules the recovered search loops and index window differently from retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1469"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8019ECA0"],
+      "precise_divergence": "Canonical GC/1.3 schedules signed integer-to-floating conversion work differently from retail inside the recovered matrix-processing function.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1468"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_80199F10", "fn_8019BDE8", "fn_8019E0B0", "fn_8019ECA0"],
+      "precise_divergence": "Canonical GC/1.3 chooses a different stack layout or smaller frame than retail: saved-register recoloring moves stack slots in fn_8019BDE8, while fn_80199F10, fn_8019E0B0, and fn_8019ECA0 use smaller generated frames or omit retail-preserved state.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1439, 1452, 1466, and 1468"]
+    },
+    {
+      "category": "float-constant-placement",
+      "functions": ["fn_80198AAC", "fn_80198BF4", "fn_801991E0", "fn_8019B1BC", "fn_8019CC28", "fn_8019CFC4", "fn_8019E5E4"],
+      "precise_divergence": "MWCC-generated integer-to-floating conversion biases can carry anonymous local identities instead of the retail labels even when their bytes agree, preventing relocation identity from matching; fn_8019B1BC retains two such anonymous biases.",
+      "workaround": "After compiling, verify the generated constant bytes against the named retail constant and only then externalize and rebind the symbol; this guarded process is recorded as successful for every listed function except the still-NonMatching fn_8019B1BC.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1432, 1434, 1446, 1455, 1457, and 1467"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_8019E0B0", "fn_8019F00C"],
+      "precise_divergence": "Canonical GC/1.3's recovered honest C does not reproduce retail's callee-save shape: fn_8019E0B0 omits retail f30/f31 saves, while fn_8019F00C emits individual r28-r31 saves instead of retail stmw/lmw covering r27-r31.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1466 and 1469"]
     }
   ],
   "out_of_taxonomy": [
@@ -3077,6 +3262,30 @@
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1336 and 1337"],
       "taxonomy_note": "Preserved here because instruction selection and lowering are not instruction scheduling."
+    },
+    {
+      "category": "instruction-selection-lowering",
+      "functions": ["fn_8019B1BC", "fn_8019C7A8"],
+      "precise_divergence": "Canonical GC/1.3 selects clrlwi where retail uses extsb for a signed descriptor byte in fn_8019B1BC, and collapses fn_8019C7A8's retail three-point stack construction and signed-short midpoint recurrence into a substantially smaller geometry loop.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1446 and 1455"],
+      "taxonomy_note": "Preserved here because instruction selection and lowering are not instruction scheduling."
+    },
+    {
+      "category": "relocation-bearing-instruction-operands",
+      "functions": ["fn_8019C3B8"],
+      "precise_divergence": "Relocation count, offset, type, and addend equality does not establish instruction equality: the fn_8018D020 address-bearing instructions use canonical r30 where retail uses r26.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/frontier-8019C3B8-8019C7A8-session-1454.json: review_remediation_1.relocated_instruction_comparison"],
+      "taxonomy_note": "Preserved outside the mandated taxonomy because this is a relocation-strict verification property caused by register allocation, not relocation placement."
+    },
+    {
+      "category": "relocation-target-identity",
+      "functions": ["fn_8019C4E4"],
+      "precise_divergence": "Relocation count, offset, type, and addend equality does not establish target identity: canonical references a different data-symbol group and a different floating constant from retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/frontier-8019C3B8-8019C7A8-session-1454.json: review_remediation_1.relocated_instruction_comparison"],
+      "taxonomy_note": "Preserved outside the mandated taxonomy because target-symbol identity is a relocation-strict verification property, not relocation placement."
     }
   ]
 }

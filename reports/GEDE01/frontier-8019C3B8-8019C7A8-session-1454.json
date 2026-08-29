@@ -6,11 +6,25 @@
   "matched_bytes": 352,
   "nonmatching_bytes": 656,
   "functions": [
-    {"symbol":"fn_8019C3B8","start":"0x8019C3B8","end":"0x8019C4E4","size":300,"generated_size":300,"match_percent":97.8,"status":"NonMatching","relocations":"18/18 count, positions unequal","divergence":"Canonical rotates the persistent object, buffer, callback and vertex-offset registers relative to retail."},
-    {"symbol":"fn_8019C4E4","start":"0x8019C4E4","end":"0x8019C648","size":356,"generated_size":356,"match_percent":97.58427,"status":"NonMatching","relocations":"20/20 count, positions unequal","divergence":"Canonical rotates the long-lived count, entry, config, first and object registers relative to retail."},
+    {"symbol":"fn_8019C3B8","start":"0x8019C3B8","end":"0x8019C4E4","size":300,"generated_size":300,"match_percent":97.8,"status":"NonMatching","relocations":"18/18 with equal offsets, types and addends; relocated instruction operands differ","divergence":"Canonical rotates the persistent object, buffer, callback and vertex-offset registers relative to retail."},
+    {"symbol":"fn_8019C4E4","start":"0x8019C4E4","end":"0x8019C648","size":356,"generated_size":356,"match_percent":97.58427,"status":"NonMatching","relocations":"20/20 with equal offsets, types and addends; some target identities differ","divergence":"Canonical rotates the long-lived count, entry, config, first and object registers relative to retail. Independently, canonical references lbl_806501D0/D4/D8/DC where retail references lbl_80651E00/04/08/0C, and canonical loads the floating constant at lbl_80650F90 where retail loads lbl_80650C10."},
     {"symbol":"fn_8019C648","start":"0x8019C648","end":"0x8019C7A8","size":352,"generated_size":352,"match_percent":100.0,"status":"Matching","relocations":"0/0 equal"}
   ],
   "gaps": [],
   "shared_reconstruction": false,
-  "assembly_added": false
+  "assembly_added": false,
+  "remediation_1": {
+    "objdiff_measurement_command": "for spec in 'reports/GEDE01/objdiff-game_fn_8019C3B8-session-1470-remediation-1.json fn_8019C3B8' 'reports/GEDE01/objdiff-game_fn_8019C4E4-session-1470-remediation-1.json fn_8019C4E4'; do set -- $spec; jq -r --arg symbol \"$2\" '[.left.symbols[] | select(.name==$symbol)][0] as $l | [.right.symbols[] | select(.name==$symbol)][0] as $r | \"\\($symbol) left_size=\\($l.size) right_size=\\($r.size) match_percent=\\($l.match_percent) left_relocations=\\([$l.instructions[].instruction | select(.relocation != null)] | length) right_relocations=\\([$r.instructions[].instruction | select(.relocation != null)] | length)\"' \"$1\"; done",
+    "objdiff_measurement_raw_output": "fn_8019C3B8 left_size=300 right_size=300 match_percent=97.8 left_relocations=18 right_relocations=18\nfn_8019C4E4 left_size=356 right_size=356 match_percent=97.58427 left_relocations=20 right_relocations=20",
+    "relocation_shape_command": "for spec in 'reports/GEDE01/objdiff-game_fn_8019C3B8-session-1470-remediation-1.json fn_8019C3B8' 'reports/GEDE01/objdiff-game_fn_8019C4E4-session-1470-remediation-1.json fn_8019C4E4'; do set -- $spec; jq -r --arg symbol \"$2\" '[.left.symbols[]|select(.name==$symbol)][0] as $l | [.right.symbols[]|select(.name==$symbol)][0] as $r | [$l.instructions[].instruction|select(.relocation!=null)|[.address//\"0\",.relocation.type_name,.relocation.addend//null]] as $la | [$r.instructions[].instruction|select(.relocation!=null)|[.address//\"0\",.relocation.type_name,.relocation.addend//null]] as $ra | \"\\($symbol) relocation_offset_type_addend_equal=\\($la==$ra)\"' \"$1\"; done",
+    "relocation_shape_raw_output": "fn_8019C3B8 relocation_offset_type_addend_equal=true\nfn_8019C4E4 relocation_offset_type_addend_equal=true"
+  },
+  "review_remediation_1": {
+    "objdiff_report_paths": [
+      "reports/GEDE01/objdiff-game_fn_8019C3B8-session-1470-review-remediation-1.json",
+      "reports/GEDE01/objdiff-game_fn_8019C4E4-session-1470-review-remediation-1.json"
+    ],
+    "relocated_instruction_comparison_command": "for symbol in fn_8019C3B8 fn_8019C4E4; do report=\"reports/GEDE01/objdiff-game_${symbol}-session-1470-review-remediation-1.json\"; jq -r --arg symbol \"$symbol\" '[.left.symbols[]|select(.name==$symbol)][0] as $l | [.right.symbols[]|select(.name==$symbol)][0] as $r | [$l.instructions[].instruction|select(.relocation!=null)|.formatted] as $la | [$r.instructions[].instruction|select(.relocation!=null)|.formatted] as $ra | \"\\($symbol) relocated_formatted_equal=\\($la==$ra)\", (range(0; [$la|length,$ra|length]|min) | select($la[.] != $ra[.]) | \"index=\\(.) retail=\\($la[.]) canonical=\\($ra[.])\")' \"$report\"; done",
+    "relocated_instruction_comparison_raw_output": "fn_8019C3B8 relocated_formatted_equal=false\nindex=8 retail=addi r26, r3, fn_8018D020@l canonical=addi r30, r3, fn_8018D020@l\nindex=9 retail=mr r5, r26 canonical=mr r5, r30\nfn_8019C4E4 relocated_formatted_equal=false\nindex=0 retail=lwz r9, lbl_80651E00@sda21 canonical=lwz r9, lbl_806501D0@sda21\nindex=1 retail=lhz r8, lbl_80651E04@sda21 canonical=lhz r8, lbl_806501D4@sda21\nindex=2 retail=lwz r7, lbl_80651E08@sda21 canonical=lwz r7, lbl_806501D8@sda21\nindex=3 retail=lhz r0, lbl_80651E0C@sda21 canonical=lhz r0, lbl_806501DC@sda21\nindex=8 retail=lfs f1, lbl_80650C10@sda21 canonical=lfs f1, lbl_80650F90@sda21"
+  }
 }
