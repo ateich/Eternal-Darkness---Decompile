@@ -1,0 +1,29 @@
+{
+  "session_id": "session-1427-remediation-1",
+  "range_start": "0x80197D20",
+  "range_end": "0x80198154",
+  "next_target": "0x80198154",
+  "accounting": {
+    "matched_bytes": 0,
+    "nonmatching_bytes": 1076,
+    "unaccounted_spans": [],
+    "command": "jq -c '.units[] | select(.name==\"main/game/game_fn_80197D20\") | {matched_code:(.measures.matched_code // \"0\"),complete_code:(.measures.complete_code // \"0\"),total_code:.measures.total_code}' reports/GEDE01/session-1427-remediation-1-reloc-strict.json",
+    "raw_output": "{\"matched_code\":\"0\",\"complete_code\":\"0\",\"total_code\":\"1076\"}"
+  },
+  "functions": [
+    {
+      "symbol": "fn_80197D20",
+      "retail_range": "0x80197D20-0x80198154",
+      "retail_bytes": 1076,
+      "generated_bytes": 1068,
+      "match_percent": 87.95911,
+      "status": "NonMatching",
+      "measurement_command": "jq -r '[.left.symbols[]|select(.name==\"fn_80197D20\")|\"retail_bytes=\\(.size) retail_instructions=\\([.instructions[]|select(.instruction)]|length) match_percent=\\(.match_percent)\"], [.right.symbols[]|select(.name==\"fn_80197D20\")|\"generated_bytes=\\(.size) generated_instructions=\\([.instructions[]|select(.instruction)]|length) match_percent=\\(.match_percent)\"] | flatten[]' reports/GEDE01/objdiff-game_fn_80197D20-session-1427-remediation-1.json",
+      "measurement_raw_output": "retail_bytes=1076 retail_instructions=269 match_percent=87.95911\ngenerated_bytes=1068 generated_instructions=267 match_percent=87.95911",
+      "relocation_summary": "The retail and generated objects have equal relocation-record counts, but their relocation-bearing instruction sequences are unequal because code-size and scheduling differences move most records and the generated signed-integer conversion bias remains TU-local.",
+      "relocation_command": "jq -r 'def rows($s): [$s.symbols[] | select(.name==\"fn_80197D20\") | .instructions[] | select(.instruction.relocation.type_name != null and .instruction.relocation.type_name != \"R_PPC_NONE\") | [.instruction.address,.instruction.formatted,.instruction.relocation.type_name]]; \"retail\", (rows(.left)[]|@tsv), \"generated\", (rows(.right)[]|@tsv)' reports/GEDE01/objdiff-game_fn_80197D20-session-1427-remediation-1.json",
+      "relocation_raw_output": "retail\n8\tlis r7, lbl_8023B0A0@ha\tR_PPC_ADDR16_HA\n48\tlwzu r4, lbl_8023B0A0@l(r7)\tR_PPC_ADDR16_LO\n132\tbl fn_8018FEDC\tR_PPC_REL24\n164\tbl fn_80198AAC\tR_PPC_REL24\n204\tbl memcpy\tR_PPC_REL24\n224\tlfs f4, lbl_80650BA8@sda21\tR_PPC_EMB_SDA21\n236\tlfs f3, lbl_80650B94@sda21\tR_PPC_EMB_SDA21\n244\tlfd f2, lbl_80650B98@sda21\tR_PPC_EMB_SDA21\n280\tbl fn_80179370\tR_PPC_REL24\n312\tbl fn_80198154\tR_PPC_REL24\n1004\tbl fn_80198318\tR_PPC_REL24\n1028\tlfs f1, lbl_80650BAC@sda21\tR_PPC_EMB_SDA21\n1036\tbl fn_80198BF4\tR_PPC_REL24\ngenerated\n8\tlis r7, lbl_8023B0A0@ha\tR_PPC_ADDR16_HA\n48\tlwzu r4, lbl_8023B0A0@l(r7)\tR_PPC_ADDR16_LO\n124\tbl fn_8018FEDC\tR_PPC_REL24\n156\tbl fn_80198AAC\tR_PPC_REL24\n196\tbl memcpy\tR_PPC_REL24\n216\tlfs f4, lbl_80650BA8@sda21\tR_PPC_EMB_SDA21\n228\tlfs f3, lbl_80650B94@sda21\tR_PPC_EMB_SDA21\n236\tlfd f2, @59@sda21\tR_PPC_EMB_SDA21\n272\tbl fn_80179370\tR_PPC_REL24\n304\tbl fn_80198154\tR_PPC_REL24\n996\tbl fn_80198318\tR_PPC_REL24\n1020\tlfs f1, lbl_80650BAC@sda21\tR_PPC_EMB_SDA21\n1028\tbl fn_80198BF4\tR_PPC_REL24",
+      "divergence": "After removal of artificial duplicate live ranges, canonical GC/1.3 still differs in preserved-register assignment, loop scratch-register scheduling, signed-integer conversion-pool ownership and generated size. The function remains honest NonMatching C and earns no exact-match credit."
+    }
+  ]
+}

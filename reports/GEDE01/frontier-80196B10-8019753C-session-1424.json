@@ -1,0 +1,40 @@
+{
+  "session_id": "session-1424-remediation-1",
+  "range_start": "0x80196B10",
+  "range_end": "0x8019753C",
+  "next_target": "0x80196DE4",
+  "matched_bytes": 0,
+  "nonmatching_bytes": 2604,
+  "matched_function_count": 0,
+  "gaps": [],
+  "accounting_command": "jq -sc '{matched_bytes:(map(.left.symbols[0])|map(select(.match_percent==100.0))|map(.size|tonumber)|add // 0),nonmatching_bytes:(map(.left.symbols[0])|map(select(.match_percent!=100.0))|map(.size|tonumber)|add // 0),matched_function_count:(map(.left.symbols[0])|map(select(.match_percent==100.0))|length),nonmatching_function_count:(map(.left.symbols[0])|map(select(.match_percent!=100.0))|length)}' reports/GEDE01/objdiff-game_fn_80196B10-session-1424-remediation-1.json reports/GEDE01/objdiff-game_fn_80196DE4-session-1424-remediation-1.json",
+  "accounting_raw_output": "{\"matched_bytes\":0,\"nonmatching_bytes\":2604,\"matched_function_count\":0,\"nonmatching_function_count\":2}",
+  "functions": [
+    {
+      "symbol": "fn_80196B10",
+      "start": "0x80196B10",
+      "end": "0x80196DE4",
+      "status": "NonMatching",
+      "measurement_command": "jq -c '{symbol:.left.symbols[0].name,retail_bytes:(.left.symbols[0].size|tonumber),generated_bytes:(.right.symbols[0].size|tonumber),retail_instructions:([.left.symbols[0].instructions[]|select(.instruction!=null)]|length),generated_instructions:([.right.symbols[0].instructions[]|select(.instruction!=null)]|length),aligned_rows:(.left.symbols[0].instructions|length),match_percent:.left.symbols[0].match_percent,retail_relocation_instructions:([.left.symbols[0].instructions[].instruction.relocation|select(.!=null)]|length),generated_relocation_instructions:([.right.symbols[0].instructions[].instruction.relocation|select(.!=null)]|length),retail_differing_rows:([.left.symbols[0].instructions[]|select(.diff_kind!=null and .diff_kind!=\"DIFF_NONE\")]|length),generated_differing_rows:([.right.symbols[0].instructions[]|select(.diff_kind!=null and .diff_kind!=\"DIFF_NONE\")]|length)}' reports/GEDE01/objdiff-game_fn_80196B10-session-1424-remediation-1.json",
+      "measurement_raw_output": "{\"symbol\":\"fn_80196B10\",\"retail_bytes\":724,\"generated_bytes\":724,\"retail_instructions\":181,\"generated_instructions\":181,\"aligned_rows\":183,\"match_percent\":97.790054,\"retail_relocation_instructions\":11,\"generated_relocation_instructions\":11,\"retail_differing_rows\":4,\"generated_differing_rows\":4}",
+      "relocation_command": "jq -c '[.left.symbols[0].instructions[]|select(.instruction!=null)|.instruction.relocation|select(.!=null)|[.type,.target.name,.target.address,.addend]] as $l | [.right.symbols[0].instructions[]|select(.instruction!=null)|.instruction.relocation|select(.!=null)|[.type,.target.name,.target.address,.addend]] as $r | {symbol:.left.symbols[0].name,retail_relocations:($l|length),generated_relocations:($r|length),relocation_sequences_equal:($l==$r)}' reports/GEDE01/objdiff-game_fn_80196B10-session-1424-remediation-1.json",
+      "relocation_raw_output": "{\"symbol\":\"fn_80196B10\",\"retail_relocations\":11,\"generated_relocations\":11,\"relocation_sequences_equal\":true}",
+      "divergence": "Honest C emits the final fn_80198420 argument setup with lwz r4 before addi r3; retail emits addi r3 before lwz r4. The schedule-only difference is preserved instead of forced with inline assembly.",
+      "evidence": "reports/GEDE01/objdiff-game_fn_80196B10-session-1424-remediation-1.json"
+    },
+    {
+      "symbol": "fn_80196DE4",
+      "start": "0x80196DE4",
+      "end": "0x8019753C",
+      "status": "NonMatching",
+      "measurement_command": "jq -c '{symbol:.left.symbols[0].name,retail_bytes:(.left.symbols[0].size|tonumber),generated_bytes:(.right.symbols[0].size|tonumber),retail_instructions:([.left.symbols[0].instructions[]|select(.instruction!=null)]|length),generated_instructions:([.right.symbols[0].instructions[]|select(.instruction!=null)]|length),aligned_rows:(.left.symbols[0].instructions|length),match_percent:.left.symbols[0].match_percent,retail_relocation_instructions:([.left.symbols[0].instructions[].instruction.relocation|select(.!=null)]|length),generated_relocation_instructions:([.right.symbols[0].instructions[].instruction.relocation|select(.!=null)]|length),retail_differing_rows:([.left.symbols[0].instructions[]|select(.diff_kind!=null and .diff_kind!=\"DIFF_NONE\")]|length),generated_differing_rows:([.right.symbols[0].instructions[]|select(.diff_kind!=null and .diff_kind!=\"DIFF_NONE\")]|length)}' reports/GEDE01/objdiff-game_fn_80196DE4-session-1424-remediation-1.json",
+      "measurement_raw_output": "{\"symbol\":\"fn_80196DE4\",\"retail_bytes\":1880,\"generated_bytes\":1812,\"retail_instructions\":470,\"generated_instructions\":453,\"aligned_rows\":512,\"match_percent\":71.45532,\"retail_relocation_instructions\":25,\"generated_relocation_instructions\":25,\"retail_differing_rows\":400,\"generated_differing_rows\":400}",
+      "relocation_command": "jq -c '[.left.symbols[0].instructions[]|select(.instruction!=null)|.instruction.relocation|select(.!=null)|[.type,.target.name,.target.address,.addend]] as $l | [.right.symbols[0].instructions[]|select(.instruction!=null)|.instruction.relocation|select(.!=null)|[.type,.target.name,.target.address,.addend]] as $r | {symbol:.left.symbols[0].name,retail_relocations:($l|length),generated_relocations:($r|length),relocation_sequences_equal:($l==$r)}' reports/GEDE01/objdiff-game_fn_80196DE4-session-1424-remediation-1.json",
+      "relocation_raw_output": "{\"symbol\":\"fn_80196DE4\",\"retail_relocations\":25,\"generated_relocations\":25,\"relocation_sequences_equal\":true}",
+      "divergence": "Canonical GC/1.3 emits less code than retail and selects broader branch layout plus different r26-r31 live ranges across the three unrolled channel-update loops.",
+      "evidence": "reports/GEDE01/objdiff-game_fn_80196DE4-session-1424-remediation-1.json"
+    }
+  ],
+  "disposition": "No function reaches the exact-match gate, so this session claims zero newly matched bytes. fn_80196B10 was inherited from an earlier session and is now honestly NonMatching after removal of schedule-forcing assembly.",
+  "next_gate": "Keep next_target at fn_80196DE4; recover its unrolled channel-update control flow and MWCC register scheduling without assembly."
+}

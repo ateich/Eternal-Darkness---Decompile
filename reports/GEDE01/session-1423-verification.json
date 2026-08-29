@@ -1,0 +1,64 @@
+{
+  "session_id": "session-1423-remediation-1",
+  "scope": "Remediation of fn_80196918 only; the accepted frontier is not advanced.",
+  "full_build_command": ".tools/bin/ninja > build/remediation-1423-final-build.log 2>&1",
+  "full_build_raw_output": "",
+  "full_build_result": "success",
+  "dol_sha1_command": "sha1sum build/GEDE01/main.dol",
+  "dol_sha1_raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+  "function_measurement": {
+    "command": "jq -r '.left.symbols[] | select(.name==\"fn_80196918\") | \"match_percent=\\(.match_percent) size=\\(.size) instructions=\\(.instructions|length) relocations=\\([.instructions[].instruction.relocation | select(. != null)]|length) differing_rows=\\([.instructions[] | select(.diff_kind != null and .diff_kind != \\\"DIFF_NONE\\\")]|length)\"' reports/GEDE01/objdiff-game_fn_80196918-session-1423-remediation-1.json",
+    "raw_output": "match_percent=96.71429 size=504 instructions=128 relocations=16 differing_rows=18"
+  },
+  "base_measurement": {
+    "command": "jq -r '.right.symbols[] | select(.name==\"fn_80196918\") | \"base_size=\\(.size) base_instructions=\\(.instructions|length) base_relocations=\\([.instructions[].instruction.relocation | select(. != null)]|length)\"' reports/GEDE01/objdiff-game_fn_80196918-session-1423-remediation-1.json",
+    "raw_output": "base_size=504 base_instructions=128 base_relocations=16"
+  },
+  "byte_accounting": {
+    "command": "jq -r '.left.symbols[] | select(.name==\"fn_80196918\") | if .match_percent == 100 then \"matched_bytes=\\(.size) nonmatching_bytes=0 matched_function_count=1\" else \"matched_bytes=0 nonmatching_bytes=\\(.size) matched_function_count=0\" end' reports/GEDE01/objdiff-game_fn_80196918-session-1423-remediation-1.json",
+    "raw_output": "matched_bytes=0 nonmatching_bytes=504 matched_function_count=0"
+  },
+  "relocation_measurement": {
+    "command": "jq -r '[.left.symbols[] | select(.name==\"fn_80196918\") | .instructions[].instruction.relocation | select(. != null) | [.type,.target.name,.target.address]] as $l | [.right.symbols[] | select(.name==\"fn_80196918\") | .instructions[].instruction.relocation | select(. != null) | [.type,.target.name,.target.address]] as $r | \"relocation_sequences_equal=\\($l == $r) relocation_count=\\($l|length)\"' reports/GEDE01/objdiff-game_fn_80196918-session-1423-remediation-1.json",
+    "raw_output": "relocation_sequences_equal=true relocation_count=16"
+  },
+  "strict_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1423-remediation-1-reloc-strict.json -f json -c function_reloc_diffs=name_address",
+    "raw_output": " INFO Loading project .\n INFO Generating report for 5458 units (using 8 threads)\n INFO Report generated in 0.154s\n INFO Writing to reports/GEDE01/session-1423-remediation-1-reloc-strict.json"
+  },
+  "variant_history": [
+    {
+      "source_shape": "Committed baseline with initialized table declaration and scoped callback outputs.",
+      "command": ".tools/bin/ninja build/GEDE01/src/game/game_fn_80196918.o >/dev/null && python3 tools/fndiff.py game/game_fn_80196918.c fn_80196918",
+      "raw_output": "target 504 bytes  base 504 bytes  match 96.55556"
+    },
+    {
+      "source_shape": "Function-scope callback output before Info.",
+      "command": ".tools/bin/ninja build/GEDE01/src/game/game_fn_80196918.o >/dev/null && python3 tools/fndiff.py game/game_fn_80196918.c fn_80196918 > build/remediation-1423-variant-1.txt",
+      "raw_output": "target 504 bytes  base 504 bytes  match 96.53968"
+    },
+    {
+      "source_shape": "Reordered and rescaled local-frame aggregate.",
+      "command": ".tools/bin/ninja build/GEDE01/src/game/game_fn_80196918.o >/dev/null && python3 tools/fndiff.py game/game_fn_80196918.c fn_80196918 > build/remediation-1423-variant-4.txt",
+      "raw_output": "target 504 bytes  base 500 bytes  match 81.5873"
+    },
+    {
+      "source_shape": "Expanded Info with callback output member.",
+      "command": ".tools/bin/ninja build/GEDE01/src/game/game_fn_80196918.o >/dev/null && python3 tools/fndiff.py game/game_fn_80196918.c fn_80196918 > build/remediation-1423-variant-8.txt",
+      "raw_output": "target 504 bytes  base 488 bytes  match 87.48412"
+    },
+    {
+      "source_shape": "Delayed table assignment after Info initialization.",
+      "command": ".tools/bin/ninja build/GEDE01/src/game/game_fn_80196918.o >/dev/null && python3 tools/fndiff.py game/game_fn_80196918.c fn_80196918 > build/remediation-1423-variant-11.txt",
+      "raw_output": "target 504 bytes  base 504 bytes  match 96.71429"
+    },
+    {
+      "source_shape": "Delayed table assignment with volatile scoped callback outputs; discarded because generated code was unchanged.",
+      "command": ".tools/bin/ninja build/GEDE01/src/game/game_fn_80196918.o >/dev/null && python3 tools/fndiff.py game/game_fn_80196918.c fn_80196918 > build/remediation-1423-variant-12.txt",
+      "raw_output": "target 504 bytes  base 504 bytes  match 96.71429"
+    }
+  ],
+  "retained_change": "Delay table assignment until after Info initialization; this removes the scratch-register differences without changing behavior.",
+  "remaining_blocker": "Local stack slots and the final call's argument-load schedule still differ. No match credit is claimed.",
+  "fallback_audit": "The immediate fallback was disassembled after the retained assigned-function improvement, but no source, split, ownership, frontier, or match claim was added because this remediation is constrained not to advance the frontier."
+}

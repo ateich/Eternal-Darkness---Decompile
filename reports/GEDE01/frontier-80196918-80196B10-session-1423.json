@@ -1,0 +1,35 @@
+{
+  "session_id": "session-1423-remediation-2",
+  "range_start": "0x80196918",
+  "range_end": "0x80196DE4",
+  "next_target": "0x80196918",
+  "matched_bytes": 724,
+  "nonmatching_bytes": 504,
+  "matched_function_count": 1,
+  "byte_accounting_command": "jq -n -r --slurpfile a reports/GEDE01/objdiff-game_fn_80196918-session-1423-remediation-2.json --slurpfile b reports/GEDE01/objdiff-game_fn_80196B10-session-1423-remediation-2.json '[$a[0].left.symbols[], $b[0].left.symbols[]] | map(select(.name==\"fn_80196918\" or .name==\"fn_80196B10\")) | \"matched_bytes=\\(map(select(.match_percent==100)|.size|tonumber)|add // 0) nonmatching_bytes=\\(map(select(.match_percent!=100)|.size|tonumber)|add // 0) matched_function_count=\\(map(select(.match_percent==100))|length)\"'",
+  "byte_accounting_raw_output": "matched_bytes=724 nonmatching_bytes=504 matched_function_count=1",
+  "gaps": [],
+  "functions": [
+    {
+      "symbol": "fn_80196918",
+      "start": "0x80196918",
+      "end": "0x80196B10",
+      "status": "NonMatching",
+      "measurement_command": "jq -c '.left.symbols[] | select(.name==\"fn_80196918\") | {match_percent,size,instructions:(.instructions|length),relocations:([.instructions[].instruction.relocation|select(.!=null)]|length),differing_rows:([.instructions[]|select(.diff_kind!=null and .diff_kind!=\"DIFF_NONE\")]|length)}' reports/GEDE01/objdiff-game_fn_80196918-session-1423-remediation-2.json",
+      "measurement_raw_output": "{\"match_percent\":96.71429,\"size\":\"504\",\"instructions\":128,\"relocations\":16,\"differing_rows\":18}",
+      "evidence": "reports/GEDE01/objdiff-game_fn_80196918-session-1423-remediation-2.json"
+    },
+    {
+      "symbol": "fn_80196B10",
+      "start": "0x80196B10",
+      "end": "0x80196DE4",
+      "status": "Matching",
+      "measurement_command": "jq -c '.left.symbols[] | select(.name==\"fn_80196B10\") | {match_percent,size,instructions:(.instructions|length),relocations:([.instructions[].instruction.relocation|select(.!=null)]|length),differing_rows:([.instructions[]|select(.diff_kind!=null and .diff_kind!=\"DIFF_NONE\")]|length)}' reports/GEDE01/objdiff-game_fn_80196B10-session-1423-remediation-2.json",
+      "measurement_raw_output": "{\"match_percent\":100.0,\"size\":\"724\",\"instructions\":181,\"relocations\":11,\"differing_rows\":0}",
+      "relocation_command": "jq -c '[.left.symbols[]|select(.name==\"fn_80196B10\")|.instructions[].instruction.relocation|select(.!=null)|[.type,.target.name,.target.address]] as $l | [.right.symbols[]|select(.name==\"fn_80196B10\")|.instructions[].instruction.relocation|select(.!=null)|[.type,.target.name,.target.address]] as $r | {relocation_sequences_equal:($l==$r),relocation_count:($l|length)}' reports/GEDE01/objdiff-game_fn_80196B10-session-1423-remediation-2.json",
+      "relocation_raw_output": "{\"relocation_sequences_equal\":true,\"relocation_count\":11}",
+      "evidence": "reports/GEDE01/objdiff-game_fn_80196B10-session-1423-remediation-2.json"
+    }
+  ],
+  "next_gate": "Resolve fn_80196918 at the unchanged honest frontier; the sanctioned contiguous fallback is independently matched but does not skip the earlier NonMatching span."
+}

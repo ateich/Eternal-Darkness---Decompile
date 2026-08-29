@@ -1,0 +1,36 @@
+{
+  "session_id": "session-1428",
+  "range_start": "0x80198154",
+  "range_end": "0x80198420",
+  "matched_code_bytes": 452,
+  "nonmatching_code_bytes": 264,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "symbol": "fn_80198154",
+      "start": "0x80198154",
+      "end": "0x80198318",
+      "status": "Matching",
+      "retail_bytes": 452,
+      "generated_bytes": 452,
+      "match_percent": 100.0,
+      "relocations_equal": "10/10",
+      "evidence": "reports/GEDE01/objdiff-game_fn_80198154-session-1428.json"
+    },
+    {
+      "symbol": "fn_80198318",
+      "start": "0x80198318",
+      "end": "0x80198420",
+      "status": "NonMatching",
+      "retail_bytes": 264,
+      "generated_bytes": 264,
+      "match_percent": 97.19697,
+      "relocations_equal": "0/0",
+      "blocker": "Canonical GC/1.3 assigns the entry and vertex induction pointers to r5 and r6 instead of retail r7 and r5; the size, unrolled control flow, loads, shifts, adds and stores otherwise align.",
+      "evidence": "reports/GEDE01/objdiff-game_fn_80198318-session-1428.json"
+    }
+  ],
+  "next_target": "0x80198420",
+  "next_gate": "Attempt immediate consecutive fn_80198420 toward the jumptable_8023BF28 data-ownership boundary. Keep fn_80198318's size-exact register-allocation debt open without redirecting the scheduler backward.",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

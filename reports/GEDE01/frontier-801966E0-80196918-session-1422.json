@@ -1,0 +1,40 @@
+{
+  "session_id": "session-1422",
+  "range_start": "0x801966E0",
+  "range_end": "0x80196918",
+  "next_target": "0x80196918",
+  "matched_bytes": 164,
+  "nonmatching_bytes": 404,
+  "gaps": [],
+  "functions": [
+    {
+      "symbol": "fn_801966E0",
+      "start": "0x801966E0",
+      "end": "0x80196784",
+      "size": 164,
+      "status": "Matching",
+      "final_match_percent": 100.0,
+      "retail_size": 164,
+      "generated_size": 164,
+      "retail_relocations": 11,
+      "generated_relocations": 11,
+      "relocations_equal": true,
+      "evidence": "reports/GEDE01/objdiff-game_fn_801966E0-session-1422.json"
+    },
+    {
+      "symbol": "fn_80196784",
+      "start": "0x80196784",
+      "end": "0x80196918",
+      "size": 404,
+      "status": "NonMatching",
+      "final_match_percent": 97.22772,
+      "retail_size": 404,
+      "generated_size": 404,
+      "retail_relocations": 17,
+      "generated_relocations": 17,
+      "blocker": "Canonical GC/1.3 assigns the long-lived object, descriptor, arguments, counts, data, and entry pointers to r24-r31 differently from retail and schedules the first fn_801804AC call relocation four bytes earlier.",
+      "evidence": "reports/GEDE01/objdiff-game_fn_80196784-session-1422.json"
+    }
+  ],
+  "next_gate": "Attempt immediate consecutive fn_80196918 toward the jumptable_8023BF28 data-ownership boundary; fn_80196784 is the sole documented NonMatching span and every byte in this report range is accounted."
+}
