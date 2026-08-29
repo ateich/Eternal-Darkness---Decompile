@@ -1,0 +1,20 @@
+{
+  "session_id": "session-1411",
+  "starting_target": "0x80193F3C",
+  "ending_next_target": "0x801941EC",
+  "build_command": ".tools/bin/ninja",
+  "build_result": "success; build/GEDE01/main.dol: OK",
+  "objdiff_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80193F3C fn_80193F3C -o reports/GEDE01/objdiff-game_fn_80193F3C-session-1411.json --format json",
+  "function_measurement_raw_output": "{\"symbol\":\"fn_80193F3C\",\"retail_size\":688,\"generated_size\":688,\"match_percent\":96.79651,\"left_relocation_instructions\":5,\"right_relocation_instructions\":5,\"differing_instructions\":59}",
+  "report_counter_command": "jq -c '{matching_objects:(.measures.complete_units|tonumber),total_objects:(.measures.total_units|tonumber),matching_functions:(.measures.matched_functions|tonumber),total_functions:(.measures.total_functions|tonumber),matching_code_bytes:(.measures.matched_code|tonumber),linked_code_bytes:(.measures.complete_code|tonumber),code_percent:.measures.matched_code_percent,function_percent:.measures.matched_functions_percent,game_code_matching_bytes:(.categories[]|select(.id==\"game\")|.measures.matched_code|tonumber),game_code_linked_bytes:(.categories[]|select(.id==\"game\")|.measures.complete_code|tonumber)}' build/GEDE01/report.json",
+  "report_counter_raw_output": "{\"matching_objects\":3951,\"total_objects\":5437,\"matching_functions\":3716,\"total_functions\":8216,\"matching_code_bytes\":576188,\"linked_code_bytes\":576156,\"code_percent\":25.044117,\"function_percent\":45.22882,\"game_code_matching_bytes\":573160,\"game_code_linked_bytes\":573128}",
+  "strict_report_command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1411-reloc-strict.json --format json -c function_reloc_diffs=name_address",
+  "strict_counter_raw_output": "{\"matching_functions\":3711,\"matching_code_bytes\":574504,\"game_matching_functions\":3649,\"game_matching_code_bytes\":571476}",
+  "dol_sha1_command": "sha1sum build/GEDE01/main.dol",
+  "dol_sha1_raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+  "matched_bytes": 0,
+  "nonmatching_bytes": 688,
+  "matching_functions": 0,
+  "matched_function_sizes": [],
+  "unaccounted_spans": []
+}

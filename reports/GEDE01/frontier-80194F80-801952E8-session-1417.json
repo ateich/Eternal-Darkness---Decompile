@@ -1,0 +1,46 @@
+{
+  "session_id": "session-1417",
+  "range_start": "0x80194F80",
+  "range_end": "0x801952E8",
+  "next_target": "0x801952E8",
+  "range_bytes": 872,
+  "accounted_bytes": 872,
+  "matched_bytes": 340,
+  "nonmatching_bytes": 532,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "symbol": "fn_80194F80",
+      "start": "0x80194F80",
+      "end": "0x801950D4",
+      "size": 340,
+      "status": "Matching",
+      "final_match_percent": 100.0,
+      "retail_size": 340,
+      "generated_size": 340,
+      "retail_instructions": 85,
+      "generated_instructions": 85,
+      "retail_relocations": 9,
+      "generated_relocations": 9,
+      "relocations_equal": true,
+      "evidence": "reports/GEDE01/objdiff-fn_80194F80-session-1417.json"
+    },
+    {
+      "symbol": "fn_801950D4",
+      "start": "0x801950D4",
+      "end": "0x801952E8",
+      "size": 532,
+      "status": "NonMatching",
+      "final_match_percent": 90.827065,
+      "retail_size": 532,
+      "generated_size": 528,
+      "retail_instructions": 133,
+      "generated_instructions": 132,
+      "retail_relocations": 11,
+      "generated_relocations": 11,
+      "relocations_equal": false,
+      "blocker": "Canonical GC/1.3 colors the persistent width, half, range, and stride locals differently and omits retail's extra full-width preservation move.",
+      "evidence": "reports/GEDE01/objdiff-fn_801950D4-session-1417.json"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "session_id": "session-1414",
+  "range_start": "0x801947F4",
+  "range_end": "0x80194998",
+  "matched_bytes": 0,
+  "nonmatching_bytes": 420,
+  "functions": [
+    {"symbol":"fn_801947F4","start":"0x801947F4","end":"0x80194998","size":420,"status":"NonMatching","final_match_percent":98.28571,"retail_size":420,"generated_size":416,"retail_relocation_instructions":7,"generated_relocation_instructions":7,"relocations_equal":true,"blocker":"The signed modulo opcode and ascending zero-store order are corrected. Fresh retained-source evidence still shows canonical GC/1.3 assigning the input byte, masked RNG result, sum, and zero to r5/r3/r3/r4 instead of retail r4/r5/r4/r3, then keeping r4 zero live across the flag test while retail emits a second li r3, 0. A branch-local distinct zero compiled identically; alternate expression grouping and explicit RNG/input temporaries regressed, so none was retained.","evidence":"reports/GEDE01/objdiff-game_fn_801947F4-session-1414-remediation-2.json"}
+  ],
+  "next_target": "0x801947F4",
+  "measurements": {
+    "objdiff_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801947F4 fn_801947F4 -o reports/GEDE01/objdiff-game_fn_801947F4-session-1414-remediation-2.json --format json-pretty -c function_reloc_diffs=name_address",
+    "summary_command": "jq '{symbol:.left.symbols[0].name,retail_size:.left.symbols[0].size,generated_size:.right.symbols[0].size,match_percent:.left.symbols[0].match_percent,aligned_diff_rows:([.left.symbols[0].instructions[]|select(.diff_kind!=null)]|length),retail_relocations:([.left.symbols[0].instructions[]|select(.instruction.relocation!=null)|.instruction.relocation]|length),generated_relocations:([.right.symbols[0].instructions[]|select(.instruction.relocation!=null)|.instruction.relocation]|length),relocations_equal:([.left.symbols[0].instructions[]|select(.instruction.relocation!=null)|.instruction.relocation]==[.right.symbols[0].instructions[]|select(.instruction.relocation!=null)|.instruction.relocation])}' reports/GEDE01/objdiff-game_fn_801947F4-session-1414-remediation-2.json",
+    "summary_raw": "{\n  \"symbol\": \"fn_801947F4\",\n  \"retail_size\": \"420\",\n  \"generated_size\": \"416\",\n  \"match_percent\": 98.28571,\n  \"aligned_diff_rows\": 14,\n  \"retail_relocations\": 7,\n  \"generated_relocations\": 7,\n  \"relocations_equal\": true\n}",
+    "dol_sha1_command": "sha1sum build/GEDE01/main.dol",
+    "dol_sha1_raw": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+  }
+}

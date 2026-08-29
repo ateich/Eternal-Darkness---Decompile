@@ -1,0 +1,30 @@
+{
+  "session_id": "session-1411",
+  "range_start": "0x80193F3C",
+  "range_end": "0x801941EC",
+  "matched_bytes": 0,
+  "nonmatching_bytes": 688,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "symbol": "fn_80193F3C",
+      "start": "0x80193F3C",
+      "end": "0x801941EC",
+      "retail_size": 688,
+      "generated_size": 688,
+      "match_percent": 98.13372,
+      "status": "NonMatching",
+      "matched_bytes": 0,
+      "divergence": "Retail dataflow uses x_scale for both first-pair terms and y_scale for both second-pair terms. The corrected honest C no longer carries the fitted unsigned-int re-cast and still compiles to separate conversions at the retail size. Canonical GC/1.3 colors the repeated integer-to-float and fctiwz conversion live ranges differently, so the function remains NonMatching and earns no matched-byte credit."
+    }
+  ],
+  "next_target": "0x801941EC",
+  "remediation_measurement": {
+    "command": "jq -c '{symbol:.left.symbols[0].name,retail_size:(.left.symbols[0].size|tonumber),generated_size:(.right.symbols[0].size|tonumber),match_percent:.left.symbols[0].match_percent,status:(if .left.symbols[0].match_percent==100 then \"Matching\" else \"NonMatching\" end),matched_bytes:(if .left.symbols[0].match_percent==100 then (.left.symbols[0].size|tonumber) else 0 end),nonmatching_bytes:(if .left.symbols[0].match_percent==100 then 0 else (.left.symbols[0].size|tonumber) end),left_instruction_count:([.left.symbols[0].instructions[]|select(.instruction)]|length),right_instruction_count:([.right.symbols[0].instructions[]|select(.instruction)]|length),left_relocation_instructions:([.left.symbols[0].instructions[]|select(.instruction.relocation)]|length),right_relocation_instructions:([.right.symbols[0].instructions[]|select(.instruction.relocation)]|length)}' reports/GEDE01/objdiff-game_fn_80193F3C-session-1411-remediation-2.json",
+    "raw_output": "{\"symbol\":\"fn_80193F3C\",\"retail_size\":688,\"generated_size\":688,\"match_percent\":98.13372,\"status\":\"NonMatching\",\"matched_bytes\":0,\"nonmatching_bytes\":688,\"left_instruction_count\":172,\"right_instruction_count\":172,\"left_relocation_instructions\":5,\"right_relocation_instructions\":5}"
+  },
+  "retail_scale_dataflow": {
+    "command": "jq -r '.left.symbols[0].instructions[] | (.instruction.address // \"0\") as $a | select(.instruction and ([96,100,112,116,132,140,156,172,188,200,224,232,240,252,264,272,276,284,288,292] | index($a|tonumber))) | \"offset=\"+$a+\" \"+.instruction.formatted' reports/GEDE01/objdiff-game_fn_80193F3C-session-1411-remediation-2.json",
+    "raw_output": "offset=96 clrlwi r7, r8, 24\noffset=100 stw r7, 0xc(r1)\noffset=112 clrlwi r8, r9, 24\noffset=116 stw r0, 0x8(r1)\noffset=132 lfd f0, 0x8(r1)\noffset=140 stw r7, 0x14(r1)\noffset=156 stw r0, 0x10(r1)\noffset=172 lfd f0, 0x10(r1)\noffset=188 fsubs f0, f0, f7\noffset=200 fmuls f0, f0, f2\noffset=224 stw r8, 0x1c(r1)\noffset=232 stw r0, 0x18(r1)\noffset=240 lfd f6, 0x18(r1)\noffset=252 fsubs f4, f6, f7\noffset=264 stw r8, 0x24(r1)\noffset=272 stw r0, 0x20(r1)\noffset=276 lfd f1, 0x20(r1)\noffset=284 fsubs f1, f1, f7\noffset=288 stw r31, 0x4c(r1)\noffset=292 lwz r8, 0x44(r1)"
+  }
+}
