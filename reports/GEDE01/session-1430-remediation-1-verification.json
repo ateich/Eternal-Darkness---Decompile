@@ -1,0 +1,44 @@
+{
+  "session_id": "session-1430-remediation-1",
+  "scope": "Review remediation of the session-1430 lessons catalog only; no source reconstruction or frontier advance.",
+  "corrections": [
+    "Replaced the stale null workaround for fn_8000EB14 and fn_8000EBD4 with the documented single-iteration-loop technique and cited docs/matching.md.",
+    "Replaced the stale null workaround for fn_80177434 with direct string literals plus guarded string-pool externalization and cited docs/matching.md.",
+    "Added a separate record for the compiler-version-dependent offset-zero addi-to-mr fold and the GC/1.3.2 translation-unit pin.",
+    "Replaced the broad refresh records with narrower records whose divergence and evidence are scoped to one behavior.",
+    "Left reports/GEDE01/progress.json and the existing frontier report unchanged because no frontier evidence changed."
+  ],
+  "source_inspection": {
+    "command": "rg -n 'for \\(|externalize_string_pool|GC/1.3.2|game_fn_80177434' src/game/game_fn_8000EB14.c src/game/game_fn_8000EBD4.c config/GEDE01/config.yml configure.py tools/externalize_string_pool.py | sed -n '1,120p'",
+    "raw_output": "tools/externalize_string_pool.py:10:usage: externalize_string_pool.py OBJECT POOL_SYMBOL RETAIL_DOL\nsrc/game/game_fn_8000EBD4.c:32:    for (i = 0; i < 1; i++) {\nsrc/game/game_fn_8000EB14.c:32:    for (i = 0; i < 1; i++) {\nconfigure.py:25:                    choices=[\"GC/1.2.5n\", \"GC/1.3\", \"GC/1.3.2\", \"GC/1.3.2r\", \"GC/2.0\"]\nconfigure.py:2003:        \"name\": \"externalize_string_pool_80250588\",\nconfigure.py:2007:            \"python3 tools/externalize_string_pool.py $in lbl_80250588 \"\nconfigure.py:2058:guarded_externalize_rules.add(\"externalize_string_pool_80250588\")\nconfigure.py:2077:            \"outputs\": [f\"build/{VERSION}/src/game/game_fn_80177434.externalized\"],\nconfigure.py:2078:            \"rule\": \"externalize_string_pool_80250588\",\nconfigure.py:2079:            \"inputs\": [f\"build/{VERSION}/src/game/game_fn_80177434.o\"],\nconfigure.py:8100:            Object(Matching, \"game/game_fn_80177434.c\", mw_version=\"GC/1.3.2\"),"
+  },
+  "build_and_objdiff_generation": {
+    "command": ".tools/bin/ninja build/GEDE01/main.dol build/GEDE01/report.json >/dev/null 2>&1; printf 'build_exit=%s\\n' \"$?\"; for fn in 8000EB14 8000EBD4 80177434; do build/tools/objdiff-cli diff -p . -u main/game/game_fn_${fn} fn_${fn} -o reports/GEDE01/objdiff-game_fn_${fn}-session-1430-remediation-1.json --format json-pretty -c function_reloc_diffs=name_address >/dev/null 2>&1; printf 'objdiff_fn_%s_exit=%s\\n' \"$fn\" \"$?\"; done; build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1430-remediation-1-reloc-strict.json -f json -c function_reloc_diffs=name_address >/dev/null 2>&1; printf 'strict_report_exit=%s\\n' \"$?\"",
+    "raw_output": "build_exit=0\nobjdiff_fn_8000EB14_exit=0\nobjdiff_fn_8000EBD4_exit=0\nobjdiff_fn_80177434_exit=0\nstrict_report_exit=0"
+  },
+  "measurement": {
+    "command": "for f in reports/GEDE01/objdiff-game_fn_8000EB14-session-1430-remediation-1.json reports/GEDE01/objdiff-game_fn_8000EBD4-session-1430-remediation-1.json reports/GEDE01/objdiff-game_fn_80177434-session-1430-remediation-1.json; do jq -r '[.left.symbols[0].name, (.left.symbols[0].size|tostring), (.right.symbols[0].size|tostring), (.left.symbols[0].match_percent|tostring), (([.left.symbols[0].instructions[]|select(.diff_kind!=null)]|length)|tostring), (([.left.symbols[0].instructions[]|select(.instruction.relocation!=null)]|length)|tostring), (([.right.symbols[0].instructions[]|select(.instruction.relocation!=null)]|length)|tostring)] | @tsv' \"$f\"; done",
+    "columns": ["symbol", "retail_bytes", "generated_bytes", "match_percent", "strict_diff_rows", "retail_relocations", "generated_relocations"],
+    "raw_output": "fn_8000EB14\t192\t192\t100.0\t0\t10\t10\nfn_8000EBD4\t192\t192\t100.0\t0\t10\t10\nfn_80177434\t6752\t6752\t100.0\t0\t746\t746"
+  },
+  "dol_identity": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol; cmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol; printf 'dol_cmp_exit=%s\\n' \"$?\"",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol\ndol_cmp_exit=0"
+  },
+  "catalog_measurement": {
+    "command": "jq -r '\"lessons=\" + ((.lessons|length)|tostring) + \" out_of_taxonomy=\" + ((.out_of_taxonomy|length)|tostring) + \" total_catalog_records=\" + (((.lessons|length)+(.out_of_taxonomy|length))|tostring)' reports/GEDE01/lessons.json",
+    "raw_output": "lessons=433 out_of_taxonomy=2 total_catalog_records=435"
+  },
+  "frontier_and_snapshot": {
+    "command": "jq -r '\"next_target=\" + .next_target' reports/GEDE01/progress.json; sha256sum reports/GEDE01/progress.json docs/matching.md",
+    "raw_output": "next_target=0x801989CC\n954419303dff6c07f0eabeb51029e8222005e538ae05d0eac87e91c084bd58fd  reports/GEDE01/progress.json\n68d8b82f5b80e7408576b2904b19b5d32a21e9d6b0548376f49866695a88970a  docs/matching.md"
+  },
+  "chain_state": {
+    "command": "test -f ../.darkfoundry/decomp-chain-state.json; printf 'chain_state_present_exit=%s\\n' \"$?\"; jq -r '\"assigned_target=\" + .assigned_target, \"accepted_frontier=\" + .accepted_frontier, \"candidate_frontier=\" + .candidate_frontier, \"review_verdict=\" + .review_verdict' ../.darkfoundry/decomp-chain-state.json",
+    "raw_output": "chain_state_present_exit=0\nassigned_target=0x801989CC\naccepted_frontier=0x801989CC\ncandidate_frontier=0x801989CC\nreview_verdict=REQUEST_CHANGES"
+  },
+  "validation": {
+    "command": "jq empty reports/GEDE01/lessons.json; printf 'lessons_json_exit=%s\\n' \"$?\"; git diff --check; printf 'diff_check_exit=%s\\n' \"$?\"",
+    "raw_output": "lessons_json_exit=0\ndiff_check_exit=0"
+  }
+}

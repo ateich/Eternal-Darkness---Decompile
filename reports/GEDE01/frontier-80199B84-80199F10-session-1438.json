@@ -1,0 +1,35 @@
+{
+  "session_id": "session-1438-remediation-1",
+  "range_start": "0x80199B84",
+  "range_end": "0x80199F10",
+  "next_target": "0x80199F10",
+  "matched_bytes": 908,
+  "linked_bytes": 908,
+  "nonmatching_bytes": 0,
+  "unaccounted_spans": [],
+  "shared_reconstructions": [],
+  "assembly_functions": [],
+  "range_measurement": {
+    "command": "jq -s -r '\"matched_bytes=\\(map(.left.symbols[0].size|tonumber)|add) linked_bytes=\\(map(.right.symbols[0].size|tonumber)|add) nonmatching_bytes=\\(map(select(.left.symbols[0].match_percent != 100))|map(.left.symbols[0].size|tonumber)|add // 0) function_count=\\(length)\"' reports/GEDE01/objdiff-game_fn_80199B84-session-1438-remediation-1.json reports/GEDE01/objdiff-game_fn_80199E18-session-1438-remediation-1.json reports/GEDE01/objdiff-game_fn_80199EBC-session-1438-remediation-1.json",
+    "raw_output": "matched_bytes=908 linked_bytes=908 nonmatching_bytes=0 function_count=3"
+  },
+  "functions": [
+    {"name": "fn_80199B84", "start": "0x80199B84", "end": "0x80199E18", "size": 660, "match_percent": 100.0, "target_relocations": 15, "base_relocations": 15},
+    {"name": "fn_80199E18", "start": "0x80199E18", "end": "0x80199EBC", "size": 164, "match_percent": 100.0, "target_relocations": 11, "base_relocations": 11},
+    {"name": "fn_80199EBC", "start": "0x80199EBC", "end": "0x80199F10", "size": 84, "match_percent": 100.0, "target_relocations": 0, "base_relocations": 0}
+  ],
+  "function_measurements": [
+    {
+      "command": "jq -r '(.left.symbols[] | select(.name==\"fn_80199B84\")) as $t | (.right.symbols[] | select(.name==\"fn_80199B84\")) as $b | ([$t.instructions[] | select((.. | objects | has(\"relocation\")))]|length) as $tr | ([$b.instructions[] | select((.. | objects | has(\"relocation\")))]|length) as $br | \"unit=main/game/game_fn_80199B84 name=\\($t.name) target_size=\\($t.size) base_size=\\($b.size) match_percent=\\($t.match_percent) target_relocations=\\($tr) base_relocations=\\($br)\"' reports/GEDE01/objdiff-game_fn_80199B84-session-1438-remediation-1.json",
+      "raw_output": "unit=main/game/game_fn_80199B84 name=fn_80199B84 target_size=660 base_size=660 match_percent=100.0 target_relocations=15 base_relocations=15"
+    },
+    {
+      "command": "jq -r '(.left.symbols[] | select(.name==\"fn_80199E18\")) as $t | (.right.symbols[] | select(.name==\"fn_80199E18\")) as $b | ([$t.instructions[] | select((.. | objects | has(\"relocation\")))]|length) as $tr | ([$b.instructions[] | select((.. | objects | has(\"relocation\")))]|length) as $br | \"unit=main/game/game_fn_80199E18 name=\\($t.name) target_size=\\($t.size) base_size=\\($b.size) match_percent=\\($t.match_percent) target_relocations=\\($tr) base_relocations=\\($br)\"' reports/GEDE01/objdiff-game_fn_80199E18-session-1438-remediation-1.json",
+      "raw_output": "unit=main/game/game_fn_80199E18 name=fn_80199E18 target_size=164 base_size=164 match_percent=100.0 target_relocations=11 base_relocations=11"
+    },
+    {
+      "command": "jq -r '(.left.symbols[] | select(.name==\"fn_80199EBC\")) as $t | (.right.symbols[] | select(.name==\"fn_80199EBC\")) as $b | ([$t.instructions[] | select((.. | objects | has(\"relocation\")))]|length) as $tr | ([$b.instructions[] | select((.. | objects | has(\"relocation\")))]|length) as $br | \"unit=main/game/game_fn_80199EBC name=\\($t.name) target_size=\\($t.size) base_size=\\($b.size) match_percent=\\($t.match_percent) target_relocations=\\($tr) base_relocations=\\($br)\"' reports/GEDE01/objdiff-game_fn_80199EBC-session-1438-remediation-1.json",
+      "raw_output": "unit=main/game/game_fn_80199EBC name=fn_80199EBC target_size=84 base_size=84 match_percent=100.0 target_relocations=0 base_relocations=0"
+    }
+  ]
+}

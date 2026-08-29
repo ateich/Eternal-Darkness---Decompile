@@ -1,0 +1,15 @@
+{
+  "session_id": "session-1437",
+  "full_build": "passed",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "matched_function": {"name": "fn_80199ABC", "size": 200, "match_percent": 100.0, "instruction_differences": 0, "target_relocations": 4, "base_relocations": 4},
+  "assigned_attempt": {"name": "fn_80199868", "retail_size": 596, "generated_size": 596, "best_match_percent": 97.167786, "target_relocations": 11, "base_relocations": 11},
+  "headline_source": "build/GEDE01/report.json",
+  "relocation_strict_source": "reports/GEDE01/session-1437-reloc-strict.json",
+  "commands": [
+    "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80199ABC fn_80199ABC -o reports/GEDE01/objdiff-game_fn_80199ABC-session-1437.json --format json-pretty -c function_reloc_diffs=name_address",
+    "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80199868 fn_80199868 -o reports/GEDE01/objdiff-game_fn_80199868-session-1437-attempt.json --format json-pretty -c function_reloc_diffs=name_address",
+    "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1437-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "sha1sum build/GEDE01/main.dol"
+  ]
+}
