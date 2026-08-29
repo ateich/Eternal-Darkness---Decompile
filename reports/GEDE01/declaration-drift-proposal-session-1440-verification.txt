@@ -1,0 +1,38 @@
+AFFECTED_OBJECT_CANDIDATE_BUILD
+command: touch src/game/game_fn_8018F378.c && .tools/bin/ninja build/GEDE01/src/game/game_fn_8018F378.o
+raw_output:
+[1/1] MWCC build/GEDE01/src/game/game_fn_8018F378.o
+### mwcceppc.exe Usage Warning:
+#   Specified directory 'include' not found
+
+AFFECTED_OBJECT_CANDIDATE_OBJDFF
+command: build/tools/objdiff-cli diff -p . -u main/game/game_fn_8018F378 -o reports/GEDE01/objdiff-game_fn_8018F378-session-1440-remediation-1-candidate.json && jq -r '"retail_size=\(.left.symbols[0].size) generated_size=\(.right.symbols[0].size) instruction_match_percent=\(.left.symbols[0].match_percent)"' reports/GEDE01/objdiff-game_fn_8018F378-session-1440-remediation-1-candidate.json
+raw_output:
+ INFO Writing to reports/GEDE01/objdiff-game_fn_8018F378-session-1440-remediation-1-candidate.json
+retail_size=892 generated_size=904 instruction_match_percent=87.69058
+
+AFFECTED_OBJECT_RESTORED_BUILD
+command: touch src/game/game_fn_8018F378.c && .tools/bin/ninja build/GEDE01/src/game/game_fn_8018F378.o
+raw_output:
+[1/1] MWCC build/GEDE01/src/game/game_fn_8018F378.o
+### mwcceppc.exe Usage Warning:
+#   Specified directory 'include' not found
+
+AFFECTED_OBJECT_RESTORED_OBJDFF
+command: build/tools/objdiff-cli diff -p . -u main/game/game_fn_8018F378 -o reports/GEDE01/objdiff-game_fn_8018F378-session-1440-remediation-1.json && jq -r '"retail_size=\(.left.symbols[0].size) generated_size=\(.right.symbols[0].size) instruction_match_percent=\(.left.symbols[0].match_percent)"' reports/GEDE01/objdiff-game_fn_8018F378-session-1440-remediation-1.json
+raw_output:
+ INFO Writing to reports/GEDE01/objdiff-game_fn_8018F378-session-1440-remediation-1.json
+retail_size=892 generated_size=876 instruction_match_percent=90.340805
+
+FULL_DOL_BUILD
+command: .tools/bin/ninja build/GEDE01/main.dol
+raw_output:
+[530/530] DOL build/GEDE01/main.dol
+
+DOL_SHA1
+command: sha1sum build/GEDE01/main.dol
+raw_output:
+ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol
+
+POST_GATE_NOTE
+A later serial rebuild, after generated-build churn began, stopped in externalize_elf_symbol.py because game_fn_801991E0.o no longer contained local symbol @17. That later failure did not relink or alter main.dol; the SHA-1 above was rechecked after the successful DOL build.

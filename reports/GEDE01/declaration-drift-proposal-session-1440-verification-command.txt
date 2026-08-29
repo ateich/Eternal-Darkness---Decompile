@@ -1,0 +1,39 @@
+#!/bin/bash
+set -euo pipefail
+
+echo 'BUILD command=.tools/bin/ninja'
+.tools/bin/ninja
+echo 'OBJDIFF command=build/tools/objdiff-cli diff -p . -u main/game/game_fn_8018F378 fn_8018F378 -o reports/GEDE01/objdiff-game_fn_8018F378-session-1440-remediation-1.json --format json-pretty -c function_reloc_diffs=name_address'
+build/tools/objdiff-cli diff -p . -u main/game/game_fn_8018F378 fn_8018F378 -o reports/GEDE01/objdiff-game_fn_8018F378-session-1440-remediation-1.json --format json-pretty -c function_reloc_diffs=name_address
+python3 - <<'PY'
+import json
+
+for label in ('candidate', 'restored'):
+    suffix = '-candidate' if label == 'candidate' else ''
+    path = f'reports/GEDE01/objdiff-game_fn_8018F378-session-1440-remediation-1{suffix}.json'
+    report = json.load(open(path, encoding='utf-8'))
+    symbols = []
+    relocations = []
+    for side in ('left', 'right'):
+        symbol = next(item for item in report[side]['symbols'] if item.get('name') == 'fn_8018F378')
+        symbols.append(symbol)
+        records = []
+        for instruction in symbol.get('instructions', []):
+            operation = instruction['instruction']
+            relocation = operation.get('relocation')
+            if relocation is not None:
+                records.append((operation.get('address', '0'), relocation['type_name'], operation['formatted']))
+        relocations.append(records)
+    left, right = symbols
+    left_relocations, right_relocations = relocations
+    print(
+        f'{label} retail_size={left["size"]} generated_size={right["size"]} '
+        f'instruction_match_percent={left["match_percent"]} '
+        f'retail_relocations={len(left_relocations)} generated_relocations={len(right_relocations)} '
+        f'relocations_exact={left_relocations == right_relocations}'
+    )
+PY
+echo 'DOL command=sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol'
+sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol
+cmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol
+echo 'DOL cmp=equal'
