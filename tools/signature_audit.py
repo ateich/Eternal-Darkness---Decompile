@@ -336,6 +336,7 @@ def audit(
     source_root: Path,
     retail_evidence_path: Path = DEFAULT_RETAIL_EVIDENCE,
     applied_symbols: set[str] | None = None,
+    trialed_reverted_symbols: set[str] | None = None,
 ) -> dict[str, object]:
     grouped: dict[str, list[Declaration]] = defaultdict(list)
     definitions: dict[str, Definition] = {}
@@ -467,6 +468,7 @@ def audit(
         for item in ground_truth_contradictions
     }
     applied_symbols = applied_symbols or set()
+    trialed_reverted_symbols = trialed_reverted_symbols or set()
     for category, entries in categories.items():
         for entry in entries:
             sites = [
@@ -501,6 +503,11 @@ def audit(
                 entry["disposition_reason"] = (
                     "Owned-definition return evidence is high-confidence; the correction affects no more than 12 translation units and passed rebuild, objdiff, and DOL gates."
                 )
+            elif symbol in trialed_reverted_symbols:
+                entry["disposition"] = "pending"
+                entry["disposition_reason"] = (
+                    "Trialed and reverted in session-1460. No trial objdiff artifact was retained, so build movement is unverified; the cited blocking object was not an edited translation unit. The symbol remains eligible for a future correction round."
+                )
             else:
                 entry["disposition"] = "deferred"
                 if truth is None:
@@ -510,7 +517,8 @@ def audit(
                 elif category != "return_register_contradictions":
                     reason = "Deferred because this session is scoped to return-register contradictions."
                 else:
-                    reason = "Not selected for the bounded correction round; declarations remain unchanged."
+                    entry["disposition"] = "pending"
+                    reason = "High-confidence return-register contradiction at or below the 12-translation-unit bound; eligible for a future correction round and not deferred under an exception."
                 entry["disposition_reason"] = reason
     applied_corrections = []
     for symbol in sorted(applied_symbols):
@@ -616,6 +624,18 @@ def main() -> int:
         "--applied-symbol", action="append", default=[],
         help="symbol corrected and independently verified in this session",
     )
+    parser.add_argument(
+        "--trialed-reverted-symbol", action="append", default=[],
+        help="symbol trialed and reverted without retained verification evidence",
+    )
+    parser.add_argument(
+        "--correction-evidence", action="append", default=[], metavar="SYMBOL=PATH",
+        help="objdiff artifact for an applied correction (repeat per affected object)",
+    )
+    parser.add_argument(
+        "--evidence-report", type=Path,
+        help="report containing verification commands and their raw output",
+    )
     parser.add_argument("--dol-sha1", help="verified linked DOL SHA-1")
     parser.add_argument("--build-report", type=Path, help="fresh objdiff report.json")
     parser.add_argument(
@@ -624,7 +644,25 @@ def main() -> int:
     )
     args = parser.parse_args()
     source = args.source.resolve()
-    report = audit(source, args.retail_evidence.resolve(), set(args.applied_symbol))
+    report = audit(
+        source,
+        args.retail_evidence.resolve(),
+        set(args.applied_symbol),
+        set(args.trialed_reverted_symbol),
+    )
+    evidence_by_symbol: dict[str, list[str]] = defaultdict(list)
+    for value in args.correction_evidence:
+        symbol, separator, artifact = value.partition("=")
+        if not separator or not symbol or not artifact:
+            raise ValueError(f"invalid --correction-evidence value {value!r}")
+        artifact_path = (ROOT / artifact).resolve()
+        if not artifact_path.is_file():
+            raise ValueError(f"missing correction evidence artifact {artifact_path}")
+        evidence_by_symbol[symbol].append(str(artifact_path.relative_to(ROOT)))
+    for correction in report["applied_corrections"]:
+        correction["objdiff_artifacts"] = evidence_by_symbol.get(
+            str(correction["symbol"]), []
+        )
     verified_objects: list[dict[str, object]] = []
     if args.build_report is not None:
         build_report_path = args.build_report.resolve()
@@ -657,6 +695,10 @@ def main() -> int:
                 "expected_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
                 "dol_byte_change": args.dol_sha1 != "ea24b6af954876ce072562ff39cdb4c81d32be1f",
                 "affected_objects_100_percent": verified_objects,
+                "evidence_report": (
+                    str(args.evidence_report.resolve().relative_to(ROOT))
+                    if args.evidence_report is not None else None
+                ),
             },
         }
     serialized = json.dumps(report, indent=2) + "\n"

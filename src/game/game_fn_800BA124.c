@@ -5,7 +5,7 @@ typedef struct Entry {
     unsigned char state;
 } Entry;
 
-extern void fn_800A4F98(int);
+extern int fn_800A4F98(int);
 extern int fn_80201B5C(void *);
 extern int fn_80201B64(void *);
 extern void *fn_80201BC8();

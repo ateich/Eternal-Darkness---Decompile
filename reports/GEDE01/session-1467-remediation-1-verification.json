@@ -1,0 +1,35 @@
+{
+  "session_id": "session-1467-remediation-1",
+  "scope": "Review remediation only; no source, split, configure, or frontier movement.",
+  "canonical_rebuild": {
+    "command": ".tools/bin/ninja -t clean build/GEDE01/src/game/game_fn_8019E5E4.o && .tools/bin/ninja",
+    "result": "Complete canonical rebuild executed successfully; its voluminous console stream was not retained verbatim, so no build task or warning tally is claimed from it.",
+    "followup_command": ".tools/bin/ninja >/dev/null 2>&1; printf 'build_exit=%s\\n' \"$?\"",
+    "raw_output": "build_exit=0"
+  },
+  "retail_constants": {
+    "source": "orig/GEDE01/sys/main.dol",
+    "command": "python3 - <<'PY'\nimport struct\nfrom pathlib import Path\np = Path('orig/GEDE01/sys/main.dol')\nd = p.read_bytes()\nfor address in (0x80650C5C, 0x80650C68, 0x80650C6C, 0x80650C70):\n    found = False\n    for ob, ab, sb, count in ((0x00,0x48,0x90,7),(0x1C,0x64,0xAC,11)):\n        for i in range(count):\n            file_offset, start, size = (struct.unpack_from('>I', d, base + 4*i)[0] for base in (ob,ab,sb))\n            if start <= address and address + 4 <= start + size:\n                offset = file_offset + address - start\n                raw = d[offset:offset+4]\n                value = struct.unpack('>f', raw)[0]\n                print(f'lbl_{address:08X} file_offset=0x{offset:X} bytes={raw.hex().upper()} float={value.hex()}')\n                found = True\n                break\n        if found:\n            break\n    if not found:\n        print(f'lbl_{address:08X} unverified: not file-backed')\nPY",
+    "raw_output": "lbl_80650C5C file_offset=0x301D3C bytes=3FC90FDB float=0x1.921fb60000000p+0\nlbl_80650C68 file_offset=0x301D48 bytes=00000000 float=0x0.0p+0\nlbl_80650C6C file_offset=0x301D4C bytes=3C0E8A72 float=0x1.1d14e40000000p-7\nlbl_80650C70 file_offset=0x301D50 bytes=3E0F5C29 float=0x1.1eb8520000000p-3"
+  },
+  "affected_object_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8019E5E4 fn_8019E5E4 -o reports/GEDE01/objdiff-game_fn_8019E5E4-session-1467-remediation-1.json --format json-pretty -c function_reloc_diffs=name_address >/dev/null 2>&1; printf 'objdiff_exit=%s\\n' \"$?\"",
+    "raw_output": "objdiff_exit=0",
+    "measurement_command": "jq -r '[.left.symbols[]|select(.name==\"fn_8019E5E4\")|.size,.match_percent] as $l | [.right.symbols[]|select(.name==\"fn_8019E5E4\")|.size,.match_percent] as $r | ([.left.symbols[]|select(.name==\"fn_8019E5E4\")|.instructions[]|select(.instruction.relocation != null)]|length) as $lr | ([.right.symbols[]|select(.name==\"fn_8019E5E4\")|.instructions[]|select(.instruction.relocation != null)]|length) as $rr | \"left_size=\\($l[0]) right_size=\\($r[0]) left_match_percent=\\($l[1]) right_match_percent=\\($r[1]) left_relocations=\\($lr) right_relocations=\\($rr)\"' reports/GEDE01/objdiff-game_fn_8019E5E4-session-1467-remediation-1.json",
+    "measurement_raw_output": "left_size=740 right_size=740 left_match_percent=100.0 right_match_percent=100.0 left_relocations=19 right_relocations=19",
+    "relocation_comparison": "function_reloc_diffs=name_address",
+    "relocation_identity_command": "jq -r 'def relocs: . as $side | [$side.symbols[] | select(.name==\"fn_8019E5E4\") | .instructions[] | select(.instruction.relocation != null) | {address:.instruction.address,type:.instruction.relocation.type_name,target:$side.symbols[.instruction.relocation.target_symbol].name}]; (.left|relocs) as $l | (.right|relocs) as $r | \"relocation_identity_equal=\\($l==$r) relocation_entries=\\($l|length)\"' reports/GEDE01/objdiff-game_fn_8019E5E4-session-1467-remediation-1.json",
+    "relocation_identity_raw_output": "relocation_identity_equal=true relocation_entries=19"
+  },
+  "dol_hash": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+    "expected": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "equal": true
+  },
+  "headline_measurement": {
+    "command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) linked_code_bytes=\\(.measures.complete_code)\"' build/GEDE01/report.json",
+    "raw_output": "matching_objects=4064 total_objects=5585 matching_functions=3829 total_functions=8216 matching_code_bytes=602036 total_code_bytes=2300692 linked_code_bytes=602004"
+  },
+  "next_target": "0x8019E8C8"
+}

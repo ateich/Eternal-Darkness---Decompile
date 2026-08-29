@@ -4,7 +4,7 @@ typedef struct Item {
 
 extern void fn_80156290(int);
 extern Item* fn_80155EF4(void);
-extern void fn_80156480(Item*, int, int);
+extern int fn_80156480(Item*, int, int);
 
 void fn_80156EBC(void)
 {
