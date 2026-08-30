@@ -1,0 +1,9 @@
+{
+  "session_id": "session-1498",
+  "build": {"command":".tools/bin/ninja","raw_output_tail":"[546/548] DOL build/GEDE01/main.dol\n[547/548] CHECK config/GEDE01/build.sha1\nbuild/GEDE01/main.dol: OK\n[548/548] PROGRESS"},
+  "dol_sha1": {"command":"sha1sum build/GEDE01/main.dol","raw_output":"ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"},
+  "canonical_report": {"command":"build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json -f json-pretty","raw_output":"canonical matching_functions=3883 matching_objects=4118 matching_code_bytes=609320 linked_code_bytes=609288 total_code=2300692 total_functions=8216 total_objects=5660 code_percent=26.484205621612976"},
+  "relocation_strict_report": {"command":"build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1498-reloc-strict.json -f json-pretty -c function_reloc_diffs=name_address","raw_output":"strict matching_functions=3878 matching_code_bytes=607636 game_functions=3816 game_bytes=604608"},
+  "per_function_measurement": {"command":"build/tools/objdiff-cli diff -p . -u main/game/game_fn_ADDRESS fn_ADDRESS -o reports/GEDE01/objdiff-game_fn_ADDRESS-session-1498.json --format json-pretty -c function_reloc_diffs=name_address","raw_output":"fn_801A438C size=132 match=100.0 instructions=33 relocations=2; fn_801A4410 size=8 match=100.0 instructions=2 relocations=0; fn_801A4418 size=8 match=100.0 instructions=2 relocations=0; fn_801A4420 size=16 match=100.0 instructions=4 relocations=0"},
+  "byte_arithmetic": {"command":"python3 -c 'sizes=[0x84,0x8,0x8,0x10]; print(sum(sizes))'","raw_output":"164"}
+}

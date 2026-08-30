@@ -1,0 +1,22 @@
+{
+  "session_id": "session-1499",
+  "remediation": 1,
+  "range_start": "0x801A4430",
+  "range_end": "0x801A48EC",
+  "next_target": "0x801A48EC",
+  "accounting": [
+    {"symbol":"fn_801A4430","start":"0x801A4430","end":"0x801A4874","bytes":1092,"status":"NonMatching","best_objdiff_percent":91.52747,"generated_bytes":1088,"size_exact":false,"divergence":"The recovered mode-2 query result now aliases the position consumed by fn_801A4874 instead of quantizing an uninitialized array. Canonical GC/1.3 still emits a four-byte-smaller function and differs in frame/save layout, saved-register allocation, floating conversion scheduling, and relocation placement."},
+    {"symbol":"fn_801A4874","start":"0x801A4874","end":"0x801A4880","bytes":12,"status":"Matching","objdiff_percent":100.0,"instructions_equal":"3/3","relocations_equal":"0/0","assembly_reason":"The Gekko psq_st instruction stores f1 through GQR5 quantization and has no scalar C spelling or canonical MWCC intrinsic."},
+    {"symbol":"fn_801A4880","start":"0x801A4880","end":"0x801A48EC","bytes":108,"status":"Matching","objdiff_percent":100.0,"instructions_equal":"27/27","relocations_equal":"1/1"}
+  ],
+  "matched_bytes": 120,
+  "nonmatching_bytes": 1092,
+  "nonmatching_functions_added": 1,
+  "unaccounted_spans": [],
+  "measurement": {
+    "command": "jq -r '\"fn_801A4430 retail_size=\\(.left.symbols[]|select(.name==\\\"fn_801A4430\\\")|.size) generated_size=\\(.right.symbols[]|select(.name==\\\"fn_801A4430\\\")|.size) match=\\(.left.symbols[]|select(.name==\\\"fn_801A4430\\\")|.match_percent) target_relocations=\\([.left|..|objects|.relocation? // empty]|length) generated_relocations=\\([.right|..|objects|.relocation? // empty]|length)\"' reports/GEDE01/objdiff-game_fn_801A4430-session-1499.json; jq -r '\"fn_801A4874 retail_size=\\(.left.symbols[]|select(.name==\\\"fn_801A4874\\\")|.size) generated_size=\\(.right.symbols[]|select(.name==\\\"fn_801A4874\\\")|.size) match=\\(.left.symbols[]|select(.name==\\\"fn_801A4874\\\")|.match_percent) retail_instructions=\\(.left.symbols[]|select(.name==\\\"fn_801A4874\\\")|.instructions|length) generated_instructions=\\(.right.symbols[]|select(.name==\\\"fn_801A4874\\\")|.instructions|length) target_relocations=\\([.left|..|objects|.relocation? // empty]|length) generated_relocations=\\([.right|..|objects|.relocation? // empty]|length)\"' reports/GEDE01/objdiff-game_fn_801A4874-session-1499.json; jq -r '\"fn_801A4880 retail_size=\\(.left.symbols[]|select(.name==\\\"fn_801A4880\\\")|.size) generated_size=\\(.right.symbols[]|select(.name==\\\"fn_801A4880\\\")|.size) match=\\(.left.symbols[]|select(.name==\\\"fn_801A4880\\\")|.match_percent) retail_instructions=\\(.left.symbols[]|select(.name==\\\"fn_801A4880\\\")|.instructions|length) generated_instructions=\\(.right.symbols[]|select(.name==\\\"fn_801A4880\\\")|.instructions|length) target_relocations=\\([.left|..|objects|.relocation? // empty]|length) generated_relocations=\\([.right|..|objects|.relocation? // empty]|length)\"' reports/GEDE01/objdiff-game_fn_801A4880-session-1499.json",
+    "raw_output": "fn_801A4430 retail_size=1092 generated_size=1088 match=91.52747 target_relocations=41 generated_relocations=43\nfn_801A4874 retail_size=12 generated_size=12 match=100.0 retail_instructions=3 generated_instructions=3 target_relocations=0 generated_relocations=0\nfn_801A4880 retail_size=108 generated_size=108 match=100.0 retail_instructions=27 generated_instructions=27 target_relocations=1 generated_relocations=1"
+  },
+  "attempt_record": "reports/GEDE01/objdiff-game_fn_801A4430-session-1499-attempt.json",
+  "verification": "reports/GEDE01/session-1499-verification.json"
+}

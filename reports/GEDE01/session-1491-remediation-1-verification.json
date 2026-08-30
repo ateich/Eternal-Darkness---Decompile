@@ -1,0 +1,42 @@
+{
+  "session_id": "session-1491-remediation-1",
+  "scope": "Review remediation only; no source, split, build registration, or frontier advancement.",
+  "configure": {
+    "command": "python3 configure.py",
+    "exit_code": 0,
+    "raw_output": ""
+  },
+  "build": {
+    "command": "set -o pipefail; .tools/bin/ninja 2>&1 | tail -n 18; build_status=${PIPESTATUS[0]}; echo build_exit_code=$build_status",
+    "exit_code": 0,
+    "raw_output": "### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n[541/543] DOL build/GEDE01/main.dol\n[542/543] CHECK config/GEDE01/build.sha1\nbuild/GEDE01/main.dol: OK\n[543/543] PROGRESS\nProgress:\n  All: 40.15% fuzzy, 26.39% matched, 26.39% linked (4100 / 5635 files)\n    Code: 607164 / 2300692 bytes (3865 / 8216 functions)\n    Data: 34626 / 4305642 bytes (0.80%)\n  Game Code: 90.70% fuzzy, 59.52% matched, 59.52% linked (4082 / 4911 files)\n    Code: 604136 / 1015012 bytes (3803 / 4632 functions)\n    Data: 34402 / 35510 bytes (96.88%)\n  SDK/Runtime: 100.00% fuzzy, 100.00% matched, 100.00% linked (18 / 18 files)\n    Code: 3028 / 3028 bytes (62 / 62 functions)\n    Data: 224 / 224 bytes (100.00%)\nbuild_exit_code=0"
+  },
+  "fn_801A2AB4": {
+    "objdiff_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801A2AB4 fn_801A2AB4 -o reports/GEDE01/objdiff-game_fn_801A2AB4-session-1491-remediation-1.json --format json-pretty -c function_reloc_diffs=name_address",
+    "measurement_command": "jq -r '.left.symbols[] | select(.name==\"fn_801A2AB4\") | [.instructions[] | select(.instruction != null)] as $rows | \"function=fn_801A2AB4 size=\\(.size) match_percent=\\(.match_percent) retail_instruction_words=\\($rows|length) differing_retail_rows=\\([$rows[] | select((.diff_kind // \"DIFF_NONE\") != \"DIFF_NONE\")]|length) retail_relocations=\\([$rows[] | select(.instruction.relocation != null)]|length)\"' reports/GEDE01/objdiff-game_fn_801A2AB4-session-1491-remediation-1.json",
+    "measurement_raw_output": "function=fn_801A2AB4 size=280 match_percent=100.0 retail_instruction_words=70 differing_retail_rows=0 retail_relocations=0",
+    "relocation_comparison_command": "jq -n --slurpfile d reports/GEDE01/objdiff-game_fn_801A2AB4-session-1491-remediation-1.json '$d[0] as $x | ($x.left.symbols[]|select(.name==\"fn_801A2AB4\")|[.instructions[]|select(.instruction.relocation != null)|.instruction.relocation]) as $l | ($x.right.symbols[]|select(.name==\"fn_801A2AB4\")|[.instructions[]|select(.instruction.relocation != null)|.instruction.relocation]) as $r | \"function=fn_801A2AB4 retail_relocations=\\($l|length) generated_relocations=\\($r|length) relocation_records_equal=\\($l==$r)\"' -r",
+    "relocation_comparison_raw_output": "function=fn_801A2AB4 retail_relocations=0 generated_relocations=0 relocation_records_equal=true"
+  },
+  "fn_801A2BCC": {
+    "objdiff_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801A2BCC fn_801A2BCC -o reports/GEDE01/objdiff-game_fn_801A2BCC-session-1491-remediation-1.json --format json-pretty -c function_reloc_diffs=name_address",
+    "measurement_command": "jq -r '.left.symbols[] | select(.name==\"fn_801A2BCC\") | [.instructions[] | select(.instruction != null)] as $rows | \"function=fn_801A2BCC size=\\(.size) match_percent=\\(.match_percent) retail_instruction_words=\\($rows|length) differing_retail_rows=\\([$rows[] | select((.diff_kind // \"DIFF_NONE\") != \"DIFF_NONE\")]|length) retail_relocations=\\([$rows[] | select(.instruction.relocation != null)]|length)\"' reports/GEDE01/objdiff-game_fn_801A2BCC-session-1491-remediation-1.json",
+    "measurement_raw_output": "function=fn_801A2BCC size=408 match_percent=94.460785 retail_instruction_words=102 differing_retail_rows=57 retail_relocations=20",
+    "diff_kind_command": "jq -r '.left.symbols[] | select(.name==\"fn_801A2BCC\") | [.instructions[] | (.diff_kind // \"DIFF_NONE\")] | group_by(.)[] | \"\\(.[0])=\\(length)\"' reports/GEDE01/objdiff-game_fn_801A2BCC-session-1491-remediation-1.json",
+    "diff_kind_raw_output": "DIFF_ARG_MISMATCH=56\nDIFF_DELETE=1\nDIFF_INSERT=1\nDIFF_NONE=45",
+    "relocation_comparison_command": "jq -n --slurpfile d reports/GEDE01/objdiff-game_fn_801A2BCC-session-1491-remediation-1.json '$d[0] as $x | ($x.left.symbols[]|select(.name==\"fn_801A2BCC\")|[.instructions[]|select(.instruction.relocation != null)|.instruction.relocation]) as $l | ($x.right.symbols[]|select(.name==\"fn_801A2BCC\")|[.instructions[]|select(.instruction.relocation != null)|.instruction.relocation]) as $r | \"function=fn_801A2BCC retail_relocations=\\($l|length) generated_relocations=\\($r|length) relocation_records_equal=\\($l==$r)\"' -r",
+    "relocation_comparison_raw_output": "function=fn_801A2BCC retail_relocations=20 generated_relocations=20 relocation_records_equal=false",
+    "receives_matched_byte_credit": false
+  },
+  "strict_summary": {
+    "generate_command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1491-remediation-1-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "generate_raw_output": "INFO Loading project .\nINFO Generating report for 5635 units (using 8 threads)\nINFO Report generated in 0.149s\nINFO Writing to reports/GEDE01/session-1491-remediation-1-reloc-strict.json",
+    "measurement_command": "jq -r '\"strict_matching_functions=\\(.measures.matched_functions) strict_matching_code_bytes=\\(.measures.matched_code) strict_game_matching_functions=\\(.categories[]|select(.id==\"game\")|.measures.matched_functions) strict_game_matching_code_bytes=\\(.categories[]|select(.id==\"game\")|.measures.matched_code)\"' reports/GEDE01/session-1491-remediation-1-reloc-strict.json",
+    "raw_output": "strict_matching_functions=3860 strict_matching_code_bytes=605480 strict_game_matching_functions=3798 strict_game_matching_code_bytes=602452"
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+  },
+  "next_target": "0x801A2D64"
+}

@@ -1,0 +1,27 @@
+{
+  "session_id": "session-1491",
+  "range_start": "0x801A2AB4",
+  "range_end": "0x801A2D64",
+  "next_target": "0x801A2D64",
+  "matched_bytes": 280,
+  "nonmatching_bytes": 408,
+  "functions": [
+    {"name": "fn_801A2AB4", "start": "0x801A2AB4", "end": "0x801A2BCC", "size": 280, "status": "Matching", "objdiff_percent": 100.0, "relocations_equal": true},
+    {"name": "fn_801A2BCC", "start": "0x801A2BCC", "end": "0x801A2D64", "size": 408, "status": "NonMatching", "objdiff_percent": 94.460785, "divergence": "The mismatch is distributed across the first unrolled pair and the scalar tail, not confined to one load: canonical GC/1.3 changes byte/halfword load ordering, temporary-register assignment, arithmetic operand selection, and the value lifetimes feeding most halfword stores. The strict diff also reports unequal relocation records for this NonMatching object. It earns zero matched-byte credit."}
+  ],
+  "coverage": "All 688 bytes are independently owned: 280 matched bytes followed by 408 NonMatching bytes; no gap or shared reconstruction.",
+  "assembly": {"fn_801A2AB4": "psq_l, psq_lu, ps_madds0, ps_madds1 and GQR5 psq_stu have no C spelling."},
+  "remediation_1_measurements": {
+    "boundary_command": "rg -n '^fn_801A2(AB4|BCC|D64)' config/GEDE01/symbols.txt",
+    "boundary_raw_output": "6150:fn_801A2AB4 = .text:0x801A2AB4; // type:function size:0x118\n6151:fn_801A2BCC = .text:0x801A2BCC; // type:function size:0x198\n6152:fn_801A2D64 = .text:0x801A2D64; // type:function size:0x250",
+    "coverage_command": "jq -r --slurpfile a reports/GEDE01/objdiff-game_fn_801A2AB4-session-1491-remediation-1.json --slurpfile b reports/GEDE01/objdiff-game_fn_801A2BCC-session-1491-remediation-1.json '($a[0].left.symbols[]|select(.name==\"fn_801A2AB4\")|.size|tonumber) as $matched | ($b[0].left.symbols[]|select(.name==\"fn_801A2BCC\")|.size|tonumber) as $nonmatching | \"matched_bytes=\\($matched) nonmatching_bytes=\\($nonmatching) covered_bytes=\\($matched+$nonmatching)\"' -n",
+    "coverage_raw_output": "matched_bytes=280 nonmatching_bytes=408 covered_bytes=688",
+    "fn_801A2AB4_command": "jq -r '.left.symbols[] | select(.name==\"fn_801A2AB4\") | [.instructions[] | select(.instruction != null)] as $rows | \"function=fn_801A2AB4 size=\\(.size) match_percent=\\(.match_percent) retail_instruction_words=\\($rows|length) differing_retail_rows=\\([$rows[] | select((.diff_kind // \"DIFF_NONE\") != \"DIFF_NONE\")]|length) retail_relocations=\\([$rows[] | select(.instruction.relocation != null)]|length)\"' reports/GEDE01/objdiff-game_fn_801A2AB4-session-1491-remediation-1.json",
+    "fn_801A2AB4_raw_output": "function=fn_801A2AB4 size=280 match_percent=100.0 retail_instruction_words=70 differing_retail_rows=0 retail_relocations=0",
+    "fn_801A2BCC_command": "jq -r '.left.symbols[] | select(.name==\"fn_801A2BCC\") | [.instructions[] | select(.instruction != null)] as $rows | \"function=fn_801A2BCC size=\\(.size) match_percent=\\(.match_percent) retail_instruction_words=\\($rows|length) differing_retail_rows=\\([$rows[] | select((.diff_kind // \"DIFF_NONE\") != \"DIFF_NONE\")]|length) retail_relocations=\\([$rows[] | select(.instruction.relocation != null)]|length)\"' reports/GEDE01/objdiff-game_fn_801A2BCC-session-1491-remediation-1.json",
+    "fn_801A2BCC_raw_output": "function=fn_801A2BCC size=408 match_percent=94.460785 retail_instruction_words=102 differing_retail_rows=57 retail_relocations=20",
+    "fn_801A2BCC_diff_kind_command": "jq -r '.left.symbols[] | select(.name==\"fn_801A2BCC\") | [.instructions[] | (.diff_kind // \"DIFF_NONE\")] | group_by(.)[] | \"\\(.[0])=\\(length)\"' reports/GEDE01/objdiff-game_fn_801A2BCC-session-1491-remediation-1.json",
+    "fn_801A2BCC_diff_kind_raw_output": "DIFF_ARG_MISMATCH=56\nDIFF_DELETE=1\nDIFF_INSERT=1\nDIFF_NONE=45",
+    "next_target_unchanged": "0x801A2D64"
+  }
+}

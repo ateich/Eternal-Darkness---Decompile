@@ -1,0 +1,80 @@
+{
+  "session_id": "session-1490",
+  "authoritative_chain_session_id": "session-1490",
+  "assignment": "Enumerate every live Object(NonMatching, ...) registration, identify units whose fresh objdiff fuzzy_match_percent is 100.0, and reclaim only already-proven exact matches; match no new functions",
+  "starting_target": "0x801A2AB4",
+  "ending_next_target": "0x801A2AB4",
+  "frontier_changed": false,
+  "method": {
+    "registration_source": "configure.py",
+    "registration_parser": "Python AST over live Object calls: first positional argument must be the NonMatching name and second positional argument must be a constant string; this includes multiline calls and excludes comments",
+    "score_source": "build/GEDE01/report.json",
+    "score_generator": "objdiff-cli v3.6.1 report generate",
+    "join_key": "configure.py object path to objdiff metadata.source_path after removing the src/ prefix",
+    "candidate_prefilter": "unit measures.fuzzy_match_percent == 100.0",
+    "reclaim_gate": "A prefiltered candidate may be changed to Matching only when fresh section-level objdiff evidence proves all retail code and data sections exact, including relocations and generated section ownership and size, followed by the exact-link and retail-DOL SHA-1 gates"
+  },
+  "inventory": {
+    "unique_nonmatching_registrations_before": 828,
+    "unique_nonmatching_registrations_after": 828,
+    "duplicate_nonmatching_registrations": 0,
+    "objdiff_units_examined": 5633,
+    "registered_nonmatching_objects_examined": 828,
+    "mapped_nonmatching_registrations": 828,
+    "unmapped_nonmatching_registrations": 0,
+    "unit_fuzzy_100_prefilter_candidates": 0,
+    "exact_section_100_candidates": 0,
+    "reclaimed_registered_objects": 0,
+    "retained_nonmatching_objects": 828,
+    "registered_nonmatching_retail_code_bytes_before": 410500,
+    "registered_nonmatching_retail_data_bytes_before": 984,
+    "registered_nonmatching_retail_code_bytes_after": 410500,
+    "registered_nonmatching_retail_data_bytes_after": 984
+  },
+  "candidates": [],
+  "outcome": "No live NonMatching registration has aggregate fuzzy_match_percent 100.0 in the fresh report. No registration or source was changed, no bytes were reclaimed, and no new function was matched.",
+  "matched_byte_accounting": {
+    "before": {
+      "matched_code_bytes": 606884,
+      "matched_data_bytes": 34626,
+      "matched_total_bytes": 641510,
+      "complete_code_bytes": 606852,
+      "complete_data_bytes": 34750,
+      "complete_units": 4099,
+      "total_units": 5633
+    },
+    "after": {
+      "matched_code_bytes": 606884,
+      "matched_data_bytes": 34626,
+      "matched_total_bytes": 641510,
+      "complete_code_bytes": 606852,
+      "complete_data_bytes": 34750,
+      "complete_units": 4099,
+      "total_units": 5633
+    },
+    "delta": {
+      "matched_code_bytes": 0,
+      "matched_data_bytes": 0,
+      "matched_total_bytes": 0,
+      "complete_code_bytes": 0,
+      "complete_data_bytes": 0,
+      "complete_units": 0,
+      "nonmatching_registrations": 0,
+      "registered_nonmatching_retail_code_bytes": 0,
+      "registered_nonmatching_retail_data_bytes": 0,
+      "reclaimed_functions": 0
+    },
+    "terminology": "Matched measures are objdiff report byte measures. Complete measures and unit counts are included separately because they are not interchangeable with matched-byte accounting or configure.py registration counts."
+  },
+  "verification": {
+    "report_command": ".tools/bin/ninja build/GEDE01/report.json",
+    "report_sha256": "b6ef73f854f22da1f78e330947aeff1f18e0a6e0a6e3cd2b9c56b987752c0cae",
+    "build_command": ".tools/bin/ninja build/GEDE01/ok",
+    "build_gate_passed": true,
+    "objdiff_version": "3.6.1",
+    "dol_sha1_expected": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "dol_sha1_actual": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "retail_dol_sha1_actual": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "dol_sha1_unchanged": true
+  }
+}

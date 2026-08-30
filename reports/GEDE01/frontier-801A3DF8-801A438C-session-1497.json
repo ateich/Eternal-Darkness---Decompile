@@ -1,0 +1,48 @@
+{
+  "session_id": "session-1497",
+  "range_start": "0x801A3DF8",
+  "range_end": "0x801A438C",
+  "accounted_bytes": 1428,
+  "matched_bytes": 236,
+  "nonmatching_bytes": 1192,
+  "functions": [
+    {
+      "name": "fn_801A3DF8",
+      "start": "0x801A3DF8",
+      "end": "0x801A42A0",
+      "size": 1192,
+      "status": "NonMatching",
+      "objdiff_percent": 43.016777,
+      "generated_size": 620,
+      "divergence": "The current honest-C body is incomplete: it emits only part of the retail function. Canonical GC/1.3 also preserves r21-r31 plus f31 in a 0x60-byte frame and schedules channel iteration, interpolation calls, state masks, event dispatch, and audio-state branches differently."
+    },
+    {
+      "name": "fn_801A42A0",
+      "start": "0x801A42A0",
+      "end": "0x801A438C",
+      "size": 236,
+      "status": "Matching",
+      "objdiff_percent": 100.0,
+      "retail_instructions": 59,
+      "relocation_count": 15,
+      "relocations_equal": true
+    }
+  ],
+  "next_target": "0x801A438C",
+  "gaps": [],
+  "assembly_added": [],
+  "remediation_1_measurements": {
+    "range_accounting": {
+      "command": "python3 -c 'start=int(\"801A3DF8\",16); split=int(\"801A42A0\",16); end=int(\"801A438C\",16); print(f\"accounted_bytes={end-start} matched_bytes={end-split} nonmatching_bytes={split-start}\")'",
+      "raw_output": "accounted_bytes=1428 matched_bytes=236 nonmatching_bytes=1192"
+    },
+    "fn_801A3DF8": {
+      "command": "jq -r '[.left,.right][] | .symbols[] | select(.name==\"fn_801A3DF8\") | \"name=\\(.name) size=\\(.size) match_percent=\\(.match_percent) relocation_annotations=\\([.instructions[] | select(.instruction.relocation? != null)]|length)\"' reports/GEDE01/objdiff-game_fn_801A3DF8-session-1497-remediation-1.json",
+      "raw_output": "name=fn_801A3DF8 size=1192 match_percent=43.016777 relocation_annotations=39\nname=fn_801A3DF8 size=620 match_percent=43.016777 relocation_annotations=15"
+    },
+    "fn_801A42A0": {
+      "command": "jq -r '[.left,.right][] | .symbols[] | select(.name==\"fn_801A42A0\") | \"name=\\(.name) size=\\(.size) match_percent=\\(.match_percent) instruction_rows=\\(.instructions|length) relocation_annotations=\\([.instructions[] | select(.instruction.relocation? != null)]|length)\"' reports/GEDE01/objdiff-game_fn_801A42A0-session-1497-remediation-1.json",
+      "raw_output": "name=fn_801A42A0 size=236 match_percent=100.0 instruction_rows=59 relocation_annotations=15\nname=fn_801A42A0 size=236 match_percent=100.0 instruction_rows=59 relocation_annotations=15"
+    }
+  }
+}
