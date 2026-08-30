@@ -1,0 +1,26 @@
+{
+  "session_id": "session-1535-remediation-1",
+  "scope": "Review remediation only; no frontier movement or unrelated reconstruction.",
+  "affected_object_commands": [
+    "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801A7F94 -c function_reloc_diffs=name_address -o reports/GEDE01/objdiff-game_fn_801A7F94-session-1535-remediation-1.json --format json-pretty fn_801A7F94",
+    "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801A8024 -c function_reloc_diffs=name_address -o reports/GEDE01/objdiff-game_fn_801A8024-session-1535-remediation-1.json --format json-pretty fn_801A8024"
+  ],
+  "affected_object_raw_output": " INFO Writing to reports/GEDE01/objdiff-game_fn_801A7F94-session-1535-remediation-1.json\n INFO Writing to reports/GEDE01/objdiff-game_fn_801A8024-session-1535-remediation-1.json",
+  "canonical_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json --format json-pretty",
+    "raw_output": " INFO Loading project .\n INFO Generating report for 5847 units (using 8 threads)\n INFO Report generated in 0.142s\n INFO Writing to build/GEDE01/report.json",
+    "measurement_command": "jq -c '{matching_functions:.measures.matched_functions,matching_objects:.measures.complete_units,matching_code_bytes:.measures.matched_code,linked_code_bytes:.measures.complete_code}' build/GEDE01/report.json",
+    "measurement_raw_output": "{\"matching_functions\":4050,\"matching_objects\":4285,\"matching_code_bytes\":\"619308\",\"linked_code_bytes\":\"619276\"}"
+  },
+  "relocation_strict_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -c function_reloc_diffs=name_address -o reports/GEDE01/session-1535-remediation-1-reloc-strict.json --format json-pretty",
+    "raw_output": " INFO Loading project .\n INFO Generating report for 5847 units (using 8 threads)\n INFO Report generated in 0.136s\n INFO Writing to reports/GEDE01/session-1535-remediation-1-reloc-strict.json",
+    "measurement_command": "jq -c '{matching_functions:.measures.matched_functions,matching_code_bytes:.measures.matched_code,game_matching_functions:([.categories[]|select(.id==\"game\")][0].measures.matched_functions),game_matching_code_bytes:([.categories[]|select(.id==\"game\")][0].measures.matched_code)}' reports/GEDE01/session-1535-remediation-1-reloc-strict.json",
+    "measurement_raw_output": "{\"matching_functions\":4045,\"matching_code_bytes\":\"617624\",\"game_matching_functions\":3983,\"game_matching_code_bytes\":\"614596\"}"
+  },
+  "dol_identity": {
+    "command": "sha1sum -c config/GEDE01/build.sha1\nsha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol\ncmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol; printf 'cmp_exit=%s\\n' \"$?\"",
+    "raw_output": "build/GEDE01/main.dol: OK\nea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol\ncmp_exit=0"
+  },
+  "next_target": "0x801A8070"
+}

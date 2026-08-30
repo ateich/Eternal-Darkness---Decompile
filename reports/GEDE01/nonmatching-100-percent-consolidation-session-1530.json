@@ -1,0 +1,104 @@
+{
+  "session_id": "session-1530",
+  "authoritative_chain_session_id": "session-1530",
+  "assignment": "Enumerate every live Object(NonMatching, ...) registration, identify units whose fresh objdiff fuzzy_match_percent is 100.0, and reclaim only already-proven exact matches; match no new functions",
+  "starting_target": "0x801A77F8",
+  "ending_next_target": "0x801A77F8",
+  "frontier_changed": false,
+  "method": {
+    "registration_source": "configure.py",
+    "registration_parser": "All live Object(NonMatching, ...) path registrations extracted from configure.py and deduplicated before joining to objdiff unit names",
+    "score_source": "build/GEDE01/report.json",
+    "score_generator": "objdiff-cli v3.6.1 report generate",
+    "join_key": "configure.py object path to objdiff unit name after removing the main/ prefix and restoring the .c suffix",
+    "candidate_prefilter": "unit measures.fuzzy_match_percent == 100.0",
+    "reclaim_gate": "A prefiltered candidate is changed to Matching only after compiler-local section ownership is reconciled to verified retail symbols, relocation-strict objdiff is 100.0, and the exact-link and retail-DOL SHA-1 gates pass"
+  },
+  "inventory": {
+    "unique_nonmatching_registrations_before": 825,
+    "unique_nonmatching_registrations_after": 824,
+    "duplicate_nonmatching_registrations": 0,
+    "objdiff_units_examined": 5827,
+    "registered_nonmatching_objects_examined": 825,
+    "mapped_nonmatching_registrations_before": 825,
+    "unmapped_nonmatching_registrations_before": 0,
+    "unit_fuzzy_100_prefilter_candidates": 1,
+    "exact_section_100_candidates": 1,
+    "reclaimed_registered_objects": 1,
+    "retained_nonmatching_objects": 824,
+    "registered_nonmatching_retail_code_bytes_before": 390112,
+    "registered_nonmatching_retail_data_bytes_before": 976,
+    "registered_nonmatching_retail_code_bytes_after": 389452,
+    "registered_nonmatching_retail_data_bytes_after": 976
+  },
+  "candidates": [
+    {
+      "object": "game/game_fn_801A4CE0.c",
+      "function": "fn_801A4CE0",
+      "retail_code_bytes": 660,
+      "retail_data_bytes": 0,
+      "fresh_fuzzy_match_percent": 100.0,
+      "fresh_relocation_strict_match_percent": 100.0,
+      "registration_before": "NonMatching",
+      "registration_after": "Matching",
+      "constant_ownership": {
+        "compiler_local_at_33": "lbl_80650D90",
+        "compiler_local_at_35": "lbl_80650D88",
+        "verification": "tools/externalize_elf_symbol.py verified both complete file-backed eight-byte values against the big-endian retail DOL before .sdata2 removal and symbol externalization"
+      },
+      "evidence": "reports/GEDE01/objdiff-game_fn_801A4CE0-session-1530.json"
+    }
+  ],
+  "outcome": "One already instruction-matched unit was reclaimed. Its two compiler-local conversion constants were externalized to the corresponding retail .sdata2 symbols, making relocation targets and section ownership exact without changing the C reconstruction or matching any new function.",
+  "matched_byte_accounting": {
+    "before": {
+      "matched_code_bytes": 618668,
+      "matched_data_bytes": 34626,
+      "matched_total_bytes": 653294,
+      "complete_code_bytes": 617976,
+      "complete_data_bytes": 34750,
+      "complete_units": 4271,
+      "relocation_strict_matched_code_bytes": 616324,
+      "total_units": 5827
+    },
+    "after": {
+      "matched_code_bytes": 618668,
+      "matched_data_bytes": 34626,
+      "matched_total_bytes": 653294,
+      "complete_code_bytes": 618636,
+      "complete_data_bytes": 34750,
+      "complete_units": 4272,
+      "relocation_strict_matched_code_bytes": 616984,
+      "total_units": 5827
+    },
+    "delta": {
+      "matched_code_bytes": 0,
+      "matched_data_bytes": 0,
+      "matched_total_bytes": 0,
+      "complete_code_bytes": 660,
+      "complete_data_bytes": 0,
+      "complete_units": 1,
+      "relocation_strict_matched_code_bytes": 660,
+      "nonmatching_registrations": -1,
+      "registered_nonmatching_retail_code_bytes": -660,
+      "registered_nonmatching_retail_data_bytes": 0,
+      "reclaimed_functions": 1
+    },
+    "terminology": "Canonical matched measures already credited the instruction bytes while the object was NonMatching. This consolidation therefore adds zero canonical fuzzy-matched bytes but reclaims 660 linked and relocation-strict matched code bytes."
+  },
+  "verification": {
+    "configure_command": "python3 configure.py",
+    "build_command": ".tools/bin/ninja build/GEDE01/ok build/GEDE01/report.json",
+    "build_gate_passed": true,
+    "canonical_report_sha256": "aaf4ba338b62b659b9f8f638f07e6f6800d16f8d1e9d5a79c0b375e91cbf607f",
+    "relocation_strict_command": "build/tools/objdiff-cli report generate -p . -c function_reloc_diffs=name_address -o reports/GEDE01/session-1530-reloc-strict.json --format json-pretty",
+    "relocation_strict_report_sha256": "9ec3158252bcb62521a51c723e53d773d0033fc1e2328ae333affee2f453262d",
+    "object_evidence_sha256": "ac70f0d092a25f19aeaad21f1fad79e16db510d4f9632f8f97e3e18495c4e940",
+    "objdiff_version": "3.6.1",
+    "dol_sha1_expected": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "dol_sha1_actual": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "retail_dol_sha1_actual": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "dol_byte_compare_exit": 0,
+    "dol_sha1_unchanged": true
+  }
+}

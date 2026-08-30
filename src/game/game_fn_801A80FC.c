@@ -1,0 +1,22 @@
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned long u32;
+
+extern void* memcpy(void*, const void*, unsigned long);
+
+u32 fn_801A80FC(u8* destination, u16 count, u8* input)
+{
+    u16 limit = count;
+    u8* source = input;
+    u32 size = 0;
+    int index = 0;
+
+    while (index < limit) {
+        memcpy(destination + (u16)size, source + 0x68, 4);
+        size += 4;
+        source += 0x74;
+        index++;
+    }
+
+    return (size + 0x1F) & 0xFFE0;
+}

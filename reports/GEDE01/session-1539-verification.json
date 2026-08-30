@@ -1,0 +1,53 @@
+{
+  "session_id": "session-1539",
+  "build": {
+    "command": ".tools/bin/ninja",
+    "result": "success",
+    "dol_check_output": "build/GEDE01/main.dol: OK"
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+  },
+  "canonical_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json --format json-pretty",
+    "raw_output": "INFO Loading project .\nINFO Generating report for 5860 units (using 8 threads)\nINFO Report generated in 0.138s\nINFO Writing to build/GEDE01/report.json",
+    "matching_objects": 4293,
+    "total_objects": 5860,
+    "matching_functions": 4058,
+    "total_functions": 8216,
+    "matching_code_bytes": 620340,
+    "total_code_bytes": 2300692,
+    "linked_code_bytes": 620308
+  },
+  "relocation_strict_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -c function_reloc_diffs=name_address -o reports/GEDE01/session-1539-reloc-strict.json --format json-pretty",
+    "raw_output": "INFO Loading project .\nINFO Generating report for 5860 units (using 8 threads)\nINFO Report generated in 0.143s\nINFO Writing to reports/GEDE01/session-1539-reloc-strict.json",
+    "matching_functions": 4053,
+    "matching_code_bytes": 618656,
+    "game_matching_functions": 3991,
+    "game_matching_code_bytes": 615628
+  },
+  "function_checks": [
+    {
+      "symbol": "fn_801A85D4",
+      "split_range": "0x801A85D4-0x801A8660",
+      "split_size": 140,
+      "objdiff_size": 140,
+      "strict_match_percent": 82.0,
+      "matched_credit": 0
+    },
+    {
+      "symbol": "fn_801A8660",
+      "split_range": "0x801A8660-0x801A872C",
+      "split_size": 204,
+      "objdiff_size": 204,
+      "strict_match_percent": 100.0,
+      "relocation_instructions_equal": "8/8",
+      "matched_credit": 204
+    }
+  ],
+  "matched_byte_arithmetic": "204 = 204",
+  "nonmatching_accounting": "one newly registered NonMatching function, fn_801A85D4, owning 140 bytes and earning zero matched-byte credit",
+  "assembly_added": false
+}

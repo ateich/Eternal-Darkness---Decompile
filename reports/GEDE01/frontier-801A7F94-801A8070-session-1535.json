@@ -1,0 +1,37 @@
+{
+  "session_id": "session-1535-remediation-1",
+  "range_start": "0x801A7F94",
+  "range_end": "0x801A8070",
+  "next_target": "0x801A8070",
+  "accounted_bytes": 220,
+  "matched_bytes": 144,
+  "nonmatching_bytes": 76,
+  "functions": [
+    {
+      "symbol": "fn_801A7F94",
+      "range": "0x801A7F94-0x801A8024",
+      "size": 144,
+      "status": "Matching",
+      "strict_match_percent": 100.0,
+      "evidence": "reports/GEDE01/objdiff-game_fn_801A7F94-session-1535-remediation-1.json"
+    },
+    {
+      "symbol": "fn_801A8024",
+      "range": "0x801A8024-0x801A8070",
+      "size": 76,
+      "status": "NonMatching",
+      "strict_match_percent": 89.1579,
+      "divergence": "The widened u32 return and removal of the spurious u16 cast make the final clrrwi r3,r0,5 instruction identical to retail. The remaining divergence is epilogue scheduling: retail restores r31 before mulli/addi/clrrwi, while canonical GC/1.3 restores r31 after that arithmetic.",
+      "evidence": "reports/GEDE01/objdiff-game_fn_801A8024-session-1535-remediation-1.json"
+    }
+  ],
+  "function_measurement": {
+    "command": "jq -c '{symbol:(.left.symbols[0].name),retail_bytes:(.left.symbols[0].size|tonumber),generated_bytes:(.right.symbols[0].size|tonumber),match_percent:.left.symbols[0].match_percent,left_diff_nodes:([.left.symbols[0].instructions[]|select(.diff_kind!=null)]|length),right_diff_nodes:([.right.symbols[0].instructions[]|select(.diff_kind!=null)]|length),left_relocations:([.left.symbols[0].instructions[]|select(.instruction.relocation!=null)]|length),right_relocations:([.right.symbols[0].instructions[]|select(.instruction.relocation!=null)]|length)}' reports/GEDE01/objdiff-game_fn_801A7F94-session-1535-remediation-1.json reports/GEDE01/objdiff-game_fn_801A8024-session-1535-remediation-1.json",
+    "raw_output": "{\"symbol\":\"fn_801A7F94\",\"retail_bytes\":144,\"generated_bytes\":144,\"match_percent\":100.0,\"left_diff_nodes\":0,\"right_diff_nodes\":0,\"left_relocations\":2,\"right_relocations\":2}\n{\"symbol\":\"fn_801A8024\",\"retail_bytes\":76,\"generated_bytes\":76,\"match_percent\":89.1579,\"left_diff_nodes\":3,\"right_diff_nodes\":3,\"left_relocations\":1,\"right_relocations\":1}"
+  },
+  "tail_instruction_measurement": {
+    "command": "jq -r '\"side\\toffset\\tinstruction\\tdiff\", (.left.symbols[]|select(.name==\"fn_801A8024\")|.instructions[]|select((.instruction.address|tonumber?) >= 40)|[\"retail\",.instruction.address,.instruction.formatted,(.diff_kind//\"equal\")]|@tsv), (.right.symbols[]|select(.name==\"fn_801A8024\")|.instructions[]|select((.instruction.address|tonumber?) >= 40)|[\"generated\",.instruction.address,.instruction.formatted,(.diff_kind//\"equal\")]|@tsv)' reports/GEDE01/objdiff-game_fn_801A8024-session-1535-remediation-1.json",
+    "raw_output": "side\toffset\tinstruction\tdiff\nretail\t40\tlhz r0, 0x10(r31)\tequal\nretail\t44\tlwz r31, 0xc(r1)\tDIFF_DELETE\nretail\t48\tmulli r3, r0, 0x74\tequal\nretail\t52\taddi r0, r3, 0x1f\tequal\nretail\t56\tclrrwi r3, r0, 5\tequal\nretail\t60\tlwz r0, 0x14(r1)\tDIFF_ARG_MISMATCH\nretail\t64\tmtlr r0\tequal\nretail\t68\taddi r1, r1, 0x10\tequal\nretail\t72\tblr \tequal\ngenerated\t40\tlhz r0, 0x10(r31)\tequal\ngenerated\t44\tmulli r3, r0, 0x74\tequal\ngenerated\t48\taddi r0, r3, 0x1f\tequal\ngenerated\t52\tclrrwi r3, r0, 5\tequal\ngenerated\t56\tlwz r31, 0xc(r1)\tDIFF_ARG_MISMATCH\ngenerated\t60\tlwz r0, 0x14(r1)\tDIFF_INSERT\ngenerated\t64\tmtlr r0\tequal\ngenerated\t68\taddi r1, r1, 0x10\tequal\ngenerated\t72\tblr \tequal"
+  },
+  "accounting": "Every byte in the declared range remains owned by one independent honest-C translation unit. There is no interior gap, shared reconstruction, assembly, matched-byte increase, or frontier movement. The matched and NonMatching byte figures are the two retail_bytes values in function_measurement; their sum is the recorded accounted_bytes figure."
+}
