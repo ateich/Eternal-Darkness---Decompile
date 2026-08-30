@@ -6,12 +6,17 @@ import struct
 import sys
 from pathlib import Path
 
-if len(sys.argv) not in (3, 5):
-    raise SystemExit(f"usage: {sys.argv[0]} OBJECT LOCAL_SYMBOL [RETAIL_SYMBOL RETAIL_DOL]")
-path = Path(sys.argv[1])
-target = sys.argv[2]
-retail_target = sys.argv[3] if len(sys.argv) == 5 else None
-retail_dol = Path(sys.argv[4]) if retail_target else None
+require_whole_section = sys.argv[-1:] == ["--require-whole-section"]
+args = sys.argv[:-1] if require_whole_section else sys.argv
+if len(args) not in (3, 5):
+    raise SystemExit(
+        f"usage: {sys.argv[0]} OBJECT LOCAL_SYMBOL [RETAIL_SYMBOL RETAIL_DOL] "
+        "[--require-whole-section]"
+    )
+path = Path(args[1])
+target = args[2]
+retail_target = args[3] if len(args) == 5 else None
+retail_dol = Path(args[4]) if retail_target else None
 data = bytearray(path.read_bytes())
 
 if data[:6] != b"\x7fELF\x01\x02":
@@ -63,7 +68,7 @@ for section_index in range(section_count):
         if data[name_start:name_end].decode("ascii") == target:
             symbol_value, symbol_size = struct.unpack_from(">II", data, entry + 4)
             symbol_section = struct.unpack_from(">H", data, entry + 0x0E)[0]
-            if retail_target:
+            if retail_target or require_whole_section:
                 if symbol_size == 0 or symbol_section == 0 or symbol_section >= section_count:
                     raise SystemExit(f"{path}: {target} has no file-backed value")
                 section_header = section_offset + symbol_section * section_size
@@ -72,6 +77,15 @@ for section_index in range(section_count):
                 value_section_size = struct.unpack_from(">I", data, section_header + 0x14)[0]
                 if value_section_type == 8 or symbol_value + symbol_size > value_section_size:
                     raise SystemExit(f"{path}: {target} has no complete file-backed value")
+                if require_whole_section and (
+                    symbol_value != 0 or symbol_size != value_section_size
+                ):
+                    raise SystemExit(
+                        f"{path}: refusing whole-section removal: {target} covers "
+                        f"[0x{symbol_value:X}, 0x{symbol_value + symbol_size:X}), "
+                        f"section size is 0x{value_section_size:X}"
+                    )
+            if retail_target:
                 address_match = re.fullmatch(r".*_([0-9A-Fa-f]{8})", retail_target)
                 if not address_match:
                     raise SystemExit(f"invalid addressed retail symbol {retail_target!r}")

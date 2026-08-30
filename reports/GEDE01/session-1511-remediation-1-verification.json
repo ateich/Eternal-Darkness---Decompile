@@ -1,0 +1,24 @@
+{
+  "session_id": "session-1511-remediation-1",
+  "scope": "Review correction only at fn_801A5FB0; frontier unchanged",
+  "object_measurement": {
+    "command": "python3 - <<'PY'\nimport json\np='reports/GEDE01/objdiff-game_fn_801A5FB0-session-1511-remediation-1.json';d=json.load(open(p))\nfor side in ('left','right'):\n s=next(x for x in d[side]['symbols'] if x['name']=='fn_801A5FB0')\n dif=[x for x in s['instructions'] if x.get('diff_kind') not in (None,'DIFF_NONE')]\n rel=[x for x in s['instructions'] if x.get('instruction',{}).get('relocation')]\n print(f'{side}_size={s[\"size\"]} match_percent={s.get(\"match_percent\")} instruction_rows={len(s[\"instructions\"])} differing_rows={len(dif)} relocations={len(rel)}')\nPY",
+    "raw_output": "left_size=928 match_percent=98.706894 instruction_rows=234 differing_rows=10 relocations=48\nright_size=936 match_percent=98.706894 instruction_rows=234 differing_rows=10 relocations=48"
+  },
+  "canonical_measurement": {
+    "command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report.json",
+    "raw_output": "matching_objects=4157 total_objects=5707 matching_functions=3923 total_functions=8216 matching_code_bytes=613672 total_code_bytes=2300692 matching_data_bytes=34626 total_data_bytes=4305642 linked_code_bytes=612980 linked_data_bytes=34750"
+  },
+  "category_measurement": {
+    "command": "jq -r '(.measures.matched_code|tonumber) as $mc | (.measures.total_code|tonumber) as $tc | (.measures.matched_functions|tonumber) as $mf | (.measures.total_functions|tonumber) as $tf | [.categories[]|select(.id==\"game\")|.measures.matched_code] as $gmc | [.categories[]|select(.id==\"game\")|.measures.total_code] as $gtc | [.categories[]|select(.id==\"game\")|.measures.complete_code] as $gcc | [.categories[]|select(.id==\"sdk\")|.measures.matched_code] as $smc | [.categories[]|select(.id==\"sdk\")|.measures.total_code] as $stc | [.categories[]|select(.id==\"sdk\")|.measures.complete_units] as $scu | [.categories[]|select(.id==\"sdk\")|.measures.total_units] as $stu | \"code_percent=\\($mc*100/$tc) function_percent=\\($mf*100/$tf) game_code_matching_bytes=\\($gmc[0]) game_code_total_bytes=\\($gtc[0]) game_code_linked_bytes=\\($gcc[0]) sdk_code_matching_bytes=\\($smc[0]) sdk_code_total_bytes=\\($stc[0]) sdk_objects_complete=\\($scu[0]) sdk_objects_total=\\($stu[0])\"' build/GEDE01/report.json",
+    "raw_output": "code_percent=26.673366100286348 function_percent=47.748296007789676 game_code_matching_bytes=610644 game_code_total_bytes=1028816 game_code_linked_bytes=609952 sdk_code_matching_bytes=3028 sdk_code_total_bytes=3028 sdk_objects_complete=18 sdk_objects_total=18"
+  },
+  "relocation_strict_measurement": {
+    "command": "jq -c '{matching_functions:.measures.matched_functions,matching_code_bytes:.measures.matched_code,game_matching_functions:([.categories[]|select(.id==\"game\")][0].measures.matched_functions),game_matching_code_bytes:([.categories[]|select(.id==\"game\")][0].measures.matched_code)}' reports/GEDE01/session-1511-remediation-1-reloc-strict.json",
+    "raw_output": "{\"matching_functions\":3917,\"matching_code_bytes\":\"611328\",\"game_matching_functions\":3855,\"game_matching_code_bytes\":\"608300\"}"
+  },
+  "dol_sha1_measurement": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+  }
+}

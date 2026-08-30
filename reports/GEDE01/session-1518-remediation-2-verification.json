@@ -1,0 +1,36 @@
+{
+  "session_id": "session-1518-remediation-2",
+  "scope": "Evidence-integrity remediation only; no source reconstruction, progress-accounting change, or frontier movement",
+  "guard_correction": {
+    "description": "The whole-section ownership check now runs whenever --require-whole-section is present, independently of whether retail comparison arguments are present.",
+    "command": "python3 -m py_compile tools/externalize_elf_symbol.py configure.py\nmkdir -p build/GEDE01/remediation-2-tests\ncp build/GEDE01/src/game/game_fn_8000755C.o build/GEDE01/remediation-2-tests/three-arg.o\ncp build/GEDE01/src/game/game_fn_8000755C.o build/GEDE01/remediation-2-tests/five-arg.o\nset +e\npython3 tools/externalize_elf_symbol.py build/GEDE01/remediation-2-tests/three-arg.o @60 --require-whole-section 2>&1\nthree_status=$?\npython3 tools/externalize_elf_symbol.py build/GEDE01/remediation-2-tests/five-arg.o @60 lbl_8023B0B0 orig/GEDE01/sys/main.dol --require-whole-section 2>&1\nfive_status=$?\nprintf 'three_arg_exit_status=%s\\nfive_arg_exit_status=%s\\n' \"$three_status\" \"$five_status\"\ntest \"$three_status\" -ne 0 && test \"$five_status\" -ne 0",
+    "raw_output": "build/GEDE01/remediation-2-tests/three-arg.o: refusing whole-section removal: @60 covers [0x0, 0x44), section size is 0x1EC\nbuild/GEDE01/remediation-2-tests/five-arg.o: refusing whole-section removal: @60 covers [0x0, 0x44), section size is 0x1EC\nthree_arg_exit_status=1\nfive_arg_exit_status=1"
+  },
+  "rodata_rule_correction": {
+    "description": "externalize_game_flags_4 now supplies lbl_80237F2C and the retail DOL and requires whole-section ownership before removing .rodata. Its real build step completed during the recorded rebuild."
+  },
+  "build": {
+    "command": "set -o pipefail; .tools/bin/ninja build/GEDE01/main.dol build/GEDE01/report.json 2>&1 | tail -n 1",
+    "raw_output": "[551/551] DOL build/GEDE01/main.dol"
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+    "expected": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "equal": true
+  },
+  "per_function_objdiff_generation": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_800119FC fn_800119FC -o reports/GEDE01/objdiff-game_fn_800119FC-session-1518-remediation-2.json --format json\nbuild/tools/objdiff-cli diff -p . -u main/game/game_fn_801A6C58 fn_801A6C58 -o reports/GEDE01/objdiff-game_fn_801A6C58-session-1518-remediation-2.json --format json\nbuild/tools/objdiff-cli diff -p . -u main/game/game_fn_801A6CB4 fn_801A6CB4 -o reports/GEDE01/objdiff-game_fn_801A6CB4-session-1518-remediation-2.json --format json",
+    "raw_output": " INFO Writing to reports/GEDE01/objdiff-game_fn_800119FC-session-1518-remediation-2.json\n INFO Writing to reports/GEDE01/objdiff-game_fn_801A6C58-session-1518-remediation-2.json\n INFO Writing to reports/GEDE01/objdiff-game_fn_801A6CB4-session-1518-remediation-2.json"
+  },
+  "per_function_measurement": {
+    "command": "python3 - <<'PY'\nimport json\nfor name in ('800119FC', '801A6C58', '801A6CB4'):\n    path = f'reports/GEDE01/objdiff-game_fn_{name}-session-1518-remediation-2.json'\n    data = json.load(open(path))\n    sides = []\n    for side in ('left', 'right'):\n        symbol = next(s for s in data[side]['symbols'] if s['name'] == f'fn_{name}')\n        relocations = []\n        for offset, row in enumerate(symbol['instructions']):\n            ins = row['instruction']\n            reloc = ins.get('relocation')\n            if reloc:\n                relocations.append((offset * 4, ins['formatted'], reloc.get('type_name'), reloc.get('addend', '0')))\n        sides.append((symbol, relocations))\n    target, base = sides\n    differences = sum(row.get('diff_kind') not in (None, 'DIFF_NONE') for row in target[0]['instructions'])\n    print(f'fn_{name} target_size={target[0][\"size\"]} base_size={base[0][\"size\"]} match_percent={target[0][\"match_percent\"]} instruction_differences={differences} relocations_equal={target[1] == base[1]}')\nPY",
+    "raw_output": "fn_800119FC target_size=344 base_size=344 match_percent=100.0 instruction_differences=0 relocations_equal=True\nfn_801A6C58 target_size=92 base_size=92 match_percent=100.0 instruction_differences=0 relocations_equal=True\nfn_801A6CB4 target_size=92 base_size=92 match_percent=100.0 instruction_differences=0 relocations_equal=True"
+  },
+  "frontier_invariance": {
+    "command": "rg -n 'next_target' reports/GEDE01/progress.json reports/GEDE01/frontier-801A6C58-801A6D10-session-1518.json",
+    "raw_output": "reports/GEDE01/frontier-801A6C58-801A6D10-session-1518.json:5:  \"next_target\": \"0x801A6D10\",\nreports/GEDE01/progress.json:1549:  \"next_target\": \"0x801A6D10\"",
+    "progress_json_changed": false,
+    "frontier_report_changed": false
+  }
+}

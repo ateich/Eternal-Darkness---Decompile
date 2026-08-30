@@ -2,10 +2,10 @@
   "schema_version": 2,
   "scope": "Distinct MWCC code-generation behaviors documented in reports/GEDE01/progress.json open_items and docs/matching.md",
   "source_snapshot": {
-    "repository_revision": "ba2b75aa1de39ffa1b2e9ef59ee8e4cad9d97b04",
-    "next_target": "0x8019F228",
+    "repository_revision": "c91210b2c0a5b44e9d57cfaa926ee8f1147a331a",
+    "next_target": "0x801A5FA0",
     "reports/GEDE01/progress.json": {
-      "sha256": "12a1f41caea77950ee1aba897a56fb23e1bc30fa905efd51ccd0a313dd3392c0",
+      "sha256": "23bcf236bf6ed51297a5a361ccaaf88b2b5e27be10c6a07dc27d2ea5902551db",
       "scope": "whole_file"
     },
     "docs/matching.md": {
@@ -15,13 +15,16 @@
   "consolidation_audit": {
     "original_consolidation_commit": "86d029104eb5ed6ad01b6af03963ea2cf924d2a4",
     "comparison_base": "b6f963fbb8643a04ab4358a988239961639dd07e",
-    "latest_consolidation_session": "session-1470",
-    "scope": "Refreshed the catalog through session-1469 without changing generated progress accounting. The preceding remediation removed broad register-allocation and instruction-scheduling umbrellas; this review remediation discloses that deletion and replaces the lost coverage with one record per evidenced behavior. Retained the preexisting out_of_taxonomy records and added the evidenced instruction-selection-lowering and relocation-equality records rather than deleting or force-fitting them.",
-    "total_lessons": 459,
+    "latest_consolidation_session": "session-1510",
+    "scope": "Refreshed the catalog through session-1509 without changing generated progress accounting or frontier prose. Added only distinct MWCC behaviors explicitly recorded after the prior session-1470 snapshot; preexisting taxonomy and out_of_taxonomy records remain intact.",
+    "total_lessons": 470,
     "measurement_command": "jq -r '\"lessons=\" + ((.lessons|length)|tostring) + \" out_of_taxonomy=\" + ((.out_of_taxonomy|length)|tostring) + \" total_catalog_records=\" + (((.lessons|length)+(.out_of_taxonomy|length))|tostring)' reports/GEDE01/lessons.json",
-    "measurement_raw_output": "lessons=459 out_of_taxonomy=5 total_catalog_records=464",
+    "measurement_raw_output": "lessons=470 out_of_taxonomy=5 total_catalog_records=475",
+    "session_parent_commit": "c91210b2c0a5b44e9d57cfaa926ee8f1147a331a",
+    "session_delta_measurement_command": "jq -s -r '.[0] as $parent | .[1] as $current | \"new_lessons=\\(($current.lessons|length)-($parent.lessons|length)) new_out_of_taxonomy=\\(($current.out_of_taxonomy|length)-($parent.out_of_taxonomy|length)) total_new_records=\\((($current.lessons|length)+($current.out_of_taxonomy|length))-(($parent.lessons|length)+($parent.out_of_taxonomy|length)))\"' <(git show c91210b2c0a5b44e9d57cfaa926ee8f1147a331a:eternal-darkness-decomp/reports/GEDE01/lessons.json) reports/GEDE01/lessons.json",
+    "session_delta_measurement_raw_output": "new_lessons=11 new_out_of_taxonomy=0 total_new_records=11",
     "delta_measurement_command": "jq -s -r '.[0] as $base | .[1] as $current | \"new_lessons=\\(($current.lessons|length)-($base.lessons|length)) new_out_of_taxonomy=\\(($current.out_of_taxonomy|length)-($base.out_of_taxonomy|length)) total_new_records=\\((($current.lessons|length)+($current.out_of_taxonomy|length))-(($base.lessons|length)+($base.out_of_taxonomy|length)))\"' <(git show b6f963fbb:eternal-darkness-decomp/reports/GEDE01/lessons.json) reports/GEDE01/lessons.json",
-    "delta_measurement_raw_output": "new_lessons=26 new_out_of_taxonomy=3 total_new_records=29",
+    "delta_measurement_raw_output": "new_lessons=37 new_out_of_taxonomy=3 total_new_records=40",
     "added_out_of_taxonomy_categories": ["instruction-selection-lowering", "relocation-bearing-instruction-operands", "relocation-target-identity"]
   },
   "lessons": [
@@ -3240,6 +3243,83 @@
       "precise_divergence": "Canonical GC/1.3's recovered honest C does not reproduce retail's callee-save shape: fn_8019E0B0 omits retail f30/f31 saves, while fn_8019F00C emits individual r28-r31 saves instead of retail stmw/lmw covering r27-r31.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1466 and 1469"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_801A0284", "fn_801A2FB4", "fn_801A34BC", "fn_801A36C0", "fn_801A5684", "fn_801A5860"],
+      "precise_divergence": "Canonical GC/1.3 permutes long-lived object, count, cursor, buffer, result, or induction-pointer values across preserved registers differently from retail while otherwise retaining the recovered operation stream.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1479, 1493, 1494, 1495, 1505, and 1506"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_801A0450", "fn_801A2BCC", "fn_801A329C", "fn_801A3A78", "fn_801A4430"],
+      "precise_divergence": "Canonical GC/1.3 assigns floating-point temporaries, scalar conversion values, pointers, store values, and loop live ranges differently across the recovered conversion-heavy bodies, with downstream scheduling and in some cases frame size also diverging.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1482, 1491, 1493, 1496, and 1499"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8019F8A8", "fn_8019FF5C", "fn_801A318C", "fn_801A59CC"],
+      "precise_divergence": "Canonical GC/1.3 orders constant loads and stores, final stores, pointer updates, or global-address materialization differently from retail despite equivalent recovered operations.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1475, 1478, 1493, and 1507"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_801A2BCC", "fn_801A329C", "fn_801A3A78", "fn_801A4430"],
+      "precise_divergence": "Canonical GC/1.3 schedules conversion loops, descriptor calls, load/store work, pointer live ranges, and relocation-bearing operands differently from retail in complex loop bodies.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1491, 1493, 1496, and 1499"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_801A1E14", "fn_801A5910"],
+      "precise_divergence": "Canonical GC/1.3 chooses the opposite fixed-loop strategy from retail: it unrolls fn_801A1E14 where retail retains a CTR loop, but retains a counted scalar loop in fn_801A5910 where retail emits a three-iteration two-entry unroll.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1486 and 1506"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_801A53C4"],
+      "precise_divergence": "Canonical GC/1.3 hoists one identical float-to-integer conversion out of the recovered eight-way unroll, while retail repeats fctiwz and its result handling in each unrolled path.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1504"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_8019F320", "fn_801A1F8C", "fn_801A260C", "fn_801A329C", "fn_801A3A78", "fn_801A4430", "fn_801A53C4"],
+      "precise_divergence": "Canonical GC/1.3 selects a different local/conversion layout or smaller stack frame than retail, changing conversion-result slots, preserved-register saves, and downstream scheduling; fn_801A53C4 uses 0x10 instead of retail's 0x90 frame.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1472, 1487, 1488, 1493, 1496, 1499, and 1504"]
+    },
+    {
+      "category": "float-constant-placement",
+      "functions": ["fn_801A0450", "fn_801A2A54", "fn_801A34BC", "fn_801A4CE0"],
+      "precise_divergence": "Canonical GC/1.3 emits private TU-local integer-conversion constants where retail relocates to shared lbl_80650D08, lbl_80650D20, lbl_80650D88, or lbl_80650D90 symbols; fn_801A4CE0's instruction opcodes and operands otherwise agree completely.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1482, 1489, 1494, and 1501"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_80164C7C"],
+      "precise_divergence": "Cross-TU declarations described fn_80164C7C as void even though its owned definition returns an integer in r3; the contradictory prototype was an ABI return-shape mismatch.",
+      "workaround": "Use the integer return declaration grounded by the owned definition in every affected translation unit.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1500"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_801A5684", "fn_801A5620"],
+      "precise_divergence": "The initial cross-TU declaration and use of fn_801A5620 had the wrong prototype and narrowing semantics, contributing to non-retail comparisons and result handling in fn_801A5684.",
+      "workaround": "Correct the cross-TU prototype, signed comparisons, return-value narrowing, cached count, output-pointer placement, and final u16 narrowing; this restores size and opcode shape, leaving only saved-register permutation.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1505"]
+    },
+    {
+      "category": "calling-convention",
+      "functions": ["fn_801A260C", "fn_801A3A78", "fn_801A4430"],
+      "precise_divergence": "Canonical recovered C preserves a smaller or different callee-save set than retail, including f30-f31 rather than retail f27-f31 in fn_801A260C and different floating-point or saved-GPR save layouts in the other two functions.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1488, 1496, and 1499"]
     }
   ],
   "out_of_taxonomy": [

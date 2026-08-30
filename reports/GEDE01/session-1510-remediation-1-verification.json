@@ -1,0 +1,37 @@
+{
+  "session_id": "session-1510-remediation-1",
+  "scope": "Correct the unsupported register-allocation attribution in the session-1510 lesson refresh without changing source, progress accounting, or the 0x801A5FA0 frontier.",
+  "correction_evidence": {
+    "mention_count_command": "for f in fn_8019FAB8 fn_8019FCB4; do progress_mentions=$(jq --arg f \"$f\" '[.open_items[] | select(contains($f))] | length' reports/GEDE01/progress.json); matching_mentions=$(rg -c \"$f\" docs/matching.md || true); printf '%s progress_open_items_mentions=%s docs_matching_mentions=%s\\n' \"$f\" \"$progress_mentions\" \"${matching_mentions:-0}\"; done",
+    "mention_count_raw_output": "fn_8019FAB8 progress_open_items_mentions=1 docs_matching_mentions=0\nfn_8019FCB4 progress_open_items_mentions=1 docs_matching_mentions=0",
+    "recorded_source_command": "jq -r '.open_items[] | select(startswith(\"Session session-1476 \"))' reports/GEDE01/progress.json",
+    "recorded_source_raw_output": "Session session-1476 started exactly at assigned fn_8019FAB8 and leaves the honest frontier at 0x8019FEC0. The substantive results are the two preserved honest-C NonMatching attempts; fn_8019FCB4 compiles four bytes shorter than retail. The only complete function is the degenerate one-instruction blr stub fn_8019FEBC, whose zero-relocation equality is vacuous and is not substantive match evidence. Remediation 1 regenerated build/GEDE01/report.json after configure.py, reran all three affected objdiffs, and preserved the retail DOL SHA-1. Every numeric claim and its current-session command and raw output are recorded in reports/GEDE01/frontier-8019FAB8-8019FEC0-session-1476.json and reports/GEDE01/session-1476-verification.json.",
+    "result": "Removed fn_8019FAB8, fn_8019FCB4, the unsupported saved-register attribution, and the session-1476 citation from the register-allocation lesson. The independently recorded generated-size shortfall remains in progress.json and is not recategorized as register allocation."
+  },
+  "build": {
+    "command": "python3 configure.py >/dev/null 2>&1 && ./.tools/bin/ninja >/dev/null 2>&1; printf 'build_exit=%s\\n' \"$?\"",
+    "raw_output": "build_exit=0"
+  },
+  "affected_objdiff": {
+    "generation_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8019FAB8 fn_8019FAB8 -o reports/GEDE01/objdiff-game_fn_8019FAB8-session-1510-remediation-1.json --format json-pretty -c function_reloc_diffs=name_address; build/tools/objdiff-cli diff -p . -u main/game/game_fn_8019FCB4 fn_8019FCB4 -o reports/GEDE01/objdiff-game_fn_8019FCB4-session-1510-remediation-1.json --format json-pretty -c function_reloc_diffs=name_address",
+    "generation_raw_output": "INFO Writing to reports/GEDE01/objdiff-game_fn_8019FAB8-session-1510-remediation-1.json\nINFO Writing to reports/GEDE01/objdiff-game_fn_8019FCB4-session-1510-remediation-1.json",
+    "measurement_command": "for f in 8019FAB8 8019FCB4; do jq -c --arg s fn_$f '(.left.symbols[]|select(.name==$s)) as $l | (.right.symbols[]|select(.name==$s)) as $r | {symbol:$s,retail_bytes:$l.size,generated_bytes:$r.size,retail_instructions:($l.instructions|length),generated_instructions:($r.instructions|length),match_percent:$l.match_percent,differing_rows:([$l.instructions[]|select(.diff_kind != null and .diff_kind != \"DIFF_NONE\")]|length),retail_relocations:([$l.instructions[].instruction|select(.relocation != null)]|length),generated_relocations:([$r.instructions[].instruction|select(.relocation != null)]|length),relocations_equal:(([$l.instructions[].instruction|select(.relocation != null)|[.address,.formatted,.relocation.type_name]]) == ([$r.instructions[].instruction|select(.relocation != null)|[.address,.formatted,.relocation.type_name]]))}' reports/GEDE01/objdiff-game_fn_$f-session-1510-remediation-1.json; done",
+    "measurement_raw_output": "{\"symbol\":\"fn_8019FAB8\",\"retail_bytes\":\"508\",\"generated_bytes\":\"508\",\"retail_instructions\":129,\"generated_instructions\":129,\"match_percent\":96.18898,\"differing_rows\":18,\"retail_relocations\":16,\"generated_relocations\":16,\"relocations_equal\":true}\n{\"symbol\":\"fn_8019FCB4\",\"retail_bytes\":\"520\",\"generated_bytes\":\"516\",\"retail_instructions\":131,\"generated_instructions\":131,\"match_percent\":95.99231,\"differing_rows\":40,\"retail_relocations\":33,\"generated_relocations\":33,\"relocations_equal\":false}",
+    "credit": "Both objects remain explicit NonMatching debt and earn no new matched credit."
+  },
+  "catalog": {
+    "measurement_command": "jq -r '\"lessons=\" + ((.lessons|length)|tostring) + \" out_of_taxonomy=\" + ((.out_of_taxonomy|length)|tostring) + \" total_catalog_records=\" + (((.lessons|length)+(.out_of_taxonomy|length))|tostring)' reports/GEDE01/lessons.json",
+    "measurement_raw_output": "lessons=470 out_of_taxonomy=5 total_catalog_records=475",
+    "session_parent_commit": "c91210b2c0a5b44e9d57cfaa926ee8f1147a331a",
+    "session_delta_measurement_command": "jq -s -r '.[0] as $parent | .[1] as $current | \"new_lessons=\\(($current.lessons|length)-($parent.lessons|length)) new_out_of_taxonomy=\\(($current.out_of_taxonomy|length)-($parent.out_of_taxonomy|length)) total_new_records=\\((($current.lessons|length)+($current.out_of_taxonomy|length))-(($parent.lessons|length)+($parent.out_of_taxonomy|length)))\"' <(git show c91210b2c0a5b44e9d57cfaa926ee8f1147a331a:eternal-darkness-decomp/reports/GEDE01/lessons.json) reports/GEDE01/lessons.json",
+    "session_delta_measurement_raw_output": "new_lessons=11 new_out_of_taxonomy=0 total_new_records=11"
+  },
+  "immutable_gates": {
+    "dol_sha1_command": "sha1sum build/GEDE01/main.dol",
+    "dol_sha1_raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+    "frontier_command": "jq -r '.next_target' reports/GEDE01/progress.json",
+    "frontier_raw_output": "0x801A5FA0",
+    "source_snapshot_command": "sha256sum reports/GEDE01/progress.json docs/matching.md",
+    "source_snapshot_raw_output": "23bcf236bf6ed51297a5a361ccaaf88b2b5e27be10c6a07dc27d2ea5902551db  reports/GEDE01/progress.json\n68d8b82f5b80e7408576b2904b19b5d32a21e9d6b0548376f49866695a88970a  docs/matching.md"
+  }
+}
