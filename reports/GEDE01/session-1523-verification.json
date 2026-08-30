@@ -1,0 +1,49 @@
+{
+  "session_id": "session-1523",
+  "canonical_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json",
+    "matching_objects": 4204,
+    "total_objects": 5760,
+    "matching_functions": 3970,
+    "total_functions": 8216,
+    "matching_code_bytes": 617712,
+    "linked_code_bytes": 617020
+  },
+  "relocation_strict_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -c function_reloc_diffs=name_address -o reports/GEDE01/session-1523-reloc-strict.json",
+    "matching_functions": 3964,
+    "matching_code_bytes": 615368,
+    "game_matching_functions": 3902,
+    "game_matching_code_bytes": 612340
+  },
+  "dol": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "matches_retail": true
+  },
+  "range_start": "0x801A717C",
+  "next_target": "0x801A743C",
+  "range_bytes": 704,
+  "matched_bytes": 280,
+  "nonmatching_bytes": 424,
+  "matched_functions": [
+    {"name":"fn_801A7324","size":48,"match_percent":100.0,"relocations_equal":true},
+    {"name":"fn_801A7354","size":216,"match_percent":100.0,"relocations_equal":true},
+    {"name":"fn_801A742C","size":8,"match_percent":100.0,"relocations_equal":true},
+    {"name":"fn_801A7434","size":8,"match_percent":100.0,"relocations_equal":true}
+  ],
+  "nonmatching_functions": [
+    {"name":"fn_801A717C","size":172,"match_percent":89.976746,"generated_size":164,"blocking_divergence":"Canonical GC/1.3 eliminates the found local and r30 live range."},
+    {"name":"fn_801A7228","size":252,"match_percent":97.22222,"generated_size":252,"blocking_divergence":"Canonical keeps the entry pointer in r3 while retail moves it to r4 and uses r3 for loop zero."}
+  ],
+  "commits": [
+    "40d0d11aeea575c74d2f4ef38583171acd9747e3",
+    "e90cd198222dce16931366c8e3c61827ac2aa163",
+    "b312d392ec81b675eaea4efa995d02bbf5618433",
+    "7fc8617c956b5c3484737f306cfb44ac2b5665a2",
+    "a0366678756e63944ca3cc19209266a64d24af4a",
+    "183cee142dc7ed7773bae7d97021a8dfd9dddd3c",
+    "2f4e29bc4f01dc1390f30b19cd3dc0624bece7e1",
+    "c7847c7c678bf664d240f0e54ead1b633561223c"
+  ]
+}

@@ -94,7 +94,17 @@ def collect(ref: str) -> dict[str, object]:
             symbol = str(entry["symbol"])
             variants = list(entry["variants"])
             truth = truths.get(symbol)
-            if truth is not None:
+            if truth is not None and truth.get("kind") == "definition":
+                candidates = [
+                    variant for variant in variants
+                    if variant["signature"] == truth["declaration"]
+                ]
+                if not candidates:
+                    raise ValueError(
+                        f"{symbol}: owned definition signature is absent from declaration variants"
+                    )
+                proposed = candidates[0]
+            elif truth is not None:
                 candidates = [
                     variant for variant in variants
                     if variant["abi"]["return"] == truth["return_shape"]
@@ -206,7 +216,9 @@ def main() -> int:
     parser.add_argument("--starting-target")
     parser.add_argument("--ending-next-target")
     parser.add_argument("--applied-symbol", action="append", default=[])
-    parser.add_argument("--tested-reverted-symbol", action="append", default=[])
+    parser.add_argument(
+        "--inherited-tested-reverted-symbol", action="append", default=[]
+    )
     args = parser.parse_args()
 
     measurement = collect(args.baseline_ref)
@@ -228,17 +240,17 @@ def main() -> int:
         raise ValueError("facts log does not match a fresh measurement")
 
     applied = set(args.applied_symbol)
-    tested_reverted = set(args.tested_reverted_symbol)
+    inherited_tested_reverted = set(args.inherited_tested_reverted_symbol)
     for item in measurement["selected_symbols"]:
         if item["symbol"] in applied:
             item["disposition"] = "applied"
             item["disposition_reason"] = (
                 "High-confidence return correction was within the TU cap and passed rebuild, affected-object objdiff, relocation, and DOL gates."
             )
-        elif item["symbol"] in tested_reverted:
-            item["disposition"] = "tested-and-reverted"
+        elif item["symbol"] in inherited_tested_reverted:
+            item["disposition"] = "proposal-only"
             item["disposition_reason"] = (
-                "The high-confidence candidate was within the TU cap, but its affected object regressed; the declaration was restored and independently rebuilt."
+                "Proposal only: inherited evidence from session-1480 records that this exact candidate regressed an affected object and was reverted; no rewrite was tested in session-1520."
             )
         elif item["confidence"] == "low":
             item["disposition"] = "proposal-only"
@@ -258,7 +270,10 @@ def main() -> int:
 
     disposition_args = " ".join(
         [f"--applied-symbol {symbol}" for symbol in args.applied_symbol]
-        + [f"--tested-reverted-symbol {symbol}" for symbol in args.tested_reverted_symbol]
+        + [
+            f"--inherited-tested-reverted-symbol {symbol}"
+            for symbol in args.inherited_tested_reverted_symbol
+        ]
     )
     if disposition_args:
         disposition_args += " "

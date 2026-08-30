@@ -1,0 +1,87 @@
+BASELINE_IDENTITY
+command: git cat-file -t b69f6d19b
+raw_output: commit
+
+OWNED_DEFINITION
+command: sed -n '1,2p' src/game/game_fn_8018E230.c
+raw_output: typedef unsigned char u8;
+raw_output: void fn_8018E230(u8* object, u8* alpha, u8 type, u8 value, u8 count, u8 stride)
+interpretation: The owned definition grounds the normalized declaration, all six parameter types, and their PPC EABI shapes. A return-only basis is insufficient.
+
+SIGNATURE_AUDIT
+command: python3 tools/declaration_drift_proposal.py --baseline-ref b69f6d19b --facts-output reports/GEDE01/declaration-drift-proposal-session-1520-facts.txt --facts
+raw_output:
+exit_status: 0
+interpretation: The generator reran tools/signature_audit.py against the immutable baseline and wrote the complete raw census to the facts artifact embedded verbatim in measurement_evidence.raw_output.
+
+CORRECTED_SYMBOL_CENSUS
+command: rg '^(SYMBOL|VARIANT).*fn_8018E230' reports/GEDE01/declaration-drift-proposal-session-1520-facts.txt
+raw_output: SYMBOL rank=10 name=fn_8018E230 declarations=77 declaring_tus=77 blast_radius_tus=76 confidence=high
+raw_output: VARIANT name=fn_8018E230 declaration="void fn_8018E230(void*, void*, int, int, int, int)" declarations=19 declaring_tus=19 call_sites=27
+raw_output: VARIANT name=fn_8018E230 declaration="void fn_8018E230(void*, void*, int, u8, u8, int)" declarations=19 declaring_tus=19 call_sites=24
+raw_output: VARIANT name=fn_8018E230 declaration="void fn_8018E230(void*, void*, int, int, s8, u8)" declarations=7 declaring_tus=7 call_sites=10
+raw_output: VARIANT name=fn_8018E230 declaration="void fn_8018E230(void*, void*, int, u8, u8, u8)" declarations=5 declaring_tus=5 call_sites=10
+raw_output: VARIANT name=fn_8018E230 declaration="void fn_8018E230(u8*, u8*, int, u8, u8, int)" declarations=4 declaring_tus=4 call_sites=4
+raw_output: VARIANT name=fn_8018E230 declaration="void fn_8018E230(u8*, u8*, int, int, int, int)" declarations=3 declaring_tus=3 call_sites=4
+raw_output: VARIANT name=fn_8018E230 declaration="void fn_8018E230(void*, void*, int, u8, int, int)" declarations=2 declaring_tus=2 call_sites=2
+raw_output: VARIANT name=fn_8018E230 declaration="int fn_8018E230(u8*, u8*, int, u8, u8, int)" declarations=2 declaring_tus=2 call_sites=2
+raw_output: VARIANT name=fn_8018E230 declaration="void fn_8018E230(void*, void*, s32, u8, u8, s32)" declarations=2 declaring_tus=2 call_sites=4
+raw_output: VARIANT name=fn_8018E230 declaration="void fn_8018E230(void*, void*, int, int, u8, u8)" declarations=2 declaring_tus=2 call_sites=2
+raw_output: VARIANT name=fn_8018E230 declaration="void fn_8018E230(Entry801810A0*, u8*, int, u8, int, int)" declarations=1 declaring_tus=1 call_sites=1
+raw_output: VARIANT name=fn_8018E230 declaration="void fn_8018E230(void*, u8*, int, int, int, u8)" declarations=1 declaring_tus=1 call_sites=1
+raw_output: VARIANT name=fn_8018E230 declaration="void fn_8018E230()" declarations=1 declaring_tus=1 call_sites=2
+raw_output: VARIANT name=fn_8018E230 declaration="void fn_8018E230(u8*, u8*, u8, u8, u8, u8)" declarations=1 declaring_tus=1 call_sites=1
+raw_output: VARIANT name=fn_8018E230 declaration="int fn_8018E230(u8*, u8*, int, int, int, int)" declarations=1 declaring_tus=1 call_sites=1
+raw_output: VARIANT name=fn_8018E230 declaration="void fn_8018E230(void*, u8*, int, u8, void*, int)" declarations=1 declaring_tus=1 call_sites=1
+raw_output: VARIANT name=fn_8018E230 declaration="void fn_8018E230(u8*, u8*, s32, u8, u8, s32)" declarations=1 declaring_tus=1 call_sites=1
+raw_output: VARIANT name=fn_8018E230 declaration="void fn_8018E230(u8*, u8*, u8, u8, s8, u8)" declarations=1 declaring_tus=1 call_sites=2
+raw_output: VARIANT name=fn_8018E230 declaration="void fn_8018E230(void*, void*, int, int, u8, int)" declarations=1 declaring_tus=1 call_sites=1
+raw_output: VARIANT name=fn_8018E230 declaration="void fn_8018E230(void*, void*, s32, s32, u8, s32)" declarations=1 declaring_tus=1 call_sites=1
+raw_output: VARIANT name=fn_8018E230 declaration="void fn_8018E230(void*, void*, s32, s32, u8, u8)" declarations=1 declaring_tus=1 call_sites=3
+raw_output: VARIANT name=fn_8018E230 declaration="void fn_8018E230(void*, void*, u32, u8, u8, u32)" declarations=1 declaring_tus=1 call_sites=2
+interpretation: The full-definition reading is the u8-pointer, six-u8-parameter variant. Every other declaring TU is in the measured blast radius, which remains above the rewrite cap; disposition remains proposal-only.
+
+AFFECTED_OBJECT_BUILD_STATUS
+command: jq -c '.units[] | select(.name=="main/game/game_fn_8018F378" or .name=="main/game/game_fn_801A3DF8") | {name,complete:.metadata.complete,matched_code_percent:.measures.matched_code_percent,complete_code_percent:.measures.complete_code_percent}' build/GEDE01/report.json
+raw_output: {"name":"main/game/game_fn_8018F378","complete":false,"matched_code_percent":null,"complete_code_percent":null}
+raw_output: {"name":"main/game/game_fn_801A3DF8","complete":false,"matched_code_percent":null,"complete_code_percent":null}
+
+INHERITED_SESSION_1480_REVERT_EVIDENCE
+command: jq -c '{retail:(.left.symbols[]|select(.name=="fn_8018F378")|{size,match_percent,instructions:(.instructions|length),relocations:([.instructions[].instruction.relocation|select(.!=null)]|length),differing_rows:([.instructions[]|select(.diff_kind!=null and .diff_kind!="DIFF_NONE")]|length)}),generated:(.right.symbols[]|select(.name=="fn_8018F378")|{size,instructions:(.instructions|length),relocations:([.instructions[].instruction.relocation|select(.!=null)]|length)})}' reports/GEDE01/objdiff-game_fn_8018F378-session-1480-remediation-1-candidate.json
+raw_output: {"retail":{"size":"892","match_percent":87.69058,"instructions":236,"relocations":30,"differing_rows":125},"generated":{"size":"904","instructions":236,"relocations":30}}
+interpretation: This artifact is inherited from session-1480. It records that session's tested and reverted fn_8020123C candidate. No source rewrite was tested in session-1520 or this remediation.
+
+FULL_DOL_BUILD
+command: .tools/bin/ninja build/GEDE01/main.dol
+raw_output_tail: [550/550] DOL build/GEDE01/main.dol
+exit_status: 0
+
+FRESH_OBJDIFF_GAME_FN_8018F378
+command: build/tools/objdiff-cli diff -p . -u main/game/game_fn_8018F378 fn_8018F378 -o reports/GEDE01/objdiff-game_fn_8018F378-session-1520-remediation-1.json --format json-pretty -c function_reloc_diffs=name_address
+raw_output: INFO Writing to reports/GEDE01/objdiff-game_fn_8018F378-session-1520-remediation-1.json
+exit_status: 0
+
+FRESH_OBJDIFF_GAME_FN_801A3DF8
+command: build/tools/objdiff-cli diff -p . -u main/game/game_fn_801A3DF8 fn_801A3DF8 -o reports/GEDE01/objdiff-game_fn_801A3DF8-session-1520-remediation-1.json --format json-pretty -c function_reloc_diffs=name_address
+raw_output: INFO Writing to reports/GEDE01/objdiff-game_fn_801A3DF8-session-1520-remediation-1.json
+exit_status: 0
+
+FRESH_OBJDIFF_MEASUREMENTS
+command: for artifact in reports/GEDE01/objdiff-game_fn_8018F378-session-1520-remediation-1.json reports/GEDE01/objdiff-game_fn_801A3DF8-session-1520-remediation-1.json; do jq -c '{retail:(.left.symbols[0]|{name,size,match_percent,instructions:(.instructions|length),relocations:([.instructions[].instruction.relocation|select(.!=null)]|length),differing_rows:([.instructions[]|select(.diff_kind!=null and .diff_kind!="DIFF_NONE")]|length),differing_relocation_rows:([.instructions[]|select(.instruction.relocation!=null and .diff_kind!=null and .diff_kind!="DIFF_NONE")]|length)}),generated:(.right.symbols[0]|{name,size,instructions:(.instructions|length),relocations:([.instructions[].instruction.relocation|select(.!=null)]|length),differing_relocation_rows:([.instructions[]|select(.instruction.relocation!=null and .diff_kind!=null and .diff_kind!="DIFF_NONE")]|length)})}' "$artifact"; done
+raw_output: {"retail":{"name":"fn_8018F378","size":"892","match_percent":90.340805,"instructions":230,"relocations":30,"differing_rows":92,"differing_relocation_rows":0},"generated":{"name":"fn_8018F378","size":"876","instructions":230,"relocations":30,"differing_relocation_rows":0}}
+raw_output: {"retail":{"name":"fn_801A3DF8","size":"1192","match_percent":43.016777,"instructions":305,"relocations":39,"differing_rows":252,"differing_relocation_rows":28},"generated":{"name":"fn_801A3DF8","size":"620","instructions":305,"relocations":15,"differing_relocation_rows":4}}
+interpretation: Both affected objects remain explicitly NonMatching. These fresh relocation-aware reports are current-state evidence, not a 100-percent claim.
+
+DOL_SHA1
+command: sha1sum build/GEDE01/main.dol
+raw_output: ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol
+
+PROGRESS_GATE
+command: jq -c '{next_target,matching_code_bytes,matching_functions,matching_objects,source,next_gate}' reports/GEDE01/progress.json
+raw_output: {"next_target":"0x801A6EFC","matching_code_bytes":616792,"matching_functions":3962,"matching_objects":4196,"source":"build/GEDE01/report.json freshly regenerated in session-1519 with no extra objdiff config","next_gate":"Start at immediate consecutive fn_801A6EFC and continue upward toward the jumptable_8023BF28 data-ownership boundary. Preserve fn_801A69F0, fn_801A68C4, fn_801A657C, fn_801A63A0, fn_801A6350, fn_801A59CC, fn_801A5910, fn_801A5860, fn_801A5684, fn_801A53C4, fn_801A4CE0, fn_801A4430, and fn_801A3DF8 as explicit NonMatching debt."}
+
+ACCOUNTING
+command: git diff --exit-code b69f6d19b -- src/game reports/GEDE01/progress.json
+raw_output:
+exit_status: 0
+interpretation: No translation unit, progress count, next_target, or next_gate changed.

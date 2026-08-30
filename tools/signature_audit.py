@@ -92,12 +92,28 @@ class Declaration:
 class Definition:
     symbol: str
     return_type: str
+    parameters: tuple[str, ...]
+    variadic: bool
+    unspecified_parameters: bool
     path: str
     line: int
 
     @property
+    def signature(self) -> str:
+        params = list(self.parameters)
+        if self.variadic:
+            params.append("...")
+        if not params and not self.unspecified_parameters:
+            params.append("void")
+        return f"{self.return_type} {self.symbol}({', '.join(params)})"
+
+    @property
     def return_shape(self) -> str:
         return return_register_shape(self.return_type)
+
+    @property
+    def parameter_shapes(self) -> tuple[str, ...]:
+        return tuple(parameter_register_shape(item) for item in self.parameters)
 
 
 def squash_space(text: str) -> str:
@@ -313,9 +329,20 @@ def definition_in(path: Path) -> Definition | None:
         return_type = re.sub(
             r"\b(?:static|inline|__inline)\b", "", candidate.group("return")
         )
+        parameter_text = text[candidate.end(): cursor - 1]
+        unspecified_parameters = not parameter_text.strip()
+        raw_parameters = split_parameters(parameter_text)
+        variadic = bool(raw_parameters and raw_parameters[-1] == "...")
+        if variadic:
+            raw_parameters.pop()
+        if raw_parameters == ["void"]:
+            raw_parameters = []
         return Definition(
             symbol=symbol,
             return_type=squash_space(return_type),
+            parameters=tuple(parameter_type(item) for item in raw_parameters),
+            variadic=variadic,
+            unspecified_parameters=unspecified_parameters,
             path=str(path.relative_to(ROOT)),
             line=text.count("\n", 0, candidate.start()) + 1,
         )
@@ -422,9 +449,14 @@ def audit(
             ]
             truth = {
                 "kind": "definition",
+                "declaration": definition.signature,
                 "return_type": definition.return_type,
                 "return_value_kind": return_value_kind(definition.return_type),
                 "return_shape": definition.return_shape,
+                "parameter_types": list(definition.parameters),
+                "parameter_shapes": list(definition.parameter_shapes),
+                "variadic": definition.variadic,
+                "unspecified_parameters": definition.unspecified_parameters,
                 "source": f"{definition.path}:{definition.line}",
             }
         elif evidence is not None:
