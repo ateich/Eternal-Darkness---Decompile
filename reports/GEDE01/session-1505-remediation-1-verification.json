@@ -1,0 +1,37 @@
+{
+  "session_id": "session-1505-remediation-1",
+  "scope": "Review remediation only; no frontier movement or unrelated reconstruction.",
+  "build": {
+    "command": ".tools/bin/ninja >/dev/null 2>&1; printf 'ninja_exit=%s\\n' \"$?\"",
+    "raw_output": "ninja_exit=0"
+  },
+  "per_function_objdiff_generation": {
+    "command": "for f in 801A5684 801A5838 801A583C 801A5848 801A5854; do build/tools/objdiff-cli diff -p . -u main/game/game_fn_$f fn_$f -o reports/GEDE01/objdiff-game_fn_$f-session-1505-remediation-1.json --format json-pretty -c function_reloc_diffs=name_address; done",
+    "raw_output": "INFO Writing to reports/GEDE01/objdiff-game_fn_801A5684-session-1505-remediation-1.json\nINFO Writing to reports/GEDE01/objdiff-game_fn_801A5838-session-1505-remediation-1.json\nINFO Writing to reports/GEDE01/objdiff-game_fn_801A583C-session-1505-remediation-1.json\nINFO Writing to reports/GEDE01/objdiff-game_fn_801A5848-session-1505-remediation-1.json\nINFO Writing to reports/GEDE01/objdiff-game_fn_801A5854-session-1505-remediation-1.json"
+  },
+  "per_function_measurement": {
+    "command": "for f in 801A5684 801A5838 801A583C 801A5848 801A5854; do jq -c --arg s fn_$f '(.left.symbols[]|select(.name==$s)) as $l | (.right.symbols[]|select(.name==$s)) as $r | {symbol:$s,retail_bytes:$l.size,generated_bytes:$r.size,retail_instructions:($l.instructions|length),generated_instructions:($r.instructions|length),match_percent:$l.match_percent,differing_rows:([$l.instructions[]|select(.diff_kind != null and .diff_kind != \"DIFF_NONE\")]|length),retail_relocations:([$l.instructions[].instruction|select(.relocation != null)]|length),generated_relocations:([$r.instructions[].instruction|select(.relocation != null)]|length)}' reports/GEDE01/objdiff-game_fn_$f-session-1505-remediation-1.json; done",
+    "raw_output": "{\"symbol\":\"fn_801A5684\",\"retail_bytes\":\"436\",\"generated_bytes\":\"436\",\"retail_instructions\":109,\"generated_instructions\":109,\"match_percent\":98.39449,\"differing_rows\":29,\"retail_relocations\":28,\"generated_relocations\":28}\n{\"symbol\":\"fn_801A5838\",\"retail_bytes\":\"4\",\"generated_bytes\":\"4\",\"retail_instructions\":1,\"generated_instructions\":1,\"match_percent\":100.0,\"differing_rows\":0,\"retail_relocations\":0,\"generated_relocations\":0}\n{\"symbol\":\"fn_801A583C\",\"retail_bytes\":\"12\",\"generated_bytes\":\"12\",\"retail_instructions\":3,\"generated_instructions\":3,\"match_percent\":100.0,\"differing_rows\":0,\"retail_relocations\":0,\"generated_relocations\":0}\n{\"symbol\":\"fn_801A5848\",\"retail_bytes\":\"12\",\"generated_bytes\":\"12\",\"retail_instructions\":3,\"generated_instructions\":3,\"match_percent\":100.0,\"differing_rows\":0,\"retail_relocations\":0,\"generated_relocations\":0}\n{\"symbol\":\"fn_801A5854\",\"retail_bytes\":\"12\",\"generated_bytes\":\"12\",\"retail_instructions\":3,\"generated_instructions\":3,\"match_percent\":100.0,\"differing_rows\":0,\"retail_relocations\":0,\"generated_relocations\":0}"
+  },
+  "canonical_report": {
+    "generation_command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json -f json-pretty",
+    "measurement_command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report.json",
+    "raw_output": "matching_objects=4132 total_objects=5678 matching_functions=3898 total_functions=8216 matching_code_bytes=612356 total_code_bytes=2300692 matching_data_bytes=34626 total_data_bytes=4305642 linked_code_bytes=611664 linked_data_bytes=34750"
+  },
+  "relocation_strict_report": {
+    "generation_command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1505-remediation-1-reloc-strict.json -f json-pretty -c function_reloc_diffs=name_address",
+    "measurement_command": "jq -c '{matching_functions:.measures.matched_functions,matching_code_bytes:.measures.matched_code,game_matching_functions:([.categories[]|select(.id==\"game\")][0].measures.matched_functions),game_matching_code_bytes:([.categories[]|select(.id==\"game\")][0].measures.matched_code)}' reports/GEDE01/session-1505-remediation-1-reloc-strict.json",
+    "raw_output": "{\"matching_functions\":3892,\"matching_code_bytes\":\"610012\",\"game_matching_functions\":3830,\"game_matching_code_bytes\":\"606984\"}"
+  },
+  "frontier_accounting": {
+    "command": "printf 'range_bytes=%d matched_bytes=%d nonmatching_bytes=%d\\n' \"$((0x801A5860-0x801A5684))\" \"$((4+12+12+12))\" \"$((0x801A5838-0x801A5684))\"",
+    "raw_output": "range_bytes=476 matched_bytes=40 nonmatching_bytes=436",
+    "next_target": "0x801A5860"
+  },
+  "dol_identity": {
+    "sha1_command": "sha1sum build/GEDE01/main.dol",
+    "sha1_raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+    "compare_command": "cmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol; printf 'cmp_exit=%s\\n' \"$?\"",
+    "compare_raw_output": "cmp_exit=0"
+  }
+}

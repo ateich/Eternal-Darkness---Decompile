@@ -1,0 +1,31 @@
+{
+  "session_id": "session-1502",
+  "scope": "Contiguous reconstruction from assigned 0x801A4F74 through 0x801A5068.",
+  "per_function_objdiff": {
+    "commands": [
+      "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801A4F74 fn_801A4F74 -o reports/GEDE01/objdiff-game_fn_801A4F74-session-1502.json --format json-pretty -c function_reloc_diffs=name_address",
+      "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801A4FCC fn_801A4FCC -o reports/GEDE01/objdiff-game_fn_801A4FCC-session-1502.json --format json-pretty -c function_reloc_diffs=name_address"
+    ],
+    "measurement_raw_output": "fn_801A4F74 retail=88 generated=88 match=100.0; fn_801A4FCC retail=156 generated=156 match=100.0"
+  },
+  "canonical_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json -f json-pretty",
+    "raw_output": "INFO Generating report for 5668 units; INFO Writing to build/GEDE01/report.json",
+    "measurement_raw_output": "matching_objects=4124 total_objects=5668 matching_functions=3890 total_functions=8216 matching_code_bytes=611356 total_code_bytes=2300692 matching_data_bytes=34626 total_data_bytes=4305642 linked_code_bytes=610664 linked_data_bytes=34750"
+  },
+  "relocation_strict_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1502-reloc-strict.json -f json-pretty -c function_reloc_diffs=name_address",
+    "raw_output": "INFO Generating report for 5668 units; INFO Writing to reports/GEDE01/session-1502-reloc-strict.json",
+    "measurement_raw_output": "matching_functions=3884 matching_code_bytes=609012 game_matching_functions=3822 game_matching_code_bytes=605984"
+  },
+  "full_build": {
+    "command": ".tools/bin/ninja",
+    "raw_output_tail": "[547/549] DOL build/GEDE01/main.dol\n[548/549] CHECK config/GEDE01/build.sha1\nbuild/GEDE01/main.dol: OK\n[549/549] PROGRESS"
+  },
+  "dol_identity": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+    "expected": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "equal": true
+  }
+}

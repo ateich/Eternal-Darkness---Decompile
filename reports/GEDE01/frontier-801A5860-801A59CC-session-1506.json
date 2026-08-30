@@ -1,0 +1,18 @@
+{
+  "session_id": "session-1506",
+  "range_start": "0x801A5860",
+  "range_end": "0x801A59CC",
+  "next_target": "0x801A59CC",
+  "accounted_bytes": 364,
+  "matched_bytes": 20,
+  "nonmatching_bytes": 344,
+  "functions": [
+    {"name":"fn_801A5860","start":"0x801A5860","end":"0x801A58FC","size":156,"status":"NonMatching","objdiff_percent":98.84615,"differing_rows":8,"divergence":"Canonical GC/1.3 assigns the cached count and entry pointer to r31 and r30 opposite retail r30 and r31; control flow, opcodes, size, and both call relocations otherwise align.","evidence":"reports/GEDE01/objdiff-game_fn_801A5860-session-1506.json"},
+    {"name":"fn_801A58FC","start":"0x801A58FC","end":"0x801A5910","size":20,"status":"Matching","objdiff_percent":100.0,"differing_rows":0,"relocations":"3 of 3 equal by name and address","evidence":"reports/GEDE01/objdiff-game_fn_801A58FC-session-1506.json"},
+    {"name":"fn_801A5910","start":"0x801A5910","end":"0x801A59CC","size":188,"status":"NonMatching","objdiff_percent":73.17021,"differing_rows":34,"divergence":"Canonical GC/1.3 retains the six-iteration scalar loop while retail uses a three-iteration CTR loop unrolled for two entries per body.","evidence":"reports/GEDE01/objdiff-game_fn_801A5910-session-1506.json"}
+  ],
+  "canonical_report":{"path":"build/GEDE01/report.json","command":"build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json -f json-pretty","matching_functions":3899,"matching_objects":4133,"matching_code_bytes":612376,"linked_code_bytes":611684},
+  "relocation_strict_report":{"path":"reports/GEDE01/session-1506-reloc-strict.json","command":"build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1506-reloc-strict.json -f json-pretty -c function_reloc_diffs=name_address","matching_functions":3893,"matching_code_bytes":610032},
+  "dol_sha1":{"command":"sha1sum build/GEDE01/main.dol","value":"ea24b6af954876ce072562ff39cdb4c81d32be1f"},
+  "accounting_check":"156 + 20 + 188 = 364 accounted bytes; 20 matched + 344 NonMatching = 364; no interior gap."
+}

@@ -208,7 +208,7 @@ def parameter_register_shape(type_name: str) -> str:
         return "FPR:1"
     if base in INT64_TYPES:
         return "GPR:2"
-    if base.startswith(("struct ", "union ")):
+    if is_aggregate(base):
         return "aggregate"
     return "GPR:1"
 
@@ -415,15 +415,15 @@ def audit(
         definition = definitions.get(symbol)
         evidence = retail_evidence.get(symbol)
         if definition is not None:
-            expected_kind = return_value_kind(definition.return_type)
+            expected_shape = definition.return_shape
             disagreeing = [
                 item for item in declarations
-                if return_value_kind(item.return_type) != expected_kind
+                if item.return_shape != expected_shape
             ]
             truth = {
                 "kind": "definition",
                 "return_type": definition.return_type,
-                "return_value_kind": expected_kind,
+                "return_value_kind": return_value_kind(definition.return_type),
                 "return_shape": definition.return_shape,
                 "source": f"{definition.path}:{definition.line}",
             }
@@ -443,11 +443,21 @@ def audit(
         if not disagreeing:
             continue
         variants = Counter(item.signature for item in disagreeing)
+        translation_units = sorted({item.path for item in disagreeing})
         ground_truth_contradictions.append({
             "symbol": symbol,
             "declarations": len(declarations),
             "ground_truth": truth,
             "disagreeing_declarations": len(disagreeing),
+            "affected_translation_units": len(translation_units),
+            "translation_units": translation_units,
+            "confidence": "high",
+            "disposition": "deferred",
+            "disposition_reason": (
+                "Owned-definition or unambiguous retail evidence establishes a "
+                "different PPC EABI return-register shape; the declaration is "
+                "left unchanged unless separately listed as an applied correction."
+            ),
             "variants": [
                 {
                     "signature": signature,
@@ -467,17 +477,64 @@ def audit(
         str(item["symbol"]): item["ground_truth"]
         for item in ground_truth_contradictions
     }
+    categorized_symbols = {
+        str(entry["symbol"])
+        for entries in categories.values()
+        for entry in entries
+    }
+    # A symbol can have one consistently wrong extern spelling.  Such a symbol
+    # has no declaration-vs-declaration disagreement, but its owned definition
+    # or retail evidence still proves a return-register contradiction and must
+    # appear in the shadow categories.
+    for contradiction in ground_truth_contradictions:
+        symbol = str(contradiction["symbol"])
+        if symbol in categorized_symbols:
+            continue
+        declarations = grouped[symbol]
+        signatures = Counter(item.signature for item in declarations)
+        categories["return_register_contradictions"].append({
+            "symbol": symbol,
+            "declarations": len(declarations),
+            "return_shapes": sorted({item.return_shape for item in declarations}),
+            "variants": [
+                {
+                    "signature": signature,
+                    "count": count,
+                    "abi": next(
+                        {
+                            "return": item.return_shape,
+                            "parameters": list(item.abi_shape[1]),
+                            "variadic": item.variadic,
+                            "unspecified_parameters": item.unspecified_parameters,
+                        }
+                        for item in declarations if item.signature == signature
+                    ),
+                    "sites": [
+                        f"{item.path}:{item.line}"
+                        for item in declarations if item.signature == signature
+                    ],
+                }
+                for signature, count in signatures.most_common()
+            ],
+        })
+    for entries in categories.values():
+        entries.sort(key=lambda item: (-int(item["declarations"]), str(item["symbol"])))
     applied_symbols = applied_symbols or set()
     trialed_reverted_symbols = trialed_reverted_symbols or set()
     for category, entries in categories.items():
         for entry in entries:
-            sites = [
-                site
-                for variant in entry["variants"]
-                for site in variant["sites"]
-            ]
-            translation_units = sorted({site.rsplit(":", 1)[0] for site in sites})
             truth = truth_by_symbol.get(str(entry["symbol"]))
+            variants = entry["variants"]
+            if truth is not None and category == "return_register_contradictions":
+                sites = [
+                    site
+                    for variant in variants
+                    if variant["abi"]["return"] != truth["return_shape"]
+                    for site in variant["sites"]
+                ]
+            else:
+                sites = [site for variant in variants for site in variant["sites"]]
+            translation_units = sorted({site.rsplit(":", 1)[0] for site in sites})
             entry["affected_translation_units"] = len(translation_units)
             entry["translation_units"] = translation_units
             entry["confidence"] = "high" if truth is not None else "low"
@@ -517,8 +574,11 @@ def audit(
                 elif category != "return_register_contradictions":
                     reason = "Deferred because this session is scoped to return-register contradictions."
                 else:
-                    entry["disposition"] = "pending"
-                    reason = "High-confidence return-register contradiction at or below the 12-translation-unit bound; eligible for a future correction round and not deferred under an exception."
+                    reason = (
+                        "High-confidence return-register contradiction within the "
+                        "12-translation-unit bound, deferred because it was not the "
+                        "single provably safe correction selected for this bounded round."
+                    )
                 entry["disposition_reason"] = reason
     applied_corrections = []
     for symbol in sorted(applied_symbols):
@@ -680,6 +740,43 @@ def main() -> int:
                 "complete": unit.get("metadata", {}).get("complete", False),
                 "source": str(build_report_path.relative_to(ROOT)),
             })
+    verified_by_name = {str(item["name"]): item for item in verified_objects}
+    for correction in report["applied_corrections"]:
+        artifacts = correction["objdiff_artifacts"]
+        if not artifacts:
+            raise ValueError(
+                f"{correction['symbol']}: applied correction lacks objdiff evidence"
+            )
+        for artifact in artifacts:
+            payload = json.loads((ROOT / artifact).read_text(encoding="utf-8"))
+            code_sections = [
+                section for section in payload.get("left", {}).get("sections", [])
+                if section.get("kind") == "SECTION_CODE"
+            ]
+            if not code_sections or any(
+                section.get("match_percent") != 100.0 for section in code_sections
+            ):
+                raise ValueError(f"{artifact}: objdiff code is not 100 percent")
+        expected_units = {
+            "main/" + path.removeprefix("src/").removesuffix(".c")
+            for path in correction["translation_units"]
+            if path.endswith(".c")
+        }
+        missing = sorted(expected_units - verified_by_name.keys())
+        if missing:
+            raise ValueError(
+                f"{correction['symbol']}: missing verified affected units {missing}"
+            )
+        failed = sorted(
+            name for name in expected_units
+            if not verified_by_name[name]["complete"]
+            or verified_by_name[name]["matched_code_percent"] != 100.0
+            or verified_by_name[name]["complete_code_percent"] != 100.0
+        )
+        if failed:
+            raise ValueError(
+                f"{correction['symbol']}: affected units are not 100 percent {failed}"
+            )
     if args.session_id:
         report["session"] = {
             "session_id": args.session_id,

@@ -1,0 +1,31 @@
+{
+  "session_id": "session-1503",
+  "scope": "Contiguous reconstruction from assigned 0x801A5068 through 0x801A5290.",
+  "per_function_objdiff": {
+    "commands": [
+      "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801A5068 fn_801A5068 -o reports/GEDE01/objdiff-game_fn_801A5068-session-1503.json --format json-pretty -c function_reloc_diffs=name_address",
+      "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801A5224 fn_801A5224 -o reports/GEDE01/objdiff-game_fn_801A5224-session-1503.json --format json-pretty -c function_reloc_diffs=name_address"
+    ],
+    "measurement_raw_output": "fn_801A5068 retail=444 generated=444 match=100.0 instructions=111/111 relocations=21/21 differing=0; fn_801A5224 retail=108 generated=108 match=100.0 instructions=27/27 relocations=0/0 differing=0"
+  },
+  "canonical_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json -f json-pretty",
+    "raw_output": "INFO Loading project .; INFO Generating report for 5670 units using 8 threads; INFO Report generated in 0.154s; INFO Writing to build/GEDE01/report.json",
+    "measurement_raw_output": "matching_objects=4126 total_objects=5670 matching_functions=3892 total_functions=8216 matching_code_bytes=611908 total_code_bytes=2300692 matching_data_bytes=34626 total_data_bytes=4305642 linked_code_bytes=611216 linked_data_bytes=34750"
+  },
+  "relocation_strict_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1503-reloc-strict.json -f json-pretty -c function_reloc_diffs=name_address",
+    "raw_output": "INFO Loading project .; INFO Generating report for 5670 units using 8 threads; INFO Report generated in 0.139s; INFO Writing to reports/GEDE01/session-1503-reloc-strict.json",
+    "measurement_raw_output": "matching_functions=3886 matching_code_bytes=609564 game_matching_functions=3824 game_matching_code_bytes=606536"
+  },
+  "full_build": {
+    "command": ".tools/bin/ninja",
+    "raw_output_tail": "[547/549] DOL build/GEDE01/main.dol; [548/549] CHECK config/GEDE01/build.sha1; build/GEDE01/main.dol: OK; [549/549] PROGRESS"
+  },
+  "dol_identity": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+    "expected": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "equal": true
+  }
+}

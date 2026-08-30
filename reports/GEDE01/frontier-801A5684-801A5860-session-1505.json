@@ -1,0 +1,33 @@
+{
+  "session_id": "session-1505",
+  "range_start": "0x801A5684",
+  "range_end": "0x801A5860",
+  "next_target": "0x801A5860",
+  "accounted_bytes": 476,
+  "matched_bytes": 40,
+  "nonmatching_bytes": 436,
+  "accounting_measurement": {
+    "command": "printf 'range_bytes=%d matched_bytes=%d nonmatching_bytes=%d\\n' \"$((0x801A5860-0x801A5684))\" \"$((4+12+12+12))\" \"$((0x801A5838-0x801A5684))\"",
+    "raw_output": "range_bytes=476 matched_bytes=40 nonmatching_bytes=436"
+  },
+  "functions": [
+    {"name":"fn_801A5684","start":"0x801A5684","end":"0x801A5838","bytes":436,"status":"NonMatching","best_percent":98.39449,"generated_bytes":436,"relocations_equal":true,"divergence":"After correcting the cross-TU fn_801A5620 prototype, signed comparisons, return-value narrowing, cached object count, delayed output assignment, and final u16 narrowing, all remaining aligned differences preserve opcodes and relocation sequences but permute the long-lived object, count, buffer1, and buffer2 values among r27-r31.","measurement":{"command_reference":"per_function_measurement.command","raw_output":"{\"symbol\":\"fn_801A5684\",\"retail_bytes\":\"436\",\"generated_bytes\":\"436\",\"retail_instructions\":109,\"generated_instructions\":109,\"match_percent\":98.39449,\"differing_rows\":29,\"retail_relocations\":28,\"generated_relocations\":28}"}},
+    {"name":"fn_801A5838","start":"0x801A5838","end":"0x801A583C","bytes":4,"status":"Matching","percent":100.0,"relocations_equal":true,"measurement":{"command_reference":"per_function_measurement.command","raw_output":"{\"symbol\":\"fn_801A5838\",\"retail_bytes\":\"4\",\"generated_bytes\":\"4\",\"retail_instructions\":1,\"generated_instructions\":1,\"match_percent\":100.0,\"differing_rows\":0,\"retail_relocations\":0,\"generated_relocations\":0}"}},
+    {"name":"fn_801A583C","start":"0x801A583C","end":"0x801A5848","bytes":12,"status":"Matching","percent":100.0,"relocations_equal":true,"measurement":{"command_reference":"per_function_measurement.command","raw_output":"{\"symbol\":\"fn_801A583C\",\"retail_bytes\":\"12\",\"generated_bytes\":\"12\",\"retail_instructions\":3,\"generated_instructions\":3,\"match_percent\":100.0,\"differing_rows\":0,\"retail_relocations\":0,\"generated_relocations\":0}"}},
+    {"name":"fn_801A5848","start":"0x801A5848","end":"0x801A5854","bytes":12,"status":"Matching","percent":100.0,"relocations_equal":true,"measurement":{"command_reference":"per_function_measurement.command","raw_output":"{\"symbol\":\"fn_801A5848\",\"retail_bytes\":\"12\",\"generated_bytes\":\"12\",\"retail_instructions\":3,\"generated_instructions\":3,\"match_percent\":100.0,\"differing_rows\":0,\"retail_relocations\":0,\"generated_relocations\":0}"}},
+    {"name":"fn_801A5854","start":"0x801A5854","end":"0x801A5860","bytes":12,"status":"Matching","percent":100.0,"relocations_equal":true,"measurement":{"command_reference":"per_function_measurement.command","raw_output":"{\"symbol\":\"fn_801A5854\",\"retail_bytes\":\"12\",\"generated_bytes\":\"12\",\"retail_instructions\":3,\"generated_instructions\":3,\"match_percent\":100.0,\"differing_rows\":0,\"retail_relocations\":0,\"generated_relocations\":0}"}}
+  ],
+  "per_function_measurement": {
+    "command": "for f in 801A5684 801A5838 801A583C 801A5848 801A5854; do jq -c --arg s fn_$f '(.left.symbols[]|select(.name==$s)) as $l | (.right.symbols[]|select(.name==$s)) as $r | {symbol:$s,retail_bytes:$l.size,generated_bytes:$r.size,retail_instructions:($l.instructions|length),generated_instructions:($r.instructions|length),match_percent:$l.match_percent,differing_rows:([$l.instructions[]|select(.diff_kind != null and .diff_kind != \"DIFF_NONE\")]|length),retail_relocations:([$l.instructions[].instruction|select(.relocation != null)]|length),generated_relocations:([$r.instructions[].instruction|select(.relocation != null)]|length)}' reports/GEDE01/objdiff-game_fn_$f-session-1505-remediation-1.json; done",
+    "raw_output": "{\"symbol\":\"fn_801A5684\",\"retail_bytes\":\"436\",\"generated_bytes\":\"436\",\"retail_instructions\":109,\"generated_instructions\":109,\"match_percent\":98.39449,\"differing_rows\":29,\"retail_relocations\":28,\"generated_relocations\":28}\n{\"symbol\":\"fn_801A5838\",\"retail_bytes\":\"4\",\"generated_bytes\":\"4\",\"retail_instructions\":1,\"generated_instructions\":1,\"match_percent\":100.0,\"differing_rows\":0,\"retail_relocations\":0,\"generated_relocations\":0}\n{\"symbol\":\"fn_801A583C\",\"retail_bytes\":\"12\",\"generated_bytes\":\"12\",\"retail_instructions\":3,\"generated_instructions\":3,\"match_percent\":100.0,\"differing_rows\":0,\"retail_relocations\":0,\"generated_relocations\":0}\n{\"symbol\":\"fn_801A5848\",\"retail_bytes\":\"12\",\"generated_bytes\":\"12\",\"retail_instructions\":3,\"generated_instructions\":3,\"match_percent\":100.0,\"differing_rows\":0,\"retail_relocations\":0,\"generated_relocations\":0}\n{\"symbol\":\"fn_801A5854\",\"retail_bytes\":\"12\",\"generated_bytes\":\"12\",\"retail_instructions\":3,\"generated_instructions\":3,\"match_percent\":100.0,\"differing_rows\":0,\"retail_relocations\":0,\"generated_relocations\":0}"
+  },
+  "remaining_difference_measurement": {
+    "command": "jq -r '(.left.symbols[]|select(.name==\"fn_801A5684\")) as $l | (.right.symbols[]|select(.name==\"fn_801A5684\")) as $r | [range(0;([$l.instructions|length,$r.instructions|length]|max)) | {l:$l.instructions[.],r:$r.instructions[.]} | select(.l.diff_kind != null and .l.diff_kind != \"DIFF_NONE\")] as $d | \"differing_rows=\\($d|length) opcode_mismatch_rows=\\([$d[]|select(.l.instruction.parts[0].opcode.mnemonic != .r.instruction.parts[0].opcode.mnemonic)]|length)\"' reports/GEDE01/objdiff-game_fn_801A5684-session-1505-remediation-1.json",
+    "raw_output": "differing_rows=29 opcode_mismatch_rows=0"
+  },
+  "relocation_measurement": {
+    "command": "jq -r '(.left.symbols[]|select(.name==\"fn_801A5684\")|[.instructions[].instruction.relocation|select(. != null)]) as $l | (.right.symbols[]|select(.name==\"fn_801A5684\")|[.instructions[].instruction.relocation|select(. != null)]) as $r | \"relocations_equal=\\($l==$r) retail_relocations=\\($l|length) generated_relocations=\\($r|length)\"' reports/GEDE01/objdiff-game_fn_801A5684-session-1505-remediation-1.json",
+    "raw_output": "relocations_equal=true retail_relocations=28 generated_relocations=28"
+  },
+  "unaccounted_spans": []
+}

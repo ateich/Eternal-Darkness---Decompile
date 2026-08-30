@@ -1,0 +1,17 @@
+{
+  "session_id": "session-1504",
+  "range_start": "0x801A5290",
+  "range_end": "0x801A5684",
+  "next_target": "0x801A5684",
+  "accounting": [
+    {"symbol":"fn_801A5290","start":"0x801A5290","end":"0x801A53C4","bytes":308,"status":"Matching","objdiff_percent":100.0,"instructions_equal":"77/77","relocations_equal":"6/6"},
+    {"symbol":"fn_801A53C4","start":"0x801A53C4","end":"0x801A5620","bytes":604,"status":"NonMatching","objdiff_percent":65.09271,"retail_bytes":604,"generated_bytes":464,"instructions_equal":"14/156","relocations_equal":"3/4","divergence":"Canonical GC/1.3 hoists the identical float-to-int conversion and emits a 0x10 frame; retail repeats fctiwz throughout its eight-way unroll and uses a 0x90 conversion-result frame."},
+    {"symbol":"fn_801A5620","start":"0x801A5620","end":"0x801A5684","bytes":100,"status":"Matching","objdiff_percent":100.0,"instructions_equal":"25/25","relocations_equal":"4/4"}
+  ],
+  "matched_bytes": 408,
+  "nonmatching_bytes": 604,
+  "nonmatching_functions_added": 1,
+  "unaccounted_spans": [],
+  "measurement": {"raw_output":"fn_801A5290 retail=308 generated=308 match=100.0 instructions=77/77 relocations=6/6 differing=0\nfn_801A53C4 retail=604 generated=464 match=65.09271 instructions=14/156 relocations=3/4 differing=142\nfn_801A5620 retail=100 generated=100 match=100.0 instructions=25/25 relocations=4/4 differing=0"},
+  "verification": "reports/GEDE01/session-1504-verification.json"
+}

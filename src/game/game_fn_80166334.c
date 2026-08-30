@@ -13,7 +13,7 @@ typedef struct Parser {
 
 extern void fn_80163DA4(Parser*);
 extern int fn_80165894(void*);
-extern void fn_80164C7C(Parser*);
+extern int fn_80164C7C(Parser*);
 extern void fn_8015F9B0(State*, int, int);
 
 void fn_80166334(Parser* parser)
