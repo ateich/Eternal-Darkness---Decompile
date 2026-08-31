@@ -1,0 +1,50 @@
+{
+  "session_id": "session-1564",
+  "build": {
+    "command": "python3 configure.py && .tools/bin/ninja",
+    "result": "completed successfully"
+  },
+  "canonical_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json --format json-pretty",
+    "matching_objects": 4336,
+    "total_objects": 5918,
+    "matching_functions": 4101,
+    "matching_code_bytes": 625332,
+    "linked_code_bytes": 625300
+  },
+  "relocation_strict_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1564-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "matching_functions": 4096,
+    "matching_code_bytes": 623648,
+    "game_matching_functions": 4034,
+    "game_matching_code_bytes": 620620
+  },
+  "per_function": [
+    {
+      "name": "fn_801AAA28",
+      "retail_bytes": 176,
+      "generated_bytes": 176,
+      "match_percent": 85.818184,
+      "relocations_equal": true,
+      "matched_bytes_credited": 0,
+      "evidence": "reports/GEDE01/objdiff-game_fn_801AAA28-session-1564.json",
+      "divergence": "Canonical GC/1.3 materializes all four interior Vec3 addresses before the stores, while retail interleaves each address calculation with that vector's first store."
+    },
+    {
+      "name": "fn_801AAAD8",
+      "retail_bytes": 96,
+      "generated_bytes": 96,
+      "match_percent": 100.0,
+      "relocations_equal": true,
+      "matched_bytes_credited": 96,
+      "evidence": "reports/GEDE01/objdiff-game_fn_801AAAD8-session-1564.json"
+    }
+  ],
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+  },
+  "matched_bytes_total": 96,
+  "nonmatching_bytes_total": 176,
+  "next_target": "0x801AAB38"
+}

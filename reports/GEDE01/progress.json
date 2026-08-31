@@ -1,38 +1,38 @@
 {
   "status": "in progress",
-  "matching_objects": 4329,
-  "total_objects": 5909,
-  "matching_functions": 4094,
+  "matching_objects": 4336,
+  "total_objects": 5918,
+  "matching_functions": 4101,
   "total_functions": 8216,
-  "matching_code_bytes": 624364,
+  "matching_code_bytes": 625332,
   "total_code_bytes": 2300692,
   "matching_data_bytes": 34626,
   "total_data_bytes": 4305642,
-  "code_percent": 27.138095842468267,
-  "function_percent": 49.829600778967865,
-  "linked_code_bytes": 624332,
+  "code_percent": 27.18017,
+  "function_percent": 49.9148,
+  "linked_code_bytes": 625300,
   "linked_data_bytes": 34758,
-  "game_code_matching_bytes": 621336,
-  "game_code_total_bytes": 1044260,
-  "game_code_linked_bytes": 621304,
+  "game_code_matching_bytes": 622304,
+  "game_code_total_bytes": 1047224,
+  "game_code_linked_bytes": 622272,
   "sdk_code_matching_bytes": 3028,
   "sdk_code_total_bytes": 3028,
   "sdk_objects_complete": 18,
   "sdk_objects_total": 18,
   "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
-  "source": "build/GEDE01/report.json freshly regenerated in session-1559 with no extra objdiff config",
+  "source": "build/GEDE01/report.json freshly regenerated in session-1564 with no extra objdiff config",
   "headline_measurement_basis": {
     "config": "canonical default with no extra -c config",
     "report_command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json --format json-pretty 2>&1 | sed 's/^ //'",
-    "raw_output": "INFO Loading project .\nINFO Generating report for 5909 units (using 8 threads)\nINFO Report generated successfully and written to build/GEDE01/report.json"
+    "raw_output": "INFO Loading project .\nINFO Generating report for 5918 units (using 8 threads)\nINFO Report generated successfully and was written to build/GEDE01/report.json"
   },
   "derived_measurement": {
     "command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report.json",
-    "raw_output": "matching_objects=4329 total_objects=5909 matching_functions=4094 total_functions=8216 matching_code_bytes=624364 total_code_bytes=2300692 matching_data_bytes=34626 total_data_bytes=4305642 linked_code_bytes=624332 linked_data_bytes=34758"
+    "raw_output": "matching_objects=4336 total_objects=5918 matching_functions=4101 total_functions=8216 matching_code_bytes=625332 total_code_bytes=2300692 matching_data_bytes=34626 total_data_bytes=4305642 linked_code_bytes=625300 linked_data_bytes=34758"
   },
   "category_measurement": {
     "command": "jq -r '(.measures.matched_code|tonumber) as $mc | (.measures.total_code|tonumber) as $tc | (.measures.matched_functions|tonumber) as $mf | (.measures.total_functions|tonumber) as $tf | [.categories[]|select(.id==\"game\")|.measures.matched_code] as $gmc | [.categories[]|select(.id==\"game\")|.measures.total_code] as $gtc | [.categories[]|select(.id==\"game\")|.measures.complete_code] as $gcc | [.categories[]|select(.id==\"sdk\")|.measures.matched_code] as $smc | [.categories[]|select(.id==\"sdk\")|.measures.total_code] as $stc | [.categories[]|select(.id==\"sdk\")|.measures.complete_units] as $scu | [.categories[]|select(.id==\"sdk\")|.measures.total_units] as $stu | \"code_percent=\\($mc*100/$tc) function_percent=\\($mf*100/$tf) game_code_matching_bytes=\\($gmc[0]) game_code_total_bytes=\\($gtc[0]) game_code_linked_bytes=\\($gcc[0]) sdk_code_matching_bytes=\\($smc[0]) sdk_code_total_bytes=\\($stc[0]) sdk_objects_complete=\\($scu[0]) sdk_objects_total=\\($stu[0])\"' build/GEDE01/report.json",
-    "raw_output": "code_percent=27.138095842468267 function_percent=49.829600778967865 game_code_matching_bytes=621336 game_code_total_bytes=1044260 game_code_linked_bytes=621304 sdk_code_matching_bytes=3028 sdk_code_total_bytes=3028 sdk_objects_complete=18 sdk_objects_total=18"
+    "raw_output": "code_percent=27.180170140114367 function_percent=49.914800389483936 game_code_matching_bytes=622304 game_code_total_bytes=1047224 game_code_linked_bytes=622272 sdk_code_matching_bytes=3028 sdk_code_total_bytes=3028 sdk_objects_complete=18 sdk_objects_total=18"
   },
   "dol_sha1_measurement": {
     "command": "sha1sum build/GEDE01/main.dol",
@@ -46,15 +46,19 @@
   },
   "relocation_strict": {
     "config": "function_reloc_diffs=name_address",
-    "matching_functions": 4089,
-    "matching_code_bytes": 622680,
-    "game_matching_functions": 4027,
-    "game_matching_code_bytes": 619652,
-    "source": "reports/GEDE01/session-1559-reloc-strict.json freshly regenerated with function_reloc_diffs=name_address",
-    "command": "jq -c '{matching_functions:.measures.matched_functions,matching_code_bytes:.measures.matched_code,game_matching_functions:([.categories[]|select(.id==\"game\")][0].measures.matched_functions),game_matching_code_bytes:([.categories[]|select(.id==\"game\")][0].measures.matched_code)}' reports/GEDE01/session-1559-reloc-strict.json",
-    "raw_output": "{\"matching_functions\":4089,\"matching_code_bytes\":\"622680\",\"game_matching_functions\":4027,\"game_matching_code_bytes\":\"619652\"}"
+    "matching_functions": 4096,
+    "matching_code_bytes": 623648,
+    "game_matching_functions": 4034,
+    "game_matching_code_bytes": 620620,
+    "source": "reports/GEDE01/session-1564-reloc-strict.json freshly regenerated with function_reloc_diffs=name_address",
+    "command": "jq -c '{matching_functions:.measures.matched_functions,matching_code_bytes:.measures.matched_code,game_matching_functions:([.categories[]|select(.id==\"game\")][0].measures.matched_functions),game_matching_code_bytes:([.categories[]|select(.id==\"game\")][0].measures.matched_code)}' reports/GEDE01/session-1562-reloc-strict.json",
+    "raw_output": "{\"matching_functions\":4096,\"matching_code_bytes\":\"623648\",\"game_matching_functions\":4034,\"game_matching_code_bytes\":\"620620\"}"
   },
   "open_items": [
+    "Session session-1564 started exactly at fn_801AAA28 and accounts contiguously for all 272 bytes through 0x801AAB38. Assigned fn_801AAA28 is preserved as this session's sole independent size-exact honest-C NonMatching debt at a best fresh relocation-strict score of 85.818184% for 176 retail and generated bytes: canonical GC/1.3 materializes all four interior Vec3 addresses before the stores, while retail interleaves each address calculation with that vector's first store; instruction count, control flow, and all relocations otherwise align. It earns zero matched-byte credit and uses no assembly. Immediate fn_801AAAD8 independently matches at 100% relocation-strict objdiff for 96 bytes; -schedule off and -opt nopeephole reproduce retail loop-update ordering, and all four address and call relocations compare equal by name and address. No gap, shared reconstruction, assembly, fallback jump, or unaccounted span was added. Fresh canonical and strict reports remain separate, and main.dol is byte-identical to retail. Evidence is reports/GEDE01/frontier-801AAA28-801AAB38-session-1564.json, both per-function objdiff files, reports/GEDE01/session-1564-verification.json, and reports/GEDE01/session-1564-reloc-strict.json.",
+    "Session session-1563 started exactly at fn_801AA6D0 and accounts contiguously for all 856 bytes through 0x801AAA28. Assigned fn_801AA6D0 is preserved as this session's sole independent size-exact honest-C NonMatching debt at a best fresh relocation-strict score of 99.40594% for 808 retail and generated bytes: canonical GC/1.3 swaps the r27 and r28 allocation in the second and third repeated maximum-size calculations, while instruction count, control flow, and all 117 relocation-bearing instructions align; it earns zero matched-byte credit and uses no assembly. Immediate fn_801AA9F8 and fn_801AA9FC independently match at 100% relocation-strict objdiff for 4 and 44 bytes, totaling 48 matched bytes; fn_801AA9FC's three call relocations compare equal by name and address. No gap, shared reconstruction, assembly, fallback jump, or unaccounted span was added. Fresh canonical and strict reports remain separate, and main.dol is byte-identical to retail. Evidence is reports/GEDE01/frontier-801AA6D0-801AAA28-session-1563.json, all three per-function objdiff files, reports/GEDE01/session-1563-verification.json, and reports/GEDE01/session-1563-reloc-strict.json.",
+    "Session session-1562 started exactly at fn_801AA550 and accounts contiguously for all 384 bytes through 0x801AA6D0. Assigned fn_801AA550 and immediate fn_801AA618 independently match at 100% relocation-strict objdiff for 200 and 184 bytes, totaling 384 matched bytes. Both use -schedule off to reproduce retail instruction ordering, and all relocation-bearing instructions compare equal by name and address. No NonMatching function, fallback, gap, shared reconstruction, assembly, or unaccounted span was added. Fresh canonical and strict reports remain separate, and main.dol is byte-identical to retail. Evidence is reports/GEDE01/frontier-801AA550-801AA6D0-session-1562.json, both per-function objdiff files, reports/GEDE01/session-1562-verification.json, and reports/GEDE01/session-1562-reloc-strict.json.",
+    "Session session-1561 started exactly at fn_801AA398 and accounts contiguously for all 440 bytes through 0x801AA550. Assigned fn_801AA398 and immediate fn_801AA4A0 independently match at 100% relocation-strict objdiff for 264 and 176 bytes, totaling 440 matched bytes. No NonMatching function, fallback, gap, shared reconstruction, assembly, or unaccounted span was added. Fresh canonical and strict reports remain separate, and main.dol is byte-identical to retail. Evidence is reports/GEDE01/frontier-801AA398-801AA550-session-1561.json, both per-function objdiff files, reports/GEDE01/session-1561-verification.json, and reports/GEDE01/session-1561-reloc-strict.json.",
     "Session session-1559 started exactly at fn_801A9FA4 and accounts contiguously for all 1012 bytes through 0x801AA398. Assigned fn_801A9FA4 is preserved as this session's sole independent honest-C NonMatching debt at a best fresh relocation-strict score of 88.05623% for 996 retail bytes versus 1000 generated bytes: canonical GC/1.3 assigns the long-lived owner, packed value, divisor, and position values to r26, r29, r28, and r27 instead of retail r29, r28, r27, and r26, and schedules the unsigned volume conversions differently. It earns zero matched-byte credit and uses no assembly. Immediate fn_801AA388 independently matches at 100% relocation-strict objdiff for 16 bytes with both small-data relocations equal by name and address. No gap, shared reconstruction, assembly, fallback jump, or unaccounted span was added. Fresh canonical and strict reports remain separate, and main.dol is byte-identical to retail. Evidence is reports/GEDE01/frontier-801A9FA4-801AA398-session-1559.json, both per-function objdiff files, reports/GEDE01/session-1559-verification.json, and reports/GEDE01/session-1559-reloc-strict.json.",
     "Session session-1558 started exactly at fn_801A9E40 and accounts contiguously for all 356 bytes through 0x801A9FA4. Assigned fn_801A9E40 and immediate fn_801A9EF4 and fn_801A9F44 independently match at 100% relocation-strict objdiff for 180, 80, and 96 bytes, totaling 356 matched bytes. All address and call relocations compare equal by name and address. No NonMatching function, fallback, gap, shared reconstruction, assembly, or unaccounted span was added. Fresh canonical and strict reports remain separate, and main.dol is byte-identical to retail. Evidence is reports/GEDE01/frontier-801A9E40-801A9FA4-session-1558.json, all three per-function objdiff files, reports/GEDE01/session-1558-verification.json, and reports/GEDE01/session-1558-reloc-strict.json.",
     "Session session-1557 started exactly at fn_801A9CDC and accounts contiguously for all 356 bytes through 0x801A9E40. Assigned fn_801A9CDC is preserved as the session's sole independent honest-C NonMatching debt at a best fresh relocation-strict score of 95.916664% for 240 retail bytes versus 244 generated bytes: canonical GC/1.3 inserts a base-pointer move and assigns the minimum, current, target, and next live values to a different register cycle, so it earns zero matched-byte credit. Immediate fn_801A9DCC independently matches at 100% relocation-strict objdiff for 116 bytes; -schedule off and -opt nopeephole preserve retail signed-byte extension, register lifetimes, and all address and call relocations by name and address. No gap, shared reconstruction, assembly, fallback jump, or unaccounted span was added. Fresh canonical and strict reports remain separate, and main.dol is byte-identical to retail. Evidence is reports/GEDE01/frontier-801A9CDC-801A9E40-session-1557.json, both per-function objdiff files, reports/GEDE01/session-1557-verification.json, and reports/GEDE01/session-1557-reloc-strict.json.",
@@ -1585,8 +1589,8 @@
     "Session session-1509 started exactly at fn_801A5D5C and accounts contiguously for all 580 bytes through 0x801A5FA0. Fourteen independent honest-C translation units match at 100% relocation-strict objdiff and contribute respectively 96, 84, 16, 16, 56, 76, 16, 16, 76, 16, 16, 20, 60, and 16 bytes. All 13 relocation records agree in offset, type, target, and addend. No NonMatching function, fallback, shared reconstruction, assembly, or unaccounted span was added. Fresh canonical and strict aggregate reports remain separate, and main.dol is byte-identical to retail. Evidence is reports/GEDE01/frontier-801A5D5C-801A5FA0-session-1509.json, fourteen per-function objdiff files, and reports/GEDE01/session-1509-reloc-strict.json.",
     "Session session-1511 started exactly at fn_801A5FA0 and accounts contiguously for all 16 bytes through 0x801A5FB0. The independent honest-C translation unit matches at 100% relocation-strict objdiff: 16 retail and generated bytes, four instructions, zero differing rows, and zero relocations on both sides. No NonMatching function, fallback, shared reconstruction, assembly, or unaccounted span was added. Consecutive fn_801A5FB0 is a 928-byte reconstruction target and remains unowned for the next session. Fresh canonical and strict aggregate reports remain separate, and main.dol is byte-identical to retail. Evidence is reports/GEDE01/frontier-801A5FA0-801A5FB0-session-1511.json, reports/GEDE01/objdiff-game_fn_801A5FA0-session-1511.json, and reports/GEDE01/session-1511-reloc-strict.json."
   ],
-  "next_target": "0x801AA398",
-  "next_gate": "Start at immediate consecutive unowned fn_801AA398 and continue upward toward the jumptable_8023BF28 data-ownership boundary. Preserve fn_801A9FA4, fn_801A9CDC, fn_801A9B94, fn_801A9B38, fn_801A9A40, fn_801A99B4, fn_801A94E4, fn_801A9488, fn_801A9250, fn_801A91D4, fn_801A8CCC, fn_801A8C60, fn_801A872C, fn_801A85D4, fn_801A852C, fn_801A82FC, fn_801A81FC, fn_801A80FC, fn_801A8024, fn_801A7EA8, fn_801A7E04, fn_801A7D44, fn_801A7BA0, fn_801A7958, fn_801A7228, fn_801A717C, fn_801A69F0, fn_801A68C4, fn_801A657C, fn_801A63A0, fn_801A6350, fn_801A59CC, fn_801A5910, fn_801A5860, fn_801A5684, fn_801A53C4, fn_801A4CE0, fn_801A4430, and fn_801A3DF8 as explicit NonMatching debt.",
+  "next_target": "0x801AAB38",
+  "next_gate": "Start at immediate consecutive unowned fn_801AAB38 and continue upward toward the jumptable_8023BF28 data-ownership boundary. Preserve fn_801AAA28, fn_801AA6D0, fn_801A9FA4, fn_801A9CDC, fn_801A9B94, fn_801A9B38, fn_801A9A40, fn_801A99B4, fn_801A94E4, fn_801A9488, fn_801A9250, fn_801A91D4, fn_801A8CCC, fn_801A8C60, fn_801A872C, fn_801A85D4, fn_801A852C, fn_801A82FC, fn_801A81FC, fn_801A80FC, fn_801A8024, fn_801A7EA8, fn_801A7E04, fn_801A7D44, fn_801A7BA0, fn_801A7958, fn_801A7228, fn_801A717C, fn_801A69F0, fn_801A68C4, fn_801A657C, fn_801A63A0, fn_801A6350, fn_801A59CC, fn_801A5910, fn_801A5860, fn_801A5684, fn_801A53C4, fn_801A4CE0, fn_801A4430, and fn_801A3DF8 as explicit NonMatching debt.",
   "asm_justifications": {
     "fn_801A4874": "The Gekko psq_st instruction stores f1 through GQR5 quantization and has no scalar C spelling or canonical MWCC intrinsic.",
     "fn_801A2AB4": "Gekko matrix transform kernel requires psq_l and psq_lu paired-single loads, ps_madds0 and ps_madds1 arithmetic, plus GQR5-quantized psq_stu stores; these instructions have no C spelling or canonical MWCC intrinsic.",

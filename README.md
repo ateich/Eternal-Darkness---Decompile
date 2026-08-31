@@ -54,9 +54,9 @@ Generated from `objdiff` build evidence (`reports/GEDE01/progress.json`), verifi
 
 | Metric | Matched | Total | Percent |
 | --- | ---: | ---: | ---: |
-| Code bytes | 624,364 | 2,300,692 | **27.14%** |
-| Functions | 4,094 | 8,216 | 49.83% |
-| Objects (TUs) | 4,329 | 5,909 | 73.26% |
+| Code bytes | 625,332 | 2,300,692 | **27.18%** |
+| Functions | 4,101 | 8,216 | 49.91% |
+| Objects (TUs) | 4,336 | 5,918 | 73.27% |
 
 Denominators are the whole retail `main.dol`. Percentages count only functions that `objdiff` reports at 100%, relocations included; reconstructions registered as documented `NonMatching` are not counted. Most matched objects are small, so the object percentage runs far ahead of the code percentage — **code bytes is the honest measure of how far along this is.**
 <!-- progress:end -->
@@ -66,3 +66,17 @@ Denominators are the whole retail `main.dol`. Percentages count only functions t
 Boot milestone (2026-08-11): **Eternal Darkness reaches the title screen on PC through DolRecomp + RecompCore with zero interpreter fallback for guest CPU execution.** The experiment is isolated on a separate `boot-experiment` branch and machine; it does not change the matching strategy, the exact-match acceptance bar, or scheduler priorities, and no runtime hacks land in this tree.
 
 The long-term goal is a PC port with a modern renderer, ray tracing, and upgraded textures, materials, and models while preserving the original gameplay logic. As matching coverage grows, recovered source functions are to progressively replace static-recompiled blocks under the gated host-replacement track defined in `docs/pc-execution.md`.
+
+## Contributors
+
+Outside contributions are welcome and are credited in
+[`CONTRIBUTORS.md`](CONTRIBUTORS.md). They are rebuilt and re-verified here
+before landing, and they reach this repository through a squashing publish, so
+that file — not the commit log — is the record of who matched what.
+
+If you are picking a function to work on, note that an automated chain is
+continuously extending the frontier upward through the address space; check
+`reports/GEDE01/progress.json` (`next_target`) to see where it currently is, so
+you are not duplicating work in flight. Anything well below that frontier still
+registered as `NonMatching` in `configure.py` is fair game and unlikely to
+collide.

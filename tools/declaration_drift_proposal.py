@@ -250,7 +250,9 @@ def main() -> int:
         elif item["symbol"] in inherited_tested_reverted:
             item["disposition"] = "proposal-only"
             item["disposition_reason"] = (
-                "Proposal only: inherited evidence from session-1480 records that this exact candidate regressed an affected object and was reverted; no rewrite was tested in session-1520."
+                "Proposal only: inherited evidence records that this exact candidate "
+                "regressed an affected object and was reverted; no rewrite was repeated "
+                f"in {args.session_id}."
             )
         elif item["confidence"] == "low":
             item["disposition"] = "proposal-only"

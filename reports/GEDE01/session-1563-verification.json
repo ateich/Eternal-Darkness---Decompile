@@ -1,0 +1,15 @@
+{
+  "session_id": "session-1563",
+  "build": {"command":"python3 configure.py && .tools/bin/ninja","result":"completed successfully"},
+  "canonical_report": {"command":"build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json --format json-pretty","matching_objects":4335,"total_objects":5916,"matching_functions":4100,"matching_code_bytes":625236,"linked_code_bytes":625204},
+  "relocation_strict_report": {"command":"build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1563-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address","matching_functions":4095,"matching_code_bytes":623552,"game_matching_functions":4033,"game_matching_code_bytes":620524},
+  "per_function": [
+    {"name":"fn_801AA6D0","retail_bytes":808,"generated_bytes":808,"match_percent":99.40594,"relocations_equal":true,"matched_bytes_credited":0,"evidence":"reports/GEDE01/objdiff-game_fn_801AA6D0-session-1563.json","divergence":"Canonical GC/1.3 swaps r27 and r28 in the second and third repeated maximum-size calculations."},
+    {"name":"fn_801AA9F8","retail_bytes":4,"generated_bytes":4,"match_percent":100.0,"relocations_equal":true,"matched_bytes_credited":4,"evidence":"reports/GEDE01/objdiff-game_fn_801AA9F8-session-1563.json"},
+    {"name":"fn_801AA9FC","retail_bytes":44,"generated_bytes":44,"match_percent":100.0,"relocations_equal":true,"matched_bytes_credited":44,"evidence":"reports/GEDE01/objdiff-game_fn_801AA9FC-session-1563.json"}
+  ],
+  "dol_sha1": {"command":"sha1sum build/GEDE01/main.dol","raw_output":"ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"},
+  "matched_bytes_total": 48,
+  "nonmatching_bytes_total": 808,
+  "next_target": "0x801AAA28"
+}

@@ -1,0 +1,43 @@
+BASELINE_IDENTITY
+command: git rev-parse HEAD
+raw_output: 43ea2c672e9bb627cc22887ac773c6be65a7fd14
+interpretation: The proposal census is pinned to the accepted source snapshot at session start.
+
+SIGNATURE_AUDIT
+command: python3 tools/declaration_drift_proposal.py --baseline-ref 43ea2c672e9bb627cc22887ac773c6be65a7fd14 --facts --facts-output reports/GEDE01/declaration-drift-proposal-session-1560-facts.txt
+raw_output: exit status 0; AUDIT declarations=18749 symbols=4367
+interpretation: The proposal generator invokes tools/signature_audit.py on the immutable snapshot and records the ten most-declared disagreement symbols, every declaration variant and count, declaring-TU counts, affected-TU estimates, call sites, and confidence grounding.
+
+HIGH_CONFIDENCE_CANDIDATES
+command: rg '^(SYMBOL|VARIANT).*name=(fn_8020123C|fn_8018E230)' reports/GEDE01/declaration-drift-proposal-session-1560-facts.txt
+raw_output: SYMBOL rank=4 name=fn_8020123C declarations=176 declaring_tus=176 blast_radius_tus=2 confidence=high
+raw_output: VARIANT name=fn_8020123C declaration='unsigned long long fn_8020123C()' declarations=174 declaring_tus=174 call_sites=330
+raw_output: VARIANT name=fn_8020123C declaration='int fn_8020123C(int, int, void*, void*)' declarations=1 declaring_tus=1 call_sites=2
+raw_output: VARIANT name=fn_8020123C declaration='void fn_8020123C(int, void*, void*, int)' declarations=1 declaring_tus=1 call_sites=1
+raw_output: SYMBOL rank=10 name=fn_8018E230 declarations=77 declaring_tus=77 blast_radius_tus=76 confidence=high
+interpretation: fn_8018E230 exceeds the 12-TU cap. fn_8020123C is within the cap, but the exact proposed normalization was already trialed and reverted after moving an affected object, so the accepted source state was preserved and the failed rewrite was not repeated.
+
+INHERITED_REVERT_EVIDENCE
+command: jq -c '{retail:(.left.symbols[]|select(.name=="fn_8018F378")|{size,match_percent,instructions:(.instructions|length),relocations:([.instructions[].instruction.relocation|select(.!=null)]|length),differing_rows:([.instructions[]|select(.diff_kind!=null and .diff_kind!="DIFF_NONE")]|length)}),generated:(.right.symbols[]|select(.name=="fn_8018F378")|{size,instructions:(.instructions|length),relocations:([.instructions[].instruction.relocation|select(.!=null)]|length)})}' reports/GEDE01/objdiff-game_fn_8018F378-session-1480-remediation-1-candidate.json
+raw_output: {"retail":{"size":"892","match_percent":87.69058,"instructions":236,"relocations":30,"differing_rows":125},"generated":{"size":"904","instructions":236,"relocations":30}}
+interpretation: This retained candidate objdiff proves that normalizing fn_8020123C changed the generated affected object. The rewrite was reverted in its original correction round and remains proposal-only.
+
+FULL_DOL_BUILD
+command: .tools/bin/ninja build/GEDE01/main.dol
+raw_output_tail: [558/558] DOL build/GEDE01/main.dol
+exit_status: 0
+
+DOL_SHA1
+command: sha1sum build/GEDE01/main.dol
+raw_output: ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol
+
+PROGRESS_GATE
+command: jq -c '{next_target,matching_code_bytes,matching_functions,matching_objects,source,next_gate}' reports/GEDE01/progress.json
+raw_output: {"next_target":"0x801AA398","matching_code_bytes":624364,"matching_functions":4094,"matching_objects":4329,"source":"build/GEDE01/report.json freshly regenerated in session-1559 with no extra objdiff config"}
+interpretation: next_target remains exactly 0x801AA398; progress counts and next_gate prose were not revised.
+
+ACCOUNTING
+command: git diff --exit-code 43ea2c672e9bb627cc22887ac773c6be65a7fd14 -- src/game reports/GEDE01/progress.json
+raw_output:
+exit_status: 0
+interpretation: No translation unit or progress field changed. Matched bytes added: 0. NonMatching bytes added: 0. NonMatching registrations added: 0. NonMatching registrations removed: 0.
