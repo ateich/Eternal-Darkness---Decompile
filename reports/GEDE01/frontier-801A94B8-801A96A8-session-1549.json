@@ -1,0 +1,36 @@
+{
+  "session_id": "session-1549",
+  "range_start": "0x801A94B8",
+  "range_end": "0x801A96A8",
+  "next_target": "0x801A96A8",
+  "range_bytes": 496,
+  "matched_bytes": 44,
+  "nonmatching_bytes": 452,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "name": "fn_801A94B8",
+      "start": "0x801A94B8",
+      "end": "0x801A94E4",
+      "bytes": 44,
+      "status": "Matching",
+      "objdiff_percent": 100.0,
+      "relocations_equal": true,
+      "compiler_adjustment": "-schedule off reproduces retail LR-spill-before-argument-materialization ordering"
+    },
+    {
+      "name": "fn_801A94E4",
+      "start": "0x801A94E4",
+      "end": "0x801A96A8",
+      "bytes": 452,
+      "generated_bytes": 436,
+      "status": "NonMatching",
+      "objdiff_percent": 73.132744,
+      "relocations_equal": false,
+      "divergence": "Canonical GC/1.3 reorders the Pair aggregate copy and argument setup and lowers the discriminator and conditional fn_801AA6D0 path into different control flow and register lifetimes."
+    }
+  ],
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "shared_reconstruction": false,
+  "assembly_added": false
+}

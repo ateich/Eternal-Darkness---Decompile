@@ -1,0 +1,100 @@
+{
+  "session_id": "session-1545",
+  "range_start": "0x801A8EDC",
+  "range_end": "0x801A90BC",
+  "next_target": "0x801A90BC",
+  "accounted_bytes": 480,
+  "matched_bytes": 480,
+  "nonmatching_bytes": 0,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "name": "fn_801A8EDC",
+      "range": "0x801A8EDC-0x801A8F08",
+      "retail_bytes": 44,
+      "generated_bytes": 44,
+      "objdiff_percent": 100.0,
+      "relocations_equal": true,
+      "evidence": "reports/GEDE01/objdiff-game_fn_801A8EDC-session-1545.json"
+    },
+    {
+      "name": "fn_801A8F08",
+      "range": "0x801A8F08-0x801A8FE8",
+      "retail_bytes": 224,
+      "generated_bytes": 224,
+      "objdiff_percent": 100.0,
+      "relocations_equal": true,
+      "evidence": "reports/GEDE01/objdiff-game_fn_801A8F08-session-1545.json"
+    },
+    {
+      "name": "fn_801A8FE8",
+      "range": "0x801A8FE8-0x801A90BC",
+      "retail_bytes": 212,
+      "generated_bytes": 212,
+      "objdiff_percent": 100.0,
+      "relocations_equal": true,
+      "evidence": "reports/GEDE01/objdiff-game_fn_801A8FE8-session-1545.json"
+    }
+  ],
+  "nonmatching_functions_added": 0,
+  "assembly_added": false,
+  "canonical_headline": {
+    "matching_functions": 4067,
+    "matching_objects": 4302,
+    "matching_code_bytes": 622152,
+    "linked_code_bytes": 622120
+  },
+  "relocation_strict": {
+    "matching_functions": 4062,
+    "matching_code_bytes": 620468,
+    "game_matching_functions": 4000,
+    "game_matching_code_bytes": 617440,
+    "evidence": "reports/GEDE01/session-1545-reloc-strict.json"
+  },
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "retail_cmp_exit": 0,
+  "canonical_headline_prior_session": {
+    "matching_functions": 4064,
+    "matching_objects": 4299,
+    "matching_code_bytes": 621672,
+    "linked_code_bytes": 621640
+  },
+  "relocation_strict_prior_session": {
+    "matching_functions": 4059,
+    "matching_code_bytes": 619988
+  },
+  "remediation": {
+    "at": "2026-08-31T07:05-04:00",
+    "by": "smith",
+    "reason": "As originally committed this session registered no translation unit in configure.py. Nothing was compiled, the per-function evidence files contained only a left side, and the headline counters did not move. The 100% claim was unsupported.",
+    "actions": [
+      "registered game_fn_801A8EDC.c, game_fn_801A8F08.c and game_fn_801A8FE8.c in configure.py",
+      "added extra_cflags -use_lmw_stmw on to fn_801A8F08 and fn_801A8FE8 (retail uses stmw/lmw; MWCC defaulted to _savegpr_/_restgpr_ calls)",
+      "swapped the sx0 and sdepth declaration order in fn_801A8F08 to flip the r27/r31 coloring to retail order",
+      "rebuilt, reran objdiff-cli producing left and right sides, regenerated the canonical and relocation-strict reports"
+    ],
+    "measured_progression": {
+      "fn_801A8F08": [
+        "93.57143",
+        "99.28571",
+        "100.0"
+      ],
+      "fn_801A8FE8": [
+        "93.962265",
+        "100.0"
+      ],
+      "fn_801A8EDC": [
+        "100.0"
+      ]
+    },
+    "headline_delta": {
+      "matching_functions": 3,
+      "matching_code_bytes": 480,
+      "matching_objects": 3
+    },
+    "relocation_strict_delta": {
+      "matching_functions": 3,
+      "matching_code_bytes": 480
+    }
+  }
+}

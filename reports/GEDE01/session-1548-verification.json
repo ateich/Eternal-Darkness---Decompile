@@ -1,0 +1,26 @@
+{
+  "session_id": "session-1548",
+  "canonical_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json --format json-pretty",
+    "matching_objects": 4312,
+    "total_objects": 5885,
+    "matching_functions": 4077,
+    "total_functions": 8216,
+    "matching_code_bytes": 622872,
+    "linked_code_bytes": 622840
+  },
+  "relocation_strict_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1548-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "matching_functions": 4072,
+    "matching_code_bytes": 621188,
+    "game_matching_functions": 4010,
+    "game_matching_code_bytes": 618160
+  },
+  "per_function_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_ADDRESS fn_ADDRESS -o reports/GEDE01/objdiff-game_fn_ADDRESS-session-1548.json --format json-pretty -c function_reloc_diffs=name_address",
+  "matched_byte_arithmetic": "100+104+4+20+12+12+8=260",
+  "range_arithmetic": "260 matched + 48 NonMatching = 308 bytes = 0x801A94B8-0x801A9384",
+  "dol_sha1_command": "sha1sum build/GEDE01/main.dol",
+  "dol_sha1_raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+  "retail_cmp_command": "cmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+  "retail_cmp_exit": 0
+}
