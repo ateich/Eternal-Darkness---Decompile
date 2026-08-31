@@ -1,0 +1,37 @@
+{
+  "session_id": "session-1569",
+  "starting_target": "0x801AB2EC",
+  "next_target": "0x801AB50C",
+  "matched_bytes": 544,
+  "nonmatching_functions": 0,
+  "commits": [
+    "850c3f3c8798e6f35bb0094a31f4557a19a80ac6",
+    "e982ad1245d6c435b762931041b5b6eecdef004a"
+  ],
+  "canonical_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json -f json",
+    "matching_objects": 4344,
+    "matching_functions": 4109,
+    "matching_code_bytes": 627320,
+    "linked_code_bytes": 627288
+  },
+  "relocation_strict_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1569-reloc-strict.json -f json -c function_reloc_diffs=name_address",
+    "matching_functions": 4104,
+    "matching_code_bytes": 625636,
+    "game_matching_functions": 4042,
+    "game_matching_code_bytes": 622608
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+    "matches_retail": true
+  },
+  "accounting": {
+    "split_expression": "(0x801AB3CC - 0x801AB2EC) + (0x801AB50C - 0x801AB3CC)",
+    "split_bytes": 544,
+    "objdiff_bytes": 544,
+    "done_total_bytes": 544,
+    "all_equal": true
+  }
+}

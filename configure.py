@@ -87,6 +87,17 @@ config.asflags = ["-mgekko", "--strip-local-absolute", "-I include", f"-I build/
 config.ldflags = ["-fp hardware", "-nodefaults"]
 config.custom_build_rules = [
     {
+        "name": "externalize_game_801AB154_conversion_biases",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @29 lbl_80650E80 orig/GEDE01/sys/main.dol && "
+            "python3 tools/externalize_elf_symbol.py $in @32 lbl_80650E88 orig/GEDE01/sys/main.dol && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@29=lbl_80650E80 --redefine-sym=@32=lbl_80650E88 "
+            "--remove-section=.sdata2 --rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
         "name": "externalize_game_801A93E8_conversion_bias",
         "command": (
             "python3 tools/externalize_elf_symbol.py $in @8 lbl_80650E40 orig/GEDE01/sys/main.dol && "
@@ -2232,6 +2243,11 @@ for rule in config.custom_build_rules:
 guarded_externalize_rules.add("externalize_string_pool_80250588")
 config.custom_build_steps = {
     "post-compile": [
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_801AB154.externalized"],
+            "rule": "externalize_game_801AB154_conversion_biases",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_801AB154.o"],
+        },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_801A93E8.externalized"],
             "rule": "externalize_game_801A93E8_conversion_bias",
@@ -9522,6 +9538,16 @@ config.libs = [
             Object(Matching, "game/game_fn_801AA9FC.c", extra_cflags=["-schedule off"]),
             Object(NonMatching, "game/game_fn_801AAA28.c", extra_cflags=["-schedule off"]),
             Object(Matching, "game/game_fn_801AAAD8.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
+            Object(NonMatching, "game/game_fn_801AAB38.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
+            Object(NonMatching, "game/game_fn_801AAC10.c", extra_cflags=["-schedule off"]),
+            Object(Matching, "game/game_fn_801AAD48.c"),
+            Object(Matching, "game/game_fn_801AAD58.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
+            Object(Matching, "game/game_fn_801AAE68.c", extra_cflags=["-schedule off", "-opt nopeephole", "-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_801AB048.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
+            Object(Matching, "game/game_fn_801AB0C4.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
+            Object(Matching, "game/game_fn_801AB154.c", extra_cflags=["-schedule off", "-opt nopeephole", "-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_801AB2EC.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
+            Object(Matching, "game/game_fn_801AB3CC.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
         ],
     },
     {

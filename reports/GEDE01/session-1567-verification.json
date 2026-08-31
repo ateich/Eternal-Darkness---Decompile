@@ -1,0 +1,33 @@
+{
+  "session_id": "session-1567",
+  "canonical_report": "build/GEDE01/report.json",
+  "headline_measurement_basis": "canonical default with no extra -c config",
+  "matching_functions": 4106,
+  "matching_objects": 4341,
+  "matching_code_bytes": 626368,
+  "linked_code_bytes": 626336,
+  "canonical_measurement": {
+    "command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report.json",
+    "raw_output": "matching_objects=4341 total_objects=5925 matching_functions=4106 total_functions=8216 matching_code_bytes=626368 total_code_bytes=2300692 matching_data_bytes=34626 total_data_bytes=4305642 linked_code_bytes=626336 linked_data_bytes=34758"
+  },
+  "relocation_strict_report": "reports/GEDE01/session-1567-reloc-strict.json",
+  "relocation_strict_matching_functions": 4101,
+  "relocation_strict_matching_code_bytes": 624684,
+  "relocation_strict_measurement": {
+    "command": "jq -c '{matching_functions:.measures.matched_functions,matching_code_bytes:.measures.matched_code,game_matching_functions:([.categories[]|select(.id==\"game\")][0].measures.matched_functions),game_matching_code_bytes:([.categories[]|select(.id==\"game\")][0].measures.matched_code)}' reports/GEDE01/session-1567-reloc-strict.json",
+    "raw_output": "{\"matching_functions\":4101,\"matching_code_bytes\":\"624684\",\"game_matching_functions\":4039,\"game_matching_code_bytes\":\"621656\"}"
+  },
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "dol_sha1_measurement": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+  },
+  "matched_bytes_this_session": 268,
+  "nonmatching_bytes_this_session": 0,
+  "next_target": "0x801AB154",
+  "commits": [
+    "89a823c2776ce4b70b98de529544c8d38a3555f9",
+    "577d1b01b744cc31b4a73d0accb0926e1107196e"
+  ],
+  "clean_worktree_required_after_commit": true
+}

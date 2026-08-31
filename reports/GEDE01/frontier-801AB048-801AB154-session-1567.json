@@ -1,0 +1,41 @@
+{
+  "session_id": "session-1567",
+  "range_start": "0x801AB048",
+  "range_end": "0x801AB154",
+  "next_target": "0x801AB154",
+  "matched_bytes": 268,
+  "nonmatching_bytes": 0,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "name": "fn_801AB048",
+      "start": "0x801AB048",
+      "end": "0x801AB0C4",
+      "retail_bytes": 124,
+      "generated_bytes": 124,
+      "match_percent": 100.0,
+      "instruction_diff_rows": 0,
+      "relocation_instructions": 2,
+      "relocations_equal": true,
+      "status": "Matching",
+      "evidence": "reports/GEDE01/objdiff-game_fn_801AB048-session-1567.json"
+    },
+    {
+      "name": "fn_801AB0C4",
+      "start": "0x801AB0C4",
+      "end": "0x801AB154",
+      "retail_bytes": 144,
+      "generated_bytes": 144,
+      "match_percent": 100.0,
+      "instruction_diff_rows": 0,
+      "relocation_instructions": 1,
+      "relocations_equal": true,
+      "status": "Matching",
+      "evidence": "reports/GEDE01/objdiff-game_fn_801AB0C4-session-1567.json"
+    }
+  ],
+  "measurement": {
+    "command": "jq -r '.left.symbols[0] as $l | .right.symbols[0] as $r | [$l.instructions[] | select((.diff_kind // \"DIFF_NONE\") != \"DIFF_NONE\")] as $diffs | [$l.instructions[] | select(.instruction.relocation != null)] as $relocs | \"function=\\($l.name) retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) instruction_diff_rows=\\($diffs|length) relocation_instructions=\\($relocs|length)\"' reports/GEDE01/objdiff-game_fn_801AB048-session-1567.json reports/GEDE01/objdiff-game_fn_801AB0C4-session-1567.json",
+    "raw_output": "function=fn_801AB048 retail_bytes=124 generated_bytes=124 match_percent=100.0 instruction_diff_rows=0 relocation_instructions=2\nfunction=fn_801AB0C4 retail_bytes=144 generated_bytes=144 match_percent=100.0 instruction_diff_rows=0 relocation_instructions=1"
+  }
+}

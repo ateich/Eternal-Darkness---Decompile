@@ -1,0 +1,41 @@
+{
+  "session_id": "session-1569",
+  "range_start": "0x801AB2EC",
+  "range_end": "0x801AB50C",
+  "next_target": "0x801AB50C",
+  "matched_bytes": 544,
+  "nonmatching_bytes": 0,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "name": "fn_801AB2EC",
+      "start": "0x801AB2EC",
+      "end": "0x801AB3CC",
+      "retail_bytes": 224,
+      "generated_bytes": 224,
+      "match_percent": 100.0,
+      "instruction_diff_rows": 0,
+      "relocation_instructions": 3,
+      "relocations_equal": true,
+      "status": "Matching",
+      "evidence": "reports/GEDE01/objdiff-game_fn_801AB2EC-session-1569.json"
+    },
+    {
+      "name": "fn_801AB3CC",
+      "start": "0x801AB3CC",
+      "end": "0x801AB50C",
+      "retail_bytes": 320,
+      "generated_bytes": 320,
+      "match_percent": 100.0,
+      "instruction_diff_rows": 0,
+      "relocation_instructions": 2,
+      "relocations_equal": true,
+      "status": "Matching",
+      "evidence": "reports/GEDE01/objdiff-game_fn_801AB3CC-session-1569.json"
+    }
+  ],
+  "measurement": {
+    "command": "for f in reports/GEDE01/objdiff-game_fn_801AB2EC-session-1569.json reports/GEDE01/objdiff-game_fn_801AB3CC-session-1569.json; do jq -r '.left.symbols[0] as $l | .right.symbols[0] as $r | [$l.instructions[] | select((.diff_kind // \"DIFF_NONE\") != \"DIFF_NONE\")] as $d | [$l.instructions[] | select(.instruction.relocation != null and .instruction.relocation.type_name != \"R_PPC_NONE\")] as $x | \"\\($l.name) retail=\\($l.size) generated=\\($r.size) match=\\($l.match_percent) diffs=\\($d|length) relocs=\\($x|length)\"' \"$f\"; done",
+    "raw_output": "fn_801AB2EC retail=224 generated=224 match=100.0 diffs=0 relocs=3\nfn_801AB3CC retail=320 generated=320 match=100.0 diffs=0 relocs=2"
+  }
+}
