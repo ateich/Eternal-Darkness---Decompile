@@ -1,0 +1,54 @@
+{
+  "session_id": "session-1541-remediation-1",
+  "range_start": "0x801A872C",
+  "range_end": "0x801A8974",
+  "next_target": "0x801A8974",
+  "accounted_bytes": 584,
+  "matched_bytes": 164,
+  "nonmatching_bytes": 420,
+  "range_measurement": {
+    "command": "python3 - <<'PY'\nimport json,re\nfrom pathlib import Path\nsplits=Path('config/GEDE01/splits.txt').read_text()\nentries=[]\nfor name in ('801A872C','801A88D0'):\n m=re.search(rf'game/game_fn_{name}\\.c:\\n\\s+\\.text\\s+start:(0x[0-9A-F]+) end:(0x[0-9A-F]+)',splits)\n p=f'reports/GEDE01/objdiff-game_fn_{name}-session-1541-remediation-1.json'\n d=json.load(open(p)); l=d['left']['symbols'][0]; r=d['right']['symbols'][0]\n status='Matching' if l['match_percent']==100 else 'NonMatching'\n start,end=(int(x,16) for x in m.groups()); entries.append((name,start,end,end-start,status))\nfor name,start,end,size,status in entries: print(f'fn_{name} range=0x{start:08X}-0x{end:08X} split_bytes={size} status={status}')\nprint(f'range=0x{entries[0][1]:08X}-0x{entries[-1][2]:08X} accounted_bytes={sum(x[3] for x in entries)} matched_bytes={sum(x[3] for x in entries if x[4]==\"Matching\")} nonmatching_bytes={sum(x[3] for x in entries if x[4]==\"NonMatching\")} next_target=0x{entries[-1][2]:08X}')\nPY",
+    "raw_output": "fn_801A872C range=0x801A872C-0x801A88D0 split_bytes=420 status=NonMatching\nfn_801A88D0 range=0x801A88D0-0x801A8974 split_bytes=164 status=Matching\nrange=0x801A872C-0x801A8974 accounted_bytes=584 matched_bytes=164 nonmatching_bytes=420 next_target=0x801A8974"
+  },
+  "functions": [
+    {
+      "name": "fn_801A872C",
+      "range": "0x801A872C-0x801A88D0",
+      "retail_bytes": 420,
+      "generated_bytes": 432,
+      "objdiff_percent": 78.95238,
+      "retail_fn_801A9454_calls": 16,
+      "generated_fn_801A9454_calls": 16,
+      "status": "NonMatching",
+      "divergence": "The dropped top-inset left vertex is restored and both sides now emit all 16 fn_801A9454 calls. The current C still differs after the byte-exact prologue: coordinate, edge, depth, and inset values occupy different callee-saved registers, and generated code places additional mr/extsh operations around arithmetic temporaries. Generated code is three instructions longer; this is residual reconstruction/code-shape debt, not the previously claimed folded-sign-extension deficit."
+    },
+    {
+      "name": "fn_801A88D0",
+      "range": "0x801A88D0-0x801A8974",
+      "retail_bytes": 164,
+      "generated_bytes": 164,
+      "objdiff_percent": 100.0,
+      "relocations_equal": true,
+      "status": "Matching"
+    }
+  ],
+  "function_measurement": {
+    "command": "python3 - <<'PY'\nimport json\nfor name in ('801A872C','801A88D0'):\n p=f'reports/GEDE01/objdiff-game_fn_{name}-session-1541-remediation-1.json'\n d=json.load(open(p)); l=d['left']['symbols'][0]; r=d['right']['symbols'][0]\n li=[x for x in l['instructions'] if 'instruction' in x]\n ri=[x for x in r['instructions'] if 'instruction' in x]\n lc=sum(x['instruction']['formatted']=='bl fn_801A9454' for x in li)\n rc=sum(x['instruction']['formatted']=='bl fn_801A9454' for x in ri)\n ld=sum(bool(x.get('diff_kind')) for x in l['instructions'])\n rd=sum(bool(x.get('diff_kind')) for x in r['instructions'])\n lr=sum('relocation' in x['instruction'] for x in li)\n rr=sum('relocation' in x['instruction'] for x in ri)\n print(f'function=fn_{name} retail_bytes={l[\"size\"]} generated_bytes={r[\"size\"]} match_percent={l[\"match_percent\"]} retail_instructions={len(li)} generated_instructions={len(ri)} left_diff_rows={ld} right_diff_rows={rd} retail_relocations={lr} generated_relocations={rr} retail_fn_801A9454_calls={lc} generated_fn_801A9454_calls={rc}')\nPY",
+    "raw_output": "function=fn_801A872C retail_bytes=420 generated_bytes=432 match_percent=78.95238 retail_instructions=105 generated_instructions=108 left_diff_rows=73 right_diff_rows=73 retail_relocations=20 generated_relocations=20 retail_fn_801A9454_calls=16 generated_fn_801A9454_calls=16\nfunction=fn_801A88D0 retail_bytes=164 generated_bytes=164 match_percent=100.0 retail_instructions=41 generated_instructions=41 left_diff_rows=0 right_diff_rows=0 retail_relocations=7 generated_relocations=7 retail_fn_801A9454_calls=0 generated_fn_801A9454_calls=0"
+  },
+  "source_call_count_measurement": {
+    "command": "awk '/^\\{/{body=1} body' src/game/game_fn_801A872C.c | rg -c 'fn_801A9454\\('",
+    "raw_output": "16"
+  },
+  "unaccounted_spans": [],
+  "assembly_added": false,
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "dol_sha1_measurement": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+  },
+  "retail_identity_measurement": {
+    "command": "cmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol; echo cmp_exit=$?",
+    "raw_output": "cmp_exit=0"
+  }
+}

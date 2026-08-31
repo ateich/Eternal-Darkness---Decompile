@@ -1,0 +1,49 @@
+{
+  "session_id": "session-1543",
+  "range_start": "0x801A8B40",
+  "range_end": "0x801A8CCC",
+  "next_target": "0x801A8CCC",
+  "accounted_bytes": 396,
+  "matched_bytes": 288,
+  "nonmatching_bytes": 108,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "name": "fn_801A8B40",
+      "range": "0x801A8B40-0x801A8C60",
+      "retail_bytes": 288,
+      "generated_bytes": 288,
+      "objdiff_percent": 100.0,
+      "relocations_equal": true,
+      "evidence": "reports/GEDE01/objdiff-game_fn_801A8B40-session-1543.json"
+    },
+    {
+      "name": "fn_801A8C60",
+      "range": "0x801A8C60-0x801A8CCC",
+      "retail_bytes": 108,
+      "generated_bytes": 100,
+      "objdiff_percent": 91.48148,
+      "relocations_equal": true,
+      "status": "NonMatching",
+      "codegen_divergence": "Canonical GC/1.3 folds the successful-path sum into r0; retail retains the signed delta in r8, recomputes into r7, and emits two additional add instructions.",
+      "evidence": "reports/GEDE01/objdiff-game_fn_801A8C60-session-1543-attempt.json"
+    }
+  ],
+  "nonmatching_functions_added": 1,
+  "assembly_added": false,
+  "canonical_headline": {
+    "matching_functions": 4062,
+    "matching_objects": 4297,
+    "matching_code_bytes": 621252,
+    "linked_code_bytes": 621220
+  },
+  "relocation_strict": {
+    "matching_functions": 4057,
+    "matching_code_bytes": 619568,
+    "game_matching_functions": 3995,
+    "game_matching_code_bytes": 616540,
+    "evidence": "reports/GEDE01/session-1543-reloc-strict.json"
+  },
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "retail_cmp_exit": 0
+}

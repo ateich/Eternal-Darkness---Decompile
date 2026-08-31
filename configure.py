@@ -9425,6 +9425,31 @@ config.libs = [
                 "game/game_fn_801A8660.c",
                 extra_cflags=["-use_lmw_stmw on"],
             ),
+            Object(
+                NonMatching,
+                "game/game_fn_801A872C.c",
+                extra_cflags=["-use_lmw_stmw on"],
+            ),
+            Object(
+                Matching,
+                "game/game_fn_801A88D0.c",
+                extra_cflags=["-use_lmw_stmw on"],
+            ),
+            Object(
+                Matching,
+                "game/game_fn_801A8974.c",
+                extra_cflags=["-use_lmw_stmw on"],
+            ),
+            Object(Matching, "game/game_fn_801A8A18.c"),
+            Object(Matching, "game/game_fn_801A8B40.c"),
+            Object(NonMatching, "game/game_fn_801A8C60.c"),
+            Object(NonMatching, "game/game_fn_801A8CCC.c"),
+            Object(Matching, "game/game_fn_801A8D38.c"),
+            Object(
+                Matching,
+                "game/game_fn_801A8DE8.c",
+                extra_cflags=["-use_lmw_stmw on"],
+            ),
         ],
     },
     {

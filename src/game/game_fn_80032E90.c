@@ -29,7 +29,7 @@ extern Vec3 lbl_8023E428;
 extern const float lbl_8064E068;
 extern float fn_80179A74(Vec3* vector);
 extern void fn_80179A18(Vec3* vector);
-extern void fn_80026118(State* state);
+extern s32 fn_80026118(State* state);
 
 void fn_80032E90(State* state, const Vec3* point)
 {

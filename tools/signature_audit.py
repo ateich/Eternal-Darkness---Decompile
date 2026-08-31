@@ -364,6 +364,7 @@ def audit(
     retail_evidence_path: Path = DEFAULT_RETAIL_EVIDENCE,
     applied_symbols: set[str] | None = None,
     trialed_reverted_symbols: set[str] | None = None,
+    corrected_translation_units: dict[str, set[str]] | None = None,
 ) -> dict[str, object]:
     grouped: dict[str, list[Declaration]] = defaultdict(list)
     definitions: dict[str, Definition] = {}
@@ -553,6 +554,7 @@ def audit(
         entries.sort(key=lambda item: (-int(item["declarations"]), str(item["symbol"])))
     applied_symbols = applied_symbols or set()
     trialed_reverted_symbols = trialed_reverted_symbols or set()
+    corrected_translation_units = corrected_translation_units or {}
     for category, entries in categories.items():
         for entry in entries:
             truth = truth_by_symbol.get(str(entry["symbol"]))
@@ -590,7 +592,9 @@ def audit(
             if symbol in applied_symbols:
                 entry["disposition"] = "applied"
                 entry["disposition_reason"] = (
-                    "Owned-definition return evidence is high-confidence; the correction affects no more than 12 translation units and passed rebuild, objdiff, and DOL gates."
+                    "Owned-definition return evidence grounds the signature correction. "
+                    "The rebuild, objdiff, and DOL gates establish codegen safety and do "
+                    "not independently prove the source-level return type."
                 )
             elif symbol in trialed_reverted_symbols:
                 entry["disposition"] = "pending"
@@ -608,15 +612,51 @@ def audit(
                 else:
                     reason = (
                         "High-confidence return-register contradiction within the "
-                        "12-translation-unit bound, deferred because it was not the "
-                        "single provably safe correction selected for this bounded round."
+                        "12-translation-unit bound. It remains eligible, but was deferred "
+                        "because the bounded consolidation session could rebuild and verify "
+                        "only the explicitly selected correction before its deadline."
                     )
                 entry["disposition_reason"] = reason
+    categorized_dispositions = {
+        (str(entry["symbol"]), str(entry["disposition"])): str(entry["disposition_reason"])
+        for entries in categories.values()
+        for entry in entries
+    }
+    for entry in ground_truth_contradictions:
+        symbol = str(entry["symbol"])
+        reason = categorized_dispositions.get((symbol, "deferred"))
+        if reason is None:
+            affected = int(entry["affected_translation_units"])
+            if affected > 12:
+                reason = (
+                    "High-confidence owned-definition or retail evidence exists, but "
+                    "the contradiction affects more than 12 translation units."
+                )
+            else:
+                reason = (
+                    "High-confidence owned-definition or retail evidence exists and the "
+                    "contradiction is within the 12-translation-unit bound. It remains "
+                    "eligible, but was deferred because the bounded consolidation session "
+                    "could rebuild and verify only the explicitly selected correction "
+                    "before its deadline."
+                )
+        entry["disposition_reason"] = reason
     applied_corrections = []
     for symbol in sorted(applied_symbols):
         definition = definitions.get(symbol)
         declarations = grouped.get(symbol, [])
-        translation_units = sorted({item.path for item in declarations})
+        translation_units = sorted(corrected_translation_units.get(symbol, set()))
+        if not translation_units:
+            raise ValueError(
+                f"{symbol}: applied correction lacks explicit corrected translation units"
+            )
+        declaring_units = {item.path for item in declarations}
+        unknown_units = sorted(set(translation_units) - declaring_units)
+        if unknown_units:
+            raise ValueError(
+                f"{symbol}: corrected translation units do not declare the symbol "
+                f"{unknown_units}"
+            )
         applied_corrections.append({
             "symbol": symbol,
             "affected_translation_units": len(translation_units),
@@ -629,6 +669,15 @@ def audit(
                 "return_shape": definition.return_shape,
                 "source": f"{definition.path}:{definition.line}",
             } if definition is not None else None),
+            "signature_grounding": (
+                "The owned definition grounds the source-level return type."
+                if definition is not None
+                else "No owned definition grounds the source-level return type."
+            ),
+            "verification_scope": (
+                "Rebuild, objdiff, relocation, and DOL checks establish codegen "
+                "safety; they do not independently prove the signature."
+            ),
             "disposition": "applied",
         })
     return {
@@ -725,6 +774,14 @@ def main() -> int:
         help="objdiff artifact for an applied correction (repeat per affected object)",
     )
     parser.add_argument(
+        "--corrected-translation-unit", action="append", default=[],
+        metavar="SYMBOL=PATH",
+        help=(
+            "source translation unit actually edited for an applied correction "
+            "(repeat per affected unit)"
+        ),
+    )
+    parser.add_argument(
         "--evidence-report", type=Path,
         help="report containing verification commands and their raw output",
     )
@@ -736,11 +793,18 @@ def main() -> int:
     )
     args = parser.parse_args()
     source = args.source.resolve()
+    corrected_translation_units: dict[str, set[str]] = defaultdict(set)
+    for value in args.corrected_translation_unit:
+        symbol, separator, path = value.partition("=")
+        if not separator or not symbol or not path:
+            raise ValueError(f"invalid --corrected-translation-unit value {value!r}")
+        corrected_translation_units[symbol].add(path)
     report = audit(
         source,
         args.retail_evidence.resolve(),
         set(args.applied_symbol),
         set(args.trialed_reverted_symbol),
+        corrected_translation_units,
     )
     evidence_by_symbol: dict[str, list[str]] = defaultdict(list)
     for value in args.correction_evidence:

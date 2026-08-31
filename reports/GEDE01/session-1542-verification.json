@@ -1,0 +1,30 @@
+{
+  "session_id": "session-1542",
+  "build": {
+    "command": "./.tools/bin/ninja",
+    "result": "success"
+  },
+  "canonical_report": {
+    "command": "build/tools/objdiff-cli report generate -o build/GEDE01/report.json",
+    "matching_objects": 4296,
+    "total_objects": 5864,
+    "matching_functions": 4061,
+    "matching_code_bytes": 620964,
+    "linked_code_bytes": 620932
+  },
+  "relocation_strict_report": {
+    "command": "build/tools/objdiff-cli report generate -o reports/GEDE01/session-1542-reloc-strict.json -c function_reloc_diffs=name_address",
+    "matching_functions": 4056,
+    "matching_code_bytes": 619280,
+    "game_matching_functions": 3994,
+    "game_matching_code_bytes": 616252
+  },
+  "dol_sha1_measurement": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+  },
+  "retail_identity_measurement": {
+    "command": "cmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol; echo cmp_exit=$?",
+    "raw_output": "cmp_exit=0"
+  }
+}

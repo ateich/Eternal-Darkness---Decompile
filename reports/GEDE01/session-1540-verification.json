@@ -1,0 +1,50 @@
+{
+  "session_id": "session-1540-remediation-1",
+  "scope": "Review remediation only; no new matching or frontier movement.",
+  "frontier": {
+    "command": "python3 - <<'PY'\nimport json\np='../.darkfoundry/decomp-chain-state.json'; d=json.load(open(p))\nprint('assigned_target='+d['assigned_target'])\nprint('accepted_frontier='+d['accepted_frontier'])\nprint('candidate_frontier='+d['candidate_frontier'])\nPY",
+    "raw_output": "assigned_target=0x801A872C\naccepted_frontier=0x801A872C\ncandidate_frontier=0x801A872C"
+  },
+  "root_cause_and_fix": {
+    "finding": "Deferred entries defined affected translation units as declarations whose return shape disagrees with grounded truth, but applied entries expanded the same field to every declaring translation unit. The verification gate therefore required unrelated, already-correct declarations.",
+    "fix": "Applied corrections now require explicit SYMBOL=PATH corrected-translation-unit provenance. The affected_translation_units field and apply gate consume only those actually corrected units, matching the deferred field's change-set meaning. Unknown declaring paths and missing provenance are rejected.",
+    "probe_command": "python3 - <<'PY'\nimport sys\nfrom pathlib import Path\nsys.path.insert(0,'tools')\nimport signature_audit\nr=signature_audit.audit(Path('src/game').resolve(), corrected_translation_units={'fn_8020123C': {'src/game/game_fn_8018F378.c','src/game/game_fn_801A3DF8.c'}}, applied_symbols={'fn_8020123C'})\ne=next(x for x in r['applied_corrections'] if x['symbol']=='fn_8020123C')\nprint('applied_semantics_probe='+str({'affected_translation_units':e['affected_translation_units'],'translation_units':e['translation_units']}))\nPY",
+    "probe_raw_output": "applied_semantics_probe={'affected_translation_units': 2, 'translation_units': ['src/game/game_fn_8018F378.c', 'src/game/game_fn_801A3DF8.c']}",
+    "missing_provenance_command": "python3 tools/signature_audit.py --json-output build/signature-audit-missing-provenance-test.json --applied-symbol fn_80026118",
+    "missing_provenance_raw_output": "ValueError: fn_80026118: applied correction lacks explicit corrected translation units",
+    "missing_provenance_exit_status": 1
+  },
+  "signature_grounding": {
+    "command": "sed -n '1,22p' src/game/game_fn_80026118.c",
+    "raw_output": "typedef unsigned int u32;\ntypedef int s32;\n\ntypedef struct BatchEntry {\n    u32 words[110];\n} BatchEntry;\n\nextern BatchEntry lbl_803028B0[10];\nextern s32 lbl_8064C6EC;\n\ns32 fn_80026118(BatchEntry* entry)\n{\n    if (entry != 0 && lbl_8064C6EC < 10) {\n        lbl_803028B0[lbl_8064C6EC] = *entry;\n        lbl_8064C6EC++;\n        return 1;\n    }\n\n    return 0;\n}",
+    "conclusion": "The owned definition grounds the s32 return type and GPR r3 return shape. Because the corrected caller discards the result, objdiff is a required codegen-safety check but does not independently validate the signature."
+  },
+  "build": {
+    "command": "set -o pipefail; .tools/bin/ninja 2>&1 | tail -n 15",
+    "raw_output": "#   Section '.ignored' is unknown. Section ignored.\n[557/559] DOL build/GEDE01/main.dol\n[558/559] CHECK config/GEDE01/build.sha1\nbuild/GEDE01/main.dol: OK\n[559/559] PROGRESS\nProgress:\n  All: 41.07% fuzzy, 26.96% matched, 26.96% linked (4293 / 5860 files)\n    Code: 620340 / 2300692 bytes (4058 / 8216 functions)\n    Data: 34626 / 4305642 bytes (0.80%)\n  Game Code: 90.74% fuzzy, 59.47% matched, 59.47% linked (4275 / 5135 files)\n    Code: 617312 / 1037996 bytes (3996 / 4856 functions)\n    Data: 34402 / 35518 bytes (96.86%)\n  SDK/Runtime: 100.00% fuzzy, 100.00% matched, 100.00% linked (18 / 18 files)\n    Code: 3028 / 3028 bytes (62 / 62 functions)\n    Data: 224 / 224 bytes (100.00%)"
+  },
+  "affected_object_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032E90 fn_80032E90 -o reports/GEDE01/objdiff-game_fn_80032E90-session-1540-remediation-1.json --format json-pretty -c function_reloc_diffs=name_address",
+    "raw_output": "INFO Writing to reports/GEDE01/objdiff-game_fn_80032E90-session-1540-remediation-1.json",
+    "measurement_command": "python3 - <<'PY'\nimport json\np='build/GEDE01/report.json'; d=json.load(open(p))\nu=next(x for x in d['units'] if x['name']=='main/game/game_fn_80032E90')\nm=u['measures']\nprint(f\"name={u['name']} matched_code={m.get('matched_code')} total_code={m.get('total_code')} matched_code_percent={m.get('matched_code_percent')} complete_code_percent={m.get('complete_code_percent')} complete={u.get('metadata',{}).get('complete',False)}\")\nPY",
+    "measurement_raw_output": "name=main/game/game_fn_80032E90 matched_code=424 total_code=424 matched_code_percent=100.0 complete_code_percent=100.0 complete=True",
+    "interpretation": "These are the caller object's bytes, not the size of fn_80026118. The unchanged result is a safety gate for a codegen-neutral discarded-return correction."
+  },
+  "relocation_strict_check": {
+    "command": "python3 - <<'PY'\nimport json\np='reports/GEDE01/objdiff-game_fn_80032E90-session-1540-remediation-1.json'; d=json.load(open(p))\ndef info(side):\n s=next(x for x in d[side]['symbols'] if x['name']=='fn_80032E90')\n rel=[]\n for row in s['instructions']:\n  i=row['instruction']; r=i.get('relocation',{})\n  if r.get('type_name') not in (None,'R_PPC_NONE'):\n   rel.append((int(i.get('address','0')),r['type_name'],i['formatted'],int(r.get('addend','0'))))\n return s,rel\nl,lr=info('left'); r,rr=info('right')\nprint(f\"left_size={l['size']} right_size={r['size']} left_match_percent={l.get('match_percent')} right_match_percent={r.get('match_percent')}\")\nprint(f\"left_relocations={len(lr)} right_relocations={len(rr)} relocation_tuples_equal={lr == rr}\")\nprint(json.dumps(lr))\nPY",
+    "raw_output": "left_size=424 right_size=424 left_match_percent=100.0 right_match_percent=100.0\nleft_relocations=12 right_relocations=12 relocation_tuples_equal=True\n[[28, \"R_PPC_ADDR16_HA\", \"lis r5, lbl_8023E428@ha\", 0], [36, \"R_PPC_ADDR16_LO\", \"addi r30, r5, lbl_8023E428@l\", 0], [60, \"R_PPC_EMB_SDA21\", \"lfs f0, lbl_8064E068@sda21\", 0], [84, \"R_PPC_REL24\", \"bl fn_80179A74\", 0], [96, \"R_PPC_REL24\", \"bl fn_80179A18\", 0], [100, \"R_PPC_ADDR16_HA\", \"lis r3, lbl_8023E428@ha\", 0], [108, \"R_PPC_ADDR16_LO\", \"addi r3, r3, lbl_8023E428@l\", 0], [188, \"R_PPC_ADDR16_HA\", \"lis r3, lbl_8023E428@ha\", 0], [192, \"R_PPC_ADDR16_LO\", \"addi r4, r3, lbl_8023E428@l\", 0], [288, \"R_PPC_ADDR16_HA\", \"lis r3, lbl_8023E428@ha\", 0], [296, \"R_PPC_ADDR16_LO\", \"lfs f2, lbl_8023E428@l(r3)\", 0], [388, \"R_PPC_REL24\", \"bl fn_80026118\", 0]]"
+  },
+  "audit": {
+    "command": "python3 tools/signature_audit.py --json-output reports/GEDE01/signature-shadow-session-1540.json --session-id session-1540-remediation-1 --starting-target 0x801A872C --ending-next-target 0x801A872C --applied-symbol fn_80026118 --corrected-translation-unit fn_80026118=src/game/game_fn_80032E90.c --correction-evidence fn_80026118=reports/GEDE01/objdiff-game_fn_80032E90-session-1540-remediation-1.json --evidence-report reports/GEDE01/session-1540-verification.json --dol-sha1 ea24b6af954876ce072562ff39cdb4c81d32be1f --build-report build/GEDE01/report.json --verified-object main/game/game_fn_80032E90",
+    "summary_command": "python3 - <<'PY'\nimport json\np='reports/GEDE01/signature-shadow-session-1540.json'; d=json.load(open(p))\nrr=d['return_register_contradictions']; gt=d['ground_truth_contradictions']\nprint('high_confidence_return_register_within_bound='+str(sum(e['confidence']=='high' and e['affected_translation_units']<=12 for e in rr)))\nprint('ground_truth_all_disagree_within_bound='+str(sum(e['affected_translation_units']<=12 and e['disagreeing_declarations']==e['declarations'] for e in gt)))\nrrs={e['symbol'] for e in rr}\nprint('ground_truth_only='+str(sum(e['symbol'] not in rrs for e in gt)))\nprint('circular_deferral_strings='+str(sum('left unchanged unless separately listed' in e['disposition_reason'] for e in gt)))\nprint('applied_corrections='+str(len(d['applied_corrections'])))\nPY",
+    "summary_raw_output": "high_confidence_return_register_within_bound=453\nground_truth_all_disagree_within_bound=401\nground_truth_only=68\ncircular_deferral_strings=0\napplied_corrections=1",
+    "deferral_policy": "Eligible contradictions were deferred because the bounded consolidation session could rebuild and verify only its explicitly selected correction before the deadline; eligibility is not represented as unique safety. Every ground-truth-only entry now carries evidence-based grounds rather than an outcome-only circular sentence."
+  },
+  "progress_open_items_deviation": "The progress.json open_items list retains one explicit pointer to the symbol-by-symbol shadow report rather than duplicating every deferred record. This is a literal deviation from the original request; the canonical evidence, confidence, affected-unit list, disposition, and grounds for each deferral live in reports/GEDE01/signature-shadow-session-1540.json.",
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+    "expected": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "unchanged": true
+  }
+}
