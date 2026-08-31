@@ -19,7 +19,7 @@ typedef struct State80095FDC {
 extern void* lbl_8064C50C;
 extern int lbl_8064D1BC;
 extern int lbl_8064D1C4;
-extern int lbl_8064D1DC;
+extern void* lbl_8064D1DC;
 extern int lbl_8064D1E0;
 
 extern int fn_80128EAC(void*);

@@ -300,3 +300,41 @@ retail DOL, repoints the two base relocations to `lbl_80250588`, and removes
 the TU's data section so the shared data unit keeps ownership. Objdiff reports
 6752/6752 bytes and all relocations at 100%, and the whole-DOL SHA-1 gate
 remains `ea24b6af954876ce072562ff39cdb4c81d32be1f`.
+
+## Narrowed values reaching a call, and inline casts on table bases
+
+**Keep a narrowed value in a `short` local, not an `int` cast later.**
+`fn_8015AD00` and `fn_8015AC94` each call a helper that returns a 16-bit field
+or -1, test the result, and pass it on. Written as an `int` local with a
+`(short)` cast at the test, the compiler sign-extends into a scratch register
+and hands the call the un-narrowed value: one instruction off retail in both,
+99.6875% and 99.81481%. Declaring the local `short` makes it extend in place,
+which is what retail does, and both reach 100%. The helpers `fn_8015AD88` and
+`fn_8015AD40` both match and return -1 or a signed 16-bit field, so nothing is
+lost by narrowing. Two other spellings were tried on `fn_8015AD00` and are
+worse: declaring `fn_8015AD88` itself to return `short`, and casting at every
+use, both 93.4375%.
+
+**Cast a table base once into a local, not at every use.**
+`fn_8016B400` reads an offset and a size out of a header table. Writing
+`((u32*)base)[index]` at each use makes the compiler add base and index into an
+address first and then load from it; retail loads with base and index still in
+separate registers. Assigning `u32* tbl = (u32*)base;` once and indexing `tbl`
+reproduces retail's form and takes the function from 98.666664% to 100%.
+Statement order makes no difference either way, and computing the byte offsets
+by hand is worse at 92.422226%.
+
+Matching `fn_8016B400` also settled its parameters. The first is a plain 32-bit
+signed integer: retail tests it with a signed compare and no sign-extension, so
+it is not a narrower type. The second is stored straight into `lbl_8064D1E0`
+and is declared `void*`. The third could be either type, since building
+`fn_8015AD00`, `fn_8015AC94`, `fn_8016B400`, `fn_8016B4B4` and `fn_80095FDC`
+with `int` there produces identical bytes and the same DOL hash; it is declared
+`void*` because `fn_8016B4B4` passes that value to `fn_8016A970`, which already
+matches and takes a `void*` there. `lbl_8064D1DC`, which carries the value from
+`fn_8016B400` to `fn_8016B4B4`, is now `void*` in all three sources that
+declare it.
+
+Objdiff reports 64/64 bytes and 3 relocations for `fn_8015AD00`, 108/108 and 4
+for `fn_8015AC94`, and 180/180 and 13 for `fn_8016B400`, all at 100%, and the
+whole-DOL SHA-1 gate remains `ea24b6af954876ce072562ff39cdb4c81d32be1f`.
