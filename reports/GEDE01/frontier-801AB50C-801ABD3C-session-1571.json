@@ -1,0 +1,58 @@
+{
+  "session_id": "session-1571-remediation-1",
+  "range_start": "0x801AB50C",
+  "range_end": "0x801ABD3C",
+  "range_bytes": 2096,
+  "matched_bytes": 148,
+  "nonmatching_bytes": 1948,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "name": "fn_801AB50C",
+      "start": "0x801AB50C",
+      "end": "0x801ABCA8",
+      "retail_bytes": 1948,
+      "generated_bytes": 1928,
+      "match_percent": 90.41889,
+      "status": "NonMatching",
+      "divergence": "The corrected Record layout now emits retail's +0x92 outer-state load, +0x8F switch-state loads, and +0x90 timer loads. Explicit no-op cases and retail body order reproduce the initial switch dispatch and the shared case 3/4/6/7 body through the two byte clamps. The first remaining non-branch divergence is the case-5 load order at retail offsets 0x148 and 0x14C: retail loads +0x88 into r4 before +0x8D into r3, while canonical GC/1.3 loads +0x8D into r3 before +0x88 into r4 and lowers the following minimum differently. The later case-1 path first diverges at retail offset 0x1AC, where retail retains handle in r4 while canonical reloads it into r0. Generated fn_801AB50C remains 20 bytes shorter. The former static clamp_u8 was already inlined at both use sites but also emitted as an unused 24-byte out-of-line symbol; spelling the clamps directly removes that extra symbol and is not described as eliminating calls.",
+      "evidence": "reports/GEDE01/objdiff-game_fn_801AB50C-session-1571-remediation-1.json"
+    },
+    {
+      "name": "fn_801ABCA8",
+      "start": "0x801ABCA8",
+      "end": "0x801ABD3C",
+      "retail_bytes": 148,
+      "generated_bytes": 148,
+      "match_percent": 100.0,
+      "relocations": 0,
+      "status": "Matching",
+      "evidence": "reports/GEDE01/objdiff-game_fn_801ABCA8-session-1571-remediation-1.json"
+    }
+  ],
+  "fn_801AB50C_measurement": {
+    "command": "jq -r '.left.symbols[0] as $l | .right.symbols[0] as $r | [$l.instructions[] | select((.diff_kind // \"DIFF_NONE\") != \"DIFF_NONE\")] as $diffs | [$l.instructions[] | select(.instruction.relocation != null)] as $lr | [$r.instructions[] | select(.instruction.relocation != null)] as $rr | \"function=\\($l.name) retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) retail_instruction_diff_rows=\\($diffs|length) retail_relocation_instructions=\\($lr|length) generated_relocation_instructions=\\($rr|length)\"' reports/GEDE01/objdiff-game_fn_801AB50C-session-1571-remediation-1.json",
+    "raw_output": "function=fn_801AB50C retail_bytes=1948 generated_bytes=1928 match_percent=90.41889 retail_instruction_diff_rows=88 retail_relocation_instructions=57 generated_relocation_instructions=57"
+  },
+  "fn_801ABCA8_measurement": {
+    "command": "jq -r '.left.symbols[0] as $l | .right.symbols[0] as $r | [$l.instructions[] | select((.diff_kind // \"DIFF_NONE\") != \"DIFF_NONE\")] as $diffs | [$l.instructions[] | select(.instruction.relocation != null)] as $lr | [$r.instructions[] | select(.instruction.relocation != null)] as $rr | \"function=\\($l.name) retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) retail_instruction_diff_rows=\\($diffs|length) retail_relocation_instructions=\\($lr|length) generated_relocation_instructions=\\($rr|length)\"' reports/GEDE01/objdiff-game_fn_801ABCA8-session-1571-remediation-1.json",
+    "raw_output": "function=fn_801ABCA8 retail_bytes=148 generated_bytes=148 match_percent=100.0 retail_instruction_diff_rows=0 retail_relocation_instructions=0 generated_relocation_instructions=0"
+  },
+  "relocation_measurement": {
+    "command": "jq -r '[.left.symbols[0].instructions[] | select(.instruction.relocation != null and ((.diff_kind // \"DIFF_NONE\") != \"DIFF_NONE\"))] as $ld | [.right.symbols[0].instructions[] | select(.instruction.relocation != null and ((.diff_kind // \"DIFF_NONE\") != \"DIFF_NONE\"))] as $rd | \"retail_relocation_diff_rows=\\($ld|length) generated_relocation_diff_rows=\\($rd|length)\"' reports/GEDE01/objdiff-game_fn_801AB50C-session-1571-remediation-1.json",
+    "raw_output": "retail_relocation_diff_rows=0 generated_relocation_diff_rows=0"
+  },
+  "symbol_measurement": {
+    "command": "build/binutils/powerpc-eabi-nm -S --size-sort build/GEDE01/src/game/game_fn_801AB50C.o",
+    "raw_output": "00000000 00000788 T fn_801AB50C"
+  },
+  "prior_symbol_measurement": {
+    "command": "jq -r '.right.symbols[] | [.name,.size] | @tsv' reports/GEDE01/objdiff-game_fn_801AB50C-session-1571.json",
+    "raw_output": "clamp_u8\t24\nfn_801AB50C\t1936"
+  },
+  "range_measurement": {
+    "command": "python3 -c 'print(f\"matched_bytes={0x801ABD3C-0x801ABCA8} nonmatching_bytes={0x801ABCA8-0x801AB50C} range_bytes={0x801ABD3C-0x801AB50C}\")'",
+    "raw_output": "matched_bytes=148 nonmatching_bytes=1948 range_bytes=2096"
+  },
+  "next_target": "0x801ABD3C"
+}

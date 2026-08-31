@@ -87,6 +87,18 @@ config.asflags = ["-mgekko", "--strip-local-absolute", "-I include", f"-I build/
 config.ldflags = ["-fp hardware", "-nodefaults"]
 config.custom_build_rules = [
     {
+        "name": "externalize_game_801ABD3C_table_and_conversion_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @25 jumptable_80251660 orig/GEDE01/sys/main.dol && "
+            "python3 tools/externalize_elf_symbol.py $in @27 lbl_80650E80 orig/GEDE01/sys/main.dol && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@25=jumptable_80251660 --redefine-sym=@27=lbl_80650E80 "
+            "--remove-section=.data --remove-section=.sdata2 "
+            "--rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
         "name": "externalize_game_801AB154_conversion_biases",
         "command": (
             "python3 tools/externalize_elf_symbol.py $in @29 lbl_80650E80 orig/GEDE01/sys/main.dol && "
@@ -2243,6 +2255,11 @@ for rule in config.custom_build_rules:
 guarded_externalize_rules.add("externalize_string_pool_80250588")
 config.custom_build_steps = {
     "post-compile": [
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_801ABD3C.externalized"],
+            "rule": "externalize_game_801ABD3C_table_and_conversion_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_801ABD3C.o"],
+        },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_801AB154.externalized"],
             "rule": "externalize_game_801AB154_conversion_biases",
@@ -9548,6 +9565,14 @@ config.libs = [
             Object(Matching, "game/game_fn_801AB154.c", extra_cflags=["-schedule off", "-opt nopeephole", "-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_801AB2EC.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(Matching, "game/game_fn_801AB3CC.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
+            Object(NonMatching, "game/game_fn_801AB50C.c", extra_cflags=["-schedule off", "-opt nopeephole", "-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_801ABCA8.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
+            Object(Matching, "game/game_fn_801ABD3C.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
+            Object(Matching, "game/game_fn_801ABF34.c", extra_cflags=["-schedule off", "-opt nopeephole", "-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_801AC030.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
+            Object(Matching, "game/game_fn_801AC0FC.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
+            Object(Matching, "game/game_fn_801AC194.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
+            Object(Matching, "game/game_fn_801AC2E8.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
         ],
     },
     {

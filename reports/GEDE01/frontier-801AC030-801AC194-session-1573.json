@@ -1,0 +1,29 @@
+{
+  "session_id": "session-1573",
+  "range_start": "0x801AC030",
+  "range_end": "0x801AC194",
+  "range_bytes": 356,
+  "matched_bytes": 356,
+  "nonmatching_bytes": 0,
+  "functions": [
+    {"name":"fn_801AC030","start":"0x801AC030","end":"0x801AC0FC","size":204,"status":"Matching","match_percent":100.0,"generated_size":204,"relocations_equal":true},
+    {"name":"fn_801AC0FC","start":"0x801AC0FC","end":"0x801AC194","size":152,"status":"Matching","match_percent":100.0,"generated_size":152,"relocations_equal":true}
+  ],
+  "gaps": [],
+  "next_target": "0x801AC194",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "measurements": [
+    {
+      "command": "printf 'range_bytes=%d matched_bytes=%d nonmatching_bytes=%d\\n' $((0x801AC194 - 0x801AC030)) $((0x801AC0FC - 0x801AC030 + 0x801AC194 - 0x801AC0FC)) 0",
+      "raw_output": "range_bytes=356 matched_bytes=356 nonmatching_bytes=0"
+    },
+    {
+      "command": "jq -c '[.left.symbols[]|{name,size:(.size|tonumber),match_percent,relocs:(.instructions|map(.instruction.relocation?|select(.))|length),diffs:(.instructions|map(select(.diff_kind != null and .diff_kind != \"DIFF_NONE\"))|length)}]' reports/GEDE01/objdiff-game_fn_801AC030-session-1573-reloc-strict.json reports/GEDE01/objdiff-game_fn_801AC0FC-session-1573-reloc-strict.json",
+      "raw_output": "[{\"name\":\"fn_801AC030\",\"size\":204,\"match_percent\":100.0,\"relocs\":2,\"diffs\":0}]\n[{\"name\":\"fn_801AC0FC\",\"size\":152,\"match_percent\":100.0,\"relocs\":13,\"diffs\":0}]"
+    },
+    {
+      "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+      "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol"
+    }
+  ]
+}
