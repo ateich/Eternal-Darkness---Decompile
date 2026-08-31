@@ -1,0 +1,36 @@
+{
+  "session_id": "session-1578",
+  "range_start": "0x801ACB0C",
+  "range_end": "0x801ACC94",
+  "next_target": "0x801ACC94",
+  "range_bytes": 392,
+  "matched_bytes": 132,
+  "nonmatching_bytes": 260,
+  "functions": [
+    {"name":"fn_801ACB0C","start":"0x801ACB0C","end":"0x801ACC10","size":260,"status":"NonMatching","match_percent":99.30769,"divergence":"canonical assigns object_id to r31 and owner to r30; retail assigns object_id to r30 and owner to r31","unused_parameter_note":"incoming r3 (arg) is dead before the first call in both generated and retail code, so the recovered signature is retained without inventing a use"},
+    {"name":"fn_801ACC10","start":"0x801ACC10","end":"0x801ACC94","size":132,"status":"Matching","match_percent":100.0,"relocations_left":9,"relocations_right":9,"relocation_diff_rows":0}
+  ],
+  "gaps": [],
+  "shared_reconstructions": [],
+  "assembly_added": [],
+  "stop_reason": "The original session did not record whether its 22-minute reconstruction cutoff was reached, so that timing claim is unverified and is not reconstructed retroactively. The no-quota rule permitted the limited matched result; review remediation did not open fn_801ACC94 and keeps the frontier fixed.",
+  "remediation_1_measurements": {
+    "range_accounting": {
+      "command": "python3 -c 'print(f\"range_bytes={0x801ACC94-0x801ACB0C} nonmatching_bytes={0x801ACC10-0x801ACB0C} matched_bytes={0x801ACC94-0x801ACC10}\")'",
+      "raw_output": "range_bytes=392 nonmatching_bytes=260 matched_bytes=132"
+    },
+    "fn_801ACB0C": {
+      "source": "reports/GEDE01/objdiff-game_fn_801ACB0C-session-1578-remediation-1-reloc-strict.json",
+      "command": "jq -r '(.left.symbols[]|select(.name==\"fn_801ACB0C\")) as $l | (.right.symbols[]|select(.name==\"fn_801ACB0C\")) as $r | \"name=fn_801ACB0C left_size=\\($l.size) right_size=\\($r.size) left_match_percent=\\($l.match_percent) right_match_percent=\\($r.match_percent) left_differing_rows=\\([$l.instructions[]|select(.diff_kind != null)]|length) right_differing_rows=\\([$r.instructions[]|select(.diff_kind != null)]|length) left_relocations=\\([$l.instructions[]|select(.instruction.relocation != null)]|length) right_relocations=\\([$r.instructions[]|select(.instruction.relocation != null)]|length)\"' reports/GEDE01/objdiff-game_fn_801ACB0C-session-1578-remediation-1-reloc-strict.json",
+      "raw_output": "name=fn_801ACB0C left_size=260 right_size=260 left_match_percent=99.30769 right_match_percent=99.30769 left_differing_rows=9 right_differing_rows=9 left_relocations=9 right_relocations=9",
+      "register_direction_command": "jq -c '{ours:[.left.symbols[]|select(.name==\"fn_801ACB0C\")|.instructions[]|select(.diff_kind != null)|{address:.instruction.address,instruction:.instruction.formatted}],retail:[.right.symbols[]|select(.name==\"fn_801ACB0C\")|.instructions[]|select(.diff_kind != null)|{address:.instruction.address,instruction:.instruction.formatted}]}' reports/GEDE01/objdiff-game_fn_801ACB0C-session-1578-remediation-1-reloc-strict.json",
+      "register_direction_raw_output": "{\"ours\":[{\"address\":\"20\",\"instruction\":\"mr r31, r4\"},{\"address\":\"28\",\"instruction\":\"mr r30, r3\"},{\"address\":\"76\",\"instruction\":\"mr r5, r31\"},{\"address\":\"88\",\"instruction\":\"mr r3, r30\"},{\"address\":\"124\",\"instruction\":\"mr r5, r31\"},{\"address\":\"136\",\"instruction\":\"mr r3, r30\"},{\"address\":\"172\",\"instruction\":\"mr r5, r31\"},{\"address\":\"184\",\"instruction\":\"mr r3, r30\"},{\"address\":\"220\",\"instruction\":\"mr r5, r31\"}],\"retail\":[{\"address\":\"20\",\"instruction\":\"mr r30, r4\"},{\"address\":\"28\",\"instruction\":\"mr r31, r3\"},{\"address\":\"76\",\"instruction\":\"mr r5, r30\"},{\"address\":\"88\",\"instruction\":\"mr r3, r31\"},{\"address\":\"124\",\"instruction\":\"mr r5, r30\"},{\"address\":\"136\",\"instruction\":\"mr r3, r31\"},{\"address\":\"172\",\"instruction\":\"mr r5, r30\"},{\"address\":\"184\",\"instruction\":\"mr r3, r31\"},{\"address\":\"220\",\"instruction\":\"mr r5, r30\"}]}"
+    },
+    "fn_801ACC10": {
+      "source": "reports/GEDE01/objdiff-game_fn_801ACC10-session-1578-remediation-1-reloc-strict.json",
+      "command": "jq -r '(.left.symbols[]|select(.name==\"fn_801ACC10\")) as $l | (.right.symbols[]|select(.name==\"fn_801ACC10\")) as $r | \"name=fn_801ACC10 left_size=\\($l.size) right_size=\\($r.size) left_match_percent=\\($l.match_percent) right_match_percent=\\($r.match_percent) left_differing_rows=\\([$l.instructions[]|select(.diff_kind != null)]|length) right_differing_rows=\\([$r.instructions[]|select(.diff_kind != null)]|length) left_relocations=\\([$l.instructions[]|select(.instruction.relocation != null)]|length) right_relocations=\\([$r.instructions[]|select(.instruction.relocation != null)]|length)\"' reports/GEDE01/objdiff-game_fn_801ACC10-session-1578-remediation-1-reloc-strict.json",
+      "raw_output": "name=fn_801ACC10 left_size=132 right_size=132 left_match_percent=100.0 right_match_percent=100.0 left_differing_rows=0 right_differing_rows=0 left_relocations=9 right_relocations=9",
+      "strict_evidence_note": "The canonical and strict per-function JSON may be byte-identical for this clean match because the configuration produces no differing rows; the separately generated aggregate strict report is the configuration-enforced relocation gate."
+    }
+  }
+}
