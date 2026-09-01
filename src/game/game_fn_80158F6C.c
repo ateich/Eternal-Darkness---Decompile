@@ -33,6 +33,7 @@ void fn_80158F6C(int id, int slot)
         index = fn_80158E88(id);
         if (index != -1) {
             u32 message;
+            u32 request;
 
             message = slot ? 0x100000 : 0;
             lbl_805B6FE0.states[slot]->id = id;
@@ -40,8 +41,9 @@ void fn_80158F6C(int id, int slot)
             lbl_805B6FE0.states[slot]->flag143 = 0;
             lbl_805B6FE0.states[slot]->active = 1;
             OSRestoreInterrupts(interrupts);
+            request = id | 0x40000000 | (index << 12);
             fn_8020D250(lbl_805B6FFC,
-                        (id | 0x40000000 | (index << 12) | message), 1);
+                        (request | message), 1);
         } else {
             OSRestoreInterrupts(interrupts);
         }

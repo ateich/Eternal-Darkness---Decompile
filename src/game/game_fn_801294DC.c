@@ -16,9 +16,12 @@ u8* fn_801294DC(void* owner, int kind, int flags, int mode)
     fn_801261F4(owner);
     entry = fn_80128E30(owner);
     ok = fn_80129C2C(owner, entry, kind, flags, mode);
-    if (!ok && **(int**)(entry + 0xB8) == kind && *(unsigned int*)(entry + 0xF4) != (unsigned int)flags &&
-        (unsigned short)mode == *(unsigned short*)(entry + 0xFA)) {
-        *(int*)(entry + 0xF4) = flags;
+    if (!ok) {
+        int resource_kind = **(int**)(entry + 0xB8);
+        if (kind == resource_kind && *(unsigned int*)(entry + 0xF4) != (unsigned int)flags &&
+            (unsigned short)mode == *(unsigned short*)(entry + 0xFA)) {
+            *(int*)(entry + 0xF4) = flags;
+        }
     }
     if (ok) {
         u8* resource = *(u8**)(entry + 0xB8);

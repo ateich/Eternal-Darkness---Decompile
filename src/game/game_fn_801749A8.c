@@ -9,11 +9,13 @@ extern const double lbl_806506D0;
 int fn_801749A8(void* state)
 {
     int value;
+    double second_value;
 
     switch (fn_8016A598(state)) {
     case 2:
         value = fn_8016A694(state, 1);
-        if (fn_8016A694(state, 2) == lbl_806506D0) {
+        second_value = fn_8016A694(state, 2);
+        if (second_value == lbl_806506D0) {
             fn_80046CE4(value);
         } else {
             fn_80046DB4(value);

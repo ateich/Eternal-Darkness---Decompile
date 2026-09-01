@@ -338,3 +338,44 @@ declare it.
 Objdiff reports 64/64 bytes and 3 relocations for `fn_8015AD00`, 108/108 and 4
 for `fn_8015AC94`, and 180/180 and 13 for `fn_8016B400`, all at 100%, and the
 whole-DOL SHA-1 gate remains `ea24b6af954876ce072562ff39cdb4c81d32be1f`.
+
+## Commutative operand order: hoist the call result into a named local
+
+Eight functions diverged from retail by exactly one instruction, always a
+commutative operation with its operands encoded in the opposite order. Five
+were `cmpw rN, r3` against our `cmpw r3, rN`, one the `fcmpu` equivalent, one
+an `or`. All eight now match.
+
+The lever is that MWCC encodes the two operands in the reverse of their source
+order, but only once both sides are simple values. With a call left inline in
+the condition, the frontend canonicalizes the comparison to temp-first and no
+spelling of the condition reaches the encoded order: rewriting
+`fn(x) != kind` as `kind != fn(x)`, as a positive `if`, or with the operands
+declared in either order all produce byte-identical output. Hoisting the call
+into a named local removes the canonicalization, after which source order
+controls the encoding.
+
+So `fn_800DB95C` matches by hoisting the second call and writing
+`type != kind`, which encodes as `cmpw r31, r3`. `fn_800BE8D4`, `fn_80096F04`,
+`fn_80063030`, `fn_800E8130` and `fn_801749A8` take the same shape, the last
+with a `double` local against a global constant. `fn_800BE8D4` and
+`fn_801294DC` needed the condition split into nested `if`s first, because the
+operand sits behind a `&&` and hoisting past it would evaluate the call or
+dereference unconditionally.
+
+Two do not follow the plain shape. `fn_801294DC` compares a memory load rather
+than a call result, and it is the load that must sit on the right: binding it
+as `resource_kind` and writing `kind == resource_kind` matches, while binding
+the pointer one level out and comparing `*slot == kind` stays at 99.85075%.
+`fn_80158F6C` is an `or` rather than a comparison: the fix is to bind
+`id | 0x40000000 | (index << 12)` to a local and pass `(request | message)`.
+Passing `(message | request)` holds at 99.85915%, and reordering the terms of the
+original four-way `or` in place is worse still, 88.45071% to 96.76057%.
+
+Ruled out before any of this, all leaving the same single wrong instruction:
+the six condition spellings recorded upstream, every compiler revision from
+GC/1.1 through GC/2.0, and 72 flag combinations on `fn_800DB95C` covering `-O0`
+through `-O4` with `p` and `s`, the inline modes, `-schedule off`, `-sdata 0
+-sdata2 0`, `-opt nopeephole`, `-fp_contract off` and `-func_align 4`, none of
+which moved it off 99.52381%. `#pragma opt_propagation off` is byte-neutral
+here and is not part of any of the eight matches.

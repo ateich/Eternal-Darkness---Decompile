@@ -48,8 +48,9 @@ int fn_800E8130(void *object)
         target = fn_80201814(id);
 
         if (target != 0) {
-            int owner = fn_80201EB8(object);
-            if (fn_80201EB8(target) == owner) {
+            int object_kind = fn_80201EB8(object);
+            int target_kind = fn_80201EB8(target);
+            if (target_kind == object_kind) {
                 void *effect = fn_801A717C();
                 Vec3 position;
 
