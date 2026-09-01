@@ -1,0 +1,23 @@
+{
+  "session_id": "session-1605",
+  "range_start": "0x801B0138",
+  "range_end": "0x801B05E8",
+  "next_target": "0x801B05E8",
+  "range_bytes": 1200,
+  "matched_bytes": 1200,
+  "nonmatching_bytes": 0,
+  "unaccounted_spans": [],
+  "functions": [
+    {"name":"fn_801B0138","start":"0x801B0138","end":"0x801B01F8","retail_bytes":192,"canonical_match_percent":100.0,"relocation_strict_match_percent":100.0,"relocations_equal":true},
+    {"name":"fn_801B01F8","start":"0x801B01F8","end":"0x801B02F0","retail_bytes":248,"canonical_match_percent":100.0,"relocation_strict_match_percent":100.0,"relocations_equal":true},
+    {"name":"fn_801B02F0","start":"0x801B02F0","end":"0x801B05B0","retail_bytes":704,"canonical_match_percent":100.0,"relocation_strict_match_percent":100.0,"relocations_equal":true},
+    {"name":"fn_801B05B0","start":"0x801B05B0","end":"0x801B05E8","retail_bytes":56,"canonical_match_percent":100.0,"relocation_strict_match_percent":100.0,"relocations_equal":true}
+  ],
+  "accounting": "1200 = 1200 matched + 0 NonMatching + 0 unaccounted bytes",
+  "assembly_added": false,
+  "shared_reconstruction": false,
+  "fallback_used": false,
+  "jumptable_evidence": "The externalizer's retail-byte guard does not compare relocation-backed @59. Session 1605 remediation 1 independently extracted retail jumptable_8025183C and compared its case destinations with the compiler object's .rela.data addends; the mappings agree. This independent comparison, not the externalizer guard, supports the binding.",
+  "data_ownership": "The custom rule removes game_fn_801B02F0.o's .data section. This session advances matched .text only and defers ownership of jumptable_8025183C.",
+  "signature_debt": "Deferred cross-TU declaration contradictions remain for fn_801ABF34 and fn_801AEAE0 in game_fn_801B02F0.c and fn_801B01F8 in game_fn_801B05B0.c. Fresh caller and callee object diffs remain exact; that does not validate the C signatures. Commands and raw outputs are in reports/GEDE01/session-1605-remediation-1-verification.json."
+}
