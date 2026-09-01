@@ -1,0 +1,76 @@
+{
+  "session_id": "session-1583-remediation-1",
+  "range_start": "0x801ACFE8",
+  "range_end": "0x801AD46C",
+  "next_target": "0x801AD46C",
+  "matched_bytes": 104,
+  "nonmatching_bytes": 1052,
+  "range_bytes": 1156,
+  "range_measurement": {
+    "command": "for fn in 801ACFE8 801AD08C 801AD404; do jq -r --arg fn fn_$fn '.left.symbols[] | select(.name==$fn) | \"\\(.size) \\(.match_percent)\"' reports/GEDE01/objdiff-game_fn_$fn-session-1583-remediation-1-reloc-strict.json; done | awk '$2 == 100 {matched += $1} $2 != 100 {nonmatching += $1} END {printf \"matched_bytes=%d nonmatching_bytes=%d range_bytes=%d\\n\", matched, nonmatching, matched + nonmatching}'",
+    "raw_output": "matched_bytes=104 nonmatching_bytes=1052 range_bytes=1156"
+  },
+  "functions": [
+    {
+      "name": "fn_801ACFE8",
+      "start": "0x801ACFE8",
+      "end": "0x801AD08C",
+      "size": 164,
+      "status": "NonMatching",
+      "score": 82.80488,
+      "divergence": "Retail uses a jump table for event values through 32. Explicitly enumerating values 0 through 15 and 17 through 31 was trialed in this remediation, but pinned GC/1.3 still folded them into a compare tree; the trial regressed the score and was reverted to the better sparse reconstruction.",
+      "measurement": {
+        "command": "jq -r '.right.symbols[] | select(.name==\"fn_801ACFE8\") | \"final_rebuilt_size=\\(.size) final_match_percent=\\(.match_percent)\"' reports/GEDE01/objdiff-game_fn_801ACFE8-session-1583-remediation-1-reloc-strict.json",
+        "raw_output": "final_rebuilt_size=156 final_match_percent=82.80488"
+      },
+      "retail_measurement": {
+        "command": "jq -r --arg fn fn_801ACFE8 '.left.symbols[] | select(.name==$fn) | \"name=\\(.name) retail_size=\\(.size) final_match_percent=\\(.match_percent)\"' reports/GEDE01/objdiff-game_fn_801ACFE8-session-1583-remediation-1-reloc-strict.json",
+        "raw_output": "name=fn_801ACFE8 retail_size=164 final_match_percent=82.80488"
+      },
+      "dense_case_trial": {
+        "artifact": "reports/GEDE01/objdiff-game_fn_801ACFE8-dense-case-trial-session-1583-remediation-1.json",
+        "command": "jq -r '.right.symbols[] | select(.name==\"fn_801ACFE8\") | \"dense_trial_rebuilt_size=\\(.size) dense_trial_match_percent=\\(.match_percent)\"' reports/GEDE01/objdiff-game_fn_801ACFE8-dense-case-trial-session-1583-remediation-1.json",
+        "raw_output": "dense_trial_rebuilt_size=164 dense_trial_match_percent=70.97561"
+      }
+    },
+    {
+      "name": "fn_801AD08C",
+      "start": "0x801AD08C",
+      "end": "0x801AD404",
+      "size": 888,
+      "status": "NonMatching",
+      "score": 89.77477,
+      "divergence": "The omitted state was restored: state 6 now follows the default exit and state 9 executes fn_801A98F4 followed by fn_801ACF80. Remaining differences are expression ordering, branching, register allocation, and local versus retail jump-table symbol ownership.",
+      "measurement": {
+        "command": "jq -r --arg fn fn_801AD08C '.left.symbols[] | select(.name==$fn) | \"name=\\(.name) retail_size=\\(.size) final_match_percent=\\(.match_percent)\"' reports/GEDE01/objdiff-game_fn_801AD08C-session-1583-remediation-1-reloc-strict.json",
+        "raw_output": "name=fn_801AD08C retail_size=888 final_match_percent=89.77477"
+      },
+      "compiled_dispatch_measurement": {
+        "command": "build/binutils/powerpc-eabi-objdump -h build/GEDE01/src/game/game_fn_801AD08C.o | awk '/\\.data/{print \"compiled_data_size=\" $3}'; build/binutils/powerpc-eabi-objdump -dr build/GEDE01/src/game/game_fn_801AD08C.o | awk '/cmplwi  r0,9/{print}'",
+        "raw_output": "compiled_data_size=00000028\n  4c:\t28 00 00 09 \tcmplwi  r0,9"
+      },
+      "retail_dispatch_measurement": {
+        "command": "off=$((0x238940 + 0x802517cc - 0x8023b940)); dd if=orig/GEDE01/sys/main.dol bs=1 skip=\"$off\" count=$((0x28)) status=none | xxd -g4",
+        "raw_output": "00000000: 801ad3e8 801ad0d4 801ad304 801ad348  ...............H\n00000010: 801ad37c 801ad20c 801ad3e8 801ad1d0  ...|............\n00000020: 801ad3b0 801ad3d4                    ........"
+      }
+    },
+    {
+      "name": "fn_801AD404",
+      "start": "0x801AD404",
+      "end": "0x801AD46C",
+      "size": 104,
+      "status": "Matching",
+      "score": 100.0,
+      "relocations_equal": true,
+      "measurement": {
+        "command": "jq -r --arg fn fn_801AD404 '.left.symbols[] | select(.name==$fn) | \"name=\\(.name) retail_size=\\(.size) final_match_percent=\\(.match_percent)\"' reports/GEDE01/objdiff-game_fn_801AD404-session-1583-remediation-1-reloc-strict.json",
+        "raw_output": "name=fn_801AD404 retail_size=104 final_match_percent=100.0"
+      }
+    }
+  ],
+  "callback_signature_measurement": {
+    "command": "rg -n 'fn_801ACFE8\\(' src/game/game_fn_801ACFE8.c src/game/game_fn_801AD08C.c",
+    "raw_output": "src/game/game_fn_801AD08C.c:12:extern void fn_801E8328(int, int), fn_801A98F4(u16, u8), DCFlushRange(void*, unsigned long), fn_801ACFE8(u32);\nsrc/game/game_fn_801ACFE8.c:8:void fn_801ACFE8(u32 event)"
+  },
+  "unaccounted_spans": []
+}

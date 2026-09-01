@@ -1,0 +1,57 @@
+{
+  "session_id": "session-1580",
+  "scope": "Consolidation maintenance only; no new functions matched and no frontier movement.",
+  "frontier": {
+    "source": ".darkfoundry/decomp-chain-state.json",
+    "starting_target": "0x801ACDC4",
+    "ending_next_target": "0x801ACDC4"
+  },
+  "accounting": {
+    "matched_bytes_added": 0,
+    "nonmatching_bytes_added": 0,
+    "match_counts_revised": false
+  },
+  "correction": {
+    "symbol": "fn_80180430",
+    "translation_units_changed": [
+      "src/game/game_fn_80180138.c"
+    ],
+    "grounding": "Owned definition src/game/game_fn_80180430.c:4 returns u32 in GPR r3; the corrected caller discarded the result and had declared void.",
+    "scope_reason": "One high-confidence return-register correction in one TU; no caller cast, unspecified prototype, argument rewrite, or ABI-equivalence-only type rationale was used."
+  },
+  "build": {
+    "command": ".tools/bin/ninja",
+    "status": "passed",
+    "report": "build/GEDE01/report.json"
+  },
+  "affected_object": {
+    "name": "main/game/game_fn_80180138",
+    "measurement": {
+      "matched_code": 36,
+      "total_code": 36,
+      "matched_code_percent": 100.0,
+      "complete_code_percent": 100.0,
+      "complete": true
+    },
+    "objdiff_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80180138 fn_80180138 -o reports/GEDE01/objdiff-game_fn_80180138-session-1580.json --format json-pretty -c function_reloc_diffs=name_address",
+    "objdiff_artifact": "reports/GEDE01/objdiff-game_fn_80180138-session-1580.json",
+    "objdiff_raw_output": "INFO Writing to reports/GEDE01/objdiff-game_fn_80180138-session-1580.json",
+    "relocation_check": {
+      "left_size": 36,
+      "right_size": 36,
+      "left_match_percent": 100.0,
+      "right_match_percent": 100.0,
+      "left_relocations": 1,
+      "right_relocations": 1,
+      "relocation_tuples_equal": true,
+      "tuples": [[16, "R_PPC_REL24", "bl fn_80180430", 0]]
+    }
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+    "expected": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "unchanged": true
+  },
+  "deferred_policy": "Every other contradiction remains unchanged. The shadow report records each symbol, variants, affected-TU count, evidence, confidence, and deferral rationale; progress.json points to that complete per-symbol ledger."
+}

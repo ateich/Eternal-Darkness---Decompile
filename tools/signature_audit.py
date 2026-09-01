@@ -476,25 +476,42 @@ def audit(
         if not disagreeing:
             continue
         variants = Counter(item.signature for item in disagreeing)
-        translation_units = sorted({item.path for item in disagreeing})
+        disagreement_units = sorted({item.path for item in disagreeing})
+        translation_units = sorted({item.path for item in declarations})
         ground_truth_contradictions.append({
             "symbol": symbol,
             "declarations": len(declarations),
             "ground_truth": truth,
             "disagreeing_declarations": len(disagreeing),
+            "disagreement_translation_units": len(disagreement_units),
+            "disagreement_units": disagreement_units,
             "affected_translation_units": len(translation_units),
             "translation_units": translation_units,
             "confidence": "high",
             "disposition": "deferred",
             "disposition_reason": (
                 "Owned-definition or unambiguous retail evidence establishes a "
-                "different PPC EABI return-register shape; the declaration is "
-                "left unchanged unless separately listed as an applied correction."
+                "different PPC EABI signature; the declaration is left unchanged "
+                "unless separately listed as an applied correction."
             ),
             "variants": [
                 {
                     "signature": signature,
                     "count": count,
+                    "parameter_count": next(
+                        len(item.parameters)
+                        for item in disagreeing if item.signature == signature
+                    ),
+                    "ground_truth_parameter_count": (
+                        len(definition.parameters) if definition is not None else None
+                    ),
+                    "parameter_arity_matches_ground_truth": (
+                        next(
+                            len(item.parameters)
+                            for item in disagreeing if item.signature == signature
+                        ) == len(definition.parameters)
+                        if definition is not None else None
+                    ),
                     "sites": [
                         f"{item.path}:{item.line}"
                         for item in disagreeing if item.signature == signature
@@ -568,9 +585,14 @@ def audit(
                 ]
             else:
                 sites = [site for variant in variants for site in variant["sites"]]
-            translation_units = sorted({site.rsplit(":", 1)[0] for site in sites})
+            disagreement_units = sorted({site.rsplit(":", 1)[0] for site in sites})
+            translation_units = sorted({
+                item.path for item in grouped[str(entry["symbol"])]
+            })
             entry["affected_translation_units"] = len(translation_units)
             entry["translation_units"] = translation_units
+            entry["disagreement_translation_units"] = len(disagreement_units)
+            entry["disagreement_units"] = disagreement_units
             entry["confidence"] = "high" if truth is not None else "low"
             entry["evidence"] = (
                 [truth]
@@ -645,22 +667,31 @@ def audit(
     for symbol in sorted(applied_symbols):
         definition = definitions.get(symbol)
         declarations = grouped.get(symbol, [])
-        translation_units = sorted(corrected_translation_units.get(symbol, set()))
-        if not translation_units:
+        edited_translation_units = sorted(
+            corrected_translation_units.get(symbol, set())
+        )
+        if not edited_translation_units:
             raise ValueError(
                 f"{symbol}: applied correction lacks explicit corrected translation units"
             )
         declaring_units = {item.path for item in declarations}
-        unknown_units = sorted(set(translation_units) - declaring_units)
+        unknown_units = sorted(set(edited_translation_units) - declaring_units)
         if unknown_units:
             raise ValueError(
                 f"{symbol}: corrected translation units do not declare the symbol "
                 f"{unknown_units}"
             )
+        translation_units = sorted(declaring_units)
+        if len(translation_units) > 12:
+            raise ValueError(
+                f"{symbol}: applied correction exceeds the 12-translation-unit "
+                f"gate ({len(translation_units)} declaring translation units)"
+            )
         applied_corrections.append({
             "symbol": symbol,
             "affected_translation_units": len(translation_units),
             "translation_units": translation_units,
+            "edited_translation_units": edited_translation_units,
             "resulting_signatures": sorted({item.signature for item in declarations}),
             "confidence": "high" if definition is not None else "low",
             "evidence": ({
@@ -855,7 +886,7 @@ def main() -> int:
                 raise ValueError(f"{artifact}: objdiff code is not 100 percent")
         expected_units = {
             "main/" + path.removeprefix("src/").removesuffix(".c")
-            for path in correction["translation_units"]
+            for path in correction["edited_translation_units"]
             if path.endswith(".c")
         }
         missing = sorted(expected_units - verified_by_name.keys())
