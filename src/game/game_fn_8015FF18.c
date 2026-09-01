@@ -16,9 +16,10 @@ int fn_8015FF18(int* values, int target, int position, int* cursor)
     value = values[offset];
     if (value < 0) {
         position -= value;
-        offset = index + 1;
+        index++;
     }
 
+    offset = index;
     while (values[offset] > target) {
         --offset;
         --position;

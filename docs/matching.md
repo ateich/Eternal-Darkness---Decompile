@@ -338,3 +338,72 @@ declare it.
 Objdiff reports 64/64 bytes and 3 relocations for `fn_8015AD00`, 108/108 and 4
 for `fn_8015AC94`, and 180/180 and 13 for `fn_8016B400`, all at 100%, and the
 whole-DOL SHA-1 gate remains `ea24b6af954876ce072562ff39cdb4c81d32be1f`.
+
+## Loop form decides constant materialization order
+
+`fn_80132D50` was two instructions from retail: the loop-invariant constants 1
+and 0 were hoisted in the wrong order (`li r31,0` before `li r30,1`; retail
+emits the 1 first). No statement reordering, store spelling, or pointer-typed
+zero moved them. Rewriting the `do { ... i++; } while (i < 5);` loop as
+`for (i = 0; i < 5; i++)` with the cursor advance kept in the body flips the
+materialization order and nothing else: 128/128 bytes, 100%. Rejected as
+byte-neutral: `(void*)0` in the store, swapping the init statements, and
+routing the zero through the object local.
+
+## A slot-pointer sum lands in the product's register when a dead local absorbs it
+
+`fn_8012CDF0` and `fn_8012CCF0` share one epilogue: fetch a runtime array,
+scale an index from the definition, store the entry into the slot. Written as
+`runtime += *(u16*)(definition + 0xE) * 0x4C;` the add computes into the base's
+register; retail computes into the product's register. The original reused the
+`definition` local, dead by then:
+`record = runtime + *(u16*)(record + 0xE) * 0x4C;`. One shared edit
+takes both functions to 100% (180/180 and 256/256 bytes). Rejected: a fresh
+`slot` local or folding into the store operand both collapse to `stwx` (97.3%),
+an int-typed offset chain reorders the loads (99.3%), and reversing the
+operands of `+=` is byte-identical to the compound form.
+
+## The register evidence caught a wrong index update
+
+`fn_8015FF18`'s entry block read `offset = index + 1;` on the negative-value
+path. Retail's `addi` writes the INDEX register, so the original increments
+`index` and derives the scan cursor from it afterwards: `index++;` in the
+block, then `offset = index;` before the while loop. That is a semantic
+difference, not a codegen preference - with the old source the two variables
+disagreed by one for the rest of the function on that path. 208/208 bytes,
+100%. Writing `offset = index;` inside the if instead costs an extra `mr`
+(96.8%).
+
+## The commutative-operand lever extends to fmuls, and where the hoist must sit
+
+`fn_8013DE44` had both `fmuls` encodings reversed. The known comparison lever -
+hoist the call out of the expression so both operands are simple - applies, but
+the hoisted value must be the whole computed subexpression, and the constant
+must sit on the right: `distance = -projection - fn_800ED720(discriminant);
+*result = distance * lbl_80650364;` reaches 264/264, 100%. Hoisting only the
+call result shuffles the float registers instead (99.62%), constant-left with
+the same hoist stays canonicalized (99.70%), and hoisting the constant itself
+makes it live across the call, growing the frame (88.7%).
+
+## An id comparison and a shared conversion constant
+
+`fn_800C65FC` needed two independent fixes. The `cmpw` operand order follows
+from the hoist lever: bind `object_id = fn_80201B54(object);` and write
+`object_id != current`. The remaining relocation row was the s16-to-float
+conversion bias: this unit's pool copy of 0x4330000080000000 must be the shared
+named symbol, so a new externalize rule verifies `@30` against retail data and
+redefines it to `lbl_8064F158`, exactly as `fn_800C59F0` and `fn_800C644C`
+already do. 384/384 bytes, 100%, relocations included.
+
+## A parse cursor is an offset, not a recast pointer
+
+`fn_800AFEC0` walked a buffer with
+`object = (void*)((u32)object + fn(buffer + (u16)(u32)object));` repeated nine
+times, and the final add spilled into a scratch register because the pointer
+local died at its last narrowing. The original is a `u32 offset` advanced with
+`offset += fn(buffer + (u16)offset);` - the compound add computes in the
+accumulator's register, all nine sites, and the code stops pretending the
+running total is a pointer. 364/364 bytes, 100%.
+
+All seven functions verify at 100% with relocations in objdiff, and the
+whole-DOL SHA-1 gate remains `ea24b6af954876ce072562ff39cdb4c81d32be1f`.
