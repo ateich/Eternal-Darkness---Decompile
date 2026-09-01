@@ -1,0 +1,39 @@
+{
+  "session": "session-1632",
+  "range_start": "0x801B4EF0",
+  "range_end": "0x801B5228",
+  "retail_text_bytes": 824,
+  "matched_bytes": 196,
+  "nonmatching_bytes": 628,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "name": "fn_801B4EF0",
+      "start": "0x801B4EF0",
+      "end": "0x801B4FB4",
+      "retail_bytes": 196,
+      "generated_bytes": 196,
+      "canonical_match_percent": 100.0,
+      "relocation_strict_match_percent": 100.0,
+      "relocation_differences": 0,
+      "status": "Matching",
+      "exception_metadata": "extab and extabindex are byte-identical with GC/1.2.5n and C++ exceptions enabled"
+    },
+    {
+      "name": "fn_801B4FB4",
+      "start": "0x801B4FB4",
+      "end": "0x801B5228",
+      "retail_bytes": 628,
+      "generated_bytes": 580,
+      "canonical_match_percent": 57.24204,
+      "relocation_strict_match_percent": 57.24204,
+      "status": "NonMatching",
+      "blocking_divergence": "The honest-C reconstruction recovers the queue pop, double-buffer toggle, refill dispatch, and termination test, but the numeric refill path still differs in float-to-integer conversion, phase wrapping, stack layout, and register scheduling; no assembly was used."
+    }
+  ],
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "canonical_report": "build/GEDE01/report.json",
+  "relocation_strict_report": "reports/GEDE01/session-1632-reloc-strict.json",
+  "next_target": "0x801B5228",
+  "next_gate": "Start at immediate consecutive unowned fn_801B5228. The preceding text range is fully accounted with 196 matched bytes and 628 NonMatching bytes; no interior span is unaccounted."
+}
