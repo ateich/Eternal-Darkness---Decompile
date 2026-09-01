@@ -1,0 +1,65 @@
+{
+  "session": "session-1653-remediation-1",
+  "scope": "Review remediation only; no frontier advancement.",
+  "frontier": {
+    "starting_target": "0x801B8E88",
+    "ending_next_target": "0x801B8E88",
+    "report": "reports/GEDE01/frontier-801B8D68-801B8E88-session-1653.json"
+  },
+  "history_repair": {
+    "command": "git log --oneline 6a2678d4a..1085df659",
+    "raw_output": "1085df659 Match fn_801B8E48\n492c9f4e1 Reconstruct fn_801B8DE8 as nonmatching\n8ad54af98 Reconstruct fn_801B8D88 as nonmatching\n004593b09 Match fn_801B8D68",
+    "conclusion": "Each function now has its own commit, both NonMatching functions are labeled honestly, and the fn_801B8D68 commit contains the unsigned-char parameter source and Matching registration."
+  },
+  "configure": {
+    "command": "python3 configure.py --version GEDE01 2>&1 | tail -n 3",
+    "raw_output": "[1/2] SPLIT config/GEDE01/config.yml\n[2/2] RUN configure.py"
+  },
+  "affected_object_rebuild": {
+    "command": "touch src/game/game_fn_801B8D68.c src/game/game_fn_801B8D88.c src/game/game_fn_801B8DE8.c src/game/game_fn_801B8E48.c && .tools/bin/ninja build/GEDE01/src/game/game_fn_801B8D68.o build/GEDE01/src/game/game_fn_801B8D88.o build/GEDE01/src/game/game_fn_801B8DE8.o build/GEDE01/src/game/game_fn_801B8E48.o 2>&1 | rg '^\\[[0-9]+/[0-9]+\\]'",
+    "raw_output": "[1/6] MWCC build/GEDE01/src/game/game_fn_801B8D68.o\n[2/6] MWCC build/GEDE01/src/game/game_fn_801B8D88.o\n[3/6] MWCC build/GEDE01/src/game/game_fn_801B8E48.o\n[4/6] MWCC build/GEDE01/src/game/game_fn_801B8DE8.o"
+  },
+  "full_dol_build": {
+    "command": ".tools/bin/ninja build/GEDE01/main.dol build/GEDE01/report.json 2>&1 | tail -n 1",
+    "raw_output": "[569/569] DOL build/GEDE01/main.dol"
+  },
+  "objdiff_generation": {
+    "canonical_config": "canonical default with no extra -c config",
+    "relocation_strict_config": "function_reloc_diffs=name_address",
+    "command": "for sym in fn_801B8D68 fn_801B8D88 fn_801B8DE8 fn_801B8E48; do build/tools/objdiff-cli diff -u main/game/game_$sym -o reports/GEDE01/session-1653/objdiff-$sym.json --format json-pretty \"$sym\"; build/tools/objdiff-cli diff -u main/game/game_$sym -o reports/GEDE01/session-1653/objdiff-$sym-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address \"$sym\"; done",
+    "raw_output": " INFO Writing to reports/GEDE01/session-1653/objdiff-fn_801B8D68.json\n INFO Writing to reports/GEDE01/session-1653/objdiff-fn_801B8D68-reloc-strict.json\n INFO Writing to reports/GEDE01/session-1653/objdiff-fn_801B8D88.json\n INFO Writing to reports/GEDE01/session-1653/objdiff-fn_801B8D88-reloc-strict.json\n INFO Writing to reports/GEDE01/session-1653/objdiff-fn_801B8DE8.json\n INFO Writing to reports/GEDE01/session-1653/objdiff-fn_801B8DE8-reloc-strict.json\n INFO Writing to reports/GEDE01/session-1653/objdiff-fn_801B8E48.json\n INFO Writing to reports/GEDE01/session-1653/objdiff-fn_801B8E48-reloc-strict.json"
+  },
+  "per_function_measurement": {
+    "command": "for sym in fn_801B8D68 fn_801B8D88 fn_801B8DE8 fn_801B8E48; do for mode in canonical reloc-strict; do file=reports/GEDE01/session-1653/objdiff-$sym.json; [ \"$mode\" = reloc-strict ] && file=reports/GEDE01/session-1653/objdiff-$sym-reloc-strict.json; jq -r --arg sym \"$sym\" --arg mode \"$mode\" '[.left.symbols[]|select(.name==$sym)][0] as $s | [.left.sections[]|select(.name==\"extab\")][0] as $e | [.left.sections[]|select(.name==\"extabindex\")][0] as $i | \"symbol=\\($sym) config=\\($mode) text_bytes=\\($s.size) text_percent=\\($s.match_percent) extab_percent=\\(if $e == null then \"not_present\" else $e.match_percent end) extabindex_percent=\\(if $i == null then \"not_present\" else $i.match_percent end)\"' \"$file\"; done; done",
+    "raw_output": "symbol=fn_801B8D68 config=canonical text_bytes=32 text_percent=100.0 extab_percent=not_present extabindex_percent=not_present\nsymbol=fn_801B8D68 config=reloc-strict text_bytes=32 text_percent=100.0 extab_percent=not_present extabindex_percent=not_present\nsymbol=fn_801B8D88 config=canonical text_bytes=96 text_percent=99.625 extab_percent=100.0 extabindex_percent=100.0\nsymbol=fn_801B8D88 config=reloc-strict text_bytes=96 text_percent=99.625 extab_percent=100.0 extabindex_percent=100.0\nsymbol=fn_801B8DE8 config=canonical text_bytes=96 text_percent=99.625 extab_percent=100.0 extabindex_percent=100.0\nsymbol=fn_801B8DE8 config=reloc-strict text_bytes=96 text_percent=99.625 extab_percent=100.0 extabindex_percent=100.0\nsymbol=fn_801B8E48 config=canonical text_bytes=64 text_percent=100.0 extab_percent=100.0 extabindex_percent=100.0\nsymbol=fn_801B8E48 config=reloc-strict text_bytes=64 text_percent=100.0 extab_percent=100.0 extabindex_percent=100.0"
+  },
+  "strict_diff_kind_measurement": {
+    "command": "for sym in fn_801B8D68 fn_801B8D88 fn_801B8DE8 fn_801B8E48; do file=reports/GEDE01/session-1653/objdiff-$sym-reloc-strict.json; jq -r --arg sym \"$sym\" '[.left.symbols[]|select(.name==$sym)|.instructions[]|select(.diff_kind != null and .diff_kind != \"DIFF_NONE\")|.diff_kind] | \"symbol=\\($sym) strict_diff_kinds=\\(unique|join(\",\")) differing_rows=\\(length)\"' \"$file\"; done",
+    "raw_output": "symbol=fn_801B8D68 strict_diff_kinds= differing_rows=0\nsymbol=fn_801B8D88 strict_diff_kinds=DIFF_ARG_MISMATCH differing_rows=9\nsymbol=fn_801B8DE8 strict_diff_kinds=DIFF_ARG_MISMATCH differing_rows=9\nsymbol=fn_801B8E48 strict_diff_kinds= differing_rows=0"
+  },
+  "text_divergence_measurement": {
+    "command": "for sym in fn_801B8D88 fn_801B8DE8; do file=reports/GEDE01/session-1653/objdiff-$sym.json; jq -r --arg sym \"$sym\" '[.left.symbols[]|select(.name==$sym)|.instructions[]|select(.diff_kind != null and .diff_kind != \"DIFF_NONE\")|.instruction.formatted] | \"symbol=\\($sym) retail_differing_rows=\\(length) retail=\\(join(\" | \"))\"' \"$file\"; jq -r --arg sym \"$sym\" '[.right.symbols[]|select(.name==$sym)|.instructions[]|select(.diff_kind != null and .diff_kind != \"DIFF_NONE\")|.instruction.formatted] | \"symbol=\\($sym) generated=\\(join(\" | \"))\"' \"$file\"; done",
+    "raw_output": "symbol=fn_801B8D88 retail_differing_rows=9 retail=stwu r1, -0x20(r1) | stw r31, 0x1c(r1) | stw r30, 0x18(r1) | stw r29, 0x14(r1) | lwz r0, 0x24(r1) | lwz r31, 0x1c(r1) | lwz r30, 0x18(r1) | lwz r29, 0x14(r1) | addi r1, r1, 0x20\nsymbol=fn_801B8D88 generated=stwu r1, -0x28(r1) | stw r31, 0x24(r1) | stw r30, 0x20(r1) | stw r29, 0x1c(r1) | lwz r0, 0x2c(r1) | lwz r31, 0x24(r1) | lwz r30, 0x20(r1) | lwz r29, 0x1c(r1) | addi r1, r1, 0x28\nsymbol=fn_801B8DE8 retail_differing_rows=9 retail=stwu r1, -0x20(r1) | stw r31, 0x1c(r1) | stw r30, 0x18(r1) | stw r29, 0x14(r1) | lwz r0, 0x24(r1) | lwz r31, 0x1c(r1) | lwz r30, 0x18(r1) | lwz r29, 0x14(r1) | addi r1, r1, 0x20\nsymbol=fn_801B8DE8 generated=stwu r1, -0x28(r1) | stw r31, 0x24(r1) | stw r30, 0x20(r1) | stw r29, 0x1c(r1) | lwz r0, 0x2c(r1) | lwz r31, 0x24(r1) | lwz r30, 0x20(r1) | lwz r29, 0x1c(r1) | addi r1, r1, 0x28"
+  },
+  "exception_section_measurement": {
+    "command": "build/binutils/powerpc-eabi-objdump -s -j extab -j extabindex build/GEDE01/obj/game/game_fn_801B8D88.o build/GEDE01/src/game/game_fn_801B8D88.o build/GEDE01/obj/game/game_fn_801B8DE8.o build/GEDE01/src/game/game_fn_801B8DE8.o | rg 'file format|Contents| 0000'",
+    "raw_output": "build/GEDE01/obj/game/game_fn_801B8D88.o:     file format elf32-powerpc\nContents of section extab:\n 0000 18080000 00000000                    ........        \nContents of section extabindex:\n 0000 00000000 00000060 00000000           .......`....    \nbuild/GEDE01/src/game/game_fn_801B8D88.o:     file format elf32-powerpc\nContents of section extab:\n 0000 18080000 00000000                    ........        \nContents of section extabindex:\n 0000 00000000 00000060 00000000           .......`....    \nbuild/GEDE01/obj/game/game_fn_801B8DE8.o:     file format elf32-powerpc\nContents of section extab:\n 0000 18080000 00000000                    ........        \nContents of section extabindex:\n 0000 00000000 00000060 00000000           .......`....    \nbuild/GEDE01/src/game/game_fn_801B8DE8.o:     file format elf32-powerpc\nContents of section extab:\n 0000 18080000 00000000                    ........        \nContents of section extabindex:\n 0000 00000000 00000060 00000000           .......`....    ",
+    "conclusion": "The freshly rebuilt retail and generated exception sections are byte-identical. The earlier zero-percent dumps were stale and are superseded."
+  },
+  "range_accounting": {
+    "command": "jq -s -r 'map(.left.symbols[]|select(.name|test(\"^fn_801B8(D68|D88|DE8|E48)$\"))|{name,size:(.size|tonumber),percent:.match_percent}) as $f | \"range_start=0x801B8D68 range_end=0x801B8E88 range_bytes=\\($f|map(.size)|add) matched_bytes=\\($f|map(select(.percent==100)|.size)|add) nonmatching_bytes=\\($f|map(select(.percent!=100)|.size)|add) functions=\\($f|map(\"\\(.name):\\(.size):\\(.percent)\")|join(\",\"))\"' reports/GEDE01/session-1653/objdiff-fn_801B8D68.json reports/GEDE01/session-1653/objdiff-fn_801B8D88.json reports/GEDE01/session-1653/objdiff-fn_801B8DE8.json reports/GEDE01/session-1653/objdiff-fn_801B8E48.json",
+    "raw_output": "range_start=0x801B8D68 range_end=0x801B8E88 range_bytes=288 matched_bytes=96 nonmatching_bytes=192 functions=fn_801B8D68:32:100.0,fn_801B8D88:96:99.625,fn_801B8DE8:96:99.625,fn_801B8E48:64:100.0"
+  },
+  "canonical_progress": {
+    "command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report.json",
+    "raw_output": "matching_objects=4506 total_objects=6088 matching_functions=4272 total_functions=8216 matching_code_bytes=650096 total_code_bytes=2300692 matching_data_bytes=35130 total_data_bytes=4305642 linked_code_bytes=649972 linked_data_bytes=35138"
+  },
+  "relocation_strict_progress": {
+    "command": "jq -r '(.categories[]|select(.id==\"game\")|.measures) as $g | \"matching_functions=\\(.measures.matched_functions) matching_code_bytes=\\(.measures.matched_code) game_matching_functions=\\($g.matched_functions) game_matching_code_bytes=\\($g.matched_code)\"' reports/GEDE01/session-1653-reloc-strict.json",
+    "raw_output": "matching_functions=4267 matching_code_bytes=648412 game_matching_functions=4205 game_matching_code_bytes=645384"
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol"
+  }
+}

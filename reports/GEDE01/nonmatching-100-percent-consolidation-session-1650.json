@@ -1,0 +1,103 @@
+{
+  "session_id": "session-1650",
+  "assignment": "Enumerate every live Object(NonMatching, ...) registration, identify units whose fresh objdiff report has fuzzy_match_percent 100.0, and reclaim only objects that preserve the exact linked DOL; match no new functions",
+  "starting_target": "0x801B86C0",
+  "ending_next_target": "0x801B86C0",
+  "frontier_changed": false,
+  "method": {
+    "registration_source": "configure.py",
+    "registration_parser": "Python AST over live Object calls whose first positional argument is the NonMatching name and whose second positional argument is a constant string",
+    "score_source": "build/GEDE01/report.json",
+    "score_generator": "objdiff-cli v3.6.1 report generate",
+    "join_key": "configure.py object path to objdiff unit metadata.source_path after removing the src/ prefix",
+    "candidate_prefilter": "unit fuzzy_match_percent == 100.0",
+    "reclaim_gate": "Fresh one-shot objdiff must show exact code and relocation equality, and temporary Matching registration must preserve the canonical linked DOL SHA-1. Retail exception metadata absent from the generated object is therefore not treated as matched."
+  },
+  "inventory": {
+    "unique_nonmatching_registrations_before": 926,
+    "unique_nonmatching_registrations_after": 926,
+    "fresh_objdiff_units_examined": 6088,
+    "registered_nonmatching_objects_examined": 926,
+    "mapped_nonmatching_registrations": 926,
+    "unmapped_nonmatching_registrations": 0,
+    "unit_fuzzy_100_prefilter_candidates": 1,
+    "exact_link_candidates": 0,
+    "reclaimed_registered_objects": 0,
+    "retained_nonmatching_candidates": 1
+  },
+  "objdiff_unit_accounting": {
+    "before": {
+      "matched_code_bytes": 649644,
+      "matched_data_bytes": 34970,
+      "complete_code_bytes": 649520,
+      "complete_data_bytes": 35018,
+      "complete_units": 4499,
+      "total_units": 6088
+    },
+    "after": {
+      "matched_code_bytes": 649644,
+      "matched_data_bytes": 34970,
+      "complete_code_bytes": 649520,
+      "complete_data_bytes": 35018,
+      "complete_units": 4499,
+      "total_units": 6088
+    },
+    "delta": {
+      "matched_code_bytes": 0,
+      "matched_data_bytes": 0,
+      "complete_code_bytes": 0,
+      "complete_data_bytes": 0,
+      "complete_units": 0,
+      "nonmatching_registrations": 0
+    },
+    "note": "No matched bytes were reclaimed and no new functions were matched."
+  },
+  "candidates": [
+    {
+      "object": "game/game_fn_801B3940.c",
+      "status_before": "NonMatching",
+      "status_after": "NonMatching",
+      "aggregate_unit_measures": {
+        "unit_fuzzy_match_percent": 100.0,
+        "total_code_bytes": 92,
+        "matched_code_bytes": 92,
+        "matched_code_percent": 100.0,
+        "total_data_bytes": 20
+      },
+      "fresh_code_gate": {
+        "text_size_bytes": 92,
+        "text_match_percent": 100.0,
+        "text_relocations_equal": true
+      },
+      "exception_metadata_gate": {
+        "passed": false,
+        "retail_extab_bytes": 8,
+        "retail_extab_match_percent": 0.0,
+        "retail_extabindex_bytes": 12,
+        "retail_extabindex_match_percent": 0.0,
+        "generated_extab_bytes": 0,
+        "generated_extabindex_bytes": 0
+      },
+      "temporary_exact_link_gate": {
+        "passed": false,
+        "canonical_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+        "promoted_dol_sha1": "e70634cc0dc1a3deacb5dc2ad8a8bbf2160df40e"
+      },
+      "exact_matched_bytes_reclaimed": 0,
+      "reason_not_reclaimed": "The 100% aggregate score covers .text but not retail exception metadata. Temporarily linking the object changes main.dol, so the exact-build gate requires retaining NonMatching.",
+      "evidence": "reports/GEDE01/objdiff-consolidation-game_fn_801B3940-session-1650.json"
+    }
+  ],
+  "verification": {
+    "verified_at": "2026-09-01T17:56:00-04:00",
+    "report_command": ".tools/bin/ninja build/GEDE01/report.json",
+    "report_sha256": "5d50ddde2b8f6951a623cc1bb0f5bd10b951879fc91fa79d5280361fb4284b4e",
+    "candidate_diff_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801B3940 -o reports/GEDE01/objdiff-consolidation-game_fn_801B3940-session-1650.json --format json-pretty",
+    "candidate_diff_sha256": "dcd7f72c8cba9d5615b6020b273af22bb43e6ce467aedc247a8fb825007a7f4c",
+    "build_command": ".tools/bin/ninja build/GEDE01/ok",
+    "objdiff_version": "3.6.1",
+    "dol_sha1_expected": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "dol_sha1_actual": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "dol_sha1_unchanged": true
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "session": "session-1653",
+  "range_start": "0x801B8D68",
+  "range_end": "0x801B8E88",
+  "next_target": "0x801B8E88",
+  "matched_bytes": 96,
+  "nonmatching_bytes": 192,
+  "unaccounted_spans": [],
+  "accounting_measurement": {
+    "command": "jq -s -r 'map(.left.symbols[]|select(.name|test(\"^fn_801B8(D68|D88|DE8|E48)$\"))|{name,size:(.size|tonumber),percent:.match_percent}) as $f | \"range_start=0x801B8D68 range_end=0x801B8E88 range_bytes=\\($f|map(.size)|add) matched_bytes=\\($f|map(select(.percent==100)|.size)|add) nonmatching_bytes=\\($f|map(select(.percent!=100)|.size)|add) functions=\\($f|map(\"\\(.name):\\(.size):\\(.percent)\")|join(\",\"))\"' reports/GEDE01/session-1653/objdiff-fn_801B8D68.json reports/GEDE01/session-1653/objdiff-fn_801B8D88.json reports/GEDE01/session-1653/objdiff-fn_801B8DE8.json reports/GEDE01/session-1653/objdiff-fn_801B8E48.json",
+    "raw_output": "range_start=0x801B8D68 range_end=0x801B8E88 range_bytes=288 matched_bytes=96 nonmatching_bytes=192 functions=fn_801B8D68:32:100.0,fn_801B8D88:96:99.625,fn_801B8DE8:96:99.625,fn_801B8E48:64:100.0"
+  },
+  "functions": [
+    {
+      "symbol": "fn_801B8D68",
+      "retail_bytes": 32,
+      "generated_bytes": 32,
+      "status": "Matching",
+      "canonical_percent": 100.0,
+      "relocation_strict_percent": 100.0,
+      "canonical_report": "reports/GEDE01/session-1653/objdiff-fn_801B8D68.json",
+      "relocation_strict_report": "reports/GEDE01/session-1653/objdiff-fn_801B8D68-reloc-strict.json"
+    },
+    {
+      "symbol": "fn_801B8D88",
+      "retail_bytes": 96,
+      "generated_bytes": 96,
+      "status": "NonMatching",
+      "canonical_percent": 99.625,
+      "relocation_strict_percent": 99.625,
+      "exception_sections_equal": true,
+      "canonical_report": "reports/GEDE01/session-1653/objdiff-fn_801B8D88.json",
+      "relocation_strict_report": "reports/GEDE01/session-1653/objdiff-fn_801B8D88-reloc-strict.json",
+      "blocking_divergence": "The only strict diff kind is DIFF_ARG_MISMATCH on nine text instructions. Retail uses a 0x20-byte frame while generated code uses 0x28, shifting the frame allocation, three saves, LR load, three restores, and frame release. Freshly rebuilt extab and extabindex bytes are equal."
+    },
+    {
+      "symbol": "fn_801B8DE8",
+      "retail_bytes": 96,
+      "generated_bytes": 96,
+      "status": "NonMatching",
+      "canonical_percent": 99.625,
+      "relocation_strict_percent": 99.625,
+      "exception_sections_equal": true,
+      "canonical_report": "reports/GEDE01/session-1653/objdiff-fn_801B8DE8.json",
+      "relocation_strict_report": "reports/GEDE01/session-1653/objdiff-fn_801B8DE8-reloc-strict.json",
+      "blocking_divergence": "The only strict diff kind is DIFF_ARG_MISMATCH on nine text instructions. Retail uses a 0x20-byte frame while generated code uses 0x28, shifting the frame allocation, three saves, LR load, three restores, and frame release. Freshly rebuilt extab and extabindex bytes are equal."
+    },
+    {
+      "symbol": "fn_801B8E48",
+      "retail_bytes": 64,
+      "generated_bytes": 64,
+      "status": "Matching",
+      "canonical_percent": 100.0,
+      "relocation_strict_percent": 100.0,
+      "exception_sections_equal": true,
+      "canonical_report": "reports/GEDE01/session-1653/objdiff-fn_801B8E48.json",
+      "relocation_strict_report": "reports/GEDE01/session-1653/objdiff-fn_801B8E48-reloc-strict.json"
+    }
+  ],
+  "per_function_measurement": {
+    "command": "for sym in fn_801B8D68 fn_801B8D88 fn_801B8DE8 fn_801B8E48; do for mode in canonical reloc-strict; do file=reports/GEDE01/session-1653/objdiff-$sym.json; [ \"$mode\" = reloc-strict ] && file=reports/GEDE01/session-1653/objdiff-$sym-reloc-strict.json; jq -r --arg sym \"$sym\" --arg mode \"$mode\" '[.left.symbols[]|select(.name==$sym)][0] as $s | [.left.sections[]|select(.name==\"extab\")][0] as $e | [.left.sections[]|select(.name==\"extabindex\")][0] as $i | \"symbol=\\($sym) config=\\($mode) text_bytes=\\($s.size) text_percent=\\($s.match_percent) extab_percent=\\(if $e == null then \"not_present\" else $e.match_percent end) extabindex_percent=\\(if $i == null then \"not_present\" else $i.match_percent end)\"' \"$file\"; done; done",
+    "raw_output": "symbol=fn_801B8D68 config=canonical text_bytes=32 text_percent=100.0 extab_percent=not_present extabindex_percent=not_present\nsymbol=fn_801B8D68 config=reloc-strict text_bytes=32 text_percent=100.0 extab_percent=not_present extabindex_percent=not_present\nsymbol=fn_801B8D88 config=canonical text_bytes=96 text_percent=99.625 extab_percent=100.0 extabindex_percent=100.0\nsymbol=fn_801B8D88 config=reloc-strict text_bytes=96 text_percent=99.625 extab_percent=100.0 extabindex_percent=100.0\nsymbol=fn_801B8DE8 config=canonical text_bytes=96 text_percent=99.625 extab_percent=100.0 extabindex_percent=100.0\nsymbol=fn_801B8DE8 config=reloc-strict text_bytes=96 text_percent=99.625 extab_percent=100.0 extabindex_percent=100.0\nsymbol=fn_801B8E48 config=canonical text_bytes=64 text_percent=100.0 extab_percent=100.0 extabindex_percent=100.0\nsymbol=fn_801B8E48 config=reloc-strict text_bytes=64 text_percent=100.0 extab_percent=100.0 extabindex_percent=100.0"
+  },
+  "divergence_measurement": {
+    "command": "for sym in fn_801B8D88 fn_801B8DE8; do file=reports/GEDE01/session-1653/objdiff-$sym.json; jq -r --arg sym \"$sym\" '[.left.symbols[]|select(.name==$sym)|.instructions[]|select(.diff_kind != null and .diff_kind != \"DIFF_NONE\")|.instruction.formatted] | \"symbol=\\($sym) retail_differing_rows=\\(length) retail=\\(join(\" | \"))\"' \"$file\"; jq -r --arg sym \"$sym\" '[.right.symbols[]|select(.name==$sym)|.instructions[]|select(.diff_kind != null and .diff_kind != \"DIFF_NONE\")|.instruction.formatted] | \"symbol=\\($sym) generated=\\(join(\" | \"))\"' \"$file\"; done",
+    "raw_output": "symbol=fn_801B8D88 retail_differing_rows=9 retail=stwu r1, -0x20(r1) | stw r31, 0x1c(r1) | stw r30, 0x18(r1) | stw r29, 0x14(r1) | lwz r0, 0x24(r1) | lwz r31, 0x1c(r1) | lwz r30, 0x18(r1) | lwz r29, 0x14(r1) | addi r1, r1, 0x20\nsymbol=fn_801B8D88 generated=stwu r1, -0x28(r1) | stw r31, 0x24(r1) | stw r30, 0x20(r1) | stw r29, 0x1c(r1) | lwz r0, 0x2c(r1) | lwz r31, 0x24(r1) | lwz r30, 0x20(r1) | lwz r29, 0x1c(r1) | addi r1, r1, 0x28\nsymbol=fn_801B8DE8 retail_differing_rows=9 retail=stwu r1, -0x20(r1) | stw r31, 0x1c(r1) | stw r30, 0x18(r1) | stw r29, 0x14(r1) | lwz r0, 0x24(r1) | lwz r31, 0x1c(r1) | lwz r30, 0x18(r1) | lwz r29, 0x14(r1) | addi r1, r1, 0x20\nsymbol=fn_801B8DE8 generated=stwu r1, -0x28(r1) | stw r31, 0x24(r1) | stw r30, 0x20(r1) | stw r29, 0x1c(r1) | lwz r0, 0x2c(r1) | lwz r31, 0x24(r1) | lwz r30, 0x20(r1) | lwz r29, 0x1c(r1) | addi r1, r1, 0x28"
+  },
+  "canonical_report": "build/GEDE01/report.json",
+  "relocation_strict_report": "reports/GEDE01/session-1653-reloc-strict.json",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}
