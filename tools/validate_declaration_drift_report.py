@@ -32,6 +32,10 @@ def main() -> int:
     by_symbol = {
         item["symbol"]: item for item in audit["return_register_contradictions"]
     }
+    truths = {
+        item["symbol"]: item["ground_truth"]
+        for item in audit["ground_truth_contradictions"]
+    }
     print(f"AUDIT declarations={audit['declarations']} symbols={audit['symbols']}")
 
     variant_total = 0
@@ -49,6 +53,26 @@ def main() -> int:
             (variant["signature"], variant["count"])
             for variant in measured["variants"]
         }
+        measured_signatures = {signature for signature, _ in measured_variants}
+        truth = truths.get(symbol)
+        reading = item["believed_correct_reading"]
+        definition_absent = (
+            truth is not None
+            and truth.get("kind") == "definition"
+            and truth["declaration"] not in measured_signatures
+        )
+        if definition_absent:
+            expected_error = (
+                f"{symbol}: owned definition signature is absent from declaration variants"
+            )
+            assert reading["status"] == "unresolvable"
+            assert reading["declaration"] is None
+            assert reading["error"] == expected_error
+            assert item["confidence"] == "unresolvable"
+            assert item["disposition"] == "unresolvable"
+        else:
+            assert reading["status"] == "resolved"
+            assert reading["declaration"] in measured_signatures
 
         union: set[str] = set()
         for variant in item["competing_declarations"]:
@@ -72,7 +96,7 @@ def main() -> int:
             call_total += len(expected_calls)
             union.update(expected_calls)
 
-        believed_calls = item["believed_correct_reading"]["call_site_evidence"]
+        believed_calls = reading["call_site_evidence"]
         assert believed_calls == sorted(union)
         believed_total += len(union)
         print(

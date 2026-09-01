@@ -1,0 +1,57 @@
+{
+  "schema": "decomp-remediation-verification-v1",
+  "session_id": "session-1640-remediation-1",
+  "scope": "Correct the session-1640 maintenance artifacts without advancing the accepted frontier or editing translation units.",
+  "frontier": "0x801B6F1C",
+  "tool_change_disclosure": {
+    "summary": "The generator and validator were both changed in this remediation. The generator now preserves the owned-definition ValueError as an explicit unresolvable result, emits the validator's strict schema, measures source rewrites, and references this report without embedding a stale pre-validation copy. The validator's conditional field aliases and missing-field default were removed; it now also rejects a resolved reading when an owned definition is absent from the declaration variants.",
+    "command": "git diff --name-only HEAD -- tools/declaration_drift_proposal.py tools/validate_declaration_drift_report.py",
+    "raw_output": "eternal-darkness-decomp/tools/declaration_drift_proposal.py\neternal-darkness-decomp/tools/validate_declaration_drift_report.py\n"
+  },
+  "affected_object_scope": {
+    "command": "git diff --name-only HEAD -- src | wc -l",
+    "raw_output": "0\n",
+    "affected_objects": 0,
+    "canonical_objdiff_reports": [],
+    "relocation_strict_objdiff_reports": [],
+    "interpretation": "The measured affected-source set is empty, so the canonical and relocation-strict affected-object sets are empty; there is no object on which an objdiff invocation is applicable."
+  },
+  "evidence": [
+    {
+      "gate": "full_dol_build",
+      "command": "set -o pipefail; .tools/bin/ninja build/GEDE01/main.dol 2>&1 | tail -n 1",
+      "raw_output": "[568/568] DOL build/GEDE01/main.dol\n",
+      "exit_status": 0
+    },
+    {
+      "gate": "dol_sha1",
+      "command": "sha1sum build/GEDE01/main.dol",
+      "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\n",
+      "exit_status": 0
+    },
+    {
+      "gate": "frontier_consistency",
+      "command": "jq -c '{next_target,next_gate}' reports/GEDE01/progress.json",
+      "raw_output": "{\"next_target\":\"0x801B6F1C\",\"next_gate\":\"Start at immediate consecutive unowned fn_801B6F1C and continue upward toward the jumptable_8023BF28 data-ownership boundary. Keep the repaired family objects registered NonMatching unless a later canonical and relocation-strict objdiff reaches a byte-identical result. The remediation did not advance the frontier.\"}\n",
+      "exit_status": 0
+    },
+    {
+      "gate": "proposal_population_blast_radius_and_resolution",
+      "command": "sed -n '1p;/^SYMBOL /p;/^UNRESOLVABLE /p' build/consolidation-session-1640/remediation-1-facts.txt",
+      "raw_output": "AUDIT declarations=19225 symbols=4562\nSYMBOL rank=1 name=fn_8020123C declarations=176 affected_tus=176 blast_radius_tus=176 confidence=high resolution=resolved\nSYMBOL rank=2 name=fn_801E8328 declarations=87 affected_tus=86 blast_radius_tus=86 confidence=low resolution=resolved\nSYMBOL rank=3 name=fn_8018E230 declarations=77 affected_tus=77 blast_radius_tus=77 confidence=high resolution=resolved\nSYMBOL rank=4 name=fn_8018E26C declarations=54 affected_tus=54 blast_radius_tus=54 confidence=high resolution=resolved\nSYMBOL rank=5 name=fn_801A98F4 declarations=48 affected_tus=48 blast_radius_tus=48 confidence=unresolvable resolution=unresolvable\nUNRESOLVABLE name=fn_801A98F4 error=\"fn_801A98F4: owned definition signature is absent from declaration variants\"\nSYMBOL rank=6 name=fn_8011F6A4 declarations=44 affected_tus=44 blast_radius_tus=44 confidence=high resolution=resolved\nSYMBOL rank=7 name=fn_801ED57C declarations=41 affected_tus=41 blast_radius_tus=41 confidence=low resolution=resolved\nSYMBOL rank=8 name=fn_80180430 declarations=39 affected_tus=39 blast_radius_tus=39 confidence=unresolvable resolution=unresolvable\nUNRESOLVABLE name=fn_80180430 error=\"fn_80180430: owned definition signature is absent from declaration variants\"\nSYMBOL rank=9 name=fn_80178E94 declarations=30 affected_tus=30 blast_radius_tus=30 confidence=unresolvable resolution=unresolvable\nUNRESOLVABLE name=fn_80178E94 error=\"fn_80178E94: owned definition signature is absent from declaration variants\"\nSYMBOL rank=10 name=fn_801AAE68 declarations=26 affected_tus=26 blast_radius_tus=26 confidence=unresolvable resolution=unresolvable\nUNRESOLVABLE name=fn_801AAE68 error=\"fn_801AAE68: owned definition signature is absent from declaration variants\"\n",
+      "exit_status": 0
+    },
+    {
+      "gate": "owned_definition_guard_regression",
+      "command": "python3 - <<'PY'\nimport sys\nsys.path.insert(0, 'tools')\nimport declaration_drift_proposal as proposal\ntry:\n    proposal.resolve_proposed_variant('fn_test', [{'signature': 'int fn_test(int, int)', 'abi': {'return': 'GPR:r3'}, 'count': 1}], {'kind': 'definition', 'declaration': 'int fn_test(int, void*)', 'return_shape': 'GPR:r3'})\nexcept ValueError as error:\n    print(f'{type(error).__name__}: {error}')\nelse:\n    raise SystemExit('guard did not raise')\nPY",
+      "raw_output": "ValueError: fn_test: owned definition signature is absent from declaration variants\n",
+      "exit_status": 0
+    },
+    {
+      "gate": "strict_proposal_validation_after_disclosed_tool_remediation",
+      "command": "python3 tools/validate_declaration_drift_report.py --report reports/GEDE01/declaration-drift-proposal-session-1640.json",
+      "raw_output": "AUDIT declarations=19225 symbols=4562\nSYMBOL name=fn_8020123C declarations=176 affected_tus=176 variants=3 variant_call_sites=333 believed_correct_call_sites=333 status=valid\nSYMBOL name=fn_801E8328 declarations=87 affected_tus=86 variants=2 variant_call_sites=105 believed_correct_call_sites=105 status=valid\nSYMBOL name=fn_8018E230 declarations=77 affected_tus=77 variants=22 variant_call_sites=106 believed_correct_call_sites=106 status=valid\nSYMBOL name=fn_8018E26C declarations=54 affected_tus=54 variants=5 variant_call_sites=64 believed_correct_call_sites=64 status=valid\nSYMBOL name=fn_801A98F4 declarations=48 affected_tus=48 variants=4 variant_call_sites=77 believed_correct_call_sites=77 status=valid\nSYMBOL name=fn_8011F6A4 declarations=44 affected_tus=44 variants=19 variant_call_sites=54 believed_correct_call_sites=54 status=valid\nSYMBOL name=fn_801ED57C declarations=41 affected_tus=41 variants=4 variant_call_sites=80 believed_correct_call_sites=80 status=valid\nSYMBOL name=fn_80180430 declarations=39 affected_tus=39 variants=5 variant_call_sites=43 believed_correct_call_sites=43 status=valid\nSYMBOL name=fn_80178E94 declarations=30 affected_tus=30 variants=18 variant_call_sites=38 believed_correct_call_sites=38 status=valid\nSYMBOL name=fn_801AAE68 declarations=26 affected_tus=26 variants=18 variant_call_sites=34 believed_correct_call_sites=34 status=valid\nTOTAL symbols=10 variants=100 declaration_sites=622 variant_call_sites=934 believed_correct_call_sites=934 invalid_call_sites=0 source_rewrites=0\n",
+      "exit_status": 0
+    }
+  ]
+}

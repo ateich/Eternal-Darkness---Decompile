@@ -29,6 +29,33 @@ COMMENTS = re.compile(r"/\*.*?\*/|//[^\n]*", re.DOTALL)
 TOP_SYMBOLS = 10
 
 
+def resolve_proposed_variant(
+    symbol: str,
+    variants: list[dict[str, object]],
+    truth: dict[str, object] | None,
+) -> dict[str, object]:
+    """Resolve a declaration only when the available evidence supports it."""
+    if truth is not None and truth.get("kind") == "definition":
+        candidates = [
+            variant
+            for variant in variants
+            if variant["signature"] == truth["declaration"]
+        ]
+        if not candidates:
+            raise ValueError(
+                f"{symbol}: owned definition signature is absent from declaration variants"
+            )
+        return candidates[0]
+    if truth is not None:
+        candidates = [
+            variant
+            for variant in variants
+            if variant["abi"]["return"] == truth["return_shape"]
+        ]
+        return max(candidates, key=lambda item: int(item["count"]))
+    return max(variants, key=lambda item: int(item["count"]))
+
+
 def snapshot(ref: str) -> tempfile.TemporaryDirectory[str]:
     temporary = tempfile.TemporaryDirectory(
         prefix="declaration-drift-", dir=ROOT / "build"
@@ -77,11 +104,7 @@ def collect(ref: str) -> dict[str, object]:
         finally:
             signature_audit.ROOT = old_root
 
-        entries = [
-            entry
-            for category in ("return_register_contradictions", "abi_divergent", "cosmetic")
-            for entry in audit[category]
-        ]
+        entries = list(audit["return_register_contradictions"])
         entries.sort(key=lambda item: (-int(item["declarations"]), str(item["symbol"])))
         selected = entries[:TOP_SYMBOLS]
         truths = {
@@ -94,29 +117,17 @@ def collect(ref: str) -> dict[str, object]:
             symbol = str(entry["symbol"])
             variants = list(entry["variants"])
             truth = truths.get(symbol)
-            if truth is not None and truth.get("kind") == "definition":
-                candidates = [
-                    variant for variant in variants
-                    if variant["signature"] == truth["declaration"]
-                ]
-                if not candidates:
-                    raise ValueError(
-                        f"{symbol}: owned definition signature is absent from declaration variants"
-                    )
-                proposed = candidates[0]
-            elif truth is not None:
-                candidates = [
-                    variant for variant in variants
-                    if variant["abi"]["return"] == truth["return_shape"]
-                ]
-                proposed = max(candidates, key=lambda item: int(item["count"]))
-            else:
-                proposed = max(variants, key=lambda item: int(item["count"]))
+            resolution_error = None
+            try:
+                proposed = resolve_proposed_variant(symbol, variants, truth)
+            except ValueError as error:
+                proposed = None
+                resolution_error = str(error)
 
             disagreeing_sites = sorted({
                 site
                 for variant in variants
-                if variant["signature"] != proposed["signature"]
+                if proposed is not None and variant["signature"] != proposed["signature"]
                 for site in variant["sites"]
             })
             disagreeing_tus = sorted({site.rsplit(":", 1)[0] for site in disagreeing_sites})
@@ -138,13 +149,33 @@ def collect(ref: str) -> dict[str, object]:
                 tus = sorted({site.rsplit(":", 1)[0] for site in variant["sites"]})
                 variant_rows.append({
                     "declaration": variant["signature"],
-                    "declaration_count": variant["count"],
+                    "count": variant["count"],
                     "declaring_tu_count": len(tus),
                     "declaration_sites": variant["sites"],
-                    "call_sites": sorted(
+                    "call_site_evidence": sorted(
                         call for tu in tus for call in calls_by_tu.get(tu, [])
                     ),
                 })
+            if resolution_error is None:
+                believed_correct_reading = {
+                    "status": "resolved",
+                    "declaration": proposed["signature"],
+                    "call_site_evidence": proposed_calls,
+                    "basis": truth or {
+                        "kind": "declaration-plurality",
+                        "detail": "Plurality is tentative; declarations alone do not ground the callee signature.",
+                    },
+                }
+                confidence = "high" if symbol in retail or truth is not None else "low"
+            else:
+                believed_correct_reading = {
+                    "status": "unresolvable",
+                    "declaration": None,
+                    "call_site_evidence": proposed_calls,
+                    "error": resolution_error,
+                    "basis": truth,
+                }
+                confidence = "unresolvable"
             result_symbols.append({
                 "rank": rank,
                 "symbol": symbol,
@@ -153,19 +184,13 @@ def collect(ref: str) -> dict[str, object]:
                         "return_register_contradictions", "abi_divergent", "cosmetic"
                     ) if entry in audit[category]
                 ),
-                "total_declaration_count": entry["declarations"],
-                "total_declaring_tu_count": len(all_tus),
-                "confidence": "high" if symbol in retail or truth is not None else "low",
+                "declaration_count": entry["declarations"],
+                "total_affected_tu_count": int(entry["affected_translation_units"]),
+                "affected_translation_units": list(entry["translation_units"]),
+                "confidence": confidence,
                 "competing_declarations": variant_rows,
-                "proposed_reading": {
-                    "declaration": proposed["signature"],
-                    "call_site_evidence": proposed_calls,
-                    "basis": truth or {
-                        "kind": "declaration-plurality",
-                        "detail": "Plurality is tentative; declarations alone do not ground the callee signature.",
-                    },
-                },
-                "estimated_blast_radius_tus": len(disagreeing_tus),
+                "believed_correct_reading": believed_correct_reading,
+                "estimated_blast_radius_tus": int(entry["affected_translation_units"]),
                 "disagreeing_translation_units": disagreeing_tus,
                 "disagreeing_declaration_sites": disagreeing_sites,
             })
@@ -185,22 +210,28 @@ def facts_text(measurement: dict[str, object]) -> str:
         lines.append(
             "SYMBOL "
             f"rank={item['rank']} name={item['symbol']} "
-            f"declarations={item['total_declaration_count']} "
-            f"declaring_tus={item['total_declaring_tu_count']} "
+            f"declarations={item['declaration_count']} "
+            f"affected_tus={item['total_affected_tu_count']} "
             f"blast_radius_tus={item['estimated_blast_radius_tus']} "
-            f"confidence={item['confidence']}"
+            f"confidence={item['confidence']} "
+            f"resolution={item['believed_correct_reading']['status']}"
         )
         for variant in item["competing_declarations"]:
             lines.append(
                 f"VARIANT name={item['symbol']} declaration={json.dumps(variant['declaration'])} "
-                f"declarations={variant['declaration_count']} "
+                f"declarations={variant['count']} "
                 f"declaring_tus={variant['declaring_tu_count']} "
-                f"call_sites={len(variant['call_sites'])}"
+                f"call_sites={len(variant['call_site_evidence'])}"
             )
         for site in item["disagreeing_translation_units"]:
             lines.append(f"DISAGREEING_TU name={item['symbol']} path={site}")
-        for site in item["proposed_reading"]["call_site_evidence"]:
-            lines.append(f"PROPOSED_CALL name={item['symbol']} site={site}")
+        if item["believed_correct_reading"]["status"] == "unresolvable":
+            lines.append(
+                f"UNRESOLVABLE name={item['symbol']} "
+                f"error={json.dumps(item['believed_correct_reading']['error'])}"
+            )
+        for site in item["believed_correct_reading"]["call_site_evidence"]:
+            lines.append(f"BELIEVED_CALL name={item['symbol']} site={site}")
     return "\n".join(lines) + "\n"
 
 
@@ -242,7 +273,10 @@ def main() -> int:
     applied = set(args.applied_symbol)
     inherited_tested_reverted = set(args.inherited_tested_reverted_symbol)
     for item in measurement["selected_symbols"]:
-        if item["symbol"] in applied:
+        if item["believed_correct_reading"]["status"] == "unresolvable":
+            item["disposition"] = "unresolvable"
+            item["disposition_reason"] = item["believed_correct_reading"]["error"]
+        elif item["symbol"] in applied:
             item["disposition"] = "applied"
             item["disposition_reason"] = (
                 "High-confidence return correction was within the TU cap and passed rebuild, affected-object objdiff, relocation, and DOL gates."
@@ -279,6 +313,21 @@ def main() -> int:
     )
     if disposition_args:
         disposition_args += " "
+    source_diff_command = [
+        "git", "diff", "--name-only", "HEAD", "--", "eternal-darkness-decomp/src"
+    ]
+    source_diff = subprocess.run(
+        source_diff_command,
+        cwd=REPO,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout
+    source_rewrites = len(source_diff.splitlines())
+    if source_rewrites != len(applied):
+        raise ValueError(
+            "applied-symbol arguments do not equal the measured source rewrite count"
+        )
     report = {
         "schema_version": 2,
         "report_kind": "declaration-drift-reduction-proposal",
@@ -300,8 +349,8 @@ def main() -> int:
             "match_counts_revised": False,
         },
         "selection_rule": (
-            "Rank signature-disagreeing symbols by total declaration count descending, then symbol ascending. "
-            "Blast radius counts only TUs whose declaration differs from the proposed reading."
+            "Rank return-register declaration contradictions by total declaration count descending, then symbol ascending. "
+            "Blast radius is the audit's affected_translation_units count: every TU declaring the symbol."
         ),
         "rewrite_tu_cap": 12,
         "measurement_evidence": {
@@ -309,8 +358,18 @@ def main() -> int:
             "raw_output": recorded_facts,
         },
         "verification_evidence": {
-            "command": f"cat {args.verification_log}",
-            "raw_output": args.verification_log.read_text(encoding="utf-8"),
+            "report": str(args.verification_log),
+            "detail": (
+                "Verification is stored separately so the final validator output can be "
+                "recorded without embedding a stale, pre-validation copy here."
+            ),
+        },
+        "proposal_summary": {
+            "source_rewrites_applied": source_rewrites,
+            "measurement_evidence": {
+                "command": " ".join(source_diff_command),
+                "raw_output": source_diff,
+            },
         },
         "symbols": measurement["selected_symbols"],
     }
