@@ -1,7 +1,7 @@
 extern int lbl_8064D300;
 extern int lbl_8064C2D0;
 extern unsigned char lbl_8060B060[];
-extern void fn_801B1610(void*);
+extern int fn_801B1610(void*);
 
 void fn_801ACFB0(void)
 {

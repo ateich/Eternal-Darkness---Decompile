@@ -1,0 +1,43 @@
+{
+  "session_id": "session-1624-remediation-1",
+  "scope": "Review remediation only; no reconstruction frontier advance.",
+  "build": {
+    "command": "python3 configure.py && .tools/bin/ninja",
+    "result": "exit 0; build/GEDE01/main.dol: OK"
+  },
+  "dol_byte_identity": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol",
+    "cmp_command": "cmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol; echo cmp_exit=$?",
+    "cmp_raw_output": "cmp_exit=0"
+  },
+  "frontier_accounting": {
+    "command": "python3 - <<'PY'\nspans=[('fn_801B35BC',0x801B35BC,0x801B3770),('fn_801B3770',0x801B3770,0x801B3940),('fn_801B3940',0x801B3940,0x801B399C)]\nfor n,a,b in spans: print(f'{n} start=0x{a:08X} end=0x{b:08X} retail_bytes={b-a}')\nprint(f'range_start=0x{spans[0][1]:08X} range_end=0x{spans[-1][2]:08X} retail_bytes={spans[-1][2]-spans[0][1]}')\nPY",
+    "raw_output": "fn_801B35BC start=0x801B35BC end=0x801B3770 retail_bytes=436\nfn_801B3770 start=0x801B3770 end=0x801B3940 retail_bytes=464\nfn_801B3940 start=0x801B3940 end=0x801B399C retail_bytes=92\nrange_start=0x801B35BC range_end=0x801B399C retail_bytes=992",
+    "next_target": "0x801B399C"
+  },
+  "affected_object_objdiff": {
+    "config": "function_reloc_diffs=name_address",
+    "generation_command": "for fn in 801B35BC 801B3770 801B3940; do build/tools/objdiff-cli diff -p . -u main/game/game_fn_${fn} fn_${fn} -o build/GEDE01/session-1624-remediation-1-${fn}-strict.json --format json-pretty -c function_reloc_diffs=name_address >/dev/null; done",
+    "measurement_command": "python3 - <<'PY'\nimport json\nfor fn in ('801B35BC','801B3770','801B3940'):\n p=f'build/GEDE01/session-1624-remediation-1-{fn}-strict.json';d=json.load(open(p)); name='fn_'+fn\n l=next(x for x in d['left']['symbols'] if x['name']==name); r=next(x for x in d['right']['symbols'] if x['name']==name)\n rows=sum(1 for i in l.get('instructions',[]) if i.get('relocation') and i.get('diff_kind'))\n print(f'{name} retail_bytes={l[\"size\"]} generated_bytes={r[\"size\"]} strict_match_percent={l.get(\"match_percent\")} relocation_diff_rows={rows}')\nPY",
+    "raw_output": "fn_801B35BC retail_bytes=436 generated_bytes=500 strict_match_percent=77.7523 relocation_diff_rows=0\nfn_801B3770 retail_bytes=464 generated_bytes=536 strict_match_percent=49.474136 relocation_diff_rows=0\nfn_801B3940 retail_bytes=92 generated_bytes=92 strict_match_percent=100.0 relocation_diff_rows=0",
+    "disposition": {
+      "fn_801B35BC": "NonMatching; retail inlines the two-list handle resolver, now restored. Remaining divergence is instruction scheduling and register allocation in the resolver and list cleanup.",
+      "fn_801B3770": "NonMatching; retail inlines the resolver and addresses lbl_8060C020 plus 0x1400. Both are restored; remaining divergence is instruction scheduling, register allocation, and control-flow layout.",
+      "fn_801B3940": "NonMatching despite an exact text diff because the generated object omits required retail exception sections; linking it fails the whole-DOL identity gate."
+    }
+  },
+  "fn_801B3940_section_gate": {
+    "command": "for side in obj src; do echo $side; readelf -SW build/GEDE01/$side/game/game_fn_801B3940.o | sed -n '/ extab /p;/ extabindex /p;/ \\.text /p'; done",
+    "raw_output": "obj\n  [ 1] extab             PROGBITS        00000000 000040 000008 00   A  0   0  4\n  [ 2] extabindex        PROGBITS        00000000 000060 00000c 00   A  0   0  4\n  [ 3] .text             PROGBITS        00000000 000080 00005c 00  AX  0   0  4\nsrc\n  [ 1] .text             PROGBITS        00000000 000034 00005c 00  AX  0   0  4"
+  },
+  "canonical_headline": {
+    "command": "python3 - <<'PY'\nimport json\np='build/GEDE01/report.json';d=json.load(open(p));g=next(x for x in d['categories'] if x['id']=='game');s=next(x for x in d['categories'] if x['id']=='sdk');m=d['measures']\nprint(f'matching_objects={m[\"complete_units\"]} total_objects={m[\"total_units\"]} matching_functions={m[\"matched_functions\"]} total_functions={m[\"total_functions\"]} matching_code_bytes={m[\"matched_code\"]} total_code_bytes={m[\"total_code\"]} matching_data_bytes={m[\"matched_data\"]} total_data_bytes={m[\"total_data\"]} linked_code_bytes={m[\"complete_code\"]} linked_data_bytes={m[\"complete_data\"]}')\nprint(f'code_percent={int(m[\"matched_code\"])*100/int(m[\"total_code\"])} function_percent={m[\"matched_functions\"]*100/m[\"total_functions\"]} game_code_matching_bytes={g[\"measures\"][\"matched_code\"]} game_code_total_bytes={g[\"measures\"][\"total_code\"]} game_code_linked_bytes={g[\"measures\"][\"complete_code\"]} sdk_code_matching_bytes={s[\"measures\"][\"matched_code\"]} sdk_code_total_bytes={s[\"measures\"][\"total_code\"]} sdk_objects_complete={s[\"measures\"][\"complete_units\"]} sdk_objects_total={s[\"measures\"][\"total_units\"]}')\nPY",
+    "raw_output": "matching_objects=4478 total_objects=6080 matching_functions=4244 total_functions=8216 matching_code_bytes=646716 total_code_bytes=2300692 matching_data_bytes=34626 total_data_bytes=4305642 linked_code_bytes=646592 linked_data_bytes=34758\ncode_percent=28.1096296244782 function_percent=51.655306718597856 game_code_matching_bytes=643688 game_code_total_bytes=1083676 game_code_linked_bytes=643564 sdk_code_matching_bytes=3028 sdk_code_total_bytes=3028 sdk_objects_complete=18 sdk_objects_total=18"
+  },
+  "relocation_strict_headline": {
+    "generation_command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/session-1624-remediation-1-strict-report.json --format json-pretty -c function_reloc_diffs=name_address",
+    "measurement_command": "python3 - <<'PY'\nimport json\np='build/GEDE01/session-1624-remediation-1-strict-report.json';d=json.load(open(p)); g=next(x for x in d['categories'] if x['id']=='game')\nprint(f'matching_functions={d[\"measures\"][\"matched_functions\"]} matching_code_bytes={d[\"measures\"][\"matched_code\"]} game_matching_functions={g[\"measures\"][\"matched_functions\"]} game_matching_code_bytes={g[\"measures\"][\"matched_code\"]}')\nPY",
+    "raw_output": "matching_functions=4239 matching_code_bytes=645032 game_matching_functions=4177 game_matching_code_bytes=642004"
+  }
+}

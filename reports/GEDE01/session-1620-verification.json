@@ -1,0 +1,59 @@
+{
+  "session_id": "session-1620",
+  "scope": "Consolidation maintenance only; no frontier movement and no match-count changes.",
+  "frontier": {
+    "starting_target": "0x801B2878",
+    "ending_next_target": "0x801B2878"
+  },
+  "session_accounting": {
+    "matched_bytes_added": 0,
+    "nonmatching_bytes_added": 0,
+    "nonmatching_objects_added": 0,
+    "match_counts_revised": false
+  },
+  "current_nonmatching_inventory": {
+    "objects": 874,
+    "retail_code_bytes": 406604,
+    "retail_data_bytes": 1016,
+    "retail_functions": 875,
+    "basis": "Unique Object(NonMatching, registrations in configure.py, resolved exhaustively against fresh build/GEDE01/report.json."
+  },
+  "correction": {
+    "symbol": "fn_801B1610",
+    "translation_unit": "src/game/game_fn_801ACFB0.c",
+    "before": "void fn_801B1610(void*)",
+    "after": "int fn_801B1610(void*)",
+    "grounding": "Owned definition int fn_801B1610(Entry*) in src/game/game_fn_801B1610.c returns through GPR r3; only the contradictory return type was corrected and the matching caller discards it.",
+    "affected_translation_units": 1
+  },
+  "build": {
+    "command": ".tools/bin/ninja build/GEDE01/src/game/game_fn_801ACFB0.o build/GEDE01/main.dol",
+    "status": "passed"
+  },
+  "canonical_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801ACFB0 fn_801ACFB0 -o reports/GEDE01/objdiff-game_fn_801ACFB0-session-1620.json --format json-pretty",
+    "code_size": 56,
+    "match_percent": 100.0
+  },
+  "relocation_strict_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801ACFB0 fn_801ACFB0 -o reports/GEDE01/objdiff-game_fn_801ACFB0-session-1620-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "code_size": 56,
+    "match_percent": 100.0,
+    "relocation_tuples_equal": true,
+    "relocation_tuples": [["16", "R_PPC_EMB_SDA21", "stw r0, lbl_8064D300@sda21", "0"], ["24", "R_PPC_EMB_SDA21", "stw r0, lbl_8064C2D0@sda21", "0"], ["28", "R_PPC_ADDR16_HA", "lis r3, lbl_8060B060@ha", "0"], ["32", "R_PPC_ADDR16_LO", "addi r3, r3, lbl_8060B060@l", "0"], ["36", "R_PPC_REL24", "bl fn_801B1610", "0"]]
+  },
+  "fresh_aggregate_reports": {
+    "canonical": "build/GEDE01/report.json",
+    "relocation_strict": "reports/GEDE01/session-1620-reloc-strict.json",
+    "canonical_matching_functions": 4238,
+    "canonical_matching_code_bytes": 646064,
+    "relocation_strict_matching_functions": 4233,
+    "relocation_strict_matching_code_bytes": 644380
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "build": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "retail": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "unchanged": true
+  }
+}
