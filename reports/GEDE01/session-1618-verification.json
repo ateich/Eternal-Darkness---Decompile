@@ -1,0 +1,39 @@
+{
+  "session_id": "session-1618",
+  "starting_target": "0x801B244C",
+  "ending_next_target": "0x801B2528",
+  "canonical_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json --format json-pretty",
+    "matching_objects": 4472,
+    "total_objects": 6078,
+    "matching_functions": 4237,
+    "matching_code_bytes": 645968,
+    "linked_code_bytes": 645936
+  },
+  "relocation_strict_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1618-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "matching_functions": 4232,
+    "matching_code_bytes": 644284,
+    "game_matching_functions": 4170,
+    "game_matching_code_bytes": 641256
+  },
+  "per_function": [
+    {
+      "name": "fn_801B244C",
+      "retail_bytes": 220,
+      "generated_bytes": 220,
+      "canonical_match_percent": 83.96364,
+      "relocation_strict_match_percent": 83.96364,
+      "relocation_diff_rows": 0,
+      "matched_bytes_credited": 0,
+      "canonical_evidence": "reports/GEDE01/objdiff-game_fn_801B244C-session-1618.json",
+      "strict_evidence": "reports/GEDE01/objdiff-game_fn_801B244C-session-1618-reloc-strict.json"
+    }
+  ],
+  "matched_bytes_total": 0,
+  "nonmatching_bytes_total": 220,
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "session_id": "session-1619",
+  "canonical_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json --format json-pretty",
+    "matching_objects": 4473,
+    "total_objects": 6079,
+    "matching_functions": 4238,
+    "total_functions": 8216,
+    "matching_code_bytes": 646064,
+    "total_code_bytes": 2300692,
+    "linked_code_bytes": 646032
+  },
+  "relocation_strict_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1619-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "matching_functions": 4233,
+    "matching_code_bytes": 644380,
+    "game_matching_functions": 4171,
+    "game_matching_code_bytes": 641352
+  },
+  "matched_function": {
+    "name": "fn_801B2818",
+    "retail_bytes": 96,
+    "generated_bytes": 96,
+    "canonical_percent": 100.0,
+    "relocation_strict_percent": 100.0,
+    "differing_rows": 0,
+    "relocations_equal": 4
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "build": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "retail": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+  },
+  "matched_byte_arithmetic": "96 = 0x801B2878 - 0x801B2818",
+  "range_byte_arithmetic": "848 = 0x801B2878 - 0x801B2528 = 96 matched + 752 NonMatching"
+}
