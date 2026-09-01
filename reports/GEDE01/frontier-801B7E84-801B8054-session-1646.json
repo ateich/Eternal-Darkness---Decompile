@@ -1,0 +1,39 @@
+{
+  "session": "session-1646-remediation-1",
+  "scope": "Review remediation only; no frontier address beyond fn_801B7E84 was opened.",
+  "range_start": "0x801B7E84",
+  "range_end": "0x801B8054",
+  "next_target": "0x801B7E84",
+  "accounting": {
+    "command": "jq -r -s '[.[]|.left.symbols[]|select(.name==\"fn_801B7E84\" or .name==\"fn_801B7F6C\")]|\"function_count=\\(length) retail_bytes=\\(map(.size|tonumber)|add) matching_functions=\\(map(select(.match_percent==100))|length) matched_retail_bytes=\\(map(select(.match_percent==100)|.size|tonumber)|add//0) nonmatching_functions=\\(map(select(.match_percent!=100))|length) nonmatching_retail_bytes=\\(map(select(.match_percent!=100)|.size|tonumber)|add)\"' reports/GEDE01/session-1646/objdiff-fn_801B7E84.json reports/GEDE01/session-1646/objdiff-fn_801B7F6C.json",
+    "raw_output": "function_count=2 retail_bytes=464 matching_functions=0 matched_retail_bytes=0 nonmatching_functions=2 nonmatching_retail_bytes=464"
+  },
+  "functions": [
+    {
+      "symbol": "fn_801B7E84",
+      "status": "NonMatching",
+      "canonical_evidence": "reports/GEDE01/session-1646/objdiff-fn_801B7E84.json",
+      "relocation_strict_evidence": "reports/GEDE01/session-1646/objdiff-fn_801B7E84-reloc-strict.json"
+    },
+    {
+      "symbol": "fn_801B7F6C",
+      "status": "NonMatching",
+      "canonical_evidence": "reports/GEDE01/session-1646/objdiff-fn_801B7F6C.json",
+      "relocation_strict_evidence": "reports/GEDE01/session-1646/objdiff-fn_801B7F6C-reloc-strict.json"
+    }
+  ],
+  "objdiff_measurement": {
+    "canonical_command": "jq -r '.left.symbols[]|select(.name==\"fn_801B7E84\" or .name==\"fn_801B7F6C\")|\"symbol=\\(.name) retail_bytes=\\(.size) canonical_percent=\\(.match_percent) target_instructions=\\([.instructions[]|select(.instruction)]|length) target_relocations=\\([.instructions[]|select(.instruction.relocation)]|length)\"' reports/GEDE01/session-1646/objdiff-fn_801B7E84.json reports/GEDE01/session-1646/objdiff-fn_801B7F6C.json",
+    "canonical_raw_output": "symbol=fn_801B7E84 retail_bytes=232 canonical_percent=56.793102 target_instructions=58 target_relocations=5\nsymbol=fn_801B7F6C retail_bytes=232 canonical_percent=56.793102 target_instructions=58 target_relocations=5",
+    "base_command": "jq -r '.right.symbols[]|select(.name==\"fn_801B7E84\" or .name==\"fn_801B7F6C\")|\"symbol=\\(.name) generated_bytes=\\(.size) base_instructions=\\([.instructions[]|select(.instruction)]|length) base_relocations=\\([.instructions[]|select(.instruction.relocation)]|length)\"' reports/GEDE01/session-1646/objdiff-fn_801B7E84.json reports/GEDE01/session-1646/objdiff-fn_801B7F6C.json",
+    "base_raw_output": "symbol=fn_801B7E84 generated_bytes=192 base_instructions=48 base_relocations=4\nsymbol=fn_801B7F6C generated_bytes=192 base_instructions=48 base_relocations=4",
+    "strict_command": "jq -r '.left.symbols[]|select(.name==\"fn_801B7E84\" or .name==\"fn_801B7F6C\")|\"symbol=\\(.name) relocation_strict_percent=\\(.match_percent)\"' reports/GEDE01/session-1646/objdiff-fn_801B7E84-reloc-strict.json reports/GEDE01/session-1646/objdiff-fn_801B7F6C-reloc-strict.json",
+    "strict_raw_output": "symbol=fn_801B7E84 relocation_strict_percent=56.793102\nsymbol=fn_801B7F6C relocation_strict_percent=56.793102"
+  },
+  "blocking_divergence": "Both candidates emit a smaller frame and fewer instructions than retail, allocate the live arguments and loop state to different callee-saved registers, omit retail's load at state offset 0x114 and its zero-mask/xor/or sequence, and schedule the linked-voice loop differently. The dead literal mask was removed from the C because it falsely implied that the eliminated load was represented by the reconstruction; recovering the retail source spelling remains open.",
+  "registration": {
+    "command": "jq -r '.units[] | select(.name==\"main/game/game_fn_801B7E84\" or .name==\"main/game/game_fn_801B7F6C\") | \"unit=\\(.name) target=\\(.target_path) base=\\(.base_path) complete=\\(.complete)\"' objdiff.json",
+    "raw_output": "unit=main/game/game_fn_801B7E84 target=build/GEDE01/obj/game/game_fn_801B7E84.o base=build/GEDE01/src/game/game_fn_801B7E84.o complete=null\nunit=main/game/game_fn_801B7F6C target=build/GEDE01/obj/game/game_fn_801B7F6C.o base=build/GEDE01/src/game/game_fn_801B7F6C.o complete=null"
+  },
+  "next_gate": "Keep next_target at fn_801B7E84 until a genuinely compiled, two-sided canonical and relocation-strict objdiff reaches a byte-identical result."
+}

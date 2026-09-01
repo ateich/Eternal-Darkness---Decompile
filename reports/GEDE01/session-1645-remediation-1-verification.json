@@ -1,0 +1,49 @@
+{
+  "session": "session-1645-remediation-1",
+  "scope": "Review remediation only; the frontier remains at 0x801B7E84.",
+  "source_correction": {
+    "symbol": "fn_801B7D94",
+    "disposition": "The wrapper now accepts and forwards u32 sequence to fn_801BD1EC and shares the SequenceInfo field layout used by fn_801B7DC8. This removes the intra-session prototype and layout contradiction."
+  },
+  "build": {
+    "command": ".tools/bin/ninja build/GEDE01/main.dol",
+    "raw_output_tail": "[568/568] DOL build/GEDE01/main.dol"
+  },
+  "affected_objdiff_generation": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801B7D94 fn_801B7D94 -o reports/GEDE01/session-1645/objdiff-fn_801B7D94.json --format json; build/tools/objdiff-cli diff -p . -u main/game/game_fn_801B7D94 fn_801B7D94 -o reports/GEDE01/session-1645/objdiff-fn_801B7D94-reloc-strict.json --format json -c function_reloc_diffs=name_address; build/tools/objdiff-cli diff -p . -u main/game/game_fn_801B7DC8 fn_801B7DC8 -o reports/GEDE01/session-1645/objdiff-fn_801B7DC8.json --format json; build/tools/objdiff-cli diff -p . -u main/game/game_fn_801B7DC8 fn_801B7DC8 -o reports/GEDE01/session-1645/objdiff-fn_801B7DC8-reloc-strict.json --format json -c function_reloc_diffs=name_address",
+    "raw_output": "INFO Writing to reports/GEDE01/session-1645/objdiff-fn_801B7D94.json\nINFO Writing to reports/GEDE01/session-1645/objdiff-fn_801B7D94-reloc-strict.json\nINFO Writing to reports/GEDE01/session-1645/objdiff-fn_801B7DC8.json\nINFO Writing to reports/GEDE01/session-1645/objdiff-fn_801B7DC8-reloc-strict.json"
+  },
+  "affected_objdiff_measurement": {
+    "command": "jq -r '.left.symbols[]|select(.name==\"fn_801B7DC8\")|\"symbol=\\(.name) retail_bytes=\\(.size) match_percent=\\(.match_percent) diff_rows=\\([.instructions[]|select(.diff_kind!=null)]|length) diffs=\\([.instructions[]|select(.diff_kind!=null)|.instruction.formatted]|join(\" | \")) outgoing_stores=\\([.instructions[]|.instruction.formatted|select(test(\"^stw .*0x(8|c|10|14|18|1c|20)\\\\(r1\\\\)$\"))]|join(\" | \"))\"' reports/GEDE01/session-1645/objdiff-fn_801B7DC8-reloc-strict.json; jq -r '.left.symbols[]|select(.name==\"fn_801B7D94\")|\"symbol=\\(.name) retail_bytes=\\(.size) match_percent=\\(.match_percent) diff_rows=\\([.instructions[]|select(.diff_kind!=null)]|length) relocation_instructions=\\([.instructions[]|select(.instruction.relocation!=null)]|length)\"' reports/GEDE01/session-1645/objdiff-fn_801B7D94-reloc-strict.json; jq -r '.left.symbols[]|select(.name==\"fn_801B7DC8\")|\"symbol=\\(.name) relocation_instructions=\\([.instructions[]|select(.instruction.relocation!=null)]|length) relocation_targets=\\([.instructions[]|select(.instruction.relocation!=null)|.instruction.formatted]|join(\" | \"))\"' reports/GEDE01/session-1645/objdiff-fn_801B7DC8-reloc-strict.json",
+    "raw_output": "symbol=fn_801B7DC8 retail_bytes=188 match_percent=99.893616 diff_rows=5 diffs=stwu r1, -0x50(r1) | stmw r27, 0x3c(r1) | lmw r27, 0x3c(r1) | lwz r0, 0x54(r1) | addi r1, r1, 0x50 outgoing_stores=stw r3, 0x8(r1) | stw r3, 0xc(r1) | stw r0, 0x10(r1) | stw r0, 0x14(r1) | stw r3, 0x18(r1) | stw r29, 0x1c(r1) | stw r30, 0x20(r1)\nsymbol=fn_801B7D94 retail_bytes=52 match_percent=100.0 diff_rows=0 relocation_instructions=1\nsymbol=fn_801B7DC8 relocation_instructions=2 relocation_targets=bl fn_801BD1EC | bl fn_801B64D0"
+  },
+  "stack_levers": [
+    {
+      "candidate": "Declare and initialize info before result",
+      "command": ".tools/bin/ninja build/GEDE01/src/game/game_fn_801B7DC8.o && python3 tools/fndiff.py game/game_fn_801B7DC8.c fn_801B7DC8 | sed -n '1,18p'",
+      "raw_output_excerpt": "target 188 bytes  base 204 bytes  match 73.40426\n  0x0008  stwu r1, -0x50(r1) | stwu r1, -0x50(r1)\n  0x000c  stmw r27, 0x3c(r1) | stw r31, 0x4c(r1)",
+      "disposition": "Rejected because it fixes frame size but damages size, register saves, and body scheduling."
+    },
+    {
+      "candidate": "Widen arg13 from u8 to u32",
+      "command": ".tools/bin/ninja build/GEDE01/src/game/game_fn_801B7DC8.o && python3 tools/fndiff.py game/game_fn_801B7DC8.c fn_801B7DC8 | sed -n '1,9p'",
+      "raw_output_excerpt": "target 188 bytes  base 192 bytes  match 93.93617\n  0x0008  stwu r1, -0x50(r1) | stwu r1, -0x58(r1)\n  0x000c  stmw r27, 0x3c(r1) | stmw r27, 0x44(r1)",
+      "disposition": "Rejected because it expands the generated body and does not correct the frame."
+    },
+    {
+      "candidate": "Add one unreferenced u32 local to test elimination",
+      "command": ".tools/bin/ninja build/GEDE01/src/game/game_fn_801B7DC8.o && python3 tools/fndiff.py game/game_fn_801B7DC8.c fn_801B7DC8 | sed -n '1,9p'",
+      "raw_output_excerpt": "target 188 bytes  base 188 bytes  match 99.893616\n  0x0008  stwu r1, -0x50(r1) | stwu r1, -0x58(r1)\n  0x000c  stmw r27, 0x3c(r1) | stmw r27, 0x44(r1)",
+      "disposition": "Rejected; optimization removes the local and leaves the retained candidate unchanged."
+    }
+  ],
+  "canonical_headline": {
+    "command": "jq '{matched_code_percent:.measures.matched_code_percent,matched_code:.measures.matched_code,total_code:.measures.total_code,matched_functions:.measures.matched_functions,complete_units:.measures.complete_units,complete_code:.measures.complete_code}' build/GEDE01/report.json",
+    "raw_output": "{\n  \"matched_code_percent\": 28.210644,\n  \"matched_code\": \"649040\",\n  \"total_code\": \"2300692\",\n  \"matched_functions\": 4260,\n  \"complete_units\": 4494,\n  \"complete_code\": \"648916\"\n}"
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol"
+  },
+  "next_target": "0x801B7E84"
+}

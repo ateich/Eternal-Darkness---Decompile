@@ -1,0 +1,65 @@
+{
+  "session": "session-1645",
+  "remediated_by": "session-1645-remediation-1",
+  "assigned_target": "0x801B7D94",
+  "range_start": "0x801B7D94",
+  "range_end": "0x801B7E84",
+  "next_target": "0x801B7E84",
+  "retail_text_bytes_accounted": 240,
+  "matched_text_bytes": 52,
+  "nonmatching_text_bytes": 188,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "symbol": "fn_801B7D94",
+      "range": "0x801B7D94..0x801B7DC8",
+      "retail_bytes": 52,
+      "generated_bytes": 52,
+      "status": "Matching",
+      "canonical_percent": 100.0,
+      "relocation_strict_percent": 100.0,
+      "signature_disposition": "Unified with fn_801B7DC8: fn_801B7D94 forwards its live u32 sequence argument to fn_801BD1EC and uses the common SequenceInfo layout. Retail codegen does not establish arity by itself, but this removes the contradictory declarations while preserving exact codegen.",
+      "canonical_evidence": "reports/GEDE01/session-1645/objdiff-fn_801B7D94.json",
+      "relocation_strict_evidence": "reports/GEDE01/session-1645/objdiff-fn_801B7D94-reloc-strict.json"
+    },
+    {
+      "symbol": "fn_801B7DC8",
+      "range": "0x801B7DC8..0x801B7E84",
+      "retail_bytes": 188,
+      "generated_bytes": 188,
+      "status": "NonMatching",
+      "canonical_percent": 99.893616,
+      "relocation_strict_percent": 99.893616,
+      "blocking_divergence": "The outgoing-argument stores and call body align. The remaining differences are frame allocation and saved-register offsets: retail places the saved-register base at 0x3c while GC/1.2.5n places it at 0x44, leaving additional unused local slack below that base.",
+      "levers_tried": [
+        "Declaration and initialization order: moving the fn_801BD1EC lookup ahead of result changed the generated frame to 0x50, but expanded the generated body and disrupted the otherwise aligned saved-register and body schedule; rejected.",
+        "Unused-local elimination: adding an unreferenced u32 local was optimized away and reproduced the retained candidate unchanged, including its 0x58 frame; no removable source local explains the slack.",
+        "Parameter narrowing: widening arg13 from u8 to u32 expanded the generated body and reduced the objdiff match; rejected.",
+        "Save mechanism: the retained candidate and retail both use inline stmw/lmw rather than __save_gpr helpers, so helper selection does not explain the frame delta."
+      ],
+      "canonical_evidence": "reports/GEDE01/session-1645/objdiff-fn_801B7DC8.json",
+      "relocation_strict_evidence": "reports/GEDE01/session-1645/objdiff-fn_801B7DC8-reloc-strict.json"
+    }
+  ],
+  "stop_rationale": "The preceding reconstruction run stopped at its mandated scheduler cutoff before opening fn_801B7E84. Its exact elapsed duration was not independently measured in this remediation and is unverified. This remediation did not advance the frontier.",
+  "measurements": {
+    "affected_functions": {
+      "command": "jq -r '.left.symbols[]|select(.name==\"fn_801B7DC8\")|\"symbol=\\(.name) retail_bytes=\\(.size) match_percent=\\(.match_percent) diff_rows=\\([.instructions[]|select(.diff_kind!=null)]|length) diffs=\\([.instructions[]|select(.diff_kind!=null)|.instruction.formatted]|join(\" | \")) outgoing_stores=\\([.instructions[]|.instruction.formatted|select(test(\"^stw .*0x(8|c|10|14|18|1c|20)\\\\(r1\\\\)$\"))]|join(\" | \"))\"' reports/GEDE01/session-1645/objdiff-fn_801B7DC8-reloc-strict.json; jq -r '.left.symbols[]|select(.name==\"fn_801B7D94\")|\"symbol=\\(.name) retail_bytes=\\(.size) match_percent=\\(.match_percent) diff_rows=\\([.instructions[]|select(.diff_kind!=null)]|length) relocation_instructions=\\([.instructions[]|select(.instruction.relocation!=null)]|length)\"' reports/GEDE01/session-1645/objdiff-fn_801B7D94-reloc-strict.json; jq -r '.left.symbols[]|select(.name==\"fn_801B7DC8\")|\"symbol=\\(.name) relocation_instructions=\\([.instructions[]|select(.instruction.relocation!=null)]|length) relocation_targets=\\([.instructions[]|select(.instruction.relocation!=null)|.instruction.formatted]|join(\" | \"))\"' reports/GEDE01/session-1645/objdiff-fn_801B7DC8-reloc-strict.json",
+      "raw_output": "symbol=fn_801B7DC8 retail_bytes=188 match_percent=99.893616 diff_rows=5 diffs=stwu r1, -0x50(r1) | stmw r27, 0x3c(r1) | lmw r27, 0x3c(r1) | lwz r0, 0x54(r1) | addi r1, r1, 0x50 outgoing_stores=stw r3, 0x8(r1) | stw r3, 0xc(r1) | stw r0, 0x10(r1) | stw r0, 0x14(r1) | stw r3, 0x18(r1) | stw r29, 0x1c(r1) | stw r30, 0x20(r1)\nsymbol=fn_801B7D94 retail_bytes=52 match_percent=100.0 diff_rows=0 relocation_instructions=1\nsymbol=fn_801B7DC8 relocation_instructions=2 relocation_targets=bl fn_801BD1EC | bl fn_801B64D0"
+    },
+    "canonical_report": {
+      "command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json -f json-pretty && jq '{matched_code_percent:.measures.matched_code_percent,matched_code:.measures.matched_code,total_code:.measures.total_code,matched_functions:.measures.matched_functions,complete_units:.measures.complete_units,complete_code:.measures.complete_code}' build/GEDE01/report.json",
+      "raw_output": "{\n  \"matched_code_percent\": 28.210644,\n  \"matched_code\": \"649040\",\n  \"total_code\": \"2300692\",\n  \"matched_functions\": 4260,\n  \"complete_units\": 4494,\n  \"complete_code\": \"648916\"\n}"
+    },
+    "relocation_strict_report": {
+      "command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1645-reloc-strict.json -f json-pretty -c function_reloc_diffs=name_address && jq '{matched_code_percent:.measures.matched_code_percent,matched_code:.measures.matched_code,total_code:.measures.total_code,matched_functions:.measures.matched_functions,complete_units:.measures.complete_units,complete_code:.measures.complete_code}' reports/GEDE01/session-1645-reloc-strict.json",
+      "raw_output": "{\n  \"matched_code_percent\": 28.13745,\n  \"matched_code\": \"647356\",\n  \"total_code\": \"2300692\",\n  \"matched_functions\": 4255,\n  \"complete_units\": 4494,\n  \"complete_code\": \"648916\"\n}"
+    },
+    "dol_sha1": {
+      "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+      "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol"
+    }
+  },
+  "assembly_added": false,
+  "shared_reconstruction": false
+}
