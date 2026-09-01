@@ -1,0 +1,10 @@
+{
+  "session_id": "session-1594",
+  "build": {"command":"python3 configure.py && .tools/bin/ninja","result":"success; build/GEDE01/main.dol passed config/GEDE01/build.sha1"},
+  "canonical_headline": {"command":"build/tools/objdiff-cli report generate -o build/GEDE01/report.json","raw_output":"matching_objects=4399 total_objects=5998 matching_functions=4164 total_functions=8216 matching_code_bytes=635208 total_code_bytes=2300692 matching_data_bytes=34626 total_data_bytes=4305642 linked_code_bytes=635176 linked_data_bytes=34758"},
+  "relocation_strict": {"command":"build/tools/objdiff-cli report generate -o reports/GEDE01/session-1594-reloc-strict.json -c function_reloc_diffs=name_address","raw_output":"{\"matching_functions\":4159,\"matching_code_bytes\":633524,\"game_matching_functions\":4097,\"game_matching_code_bytes\":630496}"},
+  "per_function": {"command":"build/tools/objdiff-cli diff -1 build/GEDE01/obj/game/game_fn_ADDRESS.o -2 build/GEDE01/src/game/game_fn_ADDRESS.o -o reports/GEDE01/objdiff-game_fn_ADDRESS-session-1594.json --format json -c function_reloc_diffs=name_address fn_ADDRESS","raw_output":["{\"name\":\"fn_801AE5DC\",\"target_size\":212,\"base_size\":212,\"match_percent\":100.0,\"relocation_instructions_each_side\":8,\"relocations_equal\":true}","{\"name\":\"fn_801AE6B0\",\"target_size\":620,\"base_size\":616,\"match_percent\":96.787094}"]},
+  "dol_sha1": {"command":"sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol","raw_output":"ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol","equal":true},
+  "arithmetic": {"split_sizes":"0xD4 + 0x26C = 212 + 620 = 832","matched_bytes":"212","nonmatching_bytes":"620"},
+  "commits": ["75919a1c3b368c98411221ca8d0b2157366aeeda","556edeaa6d4b47cb38108ffe9f05d33b8a39f8b2"]
+}

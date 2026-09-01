@@ -1,0 +1,129 @@
+{
+  "session_id": "session-1590-remediation-1",
+  "scope": "Review remediation only; no frontier movement and no new function matching.",
+  "catalog_corrections": [
+    "Removed fn_801ADCF8 from the callback-register permutation claim and recorded its entry-base move separately, explicitly preserving the agreeing loop allocation and relocations.",
+    "Split null-workaround register-allocation and instruction-scheduling umbrella records into evidence-specific behavior records.",
+    "Moved instruction selection, common-subexpression elimination, loop unrolling, and dead-loop elimination records to out_of_taxonomy.",
+    "Widened conversion-bias wording to cover the cited unsigned fn_801AC8AC case.",
+    "Removed fn_801AAE68 from the -use_lmw_stmw attribution after the cited remediation retracted the prior codegen diagnosis.",
+    "Split the two recovered-signature corrections into separate calling-convention records."
+  ],
+  "build": {
+    "command": "python3 configure.py && .tools/bin/ninja",
+    "raw_output_gate_line": "build/GEDE01/main.dol: OK",
+    "result": "success"
+  },
+  "canonical_headline": {
+    "command": "build/tools/objdiff-cli report generate -o build/GEDE01/session-1590-remediation-1/canonical-report.json >/dev/null 2>&1 && jq -r '\"matching_objects=\" + ([.units[] | select(.measures.complete_code_percent == 100 and (.metadata.complete // false))] | length | tostring) + \" total_objects=\" + (.units|length|tostring) + \" matching_functions=\" + ([.units[].functions[]? | select(.fuzzy_match_percent == 100)]|length|tostring) + \" total_functions=\" + ([.units[].functions[]?]|length|tostring) + \" matching_code_bytes=\" + ([.units[].functions[]? | select(.fuzzy_match_percent == 100) | (.size|tonumber)]|add|tostring) + \" total_code_bytes=\" + ([.units[].functions[]? | (.size|tonumber)]|add|tostring)' build/GEDE01/session-1590-remediation-1/canonical-report.json",
+    "raw_output": "matching_objects=4389 total_objects=5986 matching_functions=4154 total_functions=8216 matching_code_bytes=633356 total_code_bytes=2300692"
+  },
+  "relocation_strict_headline": {
+    "command": "build/tools/objdiff-cli report generate -o build/GEDE01/session-1590-remediation-1/reloc-strict-report.json -c function_reloc_diffs=name_address >/dev/null 2>&1 && jq -c '{matching_functions:([.units[].functions[]?|select(.fuzzy_match_percent==100)]|length),matching_code_bytes:([.units[].functions[]?|select(.fuzzy_match_percent==100)|(.size|tonumber)]|add),game_matching_functions:([.units[]|select(.name|startswith(\"main/game/\"))|.functions[]?|select(.fuzzy_match_percent==100)]|length),game_matching_code_bytes:([.units[]|select(.name|startswith(\"main/game/\"))|.functions[]?|select(.fuzzy_match_percent==100)|(.size|tonumber)]|add)}' build/GEDE01/session-1590-remediation-1/reloc-strict-report.json",
+    "raw_output": "{\"matching_functions\":4149,\"matching_code_bytes\":631672,\"game_matching_functions\":4087,\"game_matching_code_bytes\":628644}"
+  },
+  "affected_objects": [
+    "fn_801A96A8",
+    "fn_801A977C",
+    "fn_801A98F4",
+    "fn_801A9984",
+    "fn_801A9C78",
+    "fn_801A9DCC",
+    "fn_801AA550",
+    "fn_801AA618",
+    "fn_801AAAD8",
+    "fn_801A9CDC",
+    "fn_801A9FA4",
+    "fn_801AA6D0",
+    "fn_801ACB0C",
+    "fn_801AD9F4",
+    "fn_801ADC50",
+    "fn_801ADCF8",
+    "fn_801A9A40",
+    "fn_801AAA28",
+    "fn_801AAB38",
+    "fn_801AB50C",
+    "fn_801A99B4",
+    "fn_801A9B38",
+    "fn_801A9B94",
+    "fn_801AD898",
+    "fn_801AD528",
+    "fn_801AD5FC",
+    "fn_801AAC10",
+    "fn_801ACDC4",
+    "fn_801AD8E8",
+    "fn_801AC8AC",
+    "fn_801AB154",
+    "fn_801AAE68",
+    "fn_801ACFE8",
+    "fn_801AD7C0"
+  ],
+  "affected_object_count": {
+    "command": "jq -r '\"affected_objects=\" + (.affected_objects|length|tostring)' reports/GEDE01/session-1590-remediation-1-verification.json",
+    "raw_output": "affected_objects=34"
+  },
+  "per_function_relocation_strict": {
+    "command": "for symbol in $(jq -r '.affected_objects[]' reports/GEDE01/session-1590-remediation-1-verification.json); do build/tools/objdiff-cli diff -1 build/GEDE01/obj/game/game_${symbol}.o -2 build/GEDE01/src/game/game_${symbol}.o -o build/GEDE01/session-1590-remediation-1/game_${symbol}.json --format json -c function_reloc_diffs=name_address ${symbol} >/dev/null 2>&1; jq -c --arg name ${symbol} '{name:$name,target_size:(.left.symbols[]|select(.name==$name)|.size|tonumber),base_size:(.right.symbols[]|select(.name==$name)|.size|tonumber),match_percent:(.left.symbols[]|select(.name==$name)|.match_percent),two_sided:((.left.symbols|map(select(.name==$name))|length)==1 and (.right.symbols|map(select(.name==$name))|length)==1),relocation_diff_rows:([.left.symbols[]|select(.name==$name)|.instructions[]?|select(.relocation and .diff_kind)]|length)}' build/GEDE01/session-1590-remediation-1/game_${symbol}.json; done",
+    "raw_output": [
+      "{\"name\":\"fn_801A96A8\",\"target_size\":176,\"base_size\":176,\"match_percent\":100.0,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801A977C\",\"target_size\":376,\"base_size\":376,\"match_percent\":100.0,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801A98F4\",\"target_size\":112,\"base_size\":112,\"match_percent\":100.0,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801A9984\",\"target_size\":48,\"base_size\":48,\"match_percent\":100.0,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801A9C78\",\"target_size\":100,\"base_size\":100,\"match_percent\":100.0,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801A9DCC\",\"target_size\":116,\"base_size\":116,\"match_percent\":100.0,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801AA550\",\"target_size\":200,\"base_size\":200,\"match_percent\":100.0,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801AA618\",\"target_size\":184,\"base_size\":184,\"match_percent\":100.0,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801AAAD8\",\"target_size\":96,\"base_size\":96,\"match_percent\":100.0,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801A9CDC\",\"target_size\":240,\"base_size\":244,\"match_percent\":95.916664,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801A9FA4\",\"target_size\":996,\"base_size\":1000,\"match_percent\":88.05623,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801AA6D0\",\"target_size\":808,\"base_size\":808,\"match_percent\":99.40594,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801ACB0C\",\"target_size\":260,\"base_size\":260,\"match_percent\":99.30769,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801AD9F4\",\"target_size\":260,\"base_size\":260,\"match_percent\":99.69231,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801ADC50\",\"target_size\":168,\"base_size\":172,\"match_percent\":96.97619,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801ADCF8\",\"target_size\":100,\"base_size\":104,\"match_percent\":95.8,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801A9A40\",\"target_size\":232,\"base_size\":220,\"match_percent\":75.72414,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801AAA28\",\"target_size\":176,\"base_size\":176,\"match_percent\":85.818184,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801AAB38\",\"target_size\":216,\"base_size\":216,\"match_percent\":87.94444,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801AB50C\",\"target_size\":1948,\"base_size\":1928,\"match_percent\":90.41889,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801A99B4\",\"target_size\":76,\"base_size\":72,\"match_percent\":94.47369,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801A9B38\",\"target_size\":92,\"base_size\":76,\"match_percent\":69.565216,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801A9B94\",\"target_size\":228,\"base_size\":224,\"match_percent\":93.85965,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801AD898\",\"target_size\":28,\"base_size\":16,\"match_percent\":40.0,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801AD528\",\"target_size\":212,\"base_size\":208,\"match_percent\":90.18868,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801AD5FC\",\"target_size\":248,\"base_size\":188,\"match_percent\":66.70968,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801AAC10\",\"target_size\":312,\"base_size\":92,\"match_percent\":26.52564,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801ACDC4\",\"target_size\":16,\"base_size\":4,\"match_percent\":25.0,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801AD8E8\",\"target_size\":16,\"base_size\":4,\"match_percent\":25.0,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801AC8AC\",\"target_size\":92,\"base_size\":92,\"match_percent\":100.0,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801AB154\",\"target_size\":408,\"base_size\":408,\"match_percent\":100.0,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801AAE68\",\"target_size\":480,\"base_size\":480,\"match_percent\":100.0,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801ACFE8\",\"target_size\":164,\"base_size\":156,\"match_percent\":82.80488,\"two_sided\":true,\"relocation_diff_rows\":0}",
+      "{\"name\":\"fn_801AD7C0\",\"target_size\":136,\"base_size\":136,\"match_percent\":100.0,\"two_sided\":true,\"relocation_diff_rows\":0}"
+    ]
+  },
+  "affected_object_audit": {
+    "command": "jq -r '\"affected_objects=\" + (.affected_objects|length|tostring) + \" raw_outputs=\" + (.per_function_relocation_strict.raw_output|length|tostring) + \" two_sided_false=\" + ([.per_function_relocation_strict.raw_output[]|fromjson|select(.two_sided!=true)]|length|tostring) + \" relocation_diff_rows=\" + ([.per_function_relocation_strict.raw_output[]|fromjson|.relocation_diff_rows]|add|tostring)' reports/GEDE01/session-1590-remediation-1-verification.json",
+    "raw_output": "affected_objects=34 raw_outputs=34 two_sided_false=0 relocation_diff_rows=0"
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol",
+    "equal": true
+  },
+  "catalog_measurement": {
+    "command": "jq -r '\"lessons=\" + ((.lessons|length)|tostring) + \" out_of_taxonomy=\" + ((.out_of_taxonomy|length)|tostring) + \" total_catalog_records=\" + (((.lessons|length)+(.out_of_taxonomy|length))|tostring)' reports/GEDE01/lessons.json",
+    "raw_output": "lessons=506 out_of_taxonomy=13 total_catalog_records=519"
+  },
+  "session_delta_measurement": {
+    "command": "jq -s -r '.[0] as $parent | .[1] as $current | \"new_lessons=\\(($current.lessons|length)-($parent.lessons|length)) new_out_of_taxonomy=\\(($current.out_of_taxonomy|length)-($parent.out_of_taxonomy|length)) total_new_records=\\((($current.lessons|length)+($current.out_of_taxonomy|length))-(($parent.lessons|length)+($parent.out_of_taxonomy|length)))\"' <(git show 38c8a36d783e67de1d4f62b894d01d53a6aaa883:eternal-darkness-decomp/reports/GEDE01/lessons.json) reports/GEDE01/lessons.json",
+    "raw_output": "new_lessons=16 new_out_of_taxonomy=8 total_new_records=24"
+  },
+  "frontier": {
+    "chain_command": "jq -c '{assigned_target,accepted_frontier,candidate_frontier}' ../.darkfoundry/decomp-chain-state.json",
+    "chain_raw_output": "{\"assigned_target\":\"0x801ADE0C\",\"accepted_frontier\":\"0x801ADE0C\",\"candidate_frontier\":\"0x801ADE0C\"}",
+    "progress_command": "jq -c '{next_target}' reports/GEDE01/progress.json",
+    "progress_raw_output": "{\"next_target\":\"0x801ADE0C\"}",
+    "progress_sha256_command": "sha256sum reports/GEDE01/progress.json",
+    "progress_sha256_raw_output": "f4b05401d066fed715352ddc178a22c1a1a7ac67acd659c5576476cad134b9a6  reports/GEDE01/progress.json"
+  }
+}
