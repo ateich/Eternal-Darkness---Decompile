@@ -1,0 +1,36 @@
+{
+  "session_id": "session-1588-remediation-1",
+  "disposition": "frontier held because two compiled reconstructions are NonMatching",
+  "build": {
+    "command": "python3 configure.py && .tools/bin/ninja",
+    "raw_output": "build/GEDE01/main.dol: OK\nProgress:\n  All: 41.97% fuzzy, 27.52% matched, 27.52% linked (4388 / 5983 files)\n    Code: 633180 / 2300692 bytes (4153 / 8216 functions)\n    Data: 34626 / 4305642 bytes (0.80%)\n  Game Code: 90.82% fuzzy, 59.46% matched, 59.46% linked (4370 / 5258 files)\n    Code: 630152 / 1059792 bytes (4091 / 4979 functions)\n    Data: 34402 / 35518 bytes (96.86%)\n  SDK/Runtime: 100.00% fuzzy, 100.00% matched, 100.00% linked (18 / 18 files)\n    Code: 3028 / 3028 bytes (62 / 62 functions)\n    Data: 224 / 224 bytes (100.00%)"
+  },
+  "registration_measurement": {
+    "command": "rg -c '^            Object\\((Matching|NonMatching), \"game/game_fn_801AD(95C|9F4|AF8|B70|BC0|C08)\\.c\"' configure.py",
+    "raw_output": "6"
+  },
+  "canonical_headline_measurement": {
+    "command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report.json",
+    "raw_output": "matching_objects=4388 total_objects=5983 matching_functions=4153 total_functions=8216 matching_code_bytes=633180 total_code_bytes=2300692 matching_data_bytes=34626 total_data_bytes=4305642 linked_code_bytes=633148 linked_data_bytes=34758"
+  },
+  "predecessor_measurement": {
+    "command": "git show 2cd698f79:eternal-darkness-decomp/reports/GEDE01/progress.json | jq -r '\"matching_objects=\\(.matching_objects) total_objects=\\(.total_objects) matching_functions=\\(.matching_functions) total_functions=\\(.total_functions) matching_code_bytes=\\(.matching_code_bytes) total_code_bytes=\\(.total_code_bytes) linked_code_bytes=\\(.linked_code_bytes)\"'",
+    "raw_output": "matching_objects=4384 total_objects=5977 matching_functions=4149 total_functions=8216 matching_code_bytes=632836 total_code_bytes=2300692 linked_code_bytes=632804"
+  },
+  "per_function_command": "for f in 801AD95C 801AD9F4 801ADAF8 801ADB70 801ADBC0 801ADC08; do jq -c '{name:.left.symbols[0].name,target_size:(.left.symbols[0].size|tonumber),base_size:(.right.symbols[0].size|tonumber),match_percent:.left.symbols[0].match_percent,two_sided:(has(\"left\") and has(\"right\"))}' reports/GEDE01/objdiff-game_fn_${f}-session-1588-reloc-strict.json; done",
+  "per_function_raw_output": "{\"name\":\"fn_801AD95C\",\"target_size\":152,\"base_size\":156,\"match_percent\":96.052635,\"two_sided\":true}\n{\"name\":\"fn_801AD9F4\",\"target_size\":260,\"base_size\":260,\"match_percent\":99.69231,\"two_sided\":true}\n{\"name\":\"fn_801ADAF8\",\"target_size\":120,\"base_size\":120,\"match_percent\":100.0,\"two_sided\":true}\n{\"name\":\"fn_801ADB70\",\"target_size\":80,\"base_size\":80,\"match_percent\":100.0,\"two_sided\":true}\n{\"name\":\"fn_801ADBC0\",\"target_size\":72,\"base_size\":72,\"match_percent\":100.0,\"two_sided\":true}\n{\"name\":\"fn_801ADC08\",\"target_size\":72,\"base_size\":72,\"match_percent\":100.0,\"two_sided\":true}",
+  "affected_range_aggregate": {
+    "command": "jq -r '[.units[] | select(.name|test(\"main/game/game_fn_801AD(95C|9F4|AF8|B70|BC0|C08)$\")) | {total:(.measures.total_code|tonumber),matched:(.measures.matched_code//\"0\"|tonumber)}] | \"credited_matched_bytes=\\(map(.matched)|add) nonmatching_bytes=\\(map(select(.matched==0)|.total)|add) nonmatching_functions=\\(map(select(.matched==0))|length) affected_functions=\\(length)\"' build/GEDE01/report.json",
+    "raw_output": "credited_matched_bytes=344 nonmatching_bytes=412 nonmatching_functions=2 affected_functions=6"
+  },
+  "relocation_strict_report": {
+    "command": "jq -c '{matching_functions:.measures.matched_functions,matching_code_bytes:(.measures.matched_code|tonumber),game_matching_functions:([.categories[]|select(.id==\"game\")][0].measures.matched_functions),game_matching_code_bytes:([.categories[]|select(.id==\"game\")][0].measures.matched_code|tonumber)}' reports/GEDE01/session-1588-reloc-strict.json",
+    "raw_output": "{\"matching_functions\":4148,\"matching_code_bytes\":631496,\"game_matching_functions\":4086,\"game_matching_code_bytes\":628468}"
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol",
+    "equal": true
+  },
+  "next_target": "0x801AD95C"
+}
