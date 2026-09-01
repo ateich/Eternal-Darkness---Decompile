@@ -1,0 +1,9 @@
+{
+  "session_id": "session-1601",
+  "canonical_report": {"command":"build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json -f json","raw_output":"matching_objects=4416 total_objects=6017 matching_functions=4181 total_functions=8216 matching_code_bytes=638040 total_code_bytes=2300692 linked_code_bytes=638008"},
+  "relocation_strict": {"command":"build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1601-reloc-strict.json -f json -c function_reloc_diffs=name_address","raw_output":"matching_functions=4176 matching_code_bytes=636356 game_matching_functions=4114 game_matching_code_bytes=633328"},
+  "per_function": {"command":"build/tools/objdiff-cli diff -p . -u main/game/game_fn_ADDRESS -o reports/GEDE01/session-1601-fn_ADDRESS-reloc-objdiff.json --format json-pretty -c function_reloc_diffs=name_address fn_ADDRESS","raw_output":["fn_801AF37C target_size=996 base_size=1012 match_percent=86.05623 status=NonMatching","fn_801AF760 target_size=196 base_size=196 match_percent=100 relocations_equal=true","fn_801AF824 target_size=56 base_size=56 match_percent=100 relocations_equal=true","fn_801AF85C target_size=72 base_size=72 match_percent=100 relocations_equal=true","fn_801AF8A4 target_size=64 base_size=64 match_percent=100 relocations_equal=true","fn_801AF8E4 target_size=64 base_size=64 match_percent=100 relocations_equal=true","fn_801AF924 target_size=72 base_size=72 match_percent=100 relocations_equal=true"]},
+  "range_accounting": "0x801AF96C - 0x801AF37C = 0x5F0 = 1520; matched=524 NonMatching=996 unaccounted=0",
+  "dol_sha1": {"command":"sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol","raw_output":"ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol"},
+  "full_build": ".tools/bin/ninja completed successfully and config/GEDE01/build.sha1 reported build/GEDE01/main.dol OK"
+}

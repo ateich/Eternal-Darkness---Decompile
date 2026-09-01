@@ -12,7 +12,7 @@ typedef struct Record {
 } Record;
 
 extern Record lbl_806080E0[];
-extern void fn_801AF96C(u32);
+extern int fn_801AF96C(int);
 extern void fn_801B08BC(int, int, int);
 
 void fn_801ACC10(void)
