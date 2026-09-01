@@ -1,0 +1,55 @@
+{
+  "session_id": "session-1638-remediation-1",
+  "scope": "Evidence-only review remediation; no source reconstruction or frontier advancement.",
+  "next_target": "0x801B6F1C",
+  "checks": [
+    {
+      "name": "affected_object_rebuild",
+      "command": "touch src/game/game_fn_801B6768.c && .tools/bin/ninja build/GEDE01/src/game/game_fn_801B6768.o",
+      "raw_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801B6768.o\n### mwcceppc.exe Usage Warning:\n#   Specified directory 'include' not found"
+    },
+    {
+      "name": "canonical_objdiff",
+      "command": "build/tools/objdiff-cli --no-color diff -p . -u main/game/game_fn_801B6768 -o reports/GEDE01/objdiff-game_fn_801B6768-session-1638.json fn_801B6768",
+      "raw_output": " INFO Writing to reports/GEDE01/objdiff-game_fn_801B6768-session-1638.json"
+    },
+    {
+      "name": "relocation_strict_objdiff",
+      "config": "function_reloc_diffs=name_address",
+      "command": "build/tools/objdiff-cli --no-color diff -p . -u main/game/game_fn_801B6768 -c function_reloc_diffs=name_address -o reports/GEDE01/objdiff-game_fn_801B6768-session-1638-reloc-strict.json fn_801B6768",
+      "raw_output": " INFO Writing to reports/GEDE01/objdiff-game_fn_801B6768-session-1638-reloc-strict.json"
+    },
+    {
+      "name": "relocation_strict_measurement",
+      "command": "jq -r '{retail_size:(.left.symbols[]|select(.name==\"fn_801B6768\")|.size),generated_size:(.right.symbols[]|select(.name==\"fn_801B6768\")|.size),instruction_match_percent:(.left.symbols[]|select(.name==\"fn_801B6768\")|.match_percent),left_relocation_count:([.left.symbols[]|select(.name==\"fn_801B6768\")|.instructions[]?.relocations[]?]|length),right_relocation_count:([.right.symbols[]|select(.name==\"fn_801B6768\")|.instructions[]?.relocations[]?]|length)}' reports/GEDE01/objdiff-game_fn_801B6768-session-1638-reloc-strict.json",
+      "raw_output": "{\n  \"retail_size\": \"1972\",\n  \"generated_size\": \"1940\",\n  \"instruction_match_percent\": 87.66531,\n  \"left_relocation_count\": 0,\n  \"right_relocation_count\": 0\n}"
+    },
+    {
+      "name": "canonical_strict_comparison",
+      "command": "cmp -s reports/GEDE01/objdiff-game_fn_801B6768-session-1638.json reports/GEDE01/objdiff-game_fn_801B6768-session-1638-reloc-strict.json; echo cmp_exit=$?; wc -c reports/GEDE01/objdiff-game_fn_801B6768-session-1638.json reports/GEDE01/objdiff-game_fn_801B6768-session-1638-reloc-strict.json",
+      "raw_output": "cmp_exit=0\n254633 reports/GEDE01/objdiff-game_fn_801B6768-session-1638.json\n254633 reports/GEDE01/objdiff-game_fn_801B6768-session-1638-reloc-strict.json\n509266 total",
+      "interpretation": "The explicitly strict invocation produced identical JSON because the target function has no relocations on either side."
+    },
+    {
+      "name": "fallback_candidate_retail_symbol",
+      "command": "rg -n '^fn_801B6F1C' config/GEDE01/symbols.txt",
+      "raw_output": "6629:fn_801B6F1C = .text:0x801B6F1C; // type:function size:0x6B0"
+    },
+    {
+      "name": "five_session_trajectory",
+      "command": "first=$(git show e141b6731:eternal-darkness-decomp/reports/GEDE01/progress.json); last=$(git show ef487bce9:eternal-darkness-decomp/reports/GEDE01/progress.json); first_matching=$(jq -r '.matching_code_bytes' <<<\"$first\"); last_matching=$(jq -r '.matching_code_bytes' <<<\"$last\"); first_owned=$(jq -r '.game_code_total_bytes' <<<\"$first\"); last_owned=$(jq -r '.game_code_total_bytes' <<<\"$last\"); printf 'sessions_checked=5 first_matching_code_bytes=%s last_matching_code_bytes=%s matching_code_delta=%s first_game_code_total_bytes=%s last_game_code_total_bytes=%s game_code_total_delta=%s\\n' \"$first_matching\" \"$last_matching\" \"$((last_matching-first_matching))\" \"$first_owned\" \"$last_owned\" \"$((last_owned-first_owned))\"",
+      "raw_output": "sessions_checked=5 first_matching_code_bytes=648124 last_matching_code_bytes=648124 matching_code_delta=0 first_game_code_total_bytes=1093148 last_game_code_total_bytes=1097372 game_code_total_delta=4224",
+      "disposition": "Founder attention required before another throughput session continues this trajectory."
+    },
+    {
+      "name": "full_dol_rebuild",
+      "command": ".tools/bin/ninja build/GEDE01/main.dol 2>&1 | tail -1",
+      "raw_output": "[568/568] DOL build/GEDE01/main.dol"
+    },
+    {
+      "name": "dol_sha1",
+      "command": "sha1sum build/GEDE01/main.dol",
+      "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+    }
+  ]
+}

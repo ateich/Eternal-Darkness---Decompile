@@ -1,0 +1,45 @@
+{
+  "session_id": "session-1638",
+  "range_start": "0x801B6768",
+  "range_end": "0x801B6F1C",
+  "retail_text_bytes": 1972,
+  "matched_text_bytes": 0,
+  "nonmatching_text_bytes": 1972,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "name": "fn_801B6768",
+      "status": "NonMatching",
+      "retail_bytes": 1972,
+      "generated_bytes": 1940,
+      "final_match_percent": 87.66531,
+      "best_attempt_match_percent": 87.66531,
+      "matched_bytes_credited": 0,
+      "blocking_divergence": "GC/1.2.5n assigns the long-lived voice pointer, loop index, and pitch temporaries to different callee-saved registers, schedules several load/store groups differently, and emits 32 fewer text bytes than retail.",
+      "canonical_evidence": "reports/GEDE01/objdiff-game_fn_801B6768-session-1638.json",
+      "relocation_strict_evidence": "reports/GEDE01/objdiff-game_fn_801B6768-session-1638-reloc-strict.json",
+      "relocation_strict_config": "function_reloc_diffs=name_address",
+      "relocation_strict_interpretation": "The strict invocation is recorded in session-1638-remediation-1-verification.json. Its output is byte-identical to the canonical report because the measured function relocation counts are zero on both sides; identical JSON is therefore an observed result, not independent content copied between reports.",
+      "relocation_strict_measurement": {
+        "command": "jq -r '{retail_size:(.left.symbols[]|select(.name==\"fn_801B6768\")|.size),generated_size:(.right.symbols[]|select(.name==\"fn_801B6768\")|.size),instruction_match_percent:(.left.symbols[]|select(.name==\"fn_801B6768\")|.match_percent),left_relocation_count:([.left.symbols[]|select(.name==\"fn_801B6768\")|.instructions[]?.relocations[]?]|length),right_relocation_count:([.right.symbols[]|select(.name==\"fn_801B6768\")|.instructions[]?.relocations[]?]|length)}' reports/GEDE01/objdiff-game_fn_801B6768-session-1638-reloc-strict.json",
+        "raw_output": "{\n  \"retail_size\": \"1972\",\n  \"generated_size\": \"1940\",\n  \"instruction_match_percent\": 87.66531,\n  \"left_relocation_count\": 0,\n  \"right_relocation_count\": 0\n}"
+      }
+    }
+  ],
+  "fallback_consideration": {
+    "candidate": "fn_801B6F1C",
+    "decision": "not opened",
+    "reason": "The immediate consecutive candidate is a large function, so no cheap fallback existed within the contiguous region. Opening it during the bounded session would have risked another incomplete reconstruction rather than a verified match.",
+    "retail_symbol_evidence": {
+      "command": "rg -n '^fn_801B6F1C' config/GEDE01/symbols.txt",
+      "raw_output": "6629:fn_801B6F1C = .text:0x801B6F1C; // type:function size:0x6B0"
+    }
+  },
+  "trajectory_escalation": {
+    "disposition": "Founder attention required before another session follows the same NonMatching-ownership trajectory; next_target remains unchanged.",
+    "command": "first=$(git show e141b6731:eternal-darkness-decomp/reports/GEDE01/progress.json); last=$(git show ef487bce9:eternal-darkness-decomp/reports/GEDE01/progress.json); first_matching=$(jq -r '.matching_code_bytes' <<<\"$first\"); last_matching=$(jq -r '.matching_code_bytes' <<<\"$last\"); first_owned=$(jq -r '.game_code_total_bytes' <<<\"$first\"); last_owned=$(jq -r '.game_code_total_bytes' <<<\"$last\"); printf 'sessions_checked=5 first_matching_code_bytes=%s last_matching_code_bytes=%s matching_code_delta=%s first_game_code_total_bytes=%s last_game_code_total_bytes=%s game_code_total_delta=%s\\n' \"$first_matching\" \"$last_matching\" \"$((last_matching-first_matching))\" \"$first_owned\" \"$last_owned\" \"$((last_owned-first_owned))\"",
+    "raw_output": "sessions_checked=5 first_matching_code_bytes=648124 last_matching_code_bytes=648124 matching_code_delta=0 first_game_code_total_bytes=1093148 last_game_code_total_bytes=1097372 game_code_total_delta=4224"
+  },
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "next_target": "0x801B6F1C"
+}
