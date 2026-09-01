@@ -1,0 +1,59 @@
+{
+  "session": "session-1627",
+  "range_start": "0x801B3CC8",
+  "range_end": "0x801B3E64",
+  "retail_bytes": 412,
+  "matched_bytes": 0,
+  "nonmatching_bytes": 412,
+  "unaccounted_spans": [],
+  "accounting_scope": "unaccounted_spans covers the .text range only; it does not assert that the owned exception metadata matches",
+  "exception_metadata_retail_bytes": 20,
+  "exception_metadata": [
+    {
+      "section": "extab",
+      "start": "0x80005640",
+      "end": "0x80005648",
+      "retail_bytes": 8,
+      "relocation_strict_match_percent": 0.0,
+      "status": "NonMatching; retail-owned section is absent from the generated object"
+    },
+    {
+      "section": "extabindex",
+      "start": "0x80005DE0",
+      "end": "0x80005DEC",
+      "retail_bytes": 12,
+      "relocation_strict_match_percent": 0.0,
+      "status": "NonMatching; retail-owned section is absent from the generated object"
+    }
+  ],
+  "functions": [
+    {
+      "name": "fn_801B3CC8",
+      "start": "0x801B3CC8",
+      "end": "0x801B3E64",
+      "retail_bytes": 412,
+      "generated_bytes": 412,
+      "canonical_match_percent": 91.01942,
+      "relocation_strict_match_percent": 91.01942,
+      "relocation_differences": 0,
+      "status": "NonMatching",
+      "blocking_divergence": "GC/1.2.5n emits the recovered control-flow graph and exact 412-byte body, but colors the live global base and resolved handle as r4 and r3 instead of retail r3 and r4, reserves a 0x38-byte frame instead of retail 0x30, and folds the case-1 zero store through indexed addressing. These are MWCC register-allocation, frame-layout, and store-address codegen divergences; no assembly was used."
+    }
+  ],
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "canonical_report": "build/GEDE01/report.json",
+  "object_report": "reports/GEDE01/objdiff-game_fn_801B3CC8-session-1627.json",
+  "object_relocation_strict_report": "reports/GEDE01/objdiff-game_fn_801B3CC8-session-1627-reloc-strict.json",
+  "full_relocation_strict_report": "reports/GEDE01/session-1627-reloc-strict.json",
+  "remediation_verification": {
+    "report": "reports/GEDE01/session-1627-remediation-1-verification.json",
+    "object_command": "for mode in canonical strict; do p=build/GEDE01/session-1627-remediation-1-object-${mode}.json; jq -r --arg mode \"$mode\" '(.left.symbols[]|select(.name==\"fn_801B3CC8\")) as $l | (.right.symbols[]|select(.name==\"fn_801B3CC8\")) as $r | \"mode=\\($mode) symbol=\\($l.name) retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) relocation_diff_rows=\\([$l.instructions[]?|select(.relocation and .diff_kind)]|length)\"' \"$p\"; done",
+    "object_raw_output": "mode=canonical symbol=fn_801B3CC8 retail_bytes=412 generated_bytes=412 match_percent=91.01942 relocation_diff_rows=0\nmode=strict symbol=fn_801B3CC8 retail_bytes=412 generated_bytes=412 match_percent=91.01942 relocation_diff_rows=0",
+    "section_command": "jq -r '.left.sections[] | select(.name==\"extab\" or .name==\"extabindex\" or .name==\".text\") | \"section=\\(.name) retail_bytes=\\(.size) match_percent=\\(.match_percent)\"' build/GEDE01/session-1627-remediation-1-object-strict.json",
+    "section_raw_output": "section=extab retail_bytes=8 match_percent=0.0\nsection=extabindex retail_bytes=12 match_percent=0.0\nsection=.text retail_bytes=412 match_percent=91.01942",
+    "split_command": "python3 - <<'PY'\nimport re\np='config/GEDE01/splits.txt'\nlines=open(p).read().splitlines()\ni=lines.index('game/game_fn_801B3CC8.c:')\ntotal=0\nexception_total=0\ncount=0\nfor line in lines[i+1:i+4]:\n m=re.match(r'\\s*(\\S+)\\s+start:0x([0-9A-Fa-f]+) end:0x([0-9A-Fa-f]+)',line)\n name,a,b=m.group(1),int(m.group(2),16),int(m.group(3),16)\n size=b-a; total+=size; count+=1\n if name in ('extab','extabindex'): exception_total+=size\n print(f'section={name} start=0x{a:08X} end=0x{b:08X} owned_bytes={size}')\nprint(f'owned_sections={count} total_owned_bytes={total} exception_metadata_bytes={exception_total}')\nPY",
+    "split_raw_output": "section=extab start=0x80005640 end=0x80005648 owned_bytes=8\nsection=extabindex start=0x80005DE0 end=0x80005DEC owned_bytes=12\nsection=.text start=0x801B3CC8 end=0x801B3E64 owned_bytes=412\nowned_sections=3 total_owned_bytes=432 exception_metadata_bytes=20"
+  },
+  "next_target": "0x801B3E64",
+  "next_gate": "Resume at fn_801B3E64. The prior session stopped before opening it and did not exhaust its reconstruction window. The completed fn_801B3CC8 attempt remains NonMatching in .text, and its owned extab and extabindex sections remain absent and 0.0% matching; no claim of complete whole-object accounting is made."
+}

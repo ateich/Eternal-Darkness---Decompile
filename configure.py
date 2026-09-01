@@ -9773,6 +9773,16 @@ config.libs = [
             Object(NonMatching, "game/game_fn_801B35BC.c", mw_version="GC/1.2.5n", extra_cflags=["-opt nopeephole"]),
             Object(NonMatching, "game/game_fn_801B3770.c", mw_version="GC/1.2.5n", extra_cflags=["-opt nopeephole"]),
             Object(NonMatching, "game/game_fn_801B3940.c", mw_version="GC/1.2.5n"),
+            Object(Matching, "game/game_fn_801B399C.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
+            # Honest C; the remaining divergence is even-path r3 versus r5 allocation.
+            Object(NonMatching, "game/game_fn_801B3A2C.c", mw_version="GC/1.2.5n"),
+            Object(Matching, "game/game_fn_801B3B08.c", mw_version="GC/1.2.5n"),
+            Object(Matching, "game/game_fn_801B3C14.c", mw_version="GC/1.2.5n"),
+            Object(NonMatching, "game/game_fn_801B3CC8.c", mw_version="GC/1.2.5n"),
+            Object(NonMatching, "game/game_fn_801B3E64.c", mw_version="GC/1.2.5n"),
+            Object(Matching, "game/game_fn_801B4398.c", mw_version="GC/1.2.5n"),
+            Object(NonMatching, "game/game_fn_801B443C.c", mw_version="GC/1.2.5n"),
+            Object(Matching, "game/game_fn_801B4654.c", mw_version="GC/1.2.5n"),
         ],
     },
     {

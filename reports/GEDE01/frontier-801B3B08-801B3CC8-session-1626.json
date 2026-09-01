@@ -1,0 +1,51 @@
+{
+  "session_id": "session-1626",
+  "range_start": "0x801B3B08",
+  "range_end": "0x801B3CC8",
+  "retail_text_bytes": 448,
+  "matched_text_bytes": 448,
+  "nonmatching_text_bytes": 0,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "name": "fn_801B3B08",
+      "start": "0x801B3B08",
+      "end": "0x801B3C14",
+      "retail_bytes": 268,
+      "generated_bytes": 268,
+      "canonical_match_percent": 100.0,
+      "relocation_strict_match_percent": 100.0,
+      "status": "Matching",
+      "resolved_divergence": "Directly indexing lbl_8060D420 in the exceptional path preserves the retail base/index operand order. The pointer-temporary array-index and reversed-add spellings were ruled out because both retain the former allocation divergence.",
+      "source_spellings_tested": [
+        "owner = &lbl_8060D420[id & 0x7FFFFFFF];",
+        "owner = (Owner*)((id & 0x7FFFFFFF) * sizeof(Owner) + (u8*)lbl_8060D420);",
+        "lbl_8060D420[id & 0x7FFFFFFF].pad10[0xECA] &= ~8;"
+      ]
+    },
+    {
+      "name": "fn_801B3C14",
+      "start": "0x801B3C14",
+      "end": "0x801B3CC8",
+      "retail_bytes": 180,
+      "generated_bytes": 180,
+      "canonical_match_percent": 100.0,
+      "relocation_strict_match_percent": 100.0,
+      "status": "Matching",
+      "relocations": "Two address relocations and two SDA21 relocations are equal under name_address comparison."
+    }
+  ],
+  "next_target": "0x801B3CC8",
+  "next_gate": "Attempt immediate consecutive fn_801B3CC8 next; no span in this reported range is unaccounted.",
+  "session_cutoff_correction": "The original reconstruction stopped after fn_801B3C14 before the mandated reconstruction cutoff. fn_801B3CC8 was not attempted because opening that larger consecutive target was judged unsafe in the remaining time; this was an early-stop judgment, not a reached verification boundary.",
+  "measurement_evidence": {
+    "affected_object_command": "for f in reports/GEDE01/objdiff-game_fn_801B3B08-session-1626.json reports/GEDE01/objdiff-game_fn_801B3B08-session-1626-reloc-strict.json reports/GEDE01/objdiff-game_fn_801B3C14-session-1626.json reports/GEDE01/objdiff-game_fn_801B3C14-session-1626-reloc-strict.json; do jq -r --arg f \"$f\" '.left.symbols[] | select(.name==\"fn_801B3B08\" or .name==\"fn_801B3C14\") | \"report=\\($f) symbol=\\(.name) size=\\(.size) match_percent=\\(.match_percent)\"' \"$f\"; done",
+    "affected_object_raw_output": "report=reports/GEDE01/objdiff-game_fn_801B3B08-session-1626.json symbol=fn_801B3B08 size=268 match_percent=100.0\nreport=reports/GEDE01/objdiff-game_fn_801B3B08-session-1626-reloc-strict.json symbol=fn_801B3B08 size=268 match_percent=100.0\nreport=reports/GEDE01/objdiff-game_fn_801B3C14-session-1626.json symbol=fn_801B3C14 size=180 match_percent=100.0\nreport=reports/GEDE01/objdiff-game_fn_801B3C14-session-1626-reloc-strict.json symbol=fn_801B3C14 size=180 match_percent=100.0",
+    "source_spelling_command": "jq -r '.units[] | select(.name==\"main/game/game_fn_801B3B08\") | \"spelling=owner=&lbl_8060D420[id&0x7FFFFFFF] fuzzy_match_percent=\\(.measures.fuzzy_match_percent) total_code=\\(.measures.total_code)\"' build/GEDE01/variant-array-index.json && jq -r '.units[] | select(.name==\"main/game/game_fn_801B3B08\") | \"spelling=owner=(Owner*)((id&0x7FFFFFFF)*sizeof(Owner)+(u8*)lbl_8060D420) fuzzy_match_percent=\\(.measures.fuzzy_match_percent) total_code=\\(.measures.total_code)\"' build/GEDE01/variant-reversed-add.json && jq -r '.units[] | select(.name==\"main/game/game_fn_801B3B08\") | \"spelling=lbl_8060D420[id&0x7FFFFFFF].pad10[0xECA]&=~8 fuzzy_match_percent=\\(.measures.fuzzy_match_percent) total_code=\\(.measures.total_code)\"' build/GEDE01/variant-direct-index.json",
+    "source_spelling_raw_output": "spelling=owner=&lbl_8060D420[id&0x7FFFFFFF] fuzzy_match_percent=99.70149 total_code=268\nspelling=owner=(Owner*)((id&0x7FFFFFFF)*sizeof(Owner)+(u8*)lbl_8060D420) fuzzy_match_percent=99.70149 total_code=268\nspelling=lbl_8060D420[id&0x7FFFFFFF].pad10[0xECA]&=~8 fuzzy_match_percent=100.0 total_code=268",
+    "next_target_symbol_command": "awk '$1 == \"fn_801B3CC8\" { print }' config/GEDE01/symbols.txt",
+    "next_target_symbol_raw_output": "fn_801B3CC8 = .text:0x801B3CC8; // type:function size:0x19C",
+    "session_timing_command": "git show -s --date=iso-local --format='commit=%H timestamp=%ad subject=%s' 42ff064da fd75834ea",
+    "session_timing_raw_output": "commit=42ff064dad892842d0bf5cc90e6aaed0062f02a5 timestamp=2026-09-01 10:24:32 -0400 subject=Refresh final session 1625 strict report\ncommit=fd75834eac400bf20298122fedde0d1a2048c4d2 timestamp=2026-09-01 10:35:27 -0400 subject=Match fn_801B3C14"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "session": "session-1629",
+  "range_start": "0x801B443C",
+  "range_end": "0x801B46C8",
+  "retail_text_bytes": 652,
+  "matched_bytes": 116,
+  "nonmatching_bytes": 536,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "name": "fn_801B443C",
+      "start": "0x801B443C",
+      "end": "0x801B4654",
+      "retail_bytes": 536,
+      "generated_bytes": 536,
+      "canonical_match_percent": 94.68657,
+      "relocation_strict_match_percent": 94.68657,
+      "status": "NonMatching",
+      "blocking_divergence": "The honest-C reconstruction is size-exact, but GC/1.2.5n assigns the retained channel, state, and decoder values to r7, r6, and r10 where retail uses r6, r7, and r9, and schedules decoder-bound loads after current-record loads. These are C codegen divergences; no assembly was used."
+    },
+    {
+      "name": "fn_801B4654",
+      "start": "0x801B4654",
+      "end": "0x801B46C8",
+      "retail_bytes": 116,
+      "generated_bytes": 116,
+      "canonical_match_percent": 100.0,
+      "relocation_strict_match_percent": 100.0,
+      "relocation_differences": 0,
+      "status": "Matching"
+    }
+  ],
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "canonical_report": "build/GEDE01/report.json",
+  "relocation_strict_report": "reports/GEDE01/session-1629-reloc-strict.json",
+  "next_target": "0x801B46C8",
+  "next_gate": "Start at immediate consecutive unowned fn_801B46C8. The preceding text range is fully accounted with 536 NonMatching bytes and 116 matched bytes; no interior span is unaccounted."
+}

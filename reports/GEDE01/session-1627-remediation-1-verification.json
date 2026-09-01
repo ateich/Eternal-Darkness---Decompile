@@ -1,0 +1,55 @@
+{
+  "session_id": "session-1627-remediation-1",
+  "scope": "Review remediation only; no source, split, configure, or reconstruction-frontier change was made.",
+  "next_target": "0x801B3E64",
+  "correction": "The frontier and progress records now state that unaccounted_spans applies only to .text. They explicitly preserve the absent, NonMatching retail exception sections and state that the preceding session stopped before opening fn_801B3E64 without demonstrating use of its full reconstruction window.",
+  "build_gate": {
+    "full_rebuild_command": "python3 configure.py && .tools/bin/ninja",
+    "command": ".tools/bin/ninja build/GEDE01/main.dol >/dev/null; build_rc=$?; echo build_exit_code=$build_rc",
+    "raw_output": "build_exit_code=0",
+    "note": "The first command completed through DOL, SHA-1 check, and progress generation; the second command emitted the compact recorded exit result after the rebuild."
+  },
+  "affected_object_generation": {
+    "commands": [
+      "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801B3CC8 fn_801B3CC8 -o build/GEDE01/session-1627-remediation-1-object-canonical.json --format json-pretty",
+      "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801B3CC8 fn_801B3CC8 -o build/GEDE01/session-1627-remediation-1-object-strict.json --format json-pretty -c function_reloc_diffs=name_address"
+    ],
+    "raw_output": " INFO Writing to build/GEDE01/session-1627-remediation-1-object-canonical.json\n INFO Writing to build/GEDE01/session-1627-remediation-1-object-strict.json"
+  },
+  "affected_object_measurement": {
+    "command": "for mode in canonical strict; do p=build/GEDE01/session-1627-remediation-1-object-${mode}.json; jq -r --arg mode \"$mode\" '(.left.symbols[]|select(.name==\"fn_801B3CC8\")) as $l | (.right.symbols[]|select(.name==\"fn_801B3CC8\")) as $r | \"mode=\\($mode) symbol=\\($l.name) retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) relocation_diff_rows=\\([$l.instructions[]?|select(.relocation and .diff_kind)]|length)\"' \"$p\"; done",
+    "raw_output": "mode=canonical symbol=fn_801B3CC8 retail_bytes=412 generated_bytes=412 match_percent=91.01942 relocation_diff_rows=0\nmode=strict symbol=fn_801B3CC8 retail_bytes=412 generated_bytes=412 match_percent=91.01942 relocation_diff_rows=0"
+  },
+  "exception_section_measurement": {
+    "command": "jq -r '.left.sections[] | select(.name==\"extab\" or .name==\"extabindex\" or .name==\".text\") | \"section=\\(.name) retail_bytes=\\(.size) match_percent=\\(.match_percent)\"' build/GEDE01/session-1627-remediation-1-object-strict.json",
+    "raw_output": "section=extab retail_bytes=8 match_percent=0.0\nsection=extabindex retail_bytes=12 match_percent=0.0\nsection=.text retail_bytes=412 match_percent=91.01942"
+  },
+  "split_ownership_measurement": {
+    "command": "python3 - <<'PY'\nimport re\np='config/GEDE01/splits.txt'\nlines=open(p).read().splitlines()\ni=lines.index('game/game_fn_801B3CC8.c:')\ntotal=0\nexception_total=0\ncount=0\nfor line in lines[i+1:i+4]:\n m=re.match(r'\\s*(\\S+)\\s+start:0x([0-9A-Fa-f]+) end:0x([0-9A-Fa-f]+)',line)\n name,a,b=m.group(1),int(m.group(2),16),int(m.group(3),16)\n size=b-a; total+=size; count+=1\n if name in ('extab','extabindex'): exception_total+=size\n print(f'section={name} start=0x{a:08X} end=0x{b:08X} owned_bytes={size}')\nprint(f'owned_sections={count} total_owned_bytes={total} exception_metadata_bytes={exception_total}')\nPY",
+    "raw_output": "section=extab start=0x80005640 end=0x80005648 owned_bytes=8\nsection=extabindex start=0x80005DE0 end=0x80005DEC owned_bytes=12\nsection=.text start=0x801B3CC8 end=0x801B3E64 owned_bytes=412\nowned_sections=3 total_owned_bytes=432 exception_metadata_bytes=20"
+  },
+  "canonical_global_measurement": {
+    "report_command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json --format json-pretty",
+    "measurement_command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report.json",
+    "raw_output": "matching_objects=4481 total_objects=6082 matching_functions=4247 total_functions=8216 matching_code_bytes=647308 total_code_bytes=2300692 matching_data_bytes=34646 total_data_bytes=4305642 linked_code_bytes=647184 linked_data_bytes=34778"
+  },
+  "relocation_strict_global_measurement": {
+    "report_command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/session-1627-remediation-1-global-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "generation_raw_output": " INFO Loading project .\n INFO Generating report for 6082 units (using 8 threads)\n INFO Report generated in 0.141s\n INFO Writing to build/GEDE01/session-1627-remediation-1-global-strict.json",
+    "measurement_command": "python3 - <<'PY'\nimport json\np='build/GEDE01/session-1627-remediation-1-global-strict.json';d=json.load(open(p));g=next(x for x in d['categories'] if x['id']=='game')\nprint(f'matching_functions={d[\"measures\"][\"matched_functions\"]} matching_code_bytes={d[\"measures\"][\"matched_code\"]} game_matching_functions={g[\"measures\"][\"matched_functions\"]} game_matching_code_bytes={g[\"measures\"][\"matched_code\"]}')\nPY",
+    "measurement_raw_output": "matching_functions=4242 matching_code_bytes=645624 game_matching_functions=4180 game_matching_code_bytes=642596"
+  },
+  "dol_sha1_measurement": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol"
+  },
+  "dol_cmp_measurement": {
+    "command": "cmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol; cmp_rc=$?; echo cmp_exit_code=$cmp_rc; exit $cmp_rc",
+    "raw_output": "cmp_exit_code=0"
+  },
+  "prior_session_scope_audit": {
+    "command": "git diff --name-only 538d12326^ 497c3e473; git show -s --date=iso-local --format='commit=%H timestamp=%ad subject=%s' 538d12326 497c3e473",
+    "raw_output": "eternal-darkness-decomp/config/GEDE01/splits.txt\neternal-darkness-decomp/configure.py\neternal-darkness-decomp/reports/GEDE01/frontier-801B3CC8-801B3E64-session-1627.json\neternal-darkness-decomp/reports/GEDE01/objdiff-game_fn_801B3CC8-session-1627-reloc-strict.json\neternal-darkness-decomp/reports/GEDE01/objdiff-game_fn_801B3CC8-session-1627.json\neternal-darkness-decomp/reports/GEDE01/progress.json\neternal-darkness-decomp/reports/GEDE01/session-1627-reloc-strict.json\neternal-darkness-decomp/src/game/game_fn_801B3CC8.c\ncommit=538d1232605c9d0679b20922eec194edb95033c8 timestamp=2026-09-01 11:14:14 -0400 subject=Reconstruct fn_801B3CC8 as NonMatching C\ncommit=497c3e4730476eef7dda2fa85a116a1f3a45078b timestamp=2026-09-01 11:14:22 -0400 subject=Record session 1627 frontier attempt",
+    "conclusion": "The committed session range contains no fn_801B3E64 source or attempt artifact. No elapsed-time figure is asserted because this workspace does not contain an independently verified dispatch timestamp for that original session."
+  }
+}
