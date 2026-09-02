@@ -1,0 +1,50 @@
+{
+  "session_id": "session-1658-remediation-2",
+  "scope": "Review remediation only; the contiguous reconstruction frontier was not advanced.",
+  "correction": "Restored the independently split and independently verified Matching fn_801B9C94 unit. fn_801B941C remains unowned. Regenerated the existing canonical and relocation-strict session reports, refreshed progress from current build evidence, and made this report authoritative over the prior remediation attempts.",
+  "frontier_disposition": "The next target remains 0x801B941C. The restored fn_801B9C94 ownership is independent and does not claim the intervening unowned initializer.",
+  "rebuild_completion_measurement": {
+    "command": "tail -n 14 /tmp/session1658-remediation2-rebuild.log",
+    "raw_output": "[569/571] DOL build/GEDE01/main.dol\n[570/571] CHECK config/GEDE01/build.sha1\nbuild/GEDE01/main.dol: OK\n[571/571] PROGRESS\nProgress:\n  All: 43.53% fuzzy, 28.27% matched, 28.27% linked (4513 / 6089 files)\n    Code: 650464 / 2300692 bytes (4279 / 8216 functions)\n    Data: 35318 / 4305642 bytes (0.82%)\n  Game Code: 90.20% fuzzy, 58.49% matched, 58.48% linked (4495 / 5430 files)\n    Code: 647436 / 1106848 bytes (4217 / 5151 functions)\n    Data: 35094 / 36618 bytes (95.84%)\n  SDK/Runtime: 100.00% fuzzy, 100.00% matched, 100.00% linked (18 / 18 files)\n    Code: 3028 / 3028 bytes (62 / 62 functions)\n    Data: 224 / 224 bytes (100.00%)"
+  },
+  "affected_object_objdiff": {
+    "command": "for mode in canonical relocation_strict; do if [ \"$mode\" = canonical ]; then args=(); else args=(-c function_reloc_diffs=name_address); fi; build/tools/objdiff-cli diff -p . -u main/game/game_fn_801B9C94 -o - --format json \"${args[@]}\" | jq -c --arg mode \"$mode\" '{mode:$mode,text:[.left.sections[]|select(.name==\".text\")|{size,match_percent}],symbols:[.left.symbols[]|select(.name==\"fn_801B9C94\")|{name,size,match_percent}],relocation_differences:((.left.symbols[]|select(.name==\"fn_801B9C94\")|.relocation_differences) // [])}'; done",
+    "raw_output": "{\"mode\":\"canonical\",\"text\":[{\"size\":\"4\",\"match_percent\":100.0}],\"symbols\":[{\"name\":\"fn_801B9C94\",\"size\":\"4\",\"match_percent\":100.0}],\"relocation_differences\":[]}\n{\"mode\":\"relocation_strict\",\"text\":[{\"size\":\"4\",\"match_percent\":100.0}],\"symbols\":[{\"name\":\"fn_801B9C94\",\"size\":\"4\",\"match_percent\":100.0}],\"relocation_differences\":[]}"
+  },
+  "source_registration_measurement": {
+    "command": "rg -n 'game_fn_801B9C94|start:0x801B9C94 end:0x801B9C98' configure.py config/GEDE01/splits.txt src/game/game_fn_801B9C94.c",
+    "raw_output": "config/GEDE01/splits.txt:16571:game/game_fn_801B9C94.c:\nconfig/GEDE01/splits.txt:16572:\t.text       start:0x801B9C94 end:0x801B9C98\nconfigure.py:9841:            Object(Matching, \"game/game_fn_801B9C94.c\", mw_version=\"GC/1.2.5n\", extra_cflags=[\"-Cpp_exceptions on\"]),"
+  },
+  "canonical_global_measurement": {
+    "command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report.json",
+    "raw_output": "matching_objects=4513 total_objects=6089 matching_functions=4279 total_functions=8216 matching_code_bytes=650464 total_code_bytes=2300692 matching_data_bytes=35318 total_data_bytes=4305642 linked_code_bytes=650340 linked_data_bytes=35238"
+  },
+  "category_measurement": {
+    "command": "jq -r '(.measures.matched_functions|tonumber) as $mf | (.measures.total_functions|tonumber) as $tf | [.categories[]|select(.id==\"game\")|.measures.matched_code] as $gmc | [.categories[]|select(.id==\"game\")|.measures.total_code] as $gtc | [.categories[]|select(.id==\"game\")|.measures.complete_code] as $gcc | [.categories[]|select(.id==\"sdk\")|.measures.matched_code] as $smc | [.categories[]|select(.id==\"sdk\")|.measures.total_code] as $stc | [.categories[]|select(.id==\"sdk\")|.measures.complete_units] as $scu | [.categories[]|select(.id==\"sdk\")|.measures.total_units] as $stu | \"code_percent=\\(.measures.matched_code_percent) function_percent=\\($mf*100/$tf) game_code_matching_bytes=\\($gmc[0]) game_code_total_bytes=\\($gtc[0]) game_code_linked_bytes=\\($gcc[0]) sdk_code_matching_bytes=\\($smc[0]) sdk_code_total_bytes=\\($stc[0]) sdk_objects_complete=\\($scu[0]) sdk_objects_total=\\($stu[0])\"' build/GEDE01/report.json",
+    "raw_output": "code_percent=28.272537 function_percent=52.08130477117819 game_code_matching_bytes=647436 game_code_total_bytes=1106848 game_code_linked_bytes=647312 sdk_code_matching_bytes=3028 sdk_code_total_bytes=3028 sdk_objects_complete=18 sdk_objects_total=18"
+  },
+  "relocation_strict_global_measurement": {
+    "command": "jq -r '(.categories[]|select(.id==\"game\")|.measures) as $g | \"matching_functions=\\(.measures.matched_functions) matching_code_bytes=\\(.measures.matched_code) game_matching_functions=\\($g.matched_functions) game_matching_code_bytes=\\($g.matched_code)\"' reports/GEDE01/session-1658-reloc-strict.json",
+    "raw_output": "matching_functions=4274 matching_code_bytes=648780 game_matching_functions=4212 game_matching_code_bytes=645752"
+  },
+  "stale_measurement_audit": {
+    "command": "if rg -l '1109016' reports/GEDE01/session-1658-canonical.json reports/GEDE01/session-1658-reloc-strict.json; then exit 1; else echo stale_diluted_measurement_files=0; fi",
+    "raw_output": "stale_diluted_measurement_files=0"
+  },
+  "progress_frontier_measurement": {
+    "command": "jq -r '\"next_target=\\(.next_target) game_code_total_bytes=\\(.game_code_total_bytes) matching_code_bytes=\\(.matching_code_bytes)\"' reports/GEDE01/progress.json",
+    "raw_output": "next_target=0x801B941C game_code_total_bytes=1106848 matching_code_bytes=650464"
+  },
+  "corrected_frontier_report_measurement": {
+    "command": "jq -r '\"range_start=\\(.range_start) range_end=\\(.range_end) retail_text_bytes=\\(.retail_text_bytes) matched_text_bytes=\\(.matched_text_bytes) nonmatching_text_bytes=\\(.nonmatching_text_bytes) unaccounted_spans=\\(.unaccounted_spans|length) next_target=\\(.next_target) authoritative_verification=\\(.authoritative_verification)\"' reports/GEDE01/frontier-801B941C-801B9C98-session-1658.json",
+    "raw_output": "range_start=0x801B941C range_end=0x801B941C retail_text_bytes=0 matched_text_bytes=0 nonmatching_text_bytes=0 unaccounted_spans=1 next_target=0x801B941C authoritative_verification=reports/GEDE01/session-1658-remediation-2-verification.json"
+  },
+  "dol_sha1_measurement": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol"
+  },
+  "dol_cmp_measurement": {
+    "command": "cmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol; cmp_rc=$?; echo cmp_exit_code=$cmp_rc",
+    "raw_output": "cmp_exit_code=0"
+  }
+}

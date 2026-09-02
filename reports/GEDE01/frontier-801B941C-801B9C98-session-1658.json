@@ -1,0 +1,53 @@
+{
+  "session_id": "session-1658",
+  "range_start": "0x801B941C",
+  "range_end": "0x801B941C",
+  "retail_text_bytes": 0,
+  "matched_text_bytes": 0,
+  "nonmatching_text_bytes": 0,
+  "filename_note": "The scheduler-assigned filename retains the originally opened span. The body range ends at the unchanged honest frontier; fn_801B9C94 is separately owned and verified outside the contiguous frontier.",
+  "unaccounted_spans": [
+    {
+      "start": "0x801B941C",
+      "end": "0x801B9C94",
+      "reason": "fn_801B941C remains unowned because the withdrawn byte-clear placeholder was not a substantial reconstruction."
+    }
+  ],
+  "functions": [
+    {
+      "symbol": "fn_801B941C",
+      "start": "0x801B941C",
+      "end": "0x801B9C94",
+      "retail_bytes": 2168,
+      "status": "WithdrawnPlaceholder",
+      "canonical_match_percent": null,
+      "divergence": "Unverified: no substantially reconstructed C body exists, so there is no compiler code-generation divergence to report."
+    },
+    {
+      "symbol": "fn_801B9C94",
+      "start": "0x801B9C94",
+      "end": "0x801B9C98",
+      "retail_bytes": 4,
+      "generated_bytes": 4,
+      "status": "MatchingIndependentOutsideContiguousFrontier",
+      "canonical_match_percent": 100.0,
+      "relocation_strict_match_percent": 100.0,
+      "relocations_equal": true
+    }
+  ],
+  "affected_object_measurement": {
+    "command": "for mode in canonical relocation_strict; do if [ \"$mode\" = canonical ]; then args=(); else args=(-c function_reloc_diffs=name_address); fi; build/tools/objdiff-cli diff -p . -u main/game/game_fn_801B9C94 -o - --format json \"${args[@]}\" | jq -c --arg mode \"$mode\" '{mode:$mode,text:[.left.sections[]|select(.name==\".text\")|{size,match_percent}],symbols:[.left.symbols[]|select(.name==\"fn_801B9C94\")|{name,size,match_percent}],relocation_differences:((.left.symbols[]|select(.name==\"fn_801B9C94\")|.relocation_differences) // [])}'; done",
+    "raw_output": "{\"mode\":\"canonical\",\"text\":[{\"size\":\"4\",\"match_percent\":100.0}],\"symbols\":[{\"name\":\"fn_801B9C94\",\"size\":\"4\",\"match_percent\":100.0}],\"relocation_differences\":[]}\n{\"mode\":\"relocation_strict\",\"text\":[{\"size\":\"4\",\"match_percent\":100.0}],\"symbols\":[{\"name\":\"fn_801B9C94\",\"size\":\"4\",\"match_percent\":100.0}],\"relocation_differences\":[]}"
+  },
+  "assembly_added": false,
+  "shared_reconstruction": false,
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "canonical_report": "reports/GEDE01/session-1658-canonical.json",
+  "relocation_strict_report": "reports/GEDE01/session-1658-reloc-strict.json",
+  "authoritative_verification": "reports/GEDE01/session-1658-remediation-2-verification.json",
+  "superseded_verification_reports": [
+    "reports/GEDE01/session-1658-remediation-1-verification.json",
+    "reports/GEDE01/session-1658-remediation-1-reissue-1-verification.json"
+  ],
+  "next_target": "0x801B941C"
+}
