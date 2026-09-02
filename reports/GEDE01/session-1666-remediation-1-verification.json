@@ -1,0 +1,28 @@
+{
+  "session_id": "session-1666-remediation-1",
+  "scope": "Correct the contradictory retry-3 next_gate only; no source, registration, match accounting, frontier report, or next_target change.",
+  "affected_objects": [
+    "main/game/game_fn_801BA708"
+  ],
+  "full_build": {
+    "command": "set -o pipefail; .tools/bin/ninja build/GEDE01/main.dol 2>&1 | tail -n 1",
+    "raw_output": "[568/568] DOL build/GEDE01/main.dol"
+  },
+  "canonical_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BA708 -o - --format json fn_801BA708 | jq -r '(.left.symbols[]|select(.name==\"fn_801BA708\")) as $retail | (.right.symbols[]|select(.name==\"fn_801BA708\")) as $generated | \"symbol=fn_801BA708 retail_bytes=\\($retail.size) generated_bytes=\\($generated.size) canonical_percent=\\($retail.match_percent) retail_instruction_rows=\\($retail.instructions|length) generated_instruction_rows=\\($generated.instructions|length) retail_relocation_instructions=\\([$retail.instructions[]|select(.instruction.relocation != null)]|length) generated_relocation_instructions=\\([$generated.instructions[]|select(.instruction.relocation != null)]|length) retail_differing_rows=\\([$retail.instructions[]|select(.diff_kind != null)]|length) generated_differing_rows=\\([$generated.instructions[]|select(.diff_kind != null)]|length)\"'",
+    "raw_output": "symbol=fn_801BA708 retail_bytes=580 generated_bytes=580 canonical_percent=95.62759 retail_instruction_rows=147 generated_instruction_rows=147 retail_relocation_instructions=52 generated_relocation_instructions=52 retail_differing_rows=25 generated_differing_rows=25"
+  },
+  "relocation_strict_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BA708 -o - --format json -c function_reloc_diffs=name_address fn_801BA708 | jq -r '(.left.symbols[]|select(.name==\"fn_801BA708\")) as $retail | (.right.symbols[]|select(.name==\"fn_801BA708\")) as $generated | \"symbol=fn_801BA708 retail_bytes=\\($retail.size) generated_bytes=\\($generated.size) relocation_strict_percent=\\($retail.match_percent) retail_instruction_rows=\\($retail.instructions|length) generated_instruction_rows=\\($generated.instructions|length) retail_relocation_instructions=\\([$retail.instructions[]|select(.instruction.relocation != null)]|length) generated_relocation_instructions=\\([$generated.instructions[]|select(.instruction.relocation != null)]|length) retail_differing_rows=\\([$retail.instructions[]|select(.diff_kind != null)]|length) generated_differing_rows=\\([$generated.instructions[]|select(.diff_kind != null)]|length)\"'",
+    "raw_output": "symbol=fn_801BA708 retail_bytes=580 generated_bytes=580 relocation_strict_percent=95.62759 retail_instruction_rows=147 generated_instruction_rows=147 retail_relocation_instructions=52 generated_relocation_instructions=52 retail_differing_rows=25 generated_differing_rows=25"
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol"
+  },
+  "frontier_audit": {
+    "command": "jq -r '\"next_target=\\(.next_target) retry=\\(.retry) retail_text_bytes=\\(.retail_text_bytes) new_matched_bytes=\\(.new_matched_bytes) nonmatching_bytes=\\(.nonmatching_bytes) canonical_percent=\\(.functions[0].canonical_percent) relocation_strict_percent=\\(.functions[0].relocation_strict_percent)\"' reports/GEDE01/frontier-801BA708-801BA94C-session-1666.json",
+    "raw_output": "next_target=0x801BA708 retry=3 of 3 retail_text_bytes=580 new_matched_bytes=0 nonmatching_bytes=580 canonical_percent=95.62759 relocation_strict_percent=95.62759"
+  },
+  "disposition": "The current-session canonical and relocation-strict object diffs reproduce the checked-in retry-3 evidence. fn_801BA708 remains NonMatching and receives no match credit. Its retry budget is exhausted, so the next throughput session is authorized to begin at fn_801BA94C without retrying fn_801BA708. The honest next_target remains 0x801BA708 because that address is documented NonMatching debt."
+}

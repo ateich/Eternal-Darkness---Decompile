@@ -1,0 +1,36 @@
+{
+  "session": "session-1666",
+  "range_start": "0x801BA708",
+  "range_end": "0x801BA94C",
+  "next_target": "0x801BA708",
+  "retail_text_bytes": 580,
+  "new_matched_bytes": 0,
+  "nonmatching_bytes": 580,
+  "unaccounted_spans": [],
+  "retry": "3 of 3",
+  "functions": [
+    {
+      "symbol": "fn_801BA708",
+      "range": "0x801BA708-0x801BA94C",
+      "retail_bytes": 580,
+      "generated_text_bytes": 580,
+      "status": "NonMatching",
+      "previous_canonical_percent": 94.48276,
+      "canonical_percent": 95.62759,
+      "relocation_strict_percent": 95.62759,
+      "blocking_divergence": "Explicit honest-C halfword assignments eliminate the four-byte size surplus and make the frame exact, but GC/1.2.5n still computes one copy-slot base while retail retains a second equivalent base for alternating stores and preserves the byte offset in another register for the independently formed status/cache base.",
+      "evidence": [
+        "reports/GEDE01/session-1666-fn_801BA708-attempt.json",
+        "reports/GEDE01/session-1666-fn_801BA708-reloc-strict.json"
+      ]
+    }
+  ],
+  "abi_audit": {
+    "integer_width": "u32 id and signed-halfword position input remain required by the aligned prefix and retail lha copy sequence",
+    "extern_signatures": "the external caller declaration is pointer-typed but passes the same two 32-bit GPR values; no cross-TU narrowing occurs and this TU codegen is unaffected"
+  },
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "whole_function_assembly_added": 0,
+  "shared_reconstructions_added": 0,
+  "new_nonmatching_functions_registered": 0
+}

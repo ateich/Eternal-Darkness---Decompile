@@ -1,0 +1,50 @@
+{
+  "session_id": "session-1669-remediation-1",
+  "scope": "Review remediation only; next_target remains 0x801BACE8 and fn_801BAF90 was not opened.",
+  "build": {
+    "command": ".tools/bin/ninja build/GEDE01/src/game/game_fn_801BACE8.o build/GEDE01/main.dol build/GEDE01/report.json 2>&1 | tail -n 8",
+    "raw_output": "#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n[570/570] DOL build/GEDE01/main.dol"
+  },
+  "affected_object": {
+    "canonical_diff_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BACE8 fn_801BACE8 -o reports/GEDE01/objdiff-game_fn_801BACE8-session-1669.json --format json-pretty",
+    "canonical_diff_raw_output": "INFO Writing to reports/GEDE01/objdiff-game_fn_801BACE8-session-1669.json",
+    "canonical_measurement_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801BACE8\")) as $l | (.right.symbols[]|select(.name==\"fn_801BACE8\")) as $r | \"basis=canonical_default retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) retail_real_instructions=\\([$l.instructions[]|select(.instruction!=null)]|length) generated_real_instructions=\\([$r.instructions[]|select(.instruction!=null)]|length)\"' reports/GEDE01/objdiff-game_fn_801BACE8-session-1669.json",
+    "canonical_measurement_raw_output": "basis=canonical_default retail_bytes=680 generated_bytes=684 match_percent=89.3353 retail_real_instructions=170 generated_real_instructions=171",
+    "strict_diff_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BACE8 fn_801BACE8 -o reports/GEDE01/objdiff-game_fn_801BACE8-session-1669-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "strict_diff_raw_output": "INFO Writing to reports/GEDE01/objdiff-game_fn_801BACE8-session-1669-reloc-strict.json",
+    "strict_measurement_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801BACE8\")) as $l | (.right.symbols[]|select(.name==\"fn_801BACE8\")) as $r | \"basis=function_reloc_diffs=name_address retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) retail_real_instructions=\\([$l.instructions[]|select(.instruction!=null)]|length) generated_real_instructions=\\([$r.instructions[]|select(.instruction!=null)]|length)\"' reports/GEDE01/objdiff-game_fn_801BACE8-session-1669-reloc-strict.json",
+    "strict_measurement_raw_output": "basis=function_reloc_diffs=name_address retail_bytes=680 generated_bytes=684 match_percent=89.3353 retail_real_instructions=170 generated_real_instructions=171"
+  },
+  "data_regression": {
+    "before_after_command": "git show 17ebc0b1d^:eternal-darkness-decomp/reports/GEDE01/progress.json | jq -r '\"basis=pre_retry_2_committed_progress matching_objects=\\(.matching_objects) matching_functions=\\(.matching_functions) matching_code_bytes=\\(.matching_code_bytes) matching_data_bytes=\\(.matching_data_bytes)\"'; jq -r '\"basis=post_retry_2_fresh_report matching_objects=\\(.measures.complete_units) matching_functions=\\(.measures.matched_functions) matching_code_bytes=\\(.measures.matched_code) matching_data_bytes=\\(.measures.matched_data)\"' build/GEDE01/report.json",
+    "before_after_raw_output": "basis=pre_retry_2_committed_progress matching_objects=4517 matching_functions=4283 matching_code_bytes=651068 matching_data_bytes=35378\nbasis=post_retry_2_fresh_report matching_objects=4517 matching_functions=4283 matching_code_bytes=651068 matching_data_bytes=35374",
+    "unit_command": "jq -r '.units[] | select(.name==\"main/game/game_fn_801BACE8\") | \"unit=\\(.name) matched_code=\\(.measures.matched_code) total_code=\\(.measures.total_code) matched_data=\\(.measures.matched_data) total_data=\\(.measures.total_data)\"' build/GEDE01/report.json",
+    "unit_raw_output": "unit=main/game/game_fn_801BACE8 matched_code=null total_code=680 matched_data=8 total_data=20"
+  },
+  "size_exactness": {
+    "command": "jq -r '(.left.symbols[]|select(.name==\"fn_801BACE8\")) as $l | (.right.symbols[]|select(.name==\"fn_801BACE8\")) as $r | \"basis=session_1668_retained canonical_percent=\\($l.match_percent) retail_bytes=\\($l.size) generated_bytes=\\($r.size) retail_real_instructions=\\([$l.instructions[]|select(.instruction!=null)]|length) generated_real_instructions=\\([$r.instructions[]|select(.instruction!=null)]|length)\"' reports/GEDE01/objdiff-game_fn_801BACE8-session-1668.json",
+    "raw_output": "basis=session_1668_retained canonical_percent=78.61176 retail_bytes=680 generated_bytes=680 retail_real_instructions=170 generated_real_instructions=170"
+  },
+  "constant_binding_probes": {
+    "disposition": "Exploratory temporary builds only; the committed retry-2 source was restored unchanged after both probes.",
+    "neither_bound_source_change": "Removed the lbl_80650F18 extern and replaced both uses with local 4096.0f; compiler-local unsigned-conversion double remained local.",
+    "neither_bound_measurement_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801BACE8\")) as $l | (.right.symbols[]|select(.name==\"fn_801BACE8\")) as $r | \"variant=neither_bound basis=canonical_default retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) retail_real_instructions=\\([$l.instructions[]|select(.instruction!=null)]|length) generated_real_instructions=\\([$r.instructions[]|select(.instruction!=null)]|length)\"' build/GEDE01/session-1669-remediation-1-neither-default.json",
+    "neither_bound_measurement_raw_output": "variant=neither_bound basis=canonical_default retail_bytes=680 generated_bytes=684 match_percent=89.45294 retail_real_instructions=170 generated_real_instructions=171",
+    "neither_bound_data_command": "jq -r '.units[] | select(.name==\"main/game/game_fn_801BACE8\") | \"variant=neither_bound unit=\\(.name) matched_code=\\(.measures.matched_code) total_code=\\(.measures.total_code) matched_data=\\(.measures.matched_data) total_data=\\(.measures.total_data)\"' build/GEDE01/report.json",
+    "neither_bound_data_raw_output": "variant=neither_bound unit=main/game/game_fn_801BACE8 matched_code=null total_code=680 matched_data=8 total_data=20",
+    "both_bound_source_change": "Used an inline big-endian u32-to-double construction subtracting extern lbl_80650F10 and used extern lbl_80650F18 for both computations.",
+    "both_bound_measurement_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801BACE8\")) as $l | (.right.symbols[]|select(.name==\"fn_801BACE8\")) as $r | \"variant=both_bound basis=canonical_default retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) retail_real_instructions=\\([$l.instructions[]|select(.instruction!=null)]|length) generated_real_instructions=\\([$r.instructions[]|select(.instruction!=null)]|length)\"' build/GEDE01/session-1669-remediation-1-both-default.json",
+    "both_bound_measurement_raw_output": "variant=both_bound basis=canonical_default retail_bytes=680 generated_bytes=708 match_percent=75.911766 retail_real_instructions=170 generated_real_instructions=177",
+    "both_bound_data_command": "jq -r '.units[] | select(.name==\"main/game/game_fn_801BACE8\") | \"variant=both_bound unit=\\(.name) matched_code=\\(.measures.matched_code) total_code=\\(.measures.total_code) matched_data=\\(.measures.matched_data) total_data=\\(.measures.total_data)\"' build/GEDE01/report.json",
+    "both_bound_data_raw_output": "variant=both_bound unit=main/game/game_fn_801BACE8 matched_code=null total_code=680 matched_data=8 total_data=20"
+  },
+  "canonical_counters": {
+    "command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report.json",
+    "raw_output": "matching_objects=4517 total_objects=6089 matching_functions=4283 total_functions=8216 matching_code_bytes=651068 total_code_bytes=2300692 matching_data_bytes=35374 total_data_bytes=4305642 linked_code_bytes=650944 linked_data_bytes=35258"
+  },
+  "source_disposition": "No source change was retained. Raw parameter, state and cache bases plus voice offsets intentionally duplicate StreamSlot layout for current codegen; lbl_80650F18 is the retail 4096.0f constant; signed index relies deliberately on unsigned promotion for sentinel comparison and slot scaling.",
+  "dol_gate": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "session_id": "session-1666",
+  "starting_target": "0x801BA708",
+  "ending_next_target": "0x801BA708",
+  "full_build": {
+    "command": ".tools/bin/ninja build/GEDE01/main.dol",
+    "result": "success"
+  },
+  "canonical_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json --format json-pretty",
+    "matching_objects": 4517,
+    "matching_functions": 4283,
+    "matching_code_bytes": 651068,
+    "linked_code_bytes": 650944
+  },
+  "relocation_strict_report": {
+    "command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1666-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "matching_functions": 4278,
+    "matching_code_bytes": 649384,
+    "game_matching_functions": 4216,
+    "game_matching_code_bytes": 646356
+  },
+  "per_function": [
+    {
+      "symbol": "fn_801BA708",
+      "range": "0x801BA708-0x801BA94C",
+      "retail_bytes": 580,
+      "generated_bytes": 580,
+      "canonical_percent": 95.62759,
+      "relocation_strict_percent": 95.62759,
+      "matched_bytes_credited": 0,
+      "nonmatching_bytes": 580,
+      "evidence": [
+        "reports/GEDE01/session-1666-fn_801BA708-attempt.json",
+        "reports/GEDE01/session-1666-fn_801BA708-reloc-strict.json"
+      ]
+    }
+  ],
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "new_nonmatching_functions_registered": 0,
+  "whole_function_assembly_added": 0,
+  "shared_reconstructions_added": 0
+}

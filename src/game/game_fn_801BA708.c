@@ -59,17 +59,31 @@ void fn_801BA708(u32 id, s16* position)
     StreamSlot* slots = lbl_8061AE48;
     u32 slot_index;
     u32 cache;
-    int i;
+    StreamSlot* slot;
 
     fn_801CE2B8();
     slot_index = find_stream(id);
 
     if (slot_index != (u32)-1) {
-        for (i = 0; i < 16; i++) {
-            slots[slot_index].position[i] = position[i];
-        }
-        *(unsigned short*)&slots[slot_index].pad1C[4] = 8;
-        cache = slots[slot_index].cache;
+        slot = &slots[slot_index];
+        slot->position[0] = position[0];
+        slot->position[1] = position[1];
+        slot->position[2] = position[2];
+        slot->position[3] = position[3];
+        slot->position[4] = position[4];
+        slot->position[5] = position[5];
+        slot->position[6] = position[6];
+        slot->position[7] = position[7];
+        slot->position[8] = position[8];
+        slot->position[9] = position[9];
+        slot->position[10] = position[10];
+        slot->position[11] = position[11];
+        slot->position[12] = position[12];
+        slot->position[13] = position[13];
+        slot->position[14] = position[14];
+        slot->position[15] = position[15];
+        *(unsigned short*)&lbl_8061AE48[slot_index].pad1C[4] = 8;
+        cache = lbl_8061AE48[slot_index].cache;
         if (cache != (u32)-1) {
             update_cached_stream(cache, position);
         }

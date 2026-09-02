@@ -1,0 +1,38 @@
+{
+  "session_id": "session-1668-remediation-1",
+  "scope": "Review remediation only; frontier unchanged at 0x801BAF90.",
+  "build": {
+    "command": ".tools/bin/ninja build/GEDE01/src/game/game_fn_801BACE8.o build/GEDE01/main.dol build/GEDE01/report.json",
+    "raw_output_tail": "[569/569] DOL build/GEDE01/main.dol"
+  },
+  "affected_object": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BACE8 fn_801BACE8 -o reports/GEDE01/objdiff-game_fn_801BACE8-session-1668.json --format json-pretty",
+    "raw_output": "INFO Writing to reports/GEDE01/objdiff-game_fn_801BACE8-session-1668.json\nDEFAULT_OBJDIFF_EXIT=0",
+    "measurement_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801BACE8\")) as $l | (.right.symbols[]|select(.name==\"fn_801BACE8\")) as $r | \"basis=canonical_default\\nretail_bytes=\\($l.size)\\ngenerated_bytes=\\($r.size)\\nmatch_percent=\\($l.match_percent)\\nretail_real_instructions=\\([$l.instructions[]|select(.instruction!=null)]|length)\\ngenerated_real_instructions=\\([$r.instructions[]|select(.instruction!=null)]|length)\\nretail_aligned_rows=\\($l.instructions|length)\\ngenerated_aligned_rows=\\($r.instructions|length)\\nretail_differing_rows=\\([$l.instructions[]|select(.diff_kind!=null)]|length)\\ngenerated_differing_rows=\\([$r.instructions[]|select(.diff_kind!=null)]|length)\"' reports/GEDE01/objdiff-game_fn_801BACE8-session-1668.json",
+    "measurement_raw_output": "basis=canonical_default\nretail_bytes=680\ngenerated_bytes=680\nmatch_percent=78.61176\nretail_real_instructions=170\ngenerated_real_instructions=170\nretail_aligned_rows=183\ngenerated_aligned_rows=183\nretail_differing_rows=77\ngenerated_differing_rows=77",
+    "strict_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BACE8 fn_801BACE8 -o reports/GEDE01/session-1668-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "strict_raw_output": "INFO Writing to reports/GEDE01/session-1668-reloc-strict.json",
+    "strict_measurement_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801BACE8\")) as $l | (.right.symbols[]|select(.name==\"fn_801BACE8\")) as $r | \"basis=function_reloc_diffs=name_address retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) retail_real_instructions=\\([$l.instructions[]|select(.instruction!=null)]|length) generated_real_instructions=\\([$r.instructions[]|select(.instruction!=null)]|length)\"' reports/GEDE01/session-1668-reloc-strict.json",
+    "strict_measurement_raw_output": "basis=function_reloc_diffs=name_address retail_bytes=680 generated_bytes=680 match_percent=78.61176 retail_real_instructions=170 generated_real_instructions=170",
+    "readelf_command": "readelf -sW build/GEDE01/src/game/game_fn_801BACE8.o | rg 'fn_801BACE8'",
+    "readelf_raw_output": "11: 00000000   680 FUNC    GLOBAL DEFAULT    1 fn_801BACE8"
+  },
+  "fallback_evidence": {
+    "source": "reports/GEDE01/game_fn_801BAF90-session-1668-uncompiled.c",
+    "compile_command": "tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.2.5n/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma 'cats off' -pragma 'warn_notinlined off' -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -Cpp_exceptions on -c reports/GEDE01/game_fn_801BAF90-session-1668-uncompiled.c -o build/GEDE01/session-1668-remediation-1-candidate",
+    "compile_raw_output": "CANDIDATE_COMPILE_EXIT=0",
+    "objdiff_command": "build/tools/objdiff-cli diff -1 build/GEDE01/obj/auto_fn_801BAF90_text.o -2 build/GEDE01/session-1668-remediation-1-candidate/game_fn_801BAF90-session-1668-uncompiled.o fn_801BAF90 -o reports/GEDE01/objdiff-game_fn_801BAF90-session-1668-uncompiled.json --format json-pretty -c function_reloc_diffs=name_address",
+    "objdiff_raw_output": "INFO Writing to reports/GEDE01/objdiff-game_fn_801BAF90-session-1668-uncompiled.json\nFALLBACK_STRICT_OBJDIFF_EXIT=0",
+    "measurement_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801BAF90\")) as $l | (.right.symbols[]|select(.name==\"fn_801BAF90\")) as $r | \"basis=function_reloc_diffs=name_address retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) retail_real_instructions=\\([$l.instructions[]|select(.instruction!=null)]|length) generated_real_instructions=\\([$r.instructions[]|select(.instruction!=null)]|length) retail_differing_rows=\\([$l.instructions[]|select(.diff_kind!=null)]|length) generated_differing_rows=\\([$r.instructions[]|select(.diff_kind!=null)]|length)\"' reports/GEDE01/objdiff-game_fn_801BAF90-session-1668-uncompiled.json",
+    "measurement_raw_output": "basis=function_reloc_diffs=name_address retail_bytes=528 generated_bytes=532 match_percent=93.666664 retail_real_instructions=132 generated_real_instructions=133 retail_differing_rows=32 generated_differing_rows=32",
+    "blocker": "The retained source preserves the recovered cleanup/cache recursion, but canonical GC/1.2.5n rematerializes both slot-size multiplications at the state clears and shifts the loop-index and field-base register allocation."
+  },
+  "canonical_counters": {
+    "command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report.json",
+    "raw_output": "matching_objects=4517 total_objects=6089 matching_functions=4283 total_functions=8216 matching_code_bytes=651068 total_code_bytes=2300692 matching_data_bytes=35378 total_data_bytes=4305642 linked_code_bytes=650944 linked_data_bytes=35258"
+  },
+  "dol_gate": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol"
+  }
+}

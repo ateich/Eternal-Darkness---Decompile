@@ -1,0 +1,36 @@
+{
+  "session": "session-1665",
+  "range_start": "0x801BA708",
+  "range_end": "0x801BA94C",
+  "next_target": "0x801BA708",
+  "retail_text_bytes": 580,
+  "new_matched_bytes": 0,
+  "nonmatching_bytes": 580,
+  "unaccounted_spans": [],
+  "retry": "2 of 3",
+  "functions": [
+    {
+      "symbol": "fn_801BA708",
+      "range": "0x801BA708-0x801BA94C",
+      "retail_bytes": 580,
+      "generated_text_bytes": 584,
+      "status": "NonMatching",
+      "previous_canonical_percent": 94.27586,
+      "canonical_percent": 94.48276,
+      "relocation_strict_percent": 94.48276,
+      "blocking_divergence": "GC/1.2.5n still folds the sixteen halfword stores through one computed slot pointer while retail alternates two equivalent slot bases, then retains a third base for the status store and an indexed cache load; direct global spelling improves address formation but leaves a four-byte generated-size surplus.",
+      "evidence": [
+        "reports/GEDE01/session-1665-fn_801BA708-attempt.json",
+        "reports/GEDE01/session-1665-fn_801BA708-reloc-strict.json"
+      ]
+    }
+  ],
+  "abi_audit": {
+    "integer_width": "u32 id and signed-halfword position input retained; the first 364 bytes align and retail uses lha for copied elements",
+    "extern_signatures": "the only external caller uses pointer-typed arguments with the same register ABI; changing this TU signature would disturb the already aligned prefix"
+  },
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "whole_function_assembly_added": 0,
+  "shared_reconstructions_added": 0,
+  "new_nonmatching_functions_registered": 0
+}
