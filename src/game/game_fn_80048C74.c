@@ -56,13 +56,13 @@ extern u32 fn_8011FB24(void* object);
 extern u32 fn_8011FB3C(void* object);
 extern int fn_80130718(void);
 extern void fn_80144C4C(void* object);
-extern void fn_8013017C(void* object);
+extern u8 fn_8013017C(void* object);
 extern void fn_80130434(void* object, u32 value);
 extern void fn_801301B0(void* object, u32 first, u32 second);
 extern void fn_800C2474(void* object, u32 value);
 
 extern int fn_80048A60(void);
-extern void fn_800490E8(float y, float x);
+extern float fn_800490E8(float y, float x);
 extern void fn_8004948C(void* view, void* object, u32 value);
 
 void fn_80048C74(void* view)

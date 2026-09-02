@@ -1,0 +1,62 @@
+{
+  "session_id": "session-1660-remediation-1",
+  "scope": "Review remediation only; no frontier advance and no new function matching.",
+  "starting_target": "0x801B9D1C",
+  "ending_next_target": "0x801B9D1C",
+  "source_corrections": [
+    {
+      "symbol": "fn_80036060",
+      "edited_declaration": "s32 fn_80036060(void*, u16) at src/game/game_fn_80012008.c:10",
+      "prototype_gate": "The edited declaration is a full prototype. The unedited occurrence-only TU src/game/game_fn_80034708.c retains an unspecified/K&R declaration and remains recorded in fan-out."
+    },
+    {
+      "symbol": "fn_800490E8",
+      "edited_declaration": "float fn_800490E8(float, float) at src/game/game_fn_80048C74.c:65",
+      "safety_basis": "Owned definition, identical parameter ABI, direct call, discarded result."
+    },
+    {
+      "symbol": "fn_80049304",
+      "edited_declaration": "s32 fn_80049304(void*, void*) at src/game/game_fn_8000DAF4.c:10",
+      "safety_basis": "Owned definition, equivalent GPR parameter ABI, direct call, discarded result."
+    },
+    {
+      "symbol": "fn_8013017C",
+      "edited_declaration": "u8 fn_8013017C(void*) at src/game/game_fn_80048C74.c:59",
+      "safety_basis": "Owned definition, identical parameter ABI, direct call, discarded result."
+    }
+  ],
+  "broad_apply_trial": {
+    "apply_command": "python3 tools/session_1660_apply_trial.py",
+    "apply_raw_output": "changed_translation_units=446",
+    "build_command": ".tools/bin/ninja -k 0",
+    "representative_build_raw_output": "File: src\\game\\game_fn_80019244.c\n95: fn_80148008(&submit_position, &direction, &descriptor, fn_801A0008);\nError: illegal implicit conversion from 'void * ()' to 'void (*)()'\nFile: src\\game\\game_fn_8007B540.c\n34: extern u8* fn_801834F0(void);\nError: ';' expected",
+    "result": "The broad edits were reverted. The audit now re-dispositions parameter-ABI disagreements, callback/caller-cast uses, and unavailable return spellings; only individually verified clean direct-call edits were retained. The temporary helper was removed."
+  },
+  "signature_audit": {
+    "command": "jq -c '{applied_corrections:(.applied_corrections|length),pending_return_register:([.return_register_contradictions[]|select(.disposition==\"pending\")]|length),deferred_return_register:([.return_register_contradictions[]|select(.disposition==\"deferred\")]|length),return_register_contradictions:(.return_register_contradictions|length),deferred_reasons:([.return_register_contradictions[]|select(.disposition==\"deferred\")|.disposition_reason]|group_by(.)|map({reason:.[0],count:length})),asm_false_positive_present:([.return_register_contradictions[]|select(.symbol==\"fn_800F35AC\")]|length),applied:[.applied_corrections[]|{symbol,affected_translation_units,edited_translation_units,has_unspecified_parameters,unspecified_parameter_units,edited_translation_units_have_unspecified_parameters}]}' reports/GEDE01/signature-shadow-session-1660.json",
+    "raw_output": "{\"applied_corrections\":4,\"pending_return_register\":153,\"deferred_return_register\":414,\"return_register_contradictions\":567,\"deferred_reasons\":[{\"reason\":\"Deferred because at least one declaring translation unit uses an unspecified/K&R prototype.\",\"count\":33},{\"reason\":\"Deferred because at least one wrong-return declaration also disagrees with the grounded parameter ABI; a return-only edit would not produce a source-complete signature correction.\",\"count\":257},{\"reason\":\"Deferred because at least one wrong-return declaration is used as a callback value or caller-side cast target; the broad APPLY trial reproduced incompatible function-pointer diagnostics.\",\"count\":5},{\"reason\":\"Deferred because the grounded return-type spelling is unavailable in at least one declaring translation unit; the broad APPLY trial reproduced unknown-type compiler diagnostics.\",\"count\":12},{\"reason\":\"High-confidence evidence exists, but the contradiction affects more than 12 translation units.\",\"count\":23},{\"reason\":\"Low confidence: declarations alone do not establish the callee's true signature.\",\"count\":84}],\"asm_false_positive_present\":0,\"applied\":[{\"symbol\":\"fn_80036060\",\"affected_translation_units\":2,\"edited_translation_units\":[\"src/game/game_fn_80012008.c\"],\"has_unspecified_parameters\":true,\"unspecified_parameter_units\":[\"src/game/game_fn_80034708.c\"],\"edited_translation_units_have_unspecified_parameters\":false},{\"symbol\":\"fn_800490E8\",\"affected_translation_units\":7,\"edited_translation_units\":[\"src/game/game_fn_80048C74.c\"],\"has_unspecified_parameters\":false,\"unspecified_parameter_units\":[],\"edited_translation_units_have_unspecified_parameters\":false},{\"symbol\":\"fn_80049304\",\"affected_translation_units\":9,\"edited_translation_units\":[\"src/game/game_fn_8000DAF4.c\"],\"has_unspecified_parameters\":false,\"unspecified_parameter_units\":[],\"edited_translation_units_have_unspecified_parameters\":false},{\"symbol\":\"fn_8013017C\",\"affected_translation_units\":3,\"edited_translation_units\":[\"src/game/game_fn_80048C74.c\"],\"has_unspecified_parameters\":false,\"unspecified_parameter_units\":[],\"edited_translation_units_have_unspecified_parameters\":false}]}"
+  },
+  "build": {
+    "command": ".tools/bin/ninja 2>&1 | tail -n 12",
+    "raw_output": "build/GEDE01/main.dol: OK\n[571/571] PROGRESS\nProgress:\n  All: 43.55% fuzzy, 28.28% matched, 28.27% linked (4514 / 6089 files)\n    Code: 650596 / 2300692 bytes (4280 / 8216 functions)\n    Data: 35338 / 4305642 bytes (0.82%)\n  Game Code: 90.07% fuzzy, 58.38% matched, 58.37% linked (4496 / 5432 files)\n    Code: 647568 / 1109148 bytes (4218 / 5153 functions)\n    Data: 35114 / 36658 bytes (95.79%)\n  SDK/Runtime: 100.00% fuzzy, 100.00% matched, 100.00% linked (18 / 18 files)\n    Code: 3028 / 3028 bytes (62 / 62 functions)\n    Data: 224 / 224 bytes (100.00%)",
+    "status": "passed"
+  },
+  "affected_object_report": {
+    "command": "jq -c '.units[]|select(.name==\"main/game/game_fn_80012008\" or .name==\"main/game/game_fn_80034708\" or .name==\"main/game/game_fn_80048C74\" or .name==\"main/game/game_fn_8000DAF4\")|{name,complete:.metadata.complete,matched_code_percent:.measures.matched_code_percent,complete_code_percent:.measures.complete_code_percent}' build/GEDE01/report.json",
+    "raw_output": "{\"name\":\"main/game/game_fn_8000DAF4\",\"complete\":true,\"matched_code_percent\":100.0,\"complete_code_percent\":100.0}\n{\"name\":\"main/game/game_fn_80012008\",\"complete\":true,\"matched_code_percent\":100.0,\"complete_code_percent\":100.0}\n{\"name\":\"main/game/game_fn_80034708\",\"complete\":false,\"matched_code_percent\":null,\"complete_code_percent\":null}\n{\"name\":\"main/game/game_fn_80048C74\",\"complete\":true,\"matched_code_percent\":100.0,\"complete_code_percent\":100.0}",
+    "note": "main/game/game_fn_80034708 was not edited; it is fan-out-only and is not objdiff-measurable."
+  },
+  "objdiff": {
+    "command": "jq -nc --slurpfile a reports/GEDE01/objdiff-game_fn_80012008-session-1660-remediation-1.json --slurpfile as reports/GEDE01/objdiff-game_fn_80012008-session-1660-remediation-1-reloc-strict.json --slurpfile b reports/GEDE01/objdiff-game_fn_80048C74-session-1660-remediation-1.json --slurpfile bs reports/GEDE01/objdiff-game_fn_80048C74-session-1660-remediation-1-reloc-strict.json --slurpfile c reports/GEDE01/objdiff-game_fn_8000DAF4-session-1660-remediation-1.json --slurpfile cs reports/GEDE01/objdiff-game_fn_8000DAF4-session-1660-remediation-1-reloc-strict.json '{game_fn_80012008:{canonical:[$a[0].left.sections[]|select(.kind==\"SECTION_CODE\")|{name,match_percent,size}],strict:[$as[0].left.sections[]|select(.kind==\"SECTION_CODE\")|{name,match_percent,size}],strict_left_relocations:[$as[0].left.sections[]|select(.kind==\"SECTION_CODE\")|.relocations[]?],strict_right_relocations:[$as[0].right.sections[]|select(.kind==\"SECTION_CODE\")|.relocations[]?]},game_fn_80048C74:{canonical:[$b[0].left.sections[]|select(.kind==\"SECTION_CODE\")|{name,match_percent,size}],strict:[$bs[0].left.sections[]|select(.kind==\"SECTION_CODE\")|{name,match_percent,size}],strict_left_relocations:[$bs[0].left.sections[]|select(.kind==\"SECTION_CODE\")|.relocations[]?],strict_right_relocations:[$bs[0].right.sections[]|select(.kind==\"SECTION_CODE\")|.relocations[]?]},game_fn_8000DAF4:{canonical:[$c[0].left.sections[]|select(.kind==\"SECTION_CODE\")|{name,match_percent,size}],strict:[$cs[0].left.sections[]|select(.kind==\"SECTION_CODE\")|{name,match_percent,size}],strict_left_relocations:[$cs[0].left.sections[]|select(.kind==\"SECTION_CODE\")|.relocations[]?],strict_right_relocations:[$cs[0].right.sections[]|select(.kind==\"SECTION_CODE\")|.relocations[]?]}}'",
+    "raw_output": "{\"game_fn_80012008\":{\"canonical\":[{\"name\":\".text\",\"match_percent\":100.0,\"size\":\"280\"}],\"strict\":[{\"name\":\".text\",\"match_percent\":100.0,\"size\":\"280\"}],\"strict_left_relocations\":[],\"strict_right_relocations\":[]},\"game_fn_80048C74\":{\"canonical\":[{\"name\":\".text\",\"match_percent\":100.0,\"size\":\"1140\"}],\"strict\":[{\"name\":\".text\",\"match_percent\":100.0,\"size\":\"1140\"}],\"strict_left_relocations\":[],\"strict_right_relocations\":[]},\"game_fn_8000DAF4\":{\"canonical\":[{\"name\":\".text\",\"match_percent\":100.0,\"size\":\"228\"}],\"strict\":[{\"name\":\".text\",\"match_percent\":100.0,\"size\":\"228\"}],\"strict_left_relocations\":[],\"strict_right_relocations\":[]}}"
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol",
+    "unchanged": true
+  },
+  "progress_invariant": {
+    "command": "jq -c '{next_target,open_items_count:(.open_items|length),session_1660_entries:([.open_items[]|select(startswith(\"Session session-1660 \"))]|length)}' reports/GEDE01/progress.json",
+    "raw_output": "{\"next_target\":\"0x801B9D1C\",\"open_items_count\":2721,\"session_1660_entries\":0}"
+  }
+}

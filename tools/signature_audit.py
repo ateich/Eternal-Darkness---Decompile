@@ -27,6 +27,10 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SOURCE = ROOT / "src" / "game"
 DEFAULT_RETAIL_EVIDENCE = ROOT / "config" / "GEDE01" / "retail-return-shapes.json"
 FUNCTION_NAME = re.compile(r"\b(fn_[0-9A-Fa-f]+)\s*\(")
+LEGACY_UNSPECIFIED_FUNCTION = re.compile(
+    r"(?m)^[ \t]*(?:M2C_UNK|UNK_TYPE)[ \t]+(fn_[0-9A-Fa-f]+)"
+    r"[ \t]*\([ \t]*\)[ \t]*;"
+)
 EXTERN_STATEMENT = re.compile(r"\bextern\b(?P<body>.*?);", re.DOTALL)
 COMMENTS = re.compile(r"/\*.*?\*/|//[^\n]*", re.DOTALL)
 FLOAT_TYPES = {"float", "f32"}
@@ -178,6 +182,25 @@ def base_type(type_name: str) -> str:
     return squash_space(type_name)
 
 
+def has_bare_symbol_reference(path: Path, symbol: str) -> bool:
+    """Return true when a TU uses a declaration as a callback/cast value."""
+    text = COMMENTS.sub("", path.read_text(encoding="utf-8"))
+    text = EXTERN_STATEMENT.sub("", text)
+    return re.search(rf"\b{re.escape(symbol)}\b(?!\s*\()", text) is not None
+
+
+def return_type_is_available(path: Path, return_type: str) -> bool:
+    """Conservatively check whether an owned return spelling is usable in a TU."""
+    spelling = base_type(return_type).replace("*", "").strip()
+    if spelling in TYPE_WORDS or spelling in {"M2C_UNK", "UNK_TYPE", "undefined4"}:
+        return True
+    text = COMMENTS.sub("", path.read_text(encoding="utf-8"))
+    return re.search(
+        rf"\b(?:typedef\b[^;]*\b|struct\s+|union\s+|enum\s+){re.escape(spelling)}\b",
+        text,
+    ) is not None
+
+
 def return_register_shape(type_name: str) -> str:
     base = base_type(type_name)
     if base in {"M2C_UNK", "UNK_TYPE"}:
@@ -327,7 +350,7 @@ def definition_in(path: Path) -> Definition | None:
         if depth or not re.match(r"\s*\{", text[cursor:]):
             continue
         return_type = re.sub(
-            r"\b(?:static|inline|__inline)\b", "", candidate.group("return")
+            r"\b(?:asm|static|inline|__inline)\b", "", candidate.group("return")
         )
         parameter_text = text[candidate.end(): cursor - 1]
         unspecified_parameters = not parameter_text.strip()
@@ -382,6 +405,23 @@ def audit(
         definition = definition_in(path)
         if definition is not None:
             definitions[definition.symbol] = definition
+
+    # The fan-out gate must also see legacy file-scope prototypes which omit
+    # `extern`, notably `M2C_UNK fn_XXXXXXXX();`.  A conservative occurrence
+    # index can only hold or raise the gate count.  Exclude the owned definition
+    # TU itself so the measure remains caller/declaration fan-out rather than a
+    # definition count.
+    symbol_translation_units: dict[str, set[str]] = defaultdict(set)
+    legacy_unspecified_symbols: set[str] = set()
+    for path in (item for item in paths if item.suffix == ".c"):
+        relative_path = str(path.relative_to(ROOT))
+        text = COMMENTS.sub("", path.read_text(encoding="utf-8"))
+        legacy_unspecified_symbols.update(LEGACY_UNSPECIFIED_FUNCTION.findall(text))
+        for symbol in set(FUNCTION_NAME.findall(text)):
+            definition = definitions.get(symbol)
+            if definition is not None and definition.path == relative_path:
+                continue
+            symbol_translation_units[symbol].add(relative_path)
 
     retail_evidence = load_retail_evidence(retail_evidence_path)
 
@@ -477,7 +517,9 @@ def audit(
             continue
         variants = Counter(item.signature for item in disagreeing)
         disagreement_units = sorted({item.path for item in disagreeing})
-        translation_units = sorted({item.path for item in declarations})
+        translation_units = sorted(
+            {item.path for item in declarations} | symbol_translation_units[symbol]
+        )
         ground_truth_contradictions.append({
             "symbol": symbol,
             "declarations": len(declarations),
@@ -586,14 +628,57 @@ def audit(
             else:
                 sites = [site for variant in variants for site in variant["sites"]]
             disagreement_units = sorted({site.rsplit(":", 1)[0] for site in sites})
-            translation_units = sorted({
-                item.path for item in grouped[str(entry["symbol"])]
-            })
+            translation_units = sorted(
+                {item.path for item in grouped[str(entry["symbol"])]}
+                | symbol_translation_units[str(entry["symbol"])]
+            )
             entry["affected_translation_units"] = len(translation_units)
             entry["translation_units"] = translation_units
+            entry["has_unspecified_parameters"] = (
+                str(entry["symbol"]) in legacy_unspecified_symbols
+                or any(
+                    item.unspecified_parameters
+                    for item in grouped[str(entry["symbol"])]
+                )
+            )
             entry["disagreement_translation_units"] = len(disagreement_units)
             entry["disagreement_units"] = disagreement_units
             entry["confidence"] = "high" if truth is not None else "low"
+            wrong_return_variants = [
+                variant for variant in variants
+                if truth is not None
+                and variant["abi"]["return"] != truth["return_shape"]
+            ]
+            entry["return_only_parameter_abi_matches"] = (
+                truth is not None
+                and "parameter_shapes" in truth
+                and all(
+                    variant["abi"]["parameters"] == truth["parameter_shapes"]
+                    and variant["abi"]["variadic"] == truth["variadic"]
+                    and variant["abi"]["unspecified_parameters"]
+                    == truth["unspecified_parameters"]
+                    for variant in wrong_return_variants
+                )
+            )
+            entry["callback_or_caller_cast_units"] = sorted({
+                site.rsplit(":", 1)[0]
+                for variant in wrong_return_variants
+                for site in variant["sites"]
+                if has_bare_symbol_reference(
+                    ROOT / site.rsplit(":", 1)[0], str(entry["symbol"])
+                )
+            })
+            entry["return_type_unavailable_units"] = (
+                sorted({
+                    site.rsplit(":", 1)[0]
+                    for variant in wrong_return_variants
+                    for site in variant["sites"]
+                    if not return_type_is_available(
+                        ROOT / site.rsplit(":", 1)[0],
+                        str(truth["return_type"]),
+                    )
+                }) if truth is not None and "return_type" in truth else []
+            )
             entry["evidence"] = (
                 [truth]
                 if truth is not None
@@ -629,25 +714,50 @@ def audit(
                     reason = "Low confidence: declarations alone do not establish the callee's true signature."
                 elif len(translation_units) > 12:
                     reason = "High-confidence evidence exists, but the contradiction affects more than 12 translation units."
+                elif entry["has_unspecified_parameters"]:
+                    reason = (
+                        "Deferred because at least one declaring translation unit uses "
+                        "an unspecified/K&R prototype."
+                    )
+                elif not entry["return_only_parameter_abi_matches"]:
+                    reason = (
+                        "Deferred because at least one wrong-return declaration also "
+                        "disagrees with the grounded parameter ABI; a return-only edit "
+                        "would not produce a source-complete signature correction."
+                    )
+                elif entry["callback_or_caller_cast_units"]:
+                    reason = (
+                        "Deferred because at least one wrong-return declaration is used "
+                        "as a callback value or caller-side cast target; the broad APPLY "
+                        "trial reproduced incompatible function-pointer diagnostics."
+                    )
+                elif entry["return_type_unavailable_units"]:
+                    reason = (
+                        "Deferred because the grounded return-type spelling is unavailable "
+                        "in at least one declaring translation unit; the broad APPLY trial "
+                        "reproduced unknown-type compiler diagnostics."
+                    )
                 elif category != "return_register_contradictions":
                     reason = "Deferred because this session is scoped to return-register contradictions."
                 else:
+                    entry["disposition"] = "pending"
                     reason = (
                         "High-confidence return-register contradiction within the "
-                        "12-translation-unit bound. It remains eligible, but was deferred "
-                        "because the bounded consolidation session could rebuild and verify "
-                        "only the explicitly selected correction before its deadline."
+                        "12-translation-unit bound. This is eligible unstarted work, not a "
+                        "steady-state deferral."
                     )
                 entry["disposition_reason"] = reason
     categorized_dispositions = {
-        (str(entry["symbol"]), str(entry["disposition"])): str(entry["disposition_reason"])
+        str(entry["symbol"]): (
+            str(entry["disposition"]), str(entry["disposition_reason"])
+        )
         for entries in categories.values()
         for entry in entries
     }
     for entry in ground_truth_contradictions:
         symbol = str(entry["symbol"])
-        reason = categorized_dispositions.get((symbol, "deferred"))
-        if reason is None:
+        categorized = categorized_dispositions.get(symbol)
+        if categorized is None:
             affected = int(entry["affected_translation_units"])
             if affected > 12:
                 reason = (
@@ -662,6 +772,8 @@ def audit(
                     "could rebuild and verify only the explicitly selected correction "
                     "before its deadline."
                 )
+        else:
+            entry["disposition"], reason = categorized
         entry["disposition_reason"] = reason
     applied_corrections = []
     for symbol in sorted(applied_symbols):
@@ -675,13 +787,34 @@ def audit(
                 f"{symbol}: applied correction lacks explicit corrected translation units"
             )
         declaring_units = {item.path for item in declarations}
-        unknown_units = sorted(set(edited_translation_units) - declaring_units)
+        translation_units = sorted(
+            declaring_units | symbol_translation_units[symbol]
+        )
+        unspecified_parameter_units = sorted({
+            item.path for item in declarations if item.unspecified_parameters
+        } | ({
+            path for path in translation_units
+            if symbol in legacy_unspecified_symbols
+            and re.search(
+                rf"(?m)^[ \t]*(?:M2C_UNK|UNK_TYPE)[ \t]+{re.escape(symbol)}"
+                rf"[ \t]*\([ \t]*\)[ \t]*;",
+                COMMENTS.sub("", (ROOT / path).read_text(encoding="utf-8")),
+            )
+        }))
+        edited_unspecified_units = sorted(
+            set(edited_translation_units) & set(unspecified_parameter_units)
+        )
+        if edited_unspecified_units:
+            raise ValueError(
+                f"{symbol}: applied correction edits unspecified/K&R prototype "
+                f"units {edited_unspecified_units}"
+            )
+        unknown_units = sorted(set(edited_translation_units) - set(translation_units))
         if unknown_units:
             raise ValueError(
                 f"{symbol}: corrected translation units do not declare the symbol "
                 f"{unknown_units}"
             )
-        translation_units = sorted(declaring_units)
         if len(translation_units) > 12:
             raise ValueError(
                 f"{symbol}: applied correction exceeds the 12-translation-unit "
@@ -692,6 +825,13 @@ def audit(
             "affected_translation_units": len(translation_units),
             "translation_units": translation_units,
             "edited_translation_units": edited_translation_units,
+            "has_unspecified_parameters": bool(unspecified_parameter_units),
+            "unspecified_parameter_units": unspecified_parameter_units,
+            "edited_translation_units_have_unspecified_parameters": False,
+            "prototype_gate_basis": (
+                "The unspecified/K&R gate is enforced on edited declarations. "
+                "Unedited occurrence-only translation units remain recorded in fan-out."
+            ),
             "resulting_signatures": sorted({item.signature for item in declarations}),
             "confidence": "high" if definition is not None else "low",
             "evidence": ({
