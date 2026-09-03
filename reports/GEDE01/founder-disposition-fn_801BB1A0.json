@@ -1,0 +1,46 @@
+{
+  "disposition": "advance",
+  "approved_at": "2026-09-03T03:23:00.090Z",
+  "exhausted_symbol": "fn_801BB1A0",
+  "retained_status": "NonMatching",
+  "retained_match_percent": 96.78125,
+  "matched_byte_credit": 0,
+  "retail_bytes": 512,
+  "next_target": "0x801BB3A0",
+  "canonical_counts_before": {
+    "matching_objects": 4517,
+    "matching_functions": 4283,
+    "matching_code_bytes": 651068,
+    "linked_code_bytes": 650944
+  },
+  "canonical_counts_after": {
+    "matching_objects": 4517,
+    "matching_functions": 4283,
+    "matching_code_bytes": 651068,
+    "linked_code_bytes": 650944
+  },
+  "retail_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "source_changed": false,
+  "verification": {
+    "build_command": ".tools/bin/ninja build/GEDE01/main.dol",
+    "build_result": "success: 568 of 568 targets completed",
+    "canonical_report_command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json --format json-pretty",
+    "canonical_report_result": "matching_objects=4517 total_objects=6089 matching_functions=4283 total_functions=8216 matching_code_bytes=651068 total_code_bytes=2300692 linked_code_bytes=650944",
+    "relocation_strict_report_command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/founder-disposition-reloc-strict.json --format json -c function_reloc_diffs=name_address",
+    "relocation_strict_report_result": "matching_objects=4517 matching_functions=4278 matching_code_bytes=649384 linked_code_bytes=650944",
+    "canonical_function_result": "retail_size=512 generated_size=512 match_percent=96.78125",
+    "relocation_strict_function_result": "retail_size=512 generated_size=512 match_percent=96.78125",
+    "dol_command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol and cmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "dol_result": "both SHA-1 values ea24b6af954876ce072562ff39cdb4c81d32be1f; cmp exit 0"
+  },
+  "evidence": [
+    "reports/GEDE01/hard-function-backlog.json",
+    "reports/GEDE01/frontier-801BB1A0-801BB3A0-session-1674.json",
+    "reports/GEDE01/objdiff-game_fn_801BB1A0-session-1674.json",
+    "reports/GEDE01/objdiff-game_fn_801BB1A0-session-1674-reloc-strict.json",
+    "reports/GEDE01/session-1674-verification.json",
+    "reports/GEDE01/objdiff-game_fn_801BB1A0-founder-disposition.json",
+    "reports/GEDE01/objdiff-game_fn_801BB1A0-founder-disposition-reloc-strict.json",
+    "reports/GEDE01/founder-disposition-reloc-strict.json"
+  ]
+}

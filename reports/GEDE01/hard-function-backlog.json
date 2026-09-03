@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-09-03T03:23:00.090Z",
+  "entries": [
+    {
+      "symbol": "fn_801BB1A0",
+      "range_start": "0x801BB1A0",
+      "range_end": "0x801BB3A0",
+      "retail_bytes": 512,
+      "status": "NonMatching",
+      "matched_byte_credit": 0,
+      "best_canonical_match_percent": 96.78125,
+      "best_relocation_strict_match_percent": 96.78125,
+      "compiler": "GC/1.2.5n",
+      "compiler_flags": [
+        "-Cpp_exceptions on"
+      ],
+      "retry_disposition": "exhausted after retry 3 of 3",
+      "blocker": "GC/1.2.5n assigns the table base, index, byte offset, state pointer and selected slot to r31, r30, r29, r28 and r27 while retail uses r30, r29, r28, r27 and r31. The retained C also emits addi-before-add for the state address where retail emits add, lbz at +8, then addi.",
+      "retained_source": "src/game/game_fn_801BB1A0.c",
+      "canonical_evidence": "reports/GEDE01/objdiff-game_fn_801BB1A0-session-1674.json",
+      "relocation_strict_evidence": "reports/GEDE01/objdiff-game_fn_801BB1A0-session-1674-reloc-strict.json",
+      "verification_evidence": "reports/GEDE01/session-1674-verification.json",
+      "founder_disposition": "Approved 2026-09-03: preserve the best honest-C candidate with zero matched-byte credit, defer further matching work to this backlog, and advance the production frontier to 0x801BB3A0."
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "session_id": "session-1672-remediation-1",
+  "scope": "Correct session-1672 reporting and handoff only; no frontier reconstruction or additional TU registration.",
+  "build": {
+    "command": ".tools/bin/ninja",
+    "raw_output_excerpt": "[569/571] DOL build/GEDE01/main.dol\n[570/571] CHECK config/GEDE01/build.sha1\nbuild/GEDE01/main.dol: OK\n[571/571] PROGRESS"
+  },
+  "dol_hash": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol"
+  },
+  "canonical_counters_and_delta": {
+    "command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report.json && { git show 070c5d173^:eternal-darkness-decomp/reports/GEDE01/progress.json | jq -r '\"before_matching_code_bytes=\\(.matching_code_bytes) before_matching_data_bytes=\\(.matching_data_bytes)\"'; jq -r '\"after_matching_code_bytes=\\(.matching_code_bytes) after_matching_data_bytes=\\(.matching_data_bytes)\"' reports/GEDE01/progress.json; }",
+    "raw_output": "matching_objects=4517 total_objects=6089 matching_functions=4283 total_functions=8216 matching_code_bytes=651068 total_code_bytes=2300692 matching_data_bytes=35402 total_data_bytes=4305642 linked_code_bytes=650944 linked_data_bytes=35258\nbefore_matching_code_bytes=651068 before_matching_data_bytes=35382\nafter_matching_code_bytes=651068 after_matching_data_bytes=35402"
+  },
+  "assigned_object_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BB1A0 fn_801BB1A0 -o reports/GEDE01/objdiff-game_fn_801BB1A0-session-1672.json --format json-pretty -c function_reloc_diffs=name_address && jq -r '(.left.symbols[] | select(.name==\"fn_801BB1A0\") | \"retail_symbol_bytes=\\(.size) retail_instructions=\\([.instructions[] | select(.instruction != null)] | length) retail_relocations=\\([.instructions[] | .instruction? | select(.relocation != null)] | length)\"), (.right.symbols[] | select(.name==\"fn_801BB1A0\") | \"generated_symbol_bytes=\\(.size) generated_instructions=\\([.instructions[] | select(.instruction != null)] | length) generated_relocations=\\([.instructions[] | .instruction? | select(.relocation != null)] | length) match_percent=\\(.match_percent)\"), (.left.sections[] | select(.name==\"extab\") | \"extab_bytes=\\(.size) extab_match_percent=\\(.match_percent)\"), (.left.sections[] | select(.name==\"extabindex\") | \"extabindex_bytes=\\(.size) extabindex_match_percent=\\(.match_percent)\")' reports/GEDE01/objdiff-game_fn_801BB1A0-session-1672.json",
+    "raw_output": "INFO Writing to reports/GEDE01/objdiff-game_fn_801BB1A0-session-1672.json\nretail_symbol_bytes=512 retail_instructions=128 retail_relocations=43\ngenerated_symbol_bytes=512 generated_instructions=128 generated_relocations=42 match_percent=96.78125\nextab_bytes=8 extab_match_percent=100.0\nextabindex_bytes=12 extabindex_match_percent=100.0"
+  },
+  "successor_experiment_objdiff": {
+    "command": "build/tools/objdiff-cli diff -1 build/GEDE01/obj/game/game_fn_801BB3A0.o -2 build/GEDE01/remediation-1672-compile/remediation-1672-game_fn_801BB3A0.o fn_801BB3A0 -o build/GEDE01/remediation-1672-fn_801BB3A0.json --format json-pretty -c function_reloc_diffs=name_address && jq -r '(.left.symbols[] | select(.name==\"fn_801BB3A0\") | \"retail_symbol_bytes=\\(.size) retail_instructions=\\([.instructions[] | select(.instruction != null)] | length) retail_relocations=\\([.instructions[] | .instruction? | select(.relocation != null)] | length)\"), (.right.symbols[] | select(.name==\"fn_801BB3A0\") | \"generated_symbol_bytes=\\(.size) generated_instructions=\\([.instructions[] | select(.instruction != null)] | length) generated_relocations=\\([.instructions[] | .instruction? | select(.relocation != null)] | length) match_percent=\\(.match_percent)\"), (.left.sections[] | select(.name==\"extab\") | \"extab_bytes=\\(.size) extab_match_percent=\\(.match_percent)\"), (.left.sections[] | select(.name==\"extabindex\") | \"extabindex_bytes=\\(.size) extabindex_match_percent=\\(.match_percent)\")' build/GEDE01/remediation-1672-fn_801BB3A0.json",
+    "raw_output": "INFO Writing to build/GEDE01/remediation-1672-fn_801BB3A0.json\nretail_symbol_bytes=560 retail_instructions=140 retail_relocations=51\ngenerated_symbol_bytes=576 generated_instructions=144 generated_relocations=47 match_percent=87.47857\nextab_bytes=8 extab_match_percent=87.5\nextabindex_bytes=12 extabindex_match_percent=91.66667"
+  },
+  "successor_source_recovery": {
+    "command": "diff -u <(sed -E 's@/\\* [0-9A-F]+ [0-9A-F]+  @@' build/GEDE01/remediation-1672-disasm.s | sed -E 's/game_fn_801BB3A0|\"@[0-9]+\"/SOURCE/g') <(sed -E 's@/\\* [0-9A-F]+ [0-9A-F]+  @@' build/GEDE01/remediation-1672-reconstructed.s | sed -E 's/remediation-1672-game_fn_801BB3A0|\"@[0-9]+\"/SOURCE/g'); echo normalized_assembly_diff_exit=$?",
+    "raw_output": "normalized_assembly_diff_exit=0",
+    "preserved_at": "reports/GEDE01/frontier-801BB1A0-801BB3A0-session-1672.json successor_experiment.source_lines"
+  },
+  "registration_check": {
+    "command": "git diff --exit-code -- config/GEDE01/splits.txt configure.py; echo registration_diff_exit=$? && rg -n 'Object\\(NonMatching, \"game/game_fn_801BB1A0.c\"|game/game_fn_801BB1A0.c:' configure.py config/GEDE01/splits.txt",
+    "raw_output": "registration_diff_exit=0\nconfig/GEDE01/splits.txt:16628:game/game_fn_801BB1A0.c:\nconfigure.py:9854:            Object(NonMatching, \"game/game_fn_801BB1A0.c\", mw_version=\"GC/1.2.5n\", extra_cflags=[\"-Cpp_exceptions on\"]),"
+  },
+  "consecutive_blocker_check": {
+    "command": "jq -r '\"session-1671 matched_code_bytes=\\(.matched_bytes) next_target=\\(.next_target) blocker=\\(.fallback.blocker // .assigned_attempt.blocker // \"unverified\")\"' reports/GEDE01/frontier-801BACE8-801BB1A0-session-1671.json && jq -r '\"session-1672 matched_code_bytes=\\(.matched_code_bytes) next_target=\\(.next_target) blocker=\\(.assigned_attempt.blocker)\"' reports/GEDE01/frontier-801BB1A0-801BB3A0-session-1672.json",
+    "raw_output": "session-1671 matched_code_bytes=0 next_target=0x801BB1A0 blocker=GC/1.2.5n frame and r26-r31 live-range allocation leave one extra instruction and a four-byte-high extabindex length word.\nsession-1672 matched_code_bytes=0 next_target=0x801BB3A0 blocker=GC/1.2.5n assigns the traversal base/index/offset/state/selected-slot live ranges to r31/r30/r29/r28/r27 while retail uses r30/r29/r28/r27/r31; retail also preserves separate add-plus-lbz pointer formation, producing one additional relocation annotation.",
+    "disposition": "The repeated live-range blocker is documented debt. Another declaration-order-only retry is not the next gate."
+  },
+  "handoff": {
+    "next_target": "0x801BB3A0",
+    "assigned_debt": "fn_801BB1A0 remains registered NonMatching debt; declaration-order-only retry is exhausted.",
+    "successor_status": "fn_801BB3A0 remains unregistered; its compiling experimental source is preserved inline."
+  }
+}

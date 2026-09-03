@@ -1,0 +1,80 @@
+{
+  "session_id": "session-1674",
+  "range_start": "0x801BB1A0",
+  "range_end": "0x801BB3A0",
+  "next_target": "0x801BB1A0",
+  "retry": "3 of 3",
+  "retail_bytes_accounted": 512,
+  "matched_code_bytes": 0,
+  "new_nonmatching_bytes": 0,
+  "existing_nonmatching_bytes": 512,
+  "new_nonmatching_functions": 0,
+  "matching_functions_before": 4283,
+  "matching_functions_after": 4283,
+  "matching_objects_before": 4517,
+  "matching_objects_after": 4517,
+  "matching_code_bytes_before": 651068,
+  "matching_code_bytes_after": 651068,
+  "assigned_attempt": {
+    "symbol": "fn_801BB1A0",
+    "status": "NonMatching",
+    "retail_bytes": 512,
+    "generated_bytes": 512,
+    "retail_instructions": 128,
+    "generated_instructions": 128,
+    "canonical_match_percent": 96.78125,
+    "relocation_strict_match_percent": 96.78125,
+    "blocker": "GC/1.2.5n still colors the table base, index, byte offset, state pointer and selected slot as r31, r30, r29, r28 and r27 while retail uses r30, r29, r28, r27 and r31. The retained source also emits addi-before-add for the state address where retail emits add, lbz at +8, then addi.",
+    "experiments": [
+      {
+        "lever": "Move selected-slot declaration after the state pointer to alter interference priority",
+        "generated_bytes": 512,
+        "match_percent": 96.3125,
+        "result": "Changed coalescing but moved the incoming id and return-result colors away from retail."
+      },
+      {
+        "lever": "Define the selected-slot pointer before the state test while keeping state derived independently",
+        "generated_bytes": 508,
+        "match_percent": 96.16406,
+        "result": "MWCC merged the selected-slot and state pointers and removed one address-forming instruction."
+      },
+      {
+        "lever": "Use a distinct offset scalar instead of overwriting the identifier",
+        "generated_bytes": 512,
+        "match_percent": 96.375,
+        "result": "Introduced an r26 live range and increased the register-allocation divergence."
+      },
+      {
+        "lever": "Force state-pointer and return-result storage to overlap through a union",
+        "generated_bytes": 548,
+        "match_percent": 82.83594,
+        "result": "MWCC materialized the union in the stack frame, adding spill traffic."
+      },
+      {
+        "lever": "Represent the mutually exclusive state pointer and return result as one 32-bit scalar",
+        "generated_bytes": 512,
+        "match_percent": 95.453125,
+        "result": "Kept exact size but selected a worse id/result/slot coloring."
+      }
+    ],
+    "disposition": "Retry 3 is exhausted without a 100% match. The committed 96.78125% source remains the best reproducible candidate. No matched-byte credit is claimed and fn_801BB3A0 remains deferred pending chain-owner disposition."
+  },
+  "canonical": {
+    "function_report": "reports/GEDE01/objdiff-game_fn_801BB1A0-session-1674.json",
+    "aggregate_command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json --format json-pretty",
+    "raw_output": "matching_objects=4517 total_objects=6089 matching_functions=4283 total_functions=8216 matching_code_bytes=651068 total_code_bytes=2300692 linked_code_bytes=650944 matching_data_bytes=35402 total_data_bytes=4305642 linked_data_bytes=35258"
+  },
+  "relocation_strict": {
+    "function_report": "reports/GEDE01/objdiff-game_fn_801BB1A0-session-1674-reloc-strict.json",
+    "aggregate_report": "reports/GEDE01/session-1674-reloc-strict.json",
+    "aggregate_command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1674-reloc-strict.json --format json -c function_reloc_diffs=name_address",
+    "raw_output": "matching_objects=4517 matching_functions=4278 matching_code_bytes=649384 linked_code_bytes=650944 matching_data_bytes=35402 linked_data_bytes=35258; fn_801BB1A0=96.78125%"
+  },
+  "dol_verification": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol && cmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol\ncmp_exit=0"
+  },
+  "assembly_added": 0,
+  "shared_reconstructions": 0,
+  "source_disposition": "Restored byte-for-byte to the committed 96.78125% candidate after all experiments."
+}

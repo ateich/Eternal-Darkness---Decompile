@@ -1,0 +1,40 @@
+{
+  "session_id": "session-1674",
+  "assigned_symbol": "fn_801BB1A0",
+  "source_state": {
+    "command": "git diff -- src/game/game_fn_801BB1A0.c",
+    "raw_output": "",
+    "conclusion": "The final source is byte-for-byte identical to the committed 96.78125% candidate."
+  },
+  "build": {
+    "command": "touch src/game/game_fn_801BB1A0.c && .tools/bin/ninja build/GEDE01/main.dol",
+    "result": "success",
+    "final_output": "[568/568] DOL build/GEDE01/main.dol"
+  },
+  "direct_objdiff": {
+    "canonical_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BB1A0 fn_801BB1A0 -o reports/GEDE01/objdiff-game_fn_801BB1A0-session-1674.json --format json-pretty",
+    "relocation_strict_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BB1A0 fn_801BB1A0 -o reports/GEDE01/objdiff-game_fn_801BB1A0-session-1674-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "raw_output": "canonical retail_size=512 generated_size=512 retail_instructions=128 generated_instructions=128 match_percent=96.78125\nrelocation_strict retail_size=512 generated_size=512 retail_instructions=128 generated_instructions=128 match_percent=96.78125",
+    "diff_summary": "25 argument mismatches, one insertion and one deletion; the changes are register identities plus state-pointer address formation."
+  },
+  "canonical_aggregate": {
+    "command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json --format json-pretty",
+    "raw_output": "matching_objects=4517 total_objects=6089 matching_functions=4283 total_functions=8216 matching_code_bytes=651068 total_code_bytes=2300692 linked_code_bytes=650944 matching_data_bytes=35402 total_data_bytes=4305642 linked_data_bytes=35258"
+  },
+  "relocation_strict_aggregate": {
+    "command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1674-reloc-strict.json --format json -c function_reloc_diffs=name_address",
+    "raw_output": "matching_objects=4517 matching_functions=4278 matching_code_bytes=649384 linked_code_bytes=650944 matching_data_bytes=35402 linked_data_bytes=35258"
+  },
+  "dol_gate": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol && cmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol\ncmp_exit=0"
+  },
+  "coverage_disposition": {
+    "matched_code_bytes_added": 0,
+    "matched_functions_added": 0,
+    "matched_objects_added": 0,
+    "next_target": "0x801BB1A0",
+    "successor_deferred": "0x801BB3A0",
+    "reason": "Retry 3 exhausted without fn_801BB1A0 reaching 100%; chain-owner disposition is required before advancing."
+  }
+}

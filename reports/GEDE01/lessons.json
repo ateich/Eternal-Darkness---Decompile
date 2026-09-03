@@ -2,10 +2,10 @@
   "schema_version": 2,
   "scope": "Distinct MWCC code-generation behaviors documented in reports/GEDE01/progress.json open_items and docs/matching.md",
   "source_snapshot": {
-    "repository_revision": "59d10d2b4725eec9ecba305c222bfcedeedd2f80",
-    "next_target": "0x801B46C8",
+    "repository_revision": "5e7240cb7c4f7eea64cc828e893059b7d0637fa0",
+    "next_target": "0x801BACE8",
     "reports/GEDE01/progress.json": {
-      "sha256": "7a8f8b6321bcb029c303aaa4c85b2535d015bc572f99d4353ccb25a385ada726",
+      "sha256": "fcf76c8177450f0814dc8332afc8c1ff7bf44e7375f9bf3ac52a86d362b9db08",
       "scope": "whole_file"
     },
     "docs/matching.md": {
@@ -15,16 +15,16 @@
   "consolidation_audit": {
     "original_consolidation_commit": "86d029104eb5ed6ad01b6af03963ea2cf924d2a4",
     "comparison_base": "b6f963fbb8643a04ab4358a988239961639dd07e",
-    "latest_consolidation_session": "session-1630",
-    "scope": "Refreshed the catalog through session-1629 without changing generated progress accounting or frontier prose. Added only code-generation behaviors stated in the intervening open_items; incomplete source recovery and verification-only facts were not promoted into lessons.",
-    "total_lessons": 529,
+    "latest_consolidation_session": "session-1670",
+    "scope": "Refreshed the catalog through session-1669 without changing generated progress accounting or frontier prose. Added only categorized MWCC code-generation behaviors stated in the intervening open_items; incomplete recovery and verification-only facts were not promoted into lessons.",
+    "total_lessons": 540,
     "measurement_command": "jq -r '\"lessons=\" + ((.lessons|length)|tostring) + \" out_of_taxonomy=\" + ((.out_of_taxonomy|length)|tostring) + \" total_catalog_records=\" + (((.lessons|length)+(.out_of_taxonomy|length))|tostring)' reports/GEDE01/lessons.json",
-    "measurement_raw_output": "lessons=529 out_of_taxonomy=16 total_catalog_records=545",
-    "session_parent_commit": "59d10d2b4725eec9ecba305c222bfcedeedd2f80",
-    "session_delta_measurement_command": "jq -s -r '.[0] as $parent | .[1] as $current | \"new_lessons=\\(($current.lessons|length)-($parent.lessons|length)) new_out_of_taxonomy=\\(($current.out_of_taxonomy|length)-($parent.out_of_taxonomy|length)) total_new_records=\\((($current.lessons|length)+($current.out_of_taxonomy|length))-(($parent.lessons|length)+($parent.out_of_taxonomy|length)))\"' <(git show 59d10d2b4725eec9ecba305c222bfcedeedd2f80:eternal-darkness-decomp/reports/GEDE01/lessons.json) reports/GEDE01/lessons.json",
-    "session_delta_measurement_raw_output": "new_lessons=23 new_out_of_taxonomy=3 total_new_records=26",
+    "measurement_raw_output": "lessons=540 out_of_taxonomy=19 total_catalog_records=559",
+    "session_parent_commit": "5e7240cb7c4f7eea64cc828e893059b7d0637fa0",
+    "session_delta_measurement_command": "jq -s -r '.[0] as $parent | .[1] as $current | \"new_lessons=\\(($current.lessons|length)-($parent.lessons|length)) new_out_of_taxonomy=\\(($current.out_of_taxonomy|length)-($parent.out_of_taxonomy|length)) total_new_records=\\((($current.lessons|length)+($current.out_of_taxonomy|length))-(($parent.lessons|length)+($parent.out_of_taxonomy|length)))\"' <(git show 5e7240cb7c4f7eea64cc828e893059b7d0637fa0:eternal-darkness-decomp/reports/GEDE01/lessons.json) reports/GEDE01/lessons.json",
+    "session_delta_measurement_raw_output": "new_lessons=11 new_out_of_taxonomy=3 total_new_records=14",
     "delta_measurement_command": "jq -s -r '.[0] as $base | .[1] as $current | \"new_lessons=\\(($current.lessons|length)-($base.lessons|length)) new_out_of_taxonomy=\\(($current.out_of_taxonomy|length)-($base.out_of_taxonomy|length)) total_new_records=\\((($current.lessons|length)+($current.out_of_taxonomy|length))-(($base.lessons|length)+($base.out_of_taxonomy|length)))\"' <(git show b6f963fbb:eternal-darkness-decomp/reports/GEDE01/lessons.json) reports/GEDE01/lessons.json",
-    "delta_measurement_raw_output": "new_lessons=96 new_out_of_taxonomy=14 total_new_records=110",
+    "delta_measurement_raw_output": "new_lessons=107 new_out_of_taxonomy=17 total_new_records=124",
     "added_out_of_taxonomy_categories": ["instruction-selection-lowering", "common-subexpression-elimination", "loop-unrolling", "dead-loop-elimination", "relocation-bearing-instruction-operands", "relocation-target-identity"]
   },
   "lessons": [
@@ -3733,6 +3733,83 @@
       "precise_divergence": "Canonical GC/1.2.5n schedules decoder-bound loads after current-record loads, opposite the retail order.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1629"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_801B5C14", "fn_801B5E9C", "fn_801B6270", "fn_801B64D0", "fn_801B6768", "fn_801B6F1C", "fn_801B8164", "fn_801B86C0"],
+      "precise_divergence": "Canonical GC/1.2.5n chooses different long-lived GPR or FPR identities from retail across voice-scan, recursive-dispatch, linked-voice, pitch, pan, volume, ramp-loop, and unrolled-initialization paths.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1634 through 1641, 1648, and 1651"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_801B5C14", "fn_801B5E9C", "fn_801B6270", "fn_801B64D0", "fn_801B6768", "fn_801B6F1C"],
+      "precise_divergence": "Canonical GC/1.2.5n orders branches, table selection, recursive dispatch, linked-voice cleanup, loads, stores, and float conversions differently from retail in these recovered audio paths.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1634 through 1641"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_801B5B20", "fn_801B775C", "fn_801B7A7C", "fn_801B9078", "fn_801B9220"],
+      "precise_divergence": "Canonical GC/1.2.5n selects different temporary or retained registers around unsigned division, bucket masks, ramp loops, 64-bit flags, and the byte-index versus array-offset pair.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1633, 1642, 1644, 1655, and 1656"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_801B6270", "fn_801B64D0", "fn_801B7A7C", "fn_801B7DC8", "fn_801B8164", "fn_801B86C0"],
+      "precise_divergence": "Canonical GC/1.2.5n selects different stack layout, frame slack, or a frame 16 bytes larger than retail, moving the saved-register base or unwind shape.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1636, 1637, 1644, 1645 remediation 1, 1648, and 1651"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_801B7E84", "fn_801B7F6C", "fn_801B8E88", "fn_801B8F84", "fn_801B8FE4"],
+      "precise_divergence": "Canonical GC/1.2.5n reserves a different outgoing-argument area; for the later wrappers it uses 40 bytes where retail uses 32, changing prologue, epilogue, and saved-register offsets.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1646, 1647, 1654, and 1655"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_801B7A7C", "fn_801B8164"],
+      "precise_divergence": "Canonical GC/1.2.5n schedules fn_801B7A7C's ramp loops and callback-table address formation differently, and folds fn_801B8164's common ramp update across switch cases where retail duplicates three separately scheduled loop bodies.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1644 and 1648"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_801B9078"],
+      "precise_divergence": "Canonical GC/1.2.5n schedules the 64-bit record-flag update differently from retail despite matching the surrounding switch.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1655"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_801B9E7C", "fn_801BA15C", "fn_801BA2A4", "fn_801BA708", "fn_801BA94C", "fn_801BACE8", "fn_801BAF90"],
+      "precise_divergence": "Canonical GC/1.2.5n chooses different long-lived saved-register identities or equivalent address temporaries across duplicated slot lookups, unrolled searches, slot copies, stream updates, and parameter computation.",
+      "workaround": "For fn_801BA708, direct status and cache accesses through lbl_8061AE48 retain additional address formation and explicit halfword assignments restore retail text size; the remaining allocation divergence has no known workaround.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1661 through 1669"]
+    },
+    {
+      "category": "stack-slot-reuse",
+      "functions": ["fn_801BA94C", "fn_801BACE8"],
+      "precise_divergence": "Canonical GC/1.2.5n selects a 96-byte frame instead of retail's 88-byte frame for fn_801BA94C; fn_801BACE8 variants change saved-register frame shape and thereby alter extab or the extabindex range word.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1667 through 1669"]
+    },
+    {
+      "category": "float-constant-placement",
+      "functions": ["fn_801BACE8"],
+      "precise_divergence": "Canonical GC/1.2.5n emits compiler-local float constants instead of retail relocations to lbl_80650F10 and lbl_80650F18; lbl_80650F18 is documented as retail's 4096.0f constant.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1668 and 1669"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_801B9E7C", "fn_801BA2A4"],
+      "precise_divergence": "Canonical GC/1.2.5n forms the duplicated-slot branches differently in fn_801B9E7C and places fn_801BA2A4's epilogue differently despite closely aligned recovered control flow.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1661 and 1663"]
     }
   ],
   "out_of_taxonomy": [
@@ -3867,6 +3944,30 @@
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1628"],
       "taxonomy_note": "Preserved here because loop unrolling is not inlining."
+    },
+    {
+      "category": "loop-unrolling",
+      "functions": ["fn_801B58F0", "fn_801B86C0"],
+      "precise_divergence": "Canonical GC/1.2.5n retains compact counted loops where retail uses paired unrolled work-item and free-list initialization or duplicated heavily unrolled initialization stores.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1633 and 1651"],
+      "taxonomy_note": "Preserved here because loop unrolling is not inlining."
+    },
+    {
+      "category": "instruction-selection-lowering",
+      "functions": ["fn_801B9350"],
+      "precise_divergence": "Standalone GC/1.2.5n emits one additional terminal blr after an otherwise aligned 200-byte retail instruction stream.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1657"],
+      "taxonomy_note": "Preserved here because extra terminal-return emission is instruction selection, not instruction scheduling."
+    },
+    {
+      "category": "instruction-selection-lowering",
+      "functions": ["fn_801BACE8", "fn_801BAF90"],
+      "precise_divergence": "Canonical GC/1.2.5n calls __cvt_fp2unsigned for fn_801BACE8's computed unsigned parameter and forms fn_801BAF90's recovered state clear differently from retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1668"],
+      "taxonomy_note": "Preserved here because conversion and state-clear lowering are instruction selection, not instruction scheduling."
     }
   ]
 }

@@ -1,0 +1,50 @@
+{
+  "session_id": "session-1673",
+  "range_start": "0x801BB1A0",
+  "range_end": "0x801BB3A0",
+  "next_target": "0x801BB1A0",
+  "retry": "2 of 3",
+  "retail_bytes_accounted": 512,
+  "matched_code_bytes": 0,
+  "new_nonmatching_bytes": 0,
+  "existing_nonmatching_bytes": 512,
+  "new_nonmatching_functions": 0,
+  "matching_functions_before": 4283,
+  "matching_functions_after": 4283,
+  "matching_objects_before": 4517,
+  "matching_objects_after": 4517,
+  "matching_code_bytes_before": 651068,
+  "matching_code_bytes_after": 651068,
+  "assigned_attempt": {
+    "symbol": "fn_801BB1A0",
+    "status": "NonMatching",
+    "retail_bytes": 512,
+    "generated_bytes": 512,
+    "retail_instructions": 128,
+    "generated_instructions": 128,
+    "retail_relocations": 43,
+    "generated_relocations": 42,
+    "match_percent": 96.78125,
+    "blocker": "Canonical GC/1.2.5n keeps the table base, index, byte offset, state pointer and selected slot in r31, r30, r29, r28 and r27 while retail uses r30, r29, r28, r27 and r31. The retained C also forms state as addi-before-add, whereas retail forms the slot base with add, loads state at +8 and then advances the state pointer with addi.",
+    "experiments": [
+      "The boundary-width audit retained u32 for the identifier and index: retail uses cmplw for identifiers and the unsigned addis/cmplwi -1 test, so narrowing to u8 or u16 would be incorrect.",
+      "Cross-TU declarations in game_fn_801AD95C.c and game_fn_801AE5DC.c disagree with the owning u32 signature, but the calls pass the same 32-bit register value and do not alter this function's internal allocation.",
+      "Deriving state from a selected StreamSlot first produced distinct slot and state pointers but shortened generated text to 508 bytes and scored 96.203125%.",
+      "Forming the unadvanced slot base and then incrementing the state pointer expanded generated text to 528 bytes and scored 89.85156%.",
+      "A scoped byte state-value temporary expanded generated text to 528 bytes and scored 89.875%."
+    ],
+    "disposition": "The best committed honest-C candidate remains unchanged. Retry 2 matched no function and earned zero bytes; retry 3 must stay on fn_801BB1A0 and needs a different live-range lever. fn_801BB3A0 remains deferred."
+  },
+  "canonical": {
+    "command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json",
+    "raw_output": "matching_objects=4517 matching_functions=4283 matching_code_bytes=651068 linked_code_bytes=650944 matching_data_bytes=35402 linked_data_bytes=35258"
+  },
+  "relocation_strict": {
+    "command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1673-reloc-strict.json -c function_reloc_diffs=name_address",
+    "raw_output": "matching_objects=4517 matching_functions=4278 matching_code_bytes=649384 linked_code_bytes=650944"
+  },
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "assembly_added": 0,
+  "shared_reconstructions": 0,
+  "worktree_source_change": "none; discarded experiments were restored to the committed best candidate"
+}

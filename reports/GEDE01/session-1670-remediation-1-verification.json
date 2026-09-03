@@ -1,0 +1,62 @@
+{
+  "session": "session-1670-remediation-1",
+  "scope": "Review remediation only. Removed the resolved fn_801BD1EC declaration defect from the MWCC behavior catalog; no source, build configuration, progress prose, or frontier state was changed.",
+  "catalog_correction": {
+    "disposition": "The calling-convention record was removed because it described a resolved decomp-side declaration defect and incorrectly attributed an outstanding divergence to Matching fn_801B7D94.",
+    "absence_command": "jq -r '[.lessons[], .out_of_taxonomy[]] | map(select((.functions // []) | index(\"fn_801B7D94\") or index(\"fn_801BD1EC\"))) | \"catalog_entries_for_resolved_signature_pair=\\(length)\"' reports/GEDE01/lessons.json",
+    "absence_raw_output": "catalog_entries_for_resolved_signature_pair=0",
+    "source_signature_command": "rg -n 'extern SequenceInfo\\* fn_801BD1EC\\(u32\\)|fn_801BD1EC\\(sequence\\)' src/game/game_fn_801B7D94.c src/game/game_fn_801B7DC8.c",
+    "source_signature_raw_output": "src/game/game_fn_801B7DC8.c:17:extern SequenceInfo* fn_801BD1EC(u32);\nsrc/game/game_fn_801B7DC8.c:24:    SequenceInfo* info = fn_801BD1EC(sequence);\nsrc/game/game_fn_801B7D94.c:16:extern SequenceInfo* fn_801BD1EC(u32);\nsrc/game/game_fn_801B7D94.c:20:    SequenceInfo* info = fn_801BD1EC(sequence);"
+  },
+  "build": {
+    "command": "set -o pipefail; .tools/bin/ninja 2>&1 | tail -n 17",
+    "raw_output": "#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n[569/571] DOL build/GEDE01/main.dol\n[570/571] CHECK config/GEDE01/build.sha1\nbuild/GEDE01/main.dol: OK\n[571/571] PROGRESS\nProgress:\n  All: 43.74% fuzzy, 28.30% matched, 28.29% linked (4517 / 6089 files)\n    Code: 651068 / 2300692 bytes (4283 / 8216 functions)\n    Data: 35374 / 4305642 bytes (0.82%)\n  Game Code: 90.07% fuzzy, 58.18% matched, 58.17% linked (4499 / 5441 files)\n    Code: 648040 / 1113872 bytes (4221 / 5162 functions)\n    Data: 35150 / 36778 bytes (95.57%)\n  SDK/Runtime: 100.00% fuzzy, 100.00% matched, 100.00% linked (18 / 18 files)\n    Code: 3028 / 3028 bytes (62 / 62 functions)\n    Data: 224 / 224 bytes (100.00%)"
+  },
+  "affected_objects": [
+    {
+      "unit": "main/game/game_fn_801B7D94",
+      "status": "Matching",
+      "strict_diff_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801B7D94 fn_801B7D94 -o build/GEDE01/session-1670-remediation-1-fn_801B7D94-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+      "strict_diff_raw_output": " INFO Writing to build/GEDE01/session-1670-remediation-1-fn_801B7D94-reloc-strict.json",
+      "measurement_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801B7D94\")) as $l | (.right.symbols[]|select(.name==\"fn_801B7D94\")) as $r | \"basis=function_reloc_diffs=name_address function=fn_801B7D94 retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) retail_real_instructions=\\([$l.instructions[]|select(.instruction!=null)]|length) generated_real_instructions=\\([$r.instructions[]|select(.instruction!=null)]|length) retail_relocations=\\([$l.instructions[].instruction.relocation|select(.!=null)]|length) generated_relocations=\\([$r.instructions[].instruction.relocation|select(.!=null)]|length)\"' build/GEDE01/session-1670-remediation-1-fn_801B7D94-reloc-strict.json",
+      "measurement_raw_output": "basis=function_reloc_diffs=name_address function=fn_801B7D94 retail_bytes=52 generated_bytes=52 match_percent=100.0 retail_real_instructions=13 generated_real_instructions=13 retail_relocations=1 generated_relocations=1",
+      "relocation_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801B7D94\")) as $l | (.right.symbols[]|select(.name==\"fn_801B7D94\")) as $r | \"retail_relocations=\\([$l.instructions[].instruction|select(.relocation!=null)|.formatted]|join(\"|\")) generated_relocations=\\([$r.instructions[].instruction|select(.relocation!=null)|.formatted]|join(\"|\"))\"' build/GEDE01/session-1670-remediation-1-fn_801B7D94-reloc-strict.json",
+      "relocation_raw_output": "retail_relocations=bl fn_801BD1EC generated_relocations=bl fn_801BD1EC"
+    },
+    {
+      "unit": "main/game/game_fn_801B7DC8",
+      "status": "NonMatching",
+      "strict_diff_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801B7DC8 fn_801B7DC8 -o build/GEDE01/session-1670-remediation-1-fn_801B7DC8-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+      "strict_diff_raw_output": " INFO Writing to build/GEDE01/session-1670-remediation-1-fn_801B7DC8-reloc-strict.json",
+      "measurement_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801B7DC8\")) as $l | (.right.symbols[]|select(.name==\"fn_801B7DC8\")) as $r | \"basis=function_reloc_diffs=name_address function=fn_801B7DC8 retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) retail_real_instructions=\\([$l.instructions[]|select(.instruction!=null)]|length) generated_real_instructions=\\([$r.instructions[]|select(.instruction!=null)]|length) retail_relocations=\\([$l.instructions[].instruction.relocation|select(.!=null)]|length) generated_relocations=\\([$r.instructions[].instruction.relocation|select(.!=null)]|length)\"' build/GEDE01/session-1670-remediation-1-fn_801B7DC8-reloc-strict.json",
+      "measurement_raw_output": "basis=function_reloc_diffs=name_address function=fn_801B7DC8 retail_bytes=188 generated_bytes=188 match_percent=99.893616 retail_real_instructions=47 generated_real_instructions=47 retail_relocations=2 generated_relocations=2",
+      "relocation_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801B7DC8\")) as $l | (.right.symbols[]|select(.name==\"fn_801B7DC8\")) as $r | \"retail_relocations=\\([$l.instructions[].instruction|select(.relocation!=null)|.formatted]|join(\"|\")) generated_relocations=\\([$r.instructions[].instruction|select(.relocation!=null)|.formatted]|join(\"|\"))\"' build/GEDE01/session-1670-remediation-1-fn_801B7DC8-reloc-strict.json",
+      "relocation_raw_output": "retail_relocations=bl fn_801BD1EC|bl fn_801B64D0 generated_relocations=bl fn_801BD1EC|bl fn_801B64D0"
+    }
+  ],
+  "dol_gate": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+  },
+  "frontier_gate": {
+    "command": "jq -r '\"next_target=\\(.next_target)\"' reports/GEDE01/progress.json",
+    "raw_output": "next_target=0x801BACE8"
+  },
+  "catalog_measurements": {
+    "total_command": "jq -r '\"lessons=\" + ((.lessons|length)|tostring) + \" out_of_taxonomy=\" + ((.out_of_taxonomy|length)|tostring) + \" total_catalog_records=\" + (((.lessons|length)+(.out_of_taxonomy|length))|tostring)' reports/GEDE01/lessons.json",
+    "total_raw_output": "lessons=540 out_of_taxonomy=19 total_catalog_records=559",
+    "session_delta_command": "jq -s -r '.[0] as $parent | .[1] as $current | \"new_lessons=\\(($current.lessons|length)-($parent.lessons|length)) new_out_of_taxonomy=\\(($current.out_of_taxonomy|length)-($parent.out_of_taxonomy|length)) total_new_records=\\((($current.lessons|length)+($current.out_of_taxonomy|length))-(($parent.lessons|length)+($parent.out_of_taxonomy|length)))\"' <(git show 5e7240cb7c4f7eea64cc828e893059b7d0637fa0:eternal-darkness-decomp/reports/GEDE01/lessons.json) reports/GEDE01/lessons.json",
+    "session_delta_raw_output": "new_lessons=11 new_out_of_taxonomy=3 total_new_records=14",
+    "long_range_delta_command": "jq -s -r '.[0] as $base | .[1] as $current | \"new_lessons=\\(($current.lessons|length)-($base.lessons|length)) new_out_of_taxonomy=\\(($current.out_of_taxonomy|length)-($base.out_of_taxonomy|length)) total_new_records=\\((($current.lessons|length)+($current.out_of_taxonomy|length))-(($base.lessons|length)+($base.out_of_taxonomy|length)))\"' <(git show b6f963fbb:eternal-darkness-decomp/reports/GEDE01/lessons.json) reports/GEDE01/lessons.json",
+    "long_range_delta_raw_output": "new_lessons=107 new_out_of_taxonomy=17 total_new_records=124"
+  },
+  "deferred_duplicate_sweep": {
+    "disposition": "Inherited duplicate groups are recorded for a later sweep and were not changed in this bounded remediation.",
+    "command": "jq -r '[.lessons[], .out_of_taxonomy[]] | group_by([.category, (.functions // [])]) | map(select(length > 1)) | \"duplicate_category_functions_groups=\\(length)\", (.[] | \"category=\\(.[0].category) functions=\\(.[0].functions|join(\",\")) copies=\\(length)\")' reports/GEDE01/lessons.json",
+    "raw_output": "duplicate_category_functions_groups=3\ncategory=register-allocation functions=fn_80023258 copies=2\ncategory=register-allocation functions=fn_80177434 copies=2\ncategory=register-allocation functions=fn_801947F4 copies=2"
+  },
+  "prior_session_commits": {
+    "command": "git log --format='%h %s' 5e7240cb7..HEAD",
+    "raw_output": "5a22c5849 reports: complete session 1670 lesson consolidation\n814f7b738 reports: refresh GEDE01 matching lessons through session 1669"
+  }
+}
