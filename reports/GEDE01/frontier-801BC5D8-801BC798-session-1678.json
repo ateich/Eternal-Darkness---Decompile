@@ -1,0 +1,84 @@
+{
+  "session_id": "session-1678",
+  "remediation": "1",
+  "range_start": "0x801BC5D8",
+  "range_end": "0x801BC798",
+  "next_target": "0x801BC798",
+  "range_accounting": {
+    "command": "python3 - <<'PY'\nstart = 0x801BC5D8\nsplit = 0x801BC670\nend = 0x801BC798\nprint(f'first_span={split-start} second_span={end-split} range_span={end-start} accounted_sum={(split-start)+(end-split)} matched_sum={split-start} nonmatching_sum={end-split}')\nPY",
+    "raw_output": "first_span=152 second_span=296 range_span=448 accounted_sum=448 matched_sum=152 nonmatching_sum=296"
+  },
+  "retail_text_bytes": 448,
+  "matched_text_bytes": 152,
+  "nonmatching_text_bytes": 296,
+  "unaccounted_spans": [],
+  "assembly_functions_added": 0,
+  "assembly_measurement": {
+    "command": "git diff --name-only e5e16acc6 -- src | rg '\\.(s|S|asm)$' | wc -l",
+    "raw_output": "0"
+  },
+  "functions": [
+    {
+      "name": "fn_801BC5D8",
+      "start": "0x801BC5D8",
+      "end": "0x801BC670",
+      "status": "Matching",
+      "canonical_percent": 100.0,
+      "relocation_strict_percent": 100.0,
+      "retail_text_bytes": 152,
+      "generated_text_bytes": 152,
+      "retail_instructions": 38,
+      "generated_instructions": 38,
+      "retail_relocations": 6,
+      "generated_relocations": 6,
+      "relocations_equal": true,
+      "evidence": "reports/GEDE01/objdiff-game_fn_801BC5D8-session-1678-remediation-1.json"
+    },
+    {
+      "name": "fn_801BC670",
+      "start": "0x801BC670",
+      "end": "0x801BC798",
+      "status": "NonMatching",
+      "canonical_percent": 99.39189,
+      "relocation_strict_percent": 99.39189,
+      "retail_text_bytes": 296,
+      "generated_text_bytes": 296,
+      "retail_instructions": 74,
+      "generated_instructions": 74,
+      "retail_relocations": 17,
+      "generated_relocations": 17,
+      "relocations_equal": true,
+      "blocker": "The signed positive-bound loop shape removes the prior extra count copy, changes the guard to retail's ble, and restores equal text and instruction counts. The remaining differences are confined to eight operands: retail assigns the narrowed trip count to r5 and the insertion pointer to r4, while generated code assigns them to r4 and r5. This is retained as honest NonMatching C and is not attributed to scheduling.",
+      "evidence": "reports/GEDE01/objdiff-game_fn_801BC670-session-1678-remediation-1.json"
+    }
+  ],
+  "per_function_measurement": {
+    "command": "for f in reports/GEDE01/objdiff-game_fn_801BC5D8-session-1678-remediation-1.json reports/GEDE01/objdiff-game_fn_801BC670-session-1678-remediation-1.json; do jq -r --arg f \"$f\" 'def relocs: [.symbols[] | select(.name == \"fn_801BC5D8\" or .name == \"fn_801BC670\") | .instructions[] | select(.instruction.relocation != null) | [.instruction.address,.instruction.relocation.type_name,.instruction.relocation.target_symbol]]; \"file=\\($f) left_text_bytes=\\([.left.sections[]|select(.name==\".text\")|.size][0]) right_text_bytes=\\([.right.sections[]|select(.name==\".text\")|.size][0]) left_real_instructions=\\([.left.symbols[]|select(.name|startswith(\"fn_\"))|.instructions[]|select(.instruction.formatted != null)]|length) right_real_instructions=\\([.right.symbols[]|select(.name|startswith(\"fn_\"))|.instructions[]|select(.instruction.formatted != null)]|length) match_percent=\\([.left.symbols[]|select(.name|startswith(\"fn_\"))|.match_percent][0]) left_relocations=\\(.left|relocs|length) right_relocations=\\(.right|relocs|length) relocations_equal=\\((.left|relocs)==(.right|relocs))\"' \"$f\"; done",
+    "raw_output": "file=reports/GEDE01/objdiff-game_fn_801BC5D8-session-1678-remediation-1.json left_text_bytes=152 right_text_bytes=152 left_real_instructions=38 right_real_instructions=38 match_percent=100.0 left_relocations=6 right_relocations=6 relocations_equal=true\nfile=reports/GEDE01/objdiff-game_fn_801BC670-session-1678-remediation-1.json left_text_bytes=296 right_text_bytes=296 left_real_instructions=74 right_real_instructions=74 match_percent=99.39189 left_relocations=17 right_relocations=17 relocations_equal=true"
+  },
+  "canonical_function_measurement": {
+    "command": "jq -r '[.units[]|select(.name==\"main/game/game_fn_801BC5D8\" or .name==\"main/game/game_fn_801BC670\")|\"\\(.name)=\\(.functions[0].fuzzy_match_percent)%\"]|join(\" \" )' build/GEDE01/report.json",
+    "raw_output": "main/game/game_fn_801BC5D8=100.0% main/game/game_fn_801BC670=99.39189%"
+  },
+  "remaining_difference_measurement": {
+    "command": "jq -r '[(.left.symbols[]|select(.name==\"fn_801BC670\")|.instructions[]|select(.instruction.formatted != null)|.instruction.formatted)] as $l | [(.right.symbols[]|select(.name==\"fn_801BC670\")|.instructions[]|select(.instruction.formatted != null)|.instruction.formatted)] as $r | [range(0;($l|length))|select($l[.]!=$r[.])|\"index=\\(.) retail=\\($l[.]) generated=\\($r[.])\"]|join(\"\\n\")' reports/GEDE01/objdiff-game_fn_801BC670-session-1678-remediation-1.json",
+    "raw_output": "index=32 retail=clrlwi. r5, r30, 16 generated=clrlwi. r4, r30, 16\nindex=34 retail=add r4, r3, r0 generated=add r5, r3, r0\nindex=35 retail=sth r28, -0x5e00(r4) generated=sth r28, -0x5e00(r5)\nindex=37 retail=sth r30, -0x5dfe(r4) generated=sth r30, -0x5dfe(r5)\nindex=38 retail=stw r29, -0x5dfc(r4) generated=stw r29, -0x5dfc(r5)\nindex=40 retail=srwi. r0, r5, 3 generated=srwi. r0, r4, 3\nindex=53 retail=andi. r5, r5, 0x7 generated=andi. r4, r4, 0x7\nindex=55 retail=mtctr r5 generated=mtctr r4"
+  },
+  "canonical_headline": {
+    "matching_objects": 4524,
+    "matching_functions": 4290,
+    "matching_code_bytes": 653752,
+    "linked_code_bytes": 653628,
+    "code_percent": 28.415451
+  },
+  "canonical_headline_measurement": {
+    "command": "jq -r '.measures | \"matching_objects=\\(.complete_units) total_objects=\\(.total_units) matching_functions=\\(.matched_functions) total_functions=\\(.total_functions) matching_code_bytes=\\(.matched_code) total_code_bytes=\\(.total_code) matching_data_bytes=\\(.matched_data) total_data_bytes=\\(.total_data) linked_code_bytes=\\(.complete_code) linked_data_bytes=\\(.complete_data) code_percent=\\(.matched_code_percent)\"' build/GEDE01/report.json",
+    "raw_output": "matching_objects=4524 total_objects=6089 matching_functions=4290 total_functions=8216 matching_code_bytes=653752 total_code_bytes=2300692 matching_data_bytes=35622 total_data_bytes=4305642 linked_code_bytes=653628 linked_data_bytes=35398 code_percent=28.415451"
+  },
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "dol_sha1_measurement": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol"
+  },
+  "remediation_verification": "reports/GEDE01/session-1678-remediation-1-verification.json"
+}

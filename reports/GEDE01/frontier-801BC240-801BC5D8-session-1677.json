@@ -1,0 +1,48 @@
+{
+  "session_id": "session-1677",
+  "range_start": "0x801BC240",
+  "range_end": "0x801BC5D8",
+  "next_target": "0x801BC5D8",
+  "retail_text_bytes": 920,
+  "matched_text_bytes": 216,
+  "nonmatching_text_bytes": 704,
+  "unaccounted_spans": [],
+  "assembly_functions_added": 0,
+  "functions": [
+    {
+      "name": "fn_801BC240",
+      "start": "0x801BC240",
+      "end": "0x801BC500",
+      "size": 704,
+      "status": "NonMatching",
+      "canonical_percent": 92.21591,
+      "relocation_strict_percent": 92.21591,
+      "retail_instructions": 181,
+      "generated_instructions": 181,
+      "blocker": "GC/1.2.5n schedules the lbl_8061C748 low-half address and result initialization ahead of retail's frame setup, then assigns different volatile registers across the nested registry search; the 704-byte bodies and 181-instruction counts agree and the registry-compaction tail aligns.",
+      "evidence": "reports/GEDE01/session-1677-fn_801BC240-reloc-strict.json"
+    },
+    {
+      "name": "fn_801BC500",
+      "start": "0x801BC500",
+      "end": "0x801BC5D8",
+      "size": 216,
+      "status": "Matching",
+      "canonical_percent": 100.0,
+      "relocation_strict_percent": 100.0,
+      "retail_instructions": 54,
+      "generated_instructions": 54,
+      "evidence": "reports/GEDE01/session-1677-fn_801BC500-reloc-strict.json"
+    }
+  ],
+  "matched_byte_sum_check": "216 = 216",
+  "range_byte_sum_check": "704 + 216 = 920 = 0x801BC5D8 - 0x801BC240",
+  "canonical_headline": {
+    "matching_objects": 4523,
+    "matching_functions": 4289,
+    "matching_code_bytes": 653600,
+    "linked_code_bytes": 653476,
+    "code_percent": 28.408844
+  },
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}
