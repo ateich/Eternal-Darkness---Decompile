@@ -29,9 +29,13 @@ def main() -> int:
     source = args.source.resolve()
     retail_evidence = args.retail_evidence.resolve()
     audit = signature_audit.audit(source, retail_evidence)
-    by_symbol = {
-        item["symbol"]: item for item in audit["return_register_contradictions"]
-    }
+    eligible = list(audit["return_register_contradictions"])
+    eligible.extend(audit["abi_divergent"])
+    eligible.sort(key=lambda item: (-int(item["declarations"]), str(item["symbol"])))
+    by_symbol = {item["symbol"]: item for item in eligible}
+    assert [item["symbol"] for item in report["symbols"]] == [
+        item["symbol"] for item in eligible[:declaration_drift_proposal.TOP_SYMBOLS]
+    ]
     truths = {
         item["symbol"]: item["ground_truth"]
         for item in audit["ground_truth_contradictions"]
@@ -56,23 +60,36 @@ def main() -> int:
         measured_signatures = {signature for signature, _ in measured_variants}
         truth = truths.get(symbol)
         reading = item["believed_correct_reading"]
+        assert item["confidence"] in {"high", "low"}
+        assert set(item["confidence_by_component"]) == {"return_shape", "parameters"}
+        assert set(item["confidence_by_component"].values()) <= {"high", "low"}
         definition_absent = (
             truth is not None
             and truth.get("kind") == "definition"
             and truth["declaration"] not in measured_signatures
         )
         if definition_absent:
-            expected_error = (
-                f"{symbol}: owned definition signature is absent from declaration variants"
-            )
-            assert reading["status"] == "unresolvable"
-            assert reading["declaration"] is None
-            assert reading["error"] == expected_error
-            assert item["confidence"] == "unresolvable"
-            assert item["disposition"] == "unresolvable"
-        else:
             assert reading["status"] == "resolved"
-            assert reading["declaration"] in measured_signatures
+            assert reading["declaration"] == truth["declaration"]
+            assert item["confidence"] == "high"
+        else:
+            if reading["declaration"] is None:
+                assert truth is not None
+                assert truth.get("kind") == "retail-epilogue"
+                assert reading["status"] == "return-shape-only"
+                assert reading["return_shape"] == truth["return_shape"]
+                assert item["confidence_by_component"] == {
+                    "return_shape": "high", "parameters": "low"
+                }
+            else:
+                assert reading["status"] == "resolved"
+                assert reading["declaration"] in measured_signatures
+
+        if truth is not None and truth.get("kind") == "retail-epilogue":
+            assert item["confidence_by_component"] == {
+                "return_shape": "high", "parameters": "low"
+            }
+            assert item["confidence"] == "low"
 
         union: set[str] = set()
         for variant in item["competing_declarations"]:

@@ -1,0 +1,45 @@
+{
+  "session_id": "session-1681",
+  "range_start": "0x801BC8F4",
+  "range_end": "0x801BCEB0",
+  "next_target": "0x801BCEB0",
+  "range_bytes": 1468,
+  "matched_bytes": 16,
+  "nonmatching_bytes": 1452,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "name": "fn_801BC8F4",
+      "start": "0x801BC8F4",
+      "end": "0x801BCC04",
+      "retail_bytes": 784,
+      "generated_bytes": 768,
+      "canonical_objdiff_percent": 92.908165,
+      "status": "NonMatching",
+      "blocker": "GC/1.2.5n keeps the retail global base in r31 but assigns different volatile address temporaries in the C candidate, shortening address formation by four instructions despite aligned control flow."
+    },
+    {
+      "name": "fn_801BCC04",
+      "start": "0x801BCC04",
+      "end": "0x801BCEA0",
+      "retail_bytes": 668,
+      "generated_bytes": 668,
+      "canonical_objdiff_percent": 98.8024,
+      "status": "NonMatching",
+      "blocker": "The bodies are otherwise byte-aligned, but GC/1.2.5n schedules li r8,0 before the independent bucket-count lhz while retail schedules the load first."
+    },
+    {
+      "name": "fn_801BCEA0",
+      "start": "0x801BCEA0",
+      "end": "0x801BCEB0",
+      "retail_bytes": 16,
+      "generated_bytes": 16,
+      "canonical_objdiff_percent": 100.0,
+      "relocation_strict_objdiff_percent": 100.0,
+      "relocations_equal": true,
+      "status": "Matching"
+    }
+  ],
+  "nonmatching_functions_added": 2,
+  "asm_functions_added": 0
+}

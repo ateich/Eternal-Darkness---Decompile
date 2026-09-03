@@ -1,0 +1,50 @@
+{
+  "session_id": "session-1680",
+  "baseline_commit": "36c055cd6b39fc04357562798eeee098a8015196",
+  "starting_target": "0x801BC8F4",
+  "ending_next_target": "0x801BC8F4",
+  "accounting": {
+    "matched_bytes_added": 0,
+    "nonmatching_bytes_added": 0,
+    "nonmatching_registrations_added": 0,
+    "nonmatching_registrations_removed": 0,
+    "source_rewrites_applied": 0,
+    "canonical_matching_code_bytes": 654100,
+    "canonical_game_matching_code_bytes": 651072,
+    "canonical_sdk_matching_code_bytes": 3028,
+    "canonical_matching_functions": 4291,
+    "canonical_matching_objects": 4525
+  },
+  "checks": [
+    {
+      "name": "signature_audit_census",
+      "command": "python3 tools/declaration_drift_proposal.py --baseline-ref HEAD --facts --facts-output build/consolidation-session-1680/facts.txt",
+      "result": "pass",
+      "evidence": "tools/declaration_drift_proposal.py invokes tools/signature_audit.py against the immutable baseline. It audited 19398 declarations across 4637 symbols and selected the ten most-declared return-register disagreement buckets. Their measured affected-TU counts are 182, 88, 79, 54, 48, 45, 41, 39, 30, and 28. Therefore no high-confidence symbol is within the 12-TU rewrite ceiling and no source rewrite was authorized."
+    },
+    {
+      "name": "full_dol_build",
+      "command": ".tools/bin/ninja build/GEDE01/main.dol",
+      "result": "pass",
+      "evidence": "Fresh 568-edge rebuild completed with final edge DOL build/GEDE01/main.dol."
+    },
+    {
+      "name": "dol_sha1",
+      "command": "sha1sum build/GEDE01/main.dol",
+      "result": "pass",
+      "evidence": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+    },
+    {
+      "name": "frontier_and_progress",
+      "command": "jq -c '{matching_code_bytes,game_code_matching_bytes,sdk_code_matching_bytes,matching_functions,total_functions,matching_objects,total_objects,next_target,next_gate,dol_sha1}' reports/GEDE01/progress.json",
+      "result": "pass",
+      "evidence": "matching_code_bytes=654100; game_code_matching_bytes=651072; sdk_code_matching_bytes=3028; matching_functions=4291/8216; matching_objects=4525/6089; next_target=0x801BC8F4; next_gate prose unchanged; recorded DOL SHA-1 equals retail."
+    },
+    {
+      "name": "source_and_progress_immutability",
+      "command": "git diff --exit-code HEAD -- src/game reports/GEDE01/progress.json",
+      "result": "pass",
+      "evidence": "No output; no translation unit or progress field changed."
+    }
+  ]
+}

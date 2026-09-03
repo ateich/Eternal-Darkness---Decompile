@@ -1,0 +1,46 @@
+{
+  "session_id": "session-1682",
+  "range_start": "0x801BCEB0",
+  "range_end": "0x801BD07C",
+  "next_target": "0x801BD07C",
+  "range_bytes": 460,
+  "matched_bytes": 164,
+  "nonmatching_bytes": 296,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "name": "fn_801BCEB0",
+      "start": "0x801BCEB0",
+      "end": "0x801BCF44",
+      "retail_bytes": 148,
+      "generated_bytes": 148,
+      "canonical_objdiff_percent": 100.0,
+      "relocation_strict_objdiff_percent": 100.0,
+      "relocations_equal": true,
+      "status": "Matching"
+    },
+    {
+      "name": "fn_801BCF44",
+      "start": "0x801BCF44",
+      "end": "0x801BCF54",
+      "retail_bytes": 16,
+      "generated_bytes": 16,
+      "canonical_objdiff_percent": 100.0,
+      "relocation_strict_objdiff_percent": 100.0,
+      "relocations_equal": true,
+      "status": "Matching"
+    },
+    {
+      "name": "fn_801BCF54",
+      "start": "0x801BCF54",
+      "end": "0x801BD07C",
+      "retail_bytes": 296,
+      "generated_bytes": 292,
+      "canonical_objdiff_percent": 89.5946,
+      "status": "NonMatching",
+      "blocker": "GC/1.2.5n schedules the loop preheader in a different order and folds retail's initial mulli used to form the first 12-byte table entry; the result-copy body otherwise aligns."
+    }
+  ],
+  "nonmatching_functions_added": 1,
+  "asm_functions_added": 0
+}

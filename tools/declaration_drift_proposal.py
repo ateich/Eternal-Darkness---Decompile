@@ -42,9 +42,16 @@ def resolve_proposed_variant(
             if variant["signature"] == truth["declaration"]
         ]
         if not candidates:
-            raise ValueError(
-                f"{symbol}: owned definition signature is absent from declaration variants"
-            )
+            # The owned definition remains the high-confidence reading even
+            # when every caller declaration is wrong.  Keep it as a synthetic
+            # zero-site candidate so the proposal records the actual reading
+            # instead of inventing a third confidence state.
+            return {
+                "signature": truth["declaration"],
+                "count": 0,
+                "sites": [],
+                "abi": {"return": truth["return_shape"]},
+            }
         return candidates[0]
     if truth is not None:
         candidates = [
@@ -52,6 +59,17 @@ def resolve_proposed_variant(
             for variant in variants
             if variant["abi"]["return"] == truth["return_shape"]
         ]
+        if not candidates:
+            # A retail epilogue can establish the result-register shape without
+            # establishing any source-level parameter list.  Preserve exactly
+            # that partial reading instead of leaking max()'s ValueError into a
+            # third confidence state.
+            return {
+                "signature": None,
+                "count": 0,
+                "sites": [],
+                "abi": {"return": truth["return_shape"]},
+            }
         return max(candidates, key=lambda item: int(item["count"]))
     return max(variants, key=lambda item: int(item["count"]))
 
@@ -105,29 +123,24 @@ def collect(ref: str) -> dict[str, object]:
             signature_audit.ROOT = old_root
 
         entries = list(audit["return_register_contradictions"])
+        entries.extend(audit["abi_divergent"])
         entries.sort(key=lambda item: (-int(item["declarations"]), str(item["symbol"])))
         selected = entries[:TOP_SYMBOLS]
         truths = {
             item["symbol"]: item["ground_truth"]
             for item in audit["ground_truth_contradictions"]
         }
-        retail = signature_audit.load_retail_evidence(retail_path)
         result_symbols: list[dict[str, object]] = []
         for rank, entry in enumerate(selected, 1):
             symbol = str(entry["symbol"])
             variants = list(entry["variants"])
             truth = truths.get(symbol)
-            resolution_error = None
-            try:
-                proposed = resolve_proposed_variant(symbol, variants, truth)
-            except ValueError as error:
-                proposed = None
-                resolution_error = str(error)
+            proposed = resolve_proposed_variant(symbol, variants, truth)
 
             disagreeing_sites = sorted({
                 site
                 for variant in variants
-                if proposed is not None and variant["signature"] != proposed["signature"]
+                if variant["signature"] != proposed["signature"]
                 for site in variant["sites"]
             })
             disagreeing_tus = sorted({site.rsplit(":", 1)[0] for site in disagreeing_sites})
@@ -141,9 +154,9 @@ def collect(ref: str) -> dict[str, object]:
                 calls_by_tu[relative].extend(
                     call_sites(source_root.parent.parent / relative, symbol, relative)
                 )
-            proposed_calls = sorted(
+            proposed_calls = sorted({
                 call for tu in all_tus for call in calls_by_tu.get(tu, [])
-            )
+            })
             variant_rows = []
             for variant in variants:
                 tus = sorted({site.rsplit(":", 1)[0] for site in variant["sites"]})
@@ -156,26 +169,60 @@ def collect(ref: str) -> dict[str, object]:
                         call for tu in tus for call in calls_by_tu.get(tu, [])
                     ),
                 })
-            if resolution_error is None:
-                believed_correct_reading = {
-                    "status": "resolved",
-                    "declaration": proposed["signature"],
-                    "call_site_evidence": proposed_calls,
-                    "basis": truth or {
+            if truth is not None and truth.get("kind") == "definition":
+                confidence_by_component = {
+                    "return_shape": "high",
+                    "parameters": "high",
+                }
+                basis = {
+                    "return_shape": truth,
+                    "parameters": truth,
+                }
+            elif truth is not None:
+                confidence_by_component = {
+                    "return_shape": "high",
+                    "parameters": "low",
+                }
+                basis = {
+                    "return_shape": truth,
+                    "parameters": {
                         "kind": "declaration-plurality",
-                        "detail": "Plurality is tentative; declarations alone do not ground the callee signature.",
+                        "detail": (
+                            "The retail epilogue does not establish parameters. "
+                            "Any displayed declaration uses only the plurality among "
+                            "variants with the grounded return-register shape and must "
+                            "not be canonicalized without independent parameter evidence."
+                        ),
                     },
                 }
-                confidence = "high" if symbol in retail or truth is not None else "low"
             else:
-                believed_correct_reading = {
-                    "status": "unresolvable",
-                    "declaration": None,
-                    "call_site_evidence": proposed_calls,
-                    "error": resolution_error,
-                    "basis": truth,
+                confidence_by_component = {
+                    "return_shape": "low",
+                    "parameters": "low",
                 }
-                confidence = "unresolvable"
+                plurality_basis = {
+                    "kind": "declaration-plurality",
+                    "detail": "Plurality is tentative; declarations alone do not ground the callee signature.",
+                }
+                basis = {
+                    "return_shape": plurality_basis,
+                    "parameters": plurality_basis,
+                }
+            believed_correct_reading = {
+                "status": (
+                    "resolved" if proposed["signature"] is not None
+                    else "return-shape-only"
+                ),
+                "declaration": proposed["signature"],
+                "return_shape": proposed["abi"]["return"],
+                "call_site_evidence": proposed_calls,
+                "basis": basis,
+            }
+            confidence = (
+                "high"
+                if set(confidence_by_component.values()) == {"high"}
+                else "low"
+            )
             result_symbols.append({
                 "rank": rank,
                 "symbol": symbol,
@@ -188,6 +235,7 @@ def collect(ref: str) -> dict[str, object]:
                 "total_affected_tu_count": int(entry["affected_translation_units"]),
                 "affected_translation_units": list(entry["translation_units"]),
                 "confidence": confidence,
+                "confidence_by_component": confidence_by_component,
                 "competing_declarations": variant_rows,
                 "believed_correct_reading": believed_correct_reading,
                 "estimated_blast_radius_tus": int(entry["affected_translation_units"]),
@@ -225,11 +273,11 @@ def facts_text(measurement: dict[str, object]) -> str:
             )
         for site in item["disagreeing_translation_units"]:
             lines.append(f"DISAGREEING_TU name={item['symbol']} path={site}")
-        if item["believed_correct_reading"]["status"] == "unresolvable":
-            lines.append(
-                f"UNRESOLVABLE name={item['symbol']} "
-                f"error={json.dumps(item['believed_correct_reading']['error'])}"
-            )
+        lines.append(
+            f"CONFIDENCE name={item['symbol']} "
+            f"return_shape={item['confidence_by_component']['return_shape']} "
+            f"parameters={item['confidence_by_component']['parameters']}"
+        )
         for site in item["believed_correct_reading"]["call_site_evidence"]:
             lines.append(f"BELIEVED_CALL name={item['symbol']} site={site}")
     return "\n".join(lines) + "\n"
@@ -273,10 +321,7 @@ def main() -> int:
     applied = set(args.applied_symbol)
     inherited_tested_reverted = set(args.inherited_tested_reverted_symbol)
     for item in measurement["selected_symbols"]:
-        if item["believed_correct_reading"]["status"] == "unresolvable":
-            item["disposition"] = "unresolvable"
-            item["disposition_reason"] = item["believed_correct_reading"]["error"]
-        elif item["symbol"] in applied:
+        if item["symbol"] in applied:
             item["disposition"] = "applied"
             item["disposition_reason"] = (
                 "High-confidence return correction was within the TU cap and passed rebuild, affected-object objdiff, relocation, and DOL gates."
@@ -349,7 +394,8 @@ def main() -> int:
             "match_counts_revised": False,
         },
         "selection_rule": (
-            "Rank return-register declaration contradictions by total declaration count descending, then symbol ascending. "
+            "Combine return-register contradictions and ABI-divergent parameter declarations, then rank by total declaration count descending and symbol ascending. "
+            "Exclude cosmetic disagreements because the audit proves their return and parameter ABI shapes are equivalent. "
             "Blast radius is the audit's affected_translation_units count: every TU declaring the symbol."
         ),
         "rewrite_tu_cap": 12,

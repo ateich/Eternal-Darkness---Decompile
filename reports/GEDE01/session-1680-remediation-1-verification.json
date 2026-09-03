@@ -1,0 +1,71 @@
+{
+  "session_id": "session-1680-remediation-1",
+  "remediated_commit": "e55d75338",
+  "proposal_baseline_commit": "36c055cd6b39fc04357562798eeee098a8015196",
+  "starting_target": "0x801BC8F4",
+  "ending_next_target": "0x801BC8F4",
+  "checks": [
+    {
+      "name": "proposal_measurement",
+      "command": "python3 tools/declaration_drift_proposal.py --baseline-ref 36c055cd6b39fc04357562798eeee098a8015196 --facts --facts-output build/remediation-session-1680/facts.txt",
+      "result": "pass",
+      "raw_output": "",
+      "recorded_output": "The command writes the evidence stream to build/remediation-session-1680/facts.txt. That stream is reproduced verbatim in reports/GEDE01/declaration-drift-proposal-session-1680.json at measurement_evidence.raw_output beside every reported figure."
+    },
+    {
+      "name": "proposal_validator",
+      "command": "python3 tools/validate_declaration_drift_report.py --report reports/GEDE01/declaration-drift-proposal-session-1680.json",
+      "result": "pass",
+      "raw_output": "AUDIT declarations=19398 symbols=4637\nSYMBOL name=fn_80201814 declarations=409 affected_tus=414 variants=6 variant_call_sites=506 believed_correct_call_sites=505 status=valid\nSYMBOL name=fn_80201BC8 declarations=364 affected_tus=371 variants=4 variant_call_sites=427 believed_correct_call_sites=427 status=valid\nSYMBOL name=fn_80201B54 declarations=290 affected_tus=297 variants=2 variant_call_sites=357 believed_correct_call_sites=357 status=valid\nSYMBOL name=fn_8020123C declarations=176 affected_tus=182 variants=3 variant_call_sites=333 believed_correct_call_sites=333 status=valid\nSYMBOL name=fn_8011F114 declarations=108 affected_tus=115 variants=3 variant_call_sites=130 believed_correct_call_sites=130 status=valid\nSYMBOL name=fn_80201B9C declarations=96 affected_tus=100 variants=2 variant_call_sites=97 believed_correct_call_sites=97 status=valid\nSYMBOL name=fn_80201EB8 declarations=93 affected_tus=97 variants=3 variant_call_sites=113 believed_correct_call_sites=112 status=valid\nSYMBOL name=fn_80156938 declarations=90 affected_tus=90 variants=2 variant_call_sites=125 believed_correct_call_sites=123 status=valid\nSYMBOL name=fn_801E8328 declarations=87 affected_tus=88 variants=2 variant_call_sites=105 believed_correct_call_sites=105 status=valid\nSYMBOL name=fn_8018E230 declarations=77 affected_tus=79 variants=22 variant_call_sites=106 believed_correct_call_sites=106 status=valid\nTOTAL symbols=10 variants=49 declaration_sites=1790 variant_call_sites=2299 believed_correct_call_sites=2295 invalid_call_sites=0 source_rewrites=0\n"
+    },
+    {
+      "name": "empty_retail_candidate_regression",
+      "command": "python3 - <<'PY'\nimport sys\nsys.path.insert(0,'tools')\nfrom declaration_drift_proposal import resolve_proposed_variant\ntruth={'kind':'retail-epilogue','return_shape':'gpr_pair'}\nvariants=[{'signature':'void f()','count':2,'sites':[],'abi':{'return':'void'}}]\nprint(resolve_proposed_variant('f',variants,truth))\nPY",
+      "result": "pass",
+      "raw_output": "{'signature': None, 'count': 0, 'sites': [], 'abi': {'return': 'gpr_pair'}}\n"
+    },
+    {
+      "name": "retail_return_register_evidence",
+      "command": "build/binutils/powerpc-eabi-objdump -d --start-address=0x80200aec --stop-address=0x80200b08 build/GEDE01/main.elf && build/binutils/powerpc-eabi-objdump -d --start-address=0x80201278 --stop-address=0x802012a0 build/GEDE01/main.elf",
+      "result": "pass",
+      "raw_output": "\nbuild/GEDE01/main.elf:     file format elf32-powerpc\n\n\nDisassembly of section .text:\n\n80200aec <fn_8020088C+0x260>:\n80200aec:\t63 ff 00 20 \tori     r31,r31,32\n80200af0:\t88 1e 00 21 \tlbz     r0,33(r30)\n80200af4:\t28 00 00 00 \tcmplwi  r0,0\n80200af8:\t40 82 ff 70 \tbne     80200a68 <fn_8020088C+0x1dc>\n80200afc:\t80 81 00 0c \tlwz     r4,12(r1)\n80200b00:\t7f e3 fb 78 \tmr      r3,r31\n80200b04:\t80 01 00 64 \tlwz     r0,100(r1)\n\nbuild/GEDE01/main.elf:     file format elf32-powerpc\n\n\nDisassembly of section .text:\n\n80201278 <fn_8020123C+0x3c>:\n80201278:\t38 04 00 01 \taddi    r0,r4,1\n8020127c:\t93 e1 00 24 \tstw     r31,36(r1)\n80201280:\t90 0d 9a 40 \tstw     r0,-26048(r13)\n80201284:\t90 81 00 20 \tstw     r4,32(r1)\n80201288:\t4b ff f6 05 \tbl      8020088c <fn_8020088C>\n8020128c:\t80 01 00 34 \tlwz     r0,52(r1)\n80201290:\t83 e1 00 2c \tlwz     r31,44(r1)\n80201294:\t7c 08 03 a6 \tmtlr    r0\n80201298:\t38 21 00 30 \taddi    r1,r1,48\n8020129c:\t4e 80 00 20 \tblr\n"
+    },
+    {
+      "name": "clean_rebuild",
+      "command": ".tools/bin/ninja build/GEDE01/main.dol 2>&1 | tee build/remediation-session-1680/build-full.txt | tail -n 8",
+      "result": "pass",
+      "raw_output": "#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n[4828/4828] DOL build/GEDE01/main.dol\n"
+    },
+    {
+      "name": "dol_sha1",
+      "command": "sha1sum build/GEDE01/main.dol",
+      "result": "pass",
+      "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\n"
+    },
+    {
+      "name": "whole_project_objdiff",
+      "command": "build/tools/objdiff-cli report generate -p . -o build/remediation-session-1680/objdiff-report.json --format json",
+      "result": "pass",
+      "raw_output": " INFO Loading project .\n INFO Generating report for 6089 units (using 8 threads)\n INFO Report generated in 0.154s\n INFO Writing to build/remediation-session-1680/objdiff-report.json\n"
+    },
+    {
+      "name": "whole_project_objdiff_measures",
+      "command": "jq -c '.measures | {total_code,matched_code,matched_code_percent,total_functions,matched_functions,matched_functions_percent,total_units,complete_units}' build/remediation-session-1680/objdiff-report.json",
+      "result": "pass",
+      "raw_output": "{\"total_code\":\"2300692\",\"matched_code\":\"654100\",\"matched_code_percent\":28.430574,\"total_functions\":8216,\"matched_functions\":4291,\"matched_functions_percent\":52.22736,\"total_units\":6089,\"complete_units\":4525}\n"
+    },
+    {
+      "name": "affected_object_scope",
+      "command": "git -C .. diff --name-only HEAD -- eternal-darkness-decomp/src eternal-darkness-decomp/reports/GEDE01/progress.json",
+      "result": "pass",
+      "raw_output": "",
+      "interpretation": "No source object or progress record changed in this remediation. The whole-project objdiff command above therefore covers every affected object, an empty set, as well as all configured units."
+    },
+    {
+      "name": "frontier_and_progress",
+      "command": "jq -c '{next_target,dol_sha1,matching_code_bytes,game_code_matching_bytes,sdk_code_matching_bytes,matching_functions,total_functions,matching_objects,total_objects}' reports/GEDE01/progress.json",
+      "result": "pass",
+      "raw_output": "{\"next_target\":\"0x801BC8F4\",\"dol_sha1\":\"ea24b6af954876ce072562ff39cdb4c81d32be1f\",\"matching_code_bytes\":654100,\"game_code_matching_bytes\":651072,\"sdk_code_matching_bytes\":3028,\"matching_functions\":4291,\"total_functions\":8216,\"matching_objects\":4525,\"total_objects\":6089}\n"
+    }
+  ]
+}
