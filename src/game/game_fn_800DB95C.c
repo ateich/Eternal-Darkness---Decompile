@@ -6,8 +6,9 @@ extern void fn_80047D90(void);
 void fn_800DB95C(void *object)
 {
     int kind = fn_80047CB4();
+    int type = fn_8011EB04(object);
 
-    if (fn_8011EB04(object) != kind) {
+    if (type != kind) {
         return;
     }
     fn_80047FFC(1);

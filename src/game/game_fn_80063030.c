@@ -14,6 +14,7 @@ extern void *fn_80201BC0(void *object);
 s32 fn_80063030(s32 context, s32 value)
 {
     s32 object_group;
+    s32 current_group;
     void *current;
     void *object;
 
@@ -23,7 +24,8 @@ s32 fn_80063030(s32 context, s32 value)
     while (current != 0 && object != 0) {
         object_group = fn_80201EB8(object);
 
-        if (fn_80201EB8(current) != object_group) {
+        current_group = fn_80201EB8(current);
+        if (current_group != object_group) {
             /* Different groups do not interact. */
         } else if (current != object) {
             u8 compatible = fn_80204508(current, object);

@@ -17,10 +17,9 @@ void fn_80132D50(void)
     Runtime* runtime;
 
     runtime = &lbl_8030F540;
-    i = 0;
     cursor = (char*)runtime;
 
-    do {
+    for (i = 0; i < 5; i++) {
         mask = 1 << i;
         if ((s8)runtime->active_mask & mask) {
             void* object = *(void**)cursor;
@@ -30,7 +29,6 @@ void fn_80132D50(void)
             *(void**)cursor = 0;
             runtime->active_mask &= ~mask;
         }
-        i++;
         cursor += 0x10;
-    } while (i < 5);
+    }
 }

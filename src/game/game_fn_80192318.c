@@ -87,16 +87,14 @@ alive:
                         object[2], object[4], 0);
         }
     } else if (object[0xB7] & 0x40) {
-        u8 current;
-        u8 target;
+        unsigned int current;
 
         object[0xB7] &= ~0x40;
         current = object[0x5F];
-        target = object[2];
-        if (current == target)
+        if (current == object[2])
             goto done;
         fn_8018E230(object + 0x60, object + 0x5F, 1, 0,
-                    (s8)-object[4], target);
+                    (s8)-object[4], object[2]);
     }
 done:
     (*(u16*)(object + 0xA))++;

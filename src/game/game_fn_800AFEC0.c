@@ -25,6 +25,7 @@ int fn_800AFEC0(void)
     unsigned char* buffer = lbl_8031F7C0;
     void* current;
     void* object;
+    u32 offset;
     void* source;
     float value;
     u32 word;
@@ -38,17 +39,17 @@ int fn_800AFEC0(void)
         memcpy(buffer, source, 12);
         memcpy(buffer + 12, &value, 4);
         memcpy(buffer + 16, &word, 4);
-        object = (void*)(fn_800E5050(buffer + 20) + 20);
-        object = (void*)((u32)object + fn_801F4E38(buffer + (u16)(u32)object));
-        object = (void*)((u32)object + fn_80028D54(buffer + (u16)(u32)object));
-        object = (void*)((u32)object + fn_8016B1D0(buffer + (u16)(u32)object));
-        object = (void*)((u32)object + fn_801FABA4(buffer + (u16)(u32)object, 0));
-        object = (void*)((u32)object + fn_801F668C(buffer + (u16)(u32)object));
-        object = (void*)((u32)object + fn_8012BA84(buffer + (u16)(u32)object));
-        object = (void*)((u32)object + fn_801E8FAC(buffer + (u16)(u32)object));
-        object = (void*)((u32)object + fn_801A8168(buffer + (u16)(u32)object));
-        object = (void*)((u32)object + fn_8011E918(buffer + (u16)(u32)object));
-        fn_801A9A00(buffer + (u16)(u32)object);
+        offset = fn_800E5050(buffer + 20) + 20;
+        offset += fn_801F4E38(buffer + (u16)offset);
+        offset += fn_80028D54(buffer + (u16)offset);
+        offset += fn_8016B1D0(buffer + (u16)offset);
+        offset += fn_801FABA4(buffer + (u16)offset, 0);
+        offset += fn_801F668C(buffer + (u16)offset);
+        offset += fn_8012BA84(buffer + (u16)offset);
+        offset += fn_801E8FAC(buffer + (u16)offset);
+        offset += fn_801A8168(buffer + (u16)offset);
+        offset += fn_8011E918(buffer + (u16)offset);
+        fn_801A9A00(buffer + (u16)offset);
         return 1;
     }
     return 0;

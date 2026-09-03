@@ -10,15 +10,12 @@ void fn_800BE8D4(int value)
 
     if (object != 0) {
         object = fn_80201B94(object);
-        if (object != 0 && value == fn_80201C48(object)) {
-            fn_80201DD8(object, 0);
-            fn_800C63D8();
+        if (object != 0) {
+            int id = fn_80201C48(object);
+            if (id == value) {
+                fn_80201DD8(object, 0);
+                fn_800C63D8();
+            }
         }
     }
 }
-
-/*
- * Honest-C boundary: GC/1.3 reverses the encoded operands of the symmetric
- * equality at offset 0x34 (cmpw r30,r3 instead of retail cmpw r3,r30).
- * Size, control flow, and all call relocations otherwise match.
- */

@@ -17,6 +17,7 @@ extern int fn_801A98F4(int, int);
 void fn_800C65FC(void *object)
 {
     s32 current;
+    s32 object_id;
     s16 x;
     s16 y;
     float ratio;
@@ -25,7 +26,8 @@ void fn_800C65FC(void *object)
         return;
     }
     current = ((s32)fn_80201B44());
-    if (current != ((s32)fn_80201B54(object))) {
+    object_id = ((s32)fn_80201B54(object));
+    if (object_id != current) {
         return;
     }
     if ((lbl_8064D5A8 & 0x3F) != 0 &&

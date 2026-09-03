@@ -338,3 +338,189 @@ declare it.
 Objdiff reports 64/64 bytes and 3 relocations for `fn_8015AD00`, 108/108 and 4
 for `fn_8015AC94`, and 180/180 and 13 for `fn_8016B400`, all at 100%, and the
 whole-DOL SHA-1 gate remains `ea24b6af954876ce072562ff39cdb4c81d32be1f`.
+
+## Commutative operand order: hoist the call result into a named local
+
+Eight functions diverged from retail by exactly one instruction, always a
+commutative operation with its operands encoded in the opposite order. Five
+were `cmpw rN, r3` against our `cmpw r3, rN`, one the `fcmpu` equivalent, one
+an `or`. All eight now match.
+
+The lever is that MWCC encodes the two operands in the reverse of their source
+order, but only once both sides are simple values. With a call left inline in
+the condition, the frontend canonicalizes the comparison to temp-first and no
+spelling of the condition reaches the encoded order: rewriting
+`fn(x) != kind` as `kind != fn(x)`, as a positive `if`, or with the operands
+declared in either order all produce byte-identical output. Hoisting the call
+into a named local removes the canonicalization, after which source order
+controls the encoding.
+
+So `fn_800DB95C` matches by hoisting the second call and writing
+`type != kind`, which encodes as `cmpw r31, r3`. `fn_800BE8D4`, `fn_80096F04`,
+`fn_80063030`, `fn_800E8130` and `fn_801749A8` take the same shape, the last
+with a `double` local against a global constant. `fn_800BE8D4` and
+`fn_801294DC` needed the condition split into nested `if`s first, because the
+operand sits behind a `&&` and hoisting past it would evaluate the call or
+dereference unconditionally.
+
+Two do not follow the plain shape. `fn_801294DC` compares a memory load rather
+than a call result, and it is the load that must sit on the right: binding it
+as `resource_kind` and writing `kind == resource_kind` matches, while binding
+the pointer one level out and comparing `*slot == kind` stays at 99.85075%.
+`fn_80158F6C` is an `or` rather than a comparison: the fix is to bind
+`id | 0x40000000 | (index << 12)` to a local and pass `(request | message)`.
+Passing `(message | request)` holds at 99.85915%, and reordering the terms of the
+original four-way `or` in place is worse still, 88.45071% to 96.76057%.
+
+Ruled out before any of this, all leaving the same single wrong instruction:
+the six condition spellings recorded upstream, every compiler revision from
+GC/1.1 through GC/2.0, and 72 flag combinations on `fn_800DB95C` covering `-O0`
+through `-O4` with `p` and `s`, the inline modes, `-schedule off`, `-sdata 0
+-sdata2 0`, `-opt nopeephole`, `-fp_contract off` and `-func_align 4`, none of
+which moved it off 99.52381%. `#pragma opt_propagation off` is byte-neutral
+here and is not part of any of the eight matches.
+
+## Tier 2 near-misses: allocation, evaluation order, and two type choices
+
+Seven of the 27 Tier 2 functions listed in issue #4 are matched here. Each was two or three
+instructions from retail, and in every case our build and retail already agreed on which
+registers to use; only the order instructions were emitted in, or which scratch register held
+a dead value, differed. That is why operand-order rewrites do nothing on this group: mwcc
+canonicalises commutative operands before register allocation, so a swapped spelling compiles
+to identical bytes.
+
+**When a call's two arguments are emitted in the wrong order, bind both to locals and assign
+them in the order retail loads them.** `fn_80139D88` passes two loads off the same base to
+`fn_8012B408`; retail loads `0x284` first, our build loaded `0x28C` first. Both loads were
+being folded into the call's argument setup, where mwcc evaluates right to left. Assigning
+them to locals after the preceding call, second argument first, fixes the order. Initialising
+those locals at their declarations instead is much worse at 74.73684%. Six other spellings sit
+at 99.36842% and do not reach it: dropping the `volatile` casts, hoisting both loads before the
+preceding call, modelling the two fields as a typed struct and using member access, and routing
+the first argument through a `static` accessor that inlines. The `volatile` casts are load
+bearing and predate this change; without them the function is 99.36842% in the matching shape
+too. Fourteen flag combinations are byte-identical, and so is every compiler revision from
+GC/1.3 through GC/3.0a5. Issue #4 records the same wall for `cmpw` through GC/2.0; it extends
+to argument setup and through GC/2.7 as well.
+
+**A byte-width value compared against another must live in an unsigned word.** `fn_80192318`
+compares a byte read from the object against another byte. Declared `u8` the two `lbz` loads
+come out in the wrong order, and `int` or `s32` gives 99.67033%. Declaring the compared value
+`unsigned int` and reading the other operand directly at the comparison is exact. Keeping a
+second local for that operand also works but only if it stays `u8`; widening both to
+`unsigned int` drops back to 99.93407%, so the asymmetry was real and the second local is
+better removed than kept.
+
+**Hoist an inverted mask into a named local.** `fn_80088F08` reads a global, sets or clears
+bits in it, and stores it back. Retail keeps the loaded global in r5; our build used r3, which
+is free after the incoming argument is tested. Initialising `unsigned int inverted = ~mask;`
+before the branch supplies the register pressure that pushes the global to r5. Reading the
+global separately inside each branch is much worse at 97.94118%, and both the ternary form and
+dropping the explicit `!= 0` tests are byte-identical to the original.
+
+**A field that sits past the end of a sub-struct belongs to the outer object.** `fn_801A7EA8`
+and `fn_801A7E04` are the same function shape and had the identical three-instruction
+divergence: a `type` field landed in r5 where retail uses r4. Both were modelled with `type`
+as the last member of the shape struct, read through a `Shape*` local. The shape is
+`radius(4) + center(6) + padA(0x32)` = `0x3C` at offset `0x30`, so it ends exactly at `0x6C`,
+which is where `type` is read. Declaring `type` as a member of the object rather than of the
+shape matches both functions and removes the need to read one field through the object while
+reading the rest through the pointer. Reading it through the shape pointer instead is
+99.86842%, `shape[0].type` and `(*shape).type` are 99.47369%, dropping the shape local entirely
+is 92.13158%, and widening `type` to `int` is 98.02631%.
+
+**Declaration order.** `fn_800C7C0C` needed one local moved two slots earlier in its
+declaration block, with no other change. Its `other_runtime` intermediate is load bearing
+despite being assigned once and read once: collapsing it into its consumer is 99.01786%. Note
+the declaration-order lever is narrow rather than general — the five locals of `fn_8012CDF0`
+were enumerated exhaustively with `PERM_LINESWAP`, all 120 orderings compiled without error,
+and none beat its base.
+
+**`long` is not `int`.** `fn_80129108`'s only divergence was its epilogue: retail restores r31
+and r30 and then the link register, our build restored the link register first. No
+statement-level spelling reaches an epilogue, and three were tried without moving it. Declaring
+the mask parameters `long` matches exactly. `int`, `s32`, `unsigned int` and `unsigned long`
+all stay at 99.14286%, and `long` and `int` are both 32-bit signed under these flags, so mwcc
+is distinguishing the type names rather than their representation. Substituting `long` for
+every `int`, `s32` and `u32` declaration in the other nineteen Tier 2 functions, one at a time,
+improved none of them, so this is a specific lever and not a general one.
+
+Two of these units, `fn_801A7EA8` and `fn_801A7E04`, carry an `externalize` step that rewrites
+their object after compilation. objdiff compares the compiled object, so any single-unit
+compile that skips that step under-reports them by exactly the externalized relocations; both
+must be read after a full build.
+
+Objdiff reports 76/76 bytes and 2 relocations for `fn_80139D88`, 728/728 and 10 for
+`fn_80192318`, 68/68 and 3 for `fn_80088F08`, 152/152 and 4 for `fn_801A7EA8`, 164/164 and 4
+for `fn_801A7E04`, 448/448 and 30 for `fn_800C7C0C`, and 84/84 and 1 for `fn_80129108`, all at
+100% on the canonical basis and under `function_reloc_diffs=name_address`, and the whole-DOL
+SHA-1 gate remains `ea24b6af954876ce072562ff39cdb4c81d32be1f`.
+
+## Loop form decides constant materialization order
+
+`fn_80132D50` was two instructions from retail: the loop-invariant constants 1
+and 0 were hoisted in the wrong order (`li r31,0` before `li r30,1`; retail
+emits the 1 first). No statement reordering, store spelling, or pointer-typed
+zero moved them. Rewriting the `do { ... i++; } while (i < 5);` loop as
+`for (i = 0; i < 5; i++)` with the cursor advance kept in the body flips the
+materialization order and nothing else: 128/128 bytes, 100%. Rejected as
+byte-neutral: `(void*)0` in the store, swapping the init statements, and
+routing the zero through the object local.
+
+## A slot-pointer sum lands in the product's register when a dead local absorbs it
+
+`fn_8012CDF0` and `fn_8012CCF0` share one epilogue: fetch a runtime array,
+scale an index from the definition, store the entry into the slot. Written as
+`runtime += *(u16*)(definition + 0xE) * 0x4C;` the add computes into the base's
+register; retail computes into the product's register. The original reused the
+`definition` local, dead by then:
+`record = runtime + *(u16*)(record + 0xE) * 0x4C;`. One shared edit
+takes both functions to 100% (180/180 and 256/256 bytes). Rejected: a fresh
+`slot` local or folding into the store operand both collapse to `stwx` (97.3%),
+an int-typed offset chain reorders the loads (99.3%), and reversing the
+operands of `+=` is byte-identical to the compound form.
+
+## The register evidence caught a wrong index update
+
+`fn_8015FF18`'s entry block read `offset = index + 1;` on the negative-value
+path. Retail's `addi` writes the INDEX register, so the original increments
+`index` and derives the scan cursor from it afterwards: `index++;` in the
+block, then `offset = index;` before the while loop. That is a semantic
+difference, not a codegen preference - with the old source the two variables
+disagreed by one for the rest of the function on that path. 208/208 bytes,
+100%. Writing `offset = index;` inside the if instead costs an extra `mr`
+(96.8%).
+
+## The commutative-operand lever extends to fmuls, and where the hoist must sit
+
+`fn_8013DE44` had both `fmuls` encodings reversed. The known comparison lever -
+hoist the call out of the expression so both operands are simple - applies, but
+the hoisted value must be the whole computed subexpression, and the constant
+must sit on the right: `distance = -projection - fn_800ED720(discriminant);
+*result = distance * lbl_80650364;` reaches 264/264, 100%. Hoisting only the
+call result shuffles the float registers instead (99.62%), constant-left with
+the same hoist stays canonicalized (99.70%), and hoisting the constant itself
+makes it live across the call, growing the frame (88.7%).
+
+## An id comparison and a shared conversion constant
+
+`fn_800C65FC` needed two independent fixes. The `cmpw` operand order follows
+from the hoist lever: bind `object_id = fn_80201B54(object);` and write
+`object_id != current`. The remaining relocation row was the s16-to-float
+conversion bias: this unit's pool copy of 0x4330000080000000 must be the shared
+named symbol, so a new externalize rule verifies `@30` against retail data and
+redefines it to `lbl_8064F158`, exactly as `fn_800C59F0` and `fn_800C644C`
+already do. 384/384 bytes, 100%, relocations included.
+
+## A parse cursor is an offset, not a recast pointer
+
+`fn_800AFEC0` walked a buffer with
+`object = (void*)((u32)object + fn(buffer + (u16)(u32)object));` repeated nine
+times, and the final add spilled into a scratch register because the pointer
+local died at its last narrowing. The original is a `u32 offset` advanced with
+`offset += fn(buffer + (u16)offset);` - the compound add computes in the
+accumulator's register, all nine sites, and the code stops pretending the
+running total is a pointer. 364/364 bytes, 100%.
+
+All seven functions verify at 100% with relocations in objdiff, and the
+whole-DOL SHA-1 gate remains `ea24b6af954876ce072562ff39cdb4c81d32be1f`.

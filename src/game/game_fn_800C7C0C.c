@@ -46,9 +46,9 @@ void fn_800C7C0C(void *object)
     register Vec3 *position_ptr;
     void *runtime;
     void *parent;
+    void *relation;
     void *other;
     void *other_runtime;
-    void *relation;
     void *sound;
     Locals locals;
 

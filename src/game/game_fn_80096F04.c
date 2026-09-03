@@ -20,6 +20,8 @@ int fn_80096F04(void* unused, register void* object, void* value,
     register int result;
     register u32 flags;
     register int filtered;
+    register int object_id;
+    register int random_id;
 
     result = 0;
     if ((state->flags & 4) == 0 &&
@@ -27,7 +29,9 @@ int fn_80096F04(void* unused, register void* object, void* value,
         flags = fn_80036D5C(object);
         filtered = fn_80036D5C(object) & 0x80;
         random = (void*)fn_80200C20(random);
-        if (fn_80201B44((int)random) == (int)random) {
+        random_id = (int)random;
+        object_id = fn_80201B44(random_id);
+        if (object_id == random_id) {
             if (flags & 0x8000) {
                 fn_80096E24(object);
                 fn_80036DA4(object, (flags & ~0x8000) | 0x80);

@@ -1,0 +1,52 @@
+{
+  "session_id": "session-1689",
+  "range_start": "0x801BE0D4",
+  "range_end": "0x801BE474",
+  "next_target": "0x801BE474",
+  "range_bytes": 928,
+  "matched_bytes": 128,
+  "nonmatching_bytes": 800,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "name": "fn_801BE0D4",
+      "start": "0x801BE0D4",
+      "end": "0x801BE354",
+      "retail_bytes": 640,
+      "generated_bytes": 640,
+      "canonical_objdiff_percent": 61.9,
+      "relocation_strict_objdiff_percent": 61.9,
+      "status": "NonMatching",
+      "divergence": "The recovered lookup, pitch adjustment, big-endian packet decode, scaled adjustment paths, state initialization, lookup-table clamp, dispatch, and flag update compile to the exact 640-byte retail text size. GC/1.2.5n selects a 104-byte frame and saves r25-r31 instead of retail's 88-byte frame and r26-r31 set; its endian-expression scheduling and conversion-temporary register allocation then diverge despite aligned control-flow landmarks.",
+      "evidence": ["reports/GEDE01/session-1689-fn_801BE0D4.json", "reports/GEDE01/session-1689-fn_801BE0D4-reloc-strict.json"]
+    },
+    {
+      "name": "fn_801BE354",
+      "start": "0x801BE354",
+      "end": "0x801BE3F4",
+      "retail_bytes": 160,
+      "generated_bytes": 156,
+      "canonical_objdiff_percent": 72.25,
+      "relocation_strict_objdiff_percent": 72.25,
+      "status": "NonMatching",
+      "divergence": "The recovered per-channel base, target, signed delta, divisor, and state-flag operations align semantically. GC/1.2.5n emits 156 bytes rather than retail's 160 because it retains the channel base in a different saved register, combines address formation, and schedules the epilogue load before the restore sequence.",
+      "evidence": ["reports/GEDE01/session-1689-fn_801BE354.json", "reports/GEDE01/session-1689-fn_801BE354-reloc-strict.json"]
+    },
+    {
+      "name": "fn_801BE3F4",
+      "start": "0x801BE3F4",
+      "end": "0x801BE474",
+      "retail_bytes": 128,
+      "generated_bytes": 128,
+      "canonical_objdiff_percent": 100.0,
+      "relocation_strict_objdiff_percent": 100.0,
+      "status": "Matching",
+      "relocations_equal": true,
+      "exception_sections_equal": true,
+      "evidence": ["reports/GEDE01/session-1689-fn_801BE3F4.json", "reports/GEDE01/session-1689-fn_801BE3F4-reloc-strict.json"]
+    }
+  ],
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "assembly_added": 0,
+  "shared_reconstructions": 0
+}

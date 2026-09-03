@@ -21,9 +21,13 @@ int fn_8013DE44(const Vec3* a, const Vec3* b, const Vec3* c,
     discriminant = projection * projection -
         lbl_80650360 * (fn_80211B44(&delta, &delta) - radius * radius);
     if (discriminant >= lbl_80650350) {
-        *result = lbl_80650364 * (-projection - fn_800ED720(discriminant));
+        float distance;
+
+        distance = -projection - fn_800ED720(discriminant);
+        *result = distance * lbl_80650364;
         if (!alternate && *result < lbl_80650350) {
-            *result = lbl_80650364 * (-projection + fn_800ED720(discriminant));
+            distance = -projection + fn_800ED720(discriminant);
+            *result = distance * lbl_80650364;
         }
         return 1;
     }

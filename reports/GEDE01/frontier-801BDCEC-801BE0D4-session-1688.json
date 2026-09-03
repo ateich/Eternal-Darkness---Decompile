@@ -1,0 +1,45 @@
+{
+  "session_id": "session-1688",
+  "range_start": "0x801BDCEC",
+  "range_end": "0x801BE0D4",
+  "next_target": "0x801BE0D4",
+  "range_bytes": 1000,
+  "matched_bytes": 400,
+  "nonmatching_bytes": 600,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "name": "fn_801BDCEC",
+      "start": "0x801BDCEC",
+      "end": "0x801BDE7C",
+      "retail_bytes": 400,
+      "generated_bytes": 400,
+      "canonical_objdiff_percent": 100.0,
+      "relocation_strict_objdiff_percent": 100.0,
+      "status": "Matching",
+      "relocations_equal": true,
+      "evidence": [
+        "reports/GEDE01/session-1688-fn_801BDCEC.json",
+        "reports/GEDE01/session-1688-fn_801BDCEC-reloc-strict.json"
+      ]
+    },
+    {
+      "name": "fn_801BDE7C",
+      "start": "0x801BDE7C",
+      "end": "0x801BE0D4",
+      "retail_bytes": 600,
+      "generated_bytes": 596,
+      "canonical_objdiff_percent": 65.04,
+      "relocation_strict_objdiff_percent": 65.04,
+      "status": "NonMatching",
+      "divergence": "The recovered resource lookup, endian decoding, two packet formats, scaling paths, dispatch, and state flag update compile as honest C, but GC/1.2.5n emits a 596-byte body instead of retail's 600-byte body. It selects a 104-byte frame instead of retail's 72-byte frame and a different saved-register set, schedules endian assembly differently, and uses compiler-local floating constants and conversion sequences rather than retail's exact constant relocations and register allocation.",
+      "evidence": [
+        "reports/GEDE01/session-1688-fn_801BDE7C.json",
+        "reports/GEDE01/session-1688-fn_801BDE7C-reloc-strict.json"
+      ]
+    }
+  ],
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "assembly_added": 0,
+  "shared_reconstructions": 0
+}
