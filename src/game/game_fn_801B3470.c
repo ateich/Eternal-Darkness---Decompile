@@ -30,6 +30,7 @@ void fn_801B3470(u8 index)
 {
     Channel* channel;
     Command* command;
+    u32 value;
 
     channel = &lbl_8064D380->channels[index];
     if (channel->active != 0) {
@@ -39,8 +40,9 @@ void fn_801B3470(u8 index)
             }
 
             if (*(u32*)((u8*)lbl_8064D380->flags_object + 0x10) & 0x40000000) {
-                channel->position = command->value;
-                fn_801B5B20(command->value >> 10, lbl_8064D388, index);
+                value = command->value;
+                channel->position = value;
+                fn_801B5B20(value >> 10, lbl_8064D388, index);
             } else {
                 fn_801B5B20(command->value, lbl_8064D388, index);
                 channel->position = channel->cursor->value << 10;

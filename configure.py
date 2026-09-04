@@ -3794,6 +3794,11 @@ if args.debug:
 else:
     cflags_base.append("-DNDEBUG=1")
 
+
+def cflags_with_optimization(optimization):
+    return [optimization if flag == "-O4,p" else flag for flag in cflags_base]
+
+
 Matching = True
 NonMatching = False
 Equivalent = config.non_matching
@@ -9637,14 +9642,14 @@ config.libs = [
             Object(Matching, "game/game_fn_801A98F4.c", extra_cflags=["-schedule off"]),
             Object(Matching, "game/game_fn_801A9964.c"),
             Object(Matching, "game/game_fn_801A9984.c", extra_cflags=["-schedule off"]),
-            Object(NonMatching, "game/game_fn_801A99B4.c"),
+            Object(Matching, "game/game_fn_801A99B4.c", cflags=cflags_with_optimization("-O1,p")),
             Object(Matching, "game/game_fn_801A9A00.c"),
             Object(Matching, "game/game_fn_801A9A20.c"),
             Object(NonMatching, "game/game_fn_801A9A40.c"),
             Object(Matching, "game/game_fn_801A9B28.c"),
             Object(Matching, "game/game_fn_801A9B30.c"),
             Object(NonMatching, "game/game_fn_801A9B38.c", extra_cflags=["-schedule off"]),
-            Object(NonMatching, "game/game_fn_801A9B94.c", extra_cflags=["-schedule off"]),
+            Object(Matching, "game/game_fn_801A9B94.c", cflags=cflags_with_optimization("-O1,p")),
             Object(Matching, "game/game_fn_801A9C78.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(NonMatching, "game/game_fn_801A9CDC.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(Matching, "game/game_fn_801A9DCC.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
@@ -9742,7 +9747,7 @@ config.libs = [
             Object(Matching, "game/game_fn_801AE530.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(Matching, "game/game_fn_801AE5DC.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(NonMatching, "game/game_fn_801AE6B0.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
-            Object(NonMatching, "game/game_fn_801AE91C.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
+            Object(Matching, "game/game_fn_801AE91C.c", cflags=cflags_with_optimization("-O3,p")),
             Object(Matching, "game/game_fn_801AEA78.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(Matching, "game/game_fn_801AEAE0.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(Matching, "game/game_fn_801AEB74.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
@@ -9813,7 +9818,7 @@ config.libs = [
             Object(Matching, "game/game_fn_801B19BC.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(Matching, "game/game_fn_801B19D8.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(Matching, "game/game_fn_801B1A1C.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
-            Object(NonMatching, "game/game_fn_801B1B0C.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
+            Object(Matching, "game/game_fn_801B1B0C.c", cflags=cflags_with_optimization("-O3")),
             Object(NonMatching, "game/game_fn_801B1BA0.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(Matching, "game/game_fn_801B2348.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(Matching, "game/game_fn_801B2380.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
@@ -9822,14 +9827,14 @@ config.libs = [
             Object(Matching, "game/game_fn_801B243C.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(Matching, "game/game_fn_801B2444.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(NonMatching, "game/game_fn_801B244C.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
-            Object(NonMatching, "game/game_fn_801B2528.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
+            Object(Matching, "game/game_fn_801B2528.c", mw_version="GC/1.2.5n"),
             Object(NonMatching, "game/game_fn_801B261C.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
-            Object(NonMatching, "game/game_fn_801B2748.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
+            Object(Matching, "game/game_fn_801B2748.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
             Object(Matching, "game/game_fn_801B2818.c", extra_cflags=["-opt nopeephole"]),
-            Object(NonMatching, "game/game_fn_801B2878.c", extra_cflags=["-opt nopeephole"]),
+            Object(Matching, "game/game_fn_801B2878.c", mw_version="GC/1.2.5n"),
             Object(Matching, "game/game_fn_801B2914.c", extra_cflags=["-opt nopeephole"]),
             Object(NonMatching, "game/game_fn_801B2980.c", extra_cflags=["-opt nopeephole"]),
-            Object(NonMatching, "game/game_fn_801B3470.c", mw_version="GC/1.2.5n", extra_cflags=["-opt nopeephole"]),
+            Object(Matching, "game/game_fn_801B3470.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
             Object(Matching, "game/game_fn_801B3558.c", mw_version="GC/1.2.5n", extra_cflags=["-opt nopeephole"]),
             Object(NonMatching, "game/game_fn_801B35BC.c", mw_version="GC/1.2.5n", extra_cflags=["-opt nopeephole"]),
             Object(NonMatching, "game/game_fn_801B3770.c", mw_version="GC/1.2.5n", extra_cflags=["-opt nopeephole"]),

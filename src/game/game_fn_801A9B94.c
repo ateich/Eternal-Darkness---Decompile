@@ -9,10 +9,13 @@ u8 fn_801A9B94(u8 value, int mode)
     int scale;
     int result;
     int clamped;
+    int base;
+    int factor;
 
     if (mode == 3) {
-        scale = fn_801A9B38();
-        scale = fn_801A9B28() * scale / 100;
+        base = fn_801A9B38();
+        factor = fn_801A9B28();
+        scale = factor * base / 100;
     } else if (mode == 2) {
         scale = fn_801A9B30();
     } else {

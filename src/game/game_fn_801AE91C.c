@@ -30,8 +30,9 @@ void fn_801AE91C(u32 id, u8 type, int channels, int rate)
     u32 index;
     Entry* entry;
     u32 format;
-    u8 selected_channels;
     u8 selected_rate;
+    u32 selected_channels;
+    Entry* child;
 
     fn_801ADC08();
     index = fn_801ADAF8(id_arg);
@@ -40,7 +41,7 @@ void fn_801AE91C(u32 id, u8 type, int channels, int rate)
         if (channels_arg == -1) {
             selected_channels = entry->channels;
         } else {
-            selected_channels = channels_arg;
+            selected_channels = (u8)channels_arg;
         }
         if (rate_arg == -1) {
             selected_rate = entry->rate;
@@ -56,14 +57,16 @@ void fn_801AE91C(u32 id, u8 type, int channels, int rate)
 
         if (entry->first != 0) {
             entry->first->type = type;
-            format = fn_801A9B94(entry->first->type, 2);
-            fn_801BA94C(entry->first->stream, format, entry->first->channels,
-                        entry->first->rate, 0, 0);
+            child = entry->first;
+            format = fn_801A9B94(child->type, 2);
+            fn_801BA94C(entry->first->stream, format, child->channels,
+                        child->rate, 0, 0);
         } else if (entry->second != 0) {
             entry->second->type = type;
-            format = fn_801A9B94(entry->second->type, 2);
-            fn_801BA94C(entry->second->stream, format, entry->second->channels,
-                        entry->second->rate, 0, 0);
+            child = entry->second;
+            format = fn_801A9B94(child->type, 2);
+            fn_801BA94C(entry->second->stream, format, child->channels,
+                        child->rate, 0, 0);
         }
     }
     fn_801ADBC0();

@@ -27,11 +27,11 @@ extern Node* lbl_8064D384;
 
 Node* fn_801B2528(int value, u8 type)
 {
-    Node* node = lbl_8064D384;
+    Node* node;
     Node* current;
     Node* previous;
 
-    if (node != 0) {
+    if ((node = lbl_8064D384) != 0) {
         if ((lbl_8064D384 = node->next) != 0) {
             lbl_8064D384->prev = 0;
         }
