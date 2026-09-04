@@ -13,7 +13,7 @@ commits are not visible here. This file is the durable record of who did what.
 
 ## Andrew ([@ateich](https://github.com/ateich))
 
-**28 functions, 12,772 matched code bytes.**
+**57 functions, 19,616 matched code bytes.**
 
 ### Script handlers and narrowed values ([#1](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/1), [#2](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/2), [#3](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/3)) — 6 functions, 7,488 bytes
 
@@ -110,3 +110,63 @@ consistency with an adjacent function that already matches. Every lever above is
 recorded in `docs/matching.md` together with the alternatives that failed *and
 their scores*, which is the standard this project wants and rarely gets: the
 negative results are what stop the next person re-deriving them.
+
+### Extern qualifiers and first-load scheduling ([#8](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/8)) — 7 functions, 2,676 bytes
+
+| Function | Bytes | Previous score |
+| --- | ---: | ---: |
+| `fn_8002B748` | 824 | 96.79612% |
+| `fn_8006B488` | 408 | 92.15686% |
+| `fn_80066BB8` | 332 | 95.12048% |
+| `fn_80074580` | 332 | 90.36144% |
+| `fn_8008DF64` | 276 | 94.202896% |
+| `fn_800BB4C4` | 256 | 90.625% |
+| `fn_800DA308` | 248 | 93.548386% |
+
+MWCC schedules an external object's first load from the qualifiers on its
+*declaration*, even when type, width and storage are identical. Adding `const`
+to three scalar declarations and removing it from four aggregate ones moved
+every load into the retail order with no change to control flow, local
+lifetimes or compiler flags. `fn_8002B748` additionally needed a post-compile
+rule that retains the MWCC-emitted `.sdata2` copy and renames local symbol
+`@59` to `lbl_8064E038` — the `.sdata2` externalization used elsewhere in the
+tree deletes that data and could not work here.
+
+### Const-qualified scalar externs ([#9](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/9)) — 14 functions, 2,528 bytes
+
+The same lever at scale: `const` on 21 read-only float extern declarations,
+with `volatile` deliberately retained on `lbl_8064F7F0`. Thirteen of the
+fourteen function bodies are untouched. Starting scores ranged from 71.14286%
+(`fn_800A4670`) to 97.13043% (`fn_800E801C`). `fn_800A32B8` is the clearest
+demonstration: the non-const declaration already produced the correct 240-byte
+size and all nine relocation targets and types, and still scheduled the
+`lbl_8064EEA0` load after the saved-register stores instead of after `mflr`.
+
+### Per-object compiler settings in the audio code ([#10](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/10)) — 8 functions, 1,640 bytes
+
+| Function | Bytes | Settings |
+| --- | ---: | --- |
+| `fn_801AE91C` | 348 | GC/1.3 `-O3,p` |
+| `fn_801B2528` | 244 | GC/1.2.5n `-O4,p` |
+| `fn_801B3470` | 232 | GC/1.2.5n `-O4,p`, exceptions on |
+| `fn_801A9B94` | 228 | GC/1.3 `-O1,p` |
+| `fn_801B2748` | 208 | GC/1.2.5n `-O4,p`, exceptions on |
+| `fn_801B2878` | 156 | GC/1.2.5n `-O4,p` |
+| `fn_801B1B0C` | 148 | GC/1.3 `-O3` |
+| `fn_801A99B4` | 76 | GC/1.3 `-O1,p` |
+
+The audio objects were never going to match on the game library defaults. Four
+move to GC/1.3 at a lower optimization level, four to GC/1.2.5n with the old
+scheduling and peephole overrides dropped, and two of those need
+`-Cpp_exceptions on` purely to reproduce their retail `extab` and
+`extabindex` sections. Two details worth keeping: the per-object optimization
+list has to *replace* `-O4,p`, not follow it (appending reached 94.47369% on
+`fn_801A99B4` where replacing reached 100%), and a compiler setting alone was
+never sufficient — six of the eight also needed a source correction, with the
+setting-only scores recorded in `docs/matching.md` as evidence.
+
+These three PRs took the tree from 29.358124% to 29.6556% matched code, 4,397
+to 4,426 functions and 4,630 to 4,659 objects. Each was built and measured
+separately on both the canonical and the `function_reloc_diffs=name_address`
+basis; `build/GEDE01/main.dol` still hashes to
+`ea24b6af954876ce072562ff39cdb4c81d32be1f`.

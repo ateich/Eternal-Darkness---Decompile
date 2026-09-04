@@ -1,6 +1,6 @@
 typedef unsigned int u32;
 
-extern volatile u32 lbl_8064D5A8;
+extern volatile int lbl_8064D5A8;
 
 extern void fn_801A9CDC(void);
 extern void fn_801AC0FC(void);

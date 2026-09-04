@@ -524,3 +524,84 @@ running total is a pointer. 364/364 bytes, 100%.
 
 All seven functions verify at 100% with relocations in objdiff, and the
 whole-DOL SHA-1 gate remains `ea24b6af954876ce072562ff39cdb4c81d32be1f`.
+
+## External object qualifiers affect first-load scheduling
+
+MWCC uses the qualifiers on an external object's declaration when scheduling
+its first load, even when the represented type, width, and storage are
+unchanged. Adding `const` to the scalar declarations in `fn_8002B748`,
+`fn_80066BB8`, and `fn_800BB4C4` moves their loads into the retail order.
+Conversely, removing `const` from the aggregate declarations in
+`fn_8006B488`, `fn_80074580`, `fn_8008DF64`, and `fn_800DA308` reproduces the
+retail aggregate-copy schedule. The previous declarations score 96.79612%,
+95.12048%, 90.625%, 92.15686%, 90.36144%, 94.202896%, and 93.548386%,
+respectively; no control flow, local lifetime, or compiler flag changes are
+needed.
+
+MWCC emits the `lbl_8064E038` bytes in `fn_8002B748` under the local name
+`@59`. Its post-compile rule retains `.sdata2`, renames the symbol, and
+globalizes it so other objects can resolve `lbl_8064E038`. After this rename,
+objdiff reports 824/824, 332/332, 408/408,
+332/332, 276/276, 256/256, and 248/248 bytes at 100% under
+`function_reloc_diffs=name_address`, with 30, 8, 19, 15, 21, 10, and 13
+relocations on both bases. The whole-DOL SHA-1 remains
+`ea24b6af954876ce072562ff39cdb4c81d32be1f`.
+
+## Const-qualified scalar externs affect load scheduling
+
+Adding `const` to 21 read-only float extern declarations makes MWCC schedule
+their loads in the retail order in fourteen functions. Thirteen function
+bodies, all symbol names, compiler flags, and object boundaries are unchanged.
+In `fn_8014C988`, a byte-neutral `volatile` qualifier was removed from the
+callback store. The existing `volatile` qualifier on `lbl_8064F7F0` is retained.
+
+For `fn_800A32B8`, the non-const declaration already produced the correct
+240-byte size and all nine relocation targets and types, but scheduled the
+`lbl_8064EEA0` load after the saved-register and descriptor stores instead of
+after `mflr`. For `fn_8014C988`, separate statements, a comma expression, and
+a volatile callback store all left the same divergence. Qualifying the
+read-only float externs resolves both without changing either function body.
+
+The fourteen functions total 2528 bytes and 102 relocations. Each reports
+100% on both the canonical basis and with
+`function_reloc_diffs=name_address`; the whole-DOL SHA-1 remains
+`ea24b6af954876ce072562ff39cdb4c81d32be1f`.
+
+## Per-object compiler settings in the audio code
+
+Eight audio functions require compiler settings different from the game
+library defaults. `fn_801A99B4` and `fn_801A9B94` use GC/1.3 `-O1,p`,
+`fn_801AE91C` uses GC/1.3 `-O3,p`, and `fn_801B1B0C` uses GC/1.3 `-O3`.
+`fn_801B2528`, `fn_801B2748`, `fn_801B2878`, and `fn_801B3470` use
+GC/1.2.5n with the normal game flags. `fn_801B2748` and `fn_801B3470` also
+require `-Cpp_exceptions on` to reproduce their `extab` and `extabindex`
+sections. The per-object optimization lists replace `-O4,p`; appending a
+second optimization flag does not reproduce the verified compiler invocations.
+
+The settings were found by sweeping the 35 unmatched audio units that carried
+`-schedule off` or `-opt nopeephole` overrides across GC/1.3 and GC/1.2.5n at
+`-O1` through `-O4,p`, followed by the `,p` variants and GC/1.3.2. The existing
+source for `fn_801B1B0C` matches unchanged at GC/1.3 `-O3`. The other seven
+also need small source corrections: named call-result locals in
+`fn_801A9B94`; the selected-channel width and child-entry lifetime in
+`fn_801AE91C`; a signed declaration in `fn_801A99B4`; assign-in-condition
+loads and direct list indexing in `fn_801B2528` and `fn_801B2748`; the volatile
+post-increment expression in `fn_801B2878`; and a named command-value local in
+`fn_801B3470`.
+
+The unsuccessful intermediate results were retained as evidence. The compiler
+setting alone reached 99.5% for `fn_801A9B94`, 96.7% for `fn_801AE91C`, 98.2%
+for `fn_801B2528`, 94.8% for `fn_801B2748`, 96.5% for `fn_801B2878`, and 93.8%
+for `fn_801B3470`. Flipping the multiply operands in `fn_801A9B94` was worse.
+For `fn_801A99B4`, locals of different widths, an inverted condition, and a
+modulo expression did not produce the record-form mask instruction. GC/1.3
+did not emit the retail prologue used by `fn_801B2748`; GC/1.2.5n did. Keeping
+the old scheduling or peephole overrides left different branch chains, and
+other optimization levels did not complete `fn_801B3470`. For `fn_801B2878`,
+a separate counter local and the attempted addi-zero pointer-copy forms did not
+match; the direct volatile post-increment did.
+
+Objdiff reports 100% for all eight functions under
+`function_reloc_diffs=name_address`: 76, 228, 348, 148, 244, 208, 156, and
+232 code bytes respectively, with 9, 4, 11, 8, 7, 9, 8, and 8 matching
+relocations.

@@ -1,7 +1,7 @@
 typedef unsigned int u32;
 typedef struct Vec3 { u32 x, y, z; } Vec3;
 
-extern float lbl_80650608;
+extern const float lbl_80650608;
 extern void fn_801A1B34(void);
 typedef void (*Callback)(void);
 extern void* fn_80148008(Vec3*, void*, void*, Callback);

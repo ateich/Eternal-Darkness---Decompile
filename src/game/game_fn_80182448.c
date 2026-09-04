@@ -4,7 +4,7 @@ typedef unsigned int u32;
 
 extern void* lbl_8064D238;
 extern u8 lbl_80606334[];
-extern float lbl_806509B8;
+extern const float lbl_806509B8;
 
 extern void* fn_8018038C(void*, void*);
 extern void fn_80182514(void*, void*, void*, u8*);

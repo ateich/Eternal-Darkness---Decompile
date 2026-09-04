@@ -15,22 +15,19 @@ extern void fn_801B80D8(void*);
 
 void fn_801B2748(void)
 {
-    unsigned int list_index;
-    unsigned int list_offset = 0;
     Node* node;
     Node* next;
+    unsigned int i;
 
-    for (list_index = 0; list_index < 2; list_index++, list_offset += 4) {
-        node = *(Node**)((unsigned char*)lbl_8064D380 + 0xE64 + list_offset);
+    for (i = 0; i < 2; i++) {
+        node = lbl_8064D380->lists[i];
         while (node != 0) {
             next = node->next;
             fn_801B80D8(node->object);
-            *(Node**)((unsigned char*)lbl_8064D380 + 0xE64 + list_offset) = node->next;
-            if (*(Node**)((unsigned char*)lbl_8064D380 + 0xE64 + list_offset) != 0) {
-                (*(Node**)((unsigned char*)lbl_8064D380 + 0xE64 + list_offset))->prev = 0;
+            if ((lbl_8064D380->lists[i] = node->next) != 0) {
+                lbl_8064D380->lists[i]->prev = 0;
             }
-            node->next = lbl_8064D380->lists[2];
-            if (lbl_8064D380->lists[2] != 0) {
+            if ((node->next = lbl_8064D380->lists[2]) != 0) {
                 lbl_8064D380->lists[2]->prev = node;
             }
             lbl_8064D380->lists[2] = node;

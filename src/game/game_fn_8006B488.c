@@ -12,7 +12,7 @@ typedef struct Entry {
     u8 rest[0x1C];
 } Entry;
 
-extern const Descriptor lbl_802390B4;
+extern Descriptor lbl_802390B4;
 extern Entry *lbl_8064C8D4;
 extern void *lbl_80243F74[];
 extern s32 fn_8006B620(s32 value);

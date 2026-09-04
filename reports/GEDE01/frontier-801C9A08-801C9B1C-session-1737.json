@@ -1,0 +1,33 @@
+{
+  "session_id": "session-1737",
+  "range_start": "0x801C9A08",
+  "range_end": "0x801C9B1C",
+  "next_target": "0x801C9B1C",
+  "range_bytes": 276,
+  "matched_bytes": 0,
+  "nonmatching_bytes": 276,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "name": "fn_801C9A08",
+      "start": "0x801C9A08",
+      "end": "0x801C9B1C",
+      "retail_bytes": 276,
+      "generated_bytes": 280,
+      "canonical_match_percent": 88.95652,
+      "relocation_strict_match_percent": 88.95652,
+      "status": "NonMatching",
+      "divergence": "The corrected 176-entry bucket layout now places events at +0xB50, bucket materialization occurs after the equality branch, the second-list link is retained as an address cursor, and the event index increments before the final float store. The remaining fresh diff has 30 argument mismatches, 2 deletes, 3 inserts, and 1 replace across 72 aligned rows, with 36 clean rows. Generated code is four bytes longer: GC/1.2.5n still rotates the bucket count, state base, scan cursor, link cursor, previous event, and current event registers, and orders event-address formation as addi-before-add where retail uses add-before-addi."
+    }
+  ],
+  "measurement": {
+    "command": "jq -r '(.left.symbols[]|select(.name==\"fn_801C9A08\")) as $l | (.right.symbols[]|select(.name==\"fn_801C9A08\")) as $r | \"fn_801C9A08 retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent)\"' reports/GEDE01/fn_801C9A08-session-1737-canonical.json && jq -c '[.left.symbols[]|select(.name==\"fn_801C9A08\")|.instructions[].diff_kind]|group_by(.)|map({kind:.[0],count:length})' reports/GEDE01/fn_801C9A08-session-1737-canonical.json",
+    "raw_output": "fn_801C9A08 retail_bytes=276 generated_bytes=280 match_percent=88.95652\n[{\"kind\":null,\"count\":36},{\"kind\":\"DIFF_ARG_MISMATCH\",\"count\":30},{\"kind\":\"DIFF_DELETE\",\"count\":2},{\"kind\":\"DIFF_INSERT\",\"count\":3},{\"kind\":\"DIFF_REPLACE\",\"count\":1}]"
+  },
+  "withdrawn_fallback": {
+    "name": "fn_801C9B1C",
+    "status": "unverified",
+    "registered": false,
+    "reason": "No committed direct objdiff evidence exists, so the prior unsupported figures are withdrawn."
+  }
+}

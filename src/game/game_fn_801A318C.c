@@ -3,7 +3,7 @@ typedef unsigned char u8;
 typedef unsigned short u16;
 
 extern u16 fn_80048660(void);
-extern float lbl_80650D38;
+extern const float lbl_80650D38;
 
 void fn_801A318C(u8* object)
 {

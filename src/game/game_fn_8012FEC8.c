@@ -14,8 +14,8 @@ typedef struct RuntimeState {
     u8 index;
 } RuntimeState;
 
-extern float lbl_806501D8;
-extern float lbl_806501DC;
+extern const float lbl_806501D8;
+extern const float lbl_806501DC;
 
 void fn_8012FEC8(RuntimeState* state)
 {

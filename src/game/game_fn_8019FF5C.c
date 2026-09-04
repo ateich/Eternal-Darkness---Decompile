@@ -30,8 +30,8 @@ typedef struct GlobalData {
 extern void* memset(void* dst, int value, u32 size);
 extern int fn_800FBFB0(void);
 extern GlobalData lbl_802FC5BC;
-extern float lbl_80650C98;
-extern float lbl_80650C9C;
+extern const float lbl_80650C98;
+extern const float lbl_80650C9C;
 extern float lbl_80650CA0;
 
 void fn_8019FF5C(EffectParams* params)

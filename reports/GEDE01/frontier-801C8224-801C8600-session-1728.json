@@ -1,0 +1,30 @@
+{
+  "session_id": "session-1728",
+  "retry": 2,
+  "range_start": "0x801C8224",
+  "range_end": "0x801C8600",
+  "range_bytes": 988,
+  "matched_bytes": 0,
+  "nonmatching_bytes": 988,
+  "unaccounted_spans": [],
+  "next_target": "0x801C8224",
+  "remediation_1": {
+    "verification": "reports/GEDE01/session-1728-remediation-1-verification.json",
+    "measure_command": "jq -r 'def fn: .symbols[]|select(.name==\"fn_801C8224\"); (.left|fn) as $l | (.right|fn) as $r | \"retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) retail_instruction_rows=\\($l.instructions|length) generated_instruction_rows=\\($r.instructions|length) differing_rows=\\([$l.instructions[]|select(.diff_kind != null)]|length)\"' build/GEDE01/session-1728-remediation-1-strict.json",
+    "raw_output": "retail_bytes=988 generated_bytes=988 match_percent=99.75709 retail_instruction_rows=247 generated_instruction_rows=247 differing_rows=10",
+    "data_section_command": "readelf -SW build/GEDE01/src/game/game_fn_801C8224.o | awk '$3==\".sdata2\" {print $3, \"size=\" $7, \"alignment=\" $NF}'",
+    "data_section_raw_output": ".sdata2 size=000008 alignment=8",
+    "corrected_divergence": "Generated code emits a TU-local unsigned-conversion bias named @90 in .sdata2 and relocates the third cached load to it, while retail instead loads lbl_80650FB8. That symbol and data-ownership difference changes constant-load order and consequently rotates the cached floating registers; the register operands are symptoms, not the root cause. An explicit union conversion was rejected because it changed the arithmetic instruction shape, so this function remains honest-C NonMatching and the frontier does not move."
+  },
+  "functions": [
+    {
+      "name": "fn_801C8224",
+      "status": "NonMatching",
+      "retail_bytes": 988,
+      "generated_bytes": 988,
+      "match_percent": 99.75709,
+      "canonical_evidence": "reports/GEDE01/session-1728-fn_801C8224.json",
+      "strict_evidence": "reports/GEDE01/session-1728-fn_801C8224-reloc-strict.json"
+    }
+  ]
+}

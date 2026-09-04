@@ -1,0 +1,18 @@
+{
+  "session_id": "session-1724",
+  "range_start": "0x801C4B5C",
+  "range_end": "0x801C773C",
+  "next_target": "0x801C773C",
+  "retail_bytes": 11232,
+  "matched_bytes": 164,
+  "nonmatching_bytes": 11068,
+  "unaccounted_spans": [],
+  "functions": [
+    {"name":"fn_801C4B5C","start":"0x801C4B5C","end":"0x801C753C","retail_bytes":10720,"generated_bytes":8,"status":"NonMatching","canonical_percent":0.07462686,"strict_percent":0.07462686,"blocker":"The 2680-instruction multiway command dispatcher is largely unrecovered; 422 retail relocation-bearing instructions, handler cases, list mutations, and persistent r14-r31 state are absent."},
+    {"name":"fn_801C753C","start":"0x801C753C","end":"0x801C7580","retail_bytes":68,"generated_bytes":68,"status":"Matching","canonical_percent":100.0,"strict_percent":100.0},
+    {"name":"fn_801C7580","start":"0x801C7580","end":"0x801C7624","retail_bytes":164,"generated_bytes":164,"status":"NonMatching","canonical_percent":81.585365,"strict_percent":81.585365,"blocker":"GC/1.2.5n schedules group address formation before the state clear and does not select retail's update-form list-head load."},
+    {"name":"fn_801C7624","start":"0x801C7624","end":"0x801C7684","retail_bytes":96,"generated_bytes":96,"status":"Matching","canonical_percent":100.0,"strict_percent":100.0},
+    {"name":"fn_801C7684","start":"0x801C7684","end":"0x801C773C","retail_bytes":184,"generated_bytes":200,"status":"NonMatching","canonical_percent":72.391304,"strict_percent":72.391304,"blocker":"GC/1.2.5n emits separate typed group-head address operations and keeps different base-register lifetimes, producing four extra instructions."}
+  ],
+  "accounting": "10720 + 68 + 164 + 96 + 184 = 11232 retail bytes; 68 + 96 = 164 matched bytes; 10720 + 164 + 184 = 11068 NonMatching bytes."
+}

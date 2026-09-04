@@ -5,7 +5,7 @@ typedef signed char s8;
 typedef signed short s16;
 
 extern u8 lbl_802FC5BC[];
-extern float lbl_806509B8;
+extern const float lbl_806509B8;
 
 void fn_80182380(u8* descriptor)
 {

@@ -1,0 +1,50 @@
+{
+  "session_id": "session-1728-remediation-1",
+  "scope": "review remediation only for fn_801C8224; frontier unchanged",
+  "source_disposition": "The retained source is unchanged. An explicit union conversion using lbl_80650FB8 was compiled and rejected because it changed the floating-point operation shape instead of matching retail; the retained implicit u32-to-float conversions remain the best verified candidate.",
+  "full_build": {
+    "command": "set -o pipefail; .tools/bin/ninja 2>&1 | tail -n 18",
+    "raw_output": "### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n[580/582] DOL build/GEDE01/main.dol\n[581/582] CHECK config/GEDE01/build.sha1\nbuild/GEDE01/main.dol: OK\n[582/582] PROGRESS\nProgress:\n  All: 45.25% fuzzy, 29.20% matched, 29.18% linked (4612 / 6103 files)\n    Code: 671860 / 2300692 bytes (4380 / 8216 functions)\n    Data: 36786 / 4305642 bytes (0.85%)\n  Game Code: 88.81% fuzzy, 57.23% matched, 57.17% linked (4594 / 5564 files)\n    Code: 668832 / 1168768 bytes (4318 / 5285 functions)\n    Data: 36562 / 38578 bytes (94.77%)\n  SDK/Runtime: 100.00% fuzzy, 100.00% matched, 100.00% linked (18 / 18 files)\n    Code: 3028 / 3028 bytes (62 / 62 functions)\n    Data: 224 / 224 bytes (100.00%)"
+  },
+  "canonical_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801C8224 fn_801C8224 -o build/GEDE01/session-1728-remediation-1-canonical.json --format json-pretty",
+    "measure_command": "jq -r 'def fn: .symbols[]|select(.name==\"fn_801C8224\"); (.left|fn) as $l | (.right|fn) as $r | \"retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) retail_instruction_rows=\\($l.instructions|length) generated_instruction_rows=\\($r.instructions|length) differing_rows=\\([$l.instructions[]|select(.diff_kind != null)]|length)\"' build/GEDE01/session-1728-remediation-1-canonical.json",
+    "raw_output": "retail_bytes=988 generated_bytes=988 match_percent=99.75709 retail_instruction_rows=247 generated_instruction_rows=247 differing_rows=10"
+  },
+  "relocation_strict_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801C8224 fn_801C8224 -o build/GEDE01/session-1728-remediation-1-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "measure_command": "jq -r 'def fn: .symbols[]|select(.name==\"fn_801C8224\"); (.left|fn) as $l | (.right|fn) as $r | \"retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) retail_instruction_rows=\\($l.instructions|length) generated_instruction_rows=\\($r.instructions|length) differing_rows=\\([$l.instructions[]|select(.diff_kind != null)]|length)\"' build/GEDE01/session-1728-remediation-1-strict.json",
+    "raw_output": "retail_bytes=988 generated_bytes=988 match_percent=99.75709 retail_instruction_rows=247 generated_instruction_rows=247 differing_rows=10"
+  },
+  "difference_rows": {
+    "command": "jq -r 'def fn: .symbols[]|select(.name==\"fn_801C8224\"); (.left|fn) as $l | (.right|fn) as $r | range(0; ($l.instructions|length)) as $i | select($l.instructions[$i].diff_kind != null) | \"row=\\($i) kind=\\($l.instructions[$i].diff_kind) retail=\\($l.instructions[$i].instruction.formatted // \"<none>\") generated=\\($r.instructions[$i].instruction.formatted // \"<none>\")\"' build/GEDE01/session-1728-remediation-1-strict.json",
+    "raw_output": "row=20 kind=DIFF_ARG_MISMATCH retail=lfs f28, lbl_80650FC4@sda21 generated=lfs f29, lbl_80650FC4@sda21\nrow=22 kind=DIFF_ARG_MISMATCH retail=lfd f29, lbl_80650FB8@sda21 generated=lfd f30, lbl_80650FC8@sda21\nrow=23 kind=DIFF_ARG_MISMATCH retail=lfd f30, lbl_80650FC8@sda21 generated=lfd f28, @90@sda21\nrow=54 kind=DIFF_ARG_MISMATCH retail=fsubs f0, f0, f29 generated=fsubs f0, f0, f28\nrow=150 kind=DIFF_ARG_MISMATCH retail=fsubs f0, f0, f29 generated=fsubs f0, f0, f28\nrow=151 kind=DIFF_ARG_MISMATCH retail=fmuls f0, f28, f0 generated=fmuls f0, f29, f0\nrow=189 kind=DIFF_ARG_MISMATCH retail=fsubs f0, f0, f29 generated=fsubs f0, f0, f28\nrow=190 kind=DIFF_ARG_MISMATCH retail=fmuls f0, f28, f0 generated=fmuls f0, f29, f0\nrow=221 kind=DIFF_ARG_MISMATCH retail=fsubs f0, f0, f29 generated=fsubs f0, f0, f28\nrow=222 kind=DIFF_ARG_MISMATCH retail=fmuls f0, f28, f0 generated=fmuls f0, f29, f0"
+  },
+  "data_section_evidence": {
+    "local_object_command": "readelf -sW build/GEDE01/src/game/game_fn_801C8224.o | awk '$4==\"OBJECT\" && $5==\"LOCAL\" {print $2, $3, $4, $5, $7, $8}'",
+    "local_object_raw_output": "00000000 8 OBJECT LOCAL 4 @90\n00000000 8 OBJECT LOCAL 2 @91\n00000000 12 OBJECT LOCAL 3 @92",
+    "section_command": "readelf -SW build/GEDE01/src/game/game_fn_801C8224.o | awk '$3==\".sdata2\" {print $3, \"size=\" $7, \"alignment=\" $NF}'",
+    "section_raw_output": ".sdata2 size=000008 alignment=8",
+    "relocation_command": "readelf -rW build/GEDE01/src/game/game_fn_801C8224.o | awk '/lbl_80650FC4|lbl_80650FC8|@90/ {print $1, $3, $5}'",
+    "relocation_raw_output": "00000052 R_PPC_EMB_SDA21 lbl_80650FC4\n0000005a R_PPC_EMB_SDA21 lbl_80650FC8\n0000005e R_PPC_EMB_SDA21 @90",
+    "objdiff_section_command": "jq -r '([.left.sections[].name]|\"retail_sections=\"+join(\",\")), ([.right.sections[].name]|\"generated_sections=\"+join(\",\"))' build/GEDE01/session-1728-remediation-1-strict.json",
+    "objdiff_section_raw_output": "retail_sections=extab,extabindex,.text,.relaextabindex,.rela.text,.symtab,.strtab,.shstrtab\ngenerated_sections=.text,extab,extabindex,.sdata2,.rela.text,.relaextabindex,.symtab,.strtab,.shstrtab,.comment",
+    "conclusion": "The generated TU has a local .sdata2 conversion literal @90 and relocates its third cached floating load to that literal. Retail has no measured .sdata2 section in this TU and relocates the corresponding load to lbl_80650FB8. The resulting cached-register rotation is downstream of this symbol and data-ownership mismatch, not an independent register-allocation blocker."
+  },
+  "aggregate_measurement": {
+    "command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report.json",
+    "raw_output": "matching_objects=4612 total_objects=6103 matching_functions=4380 total_functions=8216 matching_code_bytes=671860 total_code_bytes=2300692 matching_data_bytes=36786 total_data_bytes=4305642 linked_code_bytes=671240 linked_data_bytes=36238"
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol"
+  },
+  "accounting": {
+    "command": "jq -r 'def fn: .symbols[]|select(.name==\"fn_801C8224\"); (.left|fn) as $f | \"matched_bytes_credited=\\(if $f.match_percent == 100 then ($f.size|tonumber) else 0 end) nonmatching_bytes=\\(if $f.match_percent == 100 then 0 else ($f.size|tonumber) end) next_target=0x801C8224\"' build/GEDE01/session-1728-remediation-1-strict.json",
+    "raw_output": "matched_bytes_credited=0 nonmatching_bytes=988 next_target=0x801C8224",
+    "next_target": "0x801C8224",
+    "matched_bytes_credited": 0,
+    "nonmatching_bytes": 988,
+    "status": "NonMatching"
+  }
+}

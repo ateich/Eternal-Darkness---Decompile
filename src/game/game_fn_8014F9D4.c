@@ -8,8 +8,8 @@ typedef struct Vec3Words { u32 x, y, z; } Vec3Words;
 
 extern u32 lbl_80651C08;
 extern u16 lbl_80651C0C;
-extern float lbl_80650578;
-extern float lbl_8065057C;
+extern const float lbl_80650578;
+extern const float lbl_8065057C;
 extern void fn_8015023C(void);
 extern u8* fn_80149D98(void*);
 extern void fn_80149D64(void*);

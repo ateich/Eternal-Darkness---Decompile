@@ -1,0 +1,55 @@
+{
+  "session_id": "session-1740",
+  "scope": "signature consolidation only; no frontier matching",
+  "starting_target": "0x801C9E74",
+  "ending_next_target": "0x801C9E74",
+  "accounting": {
+    "matched_bytes_added": 0,
+    "nonmatching_bytes_added": 0,
+    "match_counts_revised": false
+  },
+  "applied_correction": {
+    "symbol": "fn_8000755C",
+    "owned_definition_evidence": "void fn_8000755C(s32, s32, u32) at src/game/game_fn_8000755C.c:136",
+    "edited_declaration": "src/game/game_fn_8000EE9C.c:4",
+    "affected_translation_units": 1,
+    "safety_gates": "three GPR parameters unchanged; no unspecified prototype, callback/cast use, or unavailable return type"
+  },
+  "scope_decision": "fn_8000755C was the deliberately selected bounded correction, not the sole eligible candidate; the remaining eligible candidates are unstarted pending work.",
+  "contradiction_accounting": {
+    "command": "jq -r '[.return_register_contradictions[] | select(.disposition==\"deferred\")] as $r | [.abi_divergent[] | select(.disposition==\"deferred\")] as $a | [.return_register_contradictions[] | select(.disposition==\"pending\")] as $p | \"deferred=\\(($r|length)+($a|length)) pending=\\($p|length)\"' build/GEDE01/session-1740-remediation-1-fresh-audit.json",
+    "raw_output": "deferred=785 pending=170",
+    "interpretation": "Deferred is the sum of the tool's deferred return-register and ABI-divergent buckets; pending is eligible unstarted work and is not included in the steady-state deferred total.",
+    "tracking_remediation_evidence": "reports/GEDE01/session-1740-remediation-1-verification.json"
+  },
+  "residual_parameter_difference": {
+    "symbol": "fn_8000755C",
+    "declaration": "void fn_8000755C(s32, s32, s32)",
+    "definition": "void fn_8000755C(s32, s32, u32 flags)",
+    "disposition": "deferred because the signedness spelling difference preserves the third parameter's one-GPR PPC EABI shape",
+    "evidence": "reports/GEDE01/signature-shadow-session-1740.json"
+  },
+  "build": {
+    "command": ".tools/bin/ninja",
+    "status": "passed"
+  },
+  "affected_object": {
+    "name": "main/game/game_fn_8000EE9C",
+    "report_command": "jq unit measures from build/GEDE01/report.json",
+    "raw_output": "complete=true matched_code_percent=100.0 complete_code_percent=100.0",
+    "canonical_objdiff": "reports/GEDE01/objdiff-game_fn_8000EE9C-session-1740.json",
+    "relocation_strict_objdiff": "reports/GEDE01/objdiff-game_fn_8000EE9C-session-1740-reloc-strict.json",
+    "objdiff_raw_output": "canonical code=100.0 diff_rows=0; relocation-strict code=100.0 diff_rows=0"
+  },
+  "dol_identity": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol",
+    "expected": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "unchanged": true
+  },
+  "progress_invariants": {
+    "next_target": "0x801C9E74",
+    "next_gate_rewritten": false,
+    "headline_match_counts_rewritten": false
+  }
+}

@@ -33,9 +33,9 @@ typedef struct EffectOwner {
     void *field68;
 } EffectOwner;
 
-extern float lbl_8064E9E0;
-extern float lbl_8064E9E4;
-extern float lbl_8064E9E8;
+extern const float lbl_8064E9E0;
+extern const float lbl_8064E9E4;
+extern const float lbl_8064E9E8;
 extern u32 lbl_8064B58C;
 extern void fn_8007BD40(void);
 extern void fn_8014C5D4(void);
@@ -43,7 +43,6 @@ extern void fn_8014CBC0(EffectOwner *);
 extern EffectOwner *fn_80047D6C(void);
 extern void fn_8007BCFC(int, int);
 
-/* NonMatching: honest reconstruction of the effect owner initializer. */
 void fn_8007C22C(EffectOwner *effect, Vec3 *position, void *owner, u8 enabled)
 {
     if (effect != 0) {

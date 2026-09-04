@@ -1,0 +1,52 @@
+{
+  "session_id": "session-1737-remediation-1",
+  "scope": "Remediate fn_801C9A08 without advancing the frontier",
+  "source_corrections": [
+    "AudioState.buckets is 176 entries, placing events at +0xB50.",
+    "The indexed bucket cursor is materialized only after the equality branch.",
+    "The address of bucket.second is retained for the empty-list store.",
+    "The event index post-increment occurs before the final key store."
+  ],
+  "layout_verification": {
+    "command": "sed -n '27,32p' src/game/game_fn_801C9A08.c && jq -r '.right.symbols[]|select(.name==\"fn_801C9A08\")|.instructions[]|.instruction.formatted|select(type==\"string\")|select(test(\"0xb50|0xb54|0xb58\"))' reports/GEDE01/fn_801C9A08-session-1737-canonical.json",
+    "raw_output": "    char pad000[0x50];\n    Bucket buckets[176];\n    Event events[64];\n} AudioState;\n\ntypedef struct BucketCursor {\naddi r0, r4, 0xb50\naddi r0, r4, 0xb50\naddi r4, r4, 0xb50\nstfs f1, 0xb54(r3)"
+  },
+  "canonical_objdiff": {
+    "generate_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801C9A08 fn_801C9A08 -o reports/GEDE01/fn_801C9A08-session-1737-canonical.json --format json",
+    "measure_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801C9A08\")) as $l | (.right.symbols[]|select(.name==\"fn_801C9A08\")) as $r | \"fn_801C9A08 retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent)\"' reports/GEDE01/fn_801C9A08-session-1737-canonical.json",
+    "raw_output": "fn_801C9A08 retail_bytes=276 generated_bytes=280 match_percent=88.95652"
+  },
+  "relocation_strict_objdiff": {
+    "generate_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801C9A08 fn_801C9A08 -o reports/GEDE01/fn_801C9A08-session-1737-reloc-strict.json --format json -c function_reloc_diffs=name_address",
+    "measure_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801C9A08\")) as $l | (.right.symbols[]|select(.name==\"fn_801C9A08\")) as $r | \"fn_801C9A08 retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent)\"' reports/GEDE01/fn_801C9A08-session-1737-reloc-strict.json",
+    "raw_output": "fn_801C9A08 retail_bytes=276 generated_bytes=280 match_percent=88.95652"
+  },
+  "diff_kind_measurement": {
+    "command": "jq -c '[.left.symbols[]|select(.name==\"fn_801C9A08\")|.instructions[].diff_kind]|group_by(.)|map({kind:.[0],count:length})' reports/GEDE01/fn_801C9A08-session-1737-canonical.json",
+    "raw_output": "[{\"kind\":null,\"count\":36},{\"kind\":\"DIFF_ARG_MISMATCH\",\"count\":30},{\"kind\":\"DIFF_DELETE\",\"count\":2},{\"kind\":\"DIFF_INSERT\",\"count\":3},{\"kind\":\"DIFF_REPLACE\",\"count\":1}]"
+  },
+  "range_measurement": {
+    "command": "python3 -c 'print(0x801C9B1C-0x801C9A08)'",
+    "raw_output": "276"
+  },
+  "canonical_counters": {
+    "command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report.json",
+    "raw_output": "matching_objects=4622 total_objects=6104 matching_functions=4389 total_functions=8216 matching_code_bytes=673480 total_code_bytes=2300692 matching_data_bytes=37030 total_data_bytes=4305642 linked_code_bytes=673048 linked_data_bytes=36378"
+  },
+  "build_check": {
+    "command": "sha1sum -c config/GEDE01/build.sha1",
+    "raw_output": "build/GEDE01/main.dol: OK"
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol"
+  },
+  "accounting": {
+    "command": "jq -r '(.left.symbols[]|select(.name==\"fn_801C9A08\")|.match_percent) as $p | \"matched_bytes_claimed=\\(if $p == 100 then 276 else 0 end) nonmatching_bytes=\\(if $p == 100 then 0 else 276 end)\"' reports/GEDE01/fn_801C9A08-session-1737-canonical.json",
+    "raw_output": "matched_bytes_claimed=0 nonmatching_bytes=276",
+    "matched_bytes_claimed": 0,
+    "nonmatching_bytes": 276,
+    "next_target": "0x801C9B1C",
+    "withdrawn_fn_801C9B1C_figures": "unverified"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "session_id": "session-1746",
+  "range_start": "0x801CA7C0",
+  "range_end": "0x801CAEB8",
+  "range_bytes": 1784,
+  "matched_bytes_this_session": 0,
+  "nonmatching_bytes": 1784,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "symbol": "fn_801CA7C0",
+      "address": "0x801CA7C0",
+      "size": 1488,
+      "generated_size": 1456,
+      "match_percent": 78.98656,
+      "status": "PreviouslyRegisteredNonMatching",
+      "evidence": "reports/GEDE01/session-1746-fn_801CA7C0-reloc-strict.json"
+    },
+    {
+      "symbol": "fn_801CAD90",
+      "address": "0x801CAD90",
+      "size": 296,
+      "generated_size": 296,
+      "match_percent": 99.85135,
+      "status": "NonMatching",
+      "divergence": "Every body instruction and all seven text relocations align, but GC/1.2.5n allocates a 0x28-byte frame where retail uses 0x20, shifting the prologue and epilogue stack operands by eight bytes.",
+      "evidence": "reports/GEDE01/session-1746-fn_801CAD90-reloc-strict.json"
+    }
+  ],
+  "attempted_unregistered_next": {
+    "symbol": "fn_801CAEB8",
+    "address": "0x801CAEB8",
+    "size": 244,
+    "best_match_percent": 99.88525,
+    "generated_size": 244,
+    "disposition": "Withdrawn and not registered to enforce the one-new-NonMatching cap after a zero-match session; every body instruction and relocation aligned, but the generated frame was 0x20 versus retail 0x18."
+  },
+  "next_target": "0x801CAEB8"
+}

@@ -1,0 +1,54 @@
+{
+  "session_id": "session-1745-remediation-1",
+  "scope": "Remediate fn_801CA7C0 source-shape and evidence findings only; frontier unchanged.",
+  "full_build": {
+    "command": "set -o pipefail; .tools/bin/ninja 2>&1 | tee build/GEDE01/session-1745-remediation-1-full-build.raw | awk '/LINK build\\/GEDE01\\/main.elf/ || /DOL build\\/GEDE01\\/main.dol/ || /CHECK config\\/GEDE01\\/build.sha1/ || /PROGRESS/ || /^build\\/GEDE01\\/main.dol: OK$/ || /^Progress:$/ || /^  All:/ || /^    Code:/ || /^    Data:/ || /^  Game Code:/ || /^  SDK\\/Runtime:/'",
+    "raw_output": "[581/584] LINK build/GEDE01/main.elf\n[582/584] DOL build/GEDE01/main.dol\n[583/584] CHECK config/GEDE01/build.sha1\nbuild/GEDE01/main.dol: OK\n[584/584] PROGRESS\nProgress:\n  All: 45.67% fuzzy, 29.36% matched, 29.34% linked (4630 / 6109 files)\n    Code: 675440 / 2300692 bytes (4397 / 8216 functions)\n    Data: 37118 / 4305642 bytes (0.86%)\n  Game Code: 88.87% fuzzy, 57.04% matched, 57.00% linked (4612 / 5593 files)\n    Code: 672412 / 1178896 bytes (4335 / 5314 functions)\n    Data: 36894 / 38958 bytes (94.70%)\n  SDK/Runtime: 100.00% fuzzy, 100.00% matched, 100.00% linked (18 / 18 files)\n    Code: 3028 / 3028 bytes (62 / 62 functions)\n    Data: 224 / 224 bytes (100.00%)",
+    "result": "success"
+  },
+  "affected_object_objdiff": {
+    "generate_commands": [
+      "build/tools/objdiff-cli diff -1 build/GEDE01/obj/game/game_fn_801CA7C0.o -2 build/GEDE01/src/game/game_fn_801CA7C0.o -o build/GEDE01/session-1745-remediation-1-fn_801CA7C0-canonical.json --format json-pretty fn_801CA7C0",
+      "build/tools/objdiff-cli diff -1 build/GEDE01/obj/game/game_fn_801CA7C0.o -2 build/GEDE01/src/game/game_fn_801CA7C0.o -o build/GEDE01/session-1745-remediation-1-fn_801CA7C0-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address fn_801CA7C0"
+    ],
+    "generate_raw_output": " INFO Writing to build/GEDE01/session-1745-remediation-1-fn_801CA7C0-canonical.json\n INFO Writing to build/GEDE01/session-1745-remediation-1-fn_801CA7C0-reloc-strict.json",
+    "measurement_command": "for basis in canonical reloc-strict; do jq -c --arg basis \"$basis\" '{basis:$basis,function:\"fn_801CA7C0\",retail_text_bytes:(.left.sections[]|select(.name==\".text\")|.size),generated_text_bytes:(.right.sections[]|select(.name==\".text\")|.size),text_match_percent:(.left.sections[]|select(.name==\".text\")|.match_percent),extab_match_percent:([.left.sections[]|select(.name==\"extab\")|.match_percent][0] // \"absent\"),extabindex_match_percent:([.left.sections[]|select(.name==\"extabindex\")|.match_percent][0] // \"absent\")}' build/GEDE01/session-1745-remediation-1-fn_801CA7C0-$basis.json; done",
+    "measurement_raw_output": "{\"basis\":\"canonical\",\"function\":\"fn_801CA7C0\",\"retail_text_bytes\":\"1488\",\"generated_text_bytes\":\"1456\",\"text_match_percent\":78.98656,\"extab_match_percent\":100.0,\"extabindex_match_percent\":91.66667}\n{\"basis\":\"reloc-strict\",\"function\":\"fn_801CA7C0\",\"retail_text_bytes\":\"1488\",\"generated_text_bytes\":\"1456\",\"text_match_percent\":78.98656,\"extab_match_percent\":100.0,\"extabindex_match_percent\":91.66667}",
+    "status": "NonMatching"
+  },
+  "source_shape_measurement": {
+    "command": "printf 'baseline '; head -1 build/GEDE01/remediation-1745-baseline-fndiff.txt; printf 'final '; head -1 build/GEDE01/session-1745-remediation-1-final-fndiff.txt; for f in build/GEDE01/remediation-1745-baseline-fndiff.txt build/GEDE01/session-1745-remediation-1-final-fndiff.txt; do printf '%s ' \"$f\"; perl -ne 'if (/cmplw (r\\d+), r0.*\\| cmplw r0, (r\\d+)/ && $1 eq $2) {$n++} END { print \"same_register_cmplw_operand_inversions=\", $n+0, \"\\n\" }' \"$f\"; done; for f in build/GEDE01/remediation-1745-baseline-fndiff.txt build/GEDE01/session-1745-remediation-1-final-fndiff.txt; do printf '%s ' \"$f\"; perl -ne '$n++ if /beq .*\\| bne /; END { print \"beq_to_bne_shapes=\", $n+0, \"\\n\" }' \"$f\"; done; for f in build/GEDE01/remediation-1745-baseline-fndiff.txt build/GEDE01/session-1745-remediation-1-final-fndiff.txt; do printf '%s ' \"$f\"; perl -ne '$n++ if /addi (r\\d+), \\1, 0x404\\s+\\| addi \\1, \\1, 0x404/; END { print \"aligned_offset_increment_rows=\", $n+0, \"\\n\" }' \"$f\"; done",
+    "raw_output": "baseline target 1488 bytes  base 1456 bytes  match 78.56721\nfinal target 1488 bytes  base 1456 bytes  match 78.98656\nbuild/GEDE01/remediation-1745-baseline-fndiff.txt same_register_cmplw_operand_inversions=16\nbuild/GEDE01/session-1745-remediation-1-final-fndiff.txt same_register_cmplw_operand_inversions=0\nbuild/GEDE01/remediation-1745-baseline-fndiff.txt beq_to_bne_shapes=6\nbuild/GEDE01/session-1745-remediation-1-final-fndiff.txt beq_to_bne_shapes=6\nbuild/GEDE01/remediation-1745-baseline-fndiff.txt aligned_offset_increment_rows=0\nbuild/GEDE01/session-1745-remediation-1-final-fndiff.txt aligned_offset_increment_rows=2",
+    "interpretation": "Swapping the equality operands in every voice loop removes the measured same-register compare inversions. Reversing the loop update comma order improves aligned offset-update scheduling. Redundant parameter casts were removed. These are retained source fixes. The remaining branch shapes are unresolved source structure, not settled compiler divergence."
+  },
+  "tested_unretained_variants": {
+    "command": "printf 'goto_variant '; head -1 build/GEDE01/remediation-1745-goto-fndiff.txt; printf 'goto_variant_beq_to_bne_shapes='; perl -ne '$n++ if /beq .*\\| bne /; END {print $n+0,\"\\n\"}' build/GEDE01/remediation-1745-goto-fndiff.txt; printf 'nested_init_variant '; head -1 build/GEDE01/remediation-1745-nested-init-fndiff.txt; printf 'nested_init_generated_init_from_register_rows='; perl -ne '$n++ if /(?:addi|mr) (r\\d+), (r\\d+)(?:, 0x0)?\\s+\\| (?:addi|mr) \\1, \\2(?:, 0x0)?/; END {print $n+0,\"\\n\"}' build/GEDE01/remediation-1745-nested-init-fndiff.txt",
+    "raw_output": "goto_variant target 1488 bytes  base 1456 bytes  match 78.98656\ngoto_variant_beq_to_bne_shapes=6\nnested_init_variant target 1488 bytes  base 1456 bytes  match 78.98656\nnested_init_generated_init_from_register_rows=0",
+    "interpretation": "An explicit equality-goto-body followed by break compiled to the same direct opposite-condition branch. A nested assignment dependency for loop initialization did not produce retail's init-from-register rows. Both hypotheses remain recorded as tested source spellings and neither is attributed to the compiler as settled."
+  },
+  "signature_contradiction_ledger": {
+    "site_command": "rg -n '^extern void fn_801CA7C0|^void fn_801CA7C0' src/game/game_fn_801B46C8.c src/game/game_fn_801BE874.c src/game/game_fn_801B7E84.c src/game/game_fn_801CA7C0.c",
+    "site_raw_output": "src/game/game_fn_801CA7C0.c:10:void fn_801CA7C0(u8 control, u8 channel, u8 layer, u8 value)\nsrc/game/game_fn_801B46C8.c:46:extern void fn_801CA7C0(int, int, int, int);\nsrc/game/game_fn_801B7E84.c:7:extern void fn_801CA7C0();\nsrc/game/game_fn_801BE874.c:12:extern void fn_801CA7C0(int, u8, u8, int);",
+    "declaration_count_command": "rg -n '^extern void fn_801CA7C0' src/game/game_fn_801B46C8.c src/game/game_fn_801BE874.c src/game/game_fn_801B7E84.c | wc -l",
+    "declaration_count_raw_output": "3",
+    "disposition": "Registered as an ABI-equivalent source-signature contradiction. Caller declarations are deliberately unchanged because retail entry masking supports byte-width consumption but does not by itself establish the original C prototype, and prototype edits may perturb the independently reconstructed caller objects."
+  },
+  "real_relocations": {
+    "command": "for side in obj src; do printf '%s ' \"$side\"; readelf -rW build/GEDE01/$side/game/game_fn_801CA7C0.o | sed -n \"/Relocation section '.rela.text'/p\"; done; for side in obj src; do printf '%s lbl_8064D3D0_sda21_entries=' \"$side\"; readelf -rW build/GEDE01/$side/game/game_fn_801CA7C0.o | awk '/R_PPC_EMB_SDA21/ && /lbl_8064D3D0/{n++} END{print n+0}'; done; for side in obj src; do echo \"$side .relaextabindex\"; readelf -rW build/GEDE01/$side/game/game_fn_801CA7C0.o | awk '/relaextabindex/{p=1;next} p && /^$/{exit} p && /R_PPC/{print $1,$3,$5,$6,$7}'; done",
+    "raw_output": "obj Relocation section '.rela.text' at offset 0x668 contains 36 entries:\nsrc Relocation section '.rela.text' at offset 0x5f8 contains 34 entries:\nobj lbl_8064D3D0_sda21_entries=16\nsrc lbl_8064D3D0_sda21_entries=14\nobj .relaextabindex\n00000000 R_PPC_ADDR32 fn_801CA7C0 + 0\n00000008 R_PPC_ADDR32 @etb_80005B58 + 0\nsrc .relaextabindex\n00000000 R_PPC_ADDR32 fn_801CA7C0 + 0\n00000008 R_PPC_ADDR32 @149 + 0"
+  },
+  "canonical_headline": {
+    "command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report.json",
+    "raw_output": "matching_objects=4630 total_objects=6109 matching_functions=4397 total_functions=8216 matching_code_bytes=675440 total_code_bytes=2300692 matching_data_bytes=37118 total_data_bytes=4305642 linked_code_bytes=675008 linked_data_bytes=36438"
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol",
+    "equal": true
+  },
+  "frontier": {
+    "next_target": "0x801CA7C0",
+    "status": "NonMatching",
+    "accounting_evidence": "reports/GEDE01/frontier-801CA7C0-801CAD90-session-1745.json"
+  }
+}

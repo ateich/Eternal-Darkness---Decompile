@@ -87,6 +87,25 @@ config.asflags = ["-mgekko", "--strip-local-absolute", "-I include", f"-I build/
 config.ldflags = ["-fp hardware", "-nodefaults"]
 config.custom_build_rules = [
     {
+        "name": "externalize_game_801C90A4_unsigned_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @23 lbl_80650FB8 orig/GEDE01/sys/main.dol && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@23=lbl_80650FB8 --remove-section=.sdata2 "
+            "--rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "externalize_game_801C8160_unsigned_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @23 lbl_80650FB8 orig/GEDE01/sys/main.dol && "
+            "build/binutils/powerpc-eabi-objcopy --redefine-sym=@23=lbl_80650FB8 "
+            "--remove-section=.sdata2 --rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
         "name": "externalize_game_801C2D9C_conversion_biases",
         "command": (
             "python3 tools/externalize_elf_symbol.py $in @14 lbl_80650F70 orig/GEDE01/sys/main.dol && "
@@ -1362,6 +1381,15 @@ config.custom_build_rules = [
         "description": "EXTERNALIZE $in",
     },
     {
+        "name": "globalize_game_8002B748_bias",
+        "command": (
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@59=lbl_8064E038 "
+            "--globalize-symbol=lbl_8064E038 $in && touch $out"
+        ),
+        "description": "GLOBALIZE $in",
+    },
+    {
         "name": "externalize_game_800272B4_bias",
         "command": (
             "python3 tools/externalize_elf_symbol.py $in @29 && "
@@ -2328,6 +2356,16 @@ guarded_externalize_rules.add("externalize_string_pool_80250588")
 config.custom_build_steps = {
     "post-compile": [
         {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_801C90A4.externalized"],
+            "rule": "externalize_game_801C90A4_unsigned_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_801C90A4.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_801C8160.externalized"],
+            "rule": "externalize_game_801C8160_unsigned_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_801C8160.o"],
+        },
+        {
             "outputs": [f"build/{VERSION}/src/game/game_fn_801C2D9C.externalized"],
             "rule": "externalize_game_801C2D9C_conversion_biases",
             "inputs": [f"build/{VERSION}/src/game/game_fn_801C2D9C.o"],
@@ -3288,6 +3326,11 @@ config.custom_build_steps = {
             "inputs": [f"build/{VERSION}/src/game/game_fn_8002F428.o"],
         },
         {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8002B748.globalized"],
+            "rule": "globalize_game_8002B748_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8002B748.o"],
+        },
+        {
             "outputs": [f"build/{VERSION}/src/game/game_fn_800272B4.externalized"],
             "rule": "externalize_game_800272B4_bias",
             "inputs": [f"build/{VERSION}/src/game/game_fn_800272B4.o"],
@@ -3793,6 +3836,11 @@ if args.debug:
     cflags_base.extend(["-sym on", "-DDEBUG=1"])
 else:
     cflags_base.append("-DNDEBUG=1")
+
+
+def cflags_with_optimization(optimization):
+    return [optimization if flag == "-O4,p" else flag for flag in cflags_base]
+
 
 Matching = True
 NonMatching = False
@@ -4509,12 +4557,8 @@ config.libs = [
             Object(Matching, "game/game_fn_8002B650.c"),
             Object(Matching, "game/game_fn_8002B688.c"),
             Object(Matching, "game/game_fn_8002B6B0.c"),
-            # 96.79612%: exact 824-byte real-C reconstruction; the remaining
-            # differences are confined to scheduling two global loads in the
-            # final call setup. All 30 relocation targets/types agree and
-            # 28/30 sites are equal; its owned sdata2 constant is 100%.
             Object(
-                NonMatching,
+                Matching,
                 "game/game_fn_8002B748.c",
                 extra_cflags=["-use_lmw_stmw on"],
             ),
@@ -5231,7 +5275,7 @@ config.libs = [
     Object(NonMatching, "game/game_fn_80066888.c", extra_cflags=["-use_lmw_stmw on"]),
     Object(Matching, "game/game_fn_80066A0C.c", extra_cflags=["-use_lmw_stmw on"]),
     Object(Matching, "game/game_fn_80066AEC.c", extra_cflags=["-use_lmw_stmw on"]),
-    Object(NonMatching, "game/game_fn_80066BB8.c", extra_cflags=["-use_lmw_stmw on"]),
+    Object(Matching, "game/game_fn_80066BB8.c", extra_cflags=["-use_lmw_stmw on"]),
     Object(Matching, "game/game_fn_80066D04.c", extra_cflags=["-use_lmw_stmw on"]),
     Object(Matching, "game/game_fn_80066D80.c", extra_cflags=["-use_lmw_stmw on"]),
     Object(NonMatching, "game/game_fn_80066E78.c", extra_cflags=["-use_lmw_stmw on"]),
@@ -5284,7 +5328,7 @@ config.libs = [
     Object(NonMatching, "game/game_fn_8006B21C.c"),
     Object(Matching, "game/game_fn_8006B364.c"),
     Object(NonMatching, "game/game_fn_8006B40C.c"),
-    Object(NonMatching, "game/game_fn_8006B488.c", extra_cflags=["-use_lmw_stmw on"]),
+    Object(Matching, "game/game_fn_8006B488.c", extra_cflags=["-use_lmw_stmw on"]),
     Object(NonMatching, "game/game_fn_8006B620.c"),
     Object(NonMatching, "game/game_fn_8006B70C.c"),
     Object(Matching, "game/game_fn_8006B804.c"),
@@ -5387,7 +5431,7 @@ config.libs = [
     Object(NonMatching, "game/game_fn_800741E8.c"),
     Object(Matching, "game/game_fn_80074310.c"),
     Object(Matching, "game/game_fn_80074440.c"),
-    Object(NonMatching, "game/game_fn_80074580.c"),
+    Object(Matching, "game/game_fn_80074580.c"),
     Object(NonMatching, "game/game_fn_800746CC.c"),
     Object(NonMatching, "game/game_fn_800747CC.c"),
     Object(NonMatching, "game/game_fn_80074864.c"),
@@ -5430,7 +5474,7 @@ config.libs = [
     Object(Matching, "game/game_fn_8007C13C.c"),
     Object(Matching, "game/game_fn_8007C17C.c"),
     Object(Matching, "game/game_fn_8007C1D8.c"),
-    Object(NonMatching, "game/game_fn_8007C22C.c"),
+    Object(Matching, "game/game_fn_8007C22C.c"),
     Object(NonMatching, "game/game_fn_8007C354.c"),
     Object(Matching, "game/game_fn_8007C59C.c"),
     Object(NonMatching, "game/game_fn_8007C6AC.c", extra_cflags=["-use_lmw_stmw on"]),
@@ -5550,7 +5594,7 @@ config.libs = [
     Object(NonMatching, "game/game_fn_8008DBA8.c"),
     Object(Matching, "game/game_fn_8008DD24.c"),
     Object(NonMatching, "game/game_fn_8008DD78.c", extra_cflags=["-use_lmw_stmw on"]),
-    Object(NonMatching, "game/game_fn_8008DF64.c", extra_cflags=["-use_lmw_stmw on"]),
+    Object(Matching, "game/game_fn_8008DF64.c", extra_cflags=["-use_lmw_stmw on"]),
     Object(Matching, "game/game_fn_8008E078.c"),
     Object(NonMatching, "game/game_fn_8008E110.c", extra_cflags=["-use_lmw_stmw on"]),
     Object(NonMatching, "game/game_fn_8008E294.c", extra_cflags=["-use_lmw_stmw on"]),
@@ -5609,7 +5653,7 @@ config.libs = [
     Object(NonMatching, "game/game_fn_80096A44.c", extra_cflags=["-use_lmw_stmw on"]),
     Object(Matching, "game/game_fn_80096D58.c"),
     Object(Matching, "game/game_fn_80096E24.c", extra_cflags=["-use_lmw_stmw on"]),
-    Object(NonMatching, "game/game_fn_80096F04.c", extra_cflags=["-use_lmw_stmw on"]),
+    Object(Matching, "game/game_fn_80096F04.c", extra_cflags=["-use_lmw_stmw on"]),
     Object(Matching, "game/game_fn_80096FDC.c"),
     Object(Matching, "game/game_fn_80097014.c", extra_cflags=["-use_lmw_stmw on"]),
     Object(Matching, "game/game_fn_800971A0.c", extra_cflags=["-use_lmw_stmw on"]),
@@ -5740,7 +5784,7 @@ config.libs = [
     Object(NonMatching, "game/game_fn_800A3180.c"),
     Object(Matching, "game/game_fn_800A3240.c"),
     Object(Matching, "game/game_fn_800A3274.c"),
-    Object(NonMatching, "game/game_fn_800A32B8.c"),
+    Object(Matching, "game/game_fn_800A32B8.c"),
     Object(Matching, "game/game_fn_800A33A8.c"),
     Object(Matching, "game/game_fn_800A3468.c"),
     Object(Matching, "game/game_fn_800A3564.c"),
@@ -5769,7 +5813,7 @@ config.libs = [
     Object(Matching, "game/game_fn_800A4530.c", extra_cflags=["-use_lmw_stmw on"]),
     Object(Matching, "game/game_fn_800A45B0.c"),
     Object(Matching, "game/game_fn_800A4634.c"),
-    Object(NonMatching, "game/game_fn_800A4670.c"),
+    Object(Matching, "game/game_fn_800A4670.c"),
     Object(Matching, "game/game_fn_800A46C4.c"),
     Object(Matching, "game/game_fn_800A46F4.c"),
     Object(Matching, "game/game_fn_800A4724.c", extra_cflags=["-use_lmw_stmw on"]),
@@ -5984,7 +6028,7 @@ config.libs = [
             Object(Matching, "game/game_fn_800BB1EC.c"),
             Object(Matching, "game/game_fn_800BB3F8.c"),
             Object(Matching, "game/game_fn_800BB450.c"),
-            Object(NonMatching, "game/game_fn_800BB4C4.c"),
+            Object(Matching, "game/game_fn_800BB4C4.c"),
             Object(NonMatching, "game/game_fn_800BB5C4.c"),
             Object(Matching, "game/game_fn_800BB6A0.c"),
             Object(NonMatching, "game/game_fn_800BB7A8.c"),
@@ -6288,7 +6332,7 @@ config.libs = [
             Object(Matching, "game/game_fn_800DA110.c"),
             Object(Matching, "game/game_fn_800DA1D4.c"),
             Object(Matching, "game/game_fn_800DA278.c"),
-            Object(NonMatching, "game/game_fn_800DA308.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_800DA308.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_800DA400.c"),
             Object(Matching, "game/game_fn_800DAFA8.c"),
             Object(NonMatching, "game/game_fn_800DAFCC.c"),
@@ -6398,7 +6442,7 @@ config.libs = [
             Object(Matching, "game/game_fn_800E7964.c"),
             Object(Matching, "game/game_fn_800E7F70.c"),
             Object(Matching, "game/game_fn_800E7FA4.c"),
-            Object(NonMatching, "game/game_fn_800E801C.c"),
+            Object(Matching, "game/game_fn_800E801C.c"),
             Object(Matching, "game/game_fn_800E8130.c"),
             Object(NonMatching, "game/game_fn_800E828C.c"),
             Object(Matching, "game/game_fn_800E8384.c"),
@@ -6434,7 +6478,7 @@ config.libs = [
             Object(Matching, "game/game_fn_800ED6F4.c"),
             Object(Matching, "game/game_fn_800ED6F8.c"),
             Object(Matching, "game/game_fn_800ED70C.c"),
-            Object(NonMatching, "game/game_fn_800ED720.c"),
+            Object(Matching, "game/game_fn_800ED720.c"),
             Object(Matching, "game/game_fn_800ED790.c"),
             Object(Matching, "game/game_fn_800ED9D8.c"),
             Object(Matching, "game/game_fn_800ED9DC.c"),
@@ -7048,7 +7092,7 @@ config.libs = [
             Object(Matching, "game/game_fn_80129364.c"),
             Object(NonMatching, "game/game_fn_8012939C.c"),
             Object(Matching, "game/game_fn_8012948C.c"),
-            Object(NonMatching, "game/game_fn_801294DC.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_801294DC.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_801295E8.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_8012965C.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_801296E8.c"),
@@ -7171,7 +7215,7 @@ config.libs = [
             Object(Matching, "game/game_fn_8012FD1C.c"),
             Object(Matching, "game/game_fn_8012FDA0.c"),
             Object(Matching, "game/game_fn_8012FE10.c"),
-            Object(NonMatching, "game/game_fn_8012FEC8.c"),
+            Object(Matching, "game/game_fn_8012FEC8.c"),
             Object(NonMatching, "game/game_fn_8012FF34.c"),
             Object(Matching, "game/game_fn_8012FFE0.c"),
             Object(Matching, "game/game_fn_8013009C.c"),
@@ -7515,7 +7559,7 @@ config.libs = [
             Object(Matching, "game/game_fn_8014C7C0.c"),
             Object(Matching, "game/game_fn_8014C87C.c"),
             Object(Matching, "game/game_fn_8014C8F8.c"),
-            Object(NonMatching, "game/game_fn_8014C988.c"),
+            Object(Matching, "game/game_fn_8014C988.c"),
             Object(Matching, "game/game_fn_8014C9F4.c"),
             Object(NonMatching, "game/game_fn_8014CA98.c"),
             Object(Matching, "game/game_fn_8014CB54.c"),
@@ -7548,7 +7592,7 @@ config.libs = [
             Object(Matching, "game/game_fn_8014F65C.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_8014F700.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(NonMatching, "game/game_fn_8014F834.c", extra_cflags=["-use_lmw_stmw on"]),
-            Object(NonMatching, "game/game_fn_8014F9D4.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_8014F9D4.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(NonMatching, "game/game_fn_8014FB80.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(NonMatching, "game/game_fn_8014FCF4.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(NonMatching, "game/game_fn_8014FE64.c"),
@@ -7610,7 +7654,7 @@ config.libs = [
             Object(Matching, "game/game_fn_80154A14.c"),
             Object(Matching, "game/game_fn_80154A98.c"),
             Object(Matching, "game/game_fn_80154B6C.c"),
-            Object(NonMatching, "game/game_fn_80154CB4.c"),
+            Object(Matching, "game/game_fn_80154CB4.c"),
             Object(Matching, "game/game_fn_80154D24.c"),
             Object(NonMatching, "game/game_fn_80154DB4.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_80154EC0.c"),
@@ -8835,11 +8879,11 @@ config.libs = [
             Object(Matching, "game/game_fn_80182274.c"),
             Object(Matching, "game/game_fn_80182290.c"),
             Object(Matching, "game/game_fn_80182370.c"),
-            Object(NonMatching, "game/game_fn_80182380.c"),
+            Object(Matching, "game/game_fn_80182380.c"),
             Object(Matching, "game/game_fn_80182428.c"),
             Object(Matching, "game/game_fn_80182430.c"),
             Object(Matching, "game/game_fn_80182440.c"),
-            Object(NonMatching, "game/game_fn_80182448.c"),
+            Object(Matching, "game/game_fn_80182448.c"),
             Object(NonMatching, "game/game_fn_80182514.c"),
             Object(Matching, "game/game_fn_80182798.c"),
             Object(NonMatching, "game/game_fn_8018284C.c"),
@@ -9073,7 +9117,7 @@ config.libs = [
             Object(Matching, "game/game_fn_8019045C.c"),
             Object(Matching, "game/game_fn_80190500.c"),
             Object(Matching, "game/game_fn_80190508.c"),
-            Object(NonMatching, "game/game_fn_80190558.c"),
+            Object(Matching, "game/game_fn_80190558.c"),
             Object(Matching, "game/game_fn_801905CC.c"),
             Object(Matching, "game/game_fn_80190638.c"),
             Object(Matching, "game/game_fn_80190680.c"),
@@ -9321,7 +9365,7 @@ config.libs = [
             Object(Matching, "game/game_fn_8019FECC.c"),
             Object(Matching, "game/game_fn_8019FED8.c"),
             Object(Matching, "game/game_fn_8019FEE4.c"),
-            Object(NonMatching, "game/game_fn_8019FF5C.c"),
+            Object(Matching, "game/game_fn_8019FF5C.c"),
             Object(Matching, "game/game_fn_801A0008.c"),
             Object(Matching, "game/game_fn_801A00B8.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_801A0268.c"),
@@ -9346,7 +9390,7 @@ config.libs = [
             Object(NonMatching, "game/game_fn_801A2BCC.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_801A2D64.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(NonMatching, "game/game_fn_801A2FB4.c", extra_cflags=["-use_lmw_stmw on"]),
-            Object(NonMatching, "game/game_fn_801A318C.c"),
+            Object(Matching, "game/game_fn_801A318C.c"),
             Object(Matching, "game/game_fn_801A3200.c"),
             Object(NonMatching, "game/game_fn_801A329C.c"),
             Object(Matching, "game/game_fn_801A3420.c"),
@@ -9637,14 +9681,14 @@ config.libs = [
             Object(Matching, "game/game_fn_801A98F4.c", extra_cflags=["-schedule off"]),
             Object(Matching, "game/game_fn_801A9964.c"),
             Object(Matching, "game/game_fn_801A9984.c", extra_cflags=["-schedule off"]),
-            Object(NonMatching, "game/game_fn_801A99B4.c"),
+            Object(Matching, "game/game_fn_801A99B4.c", cflags=cflags_with_optimization("-O1,p")),
             Object(Matching, "game/game_fn_801A9A00.c"),
             Object(Matching, "game/game_fn_801A9A20.c"),
             Object(NonMatching, "game/game_fn_801A9A40.c"),
             Object(Matching, "game/game_fn_801A9B28.c"),
             Object(Matching, "game/game_fn_801A9B30.c"),
             Object(NonMatching, "game/game_fn_801A9B38.c", extra_cflags=["-schedule off"]),
-            Object(NonMatching, "game/game_fn_801A9B94.c", extra_cflags=["-schedule off"]),
+            Object(Matching, "game/game_fn_801A9B94.c", cflags=cflags_with_optimization("-O1,p")),
             Object(Matching, "game/game_fn_801A9C78.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(NonMatching, "game/game_fn_801A9CDC.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(Matching, "game/game_fn_801A9DCC.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
@@ -9742,7 +9786,7 @@ config.libs = [
             Object(Matching, "game/game_fn_801AE530.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(Matching, "game/game_fn_801AE5DC.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(NonMatching, "game/game_fn_801AE6B0.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
-            Object(NonMatching, "game/game_fn_801AE91C.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
+            Object(Matching, "game/game_fn_801AE91C.c", cflags=cflags_with_optimization("-O3,p")),
             Object(Matching, "game/game_fn_801AEA78.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(Matching, "game/game_fn_801AEAE0.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(Matching, "game/game_fn_801AEB74.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
@@ -9813,7 +9857,7 @@ config.libs = [
             Object(Matching, "game/game_fn_801B19BC.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(Matching, "game/game_fn_801B19D8.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(Matching, "game/game_fn_801B1A1C.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
-            Object(NonMatching, "game/game_fn_801B1B0C.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
+            Object(Matching, "game/game_fn_801B1B0C.c", cflags=cflags_with_optimization("-O3")),
             Object(NonMatching, "game/game_fn_801B1BA0.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(Matching, "game/game_fn_801B2348.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(Matching, "game/game_fn_801B2380.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
@@ -9822,14 +9866,14 @@ config.libs = [
             Object(Matching, "game/game_fn_801B243C.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(Matching, "game/game_fn_801B2444.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
             Object(NonMatching, "game/game_fn_801B244C.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
-            Object(NonMatching, "game/game_fn_801B2528.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
+            Object(Matching, "game/game_fn_801B2528.c", mw_version="GC/1.2.5n"),
             Object(NonMatching, "game/game_fn_801B261C.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
-            Object(NonMatching, "game/game_fn_801B2748.c", extra_cflags=["-schedule off", "-opt nopeephole"]),
+            Object(Matching, "game/game_fn_801B2748.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
             Object(Matching, "game/game_fn_801B2818.c", extra_cflags=["-opt nopeephole"]),
-            Object(NonMatching, "game/game_fn_801B2878.c", extra_cflags=["-opt nopeephole"]),
+            Object(Matching, "game/game_fn_801B2878.c", mw_version="GC/1.2.5n"),
             Object(Matching, "game/game_fn_801B2914.c", extra_cflags=["-opt nopeephole"]),
             Object(NonMatching, "game/game_fn_801B2980.c", extra_cflags=["-opt nopeephole"]),
-            Object(NonMatching, "game/game_fn_801B3470.c", mw_version="GC/1.2.5n", extra_cflags=["-opt nopeephole"]),
+            Object(Matching, "game/game_fn_801B3470.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
             Object(Matching, "game/game_fn_801B3558.c", mw_version="GC/1.2.5n", extra_cflags=["-opt nopeephole"]),
             Object(NonMatching, "game/game_fn_801B35BC.c", mw_version="GC/1.2.5n", extra_cflags=["-opt nopeephole"]),
             Object(NonMatching, "game/game_fn_801B3770.c", mw_version="GC/1.2.5n", extra_cflags=["-opt nopeephole"]),
@@ -10017,6 +10061,53 @@ config.libs = [
             Object(Matching, "game/game_fn_801C40AC.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-use_lmw_stmw on"]),
             Object(NonMatching, "game/game_fn_801C40D4.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_801C4478.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
+            Object(Matching, "game/game_fn_801C44B0.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
+            Object(NonMatching, "game/game_fn_801C458C.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_801C4694.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
+            Object(Matching, "game/game_fn_801C46B4.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
+            Object(Matching, "game/game_fn_801C47A8.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
+            Object(Matching, "game/game_fn_801C4A60.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
+            Object(NonMatching, "game/game_fn_801C4B5C.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
+            Object(Matching, "game/game_fn_801C753C.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
+            Object(NonMatching, "game/game_fn_801C7580.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
+            Object(Matching, "game/game_fn_801C7624.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
+            Object(NonMatching, "game/game_fn_801C7684.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
+            Object(Matching, "game/game_fn_801C773C.c", mw_version="GC/1.2.5n"),
+            Object(Matching, "game/game_fn_801C77E4.c", mw_version="GC/1.2.5n"),
+            Object(Matching, "game/game_fn_801C7868.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
+            Object(NonMatching, "game/game_fn_801C79C8.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_801C8160.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(NonMatching, "game/game_fn_801C8224.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off", "-use_lmw_stmw on"]),
+            Object(NonMatching, "game/game_fn_801C8600.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off", "-use_lmw_stmw on"]),
+            Object(NonMatching, "game/game_fn_801C87DC.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off", "-use_lmw_stmw on"]),
+            Object(NonMatching, "game/game_fn_801C8CC0.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(Matching, "game/game_fn_801C8EE0.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(NonMatching, "game/game_fn_801C8F50.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off", "-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_801C9078.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(Matching, "game/game_fn_801C90A4.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off", "-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_801C92F4.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(Matching, "game/game_fn_801C934C.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(Matching, "game/game_fn_801C93F4.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(Matching, "game/game_fn_801C9460.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(NonMatching, "game/game_fn_801C9510.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(NonMatching, "game/game_fn_801C970C.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(Matching, "game/game_fn_801C9914.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(NonMatching, "game/game_fn_801C9938.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(NonMatching, "game/game_fn_801C9A08.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(NonMatching, "game/game_fn_801C9B1C.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(Matching, "game/game_fn_801C9C4C.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(Matching, "game/game_fn_801C9E74.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(Matching, "game/game_fn_801CA240.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(Matching, "game/game_fn_801CA284.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(NonMatching, "game/game_fn_801CA288.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(NonMatching, "game/game_fn_801CA484.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(Matching, "game/game_fn_801CA3A4.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(Matching, "game/game_fn_801CA3D8.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(Matching, "game/game_fn_801CA538.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(NonMatching, "game/game_fn_801CA59C.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(Matching, "game/game_fn_801CA798.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(NonMatching, "game/game_fn_801CA7C0.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(NonMatching, "game/game_fn_801CAD90.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
         ],
     },
     {

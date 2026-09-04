@@ -22,15 +22,12 @@ unsigned int fn_801B2878(int index)
     Node* second;
     unsigned int value;
     Node* node;
-    unsigned int current;
 
     first = lbl_8064D39C;
     second = lbl_8064D398;
 
     do {
-        current = lbl_8064D390;
-        lbl_8064D390 = current + 1;
-        value = current;
+        value = lbl_8064D390++;
         lbl_8064D390 = __rlwinm(lbl_8064D390, 0, 1, 31);
 
         node = first;

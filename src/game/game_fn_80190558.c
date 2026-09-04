@@ -4,7 +4,7 @@ typedef unsigned int u32;
 typedef signed char s8;
 
 extern u8 lbl_802FC5BC[];
-extern float lbl_80650B10;
+extern const float lbl_80650B10;
 
 void fn_80190558(u8* data)
 {

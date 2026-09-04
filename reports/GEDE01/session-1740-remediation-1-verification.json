@@ -1,0 +1,55 @@
+{
+  "session_id": "session-1740-remediation-1",
+  "scope": "review remediation only; no frontier matching and no source edit",
+  "starting_target": "0x801C9E74",
+  "ending_next_target": "0x801C9E74",
+  "fresh_audit": {
+    "command": "python3 tools/signature_audit.py --json-output build/GEDE01/session-1740-remediation-1-fresh-audit.json --session-id session-1740 --starting-target 0x801C9E74 --ending-next-target 0x801C9E74 --applied-symbol fn_8000755C --corrected-translation-unit fn_8000755C=src/game/game_fn_8000EE9C.c --correction-evidence fn_8000755C=reports/GEDE01/objdiff-game_fn_8000EE9C-session-1740.json --correction-evidence fn_8000755C=reports/GEDE01/objdiff-game_fn_8000EE9C-session-1740-reloc-strict.json --evidence-report reports/GEDE01/session-1740-signature-verification.json --dol-sha1 ea24b6af954876ce072562ff39cdb4c81d32be1f --build-report build/GEDE01/report.json --verified-object main/game/game_fn_8000EE9C --limit 0 > build/GEDE01/session-1740-remediation-1-audit.log 2>&1; audit_exit=$?; cmp -s build/GEDE01/session-1740-remediation-1-fresh-audit.json reports/GEDE01/signature-shadow-session-1740.json; cmp_exit=$?; printf 'audit_exit=%s fresh_audit_matches_committed_shadow=%s\\n' \"$audit_exit\" \"$cmp_exit\"",
+    "raw_output": "audit_exit=0 fresh_audit_matches_committed_shadow=0",
+    "retail_evidence": "config/GEDE01/retail-return-shapes.json and the owned definitions cited per symbol by reports/GEDE01/signature-shadow-session-1740.json"
+  },
+  "contradiction_accounting": {
+    "command": "jq -r '[.return_register_contradictions[] | select(.disposition==\"deferred\")] as $r | [.abi_divergent[] | select(.disposition==\"deferred\")] as $a | [.return_register_contradictions[] | select(.disposition==\"pending\")] as $p | \"deferred=\\(($r|length)+($a|length)) pending=\\($p|length)\"' build/GEDE01/session-1740-remediation-1-fresh-audit.json",
+    "raw_output": "deferred=785 pending=170",
+    "meaning": "pending is eligible unstarted work and is not a steady-state deferral"
+  },
+  "untracked_pending_discovery": {
+    "command": "jq -r '.open_items[] | select(test(\"pending signature contradiction\")) | capture(\"pending signature contradiction (?<symbol>fn_[0-9A-F]+)\").symbol' reports/GEDE01/progress.json | sort -u > build/GEDE01/session-1740-tracked-pending-symbols.txt; jq -r '.ground_truth_contradictions[] | select(.disposition==\"pending\") | .symbol' reports/GEDE01/signature-shadow-session-1740.json | sort -u > build/GEDE01/session-1740-current-pending-symbols.txt; comm -23 build/GEDE01/session-1740-current-pending-symbols.txt build/GEDE01/session-1740-tracked-pending-symbols.txt | tee build/GEDE01/session-1740-untracked-pending-symbols.txt; wc -l build/GEDE01/session-1740-current-pending-symbols.txt build/GEDE01/session-1740-tracked-pending-symbols.txt build/GEDE01/session-1740-untracked-pending-symbols.txt",
+    "raw_output": "fn_801B7E84\nfn_801B7F6C\nfn_801BB5D0\nfn_801BB944\nfn_801BBD58\nfn_801BC240\nfn_801BC670\nfn_801BC798\nfn_801BC8F4\nfn_801C29BC\nfn_801C2AAC\nfn_801C2D74\nfn_801C3CBC\nfn_801C3E2C\nfn_801C8F50\nfn_801C934C\nfn_801C9510\nfn_801C9938\n 170 build/GEDE01/session-1740-current-pending-symbols.txt\n 153 build/GEDE01/session-1740-tracked-pending-symbols.txt\n  18 build/GEDE01/session-1740-untracked-pending-symbols.txt\n 341 total",
+    "evidence_pointer": "reports/GEDE01/signature-shadow-session-1740.json"
+  },
+  "tracking_after_remediation": {
+    "command": "jq -r '.open_items[] | select(test(\"pending signature contradiction\")) | capture(\"pending signature contradiction (?<symbol>fn_[0-9A-F]+)\").symbol' reports/GEDE01/progress.json | sort -u > build/GEDE01/session-1740-remediation-1-tracked-after.txt; printf 'tracked_current_pending='; comm -12 build/GEDE01/session-1740-current-pending-symbols.txt build/GEDE01/session-1740-remediation-1-tracked-after.txt | wc -l; printf 'untracked_current_pending='; comm -23 build/GEDE01/session-1740-current-pending-symbols.txt build/GEDE01/session-1740-remediation-1-tracked-after.txt | wc -l",
+    "raw_output": "tracked_current_pending=170\nuntracked_current_pending=0",
+    "open_item_count_command": "printf 'remediation_open_items='; jq '[.open_items[] | select(startswith(\"Session session-1740-remediation-1 pending signature contradiction\"))] | length' reports/GEDE01/progress.json; printf 'residual_open_items='; jq '[.open_items[] | select(startswith(\"Session session-1740-remediation-1 residual ABI-equivalent parameter contradiction fn_8000755C\"))] | length' reports/GEDE01/progress.json",
+    "open_item_count_raw_output": "remediation_open_items=18\nresidual_open_items=1"
+  },
+  "scope_decision": "The earlier fn_8000755C correction was deliberately bounded; it was not the only candidate passing the eligibility gates. This remediation records the other eligible pending work without applying it.",
+  "residual_parameter_difference": {
+    "command": "rg -n '^extern void fn_8000755C|^void fn_8000755C' src/game/game_fn_8000EE9C.c src/game/game_fn_8000755C.c",
+    "raw_output": "src/game/game_fn_8000755C.c:136:void fn_8000755C(s32 arg0, s32 arg1, u32 flags)\nsrc/game/game_fn_8000EE9C.c:4:extern void fn_8000755C(s32, s32, s32);",
+    "disposition": "The third parameter signedness remains a documented source-level contradiction; both spellings use one GPR, so the ABI-equivalence deferral is retained."
+  },
+  "build": {
+    "command": ".tools/bin/ninja > build/GEDE01/session-1740-remediation-1-build.log 2>&1; printf 'build_exit=%s\\n' \"$?\"",
+    "raw_output": "build_exit=0"
+  },
+  "affected_object_objdiff": {
+    "generation_command": "( build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json --format json && build/tools/objdiff-cli diff -p . -u main/game/game_fn_8000EE9C fn_8000EE9C -o build/GEDE01/session-1740-remediation-1-canonical.json --format json && build/tools/objdiff-cli diff -p . -u main/game/game_fn_8000EE9C fn_8000EE9C -o build/GEDE01/session-1740-remediation-1-reloc-strict.json --format json -c function_reloc_diffs=name_address ) > build/GEDE01/session-1740-remediation-1-objdiff.log 2>&1; printf 'objdiff_generation_exit=%s\\n' \"$?\"",
+    "generation_raw_output": "objdiff_generation_exit=0",
+    "measurement_command": "for basis in canonical reloc-strict; do jq -r --arg basis \"$basis\" '(.left.symbols[]|select(.name==\"fn_8000EE9C\")) as $l | (.right.symbols[]|select(.name==\"fn_8000EE9C\")) as $r | \"basis=\\($basis) symbol=fn_8000EE9C retail_bytes=\\($l.size) generated_bytes=\\($r.size) score=\\($l.match_percent) retail_instructions=\\([$l.instructions[]|select(.instruction)]|length) generated_instructions=\\([$r.instructions[]|select(.instruction)]|length) retail_relocations=\\([$l.instructions[]|select(.instruction.relocation)]|length) generated_relocations=\\([$r.instructions[]|select(.instruction.relocation)]|length) differing_rows=\\([($l.instructions[]),($r.instructions[])|select(.diff_kind)]|length)\"' \"build/GEDE01/session-1740-remediation-1-${basis}.json\"; done",
+    "measurement_raw_output": "basis=canonical symbol=fn_8000EE9C retail_bytes=296 generated_bytes=296 score=100.0 retail_instructions=74 generated_instructions=74 retail_relocations=12 generated_relocations=12 differing_rows=0\nbasis=reloc-strict symbol=fn_8000EE9C retail_bytes=296 generated_bytes=296 score=100.0 retail_instructions=74 generated_instructions=74 retail_relocations=12 generated_relocations=12 differing_rows=0",
+    "unit_command": "jq -r '.units[] | select(.name==\"main/game/game_fn_8000EE9C\") | \"unit=\\(.name) matched_code_percent=\\(.measures.matched_code_percent) complete_code_percent=\\(.measures.complete_code_percent)\"' build/GEDE01/report.json",
+    "unit_raw_output": "unit=main/game/game_fn_8000EE9C matched_code_percent=100.0 complete_code_percent=100.0"
+  },
+  "dol_identity": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol",
+    "expected": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "unchanged": true
+  },
+  "frontier_invariant": {
+    "command": "printf 'next_target='; jq -r '.next_target' reports/GEDE01/progress.json",
+    "raw_output": "next_target=0x801C9E74"
+  }
+}
