@@ -1,0 +1,15 @@
+{
+  "session_id": "session-1711",
+  "range_start": "0x801C2AAC",
+  "range_end": "0x801C2D74",
+  "retail_bytes": 712,
+  "matched_bytes": 84,
+  "nonmatching_bytes": 628,
+  "unaccounted_spans": [],
+  "functions": [
+    {"name": "fn_801C2AAC", "start": "0x801C2AAC", "end": "0x801C2B00", "retail_bytes": 84, "status": "Matching", "canonical_score": 100.0, "relocation_strict_score": 100.0},
+    {"name": "fn_801C2B00", "start": "0x801C2B00", "end": "0x801C2D74", "retail_bytes": 628, "generated_bytes": 632, "status": "NonMatching", "canonical_score": 99.29936, "relocation_strict_score": 99.29936, "blocker": "Retail allocates the clamped lookup-table index directly to r5; GC/1.2.5n forms it in r4 and emits an extra addi r5,r4,0, leaving one extra generated instruction."}
+  ],
+  "next_target": "0x801C2D74",
+  "next_gate": "Start exactly at fn_801C2D74 and continue contiguously upward; fn_801C2B00 is the sole NonMatching span and no byte in this declared range is unaccounted."
+}

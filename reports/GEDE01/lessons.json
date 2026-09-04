@@ -2,29 +2,29 @@
   "schema_version": 2,
   "scope": "Distinct MWCC code-generation behaviors documented in reports/GEDE01/progress.json open_items and docs/matching.md",
   "source_snapshot": {
-    "repository_revision": "5e7240cb7c4f7eea64cc828e893059b7d0637fa0",
-    "next_target": "0x801BACE8",
+    "repository_revision": "22c67901002c72cac902de6f07f2df235bf20b3c",
+    "next_target": "0x801C2AAC",
     "reports/GEDE01/progress.json": {
-      "sha256": "fcf76c8177450f0814dc8332afc8c1ff7bf44e7375f9bf3ac52a86d362b9db08",
+      "sha256": "53393a8ed9f72c6f53f4afd1cf9fb2ee86c19a3480c8b3d560e99a36582ecdef",
       "scope": "whole_file"
     },
     "docs/matching.md": {
-      "sha256": "23ce9ee7daef2e0753cd5ae3426d542e0ac023473039faa49fcbf395960c273f"
+      "sha256": "9c2c1a42c71422d8a8748879fa6a16f14681e90f3ab062efec77985b0954cbd8"
     }
   },
   "consolidation_audit": {
     "original_consolidation_commit": "86d029104eb5ed6ad01b6af03963ea2cf924d2a4",
     "comparison_base": "b6f963fbb8643a04ab4358a988239961639dd07e",
-    "latest_consolidation_session": "session-1670",
-    "scope": "Refreshed the catalog through session-1669 without changing generated progress accounting or frontier prose. Added only categorized MWCC code-generation behaviors stated in the intervening open_items; incomplete recovery and verification-only facts were not promoted into lessons.",
-    "total_lessons": 540,
+    "latest_consolidation_session": "session-1710",
+    "scope": "Refreshed the catalog through session-1709 without changing generated progress accounting or frontier prose. Added only categorized MWCC code-generation behaviors stated in the intervening open_items and matching guide; incomplete recovery, semantic corrections, signature audits, and verification-only facts were not promoted into lessons.",
+    "total_lessons": 562,
     "measurement_command": "jq -r '\"lessons=\" + ((.lessons|length)|tostring) + \" out_of_taxonomy=\" + ((.out_of_taxonomy|length)|tostring) + \" total_catalog_records=\" + (((.lessons|length)+(.out_of_taxonomy|length))|tostring)' reports/GEDE01/lessons.json",
-    "measurement_raw_output": "lessons=540 out_of_taxonomy=19 total_catalog_records=559",
-    "session_parent_commit": "5e7240cb7c4f7eea64cc828e893059b7d0637fa0",
-    "session_delta_measurement_command": "jq -s -r '.[0] as $parent | .[1] as $current | \"new_lessons=\\(($current.lessons|length)-($parent.lessons|length)) new_out_of_taxonomy=\\(($current.out_of_taxonomy|length)-($parent.out_of_taxonomy|length)) total_new_records=\\((($current.lessons|length)+($current.out_of_taxonomy|length))-(($parent.lessons|length)+($parent.out_of_taxonomy|length)))\"' <(git show 5e7240cb7c4f7eea64cc828e893059b7d0637fa0:eternal-darkness-decomp/reports/GEDE01/lessons.json) reports/GEDE01/lessons.json",
-    "session_delta_measurement_raw_output": "new_lessons=11 new_out_of_taxonomy=3 total_new_records=14",
+    "measurement_raw_output": "lessons=562 out_of_taxonomy=19 total_catalog_records=581",
+    "session_parent_commit": "22c67901002c72cac902de6f07f2df235bf20b3c",
+    "session_delta_measurement_command": "jq -s -r '.[0] as $parent | .[1] as $current | \"new_lessons=\\(($current.lessons|length)-($parent.lessons|length)) new_out_of_taxonomy=\\(($current.out_of_taxonomy|length)-($parent.out_of_taxonomy|length)) total_new_records=\\((($current.lessons|length)+($current.out_of_taxonomy|length))-(($parent.lessons|length)+($parent.out_of_taxonomy|length)))\"' <(git show 22c67901002c72cac902de6f07f2df235bf20b3c:eternal-darkness-decomp/reports/GEDE01/lessons.json) reports/GEDE01/lessons.json",
+    "session_delta_measurement_raw_output": "new_lessons=22 new_out_of_taxonomy=0 total_new_records=22",
     "delta_measurement_command": "jq -s -r '.[0] as $base | .[1] as $current | \"new_lessons=\\(($current.lessons|length)-($base.lessons|length)) new_out_of_taxonomy=\\(($current.out_of_taxonomy|length)-($base.out_of_taxonomy|length)) total_new_records=\\((($current.lessons|length)+($current.out_of_taxonomy|length))-(($base.lessons|length)+($base.out_of_taxonomy|length)))\"' <(git show b6f963fbb:eternal-darkness-decomp/reports/GEDE01/lessons.json) reports/GEDE01/lessons.json",
-    "delta_measurement_raw_output": "new_lessons=107 new_out_of_taxonomy=17 total_new_records=124",
+    "delta_measurement_raw_output": "new_lessons=129 new_out_of_taxonomy=17 total_new_records=146",
     "added_out_of_taxonomy_categories": ["instruction-selection-lowering", "common-subexpression-elimination", "loop-unrolling", "dead-loop-elimination", "relocation-bearing-instruction-operands", "relocation-target-identity"]
   },
   "lessons": [
@@ -3810,6 +3810,160 @@
       "precise_divergence": "Canonical GC/1.2.5n forms the duplicated-slot branches differently in fn_801B9E7C and places fn_801BA2A4's epilogue differently despite closely aligned recovered control flow.",
       "workaround": null,
       "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1661 and 1663"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80063030", "fn_80096F04", "fn_800BE8D4", "fn_800C65FC", "fn_800DB95C", "fn_800E8130", "fn_801294DC", "fn_80158F6C", "fn_801749A8"],
+      "precise_divergence": "When a call or memory load remains inline, MWCC canonicalizes a commutative comparison, OR, or multiply before register allocation and encodes the operands opposite retail; merely reversing the source expression is byte-neutral.",
+      "workaround": "Hoist the complete call, load, or computed subexpression into a named local, split short-circuit conditions when required, and then place the simple operands in the documented source order.",
+      "evidence": ["docs/matching.md: Commutative operand order: hoist the call result into a named local", "docs/matching.md: The commutative-operand lever extends to fmuls, and where the hoist must sit"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80139D88"],
+      "precise_divergence": "MWCC folds two same-base loads into call argument setup and evaluates them right to left, reversing retail's 0x284 then 0x28C load order.",
+      "workaround": "Bind both arguments to locals after the preceding call and assign them in retail load order, second argument first.",
+      "evidence": ["docs/matching.md: Tier 2 near-misses: allocation, evaluation order, and two type choices"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80192318"],
+      "precise_divergence": "Declaring both compared byte values with the same narrow or widened type reverses their load order; retail's asymmetric lifetime requires the held value to occupy an unsigned word while the other remains a direct byte load.",
+      "workaround": "Declare the held value unsigned int and read the other byte directly in the comparison.",
+      "evidence": ["docs/matching.md: Tier 2 near-misses: allocation, evaluation order, and two type choices"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_80088F08"],
+      "precise_divergence": "Without an early inverted-mask lifetime, MWCC places the loaded global in free argument register r3 instead of retail r5.",
+      "workaround": "Initialize a named unsigned inverted-mask local before the branch to supply the retail register pressure.",
+      "evidence": ["docs/matching.md: Tier 2 near-misses: allocation, evaluation order, and two type choices"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_801A7E04", "fn_801A7EA8"],
+      "precise_divergence": "Misplacing the discriminator at the end of a sub-structure makes MWCC address it through the shape pointer and color it in r5 rather than retail r4; the field is actually at the outer-object boundary.",
+      "workaround": "Model the discriminator as a member of the outer object and access it through that object.",
+      "evidence": ["docs/matching.md: Tier 2 near-misses: allocation, evaluation order, and two type choices"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_800C7C0C"],
+      "precise_divergence": "A load-bearing intermediate declared two slots too late changes MWCC's saved-register assignment even though it is assigned and consumed only once.",
+      "workaround": "Move other_runtime two positions earlier in the declaration block and retain the intermediate rather than folding it into its consumer.",
+      "evidence": ["docs/matching.md: Tier 2 near-misses: allocation, evaluation order, and two type choices"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80129108"],
+      "precise_divergence": "Although long and int have the same 32-bit signed representation under the pinned flags, MWCC distinguishes their type names and changes whether the link register is restored before or after r31 and r30.",
+      "workaround": "Declare the mask parameters long.",
+      "evidence": ["docs/matching.md: Tier 2 near-misses: allocation, evaluation order, and two type choices"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_80132D50"],
+      "precise_divergence": "A do-while loop makes MWCC hoist loop-invariant integer constants in zero-then-one order, while retail materializes one before zero.",
+      "workaround": "Use a for loop with the cursor advance retained in the body.",
+      "evidence": ["docs/matching.md: Loop form decides constant materialization order"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_8012CCF0", "fn_8012CDF0"],
+      "precise_divergence": "Computing a slot-pointer sum into the live array-base local puts the result in the base register, while retail computes it in the scaled product's register.",
+      "workaround": "Reuse the dead definition local for the base-plus-product result.",
+      "evidence": ["docs/matching.md: A slot-pointer sum lands in the product's register when a dead local absorbs it"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_8013DE44"],
+      "precise_divergence": "Hoisting only a call result does not prevent MWCC from reversing two commutative fmuls encodings; keeping the constant live across the call also grows the frame.",
+      "workaround": "Hoist the whole computed distance expression and multiply that named local by the constant on the right.",
+      "evidence": ["docs/matching.md: The commutative-operand lever extends to fmuls, and where the hoist must sit"]
+    },
+    {
+      "category": "float-constant-placement",
+      "functions": ["fn_800C65FC", "fn_801C2980"],
+      "precise_divergence": "Split-TU compilation emits a private integer-to-floating conversion bias even though retail relocates the identical bytes to a shared named constant.",
+      "workaround": "Guard the generated constant bytes against retail and externalize the compiler-local symbol to the documented shared symbol during the build.",
+      "evidence": ["docs/matching.md: An id comparison and a shared conversion constant", "reports/GEDE01/progress.json: open_items entry for session-1709"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_800AFEC0"],
+      "precise_divergence": "Representing a parse cursor as a repeatedly narrowed pointer makes its last add spill to a scratch register, while retail retains all nine additions in one accumulator.",
+      "workaround": "Represent the cursor as a u32 offset and update it with compound addition.",
+      "evidence": ["docs/matching.md: A parse cursor is an offset, not a recast pointer"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_801BACE8", "fn_801BAF90", "fn_801BB1A0", "fn_801BBD58", "fn_801BC0D4", "fn_801BC240", "fn_801BC670"],
+      "precise_divergence": "GC/1.2.5n rotates persistent bases, indices, offsets, state, selected entries, and nested-search values across r26-r31 differently from retail; declaration permutations frequently leave the same allocation cycle.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1671 through 1678"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_801BC8F4", "fn_801BD990", "fn_801BDE7C", "fn_801BE0D4", "fn_801BE354", "fn_801BE5A0", "fn_801BE740", "fn_801BEC38", "fn_801BEE6C"],
+      "precise_divergence": "GC/1.2.5n assigns persistent global, resource, channel, selection, offset, id, conversion, and scan values to a different saved-register web from retail, sometimes changing the frame or removing an explicit call-argument move.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1681, 1687 through 1689, 1692, and 1694 through 1695"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_801BCC04", "fn_801BCF54", "fn_801BD1EC", "fn_801BD294", "fn_801BD990", "fn_801BDE7C", "fn_801BE0D4", "fn_801BE354", "fn_801BE874"],
+      "precise_divergence": "GC/1.2.5n schedules independent initialization, address formation, endian decoding, loop preheaders, signed loop checks, packed-word formation, switch work, and epilogue operations differently from retail even when recovered behavior aligns.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1681, 1682, 1684, 1687 through 1689, and 1692"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_801BE474"],
+      "precise_divergence": "A combined resource-field expression lets GC/1.2.5n fold retail's separate clrlslwi and or into rlwimi.",
+      "workaround": "Split resource construction into an assignment followed by compound OR and retain the two load-bearing volatile frame slots.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1691 remediation 1"]
+    },
+    {
+      "category": "register-allocation",
+      "functions": ["fn_801BEB08", "fn_801C13D4", "fn_801C1520", "fn_801C1600", "fn_801C1790", "fn_801C1CB0", "fn_801C22F8", "fn_801C242C"],
+      "precise_divergence": "GC/1.2.5n colors list heads, indexed pointers, group or voice bases, loop locals, commands, counts, offsets, and result temporaries differently from retail, propagating alternate operands through otherwise recovered list and voice-management logic.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1693 and 1702 through 1708"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_801C0ED8"],
+      "precise_divergence": "GC/1.2.5n schedules the high half of a 64-bit zero store before two adjacent list-head clears, while retail emits it afterward.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1699"]
+    },
+    {
+      "category": "inlining",
+      "functions": ["fn_801C106C", "fn_801C22F8"],
+      "precise_divergence": "GC/1.2.5n folds helper arguments or retains a larger inlined control-flow layout instead of retail's repeated endpoint reloads and compact expansion, changing both instruction count and frame shape.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1701 and 1707"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_801C1520", "fn_801C1600"],
+      "precise_divergence": "GC/1.2.5n forms indexed group-table addresses and outer group-order control flow in a different sequence and polarity from retail.",
+      "workaround": "For fn_801C1600, explicitly reload the list head and use a while-shaped group-chain scan to restore instruction-count parity; no complete workaround is known.",
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1703 and 1704 remediation 1"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_801C1790", "fn_801C1CB0"],
+      "precise_divergence": "GC/1.2.5n folds repeated flag predicates or rematerializes and advances a shared VoiceState base, producing a shorter dispatcher or an extra base-update instruction relative to retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entries for sessions 1705 and 1706"]
+    },
+    {
+      "category": "instruction-scheduling",
+      "functions": ["fn_801C29BC"],
+      "precise_divergence": "The recovered honest-C body preserves all sixteen relocation-bearing instructions but GC/1.2.5n emits one fewer instruction and a different local schedule than retail.",
+      "workaround": null,
+      "evidence": ["reports/GEDE01/progress.json: open_items entry for session-1709"]
     }
   ],
   "out_of_taxonomy": [

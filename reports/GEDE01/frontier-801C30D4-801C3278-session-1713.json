@@ -1,0 +1,45 @@
+{
+  "session_id": "session-1713",
+  "remediation": "session-1713-remediation-1",
+  "range_start": "0x801C30D4",
+  "range_end": "0x801C3278",
+  "next_target": "0x801C3278",
+  "range_bytes": 420,
+  "matched_bytes": 420,
+  "nonmatching_bytes": 0,
+  "unaccounted_spans": [],
+  "range_measurement": {
+    "command": "python3 - <<'PY'\nstart = 0x801C30D4\nmid = 0x801C3158\nend = 0x801C3278\nfirst = mid - start\nsecond = end - mid\nprint(f'first_bytes={first} second_bytes={second} matched_bytes={first + second} nonmatching_bytes=0 range_bytes={end - start} next_target=0x{end:X}')\nPY",
+    "raw_output": "first_bytes=132 second_bytes=288 matched_bytes=420 nonmatching_bytes=0 range_bytes=420 next_target=0x801C3278"
+  },
+  "functions": [
+    {
+      "name": "fn_801C30D4",
+      "start": "0x801C30D4",
+      "end": "0x801C3158",
+      "bytes": 132,
+      "status": "Matching",
+      "canonical_score": 100.0,
+      "relocation_strict_score": 100.0,
+      "measurement": {
+        "command": "jq -r '[.left.symbols[]|select(.name==\"fn_801C30D4\")][0] as $retail | [.right.symbols[]|select(.name==\"fn_801C30D4\")][0] as $generated | \"retail_bytes=\\($retail.size) generated_bytes=\\($generated.size) score=\\($retail.match_percent) retail_instructions=\\([$retail.instructions[]|select(.instruction)]|length) generated_instructions=\\([$generated.instructions[]|select(.instruction)]|length) differing_rows=\\([$retail.instructions[]|select(.diff_kind)]|length)\"' reports/GEDE01/objdiff-game_fn_801C30D4-session-1713.json reports/GEDE01/objdiff-game_fn_801C30D4-session-1713-reloc-strict.json",
+        "raw_output": "retail_bytes=132 generated_bytes=132 score=100.0 retail_instructions=33 generated_instructions=33 differing_rows=0\nretail_bytes=132 generated_bytes=132 score=100.0 retail_instructions=33 generated_instructions=33 differing_rows=0"
+      }
+    },
+    {
+      "name": "fn_801C3158",
+      "start": "0x801C3158",
+      "end": "0x801C3278",
+      "bytes": 288,
+      "status": "Matching",
+      "canonical_score": 100.0,
+      "relocation_strict_score": 100.0,
+      "generated_bytes": 288,
+      "measurement": {
+        "command": "jq -r '[.left.symbols[]|select(.name==\"fn_801C3158\")][0] as $retail | [.right.symbols[]|select(.name==\"fn_801C3158\")][0] as $generated | \"retail_bytes=\\($retail.size) generated_bytes=\\($generated.size) score=\\($retail.match_percent) retail_instructions=\\([$retail.instructions[]|select(.instruction)]|length) generated_instructions=\\([$generated.instructions[]|select(.instruction)]|length) differing_rows=\\([$retail.instructions[]|select(.diff_kind)]|length)\"' reports/GEDE01/objdiff-game_fn_801C3158-session-1713-remediation-1.json reports/GEDE01/objdiff-game_fn_801C3158-session-1713-remediation-1-reloc-strict.json",
+        "raw_output": "retail_bytes=288 generated_bytes=288 score=100.0 retail_instructions=72 generated_instructions=72 differing_rows=0\nretail_bytes=288 generated_bytes=288 score=100.0 retail_instructions=72 generated_instructions=72 differing_rows=0"
+      },
+      "resolution": "The source now writes only the retail-observed fill span and uses a persistent local base pointer; the unused layout declaration and volatile qualifier were removed."
+    }
+  ]
+}
