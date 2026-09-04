@@ -1,0 +1,21 @@
+{
+  "session": "session-1720",
+  "range_start": "0x801C350C",
+  "range_end": "0x801C38CC",
+  "retail_bytes": 960,
+  "matched_bytes": 508,
+  "nonmatching_bytes": 452,
+  "functions": [
+    {"name":"fn_801C350C","start":"0x801C350C","end":"0x801C36FC","size":496,"status":"Matching","objdiff_percent":100.0,"relocations_equal":true,"correction":"Restored the three-word local that makes GC/1.2.5n reserve retail's 0x30 frame."},
+    {"name":"fn_801C36FC","start":"0x801C36FC","end":"0x801C38C0","size":452,"status":"NonMatching","objdiff_percent":98.23009,"relocations_equal":true,"divergence":"After correcting the stream-size layout, threshold SDA pointer, signed division, request signature, cursor loop, declaration order, and frame reservation, the sole instruction mismatch is addi r29,r30,0 scheduled at generated +0x18 versus retail +0x28; objdiff represents that move as one insertion and one deletion row."},
+    {"name":"fn_801C38C0","start":"0x801C38C0","end":"0x801C38CC","size":12,"status":"Matching","objdiff_percent":100.0,"relocations_equal":true}
+  ],
+  "measurement": {
+    "accounting_command": "python3 tools/frontier_accounting.py --splits config/GEDE01/splits.txt --configure configure.py --start 0x801C350C --end 0x801C38CC",
+    "accounting_raw_output": "0x801c350c-0x801c36fc=496:Matching 0x801c36fc-0x801c38c0=452:NonMatching 0x801c38c0-0x801c38cc=12:Matching\nmatched_bytes=508 nonmatching_bytes=452 range_bytes=960 accounted_bytes=960 next_target=0x801c38cc",
+    "objdiff_command": "for spec in 'fn_801C350C reports/GEDE01/session-1720-fn_801C350C.json /tmp/session-1715-strict-350c.json' 'fn_801C36FC reports/GEDE01/session-1720-fn_801C36FC.json /tmp/session-1715-strict-36fc.json' 'fn_801C38C0 reports/GEDE01/session-1720-fn_801C38C0.json /tmp/session-1715-strict-38c0.json'; do set -- $spec; fn=$1; canonical=$2; strict=$3; for basis in canonical strict; do eval file=\\$$basis; jq -r --arg fn \"$fn\" --arg basis \"$basis\" 'def rows($side): [$side.symbols[] | select(.name==$fn) | .instructions[] | select(.diff_kind != null)]; def rels($side): [$side.symbols[] | select(.name==$fn) | .instructions[].instruction | select(.relocation != null) | [.address // \"0\", .relocation.type_name, .relocation.addend // \"0\"]]; \"basis=\\($basis) function=\\($fn) retail_bytes=\\(.left.symbols[]|select(.name==$fn)|.size) generated_bytes=\\(.right.symbols[]|select(.name==$fn)|.size) match_percent=\\(.left.symbols[]|select(.name==$fn)|.match_percent) differing_rows=\\(rows(.left)|length) retail_relocations=\\(rels(.left)|length) generated_relocations=\\(rels(.right)|length) relocation_shapes_equal=\\(rels(.left)==rels(.right))\"' \"$file\"; done; done",
+    "objdiff_raw_output": "basis=canonical function=fn_801C350C retail_bytes=496 generated_bytes=496 match_percent=100.0 differing_rows=0 retail_relocations=12 generated_relocations=12 relocation_shapes_equal=true\nbasis=strict function=fn_801C350C retail_bytes=496 generated_bytes=496 match_percent=100.0 differing_rows=0 retail_relocations=12 generated_relocations=12 relocation_shapes_equal=true\nbasis=canonical function=fn_801C36FC retail_bytes=452 generated_bytes=452 match_percent=98.23009 differing_rows=2 retail_relocations=39 generated_relocations=39 relocation_shapes_equal=false\nbasis=strict function=fn_801C36FC retail_bytes=452 generated_bytes=452 match_percent=98.23009 differing_rows=2 retail_relocations=39 generated_relocations=39 relocation_shapes_equal=false\nbasis=canonical function=fn_801C38C0 retail_bytes=12 generated_bytes=12 match_percent=100.0 differing_rows=0 retail_relocations=1 generated_relocations=1 relocation_shapes_equal=true\nbasis=strict function=fn_801C38C0 retail_bytes=12 generated_bytes=12 match_percent=100.0 differing_rows=0 retail_relocations=1 generated_relocations=1 relocation_shapes_equal=true"
+  },
+  "unaccounted_spans": [],
+  "next_target": "0x801C38CC"
+}

@@ -1,0 +1,33 @@
+{
+  "session_id": "session-1f6bd1a6",
+  "range_start": "0x801C3BCC",
+  "range_end": "0x801C3E2C",
+  "range_bytes": 608,
+  "matched_bytes": 240,
+  "nonmatching_bytes": 368,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "symbol": "fn_801C3BCC",
+      "range": "0x801C3BCC..0x801C3CBC",
+      "retail_bytes": 240,
+      "generated_bytes": 240,
+      "classification": "Matching",
+      "canonical_match_percent": 100.0,
+      "relocation_strict_match_percent": 100.0,
+      "differing_rows": 0,
+      "relocation_shapes_equal": true
+    },
+    {
+      "symbol": "fn_801C3CBC",
+      "range": "0x801C3CBC..0x801C3E2C",
+      "retail_bytes": 368,
+      "generated_bytes": 364,
+      "classification": "NonMatching",
+      "canonical_match_percent": 95.38043,
+      "relocation_strict_match_percent": 95.38043,
+      "blocker": "GC/1.2.5n rotates the persistent base, id, archive and resource-list registers relative to retail and retains the linked-list next offset in r7 instead of retail's r0 reload, producing a four-byte codegen deficit."
+    }
+  ],
+  "next_target": "0x801C3E2C"
+}

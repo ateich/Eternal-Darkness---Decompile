@@ -1,0 +1,43 @@
+{
+  "session_id": "session-1718",
+  "range_start": "0x801C3E2C",
+  "range_end": "0x801C40D4",
+  "range_bytes": 680,
+  "matched_bytes": 40,
+  "nonmatching_bytes": 640,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "symbol": "fn_801C3E2C",
+      "range": "0x801C3E2C..0x801C3F6C",
+      "retail_bytes": 320,
+      "generated_bytes": 320,
+      "classification": "NonMatching",
+      "canonical_match_percent": 96.6875,
+      "relocation_strict_match_percent": 96.6875,
+      "blocker": "GC/1.2.5n folds the decremented resource-load index into a base-plus-offset load and schedules the base/archive loads differently, while retail preserves an lwzx through the decremented index; the resulting four differing rows are codegen-only."
+    },
+    {
+      "symbol": "fn_801C3F6C",
+      "range": "0x801C3F6C..0x801C40AC",
+      "retail_bytes": 320,
+      "generated_bytes": 320,
+      "classification": "NonMatching",
+      "canonical_match_percent": 70.55,
+      "relocation_strict_match_percent": 70.55,
+      "blocker": "The reconstruction is size-exact and preserves the lookup, sentinel scan, lock branches and call ABI, but GC/1.2.5n rotates the entry cursor, loop index and three record pointers across r5-r9 and r25-r27 and schedules the initial argument moves differently from retail."
+    },
+    {
+      "symbol": "fn_801C40AC",
+      "range": "0x801C40AC..0x801C40D4",
+      "retail_bytes": 40,
+      "generated_bytes": 40,
+      "classification": "Matching",
+      "canonical_match_percent": 100.0,
+      "relocation_strict_match_percent": 100.0,
+      "differing_rows": 0,
+      "relocation_shapes_equal": true
+    }
+  ],
+  "next_target": "0x801C40D4"
+}
