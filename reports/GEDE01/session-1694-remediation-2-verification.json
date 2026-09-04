@@ -1,0 +1,36 @@
+{
+  "session_id": "session-1694-remediation-2",
+  "scope": "Review-only correction of session-1694 instruction accounting and declaration-order conclusions; next_target remains 0x801BEE6C.",
+  "affected_object": {
+    "build_command": ".tools/bin/ninja -f build.ninja build/GEDE01/src/game/game_fn_801BEC38.o",
+    "generate_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BEC38 fn_801BEC38 -o reports/GEDE01/session-1694-remediation-1-fn_801BEC38.json --format json-pretty",
+    "measure_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801BEC38\")) as $l | (.right.symbols[]|select(.name==\"fn_801BEC38\")) as $r | \"retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) retail_instructions=\\([$l.instructions[]|select(.instruction!=null)]|length) generated_instructions=\\([$r.instructions[]|select(.instruction!=null)]|length) diff_delete_rows=\\([$r.instructions[]|select(.diff_kind==\"DIFF_DELETE\")]|length)\"' reports/GEDE01/session-1694-remediation-1-fn_801BEC38.json",
+    "raw_output": "retail_bytes=564 generated_bytes=552 match_percent=95.39007 retail_instructions=141 generated_instructions=138 diff_delete_rows=3",
+    "missing_instruction_command": "jq -r '[.left.symbols[]|select(.name==\"fn_801BEC38\")|.instructions[]|select(.diff_kind==\"DIFF_DELETE\")|.instruction.formatted]|join(\"; \")' reports/GEDE01/session-1694-remediation-1-fn_801BEC38.json",
+    "missing_instruction_raw_output": "addi r4, r31, 0x0; addi r3, r5, 0x0; li r0, 0x0"
+  },
+  "relocation_strict": {
+    "generate_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BEC38 fn_801BEC38 -o reports/GEDE01/session-1694-remediation-1-fn_801BEC38-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "measure_command": "jq -r '[.left.symbols[]|select(.name==\"fn_801BEC38\")|.instructions[]|select(.instruction.relocation!=null)|[.instruction.relocation.type_name,.instruction.formatted,(.instruction.relocation.addend//\"0\")]|@tsv] as $l | [.right.symbols[]|select(.name==\"fn_801BEC38\")|.instructions[]|select(.instruction.relocation!=null)|[.instruction.relocation.type_name,.instruction.formatted,(.instruction.relocation.addend//\"0\")]|@tsv] as $r | \"retail_relocations=\\($l|length) generated_relocations=\\($r|length) sequences_equal=\\($l==$r)\"' reports/GEDE01/session-1694-remediation-1-fn_801BEC38-reloc-strict.json",
+    "raw_output": "retail_relocations=17 generated_relocations=17 sequences_equal=true"
+  },
+  "declaration_order_check": {
+    "alternate_order_build_and_generate_command": "Temporarily reorder declarations to selected/id/offset/i; .tools/bin/ninja -f build.ninja build/GEDE01/src/game/game_fn_801BEC38.o && build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BEC38 fn_801BEC38 -o reports/GEDE01/session-1694-remediation-3-order-selected-id-offset-i.json --format json-pretty",
+    "alternate_order_measure_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801BEC38\")) as $l | (.right.symbols[]|select(.name==\"fn_801BEC38\")) as $r | \"order=selected/id/offset/i retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) retail_instructions=\\([$l.instructions[]|select(.instruction!=null)]|length) generated_instructions=\\([$r.instructions[]|select(.instruction!=null)]|length)\"' reports/GEDE01/session-1694-remediation-3-order-selected-id-offset-i.json",
+    "alternate_order_raw_output": "order=selected/id/offset/i retail_bytes=564 generated_bytes=552 match_percent=95.39007 retail_instructions=141 generated_instructions=138",
+    "retained_order_build_and_generate_command": "Restore declarations to selected/offset/id/i; .tools/bin/ninja -f build.ninja build/GEDE01/src/game/game_fn_801BEC38.o && build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BEC38 fn_801BEC38 -o reports/GEDE01/session-1694-remediation-1-fn_801BEC38.json --format json-pretty",
+    "retained_order_measure_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801BEC38\")) as $l | (.right.symbols[]|select(.name==\"fn_801BEC38\")) as $r | \"order=selected/offset/id/i retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) retail_instructions=\\([$l.instructions[]|select(.instruction!=null)]|length) generated_instructions=\\([$r.instructions[]|select(.instruction!=null)]|length) diff_delete_rows=\\([$r.instructions[]|select(.diff_kind==\"DIFF_DELETE\")]|length)\"' reports/GEDE01/session-1694-remediation-1-fn_801BEC38.json",
+    "retained_order_raw_output": "order=selected/offset/id/i retail_bytes=564 generated_bytes=552 match_percent=95.39007 retail_instructions=141 generated_instructions=138 diff_delete_rows=3",
+    "comparison_command": "jq -sr '.[0] as $x | .[1] as $y | ($x.right.symbols[]|select(.name==\"fn_801BEC38\")|.instructions) as $a | ($y.right.symbols[]|select(.name==\"fn_801BEC38\")|.instructions) as $b | \"generated_instruction_rows_equal=\\($a==$b)\"' reports/GEDE01/session-1694-remediation-3-order-selected-id-offset-i.json reports/GEDE01/session-1694-remediation-1-fn_801BEC38.json",
+    "comparison_raw_output": "generated_instruction_rows_equal=true",
+    "conclusion": "Two declaration orders were tested and measured identically. No exhaustion claim is made; untested declaration permutations remain available."
+  },
+  "frontier_accounting": {
+    "command": "python3 tools/frontier_accounting.py --splits config/GEDE01/splits.txt --configure configure.py --start 0x801BEC38 --end 0x801BEE6C",
+    "raw_output": "0x801bec38-0x801bee6c=564:NonMatching\nmatched_bytes=0 nonmatching_bytes=564 range_bytes=564 accounted_bytes=564 next_target=0x801bee6c"
+  },
+  "build_and_dol_gate": {
+    "command": ".tools/bin/ninja -f build.ninja build/GEDE01/main.dol >/dev/null; echo build_exit=$?; sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol; cmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol; echo cmp_exit=$?",
+    "raw_output": "build_exit=0\nea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol\ncmp_exit=0"
+  }
+}

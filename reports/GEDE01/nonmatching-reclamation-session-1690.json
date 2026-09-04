@@ -1,0 +1,89 @@
+{
+  "session_id": "session-1690",
+  "scope": "Consolidation only; no new functions matched and no frontier advance.",
+  "starting_target": "0x801BE474",
+  "ending_next_target": "0x801BE474",
+  "enumeration": {
+    "method": "Parsed configure.py and its pre-promotion parent revision with Python's AST, selecting Object calls whose first positional argument is the NonMatching name. This handles both single-line and multiline formatting. Mapped each source argument to main/<source path without extension> in the freshly rebuilt canonical objdiff report and selected fuzzy_match_percent == 100.0.",
+    "audit_command": "python3 - <<'PY'\nimport ast,json,subprocess\nfrom pathlib import Path\nroot=Path('.')\nreport=json.loads((root/'build/GEDE01/report.json').read_text())\nunits={u['name']:u for u in report['units']}\nfor label,text in [('baseline',subprocess.check_output(['git','show','131d92f72^:eternal-darkness-decomp/configure.py'],text=True)),('remaining',(root/'configure.py').read_text())]:\n    sources=[ast.literal_eval(n.args[1]) for n in ast.walk(ast.parse(text)) if isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=='Object' and len(n.args)>=2 and isinstance(n.args[0],ast.Name) and n.args[0].id=='NonMatching']\n    mapped=[]; missing=[]\n    for s in sources:\n        name='main/'+s.removeprefix('src/').removesuffix('.c')\n        (mapped if name in units else missing).append(units[name] if name in units else name)\n    total=lambda key:sum(int(u.get('measures',{}).get(key,0)) for u in mapped)\n    candidates=[u for u in mapped if float(u.get('measures',{}).get('fuzzy_match_percent',0))==100.0]\n    print(f'{label}: registrations={len(sources)} mapped={len(mapped)} unmapped={len(missing)} code_bytes={total(\"total_code\")} data_bytes={total(\"total_data\")} functions={total(\"total_functions\")} candidates={len(candidates)}')\n    print(f'{label}_candidate_units: '+(','.join(u['name'] for u in candidates) if candidates else '(none)'))\n    print(f'{label}_unmapped_units: '+(','.join(missing) if missing else '(none)'))\nPY",
+    "audit_raw_output": "baseline: registrations=958 mapped=958 unmapped=0 code_bytes=473444 data_bytes=2064 functions=959 candidates=1\nbaseline_candidate_units: main/game/game_fn_801B3940\nbaseline_unmapped_units: (none)\nremaining: registrations=957 mapped=957 unmapped=0 code_bytes=473352 data_bytes=2044 functions=958 candidates=0\nremaining_candidate_units: (none)\nremaining_unmapped_units: (none)",
+    "baseline_nonmatching_objects": 958,
+    "baseline_nonmatching_code_bytes": 473444,
+    "baseline_nonmatching_data_bytes": 2064,
+    "baseline_nonmatching_functions": 959,
+    "unmapped_registrations": 0,
+    "candidates": [
+      {
+        "unit": "main/game/game_fn_801B3940",
+        "source": "src/game/game_fn_801B3940.c",
+        "baseline_text_bytes": 92,
+        "baseline_data_bytes": 20,
+        "baseline_functions": 1,
+        "baseline_fuzzy_match_percent": 100.0,
+        "disposition": "Promoted to Matching after enabling MWCC C++ exceptions restored the retail 8-byte extab and 12-byte extabindex sections without changing the 92-byte text body."
+      }
+    ],
+    "candidate_count": 1,
+    "remaining_nonmatching_objects": 957,
+    "remaining_nonmatching_code_bytes": 473352,
+    "remaining_nonmatching_data_bytes": 2044,
+    "remaining_nonmatching_functions": 958
+  },
+  "reclaimed": {
+    "objects": 1,
+    "functions_newly_matched": 0,
+    "matched_code_bytes_newly_scored": 0,
+    "matched_data_bytes_newly_scored": 20,
+    "linked_code_bytes": 92,
+    "linked_data_bytes": 20
+  },
+  "objdiff": {
+    "unit": "main/game/game_fn_801B3940",
+    "function": "fn_801B3940",
+    "retail_text_bytes": 92,
+    "generated_text_bytes": 92,
+    "match_percent": 100.0,
+    "relocation_diff_rows": 0,
+    "sections": {
+      ".text": {"bytes": 92, "fuzzy_match_percent": 100.0},
+      "extab": {"bytes": 8, "fuzzy_match_percent": 100.0},
+      "extabindex": {"bytes": 12, "fuzzy_match_percent": 100.0}
+    },
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801B3940 fn_801B3940 -o reports/GEDE01/session-1690-game_fn_801B3940-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "measurement_command": "jq -r '[\".text\",\"extab\",\"extabindex\",\".rela.text\",\".relaextabindex\"][] as $n | (.left.sections[] | select(.name==$n) | \"\\(.name): bytes=\\(.size) match_percent=\\(.match_percent // \"unscored\")\")' reports/GEDE01/session-1690-game_fn_801B3940-strict.json",
+    "measurement_raw_output": ".text: bytes=92 match_percent=100.0\nextab: bytes=8 match_percent=100.0\nextabindex: bytes=12 match_percent=100.0\n.rela.text: bytes=48 match_percent=unscored\n.relaextabindex: bytes=24 match_percent=unscored",
+    "artifact": "reports/GEDE01/session-1690-game_fn_801B3940-strict.json"
+  },
+  "canonical_accounting": {
+    "command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report.json",
+    "raw_output": "matching_objects=4542 total_objects=6089 matching_functions=4307 total_functions=8216 matching_code_bytes=657120 total_code_bytes=2300692 matching_data_bytes=35962 total_data_bytes=4305642 linked_code_bytes=657088 linked_data_bytes=35638",
+    "complete_units": 4542,
+    "total_units": 6089,
+    "matched_functions": 4307,
+    "total_functions": 8216,
+    "matched_code": 657120,
+    "total_code": 2300692,
+    "complete_code": 657088,
+    "matched_data": 35962,
+    "total_data": 4305642,
+    "complete_data": 35638
+  },
+  "relocation_strict_accounting": {
+    "command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/session-1690-remediation-1-strict-report.json -c function_reloc_diffs=name_address",
+    "measurement_command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/session-1690-remediation-1-strict-report.json",
+    "measurement_raw_output": "matching_objects=4542 total_objects=6089 matching_functions=4302 total_functions=8216 matching_code_bytes=655436 total_code_bytes=2300692 matching_data_bytes=35962 total_data_bytes=4305642 linked_code_bytes=657088 linked_data_bytes=35638",
+    "complete_units": 4542,
+    "matched_functions": 4302,
+    "matched_code": 655436,
+    "matched_data": 35962,
+    "complete_code": 657088,
+    "complete_data": 35638
+  },
+  "dol_gate": {
+    "build_command": "python3 configure.py && .tools/bin/ninja",
+    "sha1_command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "build_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "retail_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "cmp_exit": 0
+  }
+}

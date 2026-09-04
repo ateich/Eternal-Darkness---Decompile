@@ -1,0 +1,60 @@
+{
+  "session_id": "session-1690-remediation-1",
+  "remediates": "session-1690",
+  "scope": "Correct the multiline-blind NonMatching inventory audit and its durable reporting only; no source or frontier changes.",
+  "enumeration": {
+    "method": "Python AST traversal selects every Object call whose first positional argument is the NonMatching name, independent of line formatting.",
+    "command": "python3 - <<'PY'\nimport ast,json,subprocess\nfrom pathlib import Path\nroot=Path('.')\nreport=json.loads((root/'build/GEDE01/report.json').read_text())\nunits={u['name']:u for u in report['units']}\nfor label,text in [('baseline',subprocess.check_output(['git','show','131d92f72^:eternal-darkness-decomp/configure.py'],text=True)),('remaining',(root/'configure.py').read_text())]:\n    sources=[ast.literal_eval(n.args[1]) for n in ast.walk(ast.parse(text)) if isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=='Object' and len(n.args)>=2 and isinstance(n.args[0],ast.Name) and n.args[0].id=='NonMatching']\n    mapped=[]; missing=[]\n    for s in sources:\n        name='main/'+s.removeprefix('src/').removesuffix('.c')\n        (mapped if name in units else missing).append(units[name] if name in units else name)\n    total=lambda key:sum(int(u.get('measures',{}).get(key,0)) for u in mapped)\n    candidates=[u for u in mapped if float(u.get('measures',{}).get('fuzzy_match_percent',0))==100.0]\n    print(f'{label}: registrations={len(sources)} mapped={len(mapped)} unmapped={len(missing)} code_bytes={total(\"total_code\")} data_bytes={total(\"total_data\")} functions={total(\"total_functions\")} candidates={len(candidates)}')\n    print(f'{label}_candidate_units: '+(','.join(u['name'] for u in candidates) if candidates else '(none)'))\n    print(f'{label}_unmapped_units: '+(','.join(missing) if missing else '(none)'))\nPY",
+    "raw_output": "baseline: registrations=958 mapped=958 unmapped=0 code_bytes=473444 data_bytes=2064 functions=959 candidates=1\nbaseline_candidate_units: main/game/game_fn_801B3940\nbaseline_unmapped_units: (none)\nremaining: registrations=957 mapped=957 unmapped=0 code_bytes=473352 data_bytes=2044 functions=958 candidates=0\nremaining_candidate_units: (none)\nremaining_unmapped_units: (none)",
+    "baseline": {
+      "registrations": 958,
+      "mapped": 958,
+      "unmapped": 0,
+      "code_bytes": 473444,
+      "data_bytes": 2064,
+      "functions": 959,
+      "candidate_count": 1,
+      "candidate_units": ["main/game/game_fn_801B3940"]
+    },
+    "remaining": {
+      "registrations": 957,
+      "mapped": 957,
+      "unmapped": 0,
+      "code_bytes": 473352,
+      "data_bytes": 2044,
+      "functions": 958,
+      "candidate_count": 0
+    }
+  },
+  "affected_object_objdiff": {
+    "generate_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801B3940 fn_801B3940 -o reports/GEDE01/session-1690-game_fn_801B3940-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "measure_command": "jq -r '[\".text\",\"extab\",\"extabindex\",\".rela.text\",\".relaextabindex\"][] as $n | (.left.sections[] | select(.name==$n) | \"\\(.name): bytes=\\(.size) match_percent=\\(.match_percent // \"unscored\")\")' reports/GEDE01/session-1690-game_fn_801B3940-strict.json",
+    "raw_output": ".text: bytes=92 match_percent=100.0\nextab: bytes=8 match_percent=100.0\nextabindex: bytes=12 match_percent=100.0\n.rela.text: bytes=48 match_percent=unscored\n.relaextabindex: bytes=24 match_percent=unscored",
+    "artifact": "reports/GEDE01/session-1690-game_fn_801B3940-strict.json"
+  },
+  "canonical_accounting": {
+    "command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report.json",
+    "raw_output": "matching_objects=4542 total_objects=6089 matching_functions=4307 total_functions=8216 matching_code_bytes=657120 total_code_bytes=2300692 matching_data_bytes=35962 total_data_bytes=4305642 linked_code_bytes=657088 linked_data_bytes=35638"
+  },
+  "relocation_strict_accounting": {
+    "generate_command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/session-1690-remediation-1-strict-report.json -c function_reloc_diffs=name_address",
+    "measure_command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/session-1690-remediation-1-strict-report.json",
+    "raw_output": "matching_objects=4542 total_objects=6089 matching_functions=4302 total_functions=8216 matching_code_bytes=655436 total_code_bytes=2300692 matching_data_bytes=35962 total_data_bytes=4305642 linked_code_bytes=657088 linked_data_bytes=35638"
+  },
+  "build_and_dol_gate": {
+    "build_command": "python3 configure.py && .tools/bin/ninja",
+    "build_raw_output_final_lines": "[569/571] DOL build/GEDE01/main.dol\n[570/571] CHECK config/GEDE01/build.sha1\nbuild/GEDE01/main.dol: OK\n[571/571] PROGRESS",
+    "verification_command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol && cmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol; printf 'cmp_exit=%s\\n' \"$?\"",
+    "verification_raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol\ncmp_exit=0",
+    "build_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "retail_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "cmp_exit": 0
+  },
+  "frontier_gate": {
+    "command": "jq -r '\"state=\\(.state) assigned_target=\\(.assigned_target) accepted_frontier=\\(.accepted_frontier) candidate_frontier=\\(.candidate_frontier) agent_commit=\\(.agent_commit)\"' .darkfoundry/decomp-chain-state.json",
+    "raw_output": "state=REVIEW_CORRECTION assigned_target=0x801BE474 accepted_frontier=0x801BE474 candidate_frontier=0x801BE474 agent_commit=131d92f721237f95331ac797bd9cfa3abae71fd5",
+    "starting_target": "0x801BE474",
+    "ending_next_target": "0x801BE474",
+    "advanced": false
+  }
+}

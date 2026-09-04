@@ -1,0 +1,28 @@
+{
+  "session_id": "session-1694",
+  "starting_target": "0x801BEC38",
+  "ending_next_target": "0x801BEE6C",
+  "scope": "The contiguous fn_801BEC38 NonMatching translation unit; evidence corrected through session-1694 remediation 3 without advancing the frontier.",
+  "canonical_function_objdiff": {
+    "generate_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BEC38 fn_801BEC38 -o reports/GEDE01/session-1694-remediation-1-fn_801BEC38.json --format json-pretty",
+    "measure_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801BEC38\")) as $l | (.right.symbols[]|select(.name==\"fn_801BEC38\")) as $r | \"retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) retail_instructions=\\([$l.instructions[]|select(.instruction!=null)]|length) generated_instructions=\\([$r.instructions[]|select(.instruction!=null)]|length) diff_delete_rows=\\([$r.instructions[]|select(.diff_kind==\"DIFF_DELETE\")]|length)\"' reports/GEDE01/session-1694-remediation-1-fn_801BEC38.json",
+    "raw_output": "retail_bytes=564 generated_bytes=552 match_percent=95.39007 retail_instructions=141 generated_instructions=138 diff_delete_rows=3"
+  },
+  "relocation_strict_function_objdiff": {
+    "generate_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BEC38 fn_801BEC38 -o reports/GEDE01/session-1694-remediation-1-fn_801BEC38-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "raw_output": "retail_relocations=17 generated_relocations=17 sequences_equal=true"
+  },
+  "source_corrections": "The loop counter is now u8, which restores retail's clrlwi before the loop-bound compare; the identifier comparison is spelled id == voice->id_102, which restores retail's comparison operand direction once the identifier reaches the retail register; and selected/offset/id/i declaration order was tested as the register-allocation lever.",
+  "remaining_divergence": "The retained source still assigns selected/offset/id to r30/r29/r31 instead of retail r31/r30/r29. That live-range cycle makes the generated queue path color the voice pointer directly into r3, while retail keeps it in r5 and emits explicit argument copies before fn_801C09C4. The smaller generated frame follows from those absent live copies; it is a symptom, not the root-cause diagnosis. The two tested declaration orders, selected/id/offset/i and selected/offset/id/i, generated identical instruction rows after correcting i to u8; untested declaration permutations remain available.",
+  "frontier_accounting": {
+    "command": "python3 tools/frontier_accounting.py --splits config/GEDE01/splits.txt --configure configure.py --start 0x801BEC38 --end 0x801BEE6C",
+    "raw_output": "0x801bec38-0x801bee6c=564:NonMatching\nmatched_bytes=0 nonmatching_bytes=564 range_bytes=564 accounted_bytes=564 next_target=0x801bee6c"
+  },
+  "canonical_accounting": "matching_objects=4566 total_objects=6089 matching_functions=4333 total_functions=8216 matching_code_bytes=663008 total_code_bytes=2300692 matching_data_bytes=36074 total_data_bytes=4305642 linked_code_bytes=662492 linked_data_bytes=35718 code_percent=28.817764",
+  "relocation_strict_accounting": "matching_objects=4566 matching_functions=4328 matching_code_bytes=661324 linked_code_bytes=662492",
+  "build_and_dol_gate": "build/GEDE01/main.dol and orig/GEDE01/sys/main.dol both hash to ea24b6af954876ce072562ff39cdb4c81d32be1f; cmp_exit=0. Fresh commands and verbatim raw output are in reports/GEDE01/session-1694-remediation-3-verification.json.",
+  "matched_bytes": 0,
+  "nonmatching_bytes": 564,
+  "new_nonmatching_functions": 1,
+  "assembly_functions_added": 0
+}
