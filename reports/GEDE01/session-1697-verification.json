@@ -1,0 +1,13 @@
+{
+  "session": "session-1697",
+  "canonical_report_command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json",
+  "canonical_headline": "matching_objects=4571 total_objects=6089 matching_functions=4338 total_functions=8216 matching_code_bytes=664188 total_code_bytes=2300692 matching_data_bytes=36162 total_data_bytes=4305642 linked_code_bytes=663672 linked_data_bytes=35798",
+  "matched_function_commands": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_ADDRESS fn_ADDRESS -o reports/GEDE01/objdiff-game_fn_ADDRESS-session-1697.json --format json for ADDRESS in 801C0594 801C0644 801C0738 801C0844",
+  "matched_function_output": "fn_801C0594 retail_bytes=176 generated_bytes=176 instructions=44 score=100.0; fn_801C0644 retail_bytes=244 generated_bytes=244 instructions=61 score=100.0; fn_801C0738 retail_bytes=268 generated_bytes=268 instructions=67 score=100.0; fn_801C0844 retail_bytes=164 generated_bytes=164 instructions=41 score=100.0",
+  "strict_report_command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1697-reloc-strict.json -c function_reloc_diffs=name_address",
+  "strict_output": "All four functions score 100.0 with nine retail and nine generated relocation-bearing instructions and zero differing rows",
+  "dol_command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+  "dol_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol",
+  "matched_byte_arithmetic": "176 + 244 + 268 + 164 = 852",
+  "nonmatching_accounting": "zero new NonMatching functions and zero NonMatching bytes"
+}

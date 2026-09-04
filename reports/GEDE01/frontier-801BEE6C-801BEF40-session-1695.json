@@ -1,0 +1,50 @@
+{
+  "session_id": "session-1695",
+  "range_start": "0x801BEE6C",
+  "range_end": "0x801BEF40",
+  "next_target": "0x801BEF40",
+  "range_bytes": 212,
+  "matched_bytes": 0,
+  "nonmatching_bytes": 212,
+  "new_nonmatching_functions": 1,
+  "assembly_functions_added": 0,
+  "unaccounted_spans": [],
+  "functions": [{
+    "name": "fn_801BEE6C",
+    "start": "0x801BEE6C",
+    "end": "0x801BEF40",
+    "status": "NonMatching",
+    "retail_bytes": 212,
+    "generated_bytes": 216,
+    "retail_instructions": 53,
+    "generated_instructions": 54,
+    "canonical_match_percent": 95.09434,
+    "divergence": "Writing the comparison as id == voice->value_104 corrects retail's operand order. A fresh sweep of all six offset/id/index declaration permutations found index/id/offset and index/offset/id tied on the recorded measurements. The retained index/id/offset form produces generated offset/id/index in r29/r31/r30 instead of retail r31/r29/r30. The compiler also independently materializes the initial zero in r0, expanding the frame from 0x28 to 0x30."
+  }],
+  "measurement": {
+    "command": "jq -r '(.left.symbols[]|select(.name==\"fn_801BEE6C\")) as $l | (.right.symbols[]|select(.name==\"fn_801BEE6C\")) as $r | \"retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) retail_instructions=\\([$l.instructions[]|select(.instruction)]|length) generated_instructions=\\([$r.instructions[]|select(.instruction)]|length)\"' reports/GEDE01/session-1695-fn_801BEE6C.json",
+    "raw_output": "retail_bytes=212 generated_bytes=216 match_percent=95.09434 retail_instructions=53 generated_instructions=54"
+  },
+  "accounting_measurement": {
+    "command": "jq -r '(.left.symbols[]|select(.name==\"fn_801BEE6C\")) as $f | ($f.size|tonumber) as $n | \"range_bytes=\\($n) matched_bytes=\\(if $f.match_percent == 100 then $n else 0 end) nonmatching_bytes=\\(if $f.match_percent == 100 then 0 else $n end) new_nonmatching_functions=\\(if $f.match_percent == 100 then 0 else 1 end) assembly_functions_added=0\"' reports/GEDE01/session-1695-fn_801BEE6C.json",
+    "raw_output": "range_bytes=212 matched_bytes=0 nonmatching_bytes=212 new_nonmatching_functions=1 assembly_functions_added=0"
+  },
+  "prior_attempts": [
+    {
+      "session": "session-1694",
+      "commit": "f66b6bf6df2968ddec1093334fde18568629c93a",
+      "disposition": "Discarded raw-byte candidate; it did not test the retained typed-Voice source with the corrected equality spelling."
+    },
+    {
+      "session": "session-1695",
+      "commit": "4ef8aa5011444d4266abc5fb92ab74f5addcc6cc",
+      "disposition": "Retained typed-Voice candidate before the equality and declaration-order remediation."
+    }
+  ],
+  "prior_attempt_measurement": {
+    "command": "git show -s --format='commit=%H commit_ts=%cI subject=%s' f66b6bf6d 4ef8aa501",
+    "raw_output": "commit=f66b6bf6df2968ddec1093334fde18568629c93a commit_ts=2026-09-04T00:47:27-04:00 subject=decomp: reconstruct fn_801BEE6C candidate\ncommit=4ef8aa5011444d4266abc5fb92ab74f5addcc6cc commit_ts=2026-09-04T01:31:04-04:00 subject=decomp: report session 1695 frontier attempt"
+  },
+  "frontier_accounting": "0x801bee6c-0x801bef40=212:NonMatching; matched_bytes=0 nonmatching_bytes=212 range_bytes=212 accounted_bytes=212 next_target=0x801bef40",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

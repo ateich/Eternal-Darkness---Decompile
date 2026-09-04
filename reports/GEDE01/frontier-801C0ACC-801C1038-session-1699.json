@@ -1,0 +1,18 @@
+{
+  "session": "session-1699",
+  "range_start": "0x801C0ACC",
+  "range_end": "0x801C1038",
+  "next_target": "0x801C1038",
+  "retail_bytes": 1388,
+  "matched_bytes": 500,
+  "nonmatching_bytes": 888,
+  "unaccounted_spans": [],
+  "functions": [
+    {"name": "fn_801C0ACC", "start": "0x801C0ACC", "end": "0x801C0BC8", "retail_bytes": 252, "generated_bytes": 252, "instructions": 63, "score": 100.0, "status": "Matching", "relocations": "4 retail, 4 generated, zero differing rows"},
+    {"name": "fn_801C0BC8", "start": "0x801C0BC8", "end": "0x801C0ED8", "retail_bytes": 784, "generated_bytes": 632, "score": 67.668365, "status": "NonMatching", "relocations": "19 retail, 14 generated", "blocker": "The initialization tail remains structurally incomplete and GC/1.2.5n consequently selects different r14-r31 live ranges and scheduling across the twelve recovered calls."},
+    {"name": "fn_801C0ED8", "start": "0x801C0ED8", "end": "0x801C0F40", "retail_bytes": 104, "generated_bytes": 104, "instructions": 26, "score": 99.42308, "status": "NonMatching", "relocations": "10 retail, 10 generated", "blocker": "The source semantics and loop codegen align, but GC/1.2.5n schedules the high half of the 64-bit zero store before the two adjacent list-head clears while retail schedules it after them."},
+    {"name": "fn_801C0F40", "start": "0x801C0F40", "end": "0x801C1038", "retail_bytes": 248, "generated_bytes": 248, "instructions": 62, "score": 100.0, "status": "Matching", "relocations": "37 retail, 37 generated, zero differing rows"}
+  ],
+  "assembly_functions": [],
+  "shared_reconstructions": []
+}

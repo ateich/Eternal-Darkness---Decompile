@@ -1,0 +1,65 @@
+{
+  "session_id": "session-1695-remediation-1",
+  "scope": "Review remediation only for fn_801BEE6C and existing session-1695 records; the frontier is not advanced.",
+  "retained_source_change": "Declarations are ordered offset/index/id and the equality is spelled id == voice->value_104.",
+  "canonical_function_objdiff": {
+    "build_command": ".tools/bin/ninja -f build.ninja build/GEDE01/src/game/game_fn_801BEE6C.o",
+    "generate_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BEE6C fn_801BEE6C -o reports/GEDE01/session-1695-fn_801BEE6C.json --format json-pretty",
+    "measure_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801BEE6C\")) as $l | (.right.symbols[]|select(.name==\"fn_801BEE6C\")) as $r | \"retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) retail_instructions=\\([$l.instructions[]|select(.instruction)]|length) generated_instructions=\\([$r.instructions[]|select(.instruction)]|length)\"' reports/GEDE01/session-1695-fn_801BEE6C.json",
+    "raw_output": "retail_bytes=212 generated_bytes=216 match_percent=94.62264 retail_instructions=53 generated_instructions=54"
+  },
+  "variant_measurements": [
+    {
+      "source_variant": "offset/index/id declarations plus retail equality operand order",
+      "command": ".tools/bin/ninja -f build.ninja build/GEDE01/src/game/game_fn_801BEE6C.o && build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BEE6C fn_801BEE6C -o reports/GEDE01/session-1695-fn_801BEE6C.json --format json-pretty && jq -r '(.left.symbols[]|select(.name==\"fn_801BEE6C\")) as $l | (.right.symbols[]|select(.name==\"fn_801BEE6C\")) as $r | \"retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) retail_instructions=\\([$l.instructions[]|select(.instruction)]|length) generated_instructions=\\([$r.instructions[]|select(.instruction)]|length)\"' reports/GEDE01/session-1695-fn_801BEE6C.json",
+      "raw_output": "retail_bytes=212 generated_bytes=216 match_percent=94.62264 retail_instructions=53 generated_instructions=54",
+      "disposition": "retained"
+    },
+    {
+      "source_variant": "offset and index initialized at declaration, with the loop assignment removed",
+      "command": ".tools/bin/ninja -f build.ninja build/GEDE01/src/game/game_fn_801BEE6C.o && build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BEE6C fn_801BEE6C -o reports/GEDE01/session-1695-fn_801BEE6C.json --format json-pretty && jq -r '(.left.symbols[]|select(.name==\"fn_801BEE6C\")) as $l | (.right.symbols[]|select(.name==\"fn_801BEE6C\")) as $r | \"retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) retail_instructions=\\([$l.instructions[]|select(.instruction)]|length) generated_instructions=\\([$r.instructions[]|select(.instruction)]|length)\"' reports/GEDE01/session-1695-fn_801BEE6C.json",
+      "raw_output": "retail_bytes=212 generated_bytes=216 match_percent=90.9434 retail_instructions=53 generated_instructions=54",
+      "disposition": "rejected because it adds eager index initialization and regresses the canonical diff"
+    },
+    {
+      "source_variant": "register-qualified offset/index/id with offset initialized at declaration",
+      "command": ".tools/bin/ninja -f build.ninja build/GEDE01/src/game/game_fn_801BEE6C.o && build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BEE6C fn_801BEE6C -o reports/GEDE01/session-1695-fn_801BEE6C.json --format json-pretty && jq -r '(.left.symbols[]|select(.name==\"fn_801BEE6C\")) as $l | (.right.symbols[]|select(.name==\"fn_801BEE6C\")) as $r | \"retail_bytes=\\($l.size) generated_bytes=\\($r.size) match_percent=\\($l.match_percent) retail_instructions=\\([$l.instructions[]|select(.instruction)]|length) generated_instructions=\\([$r.instructions[]|select(.instruction)]|length)\"' reports/GEDE01/session-1695-fn_801BEE6C.json",
+      "raw_output": "retail_bytes=212 generated_bytes=216 match_percent=94.62264 retail_instructions=53 generated_instructions=54",
+      "disposition": "rejected because it is byte-identical to the simpler retained variant"
+    }
+  ],
+  "remaining_divergence": "GC/1.2.5n still allocates offset/id/index to r30/r31/r29 instead of retail r31/r29/r30 and emits a separate r0 zero before the larger frame. The cheap levers are now tested; this is a measured remaining codegen divergence, not a declaration made in lieu of testing.",
+  "relocation_strict_function_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BEE6C fn_801BEE6C -o - --format json -c function_reloc_diffs=name_address | jq -r '(.left.symbols[]|select(.name==\"fn_801BEE6C\")) as $l | (.right.symbols[]|select(.name==\"fn_801BEE6C\")) as $r | \"retail_relocations=\\([$l.instructions[]|select(.instruction.relocation)]|length) generated_relocations=\\([$r.instructions[]|select(.instruction.relocation)]|length) relocation_diff_rows=\\([($l.instructions[]),($r.instructions[])|select(.instruction.relocation and .diff_kind)]|length)\"'",
+    "raw_output": "retail_relocations=6 generated_relocations=6 relocation_diff_rows=0"
+  },
+  "strict_output_duplication_check": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BEE6C fn_801BEE6C -o - --format json-pretty -c function_reloc_diffs=name_address | sha256sum; sha256sum reports/GEDE01/session-1695-fn_801BEE6C.json",
+    "raw_output": "fb4a855a91878e68b611bf8560782b9dafa7cc996429cd98e63e0a3cb91df982  -\nfb4a855a91878e68b611bf8560782b9dafa7cc996429cd98e63e0a3cb91df982  reports/GEDE01/session-1695-fn_801BEE6C.json",
+    "disposition": "The old duplicate relocation-strict per-function file was removed; strict verification now streams to stdout."
+  },
+  "frontier_accounting": {
+    "command": "jq -r '(.left.symbols[]|select(.name==\"fn_801BEE6C\")) as $f | ($f.size|tonumber) as $n | \"range_bytes=\\($n) matched_bytes=\\(if $f.match_percent == 100 then $n else 0 end) nonmatching_bytes=\\(if $f.match_percent == 100 then 0 else $n end) new_nonmatching_functions=\\(if $f.match_percent == 100 then 0 else 1 end) assembly_functions_added=0\"' reports/GEDE01/session-1695-fn_801BEE6C.json",
+    "raw_output": "range_bytes=212 matched_bytes=0 nonmatching_bytes=212 new_nonmatching_functions=1 assembly_functions_added=0",
+    "next_target": "0x801BEF40"
+  },
+  "prior_attempt_cross_reference": {
+    "command": "git show -s --format='commit=%H commit_ts=%cI subject=%s' f66b6bf6d 4ef8aa501",
+    "raw_output": "commit=f66b6bf6df2968ddec1093334fde18568629c93a commit_ts=2026-09-04T00:47:27-04:00 subject=decomp: reconstruct fn_801BEE6C candidate\ncommit=4ef8aa5011444d4266abc5fb92ab74f5addcc6cc commit_ts=2026-09-04T01:31:04-04:00 subject=decomp: report session 1695 frontier attempt",
+    "finding": "The session-1694 commit added a raw-byte candidate that was later discarded; session-1695 independently added the retained typed-Voice candidate."
+  },
+  "cutoff_correction": {
+    "finding": "The prior claim that an evidence cutoff had been reached is withdrawn. No scheduler dispatch timestamp is present in the tracked worktree, so elapsed time and unused cutoff budget are unverified here and are not restated as figures."
+  },
+  "canonical_project_accounting": {
+    "generate_command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json",
+    "measure_command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report.json",
+    "raw_output": "matching_objects=4566 total_objects=6089 matching_functions=4333 total_functions=8216 matching_code_bytes=663008 total_code_bytes=2300692 matching_data_bytes=36082 total_data_bytes=4305642 linked_code_bytes=662492 linked_data_bytes=35718"
+  },
+  "full_build_and_dol_gate": {
+    "build_command": ".tools/bin/ninja -f build.ninja >/dev/null; echo build_exit=$?",
+    "build_raw_output": "build_exit=0",
+    "hash_and_compare_command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol; cmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol; echo cmp_exit=$?",
+    "hash_and_compare_raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol\ncmp_exit=0"
+  }
+}

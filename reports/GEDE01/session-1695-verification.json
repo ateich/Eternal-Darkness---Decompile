@@ -1,0 +1,18 @@
+{
+  "session_id": "session-1695",
+  "starting_target": "0x801BEE6C",
+  "ending_next_target": "0x801BEF40",
+  "canonical_function_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BEE6C fn_801BEE6C -o reports/GEDE01/session-1695-fn_801BEE6C.json --format json-pretty",
+    "raw_output": "retail_bytes=212 generated_bytes=216 match_percent=94.528305 retail_instructions=53 generated_instructions=54"
+  },
+  "relocation_strict_function_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801BEE6C fn_801BEE6C -o reports/GEDE01/session-1695-fn_801BEE6C-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "evidence": "Relocation-strict report retained separately; all relocation-bearing instruction targets align while the function remains instruction-NonMatching."
+  },
+  "canonical_accounting": "matching_objects=4566 total_objects=6089 matching_functions=4333 total_functions=8216 matching_code_bytes=663008 total_code_bytes=2300692 matching_data_bytes=36082 total_data_bytes=4305642 linked_code_bytes=662492 linked_data_bytes=35718 code_percent=28.817764",
+  "relocation_strict_accounting": "matching_objects=4566 total_objects=6089 matching_functions=4328 total_functions=8216 matching_code_bytes=661324 total_code_bytes=2300692 matching_data_bytes=36082 total_data_bytes=4305642 linked_code_bytes=662492 linked_data_bytes=35718",
+  "build_and_dol_gate": "Full ninja build succeeded; build and original DOL both hash to ea24b6af954876ce072562ff39cdb4c81d32be1f and cmp succeeded.",
+  "matched_bytes": 0,
+  "nonmatching_bytes": 212
+}
