@@ -605,3 +605,85 @@ Objdiff reports 100% for all eight functions under
 `function_reloc_diffs=name_address`: 76, 228, 348, 148, 244, 208, 156, and
 232 code bytes respectively, with 9, 4, 11, 8, 7, 9, 8, and 8 matching
 relocations.
+
+## A local initializer can share an existing rodata table
+
+`fn_8006B0F0` copies the three values `{0, 2, 3}` to its stack frame before
+iterating over them. Declaring `s32 kinds[3] = {0, 2, 3};` before the state
+lookup reproduces the retail instructions, but MWCC emits the initializer as
+the compiler-local `.rodata` symbol `@4`. The post-compile rule requires `@4`
+to own that entire section, verifies its 12 bytes against the start of the
+existing retail symbol `lbl_80239090`, redefines the symbol, and removes the
+duplicate section. The raw object is 99.51923%; the guarded build edge is
+208/208 bytes and 100% with all eight relocation sites equal.
+
+Modelling the values as an external `Kinds` structure, copying that structure
+after the state lookup, and indexing `kinds.values` produces the same-sized
+function at 57.98077%.
+
+## Compiler-local data must be removed, not only renamed
+
+MWCC emits local constant pools and jump tables even when identical data already exists in
+the retail binary. Renaming the local symbol is sufficient for a strict function diff, but it
+is not sufficient for the linked binary: the object still owns a duplicate data section. The
+post-compile rules therefore verify the local data against the addressed retail symbol,
+redefine references to that symbol, and remove the local section. A single-symbol rule must
+cover the whole section. A multi-symbol rule must name every nonempty symbol in the section;
+the guard rejects overlapping ranges and nonzero bytes outside those ranges.
+
+This distinction matters for jump tables. The first strict pass for `fn_8006E53C`,
+`fn_800CF598`, `fn_801ACFE8`, and `fn_801B1BA0` renamed their tables and reached 100% at the
+function level, but left 476 bytes of duplicate `.data` plus 20 bytes of linker alignment.
+Externalizing the tables and removing those sections restores the retail DOL exactly.
+
+`fn_8009E808` has a separate case: one compiler-local eight-byte `.sdata2` symbol corresponds
+to two adjacent four-byte retail symbols. Its second relocation must first be retargeted from
+the local symbol plus four to the second retail symbol. The retargeting tool requires exactly
+one relocation with the expected type and addend, verifies both four-byte values against the
+retail DOL, and fails without writing if any check differs. Treating the full eight bytes as
+one retail symbol leaves a strict relocation-name difference at 99.9% even though the linked
+address is the same.
+
+The full-link checksum is required in addition to function-level objdiff. It caught the
+duplicate jump-table sections that the function comparison correctly did not score.
+
+## Source forms rejected while matching externalized-data functions
+
+- The earlier source using direct multidimensional `SceneEntry` indexing in
+  `fn_80090004` scores 89.671875% because
+  retail keeps the address of the table's strided `value` column in a saved register. A
+  two-use accessor macro contains that layout calculation, and it is undefined immediately
+  after the function.
+- In `fn_8007D4D8`, passing the packed direction word directly after copying the vector
+  leaves one stack reload and scores 99.0%. Reading the packed word into a named local before
+  the copy keeps it in a register and matches exactly.
+- `fn_801247F8` reaches 100% only by converting a live pointer to an integer and adding it to
+  an integer offset as though the offset were a pointer. Readable pointer-index forms are
+  size-exact at 99.84615%, so this function remains NonMatching.
+- In `fn_80174F2C`, moving the descriptor assignment out of the helper call while using only
+  `opt_common_subs off` produces 556 bytes instead of 568 and scores 96.34507%. Disabling
+  `opt_propagation` as well and storing the script value in a named `u16` preserves the
+  descriptor lifetime and matches exactly with ordinary assignment statements.
+- Declaring `fn_801E8328` variadic in `fn_80153A24` adds two `crclr` instructions, producing
+  744 bytes instead of 736 and 98.91304%. Existing calls use different argument counts, so
+  the retained old-style declaration is consistent with the dispatcher boundary.
+- Two separate walking descriptor pointers in `fn_80153A24` score 95.2%. Keeping the pair in
+  a two-element array reproduces the retail parameter allocation without dummy state.
+- Keeping the second loop index block-scoped in `fn_80186F70` scores 99.40909%. Separate
+  named loop counters, with the second counter function-scoped, match exactly.
+- Signed-byte casts on the three differences in `fn_80187BB4` add `extsb` instructions and
+  score 91.354164%. The byte operands already promote to `int`, so removing the casts is both
+  simpler and exact.
+- Replacing the packed-coordinate stores in `fn_801916D0` with two `memcpy` calls produces
+  716 bytes instead of 684 and 90.34503%. A union with named coordinate and packed-word views
+  expresses both uses without pointer aliasing and matches exactly.
+- Marking the three floating-point globals used by `fn_80192F54` as `const` changes floating
+  register allocation and scores 99.45513%; the non-const declarations match exactly.
+- Reusing and rebasing the input pointer directly in `fn_8019120C` scores 97.61176%. Keeping
+  the input and the rebased working pointer as distinct locals matches exactly.
+- Declaring `lbl_8064D2FC` signed in `fn_801ACFE8` scores 98.53658%. Other users treat it as
+  an integer handle, and the retained `u32` declaration reproduces the unsigned comparison.
+- A ternary clamp in `fn_8018E0D8` scores 93.7%. The explicit `if`/`else` form matches the
+  retail control flow and is clearer about the saturated value.
+- Alternative compiler optimization settings leave `fn_801B1BA0` at 99.3%. Its retained
+  source and existing per-file settings match exactly after both jump tables are externalized.
