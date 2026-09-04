@@ -26,7 +26,7 @@ typedef struct EffectParams800A32B8 {
 
 extern u32 lbl_80651A20;
 extern u16 lbl_80651A24;
-extern float lbl_8064EEA0;
+extern const float lbl_8064EEA0;
 extern void fn_8018358C(EffectParams800A32B8*);
 extern void fn_801833B8(void);
 extern void* fn_80148008(Vec3_800A32B8*, void*, EffectParams800A32B8*,
@@ -34,12 +34,6 @@ extern void* fn_80148008(Vec3_800A32B8*, void*, EffectParams800A32B8*,
 extern void *fn_80156938();
 extern void fn_8017FF1C(void*, int);
 
-/*
- * Behavior-complete, size-equal reconstruction. The only current divergence
- * is MWCC scheduling the lbl_8064EEA0 load after the saved-register and
- * descriptor stores instead of directly after mflr. Objdiff: 76.666664%,
- * 240/240 bytes; all nine relocations have equal targets and types.
- */
 void fn_800A32B8(const Vec3_800A32B8* source)
 {
     struct {

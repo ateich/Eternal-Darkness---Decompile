@@ -11,8 +11,8 @@ typedef struct Object800A4670 {
     Flags800A4670 flags;
 } Object800A4670;
 
-extern float lbl_8064EE70;
-extern float lbl_8064EEA0;
+extern const float lbl_8064EE70;
+extern const float lbl_8064EEA0;
 extern void fn_80120AD0(int, int, int, int, float, float);
 
 void fn_800A4670(Object800A4670* object, int value, int flags)

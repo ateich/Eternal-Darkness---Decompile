@@ -524,3 +524,23 @@ running total is a pointer. 364/364 bytes, 100%.
 
 All seven functions verify at 100% with relocations in objdiff, and the
 whole-DOL SHA-1 gate remains `ea24b6af954876ce072562ff39cdb4c81d32be1f`.
+
+## Const-qualified scalar externs affect load scheduling
+
+Adding `const` to 21 read-only float extern declarations makes MWCC schedule
+their loads in the retail order in fourteen functions. Thirteen function
+bodies, all symbol names, compiler flags, and object boundaries are unchanged.
+In `fn_8014C988`, a byte-neutral `volatile` qualifier was removed from the
+callback store. The existing `volatile` qualifier on `lbl_8064F7F0` is retained.
+
+For `fn_800A32B8`, the non-const declaration already produced the correct
+240-byte size and all nine relocation targets and types, but scheduled the
+`lbl_8064EEA0` load after the saved-register and descriptor stores instead of
+after `mflr`. For `fn_8014C988`, separate statements, a comma expression, and
+a volatile callback store all left the same divergence. Qualifying the
+read-only float externs resolves both without changing either function body.
+
+The fourteen functions total 2528 bytes and 102 relocations. Each reports
+100% on both the canonical basis and with
+`function_reloc_diffs=name_address`; the whole-DOL SHA-1 remains
+`ea24b6af954876ce072562ff39cdb4c81d32be1f`.

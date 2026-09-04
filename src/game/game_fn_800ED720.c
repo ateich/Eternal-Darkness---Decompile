@@ -1,4 +1,4 @@
-extern float lbl_8064F898;
+extern const float lbl_8064F898;
 extern double lbl_8064F8A0;
 extern double lbl_8064F8A8;
 extern double __frsqrte(double);
