@@ -1,0 +1,16 @@
+{
+  "session_id": "session-1706",
+  "canonical_report": "build/GEDE01/report.json",
+  "canonical_command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json",
+  "canonical_counters": "matching_objects=4580 total_objects=6094 matching_functions=4348 total_functions=8216 matching_code_bytes=665888 total_code_bytes=2300692 matching_data_bytes=36278 total_data_bytes=4305642 linked_code_bytes=665268 linked_data_bytes=35878",
+  "strict_report": "reports/GEDE01/session-1706-reloc-strict.json",
+  "strict_command": "build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1706-reloc-strict.json -c function_reloc_diffs=name_address",
+  "function_results": [
+    {"name": "fn_801C1CB0", "canonical_report": "reports/GEDE01/objdiff-game_fn_801C1CB0-session-1706.json", "strict_report": "reports/GEDE01/objdiff-game_fn_801C1CB0-session-1706-reloc-strict.json", "retail_bytes": 816, "generated_bytes": 820, "retail_instructions": 204, "generated_instructions": 205, "score": 87.80882, "status": "NonMatching"},
+    {"name": "fn_801C1FE0", "canonical_report": "reports/GEDE01/objdiff-game_fn_801C1FE0-session-1706.json", "strict_report": "reports/GEDE01/objdiff-game_fn_801C1FE0-session-1706-reloc-strict.json", "retail_bytes": 232, "generated_bytes": 232, "retail_instructions": 58, "generated_instructions": 58, "score": 100.0, "relocations_equal": true}
+  ],
+  "matched_byte_arithmetic": "0x801C20C8 - 0x801C1FE0 = 0xE8 = 232",
+  "range_arithmetic": "0x801C20C8 - 0x801C1CB0 = 0x418 = 1048 = 816 NonMatching + 232 matching bytes",
+  "dol_sha1_command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+  "dol_sha1_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f for both generated and retail DOL"
+}

@@ -87,6 +87,16 @@ config.asflags = ["-mgekko", "--strip-local-absolute", "-I include", f"-I build/
 config.ldflags = ["-fp hardware", "-nodefaults"]
 config.custom_build_rules = [
     {
+        "name": "externalize_game_801C2980_unsigned_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @3 lbl_80650F50 orig/GEDE01/sys/main.dol && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@3=lbl_80650F50 --remove-section=.sdata2 "
+            "--rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
         "name": "externalize_game_801B02F0_jumptable",
         "command": (
             "python3 tools/externalize_elf_symbol.py $in @59 jumptable_8025183C "
@@ -2296,6 +2306,11 @@ for rule in config.custom_build_rules:
 guarded_externalize_rules.add("externalize_string_pool_80250588")
 config.custom_build_steps = {
     "post-compile": [
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_801C2980.externalized"],
+            "rule": "externalize_game_801C2980_unsigned_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_801C2980.o"],
+        },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_801B02F0.externalized"],
             "rule": "externalize_game_801B02F0_jumptable",
@@ -9934,6 +9949,21 @@ config.libs = [
             Object(Matching, "game/game_fn_801C14D0.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
             Object(NonMatching, "game/game_fn_801C1520.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
             Object(NonMatching, "game/game_fn_801C1600.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
+            Object(NonMatching, "game/game_fn_801C1790.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_801C1BCC.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
+            Object(NonMatching, "game/game_fn_801C1CB0.c", mw_version="GC/1.2.5n"),
+            Object(Matching, "game/game_fn_801C1FE0.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
+            Object(Matching, "game/game_fn_801C20C8.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
+            Object(Matching, "game/game_fn_801C2148.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
+            Object(Matching, "game/game_fn_801C21E8.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
+            Object(NonMatching, "game/game_fn_801C22F8.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-use_lmw_stmw on"]),
+            Object(NonMatching, "game/game_fn_801C242C.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_801C267C.c", mw_version="GC/1.2.5n"),
+            Object(Matching, "game/game_fn_801C26F8.c", mw_version="GC/1.2.5n"),
+            Object(Matching, "game/game_fn_801C2754.c", mw_version="GC/1.2.5n"),
+            Object(Matching, "game/game_fn_801C27D0.c", mw_version="GC/1.2.5n"),
+            Object(Matching, "game/game_fn_801C2980.c", mw_version="GC/1.2.5n"),
+            Object(NonMatching, "game/game_fn_801C29BC.c", mw_version="GC/1.2.5n"),
         ],
     },
     {
