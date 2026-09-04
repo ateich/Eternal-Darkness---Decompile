@@ -1,0 +1,17 @@
+{
+  "session_id": "session-1704",
+  "canonical_report_command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json",
+  "canonical_headline": "matching_objects=4578 total_objects=6094 matching_functions=4346 total_functions=8216 matching_code_bytes=665428 total_code_bytes=2300692 matching_data_bytes=36238 total_data_bytes=4305642 linked_code_bytes=664808 linked_data_bytes=35838",
+  "canonical_headline_measurement_command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report.json",
+  "canonical_headline_measurement_raw_output": "matching_objects=4578 total_objects=6094 matching_functions=4346 total_functions=8216 matching_code_bytes=665428 total_code_bytes=2300692 matching_data_bytes=36238 total_data_bytes=4305642 linked_code_bytes=664808 linked_data_bytes=35838",
+  "function_measurement": "fn_801C1600 retail_bytes=400 generated_bytes=400 canonical_score=78.48 relocation_strict_score=78.48",
+  "function_measurement_command": "python3 - <<'PY'\nimport json\np='reports/GEDE01/objdiff-game_fn_801C1600-session-1704-reloc-strict.json'; d=json.load(open(p))\nfor side in ('left','right'):\n s=next(x for x in d[side]['symbols'] if x['name']=='fn_801C1600'); sec=next(x for x in d[side]['sections'] if x['name']=='.text'); ins=sum(1 for x in s['instructions'] if x.get('instruction')); print(f'{side}: symbol_size={s[\"size\"]} section_size={sec[\"size\"]} instruction_rows={ins} match_percent={s.get(\"match_percent\")}')\nPY",
+  "function_measurement_raw_output": "left: symbol_size=400 section_size=400 instruction_rows=100 match_percent=78.48\nright: symbol_size=400 section_size=400 instruction_rows=100 match_percent=78.48",
+  "matched_bytes_this_session": 0,
+  "nonmatching_bytes_this_session": 400,
+  "range_measurement_command": "python3 - <<'PY'\nstart=int('801C1600',16); end=int('801C1790',16); matched=0; nonmatching=end-start\nprint(f'range_start=0x{start:08X} range_end=0x{end:08X} retail_bytes={end-start} matched_bytes={matched} nonmatching_bytes={nonmatching} unaccounted_bytes={(end-start)-matched-nonmatching}')\nPY",
+  "range_measurement_raw_output": "range_start=0x801C1600 range_end=0x801C1790 retail_bytes=400 matched_bytes=0 nonmatching_bytes=400 unaccounted_bytes=0",
+  "dol_sha1_command": "sha1sum build/GEDE01/main.dol",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "build_result": "build/GEDE01/main.dol: OK"
+}

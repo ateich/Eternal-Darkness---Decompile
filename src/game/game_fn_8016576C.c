@@ -14,7 +14,7 @@ extern void fn_8015F694(Parser*, int, Entry*);
 extern void fn_8015F768(Parser*, int, Entry*);
 extern void fn_8015F7D4(Parser*, int, Entry*, Entry*);
 extern void fn_80163DA4(Parser*);
-extern int fn_80165464(Parser*, Entry*);
+extern void fn_80165464(Parser*, Entry*);
 extern int fn_8016560C(int);
 extern int fn_8016563C(int);
 

@@ -1,0 +1,19 @@
+{
+  "session_id": "session-1704",
+  "range_start": "0x801C1600",
+  "range_end": "0x801C1790",
+  "next_target": "0x801C1790",
+  "retail_bytes": 400,
+  "matched_bytes": 0,
+  "nonmatching_bytes": 400,
+  "unaccounted_spans": [],
+  "range_measurement": {
+    "command": "python3 - <<'PY'\nstart=int('801C1600',16); end=int('801C1790',16); matched=0; nonmatching=end-start\nprint(f'range_start=0x{start:08X} range_end=0x{end:08X} retail_bytes={end-start} matched_bytes={matched} nonmatching_bytes={nonmatching} unaccounted_bytes={(end-start)-matched-nonmatching}')\nPY",
+    "raw_output": "range_start=0x801C1600 range_end=0x801C1790 retail_bytes=400 matched_bytes=0 nonmatching_bytes=400 unaccounted_bytes=0"
+  },
+  "functions": [{"name":"fn_801C1600","status":"NonMatching","retail_bytes":400,"generated_bytes":400,"canonical_score":78.48,"relocation_strict_score":78.48,"blocker":"The explicit list-head reload and while-shaped group-chain scan now reproduce retail's missing lbz, pre-test branch, and separate address formation. Remaining differences are operand/register coloring across the list and group updates, plus the outer group-order branch polarity."}],
+  "measurement": {
+    "command": "python3 - <<'PY'\nimport json\nfor p in ['reports/GEDE01/objdiff-game_fn_801C1600-session-1704.json','reports/GEDE01/objdiff-game_fn_801C1600-session-1704-reloc-strict.json']:\n d=json.load(open(p)); print(p)\n for side in ('left','right'):\n  s=next(x for x in d[side]['symbols'] if x['name']=='fn_801C1600'); sec=next(x for x in d[side]['sections'] if x['name']=='.text')\n  ins=sum(1 for x in s['instructions'] if x.get('instruction'))\n  rel=[(x.get('instruction',{}).get('address','0'),x.get('instruction',{}).get('relocation',{}).get('type_name'),x.get('instruction',{}).get('relocation',{}).get('target_symbol')) for x in s['instructions'] if x.get('instruction',{}).get('relocation',{}).get('type_name') not in (None,'R_PPC_NONE')]\n  print(f'{side}: symbol_size={s[\"size\"]} section_size={sec[\"size\"]} instruction_rows={ins} match_percent={s.get(\"match_percent\")} relocations={rel}')\nPY",
+    "raw_output": "reports/GEDE01/objdiff-game_fn_801C1600-session-1704.json\nleft: symbol_size=400 section_size=400 instruction_rows=100 match_percent=78.48 relocations=[('28', 'R_PPC_ADDR16_HA', 6), ('32', 'R_PPC_ADDR16_LO', 6), ('84', 'R_PPC_REL24', 7), ('148', 'R_PPC_EMB_SDA21', 8), ('312', 'R_PPC_EMB_SDA21', 8), ('344', 'R_PPC_EMB_SDA21', 8), ('376', 'R_PPC_REL24', 9)]\nright: symbol_size=400 section_size=400 instruction_rows=100 match_percent=78.48 relocations=[('28', 'R_PPC_ADDR16_HA', 6), ('32', 'R_PPC_ADDR16_LO', 6), ('84', 'R_PPC_REL24', 7), ('148', 'R_PPC_EMB_SDA21', 8), ('312', 'R_PPC_EMB_SDA21', 8), ('344', 'R_PPC_EMB_SDA21', 8), ('376', 'R_PPC_REL24', 9)]\nreports/GEDE01/objdiff-game_fn_801C1600-session-1704-reloc-strict.json\nleft: symbol_size=400 section_size=400 instruction_rows=100 match_percent=78.48 relocations=[('28', 'R_PPC_ADDR16_HA', 6), ('32', 'R_PPC_ADDR16_LO', 6), ('84', 'R_PPC_REL24', 7), ('148', 'R_PPC_EMB_SDA21', 8), ('312', 'R_PPC_EMB_SDA21', 8), ('344', 'R_PPC_EMB_SDA21', 8), ('376', 'R_PPC_REL24', 9)]\nright: symbol_size=400 section_size=400 instruction_rows=100 match_percent=78.48 relocations=[('28', 'R_PPC_ADDR16_HA', 6), ('32', 'R_PPC_ADDR16_LO', 6), ('84', 'R_PPC_REL24', 7), ('148', 'R_PPC_EMB_SDA21', 8), ('312', 'R_PPC_EMB_SDA21', 8), ('344', 'R_PPC_EMB_SDA21', 8), ('376', 'R_PPC_REL24', 9)]"
+  }
+}

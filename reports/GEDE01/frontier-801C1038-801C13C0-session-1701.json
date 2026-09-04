@@ -1,0 +1,36 @@
+{
+  "session": "session-1701",
+  "range_start": "0x801C1038",
+  "range_end": "0x801C13C0",
+  "next_target": "0x801C13C0",
+  "retail_bytes": 904,
+  "matched_bytes": 52,
+  "nonmatching_bytes": 852,
+  "unaccounted_spans": [],
+  "functions": [
+    {
+      "name": "fn_801C1038",
+      "start": "0x801C1038",
+      "end": "0x801C106C",
+      "retail_bytes": 52,
+      "generated_bytes": 52,
+      "instructions": 13,
+      "score": 100.0,
+      "status": "Matching",
+      "relocations": "1 retail, 1 generated, zero differing rows"
+    },
+    {
+      "name": "fn_801C106C",
+      "start": "0x801C106C",
+      "end": "0x801C13C0",
+      "retail_bytes": 852,
+      "generated_bytes": 748,
+      "score": 84.57277,
+      "status": "NonMatching",
+      "relocations": "25 retail, 25 generated",
+      "blocker": "Retail repeatedly reloads voice->first and voice->last inside each inlined list-release expansion and retains a 0x18-byte frame; GC/1.2.5n folds the typed inline-helper arguments into temporaries and emits a 0x20-byte frame, shortening the generated body by 104 bytes."
+    }
+  ],
+  "assembly_functions": [],
+  "shared_reconstructions": []
+}

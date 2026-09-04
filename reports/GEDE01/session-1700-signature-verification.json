@@ -1,0 +1,58 @@
+{
+  "session_id": "session-1700",
+  "starting_target": "0x801C1038",
+  "ending_next_target": "0x801C1038",
+  "accounting": {
+    "matched_bytes_added": 0,
+    "nonmatching_bytes_added": 0,
+    "match_counts_revised": false
+  },
+  "correction": {
+    "symbol": "fn_80165464",
+    "grounding": "Owned definition src/game/game_fn_80165464.c:30 returns void and has the same two-GPR parameter shape as the corrected declaration.",
+    "affected_translation_units": 1,
+    "edited_translation_units": [
+      "src/game/game_fn_8016576C.c"
+    ]
+  },
+  "signature_audit": {
+    "command": "python3 tools/signature_audit.py --json-output reports/GEDE01/signature-shadow-session-1700.json --session-id session-1700 --starting-target 0x801C1038 --ending-next-target 0x801C1038 --applied-symbol fn_80165464 --corrected-translation-unit fn_80165464=src/game/game_fn_8016576C.c --correction-evidence fn_80165464=reports/GEDE01/objdiff-game_fn_8016576C-session-1700.json --correction-evidence fn_80165464=reports/GEDE01/objdiff-game_fn_8016576C-session-1700-reloc-strict.json --evidence-report reports/GEDE01/session-1700-signature-verification.json --dol-sha1 ea24b6af954876ce072562ff39cdb4c81d32be1f --build-report build/GEDE01/report.json --verified-object main/game/game_fn_8016576C --limit 0",
+    "artifact": "reports/GEDE01/signature-shadow-session-1700.json",
+    "extern_declarations": 19489,
+    "symbols": 4681,
+    "return_register_contradictions_deferred": 566,
+    "other_abi_divergent_contradictions_deferred": 362,
+    "cosmetic_differences": 744,
+    "applied_corrections": 1,
+    "pending_contradictions": 0,
+    "progress_open_items_added": 928
+  },
+  "build": {
+    "command": ".tools/bin/ninja",
+    "status": "passed",
+    "report": "build/GEDE01/report.json",
+    "affected_object": "main/game/game_fn_8016576C",
+    "matched_code_percent": 100.0,
+    "complete_code_percent": 100.0,
+    "complete": true
+  },
+  "objdiff": [
+    {
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8016576C fn_8016576C -o reports/GEDE01/objdiff-game_fn_8016576C-session-1700.json --format json-pretty",
+      "artifact": "reports/GEDE01/objdiff-game_fn_8016576C-session-1700.json",
+      "code_match_percent": 100.0
+    },
+    {
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8016576C fn_8016576C -o reports/GEDE01/objdiff-game_fn_8016576C-session-1700-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+      "artifact": "reports/GEDE01/objdiff-game_fn_8016576C-session-1700-reloc-strict.json",
+      "code_match_percent": 100.0,
+      "relocation_mode": "name_address"
+    }
+  ],
+  "dol": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "expected_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "unchanged": true
+  }
+}

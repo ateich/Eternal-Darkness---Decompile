@@ -1,0 +1,43 @@
+{
+  "session_id": "session-1704-remediation-1",
+  "scope": "Review remediation only for fn_801C1600 and its session-1704 evidence; frontier remains 0x801C1790.",
+  "all_function_measurements": {
+    "command": "for p in /tmp/session-1704-remediation-baseline.json /tmp/session-1704-remediation-variant.json reports/GEDE01/objdiff-game_fn_801C1600-session-1704.json reports/GEDE01/objdiff-game_fn_801C1600-session-1704-reloc-strict.json; do jq -r --arg p \"$p\" '$p, (\"left: symbol_size=\\(.left.symbols[]|select(.name==\\\"fn_801C1600\\\")|.size) section_size=\\(.left.sections[]|select(.name==\\\".text\\\")|.size) instruction_rows=\\([.left.symbols[]|select(.name==\\\"fn_801C1600\\\")|.instructions[]|select(.instruction)]|length) match_percent=\\(.left.symbols[]|select(.name==\\\"fn_801C1600\\\")|.match_percent)\"), (\"right: symbol_size=\\(.right.symbols[]|select(.name==\\\"fn_801C1600\\\")|.size) section_size=\\(.right.sections[]|select(.name==\\\".text\\\")|.size) instruction_rows=\\([.right.symbols[]|select(.name==\\\"fn_801C1600\\\")|.instructions[]|select(.instruction)]|length) match_percent=\\(.right.symbols[]|select(.name==\\\"fn_801C1600\\\")|.match_percent)\")' \"$p\"; done",
+    "raw_output": "/tmp/session-1704-remediation-baseline.json\nleft: symbol_size=400 section_size=400 instruction_rows=100 match_percent=77.84\nright: symbol_size=388 section_size=388 instruction_rows=97 match_percent=77.84\n/tmp/session-1704-remediation-variant.json\nleft: symbol_size=400 section_size=400 instruction_rows=100 match_percent=78.48\nright: symbol_size=400 section_size=400 instruction_rows=100 match_percent=78.48\nreports/GEDE01/objdiff-game_fn_801C1600-session-1704.json\nleft: symbol_size=400 section_size=400 instruction_rows=100 match_percent=78.48\nright: symbol_size=400 section_size=400 instruction_rows=100 match_percent=78.48\nreports/GEDE01/objdiff-game_fn_801C1600-session-1704-reloc-strict.json\nleft: symbol_size=400 section_size=400 instruction_rows=100 match_percent=78.48\nright: symbol_size=400 section_size=400 instruction_rows=100 match_percent=78.48"
+  },
+  "range_measurement": {
+    "command": "python3 - <<'PY'\nstart=int('801C1600',16); end=int('801C1790',16); matched=0; nonmatching=end-start\nprint(f'range_start=0x{start:08X} range_end=0x{end:08X} retail_bytes={end-start} matched_bytes={matched} nonmatching_bytes={nonmatching} unaccounted_bytes={(end-start)-matched-nonmatching}')\nPY",
+    "raw_output": "range_start=0x801C1600 range_end=0x801C1790 retail_bytes=400 matched_bytes=0 nonmatching_bytes=400 unaccounted_bytes=0"
+  },
+  "baseline_measurement": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801C1600 fn_801C1600 -o /tmp/session-1704-remediation-baseline.json --format json -c function_reloc_diffs=name_address; python3 extract symbol, section, instruction-row, score, and relocation fields",
+    "raw_output": "left: symbol_size=400 section_size=400 instruction_rows=100 match_percent=77.84 relocations=[('28', 'R_PPC_ADDR16_HA', 6), ('32', 'R_PPC_ADDR16_LO', 6), ('84', 'R_PPC_REL24', 7), ('148', 'R_PPC_EMB_SDA21', 8), ('312', 'R_PPC_EMB_SDA21', 8), ('344', 'R_PPC_EMB_SDA21', 8), ('376', 'R_PPC_REL24', 9)]\nright: symbol_size=388 section_size=388 instruction_rows=97 match_percent=77.84 relocations=[('28', 'R_PPC_ADDR16_HA', 6), ('32', 'R_PPC_ADDR16_LO', 6), ('84', 'R_PPC_REL24', 7), ('144', 'R_PPC_EMB_SDA21', 8), ('300', 'R_PPC_EMB_SDA21', 8), ('332', 'R_PPC_EMB_SDA21', 8), ('364', 'R_PPC_REL24', 9)]"
+  },
+  "source_experiment": {
+    "changes": "Use *head for the successor index, spell the outer comparison as group <= group_id, and rotate the group-chain scan to while (next != 0xFFFF).",
+    "command": ".tools/bin/ninja build/GEDE01/src/game/game_fn_801C1600.o && build/tools/objdiff-cli diff -p . -u main/game/game_fn_801C1600 fn_801C1600 -o /tmp/session-1704-remediation-variant.json --format json -c function_reloc_diffs=name_address; python3 extract symbol, section, instruction-row, and score fields",
+    "raw_output": "left: symbol_size=400 section_size=400 instruction_rows=100 match_percent=78.48\nright: symbol_size=400 section_size=400 instruction_rows=100 match_percent=78.48",
+    "conclusion": "The retained source restores the structural instructions missing from the baseline and improves the score, but remains NonMatching."
+  },
+  "canonical_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801C1600 fn_801C1600 -o reports/GEDE01/objdiff-game_fn_801C1600-session-1704.json --format json",
+    "raw_output": "INFO Writing to reports/GEDE01/objdiff-game_fn_801C1600-session-1704.json\nleft: symbol_size=400 section_size=400 instruction_rows=100 match_percent=78.48 relocations=[('28', 'R_PPC_ADDR16_HA', 6), ('32', 'R_PPC_ADDR16_LO', 6), ('84', 'R_PPC_REL24', 7), ('148', 'R_PPC_EMB_SDA21', 8), ('312', 'R_PPC_EMB_SDA21', 8), ('344', 'R_PPC_EMB_SDA21', 8), ('376', 'R_PPC_REL24', 9)]\nright: symbol_size=400 section_size=400 instruction_rows=100 match_percent=78.48 relocations=[('28', 'R_PPC_ADDR16_HA', 6), ('32', 'R_PPC_ADDR16_LO', 6), ('84', 'R_PPC_REL24', 7), ('148', 'R_PPC_EMB_SDA21', 8), ('312', 'R_PPC_EMB_SDA21', 8), ('344', 'R_PPC_EMB_SDA21', 8), ('376', 'R_PPC_REL24', 9)]"
+  },
+  "relocation_strict_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801C1600 fn_801C1600 -o reports/GEDE01/objdiff-game_fn_801C1600-session-1704-reloc-strict.json --format json -c function_reloc_diffs=name_address",
+    "raw_output": "INFO Writing to reports/GEDE01/objdiff-game_fn_801C1600-session-1704-reloc-strict.json\nleft: symbol_size=400 section_size=400 instruction_rows=100 match_percent=78.48 relocations=[('28', 'R_PPC_ADDR16_HA', 6), ('32', 'R_PPC_ADDR16_LO', 6), ('84', 'R_PPC_REL24', 7), ('148', 'R_PPC_EMB_SDA21', 8), ('312', 'R_PPC_EMB_SDA21', 8), ('344', 'R_PPC_EMB_SDA21', 8), ('376', 'R_PPC_REL24', 9)]\nright: symbol_size=400 section_size=400 instruction_rows=100 match_percent=78.48 relocations=[('28', 'R_PPC_ADDR16_HA', 6), ('32', 'R_PPC_ADDR16_LO', 6), ('84', 'R_PPC_REL24', 7), ('148', 'R_PPC_EMB_SDA21', 8), ('312', 'R_PPC_EMB_SDA21', 8), ('344', 'R_PPC_EMB_SDA21', 8), ('376', 'R_PPC_REL24', 9)]"
+  },
+  "canonical_headline": {
+    "command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report.json",
+    "raw_output": "matching_objects=4578 total_objects=6094 matching_functions=4346 total_functions=8216 matching_code_bytes=665428 total_code_bytes=2300692 matching_data_bytes=36238 total_data_bytes=4305642 linked_code_bytes=664808 linked_data_bytes=35838"
+  },
+  "build_gate": {
+    "command": ".tools/bin/ninja",
+    "raw_output": "[571/573] DOL build/GEDE01/main.dol\n[572/573] CHECK config/GEDE01/build.sha1\nbuild/GEDE01/main.dol: OK\n[573/573] PROGRESS"
+  },
+  "dol_identity": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol; cmp build/GEDE01/main.dol orig/GEDE01/sys/main.dol && echo 'cmp_exit=0 byte-identical'",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol\ncmp_exit=0 byte-identical"
+  },
+  "result": "fn_801C1600 remains NonMatching and earns no match credit. The next target remains 0x801C1790."
+}
