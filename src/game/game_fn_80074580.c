@@ -20,13 +20,10 @@ extern void fn_8017AB08(const Vec3 *, Vec3 *);
 extern void fn_80211A48(const Vec3 *, const Vec3 *, Vec3 *);
 extern void fn_80211AAC(const Vec3 *, Vec3 *);
 extern void fn_80211A90(const Vec3 *, Vec3 *, float);
-extern const Vec3 lbl_80239194;
+extern Vec3 lbl_80239194;
 extern const float lbl_8064E894;
 extern const float lbl_8064E898;
 
-/* NonMatching: behavior-complete vector routing. Retail and base have equal
- * size and relocations; only MWCC's scheduling of four callee-saved setup
- * instructions around the constant-vector load remains different. */
 int fn_80074580(void *object, void *other, Vec3 *position, State *state,
                 Vec3 *result)
 {

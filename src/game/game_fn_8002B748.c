@@ -26,7 +26,7 @@ typedef struct EffectState {
 
 extern void* lbl_8064C4E0;
 extern volatile s32 lbl_8064D18C;
-extern volatile float lbl_8064E034;
+extern const volatile float lbl_8064E034;
 extern double lbl_8064E038;
 
 extern int fn_80200C10(void *);

@@ -524,3 +524,25 @@ running total is a pointer. 364/364 bytes, 100%.
 
 All seven functions verify at 100% with relocations in objdiff, and the
 whole-DOL SHA-1 gate remains `ea24b6af954876ce072562ff39cdb4c81d32be1f`.
+
+## External object qualifiers affect first-load scheduling
+
+MWCC uses the qualifiers on an external object's declaration when scheduling
+its first load, even when the represented type, width, and storage are
+unchanged. Adding `const` to the scalar declarations in `fn_8002B748`,
+`fn_80066BB8`, and `fn_800BB4C4` moves their loads into the retail order.
+Conversely, removing `const` from the aggregate declarations in
+`fn_8006B488`, `fn_80074580`, `fn_8008DF64`, and `fn_800DA308` reproduces the
+retail aggregate-copy schedule. The previous declarations score 96.79612%,
+95.12048%, 90.625%, 92.15686%, 90.36144%, 94.202896%, and 93.548386%,
+respectively; no control flow, local lifetime, or compiler flag changes are
+needed.
+
+MWCC emits the `lbl_8064E038` bytes in `fn_8002B748` under the local name
+`@59`. Its post-compile rule retains `.sdata2`, renames the symbol, and
+globalizes it so other objects can resolve `lbl_8064E038`. After this rename,
+objdiff reports 824/824, 332/332, 408/408,
+332/332, 276/276, 256/256, and 248/248 bytes at 100% under
+`function_reloc_diffs=name_address`, with 30, 8, 19, 15, 21, 10, and 13
+relocations on both bases. The whole-DOL SHA-1 remains
+`ea24b6af954876ce072562ff39cdb4c81d32be1f`.

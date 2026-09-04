@@ -15,7 +15,7 @@ extern void *fn_801DA3B0(void *, unsigned int, void *, void *, void *, int,
 extern void *fn_800CD458(void *, unsigned int, int, void *, void *, void *,
                         void *);
 extern void fn_8020104C(int, void*, void*, int, float);
-extern float lbl_8064F0C4;
+extern const float lbl_8064F0C4;
 
 unsigned short fn_800BB4C4(void *input, void *object)
 {

@@ -3,7 +3,7 @@ typedef float f32;
 
 typedef struct Vec3 { f32 x, y, z; } Vec3;
 
-extern f32 lbl_8064E6DC;
+extern const f32 lbl_8064E6DC;
 extern f32 lbl_8064E6F0;
 extern f32 lbl_8064E6D4;
 extern f32 lbl_8064E6F4;

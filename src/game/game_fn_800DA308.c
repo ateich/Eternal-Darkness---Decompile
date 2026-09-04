@@ -11,7 +11,7 @@ typedef struct Vec4 {
     float w;
 } Vec4;
 
-extern const Vec3 lbl_80239988;
+extern Vec3 lbl_80239988;
 extern float lbl_8064F420;
 
 extern void fn_8012CEA4(void *, int, Vec4 *);

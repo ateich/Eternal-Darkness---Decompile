@@ -4,7 +4,7 @@ typedef struct Vec8008DF64 {
     float z;
 } Vec8008DF64;
 
-extern const volatile Vec8008DF64 lbl_80239648;
+extern volatile Vec8008DF64 lbl_80239648;
 extern int lbl_8064D18C;
 extern int lbl_8064C578;
 
@@ -33,8 +33,6 @@ typedef struct Data8008DF64 {
     }* value8C;
 } Data8008DF64;
 
-/* NonMatching: behavior-complete, size-exact C; aggregate loads are scheduled
- * into the prologue differently. */
 void fn_8008DF64(void* object, void* resource)
 {
     Vec8008DF64 position;
