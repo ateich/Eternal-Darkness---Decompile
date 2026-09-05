@@ -605,3 +605,37 @@ Objdiff reports 100% for all eight functions under
 `function_reloc_diffs=name_address`: 76, 228, 348, 148, 244, 208, 156, and
 232 code bytes respectively, with 9, 4, 11, 8, 7, 9, 8, and 8 matching
 relocations.
+
+## Declaration order, local lifetime, and source expression shape
+
+MWCC's saved-register allocation is sensitive to the order and lifetime of
+named locals. Thirty-seven functions match after moving declarations, splitting
+branch-specific roles, hoisting short-lived locals, or correcting a local's
+width or signedness. Several functions also require a function-scoped
+optimization pragma, reset immediately after the function. These changes total
+10,452 code bytes and 547 relocation sites.
+
+A redundant two-local copy is not required for `fn_8006B70C`: separate
+`initial_mask` and `mask` locals for its two switch paths produce the retail
+allocation directly. `fn_80073728` similarly matches with a normal
+`saved_object` pointer and a separate event local; converting the pointer to an
+integer is unnecessary. In `fn_801755FC`, the direction components and their
+temporary delta are signed bytes, while the color components remain unsigned.
+The local declaration of `fn_8012C62C` uses the generic pointer parameters from
+that function's definition, so no incompatible struct-pointer cast is needed.
+
+Expression order remains significant when propagation is disabled.
+`fn_80120874` preserves the aligned-size expression as
+`31 + count + count * 3`, and `fn_8017E1E4` writes the negative random bit as a
+multiplication by `-1`. Algebraically simplified forms are not byte-identical:
+`count * 4 + 31` with propagation disabled scores 63.214287%, placing the
+addition after the indexed load scores 85.71429%, and unary negation or
+subtraction in `fn_8017E1E4` scores 95.196075%.
+
+Four harvested forms were rejected. `fn_800CA554` and `fn_800E8634` only reach
+100% with a pointer converted to an integer solely to change register
+allocation; normal saved-pointer and saved-value forms score 83.888885% and
+95.50848%, respectively. The proposed forms for `fn_801301B0` and
+`fn_801B3A2C` change functions used as `void` into value-returning functions.
+The latter can also return an uninitialized pointer. These four functions
+remain nonmatching.
