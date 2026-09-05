@@ -605,3 +605,25 @@ Objdiff reports 100% for all eight functions under
 `function_reloc_diffs=name_address`: 76, 228, 348, 148, 244, 208, 156, and
 232 code bytes respectively, with 9, 4, 11, 8, 7, 9, 8, and 8 matching
 relocations.
+
+## Small source forms can control operand and register selection
+
+Several equivalent source forms produce different code under GC/1.3. Splitting an initializer
+from its declaration gives the required local numbering in `fn_80134F08` and `fn_80198318`.
+Expanding the clear operation in `fn_8011F7E0` into a load followed by a masked store preserves
+the loaded value as a named local. In `fn_8011F808` and `fn_8019A5DC`, writing commutative
+operands in retail order changes their encoded order. `fn_80144430` requires `!enabled` rather
+than `enabled == 0`, and `fn_8019CE08` requires the byte load in a named local before the mask.
+`fn_800EC318` matches when each table entry is indexed from the base inside the loop instead of
+advancing a pointer in the loop clause.
+
+`fn_8012CF08` combines three narrow effects. Moving `entry` to the end of the declaration block
+selects the retail saved-register order, computing the runtime entry address in one expression
+selects the product register for the sum, and a function-scoped `opt_propagation off` pragma is
+still required. The original direct form with the pragma scores 98.18841%. Naming the table and
+combining the address expression scores 98.333336%. The retained source without the pragma
+scores 98.26087%. A redundant two-temporary form also matches, but the declaration-order form
+does so without the redundant copies.
+
+The nine functions are 1,576 code bytes with 42 relocation sites. Each is 100% on the canonical
+basis and under `function_reloc_diffs=name_address`.
