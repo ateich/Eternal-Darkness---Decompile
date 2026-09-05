@@ -605,3 +605,11 @@ Objdiff reports 100% for all eight functions under
 `function_reloc_diffs=name_address`: 76, 228, 348, 148, 244, 208, 156, and
 232 code bytes respectively, with 9, 4, 11, 8, 7, 9, 8, and 8 matching
 relocations.
+
+## Function-scoped optimization pragmas
+
+MWCC's function-scoped optimization controls resolve several recurring code-shape differences without changing object-wide compiler settings. Each directive is placed immediately before the affected function and reset immediately afterward. This batch uses `opt_propagation off` in 22 functions; `opt_propagation off` with `opt_unroll_loops off` in three; `opt_common_subs off` in four; `opt_common_subs off` with optimization level 2 in one; `global_optimizer off` in three; `use_lmw_stmw on` in three; `use_lmw_stmw on` with `opt_lifetimes off` in two; optimization level 1 in two; and one function each with `opt_loop_invariants off`, `opt_dead_assignments off`, or `peephole off` with `scheduling off`.
+
+`fn_8011ECF8` needs `use_lmw_stmw on`, optimization level 2, and `opt_propagation off` together with separate offset assignments and direct indexing of the flag buffer. The source without these changes scores 96.04478%. `opt_propagation off` alone also scores 96.04478%; optimization level 1, with or without propagation disabled, scores 97.37313%; and optimization level 1 followed by optimization level 2, without propagation disabled, scores 99.10448%. Per-object `-O2` and `-O2,p` settings score 84.89552%. The direct optimization-level-2 form avoids stacked optimization directives and matches exactly.
+
+The directives were found by testing 26 function-scoped optimization controls and then testing pairs on candidates improved by a single directive. Alternate object-wide settings also match the unchanged sources of `fn_801ACDC4` and `fn_801AD8E8` at GC/1.3 `-O3`, `fn_801B1028` at GC/1.3 `-O1`, and `fn_801AD898` under GC/1.2.5n without the scheduling and peephole overrides. The scoped forms retain each object's existing compiler version and flags.
