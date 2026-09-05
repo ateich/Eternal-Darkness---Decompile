@@ -605,3 +605,17 @@ Objdiff reports 100% for all eight functions under
 `function_reloc_diffs=name_address`: 76, 228, 348, 148, 244, 208, 156, and
 232 code bytes respectively, with 9, 4, 11, 8, 7, 9, 8, and 8 matching
 relocations.
+
+## Switch-table ownership can require name and alignment normalization
+
+`fn_8006B620` owns its switch table. GC/1.3 emits the correct 156 table bytes
+and relocations, but names the table `@46` and gives its `.data` section
+eight-byte alignment. The retail object names the table
+`jumptable_8024406C` and uses four-byte alignment. The object-specific build
+steps retain the table, rename its symbol, and set the section alignment to
+four bytes. Externalizing the table is not valid because no other translation
+unit defines it, leaving the link unresolved.
+
+After normalization, objdiff reports 236/236 code bytes and 156/156 data
+bytes at 100% under `function_reloc_diffs=name_address`. The whole-DOL SHA-1
+remains `ea24b6af954876ce072562ff39cdb4c81d32be1f`.
