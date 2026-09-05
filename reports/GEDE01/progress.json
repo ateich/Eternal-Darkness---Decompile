@@ -1,34 +1,38 @@
 {
   "status": "in progress",
-  "matching_objects": 4659,
-  "total_objects": 6109,
-  "matching_functions": 4426,
+  "matching_objects": 4663,
+  "total_objects": 6113,
+  "matching_functions": 4430,
   "total_functions": 8216,
-  "matching_code_bytes": 682284,
+  "matching_code_bytes": 682636,
   "total_code_bytes": 2300692,
-  "matching_data_bytes": 37178,
+  "matching_data_bytes": 37218,
   "total_data_bytes": 4305642,
-  "code_percent": 29.6556,
-  "function_percent": 53.8705,
-  "linked_code_bytes": 681852,
-  "linked_data_bytes": 36486,
-  "game_code_matching_bytes": 672412,
-  "game_code_total_bytes": 1179192,
-  "game_code_linked_bytes": 671980,
+  "code_percent": 29.6709,
+  "function_percent": 53.919182083739045,
+  "linked_code_bytes": 682204,
+  "linked_data_bytes": 36506,
+  "game_code_matching_bytes": 679608,
+  "game_code_total_bytes": 1180724,
+  "game_code_linked_bytes": 679176,
   "sdk_code_matching_bytes": 3028,
   "sdk_code_total_bytes": 3028,
   "sdk_objects_complete": 18,
   "sdk_objects_total": 18,
   "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
-  "source": "monorepo landing of mirror PRs #8, #9, #10 (ateich) by Smith, 2026-09-04",
-  "headline_measurement_basis": "canonical objdiff (build/tools/objdiff-cli report generate, no extra -c config), regenerated 2026-09-04 after landing PRs #8/#9/#10",
+  "source": "build/GEDE01/report.json freshly regenerated during session-1749 on the canonical default basis",
+  "headline_measurement_basis": {
+    "config": "canonical default with no extra -c config",
+    "report_command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report.json",
+    "raw_output": "matching_objects=4663 total_objects=6113 matching_functions=4430 total_functions=8216 matching_code_bytes=682636 total_code_bytes=2300692 matching_data_bytes=37218 total_data_bytes=4305642 linked_code_bytes=682204 linked_data_bytes=36506"
+  },
   "derived_measurement": {
     "command": "jq -r '\"matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report.json",
-    "raw_output": "matching_objects=4630 total_objects=6109 matching_functions=4397 total_functions=8216 matching_code_bytes=675440 total_code_bytes=2300692 matching_data_bytes=37138 total_data_bytes=4305642 linked_code_bytes=675008 linked_data_bytes=36438"
+    "raw_output": "matching_objects=4663 total_objects=6113 matching_functions=4430 total_functions=8216 matching_code_bytes=682636 total_code_bytes=2300692 matching_data_bytes=37218 total_data_bytes=4305642 linked_code_bytes=682204 linked_data_bytes=36506"
   },
   "category_measurement": {
     "command": "jq -r '(.measures.matched_functions|tonumber) as $mf | (.measures.total_functions|tonumber) as $tf | [.categories[]|select(.id==\"game\")|.measures.matched_code] as $gmc | [.categories[]|select(.id==\"game\")|.measures.total_code] as $gtc | [.categories[]|select(.id==\"game\")|.measures.complete_code] as $gcc | [.categories[]|select(.id==\"sdk\")|.measures.matched_code] as $smc | [.categories[]|select(.id==\"sdk\")|.measures.total_code] as $stc | [.categories[]|select(.id==\"sdk\")|.measures.complete_units] as $scu | [.categories[]|select(.id==\"sdk\")|.measures.total_units] as $stu | \"code_percent=\\(.measures.matched_code_percent) function_percent=\\($mf*100/$tf) game_code_matching_bytes=\\($gmc[0]) game_code_total_bytes=\\($gtc[0]) game_code_linked_bytes=\\($gcc[0]) sdk_code_matching_bytes=\\($smc[0]) sdk_code_total_bytes=\\($stc[0]) sdk_objects_complete=\\($scu[0]) sdk_objects_total=\\($stu[0])\"' build/GEDE01/report.json",
-    "raw_output": "code_percent=29.358124 function_percent=53.51752677702045 game_code_matching_bytes=672412 game_code_total_bytes=1179192 game_code_linked_bytes=671980 sdk_code_matching_bytes=3028 sdk_code_total_bytes=3028 sdk_objects_complete=18 sdk_objects_total=18"
+    "raw_output": "code_percent=29.6709 function_percent=53.919182083739045 game_code_matching_bytes=679608 game_code_total_bytes=1180724 game_code_linked_bytes=679176 sdk_code_matching_bytes=3028 sdk_code_total_bytes=3028 sdk_objects_complete=18 sdk_objects_total=18"
   },
   "dol_sha1_measurement": {
     "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
@@ -42,19 +46,23 @@
   },
   "relocation_strict": {
     "config": "function_reloc_diffs=name_address",
-    "scope": "session-1746 direct relocation-strict diffs for fn_801CA7C0 and fn_801CAD90",
-    "generate_command": "build/tools/objdiff-cli report generate -o reports/GEDE01/session-1746-reloc-strict.json -c function_reloc_diffs=name_address; direct strict diffs are reports/GEDE01/session-1746-fn_801CA7C0-reloc-strict.json and reports/GEDE01/session-1746-fn_801CAD90-reloc-strict.json",
-    "measure_command": "jq reads each direct report's .text size and match_percent; aggregate counters are read from reports/GEDE01/session-1746-reloc-strict.json",
-    "raw_output": "fn_801CA7C0 retail=1488 generated=1456 match=78.98656%; fn_801CAD90 retail=296 generated=296 match=99.85135%",
-    "real_relocation_command": "for side in obj src; do printf '%s ' \"$side\"; readelf -rW build/GEDE01/$side/game/game_fn_801CA7C0.o | sed -n \"/Relocation section '.rela.text'/p\"; done; for side in obj src; do printf '%s lbl_8064D3D0_sda21_entries=' \"$side\"; readelf -rW build/GEDE01/$side/game/game_fn_801CA7C0.o | awk '/R_PPC_EMB_SDA21/ && /lbl_8064D3D0/{n++} END{print n+0}'; done; for side in obj src; do echo \"$side .relaextabindex\"; readelf -rW build/GEDE01/$side/game/game_fn_801CA7C0.o | awk '/relaextabindex/{p=1;next} p && /^$/{exit} p && /R_PPC/{print $1,$3,$5,$6,$7}'; done",
-    "real_relocation_raw_output": "obj Relocation section '.rela.text' at offset 0x668 contains 36 entries:\nsrc Relocation section '.rela.text' at offset 0x5f8 contains 34 entries:\nobj lbl_8064D3D0_sda21_entries=16\nsrc lbl_8064D3D0_sda21_entries=14\nobj .relaextabindex\n00000000 R_PPC_ADDR32 fn_801CA7C0 + 0\n00000008 R_PPC_ADDR32 @etb_80005B58 + 0\nsrc .relaextabindex\n00000000 R_PPC_ADDR32 fn_801CA7C0 + 0\n00000008 R_PPC_ADDR32 @149 + 0",
-    "aggregate_measure_command": "jq -r '\"matched_functions=\\(.measures.matched_functions) matching_code_bytes=\\(.measures.matched_code) complete_units=\\(.measures.complete_units) total_units=\\(.measures.total_units)\"' reports/GEDE01/session-1746-reloc-strict.json",
-    "aggregate_raw_output": "matched_functions=4390 matching_code_bytes=673356 complete_units=4630 total_units=6109",
-    "verification_report": "reports/GEDE01/session-1746-verification.json",
-    "aggregate_report": "reports/GEDE01/session-1746-reloc-strict.json",
-    "session_measurements": "fn_801CA7C0: 78.98656% of 1488 retail bytes versus 1456 generated; fn_801CAD90: 99.85135% of 296 versus 296 bytes with seven versus seven text relocations"
+    "scope": "session-1749 direct and aggregate relocation-strict evidence for fn_801CB2B8, fn_801CB354, and fn_801CB470",
+    "generate_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_ADDRESS fn_ADDRESS -o reports/GEDE01/objdiff-fn_ADDRESS-session-1749-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address; build/tools/objdiff-cli report generate -p . -o reports/GEDE01/session-1749-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "measure_command": "jq direct function symbol sizes and match_percent from the three session-1749 relocation-strict reports",
+    "raw_output": "fn_801CB2B8 retail=156 generated=156 match=100.0%; fn_801CB354 retail=284 generated=264 match=52.112675%; fn_801CB470 retail=68 generated=68 match=100.0%",
+    "real_relocation_command": "relocation-strict objdiff direct comparison with function_reloc_diffs=name_address",
+    "real_relocation_raw_output": "fn_801CB2B8 and fn_801CB470 both report 100.0% on the name-and-address relocation-strict basis",
+    "aggregate_as_of": "session-1749",
+    "aggregate_measure_command": "jq relocation-strict headline counters from reports/GEDE01/session-1749-reloc-strict.json",
+    "aggregate_raw_output": "strict matching_objects=4663 total_objects=6113 matching_functions=4423 total_functions=8216 matching_code_bytes=680552 total_code_bytes=2300692 linked_code_bytes=682204",
+    "verification_report": "reports/GEDE01/session-1749-verification.json",
+    "aggregate_report": "reports/GEDE01/session-1749-reloc-strict.json",
+    "session_measurements": "Fresh direct and aggregate measurements are recorded above; two functions and 224 bytes match exactly."
   },
   "open_items": [
+    "Session session-1749 started exactly at fn_801CB2B8 and accounts contiguously for all 508 retail text bytes through 0x801CB4B4. Assigned fn_801CB2B8 and immediate fn_801CB470 independently match 156 and 68 bytes at 100.0% canonical and relocation-strict objdiff, totaling 224 matched bytes. fn_801CB354 is preserved as independent honest-C NonMatching at 52.112675%, with 284 retail versus 264 generated bytes; GC/1.2.5n folds word-load narrowing and row address calculations into byte-oriented pointer operations and does not reproduce retail's hoisted base/index schedule. The range has 224 matched and 284 NonMatching bytes, with no gap, assembly, shared reconstruction, or unaccounted span. Evidence is reports/GEDE01/frontier-801CB2B8-801CB4B4-session-1749.json, six direct reports, reports/GEDE01/session-1749-reloc-strict.json, and reports/GEDE01/session-1749-verification.json.",
+    "Session session-1748 started exactly at fn_801CAFAC and accounts contiguously for all 780 retail text bytes through 0x801CB2B8. Assigned fn_801CAFAC is preserved as this session's sole new independent honest-C NonMatching reconstruction at 88.31288% canonical and relocation-strict objdiff, with 652 retail versus 628 generated bytes; GC/1.2.5n omits six u16 return-normalization instructions and chooses different normalized-argument registers and address-addition scheduling. Immediate fn_801CB238 and fn_801CB274 independently match 60 and 68 bytes at 100.0% canonical and relocation-strict objdiff, totaling 128 matched bytes with all four text relocations equal in each object. The range has 128 matched and 652 NonMatching bytes, no assembly, shared reconstruction, gap, or unaccounted span. Evidence is reports/GEDE01/frontier-801CAFAC-801CB2B8-session-1748.json, six direct reports, reports/GEDE01/session-1748-reloc-strict.json, and reports/GEDE01/session-1748-verification.json.",
+    "Session session-1747 remediation 2 replaces fn_801CAEB8's pointer-spelled layer parameter with the semantically honest integer layer and a separate source local. Declaration-order variants and the typed-versus-unspecified fn_801CB470 prototype experiment are now recorded as measured dead ends in reports/GEDE01/session-1747-remediation-2-verification.json. The retained shape reproduces every body instruction and all relocations, but the frame allocation remains explicitly unresolved NonMatching debt; the frontier is unchanged.",
     "Session session-1746 exhausted the final assigned retry at fn_801CA7C0 with a fresh unchanged 78.98656% canonical and relocation-strict score, then worked contiguously through fn_801CAD90. fn_801CAD90 is preserved as this session's sole new honest-C NonMatching TU at a size-exact 99.85135%; every body instruction and all seven text relocations align, but GC/1.2.5n emits a 0x28 frame where retail uses 0x20. Immediate fn_801CAEB8 was attempted and withdrawn at a size-exact 99.88525% to enforce the one-new-NonMatching cap; its only text divergence was a 0x20 generated frame versus retail 0x18. No function reached 100%, so the session claims zero matched bytes and accounts 1784 NonMatching bytes over 0x801CA7C0..0x801CAEB8 with no gap. Evidence is reports/GEDE01/frontier-801CA7C0-801CAEB8-session-1746.json, four direct reports, reports/GEDE01/session-1746-reloc-strict.json, and reports/GEDE01/session-1746-verification.json.",
     "Session session-1745 remediation 1 keeps fn_801CA7C0 and the frontier open. Source-spelling repairs remove the freshly measured compare-operand inversions and improve loop increment scheduling; tested branch and initialization spellings that did not change codegen remain explicitly unsettled rather than compiler-attributed. Cross-TU declaration disagreement is registered and deferred because changing caller prototypes can change caller codegen and retail does not yet establish a single source signature. All current figures, commands, and verbatim outputs are in reports/GEDE01/session-1745-remediation-1-verification.json.",
     "Session session-1744 remediation 1 advances only the bookkeeping frontier to immediate fn_801CAD90; it adds no match credit and changes no source or split. Fresh direct objdiff keeps fn_801CA7C0 at 76.83871% for 1488 retail versus 1448 generated text bytes, but corrects the false relocation-parity claim: real ELF .rela.text contains 36 retail versus 34 generated entries, including 16 versus 14 R_PPC_EMB_SDA21 records to lbl_8064D3D0, while extabindex matches 91.66667% and names @etb_80005B58 in retail versus @149 in generated code. The discarded fn_801CAD90 candidate is now ledgered with a replayable committed source snapshot and a freshly reproduced 67.12162% attempt; fn_801CAEB8 is ledgered without a code score because its generated C++-mangled symbol prevents valid function binding. Exact commands and verbatim output are in reports/GEDE01/session-1744-remediation-1-verification.json; next_target is 0x801CAD90.",
@@ -3815,8 +3823,8 @@
     "Session session-1740-remediation-1 pending signature contradiction fn_801C9938 (return_register_contradictions, confidence high, 1 affected translation unit): eligible unstarted return-only correction; all ABI safety gates pass. Full signatures, sites, PPC EABI shapes, and evidence: reports/GEDE01/signature-shadow-session-1740.json.",
     "Session session-1740-remediation-1 residual ABI-equivalent parameter contradiction fn_8000755C: the corrected declaration uses s32 for parameter three while the owned definition uses u32 flags; both retain the same single-GPR PPC EABI shape, so this source-level difference remains deliberately deferred. Evidence: reports/GEDE01/signature-shadow-session-1740.json."
   ],
-  "next_target": "0x801CAEB8",
-  "next_gate": "Start at fn_801CAEB8 and recover the withdrawn size-exact honest-C candidate from session-1746 evidence; resolve its eight-byte stack-frame allocation without registering another NonMatching TU unless that session's accounting permits it.",
+  "next_target": "0x801CB4B4",
+  "next_gate": "Start at fn_801CB4B4 and continue contiguously upward; fn_801CB354 remains documented 284-byte NonMatching debt at 52.112675% and contributes no matched-byte credit.",
   "asm_justifications": {
     "fn_801A4874": "The Gekko psq_st instruction stores f1 through GQR5 quantization and has no scalar C spelling or canonical MWCC intrinsic.",
     "fn_801A2AB4": "Gekko matrix transform kernel requires psq_l and psq_lu paired-single loads, ps_madds0 and ps_madds1 arithmetic, plus GQR5-quantized psq_stu stores; these instructions have no C spelling or canonical MWCC intrinsic.",
@@ -3835,6 +3843,13 @@
     "fn_801252D8": "Updates Gekko HID2/GQR6 with mtspr when the mode changes. The surrounding comparison and bit construction are honest C; only the special-purpose register write requires one inline assembly instruction."
   },
   "nonmatching_attempts": {
+    "fn_801CB354": {
+      "session_id": "session-1749",
+      "best_match_percent": 52.112675,
+      "retail_bytes": 284,
+      "generated_bytes": 264,
+      "divergence": "The four selector classes and all byte copies are recovered. GC/1.2.5n folds the source and destination index loads and narrowing into byte-oriented row pointers and rematerializes the global base within paths, whereas retail uses word loads followed by explicit byte narrowing and hoists the shared base and indices before the branch tree, leaving a 20-byte generated deficit and different address scheduling."
+    },
     "fn_801CAD90": {
       "session_id": "session-1746",
       "best_match_percent": 99.85135,
@@ -3844,12 +3859,16 @@
       "divergence": "The channel guard and every split high/low control dispatch instruction match, as do all seven text relocations. GC/1.2.5n emits a 0x28-byte frame where retail uses 0x20, shifting only the prologue and epilogue stack operands by eight bytes. Fresh canonical and strict evidence is in reports/GEDE01/session-1746-fn_801CAD90-canonical.json and reports/GEDE01/session-1746-fn_801CAD90-reloc-strict.json."
     },
     "fn_801CAEB8": {
-      "session_id": "session-1746",
+      "session_id": "session-1747",
       "best_match_percent": 99.88525,
       "retail_bytes": 244,
       "generated_bytes": 244,
-      "measurement_status": "verified_then_withdrawn",
-      "divergence": "The corrected C-linkage candidate was size exact and matched every body instruction and relocation, but GC/1.2.5n emitted a 0x20-byte frame where retail uses 0x18, shifting only six prologue and epilogue stack operands. It was withdrawn and not registered because session-1746 reached no 100% match and had already registered fn_801CAD90 as its sole new NonMatching TU. Evidence is summarized in reports/GEDE01/frontier-801CA7C0-801CAEB8-session-1746.json."
+      "measurement_status": "registered_nonmatching_with_reproducible_size_exact_source",
+      "measurement_command": "jq -r '(.left.symbols[] | select(.name == \"fn_801CAEB8\")) as $left | (.right.symbols[] | select(.name == \"fn_801CAEB8\")) as $right | \"strict retail=\\($left.size) generated=\\($right.size) left_instructions=\\($left.instructions|map(select(.instruction != null))|length) right_instructions=\\($right.instructions|map(select(.instruction != null))|length) match=\\($left.match_percent)%\"' reports/GEDE01/objdiff-fn_801CAEB8-session-1747-reloc-strict.json",
+      "measurement_raw_output": "strict retail=244 generated=244 left_instructions=61 right_instructions=61 match=99.88525%",
+      "source_hash_command": "git hash-object src/game/game_fn_801CAEB8.c",
+      "source_hash_raw_output": "a27e15d51bd25ba514919d911d8affdbbcab580d",
+      "divergence": "The committed source reproduces the best body and relocation shape. The only remaining instruction differences are stack-frame operands; their current-session command and verbatim output are in reports/GEDE01/session-1747-remediation-1-verification.json."
     },
     "fn_801CA7C0": {
       "session_id": "session-1745",
@@ -3997,6 +4016,10 @@
       "code_percent": 29.6556
     },
     "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
-    "verification": "each PR built and measured separately on both the canonical and function_reloc_diffs=name_address bases; every claimed function 100% and per-PR byte sums equal the aggregate delta"
+    "verification": "each PR built and measured separately on both the canonical and function_reloc_diffs=name_address bases; every claimed function 100% and per-PR byte sums equal the aggregate delta",
+    "remediation_2_measurement": {
+      "command": "for spec in '8:8002B748 80066BB8 8006B488 80074580 8008DF64 800BB4C4 800DA308' '9:8007C22C 800A32B8 800A4670 800E801C 800ED720 8012FEC8 8014C988 8014F9D4 80154CB4 80182380 80182448 80190558 8019FF5C 801A318C' '10:801A99B4 801A9B94 801AE91C 801B1B0C 801B2528 801B2748 801B2878 801B3470'; do pr=${spec%%:*}; addrs=${spec#*:}; functions=0; bytes=0; for addr in $addrs; do size=$(jq -r --arg target fn_$addr '.left.symbols[] | select(.name==$target) | .size' build/GEDE01/session-1746-remediation-2-fn_${addr}-strict.json); functions=$((functions+1)); bytes=$((bytes+size)); done; echo pr=$pr functions=$functions bytes=$bytes; done",
+      "raw_output": "pr=8 functions=7 bytes=2676\npr=9 functions=14 bytes=2528\npr=10 functions=8 bytes=1640"
+    }
   }
 }

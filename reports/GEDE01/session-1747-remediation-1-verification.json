@@ -1,0 +1,98 @@
+{
+  "session_id": "session-1747-remediation-1",
+  "status": "verified_nonmatching",
+  "scope": "Correct unsupported session-1747 experiment identities without changing source or advancing the frontier; rebuild and reverify fn_801CAEB8",
+  "source": {
+    "command": "git hash-object src/game/game_fn_801CAEB8.c; sha1sum src/game/game_fn_801CAEB8.c",
+    "raw_output": "f3691bfebc3f20967ff6a5102fc08dac726d638a\ne1851405f9ab731c4bea93de7adba6d744a0a6fd  src/game/game_fn_801CAEB8.c",
+    "result": "The retained source is directly reproducible from the committed TU; no relationship to the earlier a27e15d5 blob is inferred."
+  },
+  "build": {
+    "command": "python3 configure.py && .tools/bin/ninja -f build.ninja build/GEDE01/src/game/game_fn_801CAEB8.o build/GEDE01/main.dol",
+    "raw_output_tail": "[582/582] DOL build/GEDE01/main.dol",
+    "exit_code": 0
+  },
+  "canonical_objdiff": {
+    "generate_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801CAEB8 fn_801CAEB8 -o reports/GEDE01/objdiff-fn_801CAEB8-session-1747.json --format json-pretty",
+    "measure_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801CAEB8\")) as $l | (.right.symbols[]|select(.name==\"fn_801CAEB8\")) as $r | \"canonical retail=\\($l.size) generated=\\($r.size) left_instructions=\\($l.instructions|map(select(.instruction != null))|length) right_instructions=\\($r.instructions|map(select(.instruction != null))|length) match=\\($l.match_percent)% divergent_rows=\\([$l.instructions[]|select((.diff_kind//\"\") != \"\")]|length)\"' reports/GEDE01/objdiff-fn_801CAEB8-session-1747.json",
+    "raw_output": "canonical retail=244 generated=244 left_instructions=61 right_instructions=61 match=99.88525% divergent_rows=7"
+  },
+  "relocation_strict_objdiff": {
+    "generate_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801CAEB8 fn_801CAEB8 -o reports/GEDE01/objdiff-fn_801CAEB8-session-1747-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "measure_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801CAEB8\")) as $l | (.right.symbols[]|select(.name==\"fn_801CAEB8\")) as $r | \"strict retail=\\($l.size) generated=\\($r.size) left_instructions=\\($l.instructions|map(select(.instruction != null))|length) right_instructions=\\($r.instructions|map(select(.instruction != null))|length) match=\\($l.match_percent)% divergent_rows=\\([$l.instructions[]|select((.diff_kind//\"\") != \"\")]|length)\"' reports/GEDE01/objdiff-fn_801CAEB8-session-1747-reloc-strict.json",
+    "raw_output": "strict retail=244 generated=244 left_instructions=61 right_instructions=61 match=99.88525% divergent_rows=7"
+  },
+  "remaining_divergence": {
+    "command": "jq -r '(.left.symbols[]|select(.name==\"fn_801CAEB8\")|.instructions) as $l | [range(0;($l|length)) | select(($l[.].diff_kind//\"\") != \"\") | \"\\(.):\\($l[.].diff_kind):\\($l[.].instruction.formatted)\"] | \"divergent_rows=\\(length) rows=\\(join(\" | \"))\"' reports/GEDE01/objdiff-fn_801CAEB8-session-1747-reloc-strict.json",
+    "raw_output": "divergent_rows=7 rows=3:DIFF_ARG_MISMATCH:stwu r1, -0x18(r1) | 4:DIFF_ARG_MISMATCH:stw r31, 0x14(r1) | 6:DIFF_ARG_MISMATCH:stw r30, 0x10(r1) | 55:DIFF_ARG_MISMATCH:lwz r0, 0x1c(r1) | 56:DIFF_ARG_MISMATCH:lwz r31, 0x14(r1) | 57:DIFF_ARG_MISMATCH:lwz r30, 0x10(r1) | 58:DIFF_ARG_MISMATCH:addi r1, r1, 0x18",
+    "conclusion": "Only frame-size-dependent prologue and epilogue operands differ. The function remains NonMatching."
+  },
+  "real_elf_relocations": {
+    "command": "for side in obj src; do readelf -rW build/GEDE01/$side/game/game_fn_801CAEB8.o | awk -v side=\"$side\" 'index($0,\".rela.text\"){print side \" \" $0; p=1; next} p && /^$/{exit} p && /R_PPC/{print side \" \" $1 \" \" $3 \" \" $5 \" \" $6 \" \" $7}'; done",
+    "raw_output": "obj Relocation section '.rela.text' at offset 0x18c contains 10 entries:\nobj 00000026 R_PPC_ADDR16_HA lbl_8023B348 + 0\nobj 0000002a R_PPC_ADDR16_LO lbl_8023B348 + 0\nobj 00000032 R_PPC_ADDR16_HA lbl_8023B3D0 + 0\nobj 00000036 R_PPC_ADDR16_LO lbl_8023B3D0 + 0\nobj 0000004a R_PPC_ADDR16_HA lbl_8062A2F0 + 0\nobj 00000052 R_PPC_ADDR16_LO lbl_8062A2F0 + 0\nobj 0000006e R_PPC_ADDR16_HA lbl_8062E5F0 + 0\nobj 00000072 R_PPC_ADDR16_LO lbl_8062E5F0 + 0\nobj 00000084 R_PPC_REL24 memcpy + 0\nobj 000000d8 R_PPC_REL24 fn_801CB470 + 0\nsrc Relocation section '.rela.text' at offset 0x13c contains 10 entries:\nsrc 00000026 R_PPC_ADDR16_HA lbl_8023B348 + 0\nsrc 0000002a R_PPC_ADDR16_LO lbl_8023B348 + 0\nsrc 00000032 R_PPC_ADDR16_HA lbl_8023B3D0 + 0\nsrc 00000036 R_PPC_ADDR16_LO lbl_8023B3D0 + 0\nsrc 0000004a R_PPC_ADDR16_HA lbl_8062A2F0 + 0\nsrc 00000052 R_PPC_ADDR16_LO lbl_8062A2F0 + 0\nsrc 0000006e R_PPC_ADDR16_HA lbl_8062E5F0 + 0\nsrc 00000072 R_PPC_ADDR16_LO lbl_8062E5F0 + 0\nsrc 00000084 R_PPC_REL24 memcpy + 0\nsrc 000000d8 R_PPC_REL24 fn_801CB470 + 0"
+  },
+  "whole_project_objdiff": {
+    "canonical_generate_command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report.json --format json-pretty",
+    "canonical_measure_command": "jq -r '\"canonical matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report.json",
+    "canonical_raw_output": "canonical matching_objects=4659 total_objects=6109 matching_functions=4426 total_functions=8216 matching_code_bytes=682284 total_code_bytes=2300692 matching_data_bytes=37198 total_data_bytes=4305642 linked_code_bytes=681852 linked_data_bytes=36486",
+    "strict_generate_command": "build/tools/objdiff-cli report generate -p . -o build/GEDE01/report-remediation-1-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "strict_measure_command": "jq -r '\"strict matching_objects=\\(.measures.complete_units) total_objects=\\(.measures.total_units) matching_functions=\\(.measures.matched_functions) total_functions=\\(.measures.total_functions) matching_code_bytes=\\(.measures.matched_code) total_code_bytes=\\(.measures.total_code) matching_data_bytes=\\(.measures.matched_data) total_data_bytes=\\(.measures.total_data) linked_code_bytes=\\(.measures.complete_code) linked_data_bytes=\\(.measures.complete_data)\"' build/GEDE01/report-remediation-1-strict.json",
+    "strict_raw_output": "strict matching_objects=4659 total_objects=6109 matching_functions=4419 total_functions=8216 matching_code_bytes=680200 total_code_bytes=2300692 matching_data_bytes=37198 total_data_bytes=4305642 linked_code_bytes=681852 linked_data_bytes=36486"
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol",
+    "equal": true
+  },
+  "frontier": {
+    "command": "printf 'next_target=%s\\n' \"$(jq -r .next_target reports/GEDE01/progress.json)\"",
+    "raw_output": "next_target=0x801CAFAC",
+    "advanced": false
+  },
+  "current_review_verification": {
+    "build": {
+      "command": "set -o pipefail; .tools/bin/ninja -f build.ninja build/GEDE01/src/game/game_fn_801CAEB8.o build/GEDE01/main.dol | tail -n 1",
+      "raw_output": "[582/582] DOL build/GEDE01/main.dol",
+      "exit_code": 0
+    },
+    "affected_object_objdiff": {
+      "canonical_generate_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801CAEB8 fn_801CAEB8 -o reports/GEDE01/objdiff-fn_801CAEB8-session-1747.json --format json-pretty",
+      "strict_generate_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801CAEB8 fn_801CAEB8 -o reports/GEDE01/objdiff-fn_801CAEB8-session-1747-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+      "measure_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801CAEB8\")) as $l | (.right.symbols[]|select(.name==\"fn_801CAEB8\")) as $r | \"canonical retail=\\($l.size) generated=\\($r.size) left_instructions=\\($l.instructions|map(select(.instruction != null))|length) right_instructions=\\($r.instructions|map(select(.instruction != null))|length) match=\\($l.match_percent)% divergent_rows=\\([$l.instructions[]|select((.diff_kind//\"\") != \"\")]|length)\"' reports/GEDE01/objdiff-fn_801CAEB8-session-1747.json; jq -r '(.left.symbols[]|select(.name==\"fn_801CAEB8\")) as $l | (.right.symbols[]|select(.name==\"fn_801CAEB8\")) as $r | \"strict retail=\\($l.size) generated=\\($r.size) left_instructions=\\($l.instructions|map(select(.instruction != null))|length) right_instructions=\\($r.instructions|map(select(.instruction != null))|length) match=\\($l.match_percent)% divergent_rows=\\([$l.instructions[]|select((.diff_kind//\"\") != \"\")]|length)\"' reports/GEDE01/objdiff-fn_801CAEB8-session-1747-reloc-strict.json",
+      "raw_output": "canonical retail=244 generated=244 left_instructions=61 right_instructions=61 match=99.88525% divergent_rows=7\nstrict retail=244 generated=244 left_instructions=61 right_instructions=61 match=99.88525% divergent_rows=7"
+    },
+    "real_elf_relocations": {
+      "command": "for side in obj src; do readelf -rW build/GEDE01/$side/game/game_fn_801CAEB8.o | awk -v side=\"$side\" 'index($0,\".rela.text\"){print side \" \" $0; p=1; next} p && /^$/{exit} p && /R_PPC/{print side \" \" $1 \" \" $3 \" \" $5 \" \" $6 \" \" $7}'; done",
+      "raw_output": "obj Relocation section '.rela.text' at offset 0x18c contains 10 entries:\nobj 00000026 R_PPC_ADDR16_HA lbl_8023B348 + 0\nobj 0000002a R_PPC_ADDR16_LO lbl_8023B348 + 0\nobj 00000032 R_PPC_ADDR16_HA lbl_8023B3D0 + 0\nobj 00000036 R_PPC_ADDR16_LO lbl_8023B3D0 + 0\nobj 0000004a R_PPC_ADDR16_HA lbl_8062A2F0 + 0\nobj 00000052 R_PPC_ADDR16_LO lbl_8062A2F0 + 0\nobj 0000006e R_PPC_ADDR16_HA lbl_8062E5F0 + 0\nobj 00000072 R_PPC_ADDR16_LO lbl_8062E5F0 + 0\nobj 00000084 R_PPC_REL24 memcpy + 0\nobj 000000d8 R_PPC_REL24 fn_801CB470 + 0\nsrc Relocation section '.rela.text' at offset 0x13c contains 10 entries:\nsrc 00000026 R_PPC_ADDR16_HA lbl_8023B348 + 0\nsrc 0000002a R_PPC_ADDR16_LO lbl_8023B348 + 0\nsrc 00000032 R_PPC_ADDR16_HA lbl_8023B3D0 + 0\nsrc 00000036 R_PPC_ADDR16_LO lbl_8023B3D0 + 0\nsrc 0000004a R_PPC_ADDR16_HA lbl_8062A2F0 + 0\nsrc 00000052 R_PPC_ADDR16_LO lbl_8062A2F0 + 0\nsrc 0000006e R_PPC_ADDR16_HA lbl_8062E5F0 + 0\nsrc 00000072 R_PPC_ADDR16_LO lbl_8062E5F0 + 0\nsrc 00000084 R_PPC_REL24 memcpy + 0\nsrc 000000d8 R_PPC_REL24 fn_801CB470 + 0"
+    },
+    "dol_sha1": {
+      "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+      "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol",
+      "equal": true
+    },
+    "frontier": {
+      "command": "printf 'next_target=%s\\n' \"$(jq -r .next_target reports/GEDE01/progress.json)\"",
+      "raw_output": "next_target=0x801CAFAC",
+      "advanced": false
+    }
+  },
+  "legal_audit": {
+    "command": "python3 tools/legal_audit.py",
+    "raw_output": "legal audit passed (10015 tracked project files inspected)"
+  },
+  "validation": {
+    "command": "git diff --check; jq empty reports/GEDE01/session-1747-remediation-{1,2,3}-verification.json reports/GEDE01/frontier-801CAEB8-801CAFAC-session-1747.json reports/GEDE01/progress.json; jq -e '.surviving_variant_evidence.classification_raw_output | contains(\"variant=v8 configure_runs=1 config_exists=yes config_nonempty=no evidence_class=build_configuration_variant\") and contains(\"variant=v17 configure_runs=1 config_exists=yes config_nonempty=no evidence_class=build_configuration_variant\") and contains(\"variant=v18 configure_runs=0 config_exists=no config_nonempty=no evidence_class=source_only_variant\")' reports/GEDE01/session-1747-remediation-1-verification.json >/dev/null; jq -e '.surviving_variant_evidence.cxx_symbol_raw_output == \"variant=v17 generated_symbols=fn_801CAEB8__FiUiUi\"' reports/GEDE01/session-1747-remediation-1-verification.json >/dev/null; if rg -n '\"shape\"|No compiler-lever claim' reports/GEDE01/session-1747-remediation-{2,3}-verification.json; then exit 1; fi; printf 'validation_exit=0\\nevidence_audit=passed\\n'",
+    "raw_output": "validation_exit=0\nevidence_audit=passed"
+  },
+  "surviving_variant_evidence": {
+    "classification_command": "for i in $(seq 1 18); do build_log=/tmp/rem2-build-v$i.log; config_log=/tmp/rem2-config-v$i.log; configure_runs=$(grep -c 'RUN configure.py' \"$build_log\" || true); if test -s \"$config_log\"; then config_nonempty=yes; else config_nonempty=no; fi; if test -f \"$config_log\"; then config_exists=yes; else config_exists=no; fi; if test \"$configure_runs\" = 1 && test \"$config_exists\" = yes; then evidence_class=build_configuration_variant; else evidence_class=source_only_variant; fi; printf 'variant=v%s configure_runs=%s config_exists=%s config_nonempty=%s evidence_class=%s finer_identity=unrecoverable_from_surviving_artifacts\\n' \"$i\" \"$configure_runs\" \"$config_exists\" \"$config_nonempty\" \"$evidence_class\"; done",
+    "classification_raw_output": "variant=v1 configure_runs=0 config_exists=no config_nonempty=no evidence_class=source_only_variant finer_identity=unrecoverable_from_surviving_artifacts\nvariant=v2 configure_runs=0 config_exists=no config_nonempty=no evidence_class=source_only_variant finer_identity=unrecoverable_from_surviving_artifacts\nvariant=v3 configure_runs=0 config_exists=no config_nonempty=no evidence_class=source_only_variant finer_identity=unrecoverable_from_surviving_artifacts\nvariant=v4 configure_runs=0 config_exists=no config_nonempty=no evidence_class=source_only_variant finer_identity=unrecoverable_from_surviving_artifacts\nvariant=v5 configure_runs=0 config_exists=no config_nonempty=no evidence_class=source_only_variant finer_identity=unrecoverable_from_surviving_artifacts\nvariant=v6 configure_runs=0 config_exists=no config_nonempty=no evidence_class=source_only_variant finer_identity=unrecoverable_from_surviving_artifacts\nvariant=v7 configure_runs=0 config_exists=no config_nonempty=no evidence_class=source_only_variant finer_identity=unrecoverable_from_surviving_artifacts\nvariant=v8 configure_runs=1 config_exists=yes config_nonempty=no evidence_class=build_configuration_variant finer_identity=unrecoverable_from_surviving_artifacts\nvariant=v9 configure_runs=1 config_exists=yes config_nonempty=no evidence_class=build_configuration_variant finer_identity=unrecoverable_from_surviving_artifacts\nvariant=v10 configure_runs=1 config_exists=yes config_nonempty=no evidence_class=build_configuration_variant finer_identity=unrecoverable_from_surviving_artifacts\nvariant=v11 configure_runs=1 config_exists=yes config_nonempty=no evidence_class=build_configuration_variant finer_identity=unrecoverable_from_surviving_artifacts\nvariant=v12 configure_runs=1 config_exists=yes config_nonempty=no evidence_class=build_configuration_variant finer_identity=unrecoverable_from_surviving_artifacts\nvariant=v13 configure_runs=1 config_exists=yes config_nonempty=no evidence_class=build_configuration_variant finer_identity=unrecoverable_from_surviving_artifacts\nvariant=v14 configure_runs=1 config_exists=yes config_nonempty=no evidence_class=build_configuration_variant finer_identity=unrecoverable_from_surviving_artifacts\nvariant=v15 configure_runs=1 config_exists=yes config_nonempty=no evidence_class=build_configuration_variant finer_identity=unrecoverable_from_surviving_artifacts\nvariant=v16 configure_runs=1 config_exists=yes config_nonempty=no evidence_class=build_configuration_variant finer_identity=unrecoverable_from_surviving_artifacts\nvariant=v17 configure_runs=1 config_exists=yes config_nonempty=no evidence_class=build_configuration_variant finer_identity=unrecoverable_from_surviving_artifacts\nvariant=v18 configure_runs=0 config_exists=no config_nonempty=no evidence_class=source_only_variant finer_identity=unrecoverable_from_surviving_artifacts\n",
+    "classification_conclusion": "The surviving logs support only the stated source-only versus build-configuration classes. Empty configuration logs preserve no option identity, so every finer identity is unrecoverable_from_surviving_artifacts.",
+    "json_hash_command": "for i in $(seq 1 18); do sha1sum /tmp/rem2-v$i.json; done",
+    "json_hash_raw_output": "0c5b8ca957a590d730ad5574e7082653fc60b50b  /tmp/rem2-v1.json\n0c5b8ca957a590d730ad5574e7082653fc60b50b  /tmp/rem2-v2.json\na5b0e17f6aad7e76353c8e26510b93f4135f36bf  /tmp/rem2-v3.json\na5b0e17f6aad7e76353c8e26510b93f4135f36bf  /tmp/rem2-v4.json\na5b0e17f6aad7e76353c8e26510b93f4135f36bf  /tmp/rem2-v5.json\na5b0e17f6aad7e76353c8e26510b93f4135f36bf  /tmp/rem2-v6.json\na5b0e17f6aad7e76353c8e26510b93f4135f36bf  /tmp/rem2-v7.json\n6226775a1098cfe6924d7f982eb288477439ff29  /tmp/rem2-v8.json\n8cfa069773a50ffebc4053fd685fb6ab8b1d851c  /tmp/rem2-v9.json\n3a556a128b282fcb65c2264a9c5ad2970abfcc59  /tmp/rem2-v10.json\n53c5c18621c47254b67da7c1f34f6ba5767cc84c  /tmp/rem2-v11.json\na5b0e17f6aad7e76353c8e26510b93f4135f36bf  /tmp/rem2-v12.json\na5b0e17f6aad7e76353c8e26510b93f4135f36bf  /tmp/rem2-v13.json\n6a89bc76c88cda39964ada95de84f93bb397c265  /tmp/rem2-v14.json\na5b0e17f6aad7e76353c8e26510b93f4135f36bf  /tmp/rem2-v15.json\n37eba2e3b0888a047352bbce505f2741329b674a  /tmp/rem2-v16.json\n6577dcbb694cea783641b2500d051ada1c3aa267  /tmp/rem2-v17.json\n6d89968bbaf39ac5c9ccdadf9ff8e964720de18a  /tmp/rem2-v18.json",
+    "duplicate_conclusion": "The hash output makes v1 and v2 indistinguishable from each other, and makes v3, v4, v5, v6, v7, v12, v13, and v15 indistinguishable from each other. No distinct source or compiler identity can be inferred within either equal-hash group.",
+    "cxx_symbol_command": "jq -r '[.right.symbols[].name | select(startswith(\"fn_801CAEB8\"))] | \"variant=v17 generated_symbols=\" + join(\",\")' /tmp/rem2-v17.json",
+    "cxx_symbol_raw_output": "variant=v17 generated_symbols=fn_801CAEB8__FiUiUi",
+    "cxx_symbol_conclusion": "The mangled generated symbol is direct surviving evidence that v17 used C++ mode; no finer build-option identity is claimed."
+  }
+}

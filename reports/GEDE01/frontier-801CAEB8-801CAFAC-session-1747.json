@@ -1,0 +1,24 @@
+{
+  "session_id": "session-1747",
+  "remediation_note": "Remediation 2 retains an integer layer parameter with a separate source pointer local. The parameter/declaration variants and prototype dead end are recorded in reports/GEDE01/session-1747-remediation-2-verification.json; the frame allocation remains unresolved and receives no match credit.",
+  "range_start": "0x801CAEB8",
+  "range_end": "0x801CAFAC",
+  "range_bytes": 244,
+  "matched_bytes_this_session": 0,
+  "nonmatching_bytes": 244,
+  "unaccounted_spans": [],
+  "accounting_command": "printf 'range_start=0x801CAEB8 range_end=0x801CAFAC range_bytes=%d matched_bytes=%d nonmatching_bytes=%d unaccounted_spans=%d next_target=%s\\n' \"$((0x801CAFAC-0x801CAEB8))\" 0 \"$((0x801CAFAC-0x801CAEB8))\" \"$(jq '.unaccounted_spans|length' reports/GEDE01/frontier-801CAEB8-801CAFAC-session-1747.json)\" \"$(jq -r .next_target reports/GEDE01/progress.json)\"",
+  "accounting_raw_output": "range_start=0x801CAEB8 range_end=0x801CAFAC range_bytes=244 matched_bytes=0 nonmatching_bytes=244 unaccounted_spans=0 next_target=0x801CAFAC",
+  "functions": [{
+    "symbol": "fn_801CAEB8",
+      "address": "0x801CAEB8",
+      "size": 244,
+      "generated_size": 244,
+      "match_percent": 99.88525,
+      "status": "NonMatching",
+      "measurement_command": "jq -r '(.left.symbols[] | select(.name == \"fn_801CAEB8\")) as $left | (.right.symbols[] | select(.name == \"fn_801CAEB8\")) as $right | \"strict retail=\\($left.size) generated=\\($right.size) left_instructions=\\($left.instructions|map(select(.instruction != null))|length) right_instructions=\\($right.instructions|map(select(.instruction != null))|length) match=\\($left.match_percent)%\"' reports/GEDE01/objdiff-fn_801CAEB8-session-1747-reloc-strict.json",
+      "measurement_raw_output": "strict retail=244 generated=244 left_instructions=61 right_instructions=61 match=99.88525%",
+      "evidence": "reports/GEDE01/objdiff-fn_801CAEB8-session-1747-reloc-strict.json"
+  }],
+  "next_target": "0x801CAFAC"
+}

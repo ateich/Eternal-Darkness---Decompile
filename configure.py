@@ -10108,6 +10108,13 @@ config.libs = [
             Object(Matching, "game/game_fn_801CA798.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
             Object(NonMatching, "game/game_fn_801CA7C0.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
             Object(NonMatching, "game/game_fn_801CAD90.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(NonMatching, "game/game_fn_801CAEB8.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(NonMatching, "game/game_fn_801CAFAC.c", mw_version="GC/1.2.5n"),
+            Object(Matching, "game/game_fn_801CB238.c", mw_version="GC/1.2.5n"),
+            Object(Matching, "game/game_fn_801CB274.c", mw_version="GC/1.2.5n"),
+            Object(Matching, "game/game_fn_801CB2B8.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
+            Object(NonMatching, "game/game_fn_801CB354.c", mw_version="GC/1.2.5n"),
+            Object(Matching, "game/game_fn_801CB470.c", mw_version="GC/1.2.5n"),
         ],
     },
     {

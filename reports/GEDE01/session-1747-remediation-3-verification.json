@@ -1,0 +1,68 @@
+{
+  "session_id": "session-1747-remediation-3",
+  "status": "verified_nonmatching",
+  "scope": "Add the omitted experiment ledger, repair the prototype comparison evidence, and preserve every existing exact-build gate without advancing the frontier",
+  "experiment_ledger": {
+    "status": "superseded_by_central_evidence",
+    "evidence": "reports/GEDE01/session-1747-remediation-1-verification.json",
+    "conclusion": "This report no longer duplicates the variant ledger. The earlier shape labels are withdrawn; the central evidence marks every finer identity unrecoverable_from_surviving_artifacts."
+  },
+  "prototype_negative_result": {
+    "experiment": "Compile the committed typed declaration, save its object, change only fn_801CB470 to an unspecified-parameter declaration at the same source path, compile and save that object, restore the typed source, then compare both saved objects.",
+    "command": "sha1sum build/rem3-typed/game_fn_801CAEB8.o build/rem3-unspecified/game_fn_801CAEB8.o; cmp -s build/rem3-typed/game_fn_801CAEB8.o build/rem3-unspecified/game_fn_801CAEB8.o; printf 'prototype_object_cmp_exit=%d\\n' \"$?\"",
+    "raw_output": "fa8f69a608a0650f29c00c33d34d348c5dbc46eb  build/rem3-typed/game_fn_801CAEB8.o\nfa8f69a608a0650f29c00c33d34d348c5dbc46eb  build/rem3-unspecified/game_fn_801CAEB8.o\nprototype_object_cmp_exit=0",
+    "conclusion": "The separately saved typed and unspecified-declaration objects are byte-identical. The committed source retains the typed declaration."
+  },
+  "source_provenance": {
+    "command": "git cat-file -t a27e15d51bd25ba514919d911d8affdbbcab580d; git cat-file blob a27e15d51bd25ba514919d911d8affdbbcab580d | sha1sum; git hash-object src/game/game_fn_801CAEB8.c; sha1sum src/game/game_fn_801CAEB8.c",
+    "raw_output": "blob\n5755a3d2581a537f5ae8aa66eb9f254da6b7231f  -\nf3691bfebc3f20967ff6a5102fc08dac726d638a\ne1851405f9ab731c4bea93de7adba6d744a0a6fd  src/game/game_fn_801CAEB8.c",
+    "conclusion": "The first two output lines attest only that the earlier repository-local blob exists and has the recorded content hash. The final two output lines attest only to the retained source at the time of that command. The surviving evidence does not establish a source-shape relationship between them."
+  },
+  "build": {
+    "command": ".tools/bin/ninja -f build.ninja build/GEDE01/main.dol | tail -n 1",
+    "raw_output": "[582/582] DOL build/GEDE01/main.dol",
+    "result": "completed"
+  },
+  "canonical_objdiff": {
+    "generate_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801CAEB8 fn_801CAEB8 -o reports/GEDE01/objdiff-fn_801CAEB8-session-1747.json --format json-pretty",
+    "measure_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801CAEB8\")) as $l | (.right.symbols[]|select(.name==\"fn_801CAEB8\")) as $r | \"canonical retail=\\($l.size) generated=\\($r.size) left_instructions=\\($l.instructions|map(select(.instruction != null))|length) right_instructions=\\($r.instructions|map(select(.instruction != null))|length) match=\\($l.match_percent)% divergent_rows=\\([$l.instructions[]|select((.diff_kind//\"\") != \"\")]|length)\"' reports/GEDE01/objdiff-fn_801CAEB8-session-1747.json",
+    "raw_output": "canonical retail=244 generated=244 left_instructions=61 right_instructions=61 match=99.88525% divergent_rows=7"
+  },
+  "relocation_strict_objdiff": {
+    "generate_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801CAEB8 fn_801CAEB8 -o reports/GEDE01/objdiff-fn_801CAEB8-session-1747-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "measure_command": "jq -r '(.left.symbols[]|select(.name==\"fn_801CAEB8\")) as $l | (.right.symbols[]|select(.name==\"fn_801CAEB8\")) as $r | \"strict retail=\\($l.size) generated=\\($r.size) left_instructions=\\($l.instructions|map(select(.instruction != null))|length) right_instructions=\\($r.instructions|map(select(.instruction != null))|length) match=\\($l.match_percent)% divergent_rows=\\([$l.instructions[]|select((.diff_kind//\"\") != \"\")]|length)\"' reports/GEDE01/objdiff-fn_801CAEB8-session-1747-reloc-strict.json",
+    "raw_output": "strict retail=244 generated=244 left_instructions=61 right_instructions=61 match=99.88525% divergent_rows=7"
+  },
+  "canonical_strict_identity": {
+    "command": "cmp -s reports/GEDE01/objdiff-fn_801CAEB8-session-1747.json reports/GEDE01/objdiff-fn_801CAEB8-session-1747-reloc-strict.json; printf 'canonical_strict_cmp_exit=%d\\n' \"$?\"",
+    "raw_output": "canonical_strict_cmp_exit=0",
+    "conclusion": "The independently generated reports are identical because the strict relocation mode adds no differences for this object."
+  },
+  "remaining_divergence": {
+    "command": "jq -r '(.left.symbols[]|select(.name==\"fn_801CAEB8\")|.instructions) as $l | [range(0;($l|length)) | select(($l[.].diff_kind//\"\") != \"\") | \"\\(.):\\($l[.].diff_kind):\\($l[.].instruction.formatted)\"] | \"divergent_rows=\\(length) rows=\\(join(\" | \"))\"' reports/GEDE01/objdiff-fn_801CAEB8-session-1747-reloc-strict.json",
+    "raw_output": "divergent_rows=7 rows=3:DIFF_ARG_MISMATCH:stwu r1, -0x18(r1) | 4:DIFF_ARG_MISMATCH:stw r31, 0x14(r1) | 6:DIFF_ARG_MISMATCH:stw r30, 0x10(r1) | 55:DIFF_ARG_MISMATCH:lwz r0, 0x1c(r1) | 56:DIFF_ARG_MISMATCH:lwz r31, 0x14(r1) | 57:DIFF_ARG_MISMATCH:lwz r30, 0x10(r1) | 58:DIFF_ARG_MISMATCH:addi r1, r1, 0x18",
+    "conclusion": "Only prologue and epilogue frame operands remain divergent; the function remains NonMatching."
+  },
+  "real_elf_relocations": {
+    "command": "for side in obj src; do readelf -rW build/GEDE01/$side/game/game_fn_801CAEB8.o | awk -v side=\"$side\" 'index($0,\".rela.text\"){print side \" \" $0; p=1; next} p && /^$/{exit} p && /R_PPC/{print side \" \" $1 \" \" $3 \" \" $5 \" \" $6 \" \" $7}'; done",
+    "raw_output": "obj Relocation section '.rela.text' at offset 0x18c contains 10 entries:\nobj 00000026 R_PPC_ADDR16_HA lbl_8023B348 + 0\nobj 0000002a R_PPC_ADDR16_LO lbl_8023B348 + 0\nobj 00000032 R_PPC_ADDR16_HA lbl_8023B3D0 + 0\nobj 00000036 R_PPC_ADDR16_LO lbl_8023B3D0 + 0\nobj 0000004a R_PPC_ADDR16_HA lbl_8062A2F0 + 0\nobj 00000052 R_PPC_ADDR16_LO lbl_8062A2F0 + 0\nobj 0000006e R_PPC_ADDR16_HA lbl_8062E5F0 + 0\nobj 00000072 R_PPC_ADDR16_LO lbl_8062E5F0 + 0\nobj 00000084 R_PPC_REL24 memcpy + 0\nobj 000000d8 R_PPC_REL24 fn_801CB470 + 0\nsrc Relocation section '.rela.text' at offset 0x13c contains 10 entries:\nsrc 00000026 R_PPC_ADDR16_HA lbl_8023B348 + 0\nsrc 0000002a R_PPC_ADDR16_LO lbl_8023B348 + 0\nsrc 00000032 R_PPC_ADDR16_HA lbl_8023B3D0 + 0\nsrc 00000036 R_PPC_ADDR16_LO lbl_8023B3D0 + 0\nsrc 0000004a R_PPC_ADDR16_HA lbl_8062A2F0 + 0\nsrc 00000052 R_PPC_ADDR16_LO lbl_8062A2F0 + 0\nsrc 0000006e R_PPC_ADDR16_HA lbl_8062E5F0 + 0\nsrc 00000072 R_PPC_ADDR16_LO lbl_8062E5F0 + 0\nsrc 00000084 R_PPC_REL24 memcpy + 0\nsrc 000000d8 R_PPC_REL24 fn_801CB470 + 0"
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol",
+    "equal": true
+  },
+  "frontier": {
+    "command": "printf 'next_target=%s\\n' \"$(jq -r .next_target reports/GEDE01/progress.json)\"",
+    "raw_output": "next_target=0x801CAFAC",
+    "advanced": false
+  },
+  "legal_audit": {
+    "command": "python3 tools/legal_audit.py",
+    "raw_output": "legal audit passed (10014 tracked project files inspected)"
+  },
+  "validation": {
+    "command": "git diff --check; jq empty reports/GEDE01/session-1747-remediation-2-verification.json reports/GEDE01/session-1747-remediation-3-verification.json reports/GEDE01/frontier-801CAEB8-801CAFAC-session-1747.json reports/GEDE01/progress.json; printf 'validation_exit=%d\\n' \"$?\"",
+    "raw_output": "validation_exit=0"
+  }
+}
