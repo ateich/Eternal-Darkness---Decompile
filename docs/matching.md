@@ -605,3 +605,23 @@ Objdiff reports 100% for all eight functions under
 `function_reloc_diffs=name_address`: 76, 228, 348, 148, 244, 208, 156, and
 232 code bytes respectively, with 9, 4, 11, 8, 7, 9, 8, and 8 matching
 relocations.
+
+## A same-width `unsigned long` parameter copy can change register allocation
+
+MWCC can assign a parameter to a different callee-saved register when it is
+copied at function entry to a `register unsigned long` local and converted
+back at its uses. This applies even though pointers, `int`, and `unsigned long`
+are all 32 bits for this target. `fn_80036198` is an existing matching example
+of the same source form.
+
+This parameter-copy form matches `fn_8006016C`, `fn_800777B0`,
+`fn_8009E4BC`, `fn_800C77B4`, `fn_800C77FC`, `fn_800D386C`,
+`fn_800D9F2C`, and `fn_800DCFE0`. `fn_8005BCC0` matches with a typed
+`register void *` copy. `fn_800D078C` and `fn_800F35E4` also use typed pointer
+copies and require function-scoped `opt_propagation off` pragmas.
+
+Typed pointer copies were tested in the seven pointer functions that require
+`unsigned long`; they compiled but returned to the original scores: 94.02778%,
+90.21739%, 92.954544%, 83.05556%, 83.05556%, 95.22222%, and 98.39286%.
+The retained forms match 1,608 code bytes and 56 relocation sites exactly
+under `function_reloc_diffs=name_address`.
