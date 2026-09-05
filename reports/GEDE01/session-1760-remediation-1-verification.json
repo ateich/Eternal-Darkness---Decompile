@@ -1,0 +1,88 @@
+{
+  "session_id": "session-1760-remediation-1",
+  "proposal_baseline_commit": "5148624f4",
+  "starting_target": "0x801CC698",
+  "ending_next_target": "0x801CC698",
+  "frontier_changed": false,
+  "matched_bytes_added": 0,
+  "nonmatching_bytes_added": 0,
+  "rewrite_outcome": {
+    "symbol": "fn_800F5C54",
+    "result": "tested-and-reverted",
+    "attempted_declaration": "extern unsigned int fn_800F5C54(double);",
+    "interpretation": "The declaration-only rewrite set is bounded to the disagreeing TUs, but it is not an exact-build-safe independent change. It invalidated the existing exact game_fn_801C2AAC object and broke that object's externalization step, so every attempted source edit was restored. Retaining the mixed declarations is required until the broader caller/callee ABI model can be rematched without weakening any gate.",
+    "affected_translation_units": [
+      "src/game/game_fn_801B4FB4.c",
+      "src/game/game_fn_801C29BC.c",
+      "src/game/game_fn_801C2AAC.c",
+      "src/game/game_fn_801C2D9C.c",
+      "src/game/game_fn_801C79C8.c",
+      "src/game/game_fn_801C8CC0.c"
+    ]
+  },
+  "checks": [
+    {
+      "name": "candidate_measurement",
+      "command": "python3 tools/declaration_drift_proposal.py --baseline-ref 5148624f4 --facts --facts-output build/session-1760-remediation-1-declaration-drift-facts.txt && awk '/^SYMBOL .*name=fn_800F5C54 /,/^CONFIDENCE name=fn_800F5C54 /' build/session-1760-remediation-1-declaration-drift-facts.txt",
+      "result": "pass",
+      "raw_output": "SYMBOL rank=9 name=fn_800F5C54 declarations=89 affected_tus=89 blast_radius_tus=6 confidence=high resolution=resolved\nVARIANT name=fn_800F5C54 declaration=\"unsigned int fn_800F5C54(double)\" declarations=83 declaring_tus=83 call_sites=100\nVARIANT name=fn_800F5C54 declaration=\"u32 fn_800F5C54(float)\" declarations=3 declaring_tus=3 call_sites=12\nVARIANT name=fn_800F5C54 declaration=\"float fn_800F5C54(float)\" declarations=2 declaring_tus=2 call_sites=2\nVARIANT name=fn_800F5C54 declaration=\"u32 fn_800F5C54(double)\" declarations=1 declaring_tus=1 call_sites=1\nDISAGREEING_TU name=fn_800F5C54 path=src/game/game_fn_801B4FB4.c\nDISAGREEING_TU name=fn_800F5C54 path=src/game/game_fn_801C29BC.c\nDISAGREEING_TU name=fn_800F5C54 path=src/game/game_fn_801C2AAC.c\nDISAGREEING_TU name=fn_800F5C54 path=src/game/game_fn_801C2D9C.c\nDISAGREEING_TU name=fn_800F5C54 path=src/game/game_fn_801C79C8.c\nDISAGREEING_TU name=fn_800F5C54 path=src/game/game_fn_801C8CC0.c\nCONFIDENCE name=fn_800F5C54 return_shape=high parameters=high"
+    },
+    {
+      "name": "trial_build",
+      "command": ".tools/bin/ninja build/GEDE01/main.dol",
+      "result": "fail-and-revert",
+      "raw_output_tail": "FAILED: [code=1] build/GEDE01/src/game/game_fn_801C2AAC.externalized\nbuild/binutils/powerpc-eabi-objcopy: build/GEDE01/src/game/stOjkGog: symbol `@5' required but not present\nbuild/binutils/powerpc-eabi-objcopy: build/GEDE01/src/game/stOjkGog: no symbols\nninja: build stopped: subcommand failed."
+    },
+    {
+      "name": "trial_exact_object_regression",
+      "command": "jq -nr --slurpfile before build/session-1760-remediation-1-baseline-objdiff.json --slurpfile trial build/session-1760-remediation-1-trial-objdiff.json '$before[0].units[] | select(.name==\"main/game/game_fn_801C2AAC\" or .name==\"main/game/game_fn_801C2D9C\") | .name as $name | [$name, (.measures.matched_code_percent//0), (($trial[0].units[]|select(.name==$name)|.measures.matched_code_percent)//0)] | @tsv'",
+      "columns": ["unit", "baseline_matched_code_percent", "trial_matched_code_percent"],
+      "result": "fail-and-revert",
+      "raw_output": "main/game/game_fn_801C2AAC\t100.0\t0\nmain/game/game_fn_801C2D9C\t100.0\t100.0"
+    },
+    {
+      "name": "restored_build",
+      "command": "set -o pipefail; .tools/bin/ninja build/GEDE01/main.dol 2>&1 | tail -n 1",
+      "result": "pass",
+      "raw_output": "[309/309] DOL build/GEDE01/main.dol"
+    },
+    {
+      "name": "affected_object_objdiff",
+      "command": "for symbol in 801B4FB4 801C29BC 801C2AAC 801C2D9C 801C79C8 801C8CC0; do build/tools/objdiff-cli diff -p . -u main/game/game_fn_${symbol} -o build/session-1760-remediation-1-objdiff-${symbol}.json --format json; done; for symbol in 801B4FB4 801C29BC 801C2AAC 801C2D9C 801C79C8 801C8CC0; do jq -r --arg unit \"main/game/game_fn_${symbol}\" '[.left.symbols[] | select(.flags == 1) | (.match_percent // 0)] as $functions | [$unit, ($functions|length|tostring), (($functions|min)//0|tostring), ([.left.sections[] | select(.kind==\"SECTION_CODE\") | (.match_percent//0)]|min|tostring)] | @tsv' build/session-1760-remediation-1-objdiff-${symbol}.json; done",
+      "columns": ["unit", "function_count", "minimum_function_match_percent", "code_section_match_percent"],
+      "result": "pass",
+      "raw_output": "main/game/game_fn_801B4FB4\t1\t57.24204\t57.24204\nmain/game/game_fn_801C29BC\t1\t97.333336\t97.333336\nmain/game/game_fn_801C2AAC\t1\t100.0\t100.0\nmain/game/game_fn_801C2D9C\t1\t100.0\t100.0\nmain/game/game_fn_801C79C8\t1\t33.07819\t33.07819\nmain/game/game_fn_801C8CC0\t1\t87.19853\t87.19853"
+    },
+    {
+      "name": "whole_project_objdiff_affected_summary",
+      "command": "build/tools/objdiff-cli report generate -p . -o build/session-1760-remediation-1-final-objdiff.json --format json && jq -r '[\"main/game/game_fn_801B4FB4\",\"main/game/game_fn_801C29BC\",\"main/game/game_fn_801C2AAC\",\"main/game/game_fn_801C2D9C\",\"main/game/game_fn_801C79C8\",\"main/game/game_fn_801C8CC0\"][] as $wanted | .units[] | select(.name==$wanted) | [.name, (.measures.matched_code // \"0\") + \"/\" + .measures.total_code, (.measures.matched_code_percent // 0|tostring), (.measures.complete_units // 0|tostring), (.metadata.complete|tostring)] | @tsv' build/session-1760-remediation-1-final-objdiff.json",
+      "columns": ["unit", "matched_code_over_total_code", "matched_code_percent", "complete_units", "configured_complete"],
+      "result": "pass",
+      "raw_output": "main/game/game_fn_801B4FB4\t0/628\t0\t0\tfalse\nmain/game/game_fn_801C29BC\t0/240\t0\t0\tfalse\nmain/game/game_fn_801C2AAC\t84/84\t100.0\t1\ttrue\nmain/game/game_fn_801C2D9C\t340/340\t100.0\t1\ttrue\nmain/game/game_fn_801C79C8\t0/1944\t0\t0\tfalse\nmain/game/game_fn_801C8CC0\t0/544\t0\t0\tfalse"
+    },
+    {
+      "name": "dol_sha1",
+      "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+      "result": "pass",
+      "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol"
+    },
+    {
+      "name": "source_and_progress_restored",
+      "command": "git diff --name-only HEAD -- eternal-darkness-decomp/src eternal-darkness-decomp/reports/GEDE01/progress.json",
+      "result": "pass",
+      "raw_output": ""
+    },
+    {
+      "name": "frontier_and_progress",
+      "command": "jq -c '{next_target,dol_sha1,matching_code_bytes,game_code_matching_bytes,sdk_code_matching_bytes,matching_functions,total_functions,matching_objects,total_objects}' reports/GEDE01/progress.json",
+      "result": "pass",
+      "raw_output": "{\"next_target\":\"0x801CC698\",\"dol_sha1\":\"ea24b6af954876ce072562ff39cdb4c81d32be1f\",\"matching_code_bytes\":684648,\"game_code_matching_bytes\":681620,\"sdk_code_matching_bytes\":3028,\"matching_functions\":4453,\"total_functions\":8216,\"matching_objects\":4686,\"total_objects\":6116}"
+    },
+    {
+      "name": "proposal_validator",
+      "command": "python3 tools/validate_declaration_drift_report.py --report reports/GEDE01/declaration-drift-proposal-session-1760.json",
+      "result": "pass",
+      "raw_output": "AUDIT declarations=19690 symbols=4780\nSYMBOL name=fn_80201814 declarations=409 affected_tus=414 variants=6 variant_call_sites=506 believed_correct_call_sites=505 status=valid\nSYMBOL name=fn_80201BC8 declarations=364 affected_tus=371 variants=4 variant_call_sites=427 believed_correct_call_sites=427 status=valid\nSYMBOL name=fn_80201B54 declarations=290 affected_tus=297 variants=2 variant_call_sites=357 believed_correct_call_sites=357 status=valid\nSYMBOL name=fn_8020123C declarations=176 affected_tus=182 variants=3 variant_call_sites=333 believed_correct_call_sites=333 status=valid\nSYMBOL name=fn_8011F114 declarations=108 affected_tus=115 variants=3 variant_call_sites=130 believed_correct_call_sites=130 status=valid\nSYMBOL name=fn_80201B9C declarations=96 affected_tus=100 variants=2 variant_call_sites=97 believed_correct_call_sites=97 status=valid\nSYMBOL name=fn_80201EB8 declarations=93 affected_tus=97 variants=3 variant_call_sites=113 believed_correct_call_sites=112 status=valid\nSYMBOL name=fn_80156938 declarations=90 affected_tus=90 variants=2 variant_call_sites=125 believed_correct_call_sites=123 status=valid\nSYMBOL name=fn_800F5C54 declarations=89 affected_tus=89 variants=4 variant_call_sites=115 believed_correct_call_sites=115 status=valid\nSYMBOL name=fn_801E8328 declarations=87 affected_tus=88 variants=2 variant_call_sites=105 believed_correct_call_sites=105 status=valid\nTOTAL symbols=10 variants=31 declaration_sites=1802 variant_call_sites=2308 believed_correct_call_sites=2304 invalid_call_sites=0 source_rewrites=0"
+    }
+  ]
+}

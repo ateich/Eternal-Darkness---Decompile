@@ -52,7 +52,6 @@ def main() -> int:
         assert item["declaration_count"] == measured["declarations"]
         assert item["total_affected_tu_count"] == measured["affected_translation_units"]
         assert item["affected_translation_units"] == measured["translation_units"]
-        assert item["estimated_blast_radius_tus"] == measured["affected_translation_units"]
         measured_variants = {
             (variant["signature"], variant["count"])
             for variant in measured["variants"]
@@ -84,6 +83,20 @@ def main() -> int:
             else:
                 assert reading["status"] == "resolved"
                 assert reading["declaration"] in measured_signatures
+
+        expected_disagreeing_sites = sorted({
+            site
+            for variant in measured["variants"]
+            if variant["signature"] != reading["declaration"]
+            for site in variant["sites"]
+        })
+        expected_disagreeing_tus = sorted({
+            site.rsplit(":", 1)[0] for site in expected_disagreeing_sites
+        })
+        assert item["disagreeing_declaration_sites"] == expected_disagreeing_sites
+        assert item["disagreeing_translation_units"] == expected_disagreeing_tus
+        assert item["estimated_blast_radius_tus"] == len(expected_disagreeing_tus)
+        assert reading["confidence_rationale"]
 
         if truth is not None and truth.get("kind") == "retail-epilogue":
             assert item["confidence_by_component"] == {

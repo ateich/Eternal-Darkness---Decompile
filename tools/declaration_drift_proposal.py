@@ -217,6 +217,17 @@ def collect(ref: str) -> dict[str, object]:
                 "return_shape": proposed["abi"]["return"],
                 "call_site_evidence": proposed_calls,
                 "basis": basis,
+                "confidence_rationale": (
+                    "High confidence: an owned function definition grounds both the "
+                    "return-register shape and parameter ABI."
+                    if truth is not None and truth.get("kind") == "definition"
+                    else (
+                        "Low overall confidence: retail epilogue evidence grounds only "
+                        "the return-register shape; the parameter reading remains ungrounded."
+                        if truth is not None
+                        else "Low confidence: declaration plurality and call sites do not ground the callee ABI."
+                    )
+                ),
             }
             confidence = (
                 "high"
@@ -238,7 +249,7 @@ def collect(ref: str) -> dict[str, object]:
                 "confidence_by_component": confidence_by_component,
                 "competing_declarations": variant_rows,
                 "believed_correct_reading": believed_correct_reading,
-                "estimated_blast_radius_tus": int(entry["affected_translation_units"]),
+                "estimated_blast_radius_tus": len(disagreeing_tus),
                 "disagreeing_translation_units": disagreeing_tus,
                 "disagreeing_declaration_sites": disagreeing_sites,
             })
@@ -295,6 +306,7 @@ def main() -> int:
     parser.add_argument("--starting-target")
     parser.add_argument("--ending-next-target")
     parser.add_argument("--applied-symbol", action="append", default=[])
+    parser.add_argument("--tested-reverted-symbol", action="append", default=[])
     parser.add_argument(
         "--inherited-tested-reverted-symbol", action="append", default=[]
     )
@@ -319,12 +331,22 @@ def main() -> int:
         raise ValueError("facts log does not match a fresh measurement")
 
     applied = set(args.applied_symbol)
+    tested_reverted = set(args.tested_reverted_symbol)
     inherited_tested_reverted = set(args.inherited_tested_reverted_symbol)
     for item in measurement["selected_symbols"]:
         if item["symbol"] in applied:
             item["disposition"] = "applied"
             item["disposition_reason"] = (
                 "High-confidence return correction was within the TU cap and passed rebuild, affected-object objdiff, relocation, and DOL gates."
+            )
+        elif item["symbol"] in tested_reverted:
+            item["disposition"] = "tested-and-reverted"
+            item["disposition_reason"] = (
+                "The bounded rewrite of only the disagreeing declarations was tested, "
+                "but it broke an existing exact object and the build; the declarations "
+                "were restored. For this symbol, the failed bounded trial is evidence that "
+                "the total declaring-TU set remains the conservative integration scope. "
+                "The verification report records the trial and restored gates."
             )
         elif item["symbol"] in inherited_tested_reverted:
             item["disposition"] = "proposal-only"
@@ -351,6 +373,10 @@ def main() -> int:
 
     disposition_args = " ".join(
         [f"--applied-symbol {symbol}" for symbol in args.applied_symbol]
+        + [
+            f"--tested-reverted-symbol {symbol}"
+            for symbol in args.tested_reverted_symbol
+        ]
         + [
             f"--inherited-tested-reverted-symbol {symbol}"
             for symbol in args.inherited_tested_reverted_symbol
@@ -396,7 +422,7 @@ def main() -> int:
         "selection_rule": (
             "Combine return-register contradictions and ABI-divergent parameter declarations, then rank by total declaration count descending and symbol ascending. "
             "Exclude cosmetic disagreements because the audit proves their return and parameter ABI shapes are equivalent. "
-            "Blast radius is the audit's affected_translation_units count: every TU declaring the symbol."
+            "The rewrite blast radius is the set of TUs whose declaration disagrees with the grounded reading; total declaring TUs are reported separately as context."
         ),
         "rewrite_tu_cap": 12,
         "measurement_evidence": {
@@ -416,6 +442,10 @@ def main() -> int:
                 "command": " ".join(source_diff_command),
                 "raw_output": source_diff,
             },
+        },
+        "rewrite_gate": {
+            "rule": "Apply a high-confidence correction only when its disagreeing-TU rewrite set is at most the configured cap and all build, affected-object, relocation, and DOL gates pass.",
+            "tested_reverted_symbols": sorted(tested_reverted),
         },
         "symbols": measurement["selected_symbols"],
     }

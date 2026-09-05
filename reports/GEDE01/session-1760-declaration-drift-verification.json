@@ -1,0 +1,64 @@
+{
+  "session_id": "session-1760",
+  "proposal_baseline_commit": "b4ea02b71",
+  "starting_target": "0x801CC698",
+  "ending_next_target": "0x801CC698",
+  "matched_bytes_added": 0,
+  "nonmatching_bytes_added": 0,
+  "checks": [
+    {
+      "name": "proposal_measurement",
+      "command": "python3 tools/declaration_drift_proposal.py --baseline-ref b4ea02b71 --facts --facts-output build/session-1760-declaration-drift-facts.txt",
+      "result": "pass",
+      "detail": "The generated proposal embeds the reproduced facts stream verbatim."
+    },
+    {
+      "name": "proposal_validator",
+      "command": "python3 tools/validate_declaration_drift_report.py --report reports/GEDE01/declaration-drift-proposal-session-1760.json",
+      "result": "pass",
+      "raw_output": "AUDIT declarations=19690 symbols=4780; TOTAL symbols=10 variants=31 declaration_sites=1802 variant_call_sites=2308 believed_correct_call_sites=2304 invalid_call_sites=0 source_rewrites=0"
+    },
+    {
+      "name": "clean_rebuild",
+      "command": ".tools/bin/ninja build/GEDE01/main.dol",
+      "result": "pass",
+      "raw_output": "[582/582] DOL build/GEDE01/main.dol"
+    },
+    {
+      "name": "dol_sha1",
+      "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+      "result": "pass",
+      "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol; ea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol"
+    },
+    {
+      "name": "whole_project_objdiff",
+      "command": "build/tools/objdiff-cli report generate -p . -o build/session-1760-objdiff-report.json --format json",
+      "result": "pass",
+      "raw_output": "Report generated for 6116 units"
+    },
+    {
+      "name": "whole_project_objdiff_measures",
+      "command": "jq -c '.measures | {total_code,matched_code,matched_code_percent,total_functions,matched_functions,matched_functions_percent,total_units,complete_units}' build/session-1760-objdiff-report.json",
+      "result": "pass",
+      "raw_output": "{\"total_code\":\"2300692\",\"matched_code\":\"684648\",\"matched_code_percent\":29.758352,\"total_functions\":8216,\"matched_functions\":4453,\"matched_functions_percent\":54.199123,\"total_units\":6116,\"complete_units\":4686}"
+    },
+    {
+      "name": "affected_object_scope",
+      "command": "git -C .. diff --name-only HEAD -- eternal-darkness-decomp/src eternal-darkness-decomp/reports/GEDE01/progress.json",
+      "result": "pass",
+      "raw_output": "",
+      "interpretation": "No source translation unit or progress report changed; the affected-object set is empty, and the whole-project objdiff report covers all configured units."
+    },
+    {
+      "name": "rewrite_gate",
+      "result": "pass",
+      "detail": "No top-ten symbol qualified for rewriting. The only fully high-confidence symbol, fn_800F5C54, affects 89 translation units; all other top-ten symbols are low confidence, and every blast radius exceeds 12 translation units."
+    },
+    {
+      "name": "frontier_and_progress",
+      "command": "jq -c '{next_target,dol_sha1,matching_code_bytes,game_code_matching_bytes,sdk_code_matching_bytes,matching_functions,total_functions,matching_objects,total_objects}' reports/GEDE01/progress.json",
+      "result": "pass",
+      "raw_output": "{\"next_target\":\"0x801CC698\",\"dol_sha1\":\"ea24b6af954876ce072562ff39cdb4c81d32be1f\",\"matching_code_bytes\":684648,\"game_code_matching_bytes\":681620,\"sdk_code_matching_bytes\":3028,\"matching_functions\":4453,\"total_functions\":8216,\"matching_objects\":4686,\"total_objects\":6116}"
+    }
+  ]
+}
