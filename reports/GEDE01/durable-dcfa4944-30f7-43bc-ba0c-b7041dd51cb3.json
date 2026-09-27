@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "assignment_id": "dcfa4944-30f7-43bc-ba0c-b7041dd51cb3",
+  "attempt": 7,
+  "base_commit": "f754cb4fd16de71cdec9dfe26dcedd1f305bd5e0",
+  "target": "fn_80150400",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-dcfa4944-30f7-43bc-ba0c-b7041dd51cb3.json",
+    "eternal-darkness-decomp/reports/GEDE01/dcfa4944-30f7-43bc-ba0c-b7041dd51cb3/experiments.json",
+    "eternal-darkness-decomp/reports/GEDE01/dcfa4944-30f7-43bc-ba0c-b7041dd51cb3/canonical.json",
+    "eternal-darkness-decomp/reports/GEDE01/dcfa4944-30f7-43bc-ba0c-b7041dd51cb3/elf_verification.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both report 99.97059%. All 1360 .text bytes match exactly. All 40 relocation offsets/types/addends agree, but R_PPC_EMB_SDA21 at function offsets 0x2e8 and 0x46c targets generated TU-local @77 rather than retail lbl_80650588 (both addends zero). The generated eight-byte .sdata2 bias 4330000080000000 equals retail at 0x80650588. Register coloring, initializer scheduling, stack offsets, and the surplus load are resolved. The remaining externalization rule requires configure.py edits beyond the authorized registration-only scope; no policy change was made. Source remains NonMatching. Canonical configure/ninja -j2 and legal audit passed; DOL SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f verifies the canonical build, which excludes this candidate."
+}

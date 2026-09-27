@@ -41,8 +41,9 @@ extern void fn_80199EBC(void*);
 extern void fn_80199E18(void);
 extern void fn_8014F700(Vec3f*, s16, void*);
 extern void fn_80149E28(void*);
-void fn_80150400(u8* instance)
+void fn_80150400(void* arg)
 {
+    u8* instance = arg;
     u8* work = instance + 8;
     void* object;
     Vec3s* object_position;
@@ -50,7 +51,8 @@ void fn_80150400(u8* instance)
     Vec3f position1;
     u8 key1[8];
     u8 key2[8];
-    u8 key3[12];
+    u8 key3[8];
+    u32 key4;
     u8 descriptor[0x94];
     u8* command;
 
@@ -72,17 +74,17 @@ void fn_80150400(u8* instance)
         *(u16*)(key1 + 4) = lbl_80651C24;
         fn_8019B13C(descriptor);
         descriptor[1] = 1;
+        *(u16*)(descriptor + 6) = *(u16*)(work + 0x18) - *(u16*)(work + 0x12) + 20;
+        *(u16*)(descriptor + 4) = *(s16*)(work + 0x0E);
         descriptor[2] = 0xF5;
         *(s8*)(descriptor + 3) = -7;
-        *(u16*)(descriptor + 4) = *(s16*)(work + 0x0E);
-        *(u16*)(descriptor + 6) = *(u16*)(work + 0x18) - *(u16*)(work + 0x12) + 20;
-        descriptor[0x16] = 7;
-        descriptor[0x17] = 0xF5;
         *(u32*)(descriptor + 0x1C) = 0;
         *(u32*)(descriptor + 0x20) = 0;
-        *(u32*)(descriptor + 0x28) = 1;
+        descriptor[0x16] = 7;
+        descriptor[0x17] = 0xF5;
         *(float*)(descriptor + 0x34) = lbl_80650584;
         *(u32*)(descriptor + 0x38) = *(u32*)(work + 0x24);
+        *(u32*)(descriptor + 0x28) = 1;
         position1 = *(Vec3f*)(work + 0x2C);
         if (fn_80148008(&position1, key1, descriptor, fn_8019ADE4) != 0) {
             object = fn_80156938();
@@ -103,12 +105,13 @@ void fn_80150400(u8* instance)
 
     if (*(u16*)(instance + 0x132C) == *(u16*)(work + 0x12)) {
         void* optional = 0;
-        if (*(s32*)(work + 0x28) > 0)
+        s32 sound = *(s32*)(work + 0x28);
+        if (sound > 0)
             optional = work;
         fn_80150950(*(s32*)(instance + 0x1324), (Vec3f*)(work + 0x38),
                      *(u16*)(work + 0x1C), *(u16*)(work + 0x14),
                      (s32)*(void**)(work + 0x254), *(u32*)(work + 0x24),
-                     *(u32*)(work + 0x28), optional);
+                     sound, optional);
     } else if (*(u16*)(instance + 0x132C) == *(u16*)(work + 0x12) + 10 && *(s32*)work == 0) {
         *(u32*)key2 = lbl_80651C28;
         *(u16*)(key2 + 4) = lbl_80651C2C;
@@ -153,8 +156,8 @@ void fn_80150400(u8* instance)
             position2.x = object_position->x;
             position2.y = object_position->y;
             position2.z = object_position->z;
-            *(u32*)key3 = *(u32*)(work + 0x258);
-            fn_8014F700(&position2, *(s16*)(work + 0x0C), key3);
+            key4 = *(u32*)(work + 0x258);
+            fn_8014F700(&position2, *(s16*)(work + 0x0C), &key4);
         }
     }
 
