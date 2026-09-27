@@ -27,8 +27,6 @@ extern void* fn_80139B1C(ResourceHeader*, u32, ResourceSource*, int, FileInfo*, 
 extern void fn_8012B408(void*, void*);
 extern void fn_80138624(int, int);
 
-/* NonMatching: complete mapped-resource load, object construction, data
- * layout, cleanup, and parent propagation paths. */
 void fn_801383B4(int slot_index, int mode)
 {
     ResourceSlot* slot = &lbl_8064CFF8[slot_index];
@@ -40,12 +38,11 @@ void fn_801383B4(int slot_index, int mode)
     int data_index;
     int read_size;
     ResourceItem* dest;
-    u8* data;
     ResourceSource* source;
-    ResourceHeader* header;
     FileInfo file;
     int scratch_size;
     int data_offset;
+    u8* data;
 
     if (slot_index <= -1) fn_800467E8();
     if (slot->allocation != 0) return;
@@ -56,24 +53,23 @@ void fn_801383B4(int slot_index, int mode)
     fn_800F9D4C(slot->name, lbl_8024EF08, slot_index);
     read_size = fn_8015D6D0(slot->name, scratch, 0x8000);
     fn_80213394(slot->name, &file);
-    header = (ResourceHeader*)scratch;
     if ((u32)read_size == 0x20) {
-        parent = header->parent;
+        parent = ((ResourceHeader*)scratch)->parent;
     } else if (read_size != 0) {
-        count = header->count;
+        count = ((ResourceHeader*)scratch)->count;
         data_offset = 0;
         data_index = 0;
-        header->items = (ResourceSource*)((u32)header->items + (u32)header);
-        slot->allocation = fn_80138A6C(fn_801382B4(count, header, &data_offset), mode);
+        ((ResourceHeader*)scratch)->items = (ResourceSource*)((u32)((ResourceHeader*)scratch)->items + (u32)(ResourceHeader*)scratch);
+        slot->allocation = fn_80138A6C(fn_801382B4(count, (ResourceHeader*)scratch, &data_offset), mode);
         data = (u8*)slot->allocation + data_offset;
         slot->count = count;
         slot->active = (u8)mode;
         memset(slot->clear, 0, sizeof(slot->clear));
         dest = slot->allocation;
-        source = header->items;
+        source = ((ResourceHeader*)scratch)->items;
         for (i = 0; i < count; i++, source++, dest++) {
             dest->id = source->id;
-            dest->object = fn_80139B1C(header, dest->id, source, mode, &file, source_data);
+            dest->object = fn_80139B1C((ResourceHeader*)scratch, dest->id, source, mode, &file, source_data);
             dest->data = data + data_index * 16;
             data_index += *(u16*)((u8*)dest->object + 0x14);
             fn_8012B408(dest->object, dest->data);

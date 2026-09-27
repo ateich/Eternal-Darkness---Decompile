@@ -10,18 +10,23 @@ extern volatile Slot lbl_805B6F80[];
 extern int lbl_8064D17C;
 
 extern void* memset(void*, int, unsigned int);
-extern int fn_80158E88(short);
+extern int fn_80158E88(int);
 extern void fn_80159E0C(void);
 extern int fn_80159EEC(void);
 
-void fn_80159F34(short current, int count, short* ids)
+static inline void ReadCounters(volatile Slot* slots, int remaining)
+{
+    for (; remaining > 0; remaining--, slots++) {
+        (void)slots->counter;
+    }
+}
+
+void fn_80159F34(int current, int count, short* ids)
 {
     int occupied[4];
     int present[4];
     int i;
     int j;
-    volatile Slot* slot;
-    int remaining;
 
     memset(occupied, 0, sizeof(occupied));
     memset(present, 0, sizeof(present));
@@ -56,8 +61,6 @@ void fn_80159F34(short current, int count, short* ids)
         }
     }
 
-    for (slot = lbl_805B6F80, remaining = lbl_8064D17C; remaining > 0;
-         remaining--, slot++) {
-        slot->counter;
-    }
+    ReadCounters(lbl_805B6F80, lbl_8064D17C);
+
 }

@@ -38,7 +38,7 @@ extern u8 lbl_802FC5BC[];
 
 extern int fn_801EF37C(void);
 extern void* fn_80201B3C(void);
-extern void* fn_80201BC8(void);
+extern void* fn_80201BC8(void*);
 extern int fn_80047178(void);
 extern int fn_8012FA54(void*, int);
 extern void fn_8011F114(Vec3*, void*);
@@ -66,6 +66,7 @@ void fn_801FE56C(void)
     Vec3 target;
     Vec3 fallback_position;
     Vec3 transformed;
+    void* manager;
 
     mask = 0;
     constants = lbl_8023B830;
@@ -74,8 +75,7 @@ void fn_801FE56C(void)
     count = fn_801EF37C();
 
     if (fn_80201B3C() != 0) {
-        fn_80201B3C();
-        player = fn_80201BC8();
+        player = fn_80201BC8(fn_80201B3C());
     } else {
         player = 0;
     }
@@ -100,7 +100,7 @@ void fn_801FE56C(void)
         feature_mask = feature_mask | (u8)0x80;
     }
 
-    for (i = 0; i < count;) {
+    for (i = 0; i < count; i++) {
         Entry* entry = lbl_8063EA00[i];
         Record* record = &entry->record;
         int valid;
@@ -109,27 +109,27 @@ void fn_801FE56C(void)
             break;
         }
         if (!entry->active) {
-            goto next;
+            continue;
         }
         if (!allow_hidden && (entry->flags & 2)) {
-            goto next;
+            continue;
         }
         if (entry->value != lbl_8064D18C) {
-            goto next;
+            continue;
         }
         if (fn_8015E4E8() && entry->type != 7) {
-            goto next;
+            continue;
         }
 
         valid = 1;
-        if (fn_80201B3C() != 0 && (entry->flags & 8)) {
-            fn_80201BC8();
+        if ((manager = fn_80201B3C()) != 0 && (entry->flags & 8)) {
+            fn_80201BC8(manager);
             if (entry->value != fn_8011FB4C()) {
                 valid = 0;
             }
         }
         if (!valid) {
-            goto next;
+            continue;
         }
 
         if (entry->mode == 1) {
@@ -139,8 +139,6 @@ void fn_801FE56C(void)
         }
         mask |= 1 << slot;
         slot++;
-next:
-        i++;
     }
     fn_801F10BC(mask, feature_mask, 1);
 }

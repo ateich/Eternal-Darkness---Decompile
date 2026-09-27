@@ -1,6 +1,3 @@
-/* NonMatching: independent honest-C reconstruction of the volume-ramp
- * dispatcher. The three retail paths deliberately contain separate ramp
- * loops; preserving that source-level shape is important to its codegen. */
 typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned int u32;
@@ -37,8 +34,8 @@ extern void fn_801B7A10(Ramp*);
         if (ramp_duration != 0) {                                             \
             (ramp_)->previous = (ramp_)->current;                             \
             (ramp_)->target = target;                                         \
-            (ramp_)->step = 0.0f;                                             \
-            (ramp_)->reciprocal = 1.0f / (float)ramp_duration;                \
+            (ramp_)->step = 1.0f;                                             \
+            (ramp_)->reciprocal = 1280.0f / (float)ramp_duration;                \
         } else {                                                              \
             (ramp_)->target = target;                                         \
             (ramp_)->current = target;                                        \
@@ -116,8 +113,8 @@ update_type:
         if (ramp_duration != 0) {
             state->ramps[0].previous = state->ramps[0].current;
             state->ramps[0].target = lbl_80650EC8 * (float)amount;
-            state->ramps[0].step = 0.0f;
-            state->ramps[0].reciprocal = 1.0f / (float)ramp_duration;
+            state->ramps[0].step = 1.0f;
+            state->ramps[0].reciprocal = 1280.0f / (float)ramp_duration;
         } else {
             ramp = &state->ramps[0];
             target = lbl_80650EC8 * (float)amount;

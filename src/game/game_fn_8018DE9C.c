@@ -22,12 +22,6 @@ extern void fn_8018865C(void*, void*, void*);
 
 void fn_8018DE9C(u8* object)
 {
-    register u8* vertex_data;
-    register u8* index_data;
-    register u8* color_data;
-    register u8* transform;
-    u8* self;
-    u16* coordinate;
     int i;
     u8 count;
     u16 vertex_size;
@@ -36,7 +30,13 @@ void fn_8018DE9C(u8* object)
     u8* object_data;
     u8* color;
     u16 offset;
+    register u8* vertex_data;
+    register u8* index_data;
+    register u8* color_data;
+    register u8* transform;
+    register u8* self;
 
+    self = object;
     count = object[1];
     offset = *(u16*)(lbl_80607120 + 2);
     transform = object + 0x8C;
@@ -46,7 +46,6 @@ void fn_8018DE9C(u8* object)
     vertex_data = *(u8**)(object + 0x50);
     index_data = *(u8**)(object + 0x54);
     color_data = *(u8**)(object + 0x58);
-    self = object;
     if (lbl_8064D738 != 0) {
         index_data += offset * 4;
         vertex_data += offset * 6;
@@ -54,7 +53,6 @@ void fn_8018DE9C(u8* object)
     }
     object_data = *(u8**)(self + 0x4C);
     color = color_data;
-    coordinate = (u16*)transform;
     i = 0;
     for (; i < count; i++) {
         struct { u32 word; u16 half; } point;
@@ -62,7 +60,7 @@ void fn_8018DE9C(u8* object)
         point.word = lbl_80651D78;
         point.half = lbl_80651D7C;
         shade = (int)((float)i * *(float*)(transform + 0x30)) & 0x3F;
-        fn_8018168C(object_data, &point, (s16)shade, coordinate[7]);
+        fn_8018168C(object_data, &point, (s16)shade, ((u16*)transform)[i + 7]);
         *(s16*)(object_data + 0xE) = *(s16*)(self + 0x14);
         if (fn_80180430(self + 0x24, (u8)i) != 0)
             *(s16*)(object_data + 0xE) += *(s16*)(object_data + 0x14);
@@ -75,7 +73,6 @@ void fn_8018DE9C(u8* object)
         }
         *(u32*)&lbl_80607900[i * 3] = *(u32*)(object_data + 0xA);
         lbl_80607900[i * 3 + 2] = *(u16*)(object_data + 0xE);
-        coordinate++;
         object_data += 0x38;
     }
     fn_8018A574(transform, self, lbl_80607900, (s16*)vertex_data);
