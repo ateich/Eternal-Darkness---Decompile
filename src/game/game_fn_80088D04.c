@@ -7,13 +7,10 @@ typedef struct Global {
     u8* owner;
 } Global;
 
-typedef struct Positions {
-    s16 x[10];
-    s16 y[10];
-    s16 z[10];
-} Positions;
 
-extern Positions lbl_8031D3B8;
+static s16 position_x[10];
+static s16 position_y[10];
+static s16 position_z[10];
 extern Global lbl_80606328;
 extern char lbl_802515D0[];
 extern u8 lbl_8064C91C;
@@ -31,7 +28,6 @@ extern void fn_801A8F08(s16, s16, s16, s16, int, int, int);
 
 void fn_80088D04(void)
 {
-    Positions* positions = &lbl_8031D3B8;
     s16* xs;
     s16* ys;
     s16* zs;
@@ -44,9 +40,9 @@ void fn_80088D04(void)
     count = lbl_8064C91C;
 
     if (flags & 2) {
-        xs = positions->x;
-        ys = positions->y;
-        zs = positions->z;
+        xs = position_x;
+        ys = position_y;
+        zs = position_z;
 
         for (i = 0; i < count; i++) {
             u32 config;

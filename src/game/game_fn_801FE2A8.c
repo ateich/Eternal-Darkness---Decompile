@@ -84,13 +84,8 @@ void fn_801FE2A8(Input* input, u32 id)
 {
     Entry* entry = fn_801FD6F4(id);
     if (entry != 0) {
-        s16 value = input->field30;
-        s16 default_value = lbl_8064D18C;
         s32 mode;
-        if (value != 0) {
-            default_value = value;
-        }
-        entry->field2A = default_value;
+        entry->field2A = input->field30 ? input->field30 : (s16)lbl_8064D18C;
         entry->flags = 0;
         fn_801FD6AC(&entry->record, &input->position, input->color, input->value);
         entry->field24 = input->field28;
@@ -111,7 +106,7 @@ void fn_801FE2A8(Input* input, u32 id)
         entry->field2D = input->field34;
         entry->flags = 4;
         mode = (s8)input->mode;
-        if ((s32)mode == 1) {
+        if (mode == 1) {
             entry->mode = mode;
             entry->copy48 = input->copy48;
         } else {

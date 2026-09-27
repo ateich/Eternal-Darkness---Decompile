@@ -6,7 +6,7 @@ typedef struct Vec4 {
 } Vec4;
 
 extern float fn_8017A574(const Vec4*, const Vec4*);
-extern float fn_8003315C(void);
+extern float fn_8003315C(float);
 extern const float lbl_80650860;
 extern const float lbl_80650878;
 extern const float lbl_806508CC;
@@ -15,20 +15,11 @@ float fn_8017A5A8(const Vec4* left, const Vec4* right, float limit)
 {
     float result = lbl_80650878;
     float dot = fn_8017A574(left, right);
-    float magnitude;
-    float difference = lbl_80650878;
 
-    if (dot < lbl_80650860) {
-        magnitude = -dot;
-    } else {
-        magnitude = (double)dot;
-    }
-
-    difference -= magnitude;
-    if (difference > lbl_806508CC) {
-        float random = fn_8003315C();
-        if (random > limit) {
-            result = limit / random;
+    if (lbl_80650878 - (dot < lbl_80650860 ? -dot : dot) > lbl_806508CC) {
+        float angle = fn_8003315C(dot);
+        if (angle > limit) {
+            result = limit / angle;
         }
     }
 
