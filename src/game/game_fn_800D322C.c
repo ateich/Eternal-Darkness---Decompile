@@ -1,24 +1,15 @@
 typedef signed char s8;
+typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned int u32;
 
-typedef struct Vec3 {
-    u32 x;
-    u32 y;
-    u32 z;
-} Vec3;
+typedef struct Color {
+    u8 r, g, b, a;
+} Color;
 
-typedef struct Initializers {
-    Vec3 first;
-    Vec3 second;
-} Initializers;
-
-typedef struct CallLocals {
-    u32 extra;
-    u32 lower;
-    u32 upper;
-    u32 position_x;
-} CallLocals;
+typedef struct ColorDelta {
+    s8 r, g, b, a;
+} ColorDelta;
 
 typedef struct ActorState {
     char pad_000[0x197];
@@ -26,13 +17,14 @@ typedef struct ActorState {
     int handle;
 } ActorState;
 
-extern u32 lbl_8064F380;
-extern u32 lbl_8064F384;
-extern u32 lbl_8064F388;
-extern u32 lbl_8064F38C;
+extern Color lbl_8064F380;
+extern ColorDelta lbl_8064F384;
+extern ColorDelta lbl_8064F388;
+extern Color lbl_8064F38C;
 
-extern unsigned short fn_8012DBE8(void *, int, u32 *);
-extern void fn_800A1AF0(void *, int, int, int, Vec3 *, u32 *, u32 *, u16);
+extern u16 fn_8012DBE8(u8* owner, u32 index, u8* color);
+extern void fn_800A1AF0(void* object, int index, int active, int copy_values,
+                        Color first, ColorDelta second, Color third, u16 mode);
 extern void fn_800A3C84(void *, int, int, int);
 extern void fn_800CFFFC(void *, ActorState *);
 extern void fn_800A4C98(ActorState *, void *);
@@ -44,32 +36,31 @@ extern void fn_800A4634(ActorState *, void *);
 void fn_800D322C(ActorState *state, void *object, int enabled, int value)
 {
     u16 flags = 0x80;
-    Initializers initializers;
-    volatile CallLocals call;
-    initializers.second.z = lbl_8064F380;
-    initializers.second.x = lbl_8064F384;
-    initializers.first.z = lbl_8064F388;
-    initializers.first.x = lbl_8064F38C;
+    Color disabled_color;
+    ColorDelta delta;
+    ColorDelta disabled_delta;
+    ColorDelta enabled_delta;
+    Color color;
+    Color enabled_color;
+
+    disabled_color = lbl_8064F380;
+    disabled_delta = lbl_8064F384;
+    enabled_delta = lbl_8064F388;
+    enabled_color = lbl_8064F38C;
 
     if (enabled != 0) {
         flags |= 0x32;
-        initializers.first.y = initializers.first.x;
-        initializers.second.y = initializers.first.z;
+        color = enabled_color;
+        delta = enabled_delta;
     } else {
         flags |= 0x12;
-        initializers.first.y = initializers.second.z;
-        initializers.second.y = initializers.second.x;
+        color = disabled_color;
+        delta = disabled_delta;
     }
 
     if (state->handle != -1) {
-        fn_8012DBE8(object, 15, &initializers.first.y);
-        call.lower = initializers.first.y;
-        call.upper = initializers.second.y;
-        call.position_x = initializers.first.y;
-        call.extra = initializers.first.y;
-        fn_800A1AF0(object, state->handle, enabled, value,
-                    (Vec3 *)&call.position_x, (u32 *)&call.upper,
-                    (u32 *)&call.lower, flags);
+        fn_8012DBE8(object, 15, (u8*)&color);
+        fn_800A1AF0(object, state->handle, enabled, value, color, delta, color, flags);
     }
     if (state->active != 0) {
         fn_800A3C84(object, state->handle, enabled, value);
