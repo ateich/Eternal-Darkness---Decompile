@@ -22,7 +22,7 @@ extern int lbl_8064D6A0;
 
 void fn_801EBDDC(Source* source)
 {
-    int offset;
+    int i;
 
     if (lbl_8064D604 == 0)
         return;
@@ -34,14 +34,14 @@ void fn_801EBDDC(Source* source)
     *lbl_8064D604 = source->lower;
     lbl_8064D6A0 = 0;
 
-    for (offset = 0x1FC; offset >= 0; offset -= 2) {
+    for (i = 0xFE; i >= 0; i--) {
         if (lbl_8064D660 == 0) {
             if (lbl_8064D664 == 0) {
                 u16* image;
                 int value;
 
                 image = lbl_8064D604;
-                value = (u8)*image;
+                value = *image & 0xFF;
 
                 if (value <= source->lower) {
                     lbl_8064D65C = source->step;
@@ -59,6 +59,6 @@ void fn_801EBDDC(Source* source)
             lbl_8064D660 = source->delay;
         }
         lbl_8064D660--;
-        *(u16*)((char*)lbl_8064D604 + offset) = *lbl_8064D604;
+        lbl_8064D604[i] = *lbl_8064D604;
     }
 }

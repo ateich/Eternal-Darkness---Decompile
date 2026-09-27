@@ -44,6 +44,11 @@ extern Entry* fn_801697AC(Object*, void*, void*);
 extern void fn_8016057C(Object*, int);
 extern void fn_80161FA0(Object*);
 
+static inline Callback GetSourceCallback(Object* object_)
+{
+    return object_->source;
+}
+
 void fn_80160B18(Object* object, Entry* entry, int amount)
 {
     Callback callback_source;
@@ -65,7 +70,7 @@ void fn_80160B18(Object* object, Entry* entry, int amount)
     holder.value = source;
     entry->fields.value = &holder;
     entry->fields.type = 6;
-    callback_source = object->source;
+    callback_source = GetSourceCallback(object);
     if (callback_source != 0) {
         fn_8016088C(object, entry, callback_source, &lbl_8064BA68);
     }

@@ -25,13 +25,12 @@ void fn_801A36C0(u8* object)
     u16 vertex_size;
     u16 index_size;
     u16 color_size;
+    u8* entries;
     u8* vertex_data;
     u8* index_data;
     u8* color_data;
-    register u8* self;
-    int vertex_offset;
+    u8* self;
     int i;
-    u8* entries;
     u8* color;
     u16 offset;
     int saved;
@@ -54,16 +53,17 @@ void fn_801A36C0(u8* object)
 
     entries = *(u8**)(self + 0x4C);
     color = color_data;
-    for (i = 0, vertex_offset = 0; i < count; i++) {
+    for (i = 0; i < count; i++) {
         int j;
+        int vertex_offset;
         entries[0x21] = (u8)(lbl_80650D34 * *(float*)(self + 0x90));
-        fn_80188C1C(entries, vertex_data + vertex_offset, fn_8018D020);
+        vertex_offset = i * 8;
+        fn_80188C1C(entries, vertex_data + vertex_offset * 3, fn_8018D020);
         for (j = 0; j < entries[0x20]; j++) {
             *(unsigned long*)color = *(unsigned long*)(lbl_802FC5BC + 0xC);
             color += 4;
         }
         entries += 0x38;
-        vertex_offset += 0x18;
     }
 
     DCFlushRange(vertex_data, vertex_size);

@@ -15,7 +15,7 @@ extern int fn_8017FFB8(void), fn_8017FFB0(void), fn_8017FF98(void);
 extern void fn_80225F4C(int, void*, u8);
 extern void fn_8018D2E0(float);
 extern void fn_80226AB4(int, int, u16);
-extern void fn_80188578(int), fn_8018856C(int), fn_80188560(int);
+extern void fn_80188578(unsigned int), fn_8018856C(u16), fn_80188560(u16);
 extern void fn_8018855C(void);
 
 void fn_8018AEB0(u8* object)
@@ -66,9 +66,9 @@ void fn_8018AEB0(u8* object)
         }
         fn_80226AB4(0x80, 5, offset);
         for (i = 0; i < offset; i++) {
-            fn_80188578(i);
-            fn_8018856C(i);
-            fn_80188560(i);
+            fn_80188578((u16)i);
+            fn_8018856C((u16)i);
+            fn_80188560((u16)i);
         }
         fn_8018855C();
         fn_801ED57C(saved);
