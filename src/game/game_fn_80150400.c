@@ -73,7 +73,7 @@ void fn_80150400(u8* instance)
         fn_8019B13C(descriptor);
         descriptor[1] = 1;
         descriptor[2] = 0xF5;
-        descriptor[3] = (u8)-7;
+        *(s8*)(descriptor + 3) = -7;
         *(u16*)(descriptor + 4) = *(s16*)(work + 0x0E);
         *(u16*)(descriptor + 6) = *(u16*)(work + 0x18) - *(u16*)(work + 0x12) + 20;
         descriptor[0x16] = 7;
@@ -94,9 +94,10 @@ void fn_80150400(u8* instance)
         fn_801809B8(*(void**)(work + 0x254), *(u16*)(instance + 0x132C) - (*(u16*)(work + 0x12) - 56));
     }
 
-    if (*(u16*)(instance + 0x132C) >= *(u16*)(work + 0x18) - 50 && *(void**)(work + 0x254) != 0) {
-        u8 value = *(u16*)(work + 0x18) - *(u16*)(instance + 0x132C) - 1;
-        if (value != 0)
+    if (*(u16*)(instance + 0x132C) >= *(u16*)(work + 0x18) - 50) {
+        u8 value = 0 > (*(u16*)(work + 0x18) - *(u16*)(instance + 0x132C) - 1)
+                       ? 0 : (*(u16*)(work + 0x18) - *(u16*)(instance + 0x132C) - 1);
+        if (*(void**)(work + 0x254) != 0 && value != 0)
             fn_801809B8(*(void**)(work + 0x254), value);
     }
 
