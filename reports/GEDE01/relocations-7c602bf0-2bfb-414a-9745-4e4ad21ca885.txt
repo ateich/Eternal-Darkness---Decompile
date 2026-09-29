@@ -1,0 +1,56 @@
+
+build/GEDE01/src/game/game_fn_80207144.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <fn_80207144>:
+   0:	7c 08 02 a6 	mflr    r0
+   4:	90 01 00 04 	stw     r0,4(r1)
+   8:	94 21 ff e8 	stwu    r1,-24(r1)
+   c:	93 e1 00 14 	stw     r31,20(r1)
+  10:	93 c1 00 10 	stw     r30,16(r1)
+  14:	3b c3 00 00 	addi    r30,r3,0
+  18:	3c 60 00 00 	lis     r3,0
+			1a: R_PPC_ADDR16_HA	Ecb_80640AA8
+  1c:	38 03 00 00 	addi    r0,r3,0
+			1e: R_PPC_ADDR16_LO	Ecb_80640AA8
+  20:	57 c4 30 32 	slwi    r4,r30,6
+  24:	38 7e 00 00 	addi    r3,r30,0
+  28:	7f e0 22 14 	add     r31,r0,r4
+  2c:	48 00 00 01 	bl      2c <fn_80207144+0x2c>
+			2c: R_PPC_REL24	__EXIProbe_80206F50
+  30:	2c 03 00 00 	cmpwi   r3,0
+  34:	41 82 00 34 	beq     68 <fn_80207144+0x68>
+  38:	80 1f 00 20 	lwz     r0,32(r31)
+  3c:	2c 00 00 00 	cmpwi   r0,0
+  40:	40 82 00 28 	bne     68 <fn_80207144+0x68>
+  44:	38 7e 00 00 	addi    r3,r30,0
+  48:	38 a1 00 0c 	addi    r5,r1,12
+  4c:	38 80 00 00 	li      r4,0
+  50:	48 00 00 01 	bl      50 <fn_80207144+0x50>
+			50: R_PPC_REL24	fn_80207CC8
+  54:	2c 03 00 00 	cmpwi   r3,0
+  58:	41 82 00 0c 	beq     64 <fn_80207144+0x64>
+  5c:	38 60 00 01 	li      r3,1
+  60:	48 00 00 08 	b       68 <fn_80207144+0x68>
+  64:	38 60 00 00 	li      r3,0
+  68:	2c 03 00 00 	cmpwi   r3,0
+  6c:	41 82 00 0c 	beq     78 <fn_80207144+0x78>
+  70:	38 60 00 01 	li      r3,1
+  74:	48 00 00 28 	b       9c <fn_80207144+0x9c>
+  78:	3c 60 80 00 	lis     r3,-32768
+  7c:	57 c0 10 3a 	slwi    r0,r30,2
+  80:	38 63 30 c0 	addi    r3,r3,12480
+  84:	7c 03 00 2e 	lwzx    r0,r3,r0
+  88:	2c 00 00 00 	cmpwi   r0,0
+  8c:	41 82 00 0c 	beq     98 <fn_80207144+0x98>
+  90:	38 60 00 00 	li      r3,0
+  94:	48 00 00 08 	b       9c <fn_80207144+0x9c>
+  98:	38 60 ff ff 	li      r3,-1
+  9c:	80 01 00 1c 	lwz     r0,28(r1)
+  a0:	83 e1 00 14 	lwz     r31,20(r1)
+  a4:	83 c1 00 10 	lwz     r30,16(r1)
+  a8:	38 21 00 18 	addi    r1,r1,24
+  ac:	7c 08 03 a6 	mtlr    r0
+  b0:	4e 80 00 20 	blr
