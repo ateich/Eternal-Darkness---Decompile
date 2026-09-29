@@ -1,0 +1,423 @@
+Relocation-strict objdiff; left=retail, right=canonical GC/1.3 source object.
+Match: 93.90625%; retail 1664 bytes; generated 1628 bytes.
+Relocation metadata is copied from raw objdiff; numeric target_symbol indexes are ELF symbol indexes.
+
+DIFF_NONE: 0000: stwu r1, -0xa0(r1) | 0000: stwu r1, -0xa0(r1)
+DIFF_NONE: 0004: mflr r0 | 0004: mflr r0
+DIFF_NONE: 0008: stw r0, 0xa4(r1) | 0008: stw r0, 0xa4(r1)
+DIFF_NONE: 000c: stfd f31, 0x90(r1) | 000c: stfd f31, 0x90(r1)
+DIFF_NONE: 0010: psq_st f31, 0x98(r1), 0, qr0 | 0010: psq_st f31, 0x98(r1), 0, qr0
+DIFF_ARG_MISMATCH: 0014: stmw r27, 0x7c(r1) | 0014: stmw r26, 0x78(r1)
+DIFF_ARG_MISMATCH: 0018: mr r30, r3 | 0018: mr r29, r3
+DIFF_NONE: 001c: lis r3, lbl_80255898@ha {"target_symbol": 2, "type": 6, "type_name": "R_PPC_ADDR16_HA"} | 001c: lis r3, lbl_80255898@ha {"target_symbol": 7, "type": 6, "type_name": "R_PPC_ADDR16_HA"}
+DIFF_ARG_MISMATCH: 0020: lbz r4, 0x0(r30) | 0020: lbz r0, 0x0(r29)
+DIFF_NONE: 0024: addi r5, r3, lbl_80255898@l {"target_symbol": 2, "type": 4, "type_name": "R_PPC_ADDR16_LO"} | 0024: addi r5, r3, lbl_80255898@l {"target_symbol": 7, "type": 4, "type_name": "R_PPC_ADDR16_LO"}
+DIFF_ARG_MISMATCH: 0028: addis r29, r5, 0x1 {"addend": "65536", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 0028: addis r30, r5, 0x1 {"addend": "65536", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 002c: li r31, 0x0 | 002c: li r31, 0x0
+DIFF_ARG_MISMATCH: 0030: extsb r4, r4 | 0030: extsb r4, r0
+DIFF_NONE: 0034: subi r0, r4, 0x5c | 0034: subi r0, r4, 0x5c
+DIFF_NONE: 0038: cmplwi r0, 0x22 | 0038: cmplwi r0, 0x22
+DIFF_NONE: 003c: bgt 0x654 | 003c: bgt 0x630
+DIFF_ARG_MISMATCH: 0040: lis r3, jumptable_80264760@ha {"target_symbol": 3, "type": 6, "type_name": "R_PPC_ADDR16_HA"} | 0040: lis r3, @58@ha {"target_symbol": 4, "type": 6, "type_name": "R_PPC_ADDR16_HA"}
+DIFF_NONE: 0044: slwi r0, r0, 2 | 0044: slwi r0, r0, 2
+DIFF_ARG_MISMATCH: 0048: addi r3, r3, jumptable_80264760@l {"target_symbol": 3, "type": 4, "type_name": "R_PPC_ADDR16_LO"} | 0048: addi r3, r3, @58@l {"target_symbol": 4, "type": 4, "type_name": "R_PPC_ADDR16_LO"}
+DIFF_ARG_MISMATCH: 004c: lwzx r0, r3, r0 {"target_symbol": 3, "type_name": "R_PPC_NONE"} | 004c: lwzx r0, r3, r0 {"target_symbol": 4, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 0050: mtctr r0 | 0050: mtctr r0
+DIFF_NONE: 0054: bctr  | 0054: bctr
+DIFF_ARG_MISMATCH: 0058: li r5, 0x0 | 0058: li r3, 0x0
+DIFF_ARG_MISMATCH: 005c: addi r30, r30, 0x1 | 005c: addi r29, r29, 0x1
+DIFF_NONE: 0060: b 0x7c | 0060: b 0x78
+DIFF_NONE: 0064: mulli r31, r31, 0xa | 0064: mulli r31, r31, 0xa
+DIFF_DELETE: 0068: extsb r0, r3 | <gap>
+DIFF_ARG_MISMATCH: 006c: addi r5, r5, 0x1 | 0068: addi r3, r3, 0x1
+DIFF_ARG_MISMATCH: 0070: addi r30, r30, 0x1 | 006c: addi r29, r29, 0x1
+DIFF_ARG_MISMATCH: 0074: add r31, r0, r31 | 0070: add r31, r31, r0
+DIFF_NONE: 0078: subi r31, r31, 0x30 | 0074: subi r31, r31, 0x30
+DIFF_ARG_MISMATCH: 007c: lbz r3, 0x0(r30) | 0078: lbz r0, 0x0(r29)
+DIFF_ARG_MISMATCH: 0080: extsb r0, r3 | 007c: extsb r0, r0
+DIFF_NONE: 0084: cmpwi r0, 0x30 | 0080: cmpwi r0, 0x30
+DIFF_NONE: 0088: blt 0x9c | 0084: blt 0x98
+DIFF_NONE: 008c: cmpwi r0, 0x39 | 0088: cmpwi r0, 0x39
+DIFF_NONE: 0090: bgt 0x9c | 008c: bgt 0x98
+DIFF_ARG_MISMATCH: 0094: cmpwi r5, 0x3 | 0090: cmpwi r3, 0x3
+DIFF_NONE: 0098: blt 0x64 | 0094: blt 0x64
+DIFF_NONE: 009c: cmpwi r4, 0x72 | 0098: cmpwi r4, 0x72
+DIFF_NONE: 00a0: bne 0xb0 | 009c: bne 0xac
+DIFF_NONE: 00a4: lwz r3, lbl_8064D564@sda21 {"target_symbol": 4, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 00a0: lwz r3, lbl_8064D564@sda21 {"target_symbol": 8, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_ARG_MISMATCH: 00a8: addi r30, r30, 0x1 | 00a4: addi r29, r29, 0x1
+DIFF_NONE: 00ac: addi r31, r3, 0x1a | 00a8: addi r31, r3, 0x1a
+DIFF_NONE: 00b0: cmpwi r31, 0x0 | 00ac: cmpwi r31, 0x0
+DIFF_NONE: 00b4: blt 0x25c | 00b0: blt 0x258
+DIFF_NONE: 00b8: cmpwi r31, 0x20 | 00b4: cmpwi r31, 0x20
+DIFF_NONE: 00bc: bge 0x25c | 00b8: bge 0x258
+DIFF_NONE: 00c0: lfs f1, lbl_80651260@sda21 {"target_symbol": 5, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 00bc: lfs f1, lbl_80651260@sda21 {"target_symbol": 9, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 00c4: lfs f0, lbl_8064C314@sda21 {"target_symbol": 6, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 00c0: lfs f0, lbl_8064C314@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 00c8: lwz r3, lbl_8064D570@sda21 {"target_symbol": 7, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 00c4: lwz r3, lbl_8064D570@sda21 {"target_symbol": 11, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 00cc: fmuls f31, f1, f0 | 00c8: fmuls f31, f1, f0
+DIFF_NONE: 00d0: fctiwz f0, f31 | 00cc: fctiwz f0, f31
+DIFF_NONE: 00d4: stfd f0, 0x58(r1) | 00d0: stfd f0, 0x58(r1)
+DIFF_NONE: 00d8: lwz r27, 0x5c(r1) | 00d4: lwz r27, 0x5c(r1)
+DIFF_NONE: 00dc: bl fn_801ED3F4 {"target_symbol": 8, "type": 10, "type_name": "R_PPC_REL24"} | 00d8: bl fn_801ED3F4 {"target_symbol": 24, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_ARG_MISMATCH: 00e0: subi r3, r29, 0x14a0 {"addend": "60256", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 00dc: subi r3, r30, 0x14a0 {"addend": "60256", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 00e4: bl fn_801A8EDC {"target_symbol": 9, "type": 10, "type_name": "R_PPC_REL24"} | 00e0: bl fn_801A8EDC {"target_symbol": 25, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 00e8: lwz r0, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 00e4: lwz r0, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 00ec: addi r3, r1, 0x48 | 00e8: addi r3, r1, 0x48
+DIFF_NONE: 00f0: li r4, 0x0 | 00ec: li r4, 0x0
+DIFF_NONE: 00f4: li r5, 0x1 | 00f0: li r5, 0x1
+DIFF_NONE: 00f8: stw r0, 0x48(r1) | 00f4: stw r0, 0x48(r1)
+DIFF_NONE: 00fc: lis r6, 0x8000 | 00f8: lis r6, 0x8000
+DIFF_NONE: 0100: bl fn_801A852C {"target_symbol": 11, "type": 10, "type_name": "R_PPC_REL24"} | 00fc: bl fn_801A852C {"target_symbol": 26, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 0104: li r0, -0x1 | 0100: li r0, -0x1
+DIFF_NONE: 0108: li r3, 0x80 | 0104: li r3, 0x80
+DIFF_NONE: 010c: stw r0, lbl_8064C320@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0108: stw r0, lbl_8064C320@sda21 {"target_symbol": 13, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0110: li r4, 0x5 | 010c: li r4, 0x5
+DIFF_NONE: 0114: li r5, 0x4 | 0110: li r5, 0x4
+DIFF_NONE: 0118: bl fn_80226AB4 {"target_symbol": 13, "type": 10, "type_name": "R_PPC_REL24"} | 0114: bl fn_80226AB4 {"target_symbol": 27, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 011c: fctiwz f0, f31 | 0118: fctiwz f0, f31
+DIFF_NONE: 0120: lha r4, lbl_8064D578@sda21 {"target_symbol": 14, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 011c: lha r4, lbl_8064D578@sda21 {"target_symbol": 15, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0124: lha r3, lbl_8064D574@sda21 {"target_symbol": 15, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0120: lha r3, lbl_8064D574@sda21 {"target_symbol": 14, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0128: li r5, -0x1 | 0124: li r5, -0x1
+DIFF_NONE: 012c: stfd f0, 0x60(r1) | 0128: stfd f0, 0x60(r1)
+DIFF_NONE: 0130: lwz r0, 0x64(r1) | 012c: lwz r0, 0x64(r1)
+DIFF_NONE: 0134: extsh r28, r0 | 0130: extsh r28, r0
+DIFF_NONE: 0138: add r0, r4, r28 | 0134: add r0, r4, r28
+DIFF_NONE: 013c: extsh r4, r0 | 0138: extsh r4, r0
+DIFF_NONE: 0140: bl fn_801E4198 {"target_symbol": 16, "type": 10, "type_name": "R_PPC_REL24"} | 013c: bl fn_801E4198 {"target_symbol": 28, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_ARG_MISMATCH: 0144: clrlslwi r29, r31, 18, 2 | 0140: clrlslwi r26, r31, 18, 2
+DIFF_ARG_MISMATCH: 0148: addi r0, r29, 0x3 | 0144: addi r0, r26, 0x3
+DIFF_NONE: 014c: clrlwi r3, r0, 16 | 0148: clrlwi r3, r0, 16
+DIFF_NONE: 0150: bl fn_801E418C {"target_symbol": 17, "type": 10, "type_name": "R_PPC_REL24"} | 014c: bl fn_801E418C {"target_symbol": 29, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 0154: lha r3, lbl_8064D574@sda21 {"target_symbol": 15, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0150: lha r3, lbl_8064D574@sda21 {"target_symbol": 14, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0158: li r5, -0x1 | 0154: li r5, -0x1
+DIFF_NONE: 015c: lha r4, lbl_8064D578@sda21 {"target_symbol": 14, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0158: lha r4, lbl_8064D578@sda21 {"target_symbol": 15, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0160: bl fn_801E4198 {"target_symbol": 16, "type": 10, "type_name": "R_PPC_REL24"} | 015c: bl fn_801E4198 {"target_symbol": 28, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_ARG_MISMATCH: 0164: mr r3, r29 | 0160: mr r3, r26
+DIFF_NONE: 0168: bl fn_801E418C {"target_symbol": 17, "type": 10, "type_name": "R_PPC_REL24"} | 0164: bl fn_801E418C {"target_symbol": 29, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 016c: lha r0, lbl_8064D574@sda21 {"target_symbol": 15, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0168: lha r0, lbl_8064D574@sda21 {"target_symbol": 14, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_ARG_MISMATCH: 0170: extsh r27, r27 | 016c: extsh r30, r27
+DIFF_NONE: 0174: lha r4, lbl_8064D578@sda21 {"target_symbol": 14, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0170: lha r4, lbl_8064D578@sda21 {"target_symbol": 15, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0178: li r5, -0x1 | 0174: li r5, -0x1
+DIFF_ARG_MISMATCH: 017c: add r0, r0, r27 | 0178: add r0, r0, r30
+DIFF_NONE: 0180: extsh r3, r0 | 017c: extsh r3, r0
+DIFF_NONE: 0184: bl fn_801E4198 {"target_symbol": 16, "type": 10, "type_name": "R_PPC_REL24"} | 0180: bl fn_801E4198 {"target_symbol": 28, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_ARG_MISMATCH: 0188: addi r0, r29, 0x1 | 0184: addi r0, r26, 0x1
+DIFF_NONE: 018c: clrlwi r3, r0, 16 | 0188: clrlwi r3, r0, 16
+DIFF_NONE: 0190: bl fn_801E418C {"target_symbol": 17, "type": 10, "type_name": "R_PPC_REL24"} | 018c: bl fn_801E418C {"target_symbol": 29, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 0194: lha r3, lbl_8064D574@sda21 {"target_symbol": 15, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0190: lha r3, lbl_8064D574@sda21 {"target_symbol": 14, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0198: li r5, -0x1 | 0194: li r5, -0x1
+DIFF_NONE: 019c: lha r0, lbl_8064D578@sda21 {"target_symbol": 14, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0198: lha r0, lbl_8064D578@sda21 {"target_symbol": 15, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_ARG_MISMATCH: 01a0: add r3, r3, r27 | 019c: add r3, r3, r30
+DIFF_NONE: 01a4: add r0, r0, r28 | 01a0: add r0, r0, r28
+DIFF_NONE: 01a8: extsh r3, r3 | 01a4: extsh r3, r3
+DIFF_NONE: 01ac: extsh r4, r0 | 01a8: extsh r4, r0
+DIFF_NONE: 01b0: bl fn_801E4198 {"target_symbol": 16, "type": 10, "type_name": "R_PPC_REL24"} | 01ac: bl fn_801E4198 {"target_symbol": 28, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_ARG_MISMATCH: 01b4: addi r0, r29, 0x2 | 01b0: addi r0, r26, 0x2
+DIFF_NONE: 01b8: clrlwi r3, r0, 16 | 01b4: clrlwi r3, r0, 16
+DIFF_NONE: 01bc: bl fn_801E418C {"target_symbol": 17, "type": 10, "type_name": "R_PPC_REL24"} | 01b8: bl fn_801E418C {"target_symbol": 29, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 01c0: bl fn_801E4188 {"target_symbol": 18, "type": 10, "type_name": "R_PPC_REL24"} | 01bc: bl fn_801E4188 {"target_symbol": 30, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 01c4: lwz r0, lbl_8064D580@sda21 {"target_symbol": 19, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 01c0: lwz r0, lbl_8064D580@sda21 {"target_symbol": 17, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 01c8: lis r3, lbl_806333C8@ha {"target_symbol": 20, "type": 6, "type_name": "R_PPC_ADDR16_HA"} | 01c4: lis r3, lbl_806333C8@ha {"target_symbol": 16, "type": 6, "type_name": "R_PPC_ADDR16_HA"}
+DIFF_NONE: 01cc: addi r3, r3, lbl_806333C8@l {"target_symbol": 20, "type": 4, "type_name": "R_PPC_ADDR16_LO"} | 01c8: addi r3, r3, lbl_806333C8@l {"target_symbol": 16, "type": 4, "type_name": "R_PPC_ADDR16_LO"}
+DIFF_NONE: 01d0: slwi r0, r0, 2 | 01cc: slwi r0, r0, 2
+DIFF_NONE: 01d4: lwzx r3, r3, r0 {"target_symbol": 20, "type_name": "R_PPC_NONE"} | 01d0: lwzx r3, r3, r0 {"target_symbol": 16, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 01d8: bl fn_801ED3F4 {"target_symbol": 8, "type": 10, "type_name": "R_PPC_REL24"} | 01d4: bl fn_801ED3F4 {"target_symbol": 24, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 01dc: lis r3, lbl_802558E8@ha {"target_symbol": 21, "type": 6, "type_name": "R_PPC_ADDR16_HA"} | 01d8: lis r3, lbl_802558E8@ha {"target_symbol": 18, "type": 6, "type_name": "R_PPC_ADDR16_HA"}
+DIFF_NONE: 01e0: addi r3, r3, lbl_802558E8@l {"target_symbol": 21, "type": 4, "type_name": "R_PPC_ADDR16_LO"} | 01dc: addi r3, r3, lbl_802558E8@l {"target_symbol": 18, "type": 4, "type_name": "R_PPC_ADDR16_LO"}
+DIFF_NONE: 01e4: bl fn_801A8EDC {"target_symbol": 9, "type": 10, "type_name": "R_PPC_REL24"} | 01e0: bl fn_801A8EDC {"target_symbol": 25, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 01e8: lwz r0, lbl_8064D580@sda21 {"target_symbol": 19, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 01e4: lwz r0, lbl_8064D580@sda21 {"target_symbol": 17, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 01ec: lis r3, lbl_806333F0@ha {"target_symbol": 22, "type": 6, "type_name": "R_PPC_ADDR16_HA"} | 01e8: lis r3, lbl_806333F0@ha {"target_symbol": 19, "type": 6, "type_name": "R_PPC_ADDR16_HA"}
+DIFF_NONE: 01f0: lwz r4, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 01ec: lwz r4, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 01f4: addi r5, r3, lbl_806333F0@l {"target_symbol": 22, "type": 4, "type_name": "R_PPC_ADDR16_LO"} | 01f0: addi r5, r3, lbl_806333F0@l {"target_symbol": 19, "type": 4, "type_name": "R_PPC_ADDR16_LO"}
+DIFF_NONE: 01f8: slwi r0, r0, 2 | 01f4: slwi r0, r0, 2
+DIFF_NONE: 01fc: addi r3, r1, 0x44 | 01f8: addi r3, r1, 0x44
+DIFF_NONE: 0200: stw r4, 0x44(r1) | 01fc: stw r4, 0x44(r1)
+DIFF_NONE: 0204: li r4, 0x0 | 0200: li r4, 0x0
+DIFF_NONE: 0208: lwzx r5, r5, r0 {"target_symbol": 22, "type_name": "R_PPC_NONE"} | 0204: lwzx r5, r5, r0 {"target_symbol": 19, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 020c: lis r6, 0x8000 | 0208: lis r6, 0x8000
+DIFF_NONE: 0210: bl fn_801A852C {"target_symbol": 11, "type": 10, "type_name": "R_PPC_REL24"} | 020c: bl fn_801A852C {"target_symbol": 26, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 0214: lwz r3, lbl_8064D59C@sda21 {"target_symbol": 23, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0210: lwz r3, lbl_8064D59C@sda21 {"target_symbol": 20, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0218: lis r0, 0x4330 | 0214: lis r0, 0x4330
+DIFF_NONE: 021c: stw r0, 0x68(r1) | 0218: stw r0, 0x68(r1)
+DIFF_NONE: 0220: add r3, r3, r31 | 021c: add r3, r3, r31
+DIFF_ARG_MISMATCH: 0224: lfd f2, lbl_80651268@sda21 {"target_symbol": 24, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0220: lfd f2, @62@sda21 {"target_symbol": 6, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0228: lbz r0, 0x5(r3) | 0224: lbz r0, 0x5(r3)
+DIFF_NONE: 022c: lfs f0, lbl_8064C314@sda21 {"target_symbol": 6, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0228: lfs f0, lbl_8064C314@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0230: stw r0, 0x6c(r1) | 022c: stw r0, 0x6c(r1)
+DIFF_NONE: 0234: lha r3, lbl_8064D574@sda21 {"target_symbol": 15, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0230: lha r3, lbl_8064D574@sda21 {"target_symbol": 14, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0238: lfd f1, 0x68(r1) | 0234: lfd f1, 0x68(r1)
+DIFF_NONE: 023c: fsubs f1, f1, f2 | 0238: fsubs f1, f1, f2
+DIFF_NONE: 0240: fmuls f0, f1, f0 | 023c: fmuls f0, f1, f0
+DIFF_NONE: 0244: fctiwz f0, f0 | 0240: fctiwz f0, f0
+DIFF_NONE: 0248: stfd f0, 0x70(r1) | 0244: stfd f0, 0x70(r1)
+DIFF_NONE: 024c: lwz r0, 0x74(r1) | 0248: lwz r0, 0x74(r1)
+DIFF_NONE: 0250: add r0, r3, r0 | 024c: add r0, r3, r0
+DIFF_NONE: 0254: sth r0, lbl_8064D574@sda21 {"target_symbol": 15, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0250: sth r0, lbl_8064D574@sda21 {"target_symbol": 14, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0258: b 0x660 | 0254: b 0x63c
+DIFF_NONE: 025c: mr r4, r31 | 0258: mr r4, r31
+DIFF_ARG_MISMATCH: 0260: subi r3, r29, 0x127c {"addend": "60804", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 025c: subi r3, r30, 0x127c {"addend": "60804", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 0264: crclr cr1eq | 0260: crclr cr1eq
+DIFF_NONE: 0268: bl fn_801E7DCC {"target_symbol": 25, "type": 10, "type_name": "R_PPC_REL24"} | 0264: bl fn_801E7DCC {"target_symbol": 31, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 026c: b 0x660 | 0268: b 0x63c
+DIFF_ARG_MISMATCH: 0270: lbz r0, 0x1(r30) | 026c: lbz r0, 0x1(r29)
+DIFF_NONE: 0274: li r4, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0270: li r4, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0278: addi r3, r1, 0x40 | 0274: addi r3, r1, 0x40
+DIFF_NONE: 027c: stb r0, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0278: stb r0, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_ARG_MISMATCH: 0280: lbz r0, 0x2(r30) | 027c: lbz r0, 0x2(r29)
+DIFF_NONE: 0284: stb r0, 0x1(r4) | 0280: stb r0, 0x1(r4)
+DIFF_ARG_MISMATCH: 0288: lbz r0, 0x3(r30) | 0284: lbz r0, 0x3(r29)
+DIFF_NONE: 028c: stb r0, 0x2(r4) | 0288: stb r0, 0x2(r4)
+DIFF_ARG_MISMATCH: 0290: lbz r0, 0x4(r30) | 028c: lbz r0, 0x4(r29)
+DIFF_ARG_MISMATCH: 0294: addi r30, r30, 0x5 | 0290: addi r29, r29, 0x5
+DIFF_NONE: 0298: stb r0, 0x3(r4) | 0294: stb r0, 0x3(r4)
+DIFF_NONE: 029c: lwz r0, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0298: lwz r0, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 02a0: stw r0, 0x40(r1) | 029c: stw r0, 0x40(r1)
+DIFF_NONE: 02a4: bl fn_801ECD74 {"target_symbol": 26, "type": 10, "type_name": "R_PPC_REL24"} | 02a0: bl fn_801ECD74 {"target_symbol": 32, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 02a8: b 0x660 | 02a4: b 0x63c
+DIFF_ARG_MISMATCH: 02ac: lbz r4, 0x1(r30) | 02a8: lbz r0, 0x1(r29)
+DIFF_ARG_MISMATCH: 02b0: extsb r4, r4 | 02ac: extsb r4, r0
+DIFF_NONE: 02b4: subi r0, r4, 0x61 | 02b0: subi r0, r4, 0x61
+DIFF_NONE: 02b8: cmplwi r0, 0x18 | 02b4: cmplwi r0, 0x18
+DIFF_NONE: 02bc: bgt 0x5b8 | 02b8: bgt 0x594
+DIFF_ARG_MISMATCH: 02c0: lis r3, jumptable_802646FC@ha {"target_symbol": 27, "type": 6, "type_name": "R_PPC_ADDR16_HA"} | 02bc: lis r3, @64@ha {"target_symbol": 3, "type": 6, "type_name": "R_PPC_ADDR16_HA"}
+DIFF_NONE: 02c4: slwi r0, r0, 2 | 02c0: slwi r0, r0, 2
+DIFF_ARG_MISMATCH: 02c8: addi r3, r3, jumptable_802646FC@l {"target_symbol": 27, "type": 4, "type_name": "R_PPC_ADDR16_LO"} | 02c4: addi r3, r3, @64@l {"target_symbol": 3, "type": 4, "type_name": "R_PPC_ADDR16_LO"}
+DIFF_ARG_MISMATCH: 02cc: lwzx r0, r3, r0 {"target_symbol": 27, "type_name": "R_PPC_NONE"} | 02c8: lwzx r0, r3, r0 {"target_symbol": 3, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 02d0: mtctr r0 | 02cc: mtctr r0
+DIFF_NONE: 02d4: bctr  | 02d0: bctr
+DIFF_NONE: 02d8: li r0, 0xc8 | 02d4: li r0, 0xc8
+DIFF_NONE: 02dc: li r5, 0x3e | 02d8: li r5, 0x3e
+DIFF_NONE: 02e0: stb r0, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 02dc: stb r0, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 02e4: li r4, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 02e0: li r4, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 02e8: li r0, 0x39 | 02e4: li r0, 0x39
+DIFF_NONE: 02ec: addi r3, r1, 0x3c | 02e8: addi r3, r1, 0x3c
+DIFF_NONE: 02f0: stb r5, 0x1(r4) | 02ec: stb r5, 0x1(r4)
+DIFF_NONE: 02f4: stb r0, 0x2(r4) | 02f0: stb r0, 0x2(r4)
+DIFF_NONE: 02f8: lwz r0, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 02f4: lwz r0, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 02fc: stw r0, 0x3c(r1) | 02f8: stw r0, 0x3c(r1)
+DIFF_NONE: 0300: bl fn_801ECD74 {"target_symbol": 26, "type": 10, "type_name": "R_PPC_REL24"} | 02fc: bl fn_801ECD74 {"target_symbol": 32, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 0304: b 0x5c4 | 0300: b 0x5a0
+DIFF_NONE: 0308: li r5, 0x0 | 0304: li r5, 0x0
+DIFF_NONE: 030c: li r0, 0xe6 | 0308: li r0, 0xe6
+DIFF_NONE: 0310: stb r5, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 030c: stb r5, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0314: li r4, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0310: li r4, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0318: addi r3, r1, 0x38 | 0314: addi r3, r1, 0x38
+DIFF_NONE: 031c: stb r0, 0x1(r4) | 0318: stb r0, 0x1(r4)
+DIFF_NONE: 0320: stb r5, 0x2(r4) | 031c: stb r5, 0x2(r4)
+DIFF_NONE: 0324: lwz r0, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0320: lwz r0, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0328: stw r0, 0x38(r1) | 0324: stw r0, 0x38(r1)
+DIFF_NONE: 032c: bl fn_801ECD74 {"target_symbol": 26, "type": 10, "type_name": "R_PPC_REL24"} | 0328: bl fn_801ECD74 {"target_symbol": 32, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 0330: b 0x5c4 | 032c: b 0x5a0
+DIFF_NONE: 0334: li r5, 0x64 | 0330: li r5, 0x64
+DIFF_NONE: 0338: li r4, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0334: li r4, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 033c: stb r5, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0338: stb r5, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0340: li r0, 0xff | 033c: li r0, 0xff
+DIFF_NONE: 0344: addi r3, r1, 0x34 | 0340: addi r3, r1, 0x34
+DIFF_NONE: 0348: stb r5, 0x1(r4) | 0344: stb r5, 0x1(r4)
+DIFF_NONE: 034c: stb r0, 0x2(r4) | 0348: stb r0, 0x2(r4)
+DIFF_NONE: 0350: lwz r0, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 034c: lwz r0, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0354: stw r0, 0x34(r1) | 0350: stw r0, 0x34(r1)
+DIFF_NONE: 0358: bl fn_801ECD74 {"target_symbol": 26, "type": 10, "type_name": "R_PPC_REL24"} | 0354: bl fn_801ECD74 {"target_symbol": 32, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 035c: b 0x5c4 | 0358: b 0x5a0
+DIFF_NONE: 0360: li r0, 0xaf | 035c: li r0, 0xaf
+DIFF_NONE: 0364: li r5, 0xc8 | 0360: li r5, 0xc8
+DIFF_NONE: 0368: stb r0, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0364: stb r0, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 036c: li r4, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0368: li r4, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0370: li r0, 0xff | 036c: li r0, 0xff
+DIFF_NONE: 0374: addi r3, r1, 0x30 | 0370: addi r3, r1, 0x30
+DIFF_NONE: 0378: stb r5, 0x1(r4) | 0374: stb r5, 0x1(r4)
+DIFF_NONE: 037c: stb r0, 0x2(r4) | 0378: stb r0, 0x2(r4)
+DIFF_NONE: 0380: lwz r0, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 037c: lwz r0, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0384: stw r0, 0x30(r1) | 0380: stw r0, 0x30(r1)
+DIFF_NONE: 0388: bl fn_801ECD74 {"target_symbol": 26, "type": 10, "type_name": "R_PPC_REL24"} | 0384: bl fn_801ECD74 {"target_symbol": 32, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 038c: b 0x5c4 | 0388: b 0x5a0
+DIFF_NONE: 0390: li r0, 0xe6 | 038c: li r0, 0xe6
+DIFF_NONE: 0394: li r4, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0390: li r4, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0398: stb r0, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0394: stb r0, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 039c: addi r3, r1, 0x2c | 0398: addi r3, r1, 0x2c
+DIFF_NONE: 03a0: stb r0, 0x1(r4) | 039c: stb r0, 0x1(r4)
+DIFF_NONE: 03a4: stb r0, 0x2(r4) | 03a0: stb r0, 0x2(r4)
+DIFF_NONE: 03a8: lwz r0, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 03a4: lwz r0, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 03ac: stw r0, 0x2c(r1) | 03a8: stw r0, 0x2c(r1)
+DIFF_NONE: 03b0: bl fn_801ECD74 {"target_symbol": 26, "type": 10, "type_name": "R_PPC_REL24"} | 03ac: bl fn_801ECD74 {"target_symbol": 32, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 03b4: b 0x5c4 | 03b0: b 0x5a0
+DIFF_NONE: 03b8: li r5, 0xe6 | 03b4: li r5, 0xe6
+DIFF_NONE: 03bc: li r4, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 03b8: li r4, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 03c0: stb r5, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 03bc: stb r5, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 03c4: li r0, 0x0 | 03c0: li r0, 0x0
+DIFF_NONE: 03c8: addi r3, r1, 0x28 | 03c4: addi r3, r1, 0x28
+DIFF_NONE: 03cc: stb r5, 0x1(r4) | 03c8: stb r5, 0x1(r4)
+DIFF_NONE: 03d0: stb r0, 0x2(r4) | 03cc: stb r0, 0x2(r4)
+DIFF_NONE: 03d4: lwz r0, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 03d0: lwz r0, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 03d8: stw r0, 0x28(r1) | 03d4: stw r0, 0x28(r1)
+DIFF_NONE: 03dc: bl fn_801ECD74 {"target_symbol": 26, "type": 10, "type_name": "R_PPC_REL24"} | 03d8: bl fn_801ECD74 {"target_symbol": 32, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 03e0: b 0x5c4 | 03dc: b 0x5a0
+DIFF_NONE: 03e4: li r0, 0x82 | 03e0: li r0, 0x82
+DIFF_NONE: 03e8: li r4, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 03e4: li r4, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 03ec: stb r0, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 03e8: stb r0, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 03f0: addi r3, r1, 0x24 | 03ec: addi r3, r1, 0x24
+DIFF_NONE: 03f4: stb r0, 0x1(r4) | 03f0: stb r0, 0x1(r4)
+DIFF_NONE: 03f8: stb r0, 0x2(r4) | 03f4: stb r0, 0x2(r4)
+DIFF_NONE: 03fc: lwz r0, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 03f8: lwz r0, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0400: stw r0, 0x24(r1) | 03fc: stw r0, 0x24(r1)
+DIFF_NONE: 0404: bl fn_801ECD74 {"target_symbol": 26, "type": 10, "type_name": "R_PPC_REL24"} | 0400: bl fn_801ECD74 {"target_symbol": 32, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 0408: b 0x5c4 | 0404: b 0x5a0
+DIFF_DELETE: 040c: addi r6, r5, 0x0 {"target_symbol": 2, "type_name": "R_PPC_NONE"} | <gap>
+DIFF_DELETE: 0410: li r4, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | <gap>
+DIFF_ARG_MISMATCH: 0414: lbz r5, 0x4(r6) {"addend": "4", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 0408: lbz r6, 0x4(r5) {"addend": "4", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_REPLACE: 0418: addi r3, r1, 0x20 | 040c: li r4, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_ARG_MISMATCH: 041c: lbz r0, 0x5(r6) {"addend": "5", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 0410: lbz r0, 0x5(r5) {"addend": "5", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_INSERT: <gap> | 0414: addi r3, r1, 0x20
+DIFF_ARG_MISMATCH: 0420: stb r5, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0418: stb r6, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0424: stb r0, 0x1(r4) | 041c: stb r0, 0x1(r4)
+DIFF_ARG_MISMATCH: 0428: lbz r0, 0x6(r6) {"addend": "6", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 0420: lbz r0, 0x6(r5) {"addend": "6", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 042c: stb r0, 0x2(r4) | 0424: stb r0, 0x2(r4)
+DIFF_NONE: 0430: lwz r0, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0428: lwz r0, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0434: stw r0, 0x20(r1) | 042c: stw r0, 0x20(r1)
+DIFF_NONE: 0438: bl fn_801ECD74 {"target_symbol": 26, "type": 10, "type_name": "R_PPC_REL24"} | 0430: bl fn_801ECD74 {"target_symbol": 32, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 043c: b 0x5c4 | 0434: b 0x5a0
+DIFF_REPLACE: 0440: addi r6, r5, 0x0 {"target_symbol": 2, "type_name": "R_PPC_NONE"} | 0438: lbz r6, 0x8(r5) {"addend": "8", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 0444: li r4, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 043c: li r4, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_ARG_MISMATCH: 0448: lbz r5, 0x8(r6) {"addend": "8", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 0440: lbz r0, 0x9(r5) {"addend": "9", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 044c: addi r3, r1, 0x1c | 0444: addi r3, r1, 0x1c
+DIFF_DELETE: 0450: lbz r0, 0x9(r6) {"addend": "9", "target_symbol": 2, "type_name": "R_PPC_NONE"} | <gap>
+DIFF_ARG_MISMATCH: 0454: stb r5, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0448: stb r6, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0458: stb r0, 0x1(r4) | 044c: stb r0, 0x1(r4)
+DIFF_ARG_MISMATCH: 045c: lbz r0, 0xa(r6) {"addend": "10", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 0450: lbz r0, 0xa(r5) {"addend": "10", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 0460: stb r0, 0x2(r4) | 0454: stb r0, 0x2(r4)
+DIFF_NONE: 0464: lwz r0, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0458: lwz r0, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0468: stw r0, 0x1c(r1) | 045c: stw r0, 0x1c(r1)
+DIFF_NONE: 046c: bl fn_801ECD74 {"target_symbol": 26, "type": 10, "type_name": "R_PPC_REL24"} | 0460: bl fn_801ECD74 {"target_symbol": 32, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 0470: b 0x5c4 | 0464: b 0x5a0
+DIFF_DELETE: 0474: addi r6, r5, 0x0 {"target_symbol": 2, "type_name": "R_PPC_NONE"} | <gap>
+DIFF_DELETE: 0478: li r4, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | <gap>
+DIFF_ARG_MISMATCH: 047c: lbz r5, 0xc(r6) {"addend": "12", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 0468: lbz r6, 0xc(r5) {"addend": "12", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_REPLACE: 0480: addi r3, r1, 0x18 | 046c: li r4, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_ARG_MISMATCH: 0484: lbz r0, 0xd(r6) {"addend": "13", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 0470: lbz r0, 0xd(r5) {"addend": "13", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_INSERT: <gap> | 0474: addi r3, r1, 0x18
+DIFF_ARG_MISMATCH: 0488: stb r5, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0478: stb r6, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 048c: stb r0, 0x1(r4) | 047c: stb r0, 0x1(r4)
+DIFF_ARG_MISMATCH: 0490: lbz r0, 0xe(r6) {"addend": "14", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 0480: lbz r0, 0xe(r5) {"addend": "14", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 0494: stb r0, 0x2(r4) | 0484: stb r0, 0x2(r4)
+DIFF_NONE: 0498: lwz r0, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0488: lwz r0, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 049c: stw r0, 0x18(r1) | 048c: stw r0, 0x18(r1)
+DIFF_NONE: 04a0: bl fn_801ECD74 {"target_symbol": 26, "type": 10, "type_name": "R_PPC_REL24"} | 0490: bl fn_801ECD74 {"target_symbol": 32, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 04a4: b 0x5c4 | 0494: b 0x5a0
+DIFF_INSERT: <gap> | 0498: lbz r6, 0x10(r5) {"addend": "16", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_REPLACE: 04a8: addi r6, r5, 0x0 {"target_symbol": 2, "type_name": "R_PPC_NONE"} | 049c: li r4, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_DELETE: 04ac: li r4, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | <gap>
+DIFF_ARG_MISMATCH: 04b0: lbz r5, 0x10(r6) {"addend": "16", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 04a0: lbz r0, 0x11(r5) {"addend": "17", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 04b4: addi r3, r1, 0x14 | 04a4: addi r3, r1, 0x14
+DIFF_DELETE: 04b8: lbz r0, 0x11(r6) {"addend": "17", "target_symbol": 2, "type_name": "R_PPC_NONE"} | <gap>
+DIFF_ARG_MISMATCH: 04bc: stb r5, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 04a8: stb r6, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 04c0: stb r0, 0x1(r4) | 04ac: stb r0, 0x1(r4)
+DIFF_ARG_MISMATCH: 04c4: lbz r0, 0x12(r6) {"addend": "18", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 04b0: lbz r0, 0x12(r5) {"addend": "18", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 04c8: stb r0, 0x2(r4) | 04b4: stb r0, 0x2(r4)
+DIFF_NONE: 04cc: lwz r0, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 04b8: lwz r0, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 04d0: stw r0, 0x14(r1) | 04bc: stw r0, 0x14(r1)
+DIFF_NONE: 04d4: bl fn_801ECD74 {"target_symbol": 26, "type": 10, "type_name": "R_PPC_REL24"} | 04c0: bl fn_801ECD74 {"target_symbol": 32, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 04d8: b 0x5c4 | 04c4: b 0x5a0
+DIFF_NONE: 04dc: lwz r0, lbl_8064D564@sda21 {"target_symbol": 4, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 04c8: lwz r0, lbl_8064D564@sda21 {"target_symbol": 8, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_DELETE: 04e0: addi r6, r5, 0x14 {"addend": "20", "target_symbol": 2, "type_name": "R_PPC_NONE"} | <gap>
+DIFF_REPLACE: 04e4: addi r5, r5, 0x0 {"target_symbol": 2, "type_name": "R_PPC_NONE"} | 04cc: li r4, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_REPLACE: 04e8: li r4, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 04d0: addi r3, r1, 0x10
+DIFF_NONE: 04ec: mulli r0, r0, 0xc | 04d4: mulli r0, r0, 0xc
+DIFF_REPLACE: 04f0: addi r3, r1, 0x10 | 04d8: add r6, r5, r0 {"target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_REPLACE: 04f4: lwzx r0, r6, r0 {"addend": "20", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 04dc: lwz r0, 0x14(r6) {"addend": "20", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 04f8: slwi r0, r0, 2 | 04e0: slwi r0, r0, 2
+DIFF_NONE: 04fc: lbzx r6, r5, r0 {"target_symbol": 2, "type_name": "R_PPC_NONE"} | 04e4: lbzx r6, r5, r0 {"target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 0500: add r5, r5, r0 {"target_symbol": 2, "type_name": "R_PPC_NONE"} | 04e8: add r5, r5, r0 {"target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 0504: lbz r0, 0x1(r5) {"addend": "1", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 04ec: lbz r0, 0x1(r5) {"addend": "1", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 0508: stb r6, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 04f0: stb r6, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 050c: stb r0, 0x1(r4) | 04f4: stb r0, 0x1(r4)
+DIFF_NONE: 0510: lbz r0, 0x2(r5) {"addend": "2", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 04f8: lbz r0, 0x2(r5) {"addend": "2", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 0514: stb r0, 0x2(r4) | 04fc: stb r0, 0x2(r4)
+DIFF_NONE: 0518: lwz r0, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0500: lwz r0, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 051c: stw r0, 0x10(r1) | 0504: stw r0, 0x10(r1)
+DIFF_NONE: 0520: bl fn_801ECD74 {"target_symbol": 26, "type": 10, "type_name": "R_PPC_REL24"} | 0508: bl fn_801ECD74 {"target_symbol": 32, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 0524: b 0x5c4 | 050c: b 0x5a0
+DIFF_NONE: 0528: lwz r0, lbl_8064D564@sda21 {"target_symbol": 4, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0510: lwz r0, lbl_8064D564@sda21 {"target_symbol": 8, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_DELETE: 052c: addi r5, r5, 0x0 {"target_symbol": 2, "type_name": "R_PPC_NONE"} | <gap>
+DIFF_NONE: 0530: li r4, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0514: li r4, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0534: addi r3, r1, 0xc | 0518: addi r3, r1, 0xc
+DIFF_NONE: 0538: slwi r0, r0, 2 | 051c: slwi r0, r0, 2
+DIFF_NONE: 053c: lbzx r6, r5, r0 {"target_symbol": 2, "type_name": "R_PPC_NONE"} | 0520: lbzx r6, r5, r0 {"target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 0540: add r5, r5, r0 {"target_symbol": 2, "type_name": "R_PPC_NONE"} | 0524: add r5, r5, r0 {"target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 0544: lbz r0, 0x1(r5) {"addend": "1", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 0528: lbz r0, 0x1(r5) {"addend": "1", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 0548: stb r6, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 052c: stb r6, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 054c: stb r0, 0x1(r4) | 0530: stb r0, 0x1(r4)
+DIFF_NONE: 0550: lbz r0, 0x2(r5) {"addend": "2", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 0534: lbz r0, 0x2(r5) {"addend": "2", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 0554: stb r0, 0x2(r4) | 0538: stb r0, 0x2(r4)
+DIFF_NONE: 0558: lwz r0, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 053c: lwz r0, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 055c: stw r0, 0xc(r1) | 0540: stw r0, 0xc(r1)
+DIFF_NONE: 0560: bl fn_801ECD74 {"target_symbol": 26, "type": 10, "type_name": "R_PPC_REL24"} | 0544: bl fn_801ECD74 {"target_symbol": 32, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 0564: b 0x5c4 | 0548: b 0x5a0
+DIFF_NONE: 0568: lwz r0, lbl_8064D564@sda21 {"target_symbol": 4, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 054c: lwz r0, lbl_8064D564@sda21 {"target_symbol": 8, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_REPLACE: 056c: addi r6, r5, 0x14 {"addend": "20", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 0550: li r4, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_REPLACE: 0570: addi r5, r5, 0x0 {"target_symbol": 2, "type_name": "R_PPC_NONE"} | 0554: addi r3, r1, 0x8
+DIFF_DELETE: 0574: li r4, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | <gap>
+DIFF_NONE: 0578: mulli r0, r0, 0xc | 0558: mulli r0, r0, 0xc
+DIFF_DELETE: 057c: addi r3, r1, 0x8 | <gap>
+DIFF_ARG_MISMATCH: 0580: add r6, r6, r0 {"addend": "20", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 055c: add r6, r5, r0 {"target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_ARG_MISMATCH: 0584: lwz r0, 0x8(r6) {"addend": "28", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 0560: lwz r0, 0x1c(r6) {"addend": "28", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 0588: slwi r0, r0, 2 | 0564: slwi r0, r0, 2
+DIFF_NONE: 058c: lbzx r6, r5, r0 {"target_symbol": 2, "type_name": "R_PPC_NONE"} | 0568: lbzx r6, r5, r0 {"target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 0590: add r5, r5, r0 {"target_symbol": 2, "type_name": "R_PPC_NONE"} | 056c: add r5, r5, r0 {"target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 0594: lbz r0, 0x1(r5) {"addend": "1", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 0570: lbz r0, 0x1(r5) {"addend": "1", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 0598: stb r6, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0574: stb r6, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 059c: stb r0, 0x1(r4) | 0578: stb r0, 0x1(r4)
+DIFF_NONE: 05a0: lbz r0, 0x2(r5) {"addend": "2", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 057c: lbz r0, 0x2(r5) {"addend": "2", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 05a4: stb r0, 0x2(r4) | 0580: stb r0, 0x2(r4)
+DIFF_NONE: 05a8: lwz r0, lbl_8064D594@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0584: lwz r0, lbl_8064D594@sda21 {"target_symbol": 12, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 05ac: stw r0, 0x8(r1) | 0588: stw r0, 0x8(r1)
+DIFF_NONE: 05b0: bl fn_801ECD74 {"target_symbol": 26, "type": 10, "type_name": "R_PPC_REL24"} | 058c: bl fn_801ECD74 {"target_symbol": 32, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 05b4: b 0x5c4 | 0590: b 0x5a0
+DIFF_ARG_MISMATCH: 05b8: subi r3, r29, 0x1254 {"addend": "60844", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 0594: subi r3, r30, 0x1254 {"addend": "60844", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 05bc: crclr cr1eq | 0598: crclr cr1eq
+DIFF_NONE: 05c0: bl fn_801E7DCC {"target_symbol": 25, "type": 10, "type_name": "R_PPC_REL24"} | 059c: bl fn_801E7DCC {"target_symbol": 31, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_ARG_MISMATCH: 05c4: addi r30, r30, 0x2 | 05a0: addi r29, r29, 0x2
+DIFF_NONE: 05c8: b 0x660 | 05a4: b 0x63c
+DIFF_NONE: 05cc: li r0, 0x0 | 05a8: li r0, 0x0
+DIFF_ARG_MISMATCH: 05d0: addi r30, r30, 0x1 | 05ac: addi r29, r29, 0x1
+DIFF_NONE: 05d4: stw r0, 0x50(r1) | 05b0: stw r0, 0x50(r1)
+DIFF_ARG_MISMATCH: 05d8: mr r3, r30 | 05b4: mr r3, r29
+DIFF_NONE: 05dc: addi r5, r1, 0x4c | 05b8: addi r5, r1, 0x4c
+DIFF_NONE: 05e0: addi r6, r1, 0x50 | 05bc: addi r6, r1, 0x50
+DIFF_NONE: 05e4: li r4, lbl_8064C324@sda21 {"target_symbol": 28, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 05c0: li r4, lbl_8064C324@sda21 {"target_symbol": 21, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 05e8: crclr cr1eq | 05c4: crclr cr1eq
+DIFF_NONE: 05ec: bl fn_800FBFD0 {"target_symbol": 29, "type": 10, "type_name": "R_PPC_REL24"} | 05c8: bl fn_800FBFD0 {"target_symbol": 33, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 05f0: cmpwi r3, 0x0 | 05cc: cmpwi r3, 0x0
+DIFF_NONE: 05f4: ble 0x61c | 05d0: ble 0x5f8
+DIFF_NONE: 05f8: lfs f1, 0x4c(r1) | 05d4: lfs f1, 0x4c(r1)
+DIFF_NONE: 05fc: lfs f0, lbl_80651264@sda21 {"target_symbol": 30, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 05d8: lfs f0, lbl_80651264@sda21 {"target_symbol": 22, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0600: fcmpo cr0, f1, f0 | 05dc: fcmpo cr0, f1, f0
+DIFF_NONE: 0604: bge 0x610 | 05e0: bge 0x5ec
+DIFF_NONE: 0608: stfs f1, lbl_8064C314@sda21 {"target_symbol": 6, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 05e4: stfs f1, lbl_8064C314@sda21 {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 060c: b 0x61c | 05e8: b 0x5f8
+DIFF_ARG_MISMATCH: 0610: subi r3, r29, 0x1214 {"addend": "60908", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 05ec: subi r3, r30, 0x1214 {"addend": "60908", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 0614: crset cr1eq | 05f0: crset cr1eq
+DIFF_NONE: 0618: bl fn_801E7DCC {"target_symbol": 25, "type": 10, "type_name": "R_PPC_REL24"} | 05f4: bl fn_801E7DCC {"target_symbol": 31, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_NONE: 061c: lwz r0, 0x50(r1) | 05f8: lwz r0, 0x50(r1)
+DIFF_ARG_MISMATCH: 0620: add r30, r30, r0 | 05fc: add r29, r29, r0
+DIFF_NONE: 0624: b 0x660 | 0600: b 0x63c
+DIFF_NONE: 0628: li r0, 0x1 | 0604: li r0, 0x1
+DIFF_NONE: 062c: stw r0, lbl_8064D57C@sda21 {"target_symbol": 31, "type": 109, "type_name": "R_PPC_EMB_SDA21"} | 0608: stw r0, lbl_8064D57C@sda21 {"target_symbol": 23, "type": 109, "type_name": "R_PPC_EMB_SDA21"}
+DIFF_NONE: 0630: b 0x660 | 060c: b 0x63c
+DIFF_ARG_MISMATCH: 0634: lbz r0, 0x1(r30) | 0610: lbz r0, 0x1(r29)
+DIFF_NONE: 0638: extsb r3, r0 | 0614: extsb r3, r0
+DIFF_NONE: 063c: subi r3, r3, 0x30 | 0618: subi r3, r3, 0x30
+DIFF_NONE: 0640: bl fn_801E39A8 {"target_symbol": 32, "type": 10, "type_name": "R_PPC_REL24"} | 061c: bl fn_801E39A8 {"target_symbol": 34, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_ARG_MISMATCH: 0644: addi r30, r30, 0x2 | 0620: addi r29, r29, 0x2
+DIFF_NONE: 0648: b 0x660 | 0624: b 0x63c
+DIFF_ARG_MISMATCH: 064c: addi r30, r30, 0x2 | 0628: addi r29, r29, 0x2
+DIFF_NONE: 0650: b 0x660 | 062c: b 0x63c
+DIFF_ARG_MISMATCH: 0654: subi r3, r29, 0x11d8 {"addend": "60968", "target_symbol": 2, "type_name": "R_PPC_NONE"} | 0630: subi r3, r30, 0x11d8 {"addend": "60968", "target_symbol": 7, "type_name": "R_PPC_NONE"}
+DIFF_NONE: 0658: crclr cr1eq | 0634: crclr cr1eq
+DIFF_NONE: 065c: bl fn_801E7DCC {"target_symbol": 25, "type": 10, "type_name": "R_PPC_REL24"} | 0638: bl fn_801E7DCC {"target_symbol": 31, "type": 10, "type_name": "R_PPC_REL24"}
+DIFF_ARG_MISMATCH: 0660: mr r3, r30 | 063c: mr r3, r29
+DIFF_NONE: 0664: psq_l f31, 0x98(r1), 0, qr0 | 0640: psq_l f31, 0x98(r1), 0, qr0
+DIFF_NONE: 0668: lfd f31, 0x90(r1) | 0644: lfd f31, 0x90(r1)
+DIFF_ARG_MISMATCH: 066c: lmw r27, 0x7c(r1) | 0648: lmw r26, 0x78(r1)
+DIFF_NONE: 0670: lwz r0, 0xa4(r1) | 064c: lwz r0, 0xa4(r1)
+DIFF_NONE: 0674: mtlr r0 | 0650: mtlr r0
+DIFF_NONE: 0678: addi r1, r1, 0xa0 | 0654: addi r1, r1, 0xa0
+DIFF_NONE: 067c: blr  | 0658: blr

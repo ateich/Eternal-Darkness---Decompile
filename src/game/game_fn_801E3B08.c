@@ -22,7 +22,9 @@ extern int lbl_8064C320;
 extern char lbl_8064C324;
 extern float lbl_80651260;
 extern float lbl_80651264;
-extern u8 lbl_80255898[];
+/* Retail block: five RGBA colors, then five three-word lookup rows. */
+typedef struct TextPalette { Color colors[5]; u32 lookup[5][3]; } TextPalette;
+extern TextPalette lbl_80255898;
 extern u8 lbl_802558E8[];
 
 extern void fn_801E4188(void);
@@ -40,10 +42,11 @@ extern void fn_801E7DCC(char*, ...);
 /* NonMatching: complete retail-backed control-sequence reconstruction. */
 char* fn_801E3B08(char* text)
 {
-    int command = (s8)*text;
+    s8 command = (s8)*text;
     int value = 0;
-    u8* palette = lbl_80255898;
-    u8* diagnostics = lbl_80255898 + 0x10000;
+    u8* diagnostics = (u8*)&lbl_80255898 + 0x10000;
+    int consumed;
+    float scale;
     Color glyph_color, restored_color, raw_color;
     Color named_r, named_g, named_b, named_l, named_w, named_y, named_f;
     Color named_c, named_u, named_x, named_m, named_s, named_a, named_d;
@@ -52,7 +55,7 @@ char* fn_801E3B08(char* text)
     case 'h': {
         int digits = 0;
         text++;
-        while (*text >= '0' && *text <= '9' && digits < 3) {
+        while ((s8)*text >= '0' && (s8)*text <= '9' && digits < 3) {
             value *= 10;
             value += (s8)*text;
             digits++;
@@ -71,8 +74,9 @@ char* fn_801E3B08(char* text)
             text++;
         }
         if (value >= 0 && value < 32) {
+            /* Width is converted before the renderer calls; height stays float. */
+            raw_size = (int)(lbl_80651260 * lbl_8064C314);
             glyph_scale = lbl_80651260 * lbl_8064C314;
-            raw_size = (int)glyph_scale;
             fn_801ED3F4(lbl_8064D570);
             fn_801A8EDC(diagnostics - 0x14a0);
             glyph_color = lbl_8064D594;
@@ -94,7 +98,7 @@ char* fn_801E3B08(char* text)
             fn_801A8EDC(lbl_802558E8);
             restored_color = lbl_8064D594;
             fn_801A852C(&restored_color, 0, lbl_806333F0[lbl_8064D580], 0x80000000);
-            lbl_8064D574 += (s16)(lbl_8064C314 * lbl_8064D59C->widths[value]);
+            lbl_8064D574 += (s16)(lbl_8064D59C->widths[value] * lbl_8064C314);
         } else {
             fn_801E7DCC((char*)diagnostics - 0x127c, value);
         }
@@ -109,7 +113,7 @@ char* fn_801E3B08(char* text)
         break;
     }
     case '\\': {
-        switch (text[1]) {
+        switch ((s8)text[1]) {
         case 'r': {
             lbl_8064D594.r = 200; lbl_8064D594.g = 62; lbl_8064D594.b = 57;
             named_r = lbl_8064D594; fn_801ECD74(&named_r);
@@ -146,40 +150,51 @@ char* fn_801E3B08(char* text)
             break;
         }
         case 'c': {
-            lbl_8064D594.r = palette[4]; lbl_8064D594.g = palette[5]; lbl_8064D594.b = palette[6];
+            lbl_8064D594.r = lbl_80255898.colors[1].r;
+            lbl_8064D594.g = lbl_80255898.colors[1].g;
+            lbl_8064D594.b = lbl_80255898.colors[1].b;
             named_c = lbl_8064D594; fn_801ECD74(&named_c);
             break;
         }
         case 'u': {
-            lbl_8064D594.r = palette[8]; lbl_8064D594.g = palette[9]; lbl_8064D594.b = palette[10];
+            lbl_8064D594.r = lbl_80255898.colors[2].r;
+            lbl_8064D594.g = lbl_80255898.colors[2].g;
+            lbl_8064D594.b = lbl_80255898.colors[2].b;
             named_u = lbl_8064D594; fn_801ECD74(&named_u);
             break;
         }
         case 'x': {
-            lbl_8064D594.r = palette[12]; lbl_8064D594.g = palette[13]; lbl_8064D594.b = palette[14];
+            lbl_8064D594.r = lbl_80255898.colors[3].r;
+            lbl_8064D594.g = lbl_80255898.colors[3].g;
+            lbl_8064D594.b = lbl_80255898.colors[3].b;
             named_x = lbl_8064D594; fn_801ECD74(&named_x);
             break;
         }
         case 'm': {
-            lbl_8064D594.r = palette[16]; lbl_8064D594.g = palette[17]; lbl_8064D594.b = palette[18];
+            lbl_8064D594.r = lbl_80255898.colors[4].r;
+            lbl_8064D594.g = lbl_80255898.colors[4].g;
+            lbl_8064D594.b = lbl_80255898.colors[4].b;
             named_m = lbl_8064D594; fn_801ECD74(&named_m);
             break;
         }
         case 's': {
-            u8* source = palette + *(u32*)(palette + 0x14 + lbl_8064D564 * 12) * 4;
-            lbl_8064D594.r = source[0]; lbl_8064D594.g = source[1]; lbl_8064D594.b = source[2];
+            lbl_8064D594.r = lbl_80255898.colors[lbl_80255898.lookup[lbl_8064D564][0]].r;
+            lbl_8064D594.g = lbl_80255898.colors[lbl_80255898.lookup[lbl_8064D564][0]].g;
+            lbl_8064D594.b = lbl_80255898.colors[lbl_80255898.lookup[lbl_8064D564][0]].b;
             named_s = lbl_8064D594; fn_801ECD74(&named_s);
             break;
         }
         case 'a': {
-            u8* source = palette + lbl_8064D564 * 4;
-            lbl_8064D594.r = source[0]; lbl_8064D594.g = source[1]; lbl_8064D594.b = source[2];
+            lbl_8064D594.r = lbl_80255898.colors[lbl_8064D564].r;
+            lbl_8064D594.g = lbl_80255898.colors[lbl_8064D564].g;
+            lbl_8064D594.b = lbl_80255898.colors[lbl_8064D564].b;
             named_a = lbl_8064D594; fn_801ECD74(&named_a);
             break;
         }
         case 'd': {
-            u8* source = palette + *(u32*)(palette + 0x1c + lbl_8064D564 * 12) * 4;
-            lbl_8064D594.r = source[0]; lbl_8064D594.g = source[1]; lbl_8064D594.b = source[2];
+            lbl_8064D594.r = lbl_80255898.colors[lbl_80255898.lookup[lbl_8064D564][2]].r;
+            lbl_8064D594.g = lbl_80255898.colors[lbl_80255898.lookup[lbl_8064D564][2]].g;
+            lbl_8064D594.b = lbl_80255898.colors[lbl_80255898.lookup[lbl_8064D564][2]].b;
             named_d = lbl_8064D594; fn_801ECD74(&named_d);
             break;
         }
@@ -191,8 +206,7 @@ char* fn_801E3B08(char* text)
         break;
     }
     case 's': {
-        float scale;
-        int consumed = 0;
+        consumed = 0;
         text++;
         if (fn_800FBFD0(text, &lbl_8064C324, &scale, &consumed) > 0) {
             if (scale < lbl_80651264) lbl_8064C314 = scale;
