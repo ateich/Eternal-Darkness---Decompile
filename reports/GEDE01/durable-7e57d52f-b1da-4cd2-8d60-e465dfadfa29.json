@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "7e57d52f-b1da-4cd2-8d60-e465dfadfa29",
+  "attempt": 3,
+  "base_commit": "4232dd3c5d83ba747b8022ceba244a3bb75e2d34",
+  "target": "fn_801A1E14",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-7e57d52f-b1da-4cd2-8d60-e465dfadfa29.json"
+  ],
+  "divergence": "Fresh canonical relocation-strict objdiff is 64.33846%: retail and generated .text are both 260 bytes and both have five .text relocations (60-byte .rela.text sections), improving the preserved 10.846154%/440-byte attempt. Function-scoped GC/1.3 optimization level 2 suppresses the prior two-way unroll, and explicit integer-to-double bias construction targets lbl_80650D20 instead of local @14. Remaining codegen differs because generated loads lbl_80650D1C at +0x14 instead of retail +0x08, uses state/entry registers r6/r7 instead of r7/r8, emits fsub plus frsp instead of retail fsubs, loads lbl_80607440 inside the loop body at +0x9c/+0xa0 instead of the retail preheader at +0x80/+0x84, and lowers the loop as compare/branch rather than retail mtctr/bdnz. Relocation targets and addends agree by name, but four relocation addresses consequently differ; only the fn_801A1F8C call relocation agrees at +0xf0."
+}
