@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "assignment_id": "dc942500-a78a-4187-a459-e0d747e95e14",
+  "attempt": 5,
+  "base_commit": "48577de4b88327210deb8ca1ce4312ea6ee1e09c",
+  "target": "fn_802076C4",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-dc942500-a78a-4187-a459-e0d747e95e14.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-dc942500-a78a-4187-a459-e0d747e95e14-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/configure-dc942500-a78a-4187-a459-e0d747e95e14.log",
+    "eternal-darkness-decomp/reports/GEDE01/build-dc942500-a78a-4187-a459-e0d747e95e14.log",
+    "eternal-darkness-decomp/reports/GEDE01/dol-sha1-dc942500-a78a-4187-a459-e0d747e95e14.log",
+    "eternal-darkness-decomp/reports/GEDE01/legal-audit-dc942500-a78a-4187-a459-e0d747e95e14.log",
+    "eternal-darkness-decomp/reports/GEDE01/fndiff-dc942500-a78a-4187-a459-e0d747e95e14.log",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-dc942500-a78a-4187-a459-e0d747e95e14.txt",
+    "eternal-darkness-decomp/reports/GEDE01/verification-dc942500-a78a-4187-a459-e0d747e95e14.log",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-dc942500-a78a-4187-a459-e0d747e95e14.log",
+    "eternal-darkness-decomp/reports/GEDE01/notes-dc942500-a78a-4187-a459-e0d747e95e14.txt"
+  ],
+  "best_score": 99.231346,
+  "relocation_strict_score": 99.231346,
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "divergence": "Canonical and relocation-strict objdiff both measure 99.231346%. Retail and generated text are both 536 bytes. Inlining the local C completion helper removes the previous extra zero initialization and restores all branch and relocation offsets. Exactly 21 instruction words remain different: 18 instructions swap the length and buffer registers (retail length r4/buffer r7, generated length r7/buffer r4), at offsets 0xA8, 0xAC, 0xB8, 0xC8, 0xCC, 0xFC, 0x110, 0x120, 0x134, 0x148, 0x158, 0x170, 0x17C, 0x180, 0x18C, 0x190, 0x1A8 and 0x1AC; three context-address instructions at 0x1C4, 0x1CC and 0x1E8 use r1+0x18 instead of retail r1+0x20. Stack-frame size and saved-register offsets match. All seven relocation offsets, targets, types and addends match. The source remains NonMatching; the verified DOL uses its retail split object."
+}

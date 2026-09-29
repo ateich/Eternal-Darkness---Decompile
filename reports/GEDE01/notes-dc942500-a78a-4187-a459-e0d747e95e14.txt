@@ -1,0 +1,48 @@
+Assignment dc942500-a78a-4187-a459-e0d747e95e14, attempt 5
+Target: fn_802076C4 / TCIntrruptHandler_802076C4
+Accepted base: 48577de4b88327210deb8ca1ce4312ea6ee1e09c
+
+The accepted base already contains the source from preserved attempt
+f5dee850-3f06-4f8d-96a0-8004d8f6eb92 (commit a9b82671ba498b6ede5830626d83aacb40d6fac4).
+Reviewed that source, envelope, raw instruction diff and relocation tables using
+git show, plus the earlier c32a3e86 source and the supplied prior diagnoses.
+No historical source or report was blindly cherry-picked over the accepted base.
+
+New compiler/codegen hypothesis: the transfer completion logic was optimized
+as an inlined C helper. Inlining exposes its loop-index zero to a later common
+subexpression pass, allowing reuse of the callback-reset zero. This is distinct
+from the previous absolute-register-address and SDK-field-layout hypotheses.
+The preserved local static inline CompleteTransfer helper is private to this
+single translation unit. The canonical compiler emits only the assigned handler,
+not an additional out-of-line function. There is no assembly or shared helper.
+
+Experiments covered declaration scopes and ordering, length-check forms,
+initialization order, parameter/local placement, copy-only and completion-helper
+inlining, register qualifiers and context size. Raw instruction comparisons for
+the recorded variants are in the experiments log. Early zero initialization
+without a helper changed the loop unrolling and was rejected. Context size
+reduction changed the frame size and was rejected. No compiler flags, policy,
+registration gates or neighboring functions changed. Only the best final C
+reconstruction is retained; it remains registered NonMatching.
+
+The best final canonical and relocation-strict scores are both 99.231346%, up
+from the accepted source's 99.04478%. Both objects contain 536 text bytes: the
+extra zero initialization is gone, channel-offset register coloring matches,
+and every branch and relocation offset aligns. The remaining 21 differing
+instruction words consist of 18 uses of the swapped length/buffer registers
+(retail length r4 and buffer r7; generated length r7 and buffer r4), plus three
+OSContext addresses using r1+0x18 rather than retail r1+0x20. The stack frame
+size and saved-register offsets match. The raw fndiff and byte comparison in
+the verification log identify all differing offsets.
+
+All seven relocation offsets, types, target symbols and addends match exactly.
+Canonical objdiff uses no extra config; strict objdiff explicitly uses
+-c function_reloc_diffs=name_address. Both raw JSON reports are preserved.
+The compiler invocation in verification.log records GC/1.2.5n and the unmodified
+canonical flags. The raw symbol table confirms just one emitted function.
+
+python3 configure.py and .tools/bin/ninja -j2 completed successfully. The measured
+DOL SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f. As this source remains
+NonMatching, the DOL links the original split object for this function; this
+DOL hash is a build-integrity check, not a claim that the C reconstruction matches.
+The assignment has no permission blocker and finishes as attempted.

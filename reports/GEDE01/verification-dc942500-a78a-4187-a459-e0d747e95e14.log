@@ -1,0 +1,54 @@
+$ build/tools/objdiff-cli diff -p . -u main/game/game_fn_802076C4 TCIntrruptHandler_802076C4 -o reports/GEDE01/objdiff-dc942500-a78a-4187-a459-e0d747e95e14.json --format json-pretty
+ INFO Writing to reports/GEDE01/objdiff-dc942500-a78a-4187-a459-e0d747e95e14.json
+Exit code: 0
+objdiff-dc942500-a78a-4187-a459-e0d747e95e14.json left: size=536 match_percent=99.231346
+objdiff-dc942500-a78a-4187-a459-e0d747e95e14.json right: size=536 match_percent=99.231346
+$ build/tools/objdiff-cli diff -p . -u main/game/game_fn_802076C4 TCIntrruptHandler_802076C4 -o reports/GEDE01/objdiff-dc942500-a78a-4187-a459-e0d747e95e14-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address
+ INFO Writing to reports/GEDE01/objdiff-dc942500-a78a-4187-a459-e0d747e95e14-reloc-strict.json
+Exit code: 0
+objdiff-dc942500-a78a-4187-a459-e0d747e95e14-reloc-strict.json left: size=536 match_percent=99.231346
+objdiff-dc942500-a78a-4187-a459-e0d747e95e14-reloc-strict.json right: size=536 match_percent=99.231346
+$ .tools/bin/ninja -t commands build/GEDE01/src/game/game_fn_802076C4.o
+"/usr/bin/python3" tools/download_tool.py sjiswrap build/tools/sjiswrap.exe --tag v1.2.2
+tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.2.5n/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -MMD -c src/game/game_fn_802076C4.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_802076C4.d build/GEDE01/src/game/game_fn_802076C4.d
+
+Exit code: 0
+Raw .text comparison: retail=536 generated=536 identical=False
+0x0a8: retail=809f0010 generated=80ff0010
+0x0ac: retail=2c040000 generated=2c070000
+0x0b8: retail=80ff0014 generated=809f0014
+0x0c8: retail=2c040008 generated=2c070008
+0x0cc: retail=3864fff8 generated=3867fff8
+0x0fc: retail=99070000 generated=99040000
+0x110: retail=98670001 generated=98640001
+0x120: retail=98070002 generated=98040002
+0x134: retail=99870003 generated=99840003
+0x148: retail=99670004 generated=99640004
+0x158: retail=99470005 generated=99440005
+0x170: retail=99270006 generated=99240006
+0x17c: retail=99070007 generated=99040007
+0x180: retail=38e70008 generated=38840008
+0x18c: retail=7c052050 generated=7c053850
+0x190: retail=7c052000 generated=7c053800
+0x1a8: retail=98070000 generated=98040000
+0x1ac: retail=38e70001 generated=38840001
+0x1c4: retail=38610020 generated=38610018
+0x1cc: retail=38610020 generated=38610018
+0x1e8: retail=38610020 generated=38610018
+NonMatching registration retained: verified DOL links the retail split object for this function.
+
+$ readelf -sW eternal-darkness-decomp/build/GEDE01/src/game/game_fn_802076C4.o
+
+Symbol table '.symtab' contains 8 entries:
+   Num:    Value  Size Type    Bind   Vis      Ndx Name
+     0: 00000000     0 NOTYPE  LOCAL  DEFAULT  UND 
+     1: 00000000     0 FILE    LOCAL  DEFAULT  ABS game_fn_802076C4.c
+     2: 00000000     0 SECTION LOCAL  DEFAULT    1 .text
+     3: 00000000   536 FUNC    LOCAL  DEFAULT    1 TCIntrruptHandler_802076C4
+     4: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND Ecb_80640AA8
+     5: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND __OSMaskInterrupts
+     6: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND OSClearContext
+     7: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND OSSetCurrentContext
+Exit code: 0
+
+Source-only git diff --cached --check: exit 0. Raw logs retain tool-produced trailing spaces and linker CRLF output; the all-files whitespace check therefore flags those raw artifacts.
