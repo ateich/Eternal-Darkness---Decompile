@@ -13,7 +13,7 @@ commits are not visible here. This file is the durable record of who did what.
 
 ## Andrew ([@ateich](https://github.com/ateich))
 
-**554 functions, 181,468 matched code bytes.**
+**624 functions, 213,164 matched code bytes.**
 
 ### Script handlers and narrowed values ([#1](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/1), [#2](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/2), [#3](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/3)) — 6 functions, 7,488 bytes
 
@@ -401,3 +401,23 @@ in the landing evidence.
 | `fn_8008E430` | 576 |
 | `fn_8015BDF0` | 560 |
 | _63 more_ | 14,288 |
+
+### Late-September matching batches ([#27](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/27), [#28](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/28), [#29](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/29)) — 70 functions, 31,696 bytes
+
+These three batches recover interfaces, structure layouts, source expression
+shape, data ownership, and narrow MWCC settings across game, runtime, SDK, and
+audio code. PR #27 also reconstructs the original multi-function translation
+unit for `0x80158794`–`0x80159630`, which is required for MWCC to reproduce the
+retail global-data layout used by `fn_80159440`.
+
+| Pull request | Functions | Bytes | Focus |
+| --- | ---: | ---: | --- |
+| [#27](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/27) | 22 | 13,252 | Calls, loop forms, constants, and translation-unit data layout |
+| [#28](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/28) | 20 | 6,804 | By-value colors, call arguments, static data, and build flags |
+| [#29](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/29) | 28 | 11,640 | Struct layouts, value passing, declarations, SDK/reference forms, and timers |
+| **Total** | **70** | **31,696** | |
+
+Andrew's original commits and authorship are preserved in the integration
+history. The batches were reconciled onto the current tree and accepted only
+after the canonical build, relocation-strict comparisons, legal audit, and
+whole-DOL SHA-1 gate passed together.
