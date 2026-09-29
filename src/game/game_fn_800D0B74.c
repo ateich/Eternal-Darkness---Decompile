@@ -41,13 +41,19 @@ extern void fn_801A7228(int);
 extern void fn_800A2D1C(ActorState *);
 extern void fn_801557C4(void *, int);
 extern void fn_800CD094(void *, void *, int);
+extern void *fn_800A2018(ActorState *, u16);
+extern void fn_800A2B8C(void *, void *);
+extern void fn_800D38CC(ActorState *, float *);
+extern void fn_800A2E00(ActorState *, int, int);
 extern int lbl_8064D5A8;
+extern int lbl_8064D180;
 
 /*
  * Honest-C work in progress for the 9,520-byte actor event dispatcher.  The
  * common setup and the complete early event-3, event-1, event-8, event-0xED,
- * and event-0x3A paths are recovered here; the many later event branches remain
- * to be expressed before this can be considered for a matching build.
+ * event-0x3A, and event-0x3E paths are recovered here; the many later event
+ * branches remain to be expressed before this can be considered for a matching
+ * build.
  */
 int fn_800D0B74(void *object, int alternate, void *event, int value)
 {
@@ -132,6 +138,22 @@ int fn_800D0B74(void *object, int alternate, void *event, int value)
         int event_arg1 = fn_80200C28(event);
         fn_8020123C(0x27, fn_80200C20(event), event_arg1, event_arg2);
         fn_801A7228(fn_80200C38(event));
+        return 1;
+    }
+
+    if (alternate == 0 && kind == 0x3E) {
+        if (*(u8 *)((u8 *)state + 0x287) == 0) {
+            *(u8 *)((u8 *)state + 0x287) = 1;
+            fn_800A2B8C(object,
+                         fn_800A2018(state, *(u16 *)((u8 *)state + 0x86)));
+            fn_800D38CC(state, position);
+            fn_800A2E00(state, object_id, 0x319);
+        } else if ((*(u8 *)((u8 *)state + 0x2A2) & 0x80) == 0 &&
+                   lbl_8064D180 == 0x53) {
+            *(u16 *)((u8 *)state + 0x284) = 0xD2;
+            fn_80201D2C(object, 1);
+            fn_80201D14(object, 1);
+        }
         return 1;
     }
 
