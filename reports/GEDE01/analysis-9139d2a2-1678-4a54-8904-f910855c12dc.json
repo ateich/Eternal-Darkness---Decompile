@@ -1,0 +1,3394 @@
+{
+  "assignment_id": "9139d2a2-1678-4a54-8904-f910855c12dc",
+  "target": "fn_801D8E40",
+  "canonical_compiler": "GC/1.3",
+  "compiler_policy_changed": false,
+  "registration": "Existing independent NonMatching translation unit; configure.py and splits.txt unchanged.",
+  "source_sha256": "d9352eb24ee0d4349c9d90698a600681e18f6ded94b3b33d79f8fff794d37e77",
+  "preserved_attempts_studied": [
+    "762f9967284deafc558992deea48bae06a254f95",
+    "72a84656fa99e8814cbcd3162eaf1b02bf6d4ba3"
+  ],
+  "base_reconciliation": "Accepted HEAD was the specified base and its source already equaled the strongest preserved source. No historical report was substituted for newly measured evidence.",
+  "new_hypothesis": "The 0xBC subobject is a shared typed container: two 0x4D0 template buffers, seven effect pointers at +0x9A0, seven 0xC4 attachment records at +0x9BC, and seven child pointers at +0xF18. Recovering both constructor arms with this container allows GC/1.3 to share pointer induction, generate the retail FPR lifetimes, and recover the frame. Separate state-150 color locals account for the remaining stack slots.",
+  "recovered_behavior": [
+    "State 30: direction and particle descriptor setup, trigonometric ring positions, object creation, child descriptor setup, per-particle child linkage, failure cleanup, effect storage and sound update.",
+    "State 110: attachment allocation and initialization, effect ownership transfer, subject lookup, failure logging and resource cleanup, child callback and attachment linkage.",
+    "Timer loads are performed again after external calls, matching retail. Cleanup flag getter/setter use byte width. State 150 retains fn_8012F58C(actor, 15, 0, 0, 0, 4)."
+  ],
+  "experiments": [
+    {
+      "variant": "preserved index-based partial reconstruction",
+      "score": 54.79627,
+      "bytes": 1648
+    },
+    {
+      "variant": "recover state 110 with a 0xC4 attachment record and correct timer/flag loads",
+      "score": 72.11334,
+      "bytes": 2128
+    },
+    {
+      "variant": "also recover state 30; use readonly constant declarations",
+      "score": 95.46198,
+      "bytes": 2796
+    },
+    {
+      "variant": "shared typed effect container and independent color-local scopes",
+      "score": 98.79197,
+      "bytes": 2788
+    },
+    {
+      "variant": "separate case-110 subject local and changed initialization order",
+      "score": 98.64706,
+      "bytes": 2788
+    },
+    {
+      "variant": "reverse color assignments with original declaration order; descriptor byte assignment order; widen case-32 indices",
+      "score": 98.7231,
+      "bytes": 2784
+    },
+    {
+      "variant": "retain shared subject, isolate case-150 actor, restore halfword indices",
+      "score": 99.14634,
+      "bytes": 2788
+    },
+    {
+      "variant": "inline helper returning attachment handle",
+      "score": 97.5538,
+      "bytes": 2792,
+      "retained": false
+    },
+    {
+      "variant": "move subobject initialization after subject lookup and use signed locals with unsigned call parameters",
+      "score": 98.68723,
+      "bytes": 2788,
+      "retained": false
+    },
+    {
+      "variant": "capture subject ID before lookup and reuse owner as submission descriptor",
+      "score": 99.14634,
+      "bytes": 2788,
+      "retained": false
+    },
+    {
+      "variant": "separate case-110 subject with isolated case-150 actor",
+      "score": 98.74462,
+      "bytes": 2788,
+      "retained": false
+    },
+    {
+      "variant": "final: consistent signed halfword resource indices, based on fn_801D3A34 extsh return",
+      "score": 99.14634,
+      "bytes": 2788,
+      "retained": true
+    }
+  ],
+  "dol_interpretation": "The candidate remains NonMatching. A verified full-build DOL uses the existing retail object for this unit and establishes link integrity, not a claim that this C reconstruction is byte-matched.",
+  "remaining_divergence": "The subobject addi is scheduled ahead of the subject-id load. State 32 has an extra register move for the first resource index. State 110 keeps the subject in r27 instead of r20, uses r28 instead of r27 for induction, and retains the attachment descriptor in r20 instead of r21/r19; state 150 uses r20 instead of r19. The compiler-generated signed-conversion bias @233 has two relocations instead of lbl_80651110. The 0x230 frame, r19-r31/f28-f31 saves, function size, instruction count, and relocation count match. No externalization or binary patching was added.",
+  "canonical": {
+    "left": {
+      "bytes": 2788,
+      "instruction_count": 697,
+      "relocation_count": 125,
+      "match_percent": 99.14634,
+      "diff_kinds": {
+        "DIFF_NONE": 658,
+        "DIFF_INSERT": 2,
+        "DIFF_DELETE": 2,
+        "DIFF_ARG_MISMATCH": 37
+      }
+    },
+    "right": {
+      "bytes": 2788,
+      "instruction_count": 697,
+      "relocation_count": 125,
+      "match_percent": 99.14634,
+      "diff_kinds": {
+        "DIFF_NONE": 658,
+        "DIFF_INSERT": 2,
+        "DIFF_DELETE": 2,
+        "DIFF_ARG_MISMATCH": 37
+      }
+    }
+  },
+  "objdiff": {
+    "left": {
+      "bytes": 2788,
+      "instruction_count": 697,
+      "relocation_count": 125,
+      "match_percent": 99.14634,
+      "diff_kinds": {
+        "DIFF_NONE": 658,
+        "DIFF_INSERT": 2,
+        "DIFF_DELETE": 2,
+        "DIFF_ARG_MISMATCH": 37
+      }
+    },
+    "right": {
+      "bytes": 2788,
+      "instruction_count": 697,
+      "relocation_count": 125,
+      "match_percent": 99.14634,
+      "diff_kinds": {
+        "DIFF_NONE": 658,
+        "DIFF_INSERT": 2,
+        "DIFF_DELETE": 2,
+        "DIFF_ARG_MISMATCH": 37
+      }
+    }
+  },
+  "aligned_differences": [
+    {
+      "retail": {
+        "diff_kind": "DIFF_INSERT"
+      },
+      "generated": {
+        "diff_kind": "DIFF_INSERT",
+        "instruction": {
+          "address": "56",
+          "size": 4,
+          "formatted": "addi r23, r31, 0xbc",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "addi",
+                "opcode": 263
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r23"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r31"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "188"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_DELETE",
+        "instruction": {
+          "address": "60",
+          "size": 4,
+          "formatted": "addi r23, r31, 0xbc",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "addi",
+                "opcode": 263
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r23"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r31"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "188"
+              }
+            }
+          ]
+        }
+      },
+      "generated": {
+        "diff_kind": "DIFF_DELETE"
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "484",
+          "size": 4,
+          "formatted": "lfd f2, lbl_80651110@sda21",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "lfd",
+                "opcode": 457
+              }
+            },
+            {
+              "arg": {
+                "opaque": "f2"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "reloc": true
+              }
+            },
+            {
+              "basic": "@sda21"
+            }
+          ],
+          "relocation": {
+            "type": 109,
+            "type_name": "R_PPC_EMB_SDA21",
+            "target_symbol": 18
+          }
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 0
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "484",
+          "size": 4,
+          "formatted": "lfd f2, @233@sda21",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "lfd",
+                "opcode": 457
+              }
+            },
+            {
+              "arg": {
+                "opaque": "f2"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "reloc": true
+              }
+            },
+            {
+              "basic": "@sda21"
+            }
+          ],
+          "relocation": {
+            "type": 109,
+            "type_name": "R_PPC_EMB_SDA21",
+            "target_symbol": 3
+          }
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 0
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "880",
+          "size": 4,
+          "formatted": "lfd f30, lbl_80651110@sda21",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "lfd",
+                "opcode": 457
+              }
+            },
+            {
+              "arg": {
+                "opaque": "f30"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "reloc": true
+              }
+            },
+            {
+              "basic": "@sda21"
+            }
+          ],
+          "relocation": {
+            "type": 109,
+            "type_name": "R_PPC_EMB_SDA21",
+            "target_symbol": 18
+          }
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 0
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "880",
+          "size": 4,
+          "formatted": "lfd f30, @233@sda21",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "lfd",
+                "opcode": 457
+              }
+            },
+            {
+              "arg": {
+                "opaque": "f30"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "reloc": true
+              }
+            },
+            {
+              "basic": "@sda21"
+            }
+          ],
+          "relocation": {
+            "type": 109,
+            "type_name": "R_PPC_EMB_SDA21",
+            "target_symbol": 3
+          }
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 0
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "1424",
+          "size": 4,
+          "formatted": "mr r20, r3",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 1
+          },
+          {}
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "1424",
+          "size": 4,
+          "formatted": "mr r0, r3",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 1
+          },
+          {}
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_INSERT"
+      },
+      "generated": {
+        "diff_kind": "DIFF_INSERT",
+        "instruction": {
+          "address": "1432",
+          "size": 4,
+          "formatted": "mr r19, r0",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r19"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "1448",
+          "size": 4,
+          "formatted": "mr r7, r20",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r7"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 1
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "1452",
+          "size": 4,
+          "formatted": "mr r7, r19",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r7"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r19"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 2
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "1884",
+          "size": 4,
+          "formatted": "mr. r20, r3",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr.",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 1
+          },
+          {}
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "1888",
+          "size": 4,
+          "formatted": "mr. r27, r3",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr.",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r27"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 3
+          },
+          {}
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "1912",
+          "size": 4,
+          "formatted": "li r27, 0x0",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "li",
+                "opcode": 263
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r27"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "0"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 2
+          },
+          {}
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "1916",
+          "size": 4,
+          "formatted": "li r28, 0x0",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "li",
+                "opcode": 263
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r28"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "0"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 4
+          },
+          {}
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "1940",
+          "size": 4,
+          "formatted": "stw r3, 0xa7c(r25)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stw",
+                "opcode": 443
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "2684"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r25"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 3
+          },
+          {},
+          {}
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "1944",
+          "size": 4,
+          "formatted": "stw r19, 0xa7c(r25)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stw",
+                "opcode": 443
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r19"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "2684"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r25"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 2
+          },
+          {},
+          {}
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "1948",
+          "size": 4,
+          "formatted": "addi r21, r25, 0x9bc",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "addi",
+                "opcode": 263
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r21"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r25"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "2492"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 4
+          },
+          {},
+          {}
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "1952",
+          "size": 4,
+          "formatted": "addi r20, r25, 0x9bc",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "addi",
+                "opcode": 263
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r25"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "2492"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 5
+          },
+          {},
+          {}
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "1952",
+          "size": 4,
+          "formatted": "mr r3, r21",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r21"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 4
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "1956",
+          "size": 4,
+          "formatted": "mr r3, r20",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "1960",
+          "size": 4,
+          "formatted": "mr r3, r21",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r21"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 4
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "1964",
+          "size": 4,
+          "formatted": "mr r3, r20",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "1980",
+          "size": 4,
+          "formatted": "stb r0, 0xbc(r21)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stb",
+                "opcode": 445
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "188"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r21"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 4
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "1984",
+          "size": 4,
+          "formatted": "stb r0, 0xbc(r20)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stb",
+                "opcode": 445
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "188"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "1996",
+          "size": 4,
+          "formatted": "stw r0, 0xa8(r21)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stw",
+                "opcode": 443
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "168"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r21"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 4
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2000",
+          "size": 4,
+          "formatted": "stw r0, 0xa8(r20)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stw",
+                "opcode": 443
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "168"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2004",
+          "size": 4,
+          "formatted": "mr r3, r21",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r21"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 4
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2008",
+          "size": 4,
+          "formatted": "mr r3, r20",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2020",
+          "size": 4,
+          "formatted": "stw r19, 0xc(r21)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stw",
+                "opcode": 443
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r19"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "12"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r21"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 4
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2024",
+          "size": 4,
+          "formatted": "stw r19, 0xc(r20)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stw",
+                "opcode": 443
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r19"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "12"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2088",
+          "size": 4,
+          "formatted": "stb r0, 0x14(r21)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stb",
+                "opcode": 445
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "20"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r21"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 4
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2092",
+          "size": 4,
+          "formatted": "stb r0, 0x14(r20)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stb",
+                "opcode": 445
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "20"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2104",
+          "size": 4,
+          "formatted": "stb r3, 0x16(r21)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stb",
+                "opcode": 445
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "22"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r21"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 4
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2108",
+          "size": 4,
+          "formatted": "stb r3, 0x16(r20)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stb",
+                "opcode": 445
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "22"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2112",
+          "size": 4,
+          "formatted": "stb r5, 0x15(r21)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stb",
+                "opcode": 445
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r5"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "21"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r21"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 4
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2116",
+          "size": 4,
+          "formatted": "stb r5, 0x15(r20)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stb",
+                "opcode": 445
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r5"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "21"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2116",
+          "size": 4,
+          "formatted": "stb r4, 0x17(r21)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stb",
+                "opcode": 445
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "23"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r21"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 4
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2120",
+          "size": 4,
+          "formatted": "stb r4, 0x17(r20)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stb",
+                "opcode": 445
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "23"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2124",
+          "size": 4,
+          "formatted": "stw r4, 0x28(r21)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stw",
+                "opcode": 443
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "40"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r21"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 4
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2128",
+          "size": 4,
+          "formatted": "stw r4, 0x28(r20)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stw",
+                "opcode": 443
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "40"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2128",
+          "size": 4,
+          "formatted": "stw r0, 0x2c(r21)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stw",
+                "opcode": 443
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "44"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r21"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 4
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2132",
+          "size": 4,
+          "formatted": "stw r0, 0x2c(r20)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stw",
+                "opcode": 443
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "44"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_DELETE",
+        "instruction": {
+          "address": "2176",
+          "size": 4,
+          "formatted": "mr r3, r20",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            }
+          ]
+        }
+      },
+      "generated": {
+        "diff_kind": "DIFF_DELETE"
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2180",
+          "size": 4,
+          "formatted": "mr r19, r21",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r19"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r21"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 5
+          },
+          {
+            "diff_index": 4
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2180",
+          "size": 4,
+          "formatted": "mr r3, r27",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r27"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 6
+          },
+          {
+            "diff_index": 3
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2216",
+          "size": 4,
+          "formatted": "lwz r3, 0xc0(r19)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "lwz",
+                "opcode": 439
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "192"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r19"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2216",
+          "size": 4,
+          "formatted": "lwz r3, 0xc0(r20)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "lwz",
+                "opcode": 439
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "192"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2228",
+          "size": 4,
+          "formatted": "stw r0, 0xc0(r19)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stw",
+                "opcode": 443
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "192"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r19"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2228",
+          "size": 4,
+          "formatted": "stw r0, 0xc0(r20)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stw",
+                "opcode": 443
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "192"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2236",
+          "size": 4,
+          "formatted": "lwz r5, 0xc0(r19)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "lwz",
+                "opcode": 439
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r5"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "192"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r19"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2236",
+          "size": 4,
+          "formatted": "lwz r5, 0xc0(r20)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "lwz",
+                "opcode": 439
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r5"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "192"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2240",
+          "size": 4,
+          "formatted": "mr r4, r19",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r19"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2240",
+          "size": 4,
+          "formatted": "mr r4, r20",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2248",
+          "size": 4,
+          "formatted": "mr. r21, r3",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr.",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r21"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 4
+          },
+          {}
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2248",
+          "size": 4,
+          "formatted": "mr. r19, r3",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr.",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r19"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 2
+          },
+          {}
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2276",
+          "size": 4,
+          "formatted": "mr r4, r21",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r21"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 4
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2276",
+          "size": 4,
+          "formatted": "mr r4, r19",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r19"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 2
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2288",
+          "size": 4,
+          "formatted": "lwz r3, 0xc0(r19)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "lwz",
+                "opcode": 439
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "192"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r19"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2288",
+          "size": 4,
+          "formatted": "lwz r3, 0xc0(r20)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "lwz",
+                "opcode": 439
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "192"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2300",
+          "size": 4,
+          "formatted": "stw r0, 0xc0(r19)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stw",
+                "opcode": 443
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "192"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r19"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2300",
+          "size": 4,
+          "formatted": "stw r0, 0xc0(r20)",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "stw",
+                "opcode": 443
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "192"
+              }
+            },
+            {
+              "basic": "("
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            },
+            {
+              "basic": ")"
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2312",
+          "size": 4,
+          "formatted": "addi r27, r27, 0x1",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "addi",
+                "opcode": 263
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r27"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r27"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "1"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 2
+          },
+          {
+            "diff_index": 2
+          },
+          {}
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2312",
+          "size": 4,
+          "formatted": "addi r28, r28, 0x1",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "addi",
+                "opcode": 263
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r28"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r28"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "1"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 4
+          },
+          {
+            "diff_index": 4
+          },
+          {}
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2316",
+          "size": 4,
+          "formatted": "cmpw r27, r26",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "cmpw",
+                "opcode": 304
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r27"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r26"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 2
+          },
+          {}
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2316",
+          "size": 4,
+          "formatted": "cmpw r28, r26",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "cmpw",
+                "opcode": 304
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r28"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r26"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 4
+          },
+          {}
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2368",
+          "size": 4,
+          "formatted": "mr. r19, r3",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr.",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r19"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 5
+          },
+          {}
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2368",
+          "size": 4,
+          "formatted": "mr. r20, r3",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr.",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 5
+          },
+          {}
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2452",
+          "size": 4,
+          "formatted": "mr r3, r19",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r19"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2452",
+          "size": 4,
+          "formatted": "mr r3, r20",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2508",
+          "size": 4,
+          "formatted": "mr r3, r19",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r19"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2508",
+          "size": 4,
+          "formatted": "mr r3, r20",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2564",
+          "size": 4,
+          "formatted": "mr r3, r19",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r19"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2564",
+          "size": 4,
+          "formatted": "mr r3, r20",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2620",
+          "size": 4,
+          "formatted": "mr r3, r19",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r19"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2620",
+          "size": 4,
+          "formatted": "mr r3, r20",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2668",
+          "size": 4,
+          "formatted": "mr r3, r19",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r19"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      },
+      "generated": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "2668",
+          "size": 4,
+          "formatted": "mr r3, r20",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mr",
+                "opcode": 357
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r20"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 5
+          }
+        ]
+      }
+    }
+  ]
+}
