@@ -1,0 +1,526 @@
+Script started on 2026-09-29 18:37:26-04:00 [COMMAND="build/binutils/powerpc-eabi-objdump -dr build/GEDE01/obj/auto_03_80207CC8_text.o" <not executed on terminal>]
+
+build/GEDE01/obj/auto_03_80207CC8_text.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <fn_80207CC8>:
+   0:	7c 08 02 a6 	mflr    r0
+   4:	90 01 00 04 	stw     r0,4(r1)
+   8:	94 21 ff c0 	stwu    r1,-64(r1)
+   c:	bf 01 00 20 	stmw    r24,32(r1)
+  10:	3b 43 00 00 	addi    r26,r3,0
+  14:	3c 60 00 00 	lis     r3,0
+			16: R_PPC_ADDR16_HA	Ecb_80640AA8
+  18:	2c 1a 00 02 	cmpwi   r26,2
+  1c:	57 46 30 32 	slwi    r6,r26,6
+  20:	38 03 00 00 	addi    r0,r3,0
+			22: R_PPC_ADDR16_LO	Ecb_80640AA8
+  24:	7f e0 32 14 	add     r31,r0,r6
+  28:	3b 64 00 00 	addi    r27,r4,0
+  2c:	3b 85 00 00 	addi    r28,r5,0
+  30:	40 80 00 e0 	bge     110 <fn_80207CC8+0x110>
+  34:	28 1b 00 00 	cmplwi  r27,0
+  38:	40 82 00 d8 	bne     110 <fn_80207CC8+0x110>
+  3c:	7f 43 d3 78 	mr      r3,r26
+  40:	48 00 00 01 	bl      40 <fn_80207CC8+0x40>
+			40: R_PPC_REL24	__EXIProbe_80206F50
+  44:	2c 03 00 00 	cmpwi   r3,0
+  48:	40 82 00 0c 	bne     54 <fn_80207CC8+0x54>
+  4c:	38 60 00 00 	li      r3,0
+  50:	48 00 03 18 	b       368 <fn_80207CC8+0x368>
+  54:	3c 60 80 00 	lis     r3,-32768
+  58:	80 9f 00 20 	lwz     r4,32(r31)
+  5c:	57 40 10 3a 	slwi    r0,r26,2
+  60:	3b c3 30 c0 	addi    r30,r3,12480
+  64:	7f de 02 14 	add     r30,r30,r0
+  68:	80 1e 00 00 	lwz     r0,0(r30)
+  6c:	7c 04 00 00 	cmpw    r4,r0
+  70:	40 82 00 14 	bne     84 <fn_80207CC8+0x84>
+  74:	80 1f 00 1c 	lwz     r0,28(r31)
+  78:	90 1c 00 00 	stw     r0,0(r28)
+  7c:	80 7f 00 20 	lwz     r3,32(r31)
+  80:	48 00 02 e8 	b       368 <fn_80207CC8+0x368>
+  84:	48 00 00 01 	bl      84 <fn_80207CC8+0x84>
+			84: R_PPC_REL24	OSDisableInterrupts
+  88:	80 1f 00 0c 	lwz     r0,12(r31)
+  8c:	3b a3 00 00 	addi    r29,r3,0
+  90:	54 00 07 39 	rlwinm. r0,r0,0,28,28
+  94:	40 82 00 14 	bne     a8 <fn_80207CC8+0xa8>
+  98:	7f 43 d3 78 	mr      r3,r26
+  9c:	48 00 00 01 	bl      9c <fn_80207CC8+0x9c>
+			9c: R_PPC_REL24	__EXIProbe_80206F50
+  a0:	2c 03 00 00 	cmpwi   r3,0
+  a4:	40 82 00 14 	bne     b8 <fn_80207CC8+0xb8>
+  a8:	7f a3 eb 78 	mr      r3,r29
+  ac:	48 00 00 01 	bl      ac <fn_80207CC8+0xac>
+			ac: R_PPC_REL24	OSRestoreInterrupts
+  b0:	38 00 00 00 	li      r0,0
+  b4:	48 00 00 48 	b       fc <fn_80207CC8+0xfc>
+  b8:	38 7a 00 00 	addi    r3,r26,0
+  bc:	38 80 00 01 	li      r4,1
+  c0:	38 a0 00 00 	li      r5,0
+  c4:	38 c0 00 00 	li      r6,0
+  c8:	48 00 00 01 	bl      c8 <fn_80207CC8+0xc8>
+			c8: R_PPC_REL24	fn_80206E8C
+  cc:	1c 1a 00 03 	mulli   r0,r26,3
+  d0:	38 80 00 00 	li      r4,0
+  d4:	3c 60 00 10 	lis     r3,16
+  d8:	90 9f 00 08 	stw     r4,8(r31)
+  dc:	7c 63 04 30 	srw     r3,r3,r0
+  e0:	48 00 00 01 	bl      e0 <fn_80207CC8+0xe0>
+			e0: R_PPC_REL24	__OSUnmaskInterrupts
+  e4:	80 1f 00 0c 	lwz     r0,12(r31)
+  e8:	38 7d 00 00 	addi    r3,r29,0
+  ec:	60 00 00 08 	ori     r0,r0,8
+  f0:	90 1f 00 0c 	stw     r0,12(r31)
+  f4:	48 00 00 01 	bl      f4 <fn_80207CC8+0xf4>
+			f4: R_PPC_REL24	OSRestoreInterrupts
+  f8:	38 00 00 01 	li      r0,1
+  fc:	2c 00 00 00 	cmpwi   r0,0
+ 100:	40 82 00 0c 	bne     10c <fn_80207CC8+0x10c>
+ 104:	38 60 00 00 	li      r3,0
+ 108:	48 00 02 60 	b       368 <fn_80207CC8+0x368>
+ 10c:	83 be 00 00 	lwz     r29,0(r30)
+ 110:	2c 1a 00 02 	cmpwi   r26,2
+ 114:	38 00 00 00 	li      r0,0
+ 118:	40 80 00 10 	bge     128 <fn_80207CC8+0x128>
+ 11c:	28 1b 00 00 	cmplwi  r27,0
+ 120:	40 82 00 08 	bne     128 <fn_80207CC8+0x128>
+ 124:	38 00 00 01 	li      r0,1
+ 128:	2c 00 00 00 	cmpwi   r0,0
+ 12c:	41 82 00 10 	beq     13c <fn_80207CC8+0x13c>
+ 130:	3c 60 00 00 	lis     r3,0
+			132: R_PPC_ADDR16_HA	fn_80207CA0
+ 134:	38 a3 00 00 	addi    r5,r3,0
+			136: R_PPC_ADDR16_LO	fn_80207CA0
+ 138:	48 00 00 08 	b       140 <fn_80207CC8+0x140>
+ 13c:	38 a0 00 00 	li      r5,0
+ 140:	38 7a 00 00 	addi    r3,r26,0
+ 144:	38 9b 00 00 	addi    r4,r27,0
+ 148:	48 00 00 01 	bl      148 <fn_80207CC8+0x148>
+			148: R_PPC_REL24	EXILock
+ 14c:	7c 60 00 34 	cntlzw  r0,r3
+ 150:	54 00 d9 7e 	srwi    r0,r0,5
+ 154:	7c 1e 03 79 	mr.     r30,r0
+ 158:	40 82 01 34 	bne     28c <fn_80207CC8+0x28c>
+ 15c:	38 7a 00 00 	addi    r3,r26,0
+ 160:	38 9b 00 00 	addi    r4,r27,0
+ 164:	38 a0 00 00 	li      r5,0
+ 168:	48 00 00 01 	bl      168 <fn_80207CC8+0x168>
+			168: R_PPC_REL24	EXISelect
+ 16c:	7c 60 00 34 	cntlzw  r0,r3
+ 170:	54 00 d9 7e 	srwi    r0,r0,5
+ 174:	7c 1e 03 79 	mr.     r30,r0
+ 178:	40 82 00 90 	bne     208 <fn_80207CC8+0x208>
+ 17c:	38 00 00 00 	li      r0,0
+ 180:	90 01 00 1c 	stw     r0,28(r1)
+ 184:	38 7a 00 00 	addi    r3,r26,0
+ 188:	38 81 00 1c 	addi    r4,r1,28
+ 18c:	38 a0 00 02 	li      r5,2
+ 190:	38 c0 00 01 	li      r6,1
+ 194:	38 e0 00 00 	li      r7,0
+ 198:	48 00 00 01 	bl      198 <fn_80207CC8+0x198>
+			198: R_PPC_REL24	EXIImm
+ 19c:	7c 60 00 34 	cntlzw  r0,r3
+ 1a0:	54 00 d9 7e 	srwi    r0,r0,5
+ 1a4:	38 7a 00 00 	addi    r3,r26,0
+ 1a8:	7f de 03 78 	or      r30,r30,r0
+ 1ac:	48 00 00 01 	bl      1ac <fn_80207CC8+0x1ac>
+			1ac: R_PPC_REL24	EXISync
+ 1b0:	7c 60 00 34 	cntlzw  r0,r3
+ 1b4:	54 00 d9 7e 	srwi    r0,r0,5
+ 1b8:	38 7a 00 00 	addi    r3,r26,0
+ 1bc:	38 9c 00 00 	addi    r4,r28,0
+ 1c0:	7f de 03 78 	or      r30,r30,r0
+ 1c4:	38 a0 00 04 	li      r5,4
+ 1c8:	38 c0 00 00 	li      r6,0
+ 1cc:	38 e0 00 00 	li      r7,0
+ 1d0:	48 00 00 01 	bl      1d0 <fn_80207CC8+0x1d0>
+			1d0: R_PPC_REL24	EXIImm
+ 1d4:	7c 60 00 34 	cntlzw  r0,r3
+ 1d8:	54 00 d9 7e 	srwi    r0,r0,5
+ 1dc:	38 7a 00 00 	addi    r3,r26,0
+ 1e0:	7f de 03 78 	or      r30,r30,r0
+ 1e4:	48 00 00 01 	bl      1e4 <fn_80207CC8+0x1e4>
+			1e4: R_PPC_REL24	EXISync
+ 1e8:	7c 60 00 34 	cntlzw  r0,r3
+ 1ec:	54 00 d9 7e 	srwi    r0,r0,5
+ 1f0:	38 7a 00 00 	addi    r3,r26,0
+ 1f4:	7f de 03 78 	or      r30,r30,r0
+ 1f8:	48 00 00 01 	bl      1f8 <fn_80207CC8+0x1f8>
+			1f8: R_PPC_REL24	EXIDeselect
+ 1fc:	7c 60 00 34 	cntlzw  r0,r3
+ 200:	54 00 d9 7e 	srwi    r0,r0,5
+ 204:	7f de 03 78 	or      r30,r30,r0
+ 208:	48 00 00 01 	bl      208 <fn_80207CC8+0x208>
+			208: R_PPC_REL24	OSDisableInterrupts
+ 20c:	80 1f 00 0c 	lwz     r0,12(r31)
+ 210:	3b 03 00 00 	addi    r24,r3,0
+ 214:	54 00 06 f7 	rlwinm. r0,r0,0,27,27
+ 218:	40 82 00 10 	bne     228 <fn_80207CC8+0x228>
+ 21c:	7f 03 c3 78 	mr      r3,r24
+ 220:	48 00 00 01 	bl      220 <fn_80207CC8+0x220>
+			220: R_PPC_REL24	OSRestoreInterrupts
+ 224:	48 00 00 68 	b       28c <fn_80207CC8+0x28c>
+ 228:	80 1f 00 0c 	lwz     r0,12(r31)
+ 22c:	38 7a 00 00 	addi    r3,r26,0
+ 230:	38 9f 00 00 	addi    r4,r31,0
+ 234:	54 00 07 34 	rlwinm  r0,r0,0,28,26
+ 238:	90 1f 00 0c 	stw     r0,12(r31)
+ 23c:	48 00 00 01 	bl      23c <fn_80207CC8+0x23c>
+			23c: R_PPC_REL24	fn_80206778
+ 240:	80 7f 00 24 	lwz     r3,36(r31)
+ 244:	2c 03 00 00 	cmpwi   r3,0
+ 248:	40 81 00 3c 	ble     284 <fn_80207CC8+0x284>
+ 24c:	34 03 ff ff 	addic.  r0,r3,-1
+ 250:	83 3f 00 2c 	lwz     r25,44(r31)
+ 254:	90 1f 00 24 	stw     r0,36(r31)
+ 258:	40 81 00 18 	ble     270 <fn_80207CC8+0x270>
+ 25c:	80 1f 00 24 	lwz     r0,36(r31)
+ 260:	38 7f 00 28 	addi    r3,r31,40
+ 264:	38 9f 00 30 	addi    r4,r31,48
+ 268:	54 05 18 38 	slwi    r5,r0,3
+ 26c:	48 00 00 01 	bl      26c <fn_80207CC8+0x26c>
+			26c: R_PPC_REL24	fn_800F9990
+ 270:	39 99 00 00 	addi    r12,r25,0
+ 274:	7d 88 03 a6 	mtlr    r12
+ 278:	38 7a 00 00 	addi    r3,r26,0
+ 27c:	38 80 00 00 	li      r4,0
+ 280:	4e 80 00 21 	blrl
+ 284:	7f 03 c3 78 	mr      r3,r24
+ 288:	48 00 00 01 	bl      288 <fn_80207CC8+0x288>
+			288: R_PPC_REL24	OSRestoreInterrupts
+ 28c:	2c 1a 00 02 	cmpwi   r26,2
+ 290:	40 80 00 c4 	bge     354 <fn_80207CC8+0x354>
+ 294:	28 1b 00 00 	cmplwi  r27,0
+ 298:	40 82 00 bc 	bne     354 <fn_80207CC8+0x354>
+ 29c:	48 00 00 01 	bl      29c <fn_80207CC8+0x29c>
+			29c: R_PPC_REL24	OSDisableInterrupts
+ 2a0:	80 1f 00 0c 	lwz     r0,12(r31)
+ 2a4:	3b 03 00 00 	addi    r24,r3,0
+ 2a8:	54 00 07 39 	rlwinm. r0,r0,0,28,28
+ 2ac:	40 82 00 10 	bne     2bc <fn_80207CC8+0x2bc>
+ 2b0:	7f 03 c3 78 	mr      r3,r24
+ 2b4:	48 00 00 01 	bl      2b4 <fn_80207CC8+0x2b4>
+			2b4: R_PPC_REL24	OSRestoreInterrupts
+ 2b8:	48 00 00 4c 	b       304 <fn_80207CC8+0x304>
+ 2bc:	80 1f 00 0c 	lwz     r0,12(r31)
+ 2c0:	54 00 06 f7 	rlwinm. r0,r0,0,27,27
+ 2c4:	41 82 00 1c 	beq     2e0 <fn_80207CC8+0x2e0>
+ 2c8:	80 1f 00 18 	lwz     r0,24(r31)
+ 2cc:	28 00 00 00 	cmplwi  r0,0
+ 2d0:	40 82 00 10 	bne     2e0 <fn_80207CC8+0x2e0>
+ 2d4:	7f 03 c3 78 	mr      r3,r24
+ 2d8:	48 00 00 01 	bl      2d8 <fn_80207CC8+0x2d8>
+			2d8: R_PPC_REL24	OSRestoreInterrupts
+ 2dc:	48 00 00 28 	b       304 <fn_80207CC8+0x304>
+ 2e0:	80 7f 00 0c 	lwz     r3,12(r31)
+ 2e4:	1c 1a 00 03 	mulli   r0,r26,3
+ 2e8:	54 64 07 76 	rlwinm  r4,r3,0,29,27
+ 2ec:	3c 60 00 70 	lis     r3,112
+ 2f0:	90 9f 00 0c 	stw     r4,12(r31)
+ 2f4:	7c 63 04 30 	srw     r3,r3,r0
+ 2f8:	48 00 00 01 	bl      2f8 <fn_80207CC8+0x2f8>
+			2f8: R_PPC_REL24	__OSMaskInterrupts
+ 2fc:	7f 03 c3 78 	mr      r3,r24
+ 300:	48 00 00 01 	bl      300 <fn_80207CC8+0x300>
+			300: R_PPC_REL24	OSRestoreInterrupts
+ 304:	48 00 00 01 	bl      304 <fn_80207CC8+0x304>
+			304: R_PPC_REL24	OSDisableInterrupts
+ 308:	3c 80 80 00 	lis     r4,-32768
+ 30c:	57 40 10 3a 	slwi    r0,r26,2
+ 310:	38 84 30 c0 	addi    r4,r4,12480
+ 314:	7c 04 00 2e 	lwzx    r0,r4,r0
+ 318:	7c 9d 00 50 	subf    r4,r29,r0
+ 31c:	30 04 ff ff 	addic   r0,r4,-1
+ 320:	7c 00 21 10 	subfe   r0,r0,r4
+ 324:	7f de 03 79 	or.     r30,r30,r0
+ 328:	40 82 00 10 	bne     338 <fn_80207CC8+0x338>
+ 32c:	80 1c 00 00 	lwz     r0,0(r28)
+ 330:	90 1f 00 1c 	stw     r0,28(r31)
+ 334:	93 bf 00 20 	stw     r29,32(r31)
+ 338:	48 00 00 01 	bl      338 <fn_80207CC8+0x338>
+			338: R_PPC_REL24	OSRestoreInterrupts
+ 33c:	2c 1e 00 00 	cmpwi   r30,0
+ 340:	41 82 00 0c 	beq     34c <fn_80207CC8+0x34c>
+ 344:	38 60 00 00 	li      r3,0
+ 348:	48 00 00 20 	b       368 <fn_80207CC8+0x368>
+ 34c:	80 7f 00 20 	lwz     r3,32(r31)
+ 350:	48 00 00 18 	b       368 <fn_80207CC8+0x368>
+ 354:	2c 1e 00 00 	cmpwi   r30,0
+ 358:	41 82 00 0c 	beq     364 <fn_80207CC8+0x364>
+ 35c:	38 60 00 00 	li      r3,0
+ 360:	48 00 00 08 	b       368 <fn_80207CC8+0x368>
+ 364:	38 60 00 01 	li      r3,1
+ 368:	bb 01 00 20 	lmw     r24,32(r1)
+ 36c:	80 01 00 44 	lwz     r0,68(r1)
+ 370:	38 21 00 40 	addi    r1,r1,64
+ 374:	7c 08 03 a6 	mtlr    r0
+ 378:	4e 80 00 20 	blr
+
+Script done on 2026-09-29 18:37:26-04:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-09-29 18:37:31-04:00 [COMMAND="build/binutils/powerpc-eabi-objdump -dr build/GEDE01/src/game/game_fn_80207CC8.o" <not executed on terminal>]
+
+build/GEDE01/src/game/game_fn_80207CC8.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <fn_80207CC8>:
+   0:	7c 08 02 a6 	mflr    r0
+   4:	90 01 00 04 	stw     r0,4(r1)
+   8:	94 21 ff c0 	stwu    r1,-64(r1)
+   c:	bf 01 00 20 	stmw    r24,32(r1)
+  10:	3b 43 00 00 	addi    r26,r3,0
+  14:	3c 60 00 00 	lis     r3,0
+			16: R_PPC_ADDR16_HA	Ecb_80640AA8
+  18:	2c 1a 00 02 	cmpwi   r26,2
+  1c:	57 46 30 32 	slwi    r6,r26,6
+  20:	38 03 00 00 	addi    r0,r3,0
+			22: R_PPC_ADDR16_LO	Ecb_80640AA8
+  24:	7f e0 32 14 	add     r31,r0,r6
+  28:	3b 64 00 00 	addi    r27,r4,0
+  2c:	3b 85 00 00 	addi    r28,r5,0
+  30:	40 80 00 e0 	bge     110 <fn_80207CC8+0x110>
+  34:	28 1b 00 00 	cmplwi  r27,0
+  38:	40 82 00 d8 	bne     110 <fn_80207CC8+0x110>
+  3c:	7f 43 d3 78 	mr      r3,r26
+  40:	48 00 00 01 	bl      40 <fn_80207CC8+0x40>
+			40: R_PPC_REL24	__EXIProbe_80206F50
+  44:	2c 03 00 00 	cmpwi   r3,0
+  48:	40 82 00 0c 	bne     54 <fn_80207CC8+0x54>
+  4c:	38 60 00 00 	li      r3,0
+  50:	48 00 03 18 	b       368 <fn_80207CC8+0x368>
+  54:	3c 60 80 00 	lis     r3,-32768
+  58:	80 9f 00 20 	lwz     r4,32(r31)
+  5c:	57 40 10 3a 	slwi    r0,r26,2
+  60:	3b c3 30 c0 	addi    r30,r3,12480
+  64:	7f de 02 14 	add     r30,r30,r0
+  68:	80 1e 00 00 	lwz     r0,0(r30)
+  6c:	7c 04 00 00 	cmpw    r4,r0
+  70:	40 82 00 14 	bne     84 <fn_80207CC8+0x84>
+  74:	80 1f 00 1c 	lwz     r0,28(r31)
+  78:	90 1c 00 00 	stw     r0,0(r28)
+  7c:	80 7f 00 20 	lwz     r3,32(r31)
+  80:	48 00 02 e8 	b       368 <fn_80207CC8+0x368>
+  84:	48 00 00 01 	bl      84 <fn_80207CC8+0x84>
+			84: R_PPC_REL24	OSDisableInterrupts
+  88:	80 1f 00 0c 	lwz     r0,12(r31)
+  8c:	3b a3 00 00 	addi    r29,r3,0
+  90:	54 00 07 39 	rlwinm. r0,r0,0,28,28
+  94:	40 82 00 14 	bne     a8 <fn_80207CC8+0xa8>
+  98:	7f 43 d3 78 	mr      r3,r26
+  9c:	48 00 00 01 	bl      9c <fn_80207CC8+0x9c>
+			9c: R_PPC_REL24	__EXIProbe_80206F50
+  a0:	2c 03 00 00 	cmpwi   r3,0
+  a4:	40 82 00 14 	bne     b8 <fn_80207CC8+0xb8>
+  a8:	7f a3 eb 78 	mr      r3,r29
+  ac:	48 00 00 01 	bl      ac <fn_80207CC8+0xac>
+			ac: R_PPC_REL24	OSRestoreInterrupts
+  b0:	38 00 00 00 	li      r0,0
+  b4:	48 00 00 48 	b       fc <fn_80207CC8+0xfc>
+  b8:	38 7a 00 00 	addi    r3,r26,0
+  bc:	38 80 00 01 	li      r4,1
+  c0:	38 a0 00 00 	li      r5,0
+  c4:	38 c0 00 00 	li      r6,0
+  c8:	48 00 00 01 	bl      c8 <fn_80207CC8+0xc8>
+			c8: R_PPC_REL24	fn_80206E8C
+  cc:	1c 1a 00 03 	mulli   r0,r26,3
+  d0:	38 80 00 00 	li      r4,0
+  d4:	3c 60 00 10 	lis     r3,16
+  d8:	90 9f 00 08 	stw     r4,8(r31)
+  dc:	7c 63 04 30 	srw     r3,r3,r0
+  e0:	48 00 00 01 	bl      e0 <fn_80207CC8+0xe0>
+			e0: R_PPC_REL24	__OSUnmaskInterrupts
+  e4:	80 1f 00 0c 	lwz     r0,12(r31)
+  e8:	38 7d 00 00 	addi    r3,r29,0
+  ec:	60 00 00 08 	ori     r0,r0,8
+  f0:	90 1f 00 0c 	stw     r0,12(r31)
+  f4:	48 00 00 01 	bl      f4 <fn_80207CC8+0xf4>
+			f4: R_PPC_REL24	OSRestoreInterrupts
+  f8:	38 00 00 01 	li      r0,1
+  fc:	2c 00 00 00 	cmpwi   r0,0
+ 100:	40 82 00 0c 	bne     10c <fn_80207CC8+0x10c>
+ 104:	38 60 00 00 	li      r3,0
+ 108:	48 00 02 60 	b       368 <fn_80207CC8+0x368>
+ 10c:	83 be 00 00 	lwz     r29,0(r30)
+ 110:	2c 1a 00 02 	cmpwi   r26,2
+ 114:	38 00 00 00 	li      r0,0
+ 118:	40 80 00 10 	bge     128 <fn_80207CC8+0x128>
+ 11c:	28 1b 00 00 	cmplwi  r27,0
+ 120:	40 82 00 08 	bne     128 <fn_80207CC8+0x128>
+ 124:	38 00 00 01 	li      r0,1
+ 128:	2c 00 00 00 	cmpwi   r0,0
+ 12c:	41 82 00 10 	beq     13c <fn_80207CC8+0x13c>
+ 130:	3c 60 00 00 	lis     r3,0
+			132: R_PPC_ADDR16_HA	fn_80207CA0
+ 134:	38 a3 00 00 	addi    r5,r3,0
+			136: R_PPC_ADDR16_LO	fn_80207CA0
+ 138:	48 00 00 08 	b       140 <fn_80207CC8+0x140>
+ 13c:	38 a0 00 00 	li      r5,0
+ 140:	38 7a 00 00 	addi    r3,r26,0
+ 144:	38 9b 00 00 	addi    r4,r27,0
+ 148:	48 00 00 01 	bl      148 <fn_80207CC8+0x148>
+			148: R_PPC_REL24	EXILock
+ 14c:	7c 60 00 34 	cntlzw  r0,r3
+ 150:	54 00 d9 7e 	srwi    r0,r0,5
+ 154:	7c 1e 03 79 	mr.     r30,r0
+ 158:	40 82 01 34 	bne     28c <fn_80207CC8+0x28c>
+ 15c:	38 7a 00 00 	addi    r3,r26,0
+ 160:	38 9b 00 00 	addi    r4,r27,0
+ 164:	38 a0 00 00 	li      r5,0
+ 168:	48 00 00 01 	bl      168 <fn_80207CC8+0x168>
+			168: R_PPC_REL24	EXISelect
+ 16c:	7c 60 00 34 	cntlzw  r0,r3
+ 170:	54 00 d9 7e 	srwi    r0,r0,5
+ 174:	7c 1e 03 79 	mr.     r30,r0
+ 178:	40 82 00 90 	bne     208 <fn_80207CC8+0x208>
+ 17c:	38 00 00 00 	li      r0,0
+ 180:	90 01 00 1c 	stw     r0,28(r1)
+ 184:	38 7a 00 00 	addi    r3,r26,0
+ 188:	38 81 00 1c 	addi    r4,r1,28
+ 18c:	38 a0 00 02 	li      r5,2
+ 190:	38 c0 00 01 	li      r6,1
+ 194:	38 e0 00 00 	li      r7,0
+ 198:	48 00 00 01 	bl      198 <fn_80207CC8+0x198>
+			198: R_PPC_REL24	EXIImm
+ 19c:	7c 60 00 34 	cntlzw  r0,r3
+ 1a0:	54 00 d9 7e 	srwi    r0,r0,5
+ 1a4:	38 7a 00 00 	addi    r3,r26,0
+ 1a8:	7f de 03 78 	or      r30,r30,r0
+ 1ac:	48 00 00 01 	bl      1ac <fn_80207CC8+0x1ac>
+			1ac: R_PPC_REL24	EXISync
+ 1b0:	7c 60 00 34 	cntlzw  r0,r3
+ 1b4:	54 00 d9 7e 	srwi    r0,r0,5
+ 1b8:	38 7a 00 00 	addi    r3,r26,0
+ 1bc:	38 9c 00 00 	addi    r4,r28,0
+ 1c0:	7f de 03 78 	or      r30,r30,r0
+ 1c4:	38 a0 00 04 	li      r5,4
+ 1c8:	38 c0 00 00 	li      r6,0
+ 1cc:	38 e0 00 00 	li      r7,0
+ 1d0:	48 00 00 01 	bl      1d0 <fn_80207CC8+0x1d0>
+			1d0: R_PPC_REL24	EXIImm
+ 1d4:	7c 60 00 34 	cntlzw  r0,r3
+ 1d8:	54 00 d9 7e 	srwi    r0,r0,5
+ 1dc:	38 7a 00 00 	addi    r3,r26,0
+ 1e0:	7f de 03 78 	or      r30,r30,r0
+ 1e4:	48 00 00 01 	bl      1e4 <fn_80207CC8+0x1e4>
+			1e4: R_PPC_REL24	EXISync
+ 1e8:	7c 60 00 34 	cntlzw  r0,r3
+ 1ec:	54 00 d9 7e 	srwi    r0,r0,5
+ 1f0:	38 7a 00 00 	addi    r3,r26,0
+ 1f4:	7f de 03 78 	or      r30,r30,r0
+ 1f8:	48 00 00 01 	bl      1f8 <fn_80207CC8+0x1f8>
+			1f8: R_PPC_REL24	EXIDeselect
+ 1fc:	7c 60 00 34 	cntlzw  r0,r3
+ 200:	54 00 d9 7e 	srwi    r0,r0,5
+ 204:	7f de 03 78 	or      r30,r30,r0
+ 208:	48 00 00 01 	bl      208 <fn_80207CC8+0x208>
+			208: R_PPC_REL24	OSDisableInterrupts
+ 20c:	80 1f 00 0c 	lwz     r0,12(r31)
+ 210:	3b 03 00 00 	addi    r24,r3,0
+ 214:	54 00 06 f7 	rlwinm. r0,r0,0,27,27
+ 218:	40 82 00 10 	bne     228 <fn_80207CC8+0x228>
+ 21c:	7f 03 c3 78 	mr      r3,r24
+ 220:	48 00 00 01 	bl      220 <fn_80207CC8+0x220>
+			220: R_PPC_REL24	OSRestoreInterrupts
+ 224:	48 00 00 68 	b       28c <fn_80207CC8+0x28c>
+ 228:	80 1f 00 0c 	lwz     r0,12(r31)
+ 22c:	38 7a 00 00 	addi    r3,r26,0
+ 230:	38 9f 00 00 	addi    r4,r31,0
+ 234:	54 00 07 34 	rlwinm  r0,r0,0,28,26
+ 238:	90 1f 00 0c 	stw     r0,12(r31)
+ 23c:	48 00 00 01 	bl      23c <fn_80207CC8+0x23c>
+			23c: R_PPC_REL24	fn_80206778
+ 240:	80 7f 00 24 	lwz     r3,36(r31)
+ 244:	2c 03 00 00 	cmpwi   r3,0
+ 248:	40 81 00 3c 	ble     284 <fn_80207CC8+0x284>
+ 24c:	34 03 ff ff 	addic.  r0,r3,-1
+ 250:	83 3f 00 2c 	lwz     r25,44(r31)
+ 254:	90 1f 00 24 	stw     r0,36(r31)
+ 258:	40 81 00 18 	ble     270 <fn_80207CC8+0x270>
+ 25c:	80 1f 00 24 	lwz     r0,36(r31)
+ 260:	38 7f 00 28 	addi    r3,r31,40
+ 264:	38 9f 00 30 	addi    r4,r31,48
+ 268:	54 05 18 38 	slwi    r5,r0,3
+ 26c:	48 00 00 01 	bl      26c <fn_80207CC8+0x26c>
+			26c: R_PPC_REL24	fn_800F9990
+ 270:	39 99 00 00 	addi    r12,r25,0
+ 274:	7d 88 03 a6 	mtlr    r12
+ 278:	38 7a 00 00 	addi    r3,r26,0
+ 27c:	38 80 00 00 	li      r4,0
+ 280:	4e 80 00 21 	blrl
+ 284:	7f 03 c3 78 	mr      r3,r24
+ 288:	48 00 00 01 	bl      288 <fn_80207CC8+0x288>
+			288: R_PPC_REL24	OSRestoreInterrupts
+ 28c:	2c 1a 00 02 	cmpwi   r26,2
+ 290:	40 80 00 c4 	bge     354 <fn_80207CC8+0x354>
+ 294:	28 1b 00 00 	cmplwi  r27,0
+ 298:	40 82 00 bc 	bne     354 <fn_80207CC8+0x354>
+ 29c:	48 00 00 01 	bl      29c <fn_80207CC8+0x29c>
+			29c: R_PPC_REL24	OSDisableInterrupts
+ 2a0:	80 1f 00 0c 	lwz     r0,12(r31)
+ 2a4:	3b 03 00 00 	addi    r24,r3,0
+ 2a8:	54 00 07 39 	rlwinm. r0,r0,0,28,28
+ 2ac:	40 82 00 10 	bne     2bc <fn_80207CC8+0x2bc>
+ 2b0:	7f 03 c3 78 	mr      r3,r24
+ 2b4:	48 00 00 01 	bl      2b4 <fn_80207CC8+0x2b4>
+			2b4: R_PPC_REL24	OSRestoreInterrupts
+ 2b8:	48 00 00 4c 	b       304 <fn_80207CC8+0x304>
+ 2bc:	80 1f 00 0c 	lwz     r0,12(r31)
+ 2c0:	54 00 06 f7 	rlwinm. r0,r0,0,27,27
+ 2c4:	41 82 00 1c 	beq     2e0 <fn_80207CC8+0x2e0>
+ 2c8:	80 1f 00 18 	lwz     r0,24(r31)
+ 2cc:	28 00 00 00 	cmplwi  r0,0
+ 2d0:	40 82 00 10 	bne     2e0 <fn_80207CC8+0x2e0>
+ 2d4:	7f 03 c3 78 	mr      r3,r24
+ 2d8:	48 00 00 01 	bl      2d8 <fn_80207CC8+0x2d8>
+			2d8: R_PPC_REL24	OSRestoreInterrupts
+ 2dc:	48 00 00 28 	b       304 <fn_80207CC8+0x304>
+ 2e0:	80 7f 00 0c 	lwz     r3,12(r31)
+ 2e4:	1c 1a 00 03 	mulli   r0,r26,3
+ 2e8:	54 64 07 76 	rlwinm  r4,r3,0,29,27
+ 2ec:	3c 60 00 70 	lis     r3,112
+ 2f0:	90 9f 00 0c 	stw     r4,12(r31)
+ 2f4:	7c 63 04 30 	srw     r3,r3,r0
+ 2f8:	48 00 00 01 	bl      2f8 <fn_80207CC8+0x2f8>
+			2f8: R_PPC_REL24	__OSMaskInterrupts
+ 2fc:	7f 03 c3 78 	mr      r3,r24
+ 300:	48 00 00 01 	bl      300 <fn_80207CC8+0x300>
+			300: R_PPC_REL24	OSRestoreInterrupts
+ 304:	48 00 00 01 	bl      304 <fn_80207CC8+0x304>
+			304: R_PPC_REL24	OSDisableInterrupts
+ 308:	3c 80 80 00 	lis     r4,-32768
+ 30c:	57 40 10 3a 	slwi    r0,r26,2
+ 310:	38 84 30 c0 	addi    r4,r4,12480
+ 314:	7c 04 00 2e 	lwzx    r0,r4,r0
+ 318:	7c 9d 00 50 	subf    r4,r29,r0
+ 31c:	30 04 ff ff 	addic   r0,r4,-1
+ 320:	7c 00 21 10 	subfe   r0,r0,r4
+ 324:	7f de 03 79 	or.     r30,r30,r0
+ 328:	40 82 00 10 	bne     338 <fn_80207CC8+0x338>
+ 32c:	80 1c 00 00 	lwz     r0,0(r28)
+ 330:	90 1f 00 1c 	stw     r0,28(r31)
+ 334:	93 bf 00 20 	stw     r29,32(r31)
+ 338:	48 00 00 01 	bl      338 <fn_80207CC8+0x338>
+			338: R_PPC_REL24	OSRestoreInterrupts
+ 33c:	2c 1e 00 00 	cmpwi   r30,0
+ 340:	41 82 00 0c 	beq     34c <fn_80207CC8+0x34c>
+ 344:	38 60 00 00 	li      r3,0
+ 348:	48 00 00 20 	b       368 <fn_80207CC8+0x368>
+ 34c:	80 7f 00 20 	lwz     r3,32(r31)
+ 350:	48 00 00 18 	b       368 <fn_80207CC8+0x368>
+ 354:	2c 1e 00 00 	cmpwi   r30,0
+ 358:	41 82 00 0c 	beq     364 <fn_80207CC8+0x364>
+ 35c:	38 60 00 00 	li      r3,0
+ 360:	48 00 00 08 	b       368 <fn_80207CC8+0x368>
+ 364:	38 60 00 01 	li      r3,1
+ 368:	bb 01 00 20 	lmw     r24,32(r1)
+ 36c:	80 01 00 44 	lwz     r0,68(r1)
+ 370:	38 21 00 40 	addi    r1,r1,64
+ 374:	7c 08 03 a6 	mtlr    r0
+ 378:	4e 80 00 20 	blr
+
+Script done on 2026-09-29 18:37:31-04:00 [COMMAND_EXIT_CODE="0"]
