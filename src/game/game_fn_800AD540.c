@@ -6,22 +6,27 @@ extern u16* lbl_8064D71C[2];
 extern void fn_8015CBB0(void*, int, u8*);
 extern void fn_8020B774(void*, int);
 
-#define POSITIVE_PART(v) ((v) & (((-(v) & ~(v))) >> 31))
-#define CLAMP_INDEX(v, limit) \
-    (POSITIVE_PART(v) > (limit) ? (limit) : POSITIVE_PART(v))
-#define MASK_PIXEL(mask, stride, xmax, ymax, x, y) \
-    ((mask)[CLAMP_INDEX((y), (ymax)) * (stride) + \
-            (CLAMP_INDEX((x), (xmax)) >> 3)] & \
-     (1 << (CLAMP_INDEX((x), (xmax)) & 7)))
+static inline int clamp_index(int value, int limit)
+{
+    return limit < (value > 0 ? value : 0) ? limit : (value > 0 ? value : 0);
+}
+
+static inline int mask_pixel(const u8* mask, int width, int xmax, int ymax,
+                             int x, int y)
+{
+    int cx = clamp_index(x, xmax);
+    int cy = clamp_index(y, ymax);
+    return mask[cy * (width >> 3) + (cx >> 3)] & (1 << (cx & 7));
+}
 
 void fn_800AD540(void* source, int width, int height, int source_stride)
 {
     int buffer_index;
     u16 x;
     u16 y;
-    int mask_stride;
     int row_offset;
     int column_offset;
+    const u8* center_row;
     u8* mask = lbl_8031D858;
 
     fn_8015CBB0(source, source_stride, mask);
@@ -40,51 +45,52 @@ void fn_800AD540(void* source, int width, int height, int source_stride)
         }
     }
 
-    row_offset = ((480 - height) >> 1) * 640;
+    row_offset = (480 - height) >> 1;
     column_offset = ((640 - width) >> 1) / 2;
-    column_offset *= 2;
-    mask_stride = width >> 3;
 
     for (buffer_index = 0; buffer_index < 2; buffer_index++) {
-        u16* output = lbl_8064D71C[buffer_index] + row_offset + column_offset;
+        u16* buffer = lbl_8064D71C[buffer_index];
+        int column_bytes = column_offset * 4;
+        int row_bytes = row_offset * 1280;
+        u16* output = (u16*)((u8*)buffer + row_bytes + column_bytes);
         for (y = 0; y < height; y++) {
-            for (x = 1; x < width; x++) {
-                int source_y = height - y - 1;
+            for (x = 0; x < width; x++) {
                 int intensity = 0;
-                if (MASK_PIXEL(mask, mask_stride, width - 1,
-                               height - 1, x, source_y + 1)) {
+                center_row = mask + (height - y - 1) * (width >> 3);
+                if (mask_pixel(mask, width, width - 1,
+                               height - 1, x, height - y)) {
                     intensity += 20;
                 }
-                if (MASK_PIXEL(mask, mask_stride, width - 1,
-                               height - 1, x, source_y - 1)) {
+                if (mask_pixel(mask, width, width - 1,
+                               height - 1, x, height - y - 2)) {
                     intensity += 20;
                 }
-                if (MASK_PIXEL(mask, mask_stride, width - 1,
-                               height - 1, x + 1, source_y + 1)) {
+                if (mask_pixel(mask, width, width - 1,
+                               height - 1, x + 1, height - y)) {
                     intensity += 20;
                 }
-                if (MASK_PIXEL(mask, mask_stride, width - 1,
-                               height - 1, x + 1, source_y)) {
+                if (mask_pixel(mask, width, width - 1,
+                               height - 1, x + 1, height - y - 1)) {
                     intensity += 20;
                 }
-                if (MASK_PIXEL(mask, mask_stride, width - 1,
-                               height - 1, x + 1, source_y - 1)) {
+                if (mask_pixel(mask, width, width - 1,
+                               height - 1, x + 1, height - y - 2)) {
                     intensity += 20;
                 }
-                if (MASK_PIXEL(mask, mask_stride, width - 1,
-                               height - 1, x - 1, source_y + 1)) {
+                if (mask_pixel(mask, width, width - 1,
+                               height - 1, x - 1, height - y)) {
                     intensity += 20;
                 }
-                if (MASK_PIXEL(mask, mask_stride, width - 1,
-                               height - 1, x - 1, source_y)) {
+                if (mask_pixel(mask, width, width - 1,
+                               height - 1, x - 1, height - y - 1)) {
                     intensity += 20;
                 }
-                if (MASK_PIXEL(mask, mask_stride, width - 1,
-                               height - 1, x - 1, source_y - 1)) {
+                if (mask_pixel(mask, width, width - 1,
+                               height - 1, x - 1, height - y - 2)) {
                     intensity += 20;
                 }
-                if (MASK_PIXEL(mask, mask_stride, width - 1,
-                               height - 1, x, source_y)) {
+                if (center_row[x >> 3] &
+                    (1 << (x & 7))) {
                     intensity = 150;
                 }
                 if (intensity > 150) {
@@ -94,6 +100,6 @@ void fn_800AD540(void* source, int width, int height, int source_stride)
             }
             output += 640;
         }
-        fn_8020B774(lbl_8064D71C[buffer_index], 0x96000);
+        fn_8020B774(buffer, 0x96000);
     }
 }

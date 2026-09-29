@@ -1,0 +1,109 @@
+{
+  "assignment_id": "d1b35faf-2398-4edb-9c81-bcca08a95a48",
+  "target": "fn_800AD540",
+  "canonical_match_percent": 100.0,
+  "relocation_strict_match_percent": 100.0,
+  "target_bytes": 1540,
+  "generated_bytes": 1540,
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "compiler": "eternal-darkness-decomp/compilers/GC/1.3/mwcceppc.exe",
+  "compiler_sha256": "4e502c38465500d4fda8d966b268151a6c74c730508e3d9b7efd23d1a6083715",
+  "source": "eternal-darkness-decomp/src/game/game_fn_800AD540.c",
+  "source_sha256": "076c86efe240dfa9bf6096c657e14cd05ea8648e74ae0bb076bf997a962af4fe",
+  "configure": {
+    "command": [
+      "python3",
+      "configure.py"
+    ],
+    "exit_code": 0
+  },
+  "build": {
+    "command": [
+      ".tools/bin/ninja",
+      "-j2"
+    ],
+    "exit_code": 0,
+    "raw_log": "eternal-darkness-decomp/reports/GEDE01/verification-d1b35faf-2398-4edb-9c81-bcca08a95a48-build.log",
+    "log_note": "Compiler/linker CRLF line endings normalized to LF; all output retained."
+  },
+  "checks": [
+    {
+      "command": [
+        "sha1sum",
+        "-c",
+        "config/GEDE01/build.sha1"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "exit_code": 0,
+      "output": "build/GEDE01/main.dol: OK\n"
+    },
+    {
+      "command": [
+        "sha1sum",
+        "build/GEDE01/main.dol"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "exit_code": 0,
+      "output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\n"
+    },
+    {
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_800AD540",
+        "-o",
+        "reports/GEDE01/objdiff-d1b35faf-2398-4edb-9c81-bcca08a95a48-canonical.json",
+        "--format",
+        "json-pretty",
+        "fn_800AD540"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "exit_code": 0,
+      "output": " INFO Writing to reports/GEDE01/objdiff-d1b35faf-2398-4edb-9c81-bcca08a95a48-canonical.json\n"
+    },
+    {
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_800AD540",
+        "-o",
+        "reports/GEDE01/objdiff-d1b35faf-2398-4edb-9c81-bcca08a95a48.json",
+        "--format",
+        "json-pretty",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_800AD540"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "exit_code": 0,
+      "output": " INFO Writing to reports/GEDE01/objdiff-d1b35faf-2398-4edb-9c81-bcca08a95a48.json\n"
+    },
+    {
+      "command": [
+        ".tools/bin/ninja",
+        "-t",
+        "commands",
+        "build/GEDE01/src/game/game_fn_800AD540.o"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "exit_code": 0,
+      "output": "\"/usr/bin/python3\" tools/download_tool.py sjiswrap build/tools/sjiswrap.exe --tag v1.2.2\ntools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_800AD540.c -o build/GEDE01/src/game && \"/usr/bin/python3\" tools/transform_dep.py build/GEDE01/src/game/game_fn_800AD540.d build/GEDE01/src/game/game_fn_800AD540.d\n"
+    }
+  ],
+  "scope": "Only this function source and its Matching registration changed; compiler flags and splits unchanged. No assembly, runtime changes, shared reconstruction, or neighboring edits. Existing unrelated CLAUDE.md modification excluded.",
+  "historical_correction": "Previous 60.13247% commentary claim corrected to measured 60.015583%; final best is 100.0% with saved raw canonical and strict evidence.",
+  "legal_audit": {
+    "command": [
+      "python3",
+      "eternal-darkness-decomp/tools/legal_audit.py"
+    ],
+    "exit_code": 0,
+    "output": "legal audit passed (23369 tracked project files inspected)\n"
+  }
+}
