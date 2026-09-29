@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "0f3c5e22-4dd7-4082-a70a-953556c4f6b5",
+  "attempt": 3,
+  "base_commit": "63f30c16b2de27489c828bc7119f301cff313044",
+  "target": "fn_800AD540",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-0f3c5e22-4dd7-4082-a70a-953556c4f6b5.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff are byte-identical at 41.548054%. Retail is 1540 bytes and generated is 1608 bytes; both contain 15 relocation-annotated instructions. The explicit eight-neighbor expansion removes the prior nested-loop topology and the generated translation unit no longer emits out-of-line helpers. The first divergence is retail's 0x80-byte frame versus generated 0xB0; both save from r15, but generated retains the mask in r19 rather than retail r20 and spills precomputed clamp intermediates. Retail keeps the three vertical clamp candidates and repeated width/height bounds primarily in registers, while generated materializes additional stack temporaries, leaving different scheduling and register allocation through the expanded probes."
+}
