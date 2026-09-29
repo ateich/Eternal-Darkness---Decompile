@@ -1,6 +1,10 @@
 typedef signed short s16;
 typedef unsigned char u8;
 typedef unsigned int u32;
+typedef unsigned short u16;
+
+/* Slot table owned by the animation sampler. */
+typedef struct Slot Slot;
 
 extern int lbl_80265D80[];
 extern int lbl_8064C378;
@@ -10,9 +14,11 @@ extern int lbl_8064D638;
 extern u8 lbl_8064D674[4];
 extern int lbl_8064D6E8;
 extern int lbl_8064D6F0;
+extern u8 lbl_80639260[];
 
 extern void fn_801ECD74(u32*);
 extern void fn_801ED118(void);
+extern u16 fn_801F6034(int, Slot*);
 
 /*
  * Central controller-state dispatcher.  The entry filter and first-pass
@@ -20,7 +26,7 @@ extern void fn_801ED118(void);
  * per-channel caches and command emitters; those bodies remain incomplete.
  */
 int fn_801EDF80(s16* values, int total, int count, int iteration_total,
-                int* parameter, int mode, int channel, int context, int flags,
+                int* parameter, int mode, int channel, Slot* context, int flags,
                 void* state)
 {
     u32 attributes;
@@ -58,15 +64,14 @@ int fn_801EDF80(s16* values, int total, int count, int iteration_total,
     }
 
     if (channel == 10 && (flags & 0x800) == 0) {
-        u32 color;
-
         accepted = 1;
         if (values != 0) {
-            color = *(u32*)((char*)values + 0x1C);
+            u32 color = *(u32*)((char*)values + 0x1C);
+            fn_801ECD74(&color);
         } else {
-            color = *(u32*)((char*)state + 0x58);
+            u32 color = *(u32*)((char*)state + 0x58);
+            fn_801ECD74(&color);
         }
-        fn_801ECD74(&color);
 
         for (index = 0; index < 4; index++) {
             int slot = lbl_80265D80[index];
@@ -127,12 +132,62 @@ int fn_801EDF80(s16* values, int total, int count, int iteration_total,
         lbl_8064D634 = channel;
     }
 
-    /* The cache comparison and command dispatch remain to be recovered. */
+    /*
+     * Retail keeps a signed sample and the corresponding attribute bit for
+     * each channel.  Channel one additionally invalidates its sample whenever
+     * any member of the remappable three-value group changes.
+     */
+    if (channel != 10) {
+        s16* cached_values = (s16*)(lbl_80639260 + 0x21D8);
+        u32* cached_attributes = (u32*)(lbl_80639260 + 0x21F0);
+        int candidate;
+        u32 bit = 1U << channel;
+
+        if (values != 0) {
+            candidate = values[channel];
+            if (channel == 1) {
+                int* group = (int*)(lbl_80639260 + 0x21CC);
+
+                switch (lbl_8064D5F8) {
+                case 0:
+                    candidate = values[1];
+                    break;
+                case 1:
+                    candidate = values[6];
+                    break;
+                case 2:
+                    candidate = values[8];
+                    break;
+                }
+                if (group[0] != values[1] || group[1] != values[6] ||
+                    group[2] != values[8]) {
+                    group[0] = values[1];
+                    group[1] = values[6];
+                    group[2] = values[8];
+                    cached_values[channel] = -1;
+                }
+            }
+        } else {
+            candidate = *(s16*)((char*)state + 0x5C + channel * 2);
+        }
+
+        if ((attributes & bit) != (*cached_attributes & bit) ||
+            cached_values[channel] != candidate) {
+            if ((attributes & bit) != 0) {
+                candidate = (s16)fn_801F6034(values[channel], context);
+            }
+            if ((s16)candidate != cached_values[channel]) {
+                cached_values[channel] = (s16)candidate;
+                /* Retail's per-channel change handler follows this store. */
+            }
+        }
+    }
+
+    /* The per-channel change handlers and command dispatch remain incomplete. */
     (void)count;
     (void)iteration_total;
     (void)parameter;
     (void)mode;
-    (void)context;
     (void)command;
     (void)repeat;
     (void)selector;
