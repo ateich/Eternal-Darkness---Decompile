@@ -1,9 +1,13 @@
 typedef unsigned char u8;
 typedef unsigned short u16;
+typedef unsigned int u32;
+typedef struct Vec3 { float x, y, z; } Vec3;
+typedef float Matrix34[3][4];
 
 extern int lbl_8064D18C;
 extern int lbl_8064C544;
 extern u8 lbl_8023B5C0[];
+extern float lbl_806511B8, lbl_806511CC;
 extern void* fn_80201814(int);
 extern int fn_80036D5C(void);
 extern void fn_80036DA4(void*, unsigned int);
@@ -24,9 +28,23 @@ extern void fn_801D0C94(void);
 extern void fn_801D0C9C(void);
 extern void fn_801D70B0();
 extern int fn_800A4F98(int);
-extern int fn_80201BC8(void*);
+extern void* fn_80201BC8(void*);
 extern int fn_801D38E8(int);
 extern void fn_801D62D0();
+extern void* fn_8011FE34(void*);
+extern void fn_802114E0(Matrix34, void*);
+extern void fn_8011F114(Vec3*, void*);
+extern void fn_80211710(Matrix34, Vec3*, Vec3*);
+extern void fn_80211A6C(Vec3*, Vec3*, Vec3*);
+extern void fn_80211A48(Vec3*, Vec3*, Vec3*);
+extern float fn_80211B44(Vec3*, Vec3*);
+extern u32 fn_8006749C(int);
+extern void fn_80120AD0(void*, Vec3*, int, u16, float, float);
+extern int fn_8012A100(void*, int);
+extern void* fn_801294DC(void*, int, int, int);
+extern void fn_80128C44(void*, void*, int);
+extern void fn_801DE7A0(int);
+extern void fn_801DE8AC(void);
 
 /* NonMatching: honest-C reconstruction of the complete common teardown path
  * and selected event arms. The remaining large event dispatcher is not yet
@@ -38,6 +56,12 @@ void fn_801E0088(void* object)
     void* handle;
     int result;
     int a, b, c, d;
+    void* target;
+    void* effect;
+    float distance;
+    u32 flags;
+    Matrix34 transform;
+    Vec3 position, from, to;
     (void)constants;
 
     if (*(int*)(info + 8) != lbl_8064D18C || (info[0xff0] & 1)) {
@@ -89,6 +113,55 @@ void fn_801E0088(void* object)
         b = fn_801D3A34(*(int*)(info + 4), 0x46);
         a = fn_801D3A34(*(int*)(info + 4), 0x35);
         fn_8014EAA4(info + 0x38, 250, fn_801CEB2C(*(int*)(info + 4)), a, b, c, d, 4);
+        break;
+    case 170:
+        if (!(info[0xff0] & 0x10)) {
+            handle = fn_80201814(*(int*)(info + 0xe0));
+            if (*(int*)(info + 0x13c) == 6) {
+                fn_80201D44(handle, 6);
+                fn_80201D24(handle, 1);
+                fn_802015A4(handle);
+            } else if (*(int*)(info + 0x13c) == 5) {
+                fn_80201D44(handle, 5);
+                fn_80201D24(handle, 1);
+                fn_802015A4(handle);
+            }
+        }
+        if (!(info[0xff0] & 0x10) || ((*(int*)(info + 4) & 15) != 8)) {
+            if (*(int*)(info + 0x13c) == 6) {
+                from = *(Vec3*)(constants + 0xb4);
+                to = *(Vec3*)(constants + 0xc0);
+                target = fn_80201BC8(fn_80201814(*(int*)(info + 0xe0)));
+                fn_802114E0(transform, fn_8011FE34(target));
+                fn_8011F114(&position, target);
+                fn_80211710(transform, &from, &from);
+                fn_80211710(transform, &to, &to);
+                fn_80211A6C(&to, &from, &to);
+                fn_80211A48(&position, &from, &from);
+                distance = fn_80211B44(&to, &from);
+                flags = fn_8006749C(fn_801D38E8(*(int*)(info + 4))) | 0x4000;
+                fn_80120AD0(target, &to, 100, flags, distance, lbl_806511CC);
+            } else if (*(int*)(info + 0x13c) == 5) {
+                from = *(Vec3*)(constants + 0xcc);
+                to = *(Vec3*)(constants + 0xd8);
+                target = fn_80201BC8(fn_80201814(*(int*)(info + 0xe0)));
+                from.z = lbl_806511B8 + *(float*)(info + 0x110);
+                distance = fn_80211B44(&to, &from);
+                flags = fn_8006749C(fn_801D38E8(*(int*)(info + 4))) | 0x4000;
+                fn_80120AD0(target, &to, 100, flags, distance, lbl_806511CC);
+            } else {
+                break;
+            }
+            if (fn_8012A100(target, 0x8a)) {
+                if (info[0xff0] & 0x10) {
+                    effect = fn_801294DC(target, 0x8a, 0x20, 9);
+                    if (effect)
+                        fn_80128C44(effect, fn_801DE8AC, 0);
+                } else {
+                    fn_801DE7A0(*(int*)(info + 0xe0));
+                }
+            }
+        }
         break;
     case 285:
         if (*(int*)(info + 0x13c) == 5) {
