@@ -1,0 +1,77 @@
+ INFO Writing to /home/rabbit/src/darkfoundry-new/.darkfoundry/worktrees/81136289-d9d6-4a74-8320-2e4da3c1fe24/eternal-darkness-decomp/build/GEDE01/fndiff_EXISelect.json
+target 300 bytes  base 300 bytes  match 100.0
+  0x0000  mflr r0                                              | mflr r0
+  0x0004  stw r0, 0x4(r1)                                      | stw r0, 0x4(r1)
+  0x0008  stwu r1, -0x30(r1)                                   | stwu r1, -0x30(r1)
+  0x000c  stmw r27, 0x1c(r1)                                   | stmw r27, 0x1c(r1)
+  0x0010  addi r27, r3, 0x0                                    | addi r27, r3, 0x0
+  0x0014  lis r3, Ecb_80640AA8@ha [None+0 t6]                  | lis r3, Ecb_80640AA8@ha [None+0 t6]
+  0x0018  slwi r6, r27, 6                                      | slwi r6, r27, 6
+  0x001c  addi r0, r3, Ecb_80640AA8@l [None+0 t4]              | addi r0, r3, Ecb_80640AA8@l [None+0 t4]
+  0x0020  addi r28, r4, 0x0                                    | addi r28, r4, 0x0
+  0x0024  addi r29, r5, 0x0                                    | addi r29, r5, 0x0
+  0x0028  add r31, r0, r6 [None+0 tNone]                       | add r31, r0, r6 [None+0 tNone]
+  0x002c  bl OSDisableInterrupts [None+0 t10]                  | bl OSDisableInterrupts [None+0 t10]
+  0x0030  lwz r0, 0xc(r31) [None+0 tNone]                      | lwz r0, 0xc(r31) [None+0 tNone]
+  0x0034  addi r30, r3, 0x0                                    | addi r30, r3, 0x0
+  0x0038  rlwinm. r0, r0, 0, 29, 29                            | rlwinm. r0, r0, 0, 29, 29
+  0x003c  bne 0x84                                             | bne 0x84
+  0x0040  cmpwi r27, 0x2                                       | cmpwi r27, 0x2
+  0x0044  beq 0x94                                             | beq 0x94
+  0x0048  cmplwi r28, 0x0                                      | cmplwi r28, 0x0
+  0x004c  bne 0x6c                                             | bne 0x6c
+  0x0050  lwz r0, 0xc(r31) [None+0 tNone]                      | lwz r0, 0xc(r31) [None+0 tNone]
+  0x0054  rlwinm. r0, r0, 0, 28, 28                            | rlwinm. r0, r0, 0, 28, 28
+  0x0058  bne 0x6c                                             | bne 0x6c
+  0x005c  mr r3, r27                                           | mr r3, r27
+  0x0060  bl __EXIProbe_80206F50 [None+0 t10]                  | bl __EXIProbe_80206F50 [None+0 t10]
+  0x0064  cmpwi r3, 0x0                                        | cmpwi r3, 0x0
+  0x0068  beq 0x84                                             | beq 0x84
+  0x006c  lwz r0, 0xc(r31) [None+0 tNone]                      | lwz r0, 0xc(r31) [None+0 tNone]
+  0x0070  rlwinm. r0, r0, 0, 27, 27                            | rlwinm. r0, r0, 0, 27, 27
+  0x0074  beq 0x84                                             | beq 0x84
+  0x0078  lwz r0, 0x18(r31) [None+0 tNone]                     | lwz r0, 0x18(r31) [None+0 tNone]
+  0x007c  cmplw r0, r28                                        | cmplw r0, r28
+  0x0080  beq 0x94                                             | beq 0x94
+  0x0084  mr r3, r30                                           | mr r3, r30
+  0x0088  bl OSRestoreInterrupts [None+0 t10]                  | bl OSRestoreInterrupts [None+0 t10]
+  0x008c  li r3, 0x0                                           | li r3, 0x0
+  0x0090  b 0x118                                              | b 0x118
+  0x0094  lwz r4, 0xc(r31) [None+0 tNone]                      | lwz r4, 0xc(r31) [None+0 tNone]
+  0x0098  lis r3, 0xcc00                                       | lis r3, 0xcc00
+  0x009c  mulli r0, r27, 0x14                                  | mulli r0, r27, 0x14
+  0x00a0  ori r4, r4, 0x4                                      | ori r4, r4, 0x4
+  0x00a4  addi r5, r3, 0x6800                                  | addi r5, r3, 0x6800
+  0x00a8  stw r4, 0xc(r31) [None+0 tNone]                      | stw r4, 0xc(r31) [None+0 tNone]
+  0x00ac  add r5, r5, r0                                       | add r5, r5, r0
+  0x00b0  lwz r4, 0x0(r5)                                      | lwz r4, 0x0(r5)
+  0x00b4  li r0, 0x1                                           | li r0, 0x1
+  0x00b8  slw r0, r0, r28                                      | slw r0, r0, r28
+  0x00bc  slwi r3, r0, 7                                       | slwi r3, r0, 7
+  0x00c0  slwi r0, r29, 4                                      | slwi r0, r29, 4
+  0x00c4  andi. r4, r4, 0x405                                  | andi. r4, r4, 0x405
+  0x00c8  or r0, r3, r0                                        | or r0, r3, r0
+  0x00cc  or r4, r4, r0                                        | or r4, r4, r0
+  0x00d0  stw r4, 0x0(r5)                                      | stw r4, 0x0(r5)
+  0x00d4  lwz r0, 0xc(r31) [None+0 tNone]                      | lwz r0, 0xc(r31) [None+0 tNone]
+  0x00d8  rlwinm. r0, r0, 0, 28, 28                            | rlwinm. r0, r0, 0, 28, 28
+  0x00dc  beq 0x10c                                            | beq 0x10c
+  0x00e0  cmpwi r27, 0x1                                       | cmpwi r27, 0x1
+  0x00e4  beq 0x104                                            | beq 0x104
+  0x00e8  bge 0x10c                                            | bge 0x10c
+  0x00ec  cmpwi r27, 0x0                                       | cmpwi r27, 0x0
+  0x00f0  bge 0xf8                                             | bge 0xf8
+  0x00f4  b 0x10c                                              | b 0x10c
+  0x00f8  lis r3, 0x10                                         | lis r3, 0x10
+  0x00fc  bl __OSMaskInterrupts [None+0 t10]                   | bl __OSMaskInterrupts [None+0 t10]
+  0x0100  b 0x10c                                              | b 0x10c
+  0x0104  lis r3, 0x2                                          | lis r3, 0x2
+  0x0108  bl __OSMaskInterrupts [None+0 t10]                   | bl __OSMaskInterrupts [None+0 t10]
+  0x010c  mr r3, r30                                           | mr r3, r30
+  0x0110  bl OSRestoreInterrupts [None+0 t10]                  | bl OSRestoreInterrupts [None+0 t10]
+  0x0114  li r3, 0x1                                           | li r3, 0x1
+  0x0118  lmw r27, 0x1c(r1)                                    | lmw r27, 0x1c(r1)
+  0x011c  lwz r0, 0x34(r1)                                     | lwz r0, 0x34(r1)
+  0x0120  addi r1, r1, 0x30                                    | addi r1, r1, 0x30
+  0x0124  mtlr r0                                              | mtlr r0
+  0x0128  blr                                                  | blr
