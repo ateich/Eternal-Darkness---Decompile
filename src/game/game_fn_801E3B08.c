@@ -70,34 +70,34 @@ char* fn_801E3B08(char* text)
             value = lbl_8064D564 + 26;
             text++;
         }
-        if (value < 0 || value >= 32) {
+        if (value >= 0 && value < 32) {
+            glyph_scale = lbl_80651260 * lbl_8064C314;
+            raw_size = (int)glyph_scale;
+            fn_801ED3F4(lbl_8064D570);
+            fn_801A8EDC(diagnostics - 0x14a0);
+            glyph_color = lbl_8064D594;
+            fn_801A852C(&glyph_color, 0, (void*)1, 0x80000000);
+            lbl_8064C320 = -1;
+            fn_80226AB4(0x80, 5, 4);
+            short_size = (s16)glyph_scale;
+            fn_801E4198(lbl_8064D574, lbl_8064D578 + short_size, -1);
+            glyph = (value & 0x3fff) << 2;
+            fn_801E418C((u16)(glyph + 3));
+            fn_801E4198(lbl_8064D574, lbl_8064D578, -1);
+            fn_801E418C((u16)glyph);
+            fn_801E4198(lbl_8064D574 + (s16)raw_size, lbl_8064D578, -1);
+            fn_801E418C((u16)(glyph + 1));
+            fn_801E4198(lbl_8064D574 + (s16)raw_size, lbl_8064D578 + short_size, -1);
+            fn_801E418C((u16)(glyph + 2));
+            fn_801E4188();
+            fn_801ED3F4(lbl_806333C8[lbl_8064D580]);
+            fn_801A8EDC(lbl_802558E8);
+            restored_color = lbl_8064D594;
+            fn_801A852C(&restored_color, 0, lbl_806333F0[lbl_8064D580], 0x80000000);
+            lbl_8064D574 += (s16)(lbl_8064C314 * lbl_8064D59C->widths[value]);
+        } else {
             fn_801E7DCC((char*)diagnostics - 0x127c, value);
-            break;
         }
-        glyph_scale = lbl_80651260 * lbl_8064C314;
-        raw_size = (int)glyph_scale;
-        fn_801ED3F4(lbl_8064D570);
-        fn_801A8EDC(diagnostics - 0x14a0);
-        glyph_color = lbl_8064D594;
-        fn_801A852C(&glyph_color, 0, (void*)1, 0x80000000);
-        lbl_8064C320 = -1;
-        fn_80226AB4(0x80, 5, 4);
-        short_size = (s16)(int)glyph_scale;
-        fn_801E4198(lbl_8064D574, lbl_8064D578 + short_size, -1);
-        glyph = (value & 0x3fff) << 2;
-        fn_801E418C((u16)(glyph + 3));
-        fn_801E4198(lbl_8064D574, lbl_8064D578, -1);
-        fn_801E418C((u16)glyph);
-        fn_801E4198(lbl_8064D574 + (s16)raw_size, lbl_8064D578, -1);
-        fn_801E418C((u16)(glyph + 1));
-        fn_801E4198(lbl_8064D574 + (s16)raw_size, lbl_8064D578 + short_size, -1);
-        fn_801E418C((u16)(glyph + 2));
-        fn_801E4188();
-        fn_801ED3F4(lbl_806333C8[lbl_8064D580]);
-        fn_801A8EDC(lbl_802558E8);
-        restored_color = lbl_8064D594;
-        fn_801A852C(&restored_color, 0, lbl_806333F0[lbl_8064D580], 0x80000000);
-        lbl_8064D574 += (s16)(lbl_8064C314 * lbl_8064D59C->widths[value]);
         break;
     }
     case 'b': {
