@@ -10,7 +10,6 @@ typedef struct Event800A78E0 {
     s8 index;
 } Event800A78E0;
 
-extern u32 lbl_8023975C[3];
 extern int lbl_8064B81C;
 extern int fn_800CA6DC(void*, int, u32, void*, int);
 extern int fn_800CD84C(void*);
@@ -18,13 +17,8 @@ extern u32 fn_800A7860(void*);
 
 int fn_800A78E0(void* context, Event800A78E0* event, void* extra)
 {
-    u32 values[3];
-    u32 mapped;
-
-    values[0] = lbl_8023975C[0];
-    values[1] = lbl_8023975C[1];
-    values[2] = lbl_8023975C[2];
-    mapped = *(u32*)((u8*)values + (event->index - 1) * sizeof(u32));
+    u32 values[3] = { 0x10000, 0x20000, 0x40000 };
+    u32 mapped = values[event->index - 1];
 
     if (lbl_8064B81C == 0) {
         event->kind = 0;
