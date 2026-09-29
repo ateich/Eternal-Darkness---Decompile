@@ -1,0 +1,133 @@
+Script started on 2026-09-29 17:27:07-04:00 [COMMAND="sh -c 'echo === retail ===; build/binutils/powerpc-eabi-objdump -dr build/GEDE01/obj/game/game_fn_802078DC.o; echo === rebuilt ===; build/binutils/powerpc-eabi-objdump -dr build/GEDE01/src/game/game_fn_802078DC.o'" <not executed on terminal>]
+=== retail ===
+
+build/GEDE01/obj/game/game_fn_802078DC.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <EXTIntrruptHandler_802078DC>:
+   0:	7c 08 02 a6 	mflr    r0
+   4:	7c 65 07 34 	extsh   r5,r3
+   8:	90 01 00 04 	stw     r0,4(r1)
+   c:	3c 60 55 55 	lis     r3,21845
+  10:	38 05 ff f5 	addi    r0,r5,-11
+  14:	38 63 55 56 	addi    r3,r3,21846
+  18:	94 21 fd 10 	stwu    r1,-752(r1)
+  1c:	7c 63 00 96 	mulhw   r3,r3,r0
+  20:	bf 61 02 dc 	stmw    r27,732(r1)
+  24:	54 60 0f fe 	srwi    r0,r3,31
+  28:	7f c3 02 14 	add     r30,r3,r0
+  2c:	1c 1e 00 03 	mulli   r0,r30,3
+  30:	3c 60 00 70 	lis     r3,112
+  34:	3b 64 00 00 	addi    r27,r4,0
+  38:	7c 63 04 30 	srw     r3,r3,r0
+  3c:	48 00 00 01 	bl      3c <EXTIntrruptHandler_802078DC+0x3c>
+			3c: R_PPC_REL24	__OSMaskInterrupts
+  40:	1c 1e 00 14 	mulli   r0,r30,20
+  44:	3c 80 cc 00 	lis     r4,-13312
+  48:	3c 60 00 00 	lis     r3,0
+			4a: R_PPC_ADDR16_HA	Ecb_80640AA8
+  4c:	38 84 68 00 	addi    r4,r4,26624
+  50:	3b e0 00 00 	li      r31,0
+  54:	7f e4 01 2e 	stwx    r31,r4,r0
+  58:	57 c4 30 32 	slwi    r4,r30,6
+  5c:	38 03 00 00 	addi    r0,r3,0
+			5e: R_PPC_ADDR16_LO	Ecb_80640AA8
+  60:	7f a0 22 14 	add     r29,r0,r4
+  64:	83 9d 00 08 	lwz     r28,8(r29)
+  68:	80 1d 00 0c 	lwz     r0,12(r29)
+  6c:	28 1c 00 00 	cmplwi  r28,0
+  70:	54 00 07 76 	rlwinm  r0,r0,0,29,27
+  74:	90 1d 00 0c 	stw     r0,12(r29)
+  78:	41 82 00 3c 	beq     b4 <EXTIntrruptHandler_802078DC+0xb4>
+  7c:	38 61 00 10 	addi    r3,r1,16
+  80:	48 00 00 01 	bl      80 <EXTIntrruptHandler_802078DC+0x80>
+			80: R_PPC_REL24	OSClearContext
+  84:	38 61 00 10 	addi    r3,r1,16
+  88:	48 00 00 01 	bl      88 <EXTIntrruptHandler_802078DC+0x88>
+			88: R_PPC_REL24	OSSetCurrentContext
+  8c:	7f 8c e3 78 	mr      r12,r28
+  90:	93 fd 00 08 	stw     r31,8(r29)
+  94:	7d 88 03 a6 	mtlr    r12
+  98:	38 7e 00 00 	addi    r3,r30,0
+  9c:	38 9b 00 00 	addi    r4,r27,0
+  a0:	4e 80 00 21 	blrl
+  a4:	38 61 00 10 	addi    r3,r1,16
+  a8:	48 00 00 01 	bl      a8 <EXTIntrruptHandler_802078DC+0xa8>
+			a8: R_PPC_REL24	OSClearContext
+  ac:	7f 63 db 78 	mr      r3,r27
+  b0:	48 00 00 01 	bl      b0 <EXTIntrruptHandler_802078DC+0xb0>
+			b0: R_PPC_REL24	OSSetCurrentContext
+  b4:	bb 61 02 dc 	lmw     r27,732(r1)
+  b8:	80 01 02 f4 	lwz     r0,756(r1)
+  bc:	38 21 02 f0 	addi    r1,r1,752
+  c0:	7c 08 03 a6 	mtlr    r0
+  c4:	4e 80 00 20 	blr
+=== rebuilt ===
+
+build/GEDE01/src/game/game_fn_802078DC.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <EXTIntrruptHandler_802078DC>:
+   0:	7c 08 02 a6 	mflr    r0
+   4:	7c 65 07 34 	extsh   r5,r3
+   8:	90 01 00 04 	stw     r0,4(r1)
+   c:	3c 60 55 55 	lis     r3,21845
+  10:	38 05 ff f5 	addi    r0,r5,-11
+  14:	38 63 55 56 	addi    r3,r3,21846
+  18:	94 21 fd 10 	stwu    r1,-752(r1)
+  1c:	7c 63 00 96 	mulhw   r3,r3,r0
+  20:	bf 61 02 dc 	stmw    r27,732(r1)
+  24:	54 60 0f fe 	srwi    r0,r3,31
+  28:	7f c3 02 14 	add     r30,r3,r0
+  2c:	1c 1e 00 03 	mulli   r0,r30,3
+  30:	3c 60 00 70 	lis     r3,112
+  34:	3b 64 00 00 	addi    r27,r4,0
+  38:	7c 63 04 30 	srw     r3,r3,r0
+  3c:	48 00 00 01 	bl      3c <EXTIntrruptHandler_802078DC+0x3c>
+			3c: R_PPC_REL24	__OSMaskInterrupts
+  40:	1c 1e 00 14 	mulli   r0,r30,20
+  44:	3c 80 cc 00 	lis     r4,-13312
+  48:	3c 60 00 00 	lis     r3,0
+			4a: R_PPC_ADDR16_HA	Ecb_80640AA8
+  4c:	38 84 68 00 	addi    r4,r4,26624
+  50:	3b e0 00 00 	li      r31,0
+  54:	7f e4 01 2e 	stwx    r31,r4,r0
+  58:	57 c4 30 32 	slwi    r4,r30,6
+  5c:	38 03 00 00 	addi    r0,r3,0
+			5e: R_PPC_ADDR16_LO	Ecb_80640AA8
+  60:	7f a0 22 14 	add     r29,r0,r4
+  64:	83 9d 00 08 	lwz     r28,8(r29)
+  68:	80 1d 00 0c 	lwz     r0,12(r29)
+  6c:	28 1c 00 00 	cmplwi  r28,0
+  70:	54 00 07 76 	rlwinm  r0,r0,0,29,27
+  74:	90 1d 00 0c 	stw     r0,12(r29)
+  78:	41 82 00 3c 	beq     b4 <EXTIntrruptHandler_802078DC+0xb4>
+  7c:	38 61 00 10 	addi    r3,r1,16
+  80:	48 00 00 01 	bl      80 <EXTIntrruptHandler_802078DC+0x80>
+			80: R_PPC_REL24	OSClearContext
+  84:	38 61 00 10 	addi    r3,r1,16
+  88:	48 00 00 01 	bl      88 <EXTIntrruptHandler_802078DC+0x88>
+			88: R_PPC_REL24	OSSetCurrentContext
+  8c:	7f 8c e3 78 	mr      r12,r28
+  90:	93 fd 00 08 	stw     r31,8(r29)
+  94:	7d 88 03 a6 	mtlr    r12
+  98:	38 7e 00 00 	addi    r3,r30,0
+  9c:	38 9b 00 00 	addi    r4,r27,0
+  a0:	4e 80 00 21 	blrl
+  a4:	38 61 00 10 	addi    r3,r1,16
+  a8:	48 00 00 01 	bl      a8 <EXTIntrruptHandler_802078DC+0xa8>
+			a8: R_PPC_REL24	OSClearContext
+  ac:	7f 63 db 78 	mr      r3,r27
+  b0:	48 00 00 01 	bl      b0 <EXTIntrruptHandler_802078DC+0xb0>
+			b0: R_PPC_REL24	OSSetCurrentContext
+  b4:	bb 61 02 dc 	lmw     r27,732(r1)
+  b8:	80 01 02 f4 	lwz     r0,756(r1)
+  bc:	38 21 02 f0 	addi    r1,r1,752
+  c0:	7c 08 03 a6 	mtlr    r0
+  c4:	4e 80 00 20 	blr
+
+Script done on 2026-09-29 17:27:07-04:00 [COMMAND_EXIT_CODE="0"]
