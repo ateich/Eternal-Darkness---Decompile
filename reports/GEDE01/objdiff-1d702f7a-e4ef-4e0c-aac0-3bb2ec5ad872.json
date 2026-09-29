@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "assignment_id": "1d702f7a-e4ef-4e0c-aac0-3bb2ec5ad872",
+  "target": "fn_80132B24",
+  "compiler": "GC/1.3",
+  "cflags_extra": ["-use_lmw_stmw on"],
+  "report_only_recovery": {
+    "preserved_commit": "9c79fd662fc555d8f191ef9442e6bf7d375bbfa6",
+    "source_sha256": "8b4d23dede616a0dd108233826470d8d722df4aa2b9e942dde1e3880e658e6ea",
+    "source_equal": true,
+    "new_codegen_experiments": 0
+  },
+  "canonical": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80132B24 fn_80132B24 -o reports/GEDE01/objdiff-1d702f7a-e4ef-4e0c-aac0-3bb2ec5ad872-canonical.raw.json --format json-pretty",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/objdiff-1d702f7a-e4ef-4e0c-aac0-3bb2ec5ad872-canonical.raw.json",
+    "retail_bytes": 256,
+    "generated_bytes": 260,
+    "match_percent": 95.078125
+  },
+  "relocation_strict": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80132B24 fn_80132B24 -o reports/GEDE01/objdiff-1d702f7a-e4ef-4e0c-aac0-3bb2ec5ad872-reloc-strict.raw.json --format json-pretty -c function_reloc_diffs=name_address",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/objdiff-1d702f7a-e4ef-4e0c-aac0-3bb2ec5ad872-reloc-strict.raw.json",
+    "match_percent": 95.078125,
+    "relocation_count_each": 9,
+    "type_target_addend_sequence_equal": true,
+    "offsets_equal": false,
+    "strict_match": false
+  },
+  "divergence": "GC/1.3 emits addi r0,r3,lbl_8030F540@l followed by mr r28,r0, while retail forms the address directly in r28. The extra instruction makes the candidate 260 bytes versus retail 256 and shifts the seven later relocation offsets by +4. Retail also uses r3 for the first Pair word and stores it before forming the fn_801FE8DC output pointer; generated uses r6 and forms the output pointer first. All nine relocation type/target/addend tuples match in sequence.",
+  "legal_audit": "Honest C only; independent one-function translation unit; no inline/whole-function assembly, shared reconstruction, gate/compiler-policy/runtime/progress changes, neighboring edits, or new experiments."
+}

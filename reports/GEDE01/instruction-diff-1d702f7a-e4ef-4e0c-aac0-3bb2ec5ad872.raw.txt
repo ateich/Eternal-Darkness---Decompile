@@ -1,0 +1,9 @@
+COMMAND: python3 tools/fndiff.py game/game_fn_80132B24.c fn_80132B24 | grep -E '^(target|\*)'
+EXIT: 0
+target 256 bytes  base 260 bytes  match 95.078125
+* 0x002c  addi r28, r3, lbl_8030F540@l [None+0 t4]             | addi r0, r3, lbl_8030F540@l [None+0 t4]
+* 0x0034                                                       | mr r28, r0 [None+0 tNone]
+* 0x0080  lwz r3, 0x0(r26)                                     | lwz r6, 0x0(r26)
+* 0x0094                                                       | addi r3, r28, 0x54 [None+0 tNone]
+* 0x0098  stw r3, 0x6c(r28) [None+0 tNone]                     | stw r6, 0x6c(r28) [None+0 tNone]
+* 0x009c  addi r3, r28, 0x54 [None+0 tNone]                    |

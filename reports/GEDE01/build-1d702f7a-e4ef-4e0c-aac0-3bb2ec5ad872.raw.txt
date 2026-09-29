@@ -1,0 +1,28 @@
+COMMAND: python3 configure.py
+EXIT: 0
+STDOUT/STDERR: (empty)
+
+COMMAND: .tools/bin/ninja -j2
+EXIT: 0
+RAW COMPLETION OUTPUT (terminal tail):
+[951/956] MWCC build/GEDE01/src/game/game_fn_801F92F8.o
+[952/956] REPORT
+ INFO Loading project .
+ INFO Generating report for 7069 units (using 8 threads)
+ INFO Report generated in 0.278s
+ INFO Writing to build/GEDE01/report.json
+[953/956] LINK build/GEDE01/main.elf
+[954/956] DOL build/GEDE01/main.dol
+[955/956] CHECK config/GEDE01/build.sha1
+build/GEDE01/main.dol: OK
+[956/956] PROGRESS
+Progress:
+  All: 60.84% fuzzy, 51.27% matched, 51.14% linked (6358 / 7069 files)
+    Code: 1179560 / 2300692 bytes (6126 / 8214 functions)
+    Data: 39866 / 4305642 bytes (0.93%)
+  Game Code: 98.01% fuzzy, 82.56% matched, 82.35% linked (6340 / 6633 files)
+    Code: 1176532 / 1425104 bytes (6064 / 6354 functions)
+    Data: 39642 / 40522 bytes (97.83%)
+  SDK/Runtime: 100.00% fuzzy, 100.00% matched, 100.00% linked (18 / 18 files)
+    Code: 3028 / 3028 bytes (62 / 62 functions)
+    Data: 224 / 224 bytes (100.00%)
