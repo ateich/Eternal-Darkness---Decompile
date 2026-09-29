@@ -8,25 +8,24 @@ typedef struct BufferSetup {
 
 extern BufferSetup lbl_80607120[3];
 
-void fn_8018FFBC(u8* destination, u8* first, u8* second, u8 count)
+void fn_8018FFBC(u8* destination, const u8* first, const u8* second, u8 count)
 {
     u8* other = destination + lbl_80607120[0].color_buffer_offset * 4;
-    u8* row = destination;
     int buffer;
 
     for (buffer = 0; buffer < 2; buffer++) {
         int i;
         for (i = 0; i < count; i++) {
-            row[0] = first[0];
-            row[1] = first[1];
-            row[2] = first[2];
-            row[3] = first[3];
-            row[4] = second[0];
-            row[5] = second[1];
-            row[6] = second[2];
-            row[7] = second[3];
-            row += 8;
+            destination[0] = first[0];
+            destination[1] = first[1];
+            destination[2] = first[2];
+            destination[3] = first[3];
+            destination[4] = second[0];
+            destination[5] = second[1];
+            destination[6] = second[2];
+            destination[7] = second[3];
+            destination += 8;
         }
-        row = other;
+        destination = other;
     }
 }

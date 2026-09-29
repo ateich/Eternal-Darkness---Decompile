@@ -41,7 +41,22 @@ void fn_800BFFDC(void *object, void *state, int enabled)
         fn_8012C478(object, 0x10, enabled);
     }
 
-    is_secondary = (kind == 0x40 || kind == 0x80) && (fn_80157994(state) >= 2 || enabled == 0);
+    is_secondary = 0;
+    {
+        int relevant = is_secondary;
+        if (kind == 0x40 || kind == 0x80) {
+            relevant = 1;
+        }
+        if (relevant) {
+            int selected = 0;
+            if (fn_80157994(state) >= 2 || enabled == 0) {
+                selected = 1;
+            }
+            if (selected) {
+                is_secondary = 1;
+            }
+        }
+    }
 
     if (is_primary || is_secondary) {
         fn_8012C478(object, 0x11, enabled);

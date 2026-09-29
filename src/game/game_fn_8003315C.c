@@ -1,6 +1,6 @@
-extern double fn_80102320(double value);
+extern double fn_80102320(void);
 
-float fn_8003315C(float x)
+float fn_8003315C(void)
 {
-    return fn_80102320(x);
+    return fn_80102320();
 }

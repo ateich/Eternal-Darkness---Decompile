@@ -42,7 +42,7 @@ extern void fn_8020123C(int, void*, void*, void*);
 extern void fn_801DA890(int);
 extern u32 fn_801E2E1C(u32, int, int);
 extern void* fn_801E3020(u32, u32, void*, int, int, void**, void***, void***, void**, u32);
-extern void* fn_800CD568(int first, int owner, int second, void* third, float time, void* fourth, void* resource);
+extern void* fn_800CD568(int, int, u32, void*, void*, u32, float);
 extern int fn_801CEB2C(u32);
 extern void* fn_801DA3B0(u32, u32, void*, u8, int, int, void**, void**, void**, void***);
 extern void* fn_801DA058(u32);
@@ -96,8 +96,8 @@ void fn_801E3388(Object* object)
                          &output_c, &output_d, resource);
             *output_b = fn_80201B54(fn_800CD568(object->source,
                                                 (int)owner, object->flags,
-                                                output_a, lbl_80651248,
-                                                output_d, (void*)resource));
+                                                output_a, output_d,
+                                                resource, lbl_80651248));
             *output_c = *output_b;
             if ((object->flags & 0xF) == 8 && (int)resource != 0) {
                 void* second_b;

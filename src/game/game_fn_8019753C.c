@@ -3,7 +3,7 @@ typedef unsigned short u16;
 
 extern u8 lbl_80607120[];
 
-void fn_8019753C(u8* destination, u8* first, u8* second,
+void fn_8019753C(u8* destination, const u8* first, const u8* second,
                  u16 dimensions)
 {
     u8 split = (dimensions >> 1) & 0x7f;

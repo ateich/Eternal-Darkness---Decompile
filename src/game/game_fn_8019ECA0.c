@@ -24,35 +24,32 @@ extern void fn_8019EFAC(void*, void*, void*, void*, int);
 
 void fn_8019ECA0(u8* obj)
 {
-    int vertex_offset;
     Setup setup = lbl_80607120;
     Buffers buffers;
     float first[3][4];
     float second[3][4];
     int saved;
     int j;
-    int i;
+    u8* fields;
     u8 count;
     u8* color;
     DrawFn draw;
-    u8* fields;
+    u8* entry;
 
     fields = obj + 0x8C;
     fn_8018D788(lbl_8064D738, obj, &buffers, *(u16*)((u8*)&setup + 2));
+    entry = *(u8**)(obj + 0x4C);
+    count = obj[1];
+    color = buffers.indices;
+    draw = fn_8019EF50;
+    if (*(int*)fields == 0)
+        draw = fn_8019EFAC;
     {
-        u8* entry;
+        int i;
 
-        entry = *(u8**)(obj + 0x4C);
-        count = obj[1];
-        color = buffers.indices;
-        draw = fn_8019EF50;
-        if (*(int*)fields == 0)
-            draw = fn_8019EFAC;
         for (i = 0; i < count; i++) {
             int radius = entry[0x21];
-
-            vertex_offset = i * 8;
-            fn_8018D020(buffers.vertices + vertex_offset * 3,
+            fn_8018D020(buffers.vertices + i * 0x18,
                         (float)(*(s16*)(entry + 0x0A) - radius),
                         (float)(*(s16*)(entry + 0x0C) + radius),
                         (float)(*(s16*)(entry + 0x0A) + radius),

@@ -1,52 +1,53 @@
-typedef unsigned char u8;
-typedef signed short s16;
-typedef int s32;
-typedef unsigned int u32;
-typedef float f32;
+typedef struct Vec3i { int x, y, z; } Vec3i;
 
-typedef struct Vec3 {
-    u32 x;
-    u32 y;
-    u32 z;
-} Vec3;
+typedef struct Effect {
+    unsigned char pad0[4];
+    int handle;
+    int owner;
+    int fieldC;
+    unsigned char pad10[0xC];
+    Vec3i position;
+    int value;
+    unsigned short kind;
+    unsigned char pad2E[8];
+    unsigned char flag36;
+    unsigned char pad37;
+    unsigned char mode;
+    unsigned char pad39[0xF];
+    void* callback;
+} Effect;
 
-typedef struct Object Object;
-struct Object {
-    u8 pad0[4];
-    s32 timer;
-    s32 owner;
-    s32 timer_copy;
-    u8 pad10[0xC];
-    Vec3 position;
-    s32 value;
-    s16 kind;
-    u8 pad2e[8];
-    u8 byte36;
-    u8 pad37;
-    u8 byte38;
-    u8 pad39[0xF];
-    s32 (*callback)(Object*);
-};
+extern const float lbl_8064EF18;
+extern const float lbl_8064EF78;
+extern void fn_8014CBC0(Effect*);
+extern int fn_800AA6F4(void*);
+extern void fn_801FE8DC(int*, void*, float, float, float);
+extern int fn_801E8328();
 
-extern void fn_8014CBC0(Object*);
-extern void fn_801FE8DC(s32*, f32, f32, f32);
-extern int fn_801E8328(s32, Object*);
-extern s32 fn_800AA6F4(Object*);
-
-void fn_800AA7F0(Object* object, Vec3* position, s32* value, s16 kind, u8 flag, s32 owner)
+void fn_800AA7F0(Effect* effect, Vec3i* position, int* value, int kind,
+                 int flag, int owner)
 {
-    if (object != 0) {
-        fn_8014CBC0(object);
-        object->timer = 0;
-        object->position = *position;
-        object->value = *value;
-        object->callback = fn_800AA6F4;
-        object->kind = kind;
-        object->byte36 = flag;
-        object->timer_copy = 0;
-        object->owner = owner;
-        object->byte38 = 2;
-        fn_801FE8DC(&object->timer, 0.0f, 0.0f, 1.5f);
-        fn_801E8328(0x13, object);
+    if (effect != 0) {
+        float first;
+        float second;
+        float third;
+        int* handle;
+
+        fn_8014CBC0(effect);
+        handle = &effect->handle;
+        *handle = 0;
+        first = lbl_8064EF18;
+        third = lbl_8064EF78;
+        effect->position = *position;
+        second = first;
+        effect->value = *value;
+        effect->callback = fn_800AA6F4;
+        effect->kind = kind;
+        effect->flag36 = flag;
+        effect->fieldC = 0;
+        effect->owner = owner;
+        effect->mode = 2;
+        fn_801FE8DC(handle, fn_800AA6F4, first, second, third);
+        fn_801E8328(0x13, effect);
     }
 }

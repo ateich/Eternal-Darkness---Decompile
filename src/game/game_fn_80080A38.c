@@ -31,16 +31,18 @@ extern void fn_80211A48(const Vec3 *, const Vec3 *, Vec3 *);
 extern void *fn_8015C348(int);
 extern unsigned int fn_8013F898(void *, Segment *, Hit *);
 
-void fn_80080A38(Vec3 *result, Vec3 start, Vec3 end,
+void fn_80080A38(Vec3 *result, const Vec3 *start, Vec3 *end,
                  int adjust_hit, int shorten)
 {
+    /* NonMatching: behavior-complete, size-exact reconstruction. Remaining
+     * differences are FP register allocation and expression scheduling. */
     Segment segment;
     Hit hit;
     Vec3 scaled;
     float fraction;
     Collision collision;
 
-    fn_8013F3C0(&segment, &start, &end, lbl_8064EA60);
+    fn_8013F3C0(&segment, start, end, lbl_8064EA60);
     if (shorten) {
         if (fn_8013638C(&segment, &segment.end, lbl_8064C4E4,
                         &collision, &fraction, lbl_8064EA78)) {
@@ -48,16 +50,33 @@ void fn_80080A38(Vec3 *result, Vec3 start, Vec3 end,
             fn_80211A48(&segment.start, &scaled, &segment.end);
             fn_8013F3C0(&segment, &segment.start, &segment.end,
                         segment.width);
-            end = segment.end;
+            {
+                unsigned int *src = (unsigned int *)&segment.end;
+                unsigned int *dst = (unsigned int *)end;
+                unsigned int first = src[0];
+                {
+                    unsigned int second = src[1];
+                    dst[0] = first;
+                    first = src[2];
+                    dst[1] = second;
+                }
+                dst[2] = first;
+            }
         }
     }
     if (adjust_hit) {
         void *context = fn_8015C348(2);
         if (fn_8013F898(context, &segment, &hit)) {
-            end.x = hit.position.x + segment.direction.x * segment.width;
-            end.y = hit.position.y + segment.direction.y * segment.width;
-            end.z = hit.position.z + segment.direction.z * segment.width;
+            float first = segment.direction.x;
+            float x = hit.position.x + first * segment.width;
+            float y = hit.position.y + segment.direction.y * segment.width;
+            float z;
+            first = segment.direction.z;
+            z = hit.position.z + first * segment.width;
+            end->x = x;
+            end->y = y;
+            end->z = z;
         }
     }
-    *result = end;
+    *result = *end;
 }

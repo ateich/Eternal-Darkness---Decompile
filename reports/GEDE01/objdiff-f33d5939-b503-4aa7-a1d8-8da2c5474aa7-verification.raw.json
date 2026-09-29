@@ -1,0 +1,102 @@
+[
+  {
+    "command": [
+      "readelf",
+      "-Wr",
+      "build/GEDE01/obj/game/game_fn_801270DC.o"
+    ],
+    "exit_code": 0,
+    "stdout": "\nRelocation section '.rela.text' at offset 0x8c contains 1 entry:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n00000020  0000040a R_PPC_REL24            00000000   fn_801252D8 + 0\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "readelf",
+      "-x",
+      ".text",
+      "build/GEDE01/obj/game/game_fn_801252D8.o"
+    ],
+    "exit_code": 0,
+    "stdout": "\nHex dump of section '.text':\n NOTE: This section has relocations against it, but these have NOT been applied to this dump.\n  0x00000000 80000000 7c030000 4d820020 5460402e ....|...M.. T`@.\n  0x00000010 90600000 60030007 5460801e 7c600378 .`..`...T`..|`.x\n  0x00000020 7c16e3a6 4e800020                   |...N.. \n\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "readelf",
+      "-x",
+      ".text",
+      "build/GEDE01/obj/game/game_fn_801EF788.o"
+    ],
+    "exit_code": 0,
+    "stdout": "\nHex dump of section '.text':\n NOTE: This section has relocations against it, but these have NOT been applied to this dump.\n  0x00000000 9421fff0 7c0802a6 90010014 48000001 .!..|.......H...\n  0x00000010 3c600e07 38630e07 7c77e3a6 3c600407 <`..8c..|w..<`..\n  0x00000020 38630407 7c72e3a6 80010014 7c0803a6 8c..|r......|...\n  0x00000030 38210010 4e800020                   8!..N.. \n\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      ".tools/bin/ninja",
+      "-t",
+      "commands",
+      "build/GEDE01/src/game/game_fn_801270DC.o"
+    ],
+    "exit_code": 0,
+    "stdout": "\"/usr/bin/python3\" tools/download_tool.py sjiswrap build/tools/sjiswrap.exe --tag v1.2.2\ntools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -MMD -c src/game/game_fn_801270DC.c -o build/GEDE01/src/game && \"/usr/bin/python3\" tools/transform_dep.py build/GEDE01/src/game/game_fn_801270DC.d build/GEDE01/src/game/game_fn_801270DC.d\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "sha1sum",
+      "build/GEDE01/main.dol"
+    ],
+    "exit_code": 0,
+    "stdout": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "readelf",
+      "-Wr",
+      "build/GEDE01/src/game/game_fn_801270DC.o"
+    ],
+    "exit_code": 0,
+    "stdout": "\nRelocation section '.rela.text' at offset 0xf8 contains 3 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n00000020  0000060a R_PPC_REL24            00000000   fn_801252D8 + 0\n00000044  0000056d R_PPC_EMB_SDA21        00000008   @7 + 0\n0000004c  0000046d R_PPC_EMB_SDA21        00000000   @5 + 0\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "sha1sum",
+      "build/GEDE01/main.dol"
+    ],
+    "exit_code": 0,
+    "stdout": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "readelf",
+      "-Wr",
+      "build/GEDE01/src/game/game_fn_801270DC.o"
+    ],
+    "exit_code": 0,
+    "stdout": "\nRelocation section '.rela.text' at offset 0xf0 contains 3 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n00000020  0000060a R_PPC_REL24            00000000   fn_801252D8 + 0\n00000044  0000056d R_PPC_EMB_SDA21        00000008   @7 + 0\n0000004c  0000046d R_PPC_EMB_SDA21        00000000   @5 + 0\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801270DC.o"
+    ],
+    "exit_code": 0,
+    "stdout": "ninja: no work to do.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "tools/legal_audit.py"
+    ],
+    "exit_code": 0,
+    "stdout": "legal audit passed (23446 tracked project files inspected)\n",
+    "stderr": ""
+  }
+]

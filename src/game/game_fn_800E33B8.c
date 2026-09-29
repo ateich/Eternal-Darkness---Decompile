@@ -20,33 +20,36 @@ extern void fn_80204810(void);
 
 void fn_800E33B8(int id, void *resource, EventData *data)
 {
+    EventData *event_data;
     int mode;
     struct {
-        int value;
+        void *object;
         int argument;
-    } event;
+    } state;
     void *created;
-    void *object;
+    int value;
 
-    object = fn_80201814(id);
-    event.value = data->value;
+    event_data = data;
+    state.object = fn_80201814(id);
+    value = event_data->value;
     mode = 49;
-    if (event.value != 0)
+    if (value != 0)
         mode = 48;
-    event.argument = 12;
-    if (event.value != 0)
-        event.argument = 4;
+    state.argument = 12;
+    if (value != 0)
+        state.argument = 4;
 
-    fn_801291F0(resource, mode, event.value != 0 ? 25 : 26);
+    fn_801291F0(resource, mode,
+                (unsigned char)(26 + ((-value | value) >> 31)));
     created = fn_801294DC(resource, mode, 48, 6);
     if (created != 0) {
         mode = id << 8;
         fn_80128C44(created, fn_80204810, mode | 7);
         mode |= 6;
         fn_80128C28(created, fn_80204810, mode);
-        fn_801287C4(created, fn_80204810, mode, event.argument);
-        fn_80201D2C(object, 124);
-        fn_80201D14(object, 1);
-        ((RuntimeState *)data)->timer = 120;
+        fn_801287C4(created, fn_80204810, mode, state.argument);
+        fn_80201D2C(state.object, 124);
+        fn_80201D14(state.object, 1);
+        ((RuntimeState *)event_data)->timer = 120;
     }
 }

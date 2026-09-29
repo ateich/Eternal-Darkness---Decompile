@@ -11,13 +11,8 @@ extern void fn_80188584(void*, void*), fn_8018D0D0(void*, void*, s16);
 extern int fn_801ED57C(int);
 extern void fn_801889D8(void*, void*, void*), fn_80226D78(int);
 
-typedef struct Object80189C14 {
-    u8 pad0[0x94];
-    float points[9];
-    float extra[9];
-} Object80189C14;
-
-void fn_80189C14(Object80189C14* object)
+/* An integral incoming address lets MWCC allocate self independently. */
+void fn_80189C14(unsigned long arg)
 {
     u8* data = lbl_80607120;
     int entry_index;
@@ -37,7 +32,7 @@ void fn_80189C14(Object80189C14* object)
     int position_offset;
     int saved;
 
-    self = (u8*)object;
+    self = (u8*)arg;
     count = self[1];
     flush0 = *(u16*)(data + 0xA);
     flush1 = *(u16*)(data + 0xE);
@@ -85,7 +80,7 @@ void fn_80189C14(Object80189C14* object)
     DCFlushRange(buffer0, flush0);
     DCFlushRange(buffer1, flush1);
     DCFlushRange(buffer2, flush2);
-    fn_80188584(object->points, object->extra);
+    fn_80188584(self + 0x94, self + 0xB8);
     saved = fn_801ED57C(0);
     fn_8018D0D0(self, self + 0x5C, *(s16*)(self + 0xE));
     fn_801889D8(buffer0, buffer1, buffer2);

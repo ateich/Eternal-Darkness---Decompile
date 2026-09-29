@@ -47,31 +47,30 @@ extern void fn_80147EC4(EffectDescriptor*);
 void fn_80031694(Vec3* position, s32 alternate, s32 object_id)
 {
     EffectDescriptor effect;
-    EffectDescriptor* desc = &effect;
-    fn_8019B13C(desc);
-    desc->enabled = 0;
-    desc->type = fn_801D3A24(object_id, 0x31);
-    desc->unk06 = 0;
-    desc->unk16 = 0;
-    desc->scale = lbl_8064E068;
-    desc->unk1C = 0;
-    desc->active = 1;
-    desc->alpha = 0xFC;
-    desc->size = 12;
+    fn_8019B13C(&effect);
+    effect.enabled = 0;
+    effect.type = fn_801D3A24(object_id, 0x31);
+    effect.unk06 = 0;
+    effect.unk16 = 0;
+    effect.scale = lbl_8064E068;
+    effect.unk1C = 0;
+    effect.active = 1;
+    effect.alpha = 0xFC;
+    effect.size = 12;
     if (alternate != 0) {
-        desc->color0 = 0xF0;
-        desc->color1 = 0x96;
-        desc->offset = -10;
+        effect.color0 = 0xF0;
+        effect.color1 = 0x96;
+        effect.offset = -10;
     } else {
-        desc->color0 = 0;
-        desc->color1 = 0;
-        desc->offset = 0;
-        desc->unk02 = 0xFF;
-        desc->unk03 = -3;
+        effect.color0 = 0;
+        effect.color1 = 0;
+        effect.offset = 0;
+        effect.unk02 = 0xFF;
+        effect.unk03 = -3;
     }
-    desc->callback = fn_8019AFEC;
-    desc->position = *position;
-    desc->mode = 4;
-    desc->position.z += lbl_8064E138;
+    effect.callback = fn_8019AFEC;
+    effect.position = *position;
+    effect.mode = 4;
+    effect.position.z += lbl_8064E138;
     fn_80147EC4(&effect);
 }

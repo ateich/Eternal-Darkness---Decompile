@@ -29,8 +29,8 @@ void fn_80191034(u8* data)
     u8* buffer_b = *(u8**)(data + 0x54);
     u8* buffer_c = *(u8**)(data + 0x58);
     u8* output;
+    int buffer_offset;
     int j;
-    int vertex_offset;
     int token;
 
     if (lbl_8064D738 != 0) {
@@ -42,12 +42,12 @@ void fn_80191034(u8* data)
     element = *(u8**)(data + 0x4C);
     output = buffer_c;
     i = 0;
+    buffer_offset = 0;
     while (i < count) {
-        vertex_offset = i * 8;
         if (!fn_80180430(data + 0x24, (u8)i) || fn_801911B0(data, i)) {
-            fn_80188A7C(element, buffer_a + vertex_offset * 3, fn_8018D020);
+            fn_80188A7C(element, buffer_a + buffer_offset, fn_8018D020);
         } else {
-            fn_8018E0D8(element, buffer_a + vertex_offset * 3, fn_8018D020);
+            fn_8018E0D8(element, buffer_a + buffer_offset, fn_8018D020);
         }
 
         j = 0;
@@ -57,6 +57,7 @@ void fn_80191034(u8* data)
             output += 4;
         }
         element += 0x38;
+        buffer_offset += 0x18;
         i++;
     }
 

@@ -1,0 +1,6 @@
+{
+  "hypothesis": "Double scaling followed by final float conversion may avoid intermediate float rounding.",
+  "source": "typedef float f32;\ntypedef signed short s16;\n\nextern void fn_801252D8(int);\n\n/*\n * NonMatching: assumes GQR2 retains the signed-16, scale-4 setup installed\n * by fn_801EF788. fn_801252D8(4) configures GQR6, not GQR2.\n * Retail loads all three packed components before storing the float vector.\n * Scaling in double is exact for every s16 input and avoids intermediate\n * float rounding in the scalar reconstruction.\n */\nvoid fn_801270DC(f32* output, const s16* input)\n{\n    double x, y, z;\n\n    fn_801252D8(4);\n    x = (double)input[0] * 0.0625;\n    y = (double)input[1] * 0.0625;\n    z = (double)input[2] * 0.0625;\n    output[0] = (f32)x;\n    output[1] = (f32)y;\n    output[2] = (f32)z;\n}\n",
+  "result": "Rejected: 180 bytes, 0.0% canonical and strict. Adds three explicit frsp after double multiply; baseline uses fmuls without these frsp.",
+  "decision": "Rejected the larger double candidate. Retained exactly one translation unit, recovered verbatim from preserved commit 90dba8a90a88f9ca608cddc3b0fc73eef70f384e. This source is preloaded float temporaries, distinct from accepted-base counted loop; final measurements are separate from this rejected experiment."
+}

@@ -25,22 +25,16 @@ typedef struct State {
 extern int lbl_8064D6A0;
 extern void* memset(void*, int, u32);
 
-static inline int InverseHighByte(int value)
-{
-    return (0xFF - (unsigned char)(value & 0xFF)) << 8;
-}
-
 void fn_801EBC6C(Source* source, State* state, u16* image)
 {
-    State* work = state;
-    Source* input = source;
-    u16* output = image;
+    register State* work = state;
+    register Source* input = source;
+    register u16* output = image;
     u16 value;
     int compare;
     int step;
     int packed;
     int i;
-    int high;
 
     memset(work, 0, 0x18);
     work->image = output;
@@ -64,14 +58,12 @@ void fn_801EBC6C(Source* source, State* state, u16* image)
                     }
 
                     step = work->step;
-                    if (input->upper == input->lower && (unsigned char)compare == input->lower) {
+                    if (input->upper == input->lower && (unsigned char)compare == input->lower)
                         step = 0;
-                    }
 
                     step += compare;
-                    high = InverseHighByte(step);
                     work->accumulator += input->step;
-                    packed = high;
+                    packed = (0xFF - (unsigned char)step) << 8;
                     packed = (packed & ~0xFF) | (step & 0xFF);
                     value = packed;
                 } else {

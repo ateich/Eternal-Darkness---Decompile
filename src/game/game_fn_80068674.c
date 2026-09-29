@@ -20,7 +20,7 @@ s32 fn_80068674(void *object, s32 excluded_id)
             Entry80201814 *candidate;
             s32 object_id;
 
-            object_id = objects[i];
+            object_id = objects[(unsigned int)i];
             if (object_id == 0 || excluded_id == object_id) {
                 continue;
             }
@@ -29,11 +29,11 @@ s32 fn_80068674(void *object, s32 excluded_id)
                 total += fn_80201B64((int *)candidate) == 0x22;
                 total += fn_80068674(candidate, fn_80201B54((int *)object));
             } else {
-                objects[i] = 0;
+                objects[(unsigned int)i] = 0;
             }
         }
     } else {
-        asm { nop }
+        total = 0;
     }
     return total;
 }

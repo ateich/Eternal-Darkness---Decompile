@@ -1,23 +1,12 @@
 typedef unsigned int u32;
-typedef unsigned char u8;
-typedef signed char s8;
-typedef unsigned short u16;
 
-typedef struct Color {
-    u8 r, g, b, a;
-} Color;
-
-typedef struct ColorDelta {
-    s8 r, g, b, a;
-} ColorDelta;
-
-extern Color lbl_806515D0;
-extern ColorDelta lbl_806515D4;
-extern ColorDelta lbl_806515D8;
+extern u32 lbl_806515D0;
+extern u32 lbl_806515D4;
+extern u32 lbl_806515D8;
 extern float lbl_806515DC;
 extern float lbl_806515E0;
 extern float lbl_806515E4;
-extern Color lbl_80651F70;
+extern u32 lbl_80651F70;
 
 extern int fn_80200C10(void *data);
 extern int fn_80200C38(void *data);
@@ -35,7 +24,7 @@ extern void fn_801E8328(int value, void *object);
 extern void fn_801568C0(void *object, void (*callback)(void));
 extern void fn_8012C198(void *object);
 extern void fn_8011FABC(void *object, int value, int other);
-extern void fn_8012C774(u8* state, Color a, ColorDelta b, Color c, int flags);
+extern void fn_8012C774(void *object, u32 *a, u32 *b, u32 *c, int value);
 extern void fn_8011FA8C(void *object, int value, int flags);
 extern void fn_80205DB8(void);
 
@@ -114,15 +103,32 @@ int fn_80205914(void *object, int event, void *data)
         }
     } else if (event == 0xB) {
         if (data_type == 0x11) {
-            Color a = lbl_806515D0;
-            ColorDelta b = lbl_806515D4;
-            ColorDelta alternate = lbl_806515D8;
-            Color c = lbl_80651F70;
+            struct {
+                u32 output[3];
+                u32 c;
+                u32 alternate;
+                u32 b;
+                u32 a;
+            } local;
+
+            local.a = lbl_806515D0;
+            local.b = lbl_806515D4;
+            local.alternate = lbl_806515D8;
+            local.c = lbl_80651F70;
 
             if (!(fn_8011FAEC(target) & 0x2000)) {
-                b = alternate;
+                local.b = local.alternate;
             }
-            fn_8012C774(target, a, b, c, 4);
+            {
+                u32 c = local.c;
+                u32 b = local.b;
+                u32 a = local.a;
+
+                local.output[1] = b;
+                local.output[0] = c;
+                local.output[2] = a;
+            }
+            fn_8012C774(target, &local.output[2], &local.output[1], &local.output[0], 4);
             fn_8011FA8C(target, 0, 0x2000);
             fn_8020104C(0x39, effect, effect, 0, lbl_806515E4);
             return 1;

@@ -15,41 +15,40 @@ typedef struct HandlerState {
 extern f32 lbl_8064E63C;
 extern f32 lbl_8064E640;
 extern int fn_80200C38();
-extern s16 fn_801A74F8(s32 data);
+extern s32 fn_801A74F8(void);
 extern u16 fn_801A7530(s32 value);
 extern int fn_80038308(void *, int, short *);
 extern s32 fn_80038464(s32 context, s32 index, s16 *value);
 extern HandlerState *fn_80036D38(s32 context);
 extern int fn_80201B44();
-extern int fn_800389E0(s32 context, s32 index, s16 value, s32 active);
+extern int fn_800389E0(s32 context, s32 index, s32 value, s32 active);
 extern s32 fn_80200C20(s32 value);
 extern unsigned long long fn_8020123C();
 extern void fn_8011F778(s32 object, f32 value);
 extern void fn_80048708(s32 object);
-extern void fn_8020104C(int, int, int, int, float);
+extern void fn_8020104C(int, void*, void*, int, float);
+#define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void *)(b), (void *)(c), (int)(d), (e))
 extern void fn_80201D34(void *, s32);
 extern void fn_80201D1C(void *, s32);
 
 void fn_80063124(s32 context, s32 object, s32 event, s32 current_object,
                   s32 unused, s32 *out_result)
 {
-    s16 step;
+    s32 event_data;
+    u32 channels;
+    s32 step;
     s32 signed_step;
     s32 special;
-    u32 channels;
-    u16 flags;
-    s32 event_data;
     s32 index;
     s32 result;
 
     result = 0;
     event_data = fn_80200C38(event);
-    step = fn_801A74F8(event_data);
+    step = fn_801A74F8();
     fn_801A7530(event_data);
-    flags = fn_801A7530(event_data);
-    channels = flags;
-    signed_step = step;
-    special = flags & 2;
+    channels = (u16)fn_801A7530(event_data);
+    signed_step = (s16)step;
+    special = channels & 2;
 
     for (index = 0; index < 4; index++) {
         if ((channels & (1 << index)) != 0) {
@@ -72,7 +71,7 @@ void fn_80063124(s32 context, s32 object, s32 event, s32 current_object,
             remaining = remaining > 0 ? remaining : 0;
             fn_800389E0(context, index, remaining, 1);
 
-            if (special != 0 && is_current != 0 && step > 0) {
+            if (special != 0 && is_current != 0 && (s16)step > 0) {
                 fn_8020123C(0xC9, current_object, fn_80200C20(event), 1);
             }
 

@@ -17,13 +17,9 @@ extern void fn_8019F1CC(u16);
 
 void fn_8019F00C(void* a, void* b, void* c, void* d, int count)
 {
-    u16 current;
-    int* entries;
-    u16 end;
-    unsigned int j;
-    int outer;
     int first;
-    int index;
+    u16 current;
+    u16 outer;
 
     fn_80225F4C(23, d, 48);
     fn_80225F4C(9, a, (u8)fn_8017FFB8());
@@ -31,10 +27,12 @@ void fn_8019F00C(void* a, void* b, void* c, void* d, int count)
     fn_80225F4C(13, b, (u8)fn_8017FFB0());
     fn_8022A75C(1, 3, 0);
 
-    for (outer = 0; (outer & 0xFFFF) < count; outer++) {
-        entries = fn_801EF2B0();
+    for (outer = 0; outer < count; outer++) {
+        int* entries = fn_801EF2B0();
+        int index;
+        u16 end;
 
-        first = (outer & 0xFFFF) * 4;
+        first = outer * 4;
         fn_8022B7CC(outer, 30, 1);
         for (index = 0; (u16)index < 16; index++) {
             if (entries[(u16)index] == 0) {
@@ -50,8 +48,9 @@ void fn_8019F00C(void* a, void* b, void* c, void* d, int count)
         }
         fn_80226AB4(128, 5, 4);
         end = first + 4;
-        for (j = first & 0xFFFF; (j & 0xFFFF) < end; j++) {
-            current = j;
+        first = (u16)first;
+        for (; (u16)first < end; first++) {
+            current = first;
             fn_8019F1CC(current);
             fn_8019F1C0(current);
             fn_8019F1B4(current);

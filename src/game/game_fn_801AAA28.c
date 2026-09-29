@@ -12,7 +12,7 @@ typedef struct State {
     Vec3 fourth;
 } State;
 
-extern State lbl_80608020;
+extern volatile State lbl_80608020;
 extern unsigned char lbl_806080E0[];
 extern int lbl_8064D2F4;
 extern float lbl_80650E60;
@@ -29,22 +29,30 @@ extern void fn_801ACC94(int);
 void fn_801AAA28(void)
 {
     float value = lbl_80650E60;
+    volatile Vec3* first;
+    volatile Vec3* second;
+    volatile Vec3* third;
+    volatile Vec3* fourth;
 
-    lbl_80608020.first.x = value;
-    lbl_80608020.first.y = value;
-    lbl_80608020.first.z = value;
-    lbl_80608020.second.x = value;
-    lbl_80608020.second.y = value;
-    lbl_80608020.second.z = value;
-    lbl_80608020.third.x = value;
-    lbl_80608020.third.y = value;
-    lbl_80608020.third.z = lbl_80650E64;
-    lbl_80608020.fourth.x = value;
-    lbl_80608020.fourth.y = lbl_80650E68;
-    lbl_80608020.fourth.z = value;
+    first = &lbl_80608020.first;
+    first->x = value;
+    first->y = value;
+    first->z = value;
+    second = &lbl_80608020.second;
+    second->x = value;
+    second->y = value;
+    second->z = value;
+    third = &lbl_80608020.third;
+    third->x = value;
+    third->y = value;
+    third->z = lbl_80650E64;
+    fourth = &lbl_80608020.fourth;
+    fourth->x = value;
+    fourth->y = lbl_80650E68;
+    fourth->z = value;
 
-    fn_801C9914(&lbl_80608020, &lbl_80608020.first, &lbl_80608020.second,
-                &lbl_80608020.third, &lbl_80608020.fourth, lbl_80650E6C,
+    fn_801C9914((void*)&lbl_80608020, (void*)first, (void*)second,
+                (void*)third, (void*)fourth, lbl_80650E6C,
                 lbl_80650E6C, lbl_80650E70, 0, 0, 0);
     memset(lbl_806080E0, 0, 0x2F80);
     lbl_8064D2F4 = 1;

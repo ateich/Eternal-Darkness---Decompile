@@ -10,11 +10,13 @@ void fn_80129D54(void* owner, int count, Item* item)
     int i;
     for (i = 0; i < count; current++, i++) {
         switch (current->kind) {
+        case 1:
+            break;
         case 0:
             fn_801287C4(owner, fn_801A9FA4, (unsigned short)current->value,
                         current->packed >> 17);
             break;
-        case 2:
+        default:
             break;
         }
     }

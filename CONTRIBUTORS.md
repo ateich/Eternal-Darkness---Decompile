@@ -13,7 +13,7 @@ commits are not visible here. This file is the durable record of who did what.
 
 ## Andrew ([@ateich](https://github.com/ateich))
 
-**624 functions, 213,164 matched code bytes.**
+**554 functions, 181,468 matched code bytes.**
 
 ### Script handlers and narrowed values ([#1](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/1), [#2](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/2), [#3](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/3)) — 6 functions, 7,488 bytes
 
@@ -402,22 +402,19 @@ in the landing evidence.
 | `fn_8015BDF0` | 560 |
 | _63 more_ | 14,288 |
 
-### Late-September matching batches ([#27](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/27), [#28](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/28), [#29](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/29)) — 70 functions, 31,696 bytes
+### Late-September submissions — retained for verified integration
 
-These three batches recover interfaces, structure layouts, source expression
-shape, data ownership, and narrow MWCC settings across game, runtime, SDK, and
-audio code. PR #27 also reconstructs the original multi-function translation
-unit for `0x80158794`–`0x80159630`, which is required for MWCC to reproduce the
-retail global-data layout used by `fn_80159440`.
+Andrew ([@ateich](https://github.com/ateich)) also submitted
+[#27](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/27),
+[#28](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/28), and
+[#29](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/29).
+Their source, layout and compiler-setting research remains credited to Andrew.
 
-| Pull request | Functions | Bytes | Focus |
-| --- | ---: | ---: | --- |
-| [#27](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/27) | 22 | 13,252 | Calls, loop forms, constants, and translation-unit data layout |
-| [#28](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/28) | 20 | 6,804 | By-value colors, call arguments, static data, and build flags |
-| [#29](https://github.com/psdwizzard/Eternal-Darkness---Decompile/pull/29) | 28 | 11,640 | Struct layouts, value passing, declarations, SDK/reference forms, and timers |
-| **Total** | **70** | **31,696** | |
-
-Andrew's original commits and authorship are preserved in the integration
-history. The batches were reconciled onto the current tree and accepted only
-after the canonical build, relocation-strict comparisons, legal audit, and
-whole-DOL SHA-1 gate passed together.
+These submissions reached public main outside the durable acceptance path.
+The September 29 recovery restores the last locally verified source snapshot;
+it does not claim these batches as accepted matches. Their original public
+commits remain in history through `c09bfab7b33eaeacf996a166fe2b9083045e4845`
+and are retained for isolated review and incremental integration. In particular,
+the combined translation unit in #27 and symbol/build-tool changes need explicit
+policy review; each imported match must pass the existing strict gates without
+regressing previously accepted work. No contributor history is rewritten.

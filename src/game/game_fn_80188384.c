@@ -9,7 +9,7 @@ extern void* lbl_8064D250;
 extern void fn_801ECC4C(void);
 extern void fn_8022B2AC(void*, u16);
 extern void fn_80226AB4(int, int, u16);
-extern void fn_80188578(unsigned int);
+extern void fn_80188578(u16);
 extern void fn_8018856C(u16);
 extern void fn_80188560(u16);
 extern void fn_8018855C(void);
@@ -17,19 +17,20 @@ extern void* fn_8022B374(void);
 
 void fn_80188384(u8* input)
 {
-    int i;
-    u16 count;
     int count2;
+    u16 count;
+    int i;
+    u16 index;
 
     fn_801ECC4C();
-    count = ((u16*)input)[1];
+    count = *(u16*)(input + 2);
     fn_8022B2AC(lbl_80606780, *(u16*)(input + 6));
-    fn_80226AB4(0x80, 5, (u16)count);
+    fn_80226AB4(0x80, 5, count);
     for (i = 0; (u16)i < count; i++) {
-        count2 = (u16)i;
-        fn_80188578(count2);
-        fn_8018856C(count2);
-        fn_80188560(count2);
+        index = i;
+        fn_80188578(index);
+        fn_8018856C(index);
+        fn_80188560(index);
     }
     fn_8018855C();
     lbl_8064D250 = fn_8022B374();
@@ -46,12 +47,12 @@ void fn_80188384(u8* input)
     fn_80188560(0);
     count2 -= 2;
     for (i = 2; (u16)i < count2; i += 2) {
-        count = (u16)i;
-        fn_80188578(count);
-        fn_8018856C(count);
-        fn_80188560(count);
+        index = i;
+        fn_80188578(index);
+        fn_8018856C(index);
+        fn_80188560(index);
         {
-            int next = (u16)(i + 1);
+            u16 next = i + 1;
             fn_80188578(next);
             fn_8018856C(next);
             fn_80188560(next);
@@ -59,19 +60,19 @@ void fn_80188384(u8* input)
             fn_8018856C(next);
             fn_80188560(next);
         }
-        fn_80188578(count);
-        fn_8018856C(count);
-        fn_80188560(count);
+        fn_80188578(index);
+        fn_8018856C(index);
+        fn_80188560(index);
     }
     {
-        count = (u16)i;
-        fn_80188578(count);
-        fn_8018856C(count);
-        fn_80188560(count);
-        count = (u16)(i + 1);
-        fn_80188578(count);
-        fn_8018856C(count);
-        fn_80188560(count);
+        index = i;
+        fn_80188578(index);
+        fn_8018856C(index);
+        fn_80188560(index);
+        index = i + 1;
+        fn_80188578(index);
+        fn_8018856C(index);
+        fn_80188560(index);
     }
     fn_8018855C();
     lbl_8064D24C = fn_8022B374();

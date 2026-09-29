@@ -8,6 +8,7 @@ extern char lbl_802448F8[];
 extern u32 *fn_801E5D20(void *);
 extern void fn_801E6228(void *, const char *, ...);
 
+/* NonMatching: honest reconstruction of the time-display update path. */
 void fn_8007D744(int event)
 {
     int ticks;
@@ -17,8 +18,15 @@ void fn_8007D744(int event)
         return;
     }
     switch (event) {
+    case 0:
+        break;
+    case 1:
+        break;
+    case 2:
+        break;
+    case 3:
+        break;
     case 4:
-    case 6:
         break;
     case 5:
         flags = fn_801E5D20(lbl_8064C8EC);
@@ -27,6 +35,8 @@ void fn_8007D744(int event)
         *flags |= 1;
         fn_801E6228(lbl_8064C8EC, lbl_802448F8, ticks / 3600,
                     (ticks / 60) % 60, ticks % 60);
+        break;
+    default:
         break;
     }
 }
