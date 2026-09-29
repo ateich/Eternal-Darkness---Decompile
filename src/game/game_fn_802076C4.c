@@ -23,8 +23,8 @@ typedef struct EXIControl {
     EXICallback tcCallback;
     EXICallback extCallback;
     volatile u32 state;
-    void *immBuf;
     s32 immLen;
+    void *immBuf;
     u32 dev;
     u32 id;
     s32 idTime;
@@ -35,29 +35,26 @@ extern EXIControl Ecb_80640AA8[3];
 extern void __OSMaskInterrupts(u32 interrupts);
 extern void OSClearContext(OSContext *context);
 extern void OSSetCurrentContext(OSContext *context);
+volatile u32 __EXIRegs[15] : 0xCC006800;
 
 static void TCIntrruptHandler_802076C4(s16 interrupt, OSContext *context)
 {
     OSContext exceptionContext;
     s32 chan = (interrupt - 10) / 3;
     EXIControl *exi = &Ecb_80640AA8[chan];
-    volatile u8 *regs = (u8 *)0xCC006800;
-    s32 offset;
+    s32 i;
     EXICallback callback;
 
     __OSMaskInterrupts(0x80000000 >> interrupt);
-    offset = chan * sizeof(EXIRegisters);
-    *(volatile u32 *)(regs + offset) =
-        (*(volatile u32 *)(regs + offset) & 0x7F5) | 8;
+    __EXIRegs[chan * 5] = (__EXIRegs[chan * 5] & 0x7F5) | 8;
     callback = exi->tcCallback;
     if (callback != 0) {
         exi->tcCallback = 0;
         if (exi->state & 3) {
-            if ((exi->state & 2) && exi->immBuf != 0) {
-                s32 i;
+            if ((exi->state & 2) && exi->immLen != 0) {
+                u32 data = __EXIRegs[chan * 5 + 4];
                 u8 *buf = exi->immBuf;
                 s32 len = exi->immLen;
-                u32 data = *(volatile u32 *)(regs + offset + 0x10);
 
                 for (i = 0; i < len; i++) {
                     *buf++ = data >> ((3 - i) * 8);
