@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "assignment_id": "4fe2b012-b70d-4e4e-b137-3b764403529f",
+  "attempt": 5,
+  "base_commit": "2d4850e53fc20d66f42fdbf91bd83668cc0eba96",
+  "target": "fn_80206F50",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/build-4fe2b012-b70d-4e4e-b137-3b764403529f.log",
+    "eternal-darkness-decomp/reports/GEDE01/legal-audit-4fe2b012-b70d-4e4e-b137-3b764403529f.log",
+    "eternal-darkness-decomp/reports/GEDE01/dol-sha1-4fe2b012-b70d-4e4e-b137-3b764403529f.log",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-4fe2b012-b70d-4e4e-b137-3b764403529f.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-reloc-strict-4fe2b012-b70d-4e4e-b137-3b764403529f.json",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-retail-4fe2b012-b70d-4e4e-b137-3b764403529f.log",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-rebuilt-4fe2b012-b70d-4e4e-b137-3b764403529f.log",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-4fe2b012-b70d-4e4e-b137-3b764403529f.log"
+  ],
+  "divergence": "The exact preserved GC/1.2.5n candidate is size-exact at 372 bytes and measures 99.870964% in both canonical and function_reloc_diffs=name_address comparisons. All seven PPC relocations agree in offset, type, target, and zero addend. The sole codegen divergence is instruction scheduling at offsets 0xC4 and 0xC8: retail emits li r5,0 then li r6,0x64, while the rebuild emits li r6,0x64 then li r5,0. The freshly built DOL SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}

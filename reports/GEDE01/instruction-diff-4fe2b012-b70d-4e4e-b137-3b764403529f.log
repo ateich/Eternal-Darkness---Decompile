@@ -1,0 +1,98 @@
+Script started on 2026-09-29 15:07:52-04:00 [COMMAND="python3 tools/fndiff.py game/game_fn_80206F50.c __EXIProbe_80206F50" <not executed on terminal>]
+ INFO Writing to /home/rabbit/src/darkfoundry-new/.darkfoundry/worktrees/81136289-d9d6-4a74-8320-2e4da3c1fe24/eternal-darkness-decomp/build/GEDE01/fndiff___EXIProbe_80206F50.json
+target 372 bytes  base 372 bytes  match 99.870964
+  0x0000  mflr r0                                              | mflr r0
+  0x0004  stw r0, 0x4(r1)                                      | stw r0, 0x4(r1)
+  0x0008  stwu r1, -0x28(r1)                                   | stwu r1, -0x28(r1)
+  0x000c  stmw r27, 0x14(r1)                                   | stmw r27, 0x14(r1)
+  0x0010  addi r28, r3, 0x0                                    | addi r28, r3, 0x0
+  0x0014  lis r3, Ecb_80640AA8@ha [None+0 t6]                  | lis r3, Ecb_80640AA8@ha [None+0 t6]
+  0x0018  cmpwi r28, 0x2                                       | cmpwi r28, 0x2
+  0x001c  slwi r4, r28, 6                                      | slwi r4, r28, 6
+  0x0020  addi r0, r3, Ecb_80640AA8@l [None+0 t4]              | addi r0, r3, Ecb_80640AA8@l [None+0 t4]
+  0x0024  add r31, r0, r4 [None+0 tNone]                       | add r31, r0, r4 [None+0 tNone]
+  0x0028  bne 0x34                                             | bne 0x34
+  0x002c  li r3, 0x1                                           | li r3, 0x1
+  0x0030  b 0x160                                              | b 0x160
+  0x0034  li r29, 0x1                                          | li r29, 0x1
+  0x0038  bl OSDisableInterrupts [None+0 t10]                  | bl OSDisableInterrupts [None+0 t10]
+  0x003c  mulli r5, r28, 0x14                                  | mulli r5, r28, 0x14
+  0x0040  lwz r0, 0xc(r31) [None+0 tNone]                      | lwz r0, 0xc(r31) [None+0 tNone]
+  0x0044  lis r4, 0xcc00                                       | lis r4, 0xcc00
+  0x0048  addi r6, r4, 0x6800                                  | addi r6, r4, 0x6800
+  0x004c  add r6, r6, r5                                       | add r6, r6, r5
+  0x0050  rlwinm. r0, r0, 0, 28, 28                            | rlwinm. r0, r0, 0, 28, 28
+  0x0054  lwz r7, 0x0(r6)                                      | lwz r7, 0x0(r6)
+  0x0058  mr r30, r3                                           | mr r30, r3
+  0x005c  bne 0x128                                            | bne 0x128
+  0x0060  rlwinm. r0, r7, 0, 20, 20                            | rlwinm. r0, r7, 0, 20, 20
+  0x0064  beq 0x90                                             | beq 0x90
+  0x0068  lwz r5, 0x0(r6)                                      | lwz r5, 0x0(r6)
+  0x006c  lis r3, 0x8000                                       | lis r3, 0x8000
+  0x0070  li r4, 0x0                                           | li r4, 0x0
+  0x0074  andi. r5, r5, 0x7f5                                  | andi. r5, r5, 0x7f5
+  0x0078  slwi r0, r28, 2                                      | slwi r0, r28, 2
+  0x007c  addi r3, r3, 0x30c0                                  | addi r3, r3, 0x30c0
+  0x0080  ori r5, r5, 0x800                                    | ori r5, r5, 0x800
+  0x0084  stw r5, 0x0(r6)                                      | stw r5, 0x0(r6)
+  0x0088  stw r4, 0x20(r31) [None+0 tNone]                     | stw r4, 0x20(r31) [None+0 tNone]
+  0x008c  stwx r4, r3, r0                                      | stwx r4, r3, r0
+  0x0090  rlwinm. r0, r7, 0, 19, 19                            | rlwinm. r0, r7, 0, 19, 19
+  0x0094  beq 0x108                                            | beq 0x108
+  0x0098  lis r31, 0x8000                                      | lis r31, 0x8000
+  0x009c  lwz r0, 0xf8(r31)                                    | lwz r0, 0xf8(r31)
+  0x00a0  lis r3, 0x1062                                       | lis r3, 0x1062
+  0x00a4  addi r3, r3, 0x4dd3                                  | addi r3, r3, 0x4dd3
+  0x00a8  srwi r0, r0, 2                                       | srwi r0, r0, 2
+  0x00ac  mulhwu r0, r3, r0                                    | mulhwu r0, r3, r0
+  0x00b0  srwi r27, r0, 6                                      | srwi r27, r0, 6
+  0x00b4  bl OSGetTime [None+0 t10]                            | bl OSGetTime [None+0 t10]
+  0x00b8  addi r6, r27, 0x0                                    | addi r6, r27, 0x0
+  0x00bc  li r5, 0x0                                           | li r5, 0x0
+  0x00c0  bl fn_800F5ECC [None+0 t10]                          | bl fn_800F5ECC [None+0 t10]
+* 0x00c4  li r5, 0x0                                           | li r6, 0x64
+* 0x00c8  li r6, 0x64                                          | li r5, 0x0
+  0x00cc  bl fn_800F5ECC [None+0 t10]                          | bl fn_800F5ECC [None+0 t10]
+  0x00d0  slwi r0, r28, 2                                      | slwi r0, r28, 2
+  0x00d4  addi r3, r31, 0x30c0                                 | addi r3, r31, 0x30c0
+  0x00d8  add r3, r3, r0                                       | add r3, r3, r0
+  0x00dc  lwz r0, 0x0(r3)                                      | lwz r0, 0x0(r3)
+  0x00e0  addi r4, r4, 0x1                                     | addi r4, r4, 0x1
+  0x00e4  cmpwi r0, 0x0                                        | cmpwi r0, 0x0
+  0x00e8  bne 0xf0                                             | bne 0xf0
+  0x00ec  stw r4, 0x0(r3)                                      | stw r4, 0x0(r3)
+  0x00f0  lwz r0, 0x0(r3)                                      | lwz r0, 0x0(r3)
+  0x00f4  subf r0, r0, r4                                      | subf r0, r0, r4
+  0x00f8  cmpwi r0, 0x3                                        | cmpwi r0, 0x3
+  0x00fc  bge 0x154                                            | bge 0x154
+  0x0100  li r29, 0x0                                          | li r29, 0x0
+  0x0104  b 0x154                                              | b 0x154
+  0x0108  li r4, 0x0                                           | li r4, 0x0
+  0x010c  lis r3, 0x8000                                       | lis r3, 0x8000
+  0x0110  stw r4, 0x20(r31) [None+0 tNone]                     | stw r4, 0x20(r31) [None+0 tNone]
+  0x0114  slwi r0, r28, 2                                      | slwi r0, r28, 2
+  0x0118  addi r3, r3, 0x30c0                                  | addi r3, r3, 0x30c0
+  0x011c  stwx r4, r3, r0                                      | stwx r4, r3, r0
+  0x0120  li r29, 0x0                                          | li r29, 0x0
+  0x0124  b 0x154                                              | b 0x154
+  0x0128  rlwinm. r0, r7, 0, 19, 19                            | rlwinm. r0, r7, 0, 19, 19
+  0x012c  beq 0x138                                            | beq 0x138
+  0x0130  rlwinm. r0, r7, 0, 20, 20                            | rlwinm. r0, r7, 0, 20, 20
+  0x0134  beq 0x154                                            | beq 0x154
+  0x0138  li r4, 0x0                                           | li r4, 0x0
+  0x013c  lis r3, 0x8000                                       | lis r3, 0x8000
+  0x0140  stw r4, 0x20(r31) [None+0 tNone]                     | stw r4, 0x20(r31) [None+0 tNone]
+  0x0144  slwi r0, r28, 2                                      | slwi r0, r28, 2
+  0x0148  addi r3, r3, 0x30c0                                  | addi r3, r3, 0x30c0
+  0x014c  stwx r4, r3, r0                                      | stwx r4, r3, r0
+  0x0150  li r29, 0x0                                          | li r29, 0x0
+  0x0154  mr r3, r30                                           | mr r3, r30
+  0x0158  bl OSRestoreInterrupts [None+0 t10]                  | bl OSRestoreInterrupts [None+0 t10]
+  0x015c  mr r3, r29                                           | mr r3, r29
+  0x0160  lmw r27, 0x14(r1)                                    | lmw r27, 0x14(r1)
+  0x0164  lwz r0, 0x2c(r1)                                     | lwz r0, 0x2c(r1)
+  0x0168  addi r1, r1, 0x28                                    | addi r1, r1, 0x28
+  0x016c  mtlr r0                                              | mtlr r0
+  0x0170  blr                                                  | blr
+
+Script done on 2026-09-29 15:07:52-04:00 [COMMAND_EXIT_CODE="0"]
