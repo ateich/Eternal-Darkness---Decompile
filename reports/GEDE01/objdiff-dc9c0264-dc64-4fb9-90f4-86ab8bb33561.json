@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "assignment_id": "dc9c0264-dc64-4fb9-90f4-86ab8bb33561",
+  "target": "fn_800D0B74",
+  "compiler": "GC/1.3",
+  "source": "src/game/game_fn_800D0B74.c",
+  "registration": "Object(NonMatching, \"game/game_fn_800D0B74.c\", extra_cflags=[\"-use_lmw_stmw on\"])",
+  "commands": {
+    "configure": "python3 configure.py",
+    "build": ".tools/bin/ninja -j2",
+    "canonical": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_800D0B74 fn_800D0B74 -o build/GEDE01/dc9c0264-final-canonical.json --format json-pretty",
+    "relocation_strict": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_800D0B74 fn_800D0B74 -o build/GEDE01/dc9c0264-final-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "dol_sha1": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol"
+  },
+  "raw_outputs": {
+    "canonical": "left_size=9520 left_percent=8.284034 left_instructions=2380 left_relocations=483 left_diff_rows=2359; right_size=880 right_percent=8.284034 right_instructions=2380 right_relocations=46 right_diff_rows=2359",
+    "relocation_strict": "left_size=9520 left_percent=8.284034 left_instructions=2380 left_relocations=483 left_diff_rows=2359; right_size=880 right_percent=8.284034 right_instructions=2380 right_relocations=46 right_diff_rows=2359",
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol",
+    "build_check": "build/GEDE01/main.dol: OK"
+  },
+  "baseline": {
+    "match_percent": 6.3936973,
+    "retail_bytes": 9520,
+    "generated_bytes": 688
+  },
+  "best": {
+    "canonical_match_percent": 8.284034,
+    "relocation_strict_match_percent": 8.284034,
+    "retail_bytes": 9520,
+    "generated_bytes": 880,
+    "retail_relocation_instructions": 483,
+    "generated_relocation_instructions": 46
+  },
+  "reconstruction": "Honest C retains the reviewed event-3 predicate actor_kind != 2 and adds the complete retail event-0xED and event-0x3A paths after the previously recovered event-1 and event-8 paths. No inline or whole-function assembly is used.",
+  "hypothesis": "The retail function is a linear if/early-return dispatcher whose large frame and persistent r14-r31/f31 allocation emerge as later branch bodies are restored. A nested single alternate guard was tested as the apparent retail source shape but scored 8.027311%, below the retained independently guarded 8.284034% candidate, so it was rejected.",
+  "divergence": "The later dispatcher remains unexpressed: GC/1.3 emits a 0x50-byte frame with r21-r31 saves and 880 bytes, while retail uses a 0x1F0-byte frame, saves r14-r31 and f31, and contains 9520 bytes. The candidate consequently has 46 of retail's 483 relocation-bearing instructions; later event branches, large local descriptors, the f31 lifetime, and exact persistent register allocation remain absent."
+}
