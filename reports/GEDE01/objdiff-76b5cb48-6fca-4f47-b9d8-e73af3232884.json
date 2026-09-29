@@ -1,0 +1,542 @@
+{
+  "version": 1,
+  "assignment_id": "76b5cb48-6fca-4f47-b9d8-e73af3232884",
+  "target": "fn_801E0088",
+  "status": "matched",
+  "compiler": {
+    "revision": "GC/1.3",
+    "flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on",
+    "policy": "Unchanged canonical compiler flags; function-specific signed-conversion-bias registration uses existing externalize_elf_symbol.py --require-whole-section validation against the immutable retail DOL."
+  },
+  "hypothesis": "The missing dispatcher arms and separate address-taken vector temporaries, not synthetic stack padding, account for the missing 0x40 bytes of stack frame. Reconstructing all cases produced the retail 0x110 frame, r26-r31 and f31 saves. Event-local variables and separate case-170 effect blocks recover original register lifetimes.",
+  "prior_best_strict_percent": 25.082592,
+  "reconstructed_cases": [
+    0,
+    20,
+    40,
+    128,
+    150,
+    170,
+    180,
+    200,
+    217,
+    234,
+    240,
+    251,
+    268,
+    285,
+    350,
+    400,
+    460
+  ],
+  "new_cases": [
+    128,
+    150,
+    180,
+    200,
+    217,
+    234,
+    240,
+    251,
+    268
+  ],
+  "objdiff_version_stdout": "objdiff-cli 3.6.1\n",
+  "commands_relative_to_project": [
+    "python3 configure.py",
+    ".tools/bin/ninja -j2 build/GEDE01/main.dol build/GEDE01/src/game/game_fn_801E0088.externalized",
+    "build/tools/objdiff-cli diff -1 build/GEDE01/obj/game/game_fn_801E0088.o -2 build/GEDE01/src/game/game_fn_801E0088.o -o build/GEDE01/76b5cb48-final-canonical.json fn_801E0088",
+    "build/tools/objdiff-cli diff -1 build/GEDE01/obj/game/game_fn_801E0088.o -2 build/GEDE01/src/game/game_fn_801E0088.o -o build/GEDE01/76b5cb48-final-strict.json -c functionRelocDiffs=all fn_801E0088",
+    "build/tools/objdiff-cli report generate -p build/GEDE01/76b5cb48-report -o build/GEDE01/76b5cb48-canonical-report.json -f json-pretty",
+    "build/tools/objdiff-cli report generate -p build/GEDE01/76b5cb48-report -o build/GEDE01/76b5cb48-strict-report.json -f json-pretty -c functionRelocDiffs=all",
+    "python3 reports/GEDE01/verify-76b5cb48-6fca-4f47-b9d8-e73af3232884.py"
+  ],
+  "configure_exit_code": 0,
+  "ninja_exit_code": 0,
+  "build_log": "eternal-darkness-decomp/reports/GEDE01/build-76b5cb48-6fca-4f47-b9d8-e73af3232884.log",
+  "direct_objdiff_measurements": {
+    "canonical": {
+      "left": {
+        "size": "6296",
+        "match_percent": 100.0,
+        "instruction_count": 1574,
+        "instruction_differences": 0
+      },
+      "right": {
+        "size": "6296",
+        "match_percent": 100.0,
+        "instruction_count": 1574,
+        "instruction_differences": 0
+      }
+    },
+    "strict": {
+      "left": {
+        "size": "6296",
+        "match_percent": 100.0,
+        "instruction_count": 1574,
+        "instruction_differences": 0
+      },
+      "right": {
+        "size": "6296",
+        "match_percent": 100.0,
+        "instruction_count": 1574,
+        "instruction_differences": 0
+      }
+    }
+  },
+  "raw_canonical_report": {
+    "measures": {
+      "fuzzy_match_percent": 100.0,
+      "total_code": "6296",
+      "matched_code": "6296",
+      "matched_code_percent": 100.0,
+      "matched_data_percent": 100.0,
+      "total_functions": 1,
+      "matched_functions": 1,
+      "matched_functions_percent": 100.0,
+      "complete_code": "6296",
+      "complete_code_percent": 100.0,
+      "complete_data_percent": 100.0,
+      "total_units": 1,
+      "complete_units": 1
+    },
+    "units": [
+      {
+        "name": "main/game/game_fn_801E0088",
+        "measures": {
+          "fuzzy_match_percent": 100.0,
+          "total_code": "6296",
+          "matched_code": "6296",
+          "matched_code_percent": 100.0,
+          "matched_data_percent": 100.0,
+          "total_functions": 1,
+          "matched_functions": 1,
+          "matched_functions_percent": 100.0,
+          "complete_code": "6296",
+          "complete_code_percent": 100.0,
+          "complete_data_percent": 100.0,
+          "total_units": 1,
+          "complete_units": 1
+        },
+        "sections": [
+          {
+            "name": ".text",
+            "size": "6296",
+            "fuzzy_match_percent": 100.0,
+            "metadata": {}
+          }
+        ],
+        "functions": [
+          {
+            "name": "fn_801E0088",
+            "size": "6296",
+            "fuzzy_match_percent": 100.0,
+            "metadata": {},
+            "address": "0"
+          }
+        ],
+        "metadata": {
+          "complete": true
+        }
+      }
+    ],
+    "version": 2
+  },
+  "raw_relocation_strict_report": {
+    "measures": {
+      "fuzzy_match_percent": 100.0,
+      "total_code": "6296",
+      "matched_code": "6296",
+      "matched_code_percent": 100.0,
+      "matched_data_percent": 100.0,
+      "total_functions": 1,
+      "matched_functions": 1,
+      "matched_functions_percent": 100.0,
+      "complete_code": "6296",
+      "complete_code_percent": 100.0,
+      "complete_data_percent": 100.0,
+      "total_units": 1,
+      "complete_units": 1
+    },
+    "units": [
+      {
+        "name": "main/game/game_fn_801E0088",
+        "measures": {
+          "fuzzy_match_percent": 100.0,
+          "total_code": "6296",
+          "matched_code": "6296",
+          "matched_code_percent": 100.0,
+          "matched_data_percent": 100.0,
+          "total_functions": 1,
+          "matched_functions": 1,
+          "matched_functions_percent": 100.0,
+          "complete_code": "6296",
+          "complete_code_percent": 100.0,
+          "complete_data_percent": 100.0,
+          "total_units": 1,
+          "complete_units": 1
+        },
+        "sections": [
+          {
+            "name": ".text",
+            "size": "6296",
+            "fuzzy_match_percent": 100.0,
+            "metadata": {}
+          }
+        ],
+        "functions": [
+          {
+            "name": "fn_801E0088",
+            "size": "6296",
+            "fuzzy_match_percent": 100.0,
+            "metadata": {},
+            "address": "0"
+          }
+        ],
+        "metadata": {
+          "complete": true
+        }
+      }
+    ],
+    "version": 2
+  },
+  "raw_verifier_stdout": "{\n  \"target\": \"fn_801E0088\",\n  \"text_size\": 6296,\n  \"instructions\": 1574,\n  \"text_bytes_equal\": true,\n  \"retail_text_sha256\": \"7065290481c821973d20f61608195be3923b77f905f3d605172b9003b9621b69\",\n  \"generated_text_sha256\": \"7065290481c821973d20f61608195be3923b77f905f3d605172b9003b9621b69\",\n  \"retail_relocation_count\": 212,\n  \"generated_relocation_count\": 212,\n  \"relocation_tuples_equal\": true,\n  \"relocation_tuple_fields\": [\n    \"offset\",\n    \"type\",\n    \"target_symbol\",\n    \"addend\"\n  ],\n  \"relocation_tuples_sha256\": \"60e22ef312a2678889e4d5e600d520de5c52d4b6c3ac788fe8e26b5acd32d2bb\",\n  \"dol_sha1\": \"ea24b6af954876ce072562ff39cdb4c81d32be1f\",\n  \"dol_bytes_equal\": true,\n  \"linked_function_bytes_equal\": true,\n  \"linked_function_sha256\": \"9ea34f7d01471056dee7f6ab9008fe05afba1e6c8edcae6254be64391b360c3b\",\n  \"source_sha256\": \"1dd5b54ea660a39db40fd4524914917f5532688ccf3a78277b8d012af83459d9\",\n  \"compiler_sha256\": \"4e502c38465500d4fda8d966b268151a6c74c730508e3d9b7efd23d1a6083715\"\n}\n",
+  "verifier": "eternal-darkness-decomp/reports/GEDE01/verify-76b5cb48-6fca-4f47-b9d8-e73af3232884.py",
+  "legal_audit": {
+    "command": "python3 eternal-darkness-decomp/tools/legal_audit.py",
+    "exit_code": 0,
+    "stdout": "legal audit passed (23391 tracked project files inspected)\n",
+    "stderr": ""
+  },
+  "notes": [
+    "All code bytes and all 212 ELF relocation records match, including type, target and addend. Prior reports counted objdiff relocation annotations rather than ELF relocation records.",
+    "Function remains its own C translation unit; existing split already covers precisely 0x801E0088..0x801E1920.",
+    "The linked DOL is byte-identical to retail, not merely a successful NonMatching fallback build.",
+    "Reports retain raw objdiff summary outputs, build stdout and verifier stdout. Generated disassembly and private binaries are not committed.",
+    "Build stdout is preserved with Windows CRLF line endings normalized to LF; linker .ignored-section warnings are retained."
+  ],
+  "probe_measurements": [
+    [
+      "baseline",
+      "6296",
+      98.87103
+    ],
+    [
+      "unsigned",
+      "6296",
+      98.87103
+    ],
+    [
+      "local",
+      "6296",
+      98.87103
+    ],
+    [
+      "register",
+      "6296",
+      98.87103
+    ],
+    [
+      "sequential",
+      "6296",
+      98.87103
+    ],
+    [
+      "or_then_and",
+      "6296",
+      98.723
+    ],
+    [
+      "register_seq",
+      "6296",
+      98.87103
+    ],
+    [
+      "cast_u16",
+      "6296",
+      98.87103
+    ],
+    [
+      "prototype",
+      "6296",
+      98.87103
+    ],
+    [
+      "prototype_fn",
+      "6296",
+      98.87103
+    ],
+    [
+      "return_pointer",
+      "6296",
+      98.87103
+    ],
+    [
+      "prototype_int",
+      "6296",
+      98.87103
+    ],
+    [
+      "prototype_uint",
+      "6296",
+      98.87103
+    ],
+    [
+      "field",
+      "6296",
+      98.87103
+    ],
+    [
+      "arrayfield",
+      "6296",
+      98.87103
+    ],
+    [
+      "separate_assign",
+      "6296",
+      98.87103
+    ],
+    [
+      "call_or",
+      "6296",
+      98.87103
+    ],
+    [
+      "call_mask",
+      "6296",
+      98.87103
+    ],
+    [
+      "callback_locals",
+      "6296",
+      98.87103
+    ],
+    [
+      "flags_in_arg",
+      "6296",
+      98.87103
+    ],
+    [
+      "flags_before_if",
+      "6296",
+      98.96061
+    ],
+    [
+      "mask_split",
+      "6296",
+      98.87103
+    ],
+    [
+      "mask_interleave",
+      "6300",
+      99.11944
+    ],
+    [
+      "mask_neg",
+      "6300",
+      99.26302
+    ],
+    [
+      "mask_xor",
+      "6292",
+      99.32465
+    ],
+    [
+      "register_result",
+      "6296",
+      98.87103
+    ],
+    [
+      "unsigned_result",
+      "6296",
+      98.79479
+    ],
+    [
+      "long_result",
+      "6296",
+      98.87103
+    ],
+    [
+      "flags_outer",
+      "6296",
+      98.87103
+    ],
+    [
+      "compound_arg",
+      "6296",
+      98.87103
+    ],
+    [
+      "load_before_if",
+      "6296",
+      99.59847
+    ],
+    [
+      "int_callbacks",
+      "6296",
+      98.87103
+    ],
+    [
+      "void_callbacks",
+      "6296",
+      98.87103
+    ],
+    [
+      "precise_prototype",
+      "6296",
+      98.87103
+    ],
+    [
+      "vector_position",
+      "6296",
+      98.87103
+    ],
+    [
+      "uint_position",
+      "6296",
+      98.87103
+    ],
+    [
+      "char_type",
+      "6296",
+      98.87103
+    ],
+    [
+      "a_inside",
+      "6296",
+      99.97141
+    ],
+    [
+      "a_outside",
+      "6296",
+      99.59847
+    ],
+    [
+      "b_inside",
+      "6296",
+      98.87103
+    ],
+    [
+      "b_outside",
+      "6296",
+      99.59847
+    ],
+    [
+      "c_inside",
+      "6296",
+      98.87103
+    ],
+    [
+      "c_outside",
+      "6296",
+      99.59847
+    ],
+    [
+      "d_inside",
+      "6296",
+      98.87103
+    ],
+    [
+      "d_outside",
+      "6296",
+      99.59847
+    ],
+    [
+      "flags_inside",
+      "6296",
+      98.87103
+    ],
+    [
+      "flags_outside",
+      "6296",
+      99.59847
+    ],
+    [
+      "caseflags_int",
+      "6296",
+      98.87103
+    ],
+    [
+      "caseflags_u32",
+      "6296",
+      98.87103
+    ],
+    [
+      "caseflags_register_int",
+      "6296",
+      98.87103
+    ],
+    [
+      "caseflags_register_u32",
+      "6296",
+      98.87103
+    ],
+    [
+      "caseflags_long",
+      "6296",
+      98.87103
+    ],
+    [
+      "caseflags_unsigned_long",
+      "6296",
+      98.87103
+    ],
+    [
+      "a_full",
+      "6296",
+      99.41169,
+      15
+    ],
+    [
+      "a_and",
+      "6296",
+      99.996826,
+      1
+    ],
+    [
+      "a_steps",
+      "6296",
+      99.97141,
+      8
+    ],
+    [
+      "a_call_assign",
+      "6296",
+      99.97141,
+      8
+    ],
+    [
+      "a_signedmask",
+      "6296",
+      99.97141,
+      8
+    ],
+    [
+      "a_register",
+      "6296",
+      99.97141,
+      8
+    ]
+  ],
+  "divergence": "",
+  "prior_attempt_lineage_from_handoff": [
+    "a4811f12912422005c0ccca2220d48d056cf0449",
+    "6bca6e89213d42305f4812fdec302b03d9182566",
+    "2c31cb12c520cc63f8db22b1537ec2852e5255d3",
+    "58b34529609b7f2b90ba4f4e0cb91e3266fe0e4d"
+  ],
+  "preserved_source_reviewed": "a4811f12912422005c0ccca2220d48d056cf0449, already present in accepted base",
+  "raw_report_configuration": {
+    "min_version": "2.0.0-beta.5",
+    "build_target": false,
+    "units": [
+      {
+        "name": "main/game/game_fn_801E0088",
+        "target_path": "../obj/game/game_fn_801E0088.o",
+        "base_path": "../src/game/game_fn_801E0088.o",
+        "metadata": {
+          "complete": true
+        }
+      }
+    ]
+  }
+}
