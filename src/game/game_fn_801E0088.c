@@ -24,10 +24,13 @@ extern void fn_801D0C94(void);
 extern void fn_801D0C9C(void);
 extern void fn_801D70B0();
 extern int fn_800A4F98(int);
+extern int fn_80201BC8(void*);
+extern int fn_801D38E8(int);
+extern void fn_801D62D0();
 
 /* NonMatching: honest-C reconstruction of the complete common teardown path
- * and the first event arms. The remaining large event dispatcher is not yet
- * reconstructed; retail also requires a 0x110 frame and r26-r31/f31 lives. */
+ * and selected event arms. The remaining large event dispatcher is not yet
+ * reconstructed. */
 void fn_801E0088(void* object)
 {
     u8* info = object;
@@ -86,6 +89,39 @@ void fn_801E0088(void* object)
         b = fn_801D3A34(*(int*)(info + 4), 0x46);
         a = fn_801D3A34(*(int*)(info + 4), 0x35);
         fn_8014EAA4(info + 0x38, 250, fn_801CEB2C(*(int*)(info + 4)), a, b, c, d, 4);
+        break;
+    case 285:
+        if (*(int*)(info + 0x13c) == 5) {
+            a = *(int*)(info + 0xe0);
+            fn_80201BC8(fn_80201814(a));
+            result = fn_801D38E8(*(int*)(info + 4));
+            fn_801D62D0(a, 24, 2, a, 23, 3, result, 0,
+                        0, 4, 7, 2, 3, 1, 0, 1, 17, 10, 4, 60,
+                        0, 1, 68, 0x42800, 0, 4);
+        }
+        break;
+    case 350:
+        if (*(int*)(info + 0x13c) == 6) {
+            if (*(void (**)(void*, int))(info + 0x28))
+                (*(void (**)(void*, int))(info + 0x28))(info, *(int*)(info + 0x2c));
+            fn_801E1920(info);
+        }
+        break;
+    case 400:
+        if (*(int*)(info + 0x13c) == 5) {
+            if (*(void (**)(void*, int))(info + 0x28))
+                (*(void (**)(void*, int))(info + 0x28))(info, *(int*)(info + 0x2c));
+            fn_801E1920(info);
+        }
+        break;
+    case 460:
+        if (*(int*)(info + 0x13c) == 4) {
+            if (*(void (**)(void*, int))(info + 0x28))
+                (*(void (**)(void*, int))(info + 0x28))(info, *(int*)(info + 0x2c));
+            handle = fn_80201814(*(int*)(info + 0xe0));
+            fn_80036DA4(handle, fn_80036D5C() & ~0x08000000);
+            fn_801E1920(info);
+        }
         break;
     }
 }

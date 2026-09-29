@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "f160a56d-3f9d-408c-862c-1b7bcf5223e5",
+  "attempt": 3,
+  "base_commit": "d8d8c8616e49c7c30af44464b4eff6a6ead0dce4",
+  "target": "fn_801E0088",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-f160a56d-3f9d-408c-862c-1b7bcf5223e5.json"
+  ],
+  "divergence": "Relocation-strict direct objdiff is 15.104829%: generated 1076 bytes/269 instructions/43 relocations versus retail 6296 bytes/1574 instructions/226 relocations. This distinct reconstruction adds genuine dispatcher cases 285, 350, 400, and 460; case 285's large outgoing call moves canonical GC/1.3 from the preserved 0x30-byte frame with r27-r31 saved to a 0x70-byte frame with r26-r31 saved, but retail still uses a 0x110-byte frame with r26-r31 and f31 saved because the floating-point and other dispatcher arms remain absent. A clean canonical build completed and build/GEDE01/main.dol has SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}
