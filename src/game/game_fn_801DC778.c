@@ -2,8 +2,10 @@ typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned int u32;
 
-/* NonMatching: honest reconstruction of all observed state arms. The remaining
- * mismatch is register allocation and stack-local ordering. */
+/* NonMatching: state 152 is a no-op; state 153 passes Vec3 by value, so MWCC
+ * copies each argument while retaining the local vector for the second effect.
+ * Remaining differences are register allocation/coalescing and the generated
+ * conversion-bias constant relocation. See assignment 93022656 reports. */
 
 typedef struct Vec3 {
     float x, y, z;
@@ -30,8 +32,9 @@ typedef struct Payload {
 typedef struct Object {
     u8 pad00[4];
     u32 type;
-    u32 owner;
-    u8 pad0C[0x38];
+    int owner;
+    u8 pad0C[0x2C];
+    Vec3 position;
     void* linked;
     u8 pad48[0x74];
     Payload payload;
@@ -51,7 +54,7 @@ extern void* fn_8017FDA8(void*, int);
 extern void fn_801FDEB4(void*, Vec3*);
 extern void fn_801FDF74(void*, u32);
 extern int fn_801D3A34(u32, int);
-extern void fn_801D38E8(u32);
+extern int fn_801D38E8(u32);
 extern void* fn_801D3974(void);
 extern void* fn_8014E9B0(void*, Vec3*, u8, int, void*, int, int, int);
 extern void* fn_80156938(void*);
@@ -64,7 +67,7 @@ extern void fn_80180CC8(void*, void*);
 extern void fn_8018358C(EffectParams*);
 extern void fn_80183D94(EffectParams*);
 extern void* fn_801D3944(u32);
-extern void* fn_80148008(Vec3*, EffectDescriptor*, EffectParams*, void*);
+extern void* fn_80148008(Vec3, EffectDescriptor*, EffectParams*, void*);
 extern void fn_80183454(void);
 extern void fn_80183E44(void);
 extern void* memcpy(void*, const void*, u32);
@@ -76,10 +79,14 @@ extern u16 lbl_80651F00;
 
 void fn_801DC778(Object* object)
 {
-    Payload* payload = &object->payload;
-    u32 type = object->type;
-    int count = fn_801CEB2C(type);
+    Payload* payload;
+    u32 type;
+    int count;
     int i;
+
+    payload = &object->payload;
+    type = object->type;
+    count = fn_801CEB2C(type);
 
     if (object->owner != lbl_8064D18C) {
         if (object->state <= 0x99) {
@@ -169,7 +176,11 @@ void fn_801DC778(Object* object)
         position.z = payload->position[2];
         particle = fn_8014E9B0(&payload->pad40[0], &position, (u8)count,
                                65, &config, 16, 4, 1);
-        payload->particles[0] = particle != 0 ? fn_80156938(particle) : 0;
+        if (particle != 0) {
+            payload->particles[0] = fn_80156938(particle);
+        } else {
+            payload->particles[0] = 0;
+        }
         break;
     }
     case 55:
@@ -182,7 +193,11 @@ void fn_801DC778(Object* object)
         particle = fn_8014E9B0(&payload->pad40[0], &position, (u8)count,
                                fn_801D3A34(type, 57),
                                lbl_802FC5BC + 12, 16, 4, 0);
-        payload->particles[1] = particle != 0 ? fn_80156938(particle) : 0;
+        if (particle != 0) {
+            payload->particles[1] = fn_80156938(particle);
+        } else {
+            payload->particles[1] = 0;
+        }
         break;
     }
     case 70:
@@ -195,14 +210,19 @@ void fn_801DC778(Object* object)
         particle = fn_8014E9B0(&payload->pad40[0], &position, (u8)count,
                                fn_801D3A34(type, 57),
                                lbl_802FC5BC + 12, 16, 4, 0);
-        payload->particles[2] = particle != 0 ? fn_80156938(particle) : 0;
+        if (particle != 0) {
+            payload->particles[2] = fn_80156938(particle);
+        } else {
+            payload->particles[2] = 0;
+        }
         break;
     }
     case 121:
         payload->pad06[2] -= 200;
         break;
-    case 151:
     case 152:
+        break;
+    case 151:
     {
         u8* descriptor = (u8*)payload + 0xF0;
         struct {
@@ -213,34 +233,36 @@ void fn_801DC778(Object* object)
         init.word = lbl_80651EF4;
         init.half = lbl_80651EF8;
         fn_801858E0(descriptor);
-        fn_801D38E8(type);
+        type = fn_801D38E8(type);
         descriptor[1] = 100;
         *(u16*)(descriptor + 8) = 60;
         *(u16*)(descriptor + 6) = 84;
-        descriptor[3] = -10;
+        ((signed char*)descriptor)[3] = -10;
         fn_801D38BC(type, descriptor + 0x78, descriptor + 4);
         descriptor[0x14] = 50;
         *(u16*)(descriptor + 0x1C) = 250;
         descriptor[0x18] |= 2;
         descriptor[0x19] = 4;
         *(void**)(descriptor + 0x90) = fn_80185AE8;
-        *(u32*)(descriptor + 0x98) = *(u32*)((u8*)object + 0x38);
-        *(u32*)(descriptor + 0x9C) = *(u32*)((u8*)object + 0x3C);
-        *(u32*)(descriptor + 0xA0) = *(u32*)((u8*)object + 0x40);
+        *(Vec3*)(descriptor + 0x98) = object->position;
         memcpy(descriptor + 0xA4, &init, 6);
         *(u32*)(descriptor + 0x94) = 0;
         descriptor[0xAA] = 4;
         fn_801E8328(16, descriptor);
-        for (i = 0; i < 3; i++) {
-            if (payload->particles[i] != 0) {
-                fn_80180CE4(payload->particles[i], 1);
-                fn_80180CC8(payload->particles[i], (u8*)object + 0x38);
+        {
+            int index;
+            for (index = 0; index < 3; index++) {
+                if (payload->particles[index] != 0) {
+                    fn_80180CE4(payload->particles[index], 1);
+                    fn_80180CC8(payload->particles[index], &object->position);
+                }
             }
         }
         break;
     }
     case 153:
     {
+        int j;
         EffectDescriptor descriptor;
         EffectParams first_params;
         EffectParams second_params;
@@ -252,24 +274,21 @@ void fn_801DC778(Object* object)
         fn_80183D94(&second_params);
         *(void**)(second_params.bytes + 0x1C) = fn_801D3944(type);
 
-        for (i = 0; i < (short)count; i++) {
-            if (payload->effects[i] != 0) {
-                short* effect = fn_8017FDA8(payload->effects[i], 0);
-                Vec3 first_position;
-                Vec3 second_position;
+        for (j = 0; j < (short)count; j++) {
+            if (payload->effects[j] != 0) {
+                short* effect = fn_8017FDA8(payload->effects[j], 0);
+                Vec3 position;
 
-                first_position.x = effect[0];
-                first_position.y = effect[1];
-                first_position.z = effect[2];
-                fn_80148008(&first_position, &descriptor, &first_params,
+                position.x = effect[0];
+                position.y = effect[1];
+                position.z = effect[2];
+                fn_80148008(position, &descriptor, &first_params,
                             fn_80183454);
 
-                second_position.x = effect[0];
-                second_position.y = effect[1];
-                second_position.z = effect[2] + 40;
-                fn_80148008(&second_position, &descriptor, &second_params,
+                position.z = effect[2] + 40;
+                fn_80148008(position, &descriptor, &second_params,
                             fn_80183E44);
-                fn_80190500(payload->effects[i], 0);
+                fn_80190500(payload->effects[j], 0);
             }
         }
         if (object->linked != 0) {
@@ -279,7 +298,7 @@ void fn_801DC778(Object* object)
     }
     case 173:
         if (object->linked != 0) {
-            fn_801FDF74(object->linked, 0x593E0);
+            fn_801FDF74(object->linked, 0x493E0);
         }
         break;
     case 193:

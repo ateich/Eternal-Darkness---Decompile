@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "assignment_id": "93022656-b728-44ac-8434-43ee2c2ce7cf",
+  "attempt": 5,
+  "base_commit": "f0258cfe5e1b1a53ffc7c410cc1ed378ca9d8215",
+  "target": "fn_801DC778",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-93022656-b728-44ac-8434-43ee2c2ce7cf.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-93022656-b728-44ac-8434-43ee2c2ce7cf-canonical.raw.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-93022656-b728-44ac-8434-43ee2c2ce7cf-reloc-strict.raw.json",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-93022656-b728-44ac-8434-43ee2c2ce7cf.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 99.0472%. Generated .text is 2284 bytes versus 2288 retail bytes; the 0x200-byte frame and by-value Vec3 stack copies match. Remaining differences are long-lived-register assignment and loop induction/coalescing (including the missing cursor copy before state 153), plus nine conversion-bias relocations to compiler-generated @115 instead of lbl_806511A8. Both sides contain 72 ELF relocations (76 relocation-bearing objdiff instructions); the nine constant targets differ, while paired relocation types and addends agree. The source remains NonMatching and the verified DOL links retail code for this function."
+}
