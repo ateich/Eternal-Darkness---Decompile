@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "assignment_id": "9bd398e4-83ba-46fa-a739-6716299cc131",
+  "target": "fn_801DC778",
+  "tool": {
+    "command": "build/tools/objdiff-cli --version",
+    "exit_code": 0,
+    "raw_output": "objdiff-cli 3.6.1\n"
+  },
+  "configure": {
+    "command": "python3 configure.py",
+    "exit_code": 0,
+    "raw_output": ""
+  },
+  "build": {
+    "command": ".tools/bin/ninja -j2",
+    "exit_code": 0,
+    "raw_output_tail": "[949/953] REPORT\n INFO Loading project .\n INFO Generating report for 7069 units (using 8 threads)\n INFO Report generated in 0.470s\n INFO Writing to build/GEDE01/report.json\n[950/953] LINK build/GEDE01/main.elf\n[951/953] DOL build/GEDE01/main.dol\n[952/953] CHECK config/GEDE01/build.sha1\nbuild/GEDE01/main.dol: OK\n[953/953] PROGRESS\nProgress:\n  All: 59.79% fuzzy, 50.93% matched, 50.80% linked (6356 / 7069 files)\n    Code: 1171724 / 2300692 bytes (6124 / 8214 functions)\n    Data: 39866 / 4305642 bytes (0.93%)\n  Game Code: 96.31% fuzzy, 82.01% matched, 81.80% linked (6338 / 6633 files)\n    Code: 1168696 / 1425104 bytes (6062 / 6354 functions)\n    Data: 39642 / 40522 bytes (97.83%)\n  SDK/Runtime: 100.00% fuzzy, 100.00% matched, 100.00% linked (18 / 18 files)\n    Code: 3028 / 3028 bytes (62 / 62 functions)\n    Data: 224 / 224 bytes (100.00%)\n"
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "exit_code": 0,
+    "expected": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "actual": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\n"
+  },
+  "comparisons": [
+    {
+      "mode": "canonical",
+      "config": [],
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801DC778 fn_801DC778 -o reports/GEDE01/objdiff-9bd398e4-83ba-46fa-a739-6716299cc131-canonical.raw.json --format json-pretty",
+      "exit_code": 0,
+      "raw_output": " INFO Writing to reports/GEDE01/objdiff-9bd398e4-83ba-46fa-a739-6716299cc131-canonical.raw.json\n",
+      "artifact": "eternal-darkness-decomp/reports/GEDE01/objdiff-9bd398e4-83ba-46fa-a739-6716299cc131-canonical.raw.json",
+      "artifact_sha256": "c767d774e98ecd6e47e5aa9b781965e47de4f2811a5f8430751f4fd3c67fb02f",
+      "match_percent": 88.77797,
+      "retail_bytes": 2288,
+      "generated_bytes": 2280,
+      "retail_relocations": 76,
+      "generated_relocations": 76
+    },
+    {
+      "mode": "relocation-strict",
+      "config": ["function_reloc_diffs=name_address"],
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801DC778 fn_801DC778 -o reports/GEDE01/objdiff-9bd398e4-83ba-46fa-a739-6716299cc131-reloc-strict.raw.json --format json-pretty -c function_reloc_diffs=name_address",
+      "exit_code": 0,
+      "raw_output": " INFO Writing to reports/GEDE01/objdiff-9bd398e4-83ba-46fa-a739-6716299cc131-reloc-strict.raw.json\n",
+      "artifact": "eternal-darkness-decomp/reports/GEDE01/objdiff-9bd398e4-83ba-46fa-a739-6716299cc131-reloc-strict.raw.json",
+      "artifact_sha256": "c767d774e98ecd6e47e5aa9b781965e47de4f2811a5f8430751f4fd3c67fb02f",
+      "match_percent": 88.77797,
+      "retail_bytes": 2288,
+      "generated_bytes": 2280,
+      "retail_relocations": 76,
+      "generated_relocations": 76
+    }
+  ],
+  "hypothesis": "Recover retail state 153 as a distinct two-descriptor effect-replacement arm, then retain fn_801CEB2C's full-width result and the object type as long-lived locals to restore the retail frame and save range.",
+  "result": "attempted",
+  "divergence": "The candidate improves the preserved 76.29371% result to 88.77797%, restores the retail 0x200-byte frame, all 76 relocations and every observed switch arm. Generated code is 2280 bytes versus 2288 retail bytes. The remaining mismatch is MWCC register allocation and local-stack ordering: retail assigns object/payload/type/count to r28/r29/r30/r31, while the candidate assigns those long-lived values differently; this shifts otherwise corresponding instructions and stack slots throughout the function."
+}
