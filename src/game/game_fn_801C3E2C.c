@@ -22,7 +22,7 @@ typedef struct ResourceLoad {
 } ResourceLoad;
 
 extern s16 lbl_8064D470;
-extern ResourceLoad lbl_806286B0[];
+static ResourceLoad gs[128];
 extern void fn_801CE2B8(void);
 extern void fn_801C9460(void*, u16);
 extern void fn_801B399C(u16);
@@ -40,9 +40,9 @@ int fn_801C3E2C(void)
     ResourceNode* base;
     u8* extra;
 
-    node = lbl_806286B0[lbl_8064D470-- - 1].node;
-    base = lbl_806286B0[lbl_8064D470].base;
-    archive = lbl_806286B0[lbl_8064D470].archive;
+    node = gs[--lbl_8064D470].node;
+    base = gs[lbl_8064D470].base;
+    archive = gs[lbl_8064D470].archive;
 
     fn_801CE2B8();
     if (node->flags == 1) {

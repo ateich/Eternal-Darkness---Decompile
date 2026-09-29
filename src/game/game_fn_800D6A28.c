@@ -1,7 +1,9 @@
 int fn_800D6A28(int value)
 {
-    if (value == 0) {
-        return 1;
+    int result = 1;
+
+    if (value != 0) {
+        result = 1;
     }
-    return 1;
+    return result;
 }

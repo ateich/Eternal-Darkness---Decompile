@@ -13,20 +13,13 @@ typedef struct DisplayConfig {
     u8 field_32[1];
 } DisplayConfig;
 
-typedef struct DisplayState {
-    void* field_0;
-    void* field_4;
-} DisplayState;
-
 extern char lbl_802FC500[];
 extern DisplayConfig* lbl_8064C38C;
-extern DisplayState lbl_8064D71C;
-extern u32 lbl_8064D718;
+extern void* lbl_8064D71C[2];
+extern void* lbl_8064D718;
 extern void* lbl_8064D74C;
-extern float lbl_80651348;
-extern float lbl_8065134C;
 
-extern int fn_80218308(void);
+extern u32 fn_80218308(void);
 extern void fn_801EFE84(int);
 extern void fn_802177EC(DisplayConfig*);
 extern void fn_802180A4(void*);
@@ -44,8 +37,6 @@ extern void fn_80217324(void);
 
 void fn_801EF5EC(void)
 {
-    DisplayConfig* config;
-
     if (!fn_80218308()) {
         return;
     }
@@ -53,27 +44,22 @@ void fn_801EF5EC(void)
     fn_801EFE84(1);
     lbl_8064C38C = (DisplayConfig*)lbl_802FC500;
     fn_802177EC(lbl_8064C38C);
-    fn_802180A4(lbl_8064D71C.field_0);
-    lbl_8064D718 = (u32)lbl_8064D71C.field_4;
+    fn_802180A4(lbl_8064D71C[0]);
+    lbl_8064D718 = lbl_8064D71C[1];
 
-    config = lbl_8064C38C;
-    fn_8022B94C(lbl_80651348, lbl_80651348, (float)config->width,
-                (float)config->height, lbl_80651348, lbl_8065134C);
-    config = lbl_8064C38C;
-    fn_8022B970(0, 0, config->width, config->field_6);
-    config = lbl_8064C38C;
-    fn_80226DE0(0, 0, config->width, config->field_6);
-    config = lbl_8064C38C;
-    fn_80226F60(config->width, config->height);
-    config = lbl_8064C38C;
-    fn_802271BC((float)config->height / (float)config->field_6);
-    config = lbl_8064C38C;
-    fn_802272F8(config->field_19, config->field_1A, 1, config->field_32);
+    fn_8022B94C(0.0f, 0.0f, (float)lbl_8064C38C->width,
+                (float)lbl_8064C38C->height, 0.0f, 1.0f);
+    fn_8022B970(0, 0, lbl_8064C38C->width, lbl_8064C38C->field_6);
+    fn_80226DE0(0, 0, lbl_8064C38C->width, lbl_8064C38C->field_6);
+    fn_80226F60(lbl_8064C38C->width, lbl_8064C38C->height);
+    fn_802271BC((float)lbl_8064C38C->height / (float)lbl_8064C38C->field_6);
+    fn_802272F8(lbl_8064C38C->field_19, lbl_8064C38C->field_1A, 1,
+                lbl_8064C38C->field_32);
     fn_8022A814(1, 0);
     fn_8022A924(1);
-    fn_8022753C(lbl_8064D71C.field_0, 1);
-    fn_8022753C(lbl_8064D71C.field_0, 1);
-    fn_8022753C(lbl_8064D71C.field_4, 1);
+    fn_8022753C(lbl_8064D71C[0], 1);
+    fn_8022753C(lbl_8064D71C[0], 1);
+    fn_8022753C(lbl_8064D71C[1], 1);
     fn_80217F88();
     fn_80217324();
     if (lbl_8064C38C->flags & 1) {

@@ -17,6 +17,55 @@ typedef struct Vec3 {
 
 typedef float Matrix34[3][4];
 
+typedef struct Channel {
+    u8 active;
+    u8 kind;
+    u8 pad2[2];
+    u8 value;
+    s8 step;
+    u8 pad6;
+    u8 limit;
+    u16 generation;
+    u8 padA[0x21];
+    u8 level;
+    u8 pad2C[0xC];
+} Channel;
+
+typedef struct VoiceState {
+    u8 pad0;
+    s8 pan;
+    u8 pad2[3];
+    u8 flags;
+    u8 pad6[2];
+    u16 id;
+    u8 padA[0x36];
+    u16 status;
+    u8 pad42[0x12];
+    Vec3 target;
+    Vec3 angle;
+    Vec3 limit;
+} VoiceState;
+
+typedef struct Voice {
+    u8 pad0;
+    u8 count;
+    u8 value;
+    u8 pad3;
+    u8 step;
+    u8 pad5[5];
+    u16 generation;
+    u16 duration;
+    u8 padE[2];
+    s16 position[3];
+    u8 pad16[0xC];
+    u16 timer;
+    u8 pad24[0x28];
+    Channel* channels;
+    u8 pad50[0x3C];
+    VoiceState state;
+} Voice;
+
+
 typedef struct Buffers {
     u8* vertices;
     u8* colors;
@@ -58,11 +107,8 @@ extern void fn_802114E0(Matrix34, Quaternion*);
 extern void fn_80211484(Matrix34, float, float, float);
 extern void fn_80211710(Matrix34, Vec3*, Vec3*);
 
-int fn_801861C4(u8* self)
+int fn_801861C4(Voice* self)
 {
-    /* NonMatching: the conversion loop's hoisted 0x4330 uses r31 instead
-     * of retail's r25. Buffers matches the three outputs of fn_8018D788;
-     * indexed access lets GC/1.3 synthesize the first loop's byte offset. */
     SixBytes setup;
     Buffers buffers;
     Vec3 direction;
@@ -79,118 +125,118 @@ int fn_801861C4(u8* self)
     float length;
     float dot;
     int changed = 0;
-    u8* self_local = self;
+    Voice* self_local = self;
     u8 count;
     int generation;
     int index;
-    u8* state;
-    u8* entry;
+    int slot;
+    VoiceState* state;
+    Channel* entry;
     int vertex_index;
     int vertex_count;
-    u8* vertex;
+    s16* vertex;
 
-    state = self_local + 0x8C;
+    state = &self_local->state;
     setup.word = lbl_80651D50;
     setup.half = lbl_80651D54;
-    generation = *(u16*)(self_local + 0xA);
-    entry = *(u8**)(self_local + 0x4C);
-    count = self_local[1];
-    *(u16*)(self_local + 0xA) = generation + 1;
+    generation = self_local->generation;
+    entry = self_local->channels;
+    count = self_local->count;
+    self_local->generation = generation + 1;
 
     fn_8018D788(lbl_8064D738, self_local, &buffers,
                 *(u16*)(lbl_80607120 + 2));
-    fn_801869F8(state, 0, *(u16*)(state + 8));
+    fn_801869F8(state, 0, state->id);
 
-    index = 0;
-    for (; index < count; index++) {
-        if (entry[0] != 0) {
-            fn_8018E26C(entry, entry + 0x2B);
-            if (changed == 0 && (state[5] & 4) != 0) {
-                if ((s8)state[1] > 2) {
-                    state[1]--;
-                } else if ((s8)state[1] < -2) {
-                    state[1]++;
+    for (index = 0, slot = 0; index < count; slot++, index++) {
+        if (entry->active != 0) {
+            fn_8018E26C(entry, &entry->level);
+            if (changed == 0 && (state->flags & 4) != 0) {
+                if (state->pan > 2) {
+                    state->pan--;
+                } else if (state->pan < -2) {
+                    state->pan++;
                 }
                 changed = 1;
             }
         }
         fn_8018680C(state, entry,
-                    &((Vec3*)buffers.vertices)[index],
+                    (Vec3*)(buffers.vertices + slot * sizeof(Vec3)),
                     index, &setup, count);
-        if ((int)generation == (int)*(u16*)(entry + 8) &&
-            (state[5] & 1) == 0) {
-            fn_8018E230(entry, entry + 0x2B, 1, self_local[2],
-                        self_local[4], 0);
+        if ((int)generation == (int)entry->generation &&
+            (state->flags & 1) == 0) {
+            fn_8018E230(entry, &entry->level, 1, self_local->value,
+                        self_local->step, 0);
         }
-        entry += 0x38;
+        entry++;
     }
 
     origin = lbl_8023B068;
-    vertex = buffers.vertices;
-    vertex_count = (self_local[1] & 0x7F) << 1;
+    vertex = (s16*)buffers.vertices;
+    vertex_count = (self_local->count & 0x7F) << 1;
     fn_80210FB0(transform);
-    fn_80211A48((Vec3*)(state + 0x60), (Vec3*)(state + 0x6C),
-                (Vec3*)(state + 0x60));
+    fn_80211A48(&state->angle, &state->limit,
+                &state->angle);
     {
-        float angle = *(float*)(state + 0x60);
+        float angle = state->angle.x;
         if (angle > lbl_80650A20)
-            angle = *(float*)(state + 0x6C);
-        *(float*)(state + 0x60) = angle;
+            angle = state->limit.x;
+        state->angle.x = angle;
     }
     {
-        float angle = *(float*)(state + 0x64);
+        float angle = state->angle.y;
         if (angle > lbl_80650A20)
-            angle = *(float*)(state + 0x70);
-        *(float*)(state + 0x64) = angle;
+            angle = state->limit.y;
+        state->angle.y = angle;
     }
     {
-        float angle = *(float*)(state + 0x68);
+        float angle = state->angle.z;
         if (angle > lbl_80650A20)
-            angle = *(float*)(state + 0x74);
-        *(float*)(state + 0x68) = angle;
+            angle = state->limit.z;
+        state->angle.z = angle;
     }
 
     fn_80211268(x_rotation, 0x78,
-                lbl_80650A24 * *(float*)(state + 0x60));
+                lbl_80650A24 * state->angle.x);
     fn_80211268(y_rotation, 0x79,
-                lbl_80650A24 * *(float*)(state + 0x64));
+                lbl_80650A24 * state->angle.y);
     fn_80211268(z_rotation, 0x7A,
-                lbl_80650A24 * *(float*)(state + 0x68));
+                lbl_80650A24 * state->angle.z);
     fn_80210FDC(z_rotation, y_rotation, combined);
     fn_80210FDC(combined, x_rotation, result);
 
-    fn_80211B64(&origin, (Vec3*)(state + 0x54), &direction);
+    fn_80211B64(&origin, &state->target, &direction);
     length = fn_80211B08(&direction);
     if (length > lbl_80650A28) {
         fn_80211AAC(&direction, &direction);
-        dot = fn_80211B44(&origin, (Vec3*)(state + 0x54));
+        dot = fn_80211B44(&origin, &state->target);
         fn_8017A244(&direction, &rotation,
                     (float)fn_80102340(length, dot));
         fn_802114E0(transform, &rotation);
     }
     fn_80210FDC(transform, result, transform);
-    fn_80211484(translation, (float)*(s16*)(self_local + 0x10),
-                 (float)*(s16*)(self_local + 0x12),
-                 (float)*(s16*)(self_local + 0x14));
+    fn_80211484(translation, (float)self_local->position[0],
+                 (float)self_local->position[1],
+                 (float)self_local->position[2]);
     fn_80210FDC(translation, transform, transform);
 
     vertex_index = 0;
     while (vertex_index < vertex_count) {
-        transformed.x = (float)*(s16*)(vertex + 0);
-        transformed.y = (float)*(s16*)(vertex + 2);
-        transformed.z = (float)*(s16*)(vertex + 4);
+        transformed.x = vertex[0];
+        transformed.y = vertex[1];
+        transformed.z = vertex[2];
         fn_80211710(transform, &transformed, &transformed);
-        *(s16*)(vertex + 0) = (s16)transformed.x;
-        *(s16*)(vertex + 2) = (s16)transformed.y;
-        *(s16*)(vertex + 4) = (s16)transformed.z;
-        vertex += 6;
+        vertex[0] = transformed.x;
+        vertex[1] = transformed.y;
+        vertex[2] = transformed.z;
+        vertex += 3;
         vertex_index++;
     }
 
-    if ((*(u16*)(state + 0x40) & 2) != 0 ||
-        ((state[5] & 1) == 0 &&
-         (int)generation >= (int)*(u16*)(self_local + 0xC))) {
-        *(u16*)(self_local + 0x22) = 8;
+    if ((state->status & 2) != 0 ||
+        ((state->flags & 1) == 0 &&
+         (int)generation >= (int)self_local->duration)) {
+        self_local->timer = 8;
     }
     return 0;
 }
