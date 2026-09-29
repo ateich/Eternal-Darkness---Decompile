@@ -1,0 +1,205 @@
+{
+  "version": 1,
+  "assignment_id": "cbb8f499-b01d-4cf9-81b7-d939a844066f",
+  "attempt": 5,
+  "base_commit": "a94cdfd3578dc6bbcf48ea57d10407e6fb902ba5",
+  "target": "fn_801697AC",
+  "status": "attempted",
+  "source": "eternal-darkness-decomp/src/game/game_fn_801697AC.c",
+  "source_sha256": "d9cbc55f27112b5393e4b3ccce8ee9b95f395813e558a0f155c1bc284ec9f888",
+  "registration": "Object(NonMatching, \"game/game_fn_801697AC.c\")",
+  "compiler": {
+    "version": "GC/1.3",
+    "policy": "Existing canonical flags and existing use_lmw_stmw pragma unchanged.",
+    "command_evidence": "eternal-darkness-decomp/reports/GEDE01/compiler-command-cbb8f499-b01d-4cf9-81b7-d939a844066f.log",
+    "hash_evidence": "eternal-darkness-decomp/reports/GEDE01/input-hashes-cbb8f499-b01d-4cf9-81b7-d939a844066f.log"
+  },
+  "commands": [
+    {
+      "command": "python3 configure.py",
+      "exit_code": 0,
+      "raw_output": "eternal-darkness-decomp/reports/GEDE01/configure-cbb8f499-b01d-4cf9-81b7-d939a844066f.log"
+    },
+    {
+      "command": ".tools/bin/ninja -j2",
+      "exit_code": 0,
+      "raw_output": "eternal-darkness-decomp/reports/GEDE01/build-cbb8f499-b01d-4cf9-81b7-d939a844066f.log"
+    },
+    {
+      "command": ".tools/bin/ninja -j2",
+      "exit_code": 0,
+      "raw_output": "eternal-darkness-decomp/reports/GEDE01/build-calls-cbb8f499-b01d-4cf9-81b7-d939a844066f.log"
+    },
+    {
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801697AC fn_801697AC -o reports/GEDE01/objdiff-calls-cbb8f499-b01d-4cf9-81b7-d939a844066f.json --format json-pretty",
+      "exit_code": 0,
+      "raw_output": "eternal-darkness-decomp/reports/GEDE01/objdiff-calls-cbb8f499-b01d-4cf9-81b7-d939a844066f.json",
+      "command_output": "eternal-darkness-decomp/reports/GEDE01/objdiff-calls-cbb8f499-b01d-4cf9-81b7-d939a844066f.log"
+    },
+    {
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801697AC fn_801697AC -o reports/GEDE01/objdiff-canonical-cbb8f499-b01d-4cf9-81b7-d939a844066f.json --format json-pretty",
+      "exit_code": 0,
+      "raw_output": "eternal-darkness-decomp/reports/GEDE01/objdiff-canonical-cbb8f499-b01d-4cf9-81b7-d939a844066f.json",
+      "command_output": "eternal-darkness-decomp/reports/GEDE01/objdiff-canonical-cbb8f499-b01d-4cf9-81b7-d939a844066f.log"
+    },
+    {
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801697AC fn_801697AC -o reports/GEDE01/objdiff-reloc-strict-cbb8f499-b01d-4cf9-81b7-d939a844066f.json --format json-pretty -c function_reloc_diffs=name_address",
+      "exit_code": 0,
+      "raw_output": "eternal-darkness-decomp/reports/GEDE01/objdiff-reloc-strict-cbb8f499-b01d-4cf9-81b7-d939a844066f.json",
+      "command_output": "eternal-darkness-decomp/reports/GEDE01/objdiff-reloc-strict-cbb8f499-b01d-4cf9-81b7-d939a844066f.log"
+    },
+    {
+      "command": "sha1sum build/GEDE01/main.dol",
+      "exit_code": 0,
+      "raw_output": "eternal-darkness-decomp/reports/GEDE01/dol-sha1-cbb8f499-b01d-4cf9-81b7-d939a844066f.log"
+    },
+    {
+      "command": "python3 tools/legal_audit.py",
+      "exit_code": 0,
+      "raw_output": "eternal-darkness-decomp/reports/GEDE01/legal-audit-cbb8f499-b01d-4cf9-81b7-d939a844066f.log"
+    },
+    {
+      "command": "build/binutils/powerpc-eabi-objdump -dr build/GEDE01/src/game/game_fn_801697AC.o",
+      "exit_code": 0,
+      "raw_output": "eternal-darkness-decomp/reports/GEDE01/generated-disassembly-cbb8f499-b01d-4cf9-81b7-d939a844066f.log"
+    },
+    {
+      "command": "build/binutils/powerpc-eabi-readelf -Wr build/GEDE01/obj/game/game_fn_801697AC.o",
+      "exit_code": 0,
+      "raw_output": "eternal-darkness-decomp/reports/GEDE01/retail-relocations-cbb8f499-b01d-4cf9-81b7-d939a844066f.log"
+    },
+    {
+      "command": "build/binutils/powerpc-eabi-readelf -Wr build/GEDE01/src/game/game_fn_801697AC.o",
+      "exit_code": 0,
+      "raw_output": "eternal-darkness-decomp/reports/GEDE01/generated-relocations-cbb8f499-b01d-4cf9-81b7-d939a844066f.log"
+    },
+    {
+      "command": ".tools/bin/ninja -t commands build/GEDE01/src/game/game_fn_801697AC.o",
+      "exit_code": 0,
+      "raw_output": "eternal-darkness-decomp/reports/GEDE01/compiler-command-cbb8f499-b01d-4cf9-81b7-d939a844066f.log"
+    },
+    {
+      "command": "sha256sum compilers/GC/1.3/mwcceppc.exe src/game/game_fn_801697AC.c",
+      "exit_code": 0,
+      "raw_output": "eternal-darkness-decomp/reports/GEDE01/input-hashes-cbb8f499-b01d-4cf9-81b7-d939a844066f.log"
+    },
+    {
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801697AC fn_801697AC -o reports/GEDE01/objdiff-trace-cbb8f499-b01d-4cf9-81b7-d939a844066f.json --format json-pretty",
+      "exit_code": 0,
+      "raw_output": "eternal-darkness-decomp/reports/GEDE01/objdiff-trace-cbb8f499-b01d-4cf9-81b7-d939a844066f.json",
+      "command_output": "eternal-darkness-decomp/reports/GEDE01/objdiff-trace-command-cbb8f499-b01d-4cf9-81b7-d939a844066f.log"
+    },
+    {
+      "command": "build/binutils/powerpc-eabi-objdump -dr build/GEDE01/obj/game/game_fn_801697AC.o",
+      "exit_code": 0,
+      "raw_output": "eternal-darkness-decomp/reports/GEDE01/retail-disassembly-cbb8f499-b01d-4cf9-81b7-d939a844066f.log"
+    }
+  ],
+  "canonical": {
+    "retail_bytes": 3224,
+    "match_percent": 19.225807,
+    "retail_objdiff_relocation_instructions": 74,
+    "retail_save_instruction": "stmw r21, 0x34(r1)",
+    "generated_bytes": 652,
+    "generated_objdiff_relocation_instructions": 11,
+    "generated_save_instruction": "stmw r23, 0x1c(r1)"
+  },
+  "relocation_strict": {
+    "retail_bytes": 3224,
+    "match_percent": 19.225807,
+    "retail_objdiff_relocation_instructions": 74,
+    "retail_save_instruction": "stmw r21, 0x34(r1)",
+    "generated_bytes": 652,
+    "generated_objdiff_relocation_instructions": 11,
+    "generated_save_instruction": "stmw r23, 0x1c(r1)",
+    "config": "function_reloc_diffs=name_address",
+    "records_equal": false,
+    "canonical_report_byte_identical": true
+  },
+  "recovered_opcode_cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "recovered_opcode_case_count": 13,
+  "unrecovered_opcode_case_count": 36,
+  "trace_hook_recovered": true,
+  "codegen_hypothesis": "Recover the pre-dispatch trace-hook call to keep the instruction and cached hook pointer live across a call, then recover CALL and TAILCALL opcodes 2 and 3 to reconstruct top refresh and instruction-field live ranges across fn_80160B18. This differs from the previous pragma-only, primitive-push, and global-lookup-only attempts. All bodies were derived from retail disassembly; no compiler policy changes.",
+  "preserved_attempts_reviewed": [
+    {
+      "commit": "4f999477c165acfc03a5d1cab4cca21ab6440c63",
+      "finding": "Five implemented cases, not six. Synthesized raw_output summaries were insufficient evidence."
+    },
+    {
+      "commit": "38ddf574cd408d7c79fcbd424fdfa41cd967a8fc",
+      "finding": "Five cases, 308 bytes, 8.006204%; pragma alone was insufficient."
+    },
+    {
+      "commit": "5a57caea3f5073ec68e4fb8b5048ec912693d580",
+      "finding": "Accepted base already contains the ten-case, 488-byte reconstruction at 13.889578%."
+    },
+    {
+      "commit": "3f00a3bc7a13003d40472e4e1330c2413140ae3c",
+      "finding": "Recovered opcode 12 source. Raw evidence confirms 540 bytes, 15.544665%, stmw r25,0x24(r1), eleven recovered cases and 38 missing; prior r26 and 36-missing narrative claims were wrong.",
+      "raw_evidence": "eternal-darkness-decomp/reports/GEDE01/objdiff-preserved-cbb8f499-b01d-4cf9-81b7-d939a844066f.json"
+    }
+  ],
+  "measured_sequence": [
+    {
+      "variant": "preserved opcode 12 baseline",
+      "retail_bytes": 3224,
+      "match_percent": 15.544665,
+      "retail_objdiff_relocation_instructions": 74,
+      "retail_save_instruction": "stmw r21, 0x34(r1)",
+      "generated_bytes": 540,
+      "generated_objdiff_relocation_instructions": 8,
+      "generated_save_instruction": "stmw r25, 0x24(r1)"
+    },
+    {
+      "variant": "restored opcode 12 plus trace hook",
+      "retail_bytes": 3224,
+      "match_percent": 16.75062,
+      "retail_objdiff_relocation_instructions": 74,
+      "retail_save_instruction": "stmw r21, 0x34(r1)",
+      "generated_bytes": 572,
+      "generated_objdiff_relocation_instructions": 9,
+      "generated_save_instruction": "stmw r23, 0x1c(r1)"
+    },
+    {
+      "variant": "retained final: trace hook plus opcodes 2 and 3",
+      "retail_bytes": 3224,
+      "match_percent": 19.225807,
+      "retail_objdiff_relocation_instructions": 74,
+      "retail_save_instruction": "stmw r21, 0x34(r1)",
+      "generated_bytes": 652,
+      "generated_objdiff_relocation_instructions": 11,
+      "generated_save_instruction": "stmw r23, 0x1c(r1)"
+    }
+  ],
+  "relocation_audit": {
+    "matched": false,
+    "retail_elf_text_relocations": 67,
+    "generated_elf_text_relocations": 10,
+    "retail_jump_table_relocations": 49,
+    "generated_jump_table_relocations": 13,
+    "note": "Objdiff relocation-bearing instruction counts include inferred annotations; they are not ELF relocation-record counts. Raw readelf outputs preserve explicit symbol names and addends.",
+    "raw_retail": "eternal-darkness-decomp/reports/GEDE01/retail-relocations-cbb8f499-b01d-4cf9-81b7-d939a844066f.log",
+    "raw_generated": "eternal-darkness-decomp/reports/GEDE01/generated-relocations-cbb8f499-b01d-4cf9-81b7-d939a844066f.log"
+  },
+  "codegen_divergence": "Canonical and function_reloc_diffs=name_address both measure 19.225807%. Retail is 3224 bytes; generated code is 652 bytes. The first instruction differs: retail stwu r1,-0x60(r1), generated stwu r1,-0x40(r1). Retail saves r21-r31 with stmw r21,0x34(r1); generated saves r23-r31 with stmw r23,0x1c(r1). Thirteen explicit opcode cases (0 through 12) and the trace-hook call are recovered; 36 opcode bodies (13 through 48) remain unrecovered. The placeholder default returns top, unlike retail out-of-range dispatch which continues the loop. The switch has 13 generated entries versus 49 retail entries, with different branch addends. VM register allocation and stack offsets differ. Objdiff annotates 11 generated versus 74 retail instructions with relocation metadata; actual ELF .rela.text has 10 versus 67 records. Generated table/number-constant targets @40 and @42 differ from retail jumptable_8024FD9C and lbl_80650670; remaining helper/data relocations, control flow, targets and addends are missing or different.",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "dol_note": "The canonical DOL links the original retail object for this NonMatching translation unit; this hash does not establish that the partial reconstruction is equivalent.",
+  "legal_audit": "passed",
+  "scope": "Only the target C source and assignment-specific reports changed; no registrations or neighboring sources needed edits. Pre-existing CLAUDE.md changes are excluded.",
+  "conclusion": "Attempted: retain one honest independent NonMatching partial reconstruction at 19.225807%; no match claimed."
+}

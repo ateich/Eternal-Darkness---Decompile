@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "assignment_id": "cbb8f499-b01d-4cf9-81b7-d939a844066f",
+  "attempt": 5,
+  "base_commit": "a94cdfd3578dc6bbcf48ea57d10407e6fb902ba5",
+  "target": "fn_801697AC",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-cbb8f499-b01d-4cf9-81b7-d939a844066f.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-canonical-cbb8f499-b01d-4cf9-81b7-d939a844066f.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-reloc-strict-cbb8f499-b01d-4cf9-81b7-d939a844066f.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-calls-cbb8f499-b01d-4cf9-81b7-d939a844066f.log",
+    "eternal-darkness-decomp/reports/GEDE01/dol-sha1-cbb8f499-b01d-4cf9-81b7-d939a844066f.log",
+    "eternal-darkness-decomp/reports/GEDE01/legal-audit-cbb8f499-b01d-4cf9-81b7-d939a844066f.log"
+  ],
+  "divergence": "Canonical and function_reloc_diffs=name_address both measure 19.225807%. Retail is 3224 bytes; generated code is 652 bytes. The first instruction differs: retail stwu r1,-0x60(r1), generated stwu r1,-0x40(r1). Retail saves r21-r31 with stmw r21,0x34(r1); generated saves r23-r31 with stmw r23,0x1c(r1). Thirteen explicit opcode cases (0 through 12) and the trace-hook call are recovered; 36 opcode bodies (13 through 48) remain unrecovered. The placeholder default returns top, unlike retail out-of-range dispatch which continues the loop. The switch has 13 generated entries versus 49 retail entries, with different branch addends. VM register allocation and stack offsets differ. Objdiff annotates 11 generated versus 74 retail instructions with relocation metadata; actual ELF .rela.text has 10 versus 67 records. Generated table/number-constant targets @40 and @42 differ from retail jumptable_8024FD9C and lbl_80650670; remaining helper/data relocations, control flow, targets and addends are missing or different."
+}

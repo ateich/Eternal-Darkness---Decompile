@@ -38,6 +38,9 @@ typedef struct Context {
 extern void fn_8016057C(Context*, int);
 extern void fn_80160628(Context*, Value*, int);
 extern void fn_80169740(Context*, Value*, int);
+extern Value* fn_80168F84(Context*, void*);
+extern void fn_80168AE8(Context*, Value*, Value*, void*);
+extern void fn_80160B18(Context*, Value*, int);
 
 /*
  * Lua 4.0.1 luaV_execute reconstruction.  The entry/return and primitive
@@ -65,7 +68,7 @@ Value* fn_801697AC(Context* context, Closure* closure, Value* base)
     for (;;) {
         instruction = *pc++;
         if (linehook) {
-            /* trace hook body is recovered in fn_80168AE8 */
+            fn_80168AE8(context, base, top, linehook);
         }
         switch (instruction & 0x3f) {
         case 0:
@@ -74,6 +77,19 @@ Value* fn_801697AC(Context* context, Closure* closure, Value* base)
         case 1:
             context->top = top;
             return base + (instruction >> 6);
+        case 2: {
+            int results = (instruction >> 6) & 0x1ff;
+            if (results == 0xff)
+                results = -1;
+            context->top = top;
+            fn_80160B18(context, base + (instruction >> 15), results);
+            top = context->top;
+            break;
+        }
+        case 3:
+            context->top = top;
+            fn_80160B18(context, base + (instruction >> 15), -1);
+            return base + ((instruction >> 6) & 0x1ff);
         case 4: {
             int count = instruction >> 6;
             do {
@@ -111,6 +127,13 @@ Value* fn_801697AC(Context* context, Closure* closure, Value* base)
         case 11:
             *top++ = base[instruction >> 6];
             break;
+        case 12: {
+            Value* value;
+            context->top = top;
+            value = fn_80168F84(context, strings[instruction >> 6]);
+            *top++ = *value;
+            break;
+        }
         default:
             context->top = top;
             return top;
