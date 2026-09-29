@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "assignment_id": "f48155ad-59a6-48d3-b91d-d92238730183",
+  "attempt": 5,
+  "base_commit": "102d317e99101eec65c959f4479dd2f13e22cad1",
+  "target": "fn_801D324C",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-f48155ad-59a6-48d3-b91d-d92238730183.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-f48155ad-59a6-48d3-b91d-d92238730183-canonical.json",
+    "eternal-darkness-decomp/reports/GEDE01/verification-f48155ad-59a6-48d3-b91d-d92238730183.json",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-f48155ad-59a6-48d3-b91d-d92238730183.json",
+    "eternal-darkness-decomp/reports/GEDE01/trials-f48155ad-59a6-48d3-b91d-d92238730183.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 99.76942%; generated and retail .text are each 1648 bytes with a 0x240-byte frame and r24-r31 saves. Fourteen instructions differ in GPR allocation: state 0 uses owner r25 versus r30, signed bound r27 versus r25, and conversion exponent r30 versus r27; state 0x2E uses index r24 versus r26. Four SDA21 relocation targets at offsets 0x134, 0x2fc, 0x430, and 0x564 reference compiler-local @69 instead of lbl_806510C8; their addends are zero. The other 69 relocation offset/type/target/addend tuples match. Candidate retains an extra eight-byte .sdata2 constant; no new normalization policy was introduced."
+}

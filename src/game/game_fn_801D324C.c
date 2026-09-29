@@ -1,4 +1,5 @@
 typedef unsigned char u8;
+typedef signed char s8;
 typedef unsigned short u16;
 typedef unsigned int u32;
 typedef signed short s16;
@@ -6,6 +7,11 @@ typedef signed short s16;
 typedef struct Vec3 {
     float x, y, z;
 } Vec3;
+
+typedef union Range {
+    struct { u32 xy; u16 z; } packed;
+    s16 values[3];
+} Range;
 
 typedef struct EffectInfo {
     u8 type;
@@ -21,7 +27,7 @@ typedef struct BurstInfo {
     u8 count;
     u8 enabled;
     u8 color0;
-    u8 color1;
+    s8 color1;
     u16 value04;
     u16 value06;
     u8 pad08[0xC];
@@ -29,7 +35,7 @@ typedef struct BurstInfo {
     u8 color15;
     u8 color16;
     u8 pad17[2];
-    u8 color19;
+    s8 color19;
     u8 pad1A[2];
     u32 word1C;
     u8 pad20[0x14];
@@ -44,19 +50,17 @@ typedef struct BurstInfo {
     Vec3 position98;
     u8 padA4[6];
     u8 modeAA;
-    u8 padAB;
+    u8 padAB[5];
 } BurstInfo;
 
 typedef struct GameObject {
     u8 pad00[4];
-    void* owner;
+    u32 owner;
     int type;
     u8 pad0C[0x24];
     void* link30;
     u8 pad34[4];
-    float field38;
-    float field3C;
-    float field40;
+    Vec3 position;
     void* resource44;
     u8 pad48[0xFA8];
     u8 flagsFF0;
@@ -75,8 +79,8 @@ extern const float lbl_806510C4;
 extern void fn_801FE22C(void*);
 extern void fn_801D31E0(GameObject*);
 extern void fn_80181F5C(EffectInfo*);
-extern int fn_801D3A34(void*, int);
-extern s16 fn_801CEB2C(void*);
+extern s16 fn_801D3A34(int, int);
+extern int fn_801CEB2C(u32);
 extern float fn_80048C2C(float);
 extern float fn_80048C50(float);
 extern u32 fn_800FBFB0(void);
@@ -93,20 +97,18 @@ extern void fn_8019B13C(BurstInfo*);
 extern void fn_8019AD40(void);
 extern void fn_80147EC4(BurstInfo*);
 
-/*
- * Effect-object state callback.  The non-current-type teardown path and the
- * state discriminator are identified (the compiler removes its empty arms).
- * The four particle-construction arms still require their large stack-local
- * descriptor layouts to be typed.
- */
+/* Effect-object state callback with per-state particle and burst descriptors. */
 void fn_801D324C(GameObject* object)
 {
     EffectInfo info;
-    Vec3 position0, position2E, position42, position56;
     Vec3 work0, work2E, work42, work56;
-    s16 range2E[3], range42[3], defaultRange[3];
-    int count;
-    int i;
+    Vec3 position0, position2E, position42, position56;
+    Range defaultRange;
+    s16 range2E[3], range42[3];
+    u32 owner0, owner;
+    int count0;
+    s16 count;
+    int i0, i;
     u32 resource;
     BurstInfo burst;
 
@@ -116,8 +118,8 @@ void fn_801D324C(GameObject* object)
         return;
     }
 
-    *(u32*)&defaultRange[0] = lbl_806510AC;
-    defaultRange[2] = lbl_806510B0;
+    defaultRange.packed.xy = lbl_806510AC;
+    defaultRange.packed.z = lbl_806510B0;
 
     switch (object->stateFF4) {
     case 0:
@@ -128,22 +130,23 @@ void fn_801D324C(GameObject* object)
                 fn_801E8328(13, object->link30);
         }
 
+        owner0 = object->owner;
         fn_80182380(&info);
         info.type = 8;
         info.count = 1;
-        info.value04 = fn_801D3A34(object->owner, 0x42);
+        info.value04 = fn_801D3A34(owner0, 0x42);
         *(u16*)&info.pad06[0] = 30;
         *(u16*)&info.pad06[2] = 8;
         info.pad1C[3] = 2;
-        count = fn_801CEB2C(object->owner);
-        for (i = 0; i < (s16)count; i++) {
-            float angle = lbl_806510B8 * i / (s16)count;
-            work0.x = object->field38 + lbl_806510BC * fn_80048C2C(angle);
-            work0.y = object->field3C + lbl_806510BC * fn_80048C50(angle);
-            work0.z = object->field40;
+        count0 = fn_801CEB2C(owner0);
+        for (i0 = 0; i0 < (s16)count0; i0++) {
+            float angle = lbl_806510B8 * i0 / (s16)count0;
+            work0.x = object->position.x + lbl_806510BC * fn_80048C2C(angle);
+            work0.y = object->position.y + lbl_806510BC * fn_80048C50(angle);
+            work0.z = object->position.z;
             position0 = work0;
             {
-                void* effect = fn_80148008(&position0, defaultRange,
+                void* effect = fn_80148008(&position0, defaultRange.values,
                                             &info, fn_80182448);
                 if (effect != 0)
                     fn_8017FF1C(fn_80156938(effect), 4);
@@ -151,42 +154,42 @@ void fn_801D324C(GameObject* object)
         }
 
         fn_8019B13C(&burst);
-        burst.count = (u8)count;
+        burst.count = (u8)count0;
         burst.enabled = 0;
-        burst.color0 = 0xFC;
-        burst.color1 = (u8)-6;
-        burst.value04 = fn_801D3A34(object->owner, 0x31);
+        burst.value04 = fn_801D3A34(owner0, 0x31);
         burst.value06 = 0;
+        burst.color0 = 0xFC;
+        burst.color1 = -6;
+        burst.color16 = 0;
         burst.color14 = 0xF0;
         burst.color15 = 0x96;
-        burst.color16 = 0;
-        burst.color19 = (u8)-10;
-        burst.word1C = 0;
+        burst.color19 = -10;
         burst.scale34 = lbl_806510C0;
+        burst.word1C = 0;
         burst.flag3C = 1;
         burst.color3D = 0xFC;
         burst.color3E = 12;
         burst.callback90 = fn_8019AD40;
-        burst.position98.x = object->field38;
-        burst.position98.y = object->field3C;
-        burst.position98.z = object->field40 + lbl_806510C4;
+        burst.position98 = object->position;
+        burst.position98.z += lbl_806510C4;
         burst.modeAA = 4;
         fn_80147EC4(&burst);
         break;
     case 0x2E:
+        owner = object->owner;
         fn_80181F5C(&info);
         info.count = 2;
-        info.value04 = fn_801D3A34(object->owner, 0x42);
+        info.value04 = fn_801D3A34(owner, 0x42);
         info.word18 = 0;
-        count = fn_801CEB2C(object->owner);
+        count = (s16)fn_801CEB2C(owner);
         for (i = 0; i < count; i++) {
             float angle = lbl_806510B8 * i / count;
-            work2E.x = object->field38 + lbl_806510BC * fn_80048C2C(angle);
-            work2E.y = object->field3C + lbl_806510BC * fn_80048C50(angle);
-            work2E.z = object->field40;
+            work2E.x = object->position.x + lbl_806510BC * fn_80048C2C(angle);
+            work2E.y = object->position.y + lbl_806510BC * fn_80048C50(angle);
+            work2E.z = object->position.z;
             info.type = (fn_800FBFB0() & 7) + 10;
-            range2E[0] = 0;
             range2E[1] = 0;
+            range2E[0] = 0;
             range2E[2] = (fn_800FBFB0() & 3) + 10;
             position2E = work2E;
             {
@@ -197,19 +200,20 @@ void fn_801D324C(GameObject* object)
         }
         break;
     case 0x42:
+        owner = object->owner;
         fn_80181F5C(&info);
         info.count = 2;
-        info.value04 = fn_801D3A34(object->owner, 0x42);
+        info.value04 = fn_801D3A34(owner, 0x42);
         info.word18 = 0;
-        count = fn_801CEB2C(object->owner);
+        count = (s16)fn_801CEB2C(owner);
         for (i = 0; i < count; i++) {
             float angle = lbl_806510B8 * i / count;
-            work42.x = object->field38 + lbl_806510BC * fn_80048C2C(angle);
-            work42.y = object->field3C + lbl_806510BC * fn_80048C50(angle);
-            work42.z = object->field40;
+            work42.x = object->position.x + lbl_806510BC * fn_80048C2C(angle);
+            work42.y = object->position.y + lbl_806510BC * fn_80048C50(angle);
+            work42.z = object->position.z;
             info.type = (fn_800FBFB0() & 7) + 5;
-            range42[0] = 0;
             range42[1] = 0;
+            range42[0] = 0;
             range42[2] = (fn_800FBFB0() & 3) + 8;
             position42 = work42;
             {
@@ -220,20 +224,21 @@ void fn_801D324C(GameObject* object)
         }
         break;
     case 0x56:
+        owner = object->owner;
         fn_80181F5C(&info);
         info.count = 2;
-        info.value04 = fn_801D3A34(object->owner, 0x42);
+        info.value04 = fn_801D3A34(owner, 0x42);
         info.word18 = 0;
-        count = fn_801CEB2C(object->owner);
+        count = (s16)fn_801CEB2C(owner);
         for (i = 0; i < count; i++) {
             float angle = lbl_806510B8 * i / count;
-            work56.x = object->field38 + lbl_806510BC * fn_80048C2C(angle);
-            work56.y = object->field3C + lbl_806510BC * fn_80048C50(angle);
-            work56.z = object->field40;
+            work56.x = object->position.x + lbl_806510BC * fn_80048C2C(angle);
+            work56.y = object->position.y + lbl_806510BC * fn_80048C50(angle);
+            work56.z = object->position.z;
             info.type = (fn_800FBFB0() & 3) + 4;
             position56 = work56;
             {
-                void* effect = fn_80148008(&position56, defaultRange,
+                void* effect = fn_80148008(&position56, defaultRange.values,
                                             &info, fn_80181FD8);
                 if (effect != 0)
                     fn_8017FF1C(fn_80156938(effect), 4);
