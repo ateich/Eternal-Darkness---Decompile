@@ -1,0 +1,42 @@
+assignment_id: 2cd24429-128c-48fb-9086-2312f04900b0
+target: fn_801D8E40
+
+build_invocation:
+  python3 configure.py && .tools/bin/ninja -j2
+build_exit_code: 0
+build_terminal_output:
+  [949/953] REPORT
+   INFO Loading project .
+   INFO Generating report for 7069 units (using 8 threads)
+   INFO Report generated in 0.285s
+   INFO Writing to build/GEDE01/report.json
+  [950/953] LINK build/GEDE01/main.elf
+  [951/953] DOL build/GEDE01/main.dol
+  [952/953] CHECK config/GEDE01/build.sha1
+  build/GEDE01/main.dol: OK
+  [953/953] PROGRESS
+  Progress:
+    All: 59.91% fuzzy, 50.93% matched, 50.80% linked (6356 / 7069 files)
+      Code: 1171724 / 2300692 bytes (6124 / 8214 functions)
+
+dol_sha1_invocation:
+  sha1sum build/GEDE01/main.dol
+dol_sha1_output:
+  ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol
+
+legal_audit_invocation:
+  python3 tools/legal_audit.py
+legal_audit_exit_code: 0
+legal_audit_output:
+  legal audit passed (23341 tracked project files inspected)
+
+relocation_strict_objdiff_invocation:
+  build/tools/objdiff-cli diff -p . -u main/game/game_fn_801D8E40 --format json-pretty fn_801D8E40 -o reports/GEDE01/objdiff-2cd24429-128c-48fb-9086-2312f04900b0.json
+relocation_strict_objdiff_exit_code: 0
+relocation_strict_objdiff_output:
+  INFO Writing to reports/GEDE01/objdiff-2cd24429-128c-48fb-9086-2312f04900b0.json
+  retail: section_bytes=2788 section_match=54.79627 symbol_bytes=2788 symbol_match=54.79627 instructions=701
+  generated: section_bytes=1648 symbol_bytes=1648 symbol_match=54.79627 instructions=701
+
+codegen_hypothesis:
+  Recovered effect arrays were indexed from object+0xA5C on each iteration rather than represented as a carried pointer. This distinct variant improved relocation-aware objdiff from the preserved 54.305595% / 1644-byte candidate to 54.796270% / 1648 bytes and was retained.
