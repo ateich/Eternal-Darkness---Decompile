@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "assignment_id": "af6b16ea-0f91-4d70-b19e-30ba500db335",
+  "attempt": 5,
+  "base_commit": "3757d69e3d60f478c4db7a4c4c8420ba8d02c3d3",
+  "target": "fn_801A1E14",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-af6b16ea-0f91-4d70-b19e-30ba500db335.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-af6b16ea-0f91-4d70-b19e-30ba500db335-canonical.raw.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-af6b16ea-0f91-4d70-b19e-30ba500db335-relocation_strict.raw.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-af6b16ea-0f91-4d70-b19e-30ba500db335-all_relocations.raw.json",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-af6b16ea-0f91-4d70-b19e-30ba500db335.json"
+  ],
+  "divergence": "Canonical, name_address relocation-strict, and all-relocations objdiff each measure 86.13846%; retail .text is 260 bytes and generated .text is 264 bytes. The canonical O4,p guarded byte-index loop avoids prior unrolling, const float declaration recovers the retail prologue load at +0x08, and native byte conversion recovers fsubs. The remaining conversion relocation at +0x4c targets local @18 rather than lbl_80650D20. The generated loop uses count r9/index r10/table r6 and clrlwi/cmpw/blt instead of retail count in CTR/index r9/table r4 and mtctr/bdnz, with different preheader and body scheduling. Both objects have five physical .text relocations, all addends zero: only two ELF relocation offsets differ (table LO +0x86 versus +0x8a; call +0xf0 versus +0xf4), while the conversion target differs at the same offset. The float relocation at +0x08 and table HA relocation at ELF +0x82 (instruction +0x80) agree. Function remains NonMatching; canonical build and legal audit pass and retail-backed DOL SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}

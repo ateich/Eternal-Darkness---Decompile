@@ -1,0 +1,534 @@
+{
+  "version": 1,
+  "assignment_id": "af6b16ea-0f91-4d70-b19e-30ba500db335",
+  "working_directory": "eternal-darkness-decomp",
+  "prior_attempts_reviewed": [
+    "4e46c28041f990e15609dec56f94231b78f39d16",
+    "67361b3fd67a08b2ebc239380381e7dab6194520",
+    "aa7d6c2167a3156a32cd8d1a2946eebf6518f2e0",
+    "2dedf04f9d04ae11df25500ea7ce81646b1f769e"
+  ],
+  "hypothesis": "Use canonical GC/1.3 O4,p without the inherited O2 pragma. Guard the loop explicitly and express the byte-index address to avoid automatic unrolling and pointer induction; use native byte-to-float conversion and a const declaration for the retail read-only zero constant to recover fsubs and prologue scheduling.",
+  "semantics": "count is copied from an unsigned byte. For executed iterations, 0 <= i < count <= 255, so narrowing i to u8 does not change the selected element. Four table loads are deliberately retained because the entry stores can alias the byte state.",
+  "experiments": [
+    {
+      "hypothesis": "Guarded signed countdown with explicit byte offset, canonical O4,p; no optimization pragma",
+      "score": 69.52308,
+      "size": 260,
+      "raw": "build/GEDE01/af6b16ea-trial1.json",
+      "sha256": "b81f2fef06e98af50ab0ef3f23d393acc6b6faf3c3ff6db40f723867e2f34ed6"
+    },
+    {
+      "hypothesis": "unsigned_countdown",
+      "build_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_801A1E14.o"
+      ],
+      "build_exit": 0,
+      "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A1E14.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801A1E14",
+        "fn_801A1E14",
+        "-o",
+        "build/GEDE01/af6b16ea-unsigned_countdown.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=all"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/af6b16ea-unsigned_countdown.json\n",
+      "score": 72.76923,
+      "size": "260",
+      "sha256": "08431859b352464adf31af0ce277740e7d53612d6ec9b028a4dd3fce1e9715b4"
+    },
+    {
+      "hypothesis": "unsigned_bound",
+      "build_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_801A1E14.o"
+      ],
+      "build_exit": 0,
+      "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A1E14.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801A1E14",
+        "fn_801A1E14",
+        "-o",
+        "build/GEDE01/af6b16ea-unsigned_bound.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=all"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/af6b16ea-unsigned_bound.json\n",
+      "score": 11.046154,
+      "size": "428",
+      "sha256": "152fce8387a2367e4d5646e3982a35e4d02bfdef015e83291e9384f77d50a111"
+    },
+    {
+      "hypothesis": "guarded_forward",
+      "build_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_801A1E14.o"
+      ],
+      "build_exit": 0,
+      "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A1E14.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801A1E14",
+        "fn_801A1E14",
+        "-o",
+        "build/GEDE01/af6b16ea-guarded_forward.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=all"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/af6b16ea-guarded_forward.json\n",
+      "score": 70.90769,
+      "size": "264",
+      "sha256": "35bd926d24929bca6de7f652610f43dbd9986f665f14097a01f7290c121ead53"
+    },
+    {
+      "hypothesis": "byte_index",
+      "build_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_801A1E14.o"
+      ],
+      "build_exit": 0,
+      "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A1E14.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801A1E14",
+        "fn_801A1E14",
+        "-o",
+        "build/GEDE01/af6b16ea-byte_index.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=all"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/af6b16ea-byte_index.json\n",
+      "score": 74.276924,
+      "size": "268",
+      "sha256": "1e6b26c88c385f796561b0979d4666d1ea962724a9dde69d51e7c2ff797285a1"
+    },
+    {
+      "hypothesis": "offset_induction",
+      "build_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_801A1E14.o"
+      ],
+      "build_exit": 0,
+      "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A1E14.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801A1E14",
+        "fn_801A1E14",
+        "-o",
+        "build/GEDE01/af6b16ea-offset_induction.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=all"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/af6b16ea-offset_induction.json\n",
+      "score": 70.49231,
+      "size": "268",
+      "sha256": "950ad527fcc50e82742f62e6ef02be9a3bfbbb08ca7c2262cdeb4dd7c4f9d093"
+    },
+    {
+      "hypothesis": "native_conversion",
+      "build_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_801A1E14.o"
+      ],
+      "build_exit": 0,
+      "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A1E14.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801A1E14",
+        "fn_801A1E14",
+        "-o",
+        "build/GEDE01/af6b16ea-native_conversion.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=all"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/af6b16ea-native_conversion.json\n",
+      "score": 79.46154,
+      "size": "256",
+      "sha256": "f334614842785389e09ef497d586bbfe3cf776e0cc7e6761469f3aa7fb54d426"
+    },
+    {
+      "hypothesis": "const_globals",
+      "build_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_801A1E14.o"
+      ],
+      "build_exit": 0,
+      "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A1E14.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801A1E14",
+        "fn_801A1E14",
+        "-o",
+        "build/GEDE01/af6b16ea-const_globals.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=all"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/af6b16ea-const_globals.json\n",
+      "score": 82.53846,
+      "size": "256",
+      "sha256": "b642df3eeb48aa9b33ddcf586ed1ffdf19009dbb538e3946fd7a428d534c7d06"
+    },
+    {
+      "hypothesis": "pretest_countdown",
+      "build_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_801A1E14.o"
+      ],
+      "build_exit": 0,
+      "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A1E14.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801A1E14",
+        "fn_801A1E14",
+        "-o",
+        "build/GEDE01/af6b16ea-pretest_countdown.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=all"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/af6b16ea-pretest_countdown.json\n",
+      "score": 15.584616,
+      "size": "424",
+      "sha256": "37c4a2796e8b2eb160f6a4fd0d419faad3a89f1c932111d27e17dc83d56fbcd5"
+    },
+    {
+      "hypothesis": "native_byte_index",
+      "build_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_801A1E14.o"
+      ],
+      "build_exit": 0,
+      "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A1E14.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801A1E14",
+        "fn_801A1E14",
+        "-o",
+        "build/GEDE01/af6b16ea-native_byte_index.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=all"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/af6b16ea-native_byte_index.json\n",
+      "score": 83.06154,
+      "size": "264",
+      "sha256": "5c3323a21bcd74fcec294c5aed2d5dcceb027942e070224250866429845803b3"
+    },
+    {
+      "hypothesis": "posttest_unsigned_bound",
+      "build_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_801A1E14.o"
+      ],
+      "build_exit": 0,
+      "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A1E14.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801A1E14",
+        "fn_801A1E14",
+        "-o",
+        "build/GEDE01/af6b16ea-posttest_unsigned_bound.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=all"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/af6b16ea-posttest_unsigned_bound.json\n",
+      "score": 79.6,
+      "size": "260",
+      "sha256": "bc2b6a0603bada9b59f31b54e9c017446ba197d86544044fdd9e6bea557d510a"
+    },
+    {
+      "hypothesis": "const_native_byte_index",
+      "build_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_801A1E14.o"
+      ],
+      "build_exit": 0,
+      "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A1E14.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801A1E14",
+        "fn_801A1E14",
+        "-o",
+        "build/GEDE01/af6b16ea-const_native_byte_index.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=all"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/af6b16ea-const_native_byte_index.json\n",
+      "score": 86.13846,
+      "size": "264",
+      "sha256": "58911beef363d88aa361ab697c74a5ac15b44d60a0a58126020f65e71c8423e8"
+    },
+    {
+      "hypothesis": "short_index",
+      "build_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_801A1E14.o"
+      ],
+      "build_exit": 0,
+      "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A1E14.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801A1E14",
+        "fn_801A1E14",
+        "-o",
+        "build/GEDE01/af6b16ea-short_index.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=all"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/af6b16ea-short_index.json\n",
+      "score": 84.6,
+      "size": "268",
+      "sha256": "b9f8e8b73c5b2d3e0105d80324d380a723f88fcab2c174d9e9edc52450388cd2"
+    },
+    {
+      "hypothesis": "unsigned_index",
+      "build_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_801A1E14.o"
+      ],
+      "build_exit": 0,
+      "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A1E14.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801A1E14",
+        "fn_801A1E14",
+        "-o",
+        "build/GEDE01/af6b16ea-unsigned_index.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=all"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/af6b16ea-unsigned_index.json\n",
+      "score": 82.76923,
+      "size": "260",
+      "sha256": "7ff926df52ee0e145630e61d109c5281e2fca2be18cf38c0c3e19421667b43d8"
+    },
+    {
+      "hypothesis": "byte_index_variable",
+      "build_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_801A1E14.o"
+      ],
+      "build_exit": 0,
+      "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A1E14.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801A1E14",
+        "fn_801A1E14",
+        "-o",
+        "build/GEDE01/af6b16ea-byte_index_variable.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=all"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/af6b16ea-byte_index_variable.json\n",
+      "score": 84.6,
+      "size": "268",
+      "sha256": "a8c8f777b61d38ebb63c0110819585bbe14e14e64b3a107525f83661376cfd60"
+    },
+    {
+      "hypothesis": "color_word",
+      "build_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_801A1E14.o"
+      ],
+      "build_exit": 0,
+      "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A1E14.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801A1E14",
+        "fn_801A1E14",
+        "-o",
+        "build/GEDE01/af6b16ea-color_word.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=all"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/af6b16ea-color_word.json\n",
+      "score": 13.584616,
+      "size": "424",
+      "sha256": "adc2b270ef6126eadf8c16ec5c4a514c8869e3a5e11affccf5d7ee3333e3e718"
+    },
+    {
+      "hypothesis": "color_halves",
+      "build_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_801A1E14.o"
+      ],
+      "build_exit": 0,
+      "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A1E14.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801A1E14",
+        "fn_801A1E14",
+        "-o",
+        "build/GEDE01/af6b16ea-color_halves.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=all"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/af6b16ea-color_halves.json\n",
+      "score": 13.584616,
+      "size": "424",
+      "sha256": "22a420505e3e8f505b3abf65491fd3a3a6e85288ccd679abc117df1b27db4f47"
+    },
+    {
+      "hypothesis": "color_bytes",
+      "build_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_801A1E14.o"
+      ],
+      "build_exit": 0,
+      "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A1E14.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801A1E14",
+        "fn_801A1E14",
+        "-o",
+        "build/GEDE01/af6b16ea-color_bytes.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=all"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/af6b16ea-color_bytes.json\n",
+      "score": 13.584616,
+      "size": "424",
+      "sha256": "75a6434ede2dd40851886bcde67943024935dff9181b9ffb93d7def052e997a4"
+    }
+  ],
+  "retained": "const_native_byte_index, then formatting cleanup and removal of unused double declaration; final fresh measurements are in the assignment objdiff report.",
+  "historical_correction": "Preserved 4e46c280 evidence has four differing physical relocation offsets, not five; lbl_80607440@ha stays at +0x80. New candidate relocation details are measured separately."
+}
