@@ -54,8 +54,8 @@ void fn_80196578(Object* object)
     u8 two = 2;
     float scale = lbl_80650B80;
     Pair pair;
-    pair.first = lbl_80650B78;
     pair.second = lbl_80650B7C;
+    pair.first = lbl_80650B78;
 
     object->mode = ten;
     object->type = five;

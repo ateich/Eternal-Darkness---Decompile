@@ -1,0 +1,300 @@
+{
+  "assignment_id": "6a589af9-1098-4c85-b57e-b68b11436817",
+  "source": "eternal-darkness-decomp/src/game/game_fn_801F8620.c",
+  "source_sha256": "70347af4618eaa52939d237c13810d1f6590f32071740cc16ebb0d666ee3753f",
+  "commands": [
+    {
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801F8620",
+        "fn_801F8620",
+        "-o",
+        "reports/GEDE01/objdiff-6a589af9-1098-4c85-b57e-b68b11436817.json",
+        "--format",
+        "json-pretty"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "stdout": "",
+      "stderr": " INFO Writing to reports/GEDE01/objdiff-6a589af9-1098-4c85-b57e-b68b11436817.json\n",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801F8620",
+        "fn_801F8620",
+        "-c",
+        "functionRelocDiffs=all",
+        "-o",
+        "reports/GEDE01/objdiff-strict-6a589af9-1098-4c85-b57e-b68b11436817.json",
+        "--format",
+        "json-pretty"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "stdout": "",
+      "stderr": " INFO Writing to reports/GEDE01/objdiff-strict-6a589af9-1098-4c85-b57e-b68b11436817.json\n",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".tools/bin/ninja",
+        "-t",
+        "commands",
+        "build/GEDE01/src/game/game_fn_801F8620.o"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "stdout": "\"/usr/bin/python3\" tools/download_tool.py sjiswrap build/tools/sjiswrap.exe --tag v1.2.2\ntools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -MMD -c src/game/game_fn_801F8620.c -o build/GEDE01/src/game && \"/usr/bin/python3\" tools/transform_dep.py build/GEDE01/src/game/game_fn_801F8620.d build/GEDE01/src/game/game_fn_801F8620.d\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "readelf",
+        "-Wr",
+        "build/GEDE01/obj/game/game_fn_801F8620.o"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "stdout": "\nRelocation section '.rela.text' at offset 0xb4 contains 5 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n0000000a  00000406 R_PPC_ADDR16_HA        00000000   lbl_8063C6B8 + 0\n00000012  00000404 R_PPC_ADDR16_LO        00000000   lbl_8063C6B8 + 0\n0000001c  0000056d R_PPC_EMB_SDA21        00000000   lbl_8064D7BC + 0\n0000002c  0000056d R_PPC_EMB_SDA21        00000000   lbl_8064D7BC + 0\n00000058  0000060a R_PPC_REL24            00000000   fn_801FA44C + 0\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "readelf",
+        "-Wr",
+        "build/GEDE01/src/game/game_fn_801F8620.o"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "stdout": "\nRelocation section '.rela.text' at offset 0xa0 contains 5 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n0000000a  00000306 R_PPC_ADDR16_HA        00000000   lbl_8063C6B8 + 0\n00000012  00000304 R_PPC_ADDR16_LO        00000000   lbl_8063C6B8 + 0\n0000001c  0000046d R_PPC_EMB_SDA21        00000000   lbl_8064D7BC + 0\n00000028  0000046d R_PPC_EMB_SDA21        00000000   lbl_8064D7BC + 0\n00000050  0000050a R_PPC_REL24            00000000   fn_801FA44C + 0\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "readelf",
+        "-Ws",
+        "build/GEDE01/src/game/game_fn_801F8620.o"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "stdout": "\nSymbol table '.symtab' contains 7 entries:\n   Num:    Value  Size Type    Bind   Vis      Ndx Name\n     0: 00000000     0 NOTYPE  LOCAL  DEFAULT  UND \n     1: 00000000     0 FILE    LOCAL  DEFAULT  ABS game_fn_801F8620.c\n     2: 00000000     0 SECTION LOCAL  DEFAULT    1 .text\n     3: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND lbl_8063C6B8\n     4: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND lbl_8064D7BC\n     5: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801FA44C\n     6: 00000000   108 FUNC    GLOBAL DEFAULT    1 fn_801F8620\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "sha1sum",
+        "build/GEDE01/main.dol",
+        "orig/GEDE01/sys/main.dol"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "stdout": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "python3",
+        "tools/legal_audit.py"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "stdout": "legal audit passed (22317 tracked project files inspected)\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "stdout": "",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "stdout": " M ../CLAUDE.md\n M src/game/game_fn_801F8620.c\n?? reports/GEDE01/build-6a589af9-1098-4c85-b57e-b68b11436817.log\n?? reports/GEDE01/objdiff-6a589af9-1098-4c85-b57e-b68b11436817.json\n?? reports/GEDE01/objdiff-strict-6a589af9-1098-4c85-b57e-b68b11436817.json\n?? reports/GEDE01/trials-6a589af9-1098-4c85-b57e-b68b11436817.json\n",
+      "stderr": "",
+      "exit_code": 0
+    }
+  ],
+  "measurements": {
+    "canonical_percent": 91.413795,
+    "relocation_strict_percent": 91.413795,
+    "strict_configuration": "functionRelocDiffs=all",
+    "retail_text_bytes": 116,
+    "generated_text_bytes": 108,
+    "previous_preserved_percent": 90.72414,
+    "best_valid_trial_percent": 91.413795,
+    "registration": "NonMatching, GC/1.3; unchanged",
+    "defined_functions": [
+      "fn_801F8620"
+    ],
+    "relocation_identity": "Five entries have equal ordered type/target/addend tuples. Offsets differ for counter store (retail 0x2c, generated 0x28) and fn_801FA44C call (retail 0x58, generated 0x50)."
+  },
+  "hypotheses": [
+    "Recovered volatile-counter source from df7ece1f4ee774f223b696c3c370328040dba5b7; examined preserved attempt envelopes and accepted-base source.",
+    "New address-shape hypothesis: pointer-to-integer arithmetic might inhibit derived-address folding. Measured unchanged 90.72414%.",
+    "New inline snapshot hypothesis: one inline operation receiving both live states may preserve pointer lifetimes and handle allocation. Measured 91.413795%; handle register allocation improves, derived pointers still fold.",
+    "Additional register, restrict, accessor, pointer-reference, declaration and scope variants did not surpass inline snapshot. Trial-generation errors are explicitly labeled invalid and excluded from best score."
+  ],
+  "source_review": {
+    "scope": "Only target C translation unit and assignment reports are changed by this assignment. configure.py and splits.txt retain their canonical settings and NonMatching registration.",
+    "semantics": "Snapshot loads first value and handle, stores first value, loads second value and handle, stores second value and both handles, calls fn_801FA44C and saves its token. Counter load/increment/store retained. Struct offsets remain first=0xCC0, second=0xD48, saved=0xDD0; value=0x30, handle=0x70, saved stride=0x14.",
+    "qualification_limit": "Volatile field accesses and counter are inherited reconstruction hypotheses, not claims about original source declarations.",
+    "helper": "Static inline C snapshot is local to this translation unit and emits no standalone symbol; readelf verifies only fn_801F8620 is defined as FUNC. No assembly, byte blobs, new compiler flags, postcompile transformations, neighboring edits or shared reconstruction added.",
+    "preexisting_change": "CLAUDE.md was modified before this assignment; left untouched and excluded from commit because assignment scope forbids editing it.",
+    "shared_inputs": "Only approved existing toolchain/retail inputs used; no tools or private inputs installed, replaced, modified or staged."
+  },
+  "post_build_commands": [
+    {
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801F8620",
+        "fn_801F8620",
+        "-o",
+        "reports/GEDE01/objdiff-6a589af9-1098-4c85-b57e-b68b11436817.json",
+        "--format",
+        "json-pretty"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "stdout": "",
+      "stderr": " INFO Writing to reports/GEDE01/objdiff-6a589af9-1098-4c85-b57e-b68b11436817.json\n",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801F8620",
+        "fn_801F8620",
+        "-c",
+        "functionRelocDiffs=all",
+        "-o",
+        "reports/GEDE01/objdiff-strict-6a589af9-1098-4c85-b57e-b68b11436817.json",
+        "--format",
+        "json-pretty"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "stdout": "",
+      "stderr": " INFO Writing to reports/GEDE01/objdiff-strict-6a589af9-1098-4c85-b57e-b68b11436817.json\n",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "sha1sum",
+        "build/GEDE01/main.dol",
+        "orig/GEDE01/sys/main.dol"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "stdout": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--",
+        "src/game/game_fn_801F8620.c"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "stdout": "diff --git a/eternal-darkness-decomp/src/game/game_fn_801F8620.c b/eternal-darkness-decomp/src/game/game_fn_801F8620.c\nindex 00380a601b..99d2bfd29e 100644\n--- a/eternal-darkness-decomp/src/game/game_fn_801F8620.c\n+++ b/eternal-darkness-decomp/src/game/game_fn_801F8620.c\n@@ -22,19 +22,33 @@ typedef struct Globals {\n } Globals;\n \n extern Globals lbl_8063C6B8;\n-extern int lbl_8064D7BC;\n+extern volatile int lbl_8064D7BC;\n extern unsigned int fn_801FA44C(void);\n \n+/* Keep the two live-state reads together before storing their handles. */\n+static inline void snapshot(volatile SavedState* saved,\n+                            volatile LiveState* first,\n+                            volatile LiveState* second)\n+{\n+    float first_value = first->value;\n+    unsigned int first_handle = first->handle;\n+    float second_value;\n+    unsigned int second_handle;\n+\n+    saved->first_value = first_value;\n+    second_value = second->value;\n+    second_handle = second->handle;\n+    saved->second_value = second_value;\n+    saved->first_handle = first_handle;\n+    saved->second_handle = second_handle;\n+}\n+\n void fn_801F8620(void)\n {\n     volatile Globals* globals = &lbl_8063C6B8;\n     volatile SavedState* saved;\n     volatile LiveState* first;\n     volatile LiveState* second;\n-    float first_value;\n-    float second_value;\n-    unsigned int first_handle;\n-    unsigned int second_handle;\n     int count;\n \n     saved = globals->saved;\n@@ -42,14 +56,7 @@ void fn_801F8620(void)\n     saved = &saved[count];\n     first = &globals->first;\n     lbl_8064D7BC = count + 1;\n-    first_value = first->value;\n     second = &globals->second;\n-    first_handle = first->handle;\n-    saved->first_value = first_value;\n-    second_value = second->value;\n-    second_handle = second->handle;\n-    saved->second_value = second_value;\n-    saved->first_handle = first_handle;\n-    saved->second_handle = second_handle;\n+    snapshot(saved, first, second);\n     saved->token = fn_801FA44C();\n }\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--quiet",
+        "--",
+        "configure.py",
+        "config/GEDE01/splits.txt",
+        "progress.json",
+        "README.md"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "stdout": "",
+      "stderr": "",
+      "exit_code": 0
+    }
+  ],
+  "build": {
+    "log": "eternal-darkness-decomp/reports/GEDE01/build-6a589af9-1098-4c85-b57e-b68b11436817.log",
+    "configure_exit_code": 0,
+    "ninja_exit_code": 0,
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "dol_limitation": "Target remains NonMatching, so the canonical DOL links the retail target object; correct DOL hash does not establish a source match.",
+    "log_encoding": "UTF-8 text; compiler CRLF line endings normalized to LF, output content otherwise unchanged."
+  },
+  "staged_audit": [
+    {
+      "command": [
+        "python3",
+        "tools/legal_audit.py"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "stdout": "legal audit passed (22323 tracked project files inspected)\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "stdout": "",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--name-only"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "stdout": "eternal-darkness-decomp/reports/GEDE01/build-6a589af9-1098-4c85-b57e-b68b11436817.log\neternal-darkness-decomp/reports/GEDE01/durable-6a589af9-1098-4c85-b57e-b68b11436817.json\neternal-darkness-decomp/reports/GEDE01/objdiff-6a589af9-1098-4c85-b57e-b68b11436817.json\neternal-darkness-decomp/reports/GEDE01/objdiff-strict-6a589af9-1098-4c85-b57e-b68b11436817.json\neternal-darkness-decomp/reports/GEDE01/trials-6a589af9-1098-4c85-b57e-b68b11436817.json\neternal-darkness-decomp/reports/GEDE01/verification-6a589af9-1098-4c85-b57e-b68b11436817.json\neternal-darkness-decomp/src/game/game_fn_801F8620.c\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--stat"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "stdout": " .../build-6a589af9-1098-4c85-b57e-b68b11436817.log |  2043 +\n ...rable-6a589af9-1098-4c85-b57e-b68b11436817.json |    16 +\n ...jdiff-6a589af9-1098-4c85-b57e-b68b11436817.json |  2371 +\n ...trict-6a589af9-1098-4c85-b57e-b68b11436817.json |  2371 +\n ...rials-6a589af9-1098-4c85-b57e-b68b11436817.json | 43971 +++++++++++++++++++\n ...ation-6a589af9-1098-4c85-b57e-b68b11436817.json |   251 +\n .../src/game/game_fn_801F8620.c                    |    33 +-\n 7 files changed, 51043 insertions(+), 13 deletions(-)\n",
+      "stderr": "",
+      "exit_code": 0
+    }
+  ]
+}

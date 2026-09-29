@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "assignment_id": "1550cc77-d44e-4bd0-8744-6ced8fbc78f4",
+  "attempt": 5,
+  "base_commit": "8695f34645408fc0e0182a2970c49f0f01d7bba7",
+  "target": "fn_801F15D0",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-1550cc77-d44e-4bd0-8744-6ced8fbc78f4.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-1550cc77-d44e-4bd0-8744-6ced8fbc78f4-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/verification-1550cc77-d44e-4bd0-8744-6ced8fbc78f4.json",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-1550cc77-d44e-4bd0-8744-6ced8fbc78f4.json",
+    "eternal-darkness-decomp/reports/GEDE01/baseline-1550cc77-d44e-4bd0-8744-6ced8fbc78f4.json",
+    "eternal-darkness-decomp/reports/GEDE01/exact-frame-1550cc77-d44e-4bd0-8744-6ced8fbc78f4.json",
+    "eternal-darkness-decomp/reports/GEDE01/final-build-1550cc77-d44e-4bd0-8744-6ced8fbc78f4.log"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 88.06278% (baseline 84.80269%). Retail is 892 bytes with a 208-byte frame and 14 relocations; the retained GC/1.3 candidate is 940 bytes with a 224-byte frame and 16 relocations. The exact 48-byte instruction-count difference is ten double fsub + frsp pairs replacing ten retail fsubs (40 bytes), plus addi/bl save and restore sequences replacing stmw/lmw (8 bytes). Both paths retain three fdivs and three fmuls; no double fdiv/fmul typing regression was introduced. Extra relocation targets are exactly _savegpr_21 and _restgpr_21; the other 14 types, targets, and zero addends agree in sequence, but instruction offsets differ. Typed item member access, file-local inline conversion helpers, low-word-first stores, declaration order, and three reusable conversion unions recover retail nonvolatile register assignments; stack offsets and floating-point scheduling still differ. The corrected indices + 0x58 + i * 0x5c access is preserved. The best 208-byte-frame variant scored 87.2018%: two union scratch slots assigned 0100111001 across initial RGB, distance, three limits, and final RGB; it still emitted the two helper relocations and fsub/frsp pairs, with less accurate RGB scheduling. Raw evidence and exact variant descriptions are preserved. Canonical compiler settings and NonMatching registration remain unchanged; no compiler-policy, gate, or object patch was attempted."
+}

@@ -14,9 +14,9 @@ typedef struct Record24 { s32 pad0; s32 a; s32 b; s32 c; u8 flag; u8 pad11[3]; s
 typedef struct Record8 { s32 a; s32 b; } Record8;
 
 /* NonMatching: behavior-complete initialization reconstructed from retail.
- * GC/1.3 folds the eight scalar-array bases into direct stores and keeps the
- * record-loop pointers in volatile registers; retail keeps r25-r31 live and
- * uses a 0x30-byte frame, leaving the generated function 64 bytes shorter. */
+ * Field stores and pointer increments follow retail's record-loop schedule,
+ * but GC/1.3 still keeps its pointers in volatile registers while retail uses
+ * r25-r31 and a 0x30-byte frame, leaving this function 64 bytes shorter. */
 void fn_801ED118(void)
 {
     u8* base = lbl_80639260;
@@ -61,14 +61,27 @@ void fn_801ED118(void)
         }
 
         for (i = 0; i < 16; i++) {
-            r16a->value[0] = r16a->value[1] = r16a->value[2] = r16a->value[3] = -1;
-            r16b->value[0] = r16b->value[1] = r16b->value[2] = r16b->value[3] = -1;
-            r24a->a = r24a->b = r24a->c = r24a->d = -1;
+            r24a->a = -1;
+            r24b->a = -1;
+            r16a->value[0] = -1;
+            r16b->value[0] = -1;
+            r24a->b = -1;
+            r24b->b = -1;
+            r16a->value[1] = -1;
+            r16b->value[1] = -1;
+            r24a->c = -1;
+            r24b->c = -1;
+            r16a->value[2] = -1;
+            r16b->value[2] = -1;
             r24a->flag = 255;
-            r24b->a = r24b->b = r24b->c = r24b->d = -1;
             r24b->flag = 255;
-            r8->a = r8->b = -1;
+            r8->a = -1;
             *b++ = -1;
+            r16a->value[3] = -1;
+            r16b->value[3] = -1;
+            r24a->d = -1;
+            r24b->d = -1;
+            r8->b = -1;
             r16a++;
             r16b++;
             r24a++;

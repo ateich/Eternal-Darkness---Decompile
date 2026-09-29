@@ -16,6 +16,8 @@ struct Node {
 
 typedef struct Entry Entry;
 struct Entry { u8 data[0x1868]; };
+/* The third link head is addressed relative to the entry base. */
+struct EntryLinks { u8 data[0x226C]; Link* link; };
 
 extern Entry lbl_8060C020[];
 extern Node* volatile lbl_8064D394;
@@ -24,36 +26,39 @@ extern Node* volatile lbl_8064D39C;
 extern void fn_801B244C(void*);
 extern void fn_801C21E8(void*);
 
-void fn_801B3770(u32 handle)
+/* TU-local C helper; the canonical compiler inlines both searches. */
+static inline u32 resolve_handle(u32 handle)
 {
-    Entry* entries = lbl_8060C020;
     u32 key = handle & 0x7FFFFFFF;
     u32 id;
     Node* search = lbl_8064D39C;
-    Node* node;
-    Link* link;
-    u32 i;
     while (search != 0) {
         if (search->key == key) {
-            id = search->type;
-            id |= handle & 0x80000000U;
-            goto resolved;
+            id = search->type | (handle & 0x80000000U);
+            return id;
         }
         search = search->next;
     }
     search = lbl_8064D398;
     while (search != 0) {
         if (search->key == key) {
-            id = search->type;
-            id |= handle & 0x80000000U;
-            goto resolved;
+            id = search->type | (handle & 0x80000000U);
+            return id;
         }
         search = search->next;
     }
     id = -1;
-resolved:
+    return id;
+}
+
+void fn_801B3770(u32 handle)
+{
+    Entry* entries = lbl_8060C020;
+    u32 id = resolve_handle(handle);
+    Node* node;
+    u32 i;
     if (id == 0xFFFFFFFFU) return;
-    if ((id & 0x80000000U) == 0) {
+    if ((int)id >= 0) {
         u32 offset = id * sizeof(Entry);
         u8* entry = (u8*)entries + offset;
         u8 state = entry[0x1408];
@@ -62,12 +67,21 @@ resolved:
         case 1:
             if (node->prev) node->prev->next = node->next;
             else lbl_8064D39C = node->next;
-            for (i = 0; i < 2; i++) {
-                link = *(Link**)((u8*)node + 0xE64 + i * 4);
-                while (link) { fn_801C21E8(link->object); link = link->next; }
+            i = 0;
+            do {
+                Link* link = *(Link**)((u8*)node + 0xE64 + i * 4);
+                while (link) {
+                    fn_801C21E8(link->object);
+                    link = link->next;
+                }
+            } while (++i < 2);
+            {
+                Link* link = ((struct EntryLinks*)((u8*)entries + offset))->link;
+                while (link) {
+                    fn_801C21E8(link->object);
+                    link = link->next;
+                }
             }
-            link = *(Link**)((u8*)entries + offset + 0x226C);
-            while (link) { fn_801C21E8(link->object); link = link->next; }
             fn_801B244C(node);
             break;
         case 2:
@@ -77,9 +91,12 @@ resolved:
         }
         if (node->next) node->next->prev = node->prev;
         node->state = 0;
+        {
+            Node* free = lbl_8064D394;
+            if (free) free->prev = node;
+        }
         node->next = lbl_8064D394;
         node->prev = 0;
-        if (lbl_8064D394) lbl_8064D394->prev = node;
         lbl_8064D394 = node;
     } else {
         {

@@ -1,0 +1,25 @@
+diff --git a/eternal-darkness-decomp/src/game/game_fn_8005F8D0.c b/eternal-darkness-decomp/src/game/game_fn_8005F8D0.c
+index 780b5c4b6b..9d982e6891 100644
+--- a/eternal-darkness-decomp/src/game/game_fn_8005F8D0.c
++++ b/eternal-darkness-decomp/src/game/game_fn_8005F8D0.c
+@@ -82,6 +82,8 @@ void fn_8005F8D0(s32 owner, void *entry, void *manager, SourceObject *source,
+     Pair *pairs_b;
+     s32 state;
+     s32 range;
++    s32 random_min;
++    s32 random_value;
+     s32 query_two;
+     s32 query_three;
+ 
+@@ -111,8 +113,9 @@ void fn_8005F8D0(s32 owner, void *entry, void *manager, SourceObject *source,
+     }
+ 
+     config = &lbl_80243C30[config_kind];
+-    range = config->random_max - config->random_min;
+-    range = (u16)(config->random_min + fn_800FBFB0() % range);
++    random_min = config->random_min;
++    random_value = fn_800FBFB0();
++    range = (u16)(random_min + random_value % (config->random_max - random_min));
+ 
+     if (position != 0) {
+         s32 bad;

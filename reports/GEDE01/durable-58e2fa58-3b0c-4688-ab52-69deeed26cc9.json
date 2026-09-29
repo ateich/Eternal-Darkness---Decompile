@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "58e2fa58-3b0c-4688-ab52-69deeed26cc9",
+  "attempt": 3,
+  "base_commit": "6961236179d8e7e597fb240fb87256aa1052b95b",
+  "target": "fn_801E3644",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-58e2fa58-3b0c-4688-ab52-69deeed26cc9.json"
+  ],
+  "divergence": "Fresh canonical relocation-strict objdiff scores 96.53608%: generated code is 780 bytes/195 instructions versus retail 776 bytes/194 instructions, with 32 relocations on both sides. Retail flag-transition branches depend only on bits 4 and 2, and the interpolation/effect path is now reconstructed with retail semantics: it runs for a current owner whose runtime differs or when status bit 1 is set, and the main-path effect-object dereference is intentionally not null-gated. Remaining codegen divergence is one net generated instruction (an early clrlwi after fn_801A39A8), r22-r29 live-range allocation through cleanup/interpolation/attachment handling, and rlwinm versus andi mask selection. Relocation-bearing calls and constants are present in equal count; comparison uses function_reloc_diffs=name_address for strict relocation target/addend checking."
+}

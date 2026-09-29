@@ -1,0 +1,113 @@
+--- eternal-darkness-decomp/src/game/game_fn_801ED118.c
++++ eternal-darkness-decomp/src/game/game_fn_801ED118.c
+@@ -2,7 +2,6 @@
+ typedef signed int s32;
+ typedef unsigned char u8;
+ 
+-extern u8 lbl_80639260[];
+ extern s32 lbl_8064D634;
+ extern s32 lbl_8064D63C;
+ extern s32 lbl_8064D680;
+@@ -13,51 +12,63 @@
+ typedef struct Record24 { s32 pad0; s32 a; s32 b; s32 c; u8 flag; u8 pad11[3]; s32 d; } Record24;
+ typedef struct Record8 { s32 a; s32 b; } Record8;
+ 
+-/* NonMatching: behavior-complete initialization reconstructed from retail.
+- * Interleaving record fields reproduces retail's inner-loop store schedule,
+- * but GC/1.3 still keeps its pointers in volatile registers while retail uses
+- * r25-r31 and a 0x30-byte frame, leaving this function 64 bytes shorter. */
++typedef struct State {
++    u8 pad[0x21D8];
++    s16 half[11];
++    s16 pad21EE;
++    s32 count;
++    s32 pad21F4;
++    s32 word[16];
++    s32 a[16], z[16], b[16], c[16], d[16], e[16];
++    Record16 r16a[16], r16b[16];
++    Record24 r24a[16], r24b[16];
++    Record8 r8[16];
++    s32 f[16], g[16], h[16], tail[16];
++} State;
++extern State lbl_80639260;
++
++/* NonMatching: initialization reconstructed from retail. */
+ void fn_801ED118(void)
+ {
+-    u8* base = lbl_80639260;
++    State* base = &lbl_80639260;
+     s32 i;
+ 
+     {
+-        s16* half = (s16*)(base + 0x21D8);
+-        s32* word = (s32*)(base + 0x21F8);
++        s16* half = base->half;
++        s32* word = base->word;
+         for (i = 0; i < 11; i++) {
+             half[i] = -1;
+             word[i] = -1;
+         }
+     }
+     lbl_8064D634 = -1;
+-    *(s32*)(base + 0x21F0) = 0;
++    base->count = 0;
+     lbl_8064D63C = 0;
+ 
+     {
+-        s32* a = (s32*)(base + 0x2238);
+-        s32* z = (s32*)(base + 0x2278);
+-        s32* c = (s32*)(base + 0x22F8);
+-        s32* d = (s32*)(base + 0x2338);
+-        s32* e = (s32*)(base + 0x2378);
+-        s32* f = (s32*)(base + 0x2938);
+-        s32* g = (s32*)(base + 0x2978);
+-        s32* h = (s32*)(base + 0x29B8);
+-        Record16* r16a = (Record16*)(base + 0x23B8);
+-        Record16* r16b = (Record16*)(base + 0x24B8);
+-        Record24* r24a = (Record24*)(base + 0x25B8);
+-        Record24* r24b = (Record24*)(base + 0x2738);
+-        Record8* r8 = (Record8*)(base + 0x28B8);
+-        s32* b = (s32*)(base + 0x22B8);
++        s32* a = base->a;
++        s32* z = base->z;
++        s32* c = base->c;
++        s32* d = base->d;
++        s32* e = base->e;
++        s32* f = base->f;
++        s32* g = base->g;
++        s32* h = base->h;
++        Record16* r16a = base->r16a;
++        Record16* r16b = base->r16b;
++        Record24* r24a = base->r24a;
++        Record24* r24b = base->r24b;
++        Record8* r8 = base->r8;
++        s32* b = base->b;
+         for (i = 0; i < 8; i++) {
+-            *a++ = -1;
+-            *z++ = 0;
+-            *c++ = -1;
+-            *d++ = -1;
+-            *e++ = -1;
+-            *f++ = -1;
+-            *g++ = -1;
+-            *h++ = -1;
++            a[i] = -1;
++            z[i] = 0;
++            c[i] = -1;
++            d[i] = -1;
++            e[i] = -1;
++            f[i] = -1;
++            g[i] = -1;
++            h[i] = -1;
+         }
+ 
+         for (i = 0; i < 16; i++) {
+@@ -90,7 +101,7 @@
+         }
+     }
+     for (i = 0; i < 16; i++) {
+-        ((s32*)(base + 0x29F8))[i] = -1;
++        (base->tail)[i] = -1;
+     }
+     lbl_8064D6B0 = -1;
+     lbl_8064D684 = 0;

@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "assignment_id": "91bfdafc-2fc3-437b-bbe3-a5b11056b102",
+  "attempt": 5,
+  "base_commit": "a14f5418935b584ac320d236fa5ac0ca1b0f7f3e",
+  "target": "fn_800D9428",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-91bfdafc-2fc3-437b-bbe3-a5b11056b102.json",
+    "eternal-darkness-decomp/reports/GEDE01/canonical-91bfdafc-2fc3-437b-bbe3-a5b11056b102.json",
+    "eternal-darkness-decomp/reports/GEDE01/strict-91bfdafc-2fc3-437b-bbe3-a5b11056b102.json",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-91bfdafc-2fc3-437b-bbe3-a5b11056b102.json",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-91bfdafc-2fc3-437b-bbe3-a5b11056b102.json",
+    "eternal-darkness-decomp/reports/GEDE01/verification-91bfdafc-2fc3-437b-bbe3-a5b11056b102.json",
+    "eternal-darkness-decomp/reports/GEDE01/run-91bfdafc-2fc3-437b-bbe3-a5b11056b102.py",
+    "eternal-darkness-decomp/reports/GEDE01/verify-relocations-91bfdafc-2fc3-437b-bbe3-a5b11056b102.py"
+  ],
+  "divergence": "Retained non-volatile packed-color candidate is 492 bytes with the retail 0x60 frame, exact stack slots, and all 17 relocation offsets/types/targets/addends equal, but canonical and function_reloc_diffs=all scores are 90.95935%, not a match. Persistent registers are actor/runtime/source/context/flags = r27/r28/r29/r30/r31 instead of retail r28/r29/r30/r31/r27. At +0x80 the color-output address is prepared before runtime; the two fn_800A1AF0 setup regions prepare pointer arguments earlier, use clrlwi r10 for the corrected int mode parameter, and schedule the first actor-state load before the retained +0x8 stack store. The second selected color uses r5 instead of r7. Direct ELF comparison finds 53 differing instruction words."
+}

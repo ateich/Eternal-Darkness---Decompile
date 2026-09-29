@@ -1,0 +1,34 @@
+{
+  "assignment_id": "912461bb-8172-463c-94ee-99c0f2ff4979",
+  "target": "fn_800A2B8C",
+  "base_commit": "1050347f64db20cec20f99daa3f41922c046393f",
+  "preserved_attempts_reviewed": [
+    "d0e88a9b2c5bd3b0ce41e901c75c9171944ee293",
+    "4099ea53882e21ca7d9f2ee189b84a5b37060e34"
+  ],
+  "recovery": "Recovered the 84.32% source from d0e88a9b, reproducing that score on the accepted base before new experiments.",
+  "distinct_hypothesis": "The four external .sdata2 floats are read-only constants. Declaring them const removes false store/load alias dependencies and changes MWCC scheduling without changing compiler options. All four const declarations raised the recovered source to 97.65%.",
+  "refinement": "Store value78 before value19 to recover integer register lifetimes and schedule (99.75% before bias externalization). Direct reads of the const floats recover f2/f3 allocation, reaching 100% after verified bias externalization. Discarded variants survive only as raw measured reports, not alternate C translation units.",
+  "constant_ownership": {
+    "mapping": "@10 -> lbl_8064EE98",
+    "size": 8,
+    "mechanism": "Existing tools/externalize_elf_symbol.py with --require-whole-section, followed by the established objcopy symbol/section normalization. Only this function has a new rule and post-compile registration. No instruction bytes are rewritten. No compiler settings, tools, or policy gates changed.",
+    "precedents": [
+      "configure.py: externalize_game_800DC4D4_unsigned_bias",
+      "docs/matching.md: An id comparison and a shared conversion constant"
+    ],
+    "note": "The raw pre-externalization canonical score of 99.75% also included four FP register operand differences; bias externalization alone measured 99.8%, not a match."
+  },
+  "final_result": {
+    "canonical_percent": 100.0,
+    "relocation_strict_percent": 100.0,
+    "target_size": 400,
+    "base_size": 400,
+    "text_bytes_equal": true,
+    "relocation_targets_and_addends_equal": true,
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+  },
+  "build": "python3 configure.py followed by .tools/bin/ninja -j2, default matching build; assigned C is linked. Raw complete output is preserved in the build report. Existing .ignored section linker warnings occurred; build and hash gate exited zero.",
+  "scope": "Only the function source, its configure.py registration/externalization, and assignment-specific reports changed. splits.txt already had the independent translation unit. Global progress, README, runtime code and neighboring functions were not edited. Pre-existing CLAUDE.md change excluded.",
+  "evidence_reproduction": "Run python3 configure.py and .tools/bin/ninja -j2, then python3 reports/GEDE01/verify-912461bb-8172-463c-94ee-99c0f2ff4979.py from eternal-darkness-decomp. The verifier compares .text bytes and ordered ELF relocation (offset,type,target,addend) tuples independently of objdiff."
+}

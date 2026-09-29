@@ -1,0 +1,398 @@
+{
+  "assignment_id": "78696cb5-6b03-40d5-954f-92ebcce83a64",
+  "target": "fn_8005F8D0",
+  "base_commit": "fb10ddfd8b24fed9b09702613508e24474c830e7",
+  "source": "src/game/game_fn_8005F8D0.c",
+  "source_sha256": "89cadbaefdffa4a0bd2483f15c590455f4547a2b5798d32d3c36aee1427d2e81",
+  "baseline_match_percent": 77.79767,
+  "canonical_match_percent": 87.92218,
+  "relocation_strict_match_percent": 87.92218,
+  "retained_experiment": "mask-index-local",
+  "experiments": [
+    {
+      "name": "random-order",
+      "hypothesis": "New hypothesis: cache random_min before fn_800FBFB0, load random_max afterward, matching retail evaluation order.",
+      "patch": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/random-order.patch",
+      "raw_objdiff": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/random-order.json",
+      "left": {
+        "size": 1028,
+        "match_percent": 79.37743,
+        "instructions": 257,
+        "relocation_bearing_instructions": 68
+      },
+      "right": {
+        "size": 984,
+        "match_percent": 79.37743,
+        "instructions": 246,
+        "relocation_bearing_instructions": 60
+      },
+      "log": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/random-order-build.log"
+    },
+    {
+      "name": "normalized-mask",
+      "hypothesis": "Add explicit signed nonzero normalization (-bad | bad) >> 31 to random-order.",
+      "patch": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/normalized-mask.patch",
+      "raw_objdiff": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/normalized-mask.json",
+      "left": {
+        "size": 1028,
+        "match_percent": 78.38911,
+        "instructions": 257,
+        "relocation_bearing_instructions": 68
+      },
+      "right": {
+        "size": 1000,
+        "match_percent": 78.38911,
+        "instructions": 250,
+        "relocation_bearing_instructions": 62
+      },
+      "log": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/normalized-mask.log"
+    },
+    {
+      "name": "byte-force",
+      "hypothesis": "Cast force-mode selection to u8; based on random-order.",
+      "patch": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/byte-force.patch",
+      "raw_objdiff": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/byte-force.json",
+      "left": {
+        "size": 1028,
+        "match_percent": 80.03891,
+        "instructions": 257,
+        "relocation_bearing_instructions": 68
+      },
+      "right": {
+        "size": 988,
+        "match_percent": 80.03891,
+        "instructions": 247,
+        "relocation_bearing_instructions": 60
+      },
+      "log": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/byte-force.log"
+    },
+    {
+      "name": "aggregate-tables",
+      "hypothesis": "Represent config and adjacent pair tables as a typed aggregate; based on byte-force.",
+      "patch": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/aggregate-tables.patch",
+      "raw_objdiff": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/aggregate-tables.json",
+      "left": {
+        "size": 1028,
+        "match_percent": 80.81712,
+        "instructions": 257,
+        "relocation_bearing_instructions": 68
+      },
+      "right": {
+        "size": 1004,
+        "match_percent": 80.81712,
+        "instructions": 251,
+        "relocation_bearing_instructions": 64
+      },
+      "log": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/aggregate-tables.log"
+    },
+    {
+      "name": "aggregate-mask",
+      "hypothesis": "Add explicit mask normalization to aggregate-tables.",
+      "patch": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/aggregate-mask.patch",
+      "raw_objdiff": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/aggregate-mask.json",
+      "left": {
+        "size": 1028,
+        "match_percent": 79.8716,
+        "instructions": 257,
+        "relocation_bearing_instructions": 68
+      },
+      "right": {
+        "size": 1020,
+        "match_percent": 79.8716,
+        "instructions": 255,
+        "relocation_bearing_instructions": 66
+      },
+      "log": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/aggregate-mask.log"
+    },
+    {
+      "name": "aggregate-direct-mask",
+      "hypothesis": "Use indexed configuration fields, rather than a selected config pointer, with explicit mask.",
+      "patch": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/aggregate-direct-mask.patch",
+      "raw_objdiff": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/aggregate-direct-mask.json",
+      "left": {
+        "size": 1028,
+        "match_percent": 81.84825,
+        "instructions": 257,
+        "relocation_bearing_instructions": 68
+      },
+      "right": {
+        "size": 1044,
+        "match_percent": 81.84825,
+        "instructions": 261,
+        "relocation_bearing_instructions": 72
+      },
+      "log": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/aggregate-direct-mask.log"
+    },
+    {
+      "name": "aggregate-direct",
+      "hypothesis": "Indexed configuration fields and original compact mask.",
+      "patch": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/aggregate-direct.patch",
+      "raw_objdiff": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/aggregate-direct.json",
+      "left": {
+        "size": 1028,
+        "match_percent": 82.79378,
+        "instructions": 257,
+        "relocation_bearing_instructions": 68
+      },
+      "right": {
+        "size": 1028,
+        "match_percent": 82.79378,
+        "instructions": 257,
+        "relocation_bearing_instructions": 70
+      },
+      "log": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/aggregate-direct.log"
+    },
+    {
+      "name": "typed-table-base",
+      "hypothesis": "Keep a typed aggregate pointer live, with indexed config fields; distinct from the historical raw table-base experiment because random evaluation order and aggregate access representation differ.",
+      "patch": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/typed-table-base.patch",
+      "raw_objdiff": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/typed-table-base.json",
+      "left": {
+        "size": 1028,
+        "match_percent": 82.32296,
+        "instructions": 257,
+        "relocation_bearing_instructions": 68
+      },
+      "right": {
+        "size": 988,
+        "match_percent": 82.32296,
+        "instructions": 247,
+        "relocation_bearing_instructions": 60
+      },
+      "log": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/typed-table-base.log"
+    },
+    {
+      "name": "typed-table-base-mask",
+      "hypothesis": "Explicit mask applied to typed-table-base.",
+      "patch": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/typed-table-base-mask.patch",
+      "raw_objdiff": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/typed-table-base-mask.json",
+      "left": {
+        "size": 1028,
+        "match_percent": 80.43969,
+        "instructions": 257,
+        "relocation_bearing_instructions": 68
+      },
+      "right": {
+        "size": 1004,
+        "match_percent": 80.43969,
+        "instructions": 251,
+        "relocation_bearing_instructions": 62
+      },
+      "log": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/typed-table-base-mask.log"
+    },
+    {
+      "name": "reuse-range",
+      "hypothesis": "Rejected before comparison: edit accidentally removed the struct random_min member as well as the local. Raw compiler failure and patch retained; no score claimed.",
+      "patch": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/reuse-range.patch",
+      "log": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/reuse-range.log"
+    },
+    {
+      "name": "reuse-range-fixed",
+      "hypothesis": "Correct the mechanical edit; reuse range for the pre-call minimum. Same output as aggregate-direct.",
+      "patch": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/reuse-range-fixed.patch",
+      "raw_objdiff": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/reuse-range-fixed.json",
+      "left": {
+        "size": 1028,
+        "match_percent": 82.79378,
+        "instructions": 257,
+        "relocation_bearing_instructions": 68
+      },
+      "right": {
+        "size": 1028,
+        "match_percent": 82.79378,
+        "instructions": 257,
+        "relocation_bearing_instructions": 70
+      },
+      "log": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/reuse-range-fixed.log"
+    },
+    {
+      "name": "reuse-range-mask",
+      "hypothesis": "Range reuse with explicit mask.",
+      "patch": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/reuse-range-mask.patch",
+      "raw_objdiff": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/reuse-range-mask.json",
+      "left": {
+        "size": 1028,
+        "match_percent": 81.84825,
+        "instructions": 257,
+        "relocation_bearing_instructions": 68
+      },
+      "right": {
+        "size": 1044,
+        "match_percent": 81.84825,
+        "instructions": 261,
+        "relocation_bearing_instructions": 72
+      },
+      "log": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/reuse-range-mask.log"
+    },
+    {
+      "name": "pair-arrays",
+      "hypothesis": "Represent pairs as two-element arrays instead of structs. No codegen change.",
+      "patch": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/pair-arrays.patch",
+      "raw_objdiff": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/pair-arrays.json",
+      "left": {
+        "size": 1028,
+        "match_percent": 82.32296,
+        "instructions": 257,
+        "relocation_bearing_instructions": 68
+      },
+      "right": {
+        "size": 988,
+        "match_percent": 82.32296,
+        "instructions": 247,
+        "relocation_bearing_instructions": 60
+      },
+      "log": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/pair-arrays.log"
+    },
+    {
+      "name": "pair-arrays-mask",
+      "hypothesis": "Pair-array form with explicit mask. No codegen change versus typed-table-base-mask.",
+      "patch": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/pair-arrays-mask.patch",
+      "raw_objdiff": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/pair-arrays-mask.json",
+      "left": {
+        "size": 1028,
+        "match_percent": 80.43969,
+        "instructions": 257,
+        "relocation_bearing_instructions": 68
+      },
+      "right": {
+        "size": 1004,
+        "match_percent": 80.43969,
+        "instructions": 251,
+        "relocation_bearing_instructions": 62
+      },
+      "log": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/pair-arrays-mask.log"
+    },
+    {
+      "name": "short-range",
+      "hypothesis": "Declare the final random result u16; no codegen change.",
+      "patch": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/short-range.patch",
+      "raw_objdiff": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/short-range.json",
+      "left": {
+        "size": 1028,
+        "match_percent": 82.32296,
+        "instructions": 257,
+        "relocation_bearing_instructions": 68
+      },
+      "right": {
+        "size": 988,
+        "match_percent": 82.32296,
+        "instructions": 247,
+        "relocation_bearing_instructions": 60
+      },
+      "log": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/short-range.log"
+    },
+    {
+      "name": "late-pair-bases",
+      "hypothesis": "Form the two pair pointers after the position-copy block, with typed aggregate base and corrected random order.",
+      "patch": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/late-pair-bases.patch",
+      "raw_objdiff": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/late-pair-bases.json",
+      "left": {
+        "size": 1028,
+        "match_percent": 86.59144,
+        "instructions": 257,
+        "relocation_bearing_instructions": 68
+      },
+      "right": {
+        "size": 988,
+        "match_percent": 86.59144,
+        "instructions": 247,
+        "relocation_bearing_instructions": 60
+      },
+      "log": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/late-pair-bases.log"
+    },
+    {
+      "name": "late-pair-bases-mask",
+      "hypothesis": "Explicit mask with late pair bases.",
+      "patch": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/late-pair-bases-mask.patch",
+      "raw_objdiff": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/late-pair-bases-mask.json",
+      "left": {
+        "size": 1028,
+        "match_percent": 85.83269,
+        "instructions": 257,
+        "relocation_bearing_instructions": 68
+      },
+      "right": {
+        "size": 1004,
+        "match_percent": 85.83269,
+        "instructions": 251,
+        "relocation_bearing_instructions": 62
+      },
+      "log": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/late-pair-bases-mask.log"
+    },
+    {
+      "name": "pair-order",
+      "hypothesis": "Derive pairs_b before pairs_a to match first-call evaluation order.",
+      "patch": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/pair-order.patch",
+      "raw_objdiff": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/pair-order.json",
+      "left": {
+        "size": 1028,
+        "match_percent": 86.653694,
+        "instructions": 257,
+        "relocation_bearing_instructions": 68
+      },
+      "right": {
+        "size": 988,
+        "match_percent": 86.653694,
+        "instructions": 247,
+        "relocation_bearing_instructions": 60
+      },
+      "log": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/pair-order.log"
+    },
+    {
+      "name": "register-range",
+      "hypothesis": "Try register storage hint for range; no codegen change. Not retained.",
+      "patch": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/register-range.patch",
+      "raw_objdiff": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/register-range.json",
+      "left": {
+        "size": 1028,
+        "match_percent": 86.653694,
+        "instructions": 257,
+        "relocation_bearing_instructions": 68
+      },
+      "right": {
+        "size": 988,
+        "match_percent": 86.653694,
+        "instructions": 247,
+        "relocation_bearing_instructions": 60
+      },
+      "log": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/register-range.log"
+    },
+    {
+      "name": "mask-index-local",
+      "hypothesis": "Retained: normalize predicate explicitly, keep the bounded global index in a local, and use it to compute the effect-buffer pointer.",
+      "patch": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/mask-index-local.patch",
+      "raw_objdiff": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/mask-index-local.json",
+      "left": {
+        "size": 1028,
+        "match_percent": 87.92218,
+        "instructions": 257,
+        "relocation_bearing_instructions": 68
+      },
+      "right": {
+        "size": 996,
+        "match_percent": 87.92218,
+        "instructions": 249,
+        "relocation_bearing_instructions": 60
+      },
+      "log": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/mask-index-local.log"
+    }
+  ],
+  "compiler": "GC/1.3; canonical flags unchanged. Exact command preserved in experiment build logs.",
+  "verification": {
+    "configure_exit": 0,
+    "ninja_exit": 0,
+    "fresh_dol_generated": true,
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "retail_cmp_exit": 0,
+    "actual_elf_text_relocations": {
+      "retail": 37,
+      "generated": 36
+    },
+    "build_log": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/full-build.log",
+    "raw_comparison_hash_relocation_log": "reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/final-verification.log"
+  },
+  "scope": "Only the independent function C TU and assignment reports changed. Existing NonMatching registration retained. No neighboring functions, runtime, shared inputs, compiler policy, progress.json or README edits. Pre-existing CLAUDE.md modification excluded from commit.",
+  "limitations": "NonMatching source is compiled for comparison but is not linked into the normal DOL; fresh DOL verification validates the normal retail-backed build, not equivalence of this C candidate.",
+  "reproduction": "At the accepted base, apply an experiment patch from the worktree root, then run its recorded Ninja/objdiff commands from eternal-darkness-decomp. All patches are complete deltas against the accepted base, not sequential patches. Failed compiler experiment has no measured score. evaluate.py automates candidate measurement; rejected C variants are retained only as patches, not extra translation units.",
+  "path_basis": "Paths in this detailed report are relative to eternal-darkness-decomp. Result-envelope evidence paths are worktree-relative."
+}

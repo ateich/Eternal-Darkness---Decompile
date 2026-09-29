@@ -1,0 +1,422 @@
+{
+  "assignment_id": "783fe4ef-694c-41ac-a703-76c75c9d1c7e",
+  "preserved_commit": "67e61e8607dc31ef1a9358d679084a42e01162e9",
+  "accepted_base_contains_identical_preserved_source": true,
+  "preserved_source_sha256": "937fe686efe865b16e3b767a832896b970130f4d8ee619f49142ee878634daf1",
+  "preserved_raw_measurement": {
+    "left": {
+      "size": "568",
+      "match_percent": 87.69718
+    },
+    "right": {
+      "size": "552",
+      "match_percent": 87.69718
+    }
+  },
+  "hypothesis": "Indexed row accesses permit loop strength reduction into separate pointer advances; an explicit record-view address accumulator avoids indexed byte-store lowering; a void input with a local typed view changes register lifetimes without changing the ABI.",
+  "compile_command": [
+    ".tools/bin/ninja",
+    "-j2",
+    "build/GEDE01/src/game/game_fn_80088060.o"
+  ],
+  "diff_command": [
+    "build/tools/objdiff-cli",
+    "diff",
+    "-p",
+    ".",
+    "-u",
+    "main/game/game_fn_80088060",
+    "fn_80088060",
+    "-c",
+    "functionRelocDiffs=all",
+    "-o",
+    "reports/GEDE01/objdiff-783fe4ef-694c-41ac-a703-76c75c9d1c7e.json",
+    "--format",
+    "json-pretty"
+  ],
+  "measurements": [
+    {
+      "variant": "flat_indexed",
+      "size": "556",
+      "strict_match_percent": 92.33803
+    },
+    {
+      "variant": "inline_access",
+      "size": "556",
+      "strict_match_percent": 92.33803
+    },
+    {
+      "variant": "local_access",
+      "size": "556",
+      "strict_match_percent": 93.8169
+    },
+    {
+      "variant": "flat_declarations",
+      "size": "556",
+      "strict_match_percent": 92.33803
+    },
+    {
+      "variant": "flat_index_unsigned",
+      "size": "556",
+      "strict_match_percent": 91.95071
+    },
+    {
+      "variant": "flat_count_unsigned",
+      "size": "556",
+      "strict_match_percent": 91.95071
+    },
+    {
+      "variant": "flat_table_array",
+      "size": "556",
+      "strict_match_percent": 92.211266
+    },
+    {
+      "variant": "separate_entry_locals",
+      "size": "556",
+      "strict_match_percent": 92.33803,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "entry_view_fields",
+      "size": "556",
+      "strict_match_percent": 93.8169,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "entries_at_zero",
+      "size": "556",
+      "strict_match_percent": 93.8169,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "array_pointer_tables",
+      "size": "556",
+      "strict_match_percent": 93.8169,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "local_table_views",
+      "size": "556",
+      "strict_match_percent": 93.69014,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "local_table_array_views",
+      "size": "556",
+      "strict_match_percent": 93.69014,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "register_work",
+      "size": "556",
+      "strict_match_percent": 93.8169,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "register_count",
+      "size": "556",
+      "strict_match_percent": 93.8169,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "register_object",
+      "size": "556",
+      "strict_match_percent": 93.8169,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "register_i",
+      "size": "556",
+      "strict_match_percent": 93.8169,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "count_first",
+      "size": "556",
+      "strict_match_percent": 93.8169,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "table_before_condition",
+      "size": "556",
+      "strict_match_percent": 93.8169,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "count_scoped",
+      "size": "556",
+      "strict_match_percent": 93.711266,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "i_scoped",
+      "size": "556",
+      "strict_match_percent": 93.8169,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "count_u8",
+      "size": "556",
+      "strict_match_percent": 93.8169,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "count_u16",
+      "size": "556",
+      "strict_match_percent": 93.676056,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "count_short",
+      "size": "560",
+      "strict_match_percent": 93.366196,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "count_long",
+      "size": "556",
+      "strict_match_percent": 93.8169,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "table_signed",
+      "size": "556",
+      "strict_match_percent": 93.8169,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "i_early",
+      "size": "556",
+      "strict_match_percent": 92.830986,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "i_condition",
+      "size": "556",
+      "strict_match_percent": 92.830986,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "i_before_count",
+      "size": "556",
+      "strict_match_percent": 93.8169,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "entry_accumulator",
+      "size": "556",
+      "strict_match_percent": 94.978874,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "entry_integer_offset",
+      "size": "556",
+      "strict_match_percent": 93.8169,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "entry_add_offset",
+      "size": "556",
+      "strict_match_percent": 93.8169,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "entry_struct_stride",
+      "size": "556",
+      "strict_match_percent": 94.978874,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "entry_struct_subscript",
+      "size": "556",
+      "strict_match_percent": 94.978874,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "table_accumulator",
+      "size": "556",
+      "strict_match_percent": 93.323944,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "table_three_views",
+      "size": "556",
+      "strict_match_percent": 93.8169,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "entry_accumulator_separate",
+      "size": "556",
+      "strict_match_percent": 94.978874,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "entry_offsets_first",
+      "size": "556",
+      "strict_match_percent": 94.978874,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "entry_offset_accumulated",
+      "size": "556",
+      "strict_match_percent": 94.978874,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "entry_address_integer",
+      "size": "556",
+      "strict_match_percent": 94.978874,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "table_all_accumulated",
+      "size": "556",
+      "strict_match_percent": 94.485916,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "table_fields_accumulated",
+      "size": "556",
+      "strict_match_percent": 94.85211,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "inline_fill_indexed",
+      "size": "540",
+      "strict_match_percent": 92.64789,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "inline_fill_postincrement",
+      "size": "556",
+      "strict_match_percent": 91.788734,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "inline_fill_byte_count",
+      "size": "540",
+      "strict_match_percent": 92.61268,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "inline_table_row",
+      "size": "556",
+      "strict_match_percent": 94.85211,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "table_pointer_array",
+      "size": "556",
+      "strict_match_percent": 94.85211,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "table_pointer_struct",
+      "size": "556",
+      "strict_match_percent": 94.85211,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "table_struct_postindex",
+      "size": "564",
+      "strict_match_percent": 91.80986,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "table_struct_locals_scoped",
+      "size": "556",
+      "strict_match_percent": 94.85211,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "local_work_from_void",
+      "size": "556",
+      "strict_match_percent": 95.29578,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "local_work_from_typed",
+      "size": "556",
+      "strict_match_percent": 94.978874,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "local_work_after_table",
+      "size": "556",
+      "strict_match_percent": 94.978874,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "entry_direct_fields",
+      "size": "556",
+      "strict_match_percent": 94.978874,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "entry_pointer_as_param",
+      "size": "556",
+      "strict_match_percent": 94.978874,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "entry_from_argument",
+      "size": "556",
+      "strict_match_percent": 95.29578,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "table_void_base",
+      "size": "556",
+      "strict_match_percent": 95.169014,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "table_void_rows",
+      "size": "556",
+      "strict_match_percent": 95.169014,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "table_byte_rows",
+      "size": "556",
+      "strict_match_percent": 95.169014,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    },
+    {
+      "variant": "table_struct_void_arg",
+      "size": "556",
+      "strict_match_percent": 95.169014,
+      "compiler_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80088060.o\n"
+    }
+  ],
+  "additional_initial_trials": [
+    {
+      "variant": "direct_struct_array_indexing",
+      "size": 540,
+      "strict_match_percent": 89.79578
+    },
+    {
+      "variant": "struct_fields_assigned_to_three_indexed_pointers",
+      "size": 556,
+      "strict_match_percent": 92.211266
+    },
+    {
+      "variant": "byte_stride_cast_without_local_accumulator",
+      "size": 556,
+      "strict_match_percent": 92.33803
+    },
+    {
+      "variant": "integer_address_cast_without_local_accumulator",
+      "size": 556,
+      "strict_match_percent": 92.33803
+    }
+  ],
+  "discarded_compile_error": {
+    "variant": "register_all",
+    "exit_code": 1,
+    "diagnostic": "illegal use of register variable",
+    "cause": "The index local has its address passed to fn_8006ED3C and cannot be register-qualified."
+  },
+  "retained_candidate": "local_work_from_void, with equivalent direct IndexedWork field declarations; final score 95.29578. All other variants discarded.",
+  "semantic_review": "Loop still writes elements 1 through count-1 in the three ten-halfword rows, with identical random-call order and signed remainder arithmetic. Each final byte-store address separately reloads index and advances 0x2C bytes per record. No extra emitted helper, assembly, compiler-setting change, or target registration change."
+}

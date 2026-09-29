@@ -8,8 +8,8 @@ typedef struct Words3 {
     u32 z;
 } Words3;
 
-extern const Words3 lbl_8023B050;
-extern const Words3 lbl_8023B05C;
+extern const volatile Words3 lbl_8023B050;
+extern const volatile Words3 lbl_8023B05C;
 extern const volatile u32 lbl_806509F4;
 extern void fn_801859FC(u8*, u8);
 
@@ -21,7 +21,16 @@ void fn_801858E0(u8* self)
     u32 second_x = lbl_8023B05C.x;
     u32 second_y = lbl_8023B05C.y;
     u32 second_z = lbl_8023B05C.z;
-    u32 value = lbl_806509F4;
+    volatile u32 value = lbl_806509F4;
+    volatile Words3 first_store;
+    volatile Words3 second_store;
+
+    second_store.x = second_x;
+    second_store.y = second_y;
+    second_store.z = second_z;
+    first_store.x = first_x;
+    first_store.y = first_y;
+    first_store.z = first_z;
 
     self[0] = 31;
     self[1] = 64;
@@ -47,5 +56,5 @@ void fn_801858E0(u8* self)
     *(u32*)(self + 0x50) = first_z;
     *(u32*)(self + 0x30) = second_x;
     *(u32*)(self + 0x34) = second_y;
-    *(u32*)(self + 0x38) = second_z;
+    *(u32*)(self + 0x38) = second_store.z;
 }

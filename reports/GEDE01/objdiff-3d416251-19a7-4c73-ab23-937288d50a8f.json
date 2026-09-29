@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "assignment_id": "3d416251-19a7-4c73-ab23-937288d50a8f",
+  "target": "fn_80155330",
+  "compiler": "GC/1.3",
+  "extra_cflags": ["-use_lmw_stmw on"],
+  "commands": [
+    "python3 configure.py",
+    ".tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_80155330.o",
+    "python3 tools/fndiff.py game/game_fn_80155330.c fn_80155330",
+    ".tools/bin/ninja -j2",
+    "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "stat -c '%y %n' build/GEDE01/src/game/game_fn_80155330.o build/GEDE01/main.elf build/GEDE01/main.dol"
+  ],
+  "measurement": {
+    "objdiff_version": "v3.6.1",
+    "retail_code_bytes": 676,
+    "candidate_code_bytes": 676,
+    "match_percent": 97.59763,
+    "retail_instruction_rows": 170,
+    "candidate_instruction_rows": 170,
+    "retail_relocation_bearing_instructions": 32,
+    "candidate_relocation_bearing_instructions": 32,
+    "canonical_100_percent": false,
+    "relocation_strict_100_percent": false
+  },
+  "relocation_types": {
+    "retail": {"R_PPC_REL24": 25, "R_PPC_ADDR16_HA": 3, "R_PPC_ADDR16_LO": 3, "R_PPC_NONE": 1},
+    "candidate": {"R_PPC_REL24": 25, "R_PPC_ADDR16_HA": 3, "R_PPC_ADDR16_LO": 3, "R_PPC_NONE": 1}
+  },
+  "raw_measured_outputs": [
+    "target 676 bytes  base 676 bytes  match 97.59763",
+    "left size 676 match_percent 97.59763 instruction_rows 170 relocations 32",
+    "right size 676 match_percent 97.59763 instruction_rows 170 relocations 32",
+    "relocation streams identical at all 32 addresses, types, semantic targets, and addends",
+    "full ninja final edges: [929/932] LINK build/GEDE01/main.elf; [930/932] DOL build/GEDE01/main.dol; [931/932] CHECK config/GEDE01/build.sha1; build/GEDE01/main.dol: OK; [932/932] PROGRESS",
+    "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+    "ea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol",
+    "2026-09-28 00:02:40.466450783 -0400 build/GEDE01/src/game/game_fn_80155330.o",
+    "2026-09-28 00:03:05.231529015 -0400 build/GEDE01/main.elf",
+    "2026-09-28 00:03:05.774530665 -0400 build/GEDE01/main.dol"
+  ],
+  "relocation_audit": "All 32 relocation-bearing instructions have identical addresses, types, semantic targets, and addends, including R_PPC_NONE lbl_802FC5BC+12. Canonical bytes are not 100%, so the candidate is not relocation-strict matched.",
+  "hypotheses_tested": [
+    "Recovered and freshly reproduced the preserved size-exact 97.59763% candidate.",
+    "Tested a distinct alias-lifetime lever by eliminating next and reassigning the sole work pointer. MWCC then addressed most second-Work fields r1-relatively, emitted 672 bytes, and scored 96.97633%, so this was rejected.",
+    "Tested reversing work/next declaration order to alter allocation priority. Output remained byte-identical to the 97.59763% best, so this lever was neutral."
+  ],
+  "exact_codegen_divergence": "Retail and candidate are identical through 0x0154. From 0x0158 retail keeps the second Work base in r21, while the candidate uses r22; corresponding base-relative operations through 0x01f0 differ. Retail schedules field14 as li r5/stb r5 at 0x01c4/0x01d8 and field2c at 0x01e8; candidate uses r7, stores field2c at 0x01e0, and field14 at 0x01ec. The success loop exchanges retail's r22 element pointer and r23 byte bound. Code size and all relocations are otherwise exact. The WorkLocals wrapper is a reconstruction device preserving retail stack layout, not a known original declaration."
+}

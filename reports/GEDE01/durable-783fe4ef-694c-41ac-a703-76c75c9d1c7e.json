@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "assignment_id": "783fe4ef-694c-41ac-a703-76c75c9d1c7e",
+  "attempt": 5,
+  "base_commit": "5511e0f8f7ee0f735b5dd39eaf93a6361cc56005",
+  "target": "fn_80088060",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-783fe4ef-694c-41ac-a703-76c75c9d1c7e.json",
+    "eternal-darkness-decomp/reports/GEDE01/canonical-783fe4ef-694c-41ac-a703-76c75c9d1c7e.json",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-783fe4ef-694c-41ac-a703-76c75c9d1c7e.json",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-783fe4ef-694c-41ac-a703-76c75c9d1c7e.json",
+    "eternal-darkness-decomp/reports/GEDE01/verification-783fe4ef-694c-41ac-a703-76c75c9d1c7e.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 95.29578% (up from preserved 87.69718%): retail is 568 bytes with 37 instruction relocation annotations; candidate is 556 bytes with 34. The prologue and mode-handling instructions match. Retail initializes three row pointers at offsets 0/20/40, then advances each by two before the loop; MWCC folds setup to addi +2, a register copy, and addi +22, with the third row store at displacement 40. Count/index and second/third row registers differ, as do final byte-store register choices; all four final stores now use mulli/add/stb. The 25 real ELF text relocations have equal ordered types, targets, and addends, but instruction offsets differ. The target remains NonMatching; the canonical DOL hash gate therefore validates the original-backed linked build."
+}

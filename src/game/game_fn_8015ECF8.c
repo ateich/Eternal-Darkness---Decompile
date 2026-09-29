@@ -16,11 +16,11 @@ int fn_8015ECF8(Object* object, double value)
 {
     DoubleTable* table = object->table;
     int last_index = table->last_index;
-    int index = last_index;
+    int first = last_index < 20 ? 0 : last_index - 20;
     int offset = last_index * 8;
-    int first = (last_index - 20) & ~-(last_index < 20);
+    int index = last_index;
 
-    for (; index >= first; index--, offset -= 8) {
+    while (--index, offset -= 8, index >= first) {
         if (*(double*)((unsigned char*)table->values + offset) == value)
             return index;
     }

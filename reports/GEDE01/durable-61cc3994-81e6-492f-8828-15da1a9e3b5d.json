@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "61cc3994-81e6-492f-8828-15da1a9e3b5d",
+  "attempt": 3,
+  "base_commit": "0a0db554501067433c473a747bd1ea6b6b3e4eb8",
+  "target": "fn_801A260C",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-61cc3994-81e6-492f-8828-15da1a9e3b5d.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff are size-exact at 980 bytes and measure 97.53061%. Remaining text divergence is limited to initial state/particle/float-load scheduling; an f27-f30 allocation reversal among the three alpha constants and compiler-generated signed-conversion bias; an r4-r7 allocation cycle in the modulo/clamp block; and the final floating multiply operand order. Game-symbol/call relocation targets and addends agree, while the compiler-local signed-conversion constants are emitted as local @31/@40 rather than retail lbl_80650D08/lbl_80650D20. A distinct loop-invariant lifetime-order hypothesis was tested: reversing the alpha constant initialization order regressed to 97.48980%, and moving the count load before the scale load was neutral at 97.53061%; the best form was restored. python3 configure.py and .tools/bin/ninja -j2 completed successfully, config/GEDE01/build.sha1 passed, and build/GEDE01/main.dol independently hashes to ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}

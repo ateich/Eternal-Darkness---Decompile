@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "assignment_id": "6e3047e4-998c-4800-bc93-37a6e1c56d8a",
+  "attempt": 5,
+  "base_commit": "04c9229eeaab7ca6ab8a494fbf858ecb81073abd",
+  "target": "fn_801415B4",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-6e3047e4-998c-4800-bc93-37a6e1c56d8a.json",
+    "eternal-darkness-decomp/reports/GEDE01/canonical-6e3047e4-998c-4800-bc93-37a6e1c56d8a.json",
+    "eternal-darkness-decomp/reports/GEDE01/relocation-strict-6e3047e4-998c-4800-bc93-37a6e1c56d8a.json",
+    "eternal-darkness-decomp/reports/GEDE01/byte-comparison-6e3047e4-998c-4800-bc93-37a6e1c56d8a.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-6e3047e4-998c-4800-bc93-37a6e1c56d8a.json",
+    "eternal-darkness-decomp/reports/GEDE01/verification-6e3047e4-998c-4800-bc93-37a6e1c56d8a.json",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-6e3047e4-998c-4800-bc93-37a6e1c56d8a.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff are both 96.17801%, up from 83.28621%. Retail and generated functions now both have 2292 bytes, 573 instructions, 46 relocation-bearing instructions, a 0x100-byte frame and f17-f31 saves. Remaining differences are initial GPR/address and load scheduling, recomputation of lbl_805B12B0 via lis/addi at generated offsets 0x308/0x310 instead of retaining the base for retail offset 0x310, and local @231/@232 zero-pool relocation targets rather than lbl_80650410/lbl_80650418. Direct unrelocated .text comparison is unequal (1704/2292 same-offset bytes and 407/573 instructions agree; first mismatch 0x84)."
+}

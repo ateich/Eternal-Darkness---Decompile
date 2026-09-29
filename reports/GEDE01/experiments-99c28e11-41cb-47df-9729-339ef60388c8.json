@@ -1,0 +1,1762 @@
+{
+  "assignment_id": "99c28e11-41cb-47df-9729-339ef60388c8",
+  "cwd": "eternal-darkness-decomp",
+  "recovered_commit": "af890b6c73ce611903a79a5638724af23f67549e",
+  "baseline_source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first = base[1].data;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first += 0x550;\n    fn_801F7034(first, 1);\n\n    second = base[0].data;\n    second += 0x550;\n    fn_801F7034(second, 1);\n\n    *(void**)(base[1].data + 0x5C4) = second;\n    third = base[2].data;\n    *(Vec3*)(base[0].data + 0x598) = values;\n    *(Vec3*)(base[1].data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(base[2].data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(base[1].data + 0x580) = lbl_80651460;\n    *(float*)(base[0].data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+  "experiments": [
+    {
+      "name": "baseline",
+      "hypothesis": "Reproduce accepted source.",
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first = base[1].data;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first += 0x550;\n    fn_801F7034(first, 1);\n\n    second = base[0].data;\n    second += 0x550;\n    fn_801F7034(second, 1);\n\n    *(void**)(base[1].data + 0x5C4) = second;\n    third = base[2].data;\n    *(Vec3*)(base[0].data + 0x598) = values;\n    *(Vec3*)(base[1].data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(base[2].data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(base[1].data + 0x580) = lbl_80651460;\n    *(float*)(base[0].data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-baseline.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-baseline.json\n"
+        }
+      ],
+      "score": 72.01492,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-baseline.json",
+      "raw_objdiff_sha256": "5c132b2f645da665ffb76897689d508c8bb720ed734e8879eec62712bdb199ee"
+    },
+    {
+      "name": "integer_base",
+      "hypothesis": "Integer address representation may prevent pointer offset folding and keep a shared base live.",
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nvoid* fn_801F7AF8(void)\n{\n    unsigned long base = (unsigned long)lbl_8063C6B8;\n    unsigned char* first = ((unsigned char*)(base + 0x660));\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first += 0x550;\n    fn_801F7034(first, 1);\n\n    second = ((unsigned char*)(base + 0x0));\n    second += 0x550;\n    fn_801F7034(second, 1);\n\n    *(void**)(((unsigned char*)(base + 0x660)) + 0x5C4) = second;\n    third = ((unsigned char*)(base + 0xcc0));\n    *(Vec3*)(((unsigned char*)(base + 0x0)) + 0x598) = values;\n    *(Vec3*)(((unsigned char*)(base + 0x660)) + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(((unsigned char*)(base + 0xcc0)) + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(((unsigned char*)(base + 0x660)) + 0x580) = lbl_80651460;\n    *(float*)(((unsigned char*)(base + 0x0)) + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-integer_base.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-integer_base.json\n"
+        }
+      ],
+      "score": 65.268654,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-integer_base.json",
+      "raw_objdiff_sha256": "9090400299d12f64fb21ed02fcefe32da19fc7864a66156612b6feff865f0586"
+    },
+    {
+      "name": "integer_addresses",
+      "hypothesis": "Integer address representation may prevent pointer offset folding and keep a shared base live.",
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nvoid* fn_801F7AF8(void)\n{\n    unsigned long base = (unsigned long)lbl_8063C6B8;\n    unsigned long first = (unsigned long) ((unsigned char*)(base + 0x660));\n    unsigned long second;\n    unsigned long third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first += 0x550;\n    fn_801F7034((void*)first, 1);\n\n    second = (unsigned long)((unsigned char*)(base + 0x0));\n    second += 0x550;\n    fn_801F7034((void*)second, 1);\n\n    *(void**)(((unsigned char*)(base + 0x660)) + 0x5C4) = (void*)second;\n    third = (unsigned long)((unsigned char*)(base + 0xcc0));\n    *(Vec3*)(((unsigned char*)(base + 0x0)) + 0x598) = values;\n    *(Vec3*)(((unsigned char*)(base + 0x660)) + 0x598) = values;\n\n    fn_801F8994((void*)first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994((void*)second, (Vec3*)(((unsigned char*)(base + 0xcc0)) + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(((unsigned char*)(base + 0x660)) + 0x580) = lbl_80651460;\n    *(float*)(((unsigned char*)(base + 0x0)) + 0x580) = lbl_80651460;\n    return (void*)first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-integer_addresses.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-integer_addresses.json\n"
+        }
+      ],
+      "score": 65.268654,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-integer_base.json",
+      "raw_objdiff_sha256": "9090400299d12f64fb21ed02fcefe32da19fc7864a66156612b6feff865f0586"
+    },
+    {
+      "name": "accessor_auto",
+      "hypothesis": "Late inlining of an array element accessor may preserve separate addi index steps, including index zero, and keep the global base live. Nested accessor also separates field offset.",
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first = state_at(base, 1)->data;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first += 0x550;\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->data;\n    second += 0x550;\n    fn_801F7034(second, 1);\n\n    *(void**)(state_at(base, 1)->data + 0x5C4) = second;\n    third = state_at(base, 2)->data;\n    *(Vec3*)(state_at(base, 0)->data + 0x598) = values;\n    *(Vec3*)(state_at(base, 1)->data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(state_at(base, 2)->data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(state_at(base, 1)->data + 0x580) = lbl_80651460;\n    *(float*)(state_at(base, 0)->data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_auto.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_auto.json\n"
+        }
+      ],
+      "score": 70.477615,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_auto.json",
+      "raw_objdiff_sha256": "00204d94ef44cf430d99effb86a204b42b59bc9bc315c6c5921c2f2cac7eab65"
+    },
+    {
+      "name": "accessor_inline",
+      "hypothesis": "Late inlining of an array element accessor may preserve separate addi index steps, including index zero, and keep the global base live. Nested accessor also separates field offset.",
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first = state_at(base, 1)->data;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first += 0x550;\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->data;\n    second += 0x550;\n    fn_801F7034(second, 1);\n\n    *(void**)(state_at(base, 1)->data + 0x5C4) = second;\n    third = state_at(base, 2)->data;\n    *(Vec3*)(state_at(base, 0)->data + 0x598) = values;\n    *(Vec3*)(state_at(base, 1)->data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(state_at(base, 2)->data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(state_at(base, 1)->data + 0x580) = lbl_80651460;\n    *(float*)(state_at(base, 0)->data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_inline.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_inline.json\n"
+        }
+      ],
+      "score": 70.477615,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_inline.json",
+      "raw_objdiff_sha256": "2bbf1ffb9ac3468e179b4e2b17b3308c7fdf36aff49cf640bb80387415fef45e"
+    },
+    {
+      "name": "accessor_nested",
+      "hypothesis": "Late inlining of an array element accessor may preserve separate addi index steps, including index zero, and keep the global base live. Nested accessor also separates field offset.",
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nstatic inline unsigned char* state_fields(unsigned char* object)\n{\n    return object + 0x550;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first = state_at(base, 1)->data;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_fields(first);\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->data;\n    second = state_fields(second);\n    fn_801F7034(second, 1);\n\n    *(void**)(state_at(base, 1)->data + 0x5C4) = second;\n    third = state_at(base, 2)->data;\n    *(Vec3*)(state_at(base, 0)->data + 0x598) = values;\n    *(Vec3*)(state_at(base, 1)->data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(state_at(base, 2)->data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(state_at(base, 1)->data + 0x580) = lbl_80651460;\n    *(float*)(state_at(base, 0)->data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_nested.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_nested.json\n"
+        }
+      ],
+      "score": 73.522385,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_nested.json",
+      "raw_objdiff_sha256": "86814a260ddf2b192f41167fc65a460961e25911d2302ddae1c0e145a4017568"
+    },
+    {
+      "name": "base_accessor",
+      "hypothesis": "An inline global-base accessor may inhibit constant-address propagation across calls; nested accessors may preserve the two-stage element/field arithmetic.",
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_base(void)\n{\n    return lbl_8063C6B8;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = state_base();\n    unsigned char* first = base[1].data;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first += 0x550;\n    fn_801F7034(first, 1);\n\n    second = base[0].data;\n    second += 0x550;\n    fn_801F7034(second, 1);\n\n    *(void**)(base[1].data + 0x5C4) = second;\n    third = base[2].data;\n    *(Vec3*)(base[0].data + 0x598) = values;\n    *(Vec3*)(base[1].data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(base[2].data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(base[1].data + 0x580) = lbl_80651460;\n    *(float*)(base[0].data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-base_accessor.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-base_accessor.json\n"
+        }
+      ],
+      "score": 72.01492,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-baseline.json",
+      "raw_objdiff_sha256": "5c132b2f645da665ffb76897689d508c8bb720ed734e8879eec62712bdb199ee"
+    },
+    {
+      "name": "base_and_element_accessors",
+      "hypothesis": "An inline global-base accessor may inhibit constant-address propagation across calls; nested accessors may preserve the two-stage element/field arithmetic.",
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nstatic inline unsigned char* state_fields(unsigned char* object)\n{\n    return object + 0x550;\n}\n\nstatic inline ObjectState* state_base(void)\n{\n    return lbl_8063C6B8;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = state_base();\n    unsigned char* first = state_at(base, 1)->data;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_fields(first);\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->data;\n    second = state_fields(second);\n    fn_801F7034(second, 1);\n\n    *(void**)(state_at(base, 1)->data + 0x5C4) = second;\n    third = state_at(base, 2)->data;\n    *(Vec3*)(state_at(base, 0)->data + 0x598) = values;\n    *(Vec3*)(state_at(base, 1)->data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(state_at(base, 2)->data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(state_at(base, 1)->data + 0x580) = lbl_80651460;\n    *(float*)(state_at(base, 0)->data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-base_and_element_accessors.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-base_and_element_accessors.json\n"
+        }
+      ],
+      "score": 73.522385,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_nested.json",
+      "raw_objdiff_sha256": "86814a260ddf2b192f41167fc65a460961e25911d2302ddae1c0e145a4017568"
+    },
+    {
+      "name": "accessor_register_parameters",
+      "hypothesis": "Test accessor parameter representation and nesting against MWCC inline propagation and nonvolatile pointer allocation.",
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(register ObjectState* base, register int index)\n{\n    return &base[index];\n}\n\nstatic inline unsigned char* state_fields(register unsigned char* object)\n{\n    return object + 0x550;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first = state_at(base, 1)->data;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_fields(first);\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->data;\n    second = state_fields(second);\n    fn_801F7034(second, 1);\n\n    *(void**)(state_at(base, 1)->data + 0x5C4) = second;\n    third = state_at(base, 2)->data;\n    *(Vec3*)(state_at(base, 0)->data + 0x598) = values;\n    *(Vec3*)(state_at(base, 1)->data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(state_at(base, 2)->data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(state_at(base, 1)->data + 0x580) = lbl_80651460;\n    *(float*)(state_at(base, 0)->data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_register_parameters.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_register_parameters.json\n"
+        }
+      ],
+      "score": 73.522385,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_nested.json",
+      "raw_objdiff_sha256": "86814a260ddf2b192f41167fc65a460961e25911d2302ddae1c0e145a4017568"
+    },
+    {
+      "name": "accessor_byte_arithmetic",
+      "hypothesis": "Test accessor parameter representation and nesting against MWCC inline propagation and nonvolatile pointer allocation.",
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return (ObjectState*)((unsigned char*)base + index * 0x660);\n}\n\nstatic inline unsigned char* state_fields(unsigned char* object)\n{\n    return object + 0x550;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first = state_at(base, 1)->data;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_fields(first);\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->data;\n    second = state_fields(second);\n    fn_801F7034(second, 1);\n\n    *(void**)(state_at(base, 1)->data + 0x5C4) = second;\n    third = state_at(base, 2)->data;\n    *(Vec3*)(state_at(base, 0)->data + 0x598) = values;\n    *(Vec3*)(state_at(base, 1)->data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(state_at(base, 2)->data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(state_at(base, 1)->data + 0x580) = lbl_80651460;\n    *(float*)(state_at(base, 0)->data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_byte_arithmetic.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_byte_arithmetic.json\n"
+        }
+      ],
+      "score": 73.522385,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_nested.json",
+      "raw_objdiff_sha256": "86814a260ddf2b192f41167fc65a460961e25911d2302ddae1c0e145a4017568"
+    },
+    {
+      "name": "accessor_unsigned_index",
+      "hypothesis": "Test accessor parameter representation and nesting against MWCC inline propagation and nonvolatile pointer allocation.",
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, unsigned int index)\n{\n    return &base[index];\n}\n\nstatic inline unsigned char* state_fields(unsigned char* object)\n{\n    return object + 0x550;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first = state_at(base, 1)->data;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_fields(first);\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->data;\n    second = state_fields(second);\n    fn_801F7034(second, 1);\n\n    *(void**)(state_at(base, 1)->data + 0x5C4) = second;\n    third = state_at(base, 2)->data;\n    *(Vec3*)(state_at(base, 0)->data + 0x598) = values;\n    *(Vec3*)(state_at(base, 1)->data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(state_at(base, 2)->data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(state_at(base, 1)->data + 0x580) = lbl_80651460;\n    *(float*)(state_at(base, 0)->data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_unsigned_index.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_unsigned_index.json\n"
+        }
+      ],
+      "score": 73.522385,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_nested.json",
+      "raw_objdiff_sha256": "86814a260ddf2b192f41167fc65a460961e25911d2302ddae1c0e145a4017568"
+    },
+    {
+      "name": "accessor_void_base",
+      "hypothesis": "Test accessor parameter representation and nesting against MWCC inline propagation and nonvolatile pointer allocation.",
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(void* base, int index)\n{\n    return (ObjectState*)((unsigned char*)base + index * 0x660);\n}\n\nstatic inline unsigned char* state_fields(unsigned char* object)\n{\n    return object + 0x550;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first = state_at(base, 1)->data;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_fields(first);\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->data;\n    second = state_fields(second);\n    fn_801F7034(second, 1);\n\n    *(void**)(state_at(base, 1)->data + 0x5C4) = second;\n    third = state_at(base, 2)->data;\n    *(Vec3*)(state_at(base, 0)->data + 0x598) = values;\n    *(Vec3*)(state_at(base, 1)->data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(state_at(base, 2)->data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(state_at(base, 1)->data + 0x580) = lbl_80651460;\n    *(float*)(state_at(base, 0)->data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_void_base.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_void_base.json\n"
+        }
+      ],
+      "score": 73.522385,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_nested.json",
+      "raw_objdiff_sha256": "86814a260ddf2b192f41167fc65a460961e25911d2302ddae1c0e145a4017568"
+    },
+    {
+      "name": "accessor_nested_expression",
+      "hypothesis": "Test accessor parameter representation and nesting against MWCC inline propagation and nonvolatile pointer allocation.",
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nstatic inline unsigned char* state_fields(unsigned char* object)\n{\n    return object + 0x550;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_fields(state_at(base, 1)->data);\n    fn_801F7034(first, 1);\n\n    second = state_fields(state_at(base, 0)->data);\n    fn_801F7034(second, 1);\n\n    *(void**)(state_at(base, 1)->data + 0x5C4) = second;\n    third = state_at(base, 2)->data;\n    *(Vec3*)(state_at(base, 0)->data + 0x598) = values;\n    *(Vec3*)(state_at(base, 1)->data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(state_at(base, 2)->data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(state_at(base, 1)->data + 0x580) = lbl_80651460;\n    *(float*)(state_at(base, 0)->data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_nested_expression.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_nested_expression.json\n"
+        }
+      ],
+      "score": 79.82089,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_nested_expression.json",
+      "raw_objdiff_sha256": "e3a5529db58e9aecb0e11f34d02cea349e430e0763ff053747ed266f87272ae0"
+    },
+    {
+      "name": "accessor_address_base",
+      "hypothesis": "Address-taking inline accessor may inhibit global rematerialization without a volatile pointer; declaration swap tests first/second register ordering.",
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState** base, int index)\n{\n    return &(*base)[index];\n}\n\nstatic inline unsigned char* state_fields(unsigned char* object)\n{\n    return object + 0x550;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_fields(state_at(&base, 1)->data);\n    fn_801F7034(first, 1);\n\n    second = state_fields(state_at(&base, 0)->data);\n    fn_801F7034(second, 1);\n\n    *(void**)(state_at(&base, 1)->data + 0x5C4) = second;\n    third = state_at(&base, 2)->data;\n    *(Vec3*)(state_at(&base, 0)->data + 0x598) = values;\n    *(Vec3*)(state_at(&base, 1)->data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(state_at(&base, 2)->data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(state_at(&base, 1)->data + 0x580) = lbl_80651460;\n    *(float*)(state_at(&base, 0)->data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_address_base.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_address_base.json\n"
+        }
+      ],
+      "score": 79.82089,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_nested_expression.json",
+      "raw_objdiff_sha256": "e3a5529db58e9aecb0e11f34d02cea349e430e0763ff053747ed266f87272ae0"
+    },
+    {
+      "name": "accessor_swap_decls",
+      "hypothesis": "Address-taking inline accessor may inhibit global rematerialization without a volatile pointer; declaration swap tests first/second register ordering.",
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nstatic inline unsigned char* state_fields(unsigned char* object)\n{\n    return object + 0x550;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* second;\n    unsigned char* first;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_fields(state_at(base, 1)->data);\n    fn_801F7034(first, 1);\n\n    second = state_fields(state_at(base, 0)->data);\n    fn_801F7034(second, 1);\n\n    *(void**)(state_at(base, 1)->data + 0x5C4) = second;\n    third = state_at(base, 2)->data;\n    *(Vec3*)(state_at(base, 0)->data + 0x598) = values;\n    *(Vec3*)(state_at(base, 1)->data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(state_at(base, 2)->data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(state_at(base, 1)->data + 0x580) = lbl_80651460;\n    *(float*)(state_at(base, 0)->data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_swap_decls.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_swap_decls.json\n"
+        }
+      ],
+      "score": 79.82089,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_nested_expression.json",
+      "raw_objdiff_sha256": "e3a5529db58e9aecb0e11f34d02cea349e430e0763ff053747ed266f87272ae0"
+    },
+    {
+      "name": "accessor_mutating_field",
+      "hypothesis": "Address-taking inline accessor may inhibit global rematerialization without a volatile pointer; declaration swap tests first/second register ordering.",
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nstatic inline void state_fields(unsigned char** object)\n{\n    *object += 0x550;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_at(base, 1)->data;\n    state_fields(&first);\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->data;\n    state_fields(&second);\n    fn_801F7034(second, 1);\n\n    *(void**)(state_at(base, 1)->data + 0x5C4) = second;\n    third = state_at(base, 2)->data;\n    *(Vec3*)(state_at(base, 0)->data + 0x598) = values;\n    *(Vec3*)(state_at(base, 1)->data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(state_at(base, 2)->data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(state_at(base, 1)->data + 0x580) = lbl_80651460;\n    *(float*)(state_at(base, 0)->data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_mutating_field.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_mutating_field.json\n"
+        }
+      ],
+      "score": 70.25373,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_mutating_field.json",
+      "raw_objdiff_sha256": "9f11edf3185d02742d184eb81eebebaf4416dc0b52d86c84c88ace5c99193b71"
+    },
+    {
+      "name": "accessor_address_both",
+      "hypothesis": "Address-taking inline accessor may inhibit global rematerialization without a volatile pointer; declaration swap tests first/second register ordering.",
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState** base, int index)\n{\n    return &(*base)[index];\n}\n\nstatic inline void state_fields(unsigned char** object)\n{\n    *object += 0x550;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_at(&base, 1)->data;\n    state_fields(&first);\n    fn_801F7034(first, 1);\n\n    second = state_at(&base, 0)->data;\n    state_fields(&second);\n    fn_801F7034(second, 1);\n\n    *(void**)(state_at(&base, 1)->data + 0x5C4) = second;\n    third = state_at(&base, 2)->data;\n    *(Vec3*)(state_at(&base, 0)->data + 0x598) = values;\n    *(Vec3*)(state_at(&base, 1)->data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(state_at(&base, 2)->data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(state_at(&base, 1)->data + 0x580) = lbl_80651460;\n    *(float*)(state_at(&base, 0)->data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_address_both.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_address_both.json\n"
+        }
+      ],
+      "score": 70.25373,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_mutating_field.json",
+      "raw_objdiff_sha256": "9f11edf3185d02742d184eb81eebebaf4416dc0b52d86c84c88ace5c99193b71"
+    },
+    {
+      "name": "accessor_global_array",
+      "hypothesis": "Test a global-array accessor, narrower element indices, and typed object fields as plausible original accessor forms.",
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(int index)\n{\n    return &lbl_8063C6B8[index];\n}\n\nstatic inline unsigned char* state_fields(unsigned char* object)\n{\n    return object + 0x550;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_fields(state_at(1)->data);\n    fn_801F7034(first, 1);\n\n    second = state_fields(state_at(0)->data);\n    fn_801F7034(second, 1);\n\n    *(void**)(state_at(1)->data + 0x5C4) = second;\n    third = state_at(2)->data;\n    *(Vec3*)(state_at(0)->data + 0x598) = values;\n    *(Vec3*)(state_at(1)->data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(state_at(2)->data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(state_at(1)->data + 0x580) = lbl_80651460;\n    *(float*)(state_at(0)->data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_global_array.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_global_array.json\n"
+        }
+      ],
+      "score": 70.16418,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_global_array.json",
+      "raw_objdiff_sha256": "6b45840127881c21d0286151cd1834563d913e29aeab9add7b52c77fdfbcccdd"
+    },
+    {
+      "name": "accessor_short",
+      "hypothesis": "Test a global-array accessor, narrower element indices, and typed object fields as plausible original accessor forms.",
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, short index)\n{\n    return &base[index];\n}\n\nstatic inline unsigned char* state_fields(unsigned char* object)\n{\n    return object + 0x550;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_fields(state_at(base, 1)->data);\n    fn_801F7034(first, 1);\n\n    second = state_fields(state_at(base, 0)->data);\n    fn_801F7034(second, 1);\n\n    *(void**)(state_at(base, 1)->data + 0x5C4) = second;\n    third = state_at(base, 2)->data;\n    *(Vec3*)(state_at(base, 0)->data + 0x598) = values;\n    *(Vec3*)(state_at(base, 1)->data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(state_at(base, 2)->data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(state_at(base, 1)->data + 0x580) = lbl_80651460;\n    *(float*)(state_at(base, 0)->data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_short.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_short.json\n"
+        }
+      ],
+      "score": 79.82089,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_nested_expression.json",
+      "raw_objdiff_sha256": "e3a5529db58e9aecb0e11f34d02cea349e430e0763ff053747ed266f87272ae0"
+    },
+    {
+      "name": "accessor_char",
+      "hypothesis": "Test a global-array accessor, narrower element indices, and typed object fields as plausible original accessor forms.",
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, unsigned char index)\n{\n    return &base[index];\n}\n\nstatic inline unsigned char* state_fields(unsigned char* object)\n{\n    return object + 0x550;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_fields(state_at(base, 1)->data);\n    fn_801F7034(first, 1);\n\n    second = state_fields(state_at(base, 0)->data);\n    fn_801F7034(second, 1);\n\n    *(void**)(state_at(base, 1)->data + 0x5C4) = second;\n    third = state_at(base, 2)->data;\n    *(Vec3*)(state_at(base, 0)->data + 0x598) = values;\n    *(Vec3*)(state_at(base, 1)->data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(state_at(base, 2)->data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(state_at(base, 1)->data + 0x580) = lbl_80651460;\n    *(float*)(state_at(base, 0)->data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_char.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_char.json\n"
+        }
+      ],
+      "score": 79.82089,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_nested_expression.json",
+      "raw_objdiff_sha256": "e3a5529db58e9aecb0e11f34d02cea349e430e0763ff053747ed266f87272ae0"
+    },
+    {
+      "name": "accessor_long",
+      "hypothesis": "Test a global-array accessor, narrower element indices, and typed object fields as plausible original accessor forms.",
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, long index)\n{\n    return &base[index];\n}\n\nstatic inline unsigned char* state_fields(unsigned char* object)\n{\n    return object + 0x550;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_fields(state_at(base, 1)->data);\n    fn_801F7034(first, 1);\n\n    second = state_fields(state_at(base, 0)->data);\n    fn_801F7034(second, 1);\n\n    *(void**)(state_at(base, 1)->data + 0x5C4) = second;\n    third = state_at(base, 2)->data;\n    *(Vec3*)(state_at(base, 0)->data + 0x598) = values;\n    *(Vec3*)(state_at(base, 1)->data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(state_at(base, 2)->data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(state_at(base, 1)->data + 0x580) = lbl_80651460;\n    *(float*)(state_at(base, 0)->data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_long.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_long.json\n"
+        }
+      ],
+      "score": 79.82089,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_nested_expression.json",
+      "raw_objdiff_sha256": "e3a5529db58e9aecb0e11f34d02cea349e430e0763ff053747ed266f87272ae0"
+    },
+    {
+      "name": "accessor_typed_fields",
+      "hypothesis": "Test a global-array accessor, narrower element indices, and typed object fields as plausible original accessor forms.",
+      "source": "extern unsigned char lbl_8023B7D8[];\n\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\ntypedef struct ObjectState {\n    unsigned char prefix[0x550];\n    unsigned char fields[0x30];\n    float scalar;\n    unsigned char padding584[0x14];\n    Vec3 vector;\n    unsigned char padding5A4[0x20];\n    void* link;\n    unsigned char padding5C8[0x98];\n} ObjectState;\nextern ObjectState lbl_8063C6B8[];\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nstatic inline unsigned char* state_fields(unsigned char* object)\n{\n    return object + 0x550;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_fields(((unsigned char*)state_at(base, 1)));\n    fn_801F7034(first, 1);\n\n    second = state_fields(((unsigned char*)state_at(base, 0)));\n    fn_801F7034(second, 1);\n\n    state_at(base, 1)->link = second;\n    third = ((unsigned char*)state_at(base, 2));\n    state_at(base, 0)->vector = values;\n    state_at(base, 1)->vector = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(((unsigned char*)state_at(base, 2)) + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    state_at(base, 1)->scalar = lbl_80651460;\n    state_at(base, 0)->scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_typed_fields.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_typed_fields.json\n"
+        }
+      ],
+      "score": 80.19403,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_typed_fields.json",
+      "raw_objdiff_sha256": "48fc23b2b0717d53bcaee4e828f3e89d8c7a009ab51943d5bdbc906a8715a208"
+    },
+    {
+      "name": "accessor_owner_struct",
+      "hypothesis": "Typed inline subobject accessors and an owner aggregate test whether MWCC preserves the object and shared-array base as separate address values.",
+      "source": "extern unsigned char lbl_8023B7D8[];\n\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\ntypedef struct ObjectState {\n    unsigned char prefix[0x550];\n    unsigned char fields[0x30];\n    float scalar;\n    unsigned char padding584[0x14];\n    Vec3 vector;\n    unsigned char padding5A4[0x20];\n    void* link;\n    unsigned char padding5C8[0x98];\n} ObjectState;\nextern ObjectState lbl_8063C6B8[];\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\ntypedef struct StateArray {\n    ObjectState* objects;\n} StateArray;\n\nstatic inline ObjectState* state_at(StateArray* base, int index)\n{\n    return &base->objects[index];\n}\n\nstatic inline unsigned char* state_fields(unsigned char* object)\n{\n    return object + 0x550;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    StateArray base;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n    base.objects = lbl_8063C6B8;\n\n    first = state_fields(((unsigned char*)state_at(&base, 1)));\n    fn_801F7034(first, 1);\n\n    second = state_fields(((unsigned char*)state_at(&base, 0)));\n    fn_801F7034(second, 1);\n\n    state_at(&base, 1)->link = second;\n    third = ((unsigned char*)state_at(&base, 2));\n    state_at(&base, 0)->vector = values;\n    state_at(&base, 1)->vector = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(((unsigned char*)state_at(&base, 2)) + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    state_at(&base, 1)->scalar = lbl_80651460;\n    state_at(&base, 0)->scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_owner_struct.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_owner_struct.json\n"
+        }
+      ],
+      "score": 80.19403,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_typed_fields.json",
+      "raw_objdiff_sha256": "48fc23b2b0717d53bcaee4e828f3e89d8c7a009ab51943d5bdbc906a8715a208"
+    },
+    {
+      "name": "accessor_typed_subobject",
+      "hypothesis": "Typed inline subobject accessors and an owner aggregate test whether MWCC preserves the object and shared-array base as separate address values.",
+      "source": "extern unsigned char lbl_8023B7D8[];\n\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\ntypedef struct ObjectState {\n    unsigned char prefix[0x550];\n    unsigned char fields[0x30];\n    float scalar;\n    unsigned char padding584[0x14];\n    Vec3 vector;\n    unsigned char padding5A4[0x20];\n    void* link;\n    unsigned char padding5C8[0x98];\n} ObjectState;\nextern ObjectState lbl_8063C6B8[];\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nstatic inline unsigned char* state_fields(ObjectState* object)\n{\n    return object->fields;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_fields(state_at(base, 1));\n    fn_801F7034(first, 1);\n\n    second = state_fields(state_at(base, 0));\n    fn_801F7034(second, 1);\n\n    state_at(base, 1)->link = second;\n    third = ((unsigned char*)state_at(base, 2));\n    state_at(base, 0)->vector = values;\n    state_at(base, 1)->vector = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(((unsigned char*)state_at(base, 2)) + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    state_at(base, 1)->scalar = lbl_80651460;\n    state_at(base, 0)->scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_typed_subobject.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_typed_subobject.json\n"
+        }
+      ],
+      "score": 80.19403,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_typed_fields.json",
+      "raw_objdiff_sha256": "48fc23b2b0717d53bcaee4e828f3e89d8c7a009ab51943d5bdbc906a8715a208"
+    },
+    {
+      "name": "accessor_direct_typed_subobject",
+      "hypothesis": "Typed inline subobject accessors and an owner aggregate test whether MWCC preserves the object and shared-array base as separate address values.",
+      "source": "extern unsigned char lbl_8023B7D8[];\n\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\ntypedef struct ObjectState {\n    unsigned char prefix[0x550];\n    unsigned char fields[0x30];\n    float scalar;\n    unsigned char padding584[0x14];\n    Vec3 vector;\n    unsigned char padding5A4[0x20];\n    void* link;\n    unsigned char padding5C8[0x98];\n} ObjectState;\nextern ObjectState lbl_8063C6B8[];\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nstatic inline unsigned char* state_fields(ObjectState* object)\n{\n    return object->fields;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_at(base, 1)->fields;\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->fields;\n    fn_801F7034(second, 1);\n\n    state_at(base, 1)->link = second;\n    third = ((unsigned char*)state_at(base, 2));\n    state_at(base, 0)->vector = values;\n    state_at(base, 1)->vector = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(((unsigned char*)state_at(base, 2)) + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    state_at(base, 1)->scalar = lbl_80651460;\n    state_at(base, 0)->scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_direct_typed_subobject.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_direct_typed_subobject.json\n"
+        }
+      ],
+      "score": 83.25373,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_direct_typed_subobject.json",
+      "raw_objdiff_sha256": "6e1a7943bf9f59337534ffb5e051dc4ea18668a7deba7d73a6e1fc7717f734c1"
+    },
+    {
+      "name": "motion_arrays",
+      "hypothesis": "Neighboring source identifies two distinct arrays of twelve 0x88-byte motion records, rather than an array of 0x660 opaque blocks. Struct subarray address materialization may preserve the exact two-stage offsets.",
+      "source": "typedef struct Vec3 { float x, y, z; } Vec3;\ntypedef struct MotionState {\n    unsigned char pad00[0x30];\n    float scalar;\n    float rate;\n    unsigned char pad38[0x10];\n    Vec3 vector;\n    unsigned char pad54[0x20];\n    struct MotionState* link;\n    unsigned char pad78[0x10];\n} MotionState;\ntypedef struct MotionGlobals {\n    MotionState first[12];\n    MotionState second[12];\n    MotionState current_first;\n    MotionState current_second;\n} MotionGlobals;\nextern MotionGlobals lbl_8063C6B8;\nextern Vec3 lbl_8023B7D8;\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern int fn_801FA410(int);\n\nvoid* fn_801F7AF8(void)\n{\n    MotionGlobals* base = &lbl_8063C6B8;\n    MotionState* first = base->second;\n    MotionState* second;\n    MotionState* third;\n    Vec3 values = lbl_8023B7D8;\n\n    first += 10;\n    fn_801F7034(first, 1);\n    second = base->first;\n    second += 10;\n    fn_801F7034(second, 1);\n\n    base->second[10].link = second;\n    third = &base->current_first;\n    base->first[10].vector = values;\n    base->second[10].vector = values;\n    fn_801F8994(first, (Vec3*)third, third->rate);\n    fn_801F8994(second, (Vec3*)&base->current_second, third->rate);\n    fn_801F8620();\n    fn_801FA410(10);\n    lbl_8064D7A0 = lbl_80651464;\n    base->second[10].scalar = lbl_80651460;\n    base->first[10].scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-motion_arrays.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-motion_arrays.json\n"
+        }
+      ],
+      "score": 72.38806,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-motion_arrays.json",
+      "raw_objdiff_sha256": "d91da409abde4e40b26427d46da8010813c5694b58c4e9f6d40a3986ea22484d"
+    },
+    {
+      "name": "motion_arrays_expression",
+      "hypothesis": "Neighboring source identifies two distinct arrays of twelve 0x88-byte motion records, rather than an array of 0x660 opaque blocks. Struct subarray address materialization may preserve the exact two-stage offsets.",
+      "source": "typedef struct Vec3 { float x, y, z; } Vec3;\ntypedef struct MotionState {\n    unsigned char pad00[0x30];\n    float scalar;\n    float rate;\n    unsigned char pad38[0x10];\n    Vec3 vector;\n    unsigned char pad54[0x20];\n    struct MotionState* link;\n    unsigned char pad78[0x10];\n} MotionState;\ntypedef struct MotionGlobals {\n    MotionState first[12];\n    MotionState second[12];\n    MotionState current_first;\n    MotionState current_second;\n} MotionGlobals;\nextern MotionGlobals lbl_8063C6B8;\nextern Vec3 lbl_8023B7D8;\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern int fn_801FA410(int);\n\nvoid* fn_801F7AF8(void)\n{\n    MotionGlobals* base = &lbl_8063C6B8;\n    MotionState* first;\n    MotionState* second;\n    MotionState* third;\n    Vec3 values = lbl_8023B7D8;\n\n    first = &base->second[10];\n    fn_801F7034(first, 1);\n    second = &base->first[10];\n    fn_801F7034(second, 1);\n\n    base->second[10].link = second;\n    third = &base->current_first;\n    base->first[10].vector = values;\n    base->second[10].vector = values;\n    fn_801F8994(first, (Vec3*)third, third->rate);\n    fn_801F8994(second, (Vec3*)&base->current_second, third->rate);\n    fn_801F8620();\n    fn_801FA410(10);\n    lbl_8064D7A0 = lbl_80651464;\n    base->second[10].scalar = lbl_80651460;\n    base->first[10].scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-motion_arrays_expression.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-motion_arrays_expression.json\n"
+        }
+      ],
+      "score": 70.537315,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-motion_arrays_expression.json",
+      "raw_objdiff_sha256": "7d03e6783c3dc0960d9802e53d246db805471173b3fb75d4a017a55aa2fe5969"
+    },
+    {
+      "name": "typed_late_base",
+      "hypothesis": "Test declaration/initialization sequencing, pointer-to-array address form, and inline return form for retained-base and vector-copy scheduling. Volatile applies to global contents, not the local pointer.",
+      "source": "extern unsigned char lbl_8023B7D8[];\n\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\ntypedef struct ObjectState {\n    unsigned char prefix[0x550];\n    unsigned char fields[0x30];\n    float scalar;\n    unsigned char padding584[0x14];\n    Vec3 vector;\n    unsigned char padding5A4[0x20];\n    void* link;\n    unsigned char padding5C8[0x98];\n} ObjectState;\nextern ObjectState lbl_8063C6B8[];\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nstatic inline unsigned char* state_fields(ObjectState* object)\n{\n    return object->fields;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n    base = lbl_8063C6B8;\n\n    first = state_at(base, 1)->fields;\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->fields;\n    fn_801F7034(second, 1);\n\n    state_at(base, 1)->link = second;\n    third = ((unsigned char*)state_at(base, 2));\n    state_at(base, 0)->vector = values;\n    state_at(base, 1)->vector = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(((unsigned char*)state_at(base, 2)) + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    state_at(base, 1)->scalar = lbl_80651460;\n    state_at(base, 0)->scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_late_base.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_late_base.json\n"
+        }
+      ],
+      "score": 83.25373,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_direct_typed_subobject.json",
+      "raw_objdiff_sha256": "6e1a7943bf9f59337534ffb5e051dc4ea18668a7deba7d73a6e1fc7717f734c1"
+    },
+    {
+      "name": "typed_values_first",
+      "hypothesis": "Test declaration/initialization sequencing, pointer-to-array address form, and inline return form for retained-base and vector-copy scheduling. Volatile applies to global contents, not the local pointer.",
+      "source": "extern unsigned char lbl_8023B7D8[];\n\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\ntypedef struct ObjectState {\n    unsigned char prefix[0x550];\n    unsigned char fields[0x30];\n    float scalar;\n    unsigned char padding584[0x14];\n    Vec3 vector;\n    unsigned char padding5A4[0x20];\n    void* link;\n    unsigned char padding5C8[0x98];\n} ObjectState;\nextern ObjectState lbl_8063C6B8[];\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nstatic inline unsigned char* state_fields(ObjectState* object)\n{\n    return object->fields;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n\n    first = state_at(base, 1)->fields;\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->fields;\n    fn_801F7034(second, 1);\n\n    state_at(base, 1)->link = second;\n    third = ((unsigned char*)state_at(base, 2));\n    state_at(base, 0)->vector = values;\n    state_at(base, 1)->vector = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(((unsigned char*)state_at(base, 2)) + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    state_at(base, 1)->scalar = lbl_80651460;\n    state_at(base, 0)->scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_values_first.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_values_first.json\n"
+        }
+      ],
+      "score": 83.25373,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_direct_typed_subobject.json",
+      "raw_objdiff_sha256": "6e1a7943bf9f59337534ffb5e051dc4ea18668a7deba7d73a6e1fc7717f734c1"
+    },
+    {
+      "name": "motion_array_addresses",
+      "hypothesis": "Test declaration/initialization sequencing, pointer-to-array address form, and inline return form for retained-base and vector-copy scheduling. Volatile applies to global contents, not the local pointer.",
+      "source": "typedef struct Vec3 { float x, y, z; } Vec3;\ntypedef struct MotionState {\n    unsigned char pad00[0x30];\n    float scalar;\n    float rate;\n    unsigned char pad38[0x10];\n    Vec3 vector;\n    unsigned char pad54[0x20];\n    struct MotionState* link;\n    unsigned char pad78[0x10];\n} MotionState;\ntypedef struct MotionGlobals {\n    MotionState first[12];\n    MotionState second[12];\n    MotionState current_first;\n    MotionState current_second;\n} MotionGlobals;\nextern MotionGlobals lbl_8063C6B8;\nextern Vec3 lbl_8023B7D8;\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern int fn_801FA410(int);\n\nvoid* fn_801F7AF8(void)\n{\n    MotionGlobals* base = &lbl_8063C6B8;\n    MotionState* first = (MotionState*)&base->second;\n    MotionState* second;\n    MotionState* third;\n    Vec3 values = lbl_8023B7D8;\n\n    first += 10;\n    fn_801F7034(first, 1);\n    second = (MotionState*)&base->first;\n    second += 10;\n    fn_801F7034(second, 1);\n\n    base->second[10].link = second;\n    third = &base->current_first;\n    base->first[10].vector = values;\n    base->second[10].vector = values;\n    fn_801F8994(first, (Vec3*)third, third->rate);\n    fn_801F8994(second, (Vec3*)&base->current_second, third->rate);\n    fn_801F8620();\n    fn_801FA410(10);\n    lbl_8064D7A0 = lbl_80651464;\n    base->second[10].scalar = lbl_80651460;\n    base->first[10].scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-motion_array_addresses.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-motion_array_addresses.json\n"
+        }
+      ],
+      "score": 66.95522,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-motion_array_addresses.json",
+      "raw_objdiff_sha256": "0fc887a52f464734f30882d710dabf9b061c51ab3cb6cb71b80aeede40cae0cb"
+    },
+    {
+      "name": "typed_inline_increment",
+      "hypothesis": "Test declaration/initialization sequencing, pointer-to-array address form, and inline return form for retained-base and vector-copy scheduling. Volatile applies to global contents, not the local pointer.",
+      "source": "extern unsigned char lbl_8023B7D8[];\n\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\ntypedef struct ObjectState {\n    unsigned char prefix[0x550];\n    unsigned char fields[0x30];\n    float scalar;\n    unsigned char padding584[0x14];\n    Vec3 vector;\n    unsigned char padding5A4[0x20];\n    void* link;\n    unsigned char padding5C8[0x98];\n} ObjectState;\nextern ObjectState lbl_8063C6B8[];\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    base += index;\n    return base;\n}\n\nstatic inline unsigned char* state_fields(ObjectState* object)\n{\n    return object->fields;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_at(base, 1)->fields;\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->fields;\n    fn_801F7034(second, 1);\n\n    state_at(base, 1)->link = second;\n    third = ((unsigned char*)state_at(base, 2));\n    state_at(base, 0)->vector = values;\n    state_at(base, 1)->vector = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(((unsigned char*)state_at(base, 2)) + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    state_at(base, 1)->scalar = lbl_80651460;\n    state_at(base, 0)->scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_inline_increment.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_inline_increment.json\n"
+        }
+      ],
+      "score": 75.850746,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_inline_increment.json",
+      "raw_objdiff_sha256": "73cb633b9fc897e78d0325d011e402d422051bda5a1252a0bbfcbd0c57ef6b10"
+    },
+    {
+      "name": "typed_separate_vector_copy",
+      "hypothesis": "Test declaration/initialization sequencing, pointer-to-array address form, and inline return form for retained-base and vector-copy scheduling. Volatile applies to global contents, not the local pointer.",
+      "source": "extern unsigned char lbl_8023B7D8[];\n\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\ntypedef struct ObjectState {\n    unsigned char prefix[0x550];\n    unsigned char fields[0x30];\n    float scalar;\n    unsigned char padding584[0x14];\n    Vec3 vector;\n    unsigned char padding5A4[0x20];\n    void* link;\n    unsigned char padding5C8[0x98];\n} ObjectState;\nextern ObjectState lbl_8063C6B8[];\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nstatic inline unsigned char* state_fields(ObjectState* object)\n{\n    return object->fields;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values;\n    values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_at(base, 1)->fields;\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->fields;\n    fn_801F7034(second, 1);\n\n    state_at(base, 1)->link = second;\n    third = ((unsigned char*)state_at(base, 2));\n    state_at(base, 0)->vector = values;\n    state_at(base, 1)->vector = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(((unsigned char*)state_at(base, 2)) + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    state_at(base, 1)->scalar = lbl_80651460;\n    state_at(base, 0)->scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_separate_vector_copy.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_separate_vector_copy.json\n"
+        }
+      ],
+      "score": 83.25373,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_direct_typed_subobject.json",
+      "raw_objdiff_sha256": "6e1a7943bf9f59337534ffb5e051dc4ea18668a7deba7d73a6e1fc7717f734c1"
+    },
+    {
+      "name": "motion_volatile_pointee",
+      "hypothesis": "Test declaration/initialization sequencing, pointer-to-array address form, and inline return form for retained-base and vector-copy scheduling. Volatile applies to global contents, not the local pointer.",
+      "source": "typedef struct Vec3 { float x, y, z; } Vec3;\ntypedef struct MotionState {\n    unsigned char pad00[0x30];\n    float scalar;\n    float rate;\n    unsigned char pad38[0x10];\n    Vec3 vector;\n    unsigned char pad54[0x20];\n    struct MotionState* link;\n    unsigned char pad78[0x10];\n} MotionState;\ntypedef struct MotionGlobals {\n    MotionState first[12];\n    MotionState second[12];\n    MotionState current_first;\n    MotionState current_second;\n} MotionGlobals;\nextern MotionGlobals lbl_8063C6B8;\nextern Vec3 lbl_8023B7D8;\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern int fn_801FA410(int);\n\nvoid* fn_801F7AF8(void)\n{\n    volatile MotionGlobals* base = &lbl_8063C6B8;\n    MotionState* first = base->second;\n    MotionState* second;\n    MotionState* third;\n    Vec3 values = lbl_8023B7D8;\n\n    first += 10;\n    fn_801F7034(first, 1);\n    second = base->first;\n    second += 10;\n    fn_801F7034(second, 1);\n\n    base->second[10].link = second;\n    third = &base->current_first;\n    base->first[10].vector = values;\n    base->second[10].vector = values;\n    fn_801F8994(first, (Vec3*)third, third->rate);\n    fn_801F8994(second, (Vec3*)&base->current_second, third->rate);\n    fn_801F8620();\n    fn_801FA410(10);\n    lbl_8064D7A0 = lbl_80651464;\n    base->second[10].scalar = lbl_80651460;\n    base->first[10].scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 2,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\nFAILED: [code=2] build/GEDE01/src/game/game_fn_801F7AF8.o \ntools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -MMD -c src/game/game_fn_801F7AF8.c -o build/GEDE01/src/game && \"/usr/bin/python3\" tools/transform_dep.py build/GEDE01/src/game/game_fn_801F7AF8.d build/GEDE01/src/game/game_fn_801F7AF8.d\n### mwcceppc.exe Compiler:\n#    File: src\\game\\game_fn_801F7AF8.c\n# ------------------------------------\n#      31: MotionState* first = base->second;\n#   Error:                                  ^\n#   illegal implicit conversion from 'volatile struct MotionState[12]' to\n#   'struct MotionState *'\n#   Too many errors printed, aborting program\n\nUser break, cancelled...\nninja: build stopped: subcommand failed.\n"
+        }
+      ]
+    },
+    {
+      "name": "union_address_accessor",
+      "hypothesis": "A nonvolatile address union tests representation aliasing as a barrier to known-global pointer rematerialization; unlike the previous volatile-pointer attempt it need not force stack accesses.",
+      "source": "extern unsigned char lbl_8023B7D8[];\n\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\ntypedef struct ObjectState {\n    unsigned char prefix[0x550];\n    unsigned char fields[0x30];\n    float scalar;\n    unsigned char padding584[0x14];\n    Vec3 vector;\n    unsigned char padding5A4[0x20];\n    void* link;\n    unsigned char padding5C8[0x98];\n} ObjectState;\nextern ObjectState lbl_8063C6B8[];\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\ntypedef union StateAddress {\n    ObjectState* pointer;\n    unsigned long integer;\n} StateAddress;\n\nstatic inline ObjectState* state_at(StateAddress base, int index)\n{\n    return &base.pointer[index];\n}\n\nstatic inline unsigned char* state_fields(ObjectState* object)\n{\n    return object->fields;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    StateAddress base;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n    base.integer = (unsigned long)lbl_8063C6B8;\n\n    first = state_at(base, 1)->fields;\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->fields;\n    fn_801F7034(second, 1);\n\n    state_at(base, 1)->link = second;\n    third = ((unsigned char*)state_at(base, 2));\n    state_at(base, 0)->vector = values;\n    state_at(base, 1)->vector = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(((unsigned char*)state_at(base, 2)) + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    state_at(base, 1)->scalar = lbl_80651460;\n    state_at(base, 0)->scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-union_address_accessor.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-union_address_accessor.json\n"
+        }
+      ],
+      "score": 44.46269,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-union_address_accessor.json",
+      "raw_objdiff_sha256": "34bd5e97e86741082985302bbc7c45f10c06bf47edad9f96eb2dc1955345396f"
+    },
+    {
+      "name": "union_pointer_accessor",
+      "hypothesis": "A nonvolatile address union tests representation aliasing as a barrier to known-global pointer rematerialization; unlike the previous volatile-pointer attempt it need not force stack accesses.",
+      "source": "extern unsigned char lbl_8023B7D8[];\n\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\ntypedef struct ObjectState {\n    unsigned char prefix[0x550];\n    unsigned char fields[0x30];\n    float scalar;\n    unsigned char padding584[0x14];\n    Vec3 vector;\n    unsigned char padding5A4[0x20];\n    void* link;\n    unsigned char padding5C8[0x98];\n} ObjectState;\nextern ObjectState lbl_8063C6B8[];\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\ntypedef union StateAddress {\n    ObjectState* pointer;\n    unsigned long integer;\n} StateAddress;\n\nstatic inline ObjectState* state_at(StateAddress base, int index)\n{\n    return &base.pointer[index];\n}\n\nstatic inline unsigned char* state_fields(ObjectState* object)\n{\n    return object->fields;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    StateAddress base;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n    base.pointer = lbl_8063C6B8;\n\n    first = state_at(base, 1)->fields;\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->fields;\n    fn_801F7034(second, 1);\n\n    state_at(base, 1)->link = second;\n    third = ((unsigned char*)state_at(base, 2));\n    state_at(base, 0)->vector = values;\n    state_at(base, 1)->vector = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(((unsigned char*)state_at(base, 2)) + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    state_at(base, 1)->scalar = lbl_80651460;\n    state_at(base, 0)->scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-union_pointer_accessor.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-union_pointer_accessor.json\n"
+        }
+      ],
+      "score": 44.46269,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-union_address_accessor.json",
+      "raw_objdiff_sha256": "34bd5e97e86741082985302bbc7c45f10c06bf47edad9f96eb2dc1955345396f"
+    },
+    {
+      "name": "union_local_address",
+      "hypothesis": "A nonvolatile address union tests representation aliasing as a barrier to known-global pointer rematerialization; unlike the previous volatile-pointer attempt it need not force stack accesses.",
+      "source": "extern unsigned char lbl_8023B7D8[];\n\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\ntypedef struct ObjectState {\n    unsigned char prefix[0x550];\n    unsigned char fields[0x30];\n    float scalar;\n    unsigned char padding584[0x14];\n    Vec3 vector;\n    unsigned char padding5A4[0x20];\n    void* link;\n    unsigned char padding5C8[0x98];\n} ObjectState;\nextern ObjectState lbl_8063C6B8[];\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\ntypedef union StateAddress {\n    ObjectState* pointer;\n    unsigned long integer;\n} StateAddress;\n\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nstatic inline unsigned char* state_fields(ObjectState* object)\n{\n    return object->fields;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    StateAddress address;\n    ObjectState* base;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n    address.integer = (unsigned long)lbl_8063C6B8;\n    base = address.pointer;\n\n    first = state_at(base, 1)->fields;\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->fields;\n    fn_801F7034(second, 1);\n\n    state_at(base, 1)->link = second;\n    third = ((unsigned char*)state_at(base, 2));\n    state_at(base, 0)->vector = values;\n    state_at(base, 1)->vector = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(((unsigned char*)state_at(base, 2)) + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    state_at(base, 1)->scalar = lbl_80651460;\n    state_at(base, 0)->scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-union_local_address.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-union_local_address.json\n"
+        }
+      ],
+      "score": 56.50746,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-union_local_address.json",
+      "raw_objdiff_sha256": "784440e8914b6470be2a4b2d501491ffd6eb652fe4d52e77707120a824bfeeeb"
+    },
+    {
+      "name": "inline_body_baseline",
+      "hypothesis": "Optimize the initialization body with an unknown base parameter before inlining its call into the entry point, as an inline method would; this may preserve base-relative addresses and avoid rematerializing the global.",
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline void* initialize_states(ObjectState* base)\n{\n    unsigned char* first = base[1].data;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first += 0x550;\n    fn_801F7034(first, 1);\n\n    second = base[0].data;\n    second += 0x550;\n    fn_801F7034(second, 1);\n\n    *(void**)(base[1].data + 0x5C4) = second;\n    third = base[2].data;\n    *(Vec3*)(base[0].data + 0x598) = values;\n    *(Vec3*)(base[1].data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(base[2].data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(base[1].data + 0x580) = lbl_80651460;\n    *(float*)(base[0].data + 0x580) = lbl_80651460;\n    return first;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    return initialize_states(lbl_8063C6B8);\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-inline_body_baseline.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-inline_body_baseline.json\n"
+        }
+      ],
+      "score": 71.716415,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-inline_body_baseline.json",
+      "raw_objdiff_sha256": "b4d3d118824a7dcb30199ba2eb899a1c0ec7a6d3e9d8f51cb45bc08733db4442"
+    },
+    {
+      "name": "inline_body_typed",
+      "hypothesis": "Optimize the initialization body with an unknown base parameter before inlining its call into the entry point, as an inline method would; this may preserve base-relative addresses and avoid rematerializing the global.",
+      "source": "extern unsigned char lbl_8023B7D8[];\n\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\ntypedef struct ObjectState {\n    unsigned char prefix[0x550];\n    unsigned char fields[0x30];\n    float scalar;\n    unsigned char padding584[0x14];\n    Vec3 vector;\n    unsigned char padding5A4[0x20];\n    void* link;\n    unsigned char padding5C8[0x98];\n} ObjectState;\nextern ObjectState lbl_8063C6B8[];\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nstatic inline unsigned char* state_fields(ObjectState* object)\n{\n    return object->fields;\n}\n\nstatic inline void* initialize_states(ObjectState* base)\n{\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_at(base, 1)->fields;\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->fields;\n    fn_801F7034(second, 1);\n\n    state_at(base, 1)->link = second;\n    third = ((unsigned char*)state_at(base, 2));\n    state_at(base, 0)->vector = values;\n    state_at(base, 1)->vector = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(((unsigned char*)state_at(base, 2)) + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    state_at(base, 1)->scalar = lbl_80651460;\n    state_at(base, 0)->scalar = lbl_80651460;\n    return first;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    return initialize_states(lbl_8063C6B8);\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-inline_body_typed.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-inline_body_typed.json\n"
+        }
+      ],
+      "score": 75.850746,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-inline_body_typed.json",
+      "raw_objdiff_sha256": "c3bd340b3b9d312195bf605968e7a42f677ebb171f66333f66a19f35ee84dc1d"
+    },
+    {
+      "name": "inline_body_motion",
+      "hypothesis": "Optimize the initialization body with an unknown base parameter before inlining its call into the entry point, as an inline method would; this may preserve base-relative addresses and avoid rematerializing the global.",
+      "source": "typedef struct Vec3 { float x, y, z; } Vec3;\ntypedef struct MotionState {\n    unsigned char pad00[0x30];\n    float scalar;\n    float rate;\n    unsigned char pad38[0x10];\n    Vec3 vector;\n    unsigned char pad54[0x20];\n    struct MotionState* link;\n    unsigned char pad78[0x10];\n} MotionState;\ntypedef struct MotionGlobals {\n    MotionState first[12];\n    MotionState second[12];\n    MotionState current_first;\n    MotionState current_second;\n} MotionGlobals;\nextern MotionGlobals lbl_8063C6B8;\nextern Vec3 lbl_8023B7D8;\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern int fn_801FA410(int);\n\nstatic inline void* initialize_states(MotionGlobals* base)\n{\n    MotionState* first = base->second;\n    MotionState* second;\n    MotionState* third;\n    Vec3 values = lbl_8023B7D8;\n\n    first += 10;\n    fn_801F7034(first, 1);\n    second = base->first;\n    second += 10;\n    fn_801F7034(second, 1);\n\n    base->second[10].link = second;\n    third = &base->current_first;\n    base->first[10].vector = values;\n    base->second[10].vector = values;\n    fn_801F8994(first, (Vec3*)third, third->rate);\n    fn_801F8994(second, (Vec3*)&base->current_second, third->rate);\n    fn_801F8620();\n    fn_801FA410(10);\n    lbl_8064D7A0 = lbl_80651464;\n    base->second[10].scalar = lbl_80651460;\n    base->first[10].scalar = lbl_80651460;\n    return first;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    return initialize_states(&lbl_8063C6B8);\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-inline_body_motion.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-inline_body_motion.json\n"
+        }
+      ],
+      "score": 72.089554,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-inline_body_motion.json",
+      "raw_objdiff_sha256": "5eebdb31ca7a01630d335210ede583aaeca6866c9f03d27d17c64248a5c076ba"
+    },
+    {
+      "name": "typed_third_object",
+      "hypothesis": "Test semantic handle and current-state pointer types, direct current-state access, and removal of an unused helper for register allocation and a minimal final source.",
+      "source": "extern unsigned char lbl_8023B7D8[];\n\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\ntypedef struct ObjectState {\n    unsigned char prefix[0x550];\n    unsigned char fields[0x30];\n    float scalar;\n    unsigned char padding584[0x14];\n    Vec3 vector;\n    unsigned char padding5A4[0x20];\n    void* link;\n    unsigned char padding5C8[0x98];\n} ObjectState;\nextern ObjectState lbl_8063C6B8[];\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nstatic inline unsigned char* state_fields(ObjectState* object)\n{\n    return object->fields;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first;\n    unsigned char* second;\n    ObjectState* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_at(base, 1)->fields;\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->fields;\n    fn_801F7034(second, 1);\n\n    state_at(base, 1)->link = second;\n    third = state_at(base, 2);\n    state_at(base, 0)->vector = values;\n    state_at(base, 1)->vector = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)((unsigned char*)third + 0x34));\n    fn_801F8994(second, (Vec3*)(((unsigned char*)state_at(base, 2)) + 0x88), *(float*)((unsigned char*)third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    state_at(base, 1)->scalar = lbl_80651460;\n    state_at(base, 0)->scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_third_object.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_third_object.json\n"
+        }
+      ],
+      "score": 83.25373,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_direct_typed_subobject.json",
+      "raw_objdiff_sha256": "6e1a7943bf9f59337534ffb5e051dc4ea18668a7deba7d73a6e1fc7717f734c1"
+    },
+    {
+      "name": "typed_void_handles",
+      "hypothesis": "Test semantic handle and current-state pointer types, direct current-state access, and removal of an unused helper for register allocation and a minimal final source.",
+      "source": "extern unsigned char lbl_8023B7D8[];\n\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\ntypedef struct ObjectState {\n    unsigned char prefix[0x550];\n    unsigned char fields[0x30];\n    float scalar;\n    unsigned char padding584[0x14];\n    Vec3 vector;\n    unsigned char padding5A4[0x20];\n    void* link;\n    unsigned char padding5C8[0x98];\n} ObjectState;\nextern ObjectState lbl_8063C6B8[];\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nstatic inline unsigned char* state_fields(ObjectState* object)\n{\n    return object->fields;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    void* first;\n    void* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_at(base, 1)->fields;\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->fields;\n    fn_801F7034(second, 1);\n\n    state_at(base, 1)->link = second;\n    third = ((unsigned char*)state_at(base, 2));\n    state_at(base, 0)->vector = values;\n    state_at(base, 1)->vector = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(((unsigned char*)state_at(base, 2)) + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    state_at(base, 1)->scalar = lbl_80651460;\n    state_at(base, 0)->scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_void_handles.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_void_handles.json\n"
+        }
+      ],
+      "score": 83.25373,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_direct_typed_subobject.json",
+      "raw_objdiff_sha256": "6e1a7943bf9f59337534ffb5e051dc4ea18668a7deba7d73a6e1fc7717f734c1"
+    },
+    {
+      "name": "typed_third_vec",
+      "hypothesis": "Test semantic handle and current-state pointer types, direct current-state access, and removal of an unused helper for register allocation and a minimal final source.",
+      "source": "extern unsigned char lbl_8023B7D8[];\n\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\ntypedef struct ObjectState {\n    unsigned char prefix[0x550];\n    unsigned char fields[0x30];\n    float scalar;\n    unsigned char padding584[0x14];\n    Vec3 vector;\n    unsigned char padding5A4[0x20];\n    void* link;\n    unsigned char padding5C8[0x98];\n} ObjectState;\nextern ObjectState lbl_8063C6B8[];\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nstatic inline unsigned char* state_fields(ObjectState* object)\n{\n    return object->fields;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first;\n    unsigned char* second;\n    Vec3* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_at(base, 1)->fields;\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->fields;\n    fn_801F7034(second, 1);\n\n    state_at(base, 1)->link = second;\n    third = (Vec3*)state_at(base, 2);\n    state_at(base, 0)->vector = values;\n    state_at(base, 1)->vector = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)((unsigned char*)third + 0x34));\n    fn_801F8994(second, (Vec3*)(((unsigned char*)state_at(base, 2)) + 0x88), *(float*)((unsigned char*)third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    state_at(base, 1)->scalar = lbl_80651460;\n    state_at(base, 0)->scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_third_vec.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_third_vec.json\n"
+        }
+      ],
+      "score": 83.25373,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_direct_typed_subobject.json",
+      "raw_objdiff_sha256": "6e1a7943bf9f59337534ffb5e051dc4ea18668a7deba7d73a6e1fc7717f734c1"
+    },
+    {
+      "name": "typed_direct_third",
+      "hypothesis": "Test semantic handle and current-state pointer types, direct current-state access, and removal of an unused helper for register allocation and a minimal final source.",
+      "source": "extern unsigned char lbl_8023B7D8[];\n\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\ntypedef struct ObjectState {\n    unsigned char prefix[0x550];\n    unsigned char fields[0x30];\n    float scalar;\n    unsigned char padding584[0x14];\n    Vec3 vector;\n    unsigned char padding5A4[0x20];\n    void* link;\n    unsigned char padding5C8[0x98];\n} ObjectState;\nextern ObjectState lbl_8063C6B8[];\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nstatic inline unsigned char* state_fields(ObjectState* object)\n{\n    return object->fields;\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_at(base, 1)->fields;\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->fields;\n    fn_801F7034(second, 1);\n\n    state_at(base, 1)->link = second;\n    third = base[2].prefix;\n    state_at(base, 0)->vector = values;\n    state_at(base, 1)->vector = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(base[2].prefix + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    state_at(base, 1)->scalar = lbl_80651460;\n    state_at(base, 0)->scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_direct_third.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_direct_third.json\n"
+        }
+      ],
+      "score": 75.29851,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_direct_third.json",
+      "raw_objdiff_sha256": "cb67f767917049c149e9d7b1831615b84c232345f1116d30180c89a20b924df7"
+    },
+    {
+      "name": "typed_no_unused_helper",
+      "hypothesis": "Test semantic handle and current-state pointer types, direct current-state access, and removal of an unused helper for register allocation and a minimal final source.",
+      "source": "extern unsigned char lbl_8023B7D8[];\n\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\ntypedef struct ObjectState {\n    unsigned char prefix[0x550];\n    unsigned char fields[0x30];\n    float scalar;\n    unsigned char padding584[0x14];\n    Vec3 vector;\n    unsigned char padding5A4[0x20];\n    void* link;\n    unsigned char padding5C8[0x98];\n} ObjectState;\nextern ObjectState lbl_8063C6B8[];\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = state_at(base, 1)->fields;\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->fields;\n    fn_801F7034(second, 1);\n\n    state_at(base, 1)->link = second;\n    third = ((unsigned char*)state_at(base, 2));\n    state_at(base, 0)->vector = values;\n    state_at(base, 1)->vector = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(((unsigned char*)state_at(base, 2)) + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    state_at(base, 1)->scalar = lbl_80651460;\n    state_at(base, 0)->scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_no_unused_helper.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_no_unused_helper.json\n"
+        }
+      ],
+      "score": 83.25373,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_direct_typed_subobject.json",
+      "raw_objdiff_sha256": "6e1a7943bf9f59337534ffb5e051dc4ea18668a7deba7d73a6e1fc7717f734c1"
+    },
+    {
+      "name": "typed_first_initialized",
+      "hypothesis": "Test direct first-pointer initialization and a typed vector constant for the initial copy register schedule, plus explicit two-stage field address construction.",
+      "source": "extern unsigned char lbl_8023B7D8[];\n\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\ntypedef struct ObjectState {\n    unsigned char prefix[0x550];\n    unsigned char fields[0x30];\n    float scalar;\n    unsigned char padding584[0x14];\n    Vec3 vector;\n    unsigned char padding5A4[0x20];\n    void* link;\n    unsigned char padding5C8[0x98];\n} ObjectState;\nextern ObjectState lbl_8063C6B8[];\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first = state_at(base, 1)->fields;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->fields;\n    fn_801F7034(second, 1);\n\n    state_at(base, 1)->link = second;\n    third = ((unsigned char*)state_at(base, 2));\n    state_at(base, 0)->vector = values;\n    state_at(base, 1)->vector = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(((unsigned char*)state_at(base, 2)) + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    state_at(base, 1)->scalar = lbl_80651460;\n    state_at(base, 0)->scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_first_initialized.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_first_initialized.json\n"
+        }
+      ],
+      "score": 76.76119,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_first_initialized.json",
+      "raw_objdiff_sha256": "237806327980ea40da2520d8e93301225ad9e44e3d8d2f4eed0416c20d1979b9"
+    },
+    {
+      "name": "typed_vector_global",
+      "hypothesis": "Test direct first-pointer initialization and a typed vector constant for the initial copy register schedule, plus explicit two-stage field address construction.",
+      "source": "\n\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\ntypedef struct ObjectState {\n    unsigned char prefix[0x550];\n    unsigned char fields[0x30];\n    float scalar;\n    unsigned char padding584[0x14];\n    Vec3 vector;\n    unsigned char padding5A4[0x20];\n    void* link;\n    unsigned char padding5C8[0x98];\n} ObjectState;\nextern ObjectState lbl_8063C6B8[];\n\nextern Vec3 lbl_8023B7D8;\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = lbl_8023B7D8;\n\n    first = state_at(base, 1)->fields;\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->fields;\n    fn_801F7034(second, 1);\n\n    state_at(base, 1)->link = second;\n    third = ((unsigned char*)state_at(base, 2));\n    state_at(base, 0)->vector = values;\n    state_at(base, 1)->vector = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(((unsigned char*)state_at(base, 2)) + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    state_at(base, 1)->scalar = lbl_80651460;\n    state_at(base, 0)->scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_vector_global.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_vector_global.json\n"
+        }
+      ],
+      "score": 83.25373,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-accessor_direct_typed_subobject.json",
+      "raw_objdiff_sha256": "6e1a7943bf9f59337534ffb5e051dc4ea18668a7deba7d73a6e1fc7717f734c1"
+    },
+    {
+      "name": "typed_first_init_vector_global",
+      "hypothesis": "Test direct first-pointer initialization and a typed vector constant for the initial copy register schedule, plus explicit two-stage field address construction.",
+      "source": "\n\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\ntypedef struct ObjectState {\n    unsigned char prefix[0x550];\n    unsigned char fields[0x30];\n    float scalar;\n    unsigned char padding584[0x14];\n    Vec3 vector;\n    unsigned char padding5A4[0x20];\n    void* link;\n    unsigned char padding5C8[0x98];\n} ObjectState;\nextern ObjectState lbl_8063C6B8[];\n\nextern Vec3 lbl_8023B7D8;\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first = state_at(base, 1)->fields;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = lbl_8023B7D8;\n\n    fn_801F7034(first, 1);\n\n    second = state_at(base, 0)->fields;\n    fn_801F7034(second, 1);\n\n    state_at(base, 1)->link = second;\n    third = ((unsigned char*)state_at(base, 2));\n    state_at(base, 0)->vector = values;\n    state_at(base, 1)->vector = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(((unsigned char*)state_at(base, 2)) + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    state_at(base, 1)->scalar = lbl_80651460;\n    state_at(base, 0)->scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_first_init_vector_global.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_first_init_vector_global.json\n"
+        }
+      ],
+      "score": 76.76119,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_first_initialized.json",
+      "raw_objdiff_sha256": "237806327980ea40da2520d8e93301225ad9e44e3d8d2f4eed0416c20d1979b9"
+    },
+    {
+      "name": "typed_first_split_add",
+      "hypothesis": "Test direct first-pointer initialization and a typed vector constant for the initial copy register schedule, plus explicit two-stage field address construction.",
+      "source": "extern unsigned char lbl_8023B7D8[];\n\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\ntypedef struct ObjectState {\n    unsigned char prefix[0x550];\n    unsigned char fields[0x30];\n    float scalar;\n    unsigned char padding584[0x14];\n    Vec3 vector;\n    unsigned char padding5A4[0x20];\n    void* link;\n    unsigned char padding5C8[0x98];\n} ObjectState;\nextern ObjectState lbl_8063C6B8[];\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nstatic inline ObjectState* state_at(ObjectState* base, int index)\n{\n    return &base[index];\n}\n\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first = (unsigned char*)state_at(base, 1);\n    first += 0x550;\n    fn_801F7034(first, 1);\n\n    second = (unsigned char*)state_at(base, 0);\n    second += 0x550;\n    fn_801F7034(second, 1);\n\n    state_at(base, 1)->link = second;\n    third = ((unsigned char*)state_at(base, 2));\n    state_at(base, 0)->vector = values;\n    state_at(base, 1)->vector = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(((unsigned char*)state_at(base, 2)) + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    state_at(base, 1)->scalar = lbl_80651460;\n    state_at(base, 0)->scalar = lbl_80651460;\n    return first;\n}\n",
+      "commands": [
+        {
+          "argv": [
+            ".tools/bin/ninja",
+            "-j2",
+            "build/GEDE01/src/game/game_fn_801F7AF8.o"
+          ],
+          "exit_code": 0,
+          "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801F7AF8.o\n"
+        },
+        {
+          "argv": [
+            "build/tools/objdiff-cli",
+            "diff",
+            "-p",
+            ".",
+            "-u",
+            "main/game/game_fn_801F7AF8",
+            "fn_801F7AF8",
+            "-o",
+            "reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_first_split_add.json",
+            "--format",
+            "json-pretty"
+          ],
+          "exit_code": 0,
+          "output": " INFO Writing to reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_first_split_add.json\n"
+        }
+      ],
+      "score": 70.62687,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-99c28e11-41cb-47df-9729-339ef60388c8-typed_first_split_add.json",
+      "raw_objdiff_sha256": "6393f224494f5015633f324254850a9eb554fcda342602acf54b4f6812a9dad8"
+    }
+  ],
+  "measurement_storage": "Byte-identical raw outputs are deduplicated. Each successful experiment names its preserved raw_objdiff and SHA-256; recorded commands retain the original output destination for reproduction. Each source snapshot was compiled at the assigned source path using unchanged canonical flags.",
+  "prior_attempt_review": [
+    {
+      "command": [
+        "git",
+        "show",
+        "af890b6c73ce611903a79a5638724af23f67549e:eternal-darkness-decomp/src/game/game_fn_801F7AF8.c"
+      ],
+      "exit_code": 0,
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first = base[1].data;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first += 0x550;\n    fn_801F7034(first, 1);\n\n    second = base[0].data;\n    second += 0x550;\n    fn_801F7034(second, 1);\n\n    *(void**)(base[1].data + 0x5C4) = second;\n    third = base[2].data;\n    *(Vec3*)(base[0].data + 0x598) = values;\n    *(Vec3*)(base[1].data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(base[2].data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(base[1].data + 0x580) = lbl_80651460;\n    *(float*)(base[0].data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "sha256": "2020290e3590f197f6dcf6623ed93017f5301afb59559d625d759e2188af0171"
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "21aa11c0d70726d053c0cec63906a79195241435:eternal-darkness-decomp/src/game/game_fn_801F7AF8.c"
+      ],
+      "exit_code": 0,
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first = base[1].data;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first += 0x550;\n    fn_801F7034(first, 1);\n\n    second = base[0].data;\n    second += 0x550;\n    fn_801F7034(second, 1);\n\n    *(void**)(base[1].data + 0x5C4) = second;\n    third = base[2].data;\n    *(Vec3*)(base[0].data + 0x598) = values;\n    *(Vec3*)(base[1].data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(base[2].data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(base[1].data + 0x580) = lbl_80651460;\n    *(float*)(base[0].data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "sha256": "2020290e3590f197f6dcf6623ed93017f5301afb59559d625d759e2188af0171"
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "c76c3cc6e1b991642f848a8dd3f6efecfa62705c:eternal-darkness-decomp/src/game/game_fn_801F7AF8.c"
+      ],
+      "exit_code": 0,
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, const Vec3*, float);\nextern void fn_801F8620(void);\nextern void fn_801FA410(int);\n\n/* NonMatching: behavior-complete reconstruction. GC/1.3 emits 264 bytes\n * instead of 268, folds the first object and field offsets, and rematerializes\n * lbl_8063C6B8 after calls instead of retaining base/first/second/third in\n * r31/r29/r30/r28 as retail does. */\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    unsigned char* first = base[1].data;\n    unsigned char* second;\n    unsigned char* third;\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    first += 0x550;\n    fn_801F7034(first, 1);\n\n    second = base[0].data;\n    second += 0x550;\n    fn_801F7034(second, 1);\n\n    *(void**)(base[1].data + 0x5C4) = second;\n    third = base[2].data;\n    *(Vec3*)(base[0].data + 0x598) = values;\n    *(Vec3*)(base[1].data + 0x598) = values;\n\n    fn_801F8994(first, (Vec3*)third, *(float*)(third + 0x34));\n    fn_801F8994(second, (Vec3*)(base[2].data + 0x88), *(float*)(third + 0x34));\n    fn_801F8620();\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(base[1].data + 0x580) = lbl_80651460;\n    *(float*)(base[0].data + 0x580) = lbl_80651460;\n    return first;\n}\n",
+      "sha256": "2020290e3590f197f6dcf6623ed93017f5301afb59559d625d759e2188af0171"
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "b1deaecc5d0f97c34caa385fcf2423a19b175690:eternal-darkness-decomp/src/game/game_fn_801F7AF8.c"
+      ],
+      "exit_code": 0,
+      "source": "extern unsigned char lbl_8023B7D8[];\ntypedef struct ObjectState {\n    unsigned char data[0x660];\n} ObjectState;\n\nextern ObjectState lbl_8063C6B8[];\nextern float lbl_80651460;\nextern float lbl_80651464;\nextern float lbl_8064D7A0;\n\nextern void fn_801F7034(void*, int);\nextern void fn_801F8994(void*, float);\nextern void fn_801F8620(void*, void*);\nextern void fn_801FA410(int);\n\ntypedef struct Vec3 {\n    float x;\n    float y;\n    float z;\n} Vec3;\n\n/* NonMatching: behavior-complete reconstruction. Retail preserves the base,\n * both field pointers, and the third ObjectState in r31/r30/r29/r28. GC/1.3\n * folds the array/field offsets and retains only two nonvolatile pointers. */\nvoid* fn_801F7AF8(void)\n{\n    ObjectState* base = lbl_8063C6B8;\n    ObjectState* first = &base[1];\n    ObjectState* second = &base[0];\n    ObjectState* third = &base[2];\n    Vec3 values = *(Vec3*)lbl_8023B7D8;\n\n    fn_801F7034(first->data + 0x550, 1);\n    fn_801F7034(second->data + 0x550, 1);\n\n    *(void**)(first->data + 0x5C4) = second->data + 0x550;\n    *(Vec3*)(second->data + 0x598) = values;\n    *(Vec3*)(first->data + 0x598) = values;\n\n    fn_801F8994(first->data + 0x550, *(float*)(third->data + 0x34));\n    fn_801F8994(second->data + 0x550, *(float*)(third->data + 0x34));\n    fn_801F8620(second->data + 0x550, base->data + 0xD48);\n    fn_801FA410(10);\n\n    lbl_8064D7A0 = lbl_80651464;\n    *(float*)(first->data + 0x580) = lbl_80651460;\n    *(float*)(second->data + 0x580) = lbl_80651460;\n    return first->data + 0x550;\n}\n",
+      "sha256": "538a044877a582a90842ca4260cf552c26c67d8c75d259b81677b8d981c47ec2"
+    }
+  ],
+  "reconciliation": "af890b6c source is byte-identical to the accepted-base baseline_source; its retained 72.01492% version was measured fresh. Historical volatile-pointer, register-base and early-third variants were not repeated. New hypotheses and all their source/command/measurement evidence are recorded here.",
+  "selected_experiment": "typed_no_unused_helper",
+  "selection_reason": "83.25373%, 268 bytes, correct 0x30 frame and four saved registers, versus baseline 72.01492%, 264 bytes and three saved registers. No merely fuzzy-score size/frame regression is selected."
+}

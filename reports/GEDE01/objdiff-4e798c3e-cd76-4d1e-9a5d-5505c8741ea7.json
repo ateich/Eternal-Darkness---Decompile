@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "assignment_id": "4e798c3e-cd76-4d1e-9a5d-5505c8741ea7",
+  "attempt": 6,
+  "base_commit": "69acaac4595536ff5bceaa9fb06191b3e87133d0",
+  "target": "fn_80202E28",
+  "result": "matched",
+  "compiler": "GC/1.3",
+  "extra_cflags": [
+    "-use_lmw_stmw on"
+  ],
+  "source_sha256": "e3d228b5007d624764d7b01c882e9ca6659de7f3c65eb05bea3a613739187961",
+  "preserved_attempt_review": {
+    "commit": "8ac13356c66513ec1db1e4fe232bc2dd1759aa83",
+    "reported_score": 87.09044,
+    "finding": "Accepted base already contains the strongest preserved source. Earlier assignment diagnoses show that frame/triple/effect reconstruction has already been tried; this attempt addresses actual control-flow and declaration differences."
+  },
+  "new_hypothesis": "Retail repeats fn_802022B4 queries in four predicates and reloads the signed counter after callbacks; the 0xB5 action has two separate fallback paths. Preserve these observable operations rather than Boolean simplifications. Use declaration order and unsigned mask constants to recover register and instruction selection, and const-qualify the read-only float globals to permit the retail effect-call load scheduling.",
+  "changes": [
+    "Restored switch dispatch for the three vector cases and the separate action/event return paths.",
+    "Restored the retail null-effect predicate for action 0/type 0x3D, one target query before counter reset, and both 0xB5 fallback paths.",
+    "Restored repeated state-query predicates, counter reloads, separate transition branches and explicit call-result temporaries.",
+    "Corrected signed/unsigned comparisons, local declaration order and explicit unsigned bit-clear masks.",
+    "Adjusted ABI-compatible float argument positions and effect declarations; const float declarations resolve the final six effect-call scheduling differences.",
+    "Marked the two local C helpers inline so the object emits only the assigned function; no assembly used.",
+    "Promoted only the target registration from NonMatching to Matching; split and canonical compiler settings unchanged."
+  ],
+  "exploratory_scores": [
+    93.35031,
+    96.564445,
+    97.85863,
+    98.08732,
+    100.0
+  ],
+  "canonical_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80202E28 fn_80202E28 -o reports/GEDE01/objdiff-4e798c3e-cd76-4d1e-9a5d-5505c8741ea7-canonical.raw.json --format json-pretty",
+    "exit_code": 0,
+    "raw_result": "eternal-darkness-decomp/reports/GEDE01/objdiff-4e798c3e-cd76-4d1e-9a5d-5505c8741ea7-canonical.raw.json",
+    "match_percent": 100.0,
+    "target_size": 3848,
+    "candidate_size": 3848,
+    "target_relocation_bearing_instructions": 197,
+    "candidate_relocation_bearing_instructions": 197,
+    "divergent_instruction_rows": 0
+  },
+  "relocation_strict_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80202E28 fn_80202E28 -o reports/GEDE01/objdiff-4e798c3e-cd76-4d1e-9a5d-5505c8741ea7-relocation-strict.raw.json --format json-pretty -c function_reloc_diffs=name_address",
+    "exit_code": 0,
+    "raw_result": "eternal-darkness-decomp/reports/GEDE01/objdiff-4e798c3e-cd76-4d1e-9a5d-5505c8741ea7-relocation-strict.raw.json",
+    "match_percent": 100.0,
+    "target_size": 3848,
+    "candidate_size": 3848,
+    "target_relocation_bearing_instructions": 197,
+    "candidate_relocation_bearing_instructions": 197,
+    "divergent_instruction_rows": 0
+  },
+  "byte_and_relocation_verification": {
+    "raw_result": "eternal-darkness-decomp/reports/GEDE01/byte-relocation-4e798c3e-cd76-4d1e-9a5d-5505c8741ea7.json",
+    "text_bytes_equal": true,
+    "text_size": 3848,
+    "text_sha256": "93be2bdad6fb9013d1a813d2c5eac07dc73d0530058f03fc5df081888434ae65",
+    "raw_relocation_records_equal": true,
+    "raw_relocation_records": 188,
+    "note": "Objdiff reports 197 relocation-bearing instruction rows; raw ELF has 188 .rela.text records. All records compare equal by offset, type, target name/value and signed addend."
+  },
+  "build": {
+    "working_directory": "eternal-darkness-decomp",
+    "command": "python3 configure.py && .tools/bin/ninja -j2",
+    "exit_code": 0,
+    "raw_log": "eternal-darkness-decomp/reports/GEDE01/build-4e798c3e-cd76-4d1e-9a5d-5505c8741ea7-final.log",
+    "matching_source_linked": true,
+    "dol_check": "build/GEDE01/main.dol: OK"
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "expected": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "actual": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "raw_result": "eternal-darkness-decomp/reports/GEDE01/dol-sha1-4e798c3e-cd76-4d1e-9a5d-5505c8741ea7.log",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\n"
+  },
+  "legal_audit": {
+    "command": "python3 tools/legal_audit.py",
+    "exit_code": 0,
+    "raw_result": "eternal-darkness-decomp/reports/GEDE01/legal-audit-4e798c3e-cd76-4d1e-9a5d-5505c8741ea7.log",
+    "independent_translation_unit": "eternal-darkness-decomp/src/game/game_fn_80202E28.c",
+    "inline_or_whole_function_assembly": false,
+    "neighboring_function_edits": false,
+    "compiler_policy_or_gate_changes": false,
+    "runtime_or_global_progress_edits": false,
+    "generated_binaries_or_private_inputs_in_commit": false
+  },
+  "divergence": ""
+}

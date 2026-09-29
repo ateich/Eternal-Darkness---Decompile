@@ -34,6 +34,7 @@ extern const float lbl_80651464;
 extern void fn_8017974C(short*, short*, Vec3*, float);
 extern void fn_80179814(short*, short*, short*, short*, Vec3*, float);
 
+/* NonMatching: behavior-complete interpolation reconstruction. */
 float fn_801F8FAC(Vec3* output, MotionResource* resource, float time)
 {
     int whole = (int)time;
@@ -78,6 +79,8 @@ float fn_801F8FAC(Vec3* output, MotionResource* resource, float time)
         int neighbor;
         int current_offset;
         int neighbor_offset;
+        int current_time;
+        int duration;
 
         index = 0;
         while (whole > key->time && index < last) {
@@ -91,13 +94,14 @@ float fn_801F8FAC(Vec3* output, MotionResource* resource, float time)
         }
         current_offset = index * 0xC;
         neighbor_offset = neighbor * 0xC;
+        current_time = *(int*)((unsigned char*)keys + current_offset);
+        duration = *(int*)((unsigned char*)keys + neighbor_offset) - current_time;
 
         lbl_8063D4EC[0].x = *(short*)((unsigned char*)keys + current_offset + 4);
+        amount = (time - current_time) / duration;
+        keys = resource->linear_keys;
         lbl_8063D4EC[0].y = *(short*)((unsigned char*)keys + current_offset + 6);
         lbl_8063D4EC[0].z = *(short*)((unsigned char*)keys + current_offset + 8);
-        amount = (amount - lbl_8063D4EC[0].x) /
-                 (*(int*)((unsigned char*)keys + neighbor_offset) -
-                  *(int*)((unsigned char*)keys + current_offset));
         lbl_8063D4EC[1].x = *(short*)((unsigned char*)keys + neighbor_offset + 4);
         lbl_8063D4EC[1].y = *(short*)((unsigned char*)keys + neighbor_offset + 6);
         lbl_8063D4EC[1].z = *(short*)((unsigned char*)keys + neighbor_offset + 8);

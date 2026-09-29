@@ -30,11 +30,7 @@ typedef struct EffectState {
     u8 field_30;
 } EffectState;
 
-extern float lbl_80650CA8;
 extern float lbl_80650D10;
-extern float lbl_80650D28;
-extern float lbl_80650D2C;
-extern float lbl_80650D30;
 extern u32 lbl_80607440[];
 extern int lbl_8064D18C;
 extern void fn_801EF384(void*);
@@ -46,57 +42,65 @@ int fn_801A1F8C(u8* object)
     EffectState* state;
     Particle* particle;
     float scale;
+    float limit;
     int count;
     int i;
+    int spawned;
 
     fn_801EF384(object);
     state = (EffectState*)(object + 0x8C);
-    particle = *(Particle**)(object + 0x4C);
-    scale = *(float*)(object + 0x90);
-    count = object[1];
+    particle = *(Particle* volatile*)((u8*)state - 0x40);
+    scale = *(volatile float*)(object + 0x90);
+    limit = *(volatile float*)(object + 0x94);
+    count = *(volatile u8*)(object + 1);
 
-    if (*(float*)(object + 0x94) < scale) {
-        scale = *(float*)(object + 0x94);
-        state->age = *(float*)(object + 0x94) + state->step;
+    if (limit < scale) {
+        scale = limit;
+        state->age = limit + state->step;
     }
 
     for (i = 0; i < count; i++, particle++) {
         int value;
+        int clamped;
         if ((state->phase ^ 1) != 0) {
             float t = scale;
             if (scale >= lbl_80650D10) {
-                particle->x = particle->x + (s16)((particle->dx - particle->x) * t);
-                particle->y = particle->y + (s16)((particle->dy - particle->y) * t);
-                particle->z = particle->z + (s16)((particle->dz - particle->z) * t);
+                particle->x = particle->x + particle->dx * t;
+                particle->y = particle->y + particle->dy * t;
+                particle->z = particle->z + particle->dz * t;
             } else {
                 t = state->phase * scale;
                 if (t >= lbl_80650D10) {
-                    particle->x = particle->x + (s16)((particle->dx - particle->x) * t);
-                    particle->y = particle->y + (s16)((particle->dy - particle->y) * t);
-                    particle->z = particle->z + (s16)((particle->dz - particle->z) * t);
+                    particle->x = particle->x + particle->dx * t;
+                    particle->y = particle->y + particle->dy * t;
+                    particle->z = particle->z + particle->dz * t;
                 }
             }
         }
 
-        value = state->values[i] + (fn_800FBFB0() % 3) + 1;
-        if (value > 255) {
-            value = 255;
-        }
-        state->values[i] = value;
+        value = state->values[i] + (fn_800FBFB0() % 3);
+        value++;
+        clamped = value > 255 ? 255 : value;
+        state->values[i] = clamped;
         particle->colour0 = lbl_80607440[state->values[i]];
         particle->colour1 = lbl_80607440[state->values[i]];
         particle->colour2 = lbl_80607440[state->values[i]];
         particle->colour3 = lbl_80607440[state->values[i]];
-        particle->alpha = (u8)(lbl_80650D28 *
-            (lbl_80650D2C + (lbl_80650CA8 - state->values[i]) / lbl_80650CA8) * scale);
+        {
+            float alpha = 40.0f * (0.5f + (255.0f - state->values[i]) / 255.0f);
+            particle->alpha = (u8)(alpha * scale);
+        }
     }
 
-    state->phase++;
     particle = *(Particle**)(object + 0x4C);
+    state->phase++;
     if (state->phase >= 4) {
+        float spawn_alpha;
         state->phase = 0;
-        for (i = 0; i < count; i++, particle++) {
-            int index = i + 0x10;
+        spawn_alpha = 60.0f * scale;
+        spawned = 0;
+        for (i = 0; i < count; particle++, i++) {
+            int index = i;
             if (state->values[index] == 255) {
                 int random;
                 random = fn_800FBFB0();
@@ -108,20 +112,24 @@ int fn_801A1F8C(u8* object)
                 particle->dx = 1 - (fn_800FBFB0() & 1);
                 particle->dy = 1 - (fn_800FBFB0() & 1);
                 particle->dz = (fn_800FBFB0() & 1) + 1;
-                particle->colour0 = lbl_80607440[0];
-                particle->colour1 = lbl_80607440[0];
-                particle->colour2 = lbl_80607440[0];
-                particle->colour3 = lbl_80607440[0];
-                particle->alpha = (u8)(lbl_80650D30 * scale);
-                break;
+                spawned++;
+                particle->colour0 = lbl_80607440[state->values[index]];
+                particle->colour1 = lbl_80607440[state->values[index]];
+                particle->colour2 = lbl_80607440[state->values[index]];
+                particle->colour3 = lbl_80607440[state->values[index]];
+                particle->alpha = (u8)spawn_alpha;
+                if (spawned == 1) {
+                    break;
+                }
             }
         }
     }
 
     (*(u16*)(object + 0xA))++;
-    if (*(u16*)(object + 0xC) != 0 &&
-        *(u16*)(object + 0xA) >= *(u16*)(object + 0xC)) {
-        fn_801A29E0(object);
+    if (*(u16*)(object + 0xA) >= *(u16*)(object + 0xC)) {
+        if (*(u16*)(object + 0xC) != 0) {
+            fn_801A29E0(object);
+        }
     }
     if (state->field_30 != 0 && lbl_8064D18C != *(int*)(object + 0x38)) {
         *(u16*)(object + 0x22) = 8;

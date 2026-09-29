@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "7ecf351d-3268-4a3a-aec0-f956edb8d03b",
+  "attempt": 3,
+  "base_commit": "2f53b104a8605007b3f6bb3b6045fd3a5bfa8b3f",
+  "target": "fn_80020150",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-7ecf351d-3268-4a3a-aec0-f956edb8d03b.json"
+  ],
+  "divergence": "Relocation-strict objdiff scores 64.984535%: retail/generated .text are 3104/2776 bytes and .rela.text are 2016/2136 bytes (168/178 relocation records). Retail saves r26-r31 and preserves separately derived base+0x1C pointers before adding +0x40/+0x3C; generated saves r25-r31, folds them to base+0x5C/base+0x58, then directly loads 0x30(r31). This changes register allocation through the dispatcher. A distinct explicit pointer-lifetime hypothesis regressed to 62.240980%, 2852 text bytes, and 198 relocations, so it was rejected."
+}

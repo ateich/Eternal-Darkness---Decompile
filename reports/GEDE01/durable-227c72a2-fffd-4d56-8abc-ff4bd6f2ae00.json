@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "assignment_id": "227c72a2-fffd-4d56-8abc-ff4bd6f2ae00",
+  "attempt": 5,
+  "base_commit": "64fa9c91606c412b5fbbc1176028a7d7c163c43f",
+  "target": "fn_801F7C78",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-227c72a2-fffd-4d56-8abc-ff4bd6f2ae00.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-227c72a2-fffd-4d56-8abc-ff4bd6f2ae00-canonical.json",
+    "eternal-darkness-decomp/reports/GEDE01/verification-227c72a2-fffd-4d56-8abc-ff4bd6f2ae00.json",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-227c72a2-fffd-4d56-8abc-ff4bd6f2ae00.json"
+  ],
+  "divergence": "Canonical and relocation-strict scores improve from 86.60526% to 88.89474%. Retail is 456 bytes/114 instructions; generated GC/1.3 code is 448 bytes/112 instructions, with 73 versus 71 objdiff function relocations. Integer-address arguments eliminate rematerialization before the second setup call, preserving the initial load sequence and complete interleaved loop. GC/1.3 still rematerializes lbl_8063C6B8 after the second setup call and for callback setup, stores lbl_8064D7BC before the callbacks, folds the target-copy and final initialization pointers into direct r31-relative displacements, and differs in final callback/address materialization order. Exact text bytes and ELF relocation lists remain unequal."
+}

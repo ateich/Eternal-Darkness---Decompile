@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "1a0bc9ad-e09c-43e7-9719-8f581bd543a0",
+  "attempt": 4,
+  "base_commit": "b4b8fc69133b3cb82039bc1a0a699d0717efecd4",
+  "target": "fn_8015AEB8",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-1a0bc9ad-e09c-43e7-9719-8f581bd543a0.json"
+  ],
+  "divergence": "Canonical GC/1.3 is exact-size at 956 bytes and relocation-strict objdiff is 83.728035%. At offset 0x8 retail schedules li r6,0 and lis r7,lbl_805B6E00@ha, stores LR at 0x10, and emits direct stmw r16,0x10(r1) at 0x18; generated stores LR at 0x8, forms r11=r1+0x50, and calls _savegpr_16 at 0x10. Register allocation then differs (retail base/base2/base3 r27/r28/r29, count r30, flags r31; generated r28/r27/r31, r29, r30), propagating instruction and relocation-placement differences. Independent symbol-derived bases were tested under unchanged canonical settings and were codegen-neutral."
+}

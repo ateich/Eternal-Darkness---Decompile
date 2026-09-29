@@ -1,0 +1,35 @@
+--- a/eternal-darkness-decomp/src/game/game_fn_801F1A38.c
++++ b/eternal-darkness-decomp/src/game/game_fn_801F1A38.c
+@@ -64,7 +64,7 @@
+ #pragma use_lmw_stmw on
+ 
+ s32 fn_801F1A38(Vec3* point, Vec3* target, Input* input, s32 group,
+-                 s32 requested, u32 flags, float scale)
++                 s32 requested, s32 flags, float scale)
+ {
+     s32 max_count;
+     Candidate** candidates;
+@@ -110,7 +110,7 @@
+         if (flags & 1) {
+             s32 minimum = fn_801F1A24(i);
+             if (flags & 2) minimum *= 5;
+-            if (effects[i].intensity < minimum) effects[i].intensity = minimum;
++            effects[i].intensity = minimum > effects[i].intensity ? minimum : effects[i].intensity;
+             fn_801F0CB0(&effects[i], point, target, i, 0, 0, 0);
+         } else {
+             effects[i].intensity = (s32)((float)effects[i].intensity * scale);
+--- a/eternal-darkness-decomp/configure.py
++++ b/eternal-darkness-decomp/configure.py
+@@ -3433,10 +3433,10 @@
+     {
+         "name": "externalize_game_801F1A38_signed_bias",
+         "command": (
+-            "python3 tools/externalize_elf_symbol.py $in @122 lbl_80651360 "
++            "python3 tools/externalize_elf_symbol.py $in @124 lbl_80651360 "
+             "orig/GEDE01/sys/main.dol --require-whole-section && "
+             "build/binutils/powerpc-eabi-objcopy "
+-            "--redefine-sym=@122=lbl_80651360 --remove-section=.sdata2 "
++            "--redefine-sym=@124=lbl_80651360 --remove-section=.sdata2 "
+             "--rename-section=.comment=.ignored $in && touch $out"
+         ),
+         "description": "EXTERNALIZE $in",

@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "assignment_id": "e59e6aaa-28c6-4824-a66e-d0e3dfde05c4",
+  "target": "fn_801FAD4C",
+  "source": "eternal-darkness-decomp/src/game/game_fn_801FAD4C.c",
+  "source_sha256": "dfb1bb82b98f26fbd7686ab04a6e6a200b5cb6fe27c00dc49907889c6a97a7c3",
+  "reviewed_history": {
+    "5999da360dba1916d6d902ef9114012168f0b80e": "Declaration order, offset initialization, loop increment order, explicit block bases reached 80.309944%.",
+    "55e33a5fad8d7fa66c8bef5fc2975e429ee077ee": "Separate extern symbols and two incremented pointer induction variables both rejected. Neither repeated.",
+    "06543737efbd68f231ba32e1c60d73dd4deabee2": "Repeated separate-symbol experiment; summary-only evidence rejected in review. No such experiment repeated here.",
+    "a44c7fc1b8672502ef3db81b91432eaafc4a2ad2": "Explicit final u16 alignment cast retained at 82.128654%; explicit unroll rejected. Accepted base already contains this source."
+  },
+  "new_hypotheses": [
+    {
+      "description": "Starting from HEAD with signed refresh: change offset to u32, cast input offsets to u16, and explicitly narrow each parser-call sum to u16. Extra return narrowing and moves regress codegen. Callee u16 declaration unchanged.",
+      "raw_evidence": "eternal-darkness-decomp/reports/GEDE01/objdiff-e59e6aaa-28c6-4824-a66e-d0e3dfde05c4-wide-offset.json",
+      "match_percent": 74.91228,
+      "retail_bytes": 684,
+      "generated_bytes": 700,
+      "aligned_rows": 188,
+      "difference_counts": {
+        "DIFF_ARG_MISMATCH": 60,
+        "DIFF_INSERT": 17,
+        "DIFF_REPLACE": 12,
+        "DIFF_DELETE": 13
+      },
+      "relocation_instructions": {
+        "left": 23,
+        "right": 23
+      }
+    },
+    {
+      "description": "Starting from HEAD: change Header.refresh from u32 to int; reproduces retail cmpwi with identical zero/nonzero semantics.",
+      "raw_evidence": "eternal-darkness-decomp/reports/GEDE01/objdiff-e59e6aaa-28c6-4824-a66e-d0e3dfde05c4-signed-refresh.json",
+      "match_percent": 82.22222,
+      "retail_bytes": 684,
+      "generated_bytes": 660,
+      "aligned_rows": 178,
+      "difference_counts": {
+        "DIFF_ARG_MISMATCH": 49,
+        "DIFF_DELETE": 13,
+        "DIFF_INSERT": 7,
+        "DIFF_REPLACE": 9
+      },
+      "relocation_instructions": {
+        "left": 23,
+        "right": 23
+      }
+    },
+    {
+      "description": "Starting from signed-refresh: remove local globals pointer and replace all globals-> references with lbl_8063C6B8. accesses. Repeated address materialization loses the baseline register layout.",
+      "raw_evidence": "eternal-darkness-decomp/reports/GEDE01/objdiff-e59e6aaa-28c6-4824-a66e-d0e3dfde05c4-direct-fields.json",
+      "match_percent": 69.78362,
+      "retail_bytes": 684,
+      "generated_bytes": 696,
+      "aligned_rows": 192,
+      "difference_counts": {
+        "DIFF_REPLACE": 14,
+        "DIFF_ARG_MISMATCH": 48,
+        "DIFF_DELETE": 18,
+        "DIFF_INSERT": 21
+      },
+      "relocation_instructions": {
+        "left": 23,
+        "right": 33
+      }
+    },
+    {
+      "description": "Starting from signed-refresh: use u8* globals = (u8*)&lbl_8063C6B8 and typed Block casts at offsets 0, 0x660, 0xCC0, 0xD48; entries at 0xDD0. Less effective address folding.",
+      "raw_evidence": "eternal-darkness-decomp/reports/GEDE01/objdiff-e59e6aaa-28c6-4824-a66e-d0e3dfde05c4-byte-base.json",
+      "match_percent": 80.91228,
+      "retail_bytes": 684,
+      "generated_bytes": 656,
+      "aligned_rows": 178,
+      "difference_counts": {
+        "DIFF_ARG_MISMATCH": 52,
+        "DIFF_DELETE": 14,
+        "DIFF_INSERT": 7,
+        "DIFF_REPLACE": 11
+      },
+      "relocation_instructions": {
+        "left": 23,
+        "right": 23
+      }
+    },
+    {
+      "description": "Starting from signed-refresh: in each optional-record branch declare int index from the record byte, u8* data from input + offset, Block* block from the corresponding array, then block += index and pass data/block. Changes register selection and truncation scheduling unfavorably.",
+      "raw_evidence": "eternal-darkness-decomp/reports/GEDE01/objdiff-e59e6aaa-28c6-4824-a66e-d0e3dfde05c4-call-temporaries.json",
+      "match_percent": 81.49123,
+      "retail_bytes": 684,
+      "generated_bytes": 656,
+      "aligned_rows": 178,
+      "difference_counts": {
+        "DIFF_ARG_MISMATCH": 53,
+        "DIFF_DELETE": 14,
+        "DIFF_INSERT": 7,
+        "DIFF_REPLACE": 9
+      },
+      "relocation_instructions": {
+        "left": 23,
+        "right": 23
+      }
+    }
+  ],
+  "retained_hypothesis": "Signed Header.refresh plus iteration-local Block* first and Block* second computed from i; stores through these aliases. These are recomputed indexed aliases, not the historically rejected pair of incremented induction pointers. Compiler scheduling changes improve the measured score to 82.86549%.",
+  "canonical": {
+    "match_percent": 82.86549,
+    "retail_bytes": 684,
+    "generated_bytes": 660,
+    "aligned_rows": 177,
+    "difference_counts": {
+      "DIFF_ARG_MISMATCH": 49,
+      "DIFF_DELETE": 12,
+      "DIFF_INSERT": 6,
+      "DIFF_REPLACE": 10
+    },
+    "relocation_instructions": {
+      "left": 23,
+      "right": 23
+    }
+  },
+  "relocation_strict": {
+    "config": "function_reloc_diffs=name_address",
+    "raw_evidence": "eternal-darkness-decomp/reports/GEDE01/objdiff-e59e6aaa-28c6-4824-a66e-d0e3dfde05c4-reloc-strict.json",
+    "byte_identical_to_canonical": true,
+    "match_percent": 82.86549,
+    "retail_bytes": 684,
+    "generated_bytes": 660,
+    "aligned_rows": 177,
+    "difference_counts": {
+      "DIFF_ARG_MISMATCH": 49,
+      "DIFF_DELETE": 12,
+      "DIFF_INSERT": 6,
+      "DIFF_REPLACE": 10
+    },
+    "relocation_instructions": {
+      "left": 23,
+      "right": 23
+    }
+  },
+  "compiler_registration": "Object(NonMatching, \"game/game_fn_801FAD4C.c\", mw_version=\"GC/1.3\", extra_cflags=[\"-use_lmw_stmw on\"])",
+  "commands": [
+    {
+      "cwd": "eternal-darkness-decomp",
+      "command": "python3 configure.py",
+      "exit_code": 0,
+      "raw_output_file": "eternal-darkness-decomp/reports/GEDE01/configure-e59e6aaa-28c6-4824-a66e-d0e3dfde05c4.log"
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "command": ".tools/bin/ninja -j2",
+      "exit_code": 0,
+      "raw_output_file": "eternal-darkness-decomp/reports/GEDE01/build-e59e6aaa-28c6-4824-a66e-d0e3dfde05c4.log"
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801FAD4C fn_801FAD4C -o reports/GEDE01/objdiff-e59e6aaa-28c6-4824-a66e-d0e3dfde05c4.json --format json-pretty",
+      "exit_code": 0
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801FAD4C fn_801FAD4C -o reports/GEDE01/objdiff-e59e6aaa-28c6-4824-a66e-d0e3dfde05c4-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+      "exit_code": 0
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+      "exit_code": 0,
+      "raw_output_file": "eternal-darkness-decomp/reports/GEDE01/dol-sha1-e59e6aaa-28c6-4824-a66e-d0e3dfde05c4.log"
+    },
+    {
+      "cwd": ".",
+      "command": "python3 eternal-darkness-decomp/tools/legal_audit.py",
+      "exit_code": 0,
+      "raw_output_file": "eternal-darkness-decomp/reports/GEDE01/legal-audit-e59e6aaa-28c6-4824-a66e-d0e3dfde05c4.log"
+    }
+  ],
+  "legal_scope": "Only the independent assigned C translation unit and assignment reports changed. No assembly, neighboring-function edits, shared reconstruction, policy or gate changes, global progress edits, private input changes, or generated binaries committed. Existing unrelated CLAUDE.md modification excluded. Raw objdiff reports retained as explicitly required evidence.",
+  "dol_note": "The NonMatching registration links the retail function; the passing whole-DOL hash does not establish a match for the C candidate.",
+  "divergence": "Canonical GC/1.3 emits 660 bytes versus retail 684; canonical and relocation-strict objdiff both measure 82.86549% (byte-identical raw reports). Signed refresh and iteration-local indexed Block pointers improve the preserved 82.128654% candidate. Remaining 77 differing aligned rows: 49 argument mismatches, 12 deletes, 6 inserts, 10 replacements. Differences begin in the first optional block call at retail offset 0xC4: index/input register assignment, missing post-call u16 narrowing, and address/argument scheduling. Later aggregate link stores fold offsets into r31 instead of separate Block bases; twelve-element initialization uses different base registers, store order, and induction. Both sides have 23 relocation-bearing instructions; no 100% relocation/byte match claimed. Full build passes and DOL SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f.",
+  "raw_log_note": "Build log retains native CRLF from the linker; git diff whitespace check passes with cr-at-eol for this raw output."
+}

@@ -41,36 +41,29 @@ extern void fn_80228B50(void*, void*, u32, u16);
 extern void fn_802286E8(void*, void*, u16, u16, u32, u32, u32, int, u32);
 extern void fn_80228730(void*, u32, u32, float, float, float, int, u8, int);
 
-void fn_8015DC54(ResourceTable* table, void* first_context, void* second_context,
-                 u32 final_argument, u32 index)
+void fn_8015DC54(ResourceTable* table, register void* first_context,
+                 register void* second_context, register u32 final_argument,
+                 u32 index)
 {
     EntryPair* pair;
     enum { SAME, DIFFERENT } different;
-    u32 saved_final;
-    void* saved_second;
-    void* saved_first;
     EntryA* entry;
 
-    saved_final = final_argument;
-    saved_second = second_context;
-    saved_first = first_context;
     pair = fn_8015DB74(table, index);
-    entry = pair->first;
-    if (entry->field21 == entry->field22) {
+    if (pair->first->field21 == pair->first->field22) {
         different = 0;
     } else {
         different = 1;
     }
 
-    fn_80228B50(saved_second, pair->second->field8,
+    fn_80228B50(second_context, pair->second->field8,
                 pair->second->field4, pair->second->field0);
     entry = pair->first;
-    fn_802286E8(saved_first, entry->data, entry->field2, entry->field0,
+    fn_802286E8(first_context, entry->data, entry->field2, entry->field0,
                 entry->field4, entry->fieldC, entry->field10, different,
-                saved_final);
+                final_argument);
 
-    entry = pair->first;
-    fn_80228730(saved_first, entry->field14, entry->field18,
-                (float)entry->field21, (float)entry->field22, entry->field1C,
-                0, entry->field20, 0);
+    fn_80228730(first_context, pair->first->field14, pair->first->field18,
+                (float)pair->first->field21, (float)pair->first->field22,
+                pair->first->field1C, 0, pair->first->field20, 0);
 }

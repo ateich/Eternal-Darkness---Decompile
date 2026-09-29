@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "assignment_id": "d52d5a56-f048-4873-8b04-3d7af65c1ef4",
+  "attempt": 6,
+  "target": "fn_8005EF94",
+  "status": "attempted",
+  "compiler": "mwcc_242_53 (GC/1.3), canonical flags plus -use_lmw_stmw on",
+  "recovery": {
+    "accepted_base": "41fd3fb370878109971bec760840b5fd371e2132",
+    "preserved_commit": "c9c7ef8f65853d38e850dd1b6c5964ef84f9aebc",
+    "detail": "Recovered only the preserved target translation-unit refinement, then tested a distinct side-effecting-condition evaluation-order hypothesis supported by retail assembly."
+  },
+  "hypothesis": {
+    "description": "Retail calls fn_8020123C before loading and range-checking object_state->variant, whereas the preserved C evaluated variant first. Reversing the && operands should align the side-effecting call and subsequent switch layout.",
+    "result": "Confirmed in generated disassembly: the call moved before the variant load and generated .text shrank from 2028 to 2020 bytes. Aggregate objdiff remained 68.33199%. A forced-stack volatile accept variant regressed to 68.253525% and was discarded."
+  },
+  "canonical": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8005EF94 fn_8005EF94 -o build/GEDE01/objdiff-d52d5a56-canonical.raw.json --format json",
+    "raw_output": "INFO Writing to build/GEDE01/objdiff-d52d5a56-canonical.raw.json",
+    "raw_sha256": "778ca37fab8665c136661a0576d31643c1bcc063f4a21c86c78279fc132d07dd",
+    "match_percent": 68.33199,
+    "section_output": ".text\\t1988\\t68.33199\\n.rodata\\t16\\t100.0\\n.data\\t100\\t0.0",
+    "generated_text_bytes": 2020
+  },
+  "relocation_strict": {
+    "command": "build/tools/objdiff-cli diff -1 build/GEDE01/obj/game/game_fn_8005EF94.o -2 build/GEDE01/src/game/game_fn_8005EF94.o fn_8005EF94 -o build/GEDE01/objdiff-d52d5a56-relocation-strict.raw.json --format json",
+    "raw_output": "INFO Writing to build/GEDE01/objdiff-d52d5a56-relocation-strict.raw.json",
+    "raw_sha256": "778ca37fab8665c136661a0576d31643c1bcc063f4a21c86c78279fc132d07dd",
+    "byte_identical_to_canonical": true,
+    "match_percent": 68.33199,
+    "retail_text_relocations": 67,
+    "generated_text_relocations": 67,
+    "raw_relocation_excerpt": "retail: 0000002c R_PPC_REL24 fn_80201B9C + 0; generated: 00000030 R_PPC_REL24 fn_80201B9C + 0; retail: 00000220 R_PPC_REL24 fn_8020123C + 0; generated: 00000240 R_PPC_REL24 fn_8020123C + 0",
+    "relocation_targets_and_addends_accepted": false
+  },
+  "owned_sections": {
+    ".text": {"retail_bytes": 1988, "generated_bytes": 2020, "match_percent": 68.33199},
+    ".rodata": {"retail_bytes": 16, "generated_bytes": 16, "match_percent": 100.0},
+    ".data": {"retail_bytes": 100, "generated_bytes": 100, "match_percent": 0.0, "detail": "The 25-entry switch table retains divergent control-flow-label addends."}
+  },
+  "exact_codegen_divergence": "Retail uses a 0x190-byte frame and saves r14-r31, while generated code uses a 0x170-byte frame and assigns incoming arguments differently from the prologue onward. Generated .text is 32 bytes longer (2020 versus 1988). Both .rela.text sections contain 67 entries, but relocation offsets differ from the first call and subsequent targets/addends follow divergent control-flow locations; the 100-byte switch table remains 0% because its 25 branch-label addends diverge.",
+  "build": {
+    "commands": ["python3 configure.py", ".tools/bin/ninja -j2"],
+    "raw_output": "build/GEDE01/main.dol: OK",
+    "dol_sha1_command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "dol_sha1_raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol"
+  },
+  "legal_audit": {
+    "translation_unit": "src/game/game_fn_8005EF94.c",
+    "independent_translation_unit": true,
+    "inline_or_whole_function_assembly": false,
+    "register_binding": false,
+    "runtime_or_gate_changes": false,
+    "neighboring_function_changes": false,
+    "private_or_generated_inputs_committed": false
+  }
+}

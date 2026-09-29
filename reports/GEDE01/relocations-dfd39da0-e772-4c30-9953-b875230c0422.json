@@ -1,0 +1,14 @@
+{
+  "retail": {
+    "command": "build/binutils/powerpc-eabi-readelf -Wr -s build/GEDE01/obj/game/game_fn_801FA410.o",
+    "stdout": "\nRelocation section '.rela.text' at offset 0x7c contains 4 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n00000002  00000406 R_PPC_ADDR16_HA        00000000   lbl_8063C6B8 + 0\n00000004  0000056d R_PPC_EMB_SDA21        00000000   lbl_8064C3A8 + 0\n0000000a  00000404 R_PPC_ADDR16_LO        00000000   lbl_8063C6B8 + 0\n00000010  0000056d R_PPC_EMB_SDA21        00000000   lbl_8064C3A8 + 0\n\nSymbol table '.symtab' contains 6 entries:\n   Num:    Value  Size Type    Bind   Vis      Ndx Name\n     0: 00000000     0 NOTYPE  LOCAL  DEFAULT  UND \n     1: 00000000     0 FILE    LOCAL  DEFAULT  ABS game_fn_801FA410.c\n     2: 00000000     0 SECTION LOCAL  DEFAULT    1 .text\n     3: 00000000    60 FUNC    GLOBAL DEFAULT    1 fn_801FA410\n     4: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND lbl_8063C6B8\n     5: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND lbl_8064C3A8\n",
+    "stderr": "",
+    "returncode": 0
+  },
+  "candidate": {
+    "command": "build/binutils/powerpc-eabi-readelf -Wr -s build/GEDE01/src/game/game_fn_801FA410.o",
+    "stdout": "\nRelocation section '.rela.text' at offset 0x60 contains 4 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n00000006  00000406 R_PPC_ADDR16_HA        00000000   lbl_8063C6B8 + 0\n00000008  0000036d R_PPC_EMB_SDA21        00000000   lbl_8064C3A8 + 0\n0000000e  00000404 R_PPC_ADDR16_LO        00000000   lbl_8063C6B8 + 0\n00000014  0000036d R_PPC_EMB_SDA21        00000000   lbl_8064C3A8 + 0\n\nSymbol table '.symtab' contains 6 entries:\n   Num:    Value  Size Type    Bind   Vis      Ndx Name\n     0: 00000000     0 NOTYPE  LOCAL  DEFAULT  UND \n     1: 00000000     0 FILE    LOCAL  DEFAULT  ABS game_fn_801FA410.c\n     2: 00000000     0 SECTION LOCAL  DEFAULT    1 .text\n     3: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND lbl_8064C3A8\n     4: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND lbl_8063C6B8\n     5: 00000000    44 FUNC    GLOBAL DEFAULT    1 fn_801FA410\n",
+    "stderr": "",
+    "returncode": 0
+  }
+}

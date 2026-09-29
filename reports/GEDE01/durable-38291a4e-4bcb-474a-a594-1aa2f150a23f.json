@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "assignment_id": "38291a4e-4bcb-474a-a594-1aa2f150a23f",
+  "attempt": 6,
+  "base_commit": "1608e3e5a70bb107f19fad5887cad66149119e6b",
+  "target": "fn_8015DF60",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-38291a4e-4bcb-474a-a594-1aa2f150a23f.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-38291a4e-4bcb-474a-a594-1aa2f150a23f-canonical.json",
+    "eternal-darkness-decomp/reports/GEDE01/bytes-relocations-38291a4e-4bcb-474a-a594-1aa2f150a23f.json",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-38291a4e-4bcb-474a-a594-1aa2f150a23f.json",
+    "eternal-darkness-decomp/reports/GEDE01/verification-38291a4e-4bcb-474a-a594-1aa2f150a23f.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 99.9375% with equal 320-byte bodies. The sole instruction difference is at function offset 0xB4: retail has lwz r4, 0x1c(r5) (80 85 00 1c), while generated code has lwz r3, 0x1c(r5) (80 65 00 1c), reusing r3 before the next load at 0xB8. All 10 relocation offsets, types, targets, symbol values, and addends agree. Twenty-two new source variants targeting arithmetic elimination, aggregate destinations, volatility, field types, and layout did not improve the retained candidate. The full NonMatching build separately passed the DOL gate at SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f; this build gate does not establish a generated-function match."
+}

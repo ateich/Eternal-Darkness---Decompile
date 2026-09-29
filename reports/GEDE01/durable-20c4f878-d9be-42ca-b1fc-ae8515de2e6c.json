@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "20c4f878-d9be-42ca-b1fc-ae8515de2e6c",
+  "attempt": 4,
+  "base_commit": "84417c81de3f5b2501fce5c1a0a9adc91dbc1157",
+  "target": "fn_801A3DF8",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-20c4f878-d9be-42ca-b1fc-ae8515de2e6c.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 95.11074%. Retail is 1192 bytes with 39 relocations and generated is 1208 bytes with 41 relocations. Both use a 0x60-byte frame and save f31 plus r21-r31, but retail emits stmw/lmw while canonical GC/1.3 emits relocated _savegpr_21/_restgpr_21 helper calls; after the prologue, canonical assigns state to r27 instead of retail r29 and count to r25 instead of retail r27, then carries the different register coloring and instruction schedule through the function. The generated code also retains two extra register moves associated with cached update bytes. All 39 retail relocation targets and addends are represented, but the two canonical save/restore helper relocations, instruction bytes, and scheduling remain nonmatching. Canonical build succeeded and build/GEDE01/main.dol SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}

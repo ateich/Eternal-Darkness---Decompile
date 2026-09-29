@@ -1,0 +1,1349 @@
+{
+  "assignment_id": "9d195409-49b1-4be5-b6ae-6eeb0df5820e",
+  "notes": "All trials used the exact generated canonical GC/1.2.5n compile command, including -opt nopeephole. Experiments ran serially into build/attempt-9d195409, separate from Ninja outputs. Per-trial deltas describe changes against the best source at that batch; no alternate C translation units are retained. Compilation errors from an initial scoped-resolver C89 declaration placement were corrected before measurements. Recorded scores are not claims of byte or relocation identity. Experiment records retain raw symbol measurement fields plus commands, exits, hashes and source deltas; full canonical and strict objdiff output for the retained candidate is in objdiff-9d195409-49b1-4be5-b6ae-6eeb0df5820e.json.",
+  "compile_command": "tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.2.5n/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -opt nopeephole -MMD -c src/game/game_fn_801B3770.c -o build/attempt-9d195409\n",
+  "initial_trials": [
+    {
+      "hypothesis": "goto",
+      "measurements": {
+        "left": {
+          "name": "fn_801B3770",
+          "size": "464",
+          "match_percent": 79.05173
+        },
+        "right": {
+          "name": "fn_801B3770",
+          "size": "520",
+          "match_percent": 79.05173
+        }
+      }
+    },
+    {
+      "hypothesis": "bitfield",
+      "measurements": {
+        "left": {
+          "name": "fn_801B3770",
+          "size": "464",
+          "match_percent": 73.793106
+        },
+        "right": {
+          "name": "fn_801B3770",
+          "size": "548",
+          "match_percent": 73.793106
+        }
+      }
+    },
+    {
+      "hypothesis": "typed",
+      "measurements": {
+        "left": {
+          "name": "fn_801B3770",
+          "size": "464",
+          "match_percent": 79.52586
+        },
+        "right": {
+          "name": "fn_801B3770",
+          "size": "516",
+          "match_percent": 79.52586
+        }
+      }
+    },
+    {
+      "hypothesis": "overlay",
+      "measurements": {
+        "left": {
+          "name": "fn_801B3770",
+          "size": "464",
+          "match_percent": 80.12931
+        },
+        "right": {
+          "name": "fn_801B3770",
+          "size": "516",
+          "match_percent": 80.12931
+        }
+      }
+    }
+  ],
+  "trials": [
+    {
+      "hypothesis": "nonvolatile-active",
+      "source_sha256": "cd59bbdb8e06759283ea9fb5315cfacc9458eb7e801d9b00db4916778a0b35dd",
+      "source_delta": "--- \n+++ \n@@ -20,8 +20,8 @@\n \n extern Entry lbl_8060C020[];\n extern Node* volatile lbl_8064D394;\n-extern Node* volatile lbl_8064D398;\n-extern Node* volatile lbl_8064D39C;\n+extern Node* lbl_8064D398;\n+extern Node* lbl_8064D39C;\n extern void fn_801B244C(void*);\n extern void fn_801C21E8(void*);\n \n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.12931
+      }
+    },
+    {
+      "hypothesis": "register-base",
+      "source_sha256": "0edb8f5c73ee90e6c10b9406a023a1e25d913dad7b1276ffaf25ee5a95064acb",
+      "source_delta": "--- \n+++ \n@@ -27,7 +27,7 @@\n \n void fn_801B3770(u32 handle)\n {\n-    Entry* entries = lbl_8060C020;\n+    register Entry* entries = lbl_8060C020;\n     u32 key = handle & 0x7FFFFFFF;\n     u32 id;\n     Node* search = lbl_8064D39C;\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.12931
+      }
+    },
+    {
+      "hypothesis": "register-node",
+      "source_sha256": "4e68c71b02f3e8454c8346c166df9a9d326280ade8377a6ca823fc980aa1a109",
+      "source_delta": "--- \n+++ \n@@ -31,7 +31,7 @@\n     u32 key = handle & 0x7FFFFFFF;\n     u32 id;\n     Node* search = lbl_8064D39C;\n-    Node* node;\n+    register Node* node;\n     Link* link;\n     u32 i;\n     goto search1_test;\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.12931
+      }
+    },
+    {
+      "hypothesis": "register-all",
+      "source_sha256": "6340b43f1a05f88edbc8efcee57ad0aa65acd0d1c4d142947df128f8f55d3254",
+      "source_delta": "--- \n+++ \n@@ -27,13 +27,13 @@\n \n void fn_801B3770(u32 handle)\n {\n-    Entry* entries = lbl_8060C020;\n+    register Entry* entries = lbl_8060C020;\n     u32 key = handle & 0x7FFFFFFF;\n     u32 id;\n     Node* search = lbl_8064D39C;\n-    Node* node;\n-    Link* link;\n-    u32 i;\n+    register Node* node;\n+    register Link* link;\n+    register u32 i;\n     goto search1_test;\n search1_body:\n     {\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.12931
+      }
+    },
+    {
+      "hypothesis": "base-character",
+      "source_sha256": "0b81a5ac050b63c6801fee8b8a3fecec9e86375e65bfc6099d67ec6adc8af286",
+      "source_delta": "--- \n+++ \n@@ -27,7 +27,7 @@\n \n void fn_801B3770(u32 handle)\n {\n-    Entry* entries = lbl_8060C020;\n+    u8* entries = (u8*)lbl_8060C020;\n     u32 key = handle & 0x7FFFFFFF;\n     u32 id;\n     Node* search = lbl_8064D39C;\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.12931
+      }
+    },
+    {
+      "hypothesis": "xor-merge",
+      "source_sha256": "6466163a76ca0de882c0ccb2bda4d86f34fa57179455badecde7f6df59ec4d6a",
+      "source_delta": "--- \n+++ \n@@ -38,7 +38,7 @@\n search1_body:\n     {\n         if (search->key == key) {\n-            id = (handle & 0x80000000U) | search->type;\n+            id = search->type ^ ((search->type ^ handle) & 0x80000000U);\n             goto resolved;\n         }\n         search = search->next;\n@@ -50,7 +50,7 @@\n search2_body:\n     {\n         if (search->key == key) {\n-            id = (handle & 0x80000000U) | search->type;\n+            id = search->type ^ ((search->type ^ handle) & 0x80000000U);\n             goto resolved;\n         }\n         search = search->next;\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "524",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 78.49138
+      }
+    },
+    {
+      "hypothesis": "add-merge",
+      "source_sha256": "11903fb78d7c09a8d6d82edb2843ac87d5083b75e15b4553cb837d8ce268bb0b",
+      "source_delta": "--- \n+++ \n@@ -38,7 +38,7 @@\n search1_body:\n     {\n         if (search->key == key) {\n-            id = (handle & 0x80000000U) | search->type;\n+            id = search->type + (handle & 0x80000000U);\n             goto resolved;\n         }\n         search = search->next;\n@@ -50,7 +50,7 @@\n search2_body:\n     {\n         if (search->key == key) {\n-            id = (handle & 0x80000000U) | search->type;\n+            id = search->type + (handle & 0x80000000U);\n             goto resolved;\n         }\n         search = search->next;\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.215515
+      }
+    },
+    {
+      "hypothesis": "unsigned-threshold",
+      "source_sha256": "e6f494a0649005a88509bb37e3c1599b64367f16e575604a82989356751728d4",
+      "source_delta": "--- \n+++ \n@@ -60,7 +60,7 @@\n     id = -1;\n resolved:\n     if (id == 0xFFFFFFFFU) return;\n-    if ((id & 0x80000000U) == 0) {\n+    if (id < 0x80000000U) {\n         u32 offset = id * sizeof(Entry);\n         u8* entry = (u8*)entries + offset;\n         u8 state = entry[0x1408];\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 79.655174
+      }
+    },
+    {
+      "hypothesis": "inline-resolver",
+      "source_sha256": "0c107bcb99dbaa46edc39cc9d44c67b85cdcecef51beb15b359bbd554ac887f2",
+      "source_delta": "--- \n+++ \n@@ -25,21 +25,17 @@\n extern void fn_801B244C(void*);\n extern void fn_801C21E8(void*);\n \n-void fn_801B3770(u32 handle)\n+static inline u32 resolve_handle(u32 handle)\n {\n-    Entry* entries = lbl_8060C020;\n     u32 key = handle & 0x7FFFFFFF;\n     u32 id;\n     Node* search = lbl_8064D39C;\n-    Node* node;\n-    Link* link;\n-    u32 i;\n     goto search1_test;\n search1_body:\n     {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n-            goto resolved;\n+            return id;\n         }\n         search = search->next;\n     }\n@@ -51,14 +47,23 @@\n     {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n-            goto resolved;\n+            return id;\n         }\n         search = search->next;\n     }\n search2_test:\n     if (search != 0) goto search2_body;\n     id = -1;\n-resolved:\n+    return id;\n+}\n+\n+void fn_801B3770(u32 handle)\n+{\n+    Entry* entries = lbl_8060C020;\n+    u32 id = resolve_handle(handle);\n+    Node* node;\n+    Link* link;\n+    u32 i;\n     if (id == 0xFFFFFFFFU) return;\n     if ((id & 0x80000000U) == 0) {\n         u32 offset = id * sizeof(Entry);\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.77586
+      }
+    },
+    {
+      "hypothesis": "inline-resolver-or",
+      "source_sha256": "7745905fe37c0269054b3796183b999caf8871108d96503252781b1fef675b48",
+      "source_delta": "--- \n+++ \n@@ -25,21 +25,17 @@\n extern void fn_801B244C(void*);\n extern void fn_801C21E8(void*);\n \n-void fn_801B3770(u32 handle)\n+static inline u32 resolve_handle(u32 handle)\n {\n-    Entry* entries = lbl_8060C020;\n     u32 key = handle & 0x7FFFFFFF;\n     u32 id;\n     Node* search = lbl_8064D39C;\n-    Node* node;\n-    Link* link;\n-    u32 i;\n     goto search1_test;\n search1_body:\n     {\n         if (search->key == key) {\n-            id = search->type + (handle & 0x80000000U);\n-            goto resolved;\n+            id = (handle & 0x80000000U) | search->type;\n+            return id;\n         }\n         search = search->next;\n     }\n@@ -50,15 +46,24 @@\n search2_body:\n     {\n         if (search->key == key) {\n-            id = search->type + (handle & 0x80000000U);\n-            goto resolved;\n+            id = (handle & 0x80000000U) | search->type;\n+            return id;\n         }\n         search = search->next;\n     }\n search2_test:\n     if (search != 0) goto search2_body;\n     id = -1;\n-resolved:\n+    return id;\n+}\n+\n+void fn_801B3770(u32 handle)\n+{\n+    Entry* entries = lbl_8060C020;\n+    u32 id = resolve_handle(handle);\n+    Node* node;\n+    Link* link;\n+    u32 i;\n     if (id == 0xFFFFFFFFU) return;\n     if ((id & 0x80000000U) == 0) {\n         u32 offset = id * sizeof(Entry);\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.68965
+      }
+    },
+    {
+      "hypothesis": "explicit-cursor",
+      "source_sha256": "a29cc061280ff05067110670026e5c7de23a40f1c2df2cbd6caac7e3cae6bad7",
+      "source_delta": "--- \n+++ \n@@ -69,10 +69,12 @@\n         case 1:\n             if (node->prev) node->prev->next = node->next;\n             else lbl_8064D39C = node->next;\n+            {\n+            u8* cursor = (u8*)node;\n             i = 0;\n links_body:\n             {\n-                link = *(Link**)((u8*)node + 0xE64 + i * 4);\n+                link = *(Link**)(cursor + 0xE64);\n                 goto link1_test;\n link1_body:\n                 fn_801C21E8(link->object);\n@@ -81,7 +83,9 @@\n                 if (link) goto link1_body;\n             }\n             ++i;\n+            cursor += 4;\n             if (i < 2) goto links_body;\n+            }\n             link = ((struct EntryLinks*)((u8*)entries + offset))->link;\n             goto link2_test;\n link2_body:\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.215515
+      }
+    },
+    {
+      "hypothesis": "cursor-after-test",
+      "source_sha256": "2511b864be3f0b4e2017e44154ce7a43e086e9cf4fe033251ec9c8b29a6acf2f",
+      "source_delta": "--- \n+++ \n@@ -69,10 +69,12 @@\n         case 1:\n             if (node->prev) node->prev->next = node->next;\n             else lbl_8064D39C = node->next;\n+            {\n+            u8* cursor = (u8*)node;\n             i = 0;\n links_body:\n             {\n-                link = *(Link**)((u8*)node + 0xE64 + i * 4);\n+                link = *(Link**)(cursor + 0xE64);\n                 goto link1_test;\n link1_body:\n                 fn_801C21E8(link->object);\n@@ -81,7 +83,8 @@\n                 if (link) goto link1_body;\n             }\n             ++i;\n-            if (i < 2) goto links_body;\n+            if (i < 2) { cursor += 4; goto links_body; }\n+            }\n             link = ((struct EntryLinks*)((u8*)entries + offset))->link;\n             goto link2_test;\n link2_body:\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "520",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 77.93104
+      }
+    },
+    {
+      "hypothesis": "inline-guarded-resolver",
+      "source_sha256": "063605dc759185a4e0a73795887f70ff3c76943da38e26ed7469e7c104760bb2",
+      "source_delta": "--- \n+++ \n@@ -30,29 +30,21 @@\n     u32 key = handle & 0x7FFFFFFF;\n     u32 id;\n     Node* search = lbl_8064D39C;\n-    goto search1_test;\n-search1_body:\n-    {\n+    if (search) do {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n             return id;\n         }\n         search = search->next;\n-    }\n-search1_test:\n-    if (search != 0) goto search1_body;\n+    } while (search);\n     search = lbl_8064D398;\n-    goto search2_test;\n-search2_body:\n-    {\n+    if (search) do {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n             return id;\n         }\n         search = search->next;\n-    }\n-search2_test:\n-    if (search != 0) goto search2_body;\n+    } while (search);\n     id = -1;\n     return id;\n }\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "524",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.25862
+      }
+    },
+    {
+      "hypothesis": "inline-infinite-resolver",
+      "source_sha256": "fcc524bbb338439f7f0793b96a1d070d4514f456c910d3cec6fdd0c0017e8204",
+      "source_delta": "--- \n+++ \n@@ -30,29 +30,23 @@\n     u32 key = handle & 0x7FFFFFFF;\n     u32 id;\n     Node* search = lbl_8064D39C;\n-    goto search1_test;\n-search1_body:\n-    {\n+    for (;;) {\n+        if (!search) break;\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n             return id;\n         }\n         search = search->next;\n     }\n-search1_test:\n-    if (search != 0) goto search1_body;\n     search = lbl_8064D398;\n-    goto search2_test;\n-search2_body:\n-    {\n+    for (;;) {\n+        if (!search) break;\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n             return id;\n         }\n         search = search->next;\n     }\n-search2_test:\n-    if (search != 0) goto search2_body;\n     id = -1;\n     return id;\n }\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 74.52586
+      }
+    },
+    {
+      "hypothesis": "inline-guarded-links",
+      "source_sha256": "4a34d12a64dc0d7db53cc7b25a171b5b89e38f497a9f5093abe6a9ac683b7f1d",
+      "source_delta": "--- \n+++ \n@@ -78,22 +78,18 @@\n links_body:\n             {\n                 link = *(Link**)((u8*)node + 0xE64 + i * 4);\n-                goto link1_test;\n-link1_body:\n+                if (link) do {\n                 fn_801C21E8(link->object);\n                 link = link->next;\n-link1_test:\n-                if (link) goto link1_body;\n+                } while (link);\n             }\n             ++i;\n             if (i < 2) goto links_body;\n             link = ((struct EntryLinks*)((u8*)entries + offset))->link;\n-            goto link2_test;\n-link2_body:\n+            if (link) do {\n             fn_801C21E8(link->object);\n             link = link->next;\n-link2_test:\n-            if (link) goto link2_body;\n+            } while (link);\n             fn_801B244C(node);\n             break;\n         case 2:\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "528",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 76.336205
+      }
+    },
+    {
+      "hypothesis": "inline-infinite-links",
+      "source_sha256": "c10f3ae74eb91158f86432ed7b6168be9044d7571e4fcb2106913376cc921ea1",
+      "source_delta": "--- \n+++ \n@@ -78,22 +78,20 @@\n links_body:\n             {\n                 link = *(Link**)((u8*)node + 0xE64 + i * 4);\n-                goto link1_test;\n-link1_body:\n+                for (;;) {\n+                if (!link) break;\n                 fn_801C21E8(link->object);\n                 link = link->next;\n-link1_test:\n-                if (link) goto link1_body;\n+                }\n             }\n             ++i;\n             if (i < 2) goto links_body;\n             link = ((struct EntryLinks*)((u8*)entries + offset))->link;\n-            goto link2_test;\n-link2_body:\n+            for (;;) {\n+            if (!link) break;\n             fn_801C21E8(link->object);\n             link = link->next;\n-link2_test:\n-            if (link) goto link2_body;\n+            }\n             fn_801B244C(node);\n             break;\n         case 2:\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 72.465515
+      }
+    },
+    {
+      "hypothesis": "scoped-resolver-fixed",
+      "source_sha256": "4736ff1fb1b22370da26b4ff2b925ab5a2b9f1537d93de94b1d84ea1842dd4a1",
+      "source_delta": "--- \n+++ \n@@ -25,17 +25,23 @@\n extern void fn_801B244C(void*);\n extern void fn_801C21E8(void*);\n \n-static inline u32 resolve_handle(u32 handle)\n+\n+void fn_801B3770(u32 handle)\n {\n+    Entry* entries = lbl_8060C020;\n+    u32 id;\n+    Node* node;\n+    Link* link;\n+    u32 i;\n+    {\n     u32 key = handle & 0x7FFFFFFF;\n-    u32 id;\n     Node* search = lbl_8064D39C;\n     goto search1_test;\n search1_body:\n     {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n-            return id;\n+            goto resolved;\n         }\n         search = search->next;\n     }\n@@ -47,23 +53,16 @@\n     {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n-            return id;\n+            goto resolved;\n         }\n         search = search->next;\n     }\n search2_test:\n     if (search != 0) goto search2_body;\n     id = -1;\n-    return id;\n-}\n \n-void fn_801B3770(u32 handle)\n-{\n-    Entry* entries = lbl_8060C020;\n-    u32 id = resolve_handle(handle);\n-    Node* node;\n-    Link* link;\n-    u32 i;\n+    }\n+resolved:;\n     if (id == 0xFFFFFFFFU) return;\n     if ((id & 0x80000000U) == 0) {\n         u32 offset = id * sizeof(Entry);\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.215515
+      }
+    },
+    {
+      "hypothesis": "scoped-guarded-resolver",
+      "source_sha256": "54666473d42ffb4efe9e817d6123dbfa31c954848ea51a15da498ff9a3d96e1b",
+      "source_delta": "--- \n+++ \n@@ -25,45 +25,36 @@\n extern void fn_801B244C(void*);\n extern void fn_801C21E8(void*);\n \n-static inline u32 resolve_handle(u32 handle)\n-{\n-    u32 key = handle & 0x7FFFFFFF;\n-    u32 id;\n-    Node* search = lbl_8064D39C;\n-    goto search1_test;\n-search1_body:\n-    {\n-        if (search->key == key) {\n-            id = search->type + (handle & 0x80000000U);\n-            return id;\n-        }\n-        search = search->next;\n-    }\n-search1_test:\n-    if (search != 0) goto search1_body;\n-    search = lbl_8064D398;\n-    goto search2_test;\n-search2_body:\n-    {\n-        if (search->key == key) {\n-            id = search->type + (handle & 0x80000000U);\n-            return id;\n-        }\n-        search = search->next;\n-    }\n-search2_test:\n-    if (search != 0) goto search2_body;\n-    id = -1;\n-    return id;\n-}\n \n void fn_801B3770(u32 handle)\n {\n     Entry* entries = lbl_8060C020;\n-    u32 id = resolve_handle(handle);\n+    u32 id;\n     Node* node;\n     Link* link;\n     u32 i;\n+    {\n+    u32 key = handle & 0x7FFFFFFF;\n+    Node* search = lbl_8064D39C;\n+    if (search) do {\n+        if (search->key == key) {\n+            id = search->type + (handle & 0x80000000U);\n+            goto resolved;\n+        }\n+        search = search->next;\n+    } while (search);\n+    search = lbl_8064D398;\n+    if (search) do {\n+        if (search->key == key) {\n+            id = search->type + (handle & 0x80000000U);\n+            goto resolved;\n+        }\n+        search = search->next;\n+    } while (search);\n+    id = -1;\n+\n+    }\n+resolved:;\n     if (id == 0xFFFFFFFFU) return;\n     if ((id & 0x80000000U) == 0) {\n         u32 offset = id * sizeof(Entry);\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "524",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 79.69827
+      }
+    },
+    {
+      "hypothesis": "scoped-infinite-resolver",
+      "source_sha256": "757a402c91d6f70e11ff7cfc2ea130445751d0c47c88fa26b09c47308eab94ea",
+      "source_delta": "--- \n+++ \n@@ -25,45 +25,38 @@\n extern void fn_801B244C(void*);\n extern void fn_801C21E8(void*);\n \n-static inline u32 resolve_handle(u32 handle)\n-{\n-    u32 key = handle & 0x7FFFFFFF;\n-    u32 id;\n-    Node* search = lbl_8064D39C;\n-    goto search1_test;\n-search1_body:\n-    {\n-        if (search->key == key) {\n-            id = search->type + (handle & 0x80000000U);\n-            return id;\n-        }\n-        search = search->next;\n-    }\n-search1_test:\n-    if (search != 0) goto search1_body;\n-    search = lbl_8064D398;\n-    goto search2_test;\n-search2_body:\n-    {\n-        if (search->key == key) {\n-            id = search->type + (handle & 0x80000000U);\n-            return id;\n-        }\n-        search = search->next;\n-    }\n-search2_test:\n-    if (search != 0) goto search2_body;\n-    id = -1;\n-    return id;\n-}\n \n void fn_801B3770(u32 handle)\n {\n     Entry* entries = lbl_8060C020;\n-    u32 id = resolve_handle(handle);\n+    u32 id;\n     Node* node;\n     Link* link;\n     u32 i;\n+    {\n+    u32 key = handle & 0x7FFFFFFF;\n+    Node* search = lbl_8064D39C;\n+    for (;;) {\n+        if (!search) break;\n+        if (search->key == key) {\n+            id = search->type + (handle & 0x80000000U);\n+            goto resolved;\n+        }\n+        search = search->next;\n+    }\n+    search = lbl_8064D398;\n+    for (;;) {\n+        if (!search) break;\n+        if (search->key == key) {\n+            id = search->type + (handle & 0x80000000U);\n+            goto resolved;\n+        }\n+        search = search->next;\n+    }\n+    id = -1;\n+\n+    }\n+resolved:;\n     if (id == 0xFFFFFFFFU) return;\n     if ((id & 0x80000000U) == 0) {\n         u32 offset = id * sizeof(Entry);\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 74.094826
+      }
+    },
+    {
+      "hypothesis": "scoped-or",
+      "source_sha256": "96c9fa3ecbf2d4029753133a910603c242a07e116540cd6617d440b679cd6ef4",
+      "source_delta": "--- \n+++ \n@@ -25,17 +25,23 @@\n extern void fn_801B244C(void*);\n extern void fn_801C21E8(void*);\n \n-static inline u32 resolve_handle(u32 handle)\n+\n+void fn_801B3770(u32 handle)\n {\n+    Entry* entries = lbl_8060C020;\n+    u32 id;\n+    Node* node;\n+    Link* link;\n+    u32 i;\n+    {\n     u32 key = handle & 0x7FFFFFFF;\n-    u32 id;\n     Node* search = lbl_8064D39C;\n     goto search1_test;\n search1_body:\n     {\n         if (search->key == key) {\n-            id = search->type + (handle & 0x80000000U);\n-            return id;\n+            id = (handle & 0x80000000U) | search->type;\n+            goto resolved;\n         }\n         search = search->next;\n     }\n@@ -46,24 +52,17 @@\n search2_body:\n     {\n         if (search->key == key) {\n-            id = search->type + (handle & 0x80000000U);\n-            return id;\n+            id = (handle & 0x80000000U) | search->type;\n+            goto resolved;\n         }\n         search = search->next;\n     }\n search2_test:\n     if (search != 0) goto search2_body;\n     id = -1;\n-    return id;\n-}\n \n-void fn_801B3770(u32 handle)\n-{\n-    Entry* entries = lbl_8060C020;\n-    u32 id = resolve_handle(handle);\n-    Node* node;\n-    Link* link;\n-    u32 i;\n+    }\n+resolved:;\n     if (id == 0xFFFFFFFFU) return;\n     if ((id & 0x80000000U) == 0) {\n         u32 offset = id * sizeof(Entry);\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.12931
+      }
+    },
+    {
+      "hypothesis": "scoped-typed-local",
+      "source_sha256": "463384e66d5d1738a0a226539cd2b91c5bd7b28f426eae7d0237a1e09a21a623",
+      "source_delta": "--- \n+++ \n@@ -25,17 +25,23 @@\n extern void fn_801B244C(void*);\n extern void fn_801C21E8(void*);\n \n-static inline u32 resolve_handle(u32 handle)\n+\n+void fn_801B3770(u32 handle)\n {\n+    Entry* entries = lbl_8060C020;\n+    u32 id;\n+    Node* node;\n+    Link* link;\n+    u32 i;\n+    {\n     u32 key = handle & 0x7FFFFFFF;\n-    u32 id;\n     Node* search = lbl_8064D39C;\n     goto search1_test;\n search1_body:\n     {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n-            return id;\n+            goto resolved;\n         }\n         search = search->next;\n     }\n@@ -47,29 +53,22 @@\n     {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n-            return id;\n+            goto resolved;\n         }\n         search = search->next;\n     }\n search2_test:\n     if (search != 0) goto search2_body;\n     id = -1;\n-    return id;\n-}\n \n-void fn_801B3770(u32 handle)\n-{\n-    Entry* entries = lbl_8060C020;\n-    u32 id = resolve_handle(handle);\n-    Node* node;\n-    Link* link;\n-    u32 i;\n+    }\n+resolved:;\n     if (id == 0xFFFFFFFFU) return;\n     if ((id & 0x80000000U) == 0) {\n         u32 offset = id * sizeof(Entry);\n-        u8* entry = (u8*)entries + offset;\n-        u8 state = entry[0x1408];\n-        node = (Node*)(entry + 0x1400);\n+        Node* entry = (Node*)((u8*)entries + offset + 0x1400);\n+        u8 state = entry->state;\n+        node = entry;\n         switch (state) {\n         case 1:\n             if (node->prev) node->prev->next = node->next;\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 77.793106
+      }
+    },
+    {
+      "hypothesis": "scoped-node-direct-link",
+      "source_sha256": "43a2efa24c53d21dff85e20a36231a260958df3e979324ccb33962e0a80453d6",
+      "source_delta": "--- \n+++ \n@@ -25,17 +25,23 @@\n extern void fn_801B244C(void*);\n extern void fn_801C21E8(void*);\n \n-static inline u32 resolve_handle(u32 handle)\n+\n+void fn_801B3770(u32 handle)\n {\n+    Entry* entries = lbl_8060C020;\n+    u32 id;\n+    Node* node;\n+    Link* link;\n+    u32 i;\n+    {\n     u32 key = handle & 0x7FFFFFFF;\n-    u32 id;\n     Node* search = lbl_8064D39C;\n     goto search1_test;\n search1_body:\n     {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n-            return id;\n+            goto resolved;\n         }\n         search = search->next;\n     }\n@@ -47,23 +53,16 @@\n     {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n-            return id;\n+            goto resolved;\n         }\n         search = search->next;\n     }\n search2_test:\n     if (search != 0) goto search2_body;\n     id = -1;\n-    return id;\n-}\n \n-void fn_801B3770(u32 handle)\n-{\n-    Entry* entries = lbl_8060C020;\n-    u32 id = resolve_handle(handle);\n-    Node* node;\n-    Link* link;\n-    u32 i;\n+    }\n+resolved:;\n     if (id == 0xFFFFFFFFU) return;\n     if ((id & 0x80000000U) == 0) {\n         u32 offset = id * sizeof(Entry);\n@@ -87,7 +86,7 @@\n             }\n             ++i;\n             if (i < 2) goto links_body;\n-            link = ((struct EntryLinks*)((u8*)entries + offset))->link;\n+            link = *(Link**)((u8*)node + 0xE6C);\n             goto link2_test;\n link2_body:\n             fn_801C21E8(link->object);\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "536",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 72.87931
+      }
+    },
+    {
+      "hypothesis": "inline-node-direct-link",
+      "source_sha256": "090ef72c750774e1da163b845f28a0f9d0533f17310b23328e3192c3d8601835",
+      "source_delta": "--- \n+++ \n@@ -87,7 +87,7 @@\n             }\n             ++i;\n             if (i < 2) goto links_body;\n-            link = ((struct EntryLinks*)((u8*)entries + offset))->link;\n+            link = *(Link**)((u8*)node + 0xE6C);\n             goto link2_test;\n link2_body:\n             fn_801C21E8(link->object);\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "536",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 72.98276
+      }
+    },
+    {
+      "hypothesis": "structured-do",
+      "source_sha256": "b3ef6c818c6e94c7e7d9aecc17b946387742990163b059ebd073cc218202fad5",
+      "source_delta": "--- \n+++ \n@@ -30,29 +30,21 @@\n     u32 key = handle & 0x7FFFFFFF;\n     u32 id;\n     Node* search = lbl_8064D39C;\n-    goto search1_test;\n-search1_body:\n-    {\n+    while (search != 0) {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n             return id;\n         }\n         search = search->next;\n     }\n-search1_test:\n-    if (search != 0) goto search1_body;\n     search = lbl_8064D398;\n-    goto search2_test;\n-search2_body:\n-    {\n+    while (search != 0) {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n             return id;\n         }\n         search = search->next;\n     }\n-search2_test:\n-    if (search != 0) goto search2_body;\n     id = -1;\n     return id;\n }\n@@ -75,25 +67,18 @@\n             if (node->prev) node->prev->next = node->next;\n             else lbl_8064D39C = node->next;\n             i = 0;\n-links_body:\n-            {\n+            do {\n                 link = *(Link**)((u8*)node + 0xE64 + i * 4);\n-                goto link1_test;\n-link1_body:\n+                while (link) {\n                 fn_801C21E8(link->object);\n                 link = link->next;\n-link1_test:\n-                if (link) goto link1_body;\n-            }\n-            ++i;\n-            if (i < 2) goto links_body;\n+                }\n+            } while (++i < 2);\n             link = ((struct EntryLinks*)((u8*)entries + offset))->link;\n-            goto link2_test;\n-link2_body:\n+            while (link) {\n             fn_801C21E8(link->object);\n             link = link->next;\n-link2_test:\n-            if (link) goto link2_body;\n+            }\n             fn_801B244C(node);\n             break;\n         case 2:\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.77586
+      }
+    },
+    {
+      "hypothesis": "structured-do-or",
+      "source_sha256": "199c7c85dd73451ec3355494f2a986fcab604164f14a65b8382046409545578f",
+      "source_delta": "--- \n+++ \n@@ -30,29 +30,21 @@\n     u32 key = handle & 0x7FFFFFFF;\n     u32 id;\n     Node* search = lbl_8064D39C;\n-    goto search1_test;\n-search1_body:\n-    {\n+    while (search != 0) {\n         if (search->key == key) {\n-            id = search->type + (handle & 0x80000000U);\n+            id = search->type | (handle & 0x80000000U);\n             return id;\n         }\n         search = search->next;\n     }\n-search1_test:\n-    if (search != 0) goto search1_body;\n     search = lbl_8064D398;\n-    goto search2_test;\n-search2_body:\n-    {\n+    while (search != 0) {\n         if (search->key == key) {\n-            id = search->type + (handle & 0x80000000U);\n+            id = search->type | (handle & 0x80000000U);\n             return id;\n         }\n         search = search->next;\n     }\n-search2_test:\n-    if (search != 0) goto search2_body;\n     id = -1;\n     return id;\n }\n@@ -75,25 +67,18 @@\n             if (node->prev) node->prev->next = node->next;\n             else lbl_8064D39C = node->next;\n             i = 0;\n-links_body:\n-            {\n+            do {\n                 link = *(Link**)((u8*)node + 0xE64 + i * 4);\n-                goto link1_test;\n-link1_body:\n+                while (link) {\n                 fn_801C21E8(link->object);\n                 link = link->next;\n-link1_test:\n-                if (link) goto link1_body;\n-            }\n-            ++i;\n-            if (i < 2) goto links_body;\n+                }\n+            } while (++i < 2);\n             link = ((struct EntryLinks*)((u8*)entries + offset))->link;\n-            goto link2_test;\n-link2_body:\n+            while (link) {\n             fn_801C21E8(link->object);\n             link = link->next;\n-link2_test:\n-            if (link) goto link2_body;\n+            }\n             fn_801B244C(node);\n             break;\n         case 2:\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.77586
+      }
+    },
+    {
+      "hypothesis": "structured-do-signed",
+      "source_sha256": "1ac427b0bc15821ee6190ae8d47822fee352439588a619ca5465391949068438",
+      "source_delta": "--- \n+++ \n@@ -30,29 +30,21 @@\n     u32 key = handle & 0x7FFFFFFF;\n     u32 id;\n     Node* search = lbl_8064D39C;\n-    goto search1_test;\n-search1_body:\n-    {\n+    while (search != 0) {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n             return id;\n         }\n         search = search->next;\n     }\n-search1_test:\n-    if (search != 0) goto search1_body;\n     search = lbl_8064D398;\n-    goto search2_test;\n-search2_body:\n-    {\n+    while (search != 0) {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n             return id;\n         }\n         search = search->next;\n     }\n-search2_test:\n-    if (search != 0) goto search2_body;\n     id = -1;\n     return id;\n }\n@@ -65,7 +57,7 @@\n     Link* link;\n     u32 i;\n     if (id == 0xFFFFFFFFU) return;\n-    if ((id & 0x80000000U) == 0) {\n+    if ((int)id >= 0) {\n         u32 offset = id * sizeof(Entry);\n         u8* entry = (u8*)entries + offset;\n         u8 state = entry[0x1408];\n@@ -75,25 +67,18 @@\n             if (node->prev) node->prev->next = node->next;\n             else lbl_8064D39C = node->next;\n             i = 0;\n-links_body:\n-            {\n+            do {\n                 link = *(Link**)((u8*)node + 0xE64 + i * 4);\n-                goto link1_test;\n-link1_body:\n+                while (link) {\n                 fn_801C21E8(link->object);\n                 link = link->next;\n-link1_test:\n-                if (link) goto link1_body;\n-            }\n-            ++i;\n-            if (i < 2) goto links_body;\n+                }\n+            } while (++i < 2);\n             link = ((struct EntryLinks*)((u8*)entries + offset))->link;\n-            goto link2_test;\n-link2_body:\n+            while (link) {\n             fn_801C21E8(link->object);\n             link = link->next;\n-link2_test:\n-            if (link) goto link2_body;\n+            }\n             fn_801B244C(node);\n             break;\n         case 2:\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "512",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 81.163795
+      }
+    },
+    {
+      "hypothesis": "inline-long-id",
+      "source_sha256": "22b4113e094b05a2ce178a7193fe4712aa7516bd9b47cf8b67b139bd9bf865e9",
+      "source_delta": "--- \n+++ \n@@ -28,31 +28,23 @@\n static inline u32 resolve_handle(u32 handle)\n {\n     u32 key = handle & 0x7FFFFFFF;\n-    u32 id;\n+    unsigned long id;\n     Node* search = lbl_8064D39C;\n-    goto search1_test;\n-search1_body:\n-    {\n+    while (search != 0) {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n             return id;\n         }\n         search = search->next;\n     }\n-search1_test:\n-    if (search != 0) goto search1_body;\n     search = lbl_8064D398;\n-    goto search2_test;\n-search2_body:\n-    {\n+    while (search != 0) {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n             return id;\n         }\n         search = search->next;\n     }\n-search2_test:\n-    if (search != 0) goto search2_body;\n     id = -1;\n     return id;\n }\n@@ -60,7 +52,7 @@\n void fn_801B3770(u32 handle)\n {\n     Entry* entries = lbl_8060C020;\n-    u32 id = resolve_handle(handle);\n+    unsigned long id = resolve_handle(handle);\n     Node* node;\n     Link* link;\n     u32 i;\n@@ -75,25 +67,18 @@\n             if (node->prev) node->prev->next = node->next;\n             else lbl_8064D39C = node->next;\n             i = 0;\n-links_body:\n-            {\n+            do {\n                 link = *(Link**)((u8*)node + 0xE64 + i * 4);\n-                goto link1_test;\n-link1_body:\n+                while (link) {\n                 fn_801C21E8(link->object);\n                 link = link->next;\n-link1_test:\n-                if (link) goto link1_body;\n-            }\n-            ++i;\n-            if (i < 2) goto links_body;\n+                }\n+            } while (++i < 2);\n             link = ((struct EntryLinks*)((u8*)entries + offset))->link;\n-            goto link2_test;\n-link2_body:\n+            while (link) {\n             fn_801C21E8(link->object);\n             link = link->next;\n-link2_test:\n-            if (link) goto link2_body;\n+            }\n             fn_801B244C(node);\n             break;\n         case 2:\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.77586
+      }
+    },
+    {
+      "hypothesis": "inline-output-key",
+      "source_sha256": "9912aad09890186134041a15b33582e71cfb850a1415dc84a1f3559477270bc9",
+      "source_delta": "--- \n+++ \n@@ -28,33 +28,23 @@\n static inline u32 resolve_handle(u32 handle)\n {\n     u32 key = handle & 0x7FFFFFFF;\n-    u32 id;\n     Node* search = lbl_8064D39C;\n-    goto search1_test;\n-search1_body:\n-    {\n+    while (search != 0) {\n         if (search->key == key) {\n-            id = search->type + (handle & 0x80000000U);\n-            return id;\n+            key = search->type + (handle & 0x80000000U);\n+            return key;\n         }\n         search = search->next;\n     }\n-search1_test:\n-    if (search != 0) goto search1_body;\n     search = lbl_8064D398;\n-    goto search2_test;\n-search2_body:\n-    {\n+    while (search != 0) {\n         if (search->key == key) {\n-            id = search->type + (handle & 0x80000000U);\n-            return id;\n+            key = search->type + (handle & 0x80000000U);\n+            return key;\n         }\n         search = search->next;\n     }\n-search2_test:\n-    if (search != 0) goto search2_body;\n-    id = -1;\n-    return id;\n+    return -1;\n }\n \n void fn_801B3770(u32 handle)\n@@ -75,25 +65,18 @@\n             if (node->prev) node->prev->next = node->next;\n             else lbl_8064D39C = node->next;\n             i = 0;\n-links_body:\n-            {\n+            do {\n                 link = *(Link**)((u8*)node + 0xE64 + i * 4);\n-                goto link1_test;\n-link1_body:\n+                while (link) {\n                 fn_801C21E8(link->object);\n                 link = link->next;\n-link1_test:\n-                if (link) goto link1_body;\n-            }\n-            ++i;\n-            if (i < 2) goto links_body;\n+                }\n+            } while (++i < 2);\n             link = ((struct EntryLinks*)((u8*)entries + offset))->link;\n-            goto link2_test;\n-link2_body:\n+            while (link) {\n             fn_801C21E8(link->object);\n             link = link->next;\n-link2_test:\n-            if (link) goto link2_body;\n+            }\n             fn_801B244C(node);\n             break;\n         case 2:\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.77586
+      }
+    },
+    {
+      "hypothesis": "inline-unsigned-output",
+      "source_sha256": "4b6327bd02b2c9629f110927a51742deac385d14af5cae4293022b6d1c3dbfa1",
+      "source_delta": "--- \n+++ \n@@ -25,34 +25,26 @@\n extern void fn_801B244C(void*);\n extern void fn_801C21E8(void*);\n \n-static inline u32 resolve_handle(u32 handle)\n+static inline unsigned long resolve_handle(u32 handle)\n {\n     u32 key = handle & 0x7FFFFFFF;\n     u32 id;\n     Node* search = lbl_8064D39C;\n-    goto search1_test;\n-search1_body:\n-    {\n+    while (search != 0) {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n             return id;\n         }\n         search = search->next;\n     }\n-search1_test:\n-    if (search != 0) goto search1_body;\n     search = lbl_8064D398;\n-    goto search2_test;\n-search2_body:\n-    {\n+    while (search != 0) {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n             return id;\n         }\n         search = search->next;\n     }\n-search2_test:\n-    if (search != 0) goto search2_body;\n     id = -1;\n     return id;\n }\n@@ -75,25 +67,18 @@\n             if (node->prev) node->prev->next = node->next;\n             else lbl_8064D39C = node->next;\n             i = 0;\n-links_body:\n-            {\n+            do {\n                 link = *(Link**)((u8*)node + 0xE64 + i * 4);\n-                goto link1_test;\n-link1_body:\n+                while (link) {\n                 fn_801C21E8(link->object);\n                 link = link->next;\n-link1_test:\n-                if (link) goto link1_body;\n-            }\n-            ++i;\n-            if (i < 2) goto links_body;\n+                }\n+            } while (++i < 2);\n             link = ((struct EntryLinks*)((u8*)entries + offset))->link;\n-            goto link2_test;\n-link2_body:\n+            while (link) {\n             fn_801C21E8(link->object);\n             link = link->next;\n-link2_test:\n-            if (link) goto link2_body;\n+            }\n             fn_801B244C(node);\n             break;\n         case 2:\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.77586
+      }
+    },
+    {
+      "hypothesis": "inline-local-base",
+      "source_sha256": "f45d09dc7d71fe705c315619382f7eeac6e31d059a9b041458dda14116fdc7b3",
+      "source_delta": "--- \n+++ \n@@ -30,36 +30,28 @@\n     u32 key = handle & 0x7FFFFFFF;\n     u32 id;\n     Node* search = lbl_8064D39C;\n-    goto search1_test;\n-search1_body:\n-    {\n+    while (search != 0) {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n             return id;\n         }\n         search = search->next;\n     }\n-search1_test:\n-    if (search != 0) goto search1_body;\n     search = lbl_8064D398;\n-    goto search2_test;\n-search2_body:\n-    {\n+    while (search != 0) {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n             return id;\n         }\n         search = search->next;\n     }\n-search2_test:\n-    if (search != 0) goto search2_body;\n     id = -1;\n     return id;\n }\n \n void fn_801B3770(u32 handle)\n {\n-    Entry* entries = lbl_8060C020;\n+    Entry* const entries = lbl_8060C020;\n     u32 id = resolve_handle(handle);\n     Node* node;\n     Link* link;\n@@ -75,25 +67,18 @@\n             if (node->prev) node->prev->next = node->next;\n             else lbl_8064D39C = node->next;\n             i = 0;\n-links_body:\n-            {\n+            do {\n                 link = *(Link**)((u8*)node + 0xE64 + i * 4);\n-                goto link1_test;\n-link1_body:\n+                while (link) {\n                 fn_801C21E8(link->object);\n                 link = link->next;\n-link1_test:\n-                if (link) goto link1_body;\n-            }\n-            ++i;\n-            if (i < 2) goto links_body;\n+                }\n+            } while (++i < 2);\n             link = ((struct EntryLinks*)((u8*)entries + offset))->link;\n-            goto link2_test;\n-link2_body:\n+            while (link) {\n             fn_801C21E8(link->object);\n             link = link->next;\n-link2_test:\n-            if (link) goto link2_body;\n+            }\n             fn_801B244C(node);\n             break;\n         case 2:\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.77586
+      }
+    },
+    {
+      "hypothesis": "inline-scoped-link",
+      "source_sha256": "c14b1472ea43f24aa263429e665506e65d5baeb4998d5ebc82c6a7af5a03380a",
+      "source_delta": "--- \n+++ \n@@ -30,29 +30,21 @@\n     u32 key = handle & 0x7FFFFFFF;\n     u32 id;\n     Node* search = lbl_8064D39C;\n-    goto search1_test;\n-search1_body:\n-    {\n+    while (search != 0) {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n             return id;\n         }\n         search = search->next;\n     }\n-search1_test:\n-    if (search != 0) goto search1_body;\n     search = lbl_8064D398;\n-    goto search2_test;\n-search2_body:\n-    {\n+    while (search != 0) {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n             return id;\n         }\n         search = search->next;\n     }\n-search2_test:\n-    if (search != 0) goto search2_body;\n     id = -1;\n     return id;\n }\n@@ -62,7 +54,6 @@\n     Entry* entries = lbl_8060C020;\n     u32 id = resolve_handle(handle);\n     Node* node;\n-    Link* link;\n     u32 i;\n     if (id == 0xFFFFFFFFU) return;\n     if ((id & 0x80000000U) == 0) {\n@@ -75,25 +66,20 @@\n             if (node->prev) node->prev->next = node->next;\n             else lbl_8064D39C = node->next;\n             i = 0;\n-links_body:\n-            {\n-                link = *(Link**)((u8*)node + 0xE64 + i * 4);\n-                goto link1_test;\n-link1_body:\n+            do {\n+                Link* link = *(Link**)((u8*)node + 0xE64 + i * 4);\n+                while (link) {\n                 fn_801C21E8(link->object);\n                 link = link->next;\n-link1_test:\n-                if (link) goto link1_body;\n-            }\n-            ++i;\n-            if (i < 2) goto links_body;\n-            link = ((struct EntryLinks*)((u8*)entries + offset))->link;\n-            goto link2_test;\n-link2_body:\n+                }\n+            } while (++i < 2);\n+            {\n+            Link* link = ((struct EntryLinks*)((u8*)entries + offset))->link;\n+            while (link) {\n             fn_801C21E8(link->object);\n             link = link->next;\n-link2_test:\n-            if (link) goto link2_body;\n+            }\n+            }\n             fn_801B244C(node);\n             break;\n         case 2:\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "516",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.94827
+      }
+    },
+    {
+      "hypothesis": "direct-signed-clean",
+      "source_sha256": "2e9f46113f434637077fba522024071d5c772f977a02c5f6d4334fce89342b69",
+      "source_delta": "--- \n+++ \n@@ -25,15 +25,21 @@\n extern void fn_801B244C(void*);\n extern void fn_801C21E8(void*);\n \n-static inline u32 resolve_handle(u32 handle)\n+\n+void fn_801B3770(u32 handle)\n {\n+    Entry* entries = lbl_8060C020;\n+    u32 id;\n+    Node* node;\n+    Link* link;\n+    u32 i;\n+    {\n     u32 key = handle & 0x7FFFFFFF;\n-    u32 id;\n     Node* search = lbl_8064D39C;\n     while (search != 0) {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n-            return id;\n+            goto resolved;\n         }\n         search = search->next;\n     }\n@@ -41,21 +47,14 @@\n     while (search != 0) {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n-            return id;\n+            goto resolved;\n         }\n         search = search->next;\n     }\n     id = -1;\n-    return id;\n-}\n \n-void fn_801B3770(u32 handle)\n-{\n-    Entry* entries = lbl_8060C020;\n-    u32 id = resolve_handle(handle);\n-    Node* node;\n-    Link* link;\n-    u32 i;\n+    }\n+resolved:;\n     if (id == 0xFFFFFFFFU) return;\n     if ((int)id >= 0) {\n         u32 offset = id * sizeof(Entry);\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "512",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.60345
+      }
+    },
+    {
+      "hypothesis": "direct-reuse-key",
+      "source_sha256": "d2b404ad799b7726d0fab28b37b66adf9d9bdcca0e867f8507d752182c5feaad",
+      "source_delta": "--- \n+++ \n@@ -25,37 +25,37 @@\n extern void fn_801B244C(void*);\n extern void fn_801C21E8(void*);\n \n-static inline u32 resolve_handle(u32 handle)\n+\n+void fn_801B3770(u32 handle)\n {\n-    u32 key = handle & 0x7FFFFFFF;\n+    Entry* entries = lbl_8060C020;\n     u32 id;\n-    Node* search = lbl_8064D39C;\n+    Node* node;\n+    Link* link;\n+    u32 i;\n+    {\n+    Node* search;\n+    id = handle & 0x7FFFFFFF;\n+    search = lbl_8064D39C;\n     while (search != 0) {\n-        if (search->key == key) {\n+        if (search->key == id) {\n             id = search->type + (handle & 0x80000000U);\n-            return id;\n+            goto resolved;\n         }\n         search = search->next;\n     }\n     search = lbl_8064D398;\n     while (search != 0) {\n-        if (search->key == key) {\n+        if (search->key == id) {\n             id = search->type + (handle & 0x80000000U);\n-            return id;\n+            goto resolved;\n         }\n         search = search->next;\n     }\n     id = -1;\n-    return id;\n-}\n \n-void fn_801B3770(u32 handle)\n-{\n-    Entry* entries = lbl_8060C020;\n-    u32 id = resolve_handle(handle);\n-    Node* node;\n-    Link* link;\n-    u32 i;\n+    }\n+resolved:;\n     if (id == 0xFFFFFFFFU) return;\n     if ((int)id >= 0) {\n         u32 offset = id * sizeof(Entry);\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "512",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.60345
+      }
+    },
+    {
+      "hypothesis": "direct-reuse-or",
+      "source_sha256": "2d7d048856dcdfd202a17395f5aa68265c656ef6ddbb9209b977391409264870",
+      "source_delta": "--- \n+++ \n@@ -25,37 +25,37 @@\n extern void fn_801B244C(void*);\n extern void fn_801C21E8(void*);\n \n-static inline u32 resolve_handle(u32 handle)\n+\n+void fn_801B3770(u32 handle)\n {\n-    u32 key = handle & 0x7FFFFFFF;\n+    Entry* entries = lbl_8060C020;\n     u32 id;\n-    Node* search = lbl_8064D39C;\n+    Node* node;\n+    Link* link;\n+    u32 i;\n+    {\n+    Node* search;\n+    id = handle & 0x7FFFFFFF;\n+    search = lbl_8064D39C;\n     while (search != 0) {\n-        if (search->key == key) {\n-            id = search->type + (handle & 0x80000000U);\n-            return id;\n+        if (search->key == id) {\n+            id = search->type | (handle & 0x80000000U);\n+            goto resolved;\n         }\n         search = search->next;\n     }\n     search = lbl_8064D398;\n     while (search != 0) {\n-        if (search->key == key) {\n-            id = search->type + (handle & 0x80000000U);\n-            return id;\n+        if (search->key == id) {\n+            id = search->type | (handle & 0x80000000U);\n+            goto resolved;\n         }\n         search = search->next;\n     }\n     id = -1;\n-    return id;\n-}\n \n-void fn_801B3770(u32 handle)\n-{\n-    Entry* entries = lbl_8060C020;\n-    u32 id = resolve_handle(handle);\n-    Node* node;\n-    Link* link;\n-    u32 i;\n+    }\n+resolved:;\n     if (id == 0xFFFFFFFFU) return;\n     if ((int)id >= 0) {\n         u32 offset = id * sizeof(Entry);\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "512",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.60345
+      }
+    },
+    {
+      "hypothesis": "direct-local-node",
+      "source_sha256": "6d479d8526ebdbb445cba04c1d3a6bcd297717effa5fb8d8eb64de2a7745aadc",
+      "source_delta": "--- \n+++ \n@@ -25,15 +25,20 @@\n extern void fn_801B244C(void*);\n extern void fn_801C21E8(void*);\n \n-static inline u32 resolve_handle(u32 handle)\n+\n+void fn_801B3770(u32 handle)\n {\n+    Entry* entries = lbl_8060C020;\n+    u32 id;\n+    Link* link;\n+    u32 i;\n+    {\n     u32 key = handle & 0x7FFFFFFF;\n-    u32 id;\n     Node* search = lbl_8064D39C;\n     while (search != 0) {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n-            return id;\n+            goto resolved;\n         }\n         search = search->next;\n     }\n@@ -41,23 +46,17 @@\n     while (search != 0) {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n-            return id;\n+            goto resolved;\n         }\n         search = search->next;\n     }\n     id = -1;\n-    return id;\n-}\n \n-void fn_801B3770(u32 handle)\n-{\n-    Entry* entries = lbl_8060C020;\n-    u32 id = resolve_handle(handle);\n-    Node* node;\n-    Link* link;\n-    u32 i;\n+    }\n+resolved:;\n     if (id == 0xFFFFFFFFU) return;\n     if ((int)id >= 0) {\n+        Node* node;\n         u32 offset = id * sizeof(Entry);\n         u8* entry = (u8*)entries + offset;\n         u8 state = entry[0x1408];\n@@ -97,6 +96,7 @@\n         lbl_8064D394 = node;\n     } else {\n         {\n+            Node* node;\n             u8* entry = (u8*)entries + (id & 0x7FFFFFFF) * sizeof(Entry);\n             u8 state = entry[0x1408];\n             node = (Node*)(entry + 0x1400);\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "512",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.47414
+      }
+    },
+    {
+      "hypothesis": "scoped-links-signed",
+      "source_sha256": "3fa6912b092c26f1093a876444f5fb0ae14fb1bbe0469a0c8768e29e0fb94294",
+      "source_delta": "--- \n+++ \n@@ -54,7 +54,6 @@\n     Entry* entries = lbl_8060C020;\n     u32 id = resolve_handle(handle);\n     Node* node;\n-    Link* link;\n     u32 i;\n     if (id == 0xFFFFFFFFU) return;\n     if ((int)id >= 0) {\n@@ -68,16 +67,18 @@\n             else lbl_8064D39C = node->next;\n             i = 0;\n             do {\n-                link = *(Link**)((u8*)node + 0xE64 + i * 4);\n+                Link* link = *(Link**)((u8*)node + 0xE64 + i * 4);\n                 while (link) {\n                 fn_801C21E8(link->object);\n                 link = link->next;\n                 }\n             } while (++i < 2);\n-            link = ((struct EntryLinks*)((u8*)entries + offset))->link;\n+            {\n+            Link* link = ((struct EntryLinks*)((u8*)entries + offset))->link;\n             while (link) {\n             fn_801C21E8(link->object);\n             link = link->next;\n+            }\n             }\n             fn_801B244C(node);\n             break;\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "512",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 81.336205
+      }
+    },
+    {
+      "hypothesis": "direct-local-index",
+      "source_sha256": "acaff0123aeca751359a275783ac057159c0490179aeaa0724a2cf0886ed28d1",
+      "source_delta": "--- \n+++ \n@@ -25,15 +25,20 @@\n extern void fn_801B244C(void*);\n extern void fn_801C21E8(void*);\n \n-static inline u32 resolve_handle(u32 handle)\n+\n+void fn_801B3770(u32 handle)\n {\n+    Entry* entries = lbl_8060C020;\n+    u32 id;\n+    Node* node;\n+    Link* link;\n+    {\n     u32 key = handle & 0x7FFFFFFF;\n-    u32 id;\n     Node* search = lbl_8064D39C;\n     while (search != 0) {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n-            return id;\n+            goto resolved;\n         }\n         search = search->next;\n     }\n@@ -41,21 +46,14 @@\n     while (search != 0) {\n         if (search->key == key) {\n             id = search->type + (handle & 0x80000000U);\n-            return id;\n+            goto resolved;\n         }\n         search = search->next;\n     }\n     id = -1;\n-    return id;\n-}\n \n-void fn_801B3770(u32 handle)\n-{\n-    Entry* entries = lbl_8060C020;\n-    u32 id = resolve_handle(handle);\n-    Node* node;\n-    Link* link;\n-    u32 i;\n+    }\n+resolved:;\n     if (id == 0xFFFFFFFFU) return;\n     if ((int)id >= 0) {\n         u32 offset = id * sizeof(Entry);\n@@ -63,7 +61,8 @@\n         u8 state = entry[0x1408];\n         node = (Node*)(entry + 0x1400);\n         switch (state) {\n-        case 1:\n+        case 1: {\n+            u32 i;\n             if (node->prev) node->prev->next = node->next;\n             else lbl_8064D39C = node->next;\n             i = 0;\n@@ -81,6 +80,7 @@\n             }\n             fn_801B244C(node);\n             break;\n+        }\n         case 2:\n             if (node->prev) node->prev->next = node->next;\n             else lbl_8064D398 = node->next;\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "512",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 80.60345
+      }
+    },
+    {
+      "hypothesis": "final-or",
+      "source_sha256": "7c1032855450e90828ea1ae8fb8b192a6e6787ffcd5a64eee32d66af36f22158",
+      "source_delta": "--- \n+++ \n@@ -32,7 +32,7 @@\n     Node* search = lbl_8064D39C;\n     while (search != 0) {\n         if (search->key == key) {\n-            id = search->type + (handle & 0x80000000U);\n+            id = search->type | (handle & 0x80000000U);\n             return id;\n         }\n         search = search->next;\n@@ -40,7 +40,7 @@\n     search = lbl_8064D398;\n     while (search != 0) {\n         if (search->key == key) {\n-            id = search->type + (handle & 0x80000000U);\n+            id = search->type | (handle & 0x80000000U);\n             return id;\n         }\n         search = search->next;\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "512",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 81.336205
+      }
+    },
+    {
+      "hypothesis": "final-nonvolatile-active",
+      "source_sha256": "7e49a0ff6860cc261f3a27f7330b849b3a6b26e64e3c8f7bebda9592b36fe543",
+      "source_delta": "--- \n+++ \n@@ -20,8 +20,8 @@\n \n extern Entry lbl_8060C020[];\n extern Node* volatile lbl_8064D394;\n-extern Node* volatile lbl_8064D398;\n-extern Node* volatile lbl_8064D39C;\n+extern Node* lbl_8064D398;\n+extern Node* lbl_8064D39C;\n extern void fn_801B244C(void*);\n extern void fn_801C21E8(void*);\n \n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "512",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 81.336205
+      }
+    },
+    {
+      "hypothesis": "final-count-local",
+      "source_sha256": "06a58fe1ac853335b7ade72369c2788174bdd6a877cc8c85cbe88b82f31ee9a9",
+      "source_delta": "--- \n+++ \n@@ -54,7 +54,6 @@\n     Entry* entries = lbl_8060C020;\n     u32 id = resolve_handle(handle);\n     Node* node;\n-    u32 i;\n     if (id == 0xFFFFFFFFU) return;\n     if ((int)id >= 0) {\n         u32 offset = id * sizeof(Entry);\n@@ -62,7 +61,8 @@\n         u8 state = entry[0x1408];\n         node = (Node*)(entry + 0x1400);\n         switch (state) {\n-        case 1:\n+        case 1: {\n+            u32 i;\n             if (node->prev) node->prev->next = node->next;\n             else lbl_8064D39C = node->next;\n             i = 0;\n@@ -82,6 +82,7 @@\n             }\n             fn_801B244C(node);\n             break;\n+        }\n         case 2:\n             if (node->prev) node->prev->next = node->next;\n             else lbl_8064D398 = node->next;\n",
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801B3770.o",
+        "-2",
+        "build/attempt-9d195409/game_fn_801B3770.o",
+        "--format",
+        "json",
+        "-o",
+        "-",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "fn_801B3770"
+      ],
+      "compiler_exit": 0,
+      "compiler_stdout": "",
+      "compiler_stderr": "",
+      "objdiff_exit": 0,
+      "objdiff_stderr": "",
+      "raw_measurement": {
+        "name": "fn_801B3770",
+        "size": "512",
+        "flags": 1,
+        "target_symbol": 5,
+        "match_percent": 81.336205
+      }
+    }
+  ]
+}

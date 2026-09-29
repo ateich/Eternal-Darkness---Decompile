@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "714a99be-2390-4a4d-bb3f-9a1ccd990a83",
+  "attempt": 3,
+  "base_commit": "81f557770c5a08a7cc74cc4f54b7c000a9e8d377",
+  "target": "fn_801A6350",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-714a99be-2390-4a4d-bb3f-9a1ccd990a83.json"
+  ],
+  "divergence": "Canonical GC/1.3 scores 68.0% under relocation-strict objdiff and emits 76 bytes versus retail's 80 bytes. The behavior-correct reconstruction fixes the preserved attempt's mistaken zero-result cases: retail zeroes r3 before dispatch, so state -1, 0, 4 through 21, and out-of-range values return 0; states 1, 2, 3, and 22 return 2, 3, 4, and 1. The five 8-byte return stubs match exactly, but canonical lowers dispatch as a 36-byte compare tree with no relocations while retail uses a 40-byte 24-entry jump-table dispatch with R_PPC_ADDR16_HA and R_PPC_ADDR16_LO relocations to jumptable_80251304. Source-level result-variable shaping and local opt_propagation/global_optimizer controls did not retain the table. The full build passed; build/GEDE01/main.dol SHA-1 was ea24b6af954876ce072562ff39cdb4c81d32be1f and byte comparison against orig/GEDE01/sys/main.dol passed."
+}

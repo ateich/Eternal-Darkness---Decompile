@@ -9,10 +9,8 @@ void fn_800EEC44(u8 *input, u8 *output, int width, int height)
     int columns = width >> 1;
     int rows = height >> 1;
     u8 *middle = input + width * height;
-    u8 *lower = middle;
+    u8 *lower = middle + columns * rows;
     int y = 0;
-
-    lower += columns * rows;
 
     while (rows > 0) {
         u8 *top0 = input;
@@ -26,11 +24,11 @@ void fn_800EEC44(u8 *input, u8 *output, int width, int height)
         while (remaining > 0) {
             int cb = *lower++ - 128;
             int cr = *middle++ - 128;
-            int blue = -52 * cb - 25 * cr + 0x2020;
+            int blue = (-52 * cb + 0x2020) + (-25 * cr);
+            u8 *block = dst + ((x >> 1) * 64) + ((x & 1) ? 4 : 0);
             int green = 102 * cb + 0x2020;
             int red = 129 * cr + 0x2020;
             int lum = ((int)lbl_803281E0[*top0++] - 16) * 74;
-            u8 *block = dst + ((x >> 1) * 64) + ((x & 1) ? 4 : 0);
             u8 *block2 = block + 8;
 
             fn_800EEC0C(block, lum + green, lum + blue, lum + red);

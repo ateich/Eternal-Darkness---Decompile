@@ -1,0 +1,49 @@
+{
+  "assignment_id": "20db5870-8c89-4ca2-a3d4-482eebecd142",
+  "working_directory": "eternal-darkness-decomp",
+  "preserved_attempts_studied": [
+    "0f8876b80d8171b33ac35090dfd7f552bda8f4de",
+    "6cb7ff24402b49d750edda708e40d9957d849974"
+  ],
+  "base_source_equal_to_preserved": true,
+  "base_source_sha256": "6b4d540d68120e962b4e14dec3844b56cae7194ab7aabb61066f11fa5e3dae6c",
+  "compiler": "GC/1.3",
+  "compiler_sha256": "4e502c38465500d4fda8d966b268151a6c74c730508e3d9b7efd23d1a6083715",
+  "compiler_policy_changed": false,
+  "commands": [
+    {
+      "command": "python3 configure.py",
+      "exit_code": 0,
+      "stdout_stderr": "eternal-darkness-decomp/reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/configure-final.log"
+    },
+    {
+      "command": ".tools/bin/ninja -j2",
+      "exit_code": 0,
+      "stdout_stderr": "eternal-darkness-decomp/reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/build-final.log"
+    },
+    {
+      "command": "sha1sum build/GEDE01/main.dol",
+      "exit_code": 0,
+      "stdout_stderr": "eternal-darkness-decomp/reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/dol-sha1.log"
+    },
+    {
+      "command": "python3 tools/legal_audit.py",
+      "exit_code": 0,
+      "stdout_stderr": "eternal-darkness-decomp/reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/legal-audit.log"
+    },
+    {
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801A53C4 -c function_reloc_diffs=name_address -o reports/GEDE01/objdiff-20db5870-8c89-4ca2-a3d4-482eebecd142.json --format json-pretty",
+      "exit_code": 0
+    },
+    {
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801A53C4 -o reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/canonical-final.json --format json",
+      "exit_code": 0
+    }
+  ],
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "candidate_linked": false,
+  "registration": "Object(NonMatching, \"game/game_fn_801A53C4.c\")",
+  "scope": "One independent C TU changed. No registration, splits, runtime, policy, progress or neighboring source edits. Pre-existing CLAUDE.md modification excluded. No private inputs or generated binaries staged.",
+  "experiment_note": "Sources, commands, compiler outputs, scores and object hashes are retained in experiment records; baseline and final raw objdiff are retained. Redundant intermediate full diff dumps were removed. All variants were restored; only the separate scaled local is retained. Experiments test source store order, a distinct scaled local, declaration ordering, promotion/scoping, global address expressions and cursor lifetimes. No compiler flags were varied.",
+  "log_normalization": "Build logs preserve full output with CRLF converted to LF."
+}

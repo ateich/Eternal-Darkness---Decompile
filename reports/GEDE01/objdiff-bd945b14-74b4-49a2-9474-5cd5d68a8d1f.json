@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "assignment_id": "bd945b14-74b4-49a2-9474-5cd5d68a8d1f",
+  "target": "fn_801A0450",
+  "source_provenance": "The accepted base already contains the independent honest-C translation unit and its NonMatching registration recovered before preserved report commit 123b93ceaa8ea970d6699025e8e267ce3c09dace. This attempt retained that best source after testing new qualifier and declaration-order/hoist hypotheses.",
+  "experiments": [
+    {
+      "hypothesis": "Qualifying all 24 read-only scalar float externs const may reproduce retail first-load scheduling, as documented for other GC/1.3 units.",
+      "raw_output": "{\"left_size\":\"5484\",\"right_size\":\"5484\",\"match_percent\":68.90664,\"left_rows\":1538,\"right_rows\":1538}",
+      "result": "Byte-neutral; discarded."
+    },
+    {
+      "hypothesis": "Hoist the first loop's nine constants to named locals, declare those locals in reverse order, then assign them in retail relocation order to separate FPR coloring from load scheduling.",
+      "raw_output": "{\"left_size\":\"5484\",\"right_size\":\"5448\",\"match_percent\":68.45368}",
+      "raw_first_loads": "retail: f11=lbl_80650CA8, f10=lbl_80650CAC, f9=lbl_80650D08, f8=lbl_80650CB0, f7=lbl_80650CB4, f6=lbl_80650CB8, f5=lbl_80650CBC, f4=lbl_80650CC0, f3=lbl_80650CC4, f2=lbl_80650CC8; candidate: f10=lbl_80650CA8, f9=lbl_80650CAC, f8=lbl_80650CB0, f7=lbl_80650CB4, f6=lbl_80650CB8, f5=lbl_80650CBC, f4=lbl_80650CC0, f3=lbl_80650CC4, f2=lbl_80650CC8, f1=@81",
+      "result": "The target order and descending coloring hypothesis was confirmed, but MWCC kept its automatic i2d bias in f1 rather than retail f9, shortened the function by 36 bytes, and regressed the score; discarded."
+    }
+  ],
+  "canonical_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801A0450 fn_801A0450 -o - --format json | jq -c '{left_size:.left.symbols[0].size,right_size:.right.symbols[0].size,match_percent:.left.symbols[0].match_percent,left_rows:(.left.symbols[0].instructions|length),right_rows:(.right.symbols[0].instructions|length)}'",
+    "raw_output": "{\"left_size\":\"5484\",\"right_size\":\"5484\",\"match_percent\":68.90664,\"left_rows\":1538,\"right_rows\":1538}",
+    "note": "5484 bytes is 1371 PowerPC instructions; 1538 is the objdiff alignment-row count."
+  },
+  "relocation_strict_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801A0450 fn_801A0450 -o - --format json -c function_reloc_diffs=name_address | jq -c '{left_size:.left.symbols[0].size,right_size:.right.symbols[0].size,match_percent:.left.symbols[0].match_percent,left_rows:(.left.symbols[0].instructions|length),right_rows:(.right.symbols[0].instructions|length)}'",
+    "raw_output": "{\"left_size\":\"5484\",\"right_size\":\"5484\",\"match_percent\":68.90664,\"left_rows\":1538,\"right_rows\":1538}"
+  },
+  "elf_relocation_audit": {
+    "commands": [
+      "readelf -rW build/GEDE01/obj/game/game_fn_801A0450.o",
+      "readelf -rW build/GEDE01/src/game/game_fn_801A0450.o"
+    ],
+    "raw_headers": [
+      "Relocation section '.rela.text' at offset 0x15ac contains 70 entries:",
+      "Relocation section '.rela.text' at offset 0x15a8 contains 70 entries:"
+    ],
+    "tuple_definition": "offset, relocation type, resolved target symbol name, addend",
+    "raw_first_differences": [
+      "00000038 R_PPC_EMB_SDA21 lbl_80650CA8 0 | 00000038 R_PPC_EMB_SDA21 lbl_80650CAC 0",
+      "0000003c R_PPC_EMB_SDA21 lbl_80650CAC 0 | 0000003c R_PPC_EMB_SDA21 lbl_80650CB0 0",
+      "00000044 R_PPC_EMB_SDA21 lbl_80650D08 0 | 00000044 R_PPC_EMB_SDA21 lbl_80650CA8 0",
+      "0000004c R_PPC_EMB_SDA21 lbl_80650CB0 0 | 0000004c R_PPC_EMB_SDA21 lbl_80650CB8 0",
+      "00000064 R_PPC_EMB_SDA21 lbl_80650CC8 0 | 00000064 R_PPC_EMB_SDA21 @99 0"
+    ],
+    "raw_summary": "70 records per object; 42 corresponding (offset,type,target,addend) tuples differ; every addend is zero. Retail uses lbl_80650D08 six times where generated code uses compiler-local @99 six times.",
+    "raw_file_sha256": {
+      "retail": "97bca0e3ace7e653e4792fd9151c58e169bad3ae0ad509320e57d232f5cc8d0c",
+      "generated": "c7877e3387dd217febfea6b0e4220f8123b39ab78af39c18a22e5d64b05acffb"
+    }
+  },
+  "build_verification": {
+    "commands": ["python3 configure.py", ".tools/bin/ninja -j2", "sha1sum build/GEDE01/main.dol"],
+    "raw_outputs": ["[931/932] CHECK config/GEDE01/build.sha1", "build/GEDE01/main.dol: OK", "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"]
+  }
+}

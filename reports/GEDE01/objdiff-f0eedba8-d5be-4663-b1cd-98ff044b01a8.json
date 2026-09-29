@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "assignment_id": "f0eedba8-d5be-4663-b1cd-98ff044b01a8",
+  "target": "fn_801420F8",
+  "command": "python3 tools/fndiff.py game/game_fn_801420F8.c fn_801420F8",
+  "raw_summary": "target 1808 bytes  base 1404 bytes  match 51.559734",
+  "canonical_match_percent": 51.559734,
+  "retail_text_bytes": 1808,
+  "candidate_text_bytes": 1404,
+  "retail_stack_frame_bytes": 352,
+  "candidate_stack_frame_bytes": 96,
+  "retail_relocation_instructions": 60,
+  "candidate_relocation_instructions": 52,
+  "relocation_strict_match": false,
+  "dol_sha1_command": "sha1sum build/GEDE01/main.dol",
+  "dol_sha1_raw": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+  "expected_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "full_build_command": "python3 configure.py && .tools/bin/ninja -j2",
+  "full_build_result": "passed",
+  "hypothesis": "Explicit register storage hints might preserve macro-expanded scalar lifetimes and cause GC/1.3 to allocate the retail nonvolatile FPR set f14-f31.",
+  "hypothesis_result": "The register-qualified honest C emitted byte-identical code to the preserved candidate: 51.559734%, 1404 bytes, a 0x60-byte frame, and f27-f31 only. A separately measured exact-small-data/signed-table plus array-interval variant corrected several early SDA21 and lhax forms but regressed to 50.402657% and 1392 bytes, so it was not preserved.",
+  "divergence": "Retail saves f14-f31 in a 0x160-byte frame and spills plane distances, products, and the normalized normal; the candidate saves only f27-f31 in a 0x60-byte frame. Expression scheduling differs throughout the plane and interval calculations, and 8 relocation-bearing instructions remain absent or different."
+}

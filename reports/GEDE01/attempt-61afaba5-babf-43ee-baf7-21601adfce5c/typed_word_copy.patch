@@ -1,0 +1,26 @@
+--- src/game/game_fn_8011C0F0.c
++++ src/game/game_fn_8011C0F0.c
+@@ -9,7 +9,7 @@
+     Entry entry[2];
+ } Quad;
+ 
+-extern const Quad lbl_8023A670;
++extern const volatile unsigned int lbl_8023A670[4];
+ extern int lbl_8064C2BC;
+ 
+ extern void fn_801A872C(int, int, int, int, int, int, int *);
+@@ -17,8 +17,13 @@
+ 
+ void fn_8011C0F0(int index, unsigned char enabled)
+ {
+-    Quad quad = lbl_8023A670;
++    union { unsigned int words[4]; Entry entry[2]; } quad;
+     int color;
++
++    quad.words[0] = lbl_8023A670[0];
++    quad.words[1] = lbl_8023A670[1];
++    quad.words[2] = lbl_8023A670[2];
++    quad.words[3] = lbl_8023A670[3];
+ 
+     if (enabled != 0) {
+         color = lbl_8064C2BC;

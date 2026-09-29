@@ -1,0 +1,217 @@
+{
+  "assignment_id": "7e5c3c79-e1c0-40ea-9625-f4382aae185a",
+  "build": {
+    "command": "python3 configure.py && .tools/bin/ninja -j2",
+    "exit_code": 0,
+    "raw_log": "eternal-darkness-decomp/reports/GEDE01/build-7e5c3c79-e1c0-40ea-9625-f4382aae185a.txt",
+    "log_note": "Compiler CRLF line endings normalized to LF; complete stdout/stderr retained."
+  },
+  "commands": [
+    {
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801C3278",
+        "-o",
+        "reports/GEDE01/canonical-7e5c3c79-e1c0-40ea-9625-f4382aae185a.json"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": " INFO Writing to reports/GEDE01/canonical-7e5c3c79-e1c0-40ea-9625-f4382aae185a.json\n",
+      "score": 90.28689,
+      "target_size": "488",
+      "generated_size": "484"
+    },
+    {
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801C3278",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "-o",
+        "reports/GEDE01/objdiff-7e5c3c79-e1c0-40ea-9625-f4382aae185a.json"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": " INFO Writing to reports/GEDE01/objdiff-7e5c3c79-e1c0-40ea-9625-f4382aae185a.json\n",
+      "score": 90.28689,
+      "target_size": "488",
+      "generated_size": "484"
+    },
+    {
+      "command": [
+        "sha1sum",
+        "build/GEDE01/main.dol"
+      ],
+      "exit_code": 0,
+      "stdout": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "tools/legal_audit.py"
+      ],
+      "exit_code": 0,
+      "stdout": "legal audit passed (22615 tracked project files inspected)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        ".tools/bin/ninja",
+        "-t",
+        "commands",
+        "build/GEDE01/src/game/game_fn_801C3278.o"
+      ],
+      "exit_code": 0,
+      "stdout": "\"/usr/bin/python3\" tools/download_tool.py sjiswrap build/tools/sjiswrap.exe --tag v1.2.2\ntools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.2.5n/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -Cpp_exceptions on -MMD -c src/game/game_fn_801C3278.c -o build/GEDE01/src/game && \"/usr/bin/python3\" tools/transform_dep.py build/GEDE01/src/game/game_fn_801C3278.d build/GEDE01/src/game/game_fn_801C3278.d\n",
+      "stderr": ""
+    }
+  ],
+  "source_sha256": "28fec84b2b06c07f1afff08758556596eeedee6591781bbe3776d3e080f8c87e",
+  "relocations": {
+    "method": "ELF32 big-endian .rela.text; compare relocation type, target symbol name and value, and signed addend in instruction order. Site offsets recorded separately because code is NonMatching.",
+    "target": [
+      {
+        "offset": 6,
+        "type": 6,
+        "target": "lbl_80627D60",
+        "target_value": 0,
+        "addend": 0
+      },
+      {
+        "offset": 34,
+        "type": 4,
+        "target": "lbl_80627D60",
+        "target_value": 0,
+        "addend": 0
+      },
+      {
+        "offset": 228,
+        "type": 10,
+        "target": "fn_801CDD00",
+        "target_value": 0,
+        "addend": 0
+      },
+      {
+        "offset": 244,
+        "type": 10,
+        "target": "fn_801CCAC4",
+        "target_value": 0,
+        "addend": 0
+      },
+      {
+        "offset": 252,
+        "type": 10,
+        "target": "fn_801CCB0C",
+        "target_value": 0,
+        "addend": 0
+      },
+      {
+        "offset": 364,
+        "type": 10,
+        "target": "fn_801CCAF8",
+        "target_value": 0,
+        "addend": 0
+      },
+      {
+        "offset": 440,
+        "type": 10,
+        "target": "fn_801CCAC4",
+        "target_value": 0,
+        "addend": 0
+      },
+      {
+        "offset": 460,
+        "type": 10,
+        "target": "fn_801CCAC4",
+        "target_value": 0,
+        "addend": 0
+      }
+    ],
+    "generated": [
+      {
+        "offset": 6,
+        "type": 6,
+        "target": "lbl_80627D60",
+        "target_value": 0,
+        "addend": 0
+      },
+      {
+        "offset": 14,
+        "type": 4,
+        "target": "lbl_80627D60",
+        "target_value": 0,
+        "addend": 0
+      },
+      {
+        "offset": 228,
+        "type": 10,
+        "target": "fn_801CDD00",
+        "target_value": 0,
+        "addend": 0
+      },
+      {
+        "offset": 244,
+        "type": 10,
+        "target": "fn_801CCAC4",
+        "target_value": 0,
+        "addend": 0
+      },
+      {
+        "offset": 252,
+        "type": 10,
+        "target": "fn_801CCB0C",
+        "target_value": 0,
+        "addend": 0
+      },
+      {
+        "offset": 364,
+        "type": 10,
+        "target": "fn_801CCAF8",
+        "target_value": 0,
+        "addend": 0
+      },
+      {
+        "offset": 436,
+        "type": 10,
+        "target": "fn_801CCAC4",
+        "target_value": 0,
+        "addend": 0
+      },
+      {
+        "offset": 456,
+        "type": 10,
+        "target": "fn_801CCAC4",
+        "target_value": 0,
+        "addend": 0
+      }
+    ],
+    "all_targets_and_addends_equal": true
+  },
+  "registration": "Existing independent GC/1.2.5n TU remains NonMatching; configure.py and splits.txt unchanged.",
+  "legal_note": "No binaries, private retail inputs, or toolchains staged. Pre-existing CLAUDE.md change excluded.",
+  "staged_legal_audit": {
+    "command": "python3 eternal-darkness-decomp/tools/legal_audit.py",
+    "exit_code": 0,
+    "stdout": "legal audit passed (22621 tracked project files inspected)\n",
+    "stderr": ""
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "f8cd5a08-f0ca-4ec2-9376-ff3a6f10c71a",
+  "attempt": 3,
+  "base_commit": "ed4f9e45bb847a260080090ef3f80466c4b93dec",
+  "target": "fn_801858E0",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-f8cd5a08-f0ca-4ec2-9376-ff3a6f10c71a.json"
+  ],
+  "divergence": "Best fresh canonical objdiff is 59.014084%: retail is 284 bytes and generated code is 268 bytes. Both use a 0x40-byte frame and stmw/lmw r26-r31, and the reconstruction now reproduces retail's stack slots (value at 0x8, second aggregate at 0xc/0x10/0x14, first aggregate at 0x18/0x1c/0x20). Retail assigns first.x/y/z to r26/r27/r28 and second.x/y to r29/r30, with both source lis instructions at 0x8/0xc; generated assigns first.x/y/z to r30/r29/r28 and second.x/y to r27/r26, schedules the second lis at 0x34, and emits only 268 bytes. The semantic relocation targets and zero addends remain correct, but relocation offsets differ: retail HA at 0x8/0xc, LO at 0x34/0x38, SDA21 at 0x3c, REL24 at 0xa4; generated HA at 0x8/0x34, LO at 0x14/0x40, SDA21 at 0x80, REL24 at 0xa8, plus R_PPC_NONE annotations on volatile field loads. python3 configure.py and .tools/bin/ninja -j2 completed successfully; rebuilt and retail main.dol both have SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}

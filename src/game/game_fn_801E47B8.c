@@ -5,139 +5,94 @@ typedef unsigned short u16;
 typedef unsigned int u32;
 
 typedef struct TextState {
-    float scale;
-    u32 color;
-    s16 x;
-    s16 y;
-    s16 width;
-    s16 height;
-    u32 flags;
-    s16 phase;
-    u8 font;
-    s8 align;
-    char text[1];
+    float scale; u32 color; s16 x, y, width, height; u32 flags;
+    s16 phase; u16 line_limit; u8 align; s8 font; s8 text[1];
 } TextState;
-
-typedef struct FontInfo {
-    u32 word0;
-    s8 height;
-    u8 glyph_width[1];
-} FontInfo;
+typedef struct FontInfo { int value; s8 height; u8 widths[256]; } FontInfo;
 
 extern FontInfo* lbl_80633418[];
-extern float lbl_8064D594;
-extern s16 lbl_8064D598;
-extern double lbl_8064E7F0;
-extern s16 lbl_8064E7F8;
-extern int lbl_8064E7FC;
-extern int lbl_8064E800;
-extern u32 lbl_8064E814;
-extern TextState* lbl_8064E818;
-extern u8 lbl_8064E7EC;
-extern u32 lbl_8064D528;
-extern char lbl_8064D5B4[];
-extern char lbl_8064D5B8[];
-extern float lbl_8065127C;
-extern float lbl_80651280;
-
-#define text_x (*(s16*)((char*)&lbl_8064E7F0 + 4))
-
+extern TextState lbl_80633440[];
+extern u32 lbl_8064C2A8, lbl_8064D594;
+extern float lbl_8064C314;
+extern s16 lbl_8064C318, lbl_8064D574, lbl_8064D578;
+extern s8 lbl_8064C31A;
+extern char lbl_8064C334, lbl_8064C338;
+extern u8 lbl_8064D56C;
+extern int lbl_8064D57C, lbl_8064D580;
+extern TextState* lbl_8064D598;
+extern FontInfo* lbl_8064D59C;
+extern float lbl_80651260, lbl_80651280, lbl_80651284;
 extern int fn_801E6BF8(TextState*);
-extern void fn_801E3A34(u32*);
-extern void fn_801E5AD0(u8);
-extern char* fn_801E645C(char*, int, int*, int*);
-extern char* fn_801E3B08(char*);
-extern void fn_801A8D38(int);
-extern void fn_801ECF50(int);
-extern void fn_801A8EDC(void*);
-extern void fn_801ECD74(u32*);
-extern void fn_801E39A8(int);
+extern void fn_801E3A34(u32*), fn_801E5AD0(u8);
+extern s8* fn_801E645C(s8*, int, int*, int*);
+extern s8* fn_801E3B08(s8*);
+extern void fn_801A8D38(int), fn_801ECF50(int), fn_801A8EDC(void*);
+extern void fn_801ECD74(u32*), fn_801E39A8(int);
 extern s16 fn_80144A2C(u32, int, int, int);
 extern void fn_8022B970(s16, u16, s16, u16);
 extern void fn_801E4314(s16, s16, s16, s16, float, u32);
-extern void fn_801E4198(s16, s16, int);
-extern void fn_801E418C(u16);
-extern void fn_801E4188(void);
-extern void fn_801E5430(s16, s16);
-extern void fn_801E4704(TextState*);
-extern void fn_801E5FB0(TextState*);
-extern void fn_801E7004(void);
+extern void fn_801E4198(int, int, int), fn_801E418C(u16), fn_801E4188(void);
+extern void fn_801E5430(s16, s16), fn_801E4704(TextState*);
+extern void fn_801E5FB0(TextState*), fn_801E7004(void);
 extern void fn_80226AB4(int, int, int);
 
-/*
- * Main text-box renderer.  This intentionally keeps the recovered phases in
- * one function: measure the command stream, establish alignment and clipping,
- * consume glyphs/escapes while advancing the pen, then draw scroll indicators
- * and service the active-box transition.  Register coloring and several
- * graphics-state details remain under investigation.
- */
+#define MAX(a, b) ((a) < (b) ? (b) : (a))
+#define ABS(a) ((a) >= 0 ? (a) : -(a))
+
 void fn_801E47B8(TextState* state)
 {
     int measured = 0;
     int command = 0;
     int line_step;
-    int scroll_step = 1;
     int drew_quad = 0;
-    char* text = state->text;
-    char* cursor;
+    int scroll_step = 1;
+    s8* cursor = state->text;
     u32 color;
 
     line_step = fn_801E6BF8(state) - state->height;
     color = state->color;
     fn_801E3A34(&color);
-    lbl_8064D594 = state->scale;
-    fn_801E5AD0(state->font);
-    cursor = fn_801E645C(text, state->align, &measured, &command);
-    lbl_8064D594 = state->scale;
-
-    switch ((s8)cursor[-1]) {
-    case 'l':
-        text_x = state->x;
-        break;
-    case 'r':
-        text_x = state->x + state->width - (s16)measured;
-        break;
-    case 'c':
-        text_x = state->x + state->width / 2 - (s16)measured / 2;
-        break;
+    lbl_8064C314 = state->scale;
+    fn_801E5AD0(state->align);
+    fn_801E645C(cursor, state->font, &measured, &command);
+    lbl_8064C314 = state->scale;
+    switch (lbl_8064C31A) {
+    case 'l': lbl_8064D574 = state->x; break;
+    case 'r': lbl_8064D574 = state->x + state->width - (s16)measured; break;
+    case 'c': lbl_8064D574 = state->x + (state->width >> 1) - ((s16)measured >> 1); break;
     }
 
     fn_801A8D38(6);
     if (state->flags & 1) {
         s16 y = state->y;
-        FontInfo* font = lbl_80633418[lbl_8064E800];
-        if (font->word0 <= 255)
-            y += 6;
-        if (!(state->flags & 8))
-            y += 30;
+        if (lbl_80633418[lbl_8064D580]->value <= 255) y += 6;
+        if (!(state->flags & 8) && (state->flags & 1)) y += 30;
         fn_801E4314(state->x, y, state->width, state->height,
-                    lbl_8064D594, state->flags & 0x2000);
+                    lbl_8064C314, state->flags & 0x2000);
     }
     fn_801ECF50(6);
     fn_801A8EDC((void*)0x802558E8);
     color = state->color;
     fn_801ECD74(&color);
-    fn_801E39A8(state->align);
+    fn_801E39A8(state->font);
 
     if (state->flags & 0x10) {
-        scroll_step = fn_80144A2C(0xA00C0000, 0x1FFF, 2, 0);
-        if (scroll_step < 1)
-            scroll_step = 1;
+        scroll_step = MAX((s16)fn_80144A2C(0xA00C0000, 0x1FFF, 2, 0), 1);
         line_step += 2;
         if (state->flags & 0x400) {
             state->phase += scroll_step;
-            lbl_8064E7F8 -= scroll_step;
+            lbl_8064D578 -= scroll_step;
             if (state->phase >= line_step) {
-                lbl_8064E7F8 += state->phase - (line_step - 1);
+                lbl_8064D578 += state->phase - (line_step - 1);
                 state->phase = line_step - 1;
                 state->flags &= ~0x400;
                 state->flags |= 0x4000;
             }
         } else if (state->flags & 0x1000) {
             state->phase -= scroll_step;
-            lbl_8064E7F8 += scroll_step;
+            lbl_8064D578 += scroll_step;
             if (state->phase <= 0) {
-                lbl_8064E7F8 += state->phase;
+                lbl_8064D578 += state->phase;
                 state->phase = 0;
                 state->flags &= ~0x1000;
             }
@@ -147,99 +102,107 @@ void fn_801E47B8(TextState* state)
     }
 
     while (cursor[0] != 0 || cursor[1] != 0) {
-        int glyph_width;
-        int delta = lbl_8064E7F8 - state->y;
-        if (delta < 0)
-            delta = -delta;
-        if (delta < scroll_step)
-            scroll_step = delta;
-
-        glyph_width = (s16)(lbl_8064D594 *
-            lbl_80633418[(s8)state->align]->height);
-        if (glyph_width > lbl_8064D598)
-            lbl_8064D598 = glyph_width;
-        lbl_8064E7FC = 0;
-        while (*cursor == '\\' && !lbl_8064E7FC)
+        float scale;
+        int glyph_height, current;
+        if (ABS(lbl_8064D578 - state->y) < scroll_step)
+            scroll_step = ABS(lbl_8064D578 - state->y);
+        scale = lbl_8064C314;
+        glyph_height = (int)(scale * lbl_80633418[state->font]->height);
+        if ((s16)glyph_height > lbl_8064C318) lbl_8064C318 = glyph_height;
+        lbl_8064D57C = 0;
+        while (*cursor == '\\' && lbl_8064D57C == 0)
             cursor = fn_801E3B08(cursor + 1);
-        if (*cursor == 0 && cursor[1] == 0)
-            break;
+        current = (s8)*cursor;
+        if (current == 0 && cursor[1] == 0) break;
 
-        if (*cursor == '\n') {
-            int advance = lbl_8064D598 ? lbl_8064D598 : glyph_width;
-            lbl_8064E7F8 += advance;
-            text_x = state->x;
-            if (lbl_8064E7F8 > state->y + state->height)
-                break;
-            lbl_8064D598 = 0;
+        if (current == '\n') {
+            int advance = lbl_8064C318 ? lbl_8064C318 : glyph_height;
+            lbl_8064D578 += advance;
+            lbl_8064D574 = state->x;
+            if (lbl_8064D578 > state->y + state->height) break;
+            lbl_8064C318 = 0;
             ++cursor;
-            if (*cursor == 0)
-                break;
-            fn_801E645C(cursor, lbl_8064E800, &measured, &command);
-            lbl_8064D594 = state->scale;
-            switch ((s8)cursor[-1]) {
-            case 'l': text_x = state->x; break;
-            case 'r': text_x = state->x + state->width - (s16)measured; break;
-            case 'c': text_x = state->x + state->width / 2 - (s16)measured / 2; break;
+            if (*cursor == 0) break;
+            measured = 0;
+            command = 0;
+            fn_801E645C(cursor, lbl_8064D580, &measured, &command);
+            lbl_8064C314 = scale;
+            switch ((s8)lbl_8064C31A - 'c') {
+            case 'l' - 'c': case 'n' - 'c': lbl_8064D574 = state->x; break;
+            case 'r' - 'c': lbl_8064D574 = state->x + state->width - (s16)measured; break;
+            case 0: lbl_8064D574 = state->x + (state->width >> 1) - ((s16)measured >> 1); break;
             }
             continue;
         }
 
-        if (lbl_8064E7F8 + glyph_width >= state->y) {
-            float quad = lbl_8065127C * lbl_8064D594;
-            int h = (s16)quad;
-            int w;
+        if (lbl_8064D578 + (s16)glyph_height >= state->y) {
+            float size = lbl_80651260 * scale;
+            int xextent = (int)size;
+            s16 yextent;
+            int glyph;
             fn_80226AB4(0x80, 5, 4);
-            w = (s16)quad;
-            fn_801E4198(text_x, lbl_8064E7F8 + w, -1);
-            fn_801E418C((u16)((u8)*cursor * 4 + 3));
-            fn_801E4198(text_x, lbl_8064E7F8, -1);
-            fn_801E418C((u16)((u8)*cursor * 4));
-            fn_801E4198(text_x + h, lbl_8064E7F8, -1);
-            fn_801E418C((u16)((u8)*cursor * 4 + 1));
-            fn_801E4198(text_x + h, lbl_8064E7F8 + w, -1);
-            fn_801E418C((u16)((u8)*cursor * 4 + 2));
+            yextent = (s16)size;
+            fn_801E4198(lbl_8064D574, (s16)(lbl_8064D578 + yextent), -1);
+            glyph = (u16)(current * 4);
+            fn_801E418C((u16)(glyph + 3));
+            fn_801E4198(lbl_8064D574, lbl_8064D578, -1);
+            fn_801E418C(glyph);
+            xextent = (s16)xextent;
+            fn_801E4198((s16)(lbl_8064D574 + xextent), lbl_8064D578, -1);
+            fn_801E418C((u16)(glyph + 1));
+            fn_801E4198((s16)(lbl_8064D574 + xextent), (s16)(lbl_8064D578 + yextent), -1);
+            fn_801E418C((u16)(glyph + 2));
             fn_801E4188();
             drew_quad = 1;
         }
-        text_x += (s16)(lbl_8064D594 *
-            lbl_80633418[lbl_8064E800]->glyph_width[(u8)*cursor + 5]);
+        lbl_8064D574 += (s16)(lbl_8064C314 *
+            lbl_80633418[lbl_8064D580]->widths[current]);
         ++cursor;
     }
 
     if (state->flags & 0x10) {
-        fn_8022B970(0, 0, 640, 480);
-        lbl_8064E814 = lbl_8064D528;
-        ((u8*)&lbl_8064E814)[3] = lbl_8064E7EC;
-        if (state->phase && !(state->flags & 0x100)) {
-            lbl_8064D594 = lbl_8065127C;
-            fn_801E5430(state->x, state->y);
-            fn_801E3B08(lbl_8064D5B4);
-            lbl_8064D594 = lbl_80651280;
+        FontInfo* font;
+        s16 indicator_y;
+        s16 indicator_x;
+
+        font = lbl_8064D59C;
+        indicator_y = state->y - font->height;
+        indicator_x = state->x +
+            ((int)(state->width - lbl_80651280 * font->widths[31]) >> 1);
+        lbl_8064C314 = lbl_80651284;
+        if (state->phase >= line_step - 1) {
+            if (state->phase >= line_step + 1) state->flags &= ~0x1400;
+        } else if (scroll_step == 0) {
+            state->flags &= ~0x1400;
         }
+        fn_8022B970(0, 0, 640, 480);
+        lbl_8064D594 = lbl_8064C2A8;
+        ((u8*)&lbl_8064D594)[3] = lbl_8064D56C;
+        if (state->phase && !(state->flags & 0x100)) {
+            lbl_8064C314 = lbl_80651280;
+            fn_801E5430(indicator_x, indicator_y);
+            fn_801E3B08((s8*)&lbl_8064C334);
+            lbl_8064C314 = lbl_80651284;
+        }
+        indicator_y = state->y + (s8)lbl_8064D59C->height * 2;
+        if (!(state->flags & 8) && (state->flags & 1)) indicator_y += 30;
         if (!(state->flags & 0x100)) {
             if (state->phase < fn_801E6BF8(state) - state->height - 1) {
-                lbl_8064D594 = lbl_8065127C;
-                fn_801E5430(state->x, state->y + state->height);
-                fn_801E3B08(lbl_8064D5B8);
-                lbl_8064D594 = lbl_80651280;
-            } else {
-                fn_801E4704(state);
+                lbl_8064C314 = lbl_80651280;
+                fn_801E5430(indicator_x, indicator_y);
+                fn_801E3B08((s8*)&lbl_8064C338);
+                lbl_8064C314 = lbl_80651284;
+            } else fn_801E4704(state);
+        }
+        if (!drew_quad && state == lbl_8064D598) {
+            if (state->flags & 0x200) state->phase = -480;
+            else {
+                TextState* it = lbl_80633440;
+                TextState* end = (TextState*)((u8*)lbl_80633440 + 0x3C00);
+                for (; it < end; it = (TextState*)((u8*)it + 0x600))
+                    if (it == lbl_8064D598) fn_801E5FB0(it);
+                fn_801E7004();
             }
         }
-    }
-    if (!drew_quad && state == lbl_8064E818) {
-        if (state->flags & 0x200) {
-            state->phase = -480;
-        } else {
-            TextState* it = (TextState*)0x80633440;
-            TextState* end = (TextState*)0x80637040;
-            for (; it < end; it = (TextState*)((char*)it + 0x600)) {
-                if (it == lbl_8064E818)
-                    fn_801E5FB0(it);
-            }
-            fn_801E7004();
-        }
-    } else if (!(state->flags & 0x10)) {
-        fn_801E4704(state);
-    }
+    } else fn_801E4704(state);
 }

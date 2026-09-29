@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "assignment_id": "b0aeb962-8d97-4ad6-80e7-91e9cbd3a3c0",
+  "attempt": 19,
+  "target": "fn_8019E0B0",
+  "compiler": "GC/1.3",
+  "source": "eternal-darkness-decomp/src/game/game_fn_8019E0B0.c",
+  "source_sha256": "4c8cfe1c602939a45372afbf73ba231c379551eda764d8f89b80a0364ca52590",
+  "recovery": {
+    "requested_preserved_commit": "44e9b2387aa73f6aa7f8770bccbf810bb6f95177",
+    "preserved_commit_changed_files": [
+      "eternal-darkness-decomp/reports/GEDE01/durable-269322dd-644e-451b-a61e-9159a486aae8.json",
+      "eternal-darkness-decomp/reports/GEDE01/objdiff-269322dd-644e-451b-a61e-9159a486aae8.json"
+    ],
+    "result": "The preserved commit changes reports only. Its inherited source, configure.py registration, and split are identical to the accepted base; no recovery source edit was needed."
+  },
+  "hypothesis_test": {
+    "description": "Eliminate the long-lived fields=obj+0x8C base and express completed field accesses directly from obj, testing whether that live range caused candidate r21 preservation.",
+    "strict_match_percent": 82.77597,
+    "candidate_text_size": 1252,
+    "result": "Rejected: strict score regressed from 82.78247% and the prologue still saved r21-r31. The accepted source was restored."
+  },
+  "commands": [
+    "python3 configure.py",
+    ".tools/bin/ninja -j2",
+    "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8019E0B0 fn_8019E0B0 -o build/GEDE01/attempt19-canonical.json --format json-pretty",
+    "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8019E0B0 fn_8019E0B0 -o build/GEDE01/attempt19-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "sha1sum build/GEDE01/main.dol",
+    "build/binutils/powerpc-eabi-size build/GEDE01/obj/game/game_fn_8019E0B0.o build/GEDE01/src/game/game_fn_8019E0B0.o",
+    "build/binutils/powerpc-eabi-readelf -r build/GEDE01/obj/game/game_fn_8019E0B0.o",
+    "build/binutils/powerpc-eabi-readelf -r build/GEDE01/src/game/game_fn_8019E0B0.o",
+    "python3 tools/legal_audit.py"
+  ],
+  "raw_measured_outputs": {
+    "build": {
+      "exit_code": 0,
+      "terminal_output": "[920/922] DOL build/GEDE01/main.dol\n[921/922] CHECK config/GEDE01/build.sha1\nbuild/GEDE01/main.dol: OK\n[922/922] PROGRESS"
+    },
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+    "aggregate_report": {
+      "retail_size": 1232,
+      "fuzzy_match_percent": 82.987015,
+      "complete": false
+    },
+    "canonical_objdiff": {
+      "exit_code": 0,
+      "artifact": "eternal-darkness-decomp/build/GEDE01/attempt19-canonical.json",
+      "output_sha256": "7ad86b3610b1a3b561e0b37830f5386b9f8818d059033fddb33e8024ef8dcf88",
+      "left_size": 1232,
+      "right_size": 1252,
+      "match_percent": 82.78247
+    },
+    "relocation_strict_objdiff": {
+      "configuration": "function_reloc_diffs=name_address",
+      "exit_code": 0,
+      "artifact": "eternal-darkness-decomp/build/GEDE01/attempt19-strict.json",
+      "output_sha256": "7ad86b3610b1a3b561e0b37830f5386b9f8818d059033fddb33e8024ef8dcf88",
+      "left_size": 1232,
+      "right_size": 1252,
+      "match_percent": 82.78247
+    },
+    "object_sizes": "retail .text 1232 data 0 bss 0 total 1232; candidate .text 1252 data 8 bss 0 total 1260",
+    "relocations": {
+      "retail_count": 46,
+      "candidate_count": 46,
+      "retail_conversion_records": [
+        "0000024c R_PPC_EMB_SDA21 lbl_80650C60 + 0",
+        "000002ac R_PPC_EMB_SDA21 lbl_80650C60 + 0"
+      ],
+      "candidate_conversion_records": [
+        "00000254 R_PPC_EMB_SDA21 @73 + 0",
+        "000002bc R_PPC_EMB_SDA21 @73 + 0"
+      ]
+    },
+    "prologue": {
+      "retail": "0000001c: stmw r22,104(r1)",
+      "candidate": "0000001c: stmw r21,100(r1)"
+    },
+    "legal_audit": {
+      "exit_code": 0,
+      "stdout": "legal audit passed (22014 tracked project files inspected)"
+    }
+  },
+  "conclusion": "attempted: the one independent honest-C NonMatching reconstruction is retained; canonical and relocation-strict comparisons are below 100%."
+}

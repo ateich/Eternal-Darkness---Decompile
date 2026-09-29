@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "b2e98879-44cb-4bc0-9792-5d7d317a067c",
+  "attempt": 3,
+  "base_commit": "555a630812f7ee433454735e653920d056cfa5a4",
+  "target": "fn_800F61F4",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-b2e98879-44cb-4bc0-9792-5d7d317a067c.json"
+  ],
+  "divergence": "Best canonical and relocation-strict score remains 27.777779%: retail is 36 bytes (9 instructions), generated is 40 bytes (10 instructions), and neither final object has relocations. GC/1.3 uses r7/r6 instead of retail r8/r9 for shift counts, computes lo << shift early in r0, uses r7/r5 instead of retail r10 for cross-word contributions, inserts mr r4,r0, and schedules the ORs differently. Attempt 3's distinct direct unsigned-long-long shift hypothesis scored 42.22222% superficially but was invalid: GC/1.3 emitted bl __shl2i with an R_PPC_REL24 relocation, recursively calling this helper, while retail has no relocation. The valid word-expanded NonMatching C was restored. Full build passed and build/GEDE01/main.dol SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}

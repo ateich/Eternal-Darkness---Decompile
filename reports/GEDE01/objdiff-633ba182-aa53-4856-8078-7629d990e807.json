@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "assignment_id": "633ba182-aa53-4856-8078-7629d990e807",
+  "target": "fn_80202E28",
+  "compiler": "GC/1.3",
+  "extra_cflags": ["-use_lmw_stmw on"],
+  "hypothesis": "The retail 0xC0 frame is produced by distinct function-scoped aggregate temporaries. Restoring unique vector temporaries and the action 0x30 camera/effect/color path should expand the frame and improve instruction alignment without compiler-policy changes.",
+  "source_improvement": {
+    "previous_match_percent": 65.411644,
+    "final_match_percent": 68.72869,
+    "recovered": [
+      "distinct vector temporaries for the three event-selected offsets",
+      "action 0x30 camera-space conversion via fn_801D38BC",
+      "action 0x30 effect construction via fn_8014F65C",
+      "the seventh floating argument to fn_800C96D4",
+      "the color-alpha gate around the type 3 event dispatch"
+    ],
+    "source_sha256": "cb1d163f96a86b265759928df8246eecf5eb7164d794e5309abd065c6f5fb888"
+  },
+  "build": {
+    "command": "python3 configure.py && .tools/bin/ninja -j2",
+    "exit_code": 0,
+    "raw_output_tail": [
+      "[935/937] DOL build/GEDE01/main.dol",
+      "[936/937] CHECK config/GEDE01/build.sha1",
+      "build/GEDE01/main.dol: OK",
+      "[937/937] PROGRESS"
+    ]
+  },
+  "canonical_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80202E28 fn_80202E28 -o reports/GEDE01/objdiff-633ba182-aa53-4856-8078-7629d990e807-canonical.raw.json --format json-pretty",
+    "exit_code": 0,
+    "raw_result": "reports/GEDE01/objdiff-633ba182-aa53-4856-8078-7629d990e807-canonical.raw.json",
+    "target_size": 3848,
+    "candidate_size": 2940,
+    "match_percent": 68.72869,
+    "target_relocations": 197,
+    "candidate_relocations": 136,
+    "diff_instructions": 481
+  },
+  "relocation_strict_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80202E28 fn_80202E28 -o reports/GEDE01/objdiff-633ba182-aa53-4856-8078-7629d990e807-relocation-strict.raw.json --format json-pretty -c function_reloc_diffs=name_address",
+    "exit_code": 0,
+    "raw_result": "reports/GEDE01/objdiff-633ba182-aa53-4856-8078-7629d990e807-relocation-strict.raw.json",
+    "target_size": 3848,
+    "candidate_size": 2940,
+    "match_percent": 68.72869,
+    "target_relocations": 197,
+    "candidate_relocations": 136,
+    "diff_instructions": 481,
+    "raw_result_identical_to_canonical": true
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "expected": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "actual": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+  },
+  "legal_audit": {
+    "inline_or_whole_function_assembly": false,
+    "independent_translation_unit": "src/game/game_fn_80202E28.c",
+    "neighboring_function_edits": false,
+    "compiler_or_gate_changes": false,
+    "generated_or_private_inputs_staged": false
+  },
+  "divergence": "Canonical and relocation-strict objdiff both measure 68.728690%. The candidate function is 2940 bytes versus the 3848-byte target and has 136 versus 197 relocation-bearing instructions. Function-scoped aggregates expand the candidate frame from the preserved attempt's 0x50 to 0x90, but retail uses 0xC0. The missing 0x30 bytes and most of the remaining code/relocations come from unrecovered three-word stack arguments and fn_8012C62C calls in repeated flag-0x200000 branches, plus the event-0x9C fn_801AAE68 effect lifecycle in actions 0xF and 0x10; downstream branch layout consequently remains different.",
+  "result": "attempted"
+}

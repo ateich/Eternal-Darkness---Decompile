@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "92720ccd-a498-4882-b904-8ad9d39be7bd",
+  "attempt": 5,
+  "base_commit": "9eaa5e0b12469aff44a67b89d445704a9bc755f6",
+  "target": "fn_800D9278",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-92720ccd-a498-4882-b904-8ad9d39be7bd.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both 94.746830%, 316 bytes each. Eight .text words differ at real offsets 0x10, 0x14, 0x18, 0x1c, 0x20, 0x2c, 0x34, 0x40: retail copies object into r31 at 0x10 and into r3 at 0x14 before remaining saves; candidate completes saves then copies object into r28 at 0x1c and into r3 at 0x20. Subsequent uses at 0x2c/0x34/0x40 use r31 in retail and r28 in candidate. Instructions at 0x44 through 0x138 inclusive are byte-identical. All 10 relocation offsets, types, targets and explicit addends agree. New nested-scope, distance-lifetime, sequential-union-storage, integer-handle, prototype and comma-expression hypotheses did not improve; attached-only scope scored 94.367090%, candidate-only scope 94.620255%, early return 89.556960%; other variants reproduced 94.746830% byte-identically. Retained recovered source as NonMatching."
+}

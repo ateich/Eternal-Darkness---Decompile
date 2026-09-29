@@ -27,7 +27,7 @@ typedef struct Target { u8 pad00[0x9E]; u8 a; u8 b; } Target;
 
 extern int lbl_8064D5A8;
 extern u32 lbl_8064D18C;
-extern float lbl_806510D0;
+extern const float lbl_806510D0;
 extern int fn_80201A84(int);
 extern void* fn_80201814(int);
 extern int fn_80201B4C(void*);
@@ -41,14 +41,18 @@ extern int fn_801D76A8(void*, Object*, s16*, s16*);
 extern void fn_801D8050(void*, u32, s16*, s16*);
 extern void fn_801AAE68(float, int, int, int, Vec3*, int, int, int, u16, int);
 
-void fn_801D73D0(s16* first, s16* second, int id, Object* object)
+void fn_801D73D0(s16* first, s16* second, u32 id, Object* object)
 {
+    int kind;
     int now;
-    int handle = 0;
-    void* item = 0;
-    int kind = -1;
+    int handle;
     int damage;
+    void* item;
     u32 result;
+
+    handle = 0;
+    item = 0;
+    kind = -1;
 
     if (object == 0)
         return;
@@ -72,15 +76,15 @@ void fn_801D73D0(s16* first, s16* second, int id, Object* object)
     if (fn_80201B5C(item) == 21)
         return;
     fn_801D7B78(now, first, second, object);
-    result = (u32)fn_8020123C(59, object->owner, handle, 1);
-    result &= -1;
+    result = fn_8020123C(59, object->owner, handle, 1) & 0xFFFFFFFFULL;
     if (result != 1)
         return;
     {
         Target* target = 0;
-        int special = 0;
+        int special;
         if (item != 0)
             target = fn_80201B8C(item);
+        special = 0;
         if (target != 0 && target->a == 2 && target->b == 5 &&
             fn_80201B64(item) == 51)
             special = 1;
@@ -94,9 +98,20 @@ void fn_801D73D0(s16* first, s16* second, int id, Object* object)
             }
             {
                 Vec3 midpoint;
-                midpoint.x = (float)((first[0] + second[0]) >> 1);
-                midpoint.y = (float)((first[1] + second[1]) >> 1);
-                midpoint.z = (float)((first[2] + second[2]) >> 1);
+                int midpoint_x = *first++;
+                int midpoint_y;
+                int midpoint_z;
+                midpoint_x += *second++;
+                midpoint_y = *first++;
+                midpoint_y += *second++;
+                midpoint_z = *first;
+                midpoint_z += *second;
+                midpoint_x >>= 1;
+                midpoint_y >>= 1;
+                midpoint_z >>= 1;
+                midpoint.x = (float)midpoint_x;
+                midpoint.y = (float)midpoint_y;
+                midpoint.z = (float)midpoint_z;
                 fn_801AAE68(lbl_806510D0, 74, 100, 0, &midpoint, 2, 1, 0,
                             (u16)lbl_8064D18C, 0);
             }

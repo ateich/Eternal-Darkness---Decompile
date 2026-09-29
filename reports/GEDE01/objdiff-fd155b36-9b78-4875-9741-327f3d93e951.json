@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "assignment_id": "fd155b36-9b78-4875-9741-327f3d93e951",
+  "attempt": 20,
+  "target": "fn_8019E0B0",
+  "compiler": "GC/1.3",
+  "source": "eternal-darkness-decomp/src/game/game_fn_8019E0B0.c",
+  "source_sha256": "4c8cfe1c602939a45372afbf73ba231c379551eda764d8f89b80a0364ca52590",
+  "recovery": {
+    "requested_preserved_commit": "4bd84efa3827bcede2cd8a8e4c195e2aea06edd7",
+    "preserved_commit_changed_files": [
+      "eternal-darkness-decomp/reports/GEDE01/durable-b0aeb962-8d97-4ad6-80e7-91e9cbd3a3c0.json",
+      "eternal-darkness-decomp/reports/GEDE01/objdiff-b0aeb962-8d97-4ad6-80e7-91e9cbd3a3c0.json"
+    ],
+    "result": "The preserved commit changes reports only. Its inherited source, configure.py registration, and split are identical to the accepted base, so no recovery source edit was required."
+  },
+  "hypothesis_test": {
+    "description": "Retail's address-taken locals occupy a contiguous padded layout (start at stack 24, delta at 32, seeds at 40/48, bounds/corners at 56/72), unlike the independently packed candidate locals. A single explicit local aggregate was tested to encode that layout and alter address/live-range allocation.",
+    "command": ".tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_8019E0B0.o && build/tools/objdiff-cli diff -p . -u main/game/game_fn_8019E0B0 fn_8019E0B0 -o build/GEDE01/attempt20-aggregate-test.json --format json-pretty -c function_reloc_diffs=name_address",
+    "strict_match_percent": 74.512985,
+    "retail_text_size": 1232,
+    "candidate_text_size": 1260,
+    "candidate_prologue": "0000001c: stmw r19,92(r1)",
+    "result": "Rejected: strict score regressed from 82.78247%, text grew by 8 bytes, and register pressure worsened from saving r21-r31 to r19-r31. The accepted source was restored before final verification."
+  },
+  "commands": [
+    "python3 configure.py",
+    ".tools/bin/ninja -j2",
+    "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8019E0B0 fn_8019E0B0 -o build/GEDE01/attempt20-canonical.json --format json-pretty",
+    "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8019E0B0 fn_8019E0B0 -o build/GEDE01/attempt20-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "sha1sum build/GEDE01/main.dol",
+    "build/binutils/powerpc-eabi-size build/GEDE01/obj/game/game_fn_8019E0B0.o build/GEDE01/src/game/game_fn_8019E0B0.o",
+    "build/binutils/powerpc-eabi-readelf -r build/GEDE01/obj/game/game_fn_8019E0B0.o",
+    "build/binutils/powerpc-eabi-readelf -r build/GEDE01/src/game/game_fn_8019E0B0.o",
+    "python3 tools/legal_audit.py"
+  ],
+  "raw_measured_outputs": {
+    "build": {
+      "exit_code": 0,
+      "terminal_output": "[920/922] DOL build/GEDE01/main.dol\n[921/922] CHECK config/GEDE01/build.sha1\nbuild/GEDE01/main.dol: OK\n[922/922] PROGRESS"
+    },
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+    "canonical_objdiff": {
+      "exit_code": 0,
+      "artifact": "eternal-darkness-decomp/build/GEDE01/attempt20-canonical.json",
+      "output_sha256": "7ad86b3610b1a3b561e0b37830f5386b9f8818d059033fddb33e8024ef8dcf88",
+      "left_size": 1232,
+      "right_size": 1252,
+      "match_percent": 82.78247
+    },
+    "relocation_strict_objdiff": {
+      "configuration": "function_reloc_diffs=name_address",
+      "exit_code": 0,
+      "artifact": "eternal-darkness-decomp/build/GEDE01/attempt20-strict.json",
+      "output_sha256": "7ad86b3610b1a3b561e0b37830f5386b9f8818d059033fddb33e8024ef8dcf88",
+      "left_size": 1232,
+      "right_size": 1252,
+      "match_percent": 82.78247
+    },
+    "object_sizes": "retail .text 1232 data 0 bss 0 total 1232; candidate .text 1252 data 8 bss 0 total 1260",
+    "relocations": {
+      "retail_count": 46,
+      "candidate_count": 46,
+      "retail_conversion_records": [
+        "0000024c R_PPC_EMB_SDA21 lbl_80650C60 + 0",
+        "000002ac R_PPC_EMB_SDA21 lbl_80650C60 + 0"
+      ],
+      "candidate_conversion_records": [
+        "00000254 R_PPC_EMB_SDA21 @73 + 0",
+        "000002bc R_PPC_EMB_SDA21 @73 + 0"
+      ]
+    },
+    "prologue": {
+      "retail": "0000001c: stmw r22,104(r1)",
+      "candidate": "0000001c: stmw r21,100(r1)"
+    },
+    "legal_audit": {
+      "exit_code": 0,
+      "stdout": "legal audit passed (22043 tracked project files inspected)"
+    }
+  },
+  "conclusion": "attempted: the one independent honest-C NonMatching reconstruction is retained; canonical and relocation-strict comparisons are below 100%."
+}

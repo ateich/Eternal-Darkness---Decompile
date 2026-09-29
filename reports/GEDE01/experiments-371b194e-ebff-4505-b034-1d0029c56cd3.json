@@ -1,0 +1,605 @@
+[
+  {
+    "hypothesis": "baseline",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "6f52e778803259d277c9232c68a525c6b832c00c342b29c8a8227b7e51612ca6",
+    "source_diff": "",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "color_aggregate",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "0f18523c05ea9f03f956dad376998c60c15266af98740682be5f222b845d7844",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -1,6 +1,8 @@\n typedef unsigned char u8;\n typedef unsigned short u16;\n typedef unsigned int u32;\n+\n+typedef struct Color { u8 r, g, b, a; } Color;\n \n typedef struct Work {\n     u8 type;\n@@ -16,7 +18,7 @@\n     u8 value24[4];\n     u8 pad28[2];\n     u16 field2a;\n-    u32 field2c;\n+    Color field2c;\n     u32 field30;\n     u32 field34;\n     u8 pad38[0x50];\n@@ -127,8 +129,8 @@\n     work->type = 0x20;\n     work->id = (u16)fn_801D3A24(value, 0x4e);\n     work->field14 = 7;\n-    work->field2c = ((u32*)lbl_802FC5BC)[3];\n-    ((u8*)&work->field2c)[3] = 0xe0;\n+    work->field2c = ((Color*)lbl_802FC5BC)[3];\n+    work->field2c.a = 0xe0;\n \n     owner = fn_80148300(owner, &local.first, local.first_object);\n     if (owner == 0)\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "loop_bound_int",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "cbbc5c7648b320b43de179e700729ca4474ffa33a2af97c00fff7785ca456d59",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -74,7 +74,7 @@\n     void* registered;\n     int i;\n     void** element;\n-    u8 loop_count;\n+    int loop_count;\n \n     source_info = fn_80201814(source);\n     if (source_info == 0)\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "loop_bound_inline",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "d38a786c06517e832b584cadda4c614249849136c211a2f569f674c47f06d450",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -74,7 +74,6 @@\n     void* registered;\n     int i;\n     void** element;\n-    u8 loop_count;\n \n     source_info = fn_80201814(source);\n     if (source_info == 0)\n@@ -137,10 +136,9 @@\n     if (registered == 0)\n         goto second_fail;\n     fn_801568B8(registered, fn_801487AC);\n-    loop_count = (u8)count;\n     result = *(void**)((u8*)local.first_object + 0x88);\n     element = (void**)((u8*)local.second_object + 0x88);\n-    for (i = 0; i < loop_count; i++) {\n+    for (i = 0; i < (u8)count; i++) {\n         fn_801A4420(result, *element, i);\n         element++;\n     }\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "loop_count_before_element",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "4b5f407c97d4941bca504c853a92798c963e2a5103108c6ad6c08130aab80251",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -73,8 +73,8 @@\n     void* owner = 0;\n     void* registered;\n     int i;\n+    u8 loop_count;\n     void** element;\n-    u8 loop_count;\n \n     source_info = fn_80201814(source);\n     if (source_info == 0)\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "loop_count_before_index",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "4cd079a1e54e845724a5b91851575f95032f446ec3398dbbefdcdb4a8b64c7af",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -72,9 +72,9 @@\n     int count = 0x10;\n     void* owner = 0;\n     void* registered;\n+    u8 loop_count;\n     int i;\n     void** element;\n-    u8 loop_count;\n \n     source_info = fn_80201814(source);\n     if (source_info == 0)\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "element_before_index",
+    "score": 97.44971,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.44971",
+    "source_sha256": "c533121a2459fa9aa6cf5b10a43cc572506dda0a83b10a423af41d325015262b",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -72,8 +72,8 @@\n     int count = 0x10;\n     void* owner = 0;\n     void* registered;\n+    void** element;\n     int i;\n-    void** element;\n     u8 loop_count;\n \n     source_info = fn_80201814(source);\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "loop_bound_assign_after_element",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "ea3b8657ef542ba80903c38418760b2adeab4185fd1df5c0efa5012065e76492",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -137,9 +137,9 @@\n     if (registered == 0)\n         goto second_fail;\n     fn_801568B8(registered, fn_801487AC);\n-    loop_count = (u8)count;\n     result = *(void**)((u8*)local.first_object + 0x88);\n     element = (void**)((u8*)local.second_object + 0x88);\n+    loop_count = (u8)count;\n     for (i = 0; i < loop_count; i++) {\n         fn_801A4420(result, *element, i);\n         element++;\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "count_byte",
+    "score": 94.49704,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 94.49704",
+    "source_sha256": "9e3a8dfc02e973b4ed0d22d8f209f068a92a48945d344e027eb3779c328df9e9",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -69,7 +69,7 @@\n     Work* next;\n     void* source_info;\n     void* result = 0;\n-    int count = 0x10;\n+    u8 count = 0x10;\n     void* owner = 0;\n     void* registered;\n     int i;\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "work_register",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "e3a38b5e444d060fe4d29336ff32e8d92e9bc2337ab34b827d3e19bcb65b7f93",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -65,7 +65,7 @@\n                   void* position, int amount)\n {\n     WorkLocals local;\n-    Work* work;\n+    register Work* work;\n     Work* next;\n     void* source_info;\n     void* result = 0;\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "reuse_count",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "c77dc986398fae20c75296ae4ae933abb214b894823a6c5d931ee7868f3aacc9",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -74,7 +74,6 @@\n     void* registered;\n     int i;\n     void** element;\n-    u8 loop_count;\n \n     source_info = fn_80201814(source);\n     if (source_info == 0)\n@@ -137,10 +136,10 @@\n     if (registered == 0)\n         goto second_fail;\n     fn_801568B8(registered, fn_801487AC);\n-    loop_count = (u8)count;\n+    count = (u8)count;\n     result = *(void**)((u8*)local.first_object + 0x88);\n     element = (void**)((u8*)local.second_object + 0x88);\n-    for (i = 0; i < loop_count; i++) {\n+    for (i = 0; i < count; i++) {\n         fn_801A4420(result, *element, i);\n         element++;\n     }\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "store_order_bac",
+    "score": 97.56805,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.56805",
+    "source_sha256": "d59721a2eddcbaf901f69ba67769a514a595f709fe2ac05ecf361f379c5284c0",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -126,8 +126,8 @@\n     work->kind = 0x10;\n     work->type = 0x20;\n     work->id = (u16)fn_801D3A24(value, 0x4e);\n+    work->field2c = ((u32*)lbl_802FC5BC)[3];\n     work->field14 = 7;\n-    work->field2c = ((u32*)lbl_802FC5BC)[3];\n     ((u8*)&work->field2c)[3] = 0xe0;\n \n     owner = fn_80148300(owner, &local.first, local.first_object);\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "store_order_bca",
+    "score": 97.54438,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.54438",
+    "source_sha256": "987c3227e73a7801f41d2024874d7f84478fddd21c37c2b9b1a77b2ff07b24f8",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -126,9 +126,9 @@\n     work->kind = 0x10;\n     work->type = 0x20;\n     work->id = (u16)fn_801D3A24(value, 0x4e);\n-    work->field14 = 7;\n     work->field2c = ((u32*)lbl_802FC5BC)[3];\n     ((u8*)&work->field2c)[3] = 0xe0;\n+    work->field14 = 7;\n \n     owner = fn_80148300(owner, &local.first, local.first_object);\n     if (owner == 0)\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "field14_direct",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "42fe81a582db94c11f032a86371085bc3999b22f934b0a2cf73faee568f5f91b",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -126,7 +126,7 @@\n     work->kind = 0x10;\n     work->type = 0x20;\n     work->id = (u16)fn_801D3A24(value, 0x4e);\n-    work->field14 = 7;\n+    local.second.field14 = 7;\n     work->field2c = ((u32*)lbl_802FC5BC)[3];\n     ((u8*)&work->field2c)[3] = 0xe0;\n \n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "field2c_direct",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "c7fdb18ef9e317b40af13916ac8e560ed529d4d4c919de86e38429fd74a29eef",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -127,8 +127,8 @@\n     work->type = 0x20;\n     work->id = (u16)fn_801D3A24(value, 0x4e);\n     work->field14 = 7;\n-    work->field2c = ((u32*)lbl_802FC5BC)[3];\n-    ((u8*)&work->field2c)[3] = 0xe0;\n+    local.second.field2c = ((u32*)lbl_802FC5BC)[3];\n+    ((u8*)&local.second.field2c)[3] = 0xe0;\n \n     owner = fn_80148300(owner, &local.first, local.first_object);\n     if (owner == 0)\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "second_work_block",
+    "score": 96.97633,
+    "candidate_bytes": "672",
+    "raw_output": "target 676 bytes  base 672 bytes  match 96.97633",
+    "source_sha256": "297de23cf373ae3359bbcc5ed70b483d274c193a1b862a2ad0652b496e7cec5c",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -116,7 +116,8 @@\n     work->field30 = value;\n     work->fielda8 = (u32)source;\n     next = &local.second;\n-    fn_80147E88(work = next);\n+    { Work* work = next;\n+    fn_80147E88(work);\n     fn_80148A98(work, local.second_object);\n     work->owner94 = 0;\n     work->statebc = 4;\n@@ -130,6 +131,7 @@\n     work->field2c = ((u32*)lbl_802FC5BC)[3];\n     ((u8*)&work->field2c)[3] = 0xe0;\n \n+    }\n     owner = fn_80148300(owner, &local.first, local.first_object);\n     if (owner == 0)\n         goto registration_fail;\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "next_uses_work",
+    "score": 96.97633,
+    "candidate_bytes": "672",
+    "raw_output": "target 676 bytes  base 672 bytes  match 96.97633",
+    "source_sha256": "a5a666493195580138d6ae445932b535768a33dac3ac35381b94208c81324aa2",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -133,7 +133,7 @@\n     owner = fn_80148300(owner, &local.first, local.first_object);\n     if (owner == 0)\n         goto registration_fail;\n-    registered = fn_80148300(owner, next, local.second_object);\n+    registered = fn_80148300(owner, work, local.second_object);\n     if (registered == 0)\n         goto second_fail;\n     fn_801568B8(registered, fn_801487AC);\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "next_address_after_init",
+    "score": 97.47929,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.47929",
+    "source_sha256": "f3504dc7e003015454a973b885384f120321a204fced34c38b94b77117acb399",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -115,8 +115,8 @@\n     work->mode = type;\n     work->field30 = value;\n     work->fielda8 = (u32)source;\n-    next = &local.second;\n-    fn_80147E88(work = next);\n+    work = &local.second;\n+    fn_80147E88(next = work);\n     fn_80148A98(work, local.second_object);\n     work->owner94 = 0;\n     work->statebc = 4;\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "second_work_pointer_increment",
+    "score": 95.81657,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 95.81657",
+    "source_sha256": "874ab6e94176a76652a71fa4fd1c781e5aa2bea90a4a494d9633e73aa06a5e6d",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -116,7 +116,8 @@\n     work->field30 = value;\n     work->fielda8 = (u32)source;\n     next = &local.second;\n-    fn_80147E88(work = next);\n+    work = (Work*)((u8*)work + sizeof(Work) + sizeof(void*));\n+    fn_80147E88(work);\n     fn_80148A98(work, local.second_object);\n     work->owner94 = 0;\n     work->statebc = 4;\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "source_info_reused_for_work",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "6b6e818260970e11b5862da9433e2b4ecbb3f5c57a310bc4200e9d9a33871c9a",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -116,7 +116,8 @@\n     work->field30 = value;\n     work->fielda8 = (u32)source;\n     next = &local.second;\n-    fn_80147E88(work = next);\n+    source_info = next;\n+    fn_80147E88(work = (Work*)source_info);\n     fn_80148A98(work, local.second_object);\n     work->owner94 = 0;\n     work->statebc = 4;\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "int i; before Work* work;",
+    "score": 97.44971,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.44971",
+    "source_sha256": "1474f4fad12bdf67e1383a04b43732516bc6ed65c1d846fda4ff3bae4ce6f7b5",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -65,6 +65,7 @@\n                   void* position, int amount)\n {\n     WorkLocals local;\n+    int i;\n     Work* work;\n     Work* next;\n     void* source_info;\n@@ -72,7 +73,6 @@\n     int count = 0x10;\n     void* owner = 0;\n     void* registered;\n-    int i;\n     void** element;\n     u8 loop_count;\n \n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "int i; before void* source_info;",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "d667c75c41090e7c0b5ba9ca4795b2c461e2f9d01f9d8e8ce7c7a428371e9e1c",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -67,12 +67,12 @@\n     WorkLocals local;\n     Work* work;\n     Work* next;\n+    int i;\n     void* source_info;\n     void* result = 0;\n     int count = 0x10;\n     void* owner = 0;\n     void* registered;\n-    int i;\n     void** element;\n     u8 loop_count;\n \n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "int i; before void* result = 0;",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "f518419195453fc7f49a5611e84034576a7c8d21f1fc18a5ea9c13231f355dd3",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -68,11 +68,11 @@\n     Work* work;\n     Work* next;\n     void* source_info;\n+    int i;\n     void* result = 0;\n     int count = 0x10;\n     void* owner = 0;\n     void* registered;\n-    int i;\n     void** element;\n     u8 loop_count;\n \n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "int i; before void* registered;",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "e0ee45b52d9cae6e47ed7862ca7efcfc98aeecbe452b08b9229b3d4c424936d3",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -71,8 +71,8 @@\n     void* result = 0;\n     int count = 0x10;\n     void* owner = 0;\n+    int i;\n     void* registered;\n-    int i;\n     void** element;\n     u8 loop_count;\n \n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "void** element; before Work* work;",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "e3d8e77ad617753fcbdd97fd8f4ced39b22b1cb30753331024d1619c8b8df9e2",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -65,6 +65,7 @@\n                   void* position, int amount)\n {\n     WorkLocals local;\n+    void** element;\n     Work* work;\n     Work* next;\n     void* source_info;\n@@ -73,7 +74,6 @@\n     void* owner = 0;\n     void* registered;\n     int i;\n-    void** element;\n     u8 loop_count;\n \n     source_info = fn_80201814(source);\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "void** element; before void* source_info;",
+    "score": 97.44971,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.44971",
+    "source_sha256": "823b2e324ece9c9059ace448cff2764e90f6f363b7e7561d72d497f613bc780f",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -67,13 +67,13 @@\n     WorkLocals local;\n     Work* work;\n     Work* next;\n+    void** element;\n     void* source_info;\n     void* result = 0;\n     int count = 0x10;\n     void* owner = 0;\n     void* registered;\n     int i;\n-    void** element;\n     u8 loop_count;\n \n     source_info = fn_80201814(source);\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "void** element; before void* result = 0;",
+    "score": 97.44971,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.44971",
+    "source_sha256": "ecd8f7696fc2bf633ffc01334caabebc1cbc26690dc21abea9cea5f0bcc997df",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -68,12 +68,12 @@\n     Work* work;\n     Work* next;\n     void* source_info;\n+    void** element;\n     void* result = 0;\n     int count = 0x10;\n     void* owner = 0;\n     void* registered;\n     int i;\n-    void** element;\n     u8 loop_count;\n \n     source_info = fn_80201814(source);\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "void** element; before void* registered;",
+    "score": 97.44971,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.44971",
+    "source_sha256": "69286407c44ab0576530988c9e416575449b918d30f69030df2c491ca4157107",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -71,9 +71,9 @@\n     void* result = 0;\n     int count = 0x10;\n     void* owner = 0;\n+    void** element;\n     void* registered;\n     int i;\n-    void** element;\n     u8 loop_count;\n \n     source_info = fn_80201814(source);\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "u8 loop_count; before Work* work;",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "50e6761c47913669ed4c8b1ad22d3c9046dc05781a49324f96b9a117c046247d",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -65,6 +65,7 @@\n                   void* position, int amount)\n {\n     WorkLocals local;\n+    u8 loop_count;\n     Work* work;\n     Work* next;\n     void* source_info;\n@@ -74,7 +75,6 @@\n     void* registered;\n     int i;\n     void** element;\n-    u8 loop_count;\n \n     source_info = fn_80201814(source);\n     if (source_info == 0)\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "u8 loop_count; before void* source_info;",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "bcfad80e220284fe34e6639a191895d216e3c11afc002f4f8a7f00701d6625c5",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -67,6 +67,7 @@\n     WorkLocals local;\n     Work* work;\n     Work* next;\n+    u8 loop_count;\n     void* source_info;\n     void* result = 0;\n     int count = 0x10;\n@@ -74,7 +75,6 @@\n     void* registered;\n     int i;\n     void** element;\n-    u8 loop_count;\n \n     source_info = fn_80201814(source);\n     if (source_info == 0)\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "u8 loop_count; before void* result = 0;",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "665d19d34b5b77e524e3d306467f3a0b066f150901a3e1fb7b6e7524609b5e3b",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -68,13 +68,13 @@\n     Work* work;\n     Work* next;\n     void* source_info;\n+    u8 loop_count;\n     void* result = 0;\n     int count = 0x10;\n     void* owner = 0;\n     void* registered;\n     int i;\n     void** element;\n-    u8 loop_count;\n \n     source_info = fn_80201814(source);\n     if (source_info == 0)\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "u8 loop_count; before void* registered;",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "fced0225105f72234048b5199f98e456909355fc24d0ba9d8be36afc2e79adab",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -71,10 +71,10 @@\n     void* result = 0;\n     int count = 0x10;\n     void* owner = 0;\n+    u8 loop_count;\n     void* registered;\n     int i;\n     void** element;\n-    u8 loop_count;\n \n     source_info = fn_80201814(source);\n     if (source_info == 0)\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "loop declarations ('void** element;', 'u8 loop_count;', 'int i;')",
+    "score": 97.44971,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.44971",
+    "source_sha256": "935c381e481187f3deb66e0a73d2f891525fce64f1d6681db0cce2d671db9b10",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -72,9 +72,9 @@\n     int count = 0x10;\n     void* owner = 0;\n     void* registered;\n-    int i;\n     void** element;\n     u8 loop_count;\n+    int i;\n \n     source_info = fn_80201814(source);\n     if (source_info == 0)\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "loop declarations ('u8 loop_count;', 'void** element;', 'int i;')",
+    "score": 97.44971,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.44971",
+    "source_sha256": "51ef92d490142e20ebd61216aa30638b30e6dbebda8c9a7b1e61fbcc1ca02001",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -72,9 +72,9 @@\n     int count = 0x10;\n     void* owner = 0;\n     void* registered;\n+    u8 loop_count;\n+    void** element;\n     int i;\n-    void** element;\n-    u8 loop_count;\n \n     source_info = fn_80201814(source);\n     if (source_info == 0)\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "loop_postincrement_argument",
+    "score": 96.22485,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 96.22485",
+    "source_sha256": "5684ac9d390ae80bef25176dbca59a6621ff2eaef8e28a73408f7068c45ee54c",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -140,9 +140,8 @@\n     loop_count = (u8)count;\n     result = *(void**)((u8*)local.first_object + 0x88);\n     element = (void**)((u8*)local.second_object + 0x88);\n-    for (i = 0; i < loop_count; i++) {\n-        fn_801A4420(result, *element, i);\n-        element++;\n+    for (i = 0; i < loop_count;) {\n+        fn_801A4420(result, *element++, i++);\n     }\n     goto done;\n \n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "loop_index_unsigned",
+    "score": 97.27219,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.27219",
+    "source_sha256": "6e1930c5360caf7139ab3044f1e0bdccd7396efa38208025eba04c6b638ea082",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -72,7 +72,7 @@\n     int count = 0x10;\n     void* owner = 0;\n     void* registered;\n-    int i;\n+    unsigned int i;\n     void** element;\n     u8 loop_count;\n \n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "loop_index_short",
+    "score": 96.35503,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 96.35503",
+    "source_sha256": "9854d5197642a022dc63dd60958a82de2c0cf6dbfdfe697fd6729f370ccfadd4",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -72,7 +72,7 @@\n     int count = 0x10;\n     void* owner = 0;\n     void* registered;\n-    int i;\n+    short i;\n     void** element;\n     u8 loop_count;\n \n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "loop_bound_char",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "9a1b0a77ccb8110e88e288298e1dcf93d170f823faacb11d308a8b1ce9be9254",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -74,7 +74,7 @@\n     void* registered;\n     int i;\n     void** element;\n-    u8 loop_count;\n+    unsigned short loop_count;\n \n     source_info = fn_80201814(source);\n     if (source_info == 0)\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "loop_separate_argument",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "5b27211223b2553714d79d056470e358e6a85bd6124dfbda72f53576aed95f1e",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -73,6 +73,7 @@\n     void* owner = 0;\n     void* registered;\n     int i;\n+    int argument;\n     void** element;\n     u8 loop_count;\n \n@@ -141,7 +142,8 @@\n     result = *(void**)((u8*)local.first_object + 0x88);\n     element = (void**)((u8*)local.second_object + 0x88);\n     for (i = 0; i < loop_count; i++) {\n-        fn_801A4420(result, *element, i);\n+        argument = i;\n+        fn_801A4420(result, *element, argument);\n         element++;\n     }\n     goto done;\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "loop_element_char_pointer",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "b1f383b66eb6b1248876ad47fb88f615bf4dbfe136f8af3006b1d5ff08a9ee99",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -73,7 +73,7 @@\n     void* owner = 0;\n     void* registered;\n     int i;\n-    void** element;\n+    u8* element;\n     u8 loop_count;\n \n     source_info = fn_80201814(source);\n@@ -139,10 +139,10 @@\n     fn_801568B8(registered, fn_801487AC);\n     loop_count = (u8)count;\n     result = *(void**)((u8*)local.first_object + 0x88);\n-    element = (void**)((u8*)local.second_object + 0x88);\n+    element = (u8*)((u8*)local.second_object + 0x88);\n     for (i = 0; i < loop_count; i++) {\n-        fn_801A4420(result, *element, i);\n-        element++;\n+        fn_801A4420(result, *(void**)element, i);\n+        element += 4;\n     }\n     goto done;\n \n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "loop_pointer_const",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "a773cf064c5dd133d3470f1e5bf6b591d79e5b3792641c4e095c70943d0d6e7d",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -73,7 +73,7 @@\n     void* owner = 0;\n     void* registered;\n     int i;\n-    void** element;\n+    void* const* element;\n     u8 loop_count;\n \n     source_info = fn_80201814(source);\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "field14_before_id",
+    "score": 94.05325,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 94.05325",
+    "source_sha256": "9e63deadbff8f37727ac0429d37c1333a85c7ff136bfb6e267f3ac57c290af1d",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -125,8 +125,8 @@\n     fn_80184740(work);\n     work->kind = 0x10;\n     work->type = 0x20;\n+    work->field14 = 7;\n     work->id = (u16)fn_801D3A24(value, 0x4e);\n-    work->field14 = 7;\n     work->field2c = ((u32*)lbl_802FC5BC)[3];\n     ((u8*)&work->field2c)[3] = 0xe0;\n \n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "id_result_temporary",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "56dcf73e29432c0abf82875ffb010c28ef18ac13e3ca68b3284d8bdf2f9350de",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -73,6 +73,7 @@\n     void* owner = 0;\n     void* registered;\n     int i;\n+    int id;\n     void** element;\n     u8 loop_count;\n \n@@ -125,8 +126,9 @@\n     fn_80184740(work);\n     work->kind = 0x10;\n     work->type = 0x20;\n-    work->id = (u16)fn_801D3A24(value, 0x4e);\n+    id = fn_801D3A24(value, 0x4e);\n     work->field14 = 7;\n+    work->id = (u16)id;\n     work->field2c = ((u32*)lbl_802FC5BC)[3];\n     ((u8*)&work->field2c)[3] = 0xe0;\n \n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "field2c_volatile_read",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "0bc4ba4babef9b436305654b80f93b95718813cd91faa65be0dad07885906ef1",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -127,7 +127,7 @@\n     work->type = 0x20;\n     work->id = (u16)fn_801D3A24(value, 0x4e);\n     work->field14 = 7;\n-    work->field2c = ((u32*)lbl_802FC5BC)[3];\n+    work->field2c = ((volatile u32*)lbl_802FC5BC)[3];\n     ((u8*)&work->field2c)[3] = 0xe0;\n \n     owner = fn_80148300(owner, &local.first, local.first_object);\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "work_second_through_void",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "aecbb0996a7dcf8fd0ea11587b84acbde9ae6c1c132288e44ee95c11ae1934a4",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -66,7 +66,7 @@\n {\n     WorkLocals local;\n     Work* work;\n-    Work* next;\n+    void* next;\n     void* source_info;\n     void* result = 0;\n     int count = 0x10;\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "work_first_scoped",
+    "score": 97.44971,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.44971",
+    "source_sha256": "54d3a3662d430d7a382e84ca16e602516271952a5e22f1864c0d29ac6e95b527",
+    "source_diff": "--- preserved/game_fn_80155330.c\n+++ experiment/game_fn_80155330.c\n@@ -85,7 +85,7 @@\n     if (owner == 0 || local.first_object == 0 || local.second_object == 0)\n         goto allocation_fail;\n \n-    work = &local.first;\n+    { Work* work = &local.first;\n     fn_80147E88(work);\n     fn_801555D4(work, local.first_object);\n     if (type != 1)\n@@ -115,6 +115,7 @@\n     work->mode = type;\n     work->field30 = value;\n     work->fielda8 = (u32)source;\n+    }\n     next = &local.second;\n     fn_80147E88(work = next);\n     fn_80148A98(work, local.second_object);\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "first direct mode",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "3b18352a44525f8fef970cda86b8a4089ee132672cc729fe0027167e87abfc1d",
+    "source_diff": "--- \n+++ \n@@ -112,7 +112,7 @@\n     work->type = (u8)count;\n     work->kind = 0x10;\n     fn_80149B60(source_info, work->value24, 0, parameter, 0);\n-    work->mode = type;\n+    local.first.mode = type;\n     work->field30 = value;\n     work->fielda8 = (u32)source;\n     next = &local.second;\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "first direct field30",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "c9ab0e8c5804bb2fef77d5cb8608cb25574c2aaaab969f6defde0755483592bc",
+    "source_diff": "--- \n+++ \n@@ -113,7 +113,7 @@\n     work->kind = 0x10;\n     fn_80149B60(source_info, work->value24, 0, parameter, 0);\n     work->mode = type;\n-    work->field30 = value;\n+    local.first.field30 = value;\n     work->fielda8 = (u32)source;\n     next = &local.second;\n     fn_80147E88(work = next);\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "first direct mode,field30",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "18a30127634ac9792159cf20a553733dae0fbd8d9a028575cf36b131abce2b5c",
+    "source_diff": "--- \n+++ \n@@ -112,8 +112,8 @@\n     work->type = (u8)count;\n     work->kind = 0x10;\n     fn_80149B60(source_info, work->value24, 0, parameter, 0);\n-    work->mode = type;\n-    work->field30 = value;\n+    local.first.mode = type;\n+    local.first.field30 = value;\n     work->fielda8 = (u32)source;\n     next = &local.second;\n     fn_80147E88(work = next);\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "first direct fielda8",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "d2efa0bb8765494a714443c9dc933dc96a074bb7daf4e8477b8ab2401ae9f704",
+    "source_diff": "--- \n+++ \n@@ -114,7 +114,7 @@\n     fn_80149B60(source_info, work->value24, 0, parameter, 0);\n     work->mode = type;\n     work->field30 = value;\n-    work->fielda8 = (u32)source;\n+    local.first.fielda8 = (u32)source;\n     next = &local.second;\n     fn_80147E88(work = next);\n     fn_80148A98(work, local.second_object);\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "first direct mode,fielda8",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "bc913a2a7e8b69db29296db4763e43f48c412db9ff177fac4c309071129bf6ea",
+    "source_diff": "--- \n+++ \n@@ -112,9 +112,9 @@\n     work->type = (u8)count;\n     work->kind = 0x10;\n     fn_80149B60(source_info, work->value24, 0, parameter, 0);\n-    work->mode = type;\n+    local.first.mode = type;\n     work->field30 = value;\n-    work->fielda8 = (u32)source;\n+    local.first.fielda8 = (u32)source;\n     next = &local.second;\n     fn_80147E88(work = next);\n     fn_80148A98(work, local.second_object);\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "first direct field30,fielda8",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "892581628f8087939ef4cabbfc9a01589a8d427bf639ca30780d812c6f9d14e8",
+    "source_diff": "--- \n+++ \n@@ -113,8 +113,8 @@\n     work->kind = 0x10;\n     fn_80149B60(source_info, work->value24, 0, parameter, 0);\n     work->mode = type;\n-    work->field30 = value;\n-    work->fielda8 = (u32)source;\n+    local.first.field30 = value;\n+    local.first.fielda8 = (u32)source;\n     next = &local.second;\n     fn_80147E88(work = next);\n     fn_80148A98(work, local.second_object);\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "first direct mode,field30,fielda8",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "f1d989e9c255dcd34234c4693edc381c76cebf2c362e7912313b5ef761da557e",
+    "source_diff": "--- \n+++ \n@@ -112,9 +112,9 @@\n     work->type = (u8)count;\n     work->kind = 0x10;\n     fn_80149B60(source_info, work->value24, 0, parameter, 0);\n-    work->mode = type;\n-    work->field30 = value;\n-    work->fielda8 = (u32)source;\n+    local.first.mode = type;\n+    local.first.field30 = value;\n+    local.first.fielda8 = (u32)source;\n     next = &local.second;\n     fn_80147E88(work = next);\n     fn_80148A98(work, local.second_object);\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "first registration &local",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "3354a0edf161cf1248a0c60faa957b0a58b0bd4e008956aa46874ba5f036f4fa",
+    "source_diff": "--- \n+++ \n@@ -130,7 +130,7 @@\n     work->field2c = ((u32*)lbl_802FC5BC)[3];\n     ((u8*)&work->field2c)[3] = 0xe0;\n \n-    owner = fn_80148300(owner, &local.first, local.first_object);\n+    owner = fn_80148300(owner, &local, local.first_object);\n     if (owner == 0)\n         goto registration_fail;\n     registered = fn_80148300(owner, next, local.second_object);\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "first registration &local.first.type",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "c168dfc9d527b90658308e9ae689faac101ac7c2f9f9714280e3bd03acdb97fb",
+    "source_diff": "--- \n+++ \n@@ -130,7 +130,7 @@\n     work->field2c = ((u32*)lbl_802FC5BC)[3];\n     ((u8*)&work->field2c)[3] = 0xe0;\n \n-    owner = fn_80148300(owner, &local.first, local.first_object);\n+    owner = fn_80148300(owner, &local.first.type, local.first_object);\n     if (owner == 0)\n         goto registration_fail;\n     registered = fn_80148300(owner, next, local.second_object);\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "first registration (void*)&local.first",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "ec094840180209e5b67fb81e42c6f3b385cee5cce5508c0d5d578ca4bc6dc060",
+    "source_diff": "--- \n+++ \n@@ -130,7 +130,7 @@\n     work->field2c = ((u32*)lbl_802FC5BC)[3];\n     ((u8*)&work->field2c)[3] = 0xe0;\n \n-    owner = fn_80148300(owner, &local.first, local.first_object);\n+    owner = fn_80148300(owner, (void*)&local.first, local.first_object);\n     if (owner == 0)\n         goto registration_fail;\n     registered = fn_80148300(owner, next, local.second_object);\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "first registration (Work*)&local.first.type",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "32bc11396237b2ac219a0dfe0b7b7fcb6919851f66121f4a4e867451994f0246",
+    "source_diff": "--- \n+++ \n@@ -130,7 +130,7 @@\n     work->field2c = ((u32*)lbl_802FC5BC)[3];\n     ((u8*)&work->field2c)[3] = 0xe0;\n \n-    owner = fn_80148300(owner, &local.first, local.first_object);\n+    owner = fn_80148300(owner, (Work*)&local.first.type, local.first_object);\n     if (owner == 0)\n         goto registration_fail;\n     registered = fn_80148300(owner, next, local.second_object);\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "work_initial_through_void",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "3f212f3888ed51cc236cb92ef9e38cb3decc887c0b85856b823d3dad1481cd33",
+    "source_diff": "--- \n+++ \n@@ -85,7 +85,7 @@\n     if (owner == 0 || local.first_object == 0 || local.second_object == 0)\n         goto allocation_fail;\n \n-    work = &local.first;\n+    work = (Work*)&local;\n     fn_80147E88(work);\n     fn_801555D4(work, local.first_object);\n     if (type != 1)\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "work_initial_char_field",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "a8e530fe07c77f636b83164188361f1c3015d8ce33cff7066b277f555ab48430",
+    "source_diff": "--- \n+++ \n@@ -85,7 +85,7 @@\n     if (owner == 0 || local.first_object == 0 || local.second_object == 0)\n         goto allocation_fail;\n \n-    work = &local.first;\n+    work = (Work*)&local.first.type;\n     fn_80147E88(work);\n     fn_801555D4(work, local.first_object);\n     if (type != 1)\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "loop_indexed_array_strength_reduction",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "c180f18a457ca687e4bce70b52bb4eb140d5c1da61aa78de154355b18b2d616b",
+    "source_diff": "--- \n+++ \n@@ -141,8 +141,7 @@\n     result = *(void**)((u8*)local.first_object + 0x88);\n     element = (void**)((u8*)local.second_object + 0x88);\n     for (i = 0; i < loop_count; i++) {\n-        fn_801A4420(result, *element, i);\n-        element++;\n+        fn_801A4420(result, element[i], i);\n     }\n     goto done;\n \n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "loop_indexed_direct_object",
+    "score": 94.24852,
+    "candidate_bytes": "680",
+    "raw_output": "target 676 bytes  base 680 bytes  match 94.24852",
+    "source_sha256": "cc48d7cc53b8059ccde0e9c061aa57b37f0a63513fabecd3755b8138ac623164",
+    "source_diff": "--- \n+++ \n@@ -139,10 +139,8 @@\n     fn_801568B8(registered, fn_801487AC);\n     loop_count = (u8)count;\n     result = *(void**)((u8*)local.first_object + 0x88);\n-    element = (void**)((u8*)local.second_object + 0x88);\n     for (i = 0; i < loop_count; i++) {\n-        fn_801A4420(result, *element, i);\n-        element++;\n+        fn_801A4420(result, ((void**)((u8*)local.second_object + 0x88))[i], i);\n     }\n     goto done;\n \n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "loop_indexed_cached_object",
+    "score": 96.11834,
+    "candidate_bytes": "672",
+    "raw_output": "target 676 bytes  base 672 bytes  match 96.11834",
+    "source_sha256": "e2c33ae2a6287f4511c3fde249a65f7ff3743f5be19fa21f8715716df94dc473",
+    "source_diff": "--- \n+++ \n@@ -139,10 +139,9 @@\n     fn_801568B8(registered, fn_801487AC);\n     loop_count = (u8)count;\n     result = *(void**)((u8*)local.first_object + 0x88);\n-    element = (void**)((u8*)local.second_object + 0x88);\n+    element = (void**)local.second_object;\n     for (i = 0; i < loop_count; i++) {\n-        fn_801A4420(result, *element, i);\n-        element++;\n+        fn_801A4420(result, element[i + 0x22], i);\n     }\n     goto done;\n \n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "loop_indexed_struct_list",
+    "score": 96.11834,
+    "candidate_bytes": "672",
+    "raw_output": "target 676 bytes  base 672 bytes  match 96.11834",
+    "source_sha256": "d4d1a76c38d47ae0d1f0c0fef6ebe23b5914737efb7f7b49e495540bce6aa6d6",
+    "source_diff": "--- \n+++ \n@@ -73,7 +73,7 @@\n     void* owner = 0;\n     void* registered;\n     int i;\n-    void** element;\n+    Work* element;\n     u8 loop_count;\n \n     source_info = fn_80201814(source);\n@@ -139,10 +139,9 @@\n     fn_801568B8(registered, fn_801487AC);\n     loop_count = (u8)count;\n     result = *(void**)((u8*)local.first_object + 0x88);\n-    element = (void**)((u8*)local.second_object + 0x88);\n+    element = (Work*)local.second_object;\n     for (i = 0; i < loop_count; i++) {\n-        fn_801A4420(result, *element, i);\n-        element++;\n+        fn_801A4420(result, (void*)element->list[i], i);\n     }\n     goto done;\n \n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "two_records_first_then_second",
+    "score": 97.42603,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.42603",
+    "source_sha256": "3b767e27fcef2b2c5815edb078b055619791788656c51f5e0c0f291322736c06",
+    "source_diff": "--- \n+++ \n@@ -31,14 +31,10 @@\n     u8 pad_ac[0x10];\n     u8 statebc;\n     u8 padbd[3];\n+    void* object;\n } Work;\n \n-typedef struct WorkLocals {\n-    Work first;\n-    void* first_object;\n-    Work second;\n-    void* second_object;\n-} WorkLocals;\n+\n \n extern void* lbl_802FC5BC[];\n extern void fn_801487AC(void);\n@@ -64,7 +60,8 @@\n void* fn_80155330(u8 type, void* source, int value, int parameter,\n                   void* position, int amount)\n {\n-    WorkLocals local;\n+    Work first;\n+    Work second;\n     Work* work;\n     Work* next;\n     void* source_info;\n@@ -80,17 +77,17 @@\n     if (source_info == 0)\n         goto done;\n     owner = fn_80155DB4(source_info);\n-    local.first_object = fn_80149E04();\n-    local.second_object = fn_80149E04();\n-    if (owner == 0 || local.first_object == 0 || local.second_object == 0)\n+    first.object = fn_80149E04();\n+    second.object = fn_80149E04();\n+    if (owner == 0 || first.object == 0 || second.object == 0)\n         goto allocation_fail;\n \n-    work = &local.first;\n+    work = &first;\n     fn_80147E88(work);\n-    fn_801555D4(work, local.first_object);\n+    fn_801555D4(work, first.object);\n     if (type != 1)\n         work->callback98 = (u32)fn_801556DC;\n-    fn_80149B0C(local.first_object, 0, parameter);\n+    fn_80149B0C(first.object, 0, parameter);\n     fn_801A438C(work);\n \n     switch (type) {\n@@ -115,13 +112,13 @@\n     work->mode = type;\n     work->field30 = value;\n     work->fielda8 = (u32)source;\n-    next = &local.second;\n+    next = &second;\n     fn_80147E88(work = next);\n-    fn_80148A98(work, local.second_object);\n+    fn_80148A98(work, second.object);\n     work->owner94 = 0;\n     work->statebc = 4;\n-    *(u8*)local.second_object = local.first.type;\n-    fn_80149B38(local.second_object);\n+    *(u8*)second.object = first.type;\n+    fn_80149B38(second.object);\n     fn_80184740(work);\n     work->kind = 0x10;\n     work->type = 0x20;\n@@ -130,16 +127,16 @@\n     work->field2c = ((u32*)lbl_802FC5BC)[3];\n     ((u8*)&work->field2c)[3] = 0xe0;\n \n-    owner = fn_80148300(owner, &local.first, local.first_object);\n+    owner = fn_80148300(owner, &first, first.object);\n     if (owner == 0)\n         goto registration_fail;\n-    registered = fn_80148300(owner, next, local.second_object);\n+    registered = fn_80148300(owner, next, second.object);\n     if (registered == 0)\n         goto second_fail;\n     fn_801568B8(registered, fn_801487AC);\n     loop_count = (u8)count;\n-    result = *(void**)((u8*)local.first_object + 0x88);\n-    element = (void**)((u8*)local.second_object + 0x88);\n+    result = *(void**)((u8*)first.object + 0x88);\n+    element = (void**)((u8*)second.object + 0x88);\n     for (i = 0; i < loop_count; i++) {\n         fn_801A4420(result, *element, i);\n         element++;\n@@ -147,15 +144,15 @@\n     goto done;\n \n second_fail:\n-    fn_80149EB8(local.second_object);\n+    fn_80149EB8(second.object);\n     goto done;\n registration_fail:\n-    fn_80149EB8(local.first_object);\n-    fn_80149EB8(local.second_object);\n+    fn_80149EB8(first.object);\n+    fn_80149EB8(second.object);\n     goto done;\n allocation_fail:\n-    fn_80149EB8(local.first_object);\n-    fn_80149EB8(local.second_object);\n+    fn_80149EB8(first.object);\n+    fn_80149EB8(second.object);\n done:\n     return result;\n }\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "two_records_second_then_first",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "920ac0dd42fe73fcdf4d1d9c9f57e9eedc21fcdbf477a891b3321cf6792c6fa0",
+    "source_diff": "--- \n+++ \n@@ -31,14 +31,10 @@\n     u8 pad_ac[0x10];\n     u8 statebc;\n     u8 padbd[3];\n+    void* object;\n } Work;\n \n-typedef struct WorkLocals {\n-    Work first;\n-    void* first_object;\n-    Work second;\n-    void* second_object;\n-} WorkLocals;\n+\n \n extern void* lbl_802FC5BC[];\n extern void fn_801487AC(void);\n@@ -64,7 +60,8 @@\n void* fn_80155330(u8 type, void* source, int value, int parameter,\n                   void* position, int amount)\n {\n-    WorkLocals local;\n+    Work second;\n+    Work first;\n     Work* work;\n     Work* next;\n     void* source_info;\n@@ -80,17 +77,17 @@\n     if (source_info == 0)\n         goto done;\n     owner = fn_80155DB4(source_info);\n-    local.first_object = fn_80149E04();\n-    local.second_object = fn_80149E04();\n-    if (owner == 0 || local.first_object == 0 || local.second_object == 0)\n+    first.object = fn_80149E04();\n+    second.object = fn_80149E04();\n+    if (owner == 0 || first.object == 0 || second.object == 0)\n         goto allocation_fail;\n \n-    work = &local.first;\n+    work = &first;\n     fn_80147E88(work);\n-    fn_801555D4(work, local.first_object);\n+    fn_801555D4(work, first.object);\n     if (type != 1)\n         work->callback98 = (u32)fn_801556DC;\n-    fn_80149B0C(local.first_object, 0, parameter);\n+    fn_80149B0C(first.object, 0, parameter);\n     fn_801A438C(work);\n \n     switch (type) {\n@@ -115,13 +112,13 @@\n     work->mode = type;\n     work->field30 = value;\n     work->fielda8 = (u32)source;\n-    next = &local.second;\n+    next = &second;\n     fn_80147E88(work = next);\n-    fn_80148A98(work, local.second_object);\n+    fn_80148A98(work, second.object);\n     work->owner94 = 0;\n     work->statebc = 4;\n-    *(u8*)local.second_object = local.first.type;\n-    fn_80149B38(local.second_object);\n+    *(u8*)second.object = first.type;\n+    fn_80149B38(second.object);\n     fn_80184740(work);\n     work->kind = 0x10;\n     work->type = 0x20;\n@@ -130,16 +127,16 @@\n     work->field2c = ((u32*)lbl_802FC5BC)[3];\n     ((u8*)&work->field2c)[3] = 0xe0;\n \n-    owner = fn_80148300(owner, &local.first, local.first_object);\n+    owner = fn_80148300(owner, &first, first.object);\n     if (owner == 0)\n         goto registration_fail;\n-    registered = fn_80148300(owner, next, local.second_object);\n+    registered = fn_80148300(owner, next, second.object);\n     if (registered == 0)\n         goto second_fail;\n     fn_801568B8(registered, fn_801487AC);\n     loop_count = (u8)count;\n-    result = *(void**)((u8*)local.first_object + 0x88);\n-    element = (void**)((u8*)local.second_object + 0x88);\n+    result = *(void**)((u8*)first.object + 0x88);\n+    element = (void**)((u8*)second.object + 0x88);\n     for (i = 0; i < loop_count; i++) {\n         fn_801A4420(result, *element, i);\n         element++;\n@@ -147,15 +144,15 @@\n     goto done;\n \n second_fail:\n-    fn_80149EB8(local.second_object);\n+    fn_80149EB8(second.object);\n     goto done;\n registration_fail:\n-    fn_80149EB8(local.first_object);\n-    fn_80149EB8(local.second_object);\n+    fn_80149EB8(first.object);\n+    fn_80149EB8(second.object);\n     goto done;\n allocation_fail:\n-    fn_80149EB8(local.first_object);\n-    fn_80149EB8(local.second_object);\n+    fn_80149EB8(first.object);\n+    fn_80149EB8(second.object);\n done:\n     return result;\n }\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "two_records_array",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "cbd7e0a2a3eabe219bc131f7e0d3e6b15bff450b0542e744c43696810df55e87",
+    "source_diff": "--- \n+++ \n@@ -31,14 +31,10 @@\n     u8 pad_ac[0x10];\n     u8 statebc;\n     u8 padbd[3];\n+    void* object;\n } Work;\n \n-typedef struct WorkLocals {\n-    Work first;\n-    void* first_object;\n-    Work second;\n-    void* second_object;\n-} WorkLocals;\n+\n \n extern void* lbl_802FC5BC[];\n extern void fn_801487AC(void);\n@@ -64,7 +60,7 @@\n void* fn_80155330(u8 type, void* source, int value, int parameter,\n                   void* position, int amount)\n {\n-    WorkLocals local;\n+    Work records[2];\n     Work* work;\n     Work* next;\n     void* source_info;\n@@ -80,17 +76,17 @@\n     if (source_info == 0)\n         goto done;\n     owner = fn_80155DB4(source_info);\n-    local.first_object = fn_80149E04();\n-    local.second_object = fn_80149E04();\n-    if (owner == 0 || local.first_object == 0 || local.second_object == 0)\n+    records[0].object = fn_80149E04();\n+    records[1].object = fn_80149E04();\n+    if (owner == 0 || records[0].object == 0 || records[1].object == 0)\n         goto allocation_fail;\n \n-    work = &local.first;\n+    work = &records[0];\n     fn_80147E88(work);\n-    fn_801555D4(work, local.first_object);\n+    fn_801555D4(work, records[0].object);\n     if (type != 1)\n         work->callback98 = (u32)fn_801556DC;\n-    fn_80149B0C(local.first_object, 0, parameter);\n+    fn_80149B0C(records[0].object, 0, parameter);\n     fn_801A438C(work);\n \n     switch (type) {\n@@ -115,13 +111,13 @@\n     work->mode = type;\n     work->field30 = value;\n     work->fielda8 = (u32)source;\n-    next = &local.second;\n+    next = &records[1];\n     fn_80147E88(work = next);\n-    fn_80148A98(work, local.second_object);\n+    fn_80148A98(work, records[1].object);\n     work->owner94 = 0;\n     work->statebc = 4;\n-    *(u8*)local.second_object = local.first.type;\n-    fn_80149B38(local.second_object);\n+    *(u8*)records[1].object = records[0].type;\n+    fn_80149B38(records[1].object);\n     fn_80184740(work);\n     work->kind = 0x10;\n     work->type = 0x20;\n@@ -130,16 +126,16 @@\n     work->field2c = ((u32*)lbl_802FC5BC)[3];\n     ((u8*)&work->field2c)[3] = 0xe0;\n \n-    owner = fn_80148300(owner, &local.first, local.first_object);\n+    owner = fn_80148300(owner, &records[0], records[0].object);\n     if (owner == 0)\n         goto registration_fail;\n-    registered = fn_80148300(owner, next, local.second_object);\n+    registered = fn_80148300(owner, next, records[1].object);\n     if (registered == 0)\n         goto second_fail;\n     fn_801568B8(registered, fn_801487AC);\n     loop_count = (u8)count;\n-    result = *(void**)((u8*)local.first_object + 0x88);\n-    element = (void**)((u8*)local.second_object + 0x88);\n+    result = *(void**)((u8*)records[0].object + 0x88);\n+    element = (void**)((u8*)records[1].object + 0x88);\n     for (i = 0; i < loop_count; i++) {\n         fn_801A4420(result, *element, i);\n         element++;\n@@ -147,15 +143,15 @@\n     goto done;\n \n second_fail:\n-    fn_80149EB8(local.second_object);\n+    fn_80149EB8(records[1].object);\n     goto done;\n registration_fail:\n-    fn_80149EB8(local.first_object);\n-    fn_80149EB8(local.second_object);\n+    fn_80149EB8(records[0].object);\n+    fn_80149EB8(records[1].object);\n     goto done;\n allocation_fail:\n-    fn_80149EB8(local.first_object);\n-    fn_80149EB8(local.second_object);\n+    fn_80149EB8(records[0].object);\n+    fn_80149EB8(records[1].object);\n done:\n     return result;\n }\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  },
+  {
+    "hypothesis": "two_records_wrapper",
+    "score": 97.59763,
+    "candidate_bytes": "676",
+    "raw_output": "target 676 bytes  base 676 bytes  match 97.59763",
+    "source_sha256": "55a55f91e71a30364c1a03ba35d92ae45ffc3f05b9f5921e00fbbbd5182dc295",
+    "source_diff": "--- \n+++ \n@@ -31,14 +31,10 @@\n     u8 pad_ac[0x10];\n     u8 statebc;\n     u8 padbd[3];\n+    void* object;\n } Work;\n \n-typedef struct WorkLocals {\n-    Work first;\n-    void* first_object;\n-    Work second;\n-    void* second_object;\n-} WorkLocals;\n+\n \n extern void* lbl_802FC5BC[];\n extern void fn_801487AC(void);\n@@ -64,7 +60,7 @@\n void* fn_80155330(u8 type, void* source, int value, int parameter,\n                   void* position, int amount)\n {\n-    WorkLocals local;\n+    struct { Work first; Work second; } local;\n     Work* work;\n     Work* next;\n     void* source_info;\n@@ -80,17 +76,17 @@\n     if (source_info == 0)\n         goto done;\n     owner = fn_80155DB4(source_info);\n-    local.first_object = fn_80149E04();\n-    local.second_object = fn_80149E04();\n-    if (owner == 0 || local.first_object == 0 || local.second_object == 0)\n+    local.first.object = fn_80149E04();\n+    local.second.object = fn_80149E04();\n+    if (owner == 0 || local.first.object == 0 || local.second.object == 0)\n         goto allocation_fail;\n \n     work = &local.first;\n     fn_80147E88(work);\n-    fn_801555D4(work, local.first_object);\n+    fn_801555D4(work, local.first.object);\n     if (type != 1)\n         work->callback98 = (u32)fn_801556DC;\n-    fn_80149B0C(local.first_object, 0, parameter);\n+    fn_80149B0C(local.first.object, 0, parameter);\n     fn_801A438C(work);\n \n     switch (type) {\n@@ -117,11 +113,11 @@\n     work->fielda8 = (u32)source;\n     next = &local.second;\n     fn_80147E88(work = next);\n-    fn_80148A98(work, local.second_object);\n+    fn_80148A98(work, local.second.object);\n     work->owner94 = 0;\n     work->statebc = 4;\n-    *(u8*)local.second_object = local.first.type;\n-    fn_80149B38(local.second_object);\n+    *(u8*)local.second.object = local.first.type;\n+    fn_80149B38(local.second.object);\n     fn_80184740(work);\n     work->kind = 0x10;\n     work->type = 0x20;\n@@ -130,16 +126,16 @@\n     work->field2c = ((u32*)lbl_802FC5BC)[3];\n     ((u8*)&work->field2c)[3] = 0xe0;\n \n-    owner = fn_80148300(owner, &local.first, local.first_object);\n+    owner = fn_80148300(owner, &local.first, local.first.object);\n     if (owner == 0)\n         goto registration_fail;\n-    registered = fn_80148300(owner, next, local.second_object);\n+    registered = fn_80148300(owner, next, local.second.object);\n     if (registered == 0)\n         goto second_fail;\n     fn_801568B8(registered, fn_801487AC);\n     loop_count = (u8)count;\n-    result = *(void**)((u8*)local.first_object + 0x88);\n-    element = (void**)((u8*)local.second_object + 0x88);\n+    result = *(void**)((u8*)local.first.object + 0x88);\n+    element = (void**)((u8*)local.second.object + 0x88);\n     for (i = 0; i < loop_count; i++) {\n         fn_801A4420(result, *element, i);\n         element++;\n@@ -147,15 +143,15 @@\n     goto done;\n \n second_fail:\n-    fn_80149EB8(local.second_object);\n+    fn_80149EB8(local.second.object);\n     goto done;\n registration_fail:\n-    fn_80149EB8(local.first_object);\n-    fn_80149EB8(local.second_object);\n+    fn_80149EB8(local.first.object);\n+    fn_80149EB8(local.second.object);\n     goto done;\n allocation_fail:\n-    fn_80149EB8(local.first_object);\n-    fn_80149EB8(local.second_object);\n+    fn_80149EB8(local.first.object);\n+    fn_80149EB8(local.second.object);\n done:\n     return result;\n }\n",
+    "base_source_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d"
+  }
+]

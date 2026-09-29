@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "assignment_id": "3798b301-0114-476e-89cc-44f7a8dc07ae",
+  "attempt": 6,
+  "base_commit": "8eb3bf8f7a3a8cd9bc52c2fef6f00b6295010c31",
+  "target": "fn_801D73D0",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-3798b301-0114-476e-89cc-44f7a8dc07ae.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-3798b301-0114-476e-89cc-44f7a8dc07ae-reloc-strict.json"
+  ],
+  "divergence": "Fresh canonical objdiff scores 77.96703% and relocation-strict objdiff scores 77.99451%; retail is 728 bytes and generated is 724 bytes, with 22 relocations on each side. The new pointer-postincrement midpoint formulation improves the preserved 77.35714% candidate by forcing retail's component load order (offsets 0x0, 0x2, 0x4), while retaining batched integer arithmetic. A new guarded configure.py rule proves relocation reachability and changes the generated conversion-bias target from TU-local @49 to retail lbl_806510D8 with the same R_PPC_EMB_SDA21 type and implicit zero addend. Remaining differences are code generation rather than relocation identity: persistent arguments are colored r27/r28/r29 versus retail r26/r27/r30, damage is r30 versus retail r28, and the conversion/effect sequence uses f3 as the bias and is four bytes shorter versus retail's f4 scheduling. The required fallback-linked DOL build passes SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f; because this TU remains NonMatching, that hash is build-integrity evidence only."
+}

@@ -1,0 +1,16 @@
+$ .tools/bin/ninja -j2 -v build/GEDE01/src/game/game_fn_8011C0F0.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -MMD -c src/game/game_fn_8011C0F0.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_8011C0F0.d build/GEDE01/src/game/game_fn_8011C0F0.d
+FAILED: [code=2] build/GEDE01/src/game/game_fn_8011C0F0.o 
+tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -MMD -c src/game/game_fn_8011C0F0.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_8011C0F0.d build/GEDE01/src/game/game_fn_8011C0F0.d
+### mwcceppc.exe Compiler:
+#    File: src\game\game_fn_8011C0F0.c
+# ------------------------------------
+#      20: union { unsigned int words[4]; Entry entry[2]; } quad = { { lbl_8023A670[0], lbl_8023A670[1], lbl_8023A670[2], lbl_8023A670[3]
+#   Error:                                                                             ^
+#   illegal constant expression
+#   Too many errors printed, aborting program
+
+User break, cancelled...
+ninja: build stopped: subcommand failed.
+
+exit_code=2

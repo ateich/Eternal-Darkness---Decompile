@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "assignment_id": "6da6f3e8-381c-4d4d-b5d0-4edd64a6b0c5",
+  "attempt": 5,
+  "base_commit": "a9a5ab2b4df3b7b8a3afd43d0983e2d974200824",
+  "target": "fn_80181870",
+  "status": "matched",
+  "preserved_attempts_reviewed": [
+    "a1c125bfa7810978bae9f04785dfaf53d9294db9",
+    "8f69cb9548b5d5aa79f5881caa2517267d35f8e2",
+    "99e63b3a01d14ca272af05f5d6bfefd8378b4b0b",
+    "919bc7ae89c97348c4570a314c3c2eee59f5278c"
+  ],
+  "hypothesis": "The extern const aggregate allows loads to move across object stores. An unqualified external aggregate snapshot must conservatively account for aliasing with byte stores. Removing const and retaining a local snapshot before scalar initialization forces the retail live ranges and load-update lowering.",
+  "result": "Canonical GC/1.3 now emits exactly 180 retail code bytes, the 0x30-byte frame, r29-r31 aggregate values, and the two matching relocation records. No flags or normalization changed.",
+  "preliminary_experiments": [
+    {
+      "variant": "Explicit memcpy into a local aggregate",
+      "canonical_match_percent": 48.08889,
+      "generated_text_size": 188,
+      "outcome": "Out-of-line memcpy call and LR save; rejected."
+    },
+    {
+      "variant": "__builtin_memcpy spelling",
+      "outcome": "Not an intrinsic under these settings: emitted an external __builtin_memcpy call; rejected."
+    }
+  ],
+  "source": "eternal-darkness-decomp/src/game/game_fn_80181870.c",
+  "source_sha256": "c361f8d986ed96ab934a205db866d2624404faf0e9f442561ba0a39de3dde83f",
+  "registration": "Object(Matching, \"game/game_fn_80181870.c\")",
+  "independent_translation_unit": true,
+  "split": "0x80181870..0x80181924 (unchanged)",
+  "compiler_command": {
+    "command": ".tools/bin/ninja -t commands build/GEDE01/src/game/game_fn_80181870.o",
+    "exit_code": 0,
+    "stdout": "\"/usr/bin/python3\" tools/download_tool.py sjiswrap build/tools/sjiswrap.exe --tag v1.2.2\ntools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -MMD -c src/game/game_fn_80181870.c -o build/GEDE01/src/game && \"/usr/bin/python3\" tools/transform_dep.py build/GEDE01/src/game/game_fn_80181870.d build/GEDE01/src/game/game_fn_80181870.d\n",
+    "stderr": ""
+  },
+  "canonical": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80181870 fn_80181870 -o reports/GEDE01/canonical-6da6f3e8-381c-4d4d-b5d0-4edd64a6b0c5.json --format json-pretty",
+    "exit_code": 0,
+    "match_percent": 100.0,
+    "raw_output": "eternal-darkness-decomp/reports/GEDE01/canonical-6da6f3e8-381c-4d4d-b5d0-4edd64a6b0c5.json"
+  },
+  "relocation_strict": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80181870 fn_80181870 -o reports/GEDE01/strict-6da6f3e8-381c-4d4d-b5d0-4edd64a6b0c5.json --format json-pretty -c function_reloc_diffs=name_address",
+    "exit_code": 0,
+    "match_percent": 100.0,
+    "raw_output": "eternal-darkness-decomp/reports/GEDE01/strict-6da6f3e8-381c-4d4d-b5d0-4edd64a6b0c5.json"
+  },
+  "canonical_strict_payloads_identical": true,
+  "byte_and_relocation_verification": "eternal-darkness-decomp/reports/GEDE01/bytes-relocs-6da6f3e8-381c-4d4d-b5d0-4edd64a6b0c5.json",
+  "verification": {
+    "working_directory": "eternal-darkness-decomp",
+    "configure": {
+      "command": "python3 configure.py",
+      "exit_code": 0
+    },
+    "build": {
+      "command": ".tools/bin/ninja -j2",
+      "exit_code": 0,
+      "raw_output": "eternal-darkness-decomp/reports/GEDE01/build-6da6f3e8-381c-4d4d-b5d0-4edd64a6b0c5.json"
+    },
+    "dol_sha1": {
+      "command": "sha1sum build/GEDE01/main.dol",
+      "exit_code": 0,
+      "stdout": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\n",
+      "stderr": ""
+    }
+  },
+  "legal_review": "Only the assigned C function and its Matching registration changed. The external rodata is only read; its definition/ownership remains unchanged. No assembly, byte injection, compiler-policy change, reconstruction shared with another function, neighboring source edits, binaries, private inputs, global progress or README edits.",
+  "divergence": "",
+  "legal_audit": {
+    "command": "python3 tools/legal_audit.py",
+    "exit_code": 0,
+    "stdout": "legal audit passed (23154 tracked project files inspected)\n",
+    "stderr": ""
+  }
+}

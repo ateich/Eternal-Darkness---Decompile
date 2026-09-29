@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "assignment_id": "730b5d24-4b11-47c4-ba99-fcaa1a7d16e0",
+  "target": "fn_800BFF14",
+  "status": "attempted",
+  "preserved_attempts_reviewed": [
+    "222942e007a3cb69baac87255462d7c439a14624",
+    "41e7515a0e3c72093fccad8b132ed205db078200",
+    "1309d13413ee357e99d682c3507a5671aed67440",
+    "c7a11bbf57de8540ff249d9e08c5781a6d873392"
+  ],
+  "historical_basis": "Read preserved attempt 4 and attempt 3 codegen reports and attempt 1 raw objdiff; attempt 2 failed-variant details supplied in handoff. Avoided declaration/condition/alias/register/early-object-phi retests.",
+  "compiler": "GC/1.3 canonical -O4,p -lang=c, scheduling enabled; complete generated command is in commands raw evidence.",
+  "hypotheses": [
+    {
+      "name": "nested_state_call",
+      "hypothesis": "Nested argument expression may alter preservation/evaluation of object across the state lookup and thus register allocation.",
+      "match_percent": 80.89286,
+      "generated_size": 108,
+      "result": "Event/object remain r30/r31; state passes directly via mr r4,r3, eliminating retail temporary move."
+    },
+    {
+      "name": "aggregate_event_first and aggregate_object_first",
+      "hypothesis": "Scalar replacement of aggregate fields may assign virtual registers in a different order from independent scalar locals.",
+      "match_percent": 84.64286,
+      "generated_size": 112,
+      "result": "Both produce the original instruction sequence and register allocation."
+    },
+    {
+      "name": "reuse_event_for_state",
+      "hypothesis": "Reassigning the dead event parameter to state may change coalescing and nonvolatile register priority.",
+      "match_percent": 80.89286,
+      "generated_size": 116,
+      "result": "No allocation correction; additional mr r30,r0 and mr r4,r30 transfer instead of direct mr r4,r0."
+    }
+  ],
+  "retained_source": "eternal-darkness-decomp/src/game/game_fn_800BFF14.c",
+  "retained_source_sha256": "a456436c2ebffc826c7ee0952574c3c0499c83af434922e73c94645f3be81795",
+  "disposition": "Restored original clearest reconstruction, unchanged from accepted base; independent NonMatching registration and split retained. No source or registration change is needed. Experiment sources are recorded only as strings in assignment evidence.",
+  "canonical_match_percent": 84.64286,
+  "relocation_strict_match_percent": 84.64286,
+  "retail_size": 112,
+  "generated_size": 112,
+  "divergence": "Canonical and relocation-strict objdiff remain 84.64286% at 112/112 bytes. Generated event/object allocation is r30/r31 versus retail r31/r30. Retail schedules mr r3,r4 at +0x08 and mr r31,r4 at +0x14 among prologue stores; generated stores first, then mr r30,r4 at +0x14 and mr r3,r30 at +0x18. Subsequent event/object uses inherit the register mismatch. All four relocation offsets, types, targets and addends agree.",
+  "relocation_comparison": "Four R_PPC_REL24 entries at 0x1c, 0x2c, 0x3c, 0x50 agree by target name and addend 0. Raw ELF symbol indices differ and are not relocation target identity.",
+  "identical_objdiff_note": "Canonical and strict modes were independently executed; their raw JSON is byte-identical because relocations already agree. SHA-256 of each is 4993f1b7d398610eb4c375afcbe109c4f49a4a2a49397d848bf02718bff55ccf.",
+  "verification": "Configure, full ninja -j2 build, explicit candidate object build, sha1sum and both objdiff commands exited 0. Expected DOL SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f verified. NonMatching candidate is not linked into the retail-verification DOL. Legal audit output is appended to commands evidence after staging.",
+  "raw_output_note": "commands and hypotheses files contain captured subprocess stdout/stderr and exit codes, not rewritten assertions. fndiff display offsets are alignment-row offsets; final objdiff and readelf provide actual instruction/relocation addresses."
+}

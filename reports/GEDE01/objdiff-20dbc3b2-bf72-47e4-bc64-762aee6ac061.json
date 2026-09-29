@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "assignment_id": "20dbc3b2-bf72-47e4-bc64-762aee6ac061",
+  "attempt": 4,
+  "target": "fn_80181870",
+  "hypothesis": "The retail stores to stack offsets 0x8, 0xC, and 0x10 suggested that the source used a volatile local aggregate. Test a volatile Vector3Words local initialized from lbl_8023B028, plus const and register-const refinements, to force materialization and potentially retain the three words in r29-r31.",
+  "hypothesis_results": [
+    {
+      "variant": "volatile local aggregate, non-volatile source symbol",
+      "canonical_match_percent": 42.488888,
+      "generated_text_size": 172,
+      "result": "The local was materialized, but MWCC retained the words in volatile r11/r10/r9, reloaded them through r0/r4/r0, and used a 0x20-byte frame rather than retail r29-r31 and a 0x30-byte frame."
+    },
+    {
+      "variant": "const local aggregate and register const local aggregate",
+      "canonical_match_percent": 50.88889,
+      "generated_text_size": 160,
+      "result": "Both qualifiers reproduced the earlier local-aggregate allocation: volatile r12-r10, a 0x20-byte frame, and interleaved loads/stores."
+    },
+    {
+      "variant": "three independent word locals",
+      "canonical_match_percent": 49.422222,
+      "generated_text_size": 144,
+      "result": "Scalar replacement removed the frame and deferred the three loads, so this was worse than the preserved reconstruction."
+    }
+  ],
+  "preserved_best": {
+    "source": "src/game/game_fn_80181870.c",
+    "source_sha256_raw_output": "d3e576caec88f24b5a522d214c1ddf37525691d383000e83bf7169c019e453b4  src/game/game_fn_80181870.c",
+    "registration": "Object(NonMatching, game/game_fn_80181870.c)",
+    "canonical": {
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80181870 fn_80181870 -o build/GEDE01/final-canonical-20dbc3b2.json --format json-pretty",
+      "exit_code": 0,
+      "raw_stdout": "INFO Writing to build/GEDE01/final-canonical-20dbc3b2.json",
+      "match_percent": 51.866665,
+      "retail_text_size": 180,
+      "generated_text_size": 164,
+      "retail_rela_text_size": 24,
+      "generated_rela_text_size": 24
+    },
+    "relocation_strict": {
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80181870 fn_80181870 -o build/GEDE01/final-strict-20dbc3b2.json --format json-pretty -c function_reloc_diffs=name_address",
+      "exit_code": 0,
+      "raw_stdout": "INFO Writing to build/GEDE01/final-strict-20dbc3b2.json",
+      "match_percent": 51.866665,
+      "retail_text_size": 180,
+      "generated_text_size": 164,
+      "canonical_strict_cmp_exit": 0,
+      "canonical_sha256_raw_output": "a96496573bde08e7b1a2e80ab94644e07cad4f14f7786b803395cc5f8fabe682  build/GEDE01/final-canonical-20dbc3b2.json",
+      "strict_sha256_raw_output": "a96496573bde08e7b1a2e80ab94644e07cad4f14f7786b803395cc5f8fabe682  build/GEDE01/final-strict-20dbc3b2.json"
+    },
+    "diff_kind_counts": {
+      "DIFF_ARG_MISMATCH": 19,
+      "DIFF_DELETE": 12,
+      "DIFF_INSERT": 8,
+      "DIFF_REPLACE": 1,
+      "MATCH": 13
+    },
+    "retail_relocations": [
+      {"offset": "0x4", "instruction": "lis r5, lbl_8023B028@ha", "type": "R_PPC_ADDR16_HA", "target": "lbl_8023B028", "addend": 0},
+      {"offset": "0x38", "instruction": "lwzu r29, lbl_8023B028@l(r5)", "type": "R_PPC_ADDR16_LO", "target": "lbl_8023B028", "addend": 0}
+    ],
+    "generated_relocations": [
+      {"offset": "0x4", "instruction": "lis r4, lbl_8023B028@ha", "type": "R_PPC_ADDR16_HA", "target": "lbl_8023B028", "addend": 0},
+      {"offset": "0x8", "instruction": "addi r5, r4, lbl_8023B028@l", "type": "R_PPC_ADDR16_LO", "target": "lbl_8023B028", "addend": 0},
+      {"offset": "0x18", "instruction": "lwz r0, 0x0(r5)", "type": "R_PPC_NONE", "target": "lbl_8023B028", "addend": 0},
+      {"offset": "0x28", "instruction": "lwz r4, 0x4(r5)", "type": "R_PPC_NONE", "target": "lbl_8023B028", "addend": 4},
+      {"offset": "0x38", "instruction": "lwz r0, 0x8(r5)", "type": "R_PPC_NONE", "target": "lbl_8023B028", "addend": 8}
+    ]
+  },
+  "verification": {
+    "configure_command": "python3 configure.py",
+    "configure_exit_code": 0,
+    "build_command": ".tools/bin/ninja -j2",
+    "build_exit_code": 0,
+    "build_raw_tail": "[943/945] DOL build/GEDE01/main.dol\n[944/945] CHECK config/GEDE01/build.sha1\nbuild/GEDE01/main.dol: OK\n[945/945] PROGRESS",
+    "sha1_command": "sha1sum build/GEDE01/main.dol",
+    "sha1_raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+  },
+  "legal_audit": "One independent honest-C translation unit only; no inline or whole-function assembly, shared reconstruction, neighboring-function edit, gate change, compiler-policy change, generated binary, or private input is included.",
+  "conclusion": "Attempted, not matched. The distinct volatile-local hypothesis explains the retail stack slots but does not reproduce allocation: GC/1.3 still uses volatile aggregate registers. The preserved direct-first reconstruction remains best at 51.866665%; retail retains all three aggregate words in r29-r31 across scalar initialization with a 0x30-byte frame, while generated code writes through volatile registers with a 0x10-byte frame. Retail LO relocation is at 0x38 versus generated 0x8."
+}

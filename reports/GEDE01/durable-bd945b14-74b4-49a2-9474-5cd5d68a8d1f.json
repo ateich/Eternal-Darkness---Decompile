@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "bd945b14-74b4-49a2-9474-5cd5d68a8d1f",
+  "attempt": 3,
+  "base_commit": "adfe432380ebf771cf47007236b2473cb9ef9ad8",
+  "target": "fn_801A0450",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-bd945b14-74b4-49a2-9474-5cd5d68a8d1f.json"
+  ],
+  "divergence": "The retained size-exact 5484-byte honest-C reconstruction scores 68.90664% in independently run canonical and name/address relocation-strict objdiff. All 70 relocations per object have explicit resolved targets/addends, with 42 unequal corresponding tuples. A new reverse-declaration plus ordered-hoist experiment reproduced retail's descending constant FPR pattern but regressed to 5448 bytes and 68.45368% because MWCC kept its TU-local i2d bias in f1; retail interposes shared lbl_80650D08 in f9. Forcing that shared conversion bias would require disallowed build-level externalization/compiler policy or a substantially different honest-C conversion idiom."
+}

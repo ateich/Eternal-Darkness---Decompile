@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "f245cd41-f8c0-4997-9978-9da1d6ebab3b",
+  "attempt": 4,
+  "base_commit": "6ec2da8f2455cc45e1b2c21a0017ccd8c820789b",
+  "target": "fn_80119C70",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-f245cd41-f8c0-4997-9978-9da1d6ebab3b.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 98.765434% with size and all 15 relocations exact. Sixteen DIFF_ARG_MISMATCH entries remain at 0xc, 0x1c, 0x28, 0x30, 0x34, 0x3c, 0x48, 0x54, 0x58, 0x5c, 0x68, 0x6c, 0x74, 0x7c, 0x94, and 0xec: FP register allocation in the conversion/clamp dataflow, including commutative fmuls operand order at 0x3c. A distinct-conversion-temporary hypothesis produced the retail f1/f2/f0 conversion and multiply register pattern but hoisted the 0.5f clamp load to 0x24, added an 82nd instruction, and was rejected; the preserved 81-instruction candidate remains best."
+}

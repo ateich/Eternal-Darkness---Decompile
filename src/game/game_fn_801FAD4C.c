@@ -5,7 +5,7 @@ typedef unsigned int u32;
 typedef struct Header {
     u32 count;
     u32 index;
-    u32 refresh;
+    int refresh;
     u32 field0C;
     u32 field10;
     u32 field14;
@@ -104,12 +104,14 @@ u32 fn_801FAD4C(void* input)
                           &globals->first[lbl_8064C3A8], 1, valid);
 
     for (i = 0; i < 12; i++) {
-        globals->second[i].link74 = &globals->first[i];
-        globals->first[i].link74 = 0;
+        Block* first = &globals->first[i];
+        Block* second = &globals->second[i];
+        second->link74 = first;
+        first->link74 = 0;
     }
     if (header.refresh != 0) {
         fn_801F85A4();
         fn_801FA354();
     }
-    return (offset + 0x1F) & ~0x1F;
+    return (u16)(offset + 0x1F) & ~0x1F;
 }

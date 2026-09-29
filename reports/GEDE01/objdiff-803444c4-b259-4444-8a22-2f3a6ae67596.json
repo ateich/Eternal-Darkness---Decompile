@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "assignment_id": "803444c4-b259-4444-8a22-2f3a6ae67596",
+  "attempt": 3,
+  "target": "fn_80181870",
+  "hypothesis": "Place the direct lbl_8023B028 aggregate assignment before all scalar field assignments so its values overlap the scalar initialization and induce callee-saved allocation, instead of materializing the preserved attempts' local aggregate and assigning it last.",
+  "verification": {
+    "configure_command": "python3 configure.py",
+    "configure_exit_code": 0,
+    "build_command": ".tools/bin/ninja -j2",
+    "build_exit_code": 0,
+    "build_raw_tail": "[941/944] LINK build/GEDE01/main.elf\n[942/944] DOL build/GEDE01/main.dol\n[943/944] CHECK config/GEDE01/build.sha1\nbuild/GEDE01/main.dol: OK\n[944/944] PROGRESS",
+    "sha1_command": "sha1sum build/GEDE01/main.dol",
+    "sha1_raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+  },
+  "source": {
+    "path": "src/game/game_fn_80181870.c",
+    "sha256_raw_output": "d3e576caec88f24b5a522d214c1ddf37525691d383000e83bf7169c019e453b4  src/game/game_fn_80181870.c",
+    "registration": "Object(NonMatching, game/game_fn_80181870.c)",
+    "legal_audit": "One independent honest-C translation unit only; no inline or whole-function assembly, shared reconstruction, neighboring-function edit, gate change, compiler-policy change, generated binary, or private input is included."
+  },
+  "commands": {
+    "canonical": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80181870 fn_80181870 -o build/GEDE01/final-canonical-803444c4.json --format json-pretty",
+    "canonical_exit_code": 0,
+    "canonical_raw_stdout": "INFO Writing to build/GEDE01/final-canonical-803444c4.json",
+    "strict": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80181870 fn_80181870 -o build/GEDE01/final-strict-803444c4.json --format json-pretty -c function_reloc_diffs=name_address",
+    "strict_exit_code": 0,
+    "strict_raw_stdout": "INFO Writing to build/GEDE01/final-strict-803444c4.json",
+    "canonical_strict_cmp_command": "cmp build/GEDE01/final-canonical-803444c4.json build/GEDE01/final-strict-803444c4.json",
+    "canonical_strict_cmp_exit": 0,
+    "canonical_sha256_raw_output": "a96496573bde08e7b1a2e80ab94644e07cad4f14f7786b803395cc5f8fabe682  build/GEDE01/final-canonical-803444c4.json",
+    "strict_sha256_raw_output": "a96496573bde08e7b1a2e80ab94644e07cad4f14f7786b803395cc5f8fabe682  build/GEDE01/final-strict-803444c4.json"
+  },
+  "raw_measurement": {
+    "canonical": {
+      "retail_text_size": 180,
+      "generated_text_size": 164,
+      "match_percent": 51.866665,
+      "retail_rela_text_size": 24,
+      "generated_rela_text_size": 24
+    },
+    "relocation_strict": {
+      "retail_text_size": 180,
+      "generated_text_size": 164,
+      "match_percent": 51.866665,
+      "retail_rela_text_size": 24,
+      "generated_rela_text_size": 24,
+      "byte_identical_to_canonical_payload": true
+    },
+    "diff_kind_counts": {
+      "DIFF_ARG_MISMATCH": 19,
+      "DIFF_DELETE": 12,
+      "DIFF_INSERT": 8,
+      "DIFF_REPLACE": 1,
+      "MATCH": 13
+    },
+    "retail_relocations": [
+      {"offset": "0x4", "instruction": "lis r5, lbl_8023B028@ha", "type": "R_PPC_ADDR16_HA", "target": "lbl_8023B028", "addend": 0},
+      {"offset": "0x38", "instruction": "lwzu r29, lbl_8023B028@l(r5)", "type": "R_PPC_ADDR16_LO", "target": "lbl_8023B028", "addend": 0}
+    ],
+    "generated_relocations": [
+      {"offset": "0x4", "instruction": "lis r4, lbl_8023B028@ha", "type": "R_PPC_ADDR16_HA", "target": "lbl_8023B028", "addend": 0},
+      {"offset": "0x8", "instruction": "addi r5, r4, lbl_8023B028@l", "type": "R_PPC_ADDR16_LO", "target": "lbl_8023B028", "addend": 0},
+      {"offset": "0x18", "instruction": "lwz r0, 0x0(r5)", "type": "R_PPC_NONE", "target": "lbl_8023B028", "addend": 0},
+      {"offset": "0x28", "instruction": "lwz r4, 0x4(r5)", "type": "R_PPC_NONE", "target": "lbl_8023B028", "addend": 4},
+      {"offset": "0x38", "instruction": "lwz r0, 0x8(r5)", "type": "R_PPC_NONE", "target": "lbl_8023B028", "addend": 8}
+    ],
+    "retail_instruction_stream": [
+      "0000 stwu r1, -0x30(r1)", "0004 lis r5, lbl_8023B028@ha", "0008 li r4, 0x8", "000c li r0, 0x10", "0010 stw r31, 0x2c(r1)", "0014 li r12, 0x34", "0018 li r11, 0x157c", "001c li r10, 0x96", "0020 stw r30, 0x28(r1)", "0024 li r9, 0xfa", "0028 li r8, -0x2", "002c li r7, 0x0", "0030 stw r29, 0x24(r1)", "0034 li r6, -0x1", "0038 lwzu r29, lbl_8023B028@l(r5)", "003c lwz r30, 0x4(r5)", "0040 lwz r31, 0x8(r5)", "0044 li r5, 0x32", "0048 stw r29, 0x8(r1)", "004c stb r4, 0x0(r3)", "0050 li r4, 0x1", "0054 stb r0, 0x1(r3)", "0058 li r0, 0x1f", "005c sth r12, 0x4(r3)", "0060 sth r11, 0x6(r3)", "0064 sth r10, 0x8(r3)", "0068 stb r9, 0x2(r3)", "006c stb r8, 0x3(r3)", "0070 sth r7, 0x24(r3)", "0074 sth r7, 0x26(r3)", "0078 sth r6, 0x28(r3)", "007c sth r5, 0x1c(r3)", "0080 stb r4, 0x14(r3)", "0084 sth r4, 0x20(r3)", "0088 sth r0, 0x1a(r3)", "008c stw r29, 0x48(r3)", "0090 stw r30, 0x4c(r3)", "0094 stw r31, 0x50(r3)", "0098 stw r31, 0x10(r1)", "009c lwz r31, 0x2c(r1)", "00a0 stw r30, 0xc(r1)", "00a4 lwz r30, 0x28(r1)", "00a8 lwz r29, 0x24(r1)", "00ac addi r1, r1, 0x30", "00b0 blr"
+    ],
+    "generated_instruction_stream": [
+      "0000 stwu r1, -0x10(r1)", "0004 lis r4, lbl_8023B028@ha", "0008 addi r5, r4, lbl_8023B028@l", "000c li r12, 0x34", "0010 stw r31, 0xc(r1)", "0014 li r31, 0x10", "0018 lwz r0, 0x0(r5)", "001c li r11, 0x157c", "0020 stw r30, 0x8(r1)", "0024 li r30, 0x8", "0028 lwz r4, 0x4(r5)", "002c li r10, 0x96", "0030 stw r0, 0x48(r3)", "0034 li r9, 0xfa", "0038 lwz r0, 0x8(r5)", "003c li r8, -0x2", "0040 stw r4, 0x4c(r3)", "0044 li r7, 0x0", "0048 li r6, -0x1", "004c li r5, 0x32", "0050 stw r0, 0x50(r3)", "0054 li r4, 0x1", "0058 li r0, 0x1f", "005c stb r30, 0x0(r3)", "0060 stb r31, 0x1(r3)", "0064 sth r12, 0x4(r3)", "0068 sth r11, 0x6(r3)", "006c sth r10, 0x8(r3)", "0070 stb r9, 0x2(r3)", "0074 stb r8, 0x3(r3)", "0078 sth r7, 0x24(r3)", "007c sth r7, 0x26(r3)", "0080 sth r6, 0x28(r3)", "0084 sth r5, 0x1c(r3)", "0088 stb r4, 0x14(r3)", "008c sth r4, 0x20(r3)", "0090 sth r0, 0x1a(r3)", "0094 lwz r31, 0xc(r1)", "0098 lwz r30, 0x8(r1)", "009c addi r1, r1, 0x10", "00a0 blr"
+    ]
+  },
+  "conclusion": "Attempted, not matched. Moving the direct aggregate copy first raises the fresh canonical and relocation-strict score to 51.866665% and makes GC/1.3 use callee-saved r30-r31 for the first two scalar constants, but it writes the three aggregate words immediately through volatile r0/r4/r0. Retail instead holds all three aggregate words in r29-r31 across every scalar initializer store, uses a 0x30-byte frame, and emits 180 bytes; generated code uses a 0x10-byte frame and emits 164 bytes. The HA relocation now agrees at offset 0x4, while retail LO remains at 0x38 and generated LO is at 0x8."
+}

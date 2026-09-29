@@ -1,0 +1,139 @@
+{
+  "left": {
+    "size": 604,
+    "score": 97.05298,
+    "relocations": [
+      {
+        "address": 0,
+        "instruction": "lis r5, lbl_80607130@ha",
+        "type": 6,
+        "type_name": "R_PPC_ADDR16_HA",
+        "target": "lbl_80607130",
+        "addend": 0
+      },
+      {
+        "address": 8,
+        "instruction": "lfs f0, lbl_80650D9C@sda21",
+        "type": 109,
+        "type_name": "R_PPC_EMB_SDA21",
+        "target": "lbl_80650D9C",
+        "addend": 0
+      },
+      {
+        "address": 12,
+        "instruction": "addi r5, r5, lbl_80607130@l",
+        "type": 4,
+        "type_name": "R_PPC_ADDR16_LO",
+        "target": "lbl_80607130",
+        "addend": 0
+      },
+      {
+        "address": 16,
+        "instruction": "lhz r0, 0x2(r5)",
+        "type": 0,
+        "type_name": "R_PPC_NONE",
+        "target": "lbl_80607130",
+        "addend": 2
+      }
+    ]
+  },
+  "right": {
+    "size": 604,
+    "score": 97.05298,
+    "relocations": [
+      {
+        "address": 4,
+        "instruction": "lis r5, lbl_80607130@ha",
+        "type": 6,
+        "type_name": "R_PPC_ADDR16_HA",
+        "target": "lbl_80607130",
+        "addend": 0
+      },
+      {
+        "address": 8,
+        "instruction": "addi r6, r5, lbl_80607130@l",
+        "type": 4,
+        "type_name": "R_PPC_ADDR16_LO",
+        "target": "lbl_80607130",
+        "addend": 0
+      },
+      {
+        "address": 12,
+        "instruction": "lfs f0, lbl_80650D9C@sda21",
+        "type": 109,
+        "type_name": "R_PPC_EMB_SDA21",
+        "target": "lbl_80650D9C",
+        "addend": 0
+      },
+      {
+        "address": 20,
+        "instruction": "lhz r0, 0x2(r6)",
+        "type": 0,
+        "type_name": "R_PPC_NONE",
+        "target": "lbl_80607130",
+        "addend": 2
+      }
+    ]
+  },
+  "relocation_multisets_equal": true,
+  "raw_text": {
+    "retail_sha256": "d1038945cce272db4f9324db7d52f132c1684ee3611d19b7c2e33f8ce4b99cb4",
+    "generated_sha256": "756d30713cc589d7751c61413e2470fe2f3767596a3d3ca89db4c124e8e26c49",
+    "equal_bytes": 568,
+    "total_bytes": 604,
+    "different_words": [
+      {
+        "offset": "0x0",
+        "retail": "3ca00000",
+        "generated": "9421ff70"
+      },
+      {
+        "offset": "0x4",
+        "retail": "9421ff70",
+        "generated": "3ca00000"
+      },
+      {
+        "offset": "0x8",
+        "retail": "c0000000",
+        "generated": "38c50000"
+      },
+      {
+        "offset": "0xc",
+        "retail": "38a50000",
+        "generated": "c0000000"
+      },
+      {
+        "offset": "0x10",
+        "retail": "a0050002",
+        "generated": "5485063e"
+      },
+      {
+        "offset": "0x14",
+        "retail": "5485063e",
+        "generated": "a0060002"
+      },
+      {
+        "offset": "0x18",
+        "retail": "ec200072",
+        "generated": "3885fff8"
+      },
+      {
+        "offset": "0x1c",
+        "retail": "3885fff8",
+        "generated": "ec200072"
+      },
+      {
+        "offset": "0x20",
+        "retail": "5400103a",
+        "generated": "38c00000"
+      },
+      {
+        "offset": "0x24",
+        "retail": "38c00000",
+        "generated": "5400103a"
+      }
+    ],
+    "bytes_after_offset_44_identical": true
+  },
+  "note": "The lhz reference is an objdiff-inferred R_PPC_NONE relocation with addend 2. Three actual ELF relocation records plus this inferred reference agree in type, target and addend. NonMatching TU is not linked; the DOL hash validates the canonical project, not this candidate."
+}

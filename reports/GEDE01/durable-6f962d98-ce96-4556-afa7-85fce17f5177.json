@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "6f962d98-ce96-4556-afa7-85fce17f5177",
+  "attempt": 3,
+  "base_commit": "912b92129be1b8a70b21d0141efcdd481d77fe30",
+  "target": "fn_8006D548",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-6f962d98-ce96-4556-afa7-85fce17f5177.json"
+  ],
+  "divergence": "Canonical GC/1.3 objdiff is 93.14933%: retail is 2384 bytes and candidate is 2376 bytes. The first instruction divergence is register allocation at function offset 0x10 (retail `mr r19,r3`; candidate `mr r20,r3`), and the candidate alone hoists `li r19,0` at function offset 0x34, moving its fn_8015C390 call from retail function offset 0x34 to candidate function offset 0x38. Both sides load the entry-array pointer with `lwz r24,0x38(r26)`; retail then preserves it with `mr r21,r24`, while candidate uses `mr r25,r24`. The mode-2 counted loop body now instruction-matches from stack candidate-array setup through pointer/index increments, but branch targets and later register choices remain displaced. Retail has 44 .rela.text records; the candidate TU has 45 because it also contains the 0x88-byte copy_point helper and compiler-owned signed-conversion/switch data. The raw evidence embeds the complete objdiff record plus unabridged readelf relocation tables with offsets, types, symbol targets, and addends. Both retail and rebuilt DOL SHA-1 values are ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}

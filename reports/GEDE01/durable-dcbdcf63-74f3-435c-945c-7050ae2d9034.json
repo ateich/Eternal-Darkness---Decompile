@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "dcbdcf63-74f3-435c-945c-7050ae2d9034",
+  "attempt": 4,
+  "base_commit": "e6b0190aba159a3794f50345ab3a06cc098403e4",
+  "target": "fn_800F61F4",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-dcbdcf63-74f3-435c-945c-7050ae2d9034.json"
+  ],
+  "divergence": "Best canonical and relocation-strict score remains 27.777779%: retail is 36 bytes (9 instructions), generated is 40 bytes (10 instructions), and neither object has relocations. GC/1.3 uses r7/r6 rather than retail r8/r9 for the shift counts, computes lo << shift early in r0, uses r7/r5 rather than retail r10 for cross-word contributions, inserts mr r4,r0, and schedules the ORs differently. Attempt 4 tested the distinct hypothesis that register-qualified volatile intermediates could enforce retail source order while remaining register-resident; GC/1.3 instead spilled them, yielding 92 bytes and 0.0%, so the best honest word-expanded C was restored. Full build passed and build/GEDE01/main.dol SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}

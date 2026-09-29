@@ -1,0 +1,563 @@
+{
+  "version": 1,
+  "assignment_id": "1550cc77-d44e-4bd0-8744-6ced8fbc78f4",
+  "status": "attempted",
+  "source": "eternal-darkness-decomp/src/game/game_fn_801F15D0.c",
+  "source_sha256": "25f5917c46177b2ce3cee287a3da4afc0543f5d3695ac283b0e4c0c6e753c093",
+  "preserved_source_commit": "1505ba05a8c2e7169519df86f7734d3825d127f5",
+  "base_commit": "8695f34645408fc0e0182a2970c49f0f01d7bba7",
+  "compiler": "GC/1.3 with unchanged canonical per-unit flags; no -use_lmw_stmw override, source pragma, relocation rewriting, or binary patch",
+  "build": {
+    "configure_command": "python3 configure.py",
+    "configure_exit_code": 0,
+    "configure_log": "eternal-darkness-decomp/reports/GEDE01/configure-1550cc77-d44e-4bd0-8744-6ced8fbc78f4.log",
+    "build_command": ".tools/bin/ninja -j2",
+    "build_exit_code": 0,
+    "build_log": "eternal-darkness-decomp/reports/GEDE01/final-build-1550cc77-d44e-4bd0-8744-6ced8fbc78f4.log",
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "interpretation": "NonMatching candidate is measured independently; the default full DOL retains the retail split for this function, so its verified hash is not a claim that the C candidate matches.",
+    "log_line_endings": "Windows compiler CRLF messages normalized to LF; message text preserved."
+  },
+  "metrics": {
+    "canonical": {
+      "left": {
+        "size": 892,
+        "match_percent": 88.06278,
+        "frame_instruction": "stwu r1, -0xd0(r1)",
+        "instruction_count": 223,
+        "mnemonic_counts": {
+          "stwu": 1,
+          "mflr": 1,
+          "stw": 24,
+          "stfd": 14,
+          "psq_st": 5,
+          "stmw": 1,
+          "mr": 16,
+          "bl": 9,
+          "lis": 4,
+          "lfd": 19,
+          "cmpwi": 4,
+          "lbz": 8,
+          "lfs": 7,
+          "fsubs": 10,
+          "fdivs": 3,
+          "bne": 5,
+          "li": 9,
+          "b": 6,
+          "cmplwi": 2,
+          "beq": 4,
+          "addis": 1,
+          "extsb.": 1,
+          "addi": 10,
+          "lwz": 15,
+          "ble": 1,
+          "lbzx": 1,
+          "fctiwz": 9,
+          "mulli": 1,
+          "add": 1,
+          "lha": 3,
+          "xoris": 3,
+          "fcmpo": 3,
+          "cror": 3,
+          "lhz": 1,
+          "cmpw": 2,
+          "blt": 2,
+          "fmuls": 3,
+          "stb": 3,
+          "psq_l": 5,
+          "lmw": 1,
+          "mtlr": 1,
+          "blr": 1
+        },
+        "relocation_count": 14
+      },
+      "right": {
+        "size": 940,
+        "match_percent": 88.06278,
+        "frame_instruction": "stwu r1, -0xe0(r1)",
+        "instruction_count": 235,
+        "mnemonic_counts": {
+          "stwu": 1,
+          "mflr": 1,
+          "stw": 24,
+          "stfd": 14,
+          "psq_st": 5,
+          "addi": 12,
+          "bl": 11,
+          "mr": 16,
+          "lis": 4,
+          "lfd": 19,
+          "cmpwi": 4,
+          "lbz": 8,
+          "lfs": 7,
+          "fsub": 10,
+          "frsp": 10,
+          "fdivs": 3,
+          "bne": 5,
+          "li": 9,
+          "b": 6,
+          "cmplwi": 2,
+          "beq": 4,
+          "addis": 1,
+          "extsb.": 1,
+          "lwz": 15,
+          "ble": 1,
+          "lbzx": 1,
+          "fctiwz": 9,
+          "mulli": 1,
+          "add": 1,
+          "lha": 3,
+          "xoris": 3,
+          "fcmpo": 3,
+          "cror": 3,
+          "lhz": 1,
+          "cmpw": 2,
+          "blt": 2,
+          "fmuls": 3,
+          "stb": 3,
+          "psq_l": 5,
+          "mtlr": 1,
+          "blr": 1
+        },
+        "relocation_count": 16
+      }
+    },
+    "relocation_strict": {
+      "left": {
+        "size": 892,
+        "match_percent": 88.06278,
+        "frame_instruction": "stwu r1, -0xd0(r1)",
+        "instruction_count": 223,
+        "mnemonic_counts": {
+          "stwu": 1,
+          "mflr": 1,
+          "stw": 24,
+          "stfd": 14,
+          "psq_st": 5,
+          "stmw": 1,
+          "mr": 16,
+          "bl": 9,
+          "lis": 4,
+          "lfd": 19,
+          "cmpwi": 4,
+          "lbz": 8,
+          "lfs": 7,
+          "fsubs": 10,
+          "fdivs": 3,
+          "bne": 5,
+          "li": 9,
+          "b": 6,
+          "cmplwi": 2,
+          "beq": 4,
+          "addis": 1,
+          "extsb.": 1,
+          "addi": 10,
+          "lwz": 15,
+          "ble": 1,
+          "lbzx": 1,
+          "fctiwz": 9,
+          "mulli": 1,
+          "add": 1,
+          "lha": 3,
+          "xoris": 3,
+          "fcmpo": 3,
+          "cror": 3,
+          "lhz": 1,
+          "cmpw": 2,
+          "blt": 2,
+          "fmuls": 3,
+          "stb": 3,
+          "psq_l": 5,
+          "lmw": 1,
+          "mtlr": 1,
+          "blr": 1
+        },
+        "relocation_count": 14
+      },
+      "right": {
+        "size": 940,
+        "match_percent": 88.06278,
+        "frame_instruction": "stwu r1, -0xe0(r1)",
+        "instruction_count": 235,
+        "mnemonic_counts": {
+          "stwu": 1,
+          "mflr": 1,
+          "stw": 24,
+          "stfd": 14,
+          "psq_st": 5,
+          "addi": 12,
+          "bl": 11,
+          "mr": 16,
+          "lis": 4,
+          "lfd": 19,
+          "cmpwi": 4,
+          "lbz": 8,
+          "lfs": 7,
+          "fsub": 10,
+          "frsp": 10,
+          "fdivs": 3,
+          "bne": 5,
+          "li": 9,
+          "b": 6,
+          "cmplwi": 2,
+          "beq": 4,
+          "addis": 1,
+          "extsb.": 1,
+          "lwz": 15,
+          "ble": 1,
+          "lbzx": 1,
+          "fctiwz": 9,
+          "mulli": 1,
+          "add": 1,
+          "lha": 3,
+          "xoris": 3,
+          "fcmpo": 3,
+          "cror": 3,
+          "lhz": 1,
+          "cmpw": 2,
+          "blt": 2,
+          "fmuls": 3,
+          "stb": 3,
+          "psq_l": 5,
+          "mtlr": 1,
+          "blr": 1
+        },
+        "relocation_count": 16
+      }
+    }
+  },
+  "retail_relocations": [
+    {
+      "offset": "0000004c",
+      "type": "R_PPC_REL24",
+      "symbol": "fn_8015C71C",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "00000054",
+      "type": "R_PPC_REL24",
+      "symbol": "fn_801ECBB4",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "00000060",
+      "type": "R_PPC_EMB_SDA21",
+      "symbol": "lbl_80651350",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "00000078",
+      "type": "R_PPC_EMB_SDA21",
+      "symbol": "lbl_806513B8",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "000000c4",
+      "type": "R_PPC_REL24",
+      "symbol": "fn_8015C28C",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "000000d8",
+      "type": "R_PPC_REL24",
+      "symbol": "fn_8015C28C",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "000000e4",
+      "type": "R_PPC_REL24",
+      "symbol": "fn_8015C28C",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "00000140",
+      "type": "R_PPC_REL24",
+      "symbol": "fn_801F2370",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "00000158",
+      "type": "R_PPC_EMB_SDA21",
+      "symbol": "lbl_80651350",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "00000160",
+      "type": "R_PPC_EMB_SDA21",
+      "symbol": "lbl_80651360",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "000001ec",
+      "type": "R_PPC_REL24",
+      "symbol": "fn_80178F14",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "00000278",
+      "type": "R_PPC_REL24",
+      "symbol": "fn_80211B44",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "00000284",
+      "type": "R_PPC_REL24",
+      "symbol": "fn_80211B44",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "0000029c",
+      "type": "R_PPC_EMB_SDA21",
+      "symbol": "lbl_80651350",
+      "addend": "+ 0"
+    }
+  ],
+  "candidate_relocations": [
+    {
+      "offset": "00000038",
+      "type": "R_PPC_REL24",
+      "symbol": "_savegpr_21",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "00000050",
+      "type": "R_PPC_REL24",
+      "symbol": "fn_8015C71C",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "00000058",
+      "type": "R_PPC_REL24",
+      "symbol": "fn_801ECBB4",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "00000064",
+      "type": "R_PPC_EMB_SDA21",
+      "symbol": "lbl_80651350",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "0000007c",
+      "type": "R_PPC_EMB_SDA21",
+      "symbol": "lbl_806513B8",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "000000d4",
+      "type": "R_PPC_REL24",
+      "symbol": "fn_8015C28C",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "000000e8",
+      "type": "R_PPC_REL24",
+      "symbol": "fn_8015C28C",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "000000f4",
+      "type": "R_PPC_REL24",
+      "symbol": "fn_8015C28C",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "00000150",
+      "type": "R_PPC_REL24",
+      "symbol": "fn_801F2370",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "00000168",
+      "type": "R_PPC_EMB_SDA21",
+      "symbol": "lbl_80651350",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "00000170",
+      "type": "R_PPC_EMB_SDA21",
+      "symbol": "lbl_80651360",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "000001fc",
+      "type": "R_PPC_REL24",
+      "symbol": "fn_80178F14",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "00000298",
+      "type": "R_PPC_REL24",
+      "symbol": "fn_80211B44",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "000002a4",
+      "type": "R_PPC_REL24",
+      "symbol": "fn_80211B44",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "000002bc",
+      "type": "R_PPC_EMB_SDA21",
+      "symbol": "lbl_80651350",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "00000398",
+      "type": "R_PPC_REL24",
+      "symbol": "_restgpr_21",
+      "addend": "+ 0"
+    }
+  ],
+  "extra_relocations": [
+    {
+      "offset": "00000038",
+      "type": "R_PPC_REL24",
+      "symbol": "_savegpr_21",
+      "addend": "+ 0"
+    },
+    {
+      "offset": "00000398",
+      "type": "R_PPC_REL24",
+      "symbol": "_restgpr_21",
+      "addend": "+ 0"
+    }
+  ],
+  "other_relocation_types_targets_addends_equal_in_order": true,
+  "relocation_offsets_equal": false,
+  "source_review": [
+    "Only fn_801F15D0 is emitted; both conversion helpers are file-local and inline into its independent C translation unit.",
+    "IndexRecord size remains 0x5c, with index at 0x58; Item size remains 0x38, point at 0x04 and vector member at 0x14.",
+    "Unsigned and signed bias expressions still subtract the shared double constants then round to float. Their generated fsub/frsp pairs remain the source-typing mismatch; three fdivs and three fmuls are preserved.",
+    "The conditional working-group initialization is inherited from the preserved source and mirrors retail setting r27 only for a non-null group with a nonzero flag; no new fallback behavior was invented.",
+    "Retail nonvolatile register assignments are recovered, but canonical helper saves remain even in the measured 208-byte-frame candidates. No forbidden compiler-setting experiment was run.",
+    "CLAUDE.md was already modified before work began and was neither edited nor staged. No neighboring function, progress file, README, runtime, toolchain, or retail input was edited."
+  ],
+  "raw_command_results": [
+    {
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801F15D0",
+        "fn_801F15D0",
+        "-o",
+        "reports/GEDE01/objdiff-1550cc77-d44e-4bd0-8744-6ced8fbc78f4.json",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0,
+      "raw_output": " INFO Writing to reports/GEDE01/objdiff-1550cc77-d44e-4bd0-8744-6ced8fbc78f4.json\n"
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801F15D0",
+        "fn_801F15D0",
+        "-c",
+        "function_reloc_diffs=all",
+        "-o",
+        "reports/GEDE01/objdiff-1550cc77-d44e-4bd0-8744-6ced8fbc78f4-reloc-strict.json",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0,
+      "raw_output": " INFO Writing to reports/GEDE01/objdiff-1550cc77-d44e-4bd0-8744-6ced8fbc78f4-reloc-strict.json\n"
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "sha1sum",
+        "build/GEDE01/main.dol",
+        "orig/GEDE01/sys/main.dol"
+      ],
+      "exit_code": 0,
+      "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol\n"
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "build/binutils/powerpc-eabi-readelf",
+        "-rW",
+        "build/GEDE01/obj/game/game_fn_801F15D0.o"
+      ],
+      "exit_code": 0,
+      "raw_output": "\nRelocation section '.rela.text' at offset 0x3bc contains 14 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n0000004c  0000040a R_PPC_REL24            00000000   fn_8015C71C + 0\n00000054  0000050a R_PPC_REL24            00000000   fn_801ECBB4 + 0\n00000060  0000066d R_PPC_EMB_SDA21        00000000   lbl_80651350 + 0\n00000078  0000076d R_PPC_EMB_SDA21        00000000   lbl_806513B8 + 0\n000000c4  0000080a R_PPC_REL24            00000000   fn_8015C28C + 0\n000000d8  0000080a R_PPC_REL24            00000000   fn_8015C28C + 0\n000000e4  0000080a R_PPC_REL24            00000000   fn_8015C28C + 0\n00000140  0000090a R_PPC_REL24            00000000   fn_801F2370 + 0\n00000158  0000066d R_PPC_EMB_SDA21        00000000   lbl_80651350 + 0\n00000160  00000a6d R_PPC_EMB_SDA21        00000000   lbl_80651360 + 0\n000001ec  00000b0a R_PPC_REL24            00000000   fn_80178F14 + 0\n00000278  00000c0a R_PPC_REL24            00000000   fn_80211B44 + 0\n00000284  00000c0a R_PPC_REL24            00000000   fn_80211B44 + 0\n0000029c  0000066d R_PPC_EMB_SDA21        00000000   lbl_80651350 + 0\n"
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "build/binutils/powerpc-eabi-readelf",
+        "-rW",
+        "build/GEDE01/src/game/game_fn_801F15D0.o"
+      ],
+      "exit_code": 0,
+      "raw_output": "\nRelocation section '.rela.text' at offset 0x3e0 contains 16 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n00000038  00000c0a R_PPC_REL24            00000000   _savegpr_21 + 0\n00000050  0000060a R_PPC_REL24            00000000   fn_8015C71C + 0\n00000058  0000070a R_PPC_REL24            00000000   fn_801ECBB4 + 0\n00000064  0000036d R_PPC_EMB_SDA21        00000000   lbl_80651350 + 0\n0000007c  0000046d R_PPC_EMB_SDA21        00000000   lbl_806513B8 + 0\n000000d4  0000080a R_PPC_REL24            00000000   fn_8015C28C + 0\n000000e8  0000080a R_PPC_REL24            00000000   fn_8015C28C + 0\n000000f4  0000080a R_PPC_REL24            00000000   fn_8015C28C + 0\n00000150  0000090a R_PPC_REL24            00000000   fn_801F2370 + 0\n00000168  0000036d R_PPC_EMB_SDA21        00000000   lbl_80651350 + 0\n00000170  0000056d R_PPC_EMB_SDA21        00000000   lbl_80651360 + 0\n000001fc  00000a0a R_PPC_REL24            00000000   fn_80178F14 + 0\n00000298  00000b0a R_PPC_REL24            00000000   fn_80211B44 + 0\n000002a4  00000b0a R_PPC_REL24            00000000   fn_80211B44 + 0\n000002bc  0000036d R_PPC_EMB_SDA21        00000000   lbl_80651350 + 0\n00000398  00000d0a R_PPC_REL24            00000000   _restgpr_21 + 0\n"
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "build/binutils/powerpc-eabi-nm",
+        "-S",
+        "build/GEDE01/src/game/game_fn_801F15D0.o"
+      ],
+      "exit_code": 0,
+      "raw_output": "         U _restgpr_21\n         U _savegpr_21\n         U fn_8015C28C\n         U fn_8015C71C\n         U fn_80178F14\n         U fn_801ECBB4\n00000000 000003ac T fn_801F15D0\n         U fn_801F2370\n         U fn_80211B44\n         U lbl_80651350\n         U lbl_80651360\n         U lbl_806513B8\n"
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "build/binutils/powerpc-eabi-readelf",
+        "-SW",
+        "build/GEDE01/src/game/game_fn_801F15D0.o"
+      ],
+      "exit_code": 0,
+      "raw_output": "There are 7 section headers, starting at offset 0x710:\n\nSection Headers:\n  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al\n  [ 0]                   NULL            00000000 000000 000000 00      0   0  0\n  [ 1] .text             PROGBITS        00000000 000034 0003ac 00  AX  0   0  4\n  [ 2] .rela.text        RELA            00000000 0003e0 0000c0 0c      3   1  4\n  [ 3] .symtab           SYMTAB          00000000 0004a0 0000f0 10      4   3  4\n  [ 4] .strtab           STRTAB          00000000 000590 0000a7 01      0   0  1\n  [ 5] .shstrtab         STRTAB          00000000 000637 000035 01      0   0  1\n  [ 6] .comment          PROGBITS        00000000 00066c 0000a4 01      0   0  1\nKey to Flags:\n  W (write), A (alloc), X (execute), M (merge), S (strings), I (info),\n  L (link order), O (extra OS processing required), G (group), T (TLS),\n  C (compressed), x (unknown), o (OS specific), E (exclude),\n  D (mbind), v (VLE), p (processor specific)\n"
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        ".tools/bin/ninja",
+        "-t",
+        "commands",
+        "build/GEDE01/src/game/game_fn_801F15D0.o"
+      ],
+      "exit_code": 0,
+      "raw_output": "\"/usr/bin/python3\" tools/download_tool.py sjiswrap build/tools/sjiswrap.exe --tag v1.2.2\ntools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -MMD -c src/game/game_fn_801F15D0.c -o build/GEDE01/src/game && \"/usr/bin/python3\" tools/transform_dep.py build/GEDE01/src/game/game_fn_801F15D0.d build/GEDE01/src/game/game_fn_801F15D0.d\n"
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "python3",
+        "tools/legal_audit.py"
+      ],
+      "exit_code": 0,
+      "raw_output": "legal audit passed (22008 tracked project files inspected)\n"
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--",
+        "configure.py",
+        "config/GEDE01/splits.txt",
+        "reports/GEDE01/progress.json",
+        "README.md"
+      ],
+      "exit_code": 0,
+      "raw_output": ""
+    }
+  ]
+}

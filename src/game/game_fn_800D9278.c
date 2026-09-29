@@ -25,12 +25,13 @@ extern unsigned long long fn_8020123C();
 
 int fn_800D9278(void *unused, void *object)
 {
-    Runtime *runtime = fn_800A1D28(object);
-    void *owner;
+    Runtime *runtime;
     void *attached;
     void *candidate;
+    void *owner;
 
     (void)unused;
+    runtime = fn_800A1D28(object);
     fn_800A1CD0(object);
     owner = fn_80201B94(object);
     attached = ((void *)fn_80201B54(object));
@@ -40,15 +41,17 @@ int fn_800D9278(void *unused, void *object)
         void *source = fn_80201BC8(fn_80201814(candidate));
         int distance;
         unsigned long long result;
+        unsigned int low;
 
         fn_8011F114(&position, source);
         distance = fn_80179064((int)runtime->source.x, (int)runtime->source.y,
                               (int)position.x, (int)position.y);
         result = fn_8020123C(0x99, attached, candidate, 0);
-        if (distance > 175 || (unsigned int)result != 0) {
-            runtime->flags |= 0x10;
-        } else {
+        low = result & 0xFFFFFFFFULL;
+        if (distance > 175 || low == 0) {
             runtime->destination = position;
+        } else {
+            runtime->flags |= 0x10;
         }
     }
     return 1;

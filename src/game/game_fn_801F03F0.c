@@ -56,9 +56,10 @@ extern void fn_801ECD48(int);
 extern void fn_801ECD50(float);
 
 /* NonMatching: behavior-complete camera/render setup reconstruction. GC/1.3
- * emits 1192 bytes versus retail's 1224; retail uses a 0x70-byte frame rather
- * than 0x60 and retains different temporary layouts and arithmetic scheduling
- * in the color, normalization, and matrix-construction blocks. */
+ * emits 1216 bytes versus retail's 1224 with the correct 0x70-byte frame and
+ * color temporaries; remaining differences are load scheduling and register
+ * selection in the target, normalization, and matrix-construction blocks.
+ * Attempt 5: canonical/relocation-strict 92.05556%; preserve NonMatching. */
 void fn_801F03F0(BoundsCamera* in, int alternate)
 {
     u8* state = lbl_8063BEA0;
@@ -66,15 +67,24 @@ void fn_801F03F0(BoundsCamera* in, int alternate)
     float* matrix;
     float* normalized;
     Vec3* motion;
-    Color color;
+    Color constructedColor;
     float projection = lbl_80651368;
 
     target = *(Vec3*)lbl_8023B78C;
-    matrix = (float*)(state + 0xC8 + lbl_8064D738 * 0x60);
+    matrix = (float*)(state + 0xC8);
+    matrix += lbl_8064D738 * 24;
     if (lbl_8064CBA4 == 1)
         projection = lbl_8065136C;
-    target = in->eye;
-    lbl_8064D6F8 = 0;
+    {
+        /* Snapshot the vector bits before resetting render state. */
+        u32 b = ((u32*)&in->eye)[1];
+        u32 c = ((u32*)&in->eye)[2];
+        u32 a = ((u32*)&in->eye)[0];
+        lbl_8064D6F8 = 0;
+        ((u32*)&target)[0] = a;
+        ((u32*)&target)[1] = b;
+        ((u32*)&target)[2] = c;
+    }
     if (alternate)
         fn_802118E0(state + 0x88, in->projection, projection,
                     lbl_8065134C, lbl_80651370);
@@ -96,25 +106,32 @@ void fn_801F03F0(BoundsCamera* in, int alternate)
     fn_802110A8(state + 0x1C8, state + 0x1F8);
     fn_80212154(state + 0x1C8, state + 0x228);
 
-    normalized = (float*)(state + 0x7C);
-    normalized[0] = in->max_x - in->min_x;
-    normalized[1] = in->max_y - in->min_y;
-    normalized[2] = lbl_80651348;
+    {
+        float delta_x = in->max_x - in->min_x;
+        float delta_y = in->max_y - in->min_y;
+        normalized = (float*)(state + 0x7C);
+        normalized[1] = delta_y;
+        *(float*)(state + 0x7C) = delta_x;
+        normalized[2] = lbl_80651348;
+    }
     projection = fn_80211B08(normalized);
-    normalized[0] /= projection;
+    *(float*)(state + 0x7C) /= projection;
     normalized[1] /= projection;
     fn_8022B690(state + 0x1C8, 0x1B);
     fn_8022B6CC(state + 0x1C8, 0x1B);
 
     if (lbl_8064CB50) {
-        color = *(Color*)(lbl_802FC5BC + 0x28);
+        Color enabledColor = *(Color*)(lbl_802FC5BC + 0x28);
+        fn_80227290(&enabledColor, 0xFFFFFF);
     } else {
-        color.r = lbl_8064CBA0;
-        color.g = lbl_8064CBA0;
-        color.b = lbl_8064CBA0;
-        color.a = 0xFF;
+        Color fallbackColor;
+        constructedColor.r = lbl_8064CBA0;
+        constructedColor.g = lbl_8064CBA0;
+        constructedColor.b = lbl_8064CBA0;
+        constructedColor.a = 0xFF;
+        fallbackColor = constructedColor;
+        fn_80227290(&fallbackColor, 0xFFFFFF);
     }
-    fn_80227290(&color, 0xFFFFFF);
     fn_8022A5D8(1, 4, 5, 0);
     fn_80226D28(1);
     fn_801F10BC(0, 0, 0);
@@ -122,19 +139,37 @@ void fn_801F03F0(BoundsCamera* in, int alternate)
     fn_801F0044();
     fn_801ECC4C();
     fn_801ECEC8(1, 3, 1);
-    fn_80225F4C(0x18, state + 0x258 + lbl_8064D738 * 0x200, 0x40);
-    color = *(Color*)(lbl_802FC5BC + 0xC);
-    fn_801ECD74(&color);
+    {
+        u8* command = state + 0x258;
+        int command_offset = lbl_8064D738 * 0x200;
+        fn_80225F4C(0x18, command + command_offset, 0x40);
+    }
+    {
+        Color color = *(Color*)(lbl_802FC5BC + 0xC);
+        fn_801ECD74(&color);
+    }
 
     motion = fn_8015AB00(2);
     if (motion != 0) {
         float rotation[12];
+        float* view = (float*)(state + 0x1C8);
+        float y, x, z, w, divisor;
+        float* matrix2;
         fn_80211484(rotation, lbl_80651348, lbl_80651348,
                     lbl_80651384 - motion->x);
-        matrix[0] = -((float*)(state + 0x1C8))[8] / lbl_80651388;
-        matrix[1] = -((float*)(state + 0x1C8))[9] / lbl_80651388;
-        matrix[2] = -((float*)(state + 0x1C8))[10] / lbl_80651388;
-        matrix[3] = -((float*)(state + 0x1C8))[11] / lbl_80651388;
+        divisor = lbl_80651388;
+        y = -view[9];
+        x = -view[8];
+        w = -view[11];
+        z = -view[10];
+        x /= divisor;
+        y /= divisor;
+        z /= divisor;
+        w /= divisor;
+        matrix[0] = x;
+        matrix[1] = y;
+        matrix[2] = z;
+        matrix[3] = w;
         matrix[4] = lbl_80651348;
         matrix[5] = lbl_80651348;
         matrix[6] = lbl_8065138C;
@@ -145,22 +180,26 @@ void fn_801F03F0(BoundsCamera* in, int alternate)
         matrix[11] = lbl_80651348;
         fn_80210FDC(matrix, rotation, matrix);
 
-        matrix = (float*)(state + 0xF8 + lbl_8064D738 * 0x60);
-        matrix[0] = lbl_80651390;
-        matrix[1] = lbl_80651348;
-        matrix[2] = lbl_80651348;
-        matrix[3] = lbl_80651348;
-        matrix[4] = lbl_80651348;
-        matrix[5] = lbl_80651390;
-        matrix[6] = lbl_80651348;
-        matrix[7] = lbl_80651348;
-        matrix[8] = lbl_80651348;
-        matrix[9] = lbl_80651348;
-        matrix[10] = lbl_80651348;
-        matrix[11] = lbl_80651348;
+        matrix2 = (float*)(state + 0xF8 + lbl_8064D738 * 0x60);
+        matrix2[0] = lbl_80651390;
+        matrix2[1] = lbl_80651348;
+        matrix2[2] = lbl_80651348;
+        matrix2[3] = lbl_80651348;
+        matrix2[4] = lbl_80651348;
+        matrix2[5] = lbl_80651390;
+        matrix2[6] = lbl_80651348;
+        matrix2[7] = lbl_80651348;
+        matrix2[8] = lbl_80651348;
+        matrix2[9] = lbl_80651348;
+        matrix2[10] = lbl_80651348;
+        matrix2[11] = lbl_80651348;
         fn_80211484(rotation, lbl_8064D6C8, lbl_8064D6CC, lbl_80651348);
-        fn_80210FDC(matrix, rotation, matrix);
-        DCFlushRange(state + 0xC8 + lbl_8064D738 * 0x60, 0x60);
+        fn_80210FDC(matrix2, rotation, matrix2);
+        {
+            u8* base = state + 0xC8;
+            int offset = lbl_8064D738 * 0x60;
+            DCFlushRange(base + offset, 0x60);
+        }
         fn_80225F4C(0x17, state + 0xC8 + lbl_8064D738 * 0x60, 0x30);
     }
     fn_8022A6DC(1);

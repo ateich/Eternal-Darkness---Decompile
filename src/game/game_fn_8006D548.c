@@ -4,9 +4,9 @@ typedef signed int s32;
 typedef unsigned short u16;
 typedef unsigned int u32;
 
-/* NonMatching: behavior-complete point selection across all seven active
- * modes. Canonical GC/1.3 still differs in switch layout, stack lifetimes,
- * signed-conversion constants, and relocation offsets. */
+/* NonMatching: canonical GC/1.3 reaches 99.25% with the retail 0x950-byte
+ * function size and control-flow offsets. Register allocation and compiler-
+ * owned conversion-constant / jump-table relocations still differ. */
 
 typedef struct Vec3 {
     float x;
@@ -30,7 +30,7 @@ typedef struct PointTable {
     unsigned char pad_0[0x34];
     u16 count;
     unsigned char pad_36[2];
-    PointEntry entries[1];
+    PointEntry *entries;
 } PointTable;
 
 extern PointTable *fn_8015C390(s32 table_kind);
@@ -49,7 +49,7 @@ extern float lbl_8064E7FC;
 extern float lbl_8064E800;
 extern float lbl_8064E804;
 
-static void copy_point(PointEntry *entry, Vec3 *position, u32 *value, u32 *kind)
+static inline void copy_point(PointEntry *entry, Vec3 *position, u32 *value, u32 *kind)
 {
     position->x = entry->x;
     position->y = entry->y;
@@ -65,22 +65,48 @@ static void copy_point(PointEntry *entry, Vec3 *position, u32 *value, u32 *kind)
 s32 fn_8006D548(s32 table_kind, u32 mask, u32 mode, Vec3 *position,
                  u32 *value, u32 *kind, s32 start)
 {
-    PointTable *table;
-    PointEntry *entry;
-    s32 selected = -1;
-    s32 candidates[100];
-    s32 count = 0;
     s32 i;
+    s32 count = 0;
+    s32 candidates[100];
+    s32 selected = -1;
+    PointEntry *entry;
+    PointEntry *entries;
+    PointTable *table;
 
     table = fn_8015C390(table_kind);
-    if (table == 0 || table->count == 0 || mode > 7) {
-        return -1;
+    if (table == 0) {
+        goto done;
     }
+    if (table->count == 0) {
+        goto done;
+    }
+    entry = table->entries;
+    entries = entry;
 
     switch (mode) {
+    case 2: {
+        s32 *candidate = candidates;
+        s32 limit = table->count;
+        for (i = 0; i < limit; i++, entry++) {
+            if (count >= 100) {
+                break;
+            }
+            if ((entry->mask & mask) != 0) {
+                *candidate++ = (unsigned char)i;
+                count++;
+            }
+        }
+        if (count != 0) {
+            s32 pick = candidates[fn_800FBFB0() % count];
+            entry = &entries[pick];
+            selected = pick;
+            copy_point(entry, position, value, kind);
+        }
+        break;
+    }
     case 1: {
         if (start >= 0 && start < table->count) {
-            entry = &table->entries[start];
+            entry = &entries[start];
             if ((entry->mask & mask) != 0) {
                 copy_point(entry, position, value, kind);
                 selected = start;
@@ -88,21 +114,14 @@ s32 fn_8006D548(s32 table_kind, u32 mask, u32 mode, Vec3 *position,
         }
         break;
     }
-    case 2: {
-        for (i = 0; i < table->count && count < 100; i++) {
-            if ((table->entries[i].mask & mask) != 0) {
-                candidates[count++] = (unsigned char)i;
-            }
-        }
-        if (count != 0) {
-            selected = candidates[fn_800FBFB0() % count];
-            copy_point(&table->entries[selected], position, value, kind);
-        }
-        break;
-    }
     case 3: {
-        for (i = start; i >= 0 && i < table->count; i++) {
-            entry = &table->entries[i];
+        /* The initial signed guard is outside the counted forward scan. */
+        s32 limit = table->count;
+        if (start < 0) {
+            break;
+        }
+        for (i = start; i < limit; i++) {
+            entry = &entries[i];
             if ((entry->mask & mask) != 0) {
                 copy_point(entry, position, value, kind);
                 selected = i;
@@ -113,9 +132,9 @@ s32 fn_8006D548(s32 table_kind, u32 mask, u32 mode, Vec3 *position,
     }
     case 4: {
         u32 best = 10000;
-        for (i = 0; i < table->count; i++) {
+        count = -1;
+        for (i = 0; i < table->count; i++, entry++) {
             u32 distance;
-            entry = &table->entries[i];
             if ((entry->mask & mask) == 0) {
                 continue;
             }
@@ -124,19 +143,21 @@ s32 fn_8006D548(s32 table_kind, u32 mask, u32 mode, Vec3 *position,
                                    (s32)position->z);
             if (distance < best) {
                 best = distance;
-                selected = i;
+                count = i;
             }
         }
-        if (selected >= 0) {
-            copy_point(&table->entries[selected], position, value, kind);
+        if (count >= 0) {
+            selected = count;
+            entry = &entries[count];
+            copy_point(entry, position, value, kind);
         }
         break;
     }
     case 5: {
-        Vec3 projected;
         Vec3 point;
-        for (i = 0; i < table->count; i++) {
-            entry = &table->entries[i];
+        Vec3 projected;
+        count = -1;
+        for (i = 0; i < table->count; i++, entry++) {
             if ((entry->mask & mask) == 0) {
                 continue;
             }
@@ -151,20 +172,22 @@ s32 fn_8006D548(s32 table_kind, u32 mask, u32 mode, Vec3 *position,
             fn_8017ACE0(lbl_8063C068, &point, &projected);
             if (projected.x > lbl_8064E7FC && projected.x < lbl_8064E800 &&
                 projected.y > lbl_8064E7FC && projected.y < lbl_8064E804) {
-                selected = i;
+                count = i;
                 break;
             }
         }
-        if (selected >= 0) {
-            copy_point(&table->entries[selected], position, value, kind);
+        if (count >= 0) {
+            selected = count;
+            entry = &entries[count];
+            copy_point(entry, position, value, kind);
         }
         break;
     }
     case 6: {
-        Vec3 projected;
         Vec3 point;
+        Vec3 projected;
         if (start >= 0 && start < table->count) {
-            entry = &table->entries[start];
+            entry = &entries[start];
             if ((entry->mask & mask) != 0 &&
                 fn_80178F14(entry->x, entry->y, entry->z,
                             (s32)lbl_8063D378.x, (s32)lbl_8063D378.y,
@@ -183,19 +206,20 @@ s32 fn_8006D548(s32 table_kind, u32 mask, u32 mode, Vec3 *position,
         break;
     }
     case 7: {
-        Vec3 segment;
+        s32 *candidate;
         Vec3 direction;
+        Vec3 segment;
         Vec3 *origin;
         Vec3 *camera;
 
         if (fn_800AD2B4() != 0) {
             origin = fn_8011F130(fn_80201890());
             camera = fn_8011F130(lbl_8064C4E4);
+            candidate = candidates;
             segment.x = origin->x - camera->x;
             segment.y = origin->y - camera->y;
             segment.z = origin->z - camera->z;
-            for (i = 0; i < table->count && count < 100; i++) {
-                entry = &table->entries[i];
+            for (i = 0; i < table->count; i++, entry++) {
                 if ((entry->mask & mask) == 0) {
                     continue;
                 }
@@ -203,12 +227,19 @@ s32 fn_8006D548(s32 table_kind, u32 mask, u32 mode, Vec3 *position,
                 direction.y = origin->y - entry->y;
                 direction.z = origin->z - entry->z;
                 if (fn_80211B44(&direction, &segment) < lbl_8064E7FC) {
-                    candidates[count++] = (unsigned char)i;
+                    *candidate++ = (unsigned char)i;
+                    count++;
+                    /* Retail stops immediately after filling the final slot. */
+                    if (count == 100) {
+                        break;
+                    }
                 }
             }
             if (count != 0) {
-                selected = candidates[fn_800FBFB0() % count];
-                copy_point(&table->entries[selected], position, value, kind);
+                s32 pick = candidates[fn_800FBFB0() % count];
+                entry = &entries[pick];
+                selected = pick;
+                copy_point(entry, position, value, kind);
             } else {
                 selected = fn_8006D548(table_kind, mask, 2, position, value,
                                        kind, start);
@@ -217,5 +248,6 @@ s32 fn_8006D548(s32 table_kind, u32 mask, u32 mode, Vec3 *position,
         break;
     }
     }
+done:
     return selected;
 }

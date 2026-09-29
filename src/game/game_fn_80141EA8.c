@@ -22,6 +22,7 @@ void fn_80141EA8(Vec3* a, Vec3* b, Vec3* c, u8 triangle)
     Vec3* normal;
     float ux, uy, uz, vx, vy, vz, length;
     float ax, ay, az;
+    float *secondY, *secondZ, *normalY, *normalZ;
 
     second = base + 2;
     fn_80179AEC(a, second);
@@ -29,28 +30,35 @@ void fn_80141EA8(Vec3* a, Vec3* b, Vec3* c, u8 triangle)
     fn_80179AEC(b, first);
     third = base + 4;
     fn_80179AEC(c, third);
+    secondY = &second->y;
+    secondZ = &second->z;
     ux = first->x - second->x;
-    uy = first->y - second->y;
-    uz = first->z - second->z;
+    uy = first->y - *secondY;
+    uz = first->z - *secondZ;
     vx = third->x - second->x;
-    vy = third->y - second->y;
-    vz = third->z - second->z;
+    vy = third->y - *secondY;
+    vz = third->z - *secondZ;
     normal = first + 6;
+    normalY = &normal->y;
+    normalZ = &normal->z;
     normal->x = uy * vz - uz * vy;
-    normal->y = uz * vx - ux * vz;
-    normal->z = ux * vy - uy * vx;
-    length = normal->x * normal->x + normal->y * normal->y + normal->z * normal->z;
-    if (length != lbl_80650410) {
+    *normalY = uz * vx - ux * vz;
+    *normalZ = ux * vy - uy * vx;
+    length = normal->x * normal->x + *normalY * *normalY + *normalZ * *normalZ;
+    if (lbl_80650410 != length) {
         length = fn_800ED720(length);
         normal->x /= length;
-        normal->y /= length;
-        normal->z /= length;
+        *normalY /= length;
+        *normalZ /= length;
     }
-    lbl_8064D030[triangle] = normal->x * second->x +
-                            normal->y * second->y - normal->z * second->z;
-    ax = normal->x < lbl_80650410 ? -normal->x : normal->x;
-    ay = normal->y < lbl_80650410 ? -normal->y : normal->y;
-    az = normal->z < lbl_80650410 ? -normal->z : normal->z;
+    ax = normal->x;
+    ay = *normalY;
+    az = *normalZ;
+    /* The plane constant is the negative dot product. */
+    lbl_8064D030[triangle] = -(ax * second->x + ay * *secondY + az * *secondZ);
+    if (ax < lbl_80650410) ax = -ax;
+    if (ay < lbl_80650410) ay = -ay;
+    if (az < lbl_80650410) az = -az;
     if (ax > ay) {
         if (ax > az) { lbl_8064D02C[triangle] = 1; lbl_8064D028[triangle] = 2; }
         else         { lbl_8064D02C[triangle] = 0; lbl_8064D028[triangle] = 1; }

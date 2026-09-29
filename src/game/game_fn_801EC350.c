@@ -2,9 +2,11 @@ typedef unsigned char u8;
 typedef signed char s8;
 
 extern u8 fn_801EC304(u8*, int, int);
-extern void fn_801EC318(u8*, int, int, int);
+extern void fn_801EC318(u8*, int, int, u8);
 extern int fn_800FBFB0(void);
 
+/* Keep derived coordinates and clamp sums as expressions: MWCC
+ * allocates their common subexpressions differently from named locals. */
 void fn_801EC350(u8* data, int x, int y, int width, int height)
 {
     u8 top_left = fn_801EC304(data, x, y);
@@ -12,78 +14,59 @@ void fn_801EC350(u8* data, int x, int y, int width, int height)
     u8 bottom_right = fn_801EC304(data, x + width, y + height);
     u8 top_right = fn_801EC304(data, x + width, y);
     int average;
+    int right_average;
     s8 offset;
-    int half_height;
-    int half_width;
-    int mid_y;
-    int mid_x;
     int value;
+    int span;
 
     average = (top_left + bottom_left) >> 1;
     value = fn_800FBFB0() % height;
-    half_height = height >> 1;
-    mid_y = y + half_height;
-    offset = value - half_height;
-    if (fn_801EC304(data, x, mid_y) == 0) {
-        value = average + offset;
-        if (value > 255)
-            value = 255;
-        else
-            value &= ~(value >> 31);
-        fn_801EC318(data, x, mid_y, value);
+    offset = value - (height >> 1);
+    if (fn_801EC304(data, x, (y + (height >> 1))) == 0) {
+        fn_801EC318(data, x, (y + (height >> 1)),
+                    (average + offset) > 255 ? 255
+                        : ((average + offset) < 0 ? 0 : (average + offset)));
     }
 
     average = (top_left + top_right) >> 1;
-    half_width = width >> 1;
-    mid_x = x + half_width;
-    if (fn_801EC304(data, mid_x, y) == 0) {
-        offset = fn_800FBFB0() % width - half_width;
-        value = average + offset;
-        if (value > 255)
-            value = 255;
-        else
-            value &= ~(value >> 31);
-        fn_801EC318(data, mid_x, y, value);
+    if (fn_801EC304(data, (x + (width >> 1)), y) == 0) {
+        offset = fn_800FBFB0() % width - (width >> 1);
+        fn_801EC318(data, (x + (width >> 1)), y,
+                    (average + offset) > 255 ? 255
+                        : ((average + offset) < 0 ? 0 : (average + offset)));
     }
 
     average = (bottom_left + bottom_right) >> 1;
-    if (fn_801EC304(data, mid_x, y + height) == 0) {
-        offset = fn_800FBFB0() % width - half_width;
-        value = average + offset;
-        if (value > 255)
-            value = 255;
-        else
-            value &= ~(value >> 31);
-        fn_801EC318(data, mid_x, y + height, value);
+    if (fn_801EC304(data, (x + (width >> 1)), y + height) == 0) {
+        offset = fn_800FBFB0() % width - (width >> 1);
+        fn_801EC318(data, (x + (width >> 1)), y + height,
+                    (average + offset) > 255 ? 255
+                        : ((average + offset) < 0 ? 0 : (average + offset)));
     }
 
-    average = (top_right + bottom_right) >> 1;
-    if (fn_801EC304(data, x + width, mid_y) == 0) {
-        offset = fn_800FBFB0() % height - half_height;
-        value = average + offset;
-        if (value > 255)
-            value = 255;
-        else
-            value &= ~(value >> 31);
-        fn_801EC318(data, x + width, mid_y, value);
+    right_average = (top_right + bottom_right) >> 1;
+    if (fn_801EC304(data, x + width, (y + (height >> 1))) == 0) {
+        offset = fn_800FBFB0() % height - (height >> 1);
+        fn_801EC318(data, x + width, (y + (height >> 1)),
+                    (right_average + offset) > 255 ? 255
+                        : ((right_average + offset) < 0 ? 0 : (right_average + offset)));
     }
 
-    average = (top_left + bottom_left + top_right + bottom_right) >> 2;
-    if (fn_801EC304(data, mid_x, mid_y) == 0) {
-        int span = (height + width) >> 1;
+    average = (top_left + bottom_left + bottom_right + top_right) >> 2;
+    span = (height + width) >> 1;
+    if (fn_801EC304(data, (x + (width >> 1)), (y + (height >> 1))) == 0) {
         offset = fn_800FBFB0() % span - (span >> 1);
-        value = average + offset;
-        if (value > 255)
-            value = 255;
-        else
-            value &= ~(value >> 31);
-        fn_801EC318(data, mid_x, mid_y, value);
+        fn_801EC318(data, (x + (width >> 1)), (y + (height >> 1)),
+                    (average + offset) > 255 ? 255
+                        : ((average + offset) < 0 ? 0 : (average + offset)));
     }
 
     if (width > 1 || height > 1) {
-        fn_801EC350(data, x, y, half_width, half_height);
-        fn_801EC350(data, mid_x, y, half_width, half_height);
-        fn_801EC350(data, x, mid_y, half_width, half_height);
-        fn_801EC350(data, mid_x, mid_y, half_width, half_height);
+        width >>= 1;
+        height >>= 1;
+        fn_801EC350(data, x, y, width, height);
+        fn_801EC350(data, x + width, y, width, height);
+        fn_801EC350(data, x, y + height, width, height);
+        fn_801EC350(data, x + width, y + height, width, height);
     }
 }

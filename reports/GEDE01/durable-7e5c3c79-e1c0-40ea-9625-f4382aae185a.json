@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "assignment_id": "7e5c3c79-e1c0-40ea-9625-f4382aae185a",
+  "attempt": 5,
+  "base_commit": "dbdca8bdd65f6b53df4e7794b31f6951f598a6e2",
+  "target": "fn_801C3278",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-7e5c3c79-e1c0-40ea-9625-f4382aae185a.json",
+    "eternal-darkness-decomp/reports/GEDE01/canonical-7e5c3c79-e1c0-40ea-9625-f4382aae185a.json",
+    "eternal-darkness-decomp/reports/GEDE01/verification-7e5c3c79-e1c0-40ea-9625-f4382aae185a.json",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-7e5c3c79-e1c0-40ea-9625-f4382aae185a.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-7e5c3c79-e1c0-40ea-9625-f4382aae185a.txt"
+  ],
+  "divergence": "Canonical and relocation-strict GC/1.2.5n objdiff both measure 90.28689%, improved from preserved 86.88525%. Retail .text is 488 bytes; generated .text is 484 bytes. Explicit raw handle-map pointer now produces stbu; separated first call matches argument-copy instructions; explicit generation scan matches compare operand order and r5 record pointer. Remaining differences: low global address is materialized in r7 before the prologue then copied to r31 instead of directly into r31 after stmw; generation-loop index/count use r6/r4 instead of r4/r6; map and generation pointer additions have reversed source operands; callback argument reuses the record base with one addi instead of offset-first addi plus add; return uses slwi/or with cleaned handle r30 instead of slwi/rlwimi using r29. All eight .text relocation type/target-name/target-value/addend tuples agree; instruction site offsets differ. Candidate remains NonMatching. Full build, required DOL SHA-1, and legal audit passed."
+}

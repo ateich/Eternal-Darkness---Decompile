@@ -1,0 +1,264 @@
+{
+  "assignment_id": "61afaba5-babf-43ee-baf7-21601adfce5c",
+  "target": "fn_8011C0F0",
+  "status": "attempted",
+  "retained_source": "eternal-darkness-decomp/src/game/game_fn_8011C0F0.c",
+  "source_change": "None. Accepted base and preserved attempt 643f19b470 have identical source; restored after every batch.",
+  "compiler": "Canonical GC/1.3; flags and full compiler invocations in each variant log. No compiler policy or registration changes.",
+  "new_hypotheses": [
+    "A shared stack aggregate may constrain color-store alias scheduling. Test both field orders, with a boxed scalar control.",
+    "Union-backed color/quad locals may change typed alias sets without changing ABI or offsets.",
+    "Explicit volatile u32 word reads into a union can remove the global declaration mismatch without the previously tried aggregate cast.",
+    "Array lvalues and flat halfword indexing may alter MWCC local alias analysis compared with scalar/member lvalues."
+  ],
+  "measurements": [
+    {
+      "variant": "baseline",
+      "basis": "canonical",
+      "score": 85.297874,
+      "target_size": "188",
+      "generated_size": "188"
+    },
+    {
+      "variant": "baseline",
+      "basis": "strict",
+      "score": 85.297874,
+      "target_size": "188",
+      "generated_size": "188"
+    },
+    {
+      "variant": "shared_stack_frame",
+      "basis": "canonical",
+      "score": 85.297874,
+      "target_size": "188",
+      "generated_size": "188"
+    },
+    {
+      "variant": "shared_stack_frame",
+      "basis": "strict",
+      "score": 85.297874,
+      "target_size": "188",
+      "generated_size": "188"
+    },
+    {
+      "variant": "shared_stack_frame_reversed",
+      "basis": "canonical",
+      "score": 85.57447,
+      "target_size": "188",
+      "generated_size": "188"
+    },
+    {
+      "variant": "shared_stack_frame_reversed",
+      "basis": "strict",
+      "score": 85.57447,
+      "target_size": "188",
+      "generated_size": "188"
+    },
+    {
+      "variant": "boxed_color",
+      "basis": "canonical",
+      "score": 85.297874,
+      "target_size": "188",
+      "generated_size": "188"
+    },
+    {
+      "variant": "boxed_color",
+      "basis": "strict",
+      "score": 85.297874,
+      "target_size": "188",
+      "generated_size": "188"
+    },
+    {
+      "variant": "union_color_halfwords",
+      "basis": "canonical",
+      "score": 85.297874,
+      "target_size": "188",
+      "generated_size": "188"
+    },
+    {
+      "variant": "union_color_halfwords",
+      "basis": "strict",
+      "score": 85.297874,
+      "target_size": "188",
+      "generated_size": "188"
+    },
+    {
+      "variant": "union_color_bytes",
+      "basis": "canonical",
+      "score": 85.297874,
+      "target_size": "188",
+      "generated_size": "188"
+    },
+    {
+      "variant": "union_color_bytes",
+      "basis": "strict",
+      "score": 85.297874,
+      "target_size": "188",
+      "generated_size": "188"
+    },
+    {
+      "variant": "union_quad_words",
+      "basis": "canonical",
+      "score": 85.297874,
+      "target_size": "188",
+      "generated_size": "188"
+    },
+    {
+      "variant": "union_quad_words",
+      "basis": "strict",
+      "score": 85.297874,
+      "target_size": "188",
+      "generated_size": "188"
+    },
+    {
+      "variant": "typed_word_copy",
+      "basis": "canonical",
+      "score": 72.02128,
+      "target_size": "188",
+      "generated_size": "184"
+    },
+    {
+      "variant": "typed_word_copy",
+      "basis": "strict",
+      "score": 72.02128,
+      "target_size": "188",
+      "generated_size": "184"
+    },
+    {
+      "variant": "array_color",
+      "basis": "canonical",
+      "score": 85.297874,
+      "target_size": "188",
+      "generated_size": "188"
+    },
+    {
+      "variant": "array_color",
+      "basis": "strict",
+      "score": 85.297874,
+      "target_size": "188",
+      "generated_size": "188"
+    },
+    {
+      "variant": "flat_halfword_indices",
+      "basis": "canonical",
+      "score": 85.297874,
+      "target_size": "188",
+      "generated_size": "188"
+    },
+    {
+      "variant": "flat_halfword_indices",
+      "basis": "strict",
+      "score": 85.297874,
+      "target_size": "188",
+      "generated_size": "188"
+    },
+    {
+      "variant": "flat_halfword_indices_array_color",
+      "basis": "canonical",
+      "score": 85.297874,
+      "target_size": "188",
+      "generated_size": "188"
+    },
+    {
+      "variant": "flat_halfword_indices_array_color",
+      "basis": "strict",
+      "score": 85.297874,
+      "target_size": "188",
+      "generated_size": "188"
+    }
+  ],
+  "compile_failure": {
+    "variant": "typed_word_initializer",
+    "result": "MWCC illegal constant expression, exit 2; no diff measured. Patch and raw compiler failure retained."
+  },
+  "best_new_measured_score": 85.57447,
+  "retained_score": 85.297874,
+  "selection": "Rejected reversed shared frame despite 85.57447 score: relocates quad from sp+0xc to sp+0x8 and color from sp+0x8 to sp+0x18; introduces stack-offset mismatches throughout both branches. No genuine improvement toward retail layout. All other compiled variants are unchanged at 85.297874 except typed_word_copy at 72.02128/184 bytes.",
+  "divergence": {
+    "prologue": "Retail stw LR at +0x0c then addi low-address at +0x10; generated reverses these, shifting ADDR16_LO relocation site from +0x12 to +0x0e.",
+    "enabled_branch": "Retail index offset r8; generated r10. Generated stores color at +0x54 and forms its pointer at +0x58; retail forms pointer at +0x58 but stores color at +0x70. Retail/compiled argument loads and li r8 scheduling differ between +0x54 and +0x70.",
+    "disabled_and_epilogue": "Baseline remains identical from +0x7c through +0xb8.",
+    "relocations": "Five actual ELF records per object. Type, resolved symbol name and addend agree in order for all five; ADDR16_LO site differs. Objdiff also annotates four derived R_PPC_NONE references, explaining earlier reports of nine. No strict relocation equality or match claimed."
+  },
+  "signature_debt": [
+    "Inherited extern const Quad lbl_8023A670 differs in type and volatile qualification from Matching definition const volatile unsigned int lbl_8023A670[4].",
+    "Inherited fn_801A872C prototype uses int parameters and int* color, whereas callee uses signed long parameters and const unsigned long*. Both scalar widths are 32-bit under this ABI, but source types/qualification are not identical. No signature safety claim is made."
+  ],
+  "dol_verification": {
+    "expected_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "scope": "Canonical retail build/hash passes. This source is registered NonMatching at configure.py:8524 and is excluded from the DOL link; the hash does not validate the reconstruction. Its object was separately compiled and diffed on canonical and name_address bases."
+  },
+  "legal_scope": "Independent one-function C TU retained; no assembly, copied binary payloads, neighbor edits, gate changes, private inputs or generated binaries committed. legal_audit.py output in verification.log; stage audit separately preserved.",
+  "reproduction": "From eternal-darkness-decomp, run python3 configure.py, then python3 reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/experiments.py; union-experiments.py; typed-experiments.py (expected nonzero compiler rejection, finally restores base); array-experiments.py; verify.py. Each script uses the accepted base and emits raw logs and patches. Scripts are assignment reports, not additional registered translation units.",
+  "evidence_files": [
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/array-experiments.py",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/array-restore.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/array-results.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/array_color-canonical.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/array_color-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/array_color.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/array_color.patch",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/baseline-canonical.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/baseline-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/baseline.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/baseline.patch",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/boxed_color-canonical.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/boxed_color-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/boxed_color.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/boxed_color.patch",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/build.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/bytes.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/configure.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/experiments.py",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/final-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/flat_halfword_indices-canonical.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/flat_halfword_indices-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/flat_halfword_indices.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/flat_halfword_indices.patch",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/flat_halfword_indices_array_color-canonical.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/flat_halfword_indices_array_color-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/flat_halfword_indices_array_color.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/flat_halfword_indices_array_color.patch",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/instructions.txt",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/preserved-attempt4-metadata.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/prior-attempts.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/raw-whitespace-check.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/relocations.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/restore.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/results.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/shared_stack_frame-canonical.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/shared_stack_frame-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/shared_stack_frame.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/shared_stack_frame.patch",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/shared_stack_frame_reversed-canonical.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/shared_stack_frame_reversed-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/shared_stack_frame_reversed.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/shared_stack_frame_reversed.patch",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/staged-audit.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/typed-experiments.py",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/typed-restore.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/typed-results.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/typed_word_copy-canonical.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/typed_word_copy-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/typed_word_copy.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/typed_word_copy.patch",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/typed_word_initializer.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/typed_word_initializer.patch",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/union-experiments.py",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/union-results.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/union_color_bytes-canonical.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/union_color_bytes-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/union_color_bytes.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/union_color_bytes.patch",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/union_color_halfwords-canonical.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/union_color_halfwords-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/union_color_halfwords.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/union_color_halfwords.patch",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/union_quad_words-canonical.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/union_quad_words-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/union_quad_words.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/union_quad_words.patch",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/verification.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-61afaba5-babf-43ee-baf7-21601adfce5c/verify.py"
+  ]
+}

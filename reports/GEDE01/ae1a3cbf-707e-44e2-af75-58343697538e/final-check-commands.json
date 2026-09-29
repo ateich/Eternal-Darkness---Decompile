@@ -1,0 +1,71 @@
+[
+  {
+    "argv": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801DDB84",
+      "fn_801DDB84",
+      "-o",
+      "reports/GEDE01/ae1a3cbf-707e-44e2-af75-58343697538e/final-canonical.json",
+      "--format",
+      "json-pretty"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": " INFO Writing to reports/GEDE01/ae1a3cbf-707e-44e2-af75-58343697538e/final-canonical.json\n"
+  },
+  {
+    "argv": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801DDB84",
+      "fn_801DDB84",
+      "-o",
+      "reports/GEDE01/ae1a3cbf-707e-44e2-af75-58343697538e/final-strict.json",
+      "--format",
+      "json-pretty",
+      "-c",
+      "function_reloc_diffs=name_address"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": " INFO Writing to reports/GEDE01/ae1a3cbf-707e-44e2-af75-58343697538e/final-strict.json\n"
+  },
+  {
+    "argv": [
+      "python3",
+      "reports/GEDE01/ae1a3cbf-707e-44e2-af75-58343697538e/verify_elf.py"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"command\": \"python3 reports/GEDE01/ae1a3cbf-707e-44e2-af75-58343697538e/verify_elf.py\",\n  \"target_object\": \"build/GEDE01/obj/game/game_fn_801DDB84.o\",\n  \"candidate_object\": \"build/GEDE01/src/game/game_fn_801DDB84.o\",\n  \"sections\": {\n    \".text\": {\n      \"target_size\": 2340,\n      \"candidate_size\": 2340,\n      \"target_sha256\": \"b477f6e0422db90134a693b958132a74b27b4ac0f04bf6ea2e500410b406061f\",\n      \"candidate_sha256\": \"b477f6e0422db90134a693b958132a74b27b4ac0f04bf6ea2e500410b406061f\",\n      \"bytes_equal\": true\n    }\n  },\n  \"relocations_equal\": true,\n  \"elf_relocation_count\": 58,\n  \"constant_pool_note\": \"The final object uses the existing byte-verified game_section_externalizations registration; see owned-pool-elf-verification.json for raw pre-externalization constant bytes and final-build.json for each guarded mapping.\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "sha1sum",
+      "build/GEDE01/main.dol"
+    ],
+    "exit_code": 0,
+    "stdout": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "diff",
+      "--check",
+      "--",
+      "src/game/game_fn_801DDB84.c",
+      "configure.py"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+]

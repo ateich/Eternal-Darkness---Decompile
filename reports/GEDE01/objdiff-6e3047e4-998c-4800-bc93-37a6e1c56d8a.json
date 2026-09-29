@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "assignment_id": "6e3047e4-998c-4800-bc93-37a6e1c56d8a",
+  "target": "fn_801415B4",
+  "status": "attempted",
+  "compiler": {
+    "version": "GC/1.3",
+    "flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c",
+    "policy_changed": false
+  },
+  "source": "eternal-darkness-decomp/src/game/game_fn_801415B4.c",
+  "source_sha256": "ea3d66867a501458ae2d87b5b9ef993a389dd3d8141c693775139af6fb4558e7",
+  "registration": "Object(NonMatching, \"game/game_fn_801415B4.c\") (unchanged)",
+  "commands": {
+    "cwd": "eternal-darkness-decomp",
+    "configure": "python3 configure.py",
+    "build": ".tools/bin/ninja -j2",
+    "canonical": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801415B4 fn_801415B4 -o reports/GEDE01/canonical-6e3047e4-998c-4800-bc93-37a6e1c56d8a.json --format json",
+    "relocation_strict": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801415B4 fn_801415B4 -o reports/GEDE01/relocation-strict-6e3047e4-998c-4800-bc93-37a6e1c56d8a.json --format json -c function_reloc_diffs=name_address"
+  },
+  "measurements": {
+    "canonical": {
+      "left": {
+        "match_percent": 96.17801,
+        "bytes": 2292,
+        "instructions": 573,
+        "relocation_bearing_instructions": 46,
+        "diff_row_counts": {
+          "DIFF_NONE": 515,
+          "DIFF_INSERT": 8,
+          "DIFF_ARG_MISMATCH": 45,
+          "DIFF_DELETE": 8,
+          "DIFF_REPLACE": 5
+        }
+      },
+      "right": {
+        "match_percent": 96.17801,
+        "bytes": 2292,
+        "instructions": 573,
+        "relocation_bearing_instructions": 46,
+        "diff_row_counts": {
+          "DIFF_NONE": 515,
+          "DIFF_INSERT": 8,
+          "DIFF_ARG_MISMATCH": 45,
+          "DIFF_DELETE": 8,
+          "DIFF_REPLACE": 5
+        }
+      }
+    },
+    "relocation-strict": {
+      "left": {
+        "match_percent": 96.17801,
+        "bytes": 2292,
+        "instructions": 573,
+        "relocation_bearing_instructions": 46,
+        "diff_row_counts": {
+          "DIFF_NONE": 515,
+          "DIFF_INSERT": 8,
+          "DIFF_ARG_MISMATCH": 45,
+          "DIFF_DELETE": 8,
+          "DIFF_REPLACE": 5
+        }
+      },
+      "right": {
+        "match_percent": 96.17801,
+        "bytes": 2292,
+        "instructions": 573,
+        "relocation_bearing_instructions": 46,
+        "diff_row_counts": {
+          "DIFF_NONE": 515,
+          "DIFF_INSERT": 8,
+          "DIFF_ARG_MISMATCH": 45,
+          "DIFF_DELETE": 8,
+          "DIFF_REPLACE": 5
+        }
+      }
+    }
+  },
+  "divergence": "Canonical and relocation-strict objdiff are both 96.17801%, up from 83.28621%. Retail and generated functions now both have 2292 bytes, 573 instructions, 46 relocation-bearing instructions, a 0x100-byte frame and f17-f31 saves. Remaining differences are initial GPR/address and load scheduling, recomputation of lbl_805B12B0 via lis/addi at generated offsets 0x308/0x310 instead of retaining the base for retail offset 0x310, and local @231/@232 zero-pool relocation targets rather than lbl_80650410/lbl_80650418. Direct unrelocated .text comparison is unequal (1704/2292 same-offset bytes and 407/573 instructions agree; first mismatch 0x84).",
+  "hypothesis_result": "Retail arithmetic uses the opposite cross-product subtraction order and expanded line equations for containment. Reusing line coefficients, hoisting each outer edge, and declaring edge outputs tb/ta/det reproduces the retail FP save set and late arithmetic register allocation. Source-level array/address alternatives did not remove the remaining address scheduling mismatch. No previously rejected containment-reload hypothesis was repeated.",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "dol_verification_scope": "The canonical NonMatching build links the retail object for this function; the full-DOL hash validates the build, not the candidate C function.",
+  "legal_audit": "One independent honest C translation unit. No assembly, copied binary, compiler/gate policy changes, runtime code changes, neighboring function changes, or shared-input modifications. Only target source and assignment-specific reports are staged. Existing unrelated CLAUDE.md modification is excluded.",
+  "raw_evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/canonical-6e3047e4-998c-4800-bc93-37a6e1c56d8a.json",
+    "eternal-darkness-decomp/reports/GEDE01/relocation-strict-6e3047e4-998c-4800-bc93-37a6e1c56d8a.json",
+    "eternal-darkness-decomp/reports/GEDE01/byte-comparison-6e3047e4-998c-4800-bc93-37a6e1c56d8a.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-6e3047e4-998c-4800-bc93-37a6e1c56d8a.json",
+    "eternal-darkness-decomp/reports/GEDE01/verification-6e3047e4-998c-4800-bc93-37a6e1c56d8a.json",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-6e3047e4-998c-4800-bc93-37a6e1c56d8a.json"
+  ]
+}

@@ -1,0 +1,24 @@
+[
+  {
+    "side": "retail",
+    "command": [
+      "build/binutils/powerpc-eabi-readelf",
+      "-Wr",
+      "build/GEDE01/obj/game/game_fn_8019C7A8.o"
+    ],
+    "exit_code": 0,
+    "stdout": "\nRelocation section '.rela.text' at offset 0x4c0 contains 12 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n0000000a  00000406 R_PPC_ADDR16_HA        00000000   lbl_80607120 + 0\n00000012  00000404 R_PPC_ADDR16_LO        00000000   lbl_80607120 + 0\n00000040  0000056d R_PPC_EMB_SDA21        00000000   lbl_8064D738 + 0\n00000050  0000060a R_PPC_REL24            00000000   fn_8018D788 + 0\n00000064  0000076d R_PPC_EMB_SDA21        00000000   lbl_80650C30 + 0\n0000041c  0000080a R_PPC_REL24            00000000   DCFlushRange + 0\n00000428  0000080a R_PPC_REL24            00000000   DCFlushRange + 0\n00000434  0000080a R_PPC_REL24            00000000   DCFlushRange + 0\n0000043c  0000090a R_PPC_REL24            00000000   fn_801ED57C + 0\n00000450  00000a0a R_PPC_REL24            00000000   fn_8018D0D0 + 0\n00000460  00000b0a R_PPC_REL24            00000000   fn_801889D8 + 0\n00000468  0000090a R_PPC_REL24            00000000   fn_801ED57C + 0\n",
+    "stderr": ""
+  },
+  {
+    "side": "candidate",
+    "command": [
+      "build/binutils/powerpc-eabi-readelf",
+      "-Wr",
+      "build/GEDE01/src/game/game_fn_8019C7A8.o"
+    ],
+    "exit_code": 0,
+    "stdout": "\nRelocation section '.rela.text' at offset 0x4c0 contains 12 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n0000000a  00000506 R_PPC_ADDR16_HA        00000000   lbl_80607120 + 0\n00000012  00000504 R_PPC_ADDR16_LO        00000000   lbl_80607120 + 0\n00000040  0000066d R_PPC_EMB_SDA21        00000000   lbl_8064D738 + 0\n00000050  0000070a R_PPC_REL24            00000000   fn_8018D788 + 0\n00000064  0000046d R_PPC_EMB_SDA21        00000000   @44 + 0\n0000041c  0000080a R_PPC_REL24            00000000   DCFlushRange + 0\n00000428  0000080a R_PPC_REL24            00000000   DCFlushRange + 0\n00000434  0000080a R_PPC_REL24            00000000   DCFlushRange + 0\n0000043c  0000090a R_PPC_REL24            00000000   fn_801ED57C + 0\n00000450  00000a0a R_PPC_REL24            00000000   fn_8018D0D0 + 0\n00000460  00000b0a R_PPC_REL24            00000000   fn_801889D8 + 0\n00000468  0000090a R_PPC_REL24            00000000   fn_801ED57C + 0\n",
+    "stderr": ""
+  }
+]

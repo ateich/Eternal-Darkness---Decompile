@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "f6955fe2-2faf-4fe2-860c-5e48e275dd1f",
+  "attempt": 3,
+  "base_commit": "3435e0cb1cbe1fb38ac7adcc2dc47cec79387564",
+  "target": "fn_801E4314",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-f6955fe2-2faf-4fe2-860c-5e48e275dd1f.json"
+  ],
+  "divergence": "Relocation-strict objdiff is 85.69388% with exact 980-byte sizes and 64 relocation-bearing instructions on both sides. Treating x/y/width/height as 32-bit parameters with separate signed-16-bit geometry locals recovers retail's raw-depth load into r6 and preserves raw r3/r4 for negative extents. Remaining codegen divergence begins in the initial schedule: retail loads lbl_80651278 at 0x8 and interleaves conversion with centers, assigning depth/x/width/y/height to r31/r30/r29/r28/r27; GC/1.3 compares dark first, computes centers before the constant load at 0x44, and assigns those signed-16-bit geometry lifetimes differently."
+}

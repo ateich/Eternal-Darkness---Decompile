@@ -1,0 +1,37 @@
+Assignment 5a14040e-2692-4332-9509-602387839667
+All command paths below are relative to eternal-darkness-decomp/.
+$ .tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_800680C0.o
+[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o
+exit_code=0
+$ build/tools/objdiff-cli diff -p . -u main/game/game_fn_800680C0 fn_800680C0 -o reports/GEDE01/objdiff-5a14040e-2692-4332-9509-602387839667-baseline.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5a14040e-2692-4332-9509-602387839667-baseline.json
+exit_code=0
+$ python3 configure.py
+exit_code=0
+$ .tools/bin/ninja -j2
+Full output: eternal-darkness-decomp/reports/GEDE01/build-5a14040e-2692-4332-9509-602387839667.txt
+exit_code=0
+$ build/tools/objdiff-cli diff -p . -u main/game/game_fn_800680C0 fn_800680C0 -o reports/GEDE01/objdiff-5a14040e-2692-4332-9509-602387839667-canonical.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5a14040e-2692-4332-9509-602387839667-canonical.json
+exit_code=0
+$ build/tools/objdiff-cli diff -p . -u main/game/game_fn_800680C0 fn_800680C0 -c function_reloc_diffs=all -o reports/GEDE01/objdiff-5a14040e-2692-4332-9509-602387839667.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5a14040e-2692-4332-9509-602387839667.json
+exit_code=0
+$ sha1sum build/GEDE01/main.dol
+ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol
+exit_code=0
+$ python3 tools/legal_audit.py
+legal audit passed (22178 tracked project files inspected)
+exit_code=0
+$ .tools/bin/ninja -t commands build/GEDE01/src/game/game_fn_800680C0.o
+"/usr/bin/python3" tools/download_tool.py sjiswrap build/tools/sjiswrap.exe --tag v1.2.2
+tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_800680C0.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_800680C0.d build/GEDE01/src/game/game_fn_800680C0.d
+exit_code=0
+$ git diff --check
+exit_code=0
+Build log normalization: linker CRLF line endings converted to LF for Git whitespace checks; all output lines retained. Linker emitted Section .ignored warnings; DOL check passed.
+$ git diff --cached --check
+exit_code=0
+$ python3 eternal-darkness-decomp/tools/legal_audit.py
+legal audit passed (22186 tracked project files inspected)
+exit_code=0

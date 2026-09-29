@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "assignment_id": "2afb824f-daa0-42f0-8358-e5c20d34ad76",
+  "attempt": 8,
+  "base_commit": "828c75cddc66de70901edc7f1550f99390de627e",
+  "target": "fn_8005EF94",
+  "status": "matched",
+  "best_score_percent": 100.0,
+  "recovery": {
+    "preserved_commit": "852832b3f89b8394c27773bdab4983ba9830b44f",
+    "source_already_on_accepted_base": true,
+    "historical_score_percent": 76.02012,
+    "studied_earlier_commit": "e3cb0ec8ca6ddfeb8aa45b6c2b30f4a7cbceeab6",
+    "earlier_report_score_percent": 68.33199
+  },
+  "hypotheses": [
+    "Correct the output Segment from 12 to 40 bytes, restore scalar call arguments and separate selector state from returned table index; retail instruction loads/stores identify these independently of register allocation.",
+    "Restore retail mode eligibility, case-12 fallthrough, coordinate restoration, chosen-index predicate, inner+0x24/object+0xB8 access, collision initialization and timer-update eligibility.",
+    "Use an explicit fn_80201814(fn_801DA27C(node_id)) call instead of relying on an undeclared argument remaining in r3.",
+    "Declare writable .data lookup tables without const: this removes invalid load-hoisting assumptions and reproduces argument scheduling, frame and control flow.",
+    "Reorder local declarations to reproduce stack spills and register lifetimes. Explicit signed bit extraction and a saved increment followed by conditional counter reset remove the final register differences."
+  ],
+  "compiler": {
+    "name": "MWCC GC/1.3 (mwcc_242_53)",
+    "sha256": "4e502c38465500d4fda8d966b268151a6c74c730508e3d9b7efd23d1a6083715",
+    "flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on",
+    "compiler_policy_changed": false
+  },
+  "canonical": {
+    "match_percent": 100.0,
+    "raw_file": "eternal-darkness-decomp/reports/GEDE01/canonical-2afb824f-daa0-42f0-8358-e5c20d34ad76.raw.json",
+    "sha256": "8229d0bd6bb7389fdf6627c0549fa8101074514ee2f7995477eddc21e79459f0",
+    "sections": [
+      {
+        "name": ".text",
+        "size": "1988",
+        "match_percent": 100.0
+      },
+      {
+        "name": ".rodata",
+        "size": "16",
+        "match_percent": 100.0
+      },
+      {
+        "name": ".data",
+        "size": "100",
+        "match_percent": 100.0
+      }
+    ],
+    "generated_text_bytes": 1988,
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8005EF94 fn_8005EF94 -o reports/GEDE01/canonical-2afb824f-daa0-42f0-8358-e5c20d34ad76.raw.json --format json",
+    "exit_code": 0,
+    "raw_output": "INFO Writing to reports/GEDE01/canonical-2afb824f-daa0-42f0-8358-e5c20d34ad76.raw.json"
+  },
+  "strict": {
+    "match_percent": 100.0,
+    "raw_file": "eternal-darkness-decomp/reports/GEDE01/strict-2afb824f-daa0-42f0-8358-e5c20d34ad76.raw.json",
+    "sha256": "8229d0bd6bb7389fdf6627c0549fa8101074514ee2f7995477eddc21e79459f0",
+    "sections": [
+      {
+        "name": ".text",
+        "size": "1988",
+        "match_percent": 100.0
+      },
+      {
+        "name": ".rodata",
+        "size": "16",
+        "match_percent": 100.0
+      },
+      {
+        "name": ".data",
+        "size": "100",
+        "match_percent": 100.0
+      }
+    ],
+    "generated_text_bytes": 1988,
+    "command": "build/tools/objdiff-cli diff -1 build/GEDE01/obj/game/game_fn_8005EF94.o -2 build/GEDE01/src/game/game_fn_8005EF94.o fn_8005EF94 -c function_reloc_diffs=name_address -o reports/GEDE01/strict-2afb824f-daa0-42f0-8358-e5c20d34ad76.raw.json --format json",
+    "exit_code": 0,
+    "raw_output": "INFO Writing to reports/GEDE01/strict-2afb824f-daa0-42f0-8358-e5c20d34ad76.raw.json"
+  },
+  "raw_byte_and_relocation_audit": {
+    "file": "eternal-darkness-decomp/reports/GEDE01/elf-compare-2afb824f-daa0-42f0-8358-e5c20d34ad76.json",
+    "raw_owned_sections_equal": [
+      ".text",
+      ".rodata",
+      ".data"
+    ],
+    "text_relocations": 67,
+    "switch_table_relocations": 25,
+    "all_offsets_types_targets_addends_equal": true,
+    "normalization": "Undefined targets compare by external symbol name and addend; defined targets compare by owned section and symbol value plus addend. Full original symbols and addends are preserved in the ELF audit and readelf outputs."
+  },
+  "alignment": {
+    "retail_data_alignment": 4,
+    "raw_mwcc_data_alignment": 8,
+    "final_data_alignment": 4,
+    "registration": "Reuses existing align_game_80008014_data rule for only game_fn_8005EF94.o. No new rule or compiler flags. The rule changes section alignment and renames .comment; owned section bytes and relocations remain unchanged.",
+    "initial_link_check": "Failed with 8-byte data alignment; retained in final-build log. Final aligned DOL check passed."
+  },
+  "build": {
+    "commands": [
+      "python3 configure.py",
+      ".tools/bin/ninja -j2"
+    ],
+    "exit_code": 0,
+    "raw_log": "eternal-darkness-decomp/reports/GEDE01/aligned-build-2afb824f-daa0-42f0-8358-e5c20d34ad76.log",
+    "source_is_linked": true,
+    "registration": "Matching",
+    "splits": "Existing independent translation-unit ownership unchanged.",
+    "log_text_normalization": "Compiler CRLF endings and trailing whitespace normalized to LF in preserved build transcripts; diagnostic text retained."
+  },
+  "checks": {
+    "dol": {
+      "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+      "exit_code": 0,
+      "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol\n"
+    },
+    "legal": {
+      "command": "python3 tools/legal_audit.py",
+      "exit_code": 0,
+      "raw_output": "legal audit passed (22623 tracked project files inspected)\n"
+    },
+    "diff_check": {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "raw_output": ""
+    }
+  },
+  "source_sha256": "89771819b33cdeebab91c2eb5fd3b32ababa500441ea2cc0e9d787b48a5b0c6f",
+  "legal_scope": {
+    "independent_c_translation_unit": true,
+    "inline_or_whole_function_assembly": false,
+    "register_binding": false,
+    "new_compiler_policy": false,
+    "runtime_or_global_progress_edits": false,
+    "neighbor_function_edits": false,
+    "private_inputs_or_generated_binaries_committed": false,
+    "preexisting_CLAUDE_md_change": "Untouched and unstaged."
+  },
+  "exact_codegen_divergence": ""
+}

@@ -8,16 +8,22 @@ typedef struct StateRegion {
 extern StateRegion lbl_80639260;
 extern void fn_8022A118(int, int, int, int);
 
+/* Widening and narrowing preserves every 32-bit pointer bit while keeping
+ * GC/1.3 from folding the field base into the indexed address. */
+#define FIELD_ADDRESS(p) ((int*)(unsigned int)(unsigned long long)(unsigned int)(p))
+
 void fn_801EDE34(int index, int value0, int value1, int value2)
 {
     StateRegion* state = &lbl_80639260;
-    int* values0 = state->values0;
+    unsigned int offset = (unsigned int)index * 4;
+    int* values0;
 
-    if (values0[index] != value0 || state->values1[index] != value1 ||
-        state->values2[index] != value2) {
+    if (*(int*)((char*)FIELD_ADDRESS(values0 = state->values0) + offset) != value0 ||
+        value1 != *(int*)((char*)FIELD_ADDRESS(state->values1) + offset) ||
+        value2 != *(int*)((char*)FIELD_ADDRESS(state->values2) + offset)) {
         fn_8022A118(index, value0, value1, value2);
-        values0[index] = value0;
-        state->values1[index] = value1;
-        state->values2[index] = value2;
+        *(int*)((char*)FIELD_ADDRESS(values0) + offset) = value0;
+        *(int*)((char*)FIELD_ADDRESS(state->values1) + offset) = value1;
+        *(int*)((char*)FIELD_ADDRESS(state->values2) + offset) = value2;
     }
 }

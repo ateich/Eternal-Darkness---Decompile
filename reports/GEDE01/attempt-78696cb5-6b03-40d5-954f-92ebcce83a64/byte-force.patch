@@ -1,0 +1,34 @@
+diff --git a/eternal-darkness-decomp/src/game/game_fn_8005F8D0.c b/eternal-darkness-decomp/src/game/game_fn_8005F8D0.c
+index 780b5c4b6b..ff3f1dee2e 100644
+--- a/eternal-darkness-decomp/src/game/game_fn_8005F8D0.c
++++ b/eternal-darkness-decomp/src/game/game_fn_8005F8D0.c
+@@ -82,6 +82,8 @@ void fn_8005F8D0(s32 owner, void *entry, void *manager, SourceObject *source,
+     Pair *pairs_b;
+     s32 state;
+     s32 range;
++    s32 random_min;
++    s32 random_value;
+     s32 query_two;
+     s32 query_three;
+ 
+@@ -111,8 +113,9 @@ void fn_8005F8D0(s32 owner, void *entry, void *manager, SourceObject *source,
+     }
+ 
+     config = &lbl_80243C30[config_kind];
+-    range = config->random_max - config->random_min;
+-    range = (u16)(config->random_min + fn_800FBFB0() % range);
++    random_min = config->random_min;
++    random_value = fn_800FBFB0();
++    range = (u16)(random_min + random_value % (config->random_max - random_min));
+ 
+     if (position != 0) {
+         s32 bad;
+@@ -130,7 +133,7 @@ void fn_8005F8D0(s32 owner, void *entry, void *manager, SourceObject *source,
+                     pairs_a[state].first, owner, pairs_b[state].second,
+                     pairs_a[state].second, source->object_id, 0, 0,
+                     config->pad20, 4, 2, 2, 1, 0, 1, 0x11, 8, 4, 0x20, 0,
+-                    0, range, 0x42040, 0x2030, force_mode ? 4 : 0xC);
++                    0, range, 0x42040, 0x2030, (u8)(force_mode ? 4 : 0xC));
+         if (lbl_8064C590++ < 2) {
+             fn_801AAE68(lbl_8064E5BC, 0xBE, config->sound, 0,
+                         &source_position, 2, 2, 0, (u16)lbl_8064D18C, 0);

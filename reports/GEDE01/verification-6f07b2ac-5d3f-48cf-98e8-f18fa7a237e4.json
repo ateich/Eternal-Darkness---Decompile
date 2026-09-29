@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "assignment_id": "6f07b2ac-5d3f-48cf-98e8-f18fa7a237e4",
+  "commands": [
+    {
+      "command": "python3 configure.py && .tools/bin/ninja -j2",
+      "exit_status": 0,
+      "raw_output_tail": "[929/932] DOL build/GEDE01/main.dol\n[930/932] CHECK config/GEDE01/build.sha1\nbuild/GEDE01/main.dol: OK\n[931/932] PROGRESS\nAll: 58.53% fuzzy, 49.64% matched, 49.45% linked"
+    },
+    {
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_800E1E68 fn_800E1E68 -o reports/GEDE01/objdiff-6f07b2ac-5d3f-48cf-98e8-f18fa7a237e4.json --format json-pretty",
+      "exit_status": 0,
+      "raw_output": "INFO Writing to reports/GEDE01/objdiff-6f07b2ac-5d3f-48cf-98e8-f18fa7a237e4.json"
+    },
+    {
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_800E1E68 fn_800E1E68 -o reports/GEDE01/objdiff-6f07b2ac-5d3f-48cf-98e8-f18fa7a237e4-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+      "exit_status": 0,
+      "raw_output": "INFO Writing to reports/GEDE01/objdiff-6f07b2ac-5d3f-48cf-98e8-f18fa7a237e4-reloc-strict.json"
+    },
+    {
+      "command": "cmp reports/GEDE01/objdiff-6f07b2ac-5d3f-48cf-98e8-f18fa7a237e4.json reports/GEDE01/objdiff-6f07b2ac-5d3f-48cf-98e8-f18fa7a237e4-reloc-strict.json",
+      "exit_status": 0,
+      "raw_output": ""
+    },
+    {
+      "command": "sha1sum build/GEDE01/main.dol",
+      "exit_status": 0,
+      "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+    },
+    {
+      "command": "rg -n 'game/game_fn_800E1E68.c: game' build.ninja",
+      "exit_status": 0,
+      "raw_output": "42918:# game/game_fn_800E1E68.c: game (linked True)"
+    }
+  ],
+  "measurement": {
+    "canonical_match_percent": 100.0,
+    "relocation_strict_match_percent": 100.0,
+    "retail_text_bytes": 572,
+    "generated_text_bytes": 572,
+    "retail_relocations": 24,
+    "generated_relocations": 24,
+    "relocation_targets_types_addends_match": true,
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "linked": true
+  }
+}

@@ -1,0 +1,9 @@
+$ .tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_801F1A38.externalized
+[1/2] MWCC build/GEDE01/src/game/game_fn_801F1A38.o
+[2/2] EXTERNALIZE build/GEDE01/src/game/game_fn_801F1A38.o
+exit_code=0
+$ build/tools/objdiff-cli diff -p . -u main/game/game_fn_801F1A38 fn_801F1A38 -c function_reloc_diffs=name_address -o /home/rabbit/src/darkfoundry-new/.darkfoundry/worktrees/50c29326-0acb-40d9-995f-1837de479183/eternal-darkness-decomp/reports/GEDE01/attempt-1e4bad38-468b-4a9f-9ca7-70cb57e3161d/signed-flags.json --format json
+ INFO Writing to /home/rabbit/src/darkfoundry-new/.darkfoundry/worktrees/50c29326-0acb-40d9-995f-1837de479183/eternal-darkness-decomp/reports/GEDE01/attempt-1e4bad38-468b-4a9f-9ca7-70cb57e3161d/signed-flags.json
+exit_code=0
+left {"name": "fn_801F1A38", "size": "1796", "match_percent": 87.82628, "relocations": 39}
+right {"name": "fn_801F1A38", "size": "1816", "match_percent": 87.82628, "relocations": 39}

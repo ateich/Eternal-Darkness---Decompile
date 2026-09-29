@@ -1,0 +1,123 @@
+{
+  "assignment_id": "dd631e0c-9083-4847-8448-d12c9accc8fb",
+  "compiler": "GC/1.3",
+  "canonical_score": 100.0,
+  "relocation_strict_score": 100.0,
+  "code_bytes": 376,
+  "table_entries_verified": 8,
+  "linked": true,
+  "build_command": [
+    "python3 configure.py",
+    ".tools/bin/ninja -j2"
+  ],
+  "build_returncode": 0,
+  "build_log": "eternal-darkness-decomp/reports/GEDE01/build-dd631e0c-9083-4847-8448-d12c9accc8fb.log",
+  "checks": [
+    {
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_80095E64",
+        "fn_80095E64",
+        "-o",
+        "reports/GEDE01/objdiff-dd631e0c-9083-4847-8448-d12c9accc8fb-canonical.json",
+        "--format",
+        "json"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": " INFO Writing to reports/GEDE01/objdiff-dd631e0c-9083-4847-8448-d12c9accc8fb-canonical.json\n"
+    },
+    {
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_80095E64",
+        "fn_80095E64",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "-o",
+        "reports/GEDE01/objdiff-dd631e0c-9083-4847-8448-d12c9accc8fb.json",
+        "--format",
+        "json"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": " INFO Writing to reports/GEDE01/objdiff-dd631e0c-9083-4847-8448-d12c9accc8fb.json\n"
+    },
+    {
+      "command": [
+        "sha1sum",
+        "orig/GEDE01/sys/main.dol",
+        "build/GEDE01/main.dol"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "returncode": 0,
+      "stdout": "ea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/binutils/powerpc-eabi-readelf",
+        "-sr",
+        "build/GEDE01/obj/game/game_fn_80095E64.o"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "returncode": 0,
+      "stdout": "\nRelocation section '.rela.text' at offset 0x1b8 contains 6 entries:\n Offset     Info    Type            Sym.Value  Sym. Name + Addend\n00000028  0000040a R_PPC_REL24       00000000   fn_80201B8C + 0\n0000003a  00000506 R_PPC_ADDR16_HA   00000000   jumptable_8024526C + 0\n00000042  00000504 R_PPC_ADDR16_LO   00000000   jumptable_8024526C + 0\n00000064  0000060a R_PPC_REL24       00000000   fn_80201BC8 + 0\n00000068  0000070a R_PPC_REL24       00000000   fn_80128EAC + 0\n00000094  0000030a R_PPC_REL24       00000000   fn_80095E64 + 0\n\nSymbol table '.symtab' contains 8 entries:\n   Num:    Value  Size Type    Bind   Vis      Ndx Name\n     0: 00000000     0 NOTYPE  LOCAL  DEFAULT  UND \n     1: 00000000     0 FILE    LOCAL  DEFAULT  ABS game_fn_80095E64.c\n     2: 00000000     0 SECTION LOCAL  DEFAULT    1 .text\n     3: 00000000   376 FUNC    GLOBAL DEFAULT    1 fn_80095E64\n     4: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80201B8C\n     5: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND jumptable_8024526C\n     6: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80201BC8\n     7: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80128EAC\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/binutils/powerpc-eabi-readelf",
+        "-sr",
+        "build/GEDE01/src/game/game_fn_80095E64.o"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "returncode": 0,
+      "stdout": "\nRelocation section '.rela.text' at offset 0x2f8 contains 6 entries:\n Offset     Info    Type            Sym.Value  Sym. Name + Addend\n00000028  0000040a R_PPC_REL24       00000000   fn_80201B8C + 0\n0000003a  00000306 R_PPC_ADDR16_HA   00000000   jumptable_8024526C + 0\n00000042  00000304 R_PPC_ADDR16_LO   00000000   jumptable_8024526C + 0\n00000064  0000050a R_PPC_REL24       00000000   fn_80201BC8 + 0\n00000068  0000060a R_PPC_REL24       00000000   fn_80128EAC + 0\n00000094  0000070a R_PPC_REL24       00000000   fn_80095E64 + 0\n\nSymbol table '.symtab' contains 8 entries:\n   Num:    Value  Size Type    Bind   Vis      Ndx Name\n     0: 00000000     0 NOTYPE  LOCAL  DEFAULT  UND \n     1: 00000000     0 FILE    LOCAL  DEFAULT  ABS game_fn_80095E64.c\n     2: 00000000     0 SECTION LOCAL  DEFAULT    1 .text\n     3: 00000000    32 OBJECT  GLOBAL DEFAULT  UND jumptable_8024526C\n     4: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80201B8C\n     5: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80201BC8\n     6: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80128EAC\n     7: 00000000   376 FUNC    GLOBAL DEFAULT    1 fn_80095E64\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        ".tools/bin/ninja",
+        "-t",
+        "commands",
+        "build/GEDE01/src/game/game_fn_80095E64.o"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "returncode": 0,
+      "stdout": "\"/usr/bin/python3\" tools/download_tool.py sjiswrap build/tools/sjiswrap.exe --tag v1.2.2\ntools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -MMD -c src/game/game_fn_80095E64.c -o build/GEDE01/src/game && \"/usr/bin/python3\" tools/transform_dep.py build/GEDE01/src/game/game_fn_80095E64.d build/GEDE01/src/game/game_fn_80095E64.d\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "eternal-darkness-decomp/tools/legal_audit.py"
+      ],
+      "cwd": ".",
+      "returncode": 0,
+      "stdout": "legal audit passed (22213 tracked project files inspected)\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "b09b968d-1fdd-4eb7-9267-beed7ac067c6",
+  "attempt": 3,
+  "base_commit": "012ec8536c66f503b46aed2f6de3c98522a4aca8",
+  "target": "fn_800F623C",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-b09b968d-1fdd-4eb7-9267-beed7ac067c6.json"
+  ],
+  "divergence": "Best canonical and relocation-strict objdiff remains 61.5%: retail is 40 bytes and generated is 44 bytes, with zero relocations on either side. Retail allocates r8-r10 and uses subic. r9,r5,32 to form shift-32 and set CR0 before ble; canonical GC/1.3 allocates r0/r6, emits separate subi r6,r5,32 plus cmpwi r6,0, and schedules sraw r6,r3,r6 before the first or. A new signed-shift-parameter hypothesis generated the identical 44-byte object and was reverted."
+}

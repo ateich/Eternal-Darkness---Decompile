@@ -1,0 +1,878 @@
+{
+  "assignment_id": "5a14040e-2692-4332-9509-602387839667",
+  "target": "fn_800680C0",
+  "baseline_commit": "2fd358467a5bdb655a8c6dba5fb61f107c826913",
+  "preserved_source_commit": "40ead896a2a7e1ffa4cecefd33c43e42fd7cf44c",
+  "baseline_note": "The accepted base already contains the attempt-4 source verbatim. Fresh baseline comparison reproduces 80.58929%. Attempts 1-3 were inspected with git show and the supplied diagnosis. Registration already uses canonical GC/1.3 with -use_lmw_stmw on and remains NonMatching.",
+  "hypotheses": [
+    "A cast to integer-address addition alone still strength-reduces to a walking pointer (79.55357%, 204 bytes).",
+    "Aligning the running byte offset in place removes the eighth saved register, but slot base and byte offset allocation still diverge; best declaration order measures 80.89286%.",
+    "Narrowing the loop variable adds an unwanted zero-extension at the loop comparison; narrow only the subscript instead. Since index visits only 0..11, unsigned-short conversion preserves every accessed element and all side effects. This removes the redundant offset recurrence and recovers retail r25-r31 allocation, lwzx and stwx.",
+    "Register storage annotations and treating the table base as an integer do not improve the in-place-alignment form."
+  ],
+  "retained_variant": "narrow_subscript",
+  "best_score": 81.78571,
+  "retained_candidate_size": 196,
+  "retail_size": 224,
+  "permission_note": "The assignment prohibits inline/whole-function assembly. The neighboring assertion-guard idiom uses asm { nop }, so it was read but not applied. No compiler-policy change or assembly was used.",
+  "build_command": [
+    ".tools/bin/ninja",
+    "-j2",
+    "build/GEDE01/src/game/game_fn_800680C0.o"
+  ],
+  "comparison_command": [
+    "build/tools/objdiff-cli",
+    "diff",
+    "-p",
+    ".",
+    "-u",
+    "main/game/game_fn_800680C0",
+    "fn_800680C0",
+    "-o",
+    "<assignment-specific-output>",
+    "--format",
+    "json"
+  ],
+  "trials": [
+    {
+      "name": "aligned_recurrence",
+      "score": 80.14286,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "aeb9a70cc7de44f5796f54003b4d62a5a23ced5d91c8f8b506cdd9a75d09c109"
+    },
+    {
+      "name": "mask_in_place",
+      "score": 80.08929,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "7aa8e04bca5dc4860b18924a77986a3e7b729813c39ceb6a317aec5420082b0f"
+    },
+    {
+      "name": "index_mask",
+      "score": 81.78571,
+      "size": "196",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "845fa4a433f44aa67122dd20d945f6db1fb230a75698998a1140be7eeca60b5c"
+    },
+    {
+      "name": "u16_index",
+      "score": 78.83929,
+      "size": "200",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "74e72dec608ba0b3f37d96bc07de0ab728f07c2c0c5be8c60157e50cbf80973f"
+    },
+    {
+      "name": "u8_index",
+      "score": 78.83929,
+      "size": "200",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "1533dd86e2a3b7496ce4ddabb9754c80f0e72c13c4a67cafe3de0a5b2f484112"
+    },
+    {
+      "name": "s16_index",
+      "score": 77.28571,
+      "size": "208",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "9e8446742834798b4d732d29e21cc7233ce4f2dde8658dc7e108eb7b81e7f8fa"
+    },
+    {
+      "name": "u16_offset",
+      "score": 80.58929,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "f42f2c772ef4c0ca6164ac5df24b33ab0af57c3c8f81aaa83725aa158e86b47c"
+    },
+    {
+      "name": "mask_recurrence_before_add",
+      "score": 80.17857,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "43671dd6772771737737defe37bd8378e48bd1c9166241847efed85fd8ae4517"
+    },
+    {
+      "name": "mask_in_place_order_1",
+      "declarations": [
+        "s32 *slots",
+        "s32 index",
+        "u32 offset",
+        "s32 count"
+      ],
+      "score": 80.71429,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "a6d9e88e305aeab0482718b52e4ef450111cc3074202a2077bdae24fa35cae98"
+    },
+    {
+      "name": "mask_in_place_order_2",
+      "declarations": [
+        "s32 *slots",
+        "s32 count",
+        "s32 index",
+        "u32 offset"
+      ],
+      "score": 80.35714,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "e93d7e5d75570dd6ecf3842ee5c0ae023823d25b1b959970bc9fd44b54f82781"
+    },
+    {
+      "name": "mask_in_place_order_3",
+      "declarations": [
+        "s32 *slots",
+        "s32 count",
+        "u32 offset",
+        "s32 index"
+      ],
+      "score": 80.17857,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "ac724398e9547e11f7d7f10d1fdcec2cf63bcbecb2a533fb71b699ac7f5ccf5c"
+    },
+    {
+      "name": "mask_in_place_order_4",
+      "declarations": [
+        "s32 *slots",
+        "u32 offset",
+        "s32 index",
+        "s32 count"
+      ],
+      "score": 80.89286,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "e96f3681f3d3d0b8e709415ed5430cdbaef134c99fc2632d7991c03d9ac17880"
+    },
+    {
+      "name": "mask_in_place_order_5",
+      "declarations": [
+        "s32 *slots",
+        "u32 offset",
+        "s32 count",
+        "s32 index"
+      ],
+      "score": 80.08929,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "18d5c6694105247ea7e1061fed47e3f1524fbb0e2d6edfd31db496893a0a7308"
+    },
+    {
+      "name": "mask_in_place_order_6",
+      "declarations": [
+        "s32 index",
+        "s32 *slots",
+        "s32 count",
+        "u32 offset"
+      ],
+      "score": 80.08929,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "4e2e7f344c18804304a368907df899a31935108a7864cbd9571c088e38d272bc"
+    },
+    {
+      "name": "mask_in_place_order_7",
+      "declarations": [
+        "s32 index",
+        "s32 *slots",
+        "u32 offset",
+        "s32 count"
+      ],
+      "score": 80.71429,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "8ffec6ce278020dc02ec6968800b2d45e9b6fa72c88d628433452e59318bef96"
+    },
+    {
+      "name": "mask_in_place_order_8",
+      "declarations": [
+        "s32 index",
+        "s32 count",
+        "s32 *slots",
+        "u32 offset"
+      ],
+      "score": 80.08929,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "7baad1c780181eaf22fdac17e6c3016860c2d9f923ef8f02be78d39a756c72c1"
+    },
+    {
+      "name": "mask_in_place_order_9",
+      "declarations": [
+        "s32 index",
+        "s32 count",
+        "u32 offset",
+        "s32 *slots"
+      ],
+      "score": 80.08929,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "6f7f5f0af8da0d64ebb38eae13a52d1e8c7ec63a6c6c0896219941a74aa1f729"
+    },
+    {
+      "name": "mask_in_place_order_10",
+      "declarations": [
+        "s32 index",
+        "u32 offset",
+        "s32 *slots",
+        "s32 count"
+      ],
+      "score": 80.71429,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "522a7ca3411c0817f96280c0f8fa5ff5994663937f055c9d3dd9f94db878c4b2"
+    },
+    {
+      "name": "mask_in_place_order_11",
+      "declarations": [
+        "s32 index",
+        "u32 offset",
+        "s32 count",
+        "s32 *slots"
+      ],
+      "score": 80.71429,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "808ad0b69ad75873c094d33d868014b6b020663a36e9d307f414c67310c734aa"
+    },
+    {
+      "name": "mask_in_place_order_12",
+      "declarations": [
+        "s32 count",
+        "s32 *slots",
+        "s32 index",
+        "u32 offset"
+      ],
+      "score": 80.35714,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "3e5e144fd82837f220c73e6a6c4c45523840ba655829c4ed663615ea922c98d5"
+    },
+    {
+      "name": "mask_in_place_order_13",
+      "declarations": [
+        "s32 count",
+        "s32 *slots",
+        "u32 offset",
+        "s32 index"
+      ],
+      "score": 80.17857,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "e766735676c6f840f700f0a5e13d8bd970bc08e2e47971f2358938038e0544b9"
+    },
+    {
+      "name": "mask_in_place_order_14",
+      "declarations": [
+        "s32 count",
+        "s32 index",
+        "s32 *slots",
+        "u32 offset"
+      ],
+      "score": 80.35714,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "07eab80aa9a4fb253ad766fc2e37caca3da6778433b635b49c178380ce3ed6b6"
+    },
+    {
+      "name": "mask_in_place_order_15",
+      "declarations": [
+        "s32 count",
+        "s32 index",
+        "u32 offset",
+        "s32 *slots"
+      ],
+      "score": 80.35714,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "c1eeb75c94e6c7162661490ebdc238272a6b60be5760fc402b0826cb372f1b5d"
+    },
+    {
+      "name": "mask_in_place_order_16",
+      "declarations": [
+        "s32 count",
+        "u32 offset",
+        "s32 *slots",
+        "s32 index"
+      ],
+      "score": 80.17857,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "476e655a2fbeb45378f96ec0603db128d3bfdd345fa8497338d2f62ad709c3c3"
+    },
+    {
+      "name": "mask_in_place_order_17",
+      "declarations": [
+        "s32 count",
+        "u32 offset",
+        "s32 index",
+        "s32 *slots"
+      ],
+      "score": 80.17857,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "06629d8a7dfa24ff7de4d8c4c751ac5cdd5979c6112bb0860bc7e6c31121e523"
+    },
+    {
+      "name": "mask_in_place_order_18",
+      "declarations": [
+        "u32 offset",
+        "s32 *slots",
+        "s32 index",
+        "s32 count"
+      ],
+      "score": 80.89286,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "04f63c3bc1478f565872c9d7ca3648a4900b2fc57eb9983c165d32b5b7825dcf"
+    },
+    {
+      "name": "mask_in_place_order_19",
+      "declarations": [
+        "u32 offset",
+        "s32 *slots",
+        "s32 count",
+        "s32 index"
+      ],
+      "score": 80.08929,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "2636bd971c5101bd09fee4cb63cafa9a96350448c82acaa26e443a3adfca71d2"
+    },
+    {
+      "name": "mask_in_place_order_20",
+      "declarations": [
+        "u32 offset",
+        "s32 index",
+        "s32 *slots",
+        "s32 count"
+      ],
+      "score": 80.89286,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "a51a9fa81f0fa65d8ec74b06c1006dc2f0d7fd9efaf53f10f65d0ac56b971845"
+    },
+    {
+      "name": "mask_in_place_order_21",
+      "declarations": [
+        "u32 offset",
+        "s32 index",
+        "s32 count",
+        "s32 *slots"
+      ],
+      "score": 80.89286,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "a01135ab80477b10cf88f9754d005c455dd55d275e7155c7719583f92df4965a"
+    },
+    {
+      "name": "mask_in_place_order_22",
+      "declarations": [
+        "u32 offset",
+        "s32 count",
+        "s32 *slots",
+        "s32 index"
+      ],
+      "score": 80.08929,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "b28685faaa014a75c8d3ddf97f6c7b1e9f0c9f57b94c5462e3ec6f3e73af3b56"
+    },
+    {
+      "name": "mask_in_place_order_23",
+      "declarations": [
+        "u32 offset",
+        "s32 count",
+        "s32 index",
+        "s32 *slots"
+      ],
+      "score": 80.08929,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "c2cd8d74c139670cfbc90a0ac1cac28cbbe96eb203342f68f6bc513d1147c5b7"
+    },
+    {
+      "name": "register_offset",
+      "score": 80.89286,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "e2bc004a0c0e49a8823ebe8c45e92390fcf8ed853ca5346b4af75264209f3d4f"
+    },
+    {
+      "name": "register_slots",
+      "score": 80.89286,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "f3e8932f8dcb6dba13352cecc599589ca011fc4c378cfa0e4a522a3969408e1d"
+    },
+    {
+      "name": "register_both",
+      "score": 80.89286,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "11e308f4f617c210638538750c7ddd6bfeebc714ade9043ba640d77f8df2d404"
+    },
+    {
+      "name": "register_offset_plain",
+      "score": 79.55357,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "94196891ecbdf9e6c4f49c25b3567c95727639ddbbcb423a24d7dce1d0f526fb"
+    },
+    {
+      "name": "slot_pointer_local",
+      "score": 80.71429,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "5b162bbae8655438ff71264db89423fd8907c299b8b891c70a096ddd1fd69c85"
+    },
+    {
+      "name": "offset_as_pointer",
+      "score": 80.89286,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "fb053919f6e089a8df54da47dc4d8b0c32c8dcf158d4c251a2238ba5ad4775b4"
+    },
+    {
+      "name": "integer_base_order_0",
+      "declarations": [
+        "u32 slots",
+        "u32 offset",
+        "s32 index",
+        "s32 count"
+      ],
+      "score": 80.89286,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "a46246bdd1fc052540fc8c7bd9f651547a3e2a15c64e0ea0e31e691cc0bb1cf5"
+    },
+    {
+      "name": "integer_base_order_1",
+      "declarations": [
+        "u32 slots",
+        "u32 offset",
+        "s32 count",
+        "s32 index"
+      ],
+      "score": 80.08929,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "57fce181746116ddd351e44fc24999a80d9d4562ae83d448cf751c9077eb12f3"
+    },
+    {
+      "name": "integer_base_order_2",
+      "declarations": [
+        "u32 slots",
+        "s32 index",
+        "u32 offset",
+        "s32 count"
+      ],
+      "score": 80.71429,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "2793d642a189b3a9e9a8de6001e51461aed912c609959df0fe50807e2ebc0c8e"
+    },
+    {
+      "name": "integer_base_order_3",
+      "declarations": [
+        "u32 slots",
+        "s32 index",
+        "s32 count",
+        "u32 offset"
+      ],
+      "score": 80.08929,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "d49d0bbd4a7bbe70494d00957f121d51fa9b9c273270467c73c507d755ed5f40"
+    },
+    {
+      "name": "integer_base_order_4",
+      "declarations": [
+        "u32 slots",
+        "s32 count",
+        "u32 offset",
+        "s32 index"
+      ],
+      "score": 80.17857,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "215f88a241005f45053e72e8007df0f542db9b3eac0bea33beba0a9b50d55bbb"
+    },
+    {
+      "name": "integer_base_order_5",
+      "declarations": [
+        "u32 slots",
+        "s32 count",
+        "s32 index",
+        "u32 offset"
+      ],
+      "score": 80.35714,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "c792d364c20147fddca356329207cc772d4540698513dac80caed8922e0a1146"
+    },
+    {
+      "name": "integer_base_order_6",
+      "declarations": [
+        "u32 offset",
+        "u32 slots",
+        "s32 index",
+        "s32 count"
+      ],
+      "score": 80.89286,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "7f82cece221e031e7beb4854e31e4b4121d8eac02eca482547703ad997d7cfd1"
+    },
+    {
+      "name": "integer_base_order_7",
+      "declarations": [
+        "u32 offset",
+        "u32 slots",
+        "s32 count",
+        "s32 index"
+      ],
+      "score": 80.08929,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "5646cadaf17886f219142e166efbd9ad70583b4e6062f0a55d0da563ede86d4c"
+    },
+    {
+      "name": "integer_base_order_8",
+      "declarations": [
+        "u32 offset",
+        "s32 index",
+        "u32 slots",
+        "s32 count"
+      ],
+      "score": 80.89286,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "04f29adb2ea774258c94019adf53e3b9f23653e1ca5a12e1de59788bd74cf73e"
+    },
+    {
+      "name": "integer_base_order_9",
+      "declarations": [
+        "u32 offset",
+        "s32 index",
+        "s32 count",
+        "u32 slots"
+      ],
+      "score": 80.89286,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "13ba251a3dac66e6172b0e661ba99bbdfb8fed68f610fdcc4fc9ac22b52a488f"
+    },
+    {
+      "name": "integer_base_order_10",
+      "declarations": [
+        "u32 offset",
+        "s32 count",
+        "u32 slots",
+        "s32 index"
+      ],
+      "score": 80.08929,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "a595e6d7e4f14b3139935d4f665a895ba36e39b9028c74707e126a4449f3000b"
+    },
+    {
+      "name": "integer_base_order_11",
+      "declarations": [
+        "u32 offset",
+        "s32 count",
+        "s32 index",
+        "u32 slots"
+      ],
+      "score": 80.08929,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "588588e63addc50649a09414f7e3f69ee305407437fc858492ccffdda7c9150a"
+    },
+    {
+      "name": "integer_base_order_12",
+      "declarations": [
+        "s32 index",
+        "u32 slots",
+        "u32 offset",
+        "s32 count"
+      ],
+      "score": 80.71429,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "1cff9622cb2e07fa5b7248fc3cf839f9ccfc0b31542a23cf6e515c8c19710ff4"
+    },
+    {
+      "name": "integer_base_order_13",
+      "declarations": [
+        "s32 index",
+        "u32 slots",
+        "s32 count",
+        "u32 offset"
+      ],
+      "score": 80.08929,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "367d84a20c10bef51bed29280acab099f4b47df3f0de90c91782c9472938f913"
+    },
+    {
+      "name": "integer_base_order_14",
+      "declarations": [
+        "s32 index",
+        "u32 offset",
+        "u32 slots",
+        "s32 count"
+      ],
+      "score": 80.71429,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "7e869c485955828c6bc174669466cf7a5133a23021061ebe9702204e63e20950"
+    },
+    {
+      "name": "integer_base_order_15",
+      "declarations": [
+        "s32 index",
+        "u32 offset",
+        "s32 count",
+        "u32 slots"
+      ],
+      "score": 80.71429,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "5509b3a3cac1be97fabbfc5e446e4128540f0b93c3c3ce83278512954ccda60d"
+    },
+    {
+      "name": "integer_base_order_16",
+      "declarations": [
+        "s32 index",
+        "s32 count",
+        "u32 slots",
+        "u32 offset"
+      ],
+      "score": 80.08929,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "7d7e31b12d5647298cdce33ef6bbaf1fbfd9aa5d6f85e92da5810931b053c028"
+    },
+    {
+      "name": "integer_base_order_17",
+      "declarations": [
+        "s32 index",
+        "s32 count",
+        "u32 offset",
+        "u32 slots"
+      ],
+      "score": 80.08929,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "31bb4b4084c3ad4f75512766763be5bcc1f9ec4ffa258382bd150c029fa42dd3"
+    },
+    {
+      "name": "integer_base_order_18",
+      "declarations": [
+        "s32 count",
+        "u32 slots",
+        "u32 offset",
+        "s32 index"
+      ],
+      "score": 80.17857,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "89426c203b877ba4167b4957b1a52db418f349628e8866c1c4c724d062634379"
+    },
+    {
+      "name": "integer_base_order_19",
+      "declarations": [
+        "s32 count",
+        "u32 slots",
+        "s32 index",
+        "u32 offset"
+      ],
+      "score": 80.35714,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "f95d1f9b2f37f765e3206551eceb6a18e189263ea0bbe2cf88dcebd3c5f5868c"
+    },
+    {
+      "name": "integer_base_order_20",
+      "declarations": [
+        "s32 count",
+        "u32 offset",
+        "u32 slots",
+        "s32 index"
+      ],
+      "score": 80.17857,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "27a89f45db6648f2d782aa6963bde2bedd258f2553f115aea165cb3cbc3676ac"
+    },
+    {
+      "name": "integer_base_order_21",
+      "declarations": [
+        "s32 count",
+        "u32 offset",
+        "s32 index",
+        "u32 slots"
+      ],
+      "score": 80.17857,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "9e67cf5dbae6b78d738caafc40d0022d9602f4bc2af8b2b2c804e108c9974c3d"
+    },
+    {
+      "name": "integer_base_order_22",
+      "declarations": [
+        "s32 count",
+        "s32 index",
+        "u32 slots",
+        "u32 offset"
+      ],
+      "score": 80.35714,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "9bfd5bf738e70734d78559cf8f0487b271f9583a9f9314906a2587239187347f"
+    },
+    {
+      "name": "integer_base_order_23",
+      "declarations": [
+        "s32 count",
+        "s32 index",
+        "u32 offset",
+        "u32 slots"
+      ],
+      "score": 80.35714,
+      "size": "204",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "75337648b0af9ba96dfb5c48f55fc317ad6d9c18f077b1b6446b68c5568066c6"
+    },
+    {
+      "name": "narrow_subscript",
+      "score": 81.78571,
+      "size": "196",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_800680C0.o\n",
+      "build_stderr": "",
+      "exit": 0,
+      "source_sha256": "9b59f95015eac60a4585c61503c86ce68c3a395cd71210bdbb7445822746c65c"
+    }
+  ]
+}

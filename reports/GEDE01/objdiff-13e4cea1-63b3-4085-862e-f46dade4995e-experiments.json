@@ -1,0 +1,289 @@
+{
+  "baseline_source": "typedef unsigned char u8;\ntypedef signed char s8;\n\nextern u8 fn_801EC304(u8*, int, int);\nextern void fn_801EC318(u8*, int, int, u8);\nextern int fn_800FBFB0(void);\n\nvoid fn_801EC350(u8* data, int x, int y, int width, int height)\n{\n    u8 top_left = fn_801EC304(data, x, y);\n    u8 bottom_left = fn_801EC304(data, x, y + height);\n    u8 bottom_right = fn_801EC304(data, x + width, y + height);\n    u8 top_right = fn_801EC304(data, x + width, y);\n    int average;\n    s8 offset;\n    int half_height;\n    int half_width;\n    int mid_y;\n    int mid_x;\n    int value;\n    int span;\n\n    average = (top_left + bottom_left) >> 1;\n    value = fn_800FBFB0() % height;\n    half_height = height >> 1;\n    mid_y = y + half_height;\n    offset = value - half_height;\n    if (fn_801EC304(data, x, mid_y) == 0) {\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, x, mid_y, value);\n    }\n\n    average = (top_left + top_right) >> 1;\n    half_width = width >> 1;\n    mid_x = x + half_width;\n    if (fn_801EC304(data, mid_x, y) == 0) {\n        offset = fn_800FBFB0() % width - half_width;\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, mid_x, y, value);\n    }\n\n    average = (bottom_left + bottom_right) >> 1;\n    if (fn_801EC304(data, mid_x, y + height) == 0) {\n        offset = fn_800FBFB0() % width - half_width;\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, mid_x, y + height, value);\n    }\n\n    average = (top_right + bottom_right) >> 1;\n    if (fn_801EC304(data, x + width, mid_y) == 0) {\n        offset = fn_800FBFB0() % height - half_height;\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, x + width, mid_y, value);\n    }\n\n    average = (top_left + bottom_left + top_right + bottom_right) >> 2;\n    span = (height + width) >> 1;\n    if (fn_801EC304(data, mid_x, mid_y) == 0) {\n        offset = fn_800FBFB0() % span - (span >> 1);\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, mid_x, mid_y, value);\n    }\n\n    if (width > 1 || height > 1) {\n        fn_801EC350(data, x, y, half_width, half_height);\n        fn_801EC350(data, mid_x, y, half_width, half_height);\n        fn_801EC350(data, x, mid_y, half_width, half_height);\n        fn_801EC350(data, mid_x, mid_y, half_width, half_height);\n    }\n}\n",
+  "experiments": [
+    {
+      "name": "branch-local-call",
+      "source": "typedef unsigned char u8;\ntypedef signed char s8;\n\nextern u8 fn_801EC304(u8*, int, int);\nextern void fn_801EC318(u8*, int, int, u8);\nextern int fn_800FBFB0(void);\n\nvoid fn_801EC350(u8* data, int x, int y, int width, int height)\n{\n    u8 top_left = fn_801EC304(data, x, y);\n    u8 bottom_left = fn_801EC304(data, x, y + height);\n    u8 bottom_right = fn_801EC304(data, x + width, y + height);\n    u8 top_right = fn_801EC304(data, x + width, y);\n    int average;\n    s8 offset;\n    int half_height;\n    int half_width;\n    int mid_y;\n    int mid_x;\n    int value;\n    int span;\n\n    average = (top_left + bottom_left) >> 1;\n    value = fn_800FBFB0() % height;\n    half_height = height >> 1;\n    mid_y = y + half_height;\n    offset = value - half_height;\n    if (fn_801EC304(data, x, mid_y) == 0) {\n        value = average + offset;\n        if (value > 255) {\n            fn_801EC318(data, x, mid_y, 255);\n        } else {\n            fn_801EC318(data, x, mid_y, value & ~(value >> 31));\n        }\n    }\n\n    average = (top_left + top_right) >> 1;\n    half_width = width >> 1;\n    mid_x = x + half_width;\n    if (fn_801EC304(data, mid_x, y) == 0) {\n        offset = fn_800FBFB0() % width - half_width;\n        value = average + offset;\n        if (value > 255) {\n            fn_801EC318(data, mid_x, y, 255);\n        } else {\n            fn_801EC318(data, mid_x, y, value & ~(value >> 31));\n        }\n    }\n\n    average = (bottom_left + bottom_right) >> 1;\n    if (fn_801EC304(data, mid_x, y + height) == 0) {\n        offset = fn_800FBFB0() % width - half_width;\n        value = average + offset;\n        if (value > 255) {\n            fn_801EC318(data, mid_x, y + height, 255);\n        } else {\n            fn_801EC318(data, mid_x, y + height, value & ~(value >> 31));\n        }\n    }\n\n    average = (top_right + bottom_right) >> 1;\n    if (fn_801EC304(data, x + width, mid_y) == 0) {\n        offset = fn_800FBFB0() % height - half_height;\n        value = average + offset;\n        if (value > 255) {\n            fn_801EC318(data, x + width, mid_y, 255);\n        } else {\n            fn_801EC318(data, x + width, mid_y, value & ~(value >> 31));\n        }\n    }\n\n    average = (top_left + bottom_left + top_right + bottom_right) >> 2;\n    span = (height + width) >> 1;\n    if (fn_801EC304(data, mid_x, mid_y) == 0) {\n        offset = fn_800FBFB0() % span - (span >> 1);\n        value = average + offset;\n        if (value > 255) {\n            fn_801EC318(data, mid_x, mid_y, 255);\n        } else {\n            fn_801EC318(data, mid_x, mid_y, value & ~(value >> 31));\n        }\n    }\n\n    if (width > 1 || height > 1) {\n        fn_801EC350(data, x, y, half_width, half_height);\n        fn_801EC350(data, mid_x, y, half_width, half_height);\n        fn_801EC350(data, x, mid_y, half_width, half_height);\n        fn_801EC350(data, mid_x, mid_y, half_width, half_height);\n    }\n}\n",
+      "raw_json": "eternal-darkness-decomp/reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-branch-local-call.json",
+      "measured": {
+        "match_percent": 81.33005,
+        "left_size": 812,
+        "right_size": 892,
+        "diff_counts": {
+          "MATCH": 68,
+          "DIFF_ARG_MISMATCH": 125,
+          "DIFF_INSERT": 25,
+          "DIFF_OP_MISMATCH": 5,
+          "DIFF_DELETE": 5
+        }
+      },
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801EC350 fn_801EC350 -o reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-branch-local-call.json --format json-pretty -c function_reloc_diffs=name_address",
+      "retained": false,
+      "hypothesis": "Duplicated branch-local setter calls could be tail merged with the retail upper-clamp join retained."
+    },
+    {
+      "name": "inline-return-clamp",
+      "hypothesis": "Inlining early return control flow preserves the branch join rather than hoisting the constant assignment.",
+      "source": "typedef unsigned char u8;\ntypedef signed char s8;\n\nextern u8 fn_801EC304(u8*, int, int);\nextern void fn_801EC318(u8*, int, int, u8);\nextern int fn_800FBFB0(void);\n\nstatic inline int clamp_value(int value)\n{\n    if (value > 255)\n        return 255;\n    return value & ~(value >> 31);\n}\n\nvoid fn_801EC350(u8* data, int x, int y, int width, int height)\n{\n    u8 top_left = fn_801EC304(data, x, y);\n    u8 bottom_left = fn_801EC304(data, x, y + height);\n    u8 bottom_right = fn_801EC304(data, x + width, y + height);\n    u8 top_right = fn_801EC304(data, x + width, y);\n    int average;\n    s8 offset;\n    int half_height;\n    int half_width;\n    int mid_y;\n    int mid_x;\n    int value;\n    int span;\n\n    average = (top_left + bottom_left) >> 1;\n    value = fn_800FBFB0() % height;\n    half_height = height >> 1;\n    mid_y = y + half_height;\n    offset = value - half_height;\n    if (fn_801EC304(data, x, mid_y) == 0) {\n        value = average + offset;\n        value = clamp_value(value);\n        fn_801EC318(data, x, mid_y, value);\n    }\n\n    average = (top_left + top_right) >> 1;\n    half_width = width >> 1;\n    mid_x = x + half_width;\n    if (fn_801EC304(data, mid_x, y) == 0) {\n        offset = fn_800FBFB0() % width - half_width;\n        value = average + offset;\n        value = clamp_value(value);\n        fn_801EC318(data, mid_x, y, value);\n    }\n\n    average = (bottom_left + bottom_right) >> 1;\n    if (fn_801EC304(data, mid_x, y + height) == 0) {\n        offset = fn_800FBFB0() % width - half_width;\n        value = average + offset;\n        value = clamp_value(value);\n        fn_801EC318(data, mid_x, y + height, value);\n    }\n\n    average = (top_right + bottom_right) >> 1;\n    if (fn_801EC304(data, x + width, mid_y) == 0) {\n        offset = fn_800FBFB0() % height - half_height;\n        value = average + offset;\n        value = clamp_value(value);\n        fn_801EC318(data, x + width, mid_y, value);\n    }\n\n    average = (top_left + bottom_left + top_right + bottom_right) >> 2;\n    span = (height + width) >> 1;\n    if (fn_801EC304(data, mid_x, mid_y) == 0) {\n        offset = fn_800FBFB0() % span - (span >> 1);\n        value = average + offset;\n        value = clamp_value(value);\n        fn_801EC318(data, mid_x, mid_y, value);\n    }\n\n    if (width > 1 || height > 1) {\n        fn_801EC350(data, x, y, half_width, half_height);\n        fn_801EC350(data, mid_x, y, half_width, half_height);\n        fn_801EC350(data, x, mid_y, half_width, half_height);\n        fn_801EC350(data, mid_x, mid_y, half_width, half_height);\n    }\n}\n",
+      "raw_json": "eternal-darkness-decomp/reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-inline-return-clamp.json",
+      "measured": {
+        "match_percent": 74.729065,
+        "left_size": 812,
+        "right_size": 792,
+        "diff_counts": {
+          "MATCH": 55,
+          "DIFF_ARG_MISMATCH": 119,
+          "DIFF_INSERT": 18,
+          "DIFF_REPLACE": 2,
+          "DIFF_DELETE": 23,
+          "DIFF_OP_MISMATCH": 4
+        }
+      },
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801EC350 fn_801EC350 -o reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-inline-return-clamp.json --format json-pretty -c function_reloc_diffs=name_address",
+      "retained": false
+    },
+    {
+      "name": "nested-max-min",
+      "hypothesis": "Canonical min(max(value,0),255) idiom present in nearby source gives optimizer a different expression tree.",
+      "source": "typedef unsigned char u8;\ntypedef signed char s8;\n\nextern u8 fn_801EC304(u8*, int, int);\nextern void fn_801EC318(u8*, int, int, u8);\nextern int fn_800FBFB0(void);\n\nvoid fn_801EC350(u8* data, int x, int y, int width, int height)\n{\n    u8 top_left = fn_801EC304(data, x, y);\n    u8 bottom_left = fn_801EC304(data, x, y + height);\n    u8 bottom_right = fn_801EC304(data, x + width, y + height);\n    u8 top_right = fn_801EC304(data, x + width, y);\n    int average;\n    s8 offset;\n    int half_height;\n    int half_width;\n    int mid_y;\n    int mid_x;\n    int value;\n    int span;\n\n    average = (top_left + bottom_left) >> 1;\n    value = fn_800FBFB0() % height;\n    half_height = height >> 1;\n    mid_y = y + half_height;\n    offset = value - half_height;\n    if (fn_801EC304(data, x, mid_y) == 0) {\n        value = average + offset;\n        value = (value > 0 ? value : 0) > 255 ? 255 : (value > 0 ? value : 0);\n        fn_801EC318(data, x, mid_y, value);\n    }\n\n    average = (top_left + top_right) >> 1;\n    half_width = width >> 1;\n    mid_x = x + half_width;\n    if (fn_801EC304(data, mid_x, y) == 0) {\n        offset = fn_800FBFB0() % width - half_width;\n        value = average + offset;\n        value = (value > 0 ? value : 0) > 255 ? 255 : (value > 0 ? value : 0);\n        fn_801EC318(data, mid_x, y, value);\n    }\n\n    average = (bottom_left + bottom_right) >> 1;\n    if (fn_801EC304(data, mid_x, y + height) == 0) {\n        offset = fn_800FBFB0() % width - half_width;\n        value = average + offset;\n        value = (value > 0 ? value : 0) > 255 ? 255 : (value > 0 ? value : 0);\n        fn_801EC318(data, mid_x, y + height, value);\n    }\n\n    average = (top_right + bottom_right) >> 1;\n    if (fn_801EC304(data, x + width, mid_y) == 0) {\n        offset = fn_800FBFB0() % height - half_height;\n        value = average + offset;\n        value = (value > 0 ? value : 0) > 255 ? 255 : (value > 0 ? value : 0);\n        fn_801EC318(data, x + width, mid_y, value);\n    }\n\n    average = (top_left + bottom_left + top_right + bottom_right) >> 2;\n    span = (height + width) >> 1;\n    if (fn_801EC304(data, mid_x, mid_y) == 0) {\n        offset = fn_800FBFB0() % span - (span >> 1);\n        value = average + offset;\n        value = (value > 0 ? value : 0) > 255 ? 255 : (value > 0 ? value : 0);\n        fn_801EC318(data, mid_x, mid_y, value);\n    }\n\n    if (width > 1 || height > 1) {\n        fn_801EC350(data, x, y, half_width, half_height);\n        fn_801EC350(data, mid_x, y, half_width, half_height);\n        fn_801EC350(data, x, mid_y, half_width, half_height);\n        fn_801EC350(data, mid_x, mid_y, half_width, half_height);\n    }\n}\n",
+      "raw_json": "eternal-darkness-decomp/reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-nested-max-min.json",
+      "measured": {
+        "match_percent": 70.61576,
+        "left_size": 812,
+        "right_size": 892,
+        "diff_counts": {
+          "MATCH": 76,
+          "DIFF_ARG_MISMATCH": 107,
+          "DIFF_INSERT": 35,
+          "DIFF_REPLACE": 5,
+          "DIFF_DELETE": 15
+        }
+      },
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801EC350 fn_801EC350 -o reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-nested-max-min.json --format json-pretty -c function_reloc_diffs=name_address",
+      "retained": false
+    },
+    {
+      "name": "conditional-sign-test",
+      "hypothesis": "Lower >=0 conditional may lower to srawi/andc within upper ternary, unlike explicit bitwise expression or if/else negative check.",
+      "source": "typedef unsigned char u8;\ntypedef signed char s8;\n\nextern u8 fn_801EC304(u8*, int, int);\nextern void fn_801EC318(u8*, int, int, u8);\nextern int fn_800FBFB0(void);\n\nvoid fn_801EC350(u8* data, int x, int y, int width, int height)\n{\n    u8 top_left = fn_801EC304(data, x, y);\n    u8 bottom_left = fn_801EC304(data, x, y + height);\n    u8 bottom_right = fn_801EC304(data, x + width, y + height);\n    u8 top_right = fn_801EC304(data, x + width, y);\n    int average;\n    s8 offset;\n    int half_height;\n    int half_width;\n    int mid_y;\n    int mid_x;\n    int value;\n    int span;\n\n    average = (top_left + bottom_left) >> 1;\n    value = fn_800FBFB0() % height;\n    half_height = height >> 1;\n    mid_y = y + half_height;\n    offset = value - half_height;\n    if (fn_801EC304(data, x, mid_y) == 0) {\n        value = average + offset;\n        value = value > 255 ? 255 : (value >= 0 ? value : 0);\n        fn_801EC318(data, x, mid_y, value);\n    }\n\n    average = (top_left + top_right) >> 1;\n    half_width = width >> 1;\n    mid_x = x + half_width;\n    if (fn_801EC304(data, mid_x, y) == 0) {\n        offset = fn_800FBFB0() % width - half_width;\n        value = average + offset;\n        value = value > 255 ? 255 : (value >= 0 ? value : 0);\n        fn_801EC318(data, mid_x, y, value);\n    }\n\n    average = (bottom_left + bottom_right) >> 1;\n    if (fn_801EC304(data, mid_x, y + height) == 0) {\n        offset = fn_800FBFB0() % width - half_width;\n        value = average + offset;\n        value = value > 255 ? 255 : (value >= 0 ? value : 0);\n        fn_801EC318(data, mid_x, y + height, value);\n    }\n\n    average = (top_right + bottom_right) >> 1;\n    if (fn_801EC304(data, x + width, mid_y) == 0) {\n        offset = fn_800FBFB0() % height - half_height;\n        value = average + offset;\n        value = value > 255 ? 255 : (value >= 0 ? value : 0);\n        fn_801EC318(data, x + width, mid_y, value);\n    }\n\n    average = (top_left + bottom_left + top_right + bottom_right) >> 2;\n    span = (height + width) >> 1;\n    if (fn_801EC304(data, mid_x, mid_y) == 0) {\n        offset = fn_800FBFB0() % span - (span >> 1);\n        value = average + offset;\n        value = value > 255 ? 255 : (value >= 0 ? value : 0);\n        fn_801EC318(data, mid_x, mid_y, value);\n    }\n\n    if (width > 1 || height > 1) {\n        fn_801EC350(data, x, y, half_width, half_height);\n        fn_801EC350(data, mid_x, y, half_width, half_height);\n        fn_801EC350(data, x, mid_y, half_width, half_height);\n        fn_801EC350(data, mid_x, mid_y, half_width, half_height);\n    }\n}\n",
+      "raw_json": "eternal-darkness-decomp/reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-conditional-sign-test.json",
+      "measured": {
+        "match_percent": 69.261086,
+        "left_size": 812,
+        "right_size": 832,
+        "diff_counts": {
+          "MATCH": 66,
+          "DIFF_ARG_MISMATCH": 107,
+          "DIFF_INSERT": 30,
+          "DIFF_DELETE": 25,
+          "DIFF_OP_MISMATCH": 5
+        }
+      },
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801EC350 fn_801EC350 -o reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-conditional-sign-test.json --format json-pretty -c function_reloc_diffs=name_address",
+      "retained": false
+    },
+    {
+      "name": "conditional-negative-test",
+      "hypothesis": "Invert lower conditional orientation to use signed mask instead of srwi/subi; explicit if from attempt 1 is a different IR shape.",
+      "source": "typedef unsigned char u8;\ntypedef signed char s8;\n\nextern u8 fn_801EC304(u8*, int, int);\nextern void fn_801EC318(u8*, int, int, u8);\nextern int fn_800FBFB0(void);\n\nvoid fn_801EC350(u8* data, int x, int y, int width, int height)\n{\n    u8 top_left = fn_801EC304(data, x, y);\n    u8 bottom_left = fn_801EC304(data, x, y + height);\n    u8 bottom_right = fn_801EC304(data, x + width, y + height);\n    u8 top_right = fn_801EC304(data, x + width, y);\n    int average;\n    s8 offset;\n    int half_height;\n    int half_width;\n    int mid_y;\n    int mid_x;\n    int value;\n    int span;\n\n    average = (top_left + bottom_left) >> 1;\n    value = fn_800FBFB0() % height;\n    half_height = height >> 1;\n    mid_y = y + half_height;\n    offset = value - half_height;\n    if (fn_801EC304(data, x, mid_y) == 0) {\n        value = average + offset;\n        value = value > 255 ? 255 : (value < 0 ? 0 : value);\n        fn_801EC318(data, x, mid_y, value);\n    }\n\n    average = (top_left + top_right) >> 1;\n    half_width = width >> 1;\n    mid_x = x + half_width;\n    if (fn_801EC304(data, mid_x, y) == 0) {\n        offset = fn_800FBFB0() % width - half_width;\n        value = average + offset;\n        value = value > 255 ? 255 : (value < 0 ? 0 : value);\n        fn_801EC318(data, mid_x, y, value);\n    }\n\n    average = (bottom_left + bottom_right) >> 1;\n    if (fn_801EC304(data, mid_x, y + height) == 0) {\n        offset = fn_800FBFB0() % width - half_width;\n        value = average + offset;\n        value = value > 255 ? 255 : (value < 0 ? 0 : value);\n        fn_801EC318(data, mid_x, y + height, value);\n    }\n\n    average = (top_right + bottom_right) >> 1;\n    if (fn_801EC304(data, x + width, mid_y) == 0) {\n        offset = fn_800FBFB0() % height - half_height;\n        value = average + offset;\n        value = value > 255 ? 255 : (value < 0 ? 0 : value);\n        fn_801EC318(data, x + width, mid_y, value);\n    }\n\n    average = (top_left + bottom_left + top_right + bottom_right) >> 2;\n    span = (height + width) >> 1;\n    if (fn_801EC304(data, mid_x, mid_y) == 0) {\n        offset = fn_800FBFB0() % span - (span >> 1);\n        value = average + offset;\n        value = value > 255 ? 255 : (value < 0 ? 0 : value);\n        fn_801EC318(data, mid_x, mid_y, value);\n    }\n\n    if (width > 1 || height > 1) {\n        fn_801EC350(data, x, y, half_width, half_height);\n        fn_801EC350(data, mid_x, y, half_width, half_height);\n        fn_801EC350(data, x, mid_y, half_width, half_height);\n        fn_801EC350(data, mid_x, mid_y, half_width, half_height);\n    }\n}\n",
+      "raw_json": "eternal-darkness-decomp/reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-conditional-negative-test.json",
+      "measured": {
+        "match_percent": 81.82266,
+        "left_size": 812,
+        "right_size": 812,
+        "diff_counts": {
+          "MATCH": 76,
+          "DIFF_ARG_MISMATCH": 112,
+          "DIFF_INSERT": 15,
+          "DIFF_DELETE": 15
+        }
+      },
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801EC350 fn_801EC350 -o reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-conditional-negative-test.json --format json-pretty -c function_reloc_diffs=name_address",
+      "retained": false
+    },
+    {
+      "name": "statement-conditional-clamp",
+      "hypothesis": "Statement upper clamp with conditional lower sign test retains branch while avoiding argument preparation hoisting from outer ternary.",
+      "source": "typedef unsigned char u8;\ntypedef signed char s8;\n\nextern u8 fn_801EC304(u8*, int, int);\nextern void fn_801EC318(u8*, int, int, u8);\nextern int fn_800FBFB0(void);\n\nvoid fn_801EC350(u8* data, int x, int y, int width, int height)\n{\n    u8 top_left = fn_801EC304(data, x, y);\n    u8 bottom_left = fn_801EC304(data, x, y + height);\n    u8 bottom_right = fn_801EC304(data, x + width, y + height);\n    u8 top_right = fn_801EC304(data, x + width, y);\n    int average;\n    s8 offset;\n    int half_height;\n    int half_width;\n    int mid_y;\n    int mid_x;\n    int value;\n    int span;\n\n    average = (top_left + bottom_left) >> 1;\n    value = fn_800FBFB0() % height;\n    half_height = height >> 1;\n    mid_y = y + half_height;\n    offset = value - half_height;\n    if (fn_801EC304(data, x, mid_y) == 0) {\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        else\n            value = value < 0 ? 0 : value;\n        fn_801EC318(data, x, mid_y, value);\n    }\n\n    average = (top_left + top_right) >> 1;\n    half_width = width >> 1;\n    mid_x = x + half_width;\n    if (fn_801EC304(data, mid_x, y) == 0) {\n        offset = fn_800FBFB0() % width - half_width;\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        else\n            value = value < 0 ? 0 : value;\n        fn_801EC318(data, mid_x, y, value);\n    }\n\n    average = (bottom_left + bottom_right) >> 1;\n    if (fn_801EC304(data, mid_x, y + height) == 0) {\n        offset = fn_800FBFB0() % width - half_width;\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        else\n            value = value < 0 ? 0 : value;\n        fn_801EC318(data, mid_x, y + height, value);\n    }\n\n    average = (top_right + bottom_right) >> 1;\n    if (fn_801EC304(data, x + width, mid_y) == 0) {\n        offset = fn_800FBFB0() % height - half_height;\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        else\n            value = value < 0 ? 0 : value;\n        fn_801EC318(data, x + width, mid_y, value);\n    }\n\n    average = (top_left + bottom_left + top_right + bottom_right) >> 2;\n    span = (height + width) >> 1;\n    if (fn_801EC304(data, mid_x, mid_y) == 0) {\n        offset = fn_800FBFB0() % span - (span >> 1);\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        else\n            value = value < 0 ? 0 : value;\n        fn_801EC318(data, mid_x, mid_y, value);\n    }\n\n    if (width > 1 || height > 1) {\n        fn_801EC350(data, x, y, half_width, half_height);\n        fn_801EC350(data, mid_x, y, half_width, half_height);\n        fn_801EC350(data, x, mid_y, half_width, half_height);\n        fn_801EC350(data, mid_x, mid_y, half_width, half_height);\n    }\n}\n",
+      "raw_json": "eternal-darkness-decomp/reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-statement-conditional-clamp.json",
+      "measured": {
+        "match_percent": 81.82266,
+        "left_size": 812,
+        "right_size": 812,
+        "diff_counts": {
+          "MATCH": 76,
+          "DIFF_ARG_MISMATCH": 112,
+          "DIFF_INSERT": 15,
+          "DIFF_DELETE": 15
+        }
+      },
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801EC350 fn_801EC350 -o reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-statement-conditional-clamp.json --format json-pretty -c function_reloc_diffs=name_address",
+      "retained": false
+    },
+    {
+      "name": "register-parameters",
+      "hypothesis": "Explicit register storage on persistent parameters may prioritize their nonvolatile allocation as in retail r27-r31.",
+      "source": "typedef unsigned char u8;\ntypedef signed char s8;\n\nextern u8 fn_801EC304(u8*, int, int);\nextern void fn_801EC318(u8*, int, int, u8);\nextern int fn_800FBFB0(void);\n\nvoid fn_801EC350(register u8* data, register int x, register int y, register int width, register int height)\n{\n    u8 top_left = fn_801EC304(data, x, y);\n    u8 bottom_left = fn_801EC304(data, x, y + height);\n    u8 bottom_right = fn_801EC304(data, x + width, y + height);\n    u8 top_right = fn_801EC304(data, x + width, y);\n    int average;\n    s8 offset;\n    int half_height;\n    int half_width;\n    int mid_y;\n    int mid_x;\n    int value;\n    int span;\n\n    average = (top_left + bottom_left) >> 1;\n    value = fn_800FBFB0() % height;\n    half_height = height >> 1;\n    mid_y = y + half_height;\n    offset = value - half_height;\n    if (fn_801EC304(data, x, mid_y) == 0) {\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, x, mid_y, value);\n    }\n\n    average = (top_left + top_right) >> 1;\n    half_width = width >> 1;\n    mid_x = x + half_width;\n    if (fn_801EC304(data, mid_x, y) == 0) {\n        offset = fn_800FBFB0() % width - half_width;\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, mid_x, y, value);\n    }\n\n    average = (bottom_left + bottom_right) >> 1;\n    if (fn_801EC304(data, mid_x, y + height) == 0) {\n        offset = fn_800FBFB0() % width - half_width;\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, mid_x, y + height, value);\n    }\n\n    average = (top_right + bottom_right) >> 1;\n    if (fn_801EC304(data, x + width, mid_y) == 0) {\n        offset = fn_800FBFB0() % height - half_height;\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, x + width, mid_y, value);\n    }\n\n    average = (top_left + bottom_left + top_right + bottom_right) >> 2;\n    span = (height + width) >> 1;\n    if (fn_801EC304(data, mid_x, mid_y) == 0) {\n        offset = fn_800FBFB0() % span - (span >> 1);\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, mid_x, mid_y, value);\n    }\n\n    if (width > 1 || height > 1) {\n        fn_801EC350(data, x, y, half_width, half_height);\n        fn_801EC350(data, mid_x, y, half_width, half_height);\n        fn_801EC350(data, x, mid_y, half_width, half_height);\n        fn_801EC350(data, mid_x, mid_y, half_width, half_height);\n    }\n}\n",
+      "raw_json": "eternal-darkness-decomp/reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-register-parameters.json",
+      "measured": {
+        "match_percent": 88.74384,
+        "left_size": 812,
+        "right_size": 792,
+        "diff_counts": {
+          "MATCH": 63,
+          "DIFF_ARG_MISMATCH": 130,
+          "DIFF_DELETE": 10,
+          "DIFF_INSERT": 5
+        }
+      },
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801EC350 fn_801EC350 -o reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-register-parameters.json --format json-pretty -c function_reloc_diffs=name_address",
+      "retained": false
+    },
+    {
+      "name": "derived-expressions",
+      "hypothesis": "Retail low-register halves and midpoints may be compiler CSE temporaries rather than source locals; substitute equivalent expressions to remove four persistent named locals.",
+      "source": "typedef unsigned char u8;\ntypedef signed char s8;\n\nextern u8 fn_801EC304(u8*, int, int);\nextern void fn_801EC318(u8*, int, int, u8);\nextern int fn_800FBFB0(void);\n\nvoid fn_801EC350(u8* data, int x, int y, int width, int height)\n{\n    u8 top_left = fn_801EC304(data, x, y);\n    u8 bottom_left = fn_801EC304(data, x, y + height);\n    u8 bottom_right = fn_801EC304(data, x + width, y + height);\n    u8 top_right = fn_801EC304(data, x + width, y);\n    int average;\n    s8 offset;\n    int value;\n    int span;\n\n    average = (top_left + bottom_left) >> 1;\n    value = fn_800FBFB0() % height;\n    offset = value - (height >> 1);\n    if (fn_801EC304(data, x, (y + (height >> 1))) == 0) {\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, x, (y + (height >> 1)), value);\n    }\n\n    average = (top_left + top_right) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), y) == 0) {\n        offset = fn_800FBFB0() % width - (width >> 1);\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, (x + (width >> 1)), y, value);\n    }\n\n    average = (bottom_left + bottom_right) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), y + height) == 0) {\n        offset = fn_800FBFB0() % width - (width >> 1);\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, (x + (width >> 1)), y + height, value);\n    }\n\n    average = (top_right + bottom_right) >> 1;\n    if (fn_801EC304(data, x + width, (y + (height >> 1))) == 0) {\n        offset = fn_800FBFB0() % height - (height >> 1);\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, x + width, (y + (height >> 1)), value);\n    }\n\n    average = (top_left + bottom_left + top_right + bottom_right) >> 2;\n    span = (height + width) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), (y + (height >> 1))) == 0) {\n        offset = fn_800FBFB0() % span - (span >> 1);\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, (x + (width >> 1)), (y + (height >> 1)), value);\n    }\n\n    if (width > 1 || height > 1) {\n        fn_801EC350(data, x, y, (width >> 1), (height >> 1));\n        fn_801EC350(data, (x + (width >> 1)), y, (width >> 1), (height >> 1));\n        fn_801EC350(data, x, (y + (height >> 1)), (width >> 1), (height >> 1));\n        fn_801EC350(data, (x + (width >> 1)), (y + (height >> 1)), (width >> 1), (height >> 1));\n    }\n}\n",
+      "raw_json": "eternal-darkness-decomp/reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-derived-expressions.json",
+      "measured": {
+        "match_percent": 90.344826,
+        "left_size": 812,
+        "right_size": 792,
+        "diff_counts": {
+          "MATCH": 115,
+          "DIFF_ARG_MISMATCH": 78,
+          "DIFF_DELETE": 10,
+          "DIFF_INSERT": 5
+        }
+      },
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801EC350 fn_801EC350 -o reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-derived-expressions.json --format json-pretty -c function_reloc_diffs=name_address",
+      "retained": false
+    },
+    {
+      "name": "scoped-values",
+      "hypothesis": "Give each midpoint independent value/offset lifetimes rather than reusing one named temporary across all five clamps.",
+      "source": "typedef unsigned char u8;\ntypedef signed char s8;\n\nextern u8 fn_801EC304(u8*, int, int);\nextern void fn_801EC318(u8*, int, int, u8);\nextern int fn_800FBFB0(void);\n\nvoid fn_801EC350(u8* data, int x, int y, int width, int height)\n{\n    u8 top_left = fn_801EC304(data, x, y);\n    u8 bottom_left = fn_801EC304(data, x, y + height);\n    u8 bottom_right = fn_801EC304(data, x + width, y + height);\n    u8 top_right = fn_801EC304(data, x + width, y);\n    int average;\n    s8 offset;\n    int span;\n\n    average = (top_left + bottom_left) >> 1;\n    offset = fn_800FBFB0() % height - (height >> 1);\n    if (fn_801EC304(data, x, (y + (height >> 1))) == 0) {\n        int value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, x, (y + (height >> 1)), value);\n    }\n\n    average = (top_left + top_right) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), y) == 0) {\n        s8 offset = fn_800FBFB0() % width - (width >> 1);\n        int value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, (x + (width >> 1)), y, value);\n    }\n\n    average = (bottom_left + bottom_right) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), y + height) == 0) {\n        s8 offset = fn_800FBFB0() % width - (width >> 1);\n        int value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, (x + (width >> 1)), y + height, value);\n    }\n\n    average = (top_right + bottom_right) >> 1;\n    if (fn_801EC304(data, x + width, (y + (height >> 1))) == 0) {\n        s8 offset = fn_800FBFB0() % height - (height >> 1);\n        int value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, x + width, (y + (height >> 1)), value);\n    }\n\n    average = (top_left + bottom_left + top_right + bottom_right) >> 2;\n    span = (height + width) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), (y + (height >> 1))) == 0) {\n        s8 offset = fn_800FBFB0() % span - (span >> 1);\n        int value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, (x + (width >> 1)), (y + (height >> 1)), value);\n    }\n\n    if (width > 1 || height > 1) {\n        fn_801EC350(data, x, y, (width >> 1), (height >> 1));\n        fn_801EC350(data, (x + (width >> 1)), y, (width >> 1), (height >> 1));\n        fn_801EC350(data, x, (y + (height >> 1)), (width >> 1), (height >> 1));\n        fn_801EC350(data, (x + (width >> 1)), (y + (height >> 1)), (width >> 1), (height >> 1));\n    }\n}\n",
+      "note": "Initial edit used a C99 declaration after a statement and was rejected; corrected to canonical C89 ordering before measurement.",
+      "raw_json": "eternal-darkness-decomp/reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-scoped-values.json",
+      "measured": {
+        "match_percent": 90.344826,
+        "left_size": 812,
+        "right_size": 792,
+        "diff_counts": {
+          "MATCH": 115,
+          "DIFF_ARG_MISMATCH": 78,
+          "DIFF_DELETE": 10,
+          "DIFF_INSERT": 5
+        }
+      },
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801EC350 fn_801EC350 -o reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-scoped-values.json --format json-pretty -c function_reloc_diffs=name_address",
+      "retained": false
+    },
+    {
+      "name": "halve-parameters",
+      "hypothesis": "Original width/height may be halved in-place only at recursion, changing CSE temporary allocation across earlier uses.",
+      "source": "typedef unsigned char u8;\ntypedef signed char s8;\n\nextern u8 fn_801EC304(u8*, int, int);\nextern void fn_801EC318(u8*, int, int, u8);\nextern int fn_800FBFB0(void);\n\nvoid fn_801EC350(u8* data, int x, int y, int width, int height)\n{\n    u8 top_left = fn_801EC304(data, x, y);\n    u8 bottom_left = fn_801EC304(data, x, y + height);\n    u8 bottom_right = fn_801EC304(data, x + width, y + height);\n    u8 top_right = fn_801EC304(data, x + width, y);\n    int average;\n    s8 offset;\n    int value;\n    int span;\n\n    average = (top_left + bottom_left) >> 1;\n    value = fn_800FBFB0() % height;\n    offset = value - (height >> 1);\n    if (fn_801EC304(data, x, (y + (height >> 1))) == 0) {\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, x, (y + (height >> 1)), value);\n    }\n\n    average = (top_left + top_right) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), y) == 0) {\n        offset = fn_800FBFB0() % width - (width >> 1);\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, (x + (width >> 1)), y, value);\n    }\n\n    average = (bottom_left + bottom_right) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), y + height) == 0) {\n        offset = fn_800FBFB0() % width - (width >> 1);\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, (x + (width >> 1)), y + height, value);\n    }\n\n    average = (top_right + bottom_right) >> 1;\n    if (fn_801EC304(data, x + width, (y + (height >> 1))) == 0) {\n        offset = fn_800FBFB0() % height - (height >> 1);\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, x + width, (y + (height >> 1)), value);\n    }\n\n    average = (top_left + bottom_left + top_right + bottom_right) >> 2;\n    span = (height + width) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), (y + (height >> 1))) == 0) {\n        offset = fn_800FBFB0() % span - (span >> 1);\n        value = average + offset;\n        if (value > 255)\n            value = 255;\n        value &= ~(value >> 31);\n        fn_801EC318(data, (x + (width >> 1)), (y + (height >> 1)), value);\n    }\n\n    if (width > 1 || height > 1) {\n        width >>= 1;\n        height >>= 1;\n        fn_801EC350(data, x, y, width, height);\n        fn_801EC350(data, x + width, y, width, height);\n        fn_801EC350(data, x, y + height, width, height);\n        fn_801EC350(data, x + width, y + height, width, height);\n    }\n}\n",
+      "raw_json": "eternal-darkness-decomp/reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-halve-parameters.json",
+      "measured": {
+        "match_percent": 91.650246,
+        "left_size": 812,
+        "right_size": 792,
+        "diff_counts": {
+          "MATCH": 160,
+          "DIFF_ARG_MISMATCH": 33,
+          "DIFF_DELETE": 10,
+          "DIFF_INSERT": 5
+        }
+      },
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801EC350 fn_801EC350 -o reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-halve-parameters.json --format json-pretty -c function_reloc_diffs=name_address",
+      "retained": false
+    },
+    {
+      "name": "halve-conditional",
+      "hypothesis": "Combine recovered CSE/parameter lifetimes with the branch-producing negative conditional clamp.",
+      "source": "typedef unsigned char u8;\ntypedef signed char s8;\n\nextern u8 fn_801EC304(u8*, int, int);\nextern void fn_801EC318(u8*, int, int, u8);\nextern int fn_800FBFB0(void);\n\nvoid fn_801EC350(u8* data, int x, int y, int width, int height)\n{\n    u8 top_left = fn_801EC304(data, x, y);\n    u8 bottom_left = fn_801EC304(data, x, y + height);\n    u8 bottom_right = fn_801EC304(data, x + width, y + height);\n    u8 top_right = fn_801EC304(data, x + width, y);\n    int average;\n    s8 offset;\n    int value;\n    int span;\n\n    average = (top_left + bottom_left) >> 1;\n    value = fn_800FBFB0() % height;\n    offset = value - (height >> 1);\n    if (fn_801EC304(data, x, (y + (height >> 1))) == 0) {\n        value = average + offset;\n        value = value > 255 ? 255 : (value < 0 ? 0 : value);\n        fn_801EC318(data, x, (y + (height >> 1)), value);\n    }\n\n    average = (top_left + top_right) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), y) == 0) {\n        offset = fn_800FBFB0() % width - (width >> 1);\n        value = average + offset;\n        value = value > 255 ? 255 : (value < 0 ? 0 : value);\n        fn_801EC318(data, (x + (width >> 1)), y, value);\n    }\n\n    average = (bottom_left + bottom_right) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), y + height) == 0) {\n        offset = fn_800FBFB0() % width - (width >> 1);\n        value = average + offset;\n        value = value > 255 ? 255 : (value < 0 ? 0 : value);\n        fn_801EC318(data, (x + (width >> 1)), y + height, value);\n    }\n\n    average = (top_right + bottom_right) >> 1;\n    if (fn_801EC304(data, x + width, (y + (height >> 1))) == 0) {\n        offset = fn_800FBFB0() % height - (height >> 1);\n        value = average + offset;\n        value = value > 255 ? 255 : (value < 0 ? 0 : value);\n        fn_801EC318(data, x + width, (y + (height >> 1)), value);\n    }\n\n    average = (top_left + bottom_left + top_right + bottom_right) >> 2;\n    span = (height + width) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), (y + (height >> 1))) == 0) {\n        offset = fn_800FBFB0() % span - (span >> 1);\n        value = average + offset;\n        value = value > 255 ? 255 : (value < 0 ? 0 : value);\n        fn_801EC318(data, (x + (width >> 1)), (y + (height >> 1)), value);\n    }\n\n    if (width > 1 || height > 1) {\n        width >>= 1;\n        height >>= 1;\n        fn_801EC350(data, x, y, width, height);\n        fn_801EC350(data, x + width, y, width, height);\n        fn_801EC350(data, x, y + height, width, height);\n        fn_801EC350(data, x + width, y + height, width, height);\n    }\n}\n",
+      "raw_json": "eternal-darkness-decomp/reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-halve-conditional.json",
+      "measured": {
+        "match_percent": 84.48276,
+        "left_size": 812,
+        "right_size": 812,
+        "diff_counts": {
+          "MATCH": 161,
+          "DIFF_ARG_MISMATCH": 27,
+          "DIFF_INSERT": 15,
+          "DIFF_DELETE": 15
+        }
+      },
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801EC350 fn_801EC350 -o reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-halve-conditional.json --format json-pretty -c function_reloc_diffs=name_address",
+      "retained": false
+    },
+    {
+      "name": "inline-byte-negative",
+      "hypothesis": "An inlined byte-returning saturation helper may isolate argument evaluation and preserve retail r3 sum before r0 join.",
+      "source": "typedef unsigned char u8;\ntypedef signed char s8;\n\nextern u8 fn_801EC304(u8*, int, int);\nextern void fn_801EC318(u8*, int, int, u8);\nextern int fn_800FBFB0(void);\n\nstatic inline u8 clamp_value(int value)\n{\n    if (value > 255)\n        return 255;\n    return value < 0 ? 0 : value;\n}\n\nvoid fn_801EC350(u8* data, int x, int y, int width, int height)\n{\n    u8 top_left = fn_801EC304(data, x, y);\n    u8 bottom_left = fn_801EC304(data, x, y + height);\n    u8 bottom_right = fn_801EC304(data, x + width, y + height);\n    u8 top_right = fn_801EC304(data, x + width, y);\n    int average;\n    s8 offset;\n    int value;\n    int span;\n\n    average = (top_left + bottom_left) >> 1;\n    value = fn_800FBFB0() % height;\n    offset = value - (height >> 1);\n    if (fn_801EC304(data, x, (y + (height >> 1))) == 0) {\n        value = average + offset;\n        value = clamp_value(value);\n        fn_801EC318(data, x, (y + (height >> 1)), value);\n    }\n\n    average = (top_left + top_right) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), y) == 0) {\n        offset = fn_800FBFB0() % width - (width >> 1);\n        value = average + offset;\n        value = clamp_value(value);\n        fn_801EC318(data, (x + (width >> 1)), y, value);\n    }\n\n    average = (bottom_left + bottom_right) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), y + height) == 0) {\n        offset = fn_800FBFB0() % width - (width >> 1);\n        value = average + offset;\n        value = clamp_value(value);\n        fn_801EC318(data, (x + (width >> 1)), y + height, value);\n    }\n\n    average = (top_right + bottom_right) >> 1;\n    if (fn_801EC304(data, x + width, (y + (height >> 1))) == 0) {\n        offset = fn_800FBFB0() % height - (height >> 1);\n        value = average + offset;\n        value = clamp_value(value);\n        fn_801EC318(data, x + width, (y + (height >> 1)), value);\n    }\n\n    average = (top_left + bottom_left + top_right + bottom_right) >> 2;\n    span = (height + width) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), (y + (height >> 1))) == 0) {\n        offset = fn_800FBFB0() % span - (span >> 1);\n        value = average + offset;\n        value = clamp_value(value);\n        fn_801EC318(data, (x + (width >> 1)), (y + (height >> 1)), value);\n    }\n\n    if (width > 1 || height > 1) {\n        width >>= 1;\n        height >>= 1;\n        fn_801EC350(data, x, y, width, height);\n        fn_801EC350(data, x + width, y, width, height);\n        fn_801EC350(data, x, y + height, width, height);\n        fn_801EC350(data, x + width, y + height, width, height);\n    }\n}\n",
+      "raw_json": "eternal-darkness-decomp/reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-inline-byte-negative.json",
+      "measured": {
+        "match_percent": 79.06404,
+        "left_size": 812,
+        "right_size": 832,
+        "diff_counts": {
+          "MATCH": 65,
+          "DIFF_ARG_MISMATCH": 123,
+          "DIFF_INSERT": 20,
+          "DIFF_DELETE": 15
+        }
+      },
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801EC350 fn_801EC350 -o reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-inline-byte-negative.json --format json-pretty -c function_reloc_diffs=name_address",
+      "retained": false
+    },
+    {
+      "name": "clamp-expression-cse",
+      "hypothesis": "Duplicate the pure sum expression in the clamp instead of assigning it to a named local; compiler CSE may assign r3 rather than coalescing with setter r6.",
+      "source": "typedef unsigned char u8;\ntypedef signed char s8;\n\nextern u8 fn_801EC304(u8*, int, int);\nextern void fn_801EC318(u8*, int, int, u8);\nextern int fn_800FBFB0(void);\n\nvoid fn_801EC350(u8* data, int x, int y, int width, int height)\n{\n    u8 top_left = fn_801EC304(data, x, y);\n    u8 bottom_left = fn_801EC304(data, x, y + height);\n    u8 bottom_right = fn_801EC304(data, x + width, y + height);\n    u8 top_right = fn_801EC304(data, x + width, y);\n    int average;\n    s8 offset;\n    int value;\n    int span;\n\n    average = (top_left + bottom_left) >> 1;\n    value = fn_800FBFB0() % height;\n    offset = value - (height >> 1);\n    if (fn_801EC304(data, x, (y + (height >> 1))) == 0) {\n        fn_801EC318(data, x, (y + (height >> 1)), (average + offset) > 255 ? 255 : ((average + offset) < 0 ? 0 : (average + offset)));\n    }\n\n    average = (top_left + top_right) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), y) == 0) {\n        offset = fn_800FBFB0() % width - (width >> 1);\n        fn_801EC318(data, (x + (width >> 1)), y, (average + offset) > 255 ? 255 : ((average + offset) < 0 ? 0 : (average + offset)));\n    }\n\n    average = (bottom_left + bottom_right) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), y + height) == 0) {\n        offset = fn_800FBFB0() % width - (width >> 1);\n        fn_801EC318(data, (x + (width >> 1)), y + height, (average + offset) > 255 ? 255 : ((average + offset) < 0 ? 0 : (average + offset)));\n    }\n\n    average = (top_right + bottom_right) >> 1;\n    if (fn_801EC304(data, x + width, (y + (height >> 1))) == 0) {\n        offset = fn_800FBFB0() % height - (height >> 1);\n        fn_801EC318(data, x + width, (y + (height >> 1)), (average + offset) > 255 ? 255 : ((average + offset) < 0 ? 0 : (average + offset)));\n    }\n\n    average = (top_left + bottom_left + top_right + bottom_right) >> 2;\n    span = (height + width) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), (y + (height >> 1))) == 0) {\n        offset = fn_800FBFB0() % span - (span >> 1);\n        fn_801EC318(data, (x + (width >> 1)), (y + (height >> 1)), (average + offset) > 255 ? 255 : ((average + offset) < 0 ? 0 : (average + offset)));\n    }\n\n    if (width > 1 || height > 1) {\n        width >>= 1;\n        height >>= 1;\n        fn_801EC350(data, x, y, width, height);\n        fn_801EC350(data, x + width, y, width, height);\n        fn_801EC350(data, x, y + height, width, height);\n        fn_801EC350(data, x + width, y + height, width, height);\n    }\n}\n",
+      "raw_json": "eternal-darkness-decomp/reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-clamp-expression-cse.json",
+      "measured": {
+        "match_percent": 99.90148,
+        "left_size": 812,
+        "right_size": 812,
+        "diff_counts": {
+          "MATCH": 199,
+          "DIFF_ARG_MISMATCH": 4
+        }
+      },
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801EC350 fn_801EC350 -o reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-clamp-expression-cse.json --format json-pretty -c function_reloc_diffs=name_address",
+      "retained": false
+    },
+    {
+      "name": "center-association",
+      "hypothesis": "Reverse the last two center addends to counter MWCC commutative expression reassociation.",
+      "source": "typedef unsigned char u8;\ntypedef signed char s8;\n\nextern u8 fn_801EC304(u8*, int, int);\nextern void fn_801EC318(u8*, int, int, u8);\nextern int fn_800FBFB0(void);\n\nvoid fn_801EC350(u8* data, int x, int y, int width, int height)\n{\n    u8 top_left = fn_801EC304(data, x, y);\n    u8 bottom_left = fn_801EC304(data, x, y + height);\n    u8 bottom_right = fn_801EC304(data, x + width, y + height);\n    u8 top_right = fn_801EC304(data, x + width, y);\n    int average;\n    s8 offset;\n    int value;\n    int span;\n\n    average = (top_left + bottom_left) >> 1;\n    value = fn_800FBFB0() % height;\n    offset = value - (height >> 1);\n    if (fn_801EC304(data, x, (y + (height >> 1))) == 0) {\n        fn_801EC318(data, x, (y + (height >> 1)), (average + offset) > 255 ? 255 : ((average + offset) < 0 ? 0 : (average + offset)));\n    }\n\n    average = (top_left + top_right) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), y) == 0) {\n        offset = fn_800FBFB0() % width - (width >> 1);\n        fn_801EC318(data, (x + (width >> 1)), y, (average + offset) > 255 ? 255 : ((average + offset) < 0 ? 0 : (average + offset)));\n    }\n\n    average = (bottom_left + bottom_right) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), y + height) == 0) {\n        offset = fn_800FBFB0() % width - (width >> 1);\n        fn_801EC318(data, (x + (width >> 1)), y + height, (average + offset) > 255 ? 255 : ((average + offset) < 0 ? 0 : (average + offset)));\n    }\n\n    average = (top_right + bottom_right) >> 1;\n    if (fn_801EC304(data, x + width, (y + (height >> 1))) == 0) {\n        offset = fn_800FBFB0() % height - (height >> 1);\n        fn_801EC318(data, x + width, (y + (height >> 1)), (average + offset) > 255 ? 255 : ((average + offset) < 0 ? 0 : (average + offset)));\n    }\n\n    average = (top_left + bottom_left + bottom_right + top_right) >> 2;\n    span = (height + width) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), (y + (height >> 1))) == 0) {\n        offset = fn_800FBFB0() % span - (span >> 1);\n        fn_801EC318(data, (x + (width >> 1)), (y + (height >> 1)), (average + offset) > 255 ? 255 : ((average + offset) < 0 ? 0 : (average + offset)));\n    }\n\n    if (width > 1 || height > 1) {\n        width >>= 1;\n        height >>= 1;\n        fn_801EC350(data, x, y, width, height);\n        fn_801EC350(data, x + width, y, width, height);\n        fn_801EC350(data, x, y + height, width, height);\n        fn_801EC350(data, x + width, y + height, width, height);\n    }\n}\n",
+      "raw_json": "eternal-darkness-decomp/reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-center-association.json",
+      "measured": {
+        "match_percent": 99.95074,
+        "left_size": 812,
+        "right_size": 812,
+        "diff_counts": {
+          "MATCH": 201,
+          "DIFF_ARG_MISMATCH": 2
+        }
+      },
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801EC350 fn_801EC350 -o reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-center-association.json --format json-pretty -c function_reloc_diffs=name_address",
+      "retained": false
+    },
+    {
+      "name": "independent-right-average",
+      "hypothesis": "Separate the right-edge average live range from the reused bottom-edge average variable so it can reuse r16.",
+      "source": "typedef unsigned char u8;\ntypedef signed char s8;\n\nextern u8 fn_801EC304(u8*, int, int);\nextern void fn_801EC318(u8*, int, int, u8);\nextern int fn_800FBFB0(void);\n\nvoid fn_801EC350(u8* data, int x, int y, int width, int height)\n{\n    u8 top_left = fn_801EC304(data, x, y);\n    u8 bottom_left = fn_801EC304(data, x, y + height);\n    u8 bottom_right = fn_801EC304(data, x + width, y + height);\n    u8 top_right = fn_801EC304(data, x + width, y);\n    int average;\n    int right_average;\n    s8 offset;\n    int value;\n    int span;\n\n    average = (top_left + bottom_left) >> 1;\n    value = fn_800FBFB0() % height;\n    offset = value - (height >> 1);\n    if (fn_801EC304(data, x, (y + (height >> 1))) == 0) {\n        fn_801EC318(data, x, (y + (height >> 1)), (average + offset) > 255 ? 255 : ((average + offset) < 0 ? 0 : (average + offset)));\n    }\n\n    average = (top_left + top_right) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), y) == 0) {\n        offset = fn_800FBFB0() % width - (width >> 1);\n        fn_801EC318(data, (x + (width >> 1)), y, (average + offset) > 255 ? 255 : ((average + offset) < 0 ? 0 : (average + offset)));\n    }\n\n    average = (bottom_left + bottom_right) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), y + height) == 0) {\n        offset = fn_800FBFB0() % width - (width >> 1);\n        fn_801EC318(data, (x + (width >> 1)), y + height, (average + offset) > 255 ? 255 : ((average + offset) < 0 ? 0 : (average + offset)));\n    }\n\n    right_average = (top_right + bottom_right) >> 1;\n    if (fn_801EC304(data, x + width, (y + (height >> 1))) == 0) {\n        offset = fn_800FBFB0() % height - (height >> 1);\n        fn_801EC318(data, x + width, (y + (height >> 1)), (right_average + offset) > 255 ? 255 : ((right_average + offset) < 0 ? 0 : (right_average + offset)));\n    }\n\n    average = (top_left + bottom_left + bottom_right + top_right) >> 2;\n    span = (height + width) >> 1;\n    if (fn_801EC304(data, (x + (width >> 1)), (y + (height >> 1))) == 0) {\n        offset = fn_800FBFB0() % span - (span >> 1);\n        fn_801EC318(data, (x + (width >> 1)), (y + (height >> 1)), (average + offset) > 255 ? 255 : ((average + offset) < 0 ? 0 : (average + offset)));\n    }\n\n    if (width > 1 || height > 1) {\n        width >>= 1;\n        height >>= 1;\n        fn_801EC350(data, x, y, width, height);\n        fn_801EC350(data, x + width, y, width, height);\n        fn_801EC350(data, x, y + height, width, height);\n        fn_801EC350(data, x + width, y + height, width, height);\n    }\n}\n",
+      "raw_json": "eternal-darkness-decomp/reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-independent-right-average.json",
+      "measured": {
+        "match_percent": 100.0,
+        "left_size": 812,
+        "right_size": 812,
+        "diff_counts": {
+          "MATCH": 203
+        }
+      },
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801EC350 fn_801EC350 -o reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-independent-right-average.json --format json-pretty -c function_reloc_diffs=name_address",
+      "retained": true
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "58879bc3-61fa-4b53-9d83-0129b32e48e9",
+  "attempt": 4,
+  "base_commit": "8cd50202409b0bb085b05a0320735f467613cddf",
+  "target": "fn_8006D548",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-58879bc3-61fa-4b53-9d83-0129b32e48e9.json"
+  ],
+  "divergence": "Canonical GC/1.3 objdiff is 93.76342%: retail is 2384 bytes and candidate is 2372 bytes. Replacing the mode-7 indexed candidate write with a moving pointer removed the candidate-only entry li r19,0, aligned table_kind/start to retail r19/r20, and moved fn_8015C390 to the retail function offset 0x34. The first remaining instruction divergence is now at function offset 0x18: retail saves mode with mr r23,r5 while candidate uses mr r21,r5. At offsets 0x2c and 0x4c, retail uses r25 for selected and preserves the entry-array base with mr r21,r24; candidate uses r23 for selected and mr r25,r24. Retail has 44 .rela.text records; candidate has 45 .rela.text records plus 8 compiler-owned jump-table .rela.data records. Full objdiff and unabridged relocation tables, including offsets, targets, and addends, are embedded in the evidence. Retail and rebuilt DOL SHA-1 values are ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}

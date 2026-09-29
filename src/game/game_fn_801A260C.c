@@ -44,49 +44,58 @@ int fn_801A260C(u8* object)
     EffectState* state;
     Particle* particle;
     float scale;
+    float alpha_scale;
+    float alpha_offset;
+    float alpha_max;
     int count;
     int i;
 
     fn_801EF384(object);
     state = (EffectState*)(object + 0x8C);
     particle = *(Particle**)(object + 0x4C);
-    scale = *(float*)(object + 0x90);
+    scale = state->field_4;
     count = object[1];
 
-    if (*(float*)(object + 0x94) < scale) {
-        scale = *(float*)(object + 0x94);
-        state->age = *(float*)(object + 0x94) + state->step;
+    if (state->age < scale) {
+        scale = state->age;
+        state->age = state->age + state->step;
     }
 
+    alpha_scale = lbl_80650D28;
+    alpha_offset = lbl_80650D2C;
+    alpha_max = lbl_80650CA8;
+
     for (i = 0; i < count; i++, particle++) {
+        int clamped;
         int value;
+        float alpha;
         if ((state->phase ^ 1) != 0) {
             float t = scale;
             if (scale >= lbl_80650D10) {
-                particle->x = particle->x + (s16)((particle->dx - particle->x) * t);
-                particle->y = particle->y + (s16)((particle->dy - particle->y) * t);
-                particle->z = particle->z + (s16)((particle->dz - particle->z) * t);
+                particle->x = (s16)(particle->x + particle->dx * t);
+                particle->y = (s16)(particle->y + particle->dy * t);
+                particle->z = (s16)(particle->z + particle->dz * t);
             } else {
                 t = state->phase * scale;
                 if (t >= lbl_80650D10) {
-                    particle->x = particle->x + (s16)((particle->dx - particle->x) * t);
-                    particle->y = particle->y + (s16)((particle->dy - particle->y) * t);
-                    particle->z = particle->z + (s16)((particle->dz - particle->z) * t);
+                    particle->x = (s16)(particle->x + particle->dx * t);
+                    particle->y = (s16)(particle->y + particle->dy * t);
+                    particle->z = (s16)(particle->z + particle->dz * t);
                 }
             }
         }
 
-        value = state->values[i] + (fn_800FBFB0() % 3) + 1;
-        if (value > 255) {
-            value = 255;
-        }
-        state->values[i] = value;
+        value = state->values[i] + (fn_800FBFB0() % 3);
+        value += 1;
+        clamped = value <= 255 ? value : 255;
+        state->values[i] = clamped;
         particle->colour0 = lbl_80607440[state->values[i]];
         particle->colour1 = lbl_80607440[state->values[i]];
         particle->colour2 = lbl_80607440[state->values[i]];
         particle->colour3 = lbl_80607440[state->values[i]];
-        particle->alpha = (u8)(lbl_80650D28 *
-            (lbl_80650D2C + (lbl_80650CA8 - state->values[i]) / lbl_80650CA8) * scale);
+        alpha = alpha_scale *
+            (alpha_offset + (alpha_max - state->values[i]) / alpha_max);
+        particle->alpha = (u8)(alpha * scale);
     }
 
     (*(u16*)(object + 0xA))++;

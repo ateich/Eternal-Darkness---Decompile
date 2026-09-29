@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "target": "fn_801270DC",
+  "source": "src/game/game_fn_801270DC.c",
+  "candidate": "counted conversion loop from packed signed-16 input to float output",
+  "hypothesis": "A fixed three-iteration scalar conversion loop might trigger a canonical MWCC fixed-size conversion/copy idiom or retain a compact loop, unlike the previously tested unrolled aggregate expressions.",
+  "result": "MWCC completely unrolls the loop and emits the same scalar integer-to-double conversion class as the aggregate candidate; it does not select paired-single quantized instructions.",
+  "build": {
+    "commands": [
+      "python3 configure.py",
+      ".tools/bin/ninja -j2"
+    ],
+    "exit_code": 0,
+    "raw_output": "build/GEDE01/main.dol: OK"
+  },
+  "canonical": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801270DC fn_801270DC -o reports/GEDE01/objdiff-efc83dc3-c196-4cd8-b5d7-0fb9cfe300cd-canonical.raw.json --format json-pretty",
+    "exit_code": 0,
+    "raw_report": "reports/GEDE01/objdiff-efc83dc3-c196-4cd8-b5d7-0fb9cfe300cd-canonical.raw.json",
+    "raw_measurement": "left .text size=76 fn_801270DC size=76 match_percent=0.0; right fn_801270DC size=168 match_percent=0.0"
+  },
+  "relocation_strict": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801270DC fn_801270DC -o reports/GEDE01/objdiff-efc83dc3-c196-4cd8-b5d7-0fb9cfe300cd-reloc-strict.raw.json --format json-pretty -c function_reloc_diffs=name_address",
+    "exit_code": 0,
+    "raw_report": "reports/GEDE01/objdiff-efc83dc3-c196-4cd8-b5d7-0fb9cfe300cd-reloc-strict.raw.json",
+    "raw_measurement": "left fn_801270DC match_percent=0.0; right fn_801270DC match_percent=0.0; each side has R_PPC_REL24 at instruction offset 32, formatted bl fn_801252D8, with implicit addend 0; generated scalar conversion additionally has two R_PPC_EMB_SDA21 constant relocations"
+  },
+  "retail_instructions": [
+    "psq_l f0, 0x0(r31), 0, qr2",
+    "psq_lu f1, 0x4(r31), 1, qr2",
+    "psq_st f0, 0x0(r30), 0, qr0",
+    "psq_stu f1, 0x8(r30), 1, qr0"
+  ],
+  "generated_conversion": "168 bytes: three lha/xoris/stw/lfd/fsubs/fmuls/stfs scalar conversions versus 76 retail bytes",
+  "gqr_evidence": "fn_801EF788 initializes SPR 914 (GQR2) to 0x04070407, signed-16 type 7 with scale 4 in both load/store halves. fn_801252D8(4) separately writes SPR 918 (GQR6), not GQR2. Retail reads the packed values through GQR2, giving the 1/16 conversion represented by 0.0625f.",
+  "constraint": "Matching paired-single precedents such as fn_8012744C and fn_8012BE64 use inline asm, which this assignment forbids.",
+  "regression": "This semantically type-correct candidate measures 0.0%, below the historical 75.89474% float-input candidate. The historical candidate reads 12 bytes and is not semantically honest for retail's 6-byte packed signed-16 input; landing the score regression requires integrator ratification.",
+  "dol": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+  },
+  "legal_audit": {
+    "command": "python3 tools/legal_audit.py",
+    "exit_code": 0,
+    "raw_output": "legal audit passed (22323 tracked project files inspected)"
+  }
+}

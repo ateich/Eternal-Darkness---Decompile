@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "assignment_id": "1b2487e1-fe99-4880-8e66-18de0b79151c",
+  "target": "fn_80155330",
+  "compiler": "GC/1.3",
+  "extra_cflags": ["-use_lmw_stmw on"],
+  "commands": [
+    "python3 configure.py",
+    ".tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_80155330.o",
+    "python3 tools/fndiff.py game/game_fn_80155330.c fn_80155330",
+    ".tools/bin/ninja -j2",
+    "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol"
+  ],
+  "measurement": {
+    "objdiff_version": "v3.6.1",
+    "retail_code_bytes": 676,
+    "candidate_code_bytes": 676,
+    "match_percent": 97.59763,
+    "retail_instruction_rows": 170,
+    "candidate_instruction_rows": 170,
+    "retail_relocation_bearing_instructions": 32,
+    "candidate_relocation_bearing_instructions": 32,
+    "canonical_100_percent": false,
+    "relocation_strict_100_percent": false
+  },
+  "relocation_types": {
+    "retail": {"R_PPC_REL24": 25, "R_PPC_ADDR16_HA": 3, "R_PPC_ADDR16_LO": 3, "R_PPC_NONE": 1},
+    "candidate": {"R_PPC_REL24": 25, "R_PPC_ADDR16_HA": 3, "R_PPC_ADDR16_LO": 3, "R_PPC_NONE": 1}
+  },
+  "raw_measured_outputs": [
+    "target 676 bytes  base 676 bytes  match 97.59763",
+    "left size 676 match_percent 97.59763 instruction_rows 170 relocations 32",
+    "right size 676 match_percent 97.59763 instruction_rows 170 relocations 32",
+    "relocation_streams_identical",
+    "full ninja: [929/931] DOL build/GEDE01/main.dol; [930/931] CHECK config/GEDE01/build.sha1; build/GEDE01/main.dol: OK; [931/931] PROGRESS",
+    "final build start 2026-09-27T23:43:33.408331912-04:00",
+    "final build end 2026-09-27T23:44:33.241005568-04:00",
+    "2026-09-27 23:44:33.016156022 -0400 build/GEDE01/main.dol",
+    "2026-09-27 23:44:32.462154348 -0400 build/GEDE01/main.elf",
+    "2026-09-27 23:43:26.083613427 -0400 build/GEDE01/src/game/game_fn_80155330.o",
+    "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+    "ea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol"
+  ],
+  "relocation_audit": "All 32 relocation-bearing instructions have identical addresses, types, semantic targets, and addends on retail and candidate, including the R_PPC_NONE lbl_802FC5BC addend 12. Canonical instruction bytes are not 100%, so relocation-strict equality is also false despite the identical relocation stream.",
+  "hypotheses_tested": [
+    "Recovered preserved 94.04142% candidate with distinct first/second Work pointer variables.",
+    "Replaced those with a reassigned Work pointer and reordered result/count/owner declarations; this aligned the prologue and first Work register allocation and measured 95.49113% at 676 bytes.",
+    "Made the next Work pointer and reassignment explicit in the fn_80147E88 argument; this preserved the retail r31-to-base-register copy and measured 96.12426%, initially with one extra owner reload.",
+    "Assigned the first fn_80148300 return back to owner before the second registration; this removed the extra reload, restored exact size, and produced the preserved 97.59763% candidate."
+  ],
+  "exact_codegen_divergence": "The code is identical from the prologue through 0x0154 and again from the second fn_80148300 call at 0x0208 through the cleanup/epilogue except for the success-loop register pair. At 0x0158 retail assigns the second Work base to r21, while GC/1.3 assigns it to r22; all second-Work base-relative operations through 0x01f0 therefore use r22 instead of r21. Retail emits field14 as li r5/stb r5 at 0x01c4/0x01d8, whereas the candidate selects r7 and schedules that stb at 0x01ec; the field2c store moves from 0x01e8 to 0x01e0. In the loop, retail uses r23 for the byte loop bound and r22 for the element induction pointer; the candidate exchanges those two registers. The WorkLocals wrapper preserves the recovered stack layout but is a reconstruction type, not a known original declaration."
+}

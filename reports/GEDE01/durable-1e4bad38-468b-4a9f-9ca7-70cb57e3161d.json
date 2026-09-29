@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "assignment_id": "1e4bad38-468b-4a9f-9ca7-70cb57e3161d",
+  "attempt": 5,
+  "base_commit": "3707b9066fe42f247654c4c60dedceb0b1728f70",
+  "target": "fn_801F1A38",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-1e4bad38-468b-4a9f-9ca7-70cb57e3161d.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1e4bad38-468b-4a9f-9ca7-70cb57e3161d/canonical.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1e4bad38-468b-4a9f-9ca7-70cb57e3161d/verification.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1e4bad38-468b-4a9f-9ca7-70cb57e3161d/relocations.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1e4bad38-468b-4a9f-9ca7-70cb57e3161d/codegen.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1e4bad38-468b-4a9f-9ca7-70cb57e3161d/experiments.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1e4bad38-468b-4a9f-9ca7-70cb57e3161d/analysis.md",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1e4bad38-468b-4a9f-9ca7-70cb57e3161d/history.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1e4bad38-468b-4a9f-9ca7-70cb57e3161d/baseline-build.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1e4bad38-468b-4a9f-9ca7-70cb57e3161d/legal-audit.log"
+  ],
+  "divergence": "Improved from 87.57238% to 98.719376% on fresh canonical AND relocation-strict objdiff. Retail and candidate are each 1796 bytes / 449 instructions with the same 0x1E0 frame. Remaining mismatch is 125 bytes in 87 instruction words, exclusively register operands: first at +0x38 group r19 versus r18, then requested r18 versus r30, flags r28 versus r20, active mask r26 versus r27, candidate-table pointer r30 versus r28, and cap-selection r0/r3 temporaries. Branch destinations, immediates, stack offsets, instruction counts and all 39 relocation offsets/types/targets/addends agree. Corrected inherited candidate+0x34 subrecord addressing, accepted-candidate loop bound, separate special-mask accumulator, debug-color locals, and typed entry/effect indexing. Retained one honest NonMatching C TU with canonical GC/1.3 settings; only its existing bias externalizer local symbol is renumbered @122 to @127. Full canonical build and legal audit pass; raw DOL SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f. The NonMatching TU is excluded from that link, so the hash does not establish candidate inclusion. All experiment patches and raw measurements are preserved."
+}

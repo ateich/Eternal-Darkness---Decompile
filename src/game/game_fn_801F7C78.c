@@ -4,6 +4,12 @@ typedef struct Vec3 {
     float z;
 } Vec3;
 
+typedef struct Vec3Bits {
+    unsigned int x;
+    unsigned int y;
+    unsigned int z;
+} Vec3Bits;
+
 typedef void (*Callback)(void*);
 
 typedef struct Obj {
@@ -17,8 +23,15 @@ typedef struct Obj {
     unsigned char pad78[0x10];
 } Obj;
 
-extern Obj lbl_8063C6B8[];
-extern unsigned char lbl_8023B7E4[];
+typedef struct Globals {
+    Obj first[12];
+    Obj second[12];
+    Obj current_first;
+    Obj current_second;
+} Globals;
+
+extern Globals lbl_8063C6B8;
+extern Vec3Bits lbl_8023B7E4;
 extern int lbl_8064C3A0;
 extern int lbl_8064C3A4;
 extern int lbl_8064D798;
@@ -44,60 +57,67 @@ extern void fn_801F7AD4(void*);
 
 #pragma use_lmw_stmw on
 #pragma opt_lifetimes off
-/* NonMatching: behavior-complete reconstruction. Retail keeps the global base
- * in r31 throughout and schedules the two Vec3 aggregate copies as interleaved
- * word stores; canonical GC/1.3 reloads the base around setup and emits the
- * loop's aggregate stores in a different order. */
+/* NonMatching: behavior-complete reconstruction. The integer-address call
+ * arguments preserve the global base across the two setup calls on 32-bit
+ * Gekko. GC/1.3 still differs in callback scheduling and derived-pointer
+ * materialization in the target-copy and final initialization blocks. */
 void fn_801F7C78(void)
 {
-    Vec3 initial = *(Vec3*)lbl_8023B7E4;
-    Obj* base = lbl_8063C6B8;
+    Vec3 initial;
+    Globals* globals = &lbl_8063C6B8;
     Obj* first;
     Obj* second;
     float zero;
     int i;
 
+    ((Vec3Bits*)&initial)->x = lbl_8023B7E4.x;
+    ((Vec3Bits*)&initial)->y = lbl_8023B7E4.y;
+    ((Vec3Bits*)&initial)->z = lbl_8023B7E4.z;
     lbl_8064C3A0 = 2;
     lbl_8064D798 = 0;
     lbl_8064C3A4 = 2;
     lbl_8064D79C = 0;
-    fn_801F7034(&base[24], 1);
-    fn_801F7034(&base[25], 1);
-    base[25].value = lbl_8065148C;
-    base[24].link = &base[25];
+    fn_801F7034((Obj*)((unsigned int)globals + 0xcc0), 1);
+    fn_801F7034((Obj*)((unsigned int)globals + 0xd48), 1);
+    globals->current_second.value = lbl_8065148C;
+    globals->current_first.link = &globals->current_second;
     fn_801FA410(2);
     fn_801F76D8(0, 0, 0, lbl_80651464);
-    base[24].callback = fn_801F7804;
-    base[25].callback = fn_801F7804;
+    globals->current_first.callback = fn_801F7804;
+    globals->current_second.callback = fn_801F7804;
     zero = lbl_8065148C;
     lbl_8064D7BC = 0;
 
-    first = base;
-    second = &base[12];
+    first = globals->second;
+    second = globals->first;
     for (i = 0; i < 12; i++) {
-        fn_801F7034(second, 1);
         fn_801F7034(first, 1);
-        first->value = zero;
-        second->link = first;
-        first->vector = initial;
-        second->vector = initial;
+        fn_801F7034(second, 1);
+        second->value = zero;
+        first->link = second;
+        ((Vec3Bits*)&second->vector)->x = ((Vec3Bits*)&initial)->x;
+        ((Vec3Bits*)&first->vector)->x = ((Vec3Bits*)&initial)->x;
+        ((Vec3Bits*)&second->vector)->y = ((Vec3Bits*)&initial)->y;
+        ((Vec3Bits*)&first->vector)->y = ((Vec3Bits*)&initial)->y;
+        ((Vec3Bits*)&second->vector)->z = ((Vec3Bits*)&initial)->z;
+        ((Vec3Bits*)&first->vector)->z = ((Vec3Bits*)&initial)->z;
         first++;
         second++;
     }
 
-    if (base[24].target != 0) {
-        base[24].vector = ((Obj*)base[24].target)->vector;
+    if (globals->current_first.target != 0) {
+        globals->current_first.vector = ((Obj*)globals->current_first.target)->vector;
     }
 
-    second = &base[12];
+    second = globals->second;
     FLT(second, 0x440) = lbl_80651490;
     FLT(second, 0x444) = lbl_80651494;
     FLT(second, 0x448) = lbl_8065148C;
     CB(second, 0x6C) = fn_801F7AD4;
     CB(second, 0xF4) = fn_801F7804;
     FLT(second, 0x474) = lbl_80651498;
-    VEC(base, 0x440) = VEC(second, 0x440);
-    FLT(base, 0x440) = lbl_8065149C;
+    VEC(globals->first, 0x440) = VEC(second, 0x440);
+    FLT(globals->first, 0x440) = lbl_8065149C;
 }
 #pragma use_lmw_stmw off
 #pragma opt_lifetimes reset

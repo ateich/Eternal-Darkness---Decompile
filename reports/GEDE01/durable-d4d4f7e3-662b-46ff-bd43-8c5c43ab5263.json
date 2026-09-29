@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "d4d4f7e3-662b-46ff-bd43-8c5c43ab5263",
+  "attempt": 4,
+  "base_commit": "945938dcb204fdd7712dfd185b569c1d633921f8",
+  "target": "fn_801C3278",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-d4d4f7e3-662b-46ff-bd43-8c5c43ab5263.json"
+  ],
+  "divergence": "Canonical and relocation-strict GC/1.2.5n objdiff both measure 86.88525%, with exact 488-byte .text sizes. The byte-offset lifetime reconstruction now matches retail's r27-r31 save set, in-place mulli r28, and sthu generation-pointer construction. Remaining differences begin with generated code materializing lbl_80627D60@l before the prologue instead of after stmw; generated code uses separate stb plus reload for the handle-map slot instead of retail's stbu, different volatile registers and compare operand order in the generation search, record-base reuse rather than retail's offset-first callback address formation, and clrlwi/or rather than rlwimi for the successful return value. Relocation targets and addends were compared with function_reloc_diffs=name_address."
+}

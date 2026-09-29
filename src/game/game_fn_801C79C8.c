@@ -3,83 +3,208 @@ typedef unsigned int u32;
 
 extern float lbl_80252F2C[];
 extern float lbl_80253148[];
+extern const float lbl_80650F88;
+extern const float lbl_80650F90;
+extern const float lbl_80650FA0;
+extern const float lbl_80650FA4;
+extern const float lbl_80650FA8;
+extern const float lbl_80650FAC;
 extern float fn_800F6318(float);
 extern float fn_800F6264(float);
 extern u32 fn_800F5C54(float);
 
-static float wrap_unit(float value)
+static inline float wrap_unit(float value)
 {
     float one = 1.0f;
-    if (__fabs(value) < one) {
-        return value;
-    }
-    return value - one * fn_800F6264(fn_800F6318(value / one));
+    /* Keep the multiply and subtract as separate float expressions. */
+    float product;
+    if (__fabs(one) > __fabs(value)) return value;
+    product = one * fn_800F6264(fn_800F6318(value / one));
+    return value - product;
 }
 
-/* Trilinear lookup used to construct two RGB triples.  The interpolation
- * arithmetic remains under reconstruction; keeping it in C preserves the
- * recovered interface, table selection, phase handling, and output shape. */
 void fn_801C79C8(u8 table_kind, float* output, u32 packed_min, u32 packed_max,
-                 float x, float y, float z, u8 bias_x, u8 alternate_layout)
+                 float x, float y, float z, u32 bias_x, u32 alternate_layout)
 {
     float* table;
-    float sx;
-    float sy;
-    float tx;
-    float ty;
-    u32 ix;
-    u32 iy;
-    u32 ix1;
-    u32 iy1;
-    float fx;
-    float fy;
-    float fz;
-    u32 iz;
+    float* fixed = lbl_80253148;
+    float a, b, af, bf, caf, cbf, old_af, old_caf, ca, cb;
+    u32 ai, bi, cai, cbi, old_ai, old_cai;
+    float wb, wc, first, second;
+    float scaled_x, fraction_x, sample_x;
+    u32 index_x;
+    float scaled_y, fraction_y, sample_y;
+    u32 index_y;
+    float scaled_z, fraction_z, sample_z;
+    u32 index_z;
+    float scaled_alternate_x, fraction_alternate_x, sample_alternate_x;
+    u32 index_alternate_x;
+    float scaled_alternate_y, fraction_alternate_y, sample_alternate_y;
+    u32 index_alternate_y;
 
-    table = table_kind == 0 ? lbl_80253148 : lbl_80252F2C;
-    if ((packed_min & 0xFF000000) == 0x80000000) {
+    table = table_kind == 0 ? fixed : lbl_80252F2C;
+    /* The packed sentinel is 0x00800000, not the sign bit. */
+    if (packed_min == 0x00800000) {
         packed_min = 0;
         packed_max = 0x007F0000;
     }
-
-    sx = ((packed_min <= 0x10000 ? 0 : packed_min - 0x10000) / 65536.0f) * (1.0f / 127.0f);
-    sy = ((packed_max <= 0x10000 ? 0 : packed_max - 0x10000) / 65536.0f) * (1.0f / 127.0f);
+    packed_min = packed_min <= 0x10000 ? 0 : packed_min - 0x10000;
+    packed_max = packed_max <= 0x10000 ? 0 : packed_max - 0x10000;
+    a = lbl_80650FA0 * packed_min;
+    b = lbl_80650FA0 * packed_max;
 
     if (alternate_layout != 0) {
-        tx = wrap_unit(sx);
-        ix = fn_800F5C54(sx);
-        ty = 1.0f - sx;
-        fy = wrap_unit(ty);
-        iy = fn_800F5C54(ty);
+        old_af = wrap_unit(a);
+        old_ai = fn_800F5C54(a);
+        ca = lbl_80650FA4 - a;
+        old_caf = wrap_unit(ca);
+        old_cai = fn_800F5C54(ca);
     }
-
     if (bias_x != 0) {
-        sx = 1.0f + 0.5f * (sx - 1.0f);
+        first = lbl_80650FA8 * (a - 1.0f);
+        a = 1.0f + first;
     }
-    fx = wrap_unit(sx);
-    ix1 = fn_800F5C54(sx);
-    fy = wrap_unit(sy);
-    iy1 = fn_800F5C54(sy);
-    tx = wrap_unit(1.0f - sx);
-    ix = fn_800F5C54(1.0f - sx);
-    ty = wrap_unit(1.0f - sy);
-    iy = fn_800F5C54(1.0f - sy);
+    af = wrap_unit(a);
+    ai = fn_800F5C54(a);
+    bf = wrap_unit(b);
+    bi = fn_800F5C54(b);
+    ca = lbl_80650FA4 - a;
+    cb = lbl_80650FA4 - b;
+    caf = wrap_unit(ca);
+    cai = fn_800F5C54(ca);
+    cbf = wrap_unit(cb);
+    cbi = fn_800F5C54(cb);
 
-    fz = 127.0f * x;
-    iz = fn_800F5C54(fz);
-    output[0] = table[iz] * (1.0f - fx) + table[ix1] * fx;
-    output[1] = table[iz + 1] * (1.0f - fy) + table[iy1] * fy;
-    output[2] = table[ix] * tx + table[iy] * ty;
+    /* Output stores may alias the tables: reload bands between rows. */
+    if (alternate_layout == 0) {
+        float* next_band;
 
-    fz = 127.0f * y;
-    iz = fn_800F5C54(fz);
-    output[3] = table[iz] * (1.0f - fx) + table[ix1] * fx;
-    output[4] = table[iz + 1] * (1.0f - fy) + table[iy1] * fy;
-    output[5] = table[ix] * tx + table[iy] * ty;
+        scaled_x = lbl_80650F88 * x;
+        index_x = fn_800F5C54(scaled_x);
+        next_band = fixed + 130;
+        fraction_x = scaled_x - index_x;
+        first = (1.0f - fraction_x) * table[index_x];
+        second = fraction_x * table[index_x + 1];
+        sample_x = first + second;
+        first = (1.0f - bf) * fixed[bi + 129];
+        second = bf * next_band[bi];
+        wc = first + second;
+        output[2] = lbl_80650F90 * (sample_x * wc);
+        first = (1.0f - cbf) * fixed[cbi + 129];
+        second = cbf * next_band[cbi];
+        wc = first + second;
+        sample_x = sample_x * wc;
+        first = (1.0f - af) * fixed[ai + 129];
+        second = af * next_band[ai];
+        wc = first + second;
+        output[1] = sample_x * wc;
+        first = (1.0f - caf) * fixed[cai + 129];
+        second = caf * next_band[cai];
+        wc = first + second;
+        output[0] = sample_x * wc;
 
-    fz = 127.0f * z;
-    iz = fn_800F5C54(fz);
-    output[6] = table[iz] * (1.0f - fx) + table[ix1] * fx;
-    output[7] = table[iz + 1] * (1.0f - fy) + table[iy1] * fy;
-    output[8] = table[ix] * tx + table[iy] * ty;
+        scaled_y = lbl_80650F88 * y;
+        index_y = fn_800F5C54(scaled_y);
+        fraction_y = scaled_y - index_y;
+        first = (1.0f - fraction_y) * table[index_y];
+        second = fraction_y * table[index_y + 1];
+        sample_y = first + second;
+        first = (1.0f - bf) * fixed[bi + 129];
+        second = bf * next_band[bi];
+        wc = first + second;
+        output[5] = lbl_80650F90 * (sample_y * wc);
+        first = (1.0f - cbf) * fixed[cbi + 129];
+        second = cbf * next_band[cbi];
+        wc = first + second;
+        sample_y = sample_y * wc;
+        first = (1.0f - af) * fixed[ai + 129];
+        second = af * next_band[ai];
+        wc = first + second;
+        output[4] = sample_y * wc;
+        first = (1.0f - caf) * fixed[cai + 129];
+        second = caf * next_band[cai];
+        wc = first + second;
+        output[3] = sample_y * wc;
+
+        scaled_z = lbl_80650F88 * z;
+        index_z = fn_800F5C54(scaled_z);
+        fraction_z = scaled_z - index_z;
+        first = (1.0f - fraction_z) * table[index_z];
+        second = fraction_z * table[index_z + 1];
+        sample_z = first + second;
+        first = (1.0f - bf) * fixed[bi + 129];
+        second = bf * next_band[bi];
+        wc = first + second;
+        output[8] = lbl_80650F90 * (sample_z * wc);
+        first = (1.0f - cbf) * fixed[cbi + 129];
+        second = cbf * next_band[cbi];
+        wc = first + second;
+        sample_z = sample_z * wc;
+        first = (1.0f - af) * fixed[ai + 129];
+        second = af * next_band[ai];
+        wc = first + second;
+        output[7] = sample_z * wc;
+        first = (1.0f - caf) * fixed[cai + 129];
+        second = caf * next_band[cai];
+        wc = first + second;
+        output[6] = sample_z * wc;
+    } else {
+        float* next_band;
+        scaled_alternate_x = lbl_80650F88 * x;
+        index_alternate_x = fn_800F5C54(scaled_alternate_x);
+        next_band = fixed + 130;
+        fraction_alternate_x = scaled_alternate_x - index_alternate_x;
+        first = (1.0f - fraction_alternate_x) * table[index_alternate_x];
+        second = fraction_alternate_x * table[index_alternate_x + 1];
+        sample_alternate_x = first + second;
+        first = (1.0f - bf) * fixed[bi + 129];
+        second = bf * next_band[bi];
+        wc = first + second;
+        wb = sample_alternate_x * wc;
+        first = (1.0f - cbf) * fixed[cbi + 129];
+        second = cbf * next_band[cbi];
+        wc = first + second;
+        sample_alternate_x = sample_alternate_x * wc;
+        first = (1.0f - af) * fixed[ai + 129];
+        second = af * next_band[ai];
+        wc = first + second;
+        output[1] = sample_alternate_x * wc;
+        first = (1.0f - caf) * fixed[cai + 129];
+        second = caf * next_band[cai];
+        wc = first + second;
+        output[0] = sample_alternate_x * wc;
+        /* This layout uses the first sample for both outer channel pairs.
+         * Its old-phase lower tap is at +0x214; the upper tap is +0x208. */
+        first = (1.0f - old_af) * fixed[old_ai + 133];
+        second = old_af * next_band[old_ai];
+        output[7] = wb * (first + second);
+        first = (1.0f - old_caf) * fixed[old_cai + 133];
+        second = old_caf * next_band[old_cai];
+        output[6] = wb * (first + second);
+
+        scaled_alternate_y = lbl_80650F88 * y;
+        index_alternate_y = fn_800F5C54(scaled_alternate_y);
+        fraction_alternate_y = scaled_alternate_y - index_alternate_y;
+        first = (1.0f - fraction_alternate_y) * table[index_alternate_y];
+        second = fraction_alternate_y * table[index_alternate_y + 1];
+        sample_alternate_y = first + second;
+        first = (1.0f - bf) * fixed[bi + 129];
+        second = bf * next_band[bi];
+        wc = first + second;
+        output[5] = lbl_80650F90 * (sample_alternate_y * wc);
+        first = (1.0f - cbf) * fixed[cbi + 129];
+        second = cbf * next_band[cbi];
+        wc = first + second;
+        sample_alternate_y = sample_alternate_y * wc;
+        first = (1.0f - af) * fixed[ai + 129];
+        second = af * next_band[ai];
+        wc = first + second;
+        output[4] = sample_alternate_y * wc;
+        first = (1.0f - caf) * fixed[cai + 129];
+        second = caf * next_band[cai];
+        wc = first + second;
+        output[3] = sample_alternate_y * wc;
+        output[2] = lbl_80650FAC;
+        output[8] = lbl_80650FAC;
+    }
 }

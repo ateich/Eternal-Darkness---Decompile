@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "assignment_id": "09bed82e-c80e-4753-b97d-bb17efae00b8",
+  "target": "fn_801D0050",
+  "source": "eternal-darkness-decomp/src/game/game_fn_801D0050.c",
+  "registration": "Object(NonMatching, \"game/game_fn_801D0050.c\", mw_version=\"GC/1.3\", extra_cflags=[\"-use_lmw_stmw on\"])",
+  "hypothesis": "Delay perform and special initialization to their first semantic use, route subsystem rejection paths through the shared result epilogue, use distinct old-coordinate stack slots, and model lbl_80332140 as an addressed global object so GC/1.3 recovers more of retail's control-flow and stack layout.",
+  "raw_outputs": {
+    "canonical": "eternal-darkness-decomp/reports/GEDE01/objdiff-09bed82e-c80e-4753-b97d-bb17efae00b8-canonical.raw.json",
+    "relocation_strict": "eternal-darkness-decomp/reports/GEDE01/objdiff-09bed82e-c80e-4753-b97d-bb17efae00b8-reloc-strict.raw.json"
+  },
+  "commands": [
+    {
+      "command": "python3 configure.py && .tools/bin/ninja -j2",
+      "exit_code": 0,
+      "raw_output": "build/GEDE01/main.dol: OK"
+    },
+    {
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801D0050 fn_801D0050 -o reports/GEDE01/objdiff-09bed82e-c80e-4753-b97d-bb17efae00b8-canonical.raw.json --format json-pretty",
+      "exit_code": 0,
+      "raw_output_file": "eternal-darkness-decomp/reports/GEDE01/objdiff-09bed82e-c80e-4753-b97d-bb17efae00b8-canonical.raw.json"
+    },
+    {
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801D0050 fn_801D0050 -o reports/GEDE01/objdiff-09bed82e-c80e-4753-b97d-bb17efae00b8-reloc-strict.raw.json --format json-pretty -c function_reloc_diffs=name_address",
+      "exit_code": 0,
+      "raw_output_file": "eternal-darkness-decomp/reports/GEDE01/objdiff-09bed82e-c80e-4753-b97d-bb17efae00b8-reloc-strict.raw.json"
+    },
+    {
+      "command": "cmp -s reports/GEDE01/objdiff-09bed82e-c80e-4753-b97d-bb17efae00b8-canonical.raw.json reports/GEDE01/objdiff-09bed82e-c80e-4753-b97d-bb17efae00b8-reloc-strict.raw.json",
+      "exit_code": 0,
+      "raw_output": "canonical_strict_cmp_exit=0"
+    },
+    {
+      "command": "sha1sum build/GEDE01/main.dol",
+      "exit_code": 0,
+      "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+    },
+    {
+      "command": "python3 tools/legal_audit.py",
+      "exit_code": 0,
+      "raw_output": "legal audit passed (23257 tracked project files inspected)"
+    }
+  ],
+  "canonical": {
+    "match_percent": 95.95269,
+    "retail_bytes": 1860,
+    "generated_bytes": 1840,
+    "retail_aligned_rows": 468,
+    "generated_aligned_rows": 468
+  },
+  "relocation_strict": {
+    "match_percent": 95.95269,
+    "canonical_json_equal": true,
+    "retail_relocation_annotations": 95,
+    "generated_relocation_annotations": 94,
+    "exact_rows": 335,
+    "argument_mismatches": 116,
+    "deletes": 8,
+    "inserts": 3,
+    "opcode_mismatches": 1,
+    "replacements": 5
+  },
+  "divergence": "Generated code is 1840 bytes versus retail's 1860 and retains a 0x90-byte frame versus retail's 0xA0. The remaining divergence is primarily persistent-register coloring and aggregate stack placement, plus missing low-word masking after fn_8020123C and expression ordering in the 0x300 payload and final special-position paths. A bounded aggregate-stack-struct experiment produced the exact retail frame and scalar offsets but reduced strict similarity to 93.39785%, so it was not retained."
+}

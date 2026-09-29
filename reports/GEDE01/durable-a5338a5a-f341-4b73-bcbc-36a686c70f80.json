@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "assignment_id": "a5338a5a-f341-4b73-bcbc-36a686c70f80",
+  "attempt": 5,
+  "base_commit": "38886f6b21af511f24d9912079db5daf2f51d7be",
+  "target": "fn_801E4314",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-a5338a5a-f341-4b73-bcbc-36a686c70f80.json",
+    "eternal-darkness-decomp/reports/GEDE01/canonical-a5338a5a-f341-4b73-bcbc-36a686c70f80.json",
+    "eternal-darkness-decomp/reports/GEDE01/verification-a5338a5a-f341-4b73-bcbc-36a686c70f80.json",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-a5338a5a-f341-4b73-bcbc-36a686c70f80.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-a5338a5a-f341-4b73-bcbc-36a686c70f80.txt",
+    "eternal-darkness-decomp/reports/GEDE01/configure-a5338a5a-f341-4b73-bcbc-36a686c70f80.txt",
+    "eternal-darkness-decomp/reports/GEDE01/retail-relocations-a5338a5a-f341-4b73-bcbc-36a686c70f80.txt",
+    "eternal-darkness-decomp/reports/GEDE01/candidate-relocations-a5338a5a-f341-4b73-bcbc-36a686c70f80.txt",
+    "eternal-darkness-decomp/reports/GEDE01/legal-audit-a5338a5a-f341-4b73-bcbc-36a686c70f80.txt",
+    "eternal-darkness-decomp/reports/GEDE01/sha1-a5338a5a-f341-4b73-bcbc-36a686c70f80.txt"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 89.195915%; candidate is 988 bytes versus retail's 980. New separate float-to-short/float-to-int casts share fctiwz but retain two stfd/lwz result accesses (candidate 0x50/0x54 and 0x58/0x64, versus retail 0x3c/0x48). This improves the alignment score, not code size or byte equality. First divergence remains at 0x8: retail loads lbl_80651278, while candidate compares dark and delays that load until 0x44. Retail depth/x/width/y/height occupy r31/r30/r29/r28/r27; candidate uses r27/r28/r29/r30/r31, with centers and texture-bound saved registers also permuted. All 63 real ELF relocations have identical ordered types, targets and addends, but offsets differ; objdiff shows 64 relocation-bearing instructions per side. All sixteen vertex/color/texture emissions remain represented. NonMatching registration is retained."
+}

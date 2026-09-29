@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "assignment_id": "1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b",
+  "attempt": 5,
+  "base_commit": "637f4114978f4a2c7b0015d8f7ce9fb172dd555b",
+  "target": "fn_80142A70",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/manifest.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/retained-canonical.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/configure.txt",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/full-build.txt",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/dol-sha1.txt",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/legal-audit.txt",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/compiler-command.txt",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/target-disassembly.txt"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 88.87172%; generated function is 1380 bytes versus retail 1372. Frame and saved FPRs agree (0xC0, f30-f31), but generated saves r23-r31 instead of r22-r31. Retail retains lbl_805B1310 in r31 across the allocator call and derives pool addresses at +0xF0 and +0x25B0; candidate materializes separate pool symbols. First-loop vertex accesses and signed index narrowing now agree in form, but register assignment and division scheduling differ. Floating-point conversion/register scheduling differs, and the conversion constant relocation targets a compiler-local constant rather than lbl_80650438. No byte or relocation match is claimed."
+}

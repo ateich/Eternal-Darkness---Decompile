@@ -1,0 +1,183 @@
+{
+  "assignment_id": "1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b",
+  "base_commit": "637f4114978f4a2c7b0015d8f7ce9fb172dd555b",
+  "source": "eternal-darkness-decomp/src/game/game_fn_80142A70.c",
+  "source_sha256": "1317de253b1cb599756dbb430a2685e89391d329a6f082d71767dc0ab8382547",
+  "compiler": "GC/1.3, existing canonical flags including -use_lmw_stmw on; see compiler-command.txt",
+  "registration": "Existing NonMatching registration and splits retained without edits. One independent C translation unit.",
+  "prior_recovery_commit": "1dc57e5de4945ef1a38712e575a891b4beadb02d",
+  "experiments": [
+    {
+      "name": "recovered",
+      "hypothesis": "Recover the exact retained source from commit 1dc57e5de4945ef1a38712e575a891b4beadb02d and remeasure; no historical intermediate scores are treated as new evidence.",
+      "patch_against_accepted_base": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/recovered.patch",
+      "build_log": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/recovered-build.txt",
+      "disassembly": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/recovered-disassembly.txt",
+      "measurements": {
+        "canonical": {
+          "match_percent": 76.86006,
+          "target_bytes": 1372,
+          "candidate_bytes": 1356,
+          "raw_output": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/recovered-canonical.json",
+          "command_log": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/recovered-canonical-command.txt"
+        },
+        "strict": {
+          "match_percent": 76.86006,
+          "target_bytes": 1372,
+          "candidate_bytes": 1356,
+          "raw_output": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/recovered-strict.json",
+          "command_log": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/recovered-strict-command.txt"
+        }
+      }
+    },
+    {
+      "name": "scalar_vertices",
+      "hypothesis": "Distinct primary hypothesis: elevated vertices use explicit x/y/z assignments, modulo reads slot->count, and next index is narrowed to s16. Retail lha/sth, lbz divisor and extsh support these source forms.",
+      "patch_against_accepted_base": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/scalar_vertices.patch",
+      "build_log": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/scalar_vertices-build.txt",
+      "disassembly": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/scalar_vertices-disassembly.txt",
+      "measurements": {
+        "canonical": {
+          "match_percent": 86.49854,
+          "target_bytes": 1372,
+          "candidate_bytes": 1380,
+          "raw_output": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/scalar_vertices-canonical.json",
+          "command_log": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/scalar_vertices-canonical-command.txt"
+        },
+        "strict": {
+          "match_percent": 86.49854,
+          "target_bytes": 1372,
+          "candidate_bytes": 1380,
+          "raw_output": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/scalar_vertices-strict.json",
+          "command_log": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/scalar_vertices-strict-command.txt"
+        }
+      }
+    },
+    {
+      "name": "delayed_quads",
+      "hypothesis": "Move quad pool initialization after slot setup to align address lifetime with retail.",
+      "patch_against_accepted_base": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/delayed_quads.patch",
+      "build_log": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/delayed_quads-build.txt",
+      "disassembly": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/delayed_quads-disassembly.txt",
+      "measurements": {
+        "canonical": {
+          "match_percent": 88.655975,
+          "target_bytes": 1372,
+          "candidate_bytes": 1380,
+          "raw_output": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/delayed_quads-canonical.json",
+          "command_log": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/delayed_quads-canonical-command.txt"
+        },
+        "strict": {
+          "match_percent": 88.655975,
+          "target_bytes": 1372,
+          "candidate_bytes": 1380,
+          "raw_output": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/delayed_quads-strict.json",
+          "command_log": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/delayed_quads-strict-command.txt"
+        }
+      }
+    },
+    {
+      "name": "z_first",
+      "hypothesis": "Compute dz before dx/dy to reproduce the order of stack conversion slots.",
+      "patch_against_accepted_base": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/z_first.patch",
+      "build_log": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/z_first-build.txt",
+      "disassembly": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/z_first-disassembly.txt",
+      "measurements": {
+        "canonical": {
+          "match_percent": 88.87172,
+          "target_bytes": 1372,
+          "candidate_bytes": 1380,
+          "raw_output": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/z_first-canonical.json",
+          "command_log": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/z_first-canonical-command.txt"
+        },
+        "strict": {
+          "match_percent": 88.87172,
+          "target_bytes": 1372,
+          "candidate_bytes": 1380,
+          "raw_output": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/z_first-strict.json",
+          "command_log": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/z_first-strict-command.txt"
+        }
+      }
+    },
+    {
+      "name": "offset_first",
+      "hypothesis": "Swap integer addition operands in elevated z assignments; no measured improvement.",
+      "patch_against_accepted_base": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/offset_first.patch",
+      "build_log": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/offset_first-build.txt",
+      "disassembly": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/offset_first-disassembly.txt",
+      "measurements": {
+        "canonical": {
+          "match_percent": 88.87172,
+          "target_bytes": 1372,
+          "candidate_bytes": 1380,
+          "raw_output": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/offset_first-canonical.json",
+          "command_log": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/offset_first-canonical-command.txt"
+        },
+        "strict": {
+          "match_percent": 88.87172,
+          "target_bytes": 1372,
+          "candidate_bytes": 1380,
+          "raw_output": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/offset_first-strict.json",
+          "command_log": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/offset_first-strict-command.txt"
+        }
+      }
+    },
+    {
+      "name": "typed_pool_layout",
+      "hypothesis": "Follow-up to corrected vertex semantics: declare the three pools as typed fields of one local-TU aggregate with slots[12], work[84], quads[84]. Unlike a byte-offset pointer base, this tests aggregate aliasing/lowering; score regressed, variant rejected.",
+      "patch_against_accepted_base": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/typed_pool_layout.patch",
+      "build_log": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/typed_pool_layout-build.txt",
+      "disassembly": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/typed_pool_layout-disassembly.txt",
+      "measurements": {
+        "canonical": {
+          "match_percent": 70.1516,
+          "target_bytes": 1372,
+          "candidate_bytes": 1404,
+          "raw_output": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/typed_pool_layout-canonical.json",
+          "command_log": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/typed_pool_layout-canonical-command.txt"
+        },
+        "strict": {
+          "match_percent": 70.1516,
+          "target_bytes": 1372,
+          "candidate_bytes": 1404,
+          "raw_output": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/typed_pool_layout-strict.json",
+          "command_log": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/typed_pool_layout-strict-command.txt"
+        }
+      }
+    },
+    {
+      "name": "retained",
+      "hypothesis": "Restore z_first, the strongest measured variant; no aggregate pool declaration retained.",
+      "patch_against_accepted_base": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/retained.patch",
+      "build_log": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/retained-build.txt",
+      "disassembly": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/retained-disassembly.txt",
+      "measurements": {
+        "canonical": {
+          "match_percent": 88.87172,
+          "target_bytes": 1372,
+          "candidate_bytes": 1380,
+          "raw_output": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/retained-canonical.json",
+          "command_log": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/retained-canonical-command.txt"
+        },
+        "strict": {
+          "match_percent": 88.87172,
+          "target_bytes": 1372,
+          "candidate_bytes": 1380,
+          "raw_output": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/retained-strict.json",
+          "command_log": "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/retained-strict-command.txt"
+        }
+      }
+    }
+  ],
+  "reproduction": "From an isolated checkout of the accepted base, apply one variant .patch from the repository root (patches are independent, not cumulative). Within eternal-darkness-decomp run python3 configure.py, then python3 reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/measure.py <new-label>. measure.py preserves raw tool outputs and the exact patch. Run .tools/bin/ninja -j2 for the full DOL verification.",
+  "verification_logs": [
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/configure.txt",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/full-build.txt",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/dol-sha1.txt",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/legal-audit.txt",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/compiler-command.txt",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-1b929fbd-9ddc-4f7d-8bd1-3cdc982cba0b/target-disassembly.txt"
+  ],
+  "dol_verification_scope": "The required matching DOL build links retail for this NonMatching function; its valid SHA-1 does not imply that the reconstructed function matches.",
+  "divergence": "Canonical and relocation-strict objdiff both measure 88.87172%; generated function is 1380 bytes versus retail 1372. Frame and saved FPRs agree (0xC0, f30-f31), but generated saves r23-r31 instead of r22-r31. Retail retains lbl_805B1310 in r31 across the allocator call and derives pool addresses at +0xF0 and +0x25B0; candidate materializes separate pool symbols. First-loop vertex accesses and signed index narrowing now agree in form, but register assignment and division scheduling differ. Floating-point conversion/register scheduling differs, and the conversion constant relocation targets a compiler-local constant rather than lbl_80650438. No byte or relocation match is claimed."
+}

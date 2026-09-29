@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "assignment_id": "8baa90aa-10e3-413b-90d4-472b0aa1d477",
+  "attempt": 5,
+  "base_commit": "7a79b3940ed6cdfe99c53cdd2ecb61bf7519ca87",
+  "target": "fn_801B7A7C",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-8baa90aa-10e3-413b-90d4-472b0aa1d477.json",
+    "eternal-darkness-decomp/reports/GEDE01/canonical-8baa90aa-10e3-413b-90d4-472b0aa1d477.json",
+    "eternal-darkness-decomp/reports/GEDE01/verification-8baa90aa-10e3-413b-90d4-472b0aa1d477.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 93.954544%. Retail and candidate are 792 bytes. Candidate has a 0x50 stack frame versus retail 0x60; long-lived GPR assignment, callback initialization/address formation, and sample-buffer stack placement differ. Candidate shares the 0xC sample buffer where retail uses primary 0x18 and auxiliary 0xC. Explicit float casts reproduce both separate fmuls/fsubs pairs with canonical fp_contract on, and a cached reference reproduces the lbl_80650F00 relocation. The function remains NonMatching."
+}

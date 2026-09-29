@@ -1,0 +1,43 @@
+{
+  "name": "destination-0-index-base-dest-step",
+  "hypothesis": "Separate destination formation from indexed pointer update at call 0 using index-base-dest-step ordering.",
+  "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\ntypedef unsigned int u32;\n\ntypedef struct Header {\n    u32 field00;\n    u32 field04;\n    u32 argument;\n    u32 field0C;\n    u32 field10;\n    u32 field14;\n    u32 field18;\n    u16 field1C;\n    u8 pad1E[0x22];\n} Header;\n\ntypedef struct Record {\n    u16 flags;\n    u8 first_index;\n    u8 second_index;\n    u8 pad04[0xC];\n} Record;\n\nextern u32 lbl_8064D7BC;\nextern u32 lbl_8064C3A8;\nextern u32 lbl_8064C3A0;\nextern u32 lbl_8064D798;\nextern u32 lbl_8064C3A4;\nextern u32 lbl_8064D79C;\nextern u32 lbl_8064D18C;\ntypedef struct BlockGlobals {\n    u8 first[0x660];\n    u8 second[0x660];\n    u8 primary[0x88];\n    u8 secondary[0x88];\n    u8 entries[1];\n} BlockGlobals;\nextern BlockGlobals lbl_8063C6B8;\nextern void* memcpy(void*, const void*, unsigned long);\nextern void fn_801FBAC8(void*, Record*);\nextern u16 fn_801FB3B4(void*, void*, int);\n\nu32 fn_801FABA4(void* output, int argument)\n{\n    Header header;\n    Record record;\n    u8* entry;\n    int i;\n    u16 offset;\n    BlockGlobals* const globals = &lbl_8063C6B8;\n\n    header.field00 = lbl_8064D7BC;\n    header.field04 = lbl_8064C3A8;\n    header.argument = argument;\n    header.field0C = lbl_8064C3A0;\n    header.field10 = lbl_8064D798;\n    header.field14 = lbl_8064C3A4;\n    header.field18 = lbl_8064D79C;\n    header.field1C = lbl_8064D18C;\n    memcpy(output, &header, 0x40);\n    for (entry = globals->entries, i = 0, offset = 0x40; i < (int)lbl_8064D7BC; entry += 0x14, i++) {\n        fn_801FBAC8(entry, &record);\n        memcpy((u8*)output + offset, &record, 0x10);\n        offset += 0x10;\n        if (record.flags & 1) {\n            {\n                u32 index = record.first_index;\n                u8* base = globals->second;\n                u8* dest = (u8*)output + offset;\n                base += index * 0x88;\n                offset += fn_801FB3B4(dest, base, 0);\n            }\n        }\n        if (record.flags & 2) {\n            {\n                u8* base = globals->first;\n                offset += fn_801FB3B4((u8*)output + offset, base + record.second_index * 0x88, 1);\n            }\n        }\n    }\n\n    offset += fn_801FB3B4((u8*)output + offset, globals->primary, 0);\n    {\n        u8* base = globals->second;\n        base += lbl_8064C3A8 * 0x88;\n        offset += fn_801FB3B4((u8*)output + offset, base, 0);\n    }\n    offset += fn_801FB3B4((u8*)output + offset, globals->secondary, 1);\n    {\n        u8* base = globals->first;\n        offset += fn_801FB3B4((u8*)output + offset, base + lbl_8064C3A8 * 0x88, 1);\n    }\n    return (u16)(offset + 0x1F) & ~0x1F;\n}\n",
+  "commands": [
+    {
+      "argv": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_801FABA4.o"
+      ],
+      "returncode": 0,
+      "output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801FABA4.o\n"
+    },
+    {
+      "argv": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801FABA4",
+        "fn_801FABA4",
+        "-o",
+        "/home/rabbit/src/darkfoundry-new/.darkfoundry/worktrees/50c29326-0acb-40d9-995f-1837de479183/eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-0-index-base-dest-step-strict.json",
+        "--format",
+        "json-pretty",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "returncode": 0,
+      "output": " INFO Writing to /home/rabbit/src/darkfoundry-new/.darkfoundry/worktrees/50c29326-0acb-40d9-995f-1837de479183/eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-0-index-base-dest-step-strict.json\n"
+    }
+  ],
+  "left": {
+    "size": "424",
+    "match_percent": 93.4434
+  },
+  "right": {
+    "size": "412",
+    "match_percent": 93.4434
+  }
+}

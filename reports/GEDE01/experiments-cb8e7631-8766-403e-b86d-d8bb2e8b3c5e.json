@@ -1,0 +1,924 @@
+{
+  "version": 1,
+  "assignment_id": "cb8e7631-8766-403e-b86d-d8bb2e8b3c5e",
+  "preserved_attempts_reviewed": [
+    "f1863f5f31c03dc7137e6ee69a90a091419df05e",
+    "43b4731926a65edce34a1939a9b52203f9fe3f48"
+  ],
+  "prior_best": {
+    "match_percent": 86.252235,
+    "generated_bytes": 1776,
+    "source": "git show f1863f5f31c03dc7137e6ee69a90a091419df05e:eternal-darkness-decomp/reports/GEDE01/verification-492bb95d-1e8e-431f-8fd8-a45bcf104f0f.json"
+  },
+  "prior_rejected_hypotheses_not_repeated": [
+    "Explicit 0xFFFFFFFF return mask, rejected in attempt 3.",
+    "Candidate-actor lifetime split, rejected in attempt 4."
+  ],
+  "compile_command": [
+    ".tools/bin/ninja",
+    "-j2",
+    "build/GEDE01/src/game/game_fn_80151600.o"
+  ],
+  "diff_command_template": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80151600 fn_80151600 -o reports/GEDE01/experiment-cb8e7631-<trial>.json --format json-pretty",
+  "measurement_note": "Raw scalar symbol measurements extracted from transient direct objdiff reports. Full final canonical and relocation-strict reports are preserved separately. Only the final C reconstruction is retained.",
+  "trials": [
+    {
+      "trial": "aggregate",
+      "measurement_source": "experiment-cb8e7631-aggregate.json",
+      "raw_symbol_measurements": {
+        "left": {
+          "name": "fn_80151600",
+          "size": "1792",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 90.078125
+        },
+        "right": {
+          "name": "fn_80151600",
+          "size": "1780",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 90.078125
+        }
+      },
+      "left_relocation_instruction_count": 60,
+      "right_relocation_instruction_count": 60,
+      "hypothesis_and_disposition": "Separate fallback aggregate and pointer selection, then copy into point; removes persistent fallback-address register and extra relocation."
+    },
+    {
+      "trial": "allocation",
+      "measurement_source": "experiment-cb8e7631-allocation.json",
+      "raw_symbol_measurements": {
+        "left": {
+          "name": "fn_80151600",
+          "size": "1792",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 98.125
+        },
+        "right": {
+          "name": "fn_80151600",
+          "size": "1772",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 98.125
+        }
+      },
+      "left_relocation_instruction_count": 60,
+      "right_relocation_instruction_count": 60,
+      "hypothesis_and_disposition": "Last raw output of bounded declaration-order/storage-hint trials; selected source is documented by the embedded allocation measurements, not necessarily this last output."
+    },
+    {
+      "trial": "branch-abs",
+      "measurement_source": "experiment-cb8e7631-branch-abs.json",
+      "raw_symbol_measurements": {
+        "left": {
+          "name": "fn_80151600",
+          "size": "1792",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 87.0067
+        },
+        "right": {
+          "name": "fn_80151600",
+          "size": "1780",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 87.0067
+        }
+      },
+      "left_relocation_instruction_count": 60,
+      "right_relocation_instruction_count": 60,
+      "hypothesis_and_disposition": "Signed helper using assignment under if still lowers branchlessly; rejected form."
+    },
+    {
+      "trial": "distance-copy",
+      "measurement_source": "experiment-cb8e7631-distance-copy.json",
+      "raw_symbol_measurements": {
+        "left": {
+          "name": "fn_80151600",
+          "size": "1792",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 86.296875
+        },
+        "right": {
+          "name": "fn_80151600",
+          "size": "1780",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 86.296875
+        }
+      },
+      "left_relocation_instruction_count": 60,
+      "right_relocation_instruction_count": 60,
+      "hypothesis_and_disposition": "Full-width signed absolute-value helper and unsigned alias reads of distance; separate packed output copy. Signed ternary helper lowers to branchless srawi/xor/subf and regresses."
+    },
+    {
+      "trial": "long-conversion",
+      "measurement_source": "experiment-cb8e7631-long-conversion.json",
+      "raw_symbol_measurements": {
+        "left": {
+          "name": "fn_80151600",
+          "size": "1792",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 97.17634
+        },
+        "right": {
+          "name": "fn_80151600",
+          "size": "1772",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 97.17634
+        }
+      },
+      "left_relocation_instruction_count": 60,
+      "right_relocation_instruction_count": 60,
+      "hypothesis_and_disposition": "Distinct return-type hypothesis: unsigned long narrowing instead of unsigned int. Identical direct r4 compare; discarded. No explicit-mask variant was repeated."
+    },
+    {
+      "trial": "narrow-abs",
+      "measurement_source": "experiment-cb8e7631-narrow-abs.json",
+      "raw_symbol_measurements": {
+        "left": {
+          "name": "fn_80151600",
+          "size": "1792",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 85.64955
+        },
+        "right": {
+          "name": "fn_80151600",
+          "size": "1788",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 85.64955
+        }
+      },
+      "left_relocation_instruction_count": 60,
+      "right_relocation_instruction_count": 60,
+      "hypothesis_and_disposition": "Unsigned-halfword helper with assignment under if still lowers branchlessly and adds narrowing; rejected form."
+    },
+    {
+      "trial": "ordering",
+      "measurement_source": "experiment-cb8e7631-ordering.json",
+      "raw_symbol_measurements": {
+        "left": {
+          "name": "fn_80151600",
+          "size": "1792",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 98.125
+        },
+        "right": {
+          "name": "fn_80151600",
+          "size": "1772",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 98.125
+        }
+      },
+      "left_relocation_instruction_count": 60,
+      "right_relocation_instruction_count": 60,
+      "hypothesis_and_disposition": "Last raw output of bounded initialization-order/reaction-declaration trials; selected source is documented by embedded measurements."
+    },
+    {
+      "trial": "owner-slots",
+      "measurement_source": "experiment-cb8e7631-owner-slots.json",
+      "raw_symbol_measurements": {
+        "left": {
+          "name": "fn_80151600",
+          "size": "1792",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 97.17634
+        },
+        "right": {
+          "name": "fn_80151600",
+          "size": "1772",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 97.17634
+        }
+      },
+      "left_relocation_instruction_count": 60,
+      "right_relocation_instruction_count": 60,
+      "hypothesis_and_disposition": "Two owner lifetimes with separate packed/effect users, vector-local declaration ordering, and packed/value/copy declaration ordering reproduce retail 0xC0 frame and stmw r21."
+    },
+    {
+      "trial": "reaction-block",
+      "measurement_source": "experiment-cb8e7631-reaction-block.json",
+      "raw_symbol_measurements": {
+        "left": {
+          "name": "fn_80151600",
+          "size": "1792",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 98.046875
+        },
+        "right": {
+          "name": "fn_80151600",
+          "size": "1772",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 98.046875
+        }
+      },
+      "left_relocation_instruction_count": 60,
+      "right_relocation_instruction_count": 60,
+      "hypothesis_and_disposition": "Separate nested reaction-allocation if from message-result if; same score and size."
+    },
+    {
+      "trial": "reaction-register",
+      "measurement_source": "experiment-cb8e7631-reaction-register.json",
+      "raw_symbol_measurements": {
+        "left": {
+          "name": "fn_80151600",
+          "size": "1792",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 98.125
+        },
+        "right": {
+          "name": "fn_80151600",
+          "size": "1772",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 98.125
+        }
+      },
+      "left_relocation_instruction_count": 60,
+      "right_relocation_instruction_count": 60,
+      "hypothesis_and_disposition": "Register storage hint on reaction makes no difference and is discarded."
+    },
+    {
+      "trial": "register-order",
+      "measurement_source": "experiment-cb8e7631-register-order.json",
+      "raw_symbol_measurements": {
+        "left": {
+          "name": "fn_80151600",
+          "size": "1792",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 98.046875
+        },
+        "right": {
+          "name": "fn_80151600",
+          "size": "1772",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 98.046875
+        }
+      },
+      "left_relocation_instruction_count": 60,
+      "right_relocation_instruction_count": 60,
+      "hypothesis_and_disposition": "Keep unsigned dz magnitude for near-Z threshold, matching retail early clrlwi; test register declaration order."
+    },
+    {
+      "trial": "register-prototype",
+      "measurement_source": "experiment-cb8e7631-register-prototype.json",
+      "raw_symbol_measurements": {
+        "left": {
+          "name": "fn_80151600",
+          "size": "1792",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 97.67857
+        },
+        "right": {
+          "name": "fn_80151600",
+          "size": "1776",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 97.67857
+        }
+      },
+      "left_relocation_instruction_count": 60,
+      "right_relocation_instruction_count": 60,
+      "hypothesis_and_disposition": "Local signed-halfword formal for steering speed reproduces lhz/extsh call lowering. Signed distance.z read introduces extra extsh and is superseded."
+    },
+    {
+      "trial": "return-abs",
+      "measurement_source": "experiment-cb8e7631-return-abs.json",
+      "raw_symbol_measurements": {
+        "left": {
+          "name": "fn_80151600",
+          "size": "1792",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 92.43304
+        },
+        "right": {
+          "name": "fn_80151600",
+          "size": "1804",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 92.43304
+        }
+      },
+      "left_relocation_instruction_count": 60,
+      "right_relocation_instruction_count": 60,
+      "hypothesis_and_disposition": "Unsigned-halfword helper with explicit early return restores branches but introduces extra clrlwi operations."
+    },
+    {
+      "trial": "types-source",
+      "measurement_source": "experiment-cb8e7631-types-source.json",
+      "raw_symbol_measurements": {
+        "left": {
+          "name": "fn_80151600",
+          "size": "1792",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 89.77679
+        },
+        "right": {
+          "name": "fn_80151600",
+          "size": "1772",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 89.77679
+        }
+      },
+      "left_relocation_instruction_count": 60,
+      "right_relocation_instruction_count": 60,
+      "hypothesis_and_disposition": "Keep radius full-width, reverse candidate-type comparison operands, and fix fn_801D38BC source to owner at work + 0x14. Semantics correction retained despite this intermediate score decrease."
+    },
+    {
+      "trial": "unsigned-abs",
+      "measurement_source": "experiment-cb8e7631-unsigned-abs.json",
+      "raw_symbol_measurements": {
+        "left": {
+          "name": "fn_80151600",
+          "size": "1792",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 96.060265
+        },
+        "right": {
+          "name": "fn_80151600",
+          "size": "1764",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 96.060265
+        }
+      },
+      "left_relocation_instruction_count": 60,
+      "right_relocation_instruction_count": 60,
+      "hypothesis_and_disposition": "Unsigned-word early-return absolute-value helper reproduces retail branch/negate/store sequence. Retained."
+    },
+    {
+      "trial": "wide-return",
+      "measurement_source": "experiment-cb8e7631-wide-return.json",
+      "raw_symbol_measurements": {
+        "left": {
+          "name": "fn_80151600",
+          "size": "1792",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 86.36384
+        },
+        "right": {
+          "name": "fn_80151600",
+          "size": "1788",
+          "flags": 1,
+          "target_symbol": 1,
+          "match_percent": 86.36384
+        }
+      },
+      "left_relocation_instruction_count": 60,
+      "right_relocation_instruction_count": 60,
+      "hypothesis_and_disposition": "Signed-word early return reintroduces branchless abs. Also narrowed steering-call argument by cast and made radius-query comparison unsigned."
+    }
+  ],
+  "allocation_trials": {
+    "hypothesis": "Declaration order and register storage hints determine high-lifetime instance/work/completed coloring without changing behavior. Highest score then exact aligned formatted instructions selected.",
+    "commands": [
+      ".tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_80151600.o",
+      "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80151600 fn_80151600 -o reports/GEDE01/experiment-cb8e7631-allocation.json --format json-pretty"
+    ],
+    "measurements": [
+      {
+        "register_mode": "none",
+        "order": [
+          "finished",
+          "instance",
+          "work"
+        ],
+        "source_sha256": "cbb0d4661392f938e65681c09802a87b67f47ff821bbe86d27d98e032c8dc4f4",
+        "score": 98.046875,
+        "exact_formatted_aligned": 352,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "none",
+        "order": [
+          "finished",
+          "work",
+          "instance"
+        ],
+        "source_sha256": "47102c9f190479693e6d37dcbc45ff34a575aff03879551d0fd80cbf7d31083e",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "none",
+        "order": [
+          "instance",
+          "finished",
+          "work"
+        ],
+        "source_sha256": "e0d4438f100c65e7fdbcc3837f941c4b5dc8c41b227291abc6fa8031fd484c4a",
+        "score": 98.046875,
+        "exact_formatted_aligned": 352,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "none",
+        "order": [
+          "instance",
+          "work",
+          "finished"
+        ],
+        "source_sha256": "d112c3e1ed96e59b40ff8bcab6421cc3486f8edea00f6fe3128c8b5b5218112d",
+        "score": 98.046875,
+        "exact_formatted_aligned": 352,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "none",
+        "order": [
+          "work",
+          "finished",
+          "instance"
+        ],
+        "source_sha256": "740bfda5fe940c4a1aaeb8221fccd2f8d98b1aa9cf30d8aa13ebe80924425061",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "none",
+        "order": [
+          "work",
+          "instance",
+          "finished"
+        ],
+        "source_sha256": "7f9c20d3b1bbd3c2f5bd2c6df6266c8646b5a9ed73b868a2377bc2c102bb61b4",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "all",
+        "order": [
+          "finished",
+          "instance",
+          "work"
+        ],
+        "source_sha256": "7de3c08baac0b3e1d82900e2333559b6c970e4ce62ee1b4a746482ddf78051f8",
+        "score": 98.046875,
+        "exact_formatted_aligned": 352,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "all",
+        "order": [
+          "finished",
+          "work",
+          "instance"
+        ],
+        "source_sha256": "7e0a01ad72c6e1035beab14115726107e9eae47bd7cff9e8e7e6f985bbb4d89f",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "all",
+        "order": [
+          "instance",
+          "finished",
+          "work"
+        ],
+        "source_sha256": "7326d82151ed98c1da086d226d9367cfeaad8eeb3255a86ceb9330d1929e7b25",
+        "score": 98.046875,
+        "exact_formatted_aligned": 352,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "all",
+        "order": [
+          "instance",
+          "work",
+          "finished"
+        ],
+        "source_sha256": "aa9fc8cd3b0a83a10b3a8b55237c12840134e0728f2f1ffcd89ff7be5cf72571",
+        "score": 98.046875,
+        "exact_formatted_aligned": 352,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "all",
+        "order": [
+          "work",
+          "finished",
+          "instance"
+        ],
+        "source_sha256": "401bce52df34304c52b41d11a6feab448b9f3f811f277a44ad7336a6d95f5099",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "all",
+        "order": [
+          "work",
+          "instance",
+          "finished"
+        ],
+        "source_sha256": "b2ff0a3a3d26a906dcd78fdb6d85ca8bfa68691559577924357d432c6edc5665",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "finished",
+        "order": [
+          "finished",
+          "instance",
+          "work"
+        ],
+        "source_sha256": "104c32de6b76c1f6c9459779a427b62f74fd8119589090d206dc4e658fdc8b3e",
+        "score": 98.046875,
+        "exact_formatted_aligned": 352,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "finished",
+        "order": [
+          "finished",
+          "work",
+          "instance"
+        ],
+        "source_sha256": "acafb8ddd1bb8f76cbd22002c23fb33b936b6a0a40ec76bf821926fbe45664f7",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "finished",
+        "order": [
+          "instance",
+          "finished",
+          "work"
+        ],
+        "source_sha256": "9154d22ecab23ec13339648b91f5cb6e86f97c52d594cd6ed23a93b39c2b027f",
+        "score": 98.046875,
+        "exact_formatted_aligned": 352,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "finished",
+        "order": [
+          "instance",
+          "work",
+          "finished"
+        ],
+        "source_sha256": "60452e4ff9a58719b03cb0868d4b91d07d8f66e858c1f863950419e7daca7547",
+        "score": 98.046875,
+        "exact_formatted_aligned": 352,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "finished",
+        "order": [
+          "work",
+          "finished",
+          "instance"
+        ],
+        "source_sha256": "00004f309a84e9f2c6e80daaabe694bd478eb8ec54bb51abd744deee0878853e",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "finished",
+        "order": [
+          "work",
+          "instance",
+          "finished"
+        ],
+        "source_sha256": "d6a60a31ad18b8afa68a2e030930056a2a66c473fa302a7ec7569e7126ade83a",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "pointers",
+        "order": [
+          "finished",
+          "instance",
+          "work"
+        ],
+        "source_sha256": "645d5c1597832fb3bf7fccfcf0c01f9a4852c8482241928685ec0dd6e8c0df15",
+        "score": 98.046875,
+        "exact_formatted_aligned": 352,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "pointers",
+        "order": [
+          "finished",
+          "work",
+          "instance"
+        ],
+        "source_sha256": "6422cc952e61e9621a6b3dff07e1d3bc5db5cde7a71dd278abebfffa27865079",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "pointers",
+        "order": [
+          "instance",
+          "finished",
+          "work"
+        ],
+        "source_sha256": "326034e1d093909772efe15375f412f6cbc6c26956240fc099895ebb3a63f8b2",
+        "score": 98.046875,
+        "exact_formatted_aligned": 352,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "pointers",
+        "order": [
+          "instance",
+          "work",
+          "finished"
+        ],
+        "source_sha256": "e4e3150694a14e12f1997afca492eb0efed6958e0f6a80fef34135159362412d",
+        "score": 98.046875,
+        "exact_formatted_aligned": 352,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "pointers",
+        "order": [
+          "work",
+          "finished",
+          "instance"
+        ],
+        "source_sha256": "5dee61b678e5d4b0dab889a93d4d5cd2e1a09f53c3146e0ac1a487d6795b09e2",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "register_mode": "pointers",
+        "order": [
+          "work",
+          "instance",
+          "finished"
+        ],
+        "source_sha256": "f669194fe46cb187ca5f67525f68b03f7343b93e3db6fb708e129ce7ffc39c0e",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      }
+    ],
+    "selected_key": [
+      98.125,
+      358
+    ]
+  },
+  "ordering_trials": {
+    "hypothesis": "Initialization ordering and reaction declaration position affect graph-coloring ties without splitting actor lifetimes. Highest score then exact formatted instructions selected.",
+    "commands": [
+      ".tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_80151600.o",
+      "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80151600 fn_80151600 -o reports/GEDE01/experiment-cb8e7631-ordering.json --format json-pretty"
+    ],
+    "measurements": [
+      {
+        "initialization_order": [
+          "instance",
+          "work",
+          "finished"
+        ],
+        "reaction_declaration": "first",
+        "source_sha256": "47102c9f190479693e6d37dcbc45ff34a575aff03879551d0fd80cbf7d31083e",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "initialization_order": [
+          "instance",
+          "work",
+          "finished"
+        ],
+        "reaction_declaration": "before_actor",
+        "source_sha256": "17b98ad5281a4d78fe2da0a5da79a7241ece8973ebf61c009758ecb7ac4028eb",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "initialization_order": [
+          "instance",
+          "work",
+          "finished"
+        ],
+        "reaction_declaration": "after_actor",
+        "source_sha256": "f5d438ad1c8d81ff04a8c6f56f02252eec855f399d703bbb21102572c85faddd",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "initialization_order": [
+          "instance",
+          "work",
+          "finished"
+        ],
+        "reaction_declaration": "after_rank",
+        "source_sha256": "3d80735c7405f75d348677eb6c9de5f137bd6521614a21db8282eaed41bdd4e4",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "initialization_order": [
+          "instance",
+          "finished",
+          "work"
+        ],
+        "reaction_declaration": "first",
+        "source_sha256": "b14aa0d31176112f4c54e97c78a8e40097249ca3007835c979f546a728a4b027",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "initialization_order": [
+          "instance",
+          "finished",
+          "work"
+        ],
+        "reaction_declaration": "before_actor",
+        "source_sha256": "cd96f8354bc89508aba5aa70cf84e95fd3387741c5111877829622edb7f729e8",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "initialization_order": [
+          "instance",
+          "finished",
+          "work"
+        ],
+        "reaction_declaration": "after_actor",
+        "source_sha256": "c7c37cd65b34bf8c9b6cd10172d17bed4312ee396f6d733e3730a723014909f5",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "initialization_order": [
+          "instance",
+          "finished",
+          "work"
+        ],
+        "reaction_declaration": "after_rank",
+        "source_sha256": "f137f17ad24ffd12d468f062adf601b8acb4d5b69ab7e52544e1c7896debfef4",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "initialization_order": [
+          "finished",
+          "instance",
+          "work"
+        ],
+        "reaction_declaration": "first",
+        "source_sha256": "22667dc92c4684706412c08171dfd15c39159339ed6ea6b299df91809497abdd",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "initialization_order": [
+          "finished",
+          "instance",
+          "work"
+        ],
+        "reaction_declaration": "before_actor",
+        "source_sha256": "e0aff4d2e94f9248fa182ff5cb5c26ea90bbfe3361bcd9d0f2339fc687e4c00d",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "initialization_order": [
+          "finished",
+          "instance",
+          "work"
+        ],
+        "reaction_declaration": "after_actor",
+        "source_sha256": "e10fb5616a9fa31c2e2dde2be3db0fcc9639cf90dda5fcd9433b6cdd9b826bb5",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      },
+      {
+        "initialization_order": [
+          "finished",
+          "instance",
+          "work"
+        ],
+        "reaction_declaration": "after_rank",
+        "source_sha256": "24c5d3880fad34b02c432b228a787fcaaf12e70a127716e4fb531e8b886ee162",
+        "score": 98.125,
+        "exact_formatted_aligned": 358,
+        "size": "1772",
+        "build_exit": 0,
+        "diff_exit": 0
+      }
+    ],
+    "selected_key": [
+      98.125,
+      358
+    ]
+  }
+}

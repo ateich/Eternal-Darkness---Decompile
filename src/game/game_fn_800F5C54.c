@@ -1,15 +1,27 @@
-extern const double lbl_80239CD0[3];
+extern const volatile double lbl_80239CD0[3];
 
 unsigned int fn_800F5C54(double value)
 {
-    if (value < lbl_80239CD0[0]) {
-        return 0;
-    }
-    if (value < lbl_80239CD0[1]) {
-        if (value < lbl_80239CD0[2]) {
-            return (int)value;
+    double zero = lbl_80239CD0[0];
+    double limit = lbl_80239CD0[1];
+    double bias = lbl_80239CD0[2];
+    double converted;
+    unsigned int result = 0;
+
+    /* Unordered input must fall through to the all-ones saturation result. */
+    if (!(value < zero)) {
+        result--;
+        if (value < limit) {
+            if (value < bias) {
+                converted = value;
+            } else {
+                converted = value - bias;
+            }
+            result = (int)converted;
+            if (!(value < bias)) {
+                result += 0x80000000;
+            }
         }
-        return (int)(value - lbl_80239CD0[2]) + 0x80000000;
     }
-    return 0xFFFFFFFF;
+    return result;
 }

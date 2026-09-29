@@ -23,27 +23,41 @@ extern void fn_801E4188(void);
 extern void fn_801E46E8(s16, s16);
 extern void fn_801E46F8(int);
 
-/* NonMatching: honest reconstruction of all sixteen panel vertices. Retail
- * retains both the raw fctiwz result for the negative screen-space extents and
- * its signed-16-bit form for texture bounds and positive screen-space extents. */
-void fn_801E4314(s16 x, s16 y, s16 width, s16 height, float scale, int dark)
+/* NonMatching: all sixteen panel vertices, with raw 32-bit depth used for
+ * negative extents and signed-16-bit depth for texture/positive extents.
+ * Separate float-to-int and float-to-short casts score 89.195915% under the
+ * canonical GC/1.3 settings. They share fctiwz but retain a second stfd/lwz,
+ * producing 988 bytes versus retail's 980. Initial scheduling and saved
+ * geometry/texture registers also differ; see assignment a5338a5a reports. */
+void fn_801E4314(int x, int y, int width, int height, float scale, int dark)
 {
-    int raw_depth = (int)(lbl_80651278 * scale);
-    s16 depth = raw_depth;
-    s16 left = ((width >> 1) + depth) * 512 / 17;
-    s16 top = ((height >> 1) + depth) * 512 / 17;
-    s16 right = (17 - ((height >> 1) + depth)) * 512 / 17;
-    s16 bottom = (17 - ((width >> 1) + depth)) * 512 / 17;
-    s16 cx = x + (width >> 1);
-    s16 cy = y + (height >> 1);
+    float scaled_depth = lbl_80651278 * scale;
+    s16 sx = x;
+    s16 sw = width;
+    s16 sy = y;
+    s16 sh = height;
+    s16 cx = sx + (sw >> 1);
+    s16 cy = sy + (sh >> 1);
+    int raw_depth = (int)scaled_depth;
+    s16 depth;
+    s16 left;
+    s16 top;
+    s16 right;
+    s16 bottom;
     Color color;
     Color dark_color;
     Color light_color;
     Color* color_copy;
-    int left_x;
     int top_y;
+    int left_x;
     s16 right_x;
     s16 bottom_y;
+
+    depth = scaled_depth;
+    left = ((sw >> 1) + depth) * 512 / 17;
+    top = ((sh >> 1) + depth) * 512 / 17;
+    right = (17 - ((sh >> 1) + depth)) * 512 / 17;
+    bottom = (17 - ((sw >> 1) + depth)) * 512 / 17;
 
     if (dark) {
         dark_color = lbl_80651270;
@@ -72,10 +86,10 @@ void fn_801E4314(s16 x, s16 y, s16 width, s16 height, float scale, int dark)
     fn_801E4198(cx, cy, -1); fn_801E46F8(0); fn_801E46E8(top, bottom);
     fn_801E4198(cx, top_y, -1); fn_801E46F8(0); fn_801E46E8(30, bottom);
 
-    right_x = x + depth + width;
+    right_x = sx + depth + sw;
     fn_801E4198(right_x, top_y, -1); fn_801E46F8(0); fn_801E46E8(30, 481);
     fn_801E4198(right_x, cy, -1); fn_801E46F8(0); fn_801E46E8(top, 481);
-    bottom_y = y + depth + height;
+    bottom_y = sy + depth + sh;
     fn_801E4198(cx, bottom_y, -1); fn_801E46F8(0); fn_801E46E8(left, 481);
     fn_801E4198(cx, cy, -1); fn_801E46F8(0); fn_801E46E8(left, right);
     fn_801E4198(right_x, cy, -1); fn_801E46F8(0); fn_801E46E8(30, right);

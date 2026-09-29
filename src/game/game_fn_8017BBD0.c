@@ -31,14 +31,18 @@ extern u64 OSGetTime(void);
 int fn_8017BBD0(u32 value, u8 kind, const char* text, u32 flags, u32 user_data)
 {
     u16 index = lbl_8064A7C8.write_index;
-    u16 next = index + 1;
-    int difference = next - 6;
+    /* Keep the full-width increment separate from the narrowed queue index.
+     * The aggregate temporary preserves the retail register allocation. */
+    struct { int value; } next;
+    u16 wrapped;
     MessageEntry* entry;
 
-    next = difference < 0 ? next : 0;
-    if (next != lbl_8064A7C8.read_index) {
+    next.value = index + 1;
+    wrapped = next.value >= 6 ? 0 : (u16)next.value;
+
+    if (wrapped != lbl_8064A7C8.read_index) {
+        lbl_8064A7C8.entries[index].value = value;
         entry = &lbl_8064A7C8.entries[index];
-        entry->value = value;
         entry->field_08 = -1;
         entry->kind = kind;
         if (text != 0) {
@@ -53,7 +57,7 @@ int fn_8017BBD0(u32 value, u8 kind, const char* text, u32 flags, u32 user_data)
         } else {
             entry->state = 0;
         }
-        lbl_8064A7C8.write_index = next;
+        lbl_8064A7C8.write_index = wrapped;
         return 1;
     }
     return 0;

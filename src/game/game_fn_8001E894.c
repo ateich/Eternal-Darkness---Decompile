@@ -2,6 +2,23 @@ typedef unsigned char u8;
 typedef unsigned short u16;
 typedef int s32;
 typedef unsigned int u32;
+typedef long long s64;
+
+typedef struct WordBlock16 {
+    s32 words[16];
+} WordBlock16;
+
+typedef struct WordBlock8 {
+    s32 words[8];
+} WordBlock8;
+
+typedef struct WordBlock3 {
+    s32 words[3];
+} WordBlock3;
+
+typedef struct WordBlock24 {
+    s32 words[24];
+} WordBlock24;
 
 typedef struct RuntimeState {
     u32 first_handle;
@@ -14,17 +31,17 @@ typedef struct RuntimeState {
     s32 state;
     s32 counter;
     s32 selection;
+    s32 current_index;
     u32 flags;
     u32 aux_handle;
     u32 sound_handle;
-    u8 pad_3C[2];
+    u16 sound_id;
     u8 mode;
     u8 previous_mode;
     u8 timer;
 } RuntimeState;
 
 extern u8 lbl_80302400[];
-extern RuntimeState lbl_8030241C;
 extern u8 lbl_803003C8[];
 extern u8 lbl_80238978[];
 extern u8 lbl_8023D020[];
@@ -35,7 +52,7 @@ extern u32 lbl_8064C2AC;
 extern u8 lbl_8064B2C4;
 extern s32 lbl_8064B2C0;
 extern s32 lbl_8064B2B8;
-extern s32 lbl_8064C6BC[];
+extern s32 lbl_8064C6BC[2];
 extern u32 lbl_8064C6C4;
 extern s32 lbl_8064C6D4;
 extern s32 lbl_8064CBA4;
@@ -69,10 +86,10 @@ extern void fn_800B2548(int, int);
 extern void fn_8002387C(s32);
 extern void fn_80023800(s32);
 extern void fn_80023918(s32);
-extern float fn_8020F088(void*);
-extern float fn_800F5ECC(float, s32, s32, s32);
-extern float fn_800F6264(void);
-extern s32 fn_8020ED10(void);
+extern s64 fn_8020F088(void*);
+extern s64 fn_800F5ECC(s64, s64);
+extern float fn_800F6264(s64);
+extern u32 fn_8020ED10(void);
 extern void fn_8001F758(s32, s32);
 extern void fn_801AD404(s32, s32, s32);
 extern void fn_801AD490(void);
@@ -83,7 +100,7 @@ extern s32 fn_8012070C(void);
 extern void fn_8015E918(void*, s32, s32, s32, s32);
 extern int fn_801A98F4(int, int);
 extern void fn_800AFBA8(void*);
-extern void fn_80045230(void);
+extern s32 fn_80045230(void);
 extern void fn_800451C4(s32);
 extern s32 fn_801E7578(s32);
 extern s32 fn_801E75A4(s32, s32);
@@ -110,12 +127,6 @@ extern void fn_8011C830(s32);
 extern void fn_801F85A4(void);
 extern void fn_80025A78(int);
 
-static inline s32 random_three(void)
-{
-    s32 value = fn_800FBFB0();
-    return value % 3;
-}
-
 static inline void start_menu_callback(void* callback, s32 event)
 {
     fn_800B177C(3, callback);
@@ -125,9 +136,11 @@ static inline void start_menu_callback(void* callback, s32 event)
 
 void fn_8001E894(void)
 {
-    RuntimeState* runtime = &lbl_8030241C;
+    u8* tables = lbl_80238978;
+    u8* menu = lbl_8023D020;
+    u8* root = lbl_80302400;
+    RuntimeState* runtime = (RuntimeState*)(root + 0x1C);
     s32 keep_timer = 1;
-    s32 i;
 
     fn_80144C40();
 
@@ -153,16 +166,22 @@ void fn_8001E894(void)
         runtime->third_handle = 0;
         if (runtime->previous_state == 0) {
             runtime->first_handle = (u32)fn_801E6CA0(lbl_8064C504, 0, 35, 0, 1);
-            *fn_801E5D08(runtime->first_handle) = lbl_8064C2AC;
+            {
+                u32* value = fn_801E5D08(runtime->first_handle);
+                *value = lbl_8064C2AC;
+            }
             fn_801EF5EC();
             fn_8020ED80(1);
         } else {
             runtime->first_handle = (u32)fn_801E6CA0(lbl_8064C504, 0, 36, 0, 1);
-            *fn_801E5D08(runtime->first_handle) = lbl_8064C2AC;
+            {
+                u32* value = fn_801E5D08(runtime->first_handle);
+                *value = lbl_8064C2AC;
+            }
             fn_8020ED80(0);
         }
         runtime->timer = 150;
-        runtime->sound_handle = 7;
+        runtime->sound_id = 7;
         runtime->counter = 0;
         fn_8001DFEC(19, 0);
         runtime->selection = 0;
@@ -174,13 +193,12 @@ void fn_8001E894(void)
             fn_800B2AE8();
             keep_timer = 0;
         } else if (!lbl_8064B2C4) {
-            s32 first = lbl_8064C6BC[0];
-            s32 second = lbl_8064C6BC[1];
-            if ((first == 0 || first == 2) && (second == 0 || second == 2)) {
-                if (first == 0 && second == 0) {
+            if ((lbl_8064C6BC[0] == 2 || lbl_8064C6BC[0] == 0) &&
+                (lbl_8064C6BC[1] == 2 || lbl_8064C6BC[1] == 0)) {
+                if (lbl_8064C6BC[0] == 0 && lbl_8064C6BC[1] == 0) {
                     start_menu_callback(fn_8002387C, 13);
-                } else if ((first == 0 || first == 2) &&
-                           (second == 0 || second == 2)) {
+                } else if ((lbl_8064C6BC[0] == 2 || lbl_8064C6BC[0] == 0) &&
+                           (lbl_8064C6BC[1] == 2 || lbl_8064C6BC[1] == 0)) {
                     start_menu_callback(fn_8002387C, 14);
                 } else {
                     fn_8002387C(1);
@@ -195,28 +213,28 @@ void fn_8001E894(void)
         if (fn_800B193C()) {
             fn_800B2AE8();
             keep_timer = 0;
-        } else if (!lbl_8064B2C4 &&
-                   (lbl_8064C6BC[0] == 0 || lbl_8064C6BC[0] == 2) &&
-                   (lbl_8064C6BC[1] == 0 || lbl_8064C6BC[1] == 2)) {
-            if (!(lbl_8064C6C4 & 1)) {
-                lbl_8064C6C4 |= 1;
-                lbl_8064C6C4 &= ~2u;
-                start_menu_callback(fn_80023918, 34);
+        } else if (!lbl_8064B2C4) {
+            if ((lbl_8064C6BC[0] == 2 || lbl_8064C6BC[0] == 0) &&
+                (lbl_8064C6BC[1] == 2 || lbl_8064C6BC[1] == 0)) {
+                if (!(lbl_8064C6C4 & 1)) {
+                    lbl_8064C6C4 |= 1;
+                    lbl_8064C6C4 &= ~2u;
+                    start_menu_callback(fn_80023918, 34);
+                } else {
+                    lbl_8064C6C4 = 1;
+                    fn_80023918(0);
+                }
             } else {
-                lbl_8064C6C4 = 1;
-                fn_80023918(0);
+                fn_80023800(1);
             }
-        } else {
-            fn_80023800(1);
         }
         break;
 
     case 3: {
-        s32 limit = *(s32*)(lbl_80302400 + 0x2CC);
+        s32 limit = *(s32*)(root + 0x2CC);
         float now;
-        fn_8020F088(lbl_80302400 + 0x60);
-        fn_800F5ECC(0.0f, 0, 0, 0);
-        now = fn_800F6264();
+        now = fn_800F6264(fn_800F5ECC(fn_8020F088(root + 0x60),
+            (*(volatile u32*)0x800000F8 / 4) / 1000));
         lbl_8064C6D4 = 1;
         keep_timer = 0;
         if (fn_8020ED10() == 1)
@@ -252,46 +270,49 @@ void fn_8001E894(void)
         }
         switch (runtime->previous_state) {
         case 0:
-        case 1: {
-            void* dst = lbl_8064CBA4 == 1 ? lbl_8023D020 + 0x8F8
-                                          : lbl_8023D020 + 0x908;
             fn_801E79A0(lbl_8064C4E0, 0x37E);
-            fn_8015E918(dst, 0xE72D60, 0x330E0, fn_8012070C(), 0x330E0);
-            if (runtime->previous_state == 0) {
-                fn_8001DE84(8, 0);
-                fn_8001DE68();
-                fn_801A98F4(0x27A, 100);
-            } else {
-                s32* src = (s32*)(lbl_80238978 + 0x40);
-                s32* dst_words = (s32*)(lbl_8023D020 + 0x7BC);
-                start_menu_callback(fn_80023710, 1);
-                for (i = 0; i < 16; ++i)
-                    dst_words[i] = src[i];
-                fn_8001DE84(13, 0);
-                runtime->selection = 2;
-            }
+            if (lbl_8064CBA4 == 1)
+                fn_8015E918(menu + 0x8F8, 0xE72D60, 0x330E0, fn_8012070C(), 0x330E0);
+            else
+                fn_8015E918(menu + 0x908, 0xE72D60, 0x330E0, fn_8012070C(), 0x330E0);
+            fn_8001DE84(8, 0);
+            fn_8001DE68();
+            fn_801A98F4(0x27A, 100);
             break;
-        }
+        case 1:
+            fn_801E79A0(lbl_8064C4E0, 0x37E);
+            if (lbl_8064CBA4 == 1)
+                fn_8015E918(menu + 0x8F8, 0xE72D60, 0x330E0, fn_8012070C(), 0x330E0);
+            else
+                fn_8015E918(menu + 0x908, 0xE72D60, 0x330E0, fn_8012070C(), 0x330E0);
+            fn_800B177C(0, fn_80023710);
+            fn_800B689C(1, 1);
+            fn_800B2548(1, 0);
+            *(WordBlock16*)(menu + 0x7BC) = *(WordBlock16*)(tables + 0x40);
+            fn_8001DE84(13, 0);
+            runtime->selection = 2;
+            break;
         case 2:
-            fn_800AFBA8(lbl_80302400 + 0x2DC);
+            fn_800AFBA8(root + 0x2DC);
             fn_8001DE84(14, 0);
             lbl_8064B2C0 = 1;
             runtime->selection = 7;
             lbl_8064C650 = fn_801A98F4(0x2D3, 100);
             break;
+        case 4:
+            fn_8001DE84(28, 0);
+            break;
         case 3: {
-            void* dst = lbl_8064CBA4 == 1 ? lbl_8023D020 + 0x8F8
-                                          : lbl_8023D020 + 0x908;
-            fn_8015E918(dst, 0xE72D60, 0x330E0, fn_8012070C(), 0x330E0);
+            if (lbl_8064CBA4 == 1)
+                fn_8015E918(menu + 0x8F8, 0xE72D60, 0x330E0, fn_8012070C(), 0x330E0);
+            else
+                fn_8015E918(menu + 0x908, 0xE72D60, 0x330E0, fn_8012070C(), 0x330E0);
             fn_8001DE84(9, 0);
             fn_801E7974(lbl_8064C4E0, 0x37E);
             runtime->selection = 12;
             lbl_8064C650 = fn_801A98F4(0x2D2, 100);
             break;
         }
-        case 4:
-            fn_8001DE84(28, 0);
-            break;
         }
         keep_timer = 0;
         fn_801A98F4(0x279, 100);
@@ -299,35 +320,40 @@ void fn_8001E894(void)
 
     case 9:
     case 17: {
-        s32 values[24];
+        WordBlock24 values;
         s32 index;
-        for (i = 0; i < 24; ++i)
-            values[i] = ((s32*)(lbl_80238978 + 0x80))[i];
-        index = runtime->previous_state + (runtime->mode == 17 ? 12 : 0);
-        runtime->counter = index == 12 ? 0 : (index < 12 ? index + 1 : index);
-        index = runtime->counter;
-        if (((s32*)(lbl_8023D020 + 0x538))[index] >= 0) {
-            s32 value = values[index];
-            *(s32*)(lbl_803003C8 + 8) = ((s32*)(lbl_8023D020 + 0x538))[index];
+        values = *(WordBlock24*)(tables + 0x80);
+        index = 0;
+        if (runtime->mode == 17)
+            index = 12;
+        index += runtime->previous_state;
+        runtime->current_index = index;
+        if (index == 12)
+            runtime->current_index = 0;
+        else if (index < 12)
+            runtime->current_index++;
+        index = runtime->current_index;
+        if (((s32*)(menu + 0x538))[index] >= 0) {
+            s32 value = values.words[index];
+            *(s32*)(lbl_803003C8 + 8) = ((s32*)(menu + 0x538))[index];
             *(s32*)(lbl_803003C8 + 0) = value;
             *(s32*)(lbl_803003C8 + 4) = value;
             lbl_803003C8[0x1914] = 0;
             *(u16*)(lbl_803003C8 + 0x1916) = 0;
             lbl_803003C8[0x191A] = 0;
-            fn_80045230();
-            fn_800451C4(0);
+            fn_800451C4(fn_80045230());
             lbl_8064C6A0 = -1;
             lbl_8064C69C = -1;
-            if (index == 14) {
+            if (runtime->current_index == 14) {
                 fn_8001DFEC(20, 0);
                 runtime->selection = 3;
-            } else if (index == 15) {
+            } else if (runtime->current_index == 15) {
                 fn_8001DFEC(21, 0);
                 runtime->selection = 7;
             } else {
                 runtime->selection = 3;
                 if (runtime->mode == 9) {
-                    if (*(s32*)(lbl_8023D020 + 8) == 1) {
+                    if (*(s32*)(lbl_803003C8 + 8) == 1) {
                         fn_800451C4(0);
                         if (fn_801E7578(lbl_803003C8[0x1918]) > 2) {
                             runtime->selection = 2;
@@ -341,7 +367,8 @@ void fn_8001E894(void)
                             fn_801E75A4(lbl_803003C8[0x1918], 0) - 1);
                     }
                 } else {
-                    fn_8001DFEC(22, random_three());
+                    s32 choice = fn_800FBFB0();
+                    fn_8001DFEC(22, choice % 3);
                 }
             }
         }
@@ -349,26 +376,33 @@ void fn_8001E894(void)
     }
 
     case 21: {
-        s32 values[24];
+        /* Retail snapshots three separate eight-word tables. */
+        WordBlock8 first = *(WordBlock8*)(tables + 0xE0);
+        WordBlock8 second = *(WordBlock8*)(tables + 0x100);
+        WordBlock8 third = *(WordBlock8*)(tables + 0x120);
         s32 index = runtime->previous_state;
         s32* selected;
-        for (i = 0; i < 24; ++i)
-            values[i] = ((s32*)(lbl_80238978 + 0xE0))[i];
-        *(s32*)(lbl_803003C8 + 0) = values[16 + index];
-        *(s32*)(lbl_803003C8 + 4) = values[16 + index];
-        selected = *(s32**)(lbl_8023D020 + 0x538 + index * 4);
-        *(s32*)(lbl_8023D020 + 0x61C) = values[index];
-        selected[15] = values[8 + index];
-        fn_8001DFEC(22, random_three());
+        *(s32*)(lbl_803003C8 + 0) = third.words[index];
+        *(s32*)(lbl_803003C8 + 4) = third.words[index];
+        selected = (s32*)(menu + 0x538);
+        *(s32*)(menu + 0x61C) = first.words[index];
+        selected[15] = second.words[index];
+        {
+            s32 choice = fn_800FBFB0();
+            fn_8001DFEC(22, choice % 3);
+        }
         runtime->selection = 3;
         break;
     }
 
     case 20: {
+        WordBlock3 values = *(WordBlock3*)(tables + 0x140);
         s32 index = runtime->previous_state;
-        *(s32*)(lbl_8023D020 + 0x618) =
-            ((s32*)(lbl_80238978 + 0x140))[index];
-        fn_8001DFEC(22, random_three());
+        *(s32*)(menu + 0x618) = values.words[index];
+        {
+            s32 choice = fn_800FBFB0();
+            fn_8001DFEC(22, choice % 3);
+        }
         runtime->selection = 3;
         break;
     }
@@ -399,21 +433,18 @@ void fn_8001E894(void)
             break;
         }
         case 4: {
-            s32* src = (s32*)(lbl_80238978 + 0x14C);
-            s32* dst = (s32*)(lbl_8023D020 + 0x7DC);
             fn_801F8620();
             fn_801FA410(8);
             fn_801F10BC(0, 0, 0);
             *(s32*)(lbl_8063D378 + 0x40) = 1;
             runtime->mode = 16;
-            for (i = 0; i < 8; ++i)
-                dst[i] = src[i];
+            *(WordBlock8*)(menu + 0x7DC) = *(WordBlock8*)(tables + 0x14C);
             fn_8011C6BC(0x66, 0x9A, 0xFE);
             break;
         }
         case 5:
-            *(s32*)(lbl_8023D020 + 0x7C4) = 0;
-            *(void**)(lbl_8023D020 + 0x824) = fn_8011D558;
+            *(s32*)(menu + 0x7C4) = 0;
+            *(void**)(menu + 0x824) = fn_8011D558;
             lbl_8064CE80 = fn_801E8A8C(0);
             fn_801E8AEC(lbl_8064CE80, 0, 0x33, 0x33);
             fn_801E8B24(lbl_8064CE80, lbl_8064CBA0, 0);
@@ -459,15 +490,12 @@ void fn_8001E894(void)
         break;
 
     case 16: {
-        s32* src = (s32*)(lbl_80238978 + 0x16C);
-        s32* dst = (s32*)(lbl_8023D020 + 0x7DC);
-        for (i = 0; i < 8; ++i)
-            dst[i] = src[i];
+        *(WordBlock8*)(menu + 0x7DC) = *(WordBlock8*)(tables + 0x16C);
         fn_8011C830(1);
         fn_801F85A4();
         runtime->previous_mode = runtime->mode;
         runtime->mode = 14;
-        runtime->value = runtime->previous_state;
+        runtime->state = runtime->previous_state;
         runtime->previous_state = 4;
         runtime->selection = 7;
         lbl_8064B2C0 = 1;

@@ -1,0 +1,382 @@
+{
+  "version": 1,
+  "assignment_id": "8819b5ff-6b0b-4214-bbe7-af377e48adb4",
+  "attempt": 5,
+  "target": "fn_800614A8",
+  "status": "attempted",
+  "base_commit": "63820f438792c87cd8680f697bd8d9b6d7e10c14",
+  "source": "eternal-darkness-decomp/src/game/game_fn_800614A8.c",
+  "source_sha256": "897561c4a83a6f391beb4922cdd6a04a87e9ffef7a6ef51d5e372f9406c1c2b5",
+  "registration": "Existing independent NonMatching C translation unit; configure.py and splits.txt unchanged.",
+  "compiler": {
+    "version": "GC/1.3",
+    "policy": "Unchanged canonical flags, including -O4,p and -use_lmw_stmw on.",
+    "raw_command_file": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/compiler-command.txt"
+  },
+  "preserved_attempt_reconciliation": {
+    "raw_source_hashes": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/source-lineage.json",
+    "finding": "Accepted base, bf425861, and 6327f029 contain identical target source. Rebuilt accepted base at 69.30645% canonical / 69.29152% strict. No cherry-pick needed.",
+    "prior_review_correction": "Baseline .rela.text count is freshly measured as 301, not the rejected experiment count 315. Retained new candidate has 299. The old unpreserved contiguous-frame experiment is not re-run or claimed as reproducible; every newly claimed variant has its own cumulative source patch and raw canonical output."
+  },
+  "baseline": {
+    "canonical": {
+      "raw_file": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/baseline-canonical.json",
+      "sha256": "fc92520bc4418e275f92166e79fb6cd785b2743c5188bcc4c587764b9b5e44ed",
+      "match_percent": 69.30645,
+      "retail_text_size": 6696,
+      "generated_text_size": 6976,
+      "generated_relocation_count": 301,
+      "generated_prologue": [
+        "stwu r1, -0xf0(r1)",
+        "mflr r0",
+        "lis r7, lbl_80243C30@ha",
+        "stw r0, 0xf4(r1)",
+        "stmw r15, 0xac(r1)"
+      ]
+    },
+    "relocation_strict": {
+      "raw_file": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/baseline-strict.json",
+      "sha256": "92e40c05df75232c16a069073b7d136d31254b5bb6b47b00c47613b14f200e74",
+      "match_percent": 69.29152,
+      "retail_text_size": 6696,
+      "generated_text_size": 6976,
+      "generated_relocation_count": 301,
+      "generated_prologue": [
+        "stwu r1, -0xf0(r1)",
+        "mflr r0",
+        "lis r7, lbl_80243C30@ha",
+        "stw r0, 0xf4(r1)",
+        "stmw r15, 0xac(r1)"
+      ]
+    },
+    "raw_relocations": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/baseline-relocations.txt"
+  },
+  "experiments": [
+    {
+      "raw_file": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/vector-pairs-canonical.json",
+      "sha256": "24680e7db33245407df44ba92257b03302c14b6eeaf5a831aee6adbb84760e28",
+      "match_percent": 69.72521,
+      "retail_text_size": 6696,
+      "generated_text_size": 7000,
+      "generated_relocation_count": 301,
+      "generated_prologue": [
+        "stwu r1, -0x100(r1)",
+        "mflr r0",
+        "lis r7, lbl_80243C30@ha",
+        "stw r0, 0x104(r1)",
+        "stmw r15, 0xbc(r1)"
+      ],
+      "name": "vector-pairs",
+      "hypothesis": "Recover three-float positions from fn_8011F114 and fn_802045AC, including both y-to-integer conversions.",
+      "cumulative_patch": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/vector-pairs.patch",
+      "patch_sha256": "dfbaa09bc09e5cffb11e4febffe05e913b3c016fc11b7484f2f768a1080cfe2f"
+    },
+    {
+      "raw_file": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/outgoing-arg-canonical.json",
+      "sha256": "f59e624cb7b3c30ffcd8dcdac60e76ad44a6bb06ceffa9308adc5e63f4412872",
+      "match_percent": 69.888885,
+      "retail_text_size": 6696,
+      "generated_text_size": 7008,
+      "generated_relocation_count": 301,
+      "generated_prologue": [
+        "stwu r1, -0x110(r1)",
+        "mflr r0",
+        "lis r7, lbl_80243C30@ha",
+        "stw r0, 0x114(r1)",
+        "stmw r15, 0xcc(r1)"
+      ],
+      "name": "outgoing-arg",
+      "hypothesis": "Restore the ninth integer argument (flags=0) to fn_801AAE68; the sp8 store was outgoing call state, not an unused local.",
+      "cumulative_patch": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/outgoing-arg.patch",
+      "patch_sha256": "70b2059422093f5945b60248c44aa827a0368047a09b1ae89ba4a726e1aa60aa"
+    },
+    {
+      "raw_file": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/linear-dispatch-canonical.json",
+      "sha256": "0c34eb824615447a46e1343f61ed2431f4a8a59aab2fb447388f015c35b4c4b7",
+      "match_percent": 92.73835,
+      "retail_text_size": 6696,
+      "generated_text_size": 6656,
+      "generated_relocation_count": 299,
+      "generated_prologue": [
+        "stwu r1, -0x110(r1)",
+        "mflr r0",
+        "lis r7, lbl_80243C30@ha",
+        "stw r0, 0x114(r1)",
+        "stmw r15, 0xcc(r1)"
+      ],
+      "name": "linear-dispatch",
+      "hypothesis": "Replace irregular switches with source-ordered comparison chains; preserve break semantics through do/while scopes.",
+      "cumulative_patch": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/linear-dispatch.patch",
+      "patch_sha256": "6aabc48507bfc54e01be77e982b1710af73b73a74ec224841b830be357945da7"
+    },
+    {
+      "raw_file": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/search-result-canonical.json",
+      "sha256": "089ee534cfae01f8a94432de2de328874a014cd19454d98abed317fae3dad6da",
+      "match_percent": 92.75089,
+      "retail_text_size": 6696,
+      "generated_text_size": 6656,
+      "generated_relocation_count": 299,
+      "generated_prologue": [
+        "stwu r1, -0x130(r1)",
+        "mflr r0",
+        "lis r7, lbl_80243C30@ha",
+        "stw r0, 0x134(r1)",
+        "stmw r15, 0xec(r1)"
+      ],
+      "name": "search-result",
+      "hypothesis": "Allocate the 0x24-byte result written by fn_8011F598 rather than a four-byte scalar.",
+      "cumulative_patch": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/search-result.patch",
+      "patch_sha256": "ddc06d1701ca6f6ed2684b854c000a36c698b575a76f08f137bac44dd012724e"
+    },
+    {
+      "raw_file": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/aggregate-copy-canonical.json",
+      "sha256": "a0ed5681e0393f2c29390f2efdc7a2e19455bd208e2e03233a17c3fa75e5e413",
+      "match_percent": 93.563324,
+      "retail_text_size": 6696,
+      "generated_text_size": 6656,
+      "generated_relocation_count": 299,
+      "generated_prologue": [
+        "stwu r1, -0x130(r1)",
+        "mflr r0",
+        "lis r7, lbl_80243C30@ha",
+        "stw r0, 0x134(r1)",
+        "stmw r15, 0xec(r1)"
+      ],
+      "name": "aggregate-copy",
+      "hypothesis": "Recover complete Vec3 assignment operations and remove phantom live-register arguments to fn_80204434.",
+      "cumulative_patch": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/aggregate-copy.patch",
+      "patch_sha256": "8b8f5954c4404b2e7f3c2bd761eebfc935abc437ad74fd899e4e53d519457716"
+    },
+    {
+      "raw_file": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/call-chains-canonical.json",
+      "sha256": "d12977219a0c88c7bc53063eeca998c1f32c4cdd088a8205f73ac90d1de3ccb4",
+      "match_percent": 93.548386,
+      "retail_text_size": 6696,
+      "generated_text_size": 6660,
+      "generated_relocation_count": 299,
+      "generated_prologue": [
+        "stwu r1, -0x130(r1)",
+        "mflr r0",
+        "lis r7, lbl_80243C30@ha",
+        "stw r0, 0x134(r1)",
+        "stmw r15, 0xec(r1)"
+      ],
+      "name": "call-chains",
+      "hypothesis": "Restore implicit return-value arguments lost by m2c and correct the cror-derived threshold condition to <=.",
+      "cumulative_patch": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/call-chains.patch",
+      "patch_sha256": "21f285604238c209ba0df007a3b0d01d669f3fb87084c0b49cf14f4cc7654f75"
+    },
+    {
+      "raw_file": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/expressions-canonical.json",
+      "sha256": "5c677915dc5d7d10c35ee11ea21d8c83de92035493b2812c8f91ed03b1e8c513",
+      "match_percent": 94.01195,
+      "retail_text_size": 6696,
+      "generated_text_size": 6652,
+      "generated_relocation_count": 299,
+      "generated_prologue": [
+        "stwu r1, -0x130(r1)",
+        "mflr r0",
+        "lis r7, lbl_80243C30@ha",
+        "stw r0, 0x134(r1)",
+        "stmw r15, 0xec(r1)"
+      ],
+      "name": "expressions",
+      "hypothesis": "Recover signed modulo-eight and clamp expressions.",
+      "cumulative_patch": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/expressions.patch",
+      "patch_sha256": "429e89a7755be501ede4a8414c51469cb34348e9236e227bf33ac0ca494a3c25"
+    },
+    {
+      "raw_file": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/argument-objects-canonical.json",
+      "sha256": "1f997a82ce6434fc7a07dca262f3787a77e1b89eee38735b9c44ad3f2b078dc0",
+      "match_percent": 94.04122,
+      "retail_text_size": 6696,
+      "generated_text_size": 6652,
+      "generated_relocation_count": 299,
+      "generated_prologue": [
+        "stwu r1, -0x130(r1)",
+        "mflr r0",
+        "lis r7, lbl_80243C30@ha",
+        "stw r0, 0x134(r1)",
+        "stmw r15, 0xec(r1)"
+      ],
+      "name": "argument-objects",
+      "hypothesis": "Replace one six-word argument aggregate with three independent two-word objects, recovering local stack offsets.",
+      "cumulative_patch": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/argument-objects.patch",
+      "patch_sha256": "071e216269668c66febf88449344709f1b6943bbf3a84b317a7f808219e2996a"
+    },
+    {
+      "raw_file": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/register-class-canonical.json",
+      "sha256": "1f997a82ce6434fc7a07dca262f3787a77e1b89eee38735b9c44ad3f2b078dc0",
+      "match_percent": 94.04122,
+      "retail_text_size": 6696,
+      "generated_text_size": 6652,
+      "generated_relocation_count": 299,
+      "generated_prologue": [
+        "stwu r1, -0x130(r1)",
+        "mflr r0",
+        "lis r7, lbl_80243C30@ha",
+        "stw r0, 0x134(r1)",
+        "stmw r15, 0xec(r1)"
+      ],
+      "name": "register-class",
+      "hypothesis": "Test explicit register storage class on long-lived values; no score change, reverted.",
+      "cumulative_patch": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/register-class.patch",
+      "patch_sha256": "7cd6c70379d756269860cd493e72ef6817e96539d08d919b1939d5cad1533f07"
+    },
+    {
+      "raw_file": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/signatures-canonical.json",
+      "sha256": "e3f3aba97ddd62510d549b5a2d8e3294d4ab370cc40c18257358ab31d2f5df6b",
+      "match_percent": 94.19056,
+      "retail_text_size": 6696,
+      "generated_text_size": 6652,
+      "generated_relocation_count": 299,
+      "generated_prologue": [
+        "stwu r1, -0x130(r1)",
+        "mflr r0",
+        "lis r7, lbl_80243C30@ha",
+        "stw r0, 0x134(r1)",
+        "stmw r15, 0xec(r1)"
+      ],
+      "name": "signatures",
+      "hypothesis": "Remove the phantom seventh fn_8012C62C argument, restore fn_801AAE68 parameter ordering, and eliminate redundant short casts.",
+      "cumulative_patch": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/signatures.patch",
+      "patch_sha256": "4dfa1d5aaea1ef843f2b8c09b00810d5ba5100d0bcb5b2d4cbfcfe42c745206d"
+    },
+    {
+      "raw_file": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/narrow-clamp-canonical.json",
+      "sha256": "2b76ec7b98e1e17e409a607183b0372f2fc5863556c2085088cc29fc607a66b6",
+      "match_percent": 94.56392,
+      "retail_text_size": 6696,
+      "generated_text_size": 6652,
+      "generated_relocation_count": 299,
+      "generated_prologue": [
+        "stwu r1, -0x130(r1)",
+        "mflr r0",
+        "lis r7, lbl_80243C30@ha",
+        "stw r0, 0x134(r1)",
+        "stmw r15, 0xec(r1)"
+      ],
+      "name": "narrow-clamp",
+      "hypothesis": "Recover promoted signed-short operands with narrowing at the clamp comparison.",
+      "cumulative_patch": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/narrow-clamp.patch",
+      "patch_sha256": "67066f7759f7b53be4e5390cff591a2fd31f6ef5c3a43ffd1f87a1d72eb271b2"
+    },
+    {
+      "raw_file": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/clamp-at-store-canonical.json",
+      "sha256": "ebf983b80e31a83c4f8389c524a3914188b671573a73ba31d5c2fb80b680f9e5",
+      "match_percent": 94.65651,
+      "retail_text_size": 6696,
+      "generated_text_size": 6656,
+      "generated_relocation_count": 299,
+      "generated_prologue": [
+        "stwu r1, -0x130(r1)",
+        "mflr r0",
+        "lis r7, lbl_80243C30@ha",
+        "stw r0, 0x134(r1)",
+        "stmw r15, 0xec(r1)"
+      ],
+      "name": "clamp-at-store",
+      "hypothesis": "Place clamp expressions at their consumers and recover the 64-bit mask before truncating fn_8020123C return.",
+      "cumulative_patch": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/clamp-at-store.patch",
+      "patch_sha256": "f365efcb80158fa3a8d6c83582a88cc15bb728a6710d88514cdbfc04b8004a23"
+    },
+    {
+      "raw_file": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/clamp-casts-canonical.json",
+      "sha256": "0cb02e44e5b97697689ffe2503873ef6bcd73fcbc30e2f65a0c9f00046802588",
+      "match_percent": 94.28316,
+      "retail_text_size": 6696,
+      "generated_text_size": 6656,
+      "generated_relocation_count": 299,
+      "generated_prologue": [
+        "stwu r1, -0x130(r1)",
+        "mflr r0",
+        "lis r7, lbl_80243C30@ha",
+        "stw r0, 0x134(r1)",
+        "stmw r15, 0xec(r1)"
+      ],
+      "name": "clamp-casts",
+      "hypothesis": "Test narrowing both clamp operands; regression, reverted.",
+      "cumulative_patch": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/clamp-casts.patch",
+      "patch_sha256": "e57761db98bcbdc15d2d0d50b8806394155112484aeb88f8efc799f53516a047"
+    }
+  ],
+  "patch_reproduction": {
+    "basis": "Each cumulative patch applies independently to the accepted base source, not on top of another variant. Patches remain experimental evidence; only the retained target TU is registered.",
+    "working_directory": ".",
+    "apply": "git apply <cumulative_patch> in a clean checkout of the stated base",
+    "compile_working_directory": "eternal-darkness-decomp",
+    "compile": ".tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_800614A8.o",
+    "measure": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_800614A8 -o <output> --format json -c function_reloc_diffs=none fn_800614A8",
+    "retained_patch": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/final.patch"
+  },
+  "canonical": {
+    "raw_file": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/final-canonical.json",
+    "sha256": "ebf983b80e31a83c4f8389c524a3914188b671573a73ba31d5c2fb80b680f9e5",
+    "match_percent": 94.65651,
+    "retail_text_size": 6696,
+    "generated_text_size": 6656,
+    "generated_relocation_count": 299,
+    "generated_prologue": [
+      "stwu r1, -0x130(r1)",
+      "mflr r0",
+      "lis r7, lbl_80243C30@ha",
+      "stw r0, 0x134(r1)",
+      "stmw r15, 0xec(r1)"
+    ]
+  },
+  "relocation_strict": {
+    "raw_file": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/final-strict.json",
+    "sha256": "5cb1f5e5e685b25037ddb8a95f7c49d5e0dd242cfe3fadb03b5119c0096d525f",
+    "match_percent": 94.64755,
+    "retail_text_size": 6696,
+    "generated_text_size": 6656,
+    "generated_relocation_count": 299,
+    "generated_prologue": [
+      "stwu r1, -0x130(r1)",
+      "mflr r0",
+      "lis r7, lbl_80243C30@ha",
+      "stw r0, 0x134(r1)",
+      "stmw r15, 0xec(r1)"
+    ]
+  },
+  "measurement_commands": {
+    "working_directory": "eternal-darkness-decomp",
+    "canonical": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_800614A8 -o reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/final-canonical.json --format json -c function_reloc_diffs=none fn_800614A8",
+    "strict": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_800614A8 -o reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/final-strict.json --format json -c function_reloc_diffs=name_address fn_800614A8"
+  },
+  "byte_comparison": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/byte-comparison.json",
+  "relocations": {
+    "retail_count": 299,
+    "baseline_count": 301,
+    "retained_count": 299,
+    "ordinal_tuple_differences": 285,
+    "target_type_or_addend_differences": 4,
+    "raw_retail": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/retail-relocations.txt",
+    "raw_retained": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/final-relocations.txt",
+    "comparison": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/relocation-comparison.json"
+  },
+  "build": {
+    "working_directory": "eternal-darkness-decomp",
+    "commands": [
+      "python3 configure.py",
+      ".tools/bin/ninja -j2"
+    ],
+    "configure_exit": 0,
+    "ninja_exit": 0,
+    "raw_configure": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/final-configure.log",
+    "raw_ninja": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/final-build.log"
+  },
+  "dol": {
+    "sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "cmp_exit": 0,
+    "raw": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/dol-sha1.txt",
+    "limitation": "NonMatching links the extracted retail object; this verifies only the repository DOL gate."
+  },
+  "legal_audit": {
+    "command": "python3 tools/legal_audit.py",
+    "working_directory": "eternal-darkness-decomp",
+    "raw": "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/legal-audit.log"
+  },
+  "divergence": "Retained canonical 94.65651% and relocation-strict 94.64755% (6696 retail bytes, 6656 generated). The retail 0x130 frame and r15-r31 save area at +0xEC now match. Long-lived registers still differ (e.g. arg0 retail r29/generated r31), clamp branches and several call/return sequences differ, and the empty comparison at retail +0x1558 followed by nop is optimized away. Both objects have 299 .rela.text entries, but 285 ordered offset/type/target/addend tuples differ; two global-load relocations reorder and two generated double-conversion relocations target local @559 instead of lbl_8064E5C0. NonMatching links the extracted retail object, so the passing DOL gate does not validate candidate code. Pre-existing harness-owned CLAUDE.md remains unstaged and untouched.",
+  "worktree_note": "CLAUDE.md was dirty before work and remains untouched and unstaged. No runtime, global progress, compiler policy, neighboring source, or shared input edits."
+}

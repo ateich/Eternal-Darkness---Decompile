@@ -1,0 +1,40 @@
+{
+  "hypothesis": "The preserved high score hides operand and control-flow errors rather than only allocator noise. Audit mismatched argument registers and branch destinations against retail first; then test whether lexical loop nesting removes cached-byte live-range splits without any compiler changes.",
+  "preserved_commits_reviewed": [
+    "54cf7047be48e733428553a6e70a91b0881c4564",
+    "b5f0bf7d98c589d5eed919164de607855da4cc14"
+  ],
+  "baseline_preserved_strict_percent": 95.11074,
+  "argument_order_only_strict_percent": 95.144295,
+  "trials": [
+    {
+      "variant": "corrected-baseline",
+      "strict_percent": 95.36242,
+      "generated_size": "1208",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A3DF8.o\n",
+      "build_stderr": ""
+    },
+    {
+      "variant": "positive-active-guard",
+      "strict_percent": 95.36242,
+      "generated_size": "1208",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A3DF8.o\n",
+      "build_stderr": ""
+    },
+    {
+      "variant": "interpolation-else",
+      "strict_percent": 95.36242,
+      "generated_size": "1208",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A3DF8.o\n",
+      "build_stderr": ""
+    },
+    {
+      "variant": "nested-positive-guards",
+      "strict_percent": 95.36242,
+      "generated_size": "1208",
+      "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A3DF8.o\n",
+      "build_stderr": ""
+    }
+  ],
+  "conclusion": "Behavioral and local declaration corrections improve canonical and relocation-strict scores to 95.36242. Equivalent positive-active and interpolation-else loop structures compile identically; retain the original simpler loop structure. No compiler flags changed. No prior lmw/stmw, declaration-order, cache-order, register-keyword, or scalar-type probes repeated."
+}

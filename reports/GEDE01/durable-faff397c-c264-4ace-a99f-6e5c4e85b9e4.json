@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "faff397c-c264-4ace-a99f-6e5c4e85b9e4",
+  "attempt": 4,
+  "base_commit": "35fd9ad40d14c1825d9331473327c83c2e14875d",
+  "target": "fn_801A260C",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-faff397c-c264-4ace-a99f-6e5c4e85b9e4.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff are size-exact at 980 bytes and measure 97.57143%. Materializing the alpha expression in a loop-local float before multiplying by scale is a distinct lifetime/codegen hypothesis and improves the preserved 97.53061% candidate by matching retail's final fmuls operand order. Reordering the integer temporary declarations was neutral at 97.53061%; direct in-place clamping regressed to 976 bytes and 95.46939%, so both were discarded. Remaining text differences are the initial state/particle/float-load scheduling, the f27-f30 allocation reversal among the alpha constants and signed-conversion bias, and the r4-r7 allocation cycle in the modulo/clamp block. Game-symbol and call relocation targets/addends agree; compiler-generated signed-conversion constants remain local @31/@40 instead of retail lbl_80650D08/lbl_80650D20. python3 configure.py and .tools/bin/ninja -j2 completed successfully, config/GEDE01/build.sha1 passed, and build/GEDE01/main.dol independently hashes to ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}

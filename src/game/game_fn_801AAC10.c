@@ -7,6 +7,7 @@ typedef struct Record {
 extern Record lbl_806080E0[];
 extern void fn_801AA9FC(int);
 
+#pragma peephole off
 Record* fn_801AAC10(void)
 {
     Record* record;
@@ -21,3 +22,4 @@ Record* fn_801AAC10(void)
     fn_801AA9FC(1);
     return 0;
 }
+#pragma peephole reset

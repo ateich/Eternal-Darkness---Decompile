@@ -1,0 +1,61 @@
+$ git rev-parse HEAD
+3707b9066fe42f247654c4c60dedceb0b1728f70
+exit_code=0
+$ git diff 3707b9066 8521d82 -- src/game/game_fn_801F1A38.c configure.py config/GEDE01/splits.txt
+exit_code=0
+$ git show b9d3857:eternal-darkness-decomp/reports/GEDE01/durable-8d8c63a5-382d-4186-9f87-d761361da8cc.json
+{
+  "version": 1,
+  "assignment_id": "8d8c63a5-382d-4186-9f87-d761361da8cc",
+  "attempt": 1,
+  "base_commit": "494687fdd95508e1d6c63707cd5b332c2fef3603",
+  "target": "fn_801F1A38",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-8d8c63a5-382d-4186-9f87-d761361da8cc.json"
+  ],
+  "divergence": "Canonical relocation-strict objdiff is 83.89087%: retail is 1796 bytes and generated is 1768 bytes, with 39 relocations on each side. GC/1.3 emits a 0x180-byte frame instead of retail's 0x1E0-byte frame, then differs in register allocation and instruction scheduling through the loops. The canonical relink still produces the required retail-identical DOL SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}
+exit_code=0
+$ git show abb1f96:eternal-darkness-decomp/reports/GEDE01/durable-20ef0b3a-32e4-4c55-9992-a069c51a8832.json
+{
+  "version": 1,
+  "assignment_id": "20ef0b3a-32e4-4c55-9992-a069c51a8832",
+  "attempt": 2,
+  "base_commit": "d29dd9ddd533558280a49d4df3164eb6fd91354f",
+  "target": "fn_801F1A38",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-20ef0b3a-32e4-4c55-9992-a069c51a8832.json"
+  ],
+  "divergence": "Fresh relocation-strict objdiff (function_reloc_diffs=name_address) is 83.78842%: retail .text is 1796 bytes and generated .text is 1776 bytes, with 39 relocation-bearing instructions on each side. The reconstruction now reproduces retail's 0x1E0 frame and grounded local layout (distinct clamped Vec3 at stack+0x2C, 0x7C-byte candidate at +0x38, and eight 0x14-byte EffectRec outputs at +0xB4), and the signed-conversion bias is externalized to lbl_80651360 with no generated .sdata2. The remaining divergence begins in persistent-register allocation (retail point/target/input/group/requested/flags use r15/r16/r17/r19/r18/r28; generated uses r17/r18/r19/r14/r20/r15) and propagates through scheduling; generated code is five instructions shorter. The complete build passed and build/GEDE01/main.dol SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f, but this NonMatching unit is excluded from that link gate."
+}
+exit_code=0
+$ git show f0cffd67:eternal-darkness-decomp/reports/GEDE01/durable-a2807c6f-f27d-49c9-9662-77bf9a68a894.json
+{
+  "version": 1,
+  "assignment_id": "a2807c6f-f27d-49c9-9662-77bf9a68a894",
+  "attempt": 3,
+  "base_commit": "9b99ea144b9ecb895807bc3733e4c911aeca6a2b",
+  "target": "fn_801F1A38",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-a2807c6f-f27d-49c9-9662-77bf9a68a894.json"
+  ],
+  "divergence": "Fresh relocation-strict objdiff (function_reloc_diffs=name_address) is 87.57238%: retail .text is 1796 bytes and generated .text is 1816 bytes, with 39 relocation-bearing instructions on each side. Conditional-expression spellings now reproduce retail's three floating-point clamp sequences and cap-selection control flow, while entry initialization of special_offset recreates the seventh live zero-valued local and forces selected to a stack slot. The remaining divergence begins in local-slot/register coloring: retail stores effect_count at stack+0x1C and selected at +0x16C and keeps group/requested/flags in r19/r18/r28, whereas generated uses stack+0x18 and +0x170 and r18/r31/r21; candidate-pointer and later loop allocation/scheduling then diverge, leaving generated five instructions longer. The full canonical build passed and build/GEDE01/main.dol SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f; this NonMatching unit remains excluded from the link gate."
+}
+exit_code=0
+$ git show 8521d82:eternal-darkness-decomp/reports/GEDE01/durable-231edd2e-b8e6-4c0c-a67c-ab9218b8c52a.json
+{
+  "version": 1,
+  "assignment_id": "231edd2e-b8e6-4c0c-a67c-ab9218b8c52a",
+  "attempt": 4,
+  "base_commit": "3707b9066fe42f247654c4c60dedceb0b1728f70",
+  "target": "fn_801F1A38",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-231edd2e-b8e6-4c0c-a67c-ab9218b8c52a.json"
+  ],
+  "divergence": "Fresh relocation-strict objdiff (function_reloc_diffs=name_address) preserves the recovered best candidate at 87.57238%: retail .text is 1796 bytes and generated .text is 1816 bytes, with 39 relocation-bearing instructions on each side. The accepted base already contains the recovered effects[8] reconstruction and signed-bias externalization, producing retail's 0x1E0 frame and no generated .sdata2. A new stack-coloring hypothesis was tested: swapping selected/effect_count declaration order was codegen-neutral at 87.57238%, while hoisting the address-taken debug color from its block scopes to function scope regressed to 87.42762% and changed the frame layout, so neither variant was retained. The remaining divergence starts at local coloring: retail places effect_count at stack+0x1C and selected at +0x16C and keeps group/requested/flags in r19/r18/r28; generated uses stack+0x18 and +0x170 and r18/r30/r21, propagating through candidate-pointer allocation and later scheduling and leaving generated five instructions longer. The required canonical build completed, and build/GEDE01/main.dol SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f; because this unit remains NonMatching, that DOL verification validates the unchanged link gate rather than this candidate's inclusion."
+}
+exit_code=0

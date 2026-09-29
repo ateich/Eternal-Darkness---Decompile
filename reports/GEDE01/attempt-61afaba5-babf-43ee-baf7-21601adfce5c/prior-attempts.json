@@ -1,0 +1,65 @@
+{
+  "warning": "Historical claims reproduced for provenance; fresh measurements supersede the older nine-relocation claim.",
+  "attempts": [
+    {
+      "commit": "643f19b470",
+      "historical_envelope": {
+        "version": 1,
+        "assignment_id": "2aa987da-0310-4166-890c-e2a709675307",
+        "attempt": 4,
+        "base_commit": "c2e15a40929be33380ff2ce31c9e6bed3e788359",
+        "target": "fn_8011C0F0",
+        "status": "attempted",
+        "evidence": [
+          "eternal-darkness-decomp/reports/GEDE01/objdiff-2aa987da-0310-4166-890c-e2a709675307.json"
+        ],
+        "divergence": "Canonical GC/1.3 output remains size-exact at 188/188 bytes and 85.297874%. Retail schedules lbl_8023A670@l after the LR store (relocation offset 0x12 versus generated 0x0e), uses r8 rather than r10 for the enabled-branch index, and delays the color store and &color formation until immediately before the call. All five ELF relocation symbol names, types, and addends agree; the low-half relocation offset differs with the prologue schedule. The retained TU has inherited signature debt: extern const Quad lbl_8023A670 conflicts in type and volatile qualification with the matching const volatile u32[4] definition. New rejected hypotheses: a seventh-argument comma expression compiled identically at 85.297874%; an enabled-branch Entry pointer local shortened output to 180 bytes and 69.02128%."
+      }
+    },
+    {
+      "commit": "6c5b220d",
+      "historical_envelope": {
+        "version": 1,
+        "assignment_id": "98c8cd96-3914-438e-a2b1-f4801bbac32b",
+        "attempt": 3,
+        "base_commit": "3a4807ef41ae0f301d8bdd9504838ab10e6ffc4c",
+        "target": "fn_8011C0F0",
+        "status": "attempted",
+        "evidence": [
+          "eternal-darkness-decomp/reports/GEDE01/objdiff-98c8cd96-3914-438e-a2b1-f4801bbac32b.json"
+        ],
+        "divergence": "Canonical GC/1.3 output remains size-exact at 188/188 bytes and 85.297874%; all 9 relocation records agree between retail and generated output. Retail schedules the lbl_8023A670 low-address add after the LR store, then uses r8 for the enabled-branch index offset and delays the color stack store, &color formation, and constant arguments until between indexed halfword loads; generated output hoists the low-address add, uses r10 for the index offset, and emits the color store/pointer before those loads. Preserved attempt e8d760ef reached 89.55319% only by declaring lbl_8023A670 mutable, contradicting the matching const volatile u32[4] definition in game_data_8023A670.c, and was not retained. New dead ends with no score improvement: const volatile aggregate declaration; exact const volatile u32[4] declaration plus aggregate cast; short[2][4] local layout; unsigned color with const unsigned pointer prototype; and a materialized enabled boolean before a volatile aggregate copy."
+      }
+    },
+    {
+      "commit": "e8d760ef",
+      "historical_envelope": {
+        "version": 1,
+        "assignment_id": "40447b6a-9546-450c-abc7-b755175ba44b",
+        "attempt": 2,
+        "base_commit": "b31cf4077457f21b8ef407c500517ba570c8bee3",
+        "target": "fn_8011C0F0",
+        "status": "attempted",
+        "evidence": [
+          "eternal-darkness-decomp/reports/GEDE01/objdiff-40447b6a-9546-450c-abc7-b755175ba44b.json"
+        ],
+        "divergence": "Improved the accepted base from 85.297874% to 89.55319% while remaining size-exact at 188/188 bytes; all 9 relocations agree in type, target, and addend. The retained mutable declaration of lbl_8023A670 fixes the previous aggregate-base prologue scheduling mismatch. The only remaining differences are in the enabled branch: retail keeps the index offset in r8 and delays the color store/pointer and constants, whereas the reconstruction keeps the offset in r10 and schedules stw r0,0x8(r1) plus addi r9,r1,0x8 before the indexed halfword loads. Dead ends measured at no improvement were color-before-Quad declaration order, branch-scoped color, leading index copy, volatile color, const pointer and old-style callee prototypes, explicit argument locals, comma-sequenced color assignment, and register-qualified index; an Entry pointer form regressed to 69.02128% and 180 bytes."
+      }
+    },
+    {
+      "commit": "534f5c18",
+      "historical_envelope": {
+        "version": 1,
+        "assignment_id": "b37c9f4d-8e20-4426-b94c-6ca779f56f90",
+        "attempt": 1,
+        "base_commit": "92322dc6935f298992af4d951b3bdd0eab46081f",
+        "target": "fn_8011C0F0",
+        "status": "attempted",
+        "evidence": [
+          "eternal-darkness-decomp/reports/GEDE01/objdiff-b37c9f4d-8e20-4426-b94c-6ca779f56f90.json"
+        ],
+        "divergence": "Canonical objdiff is size-exact at 188/188 bytes and 85.297874%; remaining instruction differences are the aggregate-base addi scheduled across the LR save and, in the enabled branch, equivalent r8/r10 indexed-halfword argument allocation plus scheduling of the color store, color-pointer formation, and constant arguments."
+      }
+    }
+  ]
+}

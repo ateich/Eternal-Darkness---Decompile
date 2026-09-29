@@ -1,0 +1,642 @@
+{
+  "version": 1,
+  "assignment_id": "371b194e-ebff-4505-b034-1d0029c56cd3",
+  "target": "fn_80155330",
+  "status": "attempted",
+  "preserved_commit": "846099ccbeb0ed9204ccf4560e89192fdacbf90d",
+  "reconciliation": "Accepted base already contains the preserved source byte-for-byte and its NonMatching registration. No source or registration change retained.",
+  "source_sha256": "6f52e778803259d277c9232c68a525c6b832c00c342b29c8a8227b7e51612ca6",
+  "compiler": "GC/1.3",
+  "compiler_policy": "Unchanged canonical settings, including -O4,p -inline auto -use_lmw_stmw on. Full compiler command is in verification evidence.",
+  "measurement": {
+    "canonical_percent": 97.59763,
+    "relocation_strict_percent": 97.59763,
+    "strict_config": "function_reloc_diffs=name_address",
+    "retail_bytes": 676,
+    "candidate_bytes": 676,
+    "different_instruction_words": 18,
+    "different_bytes": 26,
+    "canonical_100_percent": false,
+    "relocation_strict_100_percent": false,
+    "elf_relocations_each": 31,
+    "elf_relocation_streams_identical": true,
+    "objdiff_relocation_bearing_instructions_each": 32,
+    "objdiff_relocation_streams_identical": true
+  },
+  "exact_codegen_divergence": "Canonical and relocation-strict objdiff remain 97.59763% at 676 bytes. Eighteen instruction words (26 bytes) differ: second Work base r22 instead of retail r21 at 0x158 and its uses; field14 uses r7 and stores at 0x1e8 instead of retail r5 at 0x1d8, while field2c stores at 0x1e0 instead of 0x1e8; loop bound and element pointer exchange r22/r23 at 0x220, 0x230, 0x238, 0x248, and 0x250. All 31 actual ELF relocations match offsets, types, semantic targets, symbol values, and addends; all 32 objdiff relocation-bearing instructions also match, including the inferred lbl_802FC5BC+12 reference.",
+  "instruction_differences": [
+    {
+      "offset": "0x158",
+      "retail": "mr r21, r31",
+      "candidate": "mr r22, r31",
+      "retail_word": "7ff5fb78",
+      "candidate_word": "7ff6fb78"
+    },
+    {
+      "offset": "0x170",
+      "retail": "mr r3, r21",
+      "candidate": "mr r3, r22",
+      "retail_word": "7ea3ab78",
+      "candidate_word": "7ec3b378"
+    },
+    {
+      "offset": "0x180",
+      "retail": "stw r0, 0x94(r21)",
+      "candidate": "stw r0, 0x94(r22)",
+      "retail_word": "90150094",
+      "candidate_word": "90160094"
+    },
+    {
+      "offset": "0x188",
+      "retail": "stb r3, 0xbc(r21)",
+      "candidate": "stb r3, 0xbc(r22)",
+      "retail_word": "987500bc",
+      "candidate_word": "987600bc"
+    },
+    {
+      "offset": "0x19c",
+      "retail": "mr r3, r21",
+      "candidate": "mr r3, r22",
+      "retail_word": "7ea3ab78",
+      "candidate_word": "7ec3b378"
+    },
+    {
+      "offset": "0x1ac",
+      "retail": "stb r3, 0x1(r21)",
+      "candidate": "stb r3, 0x1(r22)",
+      "retail_word": "98750001",
+      "candidate_word": "98760001"
+    },
+    {
+      "offset": "0x1b8",
+      "retail": "stb r0, 0x0(r21)",
+      "candidate": "stb r0, 0x0(r22)",
+      "retail_word": "98150000",
+      "candidate_word": "98160000"
+    },
+    {
+      "offset": "0x1c4",
+      "retail": "li r5, 0x7",
+      "candidate": "li r7, 0x7",
+      "retail_word": "38a00007",
+      "candidate_word": "38e00007"
+    },
+    {
+      "offset": "0x1cc",
+      "retail": "sth r3, 0x4(r21)",
+      "candidate": "sth r3, 0x4(r22)",
+      "retail_word": "b0750004",
+      "candidate_word": "b0760004"
+    },
+    {
+      "offset": "0x1d8",
+      "retail": "stb r5, 0x14(r21)",
+      "candidate": "lwz r5, 0xc8(r1)",
+      "retail_word": "98b50014",
+      "candidate_word": "80a100c8"
+    },
+    {
+      "offset": "0x1e0",
+      "retail": "lwz r5, 0xc8(r1)",
+      "candidate": "stw r6, 0x2c(r22)",
+      "retail_word": "80a100c8",
+      "candidate_word": "90d6002c"
+    },
+    {
+      "offset": "0x1e8",
+      "retail": "stw r6, 0x2c(r21)",
+      "candidate": "stb r7, 0x14(r22)",
+      "retail_word": "90d5002c",
+      "candidate_word": "98f60014"
+    },
+    {
+      "offset": "0x1ec",
+      "retail": "stb r0, 0x2f(r21)",
+      "candidate": "stb r0, 0x2f(r22)",
+      "retail_word": "9815002f",
+      "candidate_word": "9816002f"
+    },
+    {
+      "offset": "0x220",
+      "retail": "clrlwi r23, r29, 24",
+      "candidate": "clrlwi r22, r29, 24",
+      "retail_word": "57b7063e",
+      "candidate_word": "57b6063e"
+    },
+    {
+      "offset": "0x230",
+      "retail": "addi r22, r3, 0x88",
+      "candidate": "addi r23, r3, 0x88",
+      "retail_word": "3ac30088",
+      "candidate_word": "3ae30088"
+    },
+    {
+      "offset": "0x238",
+      "retail": "lwz r4, 0x0(r22)",
+      "candidate": "lwz r4, 0x0(r23)",
+      "retail_word": "80960000",
+      "candidate_word": "80970000"
+    },
+    {
+      "offset": "0x248",
+      "retail": "addi r22, r22, 0x4",
+      "candidate": "addi r23, r23, 0x4",
+      "retail_word": "3ad60004",
+      "candidate_word": "3af70004"
+    },
+    {
+      "offset": "0x250",
+      "retail": "cmpw r21, r23",
+      "candidate": "cmpw r21, r22",
+      "retail_word": "7c15b800",
+      "candidate_word": "7c15b000"
+    }
+  ],
+  "elf_relocations": [
+    {
+      "offset": 52,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_80201814",
+      "addend": 0
+    },
+    {
+      "offset": 64,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_80155DB4",
+      "addend": 0
+    },
+    {
+      "offset": 72,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_80149E04",
+      "addend": 0
+    },
+    {
+      "offset": 80,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_80149E04",
+      "addend": 0
+    },
+    {
+      "offset": 124,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_80147E88",
+      "addend": 0
+    },
+    {
+      "offset": 136,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_801555D4",
+      "addend": 0
+    },
+    {
+      "offset": 154,
+      "type": "R_PPC_ADDR16_HA",
+      "symbol_value": 0,
+      "target": "fn_801556DC",
+      "addend": 0
+    },
+    {
+      "offset": 158,
+      "type": "R_PPC_ADDR16_LO",
+      "symbol_value": 0,
+      "target": "fn_801556DC",
+      "addend": 0
+    },
+    {
+      "offset": 176,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_80149B0C",
+      "addend": 0
+    },
+    {
+      "offset": 184,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_801A438C",
+      "addend": 0
+    },
+    {
+      "offset": 252,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_80149B60",
+      "addend": 0
+    },
+    {
+      "offset": 292,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_80179BC0",
+      "addend": 0
+    },
+    {
+      "offset": 332,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_80149B60",
+      "addend": 0
+    },
+    {
+      "offset": 360,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_80147E88",
+      "addend": 0
+    },
+    {
+      "offset": 372,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_80148A98",
+      "addend": 0
+    },
+    {
+      "offset": 408,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_80149B38",
+      "addend": 0
+    },
+    {
+      "offset": 416,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_80184740",
+      "addend": 0
+    },
+    {
+      "offset": 444,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_801D3A24",
+      "addend": 0
+    },
+    {
+      "offset": 450,
+      "type": "R_PPC_ADDR16_HA",
+      "symbol_value": 0,
+      "target": "lbl_802FC5BC",
+      "addend": 0
+    },
+    {
+      "offset": 458,
+      "type": "R_PPC_ADDR16_LO",
+      "symbol_value": 0,
+      "target": "lbl_802FC5BC",
+      "addend": 0
+    },
+    {
+      "offset": 496,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_80148300",
+      "addend": 0
+    },
+    {
+      "offset": 516,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_80148300",
+      "addend": 0
+    },
+    {
+      "offset": 530,
+      "type": "R_PPC_ADDR16_HA",
+      "symbol_value": 0,
+      "target": "fn_801487AC",
+      "addend": 0
+    },
+    {
+      "offset": 534,
+      "type": "R_PPC_ADDR16_LO",
+      "symbol_value": 0,
+      "target": "fn_801487AC",
+      "addend": 0
+    },
+    {
+      "offset": 536,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_801568B8",
+      "addend": 0
+    },
+    {
+      "offset": 580,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_801A4420",
+      "addend": 0
+    },
+    {
+      "offset": 608,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_80149EB8",
+      "addend": 0
+    },
+    {
+      "offset": 620,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_80149EB8",
+      "addend": 0
+    },
+    {
+      "offset": 628,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_80149EB8",
+      "addend": 0
+    },
+    {
+      "offset": 640,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_80149EB8",
+      "addend": 0
+    },
+    {
+      "offset": 648,
+      "type": "R_PPC_REL24",
+      "symbol_value": 0,
+      "target": "fn_80149EB8",
+      "addend": 0
+    }
+  ],
+  "objdiff_relocations": [
+    {
+      "instruction_offset": 52,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_80201814",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 64,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_80155DB4",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 72,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_80149E04",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 80,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_80149E04",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 124,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_80147E88",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 136,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_801555D4",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 152,
+      "type": 6,
+      "type_name": "R_PPC_ADDR16_HA",
+      "target": "fn_801556DC",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 156,
+      "type": 4,
+      "type_name": "R_PPC_ADDR16_LO",
+      "target": "fn_801556DC",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 176,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_80149B0C",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 184,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_801A438C",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 252,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_80149B60",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 292,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_80179BC0",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 332,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_80149B60",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 360,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_80147E88",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 372,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_80148A98",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 408,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_80149B38",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 416,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_80184740",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 444,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_801D3A24",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 448,
+      "type": 6,
+      "type_name": "R_PPC_ADDR16_HA",
+      "target": "lbl_802FC5BC",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 456,
+      "type": 4,
+      "type_name": "R_PPC_ADDR16_LO",
+      "target": "lbl_802FC5BC",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 464,
+      "type": 0,
+      "type_name": "R_PPC_NONE",
+      "target": "lbl_802FC5BC",
+      "addend": 12
+    },
+    {
+      "instruction_offset": 496,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_80148300",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 516,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_80148300",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 528,
+      "type": 6,
+      "type_name": "R_PPC_ADDR16_HA",
+      "target": "fn_801487AC",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 532,
+      "type": 4,
+      "type_name": "R_PPC_ADDR16_LO",
+      "target": "fn_801487AC",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 536,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_801568B8",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 580,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_801A4420",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 608,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_80149EB8",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 620,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_80149EB8",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 628,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_80149EB8",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 640,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_80149EB8",
+      "addend": 0
+    },
+    {
+      "instruction_offset": 648,
+      "type": 10,
+      "type_name": "R_PPC_REL24",
+      "target": "fn_80149EB8",
+      "addend": 0
+    }
+  ],
+  "experiment_count_including_baseline": 67,
+  "new_hypotheses": [
+    "Represent field2c as a four-byte Color aggregate to test aggregate-copy scheduling; neutral at 97.59763%.",
+    "Change loop-bound lifetime/type/declaration placement and indexed versus explicit induction-pointer forms to test allocator coalescing; no improvement.",
+    "Split loop index from call argument and change independent field-store order to test scheduling dependencies; no improvement.",
+    "Use direct first-record field/address expressions to shorten first-pointer liveness across second initialization; neutral.",
+    "Replace WorkLocals with two records carrying their own object pointer, including separate-local, array, and wrapper forms; no improvement."
+  ],
+  "retained_candidate_note": "Retained exactly the one pre-existing honest NonMatching C TU. WorkLocals remains a reconstruction device preserving stack layout, not an established original declaration. Rejected variants are not retained as source TUs.",
+  "fresh_build": {
+    "full_ninja_exit": 0,
+    "forced_fresh_outputs": [
+      "build/GEDE01/main.elf",
+      "build/GEDE01/main.dol"
+    ],
+    "method": "Deleted only those generated outputs before the full canonical Ninja build. Final ELF and DOL timestamps follow final candidate object timestamp.",
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "limitation": "NonMatching registration links the retail object; the valid DOL does not establish a matching C candidate."
+  },
+  "legal_audit": {
+    "exit_code": 0,
+    "source": "Independent C, no assembly, no neighboring function changes, no compiler/gate policy changes.",
+    "commit_scope": "Assignment-specific text/JSON reports only; no generated binary or private input."
+  },
+  "preexisting_dirty_file": {
+    "path": "CLAUDE.md",
+    "action": "Preserved and excluded from commit; outside authorized edit scope."
+  },
+  "raw_measured_outputs": [
+    "canonical: target 676 bytes, candidate 676 bytes, match 97.59763",
+    "relocation-strict: match 97.59763",
+    "ELF .text comparison: 18 differing words, 26 differing bytes",
+    "31 actual ELF RELA entries identical; 32 objdiff relocation-bearing instructions identical",
+    "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+    "ea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol"
+  ],
+  "raw_evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/canonical-371b194e-ebff-4505-b034-1d0029c56cd3.json",
+    "eternal-darkness-decomp/reports/GEDE01/strict-371b194e-ebff-4505-b034-1d0029c56cd3.json",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-371b194e-ebff-4505-b034-1d0029c56cd3.json",
+    "eternal-darkness-decomp/reports/GEDE01/verification-371b194e-ebff-4505-b034-1d0029c56cd3.json"
+  ]
+}

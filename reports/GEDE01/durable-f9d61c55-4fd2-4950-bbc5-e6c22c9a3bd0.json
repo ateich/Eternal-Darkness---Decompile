@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "f9d61c55-4fd2-4950-bbc5-e6c22c9a3bd0",
+  "attempt": 3,
+  "base_commit": "75fbdf3ce97b0b562c54c1f2539e78b4ed2a321c",
+  "target": "fn_801A53C4",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-f9d61c55-4fd2-4950-bbc5-e6c22c9a3bd0.json"
+  ],
+  "divergence": "Relocation-strict objdiff is 91.70861% with retail and generated code both 604 bytes and all four relocation types, targets, and addends equal. Remaining divergence is MWCC scheduling/register allocation: generated code emits the 0x90-byte frame allocation before the lbl_80607130 high-address load, retains the global base in r6 rather than retail r5, and schedules the fourth unrolled float-conversion spill/load pair at stack offsets 0x38/0x3c later than retail. An explicit u16 offset local with scale initialization moved ahead of pointer formation produced identical codegen and was not retained. Canonical Ninja completed successfully and main.dol SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}

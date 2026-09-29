@@ -1,0 +1,1144 @@
+{
+  "experiments": [
+    {
+      "name": "baseline",
+      "source_form": "unsigned long long fn_800F61F4(unsigned int hi, unsigned int lo, unsigned int shift)\n{\n    unsigned int out_hi;\n    unsigned int out_lo;\n    int under = 32 - shift;\n    int over = shift - 32;\n    out_hi = hi << shift;\n    out_hi |= lo >> under;\n    out_hi |= lo << over;\n    out_lo = lo << shift;\n    return ((unsigned long long)out_hi << 32) | out_lo;\n}\n",
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_800F61F4.o\n",
+      "diff_output": "target 36 bytes  base 40 bytes  match 27.777779\n* 0x0000  subfic r8, r5, 0x20                                  | subfic r7, r5, 0x20\n* 0x0004  subic r9, r5, 0x20                                   | subi r6, r5, 0x20\n* 0x0008                                                       | slw r3, r3, r5\n* 0x000c  slw r3, r3, r5                                       | slw r0, r4, r5\n* 0x0010  srw r10, r4, r8                                      | srw r7, r4, r7\n* 0x0014                                                       | slw r5, r4, r6\n* 0x0018                                                       | or r3, r3, r7\n* 0x001c  or r3, r3, r10                                       | mr r4, r0\n* 0x0020  slw r10, r4, r9                                      | \n* 0x0024  or r3, r3, r10                                       | or r3, r3, r5\n* 0x0028  slw r4, r4, r5                                       | \n  0x002c  blr                                                  | blr\n",
+      "match_percent": 27.777779,
+      "generated_size": "40"
+    },
+    {
+      "name": "additive_return",
+      "source_form": "unsigned long long fn_800F61F4(unsigned int hi, unsigned int lo, unsigned int shift)\n{\n    unsigned int out_hi;\n    unsigned int out_lo;\n    int under = 32 - shift;\n    int over = shift - 32;\n    out_hi = hi << shift;\n    out_hi |= lo >> under;\n    out_hi |= lo << over;\n    out_lo = lo << shift;\n    return ((unsigned long long)out_hi << 32) + out_lo;\n}\n",
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_800F61F4.o\n",
+      "diff_output": "target 36 bytes  base 48 bytes  match 31.11111\n* 0x0000  subfic r8, r5, 0x20                                  | subfic r7, r5, 0x20\n* 0x0004  subic r9, r5, 0x20                                   | \n* 0x0008  slw r3, r3, r5                                       | slw r8, r3, r5\n* 0x000c                                                       | subi r6, r5, 0x20\n* 0x0010                                                       | slw r0, r4, r5\n* 0x0014  srw r10, r4, r8                                      | srw r5, r4, r7\n* 0x0018                                                       | li r3, 0x0\n* 0x001c  or r3, r3, r10                                       | or r8, r8, r5\n* 0x0020  slw r10, r4, r9                                      | slw r5, r4, r6\n* 0x0024                                                       | addc r4, r3, r0\n* 0x0028  or r3, r3, r10                                       | or r8, r8, r5\n* 0x002c  slw r4, r4, r5                                       | addze r3, r8\n  0x0030  blr                                                  | blr\n",
+      "match_percent": 31.11111,
+      "generated_size": "48"
+    },
+    {
+      "name": "xor_return",
+      "source_form": "unsigned long long fn_800F61F4(unsigned int hi, unsigned int lo, unsigned int shift)\n{\n    unsigned int out_hi;\n    unsigned int out_lo;\n    int under = 32 - shift;\n    int over = shift - 32;\n    out_hi = hi << shift;\n    out_hi |= lo >> under;\n    out_hi |= lo << over;\n    out_lo = lo << shift;\n    return ((unsigned long long)out_hi << 32) ^ out_lo;\n}\n",
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_800F61F4.o\n",
+      "diff_output": "target 36 bytes  base 48 bytes  match 40.555557\n* 0x0000  subfic r8, r5, 0x20                                  | subfic r7, r5, 0x20\n* 0x0004  subic r9, r5, 0x20                                   | subi r6, r5, 0x20\n* 0x0008                                                       | slw r8, r3, r5\n* 0x000c  slw r3, r3, r5                                       | slw r0, r4, r5\n* 0x0010  srw r10, r4, r8                                      | srw r3, r4, r7\n* 0x0014                                                       | slw r4, r4, r6\n* 0x0018  or r3, r3, r10                                       | or r8, r8, r3\n* 0x001c  slw r10, r4, r9                                      | li r3, 0x0\n* 0x0020  or r3, r3, r10                                       | or r8, r8, r4\n* 0x0024  slw r4, r4, r5                                       | xor r4, r3, r0\n* 0x0028                                                       | xor r3, r8, r3\n  0x002c  blr                                                  | blr\n",
+      "match_percent": 40.555557,
+      "generated_size": "48"
+    },
+    {
+      "name": "group_cross_word_terms",
+      "source_form": "unsigned long long fn_800F61F4(unsigned int hi, unsigned int lo, unsigned int shift)\n{\n    unsigned int out_hi;\n    unsigned int out_lo;\n    int under = 32 - shift;\n    int over = shift - 32;\n    out_hi = hi << shift;\n    out_hi |= (lo >> under) | (lo << over);\n    out_lo = lo << shift;\n    return ((unsigned long long)out_hi << 32) | out_lo;\n}\n",
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_800F61F4.o\n",
+      "diff_output": "target 36 bytes  base 36 bytes  match 22.222221\n* 0x0000  subfic r8, r5, 0x20                                  | subfic r6, r5, 0x20\n* 0x0004  subic r9, r5, 0x20                                   | subi r0, r5, 0x20\n* 0x0008  slw r3, r3, r5                                       | \n* 0x000c  srw r10, r4, r8                                      | srw r6, r4, r6\n* 0x0010  or r3, r3, r10                                       | \n* 0x0014  slw r10, r4, r9                                      | slw r3, r3, r5\n* 0x0018  or r3, r3, r10                                       | \n* 0x001c  slw r4, r4, r5                                       | slw r0, r4, r0\n* 0x0020                                                       | slw r4, r4, r5\n* 0x0024                                                       | or r0, r6, r0\n* 0x0028                                                       | or r3, r3, r0\n  0x002c  blr                                                  | blr\n",
+      "match_percent": 22.222221,
+      "generated_size": "36"
+    },
+    {
+      "name": "reverse_cross_word_terms",
+      "source_form": "unsigned long long fn_800F61F4(unsigned int hi, unsigned int lo, unsigned int shift)\n{\n    unsigned int out_hi;\n    unsigned int out_lo;\n    int under = 32 - shift;\n    int over = shift - 32;\n    out_hi = hi << shift;\n    out_hi |= lo << over;\n    out_hi |= lo >> under;\n    out_lo = lo << shift;\n    return ((unsigned long long)out_hi << 32) | out_lo;\n}\n",
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_800F61F4.o\n",
+      "diff_output": "target 36 bytes  base 40 bytes  match 28.88889\n* 0x0000                                                       | subi r7, r5, 0x20\n* 0x0004  subfic r8, r5, 0x20                                  | subfic r6, r5, 0x20\n* 0x0008  subic r9, r5, 0x20                                   | \n  0x000c  slw r3, r3, r5                                       | slw r3, r3, r5\n* 0x0010                                                       | slw r0, r4, r5\n* 0x0014                                                       | slw r7, r4, r7\n* 0x0018  srw r10, r4, r8                                      | srw r5, r4, r6\n* 0x001c  or r3, r3, r10                                       | or r3, r3, r7\n* 0x0020  slw r10, r4, r9                                      | \n* 0x0024  or r3, r3, r10                                       | mr r4, r0\n* 0x0028  slw r4, r4, r5                                       | or r3, r3, r5\n  0x002c  blr                                                  | blr\n",
+      "match_percent": 28.88889,
+      "generated_size": "40"
+    },
+    {
+      "name": "wide_input_word_expanded",
+      "source_form": "unsigned long long fn_800F61F4(unsigned long long value, unsigned int shift)\n{\n    unsigned int hi = value >> 32;\n    unsigned int lo = value;\n    unsigned int out_hi;\n    unsigned int out_lo;\n    int under = 32 - shift;\n    int over = shift - 32;\n    out_hi = hi << shift;\n    out_hi |= lo >> under;\n    out_hi |= lo << over;\n    out_lo = lo << shift;\n    return ((unsigned long long)out_hi << 32) | out_lo;\n}\n",
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_800F61F4.o\n",
+      "diff_output": "target 36 bytes  base 40 bytes  match 27.777779\n* 0x0000  subfic r8, r5, 0x20                                  | subfic r7, r5, 0x20\n* 0x0004  subic r9, r5, 0x20                                   | subi r6, r5, 0x20\n* 0x0008                                                       | slw r3, r3, r5\n* 0x000c  slw r3, r3, r5                                       | slw r0, r4, r5\n* 0x0010  srw r10, r4, r8                                      | srw r7, r4, r7\n* 0x0014                                                       | slw r5, r4, r6\n* 0x0018                                                       | or r3, r3, r7\n* 0x001c  or r3, r3, r10                                       | mr r4, r0\n* 0x0020  slw r10, r4, r9                                      | \n* 0x0024  or r3, r3, r10                                       | or r3, r3, r5\n* 0x0028  slw r4, r4, r5                                       | \n  0x002c  blr                                                  | blr\n",
+      "match_percent": 27.777779,
+      "generated_size": "40"
+    },
+    {
+      "name": "wide_bitwise_contributions",
+      "source_form": "unsigned long long fn_800F61F4(unsigned int hi, unsigned int lo, unsigned int shift)\n{\n    return ((unsigned long long)(hi << shift) << 32)\n         | ((unsigned long long)(lo >> (32 - shift)) << 32)\n         | ((unsigned long long)(lo << (shift - 32)) << 32)\n         | (lo << shift);\n}\n",
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_800F61F4.o\n",
+      "diff_output": "target 36 bytes  base 40 bytes  match 27.222221\n* 0x0000  subfic r8, r5, 0x20                                  | subfic r0, r5, 0x20\n* 0x0004  subic r9, r5, 0x20                                   | subi r6, r5, 0x20\n* 0x0008                                                       | slw r3, r3, r5\n* 0x000c  slw r3, r3, r5                                       | slw r7, r4, r5\n* 0x0010  srw r10, r4, r8                                      | srw r0, r4, r0\n* 0x0014                                                       | slw r5, r4, r6\n* 0x0018                                                       | or r0, r3, r0\n* 0x001c  or r3, r3, r10                                       | mr r4, r7\n* 0x0020  slw r10, r4, r9                                      | \n* 0x0024  or r3, r3, r10                                       | or r3, r5, r0\n* 0x0028  slw r4, r4, r5                                       | \n  0x002c  blr                                                  | blr\n",
+      "match_percent": 27.222221,
+      "generated_size": "40"
+    },
+    {
+      "name": "associate_HLR_pack_xor",
+      "source_form": "unsigned long long fn_800F61F4(unsigned int hi, unsigned int lo, unsigned int shift)\n{\n    unsigned int out_hi;\n    unsigned int out_lo;\n    int under = 32 - shift;\n    int over = shift - 32;\n    out_hi = hi << shift;\n    out_hi |= lo << over;\n    out_hi |= lo >> under;\n    out_lo = lo << shift;\n    return ((unsigned long long)out_hi << 32) ^ out_lo;\n}\n",
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_800F61F4.o\n",
+      "diff_output": "target 36 bytes  base 48 bytes  match 25.555555\n* 0x0000                                                       | subi r7, r5, 0x20\n* 0x0004  subfic r8, r5, 0x20                                  | subfic r6, r5, 0x20\n* 0x0008  subic r9, r5, 0x20                                   | \n* 0x000c  slw r3, r3, r5                                       | slw r8, r3, r5\n* 0x0010                                                       | slw r0, r4, r5\n* 0x0014                                                       | slw r3, r4, r7\n* 0x0018  srw r10, r4, r8                                      | srw r4, r4, r6\n* 0x001c  or r3, r3, r10                                       | or r8, r8, r3\n* 0x0020  slw r10, r4, r9                                      | li r3, 0x0\n* 0x0024  or r3, r3, r10                                       | or r8, r8, r4\n* 0x0028  slw r4, r4, r5                                       | xor r4, r3, r0\n* 0x002c                                                       | xor r3, r8, r3\n  0x0030  blr                                                  | blr\n",
+      "match_percent": 25.555555,
+      "generated_size": 48
+    },
+    {
+      "name": "associate_HLR_pack_add",
+      "source_form": "unsigned long long fn_800F61F4(unsigned int hi, unsigned int lo, unsigned int shift)\n{\n    unsigned int out_hi;\n    unsigned int out_lo;\n    int under = 32 - shift;\n    int over = shift - 32;\n    out_hi = hi << shift;\n    out_hi |= lo << over;\n    out_hi |= lo >> under;\n    out_lo = lo << shift;\n    return ((unsigned long long)out_hi << 32) + out_lo;\n}\n",
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_800F61F4.o\n",
+      "diff_output": "target 36 bytes  base 48 bytes  match 4.4444447\n* 0x0000                                                       | subi r7, r5, 0x20\n* 0x0004                                                       | slw r8, r3, r5\n* 0x0008  subfic r8, r5, 0x20                                  | subfic r6, r5, 0x20\n* 0x000c  subic r9, r5, 0x20                                   | \n* 0x0010  slw r3, r3, r5                                       | slw r0, r4, r5\n* 0x0014                                                       | slw r5, r4, r7\n* 0x0018                                                       | li r3, 0x0\n* 0x001c                                                       | or r8, r8, r5\n* 0x0020  srw r10, r4, r8                                      | srw r5, r4, r6\n* 0x0024  or r3, r3, r10                                       | addc r4, r3, r0\n* 0x0028  slw r10, r4, r9                                      | \n* 0x002c  or r3, r3, r10                                       | or r8, r8, r5\n* 0x0030  slw r4, r4, r5                                       | addze r3, r8\n  0x0034  blr                                                  | blr\n",
+      "match_percent": 4.4444447,
+      "generated_size": 48
+    },
+    {
+      "name": "associate_RHL_pack_or",
+      "source_form": "unsigned long long fn_800F61F4(unsigned int hi, unsigned int lo, unsigned int shift)\n{\n    unsigned int out_hi;\n    unsigned int out_lo;\n    int under = 32 - shift;\n    int over = shift - 32;\n    out_hi = lo >> under;\n    out_hi |= hi << shift;\n    out_hi |= lo << over;\n    out_lo = lo << shift;\n    return ((unsigned long long)out_hi << 32) | out_lo;\n}\n",
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_800F61F4.o\n",
+      "diff_output": "target 36 bytes  base 40 bytes  match 5.5555553\n* 0x0000  subfic r8, r5, 0x20                                  | subfic r6, r5, 0x20\n* 0x0004  subic r9, r5, 0x20                                   | subi r0, r5, 0x20\n* 0x0008  slw r3, r3, r5                                       | \n* 0x000c  srw r10, r4, r8                                      | srw r6, r4, r6\n* 0x0010                                                       | slw r3, r3, r5\n* 0x0014                                                       | slw r0, r4, r0\n* 0x0018                                                       | slw r4, r4, r5\n* 0x001c                                                       | or r6, r6, r3\n* 0x0020  or r3, r3, r10                                       | or r6, r6, r0\n* 0x0024  slw r10, r4, r9                                      | \n* 0x0028  or r3, r3, r10                                       | mr r3, r6\n* 0x002c  slw r4, r4, r5                                       | \n  0x0030  blr                                                  | blr\n",
+      "match_percent": 5.5555553,
+      "generated_size": 40
+    },
+    {
+      "name": "associate_RHL_pack_xor",
+      "source_form": "unsigned long long fn_800F61F4(unsigned int hi, unsigned int lo, unsigned int shift)\n{\n    unsigned int out_hi;\n    unsigned int out_lo;\n    int under = 32 - shift;\n    int over = shift - 32;\n    out_hi = lo >> under;\n    out_hi |= hi << shift;\n    out_hi |= lo << over;\n    out_lo = lo << shift;\n    return ((unsigned long long)out_hi << 32) ^ out_lo;\n}\n",
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_800F61F4.o\n",
+      "diff_output": "target 36 bytes  base 48 bytes  match 31.11111\n* 0x0000  subfic r8, r5, 0x20                                  | subfic r6, r5, 0x20\n* 0x0004  subic r9, r5, 0x20                                   | subi r0, r5, 0x20\n* 0x0008  slw r3, r3, r5                                       | \n* 0x000c  srw r10, r4, r8                                      | srw r6, r4, r6\n* 0x0010                                                       | slw r3, r3, r5\n* 0x0014  or r3, r3, r10                                       | or r6, r6, r3\n* 0x0018  slw r10, r4, r9                                      | slw r0, r4, r0\n* 0x001c  or r3, r3, r10                                       | or r6, r6, r0\n* 0x0020                                                       | li r3, 0x0\n* 0x0024  slw r4, r4, r5                                       | slw r0, r4, r5\n* 0x0028                                                       | xor r4, r3, r0\n* 0x002c                                                       | xor r3, r6, r3\n  0x0030  blr                                                  | blr\n",
+      "match_percent": 31.11111,
+      "generated_size": 48
+    },
+    {
+      "name": "associate_RHL_pack_add",
+      "source_form": "unsigned long long fn_800F61F4(unsigned int hi, unsigned int lo, unsigned int shift)\n{\n    unsigned int out_hi;\n    unsigned int out_lo;\n    int under = 32 - shift;\n    int over = shift - 32;\n    out_hi = lo >> under;\n    out_hi |= hi << shift;\n    out_hi |= lo << over;\n    out_lo = lo << shift;\n    return ((unsigned long long)out_hi << 32) + out_lo;\n}\n",
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_800F61F4.o\n",
+      "diff_output": "target 36 bytes  base 48 bytes  match 25.0\n* 0x0000  subfic r8, r5, 0x20                                  | subfic r6, r5, 0x20\n* 0x0004  subic r9, r5, 0x20                                   | subi r0, r5, 0x20\n* 0x0008  slw r3, r3, r5                                       | \n* 0x000c  srw r10, r4, r8                                      | srw r7, r4, r6\n* 0x0010                                                       | slw r3, r3, r5\n* 0x0014  or r3, r3, r10                                       | or r7, r7, r3\n* 0x0018  slw r10, r4, r9                                      | slw r6, r4, r0\n* 0x001c                                                       | slw r0, r4, r5\n* 0x0020                                                       | li r3, 0x0\n* 0x0024                                                       | addc r4, r3, r0\n* 0x0028  or r3, r3, r10                                       | or r7, r7, r6\n* 0x002c  slw r4, r4, r5                                       | addze r3, r7\n  0x0030  blr                                                  | blr\n",
+      "match_percent": 25.0,
+      "generated_size": 48
+    },
+    {
+      "name": "associate_RLH_pack_or",
+      "source_form": "unsigned long long fn_800F61F4(unsigned int hi, unsigned int lo, unsigned int shift)\n{\n    unsigned int out_hi;\n    unsigned int out_lo;\n    int under = 32 - shift;\n    int over = shift - 32;\n    out_hi = lo >> under;\n    out_hi |= lo << over;\n    out_hi |= hi << shift;\n    out_lo = lo << shift;\n    return ((unsigned long long)out_hi << 32) | out_lo;\n}\n",
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_800F61F4.o\n",
+      "diff_output": "target 36 bytes  base 40 bytes  match 47.22222\n* 0x0000  subfic r8, r5, 0x20                                  | subfic r0, r5, 0x20\n* 0x0004  subic r9, r5, 0x20                                   | subi r6, r5, 0x20\n* 0x0008  slw r3, r3, r5                                       | \n* 0x000c  srw r10, r4, r8                                      | srw r7, r4, r0\n* 0x0010                                                       | slw r0, r3, r5\n* 0x0014                                                       | slw r3, r4, r6\n* 0x0018  or r3, r3, r10                                       | or r7, r7, r3\n* 0x001c  slw r10, r4, r9                                      | slw r4, r4, r5\n* 0x0020  or r3, r3, r10                                       | or r7, r7, r0\n* 0x0024  slw r4, r4, r5                                       | mr r3, r7\n  0x0028  blr                                                  | blr\n",
+      "match_percent": 47.22222,
+      "generated_size": 40
+    },
+    {
+      "name": "associate_RLH_pack_xor",
+      "source_form": "unsigned long long fn_800F61F4(unsigned int hi, unsigned int lo, unsigned int shift)\n{\n    unsigned int out_hi;\n    unsigned int out_lo;\n    int under = 32 - shift;\n    int over = shift - 32;\n    out_hi = lo >> under;\n    out_hi |= lo << over;\n    out_hi |= hi << shift;\n    out_lo = lo << shift;\n    return ((unsigned long long)out_hi << 32) ^ out_lo;\n}\n",
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_800F61F4.o\n",
+      "diff_output": "target 36 bytes  base 48 bytes  match 19.444445\n* 0x0000  subfic r8, r5, 0x20                                  | subfic r6, r5, 0x20\n* 0x0004  subic r9, r5, 0x20                                   | subi r0, r5, 0x20\n* 0x0008  slw r3, r3, r5                                       | \n* 0x000c  srw r10, r4, r8                                      | srw r7, r4, r6\n* 0x0010                                                       | slw r6, r3, r5\n* 0x0014                                                       | slw r3, r4, r0\n* 0x0018                                                       | slw r0, r4, r5\n* 0x001c  or r3, r3, r10                                       | or r7, r7, r3\n* 0x0020  slw r10, r4, r9                                      | li r3, 0x0\n* 0x0024  or r3, r3, r10                                       | or r7, r7, r6\n* 0x0028  slw r4, r4, r5                                       | xor r4, r3, r0\n* 0x002c                                                       | xor r3, r7, r3\n  0x0030  blr                                                  | blr\n",
+      "match_percent": 19.444445,
+      "generated_size": 48
+    },
+    {
+      "name": "associate_RLH_pack_add",
+      "source_form": "unsigned long long fn_800F61F4(unsigned int hi, unsigned int lo, unsigned int shift)\n{\n    unsigned int out_hi;\n    unsigned int out_lo;\n    int under = 32 - shift;\n    int over = shift - 32;\n    out_hi = lo >> under;\n    out_hi |= lo << over;\n    out_hi |= hi << shift;\n    out_lo = lo << shift;\n    return ((unsigned long long)out_hi << 32) + out_lo;\n}\n",
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_800F61F4.o\n",
+      "diff_output": "target 36 bytes  base 48 bytes  match 25.0\n* 0x0000  subfic r8, r5, 0x20                                  | subfic r6, r5, 0x20\n* 0x0004  subic r9, r5, 0x20                                   | subi r0, r5, 0x20\n* 0x0008  slw r3, r3, r5                                       | \n* 0x000c  srw r10, r4, r8                                      | srw r7, r4, r6\n* 0x0010                                                       | slw r6, r3, r5\n* 0x0014                                                       | slw r3, r4, r0\n* 0x0018  or r3, r3, r10                                       | or r7, r7, r3\n* 0x001c  slw r10, r4, r9                                      | slw r0, r4, r5\n* 0x0020                                                       | li r3, 0x0\n* 0x0024                                                       | addc r4, r3, r0\n* 0x0028  or r3, r3, r10                                       | or r7, r7, r6\n* 0x002c  slw r4, r4, r5                                       | addze r3, r7\n  0x0030  blr                                                  | blr\n",
+      "match_percent": 25.0,
+      "generated_size": 48
+    },
+    {
+      "name": "associate_LHR_pack_or",
+      "source_form": "unsigned long long fn_800F61F4(unsigned int hi, unsigned int lo, unsigned int shift)\n{\n    unsigned int out_hi;\n    unsigned int out_lo;\n    int under = 32 - shift;\n    int over = shift - 32;\n    out_hi = lo << over;\n    out_hi |= hi << shift;\n    out_hi |= lo >> under;\n    out_lo = lo << shift;\n    return ((unsigned long long)out_hi << 32) | out_lo;\n}\n",
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_800F61F4.o\n",
+      "diff_output": "target 36 bytes  base 40 bytes  match 10.555555\n* 0x0000                                                       | subi r6, r5, 0x20\n* 0x0004  subfic r8, r5, 0x20                                  | subfic r0, r5, 0x20\n* 0x0008  subic r9, r5, 0x20                                   | \n* 0x000c  slw r3, r3, r5                                       | slw r6, r4, r6\n* 0x0010                                                       | slw r3, r3, r5\n* 0x0014  srw r10, r4, r8                                      | srw r0, r4, r0\n* 0x0018                                                       | slw r4, r4, r5\n* 0x001c                                                       | or r6, r6, r3\n* 0x0020  or r3, r3, r10                                       | or r6, r6, r0\n* 0x0024  slw r10, r4, r9                                      | \n* 0x0028  or r3, r3, r10                                       | mr r3, r6\n* 0x002c  slw r4, r4, r5                                       | \n  0x0030  blr                                                  | blr\n",
+      "match_percent": 10.555555,
+      "generated_size": 40
+    },
+    {
+      "name": "associate_LHR_pack_xor",
+      "source_form": "unsigned long long fn_800F61F4(unsigned int hi, unsigned int lo, unsigned int shift)\n{\n    unsigned int out_hi;\n    unsigned int out_lo;\n    int under = 32 - shift;\n    int over = shift - 32;\n    out_hi = lo << over;\n    out_hi |= hi << shift;\n    out_hi |= lo >> under;\n    out_lo = lo << shift;\n    return ((unsigned long long)out_hi << 32) ^ out_lo;\n}\n",
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_800F61F4.o\n",
+      "diff_output": "target 36 bytes  base 48 bytes  match 10.0\n* 0x0000                                                       | subi r6, r5, 0x20\n* 0x0004  subfic r8, r5, 0x20                                  | subfic r0, r5, 0x20\n* 0x0008  subic r9, r5, 0x20                                   | \n* 0x000c  slw r3, r3, r5                                       | slw r6, r4, r6\n* 0x0010                                                       | slw r3, r3, r5\n* 0x0014                                                       | or r6, r6, r3\n* 0x0018  srw r10, r4, r8                                      | srw r0, r4, r0\n* 0x001c  or r3, r3, r10                                       | or r6, r6, r0\n* 0x0020  slw r10, r4, r9                                      | li r3, 0x0\n* 0x0024  or r3, r3, r10                                       | \n* 0x0028  slw r4, r4, r5                                       | slw r0, r4, r5\n* 0x002c                                                       | xor r4, r3, r0\n* 0x0030                                                       | xor r3, r6, r3\n  0x0034  blr                                                  | blr\n",
+      "match_percent": 10.0,
+      "generated_size": 48
+    },
+    {
+      "name": "associate_LHR_pack_add",
+      "source_form": "unsigned long long fn_800F61F4(unsigned int hi, unsigned int lo, unsigned int shift)\n{\n    unsigned int out_hi;\n    unsigned int out_lo;\n    int under = 32 - shift;\n    int over = shift - 32;\n    out_hi = lo << over;\n    out_hi |= hi << shift;\n    out_hi |= lo >> under;\n    out_lo = lo << shift;\n    return ((unsigned long long)out_hi << 32) + out_lo;\n}\n",
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_800F61F4.o\n",
+      "diff_output": "target 36 bytes  base 48 bytes  match 9.444445\n* 0x0000                                                       | subi r6, r5, 0x20\n* 0x0004  subfic r8, r5, 0x20                                  | subfic r0, r5, 0x20\n* 0x0008  subic r9, r5, 0x20                                   | \n* 0x000c  slw r3, r3, r5                                       | slw r7, r4, r6\n* 0x0010                                                       | slw r3, r3, r5\n* 0x0014                                                       | or r7, r7, r3\n* 0x0018  srw r10, r4, r8                                      | srw r6, r4, r0\n* 0x001c  or r3, r3, r10                                       | \n* 0x0020  slw r10, r4, r9                                      | slw r0, r4, r5\n* 0x0024                                                       | li r3, 0x0\n* 0x0028                                                       | addc r4, r3, r0\n* 0x002c  or r3, r3, r10                                       | or r7, r7, r6\n* 0x0030  slw r4, r4, r5                                       | addze r3, r7\n  0x0034  blr                                                  | blr\n",
+      "match_percent": 9.444445,
+      "generated_size": 48
+    },
+    {
+      "name": "associate_LRH_pack_or",
+      "source_form": "unsigned long long fn_800F61F4(unsigned int hi, unsigned int lo, unsigned int shift)\n{\n    unsigned int out_hi;\n    unsigned int out_lo;\n    int under = 32 - shift;\n    int over = shift - 32;\n    out_hi = lo << over;\n    out_hi |= lo >> under;\n    out_hi |= hi << shift;\n    out_lo = lo << shift;\n    return ((unsigned long long)out_hi << 32) | out_lo;\n}\n",
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_800F61F4.o\n",
+      "diff_output": "target 36 bytes  base 40 bytes  match 52.22222\n* 0x0000                                                       | subi r0, r5, 0x20\n* 0x0004  subfic r8, r5, 0x20                                  | subfic r6, r5, 0x20\n* 0x0008  subic r9, r5, 0x20                                   | \n* 0x000c  slw r3, r3, r5                                       | slw r7, r4, r0\n* 0x0010                                                       | slw r0, r3, r5\n* 0x0014  srw r10, r4, r8                                      | srw r3, r4, r6\n* 0x0018  or r3, r3, r10                                       | or r7, r7, r3\n* 0x001c  slw r10, r4, r9                                      | slw r4, r4, r5\n* 0x0020  or r3, r3, r10                                       | or r7, r7, r0\n* 0x0024  slw r4, r4, r5                                       | mr r3, r7\n  0x0028  blr                                                  | blr\n",
+      "match_percent": 52.22222,
+      "generated_size": 40
+    },
+    {
+      "name": "associate_LRH_pack_xor",
+      "source_form": "unsigned long long fn_800F61F4(unsigned int hi, unsigned int lo, unsigned int shift)\n{\n    unsigned int out_hi;\n    unsigned int out_lo;\n    int under = 32 - shift;\n    int over = shift - 32;\n    out_hi = lo << over;\n    out_hi |= lo >> under;\n    out_hi |= hi << shift;\n    out_lo = lo << shift;\n    return ((unsigned long long)out_hi << 32) ^ out_lo;\n}\n",
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_800F61F4.o\n",
+      "diff_output": "target 36 bytes  base 48 bytes  match 24.444445\n* 0x0000                                                       | subi r6, r5, 0x20\n* 0x0004  subfic r8, r5, 0x20                                  | subfic r0, r5, 0x20\n* 0x0008  subic r9, r5, 0x20                                   | \n* 0x000c  slw r3, r3, r5                                       | slw r7, r4, r6\n* 0x0010                                                       | slw r6, r3, r5\n* 0x0014  srw r10, r4, r8                                      | srw r3, r4, r0\n* 0x0018                                                       | slw r0, r4, r5\n* 0x001c  or r3, r3, r10                                       | or r7, r7, r3\n* 0x0020  slw r10, r4, r9                                      | li r3, 0x0\n* 0x0024  or r3, r3, r10                                       | or r7, r7, r6\n* 0x0028  slw r4, r4, r5                                       | xor r4, r3, r0\n* 0x002c                                                       | xor r3, r7, r3\n  0x0030  blr                                                  | blr\n",
+      "match_percent": 24.444445,
+      "generated_size": 48
+    },
+    {
+      "name": "associate_LRH_pack_add",
+      "source_form": "unsigned long long fn_800F61F4(unsigned int hi, unsigned int lo, unsigned int shift)\n{\n    unsigned int out_hi;\n    unsigned int out_lo;\n    int under = 32 - shift;\n    int over = shift - 32;\n    out_hi = lo << over;\n    out_hi |= lo >> under;\n    out_hi |= hi << shift;\n    out_lo = lo << shift;\n    return ((unsigned long long)out_hi << 32) + out_lo;\n}\n",
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_800F61F4.o\n",
+      "diff_output": "target 36 bytes  base 48 bytes  match 30.0\n* 0x0000                                                       | subi r6, r5, 0x20\n* 0x0004  subfic r8, r5, 0x20                                  | subfic r0, r5, 0x20\n* 0x0008  subic r9, r5, 0x20                                   | \n* 0x000c  slw r3, r3, r5                                       | slw r7, r4, r6\n* 0x0010                                                       | slw r6, r3, r5\n* 0x0014  srw r10, r4, r8                                      | srw r3, r4, r0\n* 0x0018  or r3, r3, r10                                       | or r7, r7, r3\n* 0x001c  slw r10, r4, r9                                      | slw r0, r4, r5\n* 0x0020                                                       | li r3, 0x0\n* 0x0024                                                       | addc r4, r3, r0\n* 0x0028  or r3, r3, r10                                       | or r7, r7, r6\n* 0x002c  slw r4, r4, r5                                       | addze r3, r7\n  0x0030  blr                                                  | blr\n",
+      "match_percent": 30.0,
+      "generated_size": 48
+    }
+  ],
+  "version": 1,
+  "assignment_id": "3fc571ca-34cc-4552-9633-a0247282531e",
+  "attempt": 5,
+  "target": "fn_800F61F4",
+  "compiler": "GC/1.3",
+  "base_commit": "60f9b72058051bdef7cedad865b714b03d1e03f8",
+  "attempt_5_hypothesis": {
+    "description": "Reassociate the three word-sized high-result contributions to alter their dependency graph and register lifetimes; compare disjoint-word OR, XOR, and additive return packing. Also test native wide input with explicit word expansion, without a variable wide shift. No assembly, volatile intermediates, unions, dummy arguments, or compiler setting changes.",
+    "selected": "associate_LRH_pack_or",
+    "conclusion": "Combining the two contributions from lo first, in left-shift then right-shift order, and then ORing hi << shift raises canonical similarity to 52.22222%. XOR/additive return packing introduces redundant instructions; native wide input alone has unchanged codegen."
+  },
+  "prior_attempts_reviewed": [
+    "b50dc9c83abe9ef4f88518c6c6e70e6aba26e750",
+    "ddc7ae58bb3068a0a64b29ddcbe3d6a564df67d3",
+    "1feb782a75c8fd7b554a8e34ee54f5d4a15868c2",
+    "cc92e8cf2d818af210b0957ea2c7c423e43e1848"
+  ],
+  "verification_commands": [
+    {
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "python3",
+        "configure.py"
+      ],
+      "exit_code": 0,
+      "raw_output": ""
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        ".tools/bin/ninja",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "raw_output": "[1/943] MWCC build/GEDE01/src/game/game_fn_80008014.o\n[2/943] MWCC build/GEDE01/src/game/game_fn_800094C0.o\n[3/943] MWCC build/GEDE01/src/game/game_fn_800096E0.o\n[4/943] MWCC build/GEDE01/src/game/game_fn_800098C0.o\n[5/943] MWCC build/GEDE01/src/game/game_fn_80009AB4.o\n[6/943] MWCC build/GEDE01/src/game/game_fn_800099D8.o\n[7/943] MWCC build/GEDE01/src/game/game_fn_8000A26C.o\n[8/943] MWCC build/GEDE01/src/game/game_fn_8000AC88.o\n[9/943] MWCC build/GEDE01/src/game/game_fn_8000AEB4.o\n[10/943] MWCC build/GEDE01/src/game/game_fn_8000AFB4.o\n[11/943] MWCC build/GEDE01/src/game/game_fn_8000B1B8.o\n[12/943] MWCC build/GEDE01/src/game/game_fn_8000B36C.o\n[13/943] MWCC build/GEDE01/src/game/game_fn_8000B630.o\n[14/943] MWCC build/GEDE01/src/game/game_fn_8000B7FC.o\n[15/943] MWCC build/GEDE01/src/game/game_fn_8000B900.o\n[16/943] MWCC build/GEDE01/src/game/game_fn_8000BA0C.o\n[17/943] MWCC build/GEDE01/src/game/game_fn_8000BAA0.o\n[18/943] MWCC build/GEDE01/src/game/game_fn_8000BC40.o\n[19/943] MWCC build/GEDE01/src/game/game_fn_8000C17C.o\n[20/943] MWCC build/GEDE01/src/game/game_fn_8000C06C.o\n[21/943] MWCC build/GEDE01/src/game/game_fn_8000C400.o\n[22/943] MWCC build/GEDE01/src/game/game_fn_8000C848.o\n[23/943] MWCC build/GEDE01/src/game/game_fn_8000C91C.o\n[24/943] MWCC build/GEDE01/src/game/game_fn_8000D0BC.o\n[25/943] MWCC build/GEDE01/src/game/game_fn_8000D3D4.o\n[26/943] MWCC build/GEDE01/src/game/game_fn_8000D590.o\n[27/943] MWCC build/GEDE01/src/game/game_fn_8000D8A4.o\n[28/943] MWCC build/GEDE01/src/game/game_fn_8000DA50.o\n[29/943] MWCC build/GEDE01/src/game/game_fn_8000DAF4.o\n[30/943] MWCC build/GEDE01/src/game/game_fn_8000E054.o\n[31/943] MWCC build/GEDE01/src/game/game_fn_8000E0AC.o\n[32/943] MWCC build/GEDE01/src/game/game_fn_8000E138.o\n[33/943] MWCC build/GEDE01/src/game/game_fn_8000E1C4.o\n[34/943] MWCC build/GEDE01/src/game/game_fn_8000E96C.o\n[35/943] MWCC build/GEDE01/src/game/game_fn_8000EB14.o\n[36/943] MWCC build/GEDE01/src/game/game_fn_8000EBD4.o\n[37/943] MWCC build/GEDE01/src/game/game_fn_8000ED44.o\n[38/943] MWCC build/GEDE01/src/game/game_fn_8000EFC4.o\n[39/943] MWCC build/GEDE01/src/game/game_fn_8000F4B0.o\n[40/943] MWCC build/GEDE01/src/game/game_fn_8000F774.o\n[41/943] MWCC build/GEDE01/src/game/game_fn_8000FDE8.o\n[42/943] MWCC build/GEDE01/src/game/game_fn_8000FFD8.o\n[43/943] MWCC build/GEDE01/src/game/game_fn_800119FC.o\n[44/943] MWCC build/GEDE01/src/game/game_fn_80012DA8.o\n[45/943] MWCC build/GEDE01/src/game/game_fn_80012F40.o\n[46/943] MWCC build/GEDE01/src/game/game_fn_80012FD0.o\n[47/943] MWCC build/GEDE01/src/game/game_fn_800131E8.o\n[48/943] MWCC build/GEDE01/src/game/game_fn_80013340.o\n[49/943] MWCC build/GEDE01/src/game/game_fn_80013870.o\n[50/943] MWCC build/GEDE01/src/game/game_fn_80013CB0.o\n[51/943] MWCC build/GEDE01/src/game/game_fn_80013D54.o\n[52/943] MWCC build/GEDE01/src/game/game_fn_800142DC.o\n[53/943] MWCC build/GEDE01/src/game/game_fn_800144CC.o\n[54/943] MWCC build/GEDE01/src/game/game_fn_80014784.o\n[55/943] MWCC build/GEDE01/src/game/game_fn_800149D4.o\n[56/943] MWCC build/GEDE01/src/game/game_fn_80015058.o\n[57/943] MWCC build/GEDE01/src/game/game_fn_80015320.o\n[58/943] MWCC build/GEDE01/src/game/game_fn_80015568.o\n[59/943] MWCC build/GEDE01/src/game/game_fn_800156FC.o\n[60/943] MWCC build/GEDE01/src/game/game_fn_80015BE0.o\n[61/943] MWCC build/GEDE01/src/game/game_fn_80015F04.o\n[62/943] MWCC build/GEDE01/src/game/game_fn_80015D40.o\n[63/943] MWCC build/GEDE01/src/game/game_fn_80016128.o\n[64/943] MWCC build/GEDE01/src/game/game_fn_80016270.o\n[65/943] MWCC build/GEDE01/src/game/game_fn_80016904.o\n[66/943] MWCC build/GEDE01/src/game/game_fn_80016B24.o\n[67/943] MWCC build/GEDE01/src/game/game_fn_800171C0.o\n[68/943] MWCC build/GEDE01/src/game/game_fn_800173CC.o\n[69/943] MWCC build/GEDE01/src/game/game_fn_800176F0.o\n[70/943] MWCC build/GEDE01/src/game/game_fn_80017910.o\n[71/943] MWCC build/GEDE01/src/game/game_fn_800179AC.o\n[72/943] MWCC build/GEDE01/src/game/game_fn_80017A3C.o\n[73/943] MWCC build/GEDE01/src/game/game_fn_80017AE4.o\n[74/943] MWCC build/GEDE01/src/game/game_fn_80017C3C.o\n[75/943] MWCC build/GEDE01/src/game/game_fn_80017CC8.o\n[76/943] MWCC build/GEDE01/src/game/game_fn_80017DB0.o\n[77/943] MWCC build/GEDE01/src/game/game_fn_80018EF4.o\n[78/943] MWCC build/GEDE01/src/game/game_fn_80019054.o\n[79/943] MWCC build/GEDE01/src/game/game_fn_80019244.o\n[80/943] MWCC build/GEDE01/src/game/game_fn_800194D0.o\n[81/943] MWCC build/GEDE01/src/game/game_fn_80019940.o\n[82/943] MWCC build/GEDE01/src/game/game_fn_80019C10.o\n[83/943] MWCC build/GEDE01/src/game/game_fn_80019D2C.o\n[84/943] MWCC build/GEDE01/src/game/game_fn_80019F98.o\n[85/943] MWCC build/GEDE01/src/game/game_fn_8001AAB8.o\n[86/943] MWCC build/GEDE01/src/game/game_fn_8001A6C4.o\n[87/943] MWCC build/GEDE01/src/game/game_fn_8001ADF8.o\n[88/943] MWCC build/GEDE01/src/game/game_fn_8001AF68.o\n[89/943] MWCC build/GEDE01/src/game/game_fn_8001B124.o\n[90/943] MWCC build/GEDE01/src/game/game_fn_8001B294.o\n[91/943] MWCC build/GEDE01/src/game/game_fn_8001B874.o\n[92/943] MWCC build/GEDE01/src/game/game_fn_8001B808.o\n[93/943] MWCC build/GEDE01/src/game/game_fn_8001C078.o\n[94/943] MWCC build/GEDE01/src/game/game_fn_8001CA04.o\n[95/943] MWCC build/GEDE01/src/game/game_fn_8001CD58.o\n[96/943] MWCC build/GEDE01/src/game/game_fn_8001CE94.o\n[97/943] MWCC build/GEDE01/src/game/game_fn_8001E644.o\n[98/943] MWCC build/GEDE01/src/game/game_fn_8001FE1C.o\n[99/943] MWCC build/GEDE01/src/game/game_fn_80020E94.o\n[100/943] MWCC build/GEDE01/src/game/game_fn_80024F28.o\n[101/943] MWCC build/GEDE01/src/game/game_fn_800272B4.o\n[102/943] MWCC build/GEDE01/src/game/game_fn_8002B748.o\n[103/943] MWCC build/GEDE01/src/game/game_fn_8002DAE0.o\n[104/943] MWCC build/GEDE01/src/game/game_fn_8002E3F0.o\n[105/943] MWCC build/GEDE01/src/game/game_fn_8002EA68.o\n[106/943] MWCC build/GEDE01/src/game/game_fn_8002F428.o\n[107/943] MWCC build/GEDE01/src/game/game_fn_80031544.o\n[108/943] MWCC build/GEDE01/src/game/game_fn_8003232C.o\n[109/943] MWCC build/GEDE01/src/game/game_fn_80032B84.o\n[110/943] MWCC build/GEDE01/src/game/game_fn_80033038.o\n[111/943] MWCC build/GEDE01/src/game/game_fn_80033180.o\n[112/943] MWCC build/GEDE01/src/game/game_fn_800359A0.o\n[113/943] MWCC build/GEDE01/src/game/game_fn_800361F8.o\n[114/943] MWCC build/GEDE01/src/game/game_fn_80036C40.o\n[115/943] MWCC build/GEDE01/src/game/game_fn_80038878.o\n[116/943] MWCC build/GEDE01/src/game/game_fn_80048ADC.o\n[117/943] MWCC build/GEDE01/src/game/game_fn_80048B24.o\n[118/943] MWCC build/GEDE01/src/game/game_fn_8004998C.o\n[119/943] MWCC build/GEDE01/src/game/game_fn_80052310.o\n[120/943] MWCC build/GEDE01/src/game/game_fn_80050B08.o\n[121/943] MWCC build/GEDE01/src/game/game_fn_8005EC6C.o\n[122/943] MWCC build/GEDE01/src/game/game_fn_800542D0.o\n[123/943] MWCC build/GEDE01/src/game/game_fn_8005EE9C.o\n[124/943] MWCC build/GEDE01/src/game/game_fn_8005EF94.o\n[125/943] MWCC build/GEDE01/src/game/game_data_80239E10.o\n[126/943] MWCC build/GEDE01/src/game/game_data_80239E18.o\n[127/943] MWCC build/GEDE01/src/game/game_fn_8005FD84.o\n[128/943] MWCC build/GEDE01/src/game/game_fn_80066888.o\n[129/943] MWCC build/GEDE01/src/game/game_fn_80066E78.o\n[130/943] MWCC build/GEDE01/src/game/game_fn_8006B0F0.o\n[131/943] MWCC build/GEDE01/src/game/game_fn_8006B620.o\n[132/943] MWCC build/GEDE01/src/game/game_fn_8006E53C.o\n[133/943] MWCC build/GEDE01/src/game/game_fn_80071A58.o\n[134/943] MWCC build/GEDE01/src/game/game_fn_80074310.o\n[135/943] MWCC build/GEDE01/src/game/game_fn_80078500.o\n[136/943] MWCC build/GEDE01/src/game/game_fn_80079908.o\n[137/943] MWCC build/GEDE01/src/game/game_fn_80079AA4.o\n[138/943] MWCC build/GEDE01/src/game/game_fn_8007B2F4.o\n[139/943] MWCC build/GEDE01/src/game/game_fn_8007B540.o\n[140/943] MWCC build/GEDE01/src/game/game_fn_8007B640.o\n[141/943] MWCC build/GEDE01/src/game/game_fn_8007B828.o\n[142/943] MWCC build/GEDE01/src/game/game_fn_8007BA3C.o\n[143/943] MWCC build/GEDE01/src/game/game_fn_8007D4D8.o\n[144/943] MWCC build/GEDE01/src/game/game_fn_8007F770.o\n[145/943] MWCC build/GEDE01/src/game/game_fn_800886D8.o\n[146/943] MWCC build/GEDE01/src/game/game_fn_80088F4C.o\n[147/943] MWCC build/GEDE01/src/game/game_fn_80089A34.o\n[148/943] MWCC build/GEDE01/src/game/game_fn_8008A2E0.o\n[149/943] MWCC build/GEDE01/src/game/game_fn_8008F224.o\n[150/943] MWCC build/GEDE01/src/game/game_fn_8008F890.o\n[151/943] MWCC build/GEDE01/src/game/game_fn_80090004.o\n[152/943] MWCC build/GEDE01/src/game/game_fn_800934A0.o\n[153/943] MWCC build/GEDE01/src/game/game_fn_80095D10.o\n[154/943] MWCC build/GEDE01/src/game/game_fn_80095E64.o\n[155/943] MWCC build/GEDE01/src/game/game_fn_80095FDC.o\n[156/943] MWCC build/GEDE01/src/game/game_fn_80096830.o\n[157/943] MWCC build/GEDE01/src/game/game_fn_8009C424.o\n[158/943] MWCC build/GEDE01/src/game/game_fn_8009E808.o\n[159/943] MWCC build/GEDE01/src/game/game_fn_800A2130.o\n[160/943] MWCC build/GEDE01/src/game/game_fn_800A2B8C.o\n[161/943] MWCC build/GEDE01/src/game/game_fn_800A2FCC.o\n[162/943] MWCC build/GEDE01/src/game/game_fn_800A3180.o\n[163/943] MWCC build/GEDE01/src/game/game_fn_800A3894.o\n[164/943] MWCC build/GEDE01/src/game/game_fn_800A4428.o\n[165/943] MWCC build/GEDE01/src/game/game_fn_800A4798.o\n[166/943] MWCC build/GEDE01/src/game/game_fn_800A7E88.o\n[167/943] MWCC build/GEDE01/src/game/game_fn_800AF230.o\n[168/943] MWCC build/GEDE01/src/game/game_fn_800B2EC0.o\n[169/943] MWCC build/GEDE01/src/game/game_fn_800BB7A8.o\n[170/943] MWCC build/GEDE01/src/game/game_fn_800BB5C4.o\n[171/943] MWCC build/GEDE01/src/game/game_fn_800BB9A4.o\n[172/943] MWCC build/GEDE01/src/game/game_fn_800BBAF0.o\n[173/943] MWCC build/GEDE01/src/game/game_fn_800C17EC.o\n[174/943] MWCC build/GEDE01/src/game/game_fn_800C030C.o\n[175/943] MWCC build/GEDE01/src/game/game_fn_800C59F0.o\n[176/943] MWCC build/GEDE01/src/game/game_fn_800C644C.o\n[177/943] MWCC build/GEDE01/src/game/game_fn_800C65FC.o\n[178/943] MWCC build/GEDE01/src/game/game_fn_800C9C60.o\n[179/943] MWCC build/GEDE01/src/game/game_fn_800CB8F4.o\n[180/943] MWCC build/GEDE01/src/game/game_fn_800CB760.o\n[181/943] MWCC build/GEDE01/src/game/game_fn_800CF598.o\n[182/943] MWCC build/GEDE01/src/game/game_fn_800D9064.o\n[183/943] MWCC build/GEDE01/src/game/game_fn_800D9E10.o\n[184/943] MWCC build/GEDE01/src/game/game_fn_800DC4D4.o\n[185/943] MWCC build/GEDE01/src/game/game_fn_800E4980.o\n[186/943] MWCC build/GEDE01/src/game/game_TRKNubWelcome.o\n[187/943] MWCC build/GEDE01/src/game/game_TRK_main.o\n[188/943] MWCC build/GEDE01/src/game/game_InitMetroTRKCommTable.o\n[189/943] MWCC build/GEDE01/src/game/game_fn_800FD0C8.o\n[190/943] MWCC build/GEDE01/src/game/game_fn_8010242C.o\n[191/943] MWCC build/GEDE01/src/game/game_fn_801098C0.o\n[192/943] MWCC build/GEDE01/src/game/game_fn_8010F184.o\n[193/943] MWCC build/GEDE01/src/game/game_fn_801126E0.o\n[194/943] MWCC build/GEDE01/src/game/game_fn_801128E4.o\n[195/943] MWCC build/GEDE01/src/game/game_fn_801141B8.o\n[196/943] MWCC build/GEDE01/src/game/game_fn_80119C70.o\n[197/943] MWCC build/GEDE01/src/game/game_fn_8011F140.o\n[198/943] MWCC build/GEDE01/src/game/game_fn_801247F8.o\n[199/943] MWCC build/GEDE01/src/game/game_fn_80126A00.o\n[200/943] MWCC build/GEDE01/src/game/game_fn_8012976C.o\n[201/943] MWCC build/GEDE01/src/game/game_fn_8012DB28.o\n[202/943] MWCC build/GEDE01/src/game/game_fn_8013CBE4.o\n[203/943] MWCC build/GEDE01/src/game/game_fn_8013D6A4.o\n[204/943] MWCC build/GEDE01/src/game/game_fn_8013DB8C.o\n[205/943] MWCC build/GEDE01/src/game/game_fn_8014549C.o\n[206/943] MWCC build/GEDE01/src/game/game_fn_8014AF38.o\n[207/943] MWCC build/GEDE01/src/game/game_fn_8014B494.o\n[208/943] MWCC build/GEDE01/src/game/game_fn_8014BA14.o\n[209/943] MWCC build/GEDE01/src/game/game_fn_8014CA98.o\n[210/943] MWCC build/GEDE01/src/game/game_fn_80150A24.o\n[211/943] MWCC build/GEDE01/src/game/game_fn_801535D8.o\n[212/943] MWCC build/GEDE01/src/game/game_fn_80153898.o\n[213/943] MWCC build/GEDE01/src/game/game_fn_80153A24.o\n[214/943] MWCC build/GEDE01/src/game/game_fn_80154F74.o\n[215/943] MWCC build/GEDE01/src/game/game_fn_80155814.o\n[216/943] MWCC build/GEDE01/src/game/game_fn_80157C0C.o\n[217/943] MWCC build/GEDE01/src/game/game_fn_80158B20.o\n[218/943] MWCC build/GEDE01/src/game/game_fn_80158D38.o\n[219/943] MWCC build/GEDE01/src/game/game_fn_8015DB84.o\n[220/943] MWCC build/GEDE01/src/game/game_fn_8015DC54.o\n[221/943] MWCC build/GEDE01/src/game/game_fn_8015EDC0.o\n[222/943] MWCC build/GEDE01/src/game/game_fn_80167454.o\n[223/943] MWCC build/GEDE01/src/game/game_fn_80167B5C.o\n[224/943] MWCC build/GEDE01/src/game/game_fn_80169650.o\n[225/943] MWCC build/GEDE01/src/game/game_fn_8016BD0C.o\n[226/943] MWCC build/GEDE01/src/game/game_fn_8016BE1C.o\n[227/943] MWCC build/GEDE01/src/game/game_fn_8016BF60.o\n[228/943] MWCC build/GEDE01/src/game/game_fn_8016C0BC.o\n[229/943] MWCC build/GEDE01/src/game/game_fn_8016C164.o\n[230/943] MWCC build/GEDE01/src/game/game_fn_8016C238.o\n[231/943] MWCC build/GEDE01/src/game/game_fn_8016C4BC.o\n[232/943] MWCC build/GEDE01/src/game/game_fn_8016C774.o\n[233/943] MWCC build/GEDE01/src/game/game_fn_8016D040.o\n[234/943] MWCC build/GEDE01/src/game/game_fn_8016D1F8.o\n[235/943] MWCC build/GEDE01/src/game/game_fn_8016D2B8.o\n[236/943] MWCC build/GEDE01/src/game/game_fn_8016D9C0.o\n[237/943] MWCC build/GEDE01/src/game/game_fn_8016DF4C.o\n[238/943] MWCC build/GEDE01/src/game/game_fn_8016E8F8.o\n[239/943] MWCC build/GEDE01/src/game/game_fn_8016FEF8.o\n[240/943] MWCC build/GEDE01/src/game/game_fn_8017038C.o\n[241/943] MWCC build/GEDE01/src/game/game_fn_801704F8.o\n[242/943] MWCC build/GEDE01/src/game/game_fn_801706DC.o\n[243/943] MWCC build/GEDE01/src/game/game_fn_80170A40.o\n[244/943] MWCC build/GEDE01/src/game/game_fn_80170DF4.o\n[245/943] MWCC build/GEDE01/src/game/game_fn_80170E9C.o\n[246/943] MWCC build/GEDE01/src/game/game_fn_8017138C.o\n[247/943] MWCC build/GEDE01/src/game/game_fn_80171664.o\n[248/943] MWCC build/GEDE01/src/game/game_fn_801718F4.o\n[249/943] MWCC build/GEDE01/src/game/game_fn_801719B4.o\n[250/943] MWCC build/GEDE01/src/game/game_fn_80171F30.o\n[251/943] MWCC build/GEDE01/src/game/game_fn_8017250C.o\n[252/943] MWCC build/GEDE01/src/game/game_fn_801726EC.o\n[253/943] MWCC build/GEDE01/src/game/game_fn_80172BB0.o\n[254/943] MWCC build/GEDE01/src/game/game_fn_80172C78.o\n[255/943] MWCC build/GEDE01/src/game/game_fn_80172DB8.o\n[256/943] MWCC build/GEDE01/src/game/game_fn_80173270.o\n[257/943] MWCC build/GEDE01/src/game/game_fn_801734B4.o\n[258/943] MWCC build/GEDE01/src/game/game_fn_80173770.o\n[259/943] MWCC build/GEDE01/src/game/game_fn_80173BDC.o\n[260/943] MWCC build/GEDE01/src/game/game_fn_80173D44.o\n[261/943] MWCC build/GEDE01/src/game/game_fn_80173F04.o\n[262/943] MWCC build/GEDE01/src/game/game_fn_80174184.o\n[263/943] MWCC build/GEDE01/src/game/game_fn_80174358.o\n[264/943] MWCC build/GEDE01/src/game/game_fn_80174F2C.o\n[265/943] MWCC build/GEDE01/src/game/game_fn_801752B0.o\n[266/943] MWCC build/GEDE01/src/game/game_fn_8017553C.o\n[267/943] MWCC build/GEDE01/src/game/game_fn_80175A08.o\n[268/943] MWCC build/GEDE01/src/game/game_fn_80175E64.o\n[269/943] MWCC build/GEDE01/src/game/game_fn_80175F0C.o\n[270/943] MWCC build/GEDE01/src/game/game_fn_80175FD4.o\n[271/943] MWCC build/GEDE01/src/game/game_fn_80176098.o\n[272/943] MWCC build/GEDE01/src/game/game_fn_80176160.o\n[273/943] MWCC build/GEDE01/src/game/game_fn_80176220.o\n[274/943] MWCC build/GEDE01/src/game/game_fn_801762E8.o\n[275/943] MWCC build/GEDE01/src/game/game_fn_8017652C.o\n[276/943] MWCC build/GEDE01/src/game/game_fn_80176DF4.o\n[277/943] MWCC build/GEDE01/src/game/game_fn_80176FA0.o\n[278/943] MWCC build/GEDE01/src/game/game_fn_801770F8.o\n[279/943] MWCC build/GEDE01/src/game/game_fn_8017718C.o\n[280/943] MWCC build/GEDE01/src/game/game_fn_80178F88.o\n[281/943] MWCC build/GEDE01/src/game/game_fn_80177434.o\n[282/943] MWCC build/GEDE01/src/game/game_fn_80179398.o\n[283/943] MWCC build/GEDE01/src/game/game_fn_8017960C.o\n[284/943] MWCC build/GEDE01/src/game/game_fn_8017974C.o\n[285/943] MWCC build/GEDE01/src/game/game_fn_80179904.o\n[286/943] MWCC build/GEDE01/src/game/game_fn_80179A18.o\n[287/943] MWCC build/GEDE01/src/game/game_fn_80179A74.o\n[288/943] MWCC build/GEDE01/src/game/game_fn_80179EB8.o\n[289/943] MWCC build/GEDE01/src/game/game_fn_80179F20.o\n[290/943] MWCC build/GEDE01/src/game/game_fn_8017A010.o\n[291/943] MWCC build/GEDE01/src/game/game_fn_8017A12C.o\n[292/943] MWCC build/GEDE01/src/game/game_fn_8017A1C0.o\n[293/943] MWCC build/GEDE01/src/game/game_fn_8017A9B8.o\n[294/943] MWCC build/GEDE01/src/game/game_fn_8017AC20.o\n[295/943] MWCC build/GEDE01/src/game/game_fn_8017E850.o\n[296/943] MWCC build/GEDE01/src/game/game_fn_8017E958.o\n[297/943] MWCC build/GEDE01/src/game/game_fn_80180DDC.o\n[298/943] MWCC build/GEDE01/src/game/game_fn_801810A0.o\n[299/943] MWCC build/GEDE01/src/game/game_fn_801816D4.o\n[300/943] MWCC build/GEDE01/src/game/game_fn_801857B4.o\n[301/943] MWCC build/GEDE01/src/game/game_fn_801859FC.o\n[302/943] MWCC build/GEDE01/src/game/game_fn_80185AE8.o\n[303/943] MWCC build/GEDE01/src/game/game_fn_80185F10.o\n[304/943] MWCC build/GEDE01/src/game/game_fn_801861C4.o\n[305/943] MWCC build/GEDE01/src/game/game_fn_801865EC.o\n[306/943] MWCC build/GEDE01/src/game/game_fn_8018680C.o\n[307/943] MWCC build/GEDE01/src/game/game_fn_80186E10.o\n[308/943] MWCC build/GEDE01/src/game/game_fn_80186F70.o\n[309/943] MWCC build/GEDE01/src/game/game_fn_80187120.o\n[310/943] MWCC build/GEDE01/src/game/game_fn_80187320.o\n[311/943] MWCC build/GEDE01/src/game/game_fn_801875FC.o\n[312/943] MWCC build/GEDE01/src/game/game_fn_801878E0.o\n[313/943] MWCC build/GEDE01/src/game/game_fn_80187BB4.o\n[314/943] MWCC build/GEDE01/src/game/game_fn_80187E40.o\n[315/943] MWCC build/GEDE01/src/game/game_fn_80188A7C.o\n[316/943] MWCC build/GEDE01/src/game/game_fn_80188B44.o\n[317/943] MWCC build/GEDE01/src/game/game_fn_80188C1C.o\n[318/943] MWCC build/GEDE01/src/game/game_fn_80188E28.o\n[319/943] MWCC build/GEDE01/src/game/game_fn_80189028.o\n[320/943] MWCC build/GEDE01/src/game/game_fn_801891D8.o\n[321/943] MWCC build/GEDE01/src/game/game_fn_80189390.o\n[322/943] MWCC build/GEDE01/src/game/game_fn_801895E8.o\n[323/943] MWCC build/GEDE01/src/game/game_fn_801896A0.o\n[324/943] MWCC build/GEDE01/src/game/game_fn_80189760.o\n[325/943] MWCC build/GEDE01/src/game/game_fn_80189968.o\n[326/943] MWCC build/GEDE01/src/game/game_fn_80189C14.o\n[327/943] MWCC build/GEDE01/src/game/game_fn_8018C2D0.o\n[328/943] MWCC build/GEDE01/src/game/game_fn_8018D1F0.o\n[329/943] MWCC build/GEDE01/src/game/game_fn_8018D2E0.o\n[330/943] MWCC build/GEDE01/src/game/game_fn_8018D400.o\n[331/943] MWCC build/GEDE01/src/game/game_fn_8018D688.o\n[332/943] MWCC build/GEDE01/src/game/game_fn_8018DC24.o\n[333/943] MWCC build/GEDE01/src/game/game_fn_8018E0D8.o\n[334/943] MWCC build/GEDE01/src/game/game_fn_8018F1D0.o\n[335/943] MWCC build/GEDE01/src/game/game_fn_8018F81C.o\n[336/943] MWCC build/GEDE01/src/game/game_fn_8018FEDC.o\n[337/943] MWCC build/GEDE01/src/game/game_fn_8019120C.o\n[338/943] MWCC build/GEDE01/src/game/game_fn_80191360.o\n[339/943] MWCC build/GEDE01/src/game/game_fn_801916D0.o\n[340/943] MWCC build/GEDE01/src/game/game_fn_8019197C.o\n[341/943] MWCC build/GEDE01/src/game/game_fn_80191F58.o\n[342/943] MWCC build/GEDE01/src/game/game_fn_801926EC.o\n[343/943] MWCC build/GEDE01/src/game/game_fn_801929A4.o\n[344/943] MWCC build/GEDE01/src/game/game_fn_80192F54.o\n[345/943] MWCC build/GEDE01/src/game/game_fn_801931C4.o\n[346/943] MWCC build/GEDE01/src/game/game_fn_80193E1C.o\n[347/943] MWCC build/GEDE01/src/game/game_fn_80193F3C.o\n[348/943] MWCC build/GEDE01/src/game/game_fn_80194F80.o\n[349/943] MWCC build/GEDE01/src/game/game_fn_801952E8.o\n[350/943] MWCC build/GEDE01/src/game/game_fn_80197910.o\n[351/943] MWCC build/GEDE01/src/game/game_fn_80198154.o\n[352/943] MWCC build/GEDE01/src/game/game_fn_80198AAC.o\n[353/943] MWCC build/GEDE01/src/game/game_fn_80198BF4.o\n[354/943] MWCC build/GEDE01/src/game/game_fn_801991E0.o\n[355/943] MWCC build/GEDE01/src/game/game_fn_8019B1BC.o\n[356/943] MWCC build/GEDE01/src/game/game_fn_8019CC28.o\n[357/943] MWCC build/GEDE01/src/game/game_fn_8019CFC4.o\n[358/943] MWCC build/GEDE01/src/game/game_fn_8019E5E4.o\n[359/943] MWCC build/GEDE01/src/game/game_fn_8019E8C8.o\n[360/943] MWCC build/GEDE01/src/game/game_fn_801A1F18.o\n[361/943] MWCC build/GEDE01/src/game/game_fn_801A1F8C.o\n[362/943] MWCC build/GEDE01/src/game/game_fn_801A2A54.o\n[363/943] MWCC build/GEDE01/src/game/game_fn_801A34BC.o\n[364/943] MWCC build/GEDE01/src/game/game_fn_801A3A78.o\n[365/943] MWCC build/GEDE01/src/game/game_fn_801A4430.o\n[366/943] MWCC build/GEDE01/src/game/game_fn_801A4CE0.o\n[367/943] MWCC build/GEDE01/src/game/game_fn_801A5FB0.o\n[368/943] MWCC build/GEDE01/src/game/game_fn_801A6350.o\n[369/943] MWCC build/GEDE01/src/game/game_fn_801A6410.o\n[370/943] MWCC build/GEDE01/src/game/game_fn_801A657C.o\n[371/943] MWCC build/GEDE01/src/game/game_fn_801A6ADC.o\n[372/943] MWCC build/GEDE01/src/game/game_fn_801A6C58.o\n[373/943] MWCC build/GEDE01/src/game/game_fn_801A6CB4.o\n[374/943] MWCC build/GEDE01/src/game/game_fn_801A7E04.o\n[375/943] MWCC build/GEDE01/src/game/game_fn_801A7EA8.o\n[376/943] MWCC build/GEDE01/src/game/game_fn_801A93E8.o\n[377/943] MWCC build/GEDE01/src/game/game_fn_801AB154.o\n[378/943] MWCC build/GEDE01/src/game/game_fn_801ABD3C.o\n[379/943] MWCC build/GEDE01/src/game/game_fn_801AC8AC.o\n[380/943] MWCC build/GEDE01/src/game/game_fn_801ACFE8.o\n[381/943] MWCC build/GEDE01/src/game/game_fn_801AD08C.o\n[382/943] MWCC build/GEDE01/src/game/game_fn_801AFA74.o\n[383/943] MWCC build/GEDE01/src/game/game_fn_801B02F0.o\n[384/943] MWCC build/GEDE01/src/game/game_fn_801B1BA0.o\n[385/943] MWCC build/GEDE01/src/game/game_fn_801B35BC.o\n[386/943] MWCC build/GEDE01/src/game/game_fn_801B46C8.o\n[387/943] MWCC build/GEDE01/src/game/game_fn_801B4FB4.o\n[388/943] MWCC build/GEDE01/src/game/game_fn_801B5228.o\n[389/943] MWCC build/GEDE01/src/game/game_fn_801B58F0.o\n[390/943] MWCC build/GEDE01/src/game/game_fn_801B6F1C.o\n[391/943] MWCC build/GEDE01/src/game/game_fn_801B86C0.o\n[392/943] MWCC build/GEDE01/src/game/game_fn_801B941C.o\n[393/943] MWCC build/GEDE01/src/game/game_fn_801B9E7C.o\n[394/943] MWCC build/GEDE01/src/game/game_fn_801BA15C.o\n[395/943] MWCC build/GEDE01/src/game/game_fn_801BA708.o\n[396/943] MWCC build/GEDE01/src/game/game_fn_801BA94C.o\n[397/943] MWCC build/GEDE01/src/game/game_fn_801BB1A0.o\n[398/943] MWCC build/GEDE01/src/game/game_fn_801BC0D4.o\n[399/943] MWCC build/GEDE01/src/game/game_fn_801BC240.o\n[400/943] MWCC build/GEDE01/src/game/game_fn_801BC8F4.o\n[401/943] MWCC build/GEDE01/src/game/game_fn_801BCC04.o\n[402/943] MWCC build/GEDE01/src/game/game_fn_801BD990.o\n[403/943] MWCC build/GEDE01/src/game/game_fn_801BDE7C.o\n[404/943] MWCC build/GEDE01/src/game/game_fn_801BE0D4.o\n[405/943] MWCC build/GEDE01/src/game/game_fn_801C1CB0.o\n[406/943] MWCC build/GEDE01/src/game/game_fn_801BEF40.o\n[407/943] MWCC build/GEDE01/src/game/game_fn_801C2980.o\n[408/943] MWCC build/GEDE01/src/game/game_fn_801C29BC.o\n[409/943] MWCC build/GEDE01/src/game/game_fn_801C2AAC.o\n[410/943] MWCC build/GEDE01/src/game/game_fn_801C2D9C.o\n[411/943] MWCC build/GEDE01/src/game/game_fn_801C8160.o\n[412/943] MWCC build/GEDE01/src/game/game_fn_801C8224.o\n[413/943] MWCC build/GEDE01/src/game/game_fn_801C8600.o\n[414/943] MWCC build/GEDE01/src/game/game_fn_801C4B5C.o\n[415/943] MWCC build/GEDE01/src/game/game_fn_801C87DC.o\n[416/943] MWCC build/GEDE01/src/game/game_fn_801C8CC0.o\n[417/943] MWCC build/GEDE01/src/game/game_fn_801C8F50.o\n[418/943] MWCC build/GEDE01/src/game/game_fn_801C90A4.o\n[419/943] MWCC build/GEDE01/src/game/game_fn_801C9510.o\n[420/943] MWCC build/GEDE01/src/game/game_fn_801C970C.o\n[421/943] MWCC build/GEDE01/src/game/game_fn_801C9A08.o\n[422/943] MWCC build/GEDE01/src/game/game_fn_801C9B1C.o\n[423/943] MWCC build/GEDE01/src/game/game_fn_801CB4F8.o\n[424/943] MWCC build/GEDE01/src/game/game_fn_801CD228.o\n[425/943] MWCC build/GEDE01/src/game/game_fn_801CE09C.o\n[426/943] MWCC build/GEDE01/src/game/game_fn_801CE594.o\n[427/943] MWCC build/GEDE01/src/game/game_fn_801D1B10.o\n[428/943] MWCC build/GEDE01/src/game/game_fn_801D1F78.o\n[429/943] MWCC build/GEDE01/src/game/game_fn_801D3988.o\n[430/943] MWCC build/GEDE01/src/game/game_fn_801D73D0.o\n[431/943] MWCC build/GEDE01/src/game/game_fn_801D76A8.o\n[432/943] MWCC build/GEDE01/src/game/game_fn_801D7C24.o\n[433/943] MWCC build/GEDE01/src/game/game_fn_801D8050.o\n[434/943] MWCC build/GEDE01/src/game/game_fn_801D9FE4.o\n[435/943] MWCC build/GEDE01/src/game/game_fn_801DDB84.o\n[436/943] MWCC build/GEDE01/src/game/game_fn_801DE8B4.o\n[437/943] MWCC build/GEDE01/src/game/game_fn_801E2A48.o\n[438/943] MWCC build/GEDE01/src/game/game_fn_801E41AC.o\n[439/943] MWCC build/GEDE01/src/game/game_fn_801E504C.o\n[440/943] MWCC build/GEDE01/src/game/game_fn_801E6814.o\n[441/943] MWCC build/GEDE01/src/game/game_fn_801E7014.o\n[442/943] MWCC build/GEDE01/src/game/game_fn_801E995C.o\n[443/943] MWCC build/GEDE01/src/game/game_fn_801EAA04.o\n[444/943] MWCC build/GEDE01/src/game/game_fn_801EB09C.o\n[445/943] MWCC build/GEDE01/src/game/game_fn_801EB11C.o\n[446/943] MWCC build/GEDE01/src/game/game_fn_801ECD74.o\n[447/943] MWCC build/GEDE01/src/game/game_fn_801ECF50.o\n[448/943] MWCC build/GEDE01/src/game/game_fn_801ED5F4.o\n[449/943] MWCC build/GEDE01/src/game/game_fn_801EF580.o\n[450/943] MWCC build/GEDE01/src/game/game_fn_801EF910.o\n[451/943] MWCC build/GEDE01/src/game/game_fn_801F0CB0.o\n[452/943] MWCC build/GEDE01/src/game/game_fn_801F10BC.o\n[453/943] MWCC build/GEDE01/src/game/game_fn_801F1A38.o\n[454/943] MWCC build/GEDE01/src/game/game_fn_801F35A8.o\n[455/943] MWCC build/GEDE01/src/game/game_fn_801F55A0.o\n[456/943] MWCC build/GEDE01/src/game/game_fn_801F69F0.o\n[457/943] MWCC build/GEDE01/src/game/game_fn_801F6BD8.o\n[458/943] MWCC build/GEDE01/src/game/game_fn_801F7510.o\n[459/943] MWCC build/GEDE01/src/game/game_fn_801F76EC.o\n[460/943] MWCC build/GEDE01/src/game/game_fn_801F8264.o\n[461/943] MWCC build/GEDE01/src/game/game_fn_801F89B4.o\n[462/943] MWCC build/GEDE01/src/game/game_fn_801F8FAC.o\n[463/943] MWCC build/GEDE01/src/game/game_fn_801F9AF8.o\n[464/943] MWCC build/GEDE01/src/game/game_fn_801F9CF4.o\n[465/943] MWCC build/GEDE01/src/game/game_fn_801FA9C8.o\n[466/943] MWCC build/GEDE01/src/game/game_fn_801FB6A4.o\n[467/943] MWCC build/GEDE01/src/game/game_fn_801FC034.o\n[468/943] MWCC build/GEDE01/src/game/game_fn_801FC204.o\n[469/943] MWCC build/GEDE01/src/game/game_fn_801FFE78.o\n[470/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800A2B8C.o\n[471/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801857B4.o\n[472/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800DC4D4.o\n[473/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80119C70.o\n[474/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80175A08.o\n[475/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80066E78.o\n[476/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801247F8.o\n[477/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801EF910.o\n[478/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801ECF50.o\n[479/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801FC204.o\n[480/943] EXTERNALIZE JUMPTABLES build/GEDE01/src/game/game_fn_80050B08.o\n[481/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801EB09C.o\n[482/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801EB11C.o\n[483/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801D9FE4.o\n[484/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801E41AC.o\n[485/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801D73D0.o\n[486/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801D76A8.o\n[487/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801D8050.o\n[488/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801D7C24.o\n[489/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8019B1BC.o\n[490/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80178F88.o\n[491/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801CD228.o\n[492/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801BA15C.o\n[493/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801C970C.o\n[494/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80126A00.o\n[495/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801C9510.o\n[496/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800C9C60.o\n[497/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8013D6A4.o\n[498/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801B4FB4.o\n[499/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801B5228.o\n[500/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801C87DC.o\n[501/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801B6F1C.o\n[502/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801C8CC0.o\n[503/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800FD0C8.o\n[504/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801BDE7C.o\n[505/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801BE0D4.o\n[506/943] EXTERNALIZE STATIC POOL build/GEDE01/src/game/game_fn_801C9A08.o\nbuild/GEDE01/src/game/game_fn_801C9A08.o: lbl_80629390 now undefined; section 3 emptied\n[507/943] EXTERNALIZE STATIC POOL build/GEDE01/src/game/game_fn_801C9B1C.o\nbuild/GEDE01/src/game/game_fn_801C9B1C.o: lbl_80629390 now undefined; section 3 emptied\n[508/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801B941C.o\n[509/943] EXTERNALIZE STATIC POOL build/GEDE01/src/game/game_fn_801BD990.o\nbuild/GEDE01/src/game/game_fn_801BD990.o: lbl_80626D80 now undefined; section 6 emptied\n[510/943] EXTERNALIZE STATIC POOL build/GEDE01/src/game/game_fn_801B58F0.o\nbuild/GEDE01/src/game/game_fn_801B58F0.o: lbl_8060C020 now undefined; section 3 emptied\n[511/943] EXTERNALIZE STATIC POOL build/GEDE01/src/game/game_fn_801B9E7C.o\nbuild/GEDE01/src/game/game_fn_801B9E7C.o: 0 relocation(s) moved from streamInfo to ...bss.0\nbuild/GEDE01/src/game/game_fn_801B9E7C.o: lbl_8061AE48 now undefined; section 6 emptied\n[512/943] EXTERNALIZE STATIC POOL build/GEDE01/src/game/game_fn_801BB1A0.o\nbuild/GEDE01/src/game/game_fn_801BB1A0.o: 0 relocation(s) moved from streamInfo to ...bss.0\nbuild/GEDE01/src/game/game_fn_801BB1A0.o: lbl_8061AE48 now undefined; section 6 emptied\n[513/943] EXTERNALIZE STATIC POOL build/GEDE01/src/game/game_fn_801BA708.o\nbuild/GEDE01/src/game/game_fn_801BA708.o: 0 relocation(s) moved from streamInfo to ...bss.0\nbuild/GEDE01/src/game/game_fn_801BA708.o: lbl_8061AE48 now undefined; section 6 emptied\n[514/943] EXTERNALIZE STATIC build/GEDE01/src/game/game_fn_801B35BC.o\nbuild/GEDE01/src/game/game_fn_801B35BC.o: lbl_8060D420 now undefined; section 6 emptied\n[515/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801BA94C.o\nbuild/GEDE01/src/game/game_fn_801BA94C.o: 0 relocation(s) moved from streamInfo to ...bss.0\nbuild/GEDE01/src/game/game_fn_801BA94C.o: lbl_8061AE48 now undefined; section 6 emptied\n[516/943] EXTERNALIZE STATIC POOL build/GEDE01/src/game/game_fn_801BC8F4.o\nbuild/GEDE01/src/game/game_fn_801BC8F4.o: lbl_8061C748 now undefined; section 6 emptied\n[517/943] EXTERNALIZE STATIC build/GEDE01/src/game/game_fn_801BC240.o\nbuild/GEDE01/src/game/game_fn_801BC240.o: lbl_8061C748 now undefined; section 6 emptied\n[518/943] EXTERNALIZE STATIC POOL build/GEDE01/src/game/game_fn_801BCC04.o\nbuild/GEDE01/src/game/game_fn_801BCC04.o: lbl_8061C748 now undefined; section 6 emptied\n[519/943] EXTERNALIZE STATIC POOL build/GEDE01/src/game/game_fn_801BC0D4.o\nbuild/GEDE01/src/game/game_fn_801BC0D4.o: lbl_8061C748 now undefined; section 6 emptied\n[520/943] EXTERNALIZE STATIC POOL build/GEDE01/src/game/game_fn_801C1CB0.o\nbuild/GEDE01/src/game/game_fn_801C1CB0.o: lbl_80626DA0 now undefined; section 3 emptied\n[521/943] RENAME build/GEDE01/src/game/game_InitMetroTRKCommTable.o\n[522/943] EXTERNALIZE STATIC POOL build/GEDE01/src/game/game_fn_801CE09C.o\nbuild/GEDE01/src/game/game_fn_801CE09C.o: lbl_80631340 now undefined; section 6 emptied\n[523/943] RENAME RUNTIME INTRINSICS build/GEDE01/src/game/game_fn_801CB4F8.o\n[524/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801D3988.o\n[525/943] EXTERNALIZE STATIC POOL build/GEDE01/src/game/game_fn_8010242C.o\nbuild/GEDE01/src/game/game_fn_8010242C.o: lbl_8032CC08 now undefined; section 3 emptied\n[526/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801D1B10.o\n[527/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801CE594.o\n[528/943] ALIGN DATA build/GEDE01/src/game/game_fn_8005EF94.o\n[529/943] ALIGN DATA build/GEDE01/src/game/game_fn_801A6350.o\n[530/943] ALIGN DATA build/GEDE01/src/game/game_fn_80008014.o\n[531/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8014549C.o\n[532/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801C8224.o\n[533/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801098C0.o\n[534/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000FDE8.o\n[535/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80185F10.o\n[536/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801C29BC.o\n[537/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8007B828.o\n[538/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801C8F50.o\n[539/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801C90A4.o\n[540/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801C8160.o\n[541/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801C2AAC.o\n[542/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801C2980.o\n[543/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801C2D9C.o\n[544/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801B02F0.o\n[545/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801AFA74.o\n[546/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801AC8AC.o\n[547/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801ABD3C.o\n[548/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801816D4.o\n[549/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8011F140.o\n[550/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801AD08C.o\n[551/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8004998C.o\n[552/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80079AA4.o\n[553/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80158D38.o\n[554/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801A3A78.o\n[555/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8008F224.o\n[556/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80167454.o\n[557/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800AF230.o\n[558/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801A93E8.o\n[559/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801AB154.o\n[560/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801A7E04.o\n[561/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801A7EA8.o\n[562/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801A6CB4.o\n[563/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801A4CE0.o\n[564/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801A6C58.o\n[565/943] NAME JUMPTABLE build/GEDE01/src/game/game_fn_801A6ADC.o\n[566/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801A6410.o\n[567/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801A5FB0.o\n[568/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801A1F18.o\n[569/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8019E8C8.o\n[570/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8019E5E4.o\n[571/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8019CFC4.o\n[572/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8019CC28.o\n[573/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801991E0.o\n[574/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80198BF4.o\n[575/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80198AAC.o\n[576/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80198154.o\n[577/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80194F80.o\n[578/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80197910.o\n[579/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80177434.o\nrepointed 2 relocations to lbl_80250588\n[580/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80193E1C.o\n[581/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801931C4.o\n[582/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80193F3C.o\n[583/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80191F58.o\n[584/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80192F54.o\n[585/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8019197C.o\n[586/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80191360.o\n[587/943] GLOBALIZE build/GEDE01/src/game/game_fn_8018F1D0.o\n[588/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8018D688.o\n[589/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8018F81C.o\n[590/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8018D2E0.o\n[591/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80189968.o\n[592/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80189760.o\n[593/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8018D1F0.o\n[594/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801896A0.o\n[595/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801895E8.o\n[596/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80189390.o\n[597/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801891D8.o\n[598/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80188E28.o\n[599/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80189028.o\n[600/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80188B44.o\n[601/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80188C1C.o\n[602/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80188A7C.o\n[603/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801878E0.o\n[604/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80187120.o\n[605/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8018FEDC.o\n[606/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80186E10.o\n[607/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801865EC.o\n[608/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80185AE8.o\n[609/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801859FC.o\n[610/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80180DDC.o\n[611/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8017E958.o\n[612/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8017E850.o\n[613/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8017718C.o\n[614/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801770F8.o\n[615/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80176FA0.o\n[616/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80176DF4.o\n[617/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80174358.o\n[618/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80173F04.o\n[619/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80174184.o\n[620/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8017553C.o\n[621/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80173D44.o\n[622/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80173770.o\n[623/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801734B4.o\n[624/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80173270.o\n[625/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80172DB8.o\n[626/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80172C78.o\n[627/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80172BB0.o\n[628/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801726EC.o\n[629/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8017250C.o\n[630/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80171F30.o\n[631/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801719B4.o\n[632/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801718F4.o\n[633/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80171664.o\n[634/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8017138C.o\n[635/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80170A40.o\n[636/943] NORMALIZE build/GEDE01/src/game/game_TRKNubWelcome.o\n[637/943] NORMALIZE build/GEDE01/src/game/game_TRK_main.o\n[638/943] NORMALIZE build/GEDE01/src/game/game_data_80239E10.o\n[639/943] NORMALIZE build/GEDE01/src/game/game_data_80239E18.o\n[640/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801706DC.o\n[641/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8017652C.o\n[642/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80170E9C.o\n[643/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80175E64.o\n[644/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80175F0C.o\n[645/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80175FD4.o\n[646/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80176098.o\n[647/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80176160.o\n[648/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80176220.o\n[649/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80170DF4.o\n[650/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801762E8.o\n[651/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8016E8F8.o\n[652/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8016FEF8.o\n[653/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801704F8.o\n[654/943] NORMALIZE build/GEDE01/src/game/game_fn_8016DF4C.o\n[655/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8016D2B8.o\n[656/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8016D040.o\n[657/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8016D1F8.o\n[658/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8016C774.o\n[659/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8016C4BC.o\n[660/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8016C238.o\n[661/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8016C164.o\n[662/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8016C0BC.o\n[663/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8017038C.o\n[664/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8016BE1C.o\n[665/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8016BF60.o\n[666/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8016BD0C.o\n[667/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80169650.o\n[668/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80167B5C.o\n[669/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8015EDC0.o\n[670/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8015DC54.o\n[671/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8015DB84.o\n[672/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80158B20.o\n[673/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80179398.o\n[674/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8017960C.o\n[675/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8017974C.o\n[676/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80179904.o\n[677/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8017A9B8.o\n[678/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80179A18.o\n[679/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80179A74.o\n[680/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80179EB8.o\n[681/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80179F20.o\n[682/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8017A010.o\n[683/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8017A12C.o\n[684/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80157C0C.o\n[685/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8017A1C0.o\n[686/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80155814.o\n[687/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80153898.o\n[688/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8014B494.o\n[689/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8014AF38.o\n[690/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8012DB28.o\n[691/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801141B8.o\n[692/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801128E4.o\n[693/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801126E0.o\n[694/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8010F184.o\n[695/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800E4980.o\n[696/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800C17EC.o\n[697/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800C030C.o\n[698/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800C59F0.o\n[699/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800C644C.o\n[700/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800C65FC.o\n[701/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800CB760.o\n[702/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800CB8F4.o\n[703/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80078500.o\n[704/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80079908.o\n[705/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8007B2F4.o\n[706/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8007B540.o\n[707/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8007B640.o\n[708/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800886D8.o\n[709/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8007BA3C.o\n[710/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800934A0.o\n[711/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800A3894.o\n[712/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800A7E88.o\n[713/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800A4798.o\n[714/943] GLOBALIZE build/GEDE01/src/game/game_fn_800A2130.o\n[715/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800A2FCC.o\n[716/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8009C424.o\n[717/943] EXTERNALIZE SWITCHES build/GEDE01/src/game/game_fn_80095FDC.o\n[718/943] GLOBALIZE build/GEDE01/src/game/game_fn_8008F890.o\n[719/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80096830.o\n[720/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800A4428.o\n[721/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80074310.o\n[722/943] GLOBALIZE build/GEDE01/src/game/game_fn_8005FD84.o\n[723/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80066888.o\n[724/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8005EC6C.o\n[725/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80052310.o\n[726/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80048B24.o\n[727/943] NAME SWITCH build/GEDE01/src/game/game_fn_80020E94.o\n[728/943] NAME SWITCH build/GEDE01/src/game/game_fn_8005EE9C.o\n[729/943] NAME SWITCH build/GEDE01/src/game/game_fn_8016D9C0.o\n[730/943] NAME SWITCH build/GEDE01/src/game/game_fn_80071A58.o\n[731/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80048ADC.o\n[732/943] NAME SWITCH build/GEDE01/src/game/game_fn_8006B620.o\n[733/943] NAME SWITCH build/GEDE01/src/game/game_fn_8001FE1C.o\n[734/943] NAME SWITCH build/GEDE01/src/game/game_fn_8001E644.o\n[735/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80038878.o\n[736/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801B46C8.o\nbuild/GEDE01/src/game/game_fn_801B46C8.o: lbl_8060C020 now undefined; section 6 emptied\n[737/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80036C40.o\n[738/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800359A0.o\n[739/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80033180.o\n[740/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80033038.o\n[741/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80032B84.o\n[742/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8003232C.o\n[743/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8002E3F0.o\n[744/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8002DAE0.o\n[745/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8002EA68.o\n[746/943] GLOBALIZE build/GEDE01/src/game/game_fn_8002B748.o\n[747/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800272B4.o\n[748/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8002F428.o\n[749/943] NAME SWITCHES build/GEDE01/src/game/game_fn_80024F28.o\n[750/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8001CE94.o\n[751/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8001CD58.o\n[752/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8001C078.o\n[753/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8001B874.o\n[754/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8001B808.o\n[755/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8001B294.o\n[756/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8001B124.o\n[757/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8001ADF8.o\n[758/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8001AF68.o\n[759/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8001AAB8.o\n[760/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8001A6C4.o\n[761/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80019F98.o\n[762/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80019D2C.o\n[763/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80019C10.o\n[764/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80019940.o\n[765/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80019244.o\n[766/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800194D0.o\n[767/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80018EF4.o\n[768/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80019054.o\n[769/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80017DB0.o\n[770/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80017CC8.o\n[771/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80017C3C.o\n[772/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80017AE4.o\n[773/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80017A3C.o\n[774/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800179AC.o\n[775/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80017910.o\n[776/943] EXTERNALIZE FLAGS build/GEDE01/src/game/game_fn_800119FC.o\n[777/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000FFD8.o\n[778/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000F4B0.o\n[779/943] GLOBALIZE build/GEDE01/src/game/game_fn_800094C0.o\n[780/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000EFC4.o\n[781/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800096E0.o\n[782/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800098C0.o\n[783/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800099D8.o\n[784/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80009AB4.o\n[785/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000A26C.o\n[786/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800171C0.o\n[787/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800176F0.o\n[788/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000AC88.o\n[789/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000AEB4.o\n[790/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000AFB4.o\n[791/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000B1B8.o\n[792/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000B36C.o\n[793/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000B630.o\n[794/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000B7FC.o\n[795/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000B900.o\n[796/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000BA0C.o\n[797/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000BAA0.o\n[798/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000BC40.o\n[799/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000C06C.o\n[800/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000C17C.o\n[801/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000C400.o\n[802/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000C848.o\n[803/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000C91C.o\n[804/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000D0BC.o\n[805/943] NAME SWITCH build/GEDE01/src/game/game_fn_8000D8A4.o\n[806/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000D3D4.o\n[807/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000E054.o\n[808/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000E0AC.o\n[809/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000E96C.o\n[810/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000F774.o\n[811/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000EB14.o\n[812/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000EBD4.o\n[813/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000ED44.o\n[814/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000E138.o\n[815/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000E1C4.o\n[816/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000D590.o\n[817/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000DA50.o\n[818/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8000DAF4.o\n[819/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80012DA8.o\n[820/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80012F40.o\n[821/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80012FD0.o\n[822/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800131E8.o\n[823/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80013340.o\n[824/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80013870.o\n[825/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80013CB0.o\n[826/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80013D54.o\n[827/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800142DC.o\n[828/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800144CC.o\n[829/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80014784.o\n[830/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800149D4.o\n[831/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80015058.o\n[832/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80015320.o\n[833/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80015568.o\n[834/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800156FC.o\n[835/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80015D40.o\n[836/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80015BE0.o\n[837/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80016128.o\n[838/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80015F04.o\n[839/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80016270.o\n[840/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80016904.o\n[841/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800173CC.o\n[842/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80016B24.o\n[843/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801BEF40.o\n[844/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801B86C0.o\n[845/943] EXTERNALIZE STATIC POOL build/GEDE01/src/game/game_fn_801C4B5C.o\nbuild/GEDE01/src/game/game_fn_801C4B5C.o: lbl_80628CB0 now undefined; section 6 emptied\n[846/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801C8600.o\n[847/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801EAA04.o\n[848/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801DE8B4.o\n[849/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80173BDC.o\n[850/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801E7014.o\n[851/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801A4430.o\n[852/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8014BA14.o\n[853/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800B2EC0.o\n[854/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8001CA04.o\n[855/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80031544.o\n[856/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8006B0F0.o\n[857/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8007D4D8.o\n[858/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801DDB84.o\n[859/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8007F770.o\n[860/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80088F4C.o\n[861/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8008A2E0.o\n[862/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80089A34.o\n[863/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80090004.o\n[864/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80095D10.o\n[865/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800A3180.o\n[866/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800BB7A8.o\n[867/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800BB5C4.o\n[868/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800BB9A4.o\n[869/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800BBAF0.o\n[870/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800D9064.o\n[871/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800D9E10.o\n[872/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8012976C.o\n[873/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8013DB8C.o\n[874/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8013CBE4.o\n[875/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8014CA98.o\n[876/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80153A24.o\n[877/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801535D8.o\n[878/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80174F2C.o\n[879/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801752B0.o\n[880/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8017AC20.o\n[881/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801861C4.o\n[882/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8018680C.o\n[883/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80186F70.o\n[884/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80187320.o\n[885/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801810A0.o\n[886/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801875FC.o\n[887/943] EXTERNALIZE build/GEDE01/src/game/game_fn_800542D0.o\n[888/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80187BB4.o\n[889/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80187E40.o\n[890/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80189C14.o\n[891/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8018C2D0.o\n[892/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8018D400.o\n[893/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8018E0D8.o\n[894/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8019120C.o\n[895/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8018DC24.o\n[896/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801916D0.o\n[897/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801926EC.o\n[898/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801929A4.o\n[899/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801952E8.o\n[900/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801A2A54.o\n[901/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801A34BC.o\n[902/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801A657C.o\n[903/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801A1F8C.o\n[904/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801D1F78.o\n[905/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801E2A48.o\n[906/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801E6814.o\n[907/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801E995C.o\n[908/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801EF580.o\n[909/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801F0CB0.o\n[910/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801F10BC.o\n[911/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801F35A8.o\n[912/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801ECD74.o\n[913/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801ED5F4.o\n[914/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801F69F0.o\n[915/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801F76EC.o\n[916/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801F8264.o\n[917/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801F89B4.o\n[918/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801F9AF8.o\n[919/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801F6BD8.o\n[920/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80095E64.o\n[921/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801FB6A4.o\n[922/943] EXTERNALIZE JUMPTABLES build/GEDE01/src/game/game_fn_800361F8.o\n[923/943] EXTERNALIZE JUMPTABLES build/GEDE01/src/game/game_fn_8006E53C.o\n[924/943] EXTERNALIZE JUMPTABLES build/GEDE01/src/game/game_fn_800CF598.o\n[925/943] EXTERNALIZE JUMPTABLES build/GEDE01/src/game/game_fn_801ACFE8.o\n[926/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80150A24.o\n[927/943] EXTERNALIZE JUMPTABLES build/GEDE01/src/game/game_fn_801B1BA0.o\n[928/943] EXTERNALIZE build/GEDE01/src/game/game_fn_80154F74.o\n[929/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801E504C.o\n[930/943] EXTERNALIZE build/GEDE01/src/game/game_fn_8009E808.o\n[931/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801F1A38.o\n[932/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801FFE78.o\n[933/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801F55A0.o\n[934/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801F7510.o\n[935/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801F8FAC.o\n[936/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801F9CF4.o\n[937/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801FC034.o\n[938/943] EXTERNALIZE build/GEDE01/src/game/game_fn_801FA9C8.o\n[939/943] REPORT\n INFO Loading project .\n INFO Generating report for 7069 units (using 8 threads)\n INFO Report generated in 0.190s\n INFO Writing to build/GEDE01/report.json\n[940/943] LINK build/GEDE01/main.elf\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n### mwldeppc.exe Linker Warning:\n#   Section '.ignored' is unknown. Section ignored.\n[941/943] DOL build/GEDE01/main.dol\n[942/943] CHECK config/GEDE01/build.sha1\nbuild/GEDE01/main.dol: OK\n[943/943] PROGRESS\nProgress:\n  All: 59.37% fuzzy, 50.27% matched, 50.08% linked (6337 / 7069 files)\n    Code: 1156584 / 2300692 bytes (6106 / 8214 functions)\n    Data: 39866 / 4305642 bytes (0.93%)\n  Game Code: 95.64% fuzzy, 80.95% matched, 80.64% linked (6319 / 6633 files)\n    Code: 1153556 / 1425104 bytes (6044 / 6354 functions)\n    Data: 39642 / 40522 bytes (97.83%)\n  SDK/Runtime: 100.00% fuzzy, 100.00% matched, 100.00% linked (18 / 18 files)\n    Code: 3028 / 3028 bytes (62 / 62 functions)\n    Data: 224 / 224 bytes (100.00%)\n"
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "sha1sum",
+        "build/GEDE01/main.dol"
+      ],
+      "exit_code": 0,
+      "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\n"
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "python3",
+        "tools/fndiff.py",
+        "game/game_fn_800F61F4.c",
+        "fn_800F61F4"
+      ],
+      "exit_code": 0,
+      "raw_output": "target 36 bytes  base 40 bytes  match 52.22222\n* 0x0000                                                       | subi r0, r5, 0x20\n* 0x0004  subfic r8, r5, 0x20                                  | subfic r6, r5, 0x20\n* 0x0008  subic r9, r5, 0x20                                   | \n* 0x000c  slw r3, r3, r5                                       | slw r7, r4, r0\n* 0x0010                                                       | slw r0, r3, r5\n* 0x0014  srw r10, r4, r8                                      | srw r3, r4, r6\n* 0x0018  or r3, r3, r10                                       | or r7, r7, r3\n* 0x001c  slw r10, r4, r9                                      | slw r4, r4, r5\n* 0x0020  or r3, r3, r10                                       | or r7, r7, r0\n* 0x0024  slw r4, r4, r5                                       | mr r3, r7\n  0x0028  blr                                                  | blr\n INFO Writing to eternal-darkness-decomp/build/GEDE01/fndiff_fn_800F61F4.json\n"
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "readelf",
+        "-r",
+        "build/GEDE01/obj/game/game_fn_800F61F4.o"
+      ],
+      "exit_code": 0,
+      "raw_output": "\nThere are no relocations in this file.\n"
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "readelf",
+        "-r",
+        "build/GEDE01/src/game/game_fn_800F61F4.o"
+      ],
+      "exit_code": 0,
+      "raw_output": "\nThere are no relocations in this file.\n"
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "python3",
+        "tools/legal_audit.py"
+      ],
+      "exit_code": 0,
+      "raw_output": "legal audit passed (23269 tracked project files inspected)\n"
+    }
+  ],
+  "canonical": {
+    "target_size": 36,
+    "generated_size": 40,
+    "match_percent": 52.22222,
+    "raw_objdiff": {
+      "left": {
+        "sections": [
+          {
+            "name": ".text",
+            "kind": "SECTION_CODE",
+            "size": "36",
+            "match_percent": 52.22222
+          },
+          {
+            "name": ".symtab",
+            "size": "64"
+          },
+          {
+            "name": ".strtab",
+            "size": "32"
+          },
+          {
+            "name": ".shstrtab",
+            "size": "33"
+          }
+        ],
+        "symbols": [
+          {
+            "name": "fn_800F61F4",
+            "size": "36",
+            "flags": 1,
+            "target_symbol": 1,
+            "match_percent": 52.22222,
+            "instructions": [
+              {
+                "diff_kind": "DIFF_INSERT"
+              },
+              {
+                "diff_kind": "DIFF_ARG_MISMATCH",
+                "instruction": {
+                  "size": 4,
+                  "formatted": "subfic r8, r5, 0x20",
+                  "parts": [
+                    {
+                      "opcode": {
+                        "mnemonic": "subfic",
+                        "opcode": 258
+                      }
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r8"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r5"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "signed": "32"
+                      }
+                    }
+                  ]
+                },
+                "arg_diff": [
+                  {
+                    "diff_index": 0
+                  },
+                  {},
+                  {}
+                ]
+              },
+              {
+                "diff_kind": "DIFF_DELETE",
+                "instruction": {
+                  "address": "4",
+                  "size": 4,
+                  "formatted": "subic r9, r5, 0x20",
+                  "parts": [
+                    {
+                      "opcode": {
+                        "mnemonic": "subic",
+                        "opcode": 261
+                      }
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r9"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r5"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "signed": "32"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "diff_kind": "DIFF_ARG_MISMATCH",
+                "instruction": {
+                  "address": "8",
+                  "size": 4,
+                  "formatted": "slw r3, r3, r5",
+                  "parts": [
+                    {
+                      "opcode": {
+                        "mnemonic": "slw",
+                        "opcode": 359
+                      }
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r3"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r3"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r5"
+                      }
+                    }
+                  ]
+                },
+                "arg_diff": [
+                  {
+                    "diff_index": 1
+                  },
+                  {
+                    "diff_index": 1
+                  },
+                  {
+                    "diff_index": 2
+                  }
+                ]
+              },
+              {
+                "diff_kind": "DIFF_INSERT"
+              },
+              {
+                "diff_kind": "DIFF_ARG_MISMATCH",
+                "instruction": {
+                  "address": "12",
+                  "size": 4,
+                  "formatted": "srw r10, r4, r8",
+                  "parts": [
+                    {
+                      "opcode": {
+                        "mnemonic": "srw",
+                        "opcode": 362
+                      }
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r10"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r4"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r8"
+                      }
+                    }
+                  ]
+                },
+                "arg_diff": [
+                  {
+                    "diff_index": 3
+                  },
+                  {},
+                  {
+                    "diff_index": 0
+                  }
+                ]
+              },
+              {
+                "diff_kind": "DIFF_ARG_MISMATCH",
+                "instruction": {
+                  "address": "16",
+                  "size": 4,
+                  "formatted": "or r3, r3, r10",
+                  "parts": [
+                    {
+                      "opcode": {
+                        "mnemonic": "or",
+                        "opcode": 357
+                      }
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r3"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r3"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r10"
+                      }
+                    }
+                  ]
+                },
+                "arg_diff": [
+                  {
+                    "diff_index": 1
+                  },
+                  {
+                    "diff_index": 1
+                  },
+                  {
+                    "diff_index": 3
+                  }
+                ]
+              },
+              {
+                "diff_kind": "DIFF_ARG_MISMATCH",
+                "instruction": {
+                  "address": "20",
+                  "size": 4,
+                  "formatted": "slw r10, r4, r9",
+                  "parts": [
+                    {
+                      "opcode": {
+                        "mnemonic": "slw",
+                        "opcode": 359
+                      }
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r10"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r4"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r9"
+                      }
+                    }
+                  ]
+                },
+                "arg_diff": [
+                  {
+                    "diff_index": 3
+                  },
+                  {},
+                  {
+                    "diff_index": 4
+                  }
+                ]
+              },
+              {
+                "diff_kind": "DIFF_ARG_MISMATCH",
+                "instruction": {
+                  "address": "24",
+                  "size": 4,
+                  "formatted": "or r3, r3, r10",
+                  "parts": [
+                    {
+                      "opcode": {
+                        "mnemonic": "or",
+                        "opcode": 357
+                      }
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r3"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r3"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r10"
+                      }
+                    }
+                  ]
+                },
+                "arg_diff": [
+                  {
+                    "diff_index": 1
+                  },
+                  {
+                    "diff_index": 1
+                  },
+                  {
+                    "diff_index": 3
+                  }
+                ]
+              },
+              {
+                "diff_kind": "DIFF_REPLACE",
+                "instruction": {
+                  "address": "28",
+                  "size": 4,
+                  "formatted": "slw r4, r4, r5",
+                  "parts": [
+                    {
+                      "opcode": {
+                        "mnemonic": "slw",
+                        "opcode": 359
+                      }
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r4"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r4"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r5"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "instruction": {
+                  "address": "32",
+                  "size": 4,
+                  "formatted": "blr ",
+                  "parts": [
+                    {
+                      "opcode": {
+                        "mnemonic": "blr",
+                        "opcode": 269
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "right": {
+        "sections": [
+          {
+            "name": ".text",
+            "kind": "SECTION_CODE",
+            "size": "40"
+          },
+          {
+            "name": ".symtab",
+            "size": "64"
+          },
+          {
+            "name": ".strtab",
+            "size": "32"
+          },
+          {
+            "name": ".shstrtab",
+            "size": "42"
+          },
+          {
+            "name": ".comment",
+            "size": "76"
+          }
+        ],
+        "symbols": [
+          {
+            "name": "fn_800F61F4",
+            "size": "40",
+            "flags": 1,
+            "target_symbol": 1,
+            "match_percent": 52.22222,
+            "instructions": [
+              {
+                "diff_kind": "DIFF_INSERT",
+                "instruction": {
+                  "size": 4,
+                  "formatted": "subi r0, r5, 0x20",
+                  "parts": [
+                    {
+                      "opcode": {
+                        "mnemonic": "subi",
+                        "opcode": 263
+                      }
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r0"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r5"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "signed": "32"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "diff_kind": "DIFF_ARG_MISMATCH",
+                "instruction": {
+                  "address": "4",
+                  "size": 4,
+                  "formatted": "subfic r6, r5, 0x20",
+                  "parts": [
+                    {
+                      "opcode": {
+                        "mnemonic": "subfic",
+                        "opcode": 258
+                      }
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r6"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r5"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "signed": "32"
+                      }
+                    }
+                  ]
+                },
+                "arg_diff": [
+                  {
+                    "diff_index": 0
+                  },
+                  {},
+                  {}
+                ]
+              },
+              {
+                "diff_kind": "DIFF_DELETE"
+              },
+              {
+                "diff_kind": "DIFF_ARG_MISMATCH",
+                "instruction": {
+                  "address": "8",
+                  "size": 4,
+                  "formatted": "slw r7, r4, r0",
+                  "parts": [
+                    {
+                      "opcode": {
+                        "mnemonic": "slw",
+                        "opcode": 359
+                      }
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r7"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r4"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r0"
+                      }
+                    }
+                  ]
+                },
+                "arg_diff": [
+                  {
+                    "diff_index": 1
+                  },
+                  {
+                    "diff_index": 2
+                  },
+                  {
+                    "diff_index": 3
+                  }
+                ]
+              },
+              {
+                "diff_kind": "DIFF_INSERT",
+                "instruction": {
+                  "address": "12",
+                  "size": 4,
+                  "formatted": "slw r0, r3, r5",
+                  "parts": [
+                    {
+                      "opcode": {
+                        "mnemonic": "slw",
+                        "opcode": 359
+                      }
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r0"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r3"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r5"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "diff_kind": "DIFF_ARG_MISMATCH",
+                "instruction": {
+                  "address": "16",
+                  "size": 4,
+                  "formatted": "srw r3, r4, r6",
+                  "parts": [
+                    {
+                      "opcode": {
+                        "mnemonic": "srw",
+                        "opcode": 362
+                      }
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r3"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r4"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r6"
+                      }
+                    }
+                  ]
+                },
+                "arg_diff": [
+                  {
+                    "diff_index": 4
+                  },
+                  {},
+                  {
+                    "diff_index": 0
+                  }
+                ]
+              },
+              {
+                "diff_kind": "DIFF_ARG_MISMATCH",
+                "instruction": {
+                  "address": "20",
+                  "size": 4,
+                  "formatted": "or r7, r7, r3",
+                  "parts": [
+                    {
+                      "opcode": {
+                        "mnemonic": "or",
+                        "opcode": 357
+                      }
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r7"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r7"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r3"
+                      }
+                    }
+                  ]
+                },
+                "arg_diff": [
+                  {
+                    "diff_index": 1
+                  },
+                  {
+                    "diff_index": 1
+                  },
+                  {
+                    "diff_index": 4
+                  }
+                ]
+              },
+              {
+                "diff_kind": "DIFF_ARG_MISMATCH",
+                "instruction": {
+                  "address": "24",
+                  "size": 4,
+                  "formatted": "slw r4, r4, r5",
+                  "parts": [
+                    {
+                      "opcode": {
+                        "mnemonic": "slw",
+                        "opcode": 359
+                      }
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r4"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r4"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r5"
+                      }
+                    }
+                  ]
+                },
+                "arg_diff": [
+                  {
+                    "diff_index": 2
+                  },
+                  {},
+                  {
+                    "diff_index": 5
+                  }
+                ]
+              },
+              {
+                "diff_kind": "DIFF_ARG_MISMATCH",
+                "instruction": {
+                  "address": "28",
+                  "size": 4,
+                  "formatted": "or r7, r7, r0",
+                  "parts": [
+                    {
+                      "opcode": {
+                        "mnemonic": "or",
+                        "opcode": 357
+                      }
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r7"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r7"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r0"
+                      }
+                    }
+                  ]
+                },
+                "arg_diff": [
+                  {
+                    "diff_index": 1
+                  },
+                  {
+                    "diff_index": 1
+                  },
+                  {
+                    "diff_index": 3
+                  }
+                ]
+              },
+              {
+                "diff_kind": "DIFF_REPLACE",
+                "instruction": {
+                  "address": "32",
+                  "size": 4,
+                  "formatted": "mr r3, r7",
+                  "parts": [
+                    {
+                      "opcode": {
+                        "mnemonic": "mr",
+                        "opcode": 357
+                      }
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r3"
+                      }
+                    },
+                    {
+                      "separator": true
+                    },
+                    {
+                      "arg": {
+                        "opaque": "r7"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "instruction": {
+                  "address": "36",
+                  "size": 4,
+                  "formatted": "blr ",
+                  "parts": [
+                    {
+                      "opcode": {
+                        "mnemonic": "blr",
+                        "opcode": 269
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "relocation_strict": {
+    "match_percent": 52.22222,
+    "target_relocations": 0,
+    "generated_relocations": 0,
+    "conclusion": "Neither object contains relocation records, as verified by readelf -r. No targets or addends exist to relax; canonical and relocation-strict comparisons are identical."
+  },
+  "reconstruction": {
+    "source": "eternal-darkness-decomp/src/game/game_fn_800F61F4.c",
+    "registration": "Object(NonMatching, \"game/game_fn_800F61F4.c\")",
+    "split": ".text start:0x800F61F4 end:0x800F6218",
+    "scope": "Only this independent C translation unit and assignment-specific reports changed. Existing registration and split already match accepted base.",
+    "semantic_limit": "As in the inherited reconstruction, word shifts rely on the observed canonical MWCC PowerPC slw/srw lowering for counts outside 0..31; this is not portable ISO C shift semantics. Reassociation retains the same four machine shifts and OR result.",
+    "legal_review": "No assembly, calls, shared reconstruction, neighboring edits, compiler policy changes, or gate changes. No generated binaries or private inputs included. NonMatching retains retail code in the verified DOL."
+  },
+  "divergence": "Retail has 36 bytes (9 instructions); candidate has 40 bytes (10 instructions). Generated subi r0,r5,0x20 precedes subfic r6,r5,0x20; retail starts subfic r8,r5,0x20 then carry-setting subic r9,r5,0x20. Generated cross-word terms use r7/r3 and hi << shift uses r0, versus retail accumulating hi in r3 with cross-word r10. ORs and low-word shift are scheduled differently and generated code adds mr r3,r7. Neither object has relocations."
+}

@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "target": "fn_800BFF14",
+  "hypothesis": "MWCC might color the later object into r30 and the saved event into r31 if the object and state are declared before an explicit saved-event alias, or if an eliminated object initialization or register storage-class raises the object's allocation priority.",
+  "canonical_compiler": "GC/1.3 -O4,p with scheduling enabled (the generated build command contains no -schedule off option)",
+  "experiments": [
+    {
+      "variant": "predeclare object and state before saved_event; call all helpers through saved_event",
+      "command": ".tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_800BFF14.o && python3 tools/fndiff.py game/game_fn_800BFF14.c fn_800BFF14",
+      "raw_output": "target 112 bytes  base 112 bytes  match 84.64286",
+      "generated_registers": "event r30; object r31",
+      "generated_prologue": ["stwu r1,-16(r1)", "mflr r0", "stw r0,20(r1)", "stw r31,12(r1)", "stw r30,8(r1)", "mr r30,r4", "mr r3,r30"]
+    },
+    {
+      "variant": "initialize object to null before saved_event assignment, allowing dead-store elimination",
+      "command": ".tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_800BFF14.o && python3 tools/fndiff.py game/game_fn_800BFF14.c fn_800BFF14",
+      "raw_output": "target 112 bytes  base 112 bytes  match 84.64286",
+      "generated_registers": "event r30; object r31",
+      "generated_prologue": ["stwu r1,-16(r1)", "mflr r0", "stw r0,20(r1)", "stw r31,12(r1)", "stw r30,8(r1)", "mr r30,r4", "mr r3,r30"]
+    },
+    {
+      "variant": "explicit register storage class on the predeclared object",
+      "command": ".tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_800BFF14.o && python3 tools/fndiff.py game/game_fn_800BFF14.c fn_800BFF14",
+      "raw_output": "target 112 bytes  base 112 bytes  match 84.64286",
+      "generated_registers": "event r30; object r31",
+      "generated_prologue": ["stwu r1,-16(r1)", "mflr r0", "stw r0,20(r1)", "stw r31,12(r1)", "stw r30,8(r1)", "mr r30,r4", "mr r3,r30"]
+    }
+  ],
+  "retail_registers": "event r31; object r30",
+  "retail_prologue": ["stwu r1,-16(r1)", "mflr r0", "mr r3,r4", "stw r0,20(r1)", "stw r31,12(r1)", "mr r31,r4", "stw r30,8(r1)"],
+  "disposition": "Hypothesis rejected. All tested allocation-priority variants collapse to the prior code. The clearest reconstruction was restored unchanged."
+}

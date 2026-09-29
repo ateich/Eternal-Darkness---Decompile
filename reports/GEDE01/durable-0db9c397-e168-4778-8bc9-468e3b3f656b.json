@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "0db9c397-e168-4778-8bc9-468e3b3f656b",
+  "attempt": 5,
+  "base_commit": "318332afc5facaf2afec2aca3593b6d91770c30d",
+  "target": "fn_800F6218",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-0db9c397-e168-4778-8bc9-468e3b3f656b.json"
+  ],
+  "divergence": "Retained recovered scalar candidate: canonical GC/1.3 emits 40 bytes versus retail 36; canonical and relocation-strict objdiff both measure 27.777779%. Retail uses subfic r8,r5,32; carry-setting subic r9,r5,32; shared r10 cross-word temporaries; final srw r3,r3,r5. Candidate uses subfic r6,r5,32; non-carrying subi r0,r5,32; computes high word early into r7 and returns via mr r3,r7; cross-word temporaries r5/r0. Both relocation tables are empty. Distinct safe range-partition hypothesis emitted 56 bytes with branches and scored 0%; its source, compile command, and raw result are preserved in evidence. Retained historical scalar relies on target compiler word-shift behavior outside ISO C defined shift counts. Full canonical build passes and DOL SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f; registration remains NonMatching."
+}

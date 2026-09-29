@@ -1,0 +1,41 @@
+diff --git a/eternal-darkness-decomp/src/game/game_fn_800614A8.c b/eternal-darkness-decomp/src/game/game_fn_800614A8.c
+index 8b90bd606..22a935c51 100644
+--- a/eternal-darkness-decomp/src/game/game_fn_800614A8.c
++++ b/eternal-darkness-decomp/src/game/game_fn_800614A8.c
+@@ -73,7 +73,7 @@ extern void fn_801A74A8(s32, s32);                         /* extern */
+ extern s32 fn_801A74C0();                                  /* extern */
+ extern void fn_801A764C(s32, f32 *);                       /* extern */
+ extern M2C_UNK fn_801A977C(u32, M2C_UNK);                  /* extern */
+-extern M2C_UNK fn_801AAE68(M2C_UNK, M2C_UNK, M2C_UNK, f32 *, M2C_UNK, M2C_UNK, M2C_UNK, u16, f32); /* extern */
++extern M2C_UNK fn_801AAE68(M2C_UNK, M2C_UNK, M2C_UNK, f32 *, M2C_UNK, M2C_UNK, M2C_UNK, u16, f32, u32); /* extern */
+ extern M2C_UNK fn_801D14CC(s32);                           /* extern */
+ extern int fn_801E8328();                      /* extern */
+ extern s32 fn_802006D4(s32, s32, M2C_UNK, M2C_UNK, M2C_UNK); /* extern */
+@@ -168,7 +168,8 @@ typedef struct Fn800614A8Vec {
+ 
+ typedef struct Fn800614A8Pair {
+     f32 x;
+-    s32 y;
++    f32 y;
++    f32 z;
+ } Fn800614A8Pair;
+ 
+ typedef struct Fn800614A8Args {
+@@ -226,7 +227,6 @@ s32 fn_800614A8(s32 arg0, s32 arg1, s32 arg2, s32 *arg3) {
+     Fn800614A8Vec vec2C;
+     Fn800614A8Args callArgs;
+     s16 sp10;
+-    s32 sp8;
+     f32 temp_f2;
+     s16 temp_r3;
+     s16 temp_r3_10;
+@@ -396,8 +396,7 @@ s32 fn_800614A8(s32 arg0, s32 arg1, s32 arg2, s32 *arg3) {
+         case 0xC9:                                  /* switch 2 */
+             if (fn_8011FF38() != 0) {
+                 fn_8011FA8C(temp_r31, 0, 0x20000000);
+-                sp8 = 0;
+-                fn_801AAE68(0x1F1, 0x64, 0, &sp8C, 2, 2, 0, (u16) lbl_8064D18C, lbl_8064E5BC);
++                fn_801AAE68(0x1F1, 0x64, 0, &sp8C, 2, 2, 0, (u16) lbl_8064D18C, lbl_8064E5BC, 0);
+             }
+             return 1;
+         case 0x67:                                  /* switch 2 */

@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "assignment_id": "8fe89eeb-b430-40cd-85d2-db0d7ff992c8",
+  "attempt": 4,
+  "base_commit": "8e43d1237f5484b49ab0333ba523918d9fb09a0e",
+  "target": "fn_801F15D0",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-8fe89eeb-b430-40cd-85d2-db0d7ff992c8.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-8fe89eeb-b430-40cd-85d2-db0d7ff992c8-reloc-strict.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 84.80269%: retail is 892 bytes with a 208-byte frame, direct stmw/lmw saves beginning at r21, and 14 relocations; GC/1.3 emits 924 bytes with a 240-byte frame, _savegpr_21/_restgpr_21 calls, and 16 relocations. The corrected IndexRecord801F15D0 source now faithfully reads indices + 0x58 + i * 0x5c and reproduces retail's addi/lbzx and 0x5c induction sequence. Remaining source/codegen divergence is explicit: result-cast conversion expressions emit double-precision fsub followed by frsp where retail uses fsubs; the previously tested implicit-conversion form additionally changes retail's single-precision fdivs/fmuls typing, while operand casts add earlier frsp conversions. Stack-slot lifetime and nonvolatile-register allocation still produce the larger frame and save/restore helper relocations."
+}

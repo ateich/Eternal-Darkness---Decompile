@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "assignment_id": "d6e807f3-4a8f-479c-ba15-81e3107d0f43",
+  "attempt": 3,
+  "target": "fn_800BFF14",
+  "base_commit": "014bca8d47a6bcdb8d58379a7f8f5e3fd555fd18",
+  "preserved_commits_reviewed": [
+    "1309d13413ee357e99d682c3507a5671aed67440",
+    "c7a11bbf57de8540ff249d9e08c5781a6d873392"
+  ],
+  "compiler": "Canonical GC/1.3, -O4,p, -lang=c; scheduling is enabled because the canonical command has no -schedule off option",
+  "hypothesis_evidence": "eternal-darkness-decomp/reports/GEDE01/codegen-d6e807f3-4a8f-479c-ba15-81e3107d0f43.raw.json",
+  "measurements": {
+    "canonical": {
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_800BFF14 -o reports/GEDE01/objdiff-d6e807f3-4a8f-479c-ba15-81e3107d0f43-canonical.raw.json --format json-pretty fn_800BFF14",
+      "exit_code": 0,
+      "match_percent": 84.64286,
+      "retail_size": 112,
+      "generated_size": 112,
+      "raw_file": "eternal-darkness-decomp/reports/GEDE01/objdiff-d6e807f3-4a8f-479c-ba15-81e3107d0f43-canonical.raw.json"
+    },
+    "relocation_strict": {
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_800BFF14 -o reports/GEDE01/objdiff-d6e807f3-4a8f-479c-ba15-81e3107d0f43-reloc-strict.raw.json --format json-pretty -c function_reloc_diffs=name_address fn_800BFF14",
+      "exit_code": 0,
+      "match_percent": 84.64286,
+      "retail_size": 112,
+      "generated_size": 112,
+      "raw_file": "eternal-darkness-decomp/reports/GEDE01/objdiff-d6e807f3-4a8f-479c-ba15-81e3107d0f43-reloc-strict.raw.json"
+    }
+  },
+  "raw_files_note": "Canonical and relocation-strict raw files are byte-identical (SHA-256 4993f1b7d398610eb4c375afcbe109c4f49a4a2a49397d848bf02718bff55ccf). This is expected here: all four relocation targets and addends already agree, so function_reloc_diffs=name_address does not alter the diff.",
+  "relocations": {
+    "retail": ["0x1c R_PPC_REL24 fn_801A74C0 + 0", "0x2c R_PPC_REL24 fn_8004914C + 0", "0x3c R_PPC_REL24 fn_801A7778 + 0", "0x50 R_PPC_REL24 fn_800BFFDC + 0"],
+    "generated": ["0x1c R_PPC_REL24 fn_801A74C0 + 0", "0x2c R_PPC_REL24 fn_8004914C + 0", "0x3c R_PPC_REL24 fn_801A7778 + 0", "0x50 R_PPC_REL24 fn_800BFFDC + 0"],
+    "offset_type_target_addend_equal": true
+  },
+  "divergence": "Generated preserves event in r30 and object in r31; retail preserves event in r31 and object in r30. Retail schedules mr r3,r4 before the LR/nonvolatile stores and interleaves mr r31,r4 with them; generated performs all stores first, then emits mr r30,r4 and mr r3,r30. All four call relocations agree exactly.",
+  "retained_status": "NonMatching",
+  "build": {
+    "command": "python3 configure.py && .tools/bin/ninja -j2",
+    "exit_code": 0,
+    "raw_stdout_tail": "[919/921] DOL build/GEDE01/main.dol\n[920/921] CHECK config/GEDE01/build.sha1\nbuild/GEDE01/main.dol: OK\n[921/921] PROGRESS"
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "exit_code": 0,
+    "stdout": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+  },
+  "legal_audit": {
+    "command": "python3 tools/legal_audit.py",
+    "exit_code": 0,
+    "stdout": "legal audit passed (21627 tracked project files inspected)"
+  }
+}

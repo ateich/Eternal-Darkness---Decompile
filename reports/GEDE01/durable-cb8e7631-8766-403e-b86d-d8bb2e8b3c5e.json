@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "assignment_id": "cb8e7631-8766-403e-b86d-d8bb2e8b3c5e",
+  "attempt": 5,
+  "base_commit": "644da9762650cee44ff40ce7750f41ae134f5187",
+  "target": "fn_80151600",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-cb8e7631-8766-403e-b86d-d8bb2e8b3c5e.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-cb8e7631-8766-403e-b86d-d8bb2e8b3c5e-canonical.json",
+    "eternal-darkness-decomp/reports/GEDE01/verification-cb8e7631-8766-403e-b86d-d8bb2e8b3c5e.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-cb8e7631-8766-403e-b86d-d8bb2e8b3c5e.log",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-cb8e7631-8766-403e-b86d-d8bb2e8b3c5e.json"
+  ],
+  "divergence": "Canonical and relocation-strict direct objdiff both measure 98.125% (prior best 86.252235%). Retail is 1792 bytes; candidate is 1772. Both now use a 0xC0 frame, stmw r21, matching vector/packed stack slots, and 60 relocation-bearing objdiff instruction records (57 ELF .rela.text entries). Retail return checks at +0x474 and +0x5DC emit li r0,-1; and r0,r4,r0; cmplwi r0,1; candidate compares r4 directly, omitting 16 bytes. Candidate actor setup omits the intermediate mr r0,r3 (4 bytes). Work/finished registers r29/r31 and reaction/actor registers r21/r22 remain exchanged. Three SDA21 sites retain local conversion constants @113/@117 rather than lbl_80650588/lbl_80650590, with addend 0; relocation offsets after omitted instructions differ. Prior explicit-mask and candidate-actor lifetime-split regressions were not repeated. This attempt improves aggregate fallback lowering, full-width unsigned absolute-value lowering, radius width, owner semantics, packed-copy lowering, and stack layout. Remains NonMatching; DOL hash success does not claim candidate equivalence."
+}

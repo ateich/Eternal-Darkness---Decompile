@@ -1,0 +1,34 @@
+diff --git a/eternal-darkness-decomp/src/game/game_fn_8005F8D0.c b/eternal-darkness-decomp/src/game/game_fn_8005F8D0.c
+index 780b5c4b6b..5de7efae6c 100644
+--- a/eternal-darkness-decomp/src/game/game_fn_8005F8D0.c
++++ b/eternal-darkness-decomp/src/game/game_fn_8005F8D0.c
+@@ -82,6 +82,8 @@ void fn_8005F8D0(s32 owner, void *entry, void *manager, SourceObject *source,
+     Pair *pairs_b;
+     s32 state;
+     s32 range;
++    s32 random_min;
++    s32 random_value;
+     s32 query_two;
+     s32 query_three;
+ 
+@@ -111,15 +113,15 @@ void fn_8005F8D0(s32 owner, void *entry, void *manager, SourceObject *source,
+     }
+ 
+     config = &lbl_80243C30[config_kind];
+-    range = config->random_max - config->random_min;
+-    range = (u16)(config->random_min + fn_800FBFB0() % range);
++    random_min = config->random_min;
++    random_value = fn_800FBFB0();
++    range = (u16)(random_min + random_value % (config->random_max - random_min));
+ 
+     if (position != 0) {
+         s32 bad;
+         ++lbl_8064C888;
+-        bad = lbl_8064C888;
+-        bad &= ~-((bad < 0) || (bad >= 5));
+-        lbl_8064C888 = bad;
++        bad = (lbl_8064C888 < 0) || (lbl_8064C888 >= 5);
++        lbl_8064C888 &= ~((-bad | bad) >> 31);
+         fn_8005F758(lbl_8030F820 + lbl_8064C888 * 0xC4, source->object_id,
+                     position, owner, pairs_b[state].first,
+                     pairs_a[state].first, 5, 2, 0, 4);

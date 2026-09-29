@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "assignment_id": "d4fd74f5-5243-457c-a411-f1b7946bbcdc",
+  "attempt": 5,
+  "base_commit": "4f491a6c4c633f0e95d0c95478c186386618881c",
+  "target": "fn_801A260C",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-d4fd74f5-5243-457c-a411-f1b7946bbcdc.json",
+    "eternal-darkness-decomp/reports/GEDE01/audit-d4fd74f5-5243-457c-a411-f1b7946bbcdc.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff improved from 97.57143% to 99.734695%, size-exact at 980 bytes. EffectState member accesses fix initial load scheduling; a ternary clamp fixes the modulo/clamp register cycle. Nine text words still differ at 0x74, 0x7c, 0x84, 0x8c, 0x318, 0x31c, 0x320, 0x324, and 0x328 due to reversed f27-f30 allocation of alpha constants and the unsigned-conversion bias. Of 13 relocations, nine target/type/addend tuples match exactly; offsets 0x8c/0x198 target local @41 instead of lbl_80650D20, and 0xd0/0x1cc target @32 instead of lbl_80650D08. Addends are zero and the constant bytes agree with retail. Preserved as NonMatching without compiler or relocation-policy changes. Canonical configure/build, legal audit, build.sha1 gate, and independent DOL SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f passed."
+}

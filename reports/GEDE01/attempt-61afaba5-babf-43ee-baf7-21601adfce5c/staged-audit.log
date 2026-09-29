@@ -1,0 +1,80 @@
+git diff --cached --check returned 2 solely for trailing whitespace in raw tool output and unified-patch context; preserved verbatim in raw-whitespace-check.log. No source modifications retained.
+$ git diff --cached --stat
+ .../array-experiments.py                           |   39 +
+ .../array-restore.log                              |    4 +
+ .../array-results.json                             |   44 +
+ .../array_color-canonical.json                     |    1 +
+ .../array_color-strict.json                        |    1 +
+ .../array_color.log                                |   12 +
+ .../array_color.patch                              |   19 +
+ .../baseline-canonical.json                        |    1 +
+ .../baseline-strict.json                           |    1 +
+ .../baseline.log                                   |   12 +
+ .../baseline.patch                                 |    0
+ .../boxed_color-canonical.json                     |    1 +
+ .../boxed_color-strict.json                        |    1 +
+ .../boxed_color.log                                |   12 +
+ .../boxed_color.patch                              |   19 +
+ .../build.log                                      | 2026 ++++++++++++++++++
+ .../bytes.json                                     |   19 +
+ .../configure.log                                  |    3 +
+ .../experiments.py                                 |   39 +
+ .../final-strict.json                              |    1 +
+ .../flat_halfword_indices-canonical.json           |    1 +
+ .../flat_halfword_indices-strict.json              |    1 +
+ .../flat_halfword_indices.log                      |   12 +
+ .../flat_halfword_indices.patch                    |   26 +
+ ...lat_halfword_indices_array_color-canonical.json |    1 +
+ .../flat_halfword_indices_array_color-strict.json  |    1 +
+ .../flat_halfword_indices_array_color.log          |   12 +
+ .../flat_halfword_indices_array_color.patch        |   29 +
+ .../instructions.txt                               |   96 +
+ .../preserved-attempt4-metadata.json               |   32 +
+ .../prior-attempts.json                            |   65 +
+ .../relocations.log                                |   44 +
+ .../restore.log                                    |    4 +
+ .../results.json                                   |   58 +
+ .../shared_stack_frame-canonical.json              |    1 +
+ .../shared_stack_frame-strict.json                 |    1 +
+ .../shared_stack_frame.log                         |   12 +
+ .../shared_stack_frame.patch                       |   28 +
+ .../shared_stack_frame_reversed-canonical.json     |    1 +
+ .../shared_stack_frame_reversed-strict.json        |    1 +
+ .../shared_stack_frame_reversed.log                |   12 +
+ .../shared_stack_frame_reversed.patch              |   28 +
+ .../summary.json                                   |  262 +++
+ .../typed-experiments.py                           |   40 +
+ .../typed-restore.log                              |    4 +
+ .../typed-results.json                             |   16 +
+ .../typed_word_copy-canonical.json                 |    1 +
+ .../typed_word_copy-strict.json                    |    1 +
+ .../typed_word_copy.log                            |   12 +
+ .../typed_word_copy.patch                          |   26 +
+ .../typed_word_initializer.log                     |   16 +
+ .../typed_word_initializer.patch                   |   22 +
+ .../union-experiments.py                           |   45 +
+ .../union-results.json                             |   44 +
+ .../union_color_bytes-canonical.json               |    1 +
+ .../union_color_bytes-strict.json                  |    1 +
+ .../union_color_bytes.log                          |   12 +
+ .../union_color_bytes.patch                        |   19 +
+ .../union_color_halfwords-canonical.json           |    1 +
+ .../union_color_halfwords-strict.json              |    1 +
+ .../union_color_halfwords.log                      |   12 +
+ .../union_color_halfwords.patch                    |   19 +
+ .../union_quad_words-canonical.json                |    1 +
+ .../union_quad_words-strict.json                   |    1 +
+ .../union_quad_words.log                           |   12 +
+ .../union_quad_words.patch                         |   27 +
+ .../verification.log                               | 2148 ++++++++++++++++++++
+ .../verify.py                                      |   46 +
+ ...rable-61afaba5-babf-43ee-baf7-21601adfce5c.json |   15 +
+ ...jdiff-61afaba5-babf-43ee-baf7-21601adfce5c.json |    1 +
+ 70 files changed, 5527 insertions(+)
+
+exit_code=0
+$ python3 eternal-darkness-decomp/tools/legal_audit.py
+legal audit passed (21610 tracked project files inspected)
+
+exit_code=0
+PASS: all staged paths are assignment-specific reports; pre-existing CLAUDE.md modification excluded.

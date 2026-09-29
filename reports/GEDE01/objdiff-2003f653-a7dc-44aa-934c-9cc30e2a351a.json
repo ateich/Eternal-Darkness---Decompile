@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "assignment_id": "2003f653-a7dc-44aa-934c-9cc30e2a351a",
+  "attempt": 5,
+  "base_commit": "b019e6f08048ec1dd39008e4b555a69524dd8d52",
+  "target": "fn_801DE8B4",
+  "status": "matched",
+  "compiler": "GC/1.3",
+  "compiler_settings": "Unchanged canonical GC/1.3 flags, including -use_lmw_stmw on. Exact command and compiler hash retained.",
+  "source": "eternal-darkness-decomp/src/game/game_fn_801DE8B4.c",
+  "hypothesis": "Nested success/failure blocks preserve the retail common tail. Separate sound locals avoid address-taken output spills; a switch preserves effect-height branching; explicit effect-value branches and nested effect calls preserve evaluation scheduling. Enum-to-u32 search-radius conversion and local declaration order recover the remaining move and register allocation.",
+  "behavioral_corrections": [
+    "Unsigned candidate-state comparison rejects negative states.",
+    "Variant mode zero applies to type 6 OR type 4.",
+    "Animation/callback setup runs for non-variant objects too, and fn_801DE7A0 runs only on its mode-mismatch branch.",
+    "Final scale is read from the spawn request, which the spawn call may modify."
+  ],
+  "constant_registration": {
+    "policy": "Existing game_section_externalizations registry and unchanged byte-verifying externalizer. No compiler, gate, or tool policy changes.",
+    "local_symbol": "@93",
+    "retail_symbol": "lbl_806511E0",
+    "value_hex": "4330000080000000",
+    "whole_section_guard": true,
+    "evidence": "eternal-darkness-decomp/reports/GEDE01/attempt-2003f653-a7dc-44aa-934c-9cc30e2a351a/constant-verification.json"
+  },
+  "canonical_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801DE8B4 -o reports/GEDE01/objdiff-2003f653-a7dc-44aa-934c-9cc30e2a351a-canonical.json --format json-pretty fn_801DE8B4",
+    "raw_output_file": "eternal-darkness-decomp/reports/GEDE01/objdiff-2003f653-a7dc-44aa-934c-9cc30e2a351a-canonical.json",
+    "match_percent": 100.0,
+    "retail_bytes": 1544,
+    "generated_bytes": 1544,
+    "retail_instructions": 386,
+    "generated_instructions": 386,
+    "retail_relocations": 51,
+    "generated_relocations": 51
+  },
+  "relocation_strict_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801DE8B4 -o reports/GEDE01/objdiff-2003f653-a7dc-44aa-934c-9cc30e2a351a-reloc-strict.json --format json-pretty -c function_reloc_diffs=all fn_801DE8B4",
+    "raw_output_file": "eternal-darkness-decomp/reports/GEDE01/objdiff-2003f653-a7dc-44aa-934c-9cc30e2a351a-reloc-strict.json",
+    "match_percent": 100.0,
+    "relocation_policy": "all; independently compared ELF offset/type/target/addend tuples as well."
+  },
+  "byte_and_relocation_verification": {
+    "command": "python3 reports/GEDE01/attempt-2003f653-a7dc-44aa-934c-9cc30e2a351a/verify_elf.py",
+    "raw_output_file": "eternal-darkness-decomp/reports/GEDE01/attempt-2003f653-a7dc-44aa-934c-9cc30e2a351a/elf-verification.json",
+    "text_bytes_equal": true,
+    "relocations_equal": true
+  },
+  "build": {
+    "working_directory": "eternal-darkness-decomp",
+    "command": "python3 configure.py && .tools/bin/ninja -j2",
+    "raw_output_files": [
+      "eternal-darkness-decomp/reports/GEDE01/attempt-2003f653-a7dc-44aa-934c-9cc30e2a351a/configure.log",
+      "eternal-darkness-decomp/reports/GEDE01/attempt-2003f653-a7dc-44aa-934c-9cc30e2a351a/full-build.log",
+      "eternal-darkness-decomp/reports/GEDE01/attempt-2003f653-a7dc-44aa-934c-9cc30e2a351a/final-build.log"
+    ],
+    "status": "success",
+    "candidate_linked": true
+  },
+  "dol_verification": {
+    "command": "sha1sum build/GEDE01/main.dol",
+    "raw_output_file": "eternal-darkness-decomp/reports/GEDE01/attempt-2003f653-a7dc-44aa-934c-9cc30e2a351a/dol-sha1.log",
+    "expected_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "matches": true
+  },
+  "legal_audit": {
+    "command": "python3 tools/legal_audit.py",
+    "raw_output_file": "eternal-darkness-decomp/reports/GEDE01/attempt-2003f653-a7dc-44aa-934c-9cc30e2a351a/legal-audit.log",
+    "status": "passed"
+  },
+  "additional_evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/attempt-2003f653-a7dc-44aa-934c-9cc30e2a351a/compiler-command.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-2003f653-a7dc-44aa-934c-9cc30e2a351a/input-hashes.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-2003f653-a7dc-44aa-934c-9cc30e2a351a/provenance.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-2003f653-a7dc-44aa-934c-9cc30e2a351a/trials.json"
+  ],
+  "divergence": ""
+}

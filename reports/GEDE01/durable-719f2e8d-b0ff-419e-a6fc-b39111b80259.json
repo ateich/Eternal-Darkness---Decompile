@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "719f2e8d-b0ff-419e-a6fc-b39111b80259",
+  "attempt": 5,
+  "base_commit": "b1981e60dc6fa64a2af6a27d55cc93ef116e3f1c",
+  "target": "fn_80020150",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-719f2e8d-b0ff-419e-a6fc-b39111b80259.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff are 93.296394%, not a match. Retail/generated .text are 3104/3028 bytes; both have 168 relocations, but the generated int-to-float constant uses local @158 rather than lbl_8064DEC8. Retail uses a 0x40-byte frame with stmw r26; generated uses a 0x30-byte frame and individual r28-r31 saves. Generated folds runtime addresses into base offsets (lwz 0x30(r31) vs retail 0x14(r30)); dispatcher root is cmpwi 0x17 vs retail 0x13, with missing explicit empty-case branches."
+}

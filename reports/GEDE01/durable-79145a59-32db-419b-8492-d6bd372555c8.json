@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "79145a59-32db-419b-8492-d6bd372555c8",
+  "attempt": 4,
+  "base_commit": "efd39682c2ecc1856f6ff32c8363a9087942158f",
+  "target": "fn_80020150",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-79145a59-32db-419b-8492-d6bd372555c8.json"
+  ],
+  "divergence": "Relocation-strict objdiff remains 64.984535%: retail/generated .text are 3104/2776 bytes and .rela.text are 2016/2136 bytes (168/178 relocation records). Retail saves r26-r31 and preserves base+0x1C pointer identities before adding +0x40/+0x3C; generated saves r25-r31 and folds these to base+0x5C/base+0x58, shifting register allocation. A distinct explicit-empty-case topology hypothesis (cases 0, 6, 13) produced the expected retail-like comparisons but regressed to 64.943300% and 2804 generated text bytes, so it was rejected."
+}

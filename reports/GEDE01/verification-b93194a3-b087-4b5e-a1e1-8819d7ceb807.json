@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "assignment_id": "b93194a3-b087-4b5e-a1e1-8819d7ceb807",
+  "target": "fn_800EEC44",
+  "status": "attempted",
+  "command_working_directory": "eternal-darkness-decomp",
+  "base_commit": "5fd26e1e0507059bdcadf13d3be73a91625f5f85",
+  "preserved_attempts_inspected": [
+    "26931c66285fcddee3f4a85a0fa185b65f77b95d",
+    "ca5b18d24e8eb1ae9ab36766dc3f4ab27639a890",
+    "d3f75c60a09ede5650717b5baaa23c7e46aeb69a",
+    "e416eb9b863c1ff07a7ffca0a816b91393afc171"
+  ],
+  "reconciliation": "Accepted base already includes ca5b18d24 inner-loop order. Recovered the direct chroma pointer initializer from 26931c6628; no prior compiler flag changes recovered.",
+  "new_hypothesis": "Represent mixed chroma as a sum of two negative products, with bias grouped into the first product. Unlike the original subtraction AST, this encourages mulli -25 and add instead of mulli +25 and subf. It improves strict score, although MWCC still moves bias after combining products.",
+  "experiments": [
+    {
+      "variant": "accepted baseline",
+      "strict_score": 67.954956
+    },
+    {
+      "variant": "negative product sum and grouped bias; final retained source",
+      "strict_score": 68.52252
+    },
+    {
+      "variant": "split initialization and blue += -25 * cr before first call; rejected and removed",
+      "strict_score": 67.09009
+    }
+  ],
+  "compiler": "GC/1.3/mwcceppc.exe",
+  "compiler_policy": "Unchanged configure.py registration Object(NonMatching, game/game_fn_800EEC44.c); unchanged splits and global settings. Exact flags in compiler report.",
+  "configure_command": "python3 configure.py",
+  "configure_exit_code": 0,
+  "build_command": ".tools/bin/ninja -j2",
+  "baseline_build_exit_code": 0,
+  "candidate_build_exit_code": 0,
+  "final_build_exit_code": 0,
+  "probe_build_command": ".tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_800EEC44.o",
+  "probe_build_exit_code": 0,
+  "canonical_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_800EEC44 fn_800EEC44 -o reports/GEDE01/canonical-b93194a3-b087-4b5e-a1e1-8819d7ceb807.json --format json",
+  "relocation_strict_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_800EEC44 fn_800EEC44 -o reports/GEDE01/objdiff-b93194a3-b087-4b5e-a1e1-8819d7ceb807.json --format json -c function_reloc_diffs=name_address",
+  "canonical_exit_code": 0,
+  "strict_exit_code": 0,
+  "canonical_match_percent": 68.52252,
+  "relocation_strict_match_percent": 68.52252,
+  "retail_text_size": 444,
+  "generated_text_size": 444,
+  "retail_actual_elf_relocations": 6,
+  "generated_actual_elf_relocations": 8,
+  "relocation_count_note": "Earlier reports counted four synthetic R_PPC_NONE annotations on each side. readelf output supplies actual ELF relocation targets and explicit zero addends.",
+  "relocation_command": "readelf -rW build/GEDE01/obj/game/game_fn_800EEC44.o build/GEDE01/src/game/game_fn_800EEC44.o",
+  "hash_command": "sha1sum orig/GEDE01/sys/main.dol build/GEDE01/main.dol",
+  "expected_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "built_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "dol_verification_scope": "Matching retail-fallback DOL. NonMatching candidate is compiled and compared separately, not linked as a matched function.",
+  "source_sha256": "8f28f693bf85961496323dc809cede713830845e6f4bb2438faaf36f72c93f8e",
+  "legal_audit_command": "python3 tools/legal_audit.py",
+  "legal_audit_exit_code": 0,
+  "scope_audit": "Only this independent C TU and assignment-specific reports staged. No inline assembly, compiler policy, neighboring functions, runtime, progress, README, private inputs or generated binaries changed/staged. Preexisting CLAUDE.md modification left untouched.",
+  "divergence": "Canonical and explicit name_address relocation-strict objdiff both measure 68.52252%, up from 67.954956%, with 444-byte text on both sides. Generated prologue/epilogue call _savegpr_14/_restgpr_14 instead of retail inline stmw/lmw, adding two R_PPC_REL24 relocations (8 actual ELF entries versus 6 retail). Input/width, row/column counters, pixel pointers and color terms use different registers. Generated mixed-chroma bias is added after the products are combined, unlike retail; destination-address and arithmetic scheduling also differ. The four fn_800EEC0C calls occur four bytes earlier than retail; their targets/addends and the lbl_803281E0 HA/LO target/addends agree.",
+  "baseline_strict_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_800EEC44 fn_800EEC44 -o reports/GEDE01/baseline-b93194a3-b087-4b5e-a1e1-8819d7ceb807.json --format json -c function_reloc_diffs=name_address",
+  "probe_strict_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_800EEC44 fn_800EEC44 -o reports/GEDE01/probe-b93194a3-b087-4b5e-a1e1-8819d7ceb807.json --format json -c function_reloc_diffs=name_address",
+  "whitespace_check": "Source passes git diff --cached --check. Raw build logs retain compiler CRLF output; this produces trailing-whitespace diagnostics and is preserved verbatim."
+}

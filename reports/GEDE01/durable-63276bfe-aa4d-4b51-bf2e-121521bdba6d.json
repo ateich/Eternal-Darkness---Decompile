@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "assignment_id": "63276bfe-aa4d-4b51-bf2e-121521bdba6d",
+  "attempt": 5,
+  "base_commit": "e61d8f867a568aab61fbbd8d80104779ae76c6e0",
+  "target": "fn_801420F8",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-63276bfe-aa4d-4b51-bf2e-121521bdba6d.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-strict-63276bfe-aa4d-4b51-bf2e-121521bdba6d.json",
+    "eternal-darkness-decomp/reports/GEDE01/verification-63276bfe-aa4d-4b51-bf2e-121521bdba6d.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 56.694690%. Retail is 1808 bytes with a 0x160-byte frame and f14-f31 saves; the candidate is 1496 bytes with a 0x70-byte frame and f26-f31 saves. Retail spills plane distances, products and the normal; the C compiler retains them in registers. Retail cross products use fmsub, while the selected float reconstruction emits fmsubs, and its reciprocal-square-root path adds frsp. Scheduling, branch hints, small-data addressing and interval register allocation still differ. ELF .rela.text has 32 retail records versus 25 candidate records; relocation offsets, types, targets and addends do not match."
+}

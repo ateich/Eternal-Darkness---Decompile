@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "d3e82383-e5a7-42a0-ba2d-0942ed5d1d07",
+  "attempt": 4,
+  "base_commit": "8a65ab5339ad95000b6f546ad243b514323adacc",
+  "target": "fn_801A53C4",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-d3e82383-e5a7-42a0-ba2d-0942ed5d1d07.json"
+  ],
+  "divergence": "Relocation-strict objdiff is 91.70861% with retail and generated code both 604 bytes. All four relocation types, targets, and addends agree: R_PPC_ADDR16_HA and R_PPC_ADDR16_LO target lbl_80607130 with addend 0, R_PPC_EMB_SDA21 targets lbl_80650D9C with addend 0, and the lhz relocation targets lbl_80607130 with addend 2. Remaining divergence is MWCC scheduling/register allocation: generated code allocates the 0x90-byte frame before loading lbl_80607130, retains the completed global address in r6 instead of retail r5, and assigns/interleaves float-conversion spill slots differently, beginning with generated 0x8/0x10 versus retail 0x8/0x38. Two distinct hypotheses were tested and rejected because they produced byte-identical generated code and the same score: declaring lbl_80607130 as a u16 array with typed output arithmetic, and expressing each 16-byte output element as a record-typed pointer. The simpler accepted-base reconstruction was retained. python3 configure.py and .tools/bin/ninja -j2 completed successfully, and build/GEDE01/main.dol SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}

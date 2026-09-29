@@ -1,0 +1,570 @@
+{
+  "version": 1,
+  "assignment_id": "227c72a2-fffd-4d56-8abc-ff4bd6f2ae00",
+  "compiler": "GC/1.3",
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "configure.py"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "exit_code": 0,
+      "raw_output": "eternal-darkness-decomp/reports/GEDE01/configure-227c72a2-fffd-4d56-8abc-ff4bd6f2ae00.log"
+    },
+    {
+      "command": [
+        ".tools/bin/ninja",
+        "-j2"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "exit_code": 0,
+      "raw_output": "eternal-darkness-decomp/reports/GEDE01/build-227c72a2-fffd-4d56-8abc-ff4bd6f2ae00.log"
+    },
+    {
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801F7C78",
+        "fn_801F7C78",
+        "-o",
+        "reports/GEDE01/objdiff-227c72a2-fffd-4d56-8abc-ff4bd6f2ae00-canonical.json",
+        "--format",
+        "json-pretty"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "exit_code": 0,
+      "raw_output": "eternal-darkness-decomp/reports/GEDE01/canonical-227c72a2-fffd-4d56-8abc-ff4bd6f2ae00.log"
+    },
+    {
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801F7C78",
+        "fn_801F7C78",
+        "-o",
+        "reports/GEDE01/objdiff-227c72a2-fffd-4d56-8abc-ff4bd6f2ae00.json",
+        "--format",
+        "json-pretty",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "exit_code": 0,
+      "raw_output": "eternal-darkness-decomp/reports/GEDE01/reloc-strict-227c72a2-fffd-4d56-8abc-ff4bd6f2ae00.log"
+    },
+    {
+      "command": [
+        "sha1sum",
+        "build/GEDE01/main.dol",
+        "orig/GEDE01/sys/main.dol"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "exit_code": 0,
+      "raw_output": "eternal-darkness-decomp/reports/GEDE01/dol-sha1-227c72a2-fffd-4d56-8abc-ff4bd6f2ae00.log"
+    }
+  ],
+  "canonical": {
+    "report": "eternal-darkness-decomp/reports/GEDE01/objdiff-227c72a2-fffd-4d56-8abc-ff4bd6f2ae00-canonical.json",
+    "sha256": "3098c573b0ede2e3e585854d2e5e207c80ef24d1316d799c1022c67c5ea128b6",
+    "score": 88.89474,
+    "retail_bytes": "456",
+    "generated_bytes": "448",
+    "retail_instructions": 114,
+    "generated_instructions": 112,
+    "retail_function_relocations": 73,
+    "generated_function_relocations": 71
+  },
+  "reloc-strict": {
+    "report": "eternal-darkness-decomp/reports/GEDE01/objdiff-227c72a2-fffd-4d56-8abc-ff4bd6f2ae00.json",
+    "sha256": "3098c573b0ede2e3e585854d2e5e207c80ef24d1316d799c1022c67c5ea128b6",
+    "score": 88.89474,
+    "retail_bytes": "456",
+    "generated_bytes": "448",
+    "retail_instructions": 114,
+    "generated_instructions": 112,
+    "retail_function_relocations": 73,
+    "generated_function_relocations": 71
+  },
+  "dol_sha1": {
+    "build/GEDE01/main.dol": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "orig/GEDE01/sys/main.dol": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+  },
+  "elf_audit": {
+    "retail": {
+      "path": "eternal-darkness-decomp/build/GEDE01/obj/game/game_fn_801F7C78.o",
+      "sha256": "f3ecc3582627be270b4f64cdcb041741410f0ad6b6e90d33b30c04474c2d7ec8",
+      "text_sha256": "2d0e4cbbe5b9223c56b5813f5d5d08732b5fadcffb38288dde2d7797a280834a",
+      "text_bytes": 456,
+      "relocations": [
+        {
+          "section": ".rela.text",
+          "offset": 26,
+          "type": 6,
+          "target": "lbl_8023B7E4",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 30,
+          "type": 4,
+          "target": "lbl_8023B7E4",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 34,
+          "type": 6,
+          "target": "lbl_8063C6B8",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 46,
+          "type": 4,
+          "target": "lbl_8063C6B8",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 76,
+          "type": 109,
+          "target": "lbl_8064C3A0",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 80,
+          "type": 109,
+          "target": "lbl_8064D798",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 84,
+          "type": 109,
+          "target": "lbl_8064C3A4",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 88,
+          "type": 109,
+          "target": "lbl_8064D79C",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 92,
+          "type": 10,
+          "target": "fn_801F7034",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 104,
+          "type": 10,
+          "target": "fn_801F7034",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 108,
+          "type": 109,
+          "target": "lbl_8065148C",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 132,
+          "type": 10,
+          "target": "fn_801FA410",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 136,
+          "type": 109,
+          "target": "lbl_80651464",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 152,
+          "type": 10,
+          "target": "fn_801F76D8",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 158,
+          "type": 6,
+          "target": "fn_801F7804",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 166,
+          "type": 4,
+          "target": "fn_801F7804",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 180,
+          "type": 109,
+          "target": "lbl_8065148C",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 204,
+          "type": 109,
+          "target": "lbl_8064D7BC",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 224,
+          "type": 10,
+          "target": "fn_801F7034",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 236,
+          "type": 10,
+          "target": "fn_801F7034",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 332,
+          "type": 109,
+          "target": "lbl_80651490",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 340,
+          "type": 109,
+          "target": "lbl_80651494",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 346,
+          "type": 6,
+          "target": "fn_801F7AD4",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 354,
+          "type": 6,
+          "target": "fn_801F7804",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 356,
+          "type": 109,
+          "target": "lbl_8065148C",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 362,
+          "type": 4,
+          "target": "fn_801F7AD4",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 370,
+          "type": 4,
+          "target": "fn_801F7804",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 384,
+          "type": 109,
+          "target": "lbl_80651498",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 400,
+          "type": 109,
+          "target": "lbl_8065149C",
+          "addend": 0
+        }
+      ]
+    },
+    "generated": {
+      "path": "eternal-darkness-decomp/build/GEDE01/src/game/game_fn_801F7C78.o",
+      "sha256": "dbf15b4a4ef14ac009ecf2c38918fd335604a808257a2897873d35c5b0989b2b",
+      "text_sha256": "aa4e07ce9833d0a1cb9c781e1211307f3852e31282f50f19ee6d8471aa53185e",
+      "text_bytes": 448,
+      "relocations": [
+        {
+          "section": ".rela.text",
+          "offset": 26,
+          "type": 6,
+          "target": "lbl_8023B7E4",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 30,
+          "type": 4,
+          "target": "lbl_8023B7E4",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 34,
+          "type": 6,
+          "target": "lbl_8063C6B8",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 46,
+          "type": 4,
+          "target": "lbl_8063C6B8",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 76,
+          "type": 109,
+          "target": "lbl_8064C3A0",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 80,
+          "type": 109,
+          "target": "lbl_8064D798",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 84,
+          "type": 109,
+          "target": "lbl_8064C3A4",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 88,
+          "type": 109,
+          "target": "lbl_8064D79C",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 92,
+          "type": 10,
+          "target": "fn_801F7034",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 104,
+          "type": 10,
+          "target": "fn_801F7034",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 110,
+          "type": 6,
+          "target": "lbl_8063C6B8",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 112,
+          "type": 109,
+          "target": "lbl_8065148C",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 118,
+          "type": 4,
+          "target": "lbl_8063C6B8",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 136,
+          "type": 10,
+          "target": "fn_801FA410",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 140,
+          "type": 109,
+          "target": "lbl_80651464",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 156,
+          "type": 10,
+          "target": "fn_801F76D8",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 162,
+          "type": 6,
+          "target": "fn_801F7804",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 166,
+          "type": 6,
+          "target": "lbl_8063C6B8",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 170,
+          "type": 4,
+          "target": "lbl_8063C6B8",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 178,
+          "type": 4,
+          "target": "fn_801F7804",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 180,
+          "type": 109,
+          "target": "lbl_8064D7BC",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 184,
+          "type": 109,
+          "target": "lbl_8065148C",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 228,
+          "type": 10,
+          "target": "fn_801F7034",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 240,
+          "type": 10,
+          "target": "fn_801F7034",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 332,
+          "type": 109,
+          "target": "lbl_80651490",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 338,
+          "type": 6,
+          "target": "fn_801F7AD4",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 340,
+          "type": 109,
+          "target": "lbl_80651494",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 346,
+          "type": 6,
+          "target": "fn_801F7804",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 354,
+          "type": 4,
+          "target": "fn_801F7AD4",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 356,
+          "type": 109,
+          "target": "lbl_8065148C",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 362,
+          "type": 4,
+          "target": "fn_801F7804",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 376,
+          "type": 109,
+          "target": "lbl_80651498",
+          "addend": 0
+        },
+        {
+          "section": ".rela.text",
+          "offset": 392,
+          "type": 109,
+          "target": "lbl_8065149C",
+          "addend": 0
+        }
+      ]
+    }
+  },
+  "exact_text_equal": false,
+  "exact_relocation_lists_equal": false,
+  "legal_audit": {
+    "source": "eternal-darkness-decomp/src/game/game_fn_801F7C78.c",
+    "source_sha256": "7315d6a1a1bffbd08f11c089f1100db41304d953d06e95890b1cc309338abcd5",
+    "inline_or_whole_function_assembly": false,
+    "independent_c_translation_unit": true,
+    "registration": "Object(NonMatching, \"game/game_fn_801F7C78.c\", mw_version=\"GC/1.3\")",
+    "compiler_flags_unchanged": true,
+    "neighboring_sources_changed": false,
+    "note": "No policy, registration, split, runtime, or global progress edits. Integer-address calls use the target 32-bit pointer representation and unchanged 0xCC0/0xD48 entry offsets."
+  },
+  "canonical_strict_note": "Both commands executed independently, strict explicitly uses function_reloc_diffs=name_address. Identical outputs, if present, are not a match claim. Separate actual ELF relocation records expose targets and signed addends.",
+  "preexisting_worktree_change": {
+    "path": "CLAUDE.md",
+    "action": "Left untouched and excluded from this assignment commit; already modified at task entry and outside authorized edit scope."
+  },
+  "canonical_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c",
+  "dol_gate_note": "Function remains NonMatching, so the successful DOL gate verifies the normal retail-backed build, not linked execution of this incomplete C candidate."
+}

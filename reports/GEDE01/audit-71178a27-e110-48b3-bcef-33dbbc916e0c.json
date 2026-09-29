@@ -1,0 +1,51 @@
+{
+  "retail": {
+    "argv": [
+      "build/binutils/powerpc-eabi-readelf",
+      "-rW",
+      "build/GEDE01/obj/game/game_fn_801FD318.o"
+    ],
+    "exit_code": 0,
+    "stdout": "\nRelocation section '.rela.text' at offset 0x110 contains 8 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n0000000a  00000406 R_PPC_ADDR16_HA        00000000   lbl_8063EA00 + 0\n0000001e  00000404 R_PPC_ADDR16_LO        00000000   lbl_8063EA00 + 0\n00000024  0000050a R_PPC_REL24            00000000   memset + 0\n0000003c  0000066d R_PPC_EMB_SDA21        00000000   lbl_80651540 + 0\n0000004c  0000076d R_PPC_EMB_SDA21        00000000   lbl_80651544 + 0\n000000a4  0000086d R_PPC_EMB_SDA21        00000000   lbl_8064D7D0 + 0\n000000a8  0000096d R_PPC_EMB_SDA21        00000000   lbl_8064D7CC + 0\n000000ac  00000a6d R_PPC_EMB_SDA21        00000000   lbl_8064D7C8 + 0\n",
+    "stderr": ""
+  },
+  "generated": {
+    "argv": [
+      "build/binutils/powerpc-eabi-readelf",
+      "-rW",
+      "build/GEDE01/src/game/game_fn_801FD318.o"
+    ],
+    "exit_code": 0,
+    "stdout": "\nRelocation section '.rela.text' at offset 0x100 contains 8 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n0000000a  00000306 R_PPC_ADDR16_HA        00000000   lbl_8063EA00 + 0\n0000001e  00000304 R_PPC_ADDR16_LO        00000000   lbl_8063EA00 + 0\n00000024  0000090a R_PPC_REL24            00000000   memset + 0\n00000078  0000076d R_PPC_EMB_SDA21        00000000   lbl_80651540 + 0\n00000084  0000086d R_PPC_EMB_SDA21        00000000   lbl_80651544 + 0\n000000a0  0000046d R_PPC_EMB_SDA21        00000000   lbl_8064D7D0 + 0\n000000a4  0000056d R_PPC_EMB_SDA21        00000000   lbl_8064D7CC + 0\n000000a8  0000066d R_PPC_EMB_SDA21        00000000   lbl_8064D7C8 + 0\n",
+    "stderr": ""
+  },
+  "source": {
+    "path": "eternal-darkness-decomp/src/game/game_fn_801FD318.c",
+    "sha256": "a97ed6b5fa99ceec29b4a78c3abc077b61963a431b0bf4e1e0c34a5ac9453b9d",
+    "identical_to_accepted_base": true,
+    "disposition": "Revalidated the accepted-base NonMatching reconstruction unchanged; all tested helper variants were discarded. No source improvement is claimed."
+  },
+  "legal_audit": {
+    "independent_c_translation_unit": true,
+    "inline_or_whole_function_assembly": false,
+    "shared_reconstruction": false,
+    "compiler_policy_changes": false,
+    "runtime_or_neighbor_edits": false,
+    "registration": "Existing NonMatching registration and split unchanged. Tested static inline helpers existed only in the assigned C translation unit, never shared or out of line in the retained candidate.",
+    "preserved_candidates": 1,
+    "tracked_files_planned": "Only assignment-specific reports. Pre-existing CLAUDE.md modification is excluded."
+  },
+  "hypothesis": {
+    "description": "Function-local static inline helper boundaries may retain independently optimized entry-base, table-base and tail-base expression nodes after inlining, unlike source-level local aliases. The helper loop is optimized before substitution of State member arguments.",
+    "prior_attempts_studied": [
+      "80e431110d7728140179c96f85d2dc370f677ca5",
+      "d87ccba1c644d8516c7c21357c8b7c072d79ae3c",
+      "a2b0c9fba0ec5f118c5497b73db9dad54eb03c1b",
+      "f542256e191fa4f19d3f901f4a26e67d0f5e3669"
+    ],
+    "difference_from_prior": "Prior experiments changed aliases, global views, or induction expressions within fn_801FD318. These tests introduce separate inline function optimization boundaries with parameterized table/entry/tail inputs; no linker alias syntax or compiler policy change.",
+    "result": "Partial codegen effect but no score improvement: inlined table loop emits 200 bytes at 75.71154%, computing +0x7c, +0xf8, etc. from an entries base instead of the baseline State-relative midpoint. Table and tail bases still fold to r31; retail separately materializes r12 and r3. Explicit helper stores score 37.46154% at 228 bytes; two six-entry and three four-entry helper calls score 43.98077% at 220 bytes.",
+    "raw_evidence": "eternal-darkness-decomp/reports/GEDE01/experiments-71178a27-e110-48b3-bcef-33dbbc916e0c.json"
+  },
+  "relocation_conclusion": "ELF RELA dumps show the same eight external relocation target/type/addend triples (all addends zero). Float-load and global-store relocation offsets differ. Strict objdiff remains 75.84615%, not a byte or relocation-strict match."
+}

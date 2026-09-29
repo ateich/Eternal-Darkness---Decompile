@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "ff9a0ed6-a49c-46af-84a1-5d9c995d3ba4",
+  "attempt": 4,
+  "base_commit": "84ba525961d68336cf7d8778f4f46aa7071a591e",
+  "target": "fn_8007BD40",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-ff9a0ed6-a49c-46af-84a1-5d9c995d3ba4.json"
+  ],
+  "divergence": "Canonical and relocation-strict GC/1.3 objdiff each measure 91.64706%: retail is 1020 bytes and generated code is 1004 bytes. The new explicit packed-word local was codegen-neutral, while widening velocity components to signed int produced 1040 bytes and regressed to 85.75687%, falsifying the integer-lifetime hypothesis. The restored best signed-byte form remains four instructions short: retail loads color[0] after packed_velocity, emits separate extsb/mr copies for y and z before comparison, and materializes lbl_8064B58C in a different register. Downstream allocation remains shifted (retail arg/state/lifetime in r28/r30/r29 versus generated r27/r31/r30), and strict output retains generated signed-int-to-double pool target @85 where retail targets lbl_8064E9D8. The canonical build passed and main.dol SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}

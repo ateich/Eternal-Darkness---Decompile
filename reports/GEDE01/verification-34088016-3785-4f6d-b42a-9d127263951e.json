@@ -1,0 +1,439 @@
+{
+  "assignment_id": "34088016-3785-4f6d-b42a-9d127263951e",
+  "target": "fn_801A1F8C",
+  "commands": [
+    {
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801A1F8C",
+        "fn_801A1F8C",
+        "-o",
+        "reports/GEDE01/canonical-34088016-3785-4f6d-b42a-9d127263951e.json",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0,
+      "output": " INFO Writing to reports/GEDE01/canonical-34088016-3785-4f6d-b42a-9d127263951e.json\n"
+    },
+    {
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801A1F8C",
+        "fn_801A1F8C",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "-o",
+        "reports/GEDE01/objdiff-34088016-3785-4f6d-b42a-9d127263951e.json",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0,
+      "output": " INFO Writing to reports/GEDE01/objdiff-34088016-3785-4f6d-b42a-9d127263951e.json\n"
+    },
+    {
+      "command": [
+        "sha1sum",
+        "build/GEDE01/main.dol",
+        "orig/GEDE01/sys/main.dol"
+      ],
+      "exit_code": 0,
+      "output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol\n"
+    },
+    {
+      "command": [
+        "cmp",
+        "build/GEDE01/main.dol",
+        "orig/GEDE01/sys/main.dol"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "python3",
+        "tools/legal_audit.py"
+      ],
+      "exit_code": 0,
+      "output": "legal audit passed (22613 tracked project files inspected)\n"
+    },
+    {
+      "command": [
+        ".tools/bin/ninja",
+        "-t",
+        "commands",
+        "build/GEDE01/src/game/game_fn_801A1F8C.externalized"
+      ],
+      "exit_code": 0,
+      "output": "\"/usr/bin/python3\" tools/download_tool.py sjiswrap build/tools/sjiswrap.exe --tag v1.2.2\ntools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_801A1F8C.c -o build/GEDE01/src/game && \"/usr/bin/python3\" tools/transform_dep.py build/GEDE01/src/game/game_fn_801A1F8C.d build/GEDE01/src/game/game_fn_801A1F8C.d\npython3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_801A1F8C.o @48 lbl_80650D28 orig/GEDE01/sys/main.dol --require-section-symbols=@48,@49,@50,@51,@53,@62 && python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_801A1F8C.o @49 lbl_80650D2C orig/GEDE01/sys/main.dol && python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_801A1F8C.o @50 lbl_80650CA8 orig/GEDE01/sys/main.dol && python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_801A1F8C.o @51 lbl_80650D30 orig/GEDE01/sys/main.dol && python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_801A1F8C.o @53 lbl_80650D08 orig/GEDE01/sys/main.dol && python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_801A1F8C.o @62 lbl_80650D20 orig/GEDE01/sys/main.dol && build/binutils/powerpc-eabi-objcopy --redefine-sym=@48=lbl_80650D28 --redefine-sym=@49=lbl_80650D2C --redefine-sym=@50=lbl_80650CA8 --redefine-sym=@51=lbl_80650D30 --redefine-sym=@53=lbl_80650D08 --redefine-sym=@62=lbl_80650D20 --remove-section=.sdata2 --rename-section=.comment=.ignored build/GEDE01/src/game/game_fn_801A1F8C.o && touch build/GEDE01/src/game/game_fn_801A1F8C.externalized\n"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "--",
+        "configure.py",
+        "src/game/game_fn_801A1F8C.c",
+        "reports/GEDE01"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--name-only"
+      ],
+      "exit_code": 0,
+      "output": "eternal-darkness-decomp/configure.py\neternal-darkness-decomp/reports/GEDE01/build-34088016-3785-4f6d-b42a-9d127263951e.log\neternal-darkness-decomp/reports/GEDE01/canonical-34088016-3785-4f6d-b42a-9d127263951e.json\neternal-darkness-decomp/reports/GEDE01/durable-34088016-3785-4f6d-b42a-9d127263951e.json\neternal-darkness-decomp/reports/GEDE01/experiments-34088016-3785-4f6d-b42a-9d127263951e.json\neternal-darkness-decomp/reports/GEDE01/objdiff-34088016-3785-4f6d-b42a-9d127263951e.json\neternal-darkness-decomp/reports/GEDE01/verification-34088016-3785-4f6d-b42a-9d127263951e.json\neternal-darkness-decomp/reports/GEDE01/verify-34088016-3785-4f6d-b42a-9d127263951e.py\neternal-darkness-decomp/src/game/game_fn_801A1F8C.c\n"
+    }
+  ],
+  "canonical": {
+    "score": 100.0,
+    "size": 1460
+  },
+  "objdiff": {
+    "score": 100.0,
+    "size": 1460
+  },
+  "direct_elf_verification": {
+    "target": "build/GEDE01/obj/game/game_fn_801A1F8C.o",
+    "generated": "build/GEDE01/src/game/game_fn_801A1F8C.o",
+    "text_size": 1460,
+    "text_bytes_equal": true,
+    "target_text_sha256": "aad62cc4f5adcbf747fb2d0dbd11ef28a0ab6abde308bf89f485d0c910133b82",
+    "generated_text_sha256": "aad62cc4f5adcbf747fb2d0dbd11ef28a0ab6abde308bf89f485d0c910133b82",
+    "relocations_equal_including_offsets_types_targets_addends": true,
+    "target_relocations": [
+      {
+        "offset": 60,
+        "type": 10,
+        "target": "fn_801EF384",
+        "addend": 0
+      },
+      {
+        "offset": 114,
+        "type": 6,
+        "target": "lbl_80607440",
+        "addend": 0
+      },
+      {
+        "offset": 116,
+        "type": 109,
+        "target": "lbl_80650D28",
+        "addend": 0
+      },
+      {
+        "offset": 124,
+        "type": 109,
+        "target": "lbl_80650D2C",
+        "addend": 0
+      },
+      {
+        "offset": 130,
+        "type": 4,
+        "target": "lbl_80607440",
+        "addend": 0
+      },
+      {
+        "offset": 132,
+        "type": 109,
+        "target": "lbl_80650CA8",
+        "addend": 0
+      },
+      {
+        "offset": 140,
+        "type": 109,
+        "target": "lbl_80650D20",
+        "addend": 0
+      },
+      {
+        "offset": 168,
+        "type": 109,
+        "target": "lbl_80650D10",
+        "addend": 0
+      },
+      {
+        "offset": 208,
+        "type": 109,
+        "target": "lbl_80650D08",
+        "addend": 0
+      },
+      {
+        "offset": 408,
+        "type": 109,
+        "target": "lbl_80650D20",
+        "addend": 0
+      },
+      {
+        "offset": 460,
+        "type": 109,
+        "target": "lbl_80650D08",
+        "addend": 0
+      },
+      {
+        "offset": 648,
+        "type": 10,
+        "target": "fn_800FBFB0",
+        "addend": 0
+      },
+      {
+        "offset": 872,
+        "type": 109,
+        "target": "lbl_80650D30",
+        "addend": 0
+      },
+      {
+        "offset": 912,
+        "type": 10,
+        "target": "fn_800FBFB0",
+        "addend": 0
+      },
+      {
+        "offset": 944,
+        "type": 109,
+        "target": "lbl_80650D08",
+        "addend": 0
+      },
+      {
+        "offset": 1024,
+        "type": 10,
+        "target": "fn_800FBFB0",
+        "addend": 0
+      },
+      {
+        "offset": 1056,
+        "type": 109,
+        "target": "lbl_80650D08",
+        "addend": 0
+      },
+      {
+        "offset": 1152,
+        "type": 10,
+        "target": "fn_800FBFB0",
+        "addend": 0
+      },
+      {
+        "offset": 1168,
+        "type": 10,
+        "target": "fn_800FBFB0",
+        "addend": 0
+      },
+      {
+        "offset": 1184,
+        "type": 10,
+        "target": "fn_800FBFB0",
+        "addend": 0
+      },
+      {
+        "offset": 1202,
+        "type": 6,
+        "target": "lbl_80607440",
+        "addend": 0
+      },
+      {
+        "offset": 1214,
+        "type": 4,
+        "target": "lbl_80607440",
+        "addend": 0
+      },
+      {
+        "offset": 1356,
+        "type": 10,
+        "target": "fn_801A29E0",
+        "addend": 0
+      },
+      {
+        "offset": 1372,
+        "type": 109,
+        "target": "lbl_8064D18C",
+        "addend": 0
+      }
+    ],
+    "generated_relocations": [
+      {
+        "offset": 60,
+        "type": 10,
+        "target": "fn_801EF384",
+        "addend": 0
+      },
+      {
+        "offset": 114,
+        "type": 6,
+        "target": "lbl_80607440",
+        "addend": 0
+      },
+      {
+        "offset": 116,
+        "type": 109,
+        "target": "lbl_80650D28",
+        "addend": 0
+      },
+      {
+        "offset": 124,
+        "type": 109,
+        "target": "lbl_80650D2C",
+        "addend": 0
+      },
+      {
+        "offset": 130,
+        "type": 4,
+        "target": "lbl_80607440",
+        "addend": 0
+      },
+      {
+        "offset": 132,
+        "type": 109,
+        "target": "lbl_80650CA8",
+        "addend": 0
+      },
+      {
+        "offset": 140,
+        "type": 109,
+        "target": "lbl_80650D20",
+        "addend": 0
+      },
+      {
+        "offset": 168,
+        "type": 109,
+        "target": "lbl_80650D10",
+        "addend": 0
+      },
+      {
+        "offset": 208,
+        "type": 109,
+        "target": "lbl_80650D08",
+        "addend": 0
+      },
+      {
+        "offset": 408,
+        "type": 109,
+        "target": "lbl_80650D20",
+        "addend": 0
+      },
+      {
+        "offset": 460,
+        "type": 109,
+        "target": "lbl_80650D08",
+        "addend": 0
+      },
+      {
+        "offset": 648,
+        "type": 10,
+        "target": "fn_800FBFB0",
+        "addend": 0
+      },
+      {
+        "offset": 872,
+        "type": 109,
+        "target": "lbl_80650D30",
+        "addend": 0
+      },
+      {
+        "offset": 912,
+        "type": 10,
+        "target": "fn_800FBFB0",
+        "addend": 0
+      },
+      {
+        "offset": 944,
+        "type": 109,
+        "target": "lbl_80650D08",
+        "addend": 0
+      },
+      {
+        "offset": 1024,
+        "type": 10,
+        "target": "fn_800FBFB0",
+        "addend": 0
+      },
+      {
+        "offset": 1056,
+        "type": 109,
+        "target": "lbl_80650D08",
+        "addend": 0
+      },
+      {
+        "offset": 1152,
+        "type": 10,
+        "target": "fn_800FBFB0",
+        "addend": 0
+      },
+      {
+        "offset": 1168,
+        "type": 10,
+        "target": "fn_800FBFB0",
+        "addend": 0
+      },
+      {
+        "offset": 1184,
+        "type": 10,
+        "target": "fn_800FBFB0",
+        "addend": 0
+      },
+      {
+        "offset": 1202,
+        "type": 6,
+        "target": "lbl_80607440",
+        "addend": 0
+      },
+      {
+        "offset": 1214,
+        "type": 4,
+        "target": "lbl_80607440",
+        "addend": 0
+      },
+      {
+        "offset": 1356,
+        "type": 10,
+        "target": "fn_801A29E0",
+        "addend": 0
+      },
+      {
+        "offset": 1372,
+        "type": 109,
+        "target": "lbl_8064D18C",
+        "addend": 0
+      }
+    ]
+  },
+  "build": {
+    "commands": [
+      "python3 configure.py",
+      ".tools/bin/ninja -j2"
+    ],
+    "exit_code": 0,
+    "log_format": "stdout/stderr with CRLF normalized to LF"
+  },
+  "build_log": "eternal-darkness-decomp/reports/GEDE01/build-34088016-3785-4f6d-b42a-9d127263951e.log",
+  "scope": {
+    "source": "src/game/game_fn_801A1F8C.c",
+    "registration": "configure.py",
+    "splits_changed": false,
+    "unrelated_preexisting_modification": "CLAUDE.md (excluded from commit)",
+    "compiler_policy_changed": false,
+    "runtime_changed": false,
+    "global_progress_changed": false,
+    "assembly_added": false
+  }
+}

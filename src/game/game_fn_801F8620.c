@@ -22,8 +22,26 @@ typedef struct Globals {
 } Globals;
 
 extern Globals lbl_8063C6B8;
-extern int lbl_8064D7BC;
+extern volatile int lbl_8064D7BC;
 extern unsigned int fn_801FA44C(void);
+
+/* Keep the two live-state reads together before storing their handles. */
+static inline void snapshot(volatile SavedState* saved,
+                            volatile LiveState* first,
+                            volatile LiveState* second)
+{
+    float first_value = first->value;
+    unsigned int first_handle = first->handle;
+    float second_value;
+    unsigned int second_handle;
+
+    saved->first_value = first_value;
+    second_value = second->value;
+    second_handle = second->handle;
+    saved->second_value = second_value;
+    saved->first_handle = first_handle;
+    saved->second_handle = second_handle;
+}
 
 void fn_801F8620(void)
 {
@@ -31,23 +49,14 @@ void fn_801F8620(void)
     volatile SavedState* saved;
     volatile LiveState* first;
     volatile LiveState* second;
-    float first_value;
-    float second_value;
-    unsigned int first_handle;
-    unsigned int second_handle;
-    int count = lbl_8064D7BC;
+    int count;
 
-    saved = &globals->saved[count];
+    saved = globals->saved;
+    count = lbl_8064D7BC;
+    saved = &saved[count];
     first = &globals->first;
     lbl_8064D7BC = count + 1;
-    first_value = first->value;
     second = &globals->second;
-    first_handle = first->handle;
-    saved->first_value = first_value;
-    second_value = second->value;
-    second_handle = second->handle;
-    saved->second_value = second_value;
-    saved->first_handle = first_handle;
-    saved->second_handle = second_handle;
+    snapshot(saved, first, second);
     saved->token = fn_801FA44C();
 }

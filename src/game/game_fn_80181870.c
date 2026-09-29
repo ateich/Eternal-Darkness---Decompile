@@ -32,12 +32,11 @@ typedef struct InitObject {
     Vector3Words vector;
 } InitObject;
 
-extern const Vector3Words lbl_8023B028;
+extern Vector3Words lbl_8023B028;
 
 void fn_80181870(InitObject* object)
 {
-    Vector3Words vector = lbl_8023B028;
-
+    Vector3Words initial = lbl_8023B028;
     object->type = 8;
     object->count = 16;
     object->field_04 = 52;
@@ -52,5 +51,5 @@ void fn_80181870(InitObject* object)
     object->field_14 = 1;
     object->field_20 = 1;
     object->field_1A = 31;
-    object->vector = vector;
+    object->vector = initial;
 }

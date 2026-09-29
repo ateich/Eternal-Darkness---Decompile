@@ -1,0 +1,37 @@
+--- eternal-darkness-decomp/src/game/game_fn_801ED118.c
++++ eternal-darkness-decomp/src/game/game_fn_801ED118.c
+@@ -13,10 +13,7 @@
+ typedef struct Record24 { s32 pad0; s32 a; s32 b; s32 c; u8 flag; u8 pad11[3]; s32 d; } Record24;
+ typedef struct Record8 { s32 a; s32 b; } Record8;
+ 
+-/* NonMatching: behavior-complete initialization reconstructed from retail.
+- * Interleaving record fields reproduces retail's inner-loop store schedule,
+- * but GC/1.3 still keeps its pointers in volatile registers while retail uses
+- * r25-r31 and a 0x30-byte frame, leaving this function 64 bytes shorter. */
++/* NonMatching: initialization reconstructed from retail. */
+ void fn_801ED118(void)
+ {
+     u8* base = lbl_80639260;
+@@ -50,14 +47,14 @@
+         Record8* r8 = (Record8*)(base + 0x28B8);
+         s32* b = (s32*)(base + 0x22B8);
+         for (i = 0; i < 8; i++) {
+-            *a++ = -1;
+-            *z++ = 0;
+-            *c++ = -1;
+-            *d++ = -1;
+-            *e++ = -1;
+-            *f++ = -1;
+-            *g++ = -1;
+-            *h++ = -1;
++            a[i] = -1;
++            z[i] = 0;
++            c[i] = -1;
++            d[i] = -1;
++            e[i] = -1;
++            f[i] = -1;
++            g[i] = -1;
++            h[i] = -1;
+         }
+ 
+         for (i = 0; i < 16; i++) {

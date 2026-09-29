@@ -1,0 +1,8 @@
+$ .tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_801F1A38.externalized
+[1/2] MWCC build/GEDE01/src/game/game_fn_801F1A38.o
+[2/2] EXTERNALIZE build/GEDE01/src/game/game_fn_801F1A38.o
+FAILED: [code=1] build/GEDE01/src/game/game_fn_801F1A38.externalized 
+python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_801F1A38.o @122 lbl_80651360 orig/GEDE01/sys/main.dol --require-whole-section && build/binutils/powerpc-eabi-objcopy --redefine-sym=@122=lbl_80651360 --remove-section=.sdata2 --rename-section=.comment=.ignored build/GEDE01/src/game/game_fn_801F1A38.o && touch build/GEDE01/src/game/game_fn_801F1A38.externalized
+build/GEDE01/src/game/game_fn_801F1A38.o: symbol '@122' not found
+ninja: build stopped: subcommand failed.
+exit_code=1

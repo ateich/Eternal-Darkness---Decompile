@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "assignment_id": "13e4cea1-63b3-4085-862e-f46dade4995e",
+  "target": "fn_801EC350",
+  "unit": "main/game/game_fn_801EC350",
+  "status": "matched",
+  "compiler": "GC/1.3",
+  "compiler_policy": "Unchanged accepted-base settings, including per-TU -use_lmw_stmw on.",
+  "provenance": {
+    "base_commit": "dcea276ed08e3708dd10e969b4442bf2f1d9a3cd",
+    "preserved_attempt": "aeaca3c526ad60f62f99a9664eb4463d8a3bd2bf",
+    "reconciliation": "The accepted base already contained the preserved attempt source, center-span hoist, u8 setter prototype, and compiler registration; no transplant was necessary."
+  },
+  "source": "eternal-darkness-decomp/src/game/game_fn_801EC350.c",
+  "source_sha256": "aaa93605eaa76a97ca311bb67bec13efab3f03e41183c0cad261469c62aeab6f",
+  "findings": [
+    "Replacing named half-size/midpoint locals with pure expressions corrected persistent parameter allocation. Halving width and height in-place inside the recursion block recovered retail derived-value lifetimes.",
+    "A negative conditional lower clamp generates retail srawi/andc and the upper-clamp join branches. Repeating the pure average-plus-offset expression rather than storing a named sum makes MWCC assign r3 and retain call argument setup after the clamp.",
+    "Reordering the final two center addends corrected MWCC reassociation. Giving the right-edge average its own local corrected the final r20-versus-r16 mismatch."
+  ],
+  "experiments": "eternal-darkness-decomp/reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-experiments.json",
+  "elf_verification": "eternal-darkness-decomp/reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-elf-verification.json",
+  "build": {
+    "command": "python3 configure.py && .tools/bin/ninja -j2",
+    "cwd": "eternal-darkness-decomp",
+    "raw_json": "eternal-darkness-decomp/reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-build.json"
+  },
+  "scope": {
+    "source_units_changed": 1,
+    "registration": "NonMatching -> Matching; flags unchanged",
+    "split": "Existing independent .text interval 0x801EC350..0x801EC67C unchanged",
+    "global_progress": "Not edited",
+    "preexisting_change": "CLAUDE.md was already modified and is excluded from this commit."
+  },
+  "canonical": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801EC350 fn_801EC350 -o reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-canonical.json --format json-pretty",
+    "raw_json": "eternal-darkness-decomp/reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-canonical.json",
+    "match_percent": 100.0,
+    "left_size": 812,
+    "right_size": 812,
+    "instruction_count": 203,
+    "relocation_count": 23,
+    "diff_counts": {
+      "MATCH": 203
+    }
+  },
+  "strict": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801EC350 fn_801EC350 -o reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "raw_json": "eternal-darkness-decomp/reports/GEDE01/objdiff-13e4cea1-63b3-4085-862e-f46dade4995e-strict.json",
+    "match_percent": 100.0,
+    "left_size": 812,
+    "right_size": 812,
+    "instruction_count": 203,
+    "relocation_count": 23,
+    "diff_counts": {
+      "MATCH": 203
+    }
+  },
+  "dol_sha1": {
+    "command": [
+      "sha1sum",
+      "build/GEDE01/main.dol"
+    ],
+    "returncode": 0,
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\n"
+  },
+  "compiler_command": {
+    "command": [
+      ".tools/bin/ninja",
+      "-t",
+      "commands",
+      "build/GEDE01/src/game/game_fn_801EC350.o"
+    ],
+    "returncode": 0,
+    "raw_output": "\"/usr/bin/python3\" tools/download_tool.py sjiswrap build/tools/sjiswrap.exe --tag v1.2.2\ntools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_801EC350.c -o build/GEDE01/src/game && \"/usr/bin/python3\" tools/transform_dep.py build/GEDE01/src/game/game_fn_801EC350.d build/GEDE01/src/game/game_fn_801EC350.d\n"
+  },
+  "legal_audit": {
+    "command": [
+      "python3",
+      "tools/legal_audit.py"
+    ],
+    "cwd": "eternal-darkness-decomp",
+    "returncode": 0,
+    "raw_output": "legal audit passed (21995 tracked project files inspected)\n"
+  }
+}

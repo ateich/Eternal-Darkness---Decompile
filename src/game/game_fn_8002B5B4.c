@@ -15,10 +15,17 @@ typedef struct State {
 extern State lbl_80303A18;
 extern int lbl_8064C710;
 
+/* Register-qualified member bases test the original local-variable lifetime. */
 void fn_8002B5B4(Vec3Words* first, Vec3Words* second, int index, u32 value)
 {
-    lbl_80303A18.first[index] = *first;
-    lbl_80303A18.second[index] = *second;
-    lbl_80303A18.values[index] = value;
+    register State* state = &lbl_80303A18;
+    register Vec3Words* firstBase = state->first;
+    register Vec3Words* secondBase = state->second;
+    register u32* valueBase = state->values;
+    register int vectorIndex = index;
+
+    firstBase[vectorIndex] = *first;
+    secondBase[vectorIndex] = *second;
+    valueBase[index] = value;
     lbl_8064C710 = index;
 }

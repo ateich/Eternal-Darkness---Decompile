@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "assignment_id": "a8a4830a-a47e-4b73-9dab-3d4774e252bf",
+  "attempt": 5,
+  "base_commit": "b920da29750a1f4c76f83e4bbea1e4e9295f099a",
+  "target": "fn_80196578",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-a8a4830a-a47e-4b73-9dab-3d4774e252bf.json",
+    "eternal-darkness-decomp/reports/GEDE01/analysis-a8a4830a-a47e-4b73-9dab-3d4774e252bf.json",
+    "eternal-darkness-decomp/reports/GEDE01/commands-a8a4830a-a47e-4b73-9dab-3d4774e252bf.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-a8a4830a-a47e-4b73-9dab-3d4774e252bf-recovered-best.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-a8a4830a-a47e-4b73-9dab-3d4774e252bf-reversed-local-layout.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-a8a4830a-a47e-4b73-9dab-3d4774e252bf-separate-word-aggregates.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-a8a4830a-a47e-4b73-9dab-3d4774e252bf-separate-words-reverse-declarations.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-a8a4830a-a47e-4b73-9dab-3d4774e252bf-separate-words-reverse-initialization.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-a8a4830a-a47e-4b73-9dab-3d4774e252bf-separate-words-type-first.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-a8a4830a-a47e-4b73-9dab-3d4774e252bf-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/settings-a8a4830a-a47e-4b73-9dab-3d4774e252bf.json",
+    "eternal-darkness-decomp/reports/GEDE01/source-a8a4830a-a47e-4b73-9dab-3d4774e252bf-recovered-best.json",
+    "eternal-darkness-decomp/reports/GEDE01/source-a8a4830a-a47e-4b73-9dab-3d4774e252bf-reversed-local-layout.json",
+    "eternal-darkness-decomp/reports/GEDE01/source-a8a4830a-a47e-4b73-9dab-3d4774e252bf-separate-word-aggregates.json",
+    "eternal-darkness-decomp/reports/GEDE01/source-a8a4830a-a47e-4b73-9dab-3d4774e252bf-separate-words-reverse-declarations.json",
+    "eternal-darkness-decomp/reports/GEDE01/source-a8a4830a-a47e-4b73-9dab-3d4774e252bf-separate-words-reverse-initialization.json",
+    "eternal-darkness-decomp/reports/GEDE01/source-a8a4830a-a47e-4b73-9dab-3d4774e252bf-separate-words-type-first.json",
+    "eternal-darkness-decomp/reports/GEDE01/verify-a8a4830a-a47e-4b73-9dab-3d4774e252bf.py"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both score 80.57143%. Retail is 196 bytes and individually saves/restores r28-r31; GC/1.3 emits 188 bytes and saves/restores only r29-r31. Retail keeps 5 in r30, 10 in r31, and the global words in r28/r29; the reconstruction keeps 5 in r12, 10 in r31, and the global words in r30/r29. Retail loads 100 into r12 and 2 into r0 before object stores; generated code reuses r0 for 100 then 2. The type/mode stores are reversed, global loads and constant setup are rescheduled, and Pair stack materialization uses different values/slots and timing. All three relocation target names, types and zero addends agree; relocation instruction offsets differ. The two missing save/restore instructions account for the eight-byte size difference."
+}

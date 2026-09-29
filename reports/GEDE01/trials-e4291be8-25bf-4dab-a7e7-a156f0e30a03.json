@@ -1,0 +1,695 @@
+[
+  {
+    "name": "baseline",
+    "source_sha256": "3e67335cad5ed9b43dcf4530053ad2fb6abe85fa07f87c5a2e8b105b250211c8",
+    "patch": "",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_8018437C.o"
+    ],
+    "build_exit": 0,
+    "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_8018437C.o\n",
+    "build_stderr": "",
+    "objdiff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_8018437C",
+      "fn_8018437C",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "-",
+      "--format",
+      "json"
+    ],
+    "objdiff_exit": 0,
+    "objdiff_stderr": "",
+    "score": 99.83402,
+    "target_size": "964",
+    "base_size": "964",
+    "mismatches": [
+      {
+        "offset": "268",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r21, r0",
+        "base": "mr r20, r0"
+      },
+      {
+        "offset": "272",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r4, r21",
+        "base": "mr r4, r20"
+      },
+      {
+        "offset": "280",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r3, r21",
+        "base": "mr r3, r20"
+      },
+      {
+        "offset": "288",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "clrlwi r20, r3, 16",
+        "base": "clrlwi r21, r3, 16"
+      },
+      {
+        "offset": "292",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r3, r21",
+        "base": "mr r3, r20"
+      },
+      {
+        "offset": "324",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "lwz r21, 0x2c(r1)",
+        "base": "lwz r20, 0x2c(r1)"
+      },
+      {
+        "offset": "360",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "cmplw r31, r21",
+        "base": "cmplw r31, r20"
+      },
+      {
+        "offset": "412",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "cmplw r3, r20",
+        "base": "cmplw r3, r21"
+      }
+    ]
+  },
+  {
+    "name": "bound_u16",
+    "source_sha256": "53af648e5cd2b513e90705cf2c545661643311670272cfc1d20e4dccb76f409c",
+    "patch": "--- \n+++ \n@@ -73,7 +73,7 @@\n                         if (type == lbl_8064D18C && (state == 0 || state == 1)) {\n                             void* object = fn_80201BC8(node);\n                             float point[3];\n-                            u32 bound;\n+                            u16 bound;\n                             int radius;\n                             u32 distance_xy;\n                             u32 distance_xz;\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_8018437C.o"
+    ],
+    "build_exit": 0,
+    "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_8018437C.o\n",
+    "build_stderr": "",
+    "objdiff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_8018437C",
+      "fn_8018437C",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "-",
+      "--format",
+      "json"
+    ],
+    "objdiff_exit": 0,
+    "objdiff_stderr": "",
+    "score": 99.83402,
+    "target_size": "964",
+    "base_size": "964",
+    "mismatches": [
+      {
+        "offset": "268",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r21, r0",
+        "base": "mr r20, r0"
+      },
+      {
+        "offset": "272",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r4, r21",
+        "base": "mr r4, r20"
+      },
+      {
+        "offset": "280",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r3, r21",
+        "base": "mr r3, r20"
+      },
+      {
+        "offset": "288",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "clrlwi r20, r3, 16",
+        "base": "clrlwi r21, r3, 16"
+      },
+      {
+        "offset": "292",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r3, r21",
+        "base": "mr r3, r20"
+      },
+      {
+        "offset": "324",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "lwz r21, 0x2c(r1)",
+        "base": "lwz r20, 0x2c(r1)"
+      },
+      {
+        "offset": "360",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "cmplw r31, r21",
+        "base": "cmplw r31, r20"
+      },
+      {
+        "offset": "412",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "cmplw r3, r20",
+        "base": "cmplw r3, r21"
+      }
+    ]
+  },
+  {
+    "name": "bound_s32",
+    "source_sha256": "ea97cf74b696d44a6521e2af8b3f81918ca1aea2a535f1e620906ef37ddff23c",
+    "patch": "--- \n+++ \n@@ -73,7 +73,7 @@\n                         if (type == lbl_8064D18C && (state == 0 || state == 1)) {\n                             void* object = fn_80201BC8(node);\n                             float point[3];\n-                            u32 bound;\n+                            int bound;\n                             int radius;\n                             u32 distance_xy;\n                             u32 distance_xz;\n@@ -85,7 +85,7 @@\n                             point_x = (int)point[0];\n                             point_y = (int)point[1];\n                             point_z = (int)point[2];\n-                            if (distance_xy <= (u32)radius && distance_xz <= bound) {\n+                            if (distance_xy <= (u32)radius && distance_xz <= (u32)bound) {\n                                 void* actor = fn_80201B54(node);\n                                 u64 result = fn_8020123C(0x3B, 0, (int)actor, 0);\n                                 result &= 0xFFFFFFFFULL;\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_8018437C.o"
+    ],
+    "build_exit": 0,
+    "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_8018437C.o\n",
+    "build_stderr": "",
+    "objdiff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_8018437C",
+      "fn_8018437C",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "-",
+      "--format",
+      "json"
+    ],
+    "objdiff_exit": 0,
+    "objdiff_stderr": "",
+    "score": 99.83402,
+    "target_size": "964",
+    "base_size": "964",
+    "mismatches": [
+      {
+        "offset": "268",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r21, r0",
+        "base": "mr r20, r0"
+      },
+      {
+        "offset": "272",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r4, r21",
+        "base": "mr r4, r20"
+      },
+      {
+        "offset": "280",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r3, r21",
+        "base": "mr r3, r20"
+      },
+      {
+        "offset": "288",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "clrlwi r20, r3, 16",
+        "base": "clrlwi r21, r3, 16"
+      },
+      {
+        "offset": "292",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r3, r21",
+        "base": "mr r3, r20"
+      },
+      {
+        "offset": "324",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "lwz r21, 0x2c(r1)",
+        "base": "lwz r20, 0x2c(r1)"
+      },
+      {
+        "offset": "360",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "cmplw r31, r21",
+        "base": "cmplw r31, r20"
+      },
+      {
+        "offset": "412",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "cmplw r3, r20",
+        "base": "cmplw r3, r21"
+      }
+    ]
+  },
+  {
+    "name": "bound_ulong",
+    "source_sha256": "89243aa9b19f4c602b9c47d18e28222a30634a3544449f2a1124a119f1e78168",
+    "patch": "--- \n+++ \n@@ -73,7 +73,7 @@\n                         if (type == lbl_8064D18C && (state == 0 || state == 1)) {\n                             void* object = fn_80201BC8(node);\n                             float point[3];\n-                            u32 bound;\n+                            unsigned long bound;\n                             int radius;\n                             u32 distance_xy;\n                             u32 distance_xz;\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_8018437C.o"
+    ],
+    "build_exit": 0,
+    "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_8018437C.o\n",
+    "build_stderr": "",
+    "objdiff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_8018437C",
+      "fn_8018437C",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "-",
+      "--format",
+      "json"
+    ],
+    "objdiff_exit": 0,
+    "objdiff_stderr": "",
+    "score": 99.83402,
+    "target_size": "964",
+    "base_size": "964",
+    "mismatches": [
+      {
+        "offset": "268",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r21, r0",
+        "base": "mr r20, r0"
+      },
+      {
+        "offset": "272",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r4, r21",
+        "base": "mr r4, r20"
+      },
+      {
+        "offset": "280",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r3, r21",
+        "base": "mr r3, r20"
+      },
+      {
+        "offset": "288",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "clrlwi r20, r3, 16",
+        "base": "clrlwi r21, r3, 16"
+      },
+      {
+        "offset": "292",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r3, r21",
+        "base": "mr r3, r20"
+      },
+      {
+        "offset": "324",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "lwz r21, 0x2c(r1)",
+        "base": "lwz r20, 0x2c(r1)"
+      },
+      {
+        "offset": "360",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "cmplw r31, r21",
+        "base": "cmplw r31, r20"
+      },
+      {
+        "offset": "412",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "cmplw r3, r20",
+        "base": "cmplw r3, r21"
+      }
+    ]
+  },
+  {
+    "name": "split_short_circuit",
+    "source_sha256": "c5008f888c0ddc53f1c1920b4efe1e66eee6323df834d02c8c3e0c276bd042b9",
+    "patch": "--- \n+++ \n@@ -85,7 +85,7 @@\n                             point_x = (int)point[0];\n                             point_y = (int)point[1];\n                             point_z = (int)point[2];\n-                            if (distance_xy <= (u32)radius && distance_xz <= bound) {\n+                            if (distance_xy <= (u32)radius) if (distance_xz <= bound) {\n                                 void* actor = fn_80201B54(node);\n                                 u64 result = fn_8020123C(0x3B, 0, (int)actor, 0);\n                                 result &= 0xFFFFFFFFULL;\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_8018437C.o"
+    ],
+    "build_exit": 0,
+    "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_8018437C.o\n",
+    "build_stderr": "",
+    "objdiff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_8018437C",
+      "fn_8018437C",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "-",
+      "--format",
+      "json"
+    ],
+    "objdiff_exit": 0,
+    "objdiff_stderr": "",
+    "score": 99.83402,
+    "target_size": "964",
+    "base_size": "964",
+    "mismatches": [
+      {
+        "offset": "268",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r21, r0",
+        "base": "mr r20, r0"
+      },
+      {
+        "offset": "272",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r4, r21",
+        "base": "mr r4, r20"
+      },
+      {
+        "offset": "280",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r3, r21",
+        "base": "mr r3, r20"
+      },
+      {
+        "offset": "288",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "clrlwi r20, r3, 16",
+        "base": "clrlwi r21, r3, 16"
+      },
+      {
+        "offset": "292",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r3, r21",
+        "base": "mr r3, r20"
+      },
+      {
+        "offset": "324",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "lwz r21, 0x2c(r1)",
+        "base": "lwz r20, 0x2c(r1)"
+      },
+      {
+        "offset": "360",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "cmplw r31, r21",
+        "base": "cmplw r31, r20"
+      },
+      {
+        "offset": "412",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "cmplw r3, r20",
+        "base": "cmplw r3, r21"
+      }
+    ]
+  },
+  {
+    "name": "precomputed_bound_predicate",
+    "source_sha256": "686227e95eba98431f6dfe7a8dc3ca780d36029d009e56fd12ec7ea2e808d7d8",
+    "patch": "--- \n+++ \n@@ -85,7 +85,7 @@\n                             point_x = (int)point[0];\n                             point_y = (int)point[1];\n                             point_z = (int)point[2];\n-                            if (distance_xy <= (u32)radius && distance_xz <= bound) {\n+                            if ((distance_xz <= bound) && (distance_xy <= (u32)radius)) {\n                                 void* actor = fn_80201B54(node);\n                                 u64 result = fn_8020123C(0x3B, 0, (int)actor, 0);\n                                 result &= 0xFFFFFFFFULL;\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_8018437C.o"
+    ],
+    "build_exit": 0,
+    "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_8018437C.o\n",
+    "build_stderr": "",
+    "objdiff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_8018437C",
+      "fn_8018437C",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "-",
+      "--format",
+      "json"
+    ],
+    "objdiff_exit": 0,
+    "objdiff_stderr": "",
+    "score": 99.51453,
+    "target_size": "964",
+    "base_size": "964",
+    "mismatches": [
+      {
+        "offset": "12",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "stmw r20, 0x50(r1)",
+        "base": "stmw r19, 0x4c(r1)"
+      },
+      {
+        "offset": "212",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r21, r3",
+        "base": "mr r20, r3"
+      },
+      {
+        "offset": "228",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "cmpw r21, r0",
+        "base": "cmpw r20, r0"
+      },
+      {
+        "offset": "324",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "lwz r21, 0x2c(r1)",
+        "base": "lwz r19, 0x2c(r1)"
+      },
+      {
+        "offset": "336",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r31, r3",
+        "base": "mr r21, r3"
+      },
+      {
+        "offset": "360",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "cmplw r31, r21",
+        "base": "cmplw r3, r20"
+      },
+      {
+        "offset": "412",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "cmplw r3, r20",
+        "base": "cmplw r21, r19"
+      },
+      {
+        "offset": "436",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r20, r0",
+        "base": "mr r19, r0"
+      },
+      {
+        "offset": "444",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r5, r20",
+        "base": "mr r5, r19"
+      },
+      {
+        "offset": "484",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r21, r0",
+        "base": "mr r20, r0"
+      },
+      {
+        "offset": "500",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r3, r21",
+        "base": "mr r3, r20"
+      },
+      {
+        "offset": "508",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r4, r20",
+        "base": "mr r4, r19"
+      },
+      {
+        "offset": "516",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r3, r21",
+        "base": "mr r3, r20"
+      },
+      {
+        "offset": "528",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r3, r21",
+        "base": "mr r3, r20"
+      },
+      {
+        "offset": "540",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r3, r21",
+        "base": "mr r3, r20"
+      },
+      {
+        "offset": "552",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r3, r21",
+        "base": "mr r3, r20"
+      },
+      {
+        "offset": "564",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r3, r21",
+        "base": "mr r3, r20"
+      },
+      {
+        "offset": "576",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r5, r20",
+        "base": "mr r5, r19"
+      },
+      {
+        "offset": "580",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r6, r21",
+        "base": "mr r6, r20"
+      },
+      {
+        "offset": "596",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r3, r21",
+        "base": "mr r3, r20"
+      },
+      {
+        "offset": "940",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "lmw r20, 0x50(r1)",
+        "base": "lmw r19, 0x4c(r1)"
+      }
+    ]
+  },
+  {
+    "name": "radius_unsigned",
+    "source_sha256": "9b7185c471ce656be3f311e63566916ef6a98710af6ef348e297fc76a036e1ef",
+    "patch": "--- \n+++ \n@@ -74,7 +74,7 @@\n                             void* object = fn_80201BC8(node);\n                             float point[3];\n                             u32 bound;\n-                            int radius;\n+                            u32 radius;\n                             u32 distance_xy;\n                             u32 distance_xz;\n                             fn_8011F114(point, object);\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_8018437C.o"
+    ],
+    "build_exit": 0,
+    "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_8018437C.o\n",
+    "build_stderr": "",
+    "objdiff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_8018437C",
+      "fn_8018437C",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "-",
+      "--format",
+      "json"
+    ],
+    "objdiff_exit": 0,
+    "objdiff_stderr": "",
+    "score": 99.83402,
+    "target_size": "964",
+    "base_size": "964",
+    "mismatches": [
+      {
+        "offset": "268",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r21, r0",
+        "base": "mr r20, r0"
+      },
+      {
+        "offset": "272",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r4, r21",
+        "base": "mr r4, r20"
+      },
+      {
+        "offset": "280",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r3, r21",
+        "base": "mr r3, r20"
+      },
+      {
+        "offset": "288",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "clrlwi r20, r3, 16",
+        "base": "clrlwi r21, r3, 16"
+      },
+      {
+        "offset": "292",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "mr r3, r21",
+        "base": "mr r3, r20"
+      },
+      {
+        "offset": "324",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "lwz r21, 0x2c(r1)",
+        "base": "lwz r20, 0x2c(r1)"
+      },
+      {
+        "offset": "360",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "cmplw r31, r21",
+        "base": "cmplw r31, r20"
+      },
+      {
+        "offset": "412",
+        "kind": "DIFF_ARG_MISMATCH",
+        "target": "cmplw r3, r20",
+        "base": "cmplw r3, r21"
+      }
+    ]
+  },
+  {
+    "name": "return_u32_explicit_mask",
+    "source_sha256": "c78d11d7023b64ee9ab896ddcd0e326f54e5e8e2c5aa9c674e6e7e345de7d09e",
+    "patch": "--- \n+++ \n@@ -21,7 +21,7 @@\n extern void* fn_80201B54(void*);\n extern int fn_80201EB8(void*);\n extern void fn_8011F114(void*, void*);\n-extern u16 fn_8011F760(void*);\n+extern u32 fn_8011F760(void*);\n extern float fn_8011F6F0(void*);\n extern u32 fn_80179064(int, int, s16, s16);\n extern unsigned long long fn_8020123C(int, int, int, int);\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_8018437C.o"
+    ],
+    "build_exit": 0,
+    "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_8018437C.o\n",
+    "build_stderr": "",
+    "objdiff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_8018437C",
+      "fn_8018437C",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "-",
+      "--format",
+      "json"
+    ],
+    "objdiff_exit": 0,
+    "objdiff_stderr": "",
+    "score": 100.0,
+    "target_size": "964",
+    "base_size": "964",
+    "mismatches": []
+  }
+]

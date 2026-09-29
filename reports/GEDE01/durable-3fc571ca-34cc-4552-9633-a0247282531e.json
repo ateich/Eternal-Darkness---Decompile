@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "3fc571ca-34cc-4552-9633-a0247282531e",
+  "attempt": 5,
+  "base_commit": "60f9b72058051bdef7cedad865b714b03d1e03f8",
+  "target": "fn_800F61F4",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-3fc571ca-34cc-4552-9633-a0247282531e.json"
+  ],
+  "divergence": "Retail has 36 bytes (9 instructions); candidate has 40 bytes (10 instructions). Generated subi r0,r5,0x20 precedes subfic r6,r5,0x20; retail starts subfic r8,r5,0x20 then carry-setting subic r9,r5,0x20. Generated cross-word terms use r7/r3 and hi << shift uses r0, versus retail accumulating hi in r3 with cross-word r10. ORs and low-word shift are scheduled differently and generated code adds mr r3,r7. Neither object has relocations."
+}

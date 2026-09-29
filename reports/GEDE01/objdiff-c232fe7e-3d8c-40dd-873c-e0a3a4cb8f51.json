@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "assignment_id": "c232fe7e-3d8c-40dd-873c-e0a3a4cb8f51",
+  "attempt": 7,
+  "target": "fn_8005EF94",
+  "status": "attempted",
+  "compiler": "mwcc_242_53 (GC/1.3), canonical flags plus existing -use_lmw_stmw on",
+  "recovery": {
+    "accepted_base": "53b5283e097be6ca8d11ff7dfc4b412db9adf71c",
+    "preserved_commit_studied": "e3cb0ec8ca6ddfeb8aa45b6c2b30f4a7cbceeab6",
+    "preserved_source_already_present": true
+  },
+  "hypothesis": {
+    "description": "Retail initializes a per-node made flag immediately before its switch, updates the object timer inside each accepted-node path, conditionally emits fn_8020104C before advancing that node, and retains a separate global did_work flag for the final effect. The preserved reconstruction had merged those flags and hoisted timer/notification work after the traversal.",
+    "result": "Confirmed. Restoring the distinct lexical lifetimes and control-flow placement raised canonical and strict objdiff from 68.33199% to 76.02012%, reduced generated .text from 2020 to 2000 bytes, and changed accepted switch cases to enter the processing body directly. Intermediate measured variants were 75.29376% (combined call/range condition) and 75.696175% (nested explicit range check); both were discarded."
+  },
+  "canonical": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8005EF94 fn_8005EF94 -o reports/GEDE01/canonical-c232fe7e-3d8c-40dd-873c-e0a3a4cb8f51.raw.json --format json",
+    "exit_code": 0,
+    "raw_output": "INFO Writing to reports/GEDE01/canonical-c232fe7e-3d8c-40dd-873c-e0a3a4cb8f51.raw.json",
+    "raw_sha256": "9d3c5b1429a445366f4f21f0563e03ba7f78dbcb5234d4c29b615c19922fae95",
+    "match_percent": 76.02012,
+    "sections_raw": ".text 1988 76.02012; .rodata 16 100.0; .data 100 0.0",
+    "retail_text_bytes": 1988,
+    "generated_text_bytes": 2000
+  },
+  "relocation_strict": {
+    "command": "build/tools/objdiff-cli diff -1 build/GEDE01/obj/game/game_fn_8005EF94.o -2 build/GEDE01/src/game/game_fn_8005EF94.o fn_8005EF94 -o reports/GEDE01/strict-c232fe7e-3d8c-40dd-873c-e0a3a4cb8f51.raw.json --format json",
+    "exit_code": 0,
+    "raw_output": "INFO Writing to reports/GEDE01/strict-c232fe7e-3d8c-40dd-873c-e0a3a4cb8f51.raw.json",
+    "raw_sha256": "9d3c5b1429a445366f4f21f0563e03ba7f78dbcb5234d4c29b615c19922fae95",
+    "byte_identical_to_canonical_json": true,
+    "match_percent": 76.02012,
+    "retail_text_relocations": 67,
+    "generated_text_relocations": 67,
+    "retail_data_relocations": 25,
+    "generated_data_relocations": 25,
+    "relocation_targets_and_addends_accepted": false,
+    "raw_tail": "retail: 0000072c R_PPC_REL24 fn_8020104C + 0; 00000734 R_PPC_REL24 fn_80201BC0 + 0; generated: 00000738 R_PPC_REL24 fn_8020104C + 0; 00000740 R_PPC_REL24 fn_80201BC0 + 0"
+  },
+  "exact_codegen_divergence": "Retail uses a 0x190-byte frame and saves incoming head/limit/count/amount in r17/r18/r15/r19, while generated code uses a 0x170-byte frame, keeps head/limit/amount in r15/r14/r16, and spills count/create. Generated .text is 12 bytes longer (2000 versus 1988). Both .rela.text sections contain 67 entries, but relocation sites diverge from the first call (retail 0x2c, generated 0x30) and later control-flow placement remains offset. The 100-byte switch table remains 0% because all 25 branch-label addends are different.",
+  "build": {
+    "commands": ["python3 configure.py", ".tools/bin/ninja -j2"],
+    "exit_code": 0,
+    "raw_output": "[931/933] DOL build/GEDE01/main.dol; [932/933] CHECK config/GEDE01/build.sha1; build/GEDE01/main.dol: OK; [933/933] PROGRESS",
+    "dol_sha1_command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "dol_sha1_raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol"
+  },
+  "source_sha256": "3ba06c7fa07942dbd4bc5307622961bb8ec5681953ce9a92d1d4766a056879c7",
+  "legal_audit": {
+    "command": "python3 tools/legal_audit.py",
+    "exit_code": 0,
+    "raw_output": "legal audit passed (22623 tracked project files inspected)",
+    "independent_translation_unit": true,
+    "registration": "Existing NonMatching registration and split retained unchanged.",
+    "inline_or_whole_function_assembly": false,
+    "register_binding": false,
+    "runtime_or_gate_changes": false,
+    "neighboring_function_changes": false,
+    "private_or_generated_inputs_committed": false
+  }
+}

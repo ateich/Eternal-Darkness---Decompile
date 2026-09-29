@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "assignment_id": "88ff02d8-3469-4ca1-9864-0ce64dd6343e",
+  "attempt": 6,
+  "base_commit": "c47588efee8d7dc26d763af99ac03596bc6027ae",
+  "target": "fn_8017BBD0",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-88ff02d8-3469-4ca1-9864-0ce64dd6343e.json",
+    "eternal-darkness-decomp/reports/GEDE01/verification-88ff02d8-3469-4ca1-9864-0ce64dd6343e.json"
+  ],
+  "divergence": "Best relocation-strict objdiff score is 89.765625%: retail is 256 bytes (64 instructions) while canonical MWCC GC/1.3 emits 244 bytes (61 instructions). Both sides have six real relocations whose types, named targets, and addends agree. The remaining wrap select differs: retail materializes 6 and 0x80000006 and emits addc/subfe/andc, while canonical folds the signed negative test to srawi/and; the missing three instructions also leave the queue base in r8 rather than retail r9. An explicit sign-biased unsigned-add overflow-mask hypothesis emitted a different lis/addi/addis/subfc/subfe/and sequence and regressed to 89.140625%, so the accepted full-width-next ternary reconstruction remains best."
+}

@@ -1,0 +1,152 @@
+[
+  {
+    "name": "float_aggregate",
+    "score": 59.692307,
+    "size": "208",
+    "source": "typedef unsigned char u8;\ntypedef signed char s8;\ntypedef unsigned short u16;\ntypedef unsigned int u32;\n\ntypedef struct Triple {\n    float x;\n    float y;\n    float z;\n} Triple;\n\ntypedef struct Object {\n    u8 first;\n    u8 second;\n    u8 third;\n    s8 offset;\n    u16 size;\n    u16 field_06;\n    u16 field_08;\n    u8 pad_0A[6];\n    u32 field_10;\n    u8 field_14;\n    u8 pad_15;\n    u8 field_16;\n    u8 field_17;\n    u8 field_18;\n    u8 pad_19;\n    u16 field_1A;\n    u16 field_1C;\n    u8 pad_1E[2];\n    u16 field_20;\n    u8 pad_22[2];\n    u16 field_24;\n    u16 field_26;\n    u16 field_28;\n    u8 pad_2A[2];\n    float field_2C;\n    u8 pad_30[0x18];\n    Triple field_48;\n} Object;\n\nextern const Triple lbl_8023B018;\nextern u8 lbl_802FC5BC[];\nextern const float lbl_80650948;\n\nvoid fn_80180D0C(Object* object)\n{\n    u16 size = 0x34;\n    s8 offset = -10;\n    Triple value = lbl_8023B018;\n\n    object->first = 0x10;\n    object->second = 0x10;\n    object->third = 0xFA;\n    object->offset = offset;\n    object->size = size;\n    object->field_06 = 0xE1;\n    object->field_08 = 0x64;\n    object->field_10 = *(u32*)(lbl_802FC5BC + 0xC);\n    object->field_24 = 0;\n    object->field_26 = 0;\n    object->field_28 = 0;\n    object->field_1C = 0x12C;\n    object->field_14 = 2;\n    object->field_20 = 1;\n    object->field_1A = 0x3F;\n    object->field_16 = 4;\n    object->field_2C = lbl_80650948;\n    object->field_17 = 1;\n    object->field_18 = 0x60;\n    object->field_48 = value;\n}\n",
+    "raw_output": "eternal-darkness-decomp/reports/GEDE01/float_aggregate-6b1aa7cb-32c1-4942-83ee-60cd35d8db23.json",
+    "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80180D0C.o\n",
+    "build_stderr": "",
+    "build_exit": 0,
+    "source_sha256": "f72c5f5dc77a5aeec2a63bf93286faf2c5fe5d86f84eae1c9d64dbd5d744d7a7",
+    "build_argv": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_80180D0C.o"
+    ],
+    "objdiff_argv": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_80180D0C",
+      "-o",
+      "reports/GEDE01/float_aggregate-6b1aa7cb-32c1-4942-83ee-60cd35d8db23.json",
+      "--format",
+      "json-pretty",
+      "fn_80180D0C"
+    ],
+    "cwd": "eternal-darkness-decomp"
+  },
+  {
+    "name": "array_aggregate",
+    "score": 59.692307,
+    "size": "208",
+    "source": "typedef unsigned char u8;\ntypedef signed char s8;\ntypedef unsigned short u16;\ntypedef unsigned int u32;\n\ntypedef struct Triple {\n    u32 words[3];\n} Triple;\n\ntypedef struct Object {\n    u8 first;\n    u8 second;\n    u8 third;\n    s8 offset;\n    u16 size;\n    u16 field_06;\n    u16 field_08;\n    u8 pad_0A[6];\n    u32 field_10;\n    u8 field_14;\n    u8 pad_15;\n    u8 field_16;\n    u8 field_17;\n    u8 field_18;\n    u8 pad_19;\n    u16 field_1A;\n    u16 field_1C;\n    u8 pad_1E[2];\n    u16 field_20;\n    u8 pad_22[2];\n    u16 field_24;\n    u16 field_26;\n    u16 field_28;\n    u8 pad_2A[2];\n    float field_2C;\n    u8 pad_30[0x18];\n    Triple field_48;\n} Object;\n\nextern const Triple lbl_8023B018;\nextern u8 lbl_802FC5BC[];\nextern const float lbl_80650948;\n\nvoid fn_80180D0C(Object* object)\n{\n    u16 size = 0x34;\n    s8 offset = -10;\n    Triple value = lbl_8023B018;\n\n    object->first = 0x10;\n    object->second = 0x10;\n    object->third = 0xFA;\n    object->offset = offset;\n    object->size = size;\n    object->field_06 = 0xE1;\n    object->field_08 = 0x64;\n    object->field_10 = *(u32*)(lbl_802FC5BC + 0xC);\n    object->field_24 = 0;\n    object->field_26 = 0;\n    object->field_28 = 0;\n    object->field_1C = 0x12C;\n    object->field_14 = 2;\n    object->field_20 = 1;\n    object->field_1A = 0x3F;\n    object->field_16 = 4;\n    object->field_2C = lbl_80650948;\n    object->field_17 = 1;\n    object->field_18 = 0x60;\n    object->field_48 = value;\n}\n",
+    "raw_output": "eternal-darkness-decomp/reports/GEDE01/array_aggregate-6b1aa7cb-32c1-4942-83ee-60cd35d8db23.json",
+    "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80180D0C.o\n",
+    "build_stderr": "",
+    "build_exit": 0,
+    "source_sha256": "8ebd903414cd9279f3f343c667cbec8271e530ef741f0f08ffd8c8dc34630c62",
+    "build_argv": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_80180D0C.o"
+    ],
+    "objdiff_argv": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_80180D0C",
+      "-o",
+      "reports/GEDE01/array_aggregate-6b1aa7cb-32c1-4942-83ee-60cd35d8db23.json",
+      "--format",
+      "json-pretty",
+      "fn_80180D0C"
+    ],
+    "cwd": "eternal-darkness-decomp"
+  },
+  {
+    "name": "byte_aggregate",
+    "score": 59.692307,
+    "size": "208",
+    "source": "typedef unsigned char u8;\ntypedef signed char s8;\ntypedef unsigned short u16;\ntypedef unsigned int u32;\n\ntypedef struct Triple {\n    u8 bytes[12];\n} Triple;\n\ntypedef struct Object {\n    u8 first;\n    u8 second;\n    u8 third;\n    s8 offset;\n    u16 size;\n    u16 field_06;\n    u16 field_08;\n    u8 pad_0A[6];\n    u32 field_10;\n    u8 field_14;\n    u8 pad_15;\n    u8 field_16;\n    u8 field_17;\n    u8 field_18;\n    u8 pad_19;\n    u16 field_1A;\n    u16 field_1C;\n    u8 pad_1E[2];\n    u16 field_20;\n    u8 pad_22[2];\n    u16 field_24;\n    u16 field_26;\n    u16 field_28;\n    u8 pad_2A[2];\n    float field_2C;\n    u8 pad_30[0x18];\n    Triple field_48;\n} Object;\n\nextern const Triple lbl_8023B018;\nextern u8 lbl_802FC5BC[];\nextern const float lbl_80650948;\n\nvoid fn_80180D0C(Object* object)\n{\n    u16 size = 0x34;\n    s8 offset = -10;\n    Triple value = lbl_8023B018;\n\n    object->first = 0x10;\n    object->second = 0x10;\n    object->third = 0xFA;\n    object->offset = offset;\n    object->size = size;\n    object->field_06 = 0xE1;\n    object->field_08 = 0x64;\n    object->field_10 = *(u32*)(lbl_802FC5BC + 0xC);\n    object->field_24 = 0;\n    object->field_26 = 0;\n    object->field_28 = 0;\n    object->field_1C = 0x12C;\n    object->field_14 = 2;\n    object->field_20 = 1;\n    object->field_1A = 0x3F;\n    object->field_16 = 4;\n    object->field_2C = lbl_80650948;\n    object->field_17 = 1;\n    object->field_18 = 0x60;\n    object->field_48 = value;\n}\n",
+    "raw_output": "eternal-darkness-decomp/reports/GEDE01/byte_aggregate-6b1aa7cb-32c1-4942-83ee-60cd35d8db23.json",
+    "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80180D0C.o\n",
+    "build_stderr": "",
+    "build_exit": 0,
+    "source_sha256": "b1c6b31f69017f2ed0a927134df79584a152e60caaf75e0dafa37978befb050e",
+    "build_argv": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_80180D0C.o"
+    ],
+    "objdiff_argv": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_80180D0C",
+      "-o",
+      "reports/GEDE01/byte_aggregate-6b1aa7cb-32c1-4942-83ee-60cd35d8db23.json",
+      "--format",
+      "json-pretty",
+      "fn_80180D0C"
+    ],
+    "cwd": "eternal-darkness-decomp"
+  },
+  {
+    "name": "intrinsic_copy",
+    "score": 28.923077,
+    "size": "228",
+    "source": "typedef unsigned char u8;\ntypedef signed char s8;\ntypedef unsigned short u16;\ntypedef unsigned int u32;\n\ntypedef struct Triple {\n    u32 x;\n    u32 y;\n    u32 z;\n} Triple;\n\ntypedef struct Object {\n    u8 first;\n    u8 second;\n    u8 third;\n    s8 offset;\n    u16 size;\n    u16 field_06;\n    u16 field_08;\n    u8 pad_0A[6];\n    u32 field_10;\n    u8 field_14;\n    u8 pad_15;\n    u8 field_16;\n    u8 field_17;\n    u8 field_18;\n    u8 pad_19;\n    u16 field_1A;\n    u16 field_1C;\n    u8 pad_1E[2];\n    u16 field_20;\n    u8 pad_22[2];\n    u16 field_24;\n    u16 field_26;\n    u16 field_28;\n    u8 pad_2A[2];\n    float field_2C;\n    u8 pad_30[0x18];\n    Triple field_48;\n} Object;\n\nextern const Triple lbl_8023B018;\nextern u8 lbl_802FC5BC[];\nextern const float lbl_80650948;\n\nextern void* memcpy(void*, const void*, unsigned long);\n\nvoid fn_80180D0C(Object* object)\n{\n    u16 size = 0x34;\n    s8 offset = -10;\n    Triple value;\n    memcpy(&value, &lbl_8023B018, sizeof(value));\n\n    object->first = 0x10;\n    object->second = 0x10;\n    object->third = 0xFA;\n    object->offset = offset;\n    object->size = size;\n    object->field_06 = 0xE1;\n    object->field_08 = 0x64;\n    object->field_10 = *(u32*)(lbl_802FC5BC + 0xC);\n    object->field_24 = 0;\n    object->field_26 = 0;\n    object->field_28 = 0;\n    object->field_1C = 0x12C;\n    object->field_14 = 2;\n    object->field_20 = 1;\n    object->field_1A = 0x3F;\n    object->field_16 = 4;\n    object->field_2C = lbl_80650948;\n    object->field_17 = 1;\n    object->field_18 = 0x60;\n    object->field_48 = value;\n}\n",
+    "raw_output": "eternal-darkness-decomp/reports/GEDE01/intrinsic_copy-6b1aa7cb-32c1-4942-83ee-60cd35d8db23.json",
+    "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80180D0C.o\n",
+    "build_stderr": "",
+    "build_exit": 0,
+    "source_sha256": "ef1a3ee720f3db3d19dbfb8c40aa8d0eab4b990543563f85c6857c65eb6bf1e0",
+    "build_argv": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_80180D0C.o"
+    ],
+    "objdiff_argv": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_80180D0C",
+      "-o",
+      "reports/GEDE01/intrinsic_copy-6b1aa7cb-32c1-4942-83ee-60cd35d8db23.json",
+      "--format",
+      "json-pretty",
+      "fn_80180D0C"
+    ],
+    "cwd": "eternal-darkness-decomp"
+  },
+  {
+    "name": "inline_defaults",
+    "score": 59.692307,
+    "size": "208",
+    "source": "typedef unsigned char u8;\ntypedef signed char s8;\ntypedef unsigned short u16;\ntypedef unsigned int u32;\n\ntypedef struct Triple {\n    u32 x;\n    u32 y;\n    u32 z;\n} Triple;\n\ntypedef struct Object {\n    u8 first;\n    u8 second;\n    u8 third;\n    s8 offset;\n    u16 size;\n    u16 field_06;\n    u16 field_08;\n    u8 pad_0A[6];\n    u32 field_10;\n    u8 field_14;\n    u8 pad_15;\n    u8 field_16;\n    u8 field_17;\n    u8 field_18;\n    u8 pad_19;\n    u16 field_1A;\n    u16 field_1C;\n    u8 pad_1E[2];\n    u16 field_20;\n    u8 pad_22[2];\n    u16 field_24;\n    u16 field_26;\n    u16 field_28;\n    u8 pad_2A[2];\n    float field_2C;\n    u8 pad_30[0x18];\n    Triple field_48;\n} Object;\n\nextern const Triple lbl_8023B018;\nextern u8 lbl_802FC5BC[];\nextern const float lbl_80650948;\n\nstatic inline void initialize(Object* object, Triple value, u8 first, u8 third, s8 offset, u16 size, u16 f06, u16 f08, u16 zero, u16 f1c, u8 f14, u16 one, u16 f1a, u8 f16, u8 f18)\n{\n    object->first = first;\n    object->second = first;\n    object->third = third;\n    object->offset = offset;\n    object->size = size;\n    object->field_06 = f06;\n    object->field_08 = f08;\n    object->field_10 = *(u32*)(lbl_802FC5BC + 0xC);\n    object->field_24 = zero;\n    object->field_26 = zero;\n    object->field_28 = zero;\n    object->field_1C = f1c;\n    object->field_14 = f14;\n    object->field_20 = one;\n    object->field_1A = f1a;\n    object->field_16 = f16;\n    object->field_2C = lbl_80650948;\n    object->field_17 = one;\n    object->field_18 = f18;\n    object->field_48 = value;\n}\n\nvoid fn_80180D0C(Object* object)\n{\n    initialize(object, lbl_8023B018, 0x10, 0xFA, -10, 0x34, 0xE1, 0x64, 0, 0x12C, 2, 1, 0x3F, 4, 0x60);\n}\n",
+    "raw_output": "eternal-darkness-decomp/reports/GEDE01/inline_defaults-6b1aa7cb-32c1-4942-83ee-60cd35d8db23.json",
+    "build_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_80180D0C.o\n",
+    "build_stderr": "",
+    "build_exit": 0,
+    "source_sha256": "59634691407dde75116f91fdde876618e0922b40dd265ef0fefeed570750871b",
+    "build_argv": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_80180D0C.o"
+    ],
+    "objdiff_argv": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_80180D0C",
+      "-o",
+      "reports/GEDE01/inline_defaults-6b1aa7cb-32c1-4942-83ee-60cd35d8db23.json",
+      "--format",
+      "json-pretty",
+      "fn_80180D0C"
+    ],
+    "cwd": "eternal-darkness-decomp"
+  }
+]

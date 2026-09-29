@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "assignment_id": "ba59f922-4973-4a79-85c9-e8ef4b1bb791",
+  "target": "fn_800614A8",
+  "compiler": "GC/1.3",
+  "source": "eternal-darkness-decomp/src/game/game_fn_800614A8.c",
+  "hypothesis": "The m2c scalar locals at offsets 0x2C..0x90 recover several adjacent three-word vectors, two-word pairs, and one six-word call-argument aggregate as independent scalars. Restoring those aggregate types should inhibit invalid stack-slot coalescing and move MWCC's frame and save set toward retail.",
+  "source_change": {
+    "summary": "Retained the preserved byte-addressed lbl_80243C30 base recovery, then reconstructed seven three-word temporary aggregates, two adjacent pairs, and the six-word call-argument aggregate.",
+    "measured_effect": "Against the correctly measured preserved canonical baseline of 67.95042%, aggregate recovery improved canonical similarity to 69.30645%. The generated frame grew from 0xA0 to 0xF0, toward retail's 0x130, and the generated save set moved from r14-r31 to retail's r15-r31."
+  },
+  "canonical": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_800614A8 -o reports/GEDE01/canonical-ba59f922-4973-4a79-85c9-e8ef4b1bb791.json --format json-pretty -c function_reloc_diffs=none fn_800614A8",
+    "raw_output": "INFO Writing to reports/GEDE01/canonical-ba59f922-4973-4a79-85c9-e8ef4b1bb791.json",
+    "raw_file": "eternal-darkness-decomp/reports/GEDE01/canonical-ba59f922-4973-4a79-85c9-e8ef4b1bb791.json",
+    "sha256": "f9069292ac71eb87c47ae28bf8f9636b75c357955af4d7c56f9e0896d5fef520",
+    "match_percent": 69.30645,
+    "retail_text_size": 6696,
+    "generated_text_size": 6976
+  },
+  "relocation_strict": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_800614A8 -o reports/GEDE01/strict-ba59f922-4973-4a79-85c9-e8ef4b1bb791.json --format json-pretty -c function_reloc_diffs=name_address fn_800614A8",
+    "raw_output": "INFO Writing to reports/GEDE01/strict-ba59f922-4973-4a79-85c9-e8ef4b1bb791.json",
+    "raw_file": "eternal-darkness-decomp/reports/GEDE01/strict-ba59f922-4973-4a79-85c9-e8ef4b1bb791.json",
+    "sha256": "2f28960440b2013ed81a7cd405032f419aea582d5b7a69a6d84064f72027963b",
+    "match_percent": 69.29152,
+    "result": "NonMatching; this independent name/address relocation comparison is intentionally reported separately from the canonical score."
+  },
+  "relocations": {
+    "command": "build/binutils/powerpc-eabi-readelf -rW build/GEDE01/obj/game/game_fn_800614A8.o; build/binutils/powerpc-eabi-readelf -rW build/GEDE01/src/game/game_fn_800614A8.o",
+    "raw_output": "retail .rela.text: 299 entries; generated .rela.text: 301 entries. Both begin at offsets 0xA/0x2A/0x2C/0x38/0x48 with targets lbl_80243C30 HA, lbl_80243C30 LO, fn_80200C10, fn_80201BC8, fn_80201B8C, all addend 0."
+  },
+  "build": {
+    "command": "python3 configure.py && .tools/bin/ninja -j2",
+    "raw_output": "build/GEDE01/main.dol: OK; Game Code 94.29% fuzzy, 79.93% matched, 79.63% linked."
+  },
+  "dol_sha1": {
+    "command": "sha1sum orig/GEDE01/sys/main.dol build/GEDE01/main.dol; cmp -s orig/GEDE01/sys/main.dol build/GEDE01/main.dol",
+    "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f for both files; cmp_exit=0",
+    "note": "Because this translation unit remains registered NonMatching, the link uses the extracted retail object; this verifies the repository build gate, not the candidate reconstruction."
+  },
+  "legal_audit": {
+    "command": "python3 tools/legal_audit.py",
+    "raw_output": "legal audit passed (22535 tracked project files inspected)"
+  },
+  "divergence": "Canonical is 69.30645% and relocation-strict is 69.29152%, with 6696 retail bytes versus 6976 generated. Aggregate recovery moved the frame from 0xA0 to 0xF0 and corrected the save set to r15-r31, but retail still uses a 0x130 frame and saves at +0xEC versus generated +0xAC. Remaining unrecovered aggregate/local layout accounts for the 0x40 frame gap; irregular switch control flow and later relocation sequence/count remain different (299 retail versus 301 generated).",
+  "worktree_note": "CLAUDE.md was already modified by the harness at assignment start and was intentionally neither edited nor staged."
+}

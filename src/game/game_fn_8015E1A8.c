@@ -8,28 +8,27 @@ typedef struct StreamState {
     u8 pad04[0xC];
     u32 ring_start;
     u32 ring_end;
+    u32 unknown18;
     u32 cursor;
-    u32 produced;
     u32 request;
-    u32 consumed;
+    u32 produced;
     u32 limit;
+    u32 unknown2C;
     u32 previous;
-    u32 position;
-    u32 bound;
-    u32 source;
     u32 staging;
+    u32 source;
     u32 active;
-    void* manager;
     int requested_id;
     u32 result;
     u32 bank;
+    void* manager;
 } StreamState;
 
 extern StreamState lbl_805BB1E0;
-extern u32 lbl_806477A0[];
+__declspec(section ".sdata") extern u32 lbl_8064D160[];
 extern char lbl_8024F1D8[];
 extern char lbl_8024F200[];
-extern u8 lbl_8060A240[];
+extern u8 lbl_805FA240[];
 extern u8 lbl_805E28FC[];
 extern void fn_80155BB0(const char*, const char*, ...);
 extern u32 fn_801332F0(void*, int);
@@ -43,77 +42,91 @@ extern void fn_8015C020(int);
 
 u32 fn_8015E1A8(int id)
 {
+    volatile StreamState* state = &lbl_805BB1E0;
+    u32 return_value = 0;
     u32 size;
     u32 old_staging;
     u32 buffer;
     int interrupts;
+    int requested_id = id;
 
-    if (lbl_805BB1E0.requested_id < id) {
-        fn_80155BB0(lbl_8024F1D8, lbl_8024F200, id,
-                    lbl_805BB1E0.requested_id);
-        return 0;
+    if (state->requested_id > requested_id) {
+        fn_80155BB0(lbl_8024F1D8, lbl_8024F200, requested_id,
+                    state->requested_id);
+        goto done;
     }
-    if (lbl_805BB1E0.requested_id == id)
-        return lbl_805BB1E0.result;
+    if (state->requested_id == requested_id) {
+        return_value = state->result;
+        goto done;
+    }
 
-    lbl_805BB1E0.requested_id;
-    lbl_805BB1E0.bank ^= 1;
-    size = fn_801332F0(lbl_805BB1E0.manager, id);
-    old_staging = lbl_805BB1E0.staging;
-    buffer = lbl_806477A0[lbl_805BB1E0.bank];
+    state->requested_id;
+    {
+        u32 bank = state->bank;
+        state->bank = bank ^ 1;
+    }
+    size = fn_801332F0(state->manager, requested_id);
+    old_staging = state->staging;
+    buffer = lbl_8064D160[state->bank];
     fn_8015E0A0(size);
-    fn_8015B274(size, old_staging, buffer, 0x4B904, lbl_8060A240,
+    fn_8015B274(size, old_staging, buffer, 0x4B904, lbl_805FA240,
                 0x400, lbl_805E28FC, 1);
 
     interrupts = OSDisableInterrupts();
-    lbl_805BB1E0.requested_id = id;
-    lbl_805BB1E0.result = buffer;
-    old_staging = lbl_805BB1E0.result;
-    id = lbl_805BB1E0.active;
-    lbl_805BB1E0.active = lbl_805BB1E0.staging;
-    lbl_805BB1E0.staging += size;
-    lbl_805BB1E0.source += size;
-    lbl_805BB1E0.cursor = (lbl_805BB1E0.cursor + 31) & ~31;
-    lbl_805BB1E0.staging = (lbl_805BB1E0.staging + 31) & ~31;
-    if (lbl_805BB1E0.staging >= lbl_805BB1E0.ring_end) {
-        lbl_805BB1E0.staging = lbl_805BB1E0.ring_start +
-                              lbl_805BB1E0.staging - lbl_805BB1E0.ring_end;
-        lbl_805BB1E0.previous += lbl_805BB1E0.ring_end -
-                                lbl_805BB1E0.ring_start;
+    state->requested_id = requested_id;
+    state->result = buffer;
+    return_value = state->result;
+    requested_id = state->active;
+    state->active = state->staging;
+    state->staging += size;
+    state->source += size;
+    state->cursor = (state->cursor + 31) & ~31;
+    state->staging = (state->staging + 31) & ~31;
+    if (state->staging >= state->ring_end) {
+        u32 end = state->ring_end;
+        u32 staging = state->staging;
+        u32 start = state->ring_start;
+        state->staging = start + (staging - end);
+        state->previous += state->ring_end - state->ring_start;
     }
-    lbl_805BB1E0.staging = (lbl_805BB1E0.staging + 31) & ~31;
-    lbl_805BB1E0.source = (lbl_805BB1E0.source + 31) & ~31;
+    state->staging = (state->staging + 31) & ~31;
+    state->source = (state->source + 31) & ~31;
     fn_80158E84(1);
     if (lbl_805BB1E0.produced - lbl_805BB1E0.cursor > 0x5B160) {
-        lbl_805BB1E0.read_state = 3;
-        lbl_805BB1E0.state = 3;
-    } else if (lbl_805BB1E0.produced != lbl_805BB1E0.cursor) {
-        lbl_805BB1E0.read_state = 2;
-        lbl_805BB1E0.state = 3;
-    } else if (lbl_805BB1E0.state != 5) {
-        lbl_805BB1E0.read_state = 1;
-        lbl_805BB1E0.state = 4;
+        state->read_state = 3;
+        state->state = 3;
+    } else if (((volatile StreamState*)&lbl_805BB1E0)->produced !=
+               ((volatile StreamState*)&lbl_805BB1E0)->cursor) {
+        state->read_state = 2;
+        state->state = 3;
+    } else if (state->state != 5) {
+        state->read_state = 1;
+        state->state = 4;
     }
-    if (id != 0 && lbl_805BB1E0.produced < lbl_805BB1E0.limit) {
-        if (lbl_805BB1E0.request > (u32)id) {
-            lbl_805BB1E0.produced += (u32)id - lbl_805BB1E0.ring_start +
-                                     lbl_805BB1E0.ring_end - lbl_805BB1E0.request;
-            lbl_805BB1E0.request = id;
+    if ((u32)requested_id != 0 && state->produced < state->limit) {
+        if (state->request > (u32)requested_id) {
+            u32 produced = state->produced;
+            u32 request = state->request;
+            u32 end = state->ring_end;
+            u32 start = state->ring_start;
+            state->produced = (end - request) +
+                              ((u32)requested_id - start + produced);
+            state->request = requested_id;
         } else {
-            lbl_805BB1E0.produced += (u32)id - lbl_805BB1E0.request;
-            lbl_805BB1E0.request = id;
+            state->produced += (u32)requested_id - state->request;
+            state->request = requested_id;
         }
-        if (lbl_805BB1E0.produced > lbl_805BB1E0.limit) {
-            u32 excess = lbl_805BB1E0.produced - lbl_805BB1E0.limit;
-            lbl_805BB1E0.produced -= excess;
-            lbl_805BB1E0.request -= excess;
-            if (lbl_805BB1E0.request < lbl_805BB1E0.ring_start)
-                lbl_805BB1E0.request += lbl_805BB1E0.ring_end -
-                                        lbl_805BB1E0.ring_start;
+        if (state->produced > state->limit) {
+            u32 excess = state->produced - state->limit;
+            state->produced -= excess;
+            state->request -= excess;
+            if (state->request < state->ring_start)
+                state->request += state->ring_end - state->ring_start;
         }
     }
     OSRestoreInterrupts(interrupts);
-    if (fn_8015E548(lbl_805BB1E0.read_state))
+    if (fn_8015E548(state->read_state))
         fn_8015C020(0);
-    return old_staging;
+done:
+    return return_value;
 }

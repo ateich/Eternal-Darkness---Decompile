@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "assignment_id": "99c28e11-41cb-47df-9729-339ef60388c8",
+  "attempt": 5,
+  "base_commit": "a05db5769effdbd86eb8cbd0c870dcf3e9997b9f",
+  "target": "fn_801F7AF8",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-99c28e11-41cb-47df-9729-339ef60388c8.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-99c28e11-41cb-47df-9729-339ef60388c8-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-99c28e11-41cb-47df-9729-339ef60388c8.json",
+    "eternal-darkness-decomp/reports/GEDE01/verification-99c28e11-41cb-47df-9729-339ef60388c8.json"
+  ],
+  "divergence": "Canonical and function_reloc_diffs=all both measure 83.25373%, improved from the recovered 72.01492% baseline. Candidate and retail are both 268 bytes with a 0x30 frame and saves/restores of r28-r31. The typed inline element-accessor hypothesis retains first in r29, but second/third occupy r28/r30 instead of retail r30/r28. GC/1.3 folds the first address to +0xBB0 rather than separate +0x660/+0x550 steps, rematerializes lbl_8063C6B8 three times after its initial materialization, folds link/vector/scalar accesses to +0xC24/+0xBF8/+0xBE0, uses third+0x88 rather than base+0xD48 for the second vector argument, and differs in initial vector-copy register scheduling. One NonMatching C translation unit is retained. All 48 experiments preserve exact source, commands and raw outputs (byte-identical raw objdiff files deduplicated). Full configure/build passed; rebuilt DOL SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f is retail-backed because the candidate remains NonMatching."
+}

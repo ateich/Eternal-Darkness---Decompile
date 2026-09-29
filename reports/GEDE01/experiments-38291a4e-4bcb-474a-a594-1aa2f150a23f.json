@@ -1,0 +1,1724 @@
+{
+  "hypothesis": "Late elimination of pointer-distance or multiword subtraction may preserve distinct registers for dead volatile operands. Only the dead ternary arm is changed.",
+  "variants": [
+    {
+      "variant": "baseline",
+      "replacement": ": lbl_805BB1E0.boundary - lbl_805BB1E0.read;",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 99.9375,
+      "target_size": "320",
+      "generated_size": "320",
+      "measurement_output": "variant=baseline retail_bytes=320 generated_bytes=320 match_percent=99.9375",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "180",
+            "formatted": "lwz r3, 0x1c(r5)"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "byte_pointer_difference",
+      "replacement": ": (char *)lbl_805BB1E0.boundary - (char *)lbl_805BB1E0.read;",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 98.5625,
+      "target_size": "320",
+      "generated_size": "316",
+      "measurement_output": "variant=byte_pointer_difference retail_bytes=320 generated_bytes=316 match_percent=98.5625",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "172",
+            "formatted": "bge 0xb4"
+          },
+          "generated": {
+            "address": "172",
+            "formatted": "blt 0xe8"
+          }
+        },
+        {
+          "target": {
+            "address": "176",
+            "formatted": "b 0xec"
+          },
+          "generated": {
+            "address": null,
+            "formatted": null
+          }
+        },
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "176",
+            "formatted": "lwz r3, 0x1c(r5)"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "wide_unsigned_subtract",
+      "replacement": ": (unsigned long long)lbl_805BB1E0.boundary - (unsigned long long)lbl_805BB1E0.read;",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 98.5625,
+      "target_size": "320",
+      "generated_size": "316",
+      "measurement_output": "variant=wide_unsigned_subtract retail_bytes=320 generated_bytes=316 match_percent=98.5625",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "172",
+            "formatted": "bge 0xb4"
+          },
+          "generated": {
+            "address": "172",
+            "formatted": "blt 0xe8"
+          }
+        },
+        {
+          "target": {
+            "address": "176",
+            "formatted": "b 0xec"
+          },
+          "generated": {
+            "address": null,
+            "formatted": null
+          }
+        },
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "176",
+            "formatted": "lwz r3, 0x1c(r5)"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "wide_signed_subtract",
+      "replacement": ": (long long)lbl_805BB1E0.boundary - (long long)lbl_805BB1E0.read;",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 98.5625,
+      "target_size": "320",
+      "generated_size": "316",
+      "measurement_output": "variant=wide_signed_subtract retail_bytes=320 generated_bytes=316 match_percent=98.5625",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "172",
+            "formatted": "bge 0xb4"
+          },
+          "generated": {
+            "address": "172",
+            "formatted": "blt 0xe8"
+          }
+        },
+        {
+          "target": {
+            "address": "176",
+            "formatted": "b 0xec"
+          },
+          "generated": {
+            "address": null,
+            "formatted": null
+          }
+        },
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "176",
+            "formatted": "lwz r3, 0x1c(r5)"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "wide_signed_operands",
+      "replacement": ": (long long)(int)lbl_805BB1E0.boundary - (long long)(int)lbl_805BB1E0.read;",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 98.5625,
+      "target_size": "320",
+      "generated_size": "316",
+      "measurement_output": "variant=wide_signed_operands retail_bytes=320 generated_bytes=316 match_percent=98.5625",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "172",
+            "formatted": "bge 0xb4"
+          },
+          "generated": {
+            "address": "172",
+            "formatted": "blt 0xe8"
+          }
+        },
+        {
+          "target": {
+            "address": "176",
+            "formatted": "b 0xec"
+          },
+          "generated": {
+            "address": null,
+            "formatted": null
+          }
+        },
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "176",
+            "formatted": "lwz r3, 0x1c(r5)"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "word_pointer_difference",
+      "replacement": ": (u32 *)lbl_805BB1E0.boundary - (u32 *)lbl_805BB1E0.read;",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 98.5625,
+      "target_size": "320",
+      "generated_size": "316",
+      "measurement_output": "variant=word_pointer_difference retail_bytes=320 generated_bytes=316 match_percent=98.5625",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "172",
+            "formatted": "bge 0xb4"
+          },
+          "generated": {
+            "address": "172",
+            "formatted": "blt 0xe8"
+          }
+        },
+        {
+          "target": {
+            "address": "176",
+            "formatted": "b 0xec"
+          },
+          "generated": {
+            "address": null,
+            "formatted": null
+          }
+        },
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "176",
+            "formatted": "lwz r3, 0x1c(r5)"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "unsigned_byte_pointer_distance",
+      "source_delta": "--- \n+++ \n@@ -37,7 +37,7 @@\n                      : lbl_805BB1E0.write - lbl_805BB1E0.cursor;\n         unused = 0x10000U < lbl_805BB1E0.boundary - lbl_805BB1E0.read\n                      ? 0x10000\n-                     : lbl_805BB1E0.boundary - lbl_805BB1E0.read;\n+                     : (u32)((char *)lbl_805BB1E0.boundary - (char *)lbl_805BB1E0.read);\n     } else {\n         amount = 0x10000U < lbl_805BB1E0.end - lbl_805BB1E0.cursor\n                      ? 0x10000\n",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 98.5625,
+      "target_size": "320",
+      "generated_size": "316",
+      "measurement_output": "variant=unsigned_byte_pointer_distance retail_bytes=320 generated_bytes=316 match_percent=98.5625",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "172",
+            "formatted": "bge 0xb4"
+          },
+          "generated": {
+            "address": "172",
+            "formatted": "blt 0xe8"
+          }
+        },
+        {
+          "target": {
+            "address": "176",
+            "formatted": "b 0xec"
+          },
+          "generated": {
+            "address": null,
+            "formatted": null
+          }
+        },
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "176",
+            "formatted": "lwz r3, 0x1c(r5)"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "narrowed_wide_unsigned_difference",
+      "source_delta": "--- \n+++ \n@@ -37,7 +37,7 @@\n                      : lbl_805BB1E0.write - lbl_805BB1E0.cursor;\n         unused = 0x10000U < lbl_805BB1E0.boundary - lbl_805BB1E0.read\n                      ? 0x10000\n-                     : lbl_805BB1E0.boundary - lbl_805BB1E0.read;\n+                     : (u32)((unsigned long long)lbl_805BB1E0.boundary - (unsigned long long)lbl_805BB1E0.read);\n     } else {\n         amount = 0x10000U < lbl_805BB1E0.end - lbl_805BB1E0.cursor\n                      ? 0x10000\n",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 98.5625,
+      "target_size": "320",
+      "generated_size": "316",
+      "measurement_output": "variant=narrowed_wide_unsigned_difference retail_bytes=320 generated_bytes=316 match_percent=98.5625",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "172",
+            "formatted": "bge 0xb4"
+          },
+          "generated": {
+            "address": "172",
+            "formatted": "blt 0xe8"
+          }
+        },
+        {
+          "target": {
+            "address": "176",
+            "formatted": "b 0xec"
+          },
+          "generated": {
+            "address": null,
+            "formatted": null
+          }
+        },
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "176",
+            "formatted": "lwz r3, 0x1c(r5)"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "narrowed_wide_signed_difference",
+      "source_delta": "--- \n+++ \n@@ -37,7 +37,7 @@\n                      : lbl_805BB1E0.write - lbl_805BB1E0.cursor;\n         unused = 0x10000U < lbl_805BB1E0.boundary - lbl_805BB1E0.read\n                      ? 0x10000\n-                     : lbl_805BB1E0.boundary - lbl_805BB1E0.read;\n+                     : (u32)((long long)lbl_805BB1E0.boundary - (long long)lbl_805BB1E0.read);\n     } else {\n         amount = 0x10000U < lbl_805BB1E0.end - lbl_805BB1E0.cursor\n                      ? 0x10000\n",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 98.5625,
+      "target_size": "320",
+      "generated_size": "316",
+      "measurement_output": "variant=narrowed_wide_signed_difference retail_bytes=320 generated_bytes=316 match_percent=98.5625",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "172",
+            "formatted": "bge 0xb4"
+          },
+          "generated": {
+            "address": "172",
+            "formatted": "blt 0xe8"
+          }
+        },
+        {
+          "target": {
+            "address": "176",
+            "formatted": "b 0xec"
+          },
+          "generated": {
+            "address": null,
+            "formatted": null
+          }
+        },
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "176",
+            "formatted": "lwz r3, 0x1c(r5)"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "unsigned_word_pointer_distance",
+      "source_delta": "--- \n+++ \n@@ -37,7 +37,7 @@\n                      : lbl_805BB1E0.write - lbl_805BB1E0.cursor;\n         unused = 0x10000U < lbl_805BB1E0.boundary - lbl_805BB1E0.read\n                      ? 0x10000\n-                     : lbl_805BB1E0.boundary - lbl_805BB1E0.read;\n+                     : (u32)((u32 *)lbl_805BB1E0.boundary - (u32 *)lbl_805BB1E0.read);\n     } else {\n         amount = 0x10000U < lbl_805BB1E0.end - lbl_805BB1E0.cursor\n                      ? 0x10000\n",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 98.5625,
+      "target_size": "320",
+      "generated_size": "316",
+      "measurement_output": "variant=unsigned_word_pointer_distance retail_bytes=320 generated_bytes=316 match_percent=98.5625",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "172",
+            "formatted": "bge 0xb4"
+          },
+          "generated": {
+            "address": "172",
+            "formatted": "blt 0xe8"
+          }
+        },
+        {
+          "target": {
+            "address": "176",
+            "formatted": "b 0xec"
+          },
+          "generated": {
+            "address": null,
+            "formatted": null
+          }
+        },
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "176",
+            "formatted": "lwz r3, 0x1c(r5)"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "dead_struct",
+      "source_delta": "--- \n+++ \n@@ -20,6 +20,7 @@\n     int interrupts;\n     int amount;\n     int unused;\n+    struct { int distance; } dead;\n \n     interrupts = OSDisableInterrupts();\n     if (lbl_805BB1E0.read == lbl_805BB1E0.limit) {\n@@ -35,7 +36,7 @@\n         amount = 0x10000U < lbl_805BB1E0.write - lbl_805BB1E0.cursor\n                      ? 0x10000\n                      : lbl_805BB1E0.write - lbl_805BB1E0.cursor;\n-        unused = 0x10000U < lbl_805BB1E0.boundary - lbl_805BB1E0.read\n+        dead.distance = 0x10000U < lbl_805BB1E0.boundary - lbl_805BB1E0.read\n                      ? 0x10000\n                      : lbl_805BB1E0.boundary - lbl_805BB1E0.read;\n     } else {\n",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 99.9375,
+      "target_size": "320",
+      "generated_size": "320",
+      "measurement_output": "variant=dead_struct retail_bytes=320 generated_bytes=320 match_percent=99.9375",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "180",
+            "formatted": "lwz r3, 0x1c(r5)"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "dead_union",
+      "source_delta": "--- \n+++ \n@@ -20,6 +20,7 @@\n     int interrupts;\n     int amount;\n     int unused;\n+    union { int distance; u32 unsigned_distance; } dead;\n \n     interrupts = OSDisableInterrupts();\n     if (lbl_805BB1E0.read == lbl_805BB1E0.limit) {\n@@ -35,7 +36,7 @@\n         amount = 0x10000U < lbl_805BB1E0.write - lbl_805BB1E0.cursor\n                      ? 0x10000\n                      : lbl_805BB1E0.write - lbl_805BB1E0.cursor;\n-        unused = 0x10000U < lbl_805BB1E0.boundary - lbl_805BB1E0.read\n+        dead.distance = 0x10000U < lbl_805BB1E0.boundary - lbl_805BB1E0.read\n                      ? 0x10000\n                      : lbl_805BB1E0.boundary - lbl_805BB1E0.read;\n     } else {\n",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 99.9375,
+      "target_size": "320",
+      "generated_size": "320",
+      "measurement_output": "variant=dead_union retail_bytes=320 generated_bytes=320 match_percent=99.9375",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "180",
+            "formatted": "lwz r3, 0x1c(r5)"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "dead_array",
+      "source_delta": "--- \n+++ \n@@ -20,6 +20,7 @@\n     int interrupts;\n     int amount;\n     int unused;\n+    int dead[2];\n \n     interrupts = OSDisableInterrupts();\n     if (lbl_805BB1E0.read == lbl_805BB1E0.limit) {\n@@ -35,7 +36,7 @@\n         amount = 0x10000U < lbl_805BB1E0.write - lbl_805BB1E0.cursor\n                      ? 0x10000\n                      : lbl_805BB1E0.write - lbl_805BB1E0.cursor;\n-        unused = 0x10000U < lbl_805BB1E0.boundary - lbl_805BB1E0.read\n+        dead[0] = 0x10000U < lbl_805BB1E0.boundary - lbl_805BB1E0.read\n                      ? 0x10000\n                      : lbl_805BB1E0.boundary - lbl_805BB1E0.read;\n     } else {\n",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 99.9375,
+      "target_size": "320",
+      "generated_size": "320",
+      "measurement_output": "variant=dead_array retail_bytes=320 generated_bytes=320 match_percent=99.9375",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "180",
+            "formatted": "lwz r3, 0x1c(r5)"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "member_volatile",
+      "source_delta": "--- \n+++ \n@@ -2,15 +2,15 @@\n \n typedef struct StreamState {\n     unsigned char pad0[0x14];\n-    u32 end;\n-    u32 cursor;\n-    u32 read;\n-    u32 write;\n-    u32 boundary;\n-    u32 limit;\n+    volatile u32 end;\n+    volatile u32 cursor;\n+    volatile u32 read;\n+    volatile u32 write;\n+    volatile u32 boundary;\n+    volatile u32 limit;\n } StreamState;\n \n-extern volatile StreamState lbl_805BB1E0;\n+extern StreamState lbl_805BB1E0;\n extern int OSDisableInterrupts(void);\n extern void OSRestoreInterrupts(int);\n \n",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 90.9875,
+      "target_size": "320",
+      "generated_size": "304",
+      "measurement_output": "variant=member_volatile retail_bytes=320 generated_bytes=304 match_percent=90.9875",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "28",
+            "formatted": "addi r6, r4, lbl_805BB1E0@l"
+          },
+          "generated": {
+            "address": "28",
+            "formatted": "addi r4, r4, lbl_805BB1E0@l"
+          }
+        },
+        {
+          "target": {
+            "address": "32",
+            "formatted": "lwz r5, 0x1c(r6)"
+          },
+          "generated": {
+            "address": "32",
+            "formatted": "lwz r6, 0x1c(r4)"
+          }
+        },
+        {
+          "target": {
+            "address": "36",
+            "formatted": "lwz r4, 0x28(r6)"
+          },
+          "generated": {
+            "address": "36",
+            "formatted": "lwz r5, 0x28(r4)"
+          }
+        },
+        {
+          "target": {
+            "address": "40",
+            "formatted": "cmplw r5, r4"
+          },
+          "generated": {
+            "address": "40",
+            "formatted": "cmplw r6, r5"
+          }
+        },
+        {
+          "target": {
+            "address": "60",
+            "formatted": "lwz r5, 0x1c(r6)"
+          },
+          "generated": {
+            "address": "60",
+            "formatted": "lwz r6, 0x1c(r4)"
+          }
+        },
+        {
+          "target": {
+            "address": "64",
+            "formatted": "lwz r4, 0x24(r6)"
+          },
+          "generated": {
+            "address": "64",
+            "formatted": "lwz r5, 0x24(r4)"
+          }
+        },
+        {
+          "target": {
+            "address": "68",
+            "formatted": "cmplw r5, r4"
+          },
+          "generated": {
+            "address": "68",
+            "formatted": "cmplw r6, r5"
+          }
+        },
+        {
+          "target": {
+            "address": "88",
+            "formatted": "lwz r4, 0x20(r6)"
+          },
+          "generated": {
+            "address": "88",
+            "formatted": "lwz r5, 0x20(r4)"
+          }
+        },
+        {
+          "target": {
+            "address": "92",
+            "formatted": "lwz r3, 0x18(r6)"
+          },
+          "generated": {
+            "address": "92",
+            "formatted": "lwz r3, 0x18(r4)"
+          }
+        },
+        {
+          "target": {
+            "address": "96",
+            "formatted": "cmplw r4, r3"
+          },
+          "generated": {
+            "address": "96",
+            "formatted": "cmplw r5, r3"
+          }
+        },
+        {
+          "target": {
+            "address": "104",
+            "formatted": "lwz r4, 0x18(r6)"
+          },
+          "generated": {
+            "address": "104",
+            "formatted": "lwz r5, 0x18(r4)"
+          }
+        },
+        {
+          "target": {
+            "address": "112",
+            "formatted": "lwz r3, 0x20(r6)"
+          },
+          "generated": {
+            "address": "112",
+            "formatted": "lwz r3, 0x20(r4)"
+          }
+        },
+        {
+          "target": {
+            "address": "116",
+            "formatted": "subf r3, r4, r3"
+          },
+          "generated": {
+            "address": "116",
+            "formatted": "subf r3, r5, r3"
+          }
+        },
+        {
+          "target": {
+            "address": "132",
+            "formatted": "lwz r4, 0x18(r6)"
+          },
+          "generated": {
+            "address": "132",
+            "formatted": "lwz r5, 0x18(r4)"
+          }
+        },
+        {
+          "target": {
+            "address": "136",
+            "formatted": "lwz r3, 0x20(r6)"
+          },
+          "generated": {
+            "address": "136",
+            "formatted": "lwz r3, 0x20(r4)"
+          }
+        },
+        {
+          "target": {
+            "address": "140",
+            "formatted": "subf r7, r4, r3"
+          },
+          "generated": {
+            "address": "140",
+            "formatted": "subf r7, r5, r3"
+          }
+        },
+        {
+          "target": {
+            "address": "144",
+            "formatted": "lis r3, lbl_805BB1E0@ha"
+          },
+          "generated": {
+            "address": "144",
+            "formatted": "lwz r5, 0x1c(r4)"
+          }
+        },
+        {
+          "target": {
+            "address": "152",
+            "formatted": "addi r5, r3, lbl_805BB1E0@l"
+          },
+          "generated": {
+            "address": null,
+            "formatted": null
+          }
+        },
+        {
+          "target": {
+            "address": "156",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "152",
+            "formatted": "lwz r3, 0x24(r4)"
+          }
+        },
+        {
+          "target": {
+            "address": "160",
+            "formatted": "lwz r3, 0x24(r5)"
+          },
+          "generated": {
+            "address": null,
+            "formatted": null
+          }
+        },
+        {
+          "target": {
+            "address": "164",
+            "formatted": "subf r3, r4, r3"
+          },
+          "generated": {
+            "address": "156",
+            "formatted": "subf r3, r5, r3"
+          }
+        },
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "172",
+            "formatted": "lwz r3, 0x1c(r4)"
+          }
+        },
+        {
+          "target": {
+            "address": "184",
+            "formatted": "lwz r3, 0x24(r5)"
+          },
+          "generated": {
+            "address": "176",
+            "formatted": "lwz r3, 0x24(r4)"
+          }
+        },
+        {
+          "target": {
+            "address": "192",
+            "formatted": "lwz r4, 0x18(r6)"
+          },
+          "generated": {
+            "address": "184",
+            "formatted": "lwz r5, 0x18(r4)"
+          }
+        },
+        {
+          "target": {
+            "address": "196",
+            "formatted": "lis r5, 0x1"
+          },
+          "generated": {
+            "address": "188",
+            "formatted": "lis r6, 0x1"
+          }
+        },
+        {
+          "target": {
+            "address": "200",
+            "formatted": "lwz r3, 0x14(r6)"
+          },
+          "generated": {
+            "address": "192",
+            "formatted": "lwz r3, 0x14(r4)"
+          }
+        },
+        {
+          "target": {
+            "address": "204",
+            "formatted": "subf r3, r4, r3"
+          },
+          "generated": {
+            "address": "196",
+            "formatted": "subf r3, r5, r3"
+          }
+        },
+        {
+          "target": {
+            "address": "208",
+            "formatted": "cmplw r5, r3"
+          },
+          "generated": {
+            "address": "200",
+            "formatted": "cmplw r6, r3"
+          }
+        },
+        {
+          "target": {
+            "address": "220",
+            "formatted": "lwz r4, 0x18(r6)"
+          },
+          "generated": {
+            "address": "212",
+            "formatted": "lwz r5, 0x18(r4)"
+          }
+        },
+        {
+          "target": {
+            "address": "224",
+            "formatted": "lwz r3, 0x14(r6)"
+          },
+          "generated": {
+            "address": "216",
+            "formatted": "lwz r3, 0x14(r4)"
+          }
+        },
+        {
+          "target": {
+            "address": "228",
+            "formatted": "subf r5, r4, r3"
+          },
+          "generated": {
+            "address": "220",
+            "formatted": "subf r6, r5, r3"
+          }
+        },
+        {
+          "target": {
+            "address": "232",
+            "formatted": "mr r7, r5"
+          },
+          "generated": {
+            "address": "224",
+            "formatted": "mr r7, r6"
+          }
+        },
+        {
+          "target": {
+            "address": "236",
+            "formatted": "lis r3, lbl_805BB1E0@ha"
+          },
+          "generated": {
+            "address": null,
+            "formatted": null
+          }
+        },
+        {
+          "target": {
+            "address": "240",
+            "formatted": "addi r5, r3, lbl_805BB1E0@l"
+          },
+          "generated": {
+            "address": null,
+            "formatted": null
+          }
+        },
+        {
+          "target": {
+            "address": "244",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "228",
+            "formatted": "lwz r5, 0x1c(r4)"
+          }
+        },
+        {
+          "target": {
+            "address": "248",
+            "formatted": "lwz r3, 0x28(r5)"
+          },
+          "generated": {
+            "address": "232",
+            "formatted": "lwz r3, 0x28(r4)"
+          }
+        },
+        {
+          "target": {
+            "address": "252",
+            "formatted": "subf r3, r4, r3"
+          },
+          "generated": {
+            "address": "236",
+            "formatted": "subf r3, r5, r3"
+          }
+        },
+        {
+          "target": {
+            "address": "272",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "256",
+            "formatted": "lwz r5, 0x1c(r4)"
+          }
+        },
+        {
+          "target": {
+            "address": "276",
+            "formatted": "lwz r3, 0x28(r5)"
+          },
+          "generated": {
+            "address": "260",
+            "formatted": "lwz r3, 0x28(r4)"
+          }
+        },
+        {
+          "target": {
+            "address": "280",
+            "formatted": "subf r31, r4, r3"
+          },
+          "generated": {
+            "address": "264",
+            "formatted": "subf r31, r5, r3"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "unsigned_long_fields",
+      "source_delta": "--- \n+++ \n@@ -1,4 +1,4 @@\n-typedef unsigned int u32;\n+typedef unsigned long u32;\n \n typedef struct StreamState {\n     unsigned char pad0[0x14];\n",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 99.9375,
+      "target_size": "320",
+      "generated_size": "320",
+      "measurement_output": "variant=unsigned_long_fields retail_bytes=320 generated_bytes=320 match_percent=99.9375",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "180",
+            "formatted": "lwz r3, 0x1c(r5)"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "enum_fields",
+      "source_delta": "--- \n+++ \n@@ -1,13 +1,14 @@\n typedef unsigned int u32;\n+typedef enum { ZERO = 0, MAX = 0xffffffffU } Distance;\n \n typedef struct StreamState {\n     unsigned char pad0[0x14];\n-    u32 end;\n-    u32 cursor;\n-    u32 read;\n-    u32 write;\n-    u32 boundary;\n-    u32 limit;\n+    Distance end;\n+    Distance cursor;\n+    Distance read;\n+    Distance write;\n+    Distance boundary;\n+    Distance limit;\n } StreamState;\n \n extern volatile StreamState lbl_805BB1E0;\n",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 96.3125,
+      "target_size": "320",
+      "generated_size": "316",
+      "measurement_output": "variant=enum_fields retail_bytes=320 generated_bytes=316 match_percent=96.3125",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "40",
+            "formatted": "cmplw r5, r4"
+          },
+          "generated": {
+            "address": "40",
+            "formatted": "cmpw r5, r4"
+          }
+        },
+        {
+          "target": {
+            "address": "68",
+            "formatted": "cmplw r5, r4"
+          },
+          "generated": {
+            "address": "68",
+            "formatted": "cmpw r5, r4"
+          }
+        },
+        {
+          "target": {
+            "address": "96",
+            "formatted": "cmplw r4, r3"
+          },
+          "generated": {
+            "address": "96",
+            "formatted": "cmpw r4, r3"
+          }
+        },
+        {
+          "target": {
+            "address": "172",
+            "formatted": "bge 0xb4"
+          },
+          "generated": {
+            "address": "172",
+            "formatted": "blt 0xe8"
+          }
+        },
+        {
+          "target": {
+            "address": "176",
+            "formatted": "b 0xec"
+          },
+          "generated": {
+            "address": null,
+            "formatted": null
+          }
+        },
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "176",
+            "formatted": "lwz r3, 0x1c(r5)"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "pointer_fields",
+      "source_delta": "--- \n+++ \n@@ -2,12 +2,12 @@\n \n typedef struct StreamState {\n     unsigned char pad0[0x14];\n-    u32 end;\n-    u32 cursor;\n-    u32 read;\n-    u32 write;\n-    u32 boundary;\n-    u32 limit;\n+    unsigned char *end;\n+    unsigned char *cursor;\n+    unsigned char *read;\n+    unsigned char *write;\n+    unsigned char *boundary;\n+    unsigned char *limit;\n } StreamState;\n \n extern volatile StreamState lbl_805BB1E0;\n",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 98.5625,
+      "target_size": "320",
+      "generated_size": "316",
+      "measurement_output": "variant=pointer_fields retail_bytes=320 generated_bytes=316 match_percent=98.5625",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "172",
+            "formatted": "bge 0xb4"
+          },
+          "generated": {
+            "address": "172",
+            "formatted": "blt 0xe8"
+          }
+        },
+        {
+          "target": {
+            "address": "176",
+            "formatted": "b 0xec"
+          },
+          "generated": {
+            "address": null,
+            "formatted": null
+          }
+        },
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "176",
+            "formatted": "lwz r3, 0x1c(r5)"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "pointer_fields_unsigned_distance",
+      "source_delta": "--- \n+++ \n@@ -2,12 +2,12 @@\n \n typedef struct StreamState {\n     unsigned char pad0[0x14];\n-    u32 end;\n-    u32 cursor;\n-    u32 read;\n-    u32 write;\n-    u32 boundary;\n-    u32 limit;\n+    unsigned char *end;\n+    unsigned char *cursor;\n+    unsigned char *read;\n+    unsigned char *write;\n+    unsigned char *boundary;\n+    unsigned char *limit;\n } StreamState;\n \n extern volatile StreamState lbl_805BB1E0;\n@@ -32,20 +32,20 @@\n     }\n \n     if (lbl_805BB1E0.write > lbl_805BB1E0.cursor) {\n-        amount = 0x10000U < lbl_805BB1E0.write - lbl_805BB1E0.cursor\n+        amount = 0x10000U < (u32)(lbl_805BB1E0.write - lbl_805BB1E0.cursor)\n                      ? 0x10000\n-                     : lbl_805BB1E0.write - lbl_805BB1E0.cursor;\n-        unused = 0x10000U < lbl_805BB1E0.boundary - lbl_805BB1E0.read\n+                     : (u32)(lbl_805BB1E0.write - lbl_805BB1E0.cursor);\n+        unused = 0x10000U < (u32)(lbl_805BB1E0.boundary - lbl_805BB1E0.read)\n                      ? 0x10000\n-                     : lbl_805BB1E0.boundary - lbl_805BB1E0.read;\n+                     : (u32)(lbl_805BB1E0.boundary - lbl_805BB1E0.read);\n     } else {\n-        amount = 0x10000U < lbl_805BB1E0.end - lbl_805BB1E0.cursor\n+        amount = 0x10000U < (u32)(lbl_805BB1E0.end - lbl_805BB1E0.cursor)\n                      ? 0x10000\n-                     : lbl_805BB1E0.end - lbl_805BB1E0.cursor;\n+                     : (u32)(lbl_805BB1E0.end - lbl_805BB1E0.cursor);\n     }\n \n-    unused = lbl_805BB1E0.limit - lbl_805BB1E0.read;\n-    amount = amount < unused ? amount : lbl_805BB1E0.limit - lbl_805BB1E0.read;\n+    unused = (u32)(lbl_805BB1E0.limit - lbl_805BB1E0.read);\n+    amount = amount < unused ? amount : (u32)(lbl_805BB1E0.limit - lbl_805BB1E0.read);\n     OSRestoreInterrupts(interrupts);\n     return (amount + 31) & ~31;\n }\n",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 98.5625,
+      "target_size": "320",
+      "generated_size": "316",
+      "measurement_output": "variant=pointer_fields_unsigned_distance retail_bytes=320 generated_bytes=316 match_percent=98.5625",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "172",
+            "formatted": "bge 0xb4"
+          },
+          "generated": {
+            "address": "172",
+            "formatted": "blt 0xe8"
+          }
+        },
+        {
+          "target": {
+            "address": "176",
+            "formatted": "b 0xec"
+          },
+          "generated": {
+            "address": null,
+            "formatted": null
+          }
+        },
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "176",
+            "formatted": "lwz r3, 0x1c(r5)"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "signed_fields_unsigned_distances",
+      "source_delta": "--- \n+++ \n@@ -2,12 +2,12 @@\n \n typedef struct StreamState {\n     unsigned char pad0[0x14];\n-    u32 end;\n-    u32 cursor;\n-    u32 read;\n-    u32 write;\n-    u32 boundary;\n-    u32 limit;\n+    int end;\n+    int cursor;\n+    int read;\n+    int write;\n+    int boundary;\n+    int limit;\n } StreamState;\n \n extern volatile StreamState lbl_805BB1E0;\n@@ -31,21 +31,21 @@\n         return 0;\n     }\n \n-    if (lbl_805BB1E0.write > lbl_805BB1E0.cursor) {\n-        amount = 0x10000U < lbl_805BB1E0.write - lbl_805BB1E0.cursor\n+    if ((u32)lbl_805BB1E0.write > (u32)lbl_805BB1E0.cursor) {\n+        amount = 0x10000U < (u32)lbl_805BB1E0.write - (u32)lbl_805BB1E0.cursor\n                      ? 0x10000\n-                     : lbl_805BB1E0.write - lbl_805BB1E0.cursor;\n-        unused = 0x10000U < lbl_805BB1E0.boundary - lbl_805BB1E0.read\n+                     : (u32)lbl_805BB1E0.write - (u32)lbl_805BB1E0.cursor;\n+        unused = 0x10000U < (u32)lbl_805BB1E0.boundary - (u32)lbl_805BB1E0.read\n                      ? 0x10000\n-                     : lbl_805BB1E0.boundary - lbl_805BB1E0.read;\n+                     : (u32)lbl_805BB1E0.boundary - (u32)lbl_805BB1E0.read;\n     } else {\n-        amount = 0x10000U < lbl_805BB1E0.end - lbl_805BB1E0.cursor\n+        amount = 0x10000U < (u32)lbl_805BB1E0.end - (u32)lbl_805BB1E0.cursor\n                      ? 0x10000\n-                     : lbl_805BB1E0.end - lbl_805BB1E0.cursor;\n+                     : (u32)lbl_805BB1E0.end - (u32)lbl_805BB1E0.cursor;\n     }\n \n-    unused = lbl_805BB1E0.limit - lbl_805BB1E0.read;\n-    amount = amount < unused ? amount : lbl_805BB1E0.limit - lbl_805BB1E0.read;\n+    unused = (u32)lbl_805BB1E0.limit - (u32)lbl_805BB1E0.read;\n+    amount = amount < unused ? amount : (u32)lbl_805BB1E0.limit - (u32)lbl_805BB1E0.read;\n     OSRestoreInterrupts(interrupts);\n     return (amount + 31) & ~31;\n }\n",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 97.0625,
+      "target_size": "320",
+      "generated_size": "316",
+      "measurement_output": "variant=signed_fields_unsigned_distances retail_bytes=320 generated_bytes=316 match_percent=97.0625",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "40",
+            "formatted": "cmplw r5, r4"
+          },
+          "generated": {
+            "address": "40",
+            "formatted": "cmpw r5, r4"
+          }
+        },
+        {
+          "target": {
+            "address": "68",
+            "formatted": "cmplw r5, r4"
+          },
+          "generated": {
+            "address": "68",
+            "formatted": "cmpw r5, r4"
+          }
+        },
+        {
+          "target": {
+            "address": "172",
+            "formatted": "bge 0xb4"
+          },
+          "generated": {
+            "address": "172",
+            "formatted": "blt 0xe8"
+          }
+        },
+        {
+          "target": {
+            "address": "176",
+            "formatted": "b 0xec"
+          },
+          "generated": {
+            "address": null,
+            "formatted": null
+          }
+        },
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "176",
+            "formatted": "lwz r3, 0x1c(r5)"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "volatile_global_array",
+      "source_delta": "--- \n+++ \n@@ -1,14 +1,6 @@\n typedef unsigned int u32;\n \n-typedef struct StreamState {\n-    unsigned char pad0[0x14];\n-    u32 end;\n-    u32 cursor;\n-    u32 read;\n-    u32 write;\n-    u32 boundary;\n-    u32 limit;\n-} StreamState;\n+typedef u32 StreamState[11];\n \n extern volatile StreamState lbl_805BB1E0;\n extern int OSDisableInterrupts(void);\n@@ -22,30 +14,30 @@\n     int unused;\n \n     interrupts = OSDisableInterrupts();\n-    if (lbl_805BB1E0.read == lbl_805BB1E0.limit) {\n+    if (lbl_805BB1E0[7] == lbl_805BB1E0[10]) {\n         OSRestoreInterrupts(interrupts);\n         return 0;\n     }\n-    if (lbl_805BB1E0.read == lbl_805BB1E0.boundary) {\n+    if (lbl_805BB1E0[7] == lbl_805BB1E0[9]) {\n         OSRestoreInterrupts(interrupts);\n         return 0;\n     }\n \n-    if (lbl_805BB1E0.write > lbl_805BB1E0.cursor) {\n-        amount = 0x10000U < lbl_805BB1E0.write - lbl_805BB1E0.cursor\n+    if (lbl_805BB1E0[8] > lbl_805BB1E0[6]) {\n+        amount = 0x10000U < lbl_805BB1E0[8] - lbl_805BB1E0[6]\n                      ? 0x10000\n-                     : lbl_805BB1E0.write - lbl_805BB1E0.cursor;\n-        unused = 0x10000U < lbl_805BB1E0.boundary - lbl_805BB1E0.read\n+                     : lbl_805BB1E0[8] - lbl_805BB1E0[6];\n+        unused = 0x10000U < lbl_805BB1E0[9] - lbl_805BB1E0[7]\n                      ? 0x10000\n-                     : lbl_805BB1E0.boundary - lbl_805BB1E0.read;\n+                     : lbl_805BB1E0[9] - lbl_805BB1E0[7];\n     } else {\n-        amount = 0x10000U < lbl_805BB1E0.end - lbl_805BB1E0.cursor\n+        amount = 0x10000U < lbl_805BB1E0[5] - lbl_805BB1E0[6]\n                      ? 0x10000\n-                     : lbl_805BB1E0.end - lbl_805BB1E0.cursor;\n+                     : lbl_805BB1E0[5] - lbl_805BB1E0[6];\n     }\n \n-    unused = lbl_805BB1E0.limit - lbl_805BB1E0.read;\n-    amount = amount < unused ? amount : lbl_805BB1E0.limit - lbl_805BB1E0.read;\n+    unused = lbl_805BB1E0[10] - lbl_805BB1E0[7];\n+    amount = amount < unused ? amount : lbl_805BB1E0[10] - lbl_805BB1E0[7];\n     OSRestoreInterrupts(interrupts);\n     return (amount + 31) & ~31;\n }\n",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 99.9375,
+      "target_size": "320",
+      "generated_size": "320",
+      "measurement_output": "variant=volatile_global_array retail_bytes=320 generated_bytes=320 match_percent=99.9375",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "180",
+            "formatted": "lwz r3, 0x1c(r5)"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "volatile_nested_array",
+      "source_delta": "--- \n+++ \n@@ -1,14 +1,6 @@\n typedef unsigned int u32;\n \n-typedef struct StreamState {\n-    unsigned char pad0[0x14];\n-    u32 end;\n-    u32 cursor;\n-    u32 read;\n-    u32 write;\n-    u32 boundary;\n-    u32 limit;\n-} StreamState;\n+typedef struct { unsigned char pad[0x14]; u32 positions[6]; } StreamState;\n \n extern volatile StreamState lbl_805BB1E0;\n extern int OSDisableInterrupts(void);\n@@ -22,30 +14,30 @@\n     int unused;\n \n     interrupts = OSDisableInterrupts();\n-    if (lbl_805BB1E0.read == lbl_805BB1E0.limit) {\n+    if (lbl_805BB1E0.positions[2] == lbl_805BB1E0.positions[5]) {\n         OSRestoreInterrupts(interrupts);\n         return 0;\n     }\n-    if (lbl_805BB1E0.read == lbl_805BB1E0.boundary) {\n+    if (lbl_805BB1E0.positions[2] == lbl_805BB1E0.positions[4]) {\n         OSRestoreInterrupts(interrupts);\n         return 0;\n     }\n \n-    if (lbl_805BB1E0.write > lbl_805BB1E0.cursor) {\n-        amount = 0x10000U < lbl_805BB1E0.write - lbl_805BB1E0.cursor\n+    if (lbl_805BB1E0.positions[3] > lbl_805BB1E0.positions[1]) {\n+        amount = 0x10000U < lbl_805BB1E0.positions[3] - lbl_805BB1E0.positions[1]\n                      ? 0x10000\n-                     : lbl_805BB1E0.write - lbl_805BB1E0.cursor;\n-        unused = 0x10000U < lbl_805BB1E0.boundary - lbl_805BB1E0.read\n+                     : lbl_805BB1E0.positions[3] - lbl_805BB1E0.positions[1];\n+        unused = 0x10000U < lbl_805BB1E0.positions[4] - lbl_805BB1E0.positions[2]\n                      ? 0x10000\n-                     : lbl_805BB1E0.boundary - lbl_805BB1E0.read;\n+                     : lbl_805BB1E0.positions[4] - lbl_805BB1E0.positions[2];\n     } else {\n-        amount = 0x10000U < lbl_805BB1E0.end - lbl_805BB1E0.cursor\n+        amount = 0x10000U < lbl_805BB1E0.positions[0] - lbl_805BB1E0.positions[1]\n                      ? 0x10000\n-                     : lbl_805BB1E0.end - lbl_805BB1E0.cursor;\n+                     : lbl_805BB1E0.positions[0] - lbl_805BB1E0.positions[1];\n     }\n \n-    unused = lbl_805BB1E0.limit - lbl_805BB1E0.read;\n-    amount = amount < unused ? amount : lbl_805BB1E0.limit - lbl_805BB1E0.read;\n+    unused = lbl_805BB1E0.positions[5] - lbl_805BB1E0.positions[2];\n+    amount = amount < unused ? amount : lbl_805BB1E0.positions[5] - lbl_805BB1E0.positions[2];\n     OSRestoreInterrupts(interrupts);\n     return (amount + 31) & ~31;\n }\n",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 99.9375,
+      "target_size": "320",
+      "generated_size": "320",
+      "measurement_output": "variant=volatile_nested_array retail_bytes=320 generated_bytes=320 match_percent=99.9375",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "180",
+            "formatted": "lwz r3, 0x1c(r5)"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "volatile_nested_struct",
+      "source_delta": "--- \n+++ \n@@ -1,6 +1,6 @@\n typedef unsigned int u32;\n \n-typedef struct StreamState {\n+typedef struct StreamFields {\n     unsigned char pad0[0x14];\n     u32 end;\n     u32 cursor;\n@@ -8,7 +8,8 @@\n     u32 write;\n     u32 boundary;\n     u32 limit;\n-} StreamState;\n+} StreamFields;\n+typedef struct { StreamFields stream; } StreamState;\n \n extern volatile StreamState lbl_805BB1E0;\n extern int OSDisableInterrupts(void);\n@@ -22,30 +23,30 @@\n     int unused;\n \n     interrupts = OSDisableInterrupts();\n-    if (lbl_805BB1E0.read == lbl_805BB1E0.limit) {\n+    if (lbl_805BB1E0.stream.read == lbl_805BB1E0.stream.limit) {\n         OSRestoreInterrupts(interrupts);\n         return 0;\n     }\n-    if (lbl_805BB1E0.read == lbl_805BB1E0.boundary) {\n+    if (lbl_805BB1E0.stream.read == lbl_805BB1E0.stream.boundary) {\n         OSRestoreInterrupts(interrupts);\n         return 0;\n     }\n \n-    if (lbl_805BB1E0.write > lbl_805BB1E0.cursor) {\n-        amount = 0x10000U < lbl_805BB1E0.write - lbl_805BB1E0.cursor\n+    if (lbl_805BB1E0.stream.write > lbl_805BB1E0.stream.cursor) {\n+        amount = 0x10000U < lbl_805BB1E0.stream.write - lbl_805BB1E0.stream.cursor\n                      ? 0x10000\n-                     : lbl_805BB1E0.write - lbl_805BB1E0.cursor;\n-        unused = 0x10000U < lbl_805BB1E0.boundary - lbl_805BB1E0.read\n+                     : lbl_805BB1E0.stream.write - lbl_805BB1E0.stream.cursor;\n+        unused = 0x10000U < lbl_805BB1E0.stream.boundary - lbl_805BB1E0.stream.read\n                      ? 0x10000\n-                     : lbl_805BB1E0.boundary - lbl_805BB1E0.read;\n+                     : lbl_805BB1E0.stream.boundary - lbl_805BB1E0.stream.read;\n     } else {\n-        amount = 0x10000U < lbl_805BB1E0.end - lbl_805BB1E0.cursor\n+        amount = 0x10000U < lbl_805BB1E0.stream.end - lbl_805BB1E0.stream.cursor\n                      ? 0x10000\n-                     : lbl_805BB1E0.end - lbl_805BB1E0.cursor;\n+                     : lbl_805BB1E0.stream.end - lbl_805BB1E0.stream.cursor;\n     }\n \n-    unused = lbl_805BB1E0.limit - lbl_805BB1E0.read;\n-    amount = amount < unused ? amount : lbl_805BB1E0.limit - lbl_805BB1E0.read;\n+    unused = lbl_805BB1E0.stream.limit - lbl_805BB1E0.stream.read;\n+    amount = amount < unused ? amount : lbl_805BB1E0.stream.limit - lbl_805BB1E0.stream.read;\n     OSRestoreInterrupts(interrupts);\n     return (amount + 31) & ~31;\n }\n",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 99.9375,
+      "target_size": "320",
+      "generated_size": "320",
+      "measurement_output": "variant=volatile_nested_struct retail_bytes=320 generated_bytes=320 match_percent=99.9375",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "180",
+            "formatted": "lwz r3, 0x1c(r5)"
+          }
+        }
+      ]
+    },
+    {
+      "variant": "volatile_struct_array",
+      "source_delta": "--- \n+++ \n@@ -10,7 +10,7 @@\n     u32 limit;\n } StreamState;\n \n-extern volatile StreamState lbl_805BB1E0;\n+extern volatile StreamState lbl_805BB1E0[1];\n extern int OSDisableInterrupts(void);\n extern void OSRestoreInterrupts(int);\n \n@@ -22,30 +22,30 @@\n     int unused;\n \n     interrupts = OSDisableInterrupts();\n-    if (lbl_805BB1E0.read == lbl_805BB1E0.limit) {\n+    if (lbl_805BB1E0[0].read == lbl_805BB1E0[0].limit) {\n         OSRestoreInterrupts(interrupts);\n         return 0;\n     }\n-    if (lbl_805BB1E0.read == lbl_805BB1E0.boundary) {\n+    if (lbl_805BB1E0[0].read == lbl_805BB1E0[0].boundary) {\n         OSRestoreInterrupts(interrupts);\n         return 0;\n     }\n \n-    if (lbl_805BB1E0.write > lbl_805BB1E0.cursor) {\n-        amount = 0x10000U < lbl_805BB1E0.write - lbl_805BB1E0.cursor\n+    if (lbl_805BB1E0[0].write > lbl_805BB1E0[0].cursor) {\n+        amount = 0x10000U < lbl_805BB1E0[0].write - lbl_805BB1E0[0].cursor\n                      ? 0x10000\n-                     : lbl_805BB1E0.write - lbl_805BB1E0.cursor;\n-        unused = 0x10000U < lbl_805BB1E0.boundary - lbl_805BB1E0.read\n+                     : lbl_805BB1E0[0].write - lbl_805BB1E0[0].cursor;\n+        unused = 0x10000U < lbl_805BB1E0[0].boundary - lbl_805BB1E0[0].read\n                      ? 0x10000\n-                     : lbl_805BB1E0.boundary - lbl_805BB1E0.read;\n+                     : lbl_805BB1E0[0].boundary - lbl_805BB1E0[0].read;\n     } else {\n-        amount = 0x10000U < lbl_805BB1E0.end - lbl_805BB1E0.cursor\n+        amount = 0x10000U < lbl_805BB1E0[0].end - lbl_805BB1E0[0].cursor\n                      ? 0x10000\n-                     : lbl_805BB1E0.end - lbl_805BB1E0.cursor;\n+                     : lbl_805BB1E0[0].end - lbl_805BB1E0[0].cursor;\n     }\n \n-    unused = lbl_805BB1E0.limit - lbl_805BB1E0.read;\n-    amount = amount < unused ? amount : lbl_805BB1E0.limit - lbl_805BB1E0.read;\n+    unused = lbl_805BB1E0[0].limit - lbl_805BB1E0[0].read;\n+    amount = amount < unused ? amount : lbl_805BB1E0[0].limit - lbl_805BB1E0[0].read;\n     OSRestoreInterrupts(interrupts);\n     return (amount + 31) & ~31;\n }\n",
+      "compile_command": [
+        ".tools/bin/ninja",
+        "-j2",
+        "build/GEDE01/src/game/game_fn_8015DF60.o"
+      ],
+      "compile_exit": 0,
+      "compile_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_8015DF60.o\n",
+      "diff_command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8015DF60",
+        "fn_8015DF60",
+        "-o",
+        "build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json",
+        "--format",
+        "json",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "diff_exit": 0,
+      "diff_output": " INFO Writing to build/GEDE01/38291a4e-4bcb-474a-a594-1aa2f150a23f-variant.json\n",
+      "score": 99.9375,
+      "target_size": "320",
+      "generated_size": "320",
+      "measurement_output": "variant=volatile_struct_array retail_bytes=320 generated_bytes=320 match_percent=99.9375",
+      "differing_instructions": [
+        {
+          "target": {
+            "address": "180",
+            "formatted": "lwz r4, 0x1c(r5)"
+          },
+          "generated": {
+            "address": "180",
+            "formatted": "lwz r3, 0x1c(r5)"
+          }
+        }
+      ]
+    }
+  ],
+  "hypotheses": [
+    "Pointer-distance and multiword arithmetic may defer dead-expression elimination enough to keep operand registers distinct.",
+    "Dead aggregate destinations may change when dead assignment removal occurs.",
+    "Volatility qualification, field types, and aggregate layout may change volatile memory expression lowering."
+  ],
+  "retained_candidate": "The base already contains the exact source from preserved commit 712a6a99838a323ee3a0558f1e3e0298624a3534. All experimental source changes were restored. No variant improves its 99.9375% strict match.",
+  "measurement_method": "Match percentages and sizes are extracted without rounding from each objdiff JSON. Differing instruction addresses and formatted text are copied from the raw instruction rows; complete final raw canonical and strict reports are separate evidence files."
+}

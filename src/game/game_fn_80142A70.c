@@ -41,7 +41,7 @@ extern PoolSlot lbl_805B1310[];
 extern WorkEntry lbl_805B1400[];
 extern Quad lbl_805B38C0[];
 extern u8 lbl_8064D038;
-extern char lbl_8064BA08[];
+extern char lbl_8064BA08;
 extern float lbl_80650430;
 extern float lbl_80650434;
 extern int fn_801429A8(void);
@@ -58,8 +58,9 @@ PoolSlot* fn_80142A70(u8 count, Point3s* ring, s16 z_offset, u16 value,
 {
     int slot_index = fn_801429A8();
     PoolSlot* slot = &lbl_805B1310[slot_index];
-    Quad* quads = &lbl_805B38C0[slot_index * 7];
+    Quad* quads;
     WorkEntry* work;
+    float normalizer;
     int i;
 
     slot->flags |= 1;
@@ -73,18 +74,22 @@ PoolSlot* fn_80142A70(u8 count, Point3s* ring, s16 z_offset, u16 value,
         slot->flags |= 2;
     }
 
+    quads = &lbl_805B38C0[slot_index * 7];
     for (i = 0; i < count; i++) {
         Point3s* current = &ring[i];
-        Point3s* next = &ring[(i + 1) % count];
+        Point3s* next = &ring[(s16)((i + 1) % slot->count)];
         quads[i].point[0] = *current;
-        quads[i].point[1] = *current;
-        quads[i].point[1].z += z_offset;
-        quads[i].point[2] = *next;
-        quads[i].point[2].z += z_offset;
+        quads[i].point[1].x = current->x;
+        quads[i].point[1].y = current->y;
+        quads[i].point[1].z = current->z + z_offset;
+        quads[i].point[2].x = next->x;
+        quads[i].point[2].y = next->y;
+        quads[i].point[2].z = next->z + z_offset;
         quads[i].point[3] = *next;
     }
 
     work = &lbl_805B1400[slot_index * 7];
+    normalizer = lbl_80650430;
     for (i = 0; i < count; i++) {
         Quad* quad = &quads[i];
         PlaneEntry* plane = &work[i].plane[0];
@@ -104,12 +109,15 @@ PoolSlot* fn_80142A70(u8 count, Point3s* ring, s16 z_offset, u16 value,
                            quad->point[2].y + quad->point[3].y) >> 2;
         plane->center.z = (quad->point[0].z + quad->point[1].z +
                            quad->point[2].z + quad->point[3].z) >> 2;
+        dz = plane->center.z - quad->point[0].z;
         dx = plane->center.x - quad->point[0].x;
         dy = plane->center.y - quad->point[0].y;
-        dz = plane->center.z - quad->point[0].z;
-        plane->radius = fn_800ED720(dx * dx + dy * dy + dz * dz);
+        dx *= dx;
+        dy *= dy;
+        dz *= dz;
+        plane->radius = fn_800ED720(dx + dy + dz);
         plane->point_count = 4;
-        plane->callback = lbl_8064BA08;
+        plane->callback = &lbl_8064BA08;
         plane->state = 0;
         plane->link = 0;
         *back = *plane;
@@ -118,7 +126,7 @@ PoolSlot* fn_80142A70(u8 count, Point3s* ring, s16 z_offset, u16 value,
         fn_8017960C(&quad->point[2], &quad->point[0], &edge1);
         fn_80211B64(&edge0, &edge1, &plane->normal);
         fn_80211A90(&plane->normal, &plane->normal,
-                    lbl_80650430 / fn_80211B08(&plane->normal));
+                    normalizer / fn_80211B08(&plane->normal));
         fn_80211A90(&plane->normal, &back->normal, lbl_80650434);
         point.x = quad->point[0].x;
         point.y = quad->point[0].y;

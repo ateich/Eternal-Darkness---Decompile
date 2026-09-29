@@ -1,0 +1,2812 @@
+{
+  "version": 1,
+  "assignment_id": "2656136a-bd89-490b-b34d-a604375f3b5f",
+  "attempt": 5,
+  "target": "fn_801FABA4",
+  "base_commit": "171a0a3eea17c01f4e905f7aaf4c9b8cd03c4fb0",
+  "status": "attempted",
+  "divergence": "Canonical and relocation-strict objdiff are 94.90566% (424 retail bytes, 416 candidate bytes). The extra canonical-base HA/LO pair is removed and r31/r30/r29/r28/r27 now agree with retail for globals/entry/index/offset/output. In the first conditional block write, retail forms r31+0x660 before adding the scaled index, while the candidate adds the index to r31 then adds 0x660; scheduling differs. The candidate omits retail addi r4,r31,0 at retail offsets 0xE0 and 0x170, using r31 directly. The post-loop second-bank write uses r5/r6 for index/multiply and r0 for truncated offset instead of retail r0/r3. The ordered sequence of all 21 real relocation types, targets and addends agrees, but subsequent relocation offsets differ due to the two omitted instructions. Not a byte or relocation-strict match; retain NonMatching.",
+  "source": "eternal-darkness-decomp/src/game/game_fn_801FABA4.c",
+  "source_sha256": "5725e458aec80ae3c45fa5d177e9af425cd38bcd8e539892c02ef4bc95c5f7d4",
+  "registration": "Unchanged NonMatching, GC/1.3, extra_cflags=[-use_lmw_stmw on]",
+  "split": "Unchanged .text 0x801FABA4..0x801FAD4C",
+  "compiler_command": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/compiler-command.txt",
+  "preserved_commits_studied": [
+    "0136a5f38f978d69a7e780bcbca446721b24946c",
+    "5e1bc15a28d3d30d6d4a975b049c0f921f224f05",
+    "ce444582f13787c89c6f8809bc488a23ff16e73f",
+    "53bcc8d64478d1514b593a4e6f1208b49253ffee"
+  ],
+  "distinct_hypothesis": "Typed array layouts did not improve codegen. Const-qualifying the base pointer, rather than register-qualifying it, removes redundant rematerialization. Declaration order fixes callee-saved register allocation. Scoped member bases and a split pointer update refine address formation. Explicit u16 rounding reproduces the final retail mask.",
+  "baseline": {
+    "canonical_historical": 82.40566,
+    "strict_fresh": 82.40566,
+    "retail_bytes": 424,
+    "candidate_bytes": 428,
+    "raw": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/baseline-strict.json"
+  },
+  "canonical": {
+    "match_percent": 94.90566,
+    "retail_bytes": 424,
+    "candidate_bytes": 416,
+    "passed": false,
+    "raw": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/final-canonical.json"
+  },
+  "relocation_strict": {
+    "config": "function_reloc_diffs=name_address",
+    "match_percent": 94.90566,
+    "passed": false,
+    "raw": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/final-relocation-strict.json",
+    "ordered_type_target_addend_sequence_equal": true,
+    "relocation_offsets_equal": false,
+    "retail_real_relocations": [
+      {
+        "offset": "0x0000000a",
+        "type": "R_PPC_ADDR16_HA",
+        "target": "lbl_8063C6B8",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000016",
+        "type": "R_PPC_ADDR16_LO",
+        "target": "lbl_8063C6B8",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000020",
+        "type": "R_PPC_EMB_SDA21",
+        "target": "lbl_8064D18C",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000024",
+        "type": "R_PPC_EMB_SDA21",
+        "target": "lbl_8064D7BC",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000028",
+        "type": "R_PPC_EMB_SDA21",
+        "target": "lbl_8064C3A8",
+        "addend": 0
+      },
+      {
+        "offset": "0x0000002c",
+        "type": "R_PPC_EMB_SDA21",
+        "target": "lbl_8064C3A0",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000030",
+        "type": "R_PPC_EMB_SDA21",
+        "target": "lbl_8064D798",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000034",
+        "type": "R_PPC_EMB_SDA21",
+        "target": "lbl_8064C3A4",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000038",
+        "type": "R_PPC_EMB_SDA21",
+        "target": "lbl_8064D79C",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000060",
+        "type": "R_PPC_REL24",
+        "target": "memcpy",
+        "addend": 0
+      },
+      {
+        "offset": "0x0000007c",
+        "type": "R_PPC_REL24",
+        "target": "fn_801FBAC8",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000090",
+        "type": "R_PPC_REL24",
+        "target": "memcpy",
+        "addend": 0
+      },
+      {
+        "offset": "0x000000c0",
+        "type": "R_PPC_REL24",
+        "target": "fn_801FB3B4",
+        "addend": 0
+      },
+      {
+        "offset": "0x000000f4",
+        "type": "R_PPC_REL24",
+        "target": "fn_801FB3B4",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000108",
+        "type": "R_PPC_EMB_SDA21",
+        "target": "lbl_8064D7BC",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000124",
+        "type": "R_PPC_REL24",
+        "target": "fn_801FB3B4",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000128",
+        "type": "R_PPC_EMB_SDA21",
+        "target": "lbl_8064C3A8",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000148",
+        "type": "R_PPC_REL24",
+        "target": "fn_801FB3B4",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000160",
+        "type": "R_PPC_REL24",
+        "target": "fn_801FB3B4",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000164",
+        "type": "R_PPC_EMB_SDA21",
+        "target": "lbl_8064C3A8",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000184",
+        "type": "R_PPC_REL24",
+        "target": "fn_801FB3B4",
+        "addend": 0
+      }
+    ],
+    "candidate_real_relocations": [
+      {
+        "offset": "0x0000000a",
+        "type": "R_PPC_ADDR16_HA",
+        "target": "lbl_8063C6B8",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000016",
+        "type": "R_PPC_ADDR16_LO",
+        "target": "lbl_8063C6B8",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000020",
+        "type": "R_PPC_EMB_SDA21",
+        "target": "lbl_8064D18C",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000024",
+        "type": "R_PPC_EMB_SDA21",
+        "target": "lbl_8064D7BC",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000028",
+        "type": "R_PPC_EMB_SDA21",
+        "target": "lbl_8064C3A8",
+        "addend": 0
+      },
+      {
+        "offset": "0x0000002c",
+        "type": "R_PPC_EMB_SDA21",
+        "target": "lbl_8064C3A0",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000030",
+        "type": "R_PPC_EMB_SDA21",
+        "target": "lbl_8064D798",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000034",
+        "type": "R_PPC_EMB_SDA21",
+        "target": "lbl_8064C3A4",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000038",
+        "type": "R_PPC_EMB_SDA21",
+        "target": "lbl_8064D79C",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000060",
+        "type": "R_PPC_REL24",
+        "target": "memcpy",
+        "addend": 0
+      },
+      {
+        "offset": "0x0000007c",
+        "type": "R_PPC_REL24",
+        "target": "fn_801FBAC8",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000090",
+        "type": "R_PPC_REL24",
+        "target": "memcpy",
+        "addend": 0
+      },
+      {
+        "offset": "0x000000c0",
+        "type": "R_PPC_REL24",
+        "target": "fn_801FB3B4",
+        "addend": 0
+      },
+      {
+        "offset": "0x000000f0",
+        "type": "R_PPC_REL24",
+        "target": "fn_801FB3B4",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000104",
+        "type": "R_PPC_EMB_SDA21",
+        "target": "lbl_8064D7BC",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000120",
+        "type": "R_PPC_REL24",
+        "target": "fn_801FB3B4",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000124",
+        "type": "R_PPC_EMB_SDA21",
+        "target": "lbl_8064C3A8",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000144",
+        "type": "R_PPC_REL24",
+        "target": "fn_801FB3B4",
+        "addend": 0
+      },
+      {
+        "offset": "0x0000015c",
+        "type": "R_PPC_REL24",
+        "target": "fn_801FB3B4",
+        "addend": 0
+      },
+      {
+        "offset": "0x00000160",
+        "type": "R_PPC_EMB_SDA21",
+        "target": "lbl_8064C3A8",
+        "addend": 0
+      },
+      {
+        "offset": "0x0000017c",
+        "type": "R_PPC_REL24",
+        "target": "fn_801FB3B4",
+        "addend": 0
+      }
+    ]
+  },
+  "raw_divergent_instruction_rows": [
+    {
+      "retail": {
+        "diff_kind": "DIFF_REPLACE",
+        "instruction": {
+          "address": "172",
+          "size": 4,
+          "formatted": "addi r4, r31, 0x660",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "addi",
+                "opcode": 263
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r31"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "1632"
+              }
+            }
+          ],
+          "relocation": {
+            "type_name": "R_PPC_NONE",
+            "target_symbol": 2,
+            "addend": "1632"
+          }
+        }
+      },
+      "candidate": {
+        "diff_kind": "DIFF_REPLACE",
+        "instruction": {
+          "address": "172",
+          "size": 4,
+          "formatted": "add r3, r27, r3",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "add",
+                "opcode": 297
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r27"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_REPLACE",
+        "instruction": {
+          "address": "184",
+          "size": 4,
+          "formatted": "add r3, r27, r3",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "add",
+                "opcode": 297
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r27"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            }
+          ]
+        }
+      },
+      "candidate": {
+        "diff_kind": "DIFF_REPLACE",
+        "instruction": {
+          "address": "184",
+          "size": 4,
+          "formatted": "add r4, r31, r0",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "add",
+                "opcode": 297
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r31"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            }
+          ],
+          "relocation": {
+            "type_name": "R_PPC_NONE",
+            "target_symbol": 2
+          }
+        }
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_REPLACE",
+        "instruction": {
+          "address": "188",
+          "size": 4,
+          "formatted": "add r4, r4, r0",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "add",
+                "opcode": 297
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            }
+          ],
+          "relocation": {
+            "type_name": "R_PPC_NONE",
+            "target_symbol": 2,
+            "addend": "1632"
+          }
+        }
+      },
+      "candidate": {
+        "diff_kind": "DIFF_REPLACE",
+        "instruction": {
+          "address": "188",
+          "size": 4,
+          "formatted": "addi r4, r4, 0x660",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "addi",
+                "opcode": 263
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "1632"
+              }
+            }
+          ],
+          "relocation": {
+            "type_name": "R_PPC_NONE",
+            "target_symbol": 2,
+            "addend": "1632"
+          }
+        }
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_REPLACE",
+        "instruction": {
+          "address": "224",
+          "size": 4,
+          "formatted": "addi r4, r31, 0x0",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "addi",
+                "opcode": 263
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r31"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "0"
+              }
+            }
+          ],
+          "relocation": {
+            "type_name": "R_PPC_NONE",
+            "target_symbol": 2
+          }
+        }
+      },
+      "candidate": {
+        "diff_kind": "DIFF_REPLACE",
+        "instruction": {
+          "address": "224",
+          "size": 4,
+          "formatted": "add r3, r27, r3",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "add",
+                "opcode": 297
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r27"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_DELETE",
+        "instruction": {
+          "address": "236",
+          "size": 4,
+          "formatted": "add r3, r27, r3",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "add",
+                "opcode": 297
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r27"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            }
+          ]
+        }
+      },
+      "candidate": {
+        "diff_kind": "DIFF_DELETE"
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "240",
+          "size": 4,
+          "formatted": "add r4, r4, r0",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "add",
+                "opcode": 297
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            }
+          ],
+          "relocation": {
+            "type_name": "R_PPC_NONE",
+            "target_symbol": 2
+          }
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 0
+          },
+          {},
+          {}
+        ]
+      },
+      "candidate": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "236",
+          "size": 4,
+          "formatted": "add r4, r31, r0",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "add",
+                "opcode": 297
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r31"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            }
+          ],
+          "relocation": {
+            "type_name": "R_PPC_NONE",
+            "target_symbol": 2
+          }
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 0
+          },
+          {},
+          {}
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "296",
+          "size": 4,
+          "formatted": "lwz r0, lbl_8064C3A8@sda21",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "lwz",
+                "opcode": 439
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "reloc": true
+              }
+            },
+            {
+              "basic": "@sda21"
+            }
+          ],
+          "relocation": {
+            "type": 109,
+            "type_name": "R_PPC_EMB_SDA21",
+            "target_symbol": 5
+          }
+        },
+        "arg_diff": [
+          {
+            "diff_index": 1
+          },
+          {}
+        ]
+      },
+      "candidate": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "292",
+          "size": 4,
+          "formatted": "lwz r5, lbl_8064C3A8@sda21",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "lwz",
+                "opcode": 439
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r5"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "reloc": true
+              }
+            },
+            {
+              "basic": "@sda21"
+            }
+          ],
+          "relocation": {
+            "type": 109,
+            "type_name": "R_PPC_EMB_SDA21",
+            "target_symbol": 4
+          }
+        },
+        "arg_diff": [
+          {
+            "diff_index": 1
+          },
+          {}
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "304",
+          "size": 4,
+          "formatted": "clrlwi r3, r28, 16",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "clrlwi",
+                "opcode": 283
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r28"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "16"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 2
+          },
+          {},
+          {}
+        ]
+      },
+      "candidate": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "300",
+          "size": 4,
+          "formatted": "clrlwi r0, r28, 16",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "clrlwi",
+                "opcode": 283
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r28"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "16"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 2
+          },
+          {},
+          {}
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "312",
+          "size": 4,
+          "formatted": "mulli r0, r0, 0x88",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mulli",
+                "opcode": 257
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "136"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 1
+          },
+          {
+            "diff_index": 1
+          },
+          {}
+        ]
+      },
+      "candidate": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "308",
+          "size": 4,
+          "formatted": "mulli r6, r5, 0x88",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "mulli",
+                "opcode": 257
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r6"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r5"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "136"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {
+            "diff_index": 3
+          },
+          {
+            "diff_index": 1
+          },
+          {}
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "320",
+          "size": 4,
+          "formatted": "add r3, r27, r3",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "add",
+                "opcode": 297
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r27"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 2
+          }
+        ]
+      },
+      "candidate": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "316",
+          "size": 4,
+          "formatted": "add r3, r27, r0",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "add",
+                "opcode": 297
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r3"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r27"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            }
+          ]
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 2
+          }
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "324",
+          "size": 4,
+          "formatted": "add r4, r4, r0",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "add",
+                "opcode": 297
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            }
+          ],
+          "relocation": {
+            "type_name": "R_PPC_NONE",
+            "target_symbol": 2,
+            "addend": "1632"
+          }
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 1
+          },
+          {}
+        ]
+      },
+      "candidate": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "320",
+          "size": 4,
+          "formatted": "add r4, r4, r6",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "add",
+                "opcode": 297
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r6"
+              }
+            }
+          ],
+          "relocation": {
+            "type_name": "R_PPC_NONE",
+            "target_symbol": 2,
+            "addend": "1632"
+          }
+        },
+        "arg_diff": [
+          {},
+          {},
+          {
+            "diff_index": 3
+          },
+          {}
+        ]
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_REPLACE",
+        "instruction": {
+          "address": "368",
+          "size": 4,
+          "formatted": "addi r4, r31, 0x0",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "addi",
+                "opcode": 263
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r31"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "0"
+              }
+            }
+          ],
+          "relocation": {
+            "type_name": "R_PPC_NONE",
+            "target_symbol": 2
+          }
+        }
+      },
+      "candidate": {
+        "diff_kind": "DIFF_REPLACE",
+        "instruction": {
+          "address": "364",
+          "size": 4,
+          "formatted": "li r5, 0x1",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "li",
+                "opcode": 263
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r5"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "1"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_DELETE",
+        "instruction": {
+          "address": "376",
+          "size": 4,
+          "formatted": "li r5, 0x1",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "li",
+                "opcode": 263
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r5"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "signed": "1"
+              }
+            }
+          ]
+        }
+      },
+      "candidate": {
+        "diff_kind": "DIFF_DELETE"
+      }
+    },
+    {
+      "retail": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "384",
+          "size": 4,
+          "formatted": "add r4, r4, r0",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "add",
+                "opcode": 297
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            }
+          ],
+          "relocation": {
+            "type_name": "R_PPC_NONE",
+            "target_symbol": 2
+          }
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 0
+          },
+          {},
+          {}
+        ]
+      },
+      "candidate": {
+        "diff_kind": "DIFF_ARG_MISMATCH",
+        "instruction": {
+          "address": "376",
+          "size": 4,
+          "formatted": "add r4, r31, r0",
+          "parts": [
+            {
+              "opcode": {
+                "mnemonic": "add",
+                "opcode": 297
+              }
+            },
+            {
+              "arg": {
+                "opaque": "r4"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r31"
+              }
+            },
+            {
+              "separator": true
+            },
+            {
+              "arg": {
+                "opaque": "r0"
+              }
+            }
+          ],
+          "relocation": {
+            "type_name": "R_PPC_NONE",
+            "target_symbol": 2
+          }
+        },
+        "arg_diff": [
+          {},
+          {
+            "diff_index": 0
+          },
+          {},
+          {}
+        ]
+      }
+    }
+  ],
+  "build": {
+    "commands_cwd": "eternal-darkness-decomp",
+    "commands": [
+      "python3 configure.py",
+      ".tools/bin/ninja -j2"
+    ],
+    "configure_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/configure-final.log",
+    "build_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/build-final.log",
+    "note": "The matching build retains retail bytes for this NonMatching unit; the DOL hash does not certify the candidate as matched."
+  },
+  "verification_commands_and_raw_outputs": [
+    {
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801FABA4",
+        "fn_801FABA4",
+        "-o",
+        "reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/final-canonical.json",
+        "--format",
+        "json-pretty"
+      ],
+      "exit_code": 0,
+      "raw_output_file": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/final-canonical.log",
+      "raw_output": " INFO Writing to reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/final-canonical.json\n"
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801FABA4",
+        "fn_801FABA4",
+        "-o",
+        "reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/final-relocation-strict.json",
+        "--format",
+        "json-pretty",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "exit_code": 0,
+      "raw_output_file": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/final-relocation-strict.log",
+      "raw_output": " INFO Writing to reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/final-relocation-strict.json\n"
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "sha1sum",
+        "build/GEDE01/main.dol"
+      ],
+      "exit_code": 0,
+      "raw_output_file": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/dol-sha1.txt",
+      "raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\n"
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "python3",
+        "tools/legal_audit.py"
+      ],
+      "exit_code": 0,
+      "raw_output_file": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/legal-audit.txt",
+      "raw_output": "legal audit passed (21966 tracked project files inspected)\n"
+    },
+    {
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "raw_output_file": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/diff-check.txt",
+      "raw_output": ""
+    }
+  ],
+  "raw_disassembly": [
+    "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/retail-disassembly.txt",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/candidate-disassembly.txt"
+  ],
+  "raw_relocations": [
+    "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/retail-relocations.txt",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/candidate-relocations.txt"
+  ],
+  "candidate_sections": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/candidate-sections.txt",
+  "probes": [
+    {
+      "name": "aggregate-array-one",
+      "hypothesis": "Canonical object as array of aggregate, testing different address-expression representation.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/aggregate-array-one-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/aggregate-array-one-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 85.23585
+      },
+      "candidate": {
+        "size": "424",
+        "match_percent": 85.23585
+      }
+    },
+    {
+      "name": "aggregate-pointer-const",
+      "hypothesis": "Const pointer may allow different global CSE scheduling.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/aggregate-pointer-const-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/aggregate-pointer-const-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 86.254715
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 86.254715
+      }
+    },
+    {
+      "name": "array-declaration-order",
+      "hypothesis": "Apply corrected declaration order to const block array.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/array-declaration-order-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/array-declaration-order-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 89.83962
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 89.83962
+      }
+    },
+    {
+      "name": "array-member-local",
+      "hypothesis": "Separate typed first/second array bases from indexing to discourage folding the field offset into the variable index.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/array-member-local-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/array-member-local-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 84.79245
+      },
+      "candidate": {
+        "size": "420",
+        "match_percent": 84.79245
+      }
+    },
+    {
+      "name": "array-object-address",
+      "hypothesis": "Cast pointer to whole member array to integer before addition.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/array-object-address-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/array-object-address-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 88.603775
+      },
+      "candidate": {
+        "size": "412",
+        "match_percent": 88.603775
+      }
+    },
+    {
+      "name": "auto-const-two-members",
+      "hypothesis": "Only first/second aliases, avoiding persistent primary/secondary pointer pressure.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/auto-const-two-members-probe.json",
+      "strict_raw_result": null,
+      "retail": null,
+      "candidate": null
+    },
+    {
+      "name": "auto-const-two-members-v2",
+      "hypothesis": "Only first/second aliases, avoiding persistent primary/secondary pointer pressure.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/auto-const-two-members-v2-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/auto-const-two-members-v2-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 92.43396
+      },
+      "candidate": {
+        "size": "412",
+        "match_percent": 92.43396
+      }
+    },
+    {
+      "name": "baseline",
+      "hypothesis": "Fresh baseline with explicitly strict relocation comparison.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/baseline-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/baseline-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 82.40566
+      },
+      "candidate": {
+        "size": "428",
+        "match_percent": 82.40566
+      }
+    },
+    {
+      "name": "block-array",
+      "hypothesis": "Represent contiguous 0x88-byte global blocks as one canonical external array, including entry storage at block 26.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/block-array-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/block-array-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 85.84906
+      },
+      "candidate": {
+        "size": "424",
+        "match_percent": 85.84906
+      }
+    },
+    {
+      "name": "byte-array-2d",
+      "hypothesis": "Use array decay on a two-dimensional canonical block array instead of aggregate members.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/byte-array-2d-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/byte-array-2d-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 85.84906
+      },
+      "candidate": {
+        "size": "424",
+        "match_percent": 85.84906
+      }
+    },
+    {
+      "name": "combined-0",
+      "hypothesis": "Four-bit mask selects split pointer increment versus scoped address expression at the four indexed calls, in source order: 0",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-0-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-0-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 92.64151
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 92.64151
+      }
+    },
+    {
+      "name": "combined-1",
+      "hypothesis": "Four-bit mask selects split pointer increment versus scoped address expression at the four indexed calls, in source order: 1",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-1-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-1-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 91.179245
+      },
+      "candidate": {
+        "size": "412",
+        "match_percent": 91.179245
+      }
+    },
+    {
+      "name": "combined-10",
+      "hypothesis": "Four-bit mask selects split pointer increment versus scoped address expression at the four indexed calls, in source order: 10",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-10-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-10-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 90.70755
+      },
+      "candidate": {
+        "size": "412",
+        "match_percent": 90.70755
+      }
+    },
+    {
+      "name": "combined-11",
+      "hypothesis": "Four-bit mask selects split pointer increment versus scoped address expression at the four indexed calls, in source order: 11",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-11-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-11-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 91.13207
+      },
+      "candidate": {
+        "size": "408",
+        "match_percent": 91.13207
+      }
+    },
+    {
+      "name": "combined-12",
+      "hypothesis": "Four-bit mask selects split pointer increment versus scoped address expression at the four indexed calls, in source order: 12",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-12-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-12-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 94.62264
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 94.62264
+      }
+    },
+    {
+      "name": "combined-13",
+      "hypothesis": "Four-bit mask selects split pointer increment versus scoped address expression at the four indexed calls, in source order: 13",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-13-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-13-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 93.16038
+      },
+      "candidate": {
+        "size": "412",
+        "match_percent": 93.16038
+      }
+    },
+    {
+      "name": "combined-14",
+      "hypothesis": "Four-bit mask selects split pointer increment versus scoped address expression at the four indexed calls, in source order: 14",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-14-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-14-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 92.971695
+      },
+      "candidate": {
+        "size": "412",
+        "match_percent": 92.971695
+      }
+    },
+    {
+      "name": "combined-15",
+      "hypothesis": "Four-bit mask selects split pointer increment versus scoped address expression at the four indexed calls, in source order: 15",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-15-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-15-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 93.396225
+      },
+      "candidate": {
+        "size": "408",
+        "match_percent": 93.396225
+      }
+    },
+    {
+      "name": "combined-2",
+      "hypothesis": "Four-bit mask selects split pointer increment versus scoped address expression at the four indexed calls, in source order: 2",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-2-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-2-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 90.99056
+      },
+      "candidate": {
+        "size": "412",
+        "match_percent": 90.99056
+      }
+    },
+    {
+      "name": "combined-3",
+      "hypothesis": "Four-bit mask selects split pointer increment versus scoped address expression at the four indexed calls, in source order: 3",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-3-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-3-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 91.41509
+      },
+      "candidate": {
+        "size": "408",
+        "match_percent": 91.41509
+      }
+    },
+    {
+      "name": "combined-4",
+      "hypothesis": "Four-bit mask selects split pointer increment versus scoped address expression at the four indexed calls, in source order: 4",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-4-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-4-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 94.90566
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 94.90566
+      }
+    },
+    {
+      "name": "combined-5",
+      "hypothesis": "Four-bit mask selects split pointer increment versus scoped address expression at the four indexed calls, in source order: 5",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-5-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-5-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 93.4434
+      },
+      "candidate": {
+        "size": "412",
+        "match_percent": 93.4434
+      }
+    },
+    {
+      "name": "combined-6",
+      "hypothesis": "Four-bit mask selects split pointer increment versus scoped address expression at the four indexed calls, in source order: 6",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-6-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-6-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 93.254715
+      },
+      "candidate": {
+        "size": "412",
+        "match_percent": 93.254715
+      }
+    },
+    {
+      "name": "combined-7",
+      "hypothesis": "Four-bit mask selects split pointer increment versus scoped address expression at the four indexed calls, in source order: 7",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-7-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-7-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 93.679245
+      },
+      "candidate": {
+        "size": "408",
+        "match_percent": 93.679245
+      }
+    },
+    {
+      "name": "combined-8",
+      "hypothesis": "Four-bit mask selects split pointer increment versus scoped address expression at the four indexed calls, in source order: 8",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-8-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-8-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 92.35849
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 92.35849
+      }
+    },
+    {
+      "name": "combined-9",
+      "hypothesis": "Four-bit mask selects split pointer increment versus scoped address expression at the four indexed calls, in source order: 9",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-9-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/combined-9-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 90.896225
+      },
+      "candidate": {
+        "size": "412",
+        "match_percent": 90.896225
+      }
+    },
+    {
+      "name": "const-block-array",
+      "hypothesis": "Const array base with canonical symbol targets.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-block-array-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-block-array-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 88.70755
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 88.70755
+      }
+    },
+    {
+      "name": "const-declaration-order",
+      "hypothesis": "MWCC appears to assign callee-saved registers in declaration order; declare cursor before index before u16 offset.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-declaration-order-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-declaration-order-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 87.386795
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 87.386795
+      }
+    },
+    {
+      "name": "const-for-init",
+      "hypothesis": "Const base plus retail induction-definition order.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-for-init-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-for-init-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 86.320755
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 86.320755
+      }
+    },
+    {
+      "name": "const-index-decl",
+      "hypothesis": "Earlier index lifetime with retained const global base.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-index-decl-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-index-decl-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 82.0566
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 82.0566
+      }
+    },
+    {
+      "name": "const-members-direct",
+      "hypothesis": "Initialize const member pointers directly from canonical global member addresses.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-members-direct-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-members-direct-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 81.73585
+      },
+      "candidate": {
+        "size": "428",
+        "match_percent": 81.73585
+      }
+    },
+    {
+      "name": "const-members",
+      "hypothesis": "Const member-pointer aliases may represent symbol-plus-addend constants rather than fold member offsets into variable indexing.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-members-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-members-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 87.0
+      },
+      "candidate": {
+        "size": "420",
+        "match_percent": 87.0
+      }
+    },
+    {
+      "name": "const-offset-decl",
+      "hypothesis": "Earlier output-offset lifetime with retained const global base.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-offset-decl-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-offset-decl-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 82.12264
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 82.12264
+      }
+    },
+    {
+      "name": "const-offset-first",
+      "hypothesis": "With const base retention, change induction definition order for register allocation.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-offset-first-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-offset-first-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 86.254715
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 86.254715
+      }
+    },
+    {
+      "name": "const-order-loop",
+      "hypothesis": "Combine declaration order with cursor/index/offset initialization order and cursor-before-index update.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-order-loop-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-order-loop-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 88.63207
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 88.63207
+      }
+    },
+    {
+      "name": "const-pointee",
+      "hypothesis": "Read-only pointee qualification changes alias information without adding loads.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-pointee-probe.json",
+      "strict_raw_result": null,
+      "retail": null,
+      "candidate": null
+    },
+    {
+      "name": "const-reverse-step",
+      "hypothesis": "With the base now retained, reverse induction update order to match retail cursor-before-counter scheduling.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-reverse-step-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-reverse-step-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 87.29245
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 87.29245
+      }
+    },
+    {
+      "name": "const-typed-blocks",
+      "hypothesis": "Combine successful const base retention with typed block subscript addressing.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-typed-blocks-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/const-typed-blocks-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 86.254715
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 86.254715
+      }
+    },
+    {
+      "name": "destination-0-base-dest-step",
+      "hypothesis": "Separate destination formation from indexed pointer update at call 0 using base-dest-step ordering.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-0-base-dest-step-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-0-base-dest-step-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 93.4434
+      },
+      "candidate": {
+        "size": "412",
+        "match_percent": 93.4434
+      }
+    },
+    {
+      "name": "destination-0-dest-index-step",
+      "hypothesis": "Separate destination formation from indexed pointer update at call 0 using dest-index-step ordering.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-0-dest-index-step-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-0-dest-index-step-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 93.4434
+      },
+      "candidate": {
+        "size": "412",
+        "match_percent": 93.4434
+      }
+    },
+    {
+      "name": "destination-0-dest-step",
+      "hypothesis": "Separate destination formation from indexed pointer update at call 0 using dest-step ordering.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-0-dest-step-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-0-dest-step-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 93.4434
+      },
+      "candidate": {
+        "size": "412",
+        "match_percent": 93.4434
+      }
+    },
+    {
+      "name": "destination-0-index-base-dest-step",
+      "hypothesis": "Separate destination formation from indexed pointer update at call 0 using index-base-dest-step ordering.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-0-index-base-dest-step-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-0-index-base-dest-step-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 93.4434
+      },
+      "candidate": {
+        "size": "412",
+        "match_percent": 93.4434
+      }
+    },
+    {
+      "name": "destination-0-index-dest-step",
+      "hypothesis": "Separate destination formation from indexed pointer update at call 0 using index-dest-step ordering.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-0-index-dest-step-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-0-index-dest-step-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 93.4434
+      },
+      "candidate": {
+        "size": "412",
+        "match_percent": 93.4434
+      }
+    },
+    {
+      "name": "destination-0-step-dest",
+      "hypothesis": "Separate destination formation from indexed pointer update at call 0 using step-dest ordering.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-0-step-dest-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-0-step-dest-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 93.4434
+      },
+      "candidate": {
+        "size": "412",
+        "match_percent": 93.4434
+      }
+    },
+    {
+      "name": "destination-2-base-dest-step",
+      "hypothesis": "Separate destination formation from indexed pointer update at call 2 using base-dest-step ordering.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-2-base-dest-step-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-2-base-dest-step-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 94.90566
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 94.90566
+      }
+    },
+    {
+      "name": "destination-2-dest-index-step",
+      "hypothesis": "Separate destination formation from indexed pointer update at call 2 using dest-index-step ordering.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-2-dest-index-step-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-2-dest-index-step-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 94.90566
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 94.90566
+      }
+    },
+    {
+      "name": "destination-2-dest-step",
+      "hypothesis": "Separate destination formation from indexed pointer update at call 2 using dest-step ordering.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-2-dest-step-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-2-dest-step-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 94.90566
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 94.90566
+      }
+    },
+    {
+      "name": "destination-2-index-base-dest-step",
+      "hypothesis": "Separate destination formation from indexed pointer update at call 2 using index-base-dest-step ordering.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-2-index-base-dest-step-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-2-index-base-dest-step-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 94.90566
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 94.90566
+      }
+    },
+    {
+      "name": "destination-2-index-dest-step",
+      "hypothesis": "Separate destination formation from indexed pointer update at call 2 using index-dest-step ordering.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-2-index-dest-step-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-2-index-dest-step-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 94.90566
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 94.90566
+      }
+    },
+    {
+      "name": "destination-2-step-dest",
+      "hypothesis": "Separate destination formation from indexed pointer update at call 2 using step-dest ordering.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-2-step-dest-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/destination-2-step-dest-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 94.90566
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 94.90566
+      }
+    },
+    {
+      "name": "direct-members-ordered",
+      "hypothesis": "Direct canonical member addresses with const retained global base and correct register order.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/direct-members-ordered-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/direct-members-ordered-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 80.42453
+      },
+      "candidate": {
+        "size": "456",
+        "match_percent": 80.42453
+      }
+    },
+    {
+      "name": "direct-members-ordered-v2",
+      "hypothesis": "Direct canonical member addresses with const retained global base and correct register order.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/direct-members-ordered-v2-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/direct-members-ordered-v2-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 82.87736
+      },
+      "candidate": {
+        "size": "448",
+        "match_percent": 82.87736
+      }
+    },
+    {
+      "name": "displacement-first-step",
+      "hypothesis": "Refine successful split pointer increment using displacement-first-step, preserving the callee ABI and canonical base symbol.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/displacement-first-step-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/displacement-first-step-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 93.396225
+      },
+      "candidate": {
+        "size": "408",
+        "match_percent": 93.396225
+      }
+    },
+    {
+      "name": "final-clean",
+      "hypothesis": "Retain highest measured legal variant; remove redundant lexical scopes and format for review.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/final-clean-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/final-clean-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 94.90566
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 94.90566
+      }
+    },
+    {
+      "name": "inline-address",
+      "hypothesis": "C-only inline expansion may delay member-base/index reassociation; helper must disappear from final object.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/inline-address-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/inline-address-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 92.64151
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 92.64151
+      }
+    },
+    {
+      "name": "inline-base",
+      "hypothesis": "C-only inline expansion may delay member-base/index reassociation; helper must disappear from final object.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/inline-base-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/inline-base-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 88.603775
+      },
+      "candidate": {
+        "size": "412",
+        "match_percent": 88.603775
+      }
+    },
+    {
+      "name": "inline-writer",
+      "hypothesis": "C-only inline expansion may delay member-base/index reassociation; helper must disappear from final object.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/inline-writer-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/inline-writer-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 87.64151
+      },
+      "candidate": {
+        "size": "408",
+        "match_percent": 87.64151
+      }
+    },
+    {
+      "name": "integer-address",
+      "hypothesis": "Cast member address to integer before adding byte index to change address folding.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/integer-address-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/integer-address-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 88.603775
+      },
+      "candidate": {
+        "size": "412",
+        "match_percent": 88.603775
+      }
+    },
+    {
+      "name": "reverse-address",
+      "hypothesis": "Reverse commutative pointer-plus-byte-index operand order.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/reverse-address-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/reverse-address-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 88.63207
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 88.63207
+      }
+    },
+    {
+      "name": "round-u16",
+      "hypothesis": "Retail final rlwinm clears both high 16 bits and low 5 bits; make the rounding wrap explicit.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/round-u16-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/round-u16-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 85.23585
+      },
+      "candidate": {
+        "size": "424",
+        "match_percent": 85.23585
+      }
+    },
+    {
+      "name": "schedule-base-dest-index",
+      "hypothesis": "Separate argument computations into base-dest-index temporaries to constrain address folding and scratch-register scheduling.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/schedule-base-dest-index-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/schedule-base-dest-index-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 92.64151
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 92.64151
+      }
+    },
+    {
+      "name": "schedule-base-displacement",
+      "hypothesis": "Separate argument computations into base-displacement temporaries to constrain address folding and scratch-register scheduling.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/schedule-base-displacement-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/schedule-base-displacement-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 92.64151
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 92.64151
+      }
+    },
+    {
+      "name": "schedule-base-displacement-step",
+      "hypothesis": "Separate argument computations into base-displacement-step temporaries to constrain address folding and scratch-register scheduling.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/schedule-base-displacement-step-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/schedule-base-displacement-step-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 93.396225
+      },
+      "candidate": {
+        "size": "408",
+        "match_percent": 93.396225
+      }
+    },
+    {
+      "name": "schedule-base-index-step",
+      "hypothesis": "Separate argument computations into base-index-step temporaries to constrain address folding and scratch-register scheduling.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/schedule-base-index-step-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/schedule-base-index-step-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 93.396225
+      },
+      "candidate": {
+        "size": "408",
+        "match_percent": 93.396225
+      }
+    },
+    {
+      "name": "schedule-base-step",
+      "hypothesis": "Separate argument computations into base-step temporaries to constrain address folding and scratch-register scheduling.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/schedule-base-step-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/schedule-base-step-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 93.396225
+      },
+      "candidate": {
+        "size": "408",
+        "match_percent": 93.396225
+      }
+    },
+    {
+      "name": "schedule-dest-base-index",
+      "hypothesis": "Separate argument computations into dest-base-index temporaries to constrain address folding and scratch-register scheduling.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/schedule-dest-base-index-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/schedule-dest-base-index-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 92.64151
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 92.64151
+      }
+    },
+    {
+      "name": "schedule-displacement-base",
+      "hypothesis": "Separate argument computations into displacement-base temporaries to constrain address folding and scratch-register scheduling.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/schedule-displacement-base-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/schedule-displacement-base-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 92.64151
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 92.64151
+      }
+    },
+    {
+      "name": "schedule-index-base-dest",
+      "hypothesis": "Separate argument computations into index-base-dest temporaries to constrain address folding and scratch-register scheduling.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/schedule-index-base-dest-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/schedule-index-base-dest-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 92.64151
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 92.64151
+      }
+    },
+    {
+      "name": "schedule-index-dest-base",
+      "hypothesis": "Separate argument computations into index-dest-base temporaries to constrain address folding and scratch-register scheduling.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/schedule-index-dest-base-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/schedule-index-dest-base-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 92.64151
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 92.64151
+      }
+    },
+    {
+      "name": "scoped-array-pointer",
+      "hypothesis": "Pointer-to-whole-array temporary rather than decayed byte pointer.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/scoped-array-pointer-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/scoped-array-pointer-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 92.64151
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 92.64151
+      }
+    },
+    {
+      "name": "scoped-const-integer",
+      "hypothesis": "Const integer member-base temporary at each call site.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/scoped-const-integer-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/scoped-const-integer-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 88.603775
+      },
+      "candidate": {
+        "size": "412",
+        "match_percent": 88.603775
+      }
+    },
+    {
+      "name": "scoped-const-pointer",
+      "hypothesis": "Const local member address at each call site may retain symbol-plus-addend address form.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/scoped-const-pointer-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/scoped-const-pointer-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 92.64151
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 92.64151
+      }
+    },
+    {
+      "name": "scoped-direct-const",
+      "hypothesis": "Scoped const aliases initialized from direct canonical member addresses.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/scoped-direct-const-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/scoped-direct-const-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 78.80189
+      },
+      "candidate": {
+        "size": "444",
+        "match_percent": 78.80189
+      }
+    },
+    {
+      "name": "scoped-direct-const-v2",
+      "hypothesis": "Scoped const aliases initialized from direct canonical member addresses.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/scoped-direct-const-v2-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/scoped-direct-const-v2-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 83.66038
+      },
+      "candidate": {
+        "size": "436",
+        "match_percent": 83.66038
+      }
+    },
+    {
+      "name": "scoped-direct-members",
+      "hypothesis": "Separate direct canonical member-address materialization at each call site.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/scoped-direct-members-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/scoped-direct-members-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 78.9434
+      },
+      "candidate": {
+        "size": "440",
+        "match_percent": 78.9434
+      }
+    },
+    {
+      "name": "scoped-direct-members-v2",
+      "hypothesis": "Separate direct canonical member-address materialization at each call site.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/scoped-direct-members-v2-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/scoped-direct-members-v2-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 83.80189
+      },
+      "candidate": {
+        "size": "432",
+        "match_percent": 83.80189
+      }
+    },
+    {
+      "name": "scoped-integer",
+      "hypothesis": "Integer member-base temporary may block pointer-address reassociation while preserving PPC32 addresses.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/scoped-integer-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/scoped-integer-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 88.603775
+      },
+      "candidate": {
+        "size": "412",
+        "match_percent": 88.603775
+      }
+    },
+    {
+      "name": "scoped-pointer",
+      "hypothesis": "Limit each member-base temporary to its call site, separating base addition from scaled index.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/scoped-pointer-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/scoped-pointer-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 92.64151
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 92.64151
+      }
+    },
+    {
+      "name": "scoped-register",
+      "hypothesis": "Storage-class hint on scoped member-base temporaries.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/scoped-register-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/scoped-register-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 92.64151
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 92.64151
+      }
+    },
+    {
+      "name": "signed-displacement-step",
+      "hypothesis": "Refine successful split pointer increment using signed-displacement-step, preserving the callee ABI and canonical base symbol.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/signed-displacement-step-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/signed-displacement-step-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 93.396225
+      },
+      "candidate": {
+        "size": "408",
+        "match_percent": 93.396225
+      }
+    },
+    {
+      "name": "static-const-members",
+      "hypothesis": "Function-local static const pointer aliases may preserve canonical symbol-plus-addend address constants; inspect for emitted data.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/static-const-members-probe.json",
+      "strict_raw_result": null,
+      "retail": null,
+      "candidate": null
+    },
+    {
+      "name": "static-const-members-v2",
+      "hypothesis": "Function-local static const pointer aliases may preserve canonical symbol-plus-addend address constants; inspect for emitted data.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/static-const-members-v2-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/static-const-members-v2-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 84.15094
+      },
+      "candidate": {
+        "size": "424",
+        "match_percent": 84.15094
+      }
+    },
+    {
+      "name": "step-result",
+      "hypothesis": "Refine successful split pointer increment using step-result, preserving the callee ABI and canonical base symbol.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/step-result-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/step-result-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 93.396225
+      },
+      "candidate": {
+        "size": "408",
+        "match_percent": 93.396225
+      }
+    },
+    {
+      "name": "step-result-u32",
+      "hypothesis": "Refine successful split pointer increment using step-result-u32, preserving the callee ABI and canonical base symbol.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/step-result-u32-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/step-result-u32-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 82.028305
+      },
+      "candidate": {
+        "size": "460",
+        "match_percent": 82.028305
+      }
+    },
+    {
+      "name": "step-subscript",
+      "hypothesis": "Refine successful split pointer increment using step-subscript, preserving the callee ABI and canonical base symbol.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/step-subscript-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/step-subscript-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 93.396225
+      },
+      "candidate": {
+        "size": "408",
+        "match_percent": 93.396225
+      }
+    },
+    {
+      "name": "step-typed",
+      "hypothesis": "Refine successful split pointer increment using step-typed, preserving the callee ABI and canonical base symbol.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/step-typed-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/step-typed-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 93.396225
+      },
+      "candidate": {
+        "size": "408",
+        "match_percent": 93.396225
+      }
+    },
+    {
+      "name": "step-typed-result",
+      "hypothesis": "Refine successful split pointer increment using step-typed-result, preserving the callee ABI and canonical base symbol.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/step-typed-result-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/step-typed-result-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 93.396225
+      },
+      "candidate": {
+        "size": "408",
+        "match_percent": 93.396225
+      }
+    },
+    {
+      "name": "step-unsigned-index",
+      "hypothesis": "Refine successful split pointer increment using step-unsigned-index, preserving the callee ABI and canonical base symbol.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/step-unsigned-index-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/step-unsigned-index-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 93.396225
+      },
+      "candidate": {
+        "size": "408",
+        "match_percent": 93.396225
+      }
+    },
+    {
+      "name": "subscript-address",
+      "hypothesis": "Use address of byte array subscript.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/subscript-address-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/subscript-address-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 88.63207
+      },
+      "candidate": {
+        "size": "416",
+        "match_percent": 88.63207
+      }
+    },
+    {
+      "name": "typed-blocks",
+      "hypothesis": "Typed 0x88-byte block array subscripts may preserve member-address formation before scaled indexing.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/typed-blocks-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/typed-blocks-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 82.40566
+      },
+      "candidate": {
+        "size": "428",
+        "match_percent": 82.40566
+      }
+    },
+    {
+      "name": "typed-both",
+      "hypothesis": "Combine typed block indexing with typed entry induction.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/typed-both-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/typed-both-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 82.40566
+      },
+      "candidate": {
+        "size": "428",
+        "match_percent": 82.40566
+      }
+    },
+    {
+      "name": "typed-entries",
+      "hypothesis": "Typed 0x14-byte entry cursor may change induction-variable allocation without initialization-order changes.",
+      "exact_source_and_command_output": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/typed-entries-probe.json",
+      "strict_raw_result": "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/typed-entries-strict.json",
+      "retail": {
+        "size": "424",
+        "match_percent": 82.40566
+      },
+      "candidate": {
+        "size": "428",
+        "match_percent": 82.40566
+      }
+    }
+  ],
+  "probe_notes": [
+    "Each probe JSON preserves full source, exact compiler and strict command argv, and raw command output; successful probes also preserve the full raw strict comparison.",
+    "Compact raw JSON files retain every original field. Captured build-log CRLF line endings are normalized to LF; text content is unchanged.",
+    "The two initial symbolic-alias failures were a probe-generator substring bug (secondary accidentally replaced); v2 corrected word boundaries. They are not evidence against the compiler hypothesis.",
+    "The const-pointee probe failed for a missing explicit qualifier conversion; it is not treated as a codegen measurement.",
+    "Alternate sources are evidence strings only; one independent C translation unit is retained."
+  ],
+  "scope": "Only assigned C source and assignment-specific reports changed. No runtime, compiler policy, gate, split, registration, progress.json, README.md, private inputs or neighboring sources changed. Pre-existing CLAUDE.md modification is excluded."
+}

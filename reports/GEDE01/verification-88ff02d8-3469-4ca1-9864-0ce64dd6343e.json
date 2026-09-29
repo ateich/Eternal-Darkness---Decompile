@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "assignment_id": "88ff02d8-3469-4ca1-9864-0ce64dd6343e",
+  "commands": [
+    "python3 configure.py",
+    ".tools/bin/ninja -j2",
+    "sha1sum build/GEDE01/main.dol",
+    "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8017BBD0 fn_8017BBD0 -o reports/GEDE01/objdiff-88ff02d8-3469-4ca1-9864-0ce64dd6343e.json --format json-pretty -c function_reloc_diffs=name_address"
+  ],
+  "raw_output": {
+    "build": "build/GEDE01/main.dol: OK",
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+    "dol_gate_note": "The target remains NonMatching and is excluded from the link; the successful checksum verifies that this attempt did not disturb the canonical linked image.",
+    "objdiff": "match_percent=89.765625 retail_bytes=256 generated_bytes=244 retail_instructions=64 generated_instructions=61 relocation_mode=name_address retail_real_relocations=6 generated_real_relocations=6",
+    "retail_relocations": [
+      "8 R_PPC_ADDR16_HA lbl_8064A7C8 addend=0",
+      "16 R_PPC_ADDR16_LO lbl_8064A7C8 addend=0",
+      "140 R_PPC_REL24 fn_800FD40C addend=0",
+      "156 R_PPC_REL24 OSGetTime addend=0",
+      "204 R_PPC_ADDR16_HA lbl_8064A7C8 addend=0",
+      "212 R_PPC_ADDR16_LO lbl_8064A7C8 addend=0"
+    ],
+    "generated_relocations": [
+      "8 R_PPC_ADDR16_HA lbl_8064A7C8 addend=0",
+      "16 R_PPC_ADDR16_LO lbl_8064A7C8 addend=0",
+      "128 R_PPC_REL24 fn_800FD40C addend=0",
+      "144 R_PPC_REL24 OSGetTime addend=0",
+      "192 R_PPC_ADDR16_HA lbl_8064A7C8 addend=0",
+      "200 R_PPC_ADDR16_LO lbl_8064A7C8 addend=0"
+    ],
+    "relocation_types_named_targets_addends_equal": true,
+    "new_hypothesis": "Express the signed wrap as an explicit sign-biased unsigned-add overflow mask so canonical GC/1.3 must expose the retail carry idiom.",
+    "new_hypothesis_result": "The sign-biased overflow form emitted lis/addi/addis/subfc/subfe/and, was 256 bytes, and scored 89.140625%; a local signed limit form emitted subfc/srwi/subfe/and, was 256 bytes, and scored 81.25%. Both were reverted in favor of the 89.765625% baseline."
+  }
+}

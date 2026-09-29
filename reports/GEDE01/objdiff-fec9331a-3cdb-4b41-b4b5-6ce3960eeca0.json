@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "assignment_id": "fec9331a-3cdb-4b41-b4b5-6ce3960eeca0",
+  "target": "fn_801EC350",
+  "unit": "main/game/game_fn_801EC350",
+  "compiler": "GC/1.3",
+  "source_state": "Honest independent C reconstruction recovered from preserved commit 5233e1162, retaining the u8 fn_801EC318 value prototype and per-TU -use_lmw_stmw on, with the center span deliberately computed before the center lookup.",
+  "canonical": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801EC350 fn_801EC350 -o reports/GEDE01/objdiff-fec9331a-3cdb-4b41-b4b5-6ce3960eeca0-canonical.json --format json-pretty",
+    "raw_output": "left_size=812 right_size=792 match_percent=88.74384",
+    "raw_json": "reports/GEDE01/objdiff-fec9331a-3cdb-4b41-b4b5-6ce3960eeca0-canonical.json"
+  },
+  "relocation_strict": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801EC350 fn_801EC350 -o reports/GEDE01/objdiff-fec9331a-3cdb-4b41-b4b5-6ce3960eeca0-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "raw_output": "left_size=812 right_size=792 match_percent=88.74384 left_relocations=23 right_relocations=23 DIFF_ARG_MISMATCH=130 DIFF_DELETE=10 DIFF_INSERT=5 MATCH=63",
+    "raw_json": "reports/GEDE01/objdiff-fec9331a-3cdb-4b41-b4b5-6ce3960eeca0-strict.json",
+    "relocation_result": "All 23 generated call relocations align with the 23 retail relocations under name_address relocation-strict comparison."
+  },
+  "instruction_shape": {
+    "raw_output": "retail: size=812 stmw=1 lmw=1 andc=5 srawi=14 cmpwi=7 b=5 bl=23; generated: size=792 stmw=1 lmw=1 andc=5 srawi=14 cmpwi=7 b=0 bl=23",
+    "finding": "Hoisting the center span before fn_801EC304 makes the generated center sequence match retail's add/add/srawi scheduling and improves strict similarity from 86.576355% to 88.74384%. The remaining 20-byte deficit is exactly five unconditional retail branch instructions, one after each li 255 upper-clamp result. Generated code instead falls through to srawi/andc because that lower clamp is safe after selecting 255. Operand mismatches remain because retail keeps parameters and derived coordinates in r27-r31/r17-r26 while generated code uses r23-r31/r16-r22."
+  },
+  "experiments": [
+    {
+      "hypothesis": "Combine else-guarded bitwise clamps with the previously recovered u8 value prototype and inline stmw/lmw flag.",
+      "raw_output": "left_size=812 right_size=792 match_percent=85.98522",
+      "raw_json": "reports/GEDE01/objdiff-fec9331a-3cdb-4b41-b4b5-6ce3960eeca0-clamp-combination.json",
+      "result": "Discarded; MWCC hoists li 255 ahead of cmpwi and does not emit the five retail join branches."
+    },
+    {
+      "hypothesis": "Compute the center span before the center lookup to match retail scheduling and shorten its live range inside the conditional.",
+      "raw_output": "left_size=812 right_size=792 match_percent=88.74384",
+      "raw_json": "reports/GEDE01/objdiff-fec9331a-3cdb-4b41-b4b5-6ce3960eeca0-span-hoist.json",
+      "result": "Retained; this corrects the documented center scheduling difference and improves the preserved candidate by 2.167485 percentage points."
+    },
+    {
+      "hypothesis": "Use a separate int clamped join variable rather than the previously rejected u8 clamped local.",
+      "raw_output": "left_size=812 right_size=792 match_percent=74.729065",
+      "raw_json": "reports/GEDE01/objdiff-fec9331a-3cdb-4b41-b4b5-6ce3960eeca0-int-clamped.json",
+      "result": "Discarded; it still does not induce the retail branch pattern and substantially regresses live-range allocation."
+    }
+  ],
+  "build": {
+    "command": "python3 configure.py && .tools/bin/ninja -j2",
+    "raw_output": "build/GEDE01/main.dol: OK",
+    "sha1_command": "sha1sum build/GEDE01/main.dol",
+    "sha1_raw_output": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+  }
+}

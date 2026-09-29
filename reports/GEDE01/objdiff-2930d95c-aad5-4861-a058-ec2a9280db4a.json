@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "assignment_id": "2930d95c-aad5-4861-a058-ec2a9280db4a",
+  "target": "fn_801D0050",
+  "source": "eternal-darkness-decomp/src/game/game_fn_801D0050.c",
+  "registration": "Object(Matching, \"game/game_fn_801D0050.c\", mw_version=\"GC/1.3\", extra_cflags=[\"-use_lmw_stmw on\"])",
+  "base_commit": "0911855ad86b2284ba33cac8e5cef763ed1db8e1",
+  "preserved_source_commit": "c86c96a908fd8af4e4acae8e4a640d3f0e783776",
+  "base_reconciliation": "The accepted base already contained the preserved 95.95269% source. No cherry-pick or neighboring-function changes were required. Earlier report edce4e8b was also inspected.",
+  "hypothesis": "Model entity identifiers as signed integer handles, pass the live values explicitly through lookup calls, mask the 64-bit result before narrowing, and model the global lookup as a normal inline indexed accessor. Order independent locals by their retail lifetimes and infer a 20-byte payload union from the observed stack extent; do not group locals into the previously unsuccessful aggregate-stack struct.",
+  "changes": [
+    "Restore nested entity-rejection control flow and use a separate notice local for the second notification path.",
+    "Use explicit object/handle/state arguments in fn_80201B64, fn_80201814, fn_80201C24, fn_801579EC, fn_80201B94, fn_80201C48 and fn_80201EB8.",
+    "Recover register allocation and all stack offsets by local declaration order and a 20-byte payload union.",
+    "Use low-word masking before the u32 cast and retail operand order in the final z-coordinate addition.",
+    "Inline the ordinary global array accessor; no assembly, compiler-policy changes, or binary transformations were added."
+  ],
+  "raw_outputs": {
+    "canonical": "eternal-darkness-decomp/reports/GEDE01/objdiff-2930d95c-aad5-4861-a058-ec2a9280db4a-canonical.raw.json",
+    "relocation_strict": "eternal-darkness-decomp/reports/GEDE01/objdiff-2930d95c-aad5-4861-a058-ec2a9280db4a-reloc-strict.raw.json",
+    "elf_bytes_and_relocations": "eternal-darkness-decomp/reports/GEDE01/elf-2930d95c-aad5-4861-a058-ec2a9280db4a.raw.json",
+    "verification_commands": "eternal-darkness-decomp/reports/GEDE01/verification-2930d95c-aad5-4861-a058-ec2a9280db4a.raw.json",
+    "build_log": "eternal-darkness-decomp/reports/GEDE01/build-2930d95c-aad5-4861-a058-ec2a9280db4a.log",
+    "reproduction_script": "eternal-darkness-decomp/reports/GEDE01/verify-2930d95c-aad5-4861-a058-ec2a9280db4a.py"
+  },
+  "build": {
+    "command": "python3 configure.py && .tools/bin/ninja -j2",
+    "working_directory": "eternal-darkness-decomp",
+    "exit_code": 0,
+    "raw_output_file": "eternal-darkness-decomp/reports/GEDE01/build-2930d95c-aad5-4861-a058-ec2a9280db4a.log",
+    "matched_source_linked": true
+  },
+  "canonical": {
+    "match_percent": 100.0,
+    "retail_bytes": 1860,
+    "generated_bytes": 1860,
+    "exact_instruction_rows": 465
+  },
+  "relocation_strict": {
+    "configuration": "function_reloc_diffs=name_address",
+    "match_percent": 100.0,
+    "exact_instruction_rows": 465,
+    "mismatched_rows": 0
+  },
+  "independent_elf_check": {
+    "text_bytes_equal": true,
+    "text_sha1": "9e8b9c1aa85f81ada75cf264150b145512b86baa",
+    "relocation_count": 90,
+    "relocations_equal": true,
+    "compared_fields": [
+      "offset",
+      "type",
+      "target",
+      "target_value",
+      "addend"
+    ]
+  },
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "divergence": ""
+}

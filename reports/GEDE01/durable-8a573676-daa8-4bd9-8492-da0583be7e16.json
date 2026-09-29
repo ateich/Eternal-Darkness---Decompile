@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "8a573676-daa8-4bd9-8492-da0583be7e16",
+  "attempt": 3,
+  "base_commit": "ff4c101bc471e595ef0312952a7e3c0ecbaab1ba",
+  "target": "fn_800A2B8C",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-8a573676-daa8-4bd9-8492-da0583be7e16.json"
+  ],
+  "divergence": "Size-exact 400/400-byte honest C at 81.11% canonical and relocation-strict objdiff, improved from 79.93% by capturing lbl_8064EE8C, lbl_8064EE94, and lbl_8064EE90 in float locals so the conversion tail uses retail FP registers f0/f2/f3. Remaining divergence is concentrated at 0x80-0xDC: generated code hoists those three loads to 0x80-0x90, schedules the integer field stores later, and still relocates the u16-to-float bias load to compiler pool @10 instead of retail lbl_8064EE98. The lbl_8064EE70 load remains at generated 0x13C rather than retail 0x128. The tested explicit double-overlay hypothesis owned lbl_8064EE98 but regressed to 71.38%/404 bytes by emitting fsub plus frsp, so it was not retained."
+}

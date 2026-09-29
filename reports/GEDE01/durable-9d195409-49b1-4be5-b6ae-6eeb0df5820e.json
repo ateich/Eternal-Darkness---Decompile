@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "assignment_id": "9d195409-49b1-4be5-b6ae-6eeb0df5820e",
+  "attempt": 5,
+  "base_commit": "e65bb612e9b6c4bfdd4f3fb11bbb476081d7c77c",
+  "target": "fn_801B3770",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-9d195409-49b1-4be5-b6ae-6eeb0df5820e.json",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-9d195409-49b1-4be5-b6ae-6eeb0df5820e.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 81.336205%: 464 retail bytes versus 512 generated, improved from the preserved canonical 76.336205%/524-byte reconstruction. Generated code retains two extra loop-preheader branches per traversal, loads lbl_8060C020 HA after the prologue rather than at retail +0x4, and uses clrrwi plus or instead of rlwimi at both resolver hits. The signed high-bit test becomes cmpwi/blt rather than retail clrrwi./bne. Register allocation, the 0x30-byte rather than 0x28-byte frame, and third-list addi/lwzx versus add/lwz also differ. The free-list insertion now uses the retail two global loads. All 12 real .text relocation types, targets and addends match as a multiset, but relocation sites differ; neither bytes nor strict relocation records are identical."
+}

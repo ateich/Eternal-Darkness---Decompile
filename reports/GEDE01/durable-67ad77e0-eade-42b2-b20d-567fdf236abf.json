@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "67ad77e0-eade-42b2-b20d-567fdf236abf",
+  "attempt": 4,
+  "base_commit": "1dd681a44aa5400c0e1db35b77791a9744c9ce4d",
+  "target": "fn_80088060",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-67ad77e0-eade-42b2-b20d-567fdf236abf.json"
+  ],
+  "divergence": "Relocation-strict objdiff measures 87.69718%: retail is 568 bytes with 37 instruction relocations, generated is 552 bytes with 33. The mode switch and signed remainder arithmetic match, but canonical MWCC materializes the table base later and colors work/object/count registers differently; it lowers the first two preincrement table stores with update forms and the third with a different increment schedule instead of retail's separate pointer increments, and lowers the final indexed fields as mulli/addi/stbx instead of retail's mulli/add/stb. A distinct table-loop hypothesis using pointers initialized at element one plus postincrement stores produced identical 87.69718% codegen, so the simpler preserved candidate was retained. The canonical build completed and both build/GEDE01/main.dol and orig/GEDE01/sys/main.dol have SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}

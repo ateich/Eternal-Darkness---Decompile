@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "assignment_id": "962297be-3339-47a7-a590-d17fb28f8cee",
+  "attempt": 7,
+  "base_commit": "405753ab159881853570d89a18e5ba790ef2a10d",
+  "target": "fn_801D73D0",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-962297be-3339-47a7-a590-d17fb28f8cee.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-962297be-3339-47a7-a590-d17fb28f8cee-reloc-strict.json"
+  ],
+  "divergence": "Fresh canonical and relocation-strict objdiff each score 78.62637%; retail is 728 bytes and generated is 724 bytes, with 22 relocations on each side. Reordering the local declarations is a distinct register-coloring hypothesis and improves the preserved relocation-strict 77.99451% candidate: object, kind, and now now use retail's r30, r25, and r24. Remaining codegen divergence is that first/second use r28/r29 instead of r26/r27, handle/item use r26/r27 instead of r31/r29, and damage uses r31 instead of r28. Retail also emits a redundant low-word li/and pair after fn_8020123C, while generated compares r4 directly; a tested u64 masking spelling regressed to 75.95605% and was not retained. The conversion/effect sequence still uses f3 rather than retail f4 and the function remains four bytes shorter. The generated conversion-bias relocation resolves to lbl_806510D8 with the same R_PPC_EMB_SDA21 type and zero addend as retail. The fallback-linked DOL SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f; because this TU remains NonMatching, that is build-integrity evidence only."
+}

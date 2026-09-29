@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "assignment_id": "6a589af9-1098-4c85-b57e-b68b11436817",
+  "attempt": 5,
+  "base_commit": "86c9ccfd1968cabdee21076af6c7a7d5d1c08662",
+  "target": "fn_801F8620",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-6a589af9-1098-4c85-b57e-b68b11436817.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-strict-6a589af9-1098-4c85-b57e-b68b11436817.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-6a589af9-1098-4c85-b57e-b68b11436817.log",
+    "eternal-darkness-decomp/reports/GEDE01/verification-6a589af9-1098-4c85-b57e-b68b11436817.json",
+    "eternal-darkness-decomp/reports/GEDE01/trials-6a589af9-1098-4c85-b57e-b68b11436817.json"
+  ],
+  "divergence": "Canonical GC/1.3 and independently invoked relocation-strict objdiff (functionRelocDiffs=all) both measure 91.413795%, improved from preserved attempt 4 at 90.72414%. Retail .text is 116 bytes; generated .text is 108. The inline snapshot improves first/second handle register allocation to retail r3/r0. MWCC still omits retail addi r3,r4,0xCC0 at 0x28 and addi r4,r4,0xD48 at 0x34, folding loads into global-base displacements 0xCF0/0xD30/0xD78/0xDB8. Initial global HA uses r3 rather than r4; count and scaled index exchange r3/r5, affecting mulli, increment and saved-pointer add. Five external relocation type/target/addend entries agree; counter-store offsets differ 0x2C/0x28 and call offsets differ 0x58/0x50 (retail/generated). Remains NonMatching. Full configure/Ninja passed; canonical DOL SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f. Separate raw objdiff outputs, commands, build log, relocation/symbol dumps and legal audit are preserved."
+}

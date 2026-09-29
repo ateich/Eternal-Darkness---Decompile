@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "assignment_id": "3d06dfc9-c83c-489e-ada9-bc7e7a3d6826",
+  "configuration": {
+    "command": "python3 configure.py",
+    "exit_code": 0,
+    "compiler": "GC/1.3",
+    "cflags": "-nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma cats off -pragma warn_notinlined off -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c",
+    "configure_registration": "Object(NonMatching, game/game_fn_800EEC44.c)",
+    "compiler_override": false
+  },
+  "build": {
+    "command": ".tools/bin/ninja -j2",
+    "exit_code": 0,
+    "raw_terminal_output": [
+      "[933/939] MWCC build/GEDE01/src/game/game_fn_800EEC44.o",
+      "[935/939] REPORT",
+      "[936/939] LINK build/GEDE01/main.elf",
+      "[937/939] DOL build/GEDE01/main.dol",
+      "[938/939] CHECK config/GEDE01/build.sha1",
+      "build/GEDE01/main.dol: OK",
+      "[939/939] PROGRESS"
+    ]
+  },
+  "dol_verification": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol && cmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": [
+      "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+      "ea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol",
+      "dol_cmp_exit=0"
+    ]
+  },
+  "canonical_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_800EEC44 fn_800EEC44 -o reports/GEDE01/canonical-3d06dfc9-c83c-489e-ada9-bc7e7a3d6826.json --format json-pretty",
+    "exit_code": 0,
+    "raw_summary": "retail_bytes=444 generated_bytes=444 match_percent=67.954956"
+  },
+  "relocation_strict_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_800EEC44 fn_800EEC44 -o reports/GEDE01/objdiff-3d06dfc9-c83c-489e-ada9-bc7e7a3d6826.json --format json-pretty -c function_reloc_diffs=name_address",
+    "exit_code": 0,
+    "raw_summary": "retail_bytes=444 generated_bytes=444 match_percent=67.954956; generated has R_PPC_REL24 relocations to _savegpr_14 and _restgpr_14 absent from retail"
+  },
+  "legal_audit": {
+    "source_kind": "independent C reconstruction from retail disassembly and preserved worktree attempts",
+    "inline_or_whole_function_assembly": false,
+    "shared_reconstruction": false,
+    "private_input_modified": false,
+    "generated_binary_staged": false
+  }
+}

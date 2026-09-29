@@ -1,0 +1,73 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801D0050",
+        "fn_801D0050",
+        "-o",
+        "reports/GEDE01/objdiff-2930d95c-aad5-4861-a058-ec2a9280db4a-canonical.raw.json",
+        "--format",
+        "json-pretty"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": " INFO Writing to reports/GEDE01/objdiff-2930d95c-aad5-4861-a058-ec2a9280db4a-canonical.raw.json\n"
+    },
+    {
+      "argv": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_801D0050",
+        "fn_801D0050",
+        "-o",
+        "reports/GEDE01/objdiff-2930d95c-aad5-4861-a058-ec2a9280db4a-reloc-strict.raw.json",
+        "--format",
+        "json-pretty",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": " INFO Writing to reports/GEDE01/objdiff-2930d95c-aad5-4861-a058-ec2a9280db4a-reloc-strict.raw.json\n"
+    },
+    {
+      "argv": [
+        "sha1sum",
+        "build/GEDE01/main.dol"
+      ],
+      "exit_code": 0,
+      "stdout": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/legal_audit.py"
+      ],
+      "exit_code": 0,
+      "stdout": "legal audit passed (23269 tracked project files inspected)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "--",
+        "configure.py",
+        "src/game/game_fn_801D0050.c"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}

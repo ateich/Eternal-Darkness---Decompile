@@ -1,0 +1,14 @@
+{
+  "assignment_id": "0ec8744e-ff12-48ea-931d-04c18dfb7003",
+  "preserved_commit": "3860379ab085e0f538b56f53653d468e6fe369bd",
+  "base_source_identical_to_preserved": true,
+  "hypothesis": "Reusing the output parameter for pointer advances changes MWCC variable identity and live-range allocation, unlike merely hoisting a separate pointer or delta local. Apply this to indexed stores as well.",
+  "baseline_percent": 92.55102,
+  "intermediate_percent": 99.4898,
+  "final_percent": 100.0,
+  "result": "Replacing branch-local p with updates to output fixed all case-1/default register differences and restored subf; slwi; lwz at offsets 268-276. Replacing the two output[index] stores with output += index; *output = *first fixed the last seven register-operand differences. No arithmetic constants, input types, compiler settings, or memory access order were changed in the retained source.",
+  "rejected_variants": "Shared locals, signed arithmetic locals, named loads, explicit byte offsets, commuted subscripts, register hints, shared exits, and volatile qualifiers did not improve the baseline. Halfword arithmetic locals scored 90.96939 and were discarded. Reusing position/width for indices did not improve 99.4898. Exact patches, build stdout/stderr, measured scores, and raw objdiff reports are preserved in the experiment log.",
+  "scope": "Only target source, its Matching registration, and assignment-specific reports. The existing split remains correct. Pre-existing CLAUDE.md modification is outside the authorized edit scope and is untouched. No progress.json/README.md edits, compiler-policy changes, private-input changes, or remote push.",
+  "evidence_note": "Trial reports and final canonical/strict reports are unmodified objdiff output. Verification records actual stdout/stderr, not summaries labeled as raw output. The first shared-index edit had a C89 declaration-order syntax error; its corrected version was measured and logged.",
+  "experiment_log": "eternal-darkness-decomp/reports/GEDE01/experiments-0ec8744e-ff12-48ea-931d-04c18dfb7003.json"
+}

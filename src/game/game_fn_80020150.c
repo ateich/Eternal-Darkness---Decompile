@@ -1,6 +1,7 @@
 typedef unsigned char u8;
 typedef int s32;
 typedef unsigned int u32;
+typedef signed long long s64;
 
 typedef struct RuntimeState {
     u32 first_handle;
@@ -13,6 +14,7 @@ typedef struct RuntimeState {
     s32 state;
     s32 counter;
     s32 selection;
+    u32 reserved_2C;
     u32 flags;
     u32 aux_handle;
     u32 sound_handle;
@@ -21,15 +23,14 @@ typedef struct RuntimeState {
 } RuntimeState;
 
 extern u8 lbl_80302400[];
-extern RuntimeState lbl_8030241C;
 extern s32 lbl_803003C8[];
 extern u8 lbl_8030F540[];
 extern s32 lbl_8064C654;
 extern s32 lbl_8064C658;
 extern void* lbl_8064C504;
 extern s32 lbl_8064C644;
-extern s32 lbl_8064C6B4[];
-extern s32 lbl_8064C6BC[];
+extern s32 lbl_8064C6B4[2];
+extern s32 lbl_8064C6BC[2];
 extern u32 lbl_8064C6C4;
 extern s32 lbl_8064C6C8;
 extern s32 lbl_8064C6D0;
@@ -73,12 +74,16 @@ extern void fn_801A9964(u32);
 extern void fn_8020F0F8(void*);
 extern void fn_8020EF80(void*);
 extern void fn_8020EFBC(void*);
-extern float fn_8020F088(void*);
+extern s64 fn_8020F088(void*);
 extern s32 fn_8020ED10(void);
 extern void fn_8020ED80(s32);
 extern void* fn_80218308(void);
-extern float fn_800F5ECC(float, s32, s32, s32);
-extern float fn_800F6264(void);
+extern s64 fn_800F5ECC(s64, s64);
+extern float fn_800F6264(s64);
+
+/* Convert time-base ticks using the bus clock, as in the retail call sequence. */
+#define TIMER_MS() fn_800F6264(fn_800F5ECC(fn_8020F088(base + 0x60), \
+    (*(volatile u32*)0x800000F8 / 4) / 1000))
 extern void* fn_80144710(s32, s32, s32);
 extern void fn_80052580(s32, s32, s32, s32, s32);
 extern void fn_80042F34(void);
@@ -86,14 +91,16 @@ extern void fn_80042E94(void);
 
 void fn_80020150(void)
 {
-    RuntimeState* runtime = &lbl_8030241C;
-    s32 elapsed = fn_801A8C60(240, 150, lbl_80302400 + 0x5C,
-                              lbl_80302400 + 0x58);
+    u8* base = lbl_80302400;
+    u32* handle_data;
+    RuntimeState* runtime = (RuntimeState*)(base + 0x1C);
+    s32 elapsed;
+    fn_801A8C60(240, 150, base + 0x5C, base + 0x58);
 
     if (runtime->previous_value == 255) {
         fn_80144C4C((void*)lbl_8064C658);
     }
-    runtime->counter++;
+    elapsed = ++runtime->counter;
 
     switch (runtime->mode) {
     case 29:
@@ -104,20 +111,7 @@ void fn_80020150(void)
         break;
 
     case 18:
-    case 19:
-        if (runtime->mode == 18 &&
-            (elapsed < 600 || lbl_8064C654 != 0)) break;
-        if (runtime->mode == 19) {
-            lbl_8064C644 = 1;
-            if (fn_801AD72C() != -1) break;
-            fn_801E5FB0(runtime->first_handle);
-            runtime->first_handle = 0;
-            fn_8001DFEC(23, 0);
-            fn_8001DA18();
-            runtime->counter = 0;
-            *(u8*)(lbl_80302400 + 0x5C) = 0;
-            break;
-        }
+        if (elapsed < 600 || lbl_8064C654 != 0) break;
         fn_801E5FB0(runtime->first_handle);
         fn_801E5FB0(runtime->second_handle);
         fn_801E5FB0(runtime->third_handle);
@@ -127,31 +121,66 @@ void fn_80020150(void)
         runtime->counter = 0;
         runtime->mode = 19;
         runtime->first_handle = (u32)fn_801E6CA0(lbl_8064C504, 0, 35, 0, 1);
-        *fn_801E5D08(runtime->first_handle) = lbl_8064C2AC;
+        handle_data = fn_801E5D08(runtime->first_handle);
+        *handle_data = lbl_8064C2AC;
         fn_801EF5EC();
         break;
 
-    case 1:
-    case 2: {
+    case 19:
+        lbl_8064C644 = 1;
+        if (fn_801AD72C() != -1) break;
+        fn_801E5FB0(runtime->first_handle);
+        runtime->first_handle = 0;
+        fn_8001DFEC(23, 0);
+        fn_8001DA18();
+        runtime->counter = 0;
+        *(u8*)(base + 0x5C) = 0;
+        break;
+
+    case 1: {
         s32 limit;
+        float now;
         if (((signed char*)lbl_8030F540)[0x1D9]) runtime->flags |= 1;
         if (runtime->previous_value != 255) break;
         if (!(runtime->flags & 2)) {
             runtime->flags |= 2;
-            fn_8020F0F8(lbl_80302400 + 0x60);
-            fn_8020EF80(lbl_80302400 + 0x60);
+            fn_8020F0F8(base + 0x60);
+            fn_8020EF80(base + 0x60);
             break;
         }
-        limit = runtime->mode == 1 ? 1000 : 500;
-        fn_8020F088(lbl_80302400 + 0x60);
-        fn_800F6264();
+        limit = 1000;
+        now = TIMER_MS();
         if (runtime->flags & 1)
-            limit = *(s32*)(lbl_80302400 + 0x2CC + runtime->mode * 4);
-        if (fn_800F6264() >= (float)limit) {
-            fn_8001DFEC(runtime->mode == 1 ? 24 : 26, 0);
-            runtime->counter = 0;
-            *(u8*)(lbl_80302400 + 0x5C) = 0;
+            limit = *(s32*)(base + 0x2CC + 1 * 4);
+        if (now >= (float)limit) {
+            fn_8001DFEC(24, 0);
             fn_8001DA18();
+            runtime->counter = 0;
+            *(u8*)(base + 0x5C) = 0;
+        }
+        break;
+    }
+
+    case 2: {
+        s32 limit;
+        float now;
+        if (((signed char*)lbl_8030F540)[0x1D9]) runtime->flags |= 1;
+        if (runtime->previous_value != 255) break;
+        if (!(runtime->flags & 2)) {
+            runtime->flags |= 2;
+            fn_8020F0F8(base + 0x60);
+            fn_8020EF80(base + 0x60);
+            break;
+        }
+        limit = 500;
+        now = TIMER_MS();
+        if (runtime->flags & 1)
+            limit = *(s32*)(base + 0x2CC + 2 * 4);
+        if (now >= (float)limit) {
+            fn_8001DFEC(26, 0);
+            fn_8001DA18();
+            runtime->counter = 0;
+            *(u8*)(base + 0x5C) = 0;
         }
         break;
     }
@@ -159,15 +188,15 @@ void fn_80020150(void)
     case 27:
         fn_8001DFEC(25, 0);
         runtime->counter = 0;
-        *(u8*)(lbl_80302400 + 0x5C) = 0;
+        *(u8*)(base + 0x5C) = 0;
         break;
 
     case 26:
         if (runtime->previous_value != 255) break;
         if (!(runtime->flags & 2)) {
             runtime->flags |= 2;
-            fn_8020F0F8(lbl_80302400 + 0x60);
-            fn_8020EF80(lbl_80302400 + 0x60);
+            fn_8020F0F8(base + 0x60);
+            fn_8020EF80(base + 0x60);
             fn_8001DA18();
             if (!(runtime->flags & 1)) {
                 fn_801AD404(100, 100, 1);
@@ -177,13 +206,12 @@ void fn_80020150(void)
         }
         {
             s32 limit = (runtime->flags & 1)
-                ? *(s32*)(lbl_80302400 + 0x2D8) : 9820;
+                ? *(s32*)(base + 0x2D8) : 9820;
             float now;
-            fn_8020F088(lbl_80302400 + 0x60);
-            now = fn_800F6264();
+            now = TIMER_MS();
             if (fn_801AD72C() == -1 && now >= (float)limit) {
                 runtime->counter = 0;
-                *(u8*)(lbl_80302400 + 0x5C) = 200;
+                *(u8*)(base + 0x5C) = 200;
                 fn_801AD404(0, 0, 10); fn_801A99B4();
                 fn_801AD490(); fn_801A99B4();
                 fn_801AD404(100, 100, 1); fn_801A99B4();
@@ -195,11 +223,12 @@ void fn_80020150(void)
 
     case 8:
     case 30:
-        if (fn_800B193C() == 0 && fn_8001DA04() == 0) {
+        if ((fn_800B193C() == 0 && fn_8001DA04() == 0) ||
+            (fn_800B193C() && fn_800B194C() == 34)) {
             s32 i;
-            for (i = 0; i < 2; ++i) {
-                s32 old = lbl_8064C6B4[i];
+            for (i = 0; i <= 1; ++i) {
                 s32 current = fn_802201FC(i);
+                s32 old = lbl_8064C6B4[i];
                 lbl_8064C6B4[i] = current;
                 if (current && !old) {
                     if (fn_800B193C() && fn_800B194C() == 34)
@@ -211,30 +240,33 @@ void fn_80020150(void)
                         break;
                     }
                 }
-                if (!current) lbl_8064C6BC[i] = 0;
+                if (!lbl_8064C6B4[i]) lbl_8064C6BC[i] = 0;
             }
-        } else if (fn_800B193C() && fn_800B194C() == 34) {
-            break;
         }
         break;
 
     case 3: {
-        s32 ready = 0;
+        s32 ready;
         if (!(runtime->flags & 2)) {
             runtime->flags |= 2;
-            fn_8020F0F8(lbl_80302400 + 0x60);
-            fn_8020EF80(lbl_80302400 + 0x60);
+            fn_8020F0F8(base + 0x60);
+            fn_8020EF80(base + 0x60);
         }
+        ready = 0;
         if (runtime->counter <= 120)
             ready = lbl_8064C6D0 | (fn_8020ED10() == 1);
         if (lbl_8064C654 == 0 && fn_80218308() && ready && !lbl_8064C644) {
             runtime->first_handle = (u32)fn_801E6CA0(lbl_8064C504,0,32,0,1);
             runtime->second_handle = (u32)fn_801E6CA0(lbl_8064C504,0,33,0,1);
             runtime->third_handle = (u32)fn_801E6CA0(lbl_8064C504,0,34,0,1);
-            *fn_801E5D08(runtime->first_handle) = lbl_8064C2AC;
-            *fn_801E5D08(runtime->second_handle) = lbl_8064C2AC;
-            *fn_801E5D08(runtime->third_handle) = lbl_8064C2AC;
-            *fn_801E5D08(runtime->second_handle) = lbl_8064C2B0;
+            handle_data = fn_801E5D08(runtime->first_handle);
+            *handle_data = lbl_8064C2AC;
+            handle_data = fn_801E5D08(runtime->second_handle);
+            *handle_data = lbl_8064C2AC;
+            handle_data = fn_801E5D08(runtime->third_handle);
+            *handle_data = lbl_8064C2AC;
+            handle_data = fn_801E5D08(runtime->second_handle);
+            *handle_data = lbl_8064C2B0;
             *fn_801E5D20(runtime->second_handle) |= 0x60;
             fn_8001DFEC(18,0);
             runtime->selection = 1;
@@ -242,34 +274,43 @@ void fn_80020150(void)
         }
         if (!fn_80218308()) fn_8020ED80(0);
         if (fn_801AD72C() == -1) {
-            fn_8020F088(lbl_80302400 + 0x60);
-            fn_800F6264();
-            if (fn_800F6264() > lbl_8064DED8) {
+            if (TIMER_MS() > lbl_8064DED8) {
                 fn_801AD404(0,0,10); fn_801A99B4();
                 fn_801AD490(); fn_801A99B4();
                 fn_801AD404(100,100,1); fn_801A99B4();
-                if (runtime->value == 12) {
-                    runtime->counter = 0; *(u8*)(lbl_80302400 + 0x5C) = 200;
+                switch (runtime->value) {
+                case 12:
+                    runtime->counter = 0; *(u8*)(base + 0x5C) = 200;
                     fn_8001DE84(7,0); fn_8001DA18();
                     runtime->mode = 7; runtime->selection = 5;
                     runtime->sound_handle = fn_801A98F4(0x275,100);
-                } else {
+                    break;
+                default:
                     fn_8001DFEC(23,0); fn_8001DA18();
+                    break;
                 }
-                runtime->counter = 0; *(u8*)(lbl_80302400 + 0x5C) = 0;
+                runtime->counter = 0; *(u8*)(base + 0x5C) = 0;
             }
         }
         break;
     }
 
     case 23:
+        if (runtime->previous_value == 255) {
+            fn_8001DFEC(1, 0); fn_8001DA18();
+            if (!(runtime->flags & 1))
+                fn_80052580(0, 0, 0, 0, 0);
+            runtime->previous_value = 0;
+            runtime->counter = 0; *(u8*)(base + 0x5C) = 0;
+        }
+        break;
+
     case 24:
         if (runtime->previous_value == 255) {
-            fn_8001DFEC(runtime->mode == 23 ? 1 : 2, 0); fn_8001DA18();
+            fn_8001DFEC(2, 0); fn_8001DA18();
             if (!(runtime->flags & 1))
-                fn_80052580(0, runtime->mode == 23 ? 0 : 44, 0, 0, 0);
-            if (runtime->mode == 23) runtime->previous_value = 0;
-            runtime->counter = 0; *(u8*)(lbl_80302400 + 0x5C) = 0;
+                fn_80052580(0, 44, 0, 0, 0);
+            runtime->counter = 0; *(u8*)(base + 0x5C) = 0;
         }
         break;
 
@@ -282,35 +323,38 @@ void fn_80020150(void)
     case 25:
         if (runtime->previous_value == 255) {
             fn_8001DE84(7,0); fn_8001DA18();
-            fn_8020F0F8(lbl_80302400+0x60); fn_8020EF80(lbl_80302400+0x60);
+            fn_8020F0F8(base+0x60); fn_8020EF80(base+0x60);
             fn_80042F34(); fn_80042E94();
-            fn_8020F088(lbl_80302400 + 0x60); fn_800F6264();
+            fn_8020F088(base + 0x60);
             if (!(runtime->flags & 1)) fn_80052580(0,1,0,0,0);
             else runtime->sound_handle = fn_801A98F4(0x275,100);
             runtime->counter = 0; runtime->selection = 5;
-            *(u8*)(lbl_80302400 + 0x5C) = 0;
+            *(u8*)(base + 0x5C) = 0;
         }
         break;
 
     case 4:
         if (runtime->previous_value == 255 && !(runtime->flags & 2)) {
             runtime->flags |= 2;
-            fn_8020F0F8(lbl_80302400+0x60); fn_8020EF80(lbl_80302400+0x60);
-        }
-        break;
-
-    case 251:
-    case 252:
-        if (elapsed >= 120) {
-            fn_8001DE84(251,0);
-            runtime->first_handle = (u32)fn_801E6CA0(lbl_8064C504,0,
-                lbl_803003C8[0] == 1 ? 62 : 40,0,1);
-            fn_801E6F9C(runtime->first_handle,0);
+            fn_8020F0F8(base+0x60); fn_8020EF80(base+0x60);
         }
         break;
 
     case 253:
     case 254:
+        if (elapsed >= 120) {
+            u32 handle;
+            fn_8001DE84(251,0);
+            if (lbl_803003C8[0] == 1)
+                handle = (u32)fn_801E6CA0(lbl_8064C504,0,62,0,1);
+            else
+                handle = (u32)fn_801E6CA0(lbl_8064C504,0,40,0,1);
+            fn_801E6F9C(handle,0);
+        }
+        break;
+
+    case 251:
+    case 252:
         if (elapsed >= 1800) fn_80025A78(1);
         break;
 
@@ -318,19 +362,18 @@ void fn_80020150(void)
         float now;
         if (!(runtime->flags & 2)) {
             runtime->flags |= 2;
-            fn_8020EF80(lbl_80302400+0x60); fn_8020F0F8(lbl_80302400+0x60);
+            fn_8020EF80(base+0x60); fn_8020F0F8(base+0x60);
         }
-        fn_8020F088(lbl_80302400 + 0x60);
-        now = fn_800F6264();
+        now = TIMER_MS();
         if (fn_80144710(-1,0,0)) {
-            fn_8020EFBC(lbl_80302400+0x60);
-            fn_8020F0F8(lbl_80302400+0x60);
-            fn_8020EF80(lbl_80302400+0x60);
+            fn_8020EFBC(base+0x60);
+            fn_8020F0F8(base+0x60);
+            fn_8020EF80(base+0x60);
         }
         if (now >= lbl_8064DEDC) {
             runtime->flags = 40;
-            fn_8020EFBC(lbl_80302400+0x60);
-            runtime->counter = 0; *(u8*)(lbl_80302400+0x5C)=200;
+            fn_8020EFBC(base+0x60);
+            runtime->counter = 0; *(u8*)(base+0x5C)=200;
             fn_8001DFEC(23,0); fn_8001DA18();
             fn_801A9964(lbl_8064C650);
             if (runtime->sound_handle != (u32)-1) fn_801A9964(runtime->sound_handle);
@@ -340,13 +383,13 @@ void fn_80020150(void)
     }
     }
 
-    if ((runtime->flags & 9) == 9 && runtime->mode != 7) {
+    if ((runtime->flags & 1) && (runtime->flags & 8) && runtime->mode != 7) {
         fn_8001DFEC(27,0); fn_8001DA18();
         fn_8001DE84(7,0); fn_8001DA18();
         runtime->flags &= ~9u;
         runtime->sound_handle = fn_801A98F4(0x275,100);
         runtime->selection = 5;
         runtime->counter = 0;
-        *(u8*)(lbl_80302400+0x5C)=0;
+        *(u8*)(base+0x5C)=0;
     }
 }

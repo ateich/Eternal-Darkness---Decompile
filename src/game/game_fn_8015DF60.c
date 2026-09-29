@@ -2,17 +2,19 @@ typedef unsigned int u32;
 
 typedef struct StreamState {
     unsigned char pad0[0x14];
-    unsigned char* volatile end;
-    unsigned char* volatile cursor;
-    unsigned char* volatile read;
-    unsigned char* volatile write;
-    unsigned char* volatile limit;
+    u32 end;
+    u32 cursor;
+    u32 read;
+    u32 write;
+    u32 boundary;
+    u32 limit;
 } StreamState;
 
-extern StreamState lbl_805BB1E0;
+extern volatile StreamState lbl_805BB1E0;
 extern int OSDisableInterrupts(void);
 extern void OSRestoreInterrupts(int);
 
+/* NonMatching: size-exact; retail uses r4 for one dead volatile load, generated uses r3. */
 u32 fn_8015DF60(void)
 {
     int interrupts;
@@ -24,20 +26,20 @@ u32 fn_8015DF60(void)
         OSRestoreInterrupts(interrupts);
         return 0;
     }
-    if (lbl_805BB1E0.read == lbl_805BB1E0.write) {
+    if (lbl_805BB1E0.read == lbl_805BB1E0.boundary) {
         OSRestoreInterrupts(interrupts);
         return 0;
     }
 
     if (lbl_805BB1E0.write > lbl_805BB1E0.cursor) {
-        amount = 0x10000 < lbl_805BB1E0.write - lbl_805BB1E0.cursor
+        amount = 0x10000U < lbl_805BB1E0.write - lbl_805BB1E0.cursor
                      ? 0x10000
                      : lbl_805BB1E0.write - lbl_805BB1E0.cursor;
-        unused = 0x10000 < lbl_805BB1E0.write - lbl_805BB1E0.read
+        unused = 0x10000U < lbl_805BB1E0.boundary - lbl_805BB1E0.read
                      ? 0x10000
-                     : lbl_805BB1E0.write - lbl_805BB1E0.read;
+                     : lbl_805BB1E0.boundary - lbl_805BB1E0.read;
     } else {
-        amount = 0x10000 < lbl_805BB1E0.end - lbl_805BB1E0.cursor
+        amount = 0x10000U < lbl_805BB1E0.end - lbl_805BB1E0.cursor
                      ? 0x10000
                      : lbl_805BB1E0.end - lbl_805BB1E0.cursor;
     }

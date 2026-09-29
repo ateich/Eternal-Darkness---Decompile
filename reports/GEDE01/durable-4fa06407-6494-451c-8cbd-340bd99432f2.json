@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "4fa06407-6494-451c-8cbd-340bd99432f2",
+  "attempt": 3,
+  "base_commit": "8de2439a203a1f0ff0a7511cbf9ef7c5a093ff9f",
+  "target": "fn_8007BD40",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-4fa06407-6494-451c-8cbd-340bd99432f2.json"
+  ],
+  "divergence": "Canonical and relocation-strict GC/1.3 objdiff each measure 91.64706%: retail is 1020 bytes and generated code is 1004 bytes. The named transform temporary restores the retail mr r0,r3 / mr r4,r0 call setup and recovers one instruction over the preserved attempts. The remaining 16-byte deficit is four instructions concentrated in color/velocity scheduling: retail emits separate lbl_8064B58C and color-byte loads plus signed-byte register copies before the color comparisons, while generated code hoists the comparisons and reuses registers. Broad downstream register allocation remains shifted (retail arg/state/lifetime in r28/r30/r29 versus generated r27/r31/r30), and strict output retains a generated signed-int-to-double pool target @85 where retail targets lbl_8064E9D8. The canonical build passed and main.dol SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}

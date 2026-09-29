@@ -1,0 +1,61 @@
+--- eternal-darkness-decomp/src/game/game_fn_801ED118.c
++++ eternal-darkness-decomp/src/game/game_fn_801ED118.c
+@@ -23,8 +23,8 @@
+     s32 i;
+ 
+     {
+-        s16* half = (s16*)(base + 0x21D8);
+-        s32* word = (s32*)(base + 0x21F8);
++        register s16* half = (s16*)(base + 0x21D8);
++        register s32* word = (s32*)(base + 0x21F8);
+         for (i = 0; i < 11; i++) {
+             half[i] = -1;
+             word[i] = -1;
+@@ -35,20 +35,20 @@
+     lbl_8064D63C = 0;
+ 
+     {
+-        s32* a = (s32*)(base + 0x2238);
+-        s32* z = (s32*)(base + 0x2278);
+-        s32* c = (s32*)(base + 0x22F8);
+-        s32* d = (s32*)(base + 0x2338);
+-        s32* e = (s32*)(base + 0x2378);
+-        s32* f = (s32*)(base + 0x2938);
+-        s32* g = (s32*)(base + 0x2978);
+-        s32* h = (s32*)(base + 0x29B8);
+-        Record16* r16a = (Record16*)(base + 0x23B8);
+-        Record16* r16b = (Record16*)(base + 0x24B8);
+-        Record24* r24a = (Record24*)(base + 0x25B8);
+-        Record24* r24b = (Record24*)(base + 0x2738);
+-        Record8* r8 = (Record8*)(base + 0x28B8);
+-        s32* b = (s32*)(base + 0x22B8);
++        register s32* a = (s32*)(base + 0x2238);
++        register s32* z = (s32*)(base + 0x2278);
++        register s32* c = (s32*)(base + 0x22F8);
++        register s32* d = (s32*)(base + 0x2338);
++        register s32* e = (s32*)(base + 0x2378);
++        register s32* f = (s32*)(base + 0x2938);
++        register s32* g = (s32*)(base + 0x2978);
++        register s32* h = (s32*)(base + 0x29B8);
++        register Record16* r16a = (Record16*)(base + 0x23B8);
++        register Record16* r16b = (Record16*)(base + 0x24B8);
++        register Record24* r24a = (Record24*)(base + 0x25B8);
++        register Record24* r24b = (Record24*)(base + 0x2738);
++        register Record8* r8 = (Record8*)(base + 0x28B8);
++        register s32* b = (s32*)(base + 0x22B8);
+         for (i = 0; i < 8; i++) {
+             *a++ = -1;
+             *z++ = 0;
+@@ -77,10 +77,10 @@
+             r24b->flag = 255;
+             r8->a = -1;
+             *b++ = -1;
++            r16a->value[3] = -1;
++            r16b->value[3] = -1;
+             r24a->d = -1;
+-            r16a->value[3] = -1;
+             r24b->d = -1;
+-            r16b->value[3] = -1;
+             r8->b = -1;
+             r16a++;
+             r16b++;

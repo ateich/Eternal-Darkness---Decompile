@@ -1,0 +1,99 @@
+diff --git a/eternal-darkness-decomp/src/game/game_fn_8005F8D0.c b/eternal-darkness-decomp/src/game/game_fn_8005F8D0.c
+index 780b5c4b6b..5831a9178a 100644
+--- a/eternal-darkness-decomp/src/game/game_fn_8005F8D0.c
++++ b/eternal-darkness-decomp/src/game/game_fn_8005F8D0.c
+@@ -38,7 +38,13 @@ typedef struct EffectConfig {
+     u8 pad22[2];
+ } EffectConfig;
+ 
+-extern EffectConfig lbl_80243C30[];
++typedef struct EffectTables {
++    EffectConfig config[5];
++    Pair pairs_a[8];
++    Pair pairs_b[8];
++} EffectTables;
++
++extern EffectTables lbl_80243C30;
+ extern u8 lbl_8030F820[];
+ extern s32 lbl_8064C888;
+ extern s8 lbl_8064C590;
+@@ -72,22 +78,19 @@ void fn_8005F8D0(s32 owner, void *entry, void *manager, SourceObject *source,
+                  u8 *state_object, s8 config_kind, Vec3 *position,
+                  s32 final_value, s32 force_mode)
+ {
++    EffectTables *tables = &lbl_80243C30;
+     QueryResult primary;
+     QueryResult secondary;
+     Vec3 copied_direction;
+     Vec3 source_position;
+     Vec3 direction;
+-    EffectConfig *config;
+-    Pair *pairs_a;
+-    Pair *pairs_b;
+     s32 state;
+     s32 range;
++    s32 random_min;
++    s32 random_value;
+     s32 query_two;
+     s32 query_three;
+ 
+-    pairs_a = (Pair *)((u8 *)lbl_80243C30 + 0xB4);
+-    pairs_b = (Pair *)((u8 *)lbl_80243C30 + 0xF4);
+-
+     query_two = fn_80066D04(entry, 2);
+     query_three = fn_80066D04(entry, 3);
+     state = fn_8005EE9C(!query_three, !query_two,
+@@ -100,19 +103,19 @@ void fn_8005F8D0(s32 owner, void *entry, void *manager, SourceObject *source,
+         secondary.direction.x = position->z;
+     }
+ 
+-    if (fn_8011F6A4(manager, pairs_b[state].first,
+-                    pairs_a[state].first, -1, &primary, 1) == -1) {
++    if (fn_8011F6A4(manager, tables->pairs_b[state].first,
++                    tables->pairs_a[state].first, -1, &primary, 1) == -1) {
+         return;
+     }
+     if (position == 0 &&
+-        fn_8011F6A4(manager, pairs_b[state].second,
+-                    pairs_a[state].second, -1, &secondary, 1) == -1) {
++        fn_8011F6A4(manager, tables->pairs_b[state].second,
++                    tables->pairs_a[state].second, -1, &secondary, 1) == -1) {
+         return;
+     }
+ 
+-    config = &lbl_80243C30[config_kind];
+-    range = config->random_max - config->random_min;
+-    range = (u16)(config->random_min + fn_800FBFB0() % range);
++    random_min = tables->config[config_kind].random_min;
++    random_value = fn_800FBFB0();
++    range = (u16)(random_min + random_value % (tables->config[config_kind].random_max - random_min));
+ 
+     if (position != 0) {
+         s32 bad;
+@@ -121,18 +124,18 @@ void fn_8005F8D0(s32 owner, void *entry, void *manager, SourceObject *source,
+         bad &= ~-((bad < 0) || (bad >= 5));
+         lbl_8064C888 = bad;
+         fn_8005F758(lbl_8030F820 + lbl_8064C888 * 0xC4, source->object_id,
+-                    position, owner, pairs_b[state].first,
+-                    pairs_a[state].first, 5, 2, 0, 4);
++                    position, owner, tables->pairs_b[state].first,
++                    tables->pairs_a[state].first, 5, 2, 0, 4);
+         fn_801AAE68(lbl_8064E5BC, 0x289, 0x5A, 0, &source_position, 2, 2,
+                     0, (u16)lbl_8064D18C, 0);
+     } else {
+-        fn_801D62D0(owner, pairs_b[state].first,
+-                    pairs_a[state].first, owner, pairs_b[state].second,
+-                    pairs_a[state].second, source->object_id, 0, 0,
+-                    config->pad20, 4, 2, 2, 1, 0, 1, 0x11, 8, 4, 0x20, 0,
+-                    0, range, 0x42040, 0x2030, force_mode ? 4 : 0xC);
++        fn_801D62D0(owner, tables->pairs_b[state].first,
++                    tables->pairs_a[state].first, owner, tables->pairs_b[state].second,
++                    tables->pairs_a[state].second, source->object_id, 0, 0,
++                    tables->config[config_kind].pad20, 4, 2, 2, 1, 0, 1, 0x11, 8, 4, 0x20, 0,
++                    0, range, 0x42040, 0x2030, (u8)(force_mode ? 4 : 0xC));
+         if (lbl_8064C590++ < 2) {
+-            fn_801AAE68(lbl_8064E5BC, 0xBE, config->sound, 0,
++            fn_801AAE68(lbl_8064E5BC, 0xBE, tables->config[config_kind].sound, 0,
+                         &source_position, 2, 2, 0, (u16)lbl_8064D18C, 0);
+         }
+     }

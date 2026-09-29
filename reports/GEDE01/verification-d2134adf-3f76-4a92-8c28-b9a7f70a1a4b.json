@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "assignment_id": "d2134adf-3f76-4a92-8c28-b9a7f70a1a4b",
+  "commands": [
+    "python3 configure.py",
+    ".tools/bin/ninja -j2",
+    "sha1sum build/GEDE01/main.dol",
+    "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8017BBD0 fn_8017BBD0 -o reports/GEDE01/objdiff-d2134adf-3f76-4a92-8c28-b9a7f70a1a4b.json --format json-pretty -c function_reloc_diffs=name_address"
+  ],
+  "raw_output": {
+    "build": "build/GEDE01/main.dol: OK",
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+    "objdiff": "match_percent=89.765625 retail_bytes=256 generated_bytes=244 retail_instructions=64 generated_instructions=61 relocation_mode=name_address retail_real_relocations=6 generated_real_relocations=6",
+    "retail_relocations": [
+      "8 R_PPC_ADDR16_HA lbl_8064A7C8 addend=0",
+      "16 R_PPC_ADDR16_LO lbl_8064A7C8 addend=0",
+      "140 R_PPC_REL24 fn_800FD40C addend=0",
+      "156 R_PPC_REL24 OSGetTime addend=0",
+      "204 R_PPC_ADDR16_HA lbl_8064A7C8 addend=0",
+      "212 R_PPC_ADDR16_LO lbl_8064A7C8 addend=0"
+    ],
+    "generated_relocations": [
+      "8 R_PPC_ADDR16_HA lbl_8064A7C8 addend=0",
+      "16 R_PPC_ADDR16_LO lbl_8064A7C8 addend=0",
+      "128 R_PPC_REL24 fn_800FD40C addend=0",
+      "144 R_PPC_REL24 OSGetTime addend=0",
+      "192 R_PPC_ADDR16_HA lbl_8064A7C8 addend=0",
+      "200 R_PPC_ADDR16_LO lbl_8064A7C8 addend=0"
+    ],
+    "relocation_types_targets_addends_equal": true,
+    "dol_gate_note": "The TU remains NonMatching and is excluded from the link; the successful DOL checksum verifies that this attempt did not disturb the canonical linked image."
+  }
+}

@@ -1,0 +1,3767 @@
+{
+  "assignment_id": "98f707f5-9eea-4f0b-b8c5-1937c23fdb2a",
+  "baseline": {
+    "commit": "952d96c6cb0f82130e2e4fbe6b41a35e41747790",
+    "source_identical_to_accepted_base": true,
+    "canonical_score": 78.62637,
+    "strict_score": 78.62637,
+    "generated_bytes": 724
+  },
+  "new_hypotheses": [
+    "Explicit working-pointer copies and early scale temporaries: no codegen change.",
+    "Unsigned input ID matches retail cmplwi.",
+    "Initializing special immediately after the target lookup and before its predicate reproduces the retail call-spanning Boolean live range.",
+    "Const qualification of the scale (config/GEDE01/symbols.txt identifies lbl_806510D0 as a float in .sdata2) permits early load scheduling and reserves f1, producing retail f4 conversion bias. This is the main new hypothesis and gain.",
+    "Initializer order, scalar versus aggregate locals, parameter reuse, and midpoint evaluation structure were measured under the new control-flow and const-qualified form. Declaration permutations with separated initialization generally generated identical code.",
+    "The low-word extraction was evaluated only after the new const-qualified schedule and predicate form; in this combination it reproduces the missing li/and pair and exact 728-byte size. The old mask-only regression was not retained."
+  ],
+  "retained_changes": [
+    "const scale declaration",
+    "unsigned ID",
+    "separate handle/item/kind initialization in retail order",
+    "special initialized after target lookup with no else assignment",
+    "low-word extraction from 64-bit dispatcher return",
+    "separate midpoint component loads and sums followed by signed shifts"
+  ],
+  "probe_notes": [
+    "All probes used the existing canonical compiler command and flags.",
+    "Probe literals were validated with tools/externalize_elf_symbol.py --require-whole-section and renamed using the existing rule operations before strict comparison. The selected literal is @48; configure.py changes only this target rule literal spelling.",
+    "The initial special and comma-expression probes changed the generated literal name, so the old @49 rule rejected them. They were remeasured after resolving the actual literal and applying the existing guarded externalization.",
+    "A variable aggregate initializer was rejected by canonical C mode as an illegal constant expression; it was not retained.",
+    "Only the selected reconstruction is preserved as C source; final raw comparison and validation evidence is separate from this measured probe summary."
+  ],
+  "measurement_mode": "objdiff -c function_reloc_diffs=all; function fn_801D73D0",
+  "measurements": [
+    {
+      "variant": "unsigned-id",
+      "score": 78.95605,
+      "size": "724"
+    },
+    {
+      "variant": "working-pointers",
+      "score": 78.62637,
+      "size": "724"
+    },
+    {
+      "variant": "early-scale",
+      "score": 78.62637,
+      "size": "724"
+    },
+    {
+      "variant": "scale-before-stores",
+      "score": 78.62637,
+      "size": "724"
+    },
+    {
+      "variant": "register-params",
+      "score": 78.95605,
+      "size": "724"
+    },
+    {
+      "variant": "register-damage",
+      "score": 78.95605,
+      "size": "724"
+    },
+    {
+      "variant": "register-handle",
+      "score": 78.95605,
+      "size": "724"
+    },
+    {
+      "variant": "special-after-target",
+      "score": 80.76923,
+      "size": "720",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "float-comma-argument",
+      "score": 78.95605,
+      "size": "724",
+      "bias_literal": "@50"
+    },
+    {
+      "variant": "pointer-result",
+      "score": 80.76923,
+      "size": "720",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "inner-damage",
+      "score": 80.76923,
+      "size": "720",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "inner-hit-damage",
+      "score": 80.76923,
+      "size": "720",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "double-intermediates",
+      "score": 77.50549,
+      "size": "732",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "special-allocation-1",
+      "declarations": [
+        "    void* item = 0;",
+        "    int handle = 0;",
+        "    int damage;",
+        "    int now;",
+        "    int kind = -1;"
+      ],
+      "score": 80.43956,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-2",
+      "declarations": [
+        "    void* item = 0;",
+        "    int handle = 0;",
+        "    int kind = -1;",
+        "    int damage;",
+        "    int now;"
+      ],
+      "score": 80.76923,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-3",
+      "declarations": [
+        "    void* item = 0;",
+        "    int handle = 0;",
+        "    int kind = -1;",
+        "    int now;",
+        "    int damage;"
+      ],
+      "score": 80.76923,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-4",
+      "declarations": [
+        "    void* item = 0;",
+        "    int handle = 0;",
+        "    int now;",
+        "    int damage;",
+        "    int kind = -1;"
+      ],
+      "score": 80.43956,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-5",
+      "declarations": [
+        "    void* item = 0;",
+        "    int handle = 0;",
+        "    int now;",
+        "    int kind = -1;",
+        "    int damage;"
+      ],
+      "score": 80.43956,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-6",
+      "declarations": [
+        "    void* item = 0;",
+        "    int damage;",
+        "    int handle = 0;",
+        "    int kind = -1;",
+        "    int now;"
+      ],
+      "score": 80.76923,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-7",
+      "declarations": [
+        "    void* item = 0;",
+        "    int damage;",
+        "    int handle = 0;",
+        "    int now;",
+        "    int kind = -1;"
+      ],
+      "score": 80.43956,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-8",
+      "declarations": [
+        "    void* item = 0;",
+        "    int damage;",
+        "    int kind = -1;",
+        "    int handle = 0;",
+        "    int now;"
+      ],
+      "score": 80.59341,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-9",
+      "declarations": [
+        "    void* item = 0;",
+        "    int damage;",
+        "    int kind = -1;",
+        "    int now;",
+        "    int handle = 0;"
+      ],
+      "score": 80.81319,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-10",
+      "declarations": [
+        "    void* item = 0;",
+        "    int damage;",
+        "    int now;",
+        "    int handle = 0;",
+        "    int kind = -1;"
+      ],
+      "score": 80.43956,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-11",
+      "declarations": [
+        "    void* item = 0;",
+        "    int damage;",
+        "    int now;",
+        "    int kind = -1;",
+        "    int handle = 0;"
+      ],
+      "score": 80.51099,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-12",
+      "declarations": [
+        "    void* item = 0;",
+        "    int kind = -1;",
+        "    int handle = 0;",
+        "    int damage;",
+        "    int now;"
+      ],
+      "score": 80.59341,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-13",
+      "declarations": [
+        "    void* item = 0;",
+        "    int kind = -1;",
+        "    int handle = 0;",
+        "    int now;",
+        "    int damage;"
+      ],
+      "score": 80.59341,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-14",
+      "declarations": [
+        "    void* item = 0;",
+        "    int kind = -1;",
+        "    int damage;",
+        "    int handle = 0;",
+        "    int now;"
+      ],
+      "score": 80.59341,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-15",
+      "declarations": [
+        "    void* item = 0;",
+        "    int kind = -1;",
+        "    int damage;",
+        "    int now;",
+        "    int handle = 0;"
+      ],
+      "score": 80.81319,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-16",
+      "declarations": [
+        "    void* item = 0;",
+        "    int kind = -1;",
+        "    int now;",
+        "    int handle = 0;",
+        "    int damage;"
+      ],
+      "score": 80.81319,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-17",
+      "declarations": [
+        "    void* item = 0;",
+        "    int kind = -1;",
+        "    int now;",
+        "    int damage;",
+        "    int handle = 0;"
+      ],
+      "score": 80.81319,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-18",
+      "declarations": [
+        "    void* item = 0;",
+        "    int now;",
+        "    int handle = 0;",
+        "    int damage;",
+        "    int kind = -1;"
+      ],
+      "score": 80.43956,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-19",
+      "declarations": [
+        "    void* item = 0;",
+        "    int now;",
+        "    int handle = 0;",
+        "    int kind = -1;",
+        "    int damage;"
+      ],
+      "score": 80.43956,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-20",
+      "declarations": [
+        "    void* item = 0;",
+        "    int now;",
+        "    int damage;",
+        "    int handle = 0;",
+        "    int kind = -1;"
+      ],
+      "score": 80.43956,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-21",
+      "declarations": [
+        "    void* item = 0;",
+        "    int now;",
+        "    int damage;",
+        "    int kind = -1;",
+        "    int handle = 0;"
+      ],
+      "score": 80.51099,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-22",
+      "declarations": [
+        "    void* item = 0;",
+        "    int now;",
+        "    int kind = -1;",
+        "    int handle = 0;",
+        "    int damage;"
+      ],
+      "score": 80.51099,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-23",
+      "declarations": [
+        "    void* item = 0;",
+        "    int now;",
+        "    int kind = -1;",
+        "    int damage;",
+        "    int handle = 0;"
+      ],
+      "score": 80.51099,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-24",
+      "declarations": [
+        "    int handle = 0;",
+        "    void* item = 0;",
+        "    int damage;",
+        "    int kind = -1;",
+        "    int now;"
+      ],
+      "score": 80.38461,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-25",
+      "declarations": [
+        "    int handle = 0;",
+        "    void* item = 0;",
+        "    int damage;",
+        "    int now;",
+        "    int kind = -1;"
+      ],
+      "score": 80.05495,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-26",
+      "declarations": [
+        "    int handle = 0;",
+        "    void* item = 0;",
+        "    int kind = -1;",
+        "    int damage;",
+        "    int now;"
+      ],
+      "score": 80.38461,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-27",
+      "declarations": [
+        "    int handle = 0;",
+        "    void* item = 0;",
+        "    int kind = -1;",
+        "    int now;",
+        "    int damage;"
+      ],
+      "score": 80.38461,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-28",
+      "declarations": [
+        "    int handle = 0;",
+        "    void* item = 0;",
+        "    int now;",
+        "    int damage;",
+        "    int kind = -1;"
+      ],
+      "score": 80.05495,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-29",
+      "declarations": [
+        "    int handle = 0;",
+        "    void* item = 0;",
+        "    int now;",
+        "    int kind = -1;",
+        "    int damage;"
+      ],
+      "score": 80.05495,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-30",
+      "declarations": [
+        "    int handle = 0;",
+        "    int damage;",
+        "    void* item = 0;",
+        "    int kind = -1;",
+        "    int now;"
+      ],
+      "score": 80.38461,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-31",
+      "declarations": [
+        "    int handle = 0;",
+        "    int damage;",
+        "    void* item = 0;",
+        "    int now;",
+        "    int kind = -1;"
+      ],
+      "score": 80.05495,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-32",
+      "declarations": [
+        "    int handle = 0;",
+        "    int damage;",
+        "    int kind = -1;",
+        "    void* item = 0;",
+        "    int now;"
+      ],
+      "score": 80.34615,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-33",
+      "declarations": [
+        "    int handle = 0;",
+        "    int damage;",
+        "    int kind = -1;",
+        "    int now;",
+        "    void* item = 0;"
+      ],
+      "score": 80.34615,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-34",
+      "declarations": [
+        "    int handle = 0;",
+        "    int damage;",
+        "    int now;",
+        "    void* item = 0;",
+        "    int kind = -1;"
+      ],
+      "score": 80.05495,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-35",
+      "declarations": [
+        "    int handle = 0;",
+        "    int damage;",
+        "    int now;",
+        "    int kind = -1;",
+        "    void* item = 0;"
+      ],
+      "score": 80.04395,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-36",
+      "declarations": [
+        "    int handle = 0;",
+        "    int kind = -1;",
+        "    void* item = 0;",
+        "    int damage;",
+        "    int now;"
+      ],
+      "score": 80.34615,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-37",
+      "declarations": [
+        "    int handle = 0;",
+        "    int kind = -1;",
+        "    void* item = 0;",
+        "    int now;",
+        "    int damage;"
+      ],
+      "score": 80.34615,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-38",
+      "declarations": [
+        "    int handle = 0;",
+        "    int kind = -1;",
+        "    int damage;",
+        "    void* item = 0;",
+        "    int now;"
+      ],
+      "score": 80.34615,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-39",
+      "declarations": [
+        "    int handle = 0;",
+        "    int kind = -1;",
+        "    int damage;",
+        "    int now;",
+        "    void* item = 0;"
+      ],
+      "score": 80.34615,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-40",
+      "declarations": [
+        "    int handle = 0;",
+        "    int kind = -1;",
+        "    int now;",
+        "    void* item = 0;",
+        "    int damage;"
+      ],
+      "score": 80.34615,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-41",
+      "declarations": [
+        "    int handle = 0;",
+        "    int kind = -1;",
+        "    int now;",
+        "    int damage;",
+        "    void* item = 0;"
+      ],
+      "score": 80.34615,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-42",
+      "declarations": [
+        "    int handle = 0;",
+        "    int now;",
+        "    void* item = 0;",
+        "    int damage;",
+        "    int kind = -1;"
+      ],
+      "score": 80.05495,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-43",
+      "declarations": [
+        "    int handle = 0;",
+        "    int now;",
+        "    void* item = 0;",
+        "    int kind = -1;",
+        "    int damage;"
+      ],
+      "score": 80.05495,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-44",
+      "declarations": [
+        "    int handle = 0;",
+        "    int now;",
+        "    int damage;",
+        "    void* item = 0;",
+        "    int kind = -1;"
+      ],
+      "score": 80.05495,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-45",
+      "declarations": [
+        "    int handle = 0;",
+        "    int now;",
+        "    int damage;",
+        "    int kind = -1;",
+        "    void* item = 0;"
+      ],
+      "score": 80.04395,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-46",
+      "declarations": [
+        "    int handle = 0;",
+        "    int now;",
+        "    int kind = -1;",
+        "    void* item = 0;",
+        "    int damage;"
+      ],
+      "score": 80.04395,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-47",
+      "declarations": [
+        "    int handle = 0;",
+        "    int now;",
+        "    int kind = -1;",
+        "    int damage;",
+        "    void* item = 0;"
+      ],
+      "score": 80.04395,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-48",
+      "declarations": [
+        "    int damage;",
+        "    void* item = 0;",
+        "    int handle = 0;",
+        "    int kind = -1;",
+        "    int now;"
+      ],
+      "score": 80.76923,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-49",
+      "declarations": [
+        "    int damage;",
+        "    void* item = 0;",
+        "    int handle = 0;",
+        "    int now;",
+        "    int kind = -1;"
+      ],
+      "score": 80.43956,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-50",
+      "declarations": [
+        "    int damage;",
+        "    void* item = 0;",
+        "    int kind = -1;",
+        "    int handle = 0;",
+        "    int now;"
+      ],
+      "score": 80.59341,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-51",
+      "declarations": [
+        "    int damage;",
+        "    void* item = 0;",
+        "    int kind = -1;",
+        "    int now;",
+        "    int handle = 0;"
+      ],
+      "score": 80.78571,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-52",
+      "declarations": [
+        "    int damage;",
+        "    void* item = 0;",
+        "    int now;",
+        "    int handle = 0;",
+        "    int kind = -1;"
+      ],
+      "score": 80.43956,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-53",
+      "declarations": [
+        "    int damage;",
+        "    void* item = 0;",
+        "    int now;",
+        "    int kind = -1;",
+        "    int handle = 0;"
+      ],
+      "score": 80.48351,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-54",
+      "declarations": [
+        "    int damage;",
+        "    int handle = 0;",
+        "    void* item = 0;",
+        "    int kind = -1;",
+        "    int now;"
+      ],
+      "score": 80.38461,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-55",
+      "declarations": [
+        "    int damage;",
+        "    int handle = 0;",
+        "    void* item = 0;",
+        "    int now;",
+        "    int kind = -1;"
+      ],
+      "score": 80.05495,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-56",
+      "declarations": [
+        "    int damage;",
+        "    int handle = 0;",
+        "    int kind = -1;",
+        "    void* item = 0;",
+        "    int now;"
+      ],
+      "score": 80.34615,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-57",
+      "declarations": [
+        "    int damage;",
+        "    int handle = 0;",
+        "    int kind = -1;",
+        "    int now;",
+        "    void* item = 0;"
+      ],
+      "score": 80.34615,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-58",
+      "declarations": [
+        "    int damage;",
+        "    int handle = 0;",
+        "    int now;",
+        "    void* item = 0;",
+        "    int kind = -1;"
+      ],
+      "score": 80.05495,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-59",
+      "declarations": [
+        "    int damage;",
+        "    int handle = 0;",
+        "    int now;",
+        "    int kind = -1;",
+        "    void* item = 0;"
+      ],
+      "score": 80.04395,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-60",
+      "declarations": [
+        "    int damage;",
+        "    int kind = -1;",
+        "    void* item = 0;",
+        "    int handle = 0;",
+        "    int now;"
+      ],
+      "score": 80.20879,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-61",
+      "declarations": [
+        "    int damage;",
+        "    int kind = -1;",
+        "    void* item = 0;",
+        "    int now;",
+        "    int handle = 0;"
+      ],
+      "score": 80.78571,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-62",
+      "declarations": [
+        "    int damage;",
+        "    int kind = -1;",
+        "    int handle = 0;",
+        "    void* item = 0;",
+        "    int now;"
+      ],
+      "score": 80.18132,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-63",
+      "declarations": [
+        "    int damage;",
+        "    int kind = -1;",
+        "    int handle = 0;",
+        "    int now;",
+        "    void* item = 0;"
+      ],
+      "score": 80.18132,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-64",
+      "declarations": [
+        "    int damage;",
+        "    int kind = -1;",
+        "    int now;",
+        "    void* item = 0;",
+        "    int handle = 0;"
+      ],
+      "score": 80.78571,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-65",
+      "declarations": [
+        "    int damage;",
+        "    int kind = -1;",
+        "    int now;",
+        "    int handle = 0;",
+        "    void* item = 0;"
+      ],
+      "score": 81.14286,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-66",
+      "declarations": [
+        "    int damage;",
+        "    int now;",
+        "    void* item = 0;",
+        "    int handle = 0;",
+        "    int kind = -1;"
+      ],
+      "score": 80.05495,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-67",
+      "declarations": [
+        "    int damage;",
+        "    int now;",
+        "    void* item = 0;",
+        "    int kind = -1;",
+        "    int handle = 0;"
+      ],
+      "score": 80.48351,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-68",
+      "declarations": [
+        "    int damage;",
+        "    int now;",
+        "    int handle = 0;",
+        "    void* item = 0;",
+        "    int kind = -1;"
+      ],
+      "score": 80.05495,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-69",
+      "declarations": [
+        "    int damage;",
+        "    int now;",
+        "    int handle = 0;",
+        "    int kind = -1;",
+        "    void* item = 0;"
+      ],
+      "score": 80.04395,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-70",
+      "declarations": [
+        "    int damage;",
+        "    int now;",
+        "    int kind = -1;",
+        "    void* item = 0;",
+        "    int handle = 0;"
+      ],
+      "score": 80.48351,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-71",
+      "declarations": [
+        "    int damage;",
+        "    int now;",
+        "    int kind = -1;",
+        "    int handle = 0;",
+        "    void* item = 0;"
+      ],
+      "score": 80.84066,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-72",
+      "declarations": [
+        "    int kind = -1;",
+        "    void* item = 0;",
+        "    int handle = 0;",
+        "    int damage;",
+        "    int now;"
+      ],
+      "score": 80.20879,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-73",
+      "declarations": [
+        "    int kind = -1;",
+        "    void* item = 0;",
+        "    int handle = 0;",
+        "    int now;",
+        "    int damage;"
+      ],
+      "score": 80.20879,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-74",
+      "declarations": [
+        "    int kind = -1;",
+        "    void* item = 0;",
+        "    int damage;",
+        "    int handle = 0;",
+        "    int now;"
+      ],
+      "score": 80.20879,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-75",
+      "declarations": [
+        "    int kind = -1;",
+        "    void* item = 0;",
+        "    int damage;",
+        "    int now;",
+        "    int handle = 0;"
+      ],
+      "score": 80.78571,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-76",
+      "declarations": [
+        "    int kind = -1;",
+        "    void* item = 0;",
+        "    int now;",
+        "    int handle = 0;",
+        "    int damage;"
+      ],
+      "score": 80.78571,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-77",
+      "declarations": [
+        "    int kind = -1;",
+        "    void* item = 0;",
+        "    int now;",
+        "    int damage;",
+        "    int handle = 0;"
+      ],
+      "score": 80.78571,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-78",
+      "declarations": [
+        "    int kind = -1;",
+        "    int handle = 0;",
+        "    void* item = 0;",
+        "    int damage;",
+        "    int now;"
+      ],
+      "score": 80.18132,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-79",
+      "declarations": [
+        "    int kind = -1;",
+        "    int handle = 0;",
+        "    void* item = 0;",
+        "    int now;",
+        "    int damage;"
+      ],
+      "score": 80.18132,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-80",
+      "declarations": [
+        "    int kind = -1;",
+        "    int handle = 0;",
+        "    int damage;",
+        "    void* item = 0;",
+        "    int now;"
+      ],
+      "score": 80.18132,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-81",
+      "declarations": [
+        "    int kind = -1;",
+        "    int handle = 0;",
+        "    int damage;",
+        "    int now;",
+        "    void* item = 0;"
+      ],
+      "score": 80.18132,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-82",
+      "declarations": [
+        "    int kind = -1;",
+        "    int handle = 0;",
+        "    int now;",
+        "    void* item = 0;",
+        "    int damage;"
+      ],
+      "score": 80.18132,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-83",
+      "declarations": [
+        "    int kind = -1;",
+        "    int handle = 0;",
+        "    int now;",
+        "    int damage;",
+        "    void* item = 0;"
+      ],
+      "score": 80.18132,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-84",
+      "declarations": [
+        "    int kind = -1;",
+        "    int damage;",
+        "    void* item = 0;",
+        "    int handle = 0;",
+        "    int now;"
+      ],
+      "score": 80.20879,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-85",
+      "declarations": [
+        "    int kind = -1;",
+        "    int damage;",
+        "    void* item = 0;",
+        "    int now;",
+        "    int handle = 0;"
+      ],
+      "score": 80.78571,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-86",
+      "declarations": [
+        "    int kind = -1;",
+        "    int damage;",
+        "    int handle = 0;",
+        "    void* item = 0;",
+        "    int now;"
+      ],
+      "score": 80.18132,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-87",
+      "declarations": [
+        "    int kind = -1;",
+        "    int damage;",
+        "    int handle = 0;",
+        "    int now;",
+        "    void* item = 0;"
+      ],
+      "score": 80.18132,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-88",
+      "declarations": [
+        "    int kind = -1;",
+        "    int damage;",
+        "    int now;",
+        "    void* item = 0;",
+        "    int handle = 0;"
+      ],
+      "score": 80.78571,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-89",
+      "declarations": [
+        "    int kind = -1;",
+        "    int damage;",
+        "    int now;",
+        "    int handle = 0;",
+        "    void* item = 0;"
+      ],
+      "score": 81.14286,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-90",
+      "declarations": [
+        "    int kind = -1;",
+        "    int now;",
+        "    void* item = 0;",
+        "    int handle = 0;",
+        "    int damage;"
+      ],
+      "score": 80.78571,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-91",
+      "declarations": [
+        "    int kind = -1;",
+        "    int now;",
+        "    void* item = 0;",
+        "    int damage;",
+        "    int handle = 0;"
+      ],
+      "score": 80.78571,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-92",
+      "declarations": [
+        "    int kind = -1;",
+        "    int now;",
+        "    int handle = 0;",
+        "    void* item = 0;",
+        "    int damage;"
+      ],
+      "score": 80.86813,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-93",
+      "declarations": [
+        "    int kind = -1;",
+        "    int now;",
+        "    int handle = 0;",
+        "    int damage;",
+        "    void* item = 0;"
+      ],
+      "score": 81.22527,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-94",
+      "declarations": [
+        "    int kind = -1;",
+        "    int now;",
+        "    int damage;",
+        "    void* item = 0;",
+        "    int handle = 0;"
+      ],
+      "score": 80.78571,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-95",
+      "declarations": [
+        "    int kind = -1;",
+        "    int now;",
+        "    int damage;",
+        "    int handle = 0;",
+        "    void* item = 0;"
+      ],
+      "score": 81.14286,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-96",
+      "declarations": [
+        "    int now;",
+        "    void* item = 0;",
+        "    int handle = 0;",
+        "    int damage;",
+        "    int kind = -1;"
+      ],
+      "score": 80.08242,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-97",
+      "declarations": [
+        "    int now;",
+        "    void* item = 0;",
+        "    int handle = 0;",
+        "    int kind = -1;",
+        "    int damage;"
+      ],
+      "score": 80.08242,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-98",
+      "declarations": [
+        "    int now;",
+        "    void* item = 0;",
+        "    int damage;",
+        "    int handle = 0;",
+        "    int kind = -1;"
+      ],
+      "score": 80.08242,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-99",
+      "declarations": [
+        "    int now;",
+        "    void* item = 0;",
+        "    int damage;",
+        "    int kind = -1;",
+        "    int handle = 0;"
+      ],
+      "score": 80.51099,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-100",
+      "declarations": [
+        "    int now;",
+        "    void* item = 0;",
+        "    int kind = -1;",
+        "    int handle = 0;",
+        "    int damage;"
+      ],
+      "score": 80.51099,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-101",
+      "declarations": [
+        "    int now;",
+        "    void* item = 0;",
+        "    int kind = -1;",
+        "    int damage;",
+        "    int handle = 0;"
+      ],
+      "score": 80.51099,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-102",
+      "declarations": [
+        "    int now;",
+        "    int handle = 0;",
+        "    void* item = 0;",
+        "    int damage;",
+        "    int kind = -1;"
+      ],
+      "score": 80.05495,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-103",
+      "declarations": [
+        "    int now;",
+        "    int handle = 0;",
+        "    void* item = 0;",
+        "    int kind = -1;",
+        "    int damage;"
+      ],
+      "score": 80.05495,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-104",
+      "declarations": [
+        "    int now;",
+        "    int handle = 0;",
+        "    int damage;",
+        "    void* item = 0;",
+        "    int kind = -1;"
+      ],
+      "score": 80.05495,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-105",
+      "declarations": [
+        "    int now;",
+        "    int handle = 0;",
+        "    int damage;",
+        "    int kind = -1;",
+        "    void* item = 0;"
+      ],
+      "score": 80.04395,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-106",
+      "declarations": [
+        "    int now;",
+        "    int handle = 0;",
+        "    int kind = -1;",
+        "    void* item = 0;",
+        "    int damage;"
+      ],
+      "score": 80.04395,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-107",
+      "declarations": [
+        "    int now;",
+        "    int handle = 0;",
+        "    int kind = -1;",
+        "    int damage;",
+        "    void* item = 0;"
+      ],
+      "score": 80.04395,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-108",
+      "declarations": [
+        "    int now;",
+        "    int damage;",
+        "    void* item = 0;",
+        "    int handle = 0;",
+        "    int kind = -1;"
+      ],
+      "score": 80.05495,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-109",
+      "declarations": [
+        "    int now;",
+        "    int damage;",
+        "    void* item = 0;",
+        "    int kind = -1;",
+        "    int handle = 0;"
+      ],
+      "score": 80.48351,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-110",
+      "declarations": [
+        "    int now;",
+        "    int damage;",
+        "    int handle = 0;",
+        "    void* item = 0;",
+        "    int kind = -1;"
+      ],
+      "score": 80.05495,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-111",
+      "declarations": [
+        "    int now;",
+        "    int damage;",
+        "    int handle = 0;",
+        "    int kind = -1;",
+        "    void* item = 0;"
+      ],
+      "score": 80.04395,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-112",
+      "declarations": [
+        "    int now;",
+        "    int damage;",
+        "    int kind = -1;",
+        "    void* item = 0;",
+        "    int handle = 0;"
+      ],
+      "score": 80.48351,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-113",
+      "declarations": [
+        "    int now;",
+        "    int damage;",
+        "    int kind = -1;",
+        "    int handle = 0;",
+        "    void* item = 0;"
+      ],
+      "score": 80.84066,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-114",
+      "declarations": [
+        "    int now;",
+        "    int kind = -1;",
+        "    void* item = 0;",
+        "    int handle = 0;",
+        "    int damage;"
+      ],
+      "score": 80.48351,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-115",
+      "declarations": [
+        "    int now;",
+        "    int kind = -1;",
+        "    void* item = 0;",
+        "    int damage;",
+        "    int handle = 0;"
+      ],
+      "score": 80.48351,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-116",
+      "declarations": [
+        "    int now;",
+        "    int kind = -1;",
+        "    int handle = 0;",
+        "    void* item = 0;",
+        "    int damage;"
+      ],
+      "score": 80.56593,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-117",
+      "declarations": [
+        "    int now;",
+        "    int kind = -1;",
+        "    int handle = 0;",
+        "    int damage;",
+        "    void* item = 0;"
+      ],
+      "score": 80.92308,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-118",
+      "declarations": [
+        "    int now;",
+        "    int kind = -1;",
+        "    int damage;",
+        "    void* item = 0;",
+        "    int handle = 0;"
+      ],
+      "score": 80.48351,
+      "size": "720"
+    },
+    {
+      "variant": "special-allocation-119",
+      "declarations": [
+        "    int now;",
+        "    int kind = -1;",
+        "    int damage;",
+        "    int handle = 0;",
+        "    void* item = 0;"
+      ],
+      "score": 80.84066,
+      "size": "720"
+    },
+    {
+      "variant": "const-scale",
+      "score": 97.79121,
+      "size": "720",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "union-low-word",
+      "score": 80.0989,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "bitfield-low-word",
+      "score": 80.0989,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "midpoint-separate-pointers",
+      "score": 81.22527,
+      "size": "720",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-scale-low-word-extraction",
+      "score": 98.91758,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-scale-original-locals",
+      "score": 97.33517,
+      "size": "720",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-scale-local-assignments",
+      "score": 97.88461,
+      "size": "720",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-1",
+      "score": 98.56044,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-2",
+      "score": 98.83517,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-3",
+      "score": 98.47802,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-4",
+      "score": 98.47802,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-5",
+      "score": 98.47802,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-6",
+      "score": 98.91758,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-7",
+      "score": 98.56044,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-8",
+      "score": 98.91758,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-9",
+      "score": 98.91758,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-10",
+      "score": 98.56044,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-11",
+      "score": 98.56044,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-12",
+      "score": 98.83517,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-13",
+      "score": 98.47802,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-14",
+      "score": 98.83517,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-15",
+      "score": 98.83517,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-16",
+      "score": 98.47802,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-17",
+      "score": 98.47802,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-18",
+      "score": 98.47802,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-19",
+      "score": 98.47802,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-20",
+      "score": 98.47802,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-21",
+      "score": 98.47802,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-22",
+      "score": 98.47802,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-23",
+      "score": 98.47802,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-24",
+      "score": 98.61539,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-25",
+      "score": 98.25824,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-26",
+      "score": 98.53297,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-27",
+      "score": 98.17583,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-28",
+      "score": 98.17583,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-29",
+      "score": 98.17583,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-30",
+      "score": 98.64286,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-31",
+      "score": 98.28571,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-32",
+      "score": 98.64286,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-33",
+      "score": 98.68132,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-34",
+      "score": 98.2967,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-35",
+      "score": 98.2967,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-36",
+      "score": 98.53297,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-37",
+      "score": 98.17583,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-38",
+      "score": 98.53297,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-39",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-40",
+      "score": 98.17583,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-41",
+      "score": 98.21429,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-42",
+      "score": 98.2033,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-43",
+      "score": 98.2033,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-44",
+      "score": 98.21429,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-45",
+      "score": 98.21429,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-46",
+      "score": 98.2033,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-47",
+      "score": 98.24176,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-48",
+      "score": 98.03846,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-49",
+      "score": 98.03846,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-50",
+      "score": 98.03846,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-51",
+      "score": 98.03846,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-52",
+      "score": 98.03846,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-53",
+      "score": 98.03846,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-54",
+      "score": 97.73627,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-55",
+      "score": 97.73627,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-56",
+      "score": 97.73627,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-57",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-58",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-59",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-60",
+      "score": 98.03846,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-61",
+      "score": 98.03846,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-62",
+      "score": 97.73627,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-63",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-64",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-65",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-66",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-67",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-68",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-69",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-70",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-71",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-72",
+      "score": 98.83517,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-73",
+      "score": 98.47802,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-74",
+      "score": 98.83517,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-75",
+      "score": 98.83517,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-76",
+      "score": 98.47802,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-77",
+      "score": 98.47802,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-78",
+      "score": 98.53297,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-79",
+      "score": 98.17583,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-80",
+      "score": 98.53297,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-81",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-82",
+      "score": 98.17583,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-83",
+      "score": 98.21429,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-84",
+      "score": 98.03846,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-85",
+      "score": 98.03846,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-86",
+      "score": 97.73627,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-87",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-88",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-89",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-90",
+      "score": 98.47802,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-91",
+      "score": 98.47802,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-92",
+      "score": 98.17583,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-93",
+      "score": 98.21429,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-94",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-95",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-96",
+      "score": 98.50549,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-97",
+      "score": 98.50549,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-98",
+      "score": 98.50549,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-99",
+      "score": 98.50549,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-100",
+      "score": 98.50549,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-101",
+      "score": 98.50549,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-102",
+      "score": 98.2033,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-103",
+      "score": 98.2033,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-104",
+      "score": 98.21429,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-105",
+      "score": 98.21429,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-106",
+      "score": 98.2033,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-107",
+      "score": 98.24176,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-108",
+      "score": 98.10439,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-109",
+      "score": 98.10439,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-110",
+      "score": 97.77473,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-111",
+      "score": 97.77473,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-112",
+      "score": 98.10439,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-113",
+      "score": 97.77473,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-114",
+      "score": 98.50549,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-115",
+      "score": 98.50549,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-116",
+      "score": 98.2033,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-117",
+      "score": 98.24176,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-118",
+      "score": 98.10439,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-119",
+      "score": 97.77473,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-0",
+      "score": 99.01099,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-1",
+      "score": 98.62637,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-2",
+      "score": 98.9011,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-3",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-4",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-5",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-6",
+      "score": 99.01099,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-7",
+      "score": 98.62637,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-8",
+      "score": 99.01099,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-9",
+      "score": 99.01099,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-10",
+      "score": 98.62637,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-11",
+      "score": 98.62637,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-12",
+      "score": 98.9011,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-13",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-14",
+      "score": 98.9011,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-15",
+      "score": 98.9011,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-16",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-17",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-18",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-19",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-20",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-21",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-22",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-23",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-24",
+      "score": 98.68132,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-25",
+      "score": 98.2967,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-26",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-27",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-28",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-29",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-30",
+      "score": 98.68132,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-31",
+      "score": 98.2967,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-32",
+      "score": 98.68132,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-33",
+      "score": 98.68132,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-34",
+      "score": 98.2967,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-35",
+      "score": 98.2967,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-36",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-37",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-38",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-39",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-40",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-41",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-42",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-43",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-44",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-45",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-46",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-47",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-48",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-49",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-50",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-51",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-52",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-53",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-54",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-55",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-56",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-57",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-58",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-59",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-60",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-61",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-62",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-63",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-64",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-65",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-66",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-67",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-68",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-69",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-70",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-71",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-72",
+      "score": 98.9011,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-73",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-74",
+      "score": 98.9011,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-75",
+      "score": 98.9011,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-76",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-77",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-78",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-79",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-80",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-81",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-82",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-83",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-84",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-85",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-86",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-87",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-88",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-89",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-90",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-91",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-92",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-93",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-94",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-95",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-96",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-97",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-98",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-99",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-100",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-101",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-102",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-103",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-104",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-105",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-106",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-107",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-108",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-109",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-110",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-111",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-112",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-113",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-114",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-115",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-116",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-117",
+      "score": 98.18681,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-118",
+      "score": 98.07692,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-allocation-init-119",
+      "score": 97.74725,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "reuse-id-damage",
+      "score": 98.07692,
+      "size": "732",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-local",
+      "score": 98.51649,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "knr-declarations",
+      "score": 99.01099,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "reuse-id-handle",
+      "score": 96.81319,
+      "size": "732",
+      "bias_literal": "@49"
+    },
+    {
+      "variant": "midpoint-predeclare-xyz",
+      "score": 99.01099,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "midpoint-predeclare-xzy",
+      "score": 99.01099,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "midpoint-predeclare-yxz",
+      "score": 99.01099,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "midpoint-predeclare-yzx",
+      "score": 99.01099,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "midpoint-predeclare-zxy",
+      "score": 99.01099,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "midpoint-predeclare-zyx",
+      "score": 99.01099,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "midpoint-separate-sums",
+      "score": 99.06593,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "midpoint-all-loads",
+      "score": 98.99451,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "midpoint-index-sequence",
+      "score": 94.3022,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-0",
+      "score": 99.06593,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-1",
+      "score": 99.06593,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-2",
+      "score": 99.0,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-3",
+      "score": 99.0,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-4",
+      "score": 99.06593,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-5",
+      "score": 99.0,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-6",
+      "score": 99.01099,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-7",
+      "score": 99.01099,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-8",
+      "score": 98.97253,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-9",
+      "score": 98.97253,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-10",
+      "score": 99.01099,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-11",
+      "score": 98.97253,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-12",
+      "score": 98.97253,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-13",
+      "score": 98.97253,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-14",
+      "score": 99.0,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-15",
+      "score": 99.0,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-16",
+      "score": 98.97253,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-17",
+      "score": 99.0,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-18",
+      "score": 99.06593,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-19",
+      "score": 99.0,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-20",
+      "score": 99.01099,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-21",
+      "score": 98.97253,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-22",
+      "score": 98.97253,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "object-init-23",
+      "score": 99.0,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "damage-unsigned",
+      "score": 99.06593,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "damage-short",
+      "score": 98.76373,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "damage-owner-handle",
+      "score": 97.84615,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "combined-object-guard",
+      "score": 98.46154,
+      "size": "732",
+      "bias_literal": "@47"
+    },
+    {
+      "variant": "positive-object-guard",
+      "score": 99.06593,
+      "size": "728",
+      "bias_literal": "@47"
+    },
+    {
+      "variant": "positive-item-guard",
+      "score": 99.06593,
+      "size": "728",
+      "bias_literal": "@46"
+    },
+    {
+      "variant": "item-else-block",
+      "score": 99.06593,
+      "size": "728",
+      "bias_literal": "@49"
+    },
+    {
+      "variant": "positive-result-guard",
+      "score": 99.06593,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "single-exit",
+      "score": 99.06593,
+      "size": "728",
+      "bias_literal": "@49"
+    },
+    {
+      "variant": "void-object-init-0",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-1",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-2",
+      "score": 98.53297,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-3",
+      "score": 98.53297,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-4",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-5",
+      "score": 98.53297,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-6",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-7",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-8",
+      "score": 98.53297,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-9",
+      "score": 98.53297,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-10",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-11",
+      "score": 98.53297,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-12",
+      "score": 98.53297,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-13",
+      "score": 98.53297,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-14",
+      "score": 98.53297,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-15",
+      "score": 98.53297,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-16",
+      "score": 98.53297,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-17",
+      "score": 98.53297,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-18",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-19",
+      "score": 98.53297,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-20",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-21",
+      "score": 98.53297,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-22",
+      "score": 98.53297,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-init-23",
+      "score": 98.53297,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "midpoint-each-shift",
+      "score": 99.06593,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "midpoint-separate-increment",
+      "score": 94.3022,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "midpoint-preincrement",
+      "score": 99.01099,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "midpoint-comma-loads",
+      "score": 99.06593,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "midpoint-int-struct",
+      "score": 99.01099,
+      "size": "728",
+      "bias_literal": "@51"
+    },
+    {
+      "variant": "midpoint-int-array",
+      "score": 99.01099,
+      "size": "728",
+      "bias_literal": "@51"
+    },
+    {
+      "variant": "const-object-call",
+      "score": 99.06593,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-call",
+      "score": 99.06593,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "void-object-record-call",
+      "score": 99.06593,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "const-coordinate-calls",
+      "score": 99.06593,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "shortvec-fields",
+      "score": 94.3022,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "shortvec-sums",
+      "score": 99.01099,
+      "size": "728",
+      "bias_literal": "@48"
+    },
+    {
+      "variant": "local-state-damage",
+      "score": 98.95605,
+      "size": "728",
+      "bias_literal": "@49"
+    },
+    {
+      "variant": "local-state-damage-item",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@50"
+    },
+    {
+      "variant": "local-state-item-damage",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@50"
+    },
+    {
+      "variant": "local-state-damage-handle",
+      "score": 98.13187,
+      "size": "728",
+      "bias_literal": "@50"
+    },
+    {
+      "variant": "local-state-handle-damage",
+      "score": 98.13187,
+      "size": "728",
+      "bias_literal": "@50"
+    },
+    {
+      "variant": "local-state-damage-kind",
+      "score": 98.95605,
+      "size": "728",
+      "bias_literal": "@50"
+    },
+    {
+      "variant": "local-state-kind-damage",
+      "score": 98.95605,
+      "size": "728",
+      "bias_literal": "@50"
+    },
+    {
+      "variant": "local-state-damage-now",
+      "score": 98.62637,
+      "size": "728",
+      "bias_literal": "@50"
+    },
+    {
+      "variant": "local-state-now-damage",
+      "score": 98.62637,
+      "size": "728",
+      "bias_literal": "@50"
+    },
+    {
+      "variant": "local-state-damage-item-handle",
+      "score": 95.87912,
+      "size": "728",
+      "bias_literal": "@51"
+    },
+    {
+      "variant": "local-state-handle-item-damage",
+      "score": 95.87912,
+      "size": "728",
+      "bias_literal": "@51"
+    },
+    {
+      "variant": "local-state-kind-now-handle-damage-item",
+      "score": 95.87912,
+      "size": "728",
+      "bias_literal": "@53"
+    },
+    {
+      "variant": "object-state-0",
+      "score": 99.06593,
+      "size": "728",
+      "bias_literal": "@49"
+    },
+    {
+      "variant": "object-state-1",
+      "score": 98.95605,
+      "size": "728",
+      "bias_literal": "@50"
+    },
+    {
+      "variant": "object-state-2",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@50"
+    },
+    {
+      "variant": "object-state-3",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@51"
+    },
+    {
+      "variant": "object-state-4",
+      "score": 98.13187,
+      "size": "728",
+      "bias_literal": "@50"
+    },
+    {
+      "variant": "object-state-5",
+      "score": 98.13187,
+      "size": "728",
+      "bias_literal": "@51"
+    },
+    {
+      "variant": "object-state-6",
+      "score": 95.87912,
+      "size": "728",
+      "bias_literal": "@51"
+    },
+    {
+      "variant": "object-state-7",
+      "score": 95.87912,
+      "size": "728",
+      "bias_literal": "@52"
+    },
+    {
+      "variant": "object-state-8",
+      "score": 99.06593,
+      "size": "728",
+      "bias_literal": "@50"
+    },
+    {
+      "variant": "object-state-9",
+      "score": 98.95605,
+      "size": "728",
+      "bias_literal": "@51"
+    },
+    {
+      "variant": "object-state-10",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@51"
+    },
+    {
+      "variant": "object-state-11",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@52"
+    },
+    {
+      "variant": "object-state-12",
+      "score": 98.13187,
+      "size": "728",
+      "bias_literal": "@51"
+    },
+    {
+      "variant": "object-state-13",
+      "score": 98.13187,
+      "size": "728",
+      "bias_literal": "@52"
+    },
+    {
+      "variant": "object-state-14",
+      "score": 95.87912,
+      "size": "728",
+      "bias_literal": "@52"
+    },
+    {
+      "variant": "object-state-15",
+      "score": 95.87912,
+      "size": "728",
+      "bias_literal": "@53"
+    },
+    {
+      "variant": "object-state-16",
+      "score": 98.73627,
+      "size": "728",
+      "bias_literal": "@50"
+    },
+    {
+      "variant": "object-state-17",
+      "score": 98.62637,
+      "size": "728",
+      "bias_literal": "@51"
+    },
+    {
+      "variant": "object-state-18",
+      "score": 98.24176,
+      "size": "728",
+      "bias_literal": "@51"
+    },
+    {
+      "variant": "object-state-19",
+      "score": 98.24176,
+      "size": "728",
+      "bias_literal": "@52"
+    },
+    {
+      "variant": "object-state-20",
+      "score": 97.8022,
+      "size": "728",
+      "bias_literal": "@51"
+    },
+    {
+      "variant": "object-state-21",
+      "score": 97.8022,
+      "size": "728",
+      "bias_literal": "@52"
+    },
+    {
+      "variant": "object-state-22",
+      "score": 95.54945,
+      "size": "728",
+      "bias_literal": "@52"
+    },
+    {
+      "variant": "object-state-23",
+      "score": 95.54945,
+      "size": "728",
+      "bias_literal": "@53"
+    },
+    {
+      "variant": "object-state-24",
+      "score": 99.06593,
+      "size": "728",
+      "bias_literal": "@51"
+    },
+    {
+      "variant": "object-state-25",
+      "score": 98.95605,
+      "size": "728",
+      "bias_literal": "@52"
+    },
+    {
+      "variant": "object-state-26",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@52"
+    },
+    {
+      "variant": "object-state-27",
+      "score": 98.57143,
+      "size": "728",
+      "bias_literal": "@53"
+    },
+    {
+      "variant": "object-state-28",
+      "score": 98.13187,
+      "size": "728",
+      "bias_literal": "@52"
+    },
+    {
+      "variant": "object-state-29",
+      "score": 98.13187,
+      "size": "728",
+      "bias_literal": "@53"
+    },
+    {
+      "variant": "object-state-30",
+      "score": 95.87912,
+      "size": "728",
+      "bias_literal": "@53"
+    },
+    {
+      "variant": "object-state-31",
+      "score": 95.87912,
+      "size": "728",
+      "bias_literal": "@54"
+    }
+  ]
+}

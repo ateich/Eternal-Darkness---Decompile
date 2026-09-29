@@ -1,0 +1,32 @@
+{
+  "provenance": "643f19b4705a65486c034af2792cfe2db334f638",
+  "note": "Historical summaries only, not fresh measurements. Source is identical to accepted base.",
+  "assignment_verification": {
+    "diff_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8011C0F0 fn_8011C0F0 -o reports/GEDE01/objdiff-2aa987da-0310-4166-890c-e2a709675307.json --format json",
+    "build_commands": [
+      "python3 configure.py",
+      ".tools/bin/ninja -j2"
+    ],
+    "build_result": "build/GEDE01/main.dol: OK; 921/921 PROGRESS",
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "retail_relocations": [
+      "0000000a R_PPC_ADDR16_HA lbl_8023A670 + 0",
+      "00000012 R_PPC_ADDR16_LO lbl_8023A670 + 0",
+      "0000003c R_PPC_EMB_SDA21 lbl_8064C2BC + 0",
+      "00000074 R_PPC_REL24 fn_801A872C + 0",
+      "000000a8 R_PPC_REL24 fn_801A8974 + 0"
+    ],
+    "generated_relocations": [
+      "0000000a R_PPC_ADDR16_HA lbl_8023A670 + 0",
+      "0000000e R_PPC_ADDR16_LO lbl_8023A670 + 0",
+      "0000003c R_PPC_EMB_SDA21 lbl_8064C2BC + 0",
+      "00000074 R_PPC_REL24 fn_801A872C + 0",
+      "000000a8 R_PPC_REL24 fn_801A8974 + 0"
+    ],
+    "experiments": [
+      "seventh-argument comma expression (color = lbl_8064C2BC, &color): 188 bytes, 85.297874%, instruction-identical to baseline",
+      "enabled-branch Entry pointer local: 180 bytes, 69.02128%; rejected"
+    ],
+    "signature_debt": "extern const Quad lbl_8023A670 conflicts in type and volatile qualification with const volatile u32 lbl_8023A670[4] in game_data_8023A670.c"
+  }
+}

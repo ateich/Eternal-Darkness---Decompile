@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "assignment_id": "cb8e7631-8766-403e-b86d-d8bb2e8b3c5e",
+  "commands": [
+    {
+      "argv": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_80151600",
+        "fn_80151600",
+        "-o",
+        "reports/GEDE01/objdiff-cb8e7631-8766-403e-b86d-d8bb2e8b3c5e-canonical.json",
+        "--format",
+        "json-pretty"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": " INFO Writing to reports/GEDE01/objdiff-cb8e7631-8766-403e-b86d-d8bb2e8b3c5e-canonical.json\n"
+    },
+    {
+      "argv": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_80151600",
+        "fn_80151600",
+        "-o",
+        "reports/GEDE01/objdiff-cb8e7631-8766-403e-b86d-d8bb2e8b3c5e.json",
+        "--format",
+        "json-pretty",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": " INFO Writing to reports/GEDE01/objdiff-cb8e7631-8766-403e-b86d-d8bb2e8b3c5e.json\n"
+    },
+    {
+      "argv": [
+        "sha1sum",
+        "build/GEDE01/main.dol",
+        "orig/GEDE01/sys/main.dol"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "exit_code": 0,
+      "stdout": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "cmp",
+        "-s",
+        "build/GEDE01/main.dol",
+        "orig/GEDE01/sys/main.dol"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "sha256sum",
+        "compilers/GC/1.3/mwcceppc.exe"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "exit_code": 0,
+      "stdout": "4e502c38465500d4fda8d966b268151a6c74c730508e3d9b7efd23d1a6083715  compilers/GC/1.3/mwcceppc.exe\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        ".tools/bin/ninja",
+        "-t",
+        "commands",
+        "build/GEDE01/src/game/game_fn_80151600.o"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "exit_code": 0,
+      "stdout": "\"/usr/bin/python3\" tools/download_tool.py sjiswrap build/tools/sjiswrap.exe --tag v1.2.2\ntools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80151600.c -o build/GEDE01/src/game && \"/usr/bin/python3\" tools/transform_dep.py build/GEDE01/src/game/game_fn_80151600.d build/GEDE01/src/game/game_fn_80151600.d\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "readelf",
+        "-Wr",
+        "-s",
+        "build/GEDE01/obj/game/game_fn_80151600.o"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "exit_code": 0,
+      "stdout": "\nRelocation section '.rela.text' at offset 0x740 contains 57 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n00000038  0000040a R_PPC_REL24            00000000   fn_8017FDA8 + 0\n00000048  0000050a R_PPC_REL24            00000000   fn_8019BBB4 + 0\n00000054  0000060a R_PPC_REL24            00000000   fn_80201814 + 0\n00000060  0000070a R_PPC_REL24            00000000   fn_80201BC8 + 0\n00000070  0000080a R_PPC_REL24            00000000   fn_801809A0 + 0\n0000007c  0000090a R_PPC_REL24            00000000   fn_80201B8C + 0\n000000a8  00000a6d R_PPC_EMB_SDA21        00000000   lbl_80650588 + 0\n00000100  00000b0a R_PPC_REL24            00000000   fn_801AC9F4 + 0\n00000120  00000c0a R_PPC_REL24            00000000   fn_8019BB9C + 0\n00000144  00000d0a R_PPC_REL24            00000000   fn_8017D908 + 0\n000001b4  00000e0a R_PPC_REL24            00000000   fn_8019BBCC + 0\n00000218  00000d0a R_PPC_REL24            00000000   fn_8017D908 + 0\n00000294  00000e0a R_PPC_REL24            00000000   fn_8019BBCC + 0\n000002dc  0000050a R_PPC_REL24            00000000   fn_8019BBB4 + 0\n000002f8  00000f0a R_PPC_REL24            00000000   fn_80201B9C + 0\n00000310  0000100a R_PPC_REL24            00000000   fn_80201890 + 0\n0000031c  0000110a R_PPC_REL24            00000000   fn_8011F6F8 + 0\n0000034c  00000a6d R_PPC_EMB_SDA21        00000000   lbl_80650588 + 0\n000003a4  0000070a R_PPC_REL24            00000000   fn_80201BC8 + 0\n000003b8  0000120a R_PPC_REL24            00000000   fn_8011F114 + 0\n000003c6  00001306 R_PPC_ADDR16_HA        00000000   lbl_8023A778 + 0\n000003ce  00001304 R_PPC_ADDR16_LO        00000000   lbl_8023A778 + 0\n00000404  0000140a R_PPC_REL24            00000000   fn_80201EB8 + 0\n00000410  0000150a R_PPC_REL24            00000000   fn_80201B4C + 0\n00000414  0000166d R_PPC_EMB_SDA21        00000000   lbl_8064D18C + 0\n00000438  0000170a R_PPC_REL24            00000000   fn_80179004 + 0\n00000448  0000180a R_PPC_REL24            00000000   fn_8011EB1C + 0\n0000045c  0000190a R_PPC_REL24            00000000   fn_80201B54 + 0\n00000470  00001a0a R_PPC_REL24            00000000   fn_8020123C + 0\n00000484  00001b0a R_PPC_REL24            00000000   fn_801A717C + 0\n00000494  0000190a R_PPC_REL24            00000000   fn_80201B54 + 0\n000004a8  00001c0a R_PPC_REL24            00000000   fn_801A74A0 + 0\n000004b4  00001d0a R_PPC_REL24            00000000   fn_801A74A8 + 0\n000004c0  00001e0a R_PPC_REL24            00000000   fn_801A7538 + 0\n000004cc  00001f0a R_PPC_REL24            00000000   fn_801A7518 + 0\n000004d8  0000200a R_PPC_REL24            00000000   fn_801A7588 + 0\n000004e4  0000210a R_PPC_REL24            00000000   fn_801A764C + 0\n000004f0  0000220a R_PPC_REL24            00000000   fn_801A74D8 + 0\n000004fc  0000230a R_PPC_REL24            00000000   fn_801A7668 + 0\n00000508  0000240a R_PPC_REL24            00000000   fn_801A7670 + 0\n0000051c  00001a0a R_PPC_REL24            00000000   fn_8020123C + 0\n00000524  0000250a R_PPC_REL24            00000000   fn_801A7228 + 0\n00000530  0000260a R_PPC_REL24            00000000   fn_80201BC0 + 0\n00000554  0000270a R_PPC_REL24            00000000   fn_801D38BC + 0\n00000574  0000280a R_PPC_REL24            00000000   fn_80152404 + 0\n000005a4  0000290a R_PPC_REL24            00000000   fn_800BC100 + 0\n000005a8  0000166d R_PPC_EMB_SDA21        00000000   lbl_8064D18C + 0\n000005b0  00002a0a R_PPC_REL24            00000000   fn_80152360 + 0\n000005c4  00000e0a R_PPC_REL24            00000000   fn_8019BBCC + 0\n000005d8  00001a0a R_PPC_REL24            00000000   fn_8020123C + 0\n000005f0  0000060a R_PPC_REL24            00000000   fn_80201814 + 0\n0000060c  00000e0a R_PPC_REL24            00000000   fn_8019BBCC + 0\n0000061c  0000090a R_PPC_REL24            00000000   fn_80201B8C + 0\n0000062c  00002b0a R_PPC_REL24            00000000   fn_802045AC + 0\n00000640  00002c6d R_PPC_EMB_SDA21        00000000   lbl_80650590 + 0\n000006b8  00002d0a R_PPC_REL24            00000000   fn_80149E28 + 0\n000006e8  00002d0a R_PPC_REL24            00000000   fn_80149E28 + 0\n\nSymbol table '.symtab' contains 46 entries:\n   Num:    Value  Size Type    Bind   Vis      Ndx Name\n     0: 00000000     0 NOTYPE  LOCAL  DEFAULT  UND \n     1: 00000000     0 FILE    LOCAL  DEFAULT  ABS game_fn_80151600.c\n     2: 00000000     0 SECTION LOCAL  DEFAULT    1 .text\n     3: 00000000  1792 FUNC    GLOBAL DEFAULT    1 fn_80151600\n     4: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_8017FDA8\n     5: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_8019BBB4\n     6: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80201814\n     7: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80201BC8\n     8: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801809A0\n     9: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80201B8C\n    10: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND lbl_80650588\n    11: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801AC9F4\n    12: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_8019BB9C\n    13: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_8017D908\n    14: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_8019BBCC\n    15: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80201B9C\n    16: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80201890\n    17: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_8011F6F8\n    18: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_8011F114\n    19: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND lbl_8023A778\n    20: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80201EB8\n    21: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80201B4C\n    22: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND lbl_8064D18C\n    23: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80179004\n    24: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_8011EB1C\n    25: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80201B54\n    26: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_8020123C\n    27: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801A717C\n    28: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801A74A0\n    29: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801A74A8\n    30: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801A7538\n    31: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801A7518\n    32: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801A7588\n    33: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801A764C\n    34: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801A74D8\n    35: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801A7668\n    36: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801A7670\n    37: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801A7228\n    38: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80201BC0\n    39: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801D38BC\n    40: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80152404\n    41: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_800BC100\n    42: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80152360\n    43: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_802045AC\n    44: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND lbl_80650590\n    45: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80149E28\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "readelf",
+        "-Wr",
+        "-s",
+        "build/GEDE01/src/game/game_fn_80151600.o"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "exit_code": 0,
+      "stdout": "\nRelocation section '.rela.text' at offset 0x730 contains 57 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n00000038  0000080a R_PPC_REL24            00000000   fn_8017FDA8 + 0\n00000048  0000090a R_PPC_REL24            00000000   fn_8019BBB4 + 0\n00000054  00000a0a R_PPC_REL24            00000000   fn_80201814 + 0\n00000060  00000b0a R_PPC_REL24            00000000   fn_80201BC8 + 0\n00000070  00000c0a R_PPC_REL24            00000000   fn_801809A0 + 0\n0000007c  00000d0a R_PPC_REL24            00000000   fn_80201B8C + 0\n000000a8  0000046d R_PPC_EMB_SDA21        00000000   @113 + 0\n00000100  00000e0a R_PPC_REL24            00000000   fn_801AC9F4 + 0\n00000120  00000f0a R_PPC_REL24            00000000   fn_8019BB9C + 0\n00000144  0000100a R_PPC_REL24            00000000   fn_8017D908 + 0\n000001b4  0000110a R_PPC_REL24            00000000   fn_8019BBCC + 0\n00000218  0000100a R_PPC_REL24            00000000   fn_8017D908 + 0\n00000294  0000110a R_PPC_REL24            00000000   fn_8019BBCC + 0\n000002dc  0000090a R_PPC_REL24            00000000   fn_8019BBB4 + 0\n000002f8  0000120a R_PPC_REL24            00000000   fn_80201B9C + 0\n00000310  0000130a R_PPC_REL24            00000000   fn_80201890 + 0\n0000031c  0000140a R_PPC_REL24            00000000   fn_8011F6F8 + 0\n0000034c  0000046d R_PPC_EMB_SDA21        00000000   @113 + 0\n000003a4  00000b0a R_PPC_REL24            00000000   fn_80201BC8 + 0\n000003b8  0000150a R_PPC_REL24            00000000   fn_8011F114 + 0\n000003c6  00000606 R_PPC_ADDR16_HA        00000000   lbl_8023A778 + 0\n000003ce  00000604 R_PPC_ADDR16_LO        00000000   lbl_8023A778 + 0\n00000404  0000160a R_PPC_REL24            00000000   fn_80201EB8 + 0\n00000410  0000170a R_PPC_REL24            00000000   fn_80201B4C + 0\n00000414  0000076d R_PPC_EMB_SDA21        00000000   lbl_8064D18C + 0\n00000438  0000180a R_PPC_REL24            00000000   fn_80179004 + 0\n00000448  0000190a R_PPC_REL24            00000000   fn_8011EB1C + 0\n0000045c  00001a0a R_PPC_REL24            00000000   fn_80201B54 + 0\n00000470  00001b0a R_PPC_REL24            00000000   fn_8020123C + 0\n0000047c  00001c0a R_PPC_REL24            00000000   fn_801A717C + 0\n0000048c  00001a0a R_PPC_REL24            00000000   fn_80201B54 + 0\n0000049c  00001d0a R_PPC_REL24            00000000   fn_801A74A0 + 0\n000004a8  00001e0a R_PPC_REL24            00000000   fn_801A74A8 + 0\n000004b4  00001f0a R_PPC_REL24            00000000   fn_801A7538 + 0\n000004c0  0000200a R_PPC_REL24            00000000   fn_801A7518 + 0\n000004cc  0000210a R_PPC_REL24            00000000   fn_801A7588 + 0\n000004d8  0000220a R_PPC_REL24            00000000   fn_801A764C + 0\n000004e4  0000230a R_PPC_REL24            00000000   fn_801A74D8 + 0\n000004f0  0000240a R_PPC_REL24            00000000   fn_801A7668 + 0\n000004fc  0000250a R_PPC_REL24            00000000   fn_801A7670 + 0\n00000510  00001b0a R_PPC_REL24            00000000   fn_8020123C + 0\n00000518  0000260a R_PPC_REL24            00000000   fn_801A7228 + 0\n00000524  0000270a R_PPC_REL24            00000000   fn_80201BC0 + 0\n00000548  0000280a R_PPC_REL24            00000000   fn_801D38BC + 0\n00000568  0000290a R_PPC_REL24            00000000   fn_80152404 + 0\n00000598  00002a0a R_PPC_REL24            00000000   fn_800BC100 + 0\n0000059c  0000076d R_PPC_EMB_SDA21        00000000   lbl_8064D18C + 0\n000005a4  00002b0a R_PPC_REL24            00000000   fn_80152360 + 0\n000005b8  0000110a R_PPC_REL24            00000000   fn_8019BBCC + 0\n000005cc  00001b0a R_PPC_REL24            00000000   fn_8020123C + 0\n000005dc  00000a0a R_PPC_REL24            00000000   fn_80201814 + 0\n000005f8  0000110a R_PPC_REL24            00000000   fn_8019BBCC + 0\n00000608  00000d0a R_PPC_REL24            00000000   fn_80201B8C + 0\n00000618  00002c0a R_PPC_REL24            00000000   fn_802045AC + 0\n0000062c  0000056d R_PPC_EMB_SDA21        00000008   @117 + 0\n000006a4  00002d0a R_PPC_REL24            00000000   fn_80149E28 + 0\n000006d4  00002d0a R_PPC_REL24            00000000   fn_80149E28 + 0\n\nSymbol table '.symtab' contains 47 entries:\n   Num:    Value  Size Type    Bind   Vis      Ndx Name\n     0: 00000000     0 NOTYPE  LOCAL  DEFAULT  UND \n     1: 00000000     0 FILE    LOCAL  DEFAULT  ABS game_fn_80151600.c\n     2: 00000000     0 SECTION LOCAL  DEFAULT    1 .text\n     3: 00000000     0 SECTION LOCAL  DEFAULT    2 .sdata2\n     4: 00000000     8 OBJECT  LOCAL  DEFAULT    2 @113\n     5: 00000008     8 OBJECT  LOCAL  DEFAULT    2 @117\n     6: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND lbl_8023A778\n     7: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND lbl_8064D18C\n     8: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_8017FDA8\n     9: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_8019BBB4\n    10: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80201814\n    11: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80201BC8\n    12: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801809A0\n    13: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80201B8C\n    14: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801AC9F4\n    15: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_8019BB9C\n    16: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_8017D908\n    17: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_8019BBCC\n    18: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80201B9C\n    19: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80201890\n    20: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_8011F6F8\n    21: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_8011F114\n    22: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80201EB8\n    23: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80201B4C\n    24: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80179004\n    25: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_8011EB1C\n    26: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80201B54\n    27: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_8020123C\n    28: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801A717C\n    29: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801A74A0\n    30: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801A74A8\n    31: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801A7538\n    32: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801A7518\n    33: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801A7588\n    34: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801A764C\n    35: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801A74D8\n    36: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801A7668\n    37: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801A7670\n    38: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801A7228\n    39: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80201BC0\n    40: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_801D38BC\n    41: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80152404\n    42: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_800BC100\n    43: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80152360\n    44: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_802045AC\n    45: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND fn_80149E28\n    46: 00000000  1772 FUNC    GLOBAL DEFAULT    1 fn_80151600\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "rg",
+        "-n",
+        "__asm|asm\\(",
+        "src/game/game_fn_80151600.c"
+      ],
+      "cwd": "eternal-darkness-decomp",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "phase": "after_final_build",
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "sha1sum",
+        "build/GEDE01/main.dol",
+        "orig/GEDE01/sys/main.dol"
+      ],
+      "exit_code": 0,
+      "stdout": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\nea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol\n",
+      "stderr": ""
+    },
+    {
+      "phase": "after_final_build",
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "cmp",
+        "-s",
+        "build/GEDE01/main.dol",
+        "orig/GEDE01/sys/main.dol"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "phase": "staged_legal_audit",
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "python3",
+        "tools/legal_audit.py"
+      ],
+      "exit_code": 0,
+      "stdout": "legal audit passed (22957 tracked project files inspected)\n",
+      "stderr": ""
+    },
+    {
+      "phase": "staged_legal_audit",
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "phase": "staged_legal_audit",
+      "cwd": "eternal-darkness-decomp",
+      "argv": [
+        "git",
+        "diff",
+        "--cached",
+        "--name-only"
+      ],
+      "exit_code": 0,
+      "stdout": "eternal-darkness-decomp/reports/GEDE01/build-cb8e7631-8766-403e-b86d-d8bb2e8b3c5e.log\neternal-darkness-decomp/reports/GEDE01/durable-cb8e7631-8766-403e-b86d-d8bb2e8b3c5e.json\neternal-darkness-decomp/reports/GEDE01/experiments-cb8e7631-8766-403e-b86d-d8bb2e8b3c5e.json\neternal-darkness-decomp/reports/GEDE01/objdiff-cb8e7631-8766-403e-b86d-d8bb2e8b3c5e-canonical.json\neternal-darkness-decomp/reports/GEDE01/objdiff-cb8e7631-8766-403e-b86d-d8bb2e8b3c5e.json\neternal-darkness-decomp/reports/GEDE01/verification-cb8e7631-8766-403e-b86d-d8bb2e8b3c5e.json\neternal-darkness-decomp/src/game/game_fn_80151600.c\n",
+      "stderr": ""
+    }
+  ],
+  "build": {
+    "cwd": "eternal-darkness-decomp",
+    "command": "python3 configure.py && .tools/bin/ninja -j2",
+    "exit_code": 0,
+    "log": "eternal-darkness-decomp/reports/GEDE01/build-cb8e7631-8766-403e-b86d-d8bb2e8b3c5e.log",
+    "note": "Log contains both initial and final complete builds. Source remains NonMatching: successful DOL verification validates retail-linked output, not compiled candidate equivalence.",
+    "log_format": "Captured stdout/stderr with CRLF normalized to LF; all build lines retained."
+  },
+  "final_source_sha256": "f10a559708ae0cd52c6e41824759cbd536600d249e783d8465e2f64d53dee28d",
+  "measurements": {
+    "canonical_percent": 98.125,
+    "relocation_strict_percent": 98.125,
+    "retail_bytes": 1792,
+    "candidate_bytes": 1772,
+    "frame_bytes_both": 192,
+    "save_first_gpr_both": 21,
+    "objdiff_relocation_instruction_records_both": 60,
+    "elf_rela_text_entries_both": 57,
+    "relocations_equal": false,
+    "relocation_divergence": "Three SDA21 sites reference generated local constants (@113 twice and @117 once), instead of lbl_80650588 twice and lbl_80650590 once; all have addend 0. Subsequent relocation offsets shift with the 20-byte instruction shortfall. Full readelf target names/addends and symbol tables are recorded above."
+  },
+  "legal_audit_conclusion": "Index audit passes. Only the assigned independent C translation unit and assignment-specific reports are staged. No assembly, binaries, private inputs, compiler policy, runtime, neighboring source, or global progress edits are staged. Pre-existing CLAUDE.md modification is left untouched."
+}

@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "6b1aa7cb-32c1-4942-83ee-60cd35d8db23",
+  "attempt": 5,
+  "base_commit": "bfbb3e7a1528317243e0d1b093d5e4ef7ec9446d",
+  "target": "fn_80180D0C",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-6b1aa7cb-32c1-4942-83ee-60cd35d8db23.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 59.692307% at 208 bytes. Retail uses a 0x30 frame, stmw/lmw r27-r31, hoists scalar defaults, and loads the Triple into r27-r29 together before destination stores; generated C uses a 0x20 frame, saves only r31, and interleaves Triple loads in r31/r12/r11 with scalar stores. All five ELF relocation types/targets/addends and four additional objdiff-derived references agree as multisets, but relocation offsets and instruction bytes differ."
+}

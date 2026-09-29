@@ -43,13 +43,15 @@ TextDescriptor* fn_801E5D94(s16 x, s16 y, u8 font, s8 align, float scale,
 {
     va_list args;
     TextDescriptor* text_ptr;
+    u32 color_value;
     int index;
 
     text_ptr = lbl_80633440;
-    index = 0;
-    while (index < 10 && (text_ptr->text[0] != 0 || text_ptr->text[1] != 0)) {
-        index++;
-        if (index < 10) {
+    for (index = 0; index < 10; index++) {
+        if (text_ptr->text[0] == 0 && text_ptr->text[1] == 0) {
+            break;
+        }
+        if (index + 1 < 10) {
             text_ptr++;
         }
     }
@@ -62,12 +64,13 @@ TextDescriptor* fn_801E5D94(s16 x, s16 y, u8 font, s8 align, float scale,
     va_start(args, format);
     fn_800F9E2C((char*)text_ptr->text, format, args);
     text_ptr->x = x;
+    color_value = *color;
     text_ptr->y = y;
     text_ptr->font = font;
     text_ptr->align = align;
     text_ptr->scale = scale;
     text_ptr->flags = flags;
-    text_ptr->color = *color;
+    text_ptr->color = color_value;
     text_ptr->phase = phase;
     text_ptr->width = 0;
     fn_801E5920((char*)text_ptr->text);

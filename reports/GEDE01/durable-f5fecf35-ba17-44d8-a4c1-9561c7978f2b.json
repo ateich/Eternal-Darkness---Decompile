@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "f5fecf35-ba17-44d8-a4c1-9561c7978f2b",
+  "attempt": 5,
+  "base_commit": "1f59eb57ec6b6ef9821bf0ebca88cd0d90aa0331",
+  "target": "fn_8001E894",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-f5fecf35-ba17-44d8-a4c1-9561c7978f2b.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff are 90.065680%; retail/generated .text sizes are 3776/3644 bytes. Both use a 0x140 frame and stmw r14,0xE8(r1), but generated code folds runtime-root offsets (e.g. lbz r6,0x5A(r31) instead of addi r29,r31,0x1C; lbz r6,0x3E(r29)), schedules the three case-21 snapshots differently, and differs in register allocation/branch layout. Strict .rela.text has 198/197 records with 14 exact offset/type/target/addend set matches; the generated conversion constant is a local symbol instead of lbl_8064DEC8. DOL SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}

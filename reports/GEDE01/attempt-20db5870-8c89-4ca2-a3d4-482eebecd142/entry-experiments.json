@@ -1,0 +1,930 @@
+[
+  {
+    "name": "local-baseline",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    u16* second;\n    int pass;\n    int i;\n    float scaled;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/local-baseline.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/local-baseline.json\n",
+    "score": 97.05298,
+    "size": "604",
+    "object_sha256": "9136b8add953af95bf0d45477dbd0cf9cd3c2d9f3c18954f23518db6aaf1adea"
+  },
+  {
+    "name": "decl-spfi",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    u16* second;\n    int pass;\n    float scaled;\n    int i;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-spfi.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-spfi.json\n",
+    "score": 97.05298,
+    "size": "604",
+    "object_sha256": "9136b8add953af95bf0d45477dbd0cf9cd3c2d9f3c18954f23518db6aaf1adea"
+  },
+  {
+    "name": "decl-sipf",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    u16* second;\n    int i;\n    int pass;\n    float scaled;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-sipf.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-sipf.json\n",
+    "score": 90.45033,
+    "size": "604",
+    "object_sha256": "78ae9b329eda25528a07db7caacd43a11cefe09445cdfdc447c0c221923888c7"
+  },
+  {
+    "name": "decl-sifp",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    u16* second;\n    int i;\n    float scaled;\n    int pass;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-sifp.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-sifp.json\n",
+    "score": 90.45033,
+    "size": "604",
+    "object_sha256": "78ae9b329eda25528a07db7caacd43a11cefe09445cdfdc447c0c221923888c7"
+  },
+  {
+    "name": "decl-sfpi",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    u16* second;\n    float scaled;\n    int pass;\n    int i;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-sfpi.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-sfpi.json\n",
+    "score": 97.05298,
+    "size": "604",
+    "object_sha256": "9136b8add953af95bf0d45477dbd0cf9cd3c2d9f3c18954f23518db6aaf1adea"
+  },
+  {
+    "name": "decl-sfip",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    u16* second;\n    float scaled;\n    int i;\n    int pass;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-sfip.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-sfip.json\n",
+    "score": 90.45033,
+    "size": "604",
+    "object_sha256": "78ae9b329eda25528a07db7caacd43a11cefe09445cdfdc447c0c221923888c7"
+  },
+  {
+    "name": "decl-psif",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    int pass;\n    u16* second;\n    int i;\n    float scaled;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-psif.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-psif.json\n",
+    "score": 97.05298,
+    "size": "604",
+    "object_sha256": "9136b8add953af95bf0d45477dbd0cf9cd3c2d9f3c18954f23518db6aaf1adea"
+  },
+  {
+    "name": "decl-psfi",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    int pass;\n    u16* second;\n    float scaled;\n    int i;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-psfi.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-psfi.json\n",
+    "score": 97.05298,
+    "size": "604",
+    "object_sha256": "9136b8add953af95bf0d45477dbd0cf9cd3c2d9f3c18954f23518db6aaf1adea"
+  },
+  {
+    "name": "decl-pisf",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    int pass;\n    int i;\n    u16* second;\n    float scaled;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-pisf.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-pisf.json\n",
+    "score": 91.70861,
+    "size": "604",
+    "object_sha256": "e12832a0fbf8687d0187a219b25cc2bd4d5192bc575059bfa9340a9e8765aaa1"
+  },
+  {
+    "name": "decl-pifs",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    int pass;\n    int i;\n    float scaled;\n    u16* second;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-pifs.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-pifs.json\n",
+    "score": 91.70861,
+    "size": "604",
+    "object_sha256": "e12832a0fbf8687d0187a219b25cc2bd4d5192bc575059bfa9340a9e8765aaa1"
+  },
+  {
+    "name": "decl-pfsi",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    int pass;\n    float scaled;\n    u16* second;\n    int i;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-pfsi.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-pfsi.json\n",
+    "score": 97.05298,
+    "size": "604",
+    "object_sha256": "9136b8add953af95bf0d45477dbd0cf9cd3c2d9f3c18954f23518db6aaf1adea"
+  },
+  {
+    "name": "decl-pfis",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    int pass;\n    float scaled;\n    int i;\n    u16* second;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-pfis.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-pfis.json\n",
+    "score": 91.70861,
+    "size": "604",
+    "object_sha256": "e12832a0fbf8687d0187a219b25cc2bd4d5192bc575059bfa9340a9e8765aaa1"
+  },
+  {
+    "name": "decl-ispf",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    int i;\n    u16* second;\n    int pass;\n    float scaled;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-ispf.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-ispf.json\n",
+    "score": 95.7947,
+    "size": "604",
+    "object_sha256": "700e888051dd42e03f4b85347ab9f022041e76d19e63c7edde075be680a18a21"
+  },
+  {
+    "name": "decl-isfp",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    int i;\n    u16* second;\n    float scaled;\n    int pass;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-isfp.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-isfp.json\n",
+    "score": 95.7947,
+    "size": "604",
+    "object_sha256": "700e888051dd42e03f4b85347ab9f022041e76d19e63c7edde075be680a18a21"
+  },
+  {
+    "name": "decl-ipsf",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    int i;\n    int pass;\n    u16* second;\n    float scaled;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-ipsf.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-ipsf.json\n",
+    "score": 95.7947,
+    "size": "604",
+    "object_sha256": "700e888051dd42e03f4b85347ab9f022041e76d19e63c7edde075be680a18a21"
+  },
+  {
+    "name": "decl-ipfs",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    int i;\n    int pass;\n    float scaled;\n    u16* second;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-ipfs.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-ipfs.json\n",
+    "score": 95.7947,
+    "size": "604",
+    "object_sha256": "700e888051dd42e03f4b85347ab9f022041e76d19e63c7edde075be680a18a21"
+  },
+  {
+    "name": "decl-ifsp",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    int i;\n    float scaled;\n    u16* second;\n    int pass;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-ifsp.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-ifsp.json\n",
+    "score": 95.7947,
+    "size": "604",
+    "object_sha256": "700e888051dd42e03f4b85347ab9f022041e76d19e63c7edde075be680a18a21"
+  },
+  {
+    "name": "decl-ifps",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    int i;\n    float scaled;\n    int pass;\n    u16* second;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-ifps.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-ifps.json\n",
+    "score": 95.7947,
+    "size": "604",
+    "object_sha256": "700e888051dd42e03f4b85347ab9f022041e76d19e63c7edde075be680a18a21"
+  },
+  {
+    "name": "decl-fspi",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    float scaled;\n    u16* second;\n    int pass;\n    int i;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-fspi.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-fspi.json\n",
+    "score": 97.05298,
+    "size": "604",
+    "object_sha256": "9136b8add953af95bf0d45477dbd0cf9cd3c2d9f3c18954f23518db6aaf1adea"
+  },
+  {
+    "name": "decl-fsip",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    float scaled;\n    u16* second;\n    int i;\n    int pass;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-fsip.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-fsip.json\n",
+    "score": 90.45033,
+    "size": "604",
+    "object_sha256": "78ae9b329eda25528a07db7caacd43a11cefe09445cdfdc447c0c221923888c7"
+  },
+  {
+    "name": "decl-fpsi",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    float scaled;\n    int pass;\n    u16* second;\n    int i;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-fpsi.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-fpsi.json\n",
+    "score": 97.05298,
+    "size": "604",
+    "object_sha256": "9136b8add953af95bf0d45477dbd0cf9cd3c2d9f3c18954f23518db6aaf1adea"
+  },
+  {
+    "name": "decl-fpis",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    float scaled;\n    int pass;\n    int i;\n    u16* second;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-fpis.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-fpis.json\n",
+    "score": 91.70861,
+    "size": "604",
+    "object_sha256": "e12832a0fbf8687d0187a219b25cc2bd4d5192bc575059bfa9340a9e8765aaa1"
+  },
+  {
+    "name": "decl-fisp",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    float scaled;\n    int i;\n    u16* second;\n    int pass;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-fisp.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-fisp.json\n",
+    "score": 95.7947,
+    "size": "604",
+    "object_sha256": "700e888051dd42e03f4b85347ab9f022041e76d19e63c7edde075be680a18a21"
+  },
+  {
+    "name": "decl-fips",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    float scaled;\n    int i;\n    int pass;\n    u16* second;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-fips.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/decl-fips.json\n",
+    "score": 95.7947,
+    "size": "604",
+    "object_sha256": "700e888051dd42e03f4b85347ab9f022041e76d19e63c7edde075be680a18a21"
+  },
+  {
+    "name": "length-int",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    u16* second;\n    int pass;\n    int i;\n    float scaled;\n    int length = count;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < length; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/length-int.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/length-int.json\n",
+    "score": 86.1457,
+    "size": "604",
+    "object_sha256": "a24d415f8f924525f376f8421180e06d9accdf78d101f9370d71ac46a3d39e33"
+  },
+  {
+    "name": "length-after",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    u16* second;\n    int pass;\n    int i;\n    float scaled;\n    int length;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    length = count;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < length; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/length-after.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/length-after.json\n",
+    "score": 86.1457,
+    "size": "604",
+    "object_sha256": "a24d415f8f924525f376f8421180e06d9accdf78d101f9370d71ac46a3d39e33"
+  },
+  {
+    "name": "pass-register",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    u16* second;\n    register int pass;\n    int i;\n    float scaled;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/pass-register.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/pass-register.json\n",
+    "score": 97.05298,
+    "size": "604",
+    "object_sha256": "9136b8add953af95bf0d45477dbd0cf9cd3c2d9f3c18954f23518db6aaf1adea"
+  },
+  {
+    "name": "count-register",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, register u8 count, float scale)\n{\n    u16* second;\n    int pass;\n    int i;\n    float scaled;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/count-register.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/count-register.json\n",
+    "score": 97.05298,
+    "size": "604",
+    "object_sha256": "9136b8add953af95bf0d45477dbd0cf9cd3c2d9f3c18954f23518db6aaf1adea"
+  },
+  {
+    "name": "scaled-register",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    u16* second;\n    int pass;\n    int i;\n    register float scaled;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/scaled-register.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/scaled-register.json\n",
+    "score": 97.05298,
+    "size": "604",
+    "object_sha256": "9136b8add953af95bf0d45477dbd0cf9cd3c2d9f3c18954f23518db6aaf1adea"
+  },
+  {
+    "name": "scaled-const",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    u16* second;\n    int pass;\n    int i;\n    const float scaled = lbl_80650D9C * scale;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/scaled-const.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/scaled-const.json\n",
+    "score": 97.05298,
+    "size": "604",
+    "object_sha256": "bc20ae8620cd70137116fb58481c28b6aa83232025039b592311e66ef14b4b13"
+  },
+  {
+    "name": "second-initializer",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    u16* second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    int pass;\n    int i;\n    float scaled;\n\n    scaled = lbl_80650D9C * scale;\n    for (pass = 0; pass < 2; pass++) {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    }\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/second-initializer.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/second-initializer.json\n",
+    "score": 97.05298,
+    "size": "604",
+    "object_sha256": "9136b8add953af95bf0d45477dbd0cf9cd3c2d9f3c18954f23518db6aaf1adea"
+  },
+  {
+    "name": "outer-do",
+    "source": "typedef unsigned char u8;\ntypedef unsigned short u16;\n\nextern float lbl_80650D9C;\nextern u8 lbl_80607130[];\n\nvoid fn_801A53C4(u16* output, u8 count, float scale)\n{\n    u16* second;\n    int pass;\n    int i;\n    float scaled;\n\n    second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);\n    scaled = lbl_80650D9C * scale;\n    pass = 0;\n    do {\n        for (i = 0; i < count; i++) {\n            output[0] = scaled;\n            output[1] = 0x200;\n            output[2] = 0;\n            output[3] = 0x200;\n            output[4] = 0;\n            output[5] = 0;\n            output[6] = scaled;\n            output[7] = 0;\n            output += 8;\n        }\n        output = second;\n    } while (++pass < 2);\n}\n",
+    "build_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801A53C4.o"
+    ],
+    "build_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801A53C4.o\n",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_801A53C4",
+      "fn_801A53C4",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-o",
+      "reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/outer-do.json",
+      "--format",
+      "json"
+    ],
+    "diff_output": " INFO Writing to reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/outer-do.json\n",
+    "score": 97.05298,
+    "size": "604",
+    "object_sha256": "9136b8add953af95bf0d45477dbd0cf9cd3c2d9f3c18954f23518db6aaf1adea"
+  }
+]

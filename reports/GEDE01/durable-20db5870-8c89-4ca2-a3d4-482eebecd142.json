@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "assignment_id": "20db5870-8c89-4ca2-a3d4-482eebecd142",
+  "attempt": 5,
+  "base_commit": "a1486dc870738720eeb69745f5e642763ca92492",
+  "target": "fn_801A53C4",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-20db5870-8c89-4ca2-a3d4-482eebecd142.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/verification.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/validation.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/experiments.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/entry-experiments.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/lifetime-experiments.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-20db5870-8c89-4ca2-a3d4-482eebecd142/cursor-experiments.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 97.05298%, improved from 91.70861%, with retail/generated sizes both 604 bytes. A separate float scaled local fixes all conversion-spill scheduling differences. Ten instruction words differ, confined to offsets 0x00 through 0x24: generated code allocates the 0x90-byte frame before lis, completes the lbl_80607130 address in r6 rather than retail r5, and schedules the count normalization, multiplication, shift and pass initialization differently. Bytes from 0x28 through the end are identical. Three actual ELF relocations and the objdiff-inferred R_PPC_NONE lhz reference agree in type, target and addend. Retained as NonMatching."
+}

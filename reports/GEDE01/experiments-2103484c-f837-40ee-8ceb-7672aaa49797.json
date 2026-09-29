@@ -1,0 +1,94 @@
+{
+  "assignment_id": "2103484c-f837-40ee-8ceb-7672aaa49797",
+  "target": "fn_801ED118",
+  "base_commit": "9f53a0bf69d065bc69340afc4fd917714c309c81",
+  "reviewed_preserved_attempts": [
+    "fbd0b93d725963601d26c736ed21601732359028",
+    "eaa91e9d142014df4b4f22c45d08c60f6e0aae1a",
+    "58a49fc7edfdc80ad12174f7ede6fe637de0c158",
+    "c3312f7d3ba8e71e31775a0a62a137883304c490",
+    "d45346d8efb1acd0387f01bbe64a69e5a8c769e5"
+  ],
+  "distinct_hypothesis": "Typed aggregate array fields and fixed-base indexing might prevent folding every unrolled access into the common byte base. Both experiments compile identically to baseline, disproving this under the existing flags. No repeated all-pointers-live experiment or compiler policy change.",
+  "measurements": [
+    {
+      "name": "baseline",
+      "hypothesis": "Accepted base; identical source to fbd0b93d and the integrated eaa91e9d candidate.",
+      "canonical_percent": 75.71584,
+      "retail_size": 732,
+      "candidate_size": 668,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/baseline-2103484c-f837-40ee-8ceb-7672aaa49797.json",
+      "build_log": "eternal-darkness-decomp/reports/GEDE01/baseline-build-2103484c-f837-40ee-8ceb-7672aaa49797.log"
+    },
+    {
+      "name": "experiment-indexed",
+      "hypothesis": "Replace scalar pointer increments with fixed-base array indexing.",
+      "canonical_percent": 75.71584,
+      "retail_size": 732,
+      "candidate_size": 668,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-indexed-2103484c-f837-40ee-8ceb-7672aaa49797.json",
+      "build_log": "eternal-darkness-decomp/reports/GEDE01/experiment-indexed-build-2103484c-f837-40ee-8ceb-7672aaa49797.log",
+      "reproduction_patch_against_base_commit": "eternal-darkness-decomp/reports/GEDE01/experiment-indexed-2103484c-f837-40ee-8ceb-7672aaa49797.patch"
+    },
+    {
+      "name": "experiment-aggregate",
+      "hypothesis": "Declare a typed global aggregate with correctly sized array/record fields instead of byte-offset casts; use indexed scalar accesses.",
+      "canonical_percent": 75.71584,
+      "retail_size": 732,
+      "candidate_size": 668,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-aggregate-2103484c-f837-40ee-8ceb-7672aaa49797.json",
+      "build_log": "eternal-darkness-decomp/reports/GEDE01/experiment-aggregate-build-2103484c-f837-40ee-8ceb-7672aaa49797.log",
+      "reproduction_patch_against_base_commit": "eternal-darkness-decomp/reports/GEDE01/experiment-aggregate-2103484c-f837-40ee-8ceb-7672aaa49797.patch"
+    },
+    {
+      "name": "experiment-tail-order",
+      "hypothesis": "Retain the baseline and order final record stores as r16a[3], r16b[3], r24a.d, r24b.d, r8.b to match retail.",
+      "canonical_percent": 75.95628,
+      "retail_size": 732,
+      "candidate_size": 668,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-tail-order-2103484c-f837-40ee-8ceb-7672aaa49797.json",
+      "build_log": "eternal-darkness-decomp/reports/GEDE01/experiment-tail-order-build-2103484c-f837-40ee-8ceb-7672aaa49797.log",
+      "reproduction_patch_against_base_commit": "eternal-darkness-decomp/reports/GEDE01/experiment-tail-order-2103484c-f837-40ee-8ceb-7672aaa49797.patch"
+    },
+    {
+      "name": "experiment-early-global",
+      "hypothesis": "On top of tail-order, initialize lbl_8064D634 before the first array loop to test scheduling.",
+      "canonical_percent": 74.28416,
+      "retail_size": 732,
+      "candidate_size": 668,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-early-global-2103484c-f837-40ee-8ceb-7672aaa49797.json",
+      "build_log": "eternal-darkness-decomp/reports/GEDE01/experiment-early-global-build-2103484c-f837-40ee-8ceb-7672aaa49797.log",
+      "reproduction_patch_against_base_commit": "eternal-darkness-decomp/reports/GEDE01/experiment-early-global-2103484c-f837-40ee-8ceb-7672aaa49797.patch"
+    },
+    {
+      "name": "experiment-register-hint",
+      "hypothesis": "On top of tail-order, apply standard C register hints to array and record pointers.",
+      "canonical_percent": 75.95628,
+      "retail_size": 732,
+      "candidate_size": 668,
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-register-hint-2103484c-f837-40ee-8ceb-7672aaa49797.json",
+      "build_log": "eternal-darkness-decomp/reports/GEDE01/experiment-register-hint-build-2103484c-f837-40ee-8ceb-7672aaa49797.log",
+      "reproduction_patch_against_base_commit": "eternal-darkness-decomp/reports/GEDE01/experiment-register-hint-2103484c-f837-40ee-8ceb-7672aaa49797.patch"
+    }
+  ],
+  "retained": "experiment-tail-order; standard C, one NonMatching translation unit; comment updated only after measurement.",
+  "reproduction": {
+    "cwd": "eternal-darkness-decomp",
+    "final_commands": [
+      "python3 configure.py",
+      ".tools/bin/ninja -j2",
+      "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801ED118 fn_801ED118 -o reports/GEDE01/objdiff-2103484c-f837-40ee-8ceb-7672aaa49797.json --format json-pretty",
+      "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801ED118 fn_801ED118 -o reports/GEDE01/objdiff-strict-2103484c-f837-40ee-8ceb-7672aaa49797.json --format json-pretty -c function_reloc_diffs=name_address",
+      "sha1sum -c config/GEDE01/build.sha1",
+      "python3 tools/legal_audit.py"
+    ],
+    "experiment_steps": [
+      "Start from the stated base commit in an isolated worktree.",
+      "Apply the corresponding standard unified patch with patch -p0 from the repository root.",
+      "From eternal-darkness-decomp run python3 configure.py, then .tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_801ED118.o.",
+      "Run the canonical objdiff command with the corresponding experiment output filename. Patches are independent against the base, not cumulative."
+    ]
+  },
+  "behavior_review": "All final executable changes reorder four independent aligned word writes to distinct record arrays. Record sizes remain 16/24/8 bytes, loop count remains 16, and all addresses, constants, flags and pointer increments are unchanged. No assembly, calls, volatile accesses, output patching, toolchain changes or neighbor changes.",
+  "dol_scope": "NonMatching registration remains unchanged, so the verified DOL retains retail bytes for this function. Whole-DOL hash success does not establish a C match."
+}

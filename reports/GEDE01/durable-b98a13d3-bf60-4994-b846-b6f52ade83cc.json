@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "assignment_id": "b98a13d3-bf60-4994-b846-b6f52ade83cc",
+  "attempt": 5,
+  "base_commit": "ff977f359c17f8a46ab9f390459942a26c2eb8be",
+  "target": "fn_801F85A4",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-b98a13d3-bf60-4994-b846-b6f52ade83cc.json",
+    "eternal-darkness-decomp/reports/GEDE01/experiment-b98a13d3-bf60-4994-b846-b6f52ade83cc.py"
+  ],
+  "divergence": "Two missing live-state pointer materializations: addi r6,r5,0xCC0 and addi r5,r5,0xD48. Candidate uses shared-base stores at 0xCF0,0xD78,0xD30,0xDB8 instead of member offsets 0x30/0x70. Registers and saved-load/live-store scheduling also differ; token load precedes first store. Saved base +0xDD0 is present. Real ELF relocations are shown by readelf; objdiff R_PPC_NONE entries are derived address annotations, not ELF relocation records. Best canonical (none), default (name_address), and strict (all) scores: 83.09677%. Full build and required DOL SHA-1 pass, but NonMatching/linked False excludes this candidate from the DOL. This validates the unchanged linked build, not the candidate function."
+}

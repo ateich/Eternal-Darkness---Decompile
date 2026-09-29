@@ -1,0 +1,569 @@
+[
+  {
+    "name": "baseline",
+    "patch": "",
+    "compile_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801945D4.o"
+    ],
+    "compile_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801945D4.o\n",
+    "compile_stderr": "",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-1",
+      "build/GEDE01/obj/game/game_fn_801945D4.o",
+      "-2",
+      "build/GEDE01/src/game/game_fn_801945D4.o",
+      "fn_801945D4",
+      "-o",
+      "reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-baseline.json"
+    ],
+    "diff_stdout": "",
+    "diff_stderr": " INFO Writing to reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-baseline.json\n",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-baseline.json",
+    "score": 92.55102,
+    "size": "392"
+  },
+  {
+    "name": "shared_pointer",
+    "patch": "--- \n+++ \n@@ -7,6 +7,7 @@\n {\n     u8 inner = width - 4;\n     s32 pos = position;\n+    u32* p;\n \n     switch (pos) {\n     case 0: {\n@@ -17,7 +18,6 @@\n         return;\n     }\n     case 1: {\n-        u32* p;\n         u32 stride = inner * 4;\n \n         output[1] = *second;\n@@ -44,7 +44,6 @@\n     }\n \n     if (pos == width - 2) {\n-        u32* p;\n         u32 row2 = inner * 2;\n         u32 row4 = inner * 4;\n \n@@ -58,7 +57,6 @@\n     }\n \n     {\n-        u32* p;\n         u32 index = pos - 1;\n         u32 offset;\n \n",
+    "compile_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801945D4.o"
+    ],
+    "compile_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801945D4.o\n",
+    "compile_stderr": "",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-1",
+      "build/GEDE01/obj/game/game_fn_801945D4.o",
+      "-2",
+      "build/GEDE01/src/game/game_fn_801945D4.o",
+      "fn_801945D4",
+      "-o",
+      "reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-shared_pointer.json"
+    ],
+    "diff_stdout": "",
+    "diff_stderr": " INFO Writing to reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-shared_pointer.json\n",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-shared_pointer.json",
+    "score": 92.55102,
+    "size": "392"
+  },
+  {
+    "name": "shared_index",
+    "patch": "--- \n+++ \n@@ -7,10 +7,12 @@\n {\n     u8 inner = width - 4;\n     s32 pos = position;\n+    u32 index;\n+    u32 offset;\n \n     switch (pos) {\n     case 0: {\n-        u32 index = inner * 4;\n+        index = inner * 4;\n         index += 3;\n         output[0] = *first;\n         output[index] = *first;\n@@ -37,7 +39,7 @@\n     }\n \n     if (pos == width - 1) {\n-        u32 index = inner * 2;\n+        index = inner * 2;\n         index += 2;\n         output[index] = *first;\n         return;\n@@ -59,8 +61,7 @@\n \n     {\n         u32* p;\n-        u32 index = pos - 1;\n-        u32 offset;\n+        index = pos - 1;\n \n         index *= 2;\n         p = output + index;\n",
+    "compile_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801945D4.o"
+    ],
+    "compile_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801945D4.o\n",
+    "compile_stderr": "",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-1",
+      "build/GEDE01/obj/game/game_fn_801945D4.o",
+      "-2",
+      "build/GEDE01/src/game/game_fn_801945D4.o",
+      "fn_801945D4",
+      "-o",
+      "reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-shared_index.json"
+    ],
+    "diff_stdout": "",
+    "diff_stderr": " INFO Writing to reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-shared_index.json\n",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-shared_index.json",
+    "score": 92.55102,
+    "size": "392"
+  },
+  {
+    "name": "signed_indices",
+    "patch": "--- \n+++ \n@@ -10,7 +10,7 @@\n \n     switch (pos) {\n     case 0: {\n-        u32 index = inner * 4;\n+        s32 index = inner * 4;\n         index += 3;\n         output[0] = *first;\n         output[index] = *first;\n@@ -18,7 +18,7 @@\n     }\n     case 1: {\n         u32* p;\n-        u32 stride = inner * 4;\n+        s32 stride = inner * 4;\n \n         output[1] = *second;\n         p = output + 1;\n@@ -37,7 +37,7 @@\n     }\n \n     if (pos == width - 1) {\n-        u32 index = inner * 2;\n+        s32 index = inner * 2;\n         index += 2;\n         output[index] = *first;\n         return;\n@@ -45,8 +45,8 @@\n \n     if (pos == width - 2) {\n         u32* p;\n-        u32 row2 = inner * 2;\n-        u32 row4 = inner * 4;\n+        s32 row2 = inner * 2;\n+        s32 row4 = inner * 4;\n \n         row2 += 3;\n         p = output + row2;\n@@ -59,8 +59,8 @@\n \n     {\n         u32* p;\n-        u32 index = pos - 1;\n-        u32 offset;\n+        s32 index = pos - 1;\n+        s32 offset;\n \n         index *= 2;\n         p = output + index;\n",
+    "compile_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801945D4.o"
+    ],
+    "compile_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801945D4.o\n",
+    "compile_stderr": "",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-1",
+      "build/GEDE01/obj/game/game_fn_801945D4.o",
+      "-2",
+      "build/GEDE01/src/game/game_fn_801945D4.o",
+      "fn_801945D4",
+      "-o",
+      "reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-signed_indices.json"
+    ],
+    "diff_stdout": "",
+    "diff_stderr": " INFO Writing to reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-signed_indices.json\n",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-signed_indices.json",
+    "score": 92.55102,
+    "size": "392"
+  },
+  {
+    "name": "named_loads",
+    "patch": "--- \n+++ \n@@ -7,13 +7,15 @@\n {\n     u8 inner = width - 4;\n     s32 pos = position;\n+    u32 value;\n \n     switch (pos) {\n     case 0: {\n         u32 index = inner * 4;\n         index += 3;\n         output[0] = *first;\n-        output[index] = *first;\n+        value = *first;\n+        output[index] = value;\n         return;\n     }\n     case 1: {\n@@ -39,7 +41,8 @@\n     if (pos == width - 1) {\n         u32 index = inner * 2;\n         index += 2;\n-        output[index] = *first;\n+        value = *first;\n+        output[index] = value;\n         return;\n     }\n \n",
+    "compile_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801945D4.o"
+    ],
+    "compile_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801945D4.o\n",
+    "compile_stderr": "",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-1",
+      "build/GEDE01/obj/game/game_fn_801945D4.o",
+      "-2",
+      "build/GEDE01/src/game/game_fn_801945D4.o",
+      "fn_801945D4",
+      "-o",
+      "reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-named_loads.json"
+    ],
+    "diff_stdout": "",
+    "diff_stderr": " INFO Writing to reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-named_loads.json\n",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-named_loads.json",
+    "score": 92.55102,
+    "size": "392"
+  },
+  {
+    "name": "index_pointer",
+    "patch": "--- \n+++ \n@@ -7,13 +7,15 @@\n {\n     u8 inner = width - 4;\n     s32 pos = position;\n+    u32* target;\n \n     switch (pos) {\n     case 0: {\n         u32 index = inner * 4;\n         index += 3;\n         output[0] = *first;\n-        output[index] = *first;\n+        target = output + index;\n+        *target = *first;\n         return;\n     }\n     case 1: {\n@@ -39,7 +41,8 @@\n     if (pos == width - 1) {\n         u32 index = inner * 2;\n         index += 2;\n-        output[index] = *first;\n+        target = output + index;\n+        *target = *first;\n         return;\n     }\n \n",
+    "compile_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801945D4.o"
+    ],
+    "compile_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801945D4.o\n",
+    "compile_stderr": "",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-1",
+      "build/GEDE01/obj/game/game_fn_801945D4.o",
+      "-2",
+      "build/GEDE01/src/game/game_fn_801945D4.o",
+      "fn_801945D4",
+      "-o",
+      "reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-index_pointer.json"
+    ],
+    "diff_stdout": "",
+    "diff_stderr": " INFO Writing to reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-index_pointer.json\n",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-index_pointer.json",
+    "score": 92.55102,
+    "size": "392"
+  },
+  {
+    "name": "byte_offset",
+    "patch": "--- \n+++ \n@@ -13,7 +13,8 @@\n         u32 index = inner * 4;\n         index += 3;\n         output[0] = *first;\n-        output[index] = *first;\n+        index *= 4;\n+        *(u32*)((u8*)output + index) = *first;\n         return;\n     }\n     case 1: {\n@@ -39,7 +40,8 @@\n     if (pos == width - 1) {\n         u32 index = inner * 2;\n         index += 2;\n-        output[index] = *first;\n+        index *= 4;\n+        *(u32*)((u8*)output + index) = *first;\n         return;\n     }\n \n",
+    "compile_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801945D4.o"
+    ],
+    "compile_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801945D4.o\n",
+    "compile_stderr": "",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-1",
+      "build/GEDE01/obj/game/game_fn_801945D4.o",
+      "-2",
+      "build/GEDE01/src/game/game_fn_801945D4.o",
+      "fn_801945D4",
+      "-o",
+      "reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-byte_offset.json"
+    ],
+    "diff_stdout": "",
+    "diff_stderr": " INFO Writing to reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-byte_offset.json\n",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-byte_offset.json",
+    "score": 92.55102,
+    "size": "392"
+  },
+  {
+    "name": "byte_shift",
+    "patch": "--- \n+++ \n@@ -13,7 +13,8 @@\n         u32 index = inner * 4;\n         index += 3;\n         output[0] = *first;\n-        output[index] = *first;\n+        index <<= 2;\n+        *(u32*)((u8*)output + index) = *first;\n         return;\n     }\n     case 1: {\n@@ -39,7 +40,8 @@\n     if (pos == width - 1) {\n         u32 index = inner * 2;\n         index += 2;\n-        output[index] = *first;\n+        index <<= 2;\n+        *(u32*)((u8*)output + index) = *first;\n         return;\n     }\n \n",
+    "compile_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801945D4.o"
+    ],
+    "compile_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801945D4.o\n",
+    "compile_stderr": "",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-1",
+      "build/GEDE01/obj/game/game_fn_801945D4.o",
+      "-2",
+      "build/GEDE01/src/game/game_fn_801945D4.o",
+      "fn_801945D4",
+      "-o",
+      "reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-byte_shift.json"
+    ],
+    "diff_stdout": "",
+    "diff_stderr": " INFO Writing to reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-byte_shift.json\n",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-byte_shift.json",
+    "score": 92.55102,
+    "size": "392"
+  },
+  {
+    "name": "reverse_subscript",
+    "patch": "--- \n+++ \n@@ -13,7 +13,7 @@\n         u32 index = inner * 4;\n         index += 3;\n         output[0] = *first;\n-        output[index] = *first;\n+        index[output] = *first;\n         return;\n     }\n     case 1: {\n@@ -39,7 +39,7 @@\n     if (pos == width - 1) {\n         u32 index = inner * 2;\n         index += 2;\n-        output[index] = *first;\n+        index[output] = *first;\n         return;\n     }\n \n",
+    "compile_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801945D4.o"
+    ],
+    "compile_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801945D4.o\n",
+    "compile_stderr": "",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-1",
+      "build/GEDE01/obj/game/game_fn_801945D4.o",
+      "-2",
+      "build/GEDE01/src/game/game_fn_801945D4.o",
+      "fn_801945D4",
+      "-o",
+      "reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-reverse_subscript.json"
+    ],
+    "diff_stdout": "",
+    "diff_stderr": " INFO Writing to reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-reverse_subscript.json\n",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-reverse_subscript.json",
+    "score": 92.55102,
+    "size": "392"
+  },
+  {
+    "name": "index_signed_pointer",
+    "patch": "--- \n+++ \n@@ -13,7 +13,7 @@\n         u32 index = inner * 4;\n         index += 3;\n         output[0] = *first;\n-        output[index] = *first;\n+        *(u32*)((u32)output + index * 4) = *first;\n         return;\n     }\n     case 1: {\n@@ -39,7 +39,7 @@\n     if (pos == width - 1) {\n         u32 index = inner * 2;\n         index += 2;\n-        output[index] = *first;\n+        *(u32*)((u32)output + index * 4) = *first;\n         return;\n     }\n \n",
+    "compile_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801945D4.o"
+    ],
+    "compile_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801945D4.o\n",
+    "compile_stderr": "",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-1",
+      "build/GEDE01/obj/game/game_fn_801945D4.o",
+      "-2",
+      "build/GEDE01/src/game/game_fn_801945D4.o",
+      "fn_801945D4",
+      "-o",
+      "reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-index_signed_pointer.json"
+    ],
+    "diff_stdout": "",
+    "diff_stderr": " INFO Writing to reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-index_signed_pointer.json\n",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-index_signed_pointer.json",
+    "score": 92.55102,
+    "size": "392"
+  },
+  {
+    "name": "register_locals",
+    "patch": "--- \n+++ \n@@ -10,14 +10,14 @@\n \n     switch (pos) {\n     case 0: {\n-        u32 index = inner * 4;\n+        register u32 index = inner * 4;\n         index += 3;\n         output[0] = *first;\n         output[index] = *first;\n         return;\n     }\n     case 1: {\n-        u32* p;\n+        register u32* p;\n         u32 stride = inner * 4;\n \n         output[1] = *second;\n@@ -37,14 +37,14 @@\n     }\n \n     if (pos == width - 1) {\n-        u32 index = inner * 2;\n+        register u32 index = inner * 2;\n         index += 2;\n         output[index] = *first;\n         return;\n     }\n \n     if (pos == width - 2) {\n-        u32* p;\n+        register u32* p;\n         u32 row2 = inner * 2;\n         u32 row4 = inner * 4;\n \n@@ -58,9 +58,9 @@\n     }\n \n     {\n-        u32* p;\n-        u32 index = pos - 1;\n-        u32 offset;\n+        register u32* p;\n+        register u32 index = pos - 1;\n+        register u32 offset;\n \n         index *= 2;\n         p = output + index;\n",
+    "compile_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801945D4.o"
+    ],
+    "compile_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801945D4.o\n",
+    "compile_stderr": "",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-1",
+      "build/GEDE01/obj/game/game_fn_801945D4.o",
+      "-2",
+      "build/GEDE01/src/game/game_fn_801945D4.o",
+      "fn_801945D4",
+      "-o",
+      "reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-register_locals.json"
+    ],
+    "diff_stdout": "",
+    "diff_stderr": " INFO Writing to reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-register_locals.json\n",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-register_locals.json",
+    "score": 92.55102,
+    "size": "392"
+  },
+  {
+    "name": "shared_exit",
+    "patch": "--- \n+++ \n@@ -14,7 +14,7 @@\n         index += 3;\n         output[0] = *first;\n         output[index] = *first;\n-        return;\n+        goto done;\n     }\n     case 1: {\n         u32* p;\n@@ -30,7 +30,7 @@\n         p += stride + 3;\n         p[0] = *second;\n         p[1] = *second;\n-        return;\n+        goto done;\n     }\n     default:\n         break;\n@@ -40,7 +40,7 @@\n         u32 index = inner * 2;\n         index += 2;\n         output[index] = *first;\n-        return;\n+        goto done;\n     }\n \n     if (pos == width - 2) {\n@@ -54,7 +54,7 @@\n         p += row4 + 5;\n         p[0] = *second;\n         p[1] = *second;\n-        return;\n+        goto done;\n     }\n \n     {\n@@ -80,4 +80,6 @@\n         p[0] = *second;\n         p[1] = *third;\n     }\n+done:\n+    return;\n }\n",
+    "compile_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801945D4.o"
+    ],
+    "compile_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801945D4.o\n",
+    "compile_stderr": "",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-1",
+      "build/GEDE01/obj/game/game_fn_801945D4.o",
+      "-2",
+      "build/GEDE01/src/game/game_fn_801945D4.o",
+      "fn_801945D4",
+      "-o",
+      "reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-shared_exit.json"
+    ],
+    "diff_stdout": "",
+    "diff_stderr": " INFO Writing to reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-shared_exit.json\n",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-shared_exit.json",
+    "score": 92.55102,
+    "size": "392"
+  },
+  {
+    "name": "volatile_reads",
+    "patch": "--- \n+++ \n@@ -2,8 +2,8 @@\n typedef unsigned int u32;\n typedef int s32;\n \n-void fn_801945D4(u8 width, u8 position, u32* output, const u32* first,\n-                 const u32* second, const u32* third)\n+void fn_801945D4(u8 width, u8 position, u32* output, const volatile u32* first,\n+                 const volatile u32* second, const volatile u32* third)\n {\n     u8 inner = width - 4;\n     s32 pos = position;\n",
+    "compile_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801945D4.o"
+    ],
+    "compile_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801945D4.o\n",
+    "compile_stderr": "",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-1",
+      "build/GEDE01/obj/game/game_fn_801945D4.o",
+      "-2",
+      "build/GEDE01/src/game/game_fn_801945D4.o",
+      "fn_801945D4",
+      "-o",
+      "reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-volatile_reads.json"
+    ],
+    "diff_stdout": "",
+    "diff_stderr": " INFO Writing to reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-volatile_reads.json\n",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-volatile_reads.json",
+    "score": 92.55102,
+    "size": "392"
+  },
+  {
+    "name": "volatile_output",
+    "patch": "--- \n+++ \n@@ -2,7 +2,7 @@\n typedef unsigned int u32;\n typedef int s32;\n \n-void fn_801945D4(u8 width, u8 position, u32* output, const u32* first,\n+void fn_801945D4(u8 width, u8 position, volatile u32* output, const u32* first,\n                  const u32* second, const u32* third)\n {\n     u8 inner = width - 4;\n@@ -17,7 +17,7 @@\n         return;\n     }\n     case 1: {\n-        u32* p;\n+        volatile u32* p;\n         u32 stride = inner * 4;\n \n         output[1] = *second;\n@@ -44,7 +44,7 @@\n     }\n \n     if (pos == width - 2) {\n-        u32* p;\n+        volatile u32* p;\n         u32 row2 = inner * 2;\n         u32 row4 = inner * 4;\n \n@@ -58,7 +58,7 @@\n     }\n \n     {\n-        u32* p;\n+        volatile u32* p;\n         u32 index = pos - 1;\n         u32 offset;\n \n",
+    "compile_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801945D4.o"
+    ],
+    "compile_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801945D4.o\n",
+    "compile_stderr": "",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-1",
+      "build/GEDE01/obj/game/game_fn_801945D4.o",
+      "-2",
+      "build/GEDE01/src/game/game_fn_801945D4.o",
+      "fn_801945D4",
+      "-o",
+      "reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-volatile_output.json"
+    ],
+    "diff_stdout": "",
+    "diff_stderr": " INFO Writing to reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-volatile_output.json\n",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-volatile_output.json",
+    "score": 92.55102,
+    "size": "392"
+  },
+  {
+    "name": "halfword_indices",
+    "patch": "--- \n+++ \n@@ -1,6 +1,7 @@\n typedef unsigned char u8;\n typedef unsigned int u32;\n typedef int s32;\n+typedef unsigned short u16;\n \n void fn_801945D4(u8 width, u8 position, u32* output, const u32* first,\n                  const u32* second, const u32* third)\n@@ -10,7 +11,7 @@\n \n     switch (pos) {\n     case 0: {\n-        u32 index = inner * 4;\n+        u16 index = inner * 4;\n         index += 3;\n         output[0] = *first;\n         output[index] = *first;\n@@ -18,7 +19,7 @@\n     }\n     case 1: {\n         u32* p;\n-        u32 stride = inner * 4;\n+        u16 stride = inner * 4;\n \n         output[1] = *second;\n         p = output + 1;\n@@ -37,7 +38,7 @@\n     }\n \n     if (pos == width - 1) {\n-        u32 index = inner * 2;\n+        u16 index = inner * 2;\n         index += 2;\n         output[index] = *first;\n         return;\n@@ -45,8 +46,8 @@\n \n     if (pos == width - 2) {\n         u32* p;\n-        u32 row2 = inner * 2;\n-        u32 row4 = inner * 4;\n+        u16 row2 = inner * 2;\n+        u16 row4 = inner * 4;\n \n         row2 += 3;\n         p = output + row2;\n@@ -59,7 +60,7 @@\n \n     {\n         u32* p;\n-        u32 index = pos - 1;\n+        u16 index = pos - 1;\n         u32 offset;\n \n         index *= 2;\n",
+    "compile_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801945D4.o"
+    ],
+    "compile_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801945D4.o\n",
+    "compile_stderr": "",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-1",
+      "build/GEDE01/obj/game/game_fn_801945D4.o",
+      "-2",
+      "build/GEDE01/src/game/game_fn_801945D4.o",
+      "fn_801945D4",
+      "-o",
+      "reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-halfword_indices.json"
+    ],
+    "diff_stdout": "",
+    "diff_stderr": " INFO Writing to reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-halfword_indices.json\n",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-halfword_indices.json",
+    "score": 90.96939,
+    "size": "392"
+  },
+  {
+    "name": "reuse_output",
+    "patch": "--- \n+++ \n@@ -17,19 +17,18 @@\n         return;\n     }\n     case 1: {\n-        u32* p;\n         u32 stride = inner * 4;\n \n         output[1] = *second;\n-        p = output + 1;\n-        p += stride + 4;\n-        p[0] = *second;\n-        p[1] = *second;\n-        p += 2;\n-        *p = *second;\n-        p += stride + 3;\n-        p[0] = *second;\n-        p[1] = *second;\n+        output = output + 1;\n+        output += stride + 4;\n+        output[0] = *second;\n+        output[1] = *second;\n+        output += 2;\n+        *output = *second;\n+        output += stride + 3;\n+        output[0] = *second;\n+        output[1] = *second;\n         return;\n     }\n     default:\n@@ -44,40 +43,38 @@\n     }\n \n     if (pos == width - 2) {\n-        u32* p;\n         u32 row2 = inner * 2;\n         u32 row4 = inner * 4;\n \n         row2 += 3;\n-        p = output + row2;\n-        p[0] = *second;\n-        p += row4 + 5;\n-        p[0] = *second;\n-        p[1] = *second;\n+        output = output + row2;\n+        output[0] = *second;\n+        output += row4 + 5;\n+        output[0] = *second;\n+        output[1] = *second;\n         return;\n     }\n \n     {\n-        u32* p;\n         u32 index = pos - 1;\n         u32 offset;\n \n         index *= 2;\n-        p = output + index;\n-        p[0] = *first;\n-        p++;\n-        p[0] = *second;\n+        output = output + index;\n+        output[0] = *first;\n+        output++;\n+        output[0] = *second;\n         offset = (inner - pos + 2) * 4 - 1;\n-        p += offset;\n-        p[0] = *first;\n-        p++;\n-        p[0] = *second;\n-        p += (pos - 2) * 4 + 5;\n-        p[0] = *second;\n-        p++;\n-        p[0] = *third;\n-        p += offset;\n-        p[0] = *second;\n-        p[1] = *third;\n+        output += offset;\n+        output[0] = *first;\n+        output++;\n+        output[0] = *second;\n+        output += (pos - 2) * 4 + 5;\n+        output[0] = *second;\n+        output++;\n+        output[0] = *third;\n+        output += offset;\n+        output[0] = *second;\n+        output[1] = *third;\n     }\n }\n",
+    "compile_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801945D4.o"
+    ],
+    "compile_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801945D4.o\n",
+    "compile_stderr": "",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-1",
+      "build/GEDE01/obj/game/game_fn_801945D4.o",
+      "-2",
+      "build/GEDE01/src/game/game_fn_801945D4.o",
+      "fn_801945D4",
+      "-o",
+      "reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-reuse_output.json"
+    ],
+    "diff_stdout": "",
+    "diff_stderr": " INFO Writing to reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-reuse_output.json\n",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-reuse_output.json",
+    "score": 99.4898,
+    "size": "392"
+  },
+  {
+    "name": "reuse_output_pos",
+    "patch": "--- \n+++ \n@@ -10,26 +10,25 @@\n \n     switch (pos) {\n     case 0: {\n-        u32 index = inner * 4;\n-        index += 3;\n+        pos = inner * 4;\n+        pos += 3;\n         output[0] = *first;\n-        output[index] = *first;\n+        output[pos] = *first;\n         return;\n     }\n     case 1: {\n-        u32* p;\n         u32 stride = inner * 4;\n \n         output[1] = *second;\n-        p = output + 1;\n-        p += stride + 4;\n-        p[0] = *second;\n-        p[1] = *second;\n-        p += 2;\n-        *p = *second;\n-        p += stride + 3;\n-        p[0] = *second;\n-        p[1] = *second;\n+        output = output + 1;\n+        output += stride + 4;\n+        output[0] = *second;\n+        output[1] = *second;\n+        output += 2;\n+        *output = *second;\n+        output += stride + 3;\n+        output[0] = *second;\n+        output[1] = *second;\n         return;\n     }\n     default:\n@@ -37,47 +36,45 @@\n     }\n \n     if (pos == width - 1) {\n-        u32 index = inner * 2;\n-        index += 2;\n-        output[index] = *first;\n+        pos = inner * 2;\n+        pos += 2;\n+        output[pos] = *first;\n         return;\n     }\n \n     if (pos == width - 2) {\n-        u32* p;\n         u32 row2 = inner * 2;\n         u32 row4 = inner * 4;\n \n         row2 += 3;\n-        p = output + row2;\n-        p[0] = *second;\n-        p += row4 + 5;\n-        p[0] = *second;\n-        p[1] = *second;\n+        output = output + row2;\n+        output[0] = *second;\n+        output += row4 + 5;\n+        output[0] = *second;\n+        output[1] = *second;\n         return;\n     }\n \n     {\n-        u32* p;\n         u32 index = pos - 1;\n         u32 offset;\n \n         index *= 2;\n-        p = output + index;\n-        p[0] = *first;\n-        p++;\n-        p[0] = *second;\n+        output = output + index;\n+        output[0] = *first;\n+        output++;\n+        output[0] = *second;\n         offset = (inner - pos + 2) * 4 - 1;\n-        p += offset;\n-        p[0] = *first;\n-        p++;\n-        p[0] = *second;\n-        p += (pos - 2) * 4 + 5;\n-        p[0] = *second;\n-        p++;\n-        p[0] = *third;\n-        p += offset;\n-        p[0] = *second;\n-        p[1] = *third;\n+        output += offset;\n+        output[0] = *first;\n+        output++;\n+        output[0] = *second;\n+        output += (pos - 2) * 4 + 5;\n+        output[0] = *second;\n+        output++;\n+        output[0] = *third;\n+        output += offset;\n+        output[0] = *second;\n+        output[1] = *third;\n     }\n }\n",
+    "compile_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801945D4.o"
+    ],
+    "compile_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801945D4.o\n",
+    "compile_stderr": "",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-1",
+      "build/GEDE01/obj/game/game_fn_801945D4.o",
+      "-2",
+      "build/GEDE01/src/game/game_fn_801945D4.o",
+      "fn_801945D4",
+      "-o",
+      "reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-reuse_output_pos.json"
+    ],
+    "diff_stdout": "",
+    "diff_stderr": " INFO Writing to reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-reuse_output_pos.json\n",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-reuse_output_pos.json",
+    "score": 99.4898,
+    "size": "392"
+  },
+  {
+    "name": "reuse_output_byte_offset",
+    "patch": "--- \n+++ \n@@ -13,23 +13,23 @@\n         u32 index = inner * 4;\n         index += 3;\n         output[0] = *first;\n-        output[index] = *first;\n+        index *= 4;\n+        *(u32*)((u8*)output + index) = *first;\n         return;\n     }\n     case 1: {\n-        u32* p;\n         u32 stride = inner * 4;\n \n         output[1] = *second;\n-        p = output + 1;\n-        p += stride + 4;\n-        p[0] = *second;\n-        p[1] = *second;\n-        p += 2;\n-        *p = *second;\n-        p += stride + 3;\n-        p[0] = *second;\n-        p[1] = *second;\n+        output = output + 1;\n+        output += stride + 4;\n+        output[0] = *second;\n+        output[1] = *second;\n+        output += 2;\n+        *output = *second;\n+        output += stride + 3;\n+        output[0] = *second;\n+        output[1] = *second;\n         return;\n     }\n     default:\n@@ -39,45 +39,44 @@\n     if (pos == width - 1) {\n         u32 index = inner * 2;\n         index += 2;\n-        output[index] = *first;\n+        index *= 4;\n+        *(u32*)((u8*)output + index) = *first;\n         return;\n     }\n \n     if (pos == width - 2) {\n-        u32* p;\n         u32 row2 = inner * 2;\n         u32 row4 = inner * 4;\n \n         row2 += 3;\n-        p = output + row2;\n-        p[0] = *second;\n-        p += row4 + 5;\n-        p[0] = *second;\n-        p[1] = *second;\n+        output = output + row2;\n+        output[0] = *second;\n+        output += row4 + 5;\n+        output[0] = *second;\n+        output[1] = *second;\n         return;\n     }\n \n     {\n-        u32* p;\n         u32 index = pos - 1;\n         u32 offset;\n \n         index *= 2;\n-        p = output + index;\n-        p[0] = *first;\n-        p++;\n-        p[0] = *second;\n+        output = output + index;\n+        output[0] = *first;\n+        output++;\n+        output[0] = *second;\n         offset = (inner - pos + 2) * 4 - 1;\n-        p += offset;\n-        p[0] = *first;\n-        p++;\n-        p[0] = *second;\n-        p += (pos - 2) * 4 + 5;\n-        p[0] = *second;\n-        p++;\n-        p[0] = *third;\n-        p += offset;\n-        p[0] = *second;\n-        p[1] = *third;\n+        output += offset;\n+        output[0] = *first;\n+        output++;\n+        output[0] = *second;\n+        output += (pos - 2) * 4 + 5;\n+        output[0] = *second;\n+        output++;\n+        output[0] = *third;\n+        output += offset;\n+        output[0] = *second;\n+        output[1] = *third;\n     }\n }\n",
+    "compile_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801945D4.o"
+    ],
+    "compile_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801945D4.o\n",
+    "compile_stderr": "",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-1",
+      "build/GEDE01/obj/game/game_fn_801945D4.o",
+      "-2",
+      "build/GEDE01/src/game/game_fn_801945D4.o",
+      "fn_801945D4",
+      "-o",
+      "reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-reuse_output_byte_offset.json"
+    ],
+    "diff_stdout": "",
+    "diff_stderr": " INFO Writing to reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-reuse_output_byte_offset.json\n",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-reuse_output_byte_offset.json",
+    "score": 99.4898,
+    "size": "392"
+  },
+  {
+    "name": "reuse_output_advance_all",
+    "patch": "--- \n+++ \n@@ -13,23 +13,23 @@\n         u32 index = inner * 4;\n         index += 3;\n         output[0] = *first;\n-        output[index] = *first;\n+        output += index;\n+        *output = *first;\n         return;\n     }\n     case 1: {\n-        u32* p;\n         u32 stride = inner * 4;\n \n         output[1] = *second;\n-        p = output + 1;\n-        p += stride + 4;\n-        p[0] = *second;\n-        p[1] = *second;\n-        p += 2;\n-        *p = *second;\n-        p += stride + 3;\n-        p[0] = *second;\n-        p[1] = *second;\n+        output = output + 1;\n+        output += stride + 4;\n+        output[0] = *second;\n+        output[1] = *second;\n+        output += 2;\n+        *output = *second;\n+        output += stride + 3;\n+        output[0] = *second;\n+        output[1] = *second;\n         return;\n     }\n     default:\n@@ -39,45 +39,44 @@\n     if (pos == width - 1) {\n         u32 index = inner * 2;\n         index += 2;\n-        output[index] = *first;\n+        output += index;\n+        *output = *first;\n         return;\n     }\n \n     if (pos == width - 2) {\n-        u32* p;\n         u32 row2 = inner * 2;\n         u32 row4 = inner * 4;\n \n         row2 += 3;\n-        p = output + row2;\n-        p[0] = *second;\n-        p += row4 + 5;\n-        p[0] = *second;\n-        p[1] = *second;\n+        output = output + row2;\n+        output[0] = *second;\n+        output += row4 + 5;\n+        output[0] = *second;\n+        output[1] = *second;\n         return;\n     }\n \n     {\n-        u32* p;\n         u32 index = pos - 1;\n         u32 offset;\n \n         index *= 2;\n-        p = output + index;\n-        p[0] = *first;\n-        p++;\n-        p[0] = *second;\n+        output = output + index;\n+        output[0] = *first;\n+        output++;\n+        output[0] = *second;\n         offset = (inner - pos + 2) * 4 - 1;\n-        p += offset;\n-        p[0] = *first;\n-        p++;\n-        p[0] = *second;\n-        p += (pos - 2) * 4 + 5;\n-        p[0] = *second;\n-        p++;\n-        p[0] = *third;\n-        p += offset;\n-        p[0] = *second;\n-        p[1] = *third;\n+        output += offset;\n+        output[0] = *first;\n+        output++;\n+        output[0] = *second;\n+        output += (pos - 2) * 4 + 5;\n+        output[0] = *second;\n+        output++;\n+        output[0] = *third;\n+        output += offset;\n+        output[0] = *second;\n+        output[1] = *third;\n     }\n }\n",
+    "compile_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801945D4.o"
+    ],
+    "compile_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801945D4.o\n",
+    "compile_stderr": "",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-1",
+      "build/GEDE01/obj/game/game_fn_801945D4.o",
+      "-2",
+      "build/GEDE01/src/game/game_fn_801945D4.o",
+      "fn_801945D4",
+      "-o",
+      "reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-reuse_output_advance_all.json"
+    ],
+    "diff_stdout": "",
+    "diff_stderr": " INFO Writing to reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-reuse_output_advance_all.json\n",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-reuse_output_advance_all.json",
+    "score": 100.0,
+    "size": "392"
+  },
+  {
+    "name": "wide_width_control",
+    "patch": "--- \n+++ \n@@ -2,11 +2,14 @@\n typedef unsigned int u32;\n typedef int s32;\n \n-void fn_801945D4(u8 width, u8 position, u32* output, const u32* first,\n+void fn_801945D4(u32 width, u8 position, u32* output, const u32* first,\n                  const u32* second, const u32* third)\n {\n-    u8 inner = width - 4;\n+    u8 inner;\n     s32 pos = position;\n+    width = (u8)width;\n+    inner = width - 4;\n+\n \n     switch (pos) {\n     case 0: {\n@@ -17,67 +20,64 @@\n         return;\n     }\n     case 1: {\n-        u32* p;\n         u32 stride = inner * 4;\n \n         output[1] = *second;\n-        p = output + 1;\n-        p += stride + 4;\n-        p[0] = *second;\n-        p[1] = *second;\n-        p += 2;\n-        *p = *second;\n-        p += stride + 3;\n-        p[0] = *second;\n-        p[1] = *second;\n+        output = output + 1;\n+        output += stride + 4;\n+        output[0] = *second;\n+        output[1] = *second;\n+        output += 2;\n+        *output = *second;\n+        output += stride + 3;\n+        output[0] = *second;\n+        output[1] = *second;\n         return;\n     }\n     default:\n         break;\n     }\n \n-    if (pos == width - 1) {\n+    if (pos == (s32)width - 1) {\n         u32 index = inner * 2;\n         index += 2;\n         output[index] = *first;\n         return;\n     }\n \n-    if (pos == width - 2) {\n-        u32* p;\n+    if (pos == (s32)width - 2) {\n         u32 row2 = inner * 2;\n         u32 row4 = inner * 4;\n \n         row2 += 3;\n-        p = output + row2;\n-        p[0] = *second;\n-        p += row4 + 5;\n-        p[0] = *second;\n-        p[1] = *second;\n+        output = output + row2;\n+        output[0] = *second;\n+        output += row4 + 5;\n+        output[0] = *second;\n+        output[1] = *second;\n         return;\n     }\n \n     {\n-        u32* p;\n         u32 index = pos - 1;\n         u32 offset;\n \n         index *= 2;\n-        p = output + index;\n-        p[0] = *first;\n-        p++;\n-        p[0] = *second;\n+        output = output + index;\n+        output[0] = *first;\n+        output++;\n+        output[0] = *second;\n         offset = (inner - pos + 2) * 4 - 1;\n-        p += offset;\n-        p[0] = *first;\n-        p++;\n-        p[0] = *second;\n-        p += (pos - 2) * 4 + 5;\n-        p[0] = *second;\n-        p++;\n-        p[0] = *third;\n-        p += offset;\n-        p[0] = *second;\n-        p[1] = *third;\n+        output += offset;\n+        output[0] = *first;\n+        output++;\n+        output[0] = *second;\n+        output += (pos - 2) * 4 + 5;\n+        output[0] = *second;\n+        output++;\n+        output[0] = *third;\n+        output += offset;\n+        output[0] = *second;\n+        output[1] = *third;\n     }\n }\n",
+    "compile_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801945D4.o"
+    ],
+    "compile_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801945D4.o\n",
+    "compile_stderr": "",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-1",
+      "build/GEDE01/obj/game/game_fn_801945D4.o",
+      "-2",
+      "build/GEDE01/src/game/game_fn_801945D4.o",
+      "fn_801945D4",
+      "-o",
+      "reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-wide_width_control.json"
+    ],
+    "diff_stdout": "",
+    "diff_stderr": " INFO Writing to reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-wide_width_control.json\n",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-wide_width_control.json",
+    "score": 99.4898,
+    "size": "392"
+  },
+  {
+    "name": "reuse_width_index",
+    "patch": "--- \n+++ \n@@ -2,82 +2,82 @@\n typedef unsigned int u32;\n typedef int s32;\n \n-void fn_801945D4(u8 width, u8 position, u32* output, const u32* first,\n+void fn_801945D4(u32 width, u8 position, u32* output, const u32* first,\n                  const u32* second, const u32* third)\n {\n-    u8 inner = width - 4;\n+    u8 inner;\n     s32 pos = position;\n+    width = (u8)width;\n+    inner = width - 4;\n+\n \n     switch (pos) {\n     case 0: {\n-        u32 index = inner * 4;\n-        index += 3;\n+        width = inner * 4;\n+        width += 3;\n         output[0] = *first;\n-        output[index] = *first;\n+        output[width] = *first;\n         return;\n     }\n     case 1: {\n-        u32* p;\n         u32 stride = inner * 4;\n \n         output[1] = *second;\n-        p = output + 1;\n-        p += stride + 4;\n-        p[0] = *second;\n-        p[1] = *second;\n-        p += 2;\n-        *p = *second;\n-        p += stride + 3;\n-        p[0] = *second;\n-        p[1] = *second;\n+        output = output + 1;\n+        output += stride + 4;\n+        output[0] = *second;\n+        output[1] = *second;\n+        output += 2;\n+        *output = *second;\n+        output += stride + 3;\n+        output[0] = *second;\n+        output[1] = *second;\n         return;\n     }\n     default:\n         break;\n     }\n \n-    if (pos == width - 1) {\n-        u32 index = inner * 2;\n-        index += 2;\n-        output[index] = *first;\n+    if (pos == (s32)width - 1) {\n+        width = inner * 2;\n+        width += 2;\n+        output[width] = *first;\n         return;\n     }\n \n-    if (pos == width - 2) {\n-        u32* p;\n+    if (pos == (s32)width - 2) {\n         u32 row2 = inner * 2;\n         u32 row4 = inner * 4;\n \n         row2 += 3;\n-        p = output + row2;\n-        p[0] = *second;\n-        p += row4 + 5;\n-        p[0] = *second;\n-        p[1] = *second;\n+        output = output + row2;\n+        output[0] = *second;\n+        output += row4 + 5;\n+        output[0] = *second;\n+        output[1] = *second;\n         return;\n     }\n \n     {\n-        u32* p;\n         u32 index = pos - 1;\n         u32 offset;\n \n         index *= 2;\n-        p = output + index;\n-        p[0] = *first;\n-        p++;\n-        p[0] = *second;\n+        output = output + index;\n+        output[0] = *first;\n+        output++;\n+        output[0] = *second;\n         offset = (inner - pos + 2) * 4 - 1;\n-        p += offset;\n-        p[0] = *first;\n-        p++;\n-        p[0] = *second;\n-        p += (pos - 2) * 4 + 5;\n-        p[0] = *second;\n-        p++;\n-        p[0] = *third;\n-        p += offset;\n-        p[0] = *second;\n-        p[1] = *third;\n+        output += offset;\n+        output[0] = *first;\n+        output++;\n+        output[0] = *second;\n+        output += (pos - 2) * 4 + 5;\n+        output[0] = *second;\n+        output++;\n+        output[0] = *third;\n+        output += offset;\n+        output[0] = *second;\n+        output[1] = *third;\n     }\n }\n",
+    "compile_command": [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_801945D4.o"
+    ],
+    "compile_stdout": "[1/1] MWCC build/GEDE01/src/game/game_fn_801945D4.o\n",
+    "compile_stderr": "",
+    "diff_command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-1",
+      "build/GEDE01/obj/game/game_fn_801945D4.o",
+      "-2",
+      "build/GEDE01/src/game/game_fn_801945D4.o",
+      "fn_801945D4",
+      "-o",
+      "reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-reuse_width_index.json"
+    ],
+    "diff_stdout": "",
+    "diff_stderr": " INFO Writing to reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-reuse_width_index.json\n",
+    "raw_report": "eternal-darkness-decomp/reports/GEDE01/trial-0ec8744e-ff12-48ea-931d-04c18dfb7003-reuse_width_index.json",
+    "score": 99.4898,
+    "size": "392"
+  }
+]

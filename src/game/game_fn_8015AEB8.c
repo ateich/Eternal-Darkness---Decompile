@@ -2,7 +2,7 @@ typedef unsigned char u8;
 typedef unsigned int u32;
 
 extern u8 lbl_805B6E00[];
-extern u32 lbl_8064BA28[];
+extern u32 lbl_8064BA28[2];
 extern int lbl_8064D120, lbl_8064D14C, lbl_8064D150, lbl_8064D154;
 extern int lbl_8064D158, lbl_8064D15C, lbl_8064D180, lbl_8064D184;
 extern int lbl_8064D18C, lbl_8064D190, lbl_8064D198;
@@ -82,6 +82,7 @@ void fn_8015AEB8(int value, int allocation, int flags)
             u8* src3 = base3 - 0x3F84;
             u8* dst3 = base3 - 0x3F04;
             u8* state = base + 0x2A0;
+            u32* priority = lbl_8064BA28;
             u8* buffer = base3 - 0x3EC4;
             u8* object = base3 + 0x140;
             for (i = 0; i < 2; i++) {
@@ -94,17 +95,17 @@ void fn_8015AEB8(int value, int allocation, int flags)
                 *(void**)(state + 0x2068) = dst2;
                 *(void**)(state + 0x206C) = dst3;
                 fn_8020F84C(object, fn_8015D1C8, state, buffer + 0x2000,
-                            0x2000, lbl_8064BA28[i], 1);
-                dst0 += 0x20; src0 += 0x40;
-                dst1 += 0x20; src1 += 0x40;
-                dst2 += 0x20; src2 += 0x40;
-                dst3 += 0x20; src3 += 0x40;
-                state += 0x20A0; buffer += 0x2000; object += 0x310;
+                            0x2000, *priority, 1);
+                src0 += 0x40; dst0 += 0x20;
+                src1 += 0x40; dst1 += 0x20;
+                src2 += 0x40; dst2 += 0x20;
+                src3 += 0x40; dst3 += 0x20;
+                state += 0x20A0; priority++; buffer += 0x2000; object += 0x310;
             }
         }
         fn_8020F84C(base3 + 0x760, fn_8015A340, 0, base3 + 0x2A70, 0x2000, 0x1D, 1);
-        fn_8020F84C(base3 + 0x2A70, fn_8015B800, 0, base3 + 0x4B80, 0x2000, 0xA, 1);
-        fn_8020F84C(base3 + 0x4B80, fn_800BD94C, 0, base3 + 0x6E90, 0x2000, 0x1F, 1);
+        fn_8020F84C(base3 + 0x2A70, fn_8015B800, 0, base3 + 0x4D80, 0x2000, 0xA, 1);
+        fn_8020F84C(base3 + 0x4D80, fn_800BD94C, 0, base3 + 0x7090, 0x2000, 0x1F, 1);
     } else if ((flags & 2) == 0) {
         fn_801E7944(lbl_8064D158);
     }
@@ -117,10 +118,14 @@ void fn_8015AEB8(int value, int allocation, int flags)
         fn_8015E794();
         fn_8020FC0C(base3 + 0x760);
         fn_8020FC0C(base3 + 0x2A70);
-        for (i = 0; i < 2; i++) {
-            fn_8020FC0C(base3 + 0x140 + i * 0x310);
+        {
+            u8* object = base3 + 0x140;
+            for (i = 0; i < 2; i++) {
+                fn_8020FC0C(object);
+                object += 0x310;
+            }
         }
-        fn_8020FC0C(base3 + 0x4B80);
+        fn_8020FC0C(base3 + 0x4D80);
         lbl_8064D120 = 1;
     }
 }

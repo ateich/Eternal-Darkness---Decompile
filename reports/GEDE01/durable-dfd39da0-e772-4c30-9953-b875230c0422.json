@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "dfd39da0-e772-4c30-9953-b875230c0422",
+  "attempt": 5,
+  "base_commit": "00123d023bcbc8a0f9a2846c34ac9be4082b2e77",
+  "target": "fn_801FA410",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-dfd39da0-e772-4c30-9953-b875230c0422.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 40.533333%: retail is 60 bytes, candidate is 44. GC/1.3 hoists mulli before global-address formation, saves the previous index in r6 instead of r7, and folds the separate array/destination-base addi/add operations into a shared indexed address and larger store displacements. The four named ELF relocation targets, types and zero addends agree, but candidate relocation offsets 0x06/0x08/0x0e/0x14 are four bytes later than retail 0x02/0x04/0x0a/0x10. Integer subobject-address and inline array-selector trials scored 40.2%; an inline setter scored 40.533333%. All trials were reverted; the original independent NonMatching C source is retained."
+}

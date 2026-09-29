@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "87e03cc8-87fb-4d33-aa44-6c486f1a2e8c",
+  "attempt": 4,
+  "base_commit": "ff719ae1fe02f80ac097f11a5b44d90f3dfaab9d",
+  "target": "fn_801A1F8C",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-87e03cc8-87fb-4d33-aa44-6c486f1a2e8c.json"
+  ],
+  "divergence": "Canonical GC/1.3 emits the exact retail size (1460 bytes) at 99.109590% relocation-strict objdiff. The established per-TU externalization maps compiler-local signed and unsigned conversion biases to retail lbl_80650D08 and lbl_80650D20, making relocation targets and addends equal. Exactly 22 aligned instruction differences remain: 4 reversed nonvolatile FPR assignments at 0x74-0x8C, 10 integer-register allocation differences in the random increment/clamp at 0x28C-0x2C0, 6 consequent FPR argument differences in alpha calculation at 0x318-0x32C, and one moved phase-zero store represented by a retail-only/generated-only pair at 0x370/0x37C. A state-dependent volatile load sequence aligned the entire initial scheduling cluster, and particle-before-counter increment order aligned the second-loop latch. Full build passed and build/GEDE01/main.dol SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}

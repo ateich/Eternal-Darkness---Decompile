@@ -1,0 +1,19 @@
+--- src/game/game_fn_8011C0F0.c
++++ src/game/game_fn_8011C0F0.c
+@@ -18,13 +18,13 @@
+ void fn_8011C0F0(int index, unsigned char enabled)
+ {
+     Quad quad = lbl_8023A670;
+-    int color;
++    int color[1];
+ 
+     if (enabled != 0) {
+-        color = lbl_8064C2BC;
++        color[0] = lbl_8064C2BC;
+         fn_801A872C(quad.entry[index].x, quad.entry[index].y,
+                     quad.entry[index].width, quad.entry[index].height,
+-                    -1, 3, &color);
++                    -1, 3, color);
+     } else {
+         fn_801A8974(quad.entry[index].x, quad.entry[index].y,
+                     quad.entry[index].width, quad.entry[index].height,

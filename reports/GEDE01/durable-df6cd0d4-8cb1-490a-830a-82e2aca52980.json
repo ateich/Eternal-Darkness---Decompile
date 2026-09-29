@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "assignment_id": "df6cd0d4-8cb1-490a-830a-82e2aca52980",
+  "attempt": 5,
+  "base_commit": "4d8ae089b6d9424fd1e2193f0ad465fae85015ec",
+  "target": "fn_801A3DF8",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-df6cd0d4-8cb1-490a-830a-82e2aca52980.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-df6cd0d4-8cb1-490a-830a-82e2aca52980-canonical.json",
+    "eternal-darkness-decomp/reports/GEDE01/measurements-df6cd0d4-8cb1-490a-830a-82e2aca52980.json",
+    "eternal-darkness-decomp/reports/GEDE01/verification-df6cd0d4-8cb1-490a-830a-82e2aca52980.json",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-df6cd0d4-8cb1-490a-830a-82e2aca52980.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 95.36242% (preserved accepted source: 95.11074%). Retail is 1192 bytes with 39 text relocations; generated is 1208 bytes with 41. Canonical GC/1.3 emits addi/bl _savegpr_21 and addi/bl _restgpr_21 instead of retail stmw/lmw, plus two cached-byte register moves before the loop. Both use a 0x60-byte frame and save f31 and r21-r31. State/channel/count use r27/r26/r25 instead of retail r29/r28/r27, with downstream register-coloring and scheduling differences. All 39 retail relocation target/addend entries correspond after identifying the two byte-identical conversion literal pools; the two helper relocations remain extra. Corrected the fn_8017D1E0 argument order, completion guard bit 0x80, zero-audio completion path, and local callee declarations/flag truncation. Text bytes do not match; source remains NonMatching. Full canonical build and legal audit passed; DOL SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}

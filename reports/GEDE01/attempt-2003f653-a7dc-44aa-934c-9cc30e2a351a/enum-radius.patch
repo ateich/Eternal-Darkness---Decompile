@@ -1,0 +1,185 @@
+diff --git a/eternal-darkness-decomp/src/game/game_fn_801DE8B4.c b/eternal-darkness-decomp/src/game/game_fn_801DE8B4.c
+index ec4dc57c8..8ade023bc 100644
+--- a/eternal-darkness-decomp/src/game/game_fn_801DE8B4.c
++++ b/eternal-darkness-decomp/src/game/game_fn_801DE8B4.c
+@@ -64,7 +64,7 @@ extern void fn_8012B7A0(void*, float);
+ extern void fn_80048708(void*);
+ extern void fn_801E8328(int, void*);
+ extern void fn_801AC9F4(int, int, Vec3*, int);
+-extern int fn_801D3A34(int, int);
++extern u32 fn_801D3A34(int, int);
+ extern int fn_801CEB2C(int);
+ extern void fn_8014F3A4(Vec3*, int, int, int, void*);
+ extern int lbl_8064D5A8, lbl_8064C308;
+@@ -81,14 +81,13 @@ int fn_801DE8B4(void* object, int variant, int skip_search, float scale)
+     void* spawned;
+     int ok = 1;
+     void* selected = 0;
+-    int distance;
+     int found;
+     int category;
+     int is_six, is_four;
+     int a, b, c;
+     int red, green, blue;
+     int handle;
+-    int effect_a, effect_b;
++    int sound_time, volume, offset;
+     void* runtime;
+     void* callback;
+     SpawnRequest args;
+@@ -97,8 +96,9 @@ int fn_801DE8B4(void* object, int variant, int skip_search, float scale)
+     if (!skip_search) {
+         iterator = fn_80201B9C();
+         found = 0;
+-        distance = (*(int*)(base + 8) == 2 || *(int*)(base + 8) == 8)
+-                       ? 120 : state->search_distance;
++        {
++        enum { DEFAULT_RADIUS = 120 } distance = (*(int*)(base + 8) == 2 || *(int*)(base + 8) == 8)
++                       ? DEFAULT_RADIUS : state->search_distance;
+         while (iterator && !found) {
+             void* candidate = fn_80201BC8(iterator);
+             if (candidate) {
+@@ -110,7 +110,7 @@ int fn_801DE8B4(void* object, int variant, int skip_search, float scale)
+                 candidate_state = fn_80201B4C(iterator);
+                 if (*(int*)(base + 8) == candidate_category &&
+                     fn_80178E94(&state->candidates[state->index], &candidate_pos) < (u32)distance &&
+-                    (candidate_state <= 1 || candidate_state == 2))
++                    ((u32)candidate_state <= 1 || candidate_state == 2))
+                     found = 1;
+             }
+             iterator = fn_80201BC0(iterator);
+@@ -124,40 +124,35 @@ int fn_801DE8B4(void* object, int variant, int skip_search, float scale)
+         } else {
+             state->position = state->candidates[state->index];
+         }
++        }
+     } else {
+         state->position = state->candidates[state->index];
+     }
+     if (!ok) goto done;
+ 
+     category = fn_801D38E8(*(int*)(base + 4));
+-    if (fn_800CAC5C(state->types[state->index], category, &a, &b, &c) != 1) {
+-        ok = 0;
+-        goto post_spawn;
+-    }
++    if (fn_800CAC5C(state->types[state->index], category, &a, &b, &c) == 1) {
+     is_six = state->types[state->index] == 6;
+     is_four = state->types[state->index] == 4;
+     fn_80043F44(&args);
+     args.position = state->position;
+-    args.scale = scale;
+     args.value10 = a;
+     args.value14 = b;
+-    args.value20 = state->value34;
++    args.scale = scale;
+     args.value24 = state->value38;
+-    if (variant && !is_six && is_four)
+-        args.mode = 0;
+-    else
++    args.value20 = state->value34;
++    if (variant) {
++        if (is_six || is_four)
++            args.mode = 0;
++        else
++            args.mode = 0x28;
++    } else {
+         args.mode = 0x28;
+-    spawned = fn_80034708(&args);
+-    if (!spawned) {
+-        ok = 0;
+-        goto post_spawn;
+     }
++    spawned = fn_80034708(&args);
++    if (spawned) {
+     selected = fn_80201BC8(spawned);
+-    if (!selected) {
+-        fn_801E8328(28, spawned);
+-        ok = 0;
+-        goto post_spawn;
+-    }
++    if (selected) {
+     fn_801261F4();
+     fn_80201D54(spawned, *(int*)(base + 8));
+     fn_80201D24(spawned, 1);
+@@ -180,43 +175,62 @@ int fn_801DE8B4(void* object, int variant, int skip_search, float scale)
+             *(int*)((u8*)runtime + 0x84) = c;
+     }
+     if (*(int*)((u8*)state + 0x18)) {
+-        int effect = is_six ? 2 : (is_four ? 3 : 1);
++        int effect;
++        if (is_six)
++            effect = 2;
++        else if (is_four)
++            effect = 3;
++        else
++            effect = 1;
+         fn_801DDB84(&state->position, category, effect, selected);
+     }
+-    if (variant) {
+-        if (!is_six && !is_four && fn_8012A100(selected, 0x8a) && args.mode == 0x28) {
++    if ((!variant || (!is_six && !is_four)) && fn_8012A100(selected, 0x8a)) {
++        if (args.mode == 0x28) {
+             callback = fn_801294DC(selected, 0x8a, 0x20, 9);
+             if (callback) {
+                 fn_80128C44(callback, fn_801DE8AC, 0);
+                 fn_80128C28(callback, fn_801DE7FC, handle);
+             }
++        } else {
++            fn_801DE7A0(handle);
+         }
+-        fn_801DE7A0(handle);
+     }
+-    fn_8012B7A0(selected, scale);
++    fn_8012B7A0(selected, args.scale);
+     fn_80048708(selected);
+     if (*(void (**)(void*, int))(base + 0x28))
+         (*(void (**)(void*, int))(base + 0x28))(object, *(int*)(base + 0x2c));
+     fn_801E8328(1, spawned);
+ 
+-post_spawn:
++    } else {
++        fn_801E8328(28, spawned);
++        ok = 0;
++    }
++    } else {
++        ok = 0;
++    }
++    } else {
++        ok = 0;
++    }
+     if (!ok)
+         goto done;
+ 
+-    b = lbl_8064D5A8;
+-    a = 100;
+-    if (b - 20 < lbl_8064C308)
+-        a = 20;
+-    lbl_8064C308 = b;
+-    fn_801AC9F4(0x168, a, &state->position, 2);
++    sound_time = lbl_8064D5A8;
++    volume = 100;
++    if (sound_time - 20 < lbl_8064C308)
++        volume = 20;
++    lbl_8064C308 = sound_time;
++    fn_801AC9F4(0x168, volume, &state->position, 2);
+     category = state->types[state->index];
+-    distance = category == 4 ? 500 : (category == 6 ? 125 : 350);
++    switch (category) {
++    case 6: offset = 125; break;
++    case 4: offset = 500; break;
++    default: offset = 350; break;
++    }
+     pos = state->position;
+-    pos.z += distance;
+-    effect_a = fn_801D3A34(*(int*)(base + 4), 0x4e);
+-    effect_b = fn_801D3A34(*(int*)(base + 4), 0x35);
+-    category = (u8)fn_801CEB2C(*(int*)(base + 4));
+-    fn_8014F3A4(&pos, category, effect_b, effect_a, (u8*)state + 0x84);
++    pos.z += offset;
++    fn_8014F3A4(&pos, (u8)fn_801CEB2C(*(int*)(base + 4)),
++                 fn_801D3A34(*(int*)(base + 4), 0x35),
++                 fn_801D3A34(*(int*)(base + 4), 0x4e), (u8*)state + 0x84);
+ done:
+     return selected != 0;
+ }

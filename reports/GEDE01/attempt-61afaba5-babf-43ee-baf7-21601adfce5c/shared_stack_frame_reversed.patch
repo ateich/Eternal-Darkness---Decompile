@@ -1,0 +1,28 @@
+--- src/game/game_fn_8011C0F0.c
++++ src/game/game_fn_8011C0F0.c
+@@ -17,17 +17,17 @@
+ 
+ void fn_8011C0F0(int index, unsigned char enabled)
+ {
+-    Quad quad = lbl_8023A670;
+-    int color;
++    struct { Quad quad; int color; } frame;
++    frame.quad = lbl_8023A670;
+ 
+     if (enabled != 0) {
+-        color = lbl_8064C2BC;
+-        fn_801A872C(quad.entry[index].x, quad.entry[index].y,
+-                    quad.entry[index].width, quad.entry[index].height,
+-                    -1, 3, &color);
++        frame.color = lbl_8064C2BC;
++        fn_801A872C(frame.quad.entry[index].x, frame.quad.entry[index].y,
++                    frame.quad.entry[index].width, frame.quad.entry[index].height,
++                    -1, 3, &frame.color);
+     } else {
+-        fn_801A8974(quad.entry[index].x, quad.entry[index].y,
+-                    quad.entry[index].width, quad.entry[index].height,
++        fn_801A8974(frame.quad.entry[index].x, frame.quad.entry[index].y,
++                    frame.quad.entry[index].width, frame.quad.entry[index].height,
+                     -1, 3);
+     }
+ }

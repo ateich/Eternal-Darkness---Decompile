@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "assignment_id": "f1a7c5e1-aa8e-43bf-a373-4cb9fde374e5",
+  "target": "fn_80140E70",
+  "tool": {
+    "command": "build/tools/objdiff-cli -V",
+    "exit_status": 0,
+    "raw_stdout": "objdiff-cli 3.6.1"
+  },
+  "build": {
+    "commands": [
+      "python3 configure.py",
+      ".tools/bin/ninja -j2"
+    ],
+    "exit_statuses": [0, 0],
+    "raw_terminal_tail": [
+      "[930/932] DOL build/GEDE01/main.dol",
+      "[931/932] CHECK config/GEDE01/build.sha1",
+      "build/GEDE01/main.dol: OK",
+      "[932/932] PROGRESS"
+    ]
+  },
+  "objdiff_runs": [
+    {
+      "basis": "canonical",
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80140E70 fn_80140E70 -o reports/GEDE01/objdiff-f1a7c5e1-aa8e-43bf-a373-4cb9fde374e5-canonical.raw.json --format json",
+      "config": "project default",
+      "exit_status": 0,
+      "raw_output_file": "eternal-darkness-decomp/reports/GEDE01/objdiff-f1a7c5e1-aa8e-43bf-a373-4cb9fde374e5-canonical.raw.json",
+      "raw_measurement": "retail_size=1556 retail_instructions=389 retail_relocations=37 generated_size=1592 generated_instructions=398 generated_relocations=37 match_percent=78.97686"
+    },
+    {
+      "basis": "relocation-strict",
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80140E70 -c function_reloc_diffs=name_address fn_80140E70 -o reports/GEDE01/objdiff-f1a7c5e1-aa8e-43bf-a373-4cb9fde374e5-reloc-strict.raw.json --format json",
+      "config": "function_reloc_diffs=name_address",
+      "exit_status": 0,
+      "raw_output_file": "eternal-darkness-decomp/reports/GEDE01/objdiff-f1a7c5e1-aa8e-43bf-a373-4cb9fde374e5-reloc-strict.raw.json",
+      "raw_measurement": "retail_size=1556 retail_instructions=389 retail_relocations=37 generated_size=1592 generated_instructions=398 generated_relocations=37 match_percent=78.97686"
+    }
+  ],
+  "dol_verification": {
+    "sha1_command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_sha1_stdout": [
+      "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+      "ea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol"
+    ],
+    "compare_command": "cmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_compare_exit_status": 0
+  },
+  "codegen_hypothesis": "Starting from the preserved lifetime reconstruction, explicitly express every signed-short conversion through a 0x4330 union and extern lbl_80650408 so the generated relocation targets the retail bias constant while retaining the recovered coordinate live ranges.",
+  "hypothesis_result": "Rejected after fresh canonical measurement: it regressed to 61.606686%, generated 1724 bytes, and produced 38 generated relocation-bearing instructions versus 37 retail. The explicit union stack traffic disrupted scheduling and added code, so the final source preserves the stronger lifetime reconstruction.",
+  "remaining_divergence": "Retail uses a 0xC0 frame and saves r21-r31, while generated uses a 0xA0 frame and saves r22-r31. Retail relocates signed-conversion bias lbl_80650408 while generated uses TU-local @90; remaining part-loop scheduling and register allocation produce 398 generated instructions/1592 bytes versus 389 retail instructions/1556 bytes."
+}

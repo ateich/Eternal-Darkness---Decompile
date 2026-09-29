@@ -22,11 +22,12 @@ typedef struct Ramp {
 } Ramp;
 
 extern u8 lbl_80619860[];
+extern const float lbl_80650F00;
 extern u8 lbl_8064D3A1;
-extern u8 lbl_8064D3A4[];
-extern u8 lbl_8064D3AC[];
-extern u8 lbl_8064D3B4[];
-extern u8 lbl_8064D3BC[];
+extern u8 lbl_8064D3A4;
+extern u8 lbl_8064D3AC;
+extern u8 lbl_8064D3B4;
+extern u8 lbl_8064D3BC;
 extern u32 lbl_8064D3C4;
 extern u32 lbl_8064D3C8;
 extern u64 lbl_8064D3E0;
@@ -40,10 +41,11 @@ extern u8 fn_801CC6D4(void);
 extern u16 fn_801CBCE0(u8, u8, u8, u8);
 extern u16 fn_801CBD9C(u8, u8, u8, u8);
 extern void fn_801CD400(void);
-extern void fn_801B7A10(Ramp*);
+extern void fn_801B3770(void*);
+extern void fn_801B35BC(void*);
+extern void fn_801B3C14(void*, int, int);
 
 #define U32(p, o) (*(u32*)((p) + (o)))
-#define PTR(p, o) (*(void**)((p) + (o)))
 
 void fn_801B7A7C(u32 elapsed)
 {
@@ -64,46 +66,76 @@ void fn_801B7A7C(u32 elapsed)
     lbl_8064D3A1 = (lbl_8064D3A1 + 1) & 0x1F;
 
     if (!fn_801CC6D4()) {
-        bit = 1;
-        for (i = 0; i < 32 && (lbl_8064D3C8 || lbl_8064D3C4); ++i, bit <<= 1) {
-            Ramp* ramp = (Ramp*)(lbl_80619860 + 0x5D4 + i * 0x30);
-            if (lbl_8064D3C8 & bit) {
-                ramp->value = ramp->target - ramp->step * (ramp->target - ramp->previous_target);
-                ramp->step -= ramp->step_delta;
-                if (ramp->step <= 0.0f) {
-                    ramp->value = ramp->target;
-                    fn_801B7A10(ramp);
-                    lbl_8064D3C8 &= ~bit;
+        if (lbl_8064D3C8 | lbl_8064D3C4) {
+            const float zero = lbl_80650F00;
+            Ramp* ramp = (Ramp*)(lbl_80619860 + 0x5D4);
+            bit = 1;
+            for (i = 0; i < 32; ++i, bit <<= 1, ++ramp) {
+                if (lbl_8064D3C8 & bit) {
+                    ramp->value =
+                        ramp->target -
+                        (float)(ramp->step *
+                            (ramp->target - ramp->previous_target));
+                    if ((ramp->step = ramp->step - ramp->step_delta) <= zero) {
+                        ramp->value = ramp->target;
+                        switch (ramp->type) {
+                        case 1:
+                            fn_801B3770((void*)ramp->voice);
+                            break;
+                        case 2:
+                            fn_801B35BC((void*)ramp->voice);
+                            break;
+                        case 3:
+                            fn_801B3C14((void*)ramp->voice, 0, 0);
+                            break;
+                        }
+                        if ((lbl_8064D3C8 &= ~bit) == 0 && !lbl_8064D3C4) {
+                            break;
+                        }
+                    }
                 }
-            }
-            if (lbl_8064D3C4 & bit) {
-                ramp->aux_value = ramp->aux_target - ramp->aux_step * (ramp->aux_target - ramp->aux_previous_target);
-                ramp->aux_step -= ramp->aux_step_delta;
-                if (ramp->aux_step <= 0.0f) {
-                    ramp->aux_value = ramp->aux_target;
-                    lbl_8064D3C4 &= ~bit;
+                if (lbl_8064D3C4 & bit) {
+                    ramp->aux_value =
+                        ramp->aux_target -
+                        (float)(ramp->aux_step *
+                            (ramp->aux_target - ramp->aux_previous_target));
+                    if ((ramp->aux_step = ramp->aux_step - ramp->aux_step_delta) <=
+                        zero) {
+                        ramp->aux_value = ramp->aux_target;
+                        if ((lbl_8064D3C4 &= ~bit) == 0 && !lbl_8064D3C8) {
+                            break;
+                        }
+                    }
                 }
             }
         }
 
-        for (i = 0; i < 8; ++i) {
-            u16 values[4];
-            u32 channel;
-            if (lbl_8064D3BC[i] != 0xFF) {
-                for (channel = 0; channel < 4; ++channel) {
-                    values[channel] = fn_801CBCE0((u8)i, (u8)channel,
-                                                  lbl_8064D3BC[i], lbl_8064D3B4[i]);
+        {
+            u32* context = (u32*)(lbl_80619860 + 0xC14);
+            UpdateCallback* callback =
+                (UpdateCallback*)(lbl_80619860 + 0xC34);
+            UpdateCallback* aux_callback =
+                (UpdateCallback*)(lbl_80619860 + 0xC74);
+            for (i = 0; i < 8; ++i, ++context, ++callback, ++aux_callback) {
+                u16 values[4];
+                u32 channel;
+                u32* aux_context = context + 0x10;
+                if ((&lbl_8064D3BC)[i] != 0xFF) {
+                    for (channel = 0; channel < 4; ++channel) {
+                        values[channel] = fn_801CBCE0(
+                            (u8)i, (u8)channel, (&lbl_8064D3BC)[i],
+                            (&lbl_8064D3B4)[i]);
+                    }
+                    (*callback)(1, values, *context);
                 }
-                ((UpdateCallback*)PTR(lbl_80619860, 0xC34))[i](1, values,
-                                                               U32(lbl_80619860, 0xC14 + i * 4));
-            }
-            if (lbl_8064D3AC[i] != 0xFF) {
-                for (channel = 0; channel < 4; ++channel) {
-                    values[channel] = fn_801CBD9C((u8)i, (u8)channel,
-                                                  lbl_8064D3AC[i], lbl_8064D3A4[i]);
+                if ((&lbl_8064D3AC)[i] != 0xFF) {
+                    for (channel = 0; channel < 4; ++channel) {
+                        values[channel] = fn_801CBD9C(
+                            (u8)i, (u8)channel, (&lbl_8064D3AC)[i],
+                            (&lbl_8064D3A4)[i]);
+                    }
+                    (*aux_callback)(1, values, *aux_context);
                 }
-                ((UpdateCallback*)PTR(lbl_80619860, 0xC74))[i](1, values,
-                                                               U32(lbl_80619860, 0xC54 + i * 4));
             }
         }
     }

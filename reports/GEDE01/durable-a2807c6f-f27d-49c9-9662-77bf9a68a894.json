@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "a2807c6f-f27d-49c9-9662-77bf9a68a894",
+  "attempt": 3,
+  "base_commit": "9b99ea144b9ecb895807bc3733e4c911aeca6a2b",
+  "target": "fn_801F1A38",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-a2807c6f-f27d-49c9-9662-77bf9a68a894.json"
+  ],
+  "divergence": "Fresh relocation-strict objdiff (function_reloc_diffs=name_address) is 87.57238%: retail .text is 1796 bytes and generated .text is 1816 bytes, with 39 relocation-bearing instructions on each side. Conditional-expression spellings now reproduce retail's three floating-point clamp sequences and cap-selection control flow, while entry initialization of special_offset recreates the seventh live zero-valued local and forces selected to a stack slot. The remaining divergence begins in local-slot/register coloring: retail stores effect_count at stack+0x1C and selected at +0x16C and keeps group/requested/flags in r19/r18/r28, whereas generated uses stack+0x18 and +0x170 and r18/r31/r21; candidate-pointer and later loop allocation/scheduling then diverge, leaving generated five instructions longer. The full canonical build passed and build/GEDE01/main.dol SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f; this NonMatching unit remains excluded from the link gate."
+}

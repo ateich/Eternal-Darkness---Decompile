@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "assignment_id": "56583747-82b2-4b18-9a3e-2be56cd9a854",
+  "build": {
+    "commands": [
+      "python3 configure.py",
+      ".tools/bin/ninja -j2"
+    ],
+    "exit_code": 0,
+    "raw_log": "eternal-darkness-decomp/reports/GEDE01/build-56583747-82b2-4b18-9a3e-2be56cd9a854.log",
+    "log_note": "Compiler CRLF line endings normalized to LF; output text unchanged."
+  },
+  "checks": [
+    {
+      "argv": [
+        "sha1sum",
+        "build/GEDE01/main.dol"
+      ],
+      "exit_code": 0,
+      "stdout": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/legal_audit.py"
+      ],
+      "exit_code": 0,
+      "stdout": "legal audit passed (23231 tracked project files inspected)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        ".tools/bin/ninja",
+        "-t",
+        "commands",
+        "build/GEDE01/src/game/game_fn_800F5C54.o"
+      ],
+      "exit_code": 0,
+      "stdout": "\"/usr/bin/python3\" tools/download_tool.py sjiswrap build/tools/sjiswrap.exe --tag v1.2.2\ntools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -sdata 0 -MMD -c src/game/game_fn_800F5C54.c -o build/GEDE01/src/game && \"/usr/bin/python3\" tools/transform_dep.py build/GEDE01/src/game/game_fn_800F5C54.d build/GEDE01/src/game/game_fn_800F5C54.d\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "build/binutils/powerpc-eabi-readelf",
+        "-r",
+        "build/GEDE01/obj/game/game_fn_800F5C54.o"
+      ],
+      "exit_code": 0,
+      "stdout": "\nRelocation section '.rela.text' at offset 0x9c contains 2 entries:\n Offset     Info    Type            Sym.Value  Sym. Name + Addend\n00000006  00000405 R_PPC_ADDR16_HI   00000000   lbl_80239CD0 + 0\n0000000a  00000404 R_PPC_ADDR16_LO   00000000   lbl_80239CD0 + 0\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "build/binutils/powerpc-eabi-readelf",
+        "-r",
+        "build/GEDE01/src/game/game_fn_800F5C54.o"
+      ],
+      "exit_code": 0,
+      "stdout": "\nRelocation section '.rela.text' at offset 0x98 contains 2 entries:\n Offset     Info    Type            Sym.Value  Sym. Name + Addend\n00000002  00000306 R_PPC_ADDR16_HA   00000000   lbl_80239CD0 + 0\n0000000a  00000304 R_PPC_ADDR16_LO   00000000   lbl_80239CD0 + 0\n",
+      "stderr": ""
+    }
+  ],
+  "semantics": {
+    "method": "Source/control-flow inspection against the retail instructions in strict objdiff",
+    "cases": {
+      "negative_finite_and_negative_infinity": "0",
+      "negative_zero_and_positive_zero": "0",
+      "finite_0_through_below_2pow31": "signed truncation",
+      "finite_2pow31_through_below_2pow32": "subtract 2^31, signed truncation, add 0x80000000",
+      "2pow32_and_above_positive_infinity_and_nan": "0xFFFFFFFF"
+    },
+    "limitation": "Return-value behavior preserved; fcmpo versus retail fcmpu remains different, including floating-point exception-status behavior for NaN. No claim of exact machine semantics or match."
+  },
+  "retained_source_sha256": "4f2eb519a25bce4b45924fcff1d6a36e342ba8e88e7f70b05b24bdc3b475e03e"
+}

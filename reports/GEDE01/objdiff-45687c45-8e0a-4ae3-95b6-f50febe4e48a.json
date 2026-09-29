@@ -1,0 +1,395 @@
+{
+  "version": 1,
+  "assignment_id": "45687c45-8e0a-4ae3-95b6-f50febe4e48a",
+  "attempt": 5,
+  "base_commit": "d62468db0e7d7d640fe26977cdbde2cfe2eca232",
+  "target": "fn_8014C68C",
+  "status": "attempted",
+  "compiler": {
+    "version": "GC/1.3",
+    "settings": "Unchanged canonical configure.py settings, including -O4,p, -lang=c, and existing -use_lmw_stmw on. No pragmas, compiler policy, gate or registration changes."
+  },
+  "previous_attempts_reviewed": [
+    "0823d3097b16e65400aa93908340567a89779035",
+    "6c441bbd6e05058f371f62f272b2e4ed1edae1ec",
+    "26605eb19fd088e2f254264ddb537875d5afe7dd",
+    "72eb2bdb0e2f74b8a4c9f0bd7cdfdc785f35fca3"
+  ],
+  "hypothesis": "Unlike the preserved callback-local and call-signature variants, test the load/store dependency graph: signed byte flag, placement aggregate versus scalar/block copies, read-only float declarations, and independently delayed float loads. Const qualification is supported by the .sdata2 symbol definitions.",
+  "findings": [
+    "The accepted base already contained the preserved 81.41096% candidate; no recovery cherry-pick was necessary.",
+    "Signed flag -1 reproduces the retail immediate. Marking both float declarations const improves the score to 84.0274%.",
+    "Best result uses a const scale load and reads the endpoint between the second and third placement stores: 85.753426%, a 4.342466 percentage-point improvement over the accepted base.",
+    "Integer/float vector aggregate copies, block memcpy forms, embedded State in Job, explicit scalar snapshots, and explicit step lifetimes did not improve the retained result.",
+    "One exploratory declaration after statements was rejected by the C89 frontend; it was corrected by moving the declaration to the function scope. No compiler setting was changed.",
+    "Retained exactly one independent NonMatching C translation unit. No assembly, shared reconstruction, neighboring edits, runtime edits, progress edits, private-input edits, or remote push. The pre-existing CLAUDE.md modification is excluded from this commit."
+  ],
+  "experiments_file": "eternal-darkness-decomp/reports/GEDE01/experiments-45687c45-8e0a-4ae3-95b6-f50febe4e48a.json",
+  "experiment_count": 188,
+  "build": {
+    "cwd": "eternal-darkness-decomp",
+    "configure_command": "python3 configure.py",
+    "configure_exit": 0,
+    "configure_log": "eternal-darkness-decomp/reports/GEDE01/configure-45687c45-8e0a-4ae3-95b6-f50febe4e48a.log",
+    "build_command": ".tools/bin/ninja -j2",
+    "build_exit": 0,
+    "initial_build_log": "eternal-darkness-decomp/reports/GEDE01/build-45687c45-8e0a-4ae3-95b6-f50febe4e48a.log",
+    "final_build_log": "eternal-darkness-decomp/reports/GEDE01/final-build-45687c45-8e0a-4ae3-95b6-f50febe4e48a.log",
+    "final_build_tail": "[942/944] DOL build/GEDE01/main.dol\n[943/944] CHECK config/GEDE01/build.sha1\nbuild/GEDE01/main.dol: OK\n[944/944] PROGRESS\nProgress:\n  All: 59.21% fuzzy, 50.19% matched, 50.00% linked (6336 / 7069 files)\n    Code: 1154724 / 2300692 bytes (6105 / 8214 functions)\n    Data: 39858 / 4305642 bytes (0.93%)\n  Game Code: 95.37% fuzzy, 80.81% matched, 80.51% linked (6318 / 6633 files)\n    Code: 1151696 / 1425104 bytes (6043 / 6354 functions)\n    Data: 39634 / 40522 bytes (97.81%)\n  SDK/Runtime: 100.00% fuzzy, 100.00% matched, 100.00% linked (18 / 18 files)\n    Code: 3028 / 3028 bytes (62 / 62 functions)\n    Data: 224 / 224 bytes (100.00%)",
+    "log_line_endings": "CRLF from the Windows linker normalized to LF; output text otherwise unchanged."
+  },
+  "raw_measurements": {
+    "canonical": {
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8014C68C fn_8014C68C -o reports/GEDE01/canonical-45687c45-8e0a-4ae3-95b6-f50febe4e48a.json --format json",
+      "exit": 0,
+      "stdout": "",
+      "stderr": " INFO Writing to reports/GEDE01/canonical-45687c45-8e0a-4ae3-95b6-f50febe4e48a.json\n",
+      "match_percent": 85.753426,
+      "target_size": "292",
+      "candidate_size": "292",
+      "raw_file": "eternal-darkness-decomp/reports/GEDE01/canonical-45687c45-8e0a-4ae3-95b6-f50febe4e48a.json"
+    },
+    "strict": {
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8014C68C fn_8014C68C -o reports/GEDE01/strict-45687c45-8e0a-4ae3-95b6-f50febe4e48a.json --format json -c function_reloc_diffs=name_address",
+      "exit": 0,
+      "stdout": "",
+      "stderr": " INFO Writing to reports/GEDE01/strict-45687c45-8e0a-4ae3-95b6-f50febe4e48a.json\n",
+      "match_percent": 85.753426,
+      "target_size": "292",
+      "candidate_size": "292",
+      "raw_file": "eternal-darkness-decomp/reports/GEDE01/strict-45687c45-8e0a-4ae3-95b6-f50febe4e48a.json"
+    },
+    "elf_comparison": {
+      "method": "ELF32 big-endian .text symbol bytes and SHT_RELA records; offsets are symbol-relative byte offsets, including +2 for 16-bit relocations. Symbol names, symbol values, types and signed addends compared without normalization.",
+      "target_relocations": [
+        {
+          "offset": 48,
+          "type": 10,
+          "target": "fn_80201814",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 62,
+          "type": 6,
+          "target": "fn_8014B768",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 66,
+          "type": 4,
+          "target": "fn_8014B768",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 68,
+          "type": 10,
+          "target": "fn_80149D98",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 80,
+          "type": 10,
+          "target": "fn_80149D64",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 88,
+          "type": 10,
+          "target": "fn_80201BC8",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 112,
+          "type": 10,
+          "target": "fn_8011F6A4",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 124,
+          "type": 10,
+          "target": "fn_8014CBC0",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 134,
+          "type": 6,
+          "target": "fn_8014C7C0",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 138,
+          "type": 6,
+          "target": "fn_8014C87C",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 140,
+          "type": 109,
+          "target": "lbl_806504D8",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 166,
+          "type": 4,
+          "target": "fn_8014C7C0",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 190,
+          "type": 4,
+          "target": "fn_8014C87C",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 204,
+          "type": 109,
+          "target": "lbl_806504DC",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 252,
+          "type": 10,
+          "target": "fn_801FE8DC",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 264,
+          "type": 10,
+          "target": "fn_801E8328",
+          "target_address": 0,
+          "addend": 0
+        }
+      ],
+      "candidate_relocations": [
+        {
+          "offset": 48,
+          "type": 10,
+          "target": "fn_80201814",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 62,
+          "type": 6,
+          "target": "fn_8014B768",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 66,
+          "type": 4,
+          "target": "fn_8014B768",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 68,
+          "type": 10,
+          "target": "fn_80149D98",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 80,
+          "type": 10,
+          "target": "fn_80149D64",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 88,
+          "type": 10,
+          "target": "fn_80201BC8",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 112,
+          "type": 10,
+          "target": "fn_8011F6A4",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 124,
+          "type": 10,
+          "target": "fn_8014CBC0",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 134,
+          "type": 6,
+          "target": "fn_8014C7C0",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 138,
+          "type": 4,
+          "target": "fn_8014C7C0",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 140,
+          "type": 109,
+          "target": "lbl_806504D8",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 170,
+          "type": 6,
+          "target": "fn_8014C87C",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 186,
+          "type": 4,
+          "target": "fn_8014C87C",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 200,
+          "type": 109,
+          "target": "lbl_806504DC",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 252,
+          "type": 10,
+          "target": "fn_801FE8DC",
+          "target_address": 0,
+          "addend": 0
+        },
+        {
+          "offset": 264,
+          "type": 10,
+          "target": "fn_801E8328",
+          "target_address": 0,
+          "addend": 0
+        }
+      ],
+      "relocations_exact_equal": false,
+      "relocation_targets_types_addends_equal": true,
+      "text_bytes_equal": false,
+      "equal_instruction_words": 58,
+      "total_instruction_words": 73,
+      "mismatching_instruction_words": [
+        {
+          "offset": 136,
+          "target_word": "3c600000",
+          "candidate_word": "39050000"
+        },
+        {
+          "offset": 144,
+          "target_word": "7c99e850",
+          "candidate_word": "80c10010"
+        },
+        {
+          "offset": 148,
+          "target_word": "5740043e",
+          "candidate_word": "7c99e850"
+        },
+        {
+          "offset": 152,
+          "target_word": "81210010",
+          "candidate_word": "5740043e"
+        },
+        {
+          "offset": 156,
+          "target_word": "7cc403d6",
+          "candidate_word": "38e0ffff"
+        },
+        {
+          "offset": 160,
+          "target_word": "80010014",
+          "candidate_word": "90de001c"
+        },
+        {
+          "offset": 164,
+          "target_word": "39050000",
+          "candidate_word": "7cc403d6"
+        },
+        {
+          "offset": 168,
+          "target_word": "38e0ffff",
+          "candidate_word": "3c600000"
+        },
+        {
+          "offset": 176,
+          "target_word": "913e001c",
+          "candidate_word": "80010014"
+        },
+        {
+          "offset": 180,
+          "target_word": "901e0020",
+          "candidate_word": "38a00004"
+        },
+        {
+          "offset": 184,
+          "target_word": "38a00004",
+          "candidate_word": "38830000"
+        },
+        {
+          "offset": 188,
+          "target_word": "38830000",
+          "candidate_word": "901e0020"
+        },
+        {
+          "offset": 196,
+          "target_word": "81210018",
+          "candidate_word": "387e0004"
+        },
+        {
+          "offset": 200,
+          "target_word": "387e0004",
+          "candidate_word": "c0600000"
+        },
+        {
+          "offset": 204,
+          "target_word": "c0600000",
+          "candidate_word": "81210018"
+        }
+      ]
+    },
+    "target_disassembly": "eternal-darkness-decomp/reports/GEDE01/target-disassembly-45687c45-8e0a-4ae3-95b6-f50febe4e48a.txt",
+    "candidate_disassembly": "eternal-darkness-decomp/reports/GEDE01/candidate-disassembly-45687c45-8e0a-4ae3-95b6-f50febe4e48a.txt",
+    "dol_sha1": {
+      "command": "sha1sum build/GEDE01/main.dol",
+      "exit": 0,
+      "stdout": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\n",
+      "expected": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+      "matches": true,
+      "interpretation": "The function remains NonMatching, so the verified DOL links its retail object. This gate does not establish that the C candidate matches."
+    },
+    "source_sha256": "342a691c0b9be8d3ce4c3be32def7baaf92dded62361deecff857d037f8c12be"
+  },
+  "divergence": "Exact-size 292-byte candidate reaches 85.753426% canonical and relocation-strict objdiff, with 58/73 instruction words equal. Fifteen words differ within 0x88..0xCC. Retail/candidate callback1 low-half instructions are at 0xA4/0x88, callback2 high halves at 0x88/0xA8, callback2 low halves at 0xBC/0xB8, and endpoint loads at 0xCC/0xC8. Retail loads placement[2] into r9 at 0x98; candidate uses r6 at 0x90, and division moves from 0x9C to 0xA4. All 16 relocation target/type/symbol-value/addend tuples agree, but four relocation offsets differ; byte and relocation-strict equivalence are not achieved.",
+  "legal_audit": {
+    "command": "python3 tools/legal_audit.py",
+    "cwd": "eternal-darkness-decomp",
+    "exit": 0,
+    "stdout": "legal audit passed (23201 tracked project files inspected)\n",
+    "stderr": ""
+  }
+}

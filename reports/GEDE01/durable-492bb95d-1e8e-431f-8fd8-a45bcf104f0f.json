@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "assignment_id": "492bb95d-1e8e-431f-8fd8-a45bcf104f0f",
+  "attempt": 4,
+  "base_commit": "64a8674b21df312320915d8db0a2f8661aae34ca",
+  "target": "fn_80151600",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-492bb95d-1e8e-431f-8fd8-a45bcf104f0f.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-492bb95d-1e8e-431f-8fd8-a45bcf104f0f-canonical.json",
+    "eternal-darkness-decomp/reports/GEDE01/verification-492bb95d-1e8e-431f-8fd8-a45bcf104f0f.json"
+  ],
+  "divergence": "Canonical and relocation-strict direct objdiff both measure 86.252235%: retail is 1792 bytes with a 0xC0 frame, stmw r21, and 60 relocation-bearing instruction records; GC/1.3 emits 1776 bytes with a 0xA0 frame, stmw r20, and 61 relocation-bearing instruction records. At both fn_8020123C return checks retail emits li r0,-1; and r0,r4,r0; cmplwi r0,1, while generated code directly emits cmplwi r4,1. The prior explicit-mask experiment regressed and was discarded. This attempt's distinct candidate-actor lifetime split also regressed to 86.18304%/1780 bytes and was discarded. Remaining differences include stack-slot layout, nonvolatile register allocation, fallback Vec3 aggregate lowering, and one extra generated relocation."
+}

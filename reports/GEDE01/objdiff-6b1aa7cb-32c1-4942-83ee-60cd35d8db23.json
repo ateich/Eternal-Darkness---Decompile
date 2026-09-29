@@ -1,0 +1,215 @@
+{
+  "version": 1,
+  "assignment_id": "6b1aa7cb-32c1-4942-83ee-60cd35d8db23",
+  "attempt": 5,
+  "base_commit": "bfbb3e7a1528317243e0d1b093d5e4ef7ec9446d",
+  "target": "fn_80180D0C",
+  "status": "attempted",
+  "compiler": "GC/1.3",
+  "compiler_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on",
+  "source": {
+    "path": "eternal-darkness-decomp/src/game/game_fn_80180D0C.c",
+    "sha256": "9f0129b9e394656dcb1adf4c462bdd49728730d2967c6a25b49cc50c772e1569",
+    "registration": "NonMatching; independent C translation unit",
+    "preserved_commit": "a2262f5ae01363e922a96e5d5dc6e9884ce8a416",
+    "reconciliation": "Accepted base already has byte-identical preserved source and target registration/split. Retained unchanged after testing five new variants."
+  },
+  "prior_attempts_studied": [
+    "a2262f5ae01363e922a96e5d5dc6e9884ce8a416",
+    "236a799fb78183e3f54846bd1c542ba6cac01ffd",
+    "df5ca9ebe420bfd72c07a0c5bdab6ba4fd0e1172",
+    "24617c8dd8659d915145883eef3cd96e8a985745 (handoff diagnosis)"
+  ],
+  "new_hypotheses": [
+    "Different aggregate member representations might change MWCC copy lowering and scheduling; float, word-array and byte-array variants all compile identically to baseline.",
+    "An intrinsic copy might change aggregate copy lowering; score regressed to 28.923077%, size 228.",
+    "An inline initializer with scalar defaults as parameters might extend simultaneous live ranges; compiled identically to baseline."
+  ],
+  "canonical": {
+    "match_percent": 59.692307,
+    "retail_bytes": 208,
+    "generated_bytes": 208,
+    "matched": false
+  },
+  "relocation_strict": {
+    "configuration": "function_reloc_diffs=name_address",
+    "match_percent": 59.692307,
+    "matched": false,
+    "retail_references": [
+      {
+        "instruction_offset": 4,
+        "type": "R_PPC_ADDR16_HA",
+        "target": "lbl_8023B018",
+        "addend": 0
+      },
+      {
+        "instruction_offset": 8,
+        "type": "R_PPC_ADDR16_LO",
+        "target": "lbl_8023B018",
+        "addend": 0
+      },
+      {
+        "instruction_offset": 12,
+        "type": "R_PPC_ADDR16_HA",
+        "target": "lbl_802FC5BC",
+        "addend": 0
+      },
+      {
+        "instruction_offset": 20,
+        "type": "R_PPC_ADDR16_LO",
+        "target": "lbl_802FC5BC",
+        "addend": 0
+      },
+      {
+        "instruction_offset": 64,
+        "type": "R_PPC_EMB_SDA21",
+        "target": "lbl_80650948",
+        "addend": 0
+      },
+      {
+        "instruction_offset": 68,
+        "type": "R_PPC_NONE",
+        "target": "lbl_8023B018",
+        "addend": 0
+      },
+      {
+        "instruction_offset": 72,
+        "type": "R_PPC_NONE",
+        "target": "lbl_8023B018",
+        "addend": 4
+      },
+      {
+        "instruction_offset": 76,
+        "type": "R_PPC_NONE",
+        "target": "lbl_8023B018",
+        "addend": 8
+      },
+      {
+        "instruction_offset": 124,
+        "type": "R_PPC_NONE",
+        "target": "lbl_802FC5BC",
+        "addend": 12
+      }
+    ],
+    "generated_references": [
+      {
+        "instruction_offset": 4,
+        "type": "R_PPC_ADDR16_HA",
+        "target": "lbl_8023B018",
+        "addend": 0
+      },
+      {
+        "instruction_offset": 8,
+        "type": "R_PPC_ADDR16_LO",
+        "target": "lbl_8023B018",
+        "addend": 0
+      },
+      {
+        "instruction_offset": 12,
+        "type": "R_PPC_ADDR16_HA",
+        "target": "lbl_802FC5BC",
+        "addend": 0
+      },
+      {
+        "instruction_offset": 24,
+        "type": "R_PPC_ADDR16_LO",
+        "target": "lbl_802FC5BC",
+        "addend": 0
+      },
+      {
+        "instruction_offset": 28,
+        "type": "R_PPC_NONE",
+        "target": "lbl_8023B018",
+        "addend": 0
+      },
+      {
+        "instruction_offset": 40,
+        "type": "R_PPC_NONE",
+        "target": "lbl_8023B018",
+        "addend": 4
+      },
+      {
+        "instruction_offset": 56,
+        "type": "R_PPC_NONE",
+        "target": "lbl_8023B018",
+        "addend": 8
+      },
+      {
+        "instruction_offset": 92,
+        "type": "R_PPC_EMB_SDA21",
+        "target": "lbl_80650948",
+        "addend": 0
+      },
+      {
+        "instruction_offset": 120,
+        "type": "R_PPC_NONE",
+        "target": "lbl_802FC5BC",
+        "addend": 12
+      }
+    ],
+    "type_target_addend_multisets_equal": true,
+    "offsets_equal": false
+  },
+  "build": {
+    "configure_exit": 0,
+    "ninja_exit": 0,
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+    "note": "NonMatching function remains linked from retail; DOL equality verifies preservation, not a match for this C reconstruction."
+  },
+  "divergence": "Canonical and relocation-strict objdiff both measure 59.692307% at 208 bytes. Retail uses a 0x30 frame, stmw/lmw r27-r31, hoists scalar defaults, and loads the Triple into r27-r29 together before destination stores; generated C uses a 0x20 frame, saves only r31, and interleaves Triple loads in r31/r12/r11 with scalar stores. All five ELF relocation types/targets/addends and four additional objdiff-derived references agree as multisets, but relocation offsets and instruction bytes differ.",
+  "evidence_files": [
+    {
+      "path": "eternal-darkness-decomp/reports/GEDE01/array_aggregate-6b1aa7cb-32c1-4942-83ee-60cd35d8db23.json",
+      "sha256": "1c7ddc82b595f4b10c2a9f1ee6590315d4e4d347ee360744c91dd64a874f4d01"
+    },
+    {
+      "path": "eternal-darkness-decomp/reports/GEDE01/baseline-6b1aa7cb-32c1-4942-83ee-60cd35d8db23.json",
+      "sha256": "1c7ddc82b595f4b10c2a9f1ee6590315d4e4d347ee360744c91dd64a874f4d01"
+    },
+    {
+      "path": "eternal-darkness-decomp/reports/GEDE01/byte_aggregate-6b1aa7cb-32c1-4942-83ee-60cd35d8db23.json",
+      "sha256": "1c7ddc82b595f4b10c2a9f1ee6590315d4e4d347ee360744c91dd64a874f4d01"
+    },
+    {
+      "path": "eternal-darkness-decomp/reports/GEDE01/elf-audit-6b1aa7cb-32c1-4942-83ee-60cd35d8db23.json",
+      "sha256": "dd784e9fbde1efef0a022a26a764543812c70777b7f9fd217c79fb8b2e803e60"
+    },
+    {
+      "path": "eternal-darkness-decomp/reports/GEDE01/experiments-6b1aa7cb-32c1-4942-83ee-60cd35d8db23.json",
+      "sha256": "1930c9ea09a0ea9f519b68e6362d74b7f269fa96a9c47fe4bd5f26669c72491f"
+    },
+    {
+      "path": "eternal-darkness-decomp/reports/GEDE01/float_aggregate-6b1aa7cb-32c1-4942-83ee-60cd35d8db23.json",
+      "sha256": "1c7ddc82b595f4b10c2a9f1ee6590315d4e4d347ee360744c91dd64a874f4d01"
+    },
+    {
+      "path": "eternal-darkness-decomp/reports/GEDE01/inline_defaults-6b1aa7cb-32c1-4942-83ee-60cd35d8db23.json",
+      "sha256": "1c7ddc82b595f4b10c2a9f1ee6590315d4e4d347ee360744c91dd64a874f4d01"
+    },
+    {
+      "path": "eternal-darkness-decomp/reports/GEDE01/intrinsic_copy-6b1aa7cb-32c1-4942-83ee-60cd35d8db23.json",
+      "sha256": "d73aa6331271d9956f7d58f88867bd04f7d6b62554f635ebcb15e758304e4726"
+    },
+    {
+      "path": "eternal-darkness-decomp/reports/GEDE01/raw-canonical-6b1aa7cb-32c1-4942-83ee-60cd35d8db23.json",
+      "sha256": "1c7ddc82b595f4b10c2a9f1ee6590315d4e4d347ee360744c91dd64a874f4d01"
+    },
+    {
+      "path": "eternal-darkness-decomp/reports/GEDE01/raw-reloc-strict-6b1aa7cb-32c1-4942-83ee-60cd35d8db23.json",
+      "sha256": "1c7ddc82b595f4b10c2a9f1ee6590315d4e4d347ee360744c91dd64a874f4d01"
+    },
+    {
+      "path": "eternal-darkness-decomp/reports/GEDE01/verification-6b1aa7cb-32c1-4942-83ee-60cd35d8db23.json",
+      "sha256": "788e7b5bb850137b98321595fb70982f2782fe2617e14599c58c591a41255c5a"
+    }
+  ],
+  "staged_legal_audit": {
+    "argv": [
+      "python3",
+      "eternal-darkness-decomp/tools/legal_audit.py"
+    ],
+    "exit_code": 0,
+    "stdout": "legal audit passed (22829 tracked project files inspected)\n",
+    "stderr": ""
+  }
+}

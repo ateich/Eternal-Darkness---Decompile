@@ -1,0 +1,26 @@
+{
+  "assignment_id": "79ae66b6-ae36-4c15-bd32-0d215c5990b2",
+  "target": "fn_801ED118",
+  "hypothesis": "Interleave stores across the paired 24-byte and 16-byte record arrays field-by-field in retail order while retaining late pointer initialization; this changes expression topology and record-loop live ranges without repeating the rejected all-pointers-live declaration hypothesis.",
+  "baseline": {
+    "source": "preserved commit c3312f7d3ba8e71e31775a0a62a137883304c490",
+    "text_size": 668,
+    "canonical_percent": 71.84699,
+    "relocation_strict_percent": 71.84699
+  },
+  "result": {
+    "text_size": 668,
+    "retail_text_size": 732,
+    "canonical_percent": 75.71584,
+    "relocation_strict_percent": 75.71584,
+    "raw_experiment_objdiff": "eternal-darkness-decomp/reports/GEDE01/objdiff-experiment-79ae66b6-ae36-4c15-bd32-0d215c5990b2.json",
+    "experiment_log": "eternal-darkness-decomp/reports/GEDE01/configure-79ae66b6-ae36-4c15-bd32-0d215c5990b2-experiment.log",
+    "final_build_log": "eternal-darkness-decomp/reports/GEDE01/build-79ae66b6-ae36-4c15-bd32-0d215c5990b2.log",
+    "dol_sha1_log": "eternal-darkness-decomp/reports/GEDE01/sha1-79ae66b6-ae36-4c15-bd32-0d215c5990b2.log"
+  },
+  "reproduction": [
+    "python3 configure.py",
+    ".tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_801ED118.o",
+    "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801ED118 fn_801ED118 -o reports/GEDE01/objdiff-experiment-79ae66b6-ae36-4c15-bd32-0d215c5990b2.json --format json-pretty -c function_reloc_diffs=name_address"
+  ]
+}

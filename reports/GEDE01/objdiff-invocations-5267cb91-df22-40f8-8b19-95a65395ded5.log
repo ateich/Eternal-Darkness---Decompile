@@ -1,0 +1,23 @@
+canonical
+$ build/tools/objdiff-cli diff -p . -u main/game/game_fn_8002B5B4 fn_8002B5B4 -o reports/GEDE01/objdiff-5267cb91-df22-40f8-8b19-95a65395ded5.json --format json-pretty
+ INFO Writing to reports/GEDE01/objdiff-5267cb91-df22-40f8-8b19-95a65395ded5.json
+
+exit status: 0
+match_percent=53.035713 retail_size=112 generated_size=84
+
+relocation-strict
+$ build/tools/objdiff-cli diff -p . -u main/game/game_fn_8002B5B4 fn_8002B5B4 -o reports/GEDE01/objdiff-5267cb91-df22-40f8-8b19-95a65395ded5-relocation-strict.json --format json-pretty -c function_reloc_diffs=name_address
+ INFO Writing to reports/GEDE01/objdiff-5267cb91-df22-40f8-8b19-95a65395ded5-relocation-strict.json
+
+exit status: 0
+match_percent=53.035713 retail_size=112 generated_size=84
+
+
+Canonical compilation command:
+$ .tools/bin/ninja -t commands build/GEDE01/src/game/game_fn_8002B5B4.o
+"/usr/bin/python3" tools/download_tool.py sjiswrap build/tools/sjiswrap.exe --tag v1.2.2
+tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -MMD -c src/game/game_fn_8002B5B4.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_8002B5B4.d build/GEDE01/src/game/game_fn_8002B5B4.d
+
+exit status: 0
+Registration: Object(NonMatching, "game/game_fn_8002B5B4.c"); no flag overrides.
+Canonical objdiff uses defaults; relocation-strict explicitly sets function_reloc_diffs=name_address.

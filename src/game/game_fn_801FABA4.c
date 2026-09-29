@@ -44,10 +44,10 @@ u32 fn_801FABA4(void* output, int argument)
 {
     Header header;
     Record record;
-    u16 offset;
-    int i;
     u8* entry;
-    BlockGlobals* globals = &lbl_8063C6B8;
+    int i;
+    u16 offset;
+    BlockGlobals* const globals = &lbl_8063C6B8;
 
     header.field00 = lbl_8064D7BC;
     header.field04 = lbl_8064C3A8;
@@ -58,27 +58,35 @@ u32 fn_801FABA4(void* output, int argument)
     header.field18 = lbl_8064D79C;
     header.field1C = lbl_8064D18C;
     memcpy(output, &header, 0x40);
-    entry = globals->entries;
-    offset = 0x40;
-    for (i = 0; i < (int)lbl_8064D7BC; i++, entry += 0x14) {
+    for (entry = globals->entries, i = 0, offset = 0x40;
+         i < (int)lbl_8064D7BC; entry += 0x14, i++) {
         fn_801FBAC8(entry, &record);
         memcpy((u8*)output + offset, &record, 0x10);
         offset += 0x10;
         if (record.flags & 1) {
+            u8* base = globals->second;
             offset += fn_801FB3B4((u8*)output + offset,
-                                  globals->second + record.first_index * 0x88, 0);
+                                  base + record.first_index * 0x88, 0);
         }
         if (record.flags & 2) {
+            u8* base = globals->first;
             offset += fn_801FB3B4((u8*)output + offset,
-                                  globals->first + record.second_index * 0x88, 1);
+                                  base + record.second_index * 0x88, 1);
         }
     }
 
     offset += fn_801FB3B4((u8*)output + offset, globals->primary, 0);
-    offset += fn_801FB3B4((u8*)output + offset,
-                          globals->second + lbl_8064C3A8 * 0x88, 0);
+    {
+        u8* base = globals->second;
+        base += lbl_8064C3A8 * 0x88;
+        offset += fn_801FB3B4((u8*)output + offset, base, 0);
+    }
     offset += fn_801FB3B4((u8*)output + offset, globals->secondary, 1);
-    offset += fn_801FB3B4((u8*)output + offset,
-                          globals->first + lbl_8064C3A8 * 0x88, 1);
-    return (offset + 0x1F) & ~0x1F;
+    {
+        u8* base = globals->first;
+        offset += fn_801FB3B4((u8*)output + offset,
+                              base + lbl_8064C3A8 * 0x88, 1);
+    }
+    /* The packed size wraps to 16 bits before alignment. */
+    return (u16)(offset + 0x1F) & ~0x1F;
 }

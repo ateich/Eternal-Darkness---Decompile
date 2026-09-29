@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "9805a827-d66b-474e-aca1-1d0e96feae24",
+  "attempt": 3,
+  "base_commit": "2f14fde2f49a1aacd87daa889cf29c5096c63231",
+  "target": "fn_80095E64",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-9805a827-d66b-474e-aca1-1d0e96feae24.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff are 87.28723%; generated code is 344 bytes versus retail 376. MWCC assigns result/table pointer to r31/r30 instead of retail r30/r31 and folds four value-form logical negations, omitting four cntlzw/srwi pairs (32 bytes total). The corrected switch cases emit relocation addends for case targets in the required semantic order, but objdiff has no left .data section counterpart and reports the generated 32-byte compiler-local jump table at 0%. Pointer-first initialization was measured separately and regressed to 78.61702%/312 bytes; unsigned-char, unsigned-int, and shared-lifetime temporary hypotheses remained 87.28723%. Canonical build passed and retail/generated DOL SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}

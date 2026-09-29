@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "assignment_id": "78696cb5-6b03-40d5-954f-92ebcce83a64",
+  "attempt": 5,
+  "base_commit": "fb10ddfd8b24fed9b09702613508e24474c830e7",
+  "target": "fn_8005F8D0",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-78696cb5-6b03-40d5-954f-92ebcce83a64.json",
+    "eternal-darkness-decomp/reports/GEDE01/canonical-78696cb5-6b03-40d5-954f-92ebcce83a64.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/experiments.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/full-build.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/final-verification.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-78696cb5-6b03-40d5-954f-92ebcce83a64/legal-audit.log"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff improve from 77.79767% to 87.92218%. Retail is 1028 bytes/257 instructions/68 relocation-bearing instructions; generated GC/1.3 is 996 bytes/249 instructions/60 relocation-bearing instructions (actual ELF text relocations 37 versus 36). The typed aggregate and delayed pair pointers recover retail's r30 table base and most prologue assignments. Remaining divergence starts at +0x10 (entry r27 versus retail r26), with state_object/config_kind/state in r26/r24/r25 versus r25/r27/r24, respectively. Pair-base calculation scheduling, second-query pointer copies, redundant zero-offset config-base materialization, and effect-call argument scheduling differ. The random result remains in r12 versus retail r27; the bounded-index mask elides retail's global reload. Relocation placements and addends are preserved for inspection in raw objdiff and readelf output; no byte/relocation match claimed. Full configure/Ninja passes after removing the existing DOL from its output path and generates a fresh DOL with required SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}

@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "f8d4d4e3-e260-4b99-b2f6-12a6bb7addce",
+  "attempt": 4,
+  "base_commit": "77cf475ba3a33d96e1ed7c247c8b0ac027511d99",
+  "target": "fn_801E3644",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-f8d4d4e3-e260-4b99-b2f6-12a6bb7addce.json"
+  ],
+  "divergence": "Canonical relocation-strict objdiff scores 98.72681% with exact code size and instruction count (776 bytes, 194 instructions) and 32 relocations on each side. The u32 raw flag plus u8 final flag reconstruction removes the prior extra zero-extension instruction, and declaration ordering reproduces retail's r22 loop index/r28 attachment allocation. Remaining differences are GPR allocation and scheduling in the cleanup and interpolation paths (notably retail r27/r28 cleanup temporaries and r29/r27/r26/r25 interpolation values versus generated r31/r29 and r26/r28/r25/r27), plus generated local floating-constant symbol labels versus retail named labels; relocation-strict comparison remains enabled for targets and addends."
+}

@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "assignment_id": "4bb43bdf-4557-4a73-bb65-8c3309dadb48",
+  "attempt": 5,
+  "base_commit": "18c5664d28ebc50e68659a81cbd13053c277f9a9",
+  "target": "fn_8015AEB8",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-4bb43bdf-4557-4a73-bb65-8c3309dadb48.json",
+    "eternal-darkness-decomp/reports/GEDE01/canonical-4bb43bdf-4557-4a73-bb65-8c3309dadb48.json",
+    "eternal-darkness-decomp/reports/GEDE01/verification-4bb43bdf-4557-4a73-bb65-8c3309dadb48.json",
+    "eternal-darkness-decomp/reports/GEDE01/audit-4bb43bdf-4557-4a73-bb65-8c3309dadb48.json",
+    "eternal-darkness-decomp/reports/GEDE01/baseline-4bb43bdf-4557-4a73-bb65-8c3309dadb48.json",
+    "eternal-darkness-decomp/reports/GEDE01/indexed-4bb43bdf-4557-4a73-bb65-8c3309dadb48.json",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-4bb43bdf-4557-4a73-bb65-8c3309dadb48.json",
+    "eternal-darkness-decomp/reports/GEDE01/notes-4bb43bdf-4557-4a73-bb65-8c3309dadb48.md"
+  ],
+  "divergence": "Canonical GC/1.3 and relocation-strict (function_reloc_diffs=name_address) objdiff both measure 88.89121%, improved from the accepted baseline 83.728035%; retail is 956 bytes and generated C is 952 bytes. First byte/instruction divergence is offset 0x8: retail li r6,0 versus generated stw r0,0x54(r1). Retail uses stmw r16,0x10(r1) at 0x18 and lmw at 0x3A8; generated uses addi r11,r1,0x50 plus _savegpr_16 at 0xC/0x10 and _restgpr_16 at 0x3A4. Retail base/base2/base3 use r27/r28/r29, count r30, flags r31; generated uses r28/r27/r31, count r29, flags r30. Loop state, source0, priority, object and counter registers still differ. The three final creation calls collapse retail two-step buffer addresses (0xA70+0x2000, 0x2D80+0x2000, 0x5090+0x2000) into single adds. Save/restore helpers add eight bytes and these folds remove twelve, leaving the four-byte size deficit. The corrected eight-byte priority-table declaration now generates retail SDA21 addressing. ELF relocation sequences have identical types, targets and addends after excluding the two generated helper relocations and ignoring shifted sites; strict full relocation and byte equality still fail. Function remains NonMatching under unchanged canonical settings."
+}

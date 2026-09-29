@@ -1,0 +1,472 @@
+{
+  "assignment_id": "a0a52954-aa46-4987-942e-51a35cb32b5c",
+  "target": "fn_80141EA8",
+  "compiler": "GC/1.3/mwcceppc.exe; unchanged canonical flags recorded in verification log",
+  "canonical_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80141EA8 fn_80141EA8 -o reports/GEDE01/objdiff-a0a52954-aa46-4987-942e-51a35cb32b5c.json --format json",
+  "strict_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80141EA8 fn_80141EA8 -c function_reloc_diffs=all -o reports/GEDE01/objdiff-a0a52954-aa46-4987-942e-51a35cb32b5c-strict.raw.json --format json",
+  "commands_working_directory": "eternal-darkness-decomp",
+  "prior_review_correction": {
+    "commit": "14bd5a5a92126b74b57c967f70e375d083d6ab1c",
+    "hypothesis": "explicit byte stride",
+    "retail_bytes": 592,
+    "generated_bytes": 544,
+    "match_percent": 70.64189,
+    "note": "Recovered raw output contradicts prior envelope: 592 is retail size, not generated size. Variant was not rerun."
+  },
+  "hypotheses": [
+    {
+      "name": "baseline",
+      "change": "Accepted base bounded-array candidate, measured unchanged."
+    },
+    {
+      "name": "cached-normal",
+      "change": "Compare zero on left of length test; load ax/ay/az before plane store; conditionally negate cached scalars."
+    },
+    {
+      "name": "component-pointers",
+      "change": "Additionally retain explicit pointers to second.y/second.z and normal.y/normal.z across normalization and plane calculation. Members addressed directly without pointer arithmetic across scalar members."
+    },
+    {
+      "name": "plane-sign",
+      "change": "Correct plane constant to -(ax*second.x + ay*second.y + az*second.z), matching retail fnmadds rather than inherited fnmsubs. Retained final source."
+    },
+    {
+      "name": "coordinate-array",
+      "change": "Replace Vec3 x/y/z members with float v[3]; translate accesses to v[0]/v[1]/v[2]. Same score and size; restored original layout."
+    }
+  ],
+  "measurements": [
+    {
+      "raw": "eternal-darkness-decomp/reports/GEDE01/objdiff-a0a52954-aa46-4987-942e-51a35cb32b5c-baseline.raw.json",
+      "left": {
+        "size": 592,
+        "match_percent": 73.97298
+      },
+      "right": {
+        "size": 536,
+        "match_percent": 73.97298
+      }
+    },
+    {
+      "raw": "eternal-darkness-decomp/reports/GEDE01/objdiff-a0a52954-aa46-4987-942e-51a35cb32b5c-cached-normal.raw.json",
+      "left": {
+        "size": 592,
+        "match_percent": 74.88513
+      },
+      "right": {
+        "size": 524,
+        "match_percent": 74.88513
+      }
+    },
+    {
+      "raw": "eternal-darkness-decomp/reports/GEDE01/objdiff-a0a52954-aa46-4987-942e-51a35cb32b5c-component-pointers.raw.json",
+      "left": {
+        "size": 592,
+        "match_percent": 75.297295
+      },
+      "right": {
+        "size": 540,
+        "match_percent": 75.297295
+      }
+    },
+    {
+      "raw": "eternal-darkness-decomp/reports/GEDE01/objdiff-a0a52954-aa46-4987-942e-51a35cb32b5c-coordinate-array.raw.json",
+      "left": {
+        "size": 592,
+        "match_percent": 75.66892
+      },
+      "right": {
+        "size": 540,
+        "match_percent": 75.66892
+      }
+    },
+    {
+      "raw": "eternal-darkness-decomp/reports/GEDE01/objdiff-a0a52954-aa46-4987-942e-51a35cb32b5c-historical-byte-offset.raw.json",
+      "left": {
+        "size": 592,
+        "match_percent": 70.64189
+      },
+      "right": {
+        "size": 544,
+        "match_percent": 70.64189
+      }
+    },
+    {
+      "raw": "eternal-darkness-decomp/reports/GEDE01/objdiff-a0a52954-aa46-4987-942e-51a35cb32b5c-plane-sign.raw.json",
+      "left": {
+        "size": 592,
+        "match_percent": 75.66892
+      },
+      "right": {
+        "size": 540,
+        "match_percent": 75.66892
+      }
+    },
+    {
+      "raw": "eternal-darkness-decomp/reports/GEDE01/objdiff-a0a52954-aa46-4987-942e-51a35cb32b5c-strict.raw.json",
+      "left": {
+        "size": 592,
+        "match_percent": 75.66892
+      },
+      "right": {
+        "size": 540,
+        "match_percent": 75.66892
+      }
+    },
+    {
+      "raw": "eternal-darkness-decomp/reports/GEDE01/objdiff-a0a52954-aa46-4987-942e-51a35cb32b5c.json",
+      "left": {
+        "size": 592,
+        "match_percent": 75.66892
+      },
+      "right": {
+        "size": 540,
+        "match_percent": 75.66892
+      }
+    }
+  ],
+  "text_byte_verification": {
+    "identical": false,
+    "retail_bytes": 592,
+    "generated_bytes": 540,
+    "retail_sha1": "94aeac7c7a64fbbc4837a5fbc2e70eb1d14ca58c",
+    "generated_sha1": "1410eb39644820e6791ea105c0d89d39cfa25e36",
+    "unequal_bytes_in_common_prefix": 427
+  },
+  "external_relocation_records_from_canonical_raw": {
+    "left": [
+      {
+        "offset": 20,
+        "formatted": "lis r6, lbl_805B12B0@ha",
+        "relocation": {
+          "type": 6,
+          "type_name": "R_PPC_ADDR16_HA",
+          "target_symbol": 2
+        }
+      },
+      {
+        "offset": 28,
+        "formatted": "addi r30, r6, lbl_805B12B0@l",
+        "relocation": {
+          "type": 4,
+          "type_name": "R_PPC_ADDR16_LO",
+          "target_symbol": 2
+        }
+      },
+      {
+        "offset": 52,
+        "formatted": "bl fn_80179AEC",
+        "relocation": {
+          "type": 10,
+          "type_name": "R_PPC_REL24",
+          "target_symbol": 3
+        }
+      },
+      {
+        "offset": 72,
+        "formatted": "bl fn_80179AEC",
+        "relocation": {
+          "type": 10,
+          "type_name": "R_PPC_REL24",
+          "target_symbol": 3
+        }
+      },
+      {
+        "offset": 92,
+        "formatted": "bl fn_80179AEC",
+        "relocation": {
+          "type": 10,
+          "type_name": "R_PPC_REL24",
+          "target_symbol": 3
+        }
+      },
+      {
+        "offset": 196,
+        "formatted": "lfs f0, lbl_80650410@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 4
+        }
+      },
+      {
+        "offset": 288,
+        "formatted": "bl fn_800ED720",
+        "relocation": {
+          "type": 10,
+          "type_name": "R_PPC_REL24",
+          "target_symbol": 5
+        }
+      },
+      {
+        "offset": 340,
+        "formatted": "li r3, lbl_8064D030@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 6
+        }
+      },
+      {
+        "offset": 356,
+        "formatted": "lfs f0, lbl_80650410@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 4
+        }
+      },
+      {
+        "offset": 392,
+        "formatted": "lfs f0, lbl_80650410@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 4
+        }
+      },
+      {
+        "offset": 408,
+        "formatted": "lfs f0, lbl_80650410@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 4
+        }
+      },
+      {
+        "offset": 448,
+        "formatted": "li r3, lbl_8064D02C@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 7
+        }
+      },
+      {
+        "offset": 460,
+        "formatted": "li r3, lbl_8064D028@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 8
+        }
+      },
+      {
+        "offset": 480,
+        "formatted": "li r3, lbl_8064D02C@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 7
+        }
+      },
+      {
+        "offset": 492,
+        "formatted": "li r3, lbl_8064D028@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 8
+        }
+      },
+      {
+        "offset": 520,
+        "formatted": "li r3, lbl_8064D02C@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 7
+        }
+      },
+      {
+        "offset": 532,
+        "formatted": "li r3, lbl_8064D028@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 8
+        }
+      },
+      {
+        "offset": 552,
+        "formatted": "li r3, lbl_8064D02C@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 7
+        }
+      },
+      {
+        "offset": 564,
+        "formatted": "li r3, lbl_8064D028@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 8
+        }
+      }
+    ],
+    "right": [
+      {
+        "offset": 20,
+        "formatted": "lis r6, lbl_805B12B0@ha",
+        "relocation": {
+          "type": 6,
+          "type_name": "R_PPC_ADDR16_HA",
+          "target_symbol": 2
+        }
+      },
+      {
+        "offset": 36,
+        "formatted": "addi r0, r6, lbl_805B12B0@l",
+        "relocation": {
+          "type": 4,
+          "type_name": "R_PPC_ADDR16_LO",
+          "target_symbol": 2
+        }
+      },
+      {
+        "offset": 52,
+        "formatted": "bl fn_80179AEC",
+        "relocation": {
+          "type": 10,
+          "type_name": "R_PPC_REL24",
+          "target_symbol": 7
+        }
+      },
+      {
+        "offset": 64,
+        "formatted": "bl fn_80179AEC",
+        "relocation": {
+          "type": 10,
+          "type_name": "R_PPC_REL24",
+          "target_symbol": 7
+        }
+      },
+      {
+        "offset": 80,
+        "formatted": "bl fn_80179AEC",
+        "relocation": {
+          "type": 10,
+          "type_name": "R_PPC_REL24",
+          "target_symbol": 7
+        }
+      },
+      {
+        "offset": 164,
+        "formatted": "lfs f0, lbl_80650410@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 3
+        }
+      },
+      {
+        "offset": 244,
+        "formatted": "bl fn_800ED720",
+        "relocation": {
+          "type": 10,
+          "type_name": "R_PPC_REL24",
+          "target_symbol": 8
+        }
+      },
+      {
+        "offset": 296,
+        "formatted": "li r3, lbl_8064D030@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 4
+        }
+      },
+      {
+        "offset": 332,
+        "formatted": "lfs f0, lbl_80650410@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 3
+        }
+      },
+      {
+        "offset": 396,
+        "formatted": "li r3, lbl_8064D02C@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 5
+        }
+      },
+      {
+        "offset": 408,
+        "formatted": "li r3, lbl_8064D028@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 6
+        }
+      },
+      {
+        "offset": 428,
+        "formatted": "li r3, lbl_8064D02C@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 5
+        }
+      },
+      {
+        "offset": 440,
+        "formatted": "li r3, lbl_8064D028@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 6
+        }
+      },
+      {
+        "offset": 468,
+        "formatted": "li r3, lbl_8064D02C@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 5
+        }
+      },
+      {
+        "offset": 480,
+        "formatted": "li r3, lbl_8064D028@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 6
+        }
+      },
+      {
+        "offset": 500,
+        "formatted": "li r3, lbl_8064D02C@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 5
+        }
+      },
+      {
+        "offset": 512,
+        "formatted": "li r3, lbl_8064D028@sda21",
+        "relocation": {
+          "type": 109,
+          "type_name": "R_PPC_EMB_SDA21",
+          "target_symbol": 6
+        }
+      }
+    ]
+  },
+  "relocation_strict_match": false,
+  "divergence": "Retail saves r24-r31 at stack +0x10, generated saves r23-r31 at +0x0c. Retail retains separate storage base/index and repeats offset address construction; generated folds index into base. Floating load/arithmetic scheduling differs. Retail has four SDA21 references to lbl_80650410, generated has two. Relocation offsets/counts and instruction bytes are not equal.",
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "dol_scope": "Registration remains NonMatching; DOL hash verifies the canonical retail-backed build, not a linked match for this C candidate.",
+  "scope_audit": "Only assigned source and assignment-specific reports changed. No registration, split, compiler policy, runtime, progress, README, or neighbor changes. Existing CLAUDE.md modification excluded.",
+  "verification_log_format": "Compiler/linker CRLF line endings normalized to LF; all output retained."
+}

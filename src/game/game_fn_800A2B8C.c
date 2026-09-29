@@ -57,10 +57,10 @@ typedef struct Context800A2B8C {
 
 extern u32 lbl_80651A18;
 extern u16 lbl_80651A1C;
-extern float lbl_8064EE70;
-extern float lbl_8064EE8C;
-extern float lbl_8064EE90;
-extern float lbl_8064EE94;
+extern const float lbl_8064EE70;
+extern const float lbl_8064EE8C;
+extern const float lbl_8064EE90;
+extern const float lbl_8064EE94;
 extern double lbl_8064EE98;
 
 extern void *fn_80201B8C();
@@ -73,9 +73,8 @@ extern void fn_80185A44(void);
 extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);extern void* memcpy(void*, const void*, unsigned int);
 extern int fn_801E8328();
 
-/* NonMatching: behavior-complete and size-exact. The remaining divergence is
- * MWCC scheduling/register allocation around the u16-to-float conversion and
- * the four float constant loads in the action initializer. */
+/* The shared read-only floats permit the retail load schedule. The compiler's
+ * u16 conversion bias is verified against lbl_8064EE98 during externalization. */
 void fn_800A2B8C(void* object, u16 value)
 {
     Context800A2B8C* context = ((Context800A2B8C*)fn_80201B8C());
@@ -86,6 +85,7 @@ void fn_800A2B8C(void* object, u16 value)
     Params800A2B8C params;
     Vec3 position;
     void* source;
+    float positionZ;
 
     if ((runtime->flags84 & 0x20) == 0 && *(u32*)((u8*)runtime + 0x160) == 0) {
         params.word = lbl_80651A18;
@@ -101,8 +101,8 @@ void fn_800A2B8C(void* object, u16 value)
         action->value06 = 0;
         action->value10 = 100;
         action->value13 = -10;
-        action->value19 = 16;
         action->value78 = positionWord;
+        action->value19 = 16;
         action->value1C = value;
         action->value14 = 0;
         action->value50 = lbl_8064EE8C;
@@ -111,8 +111,9 @@ void fn_800A2B8C(void* object, u16 value)
         runtime->value98 = lbl_8064EE90;
         runtime->value94 = lbl_8064EE94 * (float)value;
         fn_80201E78(&position, object);
+        positionZ = lbl_8064EE70;
         runtime->position88 = position;
-        runtime->position88.z = lbl_8064EE70;
+        runtime->position88.z = positionZ;
         action->position = runtime->position88;
         memcpy(action->params, &params, 6);
         action->value94 = 0;

@@ -1,0 +1,124 @@
+{
+  "assignment_id": "9ce8b59b-3ce6-47dd-a2db-9ab57506bc42",
+  "commands": [
+    {
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801EDEC4.o",
+        "-2",
+        "build/GEDE01/src/game/game_fn_801EDEC4.o",
+        "fn_801EDEC4",
+        "-o",
+        "reports/GEDE01/objdiff-9ce8b59b-3ce6-47dd-a2db-9ab57506bc42.json",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": " INFO Writing to reports/GEDE01/objdiff-9ce8b59b-3ce6-47dd-a2db-9ab57506bc42.json\n"
+    },
+    {
+      "command": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-1",
+        "build/GEDE01/obj/game/game_fn_801EDEC4.o",
+        "-2",
+        "build/GEDE01/src/game/game_fn_801EDEC4.o",
+        "fn_801EDEC4",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "-o",
+        "reports/GEDE01/objdiff-9ce8b59b-3ce6-47dd-a2db-9ab57506bc42-reloc-strict.json",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": " INFO Writing to reports/GEDE01/objdiff-9ce8b59b-3ce6-47dd-a2db-9ab57506bc42-reloc-strict.json\n"
+    },
+    {
+      "command": [
+        "readelf",
+        "-rW",
+        "build/GEDE01/obj/game/game_fn_801EDEC4.o"
+      ],
+      "exit_code": 0,
+      "stdout": "\nRelocation section '.rela.text' at offset 0xd8 contains 3 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n0000000a  00000406 R_PPC_ADDR16_HA        00000000   lbl_80639260 + 0\n00000016  00000404 R_PPC_ADDR16_LO        00000000   lbl_80639260 + 0\n0000006c  0000050a R_PPC_REL24            00000000   fn_80225FE8 + 0\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "readelf",
+        "-rW",
+        "build/GEDE01/src/game/game_fn_801EDEC4.o"
+      ],
+      "exit_code": 0,
+      "stdout": "\nRelocation section '.rela.text' at offset 0xc4 contains 3 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n0000000a  00000306 R_PPC_ADDR16_HA        00000000   lbl_80639260 + 0\n00000016  00000304 R_PPC_ADDR16_LO        00000000   lbl_80639260 + 0\n00000068  0000040a R_PPC_REL24            00000000   fn_80225FE8 + 0\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "sha1sum",
+        "build/GEDE01/main.dol"
+      ],
+      "exit_code": 0,
+      "stdout": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "tools/legal_audit.py"
+      ],
+      "exit_code": 0,
+      "stdout": "legal audit passed (22074 tracked project files inspected)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        ".tools/bin/ninja",
+        "-t",
+        "commands",
+        "build/GEDE01/src/game/game_fn_801EDEC4.o"
+      ],
+      "exit_code": 0,
+      "stdout": "\"/usr/bin/python3\" tools/download_tool.py sjiswrap build/tools/sjiswrap.exe --tag v1.2.2\ntools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_801EDEC4.c -o build/GEDE01/src/game && \"/usr/bin/python3\" tools/transform_dep.py build/GEDE01/src/game/game_fn_801EDEC4.d build/GEDE01/src/game/game_fn_801EDEC4.d\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "sha256sum",
+        "compilers/GC/1.3/mwcceppc.exe"
+      ],
+      "exit_code": 0,
+      "stdout": "4e502c38465500d4fda8d966b268151a6c74c730508e3d9b7efd23d1a6083715  compilers/GC/1.3/mwcceppc.exe\n",
+      "stderr": ""
+    }
+  ],
+  "canonical_score": 80.52631,
+  "strict_score": 80.52631,
+  "canonical_strict_raw_identical": true,
+  "retail_bytes": "152",
+  "generated_bytes": "144",
+  "left_diff_kinds": {
+    "DIFF_NONE": 27,
+    "DIFF_REPLACE": 9,
+    "DIFF_DELETE": 2
+  },
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+  "nonmatching_note": "The normal DOL uses the retail object for this NonMatching function. The matching DOL hash does not establish a C object match.",
+  "legal_audit": "passed",
+  "build_log_note": "Build log normalizes CRLF emitted by MWLD to LF; otherwise output is unedited.",
+  "staged_legal_audit": {
+    "command": [
+      "python3",
+      "eternal-darkness-decomp/tools/legal_audit.py"
+    ],
+    "exit_code": 0,
+    "stdout": "legal audit passed (22082 tracked project files inspected)\n",
+    "stderr": ""
+  }
+}

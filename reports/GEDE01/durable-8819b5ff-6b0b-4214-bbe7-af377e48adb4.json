@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "assignment_id": "8819b5ff-6b0b-4214-bbe7-af377e48adb4",
+  "attempt": 5,
+  "base_commit": "63820f438792c87cd8680f697bd8d9b6d7e10c14",
+  "target": "fn_800614A8",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-8819b5ff-6b0b-4214-bbe7-af377e48adb4.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/final-canonical.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/final-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/relocation-comparison.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/byte-comparison.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/final-build.log",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/dol-sha1.txt",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-8819b5ff-6b0b-4214-bbe7-af377e48adb4/legal-audit.log"
+  ],
+  "divergence": "Retained canonical 94.65651% and relocation-strict 94.64755% (6696 retail bytes, 6656 generated). The retail 0x130 frame and r15-r31 save area at +0xEC now match. Long-lived registers still differ (e.g. arg0 retail r29/generated r31), clamp branches and several call/return sequences differ, and the empty comparison at retail +0x1558 followed by nop is optimized away. Both objects have 299 .rela.text entries, but 285 ordered offset/type/target/addend tuples differ; two global-load relocations reorder and two generated double-conversion relocations target local @559 instead of lbl_8064E5C0. NonMatching links the extracted retail object, so the passing DOL gate does not validate candidate code. Pre-existing harness-owned CLAUDE.md remains unstaged and untouched."
+}

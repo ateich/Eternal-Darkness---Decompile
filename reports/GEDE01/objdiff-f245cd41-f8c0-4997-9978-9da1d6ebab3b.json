@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "assignment_id": "f245cd41-f8c0-4997-9978-9da1d6ebab3b",
+  "target": "fn_80119C70",
+  "source": "eternal-darkness-decomp/src/game/game_fn_80119C70.c",
+  "compiler": "mwcc_242_53 (canonical GC/1.3 settings from configure.py)",
+  "hypothesis": {
+    "description": "Test whether separating the signed-short conversion into a distinct C temporary shortens its live range enough to reproduce retail FP coloring while retaining the guarded external constant pool.",
+    "raw_trial_result": "The trial emitted lfd f1,@41; lfs f2,@37; lfd f0,8(r1); fsubs f0,f0,f1; fmuls f0,f2,f0, exactly reproducing retail conversion/multiply FP registers and operand order. MWCC also hoisted the 0.5f load to 0x24, emitted 82 instructions instead of 81, and shifted the clamp schedule, so the trial was rejected and the preserved best source restored.",
+    "preserved_candidate": "The restored candidate retains the exact 324-byte/81-instruction schedule and guarded externalization of all five constants."
+  },
+  "build": {
+    "commands": ["python3 configure.py", ".tools/bin/ninja -j2"],
+    "exit_code": 0,
+    "raw_output_tail": [
+      "[919/921] DOL build/GEDE01/main.dol",
+      "[920/921] CHECK config/GEDE01/build.sha1",
+      "build/GEDE01/main.dol: OK",
+      "[921/921] PROGRESS"
+    ]
+  },
+  "dol_sha1": {
+    "command": "sha1sum build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "raw_output": [
+      "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol",
+      "ea24b6af954876ce072562ff39cdb4c81d32be1f  orig/GEDE01/sys/main.dol"
+    ]
+  },
+  "legal_audit": {
+    "command": "python3 tools/legal_audit.py",
+    "exit_code": 0,
+    "raw_output": "legal audit passed (21528 tracked project files inspected)"
+  },
+  "canonical_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80119C70 fn_80119C70 -o build/GEDE01/fn_80119C70-f245cd41-canonical.json --format json-pretty",
+    "exit_code": 0,
+    "raw_measurement": "left.size=324 right.size=324 left.match_percent=98.765434 right.match_percent=98.765434 left.instructions=81 right.instructions=81 left.diffs=16 right.diffs=16"
+  },
+  "relocation_strict_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80119C70 fn_80119C70 -c function_reloc_diffs=name_address -o build/GEDE01/fn_80119C70-f245cd41-reloc-strict.json --format json-pretty",
+    "exit_code": 0,
+    "raw_measurement": "left.size=324 right.size=324 left.match_percent=98.765434 right.match_percent=98.765434 left.instructions=81 right.instructions=81 left.diffs=16 right.diffs=16",
+    "relocation_validation": "15 retail and 15 generated relocations; every offset, R_PPC_EMB_SDA21/R_PPC_REL24 type, named target, and zero addend agrees. Targets are lbl_8064FFC0, lbl_8064FFB4, lbl_8064FFB0, lbl_8064CDF8, lbl_8064FFB8, lbl_8064CDE0, lbl_8064FFBC, and fn_8015DB74."
+  },
+  "differences": {
+    "count": 16,
+    "retail_offsets_hex": ["0xc", "0x1c", "0x28", "0x30", "0x34", "0x3c", "0x48", "0x54", "0x58", "0x5c", "0x68", "0x6c", "0x74", "0x7c", "0x94", "0xec"],
+    "diff_kinds": "16 x DIFF_ARG_MISMATCH",
+    "raw_retail_instructions": ["lfd f1, lbl_8064FFC0@sda21", "lfs f2, lbl_8064FFB4@sda21", "lfd f0, 0x8(r1)", "fsubs f0, f0, f1", "lfs f1, lbl_8064FFB0@sda21", "fmuls f0, f2, f0", "fcmpo cr0, f0, f1", "fmr f1, f0", "lfs f2, lbl_8064FFB8@sda21", "fcmpo cr0, f2, f1", "lfs f2, lbl_8064FFB0@sda21", "fcmpo cr0, f0, f2", "fmr f2, f0", "stfs f2, lbl_8064CDF8@sda21", "fcmpo cr0, f2, f0", "fcmpo cr0, f2, f0"],
+    "raw_generated_instructions": ["lfd f2, lbl_8064FFC0@sda21", "lfs f0, lbl_8064FFB4@sda21", "lfd f1, 0x8(r1)", "fsubs f1, f1, f2", "lfs f2, lbl_8064FFB0@sda21", "fmuls f0, f0, f1", "fcmpo cr0, f0, f2", "fmr f2, f0", "lfs f1, lbl_8064FFB8@sda21", "fcmpo cr0, f1, f2", "lfs f1, lbl_8064FFB0@sda21", "fcmpo cr0, f0, f1", "fmr f1, f0", "stfs f1, lbl_8064CDF8@sda21", "fcmpo cr0, f1, f0", "fcmpo cr0, f1, f0"],
+    "summary": "The retained function is size-, control-flow-, integer-register-, relocation-, literal-value-, and loop-schedule-exact. The residue is FP register allocation in the conversion/clamp prefix and later threshold consumers, plus commutative fmuls operand order at 0x3c. Both entry-update loop bodies remain byte-identical."
+  }
+}

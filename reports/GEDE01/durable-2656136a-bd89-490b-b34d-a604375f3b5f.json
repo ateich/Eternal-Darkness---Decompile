@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "assignment_id": "2656136a-bd89-490b-b34d-a604375f3b5f",
+  "attempt": 5,
+  "base_commit": "171a0a3eea17c01f4e905f7aaf4c9b8cd03c4fb0",
+  "target": "fn_801FABA4",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-2656136a-bd89-490b-b34d-a604375f3b5f.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/final-canonical.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/final-relocation-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/dol-sha1.txt",
+    "eternal-darkness-decomp/reports/GEDE01/attempt-2656136a-bd89-490b-b34d-a604375f3b5f/legal-audit.txt"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff are 94.90566% (424 retail bytes, 416 candidate bytes). The extra canonical-base HA/LO pair is removed and r31/r30/r29/r28/r27 now agree with retail for globals/entry/index/offset/output. In the first conditional block write, retail forms r31+0x660 before adding the scaled index, while the candidate adds the index to r31 then adds 0x660; scheduling differs. The candidate omits retail addi r4,r31,0 at retail offsets 0xE0 and 0x170, using r31 directly. The post-loop second-bank write uses r5/r6 for index/multiply and r0 for truncated offset instead of retail r0/r3. The ordered sequence of all 21 real relocation types, targets and addends agrees, but subsequent relocation offsets differ due to the two omitted instructions. Not a byte or relocation-strict match; retain NonMatching."
+}

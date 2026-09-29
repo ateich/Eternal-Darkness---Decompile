@@ -1,0 +1,32 @@
+--- eternal-darkness-decomp/src/game/game_fn_801ED118.c
++++ eternal-darkness-decomp/src/game/game_fn_801ED118.c
+@@ -22,6 +22,8 @@
+     u8* base = lbl_80639260;
+     s32 i;
+ 
++    lbl_8064D634 = -1;
++
+     {
+         s16* half = (s16*)(base + 0x21D8);
+         s32* word = (s32*)(base + 0x21F8);
+@@ -30,7 +32,6 @@
+             word[i] = -1;
+         }
+     }
+-    lbl_8064D634 = -1;
+     *(s32*)(base + 0x21F0) = 0;
+     lbl_8064D63C = 0;
+ 
+@@ -77,10 +78,10 @@
+             r24b->flag = 255;
+             r8->a = -1;
+             *b++ = -1;
++            r16a->value[3] = -1;
++            r16b->value[3] = -1;
+             r24a->d = -1;
+-            r16a->value[3] = -1;
+             r24b->d = -1;
+-            r16b->value[3] = -1;
+             r8->b = -1;
+             r16a++;
+             r16b++;

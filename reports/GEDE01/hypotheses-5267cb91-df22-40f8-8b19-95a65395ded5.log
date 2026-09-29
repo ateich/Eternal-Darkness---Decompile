@@ -1,0 +1,220 @@
+Hypothesis 1: member accessor inlining postpones address folding.
+Source:
+typedef unsigned int u32;
+
+typedef struct Vec3Words {
+    u32 x;
+    u32 y;
+    u32 z;
+} Vec3Words;
+
+typedef struct State {
+    Vec3Words first[10];
+    Vec3Words second[10];
+    u32 values[10];
+} State;
+
+extern State lbl_80303A18;
+extern int lbl_8064C710;
+
+/* Keep member access in local C accessors, as in an inlined state API. */
+static Vec3Words* firstArray(State* state) { return state->first; }
+static Vec3Words* secondArray(State* state) { return state->second; }
+static u32* valueArray(State* state) { return state->values; }
+
+void fn_8002B5B4(Vec3Words* first, Vec3Words* second, int index, u32 value)
+{
+    firstArray(&lbl_80303A18)[index] = *first;
+    secondArray(&lbl_80303A18)[index] = *second;
+    valueArray(&lbl_80303A18)[index] = value;
+    lbl_8064C710 = index;
+}
+
+build/GEDE01/src/game/game_fn_8002B5B4.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <firstArray>:
+   0:	4e 80 00 20 	blr
+
+00000004 <secondArray>:
+   4:	38 63 00 78 	addi    r3,r3,120
+   8:	4e 80 00 20 	blr
+
+0000000c <valueArray>:
+   c:	38 63 00 f0 	addi    r3,r3,240
+  10:	4e 80 00 20 	blr
+
+00000014 <fn_8002B5B4>:
+  14:	1d 45 00 0c 	mulli   r10,r5,12
+  18:	3c e0 00 00 	lis     r7,0
+			1a: R_PPC_ADDR16_HA	lbl_80303A18
+  1c:	81 23 00 00 	lwz     r9,0(r3)
+  20:	54 a0 10 3a 	slwi    r0,r5,2
+  24:	38 e7 00 00 	addi    r7,r7,0
+			26: R_PPC_ADDR16_LO	lbl_80303A18
+  28:	81 03 00 04 	lwz     r8,4(r3)
+  2c:	7d 47 52 14 	add     r10,r7,r10
+  30:	7c e7 02 14 	add     r7,r7,r0
+  34:	91 2a 00 00 	stw     r9,0(r10)
+  38:	91 0a 00 04 	stw     r8,4(r10)
+  3c:	80 03 00 08 	lwz     r0,8(r3)
+  40:	90 0a 00 08 	stw     r0,8(r10)
+  44:	80 64 00 00 	lwz     r3,0(r4)
+  48:	80 04 00 04 	lwz     r0,4(r4)
+  4c:	90 6a 00 78 	stw     r3,120(r10)
+  50:	90 0a 00 7c 	stw     r0,124(r10)
+  54:	80 04 00 08 	lwz     r0,8(r4)
+  58:	90 0a 00 80 	stw     r0,128(r10)
+  5c:	90 c7 00 f0 	stw     r6,240(r7)
+  60:	90 a0 00 00 	stw     r5,0(0)
+			60: R_PPC_EMB_SDA21	lbl_8064C710
+  64:	4e 80 00 20 	blr
+Result: target remains 84 bytes with folded addressing; plain static accessors also emit unwanted local functions.
+
+Hypothesis 2: integer address arithmetic retains member bases across pointer conversions.
+Source:
+typedef unsigned int u32;
+
+typedef struct Vec3Words {
+    u32 x;
+    u32 y;
+    u32 z;
+} Vec3Words;
+
+typedef struct State {
+    Vec3Words first[10];
+    Vec3Words second[10];
+    u32 values[10];
+} State;
+
+extern State lbl_80303A18;
+extern int lbl_8064C710;
+
+/* Form member addresses in the integer address domain before indexing. */
+void fn_8002B5B4(Vec3Words* first, Vec3Words* second, int index, u32 value)
+{
+    u32 base = (u32)&lbl_80303A18;
+    u32 offset = index * sizeof(Vec3Words);
+    *(Vec3Words*)(base + offset) = *first;
+    *(Vec3Words*)((base + 0x78) + offset) = *second;
+    *(u32*)((base + 0xF0) + index * sizeof(u32)) = value;
+    lbl_8064C710 = index;
+}
+
+$ .tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_8002B5B4.o
+[1/1] MWCC build/GEDE01/src/game/game_fn_8002B5B4.o
+
+exit status: 0
+
+$ build/binutils/powerpc-eabi-objdump -dr build/GEDE01/src/game/game_fn_8002B5B4.o
+
+build/GEDE01/src/game/game_fn_8002B5B4.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <fn_8002B5B4>:
+   0:	1d 45 00 0c 	mulli   r10,r5,12
+   4:	3c e0 00 00 	lis     r7,0
+			6: R_PPC_ADDR16_HA	lbl_80303A18
+   8:	81 23 00 00 	lwz     r9,0(r3)
+   c:	54 a0 10 3a 	slwi    r0,r5,2
+  10:	38 e7 00 00 	addi    r7,r7,0
+			12: R_PPC_ADDR16_LO	lbl_80303A18
+  14:	81 03 00 04 	lwz     r8,4(r3)
+  18:	7d 47 52 14 	add     r10,r7,r10
+  1c:	7c e7 02 14 	add     r7,r7,r0
+  20:	91 2a 00 00 	stw     r9,0(r10)
+  24:	91 0a 00 04 	stw     r8,4(r10)
+  28:	80 03 00 08 	lwz     r0,8(r3)
+  2c:	90 0a 00 08 	stw     r0,8(r10)
+  30:	80 64 00 00 	lwz     r3,0(r4)
+  34:	80 04 00 04 	lwz     r0,4(r4)
+  38:	90 6a 00 78 	stw     r3,120(r10)
+  3c:	90 0a 00 7c 	stw     r0,124(r10)
+  40:	80 04 00 08 	lwz     r0,8(r4)
+  44:	90 0a 00 80 	stw     r0,128(r10)
+  48:	90 c7 00 f0 	stw     r6,240(r7)
+  4c:	90 a0 00 00 	stw     r5,0(0)
+			4c: R_PPC_EMB_SDA21	lbl_8064C710
+  50:	4e 80 00 20 	blr
+
+exit status: 0
+
+Hypothesis 3: register-qualified local member bases retain independent lifetimes.
+Source:
+typedef unsigned int u32;
+
+typedef struct Vec3Words {
+    u32 x;
+    u32 y;
+    u32 z;
+} Vec3Words;
+
+typedef struct State {
+    Vec3Words first[10];
+    Vec3Words second[10];
+    u32 values[10];
+} State;
+
+extern State lbl_80303A18;
+extern int lbl_8064C710;
+
+/* Register-qualified member bases test the original local-variable lifetime. */
+void fn_8002B5B4(Vec3Words* first, Vec3Words* second, int index, u32 value)
+{
+    register State* state = &lbl_80303A18;
+    register Vec3Words* firstBase = state->first;
+    register Vec3Words* secondBase = state->second;
+    register u32* valueBase = state->values;
+    register int vectorIndex = index;
+
+    firstBase[vectorIndex] = *first;
+    secondBase[vectorIndex] = *second;
+    valueBase[index] = value;
+    lbl_8064C710 = index;
+}
+
+$ .tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_8002B5B4.o
+[1/1] MWCC build/GEDE01/src/game/game_fn_8002B5B4.o
+
+exit status: 0
+
+$ build/binutils/powerpc-eabi-objdump -dr build/GEDE01/src/game/game_fn_8002B5B4.o
+
+build/GEDE01/src/game/game_fn_8002B5B4.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <fn_8002B5B4>:
+   0:	1d 45 00 0c 	mulli   r10,r5,12
+   4:	3c e0 00 00 	lis     r7,0
+			6: R_PPC_ADDR16_HA	lbl_80303A18
+   8:	81 23 00 00 	lwz     r9,0(r3)
+   c:	54 a0 10 3a 	slwi    r0,r5,2
+  10:	38 e7 00 00 	addi    r7,r7,0
+			12: R_PPC_ADDR16_LO	lbl_80303A18
+  14:	81 03 00 04 	lwz     r8,4(r3)
+  18:	7d 47 52 14 	add     r10,r7,r10
+  1c:	7c e7 02 14 	add     r7,r7,r0
+  20:	91 2a 00 00 	stw     r9,0(r10)
+  24:	91 0a 00 04 	stw     r8,4(r10)
+  28:	80 03 00 08 	lwz     r0,8(r3)
+  2c:	90 0a 00 08 	stw     r0,8(r10)
+  30:	80 64 00 00 	lwz     r3,0(r4)
+  34:	80 04 00 04 	lwz     r0,4(r4)
+  38:	90 6a 00 78 	stw     r3,120(r10)
+  3c:	90 0a 00 7c 	stw     r0,124(r10)
+  40:	80 04 00 08 	lwz     r0,8(r4)
+  44:	90 0a 00 80 	stw     r0,128(r10)
+  48:	90 c7 00 f0 	stw     r6,240(r7)
+  4c:	90 a0 00 00 	stw     r5,0(0)
+			4c: R_PPC_EMB_SDA21	lbl_8064C710
+  50:	4e 80 00 20 	blr
+
+exit status: 0
+
+Conclusion: all three source-level hypotheses emit the same 84-byte target. Retain hypothesis 3, the register-qualified typed member-base C reconstruction, as NonMatching. Canonical GC/1.3 flags unchanged. No other functions or registration edits.

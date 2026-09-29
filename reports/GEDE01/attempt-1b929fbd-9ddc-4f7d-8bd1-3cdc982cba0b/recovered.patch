@@ -1,0 +1,53 @@
+diff --git a/eternal-darkness-decomp/src/game/game_fn_80142A70.c b/eternal-darkness-decomp/src/game/game_fn_80142A70.c
+index d6a450a073..269d194508 100644
+--- a/eternal-darkness-decomp/src/game/game_fn_80142A70.c
++++ b/eternal-darkness-decomp/src/game/game_fn_80142A70.c
+@@ -41,7 +41,7 @@ extern PoolSlot lbl_805B1310[];
+ extern WorkEntry lbl_805B1400[];
+ extern Quad lbl_805B38C0[];
+ extern u8 lbl_8064D038;
+-extern char lbl_8064BA08[];
++extern char lbl_8064BA08;
+ extern float lbl_80650430;
+ extern float lbl_80650434;
+ extern int fn_801429A8(void);
+@@ -60,6 +60,7 @@ PoolSlot* fn_80142A70(u8 count, Point3s* ring, s16 z_offset, u16 value,
+     PoolSlot* slot = &lbl_805B1310[slot_index];
+     Quad* quads = &lbl_805B38C0[slot_index * 7];
+     WorkEntry* work;
++    float normalizer;
+     int i;
+ 
+     slot->flags |= 1;
+@@ -85,6 +86,7 @@ PoolSlot* fn_80142A70(u8 count, Point3s* ring, s16 z_offset, u16 value,
+     }
+ 
+     work = &lbl_805B1400[slot_index * 7];
++    normalizer = lbl_80650430;
+     for (i = 0; i < count; i++) {
+         Quad* quad = &quads[i];
+         PlaneEntry* plane = &work[i].plane[0];
+@@ -107,9 +109,12 @@ PoolSlot* fn_80142A70(u8 count, Point3s* ring, s16 z_offset, u16 value,
+         dx = plane->center.x - quad->point[0].x;
+         dy = plane->center.y - quad->point[0].y;
+         dz = plane->center.z - quad->point[0].z;
+-        plane->radius = fn_800ED720(dx * dx + dy * dy + dz * dz);
++        dx *= dx;
++        dy *= dy;
++        dz *= dz;
++        plane->radius = fn_800ED720(dx + dy + dz);
+         plane->point_count = 4;
+-        plane->callback = lbl_8064BA08;
++        plane->callback = &lbl_8064BA08;
+         plane->state = 0;
+         plane->link = 0;
+         *back = *plane;
+@@ -118,7 +123,7 @@ PoolSlot* fn_80142A70(u8 count, Point3s* ring, s16 z_offset, u16 value,
+         fn_8017960C(&quad->point[2], &quad->point[0], &edge1);
+         fn_80211B64(&edge0, &edge1, &plane->normal);
+         fn_80211A90(&plane->normal, &plane->normal,
+-                    lbl_80650430 / fn_80211B08(&plane->normal));
++                    normalizer / fn_80211B08(&plane->normal));
+         fn_80211A90(&plane->normal, &back->normal, lbl_80650434);
+         point.x = quad->point[0].x;
+         point.y = quad->point[0].y;

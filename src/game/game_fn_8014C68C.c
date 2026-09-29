@@ -13,7 +13,7 @@ typedef struct State {
     int placement4;
     int value;
     u8 pad2C[10];
-    u8 flag36;
+    signed char flag36;
     u8 pad37;
     u8 kind38;
     u8 pad39[15];
@@ -23,7 +23,7 @@ typedef struct State {
     void (*callback68)(void);
 } State;
 
-extern float lbl_806504D8;
+extern const float lbl_806504D8;
 extern float lbl_806504DC;
 extern void fn_8014B768(void);
 extern void fn_8014C7C0(void);
@@ -44,6 +44,7 @@ void* fn_8014C68C(void* owner, int start, int finish, int* value,
     int placement[11];
     void* runtime = fn_80201814(owner);
     State* state;
+    float scale, endpoint;
 
     if (runtime != 0) {
         job = fn_80149D98(fn_8014B768);
@@ -52,21 +53,22 @@ void* fn_8014C68C(void* owner, int start, int finish, int* value,
             fn_8011F6A4(fn_80201BC8(runtime), start, finish, -1, placement, 1);
             state = (State*)(job->bytes + 8);
             fn_8014CBC0(state);
+            scale = lbl_806504D8;
             state->initial = initial;
             state->placement2 = placement[2];
             state->placement3 = placement[3];
+            endpoint = lbl_806504DC;
             state->placement4 = placement[4];
             state->value = *value;
             state->callback48 = fn_8014C7C0;
-            state->flag36 = 0xFF;
+            state->flag36 = -1;
             state->final = final;
             state->step = (final - initial) / count;
             state->kind38 = 4;
             state->owner = owner;
             state->callback68 = fn_8014C87C;
             state->unk0 = 0;
-            fn_801FE8DC(&state->initial, lbl_806504D8, lbl_806504D8,
-                        lbl_806504DC);
+            fn_801FE8DC(&state->initial, scale, scale, endpoint);
             fn_801E8328(19, state);
         }
     }

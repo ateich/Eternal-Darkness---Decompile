@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "assignment_id": "81334b3f-1d3f-4818-b1e9-525b51f7e73e",
+  "target": "fn_801FABA4",
+  "compiler": "GC/1.3",
+  "compiler_flags": ["-use_lmw_stmw on"],
+  "commands": {
+    "configure": "python3 configure.py",
+    "build": ".tools/bin/ninja -j2",
+    "canonical": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801FABA4 fn_801FABA4 -o build/GEDE01/objdiff-81334b3f-final-canonical.json --format json-pretty",
+    "relocation_strict": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801FABA4 fn_801FABA4 -o build/GEDE01/objdiff-81334b3f-final-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "measurement": "python3 tools/fndiff.py game/game_fn_801FABA4.c fn_801FABA4",
+    "dol_sha1": "sha1sum build/GEDE01/main.dol"
+  },
+  "raw_measured_outputs": {
+    "build_tail": "[920/922] DOL build/GEDE01/main.dol\n[921/922] CHECK config/GEDE01/build.sha1\nbuild/GEDE01/main.dol: OK\n[922/922] PROGRESS\nProgress:\n  All: 58.35% fuzzy, 49.34% matched, 49.20% linked (6314 / 7068 files)",
+    "canonical_fndiff": "target 424 bytes  base 428 bytes  match 82.40566",
+    "relocation_strict_objdiff": "INFO Writing to build/GEDE01/objdiff-81334b3f-final-reloc-strict.json",
+    "relocation_strict_jq_measurement": "left(retail): 424\t82.40566\t34\nright(generated): 428\t82.40566\t32",
+    "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol"
+  },
+  "canonical": {
+    "match_percent": 82.40566,
+    "retail_bytes": 424,
+    "generated_bytes": 428,
+    "passed": false
+  },
+  "relocation_strict": {
+    "config": "function_reloc_diffs=name_address",
+    "match_percent": 82.40566,
+    "passed": false,
+    "retail_initial_base_relocations": [
+      {"offset": "0x08", "type": "R_PPC_ADDR16_HA", "target": "lbl_8063C6B8", "addend": 0},
+      {"offset": "0x14", "type": "R_PPC_ADDR16_LO", "target": "lbl_8063C6B8", "addend": 0}
+    ],
+    "generated_initial_base_relocations": [
+      {"offset": "0x08", "type": "R_PPC_ADDR16_HA", "target": "lbl_8063C6B8", "addend": 0},
+      {"offset": "0x14", "type": "R_PPC_ADDR16_LO", "target": "lbl_8063C6B8", "addend": 0}
+    ],
+    "generated_extra_base_relocations": [
+      {"offset": "0x64", "type": "R_PPC_ADDR16_HA", "target": "lbl_8063C6B8", "addend": 0},
+      {"offset": "0x6c", "type": "R_PPC_ADDR16_LO", "target": "lbl_8063C6B8", "addend": 0}
+    ],
+    "raw_divergent_rows": "retail 0x0064: <none> | generated 0x0064: lis r3,lbl_8063C6B8@ha; retail 0x0068: <none> | generated 0x0068: li r30,0x40; retail 0x006c: addi r30,r31,0xdd0 | generated 0x006c: addi r3,r3,lbl_8063C6B8@l; retail 0x0074: li r28,0x40 | generated 0x0074: addi r28,r3,0xdd0"
+  },
+  "attempt_4_probes": [
+    {
+      "name": "declaration_time_header_initializer",
+      "hypothesis": "A declaration-time Header aggregate initializer could change the local lifetime graph enough to retain the canonical aggregate base across memcpy.",
+      "exact_patch": "replace `Header header;` plus the eight later field assignments with `Header header = { lbl_8064D7BC, lbl_8064C3A8, argument, lbl_8064C3A0, lbl_8064D798, lbl_8064C3A4, lbl_8064D79C, lbl_8064D18C };`",
+      "command": ".tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_801FABA4.o",
+      "raw_output": "src\\game\\game_fn_801FABA4.c:46: lbl_8064D7BC: illegal constant expression; Too many errors printed, aborting program",
+      "result": "Rejected by the canonical C frontend, so no objdiff score exists and the patch was not retained."
+    },
+    {
+      "name": "register_qualified_canonical_base",
+      "hypothesis": "The C register storage-class hint on the canonical aggregate pointer may bias MWCC to retain it in r31 across memcpy without changing relocation identity.",
+      "exact_patch": "replace `BlockGlobals* globals = &lbl_8063C6B8;` with `register BlockGlobals* globals = &lbl_8063C6B8;`",
+      "commands": [
+        ".tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_801FABA4.o",
+        "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801FABA4 fn_801FABA4 -o build/GEDE01/objdiff-81334b3f-probe-register-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+        "python3 tools/fndiff.py game/game_fn_801FABA4.c fn_801FABA4"
+      ],
+      "raw_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801FABA4.o\nINFO Writing to build/GEDE01/objdiff-81334b3f-probe-register-strict.json\ntarget 424 bytes  base 428 bytes  match 82.40566",
+      "result": "Byte-identical to the retained reconstruction; register qualification did not affect allocation or remove the extra canonical-base HA/LO relocation pair. The patch was not retained."
+    }
+  ],
+  "retained_source": "src/game/game_fn_801FABA4.c",
+  "divergence": "Retail retains lbl_8063C6B8 in r31, derives the entry cursor in r30 with addi r30,r31,0xDD0 immediately after memcpy, and keeps the u16 output offset in r28. Canonical GC/1.3 rematerializes lbl_8063C6B8 at generated offsets 0x64/0x6c with an extra HA/LO relocation pair, assigns the cursor to r28 and offset to r30, and changes address folding and scheduling through the loop and tail calls."
+}

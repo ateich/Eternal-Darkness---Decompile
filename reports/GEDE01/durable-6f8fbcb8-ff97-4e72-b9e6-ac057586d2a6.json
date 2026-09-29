@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "assignment_id": "6f8fbcb8-ff97-4e72-b9e6-ac057586d2a6",
+  "attempt": 3,
+  "base_commit": "f10cc5be7297b27285e83c939337b4937b17d79f",
+  "target": "fn_801B3770",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-6f8fbcb8-ff97-4e72-b9e6-ac057586d2a6.json"
+  ],
+  "divergence": "Canonical GC/1.2.5n with -opt nopeephole measures 76.336205%: 464 retail bytes versus 524 generated. Generated code loads lbl_8060C020 after the prologue into r30 rather than hoisting its HA load before the prologue and retaining the base in r31, emits clrrwi plus or rather than rlwimi in both resolver-hit paths, adds nopeephole branch/compare instructions, and colors offset/node/loop values as r28/r31/r26-r29 rather than retail r26/r27/r28-r30; relocation sites consequently differ while retaining the expected target globals and calls."
+}

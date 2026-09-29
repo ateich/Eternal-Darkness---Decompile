@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "assignment_id": "e59e6aaa-28c6-4824-a66e-d0e3dfde05c4",
+  "attempt": 5,
+  "base_commit": "9aa9163a0f95978346bb33219d74ad2dbf27324e",
+  "target": "fn_801FAD4C",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-e59e6aaa-28c6-4824-a66e-d0e3dfde05c4.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-e59e6aaa-28c6-4824-a66e-d0e3dfde05c4-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/analysis-e59e6aaa-28c6-4824-a66e-d0e3dfde05c4.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-e59e6aaa-28c6-4824-a66e-d0e3dfde05c4.log",
+    "eternal-darkness-decomp/reports/GEDE01/dol-sha1-e59e6aaa-28c6-4824-a66e-d0e3dfde05c4.log",
+    "eternal-darkness-decomp/reports/GEDE01/legal-audit-e59e6aaa-28c6-4824-a66e-d0e3dfde05c4.log"
+  ],
+  "divergence": "Canonical GC/1.3 emits 660 bytes versus retail 684; canonical and relocation-strict objdiff both measure 82.86549% (byte-identical raw reports). Signed refresh and iteration-local indexed Block pointers improve the preserved 82.128654% candidate. Remaining 77 differing aligned rows: 49 argument mismatches, 12 deletes, 6 inserts, 10 replacements. Differences begin in the first optional block call at retail offset 0xC4: index/input register assignment, missing post-call u16 narrowing, and address/argument scheduling. Later aggregate link stores fold offsets into r31 instead of separate Block bases; twelve-element initialization uses different base registers, store order, and induction. Both sides have 23 relocation-bearing instructions; no 100% relocation/byte match claimed. Full build passes and DOL SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f."
+}
