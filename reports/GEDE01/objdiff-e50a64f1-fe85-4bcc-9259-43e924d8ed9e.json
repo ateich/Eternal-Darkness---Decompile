@@ -1,0 +1,1242 @@
+{
+  "version": 1,
+  "assignment_id": "e50a64f1-fe85-4bcc-9259-43e924d8ed9e",
+  "target": "fn_8015A340",
+  "experiments": [
+    {
+      "name": "review-corrected baseline",
+      "canonical_score": 60.011494,
+      "size": 1676,
+      "frame": "0x110",
+      "source_sha256": "4d7a816a323aabe2889664449baf6296dbf34067408db1aeafec35e9ffb22bfa"
+    },
+    {
+      "name": "volatile stream and semantic snapshots",
+      "canonical_score": 69.65287,
+      "size": 1748,
+      "frame": "0x110",
+      "source_sha256": "738ff0591fc10ca1dbbdb625a552af03c200949f77dab65e8cbc87f231e56e1f"
+    },
+    {
+      "name": "volatile transfers plus register state pointer",
+      "canonical_score": 69.65287,
+      "size": 1748,
+      "source_sha256": "76db4da4ae987d538fd4af0a4e8a9e63385999e3bcbc241f108c9e12bc8371bf"
+    },
+    {
+      "name": "typed context and volatile completion queue",
+      "canonical_score": 69.71954,
+      "size": 1736,
+      "source_sha256": "c16cc6da4f81cb0743c9d1031fb53e2621df8d936a574b5898e6a341a1888742"
+    },
+    {
+      "name": "volatile controls and word descriptor snapshots",
+      "canonical_score": 73.63448,
+      "size": 1776,
+      "source_sha256": "6aba8bfa4845f92ef283d6e5df161e6854267d6f7e7879462e01bf67ab0f9304"
+    },
+    {
+      "name": "typed 0x3c file, 0x20 request and separate name arrays",
+      "canonical_score": 73.114944,
+      "size": 1776,
+      "frame": "0x100",
+      "local_offsets": {
+        "name": "0x10",
+        "streamName": "0x20",
+        "request": "0x40",
+        "file": "0x60"
+      },
+      "source_sha256": "92554c40b28946c9f0a02607dceffdfcc7f5e9935eff6f87366733fbd4e8b580"
+    },
+    {
+      "name": "explicit outer-loop goto",
+      "canonical_score": 73.114944,
+      "size": 1776,
+      "result": "Identical code; reverted"
+    },
+    {
+      "name": "function-scope context, stream, DMA and string pointer aliases",
+      "canonical_score": 79.308044,
+      "size": 1668,
+      "frame": "0xe0",
+      "source_sha256": "e1dd47666b53e9de22e36e2f459cdf9bc0fe9d404ddee2ed4c9d59046be45d05"
+    },
+    {
+      "name": "independent upper-region alias and direct bulk DMA references",
+      "canonical_score": 83.54023,
+      "size": 1656,
+      "frame": "0xf0",
+      "source_sha256": "fd66c97f5e3088f5521538f551915058bc526c8180899f6b91f9cf1c449f74e0"
+    },
+    {
+      "name": "integer-address casts for stream aliases",
+      "canonical_score": 83.54023,
+      "size": 1656,
+      "result": "Identical code; reverted"
+    },
+    {
+      "name": "byte-indexed volatile transfer fields",
+      "canonical_score": 82.473564,
+      "size": 1668,
+      "result": "rejected; initial pointer qualifier error corrected before measurement"
+    },
+    {
+      "name": "explicit register pointer declarations",
+      "canonical_score": 83.54023,
+      "size": "1656",
+      "raw_summary": "target 1740 bytes  base 1656 bytes  match 83.54023",
+      "source_sha256": "8e8f49acbdb7f8c1080c2c6dd5ae51458340b8e913c3072425e691ef7eff4a73"
+    },
+    {
+      "name": "separate direct invalidation pointer",
+      "canonical_score": 84.167816,
+      "size": "1660",
+      "raw_summary": "target 1740 bytes  base 1660 bytes  match 84.167816",
+      "source_sha256": "966c1f89746a067fb07ab653760996e3fb877b0d64d2f5cc8d8c3c6a9c50694b"
+    },
+    {
+      "name": "signed alternate selector",
+      "canonical_score": 83.99081,
+      "size": "1652",
+      "raw_summary": "target 1740 bytes  base 1652 bytes  match 83.99081",
+      "source_sha256": "05a1c45456561495cc0f7d7bc65bacf59d71c5c9ed21338470d066a5bd15e91f"
+    },
+    {
+      "name": "stream-relative flag and queue aliases",
+      "canonical_score": 83.54023,
+      "size": "1656",
+      "raw_summary": "target 1740 bytes  base 1656 bytes  match 83.54023",
+      "source_sha256": "cefe0f74c15471c45910d8174516aa744fb17267a8b315901c4050cae74e191a"
+    },
+    {
+      "name": "state pointer initialized before context",
+      "canonical_score": 83.54023,
+      "size": "1656",
+      "raw_summary": "target 1740 bytes  base 1656 bytes  match 83.54023",
+      "source_sha256": "4c5542f37b156da019e121c72e996897e70a8acea450e486ad95a5dfa82f296f"
+    },
+    {
+      "name": "combined invalidation alias, signed toggle and named stream index",
+      "canonical_score": 84.65287,
+      "strict_score": 84.65287,
+      "size": 1656,
+      "frame": "0xf0",
+      "retained": true,
+      "raw_summary": "target 1740 bytes  base 1656 bytes  match 84.65287"
+    }
+  ],
+  "base_commit": "26156232cfb394c6602a6a69f3a517eb79a0856a",
+  "attempt": 5,
+  "preserved_attempts_reviewed": [
+    {
+      "commit": "bd2cbb2789ec292815a2b4f10cf4b7bd0bfcba59",
+      "diagnosis": "60.004597%; separate buffers; two incorrect handled assignments; partial name/request aggregate failed at 56.680458%"
+    },
+    {
+      "commit": "63aa9a9bbdc32f0c6bc008c1f8dfc454cbe5a517",
+      "diagnosis": "59.632183%; all-buffer aggregate failed at 55.393105%; threshold addition and comparison defects reviewed in handoff"
+    },
+    {
+      "commit": "ecb4f986cc0b7590629a97e85570867c923f898a",
+      "diagnosis": "59.845978%; descriptor and stream layout defects reviewed in handoff"
+    },
+    {
+      "commit": "c51cc64c9acd5962fae5778f14b9995daceb651d",
+      "diagnosis": "57.489655%; invalid file-minus-0x20 request storage and unsupported relocation count reviewed in handoff"
+    }
+  ],
+  "canonical_compiler": {
+    "version": "GC/1.3",
+    "registration": "Object(NonMatching, \"game/game_fn_8015A340.c\", extra_cflags=[\"-use_lmw_stmw on\"])",
+    "settings_changed": false,
+    "cflags": "-nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on"
+  },
+  "command_working_directory": "eternal-darkness-decomp",
+  "commands": [
+    "python3 configure.py",
+    ".tools/bin/ninja -j2",
+    "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8015A340 fn_8015A340 -o reports/GEDE01/canonical-e50a64f1-fe85-4bcc-9259-43e924d8ed9e.json --format json-pretty",
+    "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8015A340 fn_8015A340 -o reports/GEDE01/strict-e50a64f1-fe85-4bcc-9259-43e924d8ed9e.json --format json-pretty -c function_reloc_diffs=name_address",
+    "python3 tools/fndiff.py game/game_fn_8015A340.c fn_8015A340",
+    "readelf -rW build/GEDE01/obj/game/game_fn_8015A340.o",
+    "readelf -rW build/GEDE01/src/game/game_fn_8015A340.o",
+    "sha1sum build/GEDE01/main.dol",
+    "cmp -s build/GEDE01/main.dol orig/GEDE01/sys/main.dol",
+    "python3 tools/legal_audit.py",
+    "git diff --check"
+  ],
+  "raw_artifacts": {
+    "canonical_objdiff": "eternal-darkness-decomp/reports/GEDE01/canonical-e50a64f1-fe85-4bcc-9259-43e924d8ed9e.json",
+    "strict_objdiff": "eternal-darkness-decomp/reports/GEDE01/strict-e50a64f1-fe85-4bcc-9259-43e924d8ed9e.json",
+    "instruction_comparison": "eternal-darkness-decomp/reports/GEDE01/asm-e50a64f1-fe85-4bcc-9259-43e924d8ed9e.txt",
+    "build_log": "eternal-darkness-decomp/reports/GEDE01/build-e50a64f1-fe85-4bcc-9259-43e924d8ed9e.log"
+  },
+  "measured": {
+    "canonical": {
+      "left": {
+        "name": "fn_8015A340",
+        "size": "1740",
+        "flags": 1,
+        "target_symbol": 1,
+        "match_percent": 84.65287
+      },
+      "right": {
+        "name": "fn_8015A340",
+        "size": "1656",
+        "flags": 1,
+        "target_symbol": 1,
+        "match_percent": 84.65287
+      }
+    },
+    "strict": {
+      "left": {
+        "name": "fn_8015A340",
+        "size": "1740",
+        "flags": 1,
+        "target_symbol": 1,
+        "match_percent": 84.65287
+      },
+      "right": {
+        "name": "fn_8015A340",
+        "size": "1656",
+        "flags": 1,
+        "target_symbol": 1,
+        "match_percent": 84.65287
+      }
+    }
+  },
+  "raw_relocation_tables": {
+    "retail": "\nRelocation section '.rela.text' at offset 0x70c contains 81 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n0000000a  00000406 R_PPC_ADDR16_HA        00000000   lbl_805B6E00 + 0\n0000000e  00000506 R_PPC_ADDR16_HA        00000000   lbl_805BB240 + 0\n0000001a  00000404 R_PPC_ADDR16_LO        00000000   lbl_805B6E00 + 0\n00000022  00000504 R_PPC_ADDR16_LO        00000000   lbl_805BB240 + 0\n0000002a  00000606 R_PPC_ADDR16_HA        00000000   lbl_8024F038 + 0\n00000032  00000604 R_PPC_ADDR16_LO        00000000   lbl_8024F038 + 0\n00000050  0000070a R_PPC_REL24            00000000   fn_8020D318 + 0\n00000070  0000080a R_PPC_REL24            00000000   fn_8020D250 + 0\n00000080  0000070a R_PPC_REL24            00000000   fn_8020D318 + 0\n0000009a  00000906 R_PPC_ADDR16_HA        00000000   lbl_8064DC80 + 0\n000000a2  00000904 R_PPC_ADDR16_LO        00000000   lbl_8064DC80 + 0\n000000c0  00000a0a R_PPC_REL24            00000000   fn_800F9D4C + 0\n00000118  00000b6d R_PPC_EMB_SDA21        00000000   lbl_8064BA30 + 0\n0000011c  00000c0a R_PPC_REL24            00000000   fn_802136A4 + 0\n00000128  00000d0a R_PPC_REL24            00000000   fn_80213394 + 0\n00000130  00000e6d R_PPC_EMB_SDA21        00000000   lbl_8064BA38 + 0\n00000134  00000c0a R_PPC_REL24            00000000   fn_802136A4 + 0\n0000015c  00000f0a R_PPC_REL24            00000000   OSDisableInterrupts + 0\n00000188  0000100a R_PPC_REL24            00000000   OSRestoreInterrupts + 0\n00000198  0000070a R_PPC_REL24            00000000   fn_8020D318 + 0\n000001b0  0000080a R_PPC_REL24            00000000   fn_8020D250 + 0\n000001b6  00000506 R_PPC_ADDR16_HA        00000000   lbl_805BB240 + 0\n000001ba  00001106 R_PPC_ADDR16_HA        00000000   fn_8015A17C + 0\n000001be  00000504 R_PPC_ADDR16_LO        00000000   lbl_805BB240 + 0\n000001c6  00001104 R_PPC_ADDR16_LO        00000000   fn_8015A17C + 0\n00000200  0000120a R_PPC_REL24            00000000   fn_802137F4 + 0\n00000218  0000070a R_PPC_REL24            00000000   fn_8020D318 + 0\n0000023c  0000130a R_PPC_REL24            00000000   fn_8021B730 + 0\n00000264  0000070a R_PPC_REL24            00000000   fn_8020D318 + 0\n0000026c  0000140a R_PPC_REL24            00000000   fn_8021345C + 0\n00000270  00000f0a R_PPC_REL24            00000000   OSDisableInterrupts + 0\n000002a4  0000100a R_PPC_REL24            00000000   OSRestoreInterrupts + 0\n000002b6  00000506 R_PPC_ADDR16_HA        00000000   lbl_805BB240 + 0\n000002c6  00000504 R_PPC_ADDR16_LO        00000000   lbl_805BB240 + 0\n000002d4  0000156d R_PPC_EMB_SDA21        00000000   lbl_8064D170 + 0\n000002f0  0000160a R_PPC_REL24            00000000   fn_8015B274 + 0\n000002f4  00000f0a R_PPC_REL24            00000000   OSDisableInterrupts + 0\n00000330  0000100a R_PPC_REL24            00000000   OSRestoreInterrupts + 0\n00000338  0000170a R_PPC_REL24            00000000   fn_80159088 + 0\n00000360  0000080a R_PPC_REL24            00000000   fn_8020D250 + 0\n0000037c  0000180a R_PPC_REL24            00000000   fn_80158E7C + 0\n0000038a  00001906 R_PPC_ADDR16_HA        00000000   lbl_80241DE8 + 0\n00000392  00001904 R_PPC_ADDR16_LO        00000000   lbl_80241DE8 + 0\n000003b0  00001a0a R_PPC_REL24            00000000   fn_80008014 + 0\n000003c4  00000a0a R_PPC_REL24            00000000   fn_800F9D4C + 0\n000003cc  00001b0a R_PPC_REL24            00000000   fn_8015A314 + 0\n000003e0  00001c0a R_PPC_REL24            00000000   fn_8015D304 + 0\n000003f8  00001d0a R_PPC_REL24            00000000   fn_801332E0 + 0\n00000404  00001e6d R_PPC_EMB_SDA21        00000000   lbl_8064D140 + 0\n0000040c  00001f0a R_PPC_REL24            00000000   fn_8015D4EC + 0\n00000410  00001e6d R_PPC_EMB_SDA21        00000000   lbl_8064D140 + 0\n0000042c  00001e6d R_PPC_EMB_SDA21        00000000   lbl_8064D140 + 0\n00000430  00001f0a R_PPC_REL24            00000000   fn_8015D4EC + 0\n00000438  0000200a R_PPC_REL24            00000000   fn_801332E8 + 0\n0000044c  00001f0a R_PPC_REL24            00000000   fn_8015D4EC + 0\n00000454  0000210a R_PPC_REL24            00000000   fn_80131408 + 0\n0000045c  0000200a R_PPC_REL24            00000000   fn_801332E8 + 0\n00000464  00001e6d R_PPC_EMB_SDA21        00000000   lbl_8064D140 + 0\n00000510  0000220a R_PPC_REL24            00000000   fn_80155BB0 + 0\n00000516  00002306 R_PPC_ADDR16_HA        00000000   lbl_805E2600 + 0\n0000051e  00002304 R_PPC_ADDR16_LO        00000000   lbl_805E2600 + 0\n00000524  0000080a R_PPC_REL24            00000000   fn_8020D250 + 0\n0000053c  0000220a R_PPC_REL24            00000000   fn_80155BB0 + 0\n0000054c  00001b0a R_PPC_REL24            00000000   fn_8015A314 + 0\n0000056c  0000070a R_PPC_REL24            00000000   fn_8020D318 + 0\n00000578  00000f0a R_PPC_REL24            00000000   OSDisableInterrupts + 0\n000005ac  0000100a R_PPC_REL24            00000000   OSRestoreInterrupts + 0\n000005b0  0000240a R_PPC_REL24            00000000   fn_8015DF60 + 0\n000005cc  00001f0a R_PPC_REL24            00000000   fn_8015D4EC + 0\n000005d8  0000250a R_PPC_REL24            00000000   DCInvalidateRange + 0\n000005de  00002606 R_PPC_ADDR16_HA        00000000   lbl_805E2620 + 0\n000005e2  00001106 R_PPC_ADDR16_HA        00000000   fn_8015A17C + 0\n000005e6  00001104 R_PPC_ADDR16_LO        00000000   fn_8015A17C + 0\n000005ee  00002604 R_PPC_ADDR16_LO        00000000   lbl_805E2620 + 0\n00000604  0000130a R_PPC_REL24            00000000   fn_8021B730 + 0\n00000614  0000070a R_PPC_REL24            00000000   fn_8020D318 + 0\n00000618  00000f0a R_PPC_REL24            00000000   OSDisableInterrupts + 0\n0000063c  0000270a R_PPC_REL24            00000000   fn_80158E84 + 0\n0000069c  0000100a R_PPC_REL24            00000000   OSRestoreInterrupts + 0\n000006b8  0000080a R_PPC_REL24            00000000   fn_8020D250 + 0\n000006c4  0000280a R_PPC_REL24            00000000   fn_8015C020 + 0\n",
+    "generated": "\nRelocation section '.rela.text' at offset 0x6ac contains 81 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n0000000a  00000406 R_PPC_ADDR16_HA        00000000   lbl_805BB240 + 0\n0000000e  00000306 R_PPC_ADDR16_HA        00000000   lbl_805B6E00 + 0\n00000016  00000404 R_PPC_ADDR16_LO        00000000   lbl_805BB240 + 0\n0000001a  00000506 R_PPC_ADDR16_HA        00000000   lbl_8024F038 + 0\n00000022  00000304 R_PPC_ADDR16_LO        00000000   lbl_805B6E00 + 0\n00000036  00000504 R_PPC_ADDR16_LO        00000000   lbl_8024F038 + 0\n00000044  00000e0a R_PPC_REL24            00000000   fn_8020D318 + 0\n00000064  00000f0a R_PPC_REL24            00000000   fn_8020D250 + 0\n00000074  00000e0a R_PPC_REL24            00000000   fn_8020D318 + 0\n0000008e  00000606 R_PPC_ADDR16_HA        00000000   lbl_8064DC80 + 0\n00000096  00000604 R_PPC_ADDR16_LO        00000000   lbl_8064DC80 + 0\n000000b0  0000100a R_PPC_REL24            00000000   fn_800F9D4C + 0\n0000010c  0000076d R_PPC_EMB_SDA21        00000000   lbl_8064BA30 + 0\n00000110  0000110a R_PPC_REL24            00000000   fn_802136A4 + 0\n0000011c  0000120a R_PPC_REL24            00000000   fn_80213394 + 0\n00000124  0000086d R_PPC_EMB_SDA21        00000000   lbl_8064BA38 + 0\n00000128  0000110a R_PPC_REL24            00000000   fn_802136A4 + 0\n0000014c  0000130a R_PPC_REL24            00000000   OSDisableInterrupts + 0\n00000170  0000140a R_PPC_REL24            00000000   OSRestoreInterrupts + 0\n00000180  00000e0a R_PPC_REL24            00000000   fn_8020D318 + 0\n00000198  00000f0a R_PPC_REL24            00000000   fn_8020D250 + 0\n0000019e  00000406 R_PPC_ADDR16_HA        00000000   lbl_805BB240 + 0\n000001a2  00001606 R_PPC_ADDR16_HA        00000000   fn_8015A17C + 0\n000001a6  00000404 R_PPC_ADDR16_LO        00000000   lbl_805BB240 + 0\n000001ae  00001604 R_PPC_ADDR16_LO        00000000   fn_8015A17C + 0\n000001e8  0000150a R_PPC_REL24            00000000   fn_802137F4 + 0\n00000200  00000e0a R_PPC_REL24            00000000   fn_8020D318 + 0\n00000224  0000170a R_PPC_REL24            00000000   fn_8021B730 + 0\n0000024c  00000e0a R_PPC_REL24            00000000   fn_8020D318 + 0\n00000254  0000180a R_PPC_REL24            00000000   fn_8021345C + 0\n00000258  0000130a R_PPC_REL24            00000000   OSDisableInterrupts + 0\n0000027c  0000140a R_PPC_REL24            00000000   OSRestoreInterrupts + 0\n0000028e  00000406 R_PPC_ADDR16_HA        00000000   lbl_805BB240 + 0\n00000298  0000096d R_PPC_EMB_SDA21        00000000   lbl_8064D170 + 0\n0000029e  00000404 R_PPC_ADDR16_LO        00000000   lbl_805BB240 + 0\n000002c0  0000190a R_PPC_REL24            00000000   fn_8015B274 + 0\n000002c4  0000130a R_PPC_REL24            00000000   OSDisableInterrupts + 0\n000002f8  0000140a R_PPC_REL24            00000000   OSRestoreInterrupts + 0\n00000300  00001a0a R_PPC_REL24            00000000   fn_80159088 + 0\n00000320  00000f0a R_PPC_REL24            00000000   fn_8020D250 + 0\n00000330  00001b0a R_PPC_REL24            00000000   fn_80158E7C + 0\n0000033e  00000a06 R_PPC_ADDR16_HA        00000000   lbl_80241DE8 + 0\n00000346  00000a04 R_PPC_ADDR16_LO        00000000   lbl_80241DE8 + 0\n00000364  00001c0a R_PPC_REL24            00000000   fn_80008014 + 0\n00000378  0000100a R_PPC_REL24            00000000   fn_800F9D4C + 0\n00000380  00001d0a R_PPC_REL24            00000000   fn_8015A314 + 0\n00000394  00001e0a R_PPC_REL24            00000000   fn_8015D304 + 0\n000003ac  00001f0a R_PPC_REL24            00000000   fn_801332E0 + 0\n000003b8  00000b6d R_PPC_EMB_SDA21        00000000   lbl_8064D140 + 0\n000003c0  0000200a R_PPC_REL24            00000000   fn_8015D4EC + 0\n000003c4  00000b6d R_PPC_EMB_SDA21        00000000   lbl_8064D140 + 0\n000003e0  00000b6d R_PPC_EMB_SDA21        00000000   lbl_8064D140 + 0\n000003e4  0000200a R_PPC_REL24            00000000   fn_8015D4EC + 0\n000003ec  0000210a R_PPC_REL24            00000000   fn_801332E8 + 0\n00000400  0000200a R_PPC_REL24            00000000   fn_8015D4EC + 0\n00000408  0000220a R_PPC_REL24            00000000   fn_80131408 + 0\n00000410  0000210a R_PPC_REL24            00000000   fn_801332E8 + 0\n00000418  00000b6d R_PPC_EMB_SDA21        00000000   lbl_8064D140 + 0\n000004c4  0000230a R_PPC_REL24            00000000   fn_80155BB0 + 0\n000004ca  00000c06 R_PPC_ADDR16_HA        00000000   lbl_805E2600 + 0\n000004d2  00000c04 R_PPC_ADDR16_LO        00000000   lbl_805E2600 + 0\n000004d8  00000f0a R_PPC_REL24            00000000   fn_8020D250 + 0\n000004f0  0000230a R_PPC_REL24            00000000   fn_80155BB0 + 0\n00000500  00001d0a R_PPC_REL24            00000000   fn_8015A314 + 0\n00000520  00000e0a R_PPC_REL24            00000000   fn_8020D318 + 0\n0000052c  0000130a R_PPC_REL24            00000000   OSDisableInterrupts + 0\n00000560  0000140a R_PPC_REL24            00000000   OSRestoreInterrupts + 0\n00000564  0000240a R_PPC_REL24            00000000   fn_8015DF60 + 0\n00000580  0000200a R_PPC_REL24            00000000   fn_8015D4EC + 0\n0000058c  0000250a R_PPC_REL24            00000000   DCInvalidateRange + 0\n00000592  00000d06 R_PPC_ADDR16_HA        00000000   lbl_805E2620 + 0\n00000596  00001606 R_PPC_ADDR16_HA        00000000   fn_8015A17C + 0\n0000059a  00001604 R_PPC_ADDR16_LO        00000000   fn_8015A17C + 0\n000005a2  00000d04 R_PPC_ADDR16_LO        00000000   lbl_805E2620 + 0\n000005b8  0000170a R_PPC_REL24            00000000   fn_8021B730 + 0\n000005c8  00000e0a R_PPC_REL24            00000000   fn_8020D318 + 0\n000005cc  0000130a R_PPC_REL24            00000000   OSDisableInterrupts + 0\n000005f0  0000260a R_PPC_REL24            00000000   fn_80158E84 + 0\n00000648  0000140a R_PPC_REL24            00000000   OSRestoreInterrupts + 0\n00000664  00000f0a R_PPC_REL24            00000000   fn_8020D250 + 0\n00000670  0000270a R_PPC_REL24            00000000   fn_8015C020 + 0\n"
+  },
+  "relocation_comparison": {
+    "tuple_columns": [
+      "section_offset",
+      "type",
+      "target_symbol",
+      "signed_addend"
+    ],
+    "retail": [
+      [
+        10,
+        "R_PPC_ADDR16_HA",
+        "lbl_805B6E00",
+        0
+      ],
+      [
+        14,
+        "R_PPC_ADDR16_HA",
+        "lbl_805BB240",
+        0
+      ],
+      [
+        26,
+        "R_PPC_ADDR16_LO",
+        "lbl_805B6E00",
+        0
+      ],
+      [
+        34,
+        "R_PPC_ADDR16_LO",
+        "lbl_805BB240",
+        0
+      ],
+      [
+        42,
+        "R_PPC_ADDR16_HA",
+        "lbl_8024F038",
+        0
+      ],
+      [
+        50,
+        "R_PPC_ADDR16_LO",
+        "lbl_8024F038",
+        0
+      ],
+      [
+        80,
+        "R_PPC_REL24",
+        "fn_8020D318",
+        0
+      ],
+      [
+        112,
+        "R_PPC_REL24",
+        "fn_8020D250",
+        0
+      ],
+      [
+        128,
+        "R_PPC_REL24",
+        "fn_8020D318",
+        0
+      ],
+      [
+        154,
+        "R_PPC_ADDR16_HA",
+        "lbl_8064DC80",
+        0
+      ],
+      [
+        162,
+        "R_PPC_ADDR16_LO",
+        "lbl_8064DC80",
+        0
+      ],
+      [
+        192,
+        "R_PPC_REL24",
+        "fn_800F9D4C",
+        0
+      ],
+      [
+        280,
+        "R_PPC_EMB_SDA21",
+        "lbl_8064BA30",
+        0
+      ],
+      [
+        284,
+        "R_PPC_REL24",
+        "fn_802136A4",
+        0
+      ],
+      [
+        296,
+        "R_PPC_REL24",
+        "fn_80213394",
+        0
+      ],
+      [
+        304,
+        "R_PPC_EMB_SDA21",
+        "lbl_8064BA38",
+        0
+      ],
+      [
+        308,
+        "R_PPC_REL24",
+        "fn_802136A4",
+        0
+      ],
+      [
+        348,
+        "R_PPC_REL24",
+        "OSDisableInterrupts",
+        0
+      ],
+      [
+        392,
+        "R_PPC_REL24",
+        "OSRestoreInterrupts",
+        0
+      ],
+      [
+        408,
+        "R_PPC_REL24",
+        "fn_8020D318",
+        0
+      ],
+      [
+        432,
+        "R_PPC_REL24",
+        "fn_8020D250",
+        0
+      ],
+      [
+        438,
+        "R_PPC_ADDR16_HA",
+        "lbl_805BB240",
+        0
+      ],
+      [
+        442,
+        "R_PPC_ADDR16_HA",
+        "fn_8015A17C",
+        0
+      ],
+      [
+        446,
+        "R_PPC_ADDR16_LO",
+        "lbl_805BB240",
+        0
+      ],
+      [
+        454,
+        "R_PPC_ADDR16_LO",
+        "fn_8015A17C",
+        0
+      ],
+      [
+        512,
+        "R_PPC_REL24",
+        "fn_802137F4",
+        0
+      ],
+      [
+        536,
+        "R_PPC_REL24",
+        "fn_8020D318",
+        0
+      ],
+      [
+        572,
+        "R_PPC_REL24",
+        "fn_8021B730",
+        0
+      ],
+      [
+        612,
+        "R_PPC_REL24",
+        "fn_8020D318",
+        0
+      ],
+      [
+        620,
+        "R_PPC_REL24",
+        "fn_8021345C",
+        0
+      ],
+      [
+        624,
+        "R_PPC_REL24",
+        "OSDisableInterrupts",
+        0
+      ],
+      [
+        676,
+        "R_PPC_REL24",
+        "OSRestoreInterrupts",
+        0
+      ],
+      [
+        694,
+        "R_PPC_ADDR16_HA",
+        "lbl_805BB240",
+        0
+      ],
+      [
+        710,
+        "R_PPC_ADDR16_LO",
+        "lbl_805BB240",
+        0
+      ],
+      [
+        724,
+        "R_PPC_EMB_SDA21",
+        "lbl_8064D170",
+        0
+      ],
+      [
+        752,
+        "R_PPC_REL24",
+        "fn_8015B274",
+        0
+      ],
+      [
+        756,
+        "R_PPC_REL24",
+        "OSDisableInterrupts",
+        0
+      ],
+      [
+        816,
+        "R_PPC_REL24",
+        "OSRestoreInterrupts",
+        0
+      ],
+      [
+        824,
+        "R_PPC_REL24",
+        "fn_80159088",
+        0
+      ],
+      [
+        864,
+        "R_PPC_REL24",
+        "fn_8020D250",
+        0
+      ],
+      [
+        892,
+        "R_PPC_REL24",
+        "fn_80158E7C",
+        0
+      ],
+      [
+        906,
+        "R_PPC_ADDR16_HA",
+        "lbl_80241DE8",
+        0
+      ],
+      [
+        914,
+        "R_PPC_ADDR16_LO",
+        "lbl_80241DE8",
+        0
+      ],
+      [
+        944,
+        "R_PPC_REL24",
+        "fn_80008014",
+        0
+      ],
+      [
+        964,
+        "R_PPC_REL24",
+        "fn_800F9D4C",
+        0
+      ],
+      [
+        972,
+        "R_PPC_REL24",
+        "fn_8015A314",
+        0
+      ],
+      [
+        992,
+        "R_PPC_REL24",
+        "fn_8015D304",
+        0
+      ],
+      [
+        1016,
+        "R_PPC_REL24",
+        "fn_801332E0",
+        0
+      ],
+      [
+        1028,
+        "R_PPC_EMB_SDA21",
+        "lbl_8064D140",
+        0
+      ],
+      [
+        1036,
+        "R_PPC_REL24",
+        "fn_8015D4EC",
+        0
+      ],
+      [
+        1040,
+        "R_PPC_EMB_SDA21",
+        "lbl_8064D140",
+        0
+      ],
+      [
+        1068,
+        "R_PPC_EMB_SDA21",
+        "lbl_8064D140",
+        0
+      ],
+      [
+        1072,
+        "R_PPC_REL24",
+        "fn_8015D4EC",
+        0
+      ],
+      [
+        1080,
+        "R_PPC_REL24",
+        "fn_801332E8",
+        0
+      ],
+      [
+        1100,
+        "R_PPC_REL24",
+        "fn_8015D4EC",
+        0
+      ],
+      [
+        1108,
+        "R_PPC_REL24",
+        "fn_80131408",
+        0
+      ],
+      [
+        1116,
+        "R_PPC_REL24",
+        "fn_801332E8",
+        0
+      ],
+      [
+        1124,
+        "R_PPC_EMB_SDA21",
+        "lbl_8064D140",
+        0
+      ],
+      [
+        1296,
+        "R_PPC_REL24",
+        "fn_80155BB0",
+        0
+      ],
+      [
+        1302,
+        "R_PPC_ADDR16_HA",
+        "lbl_805E2600",
+        0
+      ],
+      [
+        1310,
+        "R_PPC_ADDR16_LO",
+        "lbl_805E2600",
+        0
+      ],
+      [
+        1316,
+        "R_PPC_REL24",
+        "fn_8020D250",
+        0
+      ],
+      [
+        1340,
+        "R_PPC_REL24",
+        "fn_80155BB0",
+        0
+      ],
+      [
+        1356,
+        "R_PPC_REL24",
+        "fn_8015A314",
+        0
+      ],
+      [
+        1388,
+        "R_PPC_REL24",
+        "fn_8020D318",
+        0
+      ],
+      [
+        1400,
+        "R_PPC_REL24",
+        "OSDisableInterrupts",
+        0
+      ],
+      [
+        1452,
+        "R_PPC_REL24",
+        "OSRestoreInterrupts",
+        0
+      ],
+      [
+        1456,
+        "R_PPC_REL24",
+        "fn_8015DF60",
+        0
+      ],
+      [
+        1484,
+        "R_PPC_REL24",
+        "fn_8015D4EC",
+        0
+      ],
+      [
+        1496,
+        "R_PPC_REL24",
+        "DCInvalidateRange",
+        0
+      ],
+      [
+        1502,
+        "R_PPC_ADDR16_HA",
+        "lbl_805E2620",
+        0
+      ],
+      [
+        1506,
+        "R_PPC_ADDR16_HA",
+        "fn_8015A17C",
+        0
+      ],
+      [
+        1510,
+        "R_PPC_ADDR16_LO",
+        "fn_8015A17C",
+        0
+      ],
+      [
+        1518,
+        "R_PPC_ADDR16_LO",
+        "lbl_805E2620",
+        0
+      ],
+      [
+        1540,
+        "R_PPC_REL24",
+        "fn_8021B730",
+        0
+      ],
+      [
+        1556,
+        "R_PPC_REL24",
+        "fn_8020D318",
+        0
+      ],
+      [
+        1560,
+        "R_PPC_REL24",
+        "OSDisableInterrupts",
+        0
+      ],
+      [
+        1596,
+        "R_PPC_REL24",
+        "fn_80158E84",
+        0
+      ],
+      [
+        1692,
+        "R_PPC_REL24",
+        "OSRestoreInterrupts",
+        0
+      ],
+      [
+        1720,
+        "R_PPC_REL24",
+        "fn_8020D250",
+        0
+      ],
+      [
+        1732,
+        "R_PPC_REL24",
+        "fn_8015C020",
+        0
+      ]
+    ],
+    "generated": [
+      [
+        10,
+        "R_PPC_ADDR16_HA",
+        "lbl_805BB240",
+        0
+      ],
+      [
+        14,
+        "R_PPC_ADDR16_HA",
+        "lbl_805B6E00",
+        0
+      ],
+      [
+        22,
+        "R_PPC_ADDR16_LO",
+        "lbl_805BB240",
+        0
+      ],
+      [
+        26,
+        "R_PPC_ADDR16_HA",
+        "lbl_8024F038",
+        0
+      ],
+      [
+        34,
+        "R_PPC_ADDR16_LO",
+        "lbl_805B6E00",
+        0
+      ],
+      [
+        54,
+        "R_PPC_ADDR16_LO",
+        "lbl_8024F038",
+        0
+      ],
+      [
+        68,
+        "R_PPC_REL24",
+        "fn_8020D318",
+        0
+      ],
+      [
+        100,
+        "R_PPC_REL24",
+        "fn_8020D250",
+        0
+      ],
+      [
+        116,
+        "R_PPC_REL24",
+        "fn_8020D318",
+        0
+      ],
+      [
+        142,
+        "R_PPC_ADDR16_HA",
+        "lbl_8064DC80",
+        0
+      ],
+      [
+        150,
+        "R_PPC_ADDR16_LO",
+        "lbl_8064DC80",
+        0
+      ],
+      [
+        176,
+        "R_PPC_REL24",
+        "fn_800F9D4C",
+        0
+      ],
+      [
+        268,
+        "R_PPC_EMB_SDA21",
+        "lbl_8064BA30",
+        0
+      ],
+      [
+        272,
+        "R_PPC_REL24",
+        "fn_802136A4",
+        0
+      ],
+      [
+        284,
+        "R_PPC_REL24",
+        "fn_80213394",
+        0
+      ],
+      [
+        292,
+        "R_PPC_EMB_SDA21",
+        "lbl_8064BA38",
+        0
+      ],
+      [
+        296,
+        "R_PPC_REL24",
+        "fn_802136A4",
+        0
+      ],
+      [
+        332,
+        "R_PPC_REL24",
+        "OSDisableInterrupts",
+        0
+      ],
+      [
+        368,
+        "R_PPC_REL24",
+        "OSRestoreInterrupts",
+        0
+      ],
+      [
+        384,
+        "R_PPC_REL24",
+        "fn_8020D318",
+        0
+      ],
+      [
+        408,
+        "R_PPC_REL24",
+        "fn_8020D250",
+        0
+      ],
+      [
+        414,
+        "R_PPC_ADDR16_HA",
+        "lbl_805BB240",
+        0
+      ],
+      [
+        418,
+        "R_PPC_ADDR16_HA",
+        "fn_8015A17C",
+        0
+      ],
+      [
+        422,
+        "R_PPC_ADDR16_LO",
+        "lbl_805BB240",
+        0
+      ],
+      [
+        430,
+        "R_PPC_ADDR16_LO",
+        "fn_8015A17C",
+        0
+      ],
+      [
+        488,
+        "R_PPC_REL24",
+        "fn_802137F4",
+        0
+      ],
+      [
+        512,
+        "R_PPC_REL24",
+        "fn_8020D318",
+        0
+      ],
+      [
+        548,
+        "R_PPC_REL24",
+        "fn_8021B730",
+        0
+      ],
+      [
+        588,
+        "R_PPC_REL24",
+        "fn_8020D318",
+        0
+      ],
+      [
+        596,
+        "R_PPC_REL24",
+        "fn_8021345C",
+        0
+      ],
+      [
+        600,
+        "R_PPC_REL24",
+        "OSDisableInterrupts",
+        0
+      ],
+      [
+        636,
+        "R_PPC_REL24",
+        "OSRestoreInterrupts",
+        0
+      ],
+      [
+        654,
+        "R_PPC_ADDR16_HA",
+        "lbl_805BB240",
+        0
+      ],
+      [
+        664,
+        "R_PPC_EMB_SDA21",
+        "lbl_8064D170",
+        0
+      ],
+      [
+        670,
+        "R_PPC_ADDR16_LO",
+        "lbl_805BB240",
+        0
+      ],
+      [
+        704,
+        "R_PPC_REL24",
+        "fn_8015B274",
+        0
+      ],
+      [
+        708,
+        "R_PPC_REL24",
+        "OSDisableInterrupts",
+        0
+      ],
+      [
+        760,
+        "R_PPC_REL24",
+        "OSRestoreInterrupts",
+        0
+      ],
+      [
+        768,
+        "R_PPC_REL24",
+        "fn_80159088",
+        0
+      ],
+      [
+        800,
+        "R_PPC_REL24",
+        "fn_8020D250",
+        0
+      ],
+      [
+        816,
+        "R_PPC_REL24",
+        "fn_80158E7C",
+        0
+      ],
+      [
+        830,
+        "R_PPC_ADDR16_HA",
+        "lbl_80241DE8",
+        0
+      ],
+      [
+        838,
+        "R_PPC_ADDR16_LO",
+        "lbl_80241DE8",
+        0
+      ],
+      [
+        868,
+        "R_PPC_REL24",
+        "fn_80008014",
+        0
+      ],
+      [
+        888,
+        "R_PPC_REL24",
+        "fn_800F9D4C",
+        0
+      ],
+      [
+        896,
+        "R_PPC_REL24",
+        "fn_8015A314",
+        0
+      ],
+      [
+        916,
+        "R_PPC_REL24",
+        "fn_8015D304",
+        0
+      ],
+      [
+        940,
+        "R_PPC_REL24",
+        "fn_801332E0",
+        0
+      ],
+      [
+        952,
+        "R_PPC_EMB_SDA21",
+        "lbl_8064D140",
+        0
+      ],
+      [
+        960,
+        "R_PPC_REL24",
+        "fn_8015D4EC",
+        0
+      ],
+      [
+        964,
+        "R_PPC_EMB_SDA21",
+        "lbl_8064D140",
+        0
+      ],
+      [
+        992,
+        "R_PPC_EMB_SDA21",
+        "lbl_8064D140",
+        0
+      ],
+      [
+        996,
+        "R_PPC_REL24",
+        "fn_8015D4EC",
+        0
+      ],
+      [
+        1004,
+        "R_PPC_REL24",
+        "fn_801332E8",
+        0
+      ],
+      [
+        1024,
+        "R_PPC_REL24",
+        "fn_8015D4EC",
+        0
+      ],
+      [
+        1032,
+        "R_PPC_REL24",
+        "fn_80131408",
+        0
+      ],
+      [
+        1040,
+        "R_PPC_REL24",
+        "fn_801332E8",
+        0
+      ],
+      [
+        1048,
+        "R_PPC_EMB_SDA21",
+        "lbl_8064D140",
+        0
+      ],
+      [
+        1220,
+        "R_PPC_REL24",
+        "fn_80155BB0",
+        0
+      ],
+      [
+        1226,
+        "R_PPC_ADDR16_HA",
+        "lbl_805E2600",
+        0
+      ],
+      [
+        1234,
+        "R_PPC_ADDR16_LO",
+        "lbl_805E2600",
+        0
+      ],
+      [
+        1240,
+        "R_PPC_REL24",
+        "fn_8020D250",
+        0
+      ],
+      [
+        1264,
+        "R_PPC_REL24",
+        "fn_80155BB0",
+        0
+      ],
+      [
+        1280,
+        "R_PPC_REL24",
+        "fn_8015A314",
+        0
+      ],
+      [
+        1312,
+        "R_PPC_REL24",
+        "fn_8020D318",
+        0
+      ],
+      [
+        1324,
+        "R_PPC_REL24",
+        "OSDisableInterrupts",
+        0
+      ],
+      [
+        1376,
+        "R_PPC_REL24",
+        "OSRestoreInterrupts",
+        0
+      ],
+      [
+        1380,
+        "R_PPC_REL24",
+        "fn_8015DF60",
+        0
+      ],
+      [
+        1408,
+        "R_PPC_REL24",
+        "fn_8015D4EC",
+        0
+      ],
+      [
+        1420,
+        "R_PPC_REL24",
+        "DCInvalidateRange",
+        0
+      ],
+      [
+        1426,
+        "R_PPC_ADDR16_HA",
+        "lbl_805E2620",
+        0
+      ],
+      [
+        1430,
+        "R_PPC_ADDR16_HA",
+        "fn_8015A17C",
+        0
+      ],
+      [
+        1434,
+        "R_PPC_ADDR16_LO",
+        "fn_8015A17C",
+        0
+      ],
+      [
+        1442,
+        "R_PPC_ADDR16_LO",
+        "lbl_805E2620",
+        0
+      ],
+      [
+        1464,
+        "R_PPC_REL24",
+        "fn_8021B730",
+        0
+      ],
+      [
+        1480,
+        "R_PPC_REL24",
+        "fn_8020D318",
+        0
+      ],
+      [
+        1484,
+        "R_PPC_REL24",
+        "OSDisableInterrupts",
+        0
+      ],
+      [
+        1520,
+        "R_PPC_REL24",
+        "fn_80158E84",
+        0
+      ],
+      [
+        1608,
+        "R_PPC_REL24",
+        "OSRestoreInterrupts",
+        0
+      ],
+      [
+        1636,
+        "R_PPC_REL24",
+        "fn_8020D250",
+        0
+      ],
+      [
+        1648,
+        "R_PPC_REL24",
+        "fn_8015C020",
+        0
+      ]
+    ],
+    "retail_count": 81,
+    "generated_count": 81,
+    "exact_ordered_equal": false,
+    "equal_tuples_at_same_sequence_index": 0,
+    "equal_type_target_addend_at_same_sequence_index": 74,
+    "note": "Counts are raw ELF .rela.text records, not objdiff synthetic relocation annotations. Ordered tuple comparison uses all offsets, types, symbol names and signed addends; no stripping or normalization."
+  },
+  "byte_comparison": {
+    "text_equal": false,
+    "retail_bytes": 1740,
+    "generated_bytes": 1656,
+    "retail_text_sha256": "0d1f11edbade056c3f6045b975b20dca1fbf3abc92d40571a625c7fae8f70418",
+    "generated_text_sha256": "4a5f393f199afb372c189d6f6ea572073161893a6df78458fc3cb63211f0cf9b",
+    "same_instruction_words_at_identical_offsets": 10
+  },
+  "different_codegen_hypothesis": "Retail repeats shared-state loads and snapshots descriptor/cursor values before calls. Restore volatile stream/control/queue access, model separate 0x3C file and 0x20 request structs plus 0x10/0x20 name arrays, and keep explicit function-scope context/string/DMA aliases. These are distinct from the rejected all-local and name/request aggregate layouts; no historical aggregate variant was repeated.",
+  "semantic_audit": [
+    "handled starts at zero outside the permanent loop. Only successful bulk-read, stream-init and stream-fill paths assign one. 0x40000000 and 0xFFE00000 leave it unchanged, including when either command arrives first.",
+    "Descriptor first word is read as int and its low half is sign extended before fn_80008014(value, kind); the same snapshot is passed to the filename formatter after the call. Volatile stream index is read twice, as in retail offsets 0x384/0x38C.",
+    "Streaming layout: index@0, flag@2, state@3, start@0x10, end@0x14, cursor@0x18, loaded@0x1C, chunk@0x20, chunkLoaded@0x24, total@0x28, boundary@0x2C, length@0x30, initial@0x34, loadedCopy@0x38, source@0x4C; completion queue@0x50 relative to stream.",
+    "The loaded addition is only in the threshold else branch; chunkLoaded uses the just-stored chunk minus start, matching retail loads at 0x4C0/0x4C4. State 4 compares loaded with chunkLoaded, not chunk.",
+    "DMA destination in the stream-fill path is captured before fn_8015D4EC and DCInvalidateRange, matching the retail cursor snapshot at 0x5BC.",
+    "Transfer tag is signed 16-bit, matching retail lhax. Controls and queues are volatile pointer slots and are reloaded for each access, as in retail.",
+    "Typed FileInfo is 0x3C bytes, length@0x34. Request is a separate aligned 0x20-byte object. Generated name@r1+0x10, streamName@r1+0x20, request@r1+0x40, file@r1+0x60 and frame 0xF0 agree with retail.",
+    "No whole-function/inline assembly, helper functions, binary patches, compiler-policy changes, runtime edits or neighboring-function changes. Registration and split already existed and remain unchanged. This is a reviewed reconstruction, not a claim of proven runtime equivalence."
+  ],
+  "remaining_divergences": [
+    "Retail text is 1740 bytes; generated text is 1656 bytes. Canonical and relocation-strict objdiff both measure 84.652870%, not a match.",
+    "Retail keeps a separate stream base in r22 and completion queue pointer in r14; generated accesses stream fields by larger displacements from the context register.",
+    "Retail recomputes slot*0x18 and uses indexed transfer/control accesses across calls; generated retains derived addresses and uses displacement loads/stores, shortening the function.",
+    "The command mask is scheduled after the filename call in generated code but before it in retail; its input snapshot is still the same received message.",
+    "Register allocation, prologue address materialization order, instruction scheduling, branch displacements and relocation offsets/ordered tuples remain different despite equal relocation counts and matching stack object positions."
+  ],
+  "build": {
+    "configure_exit_code": 0,
+    "ninja_exit_code": 0,
+    "source_is_linked": false,
+    "note": "NonMatching registration retains retail object in canonical DOL; DOL identity verifies integration safety, not C equivalence."
+  },
+  "raw_dol_verification": "ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol\ncmp_exit=0",
+  "raw_legal_audit": "legal audit passed (23433 tracked project files inspected)\n",
+  "source_sha256": "47625dd009845611ff68e5e11d9678f5a3e4746caf65184adca039e883d9fa3c",
+  "result": "attempted",
+  "relocation_comparison_command": "python3 - <<'PY'\nimport json, re, subprocess\nrows = []\nfor kind in (\"obj\", \"src\"):\n    path = \"build/GEDE01/\" + kind + \"/game/game_fn_8015A340.o\"\n    raw = subprocess.check_output([\"readelf\", \"-rW\", path], text=True)\n    records = []\n    for line in raw.splitlines():\n        m = re.match(r\"^([0-9a-f]{8})\\s+[0-9a-f]+\\s+(\\S+)\\s+[0-9a-f]+\\s+(\\S+)\\s+([+-])\\s+([0-9a-f]+)$\", line)\n        if m:\n            offset, type_, target, sign, addend = m.groups()\n            records.append([int(offset, 16), type_, target, int(addend, 16) * (-1 if sign == \"-\" else 1)])\n    rows.append(records)\na, b = rows\nprint(json.dumps({\"retail_count\": len(a), \"generated_count\": len(b), \"exact_ordered_equal\": a == b, \"equal_tuples_at_same_sequence_index\": sum(x == y for x, y in zip(a, b)), \"equal_type_target_addend_at_same_sequence_index\": sum(x[1:] == y[1:] for x, y in zip(a, b))}, indent=2))\nPY",
+  "raw_relocation_comparison_output": "{\n  \"retail_count\": 81,\n  \"generated_count\": 81,\n  \"exact_ordered_equal\": false,\n  \"equal_tuples_at_same_sequence_index\": 0,\n  \"equal_type_target_addend_at_same_sequence_index\": 74\n}\n",
+  "evidence_formatting": "Text logs retain all lines; CRLF was normalized to LF and trailing whitespace removed for git diff --check. Objdiff JSON and readelf table contents are preserved.",
+  "raw_diff_check": "git diff --cached --check: exit 0 after text-log whitespace normalization"
+}
