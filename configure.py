@@ -13177,6 +13177,7 @@ config.libs = [
             Object(NonMatching, "game/game_fn_80206F50.c", mw_version=SDK_MW_VERSION),
             Object(Matching, "game/game_fn_802070C4.c", mw_version=SDK_MW_VERSION),
             Object(Matching, "game/game_fn_80207144.c", mw_version=SDK_MW_VERSION),
+            Object(Matching, "game/game_fn_802071F8.c", mw_version=SDK_MW_VERSION, extra_cflags=["-use_lmw_stmw on"]),
             Object(NonMatching, "game/game_fn_801ED118.c", mw_version="GC/1.3"),
         ],
     },
