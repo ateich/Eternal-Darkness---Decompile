@@ -21,6 +21,7 @@ float fn_801F92F8(Vec3* point, Vec3* output, MotionResource* resource)
     float neighbor_distance = best;
     float amount, step;
     float result = lbl_80651464;
+    Vec3 first, second, direction, query, closest;
     int best_index = 0;
     int neighbor, i;
 
@@ -57,10 +58,8 @@ float fn_801F92F8(Vec3* point, Vec3* output, MotionResource* resource)
                 fn_80179814(a->first, b->first, a->third, a->second, output, amount);
             }
             result = a->time + amount * (b->time - a->time);
-            goto done;
         }
-    }
-    if (resource->linear_count != 0) {
+    } else if (resource->linear_count != 0) {
         for (i = 0; i < resource->linear_count; i++) {
             LinearKey* key = &resource->linear_keys[i];
             float distance = fn_801796D4(point->x, point->y, point->z,
@@ -80,7 +79,6 @@ float fn_801F92F8(Vec3* point, Vec3* output, MotionResource* resource)
             if (distance < neighbor_distance) neighbor = best_index - 1;
         }
         {
-            Vec3 first, second, direction, query, closest;
             float first_dot, interval, projection;
             LinearKey* a = &resource->linear_keys[best_index];
             LinearKey* b = &resource->linear_keys[neighbor];
@@ -92,14 +90,12 @@ float fn_801F92F8(Vec3* point, Vec3* output, MotionResource* resource)
             first_dot = fn_80211B44(&first, &direction);
             interval = fn_80211B44(&second, &direction) - first_dot;
             projection = fn_80211B44(&closest, &direction) - fn_80211B44(&first, &direction);
+            result = a->time;
             if (interval != lbl_80651464)
                 result = a->time + (projection / interval) * (b->time - a->time);
-            else
-                result = a->time;
-            goto done;
         }
+    } else {
+        output->x = resource->base[0]; output->y = resource->base[1]; output->z = resource->base[2];
     }
-    output->x = resource->base[0]; output->y = resource->base[1]; output->z = resource->base[2];
-done:
     return result;
 }
