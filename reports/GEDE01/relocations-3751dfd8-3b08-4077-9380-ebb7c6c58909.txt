@@ -1,0 +1,128 @@
+=== retail ===
+
+build/GEDE01/obj/game/game_fn_802075FC.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <EXIIntrruptHandler_802075FC>:
+   0:	7c 08 02 a6 	mflr    r0
+   4:	7c 65 07 34 	extsh   r5,r3
+   8:	90 01 00 04 	stw     r0,4(r1)
+   c:	3c 60 55 55 	lis     r3,21845
+  10:	38 05 ff f7 	addi    r0,r5,-9
+  14:	38 63 55 56 	addi    r3,r3,21846
+  18:	94 21 fd 08 	stwu    r1,-760(r1)
+  1c:	7c 63 00 96 	mulhw   r3,r3,r0
+  20:	93 e1 02 f4 	stw     r31,756(r1)
+  24:	93 c1 02 f0 	stw     r30,752(r1)
+  28:	54 60 0f fe 	srwi    r0,r3,31
+  2c:	93 a1 02 ec 	stw     r29,748(r1)
+  30:	7f e3 02 14 	add     r31,r3,r0
+  34:	3c 60 cc 00 	lis     r3,-13312
+  38:	38 e3 68 00 	addi    r7,r3,26624
+  3c:	1c 1f 00 14 	mulli   r0,r31,20
+  40:	7c e7 02 14 	add     r7,r7,r0
+  44:	80 c7 00 00 	lwz     r6,0(r7)
+  48:	3c 60 00 00 	lis     r3,0
+			4a: R_PPC_ADDR16_HA	Ecb_80640AA8
+  4c:	57 e5 30 32 	slwi    r5,r31,6
+  50:	70 c6 07 f5 	andi.   r6,r6,2037
+  54:	38 03 00 00 	addi    r0,r3,0
+			56: R_PPC_ADDR16_LO	Ecb_80640AA8
+  58:	7c 60 2a 14 	add     r3,r0,r5
+  5c:	60 c6 00 02 	ori     r6,r6,2
+  60:	90 c7 00 00 	stw     r6,0(r7)
+  64:	7c 9d 23 78 	mr      r29,r4
+  68:	80 03 00 00 	lwz     r0,0(r3)
+  6c:	28 00 00 00 	cmplwi  r0,0
+  70:	7c 1e 03 78 	mr      r30,r0
+  74:	41 82 00 38 	beq     ac <EXIIntrruptHandler_802075FC+0xac>
+  78:	38 61 00 18 	addi    r3,r1,24
+  7c:	48 00 00 01 	bl      7c <EXIIntrruptHandler_802075FC+0x7c>
+			7c: R_PPC_REL24	OSClearContext
+  80:	38 61 00 18 	addi    r3,r1,24
+  84:	48 00 00 01 	bl      84 <EXIIntrruptHandler_802075FC+0x84>
+			84: R_PPC_REL24	OSSetCurrentContext
+  88:	39 9e 00 00 	addi    r12,r30,0
+  8c:	7d 88 03 a6 	mtlr    r12
+  90:	38 7f 00 00 	addi    r3,r31,0
+  94:	38 9d 00 00 	addi    r4,r29,0
+  98:	4e 80 00 21 	blrl
+  9c:	38 61 00 18 	addi    r3,r1,24
+  a0:	48 00 00 01 	bl      a0 <EXIIntrruptHandler_802075FC+0xa0>
+			a0: R_PPC_REL24	OSClearContext
+  a4:	7f a3 eb 78 	mr      r3,r29
+  a8:	48 00 00 01 	bl      a8 <EXIIntrruptHandler_802075FC+0xa8>
+			a8: R_PPC_REL24	OSSetCurrentContext
+  ac:	80 01 02 fc 	lwz     r0,764(r1)
+  b0:	83 e1 02 f4 	lwz     r31,756(r1)
+  b4:	83 c1 02 f0 	lwz     r30,752(r1)
+  b8:	83 a1 02 ec 	lwz     r29,748(r1)
+  bc:	38 21 02 f8 	addi    r1,r1,760
+  c0:	7c 08 03 a6 	mtlr    r0
+  c4:	4e 80 00 20 	blr
+=== rebuilt ===
+
+build/GEDE01/src/game/game_fn_802075FC.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <EXIIntrruptHandler_802075FC>:
+   0:	7c 08 02 a6 	mflr    r0
+   4:	7c 65 07 34 	extsh   r5,r3
+   8:	90 01 00 04 	stw     r0,4(r1)
+   c:	3c 60 55 55 	lis     r3,21845
+  10:	38 05 ff f7 	addi    r0,r5,-9
+  14:	38 63 55 56 	addi    r3,r3,21846
+  18:	94 21 fd 10 	stwu    r1,-752(r1)
+  1c:	7c 63 00 96 	mulhw   r3,r3,r0
+  20:	93 e1 02 ec 	stw     r31,748(r1)
+  24:	93 c1 02 e8 	stw     r30,744(r1)
+  28:	54 60 0f fe 	srwi    r0,r3,31
+  2c:	93 a1 02 e4 	stw     r29,740(r1)
+  30:	7f e3 02 14 	add     r31,r3,r0
+  34:	3c 60 cc 00 	lis     r3,-13312
+  38:	38 e3 68 00 	addi    r7,r3,26624
+  3c:	1c 1f 00 14 	mulli   r0,r31,20
+  40:	7c e7 02 14 	add     r7,r7,r0
+  44:	80 07 00 00 	lwz     r0,0(r7)
+  48:	3c 60 00 00 	lis     r3,0
+			4a: R_PPC_ADDR16_HA	Ecb_80640AA8
+  4c:	57 e5 30 32 	slwi    r5,r31,6
+  50:	70 06 07 f5 	andi.   r6,r0,2037
+  54:	38 03 00 00 	addi    r0,r3,0
+			56: R_PPC_ADDR16_LO	Ecb_80640AA8
+  58:	7c 60 2a 14 	add     r3,r0,r5
+  5c:	60 c0 00 02 	ori     r0,r6,2
+  60:	90 07 00 00 	stw     r0,0(r7)
+  64:	7c 9d 23 78 	mr      r29,r4
+  68:	80 03 00 00 	lwz     r0,0(r3)
+  6c:	28 00 00 00 	cmplwi  r0,0
+  70:	7c 1e 03 78 	mr      r30,r0
+  74:	41 82 00 38 	beq     ac <EXIIntrruptHandler_802075FC+0xac>
+  78:	38 61 00 10 	addi    r3,r1,16
+  7c:	48 00 00 01 	bl      7c <EXIIntrruptHandler_802075FC+0x7c>
+			7c: R_PPC_REL24	OSClearContext
+  80:	38 61 00 10 	addi    r3,r1,16
+  84:	48 00 00 01 	bl      84 <EXIIntrruptHandler_802075FC+0x84>
+			84: R_PPC_REL24	OSSetCurrentContext
+  88:	39 9e 00 00 	addi    r12,r30,0
+  8c:	7d 88 03 a6 	mtlr    r12
+  90:	38 7f 00 00 	addi    r3,r31,0
+  94:	38 9d 00 00 	addi    r4,r29,0
+  98:	4e 80 00 21 	blrl
+  9c:	38 61 00 10 	addi    r3,r1,16
+  a0:	48 00 00 01 	bl      a0 <EXIIntrruptHandler_802075FC+0xa0>
+			a0: R_PPC_REL24	OSClearContext
+  a4:	7f a3 eb 78 	mr      r3,r29
+  a8:	48 00 00 01 	bl      a8 <EXIIntrruptHandler_802075FC+0xa8>
+			a8: R_PPC_REL24	OSSetCurrentContext
+  ac:	80 01 02 f4 	lwz     r0,756(r1)
+  b0:	83 e1 02 ec 	lwz     r31,748(r1)
+  b4:	83 c1 02 e8 	lwz     r30,744(r1)
+  b8:	83 a1 02 e4 	lwz     r29,740(r1)
+  bc:	38 21 02 f0 	addi    r1,r1,752
+  c0:	7c 08 03 a6 	mtlr    r0
+  c4:	4e 80 00 20 	blr
