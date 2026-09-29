@@ -1,0 +1,810 @@
+ INFO Writing to /home/rabbit/src/darkfoundry-new/.darkfoundry/worktrees/81136289-d9d6-4a74-8320-2e4da3c1fe24/eternal-darkness-decomp/build/GEDE01/fndiff_fn_801697AC.json
+target 3224 bytes  base 488 bytes  match 13.889578
+* 0x0000  stwu r1, -0x60(r1)                                   | stwu r1, -0x30(r1)
+  0x0004  mflr r0                                              | mflr r0
+* 0x0008  lis r6, lbl_8024FCB8@ha [None+0 t6]                  | 
+* 0x000c  stw r0, 0x64(r1)                                     | stw r0, 0x34(r1)
+  0x0010  addi r0, r1, 0x8                                     | addi r0, r1, 0x8
+* 0x0014  stmw r21, 0x34(r1)                                   | stmw r27, 0x1c(r1)
+* 0x0018  mr r24, r4                                           | mr r28, r4
+* 0x001c  mr r23, r3                                           | mr r29, r5
+* 0x0020  mr r25, r5                                           | mr r27, r3
+* 0x0024  addi r31, r6, lbl_8024FCB8@l [None+0 t4]             | 
+* 0x0028  lwz r30, 0x0(r4)                                     | lwz r31, 0x0(r4)
+* 0x002c  lwz r4, 0x18(r30)                                    | lwz r4, 0x18(r31)
+  0x0030  stw r4, 0x8(r1)                                      | stw r4, 0x8(r1)
+* 0x0034  lwz r28, 0x8(r30)                                    | 
+* 0x0038  lwz r27, 0x68(r3)                                    | lwz r30, 0x8(r31)
+  0x003c  lwz r4, -0x8(r5)                                     | lwz r4, -0x8(r5)
+  0x0040  stw r0, 0x4(r4)                                      | stw r0, 0x4(r4)
+* 0x0044  lha r4, 0x24(r30)                                    | lha r4, 0x24(r31)
+  0x0048  addi r4, r4, 0x8                                     | addi r4, r4, 0x8
+  0x004c  bl fn_8016057C [None+0 t10]                          | bl fn_8016057C [None+0 t10]
+* 0x0050  lha r0, 0x22(r30)                                    | lha r0, 0x22(r31)
+  0x0054  cmpwi r0, 0x0                                        | cmpwi r0, 0x0
+  0x0058  beq 0x70                                             | beq 0x64
+* 0x005c  lha r5, 0x20(r30)                                    | lha r5, 0x20(r31)
+* 0x0060  mr r3, r23                                           | mr r3, r27
+* 0x0064  mr r4, r25                                           | mr r4, r29
+  0x0068  bl fn_80169740 [None+0 t10]                          | bl fn_80169740 [None+0 t10]
+  0x006c  b 0x80                                               | b 0x74
+* 0x0070  lha r5, 0x20(r30)                                    | lha r5, 0x20(r31)
+* 0x0074  mr r3, r23                                           | mr r3, r27
+* 0x0078  mr r4, r25                                           | mr r4, r29
+  0x007c  bl fn_80160628 [None+0 t10]                          | bl fn_80160628 [None+0 t10]
+* 0x0080                                                       | lis r4, @35@ha [None+0 t6]
+* 0x0084  lwz r29, 0x0(r23)                                    | lwz r3, 0x0(r27)
+* 0x0088                                                       | addi r4, r4, @35@l [None+0 t4]
+* 0x008c  lwz r3, 0x8(r1)                                      | lwz r5, 0x8(r1)
+* 0x0090  cmplwi r27, 0x0                                      | 
+* 0x0094  addi r0, r3, 0x4                                     | addi r0, r5, 0x4
+  0x0098  stw r0, 0x8(r1)                                      | stw r0, 0x8(r1)
+* 0x009c  lwz r26, 0x0(r3)                                     | lwz r6, 0x0(r5)
+* 0x00a0  beq 0xb0                                             | 
+* 0x00a4  mr r3, r23                                           | 
+* 0x00a8  mr r4, r25                                           | 
+* 0x00ac  mr r5, r29                                           | 
+* 0x00b0  mr r6, r27                                           | 
+* 0x00b4  bl fn_80168AE8 [None+0 t10]                          | 
+* 0x00b8  clrlwi r0, r26, 26                                   | clrlwi r0, r6, 26
+* 0x00bc  cmplwi r0, 0x30                                      | cmplwi r0, 0xb
+* 0x00c0  bgt 0x84                                             | bgt 0x1d0
+* 0x00c4  lis r3, jumptable_8024FD9C@ha [None+0 t6]            | 
+  0x00c8  slwi r0, r0, 2                                       | slwi r0, r0, 2
+* 0x00cc  addi r3, r3, jumptable_8024FD9C@l [None+0 t4]        | 
+* 0x00d0  lwzx r0, r3, r0 [None+0 tNone]                       | lwzx r0, r4, r0 [None+0 tNone]
+  0x00d4  mtctr r0                                             | mtctr r0
+  0x00d8  bctr                                                 | bctr
+* 0x00dc  stw r29, 0x0(r23)                                    | stw r3, 0x0(r27)
+* 0x00e0  mr r3, r29                                           | 
+  0x00e4  b 0xc84                                              | b 0x1d4
+* 0x00e8  rlwinm r0, r26, 30, 2, 27                            | rlwinm r0, r6, 30, 2, 27
+* 0x00ec  stw r29, 0x0(r23)                                    | stw r3, 0x0(r27)
+* 0x00f0  add r3, r25, r0                                      | 
+* 0x00f4  b 0xc84                                              | 
+* 0x00f8  extrwi r5, r26, 9, 17                                | 
+* 0x00fc  cmpwi r5, 0xff                                       | 
+* 0x0100  bne 0x100                                            | 
+* 0x0104  li r5, -0x1                                          | 
+* 0x0108  rlwinm r0, r26, 21, 11, 27                           | 
+* 0x010c  stw r29, 0x0(r23)                                    | 
+* 0x0110  mr r3, r23                                           | 
+* 0x0114  add r4, r25, r0                                      | 
+* 0x0118  bl fn_80160B18 [None+0 t10]                          | 
+* 0x011c  lwz r29, 0x0(r23)                                    | 
+* 0x0120  b 0x84                                               | 
+* 0x0124  rlwinm r0, r26, 21, 11, 27                           | 
+* 0x0128  stw r29, 0x0(r23)                                    | 
+* 0x012c  mr r3, r23                                           | 
+* 0x0130  li r5, -0x1                                          | 
+* 0x0134  add r4, r25, r0                                      | 
+* 0x0138  bl fn_80160B18 [None+0 t10]                          | 
+* 0x013c  rlwinm r0, r26, 30, 19, 27                           | 
+* 0x0140  add r3, r25, r0                                      | add r3, r29, r0
+  0x0144  b 0xc84                                              | b 0x1d4
+* 0x0148  srwi r3, r26, 6                                      | srwi r5, r6, 6
+  0x014c  li r0, 0x1                                           | li r0, 0x1
+* 0x0150  subic. r3, r3, 0x1                                   | subic. r5, r5, 0x1
+* 0x0154  stw r0, 0x0(r29)                                     | stw r0, 0x0(r3)
+* 0x0158  addi r29, r29, 0x10                                  | addi r3, r3, 0x10
+  0x015c  bgt 0x148                                            | bgt 0xcc
+  0x0160  b 0x84                                               | b 0x80
+* 0x0164  rlwinm r0, r26, 30, 2, 27                            | rlwinm r0, r6, 30, 2, 27
+* 0x0168  subf r29, r0, r29                                    | subf r3, r0, r3
+  0x016c  b 0x84                                               | b 0x80
+* 0x0170  srwi r3, r26, 6                                      | srwi r5, r6, 6
+  0x0174  lis r0, 0x4330                                       | lis r0, 0x4330
+* 0x0178  subis r3, r3, 0x200                                  | subis r5, r5, 0x200
+* 0x017c  li r4, 0x2                                           | li r6, 0x2
+* 0x0180  addi r3, r3, 0x1                                     | addi r5, r5, 0x1
+* 0x0184  stw r0, 0x20(r1)                                     | stw r0, 0x10(r1)
+* 0x0188  xoris r0, r3, 0x8000                                 | xoris r0, r5, 0x8000
+* 0x018c  lfd f1, lbl_80650670@sda21 [None+0 t109]             | lfd f1, @37@sda21 [None+0 t109]
+* 0x0190  stw r0, 0x24(r1)                                     | stw r0, 0x14(r1)
+* 0x0194  lfd f0, 0x20(r1)                                     | lfd f0, 0x10(r1)
+* 0x0198  stw r4, 0x0(r29)                                     | stw r6, 0x0(r3)
+  0x019c  fsub f0, f0, f1                                      | fsub f0, f0, f1
+* 0x01a0  stfd f0, 0x8(r29)                                    | stfd f0, 0x8(r3)
+* 0x01a4  addi r29, r29, 0x10                                  | addi r3, r3, 0x10
+  0x01a8  b 0x84                                               | b 0x80
+* 0x01ac  li r3, 0x3                                           | li r5, 0x3
+* 0x01b0  rlwinm r0, r26, 28, 4, 29                            | rlwinm r0, r6, 28, 4, 29
+* 0x01b4  stw r3, 0x0(r29)                                     | stw r5, 0x0(r3)
+* 0x01b8  lwzx r0, r28, r0                                     | lwzx r0, r30, r0
+* 0x01bc  stw r0, 0x8(r29)                                     | stw r0, 0x8(r3)
+* 0x01c0  addi r29, r29, 0x10                                  | addi r3, r3, 0x10
+  0x01c4  b 0x84                                               | b 0x80
+* 0x01c8  li r3, 0x2                                           | li r5, 0x2
+* 0x01cc  rlwinm r0, r26, 29, 3, 28                            | rlwinm r0, r6, 29, 3, 28
+* 0x01d0  stw r3, 0x0(r29)                                     | stw r5, 0x0(r3)
+* 0x01d4  lwz r3, 0x0(r30)                                     | lwz r5, 0x0(r31)
+* 0x01d8  lfdx f0, r3, r0                                      | lfdx f0, r5, r0
+* 0x01dc  stfd f0, 0x8(r29)                                    | stfd f0, 0x8(r3)
+* 0x01e0  addi r29, r29, 0x10                                  | addi r3, r3, 0x10
+  0x01e4  b 0x84                                               | b 0x80
+* 0x01e8  li r3, 0x2                                           | li r5, 0x2
+* 0x01ec  rlwinm r0, r26, 29, 3, 28                            | rlwinm r0, r6, 29, 3, 28
+* 0x01f0  stw r3, 0x0(r29)                                     | stw r5, 0x0(r3)
+* 0x01f4  lwz r3, 0x0(r30)                                     | lwz r5, 0x0(r31)
+* 0x01f8  lfdx f0, r3, r0                                      | lfdx f0, r5, r0
+  0x01fc  fneg f0, f0                                          | fneg f0, f0
+* 0x0200  stfd f0, 0x8(r29)                                    | stfd f0, 0x8(r3)
+* 0x0204  addi r29, r29, 0x10                                  | addi r3, r3, 0x10
+  0x0208  b 0x84                                               | b 0x80
+* 0x020c  rlwinm r3, r26, 30, 2, 27                            | rlwinm r5, r6, 30, 2, 27
+* 0x0210  addi r0, r3, 0x10                                    | 
+* 0x0214  add r3, r24, r0                                      | 
+* 0x0218  lfd f1, 0x0(r3)                                      | 
+* 0x021c  lfd f0, 0x8(r3)                                      | 
+* 0x0220  stfd f1, 0x0(r29)                                    | 
+* 0x0224  stfd f0, 0x8(r29)                                    | 
+* 0x0228  addi r29, r29, 0x10                                  | 
+* 0x022c  b 0x84                                               | 
+* 0x0230  rlwinm r0, r26, 30, 2, 27                            | 
+* 0x0234  add r3, r25, r0                                      | 
+* 0x0238  lfd f1, 0x0(r3)                                      | 
+* 0x023c  lfd f0, 0x8(r3)                                      | 
+* 0x0240  stfd f1, 0x0(r29)                                    | 
+* 0x0244  stfd f0, 0x8(r29)                                    | 
+* 0x0248  addi r29, r29, 0x10                                  | 
+* 0x024c  b 0x84                                               | 
+* 0x0250  stw r29, 0x0(r23)                                    | 
+* 0x0254  rlwinm r0, r26, 28, 4, 29                            | 
+* 0x0258  mr r3, r23                                           | 
+* 0x025c  lwzx r4, r28, r0                                     | 
+* 0x0260  bl fn_80168F84 [None+0 t10]                          | 
+* 0x0264  lfd f1, 0x0(r3)                                      | 
+* 0x0268  lfd f0, 0x8(r3)                                      | 
+* 0x026c  stfd f1, 0x0(r29)                                    | 
+* 0x0270  stfd f0, 0x8(r29)                                    | 
+* 0x0274  addi r29, r29, 0x10                                  | 
+* 0x0278  b 0x84                                               | 
+* 0x027c  stw r29, 0x0(r23)                                    | 
+* 0x0280  subi r4, r29, 0x20                                   | 
+* 0x0284  mr r3, r23                                           | 
+* 0x0288  subi r29, r29, 0x10                                  | 
+* 0x028c  bl fn_80168CEC [None+0 t10]                          | 
+* 0x0290  lfd f1, 0x0(r3)                                      | 
+* 0x0294  lfd f0, 0x8(r3)                                      | 
+* 0x0298  stfd f1, -0x10(r29)                                  | 
+* 0x029c  stfd f0, -0x8(r29)                                   | 
+* 0x02a0  b 0x84                                               | 
+* 0x02a4  li r0, 0x3                                           | 
+* 0x02a8  rlwinm r4, r26, 28, 4, 29                            | 
+* 0x02ac  stw r0, 0x0(r29)                                     | 
+* 0x02b0  addi r0, r29, 0x10                                   | 
+* 0x02b4  mr r3, r23                                           | mr r6, r3
+* 0x02b8  lwzx r5, r28, r4                                     | 
+* 0x02bc  subi r4, r29, 0x10                                   | addi r0, r5, 0x10
+* 0x02c0  stw r5, 0x8(r29)                                     | 
+* 0x02c4  stw r0, 0x0(r23)                                     | 
+* 0x02c8  bl fn_80168CEC [None+0 t10]                          | 
+* 0x02cc  lfd f1, 0x0(r3)                                      | 
+* 0x02d0  lfd f0, 0x8(r3)                                      | 
+* 0x02d4  stfd f1, -0x10(r29)                                  | 
+* 0x02d8  stfd f0, -0x8(r29)                                   | 
+* 0x02dc  b 0x84                                               | 
+* 0x02e0  rlwinm r3, r26, 30, 2, 27                            | 
+* 0x02e4  addi r0, r29, 0x10                                   | addi r3, r3, 0x10
+* 0x02e8  add r4, r25, r3                                      | add r5, r28, r0
+* 0x02ec  lfd f1, 0x0(r4)                                      | 
+* 0x02f0  mr r3, r23                                           | 
+* 0x02f4  lfd f0, 0x8(r4)                                      | 
+* 0x02f8  subi r4, r29, 0x10                                   | 
+* 0x02fc  stfd f1, 0x0(r29)                                    | 
+* 0x0300  stfd f0, 0x8(r29)                                    | 
+* 0x0304  stw r0, 0x0(r23)                                     | 
+* 0x0308  bl fn_80168CEC [None+0 t10]                          | 
+* 0x030c  lfd f1, 0x0(r3)                                      | 
+* 0x0310  lfd f0, 0x8(r3)                                      | 
+* 0x0314  stfd f1, -0x10(r29)                                  | 
+* 0x0318  stfd f0, -0x8(r29)                                   | 
+* 0x031c  b 0x84                                               | 
+* 0x0320  lfd f1, -0x10(r29)                                   | 
+* 0x0324  li r4, 0x3                                           | 
+* 0x0328  lfd f0, -0x8(r29)                                    | 
+* 0x032c  rlwinm r0, r26, 28, 4, 29                            | 
+* 0x0330  mr r5, r29                                           | 
+* 0x0334  stfd f1, 0x10(r1)                                    | 
+* 0x0338  mr r3, r23                                           | 
+* 0x033c  stw r4, 0x0(r29)                                     | 
+* 0x0340  subi r4, r29, 0x10                                   | 
+* 0x0344  addi r29, r29, 0x10                                  | 
+* 0x0348  lwzx r0, r28, r0                                     | 
+* 0x034c  stfd f0, 0x18(r1)                                    | 
+* 0x0350  stw r0, 0x8(r5)                                      | 
+* 0x0354  stw r29, 0x0(r23)                                    | 
+* 0x0358  bl fn_80168CEC [None+0 t10]                          | 
+* 0x035c  lfd f0, 0x0(r3)                                      | 
+* 0x0360  lfd f2, 0x8(r3)                                      | 
+* 0x0364  lfd f1, 0x10(r1)                                     | 
+* 0x0368  stfd f0, -0x20(r29)                                  | 
+* 0x036c  lfd f0, 0x18(r1)                                     | lfd f1, 0x0(r5)
+* 0x0370  stfd f2, -0x18(r29)                                  | 
+* 0x0374  stfd f1, -0x10(r29)                                  | 
+* 0x0378  stfd f0, -0x8(r29)                                   | 
+* 0x037c  b 0x84                                               | 
+* 0x0380  stw r29, 0x0(r23)                                    | 
+* 0x0384  mr r3, r23                                           | 
+* 0x0388  bl fn_80161FA0 [None+0 t10]                          | 
+* 0x038c  mr r3, r23                                           | 
+* 0x0390  srwi r4, r26, 6                                      | 
+* 0x0394  bl fn_80167798 [None+0 t10]                          | 
+* 0x0398  stw r3, 0x8(r29)                                     | 
+* 0x039c  li r0, 0x4                                           | 
+* 0x03a0  stw r0, 0x0(r29)                                     | 
+* 0x03a4  addi r29, r29, 0x10                                  | 
+* 0x03a8  b 0x84                                               | 
+* 0x03ac  rlwinm r0, r26, 30, 2, 27                            | 
+* 0x03b0  lfd f1, -0x10(r29)                                   | 
+* 0x03b4  lfd f0, -0x8(r29)                                    | lfd f0, 0x8(r5)
+* 0x03b8  add r3, r25, r0                                      | 
+* 0x03bc  subi r29, r29, 0x10                                  | 
+* 0x03c0  stfd f1, 0x0(r3)                                     | stfd f1, 0x0(r6)
+* 0x03c4  stfd f0, 0x8(r3)                                     | stfd f0, 0x8(r6)
+  0x03c8  b 0x84                                               | b 0x80
+* 0x03cc  stw r29, 0x0(r23)                                    | 
+* 0x03d0  rlwinm r0, r26, 28, 4, 29                            | rlwinm r0, r6, 30, 2, 27
+* 0x03d4  mr r3, r23                                           | 
+* 0x03d8  lwzx r4, r28, r0                                     | 
+* 0x03dc  bl fn_80169068 [None+0 t10]                          | 
+* 0x03e0  subi r29, r29, 0x10                                  | 
+* 0x03e4  b 0x84                                               | 
+* 0x03e8  rlwinm r0, r26, 21, 11, 27                           | 
+* 0x03ec  stw r29, 0x0(r23)                                    | 
+* 0x03f0  subf r4, r0, r29                                     | 
+* 0x03f4  mr r3, r23                                           | 
+* 0x03f8  addi r5, r4, 0x10                                    | 
+* 0x03fc  bl fn_80168E34 [None+0 t10]                          | 
+* 0x0400  rlwinm r0, r26, 30, 19, 27                           | 
+* 0x0404  subf r29, r0, r29                                    | 
+* 0x0408  b 0x84                                               | 
+* 0x040c  rlwinm r0, r26, 30, 19, 27                           | 
+* 0x0410  srwi r3, r26, 15                                     | 
+* 0x0414  subf r4, r0, r29                                     | 
+* 0x0418  extrwi r22, r26, 9, 17                               | 
+* 0x041c  lwz r21, -0x8(r4)                                    | 
+* 0x0420  mulli r26, r3, 0x3e                                  | 
+* 0x0424  stw r4, 0x0(r23)                                     | 
+* 0x0428  b 0x44c                                              | 
+* 0x042c  mr r3, r23                                           | 
+* 0x0430  mr r4, r21                                           | 
+* 0x0434  add r5, r22, r26                                     | add r5, r29, r0
+* 0x0438  subi r29, r29, 0x10                                  | 
+* 0x043c  bl fn_80167B5C [None+0 t10]                          | 
+* 0x0440  lfd f1, 0x0(r29)                                     | lfd f1, 0x0(r5)
+* 0x0444  subi r22, r22, 0x1                                   | 
+* 0x0448  lfd f0, 0x8(r29)                                     | lfd f0, 0x8(r5)
+  0x044c  stfd f1, 0x0(r3)                                     | stfd f1, 0x0(r3)
+  0x0450  stfd f0, 0x8(r3)                                     | stfd f0, 0x8(r3)
+* 0x0454  cmpwi r22, 0x0                                       | 
+* 0x0458  bne 0x424                                            | 
+* 0x045c  b 0x84                                               | 
+* 0x0460  rlwinm r0, r26, 31, 1, 26                            | 
+* 0x0464  srwi r21, r26, 6                                     | 
+* 0x0468  subf r3, r0, r29                                     | 
+* 0x046c  lwz r22, -0x8(r3)                                    | 
+* 0x0470  stw r3, 0x0(r23)                                     | 
+* 0x0474  b 0x498                                              | 
+* 0x0478  subi r29, r29, 0x20                                  | addi r3, r3, 0x10
+* 0x047c  mr r3, r23                                           | 
+* 0x0480  mr r4, r22                                           | 
+* 0x0484  mr r5, r29                                           | 
+* 0x0488  bl fn_801679F8 [None+0 t10]                          | b 0x80
+* 0x048c  lfd f1, 0x10(r29)                                    | 
+* 0x0490  subi r21, r21, 0x1                                   | 
+* 0x0494  lfd f0, 0x18(r29)                                    | 
+* 0x0498  stfd f1, 0x0(r3)                                     | 
+* 0x049c  stfd f0, 0x8(r3)                                     | 
+* 0x04a0  cmpwi r21, 0x0                                       | 
+* 0x04a4  bne 0x470                                            | 
+* 0x04a8  b 0x84                                               | 
+* 0x04ac  lwz r0, -0x20(r29)                                   | 
+* 0x04b0  cmpwi r0, 0x2                                        | 
+* 0x04b4  beq 0x4c0                                            | 
+* 0x04b8  subi r3, r29, 0x20                                   | 
+* 0x04bc  bl fn_80168A08 [None+0 t10]                          | 
+* 0x04c0  cmpwi r3, 0x0                                        | 
+* 0x04c4  bne 0x4dc                                            | 
+* 0x04c8  lwz r0, -0x10(r29)                                   | 
+* 0x04cc  cmpwi r0, 0x2                                        | 
+* 0x04d0  beq 0x4f0                                            | 
+* 0x04d4  subi r3, r29, 0x10                                   | 
+* 0x04d8  bl fn_80168A08 [None+0 t10]                          | 
+* 0x04dc  cmpwi r3, 0x0                                        | 
+* 0x04e0  beq 0x4f0                                            | 
+* 0x04e4  mr r3, r23                                           | 
+* 0x04e8  mr r4, r29                                           | 
+* 0x04ec  li r5, 0x5                                           | 
+* 0x04f0  bl fn_8016927C [None+0 t10]                          | 
+* 0x04f4  b 0x500                                              | 
+* 0x04f8  lfd f1, -0x18(r29)                                   | 
+* 0x04fc  lfd f0, -0x8(r29)                                    | 
+* 0x0500  fadd f0, f1, f0                                      | 
+* 0x0504  stfd f0, -0x18(r29)                                  | 
+* 0x0508  subi r29, r29, 0x10                                  | 
+* 0x050c  b 0x84                                               | 
+* 0x0510  lwz r0, -0x10(r29)                                   | 
+* 0x0514  cmpwi r0, 0x2                                        | 
+* 0x0518  beq 0x56c                                            | 
+* 0x051c  subi r3, r29, 0x10                                   | 
+* 0x0520  bl fn_80168A08 [None+0 t10]                          | 
+* 0x0524  cmpwi r3, 0x0                                        | 
+* 0x0528  beq 0x56c                                            | 
+* 0x052c  srwi r3, r26, 6                                      | 
+* 0x0530  lis r0, 0x4330                                       | 
+* 0x0534  subis r3, r3, 0x200                                  | 
+* 0x0538  li r6, 0x2                                           | 
+* 0x053c  addi r3, r3, 0x1                                     | 
+* 0x0540  stw r0, 0x20(r1)                                     | 
+* 0x0544  xoris r0, r3, 0x8000                                 | 
+* 0x0548  lfd f1, lbl_80650670@sda21 [None+0 t109]             | 
+* 0x054c  stw r0, 0x24(r1)                                     | 
+* 0x0550  mr r3, r23                                           | 
+* 0x0554  addi r4, r29, 0x10                                   | 
+* 0x0558  li r5, 0x5                                           | 
+* 0x055c  lfd f0, 0x20(r1)                                     | 
+* 0x0560  stw r6, 0x0(r29)                                     | 
+* 0x0564  fsub f0, f0, f1                                      | 
+* 0x0568  stfd f0, 0x8(r29)                                    | 
+* 0x056c  bl fn_8016927C [None+0 t10]                          | 
+* 0x0570  b 0x84                                               | 
+* 0x0574  srwi r3, r26, 6                                      | 
+* 0x0578  lis r0, 0x4330                                       | 
+* 0x057c  subis r3, r3, 0x200                                  | 
+* 0x0580  stw r0, 0x20(r1)                                     | 
+* 0x0584  addi r0, r3, 0x1                                     | 
+* 0x0588  lfd f1, lbl_80650670@sda21 [None+0 t109]             | 
+* 0x058c  xoris r0, r0, 0x8000                                 | 
+* 0x0590  lfd f2, -0x8(r29)                                    | 
+* 0x0594  stw r0, 0x24(r1)                                     | stw r3, 0x0(r27)
+* 0x0598  lfd f0, 0x20(r1)                                     | 
+* 0x059c  fsub f0, f0, f1                                      | 
+* 0x05a0  fadd f0, f2, f0                                      | 
+* 0x05a4  stfd f0, -0x8(r29)                                   | 
+* 0x05a8  b 0x84                                               | 
+* 0x05ac  lwz r0, -0x20(r29)                                   | 
+* 0x05b0  cmpwi r0, 0x2                                        | 
+* 0x05b4  beq 0x5c0                                            | 
+* 0x05b8  subi r3, r29, 0x20                                   | 
+* 0x05bc  bl fn_80168A08 [None+0 t10]                          | 
+* 0x05c0  cmpwi r3, 0x0                                        | 
+* 0x05c4  bne 0x5dc                                            | 
+* 0x05c8  lwz r0, -0x10(r29)                                   | 
+* 0x05cc  cmpwi r0, 0x2                                        | 
+* 0x05d0  beq 0x5f0                                            | 
+* 0x05d4  subi r3, r29, 0x10                                   | 
+* 0x05d8  bl fn_80168A08 [None+0 t10]                          | 
+* 0x05dc  cmpwi r3, 0x0                                        | 
+* 0x05e0  beq 0x5f0                                            | 
+* 0x05e4  mr r3, r23                                           | 
+* 0x05e8  mr r4, r29                                           | 
+* 0x05ec  li r5, 0x6                                           | 
+* 0x05f0  bl fn_8016927C [None+0 t10]                          | 
+* 0x05f4  b 0x600                                              | 
+* 0x05f8  lfd f1, -0x18(r29)                                   | 
+* 0x05fc  lfd f0, -0x8(r29)                                    | 
+* 0x0600  fsub f0, f1, f0                                      | 
+* 0x0604  stfd f0, -0x18(r29)                                  | 
+* 0x0608  subi r29, r29, 0x10                                  | 
+* 0x060c  b 0x84                                               | 
+* 0x0610  lwz r0, -0x20(r29)                                   | 
+* 0x0614  cmpwi r0, 0x2                                        | 
+* 0x0618  beq 0x624                                            | 
+* 0x061c  subi r3, r29, 0x20                                   | 
+* 0x0620  bl fn_80168A08 [None+0 t10]                          | 
+* 0x0624  cmpwi r3, 0x0                                        | 
+* 0x0628  bne 0x640                                            | 
+* 0x062c  lwz r0, -0x10(r29)                                   | 
+* 0x0630  cmpwi r0, 0x2                                        | 
+* 0x0634  beq 0x654                                            | 
+* 0x0638  subi r3, r29, 0x10                                   | 
+* 0x063c  bl fn_80168A08 [None+0 t10]                          | 
+* 0x0640  cmpwi r3, 0x0                                        | 
+* 0x0644  beq 0x654                                            | 
+* 0x0648  mr r3, r23                                           | 
+* 0x064c  mr r4, r29                                           | 
+* 0x0650  li r5, 0x7                                           | 
+* 0x0654  bl fn_8016927C [None+0 t10]                          | 
+* 0x0658  b 0x664                                              | 
+* 0x065c  lfd f1, -0x18(r29)                                   | 
+* 0x0660  lfd f0, -0x8(r29)                                    | 
+* 0x0664  fmul f0, f1, f0                                      | 
+* 0x0668  stfd f0, -0x18(r29)                                  | 
+* 0x066c  subi r29, r29, 0x10                                  | 
+* 0x0670  b 0x84                                               | 
+* 0x0674  lwz r0, -0x20(r29)                                   | 
+* 0x0678  cmpwi r0, 0x2                                        | 
+* 0x067c  beq 0x688                                            | 
+* 0x0680  subi r3, r29, 0x20                                   | 
+* 0x0684  bl fn_80168A08 [None+0 t10]                          | 
+* 0x0688  cmpwi r3, 0x0                                        | 
+* 0x068c  bne 0x6a4                                            | 
+* 0x0690  lwz r0, -0x10(r29)                                   | 
+* 0x0694  cmpwi r0, 0x2                                        | 
+* 0x0698  beq 0x6b8                                            | 
+* 0x069c  subi r3, r29, 0x10                                   | 
+* 0x06a0  bl fn_80168A08 [None+0 t10]                          | 
+* 0x06a4  cmpwi r3, 0x0                                        | 
+* 0x06a8  beq 0x6b8                                            | 
+* 0x06ac  mr r3, r23                                           | 
+* 0x06b0  mr r4, r29                                           | 
+* 0x06b4  li r5, 0x8                                           | 
+* 0x06b8  bl fn_8016927C [None+0 t10]                          | 
+* 0x06bc  b 0x6c8                                              | 
+* 0x06c0  lfd f1, -0x18(r29)                                   | 
+* 0x06c4  lfd f0, -0x8(r29)                                    | 
+* 0x06c8  fdiv f0, f1, f0                                      | 
+* 0x06cc  stfd f0, -0x18(r29)                                  | 
+* 0x06d0  subi r29, r29, 0x10                                  | 
+* 0x06d4  b 0x84                                               | 
+* 0x06d8  mr r3, r23                                           | 
+* 0x06dc  mr r4, r29                                           | 
+* 0x06e0  li r5, 0x9                                           | 
+* 0x06e4  bl fn_801691AC [None+0 t10]                          | 
+* 0x06e8  cmpwi r3, 0x0                                        | 
+* 0x06ec  bne 0x6f4                                            | 
+* 0x06f0  mr r3, r23                                           | 
+* 0x06f4  addi r4, r31, 0x30 [None+0 tNone]                    | 
+* 0x06f8  bl fn_80160FAC [None+0 t10]                          | 
+* 0x06fc  subi r29, r29, 0x10                                  | 
+* 0x0700  b 0x84                                               | 
+* 0x0704  srwi r21, r26, 6                                     | 
+* 0x0708  mr r3, r23                                           | 
+* 0x070c  mr r4, r21                                           | 
+* 0x0710  mr r5, r29                                           | 
+* 0x0714  bl fn_801694A8 [None+0 t10]                          | 
+* 0x0718  subi r0, r21, 0x1                                    | 
+* 0x071c  mr r3, r23                                           | 
+* 0x0720  slwi r0, r0, 4                                       | 
+* 0x0724  subf r29, r0, r29                                    | 
+* 0x0728  stw r29, 0x0(r23)                                    | 
+* 0x072c  bl fn_80161FA0 [None+0 t10]                          | 
+* 0x0730  b 0x84                                               | 
+* 0x0734  lwz r0, -0x10(r29)                                   | 
+* 0x0738  cmpwi r0, 0x2                                        | 
+* 0x073c  beq 0x764                                            | 
+* 0x0740  subi r3, r29, 0x10                                   | 
+* 0x0744  bl fn_80168A08 [None+0 t10]                          | 
+* 0x0748  cmpwi r3, 0x0                                        | 
+* 0x074c  beq 0x764                                            | 
+* 0x0750  li r0, 0x1                                           | 
+* 0x0754  mr r3, r23                                           | 
+* 0x0758  stw r0, 0x0(r29)                                     | 
+* 0x075c  addi r4, r29, 0x10                                   | 
+* 0x0760  li r5, 0xa                                           | 
+* 0x0764  bl fn_8016927C [None+0 t10]                          | 
+* 0x0768  b 0x84                                               | 
+* 0x076c  lfd f0, -0x8(r29)                                    | 
+* 0x0770  fneg f0, f0                                          | 
+* 0x0774  stfd f0, -0x8(r29)                                   | 
+* 0x0778  b 0x84                                               | 
+* 0x077c  lwz r0, -0x10(r29)                                   | 
+* 0x0780  lfd f0, lbl_80650678@sda21 [None+0 t109]             | 
+* 0x0784  subfic r0, r0, 0x1                                   | 
+* 0x0788  cntlzw r0, r0                                        | 
+* 0x078c  srwi r3, r0, 5                                       | 
+* 0x0790  addi r0, r3, 0x1                                     | 
+* 0x0794  stw r0, -0x10(r29)                                   | 
+* 0x0798  stfd f0, -0x8(r29)                                   | 
+* 0x079c  b 0x84                                               | 
+* 0x07a0  subi r29, r29, 0x20                                  | 
+* 0x07a4  mr r3, r29                                           | 
+* 0x07a8  addi r4, r29, 0x10                                   | 
+* 0x07ac  bl fn_801639E8 [None+0 t10]                          | 
+* 0x07b0  cmpwi r3, 0x0                                        | 
+* 0x07b4  bne 0x84                                             | 
+* 0x07b8  srwi r3, r26, 6                                      | 
+* 0x07bc  lwz r4, 0x8(r1)                                      | 
+* 0x07c0  subis r3, r3, 0x200                                  | 
+* 0x07c4  addi r0, r3, 0x1                                     | 
+* 0x07c8  slwi r0, r0, 2                                       | 
+* 0x07cc  add r0, r4, r0                                       | 
+* 0x07d0  stw r0, 0x8(r1)                                      | 
+* 0x07d4  b 0x84                                               | 
+* 0x07d8  subi r29, r29, 0x20                                  | 
+* 0x07dc  mr r3, r29                                           | 
+* 0x07e0  addi r4, r29, 0x10                                   | 
+* 0x07e4  bl fn_801639E8 [None+0 t10]                          | 
+* 0x07e8  cmpwi r3, 0x0                                        | 
+* 0x07ec  beq 0x84                                             | 
+* 0x07f0  srwi r3, r26, 6                                      | 
+* 0x07f4  lwz r4, 0x8(r1)                                      | 
+* 0x07f8  subis r3, r3, 0x200                                  | 
+* 0x07fc  addi r0, r3, 0x1                                     | 
+* 0x0800  slwi r0, r0, 2                                       | 
+* 0x0804  add r0, r4, r0                                       | 
+* 0x0808  stw r0, 0x8(r1)                                      | 
+* 0x080c  b 0x84                                               | 
+* 0x0810  subi r29, r29, 0x20                                  | 
+* 0x0814  mr r3, r23                                           | 
+* 0x0818  mr r4, r29                                           | 
+* 0x081c  addi r5, r29, 0x10                                   | 
+* 0x0820  addi r6, r29, 0x20                                   | 
+* 0x0824  bl fn_8016938C [None+0 t10]                          | 
+* 0x0828  cmpwi r3, 0x0                                        | 
+* 0x082c  beq 0x84                                             | 
+* 0x0830  srwi r3, r26, 6                                      | 
+* 0x0834  lwz r4, 0x8(r1)                                      | 
+* 0x0838  subis r3, r3, 0x200                                  | 
+* 0x083c  addi r0, r3, 0x1                                     | 
+* 0x0840  slwi r0, r0, 2                                       | 
+* 0x0844  add r0, r4, r0                                       | 
+* 0x0848  stw r0, 0x8(r1)                                      | 
+* 0x084c  b 0x84                                               | 
+* 0x0850  subi r4, r29, 0x10                                   | 
+* 0x0854  subi r29, r29, 0x20                                  | 
+* 0x0858  mr r3, r23                                           | 
+* 0x085c  mr r5, r29                                           | 
+* 0x0860  addi r6, r29, 0x20                                   | 
+* 0x0864  bl fn_8016938C [None+0 t10]                          | 
+* 0x0868  cmpwi r3, 0x0                                        | 
+* 0x086c  bne 0x84                                             | 
+* 0x0870  srwi r3, r26, 6                                      | 
+* 0x0874  lwz r4, 0x8(r1)                                      | 
+* 0x0878  subis r3, r3, 0x200                                  | 
+* 0x087c  addi r0, r3, 0x1                                     | 
+* 0x0880  slwi r0, r0, 2                                       | 
+* 0x0884  add r0, r4, r0                                       | 
+* 0x0888  stw r0, 0x8(r1)                                      | 
+* 0x088c  b 0x84                                               | 
+* 0x0890  subi r4, r29, 0x10                                   | 
+* 0x0894  subi r29, r29, 0x20                                  | 
+* 0x0898  mr r3, r23                                           | 
+* 0x089c  mr r5, r29                                           | 
+* 0x08a0  addi r6, r29, 0x20                                   | 
+* 0x08a4  bl fn_8016938C [None+0 t10]                          | 
+* 0x08a8  cmpwi r3, 0x0                                        | 
+* 0x08ac  beq 0x84                                             | 
+* 0x08b0  srwi r3, r26, 6                                      | 
+* 0x08b4  lwz r4, 0x8(r1)                                      | 
+* 0x08b8  subis r3, r3, 0x200                                  | 
+* 0x08bc  addi r0, r3, 0x1                                     | 
+* 0x08c0  slwi r0, r0, 2                                       | 
+* 0x08c4  add r0, r4, r0                                       | 
+* 0x08c8  stw r0, 0x8(r1)                                      | 
+* 0x08cc  b 0x84                                               | 
+* 0x08d0  subi r29, r29, 0x20                                  | 
+* 0x08d4  mr r3, r23                                           | 
+* 0x08d8  mr r4, r29                                           | 
+* 0x08dc  addi r5, r29, 0x10                                   | 
+* 0x08e0  addi r6, r29, 0x20                                   | 
+* 0x08e4  bl fn_8016938C [None+0 t10]                          | 
+* 0x08e8  cmpwi r3, 0x0                                        | 
+* 0x08ec  bne 0x84                                             | 
+* 0x08f0  srwi r3, r26, 6                                      | 
+* 0x08f4  lwz r4, 0x8(r1)                                      | 
+* 0x08f8  subis r3, r3, 0x200                                  | 
+* 0x08fc  addi r0, r3, 0x1                                     | 
+* 0x0900  slwi r0, r0, 2                                       | 
+* 0x0904  add r0, r4, r0                                       | 
+* 0x0908  stw r0, 0x8(r1)                                      | 
+* 0x090c  b 0x84                                               | 
+* 0x0910  lwzu r0, -0x10(r29)                                  | 
+* 0x0914  cmpwi r0, 0x1                                        | 
+* 0x0918  beq 0x84                                             | 
+* 0x091c  srwi r3, r26, 6                                      | 
+* 0x0920  lwz r4, 0x8(r1)                                      | 
+* 0x0924  subis r3, r3, 0x200                                  | 
+* 0x0928  addi r0, r3, 0x1                                     | 
+* 0x092c  slwi r0, r0, 2                                       | 
+* 0x0930  add r0, r4, r0                                       | 
+* 0x0934  stw r0, 0x8(r1)                                      | 
+* 0x0938  b 0x84                                               | 
+* 0x093c  lwzu r0, -0x10(r29)                                  | 
+* 0x0940  cmpwi r0, 0x1                                        | 
+* 0x0944  bne 0x84                                             | 
+* 0x0948  srwi r3, r26, 6                                      | 
+* 0x094c  lwz r4, 0x8(r1)                                      | 
+* 0x0950  subis r3, r3, 0x200                                  | 
+* 0x0954  addi r0, r3, 0x1                                     | 
+* 0x0958  slwi r0, r0, 2                                       | 
+* 0x095c  add r0, r4, r0                                       | 
+* 0x0960  stw r0, 0x8(r1)                                      | 
+* 0x0964  b 0x84                                               | 
+* 0x0968  lwz r0, -0x10(r29)                                   | 
+* 0x096c  cmpwi r0, 0x1                                        | 
+* 0x0970  bne 0x974                                            | 
+* 0x0974  subi r29, r29, 0x10                                  | 
+* 0x0978  b 0x84                                               | 
+* 0x097c  srwi r3, r26, 6                                      | 
+* 0x0980  lwz r4, 0x8(r1)                                      | 
+* 0x0984  subis r3, r3, 0x200                                  | 
+* 0x0988  addi r0, r3, 0x1                                     | 
+* 0x098c  slwi r0, r0, 2                                       | 
+* 0x0990  add r0, r4, r0                                       | 
+* 0x0994  stw r0, 0x8(r1)                                      | 
+* 0x0998  b 0x84                                               | 
+* 0x099c  lwz r0, -0x10(r29)                                   | 
+* 0x09a0  cmpwi r0, 0x1                                        | 
+* 0x09a4  beq 0x9a8                                            | 
+* 0x09a8  subi r29, r29, 0x10                                  | 
+* 0x09ac  b 0x84                                               | 
+* 0x09b0  srwi r3, r26, 6                                      | 
+* 0x09b4  lwz r4, 0x8(r1)                                      | 
+* 0x09b8  subis r3, r3, 0x200                                  | 
+* 0x09bc  addi r0, r3, 0x1                                     | 
+* 0x09c0  slwi r0, r0, 2                                       | 
+* 0x09c4  add r0, r4, r0                                       | 
+* 0x09c8  stw r0, 0x8(r1)                                      | 
+* 0x09cc  b 0x84                                               | 
+* 0x09d0  srwi r3, r26, 6                                      | 
+* 0x09d4  lwz r4, 0x8(r1)                                      | 
+* 0x09d8  subis r3, r3, 0x200                                  | 
+* 0x09dc  addi r0, r3, 0x1                                     | 
+* 0x09e0  slwi r0, r0, 2                                       | 
+* 0x09e4  add r0, r4, r0                                       | 
+* 0x09e8  stw r0, 0x8(r1)                                      | 
+* 0x09ec  b 0x84                                               | 
+* 0x09f0  li r0, 0x1                                           | 
+* 0x09f4  stw r0, 0x0(r29)                                     | 
+* 0x09f8  addi r29, r29, 0x10                                  | 
+* 0x09fc  lwz r3, 0x8(r1)                                      | 
+* 0x0a00  addi r0, r3, 0x4                                     | 
+* 0x0a04  stw r0, 0x8(r1)                                      | 
+* 0x0a08  b 0x84                                               | 
+* 0x0a0c  lwz r0, -0x10(r29)                                   | 
+* 0x0a10  cmpwi r0, 0x2                                        | 
+* 0x0a14  beq 0xa2c                                            | 
+* 0x0a18  subi r3, r29, 0x10                                   | 
+* 0x0a1c  bl fn_80168A08 [None+0 t10]                          | 
+* 0x0a20  cmpwi r3, 0x0                                        | 
+* 0x0a24  beq 0xa2c                                            | 
+* 0x0a28  mr r3, r23                                           | 
+* 0x0a2c  addi r4, r31, 0x44 [None+0 tNone]                    | 
+* 0x0a30  bl fn_80160FAC [None+0 t10]                          | 
+* 0x0a34  lwz r0, -0x20(r29)                                   | 
+* 0x0a38  cmpwi r0, 0x2                                        | 
+* 0x0a3c  beq 0xa54                                            | 
+* 0x0a40  subi r3, r29, 0x20                                   | 
+* 0x0a44  bl fn_80168A08 [None+0 t10]                          | 
+* 0x0a48  cmpwi r3, 0x0                                        | 
+* 0x0a4c  beq 0xa54                                            | 
+* 0x0a50  mr r3, r23                                           | 
+* 0x0a54  addi r4, r31, 0x60 [None+0 tNone]                    | 
+* 0x0a58  bl fn_80160FAC [None+0 t10]                          | 
+* 0x0a5c  lwz r0, -0x30(r29)                                   | 
+* 0x0a60  cmpwi r0, 0x2                                        | 
+* 0x0a64  beq 0xa7c                                            | 
+* 0x0a68  subi r3, r29, 0x30                                   | 
+* 0x0a6c  bl fn_80168A08 [None+0 t10]                          | 
+* 0x0a70  cmpwi r3, 0x0                                        | 
+* 0x0a74  beq 0xa7c                                            | 
+* 0x0a78  mr r3, r23                                           | 
+* 0x0a7c  addi r4, r31, 0x80 [None+0 tNone]                    | 
+* 0x0a80  bl fn_80160FAC [None+0 t10]                          | 
+* 0x0a84  lfd f1, -0x8(r29)                                    | 
+* 0x0a88  lfd f0, lbl_80650680@sda21 [None+0 t109]             | 
+* 0x0a8c  fcmpo cr0, f1, f0                                    | 
+* 0x0a90  ble 0xaa4                                            | 
+* 0x0a94  lfd f1, -0x28(r29)                                   | 
+* 0x0a98  lfd f0, -0x18(r29)                                   | 
+* 0x0a9c  fcmpo cr0, f1, f0                                    | 
+* 0x0aa0  mfcr r0                                              | 
+* 0x0aa4  extrwi r0, r0, 1, 1                                  | 
+* 0x0aa8  b 0xab8                                              | 
+* 0x0aac  lfd f1, -0x28(r29)                                   | 
+* 0x0ab0  lfd f0, -0x18(r29)                                   | 
+* 0x0ab4  fcmpo cr0, f1, f0                                    | 
+* 0x0ab8  mfcr r0                                              | 
+* 0x0abc  srwi r0, r0, 31                                      | 
+* 0x0ac0  cmpwi r0, 0x0                                        | 
+* 0x0ac4  beq 0x84                                             | 
+* 0x0ac8  srwi r3, r26, 6                                      | 
+* 0x0acc  lwz r4, 0x8(r1)                                      | 
+* 0x0ad0  subis r3, r3, 0x200                                  | 
+* 0x0ad4  subi r29, r29, 0x30                                  | 
+* 0x0ad8  addi r0, r3, 0x1                                     | 
+* 0x0adc  slwi r0, r0, 2                                       | 
+* 0x0ae0  add r0, r4, r0                                       | 
+* 0x0ae4  stw r0, 0x8(r1)                                      | 
+* 0x0ae8  b 0x84                                               | 
+* 0x0aec  lwz r0, -0x30(r29)                                   | 
+* 0x0af0  cmpwi r0, 0x2                                        | 
+* 0x0af4  beq 0xafc                                            | 
+* 0x0af8  mr r3, r23                                           | 
+* 0x0afc  addi r4, r31, 0xa8 [None+0 tNone]                    | 
+* 0x0b00  bl fn_80160FAC [None+0 t10]                          | 
+* 0x0b04  lfd f2, -0x28(r29)                                   | 
+* 0x0b08  lfd f1, -0x8(r29)                                    | 
+* 0x0b0c  lfd f0, lbl_80650680@sda21 [None+0 t109]             | 
+* 0x0b10  fadd f1, f2, f1                                      | 
+* 0x0b14  stfd f1, -0x28(r29)                                  | 
+* 0x0b18  lfd f1, -0x8(r29)                                    | 
+* 0x0b1c  fcmpo cr0, f1, f0                                    | 
+* 0x0b20  ble 0xb34                                            | 
+* 0x0b24  lfd f1, -0x28(r29)                                   | 
+* 0x0b28  lfd f0, -0x18(r29)                                   | 
+* 0x0b2c  fcmpo cr0, f1, f0                                    | 
+* 0x0b30  mfcr r0                                              | 
+* 0x0b34  extrwi r0, r0, 1, 1                                  | 
+* 0x0b38  b 0xb48                                              | 
+* 0x0b3c  lfd f1, -0x28(r29)                                   | 
+* 0x0b40  lfd f0, -0x18(r29)                                   | 
+* 0x0b44  fcmpo cr0, f1, f0                                    | 
+* 0x0b48  mfcr r0                                              | 
+* 0x0b4c  srwi r0, r0, 31                                      | 
+* 0x0b50  cmpwi r0, 0x0                                        | 
+* 0x0b54  beq 0xb58                                            | 
+* 0x0b58  subi r29, r29, 0x30                                  | 
+* 0x0b5c  b 0x84                                               | 
+* 0x0b60  srwi r3, r26, 6                                      | 
+* 0x0b64  lwz r4, 0x8(r1)                                      | 
+* 0x0b68  subis r3, r3, 0x200                                  | 
+* 0x0b6c  addi r0, r3, 0x1                                     | 
+* 0x0b70  slwi r0, r0, 2                                       | 
+* 0x0b74  add r0, r4, r0                                       | 
+* 0x0b78  stw r0, 0x8(r1)                                      | 
+* 0x0b7c  b 0x84                                               | 
+* 0x0b80  lwz r0, -0x10(r29)                                   | 
+* 0x0b84  cmpwi r0, 0x4                                        | 
+* 0x0b88  beq 0xb90                                            | 
+* 0x0b8c  mr r3, r23                                           | 
+* 0x0b90  addi r4, r31, 0xc8 [None+0 tNone]                    | 
+* 0x0b94  bl fn_80160FAC [None+0 t10]                          | 
+* 0x0b98  lis r3, lbl_8023A868@ha [None+0 t6]                  | 
+* 0x0b9c  lwz r4, -0x8(r29)                                    | 
+* 0x0ba0  addi r5, r3, lbl_8023A868@l [None+0 t4]              | 
+* 0x0ba4  mr r3, r23                                           | 
+* 0x0ba8  bl fn_80167380 [None+0 t10]                          | 
+* 0x0bac  cmplwi r3, 0x0                                       | 
+* 0x0bb0  bne 0xbd0                                            | 
+* 0x0bb4  srwi r3, r26, 6                                      | 
+* 0x0bb8  lwz r4, 0x8(r1)                                      | 
+* 0x0bbc  subis r3, r3, 0x200                                  | 
+* 0x0bc0  subi r29, r29, 0x10                                  | 
+* 0x0bc4  addi r0, r3, 0x1                                     | 
+* 0x0bc8  slwi r0, r0, 2                                       | 
+* 0x0bcc  add r0, r4, r0                                       | 
+* 0x0bd0  stw r0, 0x8(r1)                                      | 
+* 0x0bd4  b 0x84                                               | 
+* 0x0bd8  lfd f1, 0x0(r3)                                      | 
+* 0x0bdc  lfd f0, 0x8(r3)                                      | 
+* 0x0be0  stfd f1, 0x0(r29)                                    | 
+* 0x0be4  stfd f0, 0x8(r29)                                    | 
+* 0x0be8  lfd f1, 0x10(r3)                                     | 
+* 0x0bec  lfd f0, 0x18(r3)                                     | 
+* 0x0bf0  stfd f1, 0x10(r29)                                   | 
+* 0x0bf4  stfd f0, 0x18(r29)                                   | 
+* 0x0bf8  addi r29, r29, 0x20                                  | 
+* 0x0bfc  b 0x84                                               | 
+* 0x0c00  lwz r4, -0x28(r29)                                   | 
+* 0x0c04  mr r3, r23                                           | 
+* 0x0c08  subi r5, r29, 0x20                                   | 
+* 0x0c0c  bl fn_80167380 [None+0 t10]                          | 
+* 0x0c10  cmplwi r3, 0x0                                       | 
+* 0x0c14  bne 0xc18                                            | 
+* 0x0c18  subi r29, r29, 0x30                                  | 
+* 0x0c1c  b 0x84                                               | 
+* 0x0c20  lfd f1, 0x0(r3)                                      | 
+* 0x0c24  srwi r4, r26, 6                                      | 
+* 0x0c28  lfd f0, 0x8(r3)                                      | 
+* 0x0c2c  subis r4, r4, 0x200                                  | 
+* 0x0c30  addi r0, r4, 0x1                                     | 
+* 0x0c34  stfd f1, -0x20(r29)                                  | 
+* 0x0c38  slwi r0, r0, 2                                       | 
+* 0x0c3c  stfd f0, -0x18(r29)                                  | 
+* 0x0c40  lfd f1, 0x10(r3)                                     | 
+* 0x0c44  lfd f0, 0x18(r3)                                     | 
+* 0x0c48  stfd f1, -0x10(r29)                                  | 
+* 0x0c4c  stfd f0, -0x8(r29)                                   | 
+* 0x0c50  lwz r3, 0x8(r1)                                      | 
+* 0x0c54  add r0, r3, r0                                       | 
+* 0x0c58  stw r0, 0x8(r1)                                      | 
+* 0x0c5c  b 0x84                                               | 
+* 0x0c60  stw r29, 0x0(r23)                                    | 
+* 0x0c64  rlwinm r0, r26, 19, 13, 29                           | 
+* 0x0c68  mr r3, r23                                           | 
+* 0x0c6c  extrwi r5, r26, 9, 17                                | 
+* 0x0c70  lwz r4, 0x10(r30)                                    | 
+* 0x0c74  lwzx r4, r4, r0                                      | 
+* 0x0c78  bl fn_80168CB0 [None+0 t10]                          | 
+* 0x0c7c  lwz r29, 0x0(r23)                                    | 
+* 0x0c80  mr r3, r23                                           | 
+* 0x0c84  bl fn_80161FA0 [None+0 t10]                          | 
+* 0x0c88  b 0x84                                               | 
+* 0x0c8c  lmw r21, 0x34(r1)                                    | lmw r27, 0x1c(r1)
+* 0x0c90  lwz r0, 0x64(r1)                                     | lwz r0, 0x34(r1)
+  0x0c94  mtlr r0                                              | mtlr r0
+* 0x0c98  addi r1, r1, 0x60                                    | addi r1, r1, 0x30
+  0x0c9c  blr                                                  | blr

@@ -12,7 +12,8 @@ typedef struct Value {
 } Value;
 
 typedef struct Proto {
-    char pad00[8];
+    double* numbers;
+    char pad04[4];
     void** strings;
     char pad0C[12];
     Instruction* code;
@@ -24,6 +25,8 @@ typedef struct Proto {
 
 typedef struct Closure {
     Proto* proto;
+    char pad04[12];
+    Value upvalues[1];
 } Closure;
 
 typedef struct Context {
@@ -82,10 +85,31 @@ Value* fn_801697AC(Context* context, Closure* closure, Value* base)
         case 5:
             top -= instruction >> 6;
             break;
+        case 6:
+            top->type = 2;
+            top->value.number = (double)((int)(instruction >> 6) - 0x1ffffff);
+            top++;
+            break;
         case 7:
             top->type = 3;
             top->value.pointer = strings[instruction >> 6];
             top++;
+            break;
+        case 8:
+            top->type = 2;
+            top->value.number = proto->numbers[instruction >> 6];
+            top++;
+            break;
+        case 9:
+            top->type = 2;
+            top->value.number = -proto->numbers[instruction >> 6];
+            top++;
+            break;
+        case 10:
+            *top++ = closure->upvalues[instruction >> 6];
+            break;
+        case 11:
+            *top++ = base[instruction >> 6];
             break;
         default:
             context->top = top;
