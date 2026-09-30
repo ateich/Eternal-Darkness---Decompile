@@ -18,22 +18,20 @@ extern u32 fn_80208E58(s32 chan);
 s32 fn_80209140(s32 chan, void *data)
 {
     register SIWork *work = &Packet_80640B68;
-    register s32 channel = chan;
-    register void *output = data;
     u32 enabled = OSDisableInterrupts();
     s32 valid;
 
-    if (fn_80208E58(channel) & 0x20) {
-        work->inputBuffer[channel][0] = __SIRegs[channel * 3 + 1];
-        work->inputBuffer[channel][1] = __SIRegs[channel * 3 + 2];
-        work->inputBufferValid[channel] = 1;
+    if (fn_80208E58(chan) & 0x20) {
+        work->inputBuffer[chan][0] = __SIRegs[chan * 3 + 1];
+        work->inputBuffer[chan][1] = __SIRegs[chan * 3 + 2];
+        work->inputBufferValid[chan] = 1;
     }
 
-    valid = work->inputBufferValid[channel];
-    work->inputBufferValid[channel] = 0;
+    valid = work->inputBufferValid[chan];
+    work->inputBufferValid[chan] = 0;
     if (valid) {
-        ((u32 *)output)[0] = work->inputBuffer[channel][0];
-        ((u32 *)output)[1] = work->inputBuffer[channel][1];
+        ((u32 *)data)[0] = work->inputBuffer[chan][0];
+        ((u32 *)data)[1] = work->inputBuffer[chan][1];
     }
     OSRestoreInterrupts(enabled);
     return valid;

@@ -1,0 +1,23 @@
+fn_80209140 attempt 5: source-local alias elimination
+
+Reviewed preserved commits eb9c914, 100ea2e5, 7ab18a9, and f556d3c.
+Prior hypotheses covered local register qualifiers, direct globals, call prototypes,
+output pointer type, scheduling, and optimization pragmas. None was repeated.
+Canonical compiler remains GC/1.2.5n and all flags remain unchanged.
+
+Raw experiments are recorded in experiments-c286960c-5fd7-43cc-8073-6585dbe2d7c2.log
+in this order:
+1. Unmodified baseline: 196 bytes, canonical 95.71429%; frame 0x30.
+2. Added unused volatile u8 stack[8] after valid, motivated by neighboring matching
+   sources: 196 bytes, 95.71429%; frame grew to 0x38, address scheduling unchanged.
+   This experiment was removed.
+3. Removed the two initialized channel/output local aliases; refer directly to chan
+   and data throughout. Hypothesis: these aliases affect compiler local-slot allocation
+   and the availability of r3 during address materialization, despite identical body
+   register allocation. Result: 196 bytes, canonical AND relocation-strict 100%.
+   Frame is now 0x28, stmw/lmw at 0x14, and Packet_80640B68 HA is hoisted into r5.
+   All 49 instructions and all five relocation offsets/types/targets/addends agree.
+
+Only the third variant is retained. This is ordinary independent C, without assembly,
+compiler-policy changes, postprocessing, or neighboring source edits. Registration
+changed from NonMatching to Matching after both objdiff modes measured 100%.
