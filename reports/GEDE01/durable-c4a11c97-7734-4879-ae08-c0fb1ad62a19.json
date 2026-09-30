@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "assignment_id": "c4a11c97-7734-4879-ae08-c0fb1ad62a19",
+  "attempt": 4,
+  "base_commit": "446568d038d85e3afbe6a6df334572e410ceef7e",
+  "target": "fn_80208C4C",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-c4a11c97-7734-4879-ae08-c0fb1ad62a19.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-c4a11c97-7734-4879-ae08-c0fb1ad62a19-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/configure-c4a11c97-7734-4879-ae08-c0fb1ad62a19.log",
+    "eternal-darkness-decomp/reports/GEDE01/build-c4a11c97-7734-4879-ae08-c0fb1ad62a19.log",
+    "eternal-darkness-decomp/reports/GEDE01/dol-sha1-c4a11c97-7734-4879-ae08-c0fb1ad62a19.log",
+    "eternal-darkness-decomp/reports/GEDE01/legal-audit-c4a11c97-7734-4879-ae08-c0fb1ad62a19.log",
+    "eternal-darkness-decomp/reports/GEDE01/fndiff-c4a11c97-7734-4879-ae08-c0fb1ad62a19.log",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-c4a11c97-7734-4879-ae08-c0fb1ad62a19.txt"
+  ],
+  "divergence": "Best canonical and relocation-strict score remains 98.854965%; retail and generated code are both 524 bytes, and all five relocation offsets, types, targets, and addends agree. MWCC assigns the SIControl base to r25 in retail but r31 in the reconstruction, shifting the six saved parameters by one register throughout. The mask update at retail offsets 0x54-0x64 uses r7 for the loaded value/result while generated code uses r5 then r0. Attempt 4 tested the distinct hypothesis that a const-qualified register SIControl pointer would alter MWCC interference/coloring priority; it was codegen-neutral, so the qualifier was rejected and the prior best honest-C reconstruction retained."
+}
