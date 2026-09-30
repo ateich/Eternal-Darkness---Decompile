@@ -58,7 +58,7 @@ void fn_80193F3C(u8 column, int row, Vec3s* center, Vec3s* output,
 
     point++;
     point += row * 4 + 5;
-    point[0].x = (s16)((float)center_x - x0);
+    point[0].x = (s16)((float)center_x + x1);
     point[0].y = (s16)((float)center_y + y1);
     point[0].z = center->z;
     point[1].x = center_x;

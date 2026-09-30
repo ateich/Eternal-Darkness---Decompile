@@ -20,7 +20,7 @@ typedef struct TransitionState {
     u8 pad1DD;
     u8 pending;
     u8 pad1DF;
-    u8 descriptor_flag;
+    s8 descriptor_flag;
     u8 pad1E1[2];
     u8 busy;
     u8 restore;
@@ -209,11 +209,7 @@ void fn_800531F0(void)
         fn_80201B44();
         fn_801D0D30();
     }
-    {
-        u8 type = lbl_8030F540.type;
-        TransitionDescriptor* final_descriptor = &lbl_80241DE8[type];
-        lbl_8064C850 = 0;
-        lbl_8030F540.descriptor_flag = final_descriptor->mode;
-    }
+    lbl_8030F540.descriptor_flag = lbl_80241DE8[lbl_8030F540.type].mode;
+    lbl_8064C850 = 0;
     fn_80046C98(0);
 }

@@ -1,6 +1,17 @@
 typedef unsigned char u8;
 typedef unsigned short u16;
 typedef struct Job { u8 bytes[0x70]; } Job;
+typedef struct Pair {
+    int x, y;
+} Pair;
+
+typedef struct Placement {
+    int header[2];
+    Pair xy;
+    int z;
+    int rest[6];
+} Placement;
+
 typedef struct State {
     int unk0;
     int initial;
@@ -8,9 +19,8 @@ typedef struct State {
     int final;
     int step;
     u8 pad14[8];
-    int placement2;
-    int placement3;
-    int placement4;
+    Pair xy;
+    int z;
     int value;
     u8 pad2C[10];
     signed char flag36;
@@ -24,7 +34,7 @@ typedef struct State {
 } State;
 
 extern const float lbl_806504D8;
-extern float lbl_806504DC;
+extern const float lbl_806504DC;
 extern void fn_8014B768(void);
 extern void fn_8014C7C0(void);
 extern void fn_8014C87C(void);
@@ -37,28 +47,25 @@ extern void fn_8014CBC0(void*);
 extern void fn_801FE8DC(void*, float, float, float);
 extern int fn_801E8328();
 
+#pragma opt_common_subs off
 void* fn_8014C68C(void* owner, int start, int finish, int* value,
                   int initial, int final, u16 count)
 {
     Job* job = 0;
-    int placement[11];
+    Placement placement;
     void* runtime = fn_80201814(owner);
     State* state;
-    float scale, endpoint;
 
     if (runtime != 0) {
         job = fn_80149D98(fn_8014B768);
         if (job != 0) {
             fn_80149D64();
-            fn_8011F6A4(fn_80201BC8(runtime), start, finish, -1, placement, 1);
+            fn_8011F6A4(fn_80201BC8(runtime), start, finish, -1, &placement, 1);
             state = (State*)(job->bytes + 8);
             fn_8014CBC0(state);
-            scale = lbl_806504D8;
             state->initial = initial;
-            state->placement2 = placement[2];
-            state->placement3 = placement[3];
-            endpoint = lbl_806504DC;
-            state->placement4 = placement[4];
+            state->xy = placement.xy;
+            state->z = placement.z;
             state->value = *value;
             state->callback48 = fn_8014C7C0;
             state->flag36 = -1;
@@ -68,9 +75,11 @@ void* fn_8014C68C(void* owner, int start, int finish, int* value,
             state->owner = owner;
             state->callback68 = fn_8014C87C;
             state->unk0 = 0;
-            fn_801FE8DC(&state->initial, scale, scale, endpoint);
+            fn_801FE8DC(&state->initial, lbl_806504D8, lbl_806504D8, lbl_806504DC);
             fn_801E8328(19, state);
         }
     }
     return job;
 }
+
+#pragma opt_common_subs reset

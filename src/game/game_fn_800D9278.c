@@ -23,18 +23,20 @@ extern void fn_8011F114();
 extern int fn_80179064(int, int, int, int);
 extern unsigned long long fn_8020123C();
 
+#pragma opt_propagation off
 int fn_800D9278(void *unused, void *object)
 {
+    void *saved_object;
     Runtime *runtime;
     void *attached;
     void *candidate;
     void *owner;
 
-    (void)unused;
-    runtime = fn_800A1D28(object);
-    fn_800A1CD0(object);
-    owner = fn_80201B94(object);
-    attached = ((void *)fn_80201B54(object));
+    saved_object = object;
+    runtime = fn_800A1D28(saved_object);
+    fn_800A1CD0(saved_object);
+    owner = fn_80201B94(saved_object);
+    attached = (void *)fn_80201B54(saved_object);
     candidate = fn_80201C48(owner);
     if (candidate != 0) {
         Vec3 position;
@@ -56,3 +58,4 @@ int fn_800D9278(void *unused, void *object)
     }
     return 1;
 }
+#pragma opt_propagation reset

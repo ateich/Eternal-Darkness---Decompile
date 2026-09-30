@@ -23,13 +23,16 @@ extern void fn_80128C50(void*);
 extern void fn_8012260C(void*);
 extern int fn_801261F4(void*);
 extern void fn_80120AD0(void*, const void*, u16, u32, float, float);
-extern const u32 lbl_8023A680[4];
+extern u32 lbl_8023A680[4];
 extern u8 lbl_8024EDD4[];
 extern const float lbl_80650068;
 extern const float lbl_8065006C;
 extern const float lbl_80650070;
 extern const float lbl_80650074;
 
+typedef struct Word3 { u32 a, b, c; } Word3;
+
+#pragma opt_common_subs off
 void* fn_8011EE04(void* parent, float x, float y, float z)
 {
     u8* object;
@@ -69,13 +72,7 @@ void* fn_8011EE04(void* parent, float x, float y, float z)
     }
     *(u16*)(object + 712) = (u16)sample;
 
-    {
-        u32 first = lbl_8023A680[0];
-        u32 second = lbl_8023A680[1];
-        *(u32*)(object + 12) = first;
-        *(u32*)(object + 16) = second;
-        *(u32*)(object + 20) = lbl_8023A680[2];
-    }
+    *(Word3*)(object + 12) = *(Word3*)lbl_8023A680;
     fn_8011F890(object, lbl_80650068, lbl_80650068, lbl_8065006C);
     sample = lbl_80650068;
     *(float*)(object + 612) = sample;
@@ -115,3 +112,4 @@ void* fn_8011EE04(void* parent, float x, float y, float z)
     }
     return object;
 }
+#pragma opt_common_subs reset

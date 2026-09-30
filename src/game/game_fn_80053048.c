@@ -41,11 +41,14 @@ extern void fn_801E5FB0(void*);
 
 void fn_80053048(s32 value)
 {
+    int index;
     u32 count;
     Record* record;
-    s32 record_type;
+    u32 record_type;
     s32 type = lbl_8030F540.type;
+    s32 mask;
     u32 i;
+    s32 slot;
 
     if ((u32)(type - 0x25) <= 1 || type == 0x27) {
         type = 0x21;
@@ -62,8 +65,8 @@ void fn_80053048(s32 value)
 
     for (i = 0; i < count; i++) {
         if (value == record[i].value) {
-            for (type = 0; type < 5; type++) {
-                s32 mask = 1 << type;
+            for (slot = 0; slot < 5; slot++) {
+                mask = 1 << slot;
                 if (((s8)lbl_8030F540.used_slots & mask) == 0) {
                     void* handle;
                     if (lbl_8064C510 == 0) {
@@ -72,11 +75,12 @@ void fn_80053048(s32 value)
                     if (record[i].enabled == 0 && (lbl_803003C8.flags & 1) == 0) {
                         break;
                     }
-                    handle = fn_801E6CA0(lbl_8064C510, record_type, (u16)i,
+                    index = (u16)i;
+                    handle = fn_801E6CA0(lbl_8064C510, record_type, index,
                                         0x10000, 1);
                     lbl_8030F540.used_slots |= mask;
-                    lbl_8030F540.slots[type].handle = handle;
-                    lbl_8030F540.slots[type].value = value + record[i].addend;
+                    lbl_8030F540.slots[slot].handle = handle;
+                    lbl_8030F540.slots[slot].value = value + record[i].addend;
                     break;
                 }
             }

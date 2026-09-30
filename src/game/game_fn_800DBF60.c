@@ -23,7 +23,7 @@ extern void *fn_80149E04(void);
 extern void fn_80153464(void *, void *);
 extern int fn_80201AE4(void);
 extern void fn_8019917C(void *);
-extern int fn_801D3A24(u8, int);
+extern s16 fn_801D3A24(int, int);
 extern unsigned int fn_80148300(void *, void *, void *);
 extern void fn_80157930(void *, int);
 extern void fn_80149EB8(void *);
@@ -37,6 +37,7 @@ extern float lbl_8064F460;
 extern float lbl_8064F464;
 extern u8 lbl_80325B80[];
 
+#pragma opt_common_subs off
 void fn_800DBF60(int owner, void *context, int level, void *effect, float amount)
 {
     int effect_kind;
@@ -87,7 +88,7 @@ void fn_800DBF60(int owner, void *context, int level, void *effect, float amount
                     {
                         u8 *packet = lbl_80325B80;
                         packet[0] = 0x18;
-                        *(u16 *)(packet + 4) = fn_801D3A24(object_kind, 0x31);
+                        *(s16 *)(packet + 4) = fn_801D3A24(object_kind, 0x31);
                         packet[1] = 3;
                         *(s8 *)(packet + 3) = -10;
                         if (amount > lbl_8064F464) {
@@ -114,10 +115,8 @@ void fn_800DBF60(int owner, void *context, int level, void *effect, float amount
 
             {
                 u16 flags = (u16)fn_8006749C(object_kind);
-                u16 duration = 20 * (5 - (u8)level);
-                flags |= 0x202;
-                fn_80120AD0(object, 0, duration, flags, lbl_8064F460,
-                             lbl_8064F460);
+                fn_80120AD0(object, 0, 20 * (5 - (u8)level), flags | 0x202,
+                             lbl_8064F460, lbl_8064F460);
             }
             if (effect != 0) {
                 fn_800DC3A0(effect, effect_kind, fn_8011F130(object), object_kind, level,
@@ -129,3 +128,4 @@ void fn_800DBF60(int owner, void *context, int level, void *effect, float amount
         }
     }
 }
+#pragma opt_common_subs reset

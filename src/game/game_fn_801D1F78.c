@@ -34,15 +34,14 @@ typedef struct RingOutput {
     s32 rank[32];
 } RingOutput;
 
-extern volatile f32 lbl_8065107C;
 extern f32 fn_80048C2C(f32);
 extern f32 fn_80048C50(f32);
 extern void fn_801F6B6C(Vec3*, ScreenPosition*, s32, s32);
 extern void* fn_80201814(s32);
-extern void* fn_80201BC8(void);
+extern void* fn_80201BC8(void*);
 extern s32 fn_8011F6A4(void*, s32, s32, s32, QueryResult*, s32);
 
-void fn_801D1F78(RingOutput* output_arg, volatile RingDefinition* ring_arg, s32 object_arg)
+void fn_801D1F78(RingOutput* output, RingDefinition* ring, s32 object)
 {
     s32 projected[9];
     s32 order[9];
@@ -55,11 +54,6 @@ void fn_801D1F78(RingOutput* output_arg, volatile RingDefinition* ring_arg, s32 
     ScreenPosition reference_a_screen;
     ScreenPosition reference_b_screen;
     u8 count;
-    volatile RingDefinition* ring;
-    f32 circle;
-    s32* projected_ptr;
-    RingOutput* output;
-    s32 object;
     s32 i;
     s32 best_index;
     s32 best;
@@ -67,25 +61,20 @@ void fn_801D1F78(RingOutput* output_arg, volatile RingDefinition* ring_arg, s32 
     f32 angle;
     void* context;
 
-    count = ring_arg->count;
-    ring = ring_arg;
-    circle = lbl_8065107C;
-    projected_ptr = projected;
-    output = output_arg;
-    object = object_arg;
+    count = ring->count;
 
     for (i = 0; i < count; i++) {
-        angle = circle * (f32)i / (f32)count;
+        angle = 6.2831855f * (f32)i / (f32)count;
         point.x = ring->center.x + (f32)ring->radius * fn_80048C2C(angle);
         point.y = ring->center.y + (f32)ring->radius * fn_80048C50(angle);
         point.z = ring->center.z;
         fn_801F6B6C(&point, &screen, 0, 0);
-        *projected_ptr++ = screen.x;
+        projected[i] = screen.x;
     }
 
     for (i = 0; i < count; i++) {
-        best = projected[0];
         best_index = 0;
+        best = projected[best_index];
         for (j = 1; j < count; j++) {
             if (projected[j] > best) {
                 best_index = j;
@@ -96,8 +85,7 @@ void fn_801D1F78(RingOutput* output_arg, volatile RingDefinition* ring_arg, s32 
         projected[best_index] = (s32)0x80000000;
     }
 
-    fn_80201814(object);
-    context = fn_80201BC8();
+    context = fn_80201BC8(fn_80201814(object));
     fn_8011F6A4(context, 0x15, 0xF, -1, &query_a, 1);
     fn_8011F6A4(context, 0x16, 0xF, -1, &query_b, 1);
 
