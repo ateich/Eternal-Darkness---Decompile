@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "assignment_id": "8a71fbda-05d8-486b-8baf-1059bea300d1",
+  "attempt": 2,
+  "base_commit": "645894c7a579089ff00621cde768bdc126c28af8",
+  "target": "fn_80208C4C",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-8a71fbda-05d8-486b-8baf-1059bea300d1.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-8a71fbda-05d8-486b-8baf-1059bea300d1-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/configure-8a71fbda-05d8-486b-8baf-1059bea300d1.log",
+    "eternal-darkness-decomp/reports/GEDE01/build-8a71fbda-05d8-486b-8baf-1059bea300d1.log",
+    "eternal-darkness-decomp/reports/GEDE01/dol-sha1-8a71fbda-05d8-486b-8baf-1059bea300d1.log",
+    "eternal-darkness-decomp/reports/GEDE01/legal-audit-8a71fbda-05d8-486b-8baf-1059bea300d1.log",
+    "eternal-darkness-decomp/reports/GEDE01/fndiff-8a71fbda-05d8-486b-8baf-1059bea300d1.log",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-8a71fbda-05d8-486b-8baf-1059bea300d1.txt"
+  ],
+  "divergence": "Best canonical and relocation-strict score is 98.854965%; retail and generated code are both 524 bytes, and all five relocation offsets, types, targets, and addends agree. MWCC assigns the SIControl base to r25 in retail but r31 in the reconstruction, shifting the six saved parameters by one register throughout. The mask update at retail offsets 0x54-0x64 uses r7 for the loaded value/result while generated code uses r5 then r0. The callback ternary now reproduces the retail beq/unconditional-branch/li sequence and restores the final OSRestoreInterrupts relocation to 0x1D4."
+}

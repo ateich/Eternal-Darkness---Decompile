@@ -61,10 +61,7 @@ s32 fn_80208C4C(s32 chan, void *output, u32 outputBytes, void *input,
 
     comcsr.value = __SIRegs[13];
     comcsr.field.TCINT = 1;
-    i = 1;
-    if (callback == 0) {
-        i = 0;
-    }
+    i = callback ? 1 : 0;
     comcsr.field.TCINTMSK = i;
     comcsr.field.OUTLNGTH = outputBytes == 128 ? 0 : outputBytes;
     comcsr.field.INLNGTH = inputBytes == 128 ? 0 : inputBytes;
