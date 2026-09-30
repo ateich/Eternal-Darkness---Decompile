@@ -1,0 +1,1847 @@
+=== retail disassembly and relocations ===
+
+
+build/GEDE01/obj/auto_03_8020860C_text.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <SIInterruptHandler_8020860C>:
+       0:	7c 08 02 a6 	mflr    r0
+       4:	3c a0 cc 00 	lis     r5,-13312
+       8:	90 01 00 04 	stw     r0,4(r1)
+       c:	3c e0 00 00 	lis     r7,0
+			e: R_PPC_ADDR16_HA	Packet_80640B68
+      10:	3c c0 00 00 	lis     r6,0
+			12: R_PPC_ADDR16_HA	Si_802FCA20
+      14:	94 21 ff b8 	stwu    r1,-72(r1)
+      18:	be a1 00 1c 	stmw    r21,28(r1)
+      1c:	3b c3 00 00 	addi    r30,r3,0
+      20:	3b e4 00 00 	addi    r31,r4,0
+      24:	3b 87 00 00 	addi    r28,r7,0
+			26: R_PPC_ADDR16_LO	Packet_80640B68
+      28:	3b a6 00 00 	addi    r29,r6,0
+			2a: R_PPC_ADDR16_LO	Si_802FCA20
+      2c:	83 05 64 34 	lwz     r24,25652(r5)
+      30:	57 05 00 02 	clrrwi  r5,r24,30
+      34:	3c 05 40 00 	addis   r0,r5,16384
+      38:	28 00 00 00 	cmplwi  r0,0
+      3c:	40 82 01 84 	bne     1c0 <SIInterruptHandler_8020860C+0x1c0>
+      40:	82 fd 00 00 	lwz     r23,0(r29)
+      44:	48 00 00 01 	bl      44 <SIInterruptHandler_8020860C+0x44>
+			44: R_PPC_REL24	fn_80208310
+      48:	82 bd 00 10 	lwz     r21,16(r29)
+      4c:	3b 60 00 00 	li      r27,0
+      50:	3a c3 00 00 	addi    r22,r3,0
+      54:	93 7d 00 10 	stw     r27,16(r29)
+      58:	3b 57 00 00 	addi    r26,r23,0
+      5c:	3b 5a 00 01 	addi    r26,r26,1
+      60:	7f 40 16 70 	srawi   r0,r26,2
+      64:	7c 00 01 94 	addze   r0,r0
+      68:	54 00 10 3a 	slwi    r0,r0,2
+      6c:	7c 00 d0 10 	subfc   r0,r0,r26
+      70:	7c 1a 03 78 	mr      r26,r0
+      74:	54 00 28 34 	slwi    r0,r0,5
+      78:	7f 3c 02 14 	add     r25,r28,r0
+      7c:	80 19 00 00 	lwz     r0,0(r25)
+      80:	2c 00 ff ff 	cmpwi   r0,-1
+      84:	41 82 00 6c 	beq     f0 <SIInterruptHandler_8020860C+0xf0>
+      88:	48 00 00 01 	bl      88 <SIInterruptHandler_8020860C+0x88>
+			88: R_PPC_REL24	__OSGetSystemTime
+      8c:	80 19 00 18 	lwz     r0,24(r25)
+      90:	6c 65 80 00 	xoris   r5,r3,32768
+      94:	80 d9 00 1c 	lwz     r6,28(r25)
+      98:	6c 03 80 00 	xoris   r3,r0,32768
+      9c:	7c 06 20 10 	subfc   r0,r6,r4
+      a0:	7c 63 29 10 	subfe   r3,r3,r5
+      a4:	7c 65 29 10 	subfe   r3,r5,r5
+      a8:	7c 63 00 d1 	neg.    r3,r3
+      ac:	40 82 00 44 	bne     f0 <SIInterruptHandler_8020860C+0xf0>
+      b0:	80 79 00 00 	lwz     r3,0(r25)
+      b4:	80 99 00 04 	lwz     r4,4(r25)
+      b8:	80 b9 00 08 	lwz     r5,8(r25)
+      bc:	80 d9 00 0c 	lwz     r6,12(r25)
+      c0:	80 f9 00 10 	lwz     r7,16(r25)
+      c4:	81 19 00 14 	lwz     r8,20(r25)
+      c8:	48 00 00 01 	bl      c8 <SIInterruptHandler_8020860C+0xc8>
+			c8: R_PPC_REL24	fn_80208C4C
+      cc:	2c 03 00 00 	cmpwi   r3,0
+      d0:	41 82 00 2c 	beq     fc <SIInterruptHandler_8020860C+0xfc>
+      d4:	1c 1a 00 28 	mulli   r0,r26,40
+      d8:	7c 7c 02 14 	add     r3,r28,r0
+      dc:	38 63 00 80 	addi    r3,r3,128
+      e0:	48 00 00 01 	bl      e0 <SIInterruptHandler_8020860C+0xe0>
+			e0: R_PPC_REL24	fn_8020A93C
+      e4:	38 00 ff ff 	li      r0,-1
+      e8:	90 19 00 00 	stw     r0,0(r25)
+      ec:	48 00 00 10 	b       fc <SIInterruptHandler_8020860C+0xfc>
+      f0:	3b 7b 00 01 	addi    r27,r27,1
+      f4:	2c 1b 00 04 	cmpwi   r27,4
+      f8:	41 80 ff 64 	blt     5c <SIInterruptHandler_8020860C+0x5c>
+      fc:	28 15 00 00 	cmplwi  r21,0
+     100:	41 82 00 1c 	beq     11c <SIInterruptHandler_8020860C+0x11c>
+     104:	39 95 00 00 	addi    r12,r21,0
+     108:	7d 88 03 a6 	mtlr    r12
+     10c:	38 77 00 00 	addi    r3,r23,0
+     110:	38 96 00 00 	addi    r4,r22,0
+     114:	38 bf 00 00 	addi    r5,r31,0
+     118:	4e 80 00 21 	blrl
+     11c:	3c 60 cc 00 	lis     r3,-13312
+     120:	38 83 64 00 	addi    r4,r3,25600
+     124:	80 a3 64 38 	lwz     r5,25656(r3)
+     128:	56 e0 18 38 	slwi    r0,r23,3
+     12c:	3c 60 0f 00 	lis     r3,3840
+     130:	7c 60 06 30 	sraw    r0,r3,r0
+     134:	7c a5 00 38 	and     r5,r5,r0
+     138:	56 e0 10 3a 	slwi    r0,r23,2
+     13c:	90 a4 00 38 	stw     r5,56(r4)
+     140:	7c dd 02 14 	add     r6,r29,r0
+     144:	84 06 00 14 	lwzu    r0,20(r6)
+     148:	28 00 00 80 	cmplwi  r0,128
+     14c:	40 82 00 74 	bne     1c0 <SIInterruptHandler_8020860C+0x1c0>
+     150:	56 e0 28 34 	slwi    r0,r23,5
+     154:	7c 1c 00 2e 	lwzx    r0,r28,r0
+     158:	38 60 00 01 	li      r3,1
+     15c:	2c 00 ff ff 	cmpwi   r0,-1
+     160:	40 82 00 14 	bne     174 <SIInterruptHandler_8020860C+0x174>
+     164:	80 1d 00 00 	lwz     r0,0(r29)
+     168:	7c 00 b8 00 	cmpw    r0,r23
+     16c:	41 82 00 08 	beq     174 <SIInterruptHandler_8020860C+0x174>
+     170:	38 60 00 00 	li      r3,0
+     174:	2c 03 00 00 	cmpwi   r3,0
+     178:	40 82 00 48 	bne     1c0 <SIInterruptHandler_8020860C+0x1c0>
+     17c:	3c 60 80 00 	lis     r3,-32768
+     180:	80 03 00 f8 	lwz     r0,248(r3)
+     184:	3c 60 43 1c 	lis     r3,17180
+     188:	3c 80 00 00 	lis     r4,0
+			18a: R_PPC_ADDR16_HA	GetTypeCallback
+     18c:	54 00 f0 be 	srwi    r0,r0,2
+     190:	38 63 de 83 	addi    r3,r3,-8573
+     194:	7c 03 00 16 	mulhwu  r0,r3,r0
+     198:	54 00 8b fe 	srwi    r0,r0,15
+     19c:	1c 00 00 41 	mulli   r0,r0,65
+     1a0:	39 04 00 00 	addi    r8,r4,0
+			1a2: R_PPC_ADDR16_LO	GetTypeCallback
+     1a4:	54 0a e8 fe 	srwi    r10,r0,3
+     1a8:	38 77 00 00 	addi    r3,r23,0
+     1ac:	38 80 00 00 	li      r4,0
+			1ac: R_PPC_EMB_SDA21	lbl_8064D8D0
+     1b0:	38 a0 00 01 	li      r5,1
+     1b4:	38 e0 00 03 	li      r7,3
+     1b8:	39 20 00 00 	li      r9,0
+     1bc:	48 00 00 01 	bl      1bc <SIInterruptHandler_8020860C+0x1bc>
+			1bc: R_PPC_REL24	SITransfer
+     1c0:	57 03 00 c8 	rlwinm  r3,r24,0,3,4
+     1c4:	3c 03 e8 00 	addis   r0,r3,-6144
+     1c8:	28 00 00 00 	cmplwi  r0,0
+     1cc:	40 82 01 64 	bne     330 <SIInterruptHandler_8020860C+0x330>
+     1d0:	48 00 00 01 	bl      1d0 <SIInterruptHandler_8020860C+0x1d0>
+			1d0: R_PPC_REL24	fn_802181F4
+     1d4:	80 1d 00 04 	lwz     r0,4(r29)
+     1d8:	3a fc 01 e0 	addi    r23,r28,480
+     1dc:	3b 1d 00 04 	addi    r24,r29,4
+     1e0:	3a d7 00 00 	addi    r22,r23,0
+     1e4:	3a a3 00 01 	addi    r21,r3,1
+     1e8:	54 1a 85 be 	rlwinm  r26,r0,16,22,31
+     1ec:	3b 20 00 00 	li      r25,0
+     1f0:	7f 23 cb 78 	mr      r3,r25
+     1f4:	48 00 00 01 	bl      1f4 <SIInterruptHandler_8020860C+0x1f4>
+			1f4: R_PPC_REL24	fn_8020906C
+     1f8:	2c 03 00 00 	cmpwi   r3,0
+     1fc:	41 82 00 08 	beq     204 <SIInterruptHandler_8020860C+0x204>
+     200:	92 b6 00 00 	stw     r21,0(r22)
+     204:	3b 39 00 01 	addi    r25,r25,1
+     208:	2c 19 00 04 	cmpwi   r25,4
+     20c:	3a d6 00 04 	addi    r22,r22,4
+     210:	41 80 ff e0 	blt     1f0 <SIInterruptHandler_8020860C+0x1f0>
+     214:	80 b8 00 00 	lwz     r5,0(r24)
+     218:	3c 60 80 00 	lis     r3,-32768
+     21c:	38 00 00 18 	li      r0,24
+     220:	7c 60 04 30 	srw     r0,r3,r0
+     224:	7c a0 00 39 	and.    r0,r5,r0
+     228:	57 46 f8 7e 	srwi    r6,r26,1
+     22c:	41 82 00 24 	beq     250 <SIInterruptHandler_8020860C+0x250>
+     230:	80 17 00 00 	lwz     r0,0(r23)
+     234:	28 00 00 00 	cmplwi  r0,0
+     238:	41 82 00 f8 	beq     330 <SIInterruptHandler_8020860C+0x330>
+     23c:	80 17 00 00 	lwz     r0,0(r23)
+     240:	7c 06 02 14 	add     r0,r6,r0
+     244:	7c 00 a8 40 	cmplw   r0,r21
+     248:	40 80 00 08 	bge     250 <SIInterruptHandler_8020860C+0x250>
+     24c:	48 00 00 e4 	b       330 <SIInterruptHandler_8020860C+0x330>
+     250:	38 00 00 19 	li      r0,25
+     254:	7c 60 04 30 	srw     r0,r3,r0
+     258:	7c a0 00 39 	and.    r0,r5,r0
+     25c:	38 97 00 04 	addi    r4,r23,4
+     260:	41 82 00 24 	beq     284 <SIInterruptHandler_8020860C+0x284>
+     264:	80 04 00 00 	lwz     r0,0(r4)
+     268:	28 00 00 00 	cmplwi  r0,0
+     26c:	41 82 00 c4 	beq     330 <SIInterruptHandler_8020860C+0x330>
+     270:	80 04 00 00 	lwz     r0,0(r4)
+     274:	7c 06 02 14 	add     r0,r6,r0
+     278:	7c 00 a8 40 	cmplw   r0,r21
+     27c:	40 80 00 08 	bge     284 <SIInterruptHandler_8020860C+0x284>
+     280:	48 00 00 b0 	b       330 <SIInterruptHandler_8020860C+0x330>
+     284:	38 00 00 1a 	li      r0,26
+     288:	7c 60 04 30 	srw     r0,r3,r0
+     28c:	7c a0 00 39 	and.    r0,r5,r0
+     290:	38 84 00 04 	addi    r4,r4,4
+     294:	41 82 00 24 	beq     2b8 <SIInterruptHandler_8020860C+0x2b8>
+     298:	80 04 00 00 	lwz     r0,0(r4)
+     29c:	28 00 00 00 	cmplwi  r0,0
+     2a0:	41 82 00 90 	beq     330 <SIInterruptHandler_8020860C+0x330>
+     2a4:	80 04 00 00 	lwz     r0,0(r4)
+     2a8:	7c 06 02 14 	add     r0,r6,r0
+     2ac:	7c 00 a8 40 	cmplw   r0,r21
+     2b0:	40 80 00 08 	bge     2b8 <SIInterruptHandler_8020860C+0x2b8>
+     2b4:	48 00 00 7c 	b       330 <SIInterruptHandler_8020860C+0x330>
+     2b8:	38 00 00 1b 	li      r0,27
+     2bc:	7c 60 04 30 	srw     r0,r3,r0
+     2c0:	7c a0 00 39 	and.    r0,r5,r0
+     2c4:	38 84 00 04 	addi    r4,r4,4
+     2c8:	41 82 00 24 	beq     2ec <SIInterruptHandler_8020860C+0x2ec>
+     2cc:	80 04 00 00 	lwz     r0,0(r4)
+     2d0:	28 00 00 00 	cmplwi  r0,0
+     2d4:	41 82 00 5c 	beq     330 <SIInterruptHandler_8020860C+0x330>
+     2d8:	80 04 00 00 	lwz     r0,0(r4)
+     2dc:	7c 06 02 14 	add     r0,r6,r0
+     2e0:	7c 00 a8 40 	cmplw   r0,r21
+     2e4:	40 80 00 08 	bge     2ec <SIInterruptHandler_8020860C+0x2ec>
+     2e8:	48 00 00 48 	b       330 <SIInterruptHandler_8020860C+0x330>
+     2ec:	3a c0 00 00 	li      r22,0
+     2f0:	92 d7 00 00 	stw     r22,0(r23)
+     2f4:	3a bc 01 a0 	addi    r21,r28,416
+     2f8:	92 dc 01 e4 	stw     r22,484(r28)
+     2fc:	92 dc 01 e8 	stw     r22,488(r28)
+     300:	92 dc 01 ec 	stw     r22,492(r28)
+     304:	81 95 00 00 	lwz     r12,0(r21)
+     308:	28 0c 00 00 	cmplwi  r12,0
+     30c:	41 82 00 14 	beq     320 <SIInterruptHandler_8020860C+0x320>
+     310:	7d 88 03 a6 	mtlr    r12
+     314:	38 7e 00 00 	addi    r3,r30,0
+     318:	38 9f 00 00 	addi    r4,r31,0
+     31c:	4e 80 00 21 	blrl
+     320:	3a d6 00 01 	addi    r22,r22,1
+     324:	2c 16 00 04 	cmpwi   r22,4
+     328:	3a b5 00 04 	addi    r21,r21,4
+     32c:	41 80 ff d8 	blt     304 <SIInterruptHandler_8020860C+0x304>
+     330:	ba a1 00 1c 	lmw     r21,28(r1)
+     334:	80 01 00 4c 	lwz     r0,76(r1)
+     338:	38 21 00 48 	addi    r1,r1,72
+     33c:	7c 08 03 a6 	mtlr    r0
+     340:	4e 80 00 20 	blr
+
+00000344 <fn_80208950>:
+     344:	7c 08 02 a6 	mflr    r0
+     348:	3c 80 00 00 	lis     r4,0
+			34a: R_PPC_ADDR16_HA	Packet_80640B68
+     34c:	90 01 00 04 	stw     r0,4(r1)
+     350:	94 21 ff d0 	stwu    r1,-48(r1)
+     354:	93 e1 00 2c 	stw     r31,44(r1)
+     358:	3b e4 00 00 	addi    r31,r4,0
+			35a: R_PPC_ADDR16_LO	Packet_80640B68
+     35c:	93 c1 00 28 	stw     r30,40(r1)
+     360:	93 a1 00 24 	stw     r29,36(r1)
+     364:	3b a3 00 00 	addi    r29,r3,0
+     368:	48 00 00 01 	bl      368 <fn_80208950+0x24>
+			368: R_PPC_REL24	OSDisableInterrupts
+     36c:	3c 80 cc 00 	lis     r4,-13312
+     370:	84 a4 64 34 	lwzu    r5,25652(r4)
+     374:	54 a0 01 09 	rlwinm. r0,r5,0,4,4
+     378:	41 82 00 0c 	beq     384 <fn_80208950+0x40>
+     37c:	3b c0 00 01 	li      r30,1
+     380:	48 00 00 08 	b       388 <fn_80208950+0x44>
+     384:	3b c0 00 00 	li      r30,0
+     388:	2c 1d 00 00 	cmpwi   r29,0
+     38c:	41 82 00 20 	beq     3ac <fn_80208950+0x68>
+     390:	38 00 00 00 	li      r0,0
+     394:	90 1f 01 e0 	stw     r0,480(r31)
+     398:	64 a5 08 00 	oris    r5,r5,2048
+     39c:	90 1f 01 e4 	stw     r0,484(r31)
+     3a0:	90 1f 01 e8 	stw     r0,488(r31)
+     3a4:	90 1f 01 ec 	stw     r0,492(r31)
+     3a8:	48 00 00 08 	b       3b0 <fn_80208950+0x6c>
+     3ac:	54 a5 01 46 	rlwinm  r5,r5,0,5,3
+     3b0:	54 a5 00 7c 	rlwinm  r5,r5,0,1,30
+     3b4:	90 a4 00 00 	stw     r5,0(r4)
+     3b8:	48 00 00 01 	bl      3b8 <fn_80208950+0x74>
+			3b8: R_PPC_REL24	OSRestoreInterrupts
+     3bc:	7f c3 f3 78 	mr      r3,r30
+     3c0:	80 01 00 34 	lwz     r0,52(r1)
+     3c4:	83 e1 00 2c 	lwz     r31,44(r1)
+     3c8:	83 c1 00 28 	lwz     r30,40(r1)
+     3cc:	83 a1 00 24 	lwz     r29,36(r1)
+     3d0:	38 21 00 30 	addi    r1,r1,48
+     3d4:	7c 08 03 a6 	mtlr    r0
+     3d8:	4e 80 00 20 	blr
+
+000003dc <fn_802089E8>:
+     3dc:	7c 08 02 a6 	mflr    r0
+     3e0:	90 01 00 04 	stw     r0,4(r1)
+     3e4:	94 21 ff e8 	stwu    r1,-24(r1)
+     3e8:	93 e1 00 14 	stw     r31,20(r1)
+     3ec:	93 c1 00 10 	stw     r30,16(r1)
+     3f0:	7c 7e 1b 78 	mr      r30,r3
+     3f4:	48 00 00 01 	bl      3f4 <fn_802089E8+0x18>
+			3f4: R_PPC_REL24	OSDisableInterrupts
+     3f8:	3c 80 00 00 	lis     r4,0
+			3fa: R_PPC_ADDR16_HA	lbl_80640D08
+     3fc:	38 00 00 04 	li      r0,4
+     400:	38 84 00 00 	addi    r4,r4,0
+			402: R_PPC_ADDR16_LO	lbl_80640D08
+     404:	7c 09 03 a6 	mtctr   r0
+     408:	3b e3 00 00 	addi    r31,r3,0
+     40c:	38 64 00 00 	addi    r3,r4,0
+     410:	80 03 00 00 	lwz     r0,0(r3)
+     414:	7c 00 f0 40 	cmplw   r0,r30
+     418:	40 82 00 14 	bne     42c <fn_802089E8+0x50>
+     41c:	7f e3 fb 78 	mr      r3,r31
+     420:	48 00 00 01 	bl      420 <fn_802089E8+0x44>
+			420: R_PPC_REL24	OSRestoreInterrupts
+     424:	38 60 00 01 	li      r3,1
+     428:	48 00 00 68 	b       490 <fn_802089E8+0xb4>
+     42c:	38 63 00 04 	addi    r3,r3,4
+     430:	42 00 ff e0 	bdnz    410 <fn_802089E8+0x34>
+     434:	38 00 00 04 	li      r0,4
+     438:	7c 09 03 a6 	mtctr   r0
+     43c:	38 a0 00 00 	li      r5,0
+     440:	80 04 00 00 	lwz     r0,0(r4)
+     444:	28 00 00 00 	cmplwi  r0,0
+     448:	40 82 00 30 	bne     478 <fn_802089E8+0x9c>
+     44c:	3c 60 00 00 	lis     r3,0
+			44e: R_PPC_ADDR16_HA	lbl_80640D08
+     450:	54 a4 10 3a 	slwi    r4,r5,2
+     454:	38 03 00 00 	addi    r0,r3,0
+			456: R_PPC_ADDR16_LO	lbl_80640D08
+     458:	7c 60 22 14 	add     r3,r0,r4
+     45c:	93 c3 00 00 	stw     r30,0(r3)
+     460:	38 60 00 01 	li      r3,1
+     464:	48 00 00 01 	bl      464 <fn_802089E8+0x88>
+			464: R_PPC_REL24	fn_80208950
+     468:	7f e3 fb 78 	mr      r3,r31
+     46c:	48 00 00 01 	bl      46c <fn_802089E8+0x90>
+			46c: R_PPC_REL24	OSRestoreInterrupts
+     470:	38 60 00 01 	li      r3,1
+     474:	48 00 00 1c 	b       490 <fn_802089E8+0xb4>
+     478:	38 84 00 04 	addi    r4,r4,4
+     47c:	38 a5 00 01 	addi    r5,r5,1
+     480:	42 00 ff c0 	bdnz    440 <fn_802089E8+0x64>
+     484:	7f e3 fb 78 	mr      r3,r31
+     488:	48 00 00 01 	bl      488 <fn_802089E8+0xac>
+			488: R_PPC_REL24	OSRestoreInterrupts
+     48c:	38 60 00 00 	li      r3,0
+     490:	80 01 00 1c 	lwz     r0,28(r1)
+     494:	83 e1 00 14 	lwz     r31,20(r1)
+     498:	83 c1 00 10 	lwz     r30,16(r1)
+     49c:	38 21 00 18 	addi    r1,r1,24
+     4a0:	7c 08 03 a6 	mtlr    r0
+     4a4:	4e 80 00 20 	blr
+
+000004a8 <fn_80208AB4>:
+     4a8:	7c 08 02 a6 	mflr    r0
+     4ac:	90 01 00 04 	stw     r0,4(r1)
+     4b0:	94 21 ff e8 	stwu    r1,-24(r1)
+     4b4:	93 e1 00 14 	stw     r31,20(r1)
+     4b8:	93 c1 00 10 	stw     r30,16(r1)
+     4bc:	7c 7e 1b 78 	mr      r30,r3
+     4c0:	48 00 00 01 	bl      4c0 <fn_80208AB4+0x18>
+			4c0: R_PPC_REL24	OSDisableInterrupts
+     4c4:	3c 80 00 00 	lis     r4,0
+			4c6: R_PPC_ADDR16_HA	lbl_80640D08
+     4c8:	38 00 00 04 	li      r0,4
+     4cc:	38 a4 00 00 	addi    r5,r4,0
+			4ce: R_PPC_ADDR16_LO	lbl_80640D08
+     4d0:	7c 09 03 a6 	mtctr   r0
+     4d4:	3b e3 00 00 	addi    r31,r3,0
+     4d8:	38 65 00 00 	addi    r3,r5,0
+     4dc:	38 80 00 00 	li      r4,0
+     4e0:	80 03 00 00 	lwz     r0,0(r3)
+     4e4:	7c 00 f0 40 	cmplw   r0,r30
+     4e8:	40 82 00 84 	bne     56c <fn_80208AB4+0xc4>
+     4ec:	3c 60 00 00 	lis     r3,0
+			4ee: R_PPC_ADDR16_HA	lbl_80640D08
+     4f0:	54 84 10 3a 	slwi    r4,r4,2
+     4f4:	38 03 00 00 	addi    r0,r3,0
+			4f6: R_PPC_ADDR16_LO	lbl_80640D08
+     4f8:	7c 60 22 14 	add     r3,r0,r4
+     4fc:	38 00 00 00 	li      r0,0
+     500:	90 03 00 00 	stw     r0,0(r3)
+     504:	38 80 00 00 	li      r4,0
+     508:	80 05 00 00 	lwz     r0,0(r5)
+     50c:	28 00 00 00 	cmplwi  r0,0
+     510:	40 82 00 3c 	bne     54c <fn_80208AB4+0xa4>
+     514:	38 65 00 04 	addi    r3,r5,4
+     518:	80 05 00 04 	lwz     r0,4(r5)
+     51c:	38 80 00 01 	li      r4,1
+     520:	28 00 00 00 	cmplwi  r0,0
+     524:	40 82 00 28 	bne     54c <fn_80208AB4+0xa4>
+     528:	84 03 00 04 	lwzu    r0,4(r3)
+     52c:	38 80 00 02 	li      r4,2
+     530:	28 00 00 00 	cmplwi  r0,0
+     534:	40 82 00 18 	bne     54c <fn_80208AB4+0xa4>
+     538:	80 03 00 04 	lwz     r0,4(r3)
+     53c:	38 80 00 03 	li      r4,3
+     540:	28 00 00 00 	cmplwi  r0,0
+     544:	40 82 00 08 	bne     54c <fn_80208AB4+0xa4>
+     548:	38 80 00 04 	li      r4,4
+     54c:	2c 04 00 04 	cmpwi   r4,4
+     550:	40 82 00 0c 	bne     55c <fn_80208AB4+0xb4>
+     554:	38 60 00 00 	li      r3,0
+     558:	48 00 00 01 	bl      558 <fn_80208AB4+0xb0>
+			558: R_PPC_REL24	fn_80208950
+     55c:	7f e3 fb 78 	mr      r3,r31
+     560:	48 00 00 01 	bl      560 <fn_80208AB4+0xb8>
+			560: R_PPC_REL24	OSRestoreInterrupts
+     564:	38 60 00 01 	li      r3,1
+     568:	48 00 00 1c 	b       584 <fn_80208AB4+0xdc>
+     56c:	38 63 00 04 	addi    r3,r3,4
+     570:	38 84 00 01 	addi    r4,r4,1
+     574:	42 00 ff 6c 	bdnz    4e0 <fn_80208AB4+0x38>
+     578:	7f e3 fb 78 	mr      r3,r31
+     57c:	48 00 00 01 	bl      57c <fn_80208AB4+0xd4>
+			57c: R_PPC_REL24	OSRestoreInterrupts
+     580:	38 60 00 00 	li      r3,0
+     584:	80 01 00 1c 	lwz     r0,28(r1)
+     588:	83 e1 00 14 	lwz     r31,20(r1)
+     58c:	83 c1 00 10 	lwz     r30,16(r1)
+     590:	38 21 00 18 	addi    r1,r1,24
+     594:	7c 08 03 a6 	mtlr    r0
+     598:	4e 80 00 20 	blr
+
+0000059c <SIInit>:
+     59c:	7c 08 02 a6 	mflr    r0
+     5a0:	3c 60 00 00 	lis     r3,0
+			5a2: R_PPC_ADDR16_HA	Packet_80640B68
+     5a4:	90 01 00 04 	stw     r0,4(r1)
+     5a8:	38 c3 00 00 	addi    r6,r3,0
+			5aa: R_PPC_ADDR16_LO	Packet_80640B68
+     5ac:	3c 60 00 00 	lis     r3,0
+			5ae: R_PPC_ADDR16_HA	Si_802FCA20
+     5b0:	94 21 ff f8 	stwu    r1,-8(r1)
+     5b4:	38 a0 ff ff 	li      r5,-1
+     5b8:	38 83 00 00 	addi    r4,r3,0
+			5ba: R_PPC_ADDR16_LO	Si_802FCA20
+     5bc:	90 a6 00 60 	stw     r5,96(r6)
+     5c0:	38 00 00 00 	li      r0,0
+     5c4:	38 60 00 00 	li      r3,0
+     5c8:	90 a6 00 40 	stw     r5,64(r6)
+     5cc:	90 a6 00 20 	stw     r5,32(r6)
+     5d0:	90 a6 00 00 	stw     r5,0(r6)
+     5d4:	90 04 00 04 	stw     r0,4(r4)
+     5d8:	48 00 00 01 	bl      5d8 <SIInit+0x3c>
+			5d8: R_PPC_REL24	SISetSamplingRate
+     5dc:	3c 60 cc 00 	lis     r3,-13312
+     5e0:	38 83 64 00 	addi    r4,r3,25600
+     5e4:	84 04 00 34 	lwzu    r0,52(r4)
+     5e8:	54 00 07 ff 	clrlwi. r0,r0,31
+     5ec:	40 82 ff f4 	bne     5e0 <SIInit+0x44>
+     5f0:	3c 00 80 00 	lis     r0,-32768
+     5f4:	3c 60 00 00 	lis     r3,0
+			5f6: R_PPC_ADDR16_HA	SIInterruptHandler_8020860C
+     5f8:	90 04 00 00 	stw     r0,0(r4)
+     5fc:	38 83 00 00 	addi    r4,r3,0
+			5fe: R_PPC_ADDR16_LO	SIInterruptHandler_8020860C
+     600:	38 60 00 14 	li      r3,20
+     604:	48 00 00 01 	bl      604 <SIInit+0x68>
+			604: R_PPC_REL24	__OSSetInterruptHandler
+     608:	38 60 08 00 	li      r3,2048
+     60c:	48 00 00 01 	bl      60c <SIInit+0x70>
+			60c: R_PPC_REL24	__OSUnmaskInterrupts
+     610:	38 60 00 00 	li      r3,0
+     614:	48 00 00 01 	bl      614 <SIInit+0x78>
+			614: R_PPC_REL24	SIGetType
+     618:	38 60 00 01 	li      r3,1
+     61c:	48 00 00 01 	bl      61c <SIInit+0x80>
+			61c: R_PPC_REL24	SIGetType
+     620:	38 60 00 02 	li      r3,2
+     624:	48 00 00 01 	bl      624 <SIInit+0x88>
+			624: R_PPC_REL24	SIGetType
+     628:	38 60 00 03 	li      r3,3
+     62c:	48 00 00 01 	bl      62c <SIInit+0x90>
+			62c: R_PPC_REL24	SIGetType
+     630:	80 01 00 0c 	lwz     r0,12(r1)
+     634:	38 21 00 08 	addi    r1,r1,8
+     638:	7c 08 03 a6 	mtlr    r0
+     63c:	4e 80 00 20 	blr
+
+00000640 <fn_80208C4C>:
+     640:	7c 08 02 a6 	mflr    r0
+     644:	3d 20 00 00 	lis     r9,0
+			646: R_PPC_ADDR16_HA	Si_802FCA20
+     648:	90 01 00 04 	stw     r0,4(r1)
+     64c:	94 21 ff b8 	stwu    r1,-72(r1)
+     650:	bf 21 00 2c 	stmw    r25,44(r1)
+     654:	3b 43 00 00 	addi    r26,r3,0
+     658:	3b 64 00 00 	addi    r27,r4,0
+     65c:	3b 85 00 00 	addi    r28,r5,0
+     660:	3b a6 00 00 	addi    r29,r6,0
+     664:	3b c7 00 00 	addi    r30,r7,0
+     668:	3b e8 00 00 	addi    r31,r8,0
+     66c:	3b 29 00 00 	addi    r25,r9,0
+			66e: R_PPC_ADDR16_LO	Si_802FCA20
+     670:	48 00 00 01 	bl      670 <fn_80208C4C+0x30>
+			670: R_PPC_REL24	OSDisableInterrupts
+     674:	80 19 00 00 	lwz     r0,0(r25)
+     678:	2c 00 ff ff 	cmpwi   r0,-1
+     67c:	41 82 00 10 	beq     68c <fn_80208C4C+0x4c>
+     680:	48 00 00 01 	bl      680 <fn_80208C4C+0x40>
+			680: R_PPC_REL24	OSRestoreInterrupts
+     684:	38 60 00 00 	li      r3,0
+     688:	48 00 01 b0 	b       838 <fn_80208C4C+0x1f8>
+     68c:	3c c0 cc 00 	lis     r6,-13312
+     690:	57 40 18 38 	slwi    r0,r26,3
+     694:	80 e6 64 38 	lwz     r7,25656(r6)
+     698:	3c 80 0f 00 	lis     r4,3840
+     69c:	7c 80 06 30 	sraw    r0,r4,r0
+     6a0:	7c e7 00 38 	and     r7,r7,r0
+     6a4:	90 e6 64 38 	stw     r7,25656(r6)
+     6a8:	38 1c 00 03 	addi    r0,r28,3
+     6ac:	54 04 f0 be 	srwi    r4,r0,2
+     6b0:	93 59 00 00 	stw     r26,0(r25)
+     6b4:	28 04 00 00 	cmplwi  r4,0
+     6b8:	38 a0 00 00 	li      r5,0
+     6bc:	93 f9 00 10 	stw     r31,16(r25)
+     6c0:	93 d9 00 08 	stw     r30,8(r25)
+     6c4:	93 b9 00 0c 	stw     r29,12(r25)
+     6c8:	40 81 00 a4 	ble     76c <fn_80208C4C+0x12c>
+     6cc:	28 04 00 08 	cmplwi  r4,8
+     6d0:	38 e4 ff f8 	addi    r7,r4,-8
+     6d4:	40 81 01 4c 	ble     820 <fn_80208C4C+0x1e0>
+     6d8:	38 07 00 07 	addi    r0,r7,7
+     6dc:	54 00 e8 fe 	srwi    r0,r0,3
+     6e0:	28 07 00 00 	cmplwi  r7,0
+     6e4:	7c 09 03 a6 	mtctr   r0
+     6e8:	38 fb 00 00 	addi    r7,r27,0
+     6ec:	38 c6 64 00 	addi    r6,r6,25600
+     6f0:	40 81 01 30 	ble     820 <fn_80208C4C+0x1e0>
+     6f4:	80 07 00 00 	lwz     r0,0(r7)
+     6f8:	38 a5 00 08 	addi    r5,r5,8
+     6fc:	90 06 00 80 	stw     r0,128(r6)
+     700:	80 07 00 04 	lwz     r0,4(r7)
+     704:	90 06 00 84 	stw     r0,132(r6)
+     708:	80 07 00 08 	lwz     r0,8(r7)
+     70c:	90 06 00 88 	stw     r0,136(r6)
+     710:	80 07 00 0c 	lwz     r0,12(r7)
+     714:	90 06 00 8c 	stw     r0,140(r6)
+     718:	80 07 00 10 	lwz     r0,16(r7)
+     71c:	90 06 00 90 	stw     r0,144(r6)
+     720:	80 07 00 14 	lwz     r0,20(r7)
+     724:	90 06 00 94 	stw     r0,148(r6)
+     728:	80 07 00 18 	lwz     r0,24(r7)
+     72c:	90 06 00 98 	stw     r0,152(r6)
+     730:	80 07 00 1c 	lwz     r0,28(r7)
+     734:	38 e7 00 20 	addi    r7,r7,32
+     738:	90 06 00 9c 	stw     r0,156(r6)
+     73c:	38 c6 00 20 	addi    r6,r6,32
+     740:	42 00 ff b4 	bdnz    6f4 <fn_80208C4C+0xb4>
+     744:	48 00 00 dc 	b       820 <fn_80208C4C+0x1e0>
+     748:	7c 05 20 50 	subf    r0,r5,r4
+     74c:	7c 05 20 40 	cmplw   r5,r4
+     750:	7c 09 03 a6 	mtctr   r0
+     754:	40 80 00 18 	bge     76c <fn_80208C4C+0x12c>
+     758:	80 06 00 00 	lwz     r0,0(r6)
+     75c:	38 c6 00 04 	addi    r6,r6,4
+     760:	90 07 00 80 	stw     r0,128(r7)
+     764:	38 e7 00 04 	addi    r7,r7,4
+     768:	42 00 ff f0 	bdnz    758 <fn_80208C4C+0x118>
+     76c:	3c 80 cc 00 	lis     r4,-13312
+     770:	38 c4 64 00 	addi    r6,r4,25600
+     774:	84 06 00 34 	lwzu    r0,52(r6)
+     778:	38 80 00 01 	li      r4,1
+     77c:	90 01 00 24 	stw     r0,36(r1)
+     780:	28 1f 00 00 	cmplwi  r31,0
+     784:	88 01 00 24 	lbz     r0,36(r1)
+     788:	50 80 3e 30 	rlwimi  r0,r4,7,24,24
+     78c:	98 01 00 24 	stb     r0,36(r1)
+     790:	41 82 00 08 	beq     798 <fn_80208C4C+0x158>
+     794:	48 00 00 08 	b       79c <fn_80208C4C+0x15c>
+     798:	38 80 00 00 	li      r4,0
+     79c:	88 01 00 24 	lbz     r0,36(r1)
+     7a0:	50 80 36 72 	rlwimi  r0,r4,6,25,25
+     7a4:	28 1c 00 80 	cmplwi  r28,128
+     7a8:	98 01 00 24 	stb     r0,36(r1)
+     7ac:	40 82 00 0c 	bne     7b8 <fn_80208C4C+0x178>
+     7b0:	38 00 00 00 	li      r0,0
+     7b4:	48 00 00 08 	b       7bc <fn_80208C4C+0x17c>
+     7b8:	7f 80 e3 78 	mr      r0,r28
+     7bc:	54 04 06 3e 	clrlwi  r4,r0,24
+     7c0:	88 01 00 25 	lbz     r0,37(r1)
+     7c4:	50 80 06 7e 	rlwimi  r0,r4,0,25,31
+     7c8:	28 1e 00 80 	cmplwi  r30,128
+     7cc:	98 01 00 25 	stb     r0,37(r1)
+     7d0:	40 82 00 0c 	bne     7dc <fn_80208C4C+0x19c>
+     7d4:	38 00 00 00 	li      r0,0
+     7d8:	48 00 00 08 	b       7e0 <fn_80208C4C+0x1a0>
+     7dc:	7f c0 f3 78 	mr      r0,r30
+     7e0:	54 04 06 3e 	clrlwi  r4,r0,24
+     7e4:	88 01 00 26 	lbz     r0,38(r1)
+     7e8:	50 80 06 7e 	rlwimi  r0,r4,0,25,31
+     7ec:	98 01 00 26 	stb     r0,38(r1)
+     7f0:	38 80 00 01 	li      r4,1
+     7f4:	88 01 00 27 	lbz     r0,39(r1)
+     7f8:	53 40 0f 7c 	rlwimi  r0,r26,1,29,30
+     7fc:	98 01 00 27 	stb     r0,39(r1)
+     800:	88 01 00 27 	lbz     r0,39(r1)
+     804:	50 80 07 fe 	rlwimi  r0,r4,0,31,31
+     808:	98 01 00 27 	stb     r0,39(r1)
+     80c:	80 01 00 24 	lwz     r0,36(r1)
+     810:	90 06 00 00 	stw     r0,0(r6)
+     814:	48 00 00 01 	bl      814 <fn_80208C4C+0x1d4>
+			814: R_PPC_REL24	OSRestoreInterrupts
+     818:	38 60 00 01 	li      r3,1
+     81c:	48 00 00 1c 	b       838 <fn_80208C4C+0x1f8>
+     820:	3c c0 cc 00 	lis     r6,-13312
+     824:	54 a0 10 3a 	slwi    r0,r5,2
+     828:	38 e6 64 00 	addi    r7,r6,25600
+     82c:	7c db 02 14 	add     r6,r27,r0
+     830:	7c e7 02 14 	add     r7,r7,r0
+     834:	4b ff ff 14 	b       748 <fn_80208C4C+0x108>
+     838:	bb 21 00 2c 	lmw     r25,44(r1)
+     83c:	80 01 00 4c 	lwz     r0,76(r1)
+     840:	38 21 00 48 	addi    r1,r1,72
+     844:	7c 08 03 a6 	mtlr    r0
+     848:	4e 80 00 20 	blr
+
+0000084c <fn_80208E58>:
+     84c:	7c 08 02 a6 	mflr    r0
+     850:	90 01 00 04 	stw     r0,4(r1)
+     854:	94 21 ff e8 	stwu    r1,-24(r1)
+     858:	93 e1 00 14 	stw     r31,20(r1)
+     85c:	93 c1 00 10 	stw     r30,16(r1)
+     860:	7c 7e 1b 78 	mr      r30,r3
+     864:	48 00 00 01 	bl      864 <fn_80208E58+0x18>
+			864: R_PPC_REL24	OSDisableInterrupts
+     868:	3c 80 cc 00 	lis     r4,-13312
+     86c:	20 1e 00 03 	subfic  r0,r30,3
+     870:	83 e4 64 38 	lwz     r31,25656(r4)
+     874:	54 00 18 38 	slwi    r0,r0,3
+     878:	7f ff 04 30 	srw     r31,r31,r0
+     87c:	57 e0 07 39 	rlwinm. r0,r31,0,28,28
+     880:	41 82 00 28 	beq     8a8 <fn_80208E58+0x5c>
+     884:	3c 80 00 00 	lis     r4,0
+			886: R_PPC_ADDR16_HA	Type_802FCA34
+     888:	57 c5 10 3a 	slwi    r5,r30,2
+     88c:	38 04 00 00 	addi    r0,r4,0
+			88e: R_PPC_ADDR16_LO	Type_802FCA34
+     890:	7c 80 2a 14 	add     r4,r0,r5
+     894:	80 04 00 00 	lwz     r0,0(r4)
+     898:	54 00 06 31 	rlwinm. r0,r0,0,24,24
+     89c:	40 82 00 0c 	bne     8a8 <fn_80208E58+0x5c>
+     8a0:	38 00 00 08 	li      r0,8
+     8a4:	90 04 00 00 	stw     r0,0(r4)
+     8a8:	48 00 00 01 	bl      8a8 <fn_80208E58+0x5c>
+			8a8: R_PPC_REL24	OSRestoreInterrupts
+     8ac:	7f e3 fb 78 	mr      r3,r31
+     8b0:	80 01 00 1c 	lwz     r0,28(r1)
+     8b4:	83 e1 00 14 	lwz     r31,20(r1)
+     8b8:	83 c1 00 10 	lwz     r30,16(r1)
+     8bc:	38 21 00 18 	addi    r1,r1,24
+     8c0:	7c 08 03 a6 	mtlr    r0
+     8c4:	4e 80 00 20 	blr
+
+000008c8 <fn_80208ED4>:
+     8c8:	1c 03 00 0c 	mulli   r0,r3,12
+     8cc:	3c 60 cc 00 	lis     r3,-13312
+     8d0:	38 63 64 00 	addi    r3,r3,25600
+     8d4:	7c 83 01 2e 	stwx    r4,r3,r0
+     8d8:	4e 80 00 20 	blr
+
+000008dc <fn_80208EE8>:
+     8dc:	3c 60 cc 00 	lis     r3,-13312
+     8e0:	3c 00 80 00 	lis     r0,-32768
+     8e4:	90 03 64 38 	stw     r0,25656(r3)
+     8e8:	4e 80 00 20 	blr
+
+000008ec <SISetXY>:
+     8ec:	7c 08 02 a6 	mflr    r0
+     8f0:	90 01 00 04 	stw     r0,4(r1)
+     8f4:	54 80 40 2e 	slwi    r0,r4,8
+     8f8:	94 21 ff e8 	stwu    r1,-24(r1)
+     8fc:	93 e1 00 14 	stw     r31,20(r1)
+     900:	54 7f 80 1e 	slwi    r31,r3,16
+     904:	7f ff 03 78 	or      r31,r31,r0
+     908:	48 00 00 01 	bl      908 <SISetXY+0x1c>
+			908: R_PPC_REL24	OSDisableInterrupts
+     90c:	3c 80 00 00 	lis     r4,0
+			90e: R_PPC_ADDR16_HA	Si_802FCA20
+     910:	38 84 00 00 	addi    r4,r4,0
+			912: R_PPC_ADDR16_LO	Si_802FCA20
+     914:	80 04 00 04 	lwz     r0,4(r4)
+     918:	38 a4 00 04 	addi    r5,r4,4
+     91c:	3c 80 cc 00 	lis     r4,-13312
+     920:	54 00 06 0a 	rlwinm  r0,r0,0,24,5
+     924:	90 05 00 00 	stw     r0,0(r5)
+     928:	80 05 00 00 	lwz     r0,0(r5)
+     92c:	7c 00 fb 78 	or      r0,r0,r31
+     930:	90 05 00 00 	stw     r0,0(r5)
+     934:	83 e5 00 00 	lwz     r31,0(r5)
+     938:	93 e4 64 30 	stw     r31,25648(r4)
+     93c:	48 00 00 01 	bl      93c <SISetXY+0x50>
+			93c: R_PPC_REL24	OSRestoreInterrupts
+     940:	7f e3 fb 78 	mr      r3,r31
+     944:	80 01 00 1c 	lwz     r0,28(r1)
+     948:	83 e1 00 14 	lwz     r31,20(r1)
+     94c:	38 21 00 18 	addi    r1,r1,24
+     950:	7c 08 03 a6 	mtlr    r0
+     954:	4e 80 00 20 	blr
+
+00000958 <fn_80208F64>:
+     958:	7c 08 02 a6 	mflr    r0
+     95c:	90 01 00 04 	stw     r0,4(r1)
+     960:	94 21 ff e8 	stwu    r1,-24(r1)
+     964:	93 e1 00 14 	stw     r31,20(r1)
+     968:	7c 7f 1b 79 	mr.     r31,r3
+     96c:	40 82 00 14 	bne     980 <fn_80208F64+0x28>
+     970:	3c 60 00 00 	lis     r3,0
+			972: R_PPC_ADDR16_HA	Si_802FCA20
+     974:	38 63 00 00 	addi    r3,r3,0
+			976: R_PPC_ADDR16_LO	Si_802FCA20
+     978:	80 63 00 04 	lwz     r3,4(r3)
+     97c:	48 00 00 64 	b       9e0 <fn_80208F64+0x88>
+     980:	48 00 00 01 	bl      980 <fn_80208F64+0x28>
+			980: R_PPC_REL24	OSDisableInterrupts
+     984:	3c 80 00 00 	lis     r4,0
+			986: R_PPC_ADDR16_HA	Si_802FCA20
+     988:	38 84 00 00 	addi    r4,r4,0
+			98a: R_PPC_ADDR16_LO	Si_802FCA20
+     98c:	57 ff 46 3e 	srwi    r31,r31,24
+     990:	80 04 00 04 	lwz     r0,4(r4)
+     994:	38 a4 00 04 	addi    r5,r4,4
+     998:	57 e4 e7 3e 	rlwinm  r4,r31,28,28,31
+     99c:	7c 00 20 78 	andc    r0,r0,r4
+     9a0:	90 05 00 00 	stw     r0,0(r5)
+     9a4:	64 80 03 ff 	oris    r0,r4,1023
+     9a8:	60 00 ff f0 	ori     r0,r0,65520
+     9ac:	7f ff 00 38 	and     r31,r31,r0
+     9b0:	80 05 00 00 	lwz     r0,0(r5)
+     9b4:	57 ff 06 0a 	rlwinm  r31,r31,0,24,5
+     9b8:	7c 00 fb 78 	or      r0,r0,r31
+     9bc:	90 05 00 00 	stw     r0,0(r5)
+     9c0:	3c 80 cc 00 	lis     r4,-13312
+     9c4:	38 84 64 00 	addi    r4,r4,25600
+     9c8:	83 e5 00 00 	lwz     r31,0(r5)
+     9cc:	3c 00 80 00 	lis     r0,-32768
+     9d0:	90 04 00 38 	stw     r0,56(r4)
+     9d4:	93 e4 00 30 	stw     r31,48(r4)
+     9d8:	48 00 00 01 	bl      9d8 <fn_80208F64+0x80>
+			9d8: R_PPC_REL24	OSRestoreInterrupts
+     9dc:	7f e3 fb 78 	mr      r3,r31
+     9e0:	80 01 00 1c 	lwz     r0,28(r1)
+     9e4:	83 e1 00 14 	lwz     r31,20(r1)
+     9e8:	38 21 00 18 	addi    r1,r1,24
+     9ec:	7c 08 03 a6 	mtlr    r0
+     9f0:	4e 80 00 20 	blr
+
+000009f4 <fn_80209000>:
+     9f4:	7c 08 02 a6 	mflr    r0
+     9f8:	90 01 00 04 	stw     r0,4(r1)
+     9fc:	94 21 ff e8 	stwu    r1,-24(r1)
+     a00:	93 e1 00 14 	stw     r31,20(r1)
+     a04:	7c 7f 1b 79 	mr.     r31,r3
+     a08:	40 82 00 14 	bne     a1c <fn_80209000+0x28>
+     a0c:	3c 60 00 00 	lis     r3,0
+			a0e: R_PPC_ADDR16_HA	Si_802FCA20
+     a10:	38 63 00 00 	addi    r3,r3,0
+			a12: R_PPC_ADDR16_LO	Si_802FCA20
+     a14:	80 63 00 04 	lwz     r3,4(r3)
+     a18:	48 00 00 34 	b       a4c <fn_80209000+0x58>
+     a1c:	48 00 00 01 	bl      a1c <fn_80209000+0x28>
+			a1c: R_PPC_REL24	OSDisableInterrupts
+     a20:	3c 80 00 00 	lis     r4,0
+			a22: R_PPC_ADDR16_HA	Si_802FCA20
+     a24:	38 84 00 00 	addi    r4,r4,0
+			a26: R_PPC_ADDR16_LO	Si_802FCA20
+     a28:	80 04 00 04 	lwz     r0,4(r4)
+     a2c:	57 ff 46 36 	rlwinm  r31,r31,8,24,27
+     a30:	38 a4 00 04 	addi    r5,r4,4
+     a34:	3c 80 cc 00 	lis     r4,-13312
+     a38:	7c 1f f8 78 	andc    r31,r0,r31
+     a3c:	93 e4 64 30 	stw     r31,25648(r4)
+     a40:	93 e5 00 00 	stw     r31,0(r5)
+     a44:	48 00 00 01 	bl      a44 <fn_80209000+0x50>
+			a44: R_PPC_REL24	OSRestoreInterrupts
+     a48:	7f e3 fb 78 	mr      r3,r31
+     a4c:	80 01 00 1c 	lwz     r0,28(r1)
+     a50:	83 e1 00 14 	lwz     r31,20(r1)
+     a54:	38 21 00 18 	addi    r1,r1,24
+     a58:	7c 08 03 a6 	mtlr    r0
+     a5c:	4e 80 00 20 	blr
+
+00000a60 <fn_8020906C>:
+     a60:	7c 08 02 a6 	mflr    r0
+     a64:	3c 80 00 00 	lis     r4,0
+			a66: R_PPC_ADDR16_HA	Packet_80640B68
+     a68:	90 01 00 04 	stw     r0,4(r1)
+     a6c:	94 21 ff d8 	stwu    r1,-40(r1)
+     a70:	93 e1 00 24 	stw     r31,36(r1)
+     a74:	3b e4 00 00 	addi    r31,r4,0
+			a76: R_PPC_ADDR16_LO	Packet_80640B68
+     a78:	93 c1 00 20 	stw     r30,32(r1)
+     a7c:	3b c3 00 00 	addi    r30,r3,0
+     a80:	93 a1 00 1c 	stw     r29,28(r1)
+     a84:	48 00 00 01 	bl      a84 <fn_8020906C+0x24>
+			a84: R_PPC_REL24	OSDisableInterrupts
+     a88:	3c 80 cc 00 	lis     r4,-13312
+     a8c:	20 1e 00 03 	subfic  r0,r30,3
+     a90:	83 a4 64 38 	lwz     r29,25656(r4)
+     a94:	54 00 18 38 	slwi    r0,r0,3
+     a98:	7f bd 04 30 	srw     r29,r29,r0
+     a9c:	57 a0 07 39 	rlwinm. r0,r29,0,28,28
+     aa0:	41 82 00 28 	beq     ac8 <fn_8020906C+0x68>
+     aa4:	3c 80 00 00 	lis     r4,0
+			aa6: R_PPC_ADDR16_HA	Type_802FCA34
+     aa8:	57 c5 10 3a 	slwi    r5,r30,2
+     aac:	38 04 00 00 	addi    r0,r4,0
+			aae: R_PPC_ADDR16_LO	Type_802FCA34
+     ab0:	7c 80 2a 14 	add     r4,r0,r5
+     ab4:	80 04 00 00 	lwz     r0,0(r4)
+     ab8:	54 00 06 31 	rlwinm. r0,r0,0,24,24
+     abc:	40 82 00 0c 	bne     ac8 <fn_8020906C+0x68>
+     ac0:	38 00 00 08 	li      r0,8
+     ac4:	90 04 00 00 	stw     r0,0(r4)
+     ac8:	48 00 00 01 	bl      ac8 <fn_8020906C+0x68>
+			ac8: R_PPC_REL24	OSRestoreInterrupts
+     acc:	57 a0 06 b5 	rlwinm. r0,r29,0,26,26
+     ad0:	41 82 00 44 	beq     b14 <fn_8020906C+0xb4>
+     ad4:	1c 9e 00 0c 	mulli   r4,r30,12
+     ad8:	3c 60 cc 00 	lis     r3,-13312
+     adc:	38 03 64 00 	addi    r0,r3,25600
+     ae0:	7c 60 22 14 	add     r3,r0,r4
+     ae4:	57 c4 18 38 	slwi    r4,r30,3
+     ae8:	80 03 00 04 	lwz     r0,4(r3)
+     aec:	7c df 22 14 	add     r6,r31,r4
+     af0:	90 06 01 c0 	stw     r0,448(r6)
+     af4:	57 c0 10 3a 	slwi    r0,r30,2
+     af8:	7c 9f 02 14 	add     r4,r31,r0
+     afc:	80 a3 00 08 	lwz     r5,8(r3)
+     b00:	38 00 00 01 	li      r0,1
+     b04:	38 60 00 01 	li      r3,1
+     b08:	90 a6 01 c4 	stw     r5,452(r6)
+     b0c:	90 04 01 b0 	stw     r0,432(r4)
+     b10:	48 00 00 08 	b       b18 <fn_8020906C+0xb8>
+     b14:	38 60 00 00 	li      r3,0
+     b18:	80 01 00 2c 	lwz     r0,44(r1)
+     b1c:	83 e1 00 24 	lwz     r31,36(r1)
+     b20:	83 c1 00 20 	lwz     r30,32(r1)
+     b24:	83 a1 00 1c 	lwz     r29,28(r1)
+     b28:	38 21 00 28 	addi    r1,r1,40
+     b2c:	7c 08 03 a6 	mtlr    r0
+     b30:	4e 80 00 20 	blr
+
+00000b34 <fn_80209140>:
+     b34:	7c 08 02 a6 	mflr    r0
+     b38:	3c a0 00 00 	lis     r5,0
+			b3a: R_PPC_ADDR16_HA	Packet_80640B68
+     b3c:	90 01 00 04 	stw     r0,4(r1)
+     b40:	94 21 ff d8 	stwu    r1,-40(r1)
+     b44:	bf 61 00 14 	stmw    r27,20(r1)
+     b48:	3b a3 00 00 	addi    r29,r3,0
+     b4c:	3b c4 00 00 	addi    r30,r4,0
+     b50:	3b 85 00 00 	addi    r28,r5,0
+			b52: R_PPC_ADDR16_LO	Packet_80640B68
+     b54:	48 00 00 01 	bl      b54 <fn_80209140+0x20>
+			b54: R_PPC_REL24	OSDisableInterrupts
+     b58:	3b e3 00 00 	addi    r31,r3,0
+     b5c:	38 7d 00 00 	addi    r3,r29,0
+     b60:	48 00 00 01 	bl      b60 <fn_80209140+0x2c>
+			b60: R_PPC_REL24	fn_80208E58
+     b64:	54 60 06 b5 	rlwinm. r0,r3,0,26,26
+     b68:	41 82 00 3c 	beq     ba4 <fn_80209140+0x70>
+     b6c:	1c 9d 00 0c 	mulli   r4,r29,12
+     b70:	3c 60 cc 00 	lis     r3,-13312
+     b74:	38 03 64 00 	addi    r0,r3,25600
+     b78:	7c 80 22 14 	add     r4,r0,r4
+     b7c:	57 a3 18 38 	slwi    r3,r29,3
+     b80:	80 04 00 04 	lwz     r0,4(r4)
+     b84:	7c bc 1a 14 	add     r5,r28,r3
+     b88:	90 05 01 c0 	stw     r0,448(r5)
+     b8c:	57 a0 10 3a 	slwi    r0,r29,2
+     b90:	7c 7c 02 14 	add     r3,r28,r0
+     b94:	80 84 00 08 	lwz     r4,8(r4)
+     b98:	38 00 00 01 	li      r0,1
+     b9c:	90 85 01 c4 	stw     r4,452(r5)
+     ba0:	90 03 01 b0 	stw     r0,432(r3)
+     ba4:	57 a0 10 3a 	slwi    r0,r29,2
+     ba8:	7c 7c 02 14 	add     r3,r28,r0
+     bac:	83 63 01 b0 	lwz     r27,432(r3)
+     bb0:	38 00 00 00 	li      r0,0
+     bb4:	2c 1b 00 00 	cmpwi   r27,0
+     bb8:	90 03 01 b0 	stw     r0,432(r3)
+     bbc:	41 82 00 1c 	beq     bd8 <fn_80209140+0xa4>
+     bc0:	57 a0 18 38 	slwi    r0,r29,3
+     bc4:	7c 7c 02 14 	add     r3,r28,r0
+     bc8:	80 03 01 c0 	lwz     r0,448(r3)
+     bcc:	90 1e 00 00 	stw     r0,0(r30)
+     bd0:	80 03 01 c4 	lwz     r0,452(r3)
+     bd4:	90 1e 00 04 	stw     r0,4(r30)
+     bd8:	7f e3 fb 78 	mr      r3,r31
+     bdc:	48 00 00 01 	bl      bdc <fn_80209140+0xa8>
+			bdc: R_PPC_REL24	OSRestoreInterrupts
+     be0:	7f 63 db 78 	mr      r3,r27
+     be4:	bb 61 00 14 	lmw     r27,20(r1)
+     be8:	80 01 00 2c 	lwz     r0,44(r1)
+     bec:	38 21 00 28 	addi    r1,r1,40
+     bf0:	7c 08 03 a6 	mtlr    r0
+     bf4:	4e 80 00 20 	blr
+
+00000bf8 <fn_80209204>:
+     bf8:	7c 08 02 a6 	mflr    r0
+     bfc:	3c 80 00 00 	lis     r4,0
+			bfe: R_PPC_ADDR16_HA	lbl_80640BE8
+     c00:	90 01 00 04 	stw     r0,4(r1)
+     c04:	38 04 00 00 	addi    r0,r4,0
+			c06: R_PPC_ADDR16_LO	lbl_80640BE8
+     c08:	3c 80 66 66 	lis     r4,26214
+     c0c:	7c 00 18 50 	subf    r0,r0,r3
+     c10:	94 21 ff e0 	stwu    r1,-32(r1)
+     c14:	38 64 66 67 	addi    r3,r4,26215
+     c18:	7c 03 00 96 	mulhw   r0,r3,r0
+     c1c:	93 e1 00 1c 	stw     r31,28(r1)
+     c20:	7c 00 26 70 	srawi   r0,r0,4
+     c24:	54 03 0f fe 	srwi    r3,r0,31
+     c28:	7c 00 1a 14 	add     r0,r0,r3
+     c2c:	3c 60 00 00 	lis     r3,0
+			c2e: R_PPC_ADDR16_HA	Packet_80640B68
+     c30:	54 04 28 34 	slwi    r4,r0,5
+     c34:	38 03 00 00 	addi    r0,r3,0
+			c36: R_PPC_ADDR16_LO	Packet_80640B68
+     c38:	7f e0 22 14 	add     r31,r0,r4
+     c3c:	80 7f 00 00 	lwz     r3,0(r31)
+     c40:	2c 03 ff ff 	cmpwi   r3,-1
+     c44:	41 82 00 2c 	beq     c70 <fn_80209204+0x78>
+     c48:	80 9f 00 04 	lwz     r4,4(r31)
+     c4c:	80 bf 00 08 	lwz     r5,8(r31)
+     c50:	80 df 00 0c 	lwz     r6,12(r31)
+     c54:	80 ff 00 10 	lwz     r7,16(r31)
+     c58:	81 1f 00 14 	lwz     r8,20(r31)
+     c5c:	48 00 00 01 	bl      c5c <fn_80209204+0x64>
+			c5c: R_PPC_REL24	fn_80208C4C
+     c60:	2c 03 00 00 	cmpwi   r3,0
+     c64:	41 82 00 0c 	beq     c70 <fn_80209204+0x78>
+     c68:	38 00 ff ff 	li      r0,-1
+     c6c:	90 1f 00 00 	stw     r0,0(r31)
+     c70:	80 01 00 24 	lwz     r0,36(r1)
+     c74:	83 e1 00 1c 	lwz     r31,28(r1)
+     c78:	38 21 00 20 	addi    r1,r1,32
+     c7c:	7c 08 03 a6 	mtlr    r0
+     c80:	4e 80 00 20 	blr
+
+00000c84 <SITransfer>:
+     c84:	7c 08 02 a6 	mflr    r0
+     c88:	90 01 00 04 	stw     r0,4(r1)
+     c8c:	94 21 ff a0 	stwu    r1,-96(r1)
+     c90:	be 61 00 2c 	stmw    r19,44(r1)
+     c94:	3b 03 00 00 	addi    r24,r3,0
+     c98:	3c 60 00 00 	lis     r3,0
+			c9a: R_PPC_ADDR16_HA	Packet_80640B68
+     c9c:	3a e3 00 00 	addi    r23,r3,0
+			c9e: R_PPC_ADDR16_LO	Packet_80640B68
+     ca0:	57 00 28 34 	slwi    r0,r24,5
+     ca4:	3b 24 00 00 	addi    r25,r4,0
+     ca8:	3b 45 00 00 	addi    r26,r5,0
+     cac:	3b 66 00 00 	addi    r27,r6,0
+     cb0:	3b 87 00 00 	addi    r28,r7,0
+     cb4:	3b a8 00 00 	addi    r29,r8,0
+     cb8:	3b e9 00 00 	addi    r31,r9,0
+     cbc:	3b ca 00 00 	addi    r30,r10,0
+     cc0:	7e d7 02 14 	add     r22,r23,r0
+     cc4:	48 00 00 01 	bl      cc4 <SITransfer+0x40>
+			cc4: R_PPC_REL24	OSDisableInterrupts
+     cc8:	80 16 00 00 	lwz     r0,0(r22)
+     ccc:	3a a3 00 00 	addi    r21,r3,0
+     cd0:	2c 00 ff ff 	cmpwi   r0,-1
+     cd4:	40 82 00 14 	bne     ce8 <SITransfer+0x64>
+     cd8:	3c 60 00 00 	lis     r3,0
+			cda: R_PPC_ADDR16_HA	Si_802FCA20
+     cdc:	80 03 00 00 	lwz     r0,0(r3)
+			cde: R_PPC_ADDR16_LO	Si_802FCA20
+     ce0:	7c 00 c0 00 	cmpw    r0,r24
+     ce4:	40 82 00 14 	bne     cf8 <SITransfer+0x74>
+     ce8:	7e a3 ab 78 	mr      r3,r21
+     cec:	48 00 00 01 	bl      cec <SITransfer+0x68>
+			cec: R_PPC_REL24	OSRestoreInterrupts
+     cf0:	38 60 00 00 	li      r3,0
+     cf4:	48 00 00 e8 	b       ddc <SITransfer+0x158>
+     cf8:	48 00 00 01 	bl      cf8 <SITransfer+0x74>
+			cf8: R_PPC_REL24	__OSGetSystemTime
+     cfc:	38 00 00 00 	li      r0,0
+     d00:	7f c5 02 78 	xor     r5,r30,r0
+     d04:	7f e0 02 78 	xor     r0,r31,r0
+     d08:	7c a0 03 79 	or.     r0,r5,r0
+     d0c:	40 82 00 10 	bne     d1c <SITransfer+0x98>
+     d10:	3a 64 00 00 	addi    r19,r4,0
+     d14:	3a 83 00 00 	addi    r20,r3,0
+     d18:	48 00 00 1c 	b       d34 <SITransfer+0xb0>
+     d1c:	57 00 18 38 	slwi    r0,r24,3
+     d20:	7c d7 02 14 	add     r6,r23,r0
+     d24:	80 a6 01 44 	lwz     r5,324(r6)
+     d28:	80 06 01 40 	lwz     r0,320(r6)
+     d2c:	7e 7e 28 14 	addc    r19,r30,r5
+     d30:	7e 9f 01 14 	adde    r20,r31,r0
+     d34:	6c 66 80 00 	xoris   r6,r3,32768
+     d38:	6e 85 80 00 	xoris   r5,r20,32768
+     d3c:	7c 13 20 10 	subfc   r0,r19,r4
+     d40:	7c a5 31 10 	subfe   r5,r5,r6
+     d44:	7c a6 31 10 	subfe   r5,r6,r6
+     d48:	7c a5 00 d1 	neg.    r5,r5
+     d4c:	41 82 00 30 	beq     d7c <SITransfer+0xf8>
+     d50:	1c 18 00 28 	mulli   r0,r24,40
+     d54:	7f c4 98 10 	subfc   r30,r4,r19
+     d58:	7f e3 a1 10 	subfe   r31,r3,r20
+     d5c:	3c 80 00 00 	lis     r4,0
+			d5e: R_PPC_ADDR16_HA	fn_80209204
+     d60:	7c 77 02 14 	add     r3,r23,r0
+     d64:	38 e4 00 00 	addi    r7,r4,0
+			d66: R_PPC_ADDR16_LO	fn_80209204
+     d68:	38 de 00 00 	addi    r6,r30,0
+     d6c:	38 bf 00 00 	addi    r5,r31,0
+     d70:	38 63 00 80 	addi    r3,r3,128
+     d74:	48 00 00 01 	bl      d74 <SITransfer+0xf0>
+			d74: R_PPC_REL24	OSSetAlarm
+     d78:	48 00 00 38 	b       db0 <SITransfer+0x12c>
+     d7c:	38 78 00 00 	addi    r3,r24,0
+     d80:	38 99 00 00 	addi    r4,r25,0
+     d84:	38 ba 00 00 	addi    r5,r26,0
+     d88:	38 db 00 00 	addi    r6,r27,0
+     d8c:	38 fc 00 00 	addi    r7,r28,0
+     d90:	39 1d 00 00 	addi    r8,r29,0
+     d94:	48 00 00 01 	bl      d94 <SITransfer+0x110>
+			d94: R_PPC_REL24	fn_80208C4C
+     d98:	2c 03 00 00 	cmpwi   r3,0
+     d9c:	41 82 00 14 	beq     db0 <SITransfer+0x12c>
+     da0:	7e a3 ab 78 	mr      r3,r21
+     da4:	48 00 00 01 	bl      da4 <SITransfer+0x120>
+			da4: R_PPC_REL24	OSRestoreInterrupts
+     da8:	38 60 00 01 	li      r3,1
+     dac:	48 00 00 30 	b       ddc <SITransfer+0x158>
+     db0:	93 16 00 00 	stw     r24,0(r22)
+     db4:	7e a3 ab 78 	mr      r3,r21
+     db8:	93 36 00 04 	stw     r25,4(r22)
+     dbc:	93 56 00 08 	stw     r26,8(r22)
+     dc0:	93 76 00 0c 	stw     r27,12(r22)
+     dc4:	93 96 00 10 	stw     r28,16(r22)
+     dc8:	93 b6 00 14 	stw     r29,20(r22)
+     dcc:	92 76 00 1c 	stw     r19,28(r22)
+     dd0:	92 96 00 18 	stw     r20,24(r22)
+     dd4:	48 00 00 01 	bl      dd4 <SITransfer+0x150>
+			dd4: R_PPC_REL24	OSRestoreInterrupts
+     dd8:	38 60 00 01 	li      r3,1
+     ddc:	ba 61 00 2c 	lmw     r19,44(r1)
+     de0:	80 01 00 64 	lwz     r0,100(r1)
+     de4:	38 21 00 60 	addi    r1,r1,96
+     de8:	7c 08 03 a6 	mtlr    r0
+     dec:	4e 80 00 20 	blr
+
+00000df0 <GetTypeCallback>:
+     df0:	7c 08 02 a6 	mflr    r0
+     df4:	90 01 00 04 	stw     r0,4(r1)
+     df8:	94 21 ff d0 	stwu    r1,-48(r1)
+     dfc:	bf 41 00 18 	stmw    r26,24(r1)
+     e00:	3b 63 00 00 	addi    r27,r3,0
+     e04:	3c 60 00 00 	lis     r3,0
+			e06: R_PPC_ADDR16_HA	Type_802FCA34
+     e08:	38 03 00 00 	addi    r0,r3,0
+			e0a: R_PPC_ADDR16_LO	Type_802FCA34
+     e0c:	57 7d 10 3a 	slwi    r29,r27,2
+     e10:	7f c0 ea 14 	add     r30,r0,r29
+     e14:	3c 60 00 00 	lis     r3,0
+			e16: R_PPC_ADDR16_HA	Packet_80640B68
+     e18:	3b 44 00 00 	addi    r26,r4,0
+     e1c:	3b e3 00 00 	addi    r31,r3,0
+			e1e: R_PPC_ADDR16_LO	Packet_80640B68
+     e20:	80 1e 00 00 	lwz     r0,0(r30)
+     e24:	54 00 06 6e 	rlwinm  r0,r0,0,25,23
+     e28:	90 1e 00 00 	stw     r0,0(r30)
+     e2c:	80 1e 00 00 	lwz     r0,0(r30)
+     e30:	7c 00 d3 78 	or      r0,r0,r26
+     e34:	90 1e 00 00 	stw     r0,0(r30)
+     e38:	48 00 00 01 	bl      e38 <GetTypeCallback+0x48>
+			e38: R_PPC_REL24	__OSGetSystemTime
+     e3c:	57 60 18 38 	slwi    r0,r27,3
+     e40:	7c bf 02 14 	add     r5,r31,r0
+     e44:	90 85 01 24 	stw     r4,292(r5)
+     e48:	3c 80 80 00 	lis     r4,-32768
+     e4c:	57 40 07 3f 	clrlwi. r0,r26,28
+     e50:	90 65 01 20 	stw     r3,288(r5)
+     e54:	7c 84 dc 30 	srw     r4,r4,r27
+     e58:	80 60 00 00 	lwz     r3,0(0)
+			e58: R_PPC_EMB_SDA21	lbl_8064D8D8
+     e5c:	83 9e 00 00 	lwz     r28,0(r30)
+     e60:	7c 60 20 78 	andc    r0,r3,r4
+     e64:	90 00 00 00 	stw     r0,0(0)
+			e64: R_PPC_EMB_SDA21	lbl_8064D8D8
+     e68:	7c 7a 20 38 	and     r26,r3,r4
+     e6c:	40 82 00 24 	bne     e90 <GetTypeCallback+0xa0>
+     e70:	57 83 00 c8 	rlwinm  r3,r28,0,3,4
+     e74:	3c 03 f8 00 	addis   r0,r3,-2048
+     e78:	28 00 00 00 	cmplwi  r0,0
+     e7c:	40 82 00 14 	bne     e90 <GetTypeCallback+0xa0>
+     e80:	57 80 00 01 	clrrwi. r0,r28,31
+     e84:	41 82 00 0c 	beq     e90 <GetTypeCallback+0xa0>
+     e88:	57 80 01 4b 	rlwinm. r0,r28,0,5,5
+     e8c:	41 82 00 5c 	beq     ee8 <GetTypeCallback+0xf8>
+     e90:	38 7b 00 00 	addi    r3,r27,0
+     e94:	38 80 00 00 	li      r4,0
+     e98:	48 00 00 01 	bl      e98 <GetTypeCallback+0xa8>
+			e98: R_PPC_REL24	fn_8020EEA8
+     e9c:	57 60 20 36 	slwi    r0,r27,4
+     ea0:	83 de 00 00 	lwz     r30,0(r30)
+     ea4:	7f ff 02 14 	add     r31,r31,r0
+     ea8:	3b a0 00 00 	li      r29,0
+     eac:	3b 9d 00 00 	addi    r28,r29,0
+     eb0:	3b ff 01 60 	addi    r31,r31,352
+     eb4:	81 9f 00 00 	lwz     r12,0(r31)
+     eb8:	28 0c 00 00 	cmplwi  r12,0
+     ebc:	41 82 00 18 	beq     ed4 <GetTypeCallback+0xe4>
+     ec0:	93 9f 00 00 	stw     r28,0(r31)
+     ec4:	7d 88 03 a6 	mtlr    r12
+     ec8:	38 7b 00 00 	addi    r3,r27,0
+     ecc:	38 9e 00 00 	addi    r4,r30,0
+     ed0:	4e 80 00 21 	blrl
+     ed4:	3b bd 00 01 	addi    r29,r29,1
+     ed8:	2c 1d 00 04 	cmpwi   r29,4
+     edc:	3b ff 00 04 	addi    r31,r31,4
+     ee0:	41 80 ff d4 	blt     eb4 <GetTypeCallback+0xc4>
+     ee4:	48 00 01 90 	b       1074 <GetTypeCallback+0x284>
+     ee8:	7f 63 db 78 	mr      r3,r27
+     eec:	48 00 00 01 	bl      eec <GetTypeCallback+0xfc>
+			eec: R_PPC_REL24	fn_8020EE24
+     ef0:	2c 1a 00 00 	cmpwi   r26,0
+     ef4:	54 7a 42 2e 	rlwinm  r26,r3,8,8,23
+     ef8:	41 82 00 54 	beq     f4c <GetTypeCallback+0x15c>
+     efc:	57 40 02 d7 	rlwinm. r0,r26,0,11,11
+     f00:	41 82 00 4c 	beq     f4c <GetTypeCallback+0x15c>
+     f04:	3c 60 00 d0 	lis     r3,208
+     f08:	38 03 ff 00 	addi    r0,r3,-256
+     f0c:	7f 40 00 38 	and     r0,r26,r0
+     f10:	64 00 4e 10 	oris    r0,r0,19984
+     f14:	7c 9f ea 14 	add     r4,r31,r29
+     f18:	94 04 01 f0 	stwu    r0,496(r4)
+     f1c:	38 00 00 80 	li      r0,128
+     f20:	3c 60 00 00 	lis     r3,0
+			f22: R_PPC_ADDR16_HA	GetTypeCallback
+     f24:	90 1e 00 00 	stw     r0,0(r30)
+     f28:	39 03 00 00 	addi    r8,r3,0
+			f2a: R_PPC_ADDR16_LO	GetTypeCallback
+     f2c:	38 7b 00 00 	addi    r3,r27,0
+     f30:	38 de 00 00 	addi    r6,r30,0
+     f34:	38 a0 00 03 	li      r5,3
+     f38:	38 e0 00 03 	li      r7,3
+     f3c:	39 40 00 00 	li      r10,0
+     f40:	39 20 00 00 	li      r9,0
+     f44:	48 00 00 01 	bl      f44 <GetTypeCallback+0x154>
+			f44: R_PPC_REL24	SITransfer
+     f48:	48 00 01 2c 	b       1074 <GetTypeCallback+0x284>
+     f4c:	57 80 02 d7 	rlwinm. r0,r28,0,11,11
+     f50:	41 82 00 70 	beq     fc0 <GetTypeCallback+0x1d0>
+     f54:	3c 60 00 d0 	lis     r3,208
+     f58:	38 63 ff 00 	addi    r3,r3,-256
+     f5c:	7f 40 18 38 	and     r0,r26,r3
+     f60:	7f 83 18 38 	and     r3,r28,r3
+     f64:	7c 00 18 40 	cmplw   r0,r3
+     f68:	41 82 00 c4 	beq     102c <GetTypeCallback+0x23c>
+     f6c:	57 40 02 d7 	rlwinm. r0,r26,0,11,11
+     f70:	40 82 00 14 	bne     f84 <GetTypeCallback+0x194>
+     f74:	64 7a 00 10 	oris    r26,r3,16
+     f78:	38 7b 00 00 	addi    r3,r27,0
+     f7c:	57 44 c4 3e 	rlwinm  r4,r26,24,16,31
+     f80:	48 00 00 01 	bl      f80 <GetTypeCallback+0x190>
+			f80: R_PPC_REL24	fn_8020EEA8
+     f84:	67 40 4e 00 	oris    r0,r26,19968
+     f88:	7c 9f ea 14 	add     r4,r31,r29
+     f8c:	94 04 01 f0 	stwu    r0,496(r4)
+     f90:	38 00 00 80 	li      r0,128
+     f94:	3c 60 00 00 	lis     r3,0
+			f96: R_PPC_ADDR16_HA	GetTypeCallback
+     f98:	90 1e 00 00 	stw     r0,0(r30)
+     f9c:	39 03 00 00 	addi    r8,r3,0
+			f9e: R_PPC_ADDR16_LO	GetTypeCallback
+     fa0:	38 7b 00 00 	addi    r3,r27,0
+     fa4:	38 de 00 00 	addi    r6,r30,0
+     fa8:	38 a0 00 03 	li      r5,3
+     fac:	38 e0 00 03 	li      r7,3
+     fb0:	39 40 00 00 	li      r10,0
+     fb4:	39 20 00 00 	li      r9,0
+     fb8:	48 00 00 01 	bl      fb8 <GetTypeCallback+0x1c8>
+			fb8: R_PPC_REL24	SITransfer
+     fbc:	48 00 00 b8 	b       1074 <GetTypeCallback+0x284>
+     fc0:	57 80 00 43 	rlwinm. r0,r28,0,1,1
+     fc4:	41 82 00 5c 	beq     1020 <GetTypeCallback+0x230>
+     fc8:	3c 60 00 d0 	lis     r3,208
+     fcc:	38 03 ff 00 	addi    r0,r3,-256
+     fd0:	7f 9c 00 38 	and     r28,r28,r0
+     fd4:	67 9c 00 10 	oris    r28,r28,16
+     fd8:	38 7b 00 00 	addi    r3,r27,0
+     fdc:	57 84 c4 3e 	rlwinm  r4,r28,24,16,31
+     fe0:	48 00 00 01 	bl      fe0 <GetTypeCallback+0x1f0>
+			fe0: R_PPC_REL24	fn_8020EEA8
+     fe4:	67 80 4e 00 	oris    r0,r28,19968
+     fe8:	7c 9f ea 14 	add     r4,r31,r29
+     fec:	94 04 01 f0 	stwu    r0,496(r4)
+     ff0:	38 00 00 80 	li      r0,128
+     ff4:	3c 60 00 00 	lis     r3,0
+			ff6: R_PPC_ADDR16_HA	GetTypeCallback
+     ff8:	90 1e 00 00 	stw     r0,0(r30)
+     ffc:	39 03 00 00 	addi    r8,r3,0
+			ffe: R_PPC_ADDR16_LO	GetTypeCallback
+    1000:	38 7b 00 00 	addi    r3,r27,0
+    1004:	38 de 00 00 	addi    r6,r30,0
+    1008:	38 a0 00 03 	li      r5,3
+    100c:	38 e0 00 03 	li      r7,3
+    1010:	39 40 00 00 	li      r10,0
+    1014:	39 20 00 00 	li      r9,0
+    1018:	48 00 00 01 	bl      1018 <GetTypeCallback+0x228>
+			1018: R_PPC_REL24	SITransfer
+    101c:	48 00 00 58 	b       1074 <GetTypeCallback+0x284>
+    1020:	38 7b 00 00 	addi    r3,r27,0
+    1024:	38 80 00 00 	li      r4,0
+    1028:	48 00 00 01 	bl      1028 <GetTypeCallback+0x238>
+			1028: R_PPC_REL24	fn_8020EEA8
+    102c:	57 60 20 36 	slwi    r0,r27,4
+    1030:	83 de 00 00 	lwz     r30,0(r30)
+    1034:	7f ff 02 14 	add     r31,r31,r0
+    1038:	3b a0 00 00 	li      r29,0
+    103c:	3b 9d 00 00 	addi    r28,r29,0
+    1040:	3b ff 01 60 	addi    r31,r31,352
+    1044:	81 9f 00 00 	lwz     r12,0(r31)
+    1048:	28 0c 00 00 	cmplwi  r12,0
+    104c:	41 82 00 18 	beq     1064 <GetTypeCallback+0x274>
+    1050:	93 9f 00 00 	stw     r28,0(r31)
+    1054:	7d 88 03 a6 	mtlr    r12
+    1058:	38 7b 00 00 	addi    r3,r27,0
+    105c:	38 9e 00 00 	addi    r4,r30,0
+    1060:	4e 80 00 21 	blrl
+    1064:	3b bd 00 01 	addi    r29,r29,1
+    1068:	2c 1d 00 04 	cmpwi   r29,4
+    106c:	3b ff 00 04 	addi    r31,r31,4
+    1070:	41 80 ff d4 	blt     1044 <GetTypeCallback+0x254>
+    1074:	bb 41 00 18 	lmw     r26,24(r1)
+    1078:	80 01 00 34 	lwz     r0,52(r1)
+    107c:	38 21 00 30 	addi    r1,r1,48
+    1080:	7c 08 03 a6 	mtlr    r0
+    1084:	4e 80 00 20 	blr
+
+00001088 <SIGetType>:
+    1088:	7c 08 02 a6 	mflr    r0
+    108c:	90 01 00 04 	stw     r0,4(r1)
+    1090:	94 21 ff d8 	stwu    r1,-40(r1)
+    1094:	bf 61 00 14 	stmw    r27,20(r1)
+    1098:	7c 7b 1b 78 	mr      r27,r3
+    109c:	48 00 00 01 	bl      109c <SIGetType+0x14>
+			109c: R_PPC_REL24	OSDisableInterrupts
+    10a0:	3c 80 00 00 	lis     r4,0
+			10a2: R_PPC_ADDR16_HA	Type_802FCA34
+    10a4:	57 65 10 3a 	slwi    r5,r27,2
+    10a8:	38 04 00 00 	addi    r0,r4,0
+			10aa: R_PPC_ADDR16_LO	Type_802FCA34
+    10ac:	7f c0 2a 14 	add     r30,r0,r5
+    10b0:	83 9e 00 00 	lwz     r28,0(r30)
+    10b4:	7c 7d 1b 78 	mr      r29,r3
+    10b8:	48 00 00 01 	bl      10b8 <SIGetType+0x30>
+			10b8: R_PPC_REL24	__OSGetSystemTime
+    10bc:	3c a0 00 00 	lis     r5,0
+			10be: R_PPC_ADDR16_HA	TypeTime_80640C88
+    10c0:	57 66 18 38 	slwi    r6,r27,3
+    10c4:	38 05 00 00 	addi    r0,r5,0
+			10c6: R_PPC_ADDR16_LO	TypeTime_80640C88
+    10c8:	7f e0 32 14 	add     r31,r0,r6
+    10cc:	80 df 00 04 	lwz     r6,4(r31)
+    10d0:	3c a0 00 00 	lis     r5,0
+			10d2: R_PPC_ADDR16_HA	Si_802FCA20
+    10d4:	38 a5 00 00 	addi    r5,r5,0
+			10d6: R_PPC_ADDR16_LO	Si_802FCA20
+    10d8:	80 1f 00 00 	lwz     r0,0(r31)
+    10dc:	7c 86 20 10 	subfc   r4,r6,r4
+    10e0:	7c 00 19 10 	subfe   r0,r0,r3
+    10e4:	80 c5 00 04 	lwz     r6,4(r5)
+    10e8:	38 a0 00 80 	li      r5,128
+    10ec:	7c a3 de 30 	sraw    r3,r5,r27
+    10f0:	7c c3 18 39 	and.    r3,r6,r3
+    10f4:	41 82 00 34 	beq     1128 <SIGetType+0xa0>
+    10f8:	28 1c 00 08 	cmplwi  r28,8
+    10fc:	41 82 00 20 	beq     111c <SIGetType+0x94>
+    1100:	48 00 00 01 	bl      1100 <SIGetType+0x78>
+			1100: R_PPC_REL24	__OSGetSystemTime
+    1104:	90 9f 00 04 	stw     r4,4(r31)
+    1108:	90 7f 00 00 	stw     r3,0(r31)
+    110c:	7f a3 eb 78 	mr      r3,r29
+    1110:	48 00 00 01 	bl      1110 <SIGetType+0x88>
+			1110: R_PPC_REL24	OSRestoreInterrupts
+    1114:	7f 83 e3 78 	mr      r3,r28
+    1118:	48 00 01 20 	b       1238 <SIGetType+0x1b0>
+    111c:	90 be 00 00 	stw     r5,0(r30)
+    1120:	3b 80 00 80 	li      r28,128
+    1124:	48 00 00 b4 	b       11d8 <SIGetType+0x150>
+    1128:	3c 60 80 00 	lis     r3,-32768
+    112c:	80 c3 00 f8 	lwz     r6,248(r3)
+    1130:	3c a0 10 62 	lis     r5,4194
+    1134:	38 a5 4d d3 	addi    r5,r5,19923
+    1138:	54 c6 f0 be 	srwi    r6,r6,2
+    113c:	7c a5 30 16 	mulhwu  r5,r5,r6
+    1140:	54 a5 d1 be 	srwi    r5,r5,6
+    1144:	1c e5 00 32 	mulli   r7,r5,50
+    1148:	38 60 00 00 	li      r3,0
+    114c:	6c 66 80 00 	xoris   r6,r3,32768
+    1150:	6c 05 80 00 	xoris   r5,r0,32768
+    1154:	7c 64 38 10 	subfc   r3,r4,r7
+    1158:	7c a5 31 10 	subfe   r5,r5,r6
+    115c:	7c a6 31 10 	subfe   r5,r6,r6
+    1160:	7c a5 00 d1 	neg.    r5,r5
+    1164:	40 82 00 1c 	bne     1180 <SIGetType+0xf8>
+    1168:	28 1c 00 08 	cmplwi  r28,8
+    116c:	41 82 00 14 	beq     1180 <SIGetType+0xf8>
+    1170:	7f a3 eb 78 	mr      r3,r29
+    1174:	48 00 00 01 	bl      1174 <SIGetType+0xec>
+			1174: R_PPC_REL24	OSRestoreInterrupts
+    1178:	7f 83 e3 78 	mr      r3,r28
+    117c:	48 00 00 bc 	b       1238 <SIGetType+0x1b0>
+    1180:	3c 60 80 00 	lis     r3,-32768
+    1184:	80 c3 00 f8 	lwz     r6,248(r3)
+    1188:	3c a0 10 62 	lis     r5,4194
+    118c:	38 a5 4d d3 	addi    r5,r5,19923
+    1190:	54 c6 f0 be 	srwi    r6,r6,2
+    1194:	7c a5 30 16 	mulhwu  r5,r5,r6
+    1198:	54 a5 d1 be 	srwi    r5,r5,6
+    119c:	1c c5 00 4b 	mulli   r6,r5,75
+    11a0:	38 60 00 00 	li      r3,0
+    11a4:	6c 65 80 00 	xoris   r5,r3,32768
+    11a8:	6c 03 80 00 	xoris   r3,r0,32768
+    11ac:	7c 04 30 10 	subfc   r0,r4,r6
+    11b0:	7c 63 29 10 	subfe   r3,r3,r5
+    11b4:	7c 65 29 10 	subfe   r3,r5,r5
+    11b8:	7c 63 00 d1 	neg.    r3,r3
+    11bc:	40 82 00 10 	bne     11cc <SIGetType+0x144>
+    11c0:	38 00 00 80 	li      r0,128
+    11c4:	90 1e 00 00 	stw     r0,0(r30)
+    11c8:	48 00 00 10 	b       11d8 <SIGetType+0x150>
+    11cc:	38 00 00 80 	li      r0,128
+    11d0:	90 1e 00 00 	stw     r0,0(r30)
+    11d4:	3b 80 00 80 	li      r28,128
+    11d8:	48 00 00 01 	bl      11d8 <SIGetType+0x150>
+			11d8: R_PPC_REL24	__OSGetSystemTime
+    11dc:	90 9f 00 04 	stw     r4,4(r31)
+    11e0:	3c 80 43 1c 	lis     r4,17180
+    11e4:	3c a0 00 00 	lis     r5,0
+			11e6: R_PPC_ADDR16_HA	GetTypeCallback
+    11e8:	90 7f 00 00 	stw     r3,0(r31)
+    11ec:	3c 60 80 00 	lis     r3,-32768
+    11f0:	39 05 00 00 	addi    r8,r5,0
+			11f2: R_PPC_ADDR16_LO	GetTypeCallback
+    11f4:	80 03 00 f8 	lwz     r0,248(r3)
+    11f8:	38 84 de 83 	addi    r4,r4,-8573
+    11fc:	38 7b 00 00 	addi    r3,r27,0
+    1200:	54 00 f0 be 	srwi    r0,r0,2
+    1204:	7c 04 00 16 	mulhwu  r0,r4,r0
+    1208:	54 00 8b fe 	srwi    r0,r0,15
+    120c:	1c 00 00 41 	mulli   r0,r0,65
+    1210:	54 0a e8 fe 	srwi    r10,r0,3
+    1214:	38 de 00 00 	addi    r6,r30,0
+    1218:	38 80 00 00 	li      r4,0
+			1218: R_PPC_EMB_SDA21	cmdTypeAndStatus$371_8064D8D4
+    121c:	38 a0 00 01 	li      r5,1
+    1220:	38 e0 00 03 	li      r7,3
+    1224:	39 20 00 00 	li      r9,0
+    1228:	48 00 00 01 	bl      1228 <SIGetType+0x1a0>
+			1228: R_PPC_REL24	SITransfer
+    122c:	7f a3 eb 78 	mr      r3,r29
+    1230:	48 00 00 01 	bl      1230 <SIGetType+0x1a8>
+			1230: R_PPC_REL24	OSRestoreInterrupts
+    1234:	7f 83 e3 78 	mr      r3,r28
+    1238:	bb 61 00 14 	lmw     r27,20(r1)
+    123c:	80 01 00 2c 	lwz     r0,44(r1)
+    1240:	38 21 00 28 	addi    r1,r1,40
+    1244:	7c 08 03 a6 	mtlr    r0
+    1248:	4e 80 00 20 	blr
+
+0000124c <fn_80209858>:
+    124c:	7c 08 02 a6 	mflr    r0
+    1250:	90 01 00 04 	stw     r0,4(r1)
+    1254:	94 21 ff e0 	stwu    r1,-32(r1)
+    1258:	93 e1 00 1c 	stw     r31,28(r1)
+    125c:	3b e4 00 00 	addi    r31,r4,0
+    1260:	93 c1 00 18 	stw     r30,24(r1)
+    1264:	93 a1 00 14 	stw     r29,20(r1)
+    1268:	93 81 00 10 	stw     r28,16(r1)
+    126c:	3b 83 00 00 	addi    r28,r3,0
+    1270:	48 00 00 01 	bl      1270 <fn_80209858+0x24>
+			1270: R_PPC_REL24	OSDisableInterrupts
+    1274:	3b c3 00 00 	addi    r30,r3,0
+    1278:	38 7c 00 00 	addi    r3,r28,0
+    127c:	48 00 00 01 	bl      127c <fn_80209858+0x30>
+			127c: R_PPC_REL24	SIGetType
+    1280:	3c 80 00 00 	lis     r4,0
+			1282: R_PPC_ADDR16_HA	Type_802FCA34
+    1284:	57 85 10 3a 	slwi    r5,r28,2
+    1288:	38 04 00 00 	addi    r0,r4,0
+			128a: R_PPC_ADDR16_LO	Type_802FCA34
+    128c:	7c 80 2a 14 	add     r4,r0,r5
+    1290:	80 04 00 00 	lwz     r0,0(r4)
+    1294:	3b a3 00 00 	addi    r29,r3,0
+    1298:	54 00 06 31 	rlwinm. r0,r0,0,24,24
+    129c:	41 82 00 ac 	beq     1348 <fn_80209858+0xfc>
+    12a0:	3c 60 00 00 	lis     r3,0
+			12a2: R_PPC_ADDR16_HA	lbl_80640CC8
+    12a4:	57 84 20 36 	slwi    r4,r28,4
+    12a8:	38 03 00 00 	addi    r0,r3,0
+			12aa: R_PPC_ADDR16_LO	lbl_80640CC8
+    12ac:	7c 80 22 14 	add     r4,r0,r4
+    12b0:	80 04 00 00 	lwz     r0,0(r4)
+    12b4:	38 a0 00 00 	li      r5,0
+    12b8:	7c 00 f8 40 	cmplw   r0,r31
+    12bc:	41 82 00 a0 	beq     135c <fn_80209858+0x110>
+    12c0:	28 00 00 00 	cmplwi  r0,0
+    12c4:	40 82 00 10 	bne     12d4 <fn_80209858+0x88>
+    12c8:	54 a0 10 3a 	slwi    r0,r5,2
+    12cc:	7f e4 01 2e 	stwx    r31,r4,r0
+    12d0:	48 00 00 8c 	b       135c <fn_80209858+0x110>
+    12d4:	38 64 00 04 	addi    r3,r4,4
+    12d8:	80 04 00 04 	lwz     r0,4(r4)
+    12dc:	38 a0 00 01 	li      r5,1
+    12e0:	7c 00 f8 40 	cmplw   r0,r31
+    12e4:	41 82 00 78 	beq     135c <fn_80209858+0x110>
+    12e8:	28 00 00 00 	cmplwi  r0,0
+    12ec:	40 82 00 10 	bne     12fc <fn_80209858+0xb0>
+    12f0:	54 a0 10 3a 	slwi    r0,r5,2
+    12f4:	7f e4 01 2e 	stwx    r31,r4,r0
+    12f8:	48 00 00 64 	b       135c <fn_80209858+0x110>
+    12fc:	84 03 00 04 	lwzu    r0,4(r3)
+    1300:	38 a0 00 02 	li      r5,2
+    1304:	7c 00 f8 40 	cmplw   r0,r31
+    1308:	41 82 00 54 	beq     135c <fn_80209858+0x110>
+    130c:	28 00 00 00 	cmplwi  r0,0
+    1310:	40 82 00 10 	bne     1320 <fn_80209858+0xd4>
+    1314:	54 a0 10 3a 	slwi    r0,r5,2
+    1318:	7f e4 01 2e 	stwx    r31,r4,r0
+    131c:	48 00 00 40 	b       135c <fn_80209858+0x110>
+    1320:	80 03 00 04 	lwz     r0,4(r3)
+    1324:	38 a0 00 03 	li      r5,3
+    1328:	7c 00 f8 40 	cmplw   r0,r31
+    132c:	41 82 00 30 	beq     135c <fn_80209858+0x110>
+    1330:	28 00 00 00 	cmplwi  r0,0
+    1334:	40 82 00 28 	bne     135c <fn_80209858+0x110>
+    1338:	54 a0 10 3a 	slwi    r0,r5,2
+    133c:	7f e4 01 2e 	stwx    r31,r4,r0
+    1340:	48 00 00 1c 	b       135c <fn_80209858+0x110>
+    1344:	48 00 00 18 	b       135c <fn_80209858+0x110>
+    1348:	39 9f 00 00 	addi    r12,r31,0
+    134c:	7d 88 03 a6 	mtlr    r12
+    1350:	38 7c 00 00 	addi    r3,r28,0
+    1354:	38 9d 00 00 	addi    r4,r29,0
+    1358:	4e 80 00 21 	blrl
+    135c:	7f c3 f3 78 	mr      r3,r30
+    1360:	48 00 00 01 	bl      1360 <fn_80209858+0x114>
+			1360: R_PPC_REL24	OSRestoreInterrupts
+    1364:	7f a3 eb 78 	mr      r3,r29
+    1368:	80 01 00 24 	lwz     r0,36(r1)
+    136c:	83 e1 00 1c 	lwz     r31,28(r1)
+    1370:	83 c1 00 18 	lwz     r30,24(r1)
+    1374:	83 a1 00 14 	lwz     r29,20(r1)
+    1378:	83 81 00 10 	lwz     r28,16(r1)
+    137c:	38 21 00 20 	addi    r1,r1,32
+    1380:	7c 08 03 a6 	mtlr    r0
+    1384:	4e 80 00 20 	blr
+
+=== reconstructed disassembly and relocations ===
+
+
+build/GEDE01/src/game/game_fn_8020860C.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <SIInterruptHandler_8020860C>:
+   0:	7c 08 02 a6 	mflr    r0
+   4:	3c a0 cc 00 	lis     r5,-13312
+   8:	90 01 00 04 	stw     r0,4(r1)
+   c:	94 21 ff b8 	stwu    r1,-72(r1)
+  10:	be a1 00 1c 	stmw    r21,28(r1)
+  14:	3a a3 00 00 	addi    r21,r3,0
+  18:	3a c4 00 00 	addi    r22,r4,0
+  1c:	83 a5 64 34 	lwz     r29,25652(r5)
+  20:	3c a0 00 00 	lis     r5,0
+			22: R_PPC_ADDR16_HA	Packet_80640B68
+  24:	38 c5 00 00 	addi    r6,r5,0
+			26: R_PPC_ADDR16_LO	Packet_80640B68
+  28:	57 a5 00 02 	clrrwi  r5,r29,30
+  2c:	3c 05 40 00 	addis   r0,r5,16384
+  30:	28 00 00 00 	cmplwi  r0,0
+  34:	3c a0 00 00 	lis     r5,0
+			36: R_PPC_ADDR16_HA	Si_802FCA20
+  38:	3a e6 00 00 	addi    r23,r6,0
+  3c:	3b e5 00 00 	addi    r31,r5,0
+			3e: R_PPC_ADDR16_LO	Si_802FCA20
+  40:	40 82 01 8c 	bne     1cc <SIInterruptHandler_8020860C+0x1cc>
+  44:	83 9f 00 00 	lwz     r28,0(r31)
+  48:	48 00 00 01 	bl      48 <SIInterruptHandler_8020860C+0x48>
+			48: R_PPC_REL24	fn_80208310
+  4c:	83 5f 00 10 	lwz     r26,16(r31)
+  50:	38 00 00 00 	li      r0,0
+  54:	3b 63 00 00 	addi    r27,r3,0
+  58:	90 1f 00 10 	stw     r0,16(r31)
+  5c:	3b 1c 00 00 	addi    r24,r28,0
+  60:	3b 20 00 00 	li      r25,0
+  64:	38 18 00 01 	addi    r0,r24,1
+  68:	7c 18 16 70 	srawi   r24,r0,2
+  6c:	7f 18 01 94 	addze   r24,r24
+  70:	57 18 10 3a 	slwi    r24,r24,2
+  74:	7f 18 00 10 	subfc   r24,r24,r0
+  78:	57 00 28 34 	slwi    r0,r24,5
+  7c:	7f d7 02 14 	add     r30,r23,r0
+  80:	80 1e 00 00 	lwz     r0,0(r30)
+  84:	2c 00 ff ff 	cmpwi   r0,-1
+  88:	41 82 00 6c 	beq     f4 <SIInterruptHandler_8020860C+0xf4>
+  8c:	48 00 00 01 	bl      8c <SIInterruptHandler_8020860C+0x8c>
+			8c: R_PPC_REL24	__OSGetSystemTime
+  90:	80 1e 00 18 	lwz     r0,24(r30)
+  94:	6c 65 80 00 	xoris   r5,r3,32768
+  98:	80 de 00 1c 	lwz     r6,28(r30)
+  9c:	6c 03 80 00 	xoris   r3,r0,32768
+  a0:	7c 06 20 10 	subfc   r0,r6,r4
+  a4:	7c 63 29 10 	subfe   r3,r3,r5
+  a8:	7c 65 29 10 	subfe   r3,r5,r5
+  ac:	7c 63 00 d1 	neg.    r3,r3
+  b0:	40 82 00 44 	bne     f4 <SIInterruptHandler_8020860C+0xf4>
+  b4:	80 7e 00 00 	lwz     r3,0(r30)
+  b8:	80 9e 00 04 	lwz     r4,4(r30)
+  bc:	80 be 00 08 	lwz     r5,8(r30)
+  c0:	80 de 00 0c 	lwz     r6,12(r30)
+  c4:	80 fe 00 10 	lwz     r7,16(r30)
+  c8:	81 1e 00 14 	lwz     r8,20(r30)
+  cc:	48 00 00 01 	bl      cc <SIInterruptHandler_8020860C+0xcc>
+			cc: R_PPC_REL24	fn_80208C4C
+  d0:	2c 03 00 00 	cmpwi   r3,0
+  d4:	41 82 00 2c 	beq     100 <SIInterruptHandler_8020860C+0x100>
+  d8:	1c 78 00 28 	mulli   r3,r24,40
+  dc:	38 63 00 80 	addi    r3,r3,128
+  e0:	7c 77 1a 14 	add     r3,r23,r3
+  e4:	48 00 00 01 	bl      e4 <SIInterruptHandler_8020860C+0xe4>
+			e4: R_PPC_REL24	fn_8020A93C
+  e8:	38 00 ff ff 	li      r0,-1
+  ec:	90 1e 00 00 	stw     r0,0(r30)
+  f0:	48 00 00 10 	b       100 <SIInterruptHandler_8020860C+0x100>
+  f4:	3b 39 00 01 	addi    r25,r25,1
+  f8:	2c 19 00 04 	cmpwi   r25,4
+  fc:	41 80 ff 68 	blt     64 <SIInterruptHandler_8020860C+0x64>
+ 100:	28 1a 00 00 	cmplwi  r26,0
+ 104:	41 82 00 1c 	beq     120 <SIInterruptHandler_8020860C+0x120>
+ 108:	39 9a 00 00 	addi    r12,r26,0
+ 10c:	7d 88 03 a6 	mtlr    r12
+ 110:	38 7c 00 00 	addi    r3,r28,0
+ 114:	38 9b 00 00 	addi    r4,r27,0
+ 118:	38 b6 00 00 	addi    r5,r22,0
+ 11c:	4e 80 00 21 	blrl
+ 120:	3c 60 cc 00 	lis     r3,-13312
+ 124:	38 a3 64 00 	addi    r5,r3,25600
+ 128:	57 80 18 38 	slwi    r0,r28,3
+ 12c:	80 83 64 38 	lwz     r4,25656(r3)
+ 130:	3c 60 0f 00 	lis     r3,3840
+ 134:	7c 60 06 30 	sraw    r0,r3,r0
+ 138:	7c 80 00 38 	and     r0,r4,r0
+ 13c:	90 05 00 38 	stw     r0,56(r5)
+ 140:	57 80 28 34 	slwi    r0,r28,5
+ 144:	38 80 00 01 	li      r4,1
+ 148:	7c 17 00 2e 	lwzx    r0,r23,r0
+ 14c:	2c 00 ff ff 	cmpwi   r0,-1
+ 150:	40 82 00 14 	bne     164 <SIInterruptHandler_8020860C+0x164>
+ 154:	80 1f 00 00 	lwz     r0,0(r31)
+ 158:	7c 00 e0 00 	cmpw    r0,r28
+ 15c:	41 82 00 08 	beq     164 <SIInterruptHandler_8020860C+0x164>
+ 160:	38 80 00 00 	li      r4,0
+ 164:	57 85 10 3a 	slwi    r5,r28,2
+ 168:	7c 7f 2a 14 	add     r3,r31,r5
+ 16c:	80 03 00 14 	lwz     r0,20(r3)
+ 170:	28 00 00 80 	cmplwi  r0,128
+ 174:	40 82 00 58 	bne     1cc <SIInterruptHandler_8020860C+0x1cc>
+ 178:	2c 04 00 00 	cmpwi   r4,0
+ 17c:	40 82 00 50 	bne     1cc <SIInterruptHandler_8020860C+0x1cc>
+ 180:	3c 60 80 00 	lis     r3,-32768
+ 184:	80 03 00 f8 	lwz     r0,248(r3)
+ 188:	38 c5 00 14 	addi    r6,r5,20
+ 18c:	3c 60 43 1c 	lis     r3,17180
+ 190:	54 00 f0 be 	srwi    r0,r0,2
+ 194:	38 63 de 83 	addi    r3,r3,-8573
+ 198:	7c 03 00 16 	mulhwu  r0,r3,r0
+ 19c:	54 00 8b fe 	srwi    r0,r0,15
+ 1a0:	1c 00 00 41 	mulli   r0,r0,65
+ 1a4:	3c 80 00 00 	lis     r4,0
+			1a6: R_PPC_ADDR16_HA	GetTypeCallback_802093FC
+ 1a8:	39 04 00 00 	addi    r8,r4,0
+			1aa: R_PPC_ADDR16_LO	GetTypeCallback_802093FC
+ 1ac:	54 0a e8 fe 	srwi    r10,r0,3
+ 1b0:	38 7c 00 00 	addi    r3,r28,0
+ 1b4:	7c df 32 14 	add     r6,r31,r6
+ 1b8:	38 80 00 00 	li      r4,0
+			1ba: R_PPC_EMB_SDA21	lbl_8064D8D0
+ 1bc:	38 a0 00 01 	li      r5,1
+ 1c0:	38 e0 00 03 	li      r7,3
+ 1c4:	39 20 00 00 	li      r9,0
+ 1c8:	48 00 00 01 	bl      1c8 <SIInterruptHandler_8020860C+0x1c8>
+			1c8: R_PPC_REL24	SITransfer
+ 1cc:	57 a3 00 c8 	rlwinm  r3,r29,0,3,4
+ 1d0:	3c 03 e8 00 	addis   r0,r3,-6144
+ 1d4:	28 00 00 00 	cmplwi  r0,0
+ 1d8:	40 82 01 54 	bne     32c <SIInterruptHandler_8020860C+0x32c>
+ 1dc:	48 00 00 01 	bl      1dc <SIInterruptHandler_8020860C+0x1dc>
+			1dc: R_PPC_REL24	fn_802181F4
+ 1e0:	83 3f 00 04 	lwz     r25,4(r31)
+ 1e4:	3b 17 00 00 	addi    r24,r23,0
+ 1e8:	3b 63 00 01 	addi    r27,r3,1
+ 1ec:	57 3c 85 be 	rlwinm  r28,r25,16,22,31
+ 1f0:	3b 40 00 00 	li      r26,0
+ 1f4:	7f 43 d3 78 	mr      r3,r26
+ 1f8:	48 00 00 01 	bl      1f8 <SIInterruptHandler_8020860C+0x1f8>
+			1f8: R_PPC_REL24	fn_8020906C
+ 1fc:	2c 03 00 00 	cmpwi   r3,0
+ 200:	41 82 00 08 	beq     208 <SIInterruptHandler_8020860C+0x208>
+ 204:	93 78 01 e0 	stw     r27,480(r24)
+ 208:	3b 5a 00 01 	addi    r26,r26,1
+ 20c:	2c 1a 00 04 	cmpwi   r26,4
+ 210:	3b 18 00 04 	addi    r24,r24,4
+ 214:	41 80 ff e0 	blt     1f4 <SIInterruptHandler_8020860C+0x1f4>
+ 218:	3c 60 80 00 	lis     r3,-32768
+ 21c:	38 00 00 18 	li      r0,24
+ 220:	7c 60 04 30 	srw     r0,r3,r0
+ 224:	7f 20 00 39 	and.    r0,r25,r0
+ 228:	57 85 f8 7e 	srwi    r5,r28,1
+ 22c:	41 82 00 24 	beq     250 <SIInterruptHandler_8020860C+0x250>
+ 230:	80 17 01 e0 	lwz     r0,480(r23)
+ 234:	28 00 00 00 	cmplwi  r0,0
+ 238:	41 82 00 f4 	beq     32c <SIInterruptHandler_8020860C+0x32c>
+ 23c:	80 17 01 e0 	lwz     r0,480(r23)
+ 240:	7c 00 2a 14 	add     r0,r0,r5
+ 244:	7c 00 d8 40 	cmplw   r0,r27
+ 248:	40 80 00 08 	bge     250 <SIInterruptHandler_8020860C+0x250>
+ 24c:	48 00 00 e0 	b       32c <SIInterruptHandler_8020860C+0x32c>
+ 250:	38 00 00 19 	li      r0,25
+ 254:	7c 60 04 30 	srw     r0,r3,r0
+ 258:	7f 20 00 39 	and.    r0,r25,r0
+ 25c:	38 97 00 04 	addi    r4,r23,4
+ 260:	41 82 00 24 	beq     284 <SIInterruptHandler_8020860C+0x284>
+ 264:	80 04 01 e0 	lwz     r0,480(r4)
+ 268:	28 00 00 00 	cmplwi  r0,0
+ 26c:	41 82 00 c0 	beq     32c <SIInterruptHandler_8020860C+0x32c>
+ 270:	80 04 01 e0 	lwz     r0,480(r4)
+ 274:	7c 00 2a 14 	add     r0,r0,r5
+ 278:	7c 00 d8 40 	cmplw   r0,r27
+ 27c:	40 80 00 08 	bge     284 <SIInterruptHandler_8020860C+0x284>
+ 280:	48 00 00 ac 	b       32c <SIInterruptHandler_8020860C+0x32c>
+ 284:	38 00 00 1a 	li      r0,26
+ 288:	7c 60 04 30 	srw     r0,r3,r0
+ 28c:	7f 20 00 39 	and.    r0,r25,r0
+ 290:	38 84 00 04 	addi    r4,r4,4
+ 294:	41 82 00 24 	beq     2b8 <SIInterruptHandler_8020860C+0x2b8>
+ 298:	80 04 01 e0 	lwz     r0,480(r4)
+ 29c:	28 00 00 00 	cmplwi  r0,0
+ 2a0:	41 82 00 8c 	beq     32c <SIInterruptHandler_8020860C+0x32c>
+ 2a4:	80 04 01 e0 	lwz     r0,480(r4)
+ 2a8:	7c 00 2a 14 	add     r0,r0,r5
+ 2ac:	7c 00 d8 40 	cmplw   r0,r27
+ 2b0:	40 80 00 08 	bge     2b8 <SIInterruptHandler_8020860C+0x2b8>
+ 2b4:	48 00 00 78 	b       32c <SIInterruptHandler_8020860C+0x32c>
+ 2b8:	38 00 00 1b 	li      r0,27
+ 2bc:	7c 60 04 30 	srw     r0,r3,r0
+ 2c0:	7f 20 00 39 	and.    r0,r25,r0
+ 2c4:	38 84 00 04 	addi    r4,r4,4
+ 2c8:	41 82 00 24 	beq     2ec <SIInterruptHandler_8020860C+0x2ec>
+ 2cc:	80 04 01 e0 	lwz     r0,480(r4)
+ 2d0:	28 00 00 00 	cmplwi  r0,0
+ 2d4:	41 82 00 58 	beq     32c <SIInterruptHandler_8020860C+0x32c>
+ 2d8:	80 04 01 e0 	lwz     r0,480(r4)
+ 2dc:	7c 00 2a 14 	add     r0,r0,r5
+ 2e0:	7c 00 d8 40 	cmplw   r0,r27
+ 2e4:	40 80 00 08 	bge     2ec <SIInterruptHandler_8020860C+0x2ec>
+ 2e8:	48 00 00 44 	b       32c <SIInterruptHandler_8020860C+0x32c>
+ 2ec:	3b 00 00 00 	li      r24,0
+ 2f0:	93 17 01 e0 	stw     r24,480(r23)
+ 2f4:	93 17 01 e4 	stw     r24,484(r23)
+ 2f8:	93 17 01 e8 	stw     r24,488(r23)
+ 2fc:	93 17 01 ec 	stw     r24,492(r23)
+ 300:	81 97 01 a0 	lwz     r12,416(r23)
+ 304:	28 0c 00 00 	cmplwi  r12,0
+ 308:	41 82 00 14 	beq     31c <SIInterruptHandler_8020860C+0x31c>
+ 30c:	7d 88 03 a6 	mtlr    r12
+ 310:	38 75 00 00 	addi    r3,r21,0
+ 314:	38 96 00 00 	addi    r4,r22,0
+ 318:	4e 80 00 21 	blrl
+ 31c:	3b 18 00 01 	addi    r24,r24,1
+ 320:	2c 18 00 04 	cmpwi   r24,4
+ 324:	3a f7 00 04 	addi    r23,r23,4
+ 328:	41 80 ff d8 	blt     300 <SIInterruptHandler_8020860C+0x300>
+ 32c:	ba a1 00 1c 	lmw     r21,28(r1)
+ 330:	80 01 00 4c 	lwz     r0,76(r1)
+ 334:	38 21 00 48 	addi    r1,r1,72
+ 338:	7c 08 03 a6 	mtlr    r0
+ 33c:	4e 80 00 20 	blr
+
+=== retail raw relocation table ===
+
+
+Relocation section '.rela.text' at offset 0x13c8 contains 147 entries:
+ Offset     Info    Type                Sym. Value  Symbol's Name + Addend
+0000000e  00001606 R_PPC_ADDR16_HA        00000000   Packet_80640B68 + 0
+00000012  00001706 R_PPC_ADDR16_HA        00000000   Si_802FCA20 + 0
+00000026  00001604 R_PPC_ADDR16_LO        00000000   Packet_80640B68 + 0
+0000002a  00001704 R_PPC_ADDR16_LO        00000000   Si_802FCA20 + 0
+00000044  0000180a R_PPC_REL24            00000000   fn_80208310 + 0
+00000088  0000190a R_PPC_REL24            00000000   __OSGetSystemTime + 0
+000000c8  0000090a R_PPC_REL24            00000640   fn_80208C4C + 0
+000000e0  00001a0a R_PPC_REL24            00000000   fn_8020A93C + 0
+0000018a  00000306 R_PPC_ADDR16_HA        00000df0   GetTypeCallback + 0
+000001a2  00000304 R_PPC_ADDR16_LO        00000df0   GetTypeCallback + 0
+000001ac  00001b6d R_PPC_EMB_SDA21        00000000   lbl_8064D8D0 + 0
+000001bc  0000130a R_PPC_REL24            00000c84   SITransfer + 0
+000001d0  00001c0a R_PPC_REL24            00000000   fn_802181F4 + 0
+000001f4  0000100a R_PPC_REL24            00000a60   fn_8020906C + 0
+0000034a  00001606 R_PPC_ADDR16_HA        00000000   Packet_80640B68 + 0
+0000035a  00001604 R_PPC_ADDR16_LO        00000000   Packet_80640B68 + 0
+00000368  00001d0a R_PPC_REL24            00000000   OSDisableInterrupts + 0
+000003b8  00001e0a R_PPC_REL24            00000000   OSRestoreInterrupts + 0
+000003f4  00001d0a R_PPC_REL24            00000000   OSDisableInterrupts + 0
+000003fa  00001f06 R_PPC_ADDR16_HA        00000000   lbl_80640D08 + 0
+00000402  00001f04 R_PPC_ADDR16_LO        00000000   lbl_80640D08 + 0
+00000420  00001e0a R_PPC_REL24            00000000   OSRestoreInterrupts + 0
+0000044e  00001f06 R_PPC_ADDR16_HA        00000000   lbl_80640D08 + 0
+00000456  00001f04 R_PPC_ADDR16_LO        00000000   lbl_80640D08 + 0
+00000464  0000050a R_PPC_REL24            00000344   fn_80208950 + 0
+0000046c  00001e0a R_PPC_REL24            00000000   OSRestoreInterrupts + 0
+00000488  00001e0a R_PPC_REL24            00000000   OSRestoreInterrupts + 0
+000004c0  00001d0a R_PPC_REL24            00000000   OSDisableInterrupts + 0
+000004c6  00001f06 R_PPC_ADDR16_HA        00000000   lbl_80640D08 + 0
+000004ce  00001f04 R_PPC_ADDR16_LO        00000000   lbl_80640D08 + 0
+000004ee  00001f06 R_PPC_ADDR16_HA        00000000   lbl_80640D08 + 0
+000004f6  00001f04 R_PPC_ADDR16_LO        00000000   lbl_80640D08 + 0
+00000558  0000050a R_PPC_REL24            00000344   fn_80208950 + 0
+00000560  00001e0a R_PPC_REL24            00000000   OSRestoreInterrupts + 0
+0000057c  00001e0a R_PPC_REL24            00000000   OSRestoreInterrupts + 0
+000005a2  00001606 R_PPC_ADDR16_HA        00000000   Packet_80640B68 + 0
+000005aa  00001604 R_PPC_ADDR16_LO        00000000   Packet_80640B68 + 0
+000005ae  00001706 R_PPC_ADDR16_HA        00000000   Si_802FCA20 + 0
+000005ba  00001704 R_PPC_ADDR16_LO        00000000   Si_802FCA20 + 0
+000005d8  0000200a R_PPC_REL24            00000000   SISetSamplingRate + 0
+000005f6  00000406 R_PPC_ADDR16_HA        00000000   SIInterruptHandler_8020860C + 0
+000005fe  00000404 R_PPC_ADDR16_LO        00000000   SIInterruptHandler_8020860C + 0
+00000604  0000210a R_PPC_REL24            00000000   __OSSetInterruptHandler + 0
+0000060c  0000220a R_PPC_REL24            00000000   __OSUnmaskInterrupts + 0
+00000614  0000140a R_PPC_REL24            00001088   SIGetType + 0
+0000061c  0000140a R_PPC_REL24            00001088   SIGetType + 0
+00000624  0000140a R_PPC_REL24            00001088   SIGetType + 0
+0000062c  0000140a R_PPC_REL24            00001088   SIGetType + 0
+00000646  00001706 R_PPC_ADDR16_HA        00000000   Si_802FCA20 + 0
+0000066e  00001704 R_PPC_ADDR16_LO        00000000   Si_802FCA20 + 0
+00000670  00001d0a R_PPC_REL24            00000000   OSDisableInterrupts + 0
+00000680  00001e0a R_PPC_REL24            00000000   OSRestoreInterrupts + 0
+00000814  00001e0a R_PPC_REL24            00000000   OSRestoreInterrupts + 0
+00000864  00001d0a R_PPC_REL24            00000000   OSDisableInterrupts + 0
+00000886  00002306 R_PPC_ADDR16_HA        00000000   Type_802FCA34 + 0
+0000088e  00002304 R_PPC_ADDR16_LO        00000000   Type_802FCA34 + 0
+000008a8  00001e0a R_PPC_REL24            00000000   OSRestoreInterrupts + 0
+00000908  00001d0a R_PPC_REL24            00000000   OSDisableInterrupts + 0
+0000090e  00001706 R_PPC_ADDR16_HA        00000000   Si_802FCA20 + 0
+00000912  00001704 R_PPC_ADDR16_LO        00000000   Si_802FCA20 + 0
+0000093c  00001e0a R_PPC_REL24            00000000   OSRestoreInterrupts + 0
+00000972  00001706 R_PPC_ADDR16_HA        00000000   Si_802FCA20 + 0
+00000976  00001704 R_PPC_ADDR16_LO        00000000   Si_802FCA20 + 0
+00000980  00001d0a R_PPC_REL24            00000000   OSDisableInterrupts + 0
+00000986  00001706 R_PPC_ADDR16_HA        00000000   Si_802FCA20 + 0
+0000098a  00001704 R_PPC_ADDR16_LO        00000000   Si_802FCA20 + 0
+000009d8  00001e0a R_PPC_REL24            00000000   OSRestoreInterrupts + 0
+00000a0e  00001706 R_PPC_ADDR16_HA        00000000   Si_802FCA20 + 0
+00000a12  00001704 R_PPC_ADDR16_LO        00000000   Si_802FCA20 + 0
+00000a1c  00001d0a R_PPC_REL24            00000000   OSDisableInterrupts + 0
+00000a22  00001706 R_PPC_ADDR16_HA        00000000   Si_802FCA20 + 0
+00000a26  00001704 R_PPC_ADDR16_LO        00000000   Si_802FCA20 + 0
+00000a44  00001e0a R_PPC_REL24            00000000   OSRestoreInterrupts + 0
+00000a66  00001606 R_PPC_ADDR16_HA        00000000   Packet_80640B68 + 0
+00000a76  00001604 R_PPC_ADDR16_LO        00000000   Packet_80640B68 + 0
+00000a84  00001d0a R_PPC_REL24            00000000   OSDisableInterrupts + 0
+00000aa6  00002306 R_PPC_ADDR16_HA        00000000   Type_802FCA34 + 0
+00000aae  00002304 R_PPC_ADDR16_LO        00000000   Type_802FCA34 + 0
+00000ac8  00001e0a R_PPC_REL24            00000000   OSRestoreInterrupts + 0
+00000b3a  00001606 R_PPC_ADDR16_HA        00000000   Packet_80640B68 + 0
+00000b52  00001604 R_PPC_ADDR16_LO        00000000   Packet_80640B68 + 0
+00000b54  00001d0a R_PPC_REL24            00000000   OSDisableInterrupts + 0
+00000b60  00000a0a R_PPC_REL24            0000084c   fn_80208E58 + 0
+00000bdc  00001e0a R_PPC_REL24            00000000   OSRestoreInterrupts + 0
+00000bfe  00002406 R_PPC_ADDR16_HA        00000000   lbl_80640BE8 + 0
+00000c06  00002404 R_PPC_ADDR16_LO        00000000   lbl_80640BE8 + 0
+00000c2e  00001606 R_PPC_ADDR16_HA        00000000   Packet_80640B68 + 0
+00000c36  00001604 R_PPC_ADDR16_LO        00000000   Packet_80640B68 + 0
+00000c5c  0000090a R_PPC_REL24            00000640   fn_80208C4C + 0
+00000c9a  00001606 R_PPC_ADDR16_HA        00000000   Packet_80640B68 + 0
+00000c9e  00001604 R_PPC_ADDR16_LO        00000000   Packet_80640B68 + 0
+00000cc4  00001d0a R_PPC_REL24            00000000   OSDisableInterrupts + 0
+00000cda  00001706 R_PPC_ADDR16_HA        00000000   Si_802FCA20 + 0
+00000cde  00001704 R_PPC_ADDR16_LO        00000000   Si_802FCA20 + 0
+00000cec  00001e0a R_PPC_REL24            00000000   OSRestoreInterrupts + 0
+00000cf8  0000190a R_PPC_REL24            00000000   __OSGetSystemTime + 0
+00000d5e  00001206 R_PPC_ADDR16_HA        00000bf8   fn_80209204 + 0
+00000d66  00001204 R_PPC_ADDR16_LO        00000bf8   fn_80209204 + 0
+00000d74  0000250a R_PPC_REL24            00000000   OSSetAlarm + 0
+00000d94  0000090a R_PPC_REL24            00000640   fn_80208C4C + 0
+00000da4  00001e0a R_PPC_REL24            00000000   OSRestoreInterrupts + 0
+00000dd4  00001e0a R_PPC_REL24            00000000   OSRestoreInterrupts + 0
+00000e06  00002306 R_PPC_ADDR16_HA        00000000   Type_802FCA34 + 0
+00000e0a  00002304 R_PPC_ADDR16_LO        00000000   Type_802FCA34 + 0
+00000e16  00001606 R_PPC_ADDR16_HA        00000000   Packet_80640B68 + 0
+00000e1e  00001604 R_PPC_ADDR16_LO        00000000   Packet_80640B68 + 0
+00000e38  0000190a R_PPC_REL24            00000000   __OSGetSystemTime + 0
+00000e58  0000266d R_PPC_EMB_SDA21        00000000   lbl_8064D8D8 + 0
+00000e64  0000266d R_PPC_EMB_SDA21        00000000   lbl_8064D8D8 + 0
+00000e98  0000270a R_PPC_REL24            00000000   fn_8020EEA8 + 0
+00000eec  0000280a R_PPC_REL24            00000000   fn_8020EE24 + 0
+00000f22  00000306 R_PPC_ADDR16_HA        00000df0   GetTypeCallback + 0
+00000f2a  00000304 R_PPC_ADDR16_LO        00000df0   GetTypeCallback + 0
+00000f44  0000130a R_PPC_REL24            00000c84   SITransfer + 0
+00000f80  0000270a R_PPC_REL24            00000000   fn_8020EEA8 + 0
+00000f96  00000306 R_PPC_ADDR16_HA        00000df0   GetTypeCallback + 0
+00000f9e  00000304 R_PPC_ADDR16_LO        00000df0   GetTypeCallback + 0
+00000fb8  0000130a R_PPC_REL24            00000c84   SITransfer + 0
+00000fe0  0000270a R_PPC_REL24            00000000   fn_8020EEA8 + 0
+00000ff6  00000306 R_PPC_ADDR16_HA        00000df0   GetTypeCallback + 0
+00000ffe  00000304 R_PPC_ADDR16_LO        00000df0   GetTypeCallback + 0
+00001018  0000130a R_PPC_REL24            00000c84   SITransfer + 0
+00001028  0000270a R_PPC_REL24            00000000   fn_8020EEA8 + 0
+0000109c  00001d0a R_PPC_REL24            00000000   OSDisableInterrupts + 0
+000010a2  00002306 R_PPC_ADDR16_HA        00000000   Type_802FCA34 + 0
+000010aa  00002304 R_PPC_ADDR16_LO        00000000   Type_802FCA34 + 0
+000010b8  0000190a R_PPC_REL24            00000000   __OSGetSystemTime + 0
+000010be  00002906 R_PPC_ADDR16_HA        00000000   TypeTime_80640C88 + 0
+000010c6  00002904 R_PPC_ADDR16_LO        00000000   TypeTime_80640C88 + 0
+000010d2  00001706 R_PPC_ADDR16_HA        00000000   Si_802FCA20 + 0
+000010d6  00001704 R_PPC_ADDR16_LO        00000000   Si_802FCA20 + 0
+00001100  0000190a R_PPC_REL24            00000000   __OSGetSystemTime + 0
+00001110  00001e0a R_PPC_REL24            00000000   OSRestoreInterrupts + 0
+00001174  00001e0a R_PPC_REL24            00000000   OSRestoreInterrupts + 0
+000011d8  0000190a R_PPC_REL24            00000000   __OSGetSystemTime + 0
+000011e6  00000306 R_PPC_ADDR16_HA        00000df0   GetTypeCallback + 0
+000011f2  00000304 R_PPC_ADDR16_LO        00000df0   GetTypeCallback + 0
+00001218  00002a6d R_PPC_EMB_SDA21        00000000   cmdTypeAndStatus$371_8064D8D4 + 0
+00001228  0000130a R_PPC_REL24            00000c84   SITransfer + 0
+00001230  00001e0a R_PPC_REL24            00000000   OSRestoreInterrupts + 0
+00001270  00001d0a R_PPC_REL24            00000000   OSDisableInterrupts + 0
+0000127c  0000140a R_PPC_REL24            00001088   SIGetType + 0
+00001282  00002306 R_PPC_ADDR16_HA        00000000   Type_802FCA34 + 0
+0000128a  00002304 R_PPC_ADDR16_LO        00000000   Type_802FCA34 + 0
+000012a2  00002b06 R_PPC_ADDR16_HA        00000000   lbl_80640CC8 + 0
+000012aa  00002b04 R_PPC_ADDR16_LO        00000000   lbl_80640CC8 + 0
+00001360  00001e0a R_PPC_REL24            00000000   OSRestoreInterrupts + 0
+
+=== reconstructed raw relocation table ===
+
+
+Relocation section '.rela.text' at offset 0x374 contains 14 entries:
+ Offset     Info    Type                Sym. Value  Symbol's Name + Addend
+00000022  00000306 R_PPC_ADDR16_HA        00000000   Packet_80640B68 + 0
+00000026  00000304 R_PPC_ADDR16_LO        00000000   Packet_80640B68 + 0
+00000036  00000406 R_PPC_ADDR16_HA        00000000   Si_802FCA20 + 0
+0000003e  00000404 R_PPC_ADDR16_LO        00000000   Si_802FCA20 + 0
+00000048  0000060a R_PPC_REL24            00000000   fn_80208310 + 0
+0000008c  0000070a R_PPC_REL24            00000000   __OSGetSystemTime + 0
+000000cc  0000080a R_PPC_REL24            00000000   fn_80208C4C + 0
+000000e4  0000090a R_PPC_REL24            00000000   fn_8020A93C + 0
+000001a6  00000a06 R_PPC_ADDR16_HA        00000000   GetTypeCallback_802093FC + 0
+000001aa  00000a04 R_PPC_ADDR16_LO        00000000   GetTypeCallback_802093FC + 0
+000001ba  00000b6d R_PPC_EMB_SDA21        00000000   lbl_8064D8D0 + 0
+000001c8  00000c0a R_PPC_REL24            00000000   SITransfer + 0
+000001dc  00000d0a R_PPC_REL24            00000000   fn_802181F4 + 0
+000001f8  00000e0a R_PPC_REL24            00000000   fn_8020906C + 0

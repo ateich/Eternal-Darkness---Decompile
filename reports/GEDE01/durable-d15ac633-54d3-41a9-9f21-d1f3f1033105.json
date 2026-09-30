@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "assignment_id": "d15ac633-54d3-41a9-9f21-d1f3f1033105",
+  "attempt": 2,
+  "base_commit": "0033cbca623d914b3dab69260862ea4a880f0e7f",
+  "target": "fn_8020860C",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-d15ac633-54d3-41a9-9f21-d1f3f1033105.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-d15ac633-54d3-41a9-9f21-d1f3f1033105-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/configure-d15ac633-54d3-41a9-9f21-d1f3f1033105.log",
+    "eternal-darkness-decomp/reports/GEDE01/build-d15ac633-54d3-41a9-9f21-d1f3f1033105.log",
+    "eternal-darkness-decomp/reports/GEDE01/dol-sha1-d15ac633-54d3-41a9-9f21-d1f3f1033105.log",
+    "eternal-darkness-decomp/reports/GEDE01/legal-audit-d15ac633-54d3-41a9-9f21-d1f3f1033105.log",
+    "eternal-darkness-decomp/reports/GEDE01/fndiff-d15ac633-54d3-41a9-9f21-d1f3f1033105.log",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-d15ac633-54d3-41a9-9f21-d1f3f1033105.txt"
+  ],
+  "divergence": "Canonical and function_reloc_diffs=name_address relocation-strict objdiff both measure 80.42105%; the corrected honest C reconstruction emits 832 bytes versus retail's 836 bytes. SITransfer now receives the required 64-bit delay in r9:r10, and the queue scan now exits after the first eligible fn_80208C4C attempt on both failure and success. Remaining codegen differs because retail hoists Packet_80640B68 and Si_802FCA20 address materialization ahead of the prologue and assigns interrupt/context and the two structure bases to r30/r31 and r28/r29, while MWCC assigns them to r21/r22 and r23/r31; queue index/alarm arithmetic and polling-response pointer induction consequently use different registers and scheduling, leaving a four-byte size deficit. Raw instruction and relocation tables substantiate these differences."
+}
