@@ -1,0 +1,93 @@
+ INFO Writing to /home/rabbit/src/darkfoundry-new/.darkfoundry/worktrees/a815fa1d-a749-4a28-8689-462797c51372/eternal-darkness-decomp/build/GEDE01/fndiff_SITransfer.json
+target 364 bytes  base 364 bytes  match 100.0
+  0x0000  mflr r0                                              | mflr r0
+  0x0004  stw r0, 0x4(r1)                                      | stw r0, 0x4(r1)
+  0x0008  stwu r1, -0x60(r1)                                   | stwu r1, -0x60(r1)
+  0x000c  stmw r19, 0x2c(r1)                                   | stmw r19, 0x2c(r1)
+  0x0010  addi r24, r3, 0x0                                    | addi r24, r3, 0x0
+  0x0014  lis r3, Packet_80640B68@ha [None+0 t6]               | lis r3, Packet_80640B68@ha [None+0 t6]
+  0x0018  addi r23, r3, Packet_80640B68@l [None+0 t4]          | addi r23, r3, Packet_80640B68@l [None+0 t4]
+  0x001c  slwi r0, r24, 5                                      | slwi r0, r24, 5
+  0x0020  addi r25, r4, 0x0                                    | addi r25, r4, 0x0
+  0x0024  addi r26, r5, 0x0                                    | addi r26, r5, 0x0
+  0x0028  addi r27, r6, 0x0                                    | addi r27, r6, 0x0
+  0x002c  addi r28, r7, 0x0                                    | addi r28, r7, 0x0
+  0x0030  addi r29, r8, 0x0                                    | addi r29, r8, 0x0
+  0x0034  addi r31, r9, 0x0                                    | addi r31, r9, 0x0
+  0x0038  addi r30, r10, 0x0                                   | addi r30, r10, 0x0
+  0x003c  add r22, r23, r0 [None+0 tNone]                      | add r22, r23, r0 [None+0 tNone]
+  0x0040  bl OSDisableInterrupts [None+0 t10]                  | bl OSDisableInterrupts [None+0 t10]
+  0x0044  lwz r0, 0x0(r22) [None+0 tNone]                      | lwz r0, 0x0(r22) [None+0 tNone]
+  0x0048  addi r21, r3, 0x0                                    | addi r21, r3, 0x0
+  0x004c  cmpwi r0, -0x1                                       | cmpwi r0, -0x1
+  0x0050  bne 0x64                                             | bne 0x64
+  0x0054  lis r3, Si_802FCA20@ha [None+0 t6]                   | lis r3, Si_802FCA20@ha [None+0 t6]
+  0x0058  lwz r0, Si_802FCA20@l(r3) [None+0 t4]                | lwz r0, Si_802FCA20@l(r3) [None+0 t4]
+  0x005c  cmpw r0, r24                                         | cmpw r0, r24
+  0x0060  bne 0x74                                             | bne 0x74
+  0x0064  mr r3, r21                                           | mr r3, r21
+  0x0068  bl OSRestoreInterrupts [None+0 t10]                  | bl OSRestoreInterrupts [None+0 t10]
+  0x006c  li r3, 0x0                                           | li r3, 0x0
+  0x0070  b 0x158                                              | b 0x158
+  0x0074  bl __OSGetSystemTime [None+0 t10]                    | bl __OSGetSystemTime [None+0 t10]
+  0x0078  li r0, 0x0                                           | li r0, 0x0
+  0x007c  xor r5, r30, r0                                      | xor r5, r30, r0
+  0x0080  xor r0, r31, r0                                      | xor r0, r31, r0
+  0x0084  or. r0, r5, r0                                       | or. r0, r5, r0
+  0x0088  bne 0x98                                             | bne 0x98
+  0x008c  addi r19, r4, 0x0                                    | addi r19, r4, 0x0
+  0x0090  addi r20, r3, 0x0                                    | addi r20, r3, 0x0
+  0x0094  b 0xb0                                               | b 0xb0
+  0x0098  slwi r0, r24, 3                                      | slwi r0, r24, 3
+  0x009c  add r6, r23, r0 [None+0 tNone]                       | add r6, r23, r0 [None+0 tNone]
+  0x00a0  lwz r5, 0x144(r6) [None+0 tNone]                     | lwz r5, 0x144(r6) [None+0 tNone]
+  0x00a4  lwz r0, 0x140(r6) [None+0 tNone]                     | lwz r0, 0x140(r6) [None+0 tNone]
+  0x00a8  addc r19, r30, r5                                    | addc r19, r30, r5
+  0x00ac  adde r20, r31, r0                                    | adde r20, r31, r0
+  0x00b0  xoris r6, r3, 0x8000                                 | xoris r6, r3, 0x8000
+  0x00b4  xoris r5, r20, 0x8000                                | xoris r5, r20, 0x8000
+  0x00b8  subfc r0, r19, r4                                    | subfc r0, r19, r4
+  0x00bc  subfe r5, r5, r6                                     | subfe r5, r5, r6
+  0x00c0  subfe r5, r6, r6                                     | subfe r5, r6, r6
+  0x00c4  neg. r5, r5                                          | neg. r5, r5
+  0x00c8  beq 0xf8                                             | beq 0xf8
+  0x00cc  mulli r0, r24, 0x28                                  | mulli r0, r24, 0x28
+  0x00d0  subfc r30, r4, r19                                   | subfc r30, r4, r19
+  0x00d4  subfe r31, r3, r20                                   | subfe r31, r3, r20
+  0x00d8  lis r4, fn_80209204@ha [None+0 t6]                   | lis r4, fn_80209204@ha [None+0 t6]
+  0x00dc  add r3, r23, r0 [None+0 tNone]                       | add r3, r23, r0 [None+0 tNone]
+  0x00e0  addi r7, r4, fn_80209204@l [None+0 t4]               | addi r7, r4, fn_80209204@l [None+0 t4]
+  0x00e4  addi r6, r30, 0x0                                    | addi r6, r30, 0x0
+  0x00e8  addi r5, r31, 0x0                                    | addi r5, r31, 0x0
+  0x00ec  addi r3, r3, 0x80 [None+0 tNone]                     | addi r3, r3, 0x80 [None+0 tNone]
+  0x00f0  bl OSSetAlarm [None+0 t10]                           | bl OSSetAlarm [None+0 t10]
+  0x00f4  b 0x12c                                              | b 0x12c
+  0x00f8  addi r3, r24, 0x0                                    | addi r3, r24, 0x0
+  0x00fc  addi r4, r25, 0x0                                    | addi r4, r25, 0x0
+  0x0100  addi r5, r26, 0x0                                    | addi r5, r26, 0x0
+  0x0104  addi r6, r27, 0x0                                    | addi r6, r27, 0x0
+  0x0108  addi r7, r28, 0x0                                    | addi r7, r28, 0x0
+  0x010c  addi r8, r29, 0x0                                    | addi r8, r29, 0x0
+  0x0110  bl fn_80208C4C [None+0 t10]                          | bl fn_80208C4C [None+0 t10]
+  0x0114  cmpwi r3, 0x0                                        | cmpwi r3, 0x0
+  0x0118  beq 0x12c                                            | beq 0x12c
+  0x011c  mr r3, r21                                           | mr r3, r21
+  0x0120  bl OSRestoreInterrupts [None+0 t10]                  | bl OSRestoreInterrupts [None+0 t10]
+  0x0124  li r3, 0x1                                           | li r3, 0x1
+  0x0128  b 0x158                                              | b 0x158
+  0x012c  stw r24, 0x0(r22) [None+0 tNone]                     | stw r24, 0x0(r22) [None+0 tNone]
+  0x0130  mr r3, r21                                           | mr r3, r21
+  0x0134  stw r25, 0x4(r22) [None+0 tNone]                     | stw r25, 0x4(r22) [None+0 tNone]
+  0x0138  stw r26, 0x8(r22) [None+0 tNone]                     | stw r26, 0x8(r22) [None+0 tNone]
+  0x013c  stw r27, 0xc(r22) [None+0 tNone]                     | stw r27, 0xc(r22) [None+0 tNone]
+  0x0140  stw r28, 0x10(r22) [None+0 tNone]                    | stw r28, 0x10(r22) [None+0 tNone]
+  0x0144  stw r29, 0x14(r22) [None+0 tNone]                    | stw r29, 0x14(r22) [None+0 tNone]
+  0x0148  stw r19, 0x1c(r22) [None+0 tNone]                    | stw r19, 0x1c(r22) [None+0 tNone]
+  0x014c  stw r20, 0x18(r22) [None+0 tNone]                    | stw r20, 0x18(r22) [None+0 tNone]
+  0x0150  bl OSRestoreInterrupts [None+0 t10]                  | bl OSRestoreInterrupts [None+0 t10]
+  0x0154  li r3, 0x1                                           | li r3, 0x1
+  0x0158  lmw r19, 0x2c(r1)                                    | lmw r19, 0x2c(r1)
+  0x015c  lwz r0, 0x64(r1)                                     | lwz r0, 0x64(r1)
+  0x0160  addi r1, r1, 0x60                                    | addi r1, r1, 0x60
+  0x0164  mtlr r0                                              | mtlr r0
+  0x0168  blr                                                  | blr

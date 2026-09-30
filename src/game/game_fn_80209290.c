@@ -54,7 +54,7 @@ s32 SITransfer(s32 chan, void *output, u32 outputBytes, void *input,
     SIPacket *packet;
     SIWork *work;
     s64 now;
-    u32 alarmOffset;
+    OSAlarm *alarm;
 
     work = &Packet_80640B68;
     packet = &work->packet[chan];
@@ -72,9 +72,8 @@ s32 SITransfer(s32 chan, void *output, u32 outputBytes, void *input,
     }
     if (now < fire) {
         delay = fire - now;
-        alarmOffset = chan * sizeof(OSAlarm);
-        OSSetAlarm((OSAlarm *)((u8 *)work + alarmOffset + 0x80), delay,
-                   fn_80209204);
+        alarm = (OSAlarm *)((u8 *)work + chan * sizeof(OSAlarm));
+        OSSetAlarm((OSAlarm *)((u8 *)alarm + 0x80), delay, fn_80209204);
     } else if (fn_80208C4C(chan, output, outputBytes, input, inputBytes,
                            callback)) {
         OSRestoreInterrupts(enabled);
