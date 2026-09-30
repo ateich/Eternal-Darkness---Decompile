@@ -23,8 +23,8 @@ u32 fn_80208310(void)
 {
     u32 i;
     u32* input;
-    u32 count;
     u32* inputBytes;
+    u32 count;
     u32 data;
     volatile u32* sr;
     u32 error;
@@ -33,13 +33,13 @@ u32 fn_80208310(void)
     sr = &__SIRegs[13];
     error = __SIRegs[14];
     si = &Si_802FCA20;
-    *sr = (*sr | 0x80000000) & ~1;
+    __SIRegs[13] = (__SIRegs[13] | 0x80000000) & ~1;
 
     if (si->chan != -1) {
         lbl_80640CA8[si->chan] = __OSGetSystemTime();
         input = si->input;
-        count = si->inputBytes >> 2;
         inputBytes = &si->inputBytes;
+        count = *inputBytes >> 2;
 
         for (i = 0; i < count; i++) {
             *input++ = __SIRegs[32 + i];

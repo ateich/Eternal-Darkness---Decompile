@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "assignment_id": "68835474-5e66-47ab-acc6-47f036b0fd02",
+  "attempt": 3,
+  "base_commit": "888304de88c9973cb46d779605671ca0cd91c509",
+  "target": "fn_80208310",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-68835474-5e66-47ab-acc6-47f036b0fd02.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-68835474-5e66-47ab-acc6-47f036b0fd02-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-68835474-5e66-47ab-acc6-47f036b0fd02.log",
+    "eternal-darkness-decomp/reports/GEDE01/dol-sha1-68835474-5e66-47ab-acc6-47f036b0fd02.log",
+    "eternal-darkness-decomp/reports/GEDE01/legal-audit-68835474-5e66-47ab-acc6-47f036b0fd02.log",
+    "eternal-darkness-decomp/reports/GEDE01/fndiff-68835474-5e66-47ab-acc6-47f036b0fd02.log",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-68835474-5e66-47ab-acc6-47f036b0fd02.txt"
+  ],
+  "divergence": "Size-exact 764-byte honest C reconstruction scores 98.05235% on canonical and relocation-strict objdiff. This attempt tested direct SI-register access plus inputBytes-first count derivation to separate the persistent status pointer and reverse r6/r7 lifetimes; GC/1.2.5n canonicalized it to the prior codegen. Retail still forms r29=r30+0x34, loads COMCSR before materializing Si_802FCA20, and assigns inputBytes/count to r6/r7, while generated code coalesces r29 with the SI base using stwu and assigns inputBytes/count to r7/r6. All relocation targets and zero addends match."
+}
