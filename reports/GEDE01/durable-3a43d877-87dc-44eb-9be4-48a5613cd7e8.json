@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "assignment_id": "3a43d877-87dc-44eb-9be4-48a5613cd7e8",
+  "attempt": 4,
+  "base_commit": "0371d7ad346ff70a89df5637d8731bea3a5af7e1",
+  "target": "fn_8020860C",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-3a43d877-87dc-44eb-9be4-48a5613cd7e8.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-3a43d877-87dc-44eb-9be4-48a5613cd7e8-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/configure-3a43d877-87dc-44eb-9be4-48a5613cd7e8.log",
+    "eternal-darkness-decomp/reports/GEDE01/build-3a43d877-87dc-44eb-9be4-48a5613cd7e8.log",
+    "eternal-darkness-decomp/reports/GEDE01/dol-sha1-3a43d877-87dc-44eb-9be4-48a5613cd7e8.log",
+    "eternal-darkness-decomp/reports/GEDE01/legal-audit-3a43d877-87dc-44eb-9be4-48a5613cd7e8.log",
+    "eternal-darkness-decomp/reports/GEDE01/fndiff-3a43d877-87dc-44eb-9be4-48a5613cd7e8.log",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-3a43d877-87dc-44eb-9be4-48a5613cd7e8.txt"
+  ],
+  "divergence": "Canonical and function_reloc_diffs=name_address relocation-strict objdiff both measure 80.88039% with exact 836-byte size parity. Relocation targets and addends remain aligned, but retail hoists Packet_80640B68 and Si_802FCA20 address materialization before the prologue and assigns interrupt/context and the two long-lived structure bases to r30/r31 and r28/r29. Canonical MWCC instead materializes those bases after the prologue and assigns interrupt/context to r21/r22 and the bases to r29/r31, cascading into different queue-index/alarm arithmetic and polling-response pointer induction register allocation and scheduling. A distinct branch-scoped-temporary lifetime hypothesis was tested and rejected because it regressed the score to 80.80861%; the stronger preserved declaration-order reconstruction is retained."
+}
