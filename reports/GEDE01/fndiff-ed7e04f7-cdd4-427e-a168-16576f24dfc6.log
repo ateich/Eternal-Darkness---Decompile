@@ -1,0 +1,115 @@
+ INFO Writing to /home/rabbit/src/darkfoundry-new/.darkfoundry/worktrees/81136289-d9d6-4a74-8320-2e4da3c1fe24/eternal-darkness-decomp/build/GEDE01/fndiff_SIGetType.json
+target 452 bytes  base 452 bytes  match 100.0
+  0x0000  mflr r0                                              | mflr r0
+  0x0004  stw r0, 0x4(r1)                                      | stw r0, 0x4(r1)
+  0x0008  stwu r1, -0x28(r1)                                   | stwu r1, -0x28(r1)
+  0x000c  stmw r27, 0x14(r1)                                   | stmw r27, 0x14(r1)
+  0x0010  mr r27, r3                                           | mr r27, r3
+  0x0014  bl OSDisableInterrupts [None+0 t10]                  | bl OSDisableInterrupts [None+0 t10]
+  0x0018  lis r4, Type_802FCA34@ha [None+0 t6]                 | lis r4, Type_802FCA34@ha [None+0 t6]
+  0x001c  slwi r5, r27, 2                                      | slwi r5, r27, 2
+  0x0020  addi r0, r4, Type_802FCA34@l [None+0 t4]             | addi r0, r4, Type_802FCA34@l [None+0 t4]
+  0x0024  add r30, r0, r5 [None+0 tNone]                       | add r30, r0, r5 [None+0 tNone]
+  0x0028  lwz r28, 0x0(r30) [None+0 tNone]                     | lwz r28, 0x0(r30) [None+0 tNone]
+  0x002c  mr r29, r3                                           | mr r29, r3
+  0x0030  bl __OSGetSystemTime [None+0 t10]                    | bl __OSGetSystemTime [None+0 t10]
+  0x0034  lis r5, TypeTime_80640C88@ha [None+0 t6]             | lis r5, TypeTime_80640C88@ha [None+0 t6]
+  0x0038  slwi r6, r27, 3                                      | slwi r6, r27, 3
+  0x003c  addi r0, r5, TypeTime_80640C88@l [None+0 t4]         | addi r0, r5, TypeTime_80640C88@l [None+0 t4]
+  0x0040  add r31, r0, r6 [None+0 tNone]                       | add r31, r0, r6 [None+0 tNone]
+  0x0044  lwz r6, 0x4(r31) [None+0 tNone]                      | lwz r6, 0x4(r31) [None+0 tNone]
+  0x0048  lis r5, Si_802FCA20@ha [None+0 t6]                   | lis r5, Si_802FCA20@ha [None+0 t6]
+  0x004c  addi r5, r5, Si_802FCA20@l [None+0 t4]               | addi r5, r5, Si_802FCA20@l [None+0 t4]
+  0x0050  lwz r0, 0x0(r31) [None+0 tNone]                      | lwz r0, 0x0(r31) [None+0 tNone]
+  0x0054  subfc r4, r6, r4                                     | subfc r4, r6, r4
+  0x0058  subfe r0, r0, r3                                     | subfe r0, r0, r3
+  0x005c  lwz r6, 0x4(r5) [None+0 tNone]                       | lwz r6, 0x4(r5) [None+0 tNone]
+  0x0060  li r5, 0x80                                          | li r5, 0x80
+  0x0064  sraw r3, r5, r27                                     | sraw r3, r5, r27
+  0x0068  and. r3, r6, r3                                      | and. r3, r6, r3
+  0x006c  beq 0xa0                                             | beq 0xa0
+  0x0070  cmplwi r28, 0x8                                      | cmplwi r28, 0x8
+  0x0074  beq 0x94                                             | beq 0x94
+  0x0078  bl __OSGetSystemTime [None+0 t10]                    | bl __OSGetSystemTime [None+0 t10]
+  0x007c  stw r4, 0x4(r31) [None+0 tNone]                      | stw r4, 0x4(r31) [None+0 tNone]
+  0x0080  stw r3, 0x0(r31) [None+0 tNone]                      | stw r3, 0x0(r31) [None+0 tNone]
+  0x0084  mr r3, r29                                           | mr r3, r29
+  0x0088  bl OSRestoreInterrupts [None+0 t10]                  | bl OSRestoreInterrupts [None+0 t10]
+  0x008c  mr r3, r28                                           | mr r3, r28
+  0x0090  b 0x1b0                                              | b 0x1b0
+  0x0094  stw r5, 0x0(r30) [None+0 tNone]                      | stw r5, 0x0(r30) [None+0 tNone]
+  0x0098  li r28, 0x80                                         | li r28, 0x80
+  0x009c  b 0x150                                              | b 0x150
+  0x00a0  lis r3, 0x8000                                       | lis r3, 0x8000
+  0x00a4  lwz r6, 0xf8(r3)                                     | lwz r6, 0xf8(r3)
+  0x00a8  lis r5, 0x1062                                       | lis r5, 0x1062
+  0x00ac  addi r5, r5, 0x4dd3                                  | addi r5, r5, 0x4dd3
+  0x00b0  srwi r6, r6, 2                                       | srwi r6, r6, 2
+  0x00b4  mulhwu r5, r5, r6                                    | mulhwu r5, r5, r6
+  0x00b8  srwi r5, r5, 6                                       | srwi r5, r5, 6
+  0x00bc  mulli r7, r5, 0x32                                   | mulli r7, r5, 0x32
+  0x00c0  li r3, 0x0                                           | li r3, 0x0
+  0x00c4  xoris r6, r3, 0x8000                                 | xoris r6, r3, 0x8000
+  0x00c8  xoris r5, r0, 0x8000                                 | xoris r5, r0, 0x8000
+  0x00cc  subfc r3, r4, r7                                     | subfc r3, r4, r7
+  0x00d0  subfe r5, r5, r6                                     | subfe r5, r5, r6
+  0x00d4  subfe r5, r6, r6                                     | subfe r5, r6, r6
+  0x00d8  neg. r5, r5                                          | neg. r5, r5
+  0x00dc  bne 0xf8                                             | bne 0xf8
+  0x00e0  cmplwi r28, 0x8                                      | cmplwi r28, 0x8
+  0x00e4  beq 0xf8                                             | beq 0xf8
+  0x00e8  mr r3, r29                                           | mr r3, r29
+  0x00ec  bl OSRestoreInterrupts [None+0 t10]                  | bl OSRestoreInterrupts [None+0 t10]
+  0x00f0  mr r3, r28                                           | mr r3, r28
+  0x00f4  b 0x1b0                                              | b 0x1b0
+  0x00f8  lis r3, 0x8000                                       | lis r3, 0x8000
+  0x00fc  lwz r6, 0xf8(r3)                                     | lwz r6, 0xf8(r3)
+  0x0100  lis r5, 0x1062                                       | lis r5, 0x1062
+  0x0104  addi r5, r5, 0x4dd3                                  | addi r5, r5, 0x4dd3
+  0x0108  srwi r6, r6, 2                                       | srwi r6, r6, 2
+  0x010c  mulhwu r5, r5, r6                                    | mulhwu r5, r5, r6
+  0x0110  srwi r5, r5, 6                                       | srwi r5, r5, 6
+  0x0114  mulli r6, r5, 0x4b                                   | mulli r6, r5, 0x4b
+  0x0118  li r3, 0x0                                           | li r3, 0x0
+  0x011c  xoris r5, r3, 0x8000                                 | xoris r5, r3, 0x8000
+  0x0120  xoris r3, r0, 0x8000                                 | xoris r3, r0, 0x8000
+  0x0124  subfc r0, r4, r6                                     | subfc r0, r4, r6
+  0x0128  subfe r3, r3, r5                                     | subfe r3, r3, r5
+  0x012c  subfe r3, r5, r5                                     | subfe r3, r5, r5
+  0x0130  neg. r3, r3                                          | neg. r3, r3
+  0x0134  bne 0x144                                            | bne 0x144
+  0x0138  li r0, 0x80                                          | li r0, 0x80
+  0x013c  stw r0, 0x0(r30) [None+0 tNone]                      | stw r0, 0x0(r30) [None+0 tNone]
+  0x0140  b 0x150                                              | b 0x150
+  0x0144  li r0, 0x80                                          | li r0, 0x80
+  0x0148  stw r0, 0x0(r30) [None+0 tNone]                      | stw r0, 0x0(r30) [None+0 tNone]
+  0x014c  li r28, 0x80                                         | li r28, 0x80
+  0x0150  bl __OSGetSystemTime [None+0 t10]                    | bl __OSGetSystemTime [None+0 t10]
+  0x0154  stw r4, 0x4(r31) [None+0 tNone]                      | stw r4, 0x4(r31) [None+0 tNone]
+  0x0158  lis r4, 0x431c                                       | lis r4, 0x431c
+  0x015c  lis r5, GetTypeCallback_802093FC@ha [None+0 t6]      | lis r5, GetTypeCallback_802093FC@ha [None+0 t6]
+  0x0160  stw r3, 0x0(r31) [None+0 tNone]                      | stw r3, 0x0(r31) [None+0 tNone]
+  0x0164  lis r3, 0x8000                                       | lis r3, 0x8000
+  0x0168  addi r8, r5, GetTypeCallback_802093FC@l [None+0 t4]  | addi r8, r5, GetTypeCallback_802093FC@l [None+0 t4]
+  0x016c  lwz r0, 0xf8(r3)                                     | lwz r0, 0xf8(r3)
+  0x0170  subi r4, r4, 0x217d                                  | subi r4, r4, 0x217d
+  0x0174  addi r3, r27, 0x0                                    | addi r3, r27, 0x0
+  0x0178  srwi r0, r0, 2                                       | srwi r0, r0, 2
+  0x017c  mulhwu r0, r4, r0                                    | mulhwu r0, r4, r0
+  0x0180  srwi r0, r0, 15                                      | srwi r0, r0, 15
+  0x0184  mulli r0, r0, 0x41                                   | mulli r0, r0, 0x41
+  0x0188  srwi r10, r0, 3                                      | srwi r10, r0, 3
+  0x018c  addi r6, r30, 0x0 [None+0 tNone]                     | addi r6, r30, 0x0 [None+0 tNone]
+  0x0190  li r4, cmdTypeAndStatus$371@sda21 [None+0 t109]      | li r4, cmdTypeAndStatus@sda21 [None+0 t109]
+  0x0194  li r5, 0x1                                           | li r5, 0x1
+  0x0198  li r7, 0x3                                           | li r7, 0x3
+  0x019c  li r9, 0x0                                           | li r9, 0x0
+  0x01a0  bl SITransfer [None+0 t10]                           | bl SITransfer [None+0 t10]
+  0x01a4  mr r3, r29                                           | mr r3, r29
+  0x01a8  bl OSRestoreInterrupts [None+0 t10]                  | bl OSRestoreInterrupts [None+0 t10]
+  0x01ac  mr r3, r28                                           | mr r3, r28
+  0x01b0  lmw r27, 0x14(r1)                                    | lmw r27, 0x14(r1)
+  0x01b4  lwz r0, 0x2c(r1)                                     | lwz r0, 0x2c(r1)
+  0x01b8  addi r1, r1, 0x28                                    | addi r1, r1, 0x28
+  0x01bc  mtlr r0                                              | mtlr r0
+  0x01c0  blr                                                  | blr
