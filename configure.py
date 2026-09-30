@@ -2596,7 +2596,8 @@ config.custom_build_rules = [
     {
         "name": "externalize_game_unsigned_bias_35",
         "command": (
-            "python3 tools/externalize_elf_symbol.py $in @35 && "
+            "python3 tools/externalize_elf_symbol.py $in @35 lbl_8064DE60 "
+            "orig/GEDE01/sys/main.dol --require-whole-section && "
             "build/binutils/powerpc-eabi-objcopy "
             "--redefine-sym=@35=lbl_8064DE60 --remove-section=.sdata2 $in "
             "&& touch $out"
@@ -13197,8 +13198,11 @@ config.libs = [
             Object(Matching, "game/game_fn_80207304.c", mw_version=SDK_MW_VERSION),
             Object(Matching, "game/game_fn_802073C0.c", mw_version=SDK_MW_VERSION, extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_802074EC.c", mw_version=SDK_MW_VERSION),
-            Object(NonMatching, "game/game_fn_802075FC.c", mw_version=SDK_MW_VERSION),
+            Object(Matching, "game/game_fn_802075FC.c", mw_version=SDK_MW_VERSION),
             Object(NonMatching, "game/game_fn_802076C4.c", mw_version=SDK_MW_VERSION),
+            Object(Matching, "game/game_fn_802082B4.c", mw_version=SDK_MW_VERSION),
+            Object(Matching, "game/game_fn_802082D4.c", mw_version=SDK_MW_VERSION),
+            Object(NonMatching, "game/game_fn_80208310.c", mw_version=SDK_MW_VERSION),
             Object(Matching, "game/game_fn_802078DC.c", mw_version=SDK_MW_VERSION, extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_802079A4.c", mw_version=SDK_MW_VERSION),
             Object(Matching, "game/game_fn_80207AB8.c", mw_version=SDK_MW_VERSION),

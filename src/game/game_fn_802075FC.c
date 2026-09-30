@@ -1,10 +1,10 @@
 typedef signed short s16;
 typedef signed int s32;
 typedef unsigned int u32;
+typedef unsigned long long u64;
 
 typedef struct OSContext {
-    double align;
-    char data[0x2C8];
+    u32 data[0xB4];
 } OSContext;
 
 typedef struct EXIRegisters {
@@ -34,15 +34,21 @@ extern EXIControl Ecb_80640AA8[3];
 extern void OSClearContext(OSContext *context);
 extern void OSSetCurrentContext(OSContext *context);
 
-static void EXIIntrruptHandler_802075FC(s16 interrupt, OSContext *context)
+void EXIIntrruptHandler_802075FC(s16 interrupt, OSContext *context)
 {
     OSContext exceptionContext;
+    volatile u64 stackPadding;
     s32 chan = (interrupt - 9) / 3;
-    u32 reg = 0xCC006800;
+    u32 cpr;
+    u32 reg;
     EXICallback callback;
 
+    reg = 0xCC006800;
     reg += chan * sizeof(EXIRegisters);
-    *(volatile u32 *)reg = (*(volatile u32 *)reg & 0x7F5) | 2;
+    cpr = *(volatile u32 *)reg;
+    cpr &= 0x7F5;
+    cpr |= 2;
+    *(volatile u32 *)reg = cpr;
     callback = Ecb_80640AA8[chan].exiCallback;
     if (callback != 0) {
         OSClearContext(&exceptionContext);

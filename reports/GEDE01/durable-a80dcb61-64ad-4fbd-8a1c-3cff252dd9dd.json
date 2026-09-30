@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "assignment_id": "a80dcb61-64ad-4fbd-8a1c-3cff252dd9dd",
+  "attempt": 1,
+  "base_commit": "9f800ceed8d59cb9595783ddf367377c275bb365",
+  "target": "fn_80208310",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-a80dcb61-64ad-4fbd-8a1c-3cff252dd9dd.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-a80dcb61-64ad-4fbd-8a1c-3cff252dd9dd-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-a80dcb61-64ad-4fbd-8a1c-3cff252dd9dd.log",
+    "eternal-darkness-decomp/reports/GEDE01/dol-sha1-a80dcb61-64ad-4fbd-8a1c-3cff252dd9dd.log",
+    "eternal-darkness-decomp/reports/GEDE01/legal-audit-a80dcb61-64ad-4fbd-8a1c-3cff252dd9dd.log",
+    "eternal-darkness-decomp/reports/GEDE01/fndiff-a80dcb61-64ad-4fbd-8a1c-3cff252dd9dd.log",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-a80dcb61-64ad-4fbd-8a1c-3cff252dd9dd.txt"
+  ],
+  "divergence": "Size-exact 764-byte honest C reconstruction scores 97.92146% on both canonical and relocation-strict objdiff. Retail forms the persistent SI status pointer as r29=r30+0x34 and loads COMCSR before materializing Si_802FCA20, while GC/1.2.5n coalesces r29 with the SI register base and uses stwu; retail also assigns inputBytes/count to r6/r7 while generated code assigns them to r7/r6. The final TypeTime relocation target is retail TypeTime_80640C88 versus generated TypeTime, with identical addresses/addends after link."
+}

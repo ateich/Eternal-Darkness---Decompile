@@ -1,0 +1,18 @@
+command: python3 tools/fndiff.py game/game_fn_802082D4.c fn_802082D4
+exit: 0
+target 60 bytes  base 60 bytes  match 100.0
+  0x0000  lis r4, Packet_80640B68@ha [None+0 t6]               | lis r4, Packet_80640B68@ha [None+0 t6]
+  0x0004  slwi r5, r3, 5                                       | slwi r5, r3, 5
+  0x0008  addi r0, r4, Packet_80640B68@l [None+0 t4]           | addi r0, r4, Packet_80640B68@l [None+0 t4]
+  0x000c  add r4, r0, r5 [None+0 tNone]                        | add r4, r0, r5 [None+0 tNone]
+  0x0010  lwz r0, 0x0(r4) [None+0 tNone]                       | lwz r0, 0x0(r4) [None+0 tNone]
+  0x0014  li r5, 0x1                                           | li r5, 0x1
+  0x0018  cmpwi r0, -0x1                                       | cmpwi r0, -0x1
+  0x001c  bne 0x34                                             | bne 0x34
+  0x0020  lis r4, Si_802FCA20@ha [None+0 t6]                   | lis r4, Si_802FCA20@ha [None+0 t6]
+  0x0024  lwz r0, Si_802FCA20@l(r4) [None+0 t4]                | lwz r0, Si_802FCA20@l(r4) [None+0 t4]
+  0x0028  cmpw r0, r3                                          | cmpw r0, r3
+  0x002c  beq 0x34                                             | beq 0x34
+  0x0030  li r5, 0x0                                           | li r5, 0x0
+  0x0034  mr r3, r5                                            | mr r3, r5
+  0x0038  blr                                                  | blr
