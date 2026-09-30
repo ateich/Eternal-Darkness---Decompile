@@ -1,0 +1,43 @@
+ INFO Writing to /home/rabbit/src/darkfoundry-new/.darkfoundry/worktrees/81136289-d9d6-4a74-8320-2e4da3c1fe24/eternal-darkness-decomp/build/GEDE01/fndiff_SIInit.json
+target 164 bytes  base 164 bytes  match 98.78049
+  0x0000  mflr r0                                              | mflr r0
+  0x0004  lis r3, Packet_80640B68@ha [None+0 t6]               | lis r3, Packet_80640B68@ha [None+0 t6]
+  0x0008  stw r0, 0x4(r1)                                      | stw r0, 0x4(r1)
+* 0x000c  addi r6, r3, Packet_80640B68@l [None+0 t4]           | addi r5, r3, Packet_80640B68@l [None+0 t4]
+  0x0010  lis r3, Si_802FCA20@ha [None+0 t6]                   | lis r3, Si_802FCA20@ha [None+0 t6]
+  0x0014  stwu r1, -0x8(r1)                                    | stwu r1, -0x8(r1)
+* 0x0018  li r5, -0x1                                          | li r6, -0x1
+  0x001c  addi r4, r3, Si_802FCA20@l [None+0 t4]               | addi r4, r3, Si_802FCA20@l [None+0 t4]
+* 0x0020  stw r5, 0x60(r6) [None+0 tNone]                      | stw r6, 0x60(r5) [None+0 tNone]
+  0x0024  li r0, 0x0                                           | li r0, 0x0
+  0x0028  li r3, 0x0                                           | li r3, 0x0
+* 0x002c  stw r5, 0x40(r6) [None+0 tNone]                      | stw r6, 0x40(r5) [None+0 tNone]
+* 0x0030  stw r5, 0x20(r6) [None+0 tNone]                      | stw r6, 0x20(r5) [None+0 tNone]
+* 0x0034  stw r5, 0x0(r6) [None+0 tNone]                       | stw r6, 0x0(r5) [None+0 tNone]
+  0x0038  stw r0, 0x4(r4) [None+0 tNone]                       | stw r0, 0x4(r4) [None+0 tNone]
+  0x003c  bl SISetSamplingRate [None+0 t10]                    | bl SISetSamplingRate [None+0 t10]
+  0x0040  lis r3, 0xcc00                                       | lis r3, 0xcc00
+  0x0044  addi r4, r3, 0x6400                                  | addi r4, r3, 0x6400
+  0x0048  lwzu r0, 0x34(r4)                                    | lwzu r0, 0x34(r4)
+  0x004c  clrlwi. r0, r0, 31                                   | clrlwi. r0, r0, 31
+  0x0050  bne 0x44                                             | bne 0x44
+  0x0054  lis r0, 0x8000                                       | lis r0, 0x8000
+  0x0058  lis r3, SIInterruptHandler_8020860C@ha [None+0 t6]   | lis r3, SIInterruptHandler_8020860C@ha [None+0 t6]
+  0x005c  stw r0, 0x0(r4)                                      | stw r0, 0x0(r4)
+  0x0060  addi r4, r3, SIInterruptHandler_8020860C@l [None+0 t4] | addi r4, r3, SIInterruptHandler_8020860C@l [None+0 t4]
+  0x0064  li r3, 0x14                                          | li r3, 0x14
+  0x0068  bl __OSSetInterruptHandler [None+0 t10]              | bl __OSSetInterruptHandler [None+0 t10]
+  0x006c  li r3, 0x800                                         | li r3, 0x800
+  0x0070  bl __OSUnmaskInterrupts [None+0 t10]                 | bl __OSUnmaskInterrupts [None+0 t10]
+  0x0074  li r3, 0x0                                           | li r3, 0x0
+  0x0078  bl SIGetType [None+0 t10]                            | bl SIGetType [None+0 t10]
+  0x007c  li r3, 0x1                                           | li r3, 0x1
+  0x0080  bl SIGetType [None+0 t10]                            | bl SIGetType [None+0 t10]
+  0x0084  li r3, 0x2                                           | li r3, 0x2
+  0x0088  bl SIGetType [None+0 t10]                            | bl SIGetType [None+0 t10]
+  0x008c  li r3, 0x3                                           | li r3, 0x3
+  0x0090  bl SIGetType [None+0 t10]                            | bl SIGetType [None+0 t10]
+  0x0094  lwz r0, 0xc(r1)                                      | lwz r0, 0xc(r1)
+  0x0098  addi r1, r1, 0x8                                     | addi r1, r1, 0x8
+  0x009c  mtlr r0                                              | mtlr r0
+  0x00a0  blr                                                  | blr
