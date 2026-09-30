@@ -56,6 +56,8 @@ extern void GetTypeCallback_802093FC(s32 chan, u32 error, OSContext *context);
 
 void SIInterruptHandler_8020860C(s32 interrupt, OSContext *context)
 {
+    SIWork *work = &Packet_80640B68;
+    SIControl *si = &Si_802FCA20;
     u32 status = __SIRegs[13];
     s32 chan;
     u32 error;
@@ -67,8 +69,6 @@ void SIInterruptHandler_8020860C(s32 interrupt, OSContext *context)
     u32 poll;
     u32 interval;
     s32 busy;
-    SIWork *work = &Packet_80640B68;
-    SIControl *si = &Si_802FCA20;
 
     if ((status & 0xC0000000) == 0xC0000000) {
         chan = si->chan;
