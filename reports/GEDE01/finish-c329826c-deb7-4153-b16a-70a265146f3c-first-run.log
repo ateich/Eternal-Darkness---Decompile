@@ -1,0 +1,107 @@
+
+VARIANT baseline
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/finish-c329826c-deb7-4153-b16a-70a265146f3c-baseline.json
+RESULT baseline 93.497604 844
+
+VARIANT poll_embedded_assignment
+--- 
++++ 
+@@ -117,8 +117,7 @@
+     if ((status & 0x18000000) == 0x18000000) {
+         vcount = fn_802181F4() + 1;
+         response = work->responseTime;
+-        pollAddress = &si->poll;
+-        interval = (*pollAddress >> 16) & 0x3FF;
++        interval = (*(pollAddress = &si->poll) >> 16) & 0x3FF;
+ 
+         for (i = 0; i < 4; i++) {
+             if (fn_8020906C(i)) {
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/finish-c329826c-deb7-4153-b16a-70a265146f3c-poll_embedded_assignment.json
+RESULT poll_embedded_assignment 93.066986 844
+
+VARIANT baseline_explicit_clear
+--- 
++++ 
+@@ -136,9 +136,10 @@
+             }
+         }
+ 
+-        for (i = 0; i < 4; i++) {
+-            response[i] = 0;
+-        }
++        response[0] = 0;
++        work->responseTime[1] = 0;
++        work->responseTime[2] = 0;
++        work->responseTime[3] = 0;
+         handlers = work->pollingHandler;
+         for (i = 0; i < 4; i++) {
+             if (handlers[i] != 0) {
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/finish-c329826c-deb7-4153-b16a-70a265146f3c-baseline_explicit_clear.json
+RESULT baseline_explicit_clear 93.53589 844
+
+VARIANT poll_embedded_assignment_explicit_clear
+--- 
++++ 
+@@ -117,8 +117,7 @@
+     if ((status & 0x18000000) == 0x18000000) {
+         vcount = fn_802181F4() + 1;
+         response = work->responseTime;
+-        pollAddress = &si->poll;
+-        interval = (*pollAddress >> 16) & 0x3FF;
++        interval = (*(pollAddress = &si->poll) >> 16) & 0x3FF;
+ 
+         for (i = 0; i < 4; i++) {
+             if (fn_8020906C(i)) {
+@@ -136,9 +135,10 @@
+             }
+         }
+ 
+-        for (i = 0; i < 4; i++) {
+-            response[i] = 0;
+-        }
++        response[0] = 0;
++        work->responseTime[1] = 0;
++        work->responseTime[2] = 0;
++        work->responseTime[3] = 0;
+         handlers = work->pollingHandler;
+         for (i = 0; i < 4; i++) {
+             if (handlers[i] != 0) {
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/finish-c329826c-deb7-4153-b16a-70a265146f3c-poll_embedded_assignment_explicit_clear.json
+RESULT poll_embedded_assignment_explicit_clear 93.10526 844
+
+VARIANT baseline_earlier_counter
+--- 
++++ 
+@@ -78,10 +78,11 @@
+         chan = si->chan;
+         error = fn_80208310();
+         callback = si->callback;
+-        si->callback = 0;
++        i = 0;
++        si->callback = i;
+ 
+         next = chan;
+-        for (i = 0; i < 4; i++) {
++        for (; i < 4; i++) {
+             ++next;
+             next %= 4;
+             packet = &work->packet[next];
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+FAILED: [code=2] build/GEDE01/src/game/game_fn_8020860C.o 
+tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.2.5n/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -MMD -c src/game/game_fn_8020860C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_8020860C.d build/GEDE01/src/game/game_fn_8020860C.d
+### mwcceppc.exe Compiler:
+#    File: src\game\game_fn_8020860C.c
+# ------------------------------------
+#      82: si->callback = i;
+#   Error:                 ^
+#   cannot convert
+#   'int' to
+#   'void (*)(int, unsigned int, struct OSContext *)'
+#   Too many errors printed, aborting program
+
+User break, cancelled...
+ninja: build stopped: subcommand failed.

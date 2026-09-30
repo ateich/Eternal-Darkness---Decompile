@@ -1,0 +1,386 @@
+
+VARIANT baseline
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/pointers-c329826c-deb7-4153-b16a-70a265146f3c-baseline.json
+RESULT baseline 92.29665 840
+
+VARIANT type_pointer
+--- 
++++ 
+@@ -69,6 +69,7 @@
+     u32 poll;
+     u32 interval;
+     s32 busy;
++    u32 *type;
+     volatile u32 *response;
+     SIPollingHandler *handlers;
+ 
+@@ -98,13 +99,14 @@
+         }
+ 
+         __SIRegs[14] &= (s32)0x0F000000 >> (chan * 8);
+-        if (si->type[chan] == 0x80) {
++        type = &si->type[chan];
++        if (*type == 0x80) {
+             busy = 1;
+             if (work->packet[chan].chan == -1 && si->chan != chan) {
+                 busy = 0;
+             }
+             if (!busy) {
+-            SITransfer(chan, &lbl_8064D8D0, 1, &si->type[chan], 3,
++            SITransfer(chan, &lbl_8064D8D0, 1, type, 3,
+                        GetTypeCallback_802093FC,
+                        (((__OSBusClock / 4) / 125000) * 65) / 8);
+             }
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/pointers-c329826c-deb7-4153-b16a-70a265146f3c-type_pointer.json
+RESULT type_pointer 92.12919 840
+
+VARIANT poll_pointer
+--- 
++++ 
+@@ -20,6 +20,7 @@
+ typedef struct SIControl {
+     s32 chan;
+     u32 poll;
++    u32 *pollAddress;
+     u32 inputBytes;
+     void *input;
+     SICallback callback;
+@@ -67,8 +68,10 @@
+     SIPacket *packet;
+     u32 vcount;
+     u32 poll;
++    u32 *pollAddress;
+     u32 interval;
+     s32 busy;
++    u32 *type;
+     volatile u32 *response;
+     SIPollingHandler *handlers;
+ 
+@@ -98,13 +101,14 @@
+         }
+ 
+         __SIRegs[14] &= (s32)0x0F000000 >> (chan * 8);
+-        if (si->type[chan] == 0x80) {
++        type = &si->type[chan];
++        if (*type == 0x80) {
+             busy = 1;
+             if (work->packet[chan].chan == -1 && si->chan != chan) {
+                 busy = 0;
+             }
+             if (!busy) {
+-            SITransfer(chan, &lbl_8064D8D0, 1, &si->type[chan], 3,
++            SITransfer(chan, &lbl_8064D8D0, 1, type, 3,
+                        GetTypeCallback_802093FC,
+                        (((__OSBusClock / 4) / 125000) * 65) / 8);
+             }
+@@ -114,7 +118,8 @@
+     if ((status & 0x18000000) == 0x18000000) {
+         vcount = fn_802181F4() + 1;
+         response = work->responseTime;
+-        interval = (si->poll >> 16) & 0x3FF;
++        pollAddress = &si->poll;
++        interval = (*pollAddress >> 16) & 0x3FF;
+ 
+         for (i = 0; i < 4; i++) {
+             if (fn_8020906C(i)) {
+@@ -122,7 +127,7 @@
+             }
+         }
+ 
+-        poll = si->poll;
++        poll = *pollAddress;
+         for (i = 0; i < 4; i++) {
+             if (poll & (0x80000000 >> (24 + i))) {
+                 if (response[i] == 0 ||
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/pointers-c329826c-deb7-4153-b16a-70a265146f3c-poll_pointer.json
+RESULT poll_pointer 92.267944 844
+
+VARIANT clear_base
+--- 
++++ 
+@@ -20,6 +20,7 @@
+ typedef struct SIControl {
+     s32 chan;
+     u32 poll;
++    u32 *pollAddress;
+     u32 inputBytes;
+     void *input;
+     SICallback callback;
+@@ -67,8 +68,10 @@
+     SIPacket *packet;
+     u32 vcount;
+     u32 poll;
++    u32 *pollAddress;
+     u32 interval;
+     s32 busy;
++    u32 *type;
+     volatile u32 *response;
+     SIPollingHandler *handlers;
+ 
+@@ -98,13 +101,14 @@
+         }
+ 
+         __SIRegs[14] &= (s32)0x0F000000 >> (chan * 8);
+-        if (si->type[chan] == 0x80) {
++        type = &si->type[chan];
++        if (*type == 0x80) {
+             busy = 1;
+             if (work->packet[chan].chan == -1 && si->chan != chan) {
+                 busy = 0;
+             }
+             if (!busy) {
+-            SITransfer(chan, &lbl_8064D8D0, 1, &si->type[chan], 3,
++            SITransfer(chan, &lbl_8064D8D0, 1, type, 3,
+                        GetTypeCallback_802093FC,
+                        (((__OSBusClock / 4) / 125000) * 65) / 8);
+             }
+@@ -114,7 +118,8 @@
+     if ((status & 0x18000000) == 0x18000000) {
+         vcount = fn_802181F4() + 1;
+         response = work->responseTime;
+-        interval = (si->poll >> 16) & 0x3FF;
++        pollAddress = &si->poll;
++        interval = (*pollAddress >> 16) & 0x3FF;
+ 
+         for (i = 0; i < 4; i++) {
+             if (fn_8020906C(i)) {
+@@ -122,7 +127,7 @@
+             }
+         }
+ 
+-        poll = si->poll;
++        poll = *pollAddress;
+         for (i = 0; i < 4; i++) {
+             if (poll & (0x80000000 >> (24 + i))) {
+                 if (response[i] == 0 ||
+@@ -133,7 +138,7 @@
+         }
+ 
+         for (i = 0; i < 4; i++) {
+-            response[i] = 0;
++            work->responseTime[i] = 0;
+         }
+         handlers = work->pollingHandler;
+         for (i = 0; i < 4; i++) {
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/pointers-c329826c-deb7-4153-b16a-70a265146f3c-clear_base.json
+RESULT clear_base 92.253586 844
+
+VARIANT baseline_next_split
+--- 
++++ 
+@@ -80,7 +80,8 @@
+ 
+         next = chan;
+         for (i = 0; i < 4; i++) {
+-            next = (next + 1) % 4;
++            ++next;
++            next %= 4;
+             packet = &work->packet[next];
+             if (packet->chan != -1 && __OSGetSystemTime() >= packet->fire) {
+                 if (fn_80208C4C(packet->chan, packet->output,
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/pointers-c329826c-deb7-4153-b16a-70a265146f3c-baseline_next_split.json
+RESULT baseline_next_split 92.96651 844
+
+VARIANT type_pointer_next_split
+--- 
++++ 
+@@ -69,6 +69,7 @@
+     u32 poll;
+     u32 interval;
+     s32 busy;
++    u32 *type;
+     volatile u32 *response;
+     SIPollingHandler *handlers;
+ 
+@@ -80,7 +81,8 @@
+ 
+         next = chan;
+         for (i = 0; i < 4; i++) {
+-            next = (next + 1) % 4;
++            ++next;
++            next %= 4;
+             packet = &work->packet[next];
+             if (packet->chan != -1 && __OSGetSystemTime() >= packet->fire) {
+                 if (fn_80208C4C(packet->chan, packet->output,
+@@ -98,13 +100,14 @@
+         }
+ 
+         __SIRegs[14] &= (s32)0x0F000000 >> (chan * 8);
+-        if (si->type[chan] == 0x80) {
++        type = &si->type[chan];
++        if (*type == 0x80) {
+             busy = 1;
+             if (work->packet[chan].chan == -1 && si->chan != chan) {
+                 busy = 0;
+             }
+             if (!busy) {
+-            SITransfer(chan, &lbl_8064D8D0, 1, &si->type[chan], 3,
++            SITransfer(chan, &lbl_8064D8D0, 1, type, 3,
+                        GetTypeCallback_802093FC,
+                        (((__OSBusClock / 4) / 125000) * 65) / 8);
+             }
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/pointers-c329826c-deb7-4153-b16a-70a265146f3c-type_pointer_next_split.json
+RESULT type_pointer_next_split 92.79904 844
+
+VARIANT poll_pointer_next_split
+--- 
++++ 
+@@ -20,6 +20,7 @@
+ typedef struct SIControl {
+     s32 chan;
+     u32 poll;
++    u32 *pollAddress;
+     u32 inputBytes;
+     void *input;
+     SICallback callback;
+@@ -67,8 +68,10 @@
+     SIPacket *packet;
+     u32 vcount;
+     u32 poll;
++    u32 *pollAddress;
+     u32 interval;
+     s32 busy;
++    u32 *type;
+     volatile u32 *response;
+     SIPollingHandler *handlers;
+ 
+@@ -80,7 +83,8 @@
+ 
+         next = chan;
+         for (i = 0; i < 4; i++) {
+-            next = (next + 1) % 4;
++            ++next;
++            next %= 4;
+             packet = &work->packet[next];
+             if (packet->chan != -1 && __OSGetSystemTime() >= packet->fire) {
+                 if (fn_80208C4C(packet->chan, packet->output,
+@@ -98,13 +102,14 @@
+         }
+ 
+         __SIRegs[14] &= (s32)0x0F000000 >> (chan * 8);
+-        if (si->type[chan] == 0x80) {
++        type = &si->type[chan];
++        if (*type == 0x80) {
+             busy = 1;
+             if (work->packet[chan].chan == -1 && si->chan != chan) {
+                 busy = 0;
+             }
+             if (!busy) {
+-            SITransfer(chan, &lbl_8064D8D0, 1, &si->type[chan], 3,
++            SITransfer(chan, &lbl_8064D8D0, 1, type, 3,
+                        GetTypeCallback_802093FC,
+                        (((__OSBusClock / 4) / 125000) * 65) / 8);
+             }
+@@ -114,7 +119,8 @@
+     if ((status & 0x18000000) == 0x18000000) {
+         vcount = fn_802181F4() + 1;
+         response = work->responseTime;
+-        interval = (si->poll >> 16) & 0x3FF;
++        pollAddress = &si->poll;
++        interval = (*pollAddress >> 16) & 0x3FF;
+ 
+         for (i = 0; i < 4; i++) {
+             if (fn_8020906C(i)) {
+@@ -122,7 +128,7 @@
+             }
+         }
+ 
+-        poll = si->poll;
++        poll = *pollAddress;
+         for (i = 0; i < 4; i++) {
+             if (poll & (0x80000000 >> (24 + i))) {
+                 if (response[i] == 0 ||
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/pointers-c329826c-deb7-4153-b16a-70a265146f3c-poll_pointer_next_split.json
+RESULT poll_pointer_next_split 92.9378 848
+
+VARIANT clear_base_next_split
+--- 
++++ 
+@@ -20,6 +20,7 @@
+ typedef struct SIControl {
+     s32 chan;
+     u32 poll;
++    u32 *pollAddress;
+     u32 inputBytes;
+     void *input;
+     SICallback callback;
+@@ -67,8 +68,10 @@
+     SIPacket *packet;
+     u32 vcount;
+     u32 poll;
++    u32 *pollAddress;
+     u32 interval;
+     s32 busy;
++    u32 *type;
+     volatile u32 *response;
+     SIPollingHandler *handlers;
+ 
+@@ -80,7 +83,8 @@
+ 
+         next = chan;
+         for (i = 0; i < 4; i++) {
+-            next = (next + 1) % 4;
++            ++next;
++            next %= 4;
+             packet = &work->packet[next];
+             if (packet->chan != -1 && __OSGetSystemTime() >= packet->fire) {
+                 if (fn_80208C4C(packet->chan, packet->output,
+@@ -98,13 +102,14 @@
+         }
+ 
+         __SIRegs[14] &= (s32)0x0F000000 >> (chan * 8);
+-        if (si->type[chan] == 0x80) {
++        type = &si->type[chan];
++        if (*type == 0x80) {
+             busy = 1;
+             if (work->packet[chan].chan == -1 && si->chan != chan) {
+                 busy = 0;
+             }
+             if (!busy) {
+-            SITransfer(chan, &lbl_8064D8D0, 1, &si->type[chan], 3,
++            SITransfer(chan, &lbl_8064D8D0, 1, type, 3,
+                        GetTypeCallback_802093FC,
+                        (((__OSBusClock / 4) / 125000) * 65) / 8);
+             }
+@@ -114,7 +119,8 @@
+     if ((status & 0x18000000) == 0x18000000) {
+         vcount = fn_802181F4() + 1;
+         response = work->responseTime;
+-        interval = (si->poll >> 16) & 0x3FF;
++        pollAddress = &si->poll;
++        interval = (*pollAddress >> 16) & 0x3FF;
+ 
+         for (i = 0; i < 4; i++) {
+             if (fn_8020906C(i)) {
+@@ -122,7 +128,7 @@
+             }
+         }
+ 
+-        poll = si->poll;
++        poll = *pollAddress;
+         for (i = 0; i < 4; i++) {
+             if (poll & (0x80000000 >> (24 + i))) {
+                 if (response[i] == 0 ||
+@@ -133,7 +139,7 @@
+         }
+ 
+         for (i = 0; i < 4; i++) {
+-            response[i] = 0;
++            work->responseTime[i] = 0;
+         }
+         handlers = work->pollingHandler;
+         for (i = 0; i < 4; i++) {
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/pointers-c329826c-deb7-4153-b16a-70a265146f3c-clear_base_next_split.json
+RESULT clear_base_next_split 92.92345 848
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+RETAINED baseline_next_split 92.96651
+
+AUDIT: poll_pointer and clear_base variants (including their next_split forms) inadvertently added pollAddress to SIControl via broad text replacement. Those variants have invalid layouts and are rejected regardless of score. Retained baseline_next_split does not contain that edit. Correct-layout tests are in address-* reports.

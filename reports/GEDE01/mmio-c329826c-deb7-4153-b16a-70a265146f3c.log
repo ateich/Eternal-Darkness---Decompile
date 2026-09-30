@@ -1,0 +1,131 @@
+
+VARIANT baseline
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/mmio-c329826c-deb7-4153-b16a-70a265146f3c-baseline.json
+RESULT baseline 93.497604 844
+
+VARIANT volatile_mmio
+--- 
++++ 
+@@ -40,7 +40,7 @@
+ extern SIWork Packet_80640B68;
+ extern SIControl Si_802FCA20;
+ extern u32 lbl_8064D8D0;
+-extern u32 __SIRegs[64] : 0xCC006400;
++extern volatile u32 __SIRegs[64] : 0xCC006400;
+ extern u32 __OSBusClock : 0x800000F8;
+ 
+ extern u32 fn_80208310(void);
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/mmio-c329826c-deb7-4153-b16a-70a265146f3c-volatile_mmio.json
+RESULT volatile_mmio 93.497604 844
+
+VARIANT volatile_clock
+--- 
++++ 
+@@ -40,8 +40,8 @@
+ extern SIWork Packet_80640B68;
+ extern SIControl Si_802FCA20;
+ extern u32 lbl_8064D8D0;
+-extern u32 __SIRegs[64] : 0xCC006400;
+-extern u32 __OSBusClock : 0x800000F8;
++extern volatile u32 __SIRegs[64] : 0xCC006400;
++extern volatile u32 __OSBusClock : 0x800000F8;
+ 
+ extern u32 fn_80208310(void);
+ extern s64 __OSGetSystemTime(void);
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/mmio-c329826c-deb7-4153-b16a-70a265146f3c-volatile_clock.json
+RESULT volatile_clock 93.497604 844
+
+VARIANT typed_mmio
+--- 
++++ 
+@@ -40,7 +40,13 @@
+ extern SIWork Packet_80640B68;
+ extern SIControl Si_802FCA20;
+ extern u32 lbl_8064D8D0;
+-extern u32 __SIRegs[64] : 0xCC006400;
++typedef struct SIRegisters {
++    u32 unused[13];
++    u32 status;
++    u32 comcsr;
++    u32 tail[49];
++} SIRegisters;
++extern volatile SIRegisters __SIRegs : 0xCC006400;
+ extern u32 __OSBusClock : 0x800000F8;
+ 
+ extern u32 fn_80208310(void);
+@@ -58,7 +64,7 @@
+ {
+     SIWork *work = &Packet_80640B68;
+     SIControl *si = &Si_802FCA20;
+-    u32 status = __SIRegs[13];
++    u32 status = __SIRegs.status;
+     s32 chan;
+     u32 error;
+     SICallback callback;
+@@ -100,7 +106,7 @@
+             callback(chan, error, context);
+         }
+ 
+-        __SIRegs[14] &= (s32)0x0F000000 >> (chan * 8);
++        __SIRegs.comcsr &= (s32)0x0F000000 >> (chan * 8);
+         if (*(type = &si->type[chan]) == 0x80) {
+             busy = 1;
+             if (work->packet[chan].chan == -1 && si->chan != chan) {
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/mmio-c329826c-deb7-4153-b16a-70a265146f3c-typed_mmio.json
+RESULT typed_mmio 93.497604 844
+
+VARIANT alarm_byte_offset
+--- 
++++ 
+@@ -40,7 +40,7 @@
+ extern SIWork Packet_80640B68;
+ extern SIControl Si_802FCA20;
+ extern u32 lbl_8064D8D0;
+-extern u32 __SIRegs[64] : 0xCC006400;
++extern volatile u32 __SIRegs[64] : 0xCC006400;
+ extern u32 __OSBusClock : 0x800000F8;
+ 
+ extern u32 fn_80208310(void);
+@@ -89,7 +89,7 @@
+                 if (fn_80208C4C(packet->chan, packet->output,
+                                 packet->outputBytes, packet->input,
+                                 packet->inputBytes, packet->callback)) {
+-                    fn_8020A93C(&work->alarm[next * 10]);
++                    fn_8020A93C((void *)((char *)work + next * 40 + 128));
+                     packet->chan = -1;
+                 }
+                 break;
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/mmio-c329826c-deb7-4153-b16a-70a265146f3c-alarm_byte_offset.json
+RESULT alarm_byte_offset 93.497604 844
+
+VARIANT type_comma_pointer
+--- 
++++ 
+@@ -40,7 +40,7 @@
+ extern SIWork Packet_80640B68;
+ extern SIControl Si_802FCA20;
+ extern u32 lbl_8064D8D0;
+-extern u32 __SIRegs[64] : 0xCC006400;
++extern volatile u32 __SIRegs[64] : 0xCC006400;
+ extern u32 __OSBusClock : 0x800000F8;
+ 
+ extern u32 fn_80208310(void);
+@@ -101,7 +101,7 @@
+         }
+ 
+         __SIRegs[14] &= (s32)0x0F000000 >> (chan * 8);
+-        if (*(type = &si->type[chan]) == 0x80) {
++        if ((type = si->type + chan, *type) == 0x80) {
+             busy = 1;
+             if (work->packet[chan].chan == -1 && si->chan != chan) {
+                 busy = 0;
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/mmio-c329826c-deb7-4153-b16a-70a265146f3c-type_comma_pointer.json
+RESULT type_comma_pointer 92.99522 848
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+RETAINED baseline 93.497604

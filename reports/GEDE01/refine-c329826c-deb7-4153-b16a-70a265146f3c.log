@@ -1,0 +1,251 @@
+
+VARIANT retained
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/refine-c329826c-deb7-4153-b16a-70a265146f3c-retained.json
+RESULT retained 84.66985 856
+
+VARIANT nested
+--- 
++++ 
+@@ -96,14 +96,16 @@
+         }
+ 
+         __SIRegs[14] &= (s32)0x0F000000 >> (chan * 8);
+-        if (si->type[chan] == 0x80 &&
+-            (busy = 1,
+-             (work->packet[chan].chan == -1 && si->chan != chan) ?
+-                (busy = 0) : busy,
+-             !busy)) {
++        if (si->type[chan] == 0x80) {
++            busy = 1;
++            if (work->packet[chan].chan == -1 && si->chan != chan) {
++                busy = 0;
++            }
++            if (!busy) {
+             SITransfer(chan, &lbl_8064D8D0, 1, &si->type[chan], 3,
+                        GetTypeCallback_802093FC,
+                        (((__OSBusClock / 4) / 125000) * 65) / 8);
++            }
+         }
+     }
+ 
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/refine-c329826c-deb7-4153-b16a-70a265146f3c-nested.json
+RESULT nested 86.68421 840
+
+VARIANT array_bases
+--- 
++++ 
+@@ -69,6 +69,8 @@
+     u32 poll;
+     u32 interval;
+     s32 busy;
++    volatile u32 *response;
++    SIPollingHandler *handlers;
+ 
+     if ((status & 0xC0000000) == 0xC0000000) {
+         chan = si->chan;
+@@ -96,43 +98,47 @@
+         }
+ 
+         __SIRegs[14] &= (s32)0x0F000000 >> (chan * 8);
+-        if (si->type[chan] == 0x80 &&
+-            (busy = 1,
+-             (work->packet[chan].chan == -1 && si->chan != chan) ?
+-                (busy = 0) : busy,
+-             !busy)) {
++        if (si->type[chan] == 0x80) {
++            busy = 1;
++            if (work->packet[chan].chan == -1 && si->chan != chan) {
++                busy = 0;
++            }
++            if (!busy) {
+             SITransfer(chan, &lbl_8064D8D0, 1, &si->type[chan], 3,
+                        GetTypeCallback_802093FC,
+                        (((__OSBusClock / 4) / 125000) * 65) / 8);
++            }
+         }
+     }
+ 
+     if ((status & 0x18000000) == 0x18000000) {
+         vcount = fn_802181F4() + 1;
++        response = work->responseTime;
+         interval = (si->poll >> 16) & 0x3FF;
+ 
+         for (i = 0; i < 4; i++) {
+             if (fn_8020906C(i)) {
+-                work->responseTime[i] = vcount;
++                response[i] = vcount;
+             }
+         }
+ 
+         poll = si->poll;
+         for (i = 0; i < 4; i++) {
+             if (poll & (0x80000000 >> (24 + i))) {
+-                if (work->responseTime[i] == 0 ||
+-                    work->responseTime[i] + interval / 2 < vcount) {
++                if (response[i] == 0 ||
++                    response[i] + interval / 2 < vcount) {
+                     return;
+                 }
+             }
+         }
+ 
+         for (i = 0; i < 4; i++) {
+-            work->responseTime[i] = 0;
++            response[i] = 0;
+         }
++        handlers = work->pollingHandler;
+         for (i = 0; i < 4; i++) {
+-            if (work->pollingHandler[i] != 0) {
+-                work->pollingHandler[i](interrupt, context);
++            if (handlers[i] != 0) {
++                handlers[i](interrupt, context);
+             }
+         }
+     }
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/refine-c329826c-deb7-4153-b16a-70a265146f3c-array_bases.json
+RESULT array_bases 92.29665 840
+
+VARIANT nested_alarm
+--- 
++++ 
+@@ -28,7 +28,7 @@
+ 
+ typedef struct SIWork {
+     SIPacket packet[4];
+-    u32 alarm[40];
++    struct { u32 opaque[10]; } alarm[4];
+     u64 typeTime[4];
+     u64 xferTime[4];
+     u32 type[16];
+@@ -84,7 +84,7 @@
+                 if (fn_80208C4C(packet->chan, packet->output,
+                                 packet->outputBytes, packet->input,
+                                 packet->inputBytes, packet->callback)) {
+-                    fn_8020A93C(&work->alarm[next * 10]);
++                    fn_8020A93C(&work->alarm[next]);
+                     packet->chan = -1;
+                 }
+                 break;
+@@ -96,14 +96,16 @@
+         }
+ 
+         __SIRegs[14] &= (s32)0x0F000000 >> (chan * 8);
+-        if (si->type[chan] == 0x80 &&
+-            (busy = 1,
+-             (work->packet[chan].chan == -1 && si->chan != chan) ?
+-                (busy = 0) : busy,
+-             !busy)) {
++        if (si->type[chan] == 0x80) {
++            busy = 1;
++            if (work->packet[chan].chan == -1 && si->chan != chan) {
++                busy = 0;
++            }
++            if (!busy) {
+             SITransfer(chan, &lbl_8064D8D0, 1, &si->type[chan], 3,
+                        GetTypeCallback_802093FC,
+                        (((__OSBusClock / 4) / 125000) * 65) / 8);
++            }
+         }
+     }
+ 
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/refine-c329826c-deb7-4153-b16a-70a265146f3c-nested_alarm.json
+RESULT nested_alarm 86.68421 840
+
+VARIANT array_bases_alarm
+--- 
++++ 
+@@ -28,7 +28,7 @@
+ 
+ typedef struct SIWork {
+     SIPacket packet[4];
+-    u32 alarm[40];
++    struct { u32 opaque[10]; } alarm[4];
+     u64 typeTime[4];
+     u64 xferTime[4];
+     u32 type[16];
+@@ -69,6 +69,8 @@
+     u32 poll;
+     u32 interval;
+     s32 busy;
++    volatile u32 *response;
++    SIPollingHandler *handlers;
+ 
+     if ((status & 0xC0000000) == 0xC0000000) {
+         chan = si->chan;
+@@ -84,7 +86,7 @@
+                 if (fn_80208C4C(packet->chan, packet->output,
+                                 packet->outputBytes, packet->input,
+                                 packet->inputBytes, packet->callback)) {
+-                    fn_8020A93C(&work->alarm[next * 10]);
++                    fn_8020A93C(&work->alarm[next]);
+                     packet->chan = -1;
+                 }
+                 break;
+@@ -96,43 +98,47 @@
+         }
+ 
+         __SIRegs[14] &= (s32)0x0F000000 >> (chan * 8);
+-        if (si->type[chan] == 0x80 &&
+-            (busy = 1,
+-             (work->packet[chan].chan == -1 && si->chan != chan) ?
+-                (busy = 0) : busy,
+-             !busy)) {
++        if (si->type[chan] == 0x80) {
++            busy = 1;
++            if (work->packet[chan].chan == -1 && si->chan != chan) {
++                busy = 0;
++            }
++            if (!busy) {
+             SITransfer(chan, &lbl_8064D8D0, 1, &si->type[chan], 3,
+                        GetTypeCallback_802093FC,
+                        (((__OSBusClock / 4) / 125000) * 65) / 8);
++            }
+         }
+     }
+ 
+     if ((status & 0x18000000) == 0x18000000) {
+         vcount = fn_802181F4() + 1;
++        response = work->responseTime;
+         interval = (si->poll >> 16) & 0x3FF;
+ 
+         for (i = 0; i < 4; i++) {
+             if (fn_8020906C(i)) {
+-                work->responseTime[i] = vcount;
++                response[i] = vcount;
+             }
+         }
+ 
+         poll = si->poll;
+         for (i = 0; i < 4; i++) {
+             if (poll & (0x80000000 >> (24 + i))) {
+-                if (work->responseTime[i] == 0 ||
+-                    work->responseTime[i] + interval / 2 < vcount) {
++                if (response[i] == 0 ||
++                    response[i] + interval / 2 < vcount) {
+                     return;
+                 }
+             }
+         }
+ 
+         for (i = 0; i < 4; i++) {
+-            work->responseTime[i] = 0;
++            response[i] = 0;
+         }
++        handlers = work->pollingHandler;
+         for (i = 0; i < 4; i++) {
+-            if (work->pollingHandler[i] != 0) {
+-                work->pollingHandler[i](interrupt, context);
++            if (handlers[i] != 0) {
++                handlers[i](interrupt, context);
+             }
+         }
+     }
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/refine-c329826c-deb7-4153-b16a-70a265146f3c-array_bases_alarm.json
+RESULT array_bases_alarm 92.29665 840
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+RETAINED array_bases 92.29665

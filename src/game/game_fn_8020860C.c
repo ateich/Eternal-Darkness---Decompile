@@ -40,7 +40,7 @@ typedef struct SIWork {
 extern SIWork Packet_80640B68;
 extern SIControl Si_802FCA20;
 extern u32 lbl_8064D8D0;
-extern u32 __SIRegs[64] : 0xCC006400;
+extern volatile u32 __SIRegs[64] : 0xCC006400;
 extern u32 __OSBusClock : 0x800000F8;
 
 extern u32 fn_80208310(void);
@@ -67,8 +67,12 @@ void SIInterruptHandler_8020860C(s32 interrupt, OSContext *context)
     SIPacket *packet;
     u32 vcount;
     u32 poll;
+    u32 *pollAddress;
     u32 interval;
     s32 busy;
+    u32 *type;
+    volatile u32 *response;
+    SIPollingHandler *handlers;
 
     if ((status & 0xC0000000) == 0xC0000000) {
         chan = si->chan;
@@ -78,7 +82,8 @@ void SIInterruptHandler_8020860C(s32 interrupt, OSContext *context)
 
         next = chan;
         for (i = 0; i < 4; i++) {
-            next = (next + 1) % 4;
+            ++next;
+            next %= 4;
             packet = &work->packet[next];
             if (packet->chan != -1 && __OSGetSystemTime() >= packet->fire) {
                 if (fn_80208C4C(packet->chan, packet->output,
@@ -96,43 +101,50 @@ void SIInterruptHandler_8020860C(s32 interrupt, OSContext *context)
         }
 
         __SIRegs[14] &= (s32)0x0F000000 >> (chan * 8);
-        busy = 1;
-        if (work->packet[chan].chan == -1 && si->chan != chan) {
-            busy = 0;
-        }
-        if (si->type[chan] == 0x80 && !busy) {
-            SITransfer(chan, &lbl_8064D8D0, 1, &si->type[chan], 3,
-                       GetTypeCallback_802093FC,
-                       (((__OSBusClock / 4) / 125000) * 65) / 8);
+        if (*(type = &si->type[chan]) == 0x80) {
+            busy = 1;
+            if (work->packet[chan].chan == -1 && si->chan != chan) {
+                busy = 0;
+            }
+            if (!busy) {
+                SITransfer(chan, &lbl_8064D8D0, 1, type, 3,
+                           GetTypeCallback_802093FC,
+                           (((__OSBusClock / 4) / 125000) * 65) / 8);
+            }
         }
     }
 
     if ((status & 0x18000000) == 0x18000000) {
         vcount = fn_802181F4() + 1;
-        poll = si->poll;
-        interval = (poll >> 16) & 0x3FF;
+        response = work->responseTime;
+        pollAddress = &si->poll;
+        interval = (*pollAddress >> 16) & 0x3FF;
 
         for (i = 0; i < 4; i++) {
             if (fn_8020906C(i)) {
-                work->responseTime[i] = vcount;
+                response[i] = vcount;
             }
         }
 
+        /* Response collection can change the enabled polling channels. */
+        poll = *pollAddress;
         for (i = 0; i < 4; i++) {
             if (poll & (0x80000000 >> (24 + i))) {
-                if (work->responseTime[i] == 0 ||
-                    work->responseTime[i] + interval / 2 < vcount) {
+                if (response[i] == 0 ||
+                    response[i] + interval / 2 < vcount) {
                     return;
                 }
             }
         }
 
+        response[0] = 0;
+        work->responseTime[1] = 0;
+        work->responseTime[2] = 0;
+        work->responseTime[3] = 0;
+        handlers = work->pollingHandler;
         for (i = 0; i < 4; i++) {
-            work->responseTime[i] = 0;
-        }
-        for (i = 0; i < 4; i++) {
-            if (work->pollingHandler[i] != 0) {
-                work->pollingHandler[i](interrupt, context);
+            if (handlers[i] != 0) {
+                handlers[i](interrupt, context);
             }
         }
     }

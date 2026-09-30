@@ -1,0 +1,170 @@
+
+VARIANT baseline
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/allocation-c329826c-deb7-4153-b16a-70a265146f3c-baseline.json
+RESULT baseline 92.96651 844
+
+VARIANT param_copies_before
+--- 
++++ 
+@@ -56,6 +56,8 @@
+ 
+ void SIInterruptHandler_8020860C(s32 interrupt, OSContext *context)
+ {
++    s32 savedInterrupt = interrupt;
++    OSContext *savedContext = context;
+     SIWork *work = &Packet_80640B68;
+     SIControl *si = &Si_802FCA20;
+     u32 status = __SIRegs[13];
+@@ -95,7 +97,7 @@
+         }
+ 
+         if (callback != 0) {
+-            callback(chan, error, context);
++            callback(chan, error, savedContext);
+         }
+ 
+         __SIRegs[14] &= (s32)0x0F000000 >> (chan * 8);
+@@ -139,7 +141,7 @@
+         handlers = work->pollingHandler;
+         for (i = 0; i < 4; i++) {
+             if (handlers[i] != 0) {
+-                handlers[i](interrupt, context);
++                handlers[i](savedInterrupt, savedContext);
+             }
+         }
+     }
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/allocation-c329826c-deb7-4153-b16a-70a265146f3c-param_copies_before.json
+RESULT param_copies_before 90.88517 844
+
+VARIANT param_copies_after
+--- 
++++ 
+@@ -71,6 +71,8 @@
+     s32 busy;
+     volatile u32 *response;
+     SIPollingHandler *handlers;
++    s32 savedInterrupt = interrupt;
++    OSContext *savedContext = context;
+ 
+     if ((status & 0xC0000000) == 0xC0000000) {
+         chan = si->chan;
+@@ -95,7 +97,7 @@
+         }
+ 
+         if (callback != 0) {
+-            callback(chan, error, context);
++            callback(chan, error, savedContext);
+         }
+ 
+         __SIRegs[14] &= (s32)0x0F000000 >> (chan * 8);
+@@ -139,7 +141,7 @@
+         handlers = work->pollingHandler;
+         for (i = 0; i < 4; i++) {
+             if (handlers[i] != 0) {
+-                handlers[i](interrupt, context);
++                handlers[i](savedInterrupt, savedContext);
+             }
+         }
+     }
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/allocation-c329826c-deb7-4153-b16a-70a265146f3c-param_copies_after.json
+RESULT param_copies_after 91.02871 844
+
+VARIANT short_interrupt
+--- 
++++ 
+@@ -1,11 +1,12 @@
+ typedef signed int s32;
++typedef signed short s16;
+ typedef unsigned int u32;
+ typedef signed long long s64;
+ typedef unsigned long long u64;
+ 
+ typedef struct OSContext OSContext;
+ typedef void (*SICallback)(s32 chan, u32 error, OSContext *context);
+-typedef void (*SIPollingHandler)(s32 interrupt, OSContext *context);
++typedef void (*SIPollingHandler)(s16 interrupt, OSContext *context);
+ 
+ typedef struct SIPacket {
+     s32 chan;
+@@ -54,7 +55,7 @@
+                       u32 inputBytes, SICallback callback, u64 time);
+ extern void GetTypeCallback_802093FC(s32 chan, u32 error, OSContext *context);
+ 
+-void SIInterruptHandler_8020860C(s32 interrupt, OSContext *context)
++void SIInterruptHandler_8020860C(s16 interrupt, OSContext *context)
+ {
+     SIWork *work = &Packet_80640B68;
+     SIControl *si = &Si_802FCA20;
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/allocation-c329826c-deb7-4153-b16a-70a265146f3c-short_interrupt.json
+RESULT short_interrupt 92.96651 844
+
+VARIANT poll_pointer_scope
+--- 
++++ 
+@@ -69,8 +69,6 @@
+     u32 poll;
+     u32 interval;
+     s32 busy;
+-    volatile u32 *response;
+-    SIPollingHandler *handlers;
+ 
+     if ((status & 0xC0000000) == 0xC0000000) {
+         chan = si->chan;
+@@ -113,6 +111,8 @@
+     }
+ 
+     if ((status & 0x18000000) == 0x18000000) {
++        volatile u32 *response;
++        SIPollingHandler *handlers;
+         vcount = fn_802181F4() + 1;
+         response = work->responseTime;
+         interval = (si->poll >> 16) & 0x3FF;
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/allocation-c329826c-deb7-4153-b16a-70a265146f3c-poll_pointer_scope.json
+RESULT poll_pointer_scope 92.96651 844
+
+VARIANT reuse_result
+--- 
++++ 
+@@ -65,7 +65,6 @@
+     s32 i;
+     s32 next;
+     SIPacket *packet;
+-    u32 vcount;
+     u32 poll;
+     u32 interval;
+     s32 busy;
+@@ -113,13 +112,13 @@
+     }
+ 
+     if ((status & 0x18000000) == 0x18000000) {
+-        vcount = fn_802181F4() + 1;
++        error = fn_802181F4() + 1;
+         response = work->responseTime;
+         interval = (si->poll >> 16) & 0x3FF;
+ 
+         for (i = 0; i < 4; i++) {
+             if (fn_8020906C(i)) {
+-                response[i] = vcount;
++                response[i] = error;
+             }
+         }
+ 
+@@ -127,7 +126,7 @@
+         for (i = 0; i < 4; i++) {
+             if (poll & (0x80000000 >> (24 + i))) {
+                 if (response[i] == 0 ||
+-                    response[i] + interval / 2 < vcount) {
++                    response[i] + interval / 2 < error) {
+                     return;
+                 }
+             }
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/allocation-c329826c-deb7-4153-b16a-70a265146f3c-reuse_result.json
+RESULT reuse_result 92.84689 844
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+RETAINED baseline 92.96651

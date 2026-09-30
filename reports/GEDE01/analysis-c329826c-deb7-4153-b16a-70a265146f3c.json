@@ -1,0 +1,40 @@
+{
+  "assignment_id": "c329826c-deb7-4153-b16a-70a265146f3c",
+  "compiler": "GC/1.2.5n, unchanged canonical configure.py settings",
+  "recovery": {
+    "preserved_commit": "02828d1c5b6d1f4127a93c27cdce70853dfded31",
+    "accepted_base_source_identical": true,
+    "preserved_source_sha256": "b124e79f032b57b78d07781710319d9ee743f26d906848df22eee7163bd2b7da"
+  },
+  "retained_source_sha256": "9006adc139cc6e88a5240538f827fbcb5a824ed0550062e47f1da4603e058d18",
+  "new_hypothesis": "Use explicit response/handler member-array bases and a type-first busy check so MWCC can materialize shared bases before the prologue; preserve retail polling-mask reload after response collection.",
+  "semantic_corrections": [
+    "Reload si->poll after all four fn_8020906C calls; the previous source cached it before those calls.",
+    "Qualify absolute MMIO register accesses volatile."
+  ],
+  "prior_correctness_fixes_preserved": [
+    "SITransfer takes a 64-bit delay in r9:r10.",
+    "Exit the queue scan after the first eligible fn_80208C4C attempt, whether it succeeds or fails."
+  ],
+  "experiment_findings": [
+    "Explicit register declarations were codegen-neutral.",
+    "Direct globals regressed the score; not retained.",
+    "Nested type-first busy check plus explicit array-base pointers improved the score substantially.",
+    "Separating increment and modulo reproduces retail modulo instruction shape.",
+    "Type pointer assignment in the condition removes redundant pointer copying.",
+    "Explicit poll-member pointer restores retail frame size 0x48.",
+    "Explicit four-channel response clearing yields the retained 93.53589%."
+  ],
+  "rejected_invalid_experiments": [
+    "pointers poll_pointer/clear_base variants accidentally changed SIControl layout through broad string replacement; discarded and documented in their raw log. Later address variants use the correct layout.",
+    "finish first run tried assigning a nonconstant integer to a callback pointer; compiler rejected it. Source was restored and corrected experiments rerun; failed compiler output is preserved."
+  ],
+  "final_score_canonical": 93.53589,
+  "final_score_relocation_strict": 93.53589,
+  "retail_size": 836,
+  "candidate_size": 844,
+  "remaining_divergence": "Parameters use r21/r22 instead of r30/r31; shared bases use r30/r31 instead of r28/r29. Candidate has separate callback-zero and loop-counter-zero initialization (one extra instruction), and separate type-slot addi plus lwz rather than retail lwzu (one extra instruction). Register allocation and scheduling also differ in queue/alarm arithmetic and polling induction. Both address materializations now hoist before the prologue and stack frame is 0x48. Relocation type/target/addend sequences agree; offsets shift with the two extra instructions.",
+  "promotion": "Remain NonMatching; DOL verification uses the retail object for this unit and does not prove that the C matches.",
+  "scope": "Only the assigned source and assignment-specific reports changed. configure.py and splits registration were already present. Pre-existing CLAUDE.md modification excluded from commit.",
+  "measured_dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

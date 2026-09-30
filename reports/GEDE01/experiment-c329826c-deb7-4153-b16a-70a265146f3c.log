@@ -1,0 +1,437 @@
+
+VARIANT baseline
+--- 
++++ 
+@@ -109,8 +109,7 @@
+ 
+     if ((status & 0x18000000) == 0x18000000) {
+         vcount = fn_802181F4() + 1;
+-        poll = si->poll;
+-        interval = (poll >> 16) & 0x3FF;
++        interval = (si->poll >> 16) & 0x3FF;
+ 
+         for (i = 0; i < 4; i++) {
+             if (fn_8020906C(i)) {
+@@ -118,6 +117,7 @@
+             }
+         }
+ 
++        poll = si->poll;
+         for (i = 0; i < 4; i++) {
+             if (poll & (0x80000000 >> (24 + i))) {
+                 if (work->responseTime[i] == 0 ||
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/experiment-c329826c-deb7-4153-b16a-70a265146f3c-baseline.json
+RESULT baseline 81.03828 840
+
+VARIANT register_params
+--- 
++++ 
+@@ -54,7 +54,7 @@
+                       u32 inputBytes, SICallback callback, u64 time);
+ extern void GetTypeCallback_802093FC(s32 chan, u32 error, OSContext *context);
+ 
+-void SIInterruptHandler_8020860C(s32 interrupt, OSContext *context)
++void SIInterruptHandler_8020860C(register s32 interrupt, register OSContext *context)
+ {
+     SIWork *work = &Packet_80640B68;
+     SIControl *si = &Si_802FCA20;
+@@ -109,8 +109,7 @@
+ 
+     if ((status & 0x18000000) == 0x18000000) {
+         vcount = fn_802181F4() + 1;
+-        poll = si->poll;
+-        interval = (poll >> 16) & 0x3FF;
++        interval = (si->poll >> 16) & 0x3FF;
+ 
+         for (i = 0; i < 4; i++) {
+             if (fn_8020906C(i)) {
+@@ -118,6 +117,7 @@
+             }
+         }
+ 
++        poll = si->poll;
+         for (i = 0; i < 4; i++) {
+             if (poll & (0x80000000 >> (24 + i))) {
+                 if (work->responseTime[i] == 0 ||
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/experiment-c329826c-deb7-4153-b16a-70a265146f3c-register_params.json
+RESULT register_params 81.03828 840
+
+VARIANT register_all
+--- 
++++ 
+@@ -54,21 +54,21 @@
+                       u32 inputBytes, SICallback callback, u64 time);
+ extern void GetTypeCallback_802093FC(s32 chan, u32 error, OSContext *context);
+ 
+-void SIInterruptHandler_8020860C(s32 interrupt, OSContext *context)
++void SIInterruptHandler_8020860C(register s32 interrupt, register OSContext *context)
+ {
+-    SIWork *work = &Packet_80640B68;
+-    SIControl *si = &Si_802FCA20;
+-    u32 status = __SIRegs[13];
+-    s32 chan;
+-    u32 error;
+-    SICallback callback;
+-    s32 i;
+-    s32 next;
+-    SIPacket *packet;
+-    u32 vcount;
+-    u32 poll;
+-    u32 interval;
+-    s32 busy;
++    register SIWork *work = &Packet_80640B68;
++    register SIControl *si = &Si_802FCA20;
++    register u32 status = __SIRegs[13];
++    register s32 chan;
++    register u32 error;
++    register SICallback callback;
++    register s32 i;
++    register s32 next;
++    register SIPacket *packet;
++    register u32 vcount;
++    register u32 poll;
++    register u32 interval;
++    register s32 busy;
+ 
+     if ((status & 0xC0000000) == 0xC0000000) {
+         chan = si->chan;
+@@ -109,8 +109,7 @@
+ 
+     if ((status & 0x18000000) == 0x18000000) {
+         vcount = fn_802181F4() + 1;
+-        poll = si->poll;
+-        interval = (poll >> 16) & 0x3FF;
++        interval = (si->poll >> 16) & 0x3FF;
+ 
+         for (i = 0; i < 4; i++) {
+             if (fn_8020906C(i)) {
+@@ -118,6 +117,7 @@
+             }
+         }
+ 
++        poll = si->poll;
+         for (i = 0; i < 4; i++) {
+             if (poll & (0x80000000 >> (24 + i))) {
+                 if (work->responseTime[i] == 0 ||
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/experiment-c329826c-deb7-4153-b16a-70a265146f3c-register_all.json
+RESULT register_all 81.03828 840
+
+VARIANT type_first
+--- 
++++ 
+@@ -96,11 +96,11 @@
+         }
+ 
+         __SIRegs[14] &= (s32)0x0F000000 >> (chan * 8);
+-        busy = 1;
+-        if (work->packet[chan].chan == -1 && si->chan != chan) {
+-            busy = 0;
+-        }
+-        if (si->type[chan] == 0x80 && !busy) {
++        if (si->type[chan] == 0x80 &&
++            (busy = 1,
++             (work->packet[chan].chan == -1 && si->chan != chan) ?
++                (busy = 0) : busy,
++             !busy)) {
+             SITransfer(chan, &lbl_8064D8D0, 1, &si->type[chan], 3,
+                        GetTypeCallback_802093FC,
+                        (((__OSBusClock / 4) / 125000) * 65) / 8);
+@@ -109,8 +109,7 @@
+ 
+     if ((status & 0x18000000) == 0x18000000) {
+         vcount = fn_802181F4() + 1;
+-        poll = si->poll;
+-        interval = (poll >> 16) & 0x3FF;
++        interval = (si->poll >> 16) & 0x3FF;
+ 
+         for (i = 0; i < 4; i++) {
+             if (fn_8020906C(i)) {
+@@ -118,6 +117,7 @@
+             }
+         }
+ 
++        poll = si->poll;
+         for (i = 0; i < 4; i++) {
+             if (poll & (0x80000000 >> (24 + i))) {
+                 if (work->responseTime[i] == 0 ||
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/experiment-c329826c-deb7-4153-b16a-70a265146f3c-type_first.json
+RESULT type_first 84.66985 856
+
+VARIANT type_first_register
+--- 
++++ 
+@@ -54,21 +54,21 @@
+                       u32 inputBytes, SICallback callback, u64 time);
+ extern void GetTypeCallback_802093FC(s32 chan, u32 error, OSContext *context);
+ 
+-void SIInterruptHandler_8020860C(s32 interrupt, OSContext *context)
++void SIInterruptHandler_8020860C(register s32 interrupt, register OSContext *context)
+ {
+-    SIWork *work = &Packet_80640B68;
+-    SIControl *si = &Si_802FCA20;
+-    u32 status = __SIRegs[13];
+-    s32 chan;
+-    u32 error;
+-    SICallback callback;
+-    s32 i;
+-    s32 next;
+-    SIPacket *packet;
+-    u32 vcount;
+-    u32 poll;
+-    u32 interval;
+-    s32 busy;
++    register SIWork *work = &Packet_80640B68;
++    register SIControl *si = &Si_802FCA20;
++    register u32 status = __SIRegs[13];
++    register s32 chan;
++    register u32 error;
++    register SICallback callback;
++    register s32 i;
++    register s32 next;
++    register SIPacket *packet;
++    register u32 vcount;
++    register u32 poll;
++    register u32 interval;
++    register s32 busy;
+ 
+     if ((status & 0xC0000000) == 0xC0000000) {
+         chan = si->chan;
+@@ -96,11 +96,11 @@
+         }
+ 
+         __SIRegs[14] &= (s32)0x0F000000 >> (chan * 8);
+-        busy = 1;
+-        if (work->packet[chan].chan == -1 && si->chan != chan) {
+-            busy = 0;
+-        }
+-        if (si->type[chan] == 0x80 && !busy) {
++        if (si->type[chan] == 0x80 &&
++            (busy = 1,
++             (work->packet[chan].chan == -1 && si->chan != chan) ?
++                (busy = 0) : busy,
++             !busy)) {
+             SITransfer(chan, &lbl_8064D8D0, 1, &si->type[chan], 3,
+                        GetTypeCallback_802093FC,
+                        (((__OSBusClock / 4) / 125000) * 65) / 8);
+@@ -109,8 +109,7 @@
+ 
+     if ((status & 0x18000000) == 0x18000000) {
+         vcount = fn_802181F4() + 1;
+-        poll = si->poll;
+-        interval = (poll >> 16) & 0x3FF;
++        interval = (si->poll >> 16) & 0x3FF;
+ 
+         for (i = 0; i < 4; i++) {
+             if (fn_8020906C(i)) {
+@@ -118,6 +117,7 @@
+             }
+         }
+ 
++        poll = si->poll;
+         for (i = 0; i < 4; i++) {
+             if (poll & (0x80000000 >> (24 + i))) {
+                 if (work->responseTime[i] == 0 ||
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/experiment-c329826c-deb7-4153-b16a-70a265146f3c-type_first_register.json
+RESULT type_first_register 84.66985 856
+
+VARIANT direct_globals
+--- 
++++ 
+@@ -56,8 +56,6 @@
+ 
+ void SIInterruptHandler_8020860C(s32 interrupt, OSContext *context)
+ {
+-    SIWork *work = &Packet_80640B68;
+-    SIControl *si = &Si_802FCA20;
+     u32 status = __SIRegs[13];
+     s32 chan;
+     u32 error;
+@@ -71,20 +69,20 @@
+     s32 busy;
+ 
+     if ((status & 0xC0000000) == 0xC0000000) {
+-        chan = si->chan;
++        chan = Si_802FCA20.chan;
+         error = fn_80208310();
+-        callback = si->callback;
+-        si->callback = 0;
++        callback = Si_802FCA20.callback;
++        Si_802FCA20.callback = 0;
+ 
+         next = chan;
+         for (i = 0; i < 4; i++) {
+             next = (next + 1) % 4;
+-            packet = &work->packet[next];
++            packet = &Packet_80640B68.packet[next];
+             if (packet->chan != -1 && __OSGetSystemTime() >= packet->fire) {
+                 if (fn_80208C4C(packet->chan, packet->output,
+                                 packet->outputBytes, packet->input,
+                                 packet->inputBytes, packet->callback)) {
+-                    fn_8020A93C(&work->alarm[next * 10]);
++                    fn_8020A93C(&Packet_80640B68.alarm[next * 10]);
+                     packet->chan = -1;
+                 }
+                 break;
+@@ -97,11 +95,11 @@
+ 
+         __SIRegs[14] &= (s32)0x0F000000 >> (chan * 8);
+         busy = 1;
+-        if (work->packet[chan].chan == -1 && si->chan != chan) {
++        if (Packet_80640B68.packet[chan].chan == -1 && Si_802FCA20.chan != chan) {
+             busy = 0;
+         }
+-        if (si->type[chan] == 0x80 && !busy) {
+-            SITransfer(chan, &lbl_8064D8D0, 1, &si->type[chan], 3,
++        if (Si_802FCA20.type[chan] == 0x80 && !busy) {
++            SITransfer(chan, &lbl_8064D8D0, 1, &Si_802FCA20.type[chan], 3,
+                        GetTypeCallback_802093FC,
+                        (((__OSBusClock / 4) / 125000) * 65) / 8);
+         }
+@@ -109,30 +107,30 @@
+ 
+     if ((status & 0x18000000) == 0x18000000) {
+         vcount = fn_802181F4() + 1;
+-        poll = si->poll;
+-        interval = (poll >> 16) & 0x3FF;
++        interval = (Si_802FCA20.poll >> 16) & 0x3FF;
+ 
+         for (i = 0; i < 4; i++) {
+             if (fn_8020906C(i)) {
+-                work->responseTime[i] = vcount;
++                Packet_80640B68.responseTime[i] = vcount;
+             }
+         }
+ 
++        poll = Si_802FCA20.poll;
+         for (i = 0; i < 4; i++) {
+             if (poll & (0x80000000 >> (24 + i))) {
+-                if (work->responseTime[i] == 0 ||
+-                    work->responseTime[i] + interval / 2 < vcount) {
++                if (Packet_80640B68.responseTime[i] == 0 ||
++                    Packet_80640B68.responseTime[i] + interval / 2 < vcount) {
+                     return;
+                 }
+             }
+         }
+ 
+         for (i = 0; i < 4; i++) {
+-            work->responseTime[i] = 0;
++            Packet_80640B68.responseTime[i] = 0;
+         }
+         for (i = 0; i < 4; i++) {
+-            if (work->pollingHandler[i] != 0) {
+-                work->pollingHandler[i](interrupt, context);
++            if (Packet_80640B68.pollingHandler[i] != 0) {
++                Packet_80640B68.pollingHandler[i](interrupt, context);
+             }
+         }
+     }
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/experiment-c329826c-deb7-4153-b16a-70a265146f3c-direct_globals.json
+RESULT direct_globals 76.25837 888
+
+VARIANT direct_globals_type_first
+--- 
++++ 
+@@ -56,8 +56,6 @@
+ 
+ void SIInterruptHandler_8020860C(s32 interrupt, OSContext *context)
+ {
+-    SIWork *work = &Packet_80640B68;
+-    SIControl *si = &Si_802FCA20;
+     u32 status = __SIRegs[13];
+     s32 chan;
+     u32 error;
+@@ -71,20 +69,20 @@
+     s32 busy;
+ 
+     if ((status & 0xC0000000) == 0xC0000000) {
+-        chan = si->chan;
++        chan = Si_802FCA20.chan;
+         error = fn_80208310();
+-        callback = si->callback;
+-        si->callback = 0;
++        callback = Si_802FCA20.callback;
++        Si_802FCA20.callback = 0;
+ 
+         next = chan;
+         for (i = 0; i < 4; i++) {
+             next = (next + 1) % 4;
+-            packet = &work->packet[next];
++            packet = &Packet_80640B68.packet[next];
+             if (packet->chan != -1 && __OSGetSystemTime() >= packet->fire) {
+                 if (fn_80208C4C(packet->chan, packet->output,
+                                 packet->outputBytes, packet->input,
+                                 packet->inputBytes, packet->callback)) {
+-                    fn_8020A93C(&work->alarm[next * 10]);
++                    fn_8020A93C(&Packet_80640B68.alarm[next * 10]);
+                     packet->chan = -1;
+                 }
+                 break;
+@@ -96,12 +94,12 @@
+         }
+ 
+         __SIRegs[14] &= (s32)0x0F000000 >> (chan * 8);
+-        busy = 1;
+-        if (work->packet[chan].chan == -1 && si->chan != chan) {
+-            busy = 0;
+-        }
+-        if (si->type[chan] == 0x80 && !busy) {
+-            SITransfer(chan, &lbl_8064D8D0, 1, &si->type[chan], 3,
++        if (Si_802FCA20.type[chan] == 0x80 &&
++            (busy = 1,
++             (Packet_80640B68.packet[chan].chan == -1 && Si_802FCA20.chan != chan) ?
++                (busy = 0) : busy,
++             !busy)) {
++            SITransfer(chan, &lbl_8064D8D0, 1, &Si_802FCA20.type[chan], 3,
+                        GetTypeCallback_802093FC,
+                        (((__OSBusClock / 4) / 125000) * 65) / 8);
+         }
+@@ -109,30 +107,30 @@
+ 
+     if ((status & 0x18000000) == 0x18000000) {
+         vcount = fn_802181F4() + 1;
+-        poll = si->poll;
+-        interval = (poll >> 16) & 0x3FF;
++        interval = (Si_802FCA20.poll >> 16) & 0x3FF;
+ 
+         for (i = 0; i < 4; i++) {
+             if (fn_8020906C(i)) {
+-                work->responseTime[i] = vcount;
++                Packet_80640B68.responseTime[i] = vcount;
+             }
+         }
+ 
++        poll = Si_802FCA20.poll;
+         for (i = 0; i < 4; i++) {
+             if (poll & (0x80000000 >> (24 + i))) {
+-                if (work->responseTime[i] == 0 ||
+-                    work->responseTime[i] + interval / 2 < vcount) {
++                if (Packet_80640B68.responseTime[i] == 0 ||
++                    Packet_80640B68.responseTime[i] + interval / 2 < vcount) {
+                     return;
+                 }
+             }
+         }
+ 
+         for (i = 0; i < 4; i++) {
+-            work->responseTime[i] = 0;
++            Packet_80640B68.responseTime[i] = 0;
+         }
+         for (i = 0; i < 4; i++) {
+-            if (work->pollingHandler[i] != 0) {
+-                work->pollingHandler[i](interrupt, context);
++            if (Packet_80640B68.pollingHandler[i] != 0) {
++                Packet_80640B68.pollingHandler[i](interrupt, context);
+             }
+         }
+     }
+[1/1] MWCC build/GEDE01/src/game/game_fn_8020860C.o
+ INFO Writing to reports/GEDE01/experiment-c329826c-deb7-4153-b16a-70a265146f3c-direct_globals_type_first.json
+RESULT direct_globals_type_first 76.325356 912
+RETAINED type_first 84.66985
