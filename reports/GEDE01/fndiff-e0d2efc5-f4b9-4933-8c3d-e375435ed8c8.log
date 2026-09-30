@@ -1,0 +1,36 @@
+target 140 bytes  base 140 bytes  match 100.0
+  0x0000  mflr r0                                              | mflr r0
+  0x0004  lis r4, lbl_80640BE8@ha [None+0 t6]                  | lis r4, lbl_80640BE8@ha [None+0 t6]
+  0x0008  stw r0, 0x4(r1)                                      | stw r0, 0x4(r1)
+  0x000c  addi r0, r4, lbl_80640BE8@l [None+0 t4]              | addi r0, r4, lbl_80640BE8@l [None+0 t4]
+  0x0010  lis r4, 0x6666                                       | lis r4, 0x6666
+  0x0014  subf r0, r0, r3                                      | subf r0, r0, r3
+  0x0018  stwu r1, -0x20(r1)                                   | stwu r1, -0x20(r1)
+  0x001c  addi r3, r4, 0x6667                                  | addi r3, r4, 0x6667
+  0x0020  mulhw r0, r3, r0                                     | mulhw r0, r3, r0
+  0x0024  stw r31, 0x1c(r1)                                    | stw r31, 0x1c(r1)
+  0x0028  srawi r0, r0, 4                                      | srawi r0, r0, 4
+  0x002c  srwi r3, r0, 31                                      | srwi r3, r0, 31
+  0x0030  add r0, r0, r3                                       | add r0, r0, r3
+  0x0034  lis r3, Packet_80640B68@ha [None+0 t6]               | lis r3, Packet_80640B68@ha [None+0 t6]
+  0x0038  slwi r4, r0, 5                                       | slwi r4, r0, 5
+  0x003c  addi r0, r3, Packet_80640B68@l [None+0 t4]           | addi r0, r3, Packet_80640B68@l [None+0 t4]
+  0x0040  add r31, r0, r4 [None+0 tNone]                       | add r31, r0, r4 [None+0 tNone]
+  0x0044  lwz r3, 0x0(r31) [None+0 tNone]                      | lwz r3, 0x0(r31) [None+0 tNone]
+  0x0048  cmpwi r3, -0x1                                       | cmpwi r3, -0x1
+  0x004c  beq 0x78                                             | beq 0x78
+  0x0050  lwz r4, 0x4(r31) [None+0 tNone]                      | lwz r4, 0x4(r31) [None+0 tNone]
+  0x0054  lwz r5, 0x8(r31) [None+0 tNone]                      | lwz r5, 0x8(r31) [None+0 tNone]
+  0x0058  lwz r6, 0xc(r31) [None+0 tNone]                      | lwz r6, 0xc(r31) [None+0 tNone]
+  0x005c  lwz r7, 0x10(r31) [None+0 tNone]                     | lwz r7, 0x10(r31) [None+0 tNone]
+  0x0060  lwz r8, 0x14(r31) [None+0 tNone]                     | lwz r8, 0x14(r31) [None+0 tNone]
+  0x0064  bl fn_80208C4C [None+0 t10]                          | bl fn_80208C4C [None+0 t10]
+  0x0068  cmpwi r3, 0x0                                        | cmpwi r3, 0x0
+  0x006c  beq 0x78                                             | beq 0x78
+  0x0070  li r0, -0x1                                          | li r0, -0x1
+  0x0074  stw r0, 0x0(r31) [None+0 tNone]                      | stw r0, 0x0(r31) [None+0 tNone]
+  0x0078  lwz r0, 0x24(r1)                                     | lwz r0, 0x24(r1)
+  0x007c  lwz r31, 0x1c(r1)                                    | lwz r31, 0x1c(r1)
+  0x0080  addi r1, r1, 0x20                                    | addi r1, r1, 0x20
+  0x0084  mtlr r0                                              | mtlr r0
+  0x0088  blr                                                  | blr
