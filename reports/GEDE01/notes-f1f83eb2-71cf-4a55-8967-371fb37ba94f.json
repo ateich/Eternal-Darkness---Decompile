@@ -1,0 +1,50 @@
+{
+  "assignment_id": "f1f83eb2-71cf-4a55-8967-371fb37ba94f",
+  "target": "fn_802093FC",
+  "accepted_base": "feb26e7abb938dc2c42d5a878a353b2bd2ff643b",
+  "preserved_source_commit": "8835a5726d5a1269dbf571df35d414c84eb56a28",
+  "reconciliation": "Accepted base already contains exactly the preserved C source and NonMatching registration. No source or registration change is needed to retain the best reconstruction.",
+  "source_sha256": "88269b18603d43e2e7e89419eb4135ae3a993b4baeec3342706295b99c2bc4b5",
+  "hypothesis": "Move command preparation into a static inline C helper to change inliner temporary lifetimes and interference without compiler-policy changes. Compare member-address and channel-base implementations, then vary helper parameter ordering and caller declaration ordering.",
+  "experiments": [
+    {
+      "variant": "inline_command",
+      "size": 668,
+      "canonical_score": 87.018074
+    },
+    {
+      "variant": "inline_channel_view",
+      "size": 664,
+      "canonical_score": 88.710846
+    },
+    {
+      "variant": "five alternate helper argument orders",
+      "size": 664,
+      "canonical_score": 88.710846
+    },
+    {
+      "variant": "work declaration last, register work, id declaration first",
+      "size": 664,
+      "canonical_score": 88.710846
+    }
+  ],
+  "outcome": "All new candidates rejected; restored byte-identical preserved source. Transient variants appear only as diffs in assignment-specific experiment output, not as additional retained C translation units.",
+  "constraints": {
+    "compiler": "Canonical GC/1.2.5n settings, unchanged",
+    "registration": "NonMatching",
+    "independent_translation_unit": true,
+    "assembly_added": false,
+    "neighboring_source_modified": false,
+    "runtime_modified": false,
+    "global_progress_modified": false,
+    "shared_inputs_modified": false,
+    "remote_push": false
+  },
+  "unrelated_preexisting_change": "CLAUDE.md was already modified at task start and is excluded from this commit.",
+  "prior_diagnoses_reviewed": {
+    "8835a5726d5a1269dbf571df35d414c84eb56a28": "Compound pointer update emitted stwu but rotated registers; lifetime union regressed heavily.",
+    "021b5b28a836d4c43c5b502b8f02fe8be90fca8f": "Channel-relative pointer variants regressed; failed full build evidence required replacement.",
+    "25b74548fbaa719eff77ca504eda0dc71c8d43ca": "Retained 93.289154 percent; both final ID arms use r28.",
+    "a6cc28842d37c8a958cac20455c28b4cd2ffff6f": "Original reconstruction and inaccurate r26 claim corrected by later envelopes; supplied rejection reviewed."
+  }
+}

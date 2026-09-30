@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "assignment_id": "f1f83eb2-71cf-4a55-8967-371fb37ba94f",
+  "attempt": 5,
+  "base_commit": "feb26e7abb938dc2c42d5a878a353b2bd2ff643b",
+  "target": "fn_802093FC",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-f1f83eb2-71cf-4a55-8967-371fb37ba94f.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-f1f83eb2-71cf-4a55-8967-371fb37ba94f-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-f1f83eb2-71cf-4a55-8967-371fb37ba94f.log",
+    "eternal-darkness-decomp/reports/GEDE01/canonical-command-f1f83eb2-71cf-4a55-8967-371fb37ba94f.log",
+    "eternal-darkness-decomp/reports/GEDE01/compiler-command-f1f83eb2-71cf-4a55-8967-371fb37ba94f.log",
+    "eternal-darkness-decomp/reports/GEDE01/configure-f1f83eb2-71cf-4a55-8967-371fb37ba94f.log",
+    "eternal-darkness-decomp/reports/GEDE01/disassembly-f1f83eb2-71cf-4a55-8967-371fb37ba94f.log",
+    "eternal-darkness-decomp/reports/GEDE01/dol-sha1-f1f83eb2-71cf-4a55-8967-371fb37ba94f.log",
+    "eternal-darkness-decomp/reports/GEDE01/experiment-f1f83eb2-71cf-4a55-8967-371fb37ba94f.log",
+    "eternal-darkness-decomp/reports/GEDE01/experiment-f1f83eb2-71cf-4a55-8967-371fb37ba94f.py",
+    "eternal-darkness-decomp/reports/GEDE01/fndiff-f1f83eb2-71cf-4a55-8967-371fb37ba94f.log",
+    "eternal-darkness-decomp/reports/GEDE01/legal-audit-f1f83eb2-71cf-4a55-8967-371fb37ba94f.log",
+    "eternal-darkness-decomp/reports/GEDE01/notes-f1f83eb2-71cf-4a55-8967-371fb37ba94f.json",
+    "eternal-darkness-decomp/reports/GEDE01/reloc-strict-command-f1f83eb2-71cf-4a55-8967-371fb37ba94f.log",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-f1f83eb2-71cf-4a55-8967-371fb37ba94f.txt",
+    "eternal-darkness-decomp/reports/GEDE01/verify-f1f83eb2-71cf-4a55-8967-371fb37ba94f.py"
+  ],
+  "divergence": "Best retained canonical and relocation-strict score is 93.289154%: retail is 664 bytes and canonical GC/1.2.5n emits 680 bytes. Both inlined callback loops fold the +0x160 table displacement into lwz/stw instead of retail's separate addi. Each of three cmdFixDevice stores uses stw followed by an addi/add address rebuild instead of retail stwu 0x1F0(r4). Both retail and reconstructed final wireless-ID arms use r28. The new inline command-helper hypothesis and argument/declaration ordering controls scored at most 88.710846% (664 bytes), so the preserved independent NonMatching C translation unit was restored unchanged. Fresh configure and full ninja -j2 build succeeded; measured DOL SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f and legal audit passed."
+}
