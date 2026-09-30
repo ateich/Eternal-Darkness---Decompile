@@ -1,0 +1,394 @@
+=== retail ===
+
+build/GEDE01/obj/game/game_fn_802093FC.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <GetTypeCallback_802093FC>:
+   0:	7c 08 02 a6 	mflr    r0
+   4:	90 01 00 04 	stw     r0,4(r1)
+   8:	94 21 ff d0 	stwu    r1,-48(r1)
+   c:	bf 41 00 18 	stmw    r26,24(r1)
+  10:	3b 63 00 00 	addi    r27,r3,0
+  14:	3c 60 00 00 	lis     r3,0
+			16: R_PPC_ADDR16_HA	Type_802FCA34
+  18:	38 03 00 00 	addi    r0,r3,0
+			1a: R_PPC_ADDR16_LO	Type_802FCA34
+  1c:	57 7d 10 3a 	slwi    r29,r27,2
+  20:	7f c0 ea 14 	add     r30,r0,r29
+  24:	3c 60 00 00 	lis     r3,0
+			26: R_PPC_ADDR16_HA	Packet_80640B68
+  28:	3b 44 00 00 	addi    r26,r4,0
+  2c:	3b e3 00 00 	addi    r31,r3,0
+			2e: R_PPC_ADDR16_LO	Packet_80640B68
+  30:	80 1e 00 00 	lwz     r0,0(r30)
+  34:	54 00 06 6e 	rlwinm  r0,r0,0,25,23
+  38:	90 1e 00 00 	stw     r0,0(r30)
+  3c:	80 1e 00 00 	lwz     r0,0(r30)
+  40:	7c 00 d3 78 	or      r0,r0,r26
+  44:	90 1e 00 00 	stw     r0,0(r30)
+  48:	48 00 00 01 	bl      48 <GetTypeCallback_802093FC+0x48>
+			48: R_PPC_REL24	__OSGetSystemTime
+  4c:	57 60 18 38 	slwi    r0,r27,3
+  50:	7c bf 02 14 	add     r5,r31,r0
+  54:	90 85 01 24 	stw     r4,292(r5)
+  58:	3c 80 80 00 	lis     r4,-32768
+  5c:	57 40 07 3f 	clrlwi. r0,r26,28
+  60:	90 65 01 20 	stw     r3,288(r5)
+  64:	7c 84 dc 30 	srw     r4,r4,r27
+  68:	80 60 00 00 	lwz     r3,0(0)
+			68: R_PPC_EMB_SDA21	lbl_8064D8D8
+  6c:	83 9e 00 00 	lwz     r28,0(r30)
+  70:	7c 60 20 78 	andc    r0,r3,r4
+  74:	90 00 00 00 	stw     r0,0(0)
+			74: R_PPC_EMB_SDA21	lbl_8064D8D8
+  78:	7c 7a 20 38 	and     r26,r3,r4
+  7c:	40 82 00 24 	bne     a0 <GetTypeCallback_802093FC+0xa0>
+  80:	57 83 00 c8 	rlwinm  r3,r28,0,3,4
+  84:	3c 03 f8 00 	addis   r0,r3,-2048
+  88:	28 00 00 00 	cmplwi  r0,0
+  8c:	40 82 00 14 	bne     a0 <GetTypeCallback_802093FC+0xa0>
+  90:	57 80 00 01 	clrrwi. r0,r28,31
+  94:	41 82 00 0c 	beq     a0 <GetTypeCallback_802093FC+0xa0>
+  98:	57 80 01 4b 	rlwinm. r0,r28,0,5,5
+  9c:	41 82 00 5c 	beq     f8 <GetTypeCallback_802093FC+0xf8>
+  a0:	38 7b 00 00 	addi    r3,r27,0
+  a4:	38 80 00 00 	li      r4,0
+  a8:	48 00 00 01 	bl      a8 <GetTypeCallback_802093FC+0xa8>
+			a8: R_PPC_REL24	fn_8020EEA8
+  ac:	57 60 20 36 	slwi    r0,r27,4
+  b0:	83 de 00 00 	lwz     r30,0(r30)
+  b4:	7f ff 02 14 	add     r31,r31,r0
+  b8:	3b a0 00 00 	li      r29,0
+  bc:	3b 9d 00 00 	addi    r28,r29,0
+  c0:	3b ff 01 60 	addi    r31,r31,352
+  c4:	81 9f 00 00 	lwz     r12,0(r31)
+  c8:	28 0c 00 00 	cmplwi  r12,0
+  cc:	41 82 00 18 	beq     e4 <GetTypeCallback_802093FC+0xe4>
+  d0:	93 9f 00 00 	stw     r28,0(r31)
+  d4:	7d 88 03 a6 	mtlr    r12
+  d8:	38 7b 00 00 	addi    r3,r27,0
+  dc:	38 9e 00 00 	addi    r4,r30,0
+  e0:	4e 80 00 21 	blrl
+  e4:	3b bd 00 01 	addi    r29,r29,1
+  e8:	2c 1d 00 04 	cmpwi   r29,4
+  ec:	3b ff 00 04 	addi    r31,r31,4
+  f0:	41 80 ff d4 	blt     c4 <GetTypeCallback_802093FC+0xc4>
+  f4:	48 00 01 90 	b       284 <GetTypeCallback_802093FC+0x284>
+  f8:	7f 63 db 78 	mr      r3,r27
+  fc:	48 00 00 01 	bl      fc <GetTypeCallback_802093FC+0xfc>
+			fc: R_PPC_REL24	fn_8020EE24
+ 100:	2c 1a 00 00 	cmpwi   r26,0
+ 104:	54 7a 42 2e 	rlwinm  r26,r3,8,8,23
+ 108:	41 82 00 54 	beq     15c <GetTypeCallback_802093FC+0x15c>
+ 10c:	57 40 02 d7 	rlwinm. r0,r26,0,11,11
+ 110:	41 82 00 4c 	beq     15c <GetTypeCallback_802093FC+0x15c>
+ 114:	3c 60 00 d0 	lis     r3,208
+ 118:	38 03 ff 00 	addi    r0,r3,-256
+ 11c:	7f 40 00 38 	and     r0,r26,r0
+ 120:	64 00 4e 10 	oris    r0,r0,19984
+ 124:	7c 9f ea 14 	add     r4,r31,r29
+ 128:	94 04 01 f0 	stwu    r0,496(r4)
+ 12c:	38 00 00 80 	li      r0,128
+ 130:	3c 60 00 00 	lis     r3,0
+			132: R_PPC_ADDR16_HA	GetTypeCallback_802093FC
+ 134:	90 1e 00 00 	stw     r0,0(r30)
+ 138:	39 03 00 00 	addi    r8,r3,0
+			13a: R_PPC_ADDR16_LO	GetTypeCallback_802093FC
+ 13c:	38 7b 00 00 	addi    r3,r27,0
+ 140:	38 de 00 00 	addi    r6,r30,0
+ 144:	38 a0 00 03 	li      r5,3
+ 148:	38 e0 00 03 	li      r7,3
+ 14c:	39 40 00 00 	li      r10,0
+ 150:	39 20 00 00 	li      r9,0
+ 154:	48 00 00 01 	bl      154 <GetTypeCallback_802093FC+0x154>
+			154: R_PPC_REL24	SITransfer
+ 158:	48 00 01 2c 	b       284 <GetTypeCallback_802093FC+0x284>
+ 15c:	57 80 02 d7 	rlwinm. r0,r28,0,11,11
+ 160:	41 82 00 70 	beq     1d0 <GetTypeCallback_802093FC+0x1d0>
+ 164:	3c 60 00 d0 	lis     r3,208
+ 168:	38 63 ff 00 	addi    r3,r3,-256
+ 16c:	7f 40 18 38 	and     r0,r26,r3
+ 170:	7f 83 18 38 	and     r3,r28,r3
+ 174:	7c 00 18 40 	cmplw   r0,r3
+ 178:	41 82 00 c4 	beq     23c <GetTypeCallback_802093FC+0x23c>
+ 17c:	57 40 02 d7 	rlwinm. r0,r26,0,11,11
+ 180:	40 82 00 14 	bne     194 <GetTypeCallback_802093FC+0x194>
+ 184:	64 7a 00 10 	oris    r26,r3,16
+ 188:	38 7b 00 00 	addi    r3,r27,0
+ 18c:	57 44 c4 3e 	rlwinm  r4,r26,24,16,31
+ 190:	48 00 00 01 	bl      190 <GetTypeCallback_802093FC+0x190>
+			190: R_PPC_REL24	fn_8020EEA8
+ 194:	67 40 4e 00 	oris    r0,r26,19968
+ 198:	7c 9f ea 14 	add     r4,r31,r29
+ 19c:	94 04 01 f0 	stwu    r0,496(r4)
+ 1a0:	38 00 00 80 	li      r0,128
+ 1a4:	3c 60 00 00 	lis     r3,0
+			1a6: R_PPC_ADDR16_HA	GetTypeCallback_802093FC
+ 1a8:	90 1e 00 00 	stw     r0,0(r30)
+ 1ac:	39 03 00 00 	addi    r8,r3,0
+			1ae: R_PPC_ADDR16_LO	GetTypeCallback_802093FC
+ 1b0:	38 7b 00 00 	addi    r3,r27,0
+ 1b4:	38 de 00 00 	addi    r6,r30,0
+ 1b8:	38 a0 00 03 	li      r5,3
+ 1bc:	38 e0 00 03 	li      r7,3
+ 1c0:	39 40 00 00 	li      r10,0
+ 1c4:	39 20 00 00 	li      r9,0
+ 1c8:	48 00 00 01 	bl      1c8 <GetTypeCallback_802093FC+0x1c8>
+			1c8: R_PPC_REL24	SITransfer
+ 1cc:	48 00 00 b8 	b       284 <GetTypeCallback_802093FC+0x284>
+ 1d0:	57 80 00 43 	rlwinm. r0,r28,0,1,1
+ 1d4:	41 82 00 5c 	beq     230 <GetTypeCallback_802093FC+0x230>
+ 1d8:	3c 60 00 d0 	lis     r3,208
+ 1dc:	38 03 ff 00 	addi    r0,r3,-256
+ 1e0:	7f 9c 00 38 	and     r28,r28,r0
+ 1e4:	67 9c 00 10 	oris    r28,r28,16
+ 1e8:	38 7b 00 00 	addi    r3,r27,0
+ 1ec:	57 84 c4 3e 	rlwinm  r4,r28,24,16,31
+ 1f0:	48 00 00 01 	bl      1f0 <GetTypeCallback_802093FC+0x1f0>
+			1f0: R_PPC_REL24	fn_8020EEA8
+ 1f4:	67 80 4e 00 	oris    r0,r28,19968
+ 1f8:	7c 9f ea 14 	add     r4,r31,r29
+ 1fc:	94 04 01 f0 	stwu    r0,496(r4)
+ 200:	38 00 00 80 	li      r0,128
+ 204:	3c 60 00 00 	lis     r3,0
+			206: R_PPC_ADDR16_HA	GetTypeCallback_802093FC
+ 208:	90 1e 00 00 	stw     r0,0(r30)
+ 20c:	39 03 00 00 	addi    r8,r3,0
+			20e: R_PPC_ADDR16_LO	GetTypeCallback_802093FC
+ 210:	38 7b 00 00 	addi    r3,r27,0
+ 214:	38 de 00 00 	addi    r6,r30,0
+ 218:	38 a0 00 03 	li      r5,3
+ 21c:	38 e0 00 03 	li      r7,3
+ 220:	39 40 00 00 	li      r10,0
+ 224:	39 20 00 00 	li      r9,0
+ 228:	48 00 00 01 	bl      228 <GetTypeCallback_802093FC+0x228>
+			228: R_PPC_REL24	SITransfer
+ 22c:	48 00 00 58 	b       284 <GetTypeCallback_802093FC+0x284>
+ 230:	38 7b 00 00 	addi    r3,r27,0
+ 234:	38 80 00 00 	li      r4,0
+ 238:	48 00 00 01 	bl      238 <GetTypeCallback_802093FC+0x238>
+			238: R_PPC_REL24	fn_8020EEA8
+ 23c:	57 60 20 36 	slwi    r0,r27,4
+ 240:	83 de 00 00 	lwz     r30,0(r30)
+ 244:	7f ff 02 14 	add     r31,r31,r0
+ 248:	3b a0 00 00 	li      r29,0
+ 24c:	3b 9d 00 00 	addi    r28,r29,0
+ 250:	3b ff 01 60 	addi    r31,r31,352
+ 254:	81 9f 00 00 	lwz     r12,0(r31)
+ 258:	28 0c 00 00 	cmplwi  r12,0
+ 25c:	41 82 00 18 	beq     274 <GetTypeCallback_802093FC+0x274>
+ 260:	93 9f 00 00 	stw     r28,0(r31)
+ 264:	7d 88 03 a6 	mtlr    r12
+ 268:	38 7b 00 00 	addi    r3,r27,0
+ 26c:	38 9e 00 00 	addi    r4,r30,0
+ 270:	4e 80 00 21 	blrl
+ 274:	3b bd 00 01 	addi    r29,r29,1
+ 278:	2c 1d 00 04 	cmpwi   r29,4
+ 27c:	3b ff 00 04 	addi    r31,r31,4
+ 280:	41 80 ff d4 	blt     254 <GetTypeCallback_802093FC+0x254>
+ 284:	bb 41 00 18 	lmw     r26,24(r1)
+ 288:	80 01 00 34 	lwz     r0,52(r1)
+ 28c:	38 21 00 30 	addi    r1,r1,48
+ 290:	7c 08 03 a6 	mtlr    r0
+ 294:	4e 80 00 20 	blr
+=== reconstructed ===
+
+build/GEDE01/src/game/game_fn_802093FC.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <GetTypeCallback_802093FC>:
+   0:	7c 08 02 a6 	mflr    r0
+   4:	90 01 00 04 	stw     r0,4(r1)
+   8:	94 21 ff d0 	stwu    r1,-48(r1)
+   c:	bf 41 00 18 	stmw    r26,24(r1)
+  10:	3b 63 00 00 	addi    r27,r3,0
+  14:	3c 60 00 00 	lis     r3,0
+			16: R_PPC_ADDR16_HA	Type_802FCA34
+  18:	38 03 00 00 	addi    r0,r3,0
+			1a: R_PPC_ADDR16_LO	Type_802FCA34
+  1c:	57 7d 10 3a 	slwi    r29,r27,2
+  20:	7f c0 ea 14 	add     r30,r0,r29
+  24:	3c 60 00 00 	lis     r3,0
+			26: R_PPC_ADDR16_HA	Packet_80640B68
+  28:	3b 44 00 00 	addi    r26,r4,0
+  2c:	3b e3 00 00 	addi    r31,r3,0
+			2e: R_PPC_ADDR16_LO	Packet_80640B68
+  30:	80 1e 00 00 	lwz     r0,0(r30)
+  34:	54 00 06 6e 	rlwinm  r0,r0,0,25,23
+  38:	90 1e 00 00 	stw     r0,0(r30)
+  3c:	80 1e 00 00 	lwz     r0,0(r30)
+  40:	7c 00 d3 78 	or      r0,r0,r26
+  44:	90 1e 00 00 	stw     r0,0(r30)
+  48:	48 00 00 01 	bl      48 <GetTypeCallback_802093FC+0x48>
+			48: R_PPC_REL24	__OSGetSystemTime
+  4c:	57 60 18 38 	slwi    r0,r27,3
+  50:	7c bf 02 14 	add     r5,r31,r0
+  54:	90 85 01 24 	stw     r4,292(r5)
+  58:	3c 80 80 00 	lis     r4,-32768
+  5c:	57 40 07 3f 	clrlwi. r0,r26,28
+  60:	90 65 01 20 	stw     r3,288(r5)
+  64:	7c 84 dc 30 	srw     r4,r4,r27
+  68:	80 60 00 00 	lwz     r3,0(0)
+			6a: R_PPC_EMB_SDA21	lbl_8064D8D8
+  6c:	83 9e 00 00 	lwz     r28,0(r30)
+  70:	7c 60 20 78 	andc    r0,r3,r4
+  74:	90 00 00 00 	stw     r0,0(0)
+			76: R_PPC_EMB_SDA21	lbl_8064D8D8
+  78:	7c 7a 20 38 	and     r26,r3,r4
+  7c:	40 82 00 24 	bne     a0 <GetTypeCallback_802093FC+0xa0>
+  80:	57 83 00 c8 	rlwinm  r3,r28,0,3,4
+  84:	3c 03 f8 00 	addis   r0,r3,-2048
+  88:	28 00 00 00 	cmplwi  r0,0
+  8c:	40 82 00 14 	bne     a0 <GetTypeCallback_802093FC+0xa0>
+  90:	57 80 00 01 	clrrwi. r0,r28,31
+  94:	41 82 00 0c 	beq     a0 <GetTypeCallback_802093FC+0xa0>
+  98:	57 80 01 4b 	rlwinm. r0,r28,0,5,5
+  9c:	41 82 00 58 	beq     f4 <GetTypeCallback_802093FC+0xf4>
+  a0:	38 7b 00 00 	addi    r3,r27,0
+  a4:	38 80 00 00 	li      r4,0
+  a8:	48 00 00 01 	bl      a8 <GetTypeCallback_802093FC+0xa8>
+			a8: R_PPC_REL24	fn_8020EEA8
+  ac:	57 60 20 36 	slwi    r0,r27,4
+  b0:	83 de 00 00 	lwz     r30,0(r30)
+  b4:	3b a0 00 00 	li      r29,0
+  b8:	3b 9d 00 00 	addi    r28,r29,0
+  bc:	7f ff 02 14 	add     r31,r31,r0
+  c0:	81 9f 01 60 	lwz     r12,352(r31)
+  c4:	28 0c 00 00 	cmplwi  r12,0
+  c8:	41 82 00 18 	beq     e0 <GetTypeCallback_802093FC+0xe0>
+  cc:	93 9f 01 60 	stw     r28,352(r31)
+  d0:	7d 88 03 a6 	mtlr    r12
+  d4:	38 7b 00 00 	addi    r3,r27,0
+  d8:	38 9e 00 00 	addi    r4,r30,0
+  dc:	4e 80 00 21 	blrl
+  e0:	3b bd 00 01 	addi    r29,r29,1
+  e4:	2c 1d 00 04 	cmpwi   r29,4
+  e8:	3b ff 00 04 	addi    r31,r31,4
+  ec:	41 80 ff d4 	blt     c0 <GetTypeCallback_802093FC+0xc0>
+  f0:	48 00 01 a4 	b       294 <GetTypeCallback_802093FC+0x294>
+  f4:	7f 63 db 78 	mr      r3,r27
+  f8:	48 00 00 01 	bl      f8 <GetTypeCallback_802093FC+0xf8>
+			f8: R_PPC_REL24	fn_8020EE24
+  fc:	2c 1a 00 00 	cmpwi   r26,0
+ 100:	54 7a 42 2e 	rlwinm  r26,r3,8,8,23
+ 104:	41 82 00 5c 	beq     160 <GetTypeCallback_802093FC+0x160>
+ 108:	57 40 02 d7 	rlwinm. r0,r26,0,11,11
+ 10c:	41 82 00 54 	beq     160 <GetTypeCallback_802093FC+0x160>
+ 110:	3c 60 00 d0 	lis     r3,208
+ 114:	38 03 ff 00 	addi    r0,r3,-256
+ 118:	7f 40 00 38 	and     r0,r26,r0
+ 11c:	64 00 4e 10 	oris    r0,r0,19984
+ 120:	7c 9f ea 14 	add     r4,r31,r29
+ 124:	90 04 01 f0 	stw     r0,496(r4)
+ 128:	38 00 00 80 	li      r0,128
+ 12c:	3c 60 00 00 	lis     r3,0
+			12e: R_PPC_ADDR16_HA	GetTypeCallback_802093FC
+ 130:	38 9d 01 f0 	addi    r4,r29,496
+ 134:	90 1e 00 00 	stw     r0,0(r30)
+ 138:	39 03 00 00 	addi    r8,r3,0
+			13a: R_PPC_ADDR16_LO	GetTypeCallback_802093FC
+ 13c:	38 7b 00 00 	addi    r3,r27,0
+ 140:	38 de 00 00 	addi    r6,r30,0
+ 144:	7c 9f 22 14 	add     r4,r31,r4
+ 148:	38 a0 00 03 	li      r5,3
+ 14c:	38 e0 00 03 	li      r7,3
+ 150:	39 40 00 00 	li      r10,0
+ 154:	39 20 00 00 	li      r9,0
+ 158:	48 00 00 01 	bl      158 <GetTypeCallback_802093FC+0x158>
+			158: R_PPC_REL24	SITransfer
+ 15c:	48 00 01 38 	b       294 <GetTypeCallback_802093FC+0x294>
+ 160:	57 80 02 d7 	rlwinm. r0,r28,0,11,11
+ 164:	41 82 00 78 	beq     1dc <GetTypeCallback_802093FC+0x1dc>
+ 168:	3c 60 00 d0 	lis     r3,208
+ 16c:	38 63 ff 00 	addi    r3,r3,-256
+ 170:	7f 40 18 38 	and     r0,r26,r3
+ 174:	7f 83 18 38 	and     r3,r28,r3
+ 178:	7c 00 18 40 	cmplw   r0,r3
+ 17c:	41 82 00 d4 	beq     250 <GetTypeCallback_802093FC+0x250>
+ 180:	57 40 02 d7 	rlwinm. r0,r26,0,11,11
+ 184:	40 82 00 14 	bne     198 <GetTypeCallback_802093FC+0x198>
+ 188:	64 7a 00 10 	oris    r26,r3,16
+ 18c:	38 7b 00 00 	addi    r3,r27,0
+ 190:	57 44 c4 3e 	rlwinm  r4,r26,24,16,31
+ 194:	48 00 00 01 	bl      194 <GetTypeCallback_802093FC+0x194>
+			194: R_PPC_REL24	fn_8020EEA8
+ 198:	67 40 4e 00 	oris    r0,r26,19968
+ 19c:	7c 9f ea 14 	add     r4,r31,r29
+ 1a0:	90 04 01 f0 	stw     r0,496(r4)
+ 1a4:	38 00 00 80 	li      r0,128
+ 1a8:	3c 60 00 00 	lis     r3,0
+			1aa: R_PPC_ADDR16_HA	GetTypeCallback_802093FC
+ 1ac:	38 9d 01 f0 	addi    r4,r29,496
+ 1b0:	90 1e 00 00 	stw     r0,0(r30)
+ 1b4:	39 03 00 00 	addi    r8,r3,0
+			1b6: R_PPC_ADDR16_LO	GetTypeCallback_802093FC
+ 1b8:	38 7b 00 00 	addi    r3,r27,0
+ 1bc:	38 de 00 00 	addi    r6,r30,0
+ 1c0:	7c 9f 22 14 	add     r4,r31,r4
+ 1c4:	38 a0 00 03 	li      r5,3
+ 1c8:	38 e0 00 03 	li      r7,3
+ 1cc:	39 40 00 00 	li      r10,0
+ 1d0:	39 20 00 00 	li      r9,0
+ 1d4:	48 00 00 01 	bl      1d4 <GetTypeCallback_802093FC+0x1d4>
+			1d4: R_PPC_REL24	SITransfer
+ 1d8:	48 00 00 bc 	b       294 <GetTypeCallback_802093FC+0x294>
+ 1dc:	57 80 00 43 	rlwinm. r0,r28,0,1,1
+ 1e0:	41 82 00 64 	beq     244 <GetTypeCallback_802093FC+0x244>
+ 1e4:	3c 60 00 d0 	lis     r3,208
+ 1e8:	38 03 ff 00 	addi    r0,r3,-256
+ 1ec:	7f 9c 00 38 	and     r28,r28,r0
+ 1f0:	67 9c 00 10 	oris    r28,r28,16
+ 1f4:	38 7b 00 00 	addi    r3,r27,0
+ 1f8:	57 84 c4 3e 	rlwinm  r4,r28,24,16,31
+ 1fc:	48 00 00 01 	bl      1fc <GetTypeCallback_802093FC+0x1fc>
+			1fc: R_PPC_REL24	fn_8020EEA8
+ 200:	67 80 4e 00 	oris    r0,r28,19968
+ 204:	7c 9f ea 14 	add     r4,r31,r29
+ 208:	90 04 01 f0 	stw     r0,496(r4)
+ 20c:	38 00 00 80 	li      r0,128
+ 210:	3c 60 00 00 	lis     r3,0
+			212: R_PPC_ADDR16_HA	GetTypeCallback_802093FC
+ 214:	38 9d 01 f0 	addi    r4,r29,496
+ 218:	90 1e 00 00 	stw     r0,0(r30)
+ 21c:	39 03 00 00 	addi    r8,r3,0
+			21e: R_PPC_ADDR16_LO	GetTypeCallback_802093FC
+ 220:	38 7b 00 00 	addi    r3,r27,0
+ 224:	38 de 00 00 	addi    r6,r30,0
+ 228:	7c 9f 22 14 	add     r4,r31,r4
+ 22c:	38 a0 00 03 	li      r5,3
+ 230:	38 e0 00 03 	li      r7,3
+ 234:	39 40 00 00 	li      r10,0
+ 238:	39 20 00 00 	li      r9,0
+ 23c:	48 00 00 01 	bl      23c <GetTypeCallback_802093FC+0x23c>
+			23c: R_PPC_REL24	SITransfer
+ 240:	48 00 00 54 	b       294 <GetTypeCallback_802093FC+0x294>
+ 244:	38 7b 00 00 	addi    r3,r27,0
+ 248:	38 80 00 00 	li      r4,0
+ 24c:	48 00 00 01 	bl      24c <GetTypeCallback_802093FC+0x24c>
+			24c: R_PPC_REL24	fn_8020EEA8
+ 250:	57 60 20 36 	slwi    r0,r27,4
+ 254:	83 de 00 00 	lwz     r30,0(r30)
+ 258:	3b a0 00 00 	li      r29,0
+ 25c:	3b 9d 00 00 	addi    r28,r29,0
+ 260:	7f ff 02 14 	add     r31,r31,r0
+ 264:	81 9f 01 60 	lwz     r12,352(r31)
+ 268:	28 0c 00 00 	cmplwi  r12,0
+ 26c:	41 82 00 18 	beq     284 <GetTypeCallback_802093FC+0x284>
+ 270:	93 9f 01 60 	stw     r28,352(r31)
+ 274:	7d 88 03 a6 	mtlr    r12
+ 278:	38 7b 00 00 	addi    r3,r27,0
+ 27c:	38 9e 00 00 	addi    r4,r30,0
+ 280:	4e 80 00 21 	blrl
+ 284:	3b bd 00 01 	addi    r29,r29,1
+ 288:	2c 1d 00 04 	cmpwi   r29,4
+ 28c:	3b ff 00 04 	addi    r31,r31,4
+ 290:	41 80 ff d4 	blt     264 <GetTypeCallback_802093FC+0x264>
+ 294:	bb 41 00 18 	lmw     r26,24(r1)
+ 298:	80 01 00 34 	lwz     r0,52(r1)
+ 29c:	38 21 00 30 	addi    r1,r1,48
+ 2a0:	7c 08 03 a6 	mtlr    r0
+ 2a4:	4e 80 00 20 	blr
