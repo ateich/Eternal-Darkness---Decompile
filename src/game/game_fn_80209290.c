@@ -49,11 +49,12 @@ extern s32 fn_80208C4C(s32 chan, void *output, u32 outputBytes, void *input,
 s32 SITransfer(s32 chan, void *output, u32 outputBytes, void *input,
                u32 inputBytes, SICallback callback, s64 delay)
 {
-    s64 fire;
     u32 enabled;
+    s64 fire;
     SIPacket *packet;
     SIWork *work;
     s64 now;
+    u32 alarmOffset;
 
     work = &Packet_80640B68;
     packet = &work->packet[chan];
@@ -67,11 +68,13 @@ s32 SITransfer(s32 chan, void *output, u32 outputBytes, void *input,
     if (delay == 0) {
         fire = now;
     } else {
-        fire = work->xferTime[chan] + delay;
+        fire = delay + work->xferTime[chan];
     }
     if (now < fire) {
         delay = fire - now;
-        OSSetAlarm(&work->alarm[chan], delay, fn_80209204);
+        alarmOffset = chan * sizeof(OSAlarm);
+        OSSetAlarm((OSAlarm *)((u8 *)work + alarmOffset + 0x80), delay,
+                   fn_80209204);
     } else if (fn_80208C4C(chan, output, outputBytes, input, inputBytes,
                            callback)) {
         OSRestoreInterrupts(enabled);

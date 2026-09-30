@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "assignment_id": "69490371-1130-442a-bbcd-41a58b4596d9",
+  "attempt": 2,
+  "base_commit": "72caf2327b8379dff523bbcbc8477c338e199410",
+  "target": "fn_80209290",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-69490371-1130-442a-bbcd-41a58b4596d9.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-69490371-1130-442a-bbcd-41a58b4596d9-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-69490371-1130-442a-bbcd-41a58b4596d9.log",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-69490371-1130-442a-bbcd-41a58b4596d9-reloc-strict.log",
+    "eternal-darkness-decomp/reports/GEDE01/configure-69490371-1130-442a-bbcd-41a58b4596d9.log",
+    "eternal-darkness-decomp/reports/GEDE01/build-69490371-1130-442a-bbcd-41a58b4596d9.log",
+    "eternal-darkness-decomp/reports/GEDE01/dol-sha1-69490371-1130-442a-bbcd-41a58b4596d9.log",
+    "eternal-darkness-decomp/reports/GEDE01/legal-audit-69490371-1130-442a-bbcd-41a58b4596d9.log",
+    "eternal-darkness-decomp/reports/GEDE01/fndiff-69490371-1130-442a-bbcd-41a58b4596d9.log",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-69490371-1130-442a-bbcd-41a58b4596d9.txt"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 94.49451% for equal 364-byte functions. Declaration order now matches retail allocation (enabled r21, fire r20:r19), and delay-first addition matches retail operand order. The remaining difference is the alarm-address calculation and associated scheduling: retail emits mulli into r0, adds r23 before the 0x80 displacement, and loads fn_80209204 later; the reconstruction emits mulli into r5, folds 0x80 before adding r23, and loads fn_80209204 earlier. Raw instruction and relocation evidence is attached."
+}
