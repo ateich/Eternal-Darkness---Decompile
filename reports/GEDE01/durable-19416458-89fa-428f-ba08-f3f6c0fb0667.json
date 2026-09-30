@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "assignment_id": "19416458-89fa-428f-ba08-f3f6c0fb0667",
+  "attempt": 4,
+  "base_commit": "6a0cea2829686d712aa9cfc9e41b52087448e931",
+  "target": "fn_802093FC",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-19416458-89fa-428f-ba08-f3f6c0fb0667.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-19416458-89fa-428f-ba08-f3f6c0fb0667-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/configure-19416458-89fa-428f-ba08-f3f6c0fb0667.log",
+    "eternal-darkness-decomp/reports/GEDE01/build-19416458-89fa-428f-ba08-f3f6c0fb0667.log",
+    "eternal-darkness-decomp/reports/GEDE01/dol-sha1-19416458-89fa-428f-ba08-f3f6c0fb0667.log",
+    "eternal-darkness-decomp/reports/GEDE01/legal-audit-19416458-89fa-428f-ba08-f3f6c0fb0667.log",
+    "eternal-darkness-decomp/reports/GEDE01/fndiff-19416458-89fa-428f-ba08-f3f6c0fb0667.log",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-19416458-89fa-428f-ba08-f3f6c0fb0667.txt"
+  ],
+  "divergence": "Best retained canonical and relocation-strict score is 93.289154%: retail is 664 bytes and GC/1.2.5n emits 680 bytes. Each inlined type-callback loop folds the +0x160 table displacement into lwz/stw instead of retail's separate addi, and each of three cmdFixDevice writes uses stw plus a later addi/add address rebuild instead of retail stwu 0x1F0(r4). Both retail and reconstructed final wireless-ID arms use r28. A distinct compound pointer-update hypothesis produced the intended three stwu instructions and a size-exact 664-byte object, but rotated the nonvolatile allocation and regressed to 88.710846%; lifetime-sharing through a union regressed to 59.903614% and 776 bytes, so neither experiment was retained."
+}
