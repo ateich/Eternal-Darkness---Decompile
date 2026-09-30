@@ -1,0 +1,154 @@
+=== retail ===
+
+build/GEDE01/obj/game/game_fn_80208AB4.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <fn_80208AB4>:
+   0:	7c 08 02 a6 	mflr    r0
+   4:	90 01 00 04 	stw     r0,4(r1)
+   8:	94 21 ff e8 	stwu    r1,-24(r1)
+   c:	93 e1 00 14 	stw     r31,20(r1)
+  10:	93 c1 00 10 	stw     r30,16(r1)
+  14:	7c 7e 1b 78 	mr      r30,r3
+  18:	48 00 00 01 	bl      18 <fn_80208AB4+0x18>
+			18: R_PPC_REL24	OSDisableInterrupts
+  1c:	3c 80 00 00 	lis     r4,0
+			1e: R_PPC_ADDR16_HA	lbl_80640D08
+  20:	38 00 00 04 	li      r0,4
+  24:	38 a4 00 00 	addi    r5,r4,0
+			26: R_PPC_ADDR16_LO	lbl_80640D08
+  28:	7c 09 03 a6 	mtctr   r0
+  2c:	3b e3 00 00 	addi    r31,r3,0
+  30:	38 65 00 00 	addi    r3,r5,0
+  34:	38 80 00 00 	li      r4,0
+  38:	80 03 00 00 	lwz     r0,0(r3)
+  3c:	7c 00 f0 40 	cmplw   r0,r30
+  40:	40 82 00 84 	bne     c4 <fn_80208AB4+0xc4>
+  44:	3c 60 00 00 	lis     r3,0
+			46: R_PPC_ADDR16_HA	lbl_80640D08
+  48:	54 84 10 3a 	slwi    r4,r4,2
+  4c:	38 03 00 00 	addi    r0,r3,0
+			4e: R_PPC_ADDR16_LO	lbl_80640D08
+  50:	7c 60 22 14 	add     r3,r0,r4
+  54:	38 00 00 00 	li      r0,0
+  58:	90 03 00 00 	stw     r0,0(r3)
+  5c:	38 80 00 00 	li      r4,0
+  60:	80 05 00 00 	lwz     r0,0(r5)
+  64:	28 00 00 00 	cmplwi  r0,0
+  68:	40 82 00 3c 	bne     a4 <fn_80208AB4+0xa4>
+  6c:	38 65 00 04 	addi    r3,r5,4
+  70:	80 05 00 04 	lwz     r0,4(r5)
+  74:	38 80 00 01 	li      r4,1
+  78:	28 00 00 00 	cmplwi  r0,0
+  7c:	40 82 00 28 	bne     a4 <fn_80208AB4+0xa4>
+  80:	84 03 00 04 	lwzu    r0,4(r3)
+  84:	38 80 00 02 	li      r4,2
+  88:	28 00 00 00 	cmplwi  r0,0
+  8c:	40 82 00 18 	bne     a4 <fn_80208AB4+0xa4>
+  90:	80 03 00 04 	lwz     r0,4(r3)
+  94:	38 80 00 03 	li      r4,3
+  98:	28 00 00 00 	cmplwi  r0,0
+  9c:	40 82 00 08 	bne     a4 <fn_80208AB4+0xa4>
+  a0:	38 80 00 04 	li      r4,4
+  a4:	2c 04 00 04 	cmpwi   r4,4
+  a8:	40 82 00 0c 	bne     b4 <fn_80208AB4+0xb4>
+  ac:	38 60 00 00 	li      r3,0
+  b0:	48 00 00 01 	bl      b0 <fn_80208AB4+0xb0>
+			b0: R_PPC_REL24	fn_80208950
+  b4:	7f e3 fb 78 	mr      r3,r31
+  b8:	48 00 00 01 	bl      b8 <fn_80208AB4+0xb8>
+			b8: R_PPC_REL24	OSRestoreInterrupts
+  bc:	38 60 00 01 	li      r3,1
+  c0:	48 00 00 1c 	b       dc <fn_80208AB4+0xdc>
+  c4:	38 63 00 04 	addi    r3,r3,4
+  c8:	38 84 00 01 	addi    r4,r4,1
+  cc:	42 00 ff 6c 	bdnz    38 <fn_80208AB4+0x38>
+  d0:	7f e3 fb 78 	mr      r3,r31
+  d4:	48 00 00 01 	bl      d4 <fn_80208AB4+0xd4>
+			d4: R_PPC_REL24	OSRestoreInterrupts
+  d8:	38 60 00 00 	li      r3,0
+  dc:	80 01 00 1c 	lwz     r0,28(r1)
+  e0:	83 e1 00 14 	lwz     r31,20(r1)
+  e4:	83 c1 00 10 	lwz     r30,16(r1)
+  e8:	38 21 00 18 	addi    r1,r1,24
+  ec:	7c 08 03 a6 	mtlr    r0
+  f0:	4e 80 00 20 	blr
+=== reconstructed ===
+
+build/GEDE01/src/game/game_fn_80208AB4.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <fn_80208AB4>:
+   0:	7c 08 02 a6 	mflr    r0
+   4:	90 01 00 04 	stw     r0,4(r1)
+   8:	94 21 ff e8 	stwu    r1,-24(r1)
+   c:	93 e1 00 14 	stw     r31,20(r1)
+  10:	93 c1 00 10 	stw     r30,16(r1)
+  14:	7c 7e 1b 78 	mr      r30,r3
+  18:	48 00 00 01 	bl      18 <fn_80208AB4+0x18>
+			18: R_PPC_REL24	OSDisableInterrupts
+  1c:	3c 80 00 00 	lis     r4,0
+			1e: R_PPC_ADDR16_HA	lbl_80640D08
+  20:	38 00 00 04 	li      r0,4
+  24:	38 a4 00 00 	addi    r5,r4,0
+			26: R_PPC_ADDR16_LO	lbl_80640D08
+  28:	7c 09 03 a6 	mtctr   r0
+  2c:	3b e3 00 00 	addi    r31,r3,0
+  30:	38 65 00 00 	addi    r3,r5,0
+  34:	38 80 00 00 	li      r4,0
+  38:	80 03 00 00 	lwz     r0,0(r3)
+  3c:	7c 00 f0 40 	cmplw   r0,r30
+  40:	40 82 00 84 	bne     c4 <fn_80208AB4+0xc4>
+  44:	3c 60 00 00 	lis     r3,0
+			46: R_PPC_ADDR16_HA	lbl_80640D08
+  48:	54 84 10 3a 	slwi    r4,r4,2
+  4c:	38 03 00 00 	addi    r0,r3,0
+			4e: R_PPC_ADDR16_LO	lbl_80640D08
+  50:	7c 60 22 14 	add     r3,r0,r4
+  54:	38 00 00 00 	li      r0,0
+  58:	90 03 00 00 	stw     r0,0(r3)
+  5c:	38 80 00 00 	li      r4,0
+  60:	80 05 00 00 	lwz     r0,0(r5)
+  64:	28 00 00 00 	cmplwi  r0,0
+  68:	40 82 00 3c 	bne     a4 <fn_80208AB4+0xa4>
+  6c:	38 65 00 04 	addi    r3,r5,4
+  70:	80 05 00 04 	lwz     r0,4(r5)
+  74:	38 80 00 01 	li      r4,1
+  78:	28 00 00 00 	cmplwi  r0,0
+  7c:	40 82 00 28 	bne     a4 <fn_80208AB4+0xa4>
+  80:	84 03 00 04 	lwzu    r0,4(r3)
+  84:	38 80 00 02 	li      r4,2
+  88:	28 00 00 00 	cmplwi  r0,0
+  8c:	40 82 00 18 	bne     a4 <fn_80208AB4+0xa4>
+  90:	80 03 00 04 	lwz     r0,4(r3)
+  94:	38 80 00 03 	li      r4,3
+  98:	28 00 00 00 	cmplwi  r0,0
+  9c:	40 82 00 08 	bne     a4 <fn_80208AB4+0xa4>
+  a0:	38 80 00 04 	li      r4,4
+  a4:	2c 04 00 04 	cmpwi   r4,4
+  a8:	40 82 00 0c 	bne     b4 <fn_80208AB4+0xb4>
+  ac:	38 60 00 00 	li      r3,0
+  b0:	48 00 00 01 	bl      b0 <fn_80208AB4+0xb0>
+			b0: R_PPC_REL24	fn_80208950
+  b4:	7f e3 fb 78 	mr      r3,r31
+  b8:	48 00 00 01 	bl      b8 <fn_80208AB4+0xb8>
+			b8: R_PPC_REL24	OSRestoreInterrupts
+  bc:	38 60 00 01 	li      r3,1
+  c0:	48 00 00 1c 	b       dc <fn_80208AB4+0xdc>
+  c4:	38 63 00 04 	addi    r3,r3,4
+  c8:	38 84 00 01 	addi    r4,r4,1
+  cc:	42 00 ff 6c 	bdnz    38 <fn_80208AB4+0x38>
+  d0:	7f e3 fb 78 	mr      r3,r31
+  d4:	48 00 00 01 	bl      d4 <fn_80208AB4+0xd4>
+			d4: R_PPC_REL24	OSRestoreInterrupts
+  d8:	38 60 00 00 	li      r3,0
+  dc:	80 01 00 1c 	lwz     r0,28(r1)
+  e0:	83 e1 00 14 	lwz     r31,20(r1)
+  e4:	83 c1 00 10 	lwz     r30,16(r1)
+  e8:	38 21 00 18 	addi    r1,r1,24
+  ec:	7c 08 03 a6 	mtlr    r0
+  f0:	4e 80 00 20 	blr
