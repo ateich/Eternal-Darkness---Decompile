@@ -43,13 +43,16 @@ s32 fn_80208C4C(s32 chan, void *output, u32 outputBytes, void *input,
     u32 enabled = OSDisableInterrupts();
     u32 i;
     SIComCSR comcsr;
+    u32 status;
 
     if (si->chan != -1) {
         OSRestoreInterrupts(enabled);
         return 0;
     }
 
-    __SIRegs[14] = __SIRegs[14] & ((s32)0x0F000000 >> (chan * 8));
+    status = __SIRegs[14];
+    status &= ((s32)0x0F000000 >> (chan * 8));
+    __SIRegs[14] = status;
     si->chan = chan;
     si->callback = callback;
     si->inputBytes = inputBytes;
