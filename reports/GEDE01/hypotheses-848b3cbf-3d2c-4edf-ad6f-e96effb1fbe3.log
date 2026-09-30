@@ -1,0 +1,16 @@
+fn_80209140 attempt 3 codegen hypotheses
+
+Baseline retained: register-qualified, declaration-initialized work/channel/output locals.
+Canonical compiler: GC/1.2.5n with the generated project flags.
+Baseline result: 196-byte target, 196-byte candidate, 95.71429%.
+
+New hypothesis 1: use old-style declarations for OSRestoreInterrupts and fn_80208E58 to test whether prototype-driven outgoing-call metadata caused the extra 8-byte frame allocation.
+Measured result: 196-byte candidate, 95.71429%; prologue, frame, body, and relocations were unchanged.
+
+New hypothesis 2: type the output alias as u32 * and remove the two use-site casts to test whether pointer-type fidelity changed early address materialization or register coloring.
+Measured result: 196-byte candidate, 95.71429%; generated code was unchanged.
+
+New hypothesis 3: apply function-local #pragma scheduling off to test whether the retail global-address hoist resulted from a scheduler boundary.
+Measured result: 196-byte candidate, 65.22449%; scheduling changed extensively and regressed the matching body, so the pragma was removed.
+
+The retained source is the strongest baseline. Retail materializes Packet_80640B68@ha in r5 at instruction offset 0x4 (relocation offset 0x6), uses a 0x28-byte frame, and saves/restores r27-r31 at 0x14. The candidate materializes the same symbol in r3 at instruction offset 0x14 (relocation offset 0x16), uses a 0x30-byte frame, and saves/restores r27-r31 at 0x1c. All remaining body instructions and all five relocation targets, types, and addends match.
