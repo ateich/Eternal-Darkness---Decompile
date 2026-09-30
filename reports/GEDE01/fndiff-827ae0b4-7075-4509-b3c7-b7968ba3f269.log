@@ -1,0 +1,33 @@
+ INFO Writing to /home/rabbit/src/darkfoundry-new/.darkfoundry/worktrees/81136289-d9d6-4a74-8320-2e4da3c1fe24/eternal-darkness-decomp/build/GEDE01/fndiff_fn_80208E58.json
+target 124 bytes  base 124 bytes  match 100.0
+  0x0000  mflr r0                                              | mflr r0
+  0x0004  stw r0, 0x4(r1)                                      | stw r0, 0x4(r1)
+  0x0008  stwu r1, -0x18(r1)                                   | stwu r1, -0x18(r1)
+  0x000c  stw r31, 0x14(r1)                                    | stw r31, 0x14(r1)
+  0x0010  stw r30, 0x10(r1)                                    | stw r30, 0x10(r1)
+  0x0014  mr r30, r3                                           | mr r30, r3
+  0x0018  bl OSDisableInterrupts [None+0 t10]                  | bl OSDisableInterrupts [None+0 t10]
+  0x001c  lis r4, 0xcc00                                       | lis r4, 0xcc00
+  0x0020  subfic r0, r30, 0x3                                  | subfic r0, r30, 0x3
+  0x0024  lwz r31, 0x6438(r4)                                  | lwz r31, 0x6438(r4)
+  0x0028  slwi r0, r0, 3                                       | slwi r0, r0, 3
+  0x002c  srw r31, r31, r0                                     | srw r31, r31, r0
+  0x0030  rlwinm. r0, r31, 0, 28, 28                           | rlwinm. r0, r31, 0, 28, 28
+  0x0034  beq 0x5c                                             | beq 0x5c
+  0x0038  lis r4, Type_802FCA34@ha [None+0 t6]                 | lis r4, Type_802FCA34@ha [None+0 t6]
+  0x003c  slwi r5, r30, 2                                      | slwi r5, r30, 2
+  0x0040  addi r0, r4, Type_802FCA34@l [None+0 t4]             | addi r0, r4, Type_802FCA34@l [None+0 t4]
+  0x0044  add r4, r0, r5 [None+0 tNone]                        | add r4, r0, r5 [None+0 tNone]
+  0x0048  lwz r0, 0x0(r4) [None+0 tNone]                       | lwz r0, 0x0(r4) [None+0 tNone]
+  0x004c  rlwinm. r0, r0, 0, 24, 24                            | rlwinm. r0, r0, 0, 24, 24
+  0x0050  bne 0x5c                                             | bne 0x5c
+  0x0054  li r0, 0x8                                           | li r0, 0x8
+  0x0058  stw r0, 0x0(r4) [None+0 tNone]                       | stw r0, 0x0(r4) [None+0 tNone]
+  0x005c  bl OSRestoreInterrupts [None+0 t10]                  | bl OSRestoreInterrupts [None+0 t10]
+  0x0060  mr r3, r31                                           | mr r3, r31
+  0x0064  lwz r0, 0x1c(r1)                                     | lwz r0, 0x1c(r1)
+  0x0068  lwz r31, 0x14(r1)                                    | lwz r31, 0x14(r1)
+  0x006c  lwz r30, 0x10(r1)                                    | lwz r30, 0x10(r1)
+  0x0070  addi r1, r1, 0x18                                    | addi r1, r1, 0x18
+  0x0074  mtlr r0                                              | mtlr r0
+  0x0078  blr                                                  | blr
