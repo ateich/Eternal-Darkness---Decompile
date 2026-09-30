@@ -1,0 +1,100 @@
+=== retail ===
+
+build/GEDE01/obj/game/game_fn_80208950.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <fn_80208950>:
+   0:	7c 08 02 a6 	mflr    r0
+   4:	3c 80 00 00 	lis     r4,0
+			6: R_PPC_ADDR16_HA	Packet_80640B68
+   8:	90 01 00 04 	stw     r0,4(r1)
+   c:	94 21 ff d0 	stwu    r1,-48(r1)
+  10:	93 e1 00 2c 	stw     r31,44(r1)
+  14:	3b e4 00 00 	addi    r31,r4,0
+			16: R_PPC_ADDR16_LO	Packet_80640B68
+  18:	93 c1 00 28 	stw     r30,40(r1)
+  1c:	93 a1 00 24 	stw     r29,36(r1)
+  20:	3b a3 00 00 	addi    r29,r3,0
+  24:	48 00 00 01 	bl      24 <fn_80208950+0x24>
+			24: R_PPC_REL24	OSDisableInterrupts
+  28:	3c 80 cc 00 	lis     r4,-13312
+  2c:	84 a4 64 34 	lwzu    r5,25652(r4)
+  30:	54 a0 01 09 	rlwinm. r0,r5,0,4,4
+  34:	41 82 00 0c 	beq     40 <fn_80208950+0x40>
+  38:	3b c0 00 01 	li      r30,1
+  3c:	48 00 00 08 	b       44 <fn_80208950+0x44>
+  40:	3b c0 00 00 	li      r30,0
+  44:	2c 1d 00 00 	cmpwi   r29,0
+  48:	41 82 00 20 	beq     68 <fn_80208950+0x68>
+  4c:	38 00 00 00 	li      r0,0
+  50:	90 1f 01 e0 	stw     r0,480(r31)
+  54:	64 a5 08 00 	oris    r5,r5,2048
+  58:	90 1f 01 e4 	stw     r0,484(r31)
+  5c:	90 1f 01 e8 	stw     r0,488(r31)
+  60:	90 1f 01 ec 	stw     r0,492(r31)
+  64:	48 00 00 08 	b       6c <fn_80208950+0x6c>
+  68:	54 a5 01 46 	rlwinm  r5,r5,0,5,3
+  6c:	54 a5 00 7c 	rlwinm  r5,r5,0,1,30
+  70:	90 a4 00 00 	stw     r5,0(r4)
+  74:	48 00 00 01 	bl      74 <fn_80208950+0x74>
+			74: R_PPC_REL24	OSRestoreInterrupts
+  78:	7f c3 f3 78 	mr      r3,r30
+  7c:	80 01 00 34 	lwz     r0,52(r1)
+  80:	83 e1 00 2c 	lwz     r31,44(r1)
+  84:	83 c1 00 28 	lwz     r30,40(r1)
+  88:	83 a1 00 24 	lwz     r29,36(r1)
+  8c:	38 21 00 30 	addi    r1,r1,48
+  90:	7c 08 03 a6 	mtlr    r0
+  94:	4e 80 00 20 	blr
+=== reconstructed ===
+
+build/GEDE01/src/game/game_fn_80208950.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <fn_80208950>:
+   0:	7c 08 02 a6 	mflr    r0
+   4:	3c 80 00 00 	lis     r4,0
+			6: R_PPC_ADDR16_HA	Packet_80640B68
+   8:	90 01 00 04 	stw     r0,4(r1)
+   c:	94 21 ff d0 	stwu    r1,-48(r1)
+  10:	93 e1 00 2c 	stw     r31,44(r1)
+  14:	3b e4 00 00 	addi    r31,r4,0
+			16: R_PPC_ADDR16_LO	Packet_80640B68
+  18:	93 c1 00 28 	stw     r30,40(r1)
+  1c:	93 a1 00 24 	stw     r29,36(r1)
+  20:	3b a3 00 00 	addi    r29,r3,0
+  24:	48 00 00 01 	bl      24 <fn_80208950+0x24>
+			24: R_PPC_REL24	OSDisableInterrupts
+  28:	3c 80 cc 00 	lis     r4,-13312
+  2c:	84 a4 64 34 	lwzu    r5,25652(r4)
+  30:	54 a0 01 09 	rlwinm. r0,r5,0,4,4
+  34:	41 82 00 0c 	beq     40 <fn_80208950+0x40>
+  38:	3b c0 00 01 	li      r30,1
+  3c:	48 00 00 08 	b       44 <fn_80208950+0x44>
+  40:	3b c0 00 00 	li      r30,0
+  44:	2c 1d 00 00 	cmpwi   r29,0
+  48:	41 82 00 20 	beq     68 <fn_80208950+0x68>
+  4c:	38 00 00 00 	li      r0,0
+  50:	90 1f 01 e0 	stw     r0,480(r31)
+  54:	64 a5 08 00 	oris    r5,r5,2048
+  58:	90 1f 01 e4 	stw     r0,484(r31)
+  5c:	90 1f 01 e8 	stw     r0,488(r31)
+  60:	90 1f 01 ec 	stw     r0,492(r31)
+  64:	48 00 00 08 	b       6c <fn_80208950+0x6c>
+  68:	54 a5 01 46 	rlwinm  r5,r5,0,5,3
+  6c:	54 a5 00 7c 	rlwinm  r5,r5,0,1,30
+  70:	90 a4 00 00 	stw     r5,0(r4)
+  74:	48 00 00 01 	bl      74 <fn_80208950+0x74>
+			74: R_PPC_REL24	OSRestoreInterrupts
+  78:	7f c3 f3 78 	mr      r3,r30
+  7c:	80 01 00 34 	lwz     r0,52(r1)
+  80:	83 e1 00 2c 	lwz     r31,44(r1)
+  84:	83 c1 00 28 	lwz     r30,40(r1)
+  88:	83 a1 00 24 	lwz     r29,36(r1)
+  8c:	38 21 00 30 	addi    r1,r1,48
+  90:	7c 08 03 a6 	mtlr    r0
+  94:	4e 80 00 20 	blr

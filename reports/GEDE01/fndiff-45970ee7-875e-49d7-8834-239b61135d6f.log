@@ -1,0 +1,40 @@
+ INFO Writing to /home/rabbit/src/darkfoundry-new/.darkfoundry/worktrees/81136289-d9d6-4a74-8320-2e4da3c1fe24/eternal-darkness-decomp/build/GEDE01/fndiff_fn_80208950.json
+target 152 bytes  base 152 bytes  match 100.0
+  0x0000  mflr r0                                              | mflr r0
+  0x0004  lis r4, Packet_80640B68@ha [None+0 t6]               | lis r4, Packet_80640B68@ha [None+0 t6]
+  0x0008  stw r0, 0x4(r1)                                      | stw r0, 0x4(r1)
+  0x000c  stwu r1, -0x30(r1)                                   | stwu r1, -0x30(r1)
+  0x0010  stw r31, 0x2c(r1)                                    | stw r31, 0x2c(r1)
+  0x0014  addi r31, r4, Packet_80640B68@l [None+0 t4]          | addi r31, r4, Packet_80640B68@l [None+0 t4]
+  0x0018  stw r30, 0x28(r1)                                    | stw r30, 0x28(r1)
+  0x001c  stw r29, 0x24(r1)                                    | stw r29, 0x24(r1)
+  0x0020  addi r29, r3, 0x0                                    | addi r29, r3, 0x0
+  0x0024  bl OSDisableInterrupts [None+0 t10]                  | bl OSDisableInterrupts [None+0 t10]
+  0x0028  lis r4, 0xcc00                                       | lis r4, 0xcc00
+  0x002c  lwzu r5, 0x6434(r4)                                  | lwzu r5, 0x6434(r4)
+  0x0030  rlwinm. r0, r5, 0, 4, 4                              | rlwinm. r0, r5, 0, 4, 4
+  0x0034  beq 0x40                                             | beq 0x40
+  0x0038  li r30, 0x1                                          | li r30, 0x1
+  0x003c  b 0x44                                               | b 0x44
+  0x0040  li r30, 0x0                                          | li r30, 0x0
+  0x0044  cmpwi r29, 0x0                                       | cmpwi r29, 0x0
+  0x0048  beq 0x68                                             | beq 0x68
+  0x004c  li r0, 0x0                                           | li r0, 0x0
+  0x0050  stw r0, 0x1e0(r31) [None+0 tNone]                    | stw r0, 0x1e0(r31) [None+0 tNone]
+  0x0054  oris r5, r5, 0x800                                   | oris r5, r5, 0x800
+  0x0058  stw r0, 0x1e4(r31) [None+0 tNone]                    | stw r0, 0x1e4(r31) [None+0 tNone]
+  0x005c  stw r0, 0x1e8(r31) [None+0 tNone]                    | stw r0, 0x1e8(r31) [None+0 tNone]
+  0x0060  stw r0, 0x1ec(r31) [None+0 tNone]                    | stw r0, 0x1ec(r31) [None+0 tNone]
+  0x0064  b 0x6c                                               | b 0x6c
+  0x0068  rlwinm r5, r5, 0, 5, 3                               | rlwinm r5, r5, 0, 5, 3
+  0x006c  rlwinm r5, r5, 0, 1, 30                              | rlwinm r5, r5, 0, 1, 30
+  0x0070  stw r5, 0x0(r4)                                      | stw r5, 0x0(r4)
+  0x0074  bl OSRestoreInterrupts [None+0 t10]                  | bl OSRestoreInterrupts [None+0 t10]
+  0x0078  mr r3, r30                                           | mr r3, r30
+  0x007c  lwz r0, 0x34(r1)                                     | lwz r0, 0x34(r1)
+  0x0080  lwz r31, 0x2c(r1)                                    | lwz r31, 0x2c(r1)
+  0x0084  lwz r30, 0x28(r1)                                    | lwz r30, 0x28(r1)
+  0x0088  lwz r29, 0x24(r1)                                    | lwz r29, 0x24(r1)
+  0x008c  addi r1, r1, 0x30                                    | addi r1, r1, 0x30
+  0x0090  mtlr r0                                              | mtlr r0
+  0x0094  blr                                                  | blr
