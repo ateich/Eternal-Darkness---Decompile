@@ -13,7 +13,7 @@ typedef struct SIControl {
 } SIControl;
 
 extern SIControl Si_802FCA20;
-extern u64 TypeTime[4];
+extern u64 TypeTime_80640C88[4];
 extern u64 lbl_80640CA8[4];
 extern u64 __OSGetSystemTime(void);
 
@@ -64,7 +64,7 @@ u32 fn_80208310(void)
                 error = 4;
             }
         } else {
-            TypeTime[si->chan] = __OSGetSystemTime();
+            TypeTime_80640C88[si->chan] = __OSGetSystemTime();
             error = 0;
         }
         si->chan = -1;
