@@ -1,0 +1,16 @@
+Canonical compiler invocation (ninja -t commands):
+tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.2.5n/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -MMD -c src/game/game_fn_80208310.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80208310.d build/GEDE01/src/game/game_fn_80208310.d
+
+$ build/tools/objdiff-cli diff -p . -u main/game/game_fn_80208310 fn_80208310 -o reports/GEDE01/objdiff-ab840e82-e6ee-4aeb-9fee-5c802657befa.json --format json-pretty
+ INFO Writing to reports/GEDE01/objdiff-ab840e82-e6ee-4aeb-9fee-5c802657befa.json
+match_percent = 100.0
+$ build/tools/objdiff-cli diff -p . -u main/game/game_fn_80208310 fn_80208310 -c functionRelocDiffs=all -o reports/GEDE01/objdiff-ab840e82-e6ee-4aeb-9fee-5c802657befa-reloc-strict.json --format json-pretty
+ INFO Writing to reports/GEDE01/objdiff-ab840e82-e6ee-4aeb-9fee-5c802657befa-reloc-strict.json
+match_percent = 100.0
+build/GEDE01/obj/game/game_fn_80208310.o: .text size=764 sha256=d1a0758143e8c3848c784da83a526c64a43f1f1e272a15a24806cde2c675c347
+build/GEDE01/src/game/game_fn_80208310.o: .text size=764 sha256=d1a0758143e8c3848c784da83a526c64a43f1f1e272a15a24806cde2c675c347
+Raw .text byte equality: True
+Relocation offset/type/target/addend equality: True (8 entries)
+Final python3 configure.py and .tools/bin/ninja -j2 completed successfully (exit 0).
+Measured DOL SHA-1 after Matching registration build: ea24b6af954876ce072562ff39cdb4c81d32be1f  build/GEDE01/main.dol
+Expected retail DOL SHA-1 comparison: PASS

@@ -31,14 +31,12 @@ u32 fn_80208310(void)
 {
     u32 i;
     u32* input;
-    u32* inputBytes;
+    volatile u32* inputBytes;
     u32 count;
     u32 data;
-    volatile u32* sr;
     u32 error;
     SIControl* si;
 
-    sr = &__SIRegs.status;
     error = __SIRegs.comcsr;
     si = &Si_802FCA20;
     __SIRegs.status = (__SIRegs.status | 0x80000000) & ~1;
@@ -62,7 +60,7 @@ u32 fn_80208310(void)
             }
         }
 
-        if (*sr & 0x20000000) {
+        if (__SIRegs.status & 0x20000000) {
             error >>= (3 - si->chan) * 8;
             error &= 0xF;
             if ((error & 8) && !(si->type[si->chan] & 0x80)) {
