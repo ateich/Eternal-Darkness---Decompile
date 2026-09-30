@@ -20,10 +20,11 @@ extern void fn_801A74A8(void *, void *);
 extern unsigned long long fn_8020123C();
 extern void fn_801A7228(void *);
 
-s32 fn_800606BC(void *owner, void *resource)
+s32 fn_800606BC(s32 arg, void *resource)
 {
-    void *value;
     void *resolved;
+    void *owner = (void *)arg;
+    void *value;
     s32 status;
     u32 flags;
 

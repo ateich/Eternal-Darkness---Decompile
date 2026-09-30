@@ -848,3 +848,98 @@ each qualifier moves a load to its retail position. `fn_8015DF60` keeps the
 second bound computation, stored to an unused `u16`, under
 `opt_dead_assignments off`; retail performs those loads and discards the
 result. `fn_8019E0B0` needed only its `.sdata2` constant name.
+
+## Literal constants, file-local static data, and late temporaries
+
+Eighteen further functions match. Each builds with the whole-DOL SHA-1
+`ea24b6af954876ce072562ff39cdb4c81d32be1f` and reports 100% under both the
+default and `function_reloc_diffs=name_address` objdiff settings. Together
+they total 10,188 code bytes and 337 relocation sites. None of them uses
+`volatile`, `register`, or an optimization pragma.
+
+Six functions read `.sdata2` constants that are plain values. Declared as
+`extern const` data, repeated loads of the same constant are merged into an
+early front-end temporary and the floating-point registers come out in a
+different order; `opt_common_subs off` avoids the merge but is not needed.
+Written as literals, the constants are loaded late, as in retail.
+`fn_800D38CC` uses seven literals, `fn_80120B58` uses `0.0f` and `250.0f`,
+`fn_8017A7D4` uses `1.0` and `0.01f`, and `fn_801F02C4` uses `0.0f` and
+`1600.0f`. Without the pragma, their extern forms are 28, 13, 14 and 15 lines
+off. Each literal is renamed to its retail symbol through the `.sdata2`
+externalization table.
+
+`fn_801FA9C8` uses `0.0f` and `3.0f` and ends with
+`CLAMP(time, 0.0f, (float)fn_801F9A38(...))`, using the `MIN`, `MAX` and
+`CLAMP` macros of `fn_8017D700` and `fn_8017D908`. Retail calls `fn_801F9A38`
+twice and clamps the time twice, which is that macro's expansion.
+
+`fn_801D88D4` scales by `0.25` and `0.4`. As literals, the unit emits its
+`.sdata2` as 0.25, 0.4 and the integer-conversion bias, which is retail
+`0x80651100` to `0x80651118`, so the unit's `.sdata2` split now starts at
+`0x80651100` instead of `0x80651110` and its rule renames and globalizes all
+three constants. `fn_800389E0` takes an `s16` value, as other units declare
+it, and the values are `s16` locals named by channel.
+
+`fn_8006B96C` and `fn_801F0CB0` address file-local static data from one pooled
+base. The event tables of `fn_8006B96C` at `lbl_80243EE8` are `static const`
+arrays, and the block of `fn_801F0CB0` at `lbl_8063BEA0` is the file's static
+pool, declared as zero-initialized statics in retail address order (MWCC
+orders initialized statics by declaration). Both units use GC/1.3.2, like the
+static pool in `fn_80088060`. GC/1.3 folds pool offsets into the loads and
+stores: in `fn_8006B96C` it emits `mr r28, r5` for `addi r28, r5, 0` and loads
+`0x30(r4)` where retail adds `0x30` first, and in `fn_801F0CB0` it folds the
+member offsets `0x258` and `0x658`, which leaves it 38 lines off.
+`fn_801F0CB0` indexes its emitters as
+`effect_emitters[lbl_8064D738][index + lbl_8064D6F8 * 8]`, where
+`lbl_8064D738` is the frame's double-buffer index.
+`tools/undefine_elf_static_pool.py` now accepts an all-zero `PROGBITS` section
+and turns it into `NOBITS`, so the zero-initialized pool links as `.bss`;
+`fn_80088060` still matches.
+
+Two functions need a value held in a temporary created after an earlier call's
+result. Values removed in the same allocation pass are coloured in reverse
+order of their register numbers, so the later value takes the higher saved
+register. In `fn_800A1278` the saved position is
+`Vec800A1278 *saved = &state->work->position;`. The load of `state->work` then
+gets its own temporary after the `context` call result, and add propagation
+folds the `0x68` offset into the stores, so that value and `context` take
+`r31` and `r30` as in retail. Loading `state->work` into a local is 12 lines
+off, with or without casts. `state` is the callback argument,
+`State800A1278 *state = arg;`; a typed `State800A1278 *` parameter is 22 lines
+off.
+
+In `fn_8007BD40` the velocity is `s8 velocity[3]` and the damping step is a
+`for (i = 0; i < 3; i++)` loop. After the back end unrolls the loop, its
+array-register pass gives the three elements new registers, numbered after the
+call result held in `state`, which puts the first element in `r31` and `state`
+in `r30` as in retail. The pass only runs when the loop transforms have
+removed a loop and constant propagation has changed something. When it drops
+an array whose address is taken, it also drops every array declared ahead of
+that one, so `velocity` has to be declared after `color`, whose address is
+passed to `fn_801FD880`; declared before it, the array stays on the stack and
+the function is 127 lines off. With `s8 x, y, z` locals it is 36 lines off,
+and with a one-element array for `x` alone, `x` and `state` stay swapped (24
+lines).
+
+`fn_80130434` reads the runtime in its loop test,
+`if ((runtime = object->runtime)->ids[i] != -1)`, which makes the load a
+front-end temporary numbered after the loop counter; as a separate statement
+it is 26 lines off. `fn_80133510` declares its locals at function scope in the
+order `ez`, `ey`, `ex`, `offset`, `iterator`, `i`, `selected`, `best`, since
+block-scoped locals number below all function-scoped ones, and keeps an
+explicit byte offset in its first loop, read through
+`ENTRY_AT(manager, offset)`. Indexing `manager->entries[i]` makes the offset a
+compiler-created induction variable (24 lines off), and a local entry pointer
+is 147 lines off. `fn_801950D4` halves the width into `int half = width >> 1`,
+since a `u8` adds a mask, and writes `width - half` at each use; the three
+split pairs as a loop are 91 lines off and as an inline helper 95.
+`fn_8014A6BC` advances its mask with `bit = bit << 1`; `bit <<= 1` is 12 lines
+off.
+
+`fn_800606BC` and `fn_8008D5D4` take an integer handle and copy it to a
+pointer local, `void *owner = (void *)arg;`. The conversion keeps the copy;
+with a pointer parameter the copy is removed and the functions are 17 and 18
+lines off. `fn_801D84F4` copies its callback argument to
+`Object *object = arg;`, declared after `count`. `fn_801F3528` takes its
+`Color8` by value and stores the whole color to `lbl_8064C384` before the four
+channels; storing it after the channels is 26 lines off.

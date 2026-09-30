@@ -44,14 +44,18 @@ extern void fn_8019B134(void*, int);
 extern void fn_801D7998(Point3s*, Point3s*, Object*);
 extern void fn_801D0E78(Object*);
 
-void fn_801D84F4(Object* object)
+void fn_801D84F4(void* arg)
 {
     Point3s points[8];
-    u8 flags = *(volatile u8*)&object->state.flags;
-    register Point3s* line;
+    u8 flags;
+    Point3s* line;
     s16 count;
-    State* state = &object->state;
+    Object* object = arg;
+    State* state;
     int i;
+
+    state = &object->state;
+    flags = state->flags;
 
     if ((flags & 5) == 0 &&
         fn_80201814(state->first) == 0) {
@@ -78,14 +82,14 @@ void fn_801D84F4(Object* object)
         points[i].z = (s16)object->z;
 
         if (state->entries[i] != 0) {
-            if ((object->state.flags & 8) != 0)
+            if ((state->flags & 8) != 0)
                 fn_8017FD6C(state->entries[i]);
             else
                 fn_8019B134(state->entries[i], 0);
         }
     }
 
-    if ((object->state.flags & 8) == 0) {
+    if ((state->flags & 8) == 0) {
         for (i = 0; i < count - 1; i++) {
             fn_801D7998(line, line + 1, object);
             line++;

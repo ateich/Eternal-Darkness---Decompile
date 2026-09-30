@@ -9,8 +9,6 @@ extern float fn_8003315C(float);
 extern float fn_80048C2C(float);
 extern const float lbl_80650870;
 extern const float lbl_80650878;
-extern const double lbl_806508E0;
-extern const double lbl_806508E8;
 
 void fn_8017A7D4(const Vec4* left, const Vec4* right, float amount,
                  Vec4* output)
@@ -22,8 +20,8 @@ void fn_8017A7D4(const Vec4* left, const Vec4* right, float amount,
     float left_scale;
     float right_scale;
 
-    if (lbl_806508E0 + dot > lbl_806508E8) {
-        if (lbl_806508E0 - dot > lbl_806508E8) {
+    if (1.0 + dot > 0.01f) {
+        if (1.0 - dot > 0.01f) {
             float angle = fn_8003315C(dot);
             float sine = fn_80048C2C(angle);
             float offset = amount * angle;

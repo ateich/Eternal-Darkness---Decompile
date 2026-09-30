@@ -23,12 +23,12 @@ typedef struct Values8008D5D4 {
     short value;
 } Values8008D5D4;
 
-/* NonMatching: behavior-complete, size-exact C; register allocation differs. */
-int fn_8008D5D4(void* object, void* effect)
+int fn_8008D5D4(int arg, void* effect)
 {
+    void* mode;
+    void* object = (void*)arg;
     void* target;
     int value;
-    void* mode;
     int flags;
     int state;
     Runtime8008D5D4* runtime;

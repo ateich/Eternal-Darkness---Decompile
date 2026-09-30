@@ -8,30 +8,22 @@ typedef struct Object {
     u16 state;
 } Object;
 
-extern float lbl_806500A0;
-extern float lbl_806500C4;
-extern float lbl_806500C8;
+extern const float lbl_806500C4;
 
 void fn_80120B58(Object* object)
 {
     if ((object->state & 2) && !(object->state & 0x200)) {
-        float value = object->value;
-        float decrement = object->decrement;
-        float minimum = lbl_806500A0;
-        object->value = value - decrement;
-        if (object->value <= minimum) {
-            object->value = minimum;
+        object->value -= object->decrement;
+        if (object->value <= 0.0f) {
+            object->value = 0.0f;
             object->state = 0;
         }
     }
 
     if (object->state & 1) {
-        float value = object->value;
-        float increment = lbl_806500C4;
-        float maximum = lbl_806500C8;
-        object->value = value + increment;
-        if (maximum == object->value) {
-            object->value = maximum;
+        object->value += lbl_806500C4;
+        if (object->value == 250.0f) {
+            object->value = 250.0f;
         }
     }
 }

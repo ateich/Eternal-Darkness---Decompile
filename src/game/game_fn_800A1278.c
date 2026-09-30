@@ -61,15 +61,16 @@ extern const Vec800A1278 lbl_802396E0;
 extern float lbl_8064EE68;
 extern float lbl_8064EDB8;
 
-int fn_800A1278(State800A1278* state)
+int fn_800A1278(void* arg)
 {
     int index;
     Context800A1278* context;
-    Work800A1278* work;
-    void* transform;
-    Vec800A1278* position;
+    Vec800A1278* saved;
     Info800A1278* info;
     void* object;
+    State800A1278* state = arg;
+    void* transform;
+    Vec800A1278* position;
     Vec800A1278 value;
     Vec800A1278 offset;
     int i;
@@ -77,19 +78,13 @@ int fn_800A1278(State800A1278* state)
     context = fn_8006ED3C(state, 0x23, &index);
     object = fn_80201814(state->resource);
     transform = fn_80201BC8(object);
-    work = state->work;
+    saved = &state->work->position;
     position = fn_8011F770(transform);
     fn_8011F114(&value, transform);
     fn_80128EE4(transform);
 
     if (context->counter == 0) {
-        {
-            u32 x = position->bits[0];
-            u32 y = position->bits[1];
-            work->position.bits[0] = x;
-            work->position.bits[1] = y;
-            work->position.bits[2] = position->bits[2];
-        }
+        *saved = *position;
         context->counter++;
     }
 
@@ -106,7 +101,7 @@ int fn_800A1278(State800A1278* state)
             state->entries[index].field_00 = i;
             fn_8006DEF8(state, context->event, 0, 0, 0);
         }
-        *position = work->position;
+        *position = *saved;
         fn_8012AC74(transform, &value, 3);
         fn_8020104C(0x51, 0, info->inner->resource, 0, lbl_8064EDB8);
     }

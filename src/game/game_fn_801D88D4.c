@@ -7,28 +7,26 @@ extern int fn_80201AE4(void);
 extern void* fn_80201B8C(void*);
 extern int fn_80038308(void*, int, s16*);
 extern int fn_80038464(void*, int, s16*);
-extern void fn_800389E0(void*, int, int, int);
-extern const double lbl_80651100;
-extern const double lbl_80651108;
+extern void fn_800389E0(void*, int, s16, int);
 
 void fn_801D88D4(int flags, int subject)
 {
     void* object = fn_80201814(subject);
     int local_player;
-    int value;
-    s16 case2_value;
-    int value1;
-    s16 case1_second;
-    s16 case1_third;
-    s16 case1_first;
-    s16 case2_first;
-    s16 case4_second;
-    s16 case4_first;
-    s16 case8_fourth;
-    s16 case8_third;
-    s16 case8_second;
-    s16 case8_initial;
-    s16 case8_first;
+    s16 value;
+    s16 value0;
+    s16 value1;
+    s16 case1_current;
+    s16 case1_max;
+    s16 case1_max3;
+    s16 case2_current;
+    s16 case4_current;
+    s16 case4_max;
+    s16 case8_current0;
+    s16 case8_current1;
+    s16 case8_max0;
+    s16 case8_max3;
+    s16 case8_max1;
 
     if (object == 0) {
         return;
@@ -37,7 +35,8 @@ void fn_801D88D4(int flags, int subject)
     if (subject == fn_80201AE4()) {
         local_player = 1;
     } else {
-        flags = (flags & ~0xF) | 1;
+        flags &= ~0xF;
+        flags |= 1;
         local_player = 0;
     }
     if (*(u8*)((u8*)fn_80201B8C(object) + 0x9F) == 13) {
@@ -46,78 +45,78 @@ void fn_801D88D4(int flags, int subject)
 
     switch (flags & 0xF) {
     case 1:
-        if (fn_80038464(object, 3, &case1_first)) {
-            fn_800389E0(object, 3, case1_first, 0);
+        if (fn_80038464(object, 3, &case1_max3)) {
+            fn_800389E0(object, 3, case1_max3, 0);
         }
-        fn_80038308(object, 0, &case1_second);
-        fn_80038464(object, 0, &case1_third);
+        fn_80038308(object, 0, &case1_current);
+        fn_80038464(object, 0, &case1_max);
         switch (flags & 0x70000) {
         case 0x10000:
-            value = (int)(lbl_80651100 * case1_third + case1_second);
+            value = (s16)(0.25 * case1_max + case1_current);
             break;
         case 0x20000:
-            value = (int)(lbl_80651108 * case1_third + case1_second);
+            value = (s16)(0.4 * case1_max + case1_current);
             break;
         case 0x40000:
-            value = case1_third;
+            value = case1_max;
             break;
         }
         fn_800389E0(object, 0, value, local_player);
         break;
     case 2:
-        fn_80038308(object, 2, &case2_first);
+        fn_80038308(object, 2, &case2_current);
         switch (flags & 0x70000) {
         case 0x10000:
-            case2_value = case2_first + 30;
+            value = case2_current + 30;
             break;
         case 0x20000:
-            case2_value = case2_first + 40;
+            value = case2_current + 40;
             break;
         case 0x40000:
-            case2_value = case2_first + 50;
+            value = case2_current + 50;
             break;
         }
-        fn_800389E0(object, 2, case2_value, local_player);
+        fn_800389E0(object, 2, value, local_player);
         break;
     case 4:
-        fn_80038308(object, 1, &case4_second);
-        fn_80038464(object, 1, &case4_first);
+        fn_80038308(object, 1, &case4_current);
+        fn_80038464(object, 1, &case4_max);
         switch (flags & 0x70000) {
         case 0x10000:
-            value = (int)(lbl_80651100 * case4_first + case4_second);
+            value = (s16)(0.25 * case4_max + case4_current);
             break;
         case 0x20000:
-            value = (int)(lbl_80651108 * case4_first + case4_second);
+            value = (s16)(0.4 * case4_max + case4_current);
             break;
         case 0x40000:
-            value = case4_first;
+            value = case4_max;
             break;
         }
         fn_800389E0(object, 1, value, local_player);
         break;
     case 8:
-        if (fn_80038464(object, 3, &case8_initial)) {
-            fn_800389E0(object, 3, case8_initial, 0);
+        if (fn_80038464(object, 3, &case8_max3)) {
+            fn_800389E0(object, 3, case8_max3, 0);
         }
-        fn_80038308(object, 0, &case8_fourth);
-        fn_80038308(object, 1, &case8_third);
-        fn_80038464(object, 0, &case8_second);
-        fn_80038464(object, 1, &case8_first);
+        fn_80038308(object, 0, &case8_current0);
+        fn_80038308(object, 1, &case8_current1);
+        fn_80038464(object, 0, &case8_max0);
+        fn_80038464(object, 1, &case8_max1);
         switch (flags & 0x70000) {
             case 0x10000:
-                value = (int)(lbl_80651100 * case8_second + case8_fourth);
-                value1 = (int)(lbl_80651100 * case8_first + case8_third);
+                value0 = (s16)(0.25 * case8_max0 + case8_current0);
+                value1 = (s16)(0.25 * case8_max1 + case8_current1);
                 break;
             case 0x20000:
-                value = (int)(lbl_80651108 * case8_second + case8_fourth);
-                value1 = (int)(lbl_80651108 * case8_first + case8_third);
+                value0 = (s16)(0.4 * case8_max0 + case8_current0);
+                value1 = (s16)(0.4 * case8_max1 + case8_current1);
                 break;
             case 0x40000:
-                value = case8_second;
-                value1 = case8_first;
+                value0 = case8_max0;
+                value1 = case8_max1;
                 break;
         }
-        fn_800389E0(object, 0, value, local_player);
+        fn_800389E0(object, 0, value0, local_player);
         fn_800389E0(object, 1, value1, local_player);
         break;
     }

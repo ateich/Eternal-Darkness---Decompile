@@ -2,7 +2,14 @@ typedef signed int s32;
 typedef unsigned char u8;
 typedef unsigned short u16;
 
-extern u8 lbl_80243EE8[];
+static const u16 mode1_events[10] = {0x1E, 0x69, 0x97, 0xA1, 0xA7, 0xF3, 0xF8, 0xFD, 0xFF, 0x101};
+static const u16 mode2_events[5] = {0x1B, 0x45, 0x7B, 0xF5, 0xFF};
+static const u16 mode5_events[8] = {0x05, 0x27, 0x53, 0x9D, 0xB9, 0xBF, 0xD5, 0x124};
+static const s32 mode4_requirements[9] = {0x221, 0x269, 0x2C2, 0x3C5, 0x20B, 0x1E6, 0x1E5, 0x20C, 0x20D};
+static const u16 mode4_events[9] = {0x55, 0x64, 0x66, 0x77, 0x8B, 0xAA, 0xAC, 0x129, 0x12A};
+static const s32 mode6_requirements[6] = {0x244, 0x244, 0x171, 0x23F, 0x34A, 0x243};
+static const u16 mode6_events[6] = {0x1B, 0x159, 0x20, 0x43, 0xCA, 0xFF};
+
 extern s32 lbl_8064B52C;
 extern u16 lbl_8064B530;
 extern u16 lbl_8064B534;
@@ -11,13 +18,13 @@ extern s32 fn_801E79FC(void *, s32);
 
 s32 fn_8006B96C(s32 event, s32 mode)
 {
-    u8 *base = lbl_80243EE8;
+    const u16 *list;
+    s32 i;
     s32 count = 0;
     s32 result = -1;
-    s32 *requirements = 0;
-    u16 *events = 0;
+    const s32 *requirements = 0;
+    const u16 *events = 0;
     s32 require_set = 1;
-    s32 i;
 
     switch (mode) {
     case 9:
@@ -57,11 +64,10 @@ s32 fn_8006B96C(s32 event, s32 mode)
             }
             break;
         default: {
-            u16 *list = (u16 *)(base + 0x54);
-            s32 *list_requirements = (s32 *)(base + 0x30);
+            list = mode4_events;
             for (i = 0; i < 9; list++, i++) {
                 if (event == *list) {
-                    if (fn_801E79FC(lbl_8064C4E0, list_requirements[i]) != 0) {
+                    if (fn_801E79FC(lbl_8064C4E0, mode4_requirements[i]) != 0) {
                         result = i;
                     }
                     break;
@@ -81,8 +87,8 @@ s32 fn_8006B96C(s32 event, s32 mode)
         count = 1;
         break;
     case 6:
-        events = (u16 *)(base + 0x80);
-        requirements = (s32 *)(base + 0x68);
+        events = mode6_events;
+        requirements = mode6_requirements;
         count = 6;
         if (event == 0xCA) {
             require_set = 0;
@@ -103,15 +109,15 @@ s32 fn_8006B96C(s32 event, s32 mode)
         }
         break;
     case 1:
-        events = (u16 *)(base + 0x00);
+        events = mode1_events;
         count = 10;
         break;
     case 2:
-        events = (u16 *)(base + 0x14);
+        events = mode2_events;
         count = 5;
         break;
     case 5:
-        events = (u16 *)(base + 0x20);
+        events = mode5_events;
         count = 8;
         break;
     case 10:
