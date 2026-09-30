@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "assignment_id": "8e22a8d9-4713-434b-a543-508f47c45dd0",
+  "attempt": 4,
+  "base_commit": "f7de4c634793e6f910b9ed7f64443a28d117346e",
+  "target": "fn_80208310",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-8e22a8d9-4713-434b-a543-508f47c45dd0.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-8e22a8d9-4713-434b-a543-508f47c45dd0-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-8e22a8d9-4713-434b-a543-508f47c45dd0.log",
+    "eternal-darkness-decomp/reports/GEDE01/dol-sha1-8e22a8d9-4713-434b-a543-508f47c45dd0.log",
+    "eternal-darkness-decomp/reports/GEDE01/legal-audit-8e22a8d9-4713-434b-a543-508f47c45dd0.log",
+    "eternal-darkness-decomp/reports/GEDE01/fndiff-8e22a8d9-4713-434b-a543-508f47c45dd0.log",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-8e22a8d9-4713-434b-a543-508f47c45dd0.txt"
+  ],
+  "divergence": "Size-exact 764-byte honest C reconstruction scores 98.05235% on canonical and relocation-strict objdiff. Attempt 4 modeled the SI MMIO region as a volatile register-layout struct so the status field address was derived from a separately live base object; GC/1.2.5n canonicalized this new hypothesis to the prior codegen. Retail still forms r29=r30+0x34, loads COMCSR before materializing Si_802FCA20, and assigns inputBytes/count to r6/r7, while generated code coalesces r29 with the SI base using stwu and assigns inputBytes/count to r7/r6. All relocation targets and zero addends match."
+}

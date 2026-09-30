@@ -17,7 +17,15 @@ extern u64 TypeTime_80640C88[4];
 extern u64 lbl_80640CA8[4];
 extern u64 __OSGetSystemTime(void);
 
-volatile u32 __SIRegs[64] : 0xCC006400;
+typedef struct SIRegisters {
+    u32 poll[13];
+    u32 status;
+    u32 comcsr;
+    u32 unused_3c[17];
+    u32 ram[32];
+} SIRegisters;
+
+volatile SIRegisters __SIRegs : 0xCC006400;
 
 u32 fn_80208310(void)
 {
@@ -30,10 +38,10 @@ u32 fn_80208310(void)
     u32 error;
     SIControl* si;
 
-    sr = &__SIRegs[13];
-    error = __SIRegs[14];
+    sr = &__SIRegs.status;
+    error = __SIRegs.comcsr;
     si = &Si_802FCA20;
-    __SIRegs[13] = (__SIRegs[13] | 0x80000000) & ~1;
+    __SIRegs.status = (__SIRegs.status | 0x80000000) & ~1;
 
     if (si->chan != -1) {
         lbl_80640CA8[si->chan] = __OSGetSystemTime();
@@ -42,13 +50,13 @@ u32 fn_80208310(void)
         count = *inputBytes >> 2;
 
         for (i = 0; i < count; i++) {
-            *input++ = __SIRegs[32 + i];
+            *input++ = __SIRegs.ram[i];
         }
 
         count = *inputBytes & 3;
         if (count != 0) {
             u8* bytes = (u8*)input;
-            data = __SIRegs[32 + i];
+            data = __SIRegs.ram[i];
             for (i = 0; i < count; i++) {
                 *bytes++ = data >> ((3 - i) * 8);
             }
