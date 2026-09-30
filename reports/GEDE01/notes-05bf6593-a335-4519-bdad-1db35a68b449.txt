@@ -1,0 +1,29 @@
+Assignment attempt 6: fn_80208BA8 (SIInit)
+Accepted base: dbb5df67fba71d6496f8ac8b11bc522a869e3cc6
+
+Studied preserved envelopes from commits 7ad0b32, 46d9462, 292b623,
+and 5555ff2, and attempt-5 raw instruction and relocation reports.
+The accepted base already contains the strongest independent C TU and
+NonMatching registration. No source recovery or registration edit was needed.
+
+New hypothesis: integer promotion and constant lowering for a narrower, wider,
+unsigned or enum channel local might change virtual-register priority without
+changing the emitted 32-bit stores. Tested signed char, signed short, signed
+long, signed long long, unsigned complement, and enum -1 locals, preserving
+canonical GC/1.2.5n settings. All produced the same 164-byte, 98.78049% result.
+
+Additional hypothesis: deriving poll/call zero from the channel assignment
+result might alter the lifetime of the constant relative to the packet base.
+Three variants retained 98.78049%; call-from-poll with ~chan scored 92.68293%;
+reverse assignment-tree form regressed to 160 bytes and 85.731705%.
+Raw compiler and instruction-diff outputs for all probes are preserved.
+The original strongest source was restored exactly; no alternate TU remains.
+
+Final verification commands and raw outputs accompany this report.
+Canonical objdiff uses project defaults. Relocation-strict uses
+-c functionRelocDiffs=all. Full-width readelf tables independently expose
+relocation types, offsets, symbol names and addends for both objects.
+The DOL hash verifies the normal NonMatching build, which links the retail
+split for this function; it does not establish that this C function matches.
+No compiler settings, policies, neighboring sources, runtime, README, or
+tracked global progress files were edited. Pre-existing CLAUDE.md edit excluded.
