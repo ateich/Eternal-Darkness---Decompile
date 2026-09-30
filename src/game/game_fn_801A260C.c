@@ -30,10 +30,7 @@ typedef struct EffectState {
     u8 field_30;
 } EffectState;
 
-extern float lbl_80650CA8;
 extern float lbl_80650D10;
-extern float lbl_80650D28;
-extern float lbl_80650D2C;
 extern u32 lbl_80607440[];
 extern int lbl_8064D18C;
 extern void fn_801EF384(void*);
@@ -44,9 +41,6 @@ int fn_801A260C(u8* object)
     EffectState* state;
     Particle* particle;
     float scale;
-    float alpha_scale;
-    float alpha_offset;
-    float alpha_max;
     int count;
     int i;
 
@@ -60,10 +54,6 @@ int fn_801A260C(u8* object)
         scale = state->age;
         state->age = state->age + state->step;
     }
-
-    alpha_scale = lbl_80650D28;
-    alpha_offset = lbl_80650D2C;
-    alpha_max = lbl_80650CA8;
 
     for (i = 0; i < count; i++, particle++) {
         int clamped;
@@ -93,8 +83,7 @@ int fn_801A260C(u8* object)
         particle->colour1 = lbl_80607440[state->values[i]];
         particle->colour2 = lbl_80607440[state->values[i]];
         particle->colour3 = lbl_80607440[state->values[i]];
-        alpha = alpha_scale *
-            (alpha_offset + (alpha_max - state->values[i]) / alpha_max);
+        alpha = 40.0f * (0.5f + (255.0f - state->values[i]) / 255.0f);
         particle->alpha = (u8)(alpha * scale);
     }
 

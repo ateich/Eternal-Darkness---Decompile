@@ -1,3 +1,4 @@
+typedef unsigned short u16;
 typedef unsigned int u32;
 
 typedef struct StreamState {
@@ -14,12 +15,13 @@ extern volatile StreamState lbl_805BB1E0;
 extern int OSDisableInterrupts(void);
 extern void OSRestoreInterrupts(int);
 
-/* NonMatching: size-exact; retail uses r4 for one dead volatile load, generated uses r3. */
+#pragma opt_dead_assignments off
 u32 fn_8015DF60(void)
 {
     int interrupts;
     int amount;
-    int unused;
+    int available;
+    u16 space;
 
     interrupts = OSDisableInterrupts();
     if (lbl_805BB1E0.read == lbl_805BB1E0.limit) {
@@ -35,7 +37,7 @@ u32 fn_8015DF60(void)
         amount = 0x10000U < lbl_805BB1E0.write - lbl_805BB1E0.cursor
                      ? 0x10000
                      : lbl_805BB1E0.write - lbl_805BB1E0.cursor;
-        unused = 0x10000U < lbl_805BB1E0.boundary - lbl_805BB1E0.read
+        space = 0x10000U < lbl_805BB1E0.boundary - lbl_805BB1E0.read
                      ? 0x10000
                      : lbl_805BB1E0.boundary - lbl_805BB1E0.read;
     } else {
@@ -44,8 +46,9 @@ u32 fn_8015DF60(void)
                      : lbl_805BB1E0.end - lbl_805BB1E0.cursor;
     }
 
-    unused = lbl_805BB1E0.limit - lbl_805BB1E0.read;
-    amount = amount < unused ? amount : lbl_805BB1E0.limit - lbl_805BB1E0.read;
+    available = lbl_805BB1E0.limit - lbl_805BB1E0.read;
+    amount = amount < available ? amount : lbl_805BB1E0.limit - lbl_805BB1E0.read;
     OSRestoreInterrupts(interrupts);
     return (amount + 31) & ~31;
 }
+#pragma opt_dead_assignments reset

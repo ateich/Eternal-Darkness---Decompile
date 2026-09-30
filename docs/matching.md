@@ -785,3 +785,66 @@ unit defines it, leaving the link unresolved.
 After normalization, objdiff reports 236/236 code bytes and 156/156 data
 bytes at 100% under `function_reloc_diffs=name_address`. The whole-DOL SHA-1
 remains `ea24b6af954876ce072562ff39cdb4c81d32be1f`.
+
+## Prototype types, shared address temporaries, and saved parameters
+
+Twenty-two further functions match. Each builds with the whole-DOL SHA-1
+`ea24b6af954876ce072562ff39cdb4c81d32be1f` and reports 100% under both the
+default and `function_reloc_diffs=name_address` objdiff settings.
+
+Several fixes are declaration corrections. `fn_80064E2C` passes its `context`
+to `fn_80036D38`, `fn_800389E0` and `fn_802021AC`, whose definitions take
+`void *`. With the old `u32` parameter and `s32` prototypes, the compiler
+keeps the conversion `(int)context` in an extra temporary, and
+`original_first` and `is_current_owner` receive each other's registers (`r15`
+and `r16`) wherever the two are declared. With `void *` throughout, `s16` for
+`amount`, and `original_first` declared before `event_value`, the function
+matches.
+`fn_800DBF60` uses the `s16` return type of `fn_801D3A24`; the old `int`
+prototype left a dead truncation that the allocator deleted, which made the
+post-allocation scheduler reorder a block that retail leaves alone.
+`fn_800531F0` stores into an `s8` field, whose redundant sign extension is
+deleted between the scheduling passes in the same way retail's was.
+`fn_801E5D94` takes its colour as a four-byte `Color` passed by value.
+
+Three functions had source errors. `fn_80193F3C` stores `center_x + x1` for
+the third group's first point, not `center_x - x0`. `fn_800D9064` calls
+`fn_801E8328(20, &lbl_803254C8)` with two arguments like every other call
+site. `fn_8014BEC4` passes its first parameter to `fn_80201814`, and
+`fn_801D1F78` passes the result of `fn_80201814` to `fn_80201BC8`; retail
+keeps the value in `r3` for both calls.
+
+`fn_801D1F78` fills its first array with `projected[i]` and starts the sort
+loop with `best_index = 0; best = projected[best_index];`. After constant
+propagation that address is `projected + 0`, the same expression as the first
+loop's pointer start, and the compiler computes it once. The entry block then
+holds the `addi` of `projected` and a copy of it. Register allocation merges
+the two and deletes the copy, so the block is scheduled again after
+allocation, which gives the retail order: the `lbz` of `count` first and the
+`addi` before the copies of the first and third parameters. The later load
+uses `0xc4(r1)` directly. The circle constant is the literal `6.2831855f`. The
+earlier `volatile` qualifiers are no longer needed.
+
+`fn_800D3598`, `fn_800D9278` and `fn_800BFF14` use a `saved_object` or
+`saved_event` copy with function-scoped `opt_propagation off`, the same form
+as `fn_800C5258`. `fn_800C4AA0` copies both parameters into locals, and
+`fn_801A53C4` walks a local `output` pointer taken from its `buffer`
+parameter. In each case the copy changes which value is coloured first.
+
+Declaration order sets the register order in `fn_801E3644`, `fn_80053048`
+and `fn_80064E2C`. `fn_801E3644` needs separate `effect_a` and `effect_b`
+locals for its two flag branches; one shared local, at function or block
+scope, is 16 lines off. `fn_80053048` gives its inner loop its own `slot`
+counter instead of reusing `type`. `fn_800173CC` holds both sides of its first
+comparison in `u16` locals and drops the `register` keywords.
+
+`fn_8014C68C` copies the query's two-word `xy` pair as one member and passes
+the float arguments as the constants themselves, with `opt_common_subs off`.
+`fn_8011EE04` copies three words as one structure, also with
+`opt_common_subs off`. `fn_801A260C` writes its alpha constants as literals.
+`fn_80173F04` and `fn_8011EE04` declare their data non-`const`, and
+`fn_801A53C4` and `fn_8014C68C` declare float data `const`;
+each qualifier moves a load to its retail position. `fn_8015DF60` keeps the
+second bound computation, stored to an unused `u16`, under
+`opt_dead_assignments off`; retail performs those loads and discards the
+result. `fn_8019E0B0` needed only its `.sdata2` constant name.

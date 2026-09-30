@@ -1,16 +1,18 @@
 typedef unsigned char u8;
 typedef unsigned short u16;
 
-extern float lbl_80650D9C;
+extern const float lbl_80650D9C;
 extern u8 lbl_80607130[];
 
-void fn_801A53C4(u16* output, u8 count, float scale)
+void fn_801A53C4(u16* buffer, u8 count, float scale)
 {
+    u16* output;
     u16* second;
     int pass;
     int i;
     float scaled;
 
+    output = buffer;
     second = (u16*)((u8*)output + *(u16*)(lbl_80607130 + 2) * 4);
     scaled = lbl_80650D9C * scale;
     for (pass = 0; pass < 2; pass++) {

@@ -60,5 +60,5 @@ void fn_800D9064(void *object, void *arg1, void *arg2)
     lbl_803254C8.callback = fn_8014CA98;
     lbl_803254C8.enabled = 0;
     lbl_803254C8.mode = 4;
-    fn_801E8328(20);
+    fn_801E8328(20, &lbl_803254C8);
 }

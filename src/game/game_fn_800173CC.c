@@ -28,19 +28,19 @@ extern s32 fn_80205134(void*);
 extern u32 fn_80157BF4(void*);
 extern void fn_80157A28(void*, u8);
 
-s32 fn_800173CC(void* arg)
+s32 fn_800173CC(void* script)
 {
-    register void* target;
-    register u8 result;
-    register void* target_data;
-    register void* script;
-    register void* entry;
-    register void* related;
-    register void* temp;
-    register s32 value;
-    register void* object;
+    void* target;
+    u8 result;
+    void* target_data;
+    void* entry;
+    void* related;
+    void* temp;
+    s32 kind;
+    u16 target_kind;
+    u16 temp_kind;
+    void* object;
 
-    script = arg;
     related = fn_80201814(fn_80201B44());
     fn_80205288((s32)fn_80201B3C());
     result = 0;
@@ -55,31 +55,30 @@ s32 fn_800173CC(void* arg)
         target_data = fn_80201C24(target);
         temp = fn_801A7778(fn_8004918C());
         if (temp != 0) {
-            value = (u16)fn_80158234(target_data);
-            if ((u16)fn_80158234(temp) == (u16)value &&
+            target_kind = fn_80158234(target_data);
+            temp_kind = fn_80158234(temp);
+            if (temp_kind == target_kind &&
                 (u16)fn_80157994(target_data) != 0 &&
                 (u16)fn_80157994(temp) == 0) {
                 fn_80157C98(temp, 0x80, 0x20);
             }
         }
 
-        temp = (void*)(u16)fn_80158234(target_data);
+        kind = (u16)fn_80158234(target_data);
         related = fn_802051A4(fn_80201C2C(related));
         while (related != 0) {
             entry = fn_80201814(fn_80205134(related));
             if (entry != 0) {
                 object = fn_80201C24(entry);
                 if (fn_80157BF4(object) == 4) {
-                    if ((s32)temp == (u16)fn_80158234(object) &&
+                    if (kind == (u16)fn_80158234(object) &&
                         target != entry) {
                         result = 1;
-                        value = fn_80157994(object);
                         fn_80157A28(object,
-                                   (u8)(fn_80157994(target_data) + value));
+                                   (u8)(fn_80157994(target_data) + fn_80157994(object)));
                     }
                 } else if (fn_80157BF4(object) == 3) {
-                    value = (u16)fn_80158234(target_data);
-                    if ((u16)fn_80158234(object) == (u16)value &&
+                    if ((u16)fn_80158234(object) == (u16)fn_80158234(target_data) &&
                         (u16)fn_80157994(target_data) != 0 &&
                         (u16)fn_80157994(object) == 0) {
                         fn_80157C98(object, 0x80, 0x20);

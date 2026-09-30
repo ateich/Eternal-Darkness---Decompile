@@ -26,14 +26,13 @@ extern u8* fn_80183454(void*, void*, void*);
 extern void* fn_80148008(Vec3f*, Descriptor*, EffectParams*, u8* (*)(void*, void*, void*));
 extern void* fn_80156938(void*);
 extern void fn_8017FF1C(void*, int);
-extern const u32 lbl_80651CA8;
-extern const u16 lbl_80651CAC;
-extern const Value32 lbl_806506FC;
+extern u32 lbl_80651CA8;
+extern u16 lbl_80651CAC;
+extern Value32 lbl_806506FC;
 extern const char lbl_8024FF00[];
 
-int fn_80173F04(void* arg)
+int fn_80173F04(void* state)
 {
-    void* state = arg;
     int resource;
     int kind;
     int arg3;

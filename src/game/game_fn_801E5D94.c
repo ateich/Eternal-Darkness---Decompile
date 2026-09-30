@@ -14,9 +14,13 @@ typedef struct {
 
 #define va_start(ap, last) __builtin_va_info(&(ap))
 
+typedef struct Color {
+    u8 r, g, b, a;
+} Color;
+
 typedef struct TextDescriptor {
     float scale;
-    u32 color;
+    Color color;
     s16 x;
     s16 y;
     u32 reserved;
@@ -38,12 +42,11 @@ extern void fn_801E6A8C(TextDescriptor*);
 extern void fn_801E7DCC(const char*, ...);
 
 TextDescriptor* fn_801E5D94(s16 x, s16 y, u8 font, s8 align, float scale,
-                             u32 flags, u32* color, u16 phase,
+                             u32 flags, Color color, u16 phase,
                              const char* format, ...)
 {
     va_list args;
     TextDescriptor* text_ptr;
-    u32 color_value;
     int index;
 
     text_ptr = lbl_80633440;
@@ -64,13 +67,12 @@ TextDescriptor* fn_801E5D94(s16 x, s16 y, u8 font, s8 align, float scale,
     va_start(args, format);
     fn_800F9E2C((char*)text_ptr->text, format, args);
     text_ptr->x = x;
-    color_value = *color;
     text_ptr->y = y;
     text_ptr->font = font;
     text_ptr->align = align;
     text_ptr->scale = scale;
     text_ptr->flags = flags;
-    text_ptr->color = color_value;
+    text_ptr->color = color;
     text_ptr->phase = phase;
     text_ptr->width = 0;
     fn_801E5920((char*)text_ptr->text);

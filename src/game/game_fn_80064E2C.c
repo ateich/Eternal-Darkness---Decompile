@@ -19,7 +19,7 @@ extern u8 lbl_803003C8[];
 extern float lbl_8064E698;
 extern float lbl_8064E69C;
 
-extern u8 *fn_80036D38(s32 context);
+extern u8 *fn_80036D38(void *object);
 extern s32 fn_801A7488(s32 event);
 extern void fn_801A7744(EventPosition *position, s32 event);
 extern s32 fn_801A7498(s32 event);
@@ -28,14 +28,14 @@ extern int fn_80201B44();
 extern u32 fn_801A74C0(s32 event);
 extern void *fn_80201814();
 extern s32 fn_80071D5C(void *object);
-extern s32 fn_801A74F8(s32 event);
-extern void fn_801A7518(s32 event, s32 value);
+extern s16 fn_801A74F8(s32 event);
+extern void fn_801A7518(s32 event, s16 value);
 extern unsigned long long fn_8020123C();
 extern int fn_801E79FC(void*, int);
 extern void fn_801E7974(s32 object, s32 value);
 extern void fn_80006954(s32 value);
-extern s32 fn_800389E0(s32 context, s32 index, s16 value, s32 active);
-extern s32 fn_802021AC(s32 context);
+extern s32 fn_800389E0(void *object, s32 index, s16 value, s32 active);
+extern s32 fn_802021AC(void *object);
 extern s32 fn_801A717C(void);
 extern void fn_801A74A0(s32 event, s32 owner);
 extern void fn_801A74A8(s32 event, s32 owner);
@@ -46,7 +46,7 @@ extern void *fn_80201BC8();
 extern void fn_80120AD0(void *object, s32 zero, s32 amount, s32 kind,
                         float first, float second);
 
-s32 fn_80064E2C(u32 context, s32 event, s32 index, u16 mask, s32 amount,
+s32 fn_80064E2C(void *context, s32 event, s32 index, u16 mask, s16 amount,
                  s16 first, s16 lower)
 {
     u8 *state;
@@ -56,10 +56,10 @@ s32 fn_80064E2C(u32 context, s32 event, s32 index, u16 mask, s32 amount,
     s32 made_event;
     s32 result;
     s32 feedback;
-    s32 event_value;
-    s32 owner;
-    s32 is_current_owner;
     s16 original_first;
+    s32 event_value;
+    s32 is_current_owner;
+    s32 owner;
     s32 update_result;
     s32 has_four;
     void *object;
@@ -80,7 +80,7 @@ s32 fn_80064E2C(u32 context, s32 event, s32 index, u16 mask, s32 amount,
         s32 target = *(s32 *)(state + 0x24);
         object = fn_80201814(target);
         if (object != 0 && (!is_current_owner || fn_80071D5C(object) == 0)) {
-            s32 old_amount = fn_801A74F8(event);
+            s16 old_amount = fn_801A74F8(event);
             u32 response;
             fn_801A7518(event, amount);
             response = (u32)fn_8020123C(0xB, owner, target, event);
