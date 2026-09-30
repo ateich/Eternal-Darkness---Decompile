@@ -17,16 +17,11 @@ extern u32 fn_80208E58(s32 chan);
 
 s32 fn_80209140(s32 chan, void *data)
 {
-    SIWork *work;
-    s32 channel;
-    void *output;
-    u32 enabled;
+    register SIWork *work = &Packet_80640B68;
+    register s32 channel = chan;
+    register void *output = data;
+    u32 enabled = OSDisableInterrupts();
     s32 valid;
-
-    work = &Packet_80640B68;
-    channel = chan;
-    output = data;
-    enabled = OSDisableInterrupts();
 
     if (fn_80208E58(channel) & 0x20) {
         work->inputBuffer[channel][0] = __SIRegs[channel * 3 + 1];
