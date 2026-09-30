@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "assignment_id": "156ef996-b7c1-4f7b-97bf-151114cc973b",
+  "attempt": 1,
+  "base_commit": "61b85078f5bb0b091930d8b78b921868bee18c02",
+  "target": "fn_80208C4C",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-156ef996-b7c1-4f7b-97bf-151114cc973b.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-156ef996-b7c1-4f7b-97bf-151114cc973b-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/configure-156ef996-b7c1-4f7b-97bf-151114cc973b.log",
+    "eternal-darkness-decomp/reports/GEDE01/build-initial-156ef996-b7c1-4f7b-97bf-151114cc973b.log",
+    "eternal-darkness-decomp/reports/GEDE01/build-156ef996-b7c1-4f7b-97bf-151114cc973b.log",
+    "eternal-darkness-decomp/reports/GEDE01/dol-sha1-156ef996-b7c1-4f7b-97bf-151114cc973b.log",
+    "eternal-darkness-decomp/reports/GEDE01/legal-audit-156ef996-b7c1-4f7b-97bf-151114cc973b.log",
+    "eternal-darkness-decomp/reports/GEDE01/fndiff-156ef996-b7c1-4f7b-97bf-151114cc973b.log",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-156ef996-b7c1-4f7b-97bf-151114cc973b.txt"
+  ],
+  "divergence": "Best canonical and relocation-strict score is 98.01527%. Retail is 524 bytes and generated code is 520 bytes. MWCC assigns the SIControl base to r25 in retail but assigns it to r31 in the reconstruction, shifting the six saved parameters down by one register. At retail offsets 0x150-0x158, callback normalization uses beq, an unconditional branch, then li r4,0; generated code uses bne directly to the shared continuation and omits the unconditional branch. This four-byte shortening shifts the final OSRestoreInterrupts relocation from retail offset 0x1D4 to generated offset 0x1D0; all five relocation names, types, and addends otherwise agree."
+}
