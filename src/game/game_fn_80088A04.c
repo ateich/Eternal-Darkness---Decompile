@@ -13,55 +13,57 @@ typedef struct Int3 {
     int z;
 } Int3;
 
-typedef struct Settings {
-    s16 angle;
-    u8 pad02[0x12];
-    s16 phase;
-    u8 pad16[0x12];
-    s16 scale;
-} Settings;
+typedef struct Placement {
+    Vec3 position;
+    u8 pad0C;
+    u8 active;
+} Placement;
 
 typedef struct Work {
     u8 pad[0xC4];
     struct Work* owner;
     u8 padC8[0x84];
-    Vec3 position;
-    u8 pad158;
-    u8 active;
+    Placement placement;
 } Work;
 
-extern void *fn_8006ED3C();
-extern unsigned int fn_800FBFB0(void);
-#define fn_800FBFB0() ((int)fn_800FBFB0())
+extern void fn_8006ED3C(void*, int, int*);
+extern int fn_800FBFB0(void);
 extern void fn_801F69F0(Int3*, Vec3*, int);
-extern Settings lbl_8031D3B8;
 extern u8 lbl_8063D378[];
+
+typedef struct Rows {
+    s16 first[10];
+    s16 second[10];
+    s16 third[10];
+} Rows;
+
+extern Rows lbl_8031D3B8;
 
 int fn_80088A04(Work* work)
 {
     int index;
-    Settings* settings = &lbl_8031D3B8;
-    Work* owner = work;
+    Placement* placement;
+    Rows* rows = &lbl_8031D3B8;
 
-    fn_8006ED3C(owner, 7, &index);
-    owner = owner->owner;
-    if (owner->active == 0 && lbl_8063D378 != 0) {
+    fn_8006ED3C(work, 7, &index);
+    placement = &work->owner->placement;
+    if (placement->active == 0 && lbl_8063D378 != 0) {
         Int3 input;
         Vec3 output;
         int random;
 
-        settings->angle = fn_800FBFB0() % 512;
+        rows->first[0] = fn_800FBFB0() % 512;
         random = fn_800FBFB0() % 352;
-        settings->scale = 128;
-        input.x = settings->angle + 64;
+        rows->third[0] = 128;
+        input.x = rows->first[0] + 64;
         input.z = -1;
-        settings->phase = random;
-        input.y = settings->phase + 64;
+        rows->second[0] = random;
+        input.y = rows->second[0] + 64;
         fn_801F69F0(&input, &output, 0);
-        owner->position.x = output.x;
-        owner->position.y = output.y;
-        owner->position.z = output.z;
-        owner->active = 1;
+        placement->position.x = output.x;
+        placement->position.y = output.y;
+        placement->position.z = output.z;
+        placement->active = 1;
     }
     return 0;
 }

@@ -12,7 +12,9 @@ usage: undefine_elf_static_pool.py OBJECT SYMBOL SYMBOLS_FILE
 
 SYMBOL must already carry the retail name (objcopy --redefine-sym) and must
 be defined in symbols.txt as a `.bss` object; the object's section holding it
-must be NOBITS.
+must be NOBITS, or PROGBITS holding only zero bytes (zero-initialized statics,
+which MWCC lays out in declaration order instead of first-use order). A local
+symbol NAME at ADDRESS is passed as NAME_ADDRESS, the name it links under.
 """
 
 import re
@@ -27,7 +29,16 @@ path = Path(sys.argv[1])
 target = sys.argv[2]
 symbols_path = Path(sys.argv[3])
 
-configured = re.findall(rf"^{re.escape(target)}\s*=\s*\.bss:0x[0-9A-Fa-f]+\s*;", symbols_path.read_text(), re.MULTILINE)
+symbols_text = symbols_path.read_text()
+configured = re.findall(rf"^{re.escape(target)}\s*=\s*\.bss:0x[0-9A-Fa-f]+\s*;", symbols_text, re.MULTILINE)
+local = re.fullmatch(r"(.+)_([0-9A-Fa-f]{8})", target)
+if not configured and local:
+    # a local symbol NAME at ADDRESS links as NAME_ADDRESS
+    configured = re.findall(
+        rf"^{re.escape(local.group(1))}\s*=\s*\.bss:0x{local.group(2)}\s*;.*scope:local",
+        symbols_text,
+        re.MULTILINE | re.IGNORECASE,
+    )
 if len(configured) != 1:
     raise SystemExit(f"{symbols_path}: expected one .bss definition of {target!r}, found {len(configured)}")
 
@@ -36,7 +47,7 @@ if data[:6] != b"\x7fELF\x01\x02":
     raise SystemExit(f"{path}: not a big-endian ELF32 object")
 (e_shoff, _, _, _, _, e_shentsize, e_shnum, e_shstrndx) = struct.unpack(">IIHHHHHH", data[32:52])
 sections = [struct.unpack(">IIIIIIIIII", data[e_shoff + i * e_shentsize:e_shoff + (i + 1) * e_shentsize]) for i in range(e_shnum)]
-SHT_SYMTAB, SHT_NOBITS = 2, 8
+SHT_PROGBITS, SHT_SYMTAB, SHT_NOBITS = 1, 2, 8
 symtab_index = next((i for i, s in enumerate(sections) if s[1] == SHT_SYMTAB), None)
 if symtab_index is None:
     raise SystemExit(f"{path}: no symbol table")
@@ -60,8 +71,14 @@ for i in range(sym_size // sym_ent):
 if len(hits) != 1:
     raise SystemExit(f"{path}: expected one symbol {target!r}, found {len(hits)}")
 i, off, st_value, st_shndx, st_info = hits[0]
-if st_shndx == 0 or st_shndx >= e_shnum or sections[st_shndx][1] != SHT_NOBITS:
-    raise SystemExit(f"{path}: {target!r} is not defined in a NOBITS section")
+if st_shndx == 0 or st_shndx >= e_shnum:
+    raise SystemExit(f"{path}: {target!r} is not defined in a section")
+pool_section = sections[st_shndx]
+if pool_section[1] == SHT_PROGBITS:
+    if any(data[pool_section[4]:pool_section[4] + pool_section[5]]):
+        raise SystemExit(f"{path}: {target!r} is in a PROGBITS section with nonzero bytes")
+elif pool_section[1] != SHT_NOBITS:
+    raise SystemExit(f"{path}: {target!r} is not defined in a NOBITS or zero-filled PROGBITS section")
 if st_value != 0:
     raise SystemExit(f"{path}: {target!r} must sit at the start of its section (value {st_value:#x})")
 # global, undefined, no type
@@ -69,6 +86,7 @@ struct.pack_into(">IIIBBH", data, off, struct.unpack(">I", data[off:off + 4])[0]
 # empty the pooled section so the link allocates nothing for it
 sh_off = e_shoff + st_shndx * e_shentsize
 fields = list(sections[st_shndx])
+fields[1] = SHT_NOBITS  # a zero-filled PROGBITS pool becomes the .bss it stands for
 fields[5] = 0
 struct.pack_into(">IIIIIIIIII", data, sh_off, *fields)
 path.write_bytes(bytes(data))

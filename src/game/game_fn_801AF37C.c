@@ -11,8 +11,16 @@ typedef struct WorkDesc {
     char data[0x20];
 } WorkDesc;
 
+typedef struct StreamHeader {
+    u8 pad00[4];
+    u32 size;
+    u32 value;
+    u8 pad0C[0x10];
+    char data[0x20];
+} StreamHeader;
+
 typedef struct Work {
-    void* source[2];
+    StreamHeader* source[2];
     char buffer0[0x3c];
     char buffer1[0x3c];
     char name0[0x32];
@@ -21,8 +29,8 @@ typedef struct Work {
     u8 pad144[0x18];
     u32 id;
     u8 pad160[0x10];
-    u8 state0;
-    u8 state1;
+    volatile u8 state0;
+    volatile u8 state1;
     u8 mode0;
     u8 mode1;
     u8 pad174[2];
@@ -40,7 +48,6 @@ typedef struct Work {
 
 extern Work* lbl_8064D310;
 extern u32 lbl_8064D318;
-extern char lbl_80251808[];
 extern char lbl_8064C2D8;
 extern int fn_801AE2F4(void);
 extern int fn_800F9D4C(char*, char*, char*, u32, char*, ...);
@@ -52,16 +59,10 @@ extern int fn_801ADEEC(WorkDesc*, u8, int, int, u8, u8);
 extern int fn_801ADFC4(WorkDesc*, char**, u8, u8, u8);
 extern void* memcpy(void*, const void*, unsigned long);
 
-/* NonMatching: behavior-complete reconstruction. Explicit register preference
- * and result-before-format declaration order retain the best early-load form;
- * GC/1.3 still inserts an r0-to-r28 move where retail forms the base in r29. */
 int fn_801AF37C(Work* work)
 {
     int done;
     u32 result;
-    register char* format;
-
-    format = lbl_80251808;
     result = -1;
 
     if (lbl_8064D310 == 0 || lbl_8064D310 == work) {
@@ -71,12 +72,12 @@ int fn_801AF37C(Work* work)
                 done = 0;
                 if (work->count == 1) {
                     if (work->style == 1) {
-                        fn_800F9D4C(work->name0, format, format + 0xc,
+                        fn_800F9D4C(work->name0, "%s%04dL%s", "audio/stream/",
                                     work->id, &lbl_8064C2D8);
                         work->name1[0] = 0;
                     } else {
-                        fn_800F9D4C(work->name0, format + 0x1c,
-                                    format + 0xc, work->id, &lbl_8064C2D8);
+                        fn_800F9D4C(work->name0, "%s%04d%s",
+                                    "audio/stream/", work->id, &lbl_8064C2D8);
                         work->name1[0] = 0;
                     }
                     work->state0 = 1;
@@ -90,10 +91,10 @@ int fn_801AF37C(Work* work)
                         done = 1;
                     }
                 } else if (work->count == 2) {
-                    fn_800F9D4C(work->name0, format, format + 0xc,
+                    fn_800F9D4C(work->name0, "%s%04dL%s", "audio/stream/",
                                 work->id, &lbl_8064C2D8);
-                    fn_800F9D4C(work->name1, format + 0x28,
-                                format + 0xc, work->id, &lbl_8064C2D8);
+                    fn_800F9D4C(work->name1, "%s%04dR%s",
+                                "audio/stream/", work->id, &lbl_8064C2D8);
                     work->state0 = 1;
                     work->state1 = 1;
                     work->mode0 = 2;
@@ -121,25 +122,24 @@ int fn_801AF37C(Work* work)
                     work->mode1 = 0;
                 }
             }
-        } else if (*(volatile u8*)&work->state0 == 3) {
+        } else if (work->state0 == 3) {
             work->state0 = 1;
             while (!fn_80213704(work->buffer0, work->source[0], 0x60,
                                0, fn_801AF0E4, 2)) {}
-        } else if (*(volatile u8*)&work->state1 == 3) {
+        } else if (work->state1 == 3) {
             work->state1 = 1;
             while (!fn_80213704(work->buffer1, work->source[1], 0x60,
                                0, fn_801AF0E4, 2)) {}
-        } else if (*(volatile u8*)&work->state0 == 0 &&
-                   *(volatile u8*)&work->state1 == 0) {
+        } else if (work->state0 == 0 && work->state1 == 0) {
             int i;
             if (work->flag == 1) {
                 lbl_8064D310 = 0;
             } else {
                 for (i = 0; i < work->count; i++) {
-                    memcpy(work->desc[i].data, (char*)work->source[i] + 0x1c, 0x20);
+                    memcpy(work->desc[i].data, work->source[i]->data, 0x20);
                     work->desc[i].name = work->name0;
-                    work->desc[i].value = *(u32*)((char*)work->source[i] + 8);
-                    work->desc[i].offset = (*(u32*)((char*)work->source[i] + 4) >> 1) & ~0x1f;
+                    work->desc[i].value = work->source[i]->value;
+                    work->desc[i].offset = (work->source[i]->size >> 1) & ~0x1f;
                     work->desc[i].size = 0x60;
                 }
                 if (work->count == 1) {

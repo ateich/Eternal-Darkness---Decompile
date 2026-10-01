@@ -1,3 +1,6 @@
+typedef unsigned char u8;
+typedef unsigned int u32;
+
 typedef struct Entry {
     short x;
     short y;
@@ -9,25 +12,32 @@ typedef struct Quad {
     Entry entry[2];
 } Quad;
 
-extern const Quad lbl_8023A670;
-extern int lbl_8064C2BC;
+typedef struct Box {
+    u32 color;
+    Quad quad;
+} Box;
 
-extern void fn_801A872C(int, int, int, int, int, int, int *);
+extern Quad lbl_8023A670;
+extern u32 lbl_8064C2BC;
+
+extern void fn_801A872C(int, int, int, int, int, int, u32*);
 extern void fn_801A8974(int, int, int, int, int, int);
 
-void fn_8011C0F0(int index, unsigned char enabled)
+void fn_8011C0F0(int index, u8 enabled)
 {
-    Quad quad = lbl_8023A670;
-    int color;
+    Box box;
 
+    box.quad = lbl_8023A670;
     if (enabled != 0) {
-        color = lbl_8064C2BC;
-        fn_801A872C(quad.entry[index].x, quad.entry[index].y,
-                    quad.entry[index].width, quad.entry[index].height,
-                    -1, 3, &color);
+        int x = box.quad.entry[index].x;
+        int y = box.quad.entry[index].y;
+        int width = box.quad.entry[index].width;
+        int height = box.quad.entry[index].height;
+
+        box.color = lbl_8064C2BC;
+        fn_801A872C(x, y, width, height, -1, 3, &box.color);
     } else {
-        fn_801A8974(quad.entry[index].x, quad.entry[index].y,
-                    quad.entry[index].width, quad.entry[index].height,
-                    -1, 3);
+        fn_801A8974(box.quad.entry[index].x, box.quad.entry[index].y,
+                    box.quad.entry[index].width, box.quad.entry[index].height, -1, 3);
     }
 }

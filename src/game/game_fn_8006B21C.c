@@ -18,20 +18,15 @@ typedef struct State {
     u16 valueA;
     u8 padC[0x150];
     void *value15C;
+    u8 pad160[4];
 } State;
 
-typedef struct GlobalState {
-    u8 pad0[0x654];
-    State state;
-} GlobalState;
-
-extern u8 lbl_803108B8[];
 extern void *lbl_8064C8C0;
 extern s32 lbl_8064C8C4;
 extern s32 lbl_8064C8C8;
 extern s32 lbl_8064C8CC;
 extern void *lbl_8064C8D0;
-extern u8 (*lbl_8064C8D4)[0x654];
+extern u8 (*lbl_8064C8D4)[0x630];
 extern s32 lbl_8064C914;
 
 extern void *memset(void *dest, s32 value, unsigned long size);
@@ -41,21 +36,25 @@ extern void fn_8006B40C(void);
 extern void fn_800AE2D4(s32 mode);
 extern void fn_80088F08(s32 first, s32 second);
 extern void fn_800891F4(s32 value);
-extern unsigned int fn_800FBFB0(void);
-#define fn_800FBFB0() ((int)fn_800FBFB0())
+extern int fn_800FBFB0(void);
+
+static u8 table_data[0x630];
+static u8 table_extra[0x24];
+static State state_data;
+static u8 state_buffer[0x1788];
+static u8 scratch_large[0x80];
+static u8 scratch_small[0x10];
 
 void fn_8006B21C(s32 mode)
 {
-    GlobalState *root = (GlobalState *)lbl_803108B8;
-    u8 *base = (u8 *)root;
     State *state;
     Resource *resource;
 
-    lbl_8064C8D4 = &root->pad0;
-    lbl_8064C8D0 = base + 0x630;
+    lbl_8064C8D4 = &table_data;
+    lbl_8064C8D0 = table_extra;
     switch (mode) {
     case 1:
-        state = &root->state;
+        state = &state_data;
         state->value6 = 0;
         state->value8 = 5;
         state->valueA = 0;
@@ -68,16 +67,16 @@ void fn_8006B21C(s32 mode)
         fn_8006D1DC(0xC);
         break;
     default:
-        memset(base + 0x654, 0, 0x164);
-        state = &root->state;
-        state->value15C = (u8 *)state + 0x164;
+        memset(&state_data, 0, sizeof(State));
+        state = &state_data;
+        state->value15C = state_buffer;
         fn_8006B364(state);
         break;
     }
     fn_8006B40C();
-    memset(base + 0x7B8, 0, 0x1788);
-    memset(base + 0x1F40, 0, 0x80);
-    memset(base + 0x1FC0, 0, 0x10);
+    memset(state_buffer, 0, sizeof(state_buffer));
+    memset(scratch_large, 0, sizeof(scratch_large));
+    memset(scratch_small, 0, sizeof(scratch_small));
     fn_800AE2D4(mode);
     lbl_8064C8C8 = 0;
     lbl_8064C8C4 = 0;
