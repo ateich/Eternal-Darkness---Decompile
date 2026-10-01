@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "target": "fn_8018C8FC",
+  "hypothesis": "Declaring the normalized repeat count before the mask, while assigning it after all declarations, might change GC/1.3 graph-coloring priority without changing the retail instruction schedule: repeat count in r31 and mask in r29.",
+  "scope": "One bounded source-shape experiment using unchanged canonical GC/1.3 settings and -use_lmw_stmw on.",
+  "source_change": "Split u8 repeat_count = repeats into an earlier u8 repeat_count declaration and a later repeat_count = repeats assignment before the outer loop.",
+  "commands": [
+    "python3 configure.py",
+    ".tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_8018C8FC.o",
+    "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8018C8FC --format json-pretty",
+    "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8018C8FC -c functionRelocDiffs=name_address --format json-pretty"
+  ],
+  "before": {
+    "canonical_match_percent": 99.87261,
+    "relocation_strict_match_percent": 99.87261,
+    "retail_size": 628,
+    "compiled_size": 628,
+    "strict_objdiff_sha256": "504bf123e067fae9f47a491009665241faa1a81a55fd02bde7b4470c490d6c47"
+  },
+  "after": {
+    "canonical_match_percent": 99.87261,
+    "relocation_strict_match_percent": 99.87261,
+    "retail_size": 628,
+    "compiled_size": 628,
+    "strict_objdiff_sha256": "504bf123e067fae9f47a491009665241faa1a81a55fd02bde7b4470c490d6c47"
+  },
+  "result": "No codegen change. Canonical and relocation-strict JSON outputs are byte-identical before and after. The retained C remains size-exact and preserves all five relocation-bearing instructions, but GC/1.3 still assigns mask/repeat count to r29/r31 while retail uses r31/r29.",
+  "raw_evidence": [
+    "reports/GEDE01/build-before-2e66b7fe-2eca-43cc-8f88-e6219c82568c.log",
+    "reports/GEDE01/build-after-2e66b7fe-2eca-43cc-8f88-e6219c82568c.log",
+    "reports/GEDE01/canonical-before-2e66b7fe-2eca-43cc-8f88-e6219c82568c.json",
+    "reports/GEDE01/canonical-after-2e66b7fe-2eca-43cc-8f88-e6219c82568c.json",
+    "reports/GEDE01/objdiff-before-2e66b7fe-2eca-43cc-8f88-e6219c82568c.json",
+    "reports/GEDE01/objdiff-after-2e66b7fe-2eca-43cc-8f88-e6219c82568c.json"
+  ]
+}

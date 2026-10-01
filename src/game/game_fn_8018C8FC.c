@@ -9,13 +9,14 @@ extern void* memcpy(void*, const void*, unsigned int);
 void fn_8018C8FC(u8* dest, const u8* color, int repeats, int run_length,
                  u16 offset, u8 bits)
 {
+    u8 repeat_count;
     int mask = (1 << bits) - 1;
     int midpoint = 1 << (bits - 1);
-    u8 repeat_count = repeats;
     int i;
     int j;
     u8* cursor = dest;
 
+    repeat_count = repeats;
     for (i = 0; i < repeat_count; i++) {
         s8 delta = midpoint - (fn_800FBFB0() & mask);
         for (j = 0; j < run_length; j++) {
