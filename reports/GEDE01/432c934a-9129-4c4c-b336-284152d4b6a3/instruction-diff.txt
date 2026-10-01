@@ -1,0 +1,241 @@
+ INFO Writing to /home/rabbit/src/darkfoundry-new/.darkfoundry/durable/assignments/432c934a-9129-4c4c-b336-284152d4b6a3/eternal-darkness-decomp/build/GEDE01/fndiff_OSInit.json
+target 920 bytes  base 884 bytes  match 86.30869
+  0x0000  mflr r0                                              | mflr r0
+* 0x0004                                                       | lis r3, ...rodata.0@ha [None+0 t6]
+  0x0008  stw r0, 0x4(r1)                                      | stw r0, 0x4(r1)
+* 0x000c  stwu r1, -0x18(r1)                                   | stwu r1, -0x10(r1)
+* 0x0010  stw r31, 0x14(r1)                                    | stw r31, 0xc(r1)
+* 0x0014  stw r30, 0x10(r1)                                    | addi r31, r3, ...rodata.0@l [None+0 t4]
+* 0x0018  stw r29, 0xc(r1)                                     | stw r30, 0x8(r1)
+  0x001c  lwz r0, AreWeInitialized_8064D8FC@sda21 [None+0 t109] | lwz r0, AreWeInitialized_8064D8FC@sda21 [None+0 t109]
+* 0x0020  lis r4, DriveInfo_80640D80@ha [None+0 t6]            | 
+* 0x0024  lis r3, @81_802FCBA0@ha [None+0 t6]                  | 
+  0x0028  cmpwi r0, 0x0                                        | cmpwi r0, 0x0
+* 0x002c  addi r30, r4, DriveInfo_80640D80@l [None+0 t4]       | 
+* 0x0030  addi r31, r3, @81_802FCBA0@l [None+0 t4]             | 
+* 0x0034  bne 0x37c                                            | bne 0x35c
+  0x0038  li r0, 0x1                                           | li r0, 0x1
+  0x003c  stw r0, AreWeInitialized_8064D8FC@sda21 [None+0 t109] | stw r0, AreWeInitialized_8064D8FC@sda21 [None+0 t109]
+  0x0040  bl __OSGetSystemTime [None+0 t10]                    | bl __OSGetSystemTime [None+0 t10]
+  0x0044  stw r4, __OSStartTime+0x4@sda21 [None+0 t109]        | stw r4, __OSStartTime+0x4@sda21 [None+0 t109]
+  0x0048  stw r3, __OSStartTime@sda21 [None+0 t109]            | stw r3, __OSStartTime@sda21 [None+0 t109]
+  0x004c  bl OSDisableInterrupts [None+0 t10]                  | bl OSDisableInterrupts [None+0 t10]
+  0x0050  bl PPCDisableSpeculation [None+0 t10]                | bl PPCDisableSpeculation [None+0 t10]
+  0x0054  bl PPCSetFpNonIEEEMode [None+0 t10]                  | bl PPCSetFpNonIEEEMode [None+0 t10]
+  0x0058  li r0, 0x0                                           | li r0, 0x0
+  0x005c  lis r4, 0x8000                                       | lis r4, 0x8000
+  0x0060  stw r0, BI2DebugFlag_8064D8F4@sda21 [None+0 t109]    | stw r0, BI2DebugFlag_8064D8F4@sda21 [None+0 t109]
+  0x0064  stw r4, BootInfo_8064D8F0@sda21 [None+0 t109]        | stw r4, BootInfo_8064D8F0@sda21 [None+0 t109]
+  0x0068  stw r0, __DVDLongFileNameFlag@sda21 [None+0 t109]    | stw r0, __DVDLongFileNameFlag@sda21 [None+0 t109]
+  0x006c  lwz r3, 0xf4(r4)                                     | lwz r3, 0xf4(r4)
+  0x0070  cmplwi r3, 0x0                                       | cmplwi r3, 0x0
+  0x0074  beq 0xa4                                             | beq 0x90
+  0x0078  addi r0, r3, 0xc                                     | addi r0, r3, 0xc
+  0x007c  stw r0, BI2DebugFlag_8064D8F4@sda21 [None+0 t109]    | stw r0, BI2DebugFlag_8064D8F4@sda21 [None+0 t109]
+  0x0080  lwz r0, 0x24(r3)                                     | lwz r0, 0x24(r3)
+  0x0084  lwz r3, BI2DebugFlag_8064D8F4@sda21 [None+0 t109]    | lwz r3, BI2DebugFlag_8064D8F4@sda21 [None+0 t109]
+  0x0088  stw r0, __PADSpec@sda21 [None+0 t109]                | stw r0, __PADSpec@sda21 [None+0 t109]
+  0x008c  lwz r0, 0x0(r3)                                      | lwz r0, 0x0(r3)
+* 0x0090  clrlwi r0, r0, 24                                    | 
+  0x0094  stb r0, 0x30e8(r4)                                   | stb r0, 0x30e8(r4)
+  0x0098  lwz r0, __PADSpec@sda21 [None+0 t109]                | lwz r0, __PADSpec@sda21 [None+0 t109]
+* 0x009c  clrlwi r0, r0, 24                                    | 
+  0x00a0  stb r0, 0x30e9(r4)                                   | stb r0, 0x30e9(r4)
+  0x00a4  b 0xc8                                               | b 0xb4
+  0x00a8  lwz r0, 0x34(r4)                                     | lwz r0, 0x34(r4)
+  0x00ac  cmplwi r0, 0x0                                       | cmplwi r0, 0x0
+  0x00b0  beq 0xc8                                             | beq 0xb4
+  0x00b4  lbz r3, 0x30e8(r4)                                   | lbz r3, 0x30e8(r4)
+  0x00b8  li r0, BI2DebugFlagHolder_8064D8F8@sda21 [None+0 t109] | li r0, BI2DebugFlagHolder_8064D8F8@sda21 [None+0 t109]
+  0x00bc  stw r3, BI2DebugFlagHolder_8064D8F8@sda21 [None+0 t109] | stw r3, BI2DebugFlagHolder_8064D8F8@sda21 [None+0 t109]
+  0x00c0  stw r0, BI2DebugFlag_8064D8F4@sda21 [None+0 t109]    | stw r0, BI2DebugFlag_8064D8F4@sda21 [None+0 t109]
+  0x00c4  lbz r0, 0x30e9(r4)                                   | lbz r0, 0x30e9(r4)
+  0x00c8  stw r0, __PADSpec@sda21 [None+0 t109]                | stw r0, __PADSpec@sda21 [None+0 t109]
+  0x00cc  li r0, 0x1                                           | li r0, 0x1
+  0x00d0  lwz r3, BootInfo_8064D8F0@sda21 [None+0 t109]        | lwz r3, BootInfo_8064D8F0@sda21 [None+0 t109]
+  0x00d4  stw r0, __DVDLongFileNameFlag@sda21 [None+0 t109]    | stw r0, __DVDLongFileNameFlag@sda21 [None+0 t109]
+  0x00d8  lwz r3, 0x30(r3)                                     | lwz r3, 0x30(r3)
+  0x00dc  cmplwi r3, 0x0                                       | cmplwi r3, 0x0
+* 0x00e0  bne 0xec                                             | beq 0xd0
+* 0x00e4                                                       | b 0xd8
+  0x00e8  lis r3, __ArenaLo@ha [None+0 t6]                     | lis r3, __ArenaLo@ha [None+0 t6]
+  0x00ec  addi r3, r3, __ArenaLo@l [None+0 t4]                 | addi r3, r3, __ArenaLo@l [None+0 t4]
+* 0x00f0  b 0xec                                               | 
+  0x00f4  bl OSSetArenaLo [None+0 t10]                         | bl OSSetArenaLo [None+0 t10]
+  0x00f8  lwz r3, BootInfo_8064D8F0@sda21 [None+0 t109]        | lwz r3, BootInfo_8064D8F0@sda21 [None+0 t109]
+  0x00fc  lwz r0, 0x30(r3)                                     | lwz r0, 0x30(r3)
+  0x0100  cmplwi r0, 0x0                                       | cmplwi r0, 0x0
+  0x0104  bne 0x12c                                            | bne 0x118
+  0x0108  lwz r3, BI2DebugFlag_8064D8F4@sda21 [None+0 t109]    | lwz r3, BI2DebugFlag_8064D8F4@sda21 [None+0 t109]
+  0x010c  cmplwi r3, 0x0                                       | cmplwi r3, 0x0
+  0x0110  beq 0x12c                                            | beq 0x118
+  0x0114  lwz r0, 0x0(r3)                                      | lwz r0, 0x0(r3)
+  0x0118  cmplwi r0, 0x2                                       | cmplwi r0, 0x2
+  0x011c  bge 0x12c                                            | bge 0x118
+  0x0120  lis r3, _stack_addr@ha [None+0 t6]                   | lis r3, _stack_addr@ha [None+0 t6]
+  0x0124  addi r3, r3, _stack_addr@l [None+0 t4]               | addi r3, r3, _stack_addr@l [None+0 t4]
+  0x0128  addi r0, r3, 0x1f [None+0 tNone]                     | addi r0, r3, 0x1f [None+0 tNone]
+  0x012c  clrrwi r3, r0, 5                                     | clrrwi r3, r0, 5
+  0x0130  bl OSSetArenaLo [None+0 t10]                         | bl OSSetArenaLo [None+0 t10]
+  0x0134  lwz r3, BootInfo_8064D8F0@sda21 [None+0 t109]        | lwz r3, BootInfo_8064D8F0@sda21 [None+0 t109]
+  0x0138  lwz r3, 0x34(r3)                                     | lwz r3, 0x34(r3)
+  0x013c  cmplwi r3, 0x0                                       | cmplwi r3, 0x0
+* 0x0140  bne 0x148                                            | beq 0x12c
+* 0x0144                                                       | b 0x134
+  0x0148  lis r3, __ArenaHi@ha [None+0 t6]                     | lis r3, __ArenaHi@ha [None+0 t6]
+  0x014c  addi r3, r3, __ArenaHi@l [None+0 t4]                 | addi r3, r3, __ArenaHi@l [None+0 t4]
+* 0x0150  b 0x148                                              | 
+  0x0154  bl OSSetArenaHi [None+0 t10]                         | bl OSSetArenaHi [None+0 t10]
+  0x0158  bl OSExceptionInit_8020A19C [None+0 t10]             | bl OSExceptionInit_8020A19C [None+0 t10]
+  0x015c  bl __OSInitSystemCall [None+0 t10]                   | bl __OSInitSystemCall [None+0 t10]
+  0x0160  bl OSInitAlarm [None+0 t10]                          | bl OSInitAlarm [None+0 t10]
+  0x0164  bl __OSModuleInit [None+0 t10]                       | bl __OSModuleInit [None+0 t10]
+  0x0168  bl __OSInterruptInit [None+0 t10]                    | bl __OSInterruptInit [None+0 t10]
+  0x016c  lis r3, __OSResetSWInterruptHandler@ha [None+0 t6]   | lis r3, __OSResetSWInterruptHandler@ha [None+0 t6]
+  0x0170  addi r4, r3, __OSResetSWInterruptHandler@l [None+0 t4] | addi r4, r3, __OSResetSWInterruptHandler@l [None+0 t4]
+  0x0174  li r3, 0x16                                          | li r3, 0x16
+  0x0178  bl __OSSetInterruptHandler [None+0 t10]              | bl __OSSetInterruptHandler [None+0 t10]
+  0x017c  bl __OSContextInit [None+0 t10]                      | bl __OSContextInit [None+0 t10]
+  0x0180  bl __OSCacheInit [None+0 t10]                        | bl __OSCacheInit [None+0 t10]
+  0x0184  bl EXIInit [None+0 t10]                              | bl EXIInit [None+0 t10]
+  0x0188  bl SIInit [None+0 t10]                               | bl SIInit [None+0 t10]
+  0x018c  bl __OSInitSram [None+0 t10]                         | bl __OSInitSram [None+0 t10]
+  0x0190  bl __OSThreadInit [None+0 t10]                       | bl __OSThreadInit [None+0 t10]
+  0x0194  bl __OSInitAudioSystem [None+0 t10]                  | bl __OSInitAudioSystem [None+0 t10]
+  0x0198  bl PPCMfhid2 [None+0 t10]                            | bl PPCMfhid2 [None+0 t10]
+  0x019c  rlwinm r3, r3, 0, 2, 0                               | rlwinm r3, r3, 0, 2, 0
+  0x01a0  bl PPCMthid2 [None+0 t10]                            | bl PPCMthid2 [None+0 t10]
+  0x01a4  lwz r3, BootInfo_8064D8F0@sda21 [None+0 t109]        | lwz r3, BootInfo_8064D8F0@sda21 [None+0 t109]
+* 0x01a8  addi r4, r3, 0x2c                                    | 
+* 0x01ac  lwz r0, 0x0(r4)                                      | lwz r0, 0x2c(r3)
+* 0x01b0                                                       | addi r4, r3, 0x2c
+* 0x01b4  rlwinm r0, r0, 0, 3, 3                               | rlwinm. r0, r0, 0, 3, 3
+* 0x01b8  cmplwi r0, 0x0                                       | 
+  0x01bc  beq 0x1c0                                            | beq 0x1a8
+  0x01c0  lis r3, 0x1000                                       | lis r3, 0x1000
+  0x01c4  addi r0, r3, 0x4                                     | addi r0, r3, 0x4
+  0x01c8  stw r0, 0x0(r4)                                      | stw r0, 0x0(r4)
+  0x01cc  b 0x1c8                                              | b 0x1b0
+  0x01d0  li r0, 0x1                                           | li r0, 0x1
+  0x01d4  stw r0, 0x0(r4)                                      | stw r0, 0x0(r4)
+* 0x01d8                                                       | lwz r4, BootInfo_8064D8F0@sda21 [None+0 t109]
+  0x01dc  lis r3, 0xcc00                                       | lis r3, 0xcc00
+* 0x01e0  lwz r4, BootInfo_8064D8F0@sda21 [None+0 t109]        | 
+* 0x01e4  addi r3, r3, 0x3000                                  | 
+* 0x01e8  lwz r0, 0x2c(r3)                                     | lwz r0, 0x302c(r3)
+  0x01ec  lwz r3, 0x2c(r4)                                     | lwz r3, 0x2c(r4)
+* 0x01f0  clrrwi r0, r0, 28                                    | 
+  0x01f4  srwi r0, r0, 28                                      | srwi r0, r0, 28
+  0x01f8  add r0, r3, r0                                       | add r0, r3, r0
+  0x01fc  stw r0, 0x2c(r4)                                     | stw r0, 0x2c(r4)
+  0x0200  lwz r0, __OSInIPL@sda21 [None+0 t109]                | lwz r0, __OSInIPL@sda21 [None+0 t109]
+  0x0204  cmpwi r0, 0x0                                        | cmpwi r0, 0x0
+  0x0208  bne 0x1fc                                            | bne 0x1dc
+  0x020c  bl __OSInitMemoryProtection [None+0 t10]             | bl __OSInitMemoryProtection [None+0 t10]
+* 0x0210  mr r3, r31 [None+0 tNone]                            | addi r3, r31, 0x0 [None+0 tNone]
+  0x0214  crclr cr1eq                                          | crclr cr1eq
+  0x0218  bl OSReport [None+0 t10]                             | bl OSReport [None+0 t10]
+* 0x021c  addi r3, r31, 0x20 [None+0 tNone]                    | addi r3, r31, 0x20 [None+0 tNone]
+  0x0220  crclr cr1eq                                          | crclr cr1eq
+* 0x0224  addi r4, r31, 0x38 [None+0 tNone]                    | addi r4, r31, 0x38 [None+0 tNone]
+* 0x0228  addi r5, r31, 0x44 [None+0 tNone]                    | addi r5, r31, 0x44 [None+0 tNone]
+  0x022c  bl OSReport [None+0 t10]                             | bl OSReport [None+0 t10]
+* 0x0230  addi r3, r31, 0x50 [None+0 tNone]                    | addi r3, r31, 0x50 [None+0 tNone]
+  0x0234  crclr cr1eq                                          | crclr cr1eq
+  0x0238  bl OSReport [None+0 t10]                             | bl OSReport [None+0 t10]
+  0x023c  lwz r3, BootInfo_8064D8F0@sda21 [None+0 t109]        | lwz r3, BootInfo_8064D8F0@sda21 [None+0 t109]
+  0x0240  cmplwi r3, 0x0                                       | cmplwi r3, 0x0
+  0x0244  beq 0x240                                            | beq 0x220
+  0x0248  lwz r4, 0x2c(r3)                                     | lwz r4, 0x2c(r3)
+  0x024c  cmplwi r4, 0x0                                       | cmplwi r4, 0x0
+  0x0250  bne 0x24c                                            | bne 0x228
+  0x0254  lis r3, 0x1000                                       | lis r3, 0x1000
+  0x0258  addi r4, r3, 0x2                                     | addi r4, r3, 0x2
+* 0x025c  b 0x24c                                              | 
+* 0x0260  rlwinm r0, r4, 0, 3, 3                               | rlwinm. r0, r4, 0, 3, 3
+* 0x0264  cmplwi r0, 0x0                                       | 
+  0x0268  bne 0x268                                            | bne 0x240
+  0x026c  crclr cr1eq                                          | crclr cr1eq
+* 0x0270  addi r3, r31, 0x60 [None+0 tNone]                    | addi r3, r31, 0x60 [None+0 tNone]
+  0x0274  bl OSReport [None+0 t10]                             | bl OSReport [None+0 t10]
+  0x0278  b 0x2f0                                              | b 0x2c8
+  0x027c  lis r3, 0x1000                                       | lis r3, 0x1000
+  0x0280  addi r0, r3, 0x2                                     | addi r0, r3, 0x2
+  0x0284  cmpw r4, r0                                          | cmpw r4, r0
+  0x0288  beq 0x2bc                                            | beq 0x294
+  0x028c  bge 0x28c                                            | bge 0x264
+  0x0290  cmpw r4, r3                                          | cmpw r4, r3
+  0x0294  beq 0x29c                                            | beq 0x274
+  0x0298  bge 0x2ac                                            | bge 0x284
+  0x029c  b 0x2dc                                              | b 0x2b4
+  0x02a0  addi r0, r3, 0x4                                     | addi r0, r3, 0x4
+  0x02a4  cmpw r4, r0                                          | cmpw r4, r0
+  0x02a8  bge 0x2dc                                            | bge 0x2b4
+  0x02ac  b 0x2cc                                              | b 0x2a4
+* 0x02b0  addi r3, r31, 0x6c [None+0 tNone]                    | addi r3, r31, 0x6c [None+0 tNone]
+  0x02b4  crclr cr1eq                                          | crclr cr1eq
+  0x02b8  bl OSReport [None+0 t10]                             | bl OSReport [None+0 t10]
+  0x02bc  b 0x2f0                                              | b 0x2c8
+* 0x02c0  addi r3, r31, 0x7c [None+0 tNone]                    | addi r3, r31, 0x7c [None+0 tNone]
+  0x02c4  crclr cr1eq                                          | crclr cr1eq
+  0x02c8  bl OSReport [None+0 t10]                             | bl OSReport [None+0 t10]
+  0x02cc  b 0x2f0                                              | b 0x2c8
+* 0x02d0  addi r3, r31, 0x8c [None+0 tNone]                    | addi r3, r31, 0x8c [None+0 tNone]
+  0x02d4  crclr cr1eq                                          | crclr cr1eq
+  0x02d8  bl OSReport [None+0 t10]                             | bl OSReport [None+0 t10]
+  0x02dc  b 0x2f0                                              | b 0x2c8
+* 0x02e0  addi r3, r31, 0x9c [None+0 tNone]                    | addi r3, r31, 0x9c [None+0 tNone]
+  0x02e4  crclr cr1eq                                          | crclr cr1eq
+  0x02e8  bl OSReport [None+0 t10]                             | bl OSReport [None+0 t10]
+  0x02ec  b 0x2f0                                              | b 0x2c8
+  0x02f0  subis r4, r4, 0x1000                                 | subis r4, r4, 0x1000
+  0x02f4  crclr cr1eq                                          | crclr cr1eq
+* 0x02f8  addi r3, r31, 0xac [None+0 tNone]                    | addi r3, r31, 0xac [None+0 tNone]
+  0x02fc  subi r4, r4, 0x3                                     | subi r4, r4, 0x3
+  0x0300  bl OSReport [None+0 t10]                             | bl OSReport [None+0 t10]
+  0x0304  lwz r4, BootInfo_8064D8F0@sda21 [None+0 t109]        | lwz r4, BootInfo_8064D8F0@sda21 [None+0 t109]
+* 0x0308  addi r3, r31, 0xc0 [None+0 tNone]                    | addi r3, r31, 0xc0 [None+0 tNone]
+  0x030c  crclr cr1eq                                          | crclr cr1eq
+  0x0310  lwz r0, 0x28(r4)                                     | lwz r0, 0x28(r4)
+  0x0314  srwi r4, r0, 20                                      | srwi r4, r0, 20
+  0x0318  bl OSReport [None+0 t10]                             | bl OSReport [None+0 t10]
+  0x031c  bl OSGetArenaHi [None+0 t10]                         | bl OSGetArenaHi [None+0 t10]
+* 0x0320  mr r29, r3                                           | mr r30, r3
+  0x0324  bl OSGetArenaLo [None+0 t10]                         | bl OSGetArenaLo [None+0 t10]
+* 0x0328  mr r4, r3                                            | addi r4, r3, 0x0
+  0x032c  crclr cr1eq                                          | crclr cr1eq
+* 0x0330  mr r5, r29                                           | 
+* 0x0334  addi r3, r31, 0xd0 [None+0 tNone]                    | addi r5, r30, 0x0
+* 0x0338                                                       | addi r3, r31, 0xd0 [None+0 tNone]
+  0x033c  bl OSReport [None+0 t10]                             | bl OSReport [None+0 t10]
+  0x0340  lwz r3, BI2DebugFlag_8064D8F4@sda21 [None+0 t109]    | lwz r3, BI2DebugFlag_8064D8F4@sda21 [None+0 t109]
+  0x0344  cmplwi r3, 0x0                                       | cmplwi r3, 0x0
+  0x0348  beq 0x344                                            | beq 0x31c
+  0x034c  lwz r0, 0x0(r3)                                      | lwz r0, 0x0(r3)
+  0x0350  cmplwi r0, 0x2                                       | cmplwi r0, 0x2
+  0x0354  blt 0x344                                            | blt 0x31c
+  0x0358  bl EnableMetroTRKInterrupts [None+0 t10]             | bl EnableMetroTRKInterrupts [None+0 t10]
+  0x035c  bl ClearArena_80209CA0 [None+0 t10]                  | bl ClearArena_80209CA0 [None+0 t10]
+  0x0360  bl OSEnableInterrupts [None+0 t10]                   | bl OSEnableInterrupts [None+0 t10]
+  0x0364  lwz r0, __OSInIPL@sda21 [None+0 t109]                | lwz r0, __OSInIPL@sda21 [None+0 t109]
+  0x0368  cmpwi r0, 0x0                                        | cmpwi r0, 0x0
+* 0x036c  bne 0x37c                                            | bne 0x35c
+  0x0370  bl DVDInit [None+0 t10]                              | bl DVDInit [None+0 t10]
+* 0x0374  mr r3, r30 [None+0 tNone]                            | lis r3, DriveInfo_80640D80@ha [None+0 t6]
+* 0x0378                                                       | addi r31, r3, DriveInfo_80640D80@l [None+0 t4]
+* 0x037c                                                       | addi r3, r31, 0x0 [None+0 tNone]
+  0x0380  li r4, 0x20                                          | li r4, 0x20
+  0x0384  bl DCInvalidateRange [None+0 t10]                    | bl DCInvalidateRange [None+0 t10]
+  0x0388  lis r3, InquiryCallback_80209DC8@ha [None+0 t6]      | lis r3, InquiryCallback_80209DC8@ha [None+0 t6]
+  0x038c  addi r5, r3, InquiryCallback_80209DC8@l [None+0 t4]  | addi r5, r3, InquiryCallback_80209DC8@l [None+0 t4]
+* 0x0390  mr r4, r30 [None+0 tNone]                            | 
+* 0x0394  addi r3, r30, 0x20 [None+0 tNone]                    | addi r4, r31, 0x0 [None+0 tNone]
+* 0x0398                                                       | addi r3, r31, 0x20 [None+0 tNone]
+  0x039c  bl DVDInquiryAsync [None+0 t10]                      | bl DVDInquiryAsync [None+0 t10]
+* 0x03a0  lwz r0, 0x1c(r1)                                     | 
+* 0x03a4  lwz r31, 0x14(r1)                                    | lwz r0, 0x14(r1)
+* 0x03a8  lwz r30, 0x10(r1)                                    | lwz r31, 0xc(r1)
+* 0x03ac  lwz r29, 0xc(r1)                                     | lwz r30, 0x8(r1)
+* 0x03b0  addi r1, r1, 0x18                                    | addi r1, r1, 0x10
+  0x03b4  mtlr r0                                              | mtlr r0
+  0x03b8  blr                                                  | blr

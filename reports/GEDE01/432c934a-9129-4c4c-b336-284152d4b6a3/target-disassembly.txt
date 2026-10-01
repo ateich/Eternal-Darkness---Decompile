@@ -1,0 +1,320 @@
+
+build-432c934a/GEDE01/obj/dolphin/os/fn_80209E04.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <OSInit>:
+   0:	7c 08 02 a6 	mflr    r0
+   4:	90 01 00 04 	stw     r0,4(r1)
+   8:	94 21 ff e8 	stwu    r1,-24(r1)
+   c:	93 e1 00 14 	stw     r31,20(r1)
+  10:	93 c1 00 10 	stw     r30,16(r1)
+  14:	93 a1 00 0c 	stw     r29,12(r1)
+  18:	80 00 00 00 	lwz     r0,0(0)
+			18: R_PPC_EMB_SDA21	AreWeInitialized_8064D8FC
+  1c:	3c 80 00 00 	lis     r4,0
+			1e: R_PPC_ADDR16_HA	DriveInfo_80640D80
+  20:	3c 60 00 00 	lis     r3,0
+			22: R_PPC_ADDR16_HA	@81_802FCBA0
+  24:	2c 00 00 00 	cmpwi   r0,0
+  28:	3b c4 00 00 	addi    r30,r4,0
+			2a: R_PPC_ADDR16_LO	DriveInfo_80640D80
+  2c:	3b e3 00 00 	addi    r31,r3,0
+			2e: R_PPC_ADDR16_LO	@81_802FCBA0
+  30:	40 82 03 4c 	bne     37c <OSInit+0x37c>
+  34:	38 00 00 01 	li      r0,1
+  38:	90 00 00 00 	stw     r0,0(0)
+			38: R_PPC_EMB_SDA21	AreWeInitialized_8064D8FC
+  3c:	48 00 00 01 	bl      3c <OSInit+0x3c>
+			3c: R_PPC_REL24	__OSGetSystemTime
+  40:	90 80 00 00 	stw     r4,0(0)
+			40: R_PPC_EMB_SDA21	__OSStartTime+0x4
+  44:	90 60 00 00 	stw     r3,0(0)
+			44: R_PPC_EMB_SDA21	__OSStartTime
+  48:	48 00 00 01 	bl      48 <OSInit+0x48>
+			48: R_PPC_REL24	OSDisableInterrupts
+  4c:	48 00 00 01 	bl      4c <OSInit+0x4c>
+			4c: R_PPC_REL24	PPCDisableSpeculation
+  50:	48 00 00 01 	bl      50 <OSInit+0x50>
+			50: R_PPC_REL24	PPCSetFpNonIEEEMode
+  54:	38 00 00 00 	li      r0,0
+  58:	3c 80 80 00 	lis     r4,-32768
+  5c:	90 00 00 00 	stw     r0,0(0)
+			5c: R_PPC_EMB_SDA21	BI2DebugFlag_8064D8F4
+  60:	90 80 00 00 	stw     r4,0(0)
+			60: R_PPC_EMB_SDA21	BootInfo_8064D8F0
+  64:	90 00 00 00 	stw     r0,0(0)
+			64: R_PPC_EMB_SDA21	__DVDLongFileNameFlag
+  68:	80 64 00 f4 	lwz     r3,244(r4)
+  6c:	28 03 00 00 	cmplwi  r3,0
+  70:	41 82 00 34 	beq     a4 <OSInit+0xa4>
+  74:	38 03 00 0c 	addi    r0,r3,12
+  78:	90 00 00 00 	stw     r0,0(0)
+			78: R_PPC_EMB_SDA21	BI2DebugFlag_8064D8F4
+  7c:	80 03 00 24 	lwz     r0,36(r3)
+  80:	80 60 00 00 	lwz     r3,0(0)
+			80: R_PPC_EMB_SDA21	BI2DebugFlag_8064D8F4
+  84:	90 00 00 00 	stw     r0,0(0)
+			84: R_PPC_EMB_SDA21	__PADSpec
+  88:	80 03 00 00 	lwz     r0,0(r3)
+  8c:	54 00 06 3e 	clrlwi  r0,r0,24
+  90:	98 04 30 e8 	stb     r0,12520(r4)
+  94:	80 00 00 00 	lwz     r0,0(0)
+			94: R_PPC_EMB_SDA21	__PADSpec
+  98:	54 00 06 3e 	clrlwi  r0,r0,24
+  9c:	98 04 30 e9 	stb     r0,12521(r4)
+  a0:	48 00 00 28 	b       c8 <OSInit+0xc8>
+  a4:	80 04 00 34 	lwz     r0,52(r4)
+  a8:	28 00 00 00 	cmplwi  r0,0
+  ac:	41 82 00 1c 	beq     c8 <OSInit+0xc8>
+  b0:	88 64 30 e8 	lbz     r3,12520(r4)
+  b4:	38 00 00 00 	li      r0,0
+			b4: R_PPC_EMB_SDA21	BI2DebugFlagHolder_8064D8F8
+  b8:	90 60 00 00 	stw     r3,0(0)
+			b8: R_PPC_EMB_SDA21	BI2DebugFlagHolder_8064D8F8
+  bc:	90 00 00 00 	stw     r0,0(0)
+			bc: R_PPC_EMB_SDA21	BI2DebugFlag_8064D8F4
+  c0:	88 04 30 e9 	lbz     r0,12521(r4)
+  c4:	90 00 00 00 	stw     r0,0(0)
+			c4: R_PPC_EMB_SDA21	__PADSpec
+  c8:	38 00 00 01 	li      r0,1
+  cc:	80 60 00 00 	lwz     r3,0(0)
+			cc: R_PPC_EMB_SDA21	BootInfo_8064D8F0
+  d0:	90 00 00 00 	stw     r0,0(0)
+			d0: R_PPC_EMB_SDA21	__DVDLongFileNameFlag
+  d4:	80 63 00 30 	lwz     r3,48(r3)
+  d8:	28 03 00 00 	cmplwi  r3,0
+  dc:	40 82 00 10 	bne     ec <OSInit+0xec>
+  e0:	3c 60 00 00 	lis     r3,0
+			e2: R_PPC_ADDR16_HA	__ArenaLo
+  e4:	38 63 00 00 	addi    r3,r3,0
+			e6: R_PPC_ADDR16_LO	__ArenaLo
+  e8:	48 00 00 04 	b       ec <OSInit+0xec>
+  ec:	48 00 00 01 	bl      ec <OSInit+0xec>
+			ec: R_PPC_REL24	OSSetArenaLo
+  f0:	80 60 00 00 	lwz     r3,0(0)
+			f0: R_PPC_EMB_SDA21	BootInfo_8064D8F0
+  f4:	80 03 00 30 	lwz     r0,48(r3)
+  f8:	28 00 00 00 	cmplwi  r0,0
+  fc:	40 82 00 30 	bne     12c <OSInit+0x12c>
+ 100:	80 60 00 00 	lwz     r3,0(0)
+			100: R_PPC_EMB_SDA21	BI2DebugFlag_8064D8F4
+ 104:	28 03 00 00 	cmplwi  r3,0
+ 108:	41 82 00 24 	beq     12c <OSInit+0x12c>
+ 10c:	80 03 00 00 	lwz     r0,0(r3)
+ 110:	28 00 00 02 	cmplwi  r0,2
+ 114:	40 80 00 18 	bge     12c <OSInit+0x12c>
+ 118:	3c 60 00 00 	lis     r3,0
+			11a: R_PPC_ADDR16_HA	_stack_addr
+ 11c:	38 63 00 00 	addi    r3,r3,0
+			11e: R_PPC_ADDR16_LO	_stack_addr
+ 120:	38 03 00 1f 	addi    r0,r3,31
+ 124:	54 03 00 34 	clrrwi  r3,r0,5
+ 128:	48 00 00 01 	bl      128 <OSInit+0x128>
+			128: R_PPC_REL24	OSSetArenaLo
+ 12c:	80 60 00 00 	lwz     r3,0(0)
+			12c: R_PPC_EMB_SDA21	BootInfo_8064D8F0
+ 130:	80 63 00 34 	lwz     r3,52(r3)
+ 134:	28 03 00 00 	cmplwi  r3,0
+ 138:	40 82 00 10 	bne     148 <OSInit+0x148>
+ 13c:	3c 60 00 00 	lis     r3,0
+			13e: R_PPC_ADDR16_HA	__ArenaHi
+ 140:	38 63 00 00 	addi    r3,r3,0
+			142: R_PPC_ADDR16_LO	__ArenaHi
+ 144:	48 00 00 04 	b       148 <OSInit+0x148>
+ 148:	48 00 00 01 	bl      148 <OSInit+0x148>
+			148: R_PPC_REL24	OSSetArenaHi
+ 14c:	48 00 00 01 	bl      14c <OSInit+0x14c>
+			14c: R_PPC_REL24	OSExceptionInit_8020A19C
+ 150:	48 00 00 01 	bl      150 <OSInit+0x150>
+			150: R_PPC_REL24	__OSInitSystemCall
+ 154:	48 00 00 01 	bl      154 <OSInit+0x154>
+			154: R_PPC_REL24	OSInitAlarm
+ 158:	48 00 00 01 	bl      158 <OSInit+0x158>
+			158: R_PPC_REL24	__OSModuleInit
+ 15c:	48 00 00 01 	bl      15c <OSInit+0x15c>
+			15c: R_PPC_REL24	__OSInterruptInit
+ 160:	3c 60 00 00 	lis     r3,0
+			162: R_PPC_ADDR16_HA	__OSResetSWInterruptHandler
+ 164:	38 83 00 00 	addi    r4,r3,0
+			166: R_PPC_ADDR16_LO	__OSResetSWInterruptHandler
+ 168:	38 60 00 16 	li      r3,22
+ 16c:	48 00 00 01 	bl      16c <OSInit+0x16c>
+			16c: R_PPC_REL24	__OSSetInterruptHandler
+ 170:	48 00 00 01 	bl      170 <OSInit+0x170>
+			170: R_PPC_REL24	__OSContextInit
+ 174:	48 00 00 01 	bl      174 <OSInit+0x174>
+			174: R_PPC_REL24	__OSCacheInit
+ 178:	48 00 00 01 	bl      178 <OSInit+0x178>
+			178: R_PPC_REL24	EXIInit
+ 17c:	48 00 00 01 	bl      17c <OSInit+0x17c>
+			17c: R_PPC_REL24	SIInit
+ 180:	48 00 00 01 	bl      180 <OSInit+0x180>
+			180: R_PPC_REL24	__OSInitSram
+ 184:	48 00 00 01 	bl      184 <OSInit+0x184>
+			184: R_PPC_REL24	__OSThreadInit
+ 188:	48 00 00 01 	bl      188 <OSInit+0x188>
+			188: R_PPC_REL24	__OSInitAudioSystem
+ 18c:	48 00 00 01 	bl      18c <OSInit+0x18c>
+			18c: R_PPC_REL24	PPCMfhid2
+ 190:	54 63 00 80 	rlwinm  r3,r3,0,2,0
+ 194:	48 00 00 01 	bl      194 <OSInit+0x194>
+			194: R_PPC_REL24	PPCMthid2
+ 198:	80 60 00 00 	lwz     r3,0(0)
+			198: R_PPC_EMB_SDA21	BootInfo_8064D8F0
+ 19c:	38 83 00 2c 	addi    r4,r3,44
+ 1a0:	80 04 00 00 	lwz     r0,0(r4)
+ 1a4:	54 00 00 c6 	rlwinm  r0,r0,0,3,3
+ 1a8:	28 00 00 00 	cmplwi  r0,0
+ 1ac:	41 82 00 14 	beq     1c0 <OSInit+0x1c0>
+ 1b0:	3c 60 10 00 	lis     r3,4096
+ 1b4:	38 03 00 04 	addi    r0,r3,4
+ 1b8:	90 04 00 00 	stw     r0,0(r4)
+ 1bc:	48 00 00 0c 	b       1c8 <OSInit+0x1c8>
+ 1c0:	38 00 00 01 	li      r0,1
+ 1c4:	90 04 00 00 	stw     r0,0(r4)
+ 1c8:	3c 60 cc 00 	lis     r3,-13312
+ 1cc:	80 80 00 00 	lwz     r4,0(0)
+			1cc: R_PPC_EMB_SDA21	BootInfo_8064D8F0
+ 1d0:	38 63 30 00 	addi    r3,r3,12288
+ 1d4:	80 03 00 2c 	lwz     r0,44(r3)
+ 1d8:	80 64 00 2c 	lwz     r3,44(r4)
+ 1dc:	54 00 00 06 	clrrwi  r0,r0,28
+ 1e0:	54 00 27 3e 	srwi    r0,r0,28
+ 1e4:	7c 03 02 14 	add     r0,r3,r0
+ 1e8:	90 04 00 2c 	stw     r0,44(r4)
+ 1ec:	80 00 00 00 	lwz     r0,0(0)
+			1ec: R_PPC_EMB_SDA21	__OSInIPL
+ 1f0:	2c 00 00 00 	cmpwi   r0,0
+ 1f4:	40 82 00 08 	bne     1fc <OSInit+0x1fc>
+ 1f8:	48 00 00 01 	bl      1f8 <OSInit+0x1f8>
+			1f8: R_PPC_REL24	__OSInitMemoryProtection
+ 1fc:	7f e3 fb 78 	mr      r3,r31
+ 200:	4c c6 31 82 	crclr   4*cr1+eq
+ 204:	48 00 00 01 	bl      204 <OSInit+0x204>
+			204: R_PPC_REL24	OSReport
+ 208:	38 7f 00 20 	addi    r3,r31,32
+ 20c:	4c c6 31 82 	crclr   4*cr1+eq
+ 210:	38 9f 00 38 	addi    r4,r31,56
+ 214:	38 bf 00 44 	addi    r5,r31,68
+ 218:	48 00 00 01 	bl      218 <OSInit+0x218>
+			218: R_PPC_REL24	OSReport
+ 21c:	38 7f 00 50 	addi    r3,r31,80
+ 220:	4c c6 31 82 	crclr   4*cr1+eq
+ 224:	48 00 00 01 	bl      224 <OSInit+0x224>
+			224: R_PPC_REL24	OSReport
+ 228:	80 60 00 00 	lwz     r3,0(0)
+			228: R_PPC_EMB_SDA21	BootInfo_8064D8F0
+ 22c:	28 03 00 00 	cmplwi  r3,0
+ 230:	41 82 00 10 	beq     240 <OSInit+0x240>
+ 234:	80 83 00 2c 	lwz     r4,44(r3)
+ 238:	28 04 00 00 	cmplwi  r4,0
+ 23c:	40 82 00 10 	bne     24c <OSInit+0x24c>
+ 240:	3c 60 10 00 	lis     r3,4096
+ 244:	38 83 00 02 	addi    r4,r3,2
+ 248:	48 00 00 04 	b       24c <OSInit+0x24c>
+ 24c:	54 80 00 c6 	rlwinm  r0,r4,0,3,3
+ 250:	28 00 00 00 	cmplwi  r0,0
+ 254:	40 82 00 14 	bne     268 <OSInit+0x268>
+ 258:	4c c6 31 82 	crclr   4*cr1+eq
+ 25c:	38 7f 00 60 	addi    r3,r31,96
+ 260:	48 00 00 01 	bl      260 <OSInit+0x260>
+			260: R_PPC_REL24	OSReport
+ 264:	48 00 00 8c 	b       2f0 <OSInit+0x2f0>
+ 268:	3c 60 10 00 	lis     r3,4096
+ 26c:	38 03 00 02 	addi    r0,r3,2
+ 270:	7c 04 00 00 	cmpw    r4,r0
+ 274:	41 82 00 48 	beq     2bc <OSInit+0x2bc>
+ 278:	40 80 00 14 	bge     28c <OSInit+0x28c>
+ 27c:	7c 04 18 00 	cmpw    r4,r3
+ 280:	41 82 00 1c 	beq     29c <OSInit+0x29c>
+ 284:	40 80 00 28 	bge     2ac <OSInit+0x2ac>
+ 288:	48 00 00 54 	b       2dc <OSInit+0x2dc>
+ 28c:	38 03 00 04 	addi    r0,r3,4
+ 290:	7c 04 00 00 	cmpw    r4,r0
+ 294:	40 80 00 48 	bge     2dc <OSInit+0x2dc>
+ 298:	48 00 00 34 	b       2cc <OSInit+0x2cc>
+ 29c:	38 7f 00 6c 	addi    r3,r31,108
+ 2a0:	4c c6 31 82 	crclr   4*cr1+eq
+ 2a4:	48 00 00 01 	bl      2a4 <OSInit+0x2a4>
+			2a4: R_PPC_REL24	OSReport
+ 2a8:	48 00 00 48 	b       2f0 <OSInit+0x2f0>
+ 2ac:	38 7f 00 7c 	addi    r3,r31,124
+ 2b0:	4c c6 31 82 	crclr   4*cr1+eq
+ 2b4:	48 00 00 01 	bl      2b4 <OSInit+0x2b4>
+			2b4: R_PPC_REL24	OSReport
+ 2b8:	48 00 00 38 	b       2f0 <OSInit+0x2f0>
+ 2bc:	38 7f 00 8c 	addi    r3,r31,140
+ 2c0:	4c c6 31 82 	crclr   4*cr1+eq
+ 2c4:	48 00 00 01 	bl      2c4 <OSInit+0x2c4>
+			2c4: R_PPC_REL24	OSReport
+ 2c8:	48 00 00 28 	b       2f0 <OSInit+0x2f0>
+ 2cc:	38 7f 00 9c 	addi    r3,r31,156
+ 2d0:	4c c6 31 82 	crclr   4*cr1+eq
+ 2d4:	48 00 00 01 	bl      2d4 <OSInit+0x2d4>
+			2d4: R_PPC_REL24	OSReport
+ 2d8:	48 00 00 18 	b       2f0 <OSInit+0x2f0>
+ 2dc:	3c 84 f0 00 	addis   r4,r4,-4096
+ 2e0:	4c c6 31 82 	crclr   4*cr1+eq
+ 2e4:	38 7f 00 ac 	addi    r3,r31,172
+ 2e8:	38 84 ff fd 	addi    r4,r4,-3
+ 2ec:	48 00 00 01 	bl      2ec <OSInit+0x2ec>
+			2ec: R_PPC_REL24	OSReport
+ 2f0:	80 80 00 00 	lwz     r4,0(0)
+			2f0: R_PPC_EMB_SDA21	BootInfo_8064D8F0
+ 2f4:	38 7f 00 c0 	addi    r3,r31,192
+ 2f8:	4c c6 31 82 	crclr   4*cr1+eq
+ 2fc:	80 04 00 28 	lwz     r0,40(r4)
+ 300:	54 04 65 3e 	srwi    r4,r0,20
+ 304:	48 00 00 01 	bl      304 <OSInit+0x304>
+			304: R_PPC_REL24	OSReport
+ 308:	48 00 00 01 	bl      308 <OSInit+0x308>
+			308: R_PPC_REL24	OSGetArenaHi
+ 30c:	7c 7d 1b 78 	mr      r29,r3
+ 310:	48 00 00 01 	bl      310 <OSInit+0x310>
+			310: R_PPC_REL24	OSGetArenaLo
+ 314:	7c 64 1b 78 	mr      r4,r3
+ 318:	4c c6 31 82 	crclr   4*cr1+eq
+ 31c:	7f a5 eb 78 	mr      r5,r29
+ 320:	38 7f 00 d0 	addi    r3,r31,208
+ 324:	48 00 00 01 	bl      324 <OSInit+0x324>
+			324: R_PPC_REL24	OSReport
+ 328:	80 60 00 00 	lwz     r3,0(0)
+			328: R_PPC_EMB_SDA21	BI2DebugFlag_8064D8F4
+ 32c:	28 03 00 00 	cmplwi  r3,0
+ 330:	41 82 00 14 	beq     344 <OSInit+0x344>
+ 334:	80 03 00 00 	lwz     r0,0(r3)
+ 338:	28 00 00 02 	cmplwi  r0,2
+ 33c:	41 80 00 08 	blt     344 <OSInit+0x344>
+ 340:	48 00 00 01 	bl      340 <OSInit+0x340>
+			340: R_PPC_REL24	EnableMetroTRKInterrupts
+ 344:	48 00 00 01 	bl      344 <OSInit+0x344>
+			344: R_PPC_REL24	ClearArena_80209CA0
+ 348:	48 00 00 01 	bl      348 <OSInit+0x348>
+			348: R_PPC_REL24	OSEnableInterrupts
+ 34c:	80 00 00 00 	lwz     r0,0(0)
+			34c: R_PPC_EMB_SDA21	__OSInIPL
+ 350:	2c 00 00 00 	cmpwi   r0,0
+ 354:	40 82 00 28 	bne     37c <OSInit+0x37c>
+ 358:	48 00 00 01 	bl      358 <OSInit+0x358>
+			358: R_PPC_REL24	DVDInit
+ 35c:	7f c3 f3 78 	mr      r3,r30
+ 360:	38 80 00 20 	li      r4,32
+ 364:	48 00 00 01 	bl      364 <OSInit+0x364>
+			364: R_PPC_REL24	DCInvalidateRange
+ 368:	3c 60 00 00 	lis     r3,0
+			36a: R_PPC_ADDR16_HA	InquiryCallback_80209DC8
+ 36c:	38 a3 00 00 	addi    r5,r3,0
+			36e: R_PPC_ADDR16_LO	InquiryCallback_80209DC8
+ 370:	7f c4 f3 78 	mr      r4,r30
+ 374:	38 7e 00 20 	addi    r3,r30,32
+ 378:	48 00 00 01 	bl      378 <OSInit+0x378>
+			378: R_PPC_REL24	DVDInquiryAsync
+ 37c:	80 01 00 1c 	lwz     r0,28(r1)
+ 380:	83 e1 00 14 	lwz     r31,20(r1)
+ 384:	83 c1 00 10 	lwz     r30,16(r1)
+ 388:	83 a1 00 0c 	lwz     r29,12(r1)
+ 38c:	38 21 00 18 	addi    r1,r1,24
+ 390:	7c 08 03 a6 	mtlr    r0
+ 394:	4e 80 00 20 	blr

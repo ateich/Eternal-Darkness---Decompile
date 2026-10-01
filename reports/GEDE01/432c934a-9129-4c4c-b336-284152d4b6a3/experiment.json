@@ -1,0 +1,13 @@
+{
+  "assignment_id": "432c934a-9129-4c4c-b336-284152d4b6a3",
+  "target": "fn_80209E04",
+  "symbol": "OSInit",
+  "compiler": "GC/1.3 (mwcc_233_163n)",
+  "cflags": "-nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma cats off -pragma warn_notinlined off -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -DVERSION_GEDE01 -DNDEBUG=1 -lang=c",
+  "target_size": 920,
+  "candidate_size": 884,
+  "canonical_match_percent": 86.30869,
+  "relocation_strict_match_percent": 86.30869,
+  "matched": false,
+  "divergence": "The independent TU reconstructs OSInit control flow and calls, but the candidate is 884 bytes versus the 920-byte target. The original combined SDK TU hoists the local OS string-pool base into r31 and static DriveInfo base into r30 at entry and preserves the arena-high value in r29; this independent TU instead hoists its private rodata base before the standard prologue, delays DriveInfo materialization until the DVD tail, and uses r30 for the arena-high value. Remaining instruction differences include omitted explicit clrlwi before byte stores, alternate conditional-branch forms for arena defaults and console-type tests, and alternate MMIO address materialization. Relocation targets consequently differ for the private string pool and renamed independent neighboring functions."
+}
