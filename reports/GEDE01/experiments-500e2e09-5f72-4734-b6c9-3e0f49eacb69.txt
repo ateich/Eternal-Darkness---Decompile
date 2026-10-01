@@ -1,0 +1,27 @@
+Assignment 500e2e09-5f72-4734-b6c9-3e0f49eacb69, attempt 1
+Base ef60b01147ab7e66ae15ed31c235b086f06c5e8d
+Target ClearArena / fn_80209CA0
+
+All experiments used the assigned object target
+build/GEDE01/src/dolphin/os/fn_80209CA0.o and the registered SDK compiler
+mwcc_233_163n (GC/1.2.5n), with the unchanged canonical flags recorded in
+objdiff.json and the raw build log.
+
+1. Reconstructed the reset-code split, full-arena clearing, IPL saved-region
+   loads, and the conditional lower/upper arena clearing ranges. The first
+   direct form used fixed addresses 0x8130DFF0/0x8130DFEC; inspection of the
+   retail instructions established the effective addresses as
+   0x812FDFF0/0x812FDFEC, which corrected the constant construction.
+2. Tested direct global assignments and cached start/end forms with pointer and
+   u32 declarations. The retained end-then-start local declaration produces the
+   best measured canonical score, 82.02702%, with equal 296-byte function sizes.
+3. Tested a missing memset prototype and the canonical void* return prototype.
+   The missing prototype enlarged the frame and was rejected. The retained
+   prototype preserves the retail 16-byte frame and all 29 relocation entries.
+
+The retained honest NonMatching reconstruction has the retail control-flow and
+call layout. The exact remaining instruction differences are five argument
+copies selected as addi reg,reg,0 instead of mr, plus register allocation in the
+four saved-region load/compare/store instructions (retail base/start registers
+r4/r3 versus generated r3/r4). The raw instruction comparison and both raw
+relocation tables are recorded in the assignment-specific evidence files.
