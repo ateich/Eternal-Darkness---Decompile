@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "assignment_id": "cecacaa3-f0b0-44c0-89e0-de549027140a",
+  "target": "fn_801D9D14",
+  "hypothesis": "Declaring the block-local effect pointer before effectOwner may preserve effect in r30 while extending its live range through all three tail stores.",
+  "source_changes": [
+    "Swapped the declarations of effect and effectOwner.",
+    "Expressed the Z, zero, and byte-four tail stores as effect-relative offsets 0xA0, 0x94, and 0xAA."
+  ],
+  "build_log": "eternal-darkness-decomp/reports/GEDE01/build-experiment-cecacaa3-f0b0-44c0-89e0-de549027140a.log",
+  "canonical_objdiff": "eternal-darkness-decomp/reports/GEDE01/objdiff-experiment-cecacaa3-f0b0-44c0-89e0-de549027140a.json",
+  "relocation_strict_objdiff": "eternal-darkness-decomp/reports/GEDE01/objdiff-experiment-strict-cecacaa3-f0b0-44c0-89e0-de549027140a.json",
+  "retail_bytes": 720,
+  "generated_bytes": 720,
+  "relocation_strict_match_percent": 97.52778,
+  "outcome": "Rejected. Extending effect through the three stores triggers the broad r30/r31 allocation swap despite the declaration-order change. The 99.9% source was restored."
+}

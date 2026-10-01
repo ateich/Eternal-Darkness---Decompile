@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "assignment_id": "cecacaa3-f0b0-44c0-89e0-de549027140a",
+  "attempt": 6,
+  "base_commit": "ed7cef221b825002d1e450503f47b9a90bc7c0c0",
+  "target": "fn_801D9D14",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-cecacaa3-f0b0-44c0-89e0-de549027140a.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-strict-cecacaa3-f0b0-44c0-89e0-de549027140a.json",
+    "eternal-darkness-decomp/reports/GEDE01/verification-cecacaa3-f0b0-44c0-89e0-de549027140a.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-cecacaa3-f0b0-44c0-89e0-de549027140a.log",
+    "eternal-darkness-decomp/reports/GEDE01/retail-disassembly-relocations-cecacaa3-f0b0-44c0-89e0-de549027140a.txt",
+    "eternal-darkness-decomp/reports/GEDE01/generated-disassembly-relocations-cecacaa3-f0b0-44c0-89e0-de549027140a.txt",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-relocation-diff-cecacaa3-f0b0-44c0-89e0-de549027140a.diff",
+    "eternal-darkness-decomp/reports/GEDE01/experiment-cecacaa3-f0b0-44c0-89e0-de549027140a.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-baseline-cecacaa3-f0b0-44c0-89e0-de549027140a.log",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-baseline-cecacaa3-f0b0-44c0-89e0-de549027140a.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-baseline-strict-cecacaa3-f0b0-44c0-89e0-de549027140a.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-experiment-cecacaa3-f0b0-44c0-89e0-de549027140a.log",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-experiment-cecacaa3-f0b0-44c0-89e0-de549027140a.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-experiment-strict-cecacaa3-f0b0-44c0-89e0-de549027140a.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 99.9% for exact 720-byte functions (180 instructions). Three instruction words remain different: at 0x220 retail stw r0,0xA0(r30) versus generated stw r0,0x15C(r31); at 0x230 retail stw r3,0x94(r30) versus generated stw r3,0x150(r31); at 0x23C retail stb r0,0xAA(r30) versus generated stb r0,0x166(r31). All 31 ELF relocations agree under function_reloc_diffs=name_address. The bounded declaration-order/full-effect experiment regressed to 97.52778% by triggering the global r30/r31 swap, so the prior 99.9% NonMatching C source was restored."
+}
