@@ -81,6 +81,7 @@ LIBRARY_MW_VERSIONS = {
     "exi": SDK_MW_VERSION,
     "gx": SDK_MW_VERSION,
     "base": SDK_MW_VERSION,
+    "db": SDK_MW_VERSION,
 }
 
 config.asflags = ["-mgekko", "--strip-local-absolute", "-I include", f"-I build/{VERSION}/include"]
@@ -13300,6 +13301,13 @@ config.libs = [
         "cflags": cflags_base,
         "progress_category": "sdk",
         "objects": [Object(Matching, "dolphin/base/PPCArch.s")],
+    },
+    {
+        "lib": "db",
+        "mw_version": LIBRARY_MW_VERSIONS["db"],
+        "cflags": cflags_base,
+        "progress_category": "sdk",
+        "objects": [Object(Matching, "dolphin/db/fn_80209B8C.c")],
     },
     {
         "lib": "gx",

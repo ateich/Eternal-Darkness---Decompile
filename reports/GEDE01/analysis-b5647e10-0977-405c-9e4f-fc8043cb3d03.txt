@@ -1,0 +1,39 @@
+Target: fn_80209B8C, named DBInit in the accepted base symbols.txt.
+Reviewed preserved attempts 645ba81f, 07ba7532, 937333ba, a1cc4e79.
+The first attempt edited neighboring db.c; subsequent attempts used the scoped
+independent TU, with identical instruction output. Attempts 2/3 used
+name_address relocation comparison and attempt 4 used all. All were rejected
+by integration, with the last three reporting missing relocation-strict match.
+
+New concrete codegen hypothesis: express the physical exception-vector store
+as offset 8 of a typed low-memory DB interface at 0x80000040, rather than an
+independent integer store to 0x80000048. GC/1.2.5n constant folding should retain
+the shared r4 high-address base and the addis physical-address conversion.
+The three struct words represent the two preceding words and exception vector;
+no neighboring function, global data layout, or runtime policy is changed.
+
+Measured result: the typed store matches all ten instructions (40 bytes) and
+all objdiff relocation records under function_reloc_diffs=all. This is retained
+in the independent dolphin/db/fn_80209B8C.c TU. The canonical SDK compiler and
+flags are recorded in compiler evidence. The two owned SBSS words occupy the
+same 8 bytes as the preserved reconstruction and match their retail layout.
+
+Raw readelf confirms HA/LO target __DBExceptionDestination with addend zero,
+and SDA21 targets __DBInterface and DBVerbose with addend zero. Reference SDA21
+sites 0x0c and 0x20 versus compiled 0x0e and 0x22 describe the same instruction
+fields; objdiff normalizes this ELF representation. The synthesized R_PPC_NONE
+record carries __DBExceptionDestination plus 2147483648 on both sides.
+No remaining codegen or relocation-semantic divergence.
+
+Evidence packaging hypothesis: the rejected reports supplied raw left/right
+objdiff JSON directly under objdiff-ASSIGNMENT.json, without a relocation_strict
+measurement block. This attempt follows the structured summary shape in the
+accepted 009d3633 report, explicitly mapping target fn_80209B8C to DBInit and
+referencing fresh unmodified canonical and strict raw JSON. The integrator
+implementation is absent from this checkout, so its exact rejection cause is
+not proven here; no runtime/gate changes were made.
+
+Fresh python3 configure.py and .tools/bin/ninja -j2 succeeded. Source-linked DOL
+SHA-1 is ea24b6af954876ce072562ff39cdb4c81d32be1f. Reports retain raw build,
+legal audit, hash, instruction diff, relocation tables and disassembly.
+The pre-existing CLAUDE.md modification is excluded from the commit.
