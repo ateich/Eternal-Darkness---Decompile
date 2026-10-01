@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "assignment_id": "af0b8c64-a48e-4b52-ab52-f48f1c14e35c",
+  "attempt": 7,
+  "target": "fn_801247F8",
+  "preserved_commit_reviewed": "6bcb2fa3a36eee2444b0360cdc7e3fa5522a9c52",
+  "baseline": {
+    "source": "src/game/game_fn_801247F8.c",
+    "registration": "Object(NonMatching, \"game/game_fn_801247F8.c\")",
+    "canonical_match_percent": 99.84615,
+    "relocation_strict_match_percent": 99.84615,
+    "size_bytes": 260,
+    "instruction_count": 65
+  },
+  "experiment": {
+    "name": "commuted_pointer_addition_expression",
+    "hypothesis": "Writing the defined pointer addition as entry_index + entry may preserve the integer-index operand as the first indexed-load input and select retail lwzx r4,r8,r4 without changing lifetime or adding an instruction.",
+    "source_delta": [
+      "-        if (entry != 0 && *(u32*)(entry + entry_index) != 0xFFFFFFFF) {",
+      "+        if (entry != 0 && *(u32*)(entry_index + entry) != 0xFFFFFFFF) {"
+    ],
+    "compiler_argv": "tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma cats off -pragma warn_notinlined off -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -MMD -c src/game/game_fn_801247F8.c -o build/GEDE01/src/game",
+    "compiler_exit": 0,
+    "build_output": [
+      "[1/2] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma cats off -pragma warn_notinlined off -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -MMD -c src/game/game_fn_801247F8.c -o build/GEDE01/src/game",
+      "[2/2] python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_801247F8.o @22 lbl_80650108 orig/GEDE01/sys/main.dol --require-whole-section"
+    ],
+    "canonical_match_percent": 99.84615,
+    "relocation_strict_match_percent": 99.84615,
+    "result": "Compiler canonicalized the commuted pointer addition. Baseline and experiment objdiff JSON are byte-identical (SHA-256 ff4dbf675ada636aa7b4c7ec9058a55ea4afecf1901ebc395ddf9b42ec6cfa0a). The strongest preserved source was restored unchanged."
+  },
+  "remaining_instruction_difference": {
+    "offset": "0x3C",
+    "retail": "lwzx r4,r8,r4",
+    "candidate": "lwzx r4,r4,r8"
+  },
+  "relocations": "Four relocation entries agree by offset, R_PPC_EMB_SDA21 type, target name, and zero addend. ELF symbol-table indices and relocation-section file offsets are non-semantic container differences."
+}

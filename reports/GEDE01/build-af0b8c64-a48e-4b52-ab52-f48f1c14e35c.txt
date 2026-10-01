@@ -1,0 +1,5 @@
+Script started on 2026-10-01 15:53:25-04:00 [COMMAND=".tools/bin/ninja -v build/GEDE01/src/game/game_fn_801247F8.externalized" <not executed on terminal>]
+[1/2] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -MMD -c src/game/game_fn_801247F8.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_801247F8.d build/GEDE01/src/game/game_fn_801247F8.d
+[2/2] python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_801247F8.o @22 lbl_80650108 orig/GEDE01/sys/main.dol --require-whole-section && build/binutils/powerpc-eabi-objcopy --redefine-sym=@22=lbl_80650108 --remove-section=.sdata2 --rename-section=.comment=.ignored build/GEDE01/src/game/game_fn_801247F8.o && touch build/GEDE01/src/game/game_fn_801247F8.externalized
+
+Script done on 2026-10-01 15:53:26-04:00 [COMMAND_EXIT_CODE="0"]
