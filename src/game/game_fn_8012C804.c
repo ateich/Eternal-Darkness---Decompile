@@ -4,73 +4,107 @@ typedef unsigned short u16;
 typedef unsigned int u32;
 
 typedef struct Pair { u32 first; u32 second; } Pair;
-typedef struct State { void* inherited; u16 flags; u16 pad; } State;
-typedef struct Context { u8 pad[0x17C]; State state[24]; } Context;
+
+typedef struct Graph {
+    u8 pad0[6];
+    u16 count;
+    u16* entries;
+    s8 slot;
+    s8 child_slot;
+} Graph;
+
+typedef struct Part {
+    u8 pad0[4];
+    Graph* graph;
+    u16 flags;
+    u16 mode;
+    u8 padC[0x20];
+    u32 value2C;
+    u8 pad30[0xC];
+    u32 value3C;
+    u16 value40;
+    u8 pad42[0x12];
+    u32 value54;
+    u16 value58;
+    u8 pad5A[0x12];
+    Pair pair;
+} Part;
+
+typedef struct State { Part* inherited; u16 flags; u16 pad; } State;
+
+typedef struct Context {
+    u8 pad0[0x17C];
+    State state[24];
+    u8 pad23C[4];
+    Part** parts;
+    u8 pad244[0x34];
+    float value278;
+} Context;
 
 extern void fn_80125ECC(void*);
-extern void fn_8012BFE4(u8*);
-extern void fn_8012C478(u8*, int, int);
-extern void fn_8012CAC4(u8*, int, void*);
+extern void fn_8012BFE4(Context*);
+extern void fn_8012C478(Context*, int, int);
+extern void fn_8012CAC4(Context*, int, Part*);
 
-/* NonMatching: honest reconstruction of the complete state-clone path. */
-void fn_8012C804(u8* dst, u8* src, int index)
+void fn_8012C804(Context* dst, Context* src, int index)
 {
     int index_offset;
     int i;
-    u8* selected_object;
-    u8* graph;
-    u8* src_object;
+    Part* selected;
+    Graph* graph;
+    Part* part;
     u16 entry;
-    void* inherited;
+    Part* inherited;
+    Graph* source;
 
     fn_80125ECC(dst);
     index_offset = index * 4;
 
     for (i = 0; i < 24; i++) {
-        ((Context*)dst)->state[i].flags = 0;
-        ((Context*)dst)->state[i].inherited = 0;
+        dst->state[i].flags = 0;
+        dst->state[i].inherited = 0;
     }
 
-    graph = *(u8**)(*(u8**)(*(u8**)(dst + 0x240) + index_offset) + 4);
-    for (i = 0; i < *(u16*)(graph + 6); i++) {
-        entry = *(u16*)(*(u8**)(graph + 8) + i * 2);
+    graph = (*(Part**)((u8*)dst->parts + index_offset))->graph;
+    for (i = 0; i < graph->count; i++) {
+        entry = graph->entries[i];
         if (entry & 0x8000) {
-            /* Clear the child tag after integer promotion. */
             int child = entry & ~0x8000;
-            src_object = (*(u8***)(src + 0x240))[child];
-            if (*(u16*)(src_object + 8) & 1) {
+
+            part = src->parts[child];
+            if (part->flags & 1) {
                 fn_8012C478(dst, child, 1);
             } else {
-                s8 slot = *(s8*)(*(u8**)((*(u8***)(dst + 0x240))[child] + 4) + 0xD);
+                s8 slot = dst->parts[child]->graph->child_slot;
+
                 if (slot != -1) {
-                    *(u16*)(dst + 0x180 + slot * 8) |= 1;
+                    dst->state[slot].flags |= 1;
                 }
             }
-        } else if (((Context*)src)->state[entry].flags & 1) {
-            ((Context*)dst)->state[entry].flags |= 1;
+        } else if (src->state[entry].flags & 1) {
+            dst->state[entry].flags |= 1;
         }
     }
 
     {
-        s8 slot = *(s8*)(graph + 0xC);
+        s8 slot = graph->slot;
+
         if (slot != -1) {
-            Context* context = (Context*)dst;
-            context->state[slot].flags |= 1;
+            dst->state[slot].flags |= 1;
         }
     }
 
     for (i = 0; i < 18; i++) {
-        src_object = *(u8**)(*(u8**)(src + 0x240) + i * 4);
-        if (src_object != 0) {
-            entry = *(u16*)(src_object + 0xA);
-            selected_object = *(u8**)(*(u8**)(dst + 0x240) + i * 4);
-            if (entry & 0x3F) {
-                *(u16*)(selected_object + 0xA) = entry;
-                *(u32*)(selected_object + 0x3C) = *(u32*)(src_object + 0x3C);
-                *(u16*)(selected_object + 0x40) = *(u16*)(src_object + 0x40);
-                *(u32*)(selected_object + 0x54) = *(u32*)(src_object + 0x54);
-                *(u16*)(selected_object + 0x58) = *(u16*)(src_object + 0x58);
-                *(Pair*)(selected_object + 0x6C) = *(Pair*)(src_object + 0x6C);
+        part = src->parts[i];
+        if (part != 0) {
+            selected = dst->parts[i];
+            if (part->mode & 0x3F) {
+                selected->mode = part->mode;
+                selected->value3C = part->value3C;
+                selected->value40 = part->value40;
+                selected->value54 = part->value54;
+                selected->value58 = part->value58;
+                selected->pair = part->pair;
             }
         }
     }
@@ -78,19 +112,19 @@ void fn_8012C804(u8* dst, u8* src, int index)
     fn_8012BFE4(dst);
 
     inherited = 0;
-    graph = *(u8**)(*(u8**)(*(u8**)(src + 0x240) + index_offset) + 4);
-    for (i = 0; i < *(u16*)(graph + 6); i++) {
-        entry = *(u16*)(*(u8**)(graph + 8) + i * 2);
+    source = src->parts[index]->graph;
+    for (i = 0; i < source->count; i++) {
+        entry = source->entries[i];
         if (!(entry & 0x8000)) {
-            inherited = ((State*)(src + 0x17C))[entry].inherited;
+            inherited = src->state[entry].inherited;
             break;
         }
     }
     if (inherited != 0) {
-        *(u16*)(selected_object + 8) = *(u16*)((u8*)inherited + 8);
-        *(u32*)(selected_object + 0x2C) = *(u32*)((u8*)inherited + 0x2C);
+        selected->flags = inherited->flags;
+        selected->value2C = inherited->value2C;
     }
 
-    fn_8012CAC4(dst, index, selected_object);
-    *(float*)(dst + 0x278) = *(float*)(src + 0x278);
+    fn_8012CAC4(dst, index, selected);
+    dst->value278 = src->value278;
 }

@@ -18,15 +18,14 @@ typedef struct OwnerData {
 
 typedef struct RangeData {
     u8 pad00[0x2C];
-    s8 low;
+    u8 low;
     u8 pad2D[7];
-    s8 middle;
+    u8 middle;
     u8 pad35[7];
-    s8 high;
+    u8 high;
 } RangeData;
 
-extern unsigned int fn_800FBFB0(void);
-#define fn_800FBFB0() ((int)fn_800FBFB0())
+extern int fn_800FBFB0(void);
 extern void *fn_80201B8C();
 extern void *fn_80201BC8();
 extern void fn_800360B0(void *, u16 *);
@@ -43,12 +42,12 @@ s32 fn_8006053C(void *owner, s32 enabled)
     s32 select;
     RangeData *range;
     Vec3 position;
-    s32 low;
-    s32 middle;
-    s32 high;
+    s8 low;
+    s8 middle;
+    s8 high;
 
     fn_800360B0(owner, &flags);
-    select = enabled & ~(-((flags >> 7) & 1));
+    select = (flags & 0x80) ? 0 : enabled;
     range = fn_80072354(owner_data->range);
     fn_8011F114(&position, resource);
 
@@ -67,13 +66,15 @@ s32 fn_8006053C(void *owner, s32 enabled)
         flags |= 2;
     }
 
-    value = (flags & 1) ? (s8)middle : value;
+    if (flags & 1) {
+        value = middle;
+    }
     if (flags & 2) {
         if (flags & 1) {
             if (select != 0) {
-                value = (s8)high;
+                value = high;
             } else {
-                value = (s8)high + 1;
+                value = high + 1;
             }
         } else {
             value = low;
@@ -83,10 +84,10 @@ s32 fn_8006053C(void *owner, s32 enabled)
     if (value <= low) {
         return 4;
     }
-    if (value <= (s8)middle) {
+    if (value <= middle) {
         return 5;
     }
-    if (value <= (s8)high) {
+    if (value <= high) {
         return 6;
     }
     return -1;

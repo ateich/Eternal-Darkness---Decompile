@@ -22,45 +22,52 @@ extern void *fn_80201814();
 extern void *fn_80201B8C();
 extern int fn_80201EB8();
 
-s32 fn_80067858(s32 object_id)
+static inline s32 claim_slot(s32 object_id, s32 *free_slot)
 {
-    ObjectState *state;
-    s32 free_slot;
-    void *object;
-    s32 found;
-    RuntimeSlot **installed;
     s32 result;
+    s32 found;
+    void *object;
+    ObjectState *state;
     s32 i;
+    RuntimeSlot **installed;
+    s32 id;
+    RuntimeSlot *entry;
 
     object = fn_80201814(object_id);
     found = 0;
     result = -1;
-    free_slot = -1;
+    *free_slot = -1;
     state = fn_80201B8C(object);
-    if (state->kind == 3 && state->mode == 2 &&
-        fn_80201EB8(object) == lbl_8064D18C && state->installed != 0 &&
-        *state->installed == 0) {
-        installed = state->installed;
-        for (i = 0; i < 12; i++) {
-            if (lbl_8030FBF8[i].object_id == object_id) {
+    if (state->kind == 3 && state->mode == 2 && fn_80201EB8(object) == lbl_8064D18C &&
+        (installed = state->installed) != 0 && *installed == 0) {
+        for (i = 0, entry = lbl_8030FBF8; i < 12; entry++, i++) {
+            id = entry->object_id;
+            if (object_id == id) {
                 result = i;
                 found++;
-            } else if (lbl_8030FBF8[i].object_id == 0 && free_slot == -1) {
-                free_slot = i;
+            } else if (id == 0 && *free_slot == -1) {
+                *free_slot = i;
             }
         }
 
-        if (found == 0 && free_slot == -1) {
+        if (found == 0 && *free_slot == -1) {
             return result;
         }
         if (found > 1) {
             return result;
         }
-        if (free_slot != -1 && found != 1) {
-            result = free_slot;
-            lbl_8030FBF8[free_slot].object_id = object_id;
-            *installed = &lbl_8030FBF8[free_slot];
+        if (*free_slot != -1 && found != 1) {
+            result = *free_slot;
+            lbl_8030FBF8[*free_slot].object_id = object_id;
+            *installed = &lbl_8030FBF8[*free_slot];
         }
     }
     return result;
+}
+
+s32 fn_80067858(s32 object_id)
+{
+    s32 free_slot;
+
+    return claim_slot(object_id, &free_slot);
 }

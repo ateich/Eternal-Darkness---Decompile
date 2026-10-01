@@ -39,10 +39,29 @@ extern void fn_80124664(void *, int, int, float);
 extern float lbl_8064F460;
 extern float lbl_8064F464;
 
-int fn_800DCBC0(void *context, int phase, void *message, int *handled)
+typedef struct Actor Actor;
+typedef struct Message Message;
+
+int fn_800DCBC0(void *arg0, int phase, void *arg2, int *handled)
 {
-    int kind = fn_80200C10(message);
-    void *object = fn_80201BC8(context);
+    int source_kind;
+    void *object;
+    Actor *context;
+    int other;
+    Message *message;
+    int source_model;
+    int object_kind;
+    int object_model;
+    LinkedObject *linked;
+    int different;
+    int value;
+    int existing;
+    int kind;
+
+    context = arg0;
+    message = arg2;
+    kind = fn_80200C10(message);
+    object = fn_80201BC8(context);
 
     if (phase == 0) {
         if (kind == 1) {
@@ -51,7 +70,7 @@ int fn_800DCBC0(void *context, int phase, void *message, int *handled)
             return 1;
         }
         if (kind == 240) {
-            int value = fn_80200C38(message);
+            value = fn_80200C38(message);
             fn_80201D34(context, value);
             fn_80201D1C(context, 1);
             if (handled != 0)
@@ -80,13 +99,6 @@ int fn_800DCBC0(void *context, int phase, void *message, int *handled)
             return 1;
         }
         if (kind == 3) {
-            int source_model;
-            int object_model;
-            int source_kind;
-            int object_kind;
-            int existing;
-
-            /* The message is no longer needed; reuse it for the source object. */
             message = fn_8011FE4C();
             fn_8011FAEC();
             source_model = fn_80128EAC(message);
@@ -102,7 +114,7 @@ int fn_800DCBC0(void *context, int phase, void *message, int *handled)
                     object_kind = 0;
                     fn_8011FC38(object, 0, 0);
                 } else {
-                    LinkedObject *linked = fn_8004279C(object);
+                    linked = fn_8004279C(object);
                     if (linked != 0) {
                         object_kind = linked->kind;
                         fn_8011FC38(object, object_kind, 0);
@@ -112,10 +124,8 @@ int fn_800DCBC0(void *context, int phase, void *message, int *handled)
 
             existing = fn_8012A100(object, 15);
             if (object_kind == source_kind) {
-                int other = fn_8012A100(object, source_model);
-                int object_flag = fn_801290D0(object) & 2;
-                int source_flag = fn_801290D0(message) & 2;
-                int different = source_flag != object_flag;
+                other = fn_8012A100(object, source_model);
+                different = (fn_801290D0(message) & 2) != (fn_801290D0(object) & 2);
 
                 fn_8012915C(object);
                 fn_8012915C(message);
@@ -124,7 +134,6 @@ int fn_800DCBC0(void *context, int phase, void *message, int *handled)
                     fn_8011EB04(message) != 121 &&
                     fn_8011EB04(message) != 122 &&
                     fn_8011EB04(message) != 120) {
-                    /* Dispatch is complete; reuse kind for the transition flags. */
                     kind = 0x30;
                     if (fn_8012915C(message) == 0)
                         kind = 0x10030;

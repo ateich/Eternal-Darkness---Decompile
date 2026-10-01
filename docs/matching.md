@@ -848,3 +848,127 @@ each qualifier moves a load to its retail position. `fn_8015DF60` keeps the
 second bound computation, stored to an unused `u16`, under
 `opt_dead_assignments off`; retail performs those loads and discards the
 result. `fn_8019E0B0` needed only its `.sdata2` constant name.
+
+## Declaration order, by-value points, expression types, and inline helpers
+
+Twenty further functions match. Each builds with the whole-DOL SHA-1
+`ea24b6af954876ce072562ff39cdb4c81d32be1f` and reports 100% under both the
+default and `function_reloc_diffs=name_address` objdiff settings. Together
+they total 14,176 code bytes and 499 relocation sites.
+
+Most of the remaining differences in these units were register order. MWCC
+numbers parameters first, then locals in reverse declaration order, then
+compiler temps, and the highest number is usually coloured first. Moving a
+declaration is enough in `fn_8017D1E0` and `fn_800DC9A8`. A local assigned
+from a parameter of the same type is propagated away, but a typed copy of a
+`void *` parameter stays a local with its own number: `fn_8007930C`,
+`fn_800741E8` and `fn_80202678` take `void *arg0, void *arg1` and start by
+copying them into typed locals (`context = arg0; object = arg1;` in
+`fn_8007930C`), declared where the register order needs them. A variable that
+is assigned twice becomes two compiler temps, so a second pointer that retail
+keeps in its own register needs its own local: in `fn_80155330` the second
+work block is reached through `extra = next = &second.work;` instead of
+reusing `work`. In `fn_800DC9A8` the list cursor `node` is declared in the
+block after `list`, which keeps retail's `node = list` copy.
+
+A dead conversion can move stores. `fn_80155330` stored `(u16)fn_801D3A24(...)`
+into a halfword field. The cast leaves an `rlwinm` that reads r3 and is then
+deleted, but the scheduler has already placed the `id` store one cycle later,
+which pushes the `= 7` store past the argument load and changes its register
+(r7 instead of r5). `fn_801D3A24`'s own source returns `s16` (it ends in
+`extsh`); declaring it that way and typing the field `s16` removes the
+conversion. The loop bound in the same function is `loop_count = count & 0xff;`
+declared after `element`; `(u8)count` becomes a late compiler temp and takes the
+wrong register.
+
+Block-scoped locals are numbered after every outer local and block by block, so
+they cannot interleave. `fn_80199868` reuses the same saved registers across its
+three blocks in an order that needs block-3 values numbered between block-2
+values, so all of its locals are declared at function level with distinct names.
+Block 2 keeps the group number in its own local
+(`group = (frame - start) / period; attach_first = group * count;`) and reads
+the target and source arrays with a `step` counter that starts at 0
+(`config->targets[step]`, `config->sources[step]`).
+
+`fn_80194AC4` computes `flags` and `width` before the output pointers, which
+gives retail's scratch registers. The 0x400 branch has its own `count` and writes
+the remainder as `width - count` instead of a local; the loop uses its own `i`.
+`.sdata2` rule for `@29`.
+
+`fn_8006053C` reads three `u8` fields into `s8` locals. The conversion gives the
+`extsb` after each load, the sums stay unextended, and each use sign-extends
+again, as in retail; `s8` fields skip the first `extsb`, and `int` locals with
+`(s8)` casts add a copy.
+
+`fn_800DCBC0` declares every local at function level (block scopes again stop
+retail's interleaved numbering), copies both pointer parameters into typed
+locals (`context = arg0; message = arg2;`), and computes the flag test as one
+expression, `different = (fn_801290D0(message) & 2) != (fn_801290D0(object) & 2);`.
+MWCC evaluates the right operand of `!=` first, so `object` is queried first as
+in retail, and dropping the two flag locals frees the register pair that was
+swapped. The upstream comment in the function is removed.
+
+`fn_8014BA14` and `fn_801D73D0` take their two points as `Vec3s` passed by
+value and hand `&first` and `&second` to their helpers; the call sites are the
+same, since a struct argument travels as a pointer in a register. Retail loads
+every coordinate before the first store into an address-taken `Vec3` and keeps
+the int-to-float results in temporaries above the `0x43300000` constant. A
+by-value parameter is a local object, and MWCC does not let two distinct locals
+alias, so the direct stores (`a.x = first.x;`,
+`midpoint.x = (first.x + second.x) >> 1;`) give exactly that. Through `s16 *`
+parameters the stores pin the loads: float locals then match the integer
+registers but number below the constant, and int locals match the float
+registers but not the integer ones. `fn_8014BA14`'s `.sdata2` rule becomes
+`@65`; `fn_801D73D0`'s `Target` gains the `DamageData *` at 0x2C.
+
+Expression types decide what MWCC's common-subexpression pass can share. In
+`fn_801BA94C` the next-stream field is `unsigned long` and both checks compare
+it with `0xFFFFFFFF`, an `unsigned int`; the compare and the call argument then
+differ in type, so only the field address is shared and the two loads merge
+later, leaving retail's `add` plus `lwz 0x0` where an `unsigned int` field gives
+`lwzx`. The function's second level is written out as `mix_linked`, which
+calls the out-of-line `fn_801B9D1C` and `fn_801BA128` as retail's inlined copy
+does; the externalize rule now names `@68` and `@70`. In `fn_8012C804`,
+`index_offset = index * 4;` sits right after `fn_80125ECC` and is used for the
+`dst` part while the `src` part stays `src->parts[index]`. Both scalings are the
+same `int` expression, so they fold into one compiler temporary defined before
+the clear loop and numbered as retail needs; `index * sizeof(Part*)` is
+`unsigned long` and keeps them apart.
+
+`fn_80067858`'s early exits branch to the shared `mr r3, r31` in retail instead
+of copying the result themselves. MWCC merges copies only between compiler
+temporaries; plain locals are numbered before the merge window opens and never
+take part. The body is therefore a `static inline` helper,
+`claim_slot(object_id, &free_slot)`, and `result` is one of its locals,
+so each `return result;` copy merges into it and leaves a bare branch. `found`
+and `object` are helper locals too, numbered above `result`, which keeps
+`result` held back until `r31` is handed out; `free_slot` stays a local of the
+caller. The table is walked with an `entry` pointer next to `i`, the claimed
+slot is written as `lbl_8030FBF8[*free_slot]` twice so the index product is a
+shared temporary as in retail, and the helper declares
+`result, found, object, state, i, installed, id, entry` in that order.
+
+Smaller changes:
+
+- `fn_8008CEF0` copies the world position with one chained assignment,
+  `query_position = stored_position = world_position;`, and declares `value`
+  after `result`.
+- `fn_80187320` converts `base` before setting up the bounds and indexes
+  `bounds[index]` directly. Its `.sdata2` constant is now `@27`, so the
+  existing externalization entry changes from `@25`.
+- `fn_8017D1E0` keeps the branch form of absolute value through
+  `#define ABS(x) ((x) < 0 ? -(x) : (x))`.
+- `fn_8006330C` replaces the `M2C_FIELD` accesses with `Data` and `State`
+  structures and moves `event` to function scope ahead of `delay`.
+- `fn_8012FB50` sets `context->state[entry].flags |= 2;` in the loop. Retail
+  has a lone `nop` in the `index == -1` branch, written `asm { nop }`; without
+  the asm block the loop above it also compiles differently (`lhzx`
+  addressing, `r3` and `r4` swapped).
+- `fn_802076C4` is the SDK's `TCIntrruptHandler`, written as the SDK writes it:
+  `EXIClearInterrupts` and `CompleteTransfer` are static inlines (their locals
+  give retail's stack slots), `CompleteTransfer` tests `(len = exi->immLen)`,
+  and `OSContext` is 0x2C8 bytes. The handler is not `static`, because
+  `EXIInit` references it from another unit.
+
+`fn_8008CEF0` and `fn_800DC9A8` add `.sdata2` externalization entries for their
+float constants (`@51` to `lbl_8064EC18`, `@29` to `lbl_8064F4F0`).

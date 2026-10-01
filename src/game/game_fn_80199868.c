@@ -3,6 +3,52 @@ typedef signed short s16;
 typedef unsigned short u16;
 typedef unsigned long u32;
 
+typedef struct Point {
+    u8 flag0;
+    u8 pad1[9];
+    s16 position[3];
+    u8 value10[0xC];
+    s16 value1C;
+    u8 pad1E[0xD];
+    u8 state2B[0xD];
+} Point;
+
+typedef struct Config {
+    u8 period;
+    u8 count;
+    u8 start;
+    u8 value3;
+    u8 value4;
+    u8 pad5[0x17];
+    u32 actor;
+    void* targets[2];
+    void* sources[2];
+} Config;
+
+typedef struct Effect {
+    u8 pad0;
+    u8 count;
+    u8 pad2[2];
+    u8 value4;
+    u8 pad5[5];
+    u16 frame;
+    u16 last;
+    u8 padE[0x14];
+    u16 state;
+    u8 list[0x28];
+    Point* points;
+    u8 pad50[0x3C];
+    Config config;
+} Effect;
+
+typedef struct Result {
+    u32 unused[2];
+    float x;
+    float y;
+    float z;
+    u32 padding[5];
+} Result;
+
 extern void fn_8018E230(void*, void*, int, u8, u8, u8);
 extern void fn_8018E260(void*, u8, u8);
 extern void* fn_80201814(u32);
@@ -14,84 +60,72 @@ extern int fn_80180430(void*, u8);
 extern int fn_80180454(void*);
 extern void fn_8017DCA8(void*, s16, void*);
 
-int fn_80199868(u8* object)
+int fn_80199868(Effect* object)
 {
-    u8* config = object + 0x8c;
-    struct {
-        u32 unused[2];
-        float x;
-        float y;
-        float z;
-        u32 padding[5];
-    } result;
-
-    {
-    int index;
-    int first;
-    u8* entry;
-    if (*(u16*)(object + 0xa) % config[0] == 0) {
-        first = *(u16*)(object + 0xa) / config[0];
-        first *= config[1];
-        entry = *(u8**)(object + 0x4c) + first * 0x38;
-        for (index = first; index < first + config[1]; index++) {
-            fn_8018E230(entry, entry + 0x2b, 2, config[3], object[4], config[4]);
-            fn_8018E260(entry, config[3], config[4]);
-            entry += 0x38;
-        }
-    }
-    }
-
-    {
-    u8* entry;
-    u8* sequence;
-    void* actor;
-    int first;
-    int index;
-    if (*(u16*)(object + 0xa) >= config[2] &&
-        (*(u16*)(object + 0xa) - config[2]) % config[0] == 0 &&
-        *(u16*)(object + 0xa) <= *(u16*)(object + 0xc) &&
-        fn_80201814(*(u32*)(config + 0x1c)) != 0) {
-        actor = fn_80201BC8();
-        sequence = config;
-        first = (*(u16*)(object + 0xa) - config[2]) / config[0];
-        first *= config[1];
-        entry = *(u8**)(object + 0x4c) + first * 0x38;
-        for (index = first; index < first + config[1]; index++, sequence += 4) {
-            fn_8011F6A4(actor, *(void**)(sequence + 0x20),
-                        *(void**)(sequence + 0x28), -1, &result, 1);
-            *(s16*)(entry + 0xa) = (s16)result.x;
-            *(s16*)(entry + 0xc) = (s16)result.y;
-            *(s16*)(entry + 0xe) = (s16)result.z;
-            fn_80180518(object + 0x24, (u8)index, 1);
-            entry += 0x38;
-        }
-    }
-    }
-
-    {
-    u8* entry;
-    int index;
+    int step;
+    Config* config = &object->config;
+    Result result;
     int count;
-    entry = *(u8**)(object + 0x4c);
-    index = 0;
-    count = object[1];
-    for (; index < count; index++) {
-        if (entry[0] != 0) {
-            if (!fn_8018E26C(entry, entry + 0x2b)) {
-                fn_80180518(object + 0x24, (u8)index, 0);
+    int first;
+    int index;
+    Point* point;
+    int i;
+    Point* attach_point;
+    Point* current;
+    int attach_first;
+    int attach_index;
+    int group;
+    void* actor;
+
+    if (object->frame % config->period == 0) {
+        first = object->frame / config->period;
+        first *= config->count;
+        point = &object->points[first];
+        for (index = first; index < first + config->count; index++) {
+            fn_8018E230(point, point->state2B, 2, config->value3, object->value4,
+                        config->value4);
+            fn_8018E260(point, config->value3, config->value4);
+            point++;
+        }
+    }
+
+    if (object->frame >= config->start &&
+        (object->frame - config->start) % config->period == 0 &&
+        object->frame <= object->last &&
+        fn_80201814(config->actor) != 0) {
+        actor = fn_80201BC8();
+        step = 0;
+        group = (object->frame - config->start) / config->period;
+        attach_first = group * config->count;
+        attach_point = &object->points[attach_first];
+        for (attach_index = attach_first; attach_index < attach_first + config->count;
+             attach_index++, step++) {
+            fn_8011F6A4(actor, config->targets[step], config->sources[step], -1, &result, 1);
+            attach_point->position[0] = result.x;
+            attach_point->position[1] = result.y;
+            attach_point->position[2] = result.z;
+            fn_80180518(object->list, attach_index, 1);
+            attach_point++;
+        }
+    }
+
+    current = object->points;
+    count = object->count;
+    for (i = 0; i < count; i++) {
+        if (current->flag0 != 0) {
+            if (!fn_8018E26C(current, current->state2B)) {
+                fn_80180518(object->list, i, 0);
             }
         }
-        if (fn_80180430(object + 0x24, (u8)index)) {
-            fn_8017DCA8(entry + 0xa, *(s16*)(entry + 0x1c), entry + 0x10);
+        if (fn_80180430(object->list, i)) {
+            fn_8017DCA8(current->position, current->value1C, current->value10);
         }
-        entry += 0x38;
-    }
+        current++;
     }
 
-    (*(u16*)(object + 0xa))++;
-    if (*(u16*)(object + 0xa) > *(u16*)(object + 0xc) &&
-        fn_80180454(object + 0x24)) {
-        *(u16*)(object + 0x22) = 8;
+    object->frame++;
+    if (object->frame > object->last && fn_80180454(object->list)) {
+        object->state = 8;
     }
     return 0;
 }

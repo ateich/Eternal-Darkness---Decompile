@@ -1,13 +1,16 @@
 typedef signed short s16;
+typedef unsigned char u8;
 typedef unsigned int u32;
 typedef struct Vec3 { float x, y, z; } Vec3;
+typedef struct Vec3s { s16 x, y, z; } Vec3s;
+typedef struct Actor Actor;
 
 extern u32 lbl_8064D5A8;
 extern u32 lbl_8064D0AC;
 extern const float lbl_806504AC;
 
-extern unsigned char fn_8018F764(void*);
-extern void fn_80198C8C(void*, int, int, int, int, int);
+extern unsigned char fn_8018F764(Actor*);
+extern void fn_80198C8C(Actor*, int, int, int, int, int);
 extern void* fn_8011FE4C(void*);
 extern int fn_80201A84(int);
 extern void *fn_80201814();
@@ -20,31 +23,31 @@ extern void fn_801A74A8(void*, int);
 extern void fn_801A7538(void*, int);
 extern void fn_801A7518(void*, int);
 extern void fn_801A7588(void*, int);
-#define FN_80201E78_RETURN void
-#define FN_80201E78_PARAMETERS Vec3*, void*
-extern FN_80201E78_RETURN fn_80201E78(FN_80201E78_PARAMETERS);
+extern void fn_80201E78(Vec3*, void*);
 extern u32 fn_80179004(Vec3*, Vec3*);
 extern void fn_801A764C(void*, Vec3*);
 extern void fn_801A7670(void*, int);
 extern void fn_8020104C(int, void*, void*, int, float);
 extern int fn_801A98F4(int, int);
 
-void fn_8014BA14(s16* first, s16* second, u32 id, void* owner)
+void fn_8014BA14(Vec3s first, Vec3s second, u32 id, void* arg3)
 {
+    Actor* owner;
     int special = 0;
+    int zone;
     int effect = 0;
     int allowed = 1;
-    int zone;
     void* room;
+    u8 level;
     void* spawn;
     Vec3 point;
     Vec3 a;
     Vec3 b;
     Vec3 middle;
-    float x2, z1, y1, x1, y2, z2;
     u32 da, db, dm;
     Vec3* nearest;
 
+    owner = arg3;
     if (id == 0)
         return;
     switch (id) {
@@ -76,11 +79,11 @@ void fn_8014BA14(s16* first, s16* second, u32 id, void* owner)
         case -4:
         case -3:
         case -2: {
-            effect = (unsigned char)((effect + 1) * 17 - 5);
+            level = (effect + 1) * 17 - 5;
             if (fn_8018F764(owner) == 9)
-                fn_80198C8C(owner, 6, 255, -3, 150, effect);
+                fn_80198C8C(owner, 6, 255, -3, 150, level);
             else
-                fn_80198C8C(owner, 1, 255, -3, 90, effect);
+                fn_80198C8C(owner, 1, 255, -3, 90, level);
             break;
         }
         default:
@@ -100,7 +103,7 @@ void fn_8014BA14(s16* first, s16* second, u32 id, void* owner)
         zone = fn_80201A84((int)fn_8011FE4C((void*)id));
         room = fn_80201814();
     }
-    if ((u32)(fn_8020123C(59, -1, zone, 4) & 0xffffffffULL) != 1)
+    if ((u32)(fn_8020123C(59, -1, zone, 4) & 0xFFFFFFFF) != 1)
         return;
     if (room == 0)
         return;
@@ -127,16 +130,17 @@ void fn_8014BA14(s16* first, s16* second, u32 id, void* owner)
     fn_801A7518(spawn, 10);
     fn_801A7588(spawn, 2);
     fn_80201E78(&point, room);
-    x1 = first[0]; y1 = first[1]; z1 = first[2];
-    x2 = second[0]; y2 = second[1]; z2 = second[2];
-    a.x = x1; a.y = y1; a.z = z1;
-    b.x = x2; b.y = y2; b.z = z2;
+    a.x = first.x;
+    a.y = first.y;
+    a.z = first.z;
+    b.x = second.x;
+    b.y = second.y;
+    b.z = second.z;
     da = fn_80179004(&point, &a);
     db = fn_80179004(&point, &b);
-    z1 = first[2] + ((second[2] - first[2]) >> 1);
-    x1 = first[0] + ((second[0] - first[0]) >> 1);
-    y1 = first[1] + ((second[1] - first[1]) >> 1);
-    middle.z = z1; middle.x = x1; middle.y = y1;
+    middle.x = first.x + ((second.x - first.x) >> 1);
+    middle.y = first.y + ((second.y - first.y) >> 1);
+    middle.z = first.z + ((second.z - first.z) >> 1);
     dm = fn_80179004(&point, &middle);
     if (da < db) {
         if (da < dm)

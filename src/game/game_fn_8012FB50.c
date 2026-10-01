@@ -1,52 +1,50 @@
 typedef unsigned char u8;
 typedef unsigned short u16;
 
-typedef struct List {
-    u8 pad[6];
+typedef struct Graph {
+    u8 pad0[6];
     u16 count;
-    u16* values;
-} List;
+    u16* entries;
+} Graph;
 
-typedef struct Entry {
-    u8 pad[4];
-    List* list;
-} Entry;
+typedef struct Part {
+    u8 pad0[4];
+    Graph* graph;
+} Part;
 
-typedef struct Flag {
-    u16 bits;
-    u8 pad[6];
-} Flag;
+typedef struct State {
+    Part* inherited;
+    u16 flags;
+    u16 pad;
+} State;
 
-typedef struct Object {
-    u8 pad[0x180];
-    Flag flags[24];
-    Entry** entries;
-} Object;
+typedef struct Context {
+    u8 pad0[0x17C];
+    State state[24];
+    u8 pad23C[4];
+    Part** parts;
+} Context;
 
 extern void fn_80125ECC(void *);
 
-/* NonMatching: retail keeps offset/value in r3/r4 and forms object + scaled
- * value before the 0x180 displacement; GC/1.3 uses r4/r3 and indexed access.
- * The return preserves the sentinel comparison, but its retail bne/nop tail
- * remains unmatched. See assignment d34d3aae reports for measured C variants. */
-void fn_8012FB50(Object* object, int index)
+void fn_8012FB50(Context* context, int index)
 {
-    Entry* entry;
-    int offset;
+    Part* part;
     int i;
-    u16 value;
+    u16 entry;
 
-    fn_80125ECC(object);
-    entry = object->entries[index];
-    if (entry != 0) {
-        List* list = entry->list;
-        for (i = 0, offset = 0; i < list->count; i++, offset += 2) {
-            value = *(u16*)((u8*)list->values + offset);
-            if (!(value & 0x8000)) {
-                object->flags[value].bits |= 2;
+    fn_80125ECC(context);
+    part = context->parts[index];
+    if (part != 0) {
+        Graph* graph = part->graph;
+
+        for (i = 0; i < graph->count; i++) {
+            entry = graph->entries[i];
+            if (!(entry & 0x8000)) {
+                context->state[entry].flags |= 2;
             }
         }
     } else if (index == -1) {
-        return;
+        asm { nop }
     }
 }
