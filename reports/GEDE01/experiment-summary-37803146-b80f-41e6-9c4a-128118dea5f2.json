@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "target": "fn_801FE2A8",
+  "experiment": "fallback declaration before input value, with assignments retained in retail load order",
+  "hypothesis": "Changing declaration order while preserving expression order may exchange the fallback and comparison pseudo-register allocation without changing scheduling.",
+  "source_change": "Replaced initialized declarations with `s16 default_value; s16 value; value = input->field30; default_value = lbl_8064D18C;`.",
+  "build_exit": 0,
+  "objdiff_exit": 0,
+  "generated_size": 492,
+  "canonical_match_percent": 99.87805,
+  "generated_object_sha256": "898790ff0d83dcf0e615f96b34d1634c2cdb9df57962ea6584ae4e6b6b5c733e",
+  "outcome": "Byte-identical to the accepted attempt; declaration order did not change allocation. The experimental source was discarded and the accepted source restored.",
+  "raw_output": "reports/GEDE01/experiment-37803146-b80f-41e6-9c4a-128118dea5f2.json"
+}
