@@ -1,0 +1,63 @@
+Script started on 2026-10-01 04:55:58-04:00 [COMMAND="build/binutils/powerpc-eabi-objdump -dr build/GEDE01/obj/dolphin/db/fn_80209BB4.o; build/binutils/powerpc-eabi-objdump -dr build/GEDE01/src/dolphin/db/fn_80209BB4.o" <not executed on terminal>]
+
+build/GEDE01/obj/dolphin/db/fn_80209BB4.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <fn_80209BB4>:
+   0:	7c 08 02 a6 	mflr    r0
+   4:	3c 60 00 00 	lis     r3,0
+			6: R_PPC_ADDR16_HA	lbl_802FCB88
+   8:	90 01 00 04 	stw     r0,4(r1)
+   c:	38 63 00 00 	addi    r3,r3,0
+			e: R_PPC_ADDR16_LO	lbl_802FCB88
+  10:	4c c6 31 82 	crclr   4*cr1+eq
+  14:	94 21 ff e8 	stwu    r1,-24(r1)
+  18:	93 e1 00 14 	stw     r31,20(r1)
+  1c:	80 80 00 c0 	lwz     r4,192(0)
+  20:	3f e4 80 00 	addis   r31,r4,-32768
+  24:	48 00 00 01 	bl      24 <fn_80209BB4+0x24>
+			24: R_PPC_REL24	OSReport
+  28:	7f e3 fb 78 	mr      r3,r31
+  2c:	48 00 00 01 	bl      2c <fn_80209BB4+0x2c>
+			2c: R_PPC_REL24	OSDumpContext
+  30:	48 00 00 01 	bl      30 <fn_80209BB4+0x30>
+			30: R_PPC_REL24	PPCHalt
+  34:	80 01 00 1c 	lwz     r0,28(r1)
+  38:	83 e1 00 14 	lwz     r31,20(r1)
+  3c:	38 21 00 18 	addi    r1,r1,24
+  40:	7c 08 03 a6 	mtlr    r0
+  44:	4e 80 00 20 	blr
+
+build/GEDE01/src/dolphin/db/fn_80209BB4.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <fn_80209BB4>:
+   0:	7c 08 02 a6 	mflr    r0
+   4:	3c 60 00 00 	lis     r3,0
+			6: R_PPC_ADDR16_HA	@2
+   8:	90 01 00 04 	stw     r0,4(r1)
+   c:	38 63 00 00 	addi    r3,r3,0
+			e: R_PPC_ADDR16_LO	@2
+  10:	4c c6 31 82 	crclr   4*cr1+eq
+  14:	94 21 ff e8 	stwu    r1,-24(r1)
+  18:	93 e1 00 14 	stw     r31,20(r1)
+  1c:	80 80 00 c0 	lwz     r4,192(0)
+  20:	3f e4 80 00 	addis   r31,r4,-32768
+  24:	48 00 00 01 	bl      24 <fn_80209BB4+0x24>
+			24: R_PPC_REL24	OSReport
+  28:	7f e3 fb 78 	mr      r3,r31
+  2c:	48 00 00 01 	bl      2c <fn_80209BB4+0x2c>
+			2c: R_PPC_REL24	OSDumpContext
+  30:	48 00 00 01 	bl      30 <fn_80209BB4+0x30>
+			30: R_PPC_REL24	PPCHalt
+  34:	80 01 00 1c 	lwz     r0,28(r1)
+  38:	83 e1 00 14 	lwz     r31,20(r1)
+  3c:	38 21 00 18 	addi    r1,r1,24
+  40:	7c 08 03 a6 	mtlr    r0
+  44:	4e 80 00 20 	blr
+
+Script done on 2026-10-01 04:55:58-04:00 [COMMAND_EXIT_CODE="0"]

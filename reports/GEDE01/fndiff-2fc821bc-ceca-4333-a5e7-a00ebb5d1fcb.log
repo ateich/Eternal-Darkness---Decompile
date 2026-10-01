@@ -1,0 +1,23 @@
+Script started on 2026-10-01 04:55:58-04:00 [COMMAND="python3 tools/fndiff.py dolphin/db/fn_80209BB4.c fn_80209BB4" <not executed on terminal>]
+ INFO Writing to /home/rabbit/src/darkfoundry-new/.darkfoundry/worktrees/81136289-d9d6-4a74-8320-2e4da3c1fe24/eternal-darkness-decomp/build/GEDE01/fndiff_fn_80209BB4.json
+target 72 bytes  base 72 bytes  match 100.0
+  0x0000  mflr r0                                              | mflr r0
+  0x0004  lis r3, lbl_802FCB88@ha [None+0 t6]                  | lis r3, @2@ha [None+0 t6]
+  0x0008  stw r0, 0x4(r1)                                      | stw r0, 0x4(r1)
+  0x000c  addi r3, r3, lbl_802FCB88@l [None+0 t4]              | addi r3, r3, @2@l [None+0 t4]
+  0x0010  crclr cr1eq                                          | crclr cr1eq
+  0x0014  stwu r1, -0x18(r1)                                   | stwu r1, -0x18(r1)
+  0x0018  stw r31, 0x14(r1)                                    | stw r31, 0x14(r1)
+  0x001c  lwz r4, 0xc0(r0)                                     | lwz r4, 0xc0(r0)
+  0x0020  addis r31, r4, 0x8000                                | addis r31, r4, 0x8000
+  0x0024  bl OSReport [None+0 t10]                             | bl OSReport [None+0 t10]
+  0x0028  mr r3, r31                                           | mr r3, r31
+  0x002c  bl OSDumpContext [None+0 t10]                        | bl OSDumpContext [None+0 t10]
+  0x0030  bl PPCHalt [None+0 t10]                              | bl PPCHalt [None+0 t10]
+  0x0034  lwz r0, 0x1c(r1)                                     | lwz r0, 0x1c(r1)
+  0x0038  lwz r31, 0x14(r1)                                    | lwz r31, 0x14(r1)
+  0x003c  addi r1, r1, 0x18                                    | addi r1, r1, 0x18
+  0x0040  mtlr r0                                              | mtlr r0
+  0x0044  blr                                                  | blr
+
+Script done on 2026-10-01 04:55:58-04:00 [COMMAND_EXIT_CODE="0"]

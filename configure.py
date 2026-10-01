@@ -13307,7 +13307,10 @@ config.libs = [
         "mw_version": LIBRARY_MW_VERSIONS["db"],
         "cflags": cflags_base,
         "progress_category": "sdk",
-        "objects": [Object(Matching, "dolphin/db/fn_80209B8C.c")],
+        "objects": [
+            Object(Matching, "dolphin/db/fn_80209B8C.c"),
+            Object(Matching, "dolphin/db/fn_80209BB4.c"),
+        ],
     },
     {
         "lib": "gx",
