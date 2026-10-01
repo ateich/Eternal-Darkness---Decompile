@@ -19,7 +19,6 @@ extern EXIControl Ecb_80640AA8[3];
 extern BOOL OSDisableInterrupts(void);
 extern BOOL OSRestoreInterrupts(BOOL);
 extern s64 OSGetTime(void);
-extern s64 fn_800F5ECC(s64, s64);
 
 volatile u32 __EXIRegs[15] : 0xCC006800;
 volatile s32 __OSDeviceCode[3] : 0x800030C0;
@@ -51,8 +50,7 @@ BOOL __EXIProbe_80206F50(s32 chan)
         if (cpr & 0x1000) {
             s32 time;
             u32 ticksPerMillisecond = (*(u32 *)0x800000F8 / 4) / 1000;
-            time = (s32)fn_800F5ECC(
-                fn_800F5ECC(OSGetTime(), ticksPerMillisecond), 100) + 1;
+            time = (s32)(OSGetTime() / ticksPerMillisecond / 100) + 1;
             if (__OSDeviceCode[chan] == 0) {
                 __OSDeviceCode[chan] = time;
             }

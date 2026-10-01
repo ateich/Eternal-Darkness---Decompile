@@ -30,12 +30,9 @@ s32 fn_801E2BF8(void* object)
     EffectState* state = fn_801FD6F4(object);
 
     if (state != 0) {
-        f32 value = (f32)state->increment + state->value;
-
-        if (state->limit < value) {
-            value = state->limit;
-        }
-        state->value = value;
+        state->value = state->limit < state->value + state->increment
+                           ? state->limit
+                           : state->value + state->increment;
         state->value = lbl_80651240 > state->value ? lbl_80651240 : state->value;
         if (state->timer >= state->duration) {
             if (fn_801FE05C(object) != 0) {

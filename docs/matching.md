@@ -1064,3 +1064,121 @@ lines off. `fn_801D84F4` copies its callback argument to
 `Object *object = arg;`, declared after `count`. `fn_801F3528` takes its
 `Color8` by value and stores the whole color to `lbl_8064C384` before the four
 channels; storing it after the channels is 26 lines off.
+## Static-pool order, parameter copies, and call-site types
+
+Nineteen further functions match. Each builds with the whole-DOL SHA-1
+`ea24b6af954876ce072562ff39cdb4c81d32be1f` and reports 100% under both the
+default and `function_reloc_diffs=name_address` objdiff settings.
+
+Five functions address file-local data from one pooled base, and their units
+use GC/1.3.2, which keeps the `addi rX, base, offset` form (GC/1.3 folds the
+offsets into the loads and stores). GC/1.3 and GC/1.3.2 place uninitialized
+statics in the order the function first uses them, with unused ones after, so
+a one-function unit cannot reproduce a pool whose first object it never
+touches. Zero-initialized statics are placed in declaration order instead,
+the form used for `fn_801F0CB0`. `fn_801FA410` and `fn_801FABA4`
+declare the motion tables at `lbl_8063C6B8` (`first[12]`, `second[12]`,
+`current_first`, `current_second`, and for `fn_801FABA4` the five `entries`)
+that way; `fn_8001DFEC` declares the block at `lbl_80302400`, with `Work`
+taking the 16 bytes before `values`; `fn_801EDEC4` declares the file's statics
+from `lbl_80639260` to its three arrays at offsets `0x22F8`, `0x2338` and
+`0x2378`, using the sizes in `symbols.txt`. The new rule
+`externalize_game_static_data_pool` renames `...data.0` to the retail symbol,
+and `tools/undefine_elf_static_pool.py` accepts an all-zero `PROGBITS` pool,
+empties it, and retains its `.data` section type. With
+uninitialized statics the code is identical but the offsets are wrong (the
+first-used object sits at 0). `-inline deferred` also changes the order, to
+reverse declaration order, but needs the declarations reversed. Extern
+structure views are 13 lines off in `fn_801FA410` and 22 to 32 in
+`fn_801EDEC4` under both compilers.
+
+`fn_8006B21C` uses its statics in address order, so plain statics work:
+`table_data[0x630]` and `table_extra[0x24]` (the old 0x654 extern), the state,
+and three buffers, externalized to `lbl_803108B8` under GC/1.3.2. The statics
+need their own names because a static named `lbl_803108B8` collides with the
+renamed pool.
+
+`fn_802093FC` and `fn_80208BA8` are the SDK's `GetTypeCallback` and `SIInit`.
+They declare `SIBios.c`'s statics as the SDK does (`Packet`, `Alarm`,
+`TypeTime`, `XferTime`, `TypeCallback`, `RDSTHandler`, the input buffers and
+`cmdFixDevice`), and `CallTypeAndStatusCallback` is a static inline. GC/1.2.5n
+places plain statics in declaration order, so no initializers are needed. The
+pool is externalized to `Packet_80640B68`; the tool now accepts a `NAME_ADDRESS`
+symbol when `symbols.txt` defines `NAME` at that address as a local.
+`fn_80206F50` (`__EXIProbe`) writes the tick conversion as
+`(s32)(OSGetTime() / ticksPerMillisecond / 100) + 1`; the compiler calls
+`__div2i`, which a unit rule renames to `fn_800F5ECC`. Calling `fn_800F5ECC`
+directly swaps the `li r5` and `li r6` of the second call.
+
+Three functions needed their parameter or call types. `fn_801807B0` takes
+`u16 count, u16 width, u8 scale`, and `fn_8017CCD8` takes a `u16` count; with
+`u32` the `(u16)count` temporary is numbered after the stride results and the
+registers rotate (14 lines). `fn_801E2B28` takes `s16 kind, u8 byte36` and
+passes `0.0f, 0.0f, 1.5f` as literals like `fn_801E2A48`; with `s32`
+parameters the position copy uses `r3` (3 lines). `fn_801F49EC` takes its
+`Vec3` by value and stores it with one assignment.
+
+`fn_800D3620` is a callback: it copies `arg0` into a `State *` and `arg1`
+into an `int` (`object = (int)arg1;`), keeps the id in its own local, and
+declares `state, object, id, value, resource`. Locals are numbered in reverse
+declaration order after the parameters, and the larger number is coloured
+first, which gives retail's `r31` to `r28`. A plain copy of the same type is
+propagated away; reassigning `object` to the id creates a compiler temporary
+that takes `r31`. Every declaration order of the direct-parameter forms is 12
+to 19 lines off.
+
+`fn_80088A04` reaches the owner through
+`Placement *placement = &work->owner->placement;` (the position and active
+flag at `0x14C`). The owner load becomes a temporary numbered after the table
+address, so it takes `r31`, as in `fn_800A1278`. With an `owner` local, a
+reused `work` parameter, or the table address in a pointer local, the two
+registers are swapped (17 lines). The three tables are `first`, `second` and
+`third` of `lbl_8031D3B8` (the rows of `fn_80088060`), read as `s16`.
+
+`fn_8014B0F0` describes its set with parallel `ids`, `values` and `objects`
+arrays indexed by `i`, and each loop starts with `mask = bit;` and ends with
+`bit = mask << 1;`, which keeps the masked value in a saved register and the
+carry in `r3` as retail does. The `update` local is declared first and `mode`
+after `right_set`.
+
+`fn_801E2BF8` writes the clamp as one conditional expression,
+`limit < value + increment ? limit : value + increment`, which converts the
+limit before the increment and gives retail's stack slots; the `if` and
+local-variable forms are 14 to 34 lines off. Its integer-conversion constant
+is renamed through the `.sdata2` table.
+
+`fn_801AF37C` uses GC/1.3.2. Its four format strings are string literals, pooled at
+`lbl_80251808` by a new guarded rule; its two stream-state bytes are
+`volatile u8` fields. `fn_801AF0E4`, the callback it passes to `fn_80213704`,
+writes those bytes, and retail reads them again for every test. Without
+`volatile` the tests share one load (16 lines), as they do with accessor
+functions and pointer forms; `-O1` to `-O3` are 19 lines off or more.
+
+`fn_8011C0F0` keeps the colour and the copied rectangles in one local
+structure, `Box { u32 color; Quad quad; }`, and reads the four coordinates into
+locals before storing the colour. The indexed reads of `box.quad` may overlap
+`box.color`, so the colour store stays after them, as in retail. With separate
+locals the store moves ahead of the reads (17 lines), as it does with a
+by-value colour, a union or an inline helper; `memcpy` stays a call. `lbl_8023A670` is
+declared without `const`; with `const` the table address is computed before
+the link register is saved (2 lines). A pointer-cast store into a separate
+colour also matches and was not used.
+
+`fn_801D324C` is a callback that copies its argument into
+`GameObject *object`. `fn_801CEB2C` is declared to return `s16`, as five other
+units declare it; it returns only 0, 3, 5, 7 or 9. With an `int` count and
+`(s16)` casts, the hoisted `extsh` gets a later register number than the
+count itself and the two swap registers in the first case (5 lines); with the
+`s16` return all four cases share one `count`, `owner` and `i`.
+`fn_801D3A34` takes `u32`, so `owner` is passed without a conversion; with an
+`int` first parameter it is 30 lines off. The defaults are
+local initializers, `s16 range[3] = {0, 0, 1};` in the `else` block and
+`u8 color[4] = {60, 60, 60, 120};` in the first case, the floats are
+literals, and `EffectInfo` names the fields at `0x06`, `0x08` and `0x1F`.
+Retail reads the `{0, 0, 1}` table with a word and a halfword load, which had
+split it into `lbl_806510AC` and `lbl_806510B0`; `symbols.txt` now lists it as
+one 6-byte `lbl_806510AC`. A separate `s16` local for the first case shifts
+the other cases by one register (38 lines in every declaration order), and
+block-scoped vectors change the stack layout (47 lines or more).
+
+`fn_801941EC` needed only GC/1.3.2 (GC/1.3 is 16 lines off).

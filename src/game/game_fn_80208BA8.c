@@ -15,7 +15,7 @@ typedef struct SIControl {
     void *callback;
 } SIControl;
 
-extern SIPacket Packet_80640B68[4];
+static SIPacket Packet[4];
 extern SIControl Si_802FCA20;
 extern u32 __SIRegs[64] : 0xCC006400;
 
@@ -27,12 +27,8 @@ extern u32 SIGetType(s32 chan);
 
 void SIInit(void)
 {
-    register SIPacket *packet = Packet_80640B68;
-    register s32 chan = -1;
-    SIControl *si = &Si_802FCA20;
-
-    packet[0].chan = packet[1].chan = packet[2].chan = packet[3].chan = chan;
-    si->poll = 0;
+    Packet[0].chan = Packet[1].chan = Packet[2].chan = Packet[3].chan = -1;
+    Si_802FCA20.poll = 0;
     SISetSamplingRate(0);
 
     while (__SIRegs[13] & 1) {

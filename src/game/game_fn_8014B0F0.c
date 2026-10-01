@@ -7,11 +7,9 @@ typedef struct Set {
     u8 pad1[3];
     u16 active;
     u8 pad6[2];
-    u32 id;
-    u8 padC[0x3C];
-    u32 value48;
-    u8 pad4C[0x3C];
-    void* object88;
+    u32 ids[16];
+    u32 values[16];
+    void* objects[16];
 } Set;
 
 typedef struct Value {
@@ -21,13 +19,13 @@ typedef struct Value {
 } Value;
 
 extern int fn_80157034(void*);
-extern void *fn_80156938();
+extern Set* fn_80156938(void*);
 extern int fn_80157050(Set*);
 extern u32 fn_80036D5C(Set*);
 extern u8 fn_80202160(Set*);
 extern void fn_8017FF24(void*, int, int);
 extern void fn_8017FD6C(void*);
-extern void *fn_80201BC8();
+extern void* fn_80201BC8(Set*);
 extern int fn_8012FA54(void*, u32);
 extern int fn_8012DC94(void*, u32);
 extern int fn_8011F6A4(void*, u32, u32, int, Value*, int);
@@ -36,16 +34,14 @@ extern void fn_8014B604(float*, short*);
 
 void fn_8014B0F0(void* left, void* right)
 {
+    int update;
     int count;
     Set* set;
+    u16 bit;
+    u16 mask;
+    Set* right_set;
     int mode;
     int i;
-    Set* entry;
-    u16 bit;
-    Set* right_set;
-    int update;
-    int j;
-    float *x, *y, *z;
     Value value;
 
     if (left == 0) {
@@ -69,62 +65,54 @@ void fn_8014B0F0(void* left, void* right)
         return;
     }
     count = set->count;
-    entry = set;
     bit = 1;
     for (i = 0; i < count; i++) {
-        bit = (u16)bit;
-        if ((set->active & bit) != 0 && entry->object88 != 0) {
+        mask = bit;
+        if ((set->active & mask) != 0 && set->objects[i] != 0) {
             if (mode != 0) {
-                fn_8017FF24(entry->object88, 0, 8);
+                fn_8017FF24(set->objects[i], 0, 8);
             } else {
-                fn_8017FF24(entry->object88, 8, 0);
+                fn_8017FF24(set->objects[i], 8, 0);
             }
         }
-        bit = (u16)(bit << 1);
-        entry = (Set*)((char*)entry + 4);
+        bit = mask << 1;
     }
 
     if (update == 0) {
-        entry = set;
         bit = 1;
-        for (j = 0; j < count; j++) {
-            bit = (u16)bit;
-            if ((set->active & bit) != 0 && entry->object88 != 0) {
-                fn_8017FD6C(entry->object88);
-                set->active &= ~bit;
+        for (i = 0; i < count; i++) {
+            mask = bit;
+            if ((set->active & mask) != 0 && set->objects[i] != 0) {
+                fn_8017FD6C(set->objects[i]);
+                set->active &= ~mask;
             }
-            bit = (u16)(bit << 1);
-            entry = (Set*)((char*)entry + 4);
+            bit = mask << 1;
         }
         return;
     }
 
     {
         void* context = fn_80201BC8(right_set);
-        x = &value.x;
-        y = &value.y;
-        z = &value.z;
-        entry = set;
+
         bit = 1;
-        for (j = 0; j < count; j++) {
-            bit = (u16)bit;
-            if ((set->active & bit) != 0 && entry->object88 != 0) {
-                if (fn_8012FA54(context, entry->value48) != 0 ||
-                    fn_8012DC94(context, entry->value48) == 0) {
+        for (i = 0; i < count; i++) {
+            mask = bit;
+            if ((set->active & mask) != 0 && set->objects[i] != 0) {
+                if (fn_8012FA54(context, set->values[i]) != 0 ||
+                    fn_8012DC94(context, set->values[i]) == 0) {
                     short* position;
-                    fn_8011F6A4(context, entry->id, entry->value48,
-                                -1, &value, 1);
-                    position = fn_8017FDE4(entry->object88);
-                    fn_8014B604(x, position);
-                    fn_8014B604(y, position + 1);
-                    fn_8014B604(z, position + 2);
+
+                    fn_8011F6A4(context, set->ids[i], set->values[i], -1, &value, 1);
+                    position = fn_8017FDE4(set->objects[i]);
+                    fn_8014B604(&value.x, position);
+                    fn_8014B604(&value.y, position + 1);
+                    fn_8014B604(&value.z, position + 2);
                 } else {
-                    fn_8017FD6C(entry->object88);
-                    set->active &= ~bit;
+                    fn_8017FD6C(set->objects[i]);
+                    set->active &= ~mask;
                 }
             }
-            bit = (u16)(bit << 1);
-            entry = (Set*)((char*)entry + 4);
+            bit = mask << 1;
         }
     }
 }

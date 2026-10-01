@@ -35,25 +35,18 @@ struct Object {
 };
 
 extern s32 lbl_8064D18C;
-extern const f32 lbl_80651230;
-extern const f32 lbl_80651234;
 
 extern u32 fn_800FBFB0(void);
 extern void fn_801FE8DC(s32*, f32, f32, f32);
 extern void fn_801E8328(s32, Object*);
 extern void fn_801E2BF8(Object*);
 
-void fn_801E2B28(Object* object, Vec3* position, s32* value, s32 kind, s32 byte36)
+void fn_801E2B28(Object* object, Vec3* position, s32* value, s16 kind, u8 byte36)
 {
-    f32 scale;
-    f32 z_scale;
-
     object->field34 = lbl_8064D18C;
     object->timer = 100000;
     object->timer_copy = object->timer;
     object->random_value = (fn_800FBFB0() & 0xF) + 1;
-    scale = lbl_80651230;
-    z_scale = lbl_80651234;
     object->position = *position;
     object->value = *value;
     object->callback = fn_801E2BF8;
@@ -62,6 +55,6 @@ void fn_801E2B28(Object* object, Vec3* position, s32* value, s32 kind, s32 byte3
     object->duration = 600;
     object->enabled = 1;
     object->byte38 = 4;
-    fn_801FE8DC(&object->timer, scale, scale, z_scale);
+    fn_801FE8DC(&object->timer, 0.0f, 0.0f, 1.5f);
     fn_801E8328(0x13, object);
 }

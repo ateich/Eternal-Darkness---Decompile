@@ -75,6 +75,15 @@ def externalize(data, target, symbols):
         r'^([^\s=]+)\s*=\s*(\.[\w.]+):0x([0-9A-Fa-f]+)\s*;([^\n]*)$', re.M
     )
     mappings = mapping_pattern.findall(symbols)
+    # dtk gives bare local retail names an address-qualified linker name.
+    # Normalize only explicit locals; the address still must match exactly,
+    # and duplicate names/overlapping ownership remain rejected below.
+    mappings = [
+        (f'{name}_{int(address, 16):08X}' if re.search(r'\bscope:local\b', attributes)
+         and not re.fullmatch(r'.*_[0-9A-Fa-f]{8}', name) else name,
+         section_name, address, attributes)
+        for name, section_name, address, attributes in mappings
+    ]
     targets = [record for record in mappings if record[0] == target]
     require(len(targets) == 1, 'expected one exact retail mapping')
     _, retail_section, address, attributes = targets[0]
