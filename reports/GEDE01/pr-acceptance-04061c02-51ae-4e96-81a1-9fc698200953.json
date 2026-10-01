@@ -1,0 +1,130 @@
+{
+  "request": {
+    "number": 33,
+    "head": "8c408c633ff9e5177c37c8e753d1f73e0122ecd0",
+    "targets": [
+      "fn_8006053C",
+      "fn_8006330C",
+      "fn_80067858",
+      "fn_800741E8",
+      "fn_8007930C",
+      "fn_8008CEF0",
+      "fn_800DC9A8",
+      "fn_800DCBC0",
+      "fn_8012C804",
+      "fn_8012FB50",
+      "fn_8014BA14",
+      "fn_80155330",
+      "fn_8017D1E0",
+      "fn_80187320",
+      "fn_80194AC4",
+      "fn_80199868",
+      "fn_801BA94C",
+      "fn_801D73D0",
+      "fn_80202678",
+      "fn_802076C4"
+    ],
+    "required_deferred": [
+      "fn_8012FB50"
+    ],
+    "allowed_shared_paths": [
+      "tools/undefine_elf_static_pool.py",
+      "tools/externalize_elf_symbol.py"
+    ],
+    "repair_reason": "PR33 fn_801BA94C also uses static-pool externalization. Reuse the reviewed shared helper at its approved tools path; do not add executable report helpers to build commands.",
+    "retry_after_job": "e9ac8a58-c776-4a33-bada-7d0201261692",
+    "retry_reason": "Validate complete guarded ELF storage, unique section names, exact ownership, incoming/outgoing relocations and retail lengths; require removal-section absence on completed retry. Astra-low helper review APPROVE; full pipeline gates remain required. Preserve prior candidates and failures.",
+    "specialist": false,
+    "previous_error": "Error: PR review REQUEST_CHANGES: {\"reviewerA\":null,\"reviewerB\":{\"reviewer\":\"gpt-6-astra:low\",\"issues\":[\"[P1] `configure.py:93–96`: The guard validates the symbol’s section, but objcopy unconditionally removes `.sdata2`. Reproduced success with `@51` in `.rodata` and unrelated nonzero `.sdata2` data. Require the validated section to be exactly the section removed, across all six modified rules.\",\"[P1] `tools/externalize_elf_symbol.py:153–168`: Constant-removal validation never rejects `SHF_EXECINSTR`. An executable-section fixture passed both new guard flags and was mutated. Reject executable sections before externalization and add a regression test.\"],\"rating\":6,\"verdict\":\"REQUEST_CHANGES\",\"raw\":\"I’ll inspect the complete checkout diff, target scope, and shared static-pool removal guards.\\n\\nThe changed game files match the 19 included targets, and the deferred function is unchanged. I’m checking whether the removal tools fail safely on malformed objects and whether the regression tests cover those cases.\\n\\nThe supplied regression tests pass. I also confirmed that the new constant-removal guard accepts and mutates an executable section. I’m checking whether it validates the actual `.sdata2` section that the build rule deletes.\\n\\nISSUES:\\n- [P1] `configure.py:93–96`: The guard validates the symbol’s section, but objcopy unconditionally removes `.sdata2`. Reproduced success with `@51` in `.rodata` and unrelated nonzero `.sdata2` data. Require the validated section to be exactly the section removed, across all six modified rules.\\n- [P1] `tools/externalize_elf_symbol.py:153–168`: Constant-removal validation never rejects `SHF_EXECINSTR`. An executable-section fixture passed both new guard flags and was mutated. Reject executable sections before externalization and add a regression test.\\n\\nRATING: 6\\n\\nVERDICT: REQUEST_CHANGES\"},\"consensus\":[{\"issue\":\"[P1] `configure.py:93–96`: The guard validates the symbol’s section, but objcopy unconditionally removes `.sdata2`. Reproduced success with `@51` in `.rodata` and unrelated nonzero `.sdata2` data. Require the validated section to be exactly the section removed, across all six modified rules.\",\"reviewerA\":false,\"reviewerB\":true,\"agreed\":false},{\"issue\":\"[P1] `tools/externalize_elf_symbol.py:153–168`: Constant-removal validation never rejects `SHF_EXECINSTR`. An executable-section fixture passed both new guard flags and was mutated. Reject executable sections before externalization and add a regression test.\",\"reviewerA\":false,\"reviewerB\":true,\"agreed\":false}],\"hasDisagreement\":false,\"table\":\"| Issue | gpt-6-astra:low |\\n|-------|--------|\\n| [P1] `configure.py:93–96`: The guard validates the symbol’s section, but objcopy unconditionally removes `.sdata2`. Reproduced success with `@51` in `.rodata` and unrelated nonzero `.sdata2` data. Require the validated section to be exactly the section removed, across all six modified rules. | ✓ |\\n| [P1] `tools/externalize_elf_symbol.py:153–168`: Constant-removal validation never rejects `SHF_EXECINSTR`. An executable-section fixture passed both new guard flags and was mutated. Reject executable sections before externalization and add a regression test. | ✓ |\\n\\n**gpt-6-astra:low Rating:** 6/10 — REQUEST_CHANGES\\n\\n_Second reviewer disabled (modelRouting.enableSecondReviewer)._\",\"verdict\":\"REQUEST_CHANGES\"}\n    at integrate (file:///home/rabbit/src/darkfoundry-new/scripts/decomp-durable-runtime.mjs:884:47)\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at async runJob (file:///home/rabbit/src/darkfoundry-new/scripts/decomp-durable-runtime.mjs:1198:51)\n    at async main (file:///home/rabbit/src/darkfoundry-new/scripts/decomp-durable-runtime.mjs:1311:25)"
+  },
+  "manifest": {
+    "included": [
+      "fn_8006053C",
+      "fn_8006330C",
+      "fn_80067858",
+      "fn_800741E8",
+      "fn_8007930C",
+      "fn_8008CEF0",
+      "fn_800DC9A8",
+      "fn_800DCBC0",
+      "fn_8012C804",
+      "fn_8014BA14",
+      "fn_80155330",
+      "fn_8017D1E0",
+      "fn_80187320",
+      "fn_80194AC4",
+      "fn_80199868",
+      "fn_801BA94C",
+      "fn_801D73D0",
+      "fn_80202678",
+      "fn_802076C4"
+    ],
+    "deferred": [
+      {
+        "target": "fn_8012FB50",
+        "reason": "The proposed implementation required an assembly nop and is not an honest C match; accepted source and NonMatching registration restored."
+      }
+    ]
+  },
+  "acceptedBase": "3d1080690ba94faf530cda1e85411b41279d6659",
+  "review": {
+    "reviewerA": null,
+    "reviewerB": {
+      "reviewer": "gpt-6-astra:low",
+      "issues": [
+        "None. Full diff stays within scope; no new assembly or weakened gates found. All three synthetic guard suites passed. Fresh canonical/strict, legal, retail-DOL, and no-regression gates remain required after approval."
+      ],
+      "rating": 9,
+      "verdict": "APPROVE",
+      "raw": "I’ll inspect the complete checkout diff and the static-pool removal guards, including their target scope and failure cases.\n\nThe source changes are confined to the 19 included functions, and the deferred function is unchanged. I’m checking the shared tools against malformed pools and reviewing the regression fixtures for gaps in their removal guards.\n\nISSUES:\n- None. Full diff stays within scope; no new assembly or weakened gates found. All three synthetic guard suites passed. Fresh canonical/strict, legal, retail-DOL, and no-regression gates remain required after approval.\n\nRATING: 9\n\nVERDICT: APPROVE"
+    },
+    "consensus": [
+      {
+        "issue": "None. Full diff stays within scope; no new assembly or weakened gates found. All three synthetic guard suites passed. Fresh canonical/strict, legal, retail-DOL, and no-regression gates remain required after approval.",
+        "reviewerA": false,
+        "reviewerB": true,
+        "agreed": false
+      }
+    ],
+    "hasDisagreement": false,
+    "table": "| Issue | gpt-6-astra:low |\n|-------|--------|\n| None. Full diff stays within scope; no new assembly or weakened gates found. All three synthetic guard suites passed. Fresh canonical/strict, legal, retail-DOL, and no-regression gates remain required after approval. | ✓ |\n\n**gpt-6-astra:low Rating:** 9/10 — APPROVE\n\n_Second reviewer disabled (modelRouting.enableSecondReviewer)._",
+    "verdict": "APPROVE"
+  },
+  "canonical": {
+    "fuzzy_match_percent": 61.371025,
+    "total_code": "2300692",
+    "matched_code": "1213780",
+    "matched_code_percent": 52.757168,
+    "total_data": "4305634",
+    "matched_data": "39926",
+    "matched_data_percent": 0.92729664,
+    "total_functions": 8214,
+    "matched_functions": 6203,
+    "matched_functions_percent": 75.51741,
+    "complete_code": "1212032",
+    "complete_code_percent": 52.681194,
+    "complete_data": "40070",
+    "complete_data_percent": 0.9306411,
+    "total_units": 7116,
+    "complete_units": 6436
+  },
+  "strict": {
+    "fuzzy_match_percent": 61.36745,
+    "total_code": "2300692",
+    "matched_code": "1210348",
+    "matched_code_percent": 52.607994,
+    "total_data": "4305634",
+    "matched_data": "39926",
+    "matched_data_percent": 0.92729664,
+    "total_functions": 8214,
+    "matched_functions": 6196,
+    "matched_functions_percent": 75.43219,
+    "complete_code": "1212032",
+    "complete_code_percent": 52.681194,
+    "complete_data": "40070",
+    "complete_data_percent": 0.9306411,
+    "total_units": 7116,
+    "complete_units": 6436
+  },
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

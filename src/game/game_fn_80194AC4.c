@@ -11,23 +11,25 @@ void fn_80193E1C(s16* output, int count, float step, int base, int range);
 void fn_80194AC4(const s16* base, const float* scale, u8* state)
 {
     s16* outputs[3];
-    u32 flags;
-    u8 width;
     int type;
+    u32 flags;
+    int count;
+    int i;
+    u8 width;
     int half;
 
+    flags = *(u32*)(state + 0x7C);
+    width = state[0xB] - 4;
     outputs[0] = (s16*)(state + 0x28);
     outputs[1] = (s16*)(state + 0x42);
     outputs[2] = (s16*)(state + 0x5C);
-    flags = *(u32*)(state + 0x7C);
-    width = state[0xB] - 4;
     type = state[3];
 
     if (flags & 0x100) {
         int rest;
         float step;
 
-        half = (u8)width >> 1;
+        half = width >> 1;
         fn_80186F70(outputs[0], width, scale[0], (float)base[0], type);
         fn_80186F70(outputs[1], width, scale[1], (float)base[1], type);
 
@@ -37,27 +39,25 @@ void fn_80194AC4(const s16* base, const float* scale, u8* state)
         fn_80193E1C(outputs[2] + half, rest, scale[2] / (float)rest,
                     (int)((float)half * step + (float)base[2]), type);
     } else if (flags & 0x400) {
-        int rest;
         float step;
-        half = width >> 1;
+
+        count = width >> 1;
 
         step = lbl_80650B70 * scale[0];
-        fn_80193E1C(outputs[0], half, step, base[0], type);
-        rest = width - half;
-        fn_80193E1C(outputs[0] + half, rest, scale[0] / (float)rest,
-                    (int)((float)half * step + (float)base[0]), type);
+        fn_80193E1C(outputs[0], count, step, base[0], type);
+        fn_80193E1C(outputs[0] + count, width - count, scale[0] / (float)(width - count),
+                    (int)((float)count * step + (float)base[0]), type);
 
         step = lbl_80650B70 * scale[1];
-        fn_80193E1C(outputs[1], half, step, base[1], type);
-        fn_80193E1C(outputs[1] + half, rest, scale[1] / (float)rest,
-                    (int)((float)half * step + (float)base[1]), type);
+        fn_80193E1C(outputs[1], count, step, base[1], type);
+        fn_80193E1C(outputs[1] + count, width - count, scale[1] / (float)(width - count),
+                    (int)((float)count * step + (float)base[1]), type);
 
         step = lbl_80650B70 * scale[2];
-        fn_80193E1C(outputs[2], half, step, base[2], type);
-        fn_80193E1C(outputs[2] + half, rest, scale[2] / (float)rest,
-                    (int)((float)half * step + (float)base[2]), type);
+        fn_80193E1C(outputs[2], count, step, base[2], type);
+        fn_80193E1C(outputs[2] + count, width - count, scale[2] / (float)(width - count),
+                    (int)((float)count * step + (float)base[2]), type);
     } else {
-        int i;
         for (i = 0; i < 3; i++) {
             fn_80186F70(outputs[i], width, scale[i], (float)base[i], type);
         }

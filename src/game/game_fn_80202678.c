@@ -1,16 +1,16 @@
 typedef unsigned short u16;
 
-typedef struct Object80202678 {
-    char pad[0x24];
-    void *value;
-} Object80202678;
-
 typedef struct Output80202678 {
     char pad[4];
     int value;
     char pad2[0x2C];
     u16 state;
 } Output80202678;
+
+typedef struct Object80202678 {
+    char pad[0x24];
+    Output80202678 *value;
+} Object80202678;
 
 typedef struct Vec3i80202678 {
     int x;
@@ -35,16 +35,23 @@ extern unsigned long long fn_8020123C(int kind, void *target, int value,
 extern int fn_801AC9F4(int sound, int volume, Vec3i80202678 *position,
                        int flags);
 
-int fn_80202678(void *owner, void *effect)
+typedef struct Actor80202678 Actor80202678;
+typedef struct Effect80202678 Effect80202678;
+
+int fn_80202678(void *arg0, void *arg1)
 {
-    int result;
-    unsigned int flags;
     Output80202678 *output;
-    void *linked;
+    Object80202678 *linked;
+    Effect80202678 *effect;
+    Actor80202678 *owner;
     void *resource;
+    unsigned int flags;
+    int result;
     int height;
     Vec3i80202678 position;
 
+    owner = arg0;
+    effect = arg1;
     result = 0;
     resource = fn_801A7498(effect);
     linked = fn_80201814(resource);
@@ -64,7 +71,7 @@ int fn_80202678(void *owner, void *effect)
             result = fn_8003BD48(owner, effect);
             if (result != 0) {
                 int kind = fn_800459E0(linked);
-                fn_80201E50(((Object80202678 *)linked)->value, flags | 8);
+                fn_80201E50(linked->value, flags | 8);
                 output->state = 0;
                 if ((unsigned int)(kind - 0x23) <= 1 || kind == 0x28)
                     fn_801AC9F4(0x157, 100, &position, 2);
@@ -73,9 +80,8 @@ int fn_80202678(void *owner, void *effect)
     } else {
         result = fn_8003BD48(owner, effect);
         if (result != 0) {
-            Object80202678 *object = (Object80202678 *)linked;
-            ((Output80202678 *)object->value)->state = 0;
-            fn_80201E50(object->value, flags | 8);
+            linked->value->state = 0;
+            fn_80201E50(linked->value, flags | 8);
         }
     }
 

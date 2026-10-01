@@ -7,47 +7,31 @@ typedef struct Vec3s {
     s16 z;
 } Vec3s;
 
+#define ABS(x) ((x) < 0 ? -(x) : (x))
+
 int fn_8017D1E0(Vec3s* first, Vec3s* second, u16 distance, u16 close,
                 u16 limit, s16* counter)
 {
-    int delta;
-    int result = 0;
     u16 dx;
     u16 dy;
+    int result = 0;
     u16 dz;
 
     if (distance < close) {
         distance = close;
     }
-    {
-        delta = second->x - first->x;
-        if (delta >= 0) goto x_positive;
-        delta = -delta;
-x_positive:
-        dx = delta;
-    }
+    dx = ABS(second->x - first->x);
     if (dx < distance) {
-        {
-            delta = second->y - first->y;
-            if (delta >= 0) goto y_positive;
-            delta = -delta;
-y_positive:
-            dy = delta;
-        }
+        dy = ABS(second->y - first->y);
         if (dy < distance) {
-            {
-                delta = second->z - first->z;
-                if (delta >= 0) goto z_positive;
-                delta = -delta;
-z_positive:
-                dz = delta;
-            }
+            dz = ABS(second->z - first->z);
             if (dz < distance) {
                 if (dx <= close && dy <= close && dz <= close) {
                     result = 1;
                 } else if (counter != 0) {
                     int next = *counter + 1;
                     int value = limit;
+
                     if (next < value) {
                         value = next;
                     }

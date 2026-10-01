@@ -18,13 +18,14 @@ typedef struct StreamSlot {
     u8 priority;
     u8 cache_id;
     u8 pad5E[2];
-    u32 cache;
+    unsigned long cache;
 } StreamSlot;
 
 /* Externalized to the retail stream table by this TU's build registration. */
 static StreamSlot streamInfo[64];
 extern u32 lbl_8064D3CC;
 extern void fn_801CE2B8(void);
+void fn_801BA94C(u32 id, u8 volume, u8 left, u8 right, u8 aux_left, u8 aux_right);
 extern void fn_801CE280(void);
 extern int fn_801B9D1C(u32);
 extern void fn_801BA128(u8*, u8*);
@@ -35,88 +36,87 @@ static inline u32 find_stream(u32 id)
     u32 i;
 
     for (i = 0; i < 64; i++) {
-        if (streamInfo[i].state != 0 && streamInfo[i].id == id) {
+        if (streamInfo[i].state != 0 && id == streamInfo[i].id) {
             return i;
         }
     }
     return -1;
 }
 
-void fn_801BA94C(u32 id, u8 volume, u8 left, u8 right, u8 aux_left, u8 aux_right)
+static inline void check_output_mode(u8* left, u8* right)
 {
-    u32 offset;
-    u8* state_base;
-    u8* cache_base;
-    u32 index;
-    u32 cache;
-    u8 actual_left;
-    u8 actual_right;
+    if (lbl_8064D3CC & 1) {
+        *left = 0x40;
+        *right = 0;
+    } else if (!(lbl_8064D3CC & 2)) {
+        *right = 0;
+    }
+}
+
+static inline void set_mix(StreamSlot* slot)
+{
+    fn_801CCCC4(slot->voice, 0, (u32)slot->left << 16, (u32)slot->right << 16,
+                (float)slot->volume * (1.0f / 127.0f), (float)slot->aux_left * (1.0f / 127.0f),
+                (float)slot->aux_right * (1.0f / 127.0f));
+}
+
+static inline void setup_mix(StreamSlot* slot, u8 volume, u8 left, u8 right, u8 aux_left,
+                             u8 aux_right)
+{
+    slot->saved_left = left;
+    slot->saved_right = right;
+    check_output_mode(&left, &right);
+    slot->volume = volume;
+    slot->left = left;
+    slot->right = right;
+    slot->aux_left = aux_left;
+    slot->aux_right = aux_right;
+}
+
+static inline void setup_mix_linked(StreamSlot* slot, u8 volume, u8 left, u8 right,
+                                    u8 aux_left, u8 aux_right)
+{
+    slot->saved_left = left;
+    slot->saved_right = right;
+    fn_801BA128(&left, &right);
+    slot->volume = volume;
+    slot->left = left;
+    slot->right = right;
+    slot->aux_left = aux_left;
+    slot->aux_right = aux_right;
+}
+
+static inline void mix_linked(u32 id, u8 volume, u8 left, u8 right, u8 aux_left, u8 aux_right)
+{
+    u32 i;
 
     fn_801CE2B8();
-    index = find_stream(id);
-    if (index != (u32)-1) {
-        offset = index * sizeof(StreamSlot);
-        streamInfo[index].saved_left = left;
-        streamInfo[index].saved_right = right;
-        actual_right = right;
-        actual_left = left;
-        if (lbl_8064D3CC & 1) {
-            actual_left = 0x40;
-            actual_right = 0;
-        } else if (!(lbl_8064D3CC & 2)) {
-            actual_right = 0;
+    i = fn_801B9D1C(id);
+    if (i != -1) {
+        setup_mix_linked(&streamInfo[i], volume, left, right, aux_left, aux_right);
+        if (streamInfo[i].state == 2) {
+            set_mix(&streamInfo[i]);
         }
-        streamInfo[index].volume = volume;
-        streamInfo[index].left = actual_left;
-        streamInfo[index].right = actual_right;
-        streamInfo[index].aux_left = aux_left;
-        streamInfo[index].aux_right = aux_right;
-        state_base = (u8*)streamInfo + 8;
-        if (state_base[offset] == 2) {
-            fn_801CCCC4(streamInfo[index].voice, 0, (u32)streamInfo[index].left << 16,
-                        (u32)streamInfo[index].right << 16,
-                        (float)streamInfo[index].volume * (1.0f / 127.0f),
-                        (float)streamInfo[index].aux_left * (1.0f / 127.0f),
-                        (float)streamInfo[index].aux_right * (1.0f / 127.0f));
+        if (streamInfo[i].cache != 0xFFFFFFFF) {
+            fn_801BA94C(streamInfo[i].cache, volume, left, right, aux_left, aux_right);
         }
-        /* Each 0x64-byte slot is word aligned. Keep the shared cache-field base. */
-        cache_base = (u8*)streamInfo + 0x60;
-        offset = ((u32*)cache_base)[offset / sizeof(u32)];
-        if (offset != (u32)-1) {
-            fn_801CE2B8();
-            index = fn_801B9D1C(offset);
-            if (index != (u32)-1) {
-                StreamSlot* linked_slot;
-                u8 linked_left;
-                u8 linked_right;
+    }
+    fn_801CE280();
+}
 
-                linked_right = right;
-                linked_left = left;
+void fn_801BA94C(u32 id, u8 volume, u8 left, u8 right, u8 aux_left, u8 aux_right)
+{
+    u32 i;
 
-                offset = index * sizeof(StreamSlot);
-                linked_slot = (StreamSlot*)((u8*)streamInfo + offset);
-                linked_slot->saved_left = linked_left;
-                linked_slot->saved_right = linked_right;
-                fn_801BA128(&linked_left, &linked_right);
-                linked_slot->volume = volume;
-                linked_slot->left = linked_left;
-                linked_slot->right = linked_right;
-                linked_slot->aux_left = aux_left;
-                linked_slot->aux_right = aux_right;
-                if (state_base[offset] == 2) {
-                    fn_801CCCC4(linked_slot->voice, 0, (u32)linked_slot->left << 16,
-                                (u32)linked_slot->right << 16,
-                                (float)linked_slot->volume * (1.0f / 127.0f),
-                                (float)linked_slot->aux_left * (1.0f / 127.0f),
-                                (float)linked_slot->aux_right * (1.0f / 127.0f));
-                }
-                cache = ((u32*)cache_base)[offset / sizeof(u32)];
-                if (cache != (u32)-1) {
-                    fn_801BA94C(cache, volume, left, right,
-                                aux_left, aux_right);
-                }
-            }
-            fn_801CE280();
+    fn_801CE2B8();
+    i = find_stream(id);
+    if (i != -1) {
+        setup_mix(&streamInfo[i], volume, left, right, aux_left, aux_right);
+        if (streamInfo[i].state == 2) {
+            set_mix(&streamInfo[i]);
+        }
+        if (streamInfo[i].cache != 0xFFFFFFFF) {
+            mix_linked(streamInfo[i].cache, volume, left, right, aux_left, aux_right);
         }
     }
     fn_801CE280();

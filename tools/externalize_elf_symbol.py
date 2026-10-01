@@ -9,10 +9,20 @@ from pathlib import Path
 require_whole_section = False
 required_section_symbols = None
 require_relocation_match = False
+reject_section_relocations = False
+required_section_name = None
 args = [sys.argv[0]]
 for arg in sys.argv[1:]:
     if arg == "--require-whole-section":
         require_whole_section = True
+    elif arg == "--reject-section-relocations":
+        reject_section_relocations = True
+    elif arg.startswith("--require-section="):
+        if required_section_name is not None:
+            raise SystemExit("--require-section may be specified only once")
+        required_section_name = arg.split("=", 1)[1]
+        if not re.fullmatch(r"\.[A-Za-z0-9_.]+", required_section_name):
+            raise SystemExit("--require-section needs an ELF section name")
     elif arg == "--require-relocation-match":
         require_relocation_match = True
     elif arg.startswith("--require-section-symbols="):
@@ -29,6 +39,8 @@ if require_whole_section and required_section_symbols is not None:
     raise SystemExit(
         "--require-whole-section and --require-section-symbols are mutually exclusive"
     )
+if reject_section_relocations and not (require_whole_section or required_section_symbols is not None):
+    raise SystemExit("relocation rejection requires a complete section guard")
 if len(args) not in (3, 5):
     raise SystemExit(
         f"usage: {sys.argv[0]} OBJECT LOCAL_SYMBOL [RETAIL_SYMBOL RETAIL_DOL] "
@@ -48,6 +60,110 @@ if data[:6] != b"\x7fELF\x01\x02":
 section_offset = struct.unpack_from(">I", data, 0x20)[0]
 section_size = struct.unpack_from(">H", data, 0x2E)[0]
 section_count = struct.unpack_from(">H", data, 0x30)[0]
+
+
+def named_sections(expected):
+    """Bounded lookup matching objcopy's name-based section removal."""
+    if section_size < 40 or section_offset + section_size * section_count > len(data):
+        raise SystemExit(f"{path}: invalid section table bounds")
+    names_index = struct.unpack_from(">H", data, 0x32)[0]
+    if not 0 < names_index < section_count:
+        raise SystemExit(f"{path}: invalid section-name table")
+    header = section_offset + names_index * section_size
+    kind = struct.unpack_from(">I", data, header + 4)[0]
+    offset, size = struct.unpack_from(">II", data, header + 0x10)
+    if kind != 3 or not size or offset + size > len(data):
+        raise SystemExit(f"{path}: invalid section-name bounds")
+    matches = []
+    for index in range(section_count):
+        start = struct.unpack_from(">I", data, section_offset + index * section_size)[0]
+        if start >= size:
+            raise SystemExit(f"{path}: invalid section-name offset")
+        end = data.find(0, offset + start, offset + size)
+        if end < 0:
+            raise SystemExit(f"{path}: unterminated section name")
+        if data[offset + start:end] == expected.encode('ascii'):
+            matches.append(index)
+    return matches
+
+
+def guarded_metadata():
+    def require(ok, message):
+        if not ok:
+            raise SystemExit(f"{path}: {message}")
+    def bounds(offset, size):
+        require(0 <= offset <= len(data) and 0 <= size <= len(data) - offset,
+                "truncated ELF storage")
+    require(len(data) >= 52 and data[:7] == b"\x7fELF\x01\x02\x01", "invalid ELF header")
+    require(struct.unpack_from(">HH", data, 16) == (1, 20), "expected relocatable PowerPC ELF")
+    require(struct.unpack_from(">H", data, 40)[0] == 52 and struct.unpack_from(">I", data, 28)[0] == 0 and struct.unpack_from(">H", data, 44)[0] == 0, "unsupported ELF header metadata")
+    require(section_size == 40 and section_count > 0, "invalid section table")
+    bounds(section_offset, section_size * section_count)
+    sections = [struct.unpack_from(">10I", data, section_offset + i * 40) for i in range(section_count)]
+    ranges = [(0, 52), (section_offset, section_offset + section_size * section_count)]
+    for section in sections:
+        if section[1] != 8:
+            bounds(section[4], section[5])
+        if section[1] not in (0, 8) and section[5]:
+            ranges.append((section[4], section[4] + section[5]))
+    ranges.sort()
+    require(all(a[1] <= b[0] for a, b in zip(ranges, ranges[1:])), "overlapping ELF storage")
+    tables = [i for i, section in enumerate(sections) if section[1] == 2]
+    require(len(tables) == 1, "expected one symbol table")
+    symindex = tables[0]; table = sections[symindex]
+    require(table[9] == 16 and table[5] % 16 == 0 and table[6] < section_count, "invalid symbol table")
+    strings = sections[table[6]]
+    require(strings[1] == 3, "invalid symbol string table")
+    entries = [struct.unpack_from(">IIIBBH", data, table[4] + i * 16) for i in range(table[5] // 16)]
+    names = []
+    for entry in entries:
+        require(entry[0] < strings[5], "symbol name outside string table")
+        start = strings[4] + entry[0]; end = data.find(0, start, strings[4] + strings[5])
+        require(end >= start, "unterminated symbol name")
+        names.append(bytes(data[start:end]).decode("ascii"))
+    require(0 < table[7] <= len(entries) and all((entry[3] >> 4 == 0) == (i < table[7]) for i, entry in enumerate(entries)), "invalid local/global symbol ordering")
+    require(all(section[6] != symindex or section[1] in (4, 9) for section in sections), "unsupported symbol-indexed section")
+    require(names.count(target) <= 1 and names.count(retail_target) <= 1, "duplicate target symbol")
+    for relocation in sections:
+        if relocation[1] not in (4, 9):
+            continue
+        width = 12 if relocation[1] == 4 else 8
+        require(relocation[9] == width and relocation[5] % width == 0 and relocation[6] == symindex and 0 < relocation[7] < section_count, "invalid relocation metadata")
+        for offset in range(relocation[4], relocation[4] + relocation[5], width):
+            where, reference = struct.unpack_from(">II", data, offset)
+            widths = {0: 0, 1: 4, 2: 4, 3: 2, 4: 2, 5: 2, 6: 2, 7: 4, 8: 4, 9: 4, 10: 4, 11: 4, 12: 4, 13: 4, 26: 4, 32: 2, 109: 4}
+            kind = reference & 255
+            require(kind in widths and reference >> 8 < len(entries) and where <= sections[relocation[7]][5] - widths[kind], "invalid relocation reference or range")
+    return sections, entries, names
+
+
+guarded_sections, guarded_entries, guarded_names = guarded_metadata() if reject_section_relocations else (None, None, None)
+
+
+def validate_pool_owners(pool):
+    section = guarded_sections[pool]
+    if section[1] != 1 or not section[5]:
+        raise SystemExit(f"{path}: constant pool must be nonempty PROGBITS")
+    allowed = set(required_section_symbols or [target])
+    for name in allowed:
+        if guarded_names.count(name) != 1:
+            raise SystemExit(f"{path}: required pool symbol is missing or duplicated")
+    for i, entry in enumerate(guarded_entries):
+        if entry[5] != pool:
+            continue
+        if entry[1] == 0 and entry[2] == 0 and entry[3] == 3 and entry[4] == 0:
+            continue  # Only unreferenced section anchors may disappear.
+        if guarded_names[i] not in allowed or not entry[2] or entry[1] + entry[2] > section[5] or entry[3] & 15 not in (0, 1) or entry[4] != 0:
+            raise SystemExit(f"{path}: removed section has an unapproved symbol owner")
+    for relocation in guarded_sections:
+        if relocation[1] not in (4, 9):
+            continue
+        if relocation[7] == pool:
+            raise SystemExit(f"{path}: outgoing relocation section targets removed pool")
+        for offset in range(relocation[4], relocation[4] + relocation[5], relocation[9]):
+            index = struct.unpack_from(">I", data, offset + 4)[0] >> 8
+            if guarded_entries[index][5] == pool and guarded_names[index] not in allowed:
+                raise SystemExit(f"{path}: incoming relocation references an unapproved pool symbol")
 
 
 def resolve_relocations(
@@ -150,6 +266,22 @@ for section_index in range(section_count):
                 value_section_size = struct.unpack_from(">I", data, section_header + 0x14)[0]
                 if value_section_type == 8 or symbol_value + symbol_size > value_section_size:
                     raise SystemExit(f"{path}: {target} has no complete file-backed value")
+                if struct.unpack_from(">I", data, section_header + 8)[0] & 4:
+                    raise SystemExit(f"{path}: refusing executable section")
+                if required_section_name is not None and named_sections(required_section_name) != [symbol_section]:
+                    raise SystemExit(f"{path}: removal section is wrong or duplicated; expected unique {required_section_name}")
+                # Constant-removal guards must not use the legacy relocation
+                # bypass. Pointer pools opt in explicitly to resolved retail
+                # comparison with --require-relocation-match.
+                if reject_section_relocations:
+                    validate_pool_owners(symbol_section)
+                    for relocation_section in range(section_count):
+                        relocation_header = section_offset + relocation_section * section_size
+                        kind = struct.unpack_from(">I", data, relocation_header + 4)[0]
+                        owner = struct.unpack_from(">I", data, relocation_header + 0x1C)[0]
+                        relocation_bytes = struct.unpack_from(">I", data, relocation_header + 0x14)[0]
+                        if kind in (4, 9) and owner == symbol_section and relocation_bytes:
+                            raise SystemExit(f"{path}: refusing constant-section removal with outgoing relocations")
                 if require_whole_section and (
                     symbol_value != 0 or symbol_size != value_section_size
                 ):
@@ -253,6 +385,8 @@ for section_index in range(section_count):
                     break
                 else:
                     raise SystemExit(f"{retail_dol}: address 0x{address:08X} is not in a file-backed segment")
+                if len(local_value) != symbol_size or len(retail_value) != symbol_size:
+                    raise SystemExit(f"{path}: truncated local or retail value")
                 if local_value != retail_value:
                     raise SystemExit(
                         f"{path}: {target} resolved value {local_value.hex()} does not match "
@@ -263,6 +397,11 @@ for section_index in range(section_count):
             raise SystemExit(0)
 
 if retail_target_is_externalized:
+    if reject_section_relocations or required_section_name is not None:
+        if required_section_name is None:
+            raise SystemExit(f"{path}: retry requires an exact removal section")
+        if named_sections(required_section_name):
+            raise SystemExit(f"{path}: refusing retry while removal section remains")
     raise SystemExit(0)
 
 raise SystemExit(f"{path}: symbol {target!r} not found")

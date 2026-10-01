@@ -7,6 +7,9 @@ typedef struct Vec3 {
     float x, y, z;
 } Vec3;
 
+typedef struct Actor Actor;
+typedef struct Link Link;
+
 typedef struct State {
     u8 pad_00[0x44];
     struct State *owner;
@@ -22,7 +25,7 @@ extern void *fn_801A7490(void *);
 extern void fn_8011F114();
 extern void *fn_80201814();
 extern void *fn_80201BC8();
-extern void *fn_80201B8C();
+extern State *fn_80201B8C();
 extern int fn_80074440(void *, void *, State *, Vec3 *);
 extern void fn_80129BE4(void *);
 extern int fn_80074310(void *, Vec3 *, State *, Vec3 *);
@@ -30,31 +33,31 @@ extern void fn_8011F6F0(void *);
 extern void *fn_80137E60(void *, Vec3 *);
 extern unsigned long long fn_8020123C();
 
-/* NonMatching: behavior-complete paired-object setup and routing. Retail and
- * base have the same size and 15 call relocations; the remaining differences
- * are MWCC's callee-saved register assignments. */
-int fn_800741E8(void *object, void *link)
+int fn_800741E8(void *arg0, void *arg1)
 {
-    register void *resolved_second;
+    Link *link;
+    Actor *object;
+    void *target;
+    void *first;
     void *second;
-    register void *first;
-    register State *state;
-    void *resolved_value;
-    void *resolved_final;
+    void *owner;
+    void *route;
+    State *state;
     Vec3 position;
     Vec3 result;
     int found;
 
-    resolved_second = link;
+    object = arg0;
+    link = arg1;
     if (fn_80128EAC(object) == 7) {
-        first = fn_801A7498(resolved_second);
-        second = fn_801A7490(resolved_second);
+        first = fn_801A7498(link);
+        second = fn_801A7490(link);
         fn_8011F114(&position, object);
-        resolved_value = fn_80201814(second);
-        resolved_second = fn_80201814(first);
-        resolved_final = fn_80201BC8(resolved_value);
-        state = ((State *)fn_80201B8C(resolved_second))->owner;
-        found = fn_80074440(object, resolved_final, state, &result);
+        target = fn_80201814(second);
+        owner = fn_80201814(first);
+        route = fn_80201BC8(target);
+        state = fn_80201B8C(owner)->owner;
+        found = fn_80074440(object, route, state, &result);
         fn_80129BE4(object);
         if (found != 0) {
             state->active = 1;
