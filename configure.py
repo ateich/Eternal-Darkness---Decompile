@@ -13310,6 +13310,7 @@ config.libs = [
         "objects": [
             Object(Matching, "dolphin/db/fn_80209B8C.c"),
             Object(Matching, "dolphin/db/fn_80209BB4.c"),
+            Object(NonMatching, "dolphin/db/fn_80209BFC.c"),
         ],
     },
     {

@@ -1,0 +1,35 @@
+=== retail ===
+
+build/GEDE01/obj/dolphin/db/fn_80209BFC.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <__DBExceptionDestination>:
+   0:	7c 60 00 a6 	mfmsr   r3
+   4:	60 63 00 30 	ori     r3,r3,48
+   8:	7c 60 01 24 	mtmsr   r3
+   c:	48 00 00 00 	b       c <__DBExceptionDestination+0xc>
+			c: R_PPC_REL24	fn_80209BB4
+=== reconstructed ===
+
+build/GEDE01/src/dolphin/db/fn_80209BFC.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <__DBExceptionDestination>:
+   0:	7c 08 02 a6 	mflr    r0
+   4:	90 01 00 04 	stw     r0,4(r1)
+   8:	94 21 ff f8 	stwu    r1,-8(r1)
+   c:	48 00 00 01 	bl      c <__DBExceptionDestination+0xc>
+			c: R_PPC_REL24	PPCMfmsr
+  10:	60 63 00 30 	ori     r3,r3,48
+  14:	48 00 00 01 	bl      14 <__DBExceptionDestination+0x14>
+			14: R_PPC_REL24	PPCMtmsr
+  18:	48 00 00 01 	bl      18 <__DBExceptionDestination+0x18>
+			18: R_PPC_REL24	fn_80209BB4
+  1c:	80 01 00 0c 	lwz     r0,12(r1)
+  20:	38 21 00 08 	addi    r1,r1,8
+  24:	7c 08 03 a6 	mtlr    r0
+  28:	4e 80 00 20 	blr
