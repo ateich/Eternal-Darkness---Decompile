@@ -13251,7 +13251,10 @@ config.libs = [
         "mw_version": LIBRARY_MW_VERSIONS["NdevExi2A"],
         "cflags": cflags_base,
         "progress_category": "sdk",
-        "objects": [Object(Matching, "dolphin/db/DebuggerDriver.c")],
+        "objects": [
+            Object(Matching, "dolphin/db/DebuggerDriver.c"),
+            Object(NonMatching, "dolphin/db/fn_80209C78.c"),
+        ],
     },
     {
         "lib": "amcstubs",

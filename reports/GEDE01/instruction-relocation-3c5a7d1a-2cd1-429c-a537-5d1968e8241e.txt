@@ -1,0 +1,28 @@
+canonical_match_percent=84.0
+retail_size=40
+generated_size=36
+retail_relocations=1
+generated_relocations=1
+retail_instructions:
+lwz r3, BootInfo_8064D8F0@sda21
+cmplwi r3, 0x0
+beq 0x18
+lwz r3, 0x2c(r3)
+cmplwi r3, 0x0
+bne 0x24
+lis r3, 0x1000
+addi r3, r3, 0x2
+b 0x24
+blr
+generated_instructions:
+lwz r3, BootInfo_8064D8F0@sda21
+cmplwi r3, 0x0
+beq 0x18
+lwz r3, 0x2c(r3)
+cmplwi r3, 0x0
+bnelr
+lis r3, 0x1000
+addi r3, r3, 0x2
+blr
+955ff5c262b0a2318266804136fae432a3b0b1ebdd68cc40e81231228b6b0a08  reports/GEDE01/objdiff-3c5a7d1a-2cd1-429c-a537-5d1968e8241e.json
+955ff5c262b0a2318266804136fae432a3b0b1ebdd68cc40e81231228b6b0a08  reports/GEDE01/objdiff-3c5a7d1a-2cd1-429c-a537-5d1968e8241e-reloc-strict.json

@@ -1,0 +1,11 @@
+Assignment 3c5a7d1a-2cd1-429c-a537-5d1968e8241e, attempt 3
+Base c1448ea8a5dd889ec1a54cbca8780ca761cb4041
+Target OSGetConsoleType / fn_80209C78
+
+All experiments used the assigned object target build/GEDE01/src/dolphin/db/fn_80209C78.o and the registered SDK compiler mwcc_233_163n (GC/1.2.5n), with the unchanged cflags recorded in objdiff.json.
+
+1. Removed #pragma peephole off from the preserved candidate. The original early-return C generated 36 bytes at 84.0%: retail's `bne 0x24; ...; b 0x24; blr` was folded to `bnelr; ...; blr`.
+2. Tested a result-local form initialized to 0x10000002. It remained 40 bytes but reordered default-value construction before the null checks, selected r4/r0 for the loads, and generated early `beqlr` returns; it was rejected.
+3. Tested a volatile OSBootInfo access with a cached console_type value. This preserves exactly one BootInfo_8064D8F0 SDA21 load and exactly one console_type load, but the compiler still applies the bnelr peephole. This is the retained honest NonMatching C attempt.
+
+Final canonical and relocation-strict direct objdiff reports are byte-identical. Both report 84.0%, retail size 40, generated size 36, and one equal SDA21 relocation per side. Exact instruction streams and report SHA-256 values are in instruction-relocation-3c5a7d1a-2cd1-429c-a537-5d1968e8241e.txt.
