@@ -1,0 +1,58 @@
+
+build/GEDE01/src/game/game_fn_80088E44.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <fn_80088E44>:
+   0:	94 21 ff d0 	stwu    r1,-48(r1)
+   4:	7c 08 02 a6 	mflr    r0
+   8:	90 01 00 34 	stw     r0,52(r1)
+   c:	bf 21 00 14 	stmw    r25,20(r1)
+  10:	3b e3 00 58 	addi    r31,r3,88
+  14:	83 43 00 0c 	lwz     r26,12(r3)
+  18:	28 1a 00 00 	cmplwi  r26,0
+  1c:	41 82 00 90 	beq     ac <fn_80088E44+0xac>
+  20:	80 1a 00 14 	lwz     r0,20(r26)
+  24:	7f 43 d3 78 	mr      r3,r26
+  28:	3b 3f 00 40 	addi    r25,r31,64
+  2c:	54 1b 84 3e 	srwi    r27,r0,16
+  30:	48 00 00 01 	bl      30 <fn_80088E44+0x30>
+			30: R_PPC_REL24	fn_8006C9C0
+  34:	8b d9 00 28 	lbz     r30,40(r25)
+  38:	8b b9 00 2a 	lbz     r29,42(r25)
+  3c:	57 c3 0d fc 	rlwinm  r3,r30,1,23,30
+  40:	57 c4 15 ba 	rlwinm  r4,r30,2,22,29
+  44:	38 03 00 60 	addi    r0,r3,96
+  48:	8b 99 00 2b 	lbz     r28,43(r25)
+  4c:	7c 1f 02 2e 	lhzx    r0,r31,r0
+  50:	7c 79 22 14 	add     r3,r25,r4
+  54:	81 83 00 00 	lwz     r12,0(r3)
+  58:	7c 1b 00 00 	cmpw    r27,r0
+  5c:	80 63 00 10 	lwz     r3,16(r3)
+  60:	40 82 00 48 	bne     a8 <fn_80088E44+0xa8>
+  64:	28 1e 00 04 	cmplwi  r30,4
+  68:	40 80 00 40 	bge     a8 <fn_80088E44+0xa8>
+  6c:	28 0c 00 00 	cmplwi  r12,0
+  70:	41 82 00 38 	beq     a8 <fn_80088E44+0xa8>
+  74:	28 03 00 00 	cmplwi  r3,0
+  78:	41 82 00 30 	beq     a8 <fn_80088E44+0xa8>
+  7c:	7d 89 03 a6 	mtctr   r12
+  80:	4e 80 04 21 	bctrl
+  84:	7f 43 d3 78 	mr      r3,r26
+  88:	38 80 00 00 	li      r4,0
+  8c:	48 00 00 01 	bl      8c <fn_80088E44+0x8c>
+			8c: R_PPC_REL24	fn_8006C9E4
+  90:	9b df 00 69 	stb     r30,105(r31)
+  94:	3b de 00 01 	addi    r30,r30,1
+  98:	57 c0 06 3e 	clrlwi  r0,r30,24
+  9c:	7c 00 e0 40 	cmplw   r0,r28
+  a0:	41 80 00 08 	blt     a8 <fn_80088E44+0xa8>
+  a4:	7f be eb 78 	mr      r30,r29
+  a8:	9b df 00 68 	stb     r30,104(r31)
+  ac:	bb 21 00 14 	lmw     r25,20(r1)
+  b0:	38 60 00 00 	li      r3,0
+  b4:	80 01 00 34 	lwz     r0,52(r1)
+  b8:	7c 08 03 a6 	mtlr    r0
+  bc:	38 21 00 30 	addi    r1,r1,48
+  c0:	4e 80 00 20 	blr
