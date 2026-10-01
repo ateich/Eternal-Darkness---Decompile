@@ -1,0 +1,24 @@
+Bounded source experiments for fn_80131E8C (canonical MWCC settings)
+
+control recovered from preserved commit 4f708fca57f4598a262ea1047df3b0f1343e9d4b:
+  2312 bytes, 99.9654%
+
+Color and mesh-pointer declaration initializers:
+  2312 bytes, 99.9654%; same four r0/r8 differences.
+
+Direct assignment to third with mesh lookup declared first:
+  2312 bytes, 97.596886%; broad code-generation regression, rejected.
+
+Direct assignment to third followed by a nested mesh-pointer scope:
+  2312 bytes, 97.84948%; broad code-generation regression, rejected.
+
+Nested lifetime for third_temp, with color_mesh outside the nested scope:
+  2312 bytes, 99.9654%; same four r0/r8 differences.
+
+Named color_record_index, both in the surrounding scope and in its own nested
+scope, plus declaration-order variation:
+  2312 bytes, 99.9654%; same four r0/r8 differences.
+
+Prepared result keeps the clean nested third_temp and color_record_index
+lifetimes. No register-forcing assembly, undefined behavior, compiler-policy
+change, or neighboring-function edit was used.

@@ -1,0 +1,15 @@
+fn_80131E8C canonical instruction comparison
+retail size: 2312 bytes (578 instructions)
+candidate size: 2312 bytes (578 instructions)
+objdiff match: 99.9654%
+
+Exactly four instruction words differ:
+
+offset  retail                                  candidate
+0x540   lwz r0, lbl_8065023C@sda21             lwz r8, lbl_8065023C@sda21
+0x548   lwz r8, 0x70(r26)                      lwz r0, 0x70(r26)
+0x550   stw r0, 0x8(r1)                        stw r8, 0x8(r1)
+0x558   lwzx r3, r30, r8                       lwzx r3, r30, r0
+
+All other instruction words compare equal. The difference is limited to r0/r8
+coloring of the lbl_8065023C word and the mesh-index table value.

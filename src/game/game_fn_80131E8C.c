@@ -141,12 +141,17 @@ Batch* fn_80131E8C(Runtime* runtime, Batch* batch)
             {
                 for (small_index = 0; small_index < ENTRY->small_count; small_index++) {
                     SmallRecord* small = &ENTRY->small[small_index];
-                    Color first, first_temp, middle, third, third_temp;
                     MeshRecord* color_mesh;
-                    third_temp = lbl_8065023C;
-                    color_mesh = MESH;
-                    third_temp.a = small->color;
-                    third = third_temp;
+                    Color first, first_temp, middle, third;
+                    {
+                        Color third_temp = lbl_8065023C;
+                        {
+                            int color_record_index = batch->record_indices[outer];
+                            color_mesh = runtime->records[color_record_index].mesh;
+                        }
+                        third_temp.a = small->color;
+                        third = third_temp;
+                    }
                     middle = lbl_80651BA4;
                     first_temp = lbl_80650238;
                     first_temp.a = small->color;
