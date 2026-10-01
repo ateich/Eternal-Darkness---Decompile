@@ -35,46 +35,39 @@ typedef struct Params {
 extern void *memset(void *, int, unsigned long);
 extern void fn_801A4F74(EffectDesc *);
 extern u32 fn_80155748(Params *, EffectDesc *);
-extern float lbl_8064F368;
-extern float lbl_8064F398;
-extern float lbl_8064F39C;
-extern float lbl_8064F3A0;
-extern float lbl_8064F3A4;
-extern float lbl_8064F3A8;
-extern float lbl_8064F3AC;
 
 void fn_800D38CC(State *state, Params *params)
 {
     EffectDesc desc;
     memset(&desc, 0, sizeof(desc));
     fn_801A4F74(&desc);
-    desc.field_44 = lbl_8064F368;
+    desc.field_44 = 1.0f;
     desc.field_49 = 0;
-    desc.field_14 = lbl_8064F39C;
+    desc.field_14 = -1730.0f;
     desc.field_18 = params->field_04;
-    desc.field_1C = lbl_8064F3A0;
-    desc.field_38 = lbl_8064F39C;
+    desc.field_1C = 255.0f;
+    desc.field_38 = -1730.0f;
     desc.field_3C = params->field_04;
-    desc.field_40 = lbl_8064F398;
-    desc.field_20 = lbl_8064F3A4;
+    desc.field_40 = 0.0f;
+    desc.field_20 = -810.0f;
     desc.field_24 = params->field_04;
-    desc.field_28 = lbl_8064F3A0;
-    desc.field_2C = lbl_8064F3A4;
+    desc.field_28 = 255.0f;
+    desc.field_2C = -810.0f;
     desc.field_30 = params->field_04;
-    desc.field_34 = lbl_8064F398;
+    desc.field_34 = 0.0f;
     state->effect_a = fn_80155748(params, &desc);
 
-    desc.field_14 = lbl_8064F3A8;
+    desc.field_14 = 800.0f;
     desc.field_18 = params->field_04;
-    desc.field_1C = lbl_8064F3A0;
-    desc.field_38 = lbl_8064F3A8;
+    desc.field_1C = 255.0f;
+    desc.field_38 = 800.0f;
     desc.field_3C = params->field_04;
-    desc.field_40 = lbl_8064F398;
-    desc.field_20 = lbl_8064F3AC;
+    desc.field_40 = 0.0f;
+    desc.field_20 = 1770.0f;
     desc.field_24 = params->field_04;
-    desc.field_28 = lbl_8064F3A0;
-    desc.field_2C = lbl_8064F3AC;
+    desc.field_28 = 255.0f;
+    desc.field_2C = 1770.0f;
     desc.field_30 = params->field_04;
-    desc.field_34 = lbl_8064F398;
+    desc.field_34 = 0.0f;
     state->effect_b = fn_80155748(params, &desc);
 }

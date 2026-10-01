@@ -1,0 +1,123 @@
+{
+  "request": {
+    "number": 31,
+    "head": "7f6ebf35a5047260ef6c0e1d5b97b5ba4564b40f",
+    "targets": [
+      "fn_80120B58",
+      "fn_801F02C4",
+      "fn_801FA9C8",
+      "fn_8017A7D4",
+      "fn_80133510",
+      "fn_80130434",
+      "fn_800D38CC",
+      "fn_8007BD40",
+      "fn_8006B96C",
+      "fn_801D88D4",
+      "fn_801F0CB0",
+      "fn_800606BC",
+      "fn_8008D5D4",
+      "fn_801F3528",
+      "fn_801D84F4",
+      "fn_800A1278",
+      "fn_8014A6BC",
+      "fn_801950D4"
+    ],
+    "dependencies": [
+      33
+    ],
+    "allowed_shared_paths": [
+      "tools/undefine_elf_static_pool.py",
+      "tools/externalize_string_pool.py"
+    ],
+    "retry_after_job": "9401182d-ccc4-4825-ac44-932531f2755d",
+    "retry_reason": "Normalize unreferenced local owner extents when emptying validated static pools, and keep the empty PROGBITS section as .data in fn_801F0CB0. Focused Astra-low review approved; all fresh production gates required; failure history preserved.",
+    "allowed_build_rules": [
+      "globalize_game_801D88D4_bias"
+    ],
+    "specialist": false
+  },
+  "manifest": {
+    "included": [
+      "fn_80120B58",
+      "fn_801F02C4",
+      "fn_801FA9C8",
+      "fn_8017A7D4",
+      "fn_80133510",
+      "fn_80130434",
+      "fn_800D38CC",
+      "fn_8007BD40",
+      "fn_8006B96C",
+      "fn_801D88D4",
+      "fn_801F0CB0",
+      "fn_800606BC",
+      "fn_8008D5D4",
+      "fn_801F3528",
+      "fn_801D84F4",
+      "fn_800A1278",
+      "fn_8014A6BC",
+      "fn_801950D4"
+    ],
+    "deferred": []
+  },
+  "acceptedBase": "0ebfd3003be3a29f6266bc25736a3574d4f24c22",
+  "review": {
+    "reviewerA": null,
+    "reviewerB": {
+      "reviewer": "gpt-6-astra:low",
+      "issues": [
+        "None. Full diff stays within the 18-function scope; no new assembly or weaker gates. Pool guards reject unsafe data, and all three regression suites passed. Fresh production gates remain pending as specified."
+      ],
+      "rating": 9,
+      "verdict": "APPROVE",
+      "raw": "I’ll inspect the complete diff in the specified checkout, focusing on scope and the safety checks before data removal.\n\n\nThe source changes are confined to the 18 included functions, with no new assembly files or gate changes in the diff. I’m checking the regression fixtures and shared pool validators for unsafe acceptance cases.\n\n\nISSUES:\n- None. Full diff stays within the 18-function scope; no new assembly or weaker gates. Pool guards reject unsafe data, and all three regression suites passed. Fresh production gates remain pending as specified.\n\nRATING: 9\n\nVERDICT: APPROVE"
+    },
+    "consensus": [
+      {
+        "issue": "None. Full diff stays within the 18-function scope; no new assembly or weaker gates. Pool guards reject unsafe data, and all three regression suites passed. Fresh production gates remain pending as specified.",
+        "reviewerA": false,
+        "reviewerB": true,
+        "agreed": false
+      }
+    ],
+    "hasDisagreement": false,
+    "table": "| Issue | gpt-6-astra:low |\n|-------|--------|\n| None. Full diff stays within the 18-function scope; no new assembly or weaker gates. Pool guards reject unsafe data, and all three regression suites passed. Fresh production gates remain pending as specified. | ✓ |\n\n**gpt-6-astra:low Rating:** 9/10 — APPROVE\n\n_Second reviewer disabled (modelRouting.enableSecondReviewer)._",
+    "verdict": "APPROVE"
+  },
+  "canonical": {
+    "fuzzy_match_percent": 61.37912,
+    "total_code": "2300692",
+    "matched_code": "1223968",
+    "matched_code_percent": 53.199993,
+    "total_data": "4305634",
+    "matched_data": "39942",
+    "matched_data_percent": 0.9276683,
+    "total_functions": 8214,
+    "matched_functions": 6221,
+    "matched_functions_percent": 75.73655,
+    "complete_code": "1222220",
+    "complete_code_percent": 53.124016,
+    "complete_data": "40138",
+    "complete_data_percent": 0.93222046,
+    "total_units": 7116,
+    "complete_units": 6454
+  },
+  "strict": {
+    "fuzzy_match_percent": 61.375572,
+    "total_code": "2300692",
+    "matched_code": "1220536",
+    "matched_code_percent": 53.050823,
+    "total_data": "4305634",
+    "matched_data": "39942",
+    "matched_data_percent": 0.9276683,
+    "total_functions": 8214,
+    "matched_functions": 6214,
+    "matched_functions_percent": 75.65133,
+    "complete_code": "1222220",
+    "complete_code_percent": 53.124016,
+    "complete_data": "40138",
+    "complete_data_percent": 0.93222046,
+    "total_units": 7116,
+    "complete_units": 6454
+  },
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

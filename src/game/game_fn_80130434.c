@@ -22,7 +22,7 @@ typedef struct Object {
 
 #pragma use_lmw_stmw on
 
-extern float lbl_806501DC;
+extern const float lbl_806501DC;
 extern void fn_80125ECC(void *);
 extern void fn_8012CEA4(Object*, int, Vec4*);
 extern void fn_8012CF08(Object*, int, Vec4, Vec4, int, int, float);
@@ -33,6 +33,7 @@ void fn_80130434(Object* object, int clear)
 {
     Vec4 rotation;
     Vec4 vector;
+    RuntimeState* runtime;
     int i;
 
     if ((object->runtime->flags & 0x70) == 0) {
@@ -40,10 +41,10 @@ void fn_80130434(Object* object, int clear)
         if (object->active != 0) {
             fn_8017A630(&rotation);
             for (i = 0; i < 4; i++) {
-                if (object->runtime->ids[i] != -1) {
+                if ((runtime = object->runtime)->ids[i] != -1) {
                     float scale;
 
-                    fn_8012CEA4(object, object->runtime->ids[i], &vector);
+                    fn_8012CEA4(object, runtime->ids[i], &vector);
                     scale = fn_8017A5A8(&vector, &rotation,
                                         object->runtime->amount[i] *
                                         object->runtime->scale *

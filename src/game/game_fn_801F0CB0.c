@@ -13,10 +13,23 @@ typedef struct AimRecord {
     float distance;
 } AimRecord;
 
+typedef struct EffectRec {
+    Vec3 pos;
+    s32 value;
+    s32 intensity;
+} EffectRec;
+
+typedef struct EffectAttributes {
+    Vec3 direction;
+    u16 field_0C;
+    u8 field_0E;
+    u8 field_0F;
+    u8 field_10;
+} EffectAttributes;
+
 extern s32 lbl_8064D6F8;
 extern s32 lbl_8064D738;
 extern float lbl_8064C390;
-extern u8 lbl_8063BEA0[];
 extern Vec3 lbl_8023B798;
 extern float lbl_80651394;
 extern float lbl_80651398;
@@ -46,35 +59,37 @@ typedef struct EmitterSlot {
     u8 data[0x40];
 } EmitterSlot;
 
-/* Aim records follow the sixteen emitter slots in the shared pool. */
-static inline AimRecord* aim_records(EmitterSlot* pool)
-{
-    return (AimRecord*)(pool + 16);
-}
+static u8 effect_8063BEA0[0x20] = {0};
+static u8 effect_8063BEC0[0x5C] = {0};
+static float effect_8063BF1C[3] = {0};
+static float effect_8063BF28[16] = {0};
+static u8 effect_8063BF68[0xC0] = {0};
+static u8 effect_8063C028[0x40] = {0};
+static u8 effect_matrix[0x30] = {0};
+static u8 effect_8063C098[0x30] = {0};
+static u8 effect_8063C0C8[0x30] = {0};
+static EmitterSlot effect_emitters[2][8] = {0};
+static AimRecord effect_records[8] = {0};
 
 #pragma use_lmw_stmw on
 
-/* NonMatching: size-exact reconstruction. Reusing the typed emitter pool
- * preserves the emitter-address grouping, but GC/1.3 retains the pool in an
- * extra saved register and schedules the record base before its index.
- * The conversion-bias constants use the existing audited externalization. */
-void fn_801F0CB0(u8* source, Vec3* target, void* owner, s32 index, u8 mode,
-                 Vec3* color, u8* attributes)
+void fn_801F0CB0(EffectRec* source, Vec3* target, void* owner, s32 index, u8 mode,
+                 Vec3* color, EffectAttributes* attributes)
 {
-    u8* base;
-    EmitterSlot* emitterBase;
-    void* emitter;
     Vec3 transformed;
+    float red;
+    float green;
+    s32 scale;
     Vec3 direction;
-    s32 scale = *(s32*)(source + 0x10);
-    float red = lbl_80651394;
-    float green = lbl_80651398;
-    float blue = lbl_8065139C;
+    void* emitter;
+    float blue;
 
-    base = lbl_8063BEA0;
-    emitterBase = (EmitterSlot*)(base + 0x258);
-    emitter = emitterBase + (index + (lbl_8064D6F8 << 3)) +
-              (lbl_8064D738 << 3);
+    scale = source->intensity;
+    red = lbl_80651394;
+    green = lbl_80651398;
+    blue = lbl_8065139C;
+
+    emitter = &effect_emitters[lbl_8064D738][index + lbl_8064D6F8 * 8];
 
     if (index == 0) {
         lbl_8064C390 -= lbl_806513A0;
@@ -87,55 +102,53 @@ void fn_801F0CB0(u8* source, Vec3* target, void* owner, s32 index, u8 mode,
 
     if (mode == 0) {
         if (attributes == 0) {
-            s32 value = *(s32*)(source + 0x0C);
+            s32 value = source->value;
             fn_80227BE0(emitter, &value);
             fn_80227874(emitter, lbl_806513A4 * (float)scale,
                         lbl_80651348, lbl_80651348,
                         red, green, blue);
-            fn_80211710(base + 0x1C8, source, &transformed);
+            fn_80211710(effect_matrix, source, &transformed);
             fn_80227AE0(emitter, transformed.x, transformed.y, transformed.z);
         } else {
-            s32 value = *(s32*)(source + 0x0C);
+            s32 value = source->value;
             fn_80227BE0(emitter, &value);
-            fn_80211710(base + 0x1C8, source, &transformed);
+            fn_80211710(effect_matrix, source, &transformed);
             fn_80227AE0(emitter, transformed.x, transformed.y, transformed.z);
 
-            red = fn_800ED720(*(float*)(attributes + 0) * *(float*)(attributes + 0) +
-                              *(float*)(attributes + 4) * *(float*)(attributes + 4) +
-                              *(float*)(attributes + 8) * *(float*)(attributes + 8));
-            *(float*)(attributes + 0) /= red;
-            *(float*)(attributes + 4) /= red;
-            *(float*)(attributes + 8) /= red;
-            fn_802117F0(base + 0x1C8, (Vec3*)attributes, &transformed);
+            red = fn_800ED720(attributes->direction.x * attributes->direction.x +
+                              attributes->direction.y * attributes->direction.y +
+                              attributes->direction.z * attributes->direction.z);
+            attributes->direction.x /= red;
+            attributes->direction.y /= red;
+            attributes->direction.z /= red;
+            fn_802117F0(effect_matrix, &attributes->direction, &transformed);
             fn_80227AF0(emitter, transformed.x, transformed.y, transformed.z);
-            fn_80227890(emitter, (float)attributes[0x0E], attributes[0x10]);
-            fn_80227A10(emitter, (float)*(u16*)(attributes + 0x0C),
-                        lbl_806513A8, attributes[0x0F]);
+            fn_80227890(emitter, (float)attributes->field_0E, attributes->field_10);
+            fn_80227A10(emitter, (float)attributes->field_0C,
+                        lbl_806513A8, attributes->field_0F);
         }
     } else {
         Vec3 basis = lbl_8023B798;
         Vec3 cross;
-        AimRecord* records;
 
-        direction.x = target->x - *(float*)(source + 0);
-        direction.y = target->y - *(float*)(source + 4);
-        direction.z = target->z - *(float*)(source + 8);
+        direction.x = target->x - source->pos.x;
+        direction.y = target->y - source->pos.y;
+        direction.z = target->z - source->pos.z;
         red = fn_800ED720(direction.x * direction.x +
                           direction.y * direction.y +
                           direction.z * direction.z);
         direction.x /= red;
         direction.y /= red;
         direction.z /= red;
-        fn_802117F0(base + 0x1C8, &direction, &transformed);
+        fn_802117F0(effect_matrix, &direction, &transformed);
         {
-            s32 value = *(s32*)(source + 0x0C);
+            s32 value = source->value;
             fn_80227BE0(emitter, &value);
         }
         fn_80211BA0(&transformed, &basis, &cross);
-        records = aim_records(emitterBase);
-        records[index].direction = cross;
-        records[index].distance = red;
-        records[index].owner = owner;
+        effect_records[index].direction = cross;
+        effect_records[index].distance = red;
+        effect_records[index].owner = owner;
         fn_80227B0C(emitter, transformed.x, transformed.y, transformed.z);
         fn_80227874(emitter, lbl_80651348, lbl_80651348,
                     lbl_8065134C, lbl_806513AC,

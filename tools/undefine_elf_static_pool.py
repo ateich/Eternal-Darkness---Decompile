@@ -158,6 +158,11 @@ def externalize(data, target, symbols):
     # All checks completed. Never change the caller's bytes on rejection.
     rewritten = list(entries)
     rewritten[hit] = (entries[hit][0], 0, 0, 16, 0, 0)
+    # The unreferenced local owners disappear with the validated pool. Keep
+    # their metadata inside the now-empty section for ELF readers/objdiff.
+    for i, entry in enumerate(entries):
+        if i != hit and entry[5] == pool:
+            rewritten[i] = (entry[0], 0, 0, entry[3], entry[4], pool)
     order = [i for i, entry in enumerate(rewritten) if entry[3] >> 4 == 0] + [i for i, entry in enumerate(rewritten) if entry[3] >> 4 != 0]
     indices = {old: new for new, old in enumerate(order)}
     for new, old in enumerate(order):

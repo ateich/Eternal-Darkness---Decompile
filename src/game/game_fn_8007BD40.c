@@ -51,11 +51,11 @@ s32 fn_8007BD40(void *input)
     EffectState *state = fn_801FD6F4(arg);
     Vec3 position;
     u8 color[4];
-    s8 x, y, z;
-    s32 y_value, z_value;
+    s8 velocity[3];
     s32 lifetime;
     s32 random;
     u32 red;
+    s32 i;
 
     if (state != 0 && state->finished == 0) {
         resource = (void *)fn_80201814(state->owner);
@@ -72,11 +72,9 @@ s32 fn_8007BD40(void *input)
                 fn_801FD880(arg, color);
                 lifetime = fn_801FD8BC(arg);
                 red = color[0];
-                x = (s8)(state->packed_velocity >> 24);
-                y_value = (s8)((state->packed_velocity >> 16) & 0xFF);
-                y = y_value;
-                z_value = (s8)((state->packed_velocity >> 8) & 0xFF);
-                z = z_value;
+                velocity[0] = (u8)(state->packed_velocity >> 24);
+                velocity[1] = (u8)(state->packed_velocity >> 16);
+                velocity[2] = (u8)(state->packed_velocity >> 8);
                 if (red == lbl_8064B58C[0] &&
                     color[1] == lbl_8064B58C[1] &&
                     color[2] == lbl_8064B58C[2]) {
@@ -91,11 +89,9 @@ s32 fn_8007BD40(void *input)
                     color[1] = color[1] < 255 ? color[1] : 255;
                     color[2] = color[2] < 255 ? color[2] : 255;
                     lifetime = ((random * -200) >> 6) + 1300;
-                    x = (s8)((fn_800FBFB0() & 31) - 16);
-                    y_value = (s8)((fn_800FBFB0() & 31) - 16);
-                    y = y_value;
-                    z_value = (s8)((fn_800FBFB0() & 31) - 16);
-                    z = z_value;
+                    velocity[0] = (fn_800FBFB0() & 31) - 16;
+                    velocity[1] = (fn_800FBFB0() & 31) - 16;
+                    velocity[2] = (fn_800FBFB0() & 31) - 16;
                 } else {
                     s32 value;
                     value = red - 2;
@@ -105,18 +101,20 @@ s32 fn_8007BD40(void *input)
                     value = color[2] - 2;
                     color[2] = value > lbl_8064B58C[2] ? value : lbl_8064B58C[2];
                     lifetime = lifetime - 50 > 1300 ? lifetime - 50 : 1300;
-                    if ((s8)x > 0) x = (s8)(x - 1);
-                    else if (x < 0) x = (s8)(x + 1);
-                    if ((s8)y > 0) y = (s8)(y - 1);
-                    else if (y < 0) y = (s8)(y + 1);
-                    if ((s8)z > 0) z = (s8)(z - 1);
-                    else if (z < 0) z = (s8)(z + 1);
+                    for (i = 0; i < 3; i++) {
+                        if (velocity[i] > 0) {
+                            velocity[i]--;
+                        } else if (velocity[i] < 0) {
+                            velocity[i]++;
+                        }
+                    }
                 }
-                state->packed_velocity = ((u8)x << 24) | ((u8)y << 16) |
-                                         ((u8)z << 8);
-                position.x += x;
-                position.y += y;
-                position.z += z;
+                state->packed_velocity = ((u8)velocity[0] << 24) |
+                                         ((u8)velocity[1] << 16) |
+                                         ((u8)velocity[2] << 8);
+                position.x += velocity[0];
+                position.y += velocity[1];
+                position.z += velocity[2];
                 fn_801FDEB4(arg, &position);
                 fn_801FD80C(arg, color);
                 fn_801FDF74(arg, lifetime);

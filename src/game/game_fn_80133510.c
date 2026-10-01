@@ -15,7 +15,7 @@ typedef struct Candidate {
 } Candidate;
 
 extern u8 lbl_8030F540[];
-extern float lbl_80650248;
+extern const float lbl_80650248;
 extern void* fn_80201B9C(void);
 extern void* fn_80201BC0(void*);
 extern Candidate* fn_80201BC8(void*);
@@ -33,30 +33,36 @@ extern void fn_8011FABC(Candidate*, int, int);
 extern void fn_8011F114(Vec3*, void*);
 extern void fn_8012B7A0(void*, float);
 
-/* NonMatching: reconstruction of the unowned-entry object selection and
- * installation pass, followed by the owned-entry position refresh. */
+#define ENTRY_AT(manager, offset) ((Entry*)((char*)(manager)->entries + (offset)))
+
 void fn_80133510(Manager* manager)
 {
-    u32 best;
-    int i;
+    int ez;
+    int ey;
+    int ex;
     int offset;
+    void* iterator;
+    int i;
+    void* selected;
+    u32 best;
 
     if (manager == 0) return;
 
     best = -1;
 
-    offset = 0;
     i = 0;
+    offset = 0;
     while (i < manager->count) {
-        Entry entry = *(Entry*)((char*)manager->entries + offset);
-        if (((Entry*)((char*)manager->entries + offset))->object == 0) {
+        Entry entry = *ENTRY_AT(manager, offset);
+        if (ENTRY_AT(manager, offset)->object == 0) {
             u32 entry_id = entry.id;
-            void* iterator = fn_80201B9C();
-            void* selected = 0;
-            int ez = (int)entry.position.z;
-            int ey = (int)entry.position.y;
-            int ex = (int)entry.position.x;
             u32 distance;
+
+            iterator = fn_80201B9C();
+            selected = 0;
+            ez = (int)entry.position.z;
+            ey = (int)entry.position.y;
+            ex = (int)entry.position.x;
 
             while (iterator != 0) {
                 Candidate* candidate = fn_80201BC8(iterator);
@@ -115,30 +121,30 @@ void fn_80133510(Manager* manager)
             if (selected != 0) {
                 Candidate* candidate;
                 void* resource;
-                void* linked;
                 void* linked_object;
+                void* linked;
                 fn_80201B54(selected);
                 candidate = fn_80201BC8(selected);
                 resource = fn_80155DB4(selected);
-                ((Entry*)((char*)manager->entries + offset))->object = candidate;
-                ((Entry*)((char*)manager->entries + offset))->resource = resource;
+                ENTRY_AT(manager, offset)->object = candidate;
+                ENTRY_AT(manager, offset)->resource = resource;
                 best = distance;
-                ((Entry*)((char*)manager->entries + offset))->link = fn_80156928(resource);
+                ENTRY_AT(manager, offset)->link = fn_80156928(resource);
                 linked = fn_80205288(selected);
                 linked_object = 0;
                 if (linked != 0) linked_object = fn_80201BC8(linked);
                 if (linked_object != 0) fn_8012C478(linked_object, 0xF, 0);
                 fn_801568C0(resource, 0);
-                fn_8012C198(((Entry*)((char*)manager->entries + offset))->object);
-                fn_8012C478(((Entry*)((char*)manager->entries + offset))->object,
+                fn_8012C198(ENTRY_AT(manager, offset)->object);
+                fn_8012C478(ENTRY_AT(manager, offset)->object,
                             0xF, 1);
-                candidate->flags = candidate->flags | (u16)0x8000;
-                if (((Entry*)((char*)manager->entries + offset))->flags & 1)
+                candidate->flags |= 0x8000;
+                if (ENTRY_AT(manager, offset)->flags & 1)
                     candidate->flags |= 0x04000000;
-                if (((Entry*)((char*)manager->entries + offset))->flags & 2)
+                if (ENTRY_AT(manager, offset)->flags & 2)
                     fn_8011FABC(candidate, 0, 0x1000);
-                if (((Entry*)((char*)manager->entries + offset))->flags & 4) {
-                    candidate->flags = candidate->flags & 0xFFFFFEFFu;
+                if (ENTRY_AT(manager, offset)->flags & 4) {
+                    candidate->flags &= ~0x100;
                 } else {
                     candidate->flags |= 0x100;
                     candidate->flags_2D0 |= 0x2000;
@@ -149,19 +155,12 @@ void fn_80133510(Manager* manager)
         i++;
     }
 
-    offset = 0;
-    i = 0;
-    while (i < manager->count) {
-        if (((Entry*)((char*)manager->entries + offset))->object != 0) {
+    for (i = 0; i < manager->count; i++) {
+        if (manager->entries[i].object != 0) {
             Vec3 position;
-            fn_8011F114(&position,
-                        ((Entry*)((char*)manager->entries + offset))->object);
-            fn_8012B7A0(((Entry*)((char*)manager->entries + offset))->object,
-                        (((Entry*)((char*)manager->entries + offset))->position =
-                             position,
-                         lbl_80650248));
+            fn_8011F114(&position, manager->entries[i].object);
+            manager->entries[i].position = position;
+            fn_8012B7A0(manager->entries[i].object, lbl_80650248);
         }
-        offset += 0x28;
-        i++;
     }
 }
