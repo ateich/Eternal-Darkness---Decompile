@@ -1,0 +1,340 @@
+{
+  "version": 1,
+  "assignment_id": "2d0815fa-e2dd-4d94-8bc6-22c960ea619b",
+  "base_commit": "22d443dc2ee844a99ddf2067f68319794f7d1ffc",
+  "target": "fn_80189C14",
+  "runs": [
+    {
+      "argv": [
+        ".tools/bin/ninja",
+        "-v",
+        "build/GEDE01/src/game/game_fn_80189C14.externalized"
+      ],
+      "exit_code": 0,
+      "output": "[1/2] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80189C14.c -o build/GEDE01/src/game && \"/usr/bin/python3\" tools/transform_dep.py build/GEDE01/src/game/game_fn_80189C14.d build/GEDE01/src/game/game_fn_80189C14.d\n[2/2] python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_80189C14.o @29 lbl_80650A70 orig/GEDE01/sys/main.dol --require-whole-section && build/binutils/powerpc-eabi-objcopy --redefine-sym=@29=lbl_80650A70 --remove-section=.sdata2 --rename-section=.comment=.ignored build/GEDE01/src/game/game_fn_80189C14.o && touch build/GEDE01/src/game/game_fn_80189C14.externalized\n"
+    },
+    {
+      "argv": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_80189C14",
+        "fn_80189C14",
+        "-o",
+        "reports/GEDE01/objdiff-2d0815fa-e2dd-4d94-8bc6-22c960ea619b.json",
+        "--format",
+        "json-pretty"
+      ],
+      "exit_code": 0,
+      "output": " INFO Writing to reports/GEDE01/objdiff-2d0815fa-e2dd-4d94-8bc6-22c960ea619b.json\n"
+    },
+    {
+      "argv": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_80189C14",
+        "fn_80189C14",
+        "-o",
+        "reports/GEDE01/objdiff-2d0815fa-e2dd-4d94-8bc6-22c960ea619b-reloc-strict.json",
+        "--format",
+        "json-pretty",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "exit_code": 0,
+      "output": " INFO Writing to reports/GEDE01/objdiff-2d0815fa-e2dd-4d94-8bc6-22c960ea619b-reloc-strict.json\n"
+    },
+    {
+      "argv": [
+        ".tools/bin/ninja",
+        "-t",
+        "commands",
+        "build/GEDE01/src/game/game_fn_80189C14.o"
+      ],
+      "exit_code": 0,
+      "output": "\"/usr/bin/python3\" tools/download_tool.py sjiswrap build/tools/sjiswrap.exe --tag v1.2.2\ntools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80189C14.c -o build/GEDE01/src/game && \"/usr/bin/python3\" tools/transform_dep.py build/GEDE01/src/game/game_fn_80189C14.d build/GEDE01/src/game/game_fn_80189C14.d\n"
+    },
+    {
+      "argv": [
+        "build/binutils/powerpc-eabi-readelf",
+        "-Wr",
+        "build/GEDE01/obj/game/game_fn_80189C14.o"
+      ],
+      "exit_code": 0,
+      "output": "\nRelocation section '.rela.text' at offset 0x2a8 contains 19 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n00000018  0000046d R_PPC_EMB_SDA21        00000000   lbl_8064D738 + 0\n00000022  00000506 R_PPC_ADDR16_HA        00000000   lbl_80607120 + 0\n0000002a  00000504 R_PPC_ADDR16_LO        00000000   lbl_80607120 + 0\n00000066  00000606 R_PPC_ADDR16_HA        00000000   lbl_8063C098 + 0\n0000006a  00000706 R_PPC_ADDR16_HA        00000000   fn_8018D020 + 0\n00000074  0000086d R_PPC_EMB_SDA21        00000000   lbl_80650A70 + 0\n0000007a  00000604 R_PPC_ADDR16_LO        00000000   lbl_8063C098 + 0\n0000007e  00000704 R_PPC_ADDR16_LO        00000000   fn_8018D020 + 0\n000000a0  0000090a R_PPC_REL24            00000000   fn_80188A7C + 0\n0000010c  00000a0a R_PPC_REL24            00000000   fn_8017ACE0 + 0\n000001e8  00000b0a R_PPC_REL24            00000000   DCFlushRange + 0\n000001f4  00000b0a R_PPC_REL24            00000000   DCFlushRange + 0\n00000200  00000b0a R_PPC_REL24            00000000   DCFlushRange + 0\n0000020c  00000c0a R_PPC_REL24            00000000   fn_80188584 + 0\n00000214  00000d0a R_PPC_REL24            00000000   fn_801ED57C + 0\n00000228  00000e0a R_PPC_REL24            00000000   fn_8018D0D0 + 0\n00000238  00000f0a R_PPC_REL24            00000000   fn_801889D8 + 0\n00000240  00000d0a R_PPC_REL24            00000000   fn_801ED57C + 0\n00000248  0000100a R_PPC_REL24            00000000   fn_80226D78 + 0\n"
+    },
+    {
+      "argv": [
+        "build/binutils/powerpc-eabi-readelf",
+        "-Wr",
+        "build/GEDE01/src/game/game_fn_80189C14.o"
+      ],
+      "exit_code": 0,
+      "output": "\nRelocation section '.rela.text' at offset 0x52c contains 19 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n00000018  0000056d R_PPC_EMB_SDA21        00000000   lbl_8064D738 + 0\n00000022  00000406 R_PPC_ADDR16_HA        00000000   lbl_80607120 + 0\n0000002a  00000404 R_PPC_ADDR16_LO        00000000   lbl_80607120 + 0\n00000066  00000606 R_PPC_ADDR16_HA        00000000   lbl_8063C098 + 0\n0000006a  00000706 R_PPC_ADDR16_HA        00000000   fn_8018D020 + 0\n00000074  0000036d R_PPC_EMB_SDA21        00000000   lbl_80650A70 + 0\n0000007a  00000604 R_PPC_ADDR16_LO        00000000   lbl_8063C098 + 0\n0000007e  00000704 R_PPC_ADDR16_LO        00000000   fn_8018D020 + 0\n000000a0  0000080a R_PPC_REL24            00000000   fn_80188A7C + 0\n0000010c  0000090a R_PPC_REL24            00000000   fn_8017ACE0 + 0\n000001e8  00000a0a R_PPC_REL24            00000000   DCFlushRange + 0\n000001f4  00000a0a R_PPC_REL24            00000000   DCFlushRange + 0\n00000200  00000a0a R_PPC_REL24            00000000   DCFlushRange + 0\n0000020c  00000b0a R_PPC_REL24            00000000   fn_80188584 + 0\n00000214  00000c0a R_PPC_REL24            00000000   fn_801ED57C + 0\n00000228  00000d0a R_PPC_REL24            00000000   fn_8018D0D0 + 0\n00000238  00000e0a R_PPC_REL24            00000000   fn_801889D8 + 0\n00000240  00000c0a R_PPC_REL24            00000000   fn_801ED57C + 0\n00000248  00000f0a R_PPC_REL24            00000000   fn_80226D78 + 0\n"
+    }
+  ],
+  "canonical": {
+    "match_percent": 99.93507,
+    "retail_size": "616",
+    "generated_size": "616"
+  },
+  "relocation_strict": {
+    "match_percent": 99.93507,
+    "retail_size": "616",
+    "generated_size": "616"
+  },
+  "independent_elf_comparison": {
+    "retail_text_sha256": "ccd055abfb1a8366dbbfeaa9fa1a2d5801361210e18fc6459b8a2d91fafc8940",
+    "generated_text_sha256": "6fbaf8863399fa898cbb493494a881c87a3130468ab9df202c0e0449ce45c26d",
+    "retail_relocations": [
+      {
+        "offset": 24,
+        "type": 109,
+        "target": "lbl_8064D738",
+        "addend": 0
+      },
+      {
+        "offset": 34,
+        "type": 6,
+        "target": "lbl_80607120",
+        "addend": 0
+      },
+      {
+        "offset": 42,
+        "type": 4,
+        "target": "lbl_80607120",
+        "addend": 0
+      },
+      {
+        "offset": 102,
+        "type": 6,
+        "target": "lbl_8063C098",
+        "addend": 0
+      },
+      {
+        "offset": 106,
+        "type": 6,
+        "target": "fn_8018D020",
+        "addend": 0
+      },
+      {
+        "offset": 116,
+        "type": 109,
+        "target": "lbl_80650A70",
+        "addend": 0
+      },
+      {
+        "offset": 122,
+        "type": 4,
+        "target": "lbl_8063C098",
+        "addend": 0
+      },
+      {
+        "offset": 126,
+        "type": 4,
+        "target": "fn_8018D020",
+        "addend": 0
+      },
+      {
+        "offset": 160,
+        "type": 10,
+        "target": "fn_80188A7C",
+        "addend": 0
+      },
+      {
+        "offset": 268,
+        "type": 10,
+        "target": "fn_8017ACE0",
+        "addend": 0
+      },
+      {
+        "offset": 488,
+        "type": 10,
+        "target": "DCFlushRange",
+        "addend": 0
+      },
+      {
+        "offset": 500,
+        "type": 10,
+        "target": "DCFlushRange",
+        "addend": 0
+      },
+      {
+        "offset": 512,
+        "type": 10,
+        "target": "DCFlushRange",
+        "addend": 0
+      },
+      {
+        "offset": 524,
+        "type": 10,
+        "target": "fn_80188584",
+        "addend": 0
+      },
+      {
+        "offset": 532,
+        "type": 10,
+        "target": "fn_801ED57C",
+        "addend": 0
+      },
+      {
+        "offset": 552,
+        "type": 10,
+        "target": "fn_8018D0D0",
+        "addend": 0
+      },
+      {
+        "offset": 568,
+        "type": 10,
+        "target": "fn_801889D8",
+        "addend": 0
+      },
+      {
+        "offset": 576,
+        "type": 10,
+        "target": "fn_801ED57C",
+        "addend": 0
+      },
+      {
+        "offset": 584,
+        "type": 10,
+        "target": "fn_80226D78",
+        "addend": 0
+      }
+    ],
+    "generated_relocations": [
+      {
+        "offset": 24,
+        "type": 109,
+        "target": "lbl_8064D738",
+        "addend": 0
+      },
+      {
+        "offset": 34,
+        "type": 6,
+        "target": "lbl_80607120",
+        "addend": 0
+      },
+      {
+        "offset": 42,
+        "type": 4,
+        "target": "lbl_80607120",
+        "addend": 0
+      },
+      {
+        "offset": 102,
+        "type": 6,
+        "target": "lbl_8063C098",
+        "addend": 0
+      },
+      {
+        "offset": 106,
+        "type": 6,
+        "target": "fn_8018D020",
+        "addend": 0
+      },
+      {
+        "offset": 116,
+        "type": 109,
+        "target": "lbl_80650A70",
+        "addend": 0
+      },
+      {
+        "offset": 122,
+        "type": 4,
+        "target": "lbl_8063C098",
+        "addend": 0
+      },
+      {
+        "offset": 126,
+        "type": 4,
+        "target": "fn_8018D020",
+        "addend": 0
+      },
+      {
+        "offset": 160,
+        "type": 10,
+        "target": "fn_80188A7C",
+        "addend": 0
+      },
+      {
+        "offset": 268,
+        "type": 10,
+        "target": "fn_8017ACE0",
+        "addend": 0
+      },
+      {
+        "offset": 488,
+        "type": 10,
+        "target": "DCFlushRange",
+        "addend": 0
+      },
+      {
+        "offset": 500,
+        "type": 10,
+        "target": "DCFlushRange",
+        "addend": 0
+      },
+      {
+        "offset": 512,
+        "type": 10,
+        "target": "DCFlushRange",
+        "addend": 0
+      },
+      {
+        "offset": 524,
+        "type": 10,
+        "target": "fn_80188584",
+        "addend": 0
+      },
+      {
+        "offset": 532,
+        "type": 10,
+        "target": "fn_801ED57C",
+        "addend": 0
+      },
+      {
+        "offset": 552,
+        "type": 10,
+        "target": "fn_8018D0D0",
+        "addend": 0
+      },
+      {
+        "offset": 568,
+        "type": 10,
+        "target": "fn_801889D8",
+        "addend": 0
+      },
+      {
+        "offset": 576,
+        "type": 10,
+        "target": "fn_801ED57C",
+        "addend": 0
+      },
+      {
+        "offset": 584,
+        "type": 10,
+        "target": "fn_80226D78",
+        "addend": 0
+      }
+    ],
+    "relocations_equal_including_offsets_types_targets_addends": true,
+    "instruction_word_differences": [
+      {
+        "offset": 32,
+        "retail": "3c600000",
+        "generated": "3c800000"
+      },
+      {
+        "offset": 40,
+        "retail": "38630000",
+        "generated": "38640000"
+      }
+    ]
+  }
+}

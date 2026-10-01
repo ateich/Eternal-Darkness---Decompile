@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "assignment_id": "2d0815fa-e2dd-4d94-8bc6-22c960ea619b",
+  "base_commit": "22d443dc2ee844a99ddf2067f68319794f7d1ffc",
+  "target": "fn_80189C14",
+  "experiments": [
+    {
+      "name": "baseline",
+      "source_patch": "",
+      "build": {
+        "argv": [
+          ".tools/bin/ninja",
+          "-v",
+          "build/GEDE01/src/game/game_fn_80189C14.o"
+        ],
+        "exit_code": 0,
+        "output": "[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80189C14.c -o build/GEDE01/src/game && \"/usr/bin/python3\" tools/transform_dep.py build/GEDE01/src/game/game_fn_80189C14.d build/GEDE01/src/game/game_fn_80189C14.d\n"
+      },
+      "externalize": {
+        "argv": [
+          ".tools/bin/ninja",
+          "-v",
+          "build/GEDE01/src/game/game_fn_80189C14.externalized"
+        ],
+        "exit_code": 0,
+        "output": "[1/1] python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_80189C14.o @29 lbl_80650A70 orig/GEDE01/sys/main.dol --require-whole-section && build/binutils/powerpc-eabi-objcopy --redefine-sym=@29=lbl_80650A70 --remove-section=.sdata2 --rename-section=.comment=.ignored build/GEDE01/src/game/game_fn_80189C14.o && touch build/GEDE01/src/game/game_fn_80189C14.externalized\n"
+      },
+      "objdiff": {
+        "argv": [
+          "build/tools/objdiff-cli",
+          "diff",
+          "-p",
+          ".",
+          "-u",
+          "main/game/game_fn_80189C14",
+          "fn_80189C14",
+          "-o",
+          "reports/GEDE01/objdiff-2d0815fa-e2dd-4d94-8bc6-22c960ea619b-experiment-baseline.json",
+          "--format",
+          "json-pretty",
+          "-c",
+          "function_reloc_diffs=name_address"
+        ],
+        "exit_code": 0,
+        "output": " INFO Writing to reports/GEDE01/objdiff-2d0815fa-e2dd-4d94-8bc6-22c960ea619b-experiment-baseline.json\n"
+      },
+      "match_percent": 99.93507,
+      "object_sha256": "2172415e5600ea7394141e539497c1d90746a17d3835731f9e9d667bf3f8f347",
+      "raw_objdiff": "reports/GEDE01/objdiff-2d0815fa-e2dd-4d94-8bc6-22c960ea619b-experiment-baseline.json"
+    },
+    {
+      "name": "pointer_to_array",
+      "source_patch": "--- baseline\n+++ pointer_to_array\n@@ -4,7 +4,7 @@\n typedef struct Vec3 { float x, y, z; } Vec3;\n \n extern int lbl_8064D738;\n-extern u8 lbl_80607120[], lbl_8063C098[];\n+extern u8 lbl_80607120[16], lbl_8063C098[];\n extern void fn_80188A7C(void*, void*, void*), fn_8018D020(void);\n extern void fn_8017ACE0(void*, Vec3*, Vec3*), DCFlushRange(void*, unsigned long);\n extern void fn_80188584(void*, void*), fn_8018D0D0(void*, void*, s16);\n@@ -14,11 +14,11 @@\n /* An integral incoming address lets MWCC allocate self independently. */\n void fn_80189C14(unsigned long arg)\n {\n-    u8* data = lbl_80607120;\n+    u8 (*data)[16] = &lbl_80607120;\n     int entry_index;\n     int j;\n     u8 count;\n-    u16 size0 = *(u16*)(data + 2);\n+    u16 size0 = *(u16*)((u8*)data + 2);\n     u16 flush0;\n     u16 flush1;\n     u16 flush2;\n@@ -34,9 +34,9 @@\n \n     self = (u8*)arg;\n     count = self[1];\n-    flush0 = *(u16*)(data + 0xA);\n-    flush1 = *(u16*)(data + 0xE);\n-    flush2 = *(u16*)(data + 0xC);\n+    flush0 = *(u16*)((u8*)data + 0xA);\n+    flush1 = *(u16*)((u8*)data + 0xE);\n+    flush2 = *(u16*)((u8*)data + 0xC);\n     buffer0 = *(u8**)(self + 0x50);\n     buffer1 = *(u8**)(self + 0x54);\n     buffer2 = *(u8**)(self + 0x58);\n",
+      "build": {
+        "argv": [
+          ".tools/bin/ninja",
+          "-v",
+          "build/GEDE01/src/game/game_fn_80189C14.o"
+        ],
+        "exit_code": 0,
+        "output": "[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80189C14.c -o build/GEDE01/src/game && \"/usr/bin/python3\" tools/transform_dep.py build/GEDE01/src/game/game_fn_80189C14.d build/GEDE01/src/game/game_fn_80189C14.d\n"
+      },
+      "externalize": {
+        "argv": [
+          ".tools/bin/ninja",
+          "-v",
+          "build/GEDE01/src/game/game_fn_80189C14.externalized"
+        ],
+        "exit_code": 0,
+        "output": "[1/1] python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_80189C14.o @29 lbl_80650A70 orig/GEDE01/sys/main.dol --require-whole-section && build/binutils/powerpc-eabi-objcopy --redefine-sym=@29=lbl_80650A70 --remove-section=.sdata2 --rename-section=.comment=.ignored build/GEDE01/src/game/game_fn_80189C14.o && touch build/GEDE01/src/game/game_fn_80189C14.externalized\n"
+      },
+      "objdiff": {
+        "argv": [
+          "build/tools/objdiff-cli",
+          "diff",
+          "-p",
+          ".",
+          "-u",
+          "main/game/game_fn_80189C14",
+          "fn_80189C14",
+          "-o",
+          "reports/GEDE01/objdiff-2d0815fa-e2dd-4d94-8bc6-22c960ea619b-experiment-pointer_to_array.json",
+          "--format",
+          "json-pretty",
+          "-c",
+          "function_reloc_diffs=name_address"
+        ],
+        "exit_code": 0,
+        "output": " INFO Writing to reports/GEDE01/objdiff-2d0815fa-e2dd-4d94-8bc6-22c960ea619b-experiment-pointer_to_array.json\n"
+      },
+      "match_percent": 99.93507,
+      "object_sha256": "2172415e5600ea7394141e539497c1d90746a17d3835731f9e9d667bf3f8f347",
+      "raw_objdiff": "reports/GEDE01/objdiff-2d0815fa-e2dd-4d94-8bc6-22c960ea619b-experiment-pointer_to_array.json"
+    },
+    {
+      "name": "shifted_typed_base",
+      "source_patch": "--- baseline\n+++ shifted_typed_base\n@@ -14,11 +14,11 @@\n /* An integral incoming address lets MWCC allocate self independently. */\n void fn_80189C14(unsigned long arg)\n {\n-    u8* data = lbl_80607120;\n+    u8* data = lbl_80607120 + 2;\n     int entry_index;\n     int j;\n     u8 count;\n-    u16 size0 = *(u16*)(data + 2);\n+    u16 size0 = *(u16*)data;\n     u16 flush0;\n     u16 flush1;\n     u16 flush2;\n@@ -34,9 +34,9 @@\n \n     self = (u8*)arg;\n     count = self[1];\n-    flush0 = *(u16*)(data + 0xA);\n-    flush1 = *(u16*)(data + 0xE);\n-    flush2 = *(u16*)(data + 0xC);\n+    flush0 = *(u16*)(data + 8);\n+    flush1 = *(u16*)(data + 0xC);\n+    flush2 = *(u16*)(data + 0xA);\n     buffer0 = *(u8**)(self + 0x50);\n     buffer1 = *(u8**)(self + 0x54);\n     buffer2 = *(u8**)(self + 0x58);\n",
+      "build": {
+        "argv": [
+          ".tools/bin/ninja",
+          "-v",
+          "build/GEDE01/src/game/game_fn_80189C14.o"
+        ],
+        "exit_code": 0,
+        "output": "[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80189C14.c -o build/GEDE01/src/game && \"/usr/bin/python3\" tools/transform_dep.py build/GEDE01/src/game/game_fn_80189C14.d build/GEDE01/src/game/game_fn_80189C14.d\n"
+      },
+      "externalize": {
+        "argv": [
+          ".tools/bin/ninja",
+          "-v",
+          "build/GEDE01/src/game/game_fn_80189C14.externalized"
+        ],
+        "exit_code": 0,
+        "output": "[1/1] python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_80189C14.o @29 lbl_80650A70 orig/GEDE01/sys/main.dol --require-whole-section && build/binutils/powerpc-eabi-objcopy --redefine-sym=@29=lbl_80650A70 --remove-section=.sdata2 --rename-section=.comment=.ignored build/GEDE01/src/game/game_fn_80189C14.o && touch build/GEDE01/src/game/game_fn_80189C14.externalized\n"
+      },
+      "objdiff": {
+        "argv": [
+          "build/tools/objdiff-cli",
+          "diff",
+          "-p",
+          ".",
+          "-u",
+          "main/game/game_fn_80189C14",
+          "fn_80189C14",
+          "-o",
+          "reports/GEDE01/objdiff-2d0815fa-e2dd-4d94-8bc6-22c960ea619b-experiment-shifted_typed_base.json",
+          "--format",
+          "json-pretty",
+          "-c",
+          "function_reloc_diffs=name_address"
+        ],
+        "exit_code": 0,
+        "output": " INFO Writing to reports/GEDE01/objdiff-2d0815fa-e2dd-4d94-8bc6-22c960ea619b-experiment-shifted_typed_base.json\n"
+      },
+      "match_percent": 99.93507,
+      "object_sha256": "2172415e5600ea7394141e539497c1d90746a17d3835731f9e9d667bf3f8f347",
+      "raw_objdiff": "reports/GEDE01/objdiff-2d0815fa-e2dd-4d94-8bc6-22c960ea619b-experiment-shifted_typed_base.json"
+    }
+  ],
+  "restore_build": {
+    "argv": [
+      ".tools/bin/ninja",
+      "-v",
+      "build/GEDE01/src/game/game_fn_80189C14.o"
+    ],
+    "exit_code": 0,
+    "output": "[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80189C14.c -o build/GEDE01/src/game && \"/usr/bin/python3\" tools/transform_dep.py build/GEDE01/src/game/game_fn_80189C14.d build/GEDE01/src/game/game_fn_80189C14.d\n"
+  },
+  "restore_externalize": {
+    "argv": [
+      ".tools/bin/ninja",
+      "-v",
+      "build/GEDE01/src/game/game_fn_80189C14.externalized"
+    ],
+    "exit_code": 0,
+    "output": "[1/1] python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_80189C14.o @29 lbl_80650A70 orig/GEDE01/sys/main.dol --require-whole-section && build/binutils/powerpc-eabi-objcopy --redefine-sym=@29=lbl_80650A70 --remove-section=.sdata2 --rename-section=.comment=.ignored build/GEDE01/src/game/game_fn_80189C14.o && touch build/GEDE01/src/game/game_fn_80189C14.externalized\n"
+  }
+}
