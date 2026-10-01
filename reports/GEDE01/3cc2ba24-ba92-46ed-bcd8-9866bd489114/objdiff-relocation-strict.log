@@ -1,0 +1,16 @@
+Relocation-strict objdiff measurement
+symbol OSExceptionInit_8020A19C
+compiler GC/1.2.5n
+configuration function_reloc_diffs=name_address
+target size 640
+candidate size 536
+match percent 41.35625
+result non-match
+
+Raw report: objdiff-relocation-strict.json
+Raw tables: target-relocations.txt and candidate-relocations.txt
+
+The corrected candidate and target both relocate the exception-table store against
+OSExceptionTable_8064D900 with addend zero. Remaining relocation differences begin
+with target @81_802FCBA0 HA/LO versus candidate lbl_802FCBBE HA/LO and continue at
+different instruction offsets because of address hoisting and control-flow layout.

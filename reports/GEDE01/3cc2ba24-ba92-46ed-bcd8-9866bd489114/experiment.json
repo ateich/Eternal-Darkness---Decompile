@@ -1,0 +1,14 @@
+{
+  "assignment_id": "3cc2ba24-ba92-46ed-bcd8-9866bd489114",
+  "attempt": 2,
+  "target": "fn_8020A19C",
+  "symbol": "OSExceptionInit_8020A19C",
+  "compiler": "GC/1.2.5n",
+  "target_size": 640,
+  "candidate_size": 536,
+  "canonical_match_percent": 41.35625,
+  "relocation_strict_match_percent": 41.35625,
+  "matched": false,
+  "semantic_regression_fixed": "The candidate store now relocates against OSExceptionTable_8064D900, matching the retail target, instead of the incorrect lbl_8064D920 destination from the preserved first attempt.",
+  "divergence": "The independent candidate materializes __OSEVSetNumber and lbl_802FCBBE before the prologue and saves r19-r31 in a 64-byte frame, while the target hoists __OSEVSetNumber, __OSEVStart/__OSEVEnd, and private @81_802FCBA0 after a 56-byte r20-r31 prologue. The target also emits loop-entry branches and an eight-word unrolled debugger-vector fill; the candidate emits a compact scalar loop. Candidate string references use lbl_802FCBBE plus immediates rather than target @81_802FCBA0 relocations."
+}

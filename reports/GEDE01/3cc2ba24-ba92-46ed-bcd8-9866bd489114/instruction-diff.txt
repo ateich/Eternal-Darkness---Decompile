@@ -1,0 +1,184 @@
+ INFO Writing to /home/rabbit/src/darkfoundry-new/.darkfoundry/durable/assignments/3cc2ba24-ba92-46ed-bcd8-9866bd489114/eternal-darkness-decomp/build/GEDE01/fndiff_OSExceptionInit_8020A19C.json
+target 640 bytes  base 536 bytes  match 41.35625
+  0x0000  mflr r0                                              | mflr r0
+* 0x0004                                                       | lis r3, __OSEVSetNumber@ha [None+0 t6]
+  0x0008  stw r0, 0x4(r1)                                      | stw r0, 0x4(r1)
+* 0x000c                                                       | addi r4, r3, __OSEVSetNumber@l [None+0 t4]
+* 0x0010                                                       | lis r3, lbl_802FCBBE@ha [None+0 t6]
+* 0x0014  stwu r1, -0x38(r1)                                   | stwu r1, -0x40(r1)
+* 0x0018                                                       | addi r3, r3, lbl_802FCBBE@l [None+0 t4]
+* 0x001c  stmw r20, 0x8(r1)                                    | stmw r19, 0xc(r1)
+* 0x0020  lis r3, 0x8000                                       | lis r20, 0x8000
+* 0x0024                                                       | addi r24, r3, 0xca [None+0 tNone]
+* 0x0028  lwz r0, 0x60(r3)                                     | lwz r0, 0x60(r20)
+* 0x002c  lis r4, __OSEVSetNumber@ha [None+0 t6]               |
+* 0x0030  addi r30, r4, __OSEVSetNumber@l [None+0 t4]          |
+* 0x0034  lis r5, __OSEVStart@ha [None+0 t6]                   |
+* 0x0038  lwz r25, 0x0(r30) [None+0 tNone]                     | lwz r23, 0x0(r4) [None+0 tNone]
+* 0x003c  lis r4, __OSEVEnd@ha [None+0 t6]                     |
+* 0x0040  addi r5, r5, __OSEVStart@l [None+0 t4]               |
+* 0x0044  addi r4, r4, __OSEVEnd@l [None+0 t4]                 |
+* 0x0048  lis r6, @81_802FCBA0@ha [None+0 t6]                  |
+  0x004c  cmplwi r0, 0x0                                       | cmplwi r0, 0x0
+* 0x0050  mr r24, r5 [None+0 tNone]                            |
+* 0x0054  addi r29, r6, @81_802FCBA0@l [None+0 t4]             |
+* 0x0058  subf r23, r5, r4                                     |
+* 0x005c  addi r20, r3, 0x60                                   |
+  0x0060  bne 0x98                                             | bne 0x80
+* 0x0064  addi r3, r29, 0x124 [None+0 tNone]                   | addi r3, r3, 0x106 [None+0 tNone]
+  0x0068  crclr cr1eq                                          | crclr cr1eq
+  0x006c  bl DBPrintf [None+0 t10]                             | bl DBPrintf [None+0 t10]
+  0x0070  lis r4, __OSDBINTSTART@ha [None+0 t6]                | lis r4, __OSDBINTSTART@ha [None+0 t6]
+  0x0074  lis r3, __OSDBINTEND@ha [None+0 t6]                  | lis r3, __OSDBINTEND@ha [None+0 t6]
+  0x0078  addi r0, r3, __OSDBINTEND@l [None+0 t4]              | addi r0, r3, __OSDBINTEND@l [None+0 t4]
+  0x007c  addi r4, r4, __OSDBINTSTART@l [None+0 t4]            | addi r4, r4, __OSDBINTSTART@l [None+0 t4]
+* 0x0080  subf r21, r4, r0                                     | subf r19, r4, r0
+* 0x0084  mr r3, r20                                           | addi r5, r19, 0x0
+* 0x0088  mr r5, r21                                           | addi r3, r20, 0x60
+  0x008c  bl memcpy [None+0 t10]                               | bl memcpy [None+0 t10]
+* 0x0090  mr r3, r20                                           | addi r3, r20, 0x60
+* 0x0094  mr r4, r21                                           | addi r4, r19, 0x0
+  0x0098  bl DCFlushRangeNoSync [None+0 t10]                   | bl DCFlushRangeNoSync [None+0 t10]
+  0x009c  sync                                                 | sync
+* 0x00a0  mr r3, r20                                           | addi r3, r20, 0x60
+* 0x00a4  mr r4, r21                                           | addi r4, r19, 0x0
+  0x00a8  bl ICInvalidateRange [None+0 t10]                    | bl ICInvalidateRange [None+0 t10]
+* 0x00ac  lis r4, __OSDBINTEND@ha [None+0 t6]                  | lis r3, __OSEVEnd@ha [None+0 t6]
+* 0x00b0  lis r3, __OSDBJUMPEND@ha [None+0 t6]                 | lis r4, __OSEVStart@ha [None+0 t6]
+* 0x00b4  addi r31, r4, __OSDBINTEND@l [None+0 t4]             | addi r0, r3, __OSEVEnd@l [None+0 t4]
+* 0x00b8  addi r0, r3, __OSDBJUMPEND@l [None+0 t4]             | addi r31, r4, __OSEVStart@l [None+0 t4]
+* 0x00bc                                                       | lis r3, lbl_802FCBBE@ha [None+0 t6]
+* 0x00c0  addi r28, r29, 0xe8 [None+0 tNone]                   | addi r6, r3, lbl_802FCBBE@l [None+0 t4]
+* 0x00c4  subf r27, r31, r0                                    | lis r5, __OSDBINTEND@ha [None+0 t6]
+* 0x00c8                                                       | lis r4, __OSDBJUMPEND@ha [None+0 t6]
+* 0x00cc                                                       | lis r3, __DBVECTOR@ha [None+0 t6]
+* 0x00d0  li r26, 0x0                                          | addi r21, r3, __DBVECTOR@l [None+0 t4]
+* 0x00d4  b 0xb8                                               |
+* 0x00d8  lis r3, __DBVECTOR@ha [None+0 t6]                    | lis r3, __OSEVSetNumber@ha [None+0 t6]
+* 0x00dc  addi r21, r3, __DBVECTOR@l [None+0 t4]               | addi r29, r24, 0x0 [None+0 tNone]
+* 0x00e0                                                       | addi r30, r5, __OSDBINTEND@l [None+0 t4]
+* 0x00e4                                                       | addi r4, r4, __OSDBJUMPEND@l [None+0 t4]
+* 0x00e8                                                       | subf r25, r31, r0
+* 0x00ec                                                       | addi r28, r6, 0x122 [None+0 tNone]
+* 0x00f0                                                       | addi r27, r6, 0x152 [None+0 tNone]
+* 0x00f4                                                       | subf r26, r30, r4
+* 0x00f8                                                       | addi r20, r3, __OSEVSetNumber@l [None+0 t4]
+* 0x00fc                                                       | li r24, 0x0
+  0x0100  lis r22, 0x6000                                      | lis r22, 0x6000
+* 0x0104  b 0xc8                                               |
+* 0x0108  b 0x210                                              |
+  0x010c  lwz r3, BI2DebugFlag_8064D8F4@sda21 [None+0 t109]    | lwz r3, BI2DebugFlag_8064D8F4@sda21 [None+0 t109]
+  0x0110  cmplwi r3, 0x0                                       | cmplwi r3, 0x0
+  0x0114  beq 0x108                                            | beq 0x110
+  0x0118  lwz r0, 0x0(r3)                                      | lwz r0, 0x0(r3)
+  0x011c  cmplwi r0, 0x2                                       | cmplwi r0, 0x2
+  0x0120  blt 0x108                                            | blt 0x110
+* 0x0124  mr r3, r26                                           | mr r3, r24
+  0x0128  bl __DBIsExceptionMarked [None+0 t10]                | bl __DBIsExceptionMarked [None+0 t10]
+  0x012c  cmpwi r3, 0x0                                        | cmpwi r3, 0x0
+  0x0130  beq 0x108                                            | beq 0x110
+* 0x0134  addi r3, r29, 0x140 [None+0 tNone]                   | clrlwi r4, r24, 24
+  0x0138  crclr cr1eq                                          | crclr cr1eq
+* 0x013c  clrlwi r4, r26, 24                                   | addi r3, r28, 0x0 [None+0 tNone]
+  0x0140  bl DBPrintf [None+0 t10]                             | bl DBPrintf [None+0 t10]
+  0x0144  b 0x208                                              | b 0x1a4
+* 0x0148  clrlwi r20, r26, 24                                  | clrlwi r19, r24, 24
+* 0x014c  or r0, r25, r20                                      | or r0, r23, r19
+* 0x0150  stw r0, 0x0(r30) [None+0 tNone]                      | stw r0, 0x0(r20) [None+0 tNone]
+* 0x0154  mr r3, r26                                           | mr r3, r24
+  0x0158  bl __DBIsExceptionMarked [None+0 t10]                | bl __DBIsExceptionMarked [None+0 t10]
+  0x015c  cmpwi r3, 0x0                                        | cmpwi r3, 0x0
+  0x0160  beq 0x148                                            | beq 0x150
+* 0x0164  mr r4, r20                                           | addi r3, r27, 0x0 [None+0 tNone]
+  0x0168  crclr cr1eq                                          | crclr cr1eq
+* 0x016c  addi r3, r29, 0x170 [None+0 tNone]                   | addi r4, r19, 0x0
+  0x0170  bl DBPrintf [None+0 t10]                             | bl DBPrintf [None+0 t10]
+* 0x0174  mr r3, r21 [None+0 tNone]                            | addi r3, r21, 0x0 [None+0 tNone]
+* 0x0178  mr r4, r31 [None+0 tNone]                            | addi r4, r30, 0x0 [None+0 tNone]
+* 0x017c  mr r5, r27                                           | addi r5, r26, 0x0
+  0x0180  bl memcpy [None+0 t10]                               | bl memcpy [None+0 t10]
+* 0x0184  b 0x1d4                                              |
+* 0x0188  mr r4, r21 [None+0 tNone]                            |
+* 0x018c  b 0x150                                              | b 0x170
+* 0x0190  cmplwi r27, 0x0                                      |
+* 0x0194  addi r3, r27, 0x3                                    | addi r3, r26, 0x0
+* 0x0198  srwi r3, r3, 2                                       | addi r4, r21, 0x0 [None+0 tNone]
+* 0x019c  ble 0x1d4                                            |
+* 0x01a0  srwi r0, r3, 3                                       |
+* 0x01a4  cmplwi r0, 0x0                                       |
+* 0x01a8  mtctr r0                                             |
+* 0x01ac  beq 0x1c0                                            |
+* 0x01b0  b 0x174                                              | b 0x168
+* 0x01b4  stw r22, 0x0(r4) [None+0 tNone]                      |
+* 0x01b8  addi r4, r4, 0x4 [None+0 tNone]                      |
+* 0x01bc  stw r22, 0x0(r4) [None+0 tNone]                      | stw r22, 0x0(r4) [None+0 tNone]
+* 0x01c0  addi r4, r4, 0x4 [None+0 tNone]                      | addi r4, r4, 0x4 [None+0 tNone]
+* 0x01c4  stw r22, 0x0(r4) [None+0 tNone]                      |
+* 0x01c8  addi r4, r4, 0x4 [None+0 tNone]                      | subi r3, r3, 0x4
+* 0x01cc  stw r22, 0x0(r4) [None+0 tNone]                      | cmplwi r3, 0x0
+* 0x01d0  addi r4, r4, 0x4 [None+0 tNone]                      | bne 0x15c
+* 0x01d4  stw r22, 0x0(r4) [None+0 tNone]                      | lwz r0, 0x0(r29) [None+0 tNone]
+* 0x01d8  addi r4, r4, 0x4 [None+0 tNone]                      |
+* 0x01dc  stw r22, 0x0(r4) [None+0 tNone]                      |
+* 0x01e0  addi r4, r4, 0x4 [None+0 tNone]                      | addi r4, r31, 0x0 [None+0 tNone]
+* 0x01e4  stw r22, 0x0(r4) [None+0 tNone]                      |
+* 0x01e8  addi r4, r4, 0x4 [None+0 tNone]                      | addi r5, r25, 0x0
+* 0x01ec  stw r22, 0x0(r4) [None+0 tNone]                      | oris r19, r0, 0x8000
+* 0x01f0  addi r4, r4, 0x4 [None+0 tNone]                      | addi r3, r19, 0x0
+* 0x01f4  bdnz 0x174                                           |
+* 0x01f8  andi. r3, r3, 0x7                                    |
+* 0x01fc  beq 0x1d4                                            |
+* 0x0200  mtctr r3                                             |
+* 0x0204  b 0x1c8                                              | bl memcpy [None+0 t10]
+* 0x0208  stw r22, 0x0(r4) [None+0 tNone]                      |
+* 0x020c  addi r4, r4, 0x4 [None+0 tNone]                      | addi r3, r19, 0x0
+* 0x0210  bdnz 0x1c8                                           | addi r4, r25, 0x0
+* 0x0214  lwz r3, 0x0(r28) [None+0 tNone]                      |
+* 0x0218  mr r4, r24 [None+0 tNone]                            |
+* 0x021c  mr r5, r23                                           |
+* 0x0220  addis r20, r3, 0x8000                                |
+* 0x0224  mr r3, r20                                           |
+* 0x0228  bl memcpy [None+0 t10]                               |
+* 0x022c  mr r3, r20                                           |
+* 0x0230  mr r4, r23                                           |
+  0x0234  bl DCFlushRangeNoSync [None+0 t10]                   | bl DCFlushRangeNoSync [None+0 t10]
+  0x0238  sync                                                 | sync
+* 0x023c  mr r3, r20                                           | addi r3, r19, 0x0
+* 0x0240  mr r4, r23                                           | addi r4, r25, 0x0
+  0x0244  bl ICInvalidateRange [None+0 t10]                    | bl ICInvalidateRange [None+0 t10]
+* 0x0248  addi r28, r28, 0x4 [None+0 tNone]                    | addi r24, r24, 0x1
+* 0x024c  addi r26, r26, 0x1                                   |
+* 0x0250  clrlwi r0, r26, 24                                   |
+* 0x0254  cmplwi r0, 0xf                                       | cmplwi r24, 0xf
+* 0x0258                                                       | addi r29, r29, 0x4 [None+0 tNone]
+  0x025c  blt 0xcc                                             | blt 0xd4
+  0x0260  lis r3, 0x8000                                       | lis r3, 0x8000
+  0x0264  addi r0, r3, 0x3000                                  | addi r0, r3, 0x3000
+* 0x0268                                                       | lis r3, OSDefaultExceptionHandler@ha [None+0 t6]
+  0x026c  stw r0, OSExceptionTable_8064D900@sda21 [None+0 t109] | stw r0, OSExceptionTable_8064D900@sda21 [None+0 t109]
+* 0x0270  li r20, 0x0                                          | addi r24, r3, OSDefaultExceptionHandler@l [None+0 t4]
+* 0x0274  b 0x230                                              |
+* 0x0278  lis r3, OSDefaultExceptionHandler@ha [None+0 t6]     |
+* 0x027c  addi r23, r3, OSDefaultExceptionHandler@l [None+0 t4] | li r19, 0x0
+* 0x0280  b 0x23c                                              | clrlwi r3, r19, 24
+* 0x0284  b 0x250                                              | addi r4, r24, 0x0 [None+0 tNone]
+* 0x0288  mr r3, r20                                           |
+* 0x028c  mr r4, r23 [None+0 tNone]                            |
+  0x0290  bl __OSSetExceptionHandler [None+0 t10]              | bl __OSSetExceptionHandler [None+0 t10]
+* 0x0294  addi r20, r20, 0x1                                   | addi r19, r19, 0x1
+* 0x0298  clrlwi r0, r20, 24                                   |
+* 0x029c  cmplwi r0, 0xf                                       | cmplwi r19, 0xf
+* 0x02a0  blt 0x240                                            | blt 0x1cc
+* 0x02a4                                                       | lis r3, __OSEVSetNumber@ha [None+0 t6]
+* 0x02a8                                                       | crclr cr1eq
+* 0x02ac                                                       | addi r4, r3, __OSEVSetNumber@l [None+0 t4]
+* 0x02b0                                                       | lis r3, lbl_802FCBBE@ha [None+0 t6]
+* 0x02b4  stw r25, 0x0(r30) [None+0 tNone]                     | stw r23, 0x0(r4) [None+0 tNone]
+* 0x02b8  addi r3, r29, 0x1a0 [None+0 tNone]                   | addi r3, r3, lbl_802FCBBE@l [None+0 t4]
+* 0x02bc  crclr cr1eq                                          | addi r3, r3, 0x182 [None+0 tNone]
+  0x02c0  bl DBPrintf [None+0 t10]                             | bl DBPrintf [None+0 t10]
+* 0x02c4  lmw r20, 0x8(r1)                                     | lmw r19, 0xc(r1)
+* 0x02c8  lwz r0, 0x3c(r1)                                     | lwz r0, 0x44(r1)
+* 0x02cc  addi r1, r1, 0x38                                    | addi r1, r1, 0x40
+  0x02d0  mtlr r0                                              | mtlr r0
+  0x02d4  blr                                                  | blr

@@ -1,0 +1,185 @@
+
+build/GEDE01/src/dolphin/os/fn_8020A19C.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <OSExceptionInit_8020A19C>:
+   0:	7c 08 02 a6 	mflr    r0
+   4:	3c 60 00 00 	lis     r3,0
+			6: R_PPC_ADDR16_HA	__OSEVSetNumber
+   8:	90 01 00 04 	stw     r0,4(r1)
+   c:	38 83 00 00 	addi    r4,r3,0
+			e: R_PPC_ADDR16_LO	__OSEVSetNumber
+  10:	3c 60 00 00 	lis     r3,0
+			12: R_PPC_ADDR16_HA	lbl_802FCBBE
+  14:	94 21 ff c0 	stwu    r1,-64(r1)
+  18:	38 63 00 00 	addi    r3,r3,0
+			1a: R_PPC_ADDR16_LO	lbl_802FCBBE
+  1c:	be 61 00 0c 	stmw    r19,12(r1)
+  20:	3e 80 80 00 	lis     r20,-32768
+  24:	3b 03 00 ca 	addi    r24,r3,202
+  28:	80 14 00 60 	lwz     r0,96(r20)
+  2c:	82 e4 00 00 	lwz     r23,0(r4)
+  30:	28 00 00 00 	cmplwi  r0,0
+  34:	40 82 00 4c 	bne     80 <OSExceptionInit_8020A19C+0x80>
+  38:	38 63 01 06 	addi    r3,r3,262
+  3c:	4c c6 31 82 	crclr   4*cr1+eq
+  40:	48 00 00 01 	bl      40 <OSExceptionInit_8020A19C+0x40>
+			40: R_PPC_REL24	DBPrintf
+  44:	3c 80 00 00 	lis     r4,0
+			46: R_PPC_ADDR16_HA	__OSDBINTSTART
+  48:	3c 60 00 00 	lis     r3,0
+			4a: R_PPC_ADDR16_HA	__OSDBINTEND
+  4c:	38 03 00 00 	addi    r0,r3,0
+			4e: R_PPC_ADDR16_LO	__OSDBINTEND
+  50:	38 84 00 00 	addi    r4,r4,0
+			52: R_PPC_ADDR16_LO	__OSDBINTSTART
+  54:	7e 64 00 50 	subf    r19,r4,r0
+  58:	38 b3 00 00 	addi    r5,r19,0
+  5c:	38 74 00 60 	addi    r3,r20,96
+  60:	48 00 00 01 	bl      60 <OSExceptionInit_8020A19C+0x60>
+			60: R_PPC_REL24	memcpy
+  64:	38 74 00 60 	addi    r3,r20,96
+  68:	38 93 00 00 	addi    r4,r19,0
+  6c:	48 00 00 01 	bl      6c <OSExceptionInit_8020A19C+0x6c>
+			6c: R_PPC_REL24	DCFlushRangeNoSync
+  70:	7c 00 04 ac 	hwsync
+  74:	38 74 00 60 	addi    r3,r20,96
+  78:	38 93 00 00 	addi    r4,r19,0
+  7c:	48 00 00 01 	bl      7c <OSExceptionInit_8020A19C+0x7c>
+			7c: R_PPC_REL24	ICInvalidateRange
+  80:	3c 60 00 00 	lis     r3,0
+			82: R_PPC_ADDR16_HA	__OSEVEnd
+  84:	3c 80 00 00 	lis     r4,0
+			86: R_PPC_ADDR16_HA	__OSEVStart
+  88:	38 03 00 00 	addi    r0,r3,0
+			8a: R_PPC_ADDR16_LO	__OSEVEnd
+  8c:	3b e4 00 00 	addi    r31,r4,0
+			8e: R_PPC_ADDR16_LO	__OSEVStart
+  90:	3c 60 00 00 	lis     r3,0
+			92: R_PPC_ADDR16_HA	lbl_802FCBBE
+  94:	38 c3 00 00 	addi    r6,r3,0
+			96: R_PPC_ADDR16_LO	lbl_802FCBBE
+  98:	3c a0 00 00 	lis     r5,0
+			9a: R_PPC_ADDR16_HA	__OSDBINTEND
+  9c:	3c 80 00 00 	lis     r4,0
+			9e: R_PPC_ADDR16_HA	__OSDBJUMPEND
+  a0:	3c 60 00 00 	lis     r3,0
+			a2: R_PPC_ADDR16_HA	__DBVECTOR
+  a4:	3a a3 00 00 	addi    r21,r3,0
+			a6: R_PPC_ADDR16_LO	__DBVECTOR
+  a8:	3c 60 00 00 	lis     r3,0
+			aa: R_PPC_ADDR16_HA	__OSEVSetNumber
+  ac:	3b b8 00 00 	addi    r29,r24,0
+  b0:	3b c5 00 00 	addi    r30,r5,0
+			b2: R_PPC_ADDR16_LO	__OSDBINTEND
+  b4:	38 84 00 00 	addi    r4,r4,0
+			b6: R_PPC_ADDR16_LO	__OSDBJUMPEND
+  b8:	7f 3f 00 50 	subf    r25,r31,r0
+  bc:	3b 86 01 22 	addi    r28,r6,290
+  c0:	3b 66 01 52 	addi    r27,r6,338
+  c4:	7f 5e 20 50 	subf    r26,r30,r4
+  c8:	3a 83 00 00 	addi    r20,r3,0
+			ca: R_PPC_ADDR16_LO	__OSEVSetNumber
+  cc:	3b 00 00 00 	li      r24,0
+  d0:	3e c0 60 00 	lis     r22,24576
+  d4:	80 60 00 00 	lwz     r3,0(0)
+			d6: R_PPC_EMB_SDA21	BI2DebugFlag_8064D8F4
+  d8:	28 03 00 00 	cmplwi  r3,0
+  dc:	41 82 00 34 	beq     110 <OSExceptionInit_8020A19C+0x110>
+  e0:	80 03 00 00 	lwz     r0,0(r3)
+  e4:	28 00 00 02 	cmplwi  r0,2
+  e8:	41 80 00 28 	blt     110 <OSExceptionInit_8020A19C+0x110>
+  ec:	7f 03 c3 78 	mr      r3,r24
+  f0:	48 00 00 01 	bl      f0 <OSExceptionInit_8020A19C+0xf0>
+			f0: R_PPC_REL24	__DBIsExceptionMarked
+  f4:	2c 03 00 00 	cmpwi   r3,0
+  f8:	41 82 00 18 	beq     110 <OSExceptionInit_8020A19C+0x110>
+  fc:	57 04 06 3e 	clrlwi  r4,r24,24
+ 100:	4c c6 31 82 	crclr   4*cr1+eq
+ 104:	38 7c 00 00 	addi    r3,r28,0
+ 108:	48 00 00 01 	bl      108 <OSExceptionInit_8020A19C+0x108>
+			108: R_PPC_REL24	DBPrintf
+ 10c:	48 00 00 98 	b       1a4 <OSExceptionInit_8020A19C+0x1a4>
+ 110:	57 13 06 3e 	clrlwi  r19,r24,24
+ 114:	7e e0 9b 78 	or      r0,r23,r19
+ 118:	90 14 00 00 	stw     r0,0(r20)
+ 11c:	7f 03 c3 78 	mr      r3,r24
+ 120:	48 00 00 01 	bl      120 <OSExceptionInit_8020A19C+0x120>
+			120: R_PPC_REL24	__DBIsExceptionMarked
+ 124:	2c 03 00 00 	cmpwi   r3,0
+ 128:	41 82 00 28 	beq     150 <OSExceptionInit_8020A19C+0x150>
+ 12c:	38 7b 00 00 	addi    r3,r27,0
+ 130:	4c c6 31 82 	crclr   4*cr1+eq
+ 134:	38 93 00 00 	addi    r4,r19,0
+ 138:	48 00 00 01 	bl      138 <OSExceptionInit_8020A19C+0x138>
+			138: R_PPC_REL24	DBPrintf
+ 13c:	38 75 00 00 	addi    r3,r21,0
+ 140:	38 9e 00 00 	addi    r4,r30,0
+ 144:	38 ba 00 00 	addi    r5,r26,0
+ 148:	48 00 00 01 	bl      148 <OSExceptionInit_8020A19C+0x148>
+			148: R_PPC_REL24	memcpy
+ 14c:	48 00 00 24 	b       170 <OSExceptionInit_8020A19C+0x170>
+ 150:	38 7a 00 00 	addi    r3,r26,0
+ 154:	38 95 00 00 	addi    r4,r21,0
+ 158:	48 00 00 10 	b       168 <OSExceptionInit_8020A19C+0x168>
+ 15c:	92 c4 00 00 	stw     r22,0(r4)
+ 160:	38 84 00 04 	addi    r4,r4,4
+ 164:	38 63 ff fc 	addi    r3,r3,-4
+ 168:	28 03 00 00 	cmplwi  r3,0
+ 16c:	40 82 ff f0 	bne     15c <OSExceptionInit_8020A19C+0x15c>
+ 170:	80 1d 00 00 	lwz     r0,0(r29)
+ 174:	38 9f 00 00 	addi    r4,r31,0
+ 178:	38 b9 00 00 	addi    r5,r25,0
+ 17c:	64 13 80 00 	oris    r19,r0,32768
+ 180:	38 73 00 00 	addi    r3,r19,0
+ 184:	48 00 00 01 	bl      184 <OSExceptionInit_8020A19C+0x184>
+			184: R_PPC_REL24	memcpy
+ 188:	38 73 00 00 	addi    r3,r19,0
+ 18c:	38 99 00 00 	addi    r4,r25,0
+ 190:	48 00 00 01 	bl      190 <OSExceptionInit_8020A19C+0x190>
+			190: R_PPC_REL24	DCFlushRangeNoSync
+ 194:	7c 00 04 ac 	hwsync
+ 198:	38 73 00 00 	addi    r3,r19,0
+ 19c:	38 99 00 00 	addi    r4,r25,0
+ 1a0:	48 00 00 01 	bl      1a0 <OSExceptionInit_8020A19C+0x1a0>
+			1a0: R_PPC_REL24	ICInvalidateRange
+ 1a4:	3b 18 00 01 	addi    r24,r24,1
+ 1a8:	28 18 00 0f 	cmplwi  r24,15
+ 1ac:	3b bd 00 04 	addi    r29,r29,4
+ 1b0:	41 80 ff 24 	blt     d4 <OSExceptionInit_8020A19C+0xd4>
+ 1b4:	3c 60 80 00 	lis     r3,-32768
+ 1b8:	38 03 30 00 	addi    r0,r3,12288
+ 1bc:	3c 60 00 00 	lis     r3,0
+			1be: R_PPC_ADDR16_HA	OSDefaultExceptionHandler
+ 1c0:	90 00 00 00 	stw     r0,0(0)
+			1c2: R_PPC_EMB_SDA21	OSExceptionTable_8064D900
+ 1c4:	3b 03 00 00 	addi    r24,r3,0
+			1c6: R_PPC_ADDR16_LO	OSDefaultExceptionHandler
+ 1c8:	3a 60 00 00 	li      r19,0
+ 1cc:	56 63 06 3e 	clrlwi  r3,r19,24
+ 1d0:	38 98 00 00 	addi    r4,r24,0
+ 1d4:	48 00 00 01 	bl      1d4 <OSExceptionInit_8020A19C+0x1d4>
+			1d4: R_PPC_REL24	__OSSetExceptionHandler
+ 1d8:	3a 73 00 01 	addi    r19,r19,1
+ 1dc:	28 13 00 0f 	cmplwi  r19,15
+ 1e0:	41 80 ff ec 	blt     1cc <OSExceptionInit_8020A19C+0x1cc>
+ 1e4:	3c 60 00 00 	lis     r3,0
+			1e6: R_PPC_ADDR16_HA	__OSEVSetNumber
+ 1e8:	4c c6 31 82 	crclr   4*cr1+eq
+ 1ec:	38 83 00 00 	addi    r4,r3,0
+			1ee: R_PPC_ADDR16_LO	__OSEVSetNumber
+ 1f0:	3c 60 00 00 	lis     r3,0
+			1f2: R_PPC_ADDR16_HA	lbl_802FCBBE
+ 1f4:	92 e4 00 00 	stw     r23,0(r4)
+ 1f8:	38 63 00 00 	addi    r3,r3,0
+			1fa: R_PPC_ADDR16_LO	lbl_802FCBBE
+ 1fc:	38 63 01 82 	addi    r3,r3,386
+ 200:	48 00 00 01 	bl      200 <OSExceptionInit_8020A19C+0x200>
+			200: R_PPC_REL24	DBPrintf
+ 204:	ba 61 00 0c 	lmw     r19,12(r1)
+ 208:	80 01 00 44 	lwz     r0,68(r1)
+ 20c:	38 21 00 40 	addi    r1,r1,64
+ 210:	7c 08 03 a6 	mtlr    r0
+ 214:	4e 80 00 20 	blr
