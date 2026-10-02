@@ -65,11 +65,12 @@ void fn_8002F428(void* first_arg, void* second_arg)
     register float current_z;
     register float direction_delta;
 
-    if (first_arg == 0)
+    state = first_arg;
+    if (state == 0)
         return;
     if (second_arg == 0)
         return;
-    first = fn_80156938(first_arg);
+    first = fn_80156938(state);
     second = fn_80156938(second_arg);
     if (first == 0)
         return;
@@ -195,7 +196,7 @@ active:
             if (!(state->counter & (u8)axis_flags)) {
                 direction_delta = (float)state->direction;
                 next.z = current_z + direction_delta;
-                if (next.z > (float)position[2] + lbl_8064E048)
+                if (next.z > lbl_8064E048 + (float)position[2])
                     state->direction = -1;
                 else if (next.z < (float)position[2] - lbl_8064E048)
                     state->direction = 1;

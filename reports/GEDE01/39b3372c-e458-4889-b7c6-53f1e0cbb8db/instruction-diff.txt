@@ -1,0 +1,54 @@
+--- retail
++++ generated
+@@ -1,5 +1,5 @@
+ 
+-build/GEDE01/obj/game/game_fn_8002F428.o:     file format elf32-powerpc
++build/GEDE01/src/game/game_fn_8002F428.o:     file format elf32-powerpc
+ 
+ 
+ Disassembly of section .text:
+@@ -420,22 +420,22 @@
+  594:	6c a0 80 00 	xoris   r0,r5,32768
+  598:	90 61 00 30 	stw     r3,48(r1)
+  59c:	7c 84 07 74 	extsb   r4,r4
+- 5a0:	c8 60 00 00 	lfd     f3,0(0)
++ 5a0:	c8 40 00 00 	lfd     f2,0(0)
+ 			5a0: R_PPC_EMB_SDA21	lbl_8064E038
+  5a4:	6c 84 80 00 	xoris   r4,r4,32768
+  5a8:	90 01 00 2c 	stw     r0,44(r1)
+- 5ac:	c0 20 00 00 	lfs     f1,0(0)
++ 5ac:	c0 60 00 00 	lfs     f3,0(0)
+ 			5ac: R_PPC_EMB_SDA21	lbl_8064E048
+  5b0:	90 81 00 34 	stw     r4,52(r1)
+  5b4:	90 61 00 28 	stw     r3,40(r1)
+- 5b8:	c8 41 00 30 	lfd     f2,48(r1)
++ 5b8:	c8 21 00 30 	lfd     f1,48(r1)
+  5bc:	c8 01 00 28 	lfd     f0,40(r1)
+- 5c0:	ec 42 18 28 	fsubs   f2,f2,f3
+- 5c4:	ec 00 18 28 	fsubs   f0,f0,f3
+- 5c8:	ec 44 10 2a 	fadds   f2,f4,f2
+- 5cc:	ec 01 00 2a 	fadds   f0,f1,f0
+- 5d0:	d0 41 00 24 	stfs    f2,36(r1)
+- 5d4:	fc 02 00 40 	fcmpo   cr0,f2,f0
++ 5c0:	ec 21 10 28 	fsubs   f1,f1,f2
++ 5c4:	ec 00 10 28 	fsubs   f0,f0,f2
++ 5c8:	ec 24 08 2a 	fadds   f1,f4,f1
++ 5cc:	ec 03 00 2a 	fadds   f0,f3,f0
++ 5d0:	d0 21 00 24 	stfs    f1,36(r1)
++ 5d4:	fc 01 00 40 	fcmpo   cr0,f1,f0
+  5d8:	40 81 00 10 	ble     5e8 <fn_8002F428+0x5e8>
+  5dc:	38 00 ff ff 	li      r0,-1
+  5e0:	98 1f 00 01 	stb     r0,1(r31)
+@@ -443,9 +443,9 @@
+  5e8:	90 01 00 34 	stw     r0,52(r1)
+  5ec:	90 61 00 30 	stw     r3,48(r1)
+  5f0:	c8 01 00 30 	lfd     f0,48(r1)
+- 5f4:	ec 00 18 28 	fsubs   f0,f0,f3
+- 5f8:	ec 00 08 28 	fsubs   f0,f0,f1
+- 5fc:	fc 02 00 40 	fcmpo   cr0,f2,f0
++ 5f4:	ec 00 10 28 	fsubs   f0,f0,f2
++ 5f8:	ec 00 18 28 	fsubs   f0,f0,f3
++ 5fc:	fc 01 00 40 	fcmpo   cr0,f1,f0
+  600:	40 80 00 94 	bge     694 <fn_8002F428+0x694>
+  604:	38 00 00 01 	li      r0,1
+  608:	98 1f 00 01 	stb     r0,1(r31)

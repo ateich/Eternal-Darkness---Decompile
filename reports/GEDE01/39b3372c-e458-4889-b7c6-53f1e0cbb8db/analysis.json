@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "assignment_id": "39b3372c-e458-4889-b7c6-53f1e0cbb8db",
+  "target": "fn_8002F428",
+  "status": "attempted",
+  "compiler": "GC/1.3; unchanged canonical flags, including -use_lmw_stmw on",
+  "preserved_source_already_in_base": true,
+  "preserved_attempts_studied": [
+    "d336fde89f57410340afd9ed43496e6b1212d8f9",
+    "44baf4c794fbb8f4b82165c1d8fec26d0973ce13"
+  ],
+  "new_hypothesis": "Make State participate in the input pointer lifetime before callback extraction, changing MWCC virtual-register interference and coalescing rather than only local declaration order or qualifiers. Separately correct the floating-point addition operand order shown by retail.",
+  "outcome": "State input reuse fixes every integer-register difference. Addition operand order now agrees; remaining differences are twelve floating-point register operand rows.",
+  "retail_text_bytes": 1728,
+  "generated_text_bytes": 1728,
+  "canonical_match_percent": 99.826385,
+  "relocation_strict_match_percent": 99.826385,
+  "baseline_fresh_match_percent": 99.44444,
+  "relocation_count": 60,
+  "relocation_offsets_types_targets_addends_identical": true,
+  "differing_instruction_offsets": [
+    "0x5a0",
+    "0x5ac",
+    "0x5b8",
+    "0x5c0",
+    "0x5c4",
+    "0x5c8",
+    "0x5cc",
+    "0x5d0",
+    "0x5d4",
+    "0x5f4",
+    "0x5f8",
+    "0x5fc"
+  ],
+  "divergence": "In the final signed-conversion/oscillation block, generated uses f2 for the conversion bias, f3 for the threshold, and f1 for converted direction/new Z; retail uses f3, f1, and f2 respectively. All 60 relocations have identical offsets, types, targets, and addends. Twelve instruction rows differ; no integer-register, branch, call-target, or text-size differences remain.",
+  "experiments": [
+    {
+      "name": "baseline-cached",
+      "transformation": "Cached seed object inspected before the initial Ninja rebuild finished. Superseded by baseline.json; not the accepted-base measurement.",
+      "raw_text_match_percent": 99.35185
+    },
+    {
+      "name": "baseline",
+      "transformation": "Fresh accepted-base source rebuilt with the original @126 constant registration.",
+      "raw_text_match_percent": 99.44444,
+      "assigned_build_succeeded": true
+    },
+    {
+      "name": "operand-order",
+      "transformation": "From accepted-base source: replace (float)position[2] + lbl_8064E048 with lbl_8064E048 + (float)position[2].",
+      "raw_text_match_percent": 99.45602,
+      "assigned_build_succeeded": true
+    },
+    {
+      "name": "reuse-first",
+      "transformation": "From operand-order: remove void* first and replace all first identifier uses with target_actor. Constant externalization failed; raw unexternalized comparison is diagnostic only. Rejected.",
+      "raw_text_match_percent": 99.36343,
+      "assigned_build_succeeded": false
+    },
+    {
+      "name": "state-input",
+      "transformation": "From operand-order: add state = first_arg before null checks, check state instead of first_arg, and pass state to the first fn_80156938 call. Original @126 rule failed because the compiler emits @127. Raw unexternalized comparison is diagnostic only.",
+      "raw_text_match_percent": 99.733795,
+      "assigned_build_succeeded": false
+    },
+    {
+      "name": "state-input-fixed",
+      "transformation": "Same source as state-input; update ONLY the target-specific existing constant rule from @126 to @127, keeping all validation guards. This is the selected final source.",
+      "raw_text_match_percent": 99.826385,
+      "assigned_build_succeeded": true
+    },
+    {
+      "name": "delta-x",
+      "transformation": "From state-input-fixed: assign direction_delta = current.x before the X-axis block and replace current.x reads throughout that block with direction_delta. Rejected.",
+      "raw_text_match_percent": 97.166664,
+      "assigned_build_succeeded": true
+    },
+    {
+      "name": "bound-first",
+      "transformation": "From state-input-fixed: compute float upper_bound = lbl_8064E048 + (float)position[2] before direction conversion; compare next.z > upper_bound. No improvement; rejected.",
+      "raw_text_match_percent": 99.826385,
+      "assigned_build_succeeded": true
+    },
+    {
+      "name": "next-z",
+      "transformation": "From state-input-fixed: introduce register float next_z in the oscillation block, assign current_z + direction_delta to it, store it to next.z, compare next_z in both bounds checks. Externalization failed (@125 emitted); raw comparison is diagnostic only. Rejected.",
+      "raw_text_match_percent": 99.733795,
+      "assigned_build_succeeded": false
+    },
+    {
+      "name": "reload-current",
+      "transformation": "From state-input-fixed: use current.z rather than current_z only in the final next.z addition. Externalization failed; raw comparison is diagnostic only. Rejected.",
+      "raw_text_match_percent": 99.641205,
+      "assigned_build_succeeded": false
+    },
+    {
+      "name": "reuse-rate",
+      "transformation": "From state-input-fixed: replace state->rate += state->velocity with direction_delta = state->rate; state->rate = direction_delta + state->velocity. No improvement; rejected.",
+      "raw_text_match_percent": 99.826385,
+      "assigned_build_succeeded": true
+    }
+  ],
+  "scope": "Only function C source, its existing target-specific constant registration, and assignment reports changed. NonMatching registration retained. No new compiler policy, gate changes, neighboring edits, or assembly.",
+  "verification_pending": "Integrator must commit fresh full deterministic build, legal-audit output, canonical and relocation-strict JSON reports, and measured retail DOL SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f after independent review. These full-build acceptance gates were not run in this session."
+}
