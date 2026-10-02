@@ -1,0 +1,24 @@
+Distinct codegen hypothesis tested
+==================================
+
+Starting from the accepted 452-byte reconstruction, a second `changed = 1;`
+was inserted as the first statement of the `enabled != 1` block.  The retail
+instruction at function offset 0x108 is `li r31, 1`, so this tested whether the
+apparently redundant source assignment would also cause MWCC to reuse CR0 from
+the comparison at 0x100 for the discriminator selection at 0x10c.
+
+Command:
+  .tools/bin/ninja build/GEDE01/src/game/game_fn_801A94E4.o
+  python3 tools/fndiff.py game/game_fn_801A94E4.c fn_801A94E4
+
+Raw result:
+  target size: 452 bytes
+  generated size: 456 bytes
+  objdiff match: 99.11504%
+
+The compiler emitted the desired `li r31, 1` and then retained a fresh
+`cmpwi r28, 1`.  The generated stream was therefore four bytes too long and
+all following branch destinations shifted.  This hypothesis was rejected and
+the source was restored to the non-regressing 452-byte reconstruction.  The
+raw experiment objdiff is preserved in
+`experiment-redundant-assignment-30feeba3-3140-4811-b536-4700abc15672.json`.
