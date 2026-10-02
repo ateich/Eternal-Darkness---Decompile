@@ -1,0 +1,24 @@
+fn_80032A5C attempt 3 codegen hypotheses
+
+Baseline recovered from the accepted base and preserved attempts:
+- 188 bytes, 99.14893% canonical and relocation-strict.
+- Only the clamp-zero temporary and current-byte value use the opposite r4/r5 allocation.
+
+Different hypothesis 1: materialize the current state byte as an explicit u8
+temporary before the clamp comparison, so its live range enters MWCC's register
+allocator ahead of the clamp-zero temporary.
+- Result: 188 bytes, 98.510635% when declared beside the other value locals.
+- Persistent values shifted (increasing r6->r5 and target r7->r6); the desired
+  local r4/r5 swap did not occur in isolation.
+
+Different hypothesis 2: declare the explicit current-byte temporary after the
+loop/control locals to alter graph-coloring order while preserving evaluation order.
+- Result: 188 bytes, 97.12766%.
+- Persistent values again shifted, including complete r9->r8 and step r10->r9.
+
+Different hypothesis 3: materialize the clamp result as a named u8 threshold.
+- Result: 188 bytes, 99.14893%.
+- MWCC optimized it to the same IR and identical object as the baseline.
+
+The best honest C reconstruction was restored unchanged. No tested variant
+improved on the preserved 99.14893% object.
