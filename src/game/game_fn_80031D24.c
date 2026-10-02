@@ -25,7 +25,9 @@ typedef struct EmbeddedDescriptor {
 } EmbeddedDescriptor;
 
 typedef struct EffectSlot {
-    u8 pad00[0x14];
+    u8 pad00[6];
+    u16 lifetime;
+    u8 pad08[0xC];
     EmbeddedDescriptor descriptor;
     u8 pad3C[0x80];
     u8 mode;
@@ -37,8 +39,8 @@ typedef struct PrimarySlot {
     u8 pad3C[0x4C];
 } PrimarySlot;
 
-extern const u32 lbl_80651924;
-extern const u16 lbl_80651928;
+extern const volatile u32 lbl_80651924;
+extern const volatile u16 lbl_80651928;
 
 extern void fn_801938FC(void*);
 extern void fn_80179B64(void*, void*);
@@ -58,20 +60,22 @@ void* fn_80031D24(Vec3f* position_arg, void* source_arg, s32 object_id_arg,
                   u8 packed_kind_arg, u8 packed_variant_arg, u8 active_arg,
                   s32 extra_mode_arg)
 {
+    /* NonMatching: honest C is instruction-identical after the first call;
+       GC/1.3 hoists the two direction loads within the prologue. */
     Vec3s direction;
     Vec3f submit_position;
     PrimarySlot primary;
     EffectSlot slot;
     register PrimarySlot* primary_ptr;
-    register s32 make_third = make_third_arg;
-    register s32 object_id = object_id_arg;
-    register u8 active = active_arg;
-    register EmbeddedDescriptor* descriptor;
     register Vec3f* position = position_arg;
+    register s32 make_third = make_third_arg;
     register s32 extra_mode = extra_mode_arg;
     register u8 packed_variant = packed_variant_arg;
     register u8 packed_kind = packed_kind_arg;
     register u8 third_kind = third_kind_arg;
+    register s32 object_id = object_id_arg;
+    register u8 active = active_arg;
+    register EmbeddedDescriptor* descriptor;
     register s32 make_first = make_first_arg;
     register void* source = source_arg;
     void* result;
@@ -80,20 +84,16 @@ void* fn_80031D24(Vec3f* position_arg, void* source_arg, s32 object_id_arg,
     u8 failed;
     u8 mode;
 
-    asm {
-        addi primary_ptr, r1, 0xDC
-        lwz r11, lbl_80651924(r0)
-        lhz r0, lbl_80651928(r0)
-        stw r11, 8(r1)
-        sth r0, 0xC(r1)
-    }
+    primary_ptr = &primary;
+    *(u32*)&direction = lbl_80651924;
+    direction.z = lbl_80651928;
     fn_801938FC(primary_ptr);
     descriptor = &primary.descriptor;
     fn_80179B64(source, descriptor->position0E);
     descriptor->kind = packed_kind;
     descriptor->variant = packed_variant;
-    descriptor->active = active;
     descriptor->flags |= 0x10;
+    descriptor->active = active;
     fn_801D3CAC(object_id, 0, descriptor);
 
     submit_position = *position;
@@ -114,7 +114,7 @@ void* fn_80031D24(Vec3f* position_arg, void* source_arg, s32 object_id_arg,
                 fn_80149FDC(&slot, spawned);
                 slot.mode = mode;
                 fn_801938FC(&slot);
-                slot.descriptor.lifetime = 200;
+                slot.lifetime = 200;
                 slot.descriptor.kind = packed_kind >> 2;
                 slot.descriptor.variant = packed_variant >> 1;
                 slot.descriptor.flags |= 0x661;
@@ -136,7 +136,7 @@ void* fn_80031D24(Vec3f* position_arg, void* source_arg, s32 object_id_arg,
                 slot.mode = mode;
                 *(u8*)spawned = third_kind;
                 fn_801938FC(&slot);
-                slot.descriptor.lifetime = 200;
+                slot.lifetime = 200;
                 slot.descriptor.kind = packed_kind >> 2;
                 slot.descriptor.variant = packed_variant >> 1;
                 slot.descriptor.flags |= 0x362;
@@ -157,7 +157,7 @@ void* fn_80031D24(Vec3f* position_arg, void* source_arg, s32 object_id_arg,
                 fn_80149FDC(&slot, spawned);
                 slot.mode = mode;
                 fn_801938FC(&slot);
-                slot.descriptor.lifetime = 200;
+                slot.lifetime = 200;
                 slot.descriptor.kind = packed_kind >> 2;
                 slot.descriptor.variant = packed_variant >> 1;
                 slot.descriptor.flags |= 0x664;

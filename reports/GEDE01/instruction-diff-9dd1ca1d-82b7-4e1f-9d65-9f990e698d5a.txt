@@ -1,0 +1,29 @@
+COMMAND: powerpc-eabi-objdump -dr RETAIL and RECONSTRUCTION, followed by diff -u
+
+@@ fn_80031D24 offsets 0x0000..0x004c @@
+  0000: stwu r1,-416(r1)                    | stwu r1,-416(r1)
+  0004: mflr r0                            | mflr r0
+- 0008: stw r0,420(r1)                     | 0008: lwz r11,lbl_80651924@sda21(0)
+- 000c: stmw r21,372(r1)                   | 000c: stw r0,420(r1)
+- 0010: mr r27,r3                          | 0010: lhz r0,lbl_80651928@sda21(0)
+- 0014: lbz r29,427(r1)                    | 0014: stmw r21,372(r1)
+- 0018: mr r21,r4                          | 0018: mr r27,r3
+- 001c: lwz r26,428(r1)                   | 001c: lbz r29,427(r1)
+- 0020: mr r30,r5                          | 0020: mr r21,r4
+- 0024: mr r22,r6                          | 0024: lwz r26,428(r1)
+- 0028: mr r31,r7                          | 0028: mr r30,r5
+- 002c: mr r23,r8                          | 002c: mr r22,r6
+- 0030: mr r24,r9                          | 0030: mr r31,r7
+- 0034: mr r25,r10                         | 0034: mr r23,r8
+- 0038: addi r3,r1,220                     | 0038: mr r24,r9
+- 003c: lwz r11,lbl_80651924@sda21(0)      | 003c: mr r25,r10
+- 0040: lhz r0,lbl_80651928@sda21(0)       | 0040: addi r3,r1,220
+  0044: stw r11,8(r1)                      | stw r11,8(r1)
+  0048: sth r0,12(r1)                      | sth r0,12(r1)
+  004c: bl fn_801938FC                     | bl fn_801938FC
+
+Offsets 0x004c..0x02c0 are instruction-identical. The generated object is
+704 bytes (178 instructions), equal to retail. The two small-data relocations
+retain equal types, targets, and addends but move with their scheduled loads
+from retail sites 0x3c/0x40 to generated sites 0x08/0x10; the other 29
+relocations are equal in site, type, target, and addend.
