@@ -1,0 +1,6 @@
+[1/2] MWCC build/GEDE01/src/game/game_fn_801D8E40.o
+[2/2] EXTERNALIZE build/GEDE01/src/game/game_fn_801D8E40.o
+FAILED: [code=1] build/GEDE01/src/game/game_fn_801D8E40.externalized 
+python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_801D8E40.o @233 lbl_80651110 orig/GEDE01/sys/main.dol --require-whole-section && build/binutils/powerpc-eabi-objcopy --redefine-sym=@233=lbl_80651110 --remove-section=.sdata2 --rename-section=.comment=.ignored build/GEDE01/src/game/game_fn_801D8E40.o && touch build/GEDE01/src/game/game_fn_801D8E40.externalized
+build/GEDE01/src/game/game_fn_801D8E40.o: symbol '@233' not found
+ninja: build stopped: subcommand failed.

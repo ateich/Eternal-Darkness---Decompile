@@ -1,0 +1,56 @@
+Assignment: c8acd37a-b030-4c05-917c-5ecb2de34eaf
+Attempt: 6
+Base: b35eb5f6d8b842d9d60954325c0b40c39517094e
+Target: fn_801D8E40
+
+Recovered source provenance:
+  The accepted base already contains the 2788-byte honest-C reconstruction from
+  preserved commit 1efeb97ab00474e4f4ee03290348c35c71dc99c6. No source replacement
+  was necessary and its contributor history remains intact.
+
+Final assigned-object build:
+  .tools/bin/ninja build/GEDE01/src/game/game_fn_801D8E40.externalized
+  exit_code: 0
+  output: reports/GEDE01/build-final-c8acd37a-b030-4c05-917c-5ecb2de34eaf.log
+
+Canonical objdiff:
+  build/tools/objdiff-cli diff -p . -u main/game/game_fn_801D8E40 --format json-pretty fn_801D8E40 -o reports/GEDE01/canonical-c8acd37a-b030-4c05-917c-5ecb2de34eaf.json
+  exit_code: 0
+  fn_801D8E40 match_percent: 99.16069
+  target size: 2788 bytes
+  candidate size: 2788 bytes
+
+Relocation-strict objdiff:
+  build/tools/objdiff-cli diff -p . -u main/game/game_fn_801D8E40 --format json-pretty fn_801D8E40 -c function_reloc_diffs=name_address -o reports/GEDE01/objdiff-c8acd37a-b030-4c05-917c-5ecb2de34eaf.json
+  exit_code: 0
+  fn_801D8E40 match_percent: 99.16069
+  target size: 2788 bytes
+  candidate size: 2788 bytes
+  retail ELF text relocations: 123
+  candidate ELF text relocations: 123
+
+Guarded constant result:
+  The existing tools/externalize_elf_symbol.py retail-value guard validated the
+  compiler-local eight-byte signed-conversion constant @233 against retail-owned
+  lbl_80651110 before removing the candidate .sdata2 section. Candidate
+  relocations at text offsets 0x1e4 and 0x370 now both target lbl_80651110+0.
+
+Bounded experiments:
+  baseline (no externalization): 99.14634%, 2788 bytes
+  helper only: 99.16069%, 2788 bytes
+  reversed state-32 declaration order: 99.16069%, 2788 bytes (no improvement)
+  state-150 reuse of the outer subject lifetime: rejected; it renumbered the
+    compiler-local constant to @234 and did not preserve the requested @233 form.
+  The final source restores the accepted-base reconstruction.
+
+Remaining exact codegen divergence:
+  Retail schedules the initial subject-id load before the EffectBlock address;
+  candidate reverses those independent instructions. State 32 retains one extra
+  move around the pair of fn_801D3A34 calls, shifting the following switch cases
+  by four bytes until state 110. State 110 still uses an equivalent callee-saved
+  register allocation (subject r27 rather than retail r20, induction r28 rather
+  than r27, attachment r20 rather than retail r21/r19). State 150 uses r20 for
+  the actor lifetime rather than retail r19. Exact instruction evidence is in
+  reports/GEDE01/instruction-diff-c8acd37a-b030-4c05-917c-5ecb2de34eaf.txt.
+
+No full build or DOL hash claim is made; those gates are reserved for integration.
