@@ -88,6 +88,20 @@ config.asflags = ["-mgekko", "--strip-local-absolute", "-I include", f"-I build/
 config.ldflags = ["-fp hardware", "-nodefaults"]
 config.custom_build_rules = [
     {
+        "name": "externalize_game_8017B4F4_data",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @30 lbl_80650910 "
+            f"orig/{VERSION}/sys/main.dol --require-whole-section "
+            "--require-relocation-match && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@28=jumptable_80250F44 --globalize-symbol=jumptable_80250F44 "
+            "--redefine-sym=@30=lbl_80650910 "
+            "--remove-section=.sdata2 --set-section-alignment=.data=4 "
+            "--rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
         "name": "externalize_game_8008CEF0_constants",
         "command": (
             "python3 tools/externalize_elf_symbol.py $in @51 lbl_8064EC18 "
@@ -4078,6 +4092,11 @@ guarded_externalize_rules.add("externalize_game_801F0CB0_effect_pool")
 guarded_externalize_rules.add("externalize_string_pool_80251808")
 config.custom_build_steps = {
     "post-compile": [
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8017B4F4.externalized"],
+            "rule": "externalize_game_8017B4F4_data",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8017B4F4.o"],
+        },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8008CEF0.externalized"],
             "rule": "externalize_game_8008CEF0_constants",
@@ -11169,7 +11188,8 @@ config.libs = [
             Object(Matching, "game/game_fn_8017B3C8.c"),
             Object(Matching, "game/game_fn_8017B440.c"),
             Object(Matching, "game/game_fn_8017B47C.c"),
-            Object(NonMatching, "game/game_fn_8017B4F4.c"),
+            # Canonical and relocation-strict 100%; exact 708-byte function.
+            Object(Matching, "game/game_fn_8017B4F4.c"),
             Object(Matching, "game/game_fn_8017B7B8.c"),
             Object(Matching, "game/game_fn_8017B7C8.c"),
             Object(Matching, "game/game_fn_8017B7DC.c"),
