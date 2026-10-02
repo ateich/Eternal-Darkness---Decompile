@@ -1,0 +1,17 @@
+--- baseline
++++ cached-equality
+@@ -65,10 +65,12 @@
+     if (next != -1) {
+         s32 current = lbl_8064D298;
+         if (current != next) {
++            s32 one = enabled == 1;
+             changed = 1;
+-            if (enabled != 1) {
++            if (!one) {
+                 s32 discriminator;
+-                discriminator = enabled == 1 ? 10 : 29;
++                changed = 1;
++                discriminator = one ? 10 : 29;
+                 if (current == 0) {
+                     fn_801AA6D0(next, arg0, 0, discriminator);
+                 } else {

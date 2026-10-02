@@ -1,0 +1,12 @@
+--- baseline
++++ unsigned-selector
+@@ -68,7 +68,8 @@
+             changed = 1;
+             if (enabled != 1) {
+                 s32 discriminator;
+-                discriminator = enabled == 1 ? 10 : 29;
++                changed = 1;
++                discriminator = (unsigned long)enabled == 1UL ? 10 : 29;
+                 if (current == 0) {
+                     fn_801AA6D0(next, arg0, 0, discriminator);
+                 } else {

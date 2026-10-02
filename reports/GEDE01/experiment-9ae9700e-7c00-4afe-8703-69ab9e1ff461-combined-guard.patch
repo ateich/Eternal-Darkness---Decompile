@@ -1,0 +1,14 @@
+--- baseline
++++ combined-guard
+@@ -65,9 +65,9 @@
+     if (next != -1) {
+         s32 current = lbl_8064D298;
+         if (current != next) {
+-            changed = 1;
+-            if (enabled != 1) {
++            if ((changed = 1) && enabled != 1) {
+                 s32 discriminator;
++                changed = 1;
+                 discriminator = enabled == 1 ? 10 : 29;
+                 if (current == 0) {
+                     fn_801AA6D0(next, arg0, 0, discriminator);

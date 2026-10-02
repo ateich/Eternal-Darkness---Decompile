@@ -1,0 +1,11 @@
+--- baseline
++++ comma-condition
+@@ -68,7 +68,7 @@
+             changed = 1;
+             if (enabled != 1) {
+                 s32 discriminator;
+-                discriminator = enabled == 1 ? 10 : 29;
++                discriminator = (changed = 1, enabled == 1) ? 10 : 29;
+                 if (current == 0) {
+                     fn_801AA6D0(next, arg0, 0, discriminator);
+                 } else {

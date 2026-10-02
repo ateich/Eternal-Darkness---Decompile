@@ -1,0 +1,17 @@
+--- baseline
++++ cached-inequality
+@@ -65,10 +65,12 @@
+     if (next != -1) {
+         s32 current = lbl_8064D298;
+         if (current != next) {
++            s32 other = enabled != 1;
+             changed = 1;
+-            if (enabled != 1) {
++            if (other) {
+                 s32 discriminator;
+-                discriminator = enabled == 1 ? 10 : 29;
++                changed = 1;
++                discriminator = !other ? 10 : 29;
+                 if (current == 0) {
+                     fn_801AA6D0(next, arg0, 0, discriminator);
+                 } else {
