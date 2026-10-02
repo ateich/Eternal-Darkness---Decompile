@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "assignment_id": "54b125b4-c90c-4b4b-bcfa-1ebffdfceac1",
+  "attempt": 7,
+  "base_commit": "3e8fd7fd6a8f42d00ff70eb75913e4dfc47908c4",
+  "target": "fn_80160480",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/configure-54b125b4-c90c-4b4b-bcfa-1ebffdfceac1.log",
+    "eternal-darkness-decomp/reports/GEDE01/build-54b125b4-c90c-4b4b-bcfa-1ebffdfceac1.log",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-command-54b125b4-c90c-4b4b-bcfa-1ebffdfceac1.log",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-54b125b4-c90c-4b4b-bcfa-1ebffdfceac1.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-strict-command-54b125b4-c90c-4b4b-bcfa-1ebffdfceac1.log",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-strict-54b125b4-c90c-4b4b-bcfa-1ebffdfceac1.json",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-54b125b4-c90c-4b4b-bcfa-1ebffdfceac1.tsv",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-54b125b4-c90c-4b4b-bcfa-1ebffdfceac1.tsv",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-retail-54b125b4-c90c-4b4b-bcfa-1ebffdfceac1.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-candidate-54b125b4-c90c-4b4b-bcfa-1ebffdfceac1.txt",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-54b125b4-c90c-4b4b-bcfa-1ebffdfceac1.json",
+    "eternal-darkness-decomp/reports/GEDE01/trial-build-54b125b4-c90c-4b4b-bcfa-1ebffdfceac1.log",
+    "eternal-darkness-decomp/reports/GEDE01/trial-objdiff-command-54b125b4-c90c-4b4b-bcfa-1ebffdfceac1.log",
+    "eternal-darkness-decomp/reports/GEDE01/trial-objdiff-54b125b4-c90c-4b4b-bcfa-1ebffdfceac1.json",
+    "eternal-darkness-decomp/reports/GEDE01/trial-objdiff-strict-command-54b125b4-c90c-4b4b-bcfa-1ebffdfceac1.log",
+    "eternal-darkness-decomp/reports/GEDE01/trial-objdiff-strict-54b125b4-c90c-4b4b-bcfa-1ebffdfceac1.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff are both 99.0% at the exact 120-byte size, with all 8 relocations equal in offset, type, target, and addend. At 0x24-0x28 GC/1.3 loads the previous/current descriptor table entries in the opposite order from retail and consequently uses different base registers for the signed byte loads at 0x2c-0x30. The authorized operand-commutation and explicit-pointer trial regressed to 98.933334% by also reversing the entry type loads at 0x10-0x14."
+}

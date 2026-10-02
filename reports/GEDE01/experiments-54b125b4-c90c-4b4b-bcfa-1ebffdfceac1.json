@@ -1,0 +1,20 @@
+{
+  "assignment_id": "54b125b4-c90c-4b4b-bcfa-1ebffdfceac1",
+  "target": "fn_80160480",
+  "bounded_trial": {
+    "description": "Declared explicit current and previous descriptor pointer locals, assigned them in retail table-access order, and commuted the equality operands while preserving signed-char comparison and calls.",
+    "canonical_match_percent": 98.933334,
+    "retail_size": 120,
+    "candidate_size": 120,
+    "result": "discarded",
+    "divergence": "The table accesses moved toward the requested source order, but GC/1.3 reversed the entry type loads at 0x10 and 0x14 and still selected different descriptor registers at 0x24 through 0x30."
+  },
+  "retained_candidate": {
+    "canonical_match_percent": 99.0,
+    "relocation_strict_match_percent": 99.0,
+    "retail_size": 120,
+    "candidate_size": 120,
+    "relocations": 8,
+    "relocations_equal": true
+  }
+}
