@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "assignment_id": "14dd5816-2ece-441b-8533-347deb64bbdf",
+  "attempt": 7,
+  "target": "fn_80176A94",
+  "result": "attempted",
+  "canonical": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80176A94 fn_80176A94 -o reports/GEDE01/objdiff-14dd5816-2ece-441b-8533-347deb64bbdf.json --format json",
+    "retail_text_bytes": 272,
+    "candidate_text_bytes": 272,
+    "match_percent": 98.70588
+  },
+  "relocation_strict": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80176A94 fn_80176A94 -o reports/GEDE01/objdiff-reloc-strict-14dd5816-2ece-441b-8533-347deb64bbdf.json --format json -c function_reloc_diffs=name_address",
+    "retail_text_bytes": 272,
+    "candidate_text_bytes": 272,
+    "match_percent": 98.70588
+  },
+  "experiments": [
+    {
+      "hypothesis": "Apply the accepted guarded string-pool externalizer to the direct-literal candidate using lbl_8024FF00.",
+      "result": "rejected by retail byte validation",
+      "detail": "The compact compiler pool places the four strings at 0x0, 0x30, 0x44 and 0x58, but retail places the latter three at lbl_8024FF00+0x624, +0x638 and +0x64c. externalize_string_pool.py failed closed because the complete local pool is not byte-identical to the retail range beginning at lbl_8024FF00. No externalized object was retained."
+    },
+    {
+      "hypothesis": "Express lbl_8024FF00 as a semantic aggregate with fields at 0, 0x624, 0x638 and 0x64c and keep one aggregate pointer local.",
+      "result": "regressed",
+      "detail": "Canonical GC/1.3 emitted 276 bytes instead of retail's 272, so the experiment was discarded and the existing 272-byte direct-literal C reconstruction was retained."
+    }
+  ],
+  "divergence": "Four instruction words remain: retail addi r4,r31,0 at +0x50 versus candidate mr r4,r31, and retail string offsets 0x624/0x638/0x64c at +0xc4/+0xd4/+0xe4 versus compact-pool offsets 0x30/0x44/0x58. The candidate's HA/LO relocations target compiler-local ...data.0 rather than retail lbl_8024FF00; the other 12 call relocations agree in offset, type, target and addend.",
+  "scope": "The pre-existing independent honest-C translation unit remains NonMatching. No source, configure registration, split, compiler policy, neighboring function, runtime code or global progress change is retained.",
+  "evidence": [
+    "reports/GEDE01/objdiff-14dd5816-2ece-441b-8533-347deb64bbdf.json",
+    "reports/GEDE01/objdiff-reloc-strict-14dd5816-2ece-441b-8533-347deb64bbdf.json",
+    "reports/GEDE01/instruction-diff-14dd5816-2ece-441b-8533-347deb64bbdf.txt",
+    "reports/GEDE01/relocations-14dd5816-2ece-441b-8533-347deb64bbdf.txt",
+    "reports/GEDE01/string-pool-test-14dd5816-2ece-441b-8533-347deb64bbdf.log",
+    "reports/GEDE01/build-14dd5816-2ece-441b-8533-347deb64bbdf.log"
+  ]
+}
