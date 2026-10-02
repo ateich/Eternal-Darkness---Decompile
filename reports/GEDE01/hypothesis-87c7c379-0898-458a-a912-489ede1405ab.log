@@ -1,0 +1,33 @@
+Target: fn_8002DAE0
+Assignment: 87c7c379-0898-458a-a912-489ede1405ab, attempt 3
+
+Different hypothesis tested
+---------------------------
+The retained object colors output/state/object as r31/r30/r29, while retail uses
+r30/r28/r27 and reserves r31/r29 for is_type_8/target_state in the event-0xB
+path.  This suggested that those two event-path locals may originally have had
+function scope or an earlier declaration identity, influencing MWCC's web order.
+
+Two bounded source variants were compiled through the canonical assigned-object
+Ninja target:
+
+1. Move is_type_8 and target_state declarations to function scope, retaining
+   their original assignments and all control flow.
+2. Additionally rename the fourth parameter to output_arg and initialize a local
+   output alias after those declarations.
+
+Measured result
+---------------
+Both variants produced the same 1896-byte object as the retained source and the
+same 97.49789% direct objdiff score.  The first prologue divergences remained
+retail/generated r30/r31 for output, r28/r30 for state, and r27/r29 for
+object_id.  MWCC eliminated the alias and did not change web coloring merely from
+scope/declaration placement.  Both variants were therefore rejected and the
+pre-existing best honest-C reconstruction was restored unchanged.
+
+Final retained measurement
+--------------------------
+Canonical direct objdiff: 1896 vs 1896 bytes, 97.49789%, 120 differing rows.
+Relocation-strict direct objdiff: identical JSON measurement, 97.49789%.
+Relocations: 81 entries on each side; 78 sites agree.  Float constants are at
+retail 0x498/0x4a0/0x4ac versus generated 0x4a0/0x4ac/0x4bc.
