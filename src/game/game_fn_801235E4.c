@@ -18,37 +18,37 @@ typedef struct Item {
 extern int fn_8012343C(void* sizing, int use_first, float scale);
 extern int fn_801234DC(int kind, int use_first, float scale, float value);
 
-void fn_801235E4(register Item* items, register int count,
-                 register int* total_offsets, register int* total_sizes)
+void fn_801235E4(Item* items, int count, int* total_offsets, int* total_sizes)
 {
     Item* item = items;
     int i;
     int total_size = 0;
     int total_offset = 0;
-    int use_first;
-    int* size_out = total_sizes;
-    int* offset_out = total_offsets;
-    int item_count = count;
-    Item* base = items;
 
-    for (i = 0; i < item_count; item++, i++) {
+    for (i = 0; i < count; item++, i++) {
         int size;
         int j;
+        int use_first;
 
         use_first = item->use_first;
         size = fn_801234DC(item->kind, use_first, item->scale, item->value);
 
         total_size += size;
         for (j = 0; j < i; j++) {
-            if (item->key == base[j].key &&
-                item->use_first == base[j].use_first &&
-                item->scale == base[j].scale) {
-                item->offset = base[j].offset;
-                break;
+            int key = items[j].key;
+            if (key == item->key) {
+                int first = items[j].use_first;
+                if (first == item->use_first) {
+                    float scale = items[j].scale;
+                    if (scale == item->scale) {
+                        item->offset = items[j].offset;
+                        break;
+                    }
+                }
             }
         }
 
-        if (j == i) {
+        if (i == j) {
             item->offset = fn_8012343C(item->runtime->sizing, use_first,
                                       item->scale);
             if (item->offset > 0x32000) {
@@ -58,6 +58,6 @@ void fn_801235E4(register Item* items, register int count,
         }
     }
 
-    *offset_out = total_offset;
-    *size_out = total_size;
+    *total_offsets = total_offset;
+    *total_sizes = total_size;
 }
