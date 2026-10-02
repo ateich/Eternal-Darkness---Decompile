@@ -1,0 +1,16 @@
+COMMANDS:
+build/binutils/powerpc-eabi-objdump -dr build/GEDE01/obj/game/game_fn_80031694.o
+build/binutils/powerpc-eabi-objdump -dr build/GEDE01/src/game/game_fn_80031694.o
+
+Retail divergent prologue:
+0000000c: addi r0,r1,8
+00000010: stw r31,204(r1)
+00000014: mr r31,r3
+00000018: mr r3,r0
+
+Generated divergent prologue:
+0000000c: stw r31,204(r1)
+00000010: mr r31,r3
+00000014: addi r3,r1,8
+
+The remaining generated instructions correspond to retail after this one-instruction size difference; full raw decoded instruction streams and attached relocation records are preserved in both objdiff JSON reports.

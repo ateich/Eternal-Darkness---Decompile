@@ -39,7 +39,7 @@ typedef struct EffectDescriptor {
 extern const float lbl_8064E068;
 extern const float lbl_8064E138;
 
-extern void fn_8019B13C();
+extern void fn_8019B13C(EffectDescriptor*);
 extern s32 fn_801D3A24(s32, s32);
 extern void fn_8019AFEC(void);
 extern void fn_80147EC4(EffectDescriptor*);
@@ -47,6 +47,8 @@ extern void fn_80147EC4(EffectDescriptor*);
 void fn_80031694(Vec3* position, s32 alternate, s32 object_id)
 {
     EffectDescriptor effect;
+    /* NonMatching: retail first forms &effect in r0 and then moves it to r3;
+     * GC/1.3 folds the same expression directly into r3. */
     fn_8019B13C(&effect);
     effect.enabled = 0;
     effect.type = fn_801D3A24(object_id, 0x31);
