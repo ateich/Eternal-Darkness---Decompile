@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "assignment_id": "28a6906b-780e-494a-8487-a01495445857",
+  "attempt": 1,
+  "base_commit": "623165b0c5f0917d21a93e04fe8f9aebe9ebeb5a",
+  "target": "fn_800359A0",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-28a6906b-780e-494a-8487-a01495445857.json",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-28a6906b-780e-494a-8487-a01495445857.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-retail-28a6906b-780e-494a-8487-a01495445857.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-generated-28a6906b-780e-494a-8487-a01495445857.txt",
+    "eternal-darkness-decomp/reports/GEDE01/build-28a6906b-780e-494a-8487-a01495445857.txt",
+    "eternal-darkness-decomp/reports/GEDE01/build-mapping-28a6906b-780e-494a-8487-a01495445857.json"
+  ],
+  "divergence": "Guarded build-mapping repair of preserved attempt 07af9f70-94dc-4afd-bf6e-c1b7f721f7cd; C source and imported measurements unchanged. Canonical objdiff measures 93.78974%: retail is 1560 bytes and generated is 1564 bytes. The retry corrects the previously disclosed semantic errors: direct-target rejection and direct visibility failure now return zero, the scan's 0x1000 mask is derived from the original source flags, and equal-value candidate filtering now uses the retail sentinel/kind/special-owner cases. The remaining generated code differs in nonvolatile-register assignment and branch layout, including local zero-return sequences where retail branches to its shared zero epilogue; both objects have 50 relocations, with later relocation offsets shifted by the instruction-layout divergence. This is not a byte match or a relocation-strict match."
+}

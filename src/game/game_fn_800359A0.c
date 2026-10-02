@@ -82,6 +82,7 @@ s32 fn_800359A0(register void* source, register void* requested)
     u32 best_distance;
     s32 source_mask;
     s32 context_mask;
+    s32 context_flags;
     Vec3 requested_temporary;
     u32 message_result;
 
@@ -147,11 +148,15 @@ s32 fn_800359A0(register void* source, register void* requested)
         ((message_result = fn_8020123C(0x3B, source_id, requested_id, 0) &
                            0xFFFFFFFFULL),
          message_result == 1)) {
-        if (((source_flags & 0x1000) == 0 ||
-             ((source_flags & 0x1000) != 0 &&
-              requested_id == (s32)requested_object)) &&
-            (source_special == 0 || source_state->ownerC0 != requested_id ||
-             requested_special != 0)) {
+        if ((source_flags & 0x1000) != 0 &&
+            requested_id != (s32)requested_object) {
+            return 0;
+        }
+        if (source_special != 0 && source_state->ownerC0 == requested_id &&
+            requested_special == 0) {
+            return 0;
+        }
+        {
             fn_80201E78(&requested_temporary, requested);
             requested_position = requested_temporary;
             direct_result = 1;
@@ -165,6 +170,7 @@ s32 fn_800359A0(register void* source, register void* requested)
                 fn_80201DD8(source_context, fn_80201B54(requested));
                 return 1;
             }
+            return 0;
         }
     }
 
@@ -176,8 +182,8 @@ s32 fn_800359A0(register void* source, register void* requested)
         if (fn_800CAF7C(source) == 0) {
             return 0;
         }
-        source_flags = fn_80201CD4(source_context);
-        if ((source_flags & 1) != 0) {
+        context_flags = fn_80201CD4(source_context);
+        if ((context_flags & 1) != 0) {
             void* old = fn_80201814(candidate_context);
             if (old != 0 && source_type == fn_80201EB8(old) &&
                 ((message_result = fn_8020123C(0x3B, source_id,
@@ -186,11 +192,11 @@ s32 fn_800359A0(register void* source, register void* requested)
                  message_result == 1)) {
                 return 1;
             }
-            source_flags &= ~1;
-            fn_80201E60(source_context, source_flags);
+            context_flags &= ~1;
+            fn_80201E60(source_context, context_flags);
         }
         source_mask = source_flags & 0x1000;
-        context_mask = source_flags & 4;
+        context_mask = context_flags & 4;
 
         while (candidate != 0) {
             register s32 candidate_id = fn_80201B54(candidate);
@@ -213,10 +219,12 @@ s32 fn_800359A0(register void* source, register void* requested)
                 if (source_type == type && (flags & 0x80) == 0 &&
                     (flags & 0x8000) == 0 &&
                     (info->kind9E == 1 || info->kind9E == 2) &&
-                    (value94 != source_value94 || requested_id != (s32)requested_object ||
-                     kind9e != 1 || kind9f != 1 ||
+                    (value94 != source_value94 ||
+                     (candidate_id == (s32)requested_object && kind9e == 1 &&
+                      kind9f == 1) ||
                      (candidate_special != 0 &&
-                      (info->state8C->ownerC0 == source_id || source_special != 0))) &&
+                      info->state8C->ownerC0 != source_id) ||
+                     source_special != 0) &&
                     source_id != candidate_id &&
                     (source_mask == 0 || candidate_id == (s32)requested_object) &&
                     (source_special == 0 || source_state->ownerC0 != candidate_id)) {
