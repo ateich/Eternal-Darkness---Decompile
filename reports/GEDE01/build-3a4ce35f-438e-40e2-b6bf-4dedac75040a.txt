@@ -1,0 +1,15 @@
+$ python3 configure.py
+exit=0
+$ .tools/bin/ninja -t clean build/GEDE01/src/game/game_fn_80026DC8.o
+Cleaning... 2 files.
+$ .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80026DC8.o
+[1/2] "/usr/bin/python3" tools/download_tool.py sjiswrap build/tools/sjiswrap.exe --tag v1.2.2
+Downloading https://github.com/encounter/sjiswrap/releases/download/v1.2.2/sjiswrap-windows-x86.exe to build/tools/sjiswrap.exe
+[2/2] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80026DC8.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80026DC8.d build/GEDE01/src/game/game_fn_80026DC8.d
+exit=0
+$ build/tools/objdiff-cli diff -p . -u main/game/game_fn_80026DC8 fn_80026DC8 -o reports/GEDE01/objdiff-3a4ce35f-438e-40e2-b6bf-4dedac75040a.json --format json-pretty
+ INFO Writing to reports/GEDE01/objdiff-3a4ce35f-438e-40e2-b6bf-4dedac75040a.json
+exit=0
+$ build/tools/objdiff-cli diff -p . -u main/game/game_fn_80026DC8 fn_80026DC8 -o reports/GEDE01/objdiff-3a4ce35f-438e-40e2-b6bf-4dedac75040a-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address
+ INFO Writing to reports/GEDE01/objdiff-3a4ce35f-438e-40e2-b6bf-4dedac75040a-reloc-strict.json
+exit=0
