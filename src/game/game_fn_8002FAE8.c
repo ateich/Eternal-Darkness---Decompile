@@ -151,8 +151,11 @@ undefined4 fn_8002FAE8(undefined4 param_1,int param_2,undefined4 param_3)
   cVar17 = fn_80202160(param_1);
   if (param_2 == 0) {
     if (iVar4 == 1) {
-      if (piVar24[1] == lbl_8064D18C) {
-        if (piVar24[4] < 1) {
+      if (piVar24[1] != lbl_8064D18C) {
+        fn_8020123C(0x39,uVar6,uVar6,0);
+      }
+      else {
+        if (piVar24[4] <= 0) {
           fn_8020123C(0x62,uVar6,uVar6,0);
         }
         else {
@@ -160,9 +163,6 @@ undefined4 fn_8002FAE8(undefined4 param_1,int param_2,undefined4 param_3)
         }
         fn_80201D2C((void*)param_1,1);
         fn_80201D14((void*)param_1,1);
-      }
-      else {
-        fn_8020123C(0x39,uVar6,uVar6,0);
       }
       return 1;
     }
