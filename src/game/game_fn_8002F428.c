@@ -63,7 +63,7 @@ void fn_8002F428(void* first_arg, void* second_arg)
     Vec3 next;
     Vec3 current;
     register float current_z;
-    Callback* callback;
+    register float direction_delta;
 
     if (first_arg == 0)
         return;
@@ -73,8 +73,7 @@ void fn_8002F428(void* first_arg, void* second_arg)
     second = fn_80156938(second_arg);
     if (first == 0)
         return;
-    callback = fn_80201B8C(first);
-    state = (State*)callback->inner;
+    state = (State*)((Callback*)fn_80201B8C(first))->inner;
     if (state == 0)
         return;
     if (second == 0 || fn_80201B5C(second) == 0x15) {
@@ -194,7 +193,8 @@ active:
 
         if (!blocked) {
             if (!(state->counter & (u8)axis_flags)) {
-                next.z = current_z + (float)state->direction;
+                direction_delta = (float)state->direction;
+                next.z = current_z + direction_delta;
                 if (next.z > (float)position[2] + lbl_8064E048)
                     state->direction = -1;
                 else if (next.z < (float)position[2] - lbl_8064E048)
