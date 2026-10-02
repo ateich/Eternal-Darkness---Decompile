@@ -62,6 +62,7 @@ void fn_8002F428(void* first_arg, void* second_arg)
     s16 position[4];
     Vec3 next;
     Vec3 current;
+    register float current_z;
     Callback* callback;
 
     if (first_arg == 0)
@@ -178,27 +179,28 @@ active:
             next.y = current.y;
         }
 
-        if ((s16)current.z < position[2]) {
-            if ((s32)((float)position[2] - current.z) > 12) {
+        current_z = current.z;
+        if ((s16)current_z < position[2]) {
+            if ((s32)((float)position[2] - current_z) > 12) {
                 blocked = 1;
-                next.z = lbl_8064E12C + current.z;
+                next.z = lbl_8064E12C + current_z;
             }
-        } else if ((s16)current.z > position[2]) {
-            if ((s32)(current.z - (float)position[2]) > 12) {
+        } else if ((s16)current_z > position[2]) {
+            if ((s32)(current_z - (float)position[2]) > 12) {
                 blocked = 1;
-                next.z = current.z - lbl_8064E12C;
+                next.z = current_z - lbl_8064E12C;
             }
         }
 
         if (!blocked) {
             if (!(state->counter & (u8)axis_flags)) {
-                next.z = current.z + (float)state->direction;
+                next.z = current_z + (float)state->direction;
                 if (next.z > (float)position[2] + lbl_8064E048)
                     state->direction = -1;
                 else if (next.z < (float)position[2] - lbl_8064E048)
                     state->direction = 1;
             } else {
-                next.z = current.z;
+                next.z = current_z;
             }
         }
     } else {

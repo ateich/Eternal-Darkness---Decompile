@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "assignment_id": "2c63d74c-0dfc-4ec7-b221-9ea8f38e8236",
+  "target": "fn_8002F428",
+  "compiler": "GC/1.3 canonical flags",
+  "result": "attempted",
+  "text_size_retail": 1728,
+  "text_size_generated": 1728,
+  "canonical_match_percent": 99.44444,
+  "relocation_strict_match_percent": 99.44444,
+  "relocations": {
+    "retail_count": 60,
+    "generated_count": 60,
+    "offset_type_target_addend_match": true,
+    "normalized_diff_bytes": 0
+  },
+  "improvement": "Introducing an explicit current_z scalar raises both scores from the inherited 99.35185% to 99.44444% and corrects six differing instruction rows in the Z-axis block.",
+  "remaining_divergence": "The generated object remains size- and relocation-exact, but 45 retail instruction rows differ. GC/1.3 assigns the long-lived State pointer to r30 and target actor to r31, while retail uses r31 and r30 respectively. In the final oscillation calculation, retail uses f3/f1/f2 for the conversion bias, threshold, and converted position whereas generated code uses f2/f3/f1. The committed instruction diff records every operand difference.",
+  "evidence": [
+    "reports/GEDE01/objdiff-2c63d74c-0dfc-4ec7-b221-9ea8f38e8236.json",
+    "reports/GEDE01/2c63d74c-0dfc-4ec7-b221-9ea8f38e8236/objdiff-strict.json",
+    "reports/GEDE01/2c63d74c-0dfc-4ec7-b221-9ea8f38e8236/final-build.log",
+    "reports/GEDE01/2c63d74c-0dfc-4ec7-b221-9ea8f38e8236/instruction-diff.txt",
+    "reports/GEDE01/2c63d74c-0dfc-4ec7-b221-9ea8f38e8236/retail-relocations.txt",
+    "reports/GEDE01/2c63d74c-0dfc-4ec7-b221-9ea8f38e8236/generated-relocations.txt",
+    "reports/GEDE01/2c63d74c-0dfc-4ec7-b221-9ea8f38e8236/normalized-relocation-diff.txt"
+  ]
+}
