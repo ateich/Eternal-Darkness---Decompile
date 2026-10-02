@@ -1,0 +1,30 @@
+Attempt 4 codegen hypothesis
+============================
+
+The preserved best source uses a ternary expression to select discriminator
+10 or 29.  Earlier work tested a second standalone `changed = 1` immediately
+before that ternary.  This attempt instead expressed the selection as an
+explicit if/else after a second `changed = 1`, testing whether MWCC's branch
+lowering would reuse CR0 from the enclosing `enabled != 1` test across the
+non-CR-setting `li r31, 1`.
+
+Commands:
+  .tools/bin/ninja build/GEDE01/src/game/game_fn_801A94E4.o
+  build/tools/objdiff-cli diff -p . -u main/game/game_fn_801A94E4 fn_801A94E4 -o reports/GEDE01/experiment-explicit-branch-2615379a-530d-4e24-b758-6fa80b73cf6f.json --format json-pretty -c function_reloc_diffs=name_address
+
+Raw result:
+  retail size: 452 bytes
+  generated size: 456 bytes
+  relocation-strict objdiff match: 99.11504%
+
+The explicit if/else emitted the desired `li r31, 1` at function offset 0x108,
+but MWCC still emitted a fresh `cmpwi r28, 1` at 0x10C.  The result was one
+instruction too long and shifted all later branch destinations.  The variant
+was rejected and the size-exact 452-byte reconstruction was restored.
+
+Final retained result:
+  canonical and relocation-strict score: 99.469025%
+  retail and generated size: 452 bytes
+  relocations: 36 on each side; all offsets, types, targets, and addends equal
+  sole instruction difference: offset 0x108, retail `li r31, 1` versus
+    generated `cmpwi r28, 1`; streams realign at 0x10C
