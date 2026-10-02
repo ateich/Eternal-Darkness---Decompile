@@ -1,0 +1,32 @@
+[
+  {
+    "command": "python3 configure.py --version GEDE01 --non-matching",
+    "returncode": 0,
+    "output_summary": "configure completed; split warnings only"
+  },
+  {
+    "command": ".tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_801CE384.o",
+    "returncode": 0,
+    "output": "[1/3] MWCC build/GEDE01/src/game/game_fn_801CE384.o"
+  },
+  {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801CE384 fn_801CE384 -c functionRelocDiffs=all -o reports/GEDE01/baseline-0f226eac-e2ca-48b0-98d2-8dc6291f29fd.json --format json",
+    "returncode": 0,
+    "output": "INFO Writing to reports/GEDE01/baseline-0f226eac-e2ca-48b0-98d2-8dc6291f29fd.json"
+  },
+  {
+    "command": ".tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_801CE384.externalized",
+    "returncode": 0,
+    "output": "[1/2] EXTERNALIZE build/GEDE01/src/game/game_fn_801CE384.o"
+  },
+  {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801CE384 fn_801CE384 -c functionRelocDiffs=all -o reports/GEDE01/objdiff-0f226eac-e2ca-48b0-98d2-8dc6291f29fd.json --format json",
+    "returncode": 0,
+    "output": "INFO Writing to reports/GEDE01/objdiff-0f226eac-e2ca-48b0-98d2-8dc6291f29fd.json"
+  },
+  {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801CE384 fn_801CE384 -o reports/GEDE01/objdiff-canonical-0f226eac-e2ca-48b0-98d2-8dc6291f29fd.json --format json",
+    "returncode": 0,
+    "output": "INFO Writing to reports/GEDE01/objdiff-canonical-0f226eac-e2ca-48b0-98d2-8dc6291f29fd.json"
+  }
+]
