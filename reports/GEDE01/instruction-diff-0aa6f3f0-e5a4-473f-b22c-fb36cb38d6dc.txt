@@ -1,0 +1,18 @@
+command: python3 tools/fndiff.py game/game_fn_80032A5C.c fn_80032A5C
+target 188 bytes  base 188 bytes  match 99.14893
+  0x0044  subf r8, r10, r7   | subf r8, r10, r7
+* 0x0048  li r5, 0x0         | li r4, 0x0
+* 0x004c  subfc r0, r5, r8   | subfc r0, r4, r8
+* 0x0050  lbz r4, 0x4b(r3)   | lbz r5, 0x4b(r3)
+* 0x0054  srwi r5, r5, 31    | srwi r4, r4, 31
+  0x0058  srwi r0, r8, 31    | srwi r0, r8, 31
+* 0x005c  subfe r0, r0, r5   | subfe r0, r0, r4
+  0x0060  andc r0, r8, r0    | andc r0, r8, r0
+  0x0064  clrlwi r0, r0, 24  | clrlwi r0, r0, 24
+* 0x0068  cmplw r4, r0       | cmplw r5, r0
+  0x006c  bge 0x80           | bge 0x80
+* 0x0070  add r0, r4, r10    | add r0, r5, r10
+
+All other 40 instructions are identical. Target/retail is on the left and
+base/generated is on the right. The eight differences are operand fields;
+there are no opcode, control-flow, size, or relocation differences.
