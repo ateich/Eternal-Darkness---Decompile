@@ -1,0 +1,22 @@
+COMMAND: python3 configure.py
+EXIT STATUS: 0
+OUTPUT: <none>
+
+COMMAND: ./.tools/bin/ninja -t clean build/GEDE01/src/game/game_fn_801A872C.o
+Cleaning... 2 files.
+
+COMMAND: ./.tools/bin/ninja build/GEDE01/src/game/game_fn_801A872C.o
+[1/2] TOOL build/tools/sjiswrap.exe
+Downloading https://github.com/encounter/sjiswrap/releases/download/v1.2.2/sjiswrap-windows-x86.exe to build/tools/sjiswrap.exe
+[2/2] MWCC build/GEDE01/src/game/game_fn_801A872C.o
+EXIT STATUS: 0
+
+COMMAND: build/tools/objdiff-cli diff -1 build/GEDE01/obj/game/game_fn_801A872C.o -2 build/GEDE01/src/game/game_fn_801A872C.o -o reports/GEDE01/objdiff-1752aa42-9b61-45bb-b86b-0ad6994445cd.json --format json-pretty fn_801A872C
+ INFO Writing to reports/GEDE01/objdiff-1752aa42-9b61-45bb-b86b-0ad6994445cd.json
+EXIT STATUS: 0
+
+MEASURED SUMMARY FROM THAT JSON:
+retail .text size=420 match_percent=81.28571
+generated .text size=436 symbol_match_percent=81.28571
+retail instruction rows=111
+generated instruction rows=111
