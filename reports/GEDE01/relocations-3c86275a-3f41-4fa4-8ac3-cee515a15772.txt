@@ -1,0 +1,35 @@
+Command: build/binutils/powerpc-eabi-readelf -rW build/GEDE01/obj/game/game_fn_8002BFE0.o
+
+
+Relocation section '.rela.text' at offset 0x1c0 contains 11 entries:
+ Offset     Info    Type                Sym. Value  Symbol's Name + Addend
+00000032  00000406 R_PPC_ADDR16_HA        00000000   lbl_80238CF4 + 0
+00000034  0000056d R_PPC_EMB_SDA21        00000000   lbl_8064E038 + 0
+0000003a  00000404 R_PPC_ADDR16_LO        00000000   lbl_80238CF4 + 0
+0000003c  0000066d R_PPC_EMB_SDA21        00000000   lbl_8064E064 + 0
+00000060  0000076d R_PPC_EMB_SDA21        00000000   lbl_8064E068 + 0
+00000078  0000080a R_PPC_REL24            00000000   fn_8012CEA4 + 0
+0000007c  0000090a R_PPC_REL24            00000000   fn_800FBFB0 + 0
+000000b0  00000a0a R_PPC_REL24            00000000   fn_8017A244 + 0
+00000110  00000b0a R_PPC_REL24            00000000   fn_8012CF08 + 0
+00000130  00000c0a R_PPC_REL24            00000000   fn_8012F58C + 0
+00000138  00000d0a R_PPC_REL24            00000000   fn_8012D0D0 + 0
+
+Command: build/binutils/powerpc-eabi-readelf -rW build/GEDE01/src/game/game_fn_8002BFE0.o
+
+
+Relocation section '.rela.text' at offset 0x1c0 contains 11 entries:
+ Offset     Info    Type                Sym. Value  Symbol's Name + Addend
+00000032  00000506 R_PPC_ADDR16_HA        00000000   lbl_80238CF4 + 0
+00000034  0000066d R_PPC_EMB_SDA21        00000000   lbl_8064E064 + 0
+0000003a  00000504 R_PPC_ADDR16_LO        00000000   lbl_80238CF4 + 0
+0000003c  0000076d R_PPC_EMB_SDA21        00000000   lbl_8064E068 + 0
+00000060  0000046d R_PPC_EMB_SDA21        00000000   @17 + 0
+00000078  0000080a R_PPC_REL24            00000000   fn_8012CEA4 + 0
+0000007c  0000090a R_PPC_REL24            00000000   fn_800FBFB0 + 0
+000000b0  00000a0a R_PPC_REL24            00000000   fn_8017A244 + 0
+00000110  00000b0a R_PPC_REL24            00000000   fn_8012CF08 + 0
+00000130  00000c0a R_PPC_REL24            00000000   fn_8012F58C + 0
+00000138  00000d0a R_PPC_REL24            00000000   fn_8012D0D0 + 0
+
+Both objects have 11 relocations at identical offsets and of identical types. Eight named targets agree. The three constant relocations are permuted: retail uses lbl_8064E038, lbl_8064E064, lbl_8064E068 at 0x34, 0x3c, 0x60, while generated code uses lbl_8064E064, lbl_8064E068, @17 at those sites. All addends are zero.

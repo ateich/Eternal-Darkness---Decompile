@@ -1,0 +1,125 @@
+Command: build/binutils/powerpc-eabi-objdump -dr build/GEDE01/obj/game/game_fn_8002BFE0.o
+
+Command: build/binutils/powerpc-eabi-objdump -dr build/GEDE01/src/game/game_fn_8002BFE0.o
+
+Unified diff (retail target vs generated base):
+
+--- /dev/fd/63        2026-10-02 15:14:27.750907765 -0400
++++ /dev/fd/62        2026-10-02 15:14:27.750907765 -0400
+@@ -1,5 +1,5 @@
+
+-build/GEDE01/obj/game/game_fn_8002BFE0.o:     file format elf32-powerpc
++build/GEDE01/src/game/game_fn_8002BFE0.o:     file format elf32-powerpc
+
+
+ Disassembly of section .text:
+@@ -19,25 +19,25 @@
+   2c:        bf 21 00 64         stmw    r25,100(r1)
+   30:        3c 80 00 00         lis     r4,0
+                         32: R_PPC_ADDR16_HA        lbl_80238CF4
+-  34:        cb a0 00 00         lfd     f29,0(0)
+-                        34: R_PPC_EMB_SDA21        lbl_8064E038
++  34:        c3 c0 00 00         lfs     f30,0(0)
++                        34: R_PPC_EMB_SDA21        lbl_8064E064
+   38:        38 a4 00 00         addi    r5,r4,0
+                         3a: R_PPC_ADDR16_LO        lbl_80238CF4
+-  3c:        c3 c0 00 00         lfs     f30,0(0)
+-                        3c: R_PPC_EMB_SDA21        lbl_8064E064
++  3c:        c3 a0 00 00         lfs     f29,0(0)
++                        3c: R_PPC_EMB_SDA21        lbl_8064E068
+   40:        80 85 00 00         lwz     r4,0(r5)
+-  44:        7c 7d 1b 78         mr      r29,r3
++  44:        7c 7f 1b 78         mr      r31,r3
+   48:        80 65 00 04         lwz     r3,4(r5)
+-  4c:        3b c1 00 28         addi    r30,r1,40
++  4c:        3b 41 00 28         addi    r26,r1,40
+   50:        80 05 00 08         lwz     r0,8(r5)
+-  54:        3b e0 00 00         li      r31,0
++  54:        3b 20 00 00         li      r25,0
+   58:        90 81 00 28         stw     r4,40(r1)
+-  5c:        3f 20 43 30         lis     r25,17200
+-  60:        c3 e0 00 00         lfs     f31,0(0)
+-                        60: R_PPC_EMB_SDA21        lbl_8064E068
++  5c:        3f 60 43 30         lis     r27,17200
++  60:        cb e0 00 00         lfd     f31,0(0)
++                        60: R_PPC_EMB_SDA21        @17
+   64:        90 61 00 2c         stw     r3,44(r1)
+   68:        90 01 00 30         stw     r0,48(r1)
+-  6c:        7f a3 eb 78         mr      r3,r29
++  6c:        7f e3 fb 78         mr      r3,r31
+   70:        38 a1 00 34         addi    r5,r1,52
+   74:        38 80 00 0f         li      r4,15
+   78:        48 00 00 01         bl      78 <fn_8002BFE0+0x78>
+@@ -45,24 +45,24 @@
+   7c:        48 00 00 01         bl      7c <fn_8002BFE0+0x7c>
+                         7c: R_PPC_REL24        fn_800FBFB0
+   80:        54 63 07 3e         clrlwi  r3,r3,28
+-  84:        93 21 00 58         stw     r25,88(r1)
++  84:        93 61 00 58         stw     r27,88(r1)
+   88:        38 03 00 0a         addi    r0,r3,10
+   8c:        38 61 00 28         addi    r3,r1,40
+   90:        6c 00 80 00         xoris   r0,r0,32768
+-  94:        d3 de 00 00         stfs    f30,0(r30)
++  94:        d3 da 00 00         stfs    f30,0(r26)
+   98:        38 81 00 44         addi    r4,r1,68
+   9c:        90 01 00 5c         stw     r0,92(r1)
+   a0:        c8 01 00 58         lfd     f0,88(r1)
+-  a4:        ec 00 e8 28         fsubs   f0,f0,f29
++  a4:        ec 00 f8 28         fsubs   f0,f0,f31
+   a8:        ef 9e 00 24         fdivs   f28,f30,f0
+   ac:        fc 20 e0 90         fmr     f1,f28
+   b0:        48 00 00 01         bl      b0 <fn_8002BFE0+0xb0>
+                         b0: R_PPC_REL24        fn_8017A244
+-  b4:        83 41 00 44         lwz     r26,68(r1)
++  b4:        83 81 00 44         lwz     r28,68(r1)
+   b8:        fc 20 e0 90         fmr     f1,f28
+-  bc:        83 61 00 48         lwz     r27,72(r1)
+-  c0:        7f a3 eb 78         mr      r3,r29
+-  c4:        83 81 00 4c         lwz     r28,76(r1)
++  bc:        83 a1 00 48         lwz     r29,72(r1)
++  c0:        7f e3 fb 78         mr      r3,r31
++  c4:        83 c1 00 4c         lwz     r30,76(r1)
+   c8:        38 a1 00 18         addi    r5,r1,24
+   cc:        81 81 00 50         lwz     r12,80(r1)
+   d0:        81 61 00 34         lwz     r11,52(r1)
+@@ -73,9 +73,9 @@
+   e4:        38 e0 00 00         li      r7,0
+   e8:        80 01 00 40         lwz     r0,64(r1)
+   ec:        39 00 00 01         li      r8,1
+-  f0:        93 41 00 08         stw     r26,8(r1)
+-  f4:        93 61 00 0c         stw     r27,12(r1)
+-  f8:        93 81 00 10         stw     r28,16(r1)
++  f0:        93 81 00 08         stw     r28,8(r1)
++  f4:        93 a1 00 0c         stw     r29,12(r1)
++  f8:        93 c1 00 10         stw     r30,16(r1)
+   fc:        91 81 00 14         stw     r12,20(r1)
+  100:        91 61 00 18         stw     r11,24(r1)
+  104:        91 41 00 1c         stw     r10,28(r1)
+@@ -83,8 +83,8 @@
+  10c:        90 01 00 24         stw     r0,36(r1)
+  110:        48 00 00 01         bl      110 <fn_8002BFE0+0x110>
+                         110: R_PPC_REL24        fn_8012CF08
+- 114:        d3 fe 00 00         stfs    f31,0(r30)
+- 118:        7f a3 eb 78         mr      r3,r29
++ 114:        d3 ba 00 00         stfs    f29,0(r26)
++ 118:        7f e3 fb 78         mr      r3,r31
+  11c:        38 80 00 0f         li      r4,15
+  120:        38 a0 00 03         li      r5,3
+  124:        38 c0 00 00         li      r6,0
+@@ -92,12 +92,12 @@
+  12c:        39 00 00 20         li      r8,32
+  130:        48 00 00 01         bl      130 <fn_8002BFE0+0x130>
+                         130: R_PPC_REL24        fn_8012F58C
+- 134:        7f a3 eb 78         mr      r3,r29
++ 134:        7f e3 fb 78         mr      r3,r31
+  138:        48 00 00 01         bl      138 <fn_8002BFE0+0x138>
+                         138: R_PPC_REL24        fn_8012D0D0
+- 13c:        3b ff 00 01         addi    r31,r31,1
+- 140:        3b de 00 04         addi    r30,r30,4
+- 144:        2c 1f 00 03         cmpwi   r31,3
++ 13c:        3b 39 00 01         addi    r25,r25,1
++ 140:        3b 5a 00 04         addi    r26,r26,4
++ 144:        2c 19 00 03         cmpwi   r25,3
+  148:        41 80 ff 24         blt     6c <fn_8002BFE0+0x6c>
+  14c:        e3 e1 00 b8         psq_l   f31,184(r1),0,0
+  150:        cb e1 00 b0         lfd     f31,176(r1)
