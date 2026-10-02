@@ -1,0 +1,29 @@
+Assignment e1cba6fa-b511-4f64-955b-6ac219c98671, attempt 3
+Target: fn_800365C8
+Compiler: GC/1.3 with canonical configure.py flags and the existing
+-use_lmw_stmw on per-object flag.
+
+Recovered result:
+- The accepted base already contains the honest C reconstruction preserved by
+  the prior approved attempted result, so no source or registration change was
+  required.
+- A fresh configure and assigned-object compilation succeeded.
+- Fresh canonical objdiff .text/function score is 97.66426%.
+- Candidate .text is 1096 bytes; retail .text is 1108 bytes.
+- The candidate uses a 144-byte frame with stmw r18,72(r1); retail uses a
+  160-byte frame with stmw r18,88(r1). Vec3 locals begin 12 bytes earlier in
+  the candidate, producing local-offset and downstream instruction differences.
+- The repeated path_ok fallback tests occur in the same semantic order in the
+  candidate and retail output; they are not described as reordered.
+- Three candidate R_PPC_EMB_SDA21 relocations at .text offsets 0x298, 0x2ec,
+  and 0x378 target local symbol @71. The corresponding retail relocations at
+  offsets 0x2a0, 0x2f4, and 0x380 target lbl_8064E220. All six have addend 0.
+- Other relocation offsets after divergent local-layout/code-generation regions
+  differ even where their symbol targets agree.
+
+The raw candidate object SHA-256 matches the preserved attempt's candidate
+object SHA-256, so its complete candidate/retail disassemblies, unified
+instruction diff, and raw relocation tables were recovered byte-for-byte from
+preserved commit 3bbdeb7634ed4c064504c49c7695cac07c71b2c5 and renamed for
+this assignment. Fresh canonical and relocation-strict objdiff JSON reports,
+the fresh build record, and current object digests are sibling evidence files.
