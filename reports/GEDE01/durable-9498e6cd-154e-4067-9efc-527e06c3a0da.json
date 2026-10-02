@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "assignment_id": "9498e6cd-154e-4067-9efc-527e06c3a0da",
+  "attempt": 3,
+  "base_commit": "af44c11e803ac1bf8a98e211e5411c72e8ba967f",
+  "target": "fn_80017FF8",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-9498e6cd-154e-4067-9efc-527e06c3a0da.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-reloc-strict-9498e6cd-154e-4067-9efc-527e06c3a0da.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-9498e6cd-154e-4067-9efc-527e06c3a0da.log",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-9498e6cd-154e-4067-9efc-527e06c3a0da.txt",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-9498e6cd-154e-4067-9efc-527e06c3a0da.txt"
+  ],
+  "divergence": "Fresh canonical GC/1.3 objdiff measures 93.58889%: retail .text is 1440 bytes versus the candidate's 1452. The corrected reconstruction stores min_z into both endpoint z fields (retail stack offsets 0x20 and 0x26) and uses max_z - min_z only for width. Remaining codegen divergence includes the candidate's 0x220 frame versus retail's 0x210 frame, register allocation, and post-create conversion scheduling; relocation-strict is therefore not accepted at 100%."
+}

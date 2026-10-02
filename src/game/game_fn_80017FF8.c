@@ -67,8 +67,8 @@ extern void* fn_801966E0(void*, int, int);
 extern void fn_8014BA14(void);
 
 /* NonMatching: behavior-complete marker descriptor reconstruction. The
- * canonical candidate is 93.9%; remaining differences are local/register
- * allocation and width/end-point conversion scheduling after object spawn. */
+ * canonical candidate is 93.58889%; remaining differences include the 0x220
+ * versus 0x210 frame, register allocation, and conversion scheduling. */
 s32 fn_80017FF8(void* script)
 {
     SpawnHeader header;
@@ -194,8 +194,8 @@ s32 fn_80017FF8(void* script)
 
         fn_801964E8(object, 1, 0);
         fn_801978F8(object, 0);
-        geometry.first.y = (s16)min_z;
-        geometry.last.y = (s16)max_z;
+        geometry.first.z = (s16)min_z;
+        geometry.last.z = (s16)min_z;
         if (mode != 0) {
             handle = fn_80142A70(2, &geometry.first, width, lbl_8064D18C, 0,
                                  (s32)fn_8014BA14, (s32)object, user_value);
