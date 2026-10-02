@@ -1,0 +1,24 @@
+command: python3 configure.py
+exit: 0
+command: .tools/bin/ninja -t clean build/GEDE01/src/game/game_fn_80036374.o
+output: Cleaning... 2 files.
+command: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80036374.o
+[1/1] "/usr/bin/python3" configure.py
+[1/3] "/usr/bin/python3" tools/download_tool.py sjiswrap build/tools/sjiswrap.exe --tag v1.2.2
+Downloading https://github.com/encounter/sjiswrap/releases/download/v1.2.2/sjiswrap-windows-x86.exe to build/tools/sjiswrap.exe
+[2/3] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80036374.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80036374.d build/GEDE01/src/game/game_fn_80036374.d
+exit: 0
+command: sha1sum build/GEDE01/src/game/game_fn_80036374.o
+fbc68ae820c355e79d45b586202f5b53de959494  build/GEDE01/src/game/game_fn_80036374.o
+command: stat -c 'size=%s bytes' build/GEDE01/src/game/game_fn_80036374.o
+size=2144 bytes
+command: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80036374 fn_80036374 -o reports/GEDE01/objdiff-9cc7799c-4911-4cc5-9298-55bfa621ad83.json --format json-pretty
+exit: 0
+canonical .text: size=596 match_percent=100.0
+canonical .sdata2: size=8 match_percent=100.0
+canonical fn_80036374: size=596 match_percent=100.0
+command: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80036374 fn_80036374 -o reports/GEDE01/objdiff-9cc7799c-4911-4cc5-9298-55bfa621ad83-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address
+exit: 0
+relocation-strict .text: size=596 match_percent=100.0
+relocation-strict .sdata2: size=8 match_percent=100.0
+relocation-strict fn_80036374: size=596 match_percent=100.0

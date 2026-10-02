@@ -88,6 +88,15 @@ config.asflags = ["-mgekko", "--strip-local-absolute", "-I include", f"-I build/
 config.ldflags = ["-fp hardware", "-nodefaults"]
 config.custom_build_rules = [
     {
+        "name": "externalize_game_80036374_bias",
+        "command": (
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@39=lbl_8064E220 --globalize-symbol=lbl_8064E220 $in "
+            "&& touch $out"
+        ),
+        "description": "EXPORT $in",
+    },
+    {
         "name": "externalize_game_8017B4F4_data",
         "command": (
             "python3 tools/externalize_elf_symbol.py $in @30 lbl_80650910 "
@@ -4095,6 +4104,11 @@ guarded_externalize_rules.add("externalize_string_pool_80251808")
 config.custom_build_steps = {
     "post-compile": [
         {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80036374.externalized"],
+            "rule": "externalize_game_80036374_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80036374.o"],
+        },
+        {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8017B4F4.externalized"],
             "rule": "externalize_game_8017B4F4_data",
             "inputs": [f"build/{VERSION}/src/game/game_fn_8017B4F4.o"],
@@ -7361,7 +7375,7 @@ config.libs = [
             Object(Matching, "game/game_fn_80036198.c"),
             Object(Matching, "game/game_fn_800361F8.c"),
             Object(
-                NonMatching,
+                Matching,
                 "game/game_fn_80036374.c",
                 extra_cflags=["-use_lmw_stmw on"],
             ),
