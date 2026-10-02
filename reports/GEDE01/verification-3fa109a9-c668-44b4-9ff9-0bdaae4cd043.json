@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "assignment_id": "3fa109a9-c668-44b4-9ff9-0bdaae4cd043",
+  "attempt": 6,
+  "base_commit": "385b257f89a588e4bf2c936c328168a7ad0eed6b",
+  "target": "fn_801B7A7C",
+  "source_sha256": "9b825049ba7b3261fcd65d27a610d3adf9cbb858c0ad70576dd6a535ffae1a44",
+  "candidate_object_sha256": "22b1f0094bd9042a13ca9b6a8da355ae7b6032e6fef860864b8949c37731801e",
+  "configure_command": "python3 configure.py",
+  "assigned_object_build_command": ".tools/bin/ninja build/GEDE01/src/game/game_fn_801B7A7C.o",
+  "canonical_objdiff_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801B7A7C --format json -o reports/GEDE01/canonical-3fa109a9-c668-44b4-9ff9-0bdaae4cd043.json fn_801B7A7C",
+  "relocation_strict_objdiff_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801B7A7C -c function_reloc_diffs=all --format json -o reports/GEDE01/objdiff-3fa109a9-c668-44b4-9ff9-0bdaae4cd043.json fn_801B7A7C",
+  "canonical_text": {
+    "retail_size": 792,
+    "candidate_size": 792,
+    "match_percent": 93.954544
+  },
+  "relocation_strict_text": {
+    "retail_size": 792,
+    "candidate_size": 792,
+    "match_percent": 93.954544
+  },
+  "experiment": "Two genuine independent u16[4] arrays were declared in the same callback block. The primary callback receives values and the auxiliary callback receives aux_values. Moving the arrays from the loop body to the containing block produced identical code.",
+  "result": "The second escaping array grows the candidate frame from the preserved candidate's 0x50 to 0x58. It places the auxiliary array at r1+0xC, matching retail, and the primary array at r1+0x14. Retail uses a 0x60 frame and primary r1+0x18. Remaining differences include long-lived GPR allocation and two extra lbl_80619860 HA/LO relocations in the candidate. The function remains NonMatching.",
+  "full_build_and_dol_sha1": "Deferred to the integrator as required by the assignment; no full build or DOL claim is made here."
+}

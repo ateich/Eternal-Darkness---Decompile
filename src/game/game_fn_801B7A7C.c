@@ -111,13 +111,14 @@ void fn_801B7A7C(u32 elapsed)
         }
 
         {
+            u16 values[4];
+            u16 aux_values[4];
             u32* context = (u32*)(lbl_80619860 + 0xC14);
             UpdateCallback* callback =
                 (UpdateCallback*)(lbl_80619860 + 0xC34);
             UpdateCallback* aux_callback =
                 (UpdateCallback*)(lbl_80619860 + 0xC74);
             for (i = 0; i < 8; ++i, ++context, ++callback, ++aux_callback) {
-                u16 values[4];
                 u32 channel;
                 u32* aux_context = context + 0x10;
                 if ((&lbl_8064D3BC)[i] != 0xFF) {
@@ -130,11 +131,11 @@ void fn_801B7A7C(u32 elapsed)
                 }
                 if ((&lbl_8064D3AC)[i] != 0xFF) {
                     for (channel = 0; channel < 4; ++channel) {
-                        values[channel] = fn_801CBD9C(
+                        aux_values[channel] = fn_801CBD9C(
                             (u8)i, (u8)channel, (&lbl_8064D3AC)[i],
                             (&lbl_8064D3A4)[i]);
                     }
-                    (*aux_callback)(1, values, *aux_context);
+                    (*aux_callback)(1, aux_values, *aux_context);
                 }
             }
         }
