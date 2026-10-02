@@ -1,0 +1,25 @@
+diff --git a/eternal-darkness-decomp/src/game/game_fn_801E3388.c b/eternal-darkness-decomp/src/game/game_fn_801E3388.c
+index 55895dc99..892f82b49 100644
+--- a/eternal-darkness-decomp/src/game/game_fn_801E3388.c
++++ b/eternal-darkness-decomp/src/game/game_fn_801E3388.c
+@@ -87,6 +87,7 @@ void fn_801E3388(Object* object)
+             void** output_b;
+             void** output_c;
+             void* output_d;
++            float scalar;
+             u32 resource;
+             void* second_resource;
+             u32 alternate_flags;
+@@ -94,10 +95,11 @@ void fn_801E3388(Object* object)
+             fn_801E3020(object->runtime, object->flags, object->position,
+                          object->source, (int)owner, &output_a, &output_b,
+                          &output_c, &output_d, resource);
++            scalar = lbl_80651248;
+             *output_b = fn_80201B54(fn_800CD568(object->source,
+                                                 (int)owner, object->flags,
+                                                 output_a, output_d,
+-                                                resource, lbl_80651248));
++                                                resource, scalar));
+             *output_c = *output_b;
+             if ((object->flags & 0xF) == 8 && (int)resource != 0) {
+                 void* second_b;

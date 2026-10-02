@@ -1,0 +1,58 @@
+[
+  {
+    "label": "configure",
+    "cwd": "eternal-darkness-decomp",
+    "argv": ["python3", "configure.py"],
+    "exit_code": 0,
+    "raw_output": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/configure.log"
+  },
+  {
+    "label": "baseline-build",
+    "cwd": "eternal-darkness-decomp",
+    "argv": [".tools/bin/ninja", "-j2", "build/GEDE01/src/game/game_fn_801E3388.o"],
+    "exit_code": 0,
+    "raw_output": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/baseline-build.log"
+  },
+  {
+    "label": "baseline-diff",
+    "cwd": "eternal-darkness-decomp",
+    "argv": ["build/tools/objdiff-cli", "diff", "-p", ".", "-u", "main/game/game_fn_801E3388", "-o", "reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/baseline.json", "--format", "json-pretty", "fn_801E3388"],
+    "exit_code": 0,
+    "raw_output": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/baseline-diff.log"
+  },
+  {
+    "label": "scoped-scalar-build",
+    "cwd": "eternal-darkness-decomp",
+    "argv": [".tools/bin/ninja", "-j2", "build/GEDE01/src/game/game_fn_801E3388.o"],
+    "exit_code": 0,
+    "raw_output": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/scoped-scalar-build.log"
+  },
+  {
+    "label": "scoped-scalar-diff",
+    "cwd": "eternal-darkness-decomp",
+    "argv": ["build/tools/objdiff-cli", "diff", "-p", ".", "-u", "main/game/game_fn_801E3388", "-o", "reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/scoped-scalar.json", "--format", "json-pretty", "fn_801E3388"],
+    "exit_code": 0,
+    "raw_output": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/scoped-scalar-diff.log"
+  },
+  {
+    "label": "canonical-diff",
+    "cwd": "eternal-darkness-decomp",
+    "argv": ["build/tools/objdiff-cli", "diff", "-p", ".", "-u", "main/game/game_fn_801E3388", "-o", "reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/canonical.json", "--format", "json-pretty", "fn_801E3388"],
+    "exit_code": 0,
+    "raw_output": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/canonical-diff.log"
+  },
+  {
+    "label": "strict-diff",
+    "cwd": "eternal-darkness-decomp",
+    "argv": ["build/tools/objdiff-cli", "diff", "-p", ".", "-u", "main/game/game_fn_801E3388", "-o", "reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/strict.json", "--format", "json-pretty", "-c", "function_reloc_diffs=name_address", "fn_801E3388"],
+    "exit_code": 0,
+    "raw_output": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/strict-diff.log"
+  },
+  {
+    "label": "final-object-build",
+    "cwd": "eternal-darkness-decomp",
+    "argv": [".tools/bin/ninja", "-j2", "build/GEDE01/src/game/game_fn_801E3388.o"],
+    "exit_code": 0,
+    "raw_output": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/final-object-build.log"
+  }
+]

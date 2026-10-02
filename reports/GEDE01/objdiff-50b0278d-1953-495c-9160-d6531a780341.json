@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "assignment_id": "50b0278d-1953-495c-9160-d6531a780341",
+  "attempt": 7,
+  "base_commit": "3e8fd7fd6a8f42d00ff70eb75913e4dfc47908c4",
+  "target": "fn_801E3388",
+  "status": "attempted",
+  "source": "eternal-darkness-decomp/src/game/game_fn_801E3388.c",
+  "source_sha256": "04377af4b4c9d4e49a01a88f2db7160a7589ecb886ea350226a45fc58449c7c3",
+  "compiler": {
+    "version": "GC/1.3",
+    "policy": "unchanged canonical settings",
+    "raw_command": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/compiler-command.log"
+  },
+  "baseline": {
+    "score": 98.85714,
+    "generated_size": 700,
+    "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/baseline.json",
+    "raw_build": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/baseline-build.log",
+    "raw_diff": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/baseline-diff.log"
+  },
+  "experiment": {
+    "name": "scoped-by-value-scalar",
+    "hypothesis": "Assigning the final float argument to a scoped by-value scalar before the call could expose its evaluation early enough for GC/1.3 to schedule the lfs before the independent stack reload of output_d.",
+    "result": "The generated object is instruction-identical to baseline. The scoped scalar is retained as an honest semantic reconstruction, but it does not improve code generation.",
+    "score": 98.85714,
+    "generated_size": 700,
+    "patch": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/scoped-scalar.patch",
+    "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/scoped-scalar.json",
+    "raw_build": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/scoped-scalar-build.log",
+    "raw_diff": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/scoped-scalar-diff.log"
+  },
+  "canonical": {
+    "score": 98.85714,
+    "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/canonical.json",
+    "raw_diff": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/canonical-diff.log"
+  },
+  "relocation_strict": {
+    "score": 98.85714,
+    "setting": "function_reloc_diffs=name_address",
+    "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/strict.json",
+    "raw_diff": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/strict-diff.log",
+    "summary": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/relocation-summary.json",
+    "retail_raw": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/retail-relocations.log",
+    "generated_raw": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/generated-relocations.log"
+  },
+  "instruction_difference": {
+    "raw_diff": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/instruction-diff.log",
+    "retail_raw": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/retail-text.hex.log",
+    "generated_raw": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/generated-text.hex.log",
+    "differences": [
+      {"offset": "0x17c", "retail": "c0200000", "generated": "80e10018"},
+      {"offset": "0x180", "retail": "80e10018", "generated": "c0200000"}
+    ]
+  },
+  "verification_commands": "eternal-darkness-decomp/reports/GEDE01/50b0278d-1953-495c-9160-d6531a780341/verification-commands.json",
+  "full_verification": "Deferred to the integrator as required by the assignment; this result contains fresh assigned-object verification only.",
+  "divergence": "Canonical and relocation-strict objdiff both measure 98.85714%, with 700 bytes on each side. The only instruction-word differences are adjacent independent loads at 0x17C and 0x180: retail emits lfs f1, lbl_80651248@sda21 then lwz r7, 0x18(r1), while generated emits them in reverse. All 30 relocation type/target/addend entries agree in sequence, but the lbl_80651248 R_PPC_EMB_SDA21 relocation with addend 0 is at retail offset 0x17C and generated offset 0x180."
+}
