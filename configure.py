@@ -7328,7 +7328,7 @@ config.libs = [
                 extra_cflags=["-use_lmw_stmw on"],
             ),
             Object(
-                NonMatching,
+                Matching,
                 "game/game_fn_800337C8.c",
                 extra_cflags=["-use_lmw_stmw on"],
             ),
