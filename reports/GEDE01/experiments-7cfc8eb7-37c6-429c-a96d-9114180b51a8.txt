@@ -1,0 +1,30 @@
+fn_80032A5C attempt 4 codegen experiments
+
+Preserved baseline:
+- Exact retail size: 188 bytes.
+- Canonical and relocation-strict score: 99.14893%.
+- Eight operand-field differences caused by opposite r4/r5 allocation for the
+  clamp-zero temporary and current state byte.
+
+New hypothesis 1: reverse the source-level comparison operands, spelling the
+condition as `clamp > current`, to create the two short-lived values in the
+opposite allocator order while retaining an unsigned relational comparison.
+- Result: 188 bytes, 98.61702%.
+- MWCC retained the baseline zero temporary in r4, allocated the byte load to
+  r0, used r4/r5 for the clamp sequence, and emitted `ble` rather than `bge`.
+
+New hypothesis 2: represent the current byte through a block-local pointer,
+allowing alias/value propagation to build the byte-load virtual register before
+the clamp result without introducing a persistent scalar live range.
+- Result: 188 bytes, 99.14893%.
+- MWCC optimized the pointer away and reproduced the baseline object exactly.
+
+Additional checks:
+- Reversing the clamp ternary to `difference > 0 ? difference : 0` changed the
+  clamp idiom and produced 180 bytes at 84.04256%.
+- A block-local u32 current-byte scalar produced 188 bytes at 97.12766% and
+  perturbed persistent register allocation, consistent with the earlier u8
+  temporary diagnosis.
+
+The best honest C reconstruction was restored unchanged. No attempt improved
+on the preserved 99.14893% result.
