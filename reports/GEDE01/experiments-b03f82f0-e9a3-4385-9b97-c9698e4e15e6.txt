@@ -1,0 +1,37 @@
+Assignment b03f82f0-e9a3-4385-9b97-c9698e4e15e6, attempt 1
+Target: fn_800365C8
+Compiler: GC/1.3, canonical flags from configure.py, plus the existing
+-use_lmw_stmw on per-object flag.
+
+Baseline reconstruction findings:
+- The original nested expression for the linked transform emitted an extra
+  branch and placed fn_8011EB04 at the wrong instruction offset.
+- Treating fn_8020123C's masked result as a full u64 made MWCC compare both
+  ABI return registers. Casting the call result to u32 reproduces the retail
+  use of the low return word.
+- Repeating the path_ok test in the fallback branch improves the retail
+  control-flow shape.
+- Moving selected before state in the register-local declaration order
+  reproduces the retail long-lived assignments: source r28, candidate r29,
+  state r30, and selected r31.
+
+Rejected experiment:
+- Expanding the temporary Vec3 into a two-element array produced the retail
+  160-byte frame but caused MWCC to reserve r17 for the element address,
+  changing the prologue and many downstream registers. It scored worse than
+  the final reconstruction and was not retained.
+
+Best retained result:
+- Canonical objdiff .text/function score: 97.66426%.
+- Candidate .text size: 1096 bytes; retail .text size: 1108 bytes.
+- The first persistent divergence is the prologue/local layout: candidate
+  frame 144 bytes and stmw r18,72(r1), versus retail frame 160 bytes and stmw
+  r18,88(r1). The candidate Vec3 locals consequently begin 12 bytes earlier.
+- Remaining instruction differences also include the exact placement/order
+  of the repeated path_ok check around the fallback distance conversion.
+- Relocation targets are the intended named symbols, but relocation offsets
+  after divergent control flow/local-layout code do not all match retail.
+
+Raw evidence is in the sibling assignment-specific build, canonical objdiff,
+relocation-strict objdiff, relocation-table, disassembly, and instruction-diff
+files.

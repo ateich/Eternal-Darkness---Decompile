@@ -69,6 +69,7 @@ extern void* fn_80201BC0(void*);
 void* fn_800365C8(register void* source, register void* query)
 {
     register void* candidate;
+    register void* selected;
     register State* state;
     register void* source_transform;
     register void* linked;
@@ -80,7 +81,6 @@ void* fn_800365C8(register void* source, register void* query)
     register s32 subtype;
     register s32 path_ok;
     register u32 distance;
-    register void* selected;
     register float best_distance;
     Vec3 source_position;
     Vec3 candidate_position;
@@ -112,11 +112,9 @@ void* fn_800365C8(register void* source, register void* query)
     subtype = info != 0 ? info->subtype : 19;
     source_id = fn_80201B54(source);
 
-    if (linked != 0) {
-        void* transform = fn_80201BC8(linked);
+    {
+        void* transform = linked != 0 ? fn_80201BC8(linked) : 0;
         previous_id = transform != 0 ? fn_8011EB04(transform) : -1;
-    } else {
-        previous_id = -1;
     }
     if (linked == 0 || previous_id == 99 || previous_id == 198 || previous_id == 241) {
         return 0;
@@ -151,7 +149,7 @@ void* fn_800365C8(register void* source, register void* query)
             candidate != source &&
             (fn_80201B64(candidate) == 8 || fn_80201B64(candidate) == 9)) {
             s32 candidate_message_id = fn_80201B54(candidate);
-            if ((fn_8020123C(0xC1, source_id, candidate_message_id, 0) & 0xFFFFFFFFULL) != 0 &&
+            if ((u32)fn_8020123C(0xC1, source_id, candidate_message_id, 0) != 0 &&
                 (float)fn_80178E94(&candidate_position, &source_position) < lbl_8064E230) {
                 path_ok = fn_80036A1C(candidate, query_value, &path_value, &path_position);
                 distance = fn_80178E94(&path_position, &source_position);
@@ -163,14 +161,14 @@ void* fn_800365C8(register void* source, register void* query)
                     state->source_position = source_position;
                 } else if (path_ok != 0 && candidate_message_id == state->source_id) {
                     best_distance += lbl_8064E238;
-                    if ((float)distance < best_distance) {
+                    if (path_ok != 0 && (float)distance < best_distance) {
                         selected = candidate;
                     }
                 }
 
                 if (selected != 0) {
                     if (lbl_803003C8.mode == 5 && info != 0 && fn_800361F8(info) == 0 &&
-                        (fn_8020123C(0xC2, source_id, candidate_id, 0) & 0xFFFFFFFFULL) != 0) {
+                        (u32)fn_8020123C(0xC2, source_id, candidate_id, 0) != 0) {
                         selected = 0;
                     } else {
                         state->target_id = candidate_message_id;
