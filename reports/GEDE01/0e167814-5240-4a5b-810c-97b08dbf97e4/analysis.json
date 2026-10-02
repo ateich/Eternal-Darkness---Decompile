@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "assignment_id": "0e167814-5240-4a5b-810c-97b08dbf97e4",
+  "attempt": 6,
+  "target": "fn_80191034",
+  "preserved_commit_studied": "dde54a6debe59aa8ab9992639e4e349ccd71d852",
+  "hypothesis": "Changing the untyped entry parameter to void* and copying it to a typed u8* local could retain a distinct MWCC local number and move data to r21 while leaving the offset/token live range in r20.",
+  "experiment_patch": "eternal-darkness-decomp/reports/GEDE01/0e167814-5240-4a5b-810c-97b08dbf97e4/typed-parameter.patch",
+  "experiment_result": "The object remained 380 bytes but regressed from 98.8421% to 94.789474%; the typed copy perturbed additional register allocation rather than producing only the desired r20/r21 exchange.",
+  "decision": "Discard the bounded experiment and retain the accepted honest NonMatching C source unchanged.",
+  "source_sha256": "438eebd66bbd96be139416b42b17cb2d8f878e443e3bcc6923def02081e013e8",
+  "final_result": "Canonical and relocation-strict objdiff both measure 98.8421% at 380/380 bytes. Exactly 21 instruction rows differ, and each becomes identical by exchanging r20 and r21. All 18 actual ELF text relocations match in offset, type, target, target value, and addend.",
+  "verification_scope": "Per-function configure/build and objdiff only. Full deterministic build, legal audit, and retail DOL SHA-1 verification are intentionally deferred to the integrator as required."
+}
