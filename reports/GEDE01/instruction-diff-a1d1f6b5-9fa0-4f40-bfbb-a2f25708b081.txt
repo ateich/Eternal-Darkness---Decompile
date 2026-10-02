@@ -1,0 +1,50 @@
+--- /dev/fd/63	2026-10-02 09:48:57.995704748 -0400
++++ /dev/fd/62	2026-10-02 09:48:57.995704748 -0400
+@@ -1,5 +1,5 @@
+
+-build/GEDE01/obj/game/game_fn_801E645C.o:     file format elf32-powerpc
++build/GEDE01/src/game/game_fn_801E645C.o:     file format elf32-powerpc
+
+
+ Disassembly of section .text:
+@@ -53,30 +53,30 @@
+   a0:	38 a0 00 00 	li      r5,0
+   a4:	3b 7b 00 01 	addi    r27,r27,1
+   a8:	48 00 00 1c 	b       c4 <fn_801E645C+0xc4>
+-  ac:	1c 84 00 0a 	mulli   r4,r4,10
++  ac:	1c a5 00 0a 	mulli   r5,r5,10
+   b0:	7c 60 07 74 	extsb   r0,r3
+-  b4:	38 a5 00 01 	addi    r5,r5,1
++  b4:	38 84 00 01 	addi    r4,r4,1
+   b8:	3b 7b 00 01 	addi    r27,r27,1
+-  bc:	7c 80 22 14 	add     r4,r0,r4
+-  c0:	38 84 ff d0 	addi    r4,r4,-48
++  bc:	7c a0 2a 14 	add     r5,r0,r5
++  c0:	38 a5 ff d0 	addi    r5,r5,-48
+   c4:	88 7b 00 00 	lbz     r3,0(r27)
+   c8:	7c 60 07 74 	extsb   r0,r3
+   cc:	2c 00 00 30 	cmpwi   r0,48
+   d0:	41 80 00 14 	blt     e4 <fn_801E645C+0xe4>
+   d4:	2c 00 00 39 	cmpwi   r0,57
+   d8:	41 81 00 0c 	bgt     e4 <fn_801E645C+0xe4>
+-  dc:	2c 05 00 03 	cmpwi   r5,3
++  dc:	2c 04 00 03 	cmpwi   r4,3
+   e0:	41 80 ff cc 	blt     ac <fn_801E645C+0xac>
+-  e4:	2c 04 00 00 	cmpwi   r4,0
++  e4:	2c 05 00 00 	cmpwi   r5,0
+   e8:	41 80 00 9c 	blt     184 <fn_801E645C+0x184>
+-  ec:	2c 04 00 20 	cmpwi   r4,32
++  ec:	2c 05 00 20 	cmpwi   r5,32
+   f0:	40 80 00 94 	bge     184 <fn_801E645C+0x184>
+-  f4:	80 a0 00 00 	lwz     r5,0(0)
++  f4:	80 80 00 00 	lwz     r4,0(0)
+			f4: R_PPC_EMB_SDA21	lbl_8064D59C
+   f8:	3c 00 43 30 	lis     r0,17200
+-  fc:	38 64 00 05 	addi    r3,r4,5
++  fc:	38 65 00 05 	addi    r3,r5,5
+  100:	90 01 00 10 	stw     r0,16(r1)
+- 104:	7c 65 18 ae 	lbzx    r3,r5,r3
++ 104:	7c 64 18 ae 	lbzx    r3,r4,r3
+  108:	c8 40 00 00 	lfd     f2,0(0)
+			108: R_PPC_EMB_SDA21	lbl_80651268
+  10c:	90 61 00 14 	stw     r3,20(r1)

@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "assignment_id": "a1d1f6b5-9fa0-4f40-bfbb-a2f25708b081",
+  "attempt": 6,
+  "base_commit": "b35eb5f6d8b842d9d60954325c0b40c39517094e",
+  "target": "fn_801E645C",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-a1d1f6b5-9fa0-4f40-bfbb-a2f25708b081.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-a1d1f6b5-9fa0-4f40-bfbb-a2f25708b081-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-a1d1f6b5-9fa0-4f40-bfbb-a2f25708b081.txt",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-a1d1f6b5-9fa0-4f40-bfbb-a2f25708b081.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-retail-a1d1f6b5-9fa0-4f40-bfbb-a2f25708b081.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-candidate-a1d1f6b5-9fa0-4f40-bfbb-a2f25708b081.txt",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-a1d1f6b5-9fa0-4f40-bfbb-a2f25708b081.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 99.70588% with retail and candidate both exactly 952 bytes and 238 instructions. Existing verified constant externalization resolves all eight prior @54/@56 identity differences: both objects have 31 .rela.text entries with matching targets and zero addends. Ten instructions at offsets 0xAC, 0xB4, 0xBC, 0xC0, 0xDC, 0xE4, 0xEC, 0xF4, 0xFC, and 0x104 still exchange r4/r5 for the decimal accumulator, digit count, and following font load/index. Separately extending either variable's declaration lifetime leaves this residual unchanged. Registration remains NonMatching."
+}

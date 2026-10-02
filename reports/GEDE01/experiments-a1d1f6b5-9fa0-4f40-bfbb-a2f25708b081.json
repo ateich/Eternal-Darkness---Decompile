@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "assignment_id": "a1d1f6b5-9fa0-4f40-bfbb-a2f25708b081",
+  "attempt": 6,
+  "target": "fn_801E645C",
+  "compiler": "GC/1.3",
+  "compiler_flags": "canonical flags plus existing -use_lmw_stmw on",
+  "baseline_recovered_from": "4e3eb786a7ec947f3520bf68ab6dc727fd1d9e4f",
+  "preserved_source_shape": "952-byte explicit-outer-backedge honest C reconstruction",
+  "experiments": [
+    {
+      "variant": "existing verified constant externalization helper for @54 and @56",
+      "result": "canonical and relocation-strict score improved from 99.53782 to 99.70588; all 31 .rela.text entries now have matching target identities and zero addends"
+    },
+    {
+      "variant": "decimal accumulator number declared at function scope while digit count remained parser-local",
+      "result": "99.70588, 952 bytes; same ten r4/r5 argument mismatches"
+    },
+    {
+      "variant": "digit count declared at function scope while decimal accumulator remained parser-local",
+      "result": "99.70588, 952 bytes; same ten r4/r5 argument mismatches"
+    }
+  ],
+  "retained_variant": "original parser-local declarations because both distinct lifetime experiments generated identical code",
+  "canonical_match_percent": 99.70588,
+  "relocation_strict_match_percent": 99.70588,
+  "retail_text_bytes": 952,
+  "candidate_text_bytes": 952,
+  "retail_instructions": 238,
+  "candidate_instructions": 238,
+  "remaining_difference": "Ten instructions at offsets 0xAC, 0xB4, 0xBC, 0xC0, 0xDC, 0xE4, 0xEC, 0xF4, 0xFC, and 0x104 exchange r4/r5 for the decimal accumulator, digit count, and font descriptor load/index. Control flow, opcodes, size, and relocation targets/addends otherwise agree.",
+  "registration": "NonMatching"
+}
