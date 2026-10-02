@@ -23,6 +23,10 @@ void fn_801A7958(RegionEntry* entry, u16 count)
     char* strings = lbl_80251528;
     u8* globals = lbl_802FC5BC;
     u16 i;
+    int index;
+    int remainder;
+    u8* data;
+    RegionEntry* cursor = entry;
     Vec3 vertices[4];
     Vec3 position;
     Vec3 second;
@@ -34,11 +38,11 @@ void fn_801A7958(RegionEntry* entry, u16 count)
     u32 first_color;
     u32 second_color;
     int j;
-    for (i = 0; i < count; i++, entry++) {
-        int index = i;
-        int remainder = index % 19;
-        u8* data = entry->data;
-        switch (*(s16*)(entry->data + 0x3C)) {
+    for (i = 0; i < count; i++, cursor++) {
+        index = i;
+        remainder = index % 19;
+        data = cursor->data;
+        switch (*(s16*)(cursor->data + 0x3C)) {
         case 0:
             fn_80179B08((u8*)data + 4, &position);
             sphere_color = *(u32*)(globals + 0x2C);

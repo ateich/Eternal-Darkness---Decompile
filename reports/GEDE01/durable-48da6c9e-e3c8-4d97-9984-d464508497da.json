@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "assignment_id": "48da6c9e-e3c8-4d97-9984-d464508497da",
+  "attempt": 3,
+  "base_commit": "3c8dfe4e4f1fe7302dbf644221e9e832de2c1b7e",
+  "target": "fn_801A7958",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-48da6c9e-e3c8-4d97-9984-d464508497da.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-48da6c9e-e3c8-4d97-9984-d464508497da-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-48da6c9e-e3c8-4d97-9984-d464508497da.txt",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-command-48da6c9e-e3c8-4d97-9984-d464508497da.txt",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-strict-command-48da6c9e-e3c8-4d97-9984-d464508497da.txt",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-48da6c9e-e3c8-4d97-9984-d464508497da.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-48da6c9e-e3c8-4d97-9984-d464508497da.txt"
+  ],
+  "divergence": "Best fresh canonical and relocation-strict direct objdiff is 96.869865%: retail is 584 bytes/146 instructions while GC/1.3 with canonical -use_lmw_stmw on emits 588 bytes/147 instructions. Hoisting the loop temporaries and coalescing the entry parameter into an explicit cursor corrected the globals-base prologue ordering and improved the preserved 96.76712% attempt, but the strict aligned stream still has 123 matching rows, 19 argument mismatches, four replacements, and one insertion. Generated code still materializes lbl_80251528 through an extra pre-save addi/mr pair, colors cursor/index/remainder/loop as r24/r27/r26/r28 instead of retail r26/r28/r24/r27, schedules the first variadic-call operands differently, and targets compiler-local @29 instead of retail lbl_80650DE8 for the unsigned-conversion constant. Raw ELF tables contain 17 actual relocation records on each side; the generated insertion shifts later relocation offsets by four bytes."
+}
