@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "assignment_id": "0656be07-246f-4c54-99db-7d8af08297ec",
+  "attempt": 2,
+  "target": "fn_80031D24",
+  "compiler": "GC/1.3",
+  "cflags": "-nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma cats off -pragma warn_notinlined off -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on",
+  "commands": [
+    {"argv": ["./configure.py", "--non-matching"], "returncode": 0},
+    {"argv": [".tools/bin/ninja", "build/GEDE01/src/game/game_fn_80031D24.o"], "returncode": 0, "raw_output_file": "reports/GEDE01/build-0656be07-246f-4c54-99db-7d8af08297ec.txt"},
+    {"argv": ["build/tools/objdiff-cli", "diff", "-p", ".", "-u", "main/game/game_fn_80031D24", "fn_80031D24", "-o", "reports/GEDE01/objdiff-canonical-0656be07-246f-4c54-99db-7d8af08297ec.json", "--format", "json-pretty"], "returncode": 0},
+    {"argv": ["build/tools/objdiff-cli", "diff", "-p", ".", "-u", "main/game/game_fn_80031D24", "fn_80031D24", "-o", "reports/GEDE01/objdiff-0656be07-246f-4c54-99db-7d8af08297ec.json", "--format", "json-pretty", "-c", "function_reloc_diffs=name_address"], "returncode": 0}
+  ],
+  "canonical": {
+    "retail_size": 704,
+    "generated_size": 704,
+    "retail_instruction_count": 176,
+    "generated_instruction_count": 176,
+    "match_percent": 97.72727
+  },
+  "relocation_strict": {
+    "retail_relocation_count": 31,
+    "generated_relocation_count": 31,
+    "equal_site_type_target_addend": 29,
+    "moved_relocations": [
+      {"type": "R_PPC_EMB_SDA21", "target": "lbl_80651924", "addend": 0, "retail_site": "0x3c", "generated_site": "0x08"},
+      {"type": "R_PPC_EMB_SDA21", "target": "lbl_80651928", "addend": 0, "retail_site": "0x40", "generated_site": "0x10"}
+    ],
+    "match_percent": 97.72727
+  },
+  "object_sha256": {
+    "retail": "787b9ab57d6dabe8b572d980bf6c30ca39425cee63ff35de9bb32d0a26319979",
+    "generated": "d2d5a56f23e4b16af1357ce429e46fa96e466cbdfd5cd4b474308c7616021b95"
+  },
+  "scope": "Assigned-object build and direct canonical/relocation-strict comparison only; full deterministic relink, legal audit, and retail DOL SHA-1 verification are deferred to integrator review as required."
+}
