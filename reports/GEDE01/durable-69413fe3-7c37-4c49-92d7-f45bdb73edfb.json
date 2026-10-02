@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "assignment_id": "69413fe3-7c37-4c49-92d7-f45bdb73edfb",
+  "attempt": 7,
+  "base_commit": "f866e208b741013635f55b559181200c2dcb268c",
+  "target": "fn_800A78E0",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-69413fe3-7c37-4c49-92d7-f45bdb73edfb.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-69413fe3-7c37-4c49-92d7-f45bdb73edfb-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-69413fe3-7c37-4c49-92d7-f45bdb73edfb.txt",
+    "eternal-darkness-decomp/reports/GEDE01/instructions-69413fe3-7c37-4c49-92d7-f45bdb73edfb.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-69413fe3-7c37-4c49-92d7-f45bdb73edfb.txt",
+    "eternal-darkness-decomp/reports/GEDE01/disassembly-69413fe3-7c37-4c49-92d7-f45bdb73edfb.txt",
+    "eternal-darkness-decomp/reports/GEDE01/probe-69413fe3-7c37-4c49-92d7-f45bdb73edfb.txt",
+    "eternal-darkness-decomp/reports/GEDE01/verification-69413fe3-7c37-4c49-92d7-f45bdb73edfb.json",
+    "eternal-darkness-decomp/reports/GEDE01/verify-69413fe3-7c37-4c49-92d7-f45bdb73edfb.py"
+  ],
+  "divergence": "The bounded three-element unsigned-32-bit integer-address retry generated addi r6,r1,0x4 but reordered two initialization stores after the indexed load, so it was rejected and the verified size-exact best candidate was preserved. Canonical and relocation-strict objdiff both measure 99.95918%. Exactly four instructions differ: candidate stores at stack offsets 0xC, 0x10, and 0x14 instead of retail 0x8, 0xC, and 0x10, and candidate forms the indexed base with addi r6,r1,0x8 instead of retail addi r6,r1,0x4. All 10 relocation offsets, types, resolved targets, and addends agree. Registration remains NonMatching."
+}

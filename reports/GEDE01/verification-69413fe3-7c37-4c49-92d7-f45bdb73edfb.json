@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "assignment_id": "69413fe3-7c37-4c49-92d7-f45bdb73edfb",
+  "attempt": 7,
+  "scope": "assigned object only; full deterministic build, legal audit, and DOL SHA-1 are deferred to integrator review",
+  "source_sha256": "9be45f57aabe2969a0117cb15f9f0df7ada0b6a06c0f4fea1ca281ceb76c33e0",
+  "compiler_policy": "unchanged canonical GC/1.3 flags with existing -use_lmw_stmw on; registration remains NonMatching",
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "configure.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        ".tools/bin/ninja",
+        "build/GEDE01/src/game/game_fn_800A78E0.o"
+      ],
+      "exit_code": 0,
+      "stdout": "ninja: no work to do.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_800A78E0",
+        "-o",
+        "reports/GEDE01/objdiff-69413fe3-7c37-4c49-92d7-f45bdb73edfb.json",
+        "--format",
+        "json-pretty",
+        "fn_800A78E0"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": " INFO Writing to reports/GEDE01/objdiff-69413fe3-7c37-4c49-92d7-f45bdb73edfb.json\n"
+    },
+    {
+      "argv": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_800A78E0",
+        "-c",
+        "function_reloc_diffs=all",
+        "-o",
+        "reports/GEDE01/objdiff-69413fe3-7c37-4c49-92d7-f45bdb73edfb-reloc-strict.json",
+        "--format",
+        "json-pretty",
+        "fn_800A78E0"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": " INFO Writing to reports/GEDE01/objdiff-69413fe3-7c37-4c49-92d7-f45bdb73edfb-reloc-strict.json\n"
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/fndiff.py",
+        "game/game_fn_800A78E0.c",
+        "fn_800A78E0"
+      ],
+      "exit_code": 0,
+      "stdout": "target 392 bytes  base 392 bytes  match 99.95918\n  0x0000  stwu r1, -0x30(r1)                                   | stwu r1, -0x30(r1)\n  0x0004  mflr r0                                              | mflr r0\n  0x0008  lis r7, lbl_8023975C@ha [None+0 t6]                  | lis r7, lbl_8023975C@ha [None+0 t6]\n  0x000c  stw r0, 0x34(r1)                                     | stw r0, 0x34(r1)\n  0x0010  stw r31, 0x2c(r1)                                    | stw r31, 0x2c(r1)\n  0x0014  stw r30, 0x28(r1)                                    | stw r30, 0x28(r1)\n  0x0018  mr r30, r5                                           | mr r30, r5\n  0x001c  stw r29, 0x24(r1)                                    | stw r29, 0x24(r1)\n  0x0020  mr r29, r3                                           | mr r29, r3\n  0x0024  lwzu r9, lbl_8023975C@l(r7) [None+0 t4]              | lwzu r9, lbl_8023975C@l(r7) [None+0 t4]\n  0x0028  lbz r6, 0x42(r4)                                     | lbz r6, 0x42(r4)\n  0x002c  lwz r8, 0x4(r7)                                      | lwz r8, 0x4(r7)\n  0x0030  lwz r7, 0x8(r7)                                      | lwz r7, 0x8(r7)\n  0x0034  extsb r6, r6                                         | extsb r6, r6\n  0x0038  lwz r0, lbl_8064B81C@sda21 [None+0 t109]             | lwz r0, lbl_8064B81C@sda21 [None+0 t109]\n* 0x003c  stw r9, 0x8(r1)                                      | stw r9, 0xc(r1)\n  0x0040  cmpwi r0, 0x0                                        | cmpwi r0, 0x0\n  0x0044  slwi r0, r6, 2                                       | slwi r0, r6, 2\n* 0x0048  stw r8, 0xc(r1)                                      | stw r8, 0x10(r1)\n* 0x004c  addi r6, r1, 0x4                                     | addi r6, r1, 0x8\n* 0x0050  stw r7, 0x10(r1)                                     | stw r7, 0x14(r1)\n  0x0054  lwzx r31, r6, r0                                     | lwzx r31, r6, r0\n  0x0058  bne 0x7c                                             | bne 0x7c\n  0x005c  li r3, 0x0                                           | li r3, 0x0\n  0x0060  li r0, 0xc8                                          | li r0, 0xc8\n  0x0064  stw r3, 0x0(r4)                                      | stw r3, 0x0(r4)\n  0x0068  lwz r3, 0x8(r4)                                      | lwz r3, 0x8(r4)\n  0x006c  cmpwi r3, 0xc8                                       | cmpwi r3, 0xc8\n  0x0070  blt 0x78                                             | blt 0x78\n  0x0074  mr r0, r3                                            | mr r0, r3\n  0x0078  stw r0, 0x8(r4)                                      | stw r0, 0x8(r4)\n  0x007c  lwz r0, 0x0(r4)                                      | lwz r0, 0x0(r4)\n  0x0080  cmpwi r0, 0x500                                      | cmpwi r0, 0x500\n  0x0084  beq 0xbc                                             | beq 0xbc\n  0x0088  bge 0xa4                                             | bge 0xa4\n  0x008c  cmpwi r0, 0x410                                      | cmpwi r0, 0x410\n  0x0090  beq 0xf4                                             | beq 0xf4\n  0x0094  bge 0x168                                            | bge 0x168\n  0x0098  cmpwi r0, 0x300                                      | cmpwi r0, 0x300\n  0x009c  beq 0x128                                            | beq 0x128\n  0x00a0  b 0x168                                              | b 0x168\n  0x00a4  cmpwi r0, 0x1010                                     | cmpwi r0, 0x1010\n  0x00a8  beq 0xd8                                             | beq 0xd8\n  0x00ac  bge 0x168                                            | bge 0x168\n  0x00b0  cmpwi r0, 0x810                                      | cmpwi r0, 0x810\n  0x00b4  beq 0x144                                            | beq 0x144\n  0x00b8  b 0x168                                              | b 0x168\n  0x00bc  mr r3, r29                                           | mr r3, r29\n  0x00c0  mr r5, r31                                           | mr r5, r31\n  0x00c4  li r4, 0x500                                         | li r4, 0x500\n  0x00c8  li r6, 0x0                                           | li r6, 0x0\n  0x00cc  li r7, 0x0                                           | li r7, 0x0\n  0x00d0  bl fn_800CA6DC [None+0 t10]                          | bl fn_800CA6DC [None+0 t10]\n  0x00d4  b 0x16c                                              | b 0x16c\n  0x00d8  mr r3, r29                                           | mr r3, r29\n  0x00dc  mr r5, r31                                           | mr r5, r31\n  0x00e0  mr r6, r30                                           | mr r6, r30\n  0x00e4  li r4, 0x1010                                        | li r4, 0x1010\n  0x00e8  li r7, 0x0                                           | li r7, 0x0\n  0x00ec  bl fn_800CA6DC [None+0 t10]                          | bl fn_800CA6DC [None+0 t10]\n  0x00f0  b 0x16c                                              | b 0x16c\n  0x00f4  mr r3, r29                                           | mr r3, r29\n  0x00f8  bl fn_800CD84C [None+0 t10]                          | bl fn_800CD84C [None+0 t10]\n  0x00fc  cmpwi r3, 0x3                                        | cmpwi r3, 0x3\n  0x0100  bge 0x120                                            | bge 0x120\n  0x0104  mr r3, r29                                           | mr r3, r29\n  0x0108  mr r5, r31                                           | mr r5, r31\n  0x010c  li r4, 0x410                                         | li r4, 0x410\n  0x0110  li r6, 0x0                                           | li r6, 0x0\n  0x0114  li r7, 0x0                                           | li r7, 0x0\n  0x0118  bl fn_800CA6DC [None+0 t10]                          | bl fn_800CA6DC [None+0 t10]\n  0x011c  b 0x16c                                              | b 0x16c\n  0x0120  li r3, 0x0                                           | li r3, 0x0\n  0x0124  b 0x16c                                              | b 0x16c\n  0x0128  mr r3, r29                                           | mr r3, r29\n  0x012c  mr r5, r31                                           | mr r5, r31\n  0x0130  mr r6, r30                                           | mr r6, r30\n  0x0134  li r4, 0x300                                         | li r4, 0x300\n  0x0138  li r7, 0x0                                           | li r7, 0x0\n  0x013c  bl fn_800CA6DC [None+0 t10]                          | bl fn_800CA6DC [None+0 t10]\n  0x0140  b 0x16c                                              | b 0x16c\n  0x0144  mr r3, r30                                           | mr r3, r30\n  0x0148  bl fn_800A7860 [None+0 t10]                          | bl fn_800A7860 [None+0 t10]\n  0x014c  mr r5, r3                                            | mr r5, r3\n  0x0150  mr r3, r29                                           | mr r3, r29\n  0x0154  mr r6, r30                                           | mr r6, r30\n  0x0158  li r4, 0x810                                         | li r4, 0x810\n  0x015c  li r7, 0x0                                           | li r7, 0x0\n  0x0160  bl fn_800CA6DC [None+0 t10]                          | bl fn_800CA6DC [None+0 t10]\n  0x0164  b 0x16c                                              | b 0x16c\n  0x0168  li r3, 0x0                                           | li r3, 0x0\n  0x016c  lwz r0, 0x34(r1)                                     | lwz r0, 0x34(r1)\n  0x0170  lwz r31, 0x2c(r1)                                    | lwz r31, 0x2c(r1)\n  0x0174  lwz r30, 0x28(r1)                                    | lwz r30, 0x28(r1)\n  0x0178  lwz r29, 0x24(r1)                                    | lwz r29, 0x24(r1)\n  0x017c  mtlr r0                                              | mtlr r0\n  0x0180  addi r1, r1, 0x30                                    | addi r1, r1, 0x30\n  0x0184  blr                                                  | blr\n",
+      "stderr": " INFO Writing to /home/rabbit/src/darkfoundry-new/.darkfoundry/durable/assignments/69413fe3-7c37-4c49-92d7-f45bdb73edfb/eternal-darkness-decomp/build/GEDE01/fndiff_fn_800A78E0.json\n"
+    },
+    {
+      "argv": [
+        "build/binutils/powerpc-eabi-readelf",
+        "-Wr",
+        "build/GEDE01/obj/game/game_fn_800A78E0.o"
+      ],
+      "exit_code": 0,
+      "stdout": "\nRelocation section '.rela.text' at offset 0x1c8 contains 10 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n0000000a  00000406 R_PPC_ADDR16_HA        00000000   lbl_8023975C + 0\n00000026  00000404 R_PPC_ADDR16_LO        00000000   lbl_8023975C + 0\n00000038  0000056d R_PPC_EMB_SDA21        00000000   lbl_8064B81C + 0\n000000d0  0000060a R_PPC_REL24            00000000   fn_800CA6DC + 0\n000000ec  0000060a R_PPC_REL24            00000000   fn_800CA6DC + 0\n000000f8  0000070a R_PPC_REL24            00000000   fn_800CD84C + 0\n00000118  0000060a R_PPC_REL24            00000000   fn_800CA6DC + 0\n0000013c  0000060a R_PPC_REL24            00000000   fn_800CA6DC + 0\n00000148  0000080a R_PPC_REL24            00000000   fn_800A7860 + 0\n00000160  0000060a R_PPC_REL24            00000000   fn_800CA6DC + 0\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "build/binutils/powerpc-eabi-objdump",
+        "-dr",
+        "build/GEDE01/obj/game/game_fn_800A78E0.o"
+      ],
+      "exit_code": 0,
+      "stdout": "\nbuild/GEDE01/obj/game/game_fn_800A78E0.o:     file format elf32-powerpc\n\n\nDisassembly of section .text:\n\n00000000 <fn_800A78E0>:\n   0:\t94 21 ff d0 \tstwu    r1,-48(r1)\n   4:\t7c 08 02 a6 \tmflr    r0\n   8:\t3c e0 00 00 \tlis     r7,0\n\t\t\ta: R_PPC_ADDR16_HA\tlbl_8023975C\n   c:\t90 01 00 34 \tstw     r0,52(r1)\n  10:\t93 e1 00 2c \tstw     r31,44(r1)\n  14:\t93 c1 00 28 \tstw     r30,40(r1)\n  18:\t7c be 2b 78 \tmr      r30,r5\n  1c:\t93 a1 00 24 \tstw     r29,36(r1)\n  20:\t7c 7d 1b 78 \tmr      r29,r3\n  24:\t85 27 00 00 \tlwzu    r9,0(r7)\n\t\t\t26: R_PPC_ADDR16_LO\tlbl_8023975C\n  28:\t88 c4 00 42 \tlbz     r6,66(r4)\n  2c:\t81 07 00 04 \tlwz     r8,4(r7)\n  30:\t80 e7 00 08 \tlwz     r7,8(r7)\n  34:\t7c c6 07 74 \textsb   r6,r6\n  38:\t80 00 00 00 \tlwz     r0,0(0)\n\t\t\t38: R_PPC_EMB_SDA21\tlbl_8064B81C\n  3c:\t91 21 00 08 \tstw     r9,8(r1)\n  40:\t2c 00 00 00 \tcmpwi   r0,0\n  44:\t54 c0 10 3a \tslwi    r0,r6,2\n  48:\t91 01 00 0c \tstw     r8,12(r1)\n  4c:\t38 c1 00 04 \taddi    r6,r1,4\n  50:\t90 e1 00 10 \tstw     r7,16(r1)\n  54:\t7f e6 00 2e \tlwzx    r31,r6,r0\n  58:\t40 82 00 24 \tbne     7c <fn_800A78E0+0x7c>\n  5c:\t38 60 00 00 \tli      r3,0\n  60:\t38 00 00 c8 \tli      r0,200\n  64:\t90 64 00 00 \tstw     r3,0(r4)\n  68:\t80 64 00 08 \tlwz     r3,8(r4)\n  6c:\t2c 03 00 c8 \tcmpwi   r3,200\n  70:\t41 80 00 08 \tblt     78 <fn_800A78E0+0x78>\n  74:\t7c 60 1b 78 \tmr      r0,r3\n  78:\t90 04 00 08 \tstw     r0,8(r4)\n  7c:\t80 04 00 00 \tlwz     r0,0(r4)\n  80:\t2c 00 05 00 \tcmpwi   r0,1280\n  84:\t41 82 00 38 \tbeq     bc <fn_800A78E0+0xbc>\n  88:\t40 80 00 1c \tbge     a4 <fn_800A78E0+0xa4>\n  8c:\t2c 00 04 10 \tcmpwi   r0,1040\n  90:\t41 82 00 64 \tbeq     f4 <fn_800A78E0+0xf4>\n  94:\t40 80 00 d4 \tbge     168 <fn_800A78E0+0x168>\n  98:\t2c 00 03 00 \tcmpwi   r0,768\n  9c:\t41 82 00 8c \tbeq     128 <fn_800A78E0+0x128>\n  a0:\t48 00 00 c8 \tb       168 <fn_800A78E0+0x168>\n  a4:\t2c 00 10 10 \tcmpwi   r0,4112\n  a8:\t41 82 00 30 \tbeq     d8 <fn_800A78E0+0xd8>\n  ac:\t40 80 00 bc \tbge     168 <fn_800A78E0+0x168>\n  b0:\t2c 00 08 10 \tcmpwi   r0,2064\n  b4:\t41 82 00 90 \tbeq     144 <fn_800A78E0+0x144>\n  b8:\t48 00 00 b0 \tb       168 <fn_800A78E0+0x168>\n  bc:\t7f a3 eb 78 \tmr      r3,r29\n  c0:\t7f e5 fb 78 \tmr      r5,r31\n  c4:\t38 80 05 00 \tli      r4,1280\n  c8:\t38 c0 00 00 \tli      r6,0\n  cc:\t38 e0 00 00 \tli      r7,0\n  d0:\t48 00 00 01 \tbl      d0 <fn_800A78E0+0xd0>\n\t\t\td0: R_PPC_REL24\tfn_800CA6DC\n  d4:\t48 00 00 98 \tb       16c <fn_800A78E0+0x16c>\n  d8:\t7f a3 eb 78 \tmr      r3,r29\n  dc:\t7f e5 fb 78 \tmr      r5,r31\n  e0:\t7f c6 f3 78 \tmr      r6,r30\n  e4:\t38 80 10 10 \tli      r4,4112\n  e8:\t38 e0 00 00 \tli      r7,0\n  ec:\t48 00 00 01 \tbl      ec <fn_800A78E0+0xec>\n\t\t\tec: R_PPC_REL24\tfn_800CA6DC\n  f0:\t48 00 00 7c \tb       16c <fn_800A78E0+0x16c>\n  f4:\t7f a3 eb 78 \tmr      r3,r29\n  f8:\t48 00 00 01 \tbl      f8 <fn_800A78E0+0xf8>\n\t\t\tf8: R_PPC_REL24\tfn_800CD84C\n  fc:\t2c 03 00 03 \tcmpwi   r3,3\n 100:\t40 80 00 20 \tbge     120 <fn_800A78E0+0x120>\n 104:\t7f a3 eb 78 \tmr      r3,r29\n 108:\t7f e5 fb 78 \tmr      r5,r31\n 10c:\t38 80 04 10 \tli      r4,1040\n 110:\t38 c0 00 00 \tli      r6,0\n 114:\t38 e0 00 00 \tli      r7,0\n 118:\t48 00 00 01 \tbl      118 <fn_800A78E0+0x118>\n\t\t\t118: R_PPC_REL24\tfn_800CA6DC\n 11c:\t48 00 00 50 \tb       16c <fn_800A78E0+0x16c>\n 120:\t38 60 00 00 \tli      r3,0\n 124:\t48 00 00 48 \tb       16c <fn_800A78E0+0x16c>\n 128:\t7f a3 eb 78 \tmr      r3,r29\n 12c:\t7f e5 fb 78 \tmr      r5,r31\n 130:\t7f c6 f3 78 \tmr      r6,r30\n 134:\t38 80 03 00 \tli      r4,768\n 138:\t38 e0 00 00 \tli      r7,0\n 13c:\t48 00 00 01 \tbl      13c <fn_800A78E0+0x13c>\n\t\t\t13c: R_PPC_REL24\tfn_800CA6DC\n 140:\t48 00 00 2c \tb       16c <fn_800A78E0+0x16c>\n 144:\t7f c3 f3 78 \tmr      r3,r30\n 148:\t48 00 00 01 \tbl      148 <fn_800A78E0+0x148>\n\t\t\t148: R_PPC_REL24\tfn_800A7860\n 14c:\t7c 65 1b 78 \tmr      r5,r3\n 150:\t7f a3 eb 78 \tmr      r3,r29\n 154:\t7f c6 f3 78 \tmr      r6,r30\n 158:\t38 80 08 10 \tli      r4,2064\n 15c:\t38 e0 00 00 \tli      r7,0\n 160:\t48 00 00 01 \tbl      160 <fn_800A78E0+0x160>\n\t\t\t160: R_PPC_REL24\tfn_800CA6DC\n 164:\t48 00 00 08 \tb       16c <fn_800A78E0+0x16c>\n 168:\t38 60 00 00 \tli      r3,0\n 16c:\t80 01 00 34 \tlwz     r0,52(r1)\n 170:\t83 e1 00 2c \tlwz     r31,44(r1)\n 174:\t83 c1 00 28 \tlwz     r30,40(r1)\n 178:\t83 a1 00 24 \tlwz     r29,36(r1)\n 17c:\t7c 08 03 a6 \tmtlr    r0\n 180:\t38 21 00 30 \taddi    r1,r1,48\n 184:\t4e 80 00 20 \tblr\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "build/binutils/powerpc-eabi-readelf",
+        "-Wr",
+        "build/GEDE01/src/game/game_fn_800A78E0.o"
+      ],
+      "exit_code": 0,
+      "stdout": "\nRelocation section '.rela.text' at offset 0x1bc contains 10 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n0000000a  00000306 R_PPC_ADDR16_HA        00000000   lbl_8023975C + 0\n00000026  00000304 R_PPC_ADDR16_LO        00000000   lbl_8023975C + 0\n00000038  0000046d R_PPC_EMB_SDA21        00000000   lbl_8064B81C + 0\n000000d0  0000050a R_PPC_REL24            00000000   fn_800CA6DC + 0\n000000ec  0000050a R_PPC_REL24            00000000   fn_800CA6DC + 0\n000000f8  0000060a R_PPC_REL24            00000000   fn_800CD84C + 0\n00000118  0000050a R_PPC_REL24            00000000   fn_800CA6DC + 0\n0000013c  0000050a R_PPC_REL24            00000000   fn_800CA6DC + 0\n00000148  0000070a R_PPC_REL24            00000000   fn_800A7860 + 0\n00000160  0000050a R_PPC_REL24            00000000   fn_800CA6DC + 0\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "build/binutils/powerpc-eabi-objdump",
+        "-dr",
+        "build/GEDE01/src/game/game_fn_800A78E0.o"
+      ],
+      "exit_code": 0,
+      "stdout": "\nbuild/GEDE01/src/game/game_fn_800A78E0.o:     file format elf32-powerpc\n\n\nDisassembly of section .text:\n\n00000000 <fn_800A78E0>:\n   0:\t94 21 ff d0 \tstwu    r1,-48(r1)\n   4:\t7c 08 02 a6 \tmflr    r0\n   8:\t3c e0 00 00 \tlis     r7,0\n\t\t\ta: R_PPC_ADDR16_HA\tlbl_8023975C\n   c:\t90 01 00 34 \tstw     r0,52(r1)\n  10:\t93 e1 00 2c \tstw     r31,44(r1)\n  14:\t93 c1 00 28 \tstw     r30,40(r1)\n  18:\t7c be 2b 78 \tmr      r30,r5\n  1c:\t93 a1 00 24 \tstw     r29,36(r1)\n  20:\t7c 7d 1b 78 \tmr      r29,r3\n  24:\t85 27 00 00 \tlwzu    r9,0(r7)\n\t\t\t26: R_PPC_ADDR16_LO\tlbl_8023975C\n  28:\t88 c4 00 42 \tlbz     r6,66(r4)\n  2c:\t81 07 00 04 \tlwz     r8,4(r7)\n  30:\t80 e7 00 08 \tlwz     r7,8(r7)\n  34:\t7c c6 07 74 \textsb   r6,r6\n  38:\t80 00 00 00 \tlwz     r0,0(0)\n\t\t\t38: R_PPC_EMB_SDA21\tlbl_8064B81C\n  3c:\t91 21 00 0c \tstw     r9,12(r1)\n  40:\t2c 00 00 00 \tcmpwi   r0,0\n  44:\t54 c0 10 3a \tslwi    r0,r6,2\n  48:\t91 01 00 10 \tstw     r8,16(r1)\n  4c:\t38 c1 00 08 \taddi    r6,r1,8\n  50:\t90 e1 00 14 \tstw     r7,20(r1)\n  54:\t7f e6 00 2e \tlwzx    r31,r6,r0\n  58:\t40 82 00 24 \tbne     7c <fn_800A78E0+0x7c>\n  5c:\t38 60 00 00 \tli      r3,0\n  60:\t38 00 00 c8 \tli      r0,200\n  64:\t90 64 00 00 \tstw     r3,0(r4)\n  68:\t80 64 00 08 \tlwz     r3,8(r4)\n  6c:\t2c 03 00 c8 \tcmpwi   r3,200\n  70:\t41 80 00 08 \tblt     78 <fn_800A78E0+0x78>\n  74:\t7c 60 1b 78 \tmr      r0,r3\n  78:\t90 04 00 08 \tstw     r0,8(r4)\n  7c:\t80 04 00 00 \tlwz     r0,0(r4)\n  80:\t2c 00 05 00 \tcmpwi   r0,1280\n  84:\t41 82 00 38 \tbeq     bc <fn_800A78E0+0xbc>\n  88:\t40 80 00 1c \tbge     a4 <fn_800A78E0+0xa4>\n  8c:\t2c 00 04 10 \tcmpwi   r0,1040\n  90:\t41 82 00 64 \tbeq     f4 <fn_800A78E0+0xf4>\n  94:\t40 80 00 d4 \tbge     168 <fn_800A78E0+0x168>\n  98:\t2c 00 03 00 \tcmpwi   r0,768\n  9c:\t41 82 00 8c \tbeq     128 <fn_800A78E0+0x128>\n  a0:\t48 00 00 c8 \tb       168 <fn_800A78E0+0x168>\n  a4:\t2c 00 10 10 \tcmpwi   r0,4112\n  a8:\t41 82 00 30 \tbeq     d8 <fn_800A78E0+0xd8>\n  ac:\t40 80 00 bc \tbge     168 <fn_800A78E0+0x168>\n  b0:\t2c 00 08 10 \tcmpwi   r0,2064\n  b4:\t41 82 00 90 \tbeq     144 <fn_800A78E0+0x144>\n  b8:\t48 00 00 b0 \tb       168 <fn_800A78E0+0x168>\n  bc:\t7f a3 eb 78 \tmr      r3,r29\n  c0:\t7f e5 fb 78 \tmr      r5,r31\n  c4:\t38 80 05 00 \tli      r4,1280\n  c8:\t38 c0 00 00 \tli      r6,0\n  cc:\t38 e0 00 00 \tli      r7,0\n  d0:\t48 00 00 01 \tbl      d0 <fn_800A78E0+0xd0>\n\t\t\td0: R_PPC_REL24\tfn_800CA6DC\n  d4:\t48 00 00 98 \tb       16c <fn_800A78E0+0x16c>\n  d8:\t7f a3 eb 78 \tmr      r3,r29\n  dc:\t7f e5 fb 78 \tmr      r5,r31\n  e0:\t7f c6 f3 78 \tmr      r6,r30\n  e4:\t38 80 10 10 \tli      r4,4112\n  e8:\t38 e0 00 00 \tli      r7,0\n  ec:\t48 00 00 01 \tbl      ec <fn_800A78E0+0xec>\n\t\t\tec: R_PPC_REL24\tfn_800CA6DC\n  f0:\t48 00 00 7c \tb       16c <fn_800A78E0+0x16c>\n  f4:\t7f a3 eb 78 \tmr      r3,r29\n  f8:\t48 00 00 01 \tbl      f8 <fn_800A78E0+0xf8>\n\t\t\tf8: R_PPC_REL24\tfn_800CD84C\n  fc:\t2c 03 00 03 \tcmpwi   r3,3\n 100:\t40 80 00 20 \tbge     120 <fn_800A78E0+0x120>\n 104:\t7f a3 eb 78 \tmr      r3,r29\n 108:\t7f e5 fb 78 \tmr      r5,r31\n 10c:\t38 80 04 10 \tli      r4,1040\n 110:\t38 c0 00 00 \tli      r6,0\n 114:\t38 e0 00 00 \tli      r7,0\n 118:\t48 00 00 01 \tbl      118 <fn_800A78E0+0x118>\n\t\t\t118: R_PPC_REL24\tfn_800CA6DC\n 11c:\t48 00 00 50 \tb       16c <fn_800A78E0+0x16c>\n 120:\t38 60 00 00 \tli      r3,0\n 124:\t48 00 00 48 \tb       16c <fn_800A78E0+0x16c>\n 128:\t7f a3 eb 78 \tmr      r3,r29\n 12c:\t7f e5 fb 78 \tmr      r5,r31\n 130:\t7f c6 f3 78 \tmr      r6,r30\n 134:\t38 80 03 00 \tli      r4,768\n 138:\t38 e0 00 00 \tli      r7,0\n 13c:\t48 00 00 01 \tbl      13c <fn_800A78E0+0x13c>\n\t\t\t13c: R_PPC_REL24\tfn_800CA6DC\n 140:\t48 00 00 2c \tb       16c <fn_800A78E0+0x16c>\n 144:\t7f c3 f3 78 \tmr      r3,r30\n 148:\t48 00 00 01 \tbl      148 <fn_800A78E0+0x148>\n\t\t\t148: R_PPC_REL24\tfn_800A7860\n 14c:\t7c 65 1b 78 \tmr      r5,r3\n 150:\t7f a3 eb 78 \tmr      r3,r29\n 154:\t7f c6 f3 78 \tmr      r6,r30\n 158:\t38 80 08 10 \tli      r4,2064\n 15c:\t38 e0 00 00 \tli      r7,0\n 160:\t48 00 00 01 \tbl      160 <fn_800A78E0+0x160>\n\t\t\t160: R_PPC_REL24\tfn_800CA6DC\n 164:\t48 00 00 08 \tb       16c <fn_800A78E0+0x16c>\n 168:\t38 60 00 00 \tli      r3,0\n 16c:\t80 01 00 34 \tlwz     r0,52(r1)\n 170:\t83 e1 00 2c \tlwz     r31,44(r1)\n 174:\t83 c1 00 28 \tlwz     r30,40(r1)\n 178:\t83 a1 00 24 \tlwz     r29,36(r1)\n 17c:\t7c 08 03 a6 \tmtlr    r0\n 180:\t38 21 00 30 \taddi    r1,r1,48\n 184:\t4e 80 00 20 \tblr\n",
+      "stderr": ""
+    }
+  ]
+}
