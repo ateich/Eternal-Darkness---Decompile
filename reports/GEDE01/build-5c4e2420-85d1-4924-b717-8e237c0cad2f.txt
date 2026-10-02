@@ -1,0 +1,2107 @@
+
+EXPERIMENT baseline
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-baseline.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-baseline.json
+EXIT: 0
+
+EXPERIMENT reuse_amount
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+                amount = state[0x4B];
+
+                if (amount < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] = amount + step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-reuse_amount.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-reuse_amount.json
+EXIT: 0
+
+EXPERIMENT signed_step
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    s32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-signed_step.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-signed_step.json
+EXIT: 0
+
+EXPERIMENT unsigned_difference
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    u32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > (s32)difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-unsigned_difference.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-unsigned_difference.json
+EXIT: 0
+
+EXPERIMENT explicit_zero
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+    s32 zero = 0;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(zero > difference ? zero : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-explicit_zero.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-explicit_zero.json
+EXIT: 0
+
+EXPERIMENT inline_max
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+static inline s32 clamp(s32 a, s32 b) { return a > b ? a : b; }
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(clamp(0, difference))) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_max.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_max.json
+EXIT: 0
+
+EXPERIMENT inline_max_swapped
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+static inline s32 clamp(s32 b, s32 a) { return a > b ? a : b; }
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(clamp(difference, 0))) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_max_swapped.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_max_swapped.json
+EXIT: 0
+
+EXPERIMENT inline_clamp
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+static inline s32 clamp(s32 value) { return 0 > value ? 0 : value; }
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(clamp(difference))) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_clamp.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_clamp.json
+EXIT: 0
+
+EXPERIMENT inline_u8_clamp
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+static inline u8 clamp(s32 value) { return (u8)(0 > value ? 0 : value); }
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(clamp(difference))) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_u8_clamp.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_u8_clamp.json
+EXIT: 0
+
+EXPERIMENT register_amount
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    register u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-register_amount.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-register_amount.json
+EXIT: 0
+
+EXPERIMENT register_difference
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    register s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-register_difference.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-register_difference.json
+EXIT: 0
+
+EXPERIMENT nested_difference
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                s32 difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-nested_difference.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-nested_difference.json
+EXIT: 0
+
+EXPERIMENT u8_step
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u8 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-u8_step.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-u8_step.json
+EXIT: 0
+
+EXPERIMENT u8_step_unsigned_compare
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u8 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > (u32)step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-u8_step_unsigned_compare.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-u8_step_unsigned_compare.json
+EXIT: 0
+
+EXPERIMENT u32_target
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u32 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-u32_target.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-u32_target.json
+EXIT: 0
+
+EXPERIMENT u32_amount
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u32 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = (u8)(amount != 0 ? amount : state[0x27]);
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-u32_amount.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-u32_amount.json
+EXIT: 0
+
+EXPERIMENT long_difference
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    long difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-long_difference.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-long_difference.json
+EXIT: 0
+
+EXPERIMENT long_clamp_zero
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0L > difference ? 0L : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-long_clamp_zero.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-long_clamp_zero.json
+EXIT: 0
+
+EXPERIMENT reuse_amount_both_branches
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+                amount = state[0x4B];
+
+                if (amount < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] = amount + step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                amount = state[0x4B];
+                if (amount > step) {
+                    state[0x4B] = amount - step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-reuse_amount_both_branches.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-reuse_amount_both_branches.json
+EXIT: 0
+
+EXPERIMENT increasing_unsigned
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    u32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if ((s32)increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-increasing_unsigned.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-increasing_unsigned.json
+EXIT: 0
+
+EXPERIMENT complete_unsigned
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    u32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-complete_unsigned.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-complete_unsigned.json
+EXIT: 0
+
+EXPERIMENT difference_decl_first
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    s32 difference;
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-difference_decl_first.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-difference_decl_first.json
+EXIT: 0
+
+EXPERIMENT difference_decl_after_step
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 complete = 1;
+    u32 step;
+    s32 difference;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-difference_decl_after_step.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-difference_decl_after_step.json
+EXIT: 0
+
+EXPERIMENT step_decl_first
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u32 step;
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-step_decl_first.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-step_decl_first.json
+EXIT: 0
+
+EXPERIMENT inline_compare
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+static inline s32 less(u8 current, s32 difference) { return current < (u8)(0 > difference ? 0 : difference); }
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (less(state[0x4B], difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_compare.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_compare.json
+EXIT: 0
+
+EXPERIMENT inline_compare_swapped
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+static inline s32 less(s32 difference, u8 current) { return current < (u8)(0 > difference ? 0 : difference); }
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (less(difference, state[0x4B])) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_compare_swapped.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_compare_swapped.json
+EXIT: 0
+
+EXPERIMENT inline_compare_wide
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+static inline s32 less(u32 current, s32 difference) { return current < (u8)(0 > difference ? 0 : difference); }
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (less(state[0x4B], difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_compare_wide.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_compare_wide.json
+EXIT: 0
+
+EXPERIMENT comparison_comma_amount
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if ((amount = state[0x4B]) < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] = amount + step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-comparison_comma_amount.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-comparison_comma_amount.json
+EXIT: 0
+
+EXPERIMENT reuse_amount_rhs
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (amount = (u8)(0 > difference ? 0 : difference))) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-reuse_amount_rhs.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-reuse_amount_rhs.json
+EXIT: 0
+
+EXPERIMENT difference_clamped_in_place
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                difference = 0 > difference ? 0 : difference;
+                if (state[0x4B] < (u8)difference) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-difference_clamped_in_place.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-difference_clamped_in_place.json
+EXIT: 0
+
+EXPERIMENT initial_amount_assignment
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount;
+    s32 increasing;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    amount = state[0x26];
+    increasing = amount != 0;
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-initial_amount_assignment.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-initial_amount_assignment.json
+EXIT: 0
+
+EXPERIMENT initial_step_assignment
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    if (amount != 0) {
+        step = amount;
+    } else {
+        step = state[0x27];
+    }
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-initial_step_assignment.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-initial_step_assignment.json
+EXIT: 0
+
+EXPERIMENT eliminate_initial_amount
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    s32 increasing = state[0x26] != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = state[0x26] != 0 ? state[0x26] : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-eliminate_initial_amount.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-eliminate_initial_amount.json
+EXIT: 0
+
+EXPERIMENT replace_amount_with_current
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 current;
+    s32 increasing = state[0x26] != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = state[0x26] != 0 ? state[0x26] : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+                current = state[0x4B];
+
+                if (current < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] = current + step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-replace_amount_with_current.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-replace_amount_with_current.json
+EXIT: 0
+
+EXPERIMENT replace_amount_with_current_wide
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u32 current;
+    s32 increasing = state[0x26] != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = state[0x26] != 0 ? state[0x26] : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+                current = state[0x4B];
+
+                if (current < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] = current + step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-replace_amount_with_current_wide.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-replace_amount_with_current_wide.json
+EXIT: 0
+
+EXPERIMENT initial_amount_conditional_assignment
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount;
+    s32 increasing = state[0x26] != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = (amount = state[0x26]) != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-initial_amount_conditional_assignment.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-initial_amount_conditional_assignment.json
+EXIT: 0
+
+EXPERIMENT loop_not_equal
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i != 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-loop_not_equal.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-loop_not_equal.json
+EXIT: 0
+
+EXPERIMENT loop_do_while
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    i = 11;
+    do {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+        state += 0x24;
+    } while (--i != 0);
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-loop_do_while.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-loop_do_while.json
+EXIT: 0
+
+EXPERIMENT unsigned_current_comparison
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if ((u32)state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-unsigned_current_comparison.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-unsigned_current_comparison.json
+EXIT: 0
+
+EXPERIMENT u8_step_update
+SOURCE:
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+
+s32 fn_80032A5C(u8* state)
+{
+    u8 amount = state[0x26];
+    s32 increasing = amount != 0;
+    u8 target;
+    s32 difference;
+    s32 complete = 1;
+    u32 step;
+    s32 i;
+
+    step = amount != 0 ? amount : state[0x27];
+
+    for (i = 0; i < 11; i++, state += 0x24) {
+        target = state[0x47];
+
+        if (target != 0) {
+            if (increasing) {
+                difference = target - step;
+
+                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                    state[0x4B] += (u8)step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = target;
+                }
+            } else {
+                if (state[0x4B] > step) {
+                    state[0x4B] -= step;
+                    complete = 0;
+                } else {
+                    state[0x4B] = 0;
+                }
+            }
+        }
+    }
+
+    return complete;
+}
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-u8_step_update.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-u8_step_update.json
+EXIT: 0

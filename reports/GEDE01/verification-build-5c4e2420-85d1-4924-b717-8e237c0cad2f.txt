@@ -1,0 +1,339 @@
+COMMAND: python3 configure.py --version GEDE01 --non-matching --no-progress
+EXIT: 0
+COMMAND: build/tools/objdiff-cli --version
+objdiff-cli 3.6.1
+EXIT: 0
+COMMAND: sha256sum compilers/GC/1.3/mwcceppc.exe
+4e502c38465500d4fda8d966b268151a6c74c730508e3d9b7efd23d1a6083715  compilers/GC/1.3/mwcceppc.exe
+EXIT: 0
+
+EXPERIMENT: baseline
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-baseline.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-baseline.json
+EXIT: 0
+
+EXPERIMENT: reuse_amount
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-reuse_amount.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-reuse_amount.json
+EXIT: 0
+
+EXPERIMENT: signed_step
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-signed_step.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-signed_step.json
+EXIT: 0
+
+EXPERIMENT: unsigned_difference
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-unsigned_difference.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-unsigned_difference.json
+EXIT: 0
+
+EXPERIMENT: explicit_zero
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-explicit_zero.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-explicit_zero.json
+EXIT: 0
+
+EXPERIMENT: inline_max
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_max.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_max.json
+EXIT: 0
+
+EXPERIMENT: inline_max_swapped
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_max_swapped.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_max_swapped.json
+EXIT: 0
+
+EXPERIMENT: inline_clamp
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_clamp.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_clamp.json
+EXIT: 0
+
+EXPERIMENT: inline_u8_clamp
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_u8_clamp.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_u8_clamp.json
+EXIT: 0
+
+EXPERIMENT: register_amount
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-register_amount.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-register_amount.json
+EXIT: 0
+
+EXPERIMENT: register_difference
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-register_difference.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-register_difference.json
+EXIT: 0
+
+EXPERIMENT: nested_difference
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-nested_difference.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-nested_difference.json
+EXIT: 0
+
+EXPERIMENT: u8_step
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-u8_step.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-u8_step.json
+EXIT: 0
+
+EXPERIMENT: u8_step_unsigned_compare
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-u8_step_unsigned_compare.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-u8_step_unsigned_compare.json
+EXIT: 0
+
+EXPERIMENT: u32_target
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-u32_target.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-u32_target.json
+EXIT: 0
+
+EXPERIMENT: u32_amount
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-u32_amount.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-u32_amount.json
+EXIT: 0
+
+EXPERIMENT: long_difference
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-long_difference.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-long_difference.json
+EXIT: 0
+
+EXPERIMENT: long_clamp_zero
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-long_clamp_zero.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-long_clamp_zero.json
+EXIT: 0
+
+EXPERIMENT: reuse_amount_both_branches
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-reuse_amount_both_branches.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-reuse_amount_both_branches.json
+EXIT: 0
+
+EXPERIMENT: increasing_unsigned
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-increasing_unsigned.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-increasing_unsigned.json
+EXIT: 0
+
+EXPERIMENT: complete_unsigned
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-complete_unsigned.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-complete_unsigned.json
+EXIT: 0
+
+EXPERIMENT: difference_decl_first
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-difference_decl_first.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-difference_decl_first.json
+EXIT: 0
+
+EXPERIMENT: difference_decl_after_step
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-difference_decl_after_step.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-difference_decl_after_step.json
+EXIT: 0
+
+EXPERIMENT: step_decl_first
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-step_decl_first.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-step_decl_first.json
+EXIT: 0
+
+EXPERIMENT: inline_compare
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_compare.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_compare.json
+EXIT: 0
+
+EXPERIMENT: inline_compare_swapped
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_compare_swapped.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_compare_swapped.json
+EXIT: 0
+
+EXPERIMENT: inline_compare_wide
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_compare_wide.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-inline_compare_wide.json
+EXIT: 0
+
+EXPERIMENT: comparison_comma_amount
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-comparison_comma_amount.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-comparison_comma_amount.json
+EXIT: 0
+
+EXPERIMENT: reuse_amount_rhs
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-reuse_amount_rhs.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-reuse_amount_rhs.json
+EXIT: 0
+
+EXPERIMENT: difference_clamped_in_place
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-difference_clamped_in_place.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-difference_clamped_in_place.json
+EXIT: 0
+
+EXPERIMENT: initial_amount_assignment
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-initial_amount_assignment.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-initial_amount_assignment.json
+EXIT: 0
+
+EXPERIMENT: initial_step_assignment
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-initial_step_assignment.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-initial_step_assignment.json
+EXIT: 0
+
+EXPERIMENT: eliminate_initial_amount
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-eliminate_initial_amount.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-eliminate_initial_amount.json
+EXIT: 0
+
+EXPERIMENT: replace_amount_with_current
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-replace_amount_with_current.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-replace_amount_with_current.json
+EXIT: 0
+
+EXPERIMENT: replace_amount_with_current_wide
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-replace_amount_with_current_wide.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-replace_amount_with_current_wide.json
+EXIT: 0
+
+EXPERIMENT: initial_amount_conditional_assignment
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-initial_amount_conditional_assignment.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-initial_amount_conditional_assignment.json
+EXIT: 0
+
+EXPERIMENT: loop_not_equal
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-loop_not_equal.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-loop_not_equal.json
+EXIT: 0
+
+EXPERIMENT: loop_do_while
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-loop_do_while.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-loop_do_while.json
+EXIT: 0
+
+EXPERIMENT: unsigned_current_comparison
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-unsigned_current_comparison.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-unsigned_current_comparison.json
+EXIT: 0
+
+EXPERIMENT: u8_step_update
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-u8_step_update.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-u8_step_update.json
+EXIT: 0
+
+FINAL RESTORED BASELINE
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80032A5C.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80032A5C.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80032A5C.d build/GEDE01/src/game/game_fn_80032A5C.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f.json --format json
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f.json
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80032A5C fn_80032A5C -o reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-reloc-strict.json --format json -c function_reloc_diffs=name_address
+ INFO Writing to reports/GEDE01/objdiff-5c4e2420-85d1-4924-b717-8e237c0cad2f-reloc-strict.json
+EXIT: 0

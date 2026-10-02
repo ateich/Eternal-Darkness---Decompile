@@ -1,0 +1,2210 @@
+COMMAND: build/binutils/powerpc-eabi-objdump -dr build/GEDE01/obj/game/game_fn_80032A5C.o
+
+build/GEDE01/obj/game/game_fn_80032A5C.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <fn_80032A5C>:
+   0:	88 83 00 26 	lbz     r4,38(r3)
+   4:	39 20 00 01 	li      r9,1
+   8:	7c 04 00 d0 	neg     r0,r4
+   c:	28 04 00 00 	cmplwi  r4,0
+  10:	7c 00 23 78 	or      r0,r0,r4
+  14:	54 06 0f fe 	srwi    r6,r0,31
+  18:	41 82 00 08 	beq     20 <fn_80032A5C+0x20>
+  1c:	48 00 00 08 	b       24 <fn_80032A5C+0x24>
+  20:	88 83 00 27 	lbz     r4,39(r3)
+  24:	38 00 00 0b 	li      r0,11
+  28:	54 8a 06 3e 	clrlwi  r10,r4,24
+  2c:	7c 09 03 a6 	mtctr   r0
+  30:	88 e3 00 47 	lbz     r7,71(r3)
+  34:	28 07 00 00 	cmplwi  r7,0
+  38:	41 82 00 74 	beq     ac <fn_80032A5C+0xac>
+  3c:	2c 06 00 00 	cmpwi   r6,0
+  40:	41 82 00 48 	beq     88 <fn_80032A5C+0x88>
+  44:	7d 0a 38 50 	subf    r8,r10,r7
+  48:	38 a0 00 00 	li      r5,0
+  4c:	7c 05 40 10 	subfc   r0,r5,r8
+  50:	88 83 00 4b 	lbz     r4,75(r3)
+  54:	54 a5 0f fe 	srwi    r5,r5,31
+  58:	55 00 0f fe 	srwi    r0,r8,31
+  5c:	7c 00 29 10 	subfe   r0,r0,r5
+  60:	7d 00 00 78 	andc    r0,r8,r0
+  64:	54 00 06 3e 	clrlwi  r0,r0,24
+  68:	7c 04 00 40 	cmplw   r4,r0
+  6c:	40 80 00 14 	bge     80 <fn_80032A5C+0x80>
+  70:	7c 04 52 14 	add     r0,r4,r10
+  74:	39 20 00 00 	li      r9,0
+  78:	98 03 00 4b 	stb     r0,75(r3)
+  7c:	48 00 00 30 	b       ac <fn_80032A5C+0xac>
+  80:	98 e3 00 4b 	stb     r7,75(r3)
+  84:	48 00 00 28 	b       ac <fn_80032A5C+0xac>
+  88:	88 03 00 4b 	lbz     r0,75(r3)
+  8c:	7c 00 50 40 	cmplw   r0,r10
+  90:	40 81 00 14 	ble     a4 <fn_80032A5C+0xa4>
+  94:	7c 0a 00 50 	subf    r0,r10,r0
+  98:	39 20 00 00 	li      r9,0
+  9c:	98 03 00 4b 	stb     r0,75(r3)
+  a0:	48 00 00 0c 	b       ac <fn_80032A5C+0xac>
+  a4:	38 00 00 00 	li      r0,0
+  a8:	98 03 00 4b 	stb     r0,75(r3)
+  ac:	38 63 00 24 	addi    r3,r3,36
+  b0:	42 00 ff 80 	bdnz    30 <fn_80032A5C+0x30>
+  b4:	7d 23 4b 78 	mr      r3,r9
+  b8:	4e 80 00 20 	blr
+EXIT: 0
+COMMAND: build/binutils/powerpc-eabi-objdump -dr build/GEDE01/src/game/game_fn_80032A5C.o
+
+build/GEDE01/src/game/game_fn_80032A5C.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <fn_80032A5C>:
+   0:	88 83 00 26 	lbz     r4,38(r3)
+   4:	39 20 00 01 	li      r9,1
+   8:	7c 04 00 d0 	neg     r0,r4
+   c:	28 04 00 00 	cmplwi  r4,0
+  10:	7c 00 23 78 	or      r0,r0,r4
+  14:	54 06 0f fe 	srwi    r6,r0,31
+  18:	41 82 00 08 	beq     20 <fn_80032A5C+0x20>
+  1c:	48 00 00 08 	b       24 <fn_80032A5C+0x24>
+  20:	88 83 00 27 	lbz     r4,39(r3)
+  24:	38 00 00 0b 	li      r0,11
+  28:	54 8a 06 3e 	clrlwi  r10,r4,24
+  2c:	7c 09 03 a6 	mtctr   r0
+  30:	88 e3 00 47 	lbz     r7,71(r3)
+  34:	28 07 00 00 	cmplwi  r7,0
+  38:	41 82 00 74 	beq     ac <fn_80032A5C+0xac>
+  3c:	2c 06 00 00 	cmpwi   r6,0
+  40:	41 82 00 48 	beq     88 <fn_80032A5C+0x88>
+  44:	7d 0a 38 50 	subf    r8,r10,r7
+  48:	38 80 00 00 	li      r4,0
+  4c:	7c 04 40 10 	subfc   r0,r4,r8
+  50:	88 a3 00 4b 	lbz     r5,75(r3)
+  54:	54 84 0f fe 	srwi    r4,r4,31
+  58:	55 00 0f fe 	srwi    r0,r8,31
+  5c:	7c 00 21 10 	subfe   r0,r0,r4
+  60:	7d 00 00 78 	andc    r0,r8,r0
+  64:	54 00 06 3e 	clrlwi  r0,r0,24
+  68:	7c 05 00 40 	cmplw   r5,r0
+  6c:	40 80 00 14 	bge     80 <fn_80032A5C+0x80>
+  70:	7c 05 52 14 	add     r0,r5,r10
+  74:	39 20 00 00 	li      r9,0
+  78:	98 03 00 4b 	stb     r0,75(r3)
+  7c:	48 00 00 30 	b       ac <fn_80032A5C+0xac>
+  80:	98 e3 00 4b 	stb     r7,75(r3)
+  84:	48 00 00 28 	b       ac <fn_80032A5C+0xac>
+  88:	88 03 00 4b 	lbz     r0,75(r3)
+  8c:	7c 00 50 40 	cmplw   r0,r10
+  90:	40 81 00 14 	ble     a4 <fn_80032A5C+0xa4>
+  94:	7c 0a 00 50 	subf    r0,r10,r0
+  98:	39 20 00 00 	li      r9,0
+  9c:	98 03 00 4b 	stb     r0,75(r3)
+  a0:	48 00 00 0c 	b       ac <fn_80032A5C+0xac>
+  a4:	38 00 00 00 	li      r0,0
+  a8:	98 03 00 4b 	stb     r0,75(r3)
+  ac:	38 63 00 24 	addi    r3,r3,36
+  b0:	42 00 ff 80 	bdnz    30 <fn_80032A5C+0x30>
+  b4:	7d 23 4b 78 	mr      r3,r9
+  b8:	4e 80 00 20 	blr
+EXIT: 0
+
+EXPERIMENT: baseline
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: reuse_amount
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: signed_step
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=97.87234
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+* 008c  cmplw r0, r10                        | 008c  cmpw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: unsigned_difference
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: explicit_zero
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: inline_max
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: inline_max_swapped
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: inline_clamp
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: inline_u8_clamp
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: register_amount
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: register_difference
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: nested_difference
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=97.76596
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+* 0004  li r9, 0x1                           | 0004  li r8, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+* 0028  clrlwi r10, r4, 24                   | 0028  clrlwi r9, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+* 0044  subf r8, r10, r7                     | 0044  subf r10, r9, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r10
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+* 0058  srwi r0, r8, 31                      | 0058  srwi r0, r10, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+* 0060  andc r0, r8, r0                      | 0060  andc r0, r10, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r9
+* 0074  li r9, 0x0                           | 0074  li r8, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+* 008c  cmplw r0, r10                        | 008c  cmplw r0, r9
+  0090  ble 0xa4                             | 0090  ble 0xa4
+* 0094  subf r0, r10, r0                     | 0094  subf r0, r9, r0
+* 0098  li r9, 0x0                           | 0098  li r8, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+* 00b4  mr r3, r9                            | 00b4  mr r3, r8
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: u8_step
+Retail target | compiled C candidate
+target size=188 candidate size=196 score=92.34042
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+* 0004  li r9, 0x1                           | 0004  li r11, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+* 0014  srwi r6, r0, 31                      | 0014  srwi r8, r0, 31
+* 0018  beq 0x20                             | 0018  beq 0x24
+*                                            | 001c  mr r6, r4
+* 001c  b 0x24                               | 0020  b 0x28
+* 0020  lbz r4, 0x27(r3)                     | 0024  lbz r6, 0x27(r3)
+  0024  li r0, 0xb                           | 0028  li r0, 0xb
+* 0028  clrlwi r10, r4, 24                   | 002c  clrlwi r7, r6, 24
+  002c  mtctr r0                             | 0030  mtctr r0
+* 0030  lbz r7, 0x47(r3)                     | 0034  lbz r9, 0x47(r3)
+* 0034  cmplwi r7, 0x0                       | 0038  cmplwi r9, 0x0
+* 0038  beq 0xac                             | 003c  beq 0xb4
+* 003c  cmpwi r6, 0x0                        | 0040  cmpwi r8, 0x0
+* 0040  beq 0x88                             | 0044  beq 0x8c
+* 0044  subf r8, r10, r7                     | 0048  subf r10, r7, r9
+* 0048  li r5, 0x0                           | 004c  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 0050  subfc r0, r4, r10
+* 0050  lbz r4, 0x4b(r3)                     | 0054  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0058  srwi r4, r4, 31
+* 0058  srwi r0, r8, 31                      | 005c  srwi r0, r10, 31
+* 005c  subfe r0, r0, r5                     | 0060  subfe r0, r0, r4
+* 0060  andc r0, r8, r0                      | 0064  andc r0, r10, r0
+  0064  clrlwi r0, r0, 24                    | 0068  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 006c  cmplw r5, r0
+* 006c  bge 0x80                             | 0070  bge 0x84
+* 0070  add r0, r4, r10                      | 0074  add r0, r5, r6
+* 0074  li r9, 0x0                           | 0078  li r11, 0x0
+  0078  stb r0, 0x4b(r3)                     | 007c  stb r0, 0x4b(r3)
+* 007c  b 0xac                               | 0080  b 0xb4
+* 0080  stb r7, 0x4b(r3)                     | 0084  stb r9, 0x4b(r3)
+* 0084  b 0xac                               | 0088  b 0xb4
+* 0088  lbz r0, 0x4b(r3)                     | 008c  lbz r4, 0x4b(r3)
+*                                            | 0090  clrlwi r0, r6, 24
+* 008c  cmplw r0, r10                        | 0094  cmplw r4, r0
+* 0090  ble 0xa4                             | 0098  ble 0xac
+* 0094  subf r0, r10, r0                     | 009c  subf r0, r6, r4
+* 0098  li r9, 0x0                           | 00a0  li r11, 0x0
+  009c  stb r0, 0x4b(r3)                     | 00a4  stb r0, 0x4b(r3)
+* 00a0  b 0xac                               | 00a8  b 0xb4
+  00a4  li r0, 0x0                           | 00ac  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00b0  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00b4  addi r3, r3, 0x24
+* 00b0  bdnz 0x30                            | 00b8  bdnz 0x34
+* 00b4  mr r3, r9                            | 00bc  mr r3, r11
+  00b8  blr                                  | 00c0  blr
+
+EXPERIMENT: u8_step_unsigned_compare
+Retail target | compiled C candidate
+target size=188 candidate size=192 score=94.78723
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+* 0004  li r9, 0x1                           | 0004  li r11, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+* 0014  srwi r6, r0, 31                      | 0014  srwi r8, r0, 31
+* 0018  beq 0x20                             | 0018  beq 0x24
+*                                            | 001c  mr r6, r4
+* 001c  b 0x24                               | 0020  b 0x28
+* 0020  lbz r4, 0x27(r3)                     | 0024  lbz r6, 0x27(r3)
+  0024  li r0, 0xb                           | 0028  li r0, 0xb
+* 0028  clrlwi r10, r4, 24                   | 002c  clrlwi r7, r6, 24
+  002c  mtctr r0                             | 0030  mtctr r0
+* 0030  lbz r7, 0x47(r3)                     | 0034  lbz r9, 0x47(r3)
+* 0034  cmplwi r7, 0x0                       | 0038  cmplwi r9, 0x0
+* 0038  beq 0xac                             | 003c  beq 0xb0
+* 003c  cmpwi r6, 0x0                        | 0040  cmpwi r8, 0x0
+* 0040  beq 0x88                             | 0044  beq 0x8c
+* 0044  subf r8, r10, r7                     | 0048  subf r10, r7, r9
+* 0048  li r5, 0x0                           | 004c  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 0050  subfc r0, r4, r10
+* 0050  lbz r4, 0x4b(r3)                     | 0054  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0058  srwi r4, r4, 31
+* 0058  srwi r0, r8, 31                      | 005c  srwi r0, r10, 31
+* 005c  subfe r0, r0, r5                     | 0060  subfe r0, r0, r4
+* 0060  andc r0, r8, r0                      | 0064  andc r0, r10, r0
+  0064  clrlwi r0, r0, 24                    | 0068  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 006c  cmplw r5, r0
+* 006c  bge 0x80                             | 0070  bge 0x84
+* 0070  add r0, r4, r10                      | 0074  add r0, r5, r6
+* 0074  li r9, 0x0                           | 0078  li r11, 0x0
+  0078  stb r0, 0x4b(r3)                     | 007c  stb r0, 0x4b(r3)
+* 007c  b 0xac                               | 0080  b 0xb0
+* 0080  stb r7, 0x4b(r3)                     | 0084  stb r9, 0x4b(r3)
+* 0084  b 0xac                               | 0088  b 0xb0
+  0088  lbz r0, 0x4b(r3)                     | 008c  lbz r0, 0x4b(r3)
+* 008c  cmplw r0, r10                        | 0090  cmplw r0, r7
+* 0090  ble 0xa4                             | 0094  ble 0xa8
+* 0094  subf r0, r10, r0                     | 0098  subf r0, r6, r0
+* 0098  li r9, 0x0                           | 009c  li r11, 0x0
+  009c  stb r0, 0x4b(r3)                     | 00a0  stb r0, 0x4b(r3)
+* 00a0  b 0xac                               | 00a4  b 0xb0
+  00a4  li r0, 0x0                           | 00a8  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00ac  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00b0  addi r3, r3, 0x24
+* 00b0  bdnz 0x30                            | 00b4  bdnz 0x34
+* 00b4  mr r3, r9                            | 00b8  mr r3, r11
+  00b8  blr                                  | 00bc  blr
+
+EXPERIMENT: u32_target
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: u32_amount
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=97.12766
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+* 0004  li r9, 0x1                           | 0004  li r10, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+* 0014  srwi r6, r0, 31                      | 0014  srwi r7, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+* 0028  clrlwi r10, r4, 24                   | 0028  clrlwi r6, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+* 0030  lbz r7, 0x47(r3)                     | 0030  lbz r8, 0x47(r3)
+* 0034  cmplwi r7, 0x0                       | 0034  cmplwi r8, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+* 003c  cmpwi r6, 0x0                        | 003c  cmpwi r7, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+* 0044  subf r8, r10, r7                     | 0044  subf r9, r6, r8
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r9
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+* 0058  srwi r0, r8, 31                      | 0058  srwi r0, r9, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+* 0060  andc r0, r8, r0                      | 0060  andc r0, r9, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r6
+* 0074  li r9, 0x0                           | 0074  li r10, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+* 0080  stb r7, 0x4b(r3)                     | 0080  stb r8, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+* 008c  cmplw r0, r10                        | 008c  cmplw r0, r6
+  0090  ble 0xa4                             | 0090  ble 0xa4
+* 0094  subf r0, r10, r0                     | 0094  subf r0, r6, r0
+* 0098  li r9, 0x0                           | 0098  li r10, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+* 00b4  mr r3, r9                            | 00b4  mr r3, r10
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: long_difference
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: long_clamp_zero
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: reuse_amount_both_branches
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: increasing_unsigned
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=97.87234
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+* 003c  cmpwi r6, 0x0                        | 003c  cmplwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: complete_unsigned
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: difference_decl_first
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=98.085106
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+* 0014  srwi r6, r0, 31                      | 0014  srwi r7, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+* 0030  lbz r7, 0x47(r3)                     | 0030  lbz r8, 0x47(r3)
+* 0034  cmplwi r7, 0x0                       | 0034  cmplwi r8, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+* 003c  cmpwi r6, 0x0                        | 003c  cmpwi r7, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+* 0044  subf r8, r10, r7                     | 0044  subf r6, r10, r8
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r6
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+* 0058  srwi r0, r8, 31                      | 0058  srwi r0, r6, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+* 0060  andc r0, r8, r0                      | 0060  andc r0, r6, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+* 0080  stb r7, 0x4b(r3)                     | 0080  stb r8, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: difference_decl_after_step
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=97.76596
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+* 0004  li r9, 0x1                           | 0004  li r8, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+* 0028  clrlwi r10, r4, 24                   | 0028  clrlwi r9, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+* 0044  subf r8, r10, r7                     | 0044  subf r10, r9, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r10
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+* 0058  srwi r0, r8, 31                      | 0058  srwi r0, r10, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+* 0060  andc r0, r8, r0                      | 0060  andc r0, r10, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r9
+* 0074  li r9, 0x0                           | 0074  li r8, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+* 008c  cmplw r0, r10                        | 008c  cmplw r0, r9
+  0090  ble 0xa4                             | 0090  ble 0xa4
+* 0094  subf r0, r10, r0                     | 0094  subf r0, r9, r0
+* 0098  li r9, 0x0                           | 0098  li r8, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+* 00b4  mr r3, r9                            | 00b4  mr r3, r8
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: step_decl_first
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=97.12766
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+* 0004  li r9, 0x1                           | 0004  li r10, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+* 0014  srwi r6, r0, 31                      | 0014  srwi r7, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+* 0028  clrlwi r10, r4, 24                   | 0028  clrlwi r6, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+* 0030  lbz r7, 0x47(r3)                     | 0030  lbz r8, 0x47(r3)
+* 0034  cmplwi r7, 0x0                       | 0034  cmplwi r8, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+* 003c  cmpwi r6, 0x0                        | 003c  cmpwi r7, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+* 0044  subf r8, r10, r7                     | 0044  subf r9, r6, r8
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r9
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+* 0058  srwi r0, r8, 31                      | 0058  srwi r0, r9, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+* 0060  andc r0, r8, r0                      | 0060  andc r0, r9, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r6
+* 0074  li r9, 0x0                           | 0074  li r10, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+* 0080  stb r7, 0x4b(r3)                     | 0080  stb r8, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+* 008c  cmplw r0, r10                        | 008c  cmplw r0, r6
+  0090  ble 0xa4                             | 0090  ble 0xa4
+* 0094  subf r0, r10, r0                     | 0094  subf r0, r6, r0
+* 0098  li r9, 0x0                           | 0098  li r10, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+* 00b4  mr r3, r9                            | 00b4  mr r3, r10
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: inline_compare
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: inline_compare_swapped
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: inline_compare_wide
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: comparison_comma_amount
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: reuse_amount_rhs
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: difference_clamped_in_place
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: initial_amount_assignment
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: initial_step_assignment
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=94.78723
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+* 0018  beq 0x20                             | 0018  beq 0x24
+*                                            | 001c  mr r10, r4
+* 001c  b 0x24                               | 0020  b 0x28
+* 0020  lbz r4, 0x27(r3)                     | 0024  lbz r10, 0x27(r3)
+  0024  li r0, 0xb                           | 0028  li r0, 0xb
+* 0028  clrlwi r10, r4, 24                   |
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: eliminate_initial_amount
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: replace_amount_with_current
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: replace_amount_with_current_wide
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: initial_amount_conditional_assignment
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: loop_not_equal
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: loop_do_while
+Retail target | compiled C candidate
+target size=188 candidate size=192 score=88.19149
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+* 0018  beq 0x20                             | 0018  beq 0x24
+*                                            | 001c  mr r0, r4
+* 001c  b 0x24                               | 0020  b 0x28
+* 0020  lbz r4, 0x27(r3)                     | 0024  lbz r0, 0x27(r3)
+*                                            | 0028  clrlwi r10, r0, 24
+* 0024  li r0, 0xb                           | 002c  li r11, 0xb
+* 0028  clrlwi r10, r4, 24                   |
+* 002c  mtctr r0                             |
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+*                                            | 00ac  subic. r11, r11, 0x1
+  00ac  addi r3, r3, 0x24                    | 00b0  addi r3, r3, 0x24
+* 00b0  bdnz 0x30                            | 00b4  bne 0x30
+  00b4  mr r3, r9                            | 00b8  mr r3, r9
+  00b8  blr                                  | 00bc  blr
+
+EXPERIMENT: unsigned_current_comparison
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: u8_step_update
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
+
+EXPERIMENT: final restored baseline
+Retail target | compiled C candidate
+target size=188 candidate size=188 score=99.14893
+  0000  lbz r4, 0x26(r3)                     | 0000  lbz r4, 0x26(r3)
+  0004  li r9, 0x1                           | 0004  li r9, 0x1
+  0008  neg r0, r4                           | 0008  neg r0, r4
+  000c  cmplwi r4, 0x0                       | 000c  cmplwi r4, 0x0
+  0010  or r0, r0, r4                        | 0010  or r0, r0, r4
+  0014  srwi r6, r0, 31                      | 0014  srwi r6, r0, 31
+  0018  beq 0x20                             | 0018  beq 0x20
+  001c  b 0x24                               | 001c  b 0x24
+  0020  lbz r4, 0x27(r3)                     | 0020  lbz r4, 0x27(r3)
+  0024  li r0, 0xb                           | 0024  li r0, 0xb
+  0028  clrlwi r10, r4, 24                   | 0028  clrlwi r10, r4, 24
+  002c  mtctr r0                             | 002c  mtctr r0
+  0030  lbz r7, 0x47(r3)                     | 0030  lbz r7, 0x47(r3)
+  0034  cmplwi r7, 0x0                       | 0034  cmplwi r7, 0x0
+  0038  beq 0xac                             | 0038  beq 0xac
+  003c  cmpwi r6, 0x0                        | 003c  cmpwi r6, 0x0
+  0040  beq 0x88                             | 0040  beq 0x88
+  0044  subf r8, r10, r7                     | 0044  subf r8, r10, r7
+* 0048  li r5, 0x0                           | 0048  li r4, 0x0
+* 004c  subfc r0, r5, r8                     | 004c  subfc r0, r4, r8
+* 0050  lbz r4, 0x4b(r3)                     | 0050  lbz r5, 0x4b(r3)
+* 0054  srwi r5, r5, 31                      | 0054  srwi r4, r4, 31
+  0058  srwi r0, r8, 31                      | 0058  srwi r0, r8, 31
+* 005c  subfe r0, r0, r5                     | 005c  subfe r0, r0, r4
+  0060  andc r0, r8, r0                      | 0060  andc r0, r8, r0
+  0064  clrlwi r0, r0, 24                    | 0064  clrlwi r0, r0, 24
+* 0068  cmplw r4, r0                         | 0068  cmplw r5, r0
+  006c  bge 0x80                             | 006c  bge 0x80
+* 0070  add r0, r4, r10                      | 0070  add r0, r5, r10
+  0074  li r9, 0x0                           | 0074  li r9, 0x0
+  0078  stb r0, 0x4b(r3)                     | 0078  stb r0, 0x4b(r3)
+  007c  b 0xac                               | 007c  b 0xac
+  0080  stb r7, 0x4b(r3)                     | 0080  stb r7, 0x4b(r3)
+  0084  b 0xac                               | 0084  b 0xac
+  0088  lbz r0, 0x4b(r3)                     | 0088  lbz r0, 0x4b(r3)
+  008c  cmplw r0, r10                        | 008c  cmplw r0, r10
+  0090  ble 0xa4                             | 0090  ble 0xa4
+  0094  subf r0, r10, r0                     | 0094  subf r0, r10, r0
+  0098  li r9, 0x0                           | 0098  li r9, 0x0
+  009c  stb r0, 0x4b(r3)                     | 009c  stb r0, 0x4b(r3)
+  00a0  b 0xac                               | 00a0  b 0xac
+  00a4  li r0, 0x0                           | 00a4  li r0, 0x0
+  00a8  stb r0, 0x4b(r3)                     | 00a8  stb r0, 0x4b(r3)
+  00ac  addi r3, r3, 0x24                    | 00ac  addi r3, r3, 0x24
+  00b0  bdnz 0x30                            | 00b0  bdnz 0x30
+  00b4  mr r3, r9                            | 00b4  mr r3, r9
+  00b8  blr                                  | 00b8  blr
