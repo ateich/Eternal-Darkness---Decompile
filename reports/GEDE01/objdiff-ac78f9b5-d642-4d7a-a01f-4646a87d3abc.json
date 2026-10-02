@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "assignment_id": "ac78f9b5-d642-4d7a-a01f-4646a87d3abc",
+  "attempt": 7,
+  "target": "fn_80088E44",
+  "compiler": "GC/1.3",
+  "registration": "NonMatching",
+  "measurements": {
+    "retained_canonical": {
+      "match_percent": 99.87755,
+      "retail_size": 196,
+      "candidate_size": 196,
+      "raw_file": "eternal-darkness-decomp/reports/GEDE01/objdiff-ac78f9b5-d642-4d7a-a01f-4646a87d3abc-canonical.raw.json",
+      "raw_sha256": "8ca8748c91c76c28627fffe48abde02d88d357f4ea68c3caa5c205f84ec4cce3"
+    },
+    "retained_relocation_strict": {
+      "match_percent": 99.87755,
+      "retail_size": 196,
+      "candidate_size": 196,
+      "raw_file": "eternal-darkness-decomp/reports/GEDE01/objdiff-ac78f9b5-d642-4d7a-a01f-4646a87d3abc-relocation-strict.raw.json",
+      "raw_sha256": "8ca8748c91c76c28627fffe48abde02d88d357f4ea68c3caa5c205f84ec4cce3"
+    },
+    "nested_callback_state_trial": {
+      "match_percent": 93.20408,
+      "retail_size": 196,
+      "candidate_size": 196,
+      "canonical_raw_file": "eternal-darkness-decomp/reports/GEDE01/objdiff-ac78f9b5-d642-4d7a-a01f-4646a87d3abc-trial.raw.json",
+      "relocation_strict_raw_file": "eternal-darkness-decomp/reports/GEDE01/objdiff-ac78f9b5-d642-4d7a-a01f-4646a87d3abc-trial-relocation-strict.raw.json",
+      "raw_sha256": "a5ba3748a029d6465bf0a4fd889adcc457d3e4731e977d42b57c4d60ce1c72f4"
+    }
+  },
+  "differing_instruction_rows": [
+    {
+      "offset": "0x44",
+      "retail": "addi r0,r3,0x20",
+      "candidate": "addi r0,r3,0x60",
+      "retail_encoding": "38030020",
+      "candidate_encoding": "38030060"
+    },
+    {
+      "offset": "0x4c",
+      "retail": "lhzx r0,r25,r0",
+      "candidate": "lhzx r0,r31,r0",
+      "retail_encoding": "7c19022e",
+      "candidate_encoding": "7c1f022e"
+    }
+  ],
+  "relocations": {
+    "status": "targets and addends align",
+    "retail_file": "eternal-darkness-decomp/reports/GEDE01/relocations-ac78f9b5-d642-4d7a-a01f-4646a87d3abc-retail.txt",
+    "candidate_file": "eternal-darkness-decomp/reports/GEDE01/relocations-ac78f9b5-d642-4d7a-a01f-4646a87d3abc-candidate.txt",
+    "trial_retail_file": "eternal-darkness-decomp/reports/GEDE01/relocations-ac78f9b5-d642-4d7a-a01f-4646a87d3abc-trial-retail.txt",
+    "trial_candidate_file": "eternal-darkness-decomp/reports/GEDE01/relocations-ac78f9b5-d642-4d7a-a01f-4646a87d3abc-trial-candidate.txt"
+  },
+  "instruction_diff": {
+    "retained_file": "eternal-darkness-decomp/reports/GEDE01/fndiff-ac78f9b5-d642-4d7a-a01f-4646a87d3abc.txt",
+    "trial_file": "eternal-darkness-decomp/reports/GEDE01/fndiff-ac78f9b5-d642-4d7a-a01f-4646a87d3abc-trial.txt"
+  },
+  "build_logs": {
+    "retained_file": "eternal-darkness-decomp/reports/GEDE01/build-ac78f9b5-d642-4d7a-a01f-4646a87d3abc.log",
+    "trial_file": "eternal-darkness-decomp/reports/GEDE01/build-ac78f9b5-d642-4d7a-a01f-4646a87d3abc-trial.log"
+  },
+  "experiment": "Modeled the callback/argument/value/index fields as one nested typed subobject at State+0x40, kept its typed pointer live across fn_8006C9C0, retained the State pointer for final index stores, and used ordinary values[current] indexing. This source shape changed broad callee-saved register allocation and emitted add plus lhz 0x20 instead of the retail indexed sequence, reducing both canonical and relocation-strict match to 93.20408%. The trial was rejected and the prior best source retained.",
+  "source_sha256": "4d867b3dd4a927fdebcf51d8bcc41fb449a7f8cf041cee24c760b99f453504ae",
+  "divergence": "Canonical and relocation-strict objdiff independently measure 99.87755%, size-exact at 196/196 bytes. Relocation targets and addends align. Only two instruction words differ: at +0x44 retail addi r0,r3,0x20 versus candidate addi r0,r3,0x60; at +0x4c retail lhzx r0,r25,r0 versus candidate lhzx r0,r31,r0. The retained candidate reads the same halfword through state+0x60 rather than callback-state+0x20."
+}
