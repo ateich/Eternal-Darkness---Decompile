@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "assignment_id": "4629b89d-a038-4611-b764-9bdf4c77f8d3",
+  "attempt": 1,
+  "base_commit": "767f952fe57a61be54c7d91c2851daff9ca98337",
+  "target": "fn_80124A40",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-4629b89d-a038-4611-b764-9bdf4c77f8d3.json",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-4629b89d-a038-4611-b764-9bdf4c77f8d3.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-4629b89d-a038-4611-b764-9bdf4c77f8d3.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-4629b89d-a038-4611-b764-9bdf4c77f8d3.txt"
+  ],
+  "divergence": "Canonical objdiff measures 86.847534%: retail is 892 bytes and generated code is 896 bytes. The honest C reconstruction recovers the 0x114-byte entry stride, 8-byte owner flag stride, table offsets, source/delta pointer hoists, contiguous status array, and pair-pointer traversal. Remaining codegen divergence begins with saved-register allocation (retail stmw r22 versus generated stmw r23) and includes explicit retail induction-variable loops versus generated CTR loops, plus consequent register and scheduling differences. Raw instruction and relocation comparisons are attached."
+}

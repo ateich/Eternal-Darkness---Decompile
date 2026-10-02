@@ -17,11 +17,10 @@ typedef struct Delta {
 
 typedef struct Entry {
     u8 pad0[8];
-    u16 start;
     u16 count;
+    u16 start;
     u8 padC[8];
     Pair pairs[32];
-    u8 pad114[4];
 } Entry;
 
 typedef struct Table {
@@ -48,6 +47,7 @@ typedef struct Owner {
     u16 flags;
     u8 pad182[0x11A];
     Weight* weights;
+    u8 pad2A0[0x24];
     u32 enabled;
 } Owner;
 
@@ -55,7 +55,7 @@ typedef struct Vertex {
     s16 x, y, z;
 } Vertex;
 
-extern Pair lbl_804FA6D0[];
+extern u32 lbl_804FA6D0[];
 extern Vertex lbl_804FA740[];
 
 void fn_80124A40(Owner* owner, Table* table, u32* first_output,
@@ -63,44 +63,49 @@ void fn_80124A40(Owner* owner, Table* table, u32* first_output,
 {
     s32 entry_index;
     s32 count = table->count;
+    Vertex* source_vertices = (Vertex*)table->first_output;
+    Delta* deltas = table->deltas;
 
     *first_output = table->first_output;
     *second_output = table->second_output;
 
     for (entry_index = 0; entry_index < count; entry_index++) {
-        lbl_804FA6D0[entry_index].start = 0;
+        lbl_804FA6D0[entry_index] = 0;
     }
 
     for (entry_index = 0; entry_index < count; entry_index++) {
         Entry* entry = &table->entries[entry_index];
         u32 begin = entry->start;
         u32 end = begin + entry->count;
+        Pair* pair = entry->pairs;
         s32 weight_index;
 
-        if (owner->enabled != 0 && (owner[entry_index].flags & 1)) {
+        if (owner->enabled != 0 &&
+            (*(u16*)((u8*)owner + 0x180 + entry_index * 8) & 1)) {
             u32 vertex_index;
             for (vertex_index = begin; vertex_index < end; vertex_index++) {
                 lbl_804FA740[vertex_index] =
-                    ((Vertex*)table->first_output)[vertex_index];
+                    source_vertices[vertex_index];
             }
 
             for (weight_index = 0; weight_index < 32; weight_index++) {
-                Pair* pair = &entry->pairs[weight_index];
                 Weight* weight = &owner->weights[weight_index];
                 u32 delta_index;
 
                 if ((weight->flags & 1) == 0 || pair->start == 0xFFFFFFFF) {
+                    pair++;
                     continue;
                 }
-                lbl_804FA6D0[entry_index].start = 1;
+                lbl_804FA6D0[entry_index] = 1;
                 for (delta_index = pair->start;
                      delta_index < pair->start + pair->count; delta_index++) {
-                    Delta* delta = &table->deltas[delta_index];
+                    Delta* delta = &deltas[delta_index];
                     Vertex* vertex = &lbl_804FA740[entry->start + delta->index];
                     vertex->x += (s32)(weight->value * delta->x);
                     vertex->y += (s32)(weight->value * delta->y);
                     vertex->z += (s32)(weight->value * delta->z);
                 }
+                pair++;
             }
         }
     }
