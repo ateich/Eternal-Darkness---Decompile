@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "assignment_id": "8bcd929f-c90d-4c92-8fb0-e2c90dca8bd2",
+  "attempt": 1,
+  "target": "fn_8012EF98",
+  "compiler": "GC/1.3",
+  "flags": "repository defaults: -O4,p and the unchanged canonical flags recorded in the raw build log",
+  "candidate": {
+    "source": "src/game/game_fn_8012EF98.c",
+    "sha256": "5706c9526ce8c4f84f7ad73c093098c422613c377de6239a527f29a7e8dc1a17",
+    "backup_manifest_match": true,
+    "registration": "Object(NonMatching, \"game/game_fn_8012EF98.c\")",
+    "split_changed": false
+  },
+  "canonical": {
+    "retail_text_bytes": 836,
+    "generated_text_bytes": 856,
+    "match_percent": 92.34928,
+    "command_exit": 0,
+    "report": "reports/GEDE01/objdiff-8bcd929f-c90d-4c92-8fb0-e2c90dca8bd2.json"
+  },
+  "relocation_strict": {
+    "retail_text_bytes": 836,
+    "generated_text_bytes": 856,
+    "match_percent": 92.34928,
+    "command_exit": 0,
+    "configuration": "function_reloc_diffs=name_address",
+    "retail_relocations": 35,
+    "generated_relocations": 37,
+    "retail_type_target_sequence_preserved": true,
+    "extra_generated_relocations": [
+      "R_PPC_REL24 _savegpr_24",
+      "R_PPC_REL24 _restgpr_24"
+    ],
+    "report": "reports/GEDE01/objdiff-8bcd929f-c90d-4c92-8fb0-e2c90dca8bd2-reloc-strict.json",
+    "raw_tables": "reports/GEDE01/relocations-8bcd929f-c90d-4c92-8fb0-e2c90dca8bd2.txt"
+  },
+  "divergence": "The generated body is 856 rather than 836 bytes. Retail saves f29-f31 and uses direct stmw/lmw r24, while GC/1.3 saves an additional f28 and emits _savegpr_24/_restgpr_24 calls. It retains distance in f31 instead of retail's stack slot, rotates the remaining FPR assignments, and lays out the typed vector and matrix locals at different stack offsets. Those choices add 20 bytes, two helper relocations, and shift the offsets of the otherwise type/target-identical 35-retail-relocation sequence.",
+  "preconditions": [
+    "object_ptr is non-null and its entries table, index, selected Entry, and EntryRecord are valid",
+    "first and second are complete populated 0x28-byte QueryResult values in caller order; target and output are valid",
+    "target_delta, first.direction, and the computed cross vector satisfy the retail normalization preconditions",
+    "the selected transform is invertible; the raw integer status placed in r3 by fn_802110A8 is intentionally ignored under the accepted void(void*, void*) declaration",
+    "lbl_805AADC8 provides its configured ten Vec3 debug slots"
+  ],
+  "scope": "One source-only honest-C reconstruction and normal bare NonMatching registration; no compiler, flag, split, symbol, helper, public API, neighboring function, runtime, or global-progress change.",
+  "full_build_and_dol": "Deferred to the integrator as required by the assignment."
+}

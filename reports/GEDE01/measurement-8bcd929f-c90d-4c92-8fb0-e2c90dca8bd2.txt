@@ -1,0 +1,11 @@
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_8012EF98 fn_8012EF98 -o reports/GEDE01/objdiff-8bcd929f-c90d-4c92-8fb0-e2c90dca8bd2.json --format json-pretty
+canonical_exit=0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_8012EF98 fn_8012EF98 -o reports/GEDE01/objdiff-8bcd929f-c90d-4c92-8fb0-e2c90dca8bd2-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address
+strict_exit=0
+a2183fed85fbe6df67b4940e3c50e46f54fc601c0bad54d1e57610ecc1d3fd90  reports/GEDE01/objdiff-8bcd929f-c90d-4c92-8fb0-e2c90dca8bd2.json
+a2183fed85fbe6df67b4940e3c50e46f54fc601c0bad54d1e57610ecc1d3fd90  reports/GEDE01/objdiff-8bcd929f-c90d-4c92-8fb0-e2c90dca8bd2-reloc-strict.json
+retail_size=836 match_percent=92.34928
+generated_size=856 match_percent=92.34928
+COMMAND: compare objdump -r type/target sequences after excluding generated _savegpr_24 and _restgpr_24 helper relocations
+relocation_sequence_diff_output=(empty)
+relocation_sequence_diff_exit=0
