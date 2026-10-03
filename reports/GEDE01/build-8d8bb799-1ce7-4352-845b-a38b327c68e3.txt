@@ -1,0 +1,50 @@
+TARGET: fn_801A872C
+COMPILER HYPOTHESIS: model the post-call inset truncation as a distinct late-created s16 local, allowing MWCC to reuse the now-dead y register as retail does. This is different from the preserved attempts' reassignment of the s32 inset parameter. The generated object was byte-identical in score and size to the preserved best attempt.
+
+COMMAND: python3 configure.py
+EXIT STATUS: 0
+OUTPUT: <none>
+
+COMMAND: ./.tools/bin/ninja -t clean build/GEDE01/src/game/game_fn_801A872C.o
+EXIT STATUS: 0
+OUTPUT:
+Cleaning... 2 files.
+
+COMMAND: ./.tools/bin/ninja build/GEDE01/src/game/game_fn_801A872C.o
+EXIT STATUS: 0
+OUTPUT:
+[1/2] TOOL build/tools/sjiswrap.exe
+Downloading https://github.com/encounter/sjiswrap/releases/download/v1.2.2/sjiswrap-windows-x86.exe to build/tools/sjiswrap.exe
+[2/2] MWCC build/GEDE01/src/game/game_fn_801A872C.o
+
+COMMAND: build/tools/objdiff-cli diff -1 build/GEDE01/obj/game/game_fn_801A872C.o -2 build/GEDE01/src/game/game_fn_801A872C.o -o reports/GEDE01/objdiff-8d8bb799-1ce7-4352-845b-a38b327c68e3.json --format json-pretty fn_801A872C
+EXIT STATUS: 0
+OUTPUT:
+ INFO Writing to reports/GEDE01/objdiff-8d8bb799-1ce7-4352-845b-a38b327c68e3.json
+
+MEASURED FINAL SUMMARY:
+retail .text size=420
+generated .text size=436
+canonical match_percent=81.28571
+retail instruction rows=111
+generated instruction rows=111
+
+REJECTED DISTINCT EXPERIMENT:
+Changed only the fn_801A9454 declaration from s32 arguments to s16 arguments, based on the concrete hypothesis that callee parameter conversion would shorten the repeated cast live ranges. The canonical compiler instead removed required conversions.
+
+COMMAND: ./.tools/bin/ninja build/GEDE01/src/game/game_fn_801A872C.o
+EXIT STATUS: 0
+OUTPUT:
+[1/1] MWCC build/GEDE01/src/game/game_fn_801A872C.o
+
+COMMAND: build/tools/objdiff-cli diff -1 build/GEDE01/obj/game/game_fn_801A872C.o -2 build/GEDE01/src/game/game_fn_801A872C.o -o reports/GEDE01/objdiff-experiment-s16-prototype-8d8bb799-1ce7-4352-845b-a38b327c68e3.json --format json-pretty fn_801A872C
+EXIT STATUS: 0
+OUTPUT:
+ INFO Writing to reports/GEDE01/objdiff-experiment-s16-prototype-8d8bb799-1ce7-4352-845b-a38b327c68e3.json
+
+MEASURED REJECTED-EXPERIMENT SUMMARY:
+retail .text size=420
+generated .text size=408
+canonical match_percent=69.0
+
+The s32 declaration was restored before the final build and report above.

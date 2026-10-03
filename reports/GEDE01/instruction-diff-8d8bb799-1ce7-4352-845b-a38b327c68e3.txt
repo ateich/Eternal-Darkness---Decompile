@@ -1,0 +1,47 @@
+SOURCE: reports/GEDE01/objdiff-8d8bb799-1ce7-4352-845b-a38b327c68e3.json instruction rows
+FORMAT: row diff-kind: retail-address instruction | generated-address instruction
+
+004 DIFF_ARG_MISMATCH: retail 0010 mr r28, r3 | generated 0010 mr r27, r3
+005 DIFF_ARG_MISMATCH: retail 0014 mr r30, r4 | generated 0014 mr r25, r4
+006 DIFF_ARG_MISMATCH: retail 0018 mr r27, r7 | generated 0018 mr r24, r7
+007 DIFF_ARG_MISMATCH: retail 001c extsh r25, r28 | generated 001c extsh r30, r27
+008 DIFF_ARG_MISMATCH: retail 0020 mr r26, r8 | generated 0020 mr r23, r8
+009 DIFF_ARG_MISMATCH: retail 0024 add r4, r25, r5 | generated 0024 add r4, r30, r5
+010 DIFF_ARG_MISMATCH: retail 0028 extsh r29, r30 | generated 0028 extsh r26, r25
+011 DIFF_ARG_MISMATCH: retail 002c add r3, r29, r6 | generated 002c add r3, r26, r6
+013 DIFF_ARG_MISMATCH: retail 0034 extsh r24, r4 | generated 0034 extsh r29, r4
+015 DIFF_ARG_MISMATCH: retail 003c extsh r23, r3 | generated 003c extsh r28, r3
+027 DIFF_REPLACE: retail 006c extsh r28, r28 | generated 006c mr r31, r30
+028 DIFF_REPLACE: retail 0070 extsh r30, r30 | generated 0070 mr r27, r26
+029 DIFF_ARG_MISMATCH: retail 0074 extsh r31, r27 | generated 0074 extsh r25, r24
+030 DIFF_ARG_MISMATCH: retail 0078 mr r3, r28 | generated 0078 mr r3, r31
+031 DIFF_ARG_MISMATCH: retail 007c mr r4, r30 | generated 007c mr r4, r27
+032 DIFF_ARG_MISMATCH: retail 0080 mr r5, r31 | generated 0080 mr r5, r25
+038 DIFF_ARG_MISMATCH: retail 0098 extsh r30, r26 | generated 0098 extsh r27, r23
+040 DIFF_ARG_MISMATCH: retail 00a0 add r29, r29, r30 | generated 00a0 add r0, r26, r27
+042 DIFF_ARG_MISMATCH: retail 00a8 extsh r4, r29 | generated 00a8 extsh r26, r0
+043 DIFF_INSERT: retail <none> | generated 00ac mr r4, r26
+047 DIFF_REPLACE: retail 00b8 extsh r4, r29 | generated 00bc mr r5, r25
+049 DIFF_ARG_MISMATCH: retail 00c0 subf r26, r30, r24 | generated 00c4 subf r0, r27, r29
+051 DIFF_ARG_MISMATCH: retail 00c8 extsh r3, r26 | generated 00cc extsh r23, r0
+052 DIFF_REPLACE: retail 00cc extsh r4, r29 | generated 00d0 mr r5, r25
+053 DIFF_INSERT: retail <none> | generated 00d4 mr r3, r23
+057 DIFF_REPLACE: retail 00dc extsh r4, r29 | generated 00e4 mr r5, r25
+059 DIFF_ARG_MISMATCH: retail 00e4 subf r27, r30, r23 | generated 00ec subf r0, r27, r28
+061 DIFF_INSERT: retail <none> | generated 00f4 extsh r24, r0
+062 DIFF_INSERT: retail <none> | generated 00f8 mr r5, r25
+064 DIFF_DELETE: retail 00f0 extsh r4, r27 | generated <none>
+067 DIFF_REPLACE: retail 00fc extsh r3, r26 | generated 0108 mr r4, r24
+068 DIFF_REPLACE: retail 0100 extsh r4, r27 | generated 010c mr r5, r25
+072 DIFF_REPLACE: retail 0110 extsh r4, r27 | generated 011c mr r5, r25
+076 DIFF_REPLACE: retail 0120 extsh r4, r27 | generated 012c mr r5, r25
+090 DIFF_ARG_MISMATCH: retail 0158 add r25, r25, r30 | generated 0164 add r0, r30, r27
+092 DIFF_DELETE: retail 0160 extsh r3, r25 | generated <none>
+093 DIFF_ARG_MISMATCH: retail 0164 extsh r4, r29 | generated 016c extsh r23, r0
+094 DIFF_INSERT: retail <none> | generated 0170 mr r5, r25
+095 DIFF_INSERT: retail <none> | generated 0174 mr r3, r23
+098 DIFF_REPLACE: retail 0170 extsh r3, r25 | generated 0180 mr r4, r24
+099 DIFF_REPLACE: retail 0174 extsh r4, r27 | generated 0184 mr r5, r25
+103 DIFF_REPLACE: retail 0184 extsh r4, r27 | generated 0194 mr r5, r25
+
+The objdiff JSON is the authoritative complete raw aligned row set. The rows above isolate the register-allocation and four-extra-instruction divergence; unchanged rows and additional register-only argument mismatches remain in the JSON.

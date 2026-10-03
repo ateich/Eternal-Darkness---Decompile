@@ -15,6 +15,7 @@ void fn_801A872C(s32 x, s32 y, s32 width, s32 height, s32 depth,
     s16 top = y;
     s16 right = left + width;
     s16 bottom = top + height;
+    s16 shortInset;
     s32 topInset;
     s32 rightInset;
     s32 bottomInset;
@@ -26,14 +27,14 @@ void fn_801A872C(s32 x, s32 y, s32 width, s32 height, s32 depth,
     fn_80226AB4(0x80, 5, 0x10);
     fn_801A9454((s16)x, (s16)y, (s16)depth);
     fn_801A9454(right, (s16)y, (s16)depth);
-    inset = (s16)inset;
-    topInset = top + inset;
+    shortInset = inset;
+    topInset = top + shortInset;
     fn_801A9454(right, (s16)topInset, (s16)depth);
     fn_801A9454(left, (s16)topInset, (s16)depth);
-    rightInset = right - inset;
+    rightInset = right - shortInset;
     fn_801A9454((s16)rightInset, (s16)topInset, (s16)depth);
     fn_801A9454(right, (s16)topInset, (s16)depth);
-    bottomInset = bottom - inset;
+    bottomInset = bottom - shortInset;
     fn_801A9454(right, (s16)bottomInset, (s16)depth);
     fn_801A9454((s16)rightInset, (s16)bottomInset, (s16)depth);
     fn_801A9454((s16)x, (s16)bottomInset, (s16)depth);
@@ -41,7 +42,7 @@ void fn_801A872C(s32 x, s32 y, s32 width, s32 height, s32 depth,
     fn_801A9454(right, bottom, (s16)depth);
     fn_801A9454((s16)x, bottom, (s16)depth);
     fn_801A9454((s16)x, (s16)topInset, (s16)depth);
-    leftInset = left + inset;
+    leftInset = left + shortInset;
     fn_801A9454((s16)leftInset, (s16)topInset, (s16)depth);
     fn_801A9454((s16)leftInset, (s16)bottomInset, (s16)depth);
     fn_801A9454((s16)x, (s16)bottomInset, (s16)depth);

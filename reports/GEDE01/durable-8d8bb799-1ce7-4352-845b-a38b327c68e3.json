@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "assignment_id": "8d8bb799-1ce7-4352-845b-a38b327c68e3",
+  "attempt": 3,
+  "base_commit": "210923f536858f3c3d0739528bd405a352f02c3e",
+  "target": "fn_801A872C",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-8d8bb799-1ce7-4352-845b-a38b327c68e3.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-experiment-s16-prototype-8d8bb799-1ce7-4352-845b-a38b327c68e3.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-8d8bb799-1ce7-4352-845b-a38b327c68e3.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-8d8bb799-1ce7-4352-845b-a38b327c68e3.txt",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-8d8bb799-1ce7-4352-845b-a38b327c68e3.txt"
+  ],
+  "divergence": "Best canonical objdiff is 81.28571%: retail is 420 bytes and generated GC/1.3 code is 436 bytes. All 20 relocation types, targets, and addends agree, but generated relocation offsets diverge after 0x94. GC/1.3 assigns coordinate, depth, and inset lifetimes to different callee-saved registers and emits four extra mr/extsh scheduling instructions around top/right/bottom/left inset arithmetic. A distinct late-s16 inset local produced the same best object; a signed-16 callee-prototype hypothesis regressed to 69.0% and 408 bytes."
+}
