@@ -30,25 +30,23 @@ extern void fn_8012D0D0(void*);
 
 void fn_8002BFE0(void* object)
 {
+    float scale;
+    s32 random;
     Vec4 second;
     Vec4 first;
     Vec3 direction = lbl_80238CF4;
-    float* component = &direction.x;
     s32 i;
-    float one = lbl_8064E064;
-    float zero = lbl_8064E068;
+    float* component = &direction.x;
 
     for (i = 0; i < 3; i++, component++) {
-        float scale;
-        s32 random;
-
         fn_8012CEA4(object, 0xF, &first);
         random = (fn_800FBFB0() & 0xF) + 10;
-        scale = one / (float)random;
-        *component = one;
+        scale = (float)random;
+        scale = 1.0f / scale;
+        *component = 1.0f;
         fn_8017A244(&direction, &second, scale);
         fn_8012CF08(object, 0xF, first, second, 0, 1, scale);
-        *component = zero;
+        *component = 0.0f;
         fn_8012F58C(object, 0xF, 3, 0, 0, 0x20);
         fn_8012D0D0(object);
     }

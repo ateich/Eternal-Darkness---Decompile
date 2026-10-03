@@ -1,0 +1,72 @@
+fn_8002BFE0 attempt 5 — matched at the function level
+
+Base: eff5553f551b44d3cf4057385bd44556e9c53989
+Studied preserved attempts 9c41cc71f2f2f7e55f3d718ccabe4a1be314f64d,
+7df54c00f0c21149f1bce57bbce5e5fd6e44453f,
+faab4ae8d85c21f88dd8f0a066a8892fbcdf391a, and
+8ff0d7287264f404a24438becbc849cb0c7864fd using git show.
+The base source already equals the retained source at 8ff0d728 (SHA-256
+56717eb25f2ba02ee1b04f972148ac0342b8c1981c3d97209449465494a26fea).
+No old source or report was blindly cherry-picked.
+
+New hypothesis: GC/1.3 assigns saved registers according to scalar scope and
+declaration order, while introducing the integer-to-float conversion as a
+separate assignment changes the ordering of immutable floating constants.
+Function-scoped scale/random, loop index declared before the component pointer,
+and conversion before division reproduce all 96 instructions and their registers.
+Literal 1.0f and 0.0f replace cached mutable extern loads. The unexternalized
+candidate measures 99.84375%; its only differences are constant targets at
+0x34 (@20 versus lbl_8064E038), 0x3c (@17 versus lbl_8064E064), and
+0x60 (@18 versus lbl_8064E068). The raw experiment contains the instruction
+listing and both relocation tables, including all zero addends.
+
+Added only this target to configure.py's EXISTING game_section_externalizations
+registration table, mapping its complete .sdata2 pool to those three retail
+symbols. The unchanged add_game_externalization_rules implementation and
+externalize_elf_symbol.py verify retail bytes and complete section ownership,
+then remove the duplicate pool. This applies existing policy documented in
+docs/matching.md (Compiler-local data must be removed, not only renamed).
+No compiler flags, tool implementations, general policy, gates, or neighboring
+functions changed. The target's existing split remains correct and unchanged.
+
+Fresh canonical and function_reloc_diffs=name_address reports both measure 100%.
+Both .text sections are byte-identical (384 bytes), SHA-256
+2b8ca770f96aa86746264893838c8dd107cdb1f84406800ad68da0291c497032.
+All 11 relocations have equal offsets, types, named targets, and zero addends.
+The final object has no duplicate .sdata2 section. Raw readelf symbol/section/
+relocation tables and objdump instruction listings are committed.
+
+Experiment script reproduces the raw source variants from the fixed base; each
+experiment log includes its exact source diff, compiler command and exit,
+objdiff command/exit, instruction listing, and relocations. The initial
+scalar_declarations_first variant is a recorded C89 declaration-placement
+compile failure; scalar_first_fixed corrects it. No objdiff was run on that
+failed variant. Only the final C reconstruction is retained as source.
+
+Per user instructions, no full deterministic build, legal-audit acceptance,
+or rebuilt retail DOL SHA-1 check was run here. Independent review and fresh
+integrator full build/legal audit/canonical+strict no-regression reports and
+measured DOL SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f remain mandatory.
+The matched envelope reports function-level evidence, not final acceptance.
+
+Measured experiment and strict scores:
+objdiff-baseline-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json: 97.395836%; 384 bytes
+objdiff-component_increment_first-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json: 97.395836%; 384 bytes
+objdiff-const_direct_conversion_first-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json: 99.21875%; 384 bytes
+objdiff-const_direct_conversion_first_swap-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json: 99.6875%; 384 bytes
+objdiff-const_external-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json: 97.395836%; 384 bytes
+objdiff-do_loop-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json: 97.395836%; 384 bytes
+objdiff-hoist_literals-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json: 95.052086%; 384 bytes
+objdiff-hoist_loop_locals-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json: 97.8125%; 384 bytes
+objdiff-hoist_random_only-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json: 98.072914%; 384 bytes
+objdiff-hoist_scale_last-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json: 98.072914%; 384 bytes
+objdiff-hoist_scale_only-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json: 97.135414%; 384 bytes
+objdiff-hoist_swap_i_component-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json: 98.28125%; 384 bytes
+objdiff-index_direction-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json: 97.395836%; 384 bytes
+objdiff-literal_conversion_first-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json: 99.375%; 384 bytes
+objdiff-literal_conversion_first_swap-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json: 99.84375%; 384 bytes
+objdiff-literal_locals-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json: 94.375%; 384 bytes
+objdiff-register_locals-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json: 97.395836%; 384 bytes
+objdiff-reloc-strict-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json: 100.0%; 384 bytes
+objdiff-scalar_first_fixed-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json: 97.395836%; 384 bytes
+objdiff-swap_cached_constants-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json: 97.34375%; 384 bytes

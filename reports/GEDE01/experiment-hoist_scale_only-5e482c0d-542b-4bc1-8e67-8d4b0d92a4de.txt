@@ -1,0 +1,154 @@
+--- baseline
++++ hoist_scale_only
+@@ -30,6 +30,7 @@
+ 
+ void fn_8002BFE0(void* object)
+ {
++    float scale;
+     Vec4 second;
+     Vec4 first;
+     Vec3 direction = lbl_80238CF4;
+@@ -39,7 +40,6 @@
+     float zero = lbl_8064E068;
+ 
+     for (i = 0; i < 3; i++, component++) {
+-        float scale;
+         s32 random;
+ 
+         fn_8012CEA4(object, 0xF, &first);
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_8002BFE0.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_8002BFE0.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_8002BFE0.d build/GEDE01/src/game/game_fn_8002BFE0.d
+BUILD EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_8002BFE0 fn_8002BFE0 -o reports/GEDE01/objdiff-hoist_scale_only-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json --format json-pretty
+ INFO Writing to /home/rabbit/src/darkfoundry-new/.darkfoundry/durable/assignments/5e482c0d-542b-4bc1-8e67-8d4b0d92a4de/eternal-darkness-decomp/reports/GEDE01/objdiff-hoist_scale_only-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json
+OBJDIFF EXIT: 0
+hoist_scale_only: target=384 candidate=384 score=97.135414
+0 stwu r1, -0xc0(r1)                               | stwu r1, -0xc0(r1)
+4 mflr r0                                          | mflr r0
+8 stw r0, 0xc4(r1)                                 | stw r0, 0xc4(r1)
+12 stfd f31, 0xb0(r1)                               | stfd f31, 0xb0(r1)
+16 psq_st f31, 0xb8(r1), 0, qr0                     | psq_st f31, 0xb8(r1), 0, qr0
+20 stfd f30, 0xa0(r1)                               | stfd f30, 0xa0(r1)
+24 psq_st f30, 0xa8(r1), 0, qr0                     | psq_st f30, 0xa8(r1), 0, qr0
+28 stfd f29, 0x90(r1)                               | stfd f29, 0x90(r1)
+32 psq_st f29, 0x98(r1), 0, qr0                     | psq_st f29, 0x98(r1), 0, qr0
+36 stfd f28, 0x80(r1)                               | stfd f28, 0x80(r1)
+40 psq_st f28, 0x88(r1), 0, qr0                     | psq_st f28, 0x88(r1), 0, qr0
+44 stmw r25, 0x64(r1)                               | stmw r25, 0x64(r1)
+48 lis r4, lbl_80238CF4@ha                          | lis r4, lbl_80238CF4@ha
+52 lfd f29, lbl_8064E038@sda21                      | lfs f29, lbl_8064E064@sda21
+56 addi r5, r4, lbl_80238CF4@l                      | addi r5, r4, lbl_80238CF4@l
+60 lfs f30, lbl_8064E064@sda21                      | lfs f28, lbl_8064E068@sda21
+64 lwz r4, 0x0(r5)                                  | lwz r4, 0x0(r5)
+68 mr r29, r3                                       | mr r31, r3
+72 lwz r3, 0x4(r5)                                  | lwz r3, 0x4(r5)
+76 addi r30, r1, 0x28                               | addi r26, r1, 0x28
+80 lwz r0, 0x8(r5)                                  | lwz r0, 0x8(r5)
+84 li r31, 0x0                                      | li r25, 0x0
+88 stw r4, 0x28(r1)                                 | stw r4, 0x28(r1)
+92 lis r25, 0x4330                                  | lis r27, 0x4330
+96 lfs f31, lbl_8064E068@sda21                      | lfd f31, @17@sda21
+100 stw r3, 0x2c(r1)                                 | stw r3, 0x2c(r1)
+104 stw r0, 0x30(r1)                                 | stw r0, 0x30(r1)
+108 mr r3, r29                                       | mr r3, r31
+112 addi r5, r1, 0x34                                | addi r5, r1, 0x34
+116 li r4, 0xf                                       | li r4, 0xf
+120 bl fn_8012CEA4                                   | bl fn_8012CEA4
+124 bl fn_800FBFB0                                   | bl fn_800FBFB0
+128 clrlwi r3, r3, 28                                | clrlwi r3, r3, 28
+132 stw r25, 0x58(r1)                                | stw r27, 0x58(r1)
+136 addi r0, r3, 0xa                                 | addi r0, r3, 0xa
+140 addi r3, r1, 0x28                                | addi r3, r1, 0x28
+144 xoris r0, r0, 0x8000                             | xoris r0, r0, 0x8000
+148 stfs f30, 0x0(r30)                               | stfs f29, 0x0(r26)
+152 addi r4, r1, 0x44                                | addi r4, r1, 0x44
+156 stw r0, 0x5c(r1)                                 | stw r0, 0x5c(r1)
+160 lfd f0, 0x58(r1)                                 | lfd f0, 0x58(r1)
+164 fsubs f0, f0, f29                                | fsubs f0, f0, f31
+168 fdivs f28, f30, f0                               | fdivs f30, f29, f0
+172 fmr f1, f28                                      | fmr f1, f30
+176 bl fn_8017A244                                   | bl fn_8017A244
+180 lwz r26, 0x44(r1)                                | lwz r28, 0x44(r1)
+184 fmr f1, f28                                      | fmr f1, f30
+188 lwz r27, 0x48(r1)                                | lwz r29, 0x48(r1)
+192 mr r3, r29                                       | mr r3, r31
+196 lwz r28, 0x4c(r1)                                | lwz r30, 0x4c(r1)
+200 addi r5, r1, 0x18                                | addi r5, r1, 0x18
+204 lwz r12, 0x50(r1)                                | lwz r12, 0x50(r1)
+208 lwz r11, 0x34(r1)                                | lwz r11, 0x34(r1)
+212 addi r6, r1, 0x8                                 | addi r6, r1, 0x8
+216 lwz r10, 0x38(r1)                                | lwz r10, 0x38(r1)
+220 li r4, 0xf                                       | li r4, 0xf
+224 lwz r9, 0x3c(r1)                                 | lwz r9, 0x3c(r1)
+228 li r7, 0x0                                       | li r7, 0x0
+232 lwz r0, 0x40(r1)                                 | lwz r0, 0x40(r1)
+236 li r8, 0x1                                       | li r8, 0x1
+240 stw r26, 0x8(r1)                                 | stw r28, 0x8(r1)
+244 stw r27, 0xc(r1)                                 | stw r29, 0xc(r1)
+248 stw r28, 0x10(r1)                                | stw r30, 0x10(r1)
+252 stw r12, 0x14(r1)                                | stw r12, 0x14(r1)
+256 stw r11, 0x18(r1)                                | stw r11, 0x18(r1)
+260 stw r10, 0x1c(r1)                                | stw r10, 0x1c(r1)
+264 stw r9, 0x20(r1)                                 | stw r9, 0x20(r1)
+268 stw r0, 0x24(r1)                                 | stw r0, 0x24(r1)
+272 bl fn_8012CF08                                   | bl fn_8012CF08
+276 stfs f31, 0x0(r30)                               | stfs f28, 0x0(r26)
+280 mr r3, r29                                       | mr r3, r31
+284 li r4, 0xf                                       | li r4, 0xf
+288 li r5, 0x3                                       | li r5, 0x3
+292 li r6, 0x0                                       | li r6, 0x0
+296 li r7, 0x0                                       | li r7, 0x0
+300 li r8, 0x20                                      | li r8, 0x20
+304 bl fn_8012F58C                                   | bl fn_8012F58C
+308 mr r3, r29                                       | mr r3, r31
+312 bl fn_8012D0D0                                   | bl fn_8012D0D0
+316 addi r31, r31, 0x1                               | addi r25, r25, 0x1
+320 addi r30, r30, 0x4                               | addi r26, r26, 0x4
+324 cmpwi r31, 0x3                                   | cmpwi r25, 0x3
+328 blt 0x6c                                         | blt 0x6c
+332 psq_l f31, 0xb8(r1), 0, qr0                      | psq_l f31, 0xb8(r1), 0, qr0
+336 lfd f31, 0xb0(r1)                                | lfd f31, 0xb0(r1)
+340 psq_l f30, 0xa8(r1), 0, qr0                      | psq_l f30, 0xa8(r1), 0, qr0
+344 lfd f30, 0xa0(r1)                                | lfd f30, 0xa0(r1)
+348 psq_l f29, 0x98(r1), 0, qr0                      | psq_l f29, 0x98(r1), 0, qr0
+352 lfd f29, 0x90(r1)                                | lfd f29, 0x90(r1)
+356 psq_l f28, 0x88(r1), 0, qr0                      | psq_l f28, 0x88(r1), 0, qr0
+360 lfd f28, 0x80(r1)                                | lfd f28, 0x80(r1)
+364 lmw r25, 0x64(r1)                                | lmw r25, 0x64(r1)
+368 lwz r0, 0xc4(r1)                                 | lwz r0, 0xc4(r1)
+372 mtlr r0                                          | mtlr r0
+376 addi r1, r1, 0xc0                                | addi r1, r1, 0xc0
+380 blr                                              | blr 
+
+COMMAND: build/binutils/powerpc-eabi-readelf -rW build/GEDE01/obj/game/game_fn_8002BFE0.o
+
+Relocation section '.rela.text' at offset 0x1c0 contains 11 entries:
+ Offset     Info    Type                Sym. Value  Symbol's Name + Addend
+00000032  00000406 R_PPC_ADDR16_HA        00000000   lbl_80238CF4 + 0
+00000034  0000056d R_PPC_EMB_SDA21        00000000   lbl_8064E038 + 0
+0000003a  00000404 R_PPC_ADDR16_LO        00000000   lbl_80238CF4 + 0
+0000003c  0000066d R_PPC_EMB_SDA21        00000000   lbl_8064E064 + 0
+00000060  0000076d R_PPC_EMB_SDA21        00000000   lbl_8064E068 + 0
+00000078  0000080a R_PPC_REL24            00000000   fn_8012CEA4 + 0
+0000007c  0000090a R_PPC_REL24            00000000   fn_800FBFB0 + 0
+000000b0  00000a0a R_PPC_REL24            00000000   fn_8017A244 + 0
+00000110  00000b0a R_PPC_REL24            00000000   fn_8012CF08 + 0
+00000130  00000c0a R_PPC_REL24            00000000   fn_8012F58C + 0
+00000138  00000d0a R_PPC_REL24            00000000   fn_8012D0D0 + 0
+
+COMMAND: build/binutils/powerpc-eabi-readelf -rW build/GEDE01/src/game/game_fn_8002BFE0.o
+
+Relocation section '.rela.text' at offset 0x1c0 contains 11 entries:
+ Offset     Info    Type                Sym. Value  Symbol's Name + Addend
+00000032  00000506 R_PPC_ADDR16_HA        00000000   lbl_80238CF4 + 0
+00000034  0000066d R_PPC_EMB_SDA21        00000000   lbl_8064E064 + 0
+0000003a  00000504 R_PPC_ADDR16_LO        00000000   lbl_80238CF4 + 0
+0000003c  0000076d R_PPC_EMB_SDA21        00000000   lbl_8064E068 + 0
+00000060  0000046d R_PPC_EMB_SDA21        00000000   @17 + 0
+00000078  0000080a R_PPC_REL24            00000000   fn_8012CEA4 + 0
+0000007c  0000090a R_PPC_REL24            00000000   fn_800FBFB0 + 0
+000000b0  00000a0a R_PPC_REL24            00000000   fn_8017A244 + 0
+00000110  00000b0a R_PPC_REL24            00000000   fn_8012CF08 + 0
+00000130  00000c0a R_PPC_REL24            00000000   fn_8012F58C + 0
+00000138  00000d0a R_PPC_REL24            00000000   fn_8012D0D0 + 0

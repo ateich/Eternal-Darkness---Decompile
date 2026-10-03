@@ -1,0 +1,12 @@
+COMMAND: python3 configure.py --no-progress
+EXIT: 0
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_8002BFE0.externalized
+[1/2] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_8002BFE0.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_8002BFE0.d build/GEDE01/src/game/game_fn_8002BFE0.d
+[2/2] python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_8002BFE0.o @17 lbl_8064E064 orig/GEDE01/sys/main.dol --require-section-symbols=@17,@18,@20 && python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_8002BFE0.o @18 lbl_8064E068 orig/GEDE01/sys/main.dol && python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_8002BFE0.o @20 lbl_8064E038 orig/GEDE01/sys/main.dol && build/binutils/powerpc-eabi-objcopy --redefine-sym=@17=lbl_8064E064 --redefine-sym=@18=lbl_8064E068 --redefine-sym=@20=lbl_8064E038 --remove-section=.sdata2 --rename-section=.comment=.ignored build/GEDE01/src/game/game_fn_8002BFE0.o && touch build/GEDE01/src/game/game_fn_8002BFE0.externalized
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_8002BFE0 fn_8002BFE0 -o reports/GEDE01/objdiff-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json --format json-pretty
+ INFO Writing to reports/GEDE01/objdiff-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_8002BFE0 fn_8002BFE0 -o reports/GEDE01/objdiff-reloc-strict-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json --format json-pretty -c function_reloc_diffs=name_address
+ INFO Writing to reports/GEDE01/objdiff-reloc-strict-5e482c0d-542b-4bc1-8e67-8d4b0d92a4de.json
+EXIT: 0

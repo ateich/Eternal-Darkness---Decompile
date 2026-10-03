@@ -3651,6 +3651,10 @@ config.custom_build_rules = [
 ]
 
 game_section_externalizations = {
+    "8002BFE0": (
+        ".sdata2",
+        [("@17", "lbl_8064E064"), ("@18", "lbl_8064E068"), ("@20", "lbl_8064E038")],
+    ),
     "801CE384": (".sdata2", [("@31", "lbl_80651048")]),
     "8011EE04": (".sdata2", [("@32", "lbl_80650078")]),
     "801E3644": (
@@ -7139,7 +7143,7 @@ config.libs = [
                 extra_cflags=["-use_lmw_stmw on"],
             ),
             Object(
-                NonMatching,
+                Matching,
                 "game/game_fn_8002BFE0.c",
                 extra_cflags=["-use_lmw_stmw on"],
             ),
