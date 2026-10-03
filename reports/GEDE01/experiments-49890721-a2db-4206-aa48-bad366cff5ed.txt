@@ -1,0 +1,27 @@
+target: fn_801F2370
+compiler: compilers/GC/1.3/mwcceppc.exe
+canonical flags: -O4,p -inline auto -use_lmw_stmw on
+
+Preserved attempt baseline after semantic repairs except review findings:
+  direct sample i indexing, source pointer hoisted, conditional clamp
+  canonical match: 59.481037%
+
+Attempt 4 semantic correction baseline:
+  corrected debug call to fn_800EBF88(minimum, maximum, ...)
+  corrected color narrowing through int before u8
+  canonical match: 59.485030%
+  target/generated size: 2004/2028 bytes
+
+New codegen hypothesis:
+  express every channel/value access directly as corners[j]->samples[i].field,
+  matching retail's repeated sample-pointer loads, and express the 30000 clamp
+  as an unconditional ternary assignment. This differs from preserved variants,
+  which hoisted Sample801F2370* source and conditionally stored the clamp.
+  canonical match: 66.283430%
+  target/generated size: 2004/2080 bytes
+
+Declaration-order follow-up:
+  declare corners before corner_weight to test retail stack-slot ordering.
+  canonical and relocation-strict match: 66.319360%
+  target/generated size: 2004/2080 bytes
+  selected as the best honest C reconstruction.

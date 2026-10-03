@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "target": "fn_801F2370",
+  "configure": {
+    "command": "python3 configure.py --version GEDE01",
+    "exit_code": 0,
+    "raw_output": "reports/GEDE01/configure-49890721-a2db-4206-aa48-bad366cff5ed.txt"
+  },
+  "assigned_object_build": {
+    "command": "touch src/game/game_fn_801F2370.c && .tools/bin/ninja build/GEDE01/src/game/game_fn_801F2370.o -v",
+    "exit_code": 0,
+    "compiler": "compilers/GC/1.3/mwcceppc.exe",
+    "generated_object_sha256": "3bd9ff5de6a4378d7bd74b49855d403d59d295e228ffee2c74351b918938f4da",
+    "raw_output": "reports/GEDE01/build-49890721-a2db-4206-aa48-bad366cff5ed.txt"
+  },
+  "canonical_objdiff": {
+    "exit_code": 0,
+    "retail_bytes": 2004,
+    "generated_bytes": 2080,
+    "match_percent": 66.31936,
+    "raw_instruction_diff": "reports/GEDE01/objdiff-49890721-a2db-4206-aa48-bad366cff5ed.json"
+  },
+  "relocation_strict_objdiff": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801F2370 --format json-pretty -c function_reloc_diffs=name_address fn_801F2370",
+    "exit_code": 0,
+    "retail_bytes": 2004,
+    "generated_bytes": 2080,
+    "match_percent": 66.31936,
+    "retail_relocations": 19,
+    "generated_relocations": 22,
+    "raw_output": "reports/GEDE01/objdiff-49890721-a2db-4206-aa48-bad366cff5ed-reloc-strict.json"
+  },
+  "raw_relocation_tables": "reports/GEDE01/relocations-49890721-a2db-4206-aa48-bad366cff5ed.txt",
+  "experiments": "reports/GEDE01/experiments-49890721-a2db-4206-aa48-bad366cff5ed.txt",
+  "semantic_repairs": "Uses signed 16-bit node coordinates at offsets 0/2/4, follows the sample pointer at +0x10, indexes sample i directly for every corner, accumulates destination plus weight times source, calls the debug helper with minimum then maximum, narrows color results through int before u8, and uses the retail debug/scaling globals.",
+  "observed_divergence": "The honest-C reconstruction remains NonMatching at 66.319360%. Retail emits 2004 bytes and saves r20-r31; generated emits 2080 bytes and saves r21-r31. The prologue/index/weight construction has different register and floating-constant lifetimes, and generated emits 22 relocations versus retail's 19 because its constant-pool scheduling differs. The interpolation and accumulation tail is substantially aligned instruction-for-instruction, with remaining stack-slot/register differences."
+}
