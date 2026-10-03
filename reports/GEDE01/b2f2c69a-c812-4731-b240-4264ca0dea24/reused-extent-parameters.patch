@@ -1,0 +1,50 @@
+--- baseline
++++ reused-extent-parameters
+@@ -11,34 +11,35 @@
+ void fn_801A872C(s32 x, s32 y, s32 width, s32 height, s32 depth,
+                  s32 inset, const u32* color)
+ {
+-    s16 right = (s16)x + width;
+-    s16 bottom = (s16)y + height;
+     s16 shortInset;
+     s32 topInset;
+     s32 rightInset;
+     s32 bottomInset;
+     s32 leftInset;
+-    u32 copy = *color;
++    u32 copy;
++    width = (s16)((s16)x + width);
++    height = (s16)((s16)y + height);
++    copy = *color;
+ 
+     fn_801A852C(&copy, 0, -1, 0x80000000);
+     fn_801ECF50(4);
+     fn_80226AB4(0x80, 5, 0x10);
+     fn_801A9454((s16)x, (s16)y, (s16)depth);
+-    fn_801A9454(right, (s16)y, (s16)depth);
++    fn_801A9454(width, (s16)y, (s16)depth);
+     shortInset = inset;
+     topInset = (s16)y + shortInset;
+-    fn_801A9454(right, (s16)topInset, (s16)depth);
++    fn_801A9454(width, (s16)topInset, (s16)depth);
+     fn_801A9454((s16)x, (s16)topInset, (s16)depth);
+-    rightInset = right - shortInset;
++    rightInset = width - shortInset;
+     fn_801A9454((s16)rightInset, (s16)topInset, (s16)depth);
+-    fn_801A9454(right, (s16)topInset, (s16)depth);
+-    bottomInset = bottom - shortInset;
+-    fn_801A9454(right, (s16)bottomInset, (s16)depth);
++    fn_801A9454(width, (s16)topInset, (s16)depth);
++    bottomInset = height - shortInset;
++    fn_801A9454(width, (s16)bottomInset, (s16)depth);
+     fn_801A9454((s16)rightInset, (s16)bottomInset, (s16)depth);
+     fn_801A9454((s16)x, (s16)bottomInset, (s16)depth);
+-    fn_801A9454(right, (s16)bottomInset, (s16)depth);
+-    fn_801A9454(right, bottom, (s16)depth);
+-    fn_801A9454((s16)x, bottom, (s16)depth);
++    fn_801A9454(width, (s16)bottomInset, (s16)depth);
++    fn_801A9454(width, height, (s16)depth);
++    fn_801A9454((s16)x, height, (s16)depth);
+     fn_801A9454((s16)x, (s16)topInset, (s16)depth);
+     leftInset = (s16)x + shortInset;
+     fn_801A9454((s16)leftInset, (s16)topInset, (s16)depth);

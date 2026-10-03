@@ -1,0 +1,112 @@
+RAW ALIGNED ROWS from final.json; canonical objdiff is authoritative.
+row diff_kind | retail offset instruction | generated offset instruction
+000 DIFF_NONE | 0000 stwu r1, -0x40(r1) | 0000 stwu r1, -0x40(r1)
+001 DIFF_NONE | 0004 mflr r0 | 0004 mflr r0
+002 DIFF_NONE | 0008 stw r0, 0x44(r1) | 0008 stw r0, 0x44(r1)
+003 DIFF_NONE | 000c stmw r23, 0x1c(r1) | 000c stmw r23, 0x1c(r1)
+004 DIFF_ARG_MISMATCH | 0010 mr r28, r3 | 0010 mr r27, r3
+005 DIFF_ARG_MISMATCH | 0014 mr r30, r4 | 0014 mr r28, r4
+006 DIFF_ARG_MISMATCH | 0018 mr r27, r7 | 0018 mr r26, r7
+007 DIFF_ARG_MISMATCH | 001c extsh r25, r28 | 001c extsh r30, r27
+008 DIFF_ARG_MISMATCH | 0020 mr r26, r8 | 0020 mr r23, r8
+009 DIFF_ARG_MISMATCH | 0024 add r4, r25, r5 | 0024 add r4, r30, r5
+010 DIFF_ARG_MISMATCH | 0028 extsh r29, r30 | 0028 extsh r31, r28
+011 DIFF_ARG_MISMATCH | 002c add r3, r29, r6 | 002c add r3, r31, r6
+012 DIFF_NONE | 0030 li r5, -0x1 | 0030 li r5, -0x1
+013 DIFF_ARG_MISMATCH | 0034 extsh r24, r4 | 0034 extsh r25, r4
+014 DIFF_NONE | 0038 li r4, 0x0 | 0038 li r4, 0x0
+015 DIFF_ARG_MISMATCH | 003c extsh r23, r3 | 003c extsh r24, r3
+016 DIFF_NONE | 0040 addi r3, r1, 0x8 | 0040 addi r3, r1, 0x8
+017 DIFF_NONE | 0044 lis r6, 0x8000 | 0044 lis r6, 0x8000
+018 DIFF_NONE | 0048 lwz r0, 0x0(r9) | 0048 lwz r0, 0x0(r9)
+019 DIFF_NONE | 004c stw r0, 0x8(r1) | 004c stw r0, 0x8(r1)
+020 DIFF_NONE | 0050 bl fn_801A852C | 0050 bl fn_801A852C
+021 DIFF_NONE | 0054 li r3, 0x4 | 0054 li r3, 0x4
+022 DIFF_NONE | 0058 bl fn_801ECF50 | 0058 bl fn_801ECF50
+023 DIFF_NONE | 005c li r3, 0x80 | 005c li r3, 0x80
+024 DIFF_NONE | 0060 li r4, 0x5 | 0060 li r4, 0x5
+025 DIFF_NONE | 0064 li r5, 0x10 | 0064 li r5, 0x10
+026 DIFF_NONE | 0068 bl fn_80226AB4 | 0068 bl fn_80226AB4
+027 DIFF_ARG_MISMATCH | 006c extsh r28, r28 | 006c extsh r27, r27
+028 DIFF_ARG_MISMATCH | 0070 extsh r30, r30 | 0070 extsh r28, r28
+029 DIFF_ARG_MISMATCH | 0074 extsh r31, r27 | 0074 extsh r29, r26
+030 DIFF_ARG_MISMATCH | 0078 mr r3, r28 | 0078 mr r3, r27
+031 DIFF_ARG_MISMATCH | 007c mr r4, r30 | 007c mr r4, r28
+032 DIFF_ARG_MISMATCH | 0080 mr r5, r31 | 0080 mr r5, r29
+033 DIFF_NONE | 0084 bl fn_801A9454 | 0084 bl fn_801A9454
+034 DIFF_ARG_MISMATCH | 0088 mr r3, r24 | 0088 mr r3, r25
+035 DIFF_ARG_MISMATCH | 008c mr r4, r30 | 008c mr r4, r28
+036 DIFF_ARG_MISMATCH | 0090 mr r5, r31 | 0090 mr r5, r29
+037 DIFF_NONE | 0094 bl fn_801A9454 | 0094 bl fn_801A9454
+038 DIFF_ARG_MISMATCH | 0098 extsh r30, r26 | 0098 extsh r23, r23
+039 DIFF_ARG_MISMATCH | 009c mr r3, r24 | 009c mr r3, r25
+040 DIFF_ARG_MISMATCH | 00a0 add r29, r29, r30 | 00a0 add r0, r31, r23
+041 DIFF_ARG_MISMATCH | 00a4 mr r5, r31 | 00a4 mr r5, r29
+042 DIFF_ARG_MISMATCH | 00a8 extsh r4, r29 | 00a8 extsh r28, r0
+043 DIFF_INSERT | <none> | 00ac mr r4, r28
+044 DIFF_NONE | 00ac bl fn_801A9454 | 00b0 bl fn_801A9454
+045 DIFF_ARG_MISMATCH | 00b0 mr r3, r28 | 00b4 mr r3, r27
+046 DIFF_ARG_MISMATCH | 00b4 mr r5, r31 | 00b8 mr r4, r28
+047 DIFF_REPLACE | 00b8 extsh r4, r29 | 00bc mr r5, r29
+048 DIFF_NONE | 00bc bl fn_801A9454 | 00c0 bl fn_801A9454
+049 DIFF_ARG_MISMATCH | 00c0 subf r26, r30, r24 | 00c4 subf r0, r23, r25
+050 DIFF_ARG_MISMATCH | 00c4 mr r5, r31 | 00c8 mr r4, r28
+051 DIFF_ARG_MISMATCH | 00c8 extsh r3, r26 | 00cc extsh r26, r0
+052 DIFF_REPLACE | 00cc extsh r4, r29 | 00d0 mr r5, r29
+053 DIFF_INSERT | <none> | 00d4 mr r3, r26
+054 DIFF_NONE | 00d0 bl fn_801A9454 | 00d8 bl fn_801A9454
+055 DIFF_ARG_MISMATCH | 00d4 mr r3, r24 | 00dc mr r3, r25
+056 DIFF_ARG_MISMATCH | 00d8 mr r5, r31 | 00e0 mr r4, r28
+057 DIFF_REPLACE | 00dc extsh r4, r29 | 00e4 mr r5, r29
+058 DIFF_NONE | 00e0 bl fn_801A9454 | 00e8 bl fn_801A9454
+059 DIFF_ARG_MISMATCH | 00e4 subf r27, r30, r23 | 00ec subf r0, r23, r24
+060 DIFF_ARG_MISMATCH | 00e8 mr r3, r24 | 00f0 mr r3, r25
+061 DIFF_INSERT | <none> | 00f4 extsh r31, r0
+062 DIFF_INSERT | <none> | 00f8 mr r5, r29
+063 DIFF_ARG_MISMATCH | 00ec mr r5, r31 | 00fc mr r4, r31
+064 DIFF_DELETE | 00f0 extsh r4, r27 | <none>
+065 DIFF_NONE | 00f4 bl fn_801A9454 | 0100 bl fn_801A9454
+066 DIFF_ARG_MISMATCH | 00f8 mr r5, r31 | 0104 mr r3, r26
+067 DIFF_REPLACE | 00fc extsh r3, r26 | 0108 mr r4, r31
+068 DIFF_REPLACE | 0100 extsh r4, r27 | 010c mr r5, r29
+069 DIFF_NONE | 0104 bl fn_801A9454 | 0110 bl fn_801A9454
+070 DIFF_ARG_MISMATCH | 0108 mr r3, r28 | 0114 mr r3, r27
+071 DIFF_ARG_MISMATCH | 010c mr r5, r31 | 0118 mr r4, r31
+072 DIFF_REPLACE | 0110 extsh r4, r27 | 011c mr r5, r29
+073 DIFF_NONE | 0114 bl fn_801A9454 | 0120 bl fn_801A9454
+074 DIFF_ARG_MISMATCH | 0118 mr r3, r24 | 0124 mr r3, r25
+075 DIFF_ARG_MISMATCH | 011c mr r5, r31 | 0128 mr r4, r31
+076 DIFF_REPLACE | 0120 extsh r4, r27 | 012c mr r5, r29
+077 DIFF_NONE | 0124 bl fn_801A9454 | 0130 bl fn_801A9454
+078 DIFF_ARG_MISMATCH | 0128 mr r3, r24 | 0134 mr r3, r25
+079 DIFF_ARG_MISMATCH | 012c mr r4, r23 | 0138 mr r4, r24
+080 DIFF_ARG_MISMATCH | 0130 mr r5, r31 | 013c mr r5, r29
+081 DIFF_NONE | 0134 bl fn_801A9454 | 0140 bl fn_801A9454
+082 DIFF_ARG_MISMATCH | 0138 mr r3, r28 | 0144 mr r3, r27
+083 DIFF_ARG_MISMATCH | 013c mr r4, r23 | 0148 mr r4, r24
+084 DIFF_ARG_MISMATCH | 0140 mr r5, r31 | 014c mr r5, r29
+085 DIFF_NONE | 0144 bl fn_801A9454 | 0150 bl fn_801A9454
+086 DIFF_ARG_MISMATCH | 0148 mr r3, r28 | 0154 mr r3, r27
+087 DIFF_ARG_MISMATCH | 014c mr r5, r31 | 0158 mr r4, r28
+088 DIFF_REPLACE | 0150 extsh r4, r29 | 015c mr r5, r29
+089 DIFF_NONE | 0154 bl fn_801A9454 | 0160 bl fn_801A9454
+090 DIFF_ARG_MISMATCH | 0158 add r25, r25, r30 | 0164 add r0, r30, r23
+091 DIFF_ARG_MISMATCH | 015c mr r5, r31 | 0168 mr r4, r28
+092 DIFF_ARG_MISMATCH | 0160 extsh r3, r25 | 016c extsh r26, r0
+093 DIFF_REPLACE | 0164 extsh r4, r29 | 0170 mr r5, r29
+094 DIFF_INSERT | <none> | 0174 mr r3, r26
+095 DIFF_NONE | 0168 bl fn_801A9454 | 0178 bl fn_801A9454
+096 DIFF_ARG_MISMATCH | 016c mr r5, r31 | 017c mr r3, r26
+097 DIFF_REPLACE | 0170 extsh r3, r25 | 0180 mr r4, r31
+098 DIFF_REPLACE | 0174 extsh r4, r27 | 0184 mr r5, r29
+099 DIFF_NONE | 0178 bl fn_801A9454 | 0188 bl fn_801A9454
+100 DIFF_ARG_MISMATCH | 017c mr r3, r28 | 018c mr r3, r27
+101 DIFF_ARG_MISMATCH | 0180 mr r5, r31 | 0190 mr r4, r31
+102 DIFF_REPLACE | 0184 extsh r4, r27 | 0194 mr r5, r29
+103 DIFF_NONE | 0188 bl fn_801A9454 | 0198 bl fn_801A9454
+104 DIFF_NONE | 018c bl fn_801A9450 | 019c bl fn_801A9450
+105 DIFF_NONE | 0190 lmw r23, 0x1c(r1) | 01a0 lmw r23, 0x1c(r1)
+106 DIFF_NONE | 0194 lwz r0, 0x44(r1) | 01a4 lwz r0, 0x44(r1)
+107 DIFF_NONE | 0198 mtlr r0 | 01a8 mtlr r0
+108 DIFF_NONE | 019c addi r1, r1, 0x40 | 01ac addi r1, r1, 0x40
+109 DIFF_NONE | 01a0 blr  | 01b0 blr 

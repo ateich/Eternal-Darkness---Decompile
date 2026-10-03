@@ -14,10 +14,10 @@ void fn_801A872C(s32 x, s32 y, s32 width, s32 height, s32 depth,
     s16 right = (s16)x + width;
     s16 bottom = (s16)y + height;
     s16 shortInset;
-    s32 topInset;
+    s16 left = x;
+    s16 top = y;
     s32 rightInset;
     s32 bottomInset;
-    s32 leftInset;
     u32 copy = *color;
 
     fn_801A852C(&copy, 0, -1, 0x80000000);
@@ -26,12 +26,12 @@ void fn_801A872C(s32 x, s32 y, s32 width, s32 height, s32 depth,
     fn_801A9454((s16)x, (s16)y, (s16)depth);
     fn_801A9454(right, (s16)y, (s16)depth);
     shortInset = inset;
-    topInset = (s16)y + shortInset;
-    fn_801A9454(right, (s16)topInset, (s16)depth);
-    fn_801A9454((s16)x, (s16)topInset, (s16)depth);
+    top += shortInset;
+    fn_801A9454(right, top, (s16)depth);
+    fn_801A9454((s16)x, top, (s16)depth);
     rightInset = right - shortInset;
-    fn_801A9454((s16)rightInset, (s16)topInset, (s16)depth);
-    fn_801A9454(right, (s16)topInset, (s16)depth);
+    fn_801A9454((s16)rightInset, top, (s16)depth);
+    fn_801A9454(right, top, (s16)depth);
     bottomInset = bottom - shortInset;
     fn_801A9454(right, (s16)bottomInset, (s16)depth);
     fn_801A9454((s16)rightInset, (s16)bottomInset, (s16)depth);
@@ -39,10 +39,10 @@ void fn_801A872C(s32 x, s32 y, s32 width, s32 height, s32 depth,
     fn_801A9454(right, (s16)bottomInset, (s16)depth);
     fn_801A9454(right, bottom, (s16)depth);
     fn_801A9454((s16)x, bottom, (s16)depth);
-    fn_801A9454((s16)x, (s16)topInset, (s16)depth);
-    leftInset = (s16)x + shortInset;
-    fn_801A9454((s16)leftInset, (s16)topInset, (s16)depth);
-    fn_801A9454((s16)leftInset, (s16)bottomInset, (s16)depth);
+    fn_801A9454((s16)x, top, (s16)depth);
+    left += shortInset;
+    fn_801A9454(left, top, (s16)depth);
+    fn_801A9454(left, (s16)bottomInset, (s16)depth);
     fn_801A9454((s16)x, (s16)bottomInset, (s16)depth);
     fn_801A9450();
 }

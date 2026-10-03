@@ -1,0 +1,37 @@
+--- baseline
++++ untruncated-inset-arithmetic
+@@ -13,7 +13,6 @@
+ {
+     s16 right = (s16)x + width;
+     s16 bottom = (s16)y + height;
+-    s16 shortInset;
+     s32 topInset;
+     s32 rightInset;
+     s32 bottomInset;
+@@ -25,14 +24,13 @@
+     fn_80226AB4(0x80, 5, 0x10);
+     fn_801A9454((s16)x, (s16)y, (s16)depth);
+     fn_801A9454(right, (s16)y, (s16)depth);
+-    shortInset = inset;
+-    topInset = (s16)y + shortInset;
++    topInset = (s16)y + inset;
+     fn_801A9454(right, (s16)topInset, (s16)depth);
+     fn_801A9454((s16)x, (s16)topInset, (s16)depth);
+-    rightInset = right - shortInset;
++    rightInset = right - inset;
+     fn_801A9454((s16)rightInset, (s16)topInset, (s16)depth);
+     fn_801A9454(right, (s16)topInset, (s16)depth);
+-    bottomInset = bottom - shortInset;
++    bottomInset = bottom - inset;
+     fn_801A9454(right, (s16)bottomInset, (s16)depth);
+     fn_801A9454((s16)rightInset, (s16)bottomInset, (s16)depth);
+     fn_801A9454((s16)x, (s16)bottomInset, (s16)depth);
+@@ -40,7 +38,7 @@
+     fn_801A9454(right, bottom, (s16)depth);
+     fn_801A9454((s16)x, bottom, (s16)depth);
+     fn_801A9454((s16)x, (s16)topInset, (s16)depth);
+-    leftInset = (s16)x + shortInset;
++    leftInset = (s16)x + inset;
+     fn_801A9454((s16)leftInset, (s16)topInset, (s16)depth);
+     fn_801A9454((s16)leftInset, (s16)bottomInset, (s16)depth);
+     fn_801A9454((s16)x, (s16)bottomInset, (s16)depth);

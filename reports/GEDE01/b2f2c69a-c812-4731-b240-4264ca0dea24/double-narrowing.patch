@@ -1,0 +1,37 @@
+--- baseline
++++ double-narrowing
+@@ -27,22 +27,22 @@
+     fn_801A9454(right, (s16)y, (s16)depth);
+     shortInset = inset;
+     topInset = (s16)y + shortInset;
+-    fn_801A9454(right, (s16)topInset, (s16)depth);
+-    fn_801A9454((s16)x, (s16)topInset, (s16)depth);
++    fn_801A9454(right, (s16)(unsigned short)topInset, (s16)depth);
++    fn_801A9454((s16)x, (s16)(unsigned short)topInset, (s16)depth);
+     rightInset = right - shortInset;
+-    fn_801A9454((s16)rightInset, (s16)topInset, (s16)depth);
+-    fn_801A9454(right, (s16)topInset, (s16)depth);
++    fn_801A9454((s16)(unsigned short)rightInset, (s16)(unsigned short)topInset, (s16)depth);
++    fn_801A9454(right, (s16)(unsigned short)topInset, (s16)depth);
+     bottomInset = bottom - shortInset;
+-    fn_801A9454(right, (s16)bottomInset, (s16)depth);
+-    fn_801A9454((s16)rightInset, (s16)bottomInset, (s16)depth);
+-    fn_801A9454((s16)x, (s16)bottomInset, (s16)depth);
+-    fn_801A9454(right, (s16)bottomInset, (s16)depth);
++    fn_801A9454(right, (s16)(unsigned short)bottomInset, (s16)depth);
++    fn_801A9454((s16)(unsigned short)rightInset, (s16)(unsigned short)bottomInset, (s16)depth);
++    fn_801A9454((s16)x, (s16)(unsigned short)bottomInset, (s16)depth);
++    fn_801A9454(right, (s16)(unsigned short)bottomInset, (s16)depth);
+     fn_801A9454(right, bottom, (s16)depth);
+     fn_801A9454((s16)x, bottom, (s16)depth);
+-    fn_801A9454((s16)x, (s16)topInset, (s16)depth);
++    fn_801A9454((s16)x, (s16)(unsigned short)topInset, (s16)depth);
+     leftInset = (s16)x + shortInset;
+-    fn_801A9454((s16)leftInset, (s16)topInset, (s16)depth);
+-    fn_801A9454((s16)leftInset, (s16)bottomInset, (s16)depth);
+-    fn_801A9454((s16)x, (s16)bottomInset, (s16)depth);
++    fn_801A9454((s16)(unsigned short)leftInset, (s16)(unsigned short)topInset, (s16)depth);
++    fn_801A9454((s16)(unsigned short)leftInset, (s16)(unsigned short)bottomInset, (s16)depth);
++    fn_801A9454((s16)x, (s16)(unsigned short)bottomInset, (s16)depth);
+     fn_801A9450();
+ }

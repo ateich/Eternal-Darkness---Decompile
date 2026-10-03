@@ -1,0 +1,13 @@
+--- baseline
++++ int-truncated-edges
+@@ -11,8 +11,8 @@
+ void fn_801A872C(s32 x, s32 y, s32 width, s32 height, s32 depth,
+                  s32 inset, const u32* color)
+ {
+-    s16 right = (s16)x + width;
+-    s16 bottom = (s16)y + height;
++    int right = (s16)((s16)x + width);
++    int bottom = (s16)((s16)y + height);
+     s16 shortInset;
+     s32 topInset;
+     s32 rightInset;
