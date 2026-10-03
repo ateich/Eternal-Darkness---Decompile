@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "repair": "manual_build_mapping",
+  "previous_job": "2cf8207d-b1b8-4336-96c4-678608e09724",
+  "previous_candidate": "4bd02f4be200a8a131e7488eb49381f2df787ba9",
+  "unit": "main/game/game_fn_80033180",
+  "symbol": "fn_80033180",
+  "retail_object": "build/GEDE01/obj/game/game_fn_80033180.o",
+  "generated_object": "build/GEDE01/src/game/game_fn_80033180.o",
+  "source_sha256": "bcb6d93f8821941efbc28edfb23b759837b50c07a9253834a872918bd613e9f4",
+  "retail_object_sha256": "59f74ba4f8fcfc057634aaf6f927862a8dfca0252aeeb7701ed2958e92841134",
+  "generated_object_sha256": "9337d80fd214c85a8f03fc73af75ebe8acf86939c5f3c7aef8ef6cee83347522",
+  "retail_text_size": 1608,
+  "generated_text_size": 1616,
+  "canonical_match_percent": 81.6592,
+  "retail_relocations": 65,
+  "generated_relocations": 65,
+  "imported_measurement_provenance": "Unchanged reports from immutable candidate 4bd02f4be200a8a131e7488eb49381f2df787ba9; no objdiff or source measurement was regenerated for this mapping-only repair.",
+  "fresh_mapping_verification": {
+    "pre_repair": {
+      "command": ["python3", "configure.py", "then", ".tools/bin/ninja", "-j2", "build/GEDE01/src/game/game_fn_80033180.externalized"],
+      "exit_status": 1,
+      "failure": "externalize_elf_symbol.py requested absent symbol @95"
+    },
+    "generated_constant": {
+      "local_symbol": "@97",
+      "size": 8,
+      "section": ".sdata2",
+      "section_size": 8,
+      "bytes_hex": "4330000080000000",
+      "section_relocations": 0
+    },
+    "retail_mapping": {
+      "symbol": "lbl_8064E038",
+      "dol": "orig/GEDE01/sys/main.dol",
+      "require_whole_section": true,
+      "require_section": ".sdata2",
+      "reject_section_relocations": true
+    },
+    "post_repair": {
+      "command": ["python3", "configure.py", "then", ".tools/bin/ninja", "-j2", "build/GEDE01/src/game/game_fn_80033180.externalized"],
+      "exit_status": 0
+    }
+  },
+  "scope": "Only externalize_game_80033180_bias changed; C source, compiler options, split registration, and other rules are unchanged."
+}

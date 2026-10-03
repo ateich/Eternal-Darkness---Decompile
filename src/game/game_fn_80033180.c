@@ -140,6 +140,7 @@ s32 fn_80033180(void* object, s32 action, void* event, s32* completed)
                 fn_80201D14(object, 1);
             } else {
                 Vec3 point;
+                s32 update = 1;
                 fn_801F6B6C(state, &screen, 0, 5);
                 point.x = (float)screen.x * lbl_8064E1F4;
                 point.y = (float)screen.y * lbl_8064E1F4;
@@ -150,11 +151,14 @@ s32 fn_80033180(void* object, s32 action, void* event, s32* completed)
                 if (fn_80032924(state, &screen) != 0) {
                     fn_80201D2C(object, 0xB);
                     fn_80201D14(object, 1);
+                    update = 0;
                 } else if (fn_80032A5C(state) != 0) {
                     fn_80201D2C(object, 0xC);
                     fn_80201D14(object, 1);
                 }
-                fn_80032E90(state, &point);
+                if (update != 0) {
+                    fn_80032E90(state, &point);
+                }
             }
             return 1;
         }
@@ -182,6 +186,7 @@ s32 fn_80033180(void* object, s32 action, void* event, s32* completed)
                 if (fn_80032924(state, &screen) == 0 && !(state->flags & 1)) {
                     fn_80201D2C(object, 0x26);
                     fn_80201D14(object, 1);
+                    update = 0;
                 } else if (fn_80032A5C(state) != 0) {
                     if (state->flags & 1) {
                         fn_8020123C(0x39, object_id, object_id, 0);

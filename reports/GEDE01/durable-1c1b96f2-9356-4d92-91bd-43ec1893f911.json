@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "assignment_id": "1c1b96f2-9356-4d92-91bd-43ec1893f911",
+  "attempt": 1,
+  "base_commit": "135ea36340e1e58c710d686472efee0394e35a09",
+  "target": "fn_80033180",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-1c1b96f2-9356-4d92-91bd-43ec1893f911.json",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-1c1b96f2-9356-4d92-91bd-43ec1893f911.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-retail-1c1b96f2-9356-4d92-91bd-43ec1893f911.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-generated-1c1b96f2-9356-4d92-91bd-43ec1893f911.txt",
+    "eternal-darkness-decomp/reports/GEDE01/build-1c1b96f2-9356-4d92-91bd-43ec1893f911.txt",
+    "eternal-darkness-decomp/reports/GEDE01/build-mapping-1c1b96f2-9356-4d92-91bd-43ec1893f911.json"
+  ],
+  "divergence": "Guarded BUILD-MAPPING repair of preserved candidate 4bd02f4be200a8a131e7488eb49381f2df787ba9 from assignment 2cf8207d-b1b8-4336-96c4-678608e09724. The C source and imported objdiff, instruction-diff, and relocation evidence are unchanged. Fresh post-compile testing reproduced the stale @95 externalization failure, then passed after mapping the generated @97 whole .sdata2 constant to retail lbl_8064E038 with retail-DOL byte, section, and no-relocation guards. Imported canonical objdiff remains 81.6592%: retail is 1608 bytes and generated is 1616 bytes, so this is neither a byte match nor a relocation-strict match. The action 0xA/event 3 success path and action 0xB/event 3 transition-to-0x26 path both skip fn_80032E90, matching the reviewed retail control flow. Remaining divergence begins with nonvolatile register allocation and consequent instruction scheduling and branch-layout differences; both objects contain 65 relocations, with differing offsets shown in the imported raw tables. Full review and full-build verification remain for the serialized integration pipeline."
+}

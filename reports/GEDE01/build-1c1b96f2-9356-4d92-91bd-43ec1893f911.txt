@@ -1,0 +1,32 @@
+Manual BUILD-MAPPING repair for assignment 1c1b96f2-9356-4d92-91bd-43ec1893f911.
+
+Imported candidate evidence:
+- Candidate: 4bd02f4be200a8a131e7488eb49381f2df787ba9
+- Original assignment: 2cf8207d-b1b8-4336-96c4-678608e09724
+- The objdiff, instruction diff, and relocation reports were imported unchanged and renamed for this assignment.
+- Source SHA-256 remained bcb6d93f8821941efbc28edfb23b759837b50c07a9253834a872918bd613e9f4.
+
+Fresh pre-repair post-compile check:
+$ python3 configure.py && .tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_80033180.externalized
+[1/5] TOOL build/tools/sjiswrap.exe
+[2/5] MWCC build/GEDE01/src/game/game_fn_80033180.o
+[3/5] EXTERNALIZE build/GEDE01/src/game/game_fn_80033180.o
+python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_80033180.o @95 lbl_8064E038 orig/GEDE01/sys/main.dol && build/binutils/powerpc-eabi-objcopy --redefine-sym=@95=lbl_8064E038 --remove-section=.sdata2 build/GEDE01/src/game/game_fn_80033180.o && touch build/GEDE01/src/game/game_fn_80033180.externalized
+build/GEDE01/src/game/game_fn_80033180.o: symbol '@95' not found
+ninja: build stopped: subcommand failed.
+Exit status: 1
+
+Fresh generated-object mapping facts:
+- @97 is the sole 8-byte local object in .sdata2; @95 is absent.
+- .sdata2 is an 8-byte PROGBITS section with bytes 43300000 80000000.
+- No .rel.sdata2 or .rela.sdata2 section exists.
+- The generated object SHA-256 before externalization is 9337d80fd214c85a8f03fc73af75ebe8acf86939c5f3c7aef8ef6cee83347522.
+
+Fresh corrected post-compile check:
+$ python3 configure.py && .tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_80033180.externalized
+[1/1] RUN configure.py
+[1/2] MWCC build/GEDE01/src/game/game_fn_80033180.o
+[2/2] EXTERNALIZE build/GEDE01/src/game/game_fn_80033180.o
+Exit status: 0
+
+The corrected externalizer verified @97 against lbl_8064E038 in orig/GEDE01/sys/main.dol, required the whole .sdata2 section, and rejected section relocations before objcopy renamed the symbol and removed .sdata2. Full review and full-build verification remain for the serialized integration pipeline.
