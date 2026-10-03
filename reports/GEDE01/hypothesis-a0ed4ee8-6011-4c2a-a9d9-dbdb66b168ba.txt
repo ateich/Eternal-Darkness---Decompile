@@ -1,0 +1,30 @@
+Attempt 4 codegen hypothesis and result
+
+The earlier attempts tested ordinary pointer aliases, field-address expressions,
+and several initializer prototype shapes. This attempt tested a distinct
+register-lifetime hypothesis: declaring the address of the local descriptor as
+an explicit register-qualified pointer might make GC/1.3 materialize the address
+before assigning it to argument register r3. It also tested a volatile-qualified
+initializer parameter, to determine whether qualifier-aware argument conversion
+would inhibit address/result coalescing.
+
+Both probes were compiled with the canonical GC/1.3 flags. The register-pointer
+probe is preserved in probe-disasm.s and the volatile-parameter probe in
+probe-volatile-disasm.s. Both produced the same 276-byte text and prologue:
+
+  stw r31,204(r1)
+  mr r31,r3
+  addi r3,r1,8
+
+Neither produces retail's earlier address computation through r0:
+
+  addi r0,r1,8
+  stw r31,204(r1)
+  mr r31,r3
+  mr r3,r0
+
+The final source therefore retains the semantically precise typed prototype and
+the existing honest NonMatching reconstruction. Canonical and relocation-strict
+objdiff both measure 95.57143%. All seven relocation types, symbols, addends, and
+ordering agree; generated relocation offsets remain four bytes earlier after the
+missing prologue instruction.
