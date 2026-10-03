@@ -1,0 +1,14 @@
+COMMAND: python3 configure.py --version GEDE01 --no-progress
+EXIT: 0
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80026768.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80026768.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80026768.d build/GEDE01/src/game/game_fn_80026768.d
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80026768 fn_80026768 --format json -o reports/GEDE01/aggregate-copy-e0852d10-719c-4c2d-adf0-b637df94865a-canonical.json
+ INFO Writing to reports/GEDE01/aggregate-copy-e0852d10-719c-4c2d-adf0-b637df94865a-canonical.json
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80026768 fn_80026768 --format json -c function_reloc_diffs=name_address -o reports/GEDE01/aggregate-copy-e0852d10-719c-4c2d-adf0-b637df94865a-strict.json
+ INFO Writing to reports/GEDE01/aggregate-copy-e0852d10-719c-4c2d-adf0-b637df94865a-strict.json
+EXIT: 0
+retail object SHA256: 956f7ce044c60551fd6336434c6d206c708f4b6181e9e741a8d37c896ac25a54
+generated object SHA256: 2ab13f8ca30aa308f2aa12d62245e792a489abd2a65df4f08ddc2080d8e449dc
+source SHA256: 36d2831b79bccfadab1f1b4b097ad695116a2301cbfc7dd044fc548bf6aeba78

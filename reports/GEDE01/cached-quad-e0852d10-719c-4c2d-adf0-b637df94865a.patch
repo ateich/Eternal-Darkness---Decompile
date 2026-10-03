@@ -1,0 +1,37 @@
+--- accepted-base
++++ cached-quad
+@@ -147,23 +147,25 @@
+     fn_801A852C(&draw_color, -1, 0, 0);
+     fn_801ECF50(9);
+ 
+-    x0 = state->left + 6;
+-    x1 = x0 + 19;
+-    for (i = 0; i < 3; i++) {
+-        s32 top = state->top + edge.half[i * 2];
+-        s32 bot = state->top + edge.half[i * 2 + 1];
++    x0 = (s16)(state->left + 6);
++    x1 = (s16)(x0 + 19);
++    for (i = 0; i < 6; i += 2) {
++        s32 top = (s16)(state->top + edge.half[i]);
++        s32 bot = (s16)(state->top + edge.half[i + 1]);
++        u32 top_color = packed[i];
++        u32 bottom_color = packed[i + 1];
+         fn_80226AB4(0x80, 5, 4);
+         fn_80026754(x0, top, texture);
+-        fn_80026DBC(packed[i * 2]);
++        fn_80026DBC(top_color);
+         fn_80026DAC(0, 0);
+         fn_80026754(x1, top, texture);
+-        fn_80026DBC(packed[i * 2]);
++        fn_80026DBC(top_color);
+         fn_80026DAC(0, 0);
+         fn_80026754(x1, bot, texture);
+-        fn_80026DBC(packed[i * 2 + 1]);
++        fn_80026DBC(bottom_color);
+         fn_80026DAC(0, 0);
+         fn_80026754(x0, bot, texture);
+-        fn_80026DBC(packed[i * 2 + 1]);
++        fn_80026DBC(bottom_color);
+         fn_80026DAC(0, 0);
+         fn_80026740();
+     }
