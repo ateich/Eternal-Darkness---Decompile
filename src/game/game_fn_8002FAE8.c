@@ -91,9 +91,7 @@ undefined4 fn_8002FAE8(undefined4 param_1,int param_2,undefined4 param_3)
   undefined4 local_1c8;
   undefined4 local_1c4;
   undefined4 local_1c0 [3];
-  int local_1b4;
-  int local_1b0;
-  int local_1ac;
+  int local_1b4[3];
   int local_1a8;
   int local_1a4;
   int local_1a0;
@@ -106,15 +104,9 @@ undefined4 fn_8002FAE8(undefined4 param_1,int param_2,undefined4 param_3)
   int local_17c;
   float local_178;
   undefined1 auStack_174 [12];
-  int local_168;
-  int local_164;
-  float local_160;
-  int local_15c;
-  int local_158;
-  float local_154;
-  int local_150;
-  int local_14c;
-  int local_148;
+  float local_168[3];
+  float local_15c[3];
+  float local_150[3];
   undefined4 local_144;
   undefined4 local_140;
   undefined4 local_13c;
@@ -133,10 +125,7 @@ undefined4 fn_8002FAE8(undefined4 param_1,int param_2,undefined4 param_3)
   undefined1 auStack_108 [40];
   undefined1 auStack_e0 [40];
   undefined1 auStack_b8 [40];
-  undefined1 auStack_90 [8];
-  int local_88;
-  int local_84;
-  int local_80;
+  undefined4 auStack_90 [5];
   undefined4 local_68;
   uint uStack_64;
   int local_60;
@@ -180,10 +169,10 @@ undefined4 fn_8002FAE8(undefined4 param_1,int param_2,undefined4 param_3)
           local_120 = lbl_80238CD0[15];
           local_11c = lbl_80238CD0[16];
           local_118 = lbl_80238CD0[17];
-          fn_80201E78(&local_1b4,(void*)iVar5);
-          piVar24[10] = local_1b4;
-          piVar24[0xb] = local_1b0;
-          piVar24[0xc] = local_1ac;
+          fn_80201E78(local_1b4,(void*)iVar5);
+          piVar24[10] = local_1b4[0];
+          piVar24[0xb] = local_1b4[1];
+          piVar24[0xc] = local_1b4[2];
           uVar7 = (int)fn_80201BC8(iVar4);
           fn_80031544(iVar4,0x13,0);
           iVar8 = fn_80201B5C(iVar5);
@@ -193,9 +182,9 @@ undefined4 fn_8002FAE8(undefined4 param_1,int param_2,undefined4 param_3)
           iVar8 = fn_80201B5C(iVar5);
           if (((iVar8 == 0x39) && (iVar8 = (int)fn_80201BC8(iVar5), iVar8 != 0)) &&
              (iVar8 = fn_8011F6A4(iVar8,0,1,0xffffffff,auStack_90,1), iVar8 != -1)) {
-            piVar24[10] = local_88;
-            piVar24[0xb] = local_84;
-            piVar24[0xc] = local_80;
+            piVar24[10] = auStack_90[2];
+            piVar24[0xb] = auStack_90[3];
+            piVar24[0xc] = auStack_90[4];
           }
           if (*piVar24 == 0) {
             uVar9 = fn_80035628((void*)iVar4);
@@ -325,20 +314,20 @@ undefined4 fn_8002FAE8(undefined4 param_1,int param_2,undefined4 param_3)
           if ((lbl_8064D18C != 0x61) ||
              (iVar5 = fn_80201AE4(), piVar24[2] != iVar5)) {
             uVar7 = (int)fn_80201BC8(iVar4);
-            local_15c = piVar24[7];
-            local_158 = piVar24[8];
-            local_154 = (float)piVar24[9] + lbl_8064E114;
-            local_168 = piVar24[10];
-            local_164 = piVar24[0xb];
-            local_160 = (float)piVar24[0xc] + lbl_8064E114;
-            fn_8013F4D0(auStack_108,&local_15c,&local_168);
-            iVar5 = fn_8014317C(auStack_108,&local_150,uVar7,0,0x20);
+            local_15c[0] = ((float *)piVar24)[7];
+            local_15c[1] = ((float *)piVar24)[8];
+            local_15c[2] = ((float *)piVar24)[9] + lbl_8064E114;
+            local_168[0] = ((float *)piVar24)[10];
+            local_168[1] = ((float *)piVar24)[0xb];
+            local_168[2] = ((float *)piVar24)[0xc] + lbl_8064E114;
+            fn_8013F4D0(auStack_108,local_15c,local_168);
+            iVar5 = fn_8014317C(auStack_108,local_150,uVar7,0,0x20);
             if (iVar5 != 0) {
               fVar1 = lbl_8064E114;
-              piVar24[10] = local_150;
-              piVar24[0xb] = local_14c;
-              piVar24[0xc] = local_148;
-              piVar24[0xc] = (int)((float)piVar24[0xc] - fVar1);
+              ((float *)piVar24)[10] = local_150[0];
+              ((float *)piVar24)[0xb] = local_150[1];
+              ((float *)piVar24)[0xc] = local_150[2];
+              ((float *)piVar24)[0xc] -= fVar1;
               piVar24[6] = 1;
               if (lbl_8064D18C == 0x29) {
                 piVar24[0xc] = *(const int *)&lbl_8064E138;
@@ -421,9 +410,9 @@ undefined4 fn_8002FAE8(undefined4 param_1,int param_2,undefined4 param_3)
             local_180 = piVar24[10];
             local_17c = piVar24[0xb];
             piVar24[0x103] = local_180;
-            local_178 = (float)piVar24[0xc] + local_178;
+            local_178 = ((float *)piVar24)[0xc] + local_178;
             piVar24[0x104] = local_17c;
-            piVar24[0x105] = (int)local_178;
+            ((float *)piVar24)[0x105] = local_178;
             fn_80005278(piVar24 + 0x106,&local_1d4,6);
             piVar24[0x102] = 0;
             *(undefined1 *)((int)piVar24 + 0x41e) = 4;
