@@ -1,0 +1,21 @@
+Attempt 3 codegen hypothesis
+
+The retail prologue computes &effect before preserving the incoming position
+pointer, so r3 is still live and the stack address is formed in r0, then moved
+to r3 after position is saved in r31. The accepted reconstruction schedules
+the r31 save/copy first and therefore coalesces the address directly into r3.
+
+A distinct source-level hypothesis was tested: making the stack address pass
+through an explicit EffectDescriptor pointer alias might preserve evaluation
+order and prevent register coalescing. Related type-shape probes used the
+address of the first field, an unspecified initializer prototype, and a void*
+initializer prototype. Each probe was compiled with the canonical GC/1.3
+flags. Every probe retained the same generated prologue:
+
+  stw r31,204(r1)
+  mr r31,r3
+  addi r3,r1,8
+
+Thus these alias/type-shape variants do not explain the retail scheduling.
+The final source retains the semantically precise typed prototype and the
+single existing honest NonMatching reconstruction.
