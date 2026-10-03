@@ -1,0 +1,277 @@
+  stwu r1, -0xa0(r1) |  stwu r1, -0xa0(r1)
+ 4 mflr r0 | 4 mflr r0
+ 8 stw r0, 0xa4(r1) | 8 stw r0, 0xa4(r1)
+ 12 stfd f31, 0x90(r1) | 12 stfd f31, 0x90(r1)
+ 16 psq_st f31, 0x98(r1), 0, qr0 | 16 psq_st f31, 0x98(r1), 0, qr0
+ 20 stmw r18, 0x58(r1) | 20 stmw r18, 0x58(r1)
+ 24 mr r28, r3 | 24 mr r28, r3
+ 28 mr r18, r4 | 28 mr r18, r4
+ 32 bl fn_80201B9C | 32 bl fn_80201B9C
+ 36 lis r4, lbl_80238DA0@ha | 36 lis r4, lbl_80238DA0@ha
+ 40 mr r29, r3 | 40 mr r29, r3
+ 44 addi r6, r4, lbl_80238DA0@l | 44 addi r6, r4, lbl_80238DA0@l
+ 48 lfs f31, lbl_8064E228@sda21 | 48 lfs f31, lbl_8064E228@sda21
+ 52 lwz r5, 0x0(r6) | 52 lwz r5, 0x0(r6)
+ 56 mr r3, r28 | 56 mr r3, r28
+ 60 lwz r4, 0x4(r6) | 60 lwz r4, 0x4(r6)
+ 64 li r31, 0x0 | 64 li r31, 0x0
+ 68 lwz r0, 0x8(r6) | 68 lwz r0, 0x8(r6)
+ 72 stw r5, 0x3c(r1) | 72 stw r5, 0x3c(r1)
+ 76 stw r4, 0x40(r1) | 76 stw r4, 0x40(r1)
+ 80 stw r0, 0x44(r1) | 80 stw r0, 0x44(r1)
+ 84 bl fn_80201B8C | 84 bl fn_80201B8C
+ 88 lwz r30, 0x0(r3) | 88 lwz r30, 0x0(r3)
+ 92 mr r3, r28 | 92 mr r3, r28
+ 96 bl fn_80201BC8 | 96 bl fn_80201BC8
+ 100 mr. r27, r3 | 100 mr. r27, r3
+ 104 beq 0x80 | 104 beq 0x80
+ 108 mr r4, r27 | 108 mr r4, r27
+ 112 addi r3, r1, 0x18 | 112 addi r3, r1, 0x18
+ 116 bl fn_8011F114 | 116 bl fn_8011F114
+ 120 addi r5, r1, 0x18 | 120 addi r5, r1, 0x18
+ 124 b 0x84 | 124 b 0x84
+ 128 addi r5, r1, 0x3c | 128 addi r5, r1, 0x3c
+ 132 lwz r4, 0x0(r5) | 132 lwz r4, 0x0(r5)
+ 136 mr r3, r18 | 136 mr r3, r18
+ 140 lwz r0, 0x4(r5) | 140 lwz r0, 0x4(r5)
+ 144 stw r4, 0x3c(r1) | 144 stw r4, 0x3c(r1)
+ 148 stw r0, 0x40(r1) | 148 stw r0, 0x40(r1)
+ 152 lwz r0, 0x8(r5) | 152 lwz r0, 0x8(r5)
+ 156 stw r0, 0x44(r1) | 156 stw r0, 0x44(r1)
+ 160 bl fn_801A7570 | 160 bl fn_801A7570
+ 164 mr r0, r3 | 164 mr r0, r3
+ 168 mr r3, r28 | 168 mr r3, r28
+DIFF_ARG_MISMATCH 172 mr r22, r0 | 172 mr r20, r0
+ 176 bl fn_80205288 | 176 bl fn_80205288
+ 180 mr. r19, r3 | 180 mr. r19, r3
+ 184 beq 0xc4 | 184 beq 0xc4
+ 188 bl fn_80201B8C | 188 bl fn_80201B8C
+ 192 b 0xc8 | 192 b 0xc8
+ 196 li r3, 0x0 | 196 li r3, 0x0
+ 200 cmplwi r3, 0x0 | 200 cmplwi r3, 0x0
+ 204 beq 0xd8 | 204 beq 0xd8
+ 208 lbz r18, 0x9f(r3) | 208 lbz r18, 0x9f(r3)
+ 212 b 0xdc | 212 b 0xdc
+ 216 li r18, 0x13 | 216 li r18, 0x13
+ 220 mr r3, r28 | 220 mr r3, r28
+ 224 bl fn_80201B54 | 224 bl fn_80201B54
+ 228 cmplwi r19, 0x0 | 228 cmplwi r19, 0x0
+ 232 mr r26, r3 | 232 mr r26, r3
+ 236 beq 0xfc | 236 beq 0xfc
+ 240 mr r3, r19 | 240 mr r3, r19
+ 244 bl fn_80201BC8 | 244 bl fn_80201BC8
+ 248 b 0x100 | 248 b 0x100
+ 252 li r3, 0x0 | 252 li r3, 0x0
+ 256 cmplwi r3, 0x0 | 256 cmplwi r3, 0x0
+ 260 beq 0x110 | 260 beq 0x110
+ 264 bl fn_8011EB04 | 264 bl fn_8011EB04
+ 268 b 0x114 | 268 b 0x114
+ 272 li r3, -0x1 | 272 li r3, -0x1
+ 276 cmplwi r19, 0x0 | 276 cmplwi r19, 0x0
+ 280 beq 0x134 | 280 beq 0x134
+ 284 cmpwi r3, 0x63 | 284 cmpwi r3, 0x63
+ 288 beq 0x134 | 288 beq 0x134
+ 292 cmpwi r3, 0xc6 | 292 cmpwi r3, 0xc6
+ 296 beq 0x134 | 296 beq 0x134
+ 300 cmpwi r3, 0xf1 | 300 cmpwi r3, 0xf1
+ 304 bne 0x13c | 304 bne 0x13c
+ 308 li r3, 0x0 | 308 li r3, 0x0
+ 312 b 0x438 | 312 b 0x438
+ 316 cmpwi r18, 0x12 | 316 cmpwi r18, 0x12
+ 320 bne 0x178 | 320 bne 0x178
+ 324 mr r3, r19 | 324 mr r3, r19
+ 328 bl fn_80201C24 | 328 bl fn_80201C24
+ 332 mr r18, r3 | 332 mr r18, r3
+ 336 bl fn_80157C80 | 336 bl fn_80157C80
+ 340 rlwinm. r0, r3, 0, 26, 26 | 340 rlwinm. r0, r3, 0, 26, 26
+ 344 bne 0x16c | 344 bne 0x16c
+ 348 mr r3, r18 | 348 mr r3, r18
+ 352 bl fn_80157C80 | 352 bl fn_80157C80
+ 356 rlwinm. r0, r3, 0, 24, 24 | 356 rlwinm. r0, r3, 0, 24, 24
+ 360 beq 0x174 | 360 beq 0x174
+ 364 li r3, 0x0 | 364 li r3, 0x0
+ 368 b 0x438 | 368 b 0x438
+ 372 lfs f31, lbl_8064E22C@sda21 | 372 lfs f31, lbl_8064E22C@sda21
+ 376 lis r4, lbl_803003C8@ha | 376 lis r4, lbl_803003C8@ha
+ 380 lis r3, lbl_80238DAC@ha | 380 lis r3, lbl_80238DAC@ha
+DIFF_ARG_MISMATCH 384 mr r23, r22 | 384 mr r23, r20
+ 388 addi r24, r4, lbl_803003C8@l | 388 addi r24, r4, lbl_803003C8@l
+ 392 addi r25, r3, lbl_80238DAC@l | 392 addi r25, r3, lbl_80238DAC@l
+ 396 b 0x424 | 396 b 0x424
+ 400 mr r3, r29 | 400 mr r3, r29
+ 404 bl fn_80201B8C | 404 bl fn_80201B8C
+ 408 lwz r5, 0x0(r25) | 408 lwz r5, 0x0(r25)
+ 412 mr r21, r3 | 412 mr r21, r3
+ 416 lwz r4, 0x4(r25) | 416 lwz r4, 0x4(r25)
+ 420 mr r3, r29 | 420 mr r3, r29
+ 424 lwz r0, 0x8(r25) | 424 lwz r0, 0x8(r25)
+ 428 stw r5, 0x30(r1) | 428 stw r5, 0x30(r1)
+ 432 stw r4, 0x34(r1) | 432 stw r4, 0x34(r1)
+ 436 stw r0, 0x38(r1) | 436 stw r0, 0x38(r1)
+ 440 bl fn_80201B54 | 440 bl fn_80201B54
+ 444 mr r0, r3 | 444 mr r0, r3
+ 448 mr r3, r29 | 448 mr r3, r29
+ 452 mr r20, r0 | 452 mr r20, r0
+ 456 bl fn_80201BC8 | 456 bl fn_80201BC8
+ 460 cmplwi r3, 0x0 | 460 cmplwi r3, 0x0
+ 464 beq 0x1e8 | 464 beq 0x1e8
+ 468 mr r4, r3 | 468 mr r4, r3
+ 472 addi r3, r1, 0xc | 472 addi r3, r1, 0xc
+ 476 bl fn_8011F114 | 476 bl fn_8011F114
+ 480 addi r5, r1, 0xc | 480 addi r5, r1, 0xc
+ 484 b 0x1ec | 484 b 0x1ec
+ 488 addi r5, r1, 0x30 | 488 addi r5, r1, 0x30
+ 492 lwz r4, 0x0(r5) | 492 lwz r4, 0x0(r5)
+ 496 mr r3, r29 | 496 mr r3, r29
+ 500 lwz r0, 0x4(r5) | 500 lwz r0, 0x4(r5)
+ 504 stw r4, 0x30(r1) | 504 stw r4, 0x30(r1)
+ 508 stw r0, 0x34(r1) | 508 stw r0, 0x34(r1)
+ 512 lwz r0, 0x8(r5) | 512 lwz r0, 0x8(r5)
+ 516 stw r0, 0x38(r1) | 516 stw r0, 0x38(r1)
+ 520 bl fn_80201EB8 | 520 bl fn_80201EB8
+ 524 lwz r0, lbl_8064D18C@sda21 | 524 lwz r0, lbl_8064D18C@sda21
+ 528 cmpw r0, r3 | 528 cmpw r0, r3
+ 532 bne 0x418 | 532 bne 0x418
+ 536 mr r3, r29 | 536 mr r3, r29
+ 540 bl fn_80201B4C | 540 bl fn_80201B4C
+ 544 cmpwi r3, 0x0 | 544 cmpwi r3, 0x0
+ 548 beq 0x238 | 548 beq 0x238
+ 552 mr r3, r29 | 552 mr r3, r29
+ 556 bl fn_80201B4C | 556 bl fn_80201B4C
+ 560 cmpwi r3, 0x1 | 560 cmpwi r3, 0x1
+ 564 bne 0x418 | 564 bne 0x418
+ 568 cmplw r29, r28 | 568 cmplw r29, r28
+ 572 beq 0x418 | 572 beq 0x418
+ 576 mr r3, r29 | 576 mr r3, r29
+ 580 bl fn_80201B64 | 580 bl fn_80201B64
+ 584 cmpwi r3, 0x8 | 584 cmpwi r3, 0x8
+ 588 beq 0x260 | 588 beq 0x260
+ 592 mr r3, r29 | 592 mr r3, r29
+ 596 bl fn_80201B64 | 596 bl fn_80201B64
+ 600 cmpwi r3, 0x9 | 600 cmpwi r3, 0x9
+ 604 bne 0x418 | 604 bne 0x418
+ 608 mr r3, r29 | 608 mr r3, r29
+ 612 bl fn_80201B54 | 612 bl fn_80201B54
+ 616 mr r22, r3 | 616 mr r22, r3
+ 620 mr r4, r26 | 620 mr r4, r26
+ 624 li r3, 0xc1 | 624 li r3, 0xc1
+ 628 li r6, 0x0 | 628 li r6, 0x0
+ 632 mr r5, r22 | 632 mr r5, r22
+ 636 bl fn_8020123C | 636 bl fn_8020123C
+ 640 li r0, -0x1 | 640 li r0, -0x1
+ 644 and. r0, r4, r0 | 644 and. r0, r4, r0
+ 648 beq 0x418 | 648 beq 0x418
+ 652 addi r3, r1, 0x30 | 652 addi r3, r1, 0x30
+ 656 addi r4, r1, 0x3c | 656 addi r4, r1, 0x3c
+ 660 bl fn_80178E94 | 660 bl fn_80178E94
+ 664 lis r0, 0x4330 | 664 lis r0, 0x4330
+ 668 stw r3, 0x4c(r1) | 668 stw r3, 0x4c(r1)
+DIFF_ARG_MISMATCH 672 lfd f2, lbl_8064E220@sda21 | 672 lfd f2, @74@sda21
+ 676 stw r0, 0x48(r1) | 676 stw r0, 0x48(r1)
+ 680 lfs f0, lbl_8064E230@sda21 | 680 lfs f0, lbl_8064E230@sda21
+ 684 lfd f1, 0x48(r1) | 684 lfd f1, 0x48(r1)
+ 688 fsubs f1, f1, f2 | 688 fsubs f1, f1, f2
+ 692 fcmpo cr0, f1, f0 | 692 fcmpo cr0, f1, f0
+ 696 bge 0x418 | 696 bge 0x418
+ 700 mr r3, r29 | 700 mr r3, r29
+ 704 mr r4, r23 | 704 mr r4, r23
+ 708 addi r5, r1, 0x8 | 708 addi r5, r1, 0x8
+ 712 addi r6, r1, 0x24 | 712 addi r6, r1, 0x24
+ 716 bl fn_80036A1C | 716 bl fn_80036A1C
+ 720 mr r18, r3 | 720 mr r18, r3
+ 724 addi r3, r1, 0x24 | 724 addi r3, r1, 0x24
+ 728 addi r4, r1, 0x3c | 728 addi r4, r1, 0x3c
+ 732 bl fn_80178E94 | 732 bl fn_80178E94
+ 736 cmpwi r18, 0x0 | 736 cmpwi r18, 0x0
+ 740 mr r19, r3 | 740 mr r19, r3
+ 744 beq 0x354 | 744 beq 0x354
+ 748 lis r0, 0x4330 | 748 lis r0, 0x4330
+ 752 stw r19, 0x4c(r1) | 752 stw r19, 0x4c(r1)
+DIFF_ARG_MISMATCH 756 lfd f1, lbl_8064E220@sda21 | 756 lfd f1, @74@sda21
+ 760 stw r0, 0x48(r1) | 760 stw r0, 0x48(r1)
+ 764 lfd f0, 0x48(r1) | 764 lfd f0, 0x48(r1)
+ 768 fsubs f0, f0, f1 | 768 fsubs f0, f0, f1
+ 772 fcmpo cr0, f0, f31 | 772 fcmpo cr0, f0, f31
+ 776 bge 0x354 | 776 bge 0x354
+ 780 lfs f1, lbl_8064E234@sda21 | 780 lfs f1, lbl_8064E234@sda21
+ 784 mr r3, r27 | 784 mr r3, r27
+ 788 addi r4, r1, 0x24 | 788 addi r4, r1, 0x24
+ 792 li r5, 0x0 | 792 li r5, 0x0
+ 796 bl fn_80204434 | 796 bl fn_80204434
+ 800 clrlwi. r0, r3, 24 | 800 clrlwi. r0, r3, 24
+ 804 beq 0x354 | 804 beq 0x354
+ 808 stw r22, 0x78(r30) | 808 stw r22, 0x78(r30)
+ 812 li r0, 0xb4 | 812 li r0, 0xb4
+ 816 mr r31, r29 | 816 mr r31, r29
+ 820 sth r0, 0x8e(r30) | 820 sth r0, 0x8e(r30)
+ 824 lwz r3, 0x3c(r1) | 824 lwz r3, 0x3c(r1)
+ 828 lwz r0, 0x40(r1) | 828 lwz r0, 0x40(r1)
+ 832 stw r3, 0x2c(r30) | 832 stw r3, 0x2c(r30)
+ 836 stw r0, 0x30(r30) | 836 stw r0, 0x30(r30)
+ 840 lwz r0, 0x44(r1) | 840 lwz r0, 0x44(r1)
+ 844 stw r0, 0x34(r30) | 844 stw r0, 0x34(r30)
+ 848 b 0x39c | 848 b 0x39c
+ 852 cmpwi r18, 0x0 | 852 cmpwi r18, 0x0
+ 856 beq 0x39c | 856 beq 0x39c
+ 860 lwz r0, 0x78(r30) | 860 lwz r0, 0x78(r30)
+ 864 cmpw r22, r0 | 864 cmpw r22, r0
+ 868 bne 0x39c | 868 bne 0x39c
+ 872 lfs f0, lbl_8064E238@sda21 | 872 lfs f0, lbl_8064E238@sda21
+ 876 cmpwi r18, 0x0 | 876 cmpwi r18, 0x0
+ 880 fadds f31, f31, f0 | 880 fadds f31, f31, f0
+ 884 beq 0x39c | 884 beq 0x39c
+ 888 lis r0, 0x4330 | 888 lis r0, 0x4330
+ 892 stw r19, 0x4c(r1) | 892 stw r19, 0x4c(r1)
+DIFF_ARG_MISMATCH 896 lfd f1, lbl_8064E220@sda21 | 896 lfd f1, @74@sda21
+ 900 stw r0, 0x48(r1) | 900 stw r0, 0x48(r1)
+ 904 lfd f0, 0x48(r1) | 904 lfd f0, 0x48(r1)
+ 908 fsubs f0, f0, f1 | 908 fsubs f0, f0, f1
+ 912 fcmpo cr0, f0, f31 | 912 fcmpo cr0, f0, f31
+ 916 bge 0x39c | 916 bge 0x39c
+ 920 mr r31, r29 | 920 mr r31, r29
+ 924 cmplwi r31, 0x0 | 924 cmplwi r31, 0x0
+ 928 beq 0x418 | 928 beq 0x418
+ 932 lwz r0, 0x8(r24) | 932 lwz r0, 0x8(r24)
+ 936 cmpwi r0, 0x5 | 936 cmpwi r0, 0x5
+ 940 bne 0x3f0 | 940 bne 0x3f0
+ 944 cmplwi r21, 0x0 | 944 cmplwi r21, 0x0
+ 948 beq 0x3f0 | 948 beq 0x3f0
+ 952 mr r3, r21 | 952 mr r3, r21
+ 956 bl fn_800361F8 | 956 bl fn_800361F8
+ 960 cmpwi r3, 0x0 | 960 cmpwi r3, 0x0
+ 964 bne 0x3f0 | 964 bne 0x3f0
+ 968 mr r4, r26 | 968 mr r4, r26
+ 972 mr r5, r20 | 972 mr r5, r20
+ 976 li r3, 0xc2 | 976 li r3, 0xc2
+ 980 li r6, 0x0 | 980 li r6, 0x0
+ 984 bl fn_8020123C | 984 bl fn_8020123C
+ 988 li r0, -0x1 | 988 li r0, -0x1
+ 992 and. r0, r4, r0 | 992 and. r0, r4, r0
+ 996 beq 0x3f0 | 996 beq 0x3f0
+ 1000 li r31, 0x0 | 1000 li r31, 0x0
+ 1004 b 0x418 | 1004 b 0x418
+ 1008 stw r22, 0x74(r30) | 1008 stw r22, 0x74(r30)
+ 1012 lwz r3, 0x24(r1) | 1012 lwz r3, 0x24(r1)
+ 1016 lwz r0, 0x28(r1) | 1016 lwz r0, 0x28(r1)
+ 1020 stw r3, 0x38(r30) | 1020 stw r3, 0x38(r30)
+ 1024 stw r0, 0x3c(r30) | 1024 stw r0, 0x3c(r30)
+ 1028 lwz r0, 0x2c(r1) | 1028 lwz r0, 0x2c(r1)
+ 1032 stw r0, 0x40(r30) | 1032 stw r0, 0x40(r30)
+ 1036 lwz r0, 0x8(r1) | 1036 lwz r0, 0x8(r1)
+ 1040 stw r0, 0x54(r30) | 1040 stw r0, 0x54(r30)
+ 1044 b 0x434 | 1044 b 0x434
+ 1048 mr r3, r29 | 1048 mr r3, r29
+ 1052 bl fn_80201BC0 | 1052 bl fn_80201BC0
+ 1056 mr r29, r3 | 1056 mr r29, r3
+ 1060 cmplwi r29, 0x0 | 1060 cmplwi r29, 0x0
+ 1064 beq 0x434 | 1064 beq 0x434
+ 1068 cmplwi r31, 0x0 | 1068 cmplwi r31, 0x0
+ 1072 beq 0x190 | 1072 beq 0x190
+ 1076 mr r3, r31 | 1076 mr r3, r31
+ 1080 psq_l f31, 0x98(r1), 0, qr0 | 1080 psq_l f31, 0x98(r1), 0, qr0
+ 1084 lfd f31, 0x90(r1) | 1084 lfd f31, 0x90(r1)
+ 1088 lmw r18, 0x58(r1) | 1088 lmw r18, 0x58(r1)
+ 1092 lwz r0, 0xa4(r1) | 1092 lwz r0, 0xa4(r1)
+ 1096 mtlr r0 | 1096 mtlr r0
+ 1100 addi r1, r1, 0xa0 | 1100 addi r1, r1, 0xa0
+ 1104 blr  | 1104 blr

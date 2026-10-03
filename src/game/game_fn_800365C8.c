@@ -77,7 +77,8 @@ void* fn_800365C8(register void* source, register void* query)
     register s32 candidate_id;
     register s32 source_id;
     register s32 previous_id;
-    register s32 query_value;
+    register long query_value;
+    register s32 message_id;
     register s32 subtype;
     register s32 path_ok;
     register u32 distance;
@@ -89,6 +90,7 @@ void* fn_800365C8(register void* source, register void* query)
     Vec3 candidate_temporary;
     Vec3* position;
     s32 path_value;
+    u32 message_result;
 
     candidate = fn_80201B9C();
     source_position = lbl_80238DA0;
@@ -103,7 +105,7 @@ void* fn_800365C8(register void* source, register void* query)
         position = &source_position;
     }
     source_position = *position;
-    query_value = fn_801A7570(query);
+    message_id = fn_801A7570(query);
     linked = fn_80205288(source);
     if (linked != 0) {
         info = fn_80201B8C(linked);
@@ -130,6 +132,7 @@ void* fn_800365C8(register void* source, register void* query)
         best_distance = lbl_8064E22C;
     }
 
+    query_value = message_id;
     while (candidate != 0 && selected == 0) {
         info = fn_80201B8C(candidate);
         candidate_position = lbl_80238DAC;
@@ -149,18 +152,19 @@ void* fn_800365C8(register void* source, register void* query)
             (fn_80201B4C(candidate) == 0 || fn_80201B4C(candidate) == 1) &&
             candidate != source &&
             (fn_80201B64(candidate) == 8 || fn_80201B64(candidate) == 9)) {
-            s32 candidate_message_id = fn_80201B54(candidate);
-            if ((u32)fn_8020123C(0xC1, source_id, candidate_message_id, 0) != 0 &&
+            message_id = fn_80201B54(candidate);
+            message_result = fn_8020123C(0xC1, source_id, message_id, 0) & 0xFFFFFFFFULL;
+            if (message_result != 0 &&
                 (float)fn_80178E94(&candidate_position, &source_position) < lbl_8064E230) {
                 path_ok = fn_80036A1C(candidate, query_value, &path_value, &path_position);
                 distance = fn_80178E94(&path_position, &source_position);
                 if (path_ok != 0 && (float)distance < best_distance &&
                     fn_80204434(source_transform, &path_position, 0, lbl_8064E234) != 0) {
-                    state->source_id = candidate_message_id;
+                    state->source_id = message_id;
                     state->timer = 180;
                     selected = candidate;
                     state->source_position = source_position;
-                } else if (path_ok != 0 && candidate_message_id == state->source_id) {
+                } else if (path_ok != 0 && message_id == state->source_id) {
                     best_distance += lbl_8064E238;
                     if (path_ok != 0 && (float)distance < best_distance) {
                         selected = candidate;
@@ -168,11 +172,13 @@ void* fn_800365C8(register void* source, register void* query)
                 }
 
                 if (selected != 0) {
-                    if (lbl_803003C8.mode == 5 && info != 0 && fn_800361F8(info) == 0 &&
-                        (u32)fn_8020123C(0xC2, source_id, candidate_id, 0) != 0) {
+                    if (lbl_803003C8.mode == 5 && info != 0 && (s32)fn_800361F8(info) == 0 &&
+                        ((message_result = fn_8020123C(0xC2, source_id, candidate_id, 0) &
+                                           0xFFFFFFFFULL),
+                         message_result != 0)) {
                         selected = 0;
                     } else {
-                        state->target_id = candidate_message_id;
+                        state->target_id = message_id;
                         state->target_position = path_position;
                         state->path_value = path_value;
                         break;
