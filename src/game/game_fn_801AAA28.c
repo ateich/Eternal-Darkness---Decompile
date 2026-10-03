@@ -4,6 +4,10 @@ typedef struct Vec3 {
     float z;
 } Vec3;
 
+typedef unsigned char u8;
+typedef struct Target Target;
+typedef struct Voice Voice;
+
 typedef struct State {
     unsigned char pad[0x90];
     Vec3 first;
@@ -21,9 +25,9 @@ extern float lbl_80650E68;
 extern float lbl_80650E6C;
 extern float lbl_80650E70;
 
-extern void fn_801C9914(void*, void*, void*, void*, void*, float, float, float,
-                        int, int, int);
-extern void memset(void*, int, unsigned long);
+extern int fn_801C9914(Voice*, Vec3*, Vec3*, Vec3*, float, float, float, Vec3*,
+                       void*, u8, Target*);
+extern void* memset(void*, int, unsigned long);
 extern void fn_801ACC94(int);
 
 void fn_801AAA28(void)
@@ -51,9 +55,9 @@ void fn_801AAA28(void)
     fourth->y = lbl_80650E68;
     fourth->z = value;
 
-    fn_801C9914((void*)&lbl_80608020, (void*)first, (void*)second,
-                (void*)third, (void*)fourth, lbl_80650E6C,
-                lbl_80650E6C, lbl_80650E70, 0, 0, 0);
+    fn_801C9914((Voice*)&lbl_80608020, (Vec3*)first, (Vec3*)second,
+                (Vec3*)third, lbl_80650E6C, lbl_80650E6C, lbl_80650E70,
+                (Vec3*)fourth, (void*)0, 0, (Target*)0);
     memset(lbl_806080E0, 0, 0x2F80);
     lbl_8064D2F4 = 1;
     fn_801ACC94(1);

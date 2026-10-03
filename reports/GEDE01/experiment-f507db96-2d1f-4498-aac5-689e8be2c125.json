@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "target": "fn_801AAA28",
+  "compiler": "canonical existing GC/1.3 settings with -schedule off",
+  "corrected_baseline": {
+    "retail_bytes": 176,
+    "generated_bytes": 176,
+    "canonical_percent": 99.454544,
+    "relocation_strict_percent": 99.454544,
+    "relocations": "13/13 equal by offset, type, target, and addend",
+    "canonical_sha256": "ccc29d377136e592a4d575c1bbb928f7f157245be885cb431411f05cb53f06b0"
+  },
+  "single_permitted_trial": {
+    "change": "Combined each pointer assignment with its x store as an assignment expression; no other source or flag change.",
+    "canonical_percent": 99.454544,
+    "relocation_strict_percent": 99.454544,
+    "canonical_sha256": "ccc29d377136e592a4d575c1bbb928f7f157245be885cb431411f05cb53f06b0",
+    "outcome": "No improvement; trial discarded and corrected baseline retained."
+  },
+  "divergence": "Four operand-selection differences remain at text offsets 0x1c, 0x2c, 0x3c, and 0x50: retail stores through 0(r4), 0(r5), 0(r6), and 0(r7), while generated code uses the equivalent 0x90(r3), 0x9c(r3), 0xa8(r3), and 0xb4(r3). All other instructions and all relocations align.",
+  "historical_limitation": "The unavailable prior assignment checkout and report blobs were not claimed as recovered; only the source at the supplied base commit and repository-preserved evidence were read."
+}

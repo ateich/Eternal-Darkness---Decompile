@@ -1,0 +1,47 @@
+command: python3 tools/fndiff.py game/game_fn_801AAA28.c fn_801AAA28
+exit: 0
+target 176 bytes  base 176 bytes  match 99.454544
+  0x0000  stwu r1, -0x10(r1)             | stwu r1, -0x10(r1)
+  0x0004  mflr r0                        | mflr r0
+  0x0008  stw r0, 0x14(r1)               | stw r0, 0x14(r1)
+  0x000c  lfs f1, lbl_80650E60@sda21     | lfs f1, lbl_80650E60@sda21
+  0x0010  lis r3, lbl_80608020@ha         | lis r3, lbl_80608020@ha
+  0x0014  addi r3, r3, lbl_80608020@l     | addi r3, r3, lbl_80608020@l
+  0x0018  addi r4, r3, 0x90              | addi r4, r3, 0x90
+* 0x001c  stfs f1, 0x0(r4)               | stfs f1, 0x90(r3)
+  0x0020  stfs f1, 0x94(r3)              | stfs f1, 0x94(r3)
+  0x0024  stfs f1, 0x98(r3)              | stfs f1, 0x98(r3)
+  0x0028  addi r5, r3, 0x9c              | addi r5, r3, 0x9c
+* 0x002c  stfs f1, 0x0(r5)               | stfs f1, 0x9c(r3)
+  0x0030  stfs f1, 0xa0(r3)              | stfs f1, 0xa0(r3)
+  0x0034  stfs f1, 0xa4(r3)              | stfs f1, 0xa4(r3)
+  0x0038  addi r6, r3, 0xa8              | addi r6, r3, 0xa8
+* 0x003c  stfs f1, 0x0(r6)               | stfs f1, 0xa8(r3)
+  0x0040  stfs f1, 0xac(r3)              | stfs f1, 0xac(r3)
+  0x0044  lfs f0, lbl_80650E64@sda21     | lfs f0, lbl_80650E64@sda21
+  0x0048  stfs f0, 0xb0(r3)              | stfs f0, 0xb0(r3)
+  0x004c  addi r7, r3, 0xb4              | addi r7, r3, 0xb4
+* 0x0050  stfs f1, 0x0(r7)               | stfs f1, 0xb4(r3)
+  0x0054  lfs f0, lbl_80650E68@sda21     | lfs f0, lbl_80650E68@sda21
+  0x0058  stfs f0, 0xb8(r3)              | stfs f0, 0xb8(r3)
+  0x005c  stfs f1, 0xbc(r3)              | stfs f1, 0xbc(r3)
+  0x0060  lfs f1, lbl_80650E6C@sda21     | lfs f1, lbl_80650E6C@sda21
+  0x0064  fmr f2, f1                     | fmr f2, f1
+  0x0068  lfs f3, lbl_80650E70@sda21     | lfs f3, lbl_80650E70@sda21
+  0x006c  li r8, 0x0                     | li r8, 0x0
+  0x0070  li r9, 0x0                     | li r9, 0x0
+  0x0074  li r10, 0x0                    | li r10, 0x0
+  0x0078  bl fn_801C9914                 | bl fn_801C9914
+  0x007c  lis r3, lbl_806080E0@ha         | lis r3, lbl_806080E0@ha
+  0x0080  addi r3, r3, lbl_806080E0@l     | addi r3, r3, lbl_806080E0@l
+  0x0084  li r4, 0x0                     | li r4, 0x0
+  0x0088  li r5, 0x2f80                  | li r5, 0x2f80
+  0x008c  bl memset                      | bl memset
+  0x0090  li r0, 0x1                     | li r0, 0x1
+  0x0094  stw r0, lbl_8064D2F4@sda21     | stw r0, lbl_8064D2F4@sda21
+  0x0098  li r3, 0x1                     | li r3, 0x1
+  0x009c  bl fn_801ACC94                 | bl fn_801ACC94
+  0x00a0  lwz r0, 0x14(r1)               | lwz r0, 0x14(r1)
+  0x00a4  mtlr r0                        | mtlr r0
+  0x00a8  addi r1, r1, 0x10              | addi r1, r1, 0x10
+  0x00ac  blr                            | blr

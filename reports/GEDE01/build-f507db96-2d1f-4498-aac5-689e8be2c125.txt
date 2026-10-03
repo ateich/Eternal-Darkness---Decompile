@@ -1,0 +1,18 @@
+command: python3 configure.py
+exit: 0
+stdout: <empty>
+
+command: .tools/bin/ninja build/GEDE01/src/game/game_fn_801AAA28.o
+exit: 0
+stdout:
+[1/1] MWCC build/GEDE01/src/game/game_fn_801AAA28.o
+
+command: build/tools/objdiff-cli diff -p . -u main/game/game_fn_801AAA28 fn_801AAA28 -o reports/GEDE01/objdiff-f507db96-2d1f-4498-aac5-689e8be2c125.json --format json-pretty
+exit: 0
+stdout:
+ INFO Writing to reports/GEDE01/objdiff-f507db96-2d1f-4498-aac5-689e8be2c125.json
+
+command: build/tools/objdiff-cli diff -p . -u main/game/game_fn_801AAA28 fn_801AAA28 -o reports/GEDE01/objdiff-f507db96-2d1f-4498-aac5-689e8be2c125-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address
+exit: 0
+stdout:
+ INFO Writing to reports/GEDE01/objdiff-f507db96-2d1f-4498-aac5-689e8be2c125-reloc-strict.json
