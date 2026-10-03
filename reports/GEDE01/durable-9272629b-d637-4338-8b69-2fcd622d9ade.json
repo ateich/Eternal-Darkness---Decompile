@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "assignment_id": "9272629b-d637-4338-8b69-2fcd622d9ade",
+  "attempt": 4,
+  "base_commit": "eff5553f551b44d3cf4057385bd44556e9c53989",
+  "target": "fn_80017FF8",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-9272629b-d637-4338-8b69-2fcd622d9ade.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-reloc-strict-9272629b-d637-4338-8b69-2fcd622d9ade.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-9272629b-d637-4338-8b69-2fcd622d9ade.log",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-9272629b-d637-4338-8b69-2fcd622d9ade.txt",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-9272629b-d637-4338-8b69-2fcd622d9ade.txt"
+  ],
+  "divergence": "Fresh canonical GC/1.3 objdiff measures 96.994446%: retail .text is 1440 bytes versus the candidate's 1448. Splitting the width declaration from its post-setup assignment fixes the previously early conversion schedule, and representing the two marker endpoints as a contiguous Vec3s array removes the hoisted geometry pointer and matches retail's 0x210 frame. Remaining divergence is eight bytes plus register allocation and post-create conversion/load ordering; canonical and relocation-strict are therefore not accepted at 100%."
+}

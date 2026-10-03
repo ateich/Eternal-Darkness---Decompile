@@ -67,13 +67,14 @@ extern void* fn_801966E0(void*, int, int);
 extern void fn_8014BA14(void);
 
 /* NonMatching: behavior-complete marker descriptor reconstruction. The
- * canonical candidate is 93.58889%; remaining differences include the 0x220
- * versus 0x210 frame, register allocation, and conversion scheduling. */
+ * canonical candidate is 96.994446%; the frame now matches at 0x210, while
+ * eight bytes, register allocation, and conversion scheduling still differ. */
 s32 fn_80017FF8(void* script)
 {
     SpawnHeader header;
     SpawnInfo info;
-    MarkerGeometry geometry;
+    Vec3s endpoints[2];
+    f32 direction[3];
     ValuePair values;
     u8* body;
     s32 count;
@@ -97,8 +98,8 @@ s32 fn_80017FF8(void* script)
         return 1;
     }
 
-    body = &header.bytes[40];
     flags = 0;
+    body = &header.bytes[40];
     kind = (s32)fn_8016A694(script, 2);
     mode = (s32)fn_8016A694(script, 3);
     user_value = (s32)fn_8016A694(script, 4);
@@ -146,15 +147,15 @@ s32 fn_80017FF8(void* script)
     header.bytes[44] |= 0x81;
     header.bytes[43] = 0;
 
-    geometry.first = *fn_80158ABC(fn_8015C4A4(fn_800F5C54(fn_8016A694(script, 5)), 2), 2, 0);
-    geometry.last = *fn_80158ABC(fn_8015C4A4(fn_800F5C54(fn_8016A694(script, 7)), 2), 2, 0);
-    geometry.direction[0] = (f32)(geometry.last.x - geometry.first.x);
-    geometry.direction[1] = (f32)(geometry.last.y - geometry.first.y);
-    geometry.direction[2] = 0.0f;
-    fn_80211AAC(geometry.direction, geometry.direction);
+    endpoints[0] = *fn_80158ABC(fn_8015C4A4(fn_800F5C54(fn_8016A694(script, 5)), 2), 2, 0);
+    endpoints[1] = *fn_80158ABC(fn_8015C4A4(fn_800F5C54(fn_8016A694(script, 7)), 2), 2, 0);
+    direction[0] = (f32)(endpoints[1].x - endpoints[0].x);
+    direction[1] = (f32)(endpoints[1].y - endpoints[0].y);
+    direction[2] = 0.0f;
+    fn_80211AAC(direction, direction);
 
-    min_z = (f32)geometry.first.z;
-    max_z = (f32)geometry.first.z;
+    min_z = (f32)endpoints[0].z;
+    max_z = (f32)endpoints[0].z;
     best_low = 1000000.0f;
     best_high = -1000000.0f;
     for (i = 0; i < count; i++) {
@@ -164,9 +165,9 @@ s32 fn_80017FF8(void* script)
         point = fn_80158ABC(
             fn_8015C4A4(fn_800F5C54(fn_8016A694(script, i + 5)), 2),
             2, 0);
-        distance = geometry.direction[0] * point->x +
-                   geometry.direction[1] * point->y +
-                   geometry.direction[2] * point->z;
+        distance = direction[0] * point->x +
+                   direction[1] * point->y +
+                   direction[2] * point->z;
         if ((f32)point->z < min_z) {
             min_z = point->z;
         }
@@ -175,11 +176,11 @@ s32 fn_80017FF8(void* script)
         }
         if (distance > best_high) {
             best_high = distance;
-            geometry.last = *point;
+            endpoints[1] = *point;
         }
         if (distance < best_low) {
             best_low = distance;
-            geometry.first = *point;
+            endpoints[0] = *point;
         }
         *(Vec3s*)&body[64] = *point;
         body += 6;
@@ -190,17 +191,18 @@ s32 fn_80017FF8(void* script)
     info.bytes[170] = 0x84;
     if (fn_80147EC4(&info) != 0) {
         void* object = *(void**)&info.bytes[148];
-        s16 width = (s16)(max_z - min_z);
+        s16 width;
 
         fn_801964E8(object, 1, 0);
         fn_801978F8(object, 0);
-        geometry.first.z = (s16)min_z;
-        geometry.last.z = (s16)min_z;
+        width = (s16)(max_z - min_z);
+        endpoints[0].z = (s16)min_z;
+        endpoints[1].z = (s16)min_z;
         if (mode != 0) {
-            handle = fn_80142A70(2, &geometry.first, width, lbl_8064D18C, 0,
+            handle = fn_80142A70(2, endpoints, width, lbl_8064D18C, 0,
                                  (s32)fn_8014BA14, (s32)object, user_value);
         } else {
-            handle = fn_80142A70(2, &geometry.first, width, lbl_8064D18C, 0,
+            handle = fn_80142A70(2, endpoints, width, lbl_8064D18C, 0,
                                  0, 0, user_value);
         }
         handle = fn_8014B8D0(object, handle);
