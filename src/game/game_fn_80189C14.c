@@ -2,9 +2,18 @@ typedef unsigned char u8;
 typedef unsigned short u16;
 typedef signed short s16;
 typedef struct Vec3 { float x, y, z; } Vec3;
+typedef struct RenderData {
+    u8 pad0[2];
+    u16 size0;
+    u8 pad4[6];
+    u16 flush0;
+    u16 flush2;
+    u16 flush1;
+} RenderData;
 
 extern int lbl_8064D738;
-extern u8 lbl_80607120[], lbl_8063C098[];
+extern RenderData lbl_80607120;
+extern u8 lbl_8063C098[];
 extern void fn_80188A7C(void*, void*, void*), fn_8018D020(void);
 extern void fn_8017ACE0(void*, Vec3*, Vec3*), DCFlushRange(void*, unsigned long);
 extern void fn_80188584(void*, void*), fn_8018D0D0(void*, void*, s16);
@@ -14,11 +23,10 @@ extern void fn_801889D8(void*, void*, void*), fn_80226D78(int);
 /* An integral incoming address lets MWCC allocate self independently. */
 void fn_80189C14(unsigned long arg)
 {
-    u8* data = lbl_80607120;
     int entry_index;
     int j;
     u8 count;
-    u16 size0 = *(u16*)(data + 2);
+    u16 size0 = lbl_80607120.size0;
     u16 flush0;
     u16 flush1;
     u16 flush2;
@@ -34,9 +42,9 @@ void fn_80189C14(unsigned long arg)
 
     self = (u8*)arg;
     count = self[1];
-    flush0 = *(u16*)(data + 0xA);
-    flush1 = *(u16*)(data + 0xE);
-    flush2 = *(u16*)(data + 0xC);
+    flush0 = lbl_80607120.flush0;
+    flush1 = lbl_80607120.flush1;
+    flush2 = lbl_80607120.flush2;
     buffer0 = *(u8**)(self + 0x50);
     buffer1 = *(u8**)(self + 0x54);
     buffer2 = *(u8**)(self + 0x58);

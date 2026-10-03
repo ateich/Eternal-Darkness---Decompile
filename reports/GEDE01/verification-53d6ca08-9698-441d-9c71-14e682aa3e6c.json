@@ -1,0 +1,406 @@
+{
+  "version": 1,
+  "assignment_id": "53d6ca08-9698-441d-9c71-14e682aa3e6c",
+  "attempt": 8,
+  "base_commit": "b7630487819cddd29a7756793c982806b33732dd",
+  "target": "fn_80189C14",
+  "experiment": "natural typed RenderData overlay with direct u16 members",
+  "runs": [
+    {
+      "argv": [
+        ".tools/bin/ninja",
+        "-v",
+        "build/GEDE01/src/game/game_fn_80189C14.o"
+      ],
+      "exit_code": 0,
+      "output": "[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80189C14.c -o build/GEDE01/src/game && \"/usr/bin/python3\" tools/transform_dep.py build/GEDE01/src/game/game_fn_80189C14.d build/GEDE01/src/game/game_fn_80189C14.d\n"
+    },
+    {
+      "argv": [
+        ".tools/bin/ninja",
+        "-v",
+        "build/GEDE01/src/game/game_fn_80189C14.externalized"
+      ],
+      "exit_code": 0,
+      "output": "[1/1] python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_80189C14.o @29 lbl_80650A70 orig/GEDE01/sys/main.dol --require-whole-section && build/binutils/powerpc-eabi-objcopy --redefine-sym=@29=lbl_80650A70 --remove-section=.sdata2 --rename-section=.comment=.ignored build/GEDE01/src/game/game_fn_80189C14.o && touch build/GEDE01/src/game/game_fn_80189C14.externalized\n"
+    },
+    {
+      "argv": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_80189C14",
+        "fn_80189C14",
+        "-o",
+        "reports/GEDE01/objdiff-53d6ca08-9698-441d-9c71-14e682aa3e6c.json",
+        "--format",
+        "json-pretty"
+      ],
+      "exit_code": 0,
+      "output": " INFO Writing to reports/GEDE01/objdiff-53d6ca08-9698-441d-9c71-14e682aa3e6c.json\n"
+    },
+    {
+      "argv": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_80189C14",
+        "fn_80189C14",
+        "-o",
+        "reports/GEDE01/objdiff-53d6ca08-9698-441d-9c71-14e682aa3e6c-reloc-strict.json",
+        "--format",
+        "json-pretty",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "exit_code": 0,
+      "output": " INFO Writing to reports/GEDE01/objdiff-53d6ca08-9698-441d-9c71-14e682aa3e6c-reloc-strict.json\n"
+    },
+    {
+      "argv": [
+        ".tools/bin/ninja",
+        "-t",
+        "commands",
+        "build/GEDE01/src/game/game_fn_80189C14.o"
+      ],
+      "exit_code": 0,
+      "output": "\"/usr/bin/python3\" tools/download_tool.py sjiswrap build/tools/sjiswrap.exe --tag v1.2.2\ntools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80189C14.c -o build/GEDE01/src/game && \"/usr/bin/python3\" tools/transform_dep.py build/GEDE01/src/game/game_fn_80189C14.d build/GEDE01/src/game/game_fn_80189C14.d\n"
+    },
+    {
+      "argv": [
+        "build/binutils/powerpc-eabi-readelf",
+        "-Wr",
+        "build/GEDE01/obj/game/game_fn_80189C14.o"
+      ],
+      "exit_code": 0,
+      "output": "\nRelocation section '.rela.text' at offset 0x2a8 contains 19 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n00000018  0000046d R_PPC_EMB_SDA21        00000000   lbl_8064D738 + 0\n00000022  00000506 R_PPC_ADDR16_HA        00000000   lbl_80607120 + 0\n0000002a  00000504 R_PPC_ADDR16_LO        00000000   lbl_80607120 + 0\n00000066  00000606 R_PPC_ADDR16_HA        00000000   lbl_8063C098 + 0\n0000006a  00000706 R_PPC_ADDR16_HA        00000000   fn_8018D020 + 0\n00000074  0000086d R_PPC_EMB_SDA21        00000000   lbl_80650A70 + 0\n0000007a  00000604 R_PPC_ADDR16_LO        00000000   lbl_8063C098 + 0\n0000007e  00000704 R_PPC_ADDR16_LO        00000000   fn_8018D020 + 0\n000000a0  0000090a R_PPC_REL24            00000000   fn_80188A7C + 0\n0000010c  00000a0a R_PPC_REL24            00000000   fn_8017ACE0 + 0\n000001e8  00000b0a R_PPC_REL24            00000000   DCFlushRange + 0\n000001f4  00000b0a R_PPC_REL24            00000000   DCFlushRange + 0\n00000200  00000b0a R_PPC_REL24            00000000   DCFlushRange + 0\n0000020c  00000c0a R_PPC_REL24            00000000   fn_80188584 + 0\n00000214  00000d0a R_PPC_REL24            00000000   fn_801ED57C + 0\n00000228  00000e0a R_PPC_REL24            00000000   fn_8018D0D0 + 0\n00000238  00000f0a R_PPC_REL24            00000000   fn_801889D8 + 0\n00000240  00000d0a R_PPC_REL24            00000000   fn_801ED57C + 0\n00000248  0000100a R_PPC_REL24            00000000   fn_80226D78 + 0\n"
+    },
+    {
+      "argv": [
+        "build/binutils/powerpc-eabi-readelf",
+        "-Wr",
+        "build/GEDE01/src/game/game_fn_80189C14.o"
+      ],
+      "exit_code": 0,
+      "output": "\nRelocation section '.rela.text' at offset 0x52c contains 19 entries:\n Offset     Info    Type                Sym. Value  Symbol's Name + Addend\n00000018  0000056d R_PPC_EMB_SDA21        00000000   lbl_8064D738 + 0\n00000022  00000406 R_PPC_ADDR16_HA        00000000   lbl_80607120 + 0\n0000002a  00000404 R_PPC_ADDR16_LO        00000000   lbl_80607120 + 0\n00000066  00000606 R_PPC_ADDR16_HA        00000000   lbl_8063C098 + 0\n0000006a  00000706 R_PPC_ADDR16_HA        00000000   fn_8018D020 + 0\n00000074  0000036d R_PPC_EMB_SDA21        00000000   lbl_80650A70 + 0\n0000007a  00000604 R_PPC_ADDR16_LO        00000000   lbl_8063C098 + 0\n0000007e  00000704 R_PPC_ADDR16_LO        00000000   fn_8018D020 + 0\n000000a0  0000080a R_PPC_REL24            00000000   fn_80188A7C + 0\n0000010c  0000090a R_PPC_REL24            00000000   fn_8017ACE0 + 0\n000001e8  00000a0a R_PPC_REL24            00000000   DCFlushRange + 0\n000001f4  00000a0a R_PPC_REL24            00000000   DCFlushRange + 0\n00000200  00000a0a R_PPC_REL24            00000000   DCFlushRange + 0\n0000020c  00000b0a R_PPC_REL24            00000000   fn_80188584 + 0\n00000214  00000c0a R_PPC_REL24            00000000   fn_801ED57C + 0\n00000228  00000d0a R_PPC_REL24            00000000   fn_8018D0D0 + 0\n00000238  00000e0a R_PPC_REL24            00000000   fn_801889D8 + 0\n00000240  00000c0a R_PPC_REL24            00000000   fn_801ED57C + 0\n00000248  00000f0a R_PPC_REL24            00000000   fn_80226D78 + 0\n"
+    },
+    {
+      "argv": [
+        "build/binutils/powerpc-eabi-objdump",
+        "-dr",
+        "build/GEDE01/obj/game/game_fn_80189C14.o"
+      ],
+      "exit_code": 0,
+      "output": "\nbuild/GEDE01/obj/game/game_fn_80189C14.o:     file format elf32-powerpc\n\n\nDisassembly of section .text:\n\n00000000 <fn_80189C14>:\n   0:\t94 21 ff 50 \tstwu    r1,-176(r1)\n   4:\t7c 08 02 a6 \tmflr    r0\n   8:\t90 01 00 b4 \tstw     r0,180(r1)\n   c:\tdb e1 00 a0 \tstfd    f31,160(r1)\n  10:\tf3 e1 00 a8 \tpsq_st  f31,168(r1),0,0\n  14:\tbd e1 00 5c \tstmw    r15,92(r1)\n  18:\t80 00 00 00 \tlwz     r0,0(0)\n\t\t\t18: R_PPC_EMB_SDA21\tlbl_8064D738\n  1c:\t7c 70 1b 78 \tmr      r16,r3\n  20:\t3c 60 00 00 \tlis     r3,0\n\t\t\t22: R_PPC_ADDR16_HA\tlbl_80607120\n  24:\t8b 50 00 01 \tlbz     r26,1(r16)\n  28:\t38 63 00 00 \taddi    r3,r3,0\n\t\t\t2a: R_PPC_ADDR16_LO\tlbl_80607120\n  2c:\t2c 00 00 00 \tcmpwi   r0,0\n  30:\ta0 83 00 02 \tlhz     r4,2(r3)\n  34:\ta3 23 00 0a \tlhz     r25,10(r3)\n  38:\ta3 03 00 0e \tlhz     r24,14(r3)\n  3c:\ta2 e3 00 0c \tlhz     r23,12(r3)\n  40:\t82 b0 00 50 \tlwz     r21,80(r16)\n  44:\t82 70 00 54 \tlwz     r19,84(r16)\n  48:\t82 50 00 58 \tlwz     r18,88(r16)\n  4c:\t41 82 00 18 \tbeq     64 <fn_80189C14+0x64>\n  50:\t1c 04 00 06 \tmulli   r0,r4,6\n  54:\t54 83 13 ba \trlwinm  r3,r4,2,14,29\n  58:\t7e 73 1a 14 \tadd     r19,r19,r3\n  5c:\t7e b5 02 14 \tadd     r21,r21,r0\n  60:\t7e 52 1a 14 \tadd     r18,r18,r3\n  64:\t3c 60 00 00 \tlis     r3,0\n\t\t\t66: R_PPC_ADDR16_HA\tlbl_8063C098\n  68:\t3c 80 00 00 \tlis     r4,0\n\t\t\t6a: R_PPC_ADDR16_HA\tfn_8018D020\n  6c:\t82 d0 00 4c \tlwz     r22,76(r16)\n  70:\t7e 51 93 78 \tmr      r17,r18\n  74:\tcb e0 00 00 \tlfd     f31,0(0)\n\t\t\t74: R_PPC_EMB_SDA21\tlbl_80650A70\n  78:\t3b e3 00 00 \taddi    r31,r3,0\n\t\t\t7a: R_PPC_ADDR16_LO\tlbl_8063C098\n  7c:\t3b a4 00 00 \taddi    r29,r4,0\n\t\t\t7e: R_PPC_ADDR16_LO\tfn_8018D020\n  80:\t3b 80 00 00 \tli      r28,0\n  84:\t39 e0 00 00 \tli      r15,0\n  88:\t3f c0 43 30 \tlis     r30,17200\n  8c:\t48 00 00 ec \tb       178 <fn_80189C14+0x178>\n  90:\t7e 95 7a 14 \tadd     r20,r21,r15\n  94:\t7e c3 b3 78 \tmr      r3,r22\n  98:\t7e 84 a3 78 \tmr      r4,r20\n  9c:\t7f a5 eb 78 \tmr      r5,r29\n  a0:\t48 00 00 01 \tbl      a0 <fn_80189C14+0xa0>\n\t\t\ta0: R_PPC_REL24\tfn_80188A7C\n  a4:\t3b 60 00 00 \tli      r27,0\n  a8:\t48 00 00 b8 \tb       160 <fn_80189C14+0x160>\n  ac:\ta8 14 00 00 \tlha     r0,0(r20)\n  b0:\t7f e3 fb 78 \tmr      r3,r31\n  b4:\t93 c1 00 20 \tstw     r30,32(r1)\n  b8:\t38 81 00 08 \taddi    r4,r1,8\n  bc:\t6c 00 80 00 \txoris   r0,r0,32768\n  c0:\t38 a1 00 14 \taddi    r5,r1,20\n  c4:\t90 01 00 24 \tstw     r0,36(r1)\n  c8:\tc8 01 00 20 \tlfd     f0,32(r1)\n  cc:\t93 c1 00 28 \tstw     r30,40(r1)\n  d0:\tec 00 f8 28 \tfsubs   f0,f0,f31\n  d4:\t93 c1 00 30 \tstw     r30,48(r1)\n  d8:\td0 01 00 08 \tstfs    f0,8(r1)\n  dc:\ta8 14 00 02 \tlha     r0,2(r20)\n  e0:\t6c 00 80 00 \txoris   r0,r0,32768\n  e4:\t90 01 00 2c \tstw     r0,44(r1)\n  e8:\tc8 01 00 28 \tlfd     f0,40(r1)\n  ec:\tec 00 f8 28 \tfsubs   f0,f0,f31\n  f0:\td0 01 00 0c \tstfs    f0,12(r1)\n  f4:\ta8 14 00 04 \tlha     r0,4(r20)\n  f8:\t6c 00 80 00 \txoris   r0,r0,32768\n  fc:\t90 01 00 34 \tstw     r0,52(r1)\n 100:\tc8 01 00 30 \tlfd     f0,48(r1)\n 104:\tec 00 f8 28 \tfsubs   f0,f0,f31\n 108:\td0 01 00 10 \tstfs    f0,16(r1)\n 10c:\t48 00 00 01 \tbl      10c <fn_80189C14+0x10c>\n\t\t\t10c: R_PPC_REL24\tfn_8017ACE0\n 110:\tc0 01 00 14 \tlfs     f0,20(r1)\n 114:\t3b 7b 00 01 \taddi    r27,r27,1\n 118:\tfc 00 00 1e \tfctiwz  f0,f0\n 11c:\td8 01 00 38 \tstfd    f0,56(r1)\n 120:\t80 01 00 3c \tlwz     r0,60(r1)\n 124:\tb0 14 00 00 \tsth     r0,0(r20)\n 128:\tc0 01 00 18 \tlfs     f0,24(r1)\n 12c:\tfc 00 00 1e \tfctiwz  f0,f0\n 130:\td8 01 00 40 \tstfd    f0,64(r1)\n 134:\t80 01 00 44 \tlwz     r0,68(r1)\n 138:\tb0 14 00 02 \tsth     r0,2(r20)\n 13c:\tc0 01 00 1c \tlfs     f0,28(r1)\n 140:\tfc 00 00 1e \tfctiwz  f0,f0\n 144:\td8 01 00 48 \tstfd    f0,72(r1)\n 148:\t80 01 00 4c \tlwz     r0,76(r1)\n 14c:\tb0 14 00 04 \tsth     r0,4(r20)\n 150:\t3a 94 00 06 \taddi    r20,r20,6\n 154:\t88 16 00 2b \tlbz     r0,43(r22)\n 158:\t98 11 00 03 \tstb     r0,3(r17)\n 15c:\t3a 31 00 04 \taddi    r17,r17,4\n 160:\t88 16 00 20 \tlbz     r0,32(r22)\n 164:\t7c 1b 00 00 \tcmpw    r27,r0\n 168:\t41 80 ff 44 \tblt     ac <fn_80189C14+0xac>\n 16c:\t3a d6 00 38 \taddi    r22,r22,56\n 170:\t39 ef 00 18 \taddi    r15,r15,24\n 174:\t3b 9c 00 01 \taddi    r28,r28,1\n 178:\t7c 1c d0 00 \tcmpw    r28,r26\n 17c:\t41 80 ff 14 \tblt     90 <fn_80189C14+0x90>\n 180:\ta8 b5 00 00 \tlha     r5,0(r21)\n 184:\t7e a3 ab 78 \tmr      r3,r21\n 188:\t7f 24 cb 78 \tmr      r4,r25\n 18c:\t38 05 00 32 \taddi    r0,r5,50\n 190:\tb0 15 00 00 \tsth     r0,0(r21)\n 194:\ta8 b5 00 02 \tlha     r5,2(r21)\n 198:\t38 05 00 32 \taddi    r0,r5,50\n 19c:\tb0 15 00 02 \tsth     r0,2(r21)\n 1a0:\ta8 b5 00 06 \tlha     r5,6(r21)\n 1a4:\t38 05 ff ce \taddi    r0,r5,-50\n 1a8:\tb0 15 00 06 \tsth     r0,6(r21)\n 1ac:\ta8 b5 00 08 \tlha     r5,8(r21)\n 1b0:\t38 05 ff ce \taddi    r0,r5,-50\n 1b4:\tb0 15 00 08 \tsth     r0,8(r21)\n 1b8:\ta8 b5 00 0c \tlha     r5,12(r21)\n 1bc:\t38 05 ff ce \taddi    r0,r5,-50\n 1c0:\tb0 15 00 0c \tsth     r0,12(r21)\n 1c4:\ta8 b5 00 0e \tlha     r5,14(r21)\n 1c8:\t38 05 ff ce \taddi    r0,r5,-50\n 1cc:\tb0 15 00 0e \tsth     r0,14(r21)\n 1d0:\ta8 b5 00 12 \tlha     r5,18(r21)\n 1d4:\t38 05 00 32 \taddi    r0,r5,50\n 1d8:\tb0 15 00 12 \tsth     r0,18(r21)\n 1dc:\ta8 b5 00 14 \tlha     r5,20(r21)\n 1e0:\t38 05 00 32 \taddi    r0,r5,50\n 1e4:\tb0 15 00 14 \tsth     r0,20(r21)\n 1e8:\t48 00 00 01 \tbl      1e8 <fn_80189C14+0x1e8>\n\t\t\t1e8: R_PPC_REL24\tDCFlushRange\n 1ec:\t7e 63 9b 78 \tmr      r3,r19\n 1f0:\t7f 04 c3 78 \tmr      r4,r24\n 1f4:\t48 00 00 01 \tbl      1f4 <fn_80189C14+0x1f4>\n\t\t\t1f4: R_PPC_REL24\tDCFlushRange\n 1f8:\t7e 43 93 78 \tmr      r3,r18\n 1fc:\t7e e4 bb 78 \tmr      r4,r23\n 200:\t48 00 00 01 \tbl      200 <fn_80189C14+0x200>\n\t\t\t200: R_PPC_REL24\tDCFlushRange\n 204:\t38 70 00 94 \taddi    r3,r16,148\n 208:\t38 90 00 b8 \taddi    r4,r16,184\n 20c:\t48 00 00 01 \tbl      20c <fn_80189C14+0x20c>\n\t\t\t20c: R_PPC_REL24\tfn_80188584\n 210:\t38 60 00 00 \tli      r3,0\n 214:\t48 00 00 01 \tbl      214 <fn_80189C14+0x214>\n\t\t\t214: R_PPC_REL24\tfn_801ED57C\n 218:\ta8 b0 00 0e \tlha     r5,14(r16)\n 21c:\t7c 6f 1b 78 \tmr      r15,r3\n 220:\t7e 03 83 78 \tmr      r3,r16\n 224:\t38 90 00 5c \taddi    r4,r16,92\n 228:\t48 00 00 01 \tbl      228 <fn_80189C14+0x228>\n\t\t\t228: R_PPC_REL24\tfn_8018D0D0\n 22c:\t7e a3 ab 78 \tmr      r3,r21\n 230:\t7e 64 9b 78 \tmr      r4,r19\n 234:\t7e 45 93 78 \tmr      r5,r18\n 238:\t48 00 00 01 \tbl      238 <fn_80189C14+0x238>\n\t\t\t238: R_PPC_REL24\tfn_801889D8\n 23c:\t7d e3 7b 78 \tmr      r3,r15\n 240:\t48 00 00 01 \tbl      240 <fn_80189C14+0x240>\n\t\t\t240: R_PPC_REL24\tfn_801ED57C\n 244:\t38 60 00 00 \tli      r3,0\n 248:\t48 00 00 01 \tbl      248 <fn_80189C14+0x248>\n\t\t\t248: R_PPC_REL24\tfn_80226D78\n 24c:\te3 e1 00 a8 \tpsq_l   f31,168(r1),0,0\n 250:\tcb e1 00 a0 \tlfd     f31,160(r1)\n 254:\tb9 e1 00 5c \tlmw     r15,92(r1)\n 258:\t80 01 00 b4 \tlwz     r0,180(r1)\n 25c:\t7c 08 03 a6 \tmtlr    r0\n 260:\t38 21 00 b0 \taddi    r1,r1,176\n 264:\t4e 80 00 20 \tblr\n"
+    },
+    {
+      "argv": [
+        "build/binutils/powerpc-eabi-objdump",
+        "-dr",
+        "build/GEDE01/src/game/game_fn_80189C14.o"
+      ],
+      "exit_code": 0,
+      "output": "\nbuild/GEDE01/src/game/game_fn_80189C14.o:     file format elf32-powerpc\n\n\nDisassembly of section .text:\n\n00000000 <fn_80189C14>:\n   0:\t94 21 ff 50 \tstwu    r1,-176(r1)\n   4:\t7c 08 02 a6 \tmflr    r0\n   8:\t90 01 00 b4 \tstw     r0,180(r1)\n   c:\tdb e1 00 a0 \tstfd    f31,160(r1)\n  10:\tf3 e1 00 a8 \tpsq_st  f31,168(r1),0,0\n  14:\tbd e1 00 5c \tstmw    r15,92(r1)\n  18:\t80 00 00 00 \tlwz     r0,0(0)\n\t\t\t18: R_PPC_EMB_SDA21\tlbl_8064D738\n  1c:\t7c 70 1b 78 \tmr      r16,r3\n  20:\t3c 80 00 00 \tlis     r4,0\n\t\t\t22: R_PPC_ADDR16_HA\tlbl_80607120\n  24:\t8b 50 00 01 \tlbz     r26,1(r16)\n  28:\t38 64 00 00 \taddi    r3,r4,0\n\t\t\t2a: R_PPC_ADDR16_LO\tlbl_80607120\n  2c:\t2c 00 00 00 \tcmpwi   r0,0\n  30:\ta0 83 00 02 \tlhz     r4,2(r3)\n  34:\ta3 23 00 0a \tlhz     r25,10(r3)\n  38:\ta3 03 00 0e \tlhz     r24,14(r3)\n  3c:\ta2 e3 00 0c \tlhz     r23,12(r3)\n  40:\t82 b0 00 50 \tlwz     r21,80(r16)\n  44:\t82 70 00 54 \tlwz     r19,84(r16)\n  48:\t82 50 00 58 \tlwz     r18,88(r16)\n  4c:\t41 82 00 18 \tbeq     64 <fn_80189C14+0x64>\n  50:\t1c 04 00 06 \tmulli   r0,r4,6\n  54:\t54 83 13 ba \trlwinm  r3,r4,2,14,29\n  58:\t7e 73 1a 14 \tadd     r19,r19,r3\n  5c:\t7e b5 02 14 \tadd     r21,r21,r0\n  60:\t7e 52 1a 14 \tadd     r18,r18,r3\n  64:\t3c 60 00 00 \tlis     r3,0\n\t\t\t66: R_PPC_ADDR16_HA\tlbl_8063C098\n  68:\t3c 80 00 00 \tlis     r4,0\n\t\t\t6a: R_PPC_ADDR16_HA\tfn_8018D020\n  6c:\t82 d0 00 4c \tlwz     r22,76(r16)\n  70:\t7e 51 93 78 \tmr      r17,r18\n  74:\tcb e0 00 00 \tlfd     f31,0(0)\n\t\t\t74: R_PPC_EMB_SDA21\tlbl_80650A70\n  78:\t3b e3 00 00 \taddi    r31,r3,0\n\t\t\t7a: R_PPC_ADDR16_LO\tlbl_8063C098\n  7c:\t3b a4 00 00 \taddi    r29,r4,0\n\t\t\t7e: R_PPC_ADDR16_LO\tfn_8018D020\n  80:\t3b 80 00 00 \tli      r28,0\n  84:\t39 e0 00 00 \tli      r15,0\n  88:\t3f c0 43 30 \tlis     r30,17200\n  8c:\t48 00 00 ec \tb       178 <fn_80189C14+0x178>\n  90:\t7e 95 7a 14 \tadd     r20,r21,r15\n  94:\t7e c3 b3 78 \tmr      r3,r22\n  98:\t7e 84 a3 78 \tmr      r4,r20\n  9c:\t7f a5 eb 78 \tmr      r5,r29\n  a0:\t48 00 00 01 \tbl      a0 <fn_80189C14+0xa0>\n\t\t\ta0: R_PPC_REL24\tfn_80188A7C\n  a4:\t3b 60 00 00 \tli      r27,0\n  a8:\t48 00 00 b8 \tb       160 <fn_80189C14+0x160>\n  ac:\ta8 14 00 00 \tlha     r0,0(r20)\n  b0:\t7f e3 fb 78 \tmr      r3,r31\n  b4:\t93 c1 00 20 \tstw     r30,32(r1)\n  b8:\t38 81 00 08 \taddi    r4,r1,8\n  bc:\t6c 00 80 00 \txoris   r0,r0,32768\n  c0:\t38 a1 00 14 \taddi    r5,r1,20\n  c4:\t90 01 00 24 \tstw     r0,36(r1)\n  c8:\tc8 01 00 20 \tlfd     f0,32(r1)\n  cc:\t93 c1 00 28 \tstw     r30,40(r1)\n  d0:\tec 00 f8 28 \tfsubs   f0,f0,f31\n  d4:\t93 c1 00 30 \tstw     r30,48(r1)\n  d8:\td0 01 00 08 \tstfs    f0,8(r1)\n  dc:\ta8 14 00 02 \tlha     r0,2(r20)\n  e0:\t6c 00 80 00 \txoris   r0,r0,32768\n  e4:\t90 01 00 2c \tstw     r0,44(r1)\n  e8:\tc8 01 00 28 \tlfd     f0,40(r1)\n  ec:\tec 00 f8 28 \tfsubs   f0,f0,f31\n  f0:\td0 01 00 0c \tstfs    f0,12(r1)\n  f4:\ta8 14 00 04 \tlha     r0,4(r20)\n  f8:\t6c 00 80 00 \txoris   r0,r0,32768\n  fc:\t90 01 00 34 \tstw     r0,52(r1)\n 100:\tc8 01 00 30 \tlfd     f0,48(r1)\n 104:\tec 00 f8 28 \tfsubs   f0,f0,f31\n 108:\td0 01 00 10 \tstfs    f0,16(r1)\n 10c:\t48 00 00 01 \tbl      10c <fn_80189C14+0x10c>\n\t\t\t10c: R_PPC_REL24\tfn_8017ACE0\n 110:\tc0 01 00 14 \tlfs     f0,20(r1)\n 114:\t3b 7b 00 01 \taddi    r27,r27,1\n 118:\tfc 00 00 1e \tfctiwz  f0,f0\n 11c:\td8 01 00 38 \tstfd    f0,56(r1)\n 120:\t80 01 00 3c \tlwz     r0,60(r1)\n 124:\tb0 14 00 00 \tsth     r0,0(r20)\n 128:\tc0 01 00 18 \tlfs     f0,24(r1)\n 12c:\tfc 00 00 1e \tfctiwz  f0,f0\n 130:\td8 01 00 40 \tstfd    f0,64(r1)\n 134:\t80 01 00 44 \tlwz     r0,68(r1)\n 138:\tb0 14 00 02 \tsth     r0,2(r20)\n 13c:\tc0 01 00 1c \tlfs     f0,28(r1)\n 140:\tfc 00 00 1e \tfctiwz  f0,f0\n 144:\td8 01 00 48 \tstfd    f0,72(r1)\n 148:\t80 01 00 4c \tlwz     r0,76(r1)\n 14c:\tb0 14 00 04 \tsth     r0,4(r20)\n 150:\t3a 94 00 06 \taddi    r20,r20,6\n 154:\t88 16 00 2b \tlbz     r0,43(r22)\n 158:\t98 11 00 03 \tstb     r0,3(r17)\n 15c:\t3a 31 00 04 \taddi    r17,r17,4\n 160:\t88 16 00 20 \tlbz     r0,32(r22)\n 164:\t7c 1b 00 00 \tcmpw    r27,r0\n 168:\t41 80 ff 44 \tblt     ac <fn_80189C14+0xac>\n 16c:\t3a d6 00 38 \taddi    r22,r22,56\n 170:\t39 ef 00 18 \taddi    r15,r15,24\n 174:\t3b 9c 00 01 \taddi    r28,r28,1\n 178:\t7c 1c d0 00 \tcmpw    r28,r26\n 17c:\t41 80 ff 14 \tblt     90 <fn_80189C14+0x90>\n 180:\ta8 b5 00 00 \tlha     r5,0(r21)\n 184:\t7e a3 ab 78 \tmr      r3,r21\n 188:\t7f 24 cb 78 \tmr      r4,r25\n 18c:\t38 05 00 32 \taddi    r0,r5,50\n 190:\tb0 15 00 00 \tsth     r0,0(r21)\n 194:\ta8 b5 00 02 \tlha     r5,2(r21)\n 198:\t38 05 00 32 \taddi    r0,r5,50\n 19c:\tb0 15 00 02 \tsth     r0,2(r21)\n 1a0:\ta8 b5 00 06 \tlha     r5,6(r21)\n 1a4:\t38 05 ff ce \taddi    r0,r5,-50\n 1a8:\tb0 15 00 06 \tsth     r0,6(r21)\n 1ac:\ta8 b5 00 08 \tlha     r5,8(r21)\n 1b0:\t38 05 ff ce \taddi    r0,r5,-50\n 1b4:\tb0 15 00 08 \tsth     r0,8(r21)\n 1b8:\ta8 b5 00 0c \tlha     r5,12(r21)\n 1bc:\t38 05 ff ce \taddi    r0,r5,-50\n 1c0:\tb0 15 00 0c \tsth     r0,12(r21)\n 1c4:\ta8 b5 00 0e \tlha     r5,14(r21)\n 1c8:\t38 05 ff ce \taddi    r0,r5,-50\n 1cc:\tb0 15 00 0e \tsth     r0,14(r21)\n 1d0:\ta8 b5 00 12 \tlha     r5,18(r21)\n 1d4:\t38 05 00 32 \taddi    r0,r5,50\n 1d8:\tb0 15 00 12 \tsth     r0,18(r21)\n 1dc:\ta8 b5 00 14 \tlha     r5,20(r21)\n 1e0:\t38 05 00 32 \taddi    r0,r5,50\n 1e4:\tb0 15 00 14 \tsth     r0,20(r21)\n 1e8:\t48 00 00 01 \tbl      1e8 <fn_80189C14+0x1e8>\n\t\t\t1e8: R_PPC_REL24\tDCFlushRange\n 1ec:\t7e 63 9b 78 \tmr      r3,r19\n 1f0:\t7f 04 c3 78 \tmr      r4,r24\n 1f4:\t48 00 00 01 \tbl      1f4 <fn_80189C14+0x1f4>\n\t\t\t1f4: R_PPC_REL24\tDCFlushRange\n 1f8:\t7e 43 93 78 \tmr      r3,r18\n 1fc:\t7e e4 bb 78 \tmr      r4,r23\n 200:\t48 00 00 01 \tbl      200 <fn_80189C14+0x200>\n\t\t\t200: R_PPC_REL24\tDCFlushRange\n 204:\t38 70 00 94 \taddi    r3,r16,148\n 208:\t38 90 00 b8 \taddi    r4,r16,184\n 20c:\t48 00 00 01 \tbl      20c <fn_80189C14+0x20c>\n\t\t\t20c: R_PPC_REL24\tfn_80188584\n 210:\t38 60 00 00 \tli      r3,0\n 214:\t48 00 00 01 \tbl      214 <fn_80189C14+0x214>\n\t\t\t214: R_PPC_REL24\tfn_801ED57C\n 218:\ta8 b0 00 0e \tlha     r5,14(r16)\n 21c:\t7c 6f 1b 78 \tmr      r15,r3\n 220:\t7e 03 83 78 \tmr      r3,r16\n 224:\t38 90 00 5c \taddi    r4,r16,92\n 228:\t48 00 00 01 \tbl      228 <fn_80189C14+0x228>\n\t\t\t228: R_PPC_REL24\tfn_8018D0D0\n 22c:\t7e a3 ab 78 \tmr      r3,r21\n 230:\t7e 64 9b 78 \tmr      r4,r19\n 234:\t7e 45 93 78 \tmr      r5,r18\n 238:\t48 00 00 01 \tbl      238 <fn_80189C14+0x238>\n\t\t\t238: R_PPC_REL24\tfn_801889D8\n 23c:\t7d e3 7b 78 \tmr      r3,r15\n 240:\t48 00 00 01 \tbl      240 <fn_80189C14+0x240>\n\t\t\t240: R_PPC_REL24\tfn_801ED57C\n 244:\t38 60 00 00 \tli      r3,0\n 248:\t48 00 00 01 \tbl      248 <fn_80189C14+0x248>\n\t\t\t248: R_PPC_REL24\tfn_80226D78\n 24c:\te3 e1 00 a8 \tpsq_l   f31,168(r1),0,0\n 250:\tcb e1 00 a0 \tlfd     f31,160(r1)\n 254:\tb9 e1 00 5c \tlmw     r15,92(r1)\n 258:\t80 01 00 b4 \tlwz     r0,180(r1)\n 25c:\t7c 08 03 a6 \tmtlr    r0\n 260:\t38 21 00 b0 \taddi    r1,r1,176\n 264:\t4e 80 00 20 \tblr\n"
+    }
+  ],
+  "canonical": {
+    "match_percent": 99.93507,
+    "retail_size": "616",
+    "generated_size": "616",
+    "raw_objdiff": "reports/GEDE01/objdiff-53d6ca08-9698-441d-9c71-14e682aa3e6c.json"
+  },
+  "relocation_strict": {
+    "match_percent": 99.93507,
+    "retail_size": "616",
+    "generated_size": "616",
+    "raw_objdiff": "reports/GEDE01/objdiff-53d6ca08-9698-441d-9c71-14e682aa3e6c-reloc-strict.json"
+  },
+  "independent_elf_comparison": {
+    "retail_text_sha256": "ccd055abfb1a8366dbbfeaa9fa1a2d5801361210e18fc6459b8a2d91fafc8940",
+    "generated_text_sha256": "6fbaf8863399fa898cbb493494a881c87a3130468ab9df202c0e0449ce45c26d",
+    "generated_object_sha256": "2172415e5600ea7394141e539497c1d90746a17d3835731f9e9d667bf3f8f347",
+    "attempt_7_baseline_object_sha256": "2172415e5600ea7394141e539497c1d90746a17d3835731f9e9d667bf3f8f347",
+    "typed_overlay_object_equals_attempt_7_baseline": true,
+    "retail_relocations": [
+      {
+        "offset": 24,
+        "type": 109,
+        "target": "lbl_8064D738",
+        "addend": 0
+      },
+      {
+        "offset": 34,
+        "type": 6,
+        "target": "lbl_80607120",
+        "addend": 0
+      },
+      {
+        "offset": 42,
+        "type": 4,
+        "target": "lbl_80607120",
+        "addend": 0
+      },
+      {
+        "offset": 102,
+        "type": 6,
+        "target": "lbl_8063C098",
+        "addend": 0
+      },
+      {
+        "offset": 106,
+        "type": 6,
+        "target": "fn_8018D020",
+        "addend": 0
+      },
+      {
+        "offset": 116,
+        "type": 109,
+        "target": "lbl_80650A70",
+        "addend": 0
+      },
+      {
+        "offset": 122,
+        "type": 4,
+        "target": "lbl_8063C098",
+        "addend": 0
+      },
+      {
+        "offset": 126,
+        "type": 4,
+        "target": "fn_8018D020",
+        "addend": 0
+      },
+      {
+        "offset": 160,
+        "type": 10,
+        "target": "fn_80188A7C",
+        "addend": 0
+      },
+      {
+        "offset": 268,
+        "type": 10,
+        "target": "fn_8017ACE0",
+        "addend": 0
+      },
+      {
+        "offset": 488,
+        "type": 10,
+        "target": "DCFlushRange",
+        "addend": 0
+      },
+      {
+        "offset": 500,
+        "type": 10,
+        "target": "DCFlushRange",
+        "addend": 0
+      },
+      {
+        "offset": 512,
+        "type": 10,
+        "target": "DCFlushRange",
+        "addend": 0
+      },
+      {
+        "offset": 524,
+        "type": 10,
+        "target": "fn_80188584",
+        "addend": 0
+      },
+      {
+        "offset": 532,
+        "type": 10,
+        "target": "fn_801ED57C",
+        "addend": 0
+      },
+      {
+        "offset": 552,
+        "type": 10,
+        "target": "fn_8018D0D0",
+        "addend": 0
+      },
+      {
+        "offset": 568,
+        "type": 10,
+        "target": "fn_801889D8",
+        "addend": 0
+      },
+      {
+        "offset": 576,
+        "type": 10,
+        "target": "fn_801ED57C",
+        "addend": 0
+      },
+      {
+        "offset": 584,
+        "type": 10,
+        "target": "fn_80226D78",
+        "addend": 0
+      }
+    ],
+    "generated_relocations": [
+      {
+        "offset": 24,
+        "type": 109,
+        "target": "lbl_8064D738",
+        "addend": 0
+      },
+      {
+        "offset": 34,
+        "type": 6,
+        "target": "lbl_80607120",
+        "addend": 0
+      },
+      {
+        "offset": 42,
+        "type": 4,
+        "target": "lbl_80607120",
+        "addend": 0
+      },
+      {
+        "offset": 102,
+        "type": 6,
+        "target": "lbl_8063C098",
+        "addend": 0
+      },
+      {
+        "offset": 106,
+        "type": 6,
+        "target": "fn_8018D020",
+        "addend": 0
+      },
+      {
+        "offset": 116,
+        "type": 109,
+        "target": "lbl_80650A70",
+        "addend": 0
+      },
+      {
+        "offset": 122,
+        "type": 4,
+        "target": "lbl_8063C098",
+        "addend": 0
+      },
+      {
+        "offset": 126,
+        "type": 4,
+        "target": "fn_8018D020",
+        "addend": 0
+      },
+      {
+        "offset": 160,
+        "type": 10,
+        "target": "fn_80188A7C",
+        "addend": 0
+      },
+      {
+        "offset": 268,
+        "type": 10,
+        "target": "fn_8017ACE0",
+        "addend": 0
+      },
+      {
+        "offset": 488,
+        "type": 10,
+        "target": "DCFlushRange",
+        "addend": 0
+      },
+      {
+        "offset": 500,
+        "type": 10,
+        "target": "DCFlushRange",
+        "addend": 0
+      },
+      {
+        "offset": 512,
+        "type": 10,
+        "target": "DCFlushRange",
+        "addend": 0
+      },
+      {
+        "offset": 524,
+        "type": 10,
+        "target": "fn_80188584",
+        "addend": 0
+      },
+      {
+        "offset": 532,
+        "type": 10,
+        "target": "fn_801ED57C",
+        "addend": 0
+      },
+      {
+        "offset": 552,
+        "type": 10,
+        "target": "fn_8018D0D0",
+        "addend": 0
+      },
+      {
+        "offset": 568,
+        "type": 10,
+        "target": "fn_801889D8",
+        "addend": 0
+      },
+      {
+        "offset": 576,
+        "type": 10,
+        "target": "fn_801ED57C",
+        "addend": 0
+      },
+      {
+        "offset": 584,
+        "type": 10,
+        "target": "fn_80226D78",
+        "addend": 0
+      }
+    ],
+    "relocation_count": 19,
+    "relocations_equal_including_offsets_types_targets_addends": true,
+    "instruction_word_differences": [
+      {
+        "offset": 32,
+        "retail": "3c600000",
+        "generated": "3c800000"
+      },
+      {
+        "offset": 40,
+        "retail": "38630000",
+        "generated": "38640000"
+      }
+    ],
+    "typed_overlay_member_loads": [
+      {
+        "member": "size0",
+        "member_offset": 2,
+        "instruction_offset": 48,
+        "word": "a0830002",
+        "expected_word": "a0830002"
+      },
+      {
+        "member": "flush0",
+        "member_offset": 10,
+        "instruction_offset": 52,
+        "word": "a323000a",
+        "expected_word": "a323000a"
+      },
+      {
+        "member": "flush1",
+        "member_offset": 14,
+        "instruction_offset": 56,
+        "word": "a303000e",
+        "expected_word": "a303000e"
+      },
+      {
+        "member": "flush2",
+        "member_offset": 12,
+        "instruction_offset": 60,
+        "word": "a2e3000c",
+        "expected_word": "a2e3000c"
+      }
+    ],
+    "typed_overlay_member_offsets_verified": true
+  }
+}
