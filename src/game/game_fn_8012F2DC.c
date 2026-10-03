@@ -46,16 +46,21 @@ typedef struct RuntimeState {
     int state;
 } RuntimeState;
 
+typedef struct ObjectRecord {
+    u8 pad_0[0x48];
+    void* value;
+} ObjectRecord;
+
 typedef struct Object {
     u8 pad_0[0x160];
-    u8* records;
+    ObjectRecord* records;
     u8 pad_164[0xDC];
     Entry** entries;
     u8 pad_244[0x4C];
     RuntimeState* runtime;
 } Object;
 
-extern float lbl_805AADC8[][3];
+extern Vec3 lbl_805AADC8[];
 extern int lbl_8064CF30;
 extern int lbl_8064CF34;
 extern const float lbl_80650210;
@@ -76,16 +81,16 @@ int fn_8012F2DC(Object* object, const Vec3* target, int index,
 {
     QueryResult first;
     QueryResult second;
-    Vec4 current;
     Vec4 desired;
+    Vec4 current;
     RotationValue blended;
     Entry* entry;
-    Vec3* debug_vectors = (Vec3*)lbl_805AADC8;
+    Vec3* debug_vectors = lbl_805AADC8;
 
     fn_80125ECC(object);
     entry = object->entries[index];
     if (entry != 0) {
-        *(void**)(object->records + entry->record->record_index * 0x4C + 0x48) = 0;
+        object->records[entry->record->record_index].value = 0;
         fn_8011F6A4(query_object, query_key, 15, -1, &first, 1);
         fn_8011F6A4(query_object, query_key, 15, -1, &second, 4);
 
