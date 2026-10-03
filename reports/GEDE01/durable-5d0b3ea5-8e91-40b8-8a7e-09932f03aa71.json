@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "assignment_id": "5d0b3ea5-8e91-40b8-8a7e-09932f03aa71",
+  "attempt": 4,
+  "base_commit": "d74c54bd322f22480d0a27d8b24c18f399dd1a77",
+  "target": "fn_8012E568",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-5d0b3ea5-8e91-40b8-8a7e-09932f03aa71.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-5d0b3ea5-8e91-40b8-8a7e-09932f03aa71.txt",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-5d0b3ea5-8e91-40b8-8a7e-09932f03aa71.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-retail-5d0b3ea5-8e91-40b8-8a7e-09932f03aa71.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-candidate-5d0b3ea5-8e91-40b8-8a7e-09932f03aa71.txt",
+    "eternal-darkness-decomp/reports/GEDE01/hashes-5d0b3ea5-8e91-40b8-8a7e-09932f03aa71.txt"
+  ],
+  "divergence": "Canonical objdiff measured 94.9729%: retail is 1476 bytes while generated code is 1504 bytes. Generated code uses a 0x60-byte frame with _savegpr_23/_restgpr_23 relocations instead of retail's 0x50-byte frame with inline stmw/lmw, assigns different callee-saved registers, and materializes the float[3] joint output at stack +0x20 before copying it to the Vec3 at +0x14; retail passes +0x14 directly. Candidate has 13 relocations versus retail's 11 because of the two GPR helper calls; the remaining external relocation targets and addends are recorded in the raw tables."
+}

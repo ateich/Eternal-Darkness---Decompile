@@ -26,7 +26,7 @@ typedef struct Object {
     Vec3 position;
     Vec3 optional_position;
     u8 pad_018[0x14];
-    u32 properties[4];
+    Copy16 properties;
     void* spawn_context;
     u8 pad_040[0x114];
     Vec3* points;
@@ -61,7 +61,10 @@ extern float fn_8011F788(void*, float);
 extern void fn_8011F7A0(void*, const Vec3*);
 
 /* Keep the cross-TU surface opaque; fn_80205730 forwards this pointer without
- * inspecting it. This function alone gives the two opaque pointers types. */
+ * inspecting it. This function alone gives the two opaque pointers types.
+ * The caller owns both objects. resource_index must select a non-null resource
+ * and resource object; points, records, and states each contain 137 entries.
+ * data is either null or points to a readable Vec3. */
 void* fn_8012E568(void* object, int resource_index, void* data)
 {
     Object* source = object;
@@ -70,6 +73,7 @@ void* fn_8012E568(void* object, int resource_index, void* data)
     ResourceObject* resource_object;
     float joint_position[3];
     Vec3 relative;
+    Vec3 final_position;
     float radius;
     int i;
 
@@ -80,10 +84,7 @@ void* fn_8012E568(void* object, int resource_index, void* data)
 
     created->copied_294 = source->copied_294;
     fn_8011FB44(source, 0);
-    created->properties[0] = source->properties[0];
-    created->properties[1] = source->properties[1];
-    created->properties[2] = source->properties[2];
-    created->properties[3] = source->properties[3];
+    created->properties = source->properties;
     created->copied_250 = source->copied_250;
     created->copied_244 = source->copied_244;
     if (optional_position != 0) {
@@ -107,18 +108,21 @@ void* fn_8012E568(void* object, int resource_index, void* data)
     case 0:
         relative.z += radius;
         break;
+    case 2:
+        radius = lbl_806501FC;
+        break;
+    case 3:
+        radius = lbl_806501FC;
+        break;
     case 1:
         radius = lbl_806501FC;
         relative.z += radius;
         break;
-    case 2:
-    case 3:
-        radius = lbl_806501FC;
-        break;
     }
 
     fn_8011F788(created, radius);
-    fn_8011F7A0(created, &relative);
+    final_position = relative;
+    fn_8011F7A0(created, &final_position);
     created->flags |= 0x400;
     return created;
 }
