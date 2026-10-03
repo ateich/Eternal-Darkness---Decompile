@@ -24,8 +24,8 @@ extern void fn_801A76F4(EventVectors *vectors, s32 event);
 extern f32 fn_80211B08(Vec3 *position);
 extern s32 fn_80066D80(s32 context, s32 index);
 extern s32 fn_801A74F8(s32 event);
-extern void fn_8012EDB0(s32 context, s32 index, Vec3 *position, f32 first,
-                        f32 second);
+extern s32 fn_8012EDB0(s32 context, s32 index, Vec3 *position, f32 first,
+                       f32 second);
 extern s32 fn_8013057C(s32 context, s32 index);
 extern void fn_801301B0(s32 context, s32 clear, s32 set);
 
