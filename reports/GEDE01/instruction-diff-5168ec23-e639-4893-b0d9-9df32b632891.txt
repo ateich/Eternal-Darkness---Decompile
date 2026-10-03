@@ -1,0 +1,53 @@
+Raw selected instruction differences from objdiff-cli canonical JSON.
+Full per-instruction stream is preserved in objdiff-5168ec23-e639-4893-b0d9-9df32b632891.json.
+target 892 bytes  base 896 bytes  match 86.847534
+
+  offset  retail                                                | generated
+* 0x0008  stmw r22, 0x38(r1)                                   | stmw r23, 0x3c(r1)
+* 0x000c  lhz r27, 0xc(r4)                                     | lhz r31, 0xc(r4)
+* 0x0010  lwz r12, 0x50(r4)                                    | lwz r11, 0x50(r4)
+* 0x0014  lwz r26, 0xdc(r4)                                    | lwz r30, 0xdc(r4)
+* 0x00b8  li r30, 0x0                                          | li r12, 0x0
+* 0x00bc  addi r11, r5, lbl_804FA6D0@l                         | addi r10, r5, lbl_804FA6D0@l
+* 0x00c0  mr r10, r3                                           | mr r9, r3
+* 0x00c4  mr r9, r30                                           | mr r8, r12
+* 0x00c8  b 0x368                                              | b 0x36c
+* 0x00d4  add r24, r5, r9                                      | add r29, r5, r8
+* 0x00d8  cmpwi r0, 0x0                                        | cmplwi r0, 0x0
+* 0x0100                                                        | mr r27, r25
+* 0x0118  mulli r23, r7, 0x6                                   | mulli r24, r25, 0x6
+* 0x0138  mtctr r25                                            | mtctr r0
+* 0x0144  lwz r22, 0x0(r5)                                     | lwz r0, 0x0(r5)
+* 0x0148  addi r7, r7, 0x8                                     | addi r27, r27, 0x8
+* 0x01d4  mulli r23, r7, 0x6                                   | mulli r23, r27, 0x6
+* 0x01ec  mtctr r5                                             | mtctr r0
+* 0x0218  mr r8, r0                                            |
+* 0x021c  li r28, 0x0                                          | li r0, 0x20
+* 0x0224                                                        | mtctr r0
+* 0x0238  beq 0x344                                            | beq 0x248
+* 0x0248  beq 0x344                                            | bne 0x250
+* 0x0250  li r5, 0x1                                           | addi r28, r28, 0x8
+* 0x0254  mulli r0, r29, 0xc                                   | b 0x354
+* 0x0258  lfd f2, lbl_80650108@sda21                           | li r0, 0x1
+* 0x0260  stw r5, 0x0(r11)                                     |
+* 0x0268  add r6, r26, r0                                      | stw r0, 0x0(r10)
+* 0x0274                                                        | lfd f2, @65@sda21
+* 0x027c  mtctr r31                                            | lwz r26, 0x0(r28)
+* 0x0280  cmplw r29, r22                                       | mulli r6, r26, 0xc
+* 0x0284  bge 0x344                                            | add r6, r30, r6
+* 0x0288                                                        | b 0x33c
+* 0x0350                                                        | lwz r24, 0x0(r28)
+* 0x0354                                                        | lwz r25, 0x4(r28)
+* 0x0358                                                        | add r25, r24, r25
+* 0x035c                                                        | cmplw r26, r25
+* 0x0360  bdnz 0x27c                                           | blt 0x278
+* 0x0364  addi r28, r28, 0x1                                   |
+* 0x0368  addi r8, r8, 0x8                                     | addi r28, r28, 0x8
+* 0x036c  cmpwi r28, 0x20                                      |
+* 0x0374  blt 0x220                                            | bdnz 0x224
+* 0x0378  addi r9, r9, 0x114                                   | addi r8, r8, 0x114
+* 0x037c  addi r10, r10, 0x8                                   | addi r9, r9, 0x8
+* 0x0380  addi r11, r11, 0x4                                   | addi r10, r10, 0x4
+* 0x0384  addi r30, r30, 0x1                                   | addi r12, r12, 0x1
+* 0x0388  cmpw r30, r27                                        | cmpw r12, r31
+* 0x0390  lmw r22, 0x38(r1)                                    | lmw r23, 0x3c(r1)
