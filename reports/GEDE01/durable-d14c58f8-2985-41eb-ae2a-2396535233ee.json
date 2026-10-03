@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "assignment_id": "d14c58f8-2985-41eb-ae2a-2396535233ee",
+  "attempt": 8,
+  "base_commit": "07198943fcac8b3eeded877a4f3098cfe893c58c",
+  "target": "fn_80160480",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/baseline-build-d14c58f8-2985-41eb-ae2a-2396535233ee.log",
+    "eternal-darkness-decomp/reports/GEDE01/compatibility-build-d14c58f8-2985-41eb-ae2a-2396535233ee.log",
+    "eternal-darkness-decomp/reports/GEDE01/compatibility-objdiff-command-d14c58f8-2985-41eb-ae2a-2396535233ee.log",
+    "eternal-darkness-decomp/reports/GEDE01/compatibility-objdiff-d14c58f8-2985-41eb-ae2a-2396535233ee.json",
+    "eternal-darkness-decomp/reports/GEDE01/compatibility-objdiff-strict-command-d14c58f8-2985-41eb-ae2a-2396535233ee.log",
+    "eternal-darkness-decomp/reports/GEDE01/compatibility-objdiff-strict-d14c58f8-2985-41eb-ae2a-2396535233ee.json",
+    "eternal-darkness-decomp/reports/GEDE01/order-trial-build-d14c58f8-2985-41eb-ae2a-2396535233ee.log",
+    "eternal-darkness-decomp/reports/GEDE01/order-trial-objdiff-command-d14c58f8-2985-41eb-ae2a-2396535233ee.log",
+    "eternal-darkness-decomp/reports/GEDE01/order-trial-objdiff-d14c58f8-2985-41eb-ae2a-2396535233ee.json",
+    "eternal-darkness-decomp/reports/GEDE01/order-trial-objdiff-strict-command-d14c58f8-2985-41eb-ae2a-2396535233ee.log",
+    "eternal-darkness-decomp/reports/GEDE01/order-trial-objdiff-strict-d14c58f8-2985-41eb-ae2a-2396535233ee.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-d14c58f8-2985-41eb-ae2a-2396535233ee.log",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-command-d14c58f8-2985-41eb-ae2a-2396535233ee.log",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-d14c58f8-2985-41eb-ae2a-2396535233ee.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-strict-command-d14c58f8-2985-41eb-ae2a-2396535233ee.log",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-strict-d14c58f8-2985-41eb-ae2a-2396535233ee.json",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-d14c58f8-2985-41eb-ae2a-2396535233ee.tsv",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-d14c58f8-2985-41eb-ae2a-2396535233ee.tsv",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-retail-d14c58f8-2985-41eb-ae2a-2396535233ee.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-candidate-d14c58f8-2985-41eb-ae2a-2396535233ee.txt",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-d14c58f8-2985-41eb-ae2a-2396535233ee.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff are both 99.0% at the exact 120-byte size, with all 8 relocations equal in offset, type, target, and addend. At offsets 0x24-0x30 GC/1.3 loads previous/current descriptor table entries in the opposite order from retail and consequently uses different base registers for the signed byte loads. The isolated current-descriptor-first volatile-access trial regressed to 97.933334%, so the compatible 99.0% baseline is retained."
+}
