@@ -9790,6 +9790,7 @@ config.libs = [
             Object(Matching, "game/game_fn_8012E498.c"),
             Object(Matching, "game/game_fn_8012E504.c"),
             Object(Matching, "game/game_fn_8012E524.c"),
+            Object(NonMatching, "game/game_fn_8012E568.c"),
             Object(Matching, "game/game_fn_8012EB2C.c"),
             Object(Matching, "game/game_fn_8012EBDC.c"),
             Object(NonMatching, "game/game_fn_8012EF98.c"),

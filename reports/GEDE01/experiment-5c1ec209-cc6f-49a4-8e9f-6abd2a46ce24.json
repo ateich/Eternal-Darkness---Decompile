@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "assignment_id": "5c1ec209-cc6f-49a4-8e9f-6abd2a46ce24",
+  "attempt": 1,
+  "target": "fn_8012E568",
+  "candidate_source_sha256": "05c98e43dd3e59146dd17e7e36698d6cea1dc0450d0ff67229a2000c3c687b39",
+  "compiler": "GC/1.3",
+  "canonical_match_percent": 90.19783,
+  "relocation_strict_match_percent": 90.19783,
+  "retail_text_bytes": 1476,
+  "candidate_text_bytes": 1468,
+  "result": "attempted",
+  "divergence": "The candidate is eight bytes shorter. Its prologue calls _savegpr_23 while retail emits inline stmw r23, and its epilogue similarly calls _restgpr_23 instead of the retail inline restore. Register allocation differs from the first argument moves onward, with resulting scheduling differences throughout the 137-element unrolled copy loop and the radius switch. The source object also has helper relocations absent from retail and shifted/missing constant relocations: retail has three lbl_806501FC SDA21 sites while the candidate has two. Function-call relocation targets otherwise agree.",
+  "preconditions": [
+    "object and returned constructor object are non-null and owned as expected by existing callers",
+    "resource_index selects an existing source resources entry with a non-null object",
+    "points and records each contain at least 137 elements and states contains at least 137 bytes",
+    "data is either null or points to three readable floats"
+  ]
+}
