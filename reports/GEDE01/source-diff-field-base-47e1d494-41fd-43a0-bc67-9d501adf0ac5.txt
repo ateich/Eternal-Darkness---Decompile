@@ -1,0 +1,74 @@
+diff --git a/eternal-darkness-decomp/src/game/game_fn_80028198.c b/eternal-darkness-decomp/src/game/game_fn_80028198.c
+index fe647a89d..856266f56 100644
+--- a/eternal-darkness-decomp/src/game/game_fn_80028198.c
++++ b/eternal-darkness-decomp/src/game/game_fn_80028198.c
+@@ -81,7 +81,6 @@ static inline void begin_scene(s32 kind, s32 player_mode)
+ 
+ static inline void activate_entry(s32 player_mode, s32 retry)
+ {
+-    void* camera = lbl_8063CD18 + 0x550;
+     s32 ok;
+ 
+     reset_pair();
+@@ -95,18 +94,18 @@ static inline void activate_entry(s32 player_mode, s32 retry)
+                         lbl_8064DFF4);
+     }
+     if (ok) {
+-        lbl_80300368.entries[lbl_80300368.current].flags |= 4;
+-        lbl_80300368.entries[lbl_80300368.current].flags &= ~1;
++        ((u32*)((char*)&lbl_80300368 + 24))[lbl_80300368.current * 8] |= 4;
++        lbl_80300368.entries[lbl_80300368.current].flags &= ~1U;
+     }
+     if (lbl_80300368.entries[lbl_80300368.current].flags & 4) {
+         fn_80046D38(0);
+     }
+     if (fn_800289A4(lbl_80300368.entries[lbl_80300368.current].value14,
+                     lbl_80300368.entries[lbl_80300368.current].flags & 1, 0)) {
+-        lbl_80300368.entries[lbl_80300368.current].flags &= ~1;
++        lbl_80300368.entries[lbl_80300368.current].flags &= ~1U;
+     }
+     fn_801FA198(lbl_80300368.entries[lbl_80300368.current].value14,
+-                camera, 0, 0,
++                lbl_8063CD18 + 0x550, 0, 0,
+                 lbl_80300368.entries[lbl_80300368.current].flags & 1,
+                 0, 0, 0, 0);
+     if (retry &&
+@@ -141,7 +140,7 @@ void fn_80028198(void)
+     if (current != 0) {
+         player_mode = 4;
+     }
+-    lbl_80300368.entries[current].phase++;
++    ((s32*)((char*)&lbl_80300368 + 8))[current * 8]++;
+ 
+     switch (lbl_80300368.entries[lbl_80300368.current].state) {
+     case 1:
+@@ -212,24 +211,21 @@ void fn_80028198(void)
+             s32 scene;
+             s32 value1;
+             s32 value2;
+-            void* target;
+-            void* actor;
+ 
+             object = fn_80201814(lbl_80300368.entries[lbl_80300368.current].value1C);
+             scene = (s32)fn_80201C24();
+             value1 = fn_80157BC4();
+             value2 = fn_80157BF4(scene);
+-            target = fn_80201814(lbl_80300368.entries[lbl_80300368.current].value1C);
+-            if (target != 0) {
+-                fn_80205680(target, (void*)fn_80201B44(), 0x1E);
++            object = fn_80201814(lbl_80300368.entries[lbl_80300368.current].value1C);
++            if (object != 0) {
++                fn_80205680(object, (void*)fn_80201B44(), 0x1E);
+             }
+             if (fn_8015821C(scene) == 0x1F &&
+                 !fn_801E79FC(lbl_8064C4E0, 0x10A)) {
+                 fn_801B05E8(0xC, 0x64, 6, 1, 0, 5, 0, 0);
+             }
+-            actor = (void*)fn_80201B44();
+-            object = fn_801E6CA0(lbl_8064C504, value2, value1, 0, 1);
+-            fn_80027948(object, -2, actor,
++            object = (void*)fn_80201B44();
++            fn_80027948(fn_801E6CA0(lbl_8064C504, value2, value1, 0, 1), -2, object,
+                         lbl_80300368.entries[lbl_80300368.current].value1C,
+                         0, 0, 0);
+             break;

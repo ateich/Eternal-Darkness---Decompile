@@ -1,0 +1,188 @@
+diff --git a/eternal-darkness-decomp/src/game/game_fn_80028198.c b/eternal-darkness-decomp/src/game/game_fn_80028198.c
+index fe647a89d..a601e29db 100644
+--- a/eternal-darkness-decomp/src/game/game_fn_80028198.c
++++ b/eternal-darkness-decomp/src/game/game_fn_80028198.c
+@@ -13,9 +13,12 @@ typedef struct GameEntry {
+     s32 value1C;
+ } GameEntry;
+ 
+-typedef struct GameState {
++typedef union GameState {
+     GameEntry entries[2];
+-    s32 current;
++    struct {
++        GameEntry padding[2];
++        s32 current;
++    } control;
+ } GameState;
+ 
+ extern GameState lbl_80300368;
+@@ -75,7 +78,7 @@ static inline void reset_pair(void)
+ static inline void begin_scene(s32 kind, s32 player_mode)
+ {
+     fn_8011E310(2, kind, -2,
+-                lbl_80300368.entries[lbl_80300368.current].object,
++                lbl_80300368.entries[lbl_80300368.control.current].object,
+                 0x32, player_mode, 1);
+ }
+ 
+@@ -86,33 +89,33 @@ static inline void activate_entry(s32 player_mode, s32 retry)
+ 
+     reset_pair();
+     ok = fn_801FBEF0(lbl_8064C4E4,
+-                     lbl_80300368.entries[lbl_80300368.current].value14,
+-                     lbl_80300368.entries[lbl_80300368.current].flags & 1);
++                     lbl_80300368.entries[lbl_80300368.control.current].value14,
++                     lbl_80300368.entries[lbl_80300368.control.current].flags & 1);
+     if (!ok && retry) {
+         ok = fn_801FC034(lbl_8064C4E4,
+-                        lbl_80300368.entries[lbl_80300368.current].value14,
+-                        lbl_80300368.entries[lbl_80300368.current].flags & 1,
++                        lbl_80300368.entries[lbl_80300368.control.current].value14,
++                        lbl_80300368.entries[lbl_80300368.control.current].flags & 1,
+                         lbl_8064DFF4);
+     }
+     if (ok) {
+-        lbl_80300368.entries[lbl_80300368.current].flags |= 4;
+-        lbl_80300368.entries[lbl_80300368.current].flags &= ~1;
++        lbl_80300368.entries[lbl_80300368.control.current].flags |= 4;
++        lbl_80300368.entries[lbl_80300368.control.current].flags &= ~1U;
+     }
+-    if (lbl_80300368.entries[lbl_80300368.current].flags & 4) {
++    if (lbl_80300368.entries[lbl_80300368.control.current].flags & 4) {
+         fn_80046D38(0);
+     }
+-    if (fn_800289A4(lbl_80300368.entries[lbl_80300368.current].value14,
+-                    lbl_80300368.entries[lbl_80300368.current].flags & 1, 0)) {
+-        lbl_80300368.entries[lbl_80300368.current].flags &= ~1;
++    if (fn_800289A4(lbl_80300368.entries[lbl_80300368.control.current].value14,
++                    lbl_80300368.entries[lbl_80300368.control.current].flags & 1, 0)) {
++        lbl_80300368.entries[lbl_80300368.control.current].flags &= ~1U;
+     }
+-    fn_801FA198(lbl_80300368.entries[lbl_80300368.current].value14,
++    fn_801FA198(lbl_80300368.entries[lbl_80300368.control.current].value14,
+                 camera, 0, 0,
+-                lbl_80300368.entries[lbl_80300368.current].flags & 1,
++                lbl_80300368.entries[lbl_80300368.control.current].flags & 1,
+                 0, 0, 0, 0);
+     if (retry &&
+-        lbl_80300368.entries[lbl_80300368.current].value10 < 0) {
++        lbl_80300368.entries[lbl_80300368.control.current].value10 < 0) {
+         begin_scene(7, player_mode);
+-        lbl_80300368.entries[lbl_80300368.current].phase = 3;
++        lbl_80300368.entries[lbl_80300368.control.current].phase = 3;
+     } else {
+         begin_scene(0x22, player_mode);
+     }
+@@ -121,21 +124,21 @@ static inline void activate_entry(s32 player_mode, s32 retry)
+ static inline void finish_entry(void)
+ {
+     fn_801F85A4();
+-    if (!(lbl_80300368.entries[lbl_80300368.current].flags & 1)) {
++    if (!(lbl_80300368.entries[lbl_80300368.control.current].flags & 1)) {
+         fn_801FA354();
+     }
+-    if (lbl_80300368.entries[lbl_80300368.current].flags & 4) {
++    if (lbl_80300368.entries[lbl_80300368.control.current].flags & 4) {
+         fn_80046D38(1);
+     }
+     fn_80028B44();
+-    lbl_80300368.entries[lbl_80300368.current].state = 0;
+-    fn_8016B400(lbl_80300368.entries[lbl_80300368.current].object, 0, 0);
++    lbl_80300368.entries[lbl_80300368.control.current].state = 0;
++    fn_8016B400(lbl_80300368.entries[lbl_80300368.control.current].object, 0, 0);
+ }
+ 
+ void fn_80028198(void)
+ {
+     s32 player_mode = 2;
+-    s32 current = lbl_80300368.current;
++    s32 current = lbl_80300368.control.current;
+     s32 old_phase = lbl_80300368.entries[current].phase;
+ 
+     if (current != 0) {
+@@ -143,14 +146,14 @@ void fn_80028198(void)
+     }
+     lbl_80300368.entries[current].phase++;
+ 
+-    switch (lbl_80300368.entries[lbl_80300368.current].state) {
++    switch (lbl_80300368.entries[lbl_80300368.control.current].state) {
+     case 1:
+-        lbl_80300368.entries[lbl_80300368.current].state = 0;
++        lbl_80300368.entries[lbl_80300368.control.current].state = 0;
+         fn_80027730(fn_801E6CA0(lbl_8064C500,
+-                               lbl_80300368.entries[lbl_80300368.current].valueC,
+-                               lbl_80300368.entries[lbl_80300368.current].value10,
++                               lbl_80300368.entries[lbl_80300368.control.current].valueC,
++                               lbl_80300368.entries[lbl_80300368.control.current].value10,
+                                0, 1),
+-                     lbl_80300368.entries[lbl_80300368.current].object, 0);
++                     lbl_80300368.entries[lbl_80300368.control.current].object, 0);
+         break;
+ 
+     case 2:
+@@ -162,8 +165,8 @@ void fn_80028198(void)
+             break;
+         case 1:
+             fn_80027730(fn_801E6CA0(lbl_8064C500,
+-                                   lbl_80300368.entries[lbl_80300368.current].valueC,
+-                                   lbl_80300368.entries[lbl_80300368.current].value10,
++                                   lbl_80300368.entries[lbl_80300368.control.current].valueC,
++                                   lbl_80300368.entries[lbl_80300368.control.current].value10,
+                                    0, 1), -2, 0);
+             reset_pair();
+             break;
+@@ -175,15 +178,15 @@ void fn_80028198(void)
+         case 3:
+             fn_801A5C30(1);
+             fn_801F85A4();
+-            if (!(lbl_80300368.entries[lbl_80300368.current].flags & 1)) {
++            if (!(lbl_80300368.entries[lbl_80300368.control.current].flags & 1)) {
+                 fn_801FA354();
+             }
+-            if (lbl_80300368.entries[lbl_80300368.current].flags & 4) {
++            if (lbl_80300368.entries[lbl_80300368.control.current].flags & 4) {
+                 fn_80046D38(1);
+             }
+             fn_80028B44();
+-            lbl_80300368.entries[lbl_80300368.current].state = 0;
+-            fn_8016B400(lbl_80300368.entries[lbl_80300368.current].object, 0, 0);
++            lbl_80300368.entries[lbl_80300368.control.current].state = 0;
++            fn_8016B400(lbl_80300368.entries[lbl_80300368.control.current].object, 0, 0);
+             break;
+         }
+         break;
+@@ -197,8 +200,8 @@ void fn_80028198(void)
+             break;
+         case 1:
+             fn_80027730(fn_801E6CA0(lbl_8064C500,
+-                                   lbl_80300368.entries[lbl_80300368.current].valueC,
+-                                   lbl_80300368.entries[lbl_80300368.current].value10,
++                                   lbl_80300368.entries[lbl_80300368.control.current].valueC,
++                                   lbl_80300368.entries[lbl_80300368.control.current].value10,
+                                    0, 1), -2, 0);
+             reset_pair();
+             break;
+@@ -215,11 +218,11 @@ void fn_80028198(void)
+             void* target;
+             void* actor;
+ 
+-            object = fn_80201814(lbl_80300368.entries[lbl_80300368.current].value1C);
++            object = fn_80201814(lbl_80300368.entries[lbl_80300368.control.current].value1C);
+             scene = (s32)fn_80201C24();
+             value1 = fn_80157BC4();
+             value2 = fn_80157BF4(scene);
+-            target = fn_80201814(lbl_80300368.entries[lbl_80300368.current].value1C);
++            target = fn_80201814(lbl_80300368.entries[lbl_80300368.control.current].value1C);
+             if (target != 0) {
+                 fn_80205680(target, (void*)fn_80201B44(), 0x1E);
+             }
+@@ -230,7 +233,7 @@ void fn_80028198(void)
+             actor = (void*)fn_80201B44();
+             object = fn_801E6CA0(lbl_8064C504, value2, value1, 0, 1);
+             fn_80027948(object, -2, actor,
+-                        lbl_80300368.entries[lbl_80300368.current].value1C,
++                        lbl_80300368.entries[lbl_80300368.control.current].value1C,
+                         0, 0, 0);
+             break;
+         }

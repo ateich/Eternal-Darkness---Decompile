@@ -1,0 +1,67 @@
+Attempt 5: independent canonical GC/1.3 source experiments for fn_80028198.
+
+Preserved attempt review:
+Read the prior attempt envelopes, raw instruction diff, hypothesis reports, and
+verification commands from HEAD; inspected the first attempt source diff and the
+preserved c5cdd98b1330e504e52724a4f45b820f93e8c35e source. That source and the
+accepted-base source have SHA-256
+9e5b3a888744ade4db91947b8335cca8b6656cc1225d9a91f41e209b1bd51b63.
+Prior direct-global, helper-inlining, combined post-increment, and volatile
+second-current-read experiments were not repeated.
+
+New hypotheses and retained improvements:
+1. Use an unsigned mask (~1U) for the unsigned flags compound assignment.
+   This changes li -2 / and into retail's clrrwi, improving 94.194176% to
+   95.78641% (2064 to 2048 candidate bytes).
+2. Remove the camera local initialized before reset_pair. Evaluate the constant
+   camera address directly at fn_801FA198. This matches retail's address
+   materialization timing and activation-block register allocation: 98.46602%.
+3. Reuse the object local in the special path and pass fn_801E6CA0's result
+   directly to fn_80027948. This removes the extra move and reaches 98.73786%,
+   2044 bytes. Keep the object lookup, scene lookup, value lookups, conditional
+   call, and actor lookup in their observed order.
+4. Correct the inherited unprototyped fn_80201C24 call to pass object. The
+   existing src/game/game_fn_80201C24.c implementation dereferences its object
+   argument at +0x2C; retail receives fn_80201814's return directly in r3.
+   Add prototypes for fn_80201814(s32), fn_80201C24(void*), fn_80201B44(void).
+   This semantic correction produces identical measured instructions.
+
+Rejected follow-ups (raw build, objdiff, source patch, instruction diff, and
+relocation tables are retained for every experiment): signed flags; a union
+layout; larger object scope; struct field arrays; a flat word array; full
+byte-addressed entries; byte-addressed writes; field-base writes; consistent
+field pointers; register object; conditional object assignment; global phase
+index; explicit flag assignments; long integer typedefs; explicit phase update;
+a separate flag-clear inline helper; volatile phase/flag compound updates
+(distinct from prior volatile current-read experiment); integer object local.
+See measurements JSON for all exact scores, and source-diff files for the
+exact candidate changes relative to the accepted base. No rejected alternate
+C translation unit remains. The final candidate is the linked-object-argument
+variant. Source experiments used configure.py and assigned-object Ninja builds;
+compiler flags and registration remain unchanged.
+
+Final divergence (addresses below are real function-relative instruction
+addresses from raw objdiff, not fndiff's display-row indices):
+- Candidate loads current at 0x40, before the phase store at 0x4C. Retail loads
+  current at 0x4C after its phase store at 0x48; increment/store use r0 in retail
+  versus r3 in the candidate.
+- Retail reloads current and recomputes its scaled index at 0x1B8/0x1BC and
+  0x4E4/0x4E8 between setting flag bit 2 and clearing flag bit 0. Candidate
+  retains the index and omits those four instructions, accounting for 16 bytes.
+- Retail keeps the value1C address in r27 and the special-path object in r26;
+  candidate uses r26 and r27 respectively (retail 0x678 through 0x750).
+The final canonical and name_address relocation-strict reports both measure
+98.73786%, retail 2060 bytes, candidate 2044 bytes. This is NOT a match.
+Readelf -rW outputs preserve relocation offsets, types, symbol targets and
+addends for each measured object. Full objdiff JSON preserves instruction
+alignment and relocation metadata. No relocation equivalence claim is made
+from the canonical percentage alone.
+
+Acceptance and scope:
+Status attempted; configure.py still registers this independent TU NonMatching.
+Only target source and assignment reports are prepared. Pre-existing CLAUDE.md
+modifications are excluded from this commit. No global progress, neighboring
+source, compiler policy, shared input, or runtime code was edited. No push.
+Full deterministic build, fresh canonical/strict no-regression reports, full
+legal audit, and measured retail DOL SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f
+are NOT run or claimed here; they remain mandatory integrator post-review gates.

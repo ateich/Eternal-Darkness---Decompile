@@ -1,0 +1,219 @@
+diff --git a/eternal-darkness-decomp/src/game/game_fn_80028198.c b/eternal-darkness-decomp/src/game/game_fn_80028198.c
+index fe647a89d..91e3b54c4 100644
+--- a/eternal-darkness-decomp/src/game/game_fn_80028198.c
++++ b/eternal-darkness-decomp/src/game/game_fn_80028198.c
+@@ -2,23 +2,7 @@ typedef int s32;
+ typedef unsigned int u32;
+ typedef unsigned short u16;
+ 
+-typedef struct GameEntry {
+-    s32 state;
+-    s32 object;
+-    s32 phase;
+-    s32 valueC;
+-    s32 value10;
+-    s32 value14;
+-    u32 flags;
+-    s32 value1C;
+-} GameEntry;
+-
+-typedef struct GameState {
+-    GameEntry entries[2];
+-    s32 current;
+-} GameState;
+-
+-extern GameState lbl_80300368;
++extern s32 lbl_80300368[17];
+ extern void* lbl_8064C4E4;
+ extern void* lbl_8064C4E0;
+ extern void* lbl_8064C500;
+@@ -75,44 +59,43 @@ static inline void reset_pair(void)
+ static inline void begin_scene(s32 kind, s32 player_mode)
+ {
+     fn_8011E310(2, kind, -2,
+-                lbl_80300368.entries[lbl_80300368.current].object,
++                lbl_80300368[(lbl_80300368[16]) * 8 + 1],
+                 0x32, player_mode, 1);
+ }
+ 
+ static inline void activate_entry(s32 player_mode, s32 retry)
+ {
+-    void* camera = lbl_8063CD18 + 0x550;
+     s32 ok;
+ 
+     reset_pair();
+     ok = fn_801FBEF0(lbl_8064C4E4,
+-                     lbl_80300368.entries[lbl_80300368.current].value14,
+-                     lbl_80300368.entries[lbl_80300368.current].flags & 1);
++                     lbl_80300368[(lbl_80300368[16]) * 8 + 5],
++                     lbl_80300368[(lbl_80300368[16]) * 8 + 6] & 1);
+     if (!ok && retry) {
+         ok = fn_801FC034(lbl_8064C4E4,
+-                        lbl_80300368.entries[lbl_80300368.current].value14,
+-                        lbl_80300368.entries[lbl_80300368.current].flags & 1,
++                        lbl_80300368[(lbl_80300368[16]) * 8 + 5],
++                        lbl_80300368[(lbl_80300368[16]) * 8 + 6] & 1,
+                         lbl_8064DFF4);
+     }
+     if (ok) {
+-        lbl_80300368.entries[lbl_80300368.current].flags |= 4;
+-        lbl_80300368.entries[lbl_80300368.current].flags &= ~1;
++        lbl_80300368[(lbl_80300368[16]) * 8 + 6] |= 4;
++        lbl_80300368[(lbl_80300368[16]) * 8 + 6] &= ~1U;
+     }
+-    if (lbl_80300368.entries[lbl_80300368.current].flags & 4) {
++    if (lbl_80300368[(lbl_80300368[16]) * 8 + 6] & 4) {
+         fn_80046D38(0);
+     }
+-    if (fn_800289A4(lbl_80300368.entries[lbl_80300368.current].value14,
+-                    lbl_80300368.entries[lbl_80300368.current].flags & 1, 0)) {
+-        lbl_80300368.entries[lbl_80300368.current].flags &= ~1;
++    if (fn_800289A4(lbl_80300368[(lbl_80300368[16]) * 8 + 5],
++                    lbl_80300368[(lbl_80300368[16]) * 8 + 6] & 1, 0)) {
++        lbl_80300368[(lbl_80300368[16]) * 8 + 6] &= ~1U;
+     }
+-    fn_801FA198(lbl_80300368.entries[lbl_80300368.current].value14,
+-                camera, 0, 0,
+-                lbl_80300368.entries[lbl_80300368.current].flags & 1,
++    fn_801FA198(lbl_80300368[(lbl_80300368[16]) * 8 + 5],
++                lbl_8063CD18 + 0x550, 0, 0,
++                lbl_80300368[(lbl_80300368[16]) * 8 + 6] & 1,
+                 0, 0, 0, 0);
+     if (retry &&
+-        lbl_80300368.entries[lbl_80300368.current].value10 < 0) {
++        lbl_80300368[(lbl_80300368[16]) * 8 + 4] < 0) {
+         begin_scene(7, player_mode);
+-        lbl_80300368.entries[lbl_80300368.current].phase = 3;
++        lbl_80300368[(lbl_80300368[16]) * 8 + 2] = 3;
+     } else {
+         begin_scene(0x22, player_mode);
+     }
+@@ -121,36 +104,37 @@ static inline void activate_entry(s32 player_mode, s32 retry)
+ static inline void finish_entry(void)
+ {
+     fn_801F85A4();
+-    if (!(lbl_80300368.entries[lbl_80300368.current].flags & 1)) {
++    if (!(lbl_80300368[(lbl_80300368[16]) * 8 + 6] & 1)) {
+         fn_801FA354();
+     }
+-    if (lbl_80300368.entries[lbl_80300368.current].flags & 4) {
++    if (lbl_80300368[(lbl_80300368[16]) * 8 + 6] & 4) {
+         fn_80046D38(1);
+     }
+     fn_80028B44();
+-    lbl_80300368.entries[lbl_80300368.current].state = 0;
+-    fn_8016B400(lbl_80300368.entries[lbl_80300368.current].object, 0, 0);
++    lbl_80300368[(lbl_80300368[16]) * 8 + 0] = 0;
++    fn_8016B400(lbl_80300368[(lbl_80300368[16]) * 8 + 1], 0, 0);
+ }
+ 
+ void fn_80028198(void)
+ {
++    void* object;
+     s32 player_mode = 2;
+-    s32 current = lbl_80300368.current;
+-    s32 old_phase = lbl_80300368.entries[current].phase;
++    s32 current = lbl_80300368[16];
++    s32 old_phase = lbl_80300368[(current) * 8 + 2];
+ 
+     if (current != 0) {
+         player_mode = 4;
+     }
+-    lbl_80300368.entries[current].phase++;
++    lbl_80300368[(current) * 8 + 2]++;
+ 
+-    switch (lbl_80300368.entries[lbl_80300368.current].state) {
++    switch (lbl_80300368[(lbl_80300368[16]) * 8 + 0]) {
+     case 1:
+-        lbl_80300368.entries[lbl_80300368.current].state = 0;
++        lbl_80300368[(lbl_80300368[16]) * 8 + 0] = 0;
+         fn_80027730(fn_801E6CA0(lbl_8064C500,
+-                               lbl_80300368.entries[lbl_80300368.current].valueC,
+-                               lbl_80300368.entries[lbl_80300368.current].value10,
++                               lbl_80300368[(lbl_80300368[16]) * 8 + 3],
++                               lbl_80300368[(lbl_80300368[16]) * 8 + 4],
+                                0, 1),
+-                     lbl_80300368.entries[lbl_80300368.current].object, 0);
++                     lbl_80300368[(lbl_80300368[16]) * 8 + 1], 0);
+         break;
+ 
+     case 2:
+@@ -162,8 +146,8 @@ void fn_80028198(void)
+             break;
+         case 1:
+             fn_80027730(fn_801E6CA0(lbl_8064C500,
+-                                   lbl_80300368.entries[lbl_80300368.current].valueC,
+-                                   lbl_80300368.entries[lbl_80300368.current].value10,
++                                   lbl_80300368[(lbl_80300368[16]) * 8 + 3],
++                                   lbl_80300368[(lbl_80300368[16]) * 8 + 4],
+                                    0, 1), -2, 0);
+             reset_pair();
+             break;
+@@ -175,15 +159,15 @@ void fn_80028198(void)
+         case 3:
+             fn_801A5C30(1);
+             fn_801F85A4();
+-            if (!(lbl_80300368.entries[lbl_80300368.current].flags & 1)) {
++            if (!(lbl_80300368[(lbl_80300368[16]) * 8 + 6] & 1)) {
+                 fn_801FA354();
+             }
+-            if (lbl_80300368.entries[lbl_80300368.current].flags & 4) {
++            if (lbl_80300368[(lbl_80300368[16]) * 8 + 6] & 4) {
+                 fn_80046D38(1);
+             }
+             fn_80028B44();
+-            lbl_80300368.entries[lbl_80300368.current].state = 0;
+-            fn_8016B400(lbl_80300368.entries[lbl_80300368.current].object, 0, 0);
++            lbl_80300368[(lbl_80300368[16]) * 8 + 0] = 0;
++            fn_8016B400(lbl_80300368[(lbl_80300368[16]) * 8 + 1], 0, 0);
+             break;
+         }
+         break;
+@@ -197,8 +181,8 @@ void fn_80028198(void)
+             break;
+         case 1:
+             fn_80027730(fn_801E6CA0(lbl_8064C500,
+-                                   lbl_80300368.entries[lbl_80300368.current].valueC,
+-                                   lbl_80300368.entries[lbl_80300368.current].value10,
++                                   lbl_80300368[(lbl_80300368[16]) * 8 + 3],
++                                   lbl_80300368[(lbl_80300368[16]) * 8 + 4],
+                                    0, 1), -2, 0);
+             reset_pair();
+             break;
+@@ -208,29 +192,25 @@ void fn_80028198(void)
+             begin_scene(0x13, player_mode);
+             break;
+         case 3: {
+-            void* object;
+             s32 scene;
+             s32 value1;
+             s32 value2;
+-            void* target;
+-            void* actor;
+ 
+-            object = fn_80201814(lbl_80300368.entries[lbl_80300368.current].value1C);
++            object = fn_80201814(lbl_80300368[(lbl_80300368[16]) * 8 + 7]);
+             scene = (s32)fn_80201C24();
+             value1 = fn_80157BC4();
+             value2 = fn_80157BF4(scene);
+-            target = fn_80201814(lbl_80300368.entries[lbl_80300368.current].value1C);
+-            if (target != 0) {
+-                fn_80205680(target, (void*)fn_80201B44(), 0x1E);
++            object = fn_80201814(lbl_80300368[(lbl_80300368[16]) * 8 + 7]);
++            if (object != 0) {
++                fn_80205680(object, (void*)fn_80201B44(), 0x1E);
+             }
+             if (fn_8015821C(scene) == 0x1F &&
+                 !fn_801E79FC(lbl_8064C4E0, 0x10A)) {
+                 fn_801B05E8(0xC, 0x64, 6, 1, 0, 5, 0, 0);
+             }
+-            actor = (void*)fn_80201B44();
+-            object = fn_801E6CA0(lbl_8064C504, value2, value1, 0, 1);
+-            fn_80027948(object, -2, actor,
+-                        lbl_80300368.entries[lbl_80300368.current].value1C,
++            object = (void*)fn_80201B44();
++            fn_80027948(fn_801E6CA0(lbl_8064C504, value2, value1, 0, 1), -2, object,
++                        lbl_80300368[(lbl_80300368[16]) * 8 + 7],
+                         0, 0, 0);
+             break;
+         }

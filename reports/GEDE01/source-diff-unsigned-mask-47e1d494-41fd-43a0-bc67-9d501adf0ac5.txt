@@ -1,0 +1,21 @@
+diff --git a/eternal-darkness-decomp/src/game/game_fn_80028198.c b/eternal-darkness-decomp/src/game/game_fn_80028198.c
+index fe647a89d..e580da3c6 100644
+--- a/eternal-darkness-decomp/src/game/game_fn_80028198.c
++++ b/eternal-darkness-decomp/src/game/game_fn_80028198.c
+@@ -96,14 +96,14 @@ static inline void activate_entry(s32 player_mode, s32 retry)
+     }
+     if (ok) {
+         lbl_80300368.entries[lbl_80300368.current].flags |= 4;
+-        lbl_80300368.entries[lbl_80300368.current].flags &= ~1;
++        lbl_80300368.entries[lbl_80300368.current].flags &= ~1U;
+     }
+     if (lbl_80300368.entries[lbl_80300368.current].flags & 4) {
+         fn_80046D38(0);
+     }
+     if (fn_800289A4(lbl_80300368.entries[lbl_80300368.current].value14,
+                     lbl_80300368.entries[lbl_80300368.current].flags & 1, 0)) {
+-        lbl_80300368.entries[lbl_80300368.current].flags &= ~1;
++        lbl_80300368.entries[lbl_80300368.current].flags &= ~1U;
+     }
+     fn_801FA198(lbl_80300368.entries[lbl_80300368.current].value14,
+                 camera, 0, 0,

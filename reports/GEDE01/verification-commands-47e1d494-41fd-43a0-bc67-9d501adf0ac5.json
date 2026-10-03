@@ -1,0 +1,29 @@
+[
+  {
+    "command": [
+      "python3",
+      "configure.py"
+    ],
+    "exit_code": 0,
+    "output": "reports/GEDE01/configure-47e1d494-41fd-43a0-bc67-9d501adf0ac5.txt"
+  },
+  {
+    "command": [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_80028198",
+      "-o",
+      "reports/GEDE01/objdiff-47e1d494-41fd-43a0-bc67-9d501adf0ac5.json",
+      "--format",
+      "json-pretty",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "fn_80028198"
+    ],
+    "exit_code": 0,
+    "output": "reports/GEDE01/objdiff-relocation-strict-47e1d494-41fd-43a0-bc67-9d501adf0ac5.log"
+  }
+]

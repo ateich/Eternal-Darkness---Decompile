@@ -1,0 +1,188 @@
+diff --git a/eternal-darkness-decomp/src/game/game_fn_80028198.c b/eternal-darkness-decomp/src/game/game_fn_80028198.c
+index fe647a89d..b0aae0aa9 100644
+--- a/eternal-darkness-decomp/src/game/game_fn_80028198.c
++++ b/eternal-darkness-decomp/src/game/game_fn_80028198.c
+@@ -75,44 +75,43 @@ static inline void reset_pair(void)
+ static inline void begin_scene(s32 kind, s32 player_mode)
+ {
+     fn_8011E310(2, kind, -2,
+-                lbl_80300368.entries[lbl_80300368.current].object,
++                (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).object,
+                 0x32, player_mode, 1);
+ }
+ 
+ static inline void activate_entry(s32 player_mode, s32 retry)
+ {
+-    void* camera = lbl_8063CD18 + 0x550;
+     s32 ok;
+ 
+     reset_pair();
+     ok = fn_801FBEF0(lbl_8064C4E4,
+-                     lbl_80300368.entries[lbl_80300368.current].value14,
+-                     lbl_80300368.entries[lbl_80300368.current].flags & 1);
++                     (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).value14,
++                     (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).flags & 1);
+     if (!ok && retry) {
+         ok = fn_801FC034(lbl_8064C4E4,
+-                        lbl_80300368.entries[lbl_80300368.current].value14,
+-                        lbl_80300368.entries[lbl_80300368.current].flags & 1,
++                        (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).value14,
++                        (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).flags & 1,
+                         lbl_8064DFF4);
+     }
+     if (ok) {
+-        lbl_80300368.entries[lbl_80300368.current].flags |= 4;
+-        lbl_80300368.entries[lbl_80300368.current].flags &= ~1;
++        (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).flags |= 4;
++        (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).flags &= ~1U;
+     }
+-    if (lbl_80300368.entries[lbl_80300368.current].flags & 4) {
++    if ((*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).flags & 4) {
+         fn_80046D38(0);
+     }
+-    if (fn_800289A4(lbl_80300368.entries[lbl_80300368.current].value14,
+-                    lbl_80300368.entries[lbl_80300368.current].flags & 1, 0)) {
+-        lbl_80300368.entries[lbl_80300368.current].flags &= ~1;
++    if (fn_800289A4((*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).value14,
++                    (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).flags & 1, 0)) {
++        (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).flags &= ~1U;
+     }
+-    fn_801FA198(lbl_80300368.entries[lbl_80300368.current].value14,
+-                camera, 0, 0,
+-                lbl_80300368.entries[lbl_80300368.current].flags & 1,
++    fn_801FA198((*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).value14,
++                lbl_8063CD18 + 0x550, 0, 0,
++                (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).flags & 1,
+                 0, 0, 0, 0);
+     if (retry &&
+-        lbl_80300368.entries[lbl_80300368.current].value10 < 0) {
++        (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).value10 < 0) {
+         begin_scene(7, player_mode);
+-        lbl_80300368.entries[lbl_80300368.current].phase = 3;
++        (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).phase = 3;
+     } else {
+         begin_scene(0x22, player_mode);
+     }
+@@ -121,36 +120,36 @@ static inline void activate_entry(s32 player_mode, s32 retry)
+ static inline void finish_entry(void)
+ {
+     fn_801F85A4();
+-    if (!(lbl_80300368.entries[lbl_80300368.current].flags & 1)) {
++    if (!((*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).flags & 1)) {
+         fn_801FA354();
+     }
+-    if (lbl_80300368.entries[lbl_80300368.current].flags & 4) {
++    if ((*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).flags & 4) {
+         fn_80046D38(1);
+     }
+     fn_80028B44();
+-    lbl_80300368.entries[lbl_80300368.current].state = 0;
+-    fn_8016B400(lbl_80300368.entries[lbl_80300368.current].object, 0, 0);
++    (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).state = 0;
++    fn_8016B400((*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).object, 0, 0);
+ }
+ 
+ void fn_80028198(void)
+ {
+     s32 player_mode = 2;
+     s32 current = lbl_80300368.current;
+-    s32 old_phase = lbl_80300368.entries[current].phase;
++    s32 old_phase = (*(GameEntry*)((char*)&lbl_80300368 + (current) * 32)).phase;
+ 
+     if (current != 0) {
+         player_mode = 4;
+     }
+-    lbl_80300368.entries[current].phase++;
++    (*(GameEntry*)((char*)&lbl_80300368 + (current) * 32)).phase++;
+ 
+-    switch (lbl_80300368.entries[lbl_80300368.current].state) {
++    switch ((*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).state) {
+     case 1:
+-        lbl_80300368.entries[lbl_80300368.current].state = 0;
++        (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).state = 0;
+         fn_80027730(fn_801E6CA0(lbl_8064C500,
+-                               lbl_80300368.entries[lbl_80300368.current].valueC,
+-                               lbl_80300368.entries[lbl_80300368.current].value10,
++                               (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).valueC,
++                               (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).value10,
+                                0, 1),
+-                     lbl_80300368.entries[lbl_80300368.current].object, 0);
++                     (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).object, 0);
+         break;
+ 
+     case 2:
+@@ -162,8 +161,8 @@ void fn_80028198(void)
+             break;
+         case 1:
+             fn_80027730(fn_801E6CA0(lbl_8064C500,
+-                                   lbl_80300368.entries[lbl_80300368.current].valueC,
+-                                   lbl_80300368.entries[lbl_80300368.current].value10,
++                                   (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).valueC,
++                                   (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).value10,
+                                    0, 1), -2, 0);
+             reset_pair();
+             break;
+@@ -175,15 +174,15 @@ void fn_80028198(void)
+         case 3:
+             fn_801A5C30(1);
+             fn_801F85A4();
+-            if (!(lbl_80300368.entries[lbl_80300368.current].flags & 1)) {
++            if (!((*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).flags & 1)) {
+                 fn_801FA354();
+             }
+-            if (lbl_80300368.entries[lbl_80300368.current].flags & 4) {
++            if ((*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).flags & 4) {
+                 fn_80046D38(1);
+             }
+             fn_80028B44();
+-            lbl_80300368.entries[lbl_80300368.current].state = 0;
+-            fn_8016B400(lbl_80300368.entries[lbl_80300368.current].object, 0, 0);
++            (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).state = 0;
++            fn_8016B400((*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).object, 0, 0);
+             break;
+         }
+         break;
+@@ -197,8 +196,8 @@ void fn_80028198(void)
+             break;
+         case 1:
+             fn_80027730(fn_801E6CA0(lbl_8064C500,
+-                                   lbl_80300368.entries[lbl_80300368.current].valueC,
+-                                   lbl_80300368.entries[lbl_80300368.current].value10,
++                                   (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).valueC,
++                                   (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).value10,
+                                    0, 1), -2, 0);
+             reset_pair();
+             break;
+@@ -212,25 +211,22 @@ void fn_80028198(void)
+             s32 scene;
+             s32 value1;
+             s32 value2;
+-            void* target;
+-            void* actor;
+ 
+-            object = fn_80201814(lbl_80300368.entries[lbl_80300368.current].value1C);
++            object = fn_80201814((*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).value1C);
+             scene = (s32)fn_80201C24();
+             value1 = fn_80157BC4();
+             value2 = fn_80157BF4(scene);
+-            target = fn_80201814(lbl_80300368.entries[lbl_80300368.current].value1C);
+-            if (target != 0) {
+-                fn_80205680(target, (void*)fn_80201B44(), 0x1E);
++            object = fn_80201814((*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).value1C);
++            if (object != 0) {
++                fn_80205680(object, (void*)fn_80201B44(), 0x1E);
+             }
+             if (fn_8015821C(scene) == 0x1F &&
+                 !fn_801E79FC(lbl_8064C4E0, 0x10A)) {
+                 fn_801B05E8(0xC, 0x64, 6, 1, 0, 5, 0, 0);
+             }
+-            actor = (void*)fn_80201B44();
+-            object = fn_801E6CA0(lbl_8064C504, value2, value1, 0, 1);
+-            fn_80027948(object, -2, actor,
+-                        lbl_80300368.entries[lbl_80300368.current].value1C,
++            object = (void*)fn_80201B44();
++            fn_80027948(fn_801E6CA0(lbl_8064C504, value2, value1, 0, 1), -2, object,
++                        (*(GameEntry*)((char*)&lbl_80300368 + (lbl_80300368.current) * 32)).value1C,
+                         0, 0, 0);
+             break;
+         }
