@@ -1,0 +1,278 @@
+target 1108 bytes  candidate 1096 bytes  match 97.83394
+          stwu r1, -0xa0(r1)                                 |         stwu r1, -0xa0(r1)
+  0x0004  mflr r0                                            | 0x0004  mflr r0
+  0x0008  stw r0, 0xa4(r1)                                   | 0x0008  stw r0, 0xa4(r1)
+  0x000c  stfd f31, 0x90(r1)                                 | 0x000c  stfd f31, 0x90(r1)
+  0x0010  psq_st f31, 0x98(r1), 0, qr0                       | 0x0010  psq_st f31, 0x98(r1), 0, qr0
+  0x0014  stmw r18, 0x58(r1)                                 | 0x0014  stmw r18, 0x58(r1)
+  0x0018  mr r28, r3                                         | 0x0018  mr r28, r3
+  0x001c  mr r18, r4                                         | 0x001c  mr r18, r4
+  0x0020  bl fn_80201B9C                                     | 0x0020  bl fn_80201B9C
+  0x0024  lis r4, lbl_80238DA0@ha                            | 0x0024  lis r4, lbl_80238DA0@ha
+  0x0028  mr r29, r3                                         | 0x0028  mr r29, r3
+  0x002c  addi r6, r4, lbl_80238DA0@l                        | 0x002c  addi r6, r4, lbl_80238DA0@l
+  0x0030  lfs f31, lbl_8064E228@sda21                        | 0x0030  lfs f31, lbl_8064E228@sda21
+  0x0034  lwz r5, 0x0(r6)                                    | 0x0034  lwz r5, 0x0(r6)
+  0x0038  mr r3, r28                                         | 0x0038  mr r3, r28
+  0x003c  lwz r4, 0x4(r6)                                    | 0x003c  lwz r4, 0x4(r6)
+  0x0040  li r31, 0x0                                        | 0x0040  li r31, 0x0
+  0x0044  lwz r0, 0x8(r6)                                    | 0x0044  lwz r0, 0x8(r6)
+  0x0048  stw r5, 0x3c(r1)                                   | 0x0048  stw r5, 0x3c(r1)
+  0x004c  stw r4, 0x40(r1)                                   | 0x004c  stw r4, 0x40(r1)
+  0x0050  stw r0, 0x44(r1)                                   | 0x0050  stw r0, 0x44(r1)
+  0x0054  bl fn_80201B8C                                     | 0x0054  bl fn_80201B8C
+  0x0058  lwz r30, 0x0(r3)                                   | 0x0058  lwz r30, 0x0(r3)
+  0x005c  mr r3, r28                                         | 0x005c  mr r3, r28
+  0x0060  bl fn_80201BC8                                     | 0x0060  bl fn_80201BC8
+  0x0064  mr. r27, r3                                        | 0x0064  mr. r27, r3
+  0x0068  beq 0x80                                           | 0x0068  beq 0x80
+  0x006c  mr r4, r27                                         | 0x006c  mr r4, r27
+  0x0070  addi r3, r1, 0x18                                  | 0x0070  addi r3, r1, 0x18
+  0x0074  bl fn_8011F114                                     | 0x0074  bl fn_8011F114
+  0x0078  addi r5, r1, 0x18                                  | 0x0078  addi r5, r1, 0x18
+  0x007c  b 0x84                                             | 0x007c  b 0x84
+  0x0080  addi r5, r1, 0x3c                                  | 0x0080  addi r5, r1, 0x3c
+  0x0084  lwz r4, 0x0(r5)                                    | 0x0084  lwz r4, 0x0(r5)
+  0x0088  mr r3, r18                                         | 0x0088  mr r3, r18
+  0x008c  lwz r0, 0x4(r5)                                    | 0x008c  lwz r0, 0x4(r5)
+  0x0090  stw r4, 0x3c(r1)                                   | 0x0090  stw r4, 0x3c(r1)
+  0x0094  stw r0, 0x40(r1)                                   | 0x0094  stw r0, 0x40(r1)
+  0x0098  lwz r0, 0x8(r5)                                    | 0x0098  lwz r0, 0x8(r5)
+  0x009c  stw r0, 0x44(r1)                                   | 0x009c  stw r0, 0x44(r1)
+  0x00a0  bl fn_801A7570                                     | 0x00a0  bl fn_801A7570
+  0x00a4  mr r0, r3                                          | 0x00a4  mr r0, r3
+  0x00a8  mr r3, r28                                         | 0x00a8  mr r3, r28
+* 0x00ac  mr r22, r0                                         | 0x00ac  mr r26, r0
+  0x00b0  bl fn_80205288                                     | 0x00b0  bl fn_80205288
+  0x00b4  mr. r19, r3                                        | 0x00b4  mr. r19, r3
+  0x00b8  beq 0xc4                                           | 0x00b8  beq 0xc4
+  0x00bc  bl fn_80201B8C                                     | 0x00bc  bl fn_80201B8C
+  0x00c0  b 0xc8                                             | 0x00c0  b 0xc8
+  0x00c4  li r3, 0x0                                         | 0x00c4  li r3, 0x0
+  0x00c8  cmplwi r3, 0x0                                     | 0x00c8  cmplwi r3, 0x0
+  0x00cc  beq 0xd8                                           | 0x00cc  beq 0xd8
+  0x00d0  lbz r18, 0x9f(r3)                                  | 0x00d0  lbz r18, 0x9f(r3)
+  0x00d4  b 0xdc                                             | 0x00d4  b 0xdc
+  0x00d8  li r18, 0x13                                       | 0x00d8  li r18, 0x13
+  0x00dc  mr r3, r28                                         | 0x00dc  mr r3, r28
+  0x00e0  bl fn_80201B54                                     | 0x00e0  bl fn_80201B54
+  0x00e4  cmplwi r19, 0x0                                    | 0x00e4  cmplwi r19, 0x0
+* 0x00e8  mr r26, r3                                         | 0x00e8  mr r25, r3
+  0x00ec  beq 0xfc                                           | 0x00ec  beq 0xfc
+  0x00f0  mr r3, r19                                         | 0x00f0  mr r3, r19
+  0x00f4  bl fn_80201BC8                                     | 0x00f4  bl fn_80201BC8
+  0x00f8  b 0x100                                            | 0x00f8  b 0x100
+  0x00fc  li r3, 0x0                                         | 0x00fc  li r3, 0x0
+  0x0100  cmplwi r3, 0x0                                     | 0x0100  cmplwi r3, 0x0
+  0x0104  beq 0x110                                          | 0x0104  beq 0x110
+  0x0108  bl fn_8011EB04                                     | 0x0108  bl fn_8011EB04
+  0x010c  b 0x114                                            | 0x010c  b 0x114
+  0x0110  li r3, -0x1                                        | 0x0110  li r3, -0x1
+  0x0114  cmplwi r19, 0x0                                    | 0x0114  cmplwi r19, 0x0
+  0x0118  beq 0x134                                          | 0x0118  beq 0x134
+  0x011c  cmpwi r3, 0x63                                     | 0x011c  cmpwi r3, 0x63
+  0x0120  beq 0x134                                          | 0x0120  beq 0x134
+  0x0124  cmpwi r3, 0xc6                                     | 0x0124  cmpwi r3, 0xc6
+  0x0128  beq 0x134                                          | 0x0128  beq 0x134
+  0x012c  cmpwi r3, 0xf1                                     | 0x012c  cmpwi r3, 0xf1
+  0x0130  bne 0x13c                                          | 0x0130  bne 0x13c
+  0x0134  li r3, 0x0                                         | 0x0134  li r3, 0x0
+* 0x0138  b 0x438                                            | 0x0138  b 0x42c
+  0x013c  cmpwi r18, 0x12                                    | 0x013c  cmpwi r18, 0x12
+  0x0140  bne 0x178                                          | 0x0140  bne 0x178
+  0x0144  mr r3, r19                                         | 0x0144  mr r3, r19
+  0x0148  bl fn_80201C24                                     | 0x0148  bl fn_80201C24
+  0x014c  mr r18, r3                                         | 0x014c  mr r18, r3
+  0x0150  bl fn_80157C80                                     | 0x0150  bl fn_80157C80
+  0x0154  rlwinm. r0, r3, 0, 26, 26                          | 0x0154  rlwinm. r0, r3, 0, 26, 26
+  0x0158  bne 0x16c                                          | 0x0158  bne 0x16c
+  0x015c  mr r3, r18                                         | 0x015c  mr r3, r18
+  0x0160  bl fn_80157C80                                     | 0x0160  bl fn_80157C80
+  0x0164  rlwinm. r0, r3, 0, 24, 24                          | 0x0164  rlwinm. r0, r3, 0, 24, 24
+  0x0168  beq 0x174                                          | 0x0168  beq 0x174
+  0x016c  li r3, 0x0                                         | 0x016c  li r3, 0x0
+* 0x0170  b 0x438                                            | 0x0170  b 0x42c
+  0x0174  lfs f31, lbl_8064E22C@sda21                        | 0x0174  lfs f31, lbl_8064E22C@sda21
+  0x0178  lis r4, lbl_803003C8@ha                            | 0x0178  lis r4, lbl_803003C8@ha
+  0x017c  lis r3, lbl_80238DAC@ha                            | 0x017c  lis r3, lbl_80238DAC@ha
+* 0x0180  mr r23, r22                                        |
+* 0x0184  addi r24, r4, lbl_803003C8@l                       | 0x0180  addi r23, r4, lbl_803003C8@l
+* 0x0188  addi r25, r3, lbl_80238DAC@l                       | 0x0184  addi r24, r3, lbl_80238DAC@l
+* 0x018c  b 0x424                                            | 0x0188  b 0x418
+  0x0190  mr r3, r29                                         | 0x018c  mr r3, r29
+  0x0194  bl fn_80201B8C                                     | 0x0190  bl fn_80201B8C
+* 0x0198  lwz r5, 0x0(r25)                                   | 0x0194  lwz r5, 0x0(r24)
+* 0x019c  mr r21, r3                                         | 0x0198  mr r22, r3
+* 0x01a0  lwz r4, 0x4(r25)                                   | 0x019c  lwz r4, 0x4(r24)
+  0x01a4  mr r3, r29                                         | 0x01a0  mr r3, r29
+* 0x01a8  lwz r0, 0x8(r25)                                   | 0x01a4  lwz r0, 0x8(r24)
+  0x01ac  stw r5, 0x30(r1)                                   | 0x01a8  stw r5, 0x30(r1)
+  0x01b0  stw r4, 0x34(r1)                                   | 0x01ac  stw r4, 0x34(r1)
+  0x01b4  stw r0, 0x38(r1)                                   | 0x01b0  stw r0, 0x38(r1)
+  0x01b8  bl fn_80201B54                                     | 0x01b4  bl fn_80201B54
+  0x01bc  mr r0, r3                                          | 0x01b8  mr r0, r3
+  0x01c0  mr r3, r29                                         | 0x01bc  mr r3, r29
+* 0x01c4  mr r20, r0                                         | 0x01c0  mr r21, r0
+  0x01c8  bl fn_80201BC8                                     | 0x01c4  bl fn_80201BC8
+  0x01cc  cmplwi r3, 0x0                                     | 0x01c8  cmplwi r3, 0x0
+* 0x01d0  beq 0x1e8                                          | 0x01cc  beq 0x1e4
+  0x01d4  mr r4, r3                                          | 0x01d0  mr r4, r3
+  0x01d8  addi r3, r1, 0xc                                   | 0x01d4  addi r3, r1, 0xc
+  0x01dc  bl fn_8011F114                                     | 0x01d8  bl fn_8011F114
+  0x01e0  addi r5, r1, 0xc                                   | 0x01dc  addi r5, r1, 0xc
+* 0x01e4  b 0x1ec                                            | 0x01e0  b 0x1e8
+  0x01e8  addi r5, r1, 0x30                                  | 0x01e4  addi r5, r1, 0x30
+  0x01ec  lwz r4, 0x0(r5)                                    | 0x01e8  lwz r4, 0x0(r5)
+  0x01f0  mr r3, r29                                         | 0x01ec  mr r3, r29
+  0x01f4  lwz r0, 0x4(r5)                                    | 0x01f0  lwz r0, 0x4(r5)
+  0x01f8  stw r4, 0x30(r1)                                   | 0x01f4  stw r4, 0x30(r1)
+  0x01fc  stw r0, 0x34(r1)                                   | 0x01f8  stw r0, 0x34(r1)
+  0x0200  lwz r0, 0x8(r5)                                    | 0x01fc  lwz r0, 0x8(r5)
+  0x0204  stw r0, 0x38(r1)                                   | 0x0200  stw r0, 0x38(r1)
+  0x0208  bl fn_80201EB8                                     | 0x0204  bl fn_80201EB8
+  0x020c  lwz r0, lbl_8064D18C@sda21                         | 0x0208  lwz r0, lbl_8064D18C@sda21
+  0x0210  cmpw r0, r3                                        | 0x020c  cmpw r0, r3
+* 0x0214  bne 0x418                                          | 0x0210  bne 0x40c
+  0x0218  mr r3, r29                                         | 0x0214  mr r3, r29
+  0x021c  bl fn_80201B4C                                     | 0x0218  bl fn_80201B4C
+  0x0220  cmpwi r3, 0x0                                      | 0x021c  cmpwi r3, 0x0
+* 0x0224  beq 0x238                                          | 0x0220  beq 0x234
+  0x0228  mr r3, r29                                         | 0x0224  mr r3, r29
+  0x022c  bl fn_80201B4C                                     | 0x0228  bl fn_80201B4C
+  0x0230  cmpwi r3, 0x1                                      | 0x022c  cmpwi r3, 0x1
+* 0x0234  bne 0x418                                          | 0x0230  bne 0x40c
+  0x0238  cmplw r29, r28                                     | 0x0234  cmplw r29, r28
+* 0x023c  beq 0x418                                          | 0x0238  beq 0x40c
+  0x0240  mr r3, r29                                         | 0x023c  mr r3, r29
+  0x0244  bl fn_80201B64                                     | 0x0240  bl fn_80201B64
+  0x0248  cmpwi r3, 0x8                                      | 0x0244  cmpwi r3, 0x8
+* 0x024c  beq 0x260                                          | 0x0248  beq 0x25c
+  0x0250  mr r3, r29                                         | 0x024c  mr r3, r29
+  0x0254  bl fn_80201B64                                     | 0x0250  bl fn_80201B64
+  0x0258  cmpwi r3, 0x9                                      | 0x0254  cmpwi r3, 0x9
+* 0x025c  bne 0x418                                          | 0x0258  bne 0x40c
+  0x0260  mr r3, r29                                         | 0x025c  mr r3, r29
+  0x0264  bl fn_80201B54                                     | 0x0260  bl fn_80201B54
+* 0x0268  mr r22, r3                                         | 0x0264  mr r20, r3
+* 0x026c  mr r4, r26                                         | 0x0268  mr r4, r25
+  0x0270  li r3, 0xc1                                        | 0x026c  li r3, 0xc1
+  0x0274  li r6, 0x0                                         | 0x0270  li r6, 0x0
+* 0x0278  mr r5, r22                                         | 0x0274  mr r5, r20
+  0x027c  bl fn_8020123C                                     | 0x0278  bl fn_8020123C
+* 0x0280  li r0, -0x1                                        | 0x027c  cmplwi r4, 0x0
+* 0x0284  and. r0, r4, r0                                    |
+* 0x0288  beq 0x418                                          | 0x0280  beq 0x40c
+  0x028c  addi r3, r1, 0x30                                  | 0x0284  addi r3, r1, 0x30
+  0x0290  addi r4, r1, 0x3c                                  | 0x0288  addi r4, r1, 0x3c
+  0x0294  bl fn_80178E94                                     | 0x028c  bl fn_80178E94
+  0x0298  lis r0, 0x4330                                     | 0x0290  lis r0, 0x4330
+  0x029c  stw r3, 0x4c(r1)                                   | 0x0294  stw r3, 0x4c(r1)
+* 0x02a0  lfd f2, lbl_8064E220@sda21                         | 0x0298  lfd f2, @71@sda21
+  0x02a4  stw r0, 0x48(r1)                                   | 0x029c  stw r0, 0x48(r1)
+  0x02a8  lfs f0, lbl_8064E230@sda21                         | 0x02a0  lfs f0, lbl_8064E230@sda21
+  0x02ac  lfd f1, 0x48(r1)                                   | 0x02a4  lfd f1, 0x48(r1)
+  0x02b0  fsubs f1, f1, f2                                   | 0x02a8  fsubs f1, f1, f2
+  0x02b4  fcmpo cr0, f1, f0                                  | 0x02ac  fcmpo cr0, f1, f0
+* 0x02b8  bge 0x418                                          | 0x02b0  bge 0x40c
+  0x02bc  mr r3, r29                                         | 0x02b4  mr r3, r29
+* 0x02c0  mr r4, r23                                         | 0x02b8  mr r4, r26
+  0x02c4  addi r5, r1, 0x8                                   | 0x02bc  addi r5, r1, 0x8
+  0x02c8  addi r6, r1, 0x24                                  | 0x02c0  addi r6, r1, 0x24
+  0x02cc  bl fn_80036A1C                                     | 0x02c4  bl fn_80036A1C
+  0x02d0  mr r18, r3                                         | 0x02c8  mr r18, r3
+  0x02d4  addi r3, r1, 0x24                                  | 0x02cc  addi r3, r1, 0x24
+  0x02d8  addi r4, r1, 0x3c                                  | 0x02d0  addi r4, r1, 0x3c
+  0x02dc  bl fn_80178E94                                     | 0x02d4  bl fn_80178E94
+  0x02e0  cmpwi r18, 0x0                                     | 0x02d8  cmpwi r18, 0x0
+  0x02e4  mr r19, r3                                         | 0x02dc  mr r19, r3
+* 0x02e8  beq 0x354                                          | 0x02e0  beq 0x34c
+  0x02ec  lis r0, 0x4330                                     | 0x02e4  lis r0, 0x4330
+  0x02f0  stw r19, 0x4c(r1)                                  | 0x02e8  stw r19, 0x4c(r1)
+* 0x02f4  lfd f1, lbl_8064E220@sda21                         | 0x02ec  lfd f1, @71@sda21
+  0x02f8  stw r0, 0x48(r1)                                   | 0x02f0  stw r0, 0x48(r1)
+  0x02fc  lfd f0, 0x48(r1)                                   | 0x02f4  lfd f0, 0x48(r1)
+  0x0300  fsubs f0, f0, f1                                   | 0x02f8  fsubs f0, f0, f1
+  0x0304  fcmpo cr0, f0, f31                                 | 0x02fc  fcmpo cr0, f0, f31
+* 0x0308  bge 0x354                                          | 0x0300  bge 0x34c
+  0x030c  lfs f1, lbl_8064E234@sda21                         | 0x0304  lfs f1, lbl_8064E234@sda21
+  0x0310  mr r3, r27                                         | 0x0308  mr r3, r27
+  0x0314  addi r4, r1, 0x24                                  | 0x030c  addi r4, r1, 0x24
+  0x0318  li r5, 0x0                                         | 0x0310  li r5, 0x0
+  0x031c  bl fn_80204434                                     | 0x0314  bl fn_80204434
+  0x0320  clrlwi. r0, r3, 24                                 | 0x0318  clrlwi. r0, r3, 24
+* 0x0324  beq 0x354                                          | 0x031c  beq 0x34c
+* 0x0328  stw r22, 0x78(r30)                                 | 0x0320  stw r20, 0x78(r30)
+  0x032c  li r0, 0xb4                                        | 0x0324  li r0, 0xb4
+  0x0330  mr r31, r29                                        | 0x0328  mr r31, r29
+  0x0334  sth r0, 0x8e(r30)                                  | 0x032c  sth r0, 0x8e(r30)
+  0x0338  lwz r3, 0x3c(r1)                                   | 0x0330  lwz r3, 0x3c(r1)
+  0x033c  lwz r0, 0x40(r1)                                   | 0x0334  lwz r0, 0x40(r1)
+  0x0340  stw r3, 0x2c(r30)                                  | 0x0338  stw r3, 0x2c(r30)
+  0x0344  stw r0, 0x30(r30)                                  | 0x033c  stw r0, 0x30(r30)
+  0x0348  lwz r0, 0x44(r1)                                   | 0x0340  lwz r0, 0x44(r1)
+  0x034c  stw r0, 0x34(r30)                                  | 0x0344  stw r0, 0x34(r30)
+* 0x0350  b 0x39c                                            | 0x0348  b 0x394
+  0x0354  cmpwi r18, 0x0                                     | 0x034c  cmpwi r18, 0x0
+* 0x0358  beq 0x39c                                          | 0x0350  beq 0x394
+  0x035c  lwz r0, 0x78(r30)                                  | 0x0354  lwz r0, 0x78(r30)
+* 0x0360  cmpw r22, r0                                       | 0x0358  cmpw r20, r0
+* 0x0364  bne 0x39c                                          | 0x035c  bne 0x394
+  0x0368  lfs f0, lbl_8064E238@sda21                         | 0x0360  lfs f0, lbl_8064E238@sda21
+  0x036c  cmpwi r18, 0x0                                     | 0x0364  cmpwi r18, 0x0
+  0x0370  fadds f31, f31, f0                                 | 0x0368  fadds f31, f31, f0
+* 0x0374  beq 0x39c                                          | 0x036c  beq 0x394
+  0x0378  lis r0, 0x4330                                     | 0x0370  lis r0, 0x4330
+  0x037c  stw r19, 0x4c(r1)                                  | 0x0374  stw r19, 0x4c(r1)
+* 0x0380  lfd f1, lbl_8064E220@sda21                         | 0x0378  lfd f1, @71@sda21
+  0x0384  stw r0, 0x48(r1)                                   | 0x037c  stw r0, 0x48(r1)
+  0x0388  lfd f0, 0x48(r1)                                   | 0x0380  lfd f0, 0x48(r1)
+  0x038c  fsubs f0, f0, f1                                   | 0x0384  fsubs f0, f0, f1
+  0x0390  fcmpo cr0, f0, f31                                 | 0x0388  fcmpo cr0, f0, f31
+* 0x0394  bge 0x39c                                          | 0x038c  bge 0x394
+  0x0398  mr r31, r29                                        | 0x0390  mr r31, r29
+  0x039c  cmplwi r31, 0x0                                    | 0x0394  cmplwi r31, 0x0
+* 0x03a0  beq 0x418                                          | 0x0398  beq 0x40c
+* 0x03a4  lwz r0, 0x8(r24)                                   | 0x039c  lwz r0, 0x8(r23)
+  0x03a8  cmpwi r0, 0x5                                      | 0x03a0  cmpwi r0, 0x5
+* 0x03ac  bne 0x3f0                                          | 0x03a4  bne 0x3e4
+* 0x03b0  cmplwi r21, 0x0                                    | 0x03a8  cmplwi r22, 0x0
+* 0x03b4  beq 0x3f0                                          | 0x03ac  beq 0x3e4
+* 0x03b8  mr r3, r21                                         | 0x03b0  mr r3, r22
+  0x03bc  bl fn_800361F8                                     | 0x03b4  bl fn_800361F8
+* 0x03c0  cmpwi r3, 0x0                                      | 0x03b8  cmplwi r3, 0x0
+* 0x03c4  bne 0x3f0                                          | 0x03bc  bne 0x3e4
+* 0x03c8  mr r4, r26                                         | 0x03c0  mr r4, r25
+* 0x03cc  mr r5, r20                                         | 0x03c4  mr r5, r21
+  0x03d0  li r3, 0xc2                                        | 0x03c8  li r3, 0xc2
+  0x03d4  li r6, 0x0                                         | 0x03cc  li r6, 0x0
+  0x03d8  bl fn_8020123C                                     | 0x03d0  bl fn_8020123C
+* 0x03dc  li r0, -0x1                                        | 0x03d4  cmplwi r4, 0x0
+* 0x03e0  and. r0, r4, r0                                    |
+* 0x03e4  beq 0x3f0                                          | 0x03d8  beq 0x3e4
+  0x03e8  li r31, 0x0                                        | 0x03dc  li r31, 0x0
+* 0x03ec  b 0x418                                            | 0x03e0  b 0x40c
+* 0x03f0  stw r22, 0x74(r30)                                 | 0x03e4  stw r20, 0x74(r30)
+  0x03f4  lwz r3, 0x24(r1)                                   | 0x03e8  lwz r3, 0x24(r1)
+  0x03f8  lwz r0, 0x28(r1)                                   | 0x03ec  lwz r0, 0x28(r1)
+  0x03fc  stw r3, 0x38(r30)                                  | 0x03f0  stw r3, 0x38(r30)
+  0x0400  stw r0, 0x3c(r30)                                  | 0x03f4  stw r0, 0x3c(r30)
+  0x0404  lwz r0, 0x2c(r1)                                   | 0x03f8  lwz r0, 0x2c(r1)
+  0x0408  stw r0, 0x40(r30)                                  | 0x03fc  stw r0, 0x40(r30)
+  0x040c  lwz r0, 0x8(r1)                                    | 0x0400  lwz r0, 0x8(r1)
+  0x0410  stw r0, 0x54(r30)                                  | 0x0404  stw r0, 0x54(r30)
+* 0x0414  b 0x434                                            | 0x0408  b 0x428
+  0x0418  mr r3, r29                                         | 0x040c  mr r3, r29
+  0x041c  bl fn_80201BC0                                     | 0x0410  bl fn_80201BC0
+  0x0420  mr r29, r3                                         | 0x0414  mr r29, r3
+  0x0424  cmplwi r29, 0x0                                    | 0x0418  cmplwi r29, 0x0
+* 0x0428  beq 0x434                                          | 0x041c  beq 0x428
+  0x042c  cmplwi r31, 0x0                                    | 0x0420  cmplwi r31, 0x0
+* 0x0430  beq 0x190                                          | 0x0424  beq 0x18c
+  0x0434  mr r3, r31                                         | 0x0428  mr r3, r31
+  0x0438  psq_l f31, 0x98(r1), 0, qr0                        | 0x042c  psq_l f31, 0x98(r1), 0, qr0
+  0x043c  lfd f31, 0x90(r1)                                  | 0x0430  lfd f31, 0x90(r1)
+  0x0440  lmw r18, 0x58(r1)                                  | 0x0434  lmw r18, 0x58(r1)
+  0x0444  lwz r0, 0xa4(r1)                                   | 0x0438  lwz r0, 0xa4(r1)
+  0x0448  mtlr r0                                            | 0x043c  mtlr r0
+  0x044c  addi r1, r1, 0xa0                                  | 0x0440  addi r1, r1, 0xa0
+  0x0450  blr                                                | 0x0444  blr

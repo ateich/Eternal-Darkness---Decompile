@@ -1,0 +1,39 @@
+Assignment 3827af5a-dfa0-4fce-b70c-2fe31b982415, attempt 5
+Target: fn_800365C8
+Compiler: GC/1.3, canonical flags, existing -use_lmw_stmw on object flag
+
+Preserved attempts studied:
+- The accepted base already contains the attempt-4 two-Vec3-temporary reconstruction.
+- That reconstruction reproduces retail's 160-byte frame and stack-local offsets and
+  remains the best known result at 97.83394% (1096 candidate bytes, 1108 retail).
+- Earlier padding/array variants either produced a 176-byte frame and 91.364624%,
+  or reserved an unwanted array-base register. Those variants were not repeated.
+
+Different concrete codegen hypothesis tested:
+- Retail's two low-word fn_8020123C tests use `li r0,-1; and. r0,r4,r0`, while
+  the accepted C's explicit u32 casts fold to `cmplwi r4,0`. I tested expressing
+  the result as a 64-bit value masked by an unsuffixed 0xFFFFFFFF, on the theory
+  that MWCC's usual arithmetic conversions would retain the explicit low-word
+  mask. MWCC instead emitted a full two-word 64-bit nonzero test, expanded the
+  function to 1144 bytes, and reduced the canonical score to 95.27076%.
+- Explicit u32 mask forms (`& 0xFFFFFFFFU` and `& -1`) optimized back to the
+  existing one-instruction `cmplwi` test, retaining 1096 bytes and 97.83394%.
+- I also tested an explicitly named loop copy of query_value to induce retail's
+  loop-entry `mr r23,r22`. MWCC coalesced the variables and emitted no copy, again
+  retaining the existing 1096-byte/97.83394% result.
+- All unsuccessful experiment forms were reverted; the accepted-base honest C
+  reconstruction remains the single retained NonMatching implementation.
+
+Fresh retained-result measurements:
+- Canonical score: 97.83394%; relocation-strict score: 97.83394%.
+- Candidate remains 12 bytes shorter. Retail has loop-entry `mr r23,r22` and two
+  `li r0,-1; and. r0,r4,r0` pairs; candidate omits the copy and uses one `cmplwi`
+  at each return test. Downstream register allocation consequently differs.
+- Retail R_PPC_EMB_SDA21 relocations at 0x2a0, 0x2f4, and 0x380 name
+  lbl_8064E220+0. Candidate relocations at 0x298, 0x2ec, and 0x378 name local
+  @71+0. Other relocation offsets after the shorter generated sequences differ.
+- The fallback tests retain their order.
+
+The fresh assigned-object build log, canonical and relocation-strict objdiff
+JSON, full instruction comparison, both raw relocation tables, and object
+SHA-256 measurements are preserved in assignment-specific sibling reports.
