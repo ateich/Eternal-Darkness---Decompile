@@ -45,8 +45,8 @@ extern unsigned long long fn_8020123C();
 s32 fn_80033180(void* object, s32 action, void* event, s32* completed)
 {
     s32 event_id;
-    s32 object_id;
     State* state;
+    s32 object_id;
     u8* info;
     IVec3 screen;
 

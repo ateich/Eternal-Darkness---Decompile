@@ -1,0 +1,20 @@
+Different codegen hypothesis tested: local declaration order controls MWCC's long-lived nonvolatile-register priority.
+
+Preserved reviewed baseline:
+- Source declaration order: event_id, object_id, state, info, screen.
+- Raw report: objdiff-baseline-71e80643-556b-4d85-9e0e-8dfe2b64186c.json
+- Score: 81.6592%; retail 1608 bytes, generated 1616 bytes.
+- Generated persistent allocation begins object=r28, info=r29, state=r30, object_id=r31; retail uses object=r29, info=r28, object_id=r30, state=r31.
+
+Declaration-priority experiment (selected best):
+- Source declaration order: event_id, state, object_id, info, screen.
+- Raw report: objdiff-declaration-order-71e80643-556b-4d85-9e0e-8dfe2b64186c.json
+- Score: 81.82089%; retail 1608 bytes, generated 1616 bytes.
+- The generated state/object_id allocation changes to retail's r31/r30 assignment. Object/info remain generated r28/r29 versus retail r29/r28.
+
+Distinct actor-lifetime experiment (rejected and removed from source):
+- Introduced an actor alias after fn_80201B8C and used it for subsequent object calls, attempting to define the persistent object value after info.
+- Raw report: objdiff-actor-lifetime-71e80643-556b-4d85-9e0e-8dfe2b64186c.json
+- Score remained 81.82089%; MWCC coalesced the alias, so it did not correct object/info allocation.
+
+The selected source changes only declaration order and preserves the reviewed action 0xA/event 3 and action 0xB/event 3 control-flow fixes. It remains an honest NonMatching reconstruction.

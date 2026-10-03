@@ -1,0 +1,23 @@
+Assignment 71e80643-556b-4d85-9e0e-8dfe2b64186c assigned-object build.
+
+$ python3 configure.py && .tools/bin/ninja -j2 build/GEDE01/src/game/game_fn_80033180.externalized
+[1/2] MWCC build/GEDE01/src/game/game_fn_80033180.o
+[2/2] EXTERNALIZE build/GEDE01/src/game/game_fn_80033180.o
+Exit status: 0
+
+Canonical compiler: compilers/GC/1.3/mwcceppc.exe with the existing registered flags, including -use_lmw_stmw on.
+Source SHA-256: 74f4818594ea972da42ca76cabb8081b3f8c31312bbd0931c4c8925f41aa3fd8
+Retail object SHA-256: 59f74ba4f8fcfc057634aaf6f927862a8dfca0252aeeb7701ed2958e92841134
+Generated post-compile object SHA-256: cab3af7dea2e1c6da123c14e0a647cd69af939b3b754a9085c716d328fca53c8
+
+Fresh objdiff commands:
+$ build/tools/objdiff-cli diff -1 build/GEDE01/obj/game/game_fn_80033180.o -2 build/GEDE01/src/game/game_fn_80033180.o -o reports/GEDE01/objdiff-71e80643-556b-4d85-9e0e-8dfe2b64186c.json --format json-pretty fn_80033180
+$ build/tools/objdiff-cli diff -1 build/GEDE01/obj/game/game_fn_80033180.o -2 build/GEDE01/src/game/game_fn_80033180.o -o reports/GEDE01/objdiff-reloc-strict-71e80643-556b-4d85-9e0e-8dfe2b64186c.json --format json-pretty -c function_reloc_diffs=name_address fn_80033180
+Retail text size: 1608 bytes
+Generated text size: 1616 bytes
+Canonical score: 81.82089%
+Relocation-strict score: 81.82089%
+Retail relocations: 65
+Generated relocations: 65
+
+No full build, legal audit, or retail DOL identity claim is made; those gates are reserved for the post-review integrator.
