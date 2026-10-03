@@ -1,0 +1,20 @@
+Attempt 4 tested a code-generation hypothesis distinct from the preserved attempts:
+qualify only the second read of lbl_80300368.current as volatile. The intent was
+to prevent GC/1.3 from hoisting that read ahead of the phase increment, matching
+retail's first divergent instruction schedule without using the already-rejected
+post-increment expression.
+
+The hypothesis regressed canonical similarity to 90.10291% and emitted 2096 bytes
+instead of retail's 2060 bytes. Although the old phase remained in r7, the volatile
+access changed address-register allocation and forced additional current-index
+reloads throughout the switch cases. The variant was rejected. Its raw assigned-
+object build, canonical objdiff JSON/log, and instruction comparison are preserved
+under the volatile-current evidence names.
+
+The final prepared result retains the stronger honest-C reconstruction present at
+the accepted base. Fresh canonical and relocation-strict measurements are both
+94.194176%; retail is 2060 bytes and the candidate is 2064 bytes. The first
+remaining divergence is the current-entry reload being scheduled before rather
+than after the phase increment. Later differences chiefly concern address-register
+allocation and move scheduling in the repeated activation blocks and special
+subtype path.
