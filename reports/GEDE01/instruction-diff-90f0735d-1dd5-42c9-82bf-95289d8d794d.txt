@@ -1,0 +1,409 @@
+Raw objdiff instruction comparison: left=retail, right=candidate
+retail_size=1440 candidate_size=1440 canonical_match=99.18056
+0000 DIFF_NONE            stwu r1, -0x210(r1)                              | stwu r1, -0x210(r1)
+0004 DIFF_NONE            mflr r0                                          | mflr r0
+0008 DIFF_NONE            stw r0, 0x214(r1)                                | stw r0, 0x214(r1)
+000c DIFF_NONE            stfd f31, 0x200(r1)                              | stfd f31, 0x200(r1)
+0010 DIFF_NONE            psq_st f31, 0x208(r1), 0, qr0                    | psq_st f31, 0x208(r1), 0, qr0
+0014 DIFF_NONE            stfd f30, 0x1f0(r1)                              | stfd f30, 0x1f0(r1)
+0018 DIFF_NONE            psq_st f30, 0x1f8(r1), 0, qr0                    | psq_st f30, 0x1f8(r1), 0, qr0
+001c DIFF_NONE            stfd f29, 0x1e0(r1)                              | stfd f29, 0x1e0(r1)
+0020 DIFF_NONE            psq_st f29, 0x1e8(r1), 0, qr0                    | psq_st f29, 0x1e8(r1), 0, qr0
+0024 DIFF_NONE            stfd f28, 0x1d0(r1)                              | stfd f28, 0x1d0(r1)
+0028 DIFF_NONE            psq_st f28, 0x1d8(r1), 0, qr0                    | psq_st f28, 0x1d8(r1), 0, qr0
+002c DIFF_NONE            stfd f27, 0x1c0(r1)                              | stfd f27, 0x1c0(r1)
+0030 DIFF_NONE            psq_st f27, 0x1c8(r1), 0, qr0                    | psq_st f27, 0x1c8(r1), 0, qr0
+0034 DIFF_NONE            stmw r24, 0x1a0(r1)                              | stmw r24, 0x1a0(r1)
+0038 DIFF_ARG_MISMATCH    mr r31, r3                                       | mr r24, r3
+003c DIFF_ARG_MISMATCH    li r26, -0x1                                     | li r30, -0x1
+0040 DIFF_NONE            li r4, 0x1                                       | li r4, 0x1
+0044 DIFF_NONE            bl fn_8016A694                                   | bl fn_8016A694
+    relocations: {"left": {"target_symbol": 4, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 12, "type": 10, "type_name": "R_PPC_REL24"}}
+0048 DIFF_NONE            fctiwz f0, f1                                    | fctiwz f0, f1
+004c DIFF_ARG_MISMATCH    mr r3, r31                                       | mr r3, r24
+0050 DIFF_NONE            stfd f0, 0x168(r1)                               | stfd f0, 0x168(r1)
+0054 DIFF_ARG_MISMATCH    lwz r25, 0x16c(r1)                               | lwz r28, 0x16c(r1)
+0058 DIFF_NONE            bl fn_8016A598                                   | bl fn_8016A598
+    relocations: {"left": {"target_symbol": 5, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 13, "type": 10, "type_name": "R_PPC_REL24"}}
+005c DIFF_ARG_MISMATCH    addi r0, r25, 0x4                                | addi r0, r28, 0x4
+0060 DIFF_NONE            cmpw r0, r3                                      | cmpw r0, r3
+0064 DIFF_NONE            beq 0xa0                                         | beq 0xa0
+0068 DIFF_ARG_MISMATCH    mr r3, r31                                       | mr r3, r24
+006c DIFF_NONE            bl fn_8016A598                                   | bl fn_8016A598
+    relocations: {"left": {"target_symbol": 5, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 13, "type": 10, "type_name": "R_PPC_REL24"}}
+0070 DIFF_NONE            lis r4, lbl_8023CBC8@ha                          | lis r4, lbl_8023CBC8@ha
+    relocations: {"left": {"target_symbol": 3, "type": 6, "type_name": "R_PPC_ADDR16_HA"}, "right": {"target_symbol": 3, "type": 6, "type_name": "R_PPC_ADDR16_HA"}}
+0074 DIFF_NONE            mr r6, r3                                        | mr r6, r3
+0078 DIFF_NONE            addi r4, r4, lbl_8023CBC8@l                      | addi r4, r4, lbl_8023CBC8@l
+    relocations: {"left": {"target_symbol": 3, "type": 4, "type_name": "R_PPC_ADDR16_LO"}, "right": {"target_symbol": 3, "type": 4, "type_name": "R_PPC_ADDR16_LO"}}
+007c DIFF_ARG_MISMATCH    mr r3, r31                                       | mr r3, r24
+0080 DIFF_ARG_MISMATCH    addi r5, r25, 0x4                                | addi r5, r28, 0x4
+0084 DIFF_NONE            crclr cr1eq                                      | crclr cr1eq
+0088 DIFF_NONE            bl fn_80163BB4                                   | bl fn_80163BB4
+    relocations: {"left": {"target_symbol": 6, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 14, "type": 10, "type_name": "R_PPC_REL24"}}
+008c DIFF_NONE            lfd f1, lbl_8064DE68@sda21                       | lfd f1, lbl_8064DE68@sda21
+    relocations: {"left": {"target_symbol": 7, "type": 109, "type_name": "R_PPC_EMB_SDA21"}, "right": {"target_symbol": 6, "type": 109, "type_name": "R_PPC_EMB_SDA21"}}
+0090 DIFF_ARG_MISMATCH    mr r3, r31                                       | mr r3, r24
+0094 DIFF_NONE            bl fn_8016A830                                   | bl fn_8016A830
+    relocations: {"left": {"target_symbol": 8, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 15, "type": 10, "type_name": "R_PPC_REL24"}}
+0098 DIFF_NONE            li r3, 0x1                                       | li r3, 0x1
+009c DIFF_NONE            b 0x564                                          | b 0x564
+00a0 DIFF_ARG_MISMATCH    mr r3, r31                                       | mr r3, r24
+00a4 DIFF_NONE            addi r29, r1, 0x100                              | addi r29, r1, 0x100
+00a8 DIFF_ARG_MISMATCH    li r30, 0x0                                      | li r31, 0x0
+00ac DIFF_NONE            li r4, 0x2                                       | li r4, 0x2
+00b0 DIFF_NONE            bl fn_8016A694                                   | bl fn_8016A694
+    relocations: {"left": {"target_symbol": 4, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 12, "type": 10, "type_name": "R_PPC_REL24"}}
+00b4 DIFF_NONE            fctiwz f0, f1                                    | fctiwz f0, f1
+00b8 DIFF_ARG_MISMATCH    mr r3, r31                                       | mr r3, r24
+00bc DIFF_NONE            li r4, 0x3                                       | li r4, 0x3
+00c0 DIFF_NONE            stfd f0, 0x168(r1)                               | stfd f0, 0x168(r1)
+00c4 DIFF_ARG_MISMATCH    lwz r24, 0x16c(r1)                               | lwz r25, 0x16c(r1)
+00c8 DIFF_NONE            bl fn_8016A694                                   | bl fn_8016A694
+    relocations: {"left": {"target_symbol": 4, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 12, "type": 10, "type_name": "R_PPC_REL24"}}
+00cc DIFF_NONE            fctiwz f0, f1                                    | fctiwz f0, f1
+00d0 DIFF_ARG_MISMATCH    mr r3, r31                                       | mr r3, r24
+00d4 DIFF_NONE            li r4, 0x4                                       | li r4, 0x4
+00d8 DIFF_NONE            stfd f0, 0x170(r1)                               | stfd f0, 0x170(r1)
+00dc DIFF_ARG_MISMATCH    lwz r28, 0x174(r1)                               | lwz r27, 0x174(r1)
+00e0 DIFF_NONE            bl fn_8016A694                                   | bl fn_8016A694
+    relocations: {"left": {"target_symbol": 4, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 12, "type": 10, "type_name": "R_PPC_REL24"}}
+00e4 DIFF_NONE            fctiwz f0, f1                                    | fctiwz f0, f1
+00e8 DIFF_NONE            addi r3, r1, 0xd8                                | addi r3, r1, 0xd8
+00ec DIFF_NONE            stfd f0, 0x178(r1)                               | stfd f0, 0x178(r1)
+00f0 DIFF_ARG_MISMATCH    lwz r27, 0x17c(r1)                               | lwz r26, 0x17c(r1)
+00f4 DIFF_NONE            bl fn_80196578                                   | bl fn_80196578
+    relocations: {"left": {"target_symbol": 9, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 16, "type": 10, "type_name": "R_PPC_REL24"}}
+00f8 DIFF_NONE            li r0, -0x1                                      | li r0, -0x1
+00fc DIFF_NONE            addi r3, r1, 0xd8                                | addi r3, r1, 0xd8
+0100 DIFF_NONE            sth r0, 0xdc(r1)                                 | sth r0, 0xdc(r1)
+0104 DIFF_ARG_MISMATCH    clrlwi r4, r25, 24                               | clrlwi r4, r28, 24
+0108 DIFF_NONE            bl fn_8018F81C                                   | bl fn_8018F81C
+    relocations: {"left": {"target_symbol": 10, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 17, "type": 10, "type_name": "R_PPC_REL24"}}
+010c DIFF_NONE            lwz r4, lbl_8064D1BC@sda21                       | lwz r4, lbl_8064D1BC@sda21
+    relocations: {"left": {"target_symbol": 11, "type": 109, "type_name": "R_PPC_EMB_SDA21"}, "right": {"target_symbol": 7, "type": 109, "type_name": "R_PPC_EMB_SDA21"}}
+0110 DIFF_NONE            li r3, 0xf                                       | li r3, 0xf
+0114 DIFF_NONE            li r0, 0x9                                       | li r0, 0x9
+0118 DIFF_NONE            sth r3, 0x108(r1)                                | sth r3, 0x108(r1)
+011c DIFF_NONE            cmpwi r4, 0x89c                                  | cmpwi r4, 0x89c
+0120 DIFF_NONE            stb r0, 0x101(r1)                                | stb r0, 0x101(r1)
+0124 DIFF_ARG_MISMATCH    stb r25, 0x102(r1)                               | stb r28, 0x102(r1)
+0128 DIFF_NONE            beq 0x144                                        | beq 0x144
+012c DIFF_NONE            cmpwi r4, 0xade                                  | cmpwi r4, 0xade
+0130 DIFF_NONE            beq 0x144                                        | beq 0x144
+0134 DIFF_NONE            cmpwi r4, 0x33d                                  | cmpwi r4, 0x33d
+0138 DIFF_NONE            beq 0x144                                        | beq 0x144
+013c DIFF_NONE            cmpwi r4, 0x395                                  | cmpwi r4, 0x395
+0140 DIFF_NONE            bne 0x14c                                        | bne 0x14c
+0144 DIFF_NONE            li r0, 0x64                                      | li r0, 0x64
+0148 DIFF_NONE            sth r0, 0xf4(r1)                                 | sth r0, 0xf4(r1)
+014c DIFF_NONE            li r0, 0x0                                       | li r0, 0x0
+0150 DIFF_ARG_MISMATCH    mr r3, r24                                       | mr r3, r25
+0154 DIFF_NONE            stb r0, 0x100(r1)                                | stb r0, 0x100(r1)
+0158 DIFF_NONE            bl fn_801D3974                                   | bl fn_801D3974
+    relocations: {"left": {"target_symbol": 12, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 18, "type": 10, "type_name": "R_PPC_REL24"}}
+015c DIFF_NONE            stw r3, 0x8(r1)                                  | stw r3, 0x8(r1)
+0160 DIFF_NONE            li r0, 0x96                                      | li r0, 0x96
+0164 DIFF_ARG_MISMATCH    cmpwi r24, 0x2                                   | cmpwi r25, 0x2
+0168 DIFF_NONE            li r4, 0x3c                                      | li r4, 0x3c
+016c DIFF_NONE            stw r3, 0xc(r1)                                  | stw r3, 0xc(r1)
+0170 DIFF_NONE            stb r4, 0xf(r1)                                  | stb r4, 0xf(r1)
+0174 DIFF_NONE            stb r0, 0xb(r1)                                  | stb r0, 0xb(r1)
+0178 DIFF_NONE            beq 0x1a8                                        | beq 0x1a8
+017c DIFF_NONE            bge 0x190                                        | bge 0x190
+0180 DIFF_ARG_MISMATCH    cmpwi r24, 0x0                                   | cmpwi r25, 0x0
+0184 DIFF_NONE            beq 0x1c0                                        | beq 0x1c0
+0188 DIFF_NONE            bge 0x1a0                                        | bge 0x1a0
+018c DIFF_NONE            b 0x1c4                                          | b 0x1c4
+0190 DIFF_ARG_MISMATCH    cmpwi r24, 0x4                                   | cmpwi r25, 0x4
+0194 DIFF_NONE            beq 0x1b8                                        | beq 0x1b8
+0198 DIFF_NONE            bge 0x1c4                                        | bge 0x1c4
+019c DIFF_NONE            b 0x1b0                                          | b 0x1b0
+01a0 DIFF_ARG_MISMATCH    li r30, 0x20                                     | li r31, 0x20
+01a4 DIFF_NONE            b 0x1c4                                          | b 0x1c4
+01a8 DIFF_ARG_MISMATCH    li r30, 0x8                                      | li r31, 0x8
+01ac DIFF_NONE            b 0x1c4                                          | b 0x1c4
+01b0 DIFF_ARG_MISMATCH    li r30, 0x10                                     | li r31, 0x10
+01b4 DIFF_NONE            b 0x1c4                                          | b 0x1c4
+01b8 DIFF_ARG_MISMATCH    li r30, 0x40                                     | li r31, 0x40
+01bc DIFF_NONE            b 0x1c4                                          | b 0x1c4
+01c0 DIFF_ARG_MISMATCH    li r30, 0x100                                    | li r31, 0x100
+01c4 DIFF_NONE            lbz r0, 0x104(r1)                                | lbz r0, 0x104(r1)
+01c8 DIFF_NONE            li r7, 0x9                                       | li r7, 0x9
+01cc DIFF_NONE            lwz r3, 0xc(r1)                                  | lwz r3, 0xc(r1)
+01d0 DIFF_NONE            li r6, 0x3                                       | li r6, 0x3
+01d4 DIFF_NONE            ori r5, r0, 0x81                                 | ori r5, r0, 0x81
+01d8 DIFF_NONE            lwz r4, 0x8(r1)                                  | lwz r4, 0x8(r1)
+01dc DIFF_NONE            li r0, 0x0                                       | li r0, 0x0
+01e0 DIFF_NONE            stw r3, 0xec(r1)                                 | stw r3, 0xec(r1)
+01e4 DIFF_ARG_MISMATCH    mr r3, r31                                       | mr r3, r24
+01e8 DIFF_NONE            stw r4, 0xf0(r1)                                 | stw r4, 0xf0(r1)
+01ec DIFF_NONE            li r4, 0x5                                       | li r4, 0x5
+01f0 DIFF_NONE            stb r7, 0xf9(r1)                                 | stb r7, 0xf9(r1)
+01f4 DIFF_NONE            stb r6, 0xfc(r1)                                 | stb r6, 0xfc(r1)
+01f8 DIFF_ARG_MISMATCH    sth r30, 0xf6(r1)                                | sth r31, 0xf6(r1)
+01fc DIFF_NONE            stb r5, 0x104(r1)                                | stb r5, 0x104(r1)
+0200 DIFF_NONE            stb r0, 0x103(r1)                                | stb r0, 0x103(r1)
+0204 DIFF_NONE            bl fn_8016A694                                   | bl fn_8016A694
+    relocations: {"left": {"target_symbol": 4, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 12, "type": 10, "type_name": "R_PPC_REL24"}}
+0208 DIFF_NONE            bl fn_800F5C54                                   | bl fn_800F5C54
+    relocations: {"left": {"target_symbol": 13, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 19, "type": 10, "type_name": "R_PPC_REL24"}}
+020c DIFF_NONE            li r4, 0x2                                       | li r4, 0x2
+0210 DIFF_NONE            bl fn_8015C4A4                                   | bl fn_8015C4A4
+    relocations: {"left": {"target_symbol": 14, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 20, "type": 10, "type_name": "R_PPC_REL24"}}
+0214 DIFF_NONE            li r4, 0x2                                       | li r4, 0x2
+0218 DIFF_NONE            li r5, 0x0                                       | li r5, 0x0
+021c DIFF_NONE            bl fn_80158ABC                                   | bl fn_80158ABC
+    relocations: {"left": {"target_symbol": 15, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 21, "type": 10, "type_name": "R_PPC_REL24"}}
+0220 DIFF_NONE            lwz r0, 0x0(r3)                                  | lwz r0, 0x0(r3)
+0224 DIFF_NONE            li r4, 0x7                                       | li r4, 0x7
+0228 DIFF_NONE            stw r0, 0x1c(r1)                                 | stw r0, 0x1c(r1)
+022c DIFF_NONE            lhz r0, 0x4(r3)                                  | lhz r0, 0x4(r3)
+0230 DIFF_ARG_MISMATCH    mr r3, r31                                       | mr r3, r24
+0234 DIFF_NONE            sth r0, 0x20(r1)                                 | sth r0, 0x20(r1)
+0238 DIFF_NONE            bl fn_8016A694                                   | bl fn_8016A694
+    relocations: {"left": {"target_symbol": 4, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 12, "type": 10, "type_name": "R_PPC_REL24"}}
+023c DIFF_NONE            bl fn_800F5C54                                   | bl fn_800F5C54
+    relocations: {"left": {"target_symbol": 13, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 19, "type": 10, "type_name": "R_PPC_REL24"}}
+0240 DIFF_NONE            li r4, 0x2                                       | li r4, 0x2
+0244 DIFF_NONE            bl fn_8015C4A4                                   | bl fn_8015C4A4
+    relocations: {"left": {"target_symbol": 14, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 20, "type": 10, "type_name": "R_PPC_REL24"}}
+0248 DIFF_NONE            li r4, 0x2                                       | li r4, 0x2
+024c DIFF_NONE            li r5, 0x0                                       | li r5, 0x0
+0250 DIFF_NONE            bl fn_80158ABC                                   | bl fn_80158ABC
+    relocations: {"left": {"target_symbol": 15, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 21, "type": 10, "type_name": "R_PPC_REL24"}}
+0254 DIFF_NONE            lwz r0, 0x0(r3)                                  | lwz r0, 0x0(r3)
+0258 DIFF_NONE            lis r5, 0x4330                                   | lis r5, 0x4330
+025c DIFF_NONE            lha r7, 0x1c(r1)                                 | lha r7, 0x1c(r1)
+0260 DIFF_NONE            stw r0, 0x22(r1)                                 | stw r0, 0x22(r1)
+0264 DIFF_NONE            lha r4, 0x1e(r1)                                 | lha r4, 0x1e(r1)
+0268 DIFF_NONE            lha r6, 0x22(r1)                                 | lha r6, 0x22(r1)
+026c DIFF_NONE            lha r0, 0x24(r1)                                 | lha r0, 0x24(r1)
+0270 DIFF_NONE            subf r6, r7, r6                                  | subf r6, r7, r6
+0274 DIFF_NONE            lhz r7, 0x4(r3)                                  | lhz r7, 0x4(r3)
+0278 DIFF_NONE            subf r0, r4, r0                                  | subf r0, r4, r0
+027c DIFF_NONE            lfs f0, lbl_8064DCF4@sda21                       | lfs f0, lbl_8064DCF4@sda21
+    relocations: {"left": {"target_symbol": 16, "type": 109, "type_name": "R_PPC_EMB_SDA21"}, "right": {"target_symbol": 8, "type": 109, "type_name": "R_PPC_EMB_SDA21"}}
+0280 DIFF_NONE            xoris r4, r6, 0x8000                             | xoris r4, r6, 0x8000
+0284 DIFF_NONE            stw r5, 0x178(r1)                                | stw r5, 0x178(r1)
+0288 DIFF_NONE            xoris r0, r0, 0x8000                             | xoris r0, r0, 0x8000
+028c DIFF_NONE            addi r3, r1, 0x10                                | addi r3, r1, 0x10
+0290 DIFF_NONE            stw r4, 0x17c(r1)                                | stw r4, 0x17c(r1)
+0294 DIFF_NONE            mr r4, r3                                        | mr r4, r3
+0298 DIFF_ARG_MISMATCH    lfd f3, lbl_8064DCE8@sda21                       | lfd f3, @51@sda21
+    relocations: {"left": {"target_symbol": 17, "type": 109, "type_name": "R_PPC_EMB_SDA21"}, "right": {"target_symbol": 5, "type": 109, "type_name": "R_PPC_EMB_SDA21"}}
+029c DIFF_NONE            lfd f1, 0x178(r1)                                | lfd f1, 0x178(r1)
+02a0 DIFF_NONE            stw r0, 0x174(r1)                                | stw r0, 0x174(r1)
+02a4 DIFF_NONE            fsubs f2, f1, f3                                 | fsubs f2, f1, f3
+02a8 DIFF_NONE            stw r5, 0x170(r1)                                | stw r5, 0x170(r1)
+02ac DIFF_NONE            lfd f1, 0x170(r1)                                | lfd f1, 0x170(r1)
+02b0 DIFF_NONE            sth r7, 0x26(r1)                                 | sth r7, 0x26(r1)
+02b4 DIFF_NONE            fsubs f1, f1, f3                                 | fsubs f1, f1, f3
+02b8 DIFF_NONE            stfs f2, 0x10(r1)                                | stfs f2, 0x10(r1)
+02bc DIFF_NONE            stfs f1, 0x14(r1)                                | stfs f1, 0x14(r1)
+02c0 DIFF_NONE            stfs f0, 0x18(r1)                                | stfs f0, 0x18(r1)
+02c4 DIFF_NONE            bl fn_80211AAC                                   | bl fn_80211AAC
+    relocations: {"left": {"target_symbol": 18, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 22, "type": 10, "type_name": "R_PPC_REL24"}}
+02c8 DIFF_NONE            lha r0, 0x20(r1)                                 | lha r0, 0x20(r1)
+02cc DIFF_ARG_MISMATCH    lis r30, 0x4330                                  | lis r31, 0x4330
+02d0 DIFF_ARG_MISMATCH    stw r30, 0x168(r1)                               | stw r31, 0x168(r1)
+02d4 DIFF_ARG_MISMATCH    li r24, 0x0                                      | li r25, 0x0
+02d8 DIFF_NONE            xoris r0, r0, 0x8000                             | xoris r0, r0, 0x8000
+02dc DIFF_ARG_MISMATCH    lfd f31, lbl_8064DCE8@sda21                      | lfd f31, @51@sda21
+    relocations: {"left": {"target_symbol": 17, "type": 109, "type_name": "R_PPC_EMB_SDA21"}, "right": {"target_symbol": 5, "type": 109, "type_name": "R_PPC_EMB_SDA21"}}
+02e0 DIFF_NONE            stw r0, 0x16c(r1)                                | stw r0, 0x16c(r1)
+02e4 DIFF_NONE            lfs f28, lbl_8064DE70@sda21                      | lfs f28, lbl_8064DE70@sda21
+    relocations: {"left": {"target_symbol": 19, "type": 109, "type_name": "R_PPC_EMB_SDA21"}, "right": {"target_symbol": 9, "type": 109, "type_name": "R_PPC_EMB_SDA21"}}
+02e8 DIFF_NONE            lfd f0, 0x168(r1)                                | lfd f0, 0x168(r1)
+02ec DIFF_NONE            stw r0, 0x184(r1)                                | stw r0, 0x184(r1)
+02f0 DIFF_NONE            fsubs f30, f0, f31                               | fsubs f30, f0, f31
+02f4 DIFF_NONE            lfs f27, lbl_8064DE74@sda21                      | lfs f27, lbl_8064DE74@sda21
+    relocations: {"left": {"target_symbol": 20, "type": 109, "type_name": "R_PPC_EMB_SDA21"}, "right": {"target_symbol": 10, "type": 109, "type_name": "R_PPC_EMB_SDA21"}}
+02f8 DIFF_ARG_MISMATCH    stw r30, 0x180(r1)                               | stw r31, 0x180(r1)
+02fc DIFF_NONE            lfd f0, 0x180(r1)                                | lfd f0, 0x180(r1)
+0300 DIFF_NONE            fsubs f29, f0, f31                               | fsubs f29, f0, f31
+0304 DIFF_NONE            b 0x438                                          | b 0x438
+0308 DIFF_ARG_MISMATCH    mr r3, r31                                       | mr r3, r24
+030c DIFF_ARG_MISMATCH    addi r4, r24, 0x5                                | addi r4, r25, 0x5
+0310 DIFF_NONE            bl fn_8016A694                                   | bl fn_8016A694
+    relocations: {"left": {"target_symbol": 4, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 12, "type": 10, "type_name": "R_PPC_REL24"}}
+0314 DIFF_NONE            bl fn_800F5C54                                   | bl fn_800F5C54
+    relocations: {"left": {"target_symbol": 13, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 19, "type": 10, "type_name": "R_PPC_REL24"}}
+0318 DIFF_NONE            li r4, 0x2                                       | li r4, 0x2
+031c DIFF_NONE            bl fn_8015C4A4                                   | bl fn_8015C4A4
+    relocations: {"left": {"target_symbol": 14, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 20, "type": 10, "type_name": "R_PPC_REL24"}}
+0320 DIFF_NONE            li r4, 0x2                                       | li r4, 0x2
+0324 DIFF_NONE            li r5, 0x0                                       | li r5, 0x0
+0328 DIFF_NONE            bl fn_80158ABC                                   | bl fn_80158ABC
+    relocations: {"left": {"target_symbol": 15, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 21, "type": 10, "type_name": "R_PPC_REL24"}}
+032c DIFF_NONE            lha r0, 0x2(r3)                                  | lha r0, 0x2(r3)
+0330 DIFF_NONE            lha r4, 0x0(r3)                                  | lha r4, 0x0(r3)
+0334 DIFF_NONE            xoris r0, r0, 0x8000                             | xoris r0, r0, 0x8000
+0338 DIFF_NONE            lha r5, 0x4(r3)                                  | lha r5, 0x4(r3)
+033c DIFF_NONE            stw r0, 0x174(r1)                                | stw r0, 0x174(r1)
+0340 DIFF_NONE            xoris r0, r4, 0x8000                             | xoris r0, r4, 0x8000
+0344 DIFF_NONE            xoris r4, r5, 0x8000                             | xoris r4, r5, 0x8000
+0348 DIFF_NONE            lfs f1, 0x14(r1)                                 | lfs f1, 0x14(r1)
+034c DIFF_ARG_MISMATCH    stw r30, 0x170(r1)                               | stw r31, 0x170(r1)
+0350 DIFF_NONE            lfs f3, 0x10(r1)                                 | lfs f3, 0x10(r1)
+0354 DIFF_NONE            lfd f0, 0x170(r1)                                | lfd f0, 0x170(r1)
+0358 DIFF_NONE            stw r0, 0x17c(r1)                                | stw r0, 0x17c(r1)
+035c DIFF_NONE            fsubs f0, f0, f31                                | fsubs f0, f0, f31
+0360 DIFF_NONE            lfs f4, 0x18(r1)                                 | lfs f4, 0x18(r1)
+0364 DIFF_ARG_MISMATCH    stw r30, 0x178(r1)                               | stw r31, 0x178(r1)
+0368 DIFF_NONE            lfd f2, 0x178(r1)                                | lfd f2, 0x178(r1)
+036c DIFF_NONE            fmuls f0, f1, f0                                 | fmuls f0, f1, f0
+0370 DIFF_NONE            stw r4, 0x184(r1)                                | stw r4, 0x184(r1)
+0374 DIFF_NONE            fsubs f1, f2, f31                                | fsubs f1, f2, f31
+0378 DIFF_ARG_MISMATCH    stw r30, 0x180(r1)                               | stw r31, 0x180(r1)
+037c DIFF_NONE            lfd f2, 0x180(r1)                                | lfd f2, 0x180(r1)
+0380 DIFF_NONE            fmadds f1, f3, f1, f0                            | fmadds f1, f3, f1, f0
+0384 DIFF_NONE            stw r4, 0x16c(r1)                                | stw r4, 0x16c(r1)
+0388 DIFF_NONE            fsubs f2, f2, f31                                | fsubs f2, f2, f31
+038c DIFF_ARG_MISMATCH    stw r30, 0x168(r1)                               | stw r31, 0x168(r1)
+0390 DIFF_NONE            lfd f0, 0x168(r1)                                | lfd f0, 0x168(r1)
+0394 DIFF_NONE            fmadds f1, f4, f2, f1                            | fmadds f1, f4, f2, f1
+0398 DIFF_NONE            fsubs f0, f0, f31                                | fsubs f0, f0, f31
+039c DIFF_NONE            fcmpo cr0, f0, f30                               | fcmpo cr0, f0, f30
+03a0 DIFF_NONE            bge 0x3b8                                        | bge 0x3b8
+03a4 DIFF_NONE            lis r0, 0x4330                                   | lis r0, 0x4330
+03a8 DIFF_NONE            stw r4, 0x18c(r1)                                | stw r4, 0x18c(r1)
+03ac DIFF_NONE            stw r0, 0x188(r1)                                | stw r0, 0x188(r1)
+03b0 DIFF_NONE            lfd f0, 0x188(r1)                                | lfd f0, 0x188(r1)
+03b4 DIFF_NONE            fsubs f30, f0, f31                               | fsubs f30, f0, f31
+03b8 DIFF_NONE            xoris r4, r5, 0x8000                             | xoris r4, r5, 0x8000
+03bc DIFF_ARG_MISMATCH    stw r30, 0x190(r1)                               | stw r31, 0x190(r1)
+03c0 DIFF_NONE            stw r4, 0x194(r1)                                | stw r4, 0x194(r1)
+03c4 DIFF_NONE            lfd f0, 0x190(r1)                                | lfd f0, 0x190(r1)
+03c8 DIFF_NONE            fsubs f0, f0, f31                                | fsubs f0, f0, f31
+03cc DIFF_NONE            fcmpo cr0, f0, f29                               | fcmpo cr0, f0, f29
+03d0 DIFF_NONE            ble 0x3e8                                        | ble 0x3e8
+03d4 DIFF_NONE            lis r0, 0x4330                                   | lis r0, 0x4330
+03d8 DIFF_NONE            stw r4, 0x19c(r1)                                | stw r4, 0x19c(r1)
+03dc DIFF_NONE            stw r0, 0x198(r1)                                | stw r0, 0x198(r1)
+03e0 DIFF_NONE            lfd f0, 0x198(r1)                                | lfd f0, 0x198(r1)
+03e4 DIFF_NONE            fsubs f29, f0, f31                               | fsubs f29, f0, f31
+03e8 DIFF_NONE            fcmpo cr0, f1, f27                               | fcmpo cr0, f1, f27
+03ec DIFF_NONE            ble 0x404                                        | ble 0x404
+03f0 DIFF_NONE            lwz r0, 0x0(r3)                                  | lwz r0, 0x0(r3)
+03f4 DIFF_NONE            fmr f27, f1                                      | fmr f27, f1
+03f8 DIFF_NONE            stw r0, 0x22(r1)                                 | stw r0, 0x22(r1)
+03fc DIFF_NONE            lhz r0, 0x4(r3)                                  | lhz r0, 0x4(r3)
+0400 DIFF_NONE            sth r0, 0x26(r1)                                 | sth r0, 0x26(r1)
+0404 DIFF_NONE            fcmpo cr0, f1, f28                               | fcmpo cr0, f1, f28
+0408 DIFF_NONE            bge 0x420                                        | bge 0x420
+040c DIFF_NONE            lwz r0, 0x0(r3)                                  | lwz r0, 0x0(r3)
+0410 DIFF_NONE            fmr f28, f1                                      | fmr f28, f1
+0414 DIFF_NONE            stw r0, 0x1c(r1)                                 | stw r0, 0x1c(r1)
+0418 DIFF_NONE            lhz r0, 0x4(r3)                                  | lhz r0, 0x4(r3)
+041c DIFF_NONE            sth r0, 0x20(r1)                                 | sth r0, 0x20(r1)
+0420 DIFF_NONE            lwz r0, 0x0(r3)                                  | lwz r0, 0x0(r3)
+0424 DIFF_ARG_MISMATCH    addi r24, r24, 0x1                               | addi r25, r25, 0x1
+0428 DIFF_NONE            stw r0, 0x40(r29)                                | stw r0, 0x40(r29)
+042c DIFF_NONE            lhz r0, 0x4(r3)                                  | lhz r0, 0x4(r3)
+0430 DIFF_NONE            sth r0, 0x44(r29)                                | sth r0, 0x44(r29)
+0434 DIFF_NONE            addi r29, r29, 0x6                               | addi r29, r29, 0x6
+0438 DIFF_ARG_MISMATCH    cmpw r24, r25                                    | cmpw r25, r28
+043c DIFF_NONE            blt 0x308                                        | blt 0x308
+0440 DIFF_NONE            li r0, 0x12                                      | li r0, 0x12
+0444 DIFF_NONE            addi r5, r1, 0x24                                | addi r5, r1, 0x24
+0448 DIFF_NONE            addi r4, r1, 0xd4                                | addi r4, r1, 0xd4
+044c DIFF_NONE            mtctr r0                                         | mtctr r0
+0450 DIFF_NONE            lwz r3, 0x4(r4)                                  | lwz r3, 0x4(r4)
+0454 DIFF_NONE            lwzu r0, 0x8(r4)                                 | lwzu r0, 0x8(r4)
+0458 DIFF_NONE            stw r3, 0x4(r5)                                  | stw r3, 0x4(r5)
+045c DIFF_NONE            stwu r0, 0x8(r5)                                 | stwu r0, 0x8(r5)
+0460 DIFF_NONE            bdnz 0x450                                       | bdnz 0x450
+0464 DIFF_NONE            lis r3, fn_801966E0@ha                           | lis r3, fn_801966E0@ha
+    relocations: {"left": {"target_symbol": 21, "type": 6, "type_name": "R_PPC_ADDR16_HA"}, "right": {"target_symbol": 23, "type": 6, "type_name": "R_PPC_ADDR16_HA"}}
+0468 DIFF_NONE            li r0, 0x84                                      | li r0, 0x84
+046c DIFF_NONE            addi r4, r3, fn_801966E0@l                       | addi r4, r3, fn_801966E0@l
+    relocations: {"left": {"target_symbol": 21, "type": 4, "type_name": "R_PPC_ADDR16_LO"}, "right": {"target_symbol": 23, "type": 4, "type_name": "R_PPC_ADDR16_LO"}}
+0470 DIFF_NONE            stb r0, 0xd2(r1)                                 | stb r0, 0xd2(r1)
+0474 DIFF_NONE            addi r3, r1, 0x28                                | addi r3, r1, 0x28
+0478 DIFF_NONE            stw r4, 0xb8(r1)                                 | stw r4, 0xb8(r1)
+047c DIFF_NONE            bl fn_80147EC4                                   | bl fn_80147EC4
+    relocations: {"left": {"target_symbol": 22, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 24, "type": 10, "type_name": "R_PPC_REL24"}}
+0480 DIFF_NONE            cmplwi r3, 0x0                                   | cmplwi r3, 0x0
+0484 DIFF_NONE            beq 0x53c                                        | beq 0x53c
+0488 DIFF_ARG_MISMATCH    lwz r24, 0xbc(r1)                                | lwz r25, 0xbc(r1)
+048c DIFF_NONE            li r4, 0x1                                       | li r4, 0x1
+0490 DIFF_NONE            li r5, 0x0                                       | li r5, 0x0
+0494 DIFF_ARG_MISMATCH    mr r3, r24                                       | mr r3, r25
+0498 DIFF_NONE            bl fn_801964E8                                   | bl fn_801964E8
+    relocations: {"left": {"target_symbol": 23, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 25, "type": 10, "type_name": "R_PPC_REL24"}}
+049c DIFF_ARG_MISMATCH    mr r3, r24                                       | mr r3, r25
+04a0 DIFF_NONE            li r4, 0x0                                       | li r4, 0x0
+04a4 DIFF_NONE            bl fn_801978F8                                   | bl fn_801978F8
+    relocations: {"left": {"target_symbol": 24, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 26, "type": 10, "type_name": "R_PPC_REL24"}}
+04a8 DIFF_NONE            fsubs f0, f29, f30                               | fsubs f0, f29, f30
+04ac DIFF_ARG_MISMATCH    cmpwi r28, 0x0                                   | cmpwi r27, 0x0
+04b0 DIFF_NONE            fctiwz f1, f30                                   | fctiwz f1, f30
+04b4 DIFF_NONE            fctiwz f0, f0                                    | fctiwz f0, f0
+04b8 DIFF_NONE            stfd f1, 0x198(r1)                               | stfd f1, 0x198(r1)
+04bc DIFF_NONE            stfd f1, 0x190(r1)                               | stfd f1, 0x190(r1)
+04c0 DIFF_NONE            lwz r4, 0x19c(r1)                                | lwz r4, 0x19c(r1)
+04c4 DIFF_NONE            stfd f0, 0x188(r1)                               | stfd f0, 0x188(r1)
+04c8 DIFF_NONE            lwz r3, 0x194(r1)                                | lwz r3, 0x194(r1)
+04cc DIFF_NONE            lwz r0, 0x18c(r1)                                | lwz r0, 0x18c(r1)
+04d0 DIFF_NONE            sth r4, 0x20(r1)                                 | sth r4, 0x20(r1)
+04d4 DIFF_NONE            extsh r5, r0                                     | extsh r5, r0
+04d8 DIFF_NONE            sth r3, 0x26(r1)                                 | sth r3, 0x26(r1)
+04dc DIFF_NONE            beq 0x50c                                        | beq 0x50c
+04e0 DIFF_NONE            lis r3, fn_8014BA14@ha                           | lis r3, fn_8014BA14@ha
+    relocations: {"left": {"target_symbol": 25, "type": 6, "type_name": "R_PPC_ADDR16_HA"}, "right": {"target_symbol": 27, "type": 6, "type_name": "R_PPC_ADDR16_HA"}}
+04e4 DIFF_NONE            lwz r6, lbl_8064D18C@sda21                       | lwz r6, lbl_8064D18C@sda21
+    relocations: {"left": {"target_symbol": 26, "type": 109, "type_name": "R_PPC_EMB_SDA21"}, "right": {"target_symbol": 11, "type": 109, "type_name": "R_PPC_EMB_SDA21"}}
+04e8 DIFF_NONE            addi r8, r3, fn_8014BA14@l                       | addi r8, r3, fn_8014BA14@l
+    relocations: {"left": {"target_symbol": 25, "type": 4, "type_name": "R_PPC_ADDR16_LO"}, "right": {"target_symbol": 27, "type": 4, "type_name": "R_PPC_ADDR16_LO"}}
+04ec DIFF_ARG_MISMATCH    mr r9, r24                                       | mr r9, r25
+04f0 DIFF_ARG_MISMATCH    mr r10, r27                                      | mr r10, r26
+04f4 DIFF_NONE            addi r4, r1, 0x1c                                | addi r4, r1, 0x1c
+04f8 DIFF_NONE            li r3, 0x2                                       | li r3, 0x2
+04fc DIFF_NONE            li r7, 0x0                                       | li r7, 0x0
+0500 DIFF_NONE            bl fn_80142A70                                   | bl fn_80142A70
+    relocations: {"left": {"target_symbol": 27, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 28, "type": 10, "type_name": "R_PPC_REL24"}}
+0504 DIFF_NONE            mr r4, r3                                        | mr r4, r3
+0508 DIFF_NONE            b 0x530                                          | b 0x530
+050c DIFF_NONE            lwz r6, lbl_8064D18C@sda21                       | lwz r6, lbl_8064D18C@sda21
+    relocations: {"left": {"target_symbol": 26, "type": 109, "type_name": "R_PPC_EMB_SDA21"}, "right": {"target_symbol": 11, "type": 109, "type_name": "R_PPC_EMB_SDA21"}}
+0510 DIFF_ARG_MISMATCH    mr r10, r27                                      | mr r10, r26
+0514 DIFF_NONE            addi r4, r1, 0x1c                                | addi r4, r1, 0x1c
+0518 DIFF_NONE            li r3, 0x2                                       | li r3, 0x2
+051c DIFF_NONE            li r7, 0x0                                       | li r7, 0x0
+0520 DIFF_NONE            li r8, 0x0                                       | li r8, 0x0
+0524 DIFF_NONE            li r9, 0x0                                       | li r9, 0x0
+0528 DIFF_NONE            bl fn_80142A70                                   | bl fn_80142A70
+    relocations: {"left": {"target_symbol": 27, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 28, "type": 10, "type_name": "R_PPC_REL24"}}
+052c DIFF_NONE            mr r4, r3                                        | mr r4, r3
+0530 DIFF_ARG_MISMATCH    mr r3, r24                                       | mr r3, r25
+0534 DIFF_NONE            bl fn_8014B8D0                                   | bl fn_8014B8D0
+    relocations: {"left": {"target_symbol": 28, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 29, "type": 10, "type_name": "R_PPC_REL24"}}
+0538 DIFF_ARG_MISMATCH    mr r26, r3                                       | mr r30, r3
+053c DIFF_ARG_MISMATCH    xoris r3, r26, 0x8000                            | xoris r3, r30, 0x8000
+0540 DIFF_NONE            lis r0, 0x4330                                   | lis r0, 0x4330
+0544 DIFF_NONE            stw r3, 0x19c(r1)                                | stw r3, 0x19c(r1)
+0548 DIFF_ARG_MISMATCH    mr r3, r31                                       | mr r3, r24
+054c DIFF_ARG_MISMATCH    lfd f1, lbl_8064DCE8@sda21                       | lfd f1, @51@sda21
+    relocations: {"left": {"target_symbol": 17, "type": 109, "type_name": "R_PPC_EMB_SDA21"}, "right": {"target_symbol": 5, "type": 109, "type_name": "R_PPC_EMB_SDA21"}}
+0550 DIFF_NONE            stw r0, 0x198(r1)                                | stw r0, 0x198(r1)
+0554 DIFF_NONE            lfd f0, 0x198(r1)                                | lfd f0, 0x198(r1)
+0558 DIFF_NONE            fsub f1, f0, f1                                  | fsub f1, f0, f1
+055c DIFF_NONE            bl fn_8016A830                                   | bl fn_8016A830
+    relocations: {"left": {"target_symbol": 8, "type": 10, "type_name": "R_PPC_REL24"}, "right": {"target_symbol": 15, "type": 10, "type_name": "R_PPC_REL24"}}
+0560 DIFF_NONE            li r3, 0x1                                       | li r3, 0x1
+0564 DIFF_NONE            psq_l f31, 0x208(r1), 0, qr0                     | psq_l f31, 0x208(r1), 0, qr0
+0568 DIFF_NONE            lfd f31, 0x200(r1)                               | lfd f31, 0x200(r1)
+056c DIFF_NONE            psq_l f30, 0x1f8(r1), 0, qr0                     | psq_l f30, 0x1f8(r1), 0, qr0
+0570 DIFF_NONE            lfd f30, 0x1f0(r1)                               | lfd f30, 0x1f0(r1)
+0574 DIFF_NONE            psq_l f29, 0x1e8(r1), 0, qr0                     | psq_l f29, 0x1e8(r1), 0, qr0
+0578 DIFF_NONE            lfd f29, 0x1e0(r1)                               | lfd f29, 0x1e0(r1)
+057c DIFF_NONE            psq_l f28, 0x1d8(r1), 0, qr0                     | psq_l f28, 0x1d8(r1), 0, qr0
+0580 DIFF_NONE            lfd f28, 0x1d0(r1)                               | lfd f28, 0x1d0(r1)
+0584 DIFF_NONE            psq_l f27, 0x1c8(r1), 0, qr0                     | psq_l f27, 0x1c8(r1), 0, qr0
+0588 DIFF_NONE            lfd f27, 0x1c0(r1)                               | lfd f27, 0x1c0(r1)
+058c DIFF_NONE            lmw r24, 0x1a0(r1)                               | lmw r24, 0x1a0(r1)
+0590 DIFF_NONE            lwz r0, 0x214(r1)                                | lwz r0, 0x214(r1)
+0594 DIFF_NONE            mtlr r0                                          | mtlr r0
+0598 DIFF_NONE            addi r1, r1, 0x210                               | addi r1, r1, 0x210
+059c DIFF_NONE            blr                                              | blr 

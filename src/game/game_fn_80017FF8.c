@@ -11,8 +11,13 @@ typedef struct {
     s16 z;
 } Vec3s;
 
-typedef struct {
+typedef union {
     u8 bytes[144];
+    double alignment;
+    struct {
+        u8 prefix[40];
+        u8 body[104];
+    } layout;
 } SpawnHeader;
 
 typedef struct {
@@ -43,6 +48,9 @@ MarkerDiagnostics lbl_8023CBC8 = {
     { 0.0f, 0.0f, 0.0f },
     "Could not find marker %u"
 };
+extern const f32 lbl_8064DCF4;
+extern const f32 lbl_8064DE70;
+extern const f32 lbl_8064DE74;
 extern double lbl_8064DE68;
 extern s32 lbl_8064D1BC;
 extern s32 lbl_8064D18C;
@@ -66,9 +74,9 @@ extern s32 fn_8014B8D0(void*, s32);
 extern void* fn_801966E0(void*, int, int);
 extern void fn_8014BA14(void);
 
-/* NonMatching: behavior-complete marker descriptor reconstruction. The
- * canonical candidate is 97.96389%; the frame and conversion lifetime now
- * match, while four bytes and register allocation still differ. */
+/* NonMatching: canonical GC/1.3 is 99.18056% with the retail 1440-byte
+ * instruction count and stack layout. Nonvolatile register allocation and
+ * the compiler-generated conversion-bias relocation still differ. */
 s32 fn_80017FF8(void* script)
 {
     SpawnHeader header;
@@ -100,7 +108,7 @@ s32 fn_80017FF8(void* script)
     }
 
     flags = 0;
-    body = &header.bytes[40];
+    body = header.layout.body;
     kind = (s32)fn_8016A694(script, 2);
     mode = (s32)fn_8016A694(script, 3);
     user_value = (s32)fn_8016A694(script, 4);
@@ -123,9 +131,6 @@ s32 fn_80017FF8(void* script)
     ((u8*)&values.first)[3] = 150;
 
     switch (kind) {
-    case 0:
-        flags = 0x100;
-        break;
     case 1:
         flags = 0x20;
         break;
@@ -137,6 +142,9 @@ s32 fn_80017FF8(void* script)
         break;
     case 4:
         flags = 0x40;
+        break;
+    case 0:
+        flags = 0x100;
         break;
     }
 
@@ -152,13 +160,13 @@ s32 fn_80017FF8(void* script)
     endpoints[1] = *fn_80158ABC(fn_8015C4A4(fn_800F5C54(fn_8016A694(script, 7)), 2), 2, 0);
     direction[0] = (f32)(endpoints[1].x - endpoints[0].x);
     direction[1] = (f32)(endpoints[1].y - endpoints[0].y);
-    direction[2] = 0.0f;
+    direction[2] = lbl_8064DCF4;
     fn_80211AAC(direction, direction);
 
     min_z = (f32)endpoints[0].z;
     max_z = (f32)endpoints[0].z;
-    best_low = 1000000.0f;
-    best_high = -1000000.0f;
+    best_low = lbl_8064DE70;
+    best_high = lbl_8064DE74;
     for (i = 0; i < count; i++) {
         Vec3s* point;
         f32 distance;
@@ -195,9 +203,9 @@ s32 fn_80017FF8(void* script)
 
         fn_801964E8(object, 1, 0);
         fn_801978F8(object, 0);
-        width = (s16)(max_z - min_z);
         endpoints[0].z = (s16)min_z;
         endpoints[1].z = (s16)min_z;
+        width = (s16)(max_z - min_z);
         if (mode != 0) {
             handle = fn_80142A70(2, endpoints, width, lbl_8064D18C, 0,
                                  (s32)fn_8014BA14, (s32)object, user_value);
