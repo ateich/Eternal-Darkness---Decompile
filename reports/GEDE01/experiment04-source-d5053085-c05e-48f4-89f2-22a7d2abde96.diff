@@ -1,0 +1,41 @@
+diff --git a/eternal-darkness-decomp/src/game/game_fn_80124A40.c b/eternal-darkness-decomp/src/game/game_fn_80124A40.c
+index 38f4d1ded..767e2e54d 100644
+--- a/eternal-darkness-decomp/src/game/game_fn_80124A40.c
++++ b/eternal-darkness-decomp/src/game/game_fn_80124A40.c
+@@ -48,7 +48,7 @@ typedef struct Owner {
+     u8 pad182[0x11A];
+     Weight* weights;
+     u8 pad2A0[0x24];
+-    u32 enabled;
++    s32 enabled;
+ } Owner;
+ 
+ typedef struct Vertex {
+@@ -94,22 +94,19 @@ void fn_80124A40(Owner* owner, Table* table, u32* first_output,
+             do {
+                 Weight* weight = (Weight*)((u8*)owner->weights + weight_offset);
+                 u32 delta_index;
+-                u32 delta_count;
++                u32 delta_end;
+ 
+-                if ((weight->flags & 1) != 0 && pair->start != 0xFFFFFFFF) {
++                if ((weight->flags & 1) != 0 && (delta_index = pair->start) != 0xFFFFFFFF) {
++                    delta_end = delta_index + pair->count;
+                     lbl_804FA6D0[entry_index] = 1;
+-                    delta_index = pair->start;
+-                    delta_count = pair->count;
+-                    if (delta_index < (u32)(delta_index + delta_count)) {
+-                        for (; delta_count != 0;
+-                             delta_count--, delta_index++) {
++                    for (; delta_index < delta_end;) {
+                             Delta* delta = &deltas[delta_index];
+                             Vertex* vertex =
+                                 &lbl_804FA740[entry->start + delta->index];
+                             vertex->x += (s32)(weight->value * delta->x);
+                             vertex->y += (s32)(weight->value * delta->y);
+                             vertex->z += (s32)(weight->value * delta->z);
+-                        }
++                            delta_index++;
+                     }
+                 }
+                 weight_offset += sizeof(Weight);

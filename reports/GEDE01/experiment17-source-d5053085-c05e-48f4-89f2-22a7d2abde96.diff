@@ -1,0 +1,95 @@
+diff --git a/eternal-darkness-decomp/src/game/game_fn_80124A40.c b/eternal-darkness-decomp/src/game/game_fn_80124A40.c
+index 38f4d1ded..e818025b0 100644
+--- a/eternal-darkness-decomp/src/game/game_fn_80124A40.c
++++ b/eternal-darkness-decomp/src/game/game_fn_80124A40.c
+@@ -48,7 +48,7 @@ typedef struct Owner {
+     u8 pad182[0x11A];
+     Weight* weights;
+     u8 pad2A0[0x24];
+-    u32 enabled;
++    s32 enabled;
+ } Owner;
+ 
+ typedef struct Vertex {
+@@ -61,55 +61,61 @@ extern Vertex lbl_804FA740[];
+ void fn_80124A40(Owner* owner, Table* table, u32* first_output,
+                  u32* second_output)
+ {
+-    s32 entry_index;
++    Vertex* vertex;
++    u32 entry_index;
++    u32 delta_index;
++    s32 weight_index;
+     s32 count = table->count;
+     Vertex* source_vertices = (Vertex*)table->first_output;
+     Delta* deltas = table->deltas;
++    Weight* weight;
++    Entry* entry;
+ 
+     *first_output = table->first_output;
+     *second_output = table->second_output;
+ 
+-    for (entry_index = 0; entry_index < count; entry_index++) {
++    for (entry_index = 0; (s32)entry_index < count; entry_index++) {
+         lbl_804FA6D0[entry_index] = 0;
+     }
+ 
+-    for (entry_index = 0; entry_index < count; entry_index++) {
+-        Entry* entry = &table->entries[entry_index];
+-        u32 begin = entry->start;
+-        u32 end = begin + entry->count;
+-        Pair* pair = entry->pairs;
+-        s32 weight_index;
+-        s32 weight_offset;
++    for (entry_index = 0; (s32)entry_index < count; entry_index++) {
++        u32 begin;
++        u32 end;
++        Pair* pairs;
++
++        entry = &table->entries[entry_index];
++        begin = entry->start;
++        end = begin + entry->count;
++        pairs = entry->pairs;
+ 
+         if (owner->enabled != 0 &&
+             (*(u16*)((u8*)owner + 0x180 + entry_index * 8) & 1)) {
+             u32 vertex_index;
++            Pair* pair;
++            s32 weight_offset;
+             for (vertex_index = begin; vertex_index < end; vertex_index++) {
+                 lbl_804FA740[vertex_index] =
+                     source_vertices[vertex_index];
+             }
+ 
++            pair = pairs;
+             weight_index = 0;
+             weight_offset = 0;
+             do {
+-                Weight* weight = (Weight*)((u8*)owner->weights + weight_offset);
+-                u32 delta_index;
+-                u32 delta_count;
++                u32 delta_end;
++                weight = (Weight*)((u8*)owner->weights + weight_offset);
+ 
+-                if ((weight->flags & 1) != 0 && pair->start != 0xFFFFFFFF) {
++                if ((weight->flags & 1) != 0 && (delta_index = pair->start) != 0xFFFFFFFF) {
++                    delta_end = delta_index + pair->count;
+                     lbl_804FA6D0[entry_index] = 1;
+-                    delta_index = pair->start;
+-                    delta_count = pair->count;
+-                    if (delta_index < (u32)(delta_index + delta_count)) {
+-                        for (; delta_count != 0;
+-                             delta_count--, delta_index++) {
++                    for (; delta_index < delta_end;) {
+                             Delta* delta = &deltas[delta_index];
+-                            Vertex* vertex =
++                            vertex =
+                                 &lbl_804FA740[entry->start + delta->index];
+                             vertex->x += (s32)(weight->value * delta->x);
+                             vertex->y += (s32)(weight->value * delta->y);
+                             vertex->z += (s32)(weight->value * delta->z);
+-                        }
++                            delta_index++;
+                     }
+                 }
+                 weight_offset += sizeof(Weight);

@@ -1,0 +1,246 @@
+{
+  "assignment_id": "d5053085-c05e-48f4-89f2-22a7d2abde96",
+  "target": "fn_80124A40",
+  "selected_experiment": "experiment21; final formatting and bound-capture comment recompiled and remeasured",
+  "preserved_attempts_studied": [
+    "3fbe969a8e9f0a9d7b029f5f6a714bdc245fb0f9",
+    "8a67069aaafefef4aa0a04a60a70a801c2fdb392",
+    "fce66fb851c404bb5d8ac8cc9d8a60823735925c",
+    "701bad85df637d3068cd60664820ce9478d698f4",
+    "c477c739a25cec4ce3a9f9edbd01025e0b581928"
+  ],
+  "new_hypothesis": "A cached unsigned end computed before the status store, with index increment inside the loop body, lets canonical MWCC retain the retail unsigned overflow guard and produce compact CTR traversal without explicit count bookkeeping. Separate pair-base/pair-iterator lifetimes and copy-index scope improve allocation. No compiler flags, policy, object postprocessing, registration, or splits changed.",
+  "semantics": [
+    "The short-circuit flag test precedes the pair start load. A start of UINT32_MAX still skips the delta traversal and status update.",
+    "The pair count and wrapped u32 end are captured before the status write, matching the retail load/store ordering.",
+    "The loop condition is delta_index < delta_end. If the sum wraps or count is zero the loop executes zero times. In particular start=1,count=0xFFFFFFFF gives end=0 and skips.",
+    "When start < end, iteration increments from start to end-1 without wrapping, executing exactly count iterations. No decrement or extra zero-count guard is needed.",
+    "Owner.enabled changes only signedness of a 32-bit nonzero predicate; all bit patterns preserve truth value. It reproduces retail cmpwi instead of cmplwi.",
+    "The copy loop, 32 weight iterations, pair stride 8, weight stride 40, entry stride 276, and all component arithmetic remain intact."
+  ],
+  "final_measurement": {
+    "canonical_score": 96.098656,
+    "relocation_strict_score": 96.098656,
+    "retail_text_bytes": 892,
+    "generated_text_bytes": 892,
+    "identical_instruction_words": 151,
+    "total_instruction_words": 223,
+    "byte_match": false
+  },
+  "remaining_divergence": [
+    "Register allocation differs starting at 0x00c: retail lhz r27,12(r4), generated lhz r30,12(r4). Examples also include retail source pointer r12 vs generated r10, retail delta base r26 vs generated r29, and retail destination pointer r31 vs generated r24.",
+    "Instruction scheduling swaps li/mulli at actual byte offsets 0x248 and 0x24c, and delta-address add / loop-count subf at 0x260 and 0x264. The complete aligned rows use separate actual address columns.",
+    "All 13 relocation offsets, types, and zero addends align. At 0x250 the generated R_PPC_EMB_SDA21 target is local @65; retail targets lbl_80650108. Other relocation targets agree. No normalization or externalization was added."
+  ],
+  "verification_scope": "Only configure and the assigned object were built. The initial Ninja invocation regenerated retail split objects as a dependency. Canonical and name_address relocation-strict per-function objdiff, raw disassembly, relocation tables, and object text byte comparison were recorded. Full deterministic build, fresh full legal audit, canonical/strict no-regression, and measured retail DOL SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f are mandatory post-review integrator gates and were not run or claimed here.",
+  "scope_note": "Only the target C translation unit and assignment-specific reports are committed. The pre-existing CLAUDE.md modification is excluded. NonMatching registration stays unchanged. No remote push, other agents, model changes, runtime/global progress edits, or shared input modifications.",
+  "experiments": [
+    {
+      "id": "experiment01",
+      "hypothesis_and_result": "Cache unsigned delta_end and use a conventional indexed for loop. This enabled unwanted eight-way delta-loop unrolling.",
+      "canonical_score": 0.0,
+      "retail_size": 892,
+      "generated_size": 2480,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment01-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": null
+    },
+    {
+      "id": "experiment02",
+      "hypothesis_and_result": "Use a guarded do-while against cached delta_end. Compact but retains explicit per-iteration comparison.",
+      "canonical_score": 86.84305,
+      "retail_size": 892,
+      "generated_size": 892,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment02-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": "eternal-darkness-decomp/reports/GEDE01/experiment02-objdiff-strict-d5053085-c05e-48f4-89f2-22a7d2abde96.json"
+    },
+    {
+      "id": "experiment03",
+      "hypothesis_and_result": "Use a for loop with no increment clause, increment index in its body, and capture pair start before the condition. Restores compact CTR traversal.",
+      "canonical_score": 89.86547,
+      "retail_size": 892,
+      "generated_size": 892,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment03-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": "eternal-darkness-decomp/reports/GEDE01/experiment03-objdiff-strict-d5053085-c05e-48f4-89f2-22a7d2abde96.json"
+    },
+    {
+      "id": "experiment04",
+      "hypothesis_and_result": "Capture pair start in the short-circuit condition, compute cached bound before status store, and model enabled as signed to reproduce cmpwi.",
+      "canonical_score": 93.78924,
+      "retail_size": 892,
+      "generated_size": 892,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment04-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": "eternal-darkness-decomp/reports/GEDE01/experiment04-objdiff-strict-d5053085-c05e-48f4-89f2-22a7d2abde96.json"
+    },
+    {
+      "id": "experiment05",
+      "hypothesis_and_result": "Move delta_index, weight_index, weight, entry, and vertex declarations to function scope. Initial C89 declaration-placement compile failure corrected; both raw build outputs retained.",
+      "canonical_score": 93.96861,
+      "retail_size": 892,
+      "generated_size": 888,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment05-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": "eternal-darkness-decomp/reports/GEDE01/experiment05-objdiff-strict-d5053085-c05e-48f4-89f2-22a7d2abde96.json"
+    },
+    {
+      "id": "experiment06",
+      "hypothesis_and_result": "Apply standard C register storage class to function-scope locals. No improvement.",
+      "canonical_score": 93.96861,
+      "retail_size": 892,
+      "generated_size": 888,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment06-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": "eternal-darkness-decomp/reports/GEDE01/experiment06-objdiff-strict-d5053085-c05e-48f4-89f2-22a7d2abde96.json"
+    },
+    {
+      "id": "experiment07",
+      "hypothesis_and_result": "Move outer entry-index increment from for update clause into body. No improvement.",
+      "canonical_score": 93.96861,
+      "retail_size": 892,
+      "generated_size": 888,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment07-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": "eternal-darkness-decomp/reports/GEDE01/experiment07-objdiff-strict-d5053085-c05e-48f4-89f2-22a7d2abde96.json"
+    },
+    {
+      "id": "experiment08",
+      "hypothesis_and_result": "Move outer entry-index initialization before the for loop. No improvement.",
+      "canonical_score": 93.96861,
+      "retail_size": 892,
+      "generated_size": 888,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment08-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": "eternal-darkness-decomp/reports/GEDE01/experiment08-objdiff-strict-d5053085-c05e-48f4-89f2-22a7d2abde96.json"
+    },
+    {
+      "id": "experiment09",
+      "hypothesis_and_result": "Use a distinct clear-loop index. Regresses allocation.",
+      "canonical_score": 91.995514,
+      "retail_size": 892,
+      "generated_size": 888,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment09-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": "eternal-darkness-decomp/reports/GEDE01/experiment09-objdiff-strict-d5053085-c05e-48f4-89f2-22a7d2abde96.json"
+    },
+    {
+      "id": "experiment10",
+      "hypothesis_and_result": "Reuse entry_index for clear loop; move copy index and pair declarations to function scope; spell outer loop while. No improvement over experiment05.",
+      "canonical_score": 93.96861,
+      "retail_size": 892,
+      "generated_size": 888,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment10-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": "eternal-darkness-decomp/reports/GEDE01/experiment10-objdiff-strict-d5053085-c05e-48f4-89f2-22a7d2abde96.json"
+    },
+    {
+      "id": "experiment11",
+      "hypothesis_and_result": "Reuse the explicit destination vertex pointer in the copy loop. Regresses score.",
+      "canonical_score": 91.86547,
+      "retail_size": 892,
+      "generated_size": 892,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment11-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": "eternal-darkness-decomp/reports/GEDE01/experiment11-objdiff-strict-d5053085-c05e-48f4-89f2-22a7d2abde96.json"
+    },
+    {
+      "id": "experiment12",
+      "hypothesis_and_result": "Initialize a distinct outer entry_index at function entry. Adds early initialization and regresses.",
+      "canonical_score": 91.726456,
+      "retail_size": 892,
+      "generated_size": 888,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment12-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": "eternal-darkness-decomp/reports/GEDE01/experiment12-objdiff-strict-d5053085-c05e-48f4-89f2-22a7d2abde96.json"
+    },
+    {
+      "id": "experiment13",
+      "hypothesis_and_result": "From experiment04, explicitly maintain the entry byte offset independently of entry_index. Regresses.",
+      "canonical_score": 91.81615,
+      "retail_size": 892,
+      "generated_size": 892,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment13-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": "eternal-darkness-decomp/reports/GEDE01/experiment13-objdiff-strict-d5053085-c05e-48f4-89f2-22a7d2abde96.json"
+    },
+    {
+      "id": "experiment14",
+      "hypothesis_and_result": "From experiment05, spell outer loop as goto/check control flow. Identical score to experiment05.",
+      "canonical_score": 93.96861,
+      "retail_size": 892,
+      "generated_size": 888,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment14-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": "eternal-darkness-decomp/reports/GEDE01/experiment14-objdiff-strict-d5053085-c05e-48f4-89f2-22a7d2abde96.json"
+    },
+    {
+      "id": "experiment15",
+      "hypothesis_and_result": "From experiment05, split entry pair-array base and advancing pair pointer, placing pointer and weight offset in enabled block. Improves to 95.35874.",
+      "canonical_score": 95.35874,
+      "retail_size": 892,
+      "generated_size": 896,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment15-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": "eternal-darkness-decomp/reports/GEDE01/experiment15-objdiff-strict-d5053085-c05e-48f4-89f2-22a7d2abde96.json"
+    },
+    {
+      "id": "experiment16",
+      "hypothesis_and_result": "Guarded outer do-while. Regresses.",
+      "canonical_score": 91.76233,
+      "retail_size": 892,
+      "generated_size": 900,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment16-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": "eternal-darkness-decomp/reports/GEDE01/experiment16-objdiff-strict-d5053085-c05e-48f4-89f2-22a7d2abde96.json"
+    },
+    {
+      "id": "experiment17",
+      "hypothesis_and_result": "From experiment15, unsigned entry index with signed comparison cast. No improvement.",
+      "canonical_score": 95.35874,
+      "retail_size": 892,
+      "generated_size": 896,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment17-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": "eternal-darkness-decomp/reports/GEDE01/experiment17-objdiff-strict-d5053085-c05e-48f4-89f2-22a7d2abde96.json"
+    },
+    {
+      "id": "experiment18",
+      "hypothesis_and_result": "From experiment15, use s16 pointer indexing for destination components. No improvement.",
+      "canonical_score": 95.35874,
+      "retail_size": 892,
+      "generated_size": 896,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment18-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": "eternal-darkness-decomp/reports/GEDE01/experiment18-objdiff-strict-d5053085-c05e-48f4-89f2-22a7d2abde96.json"
+    },
+    {
+      "id": "experiment19",
+      "hypothesis_and_result": "From experiment15, keep destination Vertex pointer local to delta-loop body. Improves to 95.6278.",
+      "canonical_score": 95.6278,
+      "retail_size": 892,
+      "generated_size": 896,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment19-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": "eternal-darkness-decomp/reports/GEDE01/experiment19-objdiff-strict-d5053085-c05e-48f4-89f2-22a7d2abde96.json"
+    },
+    {
+      "id": "experiment20",
+      "hypothesis_and_result": "Use one copy index instead of begin plus index, omitting copy-loop initializer. Produces shorter, mismatched copy traversal.",
+      "canonical_score": 83.901344,
+      "retail_size": 892,
+      "generated_size": 836,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment20-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": "eternal-darkness-decomp/reports/GEDE01/experiment20-objdiff-strict-d5053085-c05e-48f4-89f2-22a7d2abde96.json"
+    },
+    {
+      "id": "experiment21",
+      "hypothesis_and_result": "From experiment19, move copy vertex_index declaration to function scope. Best 96.098656 with 892-byte text.",
+      "canonical_score": 96.098656,
+      "retail_size": 892,
+      "generated_size": 892,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment21-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": "eternal-darkness-decomp/reports/GEDE01/experiment21-objdiff-strict-d5053085-c05e-48f4-89f2-22a7d2abde96.json"
+    },
+    {
+      "id": "experiment22",
+      "hypothesis_and_result": "Split count capture and bound calculation around status store. Same score as experiment21; unnecessary extra local rejected.",
+      "canonical_score": 96.098656,
+      "retail_size": 892,
+      "generated_size": 892,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment22-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": "eternal-darkness-decomp/reports/GEDE01/experiment22-objdiff-strict-d5053085-c05e-48f4-89f2-22a7d2abde96.json"
+    },
+    {
+      "id": "experiment23",
+      "hypothesis_and_result": "Use a for loop for weight byte offset with separately incremented weight index. Slight regression; rejected.",
+      "canonical_score": 96.08968,
+      "retail_size": 892,
+      "generated_size": 892,
+      "canonical_report": "eternal-darkness-decomp/reports/GEDE01/experiment23-objdiff-d5053085-c05e-48f4-89f2-22a7d2abde96.json",
+      "strict_report": "eternal-darkness-decomp/reports/GEDE01/experiment23-objdiff-strict-d5053085-c05e-48f4-89f2-22a7d2abde96.json"
+    }
+  ]
+}
