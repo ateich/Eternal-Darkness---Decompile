@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "assignment_id": "1357f9a1-a983-4940-b6ca-7bdb3852c902",
+  "attempt": 2,
+  "base_commit": "4d4973c042340d4411237d1de881b9937aab5cfe",
+  "target": "fn_8012F474",
+  "source": {
+    "path": "src/game/game_fn_8012F474.c",
+    "sha256": "e0dc957ea446aa65a33156e98d09736b3669df45e0275f43d984ec6b63a16546",
+    "disposition": "The accepted base already contains the independently reviewed honest-C NonMatching reconstruction from preserved commit 2c39284a7d7c70c19792d41119b25a89f2495cb5; attempt 2 retained it unchanged."
+  },
+  "commands": {
+    "configure": "python3 configure.py",
+    "assigned_object_build": ".tools/bin/ninja build/GEDE01/src/game/game_fn_8012F474.o",
+    "canonical": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8012F474 fn_8012F474 -o reports/GEDE01/objdiff-1357f9a1-a983-4940-b6ca-7bdb3852c902.json --format json-pretty",
+    "relocation_strict": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8012F474 fn_8012F474 -o reports/GEDE01/objdiff-reloc-strict-1357f9a1-a983-4940-b6ca-7bdb3852c902.json --format json-pretty -c function_reloc_diffs=name_address",
+    "instruction_diff": "python3 tools/fndiff.py game/game_fn_8012F474.c fn_8012F474",
+    "relocations": "readelf -rW build/GEDE01/obj/game/game_fn_8012F474.o; readelf -rW build/GEDE01/src/game/game_fn_8012F474.o"
+  },
+  "measurement": {
+    "canonical_match_percent": 77.62857,
+    "relocation_strict_match_percent": 77.62857,
+    "retail_text_bytes": 280,
+    "generated_text_bytes": 264,
+    "retail_object_sha256": "a94c5ab2f3a927a1ee147e4678b26b7e490913560e93fe4a4ce7ed739bcf9854",
+    "generated_object_sha256": "d720b23056d9caad705d22b57337e53412b831e4a1d51c46ea428f804478cbd3",
+    "canonical_and_strict_reports_byte_identical": true,
+    "retail_relocation_count": 7,
+    "generated_relocation_count": 9
+  },
+  "divergence": "GC/1.3 emits a 0xB0 frame with _savegpr_26/_restgpr_26 REL24 relocations instead of retail's 0xD0 frame and inline stmw/lmw. It lowers the QueryResult Vec3 aggregate copies into fewer loads/stores, producing 264 rather than 280 bytes and shifting all seven intended call relocations.",
+  "scope": "No source, configure.py, or splits.txt edit was necessary because the base already contains this function as its own NonMatching translation unit at the exact 0x8012F474..0x8012F58C split. No full build, legal audit, or retail DOL identity claim is made; those remain integrator gates."
+}
