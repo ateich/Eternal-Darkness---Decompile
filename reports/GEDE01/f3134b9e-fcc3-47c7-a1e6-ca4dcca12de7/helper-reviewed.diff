@@ -1,0 +1,69 @@
+commit c0bfc23c7fbd0b87100d357e2f56f6542c5c89aa
+Author:     psdwizzard <k.loebenberg@gmail.com>
+AuthorDate: Sat Oct 3 15:02:19 2026 -0400
+Commit:     psdwizzard <k.loebenberg@gmail.com>
+CommitDate: Sat Oct 3 15:02:19 2026 -0400
+
+    Guard exact ELF section removal references
+
+diff --git a/eternal-darkness-decomp/tools/externalize_elf_symbol.py b/eternal-darkness-decomp/tools/externalize_elf_symbol.py
+index ce5a669f0..442ae1db8 100644
+--- a/eternal-darkness-decomp/tools/externalize_elf_symbol.py
++++ b/eternal-darkness-decomp/tools/externalize_elf_symbol.py
+@@ -137,10 +137,14 @@ def guarded_metadata():
+     return sections, entries, names
+ 
+ 
+-guarded_sections, guarded_entries, guarded_names = guarded_metadata() if reject_section_relocations else (None, None, None)
++guarded_sections, guarded_entries, guarded_names = (
++    guarded_metadata()
++    if reject_section_relocations or required_section_name is not None
++    else (None, None, None)
++)
+ 
+ 
+-def validate_pool_owners(pool):
++def validate_pool_owners(pool, allow_outgoing_relocations=False):
+     section = guarded_sections[pool]
+     if section[1] != 1 or not section[5]:
+         raise SystemExit(f"{path}: constant pool must be nonempty PROGBITS")
+@@ -158,7 +162,7 @@ def validate_pool_owners(pool):
+     for relocation in guarded_sections:
+         if relocation[1] not in (4, 9):
+             continue
+-        if relocation[7] == pool:
++        if relocation[7] == pool and not allow_outgoing_relocations:
+             raise SystemExit(f"{path}: outgoing relocation section targets removed pool")
+         for offset in range(relocation[4], relocation[4] + relocation[5], relocation[9]):
+             index = struct.unpack_from(">I", data, offset + 4)[0] >> 8
+@@ -273,15 +277,21 @@ for section_index in range(section_count):
+                 # Constant-removal guards must not use the legacy relocation
+                 # bypass. Pointer pools opt in explicitly to resolved retail
+                 # comparison with --require-relocation-match.
+-                if reject_section_relocations:
+-                    validate_pool_owners(symbol_section)
+-                    for relocation_section in range(section_count):
+-                        relocation_header = section_offset + relocation_section * section_size
+-                        kind = struct.unpack_from(">I", data, relocation_header + 4)[0]
+-                        owner = struct.unpack_from(">I", data, relocation_header + 0x1C)[0]
+-                        relocation_bytes = struct.unpack_from(">I", data, relocation_header + 0x14)[0]
+-                        if kind in (4, 9) and owner == symbol_section and relocation_bytes:
+-                            raise SystemExit(f"{path}: refusing constant-section removal with outgoing relocations")
++                if reject_section_relocations or required_section_name is not None:
++                    # Named section removal must validate every symbol owner and
++                    # every incoming reference, including references to the ELF
++                    # section anchor.  Outgoing relocations are safe only when
++                    # the one target owns the whole section and every relocation
++                    # is resolved for exact retail comparison below.
++                    validate_pool_owners(
++                        symbol_section,
++                        allow_outgoing_relocations=(
++                            required_section_name is not None
++                            and require_whole_section
++                            and require_relocation_match
++                            and not reject_section_relocations
++                        ),
++                    )
+                 if require_whole_section and (
+                     symbol_value != 0 or symbol_size != value_section_size
+                 ):

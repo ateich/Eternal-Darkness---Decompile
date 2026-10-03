@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "purpose": "isolated prerequisite review for exact ELF section-removal reference/owner guard",
+  "failed_integration": "ed8b6d47-dd1f-4d0a-8016-24ad1328024e",
+  "accepted_base": "552f0f70947d3511ad05bb9ce8dc5e62922df7c2",
+  "source_baseline_commit": "552f0f70947d3511ad05bb9ce8dc5e62922df7c2",
+  "patch_commit": "c0bfc23c7fbd0b87100d357e2f56f6542c5c89aa",
+  "changed_product_paths": [
+    "eternal-darkness-decomp/tools/externalize_elf_symbol.py"
+  ],
+  "base_helper_sha256": "d71ccf988880b4a526edb8123dadeac2f9c99945defedf87b00f6aeb583c1c4a",
+  "patched_helper_sha256": "9f731c20ec63c092f79f634c4856e963b934e33339db82ad2ce0048ac8a21c75",
+  "patch_sha256": "dcb2b0d6929425451a0a69fb9b604db8f26d13e928a3b73fae8ab0ebad0cc8f2",
+  "test_harness_sha256": "e48a89d77acfe1763cb6efe7c249aba2c09957e18c96772ffef4489c3bf0deb6",
+  "behavior": [
+    "Run guarded ELF metadata parsing for every exact --require-section invocation, including pointer sections that do not reject all outgoing relocations.",
+    "Validate every symbol owner in the removed section and every incoming relocation; an incoming reference to the unnamed SECTION anchor or any alternate owner is rejected before mutation.",
+    "Permit outgoing relocations only when --require-whole-section and --require-relocation-match jointly cover the one complete target, and never when --reject-section-relocations is present.",
+    "Keep legacy exact-section follow-up calls valid; they now validate the owners and incoming references remaining at that point in the serialized mapping command."
+  ],
+  "reviewer_reproduction": {
+    "fixture": "synthetic .text R_PPC_ADDR32 to the .data SECTION anchor",
+    "base_result": "exit 0 and object mutated",
+    "patched_result": "nonzero, incoming relocation references an unapproved pool symbol, object byte-identical to input"
+  },
+  "tests": {
+    "private_harness_cases": 12,
+    "private_harness_result": "pass",
+    "existing_decomp_constant_pool_fixture": "pass: constant-pool relocation guards passed",
+    "fresh_isolated_80033180_two_call_pipeline": "pass",
+    "full_build": "not run; reserved for post-Astra integration gate"
+  },
+  "accepted_config_inventory": {
+    "commit": "552f0f70947d3511ad05bb9ce8dc5e62922df7c2",
+    "externalize_elf_symbol_require_section_calls": 29,
+    "existing_reject_section_relocations_calls": 28,
+    "legacy_followup_calls_without_reject": 1,
+    "assessment": "The 28 reject calls retain the same guarded parser, owner/reference validation, and no-outgoing behavior; the removed second outgoing scan was unreachable on outgoing input after validate_pool_owners and a no-op otherwise. The sole non-reject call is the second fn_80033180 chained call and passed from a freshly compiled raw object after its first complete-section guarded call."
+  },
+  "real_object_compatibility": [
+    {
+      "case": "real fn_8006D548 jump table",
+      "after": "accepted",
+      "input_sha256": "b09a265d53d8e66ab34ab7f2547bf83c8175c496763603e72c581c67dca3c7c0",
+      "output_sha256": "193de329ce0cdeaa1122bd30b36b37c11d14b3efb4c138dee1b41506cfda555d",
+      "command": [
+        "/usr/bin/python3",
+        "/home/rabbit/backups/decomp-backlog-parser-20261002/pr34-intake-20261003/helper-prerequisite-ed8b6d47/worktree/eternal-darkness-decomp/tools/externalize_elf_symbol.py",
+        "/tmp/tmpahdk7hvx/game_fn_8006D548.o",
+        "@142",
+        "jumptable_802441E0",
+        "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/orig/GEDE01/sys/main.dol",
+        "--require-relocation-match",
+        "--require-whole-section",
+        "--require-section=.data"
+      ]
+    },
+    {
+      "case": "real accepted 8007B2F4 constant pool",
+      "after": "accepted",
+      "input_sha256": "1db705880f49d871b53b0f0e70c3c3a00e1be4be50210342a7a78aed65f96475",
+      "pre_objcopy_output_sha256": "bac12663f3f8ea4ed27ed43012ba383084d016fb4d55d33286d8b123e164c108",
+      "commands": [
+        [
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/build/binutils/powerpc-eabi-objcopy",
+          "--add-symbol=lbl_8064E97C=.sdata2:4,global,object",
+          "/tmp/tmp0nb9m3zj/game_fn_8007B2F4.o"
+        ],
+        [
+          "/usr/bin/python3",
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/tools/retarget_elf_relocation.py",
+          "/tmp/tmp0nb9m3zj/game_fn_8007B2F4.o",
+          "@4",
+          "4",
+          "lbl_8064E978",
+          "lbl_8064E97C",
+          "2",
+          "R_PPC_EMB_SDA21",
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/orig/GEDE01/sys/main.dol"
+        ],
+        [
+          "/usr/bin/python3",
+          "/home/rabbit/backups/decomp-backlog-parser-20261002/pr34-intake-20261003/helper-prerequisite-ed8b6d47/worktree/eternal-darkness-decomp/tools/externalize_elf_symbol.py",
+          "/tmp/tmp0nb9m3zj/game_fn_8007B2F4.o",
+          "@4",
+          "lbl_8064E978",
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/orig/GEDE01/sys/main.dol",
+          "--require-whole-section",
+          "--require-section=.sdata2",
+          "--reject-section-relocations"
+        ]
+      ]
+    },
+    {
+      "case": "real accepted 8007B540 constant pool",
+      "after": "accepted",
+      "input_sha256": "3536a5ff9da3b1dc2c12eebdff1b14f41bf893b530fedabfab9fae6130cbd0ba",
+      "pre_objcopy_output_sha256": "faf855215c0ea4c513ab50633b6682a4acaf16d72c834bbbcb1dc8c6b92b3ebc",
+      "commands": [
+        [
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/build/binutils/powerpc-eabi-objcopy",
+          "--add-symbol=lbl_8064E994=.sdata2:4,global,object",
+          "/tmp/tmpvc2vwl11/game_fn_8007B540.o"
+        ],
+        [
+          "/usr/bin/python3",
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/tools/retarget_elf_relocation.py",
+          "/tmp/tmpvc2vwl11/game_fn_8007B540.o",
+          "@4",
+          "4",
+          "lbl_8064E990",
+          "lbl_8064E994",
+          "2",
+          "R_PPC_EMB_SDA21",
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/orig/GEDE01/sys/main.dol"
+        ],
+        [
+          "/usr/bin/python3",
+          "/home/rabbit/backups/decomp-backlog-parser-20261002/pr34-intake-20261003/helper-prerequisite-ed8b6d47/worktree/eternal-darkness-decomp/tools/externalize_elf_symbol.py",
+          "/tmp/tmpvc2vwl11/game_fn_8007B540.o",
+          "@4",
+          "lbl_8064E990",
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/orig/GEDE01/sys/main.dol",
+          "--require-whole-section",
+          "--require-section=.sdata2",
+          "--reject-section-relocations"
+        ]
+      ]
+    },
+    {
+      "case": "real accepted 8007B640 constant pool",
+      "after": "accepted",
+      "input_sha256": "02d79cde964db79c3d15959d4a3cae7df8207e5489b88c1ea6cc9041ea08a71c",
+      "pre_objcopy_output_sha256": "b00d10fb51605560b62a632bed783542debbee631d21b0a4e0a37d3c754523c6",
+      "commands": [
+        [
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/build/binutils/powerpc-eabi-objcopy",
+          "--add-symbol=lbl_8064E9A0=.sdata2:4,global,object",
+          "/tmp/tmpnm0e8m9u/game_fn_8007B640.o"
+        ],
+        [
+          "/usr/bin/python3",
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/tools/retarget_elf_relocation.py",
+          "/tmp/tmpnm0e8m9u/game_fn_8007B640.o",
+          "@4",
+          "4",
+          "lbl_8064E99C",
+          "lbl_8064E9A0",
+          "2",
+          "R_PPC_EMB_SDA21",
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/orig/GEDE01/sys/main.dol"
+        ],
+        [
+          "/usr/bin/python3",
+          "/home/rabbit/backups/decomp-backlog-parser-20261002/pr34-intake-20261003/helper-prerequisite-ed8b6d47/worktree/eternal-darkness-decomp/tools/externalize_elf_symbol.py",
+          "/tmp/tmpnm0e8m9u/game_fn_8007B640.o",
+          "@4",
+          "lbl_8064E99C",
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/orig/GEDE01/sys/main.dol",
+          "--require-whole-section",
+          "--require-section=.sdata2",
+          "--reject-section-relocations"
+        ]
+      ]
+    }
+  ],
+  "evidence_paths": [
+    "/home/rabbit/backups/decomp-backlog-parser-20261002/pr34-intake-20261003/helper-prerequisite-ed8b6d47/helper-c0bfc23c7.diff",
+    "/home/rabbit/backups/decomp-backlog-parser-20261002/pr34-intake-20261003/helper-prerequisite-ed8b6d47/synthetic-and-real-compatibility-proof.json",
+    "/home/rabbit/backups/decomp-backlog-parser-20261002/pr34-intake-20261003/helper-prerequisite-ed8b6d47/accepted-552-exact-section-inventory.json",
+    "/home/rabbit/backups/decomp-backlog-parser-20261002/pr34-intake-20261003/helper-prerequisite-ed8b6d47/compile-80033180/raw-readelf.txt",
+    "/home/rabbit/backups/decomp-backlog-parser-20261002/pr34-intake-20261003/helper-prerequisite-ed8b6d47/compile-80033180/after-two-calls-readelf.txt",
+    "/home/rabbit/backups/decomp-backlog-parser-20261002/pr34-intake-20261003/helper-prerequisite-ed8b6d47/compile-80033180/SHA256SUMS",
+    "/home/rabbit/backups/decomp-backlog-parser-20261002/pr34-intake-20261003/helper-prerequisite-ed8b6d47/existing-fixture-output.txt"
+  ],
+  "scope_limits": [
+    "No live checkout, PR34 candidate, B640 candidate, database, queue, runtime, or public remote was mutated.",
+    "No product source/compiler/configuration change is included.",
+    "Broad mapping compatibility still requires the normal full-build gate after Astra approves the helper patch."
+  ]
+}

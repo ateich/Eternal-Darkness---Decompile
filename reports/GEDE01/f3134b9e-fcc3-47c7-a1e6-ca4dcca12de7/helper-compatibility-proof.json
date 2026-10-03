@@ -1,0 +1,169 @@
+{
+  "base_helper_sha256": "d71ccf988880b4a526edb8123dadeac2f9c99945defedf87b00f6aeb583c1c4a",
+  "patched_helper_sha256": "9f731c20ec63c092f79f634c4856e963b934e33339db82ad2ce0048ac8a21c75",
+  "cases": [
+    {
+      "case": "incoming section-anchor reproduction",
+      "before": "accepted",
+      "after": "rejected",
+      "stderr": "/tmp/tmp6ulbl2rj/fixture.o: incoming relocation references an unapproved pool symbol"
+    },
+    {
+      "case": "alternate owner/reference",
+      "after": "rejected",
+      "stderr": "/tmp/tmpxi15yy97/fixture.o: removed section has an unapproved symbol owner"
+    },
+    {
+      "case": "unreferenced alternate owner",
+      "after": "rejected",
+      "stderr": "/tmp/tmpvsyrn8r2/fixture.o: removed section has an unapproved symbol owner"
+    },
+    {
+      "case": "whole relocation-aware pointer section",
+      "after": "accepted"
+    },
+    {
+      "case": "outgoing relocation without exact relocation comparison",
+      "after": "rejected",
+      "stderr": "/tmp/tmp3c77yqi3/fixture.o: outgoing relocation section targets removed pool"
+    },
+    {
+      "case": "existing no-outgoing constant-section policy",
+      "after": "accepted"
+    },
+    {
+      "case": "constant-section outgoing relocation",
+      "after": "rejected",
+      "stderr": "/tmp/tmpki3h210d/fixture.o: outgoing relocation section targets removed pool"
+    },
+    {
+      "case": "legacy exact-section chained follow-up",
+      "after": "accepted with owner/reference validation"
+    },
+    {
+      "case": "real fn_8006D548 jump table",
+      "after": "accepted",
+      "input_sha256": "b09a265d53d8e66ab34ab7f2547bf83c8175c496763603e72c581c67dca3c7c0",
+      "output_sha256": "193de329ce0cdeaa1122bd30b36b37c11d14b3efb4c138dee1b41506cfda555d",
+      "command": [
+        "/usr/bin/python3",
+        "/home/rabbit/backups/decomp-backlog-parser-20261002/pr34-intake-20261003/helper-prerequisite-ed8b6d47/worktree/eternal-darkness-decomp/tools/externalize_elf_symbol.py",
+        "/tmp/tmpahdk7hvx/game_fn_8006D548.o",
+        "@142",
+        "jumptable_802441E0",
+        "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/orig/GEDE01/sys/main.dol",
+        "--require-relocation-match",
+        "--require-whole-section",
+        "--require-section=.data"
+      ]
+    },
+    {
+      "case": "real accepted 8007B2F4 constant pool",
+      "after": "accepted",
+      "input_sha256": "1db705880f49d871b53b0f0e70c3c3a00e1be4be50210342a7a78aed65f96475",
+      "pre_objcopy_output_sha256": "bac12663f3f8ea4ed27ed43012ba383084d016fb4d55d33286d8b123e164c108",
+      "commands": [
+        [
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/build/binutils/powerpc-eabi-objcopy",
+          "--add-symbol=lbl_8064E97C=.sdata2:4,global,object",
+          "/tmp/tmp0nb9m3zj/game_fn_8007B2F4.o"
+        ],
+        [
+          "/usr/bin/python3",
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/tools/retarget_elf_relocation.py",
+          "/tmp/tmp0nb9m3zj/game_fn_8007B2F4.o",
+          "@4",
+          "4",
+          "lbl_8064E978",
+          "lbl_8064E97C",
+          "2",
+          "R_PPC_EMB_SDA21",
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/orig/GEDE01/sys/main.dol"
+        ],
+        [
+          "/usr/bin/python3",
+          "/home/rabbit/backups/decomp-backlog-parser-20261002/pr34-intake-20261003/helper-prerequisite-ed8b6d47/worktree/eternal-darkness-decomp/tools/externalize_elf_symbol.py",
+          "/tmp/tmp0nb9m3zj/game_fn_8007B2F4.o",
+          "@4",
+          "lbl_8064E978",
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/orig/GEDE01/sys/main.dol",
+          "--require-whole-section",
+          "--require-section=.sdata2",
+          "--reject-section-relocations"
+        ]
+      ]
+    },
+    {
+      "case": "real accepted 8007B540 constant pool",
+      "after": "accepted",
+      "input_sha256": "3536a5ff9da3b1dc2c12eebdff1b14f41bf893b530fedabfab9fae6130cbd0ba",
+      "pre_objcopy_output_sha256": "faf855215c0ea4c513ab50633b6682a4acaf16d72c834bbbcb1dc8c6b92b3ebc",
+      "commands": [
+        [
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/build/binutils/powerpc-eabi-objcopy",
+          "--add-symbol=lbl_8064E994=.sdata2:4,global,object",
+          "/tmp/tmpvc2vwl11/game_fn_8007B540.o"
+        ],
+        [
+          "/usr/bin/python3",
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/tools/retarget_elf_relocation.py",
+          "/tmp/tmpvc2vwl11/game_fn_8007B540.o",
+          "@4",
+          "4",
+          "lbl_8064E990",
+          "lbl_8064E994",
+          "2",
+          "R_PPC_EMB_SDA21",
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/orig/GEDE01/sys/main.dol"
+        ],
+        [
+          "/usr/bin/python3",
+          "/home/rabbit/backups/decomp-backlog-parser-20261002/pr34-intake-20261003/helper-prerequisite-ed8b6d47/worktree/eternal-darkness-decomp/tools/externalize_elf_symbol.py",
+          "/tmp/tmpvc2vwl11/game_fn_8007B540.o",
+          "@4",
+          "lbl_8064E990",
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/orig/GEDE01/sys/main.dol",
+          "--require-whole-section",
+          "--require-section=.sdata2",
+          "--reject-section-relocations"
+        ]
+      ]
+    },
+    {
+      "case": "real accepted 8007B640 constant pool",
+      "after": "accepted",
+      "input_sha256": "02d79cde964db79c3d15959d4a3cae7df8207e5489b88c1ea6cc9041ea08a71c",
+      "pre_objcopy_output_sha256": "b00d10fb51605560b62a632bed783542debbee631d21b0a4e0a37d3c754523c6",
+      "commands": [
+        [
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/build/binutils/powerpc-eabi-objcopy",
+          "--add-symbol=lbl_8064E9A0=.sdata2:4,global,object",
+          "/tmp/tmpnm0e8m9u/game_fn_8007B640.o"
+        ],
+        [
+          "/usr/bin/python3",
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/tools/retarget_elf_relocation.py",
+          "/tmp/tmpnm0e8m9u/game_fn_8007B640.o",
+          "@4",
+          "4",
+          "lbl_8064E99C",
+          "lbl_8064E9A0",
+          "2",
+          "R_PPC_EMB_SDA21",
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/orig/GEDE01/sys/main.dol"
+        ],
+        [
+          "/usr/bin/python3",
+          "/home/rabbit/backups/decomp-backlog-parser-20261002/pr34-intake-20261003/helper-prerequisite-ed8b6d47/worktree/eternal-darkness-decomp/tools/externalize_elf_symbol.py",
+          "/tmp/tmpnm0e8m9u/game_fn_8007B640.o",
+          "@4",
+          "lbl_8064E99C",
+          "/home/rabbit/src/darkfoundry-new/.darkfoundry/durable/integrations/ed8b6d47-dd1f-4d0a-8016-24ad1328024e-02b85bed-a356-4063-a9d2-389bc9aeb9ec/eternal-darkness-decomp/orig/GEDE01/sys/main.dol",
+          "--require-whole-section",
+          "--require-section=.sdata2",
+          "--reject-section-relocations"
+        ]
+      ]
+    }
+  ]
+}

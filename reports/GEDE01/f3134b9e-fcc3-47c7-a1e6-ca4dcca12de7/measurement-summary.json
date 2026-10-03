@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "assignment_id": "f3134b9e-fcc3-47c7-a1e6-ca4dcca12de7",
+  "target": "fn_8007B640",
+  "base_commit": "552f0f70947d3511ad05bb9ce8dc5e62922df7c2",
+  "status": "matched",
+  "source_sha256": "51ee71e315d4a315f8f7e78344729470197433273aa7079b7aa138345bfaa142",
+  "raw": {
+    "sha256": "02d79cde964db79c3d15959d4a3cae7df8207e5489b88c1ea6cc9041ea08a71c",
+    "section": ".sdata2",
+    "size": 6,
+    "owner": "@4",
+    "owner_offset": 0,
+    "owner_size": 6,
+    "bytes": "000000000001",
+    "outgoing_section_relocations": 0,
+    "incoming_total": 2,
+    "incoming_section_anchor": 0,
+    "incoming_alternate_owner": 0,
+    "incoming_at_addend4_sda21": 1,
+    "retail_bytes_exact": true
+  },
+  "mapping": {
+    "local_base": "@4",
+    "retail_base": "lbl_8064E99C",
+    "retarget": {
+      "from_addend": 4,
+      "to_symbol": "lbl_8064E9A0",
+      "to_addend": 0,
+      "size": 2,
+      "type": "R_PPC_EMB_SDA21"
+    },
+    "guards": [
+      "retail DOL address equality",
+      "--require-whole-section",
+      "--require-section=.sdata2",
+      "--reject-section-relocations"
+    ]
+  },
+  "result": {
+    "text_bytes": 488,
+    "text_sha256": "ad7f4d86cff40bfcfa73bbf9b74f4ee4452ed974559308eb17ecc7ed8a8b0f72",
+    "normalized_relocations": 26,
+    "relocations_exact": true,
+    "canonical_percent": 100.0,
+    "strict_percent": 100.0,
+    "post_sdata2_absent": true
+  },
+  "scope": {
+    "source_changed": false,
+    "compiler_changed": false,
+    "helpers_changed": true,
+    "splits_changed": false,
+    "assembly_changed": false,
+    "configuration": "only externalize_game_8007B640_constants command",
+    "helper_change": "exact reviewed externalize_elf_symbol.py blob only"
+  },
+  "helper_gap_audit": "All raw .sdata2 incoming references are direct @4 owner references; no section-anchor or alternate-owner relocation is present. Shared helper repair is therefore not required by this candidate.",
+  "full_build": "deferred to serialized integration; no intake authorized",
+  "helper": {
+    "path": "eternal-darkness-decomp/tools/externalize_elf_symbol.py",
+    "before_sha256": "d71ccf988880b4a526edb8123dadeac2f9c99945defedf87b00f6aeb583c1c4a",
+    "after_sha256": "9f731c20ec63c092f79f634c4856e963b934e33339db82ad2ce0048ac8a21c75",
+    "source_commit": "c0bfc23c7fbd0b87100d357e2f56f6542c5c89aa",
+    "reviewed_tests": 12
+  },
+  "successor_remeasurement": {
+    "raw_hash_retained": true,
+    "post_hash_retained": true,
+    "canonical_strict_retained": true
+  }
+}

@@ -2971,7 +2971,14 @@ config.custom_build_rules = [
     {
         "name": "externalize_game_8007B640_constants",
         "command": (
-            "python3 tools/externalize_elf_symbol.py $in @4 && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--add-symbol=lbl_8064E9A0=.sdata2:4,global,object $in && "
+            "python3 tools/retarget_elf_relocation.py $in @4 4 "
+            "lbl_8064E99C lbl_8064E9A0 2 R_PPC_EMB_SDA21 "
+            "orig/GEDE01/sys/main.dol && "
+            "python3 tools/externalize_elf_symbol.py $in @4 lbl_8064E99C "
+            "orig/GEDE01/sys/main.dol --require-whole-section "
+            "--require-section=.sdata2 --reject-section-relocations && "
             "build/binutils/powerpc-eabi-objcopy "
             "--redefine-sym=@4=lbl_8064E99C --remove-section=.sdata2 $in "
             "&& touch $out"
