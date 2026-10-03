@@ -1,0 +1,4 @@
+$ .tools/bin/ninja build/GEDE01/src/game/game_fn_801F2370.externalized -v
+[1/1] python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_801F2370.o @99 lbl_80651348 orig/GEDE01/sys/main.dol --require-section-symbols=@99,@100,@102,@108 && python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_801F2370.o @100 lbl_8065134C orig/GEDE01/sys/main.dol && python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_801F2370.o @102 lbl_80651360 orig/GEDE01/sys/main.dol && python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_801F2370.o @108 lbl_80651350 orig/GEDE01/sys/main.dol && build/binutils/powerpc-eabi-objcopy --redefine-sym=@99=lbl_80651348 --redefine-sym=@100=lbl_8065134C --redefine-sym=@102=lbl_80651360 --redefine-sym=@108=lbl_80651350 --remove-section=.sdata2 --rename-section=.comment=.ignored build/GEDE01/src/game/game_fn_801F2370.o && touch build/GEDE01/src/game/game_fn_801F2370.externalized
+
+exit_code: 0

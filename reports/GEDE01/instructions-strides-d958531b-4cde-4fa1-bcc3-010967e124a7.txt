@@ -1,0 +1,538 @@
+target 2004 bytes  base 1976 bytes  match 79.1018
+  0x0000  stwu r1, -0x190(r1)                                  | stwu r1, -0x190(r1)
+  0x0004  mflr r0                                              | mflr r0
+* 0x0008  lis r8, 0x4330                                       | 
+* 0x000c  lfd f5, lbl_80651360@sda21 [None+0 t109]             | lfd f7, @125@sda21 [None+0 t109]
+  0x0010  stw r0, 0x194(r1)                                    | stw r0, 0x194(r1)
+  0x0014  stmw r20, 0x160(r1)                                  | stmw r20, 0x160(r1)
+* 0x0018  mr r21, r4                                           | mr r27, r3
+* 0x001c                                                       | lis r3, 0x4330
+* 0x0020                                                       | mr r28, r4
+* 0x0024  mr r20, r3                                           | mr r30, r6
+* 0x0028  mr r23, r6                                           | mr r29, r5
+* 0x002c  stw r8, 0x108(r1)                                    | stw r3, 0xe8(r1)
+* 0x0030  mr r22, r5                                           | 
+* 0x0034  li r30, 0x1                                          | li r22, 0x1
+* 0x0038  li r29, 0x1                                          | li r21, 0x1
+* 0x003c                                                       | li r20, 0x1
+* 0x0040  stw r8, 0xf8(r1)                                     | stw r3, 0xf8(r1)
+* 0x0044  li r28, 0x1                                          | 
+* 0x0048  stw r8, 0xe8(r1)                                     | stw r3, 0x108(r1)
+* 0x004c  lha r7, 0x18(r3)                                     | lha r7, 0x18(r27)
+* 0x0050  lha r0, 0x14(r20)                                    | lha r0, 0x16(r27)
+* 0x0054  xoris r4, r7, 0x8000                                 | xoris r5, r7, 0x8000
+* 0x0058  lfs f2, 0x8(r21)                                     | lfs f2, 0x8(r28)
+* 0x005c  stw r4, 0x10c(r1)                                    | stw r5, 0xec(r1)
+* 0x0060  xoris r5, r0, 0x8000                                 | xoris r8, r0, 0x8000
+* 0x0064  lfs f1, 0x10(r20)                                    | lfs f1, 0x10(r27)
+* 0x0068  lfd f0, 0x108(r1)                                    | lfd f0, 0xe8(r1)
+* 0x006c  stw r5, 0xec(r1)                                     | stw r8, 0xfc(r1)
+  0x0070  fsubs f1, f2, f1                                     | fsubs f1, f2, f1
+* 0x0074  fsubs f0, f0, f5                                     | fsubs f0, f0, f7
+* 0x0078  lha r3, 0x16(r3)                                     | lha r4, 0x14(r27)
+* 0x007c  lfs f3, 0x4(r21)                                     | lfd f3, 0xf8(r1)
+* 0x0080  xoris r4, r3, 0x8000                                 | xoris r5, r4, 0x8000
+* 0x0084  lfs f2, 0xc(r20)                                     | lfs f5, 0x4(r28)
+* 0x0088  fdivs f0, f1, f0                                     | fdivs f6, f1, f0
+* 0x008c                                                       | lfs f4, 0xc(r27)
+* 0x0090  stw r4, 0xfc(r1)                                     | stw r5, 0x10c(r1)
+* 0x0094  lfs f7, 0x0(r21)                                     | lfs f2, 0x0(r28)
+* 0x0098  lfd f1, 0xf8(r1)                                     | 
+* 0x009c  lfs f6, 0x8(r20)                                     | lfs f1, 0x8(r27)
+* 0x00a0  lfd f4, 0xe8(r1)                                     | lfd f0, 0x108(r1)
+* 0x00a4  fctiwz f0, f0                                        | fctiwz f6, f6
+* 0x00a8  lbz r6, 0x1b(r20)                                    | lbz r8, 0x1b(r27)
+* 0x00ac  fsubs f2, f3, f2                                     | fsubs f4, f5, f4
+* 0x00b0  lbz r5, 0x1c(r20)                                    | lbz r6, 0x1c(r27)
+* 0x00b4  fsubs f1, f1, f5                                     | fsubs f3, f3, f7
+* 0x00b8  stfd f0, 0x110(r1)                                   | 
+* 0x00bc  fsubs f3, f7, f6                                     | fsubs f1, f2, f1
+* 0x00c0                                                       | fsubs f0, f0, f7
+* 0x00c4                                                       | stfd f6, 0xf0(r1)
+* 0x00c8  fdivs f0, f2, f1                                     | fdivs f2, f4, f3
+* 0x00cc  lwz r25, 0x114(r1)                                   | lwz r25, 0xf4(r1)
+* 0x00d0  mullw r4, r25, r6                                    | mullw r5, r25, r8
+* 0x00d4  mullw r4, r5, r4                                     | mullw r5, r6, r5
+* 0x00d8  fsubs f1, f4, f5                                     | fdivs f0, f1, f0
+* 0x00dc                                                       | fctiwz f2, f2
+  0x00e0  fctiwz f0, f0                                        | fctiwz f0, f0
+* 0x00e4  fdivs f1, f3, f1                                     | 
+* 0x00e8  stfd f0, 0x100(r1)                                   | stfd f2, 0x100(r1)
+* 0x00ec  lwz r26, 0x104(r1)                                   | lwz r24, 0x104(r1)
+* 0x00f0                                                       | stfd f0, 0x110(r1)
+* 0x00f4  mullw r5, r26, r6                                    | mullw r6, r24, r8
+* 0x00f8                                                       | lwz r23, 0x114(r1)
+* 0x00fc  add r24, r5, r4                                      | add r31, r6, r5
+* 0x0100  fctiwz f0, f1                                        | 
+* 0x0104  stfd f0, 0xf0(r1)                                    | 
+* 0x0108  lwz r27, 0xf4(r1)                                    | 
+* 0x010c  add. r24, r27, r24                                   | add. r31, r23, r31
+  0x0110  blt 0xfc                                             | blt 0xfc
+* 0x0114  lwz r4, 0x4(r20)                                     | lwz r5, 0x4(r27)
+* 0x0118  cmpw r24, r4                                         | cmpw r31, r5
+  0x011c  blt 0x114                                            | blt 0x114
+  0x0120  li r3, 0x0                                           | li r3, 0x0
+  0x0124  li r4, 0x0                                           | li r4, 0x0
+  0x0128  li r5, 0x0                                           | li r5, 0x0
+  0x012c  bl fn_801F10BC [None+0 t10]                          | bl fn_801F10BC [None+0 t10]
+  0x0130  li r3, -0x1                                          | li r3, -0x1
+  0x0134  b 0x7c0                                              | b 0x7a4
+* 0x0138  mulli r31, r24, 0x14                                 | mulli r26, r31, 0x14
+* 0x013c  lwz r11, 0x20(r20)                                   | lwz r5, 0x20(r27)
+* 0x0140  srwi r4, r0, 31                                      | srwi r9, r4, 31
+* 0x0144  lwz r5, lbl_8064CB48@sda21 [None+0 t109]             | lwz r6, lbl_8064CB48@sda21 [None+0 t109]
+* 0x0148  srwi r6, r3, 31                                      | srwi r8, r0, 31
+* 0x014c  stw r8, 0x110(r1)                                    | stw r3, 0x110(r1)
+* 0x0150  add r4, r4, r0                                       | add r5, r5, r26
+* 0x0154  lhax r0, r11, r31                                    | add r4, r9, r4
+* 0x0158                                                       | srawi r10, r4, 1
+* 0x015c                                                       | lha r11, 0x0(r5)
+  0x0160  srawi r9, r4, 1                                      | srawi r9, r4, 1
+* 0x0164  add r10, r6, r3                                      | add r4, r8, r0
+* 0x0168  subf r3, r9, r0                                      | subf r10, r10, r11
+* 0x016c  srwi r6, r7, 31                                      | srwi r0, r7, 31
+* 0x0170                                                       | add r8, r11, r9
+* 0x0174                                                       | stw r3, 0x108(r1)
+* 0x0178  xoris r9, r3, 0x8000                                 | xoris r10, r10, 0x8000
+* 0x017c                                                       | srawi r9, r4, 1
+* 0x0180                                                       | xoris r8, r8, 0x8000
+* 0x0184                                                       | stw r10, 0x114(r1)
+* 0x0188                                                       | srawi r4, r4, 1
+* 0x018c  add r3, r11, r31                                     | add r0, r0, r7
+* 0x0190  stw r9, 0x114(r1)                                    | stw r8, 0x10c(r1)
+* 0x0194  srawi r9, r10, 1                                     | srawi r7, r0, 1
+* 0x0198  add r7, r6, r7                                       | 
+* 0x019c  cmpwi r5, 0x0                                        | 
+* 0x01a0  lfd f0, 0x110(r1)                                    | lfd f1, 0x110(r1)
+* 0x01a4  srawi r6, r7, 1                                      | srawi r0, r0, 1
+* 0x01a8  srawi r5, r4, 1                                      | lfd f0, 0x108(r1)
+* 0x01ac                                                       | cmpwi r6, 0x0
+* 0x01b0                                                       | fsubs f1, f1, f7
+* 0x01b4  stw r8, 0x108(r1)                                    | stw r3, 0x100(r1)
+* 0x01b8  fsubs f0, f0, f5                                     | fsubs f0, f0, f7
+* 0x01bc  srawi r4, r10, 1                                     | 
+* 0x01c0  add r5, r5, r0                                       | 
+* 0x01c4  srawi r0, r7, 1                                      | 
+* 0x01c8  xoris r5, r5, 0x8000                                 | 
+* 0x01cc  stw r8, 0x100(r1)                                    | stw r3, 0xf8(r1)
+* 0x01d0  stfs f0, 0x18(r1)                                    | stfs f1, 0x18(r1)
+* 0x01d4                                                       | stfs f0, 0xc(r1)
+* 0x01d8  lha r7, 0x2(r3)                                      | lha r8, 0x2(r5)
+* 0x01dc  stw r5, 0xfc(r1)                                     | stw r3, 0xf0(r1)
+* 0x01e0  subf r5, r9, r7                                      | subf r6, r9, r8
+* 0x01e4  add r4, r4, r7                                       | add r4, r8, r4
+* 0x01e8  xoris r5, r5, 0x8000                                 | xoris r6, r6, 0x8000
+* 0x01ec  stw r8, 0xf8(r1)                                     | stw r3, 0xe8(r1)
+* 0x01f0  xoris r4, r4, 0x8000                                 | xoris r3, r4, 0x8000
+* 0x01f4  stw r5, 0x10c(r1)                                    | stw r6, 0x104(r1)
+* 0x01f8                                                       | stw r3, 0xfc(r1)
+* 0x01fc  lfd f0, 0xf8(r1)                                     | lfd f1, 0x100(r1)
+* 0x0200  lfd f1, 0x108(r1)                                    | lfd f0, 0xf8(r1)
+* 0x0204  stw r4, 0xf4(r1)                                     | 
+* 0x0208  fsubs f2, f0, f5                                     | fsubs f1, f1, f7
+* 0x020c  fsubs f0, f1, f5                                     | fsubs f0, f0, f7
+* 0x0210  stw r8, 0xf0(r1)                                     | 
+* 0x0214  stfs f0, 0x1c(r1)                                    | stfs f1, 0x1c(r1)
+* 0x0218  lfd f0, 0xf0(r1)                                     | stfs f0, 0x10(r1)
+* 0x021c  lha r4, 0x4(r3)                                      | lha r4, 0x4(r5)
+* 0x0220  stw r8, 0xe8(r1)                                     | 
+* 0x0224  fsubs f1, f0, f5                                     | 
+* 0x0228  subf r3, r6, r4                                      | subf r3, r7, r4
+* 0x022c  add r0, r0, r4                                       | add r0, r4, r0
+  0x0230  xoris r3, r3, 0x8000                                 | xoris r3, r3, 0x8000
+* 0x0234  stfs f2, 0xc(r1)                                     | 
+  0x0238  xoris r0, r0, 0x8000                                 | xoris r0, r0, 0x8000
+* 0x023c  stw r3, 0x104(r1)                                    | stw r3, 0xf4(r1)
+  0x0240  stw r0, 0xec(r1)                                     | stw r0, 0xec(r1)
+* 0x0244  lfd f2, 0x100(r1)                                    | lfd f1, 0xf0(r1)
+  0x0248  lfd f0, 0xe8(r1)                                     | lfd f0, 0xe8(r1)
+* 0x024c  fsubs f2, f2, f5                                     | fsubs f1, f1, f7
+* 0x0250  stfs f1, 0x10(r1)                                    | 
+* 0x0254  fsubs f0, f0, f5                                     | fsubs f0, f0, f7
+* 0x0258  stfs f2, 0x20(r1)                                    | stfs f1, 0x20(r1)
+  0x025c  stfs f0, 0x14(r1)                                    | stfs f0, 0x14(r1)
+  0x0260  beq 0x22c                                            | beq 0x22c
+  0x0264  lwz r0, lbl_806513CC@sda21 [None+0 t109]             | lwz r0, lbl_806513CC@sda21 [None+0 t109]
+  0x0268  addi r3, r1, 0x18                                    | addi r3, r1, 0x18
+  0x026c  addi r4, r1, 0xc                                     | addi r4, r1, 0xc
+  0x0270  addi r5, r1, 0x8                                     | addi r5, r1, 0x8
+  0x0274  stw r0, 0x8(r1)                                      | stw r0, 0x8(r1)
+  0x0278  li r6, 0x40                                          | li r6, 0x40
+  0x027c  bl fn_800EBF88 [None+0 t10]                          | bl fn_800EBF88 [None+0 t10]
+* 0x0280  lwz r0, 0x20(r20)                                    | lwz r0, 0x20(r27)
+  0x0284  lis r5, 0x4330                                       | lis r5, 0x4330
+  0x0288  stw r5, 0x110(r1)                                    | stw r5, 0x110(r1)
+* 0x028c  add r3, r0, r31                                      | add r3, r0, r26
+* 0x0290  lfd f4, lbl_80651360@sda21 [None+0 t109]             | lfd f5, @125@sda21 [None+0 t109]
+  0x0294  lha r0, 0x0(r3)                                      | lha r0, 0x0(r3)
+  0x0298  lha r4, 0x2(r3)                                      | lha r4, 0x2(r3)
+  0x029c  xoris r6, r0, 0x8000                                 | xoris r6, r0, 0x8000
+  0x02a0  lha r0, 0x4(r3)                                      | lha r0, 0x4(r3)
+  0x02a4  stw r6, 0x114(r1)                                    | stw r6, 0x114(r1)
+  0x02a8  xoris r4, r4, 0x8000                                 | xoris r4, r4, 0x8000
+  0x02ac  xoris r0, r0, 0x8000                                 | xoris r0, r0, 0x8000
+* 0x02b0  lfs f5, 0x0(r21)                                     | lfs f1, 0x0(r28)
+  0x02b4  lfd f0, 0x110(r1)                                    | lfd f0, 0x110(r1)
+  0x02b8  stw r4, 0x10c(r1)                                    | stw r4, 0x10c(r1)
+* 0x02bc  fsubs f0, f0, f4                                     | fsubs f0, f0, f5
+* 0x02c0  lfs f3, 0x4(r21)                                     | lfs f4, 0x4(r28)
+  0x02c4  stw r5, 0x108(r1)                                    | stw r5, 0x108(r1)
+* 0x02c8  lfs f1, 0x8(r21)                                     | lfs f2, 0x8(r28)
+* 0x02cc  lfd f2, 0x108(r1)                                    | lfd f3, 0x108(r1)
+* 0x02d0  fsubs f8, f5, f0                                     | fsubs f0, f1, f0
+* 0x02d4  lfs f0, lbl_80651348@sda21 [None+0 t109]             | lfs f1, @122@sda21 [None+0 t109]
+* 0x02d8  fsubs f2, f2, f4                                     | fsubs f3, f3, f5
+  0x02dc  stw r0, 0x104(r1)                                    | stw r0, 0x104(r1)
+* 0x02e0  fcmpo cr0, f8, f0                                    | fcmpo cr0, f0, f1
+  0x02e4  stw r5, 0x100(r1)                                    | stw r5, 0x100(r1)
+* 0x02e8  fsubs f3, f3, f2                                     | fsubs f4, f4, f3
+* 0x02ec  lfd f0, 0x100(r1)                                    | lfd f1, 0x100(r1)
+* 0x02f0  fsubs f0, f0, f4                                     | fsubs f1, f1, f5
+* 0x02f4  fsubs f4, f1, f0                                     | fsubs f5, f2, f1
+  0x02f8  bge 0x2b0                                            | bge 0x2b0
+* 0x02fc  fneg f8, f8                                          | fneg f0, f0
+* 0x0300  li r30, -0x1                                         | li r22, -0x1
+* 0x0304  lfs f0, lbl_80651348@sda21 [None+0 t109]             | lfs f1, @122@sda21 [None+0 t109]
+* 0x0308  fcmpo cr0, f3, f0                                    | fcmpo cr0, f4, f1
+  0x030c  bge 0x2c4                                            | bge 0x2c4
+* 0x0310  fneg f3, f3                                          | fneg f4, f4
+* 0x0314  li r29, -0x1                                         | li r21, -0x1
+* 0x0318  lfs f0, lbl_80651348@sda21 [None+0 t109]             | lfs f1, @122@sda21 [None+0 t109]
+* 0x031c  fcmpo cr0, f4, f0                                    | fcmpo cr0, f5, f1
+  0x0320  bge 0x2d8                                            | bge 0x2d8
+* 0x0324  fneg f4, f4                                          | fneg f5, f5
+* 0x0328  li r28, -0x1                                         | li r20, -0x1
+* 0x032c  lha r6, 0x14(r20)                                    | lha r6, 0x14(r27)
+  0x0330  lis r5, 0x4330                                       | lis r5, 0x4330
+* 0x0334  lha r4, 0x16(r20)                                    | lha r4, 0x16(r27)
+* 0x0338  add r7, r27, r30                                     | add r7, r23, r22
+* 0x033c  lha r0, 0x18(r20)                                    | lha r0, 0x18(r27)
+  0x0340  xoris r6, r6, 0x8000                                 | xoris r6, r6, 0x8000
+  0x0344  xoris r4, r4, 0x8000                                 | xoris r4, r4, 0x8000
+  0x0348  stw r6, 0x114(r1)                                    | stw r6, 0x114(r1)
+  0x034c  xoris r0, r0, 0x8000                                 | xoris r0, r0, 0x8000
+* 0x0350  lbz r6, 0x1b(r20)                                    | lbz r6, 0x1b(r27)
+  0x0354  stw r5, 0x110(r1)                                    | stw r5, 0x110(r1)
+* 0x0358  lfd f2, lbl_80651360@sda21 [None+0 t109]             | lfd f3, @125@sda21 [None+0 t109]
+  0x035c  cmpw r7, r6                                          | cmpw r7, r6
+* 0x0360  lfd f0, 0x110(r1)                                    | lfd f1, 0x110(r1)
+  0x0364  stw r4, 0x10c(r1)                                    | stw r4, 0x10c(r1)
+* 0x0368  fsubs f0, f0, f2                                     | fsubs f1, f1, f3
+  0x036c  stw r5, 0x108(r1)                                    | stw r5, 0x108(r1)
+* 0x0370  lfd f1, 0x108(r1)                                    | lfd f2, 0x108(r1)
+* 0x0374  fdivs f8, f8, f0                                     | fdivs f0, f0, f1
+  0x0378  stw r0, 0x104(r1)                                    | stw r0, 0x104(r1)
+  0x037c  stw r5, 0x100(r1)                                    | stw r5, 0x100(r1)
+* 0x0380  lfd f0, 0x100(r1)                                    | lfd f1, 0x100(r1)
+* 0x0384  fsubs f1, f1, f2                                     | fsubs f2, f2, f3
+* 0x0388  fsubs f0, f0, f2                                     | fsubs f1, f1, f3
+* 0x038c  fdivs f3, f3, f1                                     | fdivs f4, f4, f2
+* 0x0390  fdivs f4, f4, f0                                     | fdivs f5, f5, f1
+  0x0394  bge 0x34c                                            | bge 0x34c
+  0x0398  cmpwi r7, 0x0                                        | cmpwi r7, 0x0
+  0x039c  bge 0x354                                            | bge 0x354
+* 0x03a0  lfs f8, lbl_80651348@sda21 [None+0 t109]             | lfs f0, @122@sda21 [None+0 t109]
+* 0x03a4  li r30, 0x0                                          | li r22, 0x0
+* 0x03a8  lbz r5, 0x1c(r20)                                    | lbz r5, 0x1c(r27)
+* 0x03ac  add r0, r26, r29                                     | add r0, r24, r21
+  0x03b0  cmpw r0, r5                                          | cmpw r0, r5
+  0x03b4  bge 0x36c                                            | bge 0x36c
+  0x03b8  cmpwi r0, 0x0                                        | cmpwi r0, 0x0
+  0x03bc  bge 0x374                                            | bge 0x374
+* 0x03c0  lfs f3, lbl_80651348@sda21 [None+0 t109]             | lfs f4, @122@sda21 [None+0 t109]
+* 0x03c4  li r29, 0x0                                          | li r21, 0x0
+* 0x03c8  lbz r0, 0x1d(r20)                                    | lbz r0, 0x1d(r27)
+* 0x03cc  add r4, r25, r28                                     | add r4, r25, r20
+  0x03d0  cmpw r4, r0                                          | cmpw r4, r0
+  0x03d4  bge 0x38c                                            | bge 0x38c
+  0x03d8  cmpwi r4, 0x0                                        | cmpwi r4, 0x0
+  0x03dc  bge 0x394                                            | bge 0x394
+* 0x03e0  lfs f4, lbl_80651348@sda21 [None+0 t109]             | lfs f5, @122@sda21 [None+0 t109]
+* 0x03e4  li r28, 0x0                                          | li r20, 0x0
+  0x03e8  mullw r0, r6, r5                                     | mullw r0, r6, r5
+* 0x03ec  lfs f0, lbl_8065134C@sda21 [None+0 t109]             | lfs f1, @123@sda21 [None+0 t109]
+* 0x03f0                                                       | add r4, r31, r22
+* 0x03f4  fmuls f9, f3, f4                                     | fmuls f10, f4, f5
+* 0x03f8  stw r3, 0x44(r1)                                     | 
+* 0x03fc  fsubs f1, f0, f3                                     | fsubs f3, f1, f4
+* 0x0400  add r3, r24, r30                                     | stw r3, 0x44(r1)
+* 0x0404  mullw r28, r28, r0                                   | mullw r21, r21, r6
+* 0x0408  fsubs f2, f0, f4                                     | fsubs f2, f1, f5
+* 0x040c  fsubs f0, f0, f8                                     | fsubs f8, f1, f0
+* 0x0410  lwz r10, 0x20(r20)                                   | lwz r11, 0x20(r27)
+* 0x0414  fmuls f10, f1, f4                                    | fmuls f9, f3, f5
+* 0x0418  mr r5, r22                                           | mr r5, r29
+* 0x041c                                                       | mullw r20, r20, r0
+* 0x0420                                                       | add r10, r31, r21
+* 0x0424  add r11, r24, r28                                    | add r12, r21, r4
+* 0x0428  fmuls f4, f3, f2                                     | fmuls f1, f3, f2
+* 0x042c  mullw r29, r29, r6                                   | 
+* 0x0430  fmuls f1, f1, f2                                     | fmuls f2, f4, f2
+* 0x0434                                                       | addi r3, r1, 0x64
+* 0x0438                                                       | add r8, r31, r20
+* 0x043c  add r6, r30, r11                                     | add r7, r20, r4
+* 0x0440                                                       | add r6, r20, r10
+* 0x0444                                                       | add r0, r20, r12
+* 0x0448                                                       | mulli r9, r4, 0x14
+* 0x044c  fmuls f3, f0, f10                                    | fmuls f7, f8, f1
+* 0x0450  fmuls f5, f0, f4                                     | fmuls f6, f0, f1
+* 0x0454                                                       | addi r4, r1, 0x44
+* 0x0458  fmuls f7, f0, f1                                     | fmuls f5, f8, f2
+* 0x045c  add r7, r24, r29                                     | mulli r10, r10, 0x14
+* 0x0460  add r12, r29, r11                                    | 
+* 0x0464  add r4, r30, r7                                      | 
+* 0x0468  fmuls f6, f8, f1                                     | fmuls f4, f0, f2
+* 0x046c  add r0, r30, r12                                     | add r9, r11, r9
+* 0x0470  fmuls f4, f8, f4                                     | fmuls f3, f8, f9
+* 0x0474                                                       | stw r9, 0x48(r1)
+* 0x0478  mulli r3, r3, 0x14                                   | mulli r9, r12, 0x14
+* 0x047c  fmuls f2, f8, f10                                    | fmuls f2, f0, f9
+* 0x0480  fmuls f1, f0, f9                                     | fmuls f1, f8, f10
+* 0x0484  fmuls f0, f8, f9                                     | 
+* 0x0488  stfs f7, 0x24(r1)                                    | 
+* 0x048c  mulli r8, r7, 0x14                                   | 
+* 0x0490  add r9, r10, r3                                      | add r10, r11, r10
+* 0x0494  stfs f6, 0x28(r1)                                    | 
+* 0x0498  addi r3, r1, 0x64                                    | 
+* 0x049c  mulli r7, r4, 0x14                                   | mulli r8, r8, 0x14
+* 0x04a0  stw r9, 0x48(r1)                                     | fmuls f0, f0, f10
+* 0x04a4  add r4, r10, r8                                      | add r9, r11, r9
+* 0x04a8  stw r4, 0x4c(r1)                                     | stw r10, 0x4c(r1)
+* 0x04ac  addi r4, r1, 0x44                                    | 
+* 0x04b0  mulli r8, r11, 0x14                                  | mulli r7, r7, 0x14
+* 0x04b4  add r9, r10, r7                                      | add r8, r11, r8
+* 0x04b8  stfs f5, 0x2c(r1)                                    | stw r9, 0x50(r1)
+* 0x04bc  mulli r7, r6, 0x14                                   | mulli r6, r6, 0x14
+* 0x04c0  stw r9, 0x50(r1)                                     | stw r8, 0x54(r1)
+* 0x04c4  add r6, r10, r8                                      | add r7, r11, r7
+* 0x04c8  stw r6, 0x54(r1)                                     | stw r7, 0x58(r1)
+* 0x04cc  mulli r6, r12, 0x14                                  | mulli r0, r0, 0x14
+* 0x04d0  add r7, r10, r7                                      | add r6, r11, r6
+* 0x04d4  stfs f4, 0x30(r1)                                    | stfs f7, 0x24(r1)
+* 0x04d8  mulli r0, r0, 0x14                                   | 
+* 0x04dc  stw r7, 0x58(r1)                                     | 
+* 0x04e0  add r6, r10, r6                                      | add r0, r11, r0
+  0x04e4  stw r6, 0x5c(r1)                                     | stw r6, 0x5c(r1)
+* 0x04e8  add r0, r10, r0                                      | 
+  0x04ec  stw r0, 0x60(r1)                                     | stw r0, 0x60(r1)
+* 0x04f0  stfs f3, 0x34(r1)                                    | stfs f6, 0x28(r1)
+* 0x04f4  stfs f2, 0x38(r1)                                    | stfs f5, 0x2c(r1)
+* 0x04f8  stfs f1, 0x3c(r1)                                    | stfs f4, 0x30(r1)
+* 0x04fc  stfs f0, 0x40(r1)                                    | stfs f3, 0x34(r1)
+* 0x0500                                                       | stfs f2, 0x38(r1)
+* 0x0504                                                       | stfs f1, 0x3c(r1)
+* 0x0508                                                       | stfs f0, 0x40(r1)
+  0x050c  bl fn_801F2170 [None+0 t10]                          | bl fn_801F2170 [None+0 t10]
+* 0x0510  lfd f0, lbl_80651350@sda21 [None+0 t109]             | lfd f0, @131@sda21 [None+0 t109]
+* 0x0514  mr r5, r23                                           | mr r5, r30
+* 0x0518  lfd f13, lbl_80651360@sda21 [None+0 t109]            | lfd f13, @125@sda21 [None+0 t109]
+  0x051c  li r7, 0x0                                           | li r7, 0x0
+* 0x0520  lfs f10, lbl_80651348@sda21 [None+0 t109]            | lfs f3, @122@sda21 [None+0 t109]
+  0x0524  li r6, 0x0                                           | li r6, 0x0
+* 0x0528  lfs f9, 0x24(r1)                                     | lfs f2, 0x24(r1)
+  0x052c  lis r0, 0x4330                                       | lis r0, 0x4330
+* 0x0530  lfs f8, 0x28(r1)                                     | lfs f4, 0x28(r1)
+* 0x0534  lfs f7, 0x2c(r1)                                     | lfs f5, 0x2c(r1)
+  0x0538  lfs f6, 0x30(r1)                                     | lfs f6, 0x30(r1)
+* 0x053c  lfs f5, 0x34(r1)                                     | lfs f7, 0x34(r1)
+* 0x0540  lfs f4, 0x38(r1)                                     | lfs f8, 0x38(r1)
+* 0x0544  lfs f3, 0x3c(r1)                                     | lfs f9, 0x3c(r1)
+* 0x0548  lfs f2, 0x40(r1)                                     | lfs f10, 0x40(r1)
+  0x054c  b 0x7b4                                              | b 0x798
+* 0x0550  li r8, 0x3                                           | li r3, 0x3
+* 0x0554  mr r3, r5                                            | mr r8, r5
+* 0x0558  li r4, 0x0                                           | li r9, 0x0
+* 0x055c  mtctr r8                                             | mtctr r3
+* 0x0560  stfs f10, 0x0(r3)                                    | stfs f3, 0x0(r8)
+* 0x0564                                                       | add r4, r6, r9
+* 0x0568                                                       | addi r9, r9, 0x4
+* 0x056c  lwz r8, 0x44(r1)                                     | lwz r3, 0x44(r1)
+* 0x0570  lfs f1, 0x0(r3)                                      | lfs f1, 0x0(r8)
+* 0x0574  lwz r8, 0x10(r8)                                     | lwz r3, 0x10(r3)
+* 0x0578  add r8, r8, r4                                       | 
+* 0x057c  lfsx f11, r6, r8                                     | lfsx f11, r3, r4
+* 0x0580  fmadds f1, f9, f11, f1                               | fmadds f1, f2, f11, f1
+* 0x0584  stfs f1, 0x0(r3)                                     | stfs f1, 0x0(r8)
+* 0x0588  lwz r8, 0x48(r1)                                     | lwz r3, 0x48(r1)
+* 0x058c  lfs f1, 0x0(r3)                                      | lfs f1, 0x0(r8)
+* 0x0590  lwz r8, 0x10(r8)                                     | lwz r3, 0x10(r3)
+* 0x0594  add r8, r8, r4                                       | 
+* 0x0598  lfsx f11, r6, r8                                     | lfsx f11, r3, r4
+* 0x059c  fmadds f1, f8, f11, f1                               | fmadds f1, f4, f11, f1
+* 0x05a0  stfs f1, 0x0(r3)                                     | stfs f1, 0x0(r8)
+* 0x05a4  lwz r8, 0x4c(r1)                                     | lwz r3, 0x4c(r1)
+* 0x05a8  lfs f1, 0x0(r3)                                      | lfs f1, 0x0(r8)
+* 0x05ac  lwz r8, 0x10(r8)                                     | lwz r3, 0x10(r3)
+* 0x05b0  add r8, r8, r4                                       | 
+* 0x05b4  lfsx f11, r6, r8                                     | lfsx f11, r3, r4
+* 0x05b8  fmadds f1, f7, f11, f1                               | fmadds f1, f5, f11, f1
+* 0x05bc  stfs f1, 0x0(r3)                                     | stfs f1, 0x0(r8)
+* 0x05c0  lwz r8, 0x50(r1)                                     | lwz r3, 0x50(r1)
+* 0x05c4  lfs f1, 0x0(r3)                                      | lfs f1, 0x0(r8)
+* 0x05c8  lwz r8, 0x10(r8)                                     | lwz r3, 0x10(r3)
+* 0x05cc  add r8, r8, r4                                       | 
+* 0x05d0  lfsx f11, r6, r8                                     | lfsx f11, r3, r4
+  0x05d4  fmadds f1, f6, f11, f1                               | fmadds f1, f6, f11, f1
+* 0x05d8  stfs f1, 0x0(r3)                                     | stfs f1, 0x0(r8)
+* 0x05dc  lwz r8, 0x54(r1)                                     | lwz r3, 0x54(r1)
+* 0x05e0  lfs f1, 0x0(r3)                                      | lfs f1, 0x0(r8)
+* 0x05e4  lwz r8, 0x10(r8)                                     | lwz r3, 0x10(r3)
+* 0x05e8  add r8, r8, r4                                       | 
+* 0x05ec  lfsx f11, r6, r8                                     | lfsx f11, r3, r4
+* 0x05f0  fmadds f1, f5, f11, f1                               | fmadds f1, f7, f11, f1
+* 0x05f4  stfs f1, 0x0(r3)                                     | stfs f1, 0x0(r8)
+* 0x05f8  lwz r8, 0x58(r1)                                     | lwz r3, 0x58(r1)
+* 0x05fc  lfs f1, 0x0(r3)                                      | lfs f1, 0x0(r8)
+* 0x0600  lwz r8, 0x10(r8)                                     | lwz r3, 0x10(r3)
+* 0x0604  add r8, r8, r4                                       | 
+* 0x0608  lfsx f11, r6, r8                                     | lfsx f11, r3, r4
+* 0x060c  fmadds f1, f4, f11, f1                               | fmadds f1, f8, f11, f1
+* 0x0610  stfs f1, 0x0(r3)                                     | stfs f1, 0x0(r8)
+* 0x0614  lwz r8, 0x5c(r1)                                     | lwz r3, 0x5c(r1)
+* 0x0618  lfs f1, 0x0(r3)                                      | lfs f1, 0x0(r8)
+* 0x061c  lwz r8, 0x10(r8)                                     | lwz r3, 0x10(r3)
+* 0x0620  add r8, r8, r4                                       | 
+* 0x0624  lfsx f11, r6, r8                                     | lfsx f11, r3, r4
+* 0x0628  fmadds f1, f3, f11, f1                               | fmadds f1, f9, f11, f1
+* 0x062c  stfs f1, 0x0(r3)                                     | stfs f1, 0x0(r8)
+* 0x0630  lwz r8, 0x60(r1)                                     | lwz r3, 0x60(r1)
+* 0x0634  lfs f1, 0x0(r3)                                      | lfs f1, 0x0(r8)
+* 0x0638  lwz r8, 0x10(r8)                                     | lwz r3, 0x10(r3)
+* 0x063c  add r8, r8, r4                                       | 
+* 0x0640  addi r4, r4, 0x4                                     | 
+* 0x0644  lfsx f11, r6, r8                                     | lfsx f11, r3, r4
+* 0x0648  fmadds f1, f2, f11, f1                               | fmadds f1, f10, f11, f1
+* 0x064c  stfs f1, 0x0(r3)                                     | stfs f1, 0x0(r8)
+* 0x0650  addi r3, r3, 0x4                                     | addi r8, r8, 0x4
+  0x0654  bdnz 0x4d8                                           | bdnz 0x4d8
+  0x0658  li r10, 0x0                                          | li r10, 0x0
+  0x065c  li r9, 0xff                                          | li r9, 0xff
+* 0x0660  stb r10, 0xc(r5)                                     | stb r10, 0xe(r5)
+  0x0664  li r8, 0x8                                           | li r8, 0x8
+  0x0668  addi r3, r1, 0x44                                    | addi r3, r1, 0x44
+  0x066c  addi r4, r1, 0x24                                    | addi r4, r1, 0x24
+  0x0670  stb r10, 0xd(r5)                                     | stb r10, 0xd(r5)
+* 0x0674  stb r10, 0xe(r5)                                     | stb r10, 0xc(r5)
+  0x0678  stb r9, 0xf(r5)                                      | stb r9, 0xf(r5)
+  0x067c  stw r10, 0x10(r5)                                    | stw r10, 0x10(r5)
+  0x0680  mtctr r8                                             | mtctr r8
+  0x0684  lwz r9, 0x0(r3)                                      | lwz r9, 0x0(r3)
+  0x0688  lbz r8, 0xc(r5)                                      | lbz r8, 0xc(r5)
+  0x068c  lwz r9, 0x10(r9)                                     | lwz r9, 0x10(r9)
+  0x0690  lfs f1, 0x0(r4)                                      | lfs f1, 0x0(r4)
+  0x0694  addi r4, r4, 0x4                                     | addi r4, r4, 0x4
+  0x0698  addi r9, r9, 0xc                                     | addi r9, r9, 0xc
+  0x069c  stw r0, 0x110(r1)                                    | stw r0, 0x110(r1)
+  0x06a0  lbzx r9, r6, r9                                      | lbzx r9, r6, r9
+  0x06a4  stw r8, 0x10c(r1)                                    | stw r8, 0x10c(r1)
+  0x06a8  stw r9, 0x114(r1)                                    | stw r9, 0x114(r1)
+  0x06ac  stw r0, 0x108(r1)                                    | stw r0, 0x108(r1)
+  0x06b0  lfd f12, 0x110(r1)                                   | lfd f12, 0x110(r1)
+  0x06b4  lfd f11, 0x108(r1)                                   | lfd f11, 0x108(r1)
+  0x06b8  fsubs f12, f12, f0                                   | fsubs f12, f12, f0
+  0x06bc  stw r0, 0xf8(r1)                                     | stw r0, 0xf8(r1)
+  0x06c0  fsubs f11, f11, f0                                   | fsubs f11, f11, f0
+  0x06c4  stw r0, 0xf0(r1)                                     | stw r0, 0xf0(r1)
+  0x06c8  fmadds f11, f1, f12, f11                             | fmadds f11, f1, f12, f11
+  0x06cc  stw r0, 0x118(r1)                                    | stw r0, 0x118(r1)
+  0x06d0  stw r0, 0x120(r1)                                    | stw r0, 0x120(r1)
+  0x06d4  fctiwz f11, f11                                      | fctiwz f11, f11
+  0x06d8  stw r0, 0x130(r1)                                    | stw r0, 0x130(r1)
+  0x06dc  stfd f11, 0x100(r1)                                  | stfd f11, 0x100(r1)
+  0x06e0  lwz r8, 0x104(r1)                                    | lwz r8, 0x104(r1)
+  0x06e4  stw r0, 0x138(r1)                                    | stw r0, 0x138(r1)
+  0x06e8  stb r8, 0xc(r5)                                      | stb r8, 0xc(r5)
+  0x06ec  lwz r9, 0x0(r3)                                      | lwz r9, 0x0(r3)
+  0x06f0  lbz r8, 0xd(r5)                                      | lbz r8, 0xd(r5)
+  0x06f4  lwz r9, 0x10(r9)                                     | lwz r9, 0x10(r9)
+  0x06f8  stw r8, 0xf4(r1)                                     | stw r8, 0xf4(r1)
+  0x06fc  addi r8, r9, 0xd                                     | addi r8, r9, 0xd
+  0x0700  lbzx r8, r6, r8                                      | lbzx r8, r6, r8
+  0x0704  lfd f11, 0xf0(r1)                                    | lfd f11, 0xf0(r1)
+  0x0708  stw r8, 0xfc(r1)                                     | stw r8, 0xfc(r1)
+  0x070c  fsubs f11, f11, f0                                   | fsubs f11, f11, f0
+  0x0710  lfd f12, 0xf8(r1)                                    | lfd f12, 0xf8(r1)
+  0x0714  stw r0, 0x148(r1)                                    | stw r0, 0x148(r1)
+  0x0718  fsubs f12, f12, f0                                   | fsubs f12, f12, f0
+  0x071c  stw r0, 0x150(r1)                                    | stw r0, 0x150(r1)
+  0x0720  fmadds f11, f1, f12, f11                             | fmadds f11, f1, f12, f11
+  0x0724  fctiwz f11, f11                                      | fctiwz f11, f11
+  0x0728  stfd f11, 0xe8(r1)                                   | stfd f11, 0xe8(r1)
+  0x072c  lwz r8, 0xec(r1)                                     | lwz r8, 0xec(r1)
+  0x0730  stb r8, 0xd(r5)                                      | stb r8, 0xd(r5)
+  0x0734  lwz r9, 0x0(r3)                                      | lwz r9, 0x0(r3)
+  0x0738  lbz r8, 0xe(r5)                                      | lbz r8, 0xe(r5)
+  0x073c  lwz r9, 0x10(r9)                                     | lwz r9, 0x10(r9)
+  0x0740  stw r8, 0x124(r1)                                    | stw r8, 0x124(r1)
+  0x0744  addi r8, r9, 0xe                                     | addi r8, r9, 0xe
+  0x0748  lbzx r8, r6, r8                                      | lbzx r8, r6, r8
+  0x074c  lfd f11, 0x120(r1)                                   | lfd f11, 0x120(r1)
+  0x0750  stw r8, 0x11c(r1)                                    | stw r8, 0x11c(r1)
+  0x0754  fsubs f11, f11, f0                                   | fsubs f11, f11, f0
+  0x0758  lfd f12, 0x118(r1)                                   | lfd f12, 0x118(r1)
+  0x075c  fsubs f12, f12, f0                                   | fsubs f12, f12, f0
+  0x0760  fmadds f11, f1, f12, f11                             | fmadds f11, f1, f12, f11
+  0x0764  fctiwz f11, f11                                      | fctiwz f11, f11
+  0x0768  stfd f11, 0x128(r1)                                  | stfd f11, 0x128(r1)
+  0x076c  lwz r8, 0x12c(r1)                                    | lwz r8, 0x12c(r1)
+  0x0770  stb r8, 0xe(r5)                                      | stb r8, 0xe(r5)
+  0x0774  lwz r9, 0x0(r3)                                      | lwz r9, 0x0(r3)
+  0x0778  lbz r8, 0xf(r5)                                      | lbz r8, 0xf(r5)
+  0x077c  lwz r9, 0x10(r9)                                     | lwz r9, 0x10(r9)
+  0x0780  stw r8, 0x13c(r1)                                    | stw r8, 0x13c(r1)
+  0x0784  addi r8, r9, 0xf                                     | addi r8, r9, 0xf
+  0x0788  lbzx r8, r6, r8                                      | lbzx r8, r6, r8
+  0x078c  lfd f11, 0x138(r1)                                   | lfd f11, 0x138(r1)
+  0x0790  stw r8, 0x134(r1)                                    | stw r8, 0x134(r1)
+  0x0794  fsubs f11, f11, f0                                   | fsubs f11, f11, f0
+  0x0798  lfd f12, 0x130(r1)                                   | lfd f12, 0x130(r1)
+  0x079c  fsubs f12, f12, f0                                   | fsubs f12, f12, f0
+  0x07a0  fmadds f11, f1, f12, f11                             | fmadds f11, f1, f12, f11
+  0x07a4  fctiwz f11, f11                                      | fctiwz f11, f11
+  0x07a8  stfd f11, 0x140(r1)                                  | stfd f11, 0x140(r1)
+  0x07ac  lwz r8, 0x144(r1)                                    | lwz r8, 0x144(r1)
+  0x07b0  stb r8, 0xf(r5)                                      | stb r8, 0xf(r5)
+  0x07b4  lwz r9, 0x0(r3)                                      | lwz r9, 0x0(r3)
+  0x07b8  addi r3, r3, 0x4                                     | addi r3, r3, 0x4
+  0x07bc  lwz r8, 0x10(r5)                                     | lwz r8, 0x10(r5)
+  0x07c0  lwz r9, 0x10(r9)                                     | lwz r9, 0x10(r9)
+  0x07c4  xoris r8, r8, 0x8000                                 | xoris r8, r8, 0x8000
+  0x07c8  stw r8, 0x154(r1)                                    | stw r8, 0x154(r1)
+  0x07cc  addi r9, r9, 0x10                                    | addi r9, r9, 0x10
+  0x07d0  lwzx r8, r6, r9                                      | lwzx r8, r6, r9
+  0x07d4  lfd f11, 0x150(r1)                                   | lfd f11, 0x150(r1)
+  0x07d8  xoris r8, r8, 0x8000                                 | xoris r8, r8, 0x8000
+  0x07dc  stw r8, 0x14c(r1)                                    | stw r8, 0x14c(r1)
+  0x07e0  fsubs f11, f11, f13                                  | fsubs f11, f11, f13
+  0x07e4  lfd f12, 0x148(r1)                                   | lfd f12, 0x148(r1)
+  0x07e8  fsubs f12, f12, f13                                  | fsubs f12, f12, f13
+  0x07ec  fmadds f1, f1, f12, f11                              | fmadds f1, f1, f12, f11
+  0x07f0  fctiwz f1, f1                                        | fctiwz f1, f1
+  0x07f4  stfd f1, 0x158(r1)                                   | stfd f1, 0x158(r1)
+  0x07f8  lwz r8, 0x15c(r1)                                    | lwz r8, 0x15c(r1)
+  0x07fc  stw r8, 0x10(r5)                                     | stw r8, 0x10(r5)
+  0x0800  bdnz 0x5f4                                           | bdnz 0x5d8
+  0x0804  lwz r3, lbl_8064D18C@sda21 [None+0 t109]             | lwz r3, lbl_8064D18C@sda21 [None+0 t109]
+  0x0808  cmpwi r3, 0x124                                      | cmpwi r3, 0x124
+  0x080c  bne 0x790                                            | bne 0x774
+  0x0810  lwz r3, 0x10(r5)                                     | lwz r3, 0x10(r5)
+  0x0814  slwi r3, r3, 3                                       | slwi r3, r3, 3
+  0x0818  stw r3, 0x10(r5)                                     | stw r3, 0x10(r5)
+  0x081c  b 0x7a8                                              | b 0x78c
+  0x0820  lwz r4, 0x10(r5)                                     | lwz r4, 0x10(r5)
+  0x0824  li r3, 0x7530                                        | li r3, 0x7530
+  0x0828  cmpwi r4, 0x7530                                     | cmpwi r4, 0x7530
+  0x082c  bgt 0x7a4                                            | bgt 0x788
+  0x0830  mr r3, r4                                            | mr r3, r4
+  0x0834  stw r3, 0x10(r5)                                     | stw r3, 0x10(r5)
+  0x0838  addi r5, r5, 0x14                                    | addi r5, r5, 0x14
+  0x083c  addi r6, r6, 0x14                                    | addi r6, r6, 0x14
+  0x0840  addi r7, r7, 0x1                                     | addi r7, r7, 0x1
+* 0x0844  cmpw r7, r22                                         | cmpw r7, r29
+  0x0848  blt 0x4c8                                            | blt 0x4c8
+* 0x084c  mr r3, r24                                           | mr r3, r31
+  0x0850  lmw r20, 0x160(r1)                                   | lmw r20, 0x160(r1)
+  0x0854  lwz r0, 0x194(r1)                                    | lwz r0, 0x194(r1)
+  0x0858  mtlr r0                                              | mtlr r0
+  0x085c  addi r1, r1, 0x190                                   | addi r1, r1, 0x190
+  0x0860  blr                                                  | blr

@@ -1,0 +1,91 @@
+Attempt 6: fn_801F2370
+
+Accepted base and preserved work
+The source at accepted base fc6efa5da5298e1fe41cc125b6931f6c30bbb9c2 is identical
+(SHA-256 0ca4934cda6d05cd71f2885e5771023aa87f8069bdc1ce0b2264936f1414e64a)
+to the source preserved by eec5c5a9eec74cedf5a8b4b345e43032221f7b82.
+Read the preserved attempt-4 and attempt-5 experiments and attempt-3 verification
+through git show. Their repaired signed node coordinates, indirect sample pointer,
+direct sample-i indexing, debug bounds order, and int-before-byte narrowing remain.
+The historical JSON is copied from attempt 5 and is explicitly historical evidence.
+Fresh baseline object build independently reproduced 66.319360%.
+
+Different compiler hypotheses and discoveries
+No previously rejected shared-constant, sample-pointer-hoisting, or clamp variants
+were repeated. The new investigation followed retail's difference/sign operation,
+Y/Z-before-X product tree, and cell-stride lifetimes. It uncovered these useful forms:
+- Couple negative-coordinate-difference tests with direction selection.
+- Form each complete bounds vector before the other; reload the node base after debug.
+- Scale Y and Z direction steps in-place; test upper boundary before lower boundary.
+- Evaluate initial X, Y, Z coordinates in source order and use the original sum form.
+- Model the sample's three coordinates as a float array, preserving its 20-byte layout.
+- Keep Y/Z pair products explicit and group later corner stores before later weights.
+- Let GC/1.3 unroll a real eight-iteration loop, rather than writing eight statements.
+The Y/Z parenthesization matters to floating-point rounding; it was retained even
+when its isolated score was slightly lower. Source-level changes thus go beyond
+pure register tuning and reproduce retail's operation order.
+
+Final normalization and scope
+The final unnormalized object has all retail instructions and registers, but four
+compiler-local literal/conversion-bias names. Its score is 99.870260%.
+Registered ONLY this target in the already-existing game_section_externalizations
+table: @99 -> lbl_80651348, @100 -> lbl_8065134C,
+@102 -> lbl_80651360, @108 -> lbl_80651350.
+The existing externalizer verifies constant bytes against the supplied retail DOL,
+checks complete constant-section ownership, externalizes the symbols, and removes
+the compiler-owned constant section. No new build rule, compiler policy, flags,
+text patch, gate, or externalization implementation was introduced.
+The target is now registered Matching. Splits and neighboring units are unchanged.
+Canonical GC/1.3 -O4,p -inline auto -use_lmw_stmw on settings were used throughout.
+
+Verification
+Final canonical AND function_reloc_diffs=name_address objdiff: 100%.
+A separate ELF check proves equal 2004-byte .text and equal lists of 19 relocation
+(offset, type, target name, signed addend) tuples. Both text SHA-256 values are
+41f177b2bebc2ffe424da052cbd16a2516d21e6a193072024c0047f560fd6e50.
+The constant normalization does not change text. All remaining divergence is closed.
+Only this function's C TU, its configure registration, and assignment reports changed.
+CLAUDE.md was already modified at entry and is excluded from the commit.
+No generated binaries/private inputs, remote push, runtime changes, progress updates,
+neighbor edits, policy changes, or agent delegation are part of the result.
+
+Acceptance gates still required after independent review
+The integrator must commit fresh full deterministic build, legal-audit, canonical
+and relocation-strict no-regression JSON, and measured retail DOL SHA-1
+(ea24b6af954876ce072562ff39cdb4c81d32be1f). This session performed assigned-object
+builds only and makes no claim to have completed those post-review gates.
+
+Experiment measurements (every named experiment has raw build and objdiff output)
+baseline: 66.31936% ; retail/generated 2004/2080 bytes
+sign: 73.31737% ; retail/generated 2004/1972 bytes
+yz: 72.98802% ; retail/generated 2004/1972 bytes
+center: 73.60479% ; retail/generated 2004/1976 bytes
+strides: 79.1018% ; retail/generated 2004/1976 bytes
+lifetimes: 79.1018% ; retail/generated 2004/1976 bytes
+implicit-offset: 79.46906% ; retail/generated 2004/1976 bytes
+index-order: 83.07784% ; retail/generated 2004/1976 bytes
+component-first: 83.07784% ; retail/generated 2004/1976 bytes
+address-component: 83.16766% ; retail/generated 2004/1976 bytes
+vector-array: 86.22156% ; retail/generated 2004/2004 bytes
+interleaved: 90.10978% ; retail/generated 2004/2004 bytes
+bounds-vectors: 97.149704% ; retail/generated 2004/2004 bytes
+index-accumulate: 97.532936% ; retail/generated 2004/2004 bytes
+float-lifetimes: 97.532936% ; retail/generated 2004/2004 bytes
+complements: 97.752495% ; retail/generated 2004/2004 bytes
+yz-temporaries: 98.041916% ; retail/generated 2004/2004 bytes
+weights-first: 95.353294% ; retail/generated 2004/2008 bytes
+grouped-tail: 99.71058% ; retail/generated 2004/2004 bytes
+direct-output: 99.71058% ; retail/generated 2004/2004 bytes
+product-first: 99.71058% ; retail/generated 2004/2004 bytes
+weight-locals: 99.061874% ; retail/generated 2004/2004 bytes
+compiler-unroll: 99.87026% ; retail/generated 2004/2004 bytes
+normalized: 100.0% ; retail/generated 2004/2004 bytes
+final: 100.0% ; retail/generated 2004/2004 bytes
+
+The experiment script records source diffs, build commands, both objdiff modes and
+readelf relocation tables from the strides experiment onward. Earlier baseline,
+sign, Y/Z and node-base experiments retain raw build logs and full instruction JSON;
+their raw objdiff relocation records are also extracted into separate tables.
+The first normalization trial was immediately recompiled by the original evidence
+script's .o target; the script now builds .externalized for normalized/final capture.
+The retained normalized and final reports come from successful normalized objects.
