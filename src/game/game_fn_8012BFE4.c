@@ -33,8 +33,8 @@ typedef struct State {
 void fn_8012BFE4(u8* state_bytes)
 {
     State* state = (State*)state_bytes;
-    int i;
     Entry* entry;
+    int i;
 
     for (i = 0; i < 18; i++) {
         entry = state->entries[i];
