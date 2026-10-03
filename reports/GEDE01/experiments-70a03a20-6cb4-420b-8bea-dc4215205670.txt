@@ -1,0 +1,19 @@
+fn_8002BFE0 attempt 4 experiment log
+
+Canonical retained baseline:
+retail_bytes=384 generated_bytes=384 match_percent=97.395836
+
+Hypothesis 1: remove the cached one/zero locals and reference lbl_8064E064 and lbl_8064E068 directly at use sites. This was intended to alter the constant live ranges and encourage GC/1.3 to schedule the signed-conversion bias before the one and zero values.
+variant=direct_constants retail_bytes=384 generated_bytes=352 match_percent=76.645836
+Result: rejected. GC/1.3 shortened the function by 32 bytes and the score regressed by 20.75 percentage points.
+Raw objdiff: objdiff-experiment-direct-constants-70a03a20-6cb4-420b-8bea-dc4215205670.json
+
+Hypothesis 2: declare fn_800FBFB0 directly as returning signed int instead of declaring unsigned int and applying the existing signed cast wrapper. This tested whether the AST-level cast was perturbing conversion-bias scheduling and saved-register coloring.
+variant=signed_rng_declaration retail_bytes=384 generated_bytes=384 match_percent=97.395836
+Result: byte-identical to the retained baseline, so the accepted source spelling was restored rather than recording a no-benefit source change.
+Raw objdiff: objdiff-experiment-signed-decl-70a03a20-6cb4-420b-8bea-dc4215205670.json
+
+Final retained canonical:
+retail_bytes=384 generated_bytes=384 match_percent=97.395836
+Final retained relocation-strict (function_reloc_diffs=name_address):
+retail_bytes=384 generated_bytes=384 match_percent=97.395836
