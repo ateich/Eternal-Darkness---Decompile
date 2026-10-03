@@ -20,13 +20,14 @@ extern void fn_800ED4BC(Vec3*, int, const char*, ...);
 
 void fn_801A7958(RegionEntry* entry, u16 count)
 {
-    char* strings = lbl_80251528;
+    // Keep format addresses as offsets from a cursor within the string table.
+    char* strings = lbl_80251528 + 1;
     u8* globals = lbl_802FC5BC;
-    u16 i;
     int index;
-    int remainder;
-    u8* data;
+    u16 i;
     RegionEntry* cursor = entry;
+    u8* data;
+    int remainder;
     Vec3 vertices[4];
     Vec3 position;
     Vec3 second;
@@ -47,15 +48,15 @@ void fn_801A7958(RegionEntry* entry, u16 count)
             fn_80179B08((u8*)data + 4, &position);
             sphere_color = *(u32*)(globals + 0x2C);
             fn_800EBA80(1, &position, &sphere_color, 0x78, (float)*(u32*)data);
-            fn_800ED4BC(&position, remainder, strings, index);
+            fn_800ED4BC(&position, remainder, strings - 1, index);
             break;
         case 1:
             fn_80179E08(&first, data);
             fn_80179E08(&second, (u8*)data + 6);
             box_color = *(u32*)(globals + 0x2C);
             fn_800EBBF4(&first, &second, &box_color, 0x78);
-            fn_800ED4BC(&first, remainder, strings + 0x10, index,
-                        *(s16*)(data + 0xC), *(s16*)(data + 0xE));
+            fn_800ED4BC(&first, remainder, strings + 0xF, index,
+                        *(s16*)(cursor->data + 0xC), *(s16*)(cursor->data + 0xE));
             break;
         case 2:
             for (j = 0; j < 4; j++) {
@@ -72,7 +73,7 @@ void fn_801A7958(RegionEntry* entry, u16 count)
             second_color = *(u32*)(globals + 0x28);
             second_plane = *(Vec3*)(data + 0x1C);
             fn_800EB750(vertices, &second_plane, &second_color, 0x78);
-            fn_800ED4BC(vertices, remainder, strings + 0x2C, index);
+            fn_800ED4BC(vertices, remainder, strings + 0x2B, index);
             break;
         }
     }

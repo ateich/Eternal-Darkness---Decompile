@@ -3635,6 +3635,19 @@ config.custom_build_rules = [
             ),
             "description": "EXTERNALIZE $in",
         },
+    # fn_801A7958 uses the existing guarded conversion-constant externalization.
+    {
+        "name": "externalize_game_801A7958_bias",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @29 lbl_80650DE8 "
+            f"orig/{VERSION}/sys/main.dol --require-whole-section "
+            "--require-section=.sdata2 --reject-section-relocations && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@29=lbl_80650DE8 --remove-section=.sdata2 "
+            "--rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
 ]
 
 game_section_externalizations = {
@@ -4103,6 +4116,11 @@ guarded_externalize_rules.add("externalize_game_801F0CB0_effect_pool")
 guarded_externalize_rules.add("externalize_string_pool_80251808")
 config.custom_build_steps = {
     "post-compile": [
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_801A7958.externalized"],
+            "rule": "externalize_game_801A7958_bias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_801A7958.o"],
+        },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_80036374.externalized"],
             "rule": "externalize_game_80036374_bias",
@@ -12124,7 +12142,7 @@ config.libs = [
             Object(Matching, "game/game_fn_801A7910.c"),
             Object(Matching, "game/game_fn_801A7934.c"),
             Object(
-                NonMatching,
+                Matching,
                 "game/game_fn_801A7958.c",
                 extra_cflags=["-use_lmw_stmw on"],
             ),
