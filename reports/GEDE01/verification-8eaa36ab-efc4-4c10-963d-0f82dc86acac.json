@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "assignment_id": "8eaa36ab-efc4-4c10-963d-0f82dc86acac",
+  "target": "fn_80031D24",
+  "compiler": "GC/1.3",
+  "scores": {
+    "canonical": 99.943184,
+    "relocation_strict": 99.943184
+  },
+  "text_size_each": 704,
+  "instruction_count_each": 176,
+  "text_byte_identical": true,
+  "equal_instruction_words": 176,
+  "text_sha256_each": "7ead58bb6ebec455c4fb37ca7a1bbc5832d4736899029a4521a5debd05adcd7a",
+  "object_sha256": {
+    "build/GEDE01/obj/game/game_fn_80031D24.o": "787b9ab57d6dabe8b572d980bf6c30ca39425cee63ff35de9bb32d0a26319979",
+    "build/GEDE01/src/game/game_fn_80031D24.o": "36dc4d188e9375cb5347eac6a013ff5b4cbada2d3e42cf2e53d13c9ce4d3ce32"
+  },
+  "source_sha256": "73923de22c843625762c9abcfff7f93aaf2a4489d84998bf3e7d4ad4811e7e49",
+  "relocation_count_each": 31,
+  "equal_site_type_target_addend": 29,
+  "relocation_differences": [
+    {
+      "retail": {
+        "site": "0x3c",
+        "type": 109,
+        "target": "lbl_80651924",
+        "addend": 0
+      },
+      "candidate": {
+        "site": "0x3c",
+        "type": 109,
+        "target": "@4",
+        "addend": 0
+      }
+    },
+    {
+      "retail": {
+        "site": "0x40",
+        "type": 109,
+        "target": "lbl_80651928",
+        "addend": 0
+      },
+      "candidate": {
+        "site": "0x40",
+        "type": 109,
+        "target": "@4",
+        "addend": 4
+      }
+    }
+  ],
+  "retail_object_sbss2": [],
+  "candidate_object_sbss2": [
+    {
+      "name": ".sbss2",
+      "type": 8,
+      "size": 6,
+      "alignment": 8
+    }
+  ],
+  "retail_zero_initializer_basis": {
+    "dol_bss_start": "0x80300200",
+    "dol_bss_size": "0x351d74",
+    "dol_bss_end_exclusive": "0x80651f74",
+    "retail_symbols": [
+      ".sbss2:0x80651924 size 4",
+      ".sbss2:0x80651928 size 2"
+    ],
+    "interpretation": "Both retail symbols are zero-initialized storage inside the DOL BSS range."
+  },
+  "registration": "Unchanged NonMatching; no configure.py or splits.txt changes.",
+  "remaining_scope_limit": "Matching needs the compiler-local six-byte NOBITS pool ownership and two relocations reconciled with retail. No post-compile rule, symbol-policy, tool, or neighboring-data change was authorized or attempted.",
+  "integration_gates_pending": [
+    "independent review",
+    "fresh full deterministic build output",
+    "fresh legal-audit output",
+    "fresh canonical and relocation-strict no-regression JSON",
+    "measured linked retail DOL SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f"
+  ],
+  "scope": "Assigned-object builds only. No full link, legal audit or retail DOL SHA-1 acceptance claim."
+}

@@ -1,0 +1,67 @@
+$ build/binutils/powerpc-eabi-objdump -h -t build/GEDE01/obj/game/game_fn_80031D24.o
+
+build/GEDE01/obj/game/game_fn_80031D24.o:     file format elf32-powerpc
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000002c0  00000000  00000000  00000040  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+SYMBOL TABLE:
+00000000 l    df *ABS*	00000000 game_fn_80031D24.c
+00000000 l    d  .text	00000000 .text
+00000000 g     F .text	000002c0 fn_80031D24
+00000000         *UND*	00000000 lbl_80651924
+00000000         *UND*	00000000 lbl_80651928
+00000000         *UND*	00000000 fn_801938FC
+00000000         *UND*	00000000 fn_80179B64
+00000000         *UND*	00000000 fn_801D3CAC
+00000000         *UND*	00000000 fn_801936FC
+00000000         *UND*	00000000 fn_80148008
+00000000         *UND*	00000000 fn_80156938
+00000000         *UND*	00000000 fn_8017FF1C
+00000000         *UND*	00000000 fn_80149E04
+00000000         *UND*	00000000 fn_80147E88
+00000000         *UND*	00000000 fn_80149FDC
+00000000         *UND*	00000000 fn_80148300
+00000000         *UND*	00000000 fn_80149EB8
+
+
+
+$ build/binutils/powerpc-eabi-objdump -h -t build/GEDE01/src/game/game_fn_80031D24.o
+
+build/GEDE01/src/game/game_fn_80031D24.o:     file format elf32-powerpc
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000002c0  00000000  00000000  00000034  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  1 .sbss2        00000006  00000000  00000000  000002f8  2**3
+                  ALLOC
+  2 .comment      000000bc  00000000  00000000  0000067b  2**0
+                  CONTENTS, READONLY
+SYMBOL TABLE:
+00000000 l    df *ABS*	00000000 game_fn_80031D24.c
+00000000 l    d  .text	00000000 .text
+00000000 l    d  .sbss2	00000000 .sbss2
+00000000 l     O .sbss2	00000006 @4
+00000000         *UND*	00000000 fn_801938FC
+00000000         *UND*	00000000 fn_80179B64
+00000000         *UND*	00000000 fn_801D3CAC
+00000000         *UND*	00000000 fn_801936FC
+00000000         *UND*	00000000 fn_80148008
+00000000         *UND*	00000000 fn_80156938
+00000000         *UND*	00000000 fn_8017FF1C
+00000000         *UND*	00000000 fn_80149E04
+00000000         *UND*	00000000 fn_80147E88
+00000000         *UND*	00000000 fn_80149FDC
+00000000         *UND*	00000000 fn_80148300
+00000000         *UND*	00000000 fn_80149EB8
+00000000 g     F .text	000002c0 fn_80031D24
+
+
+
+DOL header bytes [0xd8:0xe0]: 8030020000351d74
+
+lbl_80651924 = .sbss2:0x80651924; // type:object size:0x4 data:4byte
+
+lbl_80651928 = .sbss2:0x80651928; // type:object size:0x2 data:2byte

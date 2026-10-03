@@ -39,9 +39,6 @@ typedef struct PrimarySlot {
     u8 pad3C[0x4C];
 } PrimarySlot;
 
-extern const volatile u32 lbl_80651924;
-extern const volatile u16 lbl_80651928;
-
 extern void fn_801938FC(void*);
 extern void fn_80179B64(void*, void*);
 extern void fn_801D3CAC(s32, s32, EmbeddedDescriptor*);
@@ -60,9 +57,9 @@ void* fn_80031D24(Vec3f* position_arg, void* source_arg, s32 object_id_arg,
                   u8 packed_kind_arg, u8 packed_variant_arg, u8 active_arg,
                   s32 extra_mode_arg)
 {
-    /* NonMatching: honest C is instruction-identical after the first call;
-       GC/1.3 hoists the two direction loads within the prologue. */
-    Vec3s direction;
+    /* NonMatching: the literal initializer reproduces every instruction.
+       Its compiler-local zero pool still differs from the retail relocations. */
+    Vec3s direction = {0, 0, 0};
     Vec3f submit_position;
     PrimarySlot primary;
     EffectSlot slot;
@@ -85,8 +82,6 @@ void* fn_80031D24(Vec3f* position_arg, void* source_arg, s32 object_id_arg,
     u8 mode;
 
     primary_ptr = &primary;
-    *(u32*)&direction = lbl_80651924;
-    direction.z = lbl_80651928;
     fn_801938FC(primary_ptr);
     descriptor = &primary.descriptor;
     fn_80179B64(source, descriptor->position0E);

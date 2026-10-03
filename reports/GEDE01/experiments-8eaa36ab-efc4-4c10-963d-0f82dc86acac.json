@@ -1,0 +1,90 @@
+{
+  "experiments": [
+    {
+      "label": "aggregate-parts",
+      "source_diff": "--- baseline\n+++ aggregate-parts\n@@ -39,8 +39,10 @@\n     u8 pad3C[0x4C];\n } PrimarySlot;\n \n-extern const volatile u32 lbl_80651924;\n-extern const volatile u16 lbl_80651928;\n+typedef struct DirectionXY { short x, y; } DirectionXY;\n+typedef struct DirectionZ { short z; } DirectionZ;\n+extern const volatile DirectionXY lbl_80651924;\n+extern const volatile DirectionZ lbl_80651928;\n \n extern void fn_801938FC(void*);\n extern void fn_80179B64(void*, void*);\n@@ -85,8 +87,8 @@\n     u8 mode;\n \n     primary_ptr = &primary;\n-    *(u32*)&direction = lbl_80651924;\n-    direction.z = lbl_80651928;\n+    *(DirectionXY*)&direction = lbl_80651924;\n+    *(DirectionZ*)&direction.z = lbl_80651928;\n     fn_801938FC(primary_ptr);\n     descriptor = &primary.descriptor;\n     fn_80179B64(source, descriptor->position0E);\n",
+      "source_sha256": "a56aaa9f13ee736130f63d11ba4f761c77a2b233fdb1f48f16ff6f40d6050dce",
+      "object_sha256": "d2d5a56f23e4b16af1357ce429e46fa96e466cbdfd5cd4b474308c7616021b95",
+      "raw_objdiff": [
+        "eternal-darkness-decomp/reports/GEDE01/objdiff-8eaa36ab-efc4-4c10-963d-0f82dc86acac-aggregate-parts-canonical.json",
+        "eternal-darkness-decomp/reports/GEDE01/objdiff-8eaa36ab-efc4-4c10-963d-0f82dc86acac-aggregate-parts-strict.json"
+      ],
+      "measured_scores": {
+        "canonical": 97.72727,
+        "relocation_strict": 97.72727
+      },
+      "result": "Two separately named aggregate copies retained the original 97.72727% schedule and relocations; reverted."
+    },
+    {
+      "label": "aggregate-whole",
+      "source_diff": "--- baseline\n+++ aggregate-whole\n@@ -39,7 +39,7 @@\n     u8 pad3C[0x4C];\n } PrimarySlot;\n \n-extern const volatile u32 lbl_80651924;\n+extern const volatile Vec3s lbl_80651924;\n extern const volatile u16 lbl_80651928;\n \n extern void fn_801938FC(void*);\n@@ -85,8 +85,7 @@\n     u8 mode;\n \n     primary_ptr = &primary;\n-    *(u32*)&direction = lbl_80651924;\n-    direction.z = lbl_80651928;\n+    direction = lbl_80651924;\n     fn_801938FC(primary_ptr);\n     descriptor = &primary.descriptor;\n     fn_80179B64(source, descriptor->position0E);\n",
+      "source_sha256": "75a88a07108c261b0bc34e7ebd17270aa78ed5d5c3bda621020be9e4aa68d652",
+      "object_sha256": "6377a31fa7a3589fb3aa15dabea35626f25f1e4c06864d0411d9690887166e3b",
+      "raw_objdiff": [
+        "eternal-darkness-decomp/reports/GEDE01/objdiff-8eaa36ab-efc4-4c10-963d-0f82dc86acac-aggregate-whole-canonical.json",
+        "eternal-darkness-decomp/reports/GEDE01/objdiff-8eaa36ab-efc4-4c10-963d-0f82dc86acac-aggregate-whole-strict.json"
+      ],
+      "measured_scores": {
+        "canonical": 97.72727,
+        "relocation_strict": 97.72727
+      },
+      "result": "No scheduling improvement; second relocation additionally became lbl_80651924+4 instead of lbl_80651928. Reverted; equal objdiff scores do not establish relocation identity."
+    },
+    {
+      "label": "literal-initializer",
+      "source_diff": "--- baseline\n+++ literal-initializer\n@@ -62,7 +62,7 @@\n {\n     /* NonMatching: honest C is instruction-identical after the first call;\n        GC/1.3 hoists the two direction loads within the prologue. */\n-    Vec3s direction;\n+    Vec3s direction = {0, 0, 0};\n     Vec3f submit_position;\n     PrimarySlot primary;\n     EffectSlot slot;\n@@ -85,8 +85,6 @@\n     u8 mode;\n \n     primary_ptr = &primary;\n-    *(u32*)&direction = lbl_80651924;\n-    direction.z = lbl_80651928;\n     fn_801938FC(primary_ptr);\n     descriptor = &primary.descriptor;\n     fn_80179B64(source, descriptor->position0E);\n",
+      "source_sha256": "52844d41aac32efe1890cb0a4f7c94be4c3959dee5ee3b31533c6045d59ce29f",
+      "object_sha256": "36dc4d188e9375cb5347eac6a013ff5b4cbada2d3e42cf2e53d13c9ce4d3ce32",
+      "raw_objdiff": [
+        "eternal-darkness-decomp/reports/GEDE01/objdiff-8eaa36ab-efc4-4c10-963d-0f82dc86acac-literal-initializer-canonical.json",
+        "eternal-darkness-decomp/reports/GEDE01/objdiff-8eaa36ab-efc4-4c10-963d-0f82dc86acac-literal-initializer-strict.json"
+      ],
+      "measured_scores": {
+        "canonical": 99.943184,
+        "relocation_strict": 99.943184
+      },
+      "result": "Vec3s direction = {0, 0, 0} produced all 176 retail instruction words, with unresolved @4 and @4+4 pool relocations. Selected."
+    },
+    {
+      "label": "baseline",
+      "source_diff": "",
+      "source_sha256": "9ba7448d7045186a048ab0881fd19213d6607fd66aac92d56b340ce6afa1a115",
+      "object_sha256": "d2d5a56f23e4b16af1357ce429e46fa96e466cbdfd5cd4b474308c7616021b95",
+      "raw_objdiff": [
+        "eternal-darkness-decomp/reports/GEDE01/objdiff-8eaa36ab-efc4-4c10-963d-0f82dc86acac-baseline-canonical.json",
+        "eternal-darkness-decomp/reports/GEDE01/objdiff-8eaa36ab-efc4-4c10-963d-0f82dc86acac-baseline-strict.json"
+      ],
+      "measured_scores": {
+        "canonical": 97.72727,
+        "relocation_strict": 97.72727
+      },
+      "result": "Preserved best C reproduced at 97.72727%; initializer loads still hoisted."
+    },
+    {
+      "label": "final",
+      "source_diff": "--- baseline\n+++ final\n@@ -39,9 +39,6 @@\n     u8 pad3C[0x4C];\n } PrimarySlot;\n \n-extern const volatile u32 lbl_80651924;\n-extern const volatile u16 lbl_80651928;\n-\n extern void fn_801938FC(void*);\n extern void fn_80179B64(void*, void*);\n extern void fn_801D3CAC(s32, s32, EmbeddedDescriptor*);\n@@ -60,9 +57,9 @@\n                   u8 packed_kind_arg, u8 packed_variant_arg, u8 active_arg,\n                   s32 extra_mode_arg)\n {\n-    /* NonMatching: honest C is instruction-identical after the first call;\n-       GC/1.3 hoists the two direction loads within the prologue. */\n-    Vec3s direction;\n+    /* NonMatching: the literal initializer reproduces every instruction.\n+       Its compiler-local zero pool still differs from the retail relocations. */\n+    Vec3s direction = {0, 0, 0};\n     Vec3f submit_position;\n     PrimarySlot primary;\n     EffectSlot slot;\n@@ -85,8 +82,6 @@\n     u8 mode;\n \n     primary_ptr = &primary;\n-    *(u32*)&direction = lbl_80651924;\n-    direction.z = lbl_80651928;\n     fn_801938FC(primary_ptr);\n     descriptor = &primary.descriptor;\n     fn_80179B64(source, descriptor->position0E);\n",
+      "source_sha256": "73923de22c843625762c9abcfff7f93aaf2a4489d84998bf3e7d4ad4811e7e49",
+      "object_sha256": "36dc4d188e9375cb5347eac6a013ff5b4cbada2d3e42cf2e53d13c9ce4d3ce32",
+      "raw_objdiff": [
+        "eternal-darkness-decomp/reports/GEDE01/objdiff-canonical-8eaa36ab-efc4-4c10-963d-0f82dc86acac.json",
+        "eternal-darkness-decomp/reports/GEDE01/objdiff-8eaa36ab-efc4-4c10-963d-0f82dc86acac.json"
+      ],
+      "measured_scores": {
+        "canonical": 99.943184,
+        "relocation_strict": 99.943184
+      },
+      "result": "Removed unused extern declarations and corrected the NonMatching comment. All 176 instruction words remain byte-identical; 29/31 relocations exact."
+    }
+  ],
+  "baseline_commit": "1e0c8e1af9356525d36616bb7a1c79b36b351419",
+  "baseline_path": "eternal-darkness-decomp/src/game/game_fn_80031D24.c",
+  "hypothesis": "A literal automatic aggregate initializer is lowered differently from explicit scalar or aggregate loads, so its generated copy can remain after the argument-save prologue under canonical GC/1.3 scheduling.",
+  "studied_preserved_commits": [
+    "817e439772308b059d74a33918b0a31713fba0fa",
+    "893139373048cda60ad7de315609a6e33f52b625",
+    "e48aad4b8f0a76b24e04493b1002cd4bebcc1ac2",
+    "92f4ec72c850b0fec8b5eebef23138e92516e668"
+  ],
+  "not_repeated": "Scalar temporaries, comma sequencing, removing volatile scalar qualifiers, scheduling-off pragmas, volatile destinations, and the invalid external-valued aggregate initializer from the preserved attempts.",
+  "retained_candidate": "Only src/game/game_fn_80031D24.c is retained as a C translation unit; rejected variants survive solely as source-diff and measurement evidence."
+}
