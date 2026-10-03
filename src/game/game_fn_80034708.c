@@ -151,7 +151,8 @@ s32 fn_80034708(void *arg0) {
             temp_r4 = *lbl_8064C5A8;
             lbl_8064D564 = temp_r4;
             M2C_FIELD(arg0, s8 *, 0x9F) = 1;
-            M2C_FIELD(fn_80036D38(var_r30), s32 *, 0xB4) = 0x8000;
+            temp_r3 = fn_80036D38(var_r30);
+            M2C_FIELD(temp_r3, s32 *, 0xB4) = 0x8000;
             fn_802020B4(var_r30, 1);
             fn_80204C2C(var_r30);
             if (fn_801F6228(temp_r31, 0, 2) != 0) {
