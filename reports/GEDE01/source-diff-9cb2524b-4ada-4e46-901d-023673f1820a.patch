@@ -1,0 +1,31 @@
+diff --git a/eternal-darkness-decomp/src/game/game_fn_80205730.c b/eternal-darkness-decomp/src/game/game_fn_80205730.c
+index 61082bcfe..964b19a3a 100644
+--- a/eternal-darkness-decomp/src/game/game_fn_80205730.c
++++ b/eternal-darkness-decomp/src/game/game_fn_80205730.c
+@@ -2,7 +2,7 @@ typedef unsigned int u32;
+ 
+ extern void fn_8011F950(void *object);
+ extern int fn_80201A84(void *object);
+-extern void *fn_8012E568(void *object, int value, int type);
++extern void *fn_8012E568(void *object, int value, void *data);
+ extern void fn_80120874(void *object);
+ extern u32 fn_8011FA8C(void *object, int value, u32 flags);
+ extern void *fn_80204758(int type);
+@@ -22,7 +22,7 @@ extern void fn_8011FED4(void *object, int value);
+ extern void fn_8011EBFC(void *object);
+ extern void fn_801E8328(int type, void *object);
+ 
+-void *fn_80205730(void *object, int value, int type, u32 flags)
++void *fn_80205730(void *object, int value, void *data, u32 flags)
+ {
+     void *resource;
+     void *created;
+@@ -31,7 +31,7 @@ void *fn_80205730(void *object, int value, int type, u32 flags)
+ 
+     fn_8011F950(object);
+     owner = fn_80201A84(object);
+-    resource = fn_8012E568(object, value, type);
++    resource = fn_8012E568(object, value, data);
+     fn_80120874(object);
+     fn_8011FA8C(resource, 0, flags & ~0x20000000);
+ 
