@@ -1,0 +1,32 @@
+{
+  "target": "fn_80018708",
+  "compiler": "GC/1.3",
+  "flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma cats off -pragma warn_notinlined off -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -lang=c",
+  "retail_text_bytes": 1292,
+  "generated_text_bytes": 1300,
+  "canonical_match_percent": 93.87616,
+  "relocation_strict_match_percent": 93.87616,
+  "retail_relocations": 34,
+  "generated_relocations": 36,
+  "verified_codegen": {
+    "stack_frame_bytes": 576,
+    "descriptor_stack_offset": 204,
+    "descriptor_bytes": 144,
+    "body_offset_within_descriptor": 40,
+    "body_stack_offset": 244,
+    "point_offset_within_descriptor": 104,
+    "point_stride_bytes": 6,
+    "descriptor_copy_iterations": 18,
+    "descriptor_copy_bytes_per_iteration": 8,
+    "descriptor_copy_total_bytes": 144,
+    "callback_offset_within_info": 144,
+    "type_offset_within_info": 170,
+    "null_branch_generated_offset": 1092,
+    "null_branch_generated_target": 1108,
+    "null_branch_retail_offset": 1088,
+    "null_branch_retail_target": 1104
+  },
+  "review_repair": "The null branch now skips only fn_801964E8. The endpoint updates, fn_80142A70, and fn_8014B8D0 execute after the branch, matching retail control flow.",
+  "precondition": "Retail and the matching sibling assume count <= 6; the caller invariant is not proven in this assignment. No guard was added and the descriptor was not enlarged.",
+  "remaining_divergence": "The canonical object uses _savegpr_25/_restgpr_25 rather than retail stmw/lmw, adding eight text bytes and two relocations. Signed-short-to-float setup/scheduling differs, including generated compiler-local @40 versus retail lbl_8064DCE8, and related branches shift. Compiler version, flags, and configure registration were intentionally unchanged."
+}

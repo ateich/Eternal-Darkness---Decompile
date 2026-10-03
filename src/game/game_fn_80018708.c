@@ -10,16 +10,28 @@ typedef struct {
     s16 z;
 } Vec3s;
 
-typedef struct {
-    u8 bytes[40];
-} SpawnHeader;
+typedef union {
+    u8 bytes[144];
+    struct {
+        u8 prefix[40];
+        u8 body[104];
+    } layout;
+} SpawnDescriptor;
 
 typedef struct {
     u8 bytes[172];
+    u8 stack_padding[2];
 } SpawnInfo;
+
+typedef struct {
+    s32 first;
+    s32 second;
+} ValuePair;
 
 extern const char lbl_8023CBC8[];
 extern s32 lbl_8064D18C;
+extern const f32 lbl_8064DCF4;
+extern const f32 lbl_8064DE78;
 
 extern double fn_8016A694(void*, int);
 extern int fn_8016A598(void*);
@@ -34,21 +46,23 @@ extern void* fn_80147EC4(void*);
 extern void fn_801964E8(void*, s32, s32);
 extern s32 fn_80142A70(s32, Vec3s*, s32, s32, s32, s32, s32, s32);
 extern s32 fn_8014B8D0(void*, s32);
-extern void fn_801966E0(void);
+extern void* fn_801966E0(void*, int, int);
 
+/* NonMatching: count is assumed to be at most six, as in retail and the
+ * matching sibling; that caller invariant has not yet been proven here. */
 s32 fn_80018708(void* script)
 {
+    SpawnDescriptor descriptor;
     SpawnInfo info;
-    SpawnHeader header;
-    Vec3s first;
-    Vec3s last;
-    Vec3s points[24];
+    Vec3s endpoints[2];
+    u8* body;
     s32 arg1;
     s32 arg2;
     s32 count;
     s32 kind;
     s32 flags;
     s32 i;
+    s32 handle;
     f32 dx;
     f32 dy;
     f32 dz;
@@ -56,6 +70,7 @@ s32 fn_80018708(void* script)
     f32 max_z;
     f32 best_low;
     f32 best_high;
+    ValuePair values;
 
     arg1 = (s32)fn_8016A694(script, 1);
     arg2 = (s32)fn_8016A694(script, 2);
@@ -65,20 +80,22 @@ s32 fn_80018708(void* script)
         return 0;
     }
 
-    kind = (s32)fn_8016A694(script, 4);
-    fn_80196578(&header);
-    *(s16*)&header.bytes[4] = -1;
-    fn_8018F81C(&header, (u8)count);
-
-    *(u16*)&info.bytes[8] = 15;
-    info.bytes[1] = 8;
-    info.bytes[2] = (u8)count;
-
+    body = descriptor.layout.body;
     flags = 0;
+    kind = (s32)fn_8016A694(script, 4);
+    fn_80196578(&descriptor);
+    *(s16*)&descriptor.bytes[4] = -1;
+    fn_8018F81C(&descriptor, (u8)count);
+
+    *(u16*)&body[8] = 15;
+    body[1] = 8;
+    body[2] = (u8)count;
+
+    values.second = values.first = fn_801D3974(kind);
+    ((u8*)&values.second)[3] = (u8)arg1;
+    ((u8*)&values.first)[3] = (u8)arg2;
+
     switch (kind) {
-    case 0:
-        flags = 0x100;
-        break;
     case 1:
         flags = 0x20;
         break;
@@ -91,31 +108,30 @@ s32 fn_80018708(void* script)
     case 4:
         flags = 0x40;
         break;
+    case 0:
+        flags = 0x100;
+        break;
     }
 
-    *(s32*)&header.bytes[20] = fn_801D3974(kind);
-    *(s32*)&header.bytes[24] = *(s32*)&header.bytes[20];
-    header.bytes[27] = (u8)arg2;
-    header.bytes[23] = (u8)arg1;
-    *(s32*)&info.bytes[12] = *(s32*)&header.bytes[24];
-    *(s32*)&info.bytes[16] = *(s32*)&header.bytes[20];
-    info.bytes[25] = 9;
-    info.bytes[28] = 3;
-    *(u16*)&info.bytes[22] = (u16)flags;
-    info.bytes[4] |= 0x81;
-    info.bytes[3] = 0;
+    *(s32*)&descriptor.bytes[20] = values.second;
+    *(s32*)&descriptor.bytes[24] = values.first;
+    descriptor.bytes[33] = 9;
+    descriptor.bytes[36] = 3;
+    *(u16*)&descriptor.bytes[30] = (u16)flags;
+    descriptor.bytes[44] |= 0x81;
+    descriptor.bytes[43] = 0;
 
-    first = *fn_80158ABC(
+    endpoints[0] = *fn_80158ABC(
         fn_8015C4A4(fn_800F5C54(fn_8016A694(script, 5)), 2), 2, 0);
-    last = *fn_80158ABC(
+    endpoints[1] = *fn_80158ABC(
         fn_8015C4A4(fn_800F5C54(fn_8016A694(script, 7)), 2), 2, 0);
-    dx = (f32)(last.x - first.x);
-    dy = (f32)(last.y - first.y);
-    dz = (f32)(last.z - first.z);
-    min_z = (f32)first.z;
-    max_z = (f32)first.z;
-    best_low = 1000000.0f;
-    best_high = -1000000.0f;
+    dx = (f32)(endpoints[1].x - endpoints[0].x);
+    dy = (f32)(endpoints[1].y - endpoints[0].y);
+    dz = (f32)(endpoints[1].z - endpoints[0].z);
+    min_z = (f32)endpoints[0].z;
+    max_z = (f32)endpoints[0].z;
+    best_low = lbl_8064DE78;
+    best_high = lbl_8064DCF4;
 
     for (i = 0; i < count; i++) {
         Vec3s* point;
@@ -133,27 +149,28 @@ s32 fn_80018708(void* script)
         }
         if (distance > best_high) {
             best_high = distance;
-            last = *point;
+            endpoints[1] = *point;
         }
         if (distance < best_low) {
             best_low = distance;
-            first = *point;
+            endpoints[0] = *point;
         }
-        points[i] = *point;
+        *(Vec3s*)&body[64] = *point;
+        body += 6;
     }
 
+    *(SpawnDescriptor*)&info = descriptor;
+    *(void**)&info.bytes[144] = (void*)fn_801966E0;
     info.bytes[170] = 2;
-    *(s32*)&info.bytes[144] = (s32)fn_801966E0;
     fn_80147EC4(&info);
     if (*(void**)&info.bytes[148] != 0) {
         fn_801964E8(*(void**)&info.bytes[148], 1, 0);
     }
-
-    first.y = (s16)min_z;
-    last.y = (s16)max_z;
-    fn_8014B8D0(
-        *(void**)&info.bytes[148],
-        fn_80142A70(2, &first, (s16)(max_z - min_z), lbl_8064D18C,
-                    0, 0, 0, 0));
+    script = *(void**)&info.bytes[148];
+    endpoints[0].z = (s16)min_z;
+    endpoints[1].z = (s16)min_z;
+    handle = fn_80142A70(2, endpoints, (s16)(max_z - min_z),
+                         lbl_8064D18C, 0, 0, 0, 0);
+    fn_8014B8D0(script, handle);
     return 0;
 }
