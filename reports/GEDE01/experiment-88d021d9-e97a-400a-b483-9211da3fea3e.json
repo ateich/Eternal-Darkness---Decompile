@@ -1,0 +1,137 @@
+{
+  "assignment_id": "88d021d9-e97a-400a-b483-9211da3fea3e",
+  "target": "fn_800359A0",
+  "retained_experiment": 18,
+  "preserved_attempts_studied": {
+    "4ed27ff6375219e6a58a00370b3b80e0215e0ab6": "Source already identical to accepted base; read envelope, experiment, build and instruction comparison. Baseline independently rebuilt and measured 96.7%.",
+    "ea84139bb80ce8e12d6d4abf6195f4bb568628fe": "Read shared-failure-label experiment. Did not repeat that or the earlier validity-materialization hypothesis.",
+    "older_attempts": "Read supplied review and regression diagnoses; retained the corrected failure paths, source-derived mask, and candidate filtering."
+  },
+  "new_hypothesis": "Retail ignores the first fn_80201C48 return, retaining the original fn_80201B94 context pointer. Correcting the pointer provenance eliminates two instructions and changes the spill lifetime. Explicit mask disjunctions, unsigned flags, and retail operand ordering recover the remaining instruction shapes. Shared scalar lifetimes then affect register allocation.",
+  "semantic_correction": "At retail offsets 0x3c-0x48, the B94 return is stored in stack slot 0x48; the C48 call at 0xd8 is followed by mr r3,r15, discarding its return. Later context operations load the original slot. The preserved C instead used C48\u2019s return for those operations. The retained C uses the B94 pointer and preserves the C48 call for its side effects.",
+  "experiments": [
+    {
+      "id": 1,
+      "score": 97.54102,
+      "change": "Discard first C48 return, retain original context pointer."
+    },
+    {
+      "id": 2,
+      "score": 98.36154,
+      "valid_final_build": false,
+      "change": "Unsigned flags/masks, explicit nonzero-mask disjunctions, comparison operand order, multiplier first. Compilation succeeded but guarded externalization failed because the local constant identity changed. Raw exploratory objdiff retained, not claimed as final validation."
+    },
+    {
+      "id": 3,
+      "score": 98.784615,
+      "change": "Use unsigned ~1u for unsigned context flags and repair only the function-specific guarded constant identity."
+    },
+    {
+      "id": 4,
+      "score": 98.80513,
+      "change": "Reorder stack declarations."
+    },
+    {
+      "id": 5,
+      "score": 98.784615,
+      "change": "Remove register qualifiers; no improvement."
+    },
+    {
+      "id": 6,
+      "score": 98.75897,
+      "valid_final_build": false,
+      "change": "Reuse requested info and ID locals together. Guarded externalization failed on renumbered local symbol; exploratory raw diff retained."
+    },
+    {
+      "id": 7,
+      "score": 98.84615,
+      "change": "Use a single context variable and match stack declaration order."
+    },
+    {
+      "id": 8,
+      "score": 98.84615,
+      "change": "Reverse scalar declarations; no effect."
+    },
+    {
+      "id": 9,
+      "score": 98.84615,
+      "change": "Order scalar declarations by retail register numbers; no effect."
+    },
+    {
+      "id": 10,
+      "result": "Compiler error: individual ID reuse placed statement before C89 local declarations; raw failure preserved."
+    },
+    {
+      "id": 11,
+      "score": 98.84615,
+      "change": "Reuse requested info in scanning; no effect."
+    },
+    {
+      "id": 12,
+      "score": 98.84615,
+      "change": "Reuse requested value94 in scanning; no effect."
+    },
+    {
+      "id": 13,
+      "result": "Compiler error: special-state reuse placed statement before C89 local declarations; raw failure preserved."
+    },
+    {
+      "id": 14,
+      "result": "Compiler error: candidate-pointer reuse placed statement before C89 local declarations; raw failure preserved."
+    },
+    {
+      "id": 15,
+      "result": "Compiler error: flags reuse placed statement before C89 local declarations; raw failure preserved."
+    },
+    {
+      "id": 16,
+      "score": 98.84615,
+      "change": "Hoist scan declarations to permit C89-compatible lifetime experiments."
+    },
+    {
+      "id": 17,
+      "score": 98.589745,
+      "change": "Hoisted candidate ID reuse; rejected regression."
+    },
+    {
+      "id": 18,
+      "score": 98.871796,
+      "change": "Hoisted special-state reuse; retained. Requested special value is dead when scanning begins."
+    },
+    {
+      "id": 19,
+      "score": 98.551285,
+      "change": "Hoisted candidate-pointer reuse; rejected regression."
+    },
+    {
+      "id": 20,
+      "score": 98.84615,
+      "change": "Hoisted flags reuse; no improvement."
+    },
+    {
+      "id": 21,
+      "score": 98.871796,
+      "change": "All three special-bit extractions expressed as masked != 0; identical score."
+    },
+    {
+      "id": 22,
+      "score": 98.871796,
+      "change": "Only source special-bit extraction expressed as masked != 0; identical score."
+    },
+    {
+      "id": 23,
+      "score": 98.871796,
+      "change": "Only requested special-bit extraction expressed as masked != 0; identical score."
+    },
+    {
+      "id": 24,
+      "score": 98.871796,
+      "change": "Only candidate special-bit extraction expressed as masked != 0; identical score."
+    }
+  ],
+  "final": "Experiment 18, with comments and whitespace cleanup; rebuilt and freshly measured in both objdiff modes. Canonical and strict: 98.871796%; both text sections 1560 bytes; 86 words differ only in GPR fields. All 50 relocation offset/type/target/addend tuples equal. Still NonMatching.",
+  "configuration": "Only this function\u2019s existing guarded externalization local constant identity changes from @122 to @126. Whole-section, .sdata2 and reject-section-relocation guards remain intact. GC/1.3 and all compiler flags unchanged. Splits unchanged.",
+  "evidence_notes": "Experiment 2 fndiff rows use the tool\u2019s aligned display index, not necessarily true ELF instruction offsets. The final instruction-diff is a raw objdump -dr unified diff with actual offsets. Final relocation tables are raw readelf -rW. Full generated objects and private inputs are not committed. Scoped C/config whitespace checks pass. The all-files git diff --check reports whitespace in verbatim compiler CRLF diagnostics, Ninja failure lines, and unified-diff context lines; those raw reports are intentionally unmodified.",
+  "acceptance": "Attempted result only. Independent review and fresh integrator full deterministic build, legal audit, full canonical/strict no-regression reports, and measured DOL SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f remain mandatory. These gates were not run or claimed in this assignment.",
+  "workspace": "Pre-existing CLAUDE.md modification was left untouched and is excluded from the commit."
+}

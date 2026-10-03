@@ -58,12 +58,11 @@ s32 fn_800359A0(register void* source, register void* requested)
 {
     register s32 source_id;
     register void* source_value;
-    register void* source_kind;
     register State* source_state;
     register ObjectInfo* source_info;
     register ObjectInfo* requested_info;
-    register s32 source_flags;
-    register s32 requested_flags;
+    register u32 source_flags;
+    register u32 requested_flags;
     register s32 requested_id;
     register s32 requested_kind;
     register void* requested_object;
@@ -76,22 +75,34 @@ s32 fn_800359A0(register void* source, register void* requested)
     Vec3 source_position;
     Vec3 candidate_position;
     Vec3 requested_position;
+    u32 source_mask;
+    u32 context_mask;
     void* source_context;
-    void* candidate_context;
     void* best;
+    void* candidate_context;
     u32 best_distance;
-    s32 source_mask;
-    s32 context_mask;
-    s32 context_flags;
+    u32 context_flags;
     s32 requested_has_state;
     Vec3 requested_temporary;
     u32 message_result;
+
+    register void* candidate;
+    register u32 nearest;
+    register s32 candidate_id;
+    register ObjectInfo* info;
+    register u32 flags;
+    register u8 kind9e;
+    register u8 kind9f;
+    register void* value;
+    register s32 type;
+    register s32 value94;
+    register u32 distance;
 
     direct_result = 0;
     requested_value94 = 0;
     source_id = fn_80201B54(source);
     source_value = fn_80201BC8(source);
-    source_kind = fn_80201B94(source);
+    source_context = fn_80201B94(source);
     source_state = fn_80036D38(source);
     fn_80201E78(&source_position, source);
     source_info = fn_80201B8C(source);
@@ -113,7 +124,8 @@ s32 fn_800359A0(register void* source, register void* requested)
     } else {
         requested_flags = 0;
     }
-    source_context = fn_80201C48(source_kind);
+    /* Retail discards this lookup; the context is still the B94 result. */
+    fn_80201C48(source_context);
     source_type = fn_80201EB8(source);
 
     if (source_state != 0) {
@@ -150,11 +162,12 @@ s32 fn_800359A0(register void* source, register void* requested)
         ((message_result = fn_8020123C(0x3B, source_id, requested_id, 0) &
                            0xFFFFFFFFULL),
          message_result == 1)) {
-        if ((source_flags & 0x1000) != 0 &&
-            requested_id != (s32)requested_object) {
+        if (!((source_flags & 0x1000) == 0 ||
+              ((source_flags & 0x1000) != 0 &&
+               requested_id == (s32)requested_object))) {
             goto fail;
         }
-        if (source_special != 0 && source_state->ownerC0 == requested_id &&
+        if (source_special != 0 && requested_id == source_state->ownerC0 &&
             requested_special == 0) {
             goto fail;
         }
@@ -177,8 +190,8 @@ s32 fn_800359A0(register void* source, register void* requested)
     }
 
     if (source_context != 0 && source_id != (s32)requested_object) {
-        register void* candidate = fn_80201B9C();
-        register u32 nearest = (u32)-1;
+        candidate = fn_80201B9C();
+        nearest = (u32)-1;
         best = 0;
         candidate_context = fn_80201C48(source_context);
         if (fn_800CAF7C(source) == 0) {
@@ -194,24 +207,24 @@ s32 fn_800359A0(register void* source, register void* requested)
                  message_result == 1)) {
                 return 1;
             }
-            context_flags &= ~1;
+            context_flags &= ~1u;
             fn_80201E60(source_context, context_flags);
         }
         source_mask = source_flags & 0x1000;
         context_mask = context_flags & 4;
 
         while (candidate != 0) {
-            register s32 candidate_id = fn_80201B54(candidate);
-            register ObjectInfo* info = fn_80201B8C(candidate);
+            candidate_id = fn_80201B54(candidate);
+            info = fn_80201B8C(candidate);
             if (info != 0 && info->state8C != 0) {
-                register s32 flags = fn_80036D5C(candidate);
-                register s32 candidate_special =
+                flags = fn_80036D5C(candidate);
+                /* The requested target is no longer used on the scan path. */
+                requested_special =
                     (info->state8C->flags00 >> 22) & 1;
-                register u8 kind9e = info->kind9E;
-                register u8 kind9f = info->kind9F;
-                register void* value = fn_80201BC8(candidate);
-                register s32 type = fn_80201EB8(candidate);
-                register s32 value94;
+                kind9e = info->kind9E;
+                kind9f = info->kind9F;
+                value = fn_80201BC8(candidate);
+                type = fn_80201EB8(candidate);
 
                 if (flags & 0x80) {
                     value94 = fn_80035958(info);
@@ -224,18 +237,18 @@ s32 fn_800359A0(register void* source, register void* requested)
                     (value94 != source_value94 ||
                      (candidate_id == (s32)requested_object && kind9e == 1 &&
                       kind9f == 1) ||
-                     (candidate_special != 0 &&
+                     (requested_special != 0 &&
                       info->state8C->ownerC0 != source_id) ||
                      source_special != 0) &&
                     source_id != candidate_id &&
-                    (source_mask == 0 || candidate_id == (s32)requested_object) &&
-                    (source_special == 0 || source_state->ownerC0 != candidate_id)) {
-                    register u32 distance;
+                    (source_mask == 0 ||
+                     (source_mask != 0 && candidate_id == (s32)requested_object)) &&
+                    (source_special == 0 || candidate_id != source_state->ownerC0)) {
                     fn_80201E78(&candidate_position, candidate);
                     distance = fn_80178E94(&source_position, &candidate_position);
                     if (fn_80204434(source_value, &candidate_position,
-                                    (float)source_state->range14A *
-                                        *(float*)&lbl_8064E208,
+                                    *(float*)&lbl_8064E208 *
+                                        (float)source_state->range14A,
                                     0) != 0 &&
                         distance < nearest &&
                         ((message_result = fn_8020123C(0x3B, source_id,

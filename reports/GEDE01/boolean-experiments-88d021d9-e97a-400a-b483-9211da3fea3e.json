@@ -1,0 +1,30 @@
+[
+  {
+    "experiment": "21",
+    "score": 98.871796,
+    "size": "1560",
+    "constant": "@126",
+    "diff_from_experiment18": "--- \n+++ \n@@ -128,13 +128,13 @@\n     source_type = fn_80201EB8(source);\n \n     if (source_state != 0) {\n-        source_special = (source_state->flags00 >> 22) & 1;\n+        source_special = (source_state->flags00 & 0x400000) != 0;\n     } else {\n         source_special = 0;\n     }\n     requested_has_state = requested_info != 0 && requested_info->state8C != 0;\n     if (requested_has_state) {\n-        requested_special = (requested_info->state8C->flags00 >> 22) & 1;\n+        requested_special = (requested_info->state8C->flags00 & 0x400000) != 0;\n     } else {\n         requested_special = 0;\n     }\n@@ -218,7 +218,7 @@\n             if (info != 0 && info->state8C != 0) {\n                 flags = fn_80036D5C(candidate);\n                 requested_special =\n-                    (info->state8C->flags00 >> 22) & 1;\n+                    (info->state8C->flags00 & 0x400000) != 0;\n                 kind9e = info->kind9E;\n                 kind9f = info->kind9F;\n                 value = fn_80201BC8(candidate);\n"
+  },
+  {
+    "experiment": "22",
+    "score": 98.871796,
+    "size": "1560",
+    "constant": "@126",
+    "diff_from_experiment18": "--- \n+++ \n@@ -128,7 +128,7 @@\n     source_type = fn_80201EB8(source);\n \n     if (source_state != 0) {\n-        source_special = (source_state->flags00 >> 22) & 1;\n+        source_special = (source_state->flags00 & 0x400000) != 0;\n     } else {\n         source_special = 0;\n     }\n"
+  },
+  {
+    "experiment": "23",
+    "score": 98.871796,
+    "size": "1560",
+    "constant": "@126",
+    "diff_from_experiment18": "--- \n+++ \n@@ -134,7 +134,7 @@\n     }\n     requested_has_state = requested_info != 0 && requested_info->state8C != 0;\n     if (requested_has_state) {\n-        requested_special = (requested_info->state8C->flags00 >> 22) & 1;\n+        requested_special = (requested_info->state8C->flags00 & 0x400000) != 0;\n     } else {\n         requested_special = 0;\n     }\n"
+  },
+  {
+    "experiment": "24",
+    "score": 98.871796,
+    "size": "1560",
+    "constant": "@126",
+    "diff_from_experiment18": "--- \n+++ \n@@ -218,7 +218,7 @@\n             if (info != 0 && info->state8C != 0) {\n                 flags = fn_80036D5C(candidate);\n                 requested_special =\n-                    (info->state8C->flags00 >> 22) & 1;\n+                    (info->state8C->flags00 & 0x400000) != 0;\n                 kind9e = info->kind9E;\n                 kind9f = info->kind9F;\n                 value = fn_80201BC8(candidate);\n"
+  }
+]

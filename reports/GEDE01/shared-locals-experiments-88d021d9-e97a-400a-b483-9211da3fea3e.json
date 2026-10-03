@@ -1,0 +1,18 @@
+[
+  {
+    "experiment": 11,
+    "name": "info",
+    "score": 98.84615,
+    "size": "1560",
+    "constant": "@126",
+    "diff_from_experiment7": "--- \n+++ \n@@ -202,30 +202,30 @@\n \n         while (candidate != 0) {\n             register s32 candidate_id = fn_80201B54(candidate);\n-            register ObjectInfo* info = fn_80201B8C(candidate);\n-            if (info != 0 && info->state8C != 0) {\n+            requested_info = fn_80201B8C(candidate);\n+            if (requested_info != 0 && requested_info->state8C != 0) {\n                 register u32 flags = fn_80036D5C(candidate);\n                 register s32 candidate_special =\n-                    (info->state8C->flags00 >> 22) & 1;\n-                register u8 kind9e = info->kind9E;\n-                register u8 kind9f = info->kind9F;\n+                    (requested_info->state8C->flags00 >> 22) & 1;\n+                register u8 kind9e = requested_info->kind9E;\n+                register u8 kind9f = requested_info->kind9F;\n                 register void* value = fn_80201BC8(candidate);\n                 register s32 type = fn_80201EB8(candidate);\n                 register s32 value94;\n \n                 if (flags & 0x80) {\n-                    value94 = fn_80035958(info);\n+                    value94 = fn_80035958(requested_info);\n                 } else {\n-                    value94 = info->value94;\n+                    value94 = requested_info->value94;\n                 }\n                 if (source_type == type && (flags & 0x80) == 0 &&\n                     (flags & 0x8000) == 0 &&\n-                    (info->kind9E == 1 || info->kind9E == 2) &&\n+                    (requested_info->kind9E == 1 || requested_info->kind9E == 2) &&\n                     (value94 != source_value94 ||\n                      (candidate_id == (s32)requested_object && kind9e == 1 &&\n                       kind9f == 1) ||\n                      (candidate_special != 0 &&\n-                      info->state8C->ownerC0 != source_id) ||\n+                      requested_info->state8C->ownerC0 != source_id) ||\n                      source_special != 0) &&\n                     source_id != candidate_id &&\n                     (source_mask == 0 ||\n"
+  },
+  {
+    "experiment": 12,
+    "name": "value",
+    "score": 98.84615,
+    "size": "1560",
+    "constant": "@126",
+    "diff_from_experiment7": "--- \n+++ \n@@ -211,17 +211,17 @@\n                 register u8 kind9f = info->kind9F;\n                 register void* value = fn_80201BC8(candidate);\n                 register s32 type = fn_80201EB8(candidate);\n-                register s32 value94;\n+                \n \n                 if (flags & 0x80) {\n-                    value94 = fn_80035958(info);\n+                    requested_value94 = fn_80035958(info);\n                 } else {\n-                    value94 = info->value94;\n+                    requested_value94 = info->value94;\n                 }\n                 if (source_type == type && (flags & 0x80) == 0 &&\n                     (flags & 0x8000) == 0 &&\n                     (info->kind9E == 1 || info->kind9E == 2) &&\n-                    (value94 != source_value94 ||\n+                    (requested_value94 != source_value94 ||\n                      (candidate_id == (s32)requested_object && kind9e == 1 &&\n                       kind9f == 1) ||\n                      (candidate_special != 0 &&\n"
+  }
+]
