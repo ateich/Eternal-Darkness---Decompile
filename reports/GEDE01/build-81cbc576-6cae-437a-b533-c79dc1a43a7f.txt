@@ -1,0 +1,9 @@
+$ .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80026DC8.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80026DC8.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80026DC8.d build/GEDE01/src/game/game_fn_80026DC8.d
+exit=0
+$ build/tools/objdiff-cli diff -p . -u main/game/game_fn_80026DC8 fn_80026DC8 -o reports/GEDE01/objdiff-81cbc576-6cae-437a-b533-c79dc1a43a7f.json --format json-pretty
+ INFO Writing to reports/GEDE01/objdiff-81cbc576-6cae-437a-b533-c79dc1a43a7f.json
+exit=0
+$ build/tools/objdiff-cli diff -p . -u main/game/game_fn_80026DC8 fn_80026DC8 -o reports/GEDE01/objdiff-81cbc576-6cae-437a-b533-c79dc1a43a7f-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address
+ INFO Writing to reports/GEDE01/objdiff-81cbc576-6cae-437a-b533-c79dc1a43a7f-reloc-strict.json
+exit=0

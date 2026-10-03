@@ -1,0 +1,22 @@
+--- accepted-base
++++ do-alpha
+@@ -44,12 +44,14 @@
+     x[2] = (s32)(left + lbl_8064DFAC * width);
+     x[3] = right;
+ 
+-    for (i = 0; i < 4; i++) {
+-        color[i] = lbl_80238C4C[i];
+-    }
+-    for (i = 0; i < 4; i++) {
++    color[0] = lbl_80238C4C[0];
++    color[1] = lbl_80238C4C[1];
++    color[2] = lbl_80238C4C[2];
++    color[3] = lbl_80238C4C[3];
++    i = 0;
++    do {
+         color[i] |= alpha;
+-    }
++    } while (++i < 4);
+ 
+     count = 3;
+     for (i = 0; i < 4; i++) {

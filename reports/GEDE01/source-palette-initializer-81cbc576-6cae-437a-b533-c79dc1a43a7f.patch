@@ -1,0 +1,22 @@
+--- accepted-base
++++ palette-initializer
+@@ -28,7 +28,7 @@
+ {
+     u32 draw_color;
+     s16 x[4];
+-    u32 color[4];
++    u32 color[4] = {lbl_80238C4C[0], lbl_80238C4C[1], lbl_80238C4C[2], lbl_80238C4C[3]};
+     s32 width;
+     s32 clip;
+     s32 count;
+@@ -44,9 +44,7 @@
+     x[2] = (s32)(left + lbl_8064DFAC * width);
+     x[3] = right;
+ 
+-    for (i = 0; i < 4; i++) {
+-        color[i] = lbl_80238C4C[i];
+-    }
++
+     for (i = 0; i < 4; i++) {
+         color[i] |= alpha;
+     }

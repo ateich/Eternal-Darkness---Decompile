@@ -1,0 +1,56 @@
+--- accepted-base
++++ aggregate-copy
+@@ -8,7 +8,8 @@
+ 
+ #pragma use_lmw_stmw on
+ 
+-extern const u32 lbl_80238C4C[4];
++typedef struct { u32 entry[4]; } Palette;
++extern const Palette lbl_80238C4C;
+ extern u32 lbl_8064C2A8;
+ extern const f32 lbl_8064DFA8;
+ extern const f32 lbl_8064DFAC;
+@@ -28,7 +29,7 @@
+ {
+     u32 draw_color;
+     s16 x[4];
+-    u32 color[4];
++    Palette palette;
+     s32 width;
+     s32 clip;
+     s32 count;
+@@ -44,11 +45,9 @@
+     x[2] = (s32)(left + lbl_8064DFAC * width);
+     x[3] = right;
+ 
++    palette = lbl_80238C4C;
+     for (i = 0; i < 4; i++) {
+-        color[i] = lbl_80238C4C[i];
+-    }
+-    for (i = 0; i < 4; i++) {
+-        color[i] |= alpha;
++        palette.entry[i] |= alpha;
+     }
+ 
+     count = 3;
+@@ -70,16 +69,16 @@
+     for (i = 0; i < count; i++) {
+         fn_80226AB4(0x80, 5, 4);
+         fn_80026754(x[i], y0, -1);
+-        fn_80026DBC(color[i]);
++        fn_80026DBC(palette.entry[i]);
+         fn_80026DAC(0, 0);
+         fn_80026754(x[i + 1], y0, -1);
+-        fn_80026DBC(color[i + 1]);
++        fn_80026DBC(palette.entry[i + 1]);
+         fn_80026DAC(0, 0);
+         fn_80026754(x[i + 1], y1, -1);
+-        fn_80026DBC(color[i + 1]);
++        fn_80026DBC(palette.entry[i + 1]);
+         fn_80026DAC(0, 0);
+         fn_80026754(x[i], y1, -1);
+-        fn_80026DBC(color[i]);
++        fn_80026DBC(palette.entry[i]);
+         fn_80026DAC(0, 0);
+         fn_80026740();
+     }

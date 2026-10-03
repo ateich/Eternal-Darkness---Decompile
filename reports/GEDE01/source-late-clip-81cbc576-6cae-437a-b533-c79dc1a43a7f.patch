@@ -1,0 +1,24 @@
+--- accepted-base
++++ late-clip
+@@ -37,16 +37,17 @@
+     s16 y1;
+ 
+     width = right - left;
+-    clip = left + (s32)(fraction * width);
+ 
+     x[0] = left;
+     x[1] = (s32)(left + lbl_8064DFA8 * width);
+     x[2] = (s32)(left + lbl_8064DFAC * width);
+     x[3] = right;
++    clip = left + (s32)(fraction * width);
+ 
+-    for (i = 0; i < 4; i++) {
+-        color[i] = lbl_80238C4C[i];
+-    }
++    color[0] = lbl_80238C4C[0];
++    color[1] = lbl_80238C4C[1];
++    color[2] = lbl_80238C4C[2];
++    color[3] = lbl_80238C4C[3];
+     for (i = 0; i < 4; i++) {
+         color[i] |= alpha;
+     }

@@ -1,0 +1,26 @@
+--- accepted-base
++++ color-first-decl
+@@ -27,8 +27,8 @@
+                  u8 alpha)
+ {
+     u32 draw_color;
++    u32 color[4];
+     s16 x[4];
+-    u32 color[4];
+     s32 width;
+     s32 clip;
+     s32 count;
+@@ -44,9 +44,10 @@
+     x[2] = (s32)(left + lbl_8064DFAC * width);
+     x[3] = right;
+ 
+-    for (i = 0; i < 4; i++) {
+-        color[i] = lbl_80238C4C[i];
+-    }
++    color[0] = lbl_80238C4C[0];
++    color[1] = lbl_80238C4C[1];
++    color[2] = lbl_80238C4C[2];
++    color[3] = lbl_80238C4C[3];
+     for (i = 0; i < 4; i++) {
+         color[i] |= alpha;
+     }

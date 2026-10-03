@@ -1,0 +1,23 @@
+--- accepted-base
++++ scalar-alpha
+@@ -44,12 +44,14 @@
+     x[2] = (s32)(left + lbl_8064DFAC * width);
+     x[3] = right;
+ 
+-    for (i = 0; i < 4; i++) {
+-        color[i] = lbl_80238C4C[i];
+-    }
+-    for (i = 0; i < 4; i++) {
+-        color[i] |= alpha;
+-    }
++    color[0] = lbl_80238C4C[0];
++    color[1] = lbl_80238C4C[1];
++    color[2] = lbl_80238C4C[2];
++    color[3] = lbl_80238C4C[3];
++    color[0] |= alpha;
++    color[1] |= alpha;
++    color[2] |= alpha;
++    color[3] |= alpha;
+ 
+     count = 3;
+     for (i = 0; i < 4; i++) {

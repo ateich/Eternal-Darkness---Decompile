@@ -8,7 +8,6 @@ typedef float f32;
 
 #pragma use_lmw_stmw on
 
-extern const u32 lbl_80238C4C[4];
 extern u32 lbl_8064C2A8;
 extern const f32 lbl_8064DFA8;
 extern const f32 lbl_8064DFAC;
@@ -28,7 +27,7 @@ void fn_80026DC8(s16 left, s32 top, s16 right, s32 bottom, f32 fraction,
 {
     u32 draw_color;
     s16 x[4];
-    u32 color[4];
+    u32 color[4] = {0xff000000, 0xffdc0000, 0xdcff0000, 0x00ff0000};
     s32 width;
     s32 clip;
     s32 count;
@@ -44,9 +43,6 @@ void fn_80026DC8(s16 left, s32 top, s16 right, s32 bottom, f32 fraction,
     x[2] = (s32)(left + lbl_8064DFAC * width);
     x[3] = right;
 
-    for (i = 0; i < 4; i++) {
-        color[i] = lbl_80238C4C[i];
-    }
     for (i = 0; i < 4; i++) {
         color[i] |= alpha;
     }
