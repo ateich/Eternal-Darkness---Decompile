@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "assignment_id": "5d3b5eed-3bc4-41cf-9ea5-b7316c00d7a9",
+  "attempt": 4,
+  "base_commit": "ba0a4adece8aabd87794754b49d493bf705bab79",
+  "target": "fn_801A872C",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-5d3b5eed-3bc4-41cf-9ea5-b7316c00d7a9.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-test-coordinate-expressions-5d3b5eed-3bc4-41cf-9ea5-b7316c00d7a9.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-test-coordinate-direct-inset-5d3b5eed-3bc4-41cf-9ea5-b7316c00d7a9.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-test-wide-coordinate-accumulators-5d3b5eed-3bc4-41cf-9ea5-b7316c00d7a9.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-test-unprototyped-callee-5d3b5eed-3bc4-41cf-9ea5-b7316c00d7a9.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-5d3b5eed-3bc4-41cf-9ea5-b7316c00d7a9.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-5d3b5eed-3bc4-41cf-9ea5-b7316c00d7a9.txt",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-5d3b5eed-3bc4-41cf-9ea5-b7316c00d7a9.txt"
+  ],
+  "divergence": "Best canonical objdiff improved to 83.09524%: retail is 420 bytes and generated GC/1.3 code is 436 bytes. All 20 relocation types, targets, and addends agree, but generated relocation offsets diverge after 0x94. Direct (s16)x/(s16)y edge expressions reproduce retail's early expression shape more closely, while GC/1.3 still assigns coordinate, depth, and inset lifetimes to different callee-saved registers and emits four extra mr/extsh scheduling instructions around top/right/bottom/left inset arithmetic. Wide mutable-coordinate and unspecified-callee hypotheses reached 420 bytes but regressed canonical scores to 65.84762% and 65.75238%, respectively."
+}
