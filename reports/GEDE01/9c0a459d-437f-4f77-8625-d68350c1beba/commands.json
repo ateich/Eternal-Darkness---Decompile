@@ -1,0 +1,78 @@
+{
+  "assignment_id": "9c0a459d-437f-4f77-8625-d68350c1beba",
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "configure.py"
+      ],
+      "exit_status": 0,
+      "stage": "configure"
+    },
+    {
+      "argv": [
+        ".tools/bin/ninja",
+        "-j1",
+        "build/GEDE01/config.json"
+      ],
+      "exit_status": 0,
+      "stage": "split"
+    },
+    {
+      "argv": [
+        ".tools/bin/ninja",
+        "-j1",
+        "build/GEDE01/src/game/game_fn_8007B2F4.o"
+      ],
+      "exit_status": 0,
+      "stage": "raw_compile"
+    },
+    {
+      "argv": [
+        ".tools/bin/ninja",
+        "-j1",
+        "build/GEDE01/src/game/game_fn_8007B2F4.externalized"
+      ],
+      "exit_status": 0,
+      "stage": "guarded_mapping"
+    },
+    {
+      "argv": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8007B2F4",
+        "fn_8007B2F4",
+        "-o",
+        "reports/GEDE01/9c0a459d-437f-4f77-8625-d68350c1beba/canonical.json",
+        "--format",
+        "json-pretty"
+      ],
+      "exit_status": 0,
+      "stage": "canonical"
+    },
+    {
+      "argv": [
+        "build/tools/objdiff-cli",
+        "diff",
+        "-p",
+        ".",
+        "-u",
+        "main/game/game_fn_8007B2F4",
+        "fn_8007B2F4",
+        "-o",
+        "reports/GEDE01/9c0a459d-437f-4f77-8625-d68350c1beba/strict.json",
+        "--format",
+        "json-pretty",
+        "-c",
+        "function_reloc_diffs=name_address"
+      ],
+      "exit_status": 0,
+      "stage": "strict"
+    }
+  ],
+  "full_build_run": false,
+  "version": 1
+}

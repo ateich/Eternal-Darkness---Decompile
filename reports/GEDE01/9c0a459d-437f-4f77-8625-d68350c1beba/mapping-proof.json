@@ -1,0 +1,181 @@
+{
+  "assignment_id": "9c0a459d-437f-4f77-8625-d68350c1beba",
+  "authority": "Astra-low approved bounded isolated strict-only build mapping preparation; exact candidate requires separate candidate-pinned intake review",
+  "base_commit": "0a8f5745499ac7b25040e0a7468391513f7e3aa3",
+  "external_exclusions": {
+    "full_diffs": [
+      "excluded-pr-27.diff",
+      "excluded-pr-28.diff",
+      "excluded-pr-29.diff"
+    ],
+    "older_pr_diff_exclusion": "older-pr-diff-exclusion-check.json",
+    "older_pr_exclusion": "older-pr-exclusion-check.json",
+    "proof_root": "/home/rabbit/backups/decomp-backlog-parser-20261002/strict-gap-8007B2F4-20261003",
+    "result": "no target mentions"
+  },
+  "full_build": "deferred to serialized integration",
+  "mapping": {
+    "guards": [
+      "retail symbol address difference equals local addend",
+      "local two bytes equal retail DOL at lbl_8064E97C",
+      "exactly one typed relocation at addend 4",
+      "--require-whole-section",
+      "--require-section=.sdata2",
+      "--reject-section-relocations"
+    ],
+    "local_owner": "@4",
+    "postcondition": ".sdata2 removed; relocation offsets/types/targets/addends equal retail",
+    "retarget": {
+      "expected_count": 1,
+      "from": "@4+4",
+      "size": 2,
+      "to": "lbl_8064E97C+0",
+      "type": "R_PPC_EMB_SDA21"
+    },
+    "rule": "externalize_game_8007B2F4_constants",
+    "section": ".sdata2",
+    "section_complete_owner": true,
+    "section_relocations": 0,
+    "section_size": 6
+  },
+  "measurement": {
+    "assignment_id": "9c0a459d-437f-4f77-8625-d68350c1beba",
+    "base_commit": "0a8f5745499ac7b25040e0a7468391513f7e3aa3",
+    "canonical": {
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8007B2F4 fn_8007B2F4 -o reports/GEDE01/9c0a459d-437f-4f77-8625-d68350c1beba/canonical.json --format json-pretty",
+      "match_percent": 100,
+      "text_bytes": 128
+    },
+    "dol_gate_deferred_to_serialized_integration": true,
+    "full_build_run": false,
+    "post_object_sha256": "62a396200a2fe47c5c034c923f088551d27277175697f9296b6cf3cb3cf1afa0",
+    "relocations": {
+      "exact": true,
+      "generated": [
+        {
+          "addend": 0,
+          "offset": "0x00000018",
+          "symbol": "lbl_8064E978",
+          "type": "R_PPC_EMB_SDA21"
+        },
+        {
+          "addend": 0,
+          "offset": "0x0000001c",
+          "symbol": "lbl_8064E97C",
+          "type": "R_PPC_EMB_SDA21"
+        },
+        {
+          "addend": 0,
+          "offset": "0x00000028",
+          "symbol": "fn_801A19BC",
+          "type": "R_PPC_REL24"
+        },
+        {
+          "addend": 0,
+          "offset": "0x0000002c",
+          "symbol": "lbl_8064E980",
+          "type": "R_PPC_EMB_SDA21"
+        },
+        {
+          "addend": 0,
+          "offset": "0x00000036",
+          "symbol": "fn_801A1BD0",
+          "type": "R_PPC_ADDR16_HA"
+        },
+        {
+          "addend": 0,
+          "offset": "0x0000003e",
+          "symbol": "fn_801A1BD0",
+          "type": "R_PPC_ADDR16_LO"
+        },
+        {
+          "addend": 0,
+          "offset": "0x00000068",
+          "symbol": "fn_80148008",
+          "type": "R_PPC_REL24"
+        }
+      ],
+      "retail": [
+        {
+          "addend": 0,
+          "offset": "0x00000018",
+          "symbol": "lbl_8064E978",
+          "type": "R_PPC_EMB_SDA21"
+        },
+        {
+          "addend": 0,
+          "offset": "0x0000001c",
+          "symbol": "lbl_8064E97C",
+          "type": "R_PPC_EMB_SDA21"
+        },
+        {
+          "addend": 0,
+          "offset": "0x00000028",
+          "symbol": "fn_801A19BC",
+          "type": "R_PPC_REL24"
+        },
+        {
+          "addend": 0,
+          "offset": "0x0000002c",
+          "symbol": "lbl_8064E980",
+          "type": "R_PPC_EMB_SDA21"
+        },
+        {
+          "addend": 0,
+          "offset": "0x00000036",
+          "symbol": "fn_801A1BD0",
+          "type": "R_PPC_ADDR16_HA"
+        },
+        {
+          "addend": 0,
+          "offset": "0x0000003e",
+          "symbol": "fn_801A1BD0",
+          "type": "R_PPC_ADDR16_LO"
+        },
+        {
+          "addend": 0,
+          "offset": "0x00000068",
+          "symbol": "fn_80148008",
+          "type": "R_PPC_REL24"
+        }
+      ]
+    },
+    "strict": {
+      "basis": "function_reloc_diffs=name_address",
+      "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_8007B2F4 fn_8007B2F4 -o reports/GEDE01/9c0a459d-437f-4f77-8625-d68350c1beba/strict.json --format json-pretty -c function_reloc_diffs=name_address",
+      "match_percent": 100,
+      "text_bytes": 128
+    },
+    "target": "fn_8007B2F4",
+    "text": {
+      "byte_identical": true,
+      "generated_sha256": "0afeb0c862f7c8b564f78b9dceaf0c2690590cd257fea1dacb46872a7f553364",
+      "retail_sha256": "0afeb0c862f7c8b564f78b9dceaf0c2690590cd257fea1dacb46872a7f553364"
+    },
+    "version": 1
+  },
+  "scope": {
+    "assembly_changes": false,
+    "changed": [
+      "eternal-darkness-decomp/configure.py"
+    ],
+    "compiler": "GC/1.3 unchanged",
+    "helpers": [
+      {
+        "changed": false,
+        "path": "eternal-darkness-decomp/tools/externalize_elf_symbol.py",
+        "sha256": "d71ccf988880b4a526edb8123dadeac2f9c99945defedf87b00f6aeb583c1c4a"
+      },
+      {
+        "changed": false,
+        "path": "eternal-darkness-decomp/tools/retarget_elf_relocation.py",
+        "sha256": "c098dad9fe0fedf5b646c7a37c7ceb002097cfbd6799b8bc436bff4831fe5660"
+      }
+    ],
+    "source_sha256": "bcb51c7713dc4a8efaff64dc79b4314c8fd334b5715fb03eb2933cac56cdf28e",
+    "splits": "unchanged",
+    "unchanged_source": "eternal-darkness-decomp/src/game/game_fn_8007B2F4.c"
+  },
+  "target": "fn_8007B2F4",
+  "version": 1
+}
