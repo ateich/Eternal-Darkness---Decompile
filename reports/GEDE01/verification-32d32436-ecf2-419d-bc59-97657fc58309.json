@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "target": "fn_801F2370",
+  "compiler": "compilers/GC/1.3/mwcceppc.exe",
+  "canonical_flags": "-O4,p -inline auto -use_lmw_stmw on",
+  "configure": {
+    "command": "python3 configure.py --version GEDE01",
+    "exit_code": 0,
+    "raw_output": "eternal-darkness-decomp/reports/GEDE01/configure-32d32436-ecf2-419d-bc59-97657fc58309.txt"
+  },
+  "assigned_object_build": {
+    "command": "touch src/game/game_fn_801F2370.c && .tools/bin/ninja build/GEDE01/src/game/game_fn_801F2370.o -v",
+    "exit_code": 0,
+    "generated_object_sha256": "3bd9ff5de6a4378d7bd74b49855d403d59d295e228ffee2c74351b918938f4da",
+    "raw_output": "eternal-darkness-decomp/reports/GEDE01/build-32d32436-ecf2-419d-bc59-97657fc58309.txt"
+  },
+  "canonical_objdiff": {
+    "exit_code": 0,
+    "retail_bytes": 2004,
+    "generated_bytes": 2080,
+    "match_percent": 66.31936,
+    "raw_instruction_diff": "eternal-darkness-decomp/reports/GEDE01/objdiff-32d32436-ecf2-419d-bc59-97657fc58309.json"
+  },
+  "relocation_strict_objdiff": {
+    "exit_code": 0,
+    "retail_bytes": 2004,
+    "generated_bytes": 2080,
+    "match_percent": 66.31936,
+    "retail_relocations": 19,
+    "generated_relocations": 22,
+    "raw_output": "eternal-darkness-decomp/reports/GEDE01/objdiff-32d32436-ecf2-419d-bc59-97657fc58309-reloc-strict.json"
+  },
+  "raw_relocation_tables": "eternal-darkness-decomp/reports/GEDE01/relocations-32d32436-ecf2-419d-bc59-97657fc58309.txt",
+  "experiment_log": "eternal-darkness-decomp/reports/GEDE01/experiments-32d32436-ecf2-419d-bc59-97657fc58309.txt",
+  "rejected_hypothesis": {
+    "match_percent": 65.30339,
+    "generated_bytes": 2072,
+    "generated_relocations": 17,
+    "raw_build": "eternal-darkness-decomp/reports/GEDE01/build-hypothesis-shared-constants-32d32436-ecf2-419d-bc59-97657fc58309.txt",
+    "raw_instruction_diff": "eternal-darkness-decomp/reports/GEDE01/objdiff-hypothesis-shared-constants-32d32436-ecf2-419d-bc59-97657fc58309.json"
+  },
+  "observed_divergence": "Retail is 2004 bytes and saves r20-r31; generated is 2080 bytes and saves r21-r31. Index and trilinear-weight construction differ in register and floating-constant scheduling, and generated has 22 relocations versus retail's 19."
+}
