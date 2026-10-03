@@ -8,16 +8,17 @@ typedef struct Vec3 {
 
 typedef float Matrix34[3][4];
 
+typedef struct QueryResult {
+    u8 pad_0[8];
+    Vec3 position;
+    Vec3 direction;
+    u8 pad_20[8];
+} QueryResult;
+
 typedef struct QueryVectors {
     Vec3 position;
     Vec3 direction;
 } QueryVectors;
-
-typedef struct QueryResult {
-    u8 pad_0[8];
-    QueryVectors vectors;
-    u8 pad_20[8];
-} QueryResult;
 
 extern void fn_80127FD8(void*, int, Matrix34);
 extern void fn_80211A6C(const Vec3*, const Vec3*, Vec3*);
@@ -33,7 +34,7 @@ void fn_8012F474(void* object, int transform_index, int second, int first,
 {
     Matrix34 matrix;
     QueryResult query;
-    QueryVectors vectors;
+    QueryVectors query_vectors;
     Vec3 direction;
     Vec3 translation;
     Vec3 delta;
@@ -46,9 +47,10 @@ void fn_8012F474(void* object, int transform_index, int second, int first,
     fn_80211A6C(target, &translation, &delta);
     distance = fn_80211B08(&delta);
     fn_8011F6A4(object, first, second, -1, &query, 1);
-    vectors = query.vectors;
-    *start = vectors.position;
-    direction = vectors.direction;
+    query_vectors.position = query.position;
+    query_vectors.direction = query.direction;
+    *start = query_vectors.position;
+    direction = query_vectors.direction;
     fn_80211AAC(&direction, &direction);
     fn_80211A90(&direction, &direction, distance);
     fn_80211A48(start, &direction, end);
