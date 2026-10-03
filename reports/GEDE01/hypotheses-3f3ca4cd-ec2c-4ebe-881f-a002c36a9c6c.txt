@@ -1,0 +1,29 @@
+fn_80026DC8 attempt 4 codegen hypotheses
+
+Accepted-base baseline:
+- Canonical and relocation-strict score: 80.28571%.
+- Retail/candidate text sizes: 616/616 bytes.
+
+Distinct hypothesis 1 (rejected): express the signed integer-to-double conversions
+with explicit high/low union words and subtract the externally named retail bias
+constant lbl_8064DF80. This directly tested whether replacing MWCC's private @51
+conversion pool entry would fix the relocation and improve early scheduling.
+- Measured score: 55.603897%.
+- Retail/candidate text sizes: 616/596 bytes.
+- Result: it did name the conversion mechanism in C, but MWCC shortened the function,
+  reduced the frame to 0x80, and substantially changed scheduling. This was worse.
+
+Distinct hypothesis 2 (rejected): initialize and alpha-adjust the palette before
+computing the two interpolated x coordinates. Retail interleaves palette loads with
+the conversion sequence, so this tested source-order pressure without repeating the
+preserved explicit-cursor or fused-palette-loop experiments.
+- Measured score: 78.44805%.
+- Retail/candidate text sizes: 616/616 bytes.
+- Result: size and frame remained correct, but instruction agreement regressed.
+
+The accepted-base reconstruction was restored because it remains strongest. Its
+remaining divergence is: MWCC emits a TU-local @51 signed-conversion constant instead
+of retail lbl_8064DF80; early scheduling places the lbl_80238C4C LO and lbl_8064DFAC
+relocations at different offsets; and callee-saved allocation swaps the x/color
+cursors (candidate r30/r31 versus retail r31/r30). The draw loop remains structurally
+aligned from retail offset 0x164 apart from those register choices.
