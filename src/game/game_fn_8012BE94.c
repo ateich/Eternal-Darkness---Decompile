@@ -48,7 +48,7 @@ typedef struct OwnerLayout {
     StateEntry* states;
     StateEntry** state_by_id;
     u8 pad_244[0x10];
-    u32 flags;
+    int flags;
 } OwnerLayout;
 
 typedef char Definition_size_is_0x18[(sizeof(Definition) == 0x18) ? 1 : -1];
@@ -79,23 +79,25 @@ void fn_8012BE94(Owner* owner, void* header_ptr)
     Header* header = (Header*)header_ptr;
     OwnerLayout* layout = (OwnerLayout*)owner;
     int i;
-    int j;
     Definition* definition;
-    StateEntry* state;
+    int j;
     u16 item;
 
     for (i = 0; i < header->definition_count; i++) {
         definition = &header->definitions[i];
-        state = &layout->states[i];
-        state->id = definition->id;
-        state->definition = definition;
-        state->kind = definition->kind;
-        layout->state_by_id[definition->id] = state;
+        layout->states[i].id = definition->id;
+        layout->states[i].definition = definition;
+        layout->states[i].kind = definition->kind;
+        layout->state_by_id[definition->id] = &layout->states[i];
 
         for (j = 0; j < definition->item_count; j++) {
             item = definition->items[j];
             if ((item & 0x8000) == 0) {
-                layout->slots[item].flags = state->kind == 1;
+                if (layout->states[i].kind == 1) {
+                    layout->slots[item].flags = 1;
+                } else {
+                    layout->slots[item].flags = 0;
+                }
             }
         }
         if (definition->child_0 != -1) {
