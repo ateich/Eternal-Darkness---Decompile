@@ -79,6 +79,7 @@ void fn_80124A40(Owner* owner, Table* table, u32* first_output,
         u32 end = begin + entry->count;
         Pair* pair = entry->pairs;
         s32 weight_index;
+        s32 weight_offset;
 
         if (owner->enabled != 0 &&
             (*(u16*)((u8*)owner + 0x180 + entry_index * 8) & 1)) {
@@ -88,25 +89,27 @@ void fn_80124A40(Owner* owner, Table* table, u32* first_output,
                     source_vertices[vertex_index];
             }
 
-            for (weight_index = 0; weight_index < 32; weight_index++) {
-                Weight* weight = &owner->weights[weight_index];
+            weight_index = 0;
+            weight_offset = 0;
+            do {
+                Weight* weight = (Weight*)((u8*)owner->weights + weight_offset);
                 u32 delta_index;
 
-                if ((weight->flags & 1) == 0 || pair->start == 0xFFFFFFFF) {
-                    pair++;
-                    continue;
+                if ((weight->flags & 1) != 0 && pair->start != 0xFFFFFFFF) {
+                    lbl_804FA6D0[entry_index] = 1;
+                    for (delta_index = pair->start;
+                         delta_index < pair->start + pair->count; delta_index++) {
+                        Delta* delta = &deltas[delta_index];
+                        Vertex* vertex = &lbl_804FA740[entry->start + delta->index];
+                        vertex->x += (s32)(weight->value * delta->x);
+                        vertex->y += (s32)(weight->value * delta->y);
+                        vertex->z += (s32)(weight->value * delta->z);
+                    }
                 }
-                lbl_804FA6D0[entry_index] = 1;
-                for (delta_index = pair->start;
-                     delta_index < pair->start + pair->count; delta_index++) {
-                    Delta* delta = &deltas[delta_index];
-                    Vertex* vertex = &lbl_804FA740[entry->start + delta->index];
-                    vertex->x += (s32)(weight->value * delta->x);
-                    vertex->y += (s32)(weight->value * delta->y);
-                    vertex->z += (s32)(weight->value * delta->z);
-                }
+                weight_offset += sizeof(Weight);
+                weight_index++;
                 pair++;
-            }
+            } while (weight_index < 32);
         }
     }
 }

@@ -1,0 +1,12 @@
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80124A40.o
+RESULT: exit 0
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80124A40.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80124A40.d build/GEDE01/src/game/game_fn_80124A40.d
+
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80124A40 fn_80124A40 -o reports/GEDE01/objdiff-1b20e3c5-be41-4022-8c58-660af01fec70.json --format json-pretty
+RESULT: exit 0
+
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80124A40 fn_80124A40 -o reports/GEDE01/objdiff-strict-1b20e3c5-be41-4022-8c58-660af01fec70.json --format json-pretty -c function_reloc_diffs=name_address
+RESULT: exit 0
+
+MEASUREMENT: canonical match_percent 87.62332; relocation-strict match_percent 87.62332; retail .text size 892 bytes; generated .text size 892 bytes.
+HYPOTHESIS: Preserve the weight loop as a do-while with independent signed index, byte offset, and pair pointer induction variables. This prevents MWCC's prior CTR conversion, restores retail's stmw r22 prologue and explicit cmpwi/blt weight-loop latch, and improves the preserved 86.847534% attempt to 87.62332%.
