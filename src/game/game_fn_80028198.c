@@ -55,16 +55,16 @@ extern void fn_80205680(void*, void*, s32);
 extern s32 fn_8015821C(s32);
 extern int fn_801E79FC(void*, int);
 extern void fn_801B05E8(s32, s32, s32, s32, s32, s32, s32, s32);
-extern void fn_80027948(void*, s32, void*, s32, s32, s32, s32, s32);
+extern void fn_80027948(void*, s32, void*, s32, s32, s32, s32);
 
-static void enable_object_flags(void)
+static inline void enable_object_flags(void)
 {
     if (lbl_8064C4E4 != 0) {
         fn_80128F74(lbl_8064C4E4, fn_801290D0(lbl_8064C4E4) | 4);
     }
 }
 
-static void reset_pair(void)
+static inline void reset_pair(void)
 {
     fn_801F8620();
     fn_801FA410(10);
@@ -72,67 +72,85 @@ static void reset_pair(void)
     fn_801F7208(lbl_8063C6B8 + 0x550, lbl_8064DFF0);
 }
 
-static void begin_scene(GameEntry* entry, s32 kind, s32 player_mode)
+static inline void begin_scene(s32 kind, s32 player_mode)
 {
-    fn_8011E310(2, kind, -2, entry->object, 0x32, player_mode, 1);
+    fn_8011E310(2, kind, -2,
+                lbl_80300368.entries[lbl_80300368.current].object,
+                0x32, player_mode, 1);
 }
 
-static void activate_entry(GameEntry* entry, s32 player_mode, s32 retry)
+static inline void activate_entry(s32 player_mode, s32 retry)
 {
     void* camera = lbl_8063CD18 + 0x550;
     s32 ok;
 
     reset_pair();
-    ok = fn_801FBEF0(lbl_8064C4E4, entry->value14, entry->flags & 1);
+    ok = fn_801FBEF0(lbl_8064C4E4,
+                     lbl_80300368.entries[lbl_80300368.current].value14,
+                     lbl_80300368.entries[lbl_80300368.current].flags & 1);
     if (!ok && retry) {
-        ok = fn_801FC034(lbl_8064C4E4, entry->value14,
-                        entry->flags & 1, lbl_8064DFF4);
+        ok = fn_801FC034(lbl_8064C4E4,
+                        lbl_80300368.entries[lbl_80300368.current].value14,
+                        lbl_80300368.entries[lbl_80300368.current].flags & 1,
+                        lbl_8064DFF4);
     }
     if (ok) {
-        entry->flags |= 4;
-        entry->flags &= ~1;
+        lbl_80300368.entries[lbl_80300368.current].flags |= 4;
+        lbl_80300368.entries[lbl_80300368.current].flags &= ~1;
     }
-    if (entry->flags & 4) {
+    if (lbl_80300368.entries[lbl_80300368.current].flags & 4) {
         fn_80046D38(0);
     }
-    if (fn_800289A4(entry->value14, entry->flags & 1, 0)) {
-        entry->flags &= ~1;
+    if (fn_800289A4(lbl_80300368.entries[lbl_80300368.current].value14,
+                    lbl_80300368.entries[lbl_80300368.current].flags & 1, 0)) {
+        lbl_80300368.entries[lbl_80300368.current].flags &= ~1;
     }
-    fn_801FA198(entry->value14, camera, 0, 0, entry->flags & 1,
+    fn_801FA198(lbl_80300368.entries[lbl_80300368.current].value14,
+                camera, 0, 0,
+                lbl_80300368.entries[lbl_80300368.current].flags & 1,
                 0, 0, 0, 0);
-    if (entry->value10 < 0) {
-        begin_scene(entry, 7, player_mode);
-        entry->phase = 3;
+    if (retry &&
+        lbl_80300368.entries[lbl_80300368.current].value10 < 0) {
+        begin_scene(7, player_mode);
+        lbl_80300368.entries[lbl_80300368.current].phase = 3;
     } else {
-        begin_scene(entry, 0x22, player_mode);
+        begin_scene(0x22, player_mode);
     }
 }
 
-static void finish_entry(GameEntry* entry)
+static inline void finish_entry(void)
 {
     fn_801F85A4();
-    if (!(entry->flags & 1)) {
+    if (!(lbl_80300368.entries[lbl_80300368.current].flags & 1)) {
         fn_801FA354();
     }
-    if (entry->flags & 4) {
+    if (lbl_80300368.entries[lbl_80300368.current].flags & 4) {
         fn_80046D38(1);
     }
     fn_80028B44();
-    entry->state = 0;
-    fn_8016B400(entry->object, 0, 0);
+    lbl_80300368.entries[lbl_80300368.current].state = 0;
+    fn_8016B400(lbl_80300368.entries[lbl_80300368.current].object, 0, 0);
 }
 
 void fn_80028198(void)
 {
-    GameEntry* entry = &lbl_80300368.entries[lbl_80300368.current];
-    s32 old_phase = entry->phase++;
-    s32 player_mode = lbl_80300368.current == 0 ? 2 : 4;
+    s32 player_mode = 2;
+    s32 current = lbl_80300368.current;
+    s32 old_phase = lbl_80300368.entries[current].phase;
 
-    switch (entry->phase) {
+    if (current != 0) {
+        player_mode = 4;
+    }
+    lbl_80300368.entries[current].phase++;
+
+    switch (lbl_80300368.entries[lbl_80300368.current].state) {
     case 1:
-        entry->state = 0;
-        fn_80027730(fn_801E6CA0(lbl_8064C500, entry->valueC,
-                               entry->value10, 0, 1), entry->object, 0);
+        lbl_80300368.entries[lbl_80300368.current].state = 0;
+        fn_80027730(fn_801E6CA0(lbl_8064C500,
+                               lbl_80300368.entries[lbl_80300368.current].valueC,
+                               lbl_80300368.entries[lbl_80300368.current].value10,
+                               0, 1),
+                     lbl_80300368.entries[lbl_80300368.current].object, 0);
         break;
 
     case 2:
@@ -140,30 +158,32 @@ void fn_80028198(void)
         case 0:
             enable_object_flags();
             fn_801A5C30(0);
-            activate_entry(entry, player_mode, 1);
+            activate_entry(player_mode, 1);
             break;
         case 1:
-            fn_80027730(fn_801E6CA0(lbl_8064C500, entry->valueC,
-                                   entry->value10, 0, 1), -2, 0);
+            fn_80027730(fn_801E6CA0(lbl_8064C500,
+                                   lbl_80300368.entries[lbl_80300368.current].valueC,
+                                   lbl_80300368.entries[lbl_80300368.current].value10,
+                                   0, 1), -2, 0);
             reset_pair();
             break;
         case 2:
             enable_object_flags();
             fn_801A5C30(0);
-            begin_scene(entry, 7, player_mode);
+            begin_scene(7, player_mode);
             break;
         case 3:
             fn_801A5C30(1);
             fn_801F85A4();
-            if (!(entry->flags & 1)) {
+            if (!(lbl_80300368.entries[lbl_80300368.current].flags & 1)) {
                 fn_801FA354();
             }
-            if (entry->flags & 4) {
+            if (lbl_80300368.entries[lbl_80300368.current].flags & 4) {
                 fn_80046D38(1);
             }
             fn_80028B44();
-            entry->state = 0;
-            fn_8016B400(entry->object, 0, 0);
+            lbl_80300368.entries[lbl_80300368.current].state = 0;
+            fn_8016B400(lbl_80300368.entries[lbl_80300368.current].object, 0, 0);
             break;
         }
         break;
@@ -173,25 +193,33 @@ void fn_80028198(void)
         case 0:
             enable_object_flags();
             fn_801A5C30(0);
-            activate_entry(entry, player_mode, 0);
+            activate_entry(player_mode, 0);
             break;
         case 1:
-            fn_80027730(fn_801E6CA0(lbl_8064C500, entry->valueC,
-                                   entry->value10, 0, 1), -2, 0);
+            fn_80027730(fn_801E6CA0(lbl_8064C500,
+                                   lbl_80300368.entries[lbl_80300368.current].valueC,
+                                   lbl_80300368.entries[lbl_80300368.current].value10,
+                                   0, 1), -2, 0);
             reset_pair();
             break;
         case 2:
             enable_object_flags();
             fn_801A5C30(0);
-            begin_scene(entry, 0x13, player_mode);
+            begin_scene(0x13, player_mode);
             break;
         case 3: {
-            void* object = fn_80201814(entry->value1C);
-            s32 scene = (s32)fn_80201C24();
-            s32 value1 = fn_80157BC4();
-            s32 value2 = fn_80157BF4(scene);
-            void* target = fn_80201814(entry->value1C);
+            void* object;
+            s32 scene;
+            s32 value1;
+            s32 value2;
+            void* target;
             void* actor;
+
+            object = fn_80201814(lbl_80300368.entries[lbl_80300368.current].value1C);
+            scene = (s32)fn_80201C24();
+            value1 = fn_80157BC4();
+            value2 = fn_80157BF4(scene);
+            target = fn_80201814(lbl_80300368.entries[lbl_80300368.current].value1C);
             if (target != 0) {
                 fn_80205680(target, (void*)fn_80201B44(), 0x1E);
             }
@@ -200,14 +228,15 @@ void fn_80028198(void)
                 fn_801B05E8(0xC, 0x64, 6, 1, 0, 5, 0, 0);
             }
             actor = (void*)fn_80201B44();
-            fn_801E6CA0(lbl_8064C504, value2, value1, 0, 1);
-            fn_80027948(actor, -2, object, entry->value1C,
-                        0, 0, 0, 0);
+            object = fn_801E6CA0(lbl_8064C504, value2, value1, 0, 1);
+            fn_80027948(object, -2, actor,
+                        lbl_80300368.entries[lbl_80300368.current].value1C,
+                        0, 0, 0);
             break;
         }
         case 4:
             enable_object_flags();
-            finish_entry(entry);
+            finish_entry();
             break;
         }
         break;
