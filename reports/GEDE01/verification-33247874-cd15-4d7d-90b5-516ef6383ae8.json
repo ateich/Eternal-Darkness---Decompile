@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "assignment_id": "33247874-cd15-4d7d-90b5-516ef6383ae8",
+  "attempt": 7,
+  "target": "fn_801D9D14",
+  "compiler": "GC/1.3",
+  "canonical_match_percent": 99.9,
+  "relocation_strict_match_percent": 99.9,
+  "strict_configuration": "function_reloc_diffs=name_address",
+  "retail_bytes": 720,
+  "generated_bytes": 720,
+  "retail_instruction_count": 180,
+  "generated_instruction_count": 180,
+  "retail_relocation_count": 31,
+  "generated_relocation_count": 31,
+  "relocations_equal": true,
+  "source_sha256": "4551343d52f60b8ef4f5e636ad6d4fc14ec58ca7365b24164d707d0cbac8e507",
+  "instruction_differences": [
+    {"offset":"0x220","retail":"stw r0,0xA0(r30)","generated":"stw r0,0x15C(r31)"},
+    {"offset":"0x230","retail":"stw r3,0x94(r30)","generated":"stw r3,0x150(r31)"},
+    {"offset":"0x23C","retail":"stb r0,0xAA(r30)","generated":"stb r0,0x166(r31)"}
+  ],
+  "semantic_note": "The three addresses are equivalent because effect equals self->bytes + 0xBC; no relocation differs.",
+  "commands": [
+    "python3 configure.py --version GEDE01 --non-matching --no-progress",
+    ".tools/bin/ninja -v build/GEDE01/src/game/game_fn_801D9D14.o",
+    "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801D9D14 fn_801D9D14 -o reports/GEDE01/objdiff-33247874-cd15-4d7d-90b5-516ef6383ae8.json --format json-pretty",
+    "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801D9D14 fn_801D9D14 -o reports/GEDE01/objdiff-strict-33247874-cd15-4d7d-90b5-516ef6383ae8.json --format json-pretty -c function_reloc_diffs=name_address",
+    "build/binutils/powerpc-eabi-objdump -dr build/GEDE01/obj/game/game_fn_801D9D14.o",
+    "build/binutils/powerpc-eabi-objdump -dr build/GEDE01/src/game/game_fn_801D9D14.o"
+  ],
+  "full_build_performed": false,
+  "full_build_note": "Per assignment, deterministic full build, legal audit, no-regression reports, and retail DOL SHA-1 verification are deferred to the integrator after independent review."
+}
