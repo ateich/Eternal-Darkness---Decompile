@@ -65,9 +65,14 @@ typedef struct Object {
     Entry** entries;
 } Object;
 
+typedef struct RuntimeEntry {
+    u8 pad[0x48];
+    void* value;
+} RuntimeEntry;
+
 typedef struct ObjectRuntimeLayout {
     u8 pad[0x160];
-    u8* runtime;
+    RuntimeEntry* runtime;
 } ObjectRuntimeLayout;
 
 extern f32 lbl_806501D8;
@@ -92,27 +97,26 @@ extern void fn_8012F58C(void*, unsigned int, unsigned int, u16, u16, u16);
 int fn_8012EDB0(s32 context, s32 index, Vec3* position, f32 angle,
                 f32 limit)
 {
-    Object* object = (Object*)context;
-    ObjectRuntimeLayout* runtime_layout = (ObjectRuntimeLayout*)object;
+    ObjectRuntimeLayout* runtime_layout = (ObjectRuntimeLayout*)context;
+    TransformStorage transform;
     MatrixStorage matrix;
     MatrixStorage inverse;
-    TransformStorage transform;
+    Vec4 current;
     Vec3 cross;
     Vec3 axis;
     Vec4 desired;
-    Vec4 current;
     Entry* entry;
     Resource* resource;
-    int transform_id;
+    u16 transform_id;
     f32 scale;
 
-    fn_80125ECC(object);
-    entry = object->entries[index];
+    fn_80125ECC((void*)context);
+    entry = ((Object*)context)->entries[index];
     if (entry != 0) {
         resource = entry->resource;
-        *(void**)(runtime_layout->runtime + resource->id * 0x4C + 0x48) = 0;
+        runtime_layout->runtime[resource->id].value = 0;
 
-        transform_id = fn_8012FDA0(object, index);
+        transform_id = (u16)fn_8012FDA0((Object*)context, index);
         transform.local.index = index;
         transform.local.marker = -1;
         transform.local.first.x = lbl_806501D8;
@@ -123,7 +127,7 @@ int fn_8012EDB0(s32 context, s32 index, Vec3* position, f32 angle,
         transform.local.second.z = lbl_806501D8;
         transform.local.trailing = lbl_806501DC;
 
-        fn_8011F3B4(object, matrix.array, (u16)transform_id, 9);
+        fn_8011F3B4((void*)context, matrix.array, transform_id, 9);
         fn_8011F304(&transform.output, matrix.array, 9);
 
         fn_80211AAC(position, position);
@@ -132,10 +136,10 @@ int fn_8012EDB0(s32 context, s32 index, Vec3* position, f32 angle,
             fn_802110A8(&matrix.matrix, &inverse.matrix);
             fn_8017AD00(&inverse.matrix, &cross, &axis);
             fn_8017A244(&axis, &desired, angle);
-            fn_8012CEA4((u8*)object, index, &current);
+            fn_8012CEA4((u8*)context, index, &current);
             scale = fn_8017A5A8(&current, &desired, limit);
-            fn_8012CF08((u8*)object, index, current, desired, 0, 0, scale);
-            fn_8012F58C(object, index, 3, 0, 0, 0x84);
+            fn_8012CF08((u8*)context, index, current, desired, 0, 0, scale);
+            fn_8012F58C((void*)context, index, 3, 0, 0, 0x84);
         }
     }
     return 0;
