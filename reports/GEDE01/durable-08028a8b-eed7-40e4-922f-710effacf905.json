@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "assignment_id": "08028a8b-eed7-40e4-922f-710effacf905",
+  "attempt": 4,
+  "base_commit": "a4fa426b91a5ccaca338caf4d4afe47225f78e43",
+  "target": "fn_800365C8",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-08028a8b-eed7-40e4-922f-710effacf905.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-relocation-strict-08028a8b-eed7-40e4-922f-710effacf905.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-08028a8b-eed7-40e4-922f-710effacf905.log",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-08028a8b-eed7-40e4-922f-710effacf905.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-retail-08028a8b-eed7-40e4-922f-710effacf905.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-candidate-08028a8b-eed7-40e4-922f-710effacf905.txt",
+    "eternal-darkness-decomp/reports/GEDE01/object-sha256-08028a8b-eed7-40e4-922f-710effacf905.txt",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-08028a8b-eed7-40e4-922f-710effacf905.txt"
+  ],
+  "divergence": "Canonical .text/function score 97.83394% (1096 candidate bytes versus 1108 retail): two independent Vec3 temporaries now exactly reproduce the retail 160-byte frame and local offsets, but candidate omits retail's loop-invariant mr r23,r22 and compiles each low-word fn_8020123C test as one cmplwi instead of retail's li/and pair; three candidate R_PPC_EMB_SDA21 relocations at 0x298, 0x2ec, and 0x378 target local @71+0 rather than retail lbl_8064E220+0 at 0x2a0, 0x2f4, and 0x380."
+}

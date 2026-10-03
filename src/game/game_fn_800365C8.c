@@ -85,7 +85,8 @@ void* fn_800365C8(register void* source, register void* query)
     Vec3 source_position;
     Vec3 candidate_position;
     Vec3 path_position;
-    Vec3 temporary;
+    Vec3 source_temporary;
+    Vec3 candidate_temporary;
     Vec3* position;
     s32 path_value;
 
@@ -96,8 +97,8 @@ void* fn_800365C8(register void* source, register void* query)
     state = ((ObjectInfo*)fn_80201B8C(source))->state;
     source_transform = fn_80201BC8(source);
     if (source_transform != 0) {
-        fn_8011F114(&temporary, source_transform);
-        position = &temporary;
+        fn_8011F114(&source_temporary, source_transform);
+        position = &source_temporary;
     } else {
         position = &source_position;
     }
@@ -136,8 +137,8 @@ void* fn_800365C8(register void* source, register void* query)
         {
             void* transform = fn_80201BC8(candidate);
             if (transform != 0) {
-                fn_8011F114(&temporary, transform);
-                position = &temporary;
+                fn_8011F114(&candidate_temporary, transform);
+                position = &candidate_temporary;
             } else {
                 position = &candidate_position;
             }
