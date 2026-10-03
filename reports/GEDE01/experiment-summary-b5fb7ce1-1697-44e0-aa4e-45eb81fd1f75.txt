@@ -1,0 +1,29 @@
+Assignment b5fb7ce1-1697-44e0-aa4e-45eb81fd1f75, attempt 6
+Target: fn_80028198
+
+The accepted-base source is the preserved attempt-5 candidate from commit
+46a3770ba403c8cbec8d254918cff7bbdb09c646.  It retains the unsigned flag
+mask, direct camera address, object reuse, corrected fn_80201C24 prototype,
+and operation order requested by the operator.
+
+This bounded retry tested only source representations intended to force the
+post-flag-write current-entry reload and scaled-index recomputation at the two
+inlined activation sites.  The raw instruction comparisons are committed:
+
+- flat word-array addressing: 96.951454%, generated size 2092
+- block-local flags-array addressing: 97.49515%, generated size 2068
+- helper-wide flags-array addressing: 97.01748%, generated size 2060
+- unsigned current plus helper-wide flags array: 95.75534%, generated size 2072
+- signed alias plus helper-wide flags array: 97.01748%, generated size 2060
+
+All were worse than the preserved candidate and were reverted.  No volatile
+second-current-read, direct-global, helper-inlining, combined post-increment,
+compiler, assembly, mapping, or policy variant was attempted.
+
+Final measured result: canonical 98.73786%; relocation-strict 98.73786%.
+Retail size is 2060 bytes and generated size is 2044 bytes.  The remaining
+instruction divergence includes the initial current-index load scheduling,
+the two missing current reload/shift pairs after the first flag store in the
+activation blocks (retail 0x1BC/0x1C0 and 0x4E8/0x4EC), and the special-path
+r26/r27 allocation swap.  The final raw instruction diff and both relocation
+tables substantiate those statements.
