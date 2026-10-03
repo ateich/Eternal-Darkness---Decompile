@@ -1,0 +1,37 @@
+$ readelf -Wr build/GEDE01/obj/game/game_fn_800D322C.o
+
+Relocation section '.rela.text' at offset 0x188 contains 13 entries:
+ Offset     Info    Type                Sym. Value  Symbol's Name + Addend
+00000024  0000046d R_PPC_EMB_SDA21        00000000   lbl_8064F380 + 0
+00000028  0000056d R_PPC_EMB_SDA21        00000000   lbl_8064F384 + 0
+0000002c  0000066d R_PPC_EMB_SDA21        00000000   lbl_8064F388 + 0
+00000030  0000076d R_PPC_EMB_SDA21        00000000   lbl_8064F38C + 0
+00000084  0000080a R_PPC_REL24            00000000   fn_8012DBE8 + 0
+000000c0  0000090a R_PPC_REL24            00000000   fn_800A1AF0 + 0
+000000e0  00000a0a R_PPC_REL24            00000000   fn_800A3C84 + 0
+000000f4  00000b0a R_PPC_REL24            00000000   fn_800CFFFC + 0
+00000100  00000c0a R_PPC_REL24            00000000   fn_800A4C98 + 0
+00000110  00000d0a R_PPC_REL24            00000000   fn_800A4670 + 0
+0000011c  00000e0a R_PPC_REL24            00000000   fn_800A2D78 + 0
+00000124  00000f0a R_PPC_REL24            00000000   fn_800A4D04 + 0
+00000130  0000100a R_PPC_REL24            00000000   fn_800A4634 + 0
+
+$ readelf -Wr build/GEDE01/src/game/game_fn_800D322C.o
+
+Relocation section '.rela.text' at offset 0x17c contains 13 entries:
+ Offset     Info    Type                Sym. Value  Symbol's Name + Addend
+00000024  0000036d R_PPC_EMB_SDA21        00000000   lbl_8064F380 + 0
+00000028  0000046d R_PPC_EMB_SDA21        00000000   lbl_8064F384 + 0
+0000002c  0000056d R_PPC_EMB_SDA21        00000000   lbl_8064F388 + 0
+00000030  0000066d R_PPC_EMB_SDA21        00000000   lbl_8064F38C + 0
+00000084  0000070a R_PPC_REL24            00000000   fn_8012DBE8 + 0
+000000c0  0000080a R_PPC_REL24            00000000   fn_800A1AF0 + 0
+000000e0  0000090a R_PPC_REL24            00000000   fn_800A3C84 + 0
+000000f4  00000a0a R_PPC_REL24            00000000   fn_800CFFFC + 0
+00000100  00000b0a R_PPC_REL24            00000000   fn_800A4C98 + 0
+00000110  00000c0a R_PPC_REL24            00000000   fn_800A4670 + 0
+0000011c  00000d0a R_PPC_REL24            00000000   fn_800A2D78 + 0
+00000124  00000e0a R_PPC_REL24            00000000   fn_800A4D04 + 0
+00000130  00000f0a R_PPC_REL24            00000000   fn_800A4634 + 0
+
+Result: all 13 ordered (offset, type, target, addend) tuples are identical. Symbol-table indices differ only because the retail and compiled ELF symbol tables contain different preceding entries.
