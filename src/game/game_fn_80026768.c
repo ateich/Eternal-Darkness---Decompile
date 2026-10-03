@@ -85,6 +85,8 @@ void fn_80026768(EffectState* state)
     s32 y0;
     s32 y1;
     s32 bottom;
+    s32 particle_origin;
+    s32 particle_y_origin;
     s32 texture;
     s32 depth;
     s32 variant;
@@ -124,8 +126,8 @@ void fn_80026768(EffectState* state)
 
     x0 = (s32)(lbl_8064DF98 * state->y);
     x1 = (s32)(lbl_8064DF98 * state->x);
-    bottom = (s32)((lbl_8064DF94 + lbl_8064DF98 * state->scale)
-                   + state->top);
+    particle_origin =
+        (s32)(__fmadds(lbl_8064DF98, state->scale, lbl_8064DF94) + state->top);
     if (x0 < x1) {
         s32 swap = x0;
         x0 = x1;
@@ -133,6 +135,7 @@ void fn_80026768(EffectState* state)
     }
     y0 = (s32)(lbl_8064DF9C + (61 - x0) * state->scale);
     y1 = (s32)(lbl_8064DF9C + (61 - x1) * state->scale);
+    bottom = (s32)__fmadds(lbl_8064DF98, state->scale, lbl_8064DF9C);
     edge.half[1] = y0;
     edge.half[2] = y0;
     edge.half[3] = y1;
@@ -170,11 +173,12 @@ void fn_80026768(EffectState* state)
     draw_color = data->color[variant];
     fn_801A852C(&draw_color, 0, 9, 0x80000000);
 
+    particle_y_origin = (s16)(state->top + edge.half[4]);
     for (i = 0; i < 5; i++) {
         ParticlePoint* point = &data->point[variant][i];
         s16* age = &data->age[variant][i];
         s16* delay = &data->delay[variant][i];
-        s32 limit = edge.half[5] - state->top;
+        s32 limit = particle_origin - particle_y_origin;
 
         if (*age == 1) {
             lbl_8064C6E8++;
@@ -190,10 +194,10 @@ void fn_80026768(EffectState* state)
         }
         if (point->y <= limit) {
             fn_801A8F08(state->left + 6 + point->x,
-                        state->top + point->y,
+                        particle_y_origin + point->y,
                         state->left + 6 + point->x + *delay,
-                        state->top + point->y + *delay,
-                        texture, *age >> 3, 5, 0, 5);
+                        particle_y_origin + point->y + *delay,
+                        texture, (*age >> 3) * 4, 5, 0, 5);
         }
         if (point->y <= -3) {
             (*age)++;

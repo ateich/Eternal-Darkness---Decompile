@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "assignment_id": "d4a2af66-767c-48cf-a9c3-c9092c3077c6",
+  "attempt": 5,
+  "base_commit": "0c37674b804fe9496ca19fcb18e94ebbdc169805",
+  "target": "fn_80026768",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-d4a2af66-767c-48cf-a9c3-c9092c3077c6.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-d4a2af66-767c-48cf-a9c3-c9092c3077c6-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-d4a2af66-767c-48cf-a9c3-c9092c3077c6.txt",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-d4a2af66-767c-48cf-a9c3-c9092c3077c6.txt",
+    "eternal-darkness-decomp/reports/GEDE01/disassembly-retail-d4a2af66-767c-48cf-a9c3-c9092c3077c6.txt",
+    "eternal-darkness-decomp/reports/GEDE01/disassembly-generated-d4a2af66-767c-48cf-a9c3-c9092c3077c6.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-retail-d4a2af66-767c-48cf-a9c3-c9092c3077c6.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-generated-d4a2af66-767c-48cf-a9c3-c9092c3077c6.txt"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff are 63.753117%: retail is 1604 bytes with a 0xD0 stack frame and stmw r16, while generated code is 1620 bytes with a 0xB0 frame and stmw r20. Both objects contain 53 relocation records, but retail conversion constants target lbl_8064DFA0 once and lbl_8064DF80 twice, while generated code targets compiler-local @103 once and @108 twice. The reconstruction now preserves retail semantics: separate fused particle-origin and bottom calculations, the shared (s16)(top + edge.half[4]) particle Y origin, and a four-scaled particle texture index. Remaining differences are instruction scheduling, stack layout, conversion-constant ownership and relocation targets, and long-lived register allocation."
+}
