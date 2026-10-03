@@ -1,0 +1,88 @@
+command: python3 tools/fndiff.py game/game_fn_8012BE94.c fn_8012BE94
+target 336 bytes  base 276 bytes  match 68.083336
+* 0x0000  stwu r1, -0x20(r1)                                   | stwu r1, -0x10(r1)
+* 0x0004  li r6, 0x0                                           | li r5, 0x0
+* 0x0008  li r8, 0x0                                           | li r7, 0x0
+* 0x000c  stw r31, 0x1c(r1)                                    | stw r31, 0xc(r1)
+* 0x0010  mr r7, r6                                            | mr r6, r5
+* 0x0014  stw r30, 0x18(r1)                                    |
+* 0x0018  stw r29, 0x14(r1)                                    |
+  0x001c  b 0x124                                              | b 0xec
+  0x0020  lwz r0, 0xe4(r4)                                     | lwz r0, 0xe4(r4)
+* 0x0024  li r5, 0x0                                           | li r12, 0x0
+* 0x0028  lwz r30, 0x23c(r3)                                   | lwz r9, 0x23c(r3)
+* 0x002c  addi r11, r7, 0x4                                    | li r11, 0x0
+* 0x0030  add r9, r0, r6                                       | add r8, r0, r5
+* 0x0034  addi r0, r7, 0x8                                     |
+* 0x0038  lwz r29, 0x0(r9)                                     | lwz r0, 0x0(r8)
+* 0x003c  mr r12, r5                                           | add r31, r9, r6
+* 0x0040  li r10, 0x0                                          | stw r0, 0x0(r31)
+* 0x0044  li r31, 0x1                                          | stw r8, 0x4(r31)
+* 0x0048  stwx r29, r30, r7                                    |
+* 0x004c  lwz r30, 0x23c(r3)                                   |
+* 0x0050  stwx r9, r30, r11                                    |
+* 0x0054  lhz r30, 0x4(r9)                                     | lhz r0, 0x4(r8)
+* 0x0058                                                       | sth r0, 0x8(r31)
+* 0x005c  lwz r11, 0x23c(r3)                                   | lwz r0, 0x0(r8)
+* 0x0060  sthx r30, r11, r0                                    |
+* 0x0064  lwz r30, 0x23c(r3)                                   |
+* 0x0068  lwz r0, 0x0(r9)                                      | lwz r9, 0x240(r3)
+* 0x006c  lwz r11, 0x240(r3)                                   |
+* 0x0070  add r30, r30, r7                                     |
+  0x0074  slwi r0, r0, 2                                       | slwi r0, r0, 2
+* 0x0078  stwx r30, r11, r0                                    | stwx r31, r9, r0
+  0x007c  b 0xc4                                               | b 0x8c
+* 0x0080  lwz r11, 0x8(r9)                                     | lwz r9, 0x8(r8)
+* 0x0084  lhzx r29, r11, r5                                    | lhzx r9, r9, r11
+* 0x0088  rlwinm. r0, r29, 0, 16, 16                           | rlwinm. r0, r9, 0, 16, 16
+  0x008c  bne 0xbc                                             | bne 0x84
+* 0x0090  lwz r11, 0x23c(r3)                                   | lhz r10, 0x8(r31)
+* 0x0094  addi r0, r11, 0x8                                    |
+* 0x0098  lhzx r0, r7, r0                                      |
+* 0x009c  cmplwi r0, 0x1                                       |
+* 0x00a0  bne 0xb0                                             |
+* 0x00a4  clrlslwi r11, r29, 16, 3                             | clrlslwi r9, r9, 16, 3
+* 0x00a8  addi r0, r11, 0x180                                  | addi r0, r9, 0x180
+* 0x00ac  sthx r31, r3, r0                                     | subfic r9, r10, 0x1
+* 0x00b0  b 0xbc                                               | cntlzw r9, r9
+* 0x00b4  clrlslwi r11, r29, 16, 3                             | extrwi r9, r9, 16, 11
+* 0x00b8  addi r0, r11, 0x180                                  |
+* 0x00bc  sthx r12, r3, r0                                     | sthx r9, r3, r0
+* 0x00c0  addi r5, r5, 0x2                                     | addi r11, r11, 0x2
+* 0x00c4  addi r10, r10, 0x1                                   | addi r12, r12, 0x1
+* 0x00c8  lhz r0, 0x6(r9)                                      | lhz r0, 0x6(r8)
+* 0x00cc  cmpw r10, r0                                         | cmpw r12, r0
+  0x00d0  blt 0x7c                                             | blt 0x58
+* 0x00d4  lbz r0, 0xc(r9)                                      | lbz r0, 0xc(r8)
+  0x00d8  extsb r0, r0                                         | extsb r0, r0
+  0x00dc  cmpwi r0, -0x1                                       | cmpwi r0, -0x1
+  0x00e0  beq 0xf4                                             | beq 0xbc
+* 0x00e4  slwi r5, r0, 3                                       | slwi r9, r0, 3
+* 0x00e8  addi r5, r5, 0x180                                   | addi r9, r9, 0x180
+* 0x00ec  lhzx r0, r3, r5                                      | lhzx r0, r3, r9
+  0x00f0  rlwinm r0, r0, 0, 16, 30                             | rlwinm r0, r0, 0, 16, 30
+* 0x00f4  sthx r0, r3, r5                                      | sthx r0, r3, r9
+* 0x00f8  lbz r0, 0xd(r9)                                      | lbz r0, 0xd(r8)
+  0x00fc  extsb r0, r0                                         | extsb r0, r0
+  0x0100  cmpwi r0, -0x1                                       | cmpwi r0, -0x1
+  0x0104  beq 0x118                                            | beq 0xe0
+* 0x0108  slwi r5, r0, 3                                       | slwi r8, r0, 3
+* 0x010c  addi r5, r5, 0x180                                   | addi r8, r8, 0x180
+* 0x0110  lhzx r0, r3, r5                                      | lhzx r0, r3, r8
+  0x0114  rlwinm r0, r0, 0, 16, 30                             | rlwinm r0, r0, 0, 16, 30
+* 0x0118  sthx r0, r3, r5                                      | sthx r0, r3, r8
+* 0x011c  addi r6, r6, 0x18                                    | addi r5, r5, 0x18
+* 0x0120  addi r7, r7, 0x90                                    | addi r6, r6, 0x90
+* 0x0124  addi r8, r8, 0x1                                     | addi r7, r7, 0x1
+  0x0128  lwz r0, 0xe0(r4)                                     | lwz r0, 0xe0(r4)
+* 0x012c  cmpw r8, r0                                          | cmpw r7, r0
+  0x0130  blt 0x20                                             | blt 0x18
+* 0x0134  lwz r0, 0x254(r3)                                    | lwz r4, 0x254(r3)
+* 0x0138  oris r0, r0, 0x80                                    | lis r0, 0x80
+* 0x013c                                                       | or r0, r4, r0
+  0x0140  stw r0, 0x254(r3)                                    | stw r0, 0x254(r3)
+* 0x0144  lwz r31, 0x1c(r1)                                    |
+* 0x0148  lwz r30, 0x18(r1)                                    |
+* 0x014c  lwz r29, 0x14(r1)                                    | lwz r31, 0xc(r1)
+* 0x0150  addi r1, r1, 0x20                                    | addi r1, r1, 0x10
+  0x0154  blr                                                  | blr

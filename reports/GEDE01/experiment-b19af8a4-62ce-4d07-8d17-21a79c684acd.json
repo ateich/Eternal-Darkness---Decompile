@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "assignment_id": "b19af8a4-62ce-4d07-8d17-21a79c684acd",
+  "target": "fn_8012BE94",
+  "candidate_count": 1,
+  "proof_sha256_verified": {
+    "proposed-source.c.txt": "706f1f5a7b96b2edb1b2ba3773e715116c676c07c278bbc1f8afce4cf51e3340",
+    "evidence.json": "8ca1fc432aa2e2242293a57807fba70e1b76f820979a3a47c74707dd0fdcac49",
+    "retail-summary.txt": "336465bd51d84dc1ca7ff0dc4d20bfae89265851074eb418cb28a1c6c0091304"
+  },
+  "candidate_source_sha256": "d08bccc1250bccbbdb51eef30b73ffda7c7cfe0f7e9bcdd1f0a9fcc475b6115f",
+  "retail_object_sha256": "26b639ff18f75362c7e6412bfa63694e53837902daf5fa88b837d51a49add17d",
+  "candidate_object_sha256": "039329e1ce93012f79b759fa26abeba219b162dc5fbed2678ef8ccd9aa134ada",
+  "compiler": "GC/1.3 canonical repository defaults",
+  "layout_validation": {
+    "method": "MWCC compile-time negative-array checks",
+    "Definition": "0x18",
+    "Header": "0xE8",
+    "Slot": "0x8",
+    "StateEntry": "0x90",
+    "Owner": "0x40 with void* header at +0x3C",
+    "OwnerLayout": "0x258 with slots +0x17C, states +0x23C, state_by_id +0x240, flags +0x254"
+  },
+  "preconditions": [
+    "Owner states and state_by_id storage have capacity for Header.definition_count entries and all Definition.id values",
+    "every Definition.id is within the state_by_id table",
+    "every eligible item index without bit 0x8000 is below 24",
+    "child_0 and child_1 are either -1 or valid slot indices; other negative values are not safe"
+  ],
+  "canonical": {
+    "match_percent": 68.083336,
+    "retail_text_bytes": 336,
+    "candidate_text_bytes": 276,
+    "retail_instructions": 84,
+    "candidate_instructions": 69,
+    "relocations_each": 0
+  },
+  "relocation_strict": {
+    "config": "function_reloc_diffs=name_address",
+    "match_percent": 68.083336,
+    "retail_text_bytes": 336,
+    "candidate_text_bytes": 276,
+    "relocations_each": 0
+  },
+  "divergence": "The candidate preserves the recovered initialization and signed-child semantics but GC/1.3 lowers its pointer-oriented loops to 276 bytes/69 instructions. Retail is 336 bytes/84 instructions, saves r29-r31 in a 0x20-byte frame, carries separate 0x18 and 0x90 byte offset accumulators, repeatedly reloads Owner+0x23C, and uses indexed stores. The candidate saves only r31 in a 0x10-byte frame and retains direct Definition and StateEntry pointers. The item flag boolean lowering and final 0x800000 OR sequence also differ."
+}
