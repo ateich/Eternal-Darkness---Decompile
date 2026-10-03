@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "assignment_id": "5cf1c455-0b48-4885-93b8-914fb1f769f3",
+  "attempt": 8,
+  "base_commit": "711552a3d8f41dd94871ade3299f4d093291619f",
+  "parent_candidate": "d8d43d511eeaaba9cd1fbc8a6878a3e783b39453",
+  "target": "fn_80150400",
+  "verification": "target-object ownership correction; full integration build pending",
+  "split_correction": {
+    "removed_explicit_owner": {
+      "path": "game/game_fn_80150400.c",
+      "section": ".sdata2",
+      "start": "0x80650588",
+      "end": "0x80650590"
+    },
+    "restored_owner": "build/GEDE01/obj/auto_11_806503A8_sdata2.o",
+    "range": {
+      "start": "0x806503A8",
+      "end": "0x80650598",
+      "size": 496
+    }
+  },
+  "restored_symbols": [
+    {
+      "name": "lbl_80650588",
+      "offset": "0x1E0",
+      "size": 8,
+      "bytes": "4330000080000000"
+    },
+    {
+      "name": "lbl_80650590",
+      "offset": "0x1E8",
+      "size": 8,
+      "bytes": "4330000000000000"
+    }
+  ],
+  "auto_object": {
+    "sha256": "9df0dea651f29aee327e8d9369a9a93d5c2c6e12d9ec028911ad72e838638216",
+    "assembly_sha256": "0f0dd56cf37606fcdbf7e1911714af2f220af1f5b2a8cdd5121195d5cff5530e",
+    "section": ".sdata2",
+    "alignment": 8
+  },
+  "externalized_target": {
+    "path": "build/GEDE01/src/game/game_fn_80150400.o",
+    "sha256": "2b1abb08c3cb72597508efc57f1bac30a05c3ebd28589c43bd27478c8696928d",
+    "has_sdata2": false,
+    "lbl_80650588": "undefined global size 8",
+    "incoming_sda21": [
+      {
+        "offset": "0x2e8",
+        "addend": 0
+      },
+      {
+        "offset": "0x46c",
+        "addend": 0
+      }
+    ]
+  },
+  "fresh_reports": {
+    "canonical_sha256": "e709873428c489520dac583f91a639085354556fc15b33772a328d36a5392448",
+    "strict_sha256": "e709873428c489520dac583f91a639085354556fc15b33772a328d36a5392448",
+    "function_bytes": 1360,
+    "canonical_match_percent": 100.0,
+    "strict_match_percent": 100.0,
+    "assigned_sections": [
+      ".text"
+    ]
+  },
+  "preserved_raw_evidence_sha256": {
+    "raw-disassembly.txt": "a6fc31ae811cd96015faeeb9ad96622321756428dfd839f3671633d28c99f1a6",
+    "raw-relocations.txt": "c131076fb604e79f36064bc9e846c7c2466b7e28fe60e4004f60c16a90552fa5",
+    "raw-sdata2.txt": "6351028a7824cc9331219de2ce91482abe8b31555baf9f0d082c8e477acd668d",
+    "raw-sections.txt": "8891bee44fd9124963399722e3bb46eb227e9ff6d4669a174084d3f3cb6c66c1",
+    "raw-symbols.txt": "3bc1ad577b82507951b462bd3eb5fa8b8c64875fb88a8feeffb6846a1ea3b87f",
+    "retail-dol-sdata2.txt": "733b5efdcefa4d62f73a5509f06f4055a75f117f08cb0387447dfb0ebb751aca",
+    "retail-disassembly.txt": "d04839a693acebbb46ad2b191a15ef8133778c4d741cf35ab4bce7eef343137a",
+    "retail-relocations.txt": "ca8afb7ee282b445ed6b0e26d064959953633d64139335f23b73e0f64e972470",
+    "retail-sdata2.txt": "11a59b6c568fa10aff76e45053d73dd3194c98e3442c4058b7ba10f08d16cdc4",
+    "retail-sections.txt": "db085aa9f25c827d882fd2a96d7e5a51f72b45b5efd3434aa361a071aec7fa25",
+    "retail-symbols.txt": "826679ca1bb390d74435a256fcda6edafb056e402d272f91b9b308d1b86f39c8",
+    "generated-disassembly.txt": "72ebba27e1513ea30a8f425814e93b3068d6c08abfad11873536570dcdfa6ec7",
+    "generated-relocations.txt": "3bd98de0bb201750534ebf41d9e8dcdff9fe8da001fb611c01dc123c59b4dfef",
+    "relocation-diff.txt": "7256d540d659122aeaf472090388478fba79b95b7aa42c40029baa0bb564ea99",
+    "instruction-diff.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "text-byte-comparison.txt": "da12f382de3fefa157a11e10298f0843ec46ada14815a42de413450851b7f1b0",
+    "source-hash.txt": "246b4d246258b4c802a804a1b9a5926dc2efc517c3db5af4fb932fe0827f63d6"
+  },
+  "source_sha256": "37edf2e61b6c7515f30f2944be5c7826792f0c974f895550df730089d6f984ea",
+  "configure_sha256": "c499852d2af786fc6ec9142be1686ab0dd72817f7f5f16ac2d49ffb07101aa4b",
+  "commands": [
+    [
+      "python3",
+      "configure.py"
+    ],
+    [
+      ".tools/bin/ninja",
+      "-j2",
+      "build/GEDE01/src/game/game_fn_80150400.externalized"
+    ],
+    [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_80150400",
+      "fn_80150400",
+      "-o",
+      "reports/GEDE01/5cf1c455-0b48-4885-93b8-914fb1f769f3/canonical.json",
+      "--format",
+      "json-pretty"
+    ],
+    [
+      "build/tools/objdiff-cli",
+      "diff",
+      "-c",
+      "function_reloc_diffs=name_address",
+      "-p",
+      ".",
+      "-u",
+      "main/game/game_fn_80150400",
+      "fn_80150400",
+      "-o",
+      "reports/GEDE01/5cf1c455-0b48-4885-93b8-914fb1f769f3/strict.json",
+      "--format",
+      "json-pretty"
+    ]
+  ]
+}

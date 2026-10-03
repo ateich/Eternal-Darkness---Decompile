@@ -4046,10 +4046,11 @@ config.custom_build_rules.append(
     {
         "name": "externalize_game_80150400_signed_bias",
         "command": (
-            "python3 tools/externalize_elf_symbol.py $in @73 lbl_80650588 "
-            "orig/GEDE01/sys/main.dol --require-whole-section && "
+            "python3 tools/externalize_elf_symbol.py $in @77 lbl_80650588 "
+            "orig/GEDE01/sys/main.dol --require-whole-section "
+            "--require-section=.sdata2 --reject-section-relocations && "
             "build/binutils/powerpc-eabi-objcopy "
-            "--redefine-sym=@73=lbl_80650588 --remove-section=.sdata2 "
+            "--redefine-sym=@77=lbl_80650588 --remove-section=.sdata2 "
             "--rename-section=.comment=.ignored $in && touch $out"
         ),
         "description": "EXTERNALIZE $in",
