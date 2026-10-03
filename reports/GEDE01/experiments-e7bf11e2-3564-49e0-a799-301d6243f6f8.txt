@@ -1,0 +1,41 @@
+Assignment e7bf11e2-3564-49e0-a799-301d6243f6f8, attempt 3, fn_80033180.
+
+Recovered reviewed baseline
+---------------------------
+The accepted base already contains the preserved declaration-order candidate from
+commit 1dbdba7a4c2836e9ef11084df7480de9030b4d7f. It orders state before object_id,
+which gives generated state/object_id the retail r31/r30 allocation. Fresh raw
+baseline output is objdiff-baseline-e7bf11e2-3564-49e0-a799-301d6243f6f8.json.
+Canonical score: 81.82089%. Retail text: 0x648 (1608) bytes. Generated text:
+0x650 (1616) bytes.
+
+Different codegen hypothesis tested
+-----------------------------------
+Hypothesis: declaring the long-lived info pointer with the C register storage
+class would raise its MWCC allocation priority and swap generated info/object
+from r29/r28 to retail r28/r29 without changing evaluation order or behavior.
+The only experimental source change was `u8* info` to `register u8* info`.
+
+Result: rejected. The raw output is
+objdiff-register-info-e7bf11e2-3564-49e0-a799-301d6243f6f8.json. It remained
+81.82089%, and the generated object SHA-256 remained
+cab3af7dea2e1c6da123c14e0a647cd69af939b3b754a9085c716d328fca53c8.
+MWCC ignored the storage-class hint under the canonical optimization settings.
+The experimental keyword was removed, leaving the reviewed reconstruction.
+
+Final measured result
+---------------------
+Canonical and relocation-strict scores are both 81.82089%. Both objects have 65
+relocations. The first instruction divergence remains retail object=r29 versus
+generated object=r28 at byte address 0x10, followed by retail info=r28 versus
+generated info=r29 at 0x2c. Retail loads state through r5 at 0x38 and assigns it
+to r31 at 0x44; generated schedules the action comparison at 0x38 and loads
+state directly to r31 at 0x3c. These allocation and scheduling differences lead
+to later branch-layout and relocation-offset differences. Raw per-side objdump
+disassemblies, their unified instruction diff with actual hexadecimal per-side
+addresses, and raw per-side relocation tables are preserved.
+
+The reviewed action 0xA/event 3 success path and action 0xB/event 3 transition
+to 0x26 path continue to skip fn_80032E90. No match is claimed, and no full
+build, legal audit, or DOL identity claim is made; those gates are reserved for
+the post-review integrator.
