@@ -1,0 +1,42 @@
+[
+  {
+    "command": ".tools/bin/ninja -v build/GEDE01/src/game/game_fn_80031694.o",
+    "exit_status": 0,
+    "output": "eternal-darkness-decomp/reports/GEDE01/build-bf4f4627-7b65-4ce0-9b98-6eeb0824630c.txt"
+  },
+  {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80031694 fn_80031694 -o reports/GEDE01/objdiff-bf4f4627-7b65-4ce0-9b98-6eeb0824630c.json --format json-pretty",
+    "exit_status": 0,
+    "output": "eternal-darkness-decomp/reports/GEDE01/objdiff-bf4f4627-7b65-4ce0-9b98-6eeb0824630c.log.txt"
+  },
+  {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_80031694 fn_80031694 -o reports/GEDE01/objdiff-bf4f4627-7b65-4ce0-9b98-6eeb0824630c-reloc-strict.json --format json-pretty -c function_reloc_diffs=name_address",
+    "exit_status": 0,
+    "output": "eternal-darkness-decomp/reports/GEDE01/objdiff-bf4f4627-7b65-4ce0-9b98-6eeb0824630c-reloc-strict.log.txt"
+  },
+  {
+    "command": "build/binutils/powerpc-eabi-objdump -dr build/GEDE01/obj/game/game_fn_80031694.o",
+    "exit_status": 0,
+    "output": "eternal-darkness-decomp/reports/GEDE01/instructions-bf4f4627-7b65-4ce0-9b98-6eeb0824630c-retail.txt"
+  },
+  {
+    "command": "build/binutils/powerpc-eabi-readelf -rW build/GEDE01/obj/game/game_fn_80031694.o",
+    "exit_status": 0,
+    "output": "eternal-darkness-decomp/reports/GEDE01/relocations-bf4f4627-7b65-4ce0-9b98-6eeb0824630c-retail.txt"
+  },
+  {
+    "command": "build/binutils/powerpc-eabi-objdump -dr build/GEDE01/src/game/game_fn_80031694.o",
+    "exit_status": 0,
+    "output": "eternal-darkness-decomp/reports/GEDE01/instructions-bf4f4627-7b65-4ce0-9b98-6eeb0824630c-generated.txt"
+  },
+  {
+    "command": "build/binutils/powerpc-eabi-readelf -rW build/GEDE01/src/game/game_fn_80031694.o",
+    "exit_status": 0,
+    "output": "eternal-darkness-decomp/reports/GEDE01/relocations-bf4f4627-7b65-4ce0-9b98-6eeb0824630c-generated.txt"
+  },
+  {
+    "command": "python3 tools/fndiff.py game/game_fn_80031694.c fn_80031694",
+    "exit_status": 0,
+    "output": "eternal-darkness-decomp/reports/GEDE01/instruction-diff-bf4f4627-7b65-4ce0-9b98-6eeb0824630c.txt"
+  }
+]

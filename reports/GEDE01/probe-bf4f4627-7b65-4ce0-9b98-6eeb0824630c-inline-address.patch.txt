@@ -1,0 +1,21 @@
+--- baseline
++++ inline-address
+@@ -44,12 +44,17 @@
+ extern void fn_8019AFEC(void);
+ extern void fn_80147EC4(EffectDescriptor*);
+ 
++static inline EffectDescriptor* effect_address(EffectDescriptor* effect)
++{
++    return effect;
++}
++
+ void fn_80031694(Vec3* position, s32 alternate, s32 object_id)
+ {
+     EffectDescriptor effect;
+     /* NonMatching: retail first forms &effect in r0 and then moves it to r3;
+      * GC/1.3 folds the same expression directly into r3. */
+-    fn_8019B13C(&effect);
++    fn_8019B13C(effect_address(&effect));
+     effect.enabled = 0;
+     effect.type = fn_801D3A24(object_id, 0x31);
+     effect.unk06 = 0;

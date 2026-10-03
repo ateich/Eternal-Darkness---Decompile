@@ -1,0 +1,69 @@
+--- baseline
++++ inline-setup
+@@ -44,35 +44,38 @@
+ extern void fn_8019AFEC(void);
+ extern void fn_80147EC4(EffectDescriptor*);
+ 
++static inline void setup_effect(EffectDescriptor* effect, Vec3* position, s32 alternate, s32 object_id)
++{
++    fn_8019B13C(effect);
++    effect->enabled = 0;
++    effect->type = fn_801D3A24(object_id, 0x31);
++    effect->unk06 = 0;
++    effect->unk16 = 0;
++    effect->scale = lbl_8064E068;
++    effect->unk1C = 0;
++    effect->active = 1;
++    effect->alpha = 0xFC;
++    effect->size = 12;
++    if (alternate != 0) {
++        effect->color0 = 0xF0;
++        effect->color1 = 0x96;
++        effect->offset = -10;
++    } else {
++        effect->color0 = 0;
++        effect->color1 = 0;
++        effect->offset = 0;
++        effect->unk02 = 0xFF;
++        effect->unk03 = -3;
++    }
++    effect->callback = fn_8019AFEC;
++    effect->position = *position;
++    effect->mode = 4;
++    effect->position.z += lbl_8064E138;
++    fn_80147EC4(effect);
++}
++
+ void fn_80031694(Vec3* position, s32 alternate, s32 object_id)
+ {
+     EffectDescriptor effect;
+-    /* NonMatching: retail first forms &effect in r0 and then moves it to r3;
+-     * GC/1.3 folds the same expression directly into r3. */
+-    fn_8019B13C(&effect);
+-    effect.enabled = 0;
+-    effect.type = fn_801D3A24(object_id, 0x31);
+-    effect.unk06 = 0;
+-    effect.unk16 = 0;
+-    effect.scale = lbl_8064E068;
+-    effect.unk1C = 0;
+-    effect.active = 1;
+-    effect.alpha = 0xFC;
+-    effect.size = 12;
+-    if (alternate != 0) {
+-        effect.color0 = 0xF0;
+-        effect.color1 = 0x96;
+-        effect.offset = -10;
+-    } else {
+-        effect.color0 = 0;
+-        effect.color1 = 0;
+-        effect.offset = 0;
+-        effect.unk02 = 0xFF;
+-        effect.unk03 = -3;
+-    }
+-    effect.callback = fn_8019AFEC;
+-    effect.position = *position;
+-    effect.mode = 4;
+-    effect.position.z += lbl_8064E138;
+-    fn_80147EC4(&effect);
++    setup_effect(&effect, position, alternate, object_id);
+ }

@@ -1,0 +1,43 @@
+Attempt 5: fn_80031694
+
+Studied the preserved attempt 1/2 envelopes and instruction evidence and the
+attempt 3/4 hypothesis reports from the accepted base, plus preserved commit
+metadata. The typed initializer prototype and existing NonMatching source were
+already present at the accepted base. No source recovery was necessary.
+
+New hypothesis: MWCC may represent aggregate-array decay or a containing union
+member address differently from direct address-of of a local struct, changing
+when it schedules address materialization relative to incoming r3 preservation.
+Tested a one-element EffectDescriptor array, then a same-size union containing
+EffectDescriptor and unsigned int[43]. Neither changes the emitted instructions.
+
+Additional new hypothesis: inline expansion may preserve temporary argument
+lifetimes that prevent coalescing the address computation directly into r3.
+Tested an inline initializer forwarding wrapper, an inline identity/address
+helper, and an inline helper containing the full descriptor setup with the
+stack descriptor passed from fn_80031694. All inline helpers disappeared from
+the generated object. Every probe emitted the same 276-byte target instructions
+and measured canonical objdiff 95.57143%. The exact probe source changes are
+preserved as report patches; each has raw Ninja build output, objdiff JSON, and
+objdump instructions. No alternate C translation units remain.
+
+Restored and rebuilt the existing simplest, semantically faithful reconstruction.
+Final canonical AND function_reloc_diffs=name_address reports measure 95.57143%.
+The retail function has 280 bytes; generated has 276. The sole code difference
+is retail addi r0,r1,8 at 0x0c and mr r3,r0 at 0x18, versus generated
+addi r3,r1,8 at 0x14, with the adjacent r31 save/copy shifted as shown in the raw
+instruction diff. All instructions from retail 0x1c onward are byte-identical to
+generated 0x18 onward. All seven relocation types, targets, zero addends, and
+ordering agree; generated relocation offsets are each four bytes earlier.
+
+The canonical GC/1.3 compiler selection and flags, registration (NonMatching),
+and split remain unchanged. configure --no-progress and only the assigned-object
+Ninja target were requested. Ninja regenerated retail split objects as a target
+dependency. No full link/build or acceptance gate was requested in this session.
+The initial invocation found no ninja on PATH; the supplied .tools/bin/ninja was
+then used successfully. No toolchain replacement or policy change was needed.
+
+Acceptance gates are deliberately pending for the integrator after independent
+review: fresh deterministic full build, legal audit, canonical/strict no-regression
+JSON, and measured retail DOL SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f.
+This is an attempted result, not a match or acceptance claim.

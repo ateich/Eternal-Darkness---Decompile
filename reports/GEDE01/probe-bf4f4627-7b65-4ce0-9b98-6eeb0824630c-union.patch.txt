@@ -1,0 +1,61 @@
+--- baseline
++++ union
+@@ -46,33 +46,33 @@
+ 
+ void fn_80031694(Vec3* position, s32 alternate, s32 object_id)
+ {
+-    EffectDescriptor effect;
+-    /* NonMatching: retail first forms &effect in r0 and then moves it to r3;
++    union { EffectDescriptor descriptor; unsigned int words[43]; } storage;
++    /* NonMatching: retail first forms &storage.descriptor in r0 and then moves it to r3;
+      * GC/1.3 folds the same expression directly into r3. */
+-    fn_8019B13C(&effect);
+-    effect.enabled = 0;
+-    effect.type = fn_801D3A24(object_id, 0x31);
+-    effect.unk06 = 0;
+-    effect.unk16 = 0;
+-    effect.scale = lbl_8064E068;
+-    effect.unk1C = 0;
+-    effect.active = 1;
+-    effect.alpha = 0xFC;
+-    effect.size = 12;
++    fn_8019B13C(&storage.descriptor);
++    storage.descriptor.enabled = 0;
++    storage.descriptor.type = fn_801D3A24(object_id, 0x31);
++    storage.descriptor.unk06 = 0;
++    storage.descriptor.unk16 = 0;
++    storage.descriptor.scale = lbl_8064E068;
++    storage.descriptor.unk1C = 0;
++    storage.descriptor.active = 1;
++    storage.descriptor.alpha = 0xFC;
++    storage.descriptor.size = 12;
+     if (alternate != 0) {
+-        effect.color0 = 0xF0;
+-        effect.color1 = 0x96;
+-        effect.offset = -10;
++        storage.descriptor.color0 = 0xF0;
++        storage.descriptor.color1 = 0x96;
++        storage.descriptor.offset = -10;
+     } else {
+-        effect.color0 = 0;
+-        effect.color1 = 0;
+-        effect.offset = 0;
+-        effect.unk02 = 0xFF;
+-        effect.unk03 = -3;
++        storage.descriptor.color0 = 0;
++        storage.descriptor.color1 = 0;
++        storage.descriptor.offset = 0;
++        storage.descriptor.unk02 = 0xFF;
++        storage.descriptor.unk03 = -3;
+     }
+-    effect.callback = fn_8019AFEC;
+-    effect.position = *position;
+-    effect.mode = 4;
+-    effect.position.z += lbl_8064E138;
+-    fn_80147EC4(&effect);
++    storage.descriptor.callback = fn_8019AFEC;
++    storage.descriptor.position = *position;
++    storage.descriptor.mode = 4;
++    storage.descriptor.position.z += lbl_8064E138;
++    fn_80147EC4(&storage.descriptor);
+ }
