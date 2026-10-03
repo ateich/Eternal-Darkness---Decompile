@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "assignment_id": "0821ca98-6d34-4384-b3e6-6afa8324d3fc",
+  "attempt": 1,
+  "target": "fn_8012F474",
+  "candidate_policy": "One measured source-only candidate; no retry or variant was compiled.",
+  "backup": {
+    "directory": "/home/rabbit/backups/decomp-backlog-parser-20261002/lower-score-screen-20261003/fn_8012F474",
+    "sha256sum_check": "all three files OK",
+    "proposed_source_sha256": "dd7826baf1524647fa7e400d8f326e4ac602861d0b4a8337ae5b724d725873d8"
+  },
+  "candidate": {
+    "path": "src/game/game_fn_8012F474.c",
+    "sha256": "e0dc957ea446aa65a33156e98d09736b3669df45e0275f43d984ec6b63a16546",
+    "difference_from_proposal": "The target argument is consistently declared const Vec3*, and the valid-query-result precondition is documented without adding a failure branch.",
+    "semantic_reconstruction": "Extract Matrix34 translation, subtract it from target, measure the delta, query the 0x28-byte result, write result.position to start, copy result.direction locally, normalize and scale it in place by the measured distance, then add it to start into end. Target is read before start is written."
+  },
+  "signature_and_layout_basis": {
+    "retail_caller": "build/GEDE01/asm/game/game_fn_8012F2DC.s shows r3-r9 supplied and no use of a return value at the sole call site; committed extraction is reports/GEDE01/retail-caller-0821ca98-6d34-4384-b3e6-6afa8324d3fc.txt.",
+    "fn_80127FD8": {
+      "path": "src/game/game_fn_80127FD8.c",
+      "sha256": "e807fe06158f6d0b263ee7a0891441563d1249b68070230fb2bcf4c5c1883d31",
+      "signature": "void fn_80127FD8(void*, int, Matrix34) with typedef float Matrix34[3][4]"
+    },
+    "fn_8011F6A4": {
+      "path": "src/game/game_fn_8011F6A4.c",
+      "sha256": "9b904d6bc105b8f7ef9b349aaca5bbd95fe47e5dd475c83aa6db0598cdaaab3d",
+      "signature": "int fn_8011F6A4(void*, int, int, int, void*, int)"
+    },
+    "query_layout_evidence": [
+      {
+        "path": "src/game/game_fn_8005EC6C.c",
+        "sha256": "57d44fdc2922cfdd64efe87204ad9021cfa38fcab28fd7515be0b1c4c7215d57"
+      },
+      {
+        "path": "src/game/game_fn_800D082C.c",
+        "sha256": "b3f4cb14c426e734f97a12b22325f10077b6ce7c89790eb8ecc92c0308742d87"
+      }
+    ]
+  },
+  "measurement": {
+    "canonical_match_percent": 77.62857,
+    "relocation_strict_match_percent": 77.62857,
+    "retail_text_bytes": 280,
+    "generated_text_bytes": 264,
+    "retail_relocations": [
+      "+0x34 R_PPC_REL24 fn_80127FD8",
+      "+0x5c R_PPC_REL24 fn_80211A6C",
+      "+0x64 R_PPC_REL24 fn_80211B08",
+      "+0x84 R_PPC_REL24 fn_8011F6A4",
+      "+0xd8 R_PPC_REL24 fn_80211AAC",
+      "+0xe8 R_PPC_REL24 fn_80211A90",
+      "+0xf8 R_PPC_REL24 fn_80211A48"
+    ],
+    "generated_relocations": [
+      "+0x18 R_PPC_REL24 _savegpr_26",
+      "+0x38 R_PPC_REL24 fn_80127FD8",
+      "+0x60 R_PPC_REL24 fn_80211A6C",
+      "+0x68 R_PPC_REL24 fn_80211B08",
+      "+0x88 R_PPC_REL24 fn_8011F6A4",
+      "+0xc4 R_PPC_REL24 fn_80211AAC",
+      "+0xd4 R_PPC_REL24 fn_80211A90",
+      "+0xe4 R_PPC_REL24 fn_80211A48",
+      "+0xf4 R_PPC_REL24 _restgpr_26"
+    ],
+    "divergence": "GC/1.3 emits a 0xB0 frame and helper-call GPR save/restore instead of retail's 0xD0 frame and inline stmw/lmw. It also lowers the position/direction aggregate copies into fewer stores, producing 264 rather than 280 bytes, shifted seven intended REL24 calls, and two additional helper relocations."
+  },
+  "scope": "Only the target TU, its normal NonMatching registration, and assignment-specific reports changed. The existing split already covered the exact 0x8012F474..0x8012F58C range and was not changed. No full build, legal audit, or DOL identity claim is made; those are integrator gates."
+}

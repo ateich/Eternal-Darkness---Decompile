@@ -1,0 +1,77 @@
+ INFO Writing to /home/rabbit/src/darkfoundry-new/.darkfoundry/durable/assignments/0821ca98-6d34-4384-b3e6-6afa8324d3fc/eternal-darkness-decomp/build/GEDE01/fndiff_fn_8012F474.json
+target 280 bytes  base 264 bytes  match 77.62857
+* 0x0000  stwu r1, -0xd0(r1)                                   | stwu r1, -0xb0(r1)
+  0x0004  mflr r0                                              | mflr r0
+* 0x0008  stw r0, 0xd4(r1)                                     | stw r0, 0xb4(r1)
+* 0x000c  stfd f31, 0xc0(r1)                                   | stfd f31, 0xa0(r1)
+* 0x0010  psq_st f31, 0xc8(r1), 0, qr0                         | psq_st f31, 0xa8(r1), 0, qr0
+* 0x0014  stmw r26, 0xa8(r1)                                   | addi r11, r1, 0xa0
+* 0x0018                                                       | bl _savegpr_26 [None+0 t10]
+  0x001c  mr r27, r5                                           | mr r27, r5
+  0x0020  mr r26, r3                                           | mr r26, r3
+  0x0024  mr r28, r6                                           | mr r28, r6
+  0x0028  mr r29, r7                                           | mr r29, r7
+  0x002c  mr r30, r8                                           | mr r30, r8
+  0x0030  mr r31, r9                                           | mr r31, r9
+* 0x0034  addi r5, r1, 0x6c                                    | addi r5, r1, 0x54
+  0x0038  bl fn_80127FD8 [None+0 t10]                          | bl fn_80127FD8 [None+0 t10]
+* 0x003c  lfs f2, 0x78(r1)                                     | lfs f2, 0x60(r1)
+  0x0040  mr r3, r29                                           | mr r3, r29
+* 0x0044  lfs f1, 0x88(r1)                                     | lfs f1, 0x70(r1)
+* 0x0048  addi r4, r1, 0x14                                    | addi r4, r1, 0x20
+* 0x004c  lfs f0, 0x98(r1)                                     | lfs f0, 0x80(r1)
+* 0x0050  addi r5, r1, 0x8                                     | addi r5, r1, 0x14
+* 0x0054  stfs f2, 0x14(r1)                                    | stfs f2, 0x20(r1)
+* 0x0058  stfs f1, 0x18(r1)                                    | stfs f1, 0x24(r1)
+* 0x005c  stfs f0, 0x1c(r1)                                    | stfs f0, 0x28(r1)
+  0x0060  bl fn_80211A6C [None+0 t10]                          | bl fn_80211A6C [None+0 t10]
+* 0x0064  addi r3, r1, 0x8                                     | addi r3, r1, 0x14
+  0x0068  bl fn_80211B08 [None+0 t10]                          | bl fn_80211B08 [None+0 t10]
+  0x006c  fmr f31, f1                                          | fmr f31, f1
+  0x0070  mr r3, r26                                           | mr r3, r26
+  0x0074  mr r4, r28                                           | mr r4, r28
+  0x0078  mr r5, r27                                           | mr r5, r27
+* 0x007c  addi r7, r1, 0x44                                    | addi r7, r1, 0x2c
+  0x0080  li r6, -0x1                                          | li r6, -0x1
+  0x0084  li r8, 0x1                                           | li r8, 0x1
+  0x0088  bl fn_8011F6A4 [None+0 t10]                          | bl fn_8011F6A4 [None+0 t10]
+* 0x008c  lwz r9, 0x4c(r1)                                     | lwz r5, 0x34(r1)
+* 0x0090  addi r3, r1, 0x20                                    | addi r3, r1, 0x8
+* 0x0094  lwz r8, 0x50(r1)                                     | lwz r0, 0x38(r1)
+  0x0098  mr r4, r3                                            | mr r4, r3
+* 0x009c                                                       | stw r5, 0x0(r30)
+* 0x00a0                                                       | stw r0, 0x4(r30)
+* 0x00a4  lwz r7, 0x54(r1)                                     | lwz r0, 0x3c(r1)
+* 0x00a8                                                       | stw r0, 0x8(r30)
+* 0x00ac  lwz r6, 0x58(r1)                                     | lwz r6, 0x40(r1)
+* 0x00b0  lwz r5, 0x5c(r1)                                     | lwz r5, 0x44(r1)
+* 0x00b4  lwz r0, 0x60(r1)                                     | lwz r0, 0x48(r1)
+* 0x00b8  stw r9, 0x2c(r1)                                     | 
+* 0x00bc  stw r9, 0x0(r30)                                     | 
+* 0x00c0  stw r8, 0x4(r30)                                     | 
+* 0x00c4  stw r7, 0x8(r30)                                     | 
+* 0x00c8  stw r8, 0x30(r1)                                     | 
+* 0x00cc  stw r7, 0x34(r1)                                     | 
+* 0x00d0  stw r6, 0x38(r1)                                     | 
+* 0x00d4  stw r5, 0x3c(r1)                                     | 
+* 0x00d8  stw r0, 0x40(r1)                                     | 
+* 0x00dc  stw r6, 0x20(r1)                                     | stw r6, 0x8(r1)
+* 0x00e0  stw r5, 0x24(r1)                                     | stw r5, 0xc(r1)
+* 0x00e4  stw r0, 0x28(r1)                                     | stw r0, 0x10(r1)
+  0x00e8  bl fn_80211AAC [None+0 t10]                          | bl fn_80211AAC [None+0 t10]
+  0x00ec  fmr f1, f31                                          | fmr f1, f31
+* 0x00f0  addi r3, r1, 0x20                                    | addi r3, r1, 0x8
+  0x00f4  mr r4, r3                                            | mr r4, r3
+  0x00f8  bl fn_80211A90 [None+0 t10]                          | bl fn_80211A90 [None+0 t10]
+  0x00fc  mr r3, r30                                           | mr r3, r30
+  0x0100  mr r5, r31                                           | mr r5, r31
+* 0x0104  addi r4, r1, 0x20                                    | addi r4, r1, 0x8
+  0x0108  bl fn_80211A48 [None+0 t10]                          | bl fn_80211A48 [None+0 t10]
+* 0x010c  psq_l f31, 0xc8(r1), 0, qr0                          | psq_l f31, 0xa8(r1), 0, qr0
+* 0x0110                                                       | addi r11, r1, 0xa0
+* 0x0114  lfd f31, 0xc0(r1)                                    | lfd f31, 0xa0(r1)
+* 0x0118  lmw r26, 0xa8(r1)                                    | bl _restgpr_26 [None+0 t10]
+* 0x011c  lwz r0, 0xd4(r1)                                     | lwz r0, 0xb4(r1)
+  0x0120  mtlr r0                                              | mtlr r0
+* 0x0124  addi r1, r1, 0xd0                                    | addi r1, r1, 0xb0
+  0x0128  blr                                                  | blr
