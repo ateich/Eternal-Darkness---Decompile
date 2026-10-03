@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "configure": [
+    "python3",
+    "configure.py",
+    "--version",
+    "GEDE01",
+    "--dtk",
+    ".tools/bin/dtk",
+    "--objdiff",
+    "build/tools/objdiff-cli",
+    "--ninja",
+    ".tools/bin/ninja",
+    "--wrapper",
+    "build/tools/wibo",
+    "--sjiswrap",
+    "build/tools/sjiswrap.exe"
+  ],
+  "raw_target": [
+    ".tools/bin/ninja",
+    "-f",
+    "build.ninja",
+    "-j1",
+    "build/GEDE01/src/game/game_fn_8007B540.o"
+  ],
+  "mapped_target": [
+    ".tools/bin/ninja",
+    "-f",
+    "build.ninja",
+    "-j1",
+    "build/GEDE01/src/game/game_fn_8007B540.externalized"
+  ],
+  "canonical": [
+    "build/tools/objdiff-cli",
+    "diff",
+    "-1",
+    "POST_OBJECT",
+    "-2",
+    "RETAIL_OBJECT",
+    "-o",
+    "canonical.json",
+    "--format",
+    "json-pretty",
+    "fn_8007B540"
+  ],
+  "strict": [
+    "build/tools/objdiff-cli",
+    "diff",
+    "-1",
+    "POST_OBJECT",
+    "-2",
+    "RETAIL_OBJECT",
+    "-c",
+    "function_reloc_diffs=name_address",
+    "-o",
+    "strict.json",
+    "--format",
+    "json-pretty",
+    "fn_8007B540"
+  ]
+}
