@@ -1,0 +1,19 @@
+COMMAND: python3 configure.py --version GEDE01 --no-progress
+EXIT: 0
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80031D24.o
+EXIT: 0
+RAW OUTPUT:
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80031D24.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80031D24.d build/GEDE01/src/game/game_fn_80031D24.d
+COMPILER: compilers/GC/1.3/mwcceppc.exe
+FLAGS: -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on
+SOURCE_SHA256: d83e2372fe4e31e982eccf4940d3742090959c6aabd5a21bb99de371eaeaeee7
+RETAIL_OBJECT_SHA256: 787b9ab57d6dabe8b572d980bf6c30ca39425cee63ff35de9bb32d0a26319979
+GENERATED_OBJECT_SHA256: d039f27641c9233032e1d824b4922656c6526ddac777cc30ab081371916a223e
+RETAIL_TEXT_SHA256: 7ead58bb6ebec455c4fb37ca7a1bbc5832d4736899029a4521a5debd05adcd7a
+GENERATED_TEXT_SHA256: 7ead58bb6ebec455c4fb37ca7a1bbc5832d4736899029a4521a5debd05adcd7a
+TEXT_SIZE: 704 bytes / 176 instructions
+TEXT_CMP_EXIT: 0
+
+The source compiles successfully as its assigned object. The complete .text byte
+streams are identical, and canonical plus relocation-strict objdiff are 100%.
+No compiler-local initializer pool or post-compile transformation is present.

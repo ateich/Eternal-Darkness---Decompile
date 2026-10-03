@@ -51,15 +51,15 @@ extern void fn_80147E88(EffectSlot*);
 extern void fn_80149FDC(EffectSlot*, void*);
 extern u32 fn_80148300(void*, EffectSlot*, void*);
 extern void fn_80149EB8(void*);
+extern volatile u32 lbl_80651924;
+extern volatile u16 lbl_80651928;
 
 void* fn_80031D24(Vec3f* position_arg, void* source_arg, s32 object_id_arg,
                   s32 make_first_arg, s32 make_third_arg, u8 third_kind_arg,
                   u8 packed_kind_arg, u8 packed_variant_arg, u8 active_arg,
                   s32 extra_mode_arg)
 {
-    /* NonMatching: the literal initializer reproduces every instruction.
-       Its compiler-local zero pool still differs from the retail relocations. */
-    Vec3s direction = {0, 0, 0};
+    Vec3s direction;
     Vec3f submit_position;
     PrimarySlot primary;
     EffectSlot slot;
@@ -82,6 +82,8 @@ void* fn_80031D24(Vec3f* position_arg, void* source_arg, s32 object_id_arg,
     u8 mode;
 
     primary_ptr = &primary;
+    *(u32*)&direction = lbl_80651924;
+    direction.z = lbl_80651928;
     fn_801938FC(primary_ptr);
     descriptor = &primary.descriptor;
     fn_80179B64(source, descriptor->position0E);
