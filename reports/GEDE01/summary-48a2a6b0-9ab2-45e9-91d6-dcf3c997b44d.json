@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "assignment_id": "48a2a6b0-9ab2-45e9-91d6-dcf3c997b44d",
+  "attempt": 6,
+  "target": "fn_801F85A4",
+  "proof_bundle_sha256s_verified": true,
+  "correctness_corrections": [
+    "SavedState.token and the local token are signed int.",
+    "The exact declaration is int fn_801FA410(int), and its return is explicitly discarded.",
+    "Globals.saved contains five 0x14-byte records, consistent with lbl_8063D488 size 0x64."
+  ],
+  "aggregate_reconstruction": "Globals is a C reconstruction spanning adjacent linker labels beginning at lbl_8063C6B8; it is not a claim that the linker symbol alone owns the full aggregate extent.",
+  "bounds": "Index safety relies on the external invariant 0 <= lbl_8064D7BC <= 5. This invariant is not proven locally, and no runtime guard was added.",
+  "retained_result": {
+    "source_sha256": "163cd4cec4bbe0c5831c5c484e55890419bf03794f8e04d3d7cb4188a65e9363",
+    "generated_text_bytes": 116,
+    "generated_text_sha256": "48775bb786f03ed7f45fb90d3b41827dd32034b195300875ac9cf845e7878865",
+    "retail_text_bytes": 124,
+    "canonical_score": 83.09677,
+    "name_address_score": 83.09677,
+    "relocation_strict_all_score": 83.09677
+  },
+  "five_real_elf_relocations": [
+    {"kind": "R_PPC_ADDR16_HA", "target": "lbl_8063C6B8", "addend": 0, "retail_instruction_offset": 8, "generated_instruction_offset": 8},
+    {"kind": "R_PPC_ADDR16_LO", "target": "lbl_8063C6B8", "addend": 0, "retail_instruction_offset": 16, "generated_instruction_offset": 16},
+    {"kind": "R_PPC_EMB_SDA21", "target": "lbl_8064D7BC", "addend": 0, "retail_instruction_offset": 24, "generated_instruction_offset": 24},
+    {"kind": "R_PPC_EMB_SDA21", "target": "lbl_8064D7BC", "addend": 0, "retail_instruction_offset": 56, "generated_instruction_offset": 48},
+    {"kind": "R_PPC_REL24", "target": "fn_801FA410", "addend": 0, "retail_instruction_offset": 100, "generated_instruction_offset": 92}
+  ],
+  "relocation_note": "All five real relocations preserve type, target and addend. The store and call relocation offsets shift eight bytes earlier because generated code omits two retail pointer addi instructions. Objdiff R_PPC_NONE entries are derived address annotations, not ELF relocations.",
+  "authorized_trial": "Deferring first and second pointer assignments into their first stores produced the identical 116-byte text and identical 83.09677 scores in none, name_address and all modes, so the trial was retired.",
+  "divergence": "Retail materializes first and second live-state pointers with addi r6,r5,0xCC0 and addi r5,r5,0xD48. GC/1.3 omits both, uses shared-base stores at 0xCF0, 0xD78, 0xD30 and 0xDB8, and selects a different register/load/store schedule."
+}

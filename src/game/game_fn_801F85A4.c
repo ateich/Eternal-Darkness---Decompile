@@ -3,7 +3,7 @@ typedef struct SavedState {
     float second_value;
     unsigned int first_handle;
     unsigned int second_handle;
-    unsigned int token;
+    int token;
 } SavedState;
 
 typedef struct LiveState {
@@ -18,12 +18,14 @@ typedef struct Globals {
     unsigned char pad0[0xCC0];
     LiveState first;
     LiveState second;
-    SavedState saved[1];
+    /* lbl_8063D488 provides five 0x14-byte records. */
+    SavedState saved[5];
 } Globals;
 
+/* This aggregate view spans adjacent linker symbols beginning at lbl_8063C6B8. */
 extern Globals lbl_8063C6B8;
 extern int lbl_8064D7BC;
-extern void fn_801FA410(unsigned int);
+extern int fn_801FA410(int);
 
 int fn_801F85A4(void)
 {
@@ -39,8 +41,9 @@ int fn_801F85A4(void)
         float second_value;
         unsigned int first_handle;
         unsigned int second_handle;
-        unsigned int token;
+        int token;
 
+        /* Correct indexing requires the locally unproven invariant 0 <= count <= 5. */
         count--;
         saved = globals->saved;
         saved += count;
@@ -56,7 +59,7 @@ int fn_801F85A4(void)
         second->value = second_value;
         first->handle = first_handle;
         second->handle = second_handle;
-        fn_801FA410(token);
+        (void)fn_801FA410(token);
         result = 1;
     }
     return result;
