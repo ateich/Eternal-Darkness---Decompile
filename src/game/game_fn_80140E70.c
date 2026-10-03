@@ -4,6 +4,13 @@ typedef unsigned short u16;
 typedef signed short s16;
 typedef unsigned int u32;
 
+typedef struct Color {
+    u8 r;
+    u8 g;
+    u8 b;
+    u8 a;
+} Color;
+
 typedef struct DebugMeshPart {
     u16 count;
     u16 pad;
@@ -23,14 +30,20 @@ typedef struct DebugMesh {
 } DebugMesh;
 
 extern u32 lbl_802FC5BC[];
-extern void fn_801ECD74(const u32*);
+extern void fn_801ECD74(Color*);
 extern void fn_80226AB4(int, int, u16);
 extern void fn_801409AC(float, float, float);
 extern void fn_801409A8(void);
 
 static inline void set_color(u32 rgba)
 {
-    fn_801ECD74(&rgba);
+    union {
+        u32 word;
+        Color color;
+    } copy;
+
+    copy.word = rgba;
+    fn_801ECD74(&copy.color);
 }
 
 static inline void emit_point(const s16* points, u16 index, const DebugMesh* mesh)

@@ -3775,16 +3775,16 @@ config.custom_build_rules = [
         {
             "name": "externalize_game_80140E70_constants",
             "command": (
-                "python3 tools/externalize_elf_symbol.py $in @118 lbl_80650400 "
-                f"orig/{VERSION}/sys/main.dol --require-section-symbols=@118,@119,@121 "
+                "python3 tools/externalize_elf_symbol.py $in @122 lbl_80650400 "
+                f"orig/{VERSION}/sys/main.dol --require-section-symbols=@122,@123,@125 "
                 "--require-section=.sdata2 --reject-section-relocations && "
-                "python3 tools/externalize_elf_symbol.py $in @119 lbl_80650404 "
+                "python3 tools/externalize_elf_symbol.py $in @123 lbl_80650404 "
                 f"orig/{VERSION}/sys/main.dol && "
-                "python3 tools/externalize_elf_symbol.py $in @121 lbl_80650408 "
+                "python3 tools/externalize_elf_symbol.py $in @125 lbl_80650408 "
                 f"orig/{VERSION}/sys/main.dol && "
                 "build/binutils/powerpc-eabi-objcopy "
-                "--redefine-sym=@118=lbl_80650400 --redefine-sym=@119=lbl_80650404 "
-                "--redefine-sym=@121=lbl_80650408 --remove-section=.sdata2 "
+                "--redefine-sym=@122=lbl_80650400 --redefine-sym=@123=lbl_80650404 "
+                "--redefine-sym=@125=lbl_80650408 --remove-section=.sdata2 "
                 "--rename-section=.comment=.ignored $in && touch $out"
             ),
             "description": "EXTERNALIZE $in",

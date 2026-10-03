@@ -1,0 +1,83 @@
+{
+  "request": {
+    "number": 34,
+    "head": "9d7599b5f6355a7b4976a4997b770be6b44a0773",
+    "targets": [
+      "fn_80140E70"
+    ],
+    "required_deferred": [],
+    "compiler_policy": "preserve",
+    "allowed_shared_paths": []
+  },
+  "manifest": {
+    "included": [
+      "fn_80140E70"
+    ],
+    "deferred": [],
+    "authors": [
+      "ateich <4775201+ateich@users.noreply.github.com>"
+    ],
+    "purpose": "Repair accepted Color interface and preserve exact retail match; remaining PR34 deferred/source-repair work stays outside this candidate."
+  },
+  "acceptedBase": "839ab7ff5a2629a42b91afc649f3ffa7830d4801",
+  "review": {
+    "reviewerA": null,
+    "reviewerB": {
+      "reviewer": "gpt-6-astra:low",
+      "issues": [
+        "None. Full diff preserves scope and compiler policy. The Color interface matches the accepted callee with complete, aligned storage; section-removal guards remain intact. Fresh build and retail-match gates remain pending as specified."
+      ],
+      "rating": 9,
+      "verdict": "APPROVE",
+      "raw": "I’ll inspect the full checkout diff, the accepted interfaces, and the section-removal guards before giving a verdict.\n\nThe new `Color*` declaration matches the accepted callee, including its alpha-byte write. The union provides complete, aligned storage for that call. The diff also leaves compiler settings and shared helpers unchanged; I’m finishing the mapping and pool-safety checks.\n\nISSUES:\n- None. Full diff preserves scope and compiler policy. The Color interface matches the accepted callee with complete, aligned storage; section-removal guards remain intact. Fresh build and retail-match gates remain pending as specified.\n\nRATING: 9\n\nVERDICT: APPROVE"
+    },
+    "consensus": [
+      {
+        "issue": "None. Full diff preserves scope and compiler policy. The Color interface matches the accepted callee with complete, aligned storage; section-removal guards remain intact. Fresh build and retail-match gates remain pending as specified.",
+        "reviewerA": false,
+        "reviewerB": true,
+        "agreed": false
+      }
+    ],
+    "hasDisagreement": false,
+    "table": "| Issue | gpt-6-astra:low |\n|-------|--------|\n| None. Full diff preserves scope and compiler policy. The Color interface matches the accepted callee with complete, aligned storage; section-removal guards remain intact. Fresh build and retail-match gates remain pending as specified. | ✓ |\n\n**gpt-6-astra:low Rating:** 9/10 — APPROVE\n\n_Second reviewer disabled (modelRouting.enableSecondReviewer)._",
+    "verdict": "APPROVE"
+  },
+  "canonical": {
+    "fuzzy_match_percent": 61.77922,
+    "total_code": "2300692",
+    "matched_code": "1252552",
+    "matched_code_percent": 54.442398,
+    "total_data": "4305634",
+    "matched_data": "39994",
+    "matched_data_percent": 0.928876,
+    "total_functions": 8214,
+    "matched_functions": 6268,
+    "matched_functions_percent": 76.30874,
+    "complete_code": "1252552",
+    "complete_code_percent": 54.442398,
+    "complete_data": "40282",
+    "complete_data_percent": 0.93556494,
+    "total_units": 7117,
+    "complete_units": 6503
+  },
+  "strict": {
+    "fuzzy_match_percent": 61.77655,
+    "total_code": "2300692",
+    "matched_code": "1252260",
+    "matched_code_percent": 54.42971,
+    "total_data": "4305634",
+    "matched_data": "39994",
+    "matched_data_percent": 0.928876,
+    "total_functions": 8214,
+    "matched_functions": 6267,
+    "matched_functions_percent": 76.29657,
+    "complete_code": "1252552",
+    "complete_code_percent": 54.442398,
+    "complete_data": "40282",
+    "complete_data_percent": 0.93556494,
+    "total_units": 7117,
+    "complete_units": 6503
+  },
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}
