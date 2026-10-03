@@ -1,0 +1,93 @@
+--- accepted-base
++++ interleave
+@@ -113,10 +113,10 @@
+                 Vec3 point;
+                 fn_801F6B6C(state, &screen, 0, 5);
+                 point.x = (float)screen.x * lbl_8064E1F4;
++                screen.x >>= 5;
+                 point.y = (float)screen.y * lbl_8064E1F4;
++                screen.y >>= 5;
+                 point.z = (float)screen.z * lbl_8064E1F4;
+-                screen.x >>= 5;
+-                screen.y >>= 5;
+                 screen.z >>= 5;
+                 if (fn_80032924(state, &screen) != 0) {
+                     fn_80201D2C(object, 0xB);
+@@ -140,23 +140,21 @@
+                 fn_80201D14(object, 1);
+             } else {
+                 Vec3 point;
+-                s32 update = 1;
+                 fn_801F6B6C(state, &screen, 0, 5);
+                 point.x = (float)screen.x * lbl_8064E1F4;
++                screen.x >>= 5;
+                 point.y = (float)screen.y * lbl_8064E1F4;
++                screen.y >>= 5;
+                 point.z = (float)screen.z * lbl_8064E1F4;
+-                screen.x >>= 5;
+-                screen.y >>= 5;
+                 screen.z >>= 5;
+                 if (fn_80032924(state, &screen) != 0) {
+                     fn_80201D2C(object, 0xB);
+                     fn_80201D14(object, 1);
+-                    update = 0;
+-                } else if (fn_80032A5C(state) != 0) {
+-                    fn_80201D2C(object, 0xC);
+-                    fn_80201D14(object, 1);
+-                }
+-                if (update != 0) {
++                } else {
++                    if (fn_80032A5C(state) != 0) {
++                        fn_80201D2C(object, 0xC);
++                        fn_80201D14(object, 1);
++                    }
+                     fn_80032E90(state, &point);
+                 }
+             }
+@@ -175,29 +173,30 @@
+                 fn_80201D14(object, 1);
+             } else {
+                 Vec3 point;
+-                s32 update = 1;
+                 fn_801F6B6C(state, &screen, 0, 5);
+                 point.x = (float)screen.x * lbl_8064E1F4;
++                screen.x >>= 5;
+                 point.y = (float)screen.y * lbl_8064E1F4;
++                screen.y >>= 5;
+                 point.z = (float)screen.z * lbl_8064E1F4;
+-                screen.x >>= 5;
+-                screen.y >>= 5;
+                 screen.z >>= 5;
+-                if (fn_80032924(state, &screen) == 0 && !(state->flags & 1)) {
++                if (fn_80032924(state, &screen) != 0 || (state->flags & 1)) {
++                    s32 update = 1;
++                    if (fn_80032A5C(state) != 0) {
++                        if (state->flags & 1) {
++                            fn_8020123C(0x39, object_id, object_id, 0);
++                            update = 0;
++                        } else {
++                            fn_80201D2C(object, 1);
++                            fn_80201D14(object, 1);
++                        }
++                    }
++                    if (update != 0) {
++                        fn_80032E90(state, &point);
++                    }
++                } else {
+                     fn_80201D2C(object, 0x26);
+                     fn_80201D14(object, 1);
+-                    update = 0;
+-                } else if (fn_80032A5C(state) != 0) {
+-                    if (state->flags & 1) {
+-                        fn_8020123C(0x39, object_id, object_id, 0);
+-                        update = 0;
+-                    } else {
+-                        fn_80201D2C(object, 1);
+-                        fn_80201D14(object, 1);
+-                    }
+-                }
+-                if (update != 0) {
+-                    fn_80032E90(state, &point);
+                 }
+             }
+             return 1;

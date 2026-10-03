@@ -1,0 +1,125 @@
+Assignment e854772e-a3d3-451b-8803-f5f148fdb58a, attempt 4, fn_80033180.
+Accepted base: 464855c439a834d8e9552132fbff3f81cdc3541a.
+
+Preserved attempts were studied first. The accepted source is identical to
+48c1ea8e0fa0261d5bd8ffc62892f0c5db316e5b (see preserved-history report).
+Earlier declaration ordering, object aliasing, and register-storage-class
+experiments were not repeated as the initial hypothesis.
+
+New successful hypothesis: update-flag lifetime and control-flow nesting affect
+MWCC allocation. Action A now directly nests the position update in the failed
+hit-test branch; action B scopes its update flag inside the successful hit-test
+or forced-flag branch. This preserves both previously reviewed skip paths,
+corrects object/info allocation to r29/r28, and improves 81.82089 to 88.935326.
+Interleaving coordinate conversion with its corresponding right shift improves
+to 91.402985. Reusing the consumed event parameter for the initial state pointer
+reproduces retail's volatile r5 load/copy into persistent r31 (91.97513).
+An explicit final else-return reproduces retail's separate unhandled-action
+return block and exact 1608-byte size (92.36318).
+
+A second successful hypothesis: division by 32.0f is the original arithmetic
+expression. Under unchanged canonical GC/1.3 flags the compiler replaces it
+with multiplication by 0.03125f, and reproduces retail's f4 bias / f3 scalar
+allocation. The measured best canonical AND relocation-strict score is
+92.624374. A literal multiplication did not reproduce that allocation.
+The unused external scale declaration was removed after the literal division
+was retained; final fresh measurement is unchanged.
+
+Rejected variants include: initial local state alias, scalar-first multiplication,
+local scalar, staged stores through point, coordinate pointer alias, float and
+integer temporaries, explicit versus compound shift assignment, unprototyped
+hit-test declaration, mutable scalar declaration, array-based coordinates,
+implicit versus explicit integer-to-float cast, and shifts inside the call
+argument. Source patches preserve every standalone variant against the accepted
+base. The literal-multiply raw experiment was not externalized; its raw local
+relocation names remain in that report. The double-divisor experiment compiled,
+but its two double constants do not fit the supported experiment mapping, so it
+was rejected without changing the mapping; its raw build/symbol dump and objdiff
+are preserved. The first nested runner invocation stopped because nm labels
+.sdata2 constants 'd', not 'r'; the runner was corrected and the log retained.
+
+Two bounded permutation searches enumerated only statement orders where each
+coordinate is converted before it is shifted. Multiplication tested 88 new
+orders, excluding the two already measured. Division tested 89 new orders,
+excluding its measured interleaved order. Neither beat its seed. Each JSONL line
+is a complete, unmodified raw objdiff result, with its order and score in the
+corresponding index; raw compiler/objdiff command output is in the build log.
+The search scripts define the precise substitution, and before-order-search /
+divide-implicit source patches identify the respective starting source.
+
+Final mapping and verification:
+- Independent TU remains registered NonMatching, canonical flags unchanged.
+- @92 maps to retail lbl_8064E1F4 (3d000000, 0.03125f); @94 maps to
+  lbl_8064E038 (4330000080000000, signed conversion bias).
+- Existing externalization mechanism checks the scalar's entire .sdata2 pool
+  ownership (@92,@94), zero padding, exact section, and absence of outgoing
+  relocations. It checks each constant against retail DOL bytes before removing
+  the section. The bias step also requires the exact .sdata2 section. No compiler
+  policy or verification gate changed.
+- Fresh configure, assigned object compile, mandatory externalization, and
+  externalization-stamp retry all passed. Raw commands and output are committed.
+- Final canonical and name_address relocation-strict objdiff: 92.624374.
+- Both .text sections are 0x648 bytes; 363 of 402 instruction words are identical.
+  Exactly 39 words differ, all in the three coordinate conversion sequences:
+  0x24c..0x298, 0x394..0x3e0, and 0x500..0x54c. First difference is retail
+  lwz r3,48(r1) versus generated lwz r4,48(r1) at 0x24c. The argument moves,
+  z-load, xoris/srawi scheduling, and lfd/fmuls ordering then differ.
+- All 65 relocations agree in offset, type, target name and addend. Raw per-side
+  readelf tables explicitly show addends; objdump tables and actual hexadecimal
+  per-side instruction addresses are also committed.
+- Retail and generated control-flow words outside those conversion ranges are
+  identical, including action A's 0x43c -> 0x474 bypass and action B's
+  0x598 -> 0x608 -> 0x620 bypass of fn_80032E90.
+
+This is an attempted result, not a match. Full deterministic build, independent
+review, fresh legal audit, full canonical/strict no-regression reports, and the
+measured retail DOL SHA-1 ea24b6af954876ce072562ff39cdb4c81d32be1f remain mandatory
+for the integrator after review. They were deliberately not run or claimed here.
+The pre-existing unrelated CLAUDE.md modification was left untouched and unstaged.
+
+Standalone raw report scores (raw unmapped reports are explicitly named raw):
+objdiff-baseline-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 81.82089
+objdiff-before-order-search-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.36318
+objdiff-before-order-search-strict-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.36318
+objdiff-coordinate-pointer-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.36318
+objdiff-coordinate-pointer-strict-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.36318
+objdiff-default-else-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.36318
+objdiff-default-else-strict-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.36318
+objdiff-divide-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.624374
+objdiff-divide-implicit-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.624374
+objdiff-divide-implicit-strict-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.624374
+objdiff-divide-raw-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.56219
+objdiff-divide-strict-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.624374
+objdiff-double-divisor-raw-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 85.18408
+objdiff-event-reuse-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 91.97513
+objdiff-event-reuse-strict-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 91.97513
+objdiff-explicit-shift-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.31343
+objdiff-explicit-shift-strict-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.31343
+objdiff-final-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.624374
+objdiff-final-strict-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.624374
+objdiff-float-temporaries-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.36318
+objdiff-float-temporaries-strict-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.36318
+objdiff-int-temporaries-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.31343
+objdiff-int-temporaries-strict-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.31343
+objdiff-interleave-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 91.402985
+objdiff-interleave-strict-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 91.402985
+objdiff-literal-raw-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.21393
+objdiff-mutable-scale-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.36318
+objdiff-mutable-scale-strict-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.36318
+objdiff-nested-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 88.935326
+objdiff-nested-strict-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 88.935326
+objdiff-reloc-strict-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.624374
+objdiff-scale-first-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 91.15423
+objdiff-scale-first-strict-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 91.15423
+objdiff-scale-local-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.36318
+objdiff-scale-local-strict-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.36318
+objdiff-screen-array-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.624374
+objdiff-screen-array-strict-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.624374
+objdiff-shift-call-argument-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 89.935326
+objdiff-shift-call-argument-strict-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 89.935326
+objdiff-staged-float-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 87.93781
+objdiff-staged-float-strict-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 87.93781
+objdiff-state-alias-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 91.22886
+objdiff-state-alias-strict-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 91.22886
+objdiff-unprototyped-check-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.36318
+objdiff-unprototyped-check-strict-e854772e-a3d3-451b-8803-f5f148fdb58a.json: 92.36318
