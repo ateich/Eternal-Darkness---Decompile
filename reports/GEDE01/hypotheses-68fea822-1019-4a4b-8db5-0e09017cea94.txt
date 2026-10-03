@@ -1,0 +1,21 @@
+fn_80026DC8 attempt 3 codegen hypotheses
+
+Baseline preserved reconstruction:
+- Canonical and relocation-strict score: 80.28571%
+- Retail/candidate text sizes: 616/616 bytes.
+
+Distinct hypothesis 1 (rejected): make the x and color array cursors explicit C locals
+to shape live ranges and reproduce retail's r31=x / r30=color allocation and delayed
+palette loads. Canonical measurement: 77.68831%, retail/candidate sizes 616/620 bytes.
+The explicit cursor lifetime added one instruction and retained the early palette schedule.
+
+Distinct hypothesis 2 (rejected): fuse palette copy and alpha OR into one loop so the
+optimizer sees a single array definition rather than two source loops. Canonical
+measurement: 71.792206%, retail/candidate sizes 616/604 bytes. It changed the frame
+from 0xa0 to 0x90 and substantially reordered the setup.
+
+The stronger baseline was restored unchanged. Its remaining divergence is evidenced by
+the raw instruction and relocation reports: the compiler-owned signed-int conversion
+constant is TU-local @51 rather than retail lbl_8064DF80, the early setup scheduling and
+callee-saved allocation differ, and the draw body aligns structurally from 0x164 onward
+apart from r31/r30 cursor allocation.
