@@ -1,0 +1,6 @@
+[1/2] MWCC build/GEDE01/src/game/game_fn_8002F428.o
+[2/2] EXTERNALIZE build/GEDE01/src/game/game_fn_8002F428.o
+FAILED: [code=1] build/GEDE01/src/game/game_fn_8002F428.externalized 
+python3 tools/externalize_elf_symbol.py build/GEDE01/src/game/game_fn_8002F428.o @127 lbl_8064E038 orig/GEDE01/sys/main.dol --require-whole-section --require-section=.sdata2 --reject-section-relocations && build/binutils/powerpc-eabi-objcopy --redefine-sym=@127=lbl_8064E038 --remove-section=.sdata2 build/GEDE01/src/game/game_fn_8002F428.o && touch build/GEDE01/src/game/game_fn_8002F428.externalized
+build/GEDE01/src/game/game_fn_8002F428.o: symbol '@127' not found
+ninja: build stopped: subcommand failed.
