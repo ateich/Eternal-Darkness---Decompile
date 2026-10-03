@@ -1,0 +1,74 @@
+{
+  "accepted_commit": "af716e8015bf1671b6ccedee351d54d31f99e076",
+  "callees": [
+    {
+      "accepted_definition": "int(u16,u8,u8,float,Vec3*,s8,u8,u8,u16,u32)",
+      "assessment": "declaration is semantically inconsistent, but accepted target call instructions are already byte-exact; mapping does not alter call ABI or source",
+      "name": "fn_801AAE68",
+      "target_declaration": "void(float,s32,s32,s32,Vec3*,s32,s32,s32,u16,s32)"
+    },
+    {
+      "accepted_definition": "void(u8*)",
+      "assessment": "pointer ABI compatible; definition writes descriptor through offset 0x1C",
+      "name": "fn_8018358C",
+      "target_declaration": "void(EffectParams*)"
+    },
+    {
+      "accepted_definition": "u32(void)",
+      "assessment": "ABI compatible",
+      "name": "fn_800FBFB0",
+      "target_declaration": "u32(void), locally macro-cast to int"
+    },
+    {
+      "accepted_definition": "void(EffectParams*) with 0x90-byte layout",
+      "assessment": "storage extent and written offsets fit target local",
+      "name": "fn_8019FF5C",
+      "target_declaration": "void(EffectParams*)"
+    },
+    {
+      "accepted_definition": "s32(Vec3*)",
+      "assessment": "compatible",
+      "name": "fn_8007BC44",
+      "target_declaration": "s32(Vec3*)"
+    },
+    {
+      "accepted_definition": "no completed C definition at accepted commit",
+      "assessment": "four pointer-class arguments; retained retail call relocations exact",
+      "name": "fn_80148008",
+      "target_declaration": "void*(Vec3*,void*,EffectParams*,void(*)(void))"
+    },
+    {
+      "accepted_definition": "u8*(void*,void*,void*)",
+      "assessment": "callback declaration is incomplete/incompatible C typing, but only its address is materialized and retail HA/LO relocations are exact; no source change proposed",
+      "name": "fn_801834F0",
+      "target_usage": "callback address declared void(void)"
+    },
+    {
+      "accepted_definition": "no completed C definitions at accepted commit",
+      "assessment": "target pointer/float argument shapes agree with nearby accepted callers; calls and relocations already exact",
+      "name": "fn_80211A6C/fn_80211AAC/fn_80211C78/fn_80211A90"
+    },
+    {
+      "accepted_definition": "void(Coord3*,ShortCoord3*)",
+      "assessment": "second output is exactly 6 bytes and target passes follow_descriptor[6]; pointer ABI compatible",
+      "name": "fn_80179B64",
+      "target_declaration": "void(Vec3*,void*)"
+    },
+    {
+      "accepted_definition": "void*(void*,void*,void*)",
+      "assessment": "callback declaration is incomplete/incompatible C typing, but only address relocation is emitted and exact; no source change proposed",
+      "name": "fn_801A0008",
+      "target_usage": "callback address declared void(void)"
+    }
+  ],
+  "decision": "Do not attempt interface cleanup in this strict-relocation task. Existing text is byte-identical and registered Matching; full legal/build review remains mandatory.",
+  "measurement_assignment_id": "024d1058-cc75-434e-9a16-bd4c3cf30aeb",
+  "scope_effect": "No source or declaration change was made; existing defects remain unresolved and no C compatibility claim is made.",
+  "target": "fn_8007BA3C",
+  "target_layouts": {
+    "EffectParams": "0x90-byte local storage; fields written at offsets 0,2,3,6,0x14..0x19",
+    "Object": "position at 0x0C, link at 0x28, active at 0x2C; loop stride inferred 0x30 from accepted exact code",
+    "descriptor_arrays": "two independent 6-byte arrays {00 00 00 00 00 01}"
+  },
+  "target_registration": "Object(Matching, game/game_fn_8007BA3C.c, extra_cflags=[-use_lmw_stmw on]); flags remain unchanged"
+}

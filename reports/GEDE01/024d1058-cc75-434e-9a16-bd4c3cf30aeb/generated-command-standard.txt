@@ -1,0 +1,17 @@
+rule externalize_game_8007BA3C_constants
+  command = build/binutils/powerpc-eabi-objcopy $
+      --add-symbol=lbl_8064E9C4=.sdata2:4,global,object $
+      --add-symbol=lbl_8064E9CC=.sdata2:12,global,object $in && python3 $
+      tools/retarget_elf_relocation.py $in @4 4 lbl_8064E9C0 lbl_8064E9C4 2 $
+      R_PPC_EMB_SDA21 orig/GEDE01/sys/main.dol && python3 $
+      tools/retarget_elf_relocation.py $in @5 4 lbl_8064E9C8 lbl_8064E9CC 2 $
+      R_PPC_EMB_SDA21 orig/GEDE01/sys/main.dol && python3 $
+      tools/externalize_elf_symbol.py $in @4 lbl_8064E9C0 $
+      orig/GEDE01/sys/main.dol --require-section-symbols=@4,@5 $
+      --require-section=.sdata2 --reject-section-relocations && python3 $
+      tools/externalize_elf_symbol.py $in @5 lbl_8064E9C8 $
+      orig/GEDE01/sys/main.dol --require-section=.sdata2 && $
+      build/binutils/powerpc-eabi-objcopy --redefine-sym=@4=lbl_8064E9C0 $
+      --redefine-sym=@5=lbl_8064E9C8 --remove-section=.sdata2 $in && touch $
+      $out
+  description = EXTERNALIZE $in
