@@ -67,8 +67,8 @@ extern void* fn_801966E0(void*, int, int);
 extern void fn_8014BA14(void);
 
 /* NonMatching: behavior-complete marker descriptor reconstruction. The
- * canonical candidate is 96.994446%; the frame now matches at 0x210, while
- * eight bytes, register allocation, and conversion scheduling still differ. */
+ * canonical candidate is 97.96389%; the frame and conversion lifetime now
+ * match, while four bytes and register allocation still differ. */
 s32 fn_80017FF8(void* script)
 {
     SpawnHeader header;
@@ -83,6 +83,7 @@ s32 fn_80017FF8(void* script)
     s32 user_value;
     s32 flags;
     s32 handle;
+    s32 width;
     s32 i;
     f32 min_z;
     f32 max_z;
@@ -191,7 +192,6 @@ s32 fn_80017FF8(void* script)
     info.bytes[170] = 0x84;
     if (fn_80147EC4(&info) != 0) {
         void* object = *(void**)&info.bytes[148];
-        s16 width;
 
         fn_801964E8(object, 1, 0);
         fn_801978F8(object, 0);
