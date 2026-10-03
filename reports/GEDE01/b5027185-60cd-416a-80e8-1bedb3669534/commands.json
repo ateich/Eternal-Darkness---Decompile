@@ -1,0 +1,73 @@
+{
+  "schema": "pr34-three-target-commands-v1",
+  "uuid": "b5027185-60cd-416a-80e8-1bedb3669534",
+  "cwd": "/home/rabbit/backups/decomp-backlog-parser-20261002/pr34-intake-20261003/followup-b5027185-v2/eternal-darkness-decomp",
+  "commands": [
+    {
+      "purpose": "resource gate",
+      "argv": [
+        "df -BG /home/rabbit",
+        "awk /MemAvailable/ /proc/meminfo",
+        "cat /proc/pressure/memory",
+        "pgrep ninja|mwcc"
+      ]
+    },
+    {
+      "purpose": "fresh raw compile",
+      "argv": [
+        ".tools/bin/ninja",
+        "-j1",
+        "build/GEDE01/src/game/game_fn_<TARGET>.o"
+      ]
+    },
+    {
+      "purpose": "guarded target mapping",
+      "argv": [
+        ".tools/bin/ninja",
+        "-j1",
+        "build/GEDE01/src/game/game_fn_<TARGET>.externalized"
+      ]
+    },
+    {
+      "purpose": "canonical",
+      "argv": [
+        "build/tools/objdiff-cli",
+        "report",
+        "generate",
+        "-p",
+        "reports/GEDE01/b5027185-60cd-416a-80e8-1bedb3669534/objdiff",
+        "-o",
+        "reports/GEDE01/b5027185-60cd-416a-80e8-1bedb3669534/canonical.json",
+        "--format",
+        "json"
+      ]
+    },
+    {
+      "purpose": "strict",
+      "argv": [
+        "build/tools/objdiff-cli",
+        "report",
+        "generate",
+        "-c",
+        "function_reloc_diffs=name_address",
+        "-p",
+        "reports/GEDE01/b5027185-60cd-416a-80e8-1bedb3669534/objdiff",
+        "-o",
+        "reports/GEDE01/b5027185-60cd-416a-80e8-1bedb3669534/strict.json",
+        "--format",
+        "json"
+      ]
+    },
+    {
+      "purpose": "text extraction (separate output)",
+      "argv": [
+        "build/binutils/powerpc-eabi-objcopy",
+        "-O",
+        "binary",
+        "--only-section=.text",
+        "INPUT_OBJECT",
+        "OUTPUT_TEXT_BIN"
+      ]
+    }
+  ]
+}

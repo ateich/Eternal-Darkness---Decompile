@@ -1,0 +1,156 @@
+{
+  "request": {
+    "number": 34,
+    "head": "9d7599b5f6355a7b4976a4997b770be6b44a0773",
+    "targets": [
+      "fn_8006D548",
+      "fn_801BACE8",
+      "fn_801F1A38",
+      "fn_8001DE84",
+      "fn_8005B528",
+      "fn_800C030C",
+      "fn_80124DBC",
+      "fn_801415B4",
+      "fn_80154F74",
+      "fn_801A1E14",
+      "fn_801B7A7C",
+      "fn_801D8E40"
+    ],
+    "required_deferred": [
+      "fn_8001DE84",
+      "fn_8005B528",
+      "fn_800C030C",
+      "fn_80124DBC",
+      "fn_801415B4",
+      "fn_80154F74",
+      "fn_801A1E14",
+      "fn_801B7A7C",
+      "fn_801D8E40"
+    ],
+    "compiler_policy": "preserve",
+    "allowed_shared_paths": []
+  },
+  "manifest": {
+    "schema": "decomp-pr-followup-v1",
+    "uuid": "b5027185-60cd-416a-80e8-1bedb3669534",
+    "pr": 34,
+    "head": "9d7599b5f6355a7b4976a4997b770be6b44a0773",
+    "accepted_base": "0c5a3a98613feccba40531dbc5fd5de8a960a1de",
+    "purpose": "Isolated follow-up for three previously reviewed exact targets omitted from the accepted 11-target PR34 integration.",
+    "included": [
+      "fn_8006D548",
+      "fn_801BACE8",
+      "fn_801F1A38"
+    ],
+    "accepted_preserved": [
+      "fn_8000F1DC",
+      "fn_80026320",
+      "fn_800746CC",
+      "fn_80089A34",
+      "fn_800D9428",
+      "fn_80140E70",
+      "fn_8019C7A8",
+      "fn_801BAF90",
+      "fn_801BB3A0",
+      "fn_801C3278",
+      "fn_801E915C"
+    ],
+    "deferred": [
+      {
+        "target": "fn_8001DE84",
+        "reason": "Required deferral: submitted compiler-version change remains outside this follow-up."
+      },
+      {
+        "target": "fn_8005B528",
+        "reason": "Required deferral: submitted compiler-version change and inline assembly remain outside this follow-up."
+      },
+      {
+        "target": "fn_800C030C",
+        "reason": "Required deferral: submitted compiler-flag change remains outside this follow-up."
+      },
+      {
+        "target": "fn_80124DBC",
+        "reason": "Required deferral: submitted compiler-flag change remains outside this follow-up."
+      },
+      {
+        "target": "fn_801415B4",
+        "reason": "Required deferral: submitted compiler-version change remains outside this follow-up."
+      },
+      {
+        "target": "fn_80154F74",
+        "reason": "Deferred pending a separate safe object-layout and exact-interface repair; accepted footprint is preserved."
+      },
+      {
+        "target": "fn_801A1E14",
+        "reason": "Required deferral: submitted optimization-policy change remains outside this follow-up."
+      },
+      {
+        "target": "fn_801B7A7C",
+        "reason": "Required deferral: submitted compiler-flag change remains outside this follow-up."
+      },
+      {
+        "target": "fn_801D8E40",
+        "reason": "Required deferral: the reviewed allocation/domain bounds issue remains outside this follow-up."
+      }
+    ],
+    "compiler_policy": "preserve",
+    "helper_policy": "accepted helpers unchanged",
+    "source_provenance": "Three sources and mappings from reviewed3e7; fresh source/config parent3e6387b8 measured on accepted0c5 with unchanged accepted helper; final candidate pin is hydrated in the external intake envelope.",
+    "authors": [
+      "ateich <4775201+ateich@users.noreply.github.com>"
+    ],
+    "status": "fresh_measurement_complete_pending_full_integration"
+  },
+  "acceptedBase": "03e41997ca55d1a32d61fdf11129395c13f96058",
+  "review": {
+    "reviewerA": null,
+    "reviewerB": {
+      "reviewer": "gpt-6-astra:low",
+      "issues": [],
+      "rating": 9,
+      "verdict": "APPROVE",
+      "raw": "I’ll inspect the complete checkout diff and verify the changed interfaces and mapping guards against the accepted base.\n\nThe changed camera calls match the accepted callee signatures. I’m checking the union-backed interfaces and section-removal guards next, including whether their storage claims hold beyond matching object bytes.\n\nThe diff is limited to the three included sources, their build mappings, and reports. Compiler settings and shared helpers are unchanged. Independent static-pool tests accepted valid zero storage and rejected relocated, truncated, nonzero, executable, undersized, and incorrectly mapped storage.\n\nISSUES:\n- None\n\nRATING: 9\n\nVERDICT: APPROVE"
+    },
+    "consensus": [],
+    "hasDisagreement": false,
+    "table": "| Issue | gpt-6-astra:low |\n|-------|--------|\n\n**gpt-6-astra:low Rating:** 9/10 — APPROVE\n\n_Second reviewer disabled (modelRouting.enableSecondReviewer)._",
+    "verdict": "APPROVE"
+  },
+  "canonical": {
+    "fuzzy_match_percent": 61.77922,
+    "total_code": "2300692",
+    "matched_code": "1252552",
+    "matched_code_percent": 54.442398,
+    "total_data": "4305634",
+    "matched_data": "39994",
+    "matched_data_percent": 0.928876,
+    "total_functions": 8214,
+    "matched_functions": 6268,
+    "matched_functions_percent": 76.30874,
+    "complete_code": "1252552",
+    "complete_code_percent": 54.442398,
+    "complete_data": "40282",
+    "complete_data_percent": 0.93556494,
+    "total_units": 7117,
+    "complete_units": 6503
+  },
+  "strict": {
+    "fuzzy_match_percent": 61.77655,
+    "total_code": "2300692",
+    "matched_code": "1252260",
+    "matched_code_percent": 54.42971,
+    "total_data": "4305634",
+    "matched_data": "39994",
+    "matched_data_percent": 0.928876,
+    "total_functions": 8214,
+    "matched_functions": 6267,
+    "matched_functions_percent": 76.29657,
+    "complete_code": "1252552",
+    "complete_code_percent": 54.442398,
+    "complete_data": "40282",
+    "complete_data_percent": 0.93556494,
+    "total_units": 7117,
+    "complete_units": 6503
+  },
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}
