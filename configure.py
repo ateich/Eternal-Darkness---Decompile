@@ -3028,6 +3028,20 @@ config.custom_build_rules = [
         "description": "EXTERNALIZE $in",
     },
     {
+        "name": "externalize_game_80068870_constant_alias",
+        "command": (
+            "python3 tools/retarget_elf_symbol.py $in @17 lbl_8064E710 "
+            "--allow-equal-value-different-offset --require-section=.sdata2 "
+            "--require-source=local:object:4:4 --require-target=global:object:0:4 "
+            "--require-relocation=.text:0x40:R_PPC_EMB_SDA21:0 "
+            "--require-retail-dol=orig/GEDE01/sys/main.dol "
+            "--require-sda-base=0x80655C80 "
+            "--require-retail-instruction=0x800688B0 "
+            "--require-value=43160000 && touch $out"
+        ),
+        "description": "RETARGET CONSTANT $in",
+    },
+    {
         "name": "externalize_game_8007BA3C_constants",
         "command": (
             "build/binutils/powerpc-eabi-objcopy "
@@ -4286,6 +4300,7 @@ guarded_externalize_rules.add("externalize_game_80026320_constants")
 guarded_externalize_rules.add("externalize_game_80089A34_constants")
 guarded_externalize_rules.add("externalize_game_80140E70_constants")
 guarded_externalize_rules.add("externalize_game_8019C7A8_constants")
+guarded_externalize_rules.add("externalize_game_80068870_constant_alias")
 config.custom_build_steps = {
     "post-compile": [
         {
@@ -5703,6 +5718,11 @@ config.custom_build_steps = {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8007B640.externalized"],
             "rule": "externalize_game_8007B640_constants",
             "inputs": [f"build/{VERSION}/src/game/game_fn_8007B640.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80068870.externalized"],
+            "rule": "externalize_game_80068870_constant_alias",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80068870.o"],
         },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8007BA3C.externalized"],

@@ -1,0 +1,35 @@
+{
+  "schema_version": 2,
+  "status": "v2_staged_only_not_installed_not_authorized_for_candidate_mapping",
+  "accepted_commit": "839ab7ff5a2629a42b91afc649f3ffa7830d4801",
+  "target": "fn_80068870",
+  "installed_baseline": {
+    "path": "eternal-darkness-decomp/tools/retarget_elf_symbol.py",
+    "sha256": "04e62ac44f593be88fe2015ae94f148a87706f798efeadc4406e88f949d533aa"
+  },
+  "proposed_helper_sha256": "18a24a4691ae762e3a7b05b548958186bd59bdb34626bd5bcd1f6235acf9b4fe",
+  "test_sha256": "3376ba6c53efba6802be25ce1b12bb23309f00535ee9756631bb596232a63735",
+  "patch_sha256": "ce352272df5696e294b88acc0a4d42b553de26d51340fae80d0502b97cf1cb58",
+  "test_results_sha256": "abca0e9ce24649521f7f3944cceb317a31481138086c4ba979c9d87a0c61bfae",
+  "test_command": "python3 tests/test_retarget_equal_value.py",
+  "test_count": 20,
+  "exact_future_invocation": "python3 tools/retarget_elf_symbol.py $in @17 lbl_8064E710 --allow-equal-value-different-offset --require-section=.sdata2 --require-source=local:object:4:4 --require-target=global:object:0:4 --require-relocation=.text:0x40:R_PPC_EMB_SDA21:0 --require-retail-dol=orig/GEDE01/sys/main.dol --require-sda-base=0x80655C80 --require-retail-instruction=0x800688B0 --require-value=43160000",
+  "scope": [
+    "staged helper",
+    "focused staged tests",
+    "patch and manifests"
+  ],
+  "excluded": [
+    "installed helper",
+    "configure.py",
+    "scope checker",
+    "database",
+    "candidate objects",
+    "full build",
+    "intake"
+  ],
+  "output_invariant": "Successful opt-in output is byte-identical except the selected relocation r_info symbol-index bytes; symbols, section bytes, addends, metadata, and other relocations remain invariant.",
+  "review_fix": "Different-offset mode unconditionally requires both guarded and actual relocation addend zero; agreeing nonzero guards are rejected.",
+  "v1_helper_sha256": "35b52bf21d06465e83a4fe594595e82b2fa9c2f87f9e75950fe41439fbede613",
+  "v1_test_sha256": "6d987e9f449a5975d19d83973336bec446e323b141b3a8a979a0fb84ccbb3b95"
+}

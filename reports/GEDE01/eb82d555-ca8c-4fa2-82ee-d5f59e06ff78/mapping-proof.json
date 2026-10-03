@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "assignment_id": "eb82d555-ca8c-4fa2-82ee-d5f59e06ff78",
+  "target": "fn_80068870",
+  "base_commit": "839ab7ff5a2629a42b91afc649f3ffa7830d4801",
+  "status": "matched_isolated_object_measurement_pending_full_integration",
+  "source": {
+    "changed": false,
+    "sha256": "55a60a2c781c048f1709f0a8a4e2d2ced6e4e4d57acddc4a01ab1a361998b9e9"
+  },
+  "helper": {
+    "path": "eternal-darkness-decomp/tools/retarget_elf_symbol.py",
+    "before_sha256": "04e62ac44f593be88fe2015ae94f148a87706f798efeadc4406e88f949d533aa",
+    "after_sha256": "18a24a4691ae762e3a7b05b548958186bd59bdb34626bd5bcd1f6235acf9b4fe",
+    "review": "Astra approved V2 for isolated preparation; candidate/helper intake requires final exact-candidate review and payload binding."
+  },
+  "mapping": {
+    "rule": "externalize_game_80068870_constant_alias",
+    "raw_sha256": "4342bf6caffac7784b066a37c21b6832d5bfe6591587a2a46456968dfeefcb85",
+    "post_sha256": "da758024792fbfc4fbfe662dc8a2c7c7f2057a2769978c5cf478ebb061b103ba",
+    "retail_sha256": "6c7b7c720aca0a1547192776fa6e71781938eeef42a2e70c2af2a216cd9d500f",
+    "changed_zero_based_offsets": [
+      382
+    ],
+    "selected_r_info_field_offset": 380,
+    "text_bytes": 292,
+    "normalized_relocations": 12,
+    "canonical_percent": 100.0,
+    "strict_name_address_percent": 100.0
+  },
+  "invariants": [
+    "only selected relocation symbol-index bits changed",
+    "source and compiler settings unchanged",
+    "all .text and .sdata2 bytes unchanged",
+    "symbol table and relocation addends unchanged",
+    "all other relocations and ELF metadata unchanged",
+    "zero addend mandatory",
+    "read-only lfs/SDA-base/address and retail DOL instruction checked"
+  ],
+  "credit": {
+    "baseline_helper_origin_commit": "d72f8b1d05a336fd63ba121e1fbfd2b1503d247a",
+    "baseline_author": "psdwizzard <k.loebenberg@gmail.com>",
+    "external_patch_imported": false
+  },
+  "pending": [
+    "final Astra review of exact candidate",
+    "finite candidate-pinned helper and mapping approvals",
+    "exact checker/runtime permission",
+    "fresh full build",
+    "legal audit",
+    "retail DOL checksum",
+    "strict no-loss verification"
+  ],
+  "binary_policy": "Raw, post, and retail objects remain private in the external proof directory and are not committed."
+}

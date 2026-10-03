@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "mapping_command": [
+    "python3",
+    "tools/retarget_elf_symbol.py",
+    "$in",
+    "@17",
+    "lbl_8064E710",
+    "--allow-equal-value-different-offset",
+    "--require-section=.sdata2",
+    "--require-source=local:object:4:4",
+    "--require-target=global:object:0:4",
+    "--require-relocation=.text:0x40:R_PPC_EMB_SDA21:0",
+    "--require-retail-dol=orig/GEDE01/sys/main.dol",
+    "--require-sda-base=0x80655C80",
+    "--require-retail-instruction=0x800688B0",
+    "--require-value=43160000"
+  ],
+  "post_command": [
+    "touch",
+    "$out"
+  ],
+  "measurement_commands": [
+    "objdiff-cli diff canonical fn_80068870",
+    "objdiff-cli diff -c function_reloc_diffs=name_address fn_80068870"
+  ],
+  "note": "The isolated command ran on a preserved object copy. Candidate build execution and full-build verification remain pending normal serialized gates."
+}
