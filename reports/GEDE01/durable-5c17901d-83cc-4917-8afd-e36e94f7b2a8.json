@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "assignment_id": "5c17901d-83cc-4917-8afd-e36e94f7b2a8",
+  "attempt": 5,
+  "base_commit": "fa0ce74323df88854efcdb53efb674e794b18685",
+  "target": "fn_8012F474",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/build-5c17901d-83cc-4917-8afd-e36e94f7b2a8.txt",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-5c17901d-83cc-4917-8afd-e36e94f7b2a8.json",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-5c17901d-83cc-4917-8afd-e36e94f7b2a8-aggregate.txt",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-5c17901d-83cc-4917-8afd-e36e94f7b2a8-register.txt",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-5c17901d-83cc-4917-8afd-e36e94f7b2a8.txt",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-5c17901d-83cc-4917-8afd-e36e94f7b2a8-aggregate.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-5c17901d-83cc-4917-8afd-e36e94f7b2a8-register.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-5c17901d-83cc-4917-8afd-e36e94f7b2a8.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-reloc-strict-5c17901d-83cc-4917-8afd-e36e94f7b2a8-aggregate.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-reloc-strict-5c17901d-83cc-4917-8afd-e36e94f7b2a8-register.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-reloc-strict-5c17901d-83cc-4917-8afd-e36e94f7b2a8.json",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-5c17901d-83cc-4917-8afd-e36e94f7b2a8-aggregate.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-5c17901d-83cc-4917-8afd-e36e94f7b2a8-register.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-5c17901d-83cc-4917-8afd-e36e94f7b2a8.txt",
+    "eternal-darkness-decomp/reports/GEDE01/verification-5c17901d-83cc-4917-8afd-e36e94f7b2a8.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 95.42857% (280 retail bytes versus 288 generated). The body and 0xD0 stack layout match retail, but unchanged GC/1.3 settings emit _savegpr_26/_restgpr_26 helper calls instead of inline stmw/lmw. These add 8 bytes and two R_PPC_REL24 relocations; the seven intended call relocations retain their targets and zero addends but move forward four bytes."
+}

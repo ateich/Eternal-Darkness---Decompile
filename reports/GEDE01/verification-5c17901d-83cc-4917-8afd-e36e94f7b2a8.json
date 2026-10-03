@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "assignment_id": "5c17901d-83cc-4917-8afd-e36e94f7b2a8",
+  "attempt": 5,
+  "target": "fn_8012F474",
+  "base_commit": "fa0ce74323df88854efcdb53efb674e794b18685",
+  "preserved_attempts_studied": [
+    "832b0331020df81c89133e6d31592a2a730067a0",
+    "40c1eec443d2f3fcbe2de11720de6da38d5f42e6",
+    "ca244f85d2c762479576287f2a8eb82310a78a58",
+    "8809f63708efcaef40cf4b419bd64a2d145cb4fa"
+  ],
+  "new_hypotheses": [
+    {
+      "experiment": "register",
+      "hypothesis": "Explicit register storage-class hints on the six incoming values live across calls might alter MWCC register allocation and its save/restore lowering without compiler options.",
+      "result": "Rejected: generated object is byte-identical to the accepted baseline; helper save/restore remains."
+    },
+    {
+      "experiment": "aggregate",
+      "hypothesis": "A nested QueryVectors member and a single 24-byte aggregate assignment might trigger different aggregate-copy lowering or register pressure from two separate Vec3 assignments. QueryResult member offsets and size stay unchanged.",
+      "result": "Rejected: generated object is byte-identical to the accepted baseline; helper save/restore remains."
+    }
+  ],
+  "retained_source": "eternal-darkness-decomp/src/game/game_fn_8012F474.c",
+  "source_disposition": "Accepted base already contains the preserved best independent C reconstruction. Restored byte-for-byte after experiments; existing bare NonMatching registration and split are unchanged. Only assignment-specific reports are delivered.",
+  "source_sha256": "40cf8ef0ec9b0f139fe01e81a446a9327bd43312eb9bd58460ee4a22cbf0cb41",
+  "retail_object_sha256": "a94c5ab2f3a927a1ee147e4678b26b7e490913560e93fe4a4ce7ed739bcf9854",
+  "generated_object_sha256": "f2910c0e119298e54cbd5d6f6fdd1c60fea4d40cb447950284b97bf01b56eb7a",
+  "objdiff_unit_configuration": {
+    "name": "main/game/game_fn_8012F474",
+    "target_path": "build/GEDE01/obj/game/game_fn_8012F474.o",
+    "base_path": "build/GEDE01/src/game/game_fn_8012F474.o",
+    "scratch": {
+      "platform": "gc_wii",
+      "compiler": "mwcc_242_53",
+      "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma \"cats off\" -pragma \"warn_notinlined off\" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -DVERSION_GEDE01 -DNDEBUG=1 -lang=c",
+      "ctx_path": "build/GEDE01/src/game/game_fn_8012F474.ctx",
+      "build_ctx": true
+    },
+    "metadata": {
+      "complete": false,
+      "reverse_fn_order": false,
+      "source_path": "src/game/game_fn_8012F474.c",
+      "progress_categories": [
+        "game"
+      ],
+      "auto_generated": false
+    }
+  },
+  "divergence": "Canonical and relocation-strict objdiff both measure 95.42857% (280 retail bytes versus 288 generated). The body and 0xD0 stack layout match retail, but unchanged GC/1.3 settings emit _savegpr_26/_restgpr_26 helper calls instead of inline stmw/lmw. These add 8 bytes and two R_PPC_REL24 relocations; the seven intended call relocations retain their targets and zero addends but move forward four bytes.",
+  "policy_boundary": "No -use_lmw_stmw option, pragma equivalent, compiler override, assembly, wrapper change, or gate change was used. Changing save/restore policy lacks authorization and was not attempted. These two source hypotheses failed; this is not a proof that every possible C source must fail.",
+  "validation": "Configure and assigned-object builds succeeded. All three objects have the same SHA-256 and canonical/strict scores. Raw command outputs, instruction comparisons, relocation tables, and JSON reports are enclosed for each experiment. Experiment diffs are evidence, not additional translation units.",
+  "remaining_integrator_gates": {
+    "full_deterministic_build": "not run in this session; required after independent review",
+    "legal_audit": "not run in this session; fresh committed integrator output required",
+    "canonical_and_relocation_strict_no_regression": "fresh committed integrator reports required",
+    "retail_dol_sha1": {
+      "expected": "ea24b6af954876ce072562ff39cdb4c81d32be1f",
+      "measured": null,
+      "status": "integrator verification pending"
+    }
+  },
+  "workspace_note": "CLAUDE.md was already modified at session entry and was neither edited nor staged."
+}

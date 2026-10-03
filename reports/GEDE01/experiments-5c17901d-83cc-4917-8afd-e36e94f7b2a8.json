@@ -1,0 +1,35 @@
+[
+  {
+    "experiment": "register",
+    "source_diff_from_base": "--- base\n+++ register\n@@ -29,8 +29,8 @@\n extern void fn_80211A48(const Vec3*, const Vec3*, Vec3*);\n \n /* The queried key pair is required to produce a valid result. */\n-void fn_8012F474(void* object, int transform_index, int second, int first,\n-                 const Vec3* target, Vec3* start, Vec3* end)\n+void fn_8012F474(register void* object, int transform_index, register int second, register int first,\n+                 register const Vec3* target, register Vec3* start, register Vec3* end)\n {\n     Matrix34 matrix;\n     QueryResult query;\n",
+    "source_sha256": "c69441452ecfe7b85d56085244252028b69fa2d92ecb1ec0eb8a1195f66b5e3b",
+    "object_sha256": "f2910c0e119298e54cbd5d6f6fdd1c60fea4d40cb447950284b97bf01b56eb7a",
+    "match_percent": 95.42857,
+    "target_size": "280",
+    "generated_size": "288",
+    "relocation_strict_match_percent": 95.42857,
+    "canonical_and_strict_reports_byte_identical": true
+  },
+  {
+    "experiment": "aggregate",
+    "source_diff_from_base": "--- base\n+++ aggregate\n@@ -8,17 +8,16 @@\n \n typedef float Matrix34[3][4];\n \n-typedef struct QueryResult {\n-    u8 pad_0[8];\n-    Vec3 position;\n-    Vec3 direction;\n-    u8 pad_20[8];\n-} QueryResult;\n-\n typedef struct QueryVectors {\n     Vec3 position;\n     Vec3 direction;\n } QueryVectors;\n+\n+typedef struct QueryResult {\n+    u8 pad_0[8];\n+    QueryVectors vectors;\n+    u8 pad_20[8];\n+} QueryResult;\n \n extern void fn_80127FD8(void*, int, Matrix34);\n extern void fn_80211A6C(const Vec3*, const Vec3*, Vec3*);\n@@ -47,8 +46,7 @@\n     fn_80211A6C(target, &translation, &delta);\n     distance = fn_80211B08(&delta);\n     fn_8011F6A4(object, first, second, -1, &query, 1);\n-    query_vectors.position = query.position;\n-    query_vectors.direction = query.direction;\n+    query_vectors = query.vectors;\n     *start = query_vectors.position;\n     direction = query_vectors.direction;\n     fn_80211AAC(&direction, &direction);\n",
+    "source_sha256": "c282d0de1088b7cc4d8d362ff1c5973985f55ae138cbec70d75dc5f7aaf230cd",
+    "object_sha256": "f2910c0e119298e54cbd5d6f6fdd1c60fea4d40cb447950284b97bf01b56eb7a",
+    "match_percent": 95.42857,
+    "target_size": "280",
+    "generated_size": "288",
+    "relocation_strict_match_percent": 95.42857,
+    "canonical_and_strict_reports_byte_identical": true
+  },
+  {
+    "experiment": "final",
+    "source_diff_from_base": "",
+    "source_sha256": "40cf8ef0ec9b0f139fe01e81a446a9327bd43312eb9bd58460ee4a22cbf0cb41",
+    "object_sha256": "f2910c0e119298e54cbd5d6f6fdd1c60fea4d40cb447950284b97bf01b56eb7a",
+    "match_percent": 95.42857,
+    "target_size": "280",
+    "generated_size": "288",
+    "relocation_strict_match_percent": 95.42857,
+    "canonical_and_strict_reports_byte_identical": true
+  }
+]
