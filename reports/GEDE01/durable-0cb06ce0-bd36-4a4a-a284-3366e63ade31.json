@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "assignment_id": "0cb06ce0-bd36-4a4a-a284-3366e63ade31",
+  "attempt": 2,
+  "base_commit": "f0aebed5b341b7c9746b67dfab01b1c9cbac36b1",
+  "target": "fn_800359A0",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-0cb06ce0-bd36-4a4a-a284-3366e63ade31.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-reloc-strict-0cb06ce0-bd36-4a4a-a284-3366e63ade31.json",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-0cb06ce0-bd36-4a4a-a284-3366e63ade31.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-retail-0cb06ce0-bd36-4a4a-a284-3366e63ade31.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-generated-0cb06ce0-bd36-4a4a-a284-3366e63ade31.txt",
+    "eternal-darkness-decomp/reports/GEDE01/build-0cb06ce0-bd36-4a4a-a284-3366e63ade31.txt",
+    "eternal-darkness-decomp/reports/GEDE01/experiment-0cb06ce0-bd36-4a4a-a284-3366e63ade31.json"
+  ],
+  "divergence": "A new shared-failure-label source-shape hypothesis improves canonical and relocation-strict objdiff from the preserved 93.78974% baseline to 95.379486%. Retail is 1560 bytes and generated is 1540 bytes. Both objects have 50 relocations with equal targets and addends, but offsets diverge after differing instruction layout. GC/1.3 still assigns requested/source identifiers, object info, special flags, and scan state to different nonvolatile registers; it also folds the three direct failure paths into an earlier shared zero epilogue more aggressively than retail, shortening subsequent branch layout. This is not a byte match or relocation-strict match."
+}

@@ -1,0 +1,21 @@
+{
+  "assignment_id": "0cb06ce0-bd36-4a4a-a284-3366e63ade31",
+  "target": "fn_800359A0",
+  "hypothesis": "Spell the three corrected direct-target failure exits as gotos to the function's final zero-return label so GC/1.3 can share the retail-style zero epilogue instead of emitting local li/b sequences.",
+  "historical_baseline": {
+    "source_commit": "e8a8591e647df6685a1b92a90fdeec10e3d7cb40",
+    "canonical_percent": 93.78974,
+    "retail_text_bytes": 1560,
+    "generated_text_bytes": 1564
+  },
+  "result": {
+    "canonical_percent": 95.379486,
+    "relocation_strict_percent": 95.379486,
+    "retail_text_bytes": 1560,
+    "generated_text_bytes": 1540,
+    "retail_relocations": 50,
+    "generated_relocations": 50,
+    "retained": true
+  },
+  "mapping": "The source-shape change renumbered the compiler-local .sdata2 symbol from @121 to @122; the existing guarded externalization still validates the whole .sdata2 section against retail before mapping it to lbl_8064E210."
+}

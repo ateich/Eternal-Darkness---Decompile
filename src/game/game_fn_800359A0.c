@@ -150,11 +150,11 @@ s32 fn_800359A0(register void* source, register void* requested)
          message_result == 1)) {
         if ((source_flags & 0x1000) != 0 &&
             requested_id != (s32)requested_object) {
-            return 0;
+            goto fail;
         }
         if (source_special != 0 && source_state->ownerC0 == requested_id &&
             requested_special == 0) {
-            return 0;
+            goto fail;
         }
         {
             fn_80201E78(&requested_temporary, requested);
@@ -170,7 +170,7 @@ s32 fn_800359A0(register void* source, register void* requested)
                 fn_80201DD8(source_context, fn_80201B54(requested));
                 return 1;
             }
-            return 0;
+            goto fail;
         }
     }
 
@@ -271,5 +271,6 @@ s32 fn_800359A0(register void* source, register void* requested)
         }
         fn_80201DD8(source_context, 0);
     }
+fail:
     return 0;
 }
