@@ -83,6 +83,7 @@ s32 fn_800359A0(register void* source, register void* requested)
     s32 source_mask;
     s32 context_mask;
     s32 context_flags;
+    s32 requested_has_state;
     Vec3 requested_temporary;
     u32 message_result;
 
@@ -120,7 +121,8 @@ s32 fn_800359A0(register void* source, register void* requested)
     } else {
         source_special = 0;
     }
-    if (requested_info != 0 && requested_info->state8C != 0) {
+    requested_has_state = requested_info != 0 && requested_info->state8C != 0;
+    if (requested_has_state) {
         requested_special = (requested_info->state8C->flags00 >> 22) & 1;
     } else {
         requested_special = 0;
