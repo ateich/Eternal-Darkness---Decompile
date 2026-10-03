@@ -1,0 +1,9 @@
+Attempt 4 tested a distinct source-level lifetime/ordering hypothesis with the canonical GC/1.3 command recorded in build-5fedc65d-8154-47e4-85f3-9ac05ec6c2f4.txt.
+
+Hypothesis: read lbl_80651924 and lbl_80651928 into explicit u32/u16 scalar temporaries, then assign those temporaries to direction. This could have kept the two volatile reads adjacent to their stores while retaining the destination's non-volatile aggregate type.
+
+Raw strict objdiff result: both .text sections remained 704 bytes, but match_percent fell from 97.72727 to 96.306816. The generated prologue still placed the SDA21 reads at 0x08 and 0x10, while the extra temporary lifetimes rotated the stable saved-register assignment: position r27->r28, active r29->r30, extra_mode r26->r27, object_id r30->r31, and the remaining byte arguments shifted accordingly. This made the previously identical body diverge, so the variant was reverted.
+
+A comma-expression sequencing form for the two assignments was also compiled. It reproduced the preserved object byte-for-byte (704 bytes, 97.72727%, SDA21 sites 0x08 and 0x10), so it provided no improvement and was reverted.
+
+The preserved honest C remains the best candidate. No inline assembly, compiler-setting change, neighboring-function edit, or compiler-policy change was retained.
