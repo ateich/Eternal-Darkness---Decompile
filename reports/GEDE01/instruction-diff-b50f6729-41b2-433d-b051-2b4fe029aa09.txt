@@ -1,0 +1,28 @@
+command: build/binutils/powerpc-eabi-objdump -dr build/GEDE01/obj/game/game_fn_801E645C.o
+command: build/binutils/powerpc-eabi-objdump -dr build/GEDE01/src/game/game_fn_801E645C.o
+comparison: unified diff, filename header omitted
+
+@@ fn_801E645C+0xac through fn_801E645C+0x104 @@
+-  ac: 1c 84 00 0a  mulli   r4,r4,10
++  ac: 1c a5 00 0a  mulli   r5,r5,10
+-  b4: 38 a5 00 01  addi    r5,r5,1
++  b4: 38 84 00 01  addi    r4,r4,1
+-  bc: 7c 80 22 14  add     r4,r0,r4
+-  c0: 38 84 ff d0  addi    r4,r4,-48
++  bc: 7c a0 2a 14  add     r5,r0,r5
++  c0: 38 a5 ff d0  addi    r5,r5,-48
+-  dc: 2c 05 00 03  cmpwi   r5,3
++  dc: 2c 04 00 03  cmpwi   r4,3
+-  e4: 2c 04 00 00  cmpwi   r4,0
++  e4: 2c 05 00 00  cmpwi   r5,0
+-  ec: 2c 04 00 20  cmpwi   r4,32
++  ec: 2c 05 00 20  cmpwi   r5,32
+-  f4: 80 a0 00 00  lwz     r5,0(0)
++  f4: 80 80 00 00  lwz     r4,0(0)
+         f4: R_PPC_EMB_SDA21 lbl_8064D59C
+-  fc: 38 64 00 05  addi    r3,r4,5
++  fc: 38 65 00 05  addi    r3,r5,5
+- 104: 7c 65 18 ae  lbzx    r3,r5,r3
++ 104: 7c 64 18 ae  lbzx    r3,r4,r3
+
+No other instruction or relocation differences were emitted.
