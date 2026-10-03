@@ -1,0 +1,17 @@
+Attempt 3 tested a source-shaping hypothesis not preserved by the earlier attempts:
+combine the recovered old-phase load and phase increment as one post-increment
+expression while retaining the direct global reload used for the state switch.
+
+Canonical MWCC emitted exactly 2060 bytes, equal to retail, but similarity regressed
+from 94.194176% to 93.34757%. The post-increment moved the increment before the
+player-mode branch and retained the phase in r5 rather than retail's r7. This variant
+was rejected. Its raw assigned-object build, canonical objdiff JSON, objdiff log, and
+instruction comparison are preserved under the postincrement evidence names.
+
+The final prepared result therefore retains the accepted split-statement honest C
+reconstruction already present at the base commit. Fresh measurement gives
+94.194176% for both canonical and relocation-strict objdiff. Retail is 2060 bytes;
+candidate is 2064 bytes. The first remaining divergence is the current-entry reload
+scheduled between the second global-address lis/addi pair around the phase increment.
+Later differences are predominantly address-register allocation and move scheduling
+in repeated activation blocks and the special subtype path.
