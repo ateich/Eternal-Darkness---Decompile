@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "assignment_id": "94113a96-2c16-400e-aa84-fe7b0c3b76ea",
+  "attempt": 6,
+  "base_commit": "0249a1c3454a0f6a41170824ac5f776a8886090e",
+  "target": "fn_80026768",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-94113a96-2c16-400e-aa84-fe7b0c3b76ea.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-94113a96-2c16-400e-aa84-fe7b0c3b76ea-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-94113a96-2c16-400e-aa84-fe7b0c3b76ea-baseline.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-94113a96-2c16-400e-aa84-fe7b0c3b76ea-baseline-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-94113a96-2c16-400e-aa84-fe7b0c3b76ea-register-pressure.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-94113a96-2c16-400e-aa84-fe7b0c3b76ea.txt",
+    "eternal-darkness-decomp/reports/GEDE01/analysis-94113a96-2c16-400e-aa84-fe7b0c3b76ea.md",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-d4a2af66-767c-48cf-a9c3-c9092c3077c6.txt",
+    "eternal-darkness-decomp/reports/GEDE01/disassembly-retail-d4a2af66-767c-48cf-a9c3-c9092c3077c6.txt",
+    "eternal-darkness-decomp/reports/GEDE01/disassembly-generated-d4a2af66-767c-48cf-a9c3-c9092c3077c6.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-retail-d4a2af66-767c-48cf-a9c3-c9092c3077c6.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-generated-d4a2af66-767c-48cf-a9c3-c9092c3077c6.txt"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff are 63.753117%: retail is 1604 bytes with a 0xD0 stack frame and stmw r16, while generated code is 1620 bytes with a 0xB0 frame and stmw r20. Both objects contain 53 relocation records, but retail conversion constants target lbl_8064DFA0 once and lbl_8064DF80 twice, while generated code targets compiler-local @103 once and @108 twice. The reconstruction preserves retail semantics; remaining differences are instruction scheduling, stack layout, conversion-constant ownership and relocation targets, and long-lived register allocation. Explicit register hints were tested in attempt 6 and produced a byte-identical generated object, so they were reverted."
+}

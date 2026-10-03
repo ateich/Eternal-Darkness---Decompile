@@ -1,0 +1,16 @@
+COMMAND: python3 configure.py --version GEDE01 --no-progress
+RESULT: success; canonical GC/1.3 configuration regenerated.
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80026768.o
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80026768.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_80026768.d build/GEDE01/src/game/game_fn_80026768.d
+52cf59b286548125e649cc22bbe39136f8144c8f555aec038e4a973c032eb191  build/GEDE01/src/game/game_fn_80026768.o
+
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80026768 fn_80026768 --format json -o reports/GEDE01/objdiff-94113a96-2c16-400e-aa84-fe7b0c3b76ea.json
+RESULT: success; canonical match 63.753117%, retail 1604 bytes, generated 1620 bytes.
+
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80026768 fn_80026768 --format json -c function_reloc_diffs=name_address -o reports/GEDE01/objdiff-94113a96-2c16-400e-aa84-fe7b0c3b76ea-reloc-strict.json
+RESULT: success; relocation-strict match 63.753117%, retail 1604 bytes, generated 1620 bytes.
+
+EXPERIMENT: add register storage class to state, data, alpha, particle_origin, particle_y_origin, texture, variant, and i; rebuild with the same canonical command; write objdiff-94113a96-2c16-400e-aa84-fe7b0c3b76ea-register-pressure.json.
+RESULT: generated object and objdiff JSON were byte-identical to baseline; score remained 63.753117% and generated prologue remained a 0xB0 frame with stmw r20. The experiment was reverted.
+SOURCE SHA-256: e6d902fb5e738a420dc44ea037cec28bc28a8fd2ffd499e4307b2a5656f7f923  src/game/game_fn_80026768.c
