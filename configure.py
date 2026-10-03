@@ -3652,6 +3652,22 @@ config.custom_build_rules = [
         ),
         "description": "EXTERNALIZE $in",
     },
+    {
+        "name": "externalize_game_80026DC8_constants",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @4 lbl_80238C4C "
+            f"orig/{VERSION}/sys/main.dol --require-whole-section "
+            "--require-section=.rodata --reject-section-relocations && "
+            "python3 tools/externalize_elf_symbol.py $in @38 lbl_8064DF80 "
+            f"orig/{VERSION}/sys/main.dol --require-whole-section "
+            "--require-section=.sdata2 --reject-section-relocations && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@4=lbl_80238C4C --redefine-sym=@38=lbl_8064DF80 "
+            "--remove-section=.rodata --remove-section=.sdata2 "
+            "--rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    }
 ]
 
 game_section_externalizations = {
@@ -3979,6 +3995,7 @@ config.custom_build_rules.append(
         "description": "EXTERNALIZE $in",
     }
 )
+
 
 config.custom_build_rules.append(
     {
@@ -6212,6 +6229,11 @@ config.custom_build_steps = {
                     "rule": "externalize_game_801C8600_door_constants",
                     "inputs": [f"build/{VERSION}/src/game/game_fn_801C8600.o"],
                 },
+    {
+        "outputs": [f"build/{VERSION}/src/game/game_fn_80026DC8.externalized"],
+        "rule": "externalize_game_80026DC8_constants",
+        "inputs": [f"build/{VERSION}/src/game/game_fn_80026DC8.o"],
+    }
     ]
 }
 
@@ -6222,6 +6244,7 @@ config.custom_build_steps["post-compile"].append(
         "inputs": [f"build/{VERSION}/src/game/game_fn_801EAA04.o"],
     }
 )
+
 
 config.custom_build_steps["post-compile"].append(
     {
@@ -7071,7 +7094,7 @@ config.libs = [
             Object(Matching, "game/game_fn_80026DAC.c"),
             Object(Matching, "game/game_fn_80026DBC.c"),
             Object(
-                NonMatching,
+                Matching,
                 "game/game_fn_80026DC8.c",
                 extra_cflags=["-use_lmw_stmw on"],
             ),
