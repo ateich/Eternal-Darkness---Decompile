@@ -1,0 +1,19 @@
+Command: python3 configure.py configure --version GEDE01 --non-matching
+Exit status: 0
+Output: (none)
+
+Command: .tools/bin/ninja -t clean build/GEDE01/src/game/game_fn_8012EC50.o
+Exit status: 0
+Output:
+Cleaning... 2 files.
+
+Command: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_8012EC50.o
+Exit status: 0
+Output:
+[1/2] "/usr/bin/python3" tools/download_tool.py sjiswrap build/tools/sjiswrap.exe --tag v1.2.2
+Downloading https://github.com/encounter/sjiswrap/releases/download/v1.2.2/sjiswrap-windows-x86.exe to build/tools/sjiswrap.exe
+[2/2] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -MMD -c src/game/game_fn_8012EC50.c -o build/GEDE01/src/game && "/usr/bin/python3" tools/transform_dep.py build/GEDE01/src/game/game_fn_8012EC50.d build/GEDE01/src/game/game_fn_8012EC50.d
+
+Approved proposal SHA-256:
+cef642d71fc361e8015b787c334c5bc1a0873dfb4e06abbbf2605fa3d2b1c59b  src/game/game_fn_8012EC50.c
+cef642d71fc361e8015b787c334c5bc1a0873dfb4e06abbbf2605fa3d2b1c59b  approved proposed-game_fn_8012EC50.c
