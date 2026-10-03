@@ -244,7 +244,7 @@ s32 fn_8002DAE0(void* callback, s32 phase_arg, void* event_arg, s32* output)
                         void* effect = fn_80201BC8(target);
                         if (effect != 0) {
                             s32 mask = fn_8006749C(4);
-                            s16 rank = fn_801CEB2C(state->stats);
+                            s32 rank = fn_801CEB2C(state->stats);
                             u8 level = (u8)((rank >> 1) + 1);
                             fn_80120AD0(effect, 0, 100,
                                         (u16)(mask | 2),

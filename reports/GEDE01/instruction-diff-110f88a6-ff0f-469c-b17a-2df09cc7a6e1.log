@@ -1,0 +1,475 @@
+Canonical raw objdiff instruction alignment; addresses are actual section offsets.
+DIFF_NONE          0000 stwu r1, -0x70(r1)                                 | 0000 stwu r1, -0x70(r1)
+DIFF_NONE          0004 mflr r0                                            | 0004 mflr r0
+DIFF_NONE          0008 stw r0, 0x74(r1)                                   | 0008 stw r0, 0x74(r1)
+DIFF_NONE          000c stmw r17, 0x34(r1)                                 | 000c stmw r17, 0x34(r1)
+DIFF_NONE          0010 mr r17, r5                                         | 0010 mr r17, r5
+DIFF_NONE          0014 mr r20, r3                                         | 0014 mr r20, r3
+DIFF_NONE          0018 mr r19, r4                                         | 0018 mr r19, r4
+DIFF_ARG_MISMATCH  001c mr r30, r6                                         | 001c mr r26, r6
+DIFF_NONE          0020 mr r3, r17                                         | 0020 mr r3, r17
+DIFF_NONE          0024 bl fn_80200C10                                     | 0024 bl fn_80200C10
+DIFF_NONE          0028 mr r18, r3                                         | 0028 mr r18, r3
+DIFF_NONE          002c mr r3, r20                                         | 002c mr r3, r20
+DIFF_NONE          0030 bl fn_80201B8C                                     | 0030 bl fn_80201B8C
+DIFF_ARG_MISMATCH  0034 lwz r28, 0x24(r3)                                  | 0034 lwz r31, 0x24(r3)
+DIFF_NONE          0038 mr r3, r20                                         | 0038 mr r3, r20
+DIFF_NONE          003c bl fn_80201B54                                     | 003c bl fn_80201B54
+DIFF_NONE          0040 cmpwi r19, 0x0                                     | 0040 cmpwi r19, 0x0
+DIFF_ARG_MISMATCH  0044 mr r27, r3                                         | 0044 mr r30, r3
+DIFF_NONE          0048 bne 0x710                                          | 0048 bne 0x710
+DIFF_NONE          004c cmpwi r18, 0x1                                     | 004c cmpwi r18, 0x1
+DIFF_NONE          0050 bne 0x80                                           | 0050 bne 0x80
+DIFF_NONE          0054 mr r3, r20                                         | 0054 mr r3, r20
+DIFF_NONE          0058 li r4, 0x1                                         | 0058 li r4, 0x1
+DIFF_NONE          005c bl fn_802020B4                                     | 005c bl fn_802020B4
+DIFF_NONE          0060 mr r3, r20                                         | 0060 mr r3, r20
+DIFF_NONE          0064 li r4, 0x1                                         | 0064 li r4, 0x1
+DIFF_NONE          0068 bl fn_80201D2C                                     | 0068 bl fn_80201D2C
+DIFF_NONE          006c mr r3, r20                                         | 006c mr r3, r20
+DIFF_NONE          0070 li r4, 0x1                                         | 0070 li r4, 0x1
+DIFF_NONE          0074 bl fn_80201D14                                     | 0074 bl fn_80201D14
+DIFF_NONE          0078 li r3, 0x1                                         | 0078 li r3, 0x1
+DIFF_NONE          007c b 0x754                                            | 007c b 0x754
+DIFF_NONE          0080 cmpwi r18, 0xc4                                    | 0080 cmpwi r18, 0xc4
+DIFF_NONE          0084 bne 0xc0                                           | 0084 bne 0xc0
+DIFF_ARG_MISMATCH  0088 lwz r0, 0xc4(r28)                                  | 0088 lwz r0, 0xc4(r31)
+DIFF_NONE          008c cmplwi r0, 0x0                                     | 008c cmplwi r0, 0x0
+DIFF_NONE          0090 beq 0xa4                                           | 0090 beq 0xa4
+DIFF_NONE          0094 mr r3, r17                                         | 0094 mr r3, r17
+DIFF_NONE          0098 bl fn_80200C38                                     | 0098 bl fn_80200C38
+DIFF_ARG_MISMATCH  009c lwz r4, 0xc4(r28)                                  | 009c lwz r4, 0xc4(r31)
+DIFF_NONE          00a0 stw r3, 0x0(r4)                                    | 00a0 stw r3, 0x0(r4)
+DIFF_ARG_MISMATCH  00a4 mr r4, r27                                         | 00a4 mr r4, r30
+DIFF_ARG_MISMATCH  00a8 mr r5, r27                                         | 00a8 mr r5, r30
+DIFF_NONE          00ac li r3, 0x39                                        | 00ac li r3, 0x39
+DIFF_NONE          00b0 li r6, 0x0                                         | 00b0 li r6, 0x0
+DIFF_NONE          00b4 bl fn_8020123C                                     | 00b4 bl fn_8020123C
+DIFF_NONE          00b8 li r3, 0x1                                         | 00b8 li r3, 0x1
+DIFF_NONE          00bc b 0x754                                            | 00bc b 0x754
+DIFF_NONE          00c0 cmpwi r18, 0x39                                    | 00c0 cmpwi r18, 0x39
+DIFF_NONE          00c4 bne 0x128                                          | 00c4 bne 0x128
+DIFF_ARG_MISMATCH  00c8 lwz r3, 0xb4(r28)                                  | 00c8 lwz r3, 0xb4(r31)
+DIFF_NONE          00cc bl fn_80201814                                     | 00cc bl fn_80201814
+DIFF_NONE          00d0 cmplwi r3, 0x0                                     | 00d0 cmplwi r3, 0x0
+DIFF_NONE          00d4 beq 0xe8                                           | 00d4 beq 0xe8
+DIFF_NONE          00d8 bl fn_80201B8C                                     | 00d8 bl fn_80201B8C
+DIFF_NONE          00dc lwz r3, 0x8c(r3)                                   | 00dc lwz r3, 0x8c(r3)
+DIFF_NONE          00e0 li r0, 0x0                                         | 00e0 li r0, 0x0
+DIFF_NONE          00e4 stw r0, 0x24(r3)                                   | 00e4 stw r0, 0x24(r3)
+DIFF_ARG_MISMATCH  00e8 mr r3, r28                                         | 00e8 mr r3, r31
+DIFF_NONE          00ec bl fn_801DABFC                                     | 00ec bl fn_801DABFC
+DIFF_ARG_MISMATCH  00f0 lwz r3, 0xb4(r28)                                  | 00f0 lwz r3, 0xb4(r31)
+DIFF_NONE          00f4 li r4, 0x0                                         | 00f4 li r4, 0x0
+DIFF_NONE          00f8 bl fn_801DACA4                                     | 00f8 bl fn_801DACA4
+DIFF_NONE          00fc mr r4, r20                                         | 00fc mr r4, r20
+DIFF_NONE          0100 li r3, 0x2                                         | 0100 li r3, 0x2
+DIFF_NONE          0104 bl fn_801E8328                                     | 0104 bl fn_801E8328
+DIFF_NONE          0108 mr r3, r20                                         | 0108 mr r3, r20
+DIFF_NONE          010c li r4, 0x0                                         | 010c li r4, 0x0
+DIFF_NONE          0110 bl fn_80201D34                                     | 0110 bl fn_80201D34
+DIFF_NONE          0114 mr r3, r20                                         | 0114 mr r3, r20
+DIFF_NONE          0118 li r4, 0x1                                         | 0118 li r4, 0x1
+DIFF_NONE          011c bl fn_80201D1C                                     | 011c bl fn_80201D1C
+DIFF_NONE          0120 li r3, 0x1                                         | 0120 li r3, 0x1
+DIFF_NONE          0124 b 0x754                                            | 0124 b 0x754
+DIFF_NONE          0128 cmpwi r18, 0xed                                    | 0128 cmpwi r18, 0xed
+DIFF_NONE          012c bne 0x178                                          | 012c bne 0x178
+DIFF_NONE          0130 mr r3, r17                                         | 0130 mr r3, r17
+DIFF_NONE          0134 bl fn_80200C38                                     | 0134 bl fn_80200C38
+DIFF_NONE          0138 mr r19, r3                                         | 0138 mr r19, r3
+DIFF_NONE          013c mr r3, r17                                         | 013c mr r3, r17
+DIFF_NONE          0140 bl fn_80200C28                                     | 0140 bl fn_80200C28
+DIFF_NONE          0144 mr r18, r3                                         | 0144 mr r18, r3
+DIFF_NONE          0148 mr r3, r17                                         | 0148 mr r3, r17
+DIFF_NONE          014c bl fn_80200C20                                     | 014c bl fn_80200C20
+DIFF_NONE          0150 mr r4, r3                                          | 0150 mr r4, r3
+DIFF_NONE          0154 mr r5, r18                                         | 0154 mr r5, r18
+DIFF_NONE          0158 mr r6, r19                                         | 0158 mr r6, r19
+DIFF_NONE          015c li r3, 0xb                                         | 015c li r3, 0xb
+DIFF_NONE          0160 bl fn_8020123C                                     | 0160 bl fn_8020123C
+DIFF_NONE          0164 mr r3, r17                                         | 0164 mr r3, r17
+DIFF_NONE          0168 bl fn_80200C38                                     | 0168 bl fn_80200C38
+DIFF_NONE          016c bl fn_801A7228                                     | 016c bl fn_801A7228
+DIFF_NONE          0170 li r3, 0x1                                         | 0170 li r3, 0x1
+DIFF_NONE          0174 b 0x754                                            | 0174 b 0x754
+DIFF_NONE          0178 cmpwi r18, 0x3a                                    | 0178 cmpwi r18, 0x3a
+DIFF_NONE          017c bne 0x1c8                                          | 017c bne 0x1c8
+DIFF_NONE          0180 mr r3, r17                                         | 0180 mr r3, r17
+DIFF_NONE          0184 bl fn_80200C38                                     | 0184 bl fn_80200C38
+DIFF_NONE          0188 mr r19, r3                                         | 0188 mr r19, r3
+DIFF_NONE          018c mr r3, r17                                         | 018c mr r3, r17
+DIFF_NONE          0190 bl fn_80200C28                                     | 0190 bl fn_80200C28
+DIFF_NONE          0194 mr r18, r3                                         | 0194 mr r18, r3
+DIFF_NONE          0198 mr r3, r17                                         | 0198 mr r3, r17
+DIFF_NONE          019c bl fn_80200C20                                     | 019c bl fn_80200C20
+DIFF_NONE          01a0 mr r4, r3                                          | 01a0 mr r4, r3
+DIFF_NONE          01a4 mr r5, r18                                         | 01a4 mr r5, r18
+DIFF_NONE          01a8 mr r6, r19                                         | 01a8 mr r6, r19
+DIFF_NONE          01ac li r3, 0x27                                        | 01ac li r3, 0x27
+DIFF_NONE          01b0 bl fn_8020123C                                     | 01b0 bl fn_8020123C
+DIFF_NONE          01b4 mr r3, r17                                         | 01b4 mr r3, r17
+DIFF_NONE          01b8 bl fn_80200C38                                     | 01b8 bl fn_80200C38
+DIFF_NONE          01bc bl fn_801A7228                                     | 01bc bl fn_801A7228
+DIFF_NONE          01c0 li r3, 0x1                                         | 01c0 li r3, 0x1
+DIFF_NONE          01c4 b 0x754                                            | 01c4 b 0x754
+DIFF_NONE          01c8 cmpwi r18, 0xb                                     | 01c8 cmpwi r18, 0xb
+DIFF_NONE          01cc bne 0x6f4                                          | 01cc bne 0x6f4
+DIFF_NONE          01d0 mr r3, r17                                         | 01d0 mr r3, r17
+DIFF_ARG_MISMATCH  01d4 li r24, 0x1                                        | 01d4 li r23, 0x1
+DIFF_ARG_MISMATCH  01d8 li r31, 0x0                                        | 01d8 li r29, 0x0
+DIFF_NONE          01dc bl fn_80200C20                                     | 01dc bl fn_80200C20
+DIFF_NONE          01e0 mr r0, r3                                          | 01e0 mr r0, r3
+DIFF_NONE          01e4 mr r3, r17                                         | 01e4 mr r3, r17
+DIFF_ARG_MISMATCH  01e8 mr r23, r0                                         | 01e8 mr r22, r0
+DIFF_NONE          01ec bl fn_80200C38                                     | 01ec bl fn_80200C38
+DIFF_NONE          01f0 li r0, 0x0                                         | 01f0 li r0, 0x0
+DIFF_ARG_MISMATCH  01f4 mr r22, r3                                         | 01f4 mr r21, r3
+DIFF_NONE          01f8 sth r0, 0x8(r1)                                    | 01f8 sth r0, 0x8(r1)
+DIFF_NONE          01fc stw r0, 0xc(r1)                                    | 01fc stw r0, 0xc(r1)
+DIFF_NONE          0200 bl fn_801A7530                                     | 0200 bl fn_801A7530
+DIFF_NONE          0204 sth r3, 0xa(r1)                                    | 0204 sth r3, 0xa(r1)
+DIFF_ARG_MISMATCH  0208 mr r4, r22                                         | 0208 mr r4, r21
+DIFF_NONE          020c addi r3, r1, 0x10                                  | 020c addi r3, r1, 0x10
+DIFF_NONE          0210 bl fn_801A7744                                     | 0210 bl fn_801A7744
+DIFF_ARG_MISMATCH  0214 mr r3, r22                                         | 0214 mr r3, r21
+DIFF_NONE          0218 bl fn_801A7498                                     | 0218 bl fn_801A7498
+DIFF_NONE          021c mr r0, r3                                          | 021c mr r0, r3
+DIFF_ARG_MISMATCH  0220 mr r3, r22                                         | 0220 mr r3, r21
+DIFF_ARG_MISMATCH  0224 mr r26, r0                                         | 0224 mr r28, r0
+DIFF_NONE          0228 bl fn_801A7570                                     | 0228 bl fn_801A7570
+DIFF_ARG_MISMATCH  022c mr r20, r3                                         | 022c mr r24, r3
+DIFF_ARG_MISMATCH  0230 mr r3, r26                                         | 0230 mr r3, r28
+DIFF_NONE          0234 bl fn_80201814                                     | 0234 bl fn_80201814
+DIFF_ARG_MISMATCH  0238 mr. r25, r3                                        | 0238 mr. r27, r3
+DIFF_NONE          023c beq 0x24c                                          | 023c beq 0x24c
+DIFF_NONE          0240 bl fn_80201B8C                                     | 0240 bl fn_80201B8C
+DIFF_ARG_MISMATCH  0244 mr r29, r3                                         | 0244 mr r25, r3
+DIFF_NONE          0248 b 0x250                                            | 0248 b 0x250
+DIFF_ARG_MISMATCH  024c li r29, 0x0                                        | 024c li r25, 0x0
+DIFF_ARG_MISMATCH  0250 cmplwi r29, 0x0                                    | 0250 cmplwi r25, 0x0
+DIFF_NONE          0254 beq 0x264                                          | 0254 beq 0x264
+DIFF_ARG_MISMATCH  0258 lbz r0, 0x9f(r29)                                  | 0258 lbz r0, 0x9f(r25)
+DIFF_NONE          025c cmplwi r0, 0x28                                    | 025c cmplwi r0, 0x28
+DIFF_NONE          0260 beq 0x6dc                                          | 0260 beq 0x6dc
+DIFF_ARG_MISMATCH  0264 cmplwi r25, 0x0                                    | 0264 cmplwi r27, 0x0
+DIFF_NONE          0268 beq 0x2d4                                          | 0268 beq 0x2d4
+DIFF_ARG_MISMATCH  026c mr r3, r22                                         | 026c mr r3, r21
+DIFF_NONE          0270 bl fn_8004910C                                     | 0270 bl fn_8004910C
+DIFF_NONE          0274 mr r0, r3                                          | 0274 mr r0, r3
+DIFF_ARG_MISMATCH  0278 mr r3, r25                                         | 0278 mr r3, r27
+DIFF_NONE          027c mr r19, r0                                         | 027c mr r19, r0
+DIFF_NONE          0280 bl fn_80201B5C                                     | 0280 bl fn_80201B5C
+DIFF_NONE          0284 cmplwi r19, 0x0                                    | 0284 cmplwi r19, 0x0
+DIFF_NONE          0288 mr r18, r3                                         | 0288 mr r18, r3
+DIFF_NONE          028c beq 0x29c                                          | 028c beq 0x29c
+DIFF_NONE          0290 mr r3, r19                                         | 0290 mr r3, r19
+DIFF_NONE          0294 bl fn_80201B8C                                     | 0294 bl fn_80201B8C
+DIFF_NONE          0298 b 0x2a0                                            | 0298 b 0x2a0
+DIFF_NONE          029c li r3, 0x0                                         | 029c li r3, 0x0
+DIFF_NONE          02a0 subfic r4, r18, 0x18                               | 02a0 subfic r4, r18, 0x18
+DIFF_NONE          02a4 cmplwi r3, 0x0                                     | 02a4 cmplwi r3, 0x0
+DIFF_NONE          02a8 subfic r0, r18, 0x8                                | 02a8 subfic r0, r18, 0x8
+DIFF_NONE          02ac cntlzw r4, r4                                      | 02ac cntlzw r4, r4
+DIFF_NONE          02b0 cntlzw r0, r0                                      | 02b0 cntlzw r0, r0
+DIFF_NONE          02b4 srwi r18, r4, 5                                    | 02b4 srwi r18, r4, 5
+DIFF_ARG_MISMATCH  02b8 srwi r31, r0, 5                                    | 02b8 srwi r29, r0, 5
+DIFF_NONE          02bc beq 0x2d8                                          | 02bc beq 0x2d8
+DIFF_NONE          02c0 lbz r0, 0x9f(r3)                                   | 02c0 lbz r0, 0x9f(r3)
+DIFF_NONE          02c4 cmplwi r0, 0x12                                    | 02c4 cmplwi r0, 0x12
+DIFF_NONE          02c8 bne 0x2d8                                          | 02c8 bne 0x2d8
+DIFF_ARG_MISMATCH  02cc li r24, 0x0                                        | 02cc li r23, 0x0
+DIFF_NONE          02d0 b 0x2d8                                            | 02d0 b 0x2d8
+DIFF_NONE          02d4 li r18, 0x0                                        | 02d4 li r18, 0x0
+DIFF_ARG_MISMATCH  02d8 lwz r3, 0xb8(r28)                                  | 02d8 lwz r3, 0xb8(r31)
+DIFF_NONE          02dc bl fn_801D38E8                                     | 02dc bl fn_801D38E8
+DIFF_ARG_MISMATCH  02e0 mr r21, r3                                         | 02e0 mr r19, r3
+DIFF_NONE          02e4 addi r4, r1, 0xa                                   | 02e4 addi r4, r1, 0xa
+DIFF_NONE          02e8 addi r5, r1, 0x8                                   | 02e8 addi r5, r1, 0x8
+DIFF_NONE          02ec addi r6, r1, 0xc                                   | 02ec addi r6, r1, 0xc
+DIFF_NONE          02f0 bl fn_8002D8C8                                     | 02f0 bl fn_8002D8C8
+DIFF_NONE          02f4 lwz r0, 0xc(r1)                                    | 02f4 lwz r0, 0xc(r1)
+DIFF_NONE          02f8 cmpwi r0, 0x0                                      | 02f8 cmpwi r0, 0x0
+DIFF_NONE          02fc ble 0x6dc                                          | 02fc ble 0x6dc
+DIFF_ARG_MISMATCH  0300 mr r3, r22                                         | 0300 mr r3, r21
+DIFF_NONE          0304 li r17, 0x0                                        | 0304 li r17, 0x0
+DIFF_NONE          0308 bl fn_801A74F8                                     | 0308 bl fn_801A74F8
+DIFF_ARG_MISMATCH  030c mr r19, r3                                         | 030c mr r20, r3
+DIFF_ARG_MISMATCH  0310 extsh. r0, r19                                     | 0310 extsh. r0, r20
+DIFF_NONE          0314 bne 0x338                                          | 0314 bne 0x338
+DIFF_ARG_MISMATCH  0318 lwz r3, 0xb4(r28)                                  | 0318 lwz r3, 0xb4(r31)
+DIFF_NONE          031c bl fn_80201814                                     | 031c bl fn_80201814
+DIFF_NONE          0320 cmplwi r3, 0x0                                     | 0320 cmplwi r3, 0x0
+DIFF_NONE          0324 beq 0x338                                          | 0324 beq 0x338
+DIFF_NONE          0328 bl fn_80201B5C                                     | 0328 bl fn_80201B5C
+DIFF_NONE          032c cmpwi r3, 0x1c                                     | 032c cmpwi r3, 0x1c
+DIFF_NONE          0330 bne 0x338                                          | 0330 bne 0x338
+DIFF_NONE          0334 li r17, 0x1                                        | 0334 li r17, 0x1
+DIFF_NONE          0338 cmpwi r17, 0x0                                     | 0338 cmpwi r17, 0x0
+DIFF_NONE          033c bne 0x6dc                                          | 033c bne 0x6dc
+DIFF_ARG_MISMATCH  0340 mr r3, r22                                         | 0340 mr r3, r21
+DIFF_NONE          0344 bl fn_801A74C0                                     | 0344 bl fn_801A74C0
+DIFF_NONE          0348 rlwinm. r0, r3, 0, 9, 9                            | 0348 rlwinm. r0, r3, 0, 9, 9
+DIFF_NONE          034c beq 0x364                                          | 034c beq 0x364
+DIFF_ARG_MISMATCH  0350 mr r3, r26                                         | 0350 mr r3, r28
+DIFF_ARG_MISMATCH  0354 mr r5, r23                                         | 0354 mr r5, r22
+DIFF_ARG_MISMATCH  0358 mr r6, r28                                         | 0358 mr r6, r31
+DIFF_NONE          035c addi r4, r1, 0x10                                  | 035c addi r4, r1, 0x10
+DIFF_NONE          0360 bl fn_801DA8CC                                     | 0360 bl fn_801DA8CC
+DIFF_ARG_MISMATCH  0364 cmpwi r21, 0x4                                     | 0364 cmpwi r19, 0x4
+DIFF_NONE          0368 bne 0x4f4                                          | 0368 bne 0x4f4
+DIFF_NONE          036c cmpwi r18, 0x0                                     | 036c cmpwi r18, 0x0
+DIFF_NONE          0370 bne 0x4f4                                          | 0370 bne 0x4f4
+DIFF_ARG_MISMATCH  0374 cmpwi r26, 0x0                                     | 0374 cmpwi r28, 0x0
+DIFF_NONE          0378 beq 0x4f4                                          | 0378 beq 0x4f4
+DIFF_NONE          037c bl fn_801A717C                                     | 037c bl fn_801A717C
+DIFF_ARG_MISMATCH  0380 mr r4, r27                                         | 0380 mr r4, r30
+DIFF_NONE          0384 mr r18, r3                                         | 0384 mr r18, r3
+DIFF_NONE          0388 bl fn_801A74A0                                     | 0388 bl fn_801A74A0
+DIFF_NONE          038c mr r3, r18                                         | 038c mr r3, r18
+DIFF_ARG_MISMATCH  0390 mr r4, r26                                         | 0390 mr r4, r28
+DIFF_NONE          0394 bl fn_801A74A8                                     | 0394 bl fn_801A74A8
+DIFF_NONE          0398 lhz r4, 0x8(r1)                                    | 0398 lhz r4, 0x8(r1)
+DIFF_NONE          039c mr r3, r18                                         | 039c mr r3, r18
+DIFF_NONE          03a0 bl fn_801A7538                                     | 03a0 bl fn_801A7538
+DIFF_NONE          03a4 bl fn_80201B44                                     | 03a4 bl fn_80201B44
+DIFF_ARG_MISMATCH  03a8 cmpw r26, r3                                       | 03a8 cmpw r28, r3
+DIFF_NONE          03ac bne 0x3c4                                          | 03ac bne 0x3c4
+DIFF_NONE          03b0 bl fn_80071DD8                                     | 03b0 bl fn_80071DD8
+DIFF_NONE          03b4 cmpwi r3, 0x0                                      | 03b4 cmpwi r3, 0x0
+DIFF_NONE          03b8 beq 0x3c4                                          | 03b8 beq 0x3c4
+DIFF_NONE          03bc li r4, 0x1                                         | 03bc li r4, 0x1
+DIFF_NONE          03c0 b 0x3c8                                            | 03c0 b 0x3c8
+DIFF_ARG_MISMATCH  03c4 mr r4, r19                                         | 03c4 mr r4, r20
+DIFF_NONE          03c8 mr r3, r18                                         | 03c8 mr r3, r18
+DIFF_NONE          03cc bl fn_801A7518                                     | 03cc bl fn_801A7518
+DIFF_NONE          03d0 mr r3, r18                                         | 03d0 mr r3, r18
+DIFF_ARG_MISMATCH  03d4 addi r4, r28, 0x9c                                 | 03d4 addi r4, r31, 0x9c
+DIFF_NONE          03d8 bl fn_801A764C                                     | 03d8 bl fn_801A764C
+DIFF_NONE          03dc lhz r0, 0x8(r1)                                    | 03dc lhz r0, 0x8(r1)
+DIFF_NONE          03e0 clrlwi. r0, r0, 31                                 | 03e0 clrlwi. r0, r0, 31
+DIFF_NONE          03e4 beq 0x3f4                                          | 03e4 beq 0x3f4
+DIFF_NONE          03e8 mr r3, r18                                         | 03e8 mr r3, r18
+DIFF_NONE          03ec li r4, 0xb                                         | 03ec li r4, 0xb
+DIFF_NONE          03f0 bl fn_801A7470                                     | 03f0 bl fn_801A7470
+DIFF_ARG_MISMATCH  03f4 mr r4, r27                                         | 03f4 mr r4, r30
+DIFF_ARG_MISMATCH  03f8 mr r5, r26                                         | 03f8 mr r5, r28
+DIFF_NONE          03fc mr r6, r18                                         | 03fc mr r6, r18
+DIFF_NONE          0400 li r3, 0xdc                                        | 0400 li r3, 0xdc
+DIFF_NONE          0404 bl fn_8020123C                                     | 0404 bl fn_8020123C
+DIFF_NONE          0408 li r0, -0x1                                        | 0408 li r0, -0x1
+DIFF_NONE          040c and. r0, r4, r0                                    | 040c and. r0, r4, r0
+DIFF_NONE          0410 bne 0x4cc                                          | 0410 bne 0x4cc
+DIFF_ARG_MISMATCH  0414 mr r4, r27                                         | 0414 mr r4, r30
+DIFF_ARG_MISMATCH  0418 mr r5, r26                                         | 0418 mr r5, r28
+DIFF_NONE          041c mr r6, r18                                         | 041c mr r6, r18
+DIFF_NONE          0420 li r3, 0x27                                        | 0420 li r3, 0x27
+DIFF_NONE          0424 bl fn_8020123C                                     | 0424 bl fn_8020123C
+DIFF_ARG_MISMATCH  0428 cmplwi r25, 0x0                                    | 0428 cmplwi r27, 0x0
+DIFF_NONE          042c beq 0x4cc                                          | 042c beq 0x4cc
+DIFF_ARG_MISMATCH  0430 mr r3, r25                                         | 0430 mr r3, r27
+DIFF_NONE          0434 bl fn_80201B64                                     | 0434 bl fn_80201B64
+DIFF_NONE          0438 cmpwi r3, 0x8                                      | 0438 cmpwi r3, 0x8
+DIFF_NONE          043c beq 0x4cc                                          | 043c beq 0x4cc
+DIFF_ARG_MISMATCH  0440 mr r3, r25                                         | 0440 mr r3, r27
+DIFF_NONE          0444 bl fn_80201B5C                                     | 0444 bl fn_80201B5C
+DIFF_NONE          0448 cmpwi r3, 0x15                                     | 0448 cmpwi r3, 0x15
+DIFF_NONE          044c beq 0x4cc                                          | 044c beq 0x4cc
+DIFF_ARG_MISMATCH  0450 mr r3, r25                                         | 0450 mr r3, r27
+DIFF_NONE          0454 bl fn_80201BC8                                     | 0454 bl fn_80201BC8
+DIFF_ARG_MISMATCH  0458 mr. r21, r3                                        | 0458 mr. r17, r3
+DIFF_NONE          045c beq 0x4cc                                          | 045c beq 0x4cc
+DIFF_NONE          0460 li r3, 0x4                                         | 0460 li r3, 0x4
+DIFF_NONE          0464 bl fn_8006749C                                     | 0464 bl fn_8006749C
+DIFF_ARG_MISMATCH  0468 mr r20, r3                                         | 0468 mr r19, r3
+DIFF_ARG_MISMATCH  046c lwz r3, 0xb8(r28)                                  | 046c lwz r3, 0xb8(r31)
+DIFF_NONE          0470 bl fn_801CEB2C                                     | 0470 bl fn_801CEB2C
+DIFF_ARG_MISMATCH  0474 extsh r0, r3                                       | 0474 extsh r3, r3
+DIFF_ARG_MISMATCH  0478 lis r3, 0x4330                                     | 0478 lis r0, 0x4330
+DIFF_ARG_MISMATCH  047c srawi r4, r0, 1                                    | 047c srawi r3, r3, 1
+DIFF_ARG_MISMATCH  0480 ori r0, r20, 0x2                                   | 0480 ori r4, r19, 0x2
+DIFF_ARG_MISMATCH  0484 addi r4, r4, 0x1                                   | 0484 addi r3, r3, 0x1
+DIFF_ARG_MISMATCH  0488 stw r3, 0x20(r1)                                   | 0488 stw r0, 0x20(r1)
+DIFF_ARG_MISMATCH  048c clrlwi r3, r4, 24                                  | 048c clrlwi r3, r3, 24
+DIFF_NONE          0490 lfd f3, lbl_8064E038@sda21                         | 0490 lfd f3, lbl_8064E038@sda21
+DIFF_ARG_MISMATCH  0494 subi r3, r3, 0x2                                   | 0494 subi r0, r3, 0x2
+DIFF_NONE          0498 lfs f4, lbl_8064E0AC@sda21                         | 0498 lfs f4, lbl_8064E0AC@sda21
+DIFF_ARG_MISMATCH  049c xoris r3, r3, 0x8000                               | 049c xoris r0, r0, 0x8000
+DIFF_NONE          04a0 lfs f0, lbl_8064E0B0@sda21                         | 04a0 lfs f0, lbl_8064E0B0@sda21
+DIFF_ARG_MISMATCH  04a4 stw r3, 0x24(r1)                                   | 04a4 stw r0, 0x24(r1)
+DIFF_ARG_MISMATCH  04a8 mr r3, r21                                         | 04a8 mr r3, r17
+DIFF_NONE          04ac lfs f1, lbl_8064E064@sda21                         | 04ac lfs f1, lbl_8064E064@sda21
+DIFF_ARG_MISMATCH  04b0 clrlwi r6, r0, 16                                  | 04b0 clrlwi r6, r4, 16
+DIFF_NONE          04b4 lfd f2, 0x20(r1)                                   | 04b4 lfd f2, 0x20(r1)
+DIFF_NONE          04b8 li r4, 0x0                                         | 04b8 li r4, 0x0
+DIFF_NONE          04bc li r5, 0x64                                        | 04bc li r5, 0x64
+DIFF_NONE          04c0 fsubs f2, f2, f3                                   | 04c0 fsubs f2, f2, f3
+DIFF_NONE          04c4 fnmsubs f2, f4, f2, f0                             | 04c4 fnmsubs f2, f4, f2, f0
+DIFF_NONE          04c8 bl fn_80120AD0                                     | 04c8 bl fn_80120AD0
+DIFF_NONE          04cc mr r3, r18                                         | 04cc mr r3, r18
+DIFF_NONE          04d0 bl fn_801A7228                                     | 04d0 bl fn_801A7228
+DIFF_ARG_MISMATCH  04d4 cmplwi r29, 0x0                                    | 04d4 cmplwi r25, 0x0
+DIFF_NONE          04d8 beq 0x5bc                                          | 04d8 beq 0x5bc
+DIFF_ARG_MISMATCH  04dc lwz r3, 0x8c(r29)                                  | 04dc lwz r3, 0x8c(r25)
+DIFF_NONE          04e0 cmplwi r3, 0x0                                     | 04e0 cmplwi r3, 0x0
+DIFF_NONE          04e4 beq 0x5bc                                          | 04e4 beq 0x5bc
+DIFF_NONE          04e8 li r0, 0x12c                                       | 04e8 li r0, 0x12c
+DIFF_NONE          04ec sth r0, 0x150(r3)                                  | 04ec sth r0, 0x150(r3)
+DIFF_NONE          04f0 b 0x5bc                                            | 04f0 b 0x5bc
+DIFF_NONE          04f4 lhz r0, 0x8(r1)                                    | 04f4 lhz r0, 0x8(r1)
+DIFF_NONE          04f8 clrlwi. r0, r0, 31                                 | 04f8 clrlwi. r0, r0, 31
+DIFF_NONE          04fc beq 0x5bc                                          | 04fc beq 0x5bc
+DIFF_NONE          0500 cmpwi r18, 0x0                                     | 0500 cmpwi r18, 0x0
+DIFF_NONE          0504 bne 0x5bc                                          | 0504 bne 0x5bc
+DIFF_ARG_MISMATCH  0508 cmpwi r26, 0x0                                     | 0508 cmpwi r28, 0x0
+DIFF_NONE          050c beq 0x5bc                                          | 050c beq 0x5bc
+DIFF_ARG_MISMATCH  0510 cmpw r23, r26                                      | 0510 cmpw r22, r28
+DIFF_NONE          0514 beq 0x5bc                                          | 0514 beq 0x5bc
+DIFF_ARG_MISMATCH  0518 cmpwi r24, 0x0                                     | 0518 cmpwi r23, 0x0
+DIFF_NONE          051c beq 0x5bc                                          | 051c beq 0x5bc
+DIFF_ARG_MISMATCH  0520 rlwinm. r0, r20, 0, 26, 26                         | 0520 rlwinm. r0, r24, 0, 26, 26
+DIFF_NONE          0524 bne 0x5bc                                          | 0524 bne 0x5bc
+DIFF_NONE          0528 bl fn_801A717C                                     | 0528 bl fn_801A717C
+DIFF_NONE          052c li r4, 0xb                                         | 052c li r4, 0xb
+DIFF_NONE          0530 mr r17, r3                                         | 0530 mr r17, r3
+DIFF_NONE          0534 bl fn_801A7470                                     | 0534 bl fn_801A7470
+DIFF_NONE          0538 mr r3, r17                                         | 0538 mr r3, r17
+DIFF_NONE          053c li r4, 0x0                                         | 053c li r4, 0x0
+DIFF_NONE          0540 bl fn_801A74A0                                     | 0540 bl fn_801A74A0
+DIFF_NONE          0544 mr r3, r17                                         | 0544 mr r3, r17
+DIFF_ARG_MISMATCH  0548 mr r4, r26                                         | 0548 mr r4, r28
+DIFF_NONE          054c bl fn_801A74A8                                     | 054c bl fn_801A74A8
+DIFF_ARG_MISMATCH  0550 mr r4, r27                                         | 0550 mr r4, r30
+DIFF_ARG_MISMATCH  0554 mr r5, r26                                         | 0554 mr r5, r28
+DIFF_NONE          0558 mr r6, r17                                         | 0558 mr r6, r17
+DIFF_NONE          055c li r3, 0xdc                                        | 055c li r3, 0xdc
+DIFF_NONE          0560 bl fn_8020123C                                     | 0560 bl fn_8020123C
+DIFF_NONE          0564 li r0, -0x1                                        | 0564 li r0, -0x1
+DIFF_NONE          0568 and. r0, r4, r0                                    | 0568 and. r0, r4, r0
+DIFF_NONE          056c bne 0x584                                          | 056c bne 0x584
+DIFF_ARG_MISMATCH  0570 mr r4, r27                                         | 0570 mr r4, r30
+DIFF_ARG_MISMATCH  0574 mr r5, r26                                         | 0574 mr r5, r28
+DIFF_NONE          0578 mr r6, r17                                         | 0578 mr r6, r17
+DIFF_NONE          057c li r3, 0x35                                        | 057c li r3, 0x35
+DIFF_NONE          0580 bl fn_8020123C                                     | 0580 bl fn_8020123C
+DIFF_NONE          0584 mr r3, r17                                         | 0584 mr r3, r17
+DIFF_NONE          0588 bl fn_801A7228                                     | 0588 bl fn_801A7228
+DIFF_ARG_MISMATCH  058c cmplwi r29, 0x0                                    | 058c cmplwi r25, 0x0
+DIFF_NONE          0590 beq 0x5bc                                          | 0590 beq 0x5bc
+DIFF_ARG_MISMATCH  0594 lwz r3, 0x8c(r29)                                  | 0594 lwz r3, 0x8c(r25)
+DIFF_NONE          0598 cmplwi r3, 0x0                                     | 0598 cmplwi r3, 0x0
+DIFF_NONE          059c beq 0x5bc                                          | 059c beq 0x5bc
+DIFF_NONE          05a0 li r0, 0x12c                                       | 05a0 li r0, 0x12c
+DIFF_NONE          05a4 sth r0, 0x150(r3)                                  | 05a4 sth r0, 0x150(r3)
+DIFF_ARG_MISMATCH  05a8 lwz r3, 0xc(r29)                                   | 05a8 lwz r3, 0xc(r25)
+DIFF_NONE          05ac cmplwi r3, 0x0                                     | 05ac cmplwi r3, 0x0
+DIFF_NONE          05b0 beq 0x5bc                                          | 05b0 beq 0x5bc
+DIFF_NONE          05b4 li r0, 0x3c                                        | 05b4 li r0, 0x3c
+DIFF_NONE          05b8 sth r0, 0x3e(r3)                                   | 05b8 sth r0, 0x3e(r3)
+DIFF_ARG_MISMATCH  05bc lwz r3, 0xbc(r28)                                  | 05bc lwz r3, 0xbc(r31)
+DIFF_NONE          05c0 lbz r0, 0x0(r3)                                    | 05c0 lbz r0, 0x0(r3)
+DIFF_NONE          05c4 rlwinm. r0, r0, 0, 28, 28                          | 05c4 rlwinm. r0, r0, 0, 28, 28
+DIFF_NONE          05c8 bne 0x6dc                                          | 05c8 bne 0x6dc
+DIFF_NONE          05cc lwz r0, 0xc(r1)                                    | 05cc lwz r0, 0xc(r1)
+DIFF_ARG_MISMATCH  05d0 lhz r5, 0x8(r1)                                    | 05d0 lhz r4, 0x8(r1)
+DIFF_ARG_MISMATCH  05d4 mullw r3, r19, r0                                  | 05d4 mullw r3, r20, r0
+DIFF_ARG_MISMATCH  05d8 rlwinm. r0, r5, 0, 28, 28                          | 05d8 rlwinm. r0, r4, 0, 28, 28
+DIFF_NONE          05dc extsh r17, r3                                      | 05dc extsh r17, r3
+DIFF_NONE          05e0 beq 0x600                                          | 05e0 beq 0x600
+DIFF_NONE          05e4 lis r3, 0x51ec                                     | 05e4 lis r3, 0x51ec
+DIFF_NONE          05e8 subi r0, r3, 0x7ae1                                | 05e8 subi r0, r3, 0x7ae1
+DIFF_NONE          05ec mulhw r0, r0, r17                                  | 05ec mulhw r0, r0, r17
+DIFF_NONE          05f0 srawi r0, r0, 5                                    | 05f0 srawi r0, r0, 5
+DIFF_NONE          05f4 srwi r3, r0, 31                                    | 05f4 srwi r3, r0, 31
+DIFF_NONE          05f8 add r0, r0, r3                                     | 05f8 add r0, r0, r3
+DIFF_NONE          05fc extsh r17, r0                                      | 05fc extsh r17, r0
+DIFF_ARG_MISMATCH  0600 lha r4, 0x0(r28)                                   | 0600 lha r0, 0x0(r31)
+DIFF_ARG_MISMATCH  0604 extsh r0, r17                                      | 0604 extsh r3, r17
+DIFF_ARG_MISMATCH  0608 cmpw r0, r4                                        | 0608 cmpw r3, r0
+DIFF_NONE          060c bge 0x620                                          | 060c bge 0x620
+DIFF_ARG_MISMATCH  0610 cmpwi r31, 0x0                                     | 0610 cmpwi r29, 0x0
+DIFF_NONE          0614 beq 0x680                                          | 0614 beq 0x680
+DIFF_ARG_MISMATCH  0618 clrlwi. r0, r5, 31                                 | 0618 clrlwi. r0, r4, 31
+DIFF_NONE          061c beq 0x680                                          | 061c beq 0x680
+DIFF_NONE          0620 li r0, 0x0                                         | 0620 li r0, 0x0
+DIFF_ARG_MISMATCH  0624 cmplwi r25, 0x0                                    | 0624 cmplwi r27, 0x0
+DIFF_ARG_MISMATCH  0628 sth r0, 0x0(r28)                                   | 0628 sth r0, 0x0(r31)
+DIFF_NONE          062c beq 0x668                                          | 062c beq 0x668
+DIFF_ARG_MISMATCH  0630 mr r3, r25                                         | 0630 mr r3, r27
+DIFF_NONE          0634 bl fn_80201B64                                     | 0634 bl fn_80201B64
+DIFF_NONE          0638 cmpwi r3, 0x8                                      | 0638 cmpwi r3, 0x8
+DIFF_NONE          063c beq 0x668                                          | 063c beq 0x668
+DIFF_ARG_MISMATCH  0640 mr r3, r25                                         | 0640 mr r3, r27
+DIFF_NONE          0644 bl fn_80201B5C                                     | 0644 bl fn_80201B5C
+DIFF_NONE          0648 cmpwi r3, 0x15                                     | 0648 cmpwi r3, 0x15
+DIFF_NONE          064c beq 0x668                                          | 064c beq 0x668
+DIFF_ARG_MISMATCH  0650 mr r4, r27                                         | 0650 mr r4, r30
+DIFF_ARG_MISMATCH  0654 mr r5, r27                                         | 0654 mr r5, r30
+DIFF_NONE          0658 addi r6, r1, 0x10                                  | 0658 addi r6, r1, 0x10
+DIFF_NONE          065c li r3, 0xc4                                        | 065c li r3, 0xc4
+DIFF_NONE          0660 bl fn_8020123C                                     | 0660 bl fn_8020123C
+DIFF_NONE          0664 b 0x6dc                                            | 0664 b 0x6dc
+DIFF_ARG_MISMATCH  0668 mr r4, r27                                         | 0668 mr r4, r30
+DIFF_ARG_MISMATCH  066c mr r5, r27                                         | 066c mr r5, r30
+DIFF_NONE          0670 li r3, 0x39                                        | 0670 li r3, 0x39
+DIFF_NONE          0674 li r6, 0x0                                         | 0674 li r6, 0x0
+DIFF_NONE          0678 bl fn_8020123C                                     | 0678 bl fn_8020123C
+DIFF_NONE          067c b 0x6dc                                            | 067c b 0x6dc
+DIFF_ARG_MISMATCH  0680 lwz r3, 0xb8(r28)                                  | 0680 lwz r3, 0xb8(r31)
+DIFF_NONE          0684 bl fn_801D9FE4                                     | 0684 bl fn_801D9FE4
+DIFF_ARG_MISMATCH  0688 lha r0, 0x0(r28)                                   | 0688 lha r0, 0x0(r31)
+DIFF_NONE          068c clrlwi r18, r3, 24                                 | 068c clrlwi r18, r3, 24
+DIFF_NONE          0690 subf r0, r17, r0                                   | 0690 subf r0, r17, r0
+DIFF_ARG_MISMATCH  0694 sth r0, 0x0(r28)                                   | 0694 sth r0, 0x0(r31)
+DIFF_ARG_MISMATCH  0698 lwz r3, 0xb8(r28)                                  | 0698 lwz r3, 0xb8(r31)
+DIFF_ARG_MISMATCH  069c lha r4, 0x0(r28)                                   | 069c lha r4, 0x0(r31)
+DIFF_NONE          06a0 bl fn_801D9FE4                                     | 06a0 bl fn_801D9FE4
+DIFF_NONE          06a4 clrlwi r0, r3, 24                                  | 06a4 clrlwi r0, r3, 24
+DIFF_NONE          06a8 cmpw r0, r18                                       | 06a8 cmpw r0, r18
+DIFF_NONE          06ac bgt 0x6c4                                          | 06ac bgt 0x6c4
+DIFF_ARG_MISMATCH  06b0 lwz r4, 0xc0(r28)                                  | 06b0 lwz r4, 0xc0(r31)
+DIFF_NONE          06b4 subf r0, r0, r18                                   | 06b4 subf r0, r0, r18
+DIFF_NONE          06b8 lbz r3, 0x0(r4)                                    | 06b8 lbz r3, 0x0(r4)
+DIFF_NONE          06bc add r0, r3, r0                                     | 06bc add r0, r3, r0
+DIFF_NONE          06c0 stb r0, 0x0(r4)                                    | 06c0 stb r0, 0x0(r4)
+DIFF_NONE          06c4 lwz r3, 0x10(r1)                                   | 06c4 lwz r3, 0x10(r1)
+DIFF_NONE          06c8 lwz r0, 0x14(r1)                                   | 06c8 lwz r0, 0x14(r1)
+DIFF_ARG_MISMATCH  06cc stw r3, 0xc8(r28)                                  | 06cc stw r3, 0xc8(r31)
+DIFF_ARG_MISMATCH  06d0 stw r0, 0xcc(r28)                                  | 06d0 stw r0, 0xcc(r31)
+DIFF_NONE          06d4 lwz r0, 0x18(r1)                                   | 06d4 lwz r0, 0x18(r1)
+DIFF_ARG_MISMATCH  06d8 stw r0, 0xd0(r28)                                  | 06d8 stw r0, 0xd0(r31)
+DIFF_ARG_MISMATCH  06dc cmplwi r30, 0x0                                    | 06dc cmplwi r26, 0x0
+DIFF_NONE          06e0 beq 0x6ec                                          | 06e0 beq 0x6ec
+DIFF_NONE          06e4 lhz r0, 0xa(r1)                                    | 06e4 lhz r0, 0xa(r1)
+DIFF_ARG_MISMATCH  06e8 stw r0, 0x0(r30)                                   | 06e8 stw r0, 0x0(r26)
+DIFF_NONE          06ec li r3, 0x1                                         | 06ec li r3, 0x1
+DIFF_NONE          06f0 b 0x754                                            | 06f0 b 0x754
+DIFF_NONE          06f4 cmpwi r18, 0x5c                                    | 06f4 cmpwi r18, 0x5c
+DIFF_NONE          06f8 bne 0x750                                          | 06f8 bne 0x750
+DIFF_ARG_MISMATCH  06fc lwz r3, 0xb4(r28)                                  | 06fc lwz r3, 0xb4(r31)
+DIFF_NONE          0700 li r4, 0x0                                         | 0700 li r4, 0x0
+DIFF_NONE          0704 bl fn_801D16E4                                     | 0704 bl fn_801D16E4
+DIFF_NONE          0708 li r3, 0x1                                         | 0708 li r3, 0x1
+DIFF_NONE          070c b 0x754                                            | 070c b 0x754
+DIFF_NONE          0710 cmpwi r19, 0x1                                     | 0710 cmpwi r19, 0x1
+DIFF_NONE          0714 bne 0x748                                          | 0714 bne 0x748
+DIFF_NONE          0718 cmpwi r18, 0x1                                     | 0718 cmpwi r18, 0x1
+DIFF_NONE          071c bne 0x728                                          | 071c bne 0x728
+DIFF_NONE          0720 li r3, 0x1                                         | 0720 li r3, 0x1
+DIFF_NONE          0724 b 0x754                                            | 0724 b 0x754
+DIFF_NONE          0728 cmpwi r18, 0x3                                     | 0728 cmpwi r18, 0x3
+DIFF_NONE          072c bne 0x738                                          | 072c bne 0x738
+DIFF_NONE          0730 li r3, 0x1                                         | 0730 li r3, 0x1
+DIFF_NONE          0734 b 0x754                                            | 0734 b 0x754
+DIFF_NONE          0738 cmpwi r18, 0x2                                     | 0738 cmpwi r18, 0x2
+DIFF_NONE          073c bne 0x750                                          | 073c bne 0x750
+DIFF_NONE          0740 li r3, 0x1                                         | 0740 li r3, 0x1
+DIFF_NONE          0744 b 0x754                                            | 0744 b 0x754
+DIFF_NONE          0748 li r3, 0x0                                         | 0748 li r3, 0x0
+DIFF_NONE          074c b 0x754                                            | 074c b 0x754
+DIFF_NONE          0750 li r3, 0x0                                         | 0750 li r3, 0x0
+DIFF_NONE          0754 lmw r17, 0x34(r1)                                  | 0754 lmw r17, 0x34(r1)
+DIFF_NONE          0758 lwz r0, 0x74(r1)                                   | 0758 lwz r0, 0x74(r1)
+DIFF_NONE          075c mtlr r0                                            | 075c mtlr r0
+DIFF_NONE          0760 addi r1, r1, 0x70                                  | 0760 addi r1, r1, 0x70
+DIFF_NONE          0764 blr                                                | 0764 blr 
