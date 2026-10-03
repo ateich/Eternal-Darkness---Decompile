@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "assignment_id": "3193fa68-a4ca-4c48-bba2-6c063627d2ef",
+  "attempt": 1,
+  "target": "fn_8012EDB0",
+  "compiler": "GC/1.3",
+  "source_sha256": "fe136583776e2dfd677dd3c08b1835a4b4c275a978c761a2061dcc584908147f",
+  "candidate_object_sha256": "4fe5f7d02dbf7f6d1620419d4228b2fd4c6686ee2e684fddfe95a788523ad02e",
+  "retail_object_sha256": "dd252ae33d6b7432555ea550ed66d5bf609b4e64de65240a32ec56f389087af2",
+  "accepted_definition_verification": {
+    "caller": "The worktree fn_80066888 definition differs from the approved package snapshot only by the accepted prerequisite declaration change from void to s32 for fn_8012EDB0; arguments are identical and the return value remains ignored.",
+    "callees_and_siblings": "Worktree definitions for fn_8011F304, fn_8011F3B4, fn_8012CEA4, fn_8012CF08, fn_8012EF98, fn_8012F58C, fn_8012FDA0, fn_8017A244, fn_8017A5A8, fn_8017AD00, and fn_801F03F0 byte-match the approved package snapshots."
+  },
+  "canonical": {
+    "match_percent": 88.04918,
+    "retail_text_bytes": 488,
+    "candidate_text_bytes": 500,
+    "report": "eternal-darkness-decomp/reports/GEDE01/objdiff-3193fa68-a4ca-4c48-bba2-6c063627d2ef.json"
+  },
+  "relocation_strict": {
+    "setting": "function_reloc_diffs=name_address",
+    "match_percent": 88.04918,
+    "retail_relocations": 17,
+    "candidate_relocations": 19,
+    "report": "eternal-darkness-decomp/reports/GEDE01/objdiff-strict-3193fa68-a4ca-4c48-bba2-6c063627d2ef.json"
+  },
+  "divergence": "Candidate is 12 bytes larger. At retail offset 0x1c the compiler emits stmw r27,0xec(r1), while the candidate emits addi r11,r1,0x100 followed by a relocation-backed call to _savegpr_27; the symmetric retail lmw at 0x1f0 becomes a relocation-backed _restgpr_27 call. Candidate therefore has 19 relocations versus retail's 17. Register assignment, runtime-field address formation, and stack aggregate placement also diverge, as recorded in the instruction diff."
+}
