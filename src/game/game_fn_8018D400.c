@@ -1,3 +1,4 @@
+typedef struct Matrix44 Matrix44;
 typedef signed short s16;
 typedef unsigned char u8;
 typedef unsigned short u16;
@@ -12,7 +13,7 @@ typedef void (*Callback)(void*, float, float, float, float, float);
 extern u8 lbl_8063C068[];
 
 extern void fn_80179B08(void*, Vec3*);
-extern void fn_8017ACE0(void*, Vec3*, Vec3*);
+extern void fn_8017ACE0(const Matrix44*, const Vec3*, Vec3*);
 extern unsigned int fn_801F6D90(s16, s16, s16);
 
 void fn_8018D400(u8* self, void* context, Callback callback)
@@ -34,7 +35,7 @@ void fn_8018D400(u8* self, void* context, Callback callback)
     callback_context = context;
     draw = callback;
     fn_80179B08(coordinates, &input);
-    fn_8017ACE0(lbl_8063C068, &input, &output);
+    fn_8017ACE0((const Matrix44*)lbl_8063C068, &input, &output);
 
     half_width = *(u16*)(state + 0xDC) >> 1;
     half_height = *(u16*)(state + 0xDE) >> 1;

@@ -1,3 +1,4 @@
+typedef struct Matrix44 Matrix44;
 typedef signed char s8;
 typedef signed short s16;
 typedef signed int s32;
@@ -37,7 +38,7 @@ extern PointTable *fn_8015C390(s32 table_kind);
 extern unsigned int fn_800FBFB0(void);
 #define fn_800FBFB0() ((int)fn_800FBFB0())
 extern u32 fn_80178F14(s32 ax, s32 ay, s32 az, s32 bx, s32 by, s32 bz);
-extern void fn_8017ACE0(void *matrix, Vec3 *input, Vec3 *output);
+extern void fn_8017ACE0(const Matrix44*, const Vec3*, Vec3*);
 extern s32 fn_800AD2B4(void);
 extern void *fn_80201890(void);
 extern Vec3 *fn_8011F130(void *object);
@@ -169,7 +170,7 @@ s32 fn_8006D548(s32 table_kind, u32 mask, u32 mode, Vec3 *position,
             point.x = entry->x;
             point.y = entry->y;
             point.z = entry->z;
-            fn_8017ACE0(lbl_8063C068, &point, &projected);
+            fn_8017ACE0((const Matrix44*)lbl_8063C068, &point, &projected);
             if (projected.x > lbl_8064E7FC && projected.x < lbl_8064E800 &&
                 projected.y > lbl_8064E7FC && projected.y < lbl_8064E804) {
                 count = i;
@@ -195,7 +196,7 @@ s32 fn_8006D548(s32 table_kind, u32 mask, u32 mode, Vec3 *position,
                 point.x = entry->x;
                 point.y = entry->y;
                 point.z = entry->z;
-                fn_8017ACE0(lbl_8063C068, &point, &projected);
+                fn_8017ACE0((const Matrix44*)lbl_8063C068, &point, &projected);
                 if (projected.x > lbl_8064E7FC && projected.x < lbl_8064E800 &&
                     projected.y > lbl_8064E7FC && projected.y < lbl_8064E804) {
                     copy_point(entry, position, value, kind);

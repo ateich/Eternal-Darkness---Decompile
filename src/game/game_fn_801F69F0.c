@@ -48,7 +48,7 @@ void fn_801F69F0(const Int3* input, Vec3* output, int shift)
     normalized.y *= w;
     normalized.z *= w;
 
-    fn_8017ACE0(&lbl_8063C028, (Vec3*)&normalized, &transformed);
+    fn_8017ACE0(&lbl_8063C028, (const Vec3*)&normalized, &transformed);
     transformed.z = lbl_8063C028.m[3][2] * normalized.w;
     fn_8017ACE0(&lbl_8063C098, &transformed, output);
 }

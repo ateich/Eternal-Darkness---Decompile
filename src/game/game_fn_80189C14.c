@@ -1,3 +1,4 @@
+typedef struct Matrix44 Matrix44;
 typedef unsigned char u8;
 typedef unsigned short u16;
 typedef signed short s16;
@@ -15,7 +16,8 @@ extern int lbl_8064D738;
 extern RenderData lbl_80607120;
 extern u8 lbl_8063C098[];
 extern void fn_80188A7C(void*, void*, void*), fn_8018D020(void);
-extern void fn_8017ACE0(void*, Vec3*, Vec3*), DCFlushRange(void*, unsigned long);
+extern void fn_8017ACE0(const Matrix44*, const Vec3*, Vec3*);
+extern void DCFlushRange(void*, unsigned long);
 extern void fn_80188584(void*, void*), fn_8018D0D0(void*, void*, s16);
 extern int fn_801ED57C(int);
 extern void fn_801889D8(void*, void*, void*), fn_80226D78(int);
@@ -66,7 +68,7 @@ void fn_80189C14(unsigned long arg)
             input.x = (float)position[0];
             input.y = (float)position[1];
             input.z = (float)position[2];
-            fn_8017ACE0(lbl_8063C098, &input, &output);
+            fn_8017ACE0((const Matrix44*)lbl_8063C098, &input, &output);
             position[0] = (s16)output.x;
             position[1] = (s16)output.y;
             position[2] = (s16)output.z;
