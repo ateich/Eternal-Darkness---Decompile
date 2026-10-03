@@ -1,0 +1,47 @@
+command: python3 tools/fndiff.py game/game_fn_8012EB2C.c fn_8012EB2C
+exit_code: 0
+target 176 bytes  base 176 bytes  match 100.0
+  0x0000  stwu r1, -0x30(r1)                                   | stwu r1, -0x30(r1)
+  0x0004  mflr r0                                              | mflr r0
+  0x0008  stw r0, 0x34(r1)                                     | stw r0, 0x34(r1)
+  0x000c  stw r31, 0x2c(r1)                                    | stw r31, 0x2c(r1)
+  0x0010  stw r30, 0x28(r1)                                    | stw r30, 0x28(r1)
+  0x0014  stw r29, 0x24(r1)                                    | stw r29, 0x24(r1)
+  0x0018  mr r29, r3                                           | mr r29, r3
+  0x001c  lwz r0, 0x254(r3)                                    | lwz r0, 0x254(r3)
+  0x0020  rlwinm. r0, r0, 0, 29, 29                            | rlwinm. r0, r0, 0, 29, 29
+  0x0024  bne 0x90                                             | bne 0x90
+  0x0028  bl fn_8011F770 [None+0 t10]                          | bl fn_8011F770 [None+0 t10]
+  0x002c  mr r0, r3                                            | mr r0, r3
+  0x0030  mr r3, r29                                           | mr r3, r29
+  0x0034  mr r30, r0                                           | mr r30, r0
+  0x0038  addi r5, r1, 0x8                                     | addi r5, r1, 0x8
+  0x003c  mr r4, r30                                           | mr r4, r30
+  0x0040  bl fn_80211A48 [None+0 t10]                          | bl fn_80211A48 [None+0 t10]
+  0x0044  mr r3, r29                                           | mr r3, r29
+  0x0048  bl fn_8011F6F8 [None+0 t10]                          | bl fn_8011F6F8 [None+0 t10]
+  0x004c  fmr f2, f1                                           | fmr f2, f1
+  0x0050  lfs f1, lbl_806501DC@sda21 [None+0 t109]             | lfs f1, lbl_806501DC@sda21 [None+0 t109]
+  0x0054  lfs f3, lbl_80650200@sda21 [None+0 t109]             | lfs f3, lbl_80650200@sda21 [None+0 t109]
+  0x0058  addi r3, r1, 0x8                                     | addi r3, r1, 0x8
+  0x005c  lfs f4, lbl_80650204@sda21 [None+0 t109]             | lfs f4, lbl_80650204@sda21 [None+0 t109]
+  0x0060  addi r4, r29, 0xc                                    | addi r4, r29, 0xc
+  0x0064  bl fn_8017E4E4 [None+0 t10]                          | bl fn_8017E4E4 [None+0 t10]
+  0x0068  mr r31, r3                                           | mr r31, r3
+  0x006c  mr r4, r30                                           | mr r4, r30
+  0x0070  mr r5, r29                                           | mr r5, r29
+  0x0074  addi r3, r1, 0x8                                     | addi r3, r1, 0x8
+  0x0078  bl fn_80211A6C [None+0 t10]                          | bl fn_80211A6C [None+0 t10]
+  0x007c  clrlwi. r0, r31, 31                                  | clrlwi. r0, r31, 31
+  0x0080  beq 0x90                                             | beq 0x90
+  0x0084  lwz r0, 0x254(r29)                                   | lwz r0, 0x254(r29)
+  0x0088  ori r0, r0, 0x4                                      | ori r0, r0, 0x4
+  0x008c  stw r0, 0x254(r29)                                   | stw r0, 0x254(r29)
+  0x0090  lwz r0, 0x34(r1)                                     | lwz r0, 0x34(r1)
+  0x0094  li r3, 0x0                                           | li r3, 0x0
+  0x0098  lwz r31, 0x2c(r1)                                    | lwz r31, 0x2c(r1)
+  0x009c  lwz r30, 0x28(r1)                                    | lwz r30, 0x28(r1)
+  0x00a0  lwz r29, 0x24(r1)                                    | lwz r29, 0x24(r1)
+  0x00a4  mtlr r0                                              | mtlr r0
+  0x00a8  addi r1, r1, 0x30                                    | addi r1, r1, 0x30
+  0x00ac  blr                                                  | blr
