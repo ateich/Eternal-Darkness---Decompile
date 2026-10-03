@@ -1,0 +1,245 @@
+
+build/GEDE01/src/game/game_fn_80124A40.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <fn_80124A40>:
+   0:	94 21 ff a0 	stwu    r1,-96(r1)
+   4:	39 00 00 00 	li      r8,0
+   8:	be c1 00 38 	stmw    r22,56(r1)
+   c:	a1 84 00 0c 	lhz     r12,12(r4)
+  10:	81 44 00 50 	lwz     r10,80(r4)
+  14:	83 e4 00 dc 	lwz     r31,220(r4)
+  18:	2c 0c 00 00 	cmpwi   r12,0
+  1c:	91 45 00 00 	stw     r10,0(r5)
+  20:	80 04 00 34 	lwz     r0,52(r4)
+  24:	90 06 00 00 	stw     r0,0(r6)
+  28:	40 81 00 8c 	ble     b4 <fn_80124A40+0xb4>
+  2c:	2c 0c 00 08 	cmpwi   r12,8
+  30:	38 cc ff f8 	addi    r6,r12,-8
+  34:	40 81 00 50 	ble     84 <fn_80124A40+0x84>
+  38:	38 06 00 07 	addi    r0,r6,7
+  3c:	3c a0 00 00 	lis     r5,0
+			3e: R_PPC_ADDR16_HA	lbl_804FA6D0
+  40:	54 00 e8 fe 	srwi    r0,r0,3
+  44:	38 e5 00 00 	addi    r7,r5,0
+			46: R_PPC_ADDR16_LO	lbl_804FA6D0
+  48:	38 a0 00 00 	li      r5,0
+  4c:	7c 09 03 a6 	mtctr   r0
+  50:	2c 06 00 00 	cmpwi   r6,0
+  54:	40 81 00 30 	ble     84 <fn_80124A40+0x84>
+  58:	90 a7 00 00 	stw     r5,0(r7)
+  5c:	39 08 00 08 	addi    r8,r8,8
+  60:	90 a7 00 04 	stw     r5,4(r7)
+  64:	90 a7 00 08 	stw     r5,8(r7)
+  68:	90 a7 00 0c 	stw     r5,12(r7)
+  6c:	90 a7 00 10 	stw     r5,16(r7)
+  70:	90 a7 00 14 	stw     r5,20(r7)
+  74:	90 a7 00 18 	stw     r5,24(r7)
+  78:	90 a7 00 1c 	stw     r5,28(r7)
+  7c:	38 e7 00 20 	addi    r7,r7,32
+  80:	42 00 ff d8 	bdnz    58 <fn_80124A40+0x58>
+  84:	3c a0 00 00 	lis     r5,0
+			86: R_PPC_ADDR16_HA	lbl_804FA6D0
+  88:	55 06 10 3a 	slwi    r6,r8,2
+  8c:	38 a5 00 00 	addi    r5,r5,0
+			8e: R_PPC_ADDR16_LO	lbl_804FA6D0
+  90:	7c 08 60 50 	subf    r0,r8,r12
+  94:	7c c5 32 14 	add     r6,r5,r6
+  98:	38 a0 00 00 	li      r5,0
+  9c:	7c 09 03 a6 	mtctr   r0
+  a0:	7c 08 60 00 	cmpw    r8,r12
+  a4:	40 80 00 10 	bge     b4 <fn_80124A40+0xb4>
+  a8:	90 a6 00 00 	stw     r5,0(r6)
+  ac:	38 c6 00 04 	addi    r6,r6,4
+  b0:	42 00 ff f8 	bdnz    a8 <fn_80124A40+0xa8>
+  b4:	3c a0 00 00 	lis     r5,0
+			b6: R_PPC_ADDR16_HA	lbl_804FA6D0
+  b8:	39 60 00 00 	li      r11,0
+  bc:	39 25 00 00 	addi    r9,r5,0
+			be: R_PPC_ADDR16_LO	lbl_804FA6D0
+  c0:	7c 68 1b 78 	mr      r8,r3
+  c4:	7d 67 5b 78 	mr      r7,r11
+  c8:	48 00 02 a8 	b       370 <fn_80124A40+0x370>
+  cc:	80 a4 00 28 	lwz     r5,40(r4)
+  d0:	80 03 02 c4 	lwz     r0,708(r3)
+  d4:	7f c5 3a 14 	add     r30,r5,r7
+  d8:	28 00 00 00 	cmplwi  r0,0
+  dc:	a3 1e 00 0a 	lhz     r24,10(r30)
+  e0:	a0 1e 00 08 	lhz     r0,8(r30)
+  e4:	3b 9e 00 14 	addi    r28,r30,20
+  e8:	7f b8 02 14 	add     r29,r24,r0
+  ec:	41 82 02 74 	beq     360 <fn_80124A40+0x360>
+  f0:	a0 08 01 80 	lhz     r0,384(r8)
+  f4:	54 00 07 ff 	clrlwi. r0,r0,31
+  f8:	41 82 02 68 	beq     360 <fn_80124A40+0x360>
+  fc:	7c 18 e8 40 	cmplw   r24,r29
+ 100:	7f 1b c3 78 	mr      r27,r24
+ 104:	40 80 01 14 	bge     218 <fn_80124A40+0x218>
+ 108:	7c 18 e8 50 	subf    r0,r24,r29
+ 10c:	3a dd ff f8 	addi    r22,r29,-8
+ 110:	28 00 00 08 	cmplwi  r0,8
+ 114:	40 81 00 c0 	ble     1d4 <fn_80124A40+0x1d4>
+ 118:	1e f8 00 06 	mulli   r23,r24,6
+ 11c:	38 16 00 07 	addi    r0,r22,7
+ 120:	3c a0 00 00 	lis     r5,0
+			122: R_PPC_ADDR16_HA	lbl_804FA740
+ 124:	7c 18 00 50 	subf    r0,r24,r0
+ 128:	38 c5 00 00 	addi    r6,r5,0
+			12a: R_PPC_ADDR16_LO	lbl_804FA740
+ 12c:	54 00 e8 fe 	srwi    r0,r0,3
+ 130:	7c aa ba 14 	add     r5,r10,r23
+ 134:	7c c6 ba 14 	add     r6,r6,r23
+ 138:	7c 09 03 a6 	mtctr   r0
+ 13c:	7c 18 b0 40 	cmplw   r24,r22
+ 140:	40 80 00 94 	bge     1d4 <fn_80124A40+0x1d4>
+ 144:	80 05 00 00 	lwz     r0,0(r5)
+ 148:	3b 7b 00 08 	addi    r27,r27,8
+ 14c:	90 06 00 00 	stw     r0,0(r6)
+ 150:	a0 05 00 04 	lhz     r0,4(r5)
+ 154:	b0 06 00 04 	sth     r0,4(r6)
+ 158:	80 05 00 06 	lwz     r0,6(r5)
+ 15c:	90 06 00 06 	stw     r0,6(r6)
+ 160:	a0 05 00 0a 	lhz     r0,10(r5)
+ 164:	b0 06 00 0a 	sth     r0,10(r6)
+ 168:	80 05 00 0c 	lwz     r0,12(r5)
+ 16c:	90 06 00 0c 	stw     r0,12(r6)
+ 170:	a0 05 00 10 	lhz     r0,16(r5)
+ 174:	b0 06 00 10 	sth     r0,16(r6)
+ 178:	80 05 00 12 	lwz     r0,18(r5)
+ 17c:	90 06 00 12 	stw     r0,18(r6)
+ 180:	a0 05 00 16 	lhz     r0,22(r5)
+ 184:	b0 06 00 16 	sth     r0,22(r6)
+ 188:	80 05 00 18 	lwz     r0,24(r5)
+ 18c:	90 06 00 18 	stw     r0,24(r6)
+ 190:	a0 05 00 1c 	lhz     r0,28(r5)
+ 194:	b0 06 00 1c 	sth     r0,28(r6)
+ 198:	80 05 00 1e 	lwz     r0,30(r5)
+ 19c:	90 06 00 1e 	stw     r0,30(r6)
+ 1a0:	a0 05 00 22 	lhz     r0,34(r5)
+ 1a4:	b0 06 00 22 	sth     r0,34(r6)
+ 1a8:	80 05 00 24 	lwz     r0,36(r5)
+ 1ac:	90 06 00 24 	stw     r0,36(r6)
+ 1b0:	a0 05 00 28 	lhz     r0,40(r5)
+ 1b4:	b0 06 00 28 	sth     r0,40(r6)
+ 1b8:	80 05 00 2a 	lwz     r0,42(r5)
+ 1bc:	90 06 00 2a 	stw     r0,42(r6)
+ 1c0:	a0 05 00 2e 	lhz     r0,46(r5)
+ 1c4:	38 a5 00 30 	addi    r5,r5,48
+ 1c8:	b0 06 00 2e 	sth     r0,46(r6)
+ 1cc:	38 c6 00 30 	addi    r6,r6,48
+ 1d0:	42 00 ff 74 	bdnz    144 <fn_80124A40+0x144>
+ 1d4:	1e db 00 06 	mulli   r22,r27,6
+ 1d8:	3c a0 00 00 	lis     r5,0
+			1da: R_PPC_ADDR16_HA	lbl_804FA740
+ 1dc:	7c 1b e8 50 	subf    r0,r27,r29
+ 1e0:	38 a5 00 00 	addi    r5,r5,0
+			1e2: R_PPC_ADDR16_LO	lbl_804FA740
+ 1e4:	7c ca b2 14 	add     r6,r10,r22
+ 1e8:	7c a5 b2 14 	add     r5,r5,r22
+ 1ec:	7c 09 03 a6 	mtctr   r0
+ 1f0:	7c 1b e8 40 	cmplw   r27,r29
+ 1f4:	40 80 00 24 	bge     218 <fn_80124A40+0x218>
+ 1f8:	80 06 00 00 	lwz     r0,0(r6)
+ 1fc:	3b 7b 00 01 	addi    r27,r27,1
+ 200:	90 05 00 00 	stw     r0,0(r5)
+ 204:	a0 06 00 04 	lhz     r0,4(r6)
+ 208:	38 c6 00 06 	addi    r6,r6,6
+ 20c:	b0 05 00 04 	sth     r0,4(r5)
+ 210:	38 a5 00 06 	addi    r5,r5,6
+ 214:	42 00 ff e4 	bdnz    1f8 <fn_80124A40+0x1f8>
+ 218:	3b a0 00 00 	li      r29,0
+ 21c:	3b 60 00 00 	li      r27,0
+ 220:	80 03 02 9c 	lwz     r0,668(r3)
+ 224:	7f 40 da 14 	add     r26,r0,r27
+ 228:	80 1a 00 24 	lwz     r0,36(r26)
+ 22c:	54 00 07 ff 	clrlwi. r0,r0,31
+ 230:	41 82 01 1c 	beq     34c <fn_80124A40+0x34c>
+ 234:	80 bc 00 00 	lwz     r5,0(r28)
+ 238:	3c 05 00 01 	addis   r0,r5,1
+ 23c:	28 00 ff ff 	cmplwi  r0,65535
+ 240:	41 82 01 0c 	beq     34c <fn_80124A40+0x34c>
+ 244:	38 00 00 01 	li      r0,1
+ 248:	90 09 00 00 	stw     r0,0(r9)
+ 24c:	80 bc 00 00 	lwz     r5,0(r28)
+ 250:	83 3c 00 04 	lwz     r25,4(r28)
+ 254:	7c 05 ca 14 	add     r0,r5,r25
+ 258:	7c 05 00 40 	cmplw   r5,r0
+ 25c:	40 80 00 f0 	bge     34c <fn_80124A40+0x34c>
+ 260:	1c c5 00 0c 	mulli   r6,r5,12
+ 264:	3c a0 00 00 	lis     r5,0
+			266: R_PPC_ADDR16_HA	lbl_804FA740
+ 268:	c8 40 00 00 	lfd     f2,0(0)
+			268: R_PPC_EMB_SDA21	@67
+ 26c:	3c 00 43 30 	lis     r0,17200
+ 270:	38 a5 00 00 	addi    r5,r5,0
+			272: R_PPC_ADDR16_LO	lbl_804FA740
+ 274:	7c df 32 14 	add     r6,r31,r6
+ 278:	7f 29 03 a6 	mtctr   r25
+ 27c:	28 19 00 00 	cmplwi  r25,0
+ 280:	41 82 00 cc 	beq     34c <fn_80124A40+0x34c>
+ 284:	aa c6 00 04 	lha     r22,4(r6)
+ 288:	3b 39 ff ff 	addi    r25,r25,-1
+ 28c:	90 01 00 08 	stw     r0,8(r1)
+ 290:	6e d6 80 00 	xoris   r22,r22,32768
+ 294:	c0 3a 00 00 	lfs     f1,0(r26)
+ 298:	92 c1 00 0c 	stw     r22,12(r1)
+ 29c:	a2 fe 00 0a 	lhz     r23,10(r30)
+ 2a0:	c8 01 00 08 	lfd     f0,8(r1)
+ 2a4:	82 c6 00 00 	lwz     r22,0(r6)
+ 2a8:	ec 00 10 28 	fsubs   f0,f0,f2
+ 2ac:	90 01 00 18 	stw     r0,24(r1)
+ 2b0:	7e d7 b2 14 	add     r22,r23,r22
+ 2b4:	1e d6 00 06 	mulli   r22,r22,6
+ 2b8:	90 01 00 28 	stw     r0,40(r1)
+ 2bc:	ec 01 00 32 	fmuls   f0,f1,f0
+ 2c0:	7f 05 b2 14 	add     r24,r5,r22
+ 2c4:	fc 00 00 1e 	fctiwz  f0,f0
+ 2c8:	aa f8 00 00 	lha     r23,0(r24)
+ 2cc:	d8 01 00 10 	stfd    f0,16(r1)
+ 2d0:	82 c1 00 14 	lwz     r22,20(r1)
+ 2d4:	7e d7 b2 14 	add     r22,r23,r22
+ 2d8:	b2 d8 00 00 	sth     r22,0(r24)
+ 2dc:	aa c6 00 06 	lha     r22,6(r6)
+ 2e0:	c0 3a 00 00 	lfs     f1,0(r26)
+ 2e4:	6e d6 80 00 	xoris   r22,r22,32768
+ 2e8:	aa f8 00 02 	lha     r23,2(r24)
+ 2ec:	92 c1 00 1c 	stw     r22,28(r1)
+ 2f0:	c8 01 00 18 	lfd     f0,24(r1)
+ 2f4:	ec 00 10 28 	fsubs   f0,f0,f2
+ 2f8:	ec 01 00 32 	fmuls   f0,f1,f0
+ 2fc:	fc 00 00 1e 	fctiwz  f0,f0
+ 300:	d8 01 00 20 	stfd    f0,32(r1)
+ 304:	82 c1 00 24 	lwz     r22,36(r1)
+ 308:	7e d7 b2 14 	add     r22,r23,r22
+ 30c:	b2 d8 00 02 	sth     r22,2(r24)
+ 310:	aa e6 00 08 	lha     r23,8(r6)
+ 314:	38 c6 00 0c 	addi    r6,r6,12
+ 318:	c0 3a 00 00 	lfs     f1,0(r26)
+ 31c:	6e f7 80 00 	xoris   r23,r23,32768
+ 320:	aa d8 00 04 	lha     r22,4(r24)
+ 324:	92 e1 00 2c 	stw     r23,44(r1)
+ 328:	c8 01 00 28 	lfd     f0,40(r1)
+ 32c:	ec 00 10 28 	fsubs   f0,f0,f2
+ 330:	ec 01 00 32 	fmuls   f0,f1,f0
+ 334:	fc 00 00 1e 	fctiwz  f0,f0
+ 338:	d8 01 00 30 	stfd    f0,48(r1)
+ 33c:	82 e1 00 34 	lwz     r23,52(r1)
+ 340:	7e f6 ba 14 	add     r23,r22,r23
+ 344:	b2 f8 00 04 	sth     r23,4(r24)
+ 348:	42 00 ff 3c 	bdnz    284 <fn_80124A40+0x284>
+ 34c:	3b bd 00 01 	addi    r29,r29,1
+ 350:	3b 9c 00 08 	addi    r28,r28,8
+ 354:	2c 1d 00 20 	cmpwi   r29,32
+ 358:	3b 7b 00 28 	addi    r27,r27,40
+ 35c:	41 80 fe c4 	blt     220 <fn_80124A40+0x220>
+ 360:	38 e7 01 14 	addi    r7,r7,276
+ 364:	39 08 00 08 	addi    r8,r8,8
+ 368:	39 29 00 04 	addi    r9,r9,4
+ 36c:	39 6b 00 01 	addi    r11,r11,1
+ 370:	7c 0b 60 00 	cmpw    r11,r12
+ 374:	41 80 fd 58 	blt     cc <fn_80124A40+0xcc>
+ 378:	ba c1 00 38 	lmw     r22,56(r1)
+ 37c:	38 21 00 60 	addi    r1,r1,96
+ 380:	4e 80 00 20 	blr

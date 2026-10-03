@@ -94,16 +94,22 @@ void fn_80124A40(Owner* owner, Table* table, u32* first_output,
             do {
                 Weight* weight = (Weight*)((u8*)owner->weights + weight_offset);
                 u32 delta_index;
+                u32 delta_count;
 
                 if ((weight->flags & 1) != 0 && pair->start != 0xFFFFFFFF) {
                     lbl_804FA6D0[entry_index] = 1;
-                    for (delta_index = pair->start;
-                         delta_index < pair->start + pair->count; delta_index++) {
-                        Delta* delta = &deltas[delta_index];
-                        Vertex* vertex = &lbl_804FA740[entry->start + delta->index];
-                        vertex->x += (s32)(weight->value * delta->x);
-                        vertex->y += (s32)(weight->value * delta->y);
-                        vertex->z += (s32)(weight->value * delta->z);
+                    delta_index = pair->start;
+                    delta_count = pair->count;
+                    if (delta_index < (u32)(delta_index + delta_count)) {
+                        for (; delta_count != 0;
+                             delta_count--, delta_index++) {
+                            Delta* delta = &deltas[delta_index];
+                            Vertex* vertex =
+                                &lbl_804FA740[entry->start + delta->index];
+                            vertex->x += (s32)(weight->value * delta->x);
+                            vertex->y += (s32)(weight->value * delta->y);
+                            vertex->z += (s32)(weight->value * delta->z);
+                        }
                     }
                 }
                 weight_offset += sizeof(Weight);

@@ -1,0 +1,20 @@
+COMMAND: python3 configure.py --non-matching --no-progress
+RESULT: exit 0
+
+COMMAND: .tools/bin/ninja -t clean build/GEDE01/src/game/game_fn_80124A40.o
+RESULT: exit 0
+Cleaning... 2 files.
+
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80124A40.o
+RESULT: exit 0
+[1/2] "/usr/bin/python3" tools/download_tool.py sjiswrap build/tools/sjiswrap.exe --tag v1.2.2
+[2/2] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80124A40.c -o build/GEDE01/src/game
+
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80124A40 fn_80124A40 -o reports/GEDE01/objdiff-bed59af0-8ce7-47d3-8ad5-ee90b1c3c7f8.json --format json-pretty
+RESULT: exit 0
+
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80124A40 fn_80124A40 -o reports/GEDE01/objdiff-strict-bed59af0-8ce7-47d3-8ad5-ee90b1c3c7f8.json --format json-pretty -c function_reloc_diffs=name_address
+RESULT: exit 0
+
+MEASUREMENT: canonical match_percent 89.30493; relocation-strict match_percent 89.30493; retail .text size 892 bytes; generated .text size 900 bytes.
+SEMANTICS: the inner traversal is entered only when pair->start < (u32)(pair->start + pair->count), preserving retail's unsigned-overflow guard, then executes exactly pair->count iterations.

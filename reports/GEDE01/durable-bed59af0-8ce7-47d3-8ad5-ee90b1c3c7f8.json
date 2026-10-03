@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "assignment_id": "bed59af0-8ce7-47d3-8ad5-ee90b1c3c7f8",
+  "attempt": 5,
+  "base_commit": "898bdfc64085f4e2fc3d3c6e47fbff6f5a8a5be9",
+  "target": "fn_80124A40",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/build-bed59af0-8ce7-47d3-8ad5-ee90b1c3c7f8.txt",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-bed59af0-8ce7-47d3-8ad5-ee90b1c3c7f8.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-strict-bed59af0-8ce7-47d3-8ad5-ee90b1c3c7f8.json",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-bed59af0-8ce7-47d3-8ad5-ee90b1c3c7f8.txt",
+    "eternal-darkness-decomp/reports/GEDE01/retail-objdump-bed59af0-8ce7-47d3-8ad5-ee90b1c3c7f8.txt",
+    "eternal-darkness-decomp/reports/GEDE01/generated-objdump-bed59af0-8ce7-47d3-8ad5-ee90b1c3c7f8.txt",
+    "eternal-darkness-decomp/reports/GEDE01/retail-relocations-bed59af0-8ce7-47d3-8ad5-ee90b1c3c7f8.txt",
+    "eternal-darkness-decomp/reports/GEDE01/generated-relocations-bed59af0-8ce7-47d3-8ad5-ee90b1c3c7f8.txt"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 89.30493%; retail .text is 892 bytes and generated .text is 900 bytes. The generated guarded counted loop preserves retail's wrapped unsigned entry condition and restores mtctr/bdnz traversal, but emits a count-zero guard and per-iteration count decrement instead of retail's indexed end compare, with consequent register-allocation and scheduling differences. The generated SDA21 relocation is at 0x268 targeting local @67, versus retail at 0x250 targeting lbl_80650108; the other lbl_804FA740 relocation offsets also differ."
+}
