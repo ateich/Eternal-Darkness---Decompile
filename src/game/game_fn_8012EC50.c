@@ -62,10 +62,9 @@ extern float fn_8017A5A8(const Vec4*, const Vec4*, float);
 extern void fn_8017A7D4(const Vec4*, const Vec4*, float, Vec4*);
 extern void fn_8012CDF0(u8*, int, FourWords, int);
 
-int fn_8012EC50(void* object_ptr, int index, Vec3* target, int query_key,
+int fn_8012EC50(void* object, int index, Vec3* target, int query_key,
                 float blend_limit, float query_limit)
 {
-    Object* object = (Object*)object_ptr;
     QueryResult first;
     QueryResult second;
     Vec4 desired;
@@ -74,11 +73,11 @@ int fn_8012EC50(void* object_ptr, int index, Vec3* target, int query_key,
     Entry* entry;
 
     fn_80125ECC(object);
-    entry = object->entries[index];
+    entry = ((Object*)object)->entries[index];
     if (entry != 0) {
         float amount;
 
-        object->records[entry->record->record_index].value = 0;
+        ((Object*)object)->records[entry->record->record_index].value = 0;
         fn_8011F6A4(object, query_key, index, -1, &first, 1);
         fn_8011F6A4(object, query_key, index, -1, &second, 4);
         if (fn_8012EF98(object, index, &first, &second, target, &desired,
