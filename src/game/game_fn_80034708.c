@@ -482,8 +482,8 @@ s32 fn_80034708(void *arg0) {
                 var_r30 = fn_800CF3D4(arg0, -1, 0, M2C_FIELD(arg0, s32 *, 0x2C));
                 break;
             case 15:                                /* switch 4 */
-                temp_r0_2 = M2C_FIELD(arg0, s32 *, 0x28);
                 var_r30 = fn_80033D5C(&lbl_8064B400, &lbl_80303BC0, arg0);
+                temp_r0_2 = M2C_FIELD(arg0, s32 *, 0x28);
                 switch (temp_r0_2) {                /* switch 5; irregular */
                 case 0x50:                          /* switch 5 */
                 case 0x39:                          /* switch 5 */
