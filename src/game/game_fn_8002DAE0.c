@@ -246,12 +246,11 @@ s32 fn_8002DAE0(void* callback, s32 phase_arg, void* event_arg, s32* output)
                             s32 mask = fn_8006749C(4);
                             s16 rank = fn_801CEB2C(state->stats);
                             u8 level = (u8)((rank >> 1) + 1);
-                            float scale;
-                            scale = lbl_8064E0B0 - lbl_8064E0AC *
-                                (float)(level - 2);
                             fn_80120AD0(effect, 0, 100,
                                         (u16)(mask | 2),
-                                        lbl_8064E064, scale);
+                                        lbl_8064E064,
+                                        lbl_8064E0B0 - lbl_8064E0AC *
+                                            (float)(level - 2));
                         }
                     }
                 }

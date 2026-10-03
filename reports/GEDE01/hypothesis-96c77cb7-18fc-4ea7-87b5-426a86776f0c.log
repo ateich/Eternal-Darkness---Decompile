@@ -1,0 +1,41 @@
+Target: fn_8002DAE0
+Assignment: 96c77cb7-18fc-4ea7-87b5-426a86776f0c, attempt 4
+
+Different hypothesis tested
+---------------------------
+The preserved reconstruction computes the final scale argument in a named float
+temporary before calling fn_80120AD0.  Retail instead interleaves preparation of
+the integer mask argument, the signed-rank-to-double conversion, and three float
+constant loads at offsets 0x474-0x4c4.  This suggested that the original source
+may have written the scale calculation directly as the sixth call argument,
+allowing MWCC's call-argument scheduler to order those operations differently.
+
+The named scale temporary was removed and the same expression was written
+directly as fn_80120AD0's sixth argument.  No compiler flags, ABI declarations,
+control flow, or neighboring functions were changed.  The canonical assigned
+object was regenerated through configure.py and Ninja.
+
+Measured result
+---------------
+The direct-expression form still produces an equal-size 1896-byte function and
+canonical and relocation-strict scores of 97.49789%.  It remains an honest C
+NonMatching reconstruction and is retained as the sole candidate source.
+
+Remaining divergence
+--------------------
+The instruction diff contains 120 differing rows, predominantly the same
+long-lived register-coloring differences: retail/generated output r30/r31,
+state r28/r30, object_id r27/r29, is_type_8 r31/r28, and target_state r29/r25.
+The conversion/call preparation near 0x474-0x4c4 also remains scheduled
+differently.  Both objects contain 81 relocations.  Seventy-eight relocation
+sites agree; the three late float constants occur at retail offsets
+0x498/0x4a0/0x4ac and reconstructed offsets 0x4a0/0x4ac/0x4bc.
+
+Evidence
+--------
+configure-96c77cb7-18fc-4ea7-87b5-426a86776f0c.log records canonical configure.
+build-96c77cb7-18fc-4ea7-87b5-426a86776f0c.log records the assigned-object build.
+objdiff-96c77cb7-18fc-4ea7-87b5-426a86776f0c.json records canonical comparison.
+objdiff-reloc-strict-96c77cb7-18fc-4ea7-87b5-426a86776f0c.json records strict comparison.
+instruction-diff-96c77cb7-18fc-4ea7-87b5-426a86776f0c.log records every instruction row.
+relocations-96c77cb7-18fc-4ea7-87b5-426a86776f0c.log records both raw relocation tables.
