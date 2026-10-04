@@ -1,0 +1,33 @@
+Bounded retry experiments for fn_80131E8C (canonical MWCC GC/1.3 settings)
+
+Accepted control recovered in the current base from preserved commit
+64f41e715f936cc57936962cf46984d1038c9d83:
+  2312 bytes, 578 instructions, 99.9654%, all 44 ELF relocations equal.
+
+The preserved experiment report already covered declaration initializers,
+direct assignment to third, nested third_temp lifetime, a named index in both
+surrounding and nested scopes, and declaration-order variations. This retry
+therefore tested only previously unrecorded lawful expression/lifetime forms:
+
+1. Pointer arithmetic for the record lookup:
+     (runtime->records + color_record_index)->mesh
+   Result: 2312 bytes, 99.9654%; identical four r0/r8 differences.
+
+2. An explicit RuntimeRecord pointer scoped around the lookup.
+   Result: 2312 bytes, 99.9654%; identical four r0/r8 differences.
+
+3. Split declaration/assignment for third_temp while retaining the nested
+   index scope.
+   Result: 2312 bytes, 99.9654%; identical four r0/r8 differences.
+
+4. Comma-sequenced third_temp assignment and mesh lookup, both as the right
+   side of color_mesh assignment and inside the record subscript.
+   Result: 2312 bytes, 99.9654%; identical four r0/r8 differences.
+
+5. A typed Color pointer to lbl_8065023C followed by a whole-Color load.
+   Result: 2312 bytes, 99.9654%; identical four r0/r8 differences.
+
+All trials preserved color-load-before-index-table access, the declared data
+types, call behavior, and complete function semantics. No volatile/restrict,
+assembly, pragma, attribute, compiler flag, mapping, or shared-header change
+was used. The cleaner accepted source was restored after the trials.

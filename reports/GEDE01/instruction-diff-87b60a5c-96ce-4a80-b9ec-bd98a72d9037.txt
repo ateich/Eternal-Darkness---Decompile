@@ -1,0 +1,15 @@
+fn_80131E8C direct canonical and relocation-strict instruction comparison
+
+retail size:       2312 bytes (578 instructions)
+candidate size:    2312 bytes (578 instructions)
+objdiff match:     99.9654%
+differing words:   4
+
+offset  retail                                  candidate
+0x540   lwz r0, lbl_8065023C@sda21             lwz r8, lbl_8065023C@sda21
+0x548   lwz r8, 0x70(r26)                      lwz r0, 0x70(r26)
+0x550   stw r0, 0x8(r1)                        stw r8, 0x8(r1)
+0x558   lwzx r3, r30, r8                       lwzx r3, r30, r0
+
+All other instruction rows compare equal. The relocation at 0x540 has the
+same R_PPC_EMB_SDA21 target lbl_8065023C and addend 0 on both sides.
