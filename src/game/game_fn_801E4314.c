@@ -5,7 +5,6 @@ typedef struct Color {
     u32 value;
 } Color;
 
-extern float lbl_80651278;
 extern Color lbl_80651270;
 extern Color lbl_80651274;
 extern int lbl_8064D570;
@@ -23,40 +22,43 @@ extern void fn_801E4188(void);
 extern void fn_801E46E8(s16, s16);
 extern void fn_801E46F8(int);
 
-/* NonMatching: all sixteen panel vertices, with raw 32-bit depth used for
- * negative extents and signed-16-bit depth for texture/positive extents.
- * Separate float-to-int and float-to-short casts score 89.195915% under the
- * canonical GC/1.3 settings. They share fctiwz but retain a second stfd/lwz,
- * producing 988 bytes versus retail's 980. Initial scheduling and saved
- * geometry/texture registers also differ; see assignment a5338a5a reports. */
-void fn_801E4314(int x, int y, int width, int height, float scale, int dark)
+static inline void draw_vertex(s16 x, s16 y, s16 u, s16 v)
 {
-    float scaled_depth = lbl_80651278 * scale;
+    fn_801E4198(x, y, -1);
+    fn_801E46F8(0);
+    fn_801E46E8(u, v);
+}
+
+void fn_801E4314(int x, int y, int width, s16 height, float scale, int dark)
+{
+    float scaled_depth = 8.0f * scale;
     s16 sx = x;
+    int sy = (s16)y;
     s16 sw = width;
-    s16 sy = y;
-    s16 sh = height;
-    s16 cx = sx + (sw >> 1);
-    s16 cy = sy + (sh >> 1);
-    int raw_depth = (int)scaled_depth;
-    s16 depth;
     s16 left;
     s16 top;
     s16 right;
     s16 bottom;
+    s16 cx;
+    s16 cy;
+    int raw_depth;
+    s16 depth;
     Color color;
     Color dark_color;
     Color light_color;
     Color* color_copy;
-    int top_y;
-    int left_x;
+    s16 left_x;
+    s16 top_y;
     s16 right_x;
     s16 bottom_y;
 
-    depth = scaled_depth;
+    cx = (sw >> 1) + sx;
+    cy = (height >> 1) + sy;
+    raw_depth = (int)scaled_depth;
+    depth = raw_depth;
     left = ((sw >> 1) + depth) * 512 / 17;
-    top = ((sh >> 1) + depth) * 512 / 17;
-    right = (17 - ((sh >> 1) + depth)) * 512 / 17;
+    top = ((height >> 1) + depth) * 512 / 17;
+    right = (17 - ((height >> 1) + depth)) * 512 / 17;
     bottom = (17 - ((sw >> 1) + depth)) * 512 / 17;
 
     if (dark) {
@@ -67,8 +69,8 @@ void fn_801E4314(int x, int y, int width, int height, float scale, int dark)
         color_copy = &light_color;
     }
     color = *color_copy;
-    top_y = y - raw_depth;
-    left_x = x - raw_depth;
+    y -= raw_depth;
+    x -= raw_depth;
 
     fn_801ECF50(9);
     fn_801ED3F4(lbl_8064D570);
@@ -77,27 +79,27 @@ void fn_801E4314(int x, int y, int width, int height, float scale, int dark)
     lbl_8064C320 = -1;
     fn_80226AB4(0x80, 5, 0x10);
 
-    left_x = (s16)left_x;
-    fn_801E4198(left_x, cy, -1); fn_801E46F8(0); fn_801E46E8(30, right);
-    top_y = (s16)top_y;
-    fn_801E4198(left_x, top_y, -1); fn_801E46F8(0); fn_801E46E8(30, 481);
-    fn_801E4198(cx, top_y, -1); fn_801E46F8(0); fn_801E46E8(left, 481);
-    fn_801E4198(cx, cy, -1); fn_801E46F8(0); fn_801E46E8(left, right);
-    fn_801E4198(cx, cy, -1); fn_801E46F8(0); fn_801E46E8(top, bottom);
-    fn_801E4198(cx, top_y, -1); fn_801E46F8(0); fn_801E46E8(30, bottom);
+    left_x = x;
+    draw_vertex(left_x, cy, 30, right);
+    top_y = y;
+    draw_vertex(left_x, top_y, 30, 481);
+    draw_vertex(cx, top_y, left, 481);
+    draw_vertex(cx, cy, left, right);
+    draw_vertex(cx, cy, top, bottom);
+    draw_vertex(cx, top_y, 30, bottom);
 
     right_x = sx + depth + sw;
-    fn_801E4198(right_x, top_y, -1); fn_801E46F8(0); fn_801E46E8(30, 481);
-    fn_801E4198(right_x, cy, -1); fn_801E46F8(0); fn_801E46E8(top, 481);
-    bottom_y = sy + depth + sh;
-    fn_801E4198(cx, bottom_y, -1); fn_801E46F8(0); fn_801E46E8(left, 481);
-    fn_801E4198(cx, cy, -1); fn_801E46F8(0); fn_801E46E8(left, right);
-    fn_801E4198(right_x, cy, -1); fn_801E46F8(0); fn_801E46E8(30, right);
-    fn_801E4198(right_x, bottom_y, -1); fn_801E46F8(0); fn_801E46E8(30, 481);
-    fn_801E4198(left_x, bottom_y, -1); fn_801E46F8(0); fn_801E46E8(30, 481);
-    fn_801E4198(left_x, cy, -1); fn_801E46F8(0); fn_801E46E8(top, 481);
-    fn_801E4198(cx, cy, -1); fn_801E46F8(0); fn_801E46E8(top, bottom);
-    fn_801E4198(cx, bottom_y, -1); fn_801E46F8(0); fn_801E46E8(30, bottom);
+    draw_vertex(right_x, top_y, 30, 481);
+    draw_vertex(right_x, cy, top, 481);
+    bottom_y = sy + depth + height;
+    draw_vertex(cx, bottom_y, left, 481);
+    draw_vertex(cx, cy, left, right);
+    draw_vertex(right_x, cy, 30, right);
+    draw_vertex(right_x, bottom_y, 30, 481);
+    draw_vertex(left_x, bottom_y, 30, 481);
+    draw_vertex(left_x, cy, top, 481);
+    draw_vertex(cx, cy, top, bottom);
+    draw_vertex(cx, bottom_y, 30, bottom);
 
     fn_801E4188();
     fn_801ED3F4(lbl_806333C8[lbl_8064D580]);

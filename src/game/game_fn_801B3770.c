@@ -1,109 +1,127 @@
 typedef unsigned char u8;
+typedef unsigned short u16;
 typedef unsigned int u32;
+typedef int s32;
 
-typedef struct Link Link;
-struct Link { Link* next; Link* prev; void* object; };
-
-typedef struct Node Node;
-struct Node {
-    Node* next;
-    Node* prev;
-    u8 state;
-    u8 type;
-    u8 pad0A[2];
-    u32 key;
+typedef struct NOTE NOTE;
+struct NOTE {
+    NOTE* next;
+    NOTE* prev;
+    u32 id;
+    s32 endTime;
+    u8 section;
+    u8 pad11[3];
 };
 
-typedef struct Entry Entry;
-struct Entry { u8 data[0x1868]; };
-/* The third link head is addressed relative to the entry base. */
-struct EntryLinks { u8 data[0x226C]; Link* link; };
+typedef struct SEQ_INSTANCE SEQ_INSTANCE;
+struct SEQ_INSTANCE {
+    SEQ_INSTANCE* next;
+    SEQ_INSTANCE* prev;
+    u8 state;
+    u8 index;
+    u8 pad0A[2];
+    u32 publicId;
+    u8 pad010[0xE64 - 0x10];
+    NOTE* noteUsed[2];
+    NOTE* noteKeyOff;
+    u8 padE70[0xEDA - 0xE70];
+    u8 syncCrossFlags;
+    u8 padEDB;
+    u32* syncSeqIdPtr;
+    u8 padEE0[0x1868 - 0xEE0];
+};
 
-extern Entry lbl_8060C020[];
-extern Node* volatile lbl_8064D394;
-extern Node* volatile lbl_8064D398;
-extern Node* volatile lbl_8064D39C;
-extern void fn_801B244C(void*);
-extern void fn_801C21E8(void*);
+extern SEQ_INSTANCE* lbl_8064D39C;
+extern SEQ_INSTANCE* lbl_8064D398;
+extern SEQ_INSTANCE* lbl_8064D394;
+extern void fn_801C21E8(u32);
+extern void fn_801B244C(SEQ_INSTANCE*);
 
-/* TU-local C helper; the canonical compiler inlines both searches. */
-static inline u32 resolve_handle(u32 handle)
+#define seqActiveRoot lbl_8064D39C
+#define seqPausedRoot lbl_8064D398
+#define seqFreeRoot lbl_8064D394
+#define voiceKillSound fn_801C21E8
+#define ResetNotes fn_801B244C
+
+static NOTE seqNote[256];
+static SEQ_INSTANCE seqInstance[8];
+
+static inline u32 seqGetPrivateId(u32 seqId)
 {
-    u32 key = handle & 0x7FFFFFFF;
-    u32 id;
-    Node* search = lbl_8064D39C;
-    while (search != 0) {
-        if (search->key == key) {
-            id = search->type | (handle & 0x80000000U);
-            return id;
+    SEQ_INSTANCE* si;
+    for (si = seqActiveRoot; si != 0; si = si->next) {
+        if (si->publicId == (seqId & ~0x80000000)) {
+            return si->index | seqId & 0x80000000;
         }
-        search = search->next;
     }
-    search = lbl_8064D398;
-    while (search != 0) {
-        if (search->key == key) {
-            id = search->type | (handle & 0x80000000U);
-            return id;
+    for (si = seqPausedRoot; si != 0; si = si->next) {
+        if (si->publicId == (seqId & ~0x80000000)) {
+            return si->index | seqId & 0x80000000;
         }
-        search = search->next;
     }
-    id = -1;
-    return id;
+    return 0xffffffff;
 }
 
-void fn_801B3770(u32 handle)
+static inline void KillNotes(SEQ_INSTANCE* seq)
 {
-    Entry* entries = lbl_8060C020;
-    u32 id = resolve_handle(handle);
-    Node* node;
+    NOTE* n;
     u32 i;
-    if (id == 0xFFFFFFFFU) return;
-    if ((int)id >= 0) {
-        u32 offset = id * sizeof(Entry);
-        u8* entry = (u8*)entries + offset;
-        u8 state = entry[0x1408];
-        node = (Node*)(entry + 0x1400);
-        switch (state) {
+
+    for (i = 0; i < 2; i++) {
+        for (n = seq->noteUsed[i]; n != 0; n = n->next) {
+            voiceKillSound(n->id);
+        }
+    }
+
+    for (n = seq->noteKeyOff; n != 0; n = n->next) {
+        voiceKillSound(n->id);
+    }
+}
+
+void fn_801B3770(int seqId)
+{
+    SEQ_INSTANCE* si;
+
+    if ((seqId = seqGetPrivateId(seqId)) == 0xffffffff) {
+        return;
+    }
+
+    if ((seqId & 0x80000000) == 0) {
+        si = &seqInstance[seqId];
+        switch (si->state) {
         case 1:
-            if (node->prev) node->prev->next = node->next;
-            else lbl_8064D39C = node->next;
-            i = 0;
-            do {
-                Link* link = *(Link**)((u8*)node + 0xE64 + i * 4);
-                while (link) {
-                    fn_801C21E8(link->object);
-                    link = link->next;
-                }
-            } while (++i < 2);
-            {
-                Link* link = ((struct EntryLinks*)((u8*)entries + offset))->link;
-                while (link) {
-                    fn_801C21E8(link->object);
-                    link = link->next;
-                }
+            if (si->prev != 0) {
+                si->prev->next = si->next;
+            } else {
+                seqActiveRoot = si->next;
             }
-            fn_801B244C(node);
+
+            KillNotes(&seqInstance[seqId]);
+            ResetNotes(&seqInstance[seqId]);
             break;
         case 2:
-            if (node->prev) node->prev->next = node->next;
-            else lbl_8064D398 = node->next;
+            if (si->prev != 0) {
+                si->prev->next = si->next;
+            } else {
+                seqPausedRoot = si->next;
+            }
             break;
         }
-        if (node->next) node->next->prev = node->prev;
-        node->state = 0;
-        {
-            Node* free = lbl_8064D394;
-            if (free) free->prev = node;
+
+        if (si->next != 0) {
+            si->next->prev = si->prev;
         }
-        node->next = lbl_8064D394;
-        node->prev = 0;
-        lbl_8064D394 = node;
+        si->state = 0;
+        if (seqFreeRoot != 0) {
+            seqFreeRoot->prev = si;
+        }
+        si->next = seqFreeRoot;
+        si->prev = 0;
+        seqFreeRoot = si;
     } else {
-        {
-            u8* entry = (u8*)entries + (id & 0x7FFFFFFF) * sizeof(Entry);
-            u8 state = entry[0x1408];
-            node = (Node*)(entry + 0x1400);
-            if (state != 0) *(u32*)((u8*)node + 0xEDC) = 0;
+        si = &seqInstance[seqId & ~0x80000000];
+        if (si->state != 0) {
+            si->syncSeqIdPtr = 0;
         }
     }
 }

@@ -27,24 +27,18 @@ typedef struct SourceObject {
 
 typedef struct EffectConfig {
     float reset_time;
-    u8 pad04[4];
+    float duration;
     s32 count;
     s32 random_min;
     s32 random_max;
-    u8 pad14[8];
-    float step;
-    u8 pad20;
+    float phase_step;
+    float unk18;
+    float cooldown_step;
+    u8 unk20;
     u8 sound;
     u8 pad22[2];
 } EffectConfig;
 
-typedef struct EffectTables {
-    EffectConfig config[5];
-    Pair pairs_a[8];
-    Pair pairs_b[8];
-} EffectTables;
-
-extern EffectTables lbl_80243C30;
 extern u8 lbl_8030F820[];
 extern s32 lbl_8064C888;
 extern s8 lbl_8064C590;
@@ -59,7 +53,6 @@ extern s32 fn_8005EE9C(s32, s32, s32 *);
 extern void fn_8011F114();
 extern s32 fn_8011F6A4(void *, s32, s32, s32, QueryResult *, s32);
 extern unsigned int fn_800FBFB0(void);
-#define fn_800FBFB0() ((int)fn_800FBFB0())
 extern void fn_8005F758(void *, s32, Vec3 *, s32, s32, s32, u8, u8, s32, u8);
 extern void fn_801AAE68(float, s32, s32, s32, Vec3 *, s32, s32, s32, u16, s32);
 extern void fn_801D62D0(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32,
@@ -72,26 +65,37 @@ extern void fn_80211A48(Vec3 *, Vec3 *, Vec3 *);
 extern s32 fn_801D3A24(s32, s32);
 extern void fn_8015295C(Vec3 *, Vec3 *, s32, s32, s32);
 extern void fn_8020104C(int, void*, void*, int, float);
-#define fn_8020104C(a, b, c, d, e) fn_8020104C((a), (void *)(b), (void *)(c), (int)(d), (e))
 
-void fn_8005F8D0(s32 owner, void *entry, void *manager, SourceObject *source,
+static EffectConfig effect_config[5] = {
+    { 240.0f, 1.0f, 1, 120, 140, 1.0f, 0.0f, 1.0f, 1, 60 },
+    { 35.0f, 42.0f, 1, 60, 80, 1.0f, 1.5f, 1.0f, 2, 60 },
+    { 35.0f, 42.0f, 1, 30, 50, 1.0f, 1.5f, 1.0f, 3, 60 },
+    { 31.0f, 43.0f, 2, 25, 30, 1.0f, 1.5f, 1.0f, 4, 60 },
+    { 25.0f, 43.0f, 3, 10, 25, 1.0f, 1.5f, 1.0f, 5, 60 },
+};
+
+static Pair effect_pairs_a[8] = {
+    { 2, 5 }, { 3, 2 }, { 4, 1 }, { 2, 1 }, { 3, 4 }, { 2, 3 }, { 3, 1 }, { 5, 1 },
+};
+
+static Pair effect_pairs_b[8] = {
+    { 24, 0 },  { 23, 24 }, { 0, 31 },  { 24, 31 },
+    { 23, 0 },  { 24, 23 }, { 23, 31 }, { 0, 31 },
+};
+
+void fn_8005F8D0(void *owner, void *entry, void *manager, SourceObject *source,
                  u8 *state_object, s8 config_kind, Vec3 *position,
                  s32 final_value, s32 force_mode)
 {
-    EffectTables *tables = &lbl_80243C30;
     QueryResult primary;
     QueryResult secondary;
     Vec3 copied_direction;
     Vec3 source_position;
     Vec3 direction;
-    Pair *pairs_a;
-    Pair *pairs_b;
-    s32 state;
-    u16 range;
-    s32 random_min;
-    s32 random_value;
-    s32 query_two;
     s32 query_three;
+    s32 query_two;
+    u16 range;
+    s32 state;
 
     query_two = fn_80066D04(entry, 2);
     query_three = fn_80066D04(entry, 3);
@@ -105,42 +109,40 @@ void fn_8005F8D0(s32 owner, void *entry, void *manager, SourceObject *source,
         secondary.direction.x = position->z;
     }
 
-    pairs_b = tables->pairs_b;
-    pairs_a = tables->pairs_a;
-
-    if (fn_8011F6A4(manager, pairs_b[state].first,
-                    pairs_a[state].first, -1, &primary, 1) == -1) {
+    if (fn_8011F6A4(manager, effect_pairs_b[state].first,
+                    effect_pairs_a[state].first, -1, &primary, 1) == -1) {
         return;
     }
     if (position == 0 &&
-        fn_8011F6A4(manager, pairs_b[state].second,
-                    pairs_a[state].second, -1, &secondary, 1) == -1) {
+        fn_8011F6A4(manager, effect_pairs_b[state].second,
+                    effect_pairs_a[state].second, -1, &secondary, 1) == -1) {
         return;
     }
 
-    random_min = tables->config[config_kind].random_min;
-    random_value = fn_800FBFB0();
-    range = (u16)(random_min + random_value % (tables->config[config_kind].random_max - random_min));
+    range = (u16)(effect_config[config_kind].random_min +
+                  (int)fn_800FBFB0() % (effect_config[config_kind].random_max -
+                                   effect_config[config_kind].random_min));
 
     if (position != 0) {
-        s32 bad;
-        ++lbl_8064C888;
-        bad = (lbl_8064C888 < 0) || (lbl_8064C888 >= 5);
-        bad = lbl_8064C888 & ~((-bad | bad) >> 31);
-        lbl_8064C888 = bad;
-        fn_8005F758(lbl_8030F820 + bad * 0xC4, source->object_id,
-                    position, owner, pairs_b[state].first,
-                    pairs_a[state].first, 5, 2, 0, 4);
+        s32 out_of_range;
+
+        out_of_range = ++lbl_8064C888 < 0 || lbl_8064C888 >= 5;
+        lbl_8064C888 = out_of_range ? 0 : lbl_8064C888;
+        fn_8005F758(lbl_8030F820 + lbl_8064C888 * 0xC4, source->object_id,
+                    position, (s32)owner, effect_pairs_b[state].first,
+                    effect_pairs_a[state].first, 5, 2, 0, 4);
         fn_801AAE68(lbl_8064E5BC, 0x289, 0x5A, 0, &source_position, 2, 2,
                     0, (u16)lbl_8064D18C, 0);
     } else {
-        fn_801D62D0(owner, pairs_b[state].first,
-                    pairs_a[state].first, owner, pairs_b[state].second,
-                    pairs_a[state].second, source->object_id, 0, 0,
-                    tables->config[config_kind].pad20, 4, 2, 2, 1, 0, 1, 0x11, 8, 4, 0x20, 0,
+        s32 id = (s32)owner;
+
+        fn_801D62D0(id, effect_pairs_b[state].first,
+                    effect_pairs_a[state].first, id, effect_pairs_b[state].second,
+                    effect_pairs_a[state].second, source->object_id, 0, 0,
+                    effect_config[config_kind].unk20, 4, 2, 2, 1, 0, 1, 0x11, 8, 4, 0x20, 0,
                     0, range, 0x42040, 0x2030, (u8)(force_mode ? 4 : 0xC));
         if (lbl_8064C590++ < 2) {
-            fn_801AAE68(lbl_8064E5BC, 0xBE, tables->config[config_kind].sound, 0,
+            fn_801AAE68(lbl_8064E5BC, 0xBE, effect_config[config_kind].sound, 0,
                         &source_position, 2, 2, 0, (u16)lbl_8064D18C, 0);
         }
     }

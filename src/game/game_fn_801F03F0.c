@@ -11,7 +11,6 @@ typedef struct BoundsCamera {
     float projection;
 } BoundsCamera;
 
-extern u8 lbl_8063BEA0[];
 extern float lbl_8023B78C[3];
 extern int lbl_8064D738, lbl_8064CBA4, lbl_8064D6F8;
 extern int lbl_8064CB50, lbl_8064CBA0, lbl_8064D638;
@@ -55,14 +54,19 @@ extern void fn_80229FA4(int, int, int, int, int);
 extern void fn_801ECD48(int);
 extern void fn_801ECD50(float);
 
-/* NonMatching: behavior-complete camera/render setup reconstruction. GC/1.3
- * emits 1216 bytes versus retail's 1224 with the correct 0x70-byte frame and
- * color temporaries; remaining differences are load scheduling and register
- * selection in the target, normalization, and matrix-construction blocks.
- * Attempt 5: canonical/relocation-strict 92.05556%; preserve NonMatching. */
-void fn_801F03F0(BoundsCamera* in, int alternate)
+static u8 effect_8063BEA0[0x20] = {0};
+static u8 effect_8063BEC0[0x5C] = {0};
+static float effect_8063BF1C[3] = {0};
+static float effect_8063BF28[16] = {0};
+static u8 effect_8063BF68[0xC0] = {0};
+static u8 effect_8063C028[0x40] = {0};
+static u8 effect_matrix[0x30] = {0};
+static u8 effect_8063C098[0x30] = {0};
+static u8 effect_8063C0C8[0x30] = {0};
+static u8 effect_emitters[0x400] = {0};
+
+void fn_801F03F0(BoundsCamera in, int alternate)
 {
-    u8* state = lbl_8063BEA0;
     Vec3 target;
     float* matrix;
     float* normalized;
@@ -71,54 +75,46 @@ void fn_801F03F0(BoundsCamera* in, int alternate)
     float projection = lbl_80651368;
 
     target = *(Vec3*)lbl_8023B78C;
-    matrix = (float*)(state + 0xC8);
+    matrix = (float*)(effect_8063BF68);
     matrix += lbl_8064D738 * 24;
     if (lbl_8064CBA4 == 1)
         projection = lbl_8065136C;
-    {
-        /* Snapshot the vector bits before resetting render state. */
-        u32 b = ((u32*)&in->eye)[1];
-        u32 c = ((u32*)&in->eye)[2];
-        u32 a = ((u32*)&in->eye)[0];
-        lbl_8064D6F8 = 0;
-        ((u32*)&target)[0] = a;
-        ((u32*)&target)[1] = b;
-        ((u32*)&target)[2] = c;
-    }
+    lbl_8064D6F8 = 0;
+    target = in.eye;
     if (alternate)
-        fn_802118E0(state + 0x88, in->projection, projection,
+        fn_802118E0(effect_8063BF28, in.projection, projection,
                     lbl_8065134C, lbl_80651370);
     else
-        fn_802118E0(state + 0x88, in->projection, projection,
+        fn_802118E0(effect_8063BF28, in.projection, projection,
                     lbl_8065134C, lbl_80651374);
     fn_8022B94C(lbl_80651348, lbl_80651348, lbl_80651378,
                 lbl_8065137C, lbl_80651348, lbl_8065134C);
     fn_8022B970(0, 0, 0x280, 0x1E0);
-    fn_8022B4B8(state + 0x88, 0);
-    fn_8017AD7C(state + 0x88, state + 0x188);
+    fn_8022B4B8(effect_8063BF28, 0);
+    fn_8017AD7C(effect_8063BF28, effect_8063C028);
 
-    if (in->min_x == in->max_x && in->min_y == in->max_y &&
-        target.z == lbl_8065134C) {
-        in->min_x += lbl_80651380;
-        in->min_y += lbl_80651380;
+    if (in.min_x == in.max_x && in.min_y == in.max_y &&
+        lbl_8065134C == target.z) {
+        in.min_x += lbl_80651380;
+        in.min_y += lbl_80651380;
     }
-    fn_80211584(state + 0x1C8, in, &target, &in->max_x);
-    fn_802110A8(state + 0x1C8, state + 0x1F8);
-    fn_80212154(state + 0x1C8, state + 0x228);
+    fn_80211584(effect_matrix, &in, &target, &in.max_x);
+    fn_802110A8(effect_matrix, effect_8063C098);
+    fn_80212154(effect_matrix, effect_8063C0C8);
 
     {
-        float delta_x = in->max_x - in->min_x;
-        float delta_y = in->max_y - in->min_y;
-        normalized = (float*)(state + 0x7C);
+        float delta_x = in.max_x - in.min_x;
+        float delta_y = in.max_y - in.min_y;
+        normalized = effect_8063BF1C;
         normalized[1] = delta_y;
-        *(float*)(state + 0x7C) = delta_x;
+        effect_8063BF1C[0] = delta_x;
         normalized[2] = lbl_80651348;
     }
     projection = fn_80211B08(normalized);
-    *(float*)(state + 0x7C) /= projection;
+    effect_8063BF1C[0] /= projection;
     normalized[1] /= projection;
-    fn_8022B690(state + 0x1C8, 0x1B);
-    fn_8022B6CC(state + 0x1C8, 0x1B);
+    fn_8022B690(effect_matrix, 0x1B);
+    fn_8022B6CC(effect_matrix, 0x1B);
 
     if (lbl_8064CB50) {
         Color enabledColor = *(Color*)(lbl_802FC5BC + 0x28);
@@ -140,7 +136,7 @@ void fn_801F03F0(BoundsCamera* in, int alternate)
     fn_801ECC4C();
     fn_801ECEC8(1, 3, 1);
     {
-        u8* command = state + 0x258;
+        u8* command = effect_emitters;
         int command_offset = lbl_8064D738 * 0x200;
         fn_80225F4C(0x18, command + command_offset, 0x40);
     }
@@ -152,16 +148,15 @@ void fn_801F03F0(BoundsCamera* in, int alternate)
     motion = fn_8015AB00(2);
     if (motion != 0) {
         float rotation[12];
-        float* view = (float*)(state + 0x1C8);
-        float y, x, z, w, divisor;
+        float z, y, x, w, divisor;
         float* matrix2;
         fn_80211484(rotation, lbl_80651348, lbl_80651348,
                     lbl_80651384 - motion->x);
         divisor = lbl_80651388;
-        y = -view[9];
-        x = -view[8];
-        w = -view[11];
-        z = -view[10];
+        x = -((float*)effect_matrix)[8];
+        y = -((float*)effect_matrix)[9];
+        z = -((float*)effect_matrix)[10];
+        w = -((float*)effect_matrix)[11];
         x /= divisor;
         y /= divisor;
         z /= divisor;
@@ -180,7 +175,7 @@ void fn_801F03F0(BoundsCamera* in, int alternate)
         matrix[11] = lbl_80651348;
         fn_80210FDC(matrix, rotation, matrix);
 
-        matrix2 = (float*)(state + 0xF8 + lbl_8064D738 * 0x60);
+        matrix2 = (float*)(effect_8063BF68 + 0x30 + lbl_8064D738 * 0x60);
         matrix2[0] = lbl_80651390;
         matrix2[1] = lbl_80651348;
         matrix2[2] = lbl_80651348;
@@ -196,11 +191,11 @@ void fn_801F03F0(BoundsCamera* in, int alternate)
         fn_80211484(rotation, lbl_8064D6C8, lbl_8064D6CC, lbl_80651348);
         fn_80210FDC(matrix2, rotation, matrix2);
         {
-            u8* base = state + 0xC8;
+            u8* base = effect_8063BF68;
             int offset = lbl_8064D738 * 0x60;
             DCFlushRange(base + offset, 0x60);
         }
-        fn_80225F4C(0x17, state + 0xC8 + lbl_8064D738 * 0x60, 0x30);
+        fn_80225F4C(0x17, effect_8063BF68 + lbl_8064D738 * 0x60, 0x30);
     }
     fn_8022A6DC(1);
     fn_8022A71C(0);

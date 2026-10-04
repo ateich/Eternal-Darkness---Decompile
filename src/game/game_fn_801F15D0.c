@@ -45,46 +45,16 @@ typedef struct ColorItem801F15D0 {
     u8 pad10[4];
 } ColorItem801F15D0;
 
-typedef union DoubleBits801F15D0 {
-    double value;
-    struct {
-        u32 high;
-        u32 low;
-    } bits;
-} DoubleBits801F15D0;
-
 extern s32 fn_8015C71C(s32);
 extern Group801F15D0* fn_8015C28C(s32);
 extern u32 fn_801ECBB4(void);
 extern s32 fn_801F2370(Input801F15D0*, Vec3*, s32, ColorItem801F15D0*);
 extern u32 fn_80178F14(s32, s32, s32, s32, s32, s32);
 extern void fn_80211B44(Vec3*, Vec3*);
-extern const double lbl_80651350;
-extern const double lbl_80651360;
-extern const float lbl_806513B8;
 
-/* Keep conversions local to this translation unit and reuse their storage. */
-static inline float unsigned_float(u32 value, DoubleBits801F15D0* bits)
-{
-    bits->bits.low = value;
-    bits->bits.high = 0x43300000;
-    return (float)(bits->value - lbl_80651350);
-}
-
-static inline float signed_float(s32 value, DoubleBits801F15D0* bits)
-{
-    bits->bits.low = ((u32)value) ^ 0x80000000;
-    bits->bits.high = 0x43300000;
-    return (float)(bits->value - lbl_80651360);
-}
-
-/* NonMatching: shared-constant conversions still emit fsub/frsp pairs. */
 s32 fn_801F15D0(Vec3* point, s32 group_id, Input801F15D0* input,
                  s32* count_out, ColorItem801F15D0* colors)
 {
-    DoubleBits801F15D0 blue_bits;
-    DoubleBits801F15D0 green_bits;
-    DoubleBits801F15D0 red_bits;
     u32 packed;
     float red_scale;
     float green_scale;
@@ -98,9 +68,9 @@ s32 fn_801F15D0(Vec3* point, s32 group_id, Input801F15D0* input,
 
     group_index = fn_8015C71C(group_id);
     packed = fn_801ECBB4();
-    red_scale = unsigned_float(((u8*)&packed)[0], &red_bits) / lbl_806513B8;
-    green_scale = unsigned_float(((u8*)&packed)[1], &green_bits) / lbl_806513B8;
-    blue_scale = unsigned_float(((u8*)&packed)[2], &blue_bits) / lbl_806513B8;
+    red_scale = (float)((u8*)&packed)[0] / 255.0f;
+    green_scale = (float)((u8*)&packed)[1] / 255.0f;
+    blue_scale = (float)((u8*)&packed)[2] / 255.0f;
     if (group_index == -1) {
         return -1;
     }
@@ -134,21 +104,21 @@ s32 fn_801F15D0(Vec3* point, s32 group_id, Input801F15D0* input,
         float distance_float;
 
         distance = fn_80178F14((s32)point->x, (s32)point->y, (s32)point->z,
-                                   (s32)item->point.x, (s32)item->point.y,
-                                   (s32)item->point.z);
-        distance_float = unsigned_float(distance, &red_bits);
-        if (distance_float <= signed_float(input->limit0, &green_bits) ||
-            distance_float <= signed_float(input->limit1, &green_bits) ||
-            distance_float <= signed_float(input->limit2, &green_bits)) {
+                               (s32)item_point->x, (s32)item_point->y,
+                               (s32)item_point->z);
+        distance_float = (float)distance;
+        if (distance_float <= (float)input->limit0 ||
+            distance_float <= (float)input->limit1 ||
+            distance_float <= (float)input->limit2) {
             fn_80211B44(&item->direction, item_point);
             fn_80211B44(&item->direction, point);
         }
     }
 
     for (i = 0; i < *count_out; i++) {
-        colors[i].r = (u8)(red_scale * unsigned_float(colors[i].r, &red_bits));
-        colors[i].g = (u8)(green_scale * unsigned_float(colors[i].g, &green_bits));
-        colors[i].b = (u8)(blue_scale * unsigned_float(colors[i].b, &blue_bits));
+        colors[i].r = (u8)(red_scale * (float)colors[i].r);
+        colors[i].g = (u8)(green_scale * (float)colors[i].g);
+        colors[i].b = (u8)(blue_scale * (float)colors[i].b);
     }
     return result;
 }

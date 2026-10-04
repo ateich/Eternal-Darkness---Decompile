@@ -1182,3 +1182,174 @@ the other cases by one register (38 lines in every declaration order), and
 block-scoped vectors change the stack layout (47 lines or more).
 
 `fn_801941EC` needed only GC/1.3.2 (GC/1.3 is 16 lines off).
+
+## Initialized data, file-static pools, library ports, callee types, and store order
+
+Nineteen further functions match. Each builds with the whole-DOL SHA-1
+`ea24b6af954876ce072562ff39cdb4c81d32be1f` and reports 100% under both the
+default and `function_reloc_diffs=name_address` objdiff settings. Together
+they total 13,856 code bytes and 592 relocation sites. `fn_80141EA8` turns off
+`opt_propagation` and `opt_lifetimes` for its own body, `fn_8015B800` declares
+one `volatile` global, `fn_801270DC` uses `register` parameters in a
+paired-single `asm` block, and `fn_80068AAC` keeps retail's two `nop`s as
+`asm { nop }`; each is explained below.
+
+Four functions take their constants from data the compiler generates.
+`fn_8018F76C` and `fn_801858E0` build them from local initializers, as
+`fn_801857B4` does. `fn_8018F76C` declares
+`Color color0 = {230, 230, 255, 250};` and `Color color1 = {120, 120, 155, 40};`
+and uses the literal `3.0f`; the previous inline helper that took the colours
+as arguments is 33 lines off. `fn_801858E0` declares `Vector3 first = {0, 0, 0}`,
+`Vector3 second = {0, 0, 1}` and `Color value = {255, 255, 255, 255}`, and stores
+`value02` and `value03` after the `u16` fields and the colour before
+`value18`/`value19`; in field order the stores are 18 lines off. A new rule,
+`externalize_game_801858E0_constants`, checks its `.rodata` templates and
+`.sdata2` constants against the DOL, renames them to the retail labels and
+removes the sections. `fn_80180D0C` copies `lbl_8023B018` as one `Triple`,
+declared without `const`; the word-by-word copy is 38 lines off. `fn_801F15D0`
+uses plain `(float)` casts and the literal `/ 255.0f` instead of hand-built
+conversions, which gave a 0xE0-byte frame against retail's 0xD0 (95 lines), and
+reads `item_point->x`, `y` and `z` at the call. The constants of `fn_801F15D0`
+and the `8.0f` of `fn_801E4314` (`lbl_80651278`) are renamed through
+`game_section_externalizations`.
+
+Five functions declare their unit's file-static data under GC/1.3.2, which
+addresses the tables from one base. `fn_8002B5B4` declares `first_points[10]`,
+`second_points[10]` and `values[10]` and stores into them by index
+(`externalize_game_static_pool`, `lbl_80303A18`); the previous `register`
+pointer form is 26 lines off. `fn_801FAD4C` is the load side of `fn_801FABA4`
+and declares the same motion tables (`lbl_8063C6B8`,
+`externalize_game_static_data_pool`); its final linking loop is a
+`static inline` function, because written in place the unrolled loop rotates
+three registers (38 lines). `fn_8005F8D0` declares `effect_config[5]`,
+`effect_pairs_a[8]` and `effect_pairs_b[8]` with their retail values
+(`lbl_80243C30`, `lbl_80243CE4`, `lbl_80243D24`), and
+`externalize_game_8005F8D0_tables` checks the three tables against the DOL,
+renames them and removes the unit's `.data`. Its owner parameter is a pointer,
+and `fn_801D62D0` receives it through `s32 id = (s32)owner;`, which gives
+retail's single copy for the first and fourth arguments (34 lines with an
+`s32` parameter). The random range is one expression over
+`effect_config[config_kind]` (30 lines with a `random_min` local), and the wrap
+of `lbl_8064C888` is a ternary.
+
+`fn_80023258` and `fn_8001E144` declare their unit's statics with the retail
+values: the `.bss` pool (`clear`, `values`, `work`, `object`, `info`, `head`)
+and the `.data` tables (`table`, `block4C0`, `block4D8`, `block5B8`, `block600`,
+`settings`). `info` and `work` use the `Info` and `Work` types of
+`fn_8001DFEC`, which reads the same pool. `fn_8001E144` adds the seven-entry
+`MenuEntry` table at `lbl_8023D77C` and the strings "MainMenu", "Nintendo.tpl",
+"EMnMenu.cmp" and "EMemcardText.bin" as string literals; declared in that order
+they give retail's layout, with the unit's switch table at offset 0x878.
+Addressing `lbl_8023D020` and `lbl_80302400` by offset, as the previous sources
+did, is 33 and 115 lines off. Both units build with GC/1.3.2 and
+`-inline deferred` (25 and 86 lines off without the flag).
+`externalize_game_80023258_pools` checks each table and its relocations against
+the DOL, renames it to the retail label, removes the unit's `.data` and
+externalizes the `.bss` pool as `lbl_80302400`, so the data stays owned by
+`game_data_8023D020.c` and `game_data_8023D5B8.c`. The split of `fn_8001E144`
+also owns `.data` 0x8023D898-0x8023D8D4, its switch table, so its whole section
+cannot be dropped: `externalize_game_8001E144_pools` runs the same checks, and
+the new `tools/drop_leading_section_bytes.py` removes the first 0x878 bytes and
+their relocations and keeps the switch table. Moving the table to a generated
+split instead shifts the next table by 4 bytes, because the generated split
+links ahead of `fn_8001DFEC`, whose empty `.data` is 8-aligned.
+
+Two functions are library code. `SIInterruptHandler_8020860C` is the Dolphin
+SDK `SIInterruptHandler` in the form the Super Mario Sunshine decompilation
+(CC0) gives for `SIBios.c`, with `SIIsChanBusy` and `SITransferNext` as
+`static inline` functions and the SDK's file statics declared in the same
+order. GC/1.2.5n lays them out as retail does, and
+`externalize_game_8020860C_pools` checks `Si` and `Type` against the DOL,
+renames them to `Si_802FCA20` and `Type_802FCA34`, and externalizes the `.bss`
+pool as `Packet_80640B68`; the previous source is 89 lines off.
+`fn_801B3770` is MusyX `seqStop` in the form of the other MusyX
+decompilations, with the `seqPause` unit's types: `KillNotes` and `ResetNotes`
+both take `&seqInstance[seqId]`. The parameter is `int seqId`; with `u32` the
+compiler keeps a separate copy of the instance pointer (47 lines). The unit
+uses `-Cpp_exceptions on`, as `seqPause` does, because retail has an `extab`
+entry for it, and its two statics are externalized as `lbl_8060C020`.
+
+Three functions declare callees and globals as their definitions and uses
+show. `fn_80197D20` declares `fn_80179370` with two floats: its callee
+`fn_801790F0` reads only `f1` and `f2`, and sets `f3` and `f4` before using
+them. Declared with four, `direction.x` and `direction.y` are also passed as
+arguments; the register allocator removes the two argument copies, which sends
+the block through the second scheduling pass and puts the y conversion's `stw`
+before the x `xoris` (6 lines). Its first loop computes the destination as the
+second loop does, `(ShortCoord3*)vertices + (index << 1)`, so the backend loop
+pass creates the first loop's offset register first; the second loop's offset
+then lands above the range the later CSE pass merges and keeps its own
+`li r8,0` instead of `mr r8,r4`. A separate `vertex_offset` counter is 19 lines
+off. The conversion constant is renamed to `lbl_80650B98` by
+`externalize_game_80197D20_signed_bias`.
+
+`fn_8015B800` declares its callees as they are defined: `fn_80158E88`,
+`fn_80158ECC` and `fn_80158F6C` take `int` and `fn_80159DD0` takes
+`unsigned int`. The slot lookups are macros, `slot_id(slot)` and
+`slot_busy(slot)`, and the locals are declared `state`, `action`, `selection`.
+With `s16` prototypes and inline helpers each argument goes through an extra
+temporary, and the queue address is spilled first and gets `r28` instead of
+`r31` (37 lines). `lbl_805B6FE0` is `extern volatile Shared`, as in
+`fn_8015C880`: retail reads its fields again at each use, and without the
+qualifier the function is 44 bytes shorter (59 lines). The jump table is
+externalized as `jumptable_8024F168`, as `fn_80066E78` does for its table.
+
+`fn_80068AAC` passes three colours to `fn_8012C62C`, which takes pointers.
+Retail keeps a value slot next to each argument copy (0xC/0x10, 0x14/0x18,
+0x1C/0x20), as `fn_800C8394` does: each colour is a `ColorWord` union with a
+value and a copy, declared `first_copy, first, second_copy, second,
+third_copy, third`, and set from third to first
+(`third.value = lbl_80651958; third_copy = third;`). The arguments go through
+`ColorWord *third_arg = &third_copy;` and its two siblings. Passing
+`&first_copy` directly gives the six parameters `r24`-`r29` instead of
+`r26`-`r31` (94 lines), and an inline helper returning the struct puts the
+three value slots below the three copies (7 lines). The two checks that retail
+ends in a lone `nop` (`objects == 0` and the flag test) are written
+`if (...) { asm { nop } }`, as in `fn_8006845C` and `fn_8012C62C`. Retail also
+copies `lbl_80239060` ({15, 5, 10}) to the stack and never reads it; the source
+keeps that copy as the unused local `origin` (the previous source used a
+`volatile` local).
+
+Two functions needed forms that fix the order of loads and stores.
+`fn_80141EA8` sets its two projection axes through an inline helper,
+`set_axes`, which copies the two values into locals and stores both through one
+`u16*`, pointed first at `lbl_8064D02C` and then at `lbl_8064D028`, with
+`opt_propagation` and `opt_lifetimes` off for this function (both pragmas are
+used elsewhere in the repo). GC/1.3.2 never treats two different arrays as
+aliases, so with two direct stores the scheduler moves the second address load
+above the first store (28 lines, with or without the pragmas); the reused
+pointer keeps retail's order. Without the value copies the helper's registers
+come out in a different order (20 lines), and a pointer declared in the
+function itself is coloured last (24 lines). The four triangle tables are
+`= {0}` statics, as in `fn_801F0CB0`, so they keep declaration order; left
+uninitialized they land in `.bss` with `second` first.
+`externalize_game_80141EA8_triangle_pool` checks the `0.0f` literal against
+`lbl_80650410` and makes the pool `lbl_805B12B0`.
+
+`fn_801F03F0` takes its `BoundsCamera` by value. Retail loads all three `eye`
+words before it clears `lbl_8064D6F8` and stores them into `target`, whose
+address later goes to `fn_80211584`. Through a pointer parameter the stores pin
+the loads (11 lines; 6 with the words copied through `u32` locals); with the
+parameter as a local object, as for `fn_8014BA14`, the plain
+`target = in.eye;` groups them. The unit is GC/1.3.2, and its file-static
+tables are externalized as `lbl_8063BEA0`, the pool `fn_801F0CB0` uses, with
+its names.
+
+Three functions needed expression or type forms. `fn_801270DC` unpacks with
+`psq_l`/`psq_st` in an `asm` block on `register` parameters, as `fn_8011F140`
+and `fn_8012744C` do; the C multiply form is 35 lines off. `fn_800EEC44`
+converts YUV to RGB. Its loop walks a copy of the input pointer while the input
+advances to the U and then the V plane, keeps a separate row counter, reads
+`row0[0]` and `row0[1]` and then advances by two, builds the destination in two
+steps, and computes green as `(-25 * u) + (-52 * v) + 0x2020` (15 lines with
+the `-52 * v` term first). `fn_800EEC44` and `fn_801F15D0` use
+`-use_lmw_stmw on`. `fn_801E4314` takes
+`(int x, int y, int width, s16 height, float scale, int dark)` and keeps
+`s16 sx = x`, `int sy = (s16)y` and `s16 sw = width`. Retail hands out the four
+sign extensions in the order of the front end's shared temporaries (x, width,
+y, height); this mix of types is the only one found that gives that order
+without moving the centre computations (9 lines with all four as `s16`). After
+the colour choice it moves `x` and `y` in by the depth (`x -= raw_depth`), and
+`s16 left_x`/`top_y` take them just before their first vertex, which gives
+retail's late in-place `extsh`. The vertices go through a `static inline`
+`draw_vertex`.
