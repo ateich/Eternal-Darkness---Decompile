@@ -1,0 +1,26 @@
+fn_80159F34 attempt 9 bounded experiment record
+base: f2be0b8d86e7bf33570573cd60c1a2c0a8429b37
+compiler/build policy: existing canonical GEDE01 configuration, assigned object only
+
+Preserved baseline measured 99.007935%: 504 retail bytes versus 508 generated
+bytes. Instructions and relocations agree through offset 0x170. All 16
+relocation-bearing instructions retain equal types, targets, and addends.
+
+Materially different tail reconstructions tested and rejected:
+- direct indexed access lbl_805B6F80[i].counter: generated 0x224-byte function
+  with a separate index/remainder loop, substantially regressing size and CFG;
+- block-scoped count and pointer induction: retained 508 bytes but selected r4
+  for the count and r5 for the pointer, regressing from the baseline allocation;
+- post-decrement while induction: retained 508 bytes but selected r4/r5;
+- counter-member-only volatility with nonvolatile array storage: retained the
+  same 508-byte code and baseline tail allocation;
+- reuse of the input count parameter: retained 508 bytes but kept the count in
+  nonvolatile r28, regressing from the baseline allocation;
+- declaration and initialization order changes: either reproduced baseline or
+  selected r4 for count and r5 for pointer.
+
+The best honest C remains the preserved baseline. At retail 0x174 the count is
+loaded into r0 and the array base is formed directly in r4. Generated code loads
+the count into r5, forms the base through r0, and inserts `mr r4,r0` at generated
+0x188. That one extra instruction shifts the rest of the final unrolled volatile
+counter walk by four bytes; its load sequence otherwise agrees.
