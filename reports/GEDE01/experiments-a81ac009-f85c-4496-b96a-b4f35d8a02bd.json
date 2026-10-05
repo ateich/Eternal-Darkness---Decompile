@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "assignment_id": "a81ac009-f85c-4496-b96a-b4f35d8a02bd",
+  "target": "fn_800E33B8",
+  "baseline": {
+    "score": 99.52381,
+    "text_size": 252,
+    "instruction_differences": 6,
+    "relocations_per_side": 14
+  },
+  "experiments": [
+    {
+      "name": "nested aggregate for event data and callback state",
+      "hypothesis": "Nesting event_data beside the existing object/argument aggregate could alter scalar-replacement web order and swap the remaining r30/r31 allocation.",
+      "result": "252 bytes and 99.52381%; the same six r30/r31 operand differences remained.",
+      "build_output": "eternal-darkness-decomp/reports/GEDE01/experiment-nested-a81ac009-f85c-4496-b96a-b4f35d8a02bd-build.txt",
+      "objdiff_output": "eternal-darkness-decomp/reports/GEDE01/experiment-nested-a81ac009-f85c-4496-b96a-b4f35d8a02bd.json"
+    },
+    {
+      "name": "split callback return value before aggregate assignment",
+      "hypothesis": "Giving the fn_80201814 return value a distinct scalar web before assigning the object field could prioritize it ahead of event_data.",
+      "result": "252 bytes and 98.492065%; allocation regressed to the older four-web permutation, so the variant was rejected.",
+      "build_output": "eternal-darkness-decomp/reports/GEDE01/experiment-split-return-a81ac009-f85c-4496-b96a-b4f35d8a02bd-build.txt",
+      "objdiff_output": "eternal-darkness-decomp/reports/GEDE01/experiment-split-return-a81ac009-f85c-4496-b96a-b4f35d8a02bd.json"
+    }
+  ],
+  "retained": "Existing honest object/argument aggregate reconstruction; no source change from the base commit."
+}

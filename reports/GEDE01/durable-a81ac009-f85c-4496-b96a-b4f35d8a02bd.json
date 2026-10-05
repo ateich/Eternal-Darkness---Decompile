@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "assignment_id": "a81ac009-f85c-4496-b96a-b4f35d8a02bd",
+  "attempt": 7,
+  "base_commit": "9bd3d3020a3346b184288cca819e70028eed747b",
+  "target": "fn_800E33B8",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-a81ac009-f85c-4496-b96a-b4f35d8a02bd.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-a81ac009-f85c-4496-b96a-b4f35d8a02bd-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-a81ac009-f85c-4496-b96a-b4f35d8a02bd.txt",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-a81ac009-f85c-4496-b96a-b4f35d8a02bd.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-a81ac009-f85c-4496-b96a-b4f35d8a02bd.txt",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-a81ac009-f85c-4496-b96a-b4f35d8a02bd.json",
+    "eternal-darkness-decomp/reports/GEDE01/experiment-nested-a81ac009-f85c-4496-b96a-b4f35d8a02bd-build.txt",
+    "eternal-darkness-decomp/reports/GEDE01/experiment-nested-a81ac009-f85c-4496-b96a-b4f35d8a02bd.json",
+    "eternal-darkness-decomp/reports/GEDE01/experiment-split-return-a81ac009-f85c-4496-b96a-b4f35d8a02bd-build.txt",
+    "eternal-darkness-decomp/reports/GEDE01/experiment-split-return-a81ac009-f85c-4496-b96a-b4f35d8a02bd.json"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff are size-exact at 252/252 bytes and 99.52381%. All 14 relocation records match in offset, type, target and addend. Six register-operand differences remain at offsets 0x18, 0x20, 0x24, 0xC8, 0xD4 and 0xE4: retail assigns event_data/object to r30/r31, while generated code assigns them to r31/r30. Nested aggregate scalar replacement reproduced the same result; splitting the callback return web regressed to 98.492065%."
+}
