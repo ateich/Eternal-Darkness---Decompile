@@ -870,11 +870,13 @@ config.custom_build_rules = [
         "name": "externalize_game_801858E0_constants",
         "command": (
             "python3 tools/externalize_elf_symbol.py $in @4 lbl_8023B050 "
-            f"orig/{VERSION}/sys/main.dol --require-section-symbols=@4,@5 && "
+            f"orig/{VERSION}/sys/main.dol --require-section-symbols=@4,@5 "
+            "--require-section=.rodata --reject-section-relocations && "
             "python3 tools/externalize_elf_symbol.py $in @5 lbl_8023B05C "
             f"orig/{VERSION}/sys/main.dol && "
             "python3 tools/externalize_elf_symbol.py $in @6 lbl_806509F4 "
-            f"orig/{VERSION}/sys/main.dol --require-whole-section && "
+            f"orig/{VERSION}/sys/main.dol --require-whole-section "
+            "--require-section=.sdata2 --reject-section-relocations && "
             "build/binutils/powerpc-eabi-objcopy --redefine-sym=@4=lbl_8023B050 "
             "--redefine-sym=@5=lbl_8023B05C --redefine-sym=@6=lbl_806509F4 "
             "--remove-section=.rodata --remove-section=.sdata2 "
@@ -1534,7 +1536,8 @@ config.custom_build_rules = [
         "name": "externalize_game_80141EA8_triangle_pool",
         "command": (
             "python3 tools/externalize_elf_symbol.py $in @67 lbl_80650410 "
-            f"orig/{VERSION}/sys/main.dol --require-whole-section && "
+            f"orig/{VERSION}/sys/main.dol --require-whole-section "
+            "--require-section=.sdata2 --reject-section-relocations && "
             "build/binutils/powerpc-eabi-objcopy "
             "--redefine-sym=@67=lbl_80650410 --remove-section=.sdata2 "
             "--redefine-sym=...data.0=lbl_805B12B0 --globalize-symbol=lbl_805B12B0 $in && "
@@ -1549,7 +1552,7 @@ config.custom_build_rules = [
         "name": "externalize_game_80197D20_signed_bias",
         "command": (
             "python3 tools/externalize_elf_symbol.py $in @68 lbl_80650B98 orig/GEDE01/sys/main.dol "
-            "--require-whole-section && "
+            "--require-whole-section --require-section=.sdata2 --reject-section-relocations && "
             "build/binutils/powerpc-eabi-objcopy "
             "--redefine-sym=@68=lbl_80650B98 --remove-section=.sdata2 "
             "--rename-section=.comment=.ignored $in && touch $out"
