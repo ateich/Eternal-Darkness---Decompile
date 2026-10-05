@@ -20,13 +20,15 @@ extern const char lbl_8024FF00[];
 
 int fn_80175BB8(void* state)
 {
-    const char* strings = lbl_8024FF00;
+    struct { const char* strings; } diagnostic;
     int kind;
     int object_id;
     void* object;
 
+    diagnostic.strings = lbl_8024FF00;
+
     if (fn_8016A598(state) != 2) {
-        fn_80163BB4(state, strings, 2, fn_8016A598(state));
+        fn_80163BB4(state, diagnostic.strings, 2, fn_8016A598(state));
         return 0;
     }
     object_id = fn_8016A694(state, 1);
@@ -45,12 +47,12 @@ int fn_80175BB8(void* state)
         case 7: fn_8016A830(state, fn_80157918(object)); break;
         default:
             fn_8016A7D8(state);
-            fn_80163BB4(state, strings + 0x5A8, kind);
+            fn_80163BB4(state, diagnostic.strings + 0x5A8, kind);
             break;
         }
     } else {
         fn_8016A7D8(state);
-        fn_80163BB4(state, strings + 0x5CC, object_id);
+        fn_80163BB4(state, diagnostic.strings + 0x5CC, object_id);
     }
     return 1;
 }

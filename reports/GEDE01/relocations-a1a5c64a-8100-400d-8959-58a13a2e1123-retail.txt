@@ -1,0 +1,221 @@
+Script started on 2026-10-04 23:41:40-04:00 [COMMAND="build/binutils/powerpc-eabi-objdump -dr build/GEDE01/obj/game/game_fn_80175BB8.o" <not executed on terminal>]
+
+build/GEDE01/obj/game/game_fn_80175BB8.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <fn_80175BB8>:
+   0:	94 21 ff d0 	stwu    r1,-48(r1)
+   4:	7c 08 02 a6 	mflr    r0
+   8:	3c 80 00 00 	lis     r4,0
+			a: R_PPC_ADDR16_HA	lbl_8024FF00
+   c:	90 01 00 34 	stw     r0,52(r1)
+  10:	93 e1 00 2c 	stw     r31,44(r1)
+  14:	7c 7f 1b 78 	mr      r31,r3
+  18:	93 c1 00 28 	stw     r30,40(r1)
+  1c:	3b c4 00 00 	addi    r30,r4,0
+			1e: R_PPC_ADDR16_LO	lbl_8024FF00
+  20:	93 a1 00 24 	stw     r29,36(r1)
+  24:	93 81 00 20 	stw     r28,32(r1)
+  28:	48 00 00 01 	bl      28 <fn_80175BB8+0x28>
+			28: R_PPC_REL24	fn_8016A598
+  2c:	2c 03 00 02 	cmpwi   r3,2
+  30:	41 82 00 2c 	beq     5c <fn_80175BB8+0x5c>
+  34:	7f e3 fb 78 	mr      r3,r31
+  38:	48 00 00 01 	bl      38 <fn_80175BB8+0x38>
+			38: R_PPC_REL24	fn_8016A598
+  3c:	7c 66 1b 78 	mr      r6,r3
+  40:	7f e3 fb 78 	mr      r3,r31
+  44:	38 9e 00 00 	addi    r4,r30,0
+  48:	38 a0 00 02 	li      r5,2
+  4c:	4c c6 31 82 	crclr   4*cr1+eq
+  50:	48 00 00 01 	bl      50 <fn_80175BB8+0x50>
+			50: R_PPC_REL24	fn_80163BB4
+  54:	38 60 00 00 	li      r3,0
+  58:	48 00 02 34 	b       28c <fn_80175BB8+0x28c>
+  5c:	7f e3 fb 78 	mr      r3,r31
+  60:	38 80 00 01 	li      r4,1
+  64:	48 00 00 01 	bl      64 <fn_80175BB8+0x64>
+			64: R_PPC_REL24	fn_8016A694
+  68:	fc 00 08 1e 	fctiwz  f0,f1
+  6c:	7f e3 fb 78 	mr      r3,r31
+  70:	38 80 00 02 	li      r4,2
+  74:	d8 01 00 08 	stfd    f0,8(r1)
+  78:	83 81 00 0c 	lwz     r28,12(r1)
+  7c:	48 00 00 01 	bl      7c <fn_80175BB8+0x7c>
+			7c: R_PPC_REL24	fn_8016A694
+  80:	fc 00 08 1e 	fctiwz  f0,f1
+  84:	7f 83 e3 78 	mr      r3,r28
+  88:	d8 01 00 10 	stfd    f0,16(r1)
+  8c:	83 a1 00 14 	lwz     r29,20(r1)
+  90:	48 00 00 01 	bl      90 <fn_80175BB8+0x90>
+			90: R_PPC_REL24	fn_80201814
+  94:	28 03 00 00 	cmplwi  r3,0
+  98:	41 82 01 d4 	beq     26c <fn_80175BB8+0x26c>
+  9c:	48 00 00 01 	bl      9c <fn_80175BB8+0x9c>
+			9c: R_PPC_REL24	fn_80201C24
+  a0:	7c 60 1b 78 	mr      r0,r3
+  a4:	7f e3 fb 78 	mr      r3,r31
+  a8:	7c 1c 03 78 	mr      r28,r0
+  ac:	38 80 00 03 	li      r4,3
+  b0:	48 00 00 01 	bl      b0 <fn_80175BB8+0xb0>
+			b0: R_PPC_REL24	fn_8016A694
+  b4:	28 1d 00 07 	cmplwi  r29,7
+  b8:	41 81 01 94 	bgt     24c <fn_80175BB8+0x24c>
+  bc:	3c 60 00 00 	lis     r3,0
+			be: R_PPC_ADDR16_HA	jumptable_80250504
+  c0:	57 a0 10 3a 	slwi    r0,r29,2
+  c4:	38 63 00 00 	addi    r3,r3,0
+			c6: R_PPC_ADDR16_LO	jumptable_80250504
+  c8:	7c 03 00 2e 	lwzx    r0,r3,r0
+  cc:	7c 09 03 a6 	mtctr   r0
+  d0:	4e 80 04 20 	bctr
+  d4:	7f 83 e3 78 	mr      r3,r28
+  d8:	48 00 00 01 	bl      d8 <fn_80175BB8+0xd8>
+			d8: R_PPC_REL24	fn_801578E8
+  dc:	7c 63 07 34 	extsh   r3,r3
+  e0:	3c 00 43 30 	lis     r0,17200
+  e4:	6c 64 80 00 	xoris   r4,r3,32768
+  e8:	90 01 00 10 	stw     r0,16(r1)
+  ec:	c8 20 00 00 	lfd     f1,0(0)
+			ec: R_PPC_EMB_SDA21	lbl_806506A8
+  f0:	7f e3 fb 78 	mr      r3,r31
+  f4:	90 81 00 14 	stw     r4,20(r1)
+  f8:	c8 01 00 10 	lfd     f0,16(r1)
+  fc:	fc 20 08 28 	fsub    f1,f0,f1
+ 100:	48 00 00 01 	bl      100 <fn_80175BB8+0x100>
+			100: R_PPC_REL24	fn_8016A830
+ 104:	48 00 01 84 	b       288 <fn_80175BB8+0x288>
+ 108:	7f 83 e3 78 	mr      r3,r28
+ 10c:	48 00 00 01 	bl      10c <fn_80175BB8+0x10c>
+			10c: R_PPC_REL24	fn_801578F4
+ 110:	7c 63 07 34 	extsh   r3,r3
+ 114:	3c 00 43 30 	lis     r0,17200
+ 118:	6c 64 80 00 	xoris   r4,r3,32768
+ 11c:	90 01 00 10 	stw     r0,16(r1)
+ 120:	c8 20 00 00 	lfd     f1,0(0)
+			120: R_PPC_EMB_SDA21	lbl_806506A8
+ 124:	7f e3 fb 78 	mr      r3,r31
+ 128:	90 81 00 14 	stw     r4,20(r1)
+ 12c:	c8 01 00 10 	lfd     f0,16(r1)
+ 130:	fc 20 08 28 	fsub    f1,f0,f1
+ 134:	48 00 00 01 	bl      134 <fn_80175BB8+0x134>
+			134: R_PPC_REL24	fn_8016A830
+ 138:	48 00 01 50 	b       288 <fn_80175BB8+0x288>
+ 13c:	7f 83 e3 78 	mr      r3,r28
+ 140:	48 00 00 01 	bl      140 <fn_80175BB8+0x140>
+			140: R_PPC_REL24	fn_80157BC4
+ 144:	3c 00 43 30 	lis     r0,17200
+ 148:	90 61 00 14 	stw     r3,20(r1)
+ 14c:	c8 20 00 00 	lfd     f1,0(0)
+			14c: R_PPC_EMB_SDA21	lbl_806506B0
+ 150:	7f e3 fb 78 	mr      r3,r31
+ 154:	90 01 00 10 	stw     r0,16(r1)
+ 158:	c8 01 00 10 	lfd     f0,16(r1)
+ 15c:	fc 20 08 28 	fsub    f1,f0,f1
+ 160:	48 00 00 01 	bl      160 <fn_80175BB8+0x160>
+			160: R_PPC_REL24	fn_8016A830
+ 164:	48 00 01 24 	b       288 <fn_80175BB8+0x288>
+ 168:	7f 83 e3 78 	mr      r3,r28
+ 16c:	48 00 00 01 	bl      16c <fn_80175BB8+0x16c>
+			16c: R_PPC_REL24	fn_80157BDC
+ 170:	3c 00 43 30 	lis     r0,17200
+ 174:	90 61 00 14 	stw     r3,20(r1)
+ 178:	c8 20 00 00 	lfd     f1,0(0)
+			178: R_PPC_EMB_SDA21	lbl_806506B0
+ 17c:	7f e3 fb 78 	mr      r3,r31
+ 180:	90 01 00 10 	stw     r0,16(r1)
+ 184:	c8 01 00 10 	lfd     f0,16(r1)
+ 188:	fc 20 08 28 	fsub    f1,f0,f1
+ 18c:	48 00 00 01 	bl      18c <fn_80175BB8+0x18c>
+			18c: R_PPC_REL24	fn_8016A830
+ 190:	48 00 00 f8 	b       288 <fn_80175BB8+0x288>
+ 194:	7f 83 e3 78 	mr      r3,r28
+ 198:	48 00 00 01 	bl      198 <fn_80175BB8+0x198>
+			198: R_PPC_REL24	fn_80157BD0
+ 19c:	3c 00 43 30 	lis     r0,17200
+ 1a0:	90 61 00 14 	stw     r3,20(r1)
+ 1a4:	c8 20 00 00 	lfd     f1,0(0)
+			1a4: R_PPC_EMB_SDA21	lbl_806506B0
+ 1a8:	7f e3 fb 78 	mr      r3,r31
+ 1ac:	90 01 00 10 	stw     r0,16(r1)
+ 1b0:	c8 01 00 10 	lfd     f0,16(r1)
+ 1b4:	fc 20 08 28 	fsub    f1,f0,f1
+ 1b8:	48 00 00 01 	bl      1b8 <fn_80175BB8+0x1b8>
+			1b8: R_PPC_REL24	fn_8016A830
+ 1bc:	48 00 00 cc 	b       288 <fn_80175BB8+0x288>
+ 1c0:	7f 83 e3 78 	mr      r3,r28
+ 1c4:	48 00 00 01 	bl      1c4 <fn_80175BB8+0x1c4>
+			1c4: R_PPC_REL24	fn_80157900
+ 1c8:	3c 00 43 30 	lis     r0,17200
+ 1cc:	90 61 00 14 	stw     r3,20(r1)
+ 1d0:	c8 20 00 00 	lfd     f1,0(0)
+			1d0: R_PPC_EMB_SDA21	lbl_806506B0
+ 1d4:	7f e3 fb 78 	mr      r3,r31
+ 1d8:	90 01 00 10 	stw     r0,16(r1)
+ 1dc:	c8 01 00 10 	lfd     f0,16(r1)
+ 1e0:	fc 20 08 28 	fsub    f1,f0,f1
+ 1e4:	48 00 00 01 	bl      1e4 <fn_80175BB8+0x1e4>
+			1e4: R_PPC_REL24	fn_8016A830
+ 1e8:	48 00 00 a0 	b       288 <fn_80175BB8+0x288>
+ 1ec:	7f 83 e3 78 	mr      r3,r28
+ 1f0:	48 00 00 01 	bl      1f0 <fn_80175BB8+0x1f0>
+			1f0: R_PPC_REL24	fn_80157AB8
+ 1f4:	54 63 06 3e 	clrlwi  r3,r3,24
+ 1f8:	3c 00 43 30 	lis     r0,17200
+ 1fc:	90 61 00 14 	stw     r3,20(r1)
+ 200:	7f e3 fb 78 	mr      r3,r31
+ 204:	c8 20 00 00 	lfd     f1,0(0)
+			204: R_PPC_EMB_SDA21	lbl_806506B0
+ 208:	90 01 00 10 	stw     r0,16(r1)
+ 20c:	c8 01 00 10 	lfd     f0,16(r1)
+ 210:	fc 20 08 28 	fsub    f1,f0,f1
+ 214:	48 00 00 01 	bl      214 <fn_80175BB8+0x214>
+			214: R_PPC_REL24	fn_8016A830
+ 218:	48 00 00 70 	b       288 <fn_80175BB8+0x288>
+ 21c:	7f 83 e3 78 	mr      r3,r28
+ 220:	48 00 00 01 	bl      220 <fn_80175BB8+0x220>
+			220: R_PPC_REL24	fn_80157918
+ 224:	54 63 06 3e 	clrlwi  r3,r3,24
+ 228:	3c 00 43 30 	lis     r0,17200
+ 22c:	90 61 00 14 	stw     r3,20(r1)
+ 230:	7f e3 fb 78 	mr      r3,r31
+ 234:	c8 20 00 00 	lfd     f1,0(0)
+			234: R_PPC_EMB_SDA21	lbl_806506B0
+ 238:	90 01 00 10 	stw     r0,16(r1)
+ 23c:	c8 01 00 10 	lfd     f0,16(r1)
+ 240:	fc 20 08 28 	fsub    f1,f0,f1
+ 244:	48 00 00 01 	bl      244 <fn_80175BB8+0x244>
+			244: R_PPC_REL24	fn_8016A830
+ 248:	48 00 00 40 	b       288 <fn_80175BB8+0x288>
+ 24c:	7f e3 fb 78 	mr      r3,r31
+ 250:	48 00 00 01 	bl      250 <fn_80175BB8+0x250>
+			250: R_PPC_REL24	fn_8016A7D8
+ 254:	7f e3 fb 78 	mr      r3,r31
+ 258:	7f a5 eb 78 	mr      r5,r29
+ 25c:	38 9e 05 a8 	addi    r4,r30,1448
+ 260:	4c c6 31 82 	crclr   4*cr1+eq
+ 264:	48 00 00 01 	bl      264 <fn_80175BB8+0x264>
+			264: R_PPC_REL24	fn_80163BB4
+ 268:	48 00 00 20 	b       288 <fn_80175BB8+0x288>
+ 26c:	7f e3 fb 78 	mr      r3,r31
+ 270:	48 00 00 01 	bl      270 <fn_80175BB8+0x270>
+			270: R_PPC_REL24	fn_8016A7D8
+ 274:	7f e3 fb 78 	mr      r3,r31
+ 278:	7f 85 e3 78 	mr      r5,r28
+ 27c:	38 9e 05 cc 	addi    r4,r30,1484
+ 280:	4c c6 31 82 	crclr   4*cr1+eq
+ 284:	48 00 00 01 	bl      284 <fn_80175BB8+0x284>
+			284: R_PPC_REL24	fn_80163BB4
+ 288:	38 60 00 01 	li      r3,1
+ 28c:	80 01 00 34 	lwz     r0,52(r1)
+ 290:	83 e1 00 2c 	lwz     r31,44(r1)
+ 294:	83 c1 00 28 	lwz     r30,40(r1)
+ 298:	83 a1 00 24 	lwz     r29,36(r1)
+ 29c:	83 81 00 20 	lwz     r28,32(r1)
+ 2a0:	7c 08 03 a6 	mtlr    r0
+ 2a4:	38 21 00 30 	addi    r1,r1,48
+ 2a8:	4e 80 00 20 	blr
+
+Script done on 2026-10-04 23:41:40-04:00 [COMMAND_EXIT_CODE="0"]

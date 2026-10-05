@@ -1,0 +1,106 @@
+Script started on 2026-10-04 23:41:40-04:00 [COMMAND="diff -u <(build/binutils/powerpc-eabi-objdump -dr build/GEDE01/obj/game/game_fn_80175BB8.o) <(build/binutils/powerpc-eabi-objdump -dr build/GEDE01/src/game/game_fn_80175BB8.o)" <not executed on terminal>]
+--- /dev/fd/63	2026-10-04 23:41:40.702421530 -0400
++++ /dev/fd/62	2026-10-04 23:41:40.702421530 -0400
+@@ -1,5 +1,5 @@
+ 
+-build/GEDE01/obj/game/game_fn_80175BB8.o:     file format elf32-powerpc
++build/GEDE01/src/game/game_fn_80175BB8.o:     file format elf32-powerpc
+ 
+ 
+ Disassembly of section .text:
+@@ -26,7 +26,7 @@
+ 			38: R_PPC_REL24	fn_8016A598
+   3c:	7c 66 1b 78 	mr      r6,r3
+   40:	7f e3 fb 78 	mr      r3,r31
+-  44:	38 9e 00 00 	addi    r4,r30,0
++  44:	7f c4 f3 78 	mr      r4,r30
+   48:	38 a0 00 02 	li      r5,2
+   4c:	4c c6 31 82 	crclr   4*cr1+eq
+   50:	48 00 00 01 	bl      50 <fn_80175BB8+0x50>
+@@ -63,10 +63,10 @@
+   b4:	28 1d 00 07 	cmplwi  r29,7
+   b8:	41 81 01 94 	bgt     24c <fn_80175BB8+0x24c>
+   bc:	3c 60 00 00 	lis     r3,0
+-			be: R_PPC_ADDR16_HA	jumptable_80250504
++			be: R_PPC_ADDR16_HA	@23
+   c0:	57 a0 10 3a 	slwi    r0,r29,2
+   c4:	38 63 00 00 	addi    r3,r3,0
+-			c6: R_PPC_ADDR16_LO	jumptable_80250504
++			c6: R_PPC_ADDR16_LO	@23
+   c8:	7c 03 00 2e 	lwzx    r0,r3,r0
+   cc:	7c 09 03 a6 	mtctr   r0
+   d0:	4e 80 04 20 	bctr
+@@ -78,7 +78,7 @@
+   e4:	6c 64 80 00 	xoris   r4,r3,32768
+   e8:	90 01 00 10 	stw     r0,16(r1)
+   ec:	c8 20 00 00 	lfd     f1,0(0)
+-			ec: R_PPC_EMB_SDA21	lbl_806506A8
++			ec: R_PPC_EMB_SDA21	@24
+   f0:	7f e3 fb 78 	mr      r3,r31
+   f4:	90 81 00 14 	stw     r4,20(r1)
+   f8:	c8 01 00 10 	lfd     f0,16(r1)
+@@ -94,7 +94,7 @@
+  118:	6c 64 80 00 	xoris   r4,r3,32768
+  11c:	90 01 00 10 	stw     r0,16(r1)
+  120:	c8 20 00 00 	lfd     f1,0(0)
+-			120: R_PPC_EMB_SDA21	lbl_806506A8
++			120: R_PPC_EMB_SDA21	@24
+  124:	7f e3 fb 78 	mr      r3,r31
+  128:	90 81 00 14 	stw     r4,20(r1)
+  12c:	c8 01 00 10 	lfd     f0,16(r1)
+@@ -108,7 +108,7 @@
+  144:	3c 00 43 30 	lis     r0,17200
+  148:	90 61 00 14 	stw     r3,20(r1)
+  14c:	c8 20 00 00 	lfd     f1,0(0)
+-			14c: R_PPC_EMB_SDA21	lbl_806506B0
++			14c: R_PPC_EMB_SDA21	@25
+  150:	7f e3 fb 78 	mr      r3,r31
+  154:	90 01 00 10 	stw     r0,16(r1)
+  158:	c8 01 00 10 	lfd     f0,16(r1)
+@@ -122,7 +122,7 @@
+  170:	3c 00 43 30 	lis     r0,17200
+  174:	90 61 00 14 	stw     r3,20(r1)
+  178:	c8 20 00 00 	lfd     f1,0(0)
+-			178: R_PPC_EMB_SDA21	lbl_806506B0
++			178: R_PPC_EMB_SDA21	@25
+  17c:	7f e3 fb 78 	mr      r3,r31
+  180:	90 01 00 10 	stw     r0,16(r1)
+  184:	c8 01 00 10 	lfd     f0,16(r1)
+@@ -136,7 +136,7 @@
+  19c:	3c 00 43 30 	lis     r0,17200
+  1a0:	90 61 00 14 	stw     r3,20(r1)
+  1a4:	c8 20 00 00 	lfd     f1,0(0)
+-			1a4: R_PPC_EMB_SDA21	lbl_806506B0
++			1a4: R_PPC_EMB_SDA21	@25
+  1a8:	7f e3 fb 78 	mr      r3,r31
+  1ac:	90 01 00 10 	stw     r0,16(r1)
+  1b0:	c8 01 00 10 	lfd     f0,16(r1)
+@@ -150,7 +150,7 @@
+  1c8:	3c 00 43 30 	lis     r0,17200
+  1cc:	90 61 00 14 	stw     r3,20(r1)
+  1d0:	c8 20 00 00 	lfd     f1,0(0)
+-			1d0: R_PPC_EMB_SDA21	lbl_806506B0
++			1d0: R_PPC_EMB_SDA21	@25
+  1d4:	7f e3 fb 78 	mr      r3,r31
+  1d8:	90 01 00 10 	stw     r0,16(r1)
+  1dc:	c8 01 00 10 	lfd     f0,16(r1)
+@@ -166,7 +166,7 @@
+  1fc:	90 61 00 14 	stw     r3,20(r1)
+  200:	7f e3 fb 78 	mr      r3,r31
+  204:	c8 20 00 00 	lfd     f1,0(0)
+-			204: R_PPC_EMB_SDA21	lbl_806506B0
++			204: R_PPC_EMB_SDA21	@25
+  208:	90 01 00 10 	stw     r0,16(r1)
+  20c:	c8 01 00 10 	lfd     f0,16(r1)
+  210:	fc 20 08 28 	fsub    f1,f0,f1
+@@ -181,7 +181,7 @@
+  22c:	90 61 00 14 	stw     r3,20(r1)
+  230:	7f e3 fb 78 	mr      r3,r31
+  234:	c8 20 00 00 	lfd     f1,0(0)
+-			234: R_PPC_EMB_SDA21	lbl_806506B0
++			234: R_PPC_EMB_SDA21	@25
+  238:	90 01 00 10 	stw     r0,16(r1)
+  23c:	c8 01 00 10 	lfd     f0,16(r1)
+  240:	fc 20 08 28 	fsub    f1,f0,f1
+
+Script done on 2026-10-04 23:41:40-04:00 [COMMAND_EXIT_CODE="1"]
