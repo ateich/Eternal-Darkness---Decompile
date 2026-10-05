@@ -1,3 +1,4 @@
+typedef signed short s16;
 typedef unsigned int u32;
 
 typedef struct Vec3 {
@@ -13,20 +14,15 @@ typedef struct Color {
     unsigned char a;
 } Color;
 
-typedef struct DrawTail {
+typedef struct DrawParams {
+    s16 values[12];
     u32 flags;
     Color color;
-} DrawTail;
+} DrawParams;
 
-typedef struct DrawState {
-    u32 words[6];
-    DrawTail tail;
-} DrawState;
-
-extern DrawState lbl_8023B6A8;
 extern void fn_801ECC4C(void);
 extern void fn_801ED468(int);
-extern void fn_801EDA7C(void*, int, int, int);
+extern int fn_801EDA7C(s16* values, int context, int flags, void* state);
 extern void fn_801ECF50(int);
 extern void fn_80226AB4(int, int, int);
 extern void fn_801E7BDC(float, float, float);
@@ -34,13 +30,17 @@ extern void fn_801E7BD8(void);
 
 void fn_801E7CBC(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Color color)
 {
-    DrawState state = lbl_8023B6A8;
+    DrawParams params = {
+        {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
+        0x00000000,
+        {0xFF, 0xFF, 0xFF, 0xFF},
+    };
 
     fn_801ECC4C();
     fn_801ED468(0x1B);
-    state.tail.flags = 0x80000000U;
-    state.tail.color = color;
-    fn_801EDA7C(&state, 0, 0x2BF, 0);
+    params.flags = 0x80000000U;
+    params.color = color;
+    fn_801EDA7C(params.values, 0, 0x2BF, 0);
     fn_801ECF50(4);
     fn_80226AB4(0x80, 3, 4);
     fn_801E7BDC(a->x, a->y, a->z);

@@ -278,6 +278,18 @@ config.custom_build_rules = [
         "description": "EXTERNALIZE $in",
     },
     {
+        "name": "externalize_game_801E7CBC_template",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @4 lbl_8023B6A8 "
+            f"orig/{VERSION}/sys/main.dol --require-whole-section "
+            "--require-section=.rodata --reject-section-relocations && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@4=lbl_8023B6A8 --remove-section=.rodata "
+            "--rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
         "name": "externalize_game_80154F74_divisor",
         "command": (
             "python3 tools/externalize_elf_symbol.py $in @29 lbl_80650608 "
@@ -6382,6 +6394,14 @@ config.custom_build_steps["post-compile"].append(
         "outputs": [f"build/{VERSION}/src/game/game_fn_801E504C.externalized"],
         "rule": "externalize_game_801E504C_constants",
         "inputs": [f"build/{VERSION}/src/game/game_fn_801E504C.o"],
+    }
+)
+
+config.custom_build_steps["post-compile"].append(
+    {
+        "outputs": [f"build/{VERSION}/src/game/game_fn_801E7CBC.externalized"],
+        "rule": "externalize_game_801E7CBC_template",
+        "inputs": [f"build/{VERSION}/src/game/game_fn_801E7CBC.o"],
     }
 )
 
