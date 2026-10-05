@@ -1182,3 +1182,10 @@ the other cases by one register (38 lines in every declaration order), and
 block-scoped vectors change the stack layout (47 lines or more).
 
 `fn_801941EC` needed only GC/1.3.2 (GC/1.3 is 16 lines off).
+
+## Colour words are `Color` initializers
+
+`fn_80196578` initializes two local colours, `{255, 0, 0, 180}` and
+`{255, 0, 0, 40}`, and copies them into the object. With `u32` colour fields
+and the words as constants it reaches 68.16327%. It stores `type` before
+`mode` (99.61224% the other way).

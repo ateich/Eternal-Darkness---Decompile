@@ -1,0 +1,258 @@
+{
+  "request": {
+    "number": 36,
+    "head": "17f9721ad6b0704deb41116222359a10525f2254",
+    "targets": [
+      "fn_80052670",
+      "fn_800680C0",
+      "fn_80079D24",
+      "fn_80130720",
+      "fn_8015E1A8",
+      "fn_80196578",
+      "fn_801A3DF8",
+      "fn_801A7BA0",
+      "fn_801BA2A4",
+      "fn_801BEC38",
+      "fn_801D2440",
+      "fn_801DC778",
+      "fn_801E2408",
+      "fn_801E5BD8",
+      "fn_801E7CBC",
+      "fn_801F7234",
+      "fn_801F85A4",
+      "fn_801FA66C",
+      "fn_801FD318"
+    ],
+    "compiler_policy": "preserve",
+    "required_deferred": [
+      "fn_80052670",
+      "fn_800680C0",
+      "fn_80079D24",
+      "fn_80130720",
+      "fn_801A3DF8",
+      "fn_801A7BA0",
+      "fn_801E5BD8",
+      "fn_801F7234",
+      "fn_801F85A4",
+      "fn_801FA66C",
+      "fn_801FD318"
+    ],
+    "discovered_at": 1791217243054,
+    "discovered_by": "pr-sync",
+    "specialist": false,
+    "previous_error": "Error: PR review REQUEST_CHANGES: {\"reviewerA\":null,\"reviewerB\":{\"reviewer\":\"gpt-6-astra:low\",\"issues\":[\"[P1] `game_fn_801BA2A4.c:56,150` declares and calls `fn_801CD1C0` with one argument; its accepted definition requires four. This introduces an incompatible prototype and undefined behavior.\",\"[P1] `game_fn_801BA2A4.c:102–105` changes the interface without matching accepted callers. `fn_801ADC50` uses incompatible parameter types, and its supplied callback, `fn_801AE530`, takes `(u32, u32, u32, u32, Entry*)`, incompatible with the new callback type `(void*, u32, void*, u32, u32)`.\",\"[P1] `game_fn_801BEC38.c:6–48,73` introduces incompatible aggregate interfaces. Accepted caller `fn_801BEF40` defines `MSTEP` as two scalar members and materially different `SYNTH_VOICE`/`VID_LIST` structures; accepted callee `fn_801C09C4` takes a different `Voice` structure. Matching offsets does not establish compatible C types or lawful aliasing.\",\"[P1] `configure.py:3947` routes the new constant mapping through guards lacking `--require-section=.sdata2` and `--reject-section-relocations`. The helper’s legacy relocation path can bypass retail-byte comparison, and section-name/ownership validation is not enabled before unconditional `.sdata2` removal. Use target-scoped commands invoking the existing strict guards.\"],\"rating\":3,\"verdict\":\"REQUEST_CHANGES\",\"raw\":\"I’ll inspect the complete diff, the mapping guards, and the accepted interfaces in the specified checkout.\\n\\nI found an incompatible call: the candidate passes one argument to `fn_801CD1C0`, whose accepted definition takes four. The new constant mapping also omits guards needed to reject relocations and verify the exact section being removed. I’m checking the remaining storage and interface changes.\\n\\nISSUES:\\n- [P1] `game_fn_801BA2A4.c:56,150` declares and calls `fn_801CD1C0` with one argument; its accepted definition requires four. This introduces an incompatible prototype and undefined behavior.\\n- [P1] `game_fn_801BA2A4.c:102–105` changes the interface without matching accepted callers. `fn_801ADC50` uses incompatible parameter types, and its supplied callback, `fn_801AE530`, takes `(u32, u32, u32, u32, Entry*)`, incompatible with the new callback type `(void*, u32, void*, u32, u32)`.\\n- [P1] `game_fn_801BEC38.c:6–48,73` introduces incompatible aggregate interfaces. Accepted caller `fn_801BEF40` defines `MSTEP` as two scalar members and materially different `SYNTH_VOICE`/`VID_LIST` structures; accepted callee `fn_801C09C4` takes a different `Voice` structure. Matching offsets does not establish compatible C types or lawful aliasing.\\n- [P1] `configure.py:3947` routes the new constant mapping through guards lacking `--require-section=.sdata2` and `--reject-section-relocations`. The helper’s legacy relocation path can bypass retail-byte comparison, and section-name/ownership validation is not enabled before unconditional `.sdata2` removal. Use target-scoped commands invoking the existing strict guards.\\n\\nRATING: 3\\n\\nVERDICT: REQUEST_CHANGES\"},\"consensus\":[{\"issue\":\"[P1] `game_fn_801BA2A4.c:56,150` declares and calls `fn_801CD1C0` with one argument; its accepted definition requires four. This introduces an incompatible prototype and undefined behavior.\",\"reviewerA\":false,\"reviewerB\":true,\"agreed\":false},{\"issue\":\"[P1] `game_fn_801BA2A4.c:102–105` changes the interface without matching accepted callers. `fn_801ADC50` uses incompatible parameter types, and its supplied callback, `fn_801AE530`, takes `(u32, u32, u32, u32, Entry*)`, incompatible with the new callback type `(void*, u32, void*, u32, u32)`.\",\"reviewerA\":false,\"reviewerB\":true,\"agreed\":false},{\"issue\":\"[P1] `game_fn_801BEC38.c:6–48,73` introduces incompatible aggregate interfaces. Accepted caller `fn_801BEF40` defines `MSTEP` as two scalar members and materially different `SYNTH_VOICE`/`VID_LIST` structures; accepted callee `fn_801C09C4` takes a different `Voice` structure. Matching offsets does not establish compatible C types or lawful aliasing.\",\"reviewerA\":false,\"reviewerB\":true,\"agreed\":false},{\"issue\":\"[P1] `configure.py:3947` routes the new constant mapping through guards lacking `--require-section=.sdata2` and `--reject-section-relocations`. The helper’s legacy relocation path can bypass retail-byte comparison, and section-name/ownership validation is not enabled before unconditional `.sdata2` removal. Use target-scoped commands invoking the existing strict guards.\",\"reviewerA\":false,\"reviewerB\":true,\"agreed\":false}],\"hasDisagreement\":false,\"table\":\"| Issue | gpt-6-astra:low |\\n|-------|--------|\\n| [P1] `game_fn_801BA2A4.c:56,150` declares and calls `fn_801CD1C0` with one argument; its accepted definition requires four. This introduces an incompatible prototype and undefined behavior. | ✓ |\\n| [P1] `game_fn_801BA2A4.c:102–105` changes the interface without matching accepted callers. `fn_801ADC50` uses incompatible parameter types, and its supplied callback, `fn_801AE530`, takes `(u32, u32, u32, u32, Entry*)`, incompatible with the new callback type `(void*, u32, void*, u32, u32)`. | ✓ |\\n| [P1] `game_fn_801BEC38.c:6–48,73` introduces incompatible aggregate interfaces. Accepted caller `fn_801BEF40` defines `MSTEP` as two scalar members and materially different `SYNTH_VOICE`/`VID_LIST` structures; accepted callee `fn_801C09C4` takes a different `Voice` structure. Matching offsets does not establish compatible C types or lawful aliasing. | ✓ |\\n| [P1] `configure.py:3947` routes the new constant mapping through guards lacking `--require-section=.sdata2` and `--reject-section-relocations`. The helper’s legacy relocation path can bypass retail-byte comparison, and section-name/ownership validation is not enabled before unconditional `.sdata2` removal. Use target-scoped commands invoking the existing strict guards. | ✓ |\\n\\n**gpt-6-astra:low Rating:** 3/10 — REQUEST_CHANGES\\n\\n_Second reviewer disabled (modelRouting.enableSecondReviewer)._\",\"verdict\":\"REQUEST_CHANGES\"}\n    at integrate (file:///home/rabbit/src/darkfoundry-new/scripts/decomp-durable-runtime.mjs:1159:47)\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at async runJob (file:///home/rabbit/src/darkfoundry-new/scripts/decomp-durable-runtime.mjs:1475:51)\n    at async main (file:///home/rabbit/src/darkfoundry-new/scripts/decomp-durable-runtime.mjs:1588:25)",
+    "previous_preparation": {
+      "job": "db19db0c-8b66-4f14-9dcb-d1ddfac03b73",
+      "base_commit": "3048dcbb1ebcc987e57b86d7e019ae8f5c073858",
+      "candidate_commit": "07ea9bebc10babeeb60b1b9d94f64c007dd3d612",
+      "directory": "/home/rabbit/src/darkfoundry-new/.darkfoundry/worktrees/22ad71f4-4952-4d9b-afe9-95fe6794a318",
+      "manifest": {
+        "included": [
+          "fn_80196578",
+          "fn_801BA2A4",
+          "fn_801BEC38"
+        ],
+        "deferred": [
+          {
+            "target": "fn_80052670",
+            "reason": "mandatory deferral"
+          },
+          {
+            "target": "fn_800680C0",
+            "reason": "mandatory deferral"
+          },
+          {
+            "target": "fn_80079D24",
+            "reason": "mandatory deferral"
+          },
+          {
+            "target": "fn_80130720",
+            "reason": "mandatory deferral"
+          },
+          {
+            "target": "fn_8015E1A8",
+            "reason": "requires a forbidden compiler-flag change"
+          },
+          {
+            "target": "fn_801A3DF8",
+            "reason": "mandatory deferral"
+          },
+          {
+            "target": "fn_801A7BA0",
+            "reason": "mandatory deferral"
+          },
+          {
+            "target": "fn_801D2440",
+            "reason": "review found incompatible accepted interfaces and out-of-bounds storage; no honest C repair established"
+          },
+          {
+            "target": "fn_801DC778",
+            "reason": "review found an incompatible callback type; no honest C repair established"
+          },
+          {
+            "target": "fn_801E2408",
+            "reason": "review found incompatible object storage and callback types; no honest C repair established"
+          },
+          {
+            "target": "fn_801E5BD8",
+            "reason": "mandatory deferral"
+          },
+          {
+            "target": "fn_801E7CBC",
+            "reason": "review found out-of-bounds and aliasing-invalid parameter storage; no honest C repair established"
+          },
+          {
+            "target": "fn_801F7234",
+            "reason": "mandatory deferral"
+          },
+          {
+            "target": "fn_801F85A4",
+            "reason": "mandatory deferral"
+          },
+          {
+            "target": "fn_801FA66C",
+            "reason": "mandatory deferral"
+          },
+          {
+            "target": "fn_801FD318",
+            "reason": "mandatory deferral"
+          }
+        ]
+      },
+      "authors": [
+        "ateich <4775201+ateich@users.noreply.github.com>"
+      ]
+    }
+  },
+  "manifest": {
+    "included": [
+      "fn_80196578"
+    ],
+    "deferred": [
+      {
+        "target": "fn_80052670",
+        "reason": "mandatory deferral"
+      },
+      {
+        "target": "fn_800680C0",
+        "reason": "mandatory deferral"
+      },
+      {
+        "target": "fn_80079D24",
+        "reason": "mandatory deferral"
+      },
+      {
+        "target": "fn_80130720",
+        "reason": "mandatory deferral"
+      },
+      {
+        "target": "fn_8015E1A8",
+        "reason": "requires a forbidden compiler-flag change"
+      },
+      {
+        "target": "fn_801A3DF8",
+        "reason": "mandatory deferral"
+      },
+      {
+        "target": "fn_801A7BA0",
+        "reason": "mandatory deferral"
+      },
+      {
+        "target": "fn_801BA2A4",
+        "reason": "review found incompatible callee and callback interfaces; no honest C repair established"
+      },
+      {
+        "target": "fn_801BEC38",
+        "reason": "review found incompatible aggregate interfaces; no honest C repair established"
+      },
+      {
+        "target": "fn_801D2440",
+        "reason": "review found incompatible accepted interfaces and out-of-bounds storage; no honest C repair established"
+      },
+      {
+        "target": "fn_801DC778",
+        "reason": "review found an incompatible callback type; no honest C repair established"
+      },
+      {
+        "target": "fn_801E2408",
+        "reason": "review found incompatible object storage and callback types; no honest C repair established"
+      },
+      {
+        "target": "fn_801E5BD8",
+        "reason": "mandatory deferral"
+      },
+      {
+        "target": "fn_801E7CBC",
+        "reason": "review found out-of-bounds and aliasing-invalid parameter storage; no honest C repair established"
+      },
+      {
+        "target": "fn_801F7234",
+        "reason": "mandatory deferral"
+      },
+      {
+        "target": "fn_801F85A4",
+        "reason": "mandatory deferral"
+      },
+      {
+        "target": "fn_801FA66C",
+        "reason": "mandatory deferral"
+      },
+      {
+        "target": "fn_801FD318",
+        "reason": "mandatory deferral"
+      }
+    ]
+  },
+  "acceptedBase": "3048dcbb1ebcc987e57b86d7e019ae8f5c073858",
+  "review": {
+    "reviewerA": null,
+    "reviewerB": {
+      "reviewer": "gpt-6-astra:low",
+      "issues": [],
+      "rating": 9,
+      "verdict": "APPROVE",
+      "raw": "I’ll inspect the complete checkout diff, the accepted interfaces, and the section-removal guards against the stated scope and compiler policy.\n\nThe diff is limited to the included target, its build mapping, and documentation/report files. Compiler settings, shared helpers, and deferred targets are unchanged. I’m checking the complete-section guards and the target’s layout; this checkout has no retail DOL or built target object for byte verification.\n\nISSUES:\n- None\n\nRATING: 9\n\nVERDICT: APPROVE"
+    },
+    "consensus": [],
+    "hasDisagreement": false,
+    "table": "| Issue | gpt-6-astra:low |\n|-------|--------|\n\n**gpt-6-astra:low Rating:** 9/10 — APPROVE\n\n_Second reviewer disabled (modelRouting.enableSecondReviewer)._",
+    "verdict": "APPROVE"
+  },
+  "canonical": {
+    "fuzzy_match_percent": 61.78436,
+    "total_code": "2300692",
+    "matched_code": "1252748",
+    "matched_code_percent": 54.450924,
+    "total_data": "4305634",
+    "matched_data": "39994",
+    "matched_data_percent": 0.928876,
+    "total_functions": 8214,
+    "matched_functions": 6269,
+    "matched_functions_percent": 76.320915,
+    "complete_code": "1252748",
+    "complete_code_percent": 54.450924,
+    "complete_data": "40282",
+    "complete_data_percent": 0.93556494,
+    "total_units": 7121,
+    "complete_units": 6504
+  },
+  "strict": {
+    "fuzzy_match_percent": 61.781704,
+    "total_code": "2300692",
+    "matched_code": "1252748",
+    "matched_code_percent": 54.450924,
+    "total_data": "4305634",
+    "matched_data": "39994",
+    "matched_data_percent": 0.928876,
+    "total_functions": 8214,
+    "matched_functions": 6269,
+    "matched_functions_percent": 76.320915,
+    "complete_code": "1252748",
+    "complete_code_percent": 54.450924,
+    "complete_data": "40282",
+    "complete_data_percent": 0.93556494,
+    "total_units": 7121,
+    "complete_units": 6504
+  },
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

@@ -88,6 +88,23 @@ config.asflags = ["-mgekko", "--strip-local-absolute", "-I include", f"-I build/
 config.ldflags = ["-fp hardware", "-nodefaults"]
 config.custom_build_rules = [
     {
+        "name": "externalize_game_80196578_constants",
+        "command": (
+            "python3 tools/externalize_elf_symbol.py $in @4 lbl_80650B78 "
+            f"orig/{VERSION}/sys/main.dol --require-section-symbols=@4,@5,@7 "
+            "--require-section=.sdata2 --reject-section-relocations && "
+            "python3 tools/externalize_elf_symbol.py $in @5 lbl_80650B7C "
+            f"orig/{VERSION}/sys/main.dol && "
+            "python3 tools/externalize_elf_symbol.py $in @7 lbl_80650B80 "
+            f"orig/{VERSION}/sys/main.dol && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@4=lbl_80650B78 --redefine-sym=@5=lbl_80650B7C "
+            "--redefine-sym=@7=lbl_80650B80 --remove-section=.sdata2 "
+            "--rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
         "name": "externalize_game_8006D548_constants",
         "command": (
             "python3 tools/externalize_elf_symbol.py $in @139 lbl_8064E7FC "
@@ -4301,8 +4318,14 @@ guarded_externalize_rules.add("externalize_game_80089A34_constants")
 guarded_externalize_rules.add("externalize_game_80140E70_constants")
 guarded_externalize_rules.add("externalize_game_8019C7A8_constants")
 guarded_externalize_rules.add("externalize_game_80068870_constant_alias")
+guarded_externalize_rules.add("externalize_game_80196578_constants")
 config.custom_build_steps = {
     "post-compile": [
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_80196578.externalized"],
+            "rule": "externalize_game_80196578_constants",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_80196578.o"],
+        },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_8006D548.externalized"],
             "rule": "externalize_game_8006D548_constants",
@@ -12014,7 +12037,7 @@ config.libs = [
             Object(Matching, "game/game_fn_80195960.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(NonMatching, "game/game_fn_80195AEC.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_801964E8.c", extra_cflags=["-use_lmw_stmw on"]),
-            Object(NonMatching, "game/game_fn_80196578.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_80196578.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_8019663C.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_801966E0.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_80196784.c", extra_cflags=["-use_lmw_stmw on"]),
