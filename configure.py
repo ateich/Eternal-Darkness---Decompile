@@ -14074,6 +14074,7 @@ config.libs = [
             Object(NonMatching, "dolphin/os/fn_8020A19C.c"),
             Object(NonMatching, "dolphin/os/fn_8020A41C.c"),
             Object(NonMatching, "dolphin/os/fn_8020A440.c"),
+            Object(NonMatching, "dolphin/os/fn_8020A444.c"),
             Object(Matching, "dolphin/os/OSArena.c"),
             Object(Matching, "dolphin/os/OSLink.c"),
             Object(Matching, "dolphin/os/OSMessage.c"),

@@ -1,0 +1,14 @@
+
+build/GEDE01/src/dolphin/os/fn_8020A444.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <__OSSetExceptionHandler>:
+   0:	80 a0 00 00 	lwz     r5,0(0)
+			2: R_PPC_EMB_SDA21	OSExceptionTable
+   4:	54 60 15 ba 	rlwinm  r0,r3,2,22,29
+   8:	7c a5 02 14 	add     r5,r5,r0
+   c:	80 65 00 00 	lwz     r3,0(r5)
+  10:	90 85 00 00 	stw     r4,0(r5)
+  14:	4e 80 00 20 	blr

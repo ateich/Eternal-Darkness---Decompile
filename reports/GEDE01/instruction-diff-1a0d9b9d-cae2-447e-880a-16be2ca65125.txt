@@ -1,0 +1,8 @@
+target 28 bytes  base 24 bytes  match 75.0
+* 0x0000  clrlwi r0, r3, 24                                    |
+* 0x0004  lwz r3, OSExceptionTable_8064D900@sda21 [None+0 t109] | lwz r5, OSExceptionTable@sda21 [None+0 t109]
+* 0x0008  slwi r0, r0, 2                                       | clrlslwi r0, r3, 24, 2
+* 0x000c  add r5, r3, r0                                       | add r5, r5, r0
+  0x0010  lwz r3, 0x0(r5)                                      | lwz r3, 0x0(r5)
+  0x0014  stw r4, 0x0(r5)                                      | stw r4, 0x0(r5)
+  0x0018  blr                                                  | blr
