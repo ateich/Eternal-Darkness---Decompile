@@ -20,10 +20,10 @@ void fn_8018A060(u8* arg)
 {
     u8* data;
     u16 vertex_count;
-    u8* buffer0;
-    u8* buffer1;
-    u8* buffer2;
-    u8* object;
+    register u8* object;
+    register u8* buffer2;
+    register u8* buffer1;
+    register u8* buffer0;
     int buffer_offset;
     int i;
     u8 entry_count;
@@ -51,9 +51,8 @@ void fn_8018A060(u8* arg)
 
     entry = *(u8**)(object + 0x4C);
     color_out = buffer2;
-    i = 0;
     buffer_offset = 0;
-    for (; i < entry_count; i++) {
+    for (i = 0; i < entry_count; i++) {
         int j;
         fn_80188A7C(entry, buffer0 + buffer_offset, fn_8018D688);
         for (j = 0; j < entry[0x20]; j++) {

@@ -1,0 +1,290 @@
+TARGET retail object relocations and disassembly
+
+Relocation section '.rela.text' at offset 0x1a8 contains 22 entries:
+ Offset     Info    Type            Sym.Value  Sym. Name + Addend
+00000016  00000406 R_PPC_ADDR16_HA   00000000   lbl_80607120 + 0
+0000001a  00000404 R_PPC_ADDR16_LO   00000000   lbl_80607120 + 0
+0000001c  0000056d R_PPC_EMB_SDA21   00000000   lbl_8064D738 + 0
+0000005e  00000606 R_PPC_ADDR16_HA   00000000   fn_8018D688 + 0
+0000006e  00000604 R_PPC_ADDR16_LO   00000000   fn_8018D688 + 0
+00000084  0000070a R_PPC_REL24       00000000   fn_80188A7C + 0
+000000c8  0000080a R_PPC_REL24       00000000   DCFlushRange + 0
+000000d4  0000080a R_PPC_REL24       00000000   DCFlushRange + 0
+000000e0  0000080a R_PPC_REL24       00000000   DCFlushRange + 0
+000000e8  0000090a R_PPC_REL24       00000000   fn_801ED57C + 0
+000000fc  00000a0a R_PPC_REL24       00000000   fn_8018D0D0 + 0
+00000100  00000b0a R_PPC_REL24       00000000   fn_8017FFB8 + 0
+00000110  00000c0a R_PPC_REL24       00000000   fn_80225F4C + 0
+00000114  00000d0a R_PPC_REL24       00000000   fn_8017FF98 + 0
+00000124  00000c0a R_PPC_REL24       00000000   fn_80225F4C + 0
+00000128  00000e0a R_PPC_REL24       00000000   fn_8017FFB0 + 0
+00000138  00000c0a R_PPC_REL24       00000000   fn_80225F4C + 0
+0000013e  00000f06 R_PPC_ADDR16_HA   00000000   lbl_80606AE0 + 0
+00000140  0000106d R_PPC_EMB_SDA21   00000000   lbl_8064D24C + 0
+00000146  00000f04 R_PPC_ADDR16_LO   00000000   lbl_80606AE0 + 0
+00000148  0000110a R_PPC_REL24       00000000   fn_8022B448 + 0
+00000150  0000090a R_PPC_REL24       00000000   fn_801ED57C + 0
+
+build/GEDE01/obj/game/game_fn_8018A060.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <fn_8018A060>:
+   0:	94 21 ff c0 	stwu    r1,-64(r1)
+   4:	7c 08 02 a6 	mflr    r0
+   8:	90 01 00 44 	stw     r0,68(r1)
+   c:	be 61 00 0c 	stmw    r19,12(r1)
+  10:	7c 7c 1b 78 	mr      r28,r3
+  14:	3c 60 00 00 	lis     r3,0
+			16: R_PPC_ADDR16_HA	lbl_80607120
+  18:	38 63 00 00 	addi    r3,r3,0
+			1a: R_PPC_ADDR16_LO	lbl_80607120
+  1c:	80 00 00 00 	lwz     r0,0(0)
+			1c: R_PPC_EMB_SDA21	lbl_8064D738
+  20:	8b 1c 00 01 	lbz     r24,1(r28)
+  24:	2c 00 00 00 	cmpwi   r0,0
+  28:	a0 83 00 02 	lhz     r4,2(r3)
+  2c:	a2 e3 00 0a 	lhz     r23,10(r3)
+  30:	a2 c3 00 0e 	lhz     r22,14(r3)
+  34:	a2 a3 00 0c 	lhz     r21,12(r3)
+  38:	83 fc 00 50 	lwz     r31,80(r28)
+  3c:	83 dc 00 54 	lwz     r30,84(r28)
+  40:	83 bc 00 58 	lwz     r29,88(r28)
+  44:	41 82 00 18 	beq     5c <fn_8018A060+0x5c>
+  48:	1c 04 00 06 	mulli   r0,r4,6
+  4c:	54 83 13 ba 	rlwinm  r3,r4,2,14,29
+  50:	7f de 1a 14 	add     r30,r30,r3
+  54:	7f ff 02 14 	add     r31,r31,r0
+  58:	7f bd 1a 14 	add     r29,r29,r3
+  5c:	3c 60 00 00 	lis     r3,0
+			5e: R_PPC_ADDR16_HA	fn_8018D688
+  60:	82 9c 00 4c 	lwz     r20,76(r28)
+  64:	7f b3 eb 78 	mr      r19,r29
+  68:	3b 20 00 00 	li      r25,0
+  6c:	3b 43 00 00 	addi    r26,r3,0
+			6e: R_PPC_ADDR16_LO	fn_8018D688
+  70:	3b 60 00 00 	li      r27,0
+  74:	48 00 00 44 	b       b8 <fn_8018A060+0xb8>
+  78:	7e 83 a3 78 	mr      r3,r20
+  7c:	7f 45 d3 78 	mr      r5,r26
+  80:	7c 9f da 14 	add     r4,r31,r27
+  84:	48 00 00 01 	bl      84 <fn_8018A060+0x84>
+			84: R_PPC_REL24	fn_80188A7C
+  88:	38 60 00 00 	li      r3,0
+  8c:	48 00 00 14 	b       a0 <fn_8018A060+0xa0>
+  90:	88 14 00 2b 	lbz     r0,43(r20)
+  94:	38 63 00 01 	addi    r3,r3,1
+  98:	98 13 00 03 	stb     r0,3(r19)
+  9c:	3a 73 00 04 	addi    r19,r19,4
+  a0:	88 14 00 20 	lbz     r0,32(r20)
+  a4:	7c 03 00 00 	cmpw    r3,r0
+  a8:	41 80 ff e8 	blt     90 <fn_8018A060+0x90>
+  ac:	3a 94 00 38 	addi    r20,r20,56
+  b0:	3b 7b 00 0c 	addi    r27,r27,12
+  b4:	3b 39 00 01 	addi    r25,r25,1
+  b8:	7c 19 c0 00 	cmpw    r25,r24
+  bc:	41 80 ff bc 	blt     78 <fn_8018A060+0x78>
+  c0:	7f e3 fb 78 	mr      r3,r31
+  c4:	7e e4 bb 78 	mr      r4,r23
+  c8:	48 00 00 01 	bl      c8 <fn_8018A060+0xc8>
+			c8: R_PPC_REL24	DCFlushRange
+  cc:	7f a3 eb 78 	mr      r3,r29
+  d0:	7e a4 ab 78 	mr      r4,r21
+  d4:	48 00 00 01 	bl      d4 <fn_8018A060+0xd4>
+			d4: R_PPC_REL24	DCFlushRange
+  d8:	7f c3 f3 78 	mr      r3,r30
+  dc:	7e c4 b3 78 	mr      r4,r22
+  e0:	48 00 00 01 	bl      e0 <fn_8018A060+0xe0>
+			e0: R_PPC_REL24	DCFlushRange
+  e4:	38 60 00 00 	li      r3,0
+  e8:	48 00 00 01 	bl      e8 <fn_8018A060+0xe8>
+			e8: R_PPC_REL24	fn_801ED57C
+  ec:	a8 bc 00 0e 	lha     r5,14(r28)
+  f0:	7c 73 1b 78 	mr      r19,r3
+  f4:	7f 83 e3 78 	mr      r3,r28
+  f8:	38 9c 00 5c 	addi    r4,r28,92
+  fc:	48 00 00 01 	bl      fc <fn_8018A060+0xfc>
+			fc: R_PPC_REL24	fn_8018D0D0
+ 100:	48 00 00 01 	bl      100 <fn_8018A060+0x100>
+			100: R_PPC_REL24	fn_8017FFB8
+ 104:	54 65 06 3e 	clrlwi  r5,r3,24
+ 108:	7f e4 fb 78 	mr      r4,r31
+ 10c:	38 60 00 09 	li      r3,9
+ 110:	48 00 00 01 	bl      110 <fn_8018A060+0x110>
+			110: R_PPC_REL24	fn_80225F4C
+ 114:	48 00 00 01 	bl      114 <fn_8018A060+0x114>
+			114: R_PPC_REL24	fn_8017FF98
+ 118:	54 65 06 3e 	clrlwi  r5,r3,24
+ 11c:	7f a4 eb 78 	mr      r4,r29
+ 120:	38 60 00 0b 	li      r3,11
+ 124:	48 00 00 01 	bl      124 <fn_8018A060+0x124>
+			124: R_PPC_REL24	fn_80225F4C
+ 128:	48 00 00 01 	bl      128 <fn_8018A060+0x128>
+			128: R_PPC_REL24	fn_8017FFB0
+ 12c:	54 65 06 3e 	clrlwi  r5,r3,24
+ 130:	7f c4 f3 78 	mr      r4,r30
+ 134:	38 60 00 0d 	li      r3,13
+ 138:	48 00 00 01 	bl      138 <fn_8018A060+0x138>
+			138: R_PPC_REL24	fn_80225F4C
+ 13c:	3c 60 00 00 	lis     r3,0
+			13e: R_PPC_ADDR16_HA	lbl_80606AE0
+ 140:	80 80 00 00 	lwz     r4,0(0)
+			140: R_PPC_EMB_SDA21	lbl_8064D24C
+ 144:	38 63 00 00 	addi    r3,r3,0
+			146: R_PPC_ADDR16_LO	lbl_80606AE0
+ 148:	48 00 00 01 	bl      148 <fn_8018A060+0x148>
+			148: R_PPC_REL24	fn_8022B448
+ 14c:	7e 63 9b 78 	mr      r3,r19
+ 150:	48 00 00 01 	bl      150 <fn_8018A060+0x150>
+			150: R_PPC_REL24	fn_801ED57C
+ 154:	ba 61 00 0c 	lmw     r19,12(r1)
+ 158:	80 01 00 44 	lwz     r0,68(r1)
+ 15c:	7c 08 03 a6 	mtlr    r0
+ 160:	38 21 00 40 	addi    r1,r1,64
+ 164:	4e 80 00 20 	blr
+BASE reconstructed object relocations and disassembly
+
+Relocation section '.rela.text' at offset 0x19c contains 22 entries:
+ Offset     Info    Type            Sym.Value  Sym. Name + Addend
+00000016  00000306 R_PPC_ADDR16_HA   00000000   lbl_80607120 + 0
+0000001a  00000304 R_PPC_ADDR16_LO   00000000   lbl_80607120 + 0
+0000001c  0000046d R_PPC_EMB_SDA21   00000000   lbl_8064D738 + 0
+0000005e  00000706 R_PPC_ADDR16_HA   00000000   fn_8018D688 + 0
+0000006e  00000704 R_PPC_ADDR16_LO   00000000   fn_8018D688 + 0
+00000084  0000080a R_PPC_REL24       00000000   fn_80188A7C + 0
+000000c8  0000090a R_PPC_REL24       00000000   DCFlushRange + 0
+000000d4  0000090a R_PPC_REL24       00000000   DCFlushRange + 0
+000000e0  0000090a R_PPC_REL24       00000000   DCFlushRange + 0
+000000e8  00000a0a R_PPC_REL24       00000000   fn_801ED57C + 0
+000000fc  00000b0a R_PPC_REL24       00000000   fn_8018D0D0 + 0
+00000100  00000c0a R_PPC_REL24       00000000   fn_8017FFB8 + 0
+00000110  00000d0a R_PPC_REL24       00000000   fn_80225F4C + 0
+00000114  00000e0a R_PPC_REL24       00000000   fn_8017FF98 + 0
+00000124  00000d0a R_PPC_REL24       00000000   fn_80225F4C + 0
+00000128  00000f0a R_PPC_REL24       00000000   fn_8017FFB0 + 0
+00000138  00000d0a R_PPC_REL24       00000000   fn_80225F4C + 0
+0000013e  00000506 R_PPC_ADDR16_HA   00000000   lbl_80606AE0 + 0
+00000140  0000066d R_PPC_EMB_SDA21   00000000   lbl_8064D24C + 0
+00000146  00000504 R_PPC_ADDR16_LO   00000000   lbl_80606AE0 + 0
+00000148  0000100a R_PPC_REL24       00000000   fn_8022B448 + 0
+00000150  00000a0a R_PPC_REL24       00000000   fn_801ED57C + 0
+
+build/GEDE01/src/game/game_fn_8018A060.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <fn_8018A060>:
+   0:	94 21 ff c0 	stwu    r1,-64(r1)
+   4:	7c 08 02 a6 	mflr    r0
+   8:	90 01 00 44 	stw     r0,68(r1)
+   c:	be 61 00 0c 	stmw    r19,12(r1)
+  10:	7c 7f 1b 78 	mr      r31,r3
+  14:	3c 60 00 00 	lis     r3,0
+			16: R_PPC_ADDR16_HA	lbl_80607120
+  18:	38 63 00 00 	addi    r3,r3,0
+			1a: R_PPC_ADDR16_LO	lbl_80607120
+  1c:	80 00 00 00 	lwz     r0,0(0)
+			1c: R_PPC_EMB_SDA21	lbl_8064D738
+  20:	8b 1f 00 01 	lbz     r24,1(r31)
+  24:	2c 00 00 00 	cmpwi   r0,0
+  28:	a0 83 00 02 	lhz     r4,2(r3)
+  2c:	a2 e3 00 0a 	lhz     r23,10(r3)
+  30:	a2 c3 00 0e 	lhz     r22,14(r3)
+  34:	a2 a3 00 0c 	lhz     r21,12(r3)
+  38:	83 7f 00 50 	lwz     r27,80(r31)
+  3c:	83 9f 00 54 	lwz     r28,84(r31)
+  40:	83 bf 00 58 	lwz     r29,88(r31)
+  44:	41 82 00 18 	beq     5c <fn_8018A060+0x5c>
+  48:	1c 04 00 06 	mulli   r0,r4,6
+  4c:	54 83 13 ba 	rlwinm  r3,r4,2,14,29
+  50:	7f 9c 1a 14 	add     r28,r28,r3
+  54:	7f 7b 02 14 	add     r27,r27,r0
+  58:	7f bd 1a 14 	add     r29,r29,r3
+  5c:	3c 60 00 00 	lis     r3,0
+			5e: R_PPC_ADDR16_HA	fn_8018D688
+  60:	82 9f 00 4c 	lwz     r20,76(r31)
+  64:	7f b3 eb 78 	mr      r19,r29
+  68:	3b 40 00 00 	li      r26,0
+  6c:	3b c3 00 00 	addi    r30,r3,0
+			6e: R_PPC_ADDR16_LO	fn_8018D688
+  70:	3b 20 00 00 	li      r25,0
+  74:	48 00 00 44 	b       b8 <fn_8018A060+0xb8>
+  78:	7e 83 a3 78 	mr      r3,r20
+  7c:	7f c5 f3 78 	mr      r5,r30
+  80:	7c 9b d2 14 	add     r4,r27,r26
+  84:	48 00 00 01 	bl      84 <fn_8018A060+0x84>
+			84: R_PPC_REL24	fn_80188A7C
+  88:	38 60 00 00 	li      r3,0
+  8c:	48 00 00 14 	b       a0 <fn_8018A060+0xa0>
+  90:	88 14 00 2b 	lbz     r0,43(r20)
+  94:	38 63 00 01 	addi    r3,r3,1
+  98:	98 13 00 03 	stb     r0,3(r19)
+  9c:	3a 73 00 04 	addi    r19,r19,4
+  a0:	88 14 00 20 	lbz     r0,32(r20)
+  a4:	7c 03 00 00 	cmpw    r3,r0
+  a8:	41 80 ff e8 	blt     90 <fn_8018A060+0x90>
+  ac:	3a 94 00 38 	addi    r20,r20,56
+  b0:	3b 5a 00 0c 	addi    r26,r26,12
+  b4:	3b 39 00 01 	addi    r25,r25,1
+  b8:	7c 19 c0 00 	cmpw    r25,r24
+  bc:	41 80 ff bc 	blt     78 <fn_8018A060+0x78>
+  c0:	7f 63 db 78 	mr      r3,r27
+  c4:	7e e4 bb 78 	mr      r4,r23
+  c8:	48 00 00 01 	bl      c8 <fn_8018A060+0xc8>
+			c8: R_PPC_REL24	DCFlushRange
+  cc:	7f a3 eb 78 	mr      r3,r29
+  d0:	7e a4 ab 78 	mr      r4,r21
+  d4:	48 00 00 01 	bl      d4 <fn_8018A060+0xd4>
+			d4: R_PPC_REL24	DCFlushRange
+  d8:	7f 83 e3 78 	mr      r3,r28
+  dc:	7e c4 b3 78 	mr      r4,r22
+  e0:	48 00 00 01 	bl      e0 <fn_8018A060+0xe0>
+			e0: R_PPC_REL24	DCFlushRange
+  e4:	38 60 00 00 	li      r3,0
+  e8:	48 00 00 01 	bl      e8 <fn_8018A060+0xe8>
+			e8: R_PPC_REL24	fn_801ED57C
+  ec:	a8 bf 00 0e 	lha     r5,14(r31)
+  f0:	7c 73 1b 78 	mr      r19,r3
+  f4:	7f e3 fb 78 	mr      r3,r31
+  f8:	38 9f 00 5c 	addi    r4,r31,92
+  fc:	48 00 00 01 	bl      fc <fn_8018A060+0xfc>
+			fc: R_PPC_REL24	fn_8018D0D0
+ 100:	48 00 00 01 	bl      100 <fn_8018A060+0x100>
+			100: R_PPC_REL24	fn_8017FFB8
+ 104:	54 65 06 3e 	clrlwi  r5,r3,24
+ 108:	7f 64 db 78 	mr      r4,r27
+ 10c:	38 60 00 09 	li      r3,9
+ 110:	48 00 00 01 	bl      110 <fn_8018A060+0x110>
+			110: R_PPC_REL24	fn_80225F4C
+ 114:	48 00 00 01 	bl      114 <fn_8018A060+0x114>
+			114: R_PPC_REL24	fn_8017FF98
+ 118:	54 65 06 3e 	clrlwi  r5,r3,24
+ 11c:	7f a4 eb 78 	mr      r4,r29
+ 120:	38 60 00 0b 	li      r3,11
+ 124:	48 00 00 01 	bl      124 <fn_8018A060+0x124>
+			124: R_PPC_REL24	fn_80225F4C
+ 128:	48 00 00 01 	bl      128 <fn_8018A060+0x128>
+			128: R_PPC_REL24	fn_8017FFB0
+ 12c:	54 65 06 3e 	clrlwi  r5,r3,24
+ 130:	7f 84 e3 78 	mr      r4,r28
+ 134:	38 60 00 0d 	li      r3,13
+ 138:	48 00 00 01 	bl      138 <fn_8018A060+0x138>
+			138: R_PPC_REL24	fn_80225F4C
+ 13c:	3c 60 00 00 	lis     r3,0
+			13e: R_PPC_ADDR16_HA	lbl_80606AE0
+ 140:	80 80 00 00 	lwz     r4,0(0)
+			140: R_PPC_EMB_SDA21	lbl_8064D24C
+ 144:	38 63 00 00 	addi    r3,r3,0
+			146: R_PPC_ADDR16_LO	lbl_80606AE0
+ 148:	48 00 00 01 	bl      148 <fn_8018A060+0x148>
+			148: R_PPC_REL24	fn_8022B448
+ 14c:	7e 63 9b 78 	mr      r3,r19
+ 150:	48 00 00 01 	bl      150 <fn_8018A060+0x150>
+			150: R_PPC_REL24	fn_801ED57C
+ 154:	ba 61 00 0c 	lmw     r19,12(r1)
+ 158:	80 01 00 44 	lwz     r0,68(r1)
+ 15c:	7c 08 03 a6 	mtlr    r0
+ 160:	38 21 00 40 	addi    r1,r1,64
+ 164:	4e 80 00 20 	blr
