@@ -22,7 +22,32 @@ typedef struct Direction { u32 word; u16 half; } Direction;
 typedef struct ParticleParams { u8 bytes[0x90]; } ParticleParams;
 typedef struct Descriptor { u8 bytes[0xC0]; } Descriptor;
 
-typedef struct Object { u8 bytes[0x1000]; } Object;
+typedef struct Object Object;
+struct Object {
+    u32 unk00;
+    u32 flags;
+    int generation;
+    u32 subject;
+    int resource;
+    Object* next;
+    Object* prev;
+    void (*callback)(Object*);
+    u32 unk20;
+    u32 unk24;
+    void (*on_finish)(Object*, u32);
+    u32 finish_arg;
+    u32 unk30;
+    u32 unk34;
+    Vec3 position;
+    u32 unk44;
+    u8 pad48[0x74];
+    EffectBlock effects;
+    u8 status;
+    u8 state;
+    u8 active;
+    u8 padFF3;
+    u16 timer;
+};
 
 extern int lbl_8064D18C;
 extern void* fn_80201814(u32);
@@ -99,32 +124,33 @@ extern const u32 lbl_80651144;
 extern const u32 lbl_80651148;
 extern const u32 lbl_8065114C;
 
-void fn_801D8E40(Object* object)
+void fn_801D8E40(void* arg)
 {
+    Object* object = arg;
+    EffectBlock* data = &object->effects;
     u32 flags;
     void* subject;
     void** effect;
-    EffectBlock* data = (EffectBlock*)(object->bytes + 0xBC);
     s16 count;
     int i;
     u16 timer;
 
-    flags = *(u32*)(object->bytes + 4);
-    subject = fn_80201814(*(u32*)(object->bytes + 0xC));
-    if (*(int*)(object->bytes + 8) != lbl_8064D18C || (object->bytes[0xFF0] & 1) != 0) {
-        if (*(u16*)(object->bytes + 0xFF4) == 0 && fn_800A0C0C(0) == 0)
-            fn_801D88D4(flags, *(u32*)(object->bytes + 0xC));
-        fn_801FE22C(*(u32*)(object->bytes + 0x44));
-        if (*(int*)(object->bytes + 0x10) != -1)
-            fn_801B05B0(*(int*)(object->bytes + 0x10), 10);
+    flags = object->flags;
+    subject = fn_80201814(object->subject);
+    if (object->generation != lbl_8064D18C || (object->status & 1) != 0) {
+        if (object->timer == 0 && fn_800A0C0C(0) == 0)
+            fn_801D88D4(flags, object->subject);
+        fn_801FE22C(object->unk44);
+        if (object->resource != -1)
+            fn_801B05B0(object->resource, 10);
         fn_801D884C(object);
         return;
     }
 
     if (subject != 0 && fn_80201B64() == 8) {
-        if (*(u16*)(object->bytes + 0xFF4) > 30) {
+        if (object->timer > 30) {
             count = fn_801CEB2C(flags);
-            if (*(u16*)(object->bytes + 0xFF4) > 110) {
+            if (object->timer > 110) {
                 for (i = 0; i < count; i++) {
                     effect = &data->effects[i];
                     if (*effect != 0) {
@@ -140,28 +166,28 @@ void fn_801D8E40(Object* object)
                 }
             }
         }
-        fn_801FE22C(*(u32*)(object->bytes + 0x44));
-        if (*(int*)(object->bytes + 0x10) != -1)
-            fn_801B05B0(*(int*)(object->bytes + 0x10), 10);
+        fn_801FE22C(object->unk44);
+        if (object->resource != -1)
+            fn_801B05B0(object->resource, 10);
         fn_801D884C(object);
         return;
     }
 
-    timer = *(u16*)(object->bytes + 0xFF4);
+    timer = object->timer;
     if (timer >= 130 && timer < 160) {
         subject = fn_80201BC8(subject);
         if ((fn_8012F674(subject, 15, 0) & 8) == 0)
-            fn_80121104(subject, lbl_806510F8 + (float)(*(u16*)(object->bytes + 0xFF4) - 129) / lbl_80651150);
+            fn_80121104(subject, lbl_806510F8 + (float)(object->timer - 129) / lbl_80651150);
     }
 
-    switch (*(u16*)(object->bytes + 0xFF4)) {
+    switch (object->timer) {
     case 0:
         if (fn_800A0C0C(0) == 0) {
-            fn_801D88D4(flags, *(u32*)(object->bytes + 0xC));
+            fn_801D88D4(flags, object->subject);
         } else {
-            fn_801FE22C(*(u32*)(object->bytes + 0x44));
-            if (*(int*)(object->bytes + 0x10) != -1)
-                fn_801B05B0(*(int*)(object->bytes + 0x10), 10);
+            fn_801FE22C(object->unk44);
+            if (object->resource != -1)
+                fn_801B05B0(object->resource, 10);
             fn_801D884C(object);
         }
         break;
@@ -189,9 +215,9 @@ void fn_801D8E40(Object* object)
             for (i = 0; i < count; i++) {
                 float angle = lbl_80651154 * i / count;
                 void* spawned;
-                position.x = *(float*)(object->bytes + 0x38) + lbl_80651158 * fn_80048C2C(angle);
-                position.y = *(float*)(object->bytes + 0x3C) + lbl_80651158 * fn_80048C50(angle);
-                position.z = *(float*)(object->bytes + 0x40);
+                position.x = object->position.x + lbl_80651158 * fn_80048C2C(angle);
+                position.y = object->position.y + lbl_80651158 * fn_80048C50(angle);
+                position.z = object->position.z;
                 submit_position = position;
                 spawned = fn_80148008(&submit_position, &direction, &params, fn_80182448);
                 if (spawned != 0) {
@@ -226,7 +252,7 @@ void fn_801D8E40(Object* object)
                     data->effects[i] = fn_80156938(spawned);
                 }
             }
-            fn_801FE934(*(u32*)(object->bytes + 0x44), 25);
+            fn_801FE934(object->unk44, 25);
         }
         break;
     case 32:
@@ -238,12 +264,8 @@ void fn_801D8E40(Object* object)
                 fn_80182440(*effect, 3);
             }
         }
-        {
-            s16 a = fn_801D3A34(flags, 74);
-            s16 b = fn_801D3A34(flags, 70);
-            fn_80153A24((float*)(object->bytes + 0x38), count, 250, b, a,
-                        data->positions, data->velocities, 4);
-        }
+        fn_80153A24(&object->position.x, count, 250, fn_801D3A34(flags, 70),
+                    fn_801D3A34(flags, 74), data->positions, data->velocities, 4);
         break;
     case 36:
         count = fn_801CEB2C(flags);
@@ -292,21 +314,22 @@ void fn_801D8E40(Object* object)
         break;
     /* Transfer the effects to attachments on the current subject. */
     case 110: {
-        subject = fn_80201814(*(u32*)(object->bytes + 0xC));
-        if (subject != 0) {
+        void* target = fn_80201814(object->subject);
+        if (target != 0) {
             count = fn_801CEB2C(flags);
             for (i = 0; i < count; i++) {
                 if (data->effects[i] != 0) {
-                    void* resource = fn_80149E04();
-                    if ((data->attachments[i].resource = resource) != 0) {
+                    void* resource;
+                    if ((resource = data->attachments[i].resource = fn_80149E04()) != 0) {
                         Attachment* attachment = &data->attachments[i];
                         void* particle;
                         void* owner;
+                        Attachment* slot;
                         void* attached;
                         fn_80147E88(attachment);
                         fn_801495FC(attachment, resource);
                         attachment->bytes[0xBC] = 4;
-                        *(u32*)(attachment->bytes + 0xA8) = *(u32*)(object->bytes + 0xC);
+                        *(u32*)(attachment->bytes + 0xA8) = object->subject;
                         fn_80149B0C(resource, 0, 0);
                         fn_801913F4(attachment);
                         particle = data->effects[i];
@@ -319,26 +342,27 @@ void fn_801D8E40(Object* object)
                         attachment->bytes[0x16] = 40;
                         attachment->bytes[0x15] = 3;
                         attachment->bytes[0x17] = 5;
-                        *(u32*)(attachment->bytes + 0x28) = *(u32*)(object->bytes + 0xC);
+                        *(u32*)(attachment->bytes + 0x28) = object->subject;
                         *(u32*)(attachment->bytes + 0x2C) = 0;
                         owner = fn_80155DB4(particle);
                         fn_801570F8(data->children[i], owner);
                         fn_8015690C(owner, 0);
                         fn_80156FF4(owner);
-                        owner = fn_80155DB4(subject);
+                        slot = &data->attachments[i];
+                        owner = fn_80155DB4(target);
                         if (owner == 0) {
                             fn_800073D8(-1);
                             fn_80157438(9, 0);
-                            fn_80149EB8(attachment->resource);
-                            attachment->resource = 0;
+                            fn_80149EB8(slot->resource);
+                            slot->resource = 0;
                         } else {
-                            attached = fn_80148300(owner, attachment, attachment->resource);
+                            attached = fn_80148300(owner, slot, slot->resource);
                             if (attached != 0) {
                                 fn_80156904(data->children[i], fn_80148E04);
                                 fn_80156F80(data->children[i], attached);
                             } else {
-                                fn_80149EB8(attachment->resource);
-                                attachment->resource = 0;
+                                fn_80149EB8(slot->resource);
+                                slot->resource = 0;
                             }
                         }
                     }
@@ -348,12 +372,13 @@ void fn_801D8E40(Object* object)
         break;
     }
     case 140:
-        fn_801FDF74(*(u32*)(object->bytes + 0x44), 0x7A120);
+        fn_801FDF74(object->unk44, 0x7A120);
         break;
     case 150: {
-        void* actor = fn_80201814(*(u32*)(object->bytes + 0xC));
-        if (actor != 0) {
-            actor = fn_80201BC8(actor);
+        void* actor;
+        subject = fn_80201814(object->subject);
+        if (subject != 0) {
+            actor = fn_80201BC8(subject);
             if (actor != 0 && (fn_8012F674(actor, 15, 0) & 8) == 0) {
                 switch (flags & 0xF) {
                 case 1: {
@@ -403,8 +428,8 @@ void fn_801D8E40(Object* object)
         break;
     }
     case 160:
-        if (*(void (**)(Object*, u32))(object->bytes + 0x28) != 0)
-            (*(void (**)(Object*, u32))(object->bytes + 0x28))(object, *(u32*)(object->bytes + 0x2C));
+        if (object->on_finish != 0)
+            object->on_finish(object, object->finish_arg);
         fn_801D884C(object);
         break;
     }

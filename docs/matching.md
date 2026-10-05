@@ -1182,3 +1182,126 @@ the other cases by one register (38 lines in every declaration order), and
 block-scoped vectors change the stack layout (47 lines or more).
 
 `fn_801941EC` needed only GC/1.3.2 (GC/1.3 is 16 lines off).
+
+## File statics, per-unit settings, and two reviewed layouts
+
+Nine further functions match. Each builds with the whole-DOL SHA-1
+`ea24b6af954876ce072562ff39cdb4c81d32be1f` and reports 100% under both the
+default and `function_reloc_diffs=name_address` objdiff settings.
+
+### File statics
+
+Retail loads one base address and reaches several variables at fixed
+offsets from it. MWCC produces that form for data defined in the same file,
+so these units declare that data as file statics and rename the pooled block
+to the retail symbol after compiling.
+
+- `fn_8001DE84` uses the same block as `fn_8001DFEC`: zero-initialized
+  statics `head`, `info`, `object`, `work`, `values` and `clear` in address
+  order, under GC/1.3.2, renamed to `lbl_80302400` by the same
+  `externalize_game_static_data_pool` rule.
+- `fn_801B7A7C` is MusyX `synthHandle`. `synth.c`'s data are statics in
+  address order (`synthTicksPerSecond`, `synthJobTable`, `synthInfo`,
+  `synthMasterFader`, `synthTrackVolume`, the aux user and callback arrays);
+  GC/1.2.5n keeps declaration order, and retail adds the `+0x240` of the job
+  table after the index, as it does for a pooled static. The block is renamed
+  to `lbl_80619860`.
+- `fn_801415B4` is Tomas Möller's `coplanar_tri_tri`, with the published
+  `EDGE_EDGE_TEST`, `EDGE_AGAINST_TRI_EDGES` and `POINT_IN_TRI` macros, `int`
+  axes read from `lbl_8064D024`/`lbl_8064D022`, and the fixed triangle as
+  three `static float[2][3]` corners indexed by `lbl_8064D020`. Retail forms
+  each corner as block base plus 0, 24 or 48, then adds the index; GC/1.3.2
+  keeps the `addi rX, base, 0`. The block is renamed to `lbl_805B12B0`.
+
+After the rename both blocks are undefined references in the built objects
+and their `.bss` sections are empty, so neither unit defines storage; the
+blocks stay with the retail symbol map and the units that already reference
+them.
+
+### Per-unit settings and constants
+
+- `fn_801A1E14`: `-O4,s` through `cflags_with_optimization`. Retail's loop
+  is a counted loop that is not unrolled; `-O4,p` unrolls it eight times. Its
+  constant is renamed to `lbl_80650D20` through
+  `game_section_externalizations`.
+- `fn_80124DBC` and `fn_800C030C`: `-use_lmw_stmw on`, as retail saves with
+  `stmw`. `fn_80124DBC`'s `Owner` fields replace the offset macros, which
+  gives retail's `add` plus displacement for the double-buffered pointers.
+- `fn_800C030C`: float constants as literals (retail reloads `1.0` after the
+  timer store), the timer ratio in its own local, and `fn_8017A010` declared
+  `(float *, float, float, float, int)`, as its neighbour `fn_800BE70C` does.
+  The eight constants are renamed through `game_section_externalizations`,
+  which replaces the old rule that named only `@69`.
+- `fn_801B7A7C`: `-fp_contract off`, which 140 other GC/1.2.5n units already
+  use.
+- `fn_8005B528`: GC/1.3.2. GC/1.3 lets the `values[*lbl_8064C5A8 - 1]` load
+  pass two of the array's initializing stores; 1.3.2 keeps it after them, as
+  retail does. The table stays the compiler's anonymous `.rodata` object, like
+  `fn_80050A7C`.
+
+### `fn_8005B528`
+
+Retail's kind 3 test is `bl fn_80128EAC; cmpwi r3, 24; beq; nop`: the branch
+skips one `nop` and nothing else. That is the shape of the retained debugger
+breakpoints in `fn_8006845C` and `fn_8012C62C`, and it is written the same way,
+as `asm { nop }`. C gives no other way to emit it: an empty `if` emits
+nothing, `__nop()` compiles to a call, and `__sync()`, `__isync()` and
+`__eieio()` emit their own instructions.
+
+Any inline asm makes MWCC lower `?:` to branches, so kind 7's compare with no
+branch is written as a flag that is set and never read
+(`int ready = 0; if (fn_800A1060() != 0) ready = 1;`). In kind 17 the two
+stores of the timer value go to two one-element arrays, and the call takes a
+pointer variable (`u32 *slot = timer; fn_801F348C(slot, ...)`): the first
+array does not escape, so the selector load is not ordered after its store,
+and the copy into `r3` that the allocator merges makes MWCC reschedule the
+block after allocation, which gives retail's order and registers.
+
+### `fn_80154F74`: header and body locals
+
+`fn_80154F74` builds a 0x90-byte batch on the stack. `fn_801A1A4C` clears
+and fills 0x90 bytes from its first byte, and `fn_801550C8` copies 0x90
+bytes from it. Retail's frame has a 0x14-byte local at `0x8(r1)` and a
+second block at `0x1C(r1)`, which `r31` points to for the `indices` store,
+and it loads `index_count` again after that store.
+
+The source declares `BatchHeader header` and `BatchBody body` and reaches the
+body through `BatchBody *b = &body`. One 0x90-byte struct with
+`b = &batch.body` builds to 336 bytes instead of 340: the second
+`index_count` load is merged into the first. A union payload, a raw byte
+payload with a cast, `fn_801A1A4C(&batch.header)` and a `Batch *` pointer
+all merge it the same way. MWCC keeps the second load only when `b` points
+to the start of a separate object. The match itself checks the layout:
+`header` ends at `0x1C(r1)`, where `body` starts.
+
+`fn_801550C8` is declared `(void *source, int flag)`. The caller passes
+`flag` without narrowing it, and a `u8` parameter adds a `clrlwi` that retail
+does not have. `fn_801550C8` only stores the flag as a byte, so its own code
+is the same with either type.
+
+### `fn_801D8E40`: object layout and callback parameter
+
+The object is one 0xFF8-byte pool entry: `fn_801D1054` creates the pool with
+`fn_8017CCD8(allocation, 0xFF8, count)`, and `GameObject` in `fn_801D324C`
+has the same size. `Object` is now a struct of that size with the effect data
+as an `EffectBlock effects` member at 0xBC, which ends at 0xFF0 where the
+status byte is. The field names follow `fn_801D0D78`, which fills them in
+(`generation` from `lbl_8064D18C`, `flags`, `subject`, `resource`, and the
+finish callback and its argument). This replaces the `u8 bytes[0x1000]`
+overlay and its casts.
+
+The parameter is `void *arg`, copied into `Object *object`, the same form as
+`fn_801D324C`, another callback of this object system; `fn_801D84F4`,
+`fn_801DEEBC`, `fn_801DF060` and `fn_801E0088` also take `void *`. With an
+`Object *` parameter the function is 99.71%: the `addi` for
+`&object->effects` is scheduled two instructions early, and moving the
+declaration or the assignment, or dropping `data`, does not change that.
+
+In case 110 the second half reads the attachment again
+(`slot = &data->attachments[i]`, declared before `attached`); the recomputed
+address gets a different register from `attachment`, and MWCC's
+common-subexpression pass after allocation turns it into retail's
+`mr r19, r21`. Case 110 keeps its subject in its own local (`target`), and
+case 150 reads `subject` and keeps the second value in `actor`, which gives
+retail's `r20`/`r21` and `r19`. Its existing externalize rule now names
+`@232`, the int-to-float constant, renamed to `lbl_80651110`.

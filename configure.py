@@ -112,6 +112,38 @@ config.custom_build_rules = [
         "description": "EXTERNALIZE $in",
     },
     {
+        "name": "externalize_game_801415B4_data",
+        "command": (
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=...bss.0=lbl_805B12B0 --globalize-symbol=lbl_805B12B0 $in && "
+            f"python3 tools/undefine_elf_static_pool.py $in lbl_805B12B0 config/{VERSION}/symbols.txt && "
+            "python3 tools/externalize_elf_symbol.py $in @227 lbl_80650410 "
+            f"orig/{VERSION}/sys/main.dol --require-section-symbols=@227,@228 "
+            "--require-section=.sdata2 --reject-section-relocations && "
+            "python3 tools/externalize_elf_symbol.py $in @228 lbl_80650418 "
+            f"orig/{VERSION}/sys/main.dol && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@227=lbl_80650410 --redefine-sym=@228=lbl_80650418 --remove-section=.sdata2 "
+            "--rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
+        "name": "externalize_game_801B7A7C_data",
+        "command": (
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=...bss.0=lbl_80619860 --globalize-symbol=lbl_80619860 $in && "
+            f"python3 tools/undefine_elf_static_pool.py $in lbl_80619860 config/{VERSION}/symbols.txt && "
+            "python3 tools/externalize_elf_symbol.py $in @76 lbl_80650F00 "
+            f"orig/{VERSION}/sys/main.dol --require-whole-section "
+            "--require-section=.sdata2 --reject-section-relocations && "
+            "build/binutils/powerpc-eabi-objcopy "
+            "--redefine-sym=@76=lbl_80650F00 --remove-section=.sdata2 "
+            "--rename-section=.comment=.ignored $in && touch $out"
+        ),
+        "description": "EXTERNALIZE $in",
+    },
+    {
         "name": "externalize_game_801BACE8_data",
         "command": (
             "python3 tools/retarget_elf_symbol.py $in streamInfo ...bss.0 && "
@@ -322,10 +354,10 @@ config.custom_build_rules = [
     {
         "name": "externalize_game_80154F74_divisor",
         "command": (
-            "python3 tools/externalize_elf_symbol.py $in @29 lbl_80650608 "
+            "python3 tools/externalize_elf_symbol.py $in @27 lbl_80650608 "
             "orig/GEDE01/sys/main.dol --require-whole-section && "
             "build/binutils/powerpc-eabi-objcopy "
-            "--redefine-sym=@29=lbl_80650608 --remove-section=.sdata2 "
+            "--redefine-sym=@27=lbl_80650608 --remove-section=.sdata2 "
             "--rename-section=.comment=.ignored $in && touch $out"
         ),
         "description": "EXTERNALIZE $in",
@@ -2298,10 +2330,10 @@ config.custom_build_rules = [
     {
         "name": "externalize_game_801D8E40_bias",
         "command": (
-            "python3 tools/externalize_elf_symbol.py $in @233 lbl_80651110 "
+            "python3 tools/externalize_elf_symbol.py $in @232 lbl_80651110 "
             f"orig/{VERSION}/sys/main.dol --require-whole-section && "
             "build/binutils/powerpc-eabi-objcopy "
-            "--redefine-sym=@233=lbl_80651110 --remove-section=.sdata2 "
+            "--redefine-sym=@232=lbl_80651110 --remove-section=.sdata2 "
             "--rename-section=.comment=.ignored $in && touch $out"
         ),
         "description": "EXTERNALIZE $in",
@@ -3115,17 +3147,6 @@ config.custom_build_rules = [
         "description": "EXTERNALIZE $in",
     },
     {
-        "name": "externalize_game_800C030C_signed_bias",
-        "command": (
-            "python3 tools/externalize_elf_symbol.py $in @69 lbl_8064F158 "
-            "orig/GEDE01/sys/main.dol --require-relocation-match --require-whole-section && "
-            "build/binutils/powerpc-eabi-objcopy "
-            "--redefine-sym=@69=lbl_8064F158 --remove-section=.sdata2 "
-            "--rename-section=.comment=.ignored $in && touch $out"
-        ),
-        "description": "EXTERNALIZE $in",
-    },
-    {
         "name": "externalize_game_800C59F0_bias",
         "command": (
             "python3 tools/externalize_elf_symbol.py $in @8 && "
@@ -3861,6 +3882,19 @@ game_section_externalizations = {
     "801E7014": (".sdata2", [("@19", "lbl_80651288")]),
     "801A4430": (".sdata2", [("@51", "lbl_80650D88"), ("@55", "lbl_80650D90")]),
     "800B2EC0": (".sdata2", [("@41", "lbl_8064F020")]),
+    "800C030C": (
+        ".sdata2",
+        [
+            ("@66", "lbl_8064F140"),
+            ("@67", "lbl_8064F144"),
+            ("@68", "lbl_8064F148"),
+            ("@69", "lbl_8064F14C"),
+            ("@70", "lbl_8064F150"),
+            ("@71", "lbl_8064F110"),
+            ("@72", "lbl_8064F114"),
+            ("@74", "lbl_8064F158"),
+        ],
+    ),
     "8001CA04": (".sdata2", [("@18", "lbl_8064DE60")]),
     "80031544": (".sdata2", [("@7", "lbl_8064E038")]),
     "8006B0F0": (".rodata", [("@4", "lbl_80239090")]),
@@ -3931,6 +3965,7 @@ game_section_externalizations = {
     "801926EC": (".sdata2", [("@35", "lbl_80650B18")]),
     "801929A4": (".sdata2", [("@61", "lbl_80650B18")]),
     "801952E8": (".sdata2", [("@73", "lbl_80650B58"), ("@75", "lbl_80650B68")]),
+    "801A1E14": (".sdata2", [("@15", "lbl_80650D20")]),
     "801A1F8C": (
         ".sdata2",
         [
@@ -4309,6 +4344,16 @@ config.custom_build_steps = {
             "inputs": [f"build/{VERSION}/src/game/game_fn_8006D548.o"],
         },
         {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_801415B4.externalized"],
+            "rule": "externalize_game_801415B4_data",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_801415B4.o"],
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_801B7A7C.externalized"],
+            "rule": "externalize_game_801B7A7C_data",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_801B7A7C.o"],
+        },
+        {
             "outputs": [f"build/{VERSION}/src/game/game_fn_801BACE8.externalized"],
             "rule": "externalize_game_801BACE8_data",
             "inputs": [f"build/{VERSION}/src/game/game_fn_801BACE8.o"],
@@ -4478,6 +4523,12 @@ config.custom_build_steps = {
             "rule": "externalize_game_static_pool",
             "inputs": [f"build/{VERSION}/src/game/game_fn_80088060.o"],
             "variables": {"symbol": "lbl_8031D3B8"},
+        },
+        {
+            "outputs": [f"build/{VERSION}/src/game/game_fn_8001DE84.externalized"],
+            "rule": "externalize_game_static_data_pool",
+            "inputs": [f"build/{VERSION}/src/game/game_fn_8001DE84.o"],
+            "variables": {"symbol": "lbl_80302400"},
         },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_80175A08.externalized"],
@@ -5663,11 +5714,6 @@ config.custom_build_steps = {
             "outputs": [f"build/{VERSION}/src/game/game_fn_800C17EC.externalized"],
             "rule": "externalize_game_800C17EC_unsigned_bias",
             "inputs": [f"build/{VERSION}/src/game/game_fn_800C17EC.o"],
-        },
-        {
-            "outputs": [f"build/{VERSION}/src/game/game_fn_800C030C.externalized"],
-            "rule": "externalize_game_800C030C_signed_bias",
-            "inputs": [f"build/{VERSION}/src/game/game_fn_800C030C.o"],
         },
         {
             "outputs": [f"build/{VERSION}/src/game/game_fn_800C59F0.externalized"],
@@ -7160,7 +7206,7 @@ config.libs = [
             Object(Matching, "game/game_fn_8001DA7C.c"),
             Object(Matching, "game/game_fn_8001DB04.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_8001DE68.c"),
-            Object(NonMatching, "game/game_fn_8001DE84.c"),
+            Object(Matching, "game/game_fn_8001DE84.c", mw_version="GC/1.3.2"),
             Object(Matching, "game/game_fn_8001DFEC.c", mw_version="GC/1.3.2"),
             Object(Matching, "game/game_fn_8001E134.c"),
             Object(Matching, "game/game_fn_8001E13C.c"),
@@ -7807,7 +7853,7 @@ config.libs = [
     Object(Matching, "game/game_fn_8005A75C.c"),
     Object(Matching, "game/game_fn_8005AC7C.c"),
     Object(Matching, "game/game_fn_8005AF34.c"),
-    Object(NonMatching, "game/game_fn_8005B528.c", extra_cflags=["-use_lmw_stmw on"]),
+    Object(Matching, "game/game_fn_8005B528.c", mw_version="GC/1.3.2", extra_cflags=["-use_lmw_stmw on"]),
     Object(Matching, "game/game_fn_8005BBB4.c", extra_cflags=["-use_lmw_stmw on"]),
     Object(Matching, "game/game_fn_8005BC64.c"),
     Object(Matching, "game/game_fn_8005BCC0.c"),
@@ -8893,7 +8939,7 @@ config.libs = [
             Object(Matching, "game/game_fn_800BFF84.c"),
             Object(NonMatching, "game/game_fn_800BFFDC.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_800C0240.c"),
-            Object(NonMatching, "game/game_fn_800C030C.c"),
+            Object(Matching, "game/game_fn_800C030C.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_800C16F4.c"),
             Object(Matching, "game/game_fn_800C17EC.c"),
             Object(Matching, "game/game_fn_800C1AB8.c"),
@@ -9803,7 +9849,7 @@ config.libs = [
                 "game/game_fn_80124A40.c",
                 extra_cflags=["-use_lmw_stmw on"],
             ),
-            Object(NonMatching, "game/game_fn_80124DBC.c"),
+            Object(Matching, "game/game_fn_80124DBC.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_80125284.c"),
             Object(Matching, "game/game_fn_801252D8.c"),
             Object(Matching, "game/game_fn_80125664.c"),
@@ -10228,7 +10274,7 @@ config.libs = [
             Object(Matching, "game/game_fn_80140E68.c"),
             Object(Matching, "game/game_fn_80140E70.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_80141484.c", extra_cflags=["-use_lmw_stmw on"]),
-            Object(NonMatching, "game/game_fn_801415B4.c"),
+            Object(Matching, "game/game_fn_801415B4.c", mw_version="GC/1.3.2"),
             Object(NonMatching, "game/game_fn_80141EA8.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(NonMatching, "game/game_fn_801420F8.c"),
             Object(Matching, "game/game_fn_80142808.c", extra_cflags=["-use_lmw_stmw on"]),
@@ -10465,7 +10511,7 @@ config.libs = [
             Object(Matching, "game/game_fn_80154DB4.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_80154EC0.c"),
             Object(Matching, "game/game_fn_80154F10.c"),
-            Object(NonMatching, "game/game_fn_80154F74.c", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_80154F74.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_801550C8.c"),
             Object(Matching, "game/game_fn_80155158.c"),
             Object(Matching, "game/game_fn_801552AC.c"),
@@ -12187,7 +12233,7 @@ config.libs = [
             Object(Matching, "game/game_fn_801A1B34.c"),
             Object(Matching, "game/game_fn_801A1BD0.c"),
             Object(Matching, "game/game_fn_801A1C78.c", extra_cflags=["-use_lmw_stmw on"]),
-            Object(NonMatching, "game/game_fn_801A1E14.c"),
+            Object(Matching, "game/game_fn_801A1E14.c", cflags=cflags_with_optimization("-O4,s")),
             Object(Matching, "game/game_fn_801A1F18.c"),
             Object(Matching, "game/game_fn_801A1F8C.c", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_801A2540.c"),
@@ -12728,7 +12774,7 @@ config.libs = [
             Object(Matching, "game/game_fn_801B7954.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
             Object(Matching, "game/game_fn_801B797C.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
             Object(Matching, "game/game_fn_801B7A10.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
-            Object(NonMatching, "game/game_fn_801B7A7C.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
+            Object(Matching, "game/game_fn_801B7A7C.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on", "-fp_contract off"]),
             Object(Matching, "game/game_fn_801B7D94.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
             Object(Matching, "game/game_fn_801B7DC8.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
             Object(Matching, "game/game_fn_801B7E84.c", mw_version="GC/1.2.5n", extra_cflags=["-Cpp_exceptions on"]),
@@ -13148,7 +13194,7 @@ config.libs = [
             Object(Matching, "game/game_fn_801D8760.c", mw_version="GC/1.3", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_801D884C.c", mw_version="GC/1.3", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_801D88D4.c", mw_version="GC/1.3", extra_cflags=["-use_lmw_stmw on"]),
-            Object(NonMatching, "game/game_fn_801D8E40.c", mw_version="GC/1.3", extra_cflags=["-use_lmw_stmw on"]),
+            Object(Matching, "game/game_fn_801D8E40.c", mw_version="GC/1.3", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_801D9924.c", mw_version="GC/1.3", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_801D997C.c", mw_version="GC/1.3", extra_cflags=["-use_lmw_stmw on"]),
             Object(Matching, "game/game_fn_801D9A68.c", mw_version="GC/1.3", extra_cflags=["-use_lmw_stmw on"]),
