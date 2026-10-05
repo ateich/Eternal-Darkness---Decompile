@@ -10,15 +10,20 @@ typedef union Entry {
 } Entry;
 
 typedef struct Holder {
-    Entry* value;
+    void* value;
     char padding04[28];
 } Holder;
+
+typedef struct Closure {
+    char padding00[12];
+    short count;
+} Closure;
 
 typedef void (*Callback)(struct Object*, Entry*, void*);
 
 typedef struct TableEntry {
     char padding00[56];
-    Entry* saved;
+    Closure* saved;
     char padding3C[4];
 } TableEntry;
 
@@ -39,41 +44,40 @@ extern int fn_80167D2C(Entry*);
 extern void fn_801603AC(Object*, Entry*, void*);
 extern void fn_80160748(Object*, Entry*);
 extern void fn_8016088C(Object*, void*, Callback, void*);
-extern Entry* fn_801608D0(Object*, void*, void*);
-extern Entry* fn_801697AC(Object*, void*, void*);
+extern Entry* fn_801608D0(Object*, Closure*, void*);
+extern Entry* fn_801697AC(Object*, Closure*, void*);
 extern void fn_8016057C(Object*, int);
 extern void fn_80161FA0(Object*);
 
 void fn_80160B18(Object* object, Entry* entry, int amount)
 {
-    Callback callback_source;
-    Entry* source;
-
+    Entry* first_result;
     Holder holder;
+    Callback callback_source;
+    Closure* closure;
 
     if (entry->fields.type != 5) {
-        source = object->table[fn_80167D2C(entry)].saved;
-        if (source == 0) {
+        closure = object->table[fn_80167D2C(entry)].saved;
+        if (closure == 0) {
             fn_801603AC(object, entry, &lbl_8064BA68);
         }
         fn_80160748(object, entry);
-        entry->fields.value = source;
+        entry->fields.value = closure;
         entry->fields.type = 5;
     }
 
-    source = entry->fields.value;
-    holder.value = source;
+    closure = entry->fields.value;
+    holder.value = closure;
     entry->fields.value = &holder;
     entry->fields.type = 6;
-    callback_source = object->source;
-    if (callback_source != 0) {
+    if ((callback_source = object->source) != 0) {
         fn_8016088C(object, entry, callback_source, &lbl_8064BA68);
     }
 
-    if (source->fields.count != 0) {
-        source = fn_801608D0(object, source, entry + 1);
+    if (closure->count != 0) {
+        first_result = fn_801608D0(object, closure, entry + 1);
     } else {
-        source = fn_801697AC(object, source, entry + 1);
+        first_result = fn_801697AC(object, closure, entry + 1);
     }
 
     if (callback_source != 0) {
@@ -81,13 +85,13 @@ void fn_80160B18(Object* object, Entry* entry, int amount)
     }
 
     if (amount == -1) {
-        while (source < object->current) {
-            *entry++ = *source++;
+        while (first_result < object->current) {
+            *entry++ = *first_result++;
         }
         object->current = entry;
     } else {
-        while (amount > 0 && source < object->current) {
-            *entry++ = *source++;
+        while (amount > 0 && first_result < object->current) {
+            *entry++ = *first_result++;
             amount--;
         }
         object->current = entry;
