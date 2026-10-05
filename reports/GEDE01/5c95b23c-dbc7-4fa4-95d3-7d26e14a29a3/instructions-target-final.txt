@@ -1,0 +1,225 @@
+	stwu r1, -0x50(r1)
+4	mflr r0
+8	stw r0, 0x54(r1)
+12	stmw r25, 0x34(r1)
+16	mr r27, r5
+20	mr r25, r3
+24	mr r26, r4
+28	mr r3, r27
+32	bl fn_80200C10
+36	mr r31, r3
+40	mr r3, r25
+44	bl fn_80155DB4
+48	mr r0, r3
+52	mr r3, r25
+56	mr r30, r0
+60	bl fn_80201BC8
+64	mr r0, r3
+68	mr r3, r25
+72	mr r29, r0
+76	bl fn_80201B54
+80	cmpwi r26, 0x0
+84	mr r28, r3
+88	bne 0x1e4
+92	cmpwi r31, 0x1
+96	bne 0xc8
+100	mr r3, r29
+104	bl fn_8011FAEC
+108	rlwinm. r0, r3, 0, 18, 18
+112	beq 0xa8
+116	lfs f1, lbl_806515DC@sda21
+120	mr r4, r28
+124	mr r5, r28
+128	li r3, 0x11
+132	li r6, 0x0
+136	bl fn_8020104C
+140	mr r3, r25
+144	li r4, 0xb
+148	bl fn_80201D2C
+152	mr r3, r25
+156	li r4, 0x1
+160	bl fn_80201D14
+164	b 0xc0
+168	mr r3, r25
+172	li r4, 0x1
+176	bl fn_80201D2C
+180	mr r3, r25
+184	li r4, 0x1
+188	bl fn_80201D14
+192	li r3, 0x1
+196	b 0x370
+200	cmpwi r31, 0x39
+204	bne 0xfc
+208	mr r4, r25
+212	li r3, 0x2
+216	bl fn_801E8328
+220	mr r3, r25
+224	li r4, 0x0
+228	bl fn_80201D2C
+232	mr r3, r25
+236	li r4, 0x1
+240	bl fn_80201D14
+244	li r3, 0x1
+248	b 0x370
+252	cmpwi r31, 0x3d
+256	bne 0x12c
+260	mr r3, r25
+264	bl fn_80201BC8
+268	bl fn_80126880
+272	mr r4, r28
+276	mr r5, r28
+280	li r3, 0x39
+284	li r6, 0x0
+288	bl fn_8020123C
+292	li r3, 0x1
+296	b 0x370
+300	cmpwi r31, 0x59
+304	bne 0x15c
+308	mr r3, r25
+312	bl fn_80201BC8
+316	bl fn_80126880
+320	mr r4, r28
+324	mr r5, r28
+328	li r3, 0x39
+332	li r6, 0x0
+336	bl fn_8020123C
+340	li r3, 0x1
+344	b 0x370
+348	cmpwi r31, 0x1c
+352	bne 0x1a8
+356	mr r3, r27
+360	bl fn_80200C38
+364	cmpwi r3, 0x0
+368	beq 0x1a0
+372	mr r3, r29
+376	bl fn_8011EB1C
+380	cmpwi r3, 0x6
+384	bne 0x1a0
+388	mr r3, r29
+392	bl fn_80126880
+396	mr r4, r28
+400	mr r5, r28
+404	li r3, 0x39
+408	li r6, 0x0
+412	bl fn_8020123C
+416	li r3, 0x1
+420	b 0x370
+424	cmpwi r31, 0xe5
+428	bne 0x36c
+432	mr r3, r29
+436	bl fn_8011EB1C
+440	cmpwi r3, 0x6
+444	bne 0x1dc
+448	mr r3, r29
+452	bl fn_80126880
+456	mr r4, r28
+460	mr r5, r28
+464	li r3, 0x39
+468	li r6, 0x0
+472	bl fn_8020123C
+476	li r3, 0x1
+480	b 0x370
+484	cmpwi r26, 0x1
+488	bne 0x23c
+492	cmpwi r31, 0x47
+496	bne 0x214
+500	mr r3, r25
+504	li r4, 0x23
+508	bl fn_80201D2C
+512	mr r3, r25
+516	li r4, 0x1
+520	bl fn_80201D14
+524	li r3, 0x1
+528	b 0x370
+532	cmpwi r31, 0x11
+536	bne 0x36c
+540	mr r3, r25
+544	li r4, 0xb
+548	bl fn_80201D2C
+552	mr r3, r25
+556	li r4, 0x1
+560	bl fn_80201D14
+564	li r3, 0x1
+568	b 0x370
+572	cmpwi r26, 0x23
+576	bne 0x2bc
+580	cmpwi r31, 0x1
+584	bne 0x27c
+588	lis r4, fn_80205DB8@ha
+592	mr r3, r30
+596	addi r4, r4, fn_80205DB8@l
+600	bl fn_801568C0
+604	mr r3, r29
+608	bl fn_8012C198
+612	mr r3, r29
+616	li r4, 0x8
+620	li r5, 0x0
+624	bl fn_8011FABC
+628	li r3, 0x1
+632	b 0x370
+636	cmpwi r31, 0x2e
+640	bne 0x36c
+644	lfs f1, lbl_806515E0@sda21
+648	mr r4, r28
+652	mr r5, r28
+656	li r3, 0x11
+660	li r6, 0x0
+664	bl fn_8020104C
+668	mr r3, r25
+672	li r4, 0xb
+676	bl fn_80201D2C
+680	mr r3, r25
+684	li r4, 0x1
+688	bl fn_80201D14
+692	li r3, 0x1
+696	b 0x370
+700	cmpwi r26, 0xb
+704	bne 0x364
+708	cmpwi r31, 0x11
+712	bne 0x36c
+716	lwz r6, lbl_806515D0@sda21
+720	mr r3, r29
+724	lwz r5, lbl_806515D4@sda21
+728	lwz r4, lbl_806515D8@sda21
+732	lwz r0, lbl_80651F70@sda21
+736	stw r6, 0x20(r1)
+740	stw r5, 0x1c(r1)
+744	stw r4, 0x18(r1)
+748	stw r0, 0x14(r1)
+752	bl fn_8011FAEC
+756	rlwinm. r0, r3, 0, 18, 18
+760	bne 0x304
+764	lwz r0, 0x18(r1)
+768	stw r0, 0x1c(r1)
+772	lwz r6, 0x14(r1)
+776	mr r3, r29
+780	lwz r8, 0x1c(r1)
+784	addi r4, r1, 0x10
+788	lwz r0, 0x20(r1)
+792	addi r5, r1, 0xc
+796	stw r6, 0x8(r1)
+800	addi r6, r1, 0x8
+804	li r7, 0x4
+808	stw r8, 0xc(r1)
+812	stw r0, 0x10(r1)
+816	bl fn_8012C774
+820	mr r3, r29
+824	li r4, 0x0
+828	li r5, 0x2000
+832	bl fn_8011FA8C
+836	lfs f1, lbl_806515E4@sda21
+840	mr r4, r28
+844	mr r5, r28
+848	li r3, 0x39
+852	li r6, 0x0
+856	bl fn_8020104C
+860	li r3, 0x1
+864	b 0x370
+868	li r3, 0x0
+872	b 0x370
+876	li r3, 0x0
+880	lmw r25, 0x34(r1)
+884	lwz r0, 0x54(r1)
+888	mtlr r0
+892	addi r1, r1, 0x50
+896	blr 

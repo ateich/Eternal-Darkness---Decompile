@@ -105,24 +105,21 @@ int fn_80205914(void *object, int event, void *data)
         if (data_type == 0x11) {
             struct {
                 u32 output[3];
-                u32 c;
-                u32 alternate;
-                u32 b;
-                u32 a;
+                u32 input[4];
             } local;
 
-            local.a = lbl_806515D0;
-            local.b = lbl_806515D4;
-            local.alternate = lbl_806515D8;
-            local.c = lbl_80651F70;
+            local.input[3] = lbl_806515D0;
+            local.input[2] = lbl_806515D4;
+            local.input[1] = lbl_806515D8;
+            local.input[0] = lbl_80651F70;
 
             if (!(fn_8011FAEC(target) & 0x2000)) {
-                local.b = local.alternate;
+                local.input[2] = local.input[1];
             }
             {
-                u32 c = local.c;
-                u32 b = local.b;
-                u32 a = local.a;
+                u32 c = local.input[0];
+                u32 b = local.input[2];
+                u32 a = local.input[3];
 
                 local.output[1] = b;
                 local.output[0] = c;
