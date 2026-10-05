@@ -1,0 +1,47 @@
+{
+  "assignment_id": "b39ce605-e4a6-4d6f-b48a-b51015faa028",
+  "attempt": 7,
+  "target": "fn_801CE744",
+  "object_build_command": ".tools/bin/ninja build/GEDE01/src/game/game_fn_801CE744.o",
+  "objdiff_command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801CE744 fn_801CE744 -o <report> --format json-pretty -c function_reloc_diffs=name_address",
+  "experiments": [
+    {
+      "name": "full_width_index_value18_and_address_argument",
+      "source_change": "Changed index, value18, and objects parameters to u32; used objects directly as the address cursor.",
+      "build_raw_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801CE744.o\n",
+      "objdiff_raw_output": "INFO Writing to /tmp/b39-v1.json\n",
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-full-width-b39ce605-e4a6-4d6f-b48a-b51015faa028.json",
+      "size": 572,
+      "score": 98.53147,
+      "retained": false
+    },
+    {
+      "name": "address_typed_ninth_argument",
+      "source_change": "Changed only objects from void ** to the caller-compatible u32 address representation and removed the redundant cast.",
+      "build_raw_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801CE744.o\n",
+      "objdiff_raw_output": "INFO Writing to /tmp/b39-v2.json\n",
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-address-arg-b39ce605-e4a6-4d6f-b48a-b51015faa028.json",
+      "size": 572,
+      "score": 98.916084,
+      "retained": true
+    },
+    {
+      "name": "ordered_local_parameter_aliases",
+      "source_change": "Introduced ordinary local aliases in desired retail register order and used them throughout; the optimizer removed them without changing code generation.",
+      "build_raw_output": "[1/1] MWCC build/GEDE01/src/game/game_fn_801CE744.o\n",
+      "objdiff_raw_output": "INFO Writing to /tmp/b39-v3.json\n",
+      "raw_objdiff": "eternal-darkness-decomp/reports/GEDE01/experiment-aliases-b39ce605-e4a6-4d6f-b48a-b51015faa028.json",
+      "size": 572,
+      "score": 98.916084,
+      "retained": false
+    }
+  ],
+  "prior_attempts_reviewed": [
+    "5d4025905ef27c709650106db29affdbad2f5c75",
+    "ae8faaee663f9514a1ef6d60dc09c8509ff494c9",
+    "1e6d5e3d167ede8efa42590fe28116a09782c39a",
+    "31c72a0b38c9bc8aacdaed5d55a04d066438e1b3",
+    "eternal-darkness-decomp/reports/GEDE01/probes-4384c65d-bd15-41f8-88c8-9444293d7575.json",
+    "eternal-darkness-decomp/reports/GEDE01/frontier-801CE720-801CEA8C-session-1783.json"
+  ]
+}

@@ -48,7 +48,7 @@ extern void fn_8017FE0C(void*, u32);
 extern void fn_8019045C(void);
 
 void fn_801CE744(u32 type, u32 value, const Vec3f* position, u16 index,
-                 u32 value20, u8 value18, void** objects, f32 base_angle,
+                 u32 value20, u8 value18, u32 objects, f32 base_angle,
                  f32 radius)
 {
     Descriptor descriptor;
@@ -74,7 +74,7 @@ void fn_801CE744(u32 type, u32 value, const Vec3f* position, u16 index,
 
     object_type = fn_801D38E8(type);
     count = fn_801CEB2C(type);
-    object_address = (u32)objects;
+    object_address = objects;
     index_ptr = indices;
     i = 0;
     while (i < count) {

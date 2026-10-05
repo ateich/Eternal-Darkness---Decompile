@@ -1,0 +1,144 @@
+--- reports/GEDE01/instructions-retail-b39ce605-e4a6-4d6f-b48a-b51015faa028.txt	2026-10-04 23:40:19.415798534 -0400
++++ reports/GEDE01/instructions-generated-b39ce605-e4a6-4d6f-b48a-b51015faa028.txt	2026-10-04 23:40:19.416798542 -0400
+@@ -1,5 +1,5 @@
+ 
+-build/GEDE01/obj/game/game_fn_801CE744.o:     file format elf32-powerpc
++build/GEDE01/src/game/game_fn_801CE744.o:     file format elf32-powerpc
+ 
+ 
+ Disassembly of section .text:
+@@ -24,33 +24,33 @@
+   40:	f3 21 01 18 	psq_st  f25,280(r1),0,0
+   44:	be 81 00 e0 	stmw    r20,224(r1)
+   48:	ff 80 08 90 	fmr     f28,f1
+-  4c:	7c 98 23 78 	mr      r24,r4
++  4c:	7c 96 23 78 	mr      r22,r4
+   50:	ff a0 10 90 	fmr     f29,f2
+-  54:	7c 77 1b 78 	mr      r23,r3
+-  58:	7c b9 2b 78 	mr      r25,r5
+-  5c:	7c d6 33 78 	mr      r22,r6
++  54:	7c 7a 1b 78 	mr      r26,r3
++  58:	7c b7 2b 78 	mr      r23,r5
++  5c:	7c d9 33 78 	mr      r25,r6
+   60:	7c f5 3b 78 	mr      r21,r7
+   64:	7d 14 43 78 	mr      r20,r8
+-  68:	7d 3a 4b 78 	mr      r26,r9
++  68:	7d 38 4b 78 	mr      r24,r9
+   6c:	38 81 00 28 	addi    r4,r1,40
+   70:	48 00 00 01 	bl      70 <fn_801CE744+0x70>
+ 			70: R_PPC_REL24	fn_801CECB4
+   74:	38 61 00 3c 	addi    r3,r1,60
+   78:	48 00 00 01 	bl      78 <fn_801CE744+0x78>
+ 			78: R_PPC_REL24	fn_801905CC
+-  7c:	56 c0 04 3f 	clrlwi. r0,r22,16
++  7c:	57 20 04 3f 	clrlwi. r0,r25,16
+   80:	92 a1 00 5c 	stw     r21,92(r1)
+   84:	9a 81 00 54 	stb     r20,84(r1)
+   88:	40 82 00 10 	bne     98 <fn_801CE744+0x98>
+   8c:	38 00 00 01 	li      r0,1
+   90:	90 01 00 58 	stw     r0,88(r1)
+   94:	48 00 00 08 	b       9c <fn_801CE744+0x9c>
+-  98:	b2 c1 00 42 	sth     r22,66(r1)
+-  9c:	7e e3 bb 78 	mr      r3,r23
++  98:	b3 21 00 42 	sth     r25,66(r1)
++  9c:	7f 43 d3 78 	mr      r3,r26
+   a0:	48 00 00 01 	bl      a0 <fn_801CE744+0xa0>
+ 			a0: R_PPC_REL24	fn_801D38E8
+   a4:	7c 60 1b 78 	mr      r0,r3
+-  a8:	7e e3 bb 78 	mr      r3,r23
++  a8:	7f 43 d3 78 	mr      r3,r26
+   ac:	7c 1b 03 78 	mr      r27,r0
+   b0:	48 00 00 01 	bl      b0 <fn_801CE744+0xb0>
+ 			b0: R_PPC_REL24	fn_801CEB2C
+@@ -59,19 +59,19 @@
+ 			ba: R_PPC_ADDR16_HA	fn_8019045C
+   bc:	c3 c0 00 00 	lfs     f30,0(0)
+ 			bc: R_PPC_EMB_SDA21	lbl_80651038
+-  c0:	7f 5e d3 78 	mr      r30,r26
++  c0:	7f 19 c3 78 	mr      r25,r24
+   c4:	cb e0 00 00 	lfd     f31,0(0)
+-			c4: R_PPC_EMB_SDA21	lbl_80651048
+-  c8:	3b e1 00 28 	addi    r31,r1,40
++			c4: R_PPC_EMB_SDA21	@25
++  c8:	3b 41 00 28 	addi    r26,r1,40
+   cc:	c3 40 00 00 	lfs     f26,0(0)
+ 			cc: R_PPC_EMB_SDA21	lbl_8065103C
+-  d0:	6f b6 80 00 	xoris   r22,r29,32768
++  d0:	6f bf 80 00 	xoris   r31,r29,32768
+   d4:	c3 60 00 00 	lfs     f27,0(0)
+ 			d4: R_PPC_EMB_SDA21	lbl_80651040
+-  d8:	3a e3 00 00 	addi    r23,r3,0
++  d8:	3a a3 00 00 	addi    r21,r3,0
+ 			da: R_PPC_ADDR16_LO	fn_8019045C
+   dc:	3b 80 00 00 	li      r28,0
+-  e0:	3e a0 43 30 	lis     r21,17200
++  e0:	3f c0 43 30 	lis     r30,17200
+   e4:	48 00 01 04 	b       1e8 <fn_801CE744+0x1e8>
+   e8:	6f 80 80 00 	xoris   r0,r28,32768
+   ec:	80 60 00 00 	lwz     r3,0(0)
+@@ -79,11 +79,11 @@
+   f0:	90 01 00 d4 	stw     r0,212(r1)
+   f4:	a0 00 00 00 	lhz     r0,0(0)
+ 			f4: R_PPC_EMB_SDA21	lbl_80651EA4
+-  f8:	92 a1 00 d0 	stw     r21,208(r1)
++  f8:	93 c1 00 d0 	stw     r30,208(r1)
+   fc:	c8 01 00 d0 	lfd     f0,208(r1)
+- 100:	92 c1 00 dc 	stw     r22,220(r1)
++ 100:	93 e1 00 dc 	stw     r31,220(r1)
+  104:	ec 20 f8 28 	fsubs   f1,f0,f31
+- 108:	92 a1 00 d8 	stw     r21,216(r1)
++ 108:	93 c1 00 d8 	stw     r30,216(r1)
+  10c:	c8 01 00 d8 	lfd     f0,216(r1)
+  110:	ec 3e 00 72 	fmuls   f1,f30,f1
+  114:	90 61 00 08 	stw     r3,8(r1)
+@@ -95,17 +95,17 @@
+  12c:	48 00 00 01 	bl      12c <fn_801CE744+0x12c>
+ 			12c: R_PPC_REL24	fn_80048C2C
+  130:	ec 5a 00 72 	fmuls   f2,f26,f1
+- 134:	c0 19 00 00 	lfs     f0,0(r25)
++ 134:	c0 17 00 00 	lfs     f0,0(r23)
+  138:	fc 20 c8 90 	fmr     f1,f25
+  13c:	ec 1d 00 ba 	fmadds  f0,f29,f2,f0
+  140:	d0 01 00 1c 	stfs    f0,28(r1)
+  144:	48 00 00 01 	bl      144 <fn_801CE744+0x144>
+ 			144: R_PPC_REL24	fn_80048C50
+  148:	ec 5a 00 72 	fmuls   f2,f26,f1
+- 14c:	c0 39 00 04 	lfs     f1,4(r25)
+- 150:	c0 19 00 08 	lfs     f0,8(r25)
++ 14c:	c0 37 00 04 	lfs     f1,4(r23)
++ 150:	c0 17 00 08 	lfs     f0,8(r23)
+  154:	7f 64 db 78 	mr      r4,r27
+- 158:	a8 7f 00 00 	lha     r3,0(r31)
++ 158:	a8 7a 00 00 	lha     r3,0(r26)
+  15c:	ec 3d 08 ba 	fmadds  f1,f29,f2,f1
+  160:	ec 1b 00 2a 	fadds   f0,f27,f0
+  164:	b0 61 00 40 	sth     r3,64(r1)
+@@ -114,7 +114,7 @@
+  170:	48 00 00 01 	bl      170 <fn_801CE744+0x170>
+ 			170: R_PPC_REL24	fn_801D3988
+  174:	81 01 00 1c 	lwz     r8,28(r1)
+- 178:	7e e6 bb 78 	mr      r6,r23
++ 178:	7e a6 ab 78 	mr      r6,r21
+  17c:	80 e1 00 20 	lwz     r7,32(r1)
+  180:	38 81 00 08 	addi    r4,r1,8
+  184:	80 01 00 24 	lwz     r0,36(r1)
+@@ -137,14 +137,14 @@
+  1c0:	48 00 00 01 	bl      1c0 <fn_801CE744+0x1c0>
+ 			1c0: R_PPC_REL24	fn_8017FF1C
+  1c4:	7e 83 a3 78 	mr      r3,r20
+- 1c8:	7f 04 c3 78 	mr      r4,r24
++ 1c8:	7e c4 b3 78 	mr      r4,r22
+  1cc:	48 00 00 01 	bl      1cc <fn_801CE744+0x1cc>
+ 			1cc: R_PPC_REL24	fn_8017FE0C
+- 1d0:	28 1a 00 00 	cmplwi  r26,0
++ 1d0:	28 18 00 00 	cmplwi  r24,0
+  1d4:	41 82 00 08 	beq     1dc <fn_801CE744+0x1dc>
+- 1d8:	92 9e 00 00 	stw     r20,0(r30)
+- 1dc:	3b ff 00 02 	addi    r31,r31,2
+- 1e0:	3b de 00 04 	addi    r30,r30,4
++ 1d8:	92 99 00 00 	stw     r20,0(r25)
++ 1dc:	3b 5a 00 02 	addi    r26,r26,2
++ 1e0:	3b 39 00 04 	addi    r25,r25,4
+  1e4:	3b 9c 00 01 	addi    r28,r28,1
+  1e8:	7c 1c e8 00 	cmpw    r28,r29
+  1ec:	41 80 fe fc 	blt     e8 <fn_801CE744+0xe8>
