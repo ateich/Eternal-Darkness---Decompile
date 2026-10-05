@@ -14,10 +14,6 @@ extern void fn_8018865C(void*, void*, void*);
 
 void fn_8019C3B8(u8* object)
 {
-    register u8* self;
-    register u8* color_data;
-    register u8* index_data;
-    register u8* vertex_data;
     int vertex_offset;
     int i;
     u8 count;
@@ -27,16 +23,20 @@ void fn_8019C3B8(u8* object)
     u8* object_data;
     u8* color;
     u16 offset;
+    register u8* vertex_data;
+    register u8* index_data;
+    register u8* color_data;
+    register u8* self;
 
     self = object;
-    count = self[1];
+    count = object[1];
     offset = *(u16*)(lbl_80607120 + 2);
     vertex_size = *(u16*)(lbl_80607120 + 0xA);
     index_size = *(u16*)(lbl_80607120 + 0xE);
     color_size = *(u16*)(lbl_80607120 + 0xC);
-    vertex_data = *(u8**)(self + 0x50);
-    index_data = *(u8**)(self + 0x54);
-    color_data = *(u8**)(self + 0x58);
+    vertex_data = *(u8**)(object + 0x50);
+    index_data = *(u8**)(object + 0x54);
+    color_data = *(u8**)(object + 0x58);
     if (lbl_8064D738 != 0) {
         index_data += offset * 4;
         vertex_data += offset * 6;

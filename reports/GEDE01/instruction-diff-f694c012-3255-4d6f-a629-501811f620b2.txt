@@ -1,0 +1,13 @@
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_8019C3B8 -o - --format json-pretty fn_8019C3B8 | jq instruction differences
+RETAIL/TARGET:
+108	addi r26, r3, fn_8018D020@l	DIFF_ARG_MISMATCH
+112	li r27, 0x0	DIFF_ARG_MISMATCH
+124	mr r5, r26	DIFF_ARG_MISMATCH
+128	add r4, r31, r27	DIFF_ARG_MISMATCH
+176	addi r27, r27, 0x18	DIFF_ARG_MISMATCH
+GENERATED/BASE:
+108	addi r27, r3, fn_8018D020@l	DIFF_ARG_MISMATCH
+112	li r26, 0x0	DIFF_ARG_MISMATCH
+124	mr r5, r27	DIFF_ARG_MISMATCH
+128	add r4, r31, r26	DIFF_ARG_MISMATCH
+176	addi r26, r26, 0x18	DIFF_ARG_MISMATCH
