@@ -1,0 +1,20 @@
+Commands:
+  build/binutils/powerpc-eabi-objdump -dr build/GEDE01/obj/game/game_fn_8020686C.o
+  build/binutils/powerpc-eabi-objdump -dr build/GEDE01/src/game/game_fn_8020686C.o
+
+Retail and candidate .text are both 604 bytes (151 instruction words). Exactly five words differ:
+
+Offset  Retail      Candidate   Retail instruction       Candidate instruction
+0x218   38636800    38c36800    addi r3,r3,0x6800        addi r6,r3,0x6800
+0x220   54842036    54832036    slwi r4,r4,4             slwi r3,r4,4
+0x224   7ca42378    7ca51b78    or r4,r5,r4              or r5,r5,r3
+0x228   7c630214    7cc60214    add r3,r3,r0             add r6,r6,r0
+0x22C   9083000c    90a6000c    stw r4,0xC(r3)           stw r5,0xC(r6)
+
+All five differences are register-allocation differences in the final control-register computation; instruction semantics and all relocations agree.
+
+Materially different retry experiments (canonical objdiff, same compiler and flags):
+  memory-mapped register storage as volatile u32 (*)[5]: 97.84768%; compiler folded address formation and shortened .text to 588 bytes.
+  mutate len with len--; len <<= 4 before the final OR: 97.84768%; instruction order and register allocation regressed.
+  form final address as chan * 20 followed by + 0xCC006800: 97.87417%; compiler used addis/displacement addressing and shortened .text to 596 bytes.
+  baseline restored: 99.7351%; 604-byte size exact.
