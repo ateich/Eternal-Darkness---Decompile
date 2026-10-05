@@ -1189,3 +1189,76 @@ block-scoped vectors change the stack layout (47 lines or more).
 `{255, 0, 0, 40}`, and copies them into the object. With `u32` colour fields
 and the words as constants it reaches 68.16327%. It stores `type` before
 `mode` (99.61224% the other way).
+## File statics and per-unit settings
+
+Seven further functions match. Each builds with the whole-DOL SHA-1
+`ea24b6af954876ce072562ff39cdb4c81d32be1f` and reports 100% under both the
+default and `function_reloc_diffs=name_address` objdiff settings.
+
+### File statics
+
+Retail loads one base address and reaches several variables at fixed
+offsets from it. MWCC produces that form for data defined in the same file,
+so these units declare that data as file statics and rename the pooled block
+to the retail symbol after compiling.
+
+- `fn_8001DE84` uses the same block as `fn_8001DFEC`: zero-initialized
+  statics `head`, `info`, `object`, `work`, `values` and `clear` in address
+  order, under GC/1.3.2, renamed to `lbl_80302400` by the same
+  `externalize_game_static_data_pool` rule.
+- `fn_801B7A7C` is MusyX `synthHandle`. `synth.c`'s data are statics in
+  address order (`synthTicksPerSecond`, `synthJobTable`, `synthInfo`,
+  `synthMasterFader`, `synthTrackVolume`, the aux user and callback arrays);
+  GC/1.2.5n keeps declaration order, and retail adds the `+0x240` of the job
+  table after the index, as it does for a pooled static. The block is renamed
+  to `lbl_80619860`.
+- `fn_801415B4` is Tomas Möller's `coplanar_tri_tri`, with the published
+  `EDGE_EDGE_TEST`, `EDGE_AGAINST_TRI_EDGES` and `POINT_IN_TRI` macros, `int`
+  axes read from `lbl_8064D024`/`lbl_8064D022`, and the fixed triangle as
+  three `static float[2][3]` corners indexed by `lbl_8064D020`. Retail forms
+  each corner as block base plus 0, 24 or 48, then adds the index; GC/1.3.2
+  keeps the `addi rX, base, 0`. The block is renamed to `lbl_805B12B0`.
+
+After the rename both blocks are undefined references in the built objects
+and their `.bss` sections are empty, so neither unit defines storage; the
+blocks stay with the retail symbol map and the units that already reference
+them.
+
+### Per-unit settings and constants
+
+- `fn_801A1E14`: a final per-unit `-O4,s` optimization override. Retail's loop
+  is a counted loop that is not unrolled; `-O4,p` unrolls it eight times. Its
+  constant is renamed to `lbl_80650D20` through
+  `game_section_externalizations`.
+- `fn_80124DBC` and `fn_800C030C`: `-use_lmw_stmw on`, as retail saves with
+  `stmw`. `fn_80124DBC`'s `Owner` fields replace the offset macros, which
+  gives retail's `add` plus displacement for the double-buffered pointers.
+- `fn_800C030C`: float constants as literals (retail reloads `1.0` after the
+  timer store), the timer ratio in its own local, and `fn_8017A010` declared
+  `(float *, float, float, float, int)`, as its neighbour `fn_800BE70C` does.
+  The eight constants are renamed through `game_section_externalizations`,
+  which replaces the old rule that named only `@69`.
+- `fn_801B7A7C`: `-fp_contract off`, which 140 other GC/1.2.5n units already
+  use.
+- `fn_8005B528`: GC/1.3.2. GC/1.3 lets the `values[*lbl_8064C5A8 - 1]` load
+  pass two of the array's initializing stores; 1.3.2 keeps it after them, as
+  retail does. The table stays the compiler's anonymous `.rodata` object, like
+  `fn_80050A7C`.
+
+### `fn_8005B528`
+
+Retail's kind 3 test is `bl fn_80128EAC; cmpwi r3, 24; beq; nop`: the branch
+skips one `nop` and nothing else. That is the shape of the retained debugger
+breakpoints in `fn_8006845C` and `fn_8012C62C`, and it is written the same way,
+as `asm { nop }`. C gives no other way to emit it: an empty `if` emits
+nothing, `__nop()` compiles to a call, and `__sync()`, `__isync()` and
+`__eieio()` emit their own instructions.
+
+Any inline asm makes MWCC lower `?:` to branches, so kind 7's compare with no
+branch is written as a flag that is set and never read
+(`int ready = 0; if (fn_800A1060() != 0) ready = 1;`). In kind 17 the two
+stores of the timer value go to two one-element arrays, and the call takes a
+pointer variable (`u32 *slot = timer; fn_801F348C(slot, ...)`): the first
+array does not escape, so the selector load is not ordered after its store,
+and the copy into `r3` that the allocator merges makes MWCC reschedule the
+block after allocation, which gives retail's order and registers.

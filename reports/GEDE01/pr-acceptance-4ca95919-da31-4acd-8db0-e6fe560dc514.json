@@ -1,0 +1,107 @@
+{
+  "request": {
+    "number": 38,
+    "head": "6c321de69743204e5027c8811f382605c3c56c66",
+    "targets": [
+      "fn_8001DE84",
+      "fn_8005B528",
+      "fn_800C030C",
+      "fn_80124DBC",
+      "fn_801415B4",
+      "fn_80154F74",
+      "fn_801A1E14",
+      "fn_801B7A7C",
+      "fn_801D8E40"
+    ],
+    "discovered_at": 1791176282789,
+    "discovered_by": "pr-sync",
+    "allowed_build_rules": [
+      "externalize_game_801415B4_data",
+      "externalize_game_801B7A7C_data",
+      "externalize_game_80154F74_divisor",
+      "externalize_game_801D8E40_bias",
+      "externalize_game_800C030C_signed_bias"
+    ],
+    "repair_reason": "Owner approved 2026-10-05: use the contributor code if it verifies, otherwise fix it. Per-object pinned compiler versions, target-scoped flags and optimization overrides are allowed (rules posted on PR34). Address the PR34 review notes: exact interfaces/stack layout for fn_80154F74, object-domain bounds for fn_801D8E40. Inline assembly is allowed only under the minimal-asm policy (asm { } blocks <=8 instructions with an ASM: justification); fn_8005B528 must justify its asm portion or be deferred.",
+    "retry_after_job": "28170142-8819-44c4-bc64-947f646e3219",
+    "retry_reason": "Automatic retry after infrastructure failure (interruption): Error: codex timed out after 30 minutes",
+    "auto_retry_used": true,
+    "infra_retries": 1,
+    "specialist": false,
+    "previous_error": "Error: codex timed out after 30 minutes\n    at Timeout.<anonymous> (file:///home/rabbit/src/darkfoundry-new/dist/agents/runners/codex.js:227:18)\n    at listOnTimeout (node:internal/timers:585:17)\n    at process.processTimers (node:internal/timers:521:7)",
+    "previous_preparation": null
+  },
+  "manifest": {
+    "included": [
+      "fn_8001DE84",
+      "fn_8005B528",
+      "fn_800C030C",
+      "fn_80124DBC",
+      "fn_801415B4",
+      "fn_801A1E14",
+      "fn_801B7A7C"
+    ],
+    "deferred": [
+      {
+        "target": "fn_80154F74",
+        "reason": "The matching split-local batch lets 0x90-byte helpers access beyond a 0x14-byte object; one complete object and the accepted u8 callee prototype change code generation."
+      },
+      {
+        "target": "fn_801D8E40",
+        "reason": "The proposed typed effect layout has seven descriptor and handle slots, but fn_801CEB2C can return nine; the matching source cannot be retained without out-of-bounds accesses."
+      }
+    ]
+  },
+  "acceptedBase": "300a5da94853649f97ff4f196f12b0ab89ee1336",
+  "review": {
+    "reviewerA": null,
+    "reviewerB": {
+      "reviewer": "gpt-6-astra:low",
+      "issues": [],
+      "rating": 9,
+      "verdict": "APPROVE",
+      "raw": "I’ll inspect the complete diff, target scope, and data-removal guards in the specified checkout.\n\nThe diff is limited to the seven included functions and their build/report changes. I found one single-instruction `asm { nop }` block with the required explanation. I’m checking the removal guards and new object layouts for safety.\n\nISSUES:\n- None\n\nRATING: 9\n\nVERDICT: APPROVE"
+    },
+    "consensus": [],
+    "hasDisagreement": false,
+    "table": "| Issue | gpt-6-astra:low |\n|-------|--------|\n\n**gpt-6-astra:low Rating:** 9/10 — APPROVE\n\n_Second reviewer disabled (modelRouting.enableSecondReviewer)._",
+    "verdict": "APPROVE"
+  },
+  "canonical": {
+    "fuzzy_match_percent": 61.796307,
+    "total_code": "2300692",
+    "matched_code": "1260204",
+    "matched_code_percent": 54.775,
+    "total_data": "4305634",
+    "matched_data": "39994",
+    "matched_data_percent": 0.928876,
+    "total_functions": 8214,
+    "matched_functions": 6276,
+    "matched_functions_percent": 76.406136,
+    "complete_code": "1260204",
+    "complete_code_percent": 54.775,
+    "complete_data": "40318",
+    "complete_data_percent": 0.936401,
+    "total_units": 7121,
+    "complete_units": 6511
+  },
+  "strict": {
+    "fuzzy_match_percent": 61.79393,
+    "total_code": "2300692",
+    "matched_code": "1260204",
+    "matched_code_percent": 54.775,
+    "total_data": "4305634",
+    "matched_data": "39994",
+    "matched_data_percent": 0.928876,
+    "total_functions": 8214,
+    "matched_functions": 6276,
+    "matched_functions_percent": 76.406136,
+    "complete_code": "1260204",
+    "complete_code_percent": 54.775,
+    "complete_data": "40318",
+    "complete_data_percent": 0.936401,
+    "total_units": 7121,
+    "complete_units": 6511
+  },
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

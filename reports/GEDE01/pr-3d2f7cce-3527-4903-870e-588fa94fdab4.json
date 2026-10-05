@@ -1,0 +1,21 @@
+{
+  "included": [
+    "fn_8001DE84",
+    "fn_8005B528",
+    "fn_800C030C",
+    "fn_80124DBC",
+    "fn_801415B4",
+    "fn_801A1E14",
+    "fn_801B7A7C"
+  ],
+  "deferred": [
+    {
+      "target": "fn_80154F74",
+      "reason": "The matching split-local batch lets 0x90-byte helpers access beyond a 0x14-byte object; one complete object and the accepted u8 callee prototype change code generation."
+    },
+    {
+      "target": "fn_801D8E40",
+      "reason": "The proposed typed effect layout has seven descriptor and handle slots, but fn_801CEB2C can return nine; the matching source cannot be retained without out-of-bounds accesses."
+    }
+  ]
+}
