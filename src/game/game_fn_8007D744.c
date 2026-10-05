@@ -18,6 +18,14 @@ void fn_8007D744(int event)
         return;
     }
     switch (event) {
+    case 5:
+        flags = fn_801E5D20(lbl_8064C8EC);
+        ticks = *(s16 *)(lbl_8031CBA0 + 0x14);
+        ticks = 0 > ticks ? 0 : ticks;
+        *flags |= 1;
+        fn_801E6228(lbl_8064C8EC, lbl_802448F8, ticks / 3600,
+                    (ticks / 60) % 60, ticks % 60);
+        break;
     case 0:
         break;
     case 1:
@@ -27,14 +35,6 @@ void fn_8007D744(int event)
     case 3:
         break;
     case 4:
-        break;
-    case 5:
-        flags = fn_801E5D20(lbl_8064C8EC);
-        ticks = *(s16 *)(lbl_8031CBA0 + 0x14);
-        ticks = 0 > ticks ? 0 : ticks;
-        *flags |= 1;
-        fn_801E6228(lbl_8064C8EC, lbl_802448F8, ticks / 3600,
-                    (ticks / 60) % 60, ticks % 60);
         break;
     default:
         break;
