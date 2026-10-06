@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "assignment_id": "1fb740f1-5eff-4a0a-b691-f867fdbc2dee",
+  "target": "fn_8007C90C",
+  "compiler": "GC/1.3 mwcceppc, canonical configure.py flags including -use_lmw_stmw on",
+  "command": ".tools/bin/ninja build/GEDE01/src/game/game_fn_8007C90C.o && python3 tools/fndiff.py game/game_fn_8007C90C.c fn_8007C90C",
+  "trials": [
+    {
+      "name": "explicit-shifted-id-and-reused-object-id",
+      "size": 444,
+      "match_percent": 96.09091,
+      "result": "Regressed: the added shifted_id live range moved created/current/target across r28-r31 and introduced an extra target move through r0."
+    },
+    {
+      "name": "register-qualified-explicit-shifted-id",
+      "size": 444,
+      "match_percent": 96.09091,
+      "result": "No improvement; register qualifiers did not change the regressed allocation."
+    },
+    {
+      "name": "destructive-object-id-shift",
+      "size": 440,
+      "match_percent": 98.13636,
+      "result": "Recovered the existing frontier but retained the same three aligned diff rows."
+    },
+    {
+      "name": "declaration-order-object-id-first",
+      "size": 440,
+      "match_percent": 98.13636,
+      "result": "Declaration order did not affect MWCC allocation or scheduling."
+    },
+    {
+      "name": "single-index-ssa-plus-packed-flags",
+      "size": 444,
+      "match_percent": 96.181816,
+      "result": "Materially different coalescing attempt regressed by adding the r0 target move and shifting persistent values by one register."
+    },
+    {
+      "name": "ordinary-object-id",
+      "size": 440,
+      "match_percent": 98.13636,
+      "result": "Removing register from object_id produced the same existing frontier."
+    }
+  ],
+  "selected": "The pre-existing behavior-complete NonMatching C remains selected because all materially different legal C live-range/coalescing forms were equal or worse."
+}

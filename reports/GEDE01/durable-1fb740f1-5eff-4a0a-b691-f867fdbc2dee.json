@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "assignment_id": "1fb740f1-5eff-4a0a-b691-f867fdbc2dee",
+  "attempt": 7,
+  "base_commit": "e8d87934724bb4d6e9b127449e7aa2b84860874b",
+  "target": "fn_8007C90C",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-1fb740f1-5eff-4a0a-b691-f867fdbc2dee.json",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-1fb740f1-5eff-4a0a-b691-f867fdbc2dee-reloc-strict.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-1fb740f1-5eff-4a0a-b691-f867fdbc2dee.txt",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-1fb740f1-5eff-4a0a-b691-f867fdbc2dee.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-1fb740f1-5eff-4a0a-b691-f867fdbc2dee.txt",
+    "eternal-darkness-decomp/reports/GEDE01/experiments-1fb740f1-5eff-4a0a-b691-f867fdbc2dee.json",
+    "eternal-darkness-decomp/reports/GEDE01/experiment-output-1fb740f1-5eff-4a0a-b691-f867fdbc2dee.txt"
+  ],
+  "divergence": "Canonical and relocation-strict objdiff both measure 98.13636% with equal 440-byte functions. Three aligned rows remain: retail preserves the initial object ID in r26 while generated uses r29; retail emits lis r4,fn_80204810@ha before slwi r31,r26,8, while generated emits slwi r31,r29,8 before the lis. The callback HA relocation consequently occurs four bytes later in generated code, while relocation types, targets, and addends otherwise agree. Materially different explicit packed-ID and SSA coalescing attempts regressed to 96.09091% and 96.181816%."
+}
