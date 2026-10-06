@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "assignment_id": "ad854cd9-b815-4a79-b321-ac8119947e86",
+  "target": "fn_80175A08",
+  "retained_form": "compatible extern const char array plus a local diagnostic aggregate containing its base pointer",
+  "best": {
+    "canonical_match_percent": 99.44444,
+    "relocation_strict_match_percent": 99.44444,
+    "retail_size": 432,
+    "generated_size": 432,
+    "differing_instruction_rows": 1,
+    "relocations_per_side": 22
+  },
+  "materially_different_trials": [
+    "repeated direct references to the global array; rejected after regressing register allocation and score to 88.62963% before post-compile externalization",
+    "register-qualified local base pointer; no improvement over the prior pre-externalization 97.82407% result",
+    "pointer-to-array local and explicit element addresses; no improvement over the prior pre-externalization 97.82407% result",
+    "moving the base pointer after scalar declarations; regressed register allocation and score to 95.69444% before post-compile externalization",
+    "aggregate containing a genuine character array and member-address uses; no improvement over the prior pre-externalization 97.82407% result",
+    "scalar-symbol declaration tested only as an experiment; no improvement and rejected to preserve genuine array storage"
+  ],
+  "remaining_divergence": "At function offset 0x44 retail emits addi r4,r31,0 while canonical GC/1.3 emits the semantically equivalent mr r4,r31. All other 107 instructions, sizes, relocation targets, and relocation addends agree after the configured jump-table externalization."
+}
