@@ -1,0 +1,9 @@
+Command: python3 tools/fndiff.py game/game_fn_8018FFBC.c fn_8018FFBC | rg '^target|^\\*'
+target 708 bytes  base 708 bytes  match 97.62712
+* 0x0000  lis r7, lbl_80607120@ha                           | lis r8, lbl_80607120@ha
+* 0x0004                                                    | clrlwi r7, r6, 24
+* 0x0008  addi r8, r7, lbl_80607120@l                       | addi r6, r8, lbl_80607120@l
+* 0x000c  lhz r0, 0x2(r8)                                  | lhz r0, 0x2(r6)
+* 0x0010  clrlwi r7, r6, 24                                |
+* 0x0160                                                    | addi r9, r9, 0x8
+* 0x01ec  addi r9, r9, 0x8                                 |
