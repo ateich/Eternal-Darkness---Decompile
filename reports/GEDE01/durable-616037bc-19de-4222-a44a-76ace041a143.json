@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "assignment_id": "616037bc-19de-4222-a44a-76ace041a143",
+  "attempt": 7,
+  "base_commit": "c9ef654547d0e55ceeccd2c3c2588819a894374e",
+  "target": "fn_8016F78C",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-616037bc-19de-4222-a44a-76ace041a143.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-616037bc-19de-4222-a44a-76ace041a143.txt",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-616037bc-19de-4222-a44a-76ace041a143.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-retail-616037bc-19de-4222-a44a-76ace041a143.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-generated-616037bc-19de-4222-a44a-76ace041a143.txt"
+  ],
+  "divergence": "Best canonical objdiff remains 97.58242%: retail is 364 bytes and generated C is 368 bytes. MWCC emits addi r0,r4,lbl_8024FF00@l at generated offset 16 followed by mr r31,r0 at offset 28, while retail emits the low-address addi directly into r31 at offset 24; generated also uses mr r4,r31 at offset 76 where retail uses addi r4,r31,0 at offset 72. The 17 raw ELF relocation entries otherwise have the same types, targets, and addends, shifted by the extra generated instruction after the low-address relocation."
+}
