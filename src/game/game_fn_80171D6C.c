@@ -6,7 +6,9 @@ extern const char lbl_8024FF00[];
 
 int fn_80171D6C(void* state)
 {
-    const char* strings = lbl_8024FF00;
+    struct {
+        const char* strings;
+    } args;
     int arg1;
     int arg2;
     unsigned char clamped2;
@@ -15,8 +17,9 @@ int fn_80171D6C(void* state)
     unsigned char clamped1;
     signed char clamped4;
 
+    args.strings = lbl_8024FF00;
     if (fn_8016A598(state) != 4) {
-        fn_80163BB4(state, strings, 4, fn_8016A598(state));
+        fn_80163BB4(state, args.strings, 4, fn_8016A598(state));
         return 0;
     }
     arg1 = (int)fn_8016A694(state, 1);
@@ -25,13 +28,13 @@ int fn_80171D6C(void* state)
     arg4 = (int)fn_8016A694(state, 4);
     clamped2 = (arg2 > 0 ? arg2 : 0) > 0x7F ? 0x7F : (arg2 > 0 ? arg2 : 0);
     if (arg2 != clamped2)
-        fn_80163BB4(state, strings + 0x3A8, arg2, 0x7F);
+        fn_80163BB4(state, args.strings + 0x3A8, arg2, 0x7F);
     clamped4 = (arg4 > 0 ? arg4 : 0) > 0x7F ? 0x7F : (arg4 > 0 ? arg4 : 0);
     if (arg4 != clamped4)
-        fn_80163BB4(state, strings + 0x40C, arg4);
+        fn_80163BB4(state, args.strings + 0x40C, arg4);
     clamped1 = (arg1 > 0 ? arg1 : 0) > 0xFF ? 0xFF : (arg1 > 0 ? arg1 : 0);
     if (arg1 != clamped1)
-        fn_80163BB4(state, strings + 0x434, arg4);
+        fn_80163BB4(state, args.strings + 0x434, arg4);
     fn_801AC5E4(0, clamped1, clamped2, arg3, clamped4, 0, 0);
     return 0;
 }

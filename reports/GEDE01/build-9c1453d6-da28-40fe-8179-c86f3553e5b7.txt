@@ -1,0 +1,10 @@
+COMMAND: .tools/bin/ninja -v build/GEDE01/src/game/game_fn_80171D6C.o
+EXIT: 0
+[1/1] tools/mwcc_wrapper.py build/tools/sjiswrap.exe compilers/GC/1.3/mwcceppc.exe -nodefaults -proc gekko -align powerpc -enum int -fp hardware -Cpp_exceptions off -O4,p -inline auto -pragma "cats off" -pragma "warn_notinlined off" -maxerrors 1 -nosyspath -RTTI off -fp_contract on -str reuse -multibyte -i include -i build/GEDE01/include -DVERSION_GEDE01 -DNDEBUG=1 -lang=c -use_lmw_stmw on -MMD -c src/game/game_fn_80171D6C.c -o build/GEDE01/src/game
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80171D6C fn_80171D6C --format json -o reports/GEDE01/objdiff-9c1453d6-da28-40fe-8179-c86f3553e5b7.json
+EXIT: 0
+COMMAND: build/tools/objdiff-cli diff -p . -u main/game/game_fn_80171D6C fn_80171D6C --format json -c function_reloc_diffs=name_address -o reports/GEDE01/objdiff-strict-9c1453d6-da28-40fe-8179-c86f3553e5b7.json
+EXIT: 0
+retail object SHA256: 6aebfcbf27b6f4d4b48a4c5b67dfa59dc9e782bf3cdad3c9bbd65c97fa3279b9
+generated object SHA256: 82f68cc2a2d2fbdd9b57dc61baabe70a0420d455d3bf60088c17b14520ff5155
+source SHA256: 57807ad94a419d2e7af06f494695f910096807313f93d57c52b0b7db465f7fa6
