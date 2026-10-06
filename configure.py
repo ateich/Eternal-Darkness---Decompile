@@ -998,7 +998,8 @@ config.custom_build_rules = [
             "--strip-symbol=lbl_8023D77C --strip-symbol=lbl_8023D85C --strip-symbol=lbl_8023D868 "
             "--strip-symbol=lbl_8023D878 --strip-symbol=lbl_8023D884 "
             "--strip-symbol=...data.0 --rename-section=.comment=.ignored $in && "
-            "python3 tools/drop_leading_section_bytes.py $in .data 0x878 && touch $out"
+            "python3 tools/drop_leading_section_bytes.py $in .data 0x878 0x8023D020 "
+            f"orig/{VERSION}/sys/main.dol && touch $out"
         ),
         "description": "EXTERNALIZE $in",
     },

@@ -5,17 +5,26 @@ Every symbol left in the section must start at or after the cut, every
 relocation inside the dropped range is removed, and no relocation may refer
 to the section through a symbol that ends up inside the dropped range.
 
-usage: drop_leading_section_bytes.py OBJECT SECTION SIZE
+Before anything is removed, the whole dropped range is compared with the
+retail DOL at RETAIL_ADDRESS, with every relocation in it resolved. Each of
+those relocations must be an R_PPC_ADDR32 that lies entirely inside the range
+and refers to an address-suffixed symbol, so padding and boundary-crossing
+writes cannot be dropped unverified.
+
+usage: drop_leading_section_bytes.py OBJECT SECTION SIZE RETAIL_ADDRESS DOL
 """
+import re
 import struct
 import sys
 from pathlib import Path
 
-if len(sys.argv) != 4:
+if len(sys.argv) != 6:
     raise SystemExit(__doc__.strip().splitlines()[-1])
 path = Path(sys.argv[1])
 section_name = sys.argv[2]
 cut = int(sys.argv[3], 0)
+retail_address = int(sys.argv[4], 0)
+retail_dol = Path(sys.argv[5])
 data = bytearray(path.read_bytes())
 if data[:6] != b"\x7fELF\x01\x02":
     raise SystemExit(f"{path}: expected a big-endian ELF32 object")
@@ -51,6 +60,42 @@ for index in range(symtab_header[5] // 16):
     offset = symtab_header[4] + index * 16
     name, value, size, info, other, shndx = struct.unpack_from(">IIIBBH", data, offset)
     symbols.append((offset, name_of(name, strings_offset), value, size, info, shndx))
+
+resolved = bytearray(data[header[4]:header[4] + cut])
+for rel in headers:
+    if rel[1] not in (4, 9) or rel[7] != target:
+        continue
+    width = 12 if rel[1] == 4 else 8
+    for entry in range(rel[4], rel[4] + rel[5], width):
+        where, info = struct.unpack_from(">II", data, entry)
+        if where >= cut:
+            continue
+        if where + 4 > cut:
+            raise SystemExit(f"{path}: relocation at 0x{where:X} crosses the cut at 0x{cut:X}")
+        if info & 0xFF != 1:  # R_PPC_ADDR32
+            raise SystemExit(f"{path}: unverifiable relocation type {info & 0xFF} at 0x{where:X}")
+        referenced = symbols[info >> 8]
+        address = re.fullmatch(r".*_([0-9A-Fa-f]{8})", referenced[1])
+        if not address:
+            raise SystemExit(f"{path}: cannot verify relocation at 0x{where:X} against {referenced[1]!r}")
+        if rel[1] == 4:
+            addend = struct.unpack_from(">i", data, entry + 8)[0]
+        else:
+            addend = struct.unpack_from(">i", data, header[4] + where)[0]
+        struct.pack_into(">I", resolved, where, (int(address.group(1), 16) + addend) & 0xFFFFFFFF)
+
+dol = retail_dol.read_bytes()
+retail = None
+for off_base, addr_base, size_base, count in ((0x00, 0x48, 0x90, 7), (0x1C, 0x64, 0xAC, 11)):
+    for i in range(count):
+        file_off, start, size = (struct.unpack_from(">I", dol, base + 4 * i)[0] for base in (off_base, addr_base, size_base))
+        if start <= retail_address and retail_address + cut <= start + size:
+            retail = dol[file_off + retail_address - start:file_off + retail_address - start + cut]
+if retail is None or len(retail) != cut:
+    raise SystemExit(f"{retail_dol}: 0x{retail_address:08X} + 0x{cut:X} is not in one file-backed segment")
+if resolved != retail:
+    first = next(i for i in range(cut) if resolved[i] != retail[i])
+    raise SystemExit(f"{path}: dropped bytes differ from retail at 0x{retail_address + first:08X}")
 
 for offset, name, value, size, info, shndx in symbols:
     if shndx != target:
