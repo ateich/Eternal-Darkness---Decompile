@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "assignment_id": "73160aff-d148-4a2e-9f09-702bb3cec9ff",
+  "attempt": 7,
+  "target": "fn_801EBC6C",
+  "source": "eternal-darkness-decomp/src/game/game_fn_801EBC6C.c",
+  "registration": "Object(NonMatching, \"game/game_fn_801EBC6C.c\", mw_version=\"GC/1.3\")",
+  "build": {
+    "command": ".tools/bin/ninja build/GEDE01/src/game/game_fn_801EBC6C.o",
+    "exit_code": 0,
+    "raw_file": "eternal-darkness-decomp/reports/GEDE01/build-73160aff-d148-4a2e-9f09-702bb3cec9ff.txt"
+  },
+  "canonical": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801EBC6C fn_801EBC6C -o reports/GEDE01/objdiff-73160aff-d148-4a2e-9f09-702bb3cec9ff-canonical.raw.json --format json-pretty",
+    "match_percent": 99.29348,
+    "retail_size": 368,
+    "generated_size": 368,
+    "raw_file": "eternal-darkness-decomp/reports/GEDE01/objdiff-73160aff-d148-4a2e-9f09-702bb3cec9ff-canonical.raw.json"
+  },
+  "relocation_strict": {
+    "command": "build/tools/objdiff-cli diff -p . -u main/game/game_fn_801EBC6C fn_801EBC6C -o reports/GEDE01/objdiff-73160aff-d148-4a2e-9f09-702bb3cec9ff-reloc-strict.raw.json --format json-pretty -c function_reloc_diffs=name_address",
+    "match_percent": 99.29348,
+    "config": "function_reloc_diffs=name_address",
+    "relocations_equal": true,
+    "canonical_raw_byte_identical": true,
+    "raw_file": "eternal-darkness-decomp/reports/GEDE01/objdiff-73160aff-d148-4a2e-9f09-702bb3cec9ff-reloc-strict.raw.json",
+    "relocation_tables": "eternal-darkness-decomp/reports/GEDE01/relocations-73160aff-d148-4a2e-9f09-702bb3cec9ff.txt"
+  },
+  "experiments": [
+    {"approach":"reuse compare as packed-color temporary","match_percent":99.29348,"result":"same nine register-operand differences"},
+    {"approach":"construct and mask directly in persistent u16 value","match_percent":95.70652,"generated_size":364,"result":"lost the explicit slwi and changed allocation earlier in the block"},
+    {"approach":"chained packed/value assignment to encourage coalescing","match_percent":96.141304,"generated_size":368,"result":"introduced mr/rlwimi scheduling and broader allocation differences"},
+    {"approach":"assign packed high half into value before low-byte insertion","match_percent":95.70652,"generated_size":364,"result":"folded the shift into rlwimi"}
+  ],
+  "instruction_diff": "eternal-darkness-decomp/reports/GEDE01/instruction-diff-73160aff-d148-4a2e-9f09-702bb3cec9ff.json",
+  "divergence": "Both sides are 368 bytes and all opcode positions agree. Nine instructions from 0x100 through 0x120 differ only in register operands: retail holds the accumulator in r4/r0 and constructs the packed pixel in r5, while GC/1.3 holds the accumulator in r5/r4 and constructs the packed pixel in r0 before narrowing it into r5. The relocations at 0x30 (R_PPC_REL24 memset +0) and 0x70 (R_PPC_EMB_SDA21 lbl_8064D6A0 +0) agree in offset, type, target, and addend.",
+  "conclusion": "Attempted: retain the behavior-complete independent honest C reconstruction as NonMatching at 99.29348%; no matched credit is claimed."
+}
