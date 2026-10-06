@@ -1,60 +1,70 @@
 typedef unsigned char u8;
 typedef unsigned short u16;
-typedef unsigned int u32;
 
-typedef struct Words3 {
-    u32 x;
-    u32 y;
-    u32 z;
-} Words3;
+typedef struct Vector3 {
+    float x;
+    float y;
+    float z;
+} Vector3;
 
-extern const volatile Words3 lbl_8023B050;
-extern const volatile Words3 lbl_8023B05C;
-extern const volatile u32 lbl_806509F4;
-extern void fn_801859FC(u8*, u8);
+typedef struct Color {
+    u8 r;
+    u8 g;
+    u8 b;
+    u8 a;
+} Color;
 
-void fn_801858E0(u8* self)
+typedef struct Effect {
+    u8 type;
+    u8 value01;
+    u8 value02;
+    signed char value03;
+    u16 value04;
+    u16 value06;
+    u16 value08;
+    u8 pad0A[10];
+    u8 value14;
+    u8 value15;
+    u8 pad16[2];
+    u8 value18;
+    u8 value19;
+    u8 pad1A[2];
+    u16 value1C;
+    u16 value1E;
+    u16 value20;
+    u8 pad22[0xE];
+    Vector3 second;
+    Vector3 first;
+    Vector3 first_copy;
+    u8 pad54[0x24];
+    Color value78;
+} Effect;
+
+extern void fn_801859FC(Effect*, u8);
+
+void fn_801858E0(Effect* self)
 {
-    u32 first_x = lbl_8023B050.x;
-    u32 first_y = lbl_8023B050.y;
-    u32 first_z = lbl_8023B050.z;
-    u32 second_x = lbl_8023B05C.x;
-    u32 second_y = lbl_8023B05C.y;
-    u32 second_z = lbl_8023B05C.z;
-    volatile u32 value = lbl_806509F4;
-    volatile Words3 first_store;
-    volatile Words3 second_store;
+    Vector3 first = {0.0f, 0.0f, 0.0f};
+    Vector3 second = {0.0f, 0.0f, 1.0f};
+    Color value = {255, 255, 255, 255};
 
-    second_store.x = second_x;
-    second_store.y = second_y;
-    second_store.z = second_z;
-    first_store.x = first_x;
-    first_store.y = first_y;
-    first_store.z = first_z;
-
-    self[0] = 31;
-    self[1] = 64;
-    self[2] = 250;
-    self[3] = 254;
-    *(u16*)(self + 4) = 5;
-    *(u16*)(self + 6) = 130;
-    *(u16*)(self + 8) = 5;
-    *(u16*)(self + 0x1C) = 100;
-    *(u16*)(self + 0x1E) = 0x800;
-    *(u16*)(self + 0x20) = 4;
-    fn_801859FC(self, self[0]);
-    self[0x14] = 20;
-    self[0x15] = 3;
-    self[0x18] = 20;
-    self[0x19] = 31;
-    *(u32*)(self + 0x78) = value;
-    *(u32*)(self + 0x3C) = first_x;
-    *(u32*)(self + 0x40) = first_y;
-    *(u32*)(self + 0x44) = first_z;
-    *(u32*)(self + 0x48) = first_x;
-    *(u32*)(self + 0x4C) = first_y;
-    *(u32*)(self + 0x50) = first_z;
-    *(u32*)(self + 0x30) = second_x;
-    *(u32*)(self + 0x34) = second_y;
-    *(u32*)(self + 0x38) = second_store.z;
+    self->type = 31;
+    self->value01 = 64;
+    self->value04 = 5;
+    self->value06 = 130;
+    self->value08 = 5;
+    self->value02 = 250;
+    self->value03 = -2;
+    self->value1C = 100;
+    self->value1E = 0x800;
+    self->value20 = 4;
+    fn_801859FC(self, self->type);
+    self->value14 = 20;
+    self->value15 = 3;
+    self->value78 = value;
+    self->value18 = 20;
+    self->value19 = 31;
+    self->first = first;
+    self->first_copy = first;
+    self->second = second;
 }

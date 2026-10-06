@@ -1,0 +1,197 @@
+{
+  "request": {
+    "number": 37,
+    "head": "a9de96152d72fd375c0515ffe873b5e693faefc6",
+    "targets": [
+      "fn_8001E144",
+      "fn_80023258",
+      "fn_8002B5B4",
+      "fn_8005F8D0",
+      "fn_80068AAC",
+      "fn_800EEC44",
+      "fn_801270DC",
+      "fn_80141EA8",
+      "fn_8015B800",
+      "fn_80180D0C",
+      "fn_801858E0",
+      "fn_8018F76C",
+      "fn_80197D20",
+      "fn_801B3770",
+      "fn_801E4314",
+      "fn_801F03F0",
+      "fn_801F15D0",
+      "fn_801FAD4C",
+      "fn_8020860C"
+    ],
+    "allowed_shared_paths": [
+      "tools/drop_leading_section_bytes.py"
+    ],
+    "allowed_build_rules": [
+      "externalize_game_8015B800_jumptable",
+      "externalize_game_801858E0_constants",
+      "externalize_game_8005F8D0_tables",
+      "externalize_game_8020860C_pools",
+      "externalize_game_80023258_pools",
+      "externalize_game_8001E144_pools",
+      "externalize_game_80141EA8_triangle_pool",
+      "externalize_game_80197D20_signed_bias"
+    ],
+    "repair_reason": "User reviewed and approved tools/drop_leading_section_bytes.py (2026-10-04, unchanged at this head) and the PR-scoped per-function compiler settings and externalization rules. Constant-removal rules must carry exact --require-section and --reject-section-relocations guards. Rework any rule the scope checker rejects or defer that target.",
+    "discovered_at": 1791255168401,
+    "discovered_by": "pr-sync",
+    "retry_after_job": "df6e3620-3bad-4d82-aea5-aee422a009de",
+    "auto_retry_used": true,
+    "retry_reason": "Automatic single repair pass after review rejection: fix every reviewer finding within the pinned target scope; defer any target that cannot be fixed honestly in C. All gates remain mandatory.",
+    "specialist": false,
+    "previous_error": "Error: PR review REQUEST_CHANGES: {\"reviewerA\":null,\"reviewerB\":{\"reviewer\":\"gpt-6-astra:low\",\"issues\":[\"[P1] `configure.py:994,1014,1036,1069`: Four new rules retain the zero-sized `...data.0` NOTYPE anchor after retargeting. Freshly compiled candidate objects reproducibly fail externalization with “removed section has an unapproved symbol owner.” Safely remove the unreferenced anchor before validation; preserve ownership guards.\",\"[P1] `configure.py:1070–1073`: Even after removing that anchor, `fn_8001E144` fails with “outgoing relocation section targets removed pool.” The tool permits outgoing relocations only with `--require-whole-section`, whereas this rule uses `--require-section-symbols`. Implement guarded partial-section externalization that validates every removed relocation without weakening existing checks.\"],\"rating\":4,\"verdict\":\"REQUEST_CHANGES\",\"raw\":\"I’ll inspect the complete diff in the specified checkout, including assembly use, target scope, and the shared static-pool removal guards.\\n\\nThe assembly is limited to two single-instruction `nop` blocks and one four-instruction paired-single conversion block, all with the required comments. I’m checking the data-removal tools next, including whether malformed objects can bypass their guards.\\n\\nI reproduced build failures in four new externalization rules: retargeting leaves a zero-sized MWCC anchor that the ownership guard rejects. After removing that unused anchor in a disposable test object, `fn_8001E144` hits a second guard because its data section contains relocations. The shared static-pool rejection tests passed.\\n\\nISSUES:\\n- [P1] `configure.py:994,1014,1036,1069`: Four new rules retain the zero-sized `...data.0` NOTYPE anchor after retargeting. Freshly compiled candidate objects reproducibly fail externalization with “removed section has an unapproved symbol owner.” Safely remove the unreferenced anchor before validation; preserve ownership guards.\\n- [P1] `configure.py:1070–1073`: Even after removing that anchor, `fn_8001E144` fails with “outgoing relocation section targets removed pool.” The tool permits outgoing relocations only with `--require-whole-section`, whereas this rule uses `--require-section-symbols`. Implement guarded partial-section externalization that validates every removed relocation without weakening existing checks.\\n\\nRATING: 4\\n\\nVERDICT: REQUEST_CHANGES\"},\"consensus\":[{\"issue\":\"[P1] `configure.py:994,1014,1036,1069`: Four new rules retain the zero-sized `...data.0` NOTYPE anchor after retargeting. Freshly compiled candidate objects reproducibly fail externalization with “removed section has an unapproved symbol owner.” Safely remove the unreferenced anchor before validation; preserve ownership guards.\",\"reviewerA\":false,\"reviewerB\":true,\"agreed\":false},{\"issue\":\"[P1] `configure.py:1070–1073`: Even after removing that anchor, `fn_8001E144` fails with “outgoing relocation section targets removed pool.” The tool permits outgoing relocations only with `--require-whole-section`, whereas this rule uses `--require-section-symbols`. Implement guarded partial-section externalization that validates every removed relocation without weakening existing checks.\",\"reviewerA\":false,\"reviewerB\":true,\"agreed\":false}],\"hasDisagreement\":false,\"table\":\"| Issue | gpt-6-astra:low |\\n|-------|--------|\\n| [P1] `configure.py:994,1014,1036,1069`: Four new rules retain the zero-sized `...data.0` NOTYPE anchor after retargeting. Freshly compiled candidate objects reproducibly fail externalization with “removed section has an unapproved symbol owner.” Safely remove the unreferenced anchor before validation; preserve ownership guards. | ✓ |\\n| [P1] `configure.py:1070–1073`: Even after removing that anchor, `fn_8001E144` fails with “outgoing relocation section targets removed pool.” The tool permits outgoing relocations only with `--require-whole-section`, whereas this rule uses `--require-section-symbols`. Implement guarded partial-section externalization that validates every removed relocation without weakening existing checks. | ✓ |\\n\\n**gpt-6-astra:low Rating:** 4/10 — REQUEST_CHANGES\\n\\n_Second reviewer disabled (modelRouting.enableSecondReviewer)._\",\"verdict\":\"REQUEST_CHANGES\"}\n    at integrate (file:///home/rabbit/src/darkfoundry-new/scripts/decomp-durable-runtime.mjs:1159:47)\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at async runJob (file:///home/rabbit/src/darkfoundry-new/scripts/decomp-durable-runtime.mjs:1475:51)\n    at async main (file:///home/rabbit/src/darkfoundry-new/scripts/decomp-durable-runtime.mjs:1588:25)",
+    "previous_preparation": {
+      "job": "6d9cb1c6-53d2-4a8c-beef-c5ed933adb1f",
+      "base_commit": "3d2847b46f677c9762fb48f47ddd26eceb7f3933",
+      "candidate_commit": "c16c3b8d592dbefc55d8efe6a0431402f0e0d3b1",
+      "directory": "/home/rabbit/src/darkfoundry-new/.darkfoundry/worktrees/e726b980-677d-4713-a44a-81956af25c2a",
+      "manifest": {
+        "included": [
+          "fn_8001E144",
+          "fn_80023258",
+          "fn_8002B5B4",
+          "fn_8005F8D0",
+          "fn_80068AAC",
+          "fn_800EEC44",
+          "fn_801270DC",
+          "fn_80141EA8",
+          "fn_8015B800",
+          "fn_80180D0C",
+          "fn_801858E0",
+          "fn_8018F76C",
+          "fn_80197D20",
+          "fn_801B3770",
+          "fn_801E4314",
+          "fn_801F03F0",
+          "fn_801F15D0",
+          "fn_801FAD4C",
+          "fn_8020860C"
+        ],
+        "deferred": []
+      },
+      "authors": [
+        "ateich <4775201+ateich@users.noreply.github.com>"
+      ]
+    }
+  },
+  "manifest": {
+    "included": [
+      "fn_80068AAC",
+      "fn_800EEC44",
+      "fn_801270DC",
+      "fn_80141EA8",
+      "fn_8015B800",
+      "fn_80180D0C",
+      "fn_801858E0",
+      "fn_8018F76C",
+      "fn_80197D20"
+    ],
+    "deferred": [
+      {
+        "target": "fn_8001E144",
+        "reason": "The matched C requires partial .data prefix removal with outgoing relocations; a complete fail-closed C/tooling repair could not be justified within this preparation, so accepted source and registration were restored."
+      },
+      {
+        "target": "fn_80023258",
+        "reason": "The compiled object retains a zero-sized local data owner that the required whole-section ownership guard correctly rejects; the allowed configuration scope does not admit the reviewed normalization helper, so accepted source and registration were restored."
+      },
+      {
+        "target": "fn_8005F8D0",
+        "reason": "The compiled object retains a zero-sized local data owner that the required whole-section ownership guard correctly rejects; the allowed configuration scope does not admit the reviewed normalization helper, so accepted source and registration were restored."
+      },
+      {
+        "target": "fn_8020860C",
+        "reason": "The compiled object retains a zero-sized local data owner that the required whole-section ownership guard correctly rejects; the allowed configuration scope does not admit the reviewed normalization helper, so accepted source and registration were restored."
+      },
+      {
+        "target": "fn_8002B5B4",
+        "reason": "Its match requires a new generic static-pool build step that the supplied scope checker rejects as an unapproved scoped rule, so accepted source and registration were restored."
+      },
+      {
+        "target": "fn_801B3770",
+        "reason": "Its match requires a new generic static-pool build step that the supplied scope checker rejects as an unapproved scoped rule, so accepted source and registration were restored."
+      },
+      {
+        "target": "fn_801FAD4C",
+        "reason": "Its match requires a new generic static-data-pool build step that the supplied scope checker rejects as an unapproved scoped rule, so accepted source and registration were restored."
+      },
+      {
+        "target": "fn_801F03F0",
+        "reason": "Its match requires a new generic static-data-pool build step that the supplied scope checker rejects as an unapproved scoped rule, so accepted source and registration were restored."
+      },
+      {
+        "target": "fn_801E4314",
+        "reason": "Its generated constant-section rule lacked the mandatory exact-section and relocation guards; the safe target-specific replacement was not accepted by the supplied scope checker, so accepted source and registration were restored."
+      },
+      {
+        "target": "fn_801F15D0",
+        "reason": "Its generated constant-section rule lacked the mandatory exact-section and relocation guards; the safe target-specific replacement was not accepted by the supplied scope checker, so accepted source and registration were restored."
+      }
+    ]
+  },
+  "acceptedBase": "3d2847b46f677c9762fb48f47ddd26eceb7f3933",
+  "review": {
+    "reviewerA": null,
+    "reviewerB": {
+      "reviewer": "gpt-6-astra:low",
+      "issues": [
+        "None. Full diff stays within the included targets; assembly meets the stated limits and instruction-specific exceptions. Removal rules have whole-section guards. Independent static-pool tests rejected relocated, truncated, nonzero, executable, and incorrectly mapped data without mutation. Fresh build and retail-match gates remain pending as specified."
+      ],
+      "rating": 9,
+      "verdict": "APPROVE",
+      "raw": "I’ll inspect the complete diff in the specified checkout, focusing on scope, inline assembly, and the static-pool removal guards.\n\nThe diff is limited to the nine included functions, their build rules, and the manifest. The added assembly consists of two single `nop` blocks and one four-instruction paired-single block. I’m now checking the shared tool’s rejection paths and the guards on each new section-removal rule.\n\nISSUES:\n- None. Full diff stays within the included targets; assembly meets the stated limits and instruction-specific exceptions. Removal rules have whole-section guards. Independent static-pool tests rejected relocated, truncated, nonzero, executable, and incorrectly mapped data without mutation. Fresh build and retail-match gates remain pending as specified.\n\nRATING: 9\n\nVERDICT: APPROVE"
+    },
+    "consensus": [
+      {
+        "issue": "None. Full diff stays within the included targets; assembly meets the stated limits and instruction-specific exceptions. Removal rules have whole-section guards. Independent static-pool tests rejected relocated, truncated, nonzero, executable, and incorrectly mapped data without mutation. Fresh build and retail-match gates remain pending as specified.",
+        "reviewerA": false,
+        "reviewerB": true,
+        "agreed": false
+      }
+    ],
+    "hasDisagreement": false,
+    "table": "| Issue | gpt-6-astra:low |\n|-------|--------|\n| None. Full diff stays within the included targets; assembly meets the stated limits and instruction-specific exceptions. Removal rules have whole-section guards. Independent static-pool tests rejected relocated, truncated, nonzero, executable, and incorrectly mapped data without mutation. Fresh build and retail-match gates remain pending as specified. | ✓ |\n\n**gpt-6-astra:low Rating:** 9/10 — APPROVE\n\n_Second reviewer disabled (modelRouting.enableSecondReviewer)._",
+    "verdict": "APPROVE"
+  },
+  "canonical": {
+    "fuzzy_match_percent": 61.83464,
+    "total_code": "2300692",
+    "matched_code": "1265572",
+    "matched_code_percent": 55.008324,
+    "total_data": "4305634",
+    "matched_data": "40006",
+    "matched_data_percent": 0.92915463,
+    "total_functions": 8214,
+    "matched_functions": 6285,
+    "matched_functions_percent": 76.5157,
+    "complete_code": "1265572",
+    "complete_code_percent": 55.008324,
+    "complete_data": "40330",
+    "complete_data_percent": 0.9366797,
+    "total_units": 7121,
+    "complete_units": 6520
+  },
+  "strict": {
+    "fuzzy_match_percent": 61.832306,
+    "total_code": "2300692",
+    "matched_code": "1265572",
+    "matched_code_percent": 55.008324,
+    "total_data": "4305634",
+    "matched_data": "40006",
+    "matched_data_percent": 0.92915463,
+    "total_functions": 8214,
+    "matched_functions": 6285,
+    "matched_functions_percent": 76.5157,
+    "complete_code": "1265572",
+    "complete_code_percent": 55.008324,
+    "complete_data": "40330",
+    "complete_data_percent": 0.9366797,
+    "total_units": 7121,
+    "complete_units": 6520
+  },
+  "dol_sha1": "ea24b6af954876ce072562ff39cdb4c81d32be1f"
+}

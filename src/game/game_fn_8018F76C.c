@@ -1,43 +1,60 @@
 typedef unsigned char u8;
-typedef signed char s8;
 typedef signed short s16;
 typedef unsigned short u16;
-typedef unsigned int u32;
 
 typedef struct Color {
-    u32 value;
+    u8 r;
+    u8 g;
+    u8 b;
+    u8 a;
 } Color;
 
-extern const Color lbl_80650AE0;
-extern const Color lbl_80650AE4;
-extern const float lbl_80650AE8;
+typedef struct Effect {
+    u8 type;
+    u8 value01;
+    u8 value02;
+    signed char value03;
+    s16 value04;
+    u16 value06;
+    u16 value08;
+    u8 pad0A[10];
+    Color color0;
+    Color color1;
+    u16 value1C;
+    u16 value1E;
+    u8 value20;
+    u8 value21;
+    u8 value22;
+    u8 value23;
+    u8 value24;
+    u8 pad25[3];
+    u8 value28;
+    u8 value29;
+    u8 pad2A[6];
+    u16 value30;
+    u8 pad32[14];
+    float value40;
+} Effect;
 
-/* Keep aggregate arguments local to this translation unit. */
-static inline void initialize_descriptor(u8* desc, u8 field_00, u8 field_01,
-    s16 field_04, u16 field_06, u16 field_08, u8 field_02, s8 field_03,
-    Color color0, Color color1, u8 field_20, u8 field_22, u8 field_23,
-    u16 field_30, float field_40, u8 field_28, u8 field_29)
+void fn_8018F76C(Effect* object)
 {
-    desc[0] = field_00;
-    desc[1] = field_01;
-    *(s16*)(desc + 4) = field_04;
-    *(u16*)(desc + 6) = field_06;
-    *(u16*)(desc + 8) = field_08;
-    desc[2] = field_02;
-    ((s8*)desc)[3] = field_03;
-    *(Color*)(desc + 0x14) = color0;
-    *(Color*)(desc + 0x18) = color1;
-    desc[0x20] = field_20;
-    desc[0x22] = field_22;
-    desc[0x23] = field_23;
-    *(u16*)(desc + 0x30) = field_30;
-    *(float*)(desc + 0x40) = field_40;
-    desc[0x28] = field_28;
-    desc[0x29] = field_29;
-}
+    Color color0 = {230, 230, 255, 250};
+    Color color1 = {120, 120, 155, 40};
 
-void fn_8018F76C(u8* desc)
-{
-    initialize_descriptor(desc, 21, 16, -1, 120, 5, 250, -2,
-        lbl_80650AE0, lbl_80650AE4, 0, 180, 60, 512, lbl_80650AE8, 100, 6);
+    object->type = 21;
+    object->value01 = 16;
+    object->value04 = -1;
+    object->value06 = 120;
+    object->value08 = 5;
+    object->value02 = 250;
+    object->value03 = -2;
+    object->color0 = color0;
+    object->color1 = color1;
+    object->value20 = 0;
+    object->value22 = 180;
+    object->value23 = 60;
+    object->value30 = 512;
+    object->value40 = 3.0f;
+    object->value28 = 100;
+    object->value29 = 6;
 }
