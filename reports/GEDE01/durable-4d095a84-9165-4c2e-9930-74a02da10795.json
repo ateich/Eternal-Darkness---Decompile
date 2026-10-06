@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "assignment_id": "4d095a84-9165-4c2e-9930-74a02da10795",
+  "attempt": 7,
+  "base_commit": "32d62255864ed7a50cc4898175ce3aa860fa74b2",
+  "target": "fn_8016FA08",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-4d095a84-9165-4c2e-9930-74a02da10795.json",
+    "eternal-darkness-decomp/reports/GEDE01/build-4d095a84-9165-4c2e-9930-74a02da10795.txt",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-4d095a84-9165-4c2e-9930-74a02da10795.txt",
+    "eternal-darkness-decomp/reports/GEDE01/relocations-4d095a84-9165-4c2e-9930-74a02da10795.txt"
+  ],
+  "divergence": "Best canonical objdiff remains 97.77778%: retail is 396 bytes with 24 relocation-bearing instructions, while generated code is 400 bytes with 25. MWCC materializes lbl_8024FF00@l into r0 and copies r0 to r31; retail materializes the low half directly into r31. This adds one instruction, changes retail's zero-offset addi argument into mr, and shifts subsequent branch targets. Direct array-expression and structured-storage trials materially differed from the preserved attempt but regressed to 85.47475%, so the existing honest NonMatching C reconstruction was retained."
+}
