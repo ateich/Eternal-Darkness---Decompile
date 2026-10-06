@@ -1,0 +1,15 @@
+canonical function instruction differences
+left=retail target; right=generated candidate
+  24 DIFF_ARG_MISMATCH: addi r24, r3, lbl_8023B830@l || addi r23, r3, lbl_8023B830@l
+  64 DIFF_ARG_MISMATCH: mr r23, r3 || mr r24, r3
+  72 DIFF_ARG_MISMATCH: li r23, 0x0 || li r24, 0x0
+  92 DIFF_ARG_MISMATCH: mr r3, r23 || mr r3, r24
+ 128 DIFF_ARG_MISMATCH: lwz r6, 0x0(r24) || lwz r6, 0x0(r23)
+ 136 DIFF_ARG_MISMATCH: lwz r5, 0x4(r24) || lwz r5, 0x4(r23)
+ 140 DIFF_ARG_MISMATCH: lwz r0, 0x8(r24) || lwz r0, 0x8(r23)
+ 280 DIFF_ARG_MISMATCH: lwz r8, 0xc(r24) || lwz r8, 0xc(r23)
+ 288 DIFF_ARG_MISMATCH: lwz r7, 0x10(r24) || lwz r7, 0x10(r23)
+ 292 DIFF_ARG_MISMATCH: lwz r6, 0x14(r24) || lwz r6, 0x14(r23)
+ 296 DIFF_ARG_MISMATCH: lwz r5, 0x18(r24) || lwz r5, 0x18(r23)
+ 300 DIFF_ARG_MISMATCH: lwz r4, 0x1c(r24) || lwz r4, 0x1c(r23)
+ 304 DIFF_ARG_MISMATCH: lwz r0, 0x20(r24) || lwz r0, 0x20(r23)
