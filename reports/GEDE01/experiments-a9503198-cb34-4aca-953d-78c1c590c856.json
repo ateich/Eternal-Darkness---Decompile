@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "assignment_id": "a9503198-cb34-4aca-953d-78c1c590c856",
+  "target": "fn_80159440",
+  "compiler": "GC/1.3, unchanged canonical settings",
+  "best_canonical_match_percent": 98.6129,
+  "best_relocation_strict_match_percent": 98.6129,
+  "retail_text_bytes": 496,
+  "generated_text_bytes": 492,
+  "retained_source_changed": false,
+  "experiments": [
+    {
+      "hypothesis": "one-element aggregate arrays may preserve the transition and channel subobject bases",
+      "result": "The generated object was byte-identical to the retained best object; MWCC still folded the transition address and the first channel-index load."
+    },
+    {
+      "hypothesis": "pointer arithmetic through complete prefix aggregate types may preserve addi base formation",
+      "result": "The generated object was byte-identical to the retained best object; both prefix additions were folded."
+    },
+    {
+      "hypothesis": "the policy-permitted three-instruction inline-asm fallback can isolate only the stubborn transition store",
+      "result": "MWCC optimized the asm statements and changed long-lived register allocation, producing a materially worse object; the experiment was not retained."
+    }
+  ],
+  "divergence": "Retail emits addi r3,r29,0x21c followed by li r0,1 and stw r0,0x18(r3); generated C folds the address into li r0,1 plus stw r0,0x234(r29). Retail also loads the initial channel index as lwz r0,0x4(r6), while generated C uses lwz r0,0x1e4(r29). All 30 actual ELF relocation types, targets, and addends agree in corresponding order, with generated relocation offsets four bytes earlier after the omitted transition addi."
+}
