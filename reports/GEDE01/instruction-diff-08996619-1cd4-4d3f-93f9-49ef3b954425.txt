@@ -1,0 +1,20 @@
+fn_80142944 canonical GC/1.3 instruction diff
+target bytes: 100
+candidate bytes: 100
+matching instructions: 24/25
+match percent: 97.6
+
+Only differing instruction:
+0x0020 target:    addi r3, r31, 0x0  [R_PPC_NONE lbl_805B1310+0]
+0x0020 candidate: mr r3, r31         [R_PPC_NONE lbl_805B1310+0]
+
+All other 24 instructions agree. Raw complete objdiff output is in
+objdiff-08996619-1cd4-4d3f-93f9-49ef3b954425.json.
+
+Materially different retry experiments:
+- Typed aggregate/member expressions caused GC/1.3 to rematerialize the global
+  address for each call: 104 candidate bytes, 54.72%.
+- A one-instruction inline-asm dataflow result caused GC/1.3 to emit the desired
+  addi, but the asm barrier reordered the first-call setup: 100 bytes, 74.4%.
+Neither regression was retained; the honest C reconstruction remains best.
+

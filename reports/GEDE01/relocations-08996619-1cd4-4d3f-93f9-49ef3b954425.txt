@@ -1,0 +1,18 @@
+fn_80142944 relocation comparison extracted from raw objdiff JSON
+
+offset  target relocation                         candidate relocation                    result
+0x0008  R_PPC_ADDR16_HA lbl_805B1310 + 0          R_PPC_ADDR16_HA lbl_805B1310 + 0        agree
+0x001c  R_PPC_ADDR16_LO lbl_805B1310 + 0          R_PPC_ADDR16_LO lbl_805B1310 + 0        agree
+0x0020  R_PPC_NONE lbl_805B1310 + 0               R_PPC_NONE lbl_805B1310 + 0             agree
+0x0024  R_PPC_REL24 memset + 0                    R_PPC_REL24 memset + 0                  agree
+0x0028  R_PPC_NONE lbl_805B1310 + 240             R_PPC_NONE lbl_805B1310 + 240           agree
+0x0034  R_PPC_REL24 memset + 0                    R_PPC_REL24 memset + 0                  agree
+0x0038  R_PPC_NONE lbl_805B1310 + 9648            R_PPC_NONE lbl_805B1310 + 9648          agree
+0x0044  R_PPC_REL24 memset + 0                    R_PPC_REL24 memset + 0                  agree
+0x004c  R_PPC_EMB_SDA21 lbl_8064D038 + 0          R_PPC_EMB_SDA21 lbl_8064D038 + 0        agree
+
+Symbol-table indices differ between the split retail object and reconstructed
+object, but resolved target names, relocation types, offsets, and addends agree.
+Relocation-strict result: failed because the instruction encoding at 0x0020 is
+not byte-identical, despite identical R_PPC_NONE annotation metadata.
+
