@@ -22,7 +22,7 @@ typedef struct ObjectInfo {
 
 extern void *fn_80201B8C();
 extern void* fn_80201B94();
-extern int fn_80201B54();
+extern u32 fn_80201B54(void*);
 extern void *fn_80201BC8(void*);
 extern void* fn_80201C48(void*);
 extern void fn_80201D2C(void *, int);
@@ -64,7 +64,7 @@ int fn_8008A96C(void* object, void* resource, void* unused)
     Vec3 positionCopy;
     Vec3 position;
     int flags;
-    void* owner;
+    u32 owner;
     int success;
     int i;
     int selection;
@@ -78,7 +78,7 @@ int fn_8008A96C(void* object, void* resource, void* unused)
     positionCopy = position;
     flags = fn_80128EE4(resource);
     related = fn_80201C48(object2);
-    owner = ((void*)fn_80201B54(object));
+    owner = fn_80201B54(object);
     success = 0;
 
     if ((flags & 0x20) == 0) {
@@ -95,7 +95,7 @@ int fn_8008A96C(void* object, void* resource, void* unused)
                     config = fn_801A717C();
                     table = (u8 (*)[0x34])fn_80072354(info->field90);
                     fn_801A7460(config, selection);
-                    fn_801A74A0(config, owner);
+                    fn_801A74A0(config, (void*)owner);
                     fn_801A74A8(config, related);
                     fn_801A74C8(config, 1);
                     fn_801A7560(config, 0x84);

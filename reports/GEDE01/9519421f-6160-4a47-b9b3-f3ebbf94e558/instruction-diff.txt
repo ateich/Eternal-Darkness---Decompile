@@ -1,0 +1,12 @@
+Raw measured instruction difference from canonical.json and relocation-strict objdiff JSON.
+Function sizes: retail 608 bytes; generated 608 bytes.
+Match: 98.68421% canonical; 98.68421% relocation-strict.
+
+offset  retail                         generated
+0x0074  rlwinm. r0,r27,0,26,26        rlwinm. r0,r27,0,26,26
+0x0078  mr r25,r3  (7c791b78)         li r27,0   (3b600000)
+0x007c  li r27,0   (3b600000)         mr r25,r3  (7c791b78)
+0x0080  bne 0x248                     bne 0x248
+
+No other instruction words differ. The two words are independent and reversed
+by canonical GC/1.3 scheduling.
