@@ -1,0 +1,141 @@
+Script started on 2026-10-06 00:10:31-04:00 [COMMAND="build/binutils/powerpc-eabi-objdump -dr build/GEDE01/obj/game/game_fn_801711D0.o" <not executed on terminal>]
+
+build/GEDE01/obj/game/game_fn_801711D0.o:     file format elf32-powerpc
+
+
+Disassembly of section .text:
+
+00000000 <fn_801711D0>:
+   0:	94 21 ff b0 	stwu    r1,-80(r1)
+   4:	7c 08 02 a6 	mflr    r0
+   8:	3c 80 00 00 	lis     r4,0
+			a: R_PPC_ADDR16_HA	lbl_8024FF00
+   c:	90 01 00 54 	stw     r0,84(r1)
+  10:	93 e1 00 4c 	stw     r31,76(r1)
+  14:	7c 7f 1b 78 	mr      r31,r3
+  18:	93 c1 00 48 	stw     r30,72(r1)
+  1c:	3b c4 00 00 	addi    r30,r4,0
+			1e: R_PPC_ADDR16_LO	lbl_8024FF00
+  20:	93 a1 00 44 	stw     r29,68(r1)
+  24:	93 81 00 40 	stw     r28,64(r1)
+  28:	48 00 00 01 	bl      28 <fn_801711D0+0x28>
+			28: R_PPC_REL24	fn_8016A598
+  2c:	2c 03 00 02 	cmpwi   r3,2
+  30:	41 82 00 2c 	beq     5c <fn_801711D0+0x5c>
+  34:	7f e3 fb 78 	mr      r3,r31
+  38:	48 00 00 01 	bl      38 <fn_801711D0+0x38>
+			38: R_PPC_REL24	fn_8016A598
+  3c:	7c 66 1b 78 	mr      r6,r3
+  40:	7f e3 fb 78 	mr      r3,r31
+  44:	38 9e 00 00 	addi    r4,r30,0
+  48:	38 a0 00 02 	li      r5,2
+  4c:	4c c6 31 82 	crclr   4*cr1+eq
+  50:	48 00 00 01 	bl      50 <fn_801711D0+0x50>
+			50: R_PPC_REL24	fn_80163BB4
+  54:	38 60 00 00 	li      r3,0
+  58:	48 00 01 44 	b       19c <fn_801711D0+0x19c>
+  5c:	7f e3 fb 78 	mr      r3,r31
+  60:	38 80 00 01 	li      r4,1
+  64:	48 00 00 01 	bl      64 <fn_801711D0+0x64>
+			64: R_PPC_REL24	fn_8016A694
+  68:	fc 00 08 1e 	fctiwz  f0,f1
+  6c:	d8 01 00 18 	stfd    f0,24(r1)
+  70:	83 a1 00 1c 	lwz     r29,28(r1)
+  74:	7f a3 eb 78 	mr      r3,r29
+  78:	48 00 00 01 	bl      78 <fn_801711D0+0x78>
+			78: R_PPC_REL24	fn_80201814
+  7c:	7c 7c 1b 79 	mr.     r28,r3
+  80:	41 82 00 f4 	beq     174 <fn_801711D0+0x174>
+  84:	7f e3 fb 78 	mr      r3,r31
+  88:	38 80 00 02 	li      r4,2
+  8c:	48 00 00 01 	bl      8c <fn_801711D0+0x8c>
+			8c: R_PPC_REL24	fn_8016A694
+  90:	48 00 00 01 	bl      90 <fn_801711D0+0x90>
+			90: R_PPC_REL24	fn_800F5C54
+  94:	38 80 00 02 	li      r4,2
+  98:	7c 7d 1b 78 	mr      r29,r3
+  9c:	48 00 00 01 	bl      9c <fn_801711D0+0x9c>
+			9c: R_PPC_REL24	fn_8015C4A4
+  a0:	2c 03 ff ff 	cmpwi   r3,-1
+  a4:	41 82 00 a8 	beq     14c <fn_801711D0+0x14c>
+  a8:	38 a1 00 08 	addi    r5,r1,8
+  ac:	38 80 00 02 	li      r4,2
+  b0:	48 00 00 01 	bl      b0 <fn_801711D0+0xb0>
+			b0: R_PPC_REL24	fn_80158ABC
+  b4:	a8 83 00 00 	lha     r4,0(r3)
+  b8:	3c 00 43 30 	lis     r0,17200
+  bc:	90 01 00 18 	stw     r0,24(r1)
+  c0:	6c 84 80 00 	xoris   r4,r4,32768
+  c4:	c8 20 00 00 	lfd     f1,0(0)
+			c4: R_PPC_EMB_SDA21	lbl_806506A8
+  c8:	90 81 00 1c 	stw     r4,28(r1)
+  cc:	c8 01 00 18 	lfd     f0,24(r1)
+  d0:	90 01 00 20 	stw     r0,32(r1)
+  d4:	ec 00 08 28 	fsubs   f0,f0,f1
+  d8:	90 01 00 28 	stw     r0,40(r1)
+  dc:	d0 01 00 0c 	stfs    f0,12(r1)
+  e0:	a8 03 00 02 	lha     r0,2(r3)
+  e4:	6c 00 80 00 	xoris   r0,r0,32768
+  e8:	90 01 00 24 	stw     r0,36(r1)
+  ec:	c8 01 00 20 	lfd     f0,32(r1)
+  f0:	ec 00 08 28 	fsubs   f0,f0,f1
+  f4:	d0 01 00 10 	stfs    f0,16(r1)
+  f8:	a8 03 00 04 	lha     r0,4(r3)
+  fc:	7f 83 e3 78 	mr      r3,r28
+ 100:	6c 00 80 00 	xoris   r0,r0,32768
+ 104:	90 01 00 2c 	stw     r0,44(r1)
+ 108:	c8 01 00 28 	lfd     f0,40(r1)
+ 10c:	ec 00 08 28 	fsubs   f0,f0,f1
+ 110:	d0 01 00 14 	stfs    f0,20(r1)
+ 114:	48 00 00 01 	bl      114 <fn_801711D0+0x114>
+			114: R_PPC_REL24	fn_80201BC8
+ 118:	38 81 00 0c 	addi    r4,r1,12
+ 11c:	48 00 00 01 	bl      11c <fn_801711D0+0x11c>
+			11c: R_PPC_REL24	fn_8012B8A8
+ 120:	54 63 06 3e 	clrlwi  r3,r3,24
+ 124:	3c 00 43 30 	lis     r0,17200
+ 128:	6c 64 80 00 	xoris   r4,r3,32768
+ 12c:	90 01 00 30 	stw     r0,48(r1)
+ 130:	c8 20 00 00 	lfd     f1,0(0)
+			130: R_PPC_EMB_SDA21	lbl_806506A8
+ 134:	7f e3 fb 78 	mr      r3,r31
+ 138:	90 81 00 34 	stw     r4,52(r1)
+ 13c:	c8 01 00 30 	lfd     f0,48(r1)
+ 140:	fc 20 08 28 	fsub    f1,f0,f1
+ 144:	48 00 00 01 	bl      144 <fn_801711D0+0x144>
+			144: R_PPC_REL24	fn_8016A830
+ 148:	48 00 00 50 	b       198 <fn_801711D0+0x198>
+ 14c:	7f e3 fb 78 	mr      r3,r31
+ 150:	7f a5 eb 78 	mr      r5,r29
+ 154:	38 9e 01 9c 	addi    r4,r30,412
+ 158:	4c c6 31 82 	crclr   4*cr1+eq
+ 15c:	48 00 00 01 	bl      15c <fn_801711D0+0x15c>
+			15c: R_PPC_REL24	fn_80163BB4
+ 160:	7f e3 fb 78 	mr      r3,r31
+ 164:	38 80 00 00 	li      r4,0
+ 168:	38 a0 00 00 	li      r5,0
+ 16c:	48 00 00 01 	bl      16c <fn_801711D0+0x16c>
+			16c: R_PPC_REL24	fn_8016A970
+ 170:	48 00 00 28 	b       198 <fn_801711D0+0x198>
+ 174:	7f e3 fb 78 	mr      r3,r31
+ 178:	7f a5 eb 78 	mr      r5,r29
+ 17c:	38 9e 03 1c 	addi    r4,r30,796
+ 180:	4c c6 31 82 	crclr   4*cr1+eq
+ 184:	48 00 00 01 	bl      184 <fn_801711D0+0x184>
+			184: R_PPC_REL24	fn_80163BB4
+ 188:	7f e3 fb 78 	mr      r3,r31
+ 18c:	38 80 00 00 	li      r4,0
+ 190:	38 a0 00 00 	li      r5,0
+ 194:	48 00 00 01 	bl      194 <fn_801711D0+0x194>
+			194: R_PPC_REL24	fn_8016A970
+ 198:	38 60 00 01 	li      r3,1
+ 19c:	80 01 00 54 	lwz     r0,84(r1)
+ 1a0:	83 e1 00 4c 	lwz     r31,76(r1)
+ 1a4:	83 c1 00 48 	lwz     r30,72(r1)
+ 1a8:	83 a1 00 44 	lwz     r29,68(r1)
+ 1ac:	83 81 00 40 	lwz     r28,64(r1)
+ 1b0:	7c 08 03 a6 	mtlr    r0
+ 1b4:	38 21 00 50 	addi    r1,r1,80
+ 1b8:	4e 80 00 20 	blr
+
+Script done on 2026-10-06 00:10:31-04:00 [COMMAND_EXIT_CODE="0"]

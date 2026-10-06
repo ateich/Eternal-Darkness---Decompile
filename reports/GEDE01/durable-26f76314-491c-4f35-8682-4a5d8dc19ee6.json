@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "assignment_id": "26f76314-491c-4f35-8682-4a5d8dc19ee6",
+  "attempt": 7,
+  "base_commit": "1d0632be1b214ce4330354e15a5d068032dd8266",
+  "target": "fn_801711D0",
+  "status": "attempted",
+  "evidence": [
+    "eternal-darkness-decomp/reports/GEDE01/build-26f76314-491c-4f35-8682-4a5d8dc19ee6.txt",
+    "eternal-darkness-decomp/reports/GEDE01/objdiff-26f76314-491c-4f35-8682-4a5d8dc19ee6.json",
+    "eternal-darkness-decomp/reports/GEDE01/retail-disasm-relocs-26f76314-491c-4f35-8682-4a5d8dc19ee6.txt",
+    "eternal-darkness-decomp/reports/GEDE01/candidate-disasm-relocs-26f76314-491c-4f35-8682-4a5d8dc19ee6.txt",
+    "eternal-darkness-decomp/reports/GEDE01/instruction-diff-26f76314-491c-4f35-8682-4a5d8dc19ee6.txt"
+  ],
+  "divergence": "Best canonical code match remains 97.927925%: retail is 444 bytes and the standalone candidate is 448 bytes. At entry retail forms lbl_8024FF00 directly in r30 with addi r30,r4,lo after saving r30, while canonical MWCC forms the low half in r0 and then emits mr r30,r0; the resulting one-instruction displacement shifts the remaining code. The first error-call argument is addi r4,r30,0 in retail versus mr r4,r30 in the candidate. Candidate signed-short and unsigned-byte conversions also relocate their compiler-emitted 2^52+2^31 constant as local @15, whereas retail relocates lbl_806506A8."
+}
