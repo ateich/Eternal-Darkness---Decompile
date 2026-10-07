@@ -1,6 +1,8 @@
-/* fn_80179370 (0x80179370, 40 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+extern float lbl_806508B0;
 
-void fn_80179370(void) {
+extern float fn_801790F0(float y, float x);
+
+float fn_80179370(float y, float x)
+{
+    return lbl_806508B0 * fn_801790F0(y, x);
 }

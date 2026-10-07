@@ -1,6 +1,20 @@
-/* fn_80128130 (0x80128130, 248 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+typedef unsigned char u8;
 
-void fn_80128130(void) {
+typedef struct Entry48C8 {
+    int state;
+    u8 pad[0x48C4];
+} Entry48C8;
+
+extern Entry48C8 lbl_80514AE0[];
+
+int fn_80128130(void)
+{
+    int i;
+
+    for (i = 19; i >= 0; i--) {
+        if (lbl_80514AE0[i].state == 0) {
+            return 1;
+        }
+    }
+    return 0;
 }
