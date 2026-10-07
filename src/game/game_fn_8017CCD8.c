@@ -31,28 +31,24 @@ extern BufferState lbl_8060630C;
 extern void* memset(void*, int, u32);
 extern void fn_8017CF74(Manager*);
 
-void* fn_8017CCD8(void* data, u32 size, u32 count)
+void* fn_8017CCD8(void* data, u32 size, u16 count)
 {
-    u32 saved_count = count;
-    void* saved_data = data;
     Manager* manager;
-    u32 saved_size = size;
 
     manager = lbl_8060630C.managers;
-    memset(saved_data, 0, saved_size * (u16)saved_count);
-    manager->data = saved_data;
-    manager->size = saved_size;
-    manager->count = saved_count;
+    memset(data, 0, size * count);
+    manager->data = data;
+    manager->size = size;
+    manager->count = count;
     manager->entries = lbl_8060630C.entries;
     manager->current = lbl_8060630C.entries;
     manager->first = 0;
     manager->last = 0;
     fn_8017CF74(manager);
 
-    lbl_8060630C.managers =
-        (Manager*)((u8*)lbl_8060630C.managers + sizeof(Manager));
+    lbl_8060630C.managers++;
     lbl_8060630C.manager_count++;
-    lbl_8060630C.entries += saved_count & 0xFFFF;
-    lbl_8060630C.entry_count += saved_count;
+    lbl_8060630C.entries += count;
+    lbl_8060630C.entry_count += count;
     return manager;
 }
