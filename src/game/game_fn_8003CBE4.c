@@ -1,6 +1,10 @@
-/* fn_8003CBE4 (0x8003CBE4, 56 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+typedef unsigned int u32;
 
-void fn_8003CBE4(void) {
+extern void *fn_801294DC(void *, int, int, int);
+
+void fn_8003CBE4(int context, u32 flags, void *resource)
+{
+    if ((flags & 0x3FF) == 0) {
+        fn_801294DC(resource, 0x10, 0x20, 1);
+    }
 }
