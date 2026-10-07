@@ -1,6 +1,14 @@
-/* fn_8004736C (0x8004736C, 56 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+typedef unsigned char u8;
+typedef signed int s32;
 
-void fn_8004736C(void) {
+extern s32 lbl_8064C814;
+extern void fn_80047240(s32 value);
+
+u8 fn_8004736C(s32 value)
+{
+    u8 previous = lbl_8064C814;
+
+    lbl_8064C814 = value;
+    fn_80047240(value);
+    return previous;
 }
