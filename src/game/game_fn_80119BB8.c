@@ -1,6 +1,18 @@
-/* fn_80119BB8 (0x80119BB8, 52 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+extern short lbl_8064CDF0;
+extern int lbl_8064CDFC;
+extern int lbl_8064CE04;
 
-void fn_80119BB8(void) {
+void fn_80119BB8(short amount)
+{
+    short *bounds = &lbl_8064CDF0;
+    int value = lbl_8064CE04 - amount;
+    int minimum;
+
+    lbl_8064CE04 = value;
+    minimum = bounds[1] - 240;
+    if (value > minimum) {
+        minimum = value;
+    }
+    lbl_8064CE04 = minimum;
+    lbl_8064CDFC = minimum;
 }

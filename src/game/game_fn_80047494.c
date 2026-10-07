@@ -1,6 +1,8 @@
-/* fn_80047494 (0x80047494, 52 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+extern void fn_80006954(unsigned int value);
+extern void fn_80145478(unsigned int value);
 
-void fn_80047494(void) {
+void fn_80047494(unsigned int value)
+{
+    fn_80006954(value);
+    fn_80145478(value);
 }

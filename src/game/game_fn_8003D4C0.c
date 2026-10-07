@@ -1,6 +1,8 @@
-/* fn_8003D4C0 (0x8003D4C0, 48 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+extern void *memset(void *, int, unsigned long);
 
-void fn_8003D4C0(void) {
+extern unsigned char lbl_80303D90[0x2D0];
+
+void fn_8003D4C0(void)
+{
+    memset(lbl_80303D90, 0, sizeof(lbl_80303D90));
 }
