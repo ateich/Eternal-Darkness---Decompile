@@ -33,7 +33,8 @@ s32 fn_80068674(void *object, s32 excluded_id)
             }
         }
     } else {
-        total = 0;
+        /* ASM: nop preserves a stripped assertion on a null object table; an empty C branch is removed. */
+        asm { nop }
     }
     return total;
 }

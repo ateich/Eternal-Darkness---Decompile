@@ -8329,7 +8329,7 @@ config.libs = [
     Object(Matching, "game/game_data_800685A4.c"),
     Object(Matching, "game/game_fn_800685A4.c"),
     Object(Matching, "game/game_fn_80068668.c"),
-    Object(NonMatching, "game/game_fn_80068674.c", extra_cflags=["-use_lmw_stmw on"]),
+    Object(Matching, "game/game_fn_80068674.c", extra_cflags=["-use_lmw_stmw on"]),
     Object(Matching, "game/game_fn_8006872C.c", extra_cflags=["-use_lmw_stmw on"]),
     Object(Matching, "game/game_fn_80068870.c"),
     Object(Matching, "game/game_fn_80068994.c"),
@@ -9575,7 +9575,7 @@ config.libs = [
             # Honest C is size-exact; only the range compare's temporary registers differ.
             Object(Matching, "game/game_fn_800F0CC4.c"),
             Object(NonMatching, "game/game_fn_800F1F80.c"),
-            Object(NonMatching, "game/game_fn_800F0FBC.c"),
+            Object(Matching, "game/game_fn_800F0FBC.c"),
             Object(Matching, "game/game_fn_800F1384.c"),
             Object(Matching, "game/game_fn_800F2820.c"),
             Object(Matching, "game/game_fn_800F28D8.c", extra_cflags=["-sdata 0"]),
