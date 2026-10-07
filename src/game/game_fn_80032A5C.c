@@ -19,9 +19,7 @@ s32 fn_80032A5C(u8* state)
 
         if (target != 0) {
             if (increasing) {
-                difference = target - step;
-
-                if (state[0x4B] < (u8)(0 > difference ? 0 : difference)) {
+                if (state[0x4B] < (u8)(0 > (difference = target - step) ? 0 : difference)) {
                     state[0x4B] += step;
                     complete = 0;
                 } else {
