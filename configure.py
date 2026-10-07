@@ -9762,7 +9762,7 @@ config.libs = [
             Object(Matching, "game/game_fn_800FEC70.c"),
             Object(Matching, "game/game_fwide.c", extra_cflags=["-sdata 0"]),
             Object(NonMatching, "game/game_fn_80100080.c"),
-            Object(NonMatching, "game/game_fn_80100420.c"),
+            Object(Matching, "game/game_fn_80100420.c"),
             Object(NonMatching, "game/game_fn_80100514.c"),
             Object(Matching, "game/game_fn_80101960.c", extra_cflags=["-sdata 0"]),
             Object(NonMatching, "game/game_fn_80101988.c"),

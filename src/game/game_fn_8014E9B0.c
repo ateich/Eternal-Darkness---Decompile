@@ -1,6 +1,72 @@
-/* fn_8014E9B0 (0x8014E9B0, 244 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned int u32;
 
-void fn_8014E9B0(void) {
+typedef struct Vec3Words {
+    u32 x, y, z;
+} Vec3Words;
+
+typedef struct Effect {
+    u8 type;
+    u8 mode;
+    u8 pad02[2];
+    u16 value;
+    u8 pad06[0xA];
+    u32 resource;
+    u8 state;
+    u8 pad15[2];
+    u8 size;
+    u8 flags;
+    u8 pad19[7];
+    u16 count;
+    u8 pad22[0x2E];
+    float scale;
+    u8 pad54[0x3C];
+    void (*update)(void);
+    u32 owner;
+    Vec3Words position;
+    u8 config[6];
+    u8 variant;
+} Effect;
+
+typedef struct Config {
+    u32 word;
+    u16 half;
+} Config;
+
+extern u32 lbl_80650530;
+extern u16 lbl_80650534;
+extern const float lbl_80650538;
+
+extern void fn_80180D0C(Effect*);
+extern void fn_80180DDC(u8*, u8);
+extern void fn_80180E14(void);
+extern void* fn_80147EC4(void*);
+extern void* memcpy(void*, const void*, u32);
+
+void fn_8014E9B0(Effect* effect, Vec3Words* position, u8 type, u16 value,
+                 u32* resource, u8 mode, u8 variant, int enabled)
+{
+    Config config;
+
+    config.word = lbl_80650530;
+    config.half = lbl_80650534;
+    fn_80180D0C(effect);
+    effect->type = type;
+    effect->mode = mode;
+    effect->value = value;
+    effect->resource = *resource;
+    fn_80180DDC((u8*)effect, type);
+    effect->state = 0;
+    effect->count = 2;
+    effect->size = 4;
+    if (enabled == 0)
+        effect->flags &= ~0x40;
+    effect->scale = lbl_80650538;
+    effect->update = fn_80180E14;
+    effect->position = *position;
+    memcpy(effect->config, &config, 6);
+    effect->owner = 0;
+    effect->variant = variant;
+    fn_80147EC4(effect);
 }
