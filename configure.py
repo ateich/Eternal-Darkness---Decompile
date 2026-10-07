@@ -9574,7 +9574,7 @@ config.libs = [
             Object(Matching, "game/game_fn_800F0B70.c"),
             # Honest C is size-exact; only the range compare's temporary registers differ.
             Object(Matching, "game/game_fn_800F0CC4.c"),
-            Object(NonMatching, "game/game_fn_800F1F80.c"),
+            Object(Matching, "game/game_fn_800F1F80.c"),
             Object(Matching, "game/game_fn_800F0FBC.c"),
             Object(Matching, "game/game_fn_800F1384.c"),
             Object(Matching, "game/game_fn_800F2820.c"),
