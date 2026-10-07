@@ -25,28 +25,26 @@ typedef struct Object {
 
 extern void fn_80125ECC(void *);
 
-/* NonMatching: retail keeps offset/value in r3/r4 and forms object + scaled
- * value before the 0x180 displacement; GC/1.3 uses r4/r3 and indexed access.
- * The return preserves the sentinel comparison, but its retail bne/nop tail
- * remains unmatched. See assignment d34d3aae reports for measured C variants. */
+/* NonMatching: MWCC assigns the otherwise symmetric byte-offset and loaded
+ * value live ranges to r4/r3 here, while retail uses r3/r4. */
 void fn_8012FB50(Object* object, int index)
 {
     Entry* entry;
     int offset;
     int i;
-    u16 value;
 
     fn_80125ECC(object);
     entry = object->entries[index];
     if (entry != 0) {
         List* list = entry->list;
         for (i = 0, offset = 0; i < list->count; i++, offset += 2) {
-            value = *(u16*)((u8*)list->values + offset);
+            u16 value = *(u16*)((u8*)list->values + offset);
             if (!(value & 0x8000)) {
                 object->flags[value].bits |= 2;
             }
         }
     } else if (index == -1) {
-        return;
+        /* ASM: nop; the retail empty sentinel arm retains a compiler no-op. */
+        asm { nop }
     }
 }
