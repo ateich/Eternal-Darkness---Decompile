@@ -1,6 +1,7 @@
-/* fn_8003BAD8 (0x8003BAD8, 44 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+extern void fn_8003BB04(void *object, int value);
 
-void fn_8003BAD8(void) {
+int fn_8003BAD8(void *unused, void *object)
+{
+    fn_8003BB04(object, 0);
+    return 1;
 }
