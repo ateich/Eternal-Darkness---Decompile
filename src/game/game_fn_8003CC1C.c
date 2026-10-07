@@ -1,6 +1,18 @@
-/* fn_8003CC1C (0x8003CC1C, 44 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+typedef float f32;
 
-void fn_8003CC1C(void) {
+typedef struct Float3 {
+    f32 x;
+    f32 y;
+    f32 z;
+} Float3;
+
+f32 fn_8003CC1C(Float3 *value)
+{
+    f32 x = value->x;
+    f32 maximum = value->y > x ? value->y : x;
+
+    if (value->z > maximum) {
+        return value->z;
+    }
+    return maximum;
 }

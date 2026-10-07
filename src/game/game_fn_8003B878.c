@@ -1,6 +1,16 @@
-/* fn_8003B878 (0x8003B878, 40 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+typedef struct SortCandidate {
+    unsigned char padding[4];
+    unsigned int key;
+} SortCandidate;
 
-void fn_8003B878(void) {
+int fn_8003B878(const SortCandidate *left, const SortCandidate *right)
+{
+    int result = 0;
+
+    if (left->key < right->key) {
+        result = -1;
+    } else if (left->key > right->key) {
+        result = 1;
+    }
+    return result;
 }
