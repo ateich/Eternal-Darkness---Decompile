@@ -1,6 +1,14 @@
-/* fn_8003E1F0 (0x8003E1F0, 36 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+typedef struct Vec3 {
+    float x;
+    float y;
+    float z;
+} Vec3;
 
-void fn_8003E1F0(void) {
+extern const float lbl_8064E2D8;
+extern int fn_8003E0E4(void *object, Vec3 *position, float first,
+                      float second, int enabled);
+
+int fn_8003E1F0(void *object, Vec3 *position, int enabled, float value)
+{
+    return fn_8003E0E4(object, position, value, lbl_8064E2D8, enabled);
 }
