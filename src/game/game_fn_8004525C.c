@@ -1,6 +1,14 @@
-/* fn_8004525C (0x8004525C, 32 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+typedef unsigned char u8;
+typedef signed int s32;
 
-void fn_8004525C(void) {
+typedef struct GameState {
+    u8 pad[0x1918];
+    u8 flags;
+} GameState;
+
+extern GameState lbl_803003C8;
+
+void fn_8004525C(s32 bit)
+{
+    lbl_803003C8.flags |= 1 << bit;
 }

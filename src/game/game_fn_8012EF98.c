@@ -50,6 +50,11 @@ typedef union MatrixStorage {
     Matrix34 matrix;
 } MatrixStorage;
 
+typedef struct Sphere {
+    Vec3 center;
+    float radius;
+} Sphere;
+
 extern float lbl_805AADC8[][3];
 extern int lbl_8064CF30;
 extern int lbl_8064CF34;
@@ -77,18 +82,17 @@ int fn_8012EF98(void* object_ptr, int index, QueryResult* first,
     ObjectLayout* object = (ObjectLayout*)object_ptr;
     MatrixStorage matrix;
     MatrixStorage inverse;
-    Vec3 translation;
+    Vec3 point[2]; /* only [0] is used; retail reserves the full 24 bytes */
     Vec3 target_delta;
-    Vec3 direction;
-    Vec3 point;
-    Vec3 local_point;
     Vec3 cross;
-    Vec3 axis;
     Vec3 local_axis;
+    Vec3 axis;
+    Vec3 local_point;
+    Vec3 direction;
+    Sphere sphere;
     Vec3 debug_direction;
-    Vec3* debug_vectors = (Vec3*)lbl_805AADC8;
-    float distance;
     float intersection;
+    Vec3* debug_vectors = (Vec3*)lbl_805AADC8;
     float cross_length;
     float axis_dot;
     float angle;
@@ -100,26 +104,26 @@ int fn_8012EF98(void* object_ptr, int index, QueryResult* first,
     entry = object->entries[index];
     if (entry != 0) {
         fn_80127FD8(object_ptr, entry->record->transform_index, matrix.array);
-        translation.x = matrix.array[0][3];
-        translation.y = matrix.array[1][3];
-        translation.z = matrix.array[2][3];
+        sphere.center.x = matrix.array[0][3];
+        sphere.center.y = matrix.array[1][3];
+        sphere.center.z = matrix.array[2][3];
 
-        fn_80211A6C(target, &translation, &target_delta);
-        distance = fn_80211B08(&target_delta);
+        fn_80211A6C(target, &sphere.center, &target_delta);
+        sphere.radius = fn_80211B08(&target_delta);
         fn_80211AAC(&target_delta, &target_delta);
         fn_80211AAC(&first->direction, &direction);
 
-        if (fn_8013DE44(&first->position, &direction, &translation, distance,
+        if (fn_8013DE44(&first->position, &direction, &sphere.center, sphere.radius,
                         &intersection, 0)) {
             result = 1;
             fn_80211A90(&direction, &direction, intersection);
-            fn_80211A48(&first->position, &direction, &point);
-            fn_80211A6C(&point, &translation, &local_point);
+            fn_80211A48(&first->position, &direction, &point[0]);
+            fn_80211A6C(&point[0],&sphere.center, &local_point);
             fn_80211B64(&local_point, &target_delta, &cross);
             cross_length = fn_80211B08(&cross);
             fn_80211AAC(&cross, &cross);
-            angle = fn_800490E8(cross_length,
-                                fn_80211B44(&local_point, &target_delta));
+            axis_dot = fn_80211B44(&local_point, &target_delta);
+            angle = fn_800490E8(cross_length, axis_dot);
 
             if ((object->flags & 0x80000000U) != 0) {
                 fn_80211B64(&first->direction, &target_delta, &axis);
@@ -142,18 +146,18 @@ int fn_8012EF98(void* object_ptr, int index, QueryResult* first,
                 debug_vectors[3] = first->position;
                 debug_direction = first->direction;
                 fn_80211AAC(&debug_direction, &debug_direction);
-                fn_80211A90(&debug_direction, &debug_direction, distance);
+                fn_80211A90(&debug_direction, &debug_direction, sphere.radius);
                 fn_80211A48(&debug_vectors[3], &debug_direction,
                              &debug_vectors[4]);
 
                 debug_vectors[5] = second->position;
                 debug_direction = second->direction;
                 fn_80211AAC(&debug_direction, &debug_direction);
-                fn_80211A90(&debug_direction, &debug_direction, distance);
+                fn_80211A90(&debug_direction, &debug_direction, sphere.radius);
                 fn_80211A48(&debug_vectors[5], &debug_direction,
                              &debug_vectors[6]);
 
-                debug_vectors[7] = translation;
+                debug_vectors[7] = sphere.center;
                 fn_80211A48(&debug_vectors[7], &local_point,
                              &debug_vectors[8]);
             }
