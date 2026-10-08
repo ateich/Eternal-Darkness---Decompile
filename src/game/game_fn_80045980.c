@@ -1,6 +1,6 @@
-/* fn_80045980 (0x80045980, 32 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+extern void fn_8003D4C0(void);
 
-void fn_80045980(void) {
+void fn_80045980(void)
+{
+    fn_8003D4C0();
 }

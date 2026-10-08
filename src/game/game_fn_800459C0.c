@@ -1,6 +1,6 @@
-/* fn_800459C0 (0x800459C0, 32 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+extern void fn_800BDE24(void);
 
-void fn_800459C0(void) {
+void fn_800459C0(void)
+{
+    fn_800BDE24();
 }
