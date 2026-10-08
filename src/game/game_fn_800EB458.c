@@ -1,6 +1,32 @@
-/* fn_800EB458 (0x800EB458, 172 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+typedef unsigned int u32;
 
-void fn_800EB458(void) {
+typedef struct {
+    unsigned char gpr;
+    unsigned char fpr;
+    unsigned char reserved[2];
+    char* input_arg_area;
+    char* reg_save_area;
+} va_list[1];
+
+#define va_start(ap, last) __builtin_va_info(&(ap))
+
+extern int lbl_8064CB70;
+
+extern int fn_800F9E2C(char*, const char*, void*);
+extern void fn_801E7DC8(int);
+extern u32 OSDisableInterrupts(void);
+extern void OSRestoreInterrupts(u32);
+
+void fn_800EB458(const char* format, ...)
+{
+    va_list args;
+    char buffer[256];
+
+    if (lbl_8064CB70 != 0) {
+        va_start(args, format);
+        fn_800F9E2C(buffer, format, args);
+        fn_801E7DC8(5);
+        OSRestoreInterrupts(OSDisableInterrupts());
+        fn_801E7DC8(0x100);
+    }
 }
