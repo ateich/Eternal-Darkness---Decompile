@@ -1,6 +1,5 @@
-/* fn_80048668 (0x80048668, 32 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+extern unsigned int fn_800E4750(void);
 
-void fn_80048668(void) {
+unsigned int fn_80048668(void) {
+    return fn_800E4750();
 }

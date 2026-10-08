@@ -1,6 +1,8 @@
-/* fn_80046378 (0x80046378, 32 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+typedef short s16;
 
-void fn_80046378(void) {
+extern int fn_80052310(int type, const s16* position);
+
+int fn_80046378(int type, const s16* position, int unused)
+{
+    return fn_80052310(type, position);
 }
