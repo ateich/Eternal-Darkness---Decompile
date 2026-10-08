@@ -1,6 +1,42 @@
-/* fn_800467F0 (0x800467F0, 224 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+typedef signed int s32;
+typedef unsigned int u32;
+typedef unsigned long long u64;
 
-void fn_800467F0(void) {
+extern u64 fn_8020123C(s32, s32, s32, s32);
+extern s32 fn_80201B44(void);
+extern s32 fn_80201B4C(void *);
+extern s32 fn_80201B54(void *);
+extern void *fn_80201B9C(void);
+extern void *fn_80201BC0(void *);
+extern s32 fn_80201EB8(void *);
+
+s32 fn_800467F0(register s32 kind, s32 use_current)
+{
+    void *object;
+    s32 count;
+    s32 object_id;
+
+    object = fn_80201B9C();
+    count = 0;
+    while (object != 0) {
+        fn_80201EB8(object);
+        /* ASM: cmpw/bne preserves retail's operand order, which MWCC canonicalizes in C. */
+        asm {
+            cmpw r3, kind
+            bne next_object
+        }
+        if (fn_80201B4C(object) == 1) {
+            object_id = fn_80201B54(object);
+            if (use_current != 0) {
+                if ((u32)(fn_8020123C(0x3B, fn_80201B44(), object_id, 0) & 0xFFFFFFFFULL) == 1) {
+                    count++;
+                }
+            } else if ((u32)(fn_8020123C(0x3B, object_id, object_id, 0) & 0xFFFFFFFFULL) == 1) {
+                count++;
+            }
+        }
+next_object:
+        object = fn_80201BC0(object);
+    }
+    return count;
 }
