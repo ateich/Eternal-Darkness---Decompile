@@ -27,23 +27,15 @@ void fn_801EB340(u8* dl, void* tex_obj)
     int flags = 0;
     int amount;
     int done = 0;
-    u16 w;
-    u16 h;
-    u32 m;
-    u32 f;
 
     fn_802288C4(tex_obj, &image, &width, &height, &format, &wrap_s, &wrap_t, &mipmap);
-    f = format;
-    w = width - 1;
-    h = height - 1;
-    m = mipmap & 1;
-    width = w;
-    height = h;
-    width = w & 0x3FF;
-    height = h & 0x3FF;
-    mipmap = m;
-    format = f % 16u;
-    format = (f % 16u) << 4;
+    width = width - 1;
+    height = height - 1;
+    width = width & 0x3FF;
+    height = height & 0x3FF;
+    mipmap = mipmap & 1;
+    format = format % 16u;
+    format = format << 4;
     DCInvalidateRange(dl, 0x20);
 
     amount = 0;

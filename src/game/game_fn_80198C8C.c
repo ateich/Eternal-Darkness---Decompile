@@ -1,10 +1,10 @@
 typedef signed char s8;
 typedef unsigned char u8;
 
-extern void fn_8018E230(u8*, u8*, u8, u8, s8, u8);
+extern void fn_8018E230(u8*, u8*, u8, u8, u8, u8);
 extern void fn_8018E8B8(u8*, u8, int);
 
-void fn_80198C8C(u8* object, u8 mode, u8 value, s8 step, u8 kind, u8 limit)
+void fn_80198C8C(u8* object, u8 mode, u8 value, u8 step, u8 kind, u8 limit)
 {
     u8* entry = *(u8**)(object + 0x4c);
     u8 count = object[1];
@@ -23,9 +23,11 @@ void fn_80198C8C(u8* object, u8 mode, u8 value, s8 step, u8 kind, u8 limit)
             u8 level;
             u8 half;
             u8* p;
+            int signedStep;
 
+            signedStep = (s8)step;
             half = count >> 1;
-            level = (step / 2) * ((value - 150) / step) + 60;
+            level = (signedStep / 2) * ((value - 150) / signedStep) + 60;
             entry[1] = kind;
             entry[5] = step;
             p = *(u8**)(object + 0x4c);
