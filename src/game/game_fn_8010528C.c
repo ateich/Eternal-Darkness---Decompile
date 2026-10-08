@@ -1,6 +1,73 @@
-/* fn_8010528C (0x8010528C, 196 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+typedef unsigned char u8;
+typedef unsigned short u16;
 
-void fn_8010528C(void) {
+typedef struct MotionPlane {
+    u8 pad00[0x18];
+    int offsets[4];
+    u16 width;
+    u8 pad2A[6];
+    u8 x_shift;
+    u8 y_shift;
+    u8 pad32[2];
+    u8 count;
+    u8 pad35[3];
+} MotionPlane;
+
+typedef struct Decoder {
+    MotionPlane planes[3];
+} Decoder;
+
+typedef struct PlaneCursor {
+    u8 pad00[0x14];
+    int destination;
+    int reference;
+    u8 pad1C[0x18];
+} PlaneCursor;
+
+typedef struct FrameContext {
+    PlaneCursor planes[3];
+} FrameContext;
+
+extern void fn_80104BBC(int destination, u16 width, int reference,
+                        u16 reference_width, int x_half, int y_half);
+
+void fn_8010528C(Decoder *decoder, FrameContext *context, int x, int y)
+{
+    MotionPlane *source;
+    PlaneCursor *cursor;
+    int *offset;
+    int reference;
+    int offset_value;
+    int reference_block;
+    int destination_block;
+    int block;
+    int plane;
+    u16 width;
+    u8 count;
+
+    cursor = context->planes;
+    source = decoder->planes;
+    plane = 0;
+    do {
+        offset = source->offsets;
+        block = 0;
+        count = source->count;
+        reference = cursor->reference +
+            (y >> (source->y_shift + 1)) * source->width +
+            (x >> (source->x_shift + 1));
+
+        while (block < count) {
+            offset_value = *offset;
+            width = source->width;
+            reference_block = reference + offset_value;
+            destination_block = cursor->destination + offset_value;
+            offset++;
+            fn_80104BBC(destination_block, width, reference_block, width,
+                        x & 1, y & 1);
+            block++;
+        }
+        plane++;
+        cursor++;
+        source++;
+    } while (plane < 3);
 }
