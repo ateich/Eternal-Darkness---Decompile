@@ -1,6 +1,55 @@
-/* fn_80122FD0 (0x80122FD0, 176 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+typedef unsigned char u8;
+typedef unsigned short u16;
 
-void fn_80122FD0(void) {
+typedef struct MeshIndex {
+    u16 vertex;
+    u16 pad;
+} MeshIndex;
+
+typedef struct MeshInfo {
+    u8 pad[0x44];
+    MeshIndex* indices;
+} MeshInfo;
+
+typedef struct MeshGroup {
+    u8 pad;
+    u8 count;
+    u16 first;
+} MeshGroup;
+
+extern u8 lbl_804EE5CC[];
+extern u16 lbl_805AAE40[];
+
+void fn_80122FD0(MeshInfo* info, MeshGroup* groups, int count)
+{
+    u8* result;
+    int i;
+    u16* table;
+    MeshIndex* index;
+    int j;
+    int a;
+    int b;
+    int c;
+
+    result = lbl_804EE5CC;
+    i = 0;
+    table = lbl_805AAE40;
+    while (i < count) {
+        index = info->indices + groups->first;
+        *result = 0;
+        for (j = 0; j < groups->count - 2; j++) {
+            a = table[index[0].vertex];
+            b = table[index[1].vertex];
+            c = table[index[2].vertex];
+
+            if (a != b && b != c && a != c) {
+                *result = 1;
+                break;
+            }
+            index++;
+        }
+        result++;
+        groups++;
+        i++;
+    }
 }
