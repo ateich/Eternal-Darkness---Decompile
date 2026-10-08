@@ -1,6 +1,15 @@
-/* fn_800E783C (0x800E783C, 208 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+extern unsigned char lbl_80325DB8[10][16];
 
-void fn_800E783C(void) {
+int fn_800E783C(void)
+{
+    int i;
+    int result = 1;
+
+    for (i = 0; i < 10; i++) {
+        if (*(int *)lbl_80325DB8[i] != 0) {
+            result = 0;
+            break;
+        }
+    }
+    return result;
 }
