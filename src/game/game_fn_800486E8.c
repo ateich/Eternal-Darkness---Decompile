@@ -1,6 +1,5 @@
-/* fn_800486E8 (0x800486E8, 32 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+extern unsigned short fn_800E4918(void);
 
-void fn_800486E8(void) {
+unsigned short fn_800486E8(void) {
+    return fn_800E4918();
 }
