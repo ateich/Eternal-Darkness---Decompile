@@ -1,6 +1,21 @@
-/* fn_801199A0 (0x801199A0, 188 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+extern void *lbl_8064C4E0;
 
-void fn_801199A0(void) {
+extern int fn_801E79FC(void *object, int value);
+
+int fn_801199A0(int value)
+{
+    switch (value) {
+    case 0xC9:
+        return fn_801E79FC(lbl_8064C4E0, 0x32B) == 0;
+    case 0xCC:
+        return fn_801E79FC(lbl_8064C4E0, 0x32C) == 0;
+    case 0xCF:
+        return fn_801E79FC(lbl_8064C4E0, 0x32D) == 0;
+    case 0xC7:
+        return fn_801E79FC(lbl_8064C4E0, 0x32E) == 0;
+    case 0xD5:
+        return fn_801E79FC(lbl_8064C4E0, 0x32F) == 0;
+    default:
+        return 0;
+    }
 }

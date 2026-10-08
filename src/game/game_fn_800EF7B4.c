@@ -1,6 +1,58 @@
-/* fn_800EF7B4 (0x800EF7B4, 184 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned int u32;
 
-void fn_800EF7B4(void) {
+typedef struct TRKBuffer {
+    u32 unk0;
+    u32 unk4;
+    u32 length;
+    u32 position;
+    u8 data[1];
+} TRKBuffer;
+
+extern void fn_80003130(void *, const void *, u32);
+extern int gTRKBigEndian[];
+
+static inline int TRKReadBuffer(TRKBuffer *buffer, void *data, register u32 length)
+{
+    int error = 0;
+    register u32 bytes_left;
+
+    if (length == 0) {
+        return 0;
+    }
+    bytes_left = buffer->length - buffer->position;
+    /* ASM: cmplw/ble retain the inlined length parameter as a register;
+     * CodeWarrior otherwise folds the constant-sized read to cmplwi/bge. */
+    asm {
+        cmplw length, bytes_left
+        ble read_ready
+    }
+    error = 0x302;
+    length = bytes_left;
+read_ready:
+    fn_80003130(data, buffer->data + buffer->position, length);
+    buffer->position += length;
+    return error;
+}
+
+int fn_800EF7B4(TRKBuffer *buffer, u16 *out)
+{
+    int read_err;
+    u8 *destination;
+    u8 *byte_data;
+    u8 swap_buffer[sizeof(out)];
+
+    if (gTRKBigEndian[0] != 0) {
+        destination = (u8 *)out;
+    } else {
+        destination = swap_buffer;
+    }
+    read_err = TRKReadBuffer(buffer, (void *)destination, sizeof(*out));
+    if (gTRKBigEndian[0] == 0 && read_err == 0) {
+        byte_data = (u8 *)out;
+        byte_data[0] = destination[1];
+        byte_data[1] = destination[0];
+    }
+    return read_err;
 }
