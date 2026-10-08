@@ -1,6 +1,10 @@
-/* fn_8004519C (0x8004519C, 40 bytes): not decompiled yet.
- * Scaffolded by decomp-foundry; the build links the original asm until this
- * unit is marked Matching. See build/GEDE01/asm for the target code. */
+typedef unsigned char u8;
+typedef unsigned int u32;
 
-void fn_8004519C(void) {
+extern u8 fn_800451D4(void);
+extern u32 fn_801E7578(u32 value);
+
+u32 fn_8004519C(void)
+{
+    return fn_801E7578(fn_800451D4());
 }
